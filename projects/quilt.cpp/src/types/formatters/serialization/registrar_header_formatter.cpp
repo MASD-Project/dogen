@@ -108,11 +108,6 @@ file_types registrar_header_formatter::file_type() const {
     return file_types::cpp_header;
 }
 
-properties::origin_types
-registrar_header_formatter::formattable_origin_type() const {
-    return properties::origin_types::external;
-}
-
 void registrar_header_formatter::
 register_provider(properties::registrar& rg) const {
     rg.register_provider(boost::make_shared<provider>());

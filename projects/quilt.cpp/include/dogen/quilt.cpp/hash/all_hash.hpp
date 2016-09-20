@@ -32,7 +32,6 @@
 #include "dogen/quilt.cpp/hash/formatters/file_types_hash.hpp"
 #include "dogen/quilt.cpp/hash/settings/odb_settings_hash.hpp"
 #include "dogen/quilt.cpp/hash/settings/path_settings_hash.hpp"
-#include "dogen/quilt.cpp/hash/properties/origin_types_hash.hpp"
 #include "dogen/quilt.cpp/hash/settings/aspect_settings_hash.hpp"
 #include "dogen/quilt.cpp/hash/settings/helper_settings_hash.hpp"
 #include "dogen/quilt.cpp/hash/settings/opaque_settings_hash.hpp"

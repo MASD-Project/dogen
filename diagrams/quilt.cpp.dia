@@ -436,7 +436,7 @@ seems like the least bad approach.
         <dia:point val="358,151"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="357.95,150.95;388.965,157.85"/>
+        <dia:rectangle val="357.95,150.95;388.965,157.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="358,151"/>
@@ -445,7 +445,7 @@ seems like the least bad approach.
         <dia:real val="30.914999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.8000000000000007"/>
+        <dia:real val="6"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#file_formatter_interface#</dia:string>
@@ -605,36 +605,6 @@ seems like the least bad approach.
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#formatters::file_types#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="true"/>
-          </dia:attribute>
-          <dia:attribute name="inheritance_type">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="query">
-            <dia:boolean val="true"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="parameters"/>
-        </dia:composite>
-        <dia:composite type="umloperation">
-          <dia:attribute name="name">
-            <dia:string>#formattable_origin_type#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="stereotype">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#properties::origin_types#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -25142,164 +25112,6 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O196">
       <dia:attribute name="obj_pos">
-        <dia:point val="118,-13.9166"/>
-      </dia:attribute>
-      <dia:attribute name="obj_bb">
-        <dia:rectangle val="117.95,-13.9666;124.325,-9.4666"/>
-      </dia:attribute>
-      <dia:attribute name="elem_corner">
-        <dia:point val="118,-13.9166"/>
-      </dia:attribute>
-      <dia:attribute name="elem_width">
-        <dia:real val="6.2750000000000004"/>
-      </dia:attribute>
-      <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
-      </dia:attribute>
-      <dia:attribute name="name">
-        <dia:string>#origin_types#</dia:string>
-      </dia:attribute>
-      <dia:attribute name="stereotype">
-        <dia:string>#enumeration#</dia:string>
-      </dia:attribute>
-      <dia:attribute name="comment">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="abstract">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="suppress_attributes">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="suppress_operations">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="visible_attributes">
-        <dia:boolean val="true"/>
-      </dia:attribute>
-      <dia:attribute name="visible_operations">
-        <dia:boolean val="true"/>
-      </dia:attribute>
-      <dia:attribute name="visible_comments">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="wrap_operations">
-        <dia:boolean val="true"/>
-      </dia:attribute>
-      <dia:attribute name="wrap_after_char">
-        <dia:int val="40"/>
-      </dia:attribute>
-      <dia:attribute name="comment_line_length">
-        <dia:int val="17"/>
-      </dia:attribute>
-      <dia:attribute name="comment_tagging">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="line_width">
-        <dia:real val="0.10000000000000001"/>
-      </dia:attribute>
-      <dia:attribute name="line_color">
-        <dia:color val="#000000"/>
-      </dia:attribute>
-      <dia:attribute name="fill_color">
-        <dia:color val="#ffffff"/>
-      </dia:attribute>
-      <dia:attribute name="text_color">
-        <dia:color val="#000000"/>
-      </dia:attribute>
-      <dia:attribute name="normal_font">
-        <dia:font family="monospace" style="0" name="Courier"/>
-      </dia:attribute>
-      <dia:attribute name="abstract_font">
-        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
-      </dia:attribute>
-      <dia:attribute name="polymorphic_font">
-        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
-      </dia:attribute>
-      <dia:attribute name="classname_font">
-        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
-      </dia:attribute>
-      <dia:attribute name="abstract_classname_font">
-        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
-      </dia:attribute>
-      <dia:attribute name="comment_font">
-        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
-      </dia:attribute>
-      <dia:attribute name="normal_font_height">
-        <dia:real val="0.80000000000000004"/>
-      </dia:attribute>
-      <dia:attribute name="polymorphic_font_height">
-        <dia:real val="0.80000000000000004"/>
-      </dia:attribute>
-      <dia:attribute name="abstract_font_height">
-        <dia:real val="0.80000000000000004"/>
-      </dia:attribute>
-      <dia:attribute name="classname_font_height">
-        <dia:real val="1"/>
-      </dia:attribute>
-      <dia:attribute name="abstract_classname_font_height">
-        <dia:real val="1"/>
-      </dia:attribute>
-      <dia:attribute name="comment_font_height">
-        <dia:real val="0.69999999999999996"/>
-      </dia:attribute>
-      <dia:attribute name="attributes">
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#internal#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#external#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-      </dia:attribute>
-      <dia:attribute name="operations"/>
-      <dia:attribute name="template">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="templates"/>
-      <dia:childnode parent="O0"/>
-    </dia:object>
-    <dia:object type="UML - Class" version="0" id="O197">
-      <dia:attribute name="obj_pos">
         <dia:point val="526,188"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
@@ -25898,7 +25710,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O198">
+    <dia:object type="UML - Class" version="0" id="O197">
       <dia:attribute name="obj_pos">
         <dia:point val="482,227"/>
       </dia:attribute>
@@ -26009,7 +25821,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       <dia:attribute name="templates"/>
       <dia:childnode parent="O29"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O199">
+    <dia:object type="UML - Class" version="0" id="O198">
       <dia:attribute name="obj_pos">
         <dia:point val="503,227"/>
       </dia:attribute>
@@ -26120,7 +25932,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       <dia:attribute name="templates"/>
       <dia:childnode parent="O29"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O200">
+    <dia:object type="UML - Class" version="0" id="O199">
       <dia:attribute name="obj_pos">
         <dia:point val="503,232"/>
       </dia:attribute>
@@ -26231,7 +26043,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       <dia:attribute name="templates"/>
       <dia:childnode parent="O29"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O201">
+    <dia:object type="UML - Class" version="0" id="O200">
       <dia:attribute name="obj_pos">
         <dia:point val="434,227"/>
       </dia:attribute>
@@ -26342,7 +26154,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       <dia:attribute name="templates"/>
       <dia:childnode parent="O38"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O202">
+    <dia:object type="UML - Class" version="0" id="O201">
       <dia:attribute name="obj_pos">
         <dia:point val="137,214"/>
       </dia:attribute>
@@ -26500,7 +26312,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       <dia:attribute name="templates"/>
       <dia:childnode parent="O1"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O203">
+    <dia:object type="UML - Association" version="2" id="O202">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -26567,12 +26379,12 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O204" connection="6"/>
-        <dia:connection handle="1" to="O202" connection="6"/>
+        <dia:connection handle="0" to="O203" connection="6"/>
+        <dia:connection handle="1" to="O201" connection="6"/>
       </dia:connections>
       <dia:childnode parent="O1"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O204">
+    <dia:object type="UML - Class" version="0" id="O203">
       <dia:attribute name="obj_pos">
         <dia:point val="164,214"/>
       </dia:attribute>
@@ -26732,7 +26544,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       <dia:attribute name="templates"/>
       <dia:childnode parent="O1"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O205">
+    <dia:object type="UML - Class" version="0" id="O204">
       <dia:attribute name="obj_pos">
         <dia:point val="442,151"/>
       </dia:attribute>
@@ -26913,7 +26725,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - LargePackage" version="0" id="O206">
+    <dia:object type="UML - LargePackage" version="0" id="O205">
       <dia:attribute name="obj_pos">
         <dia:point val="478,-61"/>
       </dia:attribute>
@@ -26951,7 +26763,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:string>#fabric#</dia:string>
       </dia:attribute>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O207">
+    <dia:object type="UML - Class" version="0" id="O206">
       <dia:attribute name="obj_pos">
         <dia:point val="258,198"/>
       </dia:attribute>
@@ -27086,7 +26898,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       <dia:attribute name="templates"/>
       <dia:childnode parent="O1"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O208">
+    <dia:object type="UML - Class" version="0" id="O207">
       <dia:attribute name="obj_pos">
         <dia:point val="263,214"/>
       </dia:attribute>
@@ -27246,7 +27058,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       <dia:attribute name="templates"/>
       <dia:childnode parent="O1"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O209">
+    <dia:object type="UML - Association" version="2" id="O208">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -27313,12 +27125,12 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O208" connection="1"/>
-        <dia:connection handle="1" to="O207" connection="6"/>
+        <dia:connection handle="0" to="O207" connection="1"/>
+        <dia:connection handle="1" to="O206" connection="6"/>
       </dia:connections>
       <dia:childnode parent="O1"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O210">
+    <dia:object type="UML - Class" version="0" id="O209">
       <dia:attribute name="obj_pos">
         <dia:point val="379,129"/>
       </dia:attribute>
@@ -27788,7 +27600,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O211">
+    <dia:object type="UML - Class" version="0" id="O210">
       <dia:attribute name="obj_pos">
         <dia:point val="291,198"/>
       </dia:attribute>
@@ -27923,7 +27735,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       <dia:attribute name="templates"/>
       <dia:childnode parent="O1"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O212">
+    <dia:object type="UML - Class" version="0" id="O211">
       <dia:attribute name="obj_pos">
         <dia:point val="296,214"/>
       </dia:attribute>
@@ -28083,7 +27895,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       <dia:attribute name="templates"/>
       <dia:childnode parent="O1"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O213">
+    <dia:object type="UML - Association" version="2" id="O212">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -28150,12 +27962,12 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O211" connection="1"/>
-        <dia:connection handle="1" to="O207" connection="1"/>
+        <dia:connection handle="0" to="O210" connection="1"/>
+        <dia:connection handle="1" to="O206" connection="1"/>
       </dia:connections>
       <dia:childnode parent="O1"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O214">
+    <dia:object type="UML - Association" version="2" id="O213">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -28222,12 +28034,12 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O212" connection="1"/>
-        <dia:connection handle="1" to="O211" connection="6"/>
+        <dia:connection handle="0" to="O211" connection="1"/>
+        <dia:connection handle="1" to="O210" connection="6"/>
       </dia:connections>
       <dia:childnode parent="O1"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O215">
+    <dia:object type="UML - Class" version="0" id="O214">
       <dia:attribute name="obj_pos">
         <dia:point val="399,151"/>
       </dia:attribute>
@@ -28579,7 +28391,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O216">
+    <dia:object type="UML - Association" version="2" id="O215">
       <dia:attribute name="name">
         <dia:string>#&lt; creates contexts for formatting using#</dia:string>
       </dia:attribute>
@@ -28647,11 +28459,11 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O67" connection="5"/>
-        <dia:connection handle="1" to="O215" connection="0"/>
+        <dia:connection handle="1" to="O214" connection="0"/>
       </dia:connections>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O217">
+    <dia:object type="UML - Association" version="2" id="O216">
       <dia:attribute name="name">
         <dia:string>#creates &gt;#</dia:string>
       </dia:attribute>
@@ -28718,12 +28530,12 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O215" connection="2"/>
-        <dia:connection handle="1" to="O205" connection="1"/>
+        <dia:connection handle="0" to="O214" connection="2"/>
+        <dia:connection handle="1" to="O204" connection="1"/>
       </dia:connections>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O218">
+    <dia:object type="UML - Class" version="0" id="O217">
       <dia:attribute name="obj_pos">
         <dia:point val="431,151"/>
       </dia:attribute>
@@ -28834,7 +28646,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O219">
+    <dia:object type="UML - Association" version="2" id="O218">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -28901,12 +28713,12 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O215" connection="6"/>
-        <dia:connection handle="1" to="O218" connection="6"/>
+        <dia:connection handle="0" to="O214" connection="6"/>
+        <dia:connection handle="1" to="O217" connection="6"/>
       </dia:connections>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O220">
+    <dia:object type="UML - Class" version="0" id="O219">
       <dia:attribute name="obj_pos">
         <dia:point val="489,178"/>
       </dia:attribute>
@@ -29131,7 +28943,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O221">
+    <dia:object type="UML - Association" version="2" id="O220">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -29198,12 +29010,12 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O220" connection="0"/>
-        <dia:connection handle="1" to="O205" connection="6"/>
+        <dia:connection handle="0" to="O219" connection="0"/>
+        <dia:connection handle="1" to="O204" connection="6"/>
       </dia:connections>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O222">
+    <dia:object type="UML - Association" version="2" id="O221">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -29270,12 +29082,12 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O220" connection="2"/>
+        <dia:connection handle="0" to="O219" connection="2"/>
         <dia:connection handle="1" to="O65" connection="6"/>
       </dia:connections>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O223">
+    <dia:object type="UML - Class" version="0" id="O222">
       <dia:attribute name="obj_pos">
         <dia:point val="389,52"/>
       </dia:attribute>
@@ -29640,7 +29452,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       <dia:attribute name="templates"/>
       <dia:childnode parent="O0"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O224">
+    <dia:object type="UML - Association" version="2" id="O223">
       <dia:attribute name="name">
         <dia:string>#&lt; stores#</dia:string>
       </dia:attribute>
@@ -29707,12 +29519,12 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O232" connection="6"/>
-        <dia:connection handle="1" to="O225" connection="0"/>
+        <dia:connection handle="0" to="O231" connection="6"/>
+        <dia:connection handle="1" to="O224" connection="0"/>
       </dia:connections>
       <dia:childnode parent="O0"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O225">
+    <dia:object type="UML - Class" version="0" id="O224">
       <dia:attribute name="obj_pos">
         <dia:point val="360,52"/>
       </dia:attribute>
@@ -29893,7 +29705,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       <dia:attribute name="templates"/>
       <dia:childnode parent="O0"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O226">
+    <dia:object type="UML - Association" version="2" id="O225">
       <dia:attribute name="name">
         <dia:string>#describes helpers via &gt;#</dia:string>
       </dia:attribute>
@@ -29960,12 +29772,12 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O225" connection="7"/>
-        <dia:connection handle="1" to="O223" connection="6"/>
+        <dia:connection handle="0" to="O224" connection="7"/>
+        <dia:connection handle="1" to="O222" connection="6"/>
       </dia:connections>
       <dia:childnode parent="O0"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O227">
+    <dia:object type="UML - Class" version="0" id="O226">
       <dia:attribute name="obj_pos">
         <dia:point val="401,15"/>
       </dia:attribute>
@@ -30142,7 +29954,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       <dia:attribute name="templates"/>
       <dia:childnode parent="O0"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O228">
+    <dia:object type="UML - Association" version="2" id="O227">
       <dia:attribute name="name">
         <dia:string>#&lt; produces#</dia:string>
       </dia:attribute>
@@ -30209,12 +30021,12 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O227" connection="5"/>
-        <dia:connection handle="1" to="O232" connection="1"/>
+        <dia:connection handle="0" to="O226" connection="5"/>
+        <dia:connection handle="1" to="O231" connection="1"/>
       </dia:connections>
       <dia:childnode parent="O0"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O229">
+    <dia:object type="UML - Class" version="0" id="O228">
       <dia:attribute name="obj_pos">
         <dia:point val="395,34"/>
       </dia:attribute>
@@ -30422,7 +30234,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       <dia:attribute name="templates"/>
       <dia:childnode parent="O0"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O230">
+    <dia:object type="UML - Association" version="2" id="O229">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -30489,12 +30301,12 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O227" connection="7"/>
-        <dia:connection handle="1" to="O229" connection="1"/>
+        <dia:connection handle="0" to="O226" connection="7"/>
+        <dia:connection handle="1" to="O228" connection="1"/>
       </dia:connections>
       <dia:childnode parent="O0"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O231">
+    <dia:object type="UML - Association" version="2" id="O230">
       <dia:attribute name="name">
         <dia:string>#&lt; produces#</dia:string>
       </dia:attribute>
@@ -30561,12 +30373,12 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O229" connection="6"/>
-        <dia:connection handle="1" to="O225" connection="2"/>
+        <dia:connection handle="0" to="O228" connection="6"/>
+        <dia:connection handle="1" to="O224" connection="2"/>
       </dia:connections>
       <dia:childnode parent="O0"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O232">
+    <dia:object type="UML - Class" version="0" id="O231">
       <dia:attribute name="obj_pos">
         <dia:point val="360,34"/>
       </dia:attribute>
@@ -30701,7 +30513,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       <dia:attribute name="templates"/>
       <dia:childnode parent="O0"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O233">
+    <dia:object type="UML - Class" version="0" id="O232">
       <dia:attribute name="obj_pos">
         <dia:point val="357,80"/>
       </dia:attribute>
@@ -30905,7 +30717,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       <dia:attribute name="templates"/>
       <dia:childnode parent="O0"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O234">
+    <dia:object type="UML - Association" version="2" id="O233">
       <dia:attribute name="name">
         <dia:string>#&lt; aggregagtes for a given element#</dia:string>
       </dia:attribute>
@@ -30972,12 +30784,12 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O233" connection="0"/>
+        <dia:connection handle="0" to="O232" connection="0"/>
         <dia:connection handle="1" to="O150" connection="7"/>
       </dia:connections>
       <dia:childnode parent="O0"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O235">
+    <dia:object type="UML - Association" version="2" id="O234">
       <dia:attribute name="name">
         <dia:string>#aggregagtes for a given element &gt;#</dia:string>
       </dia:attribute>
@@ -31044,12 +30856,12 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O233" connection="1"/>
-        <dia:connection handle="1" to="O225" connection="5"/>
+        <dia:connection handle="0" to="O232" connection="1"/>
+        <dia:connection handle="1" to="O224" connection="5"/>
       </dia:connections>
       <dia:childnode parent="O0"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O236">
+    <dia:object type="UML - Class" version="0" id="O235">
       <dia:attribute name="obj_pos">
         <dia:point val="324,80"/>
       </dia:attribute>
@@ -31184,7 +30996,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       <dia:attribute name="templates"/>
       <dia:childnode parent="O0"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O237">
+    <dia:object type="UML - Association" version="2" id="O236">
       <dia:attribute name="name">
         <dia:string>#stores &gt;#</dia:string>
       </dia:attribute>
@@ -31251,12 +31063,12 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O236" connection="7"/>
-        <dia:connection handle="1" to="O233" connection="6"/>
+        <dia:connection handle="0" to="O235" connection="7"/>
+        <dia:connection handle="1" to="O232" connection="6"/>
       </dia:connections>
       <dia:childnode parent="O0"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O238">
+    <dia:object type="UML - Association" version="2" id="O237">
       <dia:attribute name="name">
         <dia:string>#creates &gt;#</dia:string>
       </dia:attribute>
@@ -31323,12 +31135,12 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O239" connection="2"/>
-        <dia:connection handle="1" to="O236" connection="1"/>
+        <dia:connection handle="0" to="O238" connection="2"/>
+        <dia:connection handle="1" to="O235" connection="1"/>
       </dia:connections>
       <dia:childnode parent="O0"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O239">
+    <dia:object type="UML - Class" version="0" id="O238">
       <dia:attribute name="obj_pos">
         <dia:point val="301,80"/>
       </dia:attribute>
@@ -31505,7 +31317,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       <dia:attribute name="templates"/>
       <dia:childnode parent="O0"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O240">
+    <dia:object type="UML - Association" version="2" id="O239">
       <dia:attribute name="name">
         <dia:string>#creates all element properties using &gt;#</dia:string>
       </dia:attribute>
@@ -31573,11 +31385,11 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O79" connection="2"/>
-        <dia:connection handle="1" to="O239" connection="0"/>
+        <dia:connection handle="1" to="O238" connection="0"/>
       </dia:connections>
       <dia:childnode parent="O0"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O241">
+    <dia:object type="UML - Association" version="2" id="O240">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -31645,11 +31457,11 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O79" connection="7"/>
-        <dia:connection handle="1" to="O236" connection="5"/>
+        <dia:connection handle="1" to="O235" connection="5"/>
       </dia:connections>
       <dia:childnode parent="O0"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O242">
+    <dia:object type="UML - Class" version="0" id="O241">
       <dia:attribute name="obj_pos">
         <dia:point val="261,228"/>
       </dia:attribute>
@@ -31830,7 +31642,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       <dia:attribute name="templates"/>
       <dia:childnode parent="O1"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O243">
+    <dia:object type="UML - Class" version="0" id="O242">
       <dia:attribute name="obj_pos">
         <dia:point val="298,228"/>
       </dia:attribute>
@@ -31965,7 +31777,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       <dia:attribute name="templates"/>
       <dia:childnode parent="O1"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O244">
+    <dia:object type="UML - Class" version="0" id="O243">
       <dia:attribute name="obj_pos">
         <dia:point val="266,242"/>
       </dia:attribute>
@@ -32125,7 +31937,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       <dia:attribute name="templates"/>
       <dia:childnode parent="O1"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O245">
+    <dia:object type="UML - Class" version="0" id="O244">
       <dia:attribute name="obj_pos">
         <dia:point val="295,242"/>
       </dia:attribute>
@@ -32285,7 +32097,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       <dia:attribute name="templates"/>
       <dia:childnode parent="O1"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O246">
+    <dia:object type="UML - Association" version="2" id="O245">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -32352,12 +32164,12 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O242" connection="1"/>
-        <dia:connection handle="1" to="O243" connection="1"/>
+        <dia:connection handle="0" to="O241" connection="1"/>
+        <dia:connection handle="1" to="O242" connection="1"/>
       </dia:connections>
       <dia:childnode parent="O1"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O247">
+    <dia:object type="UML - Association" version="2" id="O246">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -32424,12 +32236,12 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O242" connection="6"/>
-        <dia:connection handle="1" to="O244" connection="1"/>
+        <dia:connection handle="0" to="O241" connection="6"/>
+        <dia:connection handle="1" to="O243" connection="1"/>
       </dia:connections>
       <dia:childnode parent="O1"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O248">
+    <dia:object type="UML - Association" version="2" id="O247">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -32496,12 +32308,12 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O245" connection="1"/>
-        <dia:connection handle="1" to="O243" connection="6"/>
+        <dia:connection handle="0" to="O244" connection="1"/>
+        <dia:connection handle="1" to="O242" connection="6"/>
       </dia:connections>
       <dia:childnode parent="O1"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O249">
+    <dia:object type="UML - Class" version="0" id="O248">
       <dia:attribute name="obj_pos">
         <dia:point val="340,166"/>
       </dia:attribute>
@@ -32678,7 +32490,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O250">
+    <dia:object type="UML - Class" version="0" id="O249">
       <dia:attribute name="obj_pos">
         <dia:point val="397,80"/>
       </dia:attribute>
@@ -32859,7 +32671,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       <dia:attribute name="templates"/>
       <dia:childnode parent="O0"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O251">
+    <dia:object type="UML - Class" version="0" id="O250">
       <dia:attribute name="obj_pos">
         <dia:point val="422,80"/>
       </dia:attribute>
@@ -32994,7 +32806,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       <dia:attribute name="templates"/>
       <dia:childnode parent="O0"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O252">
+    <dia:object type="UML - Association" version="2" id="O251">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -33061,12 +32873,12 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O233" connection="2"/>
-        <dia:connection handle="1" to="O250" connection="0"/>
+        <dia:connection handle="0" to="O232" connection="2"/>
+        <dia:connection handle="1" to="O249" connection="0"/>
       </dia:connections>
       <dia:childnode parent="O0"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O253">
+    <dia:object type="UML - Class" version="0" id="O252">
       <dia:attribute name="obj_pos">
         <dia:point val="420,52"/>
       </dia:attribute>
@@ -33274,7 +33086,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       <dia:attribute name="templates"/>
       <dia:childnode parent="O0"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O254">
+    <dia:object type="UML - Association" version="2" id="O253">
       <dia:attribute name="name">
         <dia:string>#&lt; produces#</dia:string>
       </dia:attribute>
@@ -33341,12 +33153,12 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O253" connection="5"/>
-        <dia:connection handle="1" to="O250" connection="1"/>
+        <dia:connection handle="0" to="O252" connection="5"/>
+        <dia:connection handle="1" to="O249" connection="1"/>
       </dia:connections>
       <dia:childnode parent="O0"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O255">
+    <dia:object type="UML - Association" version="2" id="O254">
       <dia:attribute name="name">
         <dia:string>#&lt; stores#</dia:string>
       </dia:attribute>
@@ -33413,12 +33225,12 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O250" connection="2"/>
-        <dia:connection handle="1" to="O251" connection="0"/>
+        <dia:connection handle="0" to="O249" connection="2"/>
+        <dia:connection handle="1" to="O250" connection="0"/>
       </dia:connections>
       <dia:childnode parent="O0"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O256">
+    <dia:object type="UML - Class" version="0" id="O255">
       <dia:attribute name="obj_pos">
         <dia:point val="436,34"/>
       </dia:attribute>
@@ -33595,7 +33407,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       <dia:attribute name="templates"/>
       <dia:childnode parent="O0"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O257">
+    <dia:object type="UML - Association" version="2" id="O256">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -33662,12 +33474,12 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O256" connection="5"/>
-        <dia:connection handle="1" to="O253" connection="1"/>
+        <dia:connection handle="0" to="O255" connection="5"/>
+        <dia:connection handle="1" to="O252" connection="1"/>
       </dia:connections>
       <dia:childnode parent="O0"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O258">
+    <dia:object type="UML - Association" version="2" id="O257">
       <dia:attribute name="name">
         <dia:string>#&lt; produces#</dia:string>
       </dia:attribute>
@@ -33734,12 +33546,12 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O256" connection="7"/>
-        <dia:connection handle="1" to="O251" connection="2"/>
+        <dia:connection handle="0" to="O255" connection="7"/>
+        <dia:connection handle="1" to="O250" connection="2"/>
       </dia:connections>
       <dia:childnode parent="O0"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O259">
+    <dia:object type="UML - Class" version="0" id="O258">
       <dia:attribute name="obj_pos">
         <dia:point val="99,163"/>
       </dia:attribute>
@@ -33916,7 +33728,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       <dia:attribute name="templates"/>
       <dia:childnode parent="O1"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O260">
+    <dia:object type="UML - Class" version="0" id="O259">
       <dia:attribute name="obj_pos">
         <dia:point val="119,178"/>
       </dia:attribute>
@@ -34051,7 +33863,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       <dia:attribute name="templates"/>
       <dia:childnode parent="O1"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O261">
+    <dia:object type="UML - Association" version="2" id="O260">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -34118,12 +33930,12 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O259" connection="1"/>
+        <dia:connection handle="0" to="O258" connection="1"/>
         <dia:connection handle="1" to="O179" connection="5"/>
       </dia:connections>
       <dia:childnode parent="O1"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O262">
+    <dia:object type="UML - Association" version="2" id="O261">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -34190,12 +34002,12 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O259" connection="6"/>
-        <dia:connection handle="1" to="O260" connection="0"/>
+        <dia:connection handle="0" to="O258" connection="6"/>
+        <dia:connection handle="1" to="O259" connection="0"/>
       </dia:connections>
       <dia:childnode parent="O1"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O263">
+    <dia:object type="UML - Association" version="2" id="O262">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -34262,12 +34074,12 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O260" connection="2"/>
+        <dia:connection handle="0" to="O259" connection="2"/>
         <dia:connection handle="1" to="O178" connection="6"/>
       </dia:connections>
       <dia:childnode parent="O1"/>
     </dia:object>
-    <dia:object type="UML - Generalization" version="1" id="O264">
+    <dia:object type="UML - Generalization" version="1" id="O263">
       <dia:attribute name="obj_pos">
         <dia:point val="451.072,169.6"/>
       </dia:attribute>
@@ -34309,7 +34121,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       </dia:connections>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Generalization" version="1" id="O265">
+    <dia:object type="UML - Generalization" version="1" id="O264">
       <dia:attribute name="obj_pos">
         <dia:point val="451.072,169.6"/>
       </dia:attribute>
@@ -34351,7 +34163,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       </dia:connections>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Generalization" version="1" id="O266">
+    <dia:object type="UML - Generalization" version="1" id="O265">
       <dia:attribute name="obj_pos">
         <dia:point val="564.88,171.6"/>
       </dia:attribute>
@@ -34393,7 +34205,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       </dia:connections>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O267">
+    <dia:object type="UML - Class" version="0" id="O266">
       <dia:attribute name="obj_pos">
         <dia:point val="485,49"/>
       </dia:attribute>
@@ -34572,9 +34384,9 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O206"/>
+      <dia:childnode parent="O205"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O268">
+    <dia:object type="UML - Class" version="0" id="O267">
       <dia:attribute name="obj_pos">
         <dia:point val="559,49"/>
       </dia:attribute>
@@ -34754,9 +34566,9 @@ an enumeration, false otherwise.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O206"/>
+      <dia:childnode parent="O205"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O269">
+    <dia:object type="UML - Class" version="0" id="O268">
       <dia:attribute name="obj_pos">
         <dia:point val="532,19"/>
       </dia:attribute>
@@ -34914,9 +34726,9 @@ an enumeration, false otherwise.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O206"/>
+      <dia:childnode parent="O205"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O270">
+    <dia:object type="UML - Association" version="2" id="O269">
       <dia:attribute name="name">
         <dia:string>#&lt; injects the output of#</dia:string>
       </dia:attribute>
@@ -34983,12 +34795,12 @@ an enumeration, false otherwise.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O269" connection="5"/>
-        <dia:connection handle="1" to="O278" connection="1"/>
+        <dia:connection handle="0" to="O268" connection="5"/>
+        <dia:connection handle="1" to="O277" connection="1"/>
       </dia:connections>
-      <dia:childnode parent="O206"/>
+      <dia:childnode parent="O205"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O271">
+    <dia:object type="UML - Association" version="2" id="O270">
       <dia:attribute name="name">
         <dia:string>#injects the output of &gt;#</dia:string>
       </dia:attribute>
@@ -35055,12 +34867,12 @@ an enumeration, false otherwise.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O269" connection="7"/>
-        <dia:connection handle="1" to="O280" connection="1"/>
+        <dia:connection handle="0" to="O268" connection="7"/>
+        <dia:connection handle="1" to="O279" connection="1"/>
       </dia:connections>
-      <dia:childnode parent="O206"/>
+      <dia:childnode parent="O205"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O272">
+    <dia:object type="UML - Class" version="0" id="O271">
       <dia:attribute name="obj_pos">
         <dia:point val="531,5"/>
       </dia:attribute>
@@ -35200,9 +35012,9 @@ an enumeration, false otherwise.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O206"/>
+      <dia:childnode parent="O205"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O273">
+    <dia:object type="UML - Association" version="2" id="O272">
       <dia:attribute name="name">
         <dia:string>#registers &gt;#</dia:string>
       </dia:attribute>
@@ -35269,11 +35081,11 @@ an enumeration, false otherwise.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O272" connection="6"/>
-        <dia:connection handle="1" to="O269" connection="1"/>
+        <dia:connection handle="0" to="O271" connection="6"/>
+        <dia:connection handle="1" to="O268" connection="1"/>
       </dia:connections>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O274">
+    <dia:object type="UML - Class" version="0" id="O273">
       <dia:attribute name="obj_pos">
         <dia:point val="508,49"/>
       </dia:attribute>
@@ -35406,9 +35218,9 @@ an enumeration, false otherwise.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O206"/>
+      <dia:childnode parent="O205"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O275">
+    <dia:object type="UML - Association" version="2" id="O274">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -35475,12 +35287,12 @@ an enumeration, false otherwise.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O269" connection="6"/>
-        <dia:connection handle="1" to="O276" connection="1"/>
+        <dia:connection handle="0" to="O268" connection="6"/>
+        <dia:connection handle="1" to="O275" connection="1"/>
       </dia:connections>
-      <dia:childnode parent="O206"/>
+      <dia:childnode parent="O205"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O276">
+    <dia:object type="UML - Class" version="0" id="O275">
       <dia:attribute name="obj_pos">
         <dia:point val="524,34"/>
       </dia:attribute>
@@ -35655,9 +35467,9 @@ an enumeration, false otherwise.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O206"/>
+      <dia:childnode parent="O205"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O277">
+    <dia:object type="UML - Association" version="2" id="O276">
       <dia:attribute name="name">
         <dia:string>#&lt; builds#</dia:string>
       </dia:attribute>
@@ -35724,11 +35536,11 @@ an enumeration, false otherwise.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O276" connection="6"/>
-        <dia:connection handle="1" to="O274" connection="1"/>
+        <dia:connection handle="0" to="O275" connection="6"/>
+        <dia:connection handle="1" to="O273" connection="1"/>
       </dia:connections>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O278">
+    <dia:object type="UML - Class" version="0" id="O277">
       <dia:attribute name="obj_pos">
         <dia:point val="488,34"/>
       </dia:attribute>
@@ -35886,9 +35698,9 @@ an enumeration, false otherwise.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O206"/>
+      <dia:childnode parent="O205"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O279">
+    <dia:object type="UML - Association" version="2" id="O278">
       <dia:attribute name="name">
         <dia:string>#&lt; builds#</dia:string>
       </dia:attribute>
@@ -35955,12 +35767,12 @@ an enumeration, false otherwise.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O278" connection="6"/>
-        <dia:connection handle="1" to="O267" connection="1"/>
+        <dia:connection handle="0" to="O277" connection="6"/>
+        <dia:connection handle="1" to="O266" connection="1"/>
       </dia:connections>
-      <dia:childnode parent="O206"/>
+      <dia:childnode parent="O205"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O280">
+    <dia:object type="UML - Class" version="0" id="O279">
       <dia:attribute name="obj_pos">
         <dia:point val="556,34"/>
       </dia:attribute>
@@ -36118,9 +35930,9 @@ an enumeration, false otherwise.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O206"/>
+      <dia:childnode parent="O205"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O281">
+    <dia:object type="UML - Association" version="2" id="O280">
       <dia:attribute name="name">
         <dia:string>#&lt; builds#</dia:string>
       </dia:attribute>
@@ -36187,12 +35999,12 @@ an enumeration, false otherwise.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O268" connection="1"/>
-        <dia:connection handle="1" to="O280" connection="6"/>
+        <dia:connection handle="0" to="O267" connection="1"/>
+        <dia:connection handle="1" to="O279" connection="6"/>
       </dia:connections>
-      <dia:childnode parent="O206"/>
+      <dia:childnode parent="O205"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O282">
+    <dia:object type="UML - Association" version="2" id="O281">
       <dia:attribute name="name">
         <dia:string>#builds paths using &gt;#</dia:string>
       </dia:attribute>
@@ -36264,7 +36076,7 @@ an enumeration, false otherwise.#</dia:string>
       </dia:connections>
       <dia:childnode parent="O0"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O283">
+    <dia:object type="UML - Association" version="2" id="O282">
       <dia:attribute name="name">
         <dia:string>#stores &gt;#</dia:string>
       </dia:attribute>
@@ -36336,7 +36148,7 @@ an enumeration, false otherwise.#</dia:string>
       </dia:connections>
       <dia:childnode parent="O0"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O284">
+    <dia:object type="UML - Association" version="2" id="O283">
       <dia:attribute name="name">
         <dia:string>#obtains paths using &gt;#</dia:string>
       </dia:attribute>
@@ -36408,7 +36220,7 @@ an enumeration, false otherwise.#</dia:string>
       </dia:connections>
       <dia:childnode parent="O0"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O285">
+    <dia:object type="UML - Class" version="0" id="O284">
       <dia:attribute name="obj_pos">
         <dia:point val="366,-14"/>
       </dia:attribute>
@@ -36590,7 +36402,7 @@ and element.#</dia:string>
       <dia:attribute name="templates"/>
       <dia:childnode parent="O0"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O286">
+    <dia:object type="UML - Association" version="2" id="O285">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -36657,12 +36469,12 @@ and element.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O285" connection="6"/>
+        <dia:connection handle="0" to="O284" connection="6"/>
         <dia:connection handle="1" to="O122" connection="7"/>
       </dia:connections>
       <dia:childnode parent="O0"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O287">
+    <dia:object type="UML - Class" version="0" id="O286">
       <dia:attribute name="obj_pos">
         <dia:point val="515,5"/>
       </dia:attribute>
@@ -36771,9 +36583,9 @@ and element.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O206"/>
+      <dia:childnode parent="O205"/>
     </dia:object>
-    <dia:object type="UML - Note" version="0" id="O288">
+    <dia:object type="UML - Note" version="0" id="O287">
       <dia:attribute name="obj_pos">
         <dia:point val="481,-58"/>
       </dia:attribute>
@@ -36825,9 +36637,9 @@ and element.#</dia:string>
           </dia:attribute>
         </dia:composite>
       </dia:attribute>
-      <dia:childnode parent="O206"/>
+      <dia:childnode parent="O205"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O289">
+    <dia:object type="UML - Association" version="2" id="O288">
       <dia:attribute name="name">
         <dia:string>#&lt; builds and injects#</dia:string>
       </dia:attribute>
@@ -36894,12 +36706,12 @@ and element.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O269" connection="0"/>
-        <dia:connection handle="1" to="O287" connection="6"/>
+        <dia:connection handle="0" to="O268" connection="0"/>
+        <dia:connection handle="1" to="O286" connection="6"/>
       </dia:connections>
-      <dia:childnode parent="O206"/>
+      <dia:childnode parent="O205"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O290">
+    <dia:object type="UML - Class" version="0" id="O289">
       <dia:attribute name="obj_pos">
         <dia:point val="553,5"/>
       </dia:attribute>
@@ -37008,9 +36820,9 @@ and element.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O206"/>
+      <dia:childnode parent="O205"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O291">
+    <dia:object type="UML - Association" version="2" id="O290">
       <dia:attribute name="name">
         <dia:string>#builds and injects &gt;#</dia:string>
       </dia:attribute>
@@ -37051,7 +36863,7 @@ and element.#</dia:string>
         <dia:point val="546.745,19"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="545.995,7.15;556.185,20.6"/>
+        <dia:rectangle val="545.995,7.15;556.185,19.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -37077,10 +36889,10 @@ and element.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O269" connection="2"/>
-        <dia:connection handle="1" to="O290" connection="6"/>
+        <dia:connection handle="0" to="O268" connection="2"/>
+        <dia:connection handle="1" to="O289" connection="6"/>
       </dia:connections>
-      <dia:childnode parent="O206"/>
+      <dia:childnode parent="O205"/>
     </dia:object>
   </dia:layer>
 </dia:diagram>

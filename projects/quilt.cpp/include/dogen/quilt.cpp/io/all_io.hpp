@@ -32,7 +32,6 @@
 #include "dogen/quilt.cpp/io/formatters/file_types_io.hpp"
 #include "dogen/quilt.cpp/io/settings/odb_settings_io.hpp"
 #include "dogen/quilt.cpp/io/settings/path_settings_io.hpp"
-#include "dogen/quilt.cpp/io/properties/origin_types_io.hpp"
 #include "dogen/quilt.cpp/io/settings/aspect_settings_io.hpp"
 #include "dogen/quilt.cpp/io/settings/helper_settings_io.hpp"
 #include "dogen/quilt.cpp/io/settings/opaque_settings_io.hpp"

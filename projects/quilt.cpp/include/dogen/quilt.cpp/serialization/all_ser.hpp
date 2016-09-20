@@ -32,7 +32,6 @@
 #include "dogen/quilt.cpp/serialization/formatters/file_types_ser.hpp"
 #include "dogen/quilt.cpp/serialization/settings/odb_settings_ser.hpp"
 #include "dogen/quilt.cpp/serialization/settings/path_settings_ser.hpp"
-#include "dogen/quilt.cpp/serialization/properties/origin_types_ser.hpp"
 #include "dogen/quilt.cpp/serialization/settings/aspect_settings_ser.hpp"
 #include "dogen/quilt.cpp/serialization/settings/helper_settings_ser.hpp"
 #include "dogen/quilt.cpp/serialization/settings/opaque_settings_ser.hpp"

@@ -91,16 +91,6 @@ container::all_file_formatters() const {
     return all_file_formatters_;
 }
 
-const std::forward_list<std::shared_ptr<formatters::file_formatter_interface>>&
-container::all_internal_file_formatters() const {
-    return all_internal_file_formatters_;
-}
-
-const std::forward_list<std::shared_ptr<formatters::file_formatter_interface>>&
-container::all_external_file_formatters() const {
-    return all_external_file_formatters_;
-}
-
 const std::unordered_map<
     std::string, std::unordered_map<
                      std::string,

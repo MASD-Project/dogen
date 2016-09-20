@@ -43,8 +43,6 @@ public:
 
     file_types file_type() const override;
 
-    properties::origin_types formattable_origin_type() const override;
-
     void register_provider(properties::registrar& rg) const override;
 
     dogen::formatters::file format(const context& ctx,

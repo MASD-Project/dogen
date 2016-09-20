@@ -114,11 +114,6 @@ file_types source_cmakelists_formatter::file_type() const {
     return file_types::cmakefile;
 }
 
-properties::origin_types
-source_cmakelists_formatter::formattable_origin_type() const {
-    return properties::origin_types::external;
-}
-
 void source_cmakelists_formatter::
 register_provider(properties::registrar& rg) const {
     rg.register_provider(boost::make_shared<provider>());

@@ -61,7 +61,7 @@ workflow::create_path_settings(const dynamic::repository& drp,
     const formatters::container& fc) const {
 
     BOOST_LOG_SEV(lg, debug) << "Creating path settings for root object.";
-    settings::path_settings_factory f(drp, fc.all_external_file_formatters());
+    settings::path_settings_factory f(drp, fc.all_file_formatters());
     const auto r(f.make(root_object));
     BOOST_LOG_SEV(lg, debug) << "Created path settings for root object.";
     return r;
@@ -80,7 +80,7 @@ facet_directory_for_facet(const formatters::container& fc,
     settings::path_settings>& ps) const {
 
     std::unordered_map<std::string, std::string> r;
-    for (const auto& f : fc.all_external_file_formatters()) {
+    for (const auto& f : fc.all_file_formatters()) {
         const auto i(ps.find(f->ownership_hierarchy().formatter_name()));
         if ( i != ps.end()) {
             const auto fn(f->ownership_hierarchy().facet_name());

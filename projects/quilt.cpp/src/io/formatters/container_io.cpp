@@ -81,11 +81,6 @@ std::ostream& operator<<(std::ostream& s, const container& c) {
     to_stream(s, "forward_declarations_formatters",
         c.forward_declarations_formatters());
     to_stream(s, "all_file_formatters", c.all_file_formatters());
-    to_stream(s, "all_internal_file_formatters",
-        c.all_internal_file_formatters());
-    to_stream(s, "all_external_file_formatters",
-        c.all_external_file_formatters());
-
     to_stream(s, c.helper_formatters());
     s << " }";
     return s;

@@ -145,22 +145,6 @@ public:
     >&
     all_file_formatters() const;
 
-    /**
-     * @brief Returns all internal file formatters.
-     */
-    const std::forward_list<
-        std::shared_ptr<formatters::file_formatter_interface>
-    >&
-    all_internal_file_formatters() const;
-
-    /**
-     * @brief Returns all internal formatters.
-     */
-    const std::forward_list<
-        std::shared_ptr<formatters::file_formatter_interface>
-    >&
-    all_external_file_formatters() const;
-
 public:
     const std::unordered_map<
     std::string,
@@ -199,10 +183,6 @@ private:
     master_header_formatters_;
     std::forward_list<std::shared_ptr<formatters::file_formatter_interface>>
         all_file_formatters_;
-    std::forward_list<std::shared_ptr<formatters::file_formatter_interface>>
-        all_internal_file_formatters_;
-    std::forward_list<std::shared_ptr<formatters::file_formatter_interface>>
-        all_external_file_formatters_;
     std::unordered_map<
         std::string,
         std::unordered_map<std::string,

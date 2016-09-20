@@ -58,7 +58,6 @@
 #include "dogen/quilt.cpp/types/settings/path_settings.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
 #include "dogen/quilt.cpp/types/properties/name_builder.hpp"
-#include "dogen/quilt.cpp/types/properties/origin_types.hpp"
 #include "dogen/quilt.cpp/types/settings/building_error.hpp"
 #include "dogen/quilt.cpp/types/fabric/registrar_factory.hpp"
 #include "dogen/quilt.cpp/types/settings/aspect_settings.hpp"

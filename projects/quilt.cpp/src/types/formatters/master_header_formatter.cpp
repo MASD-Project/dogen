@@ -123,11 +123,6 @@ file_types master_header_formatter::file_type() const {
     return file_types::cpp_header;
 }
 
-properties::origin_types master_header_formatter::
-formattable_origin_type() const {
-    return properties::origin_types::external;
-}
-
 void master_header_formatter::
 register_provider(properties::registrar& rg) const {
     const auto fn(ownership_hierarchy_.facet_name());

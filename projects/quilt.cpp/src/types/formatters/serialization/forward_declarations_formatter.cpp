@@ -119,11 +119,6 @@ file_types forward_declarations_formatter::file_type() const {
     return file_types::cpp_header;
 }
 
-properties::origin_types
-forward_declarations_formatter::formattable_origin_type() const {
-    return properties::origin_types::external;
-}
-
 void forward_declarations_formatter::
 register_provider(properties::registrar& rg) const {
     rg.register_provider(boost::make_shared<provider>());
