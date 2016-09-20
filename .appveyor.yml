@@ -19,7 +19,7 @@ platform:
 clone_depth: 5
 
 install:
-    - cinst cmake --version 3.4.3
+    - cinst cmake --version 3.6.1
 
     # conan
     - cmd: echo "Installing conan..."
