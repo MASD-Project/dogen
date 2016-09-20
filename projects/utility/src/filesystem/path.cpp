@@ -29,7 +29,7 @@
 #elif defined _WIN32
 #include <windows.h>
 #endif
-#include "dogen/config/version.hpp"
+#include "dogen/version.hpp"
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/filesystem/file_not_found.hpp"
 
