@@ -50,7 +50,7 @@ cmakelists_factory::build(const yarn::intermediate_model& im) const {
     const auto n(nf.build_element_in_model(im.name(), simple_name));
     auto e(boost::make_shared<cmakelists>());
     e->name(n);
-
+/*
     using boost::algorithm::join;
     const auto mn(join(im.name().location().model_modules(), underscore));
     e->model_name(mn);
@@ -58,7 +58,7 @@ cmakelists_factory::build(const yarn::intermediate_model& im) const {
     const auto em(im.name().location().external_modules());
     if (!em.empty())
         e->product_name(em.front());
-
+*/
     std::list<boost::shared_ptr<yarn::element>> r;
     r.push_back(e);
 

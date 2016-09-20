@@ -40,12 +40,6 @@ std::size_t cmakelists_hasher::hash(const cmakelists& v) {
     std::size_t seed(0);
 
     combine(seed, dynamic_cast<const dogen::yarn::element&>(v));
-
-    combine(seed, v.model_name());
-    combine(seed, v.product_name());
-    combine(seed, v.odb_enabled());
-    combine(seed, v.odb_folder());
-
     return seed;
 }
 

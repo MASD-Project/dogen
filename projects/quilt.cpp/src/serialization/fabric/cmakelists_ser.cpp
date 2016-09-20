@@ -21,7 +21,6 @@
 #include <boost/serialization/nvp.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
-#include <boost/serialization/string.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
@@ -43,11 +42,6 @@ void save(Archive& ar,
     const dogen::quilt::cpp::fabric::cmakelists& v,
     const unsigned int /*version*/) {
     ar << make_nvp("element", base_object<dogen::yarn::element>(v));
-
-    ar << make_nvp("model_name", v.model_name_);
-    ar << make_nvp("product_name", v.product_name_);
-    ar << make_nvp("odb_enabled", v.odb_enabled_);
-    ar << make_nvp("odb_folder", v.odb_folder_);
 }
 
 template<typename Archive>
@@ -55,11 +49,6 @@ void load(Archive& ar,
     dogen::quilt::cpp::fabric::cmakelists& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("element", base_object<dogen::yarn::element>(v));
-
-    ar >> make_nvp("model_name", v.model_name_);
-    ar >> make_nvp("product_name", v.product_name_);
-    ar >> make_nvp("odb_enabled", v.odb_enabled_);
-    ar >> make_nvp("odb_folder", v.odb_folder_);
 }
 
 } }

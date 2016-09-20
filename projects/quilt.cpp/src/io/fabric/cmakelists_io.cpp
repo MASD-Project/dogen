@@ -19,8 +19,6 @@
  *
  */
 #include <ostream>
-#include <boost/io/ios_state.hpp>
-#include <boost/algorithm/string.hpp>
 #include "dogen/yarn/io/element_io.hpp"
 #include "dogen/quilt.cpp/io/fabric/cmakelists_io.hpp"
 

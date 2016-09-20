@@ -18,23 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include <sstream>
 #include "dogen/yarn/test_data/element_td.hpp"
 #include "dogen/quilt.cpp/test_data/fabric/cmakelists_td.hpp"
-
-namespace {
-
-std::string create_std_string(const unsigned int position) {
-    std::ostringstream s;
-    s << "a_string_" << position;
-    return s.str();
-}
-
-bool create_bool(const unsigned int position) {
-    return (position % 2) == 0;
-}
-
-}
 
 namespace dogen {
 namespace quilt {
@@ -46,10 +31,6 @@ cmakelists_generator::cmakelists_generator() : position_(0) { }
 void cmakelists_generator::
 populate(const unsigned int position, result_type& v) {
     dogen::yarn::element_generator::populate(position, v);
-    v.model_name(create_std_string(position + 0));
-    v.product_name(create_std_string(position + 1));
-    v.odb_enabled(create_bool(position + 2));
-    v.odb_folder(create_std_string(position + 3));
 }
 
 cmakelists_generator::result_type

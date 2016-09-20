@@ -26,7 +26,6 @@
 #endif
 
 #include <iosfwd>
-#include <string>
 #include <algorithm>
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/quilt.cpp/serialization/fabric/cmakelists_fwd_ser.hpp"
@@ -38,11 +37,9 @@ namespace fabric {
 
 class cmakelists final : public dogen::yarn::element {
 public:
+    cmakelists() = default;
     cmakelists(const cmakelists&) = default;
     cmakelists(cmakelists&&) = default;
-
-public:
-    cmakelists();
 
     virtual ~cmakelists() noexcept { }
 
@@ -56,11 +53,7 @@ public:
         const std::string& original_model_name,
         const boost::optional<dogen::yarn::name>& contained_by,
         const bool in_global_module,
-        const bool is_element_extension,
-        const std::string& model_name,
-        const std::string& product_name,
-        const bool odb_enabled,
-        const std::string& odb_folder);
+        const bool is_element_extension);
 
 private:
     template<typename Archive>
@@ -80,25 +73,6 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
-    const std::string& model_name() const;
-    std::string& model_name();
-    void model_name(const std::string& v);
-    void model_name(const std::string&& v);
-
-    const std::string& product_name() const;
-    std::string& product_name();
-    void product_name(const std::string& v);
-    void product_name(const std::string&& v);
-
-    bool odb_enabled() const;
-    void odb_enabled(const bool v);
-
-    const std::string& odb_folder() const;
-    std::string& odb_folder();
-    void odb_folder(const std::string& v);
-    void odb_folder(const std::string&& v);
-
-public:
     bool operator==(const cmakelists& rhs) const;
     bool operator!=(const cmakelists& rhs) const {
         return !this->operator==(rhs);
@@ -111,11 +85,6 @@ public:
     void swap(cmakelists& other) noexcept;
     cmakelists& operator=(cmakelists other);
 
-private:
-    std::string model_name_;
-    std::string product_name_;
-    bool odb_enabled_;
-    std::string odb_folder_;
 };
 
 } } } }
