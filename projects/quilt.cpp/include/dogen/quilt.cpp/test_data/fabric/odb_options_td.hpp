@@ -18,19 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FABRIC_CMAKELISTS_FACTORY_FWD_HPP
-#define DOGEN_QUILT_CPP_TYPES_FABRIC_CMAKELISTS_FACTORY_FWD_HPP
+#ifndef DOGEN_QUILT_CPP_TEST_DATA_FABRIC_ODB_OPTIONS_TD_HPP
+#define DOGEN_QUILT_CPP_TEST_DATA_FABRIC_ODB_OPTIONS_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
+
+#include "dogen/quilt.cpp/types/fabric/odb_options.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace fabric {
 
-class cmakelists_factory;
+class odb_options_generator {
+public:
+    odb_options_generator();
+
+public:
+    typedef dogen::quilt::cpp::fabric::odb_options result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 } } } }
 

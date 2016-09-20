@@ -18,12 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/yarn/types/injection_error.hpp"
 #include "dogen/quilt.cpp/types/formatters/workflow.hpp"
+#include "dogen/quilt.cpp/types/fabric/cmakelists.hpp"
+#include "dogen/quilt.cpp/types/fabric/odb_options.hpp"
 #include "dogen/quilt.cpp/types/fabric/registrar_factory.hpp"
-#include "dogen/quilt.cpp/types/fabric/cmakelists_factory.hpp"
 #include "dogen/quilt.cpp/types/fabric/master_header_factory.hpp"
 #include "dogen/quilt.cpp/types/fabric/forward_declarations_factory.hpp"
 #include "dogen/quilt.cpp/types/fabric/injector.hpp"
@@ -35,6 +38,8 @@ const std::string id("quilt.cpp.fabric.injector");
 using namespace dogen::utility::log;
 static logger lg(logger_factory(id));
 
+const std::string cmakelists_name("CMakeLists");
+const std::string odb_options_name("options.odb");
 const std::string duplicate_qualified_name("Duplicate qualified name: ");
 
 }
@@ -75,9 +80,27 @@ void injector::inject_registrar(yarn::intermediate_model& im) const {
 }
 
 void injector::inject_cmakelists(yarn::intermediate_model& im) const {
-    cmakelists_factory f;
-    const auto elements(f.build(im));
-    add_elements(elements, im);
+    BOOST_LOG_SEV(lg, debug) << "Generating CMakeLists.";
+
+    yarn::name_factory nf;
+    const auto n(nf.build_element_in_model(im.name(), cmakelists_name));
+    auto e(boost::make_shared<cmakelists>());
+    e->name(n);
+    add_element(e, im);
+
+    BOOST_LOG_SEV(lg, debug) << "Generated CMakeLists.";
+}
+
+void injector::inject_odb_options(yarn::intermediate_model& im) const {
+    BOOST_LOG_SEV(lg, debug) << "Generating ODB Options.";
+
+    yarn::name_factory nf;
+    const auto n(nf.build_element_in_model(im.name(), odb_options_name));
+    auto e(boost::make_shared<odb_options>());
+    e->name(n);
+    add_element(e, im);
+
+    BOOST_LOG_SEV(lg, debug) << "Generated ODB Options.";
 }
 
 void injector::inject_master_headers(yarn::intermediate_model& im) const {
@@ -97,6 +120,7 @@ void injector::inject_forward_declarations(yarn::intermediate_model& im) const {
 void injector::inject(yarn::intermediate_model& im) const {
     inject_registrar(im);
     inject_cmakelists(im);
+    inject_odb_options(im);
     inject_master_headers(im);
     inject_forward_declarations(im);
 }

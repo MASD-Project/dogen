@@ -18,47 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FABRIC_INJECTOR_HPP
-#define DOGEN_QUILT_CPP_TYPES_FABRIC_INJECTOR_HPP
+#ifndef DOGEN_QUILT_CPP_HASH_FABRIC_ODB_OPTIONS_HASH_HPP
+#define DOGEN_QUILT_CPP_HASH_FABRIC_ODB_OPTIONS_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <list>
-#include <boost/shared_ptr.hpp>
-#include "dogen/yarn/types/element.hpp"
-#include "dogen/yarn/types/injector_interface.hpp"
+#include <functional>
+#include "dogen/quilt.cpp/types/fabric/odb_options.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace fabric {
 
-class injector : public yarn::injector_interface {
+struct odb_options_hasher {
 public:
-    virtual ~injector() noexcept;
-
-private:
-    void add_element(const boost::shared_ptr<yarn::element>& e,
-        yarn::intermediate_model& im) const;
-
-    void add_elements(
-        const std::list<boost::shared_ptr<yarn::element>>& elements,
-        yarn::intermediate_model& im) const;
-
-private:
-    void inject_registrar(yarn::intermediate_model& im) const;
-    void inject_cmakelists(yarn::intermediate_model& im) const;
-    void inject_odb_options(yarn::intermediate_model& im) const;
-    void inject_master_headers(yarn::intermediate_model& im) const;
-    void inject_forward_declarations(yarn::intermediate_model& im) const;
-
-public:
-    std::string id() const override;
-    void inject(yarn::intermediate_model& im) const override;
+    static std::size_t hash(const odb_options& v);
 };
 
 } } } }
 
+namespace std {
+
+template<>
+struct hash<dogen::quilt::cpp::fabric::odb_options> {
+public:
+    size_t operator()(const dogen::quilt::cpp::fabric::odb_options& v) const {
+        return dogen::quilt::cpp::fabric::odb_options_hasher::hash(v);
+    }
+};
+
+}
 #endif
