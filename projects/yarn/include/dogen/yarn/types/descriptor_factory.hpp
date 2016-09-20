@@ -27,8 +27,8 @@
 
 #include <list>
 #include <boost/filesystem/path.hpp>
-#include "dogen/config/types/input.hpp"
-#include "dogen/config/types/input_options.hpp"
+#include "dogen/options/types/input.hpp"
+#include "dogen/options/types/input_options.hpp"
 #include "dogen/yarn/types/descriptor.hpp"
 
 namespace dogen {
@@ -40,13 +40,13 @@ private:
         const std::list<boost::filesystem::path>& dirs) const;
 
     std::list<descriptor>
-    from_references(const std::list<config::input>& refs) const;
+    from_references(const std::list<options::input>& refs) const;
 
-    descriptor from_target(const config::input& tg) const;
+    descriptor from_target(const options::input& tg) const;
 
 public:
     std::list<descriptor> make(const std::list<boost::filesystem::path>& dirs,
-        const config::input_options& io) const;
+        const options::input_options& io) const;
 };
 
 } }

@@ -32,7 +32,7 @@
 #include <forward_list>
 #include <boost/filesystem/path.hpp>
 #include "dogen/dynamic/types/repository.hpp"
-#include "dogen/config/types/knitting_options.hpp"
+#include "dogen/options/types/knitting_options.hpp"
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/yarn/types/descriptor.hpp"
 #include "dogen/formatters/types/file.hpp"
@@ -79,7 +79,7 @@ public:
 
 public:
     workflow(workflow&& rhs);
-    explicit workflow(const config::knitting_options& s);
+    explicit workflow(const options::knitting_options& s);
 
 public: // public section for testing purposes only
     /**
@@ -135,7 +135,7 @@ public:
     void execute() const;
 
 private:
-    const config::knitting_options knitting_options_;
+    const options::knitting_options knitting_options_;
 };
 
 } }

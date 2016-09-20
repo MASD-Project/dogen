@@ -433,16 +433,16 @@ seems like the least bad approach.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O6">
       <dia:attribute name="obj_pos">
-        <dia:point val="358,151"/>
+        <dia:point val="361,151"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="357.95,150.95;388.965,157.05"/>
+        <dia:rectangle val="360.95,150.95;383.11,157.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="358,151"/>
+        <dia:point val="361,151"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="30.914999999999999"/>
+        <dia:real val="22.059999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6"/>
@@ -628,7 +628,7 @@ seems like the least bad approach.
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#register_inclusion_dependencies_provider#</dia:string>
+            <dia:string>#register_provider#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -11096,17 +11096,17 @@ registry of all available formatters.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="373.457,151"/>
+        <dia:point val="372.03,151"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="346.858,144.25;374.207,151.8"/>
+        <dia:rectangle val="346.858,144.25;372.78,151.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="373.457,151"/>
-        <dia:point val="373.457,145"/>
+        <dia:point val="372.03,151"/>
+        <dia:point val="372.03,145"/>
         <dia:point val="346.908,145"/>
         <dia:point val="346.908,151"/>
       </dia:attribute>

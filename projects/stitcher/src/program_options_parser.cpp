@@ -154,9 +154,9 @@ void program_options_parser::version_function(std::function<void()> value) {
     version_function_ = value;
 }
 
-config::stitching_options program_options_parser::
+options::stitching_options program_options_parser::
 transform_options(const variables_map& vm) const {
-    config::stitching_options r;
+    options::stitching_options r;
 
     r.verbose(vm.count(verbose_arg));
     if (!vm.count(target_arg))
@@ -167,15 +167,15 @@ transform_options(const variables_map& vm) const {
     return r;
 }
 
-boost::optional<config::stitching_options> program_options_parser::parse() {
+boost::optional<options::stitching_options> program_options_parser::parse() {
     auto optional_vm(variables_map_factory());
 
     if (!optional_vm)
-        return boost::optional<config::stitching_options>();
+        return boost::optional<options::stitching_options>();
 
     const boost::program_options::variables_map vm(*optional_vm);
     const auto r(transform_options(vm));
-    return boost::optional<config::stitching_options>(r);
+    return boost::optional<options::stitching_options>(r);
 }
 
 } }

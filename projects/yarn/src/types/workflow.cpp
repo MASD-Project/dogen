@@ -71,7 +71,7 @@ void workflow::validate() const {
 std::list<intermediate_model> workflow::
 obtain_intermediate_models(const dynamic::repository& drp,
     const std::list<boost::filesystem::path>& dirs,
-    const config::input_options& io) const {
+    const options::input_options& io) const {
     pre_merge_workflow w;
     return w.execute(drp, dirs, io, frontend_registrar());
 }
@@ -106,7 +106,7 @@ model workflow::transform_intermediate_model(
 
 model workflow::execute(const dynamic::repository& drp,
     const std::list<boost::filesystem::path>& dirs,
-    const config::input_options& io) const {
+    const options::input_options& io) const {
 
     const auto im(obtain_intermediate_models(drp, dirs, io));
     auto mim(merge_intermediate_models(im));

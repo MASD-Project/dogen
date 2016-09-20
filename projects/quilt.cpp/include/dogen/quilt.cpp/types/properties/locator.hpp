@@ -29,7 +29,7 @@
 #include <unordered_set>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
-#include "dogen/config/types/cpp_options.hpp"
+#include "dogen/options/types/cpp_options.hpp"
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/quilt.cpp/types/settings/path_settings.hpp"
@@ -44,7 +44,7 @@ namespace properties {
  */
 class locator {
 public:
-    locator(const config::cpp_options& opts, const yarn::model& m,
+    locator(const options::cpp_options& opts, const yarn::model& m,
         const std::unordered_map<std::string, settings::path_settings>& ps);
 
 private:
@@ -67,7 +67,7 @@ private:
      * @brief Returns the absolute path to the project folder.
      */
     boost::filesystem::path make_project_path(
-        const config::cpp_options& opts,
+        const options::cpp_options& opts,
         const yarn::name& model_name) const;
 
     /**

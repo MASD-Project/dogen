@@ -28,7 +28,7 @@
 #include <list>
 #include <boost/filesystem/path.hpp>
 #include "dogen/dynamic/types/repository.hpp"
-#include "dogen/config/types/input_options.hpp"
+#include "dogen/options/types/input_options.hpp"
 #include "dogen/yarn/types/frontend_registrar.hpp"
 #include "dogen/yarn/types/injector_registrar.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
@@ -63,7 +63,7 @@ private:
     std::list<intermediate_model> obtain_intermediate_models(
         const dynamic::repository& drp,
         const std::list<boost::filesystem::path>& dirs,
-        const config::input_options& io) const;
+        const options::input_options& io) const;
 
     /**
      * @brief Creates the merged intermediate model.
@@ -85,7 +85,7 @@ private:
 public:
     model execute(const dynamic::repository& drp,
         const std::list<boost::filesystem::path>& dirs,
-        const config::input_options& io) const;
+        const options::input_options& io) const;
 
 private:
     static std::shared_ptr<yarn::frontend_registrar> frontend_registrar_;

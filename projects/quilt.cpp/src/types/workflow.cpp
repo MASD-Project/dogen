@@ -87,7 +87,7 @@ workflow::create_element_settings_repository(
 }
 
 properties::element_properties_repository workflow::create_properties(
-    const config::cpp_options& opts,
+    const options::cpp_options& opts,
     const dynamic::repository& srp,
     const dynamic::object& root_object,
     const dogen::formatters::file_properties_workflow& fpwf,
@@ -125,7 +125,7 @@ std::string workflow::name() const {
 }
 
 std::forward_list<boost::filesystem::path>
-workflow::managed_directories(const config::knitting_options& ko,
+workflow::managed_directories(const options::knitting_options& ko,
     const dynamic::repository& rp, const yarn::model& m) const {
     const auto ro(m.root_module().extensions());
     settings::directory_names_settings_factory f(rp);
@@ -144,7 +144,7 @@ workflow::ownership_hierarchy() const {
 }
 
 std::forward_list<dogen::formatters::file>
-workflow::generate(const config::knitting_options& ko,
+workflow::generate(const options::knitting_options& ko,
     const dynamic::repository& drp,
     const yarn::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started C++ backend.";

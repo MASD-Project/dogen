@@ -27,7 +27,7 @@
 
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
-#include "dogen/config/types/stitching_options.hpp"
+#include "dogen/options/types/stitching_options.hpp"
 
 namespace dogen {
 namespace stitcher {
@@ -43,25 +43,25 @@ private:
     /**
      * @brief Sets up the template name from the options.
      */
-    void initialise_template_name(const dogen::config::stitching_options& o);
+    void initialise_template_name(const dogen::options::stitching_options& o);
 
     /**
      * @brief Given the main arguments, generates the knitting options.
      */
-    boost::optional<dogen::config::stitching_options>
+    boost::optional<dogen::options::stitching_options>
     generate_stitching_options_activity(
         const int argc, const char* argv[]) const;
 
     /**
      * @brief Performs the initialisation of logging system.
      */
-    void initialise_logging_activity(const dogen::config::stitching_options& o);
+    void initialise_logging_activity(const dogen::options::stitching_options& o);
 
     /**
      * @brief Executes the code generation workflow for the given the
      * application options.
      */
-    void stitch_activity(const dogen::config::stitching_options& o) const;
+    void stitch_activity(const dogen::options::stitching_options& o) const;
 
 private:
      /**

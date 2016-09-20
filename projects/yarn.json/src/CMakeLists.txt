@@ -31,7 +31,6 @@ set_target_properties(${name}
 
 target_link_libraries(${name}
     utility
-    config
     dynamic
     yarn
     ${LIBXML2_LIBRARIES}

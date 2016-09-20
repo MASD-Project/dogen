@@ -24,7 +24,7 @@
 #include <boost/exception/diagnostic_information.hpp>
 #include "dogen/utility/log/life_cycle_manager.hpp"
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/config/version.hpp"
+#include "dogen/version.hpp"
 #include "dogen/stitcher/program_options_parser.hpp"
 #include "dogen/stitcher/parser_validation_error.hpp"
 #include "dogen/stitch/types/parser.hpp"
@@ -72,21 +72,21 @@ namespace stitcher {
 workflow::workflow() : can_log_(false) { }
 
 void workflow::
-initialise_template_name(const dogen::config::stitching_options& o) {
+initialise_template_name(const dogen::options::stitching_options& o) {
     const boost::filesystem::path p(o.target());
     template_name_ = p.stem().filename().string();
 }
 
-boost::optional<config::stitching_options> workflow::
+boost::optional<options::stitching_options> workflow::
 generate_stitching_options_activity(const int argc, const char* argv[]) const {
     program_options_parser p(argc, argv);
     p.help_function(help);
     p.version_function(version);
-    boost::optional<config::stitching_options> r(p.parse());
+    boost::optional<options::stitching_options> r(p.parse());
     return r;
 }
 
-void workflow::initialise_logging_activity(const config::stitching_options& o) {
+void workflow::initialise_logging_activity(const options::stitching_options& o) {
     const auto sev(o.verbose() ? severity_level::debug : severity_level::info);
     log_file_name_ = log_file_prefix + template_name_ + ".log";
     life_cycle_manager lcm;
@@ -94,7 +94,7 @@ void workflow::initialise_logging_activity(const config::stitching_options& o) {
     can_log_ = true;
 }
 
-void workflow::stitch_activity(const config::stitching_options& o) const {
+void workflow::stitch_activity(const options::stitching_options& o) const {
     BOOST_LOG_SEV(lg, info) << stitcher_product << " started.";
     stitch::workflow w;
     w.execute(o.target());

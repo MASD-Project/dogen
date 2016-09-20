@@ -30,13 +30,13 @@
 #include <functional>
 #include <boost/optional.hpp>
 #include <boost/program_options.hpp>
-#include "dogen/config/types/knitting_options.hpp"
+#include "dogen/options/types/knitting_options.hpp"
 
 namespace dogen {
 namespace knitter {
 
 /**
- * @brief Creates a configuration from a set of command line arguments
+ * @brief Creates a optionsuration from a set of command line arguments
  * supplied by the user.
  */
 class program_options_parser {
@@ -51,7 +51,7 @@ public:
     program_options_parser(program_options_parser&& rhs);
 
 private:
-    config::input make_input(const std::string& s) const;
+    options::input make_input(const std::string& s) const;
 
 private:
     typedef boost::program_options::options_description options_description;
@@ -67,10 +67,10 @@ private:
     boost::optional<variables_map> variables_map_factory() const;
 
 private:
-    config::input_options
+    options::input_options
     transform_input_options(const variables_map& vm) const;
-    config::cpp_options transform_cpp_options(const variables_map& vm) const;
-    config::output_options
+    options::cpp_options transform_cpp_options(const variables_map& vm) const;
+    options::output_options
     transform_output_options(const variables_map& vm) const;
 
 public:
@@ -78,7 +78,7 @@ public:
     void version_function(std::function<void()> value);
 
 public:
-    boost::optional<config::knitting_options> parse();
+    boost::optional<options::knitting_options> parse();
 
 private:
     const std::vector<std::string> arguments_;

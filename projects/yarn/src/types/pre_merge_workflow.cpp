@@ -30,7 +30,7 @@ namespace yarn {
 
 std::list<descriptor> pre_merge_workflow::
 obtain_descriptors(const std::list<boost::filesystem::path>& dirs,
-    const config::input_options& io) const {
+    const options::input_options& io) const {
     descriptor_factory f;
     return f.make(dirs, io);
 }
@@ -62,7 +62,7 @@ void pre_merge_workflow::do_settings_expansion(const dynamic::repository& drp,
 std::list<intermediate_model>
 pre_merge_workflow::execute(const dynamic::repository& drp,
     const std::list<boost::filesystem::path>& dirs,
-    const config::input_options& io,
+    const options::input_options& io,
     frontend_registrar& rg) const {
 
     const auto d(obtain_descriptors(dirs, io));

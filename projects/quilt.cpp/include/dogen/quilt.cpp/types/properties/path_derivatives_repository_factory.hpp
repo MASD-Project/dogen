@@ -29,7 +29,6 @@
 #include <unordered_map>
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/repository.hpp"
-#include "dogen/config/types/cpp_options.hpp"
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/quilt.cpp/types/settings/path_settings.hpp"
 #include "dogen/quilt.cpp/types/properties/locator.hpp"

@@ -31,7 +31,7 @@
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/formatters/types/file_properties_workflow.hpp"
-#include "dogen/config/types/cpp_options.hpp"
+#include "dogen/options/types/cpp_options.hpp"
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/quilt.cpp/types/properties/registrar.hpp"
 #include "dogen/quilt.cpp/types/settings/path_settings.hpp"
@@ -127,7 +127,7 @@ public:
     /**
      * @brief Executes the workflow.
      */
-    element_properties_repository execute(const config::cpp_options& opts,
+    element_properties_repository execute(const options::cpp_options& opts,
         const dynamic::repository& drp,
         const dynamic::object& root_object,
         const dogen::formatters::file_properties_workflow& fpwf,

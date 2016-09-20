@@ -32,6 +32,7 @@ set_target_properties(${name}
 target_link_libraries(${name}
     utility
     dynamic
+    options
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES})
 

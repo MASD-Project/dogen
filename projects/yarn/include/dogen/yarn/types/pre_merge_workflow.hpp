@@ -25,7 +25,7 @@
 #endif
 
 #include "dogen/dynamic/types/repository.hpp"
-#include "dogen/config/types/input_options.hpp"
+#include "dogen/options/types/input_options.hpp"
 #include "dogen/yarn/types/descriptor.hpp"
 #include "dogen/yarn/types/frontend_registrar.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
@@ -43,7 +43,7 @@ private:
      */
     std::list<descriptor> obtain_descriptors(
         const std::list<boost::filesystem::path>& dirs,
-        const config::input_options& io) const;
+        const options::input_options& io) const;
 
     /**
      * @brief Obtains all intermediate models.
@@ -74,7 +74,7 @@ public:
      */
     std::list<intermediate_model> execute(const dynamic::repository& drp,
         const std::list<boost::filesystem::path>& dirs,
-        const config::input_options& io,
+        const options::input_options& io,
         frontend_registrar& rg) const;
 };
 

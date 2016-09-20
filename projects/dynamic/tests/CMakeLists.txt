@@ -31,7 +31,6 @@ set_target_properties(${tests_name} PROPERTIES OUTPUT_NAME ${binary_name})
 target_link_libraries(${tests_name}
     ${name}
     utility
-    config
     ${Boost_LIBRARIES}
     ${CMAKE_REQUIRED_LIBRARIES}
     ${CMAKE_THREAD_LIBS_INIT})

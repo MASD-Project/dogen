@@ -131,7 +131,7 @@ element_properties_repository workflow::create_element_properties_repository(
     return f.make(fpwf, hsrp, asrp, ssrp, fc, fprp, m);
 }
 
-element_properties_repository workflow::execute(const config::cpp_options& opts,
+element_properties_repository workflow::execute(const options::cpp_options& opts,
     const dynamic::repository& drp,
     const dynamic::object& root_object,
     const dogen::formatters::file_properties_workflow& fpwf,

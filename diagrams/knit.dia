@@ -522,7 +522,7 @@
             <dia:string>#knitting_options_#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#config::knitting_options#</dia:string>
+            <dia:string>#options::knitting_options#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -576,7 +576,7 @@
                 <dia:string>#ko#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const config::knitting_options&amp;#</dia:string>
+                <dia:string>#const options::knitting_options&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>

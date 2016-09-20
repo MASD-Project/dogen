@@ -31,13 +31,13 @@
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
 #include <boost/program_options.hpp>
-#include "dogen/config/types/stitching_options.hpp"
+#include "dogen/options/types/stitching_options.hpp"
 
 namespace dogen {
 namespace stitcher {
 
 /**
- * @brief Creates a configuration from a set of command line arguments
+ * @brief Creates a optionsuration from a set of command line arguments
  * supplied by the user.
  */
 class program_options_parser {
@@ -71,7 +71,7 @@ private:
     typedef boost::program_options::variables_map variables_map;
     boost::optional<variables_map> variables_map_factory() const;
 
-    config::stitching_options transform_options(const variables_map& vm) const;
+    options::stitching_options transform_options(const variables_map& vm) const;
 
 public:
     void help_function(std::function<void(std::string)> value);
@@ -79,7 +79,7 @@ public:
 
 
 public:
-    boost::optional<config::stitching_options> parse();
+    boost::optional<options::stitching_options> parse();
 
 private:
     const std::vector<std::string> arguments_;

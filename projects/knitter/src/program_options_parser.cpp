@@ -83,7 +83,7 @@ program_options_parser::program_options_parser(program_options_parser&& rhs)
       help_function_(std::move(rhs.help_function_)),
       version_function_(std::move(rhs.version_function_)) { }
 
-config::input program_options_parser::make_input(const std::string& s) const {
+options::input program_options_parser::make_input(const std::string& s) const {
 
     std::vector<std::string> tokens;
     boost::split(tokens, s, boost::is_any_of(comma));
@@ -94,7 +94,7 @@ config::input program_options_parser::make_input(const std::string& s) const {
     if (tokens.size() > 2)
         BOOST_THROW_EXCEPTION(parser_validation_error(at_most_two_arguments));
 
-    config::input r;
+    options::input r;
     r.path(tokens[0]);
     if (tokens.size() > 1)
         r.external_modules(tokens[1]);
@@ -210,9 +210,9 @@ void program_options_parser::version_function(std::function<void()> value) {
     version_function_ = value;
 }
 
-config::cpp_options program_options_parser::
+options::cpp_options program_options_parser::
 transform_cpp_options(const boost::program_options::variables_map& vm) const {
-    config::cpp_options r;
+    options::cpp_options r;
     r.disable_cmakelists(vm.count(cpp_disable_cmakelists_arg));
     if (!vm.count(cpp_project_dir_arg))
         r.project_directory_path(boost::filesystem::current_path());
@@ -222,9 +222,9 @@ transform_cpp_options(const boost::program_options::variables_map& vm) const {
     return r;
 }
 
-config::input_options program_options_parser::transform_input_options(
+options::input_options program_options_parser::transform_input_options(
     const boost::program_options::variables_map& vm) const {
-    config::input_options r;
+    options::input_options r;
 
     if (!vm.count(target_arg))
         BOOST_THROW_EXCEPTION(parser_validation_error(missing_target));
@@ -242,9 +242,9 @@ config::input_options program_options_parser::transform_input_options(
     return r;
 }
 
-config::output_options program_options_parser::
+options::output_options program_options_parser::
 transform_output_options(const variables_map& vm) const {
-    config::output_options r;
+    options::output_options r;
     r.delete_extra_files(vm.count(delete_extra_files_arg));
     r.force_write(vm.count(force_write_arg));
 
@@ -258,13 +258,13 @@ transform_output_options(const variables_map& vm) const {
     return r;
 }
 
-boost::optional<config::knitting_options> program_options_parser::parse() {
+boost::optional<options::knitting_options> program_options_parser::parse() {
     auto optional_vm(variables_map_factory());
 
     if (!optional_vm)
-        return boost::optional<config::knitting_options>();
+        return boost::optional<options::knitting_options>();
 
-    config::knitting_options r;
+    options::knitting_options r;
     const auto& vm(*optional_vm);
     r.verbose(vm.count(verbose_arg));
     r.input(transform_input_options(vm));

@@ -97,7 +97,7 @@ private:
      * @brief Create the properties.
      */
     properties::element_properties_repository
-    create_properties(const config::cpp_options& opts,
+        create_properties(const options::cpp_options& opts,
         const dynamic::repository& srp,
         const dynamic::object& root_object,
         const dogen::formatters::file_properties_workflow& fpwf,
@@ -125,7 +125,7 @@ public:
     std::string name() const override;
 
     std::forward_list<boost::filesystem::path>
-    managed_directories(const config::knitting_options& ko,
+    managed_directories(const options::knitting_options& ko,
         const dynamic::repository& drp,
         const yarn::model& m) const override;
 
@@ -133,7 +133,7 @@ public:
         ownership_hierarchy() const override;
 
     std::forward_list<dogen::formatters::file> generate(
-        const config::knitting_options& ko,
+        const options::knitting_options& ko,
         const dynamic::repository& drp,
         const yarn::model& m) const override;
 };

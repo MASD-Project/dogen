@@ -27,7 +27,7 @@
 
 #include <forward_list>
 #include <boost/filesystem/path.hpp>
-#include "dogen/config/types/knitting_options.hpp"
+#include "dogen/options/types/knitting_options.hpp"
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/dynamic/types/ownership_hierarchy.hpp"
 #include "dogen/yarn/types/model.hpp"
@@ -57,7 +57,7 @@ public:
      * @brief Returns all directories managed by this backend.
      */
     virtual std::forward_list<boost::filesystem::path>
-    managed_directories(const config::knitting_options& ko,
+    managed_directories(const options::knitting_options& ko,
         const dynamic::repository& rp,
         const yarn::model& m) const = 0;
 
@@ -75,7 +75,7 @@ public:
      * @param m Model to generate.
      */
     virtual std::forward_list<formatters::file> generate(
-        const config::knitting_options& ko,
+        const options::knitting_options& ko,
         const dynamic::repository& rp,
         const yarn::model& m) const = 0;
 };

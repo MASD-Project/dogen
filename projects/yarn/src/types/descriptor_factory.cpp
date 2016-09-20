@@ -64,7 +64,7 @@ std::list<descriptor> descriptor_factory::from_directories(
 }
 
 std::list<descriptor> descriptor_factory::
-from_references(const std::list<config::input>& refs) const {
+from_references(const std::list<options::input>& refs) const {
     BOOST_LOG_SEV(lg, debug) << "Creating descriptors for reference models.";
     BOOST_LOG_SEV(lg, debug) << "Found " << refs.size() << " reference models.";
 
@@ -85,7 +85,7 @@ from_references(const std::list<config::input>& refs) const {
     return r;
 }
 
-descriptor descriptor_factory::from_target(const config::input& tg) const {
+descriptor descriptor_factory::from_target(const options::input& tg) const {
     BOOST_LOG_SEV(lg, debug) << "Creating descriptor for target model.";
 
     descriptor r;
@@ -101,7 +101,7 @@ descriptor descriptor_factory::from_target(const config::input& tg) const {
 
 std::list<descriptor> descriptor_factory::
 make(const std::list<boost::filesystem::path>& dirs,
-    const config::input_options& io) const {
+    const options::input_options& io) const {
 
     auto r(from_directories(dirs));
     r.splice(r.end(), from_references(io.references()));

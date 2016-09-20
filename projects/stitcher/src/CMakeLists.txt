@@ -30,7 +30,7 @@ set_target_properties(${name} PROPERTIES OUTPUT_NAME ${binary_name})
 target_link_libraries(${name}
     stitch
     utility
-    config
+    options
     ${Boost_LIBRARIES})
 
 install(TARGETS ${name} RUNTIME DESTINATION bin COMPONENT applications)

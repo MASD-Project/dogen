@@ -73,9 +73,9 @@ if(use_latest_knitter)
 endif()
 add_dependencies(knit_all knit_${target})
 
-set(target config)
+set(target options)
 add_custom_target(knit_${target}
-    COMMENT "Knitting Config model" VERBATIM
+    COMMENT "Knitting Options model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen
@@ -97,7 +97,7 @@ add_custom_target(knit_${target}
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/config.dia,dogen
+    --reference ${CMAKE_SOURCE_DIR}/diagrams/options.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/yarn.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/formatters.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/dynamic.dia,dogen
@@ -144,7 +144,7 @@ add_custom_target(knit_${target}
     COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/dynamic.dia,dogen
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/config.dia,dogen
+    --reference ${CMAKE_SOURCE_DIR}/diagrams/options.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/yarn.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/quilt.cpp.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/formatters.dia,dogen
@@ -205,7 +205,7 @@ add_custom_target(knit_${target}
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/config.dia,dogen
+    --reference ${CMAKE_SOURCE_DIR}/diagrams/options.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/dynamic.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/yarn.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/formatters.dia,dogen

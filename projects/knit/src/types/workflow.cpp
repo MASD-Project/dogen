@@ -24,8 +24,8 @@
 #include "dogen/utility/filesystem/file.hpp"
 #include "dogen/utility/exception/invalid_enum_value.hpp"
 #include "dogen/dynamic/types/repository_workflow.hpp"
-#include "dogen/config/types/knitting_options_validator.hpp"
-#include "dogen/config/io/knitting_options_io.hpp"
+#include "dogen/options/types/knitting_options_validator.hpp"
+#include "dogen/options/io/knitting_options_io.hpp"
 #include "dogen/yarn/types/workflow.hpp"
 #include "dogen/formatters/types/formatting_error.hpp"
 #include "dogen/formatters/types/filesystem_writer.hpp"
@@ -49,7 +49,7 @@ const std::string library_dir("library");
 const std::string merged("merged_");
 const std::string fields_dir("fields");
 const std::string invalid_archive_type("Invalid or unexpected archive type");
-const std::string incorrect_stdout_config(
+const std::string incorrect_stdout_options(
     "Configuration for output to stdout is incorrect");
 const std::string code_generation_failure("Code generation failure.");
 
@@ -62,8 +62,8 @@ workflow::workflow(workflow&& rhs)
     : knitting_options_(std::move(rhs.knitting_options_)) { }
 
 workflow::
-workflow(const config::knitting_options& o) : knitting_options_(o) {
-    config::knitting_options_validator v;
+workflow(const options::knitting_options& o) : knitting_options_(o) {
+    options::knitting_options_validator v;
     v.validate(knitting_options_);
 }
 
@@ -118,7 +118,7 @@ void workflow::perform_housekeeping_activity(
 
 std::shared_ptr<dogen::formatters::file_writer_interface>
 workflow::obtain_file_writer_activity() const {
-    const config::output_options& options(knitting_options_.output());
+    const options::output_options& options(knitting_options_.output());
     const auto fw(options.force_write());
 
     using dogen::formatters::filesystem_writer;

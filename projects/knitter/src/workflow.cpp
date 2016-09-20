@@ -22,11 +22,11 @@
 #include <boost/exception/diagnostic_information.hpp>
 #include "dogen/utility/log/life_cycle_manager.hpp"
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/config/types/knitting_options_validator.hpp"
-#include "dogen/config/version.hpp"
+#include "dogen/options/types/knitting_options_validator.hpp"
+#include "dogen/version.hpp"
 #include "dogen/knitter/program_options_parser.hpp"
 #include "dogen/knitter/parser_validation_error.hpp"
-#include "dogen/config/types/knitting_options.hpp"
+#include "dogen/options/types/knitting_options.hpp"
 #include "dogen/knit/types/workflow.hpp"
 #include "dogen/knitter/workflow.hpp"
 
@@ -71,28 +71,28 @@ namespace knitter {
 workflow::workflow() : can_log_(false) { }
 
 void workflow::
-initialise_model_name(const dogen::config::knitting_options& o) {
+initialise_model_name(const dogen::options::knitting_options& o) {
     const boost::filesystem::path p(o.input().target().path());
     model_name_ = p.stem().filename().string();
 }
 
-boost::optional<config::knitting_options> workflow::
+boost::optional<options::knitting_options> workflow::
 generate_knitting_options_activity(const int argc, const char* argv[]) const {
     program_options_parser p(argc, argv);
     p.help_function(help);
     p.version_function(version);
 
-    boost::optional<config::knitting_options> r(p.parse());
+    boost::optional<options::knitting_options> r(p.parse());
     if (!r)
         return r;
 
-    config::knitting_options_validator v;
+    options::knitting_options_validator v;
     v.validate(*r);
 
     return r;
 }
 
-void workflow::initialise_logging_activity(const config::knitting_options& o) {
+void workflow::initialise_logging_activity(const options::knitting_options& o) {
     const auto sev(o.verbose() ? severity_level::debug : severity_level::info);
     log_file_name_ = log_file_prefix + model_name_ + ".log";
     life_cycle_manager lcm;
@@ -100,7 +100,7 @@ void workflow::initialise_logging_activity(const config::knitting_options& o) {
     can_log_ = true;
 }
 
-void workflow::knit_activity(const config::knitting_options& o) const {
+void workflow::knit_activity(const options::knitting_options& o) const {
     BOOST_LOG_SEV(lg, info) << knitter_product << " started.";
     knit::workflow w(o);
     w.execute();

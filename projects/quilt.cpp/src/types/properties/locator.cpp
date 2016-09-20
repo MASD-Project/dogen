@@ -66,7 +66,7 @@ private:
 };
 
 locator::locator(
-    const config::cpp_options& opts, const yarn::model& m,
+    const options::cpp_options& opts, const yarn::model& m,
     const std::unordered_map<std::string, settings::path_settings>& ps)
     : model_name_(m.name()), path_settings_(ps), module_ids_(module_ids(m)),
       project_path_(make_project_path(opts, m.name())) {}
@@ -93,7 +93,7 @@ path_settings_for_formatter(const std::string& formatter_name) const {
 }
 
 boost::filesystem::path locator::make_project_path(
-    const config::cpp_options& opts,
+    const options::cpp_options& opts,
     const yarn::name& model_name) const {
 
     boost::filesystem::path r;

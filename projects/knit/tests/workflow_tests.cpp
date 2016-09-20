@@ -31,8 +31,8 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/dia/io/diagram_io.hpp"
 #include "dogen/knit/types/workflow_error.hpp"
-#include "dogen/config/test/mock_options_factory.hpp"
-#include "dogen/config/types/knitting_options.hpp"
+#include "dogen/options/test/mock_options_factory.hpp"
+#include "dogen/options/types/knitting_options.hpp"
 #include "dogen/knit/types/workflow.hpp"
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/yarn/io/model_io.hpp"
@@ -65,7 +65,7 @@ bool generate_and_diff(const boost::filesystem::path& target,
     const auto expected(validating_resolver::resolve(name + ::expected));
     const auto actual(validating_resolver::resolve(name + ::actual));
 
-    using dogen::config::test::mock_options_factory;
+    using dogen::options::test::mock_options_factory;
     auto ko(mock_options_factory::
         make_knitting_options(target, actual, module_path));
     ko.cpp().disable_cmakelists(disable_cmakelists);
