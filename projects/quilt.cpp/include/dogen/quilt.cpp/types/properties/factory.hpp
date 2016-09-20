@@ -34,7 +34,6 @@
 #include "dogen/quilt.cpp/types/settings/path_settings.hpp"
 #include "dogen/quilt.cpp/types/settings/element_settings_repository.hpp"
 #include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
-#include "dogen/quilt.cpp/types/properties/cmakelists_info.hpp"
 #include "dogen/quilt.cpp/types/properties/odb_options_info.hpp"
 #include "dogen/quilt.cpp/types/properties/path_derivatives_repository.hpp"
 #include "dogen/quilt.cpp/types/properties/formatter_properties_repository.hpp"
@@ -59,13 +58,6 @@ private:
         const yarn::name& n, const std::string& formatter_name) const;
 
 public:
-    std::forward_list<std::shared_ptr<formattable> > make_cmakelists(
-        const config::cpp_options& opts,
-        const dogen::formatters::file_properties_workflow& fpwf,
-        const std::unordered_map<std::string, settings::path_settings>& ps,
-        const formatter_properties_repository& fprp,
-        const yarn::model& m) const;
-
     std::shared_ptr<formattable> make_odb_options(
         const config::cpp_options& opts,
         const dogen::formatters::file_properties_workflow& fpwf,

@@ -47,7 +47,6 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("quilt.cpp.formatters.factory"));
 
 const std::string namespace_separator("::");
-const std::string cmakelists_name("CMakeLists.txt");
 const std::string odb_options_name("options.odb");
 const std::string settings_not_found_for_formatter(
     "Settings not found for formatter: ");
@@ -118,67 +117,6 @@ bool factory::is_enabled(const formatter_properties_repository& fprp,
                 settings_not_found_for_formatter + formatter_name));
     }
     return j->second.enabled();
-}
-
-std::forward_list<std::shared_ptr<formattable> > factory::
-make_cmakelists(const config::cpp_options& opts,
-    const dogen::formatters::file_properties_workflow& fpwf,
-    const std::unordered_map<std::string, settings::path_settings>& ps,
-    const formatter_properties_repository& fprp,
-    const yarn::model& m) const
-{
-    std::forward_list<std::shared_ptr<formattable> > r;
-    if (opts.disable_cmakelists()) {
-        BOOST_LOG_SEV(lg, info) << "CMakeLists generation disabled.";
-        return r;
-    }
-
-    BOOST_LOG_SEV(lg, debug) << "Generating source CMakeLists.";
-    using boost::algorithm::join;
-    const auto mn(join(m.name().location().model_modules(), underscore));
-
-    auto cm(std::make_shared<cmakelists_info>());
-    cm->model_name(mn);
-    cm->file_name(cmakelists_name);
-
-    const auto fp(fpwf.execute(cmake_modeline_name));
-    cm->file_properties(fp);
-
-    if (!m.name().location().external_modules().empty())
-        cm->product_name(m.name().location().external_modules().front());
-
-    using namespace formatters::types;
-    const auto ch_fn(traits::class_header_formatter_name());
-    const auto i(ps.find(ch_fn));
-    if (i == ps.end()) {
-        BOOST_LOG_SEV(lg, error) << settings_not_found_for_formatter
-                                 << ch_fn;
-        BOOST_THROW_EXCEPTION(building_error(
-                settings_not_found_for_formatter + ch_fn));
-    }
-
-    auto base(opts.project_directory_path());
-    for (const auto& p : m.name().location().model_modules())
-        base /= p;
-
-    cm->source_file_path(base / i->second.source_directory_name() /
-        cmakelists_name);
-    cm->include_file_path(base / cmakelists_name);
-
-    const auto odb_ch_fn(
-        formatters::odb::traits::class_header_formatter_name());
-    cm->odb_enabled(is_enabled(fprp, m.name(), odb_ch_fn));
-    const auto j(ps.find(odb_ch_fn));
-    if (j == ps.end()) {
-        BOOST_LOG_SEV(lg, error) << settings_not_found_for_formatter
-                                 << odb_ch_fn;
-        BOOST_THROW_EXCEPTION(building_error(
-                settings_not_found_for_formatter + odb_ch_fn));
-    }
-    cm->odb_folder(j->second.facet_directory());
-
-    r.push_front(cm);
-    return r;
 }
 
 std::shared_ptr<formattable>

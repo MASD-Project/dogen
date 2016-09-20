@@ -131,9 +131,6 @@ workflow::from_factory(const config::cpp_options& opts,
     std::forward_list<std::shared_ptr<properties::formattable> > r;
     factory f;
 
-    r.splice_after(r.before_begin(),
-        f.make_cmakelists(opts, fpwf, ps, fprp, m));
-
     const auto oi(f.make_odb_options(opts, fpwf, ps, fprp, m));
     if (oi)
         r.push_front(oi);

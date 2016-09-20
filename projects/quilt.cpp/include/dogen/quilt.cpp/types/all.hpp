@@ -74,7 +74,6 @@
 #include "dogen/quilt.cpp/types/formatters/context_factory.hpp"
 #include "dogen/quilt.cpp/types/formatters/odb/initializer.hpp"
 #include "dogen/quilt.cpp/types/formatters/registrar_error.hpp"
-#include "dogen/quilt.cpp/types/properties/cmakelists_info.hpp"
 #include "dogen/quilt.cpp/types/properties/provision_error.hpp"
 #include "dogen/quilt.cpp/types/properties/registrar_error.hpp"
 #include "dogen/quilt.cpp/types/fabric/forward_declarations.hpp"

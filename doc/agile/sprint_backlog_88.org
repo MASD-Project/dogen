@@ -13,18 +13,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-20 Tue 13:07]
+#+CAPTION: Clock summary at [2016-09-20 Tue 13:12]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *48:43* |       |       | 100.0 |
+| *Total time*                                                                | *48:47* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 48:43   |       |       | 100.0 |
-| Active                                                                      |         | 48:43 |       | 100.0 |
+| Stories                                                                     | 48:47   |       |       | 100.0 |
+| Active                                                                      |         | 48:47 |       | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  2:34 |   5.3 |
 | COMPLETED Fix chocolatey warning                                            |         |       |  0:08 |   0.3 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:27 |   0.9 |
-| COMPLETED Analysis on current state of file path generation                 |         |       |  0:57 |   2.0 |
+| COMPLETED Analysis on current state of file path generation                 |         |       |  0:57 |   1.9 |
 | CANCELLED Remove inclusion dependencies builder factory                     |         |       |  0:14 |   0.5 |
 | COMPLETED Analysis on formatters, elements and extensibility                |         |       |  1:18 |   2.7 |
 | COMPLETED Refactor =inclusion_dependencies_provider_interface=              |         |       |  1:12 |   2.5 |
@@ -34,13 +34,13 @@
 | CANCELLED Path derivatives factory generates all possible includes          |         |       |  3:07 |   6.4 |
 | COMPLETED Analysis on inclusion derivatives and path derivatives            |         |       |  1:04 |   2.2 |
 | COMPLETED Split path factory from provider factory                          |         |       |  2:32 |   5.2 |
-| COMPLETED Use providers when building inclusion directives                  |         |       | 12:01 |  24.7 |
+| COMPLETED Use providers when building inclusion directives                  |         |       | 12:01 |  24.6 |
 | COMPLETED Fix AppVeyor notifications                                        |         |       |  0:22 |   0.8 |
 | COMPLETED Static use of element types does more harm than good              |         |       |  0:32 |   1.1 |
 | COMPLETED Analysis: major rethink of the implementation of quilt            |         |       |  1:30 |   3.1 |
 | CANCELLED Create a simple Emacs mode for stitch                             |         |       |  1:12 |   2.5 |
 | COMPLETED Add facet folder and formatter enablement to formatter properties |         |       |  2:52 |   5.9 |
-| COMPLETED Move =cmakelists_info= to fabric                                  |         |       |  6:30 |  13.3 |
+| COMPLETED Move =cmakelists_info= to fabric                                  |         |       |  6:34 |  13.5 |
 | STARTED Terminology clean up                                                |         |       |  0:02 |   0.1 |
 | STARTED Remove formattable origin type                                      |         |       |  2:25 |   5.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
@@ -799,6 +799,7 @@ This is also a requirement to move CMakeLists to fabric.
 
 *** COMPLETED Move =cmakelists_info= to fabric                        :story:
     CLOSED: [2016-09-20 Tue 13:07]
+    CLOCK: [2016-09-20 Tue 13:08]--[2016-09-20 Tue 13:12] =>  0:04
     CLOCK: [2016-09-20 Tue 10:03]--[2016-09-20 Tue 13:07] =>  3:04
     CLOCK: [2016-09-20 Tue 09:54]--[2016-09-20 Tue 10:02] =>  0:08
     CLOCK: [2016-09-18 Sun 12:51]--[2016-09-18 Sun 12:56] =>  0:05

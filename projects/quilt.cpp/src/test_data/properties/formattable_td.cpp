@@ -21,7 +21,6 @@
 #include <sstream>
 #include "dogen/quilt.cpp/test_data/properties/formattable_td.hpp"
 #include "dogen/quilt.cpp/test_data/properties/origin_types_td.hpp"
-#include "dogen/quilt.cpp/test_data/properties/cmakelists_info_td.hpp"
 #include "dogen/quilt.cpp/test_data/properties/odb_options_info_td.hpp"
 
 namespace {
@@ -53,9 +52,7 @@ populate(const unsigned int position, result_type& v) {
 
 formattable_generator::result_type*
 formattable_generator::create_ptr(const unsigned int position) {
-    if ((position % 1) == 0)
-        return dogen::quilt::cpp::properties::odb_options_info_generator::create_ptr(position);
-    return dogen::quilt::cpp::properties::cmakelists_info_generator::create_ptr(position);
+    return dogen::quilt::cpp::properties::odb_options_info_generator::create_ptr(position);
 }
 
 } } } }

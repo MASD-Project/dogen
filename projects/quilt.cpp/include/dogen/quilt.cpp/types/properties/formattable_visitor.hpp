@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen/quilt.cpp/types/properties/cmakelists_info_fwd.hpp"
 #include "dogen/quilt.cpp/types/properties/odb_options_info_fwd.hpp"
 
 namespace dogen {
@@ -41,16 +40,6 @@ public:
     virtual ~formattable_visitor() noexcept = 0;
 
 public:
-    /**
-     * @brief Accept visits for type dogen::quilt::cpp::properties::cmakelists_info
-     */
-    /**@{*/
-    virtual void visit(const dogen::quilt::cpp::properties::cmakelists_info&) const { }
-    virtual void visit(const dogen::quilt::cpp::properties::cmakelists_info&) { }
-    virtual void visit(dogen::quilt::cpp::properties::cmakelists_info&) const { }
-    virtual void visit(dogen::quilt::cpp::properties::cmakelists_info&) { }
-    /**@}*/
-
     /**
      * @brief Accept visits for type dogen::quilt::cpp::properties::odb_options_info
      */

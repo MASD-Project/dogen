@@ -42,7 +42,6 @@ BOOST_AUTO_TEST_SUITE(hashing_tests)
 BOOST_AUTO_TEST_CASE(validate_hashing) {
     SETUP_TEST_LOG("validate_hashing");
 
-    test_hashing<properties::cmakelists_info_generator>();
     test_hashing<properties::odb_options_info_generator>();
     test_hashing<fabric::registrar_generator>();
  }
