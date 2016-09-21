@@ -25,10 +25,9 @@ install:
   #
   # cmake
   #
-  - cinst cmake
+  - cinst cmake --version 3.4.3
   - cmd: set PATH=C:\MinGW\bin;%PATH%
-  - cmd: set PATH=%PATH%:"C:\Program Files\CMake\bin";"C:\Program Files (x86)\cmake\bin"
-  - cmd: "C:\Program Files\CMake\bin\cmake.exe" --version
+  - cmd: cmake --version
 
   #
   # conan
@@ -46,11 +45,11 @@ before_build:
   - cmd: cd output
   - cmd: if "%configuration%"=="Release" conan install ../.. --file=.conanfile.txt
   - cmd: if "%configuration%"=="Debug" conan install ../.. --file=.conanfile.txt -s compiler="Visual Studio" -s compiler.version=14 -s arch=x86 -s build_type=Debug -s compiler.runtime=MDd
-  - cmd: "C:\Program Files\CMake\bin\cmake.exe" ../.. -DCMAKE_BUILD_TYPE=%configuration% -G "%generator%"
+    - cmd: cmake ../.. -DCMAKE_BUILD_TYPE=%configuration% -G "%generator%"
 
 build_script:
-  - cmd: if "%configuration%"=="Release" "C:\Program Files\CMake\bin\cmake.exe" --build . --config "%configuration%"
-  - cmd: if "%configuration%"=="Debug"  "C:\Program Files\CMake\bin\cmake.exe" --build . --config "%configuration%" --target knit
+  - cmd: if "%configuration%"=="Release" cmake.exe --build . --config "%configuration%"
+  - cmd: if "%configuration%"=="Debug"  cmake.exe --build . --config "%configuration%" --target knit
   # FIXME: different levels of borkage atm.
   # - cmd: cmake --build . --config "%configuration%" --target run_all_tests
 
