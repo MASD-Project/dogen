@@ -39,10 +39,10 @@ public:
 
 private:
     struct field_definitions {
+        dynamic::field_definition generate_decoration;
         dynamic::field_definition copyright_notice;
         dynamic::field_definition licence_name;
         dynamic::field_definition modeline_group_name;
-        dynamic::field_definition generate_preamble;
         dynamic::field_definition marker_add_date_time;
         dynamic::field_definition marker_add_warning;
         dynamic::field_definition marker_message;

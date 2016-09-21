@@ -45,10 +45,10 @@ public:
 
 public:
     decoration_annotations(
+        const boost::optional<bool>& generate_decoration,
         const std::list<std::string>& copyright_notices,
         const std::string& licence_name,
         const std::string& modeline_group_name,
-        const boost::optional<bool>& generate_preamble,
         const boost::optional<bool>& marker_add_date_time,
         const boost::optional<bool>& marker_add_warning,
         const std::string& marker_message);
@@ -61,6 +61,11 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::formatters::decoration_annotations& v, unsigned int version);
 
 public:
+    const boost::optional<bool>& generate_decoration() const;
+    boost::optional<bool>& generate_decoration();
+    void generate_decoration(const boost::optional<bool>& v);
+    void generate_decoration(const boost::optional<bool>&& v);
+
     const std::list<std::string>& copyright_notices() const;
     std::list<std::string>& copyright_notices();
     void copyright_notices(const std::list<std::string>& v);
@@ -75,11 +80,6 @@ public:
     std::string& modeline_group_name();
     void modeline_group_name(const std::string& v);
     void modeline_group_name(const std::string&& v);
-
-    const boost::optional<bool>& generate_preamble() const;
-    boost::optional<bool>& generate_preamble();
-    void generate_preamble(const boost::optional<bool>& v);
-    void generate_preamble(const boost::optional<bool>&& v);
 
     const boost::optional<bool>& marker_add_date_time() const;
     boost::optional<bool>& marker_add_date_time();
@@ -107,10 +107,10 @@ public:
     decoration_annotations& operator=(decoration_annotations other);
 
 private:
+    boost::optional<bool> generate_decoration_;
     std::list<std::string> copyright_notices_;
     std::string licence_name_;
     std::string modeline_group_name_;
-    boost::optional<bool> generate_preamble_;
     boost::optional<bool> marker_add_date_time_;
     boost::optional<bool> marker_add_warning_;
     std::string marker_message_;

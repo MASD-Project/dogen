@@ -111,8 +111,8 @@
 					<documentation></documentation>
 					<extensions>
 						<fields>
-							<count>3</count>
-							<bucket_count>5</bucket_count>
+							<count>1</count>
+							<bucket_count>2</bucket_count>
 							<item_version>0</item_version>
 							<item class_id="26" tracking_level="0" version="0">
 								<first>yarn.dia.comment</first>
@@ -121,28 +121,6 @@
 										<px class_id="2" tracking_level="1" version="0" object_id="_2">
 											<value class_id="29" tracking_level="0" version="0"></value>
 											<content>true</content>
-										</px>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>licence_name</first>
-								<second>
-									<value>
-										<px class_id_reference="2" object_id="_3">
-											<value></value>
-											<content>gpl_v3</content>
-										</px>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>copyright_notice</first>
-								<second>
-									<value>
-										<px class_id_reference="2" object_id="_4">
-											<value></value>
-											<content>Copyright (C) 2012-2015 Marco Craveiro &lt;marco.craveiro@gmail.com&gt;</content>
 										</px>
 									</value>
 								</second>
@@ -215,7 +193,7 @@
 		<item_version>0</item_version>
 		<item class_id="34" tracking_level="0" version="0">
 			<first>&lt;class_in_a_package&gt;&lt;package1&gt;&lt;first_class&gt;</first>
-			<second class_id="8" tracking_level="1" version="0" object_id="_5">
+			<second class_id="8" tracking_level="1" version="0" object_id="_3">
 				<element>
 					<documentation></documentation>
 					<extensions>

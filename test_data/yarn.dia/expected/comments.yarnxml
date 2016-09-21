@@ -195,8 +195,8 @@ This comment will be applied to the model namespace itself.
 </documentation>
 					<extensions>
 						<fields>
-							<count>3</count>
-							<bucket_count>5</bucket_count>
+							<count>1</count>
+							<bucket_count>2</bucket_count>
 							<item_version>0</item_version>
 							<item>
 								<first>yarn.dia.comment</first>
@@ -205,28 +205,6 @@ This comment will be applied to the model namespace itself.
 										<px class_id_reference="2" object_id="_5">
 											<value></value>
 											<content>true</content>
-										</px>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>licence_name</first>
-								<second>
-									<value>
-										<px class_id_reference="2" object_id="_6">
-											<value></value>
-											<content>gpl_v3</content>
-										</px>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>copyright_notice</first>
-								<second>
-									<value>
-										<px class_id_reference="2" object_id="_7">
-											<value></value>
-											<content>Copyright (C) 2012-2015 Marco Craveiro &lt;marco.craveiro@gmail.com&gt;</content>
 										</px>
 									</value>
 								</second>
@@ -299,7 +277,7 @@ This comment will be applied to the model namespace itself.
 		<item_version>0</item_version>
 		<item class_id="34" tracking_level="0" version="0">
 			<first>&lt;comments&gt;&lt;multi_line&gt;</first>
-			<second class_id="8" tracking_level="1" version="0" object_id="_8">
+			<second class_id="8" tracking_level="1" version="0" object_id="_6">
 				<element>
 					<documentation>first line
 
@@ -429,7 +407,7 @@ third line with &quot;quote&quot;
 		</item>
 		<item>
 			<first>&lt;comments&gt;&lt;one_line&gt;</first>
-			<second object_id="_9">
+			<second object_id="_7">
 				<element>
 					<documentation>this is the brief comment
 </documentation>

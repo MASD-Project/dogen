@@ -50,11 +50,11 @@ decoration_configuration_factory(const dynamic::repository& drp,
     const repository& rp, const dynamic::object& fallback)
     : repository_(rp), annotations_factory_(drp),
       default_annotations_(annotations_factory_.make(fallback)),
+      default_generate_decoration_(default_annotations_.generate_decoration()),
       default_licence_text_(get_licence_text(default_annotations_)),
       default_copyright_notices_(default_annotations_.copyright_notices()),
       default_modeline_group_(get_modeline_group(default_annotations_)),
-      default_marker_(get_marker(default_annotations_)),
-      default_generate_preamble_(default_annotations_.generate_preamble()) {}
+      default_marker_(get_marker(default_annotations_)) {}
 
 boost::optional<std::string> decoration_configuration_factory::
 get_licence_text(const decoration_annotations& fa) const {
@@ -162,15 +162,15 @@ get_marker_or_default(const decoration_annotations& fa) const {
 }
 
 bool decoration_configuration_factory::
-get_generate_preamble_or_default(const decoration_annotations& fa) const {
-    const auto overriden_generate_preamble(fa.generate_preamble());
-    if (!overriden_generate_preamble && !default_generate_preamble_)
+get_generate_decoration_or_default(const decoration_annotations& fa) const {
+    const auto overriden_generate_decoration(fa.generate_decoration());
+    if (!overriden_generate_decoration && !default_generate_decoration_)
         return true; // FIXME: fairly random default.
 
-    if (overriden_generate_preamble)
-        return *overriden_generate_preamble;
+    if (overriden_generate_decoration)
+        return *overriden_generate_decoration;
     else
-        return *default_generate_preamble_;
+        return *default_generate_decoration_;
 }
 
 decoration_configuration
@@ -179,8 +179,8 @@ decoration_configuration_factory::make(const std::string& modeline_name,
     const auto modeline(get_modeline(modeline_name, fa));
     const auto licence(get_licence(fa));
     const auto marker(get_marker_or_default(fa));
-    const bool gp(get_generate_preamble_or_default(fa));
-    decoration_configuration r(gp, modeline, licence, marker);
+    const bool gd(get_generate_decoration_or_default(fa));
+    decoration_configuration r(gd, modeline, licence, marker);
     return r;
 }
 

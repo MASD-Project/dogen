@@ -24,46 +24,46 @@ namespace dogen {
 namespace formatters {
 
 decoration_annotations::decoration_annotations(decoration_annotations&& rhs)
-    : copyright_notices_(std::move(rhs.copyright_notices_)),
+    : generate_decoration_(std::move(rhs.generate_decoration_)),
+      copyright_notices_(std::move(rhs.copyright_notices_)),
       licence_name_(std::move(rhs.licence_name_)),
       modeline_group_name_(std::move(rhs.modeline_group_name_)),
-      generate_preamble_(std::move(rhs.generate_preamble_)),
       marker_add_date_time_(std::move(rhs.marker_add_date_time_)),
       marker_add_warning_(std::move(rhs.marker_add_warning_)),
       marker_message_(std::move(rhs.marker_message_)) { }
 
 decoration_annotations::decoration_annotations(
+    const boost::optional<bool>& generate_decoration,
     const std::list<std::string>& copyright_notices,
     const std::string& licence_name,
     const std::string& modeline_group_name,
-    const boost::optional<bool>& generate_preamble,
     const boost::optional<bool>& marker_add_date_time,
     const boost::optional<bool>& marker_add_warning,
     const std::string& marker_message)
-    : copyright_notices_(copyright_notices),
+    : generate_decoration_(generate_decoration),
+      copyright_notices_(copyright_notices),
       licence_name_(licence_name),
       modeline_group_name_(modeline_group_name),
-      generate_preamble_(generate_preamble),
       marker_add_date_time_(marker_add_date_time),
       marker_add_warning_(marker_add_warning),
       marker_message_(marker_message) { }
 
 void decoration_annotations::swap(decoration_annotations& other) noexcept {
     using std::swap;
+    swap(generate_decoration_, other.generate_decoration_);
     swap(copyright_notices_, other.copyright_notices_);
     swap(licence_name_, other.licence_name_);
     swap(modeline_group_name_, other.modeline_group_name_);
-    swap(generate_preamble_, other.generate_preamble_);
     swap(marker_add_date_time_, other.marker_add_date_time_);
     swap(marker_add_warning_, other.marker_add_warning_);
     swap(marker_message_, other.marker_message_);
 }
 
 bool decoration_annotations::operator==(const decoration_annotations& rhs) const {
-    return copyright_notices_ == rhs.copyright_notices_ &&
+    return generate_decoration_ == rhs.generate_decoration_ &&
+        copyright_notices_ == rhs.copyright_notices_ &&
         licence_name_ == rhs.licence_name_ &&
         modeline_group_name_ == rhs.modeline_group_name_ &&
-        generate_preamble_ == rhs.generate_preamble_ &&
         marker_add_date_time_ == rhs.marker_add_date_time_ &&
         marker_add_warning_ == rhs.marker_add_warning_ &&
         marker_message_ == rhs.marker_message_;
@@ -73,6 +73,22 @@ decoration_annotations& decoration_annotations::operator=(decoration_annotations
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+const boost::optional<bool>& decoration_annotations::generate_decoration() const {
+    return generate_decoration_;
+}
+
+boost::optional<bool>& decoration_annotations::generate_decoration() {
+    return generate_decoration_;
+}
+
+void decoration_annotations::generate_decoration(const boost::optional<bool>& v) {
+    generate_decoration_ = v;
+}
+
+void decoration_annotations::generate_decoration(const boost::optional<bool>&& v) {
+    generate_decoration_ = std::move(v);
 }
 
 const std::list<std::string>& decoration_annotations::copyright_notices() const {
@@ -121,22 +137,6 @@ void decoration_annotations::modeline_group_name(const std::string& v) {
 
 void decoration_annotations::modeline_group_name(const std::string&& v) {
     modeline_group_name_ = std::move(v);
-}
-
-const boost::optional<bool>& decoration_annotations::generate_preamble() const {
-    return generate_preamble_;
-}
-
-boost::optional<bool>& decoration_annotations::generate_preamble() {
-    return generate_preamble_;
-}
-
-void decoration_annotations::generate_preamble(const boost::optional<bool>& v) {
-    generate_preamble_ = v;
-}
-
-void decoration_annotations::generate_preamble(const boost::optional<bool>&& v) {
-    generate_preamble_ = std::move(v);
 }
 
 const boost::optional<bool>& decoration_annotations::marker_add_date_time() const {

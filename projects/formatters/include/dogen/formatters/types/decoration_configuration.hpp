@@ -51,7 +51,7 @@ public:
 
 public:
     decoration_configuration(
-        const bool generate_preamble,
+        const bool generate_decoration,
         const boost::optional<dogen::formatters::modeline>& modeline,
         const boost::optional<dogen::formatters::licence>& licence,
         const std::string& code_generation_marker);
@@ -65,11 +65,11 @@ private:
 
 public:
     /**
-     * @brief If set to true, the preamble will be generated.
+     * @brief If set to true, the decoration will be generated.
      */
     /**@{*/
-    bool generate_preamble() const;
-    void generate_preamble(const bool v);
+    bool generate_decoration() const;
+    void generate_decoration(const bool v);
     /**@}*/
 
     /**
@@ -113,7 +113,7 @@ public:
     decoration_configuration& operator=(decoration_configuration other);
 
 private:
-    bool generate_preamble_;
+    bool generate_decoration_;
     boost::optional<dogen::formatters::modeline> modeline_;
     boost::optional<dogen::formatters::licence> licence_;
     std::string code_generation_marker_;

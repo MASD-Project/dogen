@@ -291,9 +291,9 @@
         <dia:composite type="text">
           <dia:attribute name="string">
             <dia:string>##DOGEN yarn.dia.comment=true
-#DOGEN licence_name=gpl_v3
-#DOGEN copyright_notice=Copyright (C) 2012-2015 Marco Craveiro &lt;marco.craveiro@gmail.com&gt;
-#DOGEN modeline_group_name=emacs
+#DOGEN decoration.licence_name=gpl_v3
+#DOGEN decoration.copyright_notice=Copyright (C) 2012-2015 Marco Craveiro &lt;marco.craveiro@gmail.com&gt;
+#DOGEN decoration.modeline_group_name=emacs
 #DOGEN quilt.cpp.types.enabled=true
 #DOGEN quilt.cpp.hash.enabled=false
 #DOGEN quilt.cpp.io.enabled=true

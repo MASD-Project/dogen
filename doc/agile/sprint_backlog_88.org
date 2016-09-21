@@ -13,42 +13,42 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-21 Wed 17:42]
+#+CAPTION: Clock summary at [2016-09-21 Wed 20:54]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *59:29* |       |       | 100.0 |
+| *Total time*                                                                | *60:26* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 59:29   |       |       | 100.0 |
-| Active                                                                      |         | 59:29 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  3:33 |   6.0 |
+| Stories                                                                     | 60:26   |       |       | 100.0 |
+| Active                                                                      |         | 60:26 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  3:33 |   5.9 |
 | COMPLETED Fix chocolatey warning                                            |         |       |  0:08 |   0.2 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  0:27 |   0.8 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  0:27 |   0.7 |
 | COMPLETED Analysis on current state of file path generation                 |         |       |  0:57 |   1.6 |
 | CANCELLED Remove inclusion dependencies builder factory                     |         |       |  0:14 |   0.4 |
 | COMPLETED Analysis on formatters, elements and extensibility                |         |       |  1:18 |   2.2 |
 | COMPLETED Refactor =inclusion_dependencies_provider_interface=              |         |       |  1:12 |   2.0 |
 | COMPLETED Investigate broken windows builds                                 |         |       |  0:32 |   0.9 |
-| COMPLETED Refactor path derivatives factory for usage in formatters         |         |       |  5:14 |   8.8 |
+| COMPLETED Refactor path derivatives factory for usage in formatters         |         |       |  5:14 |   8.7 |
 | COMPLETED Move file path generation to formatters                           |         |       |  1:58 |   3.3 |
 | CANCELLED Path derivatives factory generates all possible includes          |         |       |  3:07 |   5.2 |
 | COMPLETED Analysis on inclusion derivatives and path derivatives            |         |       |  1:04 |   1.8 |
-| COMPLETED Split path factory from provider factory                          |         |       |  2:32 |   4.3 |
-| COMPLETED Use providers when building inclusion directives                  |         |       | 12:01 |  20.2 |
+| COMPLETED Split path factory from provider factory                          |         |       |  2:32 |   4.2 |
+| COMPLETED Use providers when building inclusion directives                  |         |       | 12:01 |  19.9 |
 | COMPLETED Fix AppVeyor notifications                                        |         |       |  0:22 |   0.6 |
 | COMPLETED Static use of element types does more harm than good              |         |       |  0:32 |   0.9 |
 | COMPLETED Analysis: major rethink of the implementation of quilt            |         |       |  1:30 |   2.5 |
 | CANCELLED Create a simple Emacs mode for stitch                             |         |       |  1:12 |   2.0 |
-| COMPLETED Add facet folder and formatter enablement to formatter properties |         |       |  2:52 |   4.8 |
-| COMPLETED Move =cmakelists_info= to fabric                                  |         |       |  6:34 |  11.0 |
+| COMPLETED Add facet folder and formatter enablement to formatter properties |         |       |  2:52 |   4.7 |
+| COMPLETED Move =cmakelists_info= to fabric                                  |         |       |  6:34 |  10.9 |
 | COMPLETED Move =odb_options_info= to fabric                                 |         |       |  1:29 |   2.5 |
 | COMPLETED Remove =formattable_origin_type=                                  |         |       |  0:17 |   0.5 |
-| COMPLETED Remove formattable origin type                                    |         |       |  2:25 |   4.1 |
-| COMPLETED Rename config model to options                                    |         |       |  1:07 |   1.9 |
+| COMPLETED Remove formattable origin type                                    |         |       |  2:25 |   4.0 |
+| COMPLETED Rename config model to options                                    |         |       |  1:07 |   1.8 |
 | COMPLETED Rename annotation to decoration in formatters model               |         |       |  0:30 |   0.8 |
 | COMPLETED Fix appveyor Visual Studio build                                  |         |       |  1:04 |   1.8 |
-| COMPLETED Big rename for "final" terminology clean up                       |         |       |  2:19 |   3.9 |
-| STARTED Tidy-up file configuration in formatters                            |         |       |  2:06 |   3.5 |
+| COMPLETED Big rename for "final" terminology clean up                       |         |       |  2:19 |   3.8 |
+| COMPLETED Tidy-up file configuration in formatters                          |         |       |  3:03 |   5.0 |
 | STARTED Add type index to name and to formatter interface                   |         |       |  0:53 |   1.5 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -940,15 +940,20 @@ naming. One possible reason not to use annotations was because we used
 it already in the formatters model. Perhaps that could be renamed to
 something else, freeing up the name?
 
-*** STARTED Tidy-up file configuration in formatters                  :story:
+*** COMPLETED Tidy-up file configuration in formatters                :story:
+    CLOSED: [2016-09-21 Wed 20:54]
+    CLOCK: [2016-09-21 Wed 20:35]--[2016-09-21 Wed 20:52] =>  0:17
+    CLOCK: [2016-09-21 Wed 17:43]--[2016-09-21 Wed 18:23] =>  0:40
     CLOCK: [2016-09-21 Wed 16:32]--[2016-09-21 Wed 17:42] =>  1:10
     CLOCK: [2016-09-21 Wed 15:35]--[2016-09-21 Wed 16:31] =>  0:56
 
-We never did like the "file" prefix, since many things can be
-construed as "file configuration". In a certain way, all configuration
-is ultimately file configuration since it affects the generation of
-files. However, things became clearer with the decoration rename:
-this is the decoration configuration.
+We never did like the "file" prefix in file configuration, since many
+things can be construed as existing at the "file level". In a certain
+way, all configuration is ultimately "file configuration" since it
+affects the generation of files. However, things became clearer with
+the decoration rename: what we are calling the "file configuration" is
+actually the decoration configuration. Rename it to make things
+consistent.
 
 Tasks:
 
@@ -958,11 +963,22 @@ Tasks:
   and workflow.
 - rename file annotation etc to decoration annotation.
 
+*** Stitch still uses "properties"                                    :story:
+
+We didn't rename properties to configuration in stitch. Check
+annotations while we're there.
+
 *** Formatter properties are not optional in assistant                :story:
 
 After the formattables refactor, the formatter properties are now
 mandatory for all elements. We should not allow them to be optional in
 assistant.
+
+*** Add a stitch prefix to stitch fields                              :story:
+
+Now that decoration is used as a prefix for the top-level fields, it
+seems only right to have a prefix for the stitch fields as well. If
+nothing else, for symmetry purposes.
 
 *** STARTED Add type index to name and to formatter interface         :story:
     CLOCK: [2016-09-21 Wed 09:16]--[2016-09-21 Wed 09:31] =>  0:15

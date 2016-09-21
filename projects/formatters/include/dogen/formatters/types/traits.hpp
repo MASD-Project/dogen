@@ -31,56 +31,55 @@ namespace dogen {
 namespace formatters {
 
 struct traits {
-    /**
-     * @brief Key used to denote copyright notices.
-     *
-     * It is expected to be repeated in a model; order is kept as
-     * provided by user.
-     */
-    static std::string copyright_notices();
-
-    /**
-     * @brief Name of the legal licence to use.
-     *
-     * Must match licences available in library.
-     */
-    static std::string licence_name();
-
-    /**
-     * @brief Name of the modeline group to use.
-     *
-     * Must match licences available in library.
-     */
-    static std::string modeline_group_name();
-
-    /**
-     * @brief Whether to generate the preamble or not.
-     *
-     * The preamble is made up of a modeline, copyright
-     * information and licensing details.
-     */
-    static std::string generate_preamble();
-
-    /**
-     * @brief Tags related to the code generation marker.
-     */
-    struct code_generation_marker {
+    struct decoration {
         /**
-         * @brief Whether to add the generation date and time to the
-         * marker or not.
+         * @brief Whether to generate the decoration or not.
          */
-        static std::string add_date_time();
+        static std::string generate_decoration();
 
         /**
-         * @brief Whether to add a warning not to modify code-generated
-         * files or not.
+         * @brief Key used to denote copyright notices.
+         *
+         * It is expected to be repeated in a model; order is kept as
+         * provided by user.
          */
-        static std::string add_warning();
+        static std::string copyright_notices();
 
         /**
-         * @brief Message to place on all code-generated files.
+         * @brief Name of the legal licence to use.
+         *
+         * Must match licences available in library.
          */
-        static std::string message();
+        static std::string licence_name();
+
+        /**
+         * @brief Name of the modeline group to use.
+         *
+         * Must match licences available in library.
+         */
+        static std::string modeline_group_name();
+
+        /**
+         * @brief Tags related to the code generation marker.
+         */
+        struct code_generation_marker {
+            /**
+             * @brief Whether to add the generation date and time to the
+             * marker or not.
+             */
+            static std::string add_date_time();
+
+            /**
+             * @brief Whether to add a warning not to modify code-generated
+             * files or not.
+             */
+            static std::string add_warning();
+
+            /**
+             * @brief Message to place on all code-generated files.
+             */
+            static std::string message();
+        };
     };
 };
 

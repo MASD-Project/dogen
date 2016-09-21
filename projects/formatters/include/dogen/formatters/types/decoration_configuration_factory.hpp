@@ -111,11 +111,11 @@ private:
     std::string get_marker_or_default(const decoration_annotations& fa) const;
 
     /**
-     * @brief Obtains the generate preamble; if none is found, uses
-     * the default value.
+     * @brief Obtains the generate decoration field value, if
+     * available; if not, uses the default value.
      */
     bool
-    get_generate_preamble_or_default(const decoration_annotations& fa) const;
+    get_generate_decoration_or_default(const decoration_annotations& fa) const;
 
 private:
     /**
@@ -139,11 +139,11 @@ private:
     const repository& repository_;
     const decoration_annotations_factory annotations_factory_;
     const decoration_annotations default_annotations_;
+    const boost::optional<bool> default_generate_decoration_;
     const boost::optional<std::string> default_licence_text_;
     const boost::optional<std::list<std::string>> default_copyright_notices_;
     const boost::optional<modeline_group> default_modeline_group_;
     const boost::optional<std::string> default_marker_;
-    const boost::optional<bool> default_generate_preamble_;
 };
 
 } }

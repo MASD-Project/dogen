@@ -28,14 +28,6 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
 inline std::size_t hash_boost_optional_bool(const boost::optional<bool>& v) {
     std::size_t seed(0);
 
@@ -43,6 +35,14 @@ inline std::size_t hash_boost_optional_bool(const boost::optional<bool>& v) {
         return seed;
 
     combine(seed, *v);
+    return seed;
+}
+
+inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
     return seed;
 }
 
@@ -54,10 +54,10 @@ namespace formatters {
 std::size_t decoration_annotations_hasher::hash(const decoration_annotations& v) {
     std::size_t seed(0);
 
+    combine(seed, hash_boost_optional_bool(v.generate_decoration()));
     combine(seed, hash_std_list_std_string(v.copyright_notices()));
     combine(seed, v.licence_name());
     combine(seed, v.modeline_group_name());
-    combine(seed, hash_boost_optional_bool(v.generate_preamble()));
     combine(seed, hash_boost_optional_bool(v.marker_add_date_time()));
     combine(seed, hash_boost_optional_bool(v.marker_add_warning()));
     combine(seed, v.marker_message());

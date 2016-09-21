@@ -74,7 +74,7 @@ std::ostream& operator<<(std::ostream& s, const decoration_configuration& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::formatters::decoration_configuration\"" << ", "
-      << "\"generate_preamble\": " << v.generate_preamble() << ", "
+      << "\"generate_decoration\": " << v.generate_decoration() << ", "
       << "\"modeline\": " << v.modeline() << ", "
       << "\"licence\": " << v.licence() << ", "
       << "\"code_generation_marker\": " << "\"" << tidy_up_string(v.code_generation_marker()) << "\""

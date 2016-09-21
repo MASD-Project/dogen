@@ -111,8 +111,8 @@
 					<documentation></documentation>
 					<extensions>
 						<fields>
-							<count>3</count>
-							<bucket_count>5</bucket_count>
+							<count>1</count>
+							<bucket_count>2</bucket_count>
 							<item_version>0</item_version>
 							<item class_id="26" tracking_level="0" version="0">
 								<first>yarn.dia.comment</first>
@@ -121,28 +121,6 @@
 										<px class_id="2" tracking_level="1" version="0" object_id="_2">
 											<value class_id="29" tracking_level="0" version="0"></value>
 											<content>true</content>
-										</px>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>licence_name</first>
-								<second>
-									<value>
-										<px class_id_reference="2" object_id="_3">
-											<value></value>
-											<content>gpl_v3</content>
-										</px>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>copyright_notice</first>
-								<second>
-									<value>
-										<px class_id_reference="2" object_id="_4">
-											<value></value>
-											<content>Copyright (C) 2012-2015 Marco Craveiro &lt;marco.craveiro@gmail.com&gt;</content>
 										</px>
 									</value>
 								</second>
@@ -215,7 +193,7 @@
 		<item_version>0</item_version>
 		<item class_id="34" tracking_level="0" version="0">
 			<first>&lt;boost_model&gt;&lt;class_h&gt;</first>
-			<second class_id="8" tracking_level="1" version="0" object_id="_5">
+			<second class_id="8" tracking_level="1" version="0" object_id="_3">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -421,7 +399,7 @@
 		</item>
 		<item>
 			<first>&lt;boost_model&gt;&lt;class_a&gt;</first>
-			<second object_id="_6">
+			<second object_id="_4">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -627,7 +605,7 @@
 		</item>
 		<item>
 			<first>&lt;boost_model&gt;&lt;class_derived&gt;</first>
-			<second object_id="_7">
+			<second object_id="_5">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -863,7 +841,7 @@
 		</item>
 		<item>
 			<first>&lt;boost_model&gt;&lt;pkg1&gt;&lt;class_c&gt;</first>
-			<second object_id="_8">
+			<second object_id="_6">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -1152,7 +1130,7 @@
 		</item>
 		<item>
 			<first>&lt;boost_model&gt;&lt;class_base&gt;</first>
-			<second object_id="_9">
+			<second object_id="_7">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -1358,7 +1336,7 @@
 		</item>
 		<item>
 			<first>&lt;boost_model&gt;&lt;class_b&gt;</first>
-			<second object_id="_10">
+			<second object_id="_8">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -2044,7 +2022,7 @@
 		</item>
 		<item>
 			<first>&lt;boost_model&gt;&lt;class_d&gt;</first>
-			<second object_id="_11">
+			<second object_id="_9">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -2490,7 +2468,7 @@
 		</item>
 		<item>
 			<first>&lt;boost_model&gt;&lt;some_service&gt;</first>
-			<second object_id="_12">
+			<second object_id="_10">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -2856,7 +2834,7 @@
 		</item>
 		<item>
 			<first>&lt;boost_model&gt;&lt;class_e&gt;</first>
-			<second object_id="_13">
+			<second object_id="_11">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -3302,7 +3280,7 @@
 		</item>
 		<item>
 			<first>&lt;boost_model&gt;&lt;class_f&gt;</first>
-			<second object_id="_14">
+			<second object_id="_12">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -3908,7 +3886,7 @@
 		</item>
 		<item>
 			<first>&lt;boost_model&gt;&lt;class_g&gt;</first>
-			<second object_id="_15">
+			<second object_id="_13">
 				<element>
 					<documentation></documentation>
 					<extensions>

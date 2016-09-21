@@ -55,8 +55,8 @@
 					<documentation></documentation>
 					<extensions class_id="22" tracking_level="0" version="0">
 						<fields class_id="23" tracking_level="0" version="0">
-							<count>3</count>
-							<bucket_count>5</bucket_count>
+							<count>1</count>
+							<bucket_count>2</bucket_count>
 							<item_version>0</item_version>
 							<item class_id="24" tracking_level="0" version="0">
 								<first>yarn.dia.comment</first>
@@ -65,28 +65,6 @@
 										<px class_id="2" tracking_level="1" version="0" object_id="_1">
 											<value class_id="27" tracking_level="0" version="0"></value>
 											<content>true</content>
-										</px>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>licence_name</first>
-								<second>
-									<value>
-										<px class_id_reference="2" object_id="_2">
-											<value></value>
-											<content>gpl_v3</content>
-										</px>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>copyright_notice</first>
-								<second>
-									<value>
-										<px class_id_reference="2" object_id="_3">
-											<value></value>
-											<content>Copyright (C) 2012-2015 Marco Craveiro &lt;marco.craveiro@gmail.com&gt;</content>
 										</px>
 									</value>
 								</second>
@@ -159,7 +137,7 @@
 		<item_version>0</item_version>
 		<item class_id="34" tracking_level="0" version="0">
 			<first>&lt;classes_without_package&gt;&lt;class_5&gt;</first>
-			<second class_id="8" tracking_level="1" version="0" object_id="_4">
+			<second class_id="8" tracking_level="1" version="0" object_id="_2">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -365,7 +343,7 @@
 		</item>
 		<item>
 			<first>&lt;classes_without_package&gt;&lt;class_1&gt;</first>
-			<second object_id="_5">
+			<second object_id="_3">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -571,7 +549,7 @@
 		</item>
 		<item>
 			<first>&lt;classes_without_package&gt;&lt;class_2&gt;</first>
-			<second object_id="_6">
+			<second object_id="_4">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -777,7 +755,7 @@
 		</item>
 		<item>
 			<first>&lt;classes_without_package&gt;&lt;class_4&gt;</first>
-			<second object_id="_7">
+			<second object_id="_5">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -983,7 +961,7 @@
 		</item>
 		<item>
 			<first>&lt;classes_without_package&gt;&lt;class_3&gt;</first>
-			<second object_id="_8">
+			<second object_id="_6">
 				<element>
 					<documentation></documentation>
 					<extensions>

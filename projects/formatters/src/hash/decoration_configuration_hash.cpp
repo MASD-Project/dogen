@@ -58,7 +58,7 @@ namespace formatters {
 std::size_t decoration_configuration_hasher::hash(const decoration_configuration& v) {
     std::size_t seed(0);
 
-    combine(seed, v.generate_preamble());
+    combine(seed, v.generate_decoration());
     combine(seed, hash_boost_optional_dogen_formatters_modeline(v.modeline()));
     combine(seed, hash_boost_optional_dogen_formatters_licence(v.licence()));
     combine(seed, v.code_generation_marker());

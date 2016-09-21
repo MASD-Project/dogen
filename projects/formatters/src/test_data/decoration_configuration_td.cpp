@@ -68,7 +68,7 @@ decoration_configuration_generator::decoration_configuration_generator() : posit
 
 void decoration_configuration_generator::
 populate(const unsigned int position, result_type& v) {
-    v.generate_preamble(create_bool(position + 0));
+    v.generate_decoration(create_bool(position + 0));
     v.modeline(create_boost_optional_dogen_formatters_modeline(position + 1));
     v.licence(create_boost_optional_dogen_formatters_licence(position + 2));
     v.code_generation_marker(create_std_string(position + 3));

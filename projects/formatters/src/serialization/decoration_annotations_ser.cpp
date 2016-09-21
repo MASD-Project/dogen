@@ -39,10 +39,10 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::formatters::decoration_annotations& v,
     const unsigned int /*version*/) {
+    ar << make_nvp("generate_decoration", v.generate_decoration_);
     ar << make_nvp("copyright_notices", v.copyright_notices_);
     ar << make_nvp("licence_name", v.licence_name_);
     ar << make_nvp("modeline_group_name", v.modeline_group_name_);
-    ar << make_nvp("generate_preamble", v.generate_preamble_);
     ar << make_nvp("marker_add_date_time", v.marker_add_date_time_);
     ar << make_nvp("marker_add_warning", v.marker_add_warning_);
     ar << make_nvp("marker_message", v.marker_message_);
@@ -52,10 +52,10 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::formatters::decoration_annotations& v,
     const unsigned int /*version*/) {
+    ar >> make_nvp("generate_decoration", v.generate_decoration_);
     ar >> make_nvp("copyright_notices", v.copyright_notices_);
     ar >> make_nvp("licence_name", v.licence_name_);
     ar >> make_nvp("modeline_group_name", v.modeline_group_name_);
-    ar >> make_nvp("generate_preamble", v.generate_preamble_);
     ar >> make_nvp("marker_add_date_time", v.marker_add_date_time_);
     ar >> make_nvp("marker_add_warning", v.marker_add_warning_);
     ar >> make_nvp("marker_message", v.marker_message_);

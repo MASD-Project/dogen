@@ -40,7 +40,7 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::formatters::decoration_configuration& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("generate_preamble", v.generate_preamble_);
+    ar << make_nvp("generate_decoration", v.generate_decoration_);
     ar << make_nvp("modeline", v.modeline_);
     ar << make_nvp("licence", v.licence_);
     ar << make_nvp("code_generation_marker", v.code_generation_marker_);
@@ -50,7 +50,7 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::formatters::decoration_configuration& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("generate_preamble", v.generate_preamble_);
+    ar >> make_nvp("generate_decoration", v.generate_decoration_);
     ar >> make_nvp("modeline", v.modeline_);
     ar >> make_nvp("licence", v.licence_);
     ar >> make_nvp("code_generation_marker", v.code_generation_marker_);

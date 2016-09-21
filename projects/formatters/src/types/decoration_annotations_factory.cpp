@@ -37,15 +37,19 @@ make_field_definitions(const dynamic::repository& rp) const {
     const dynamic::repository_selector s(rp);
 
     field_definitions r;
-    r.copyright_notice = s.select_field_by_name(traits::copyright_notices());
+    const auto gd(traits::decoration::generate_decoration());
+    r.generate_decoration = s.select_field_by_name(gd);
 
-    r.licence_name = s.select_field_by_name(traits::licence_name());
+    const auto cn(traits::decoration::copyright_notices());
+    r.copyright_notice = s.select_field_by_name(cn);
 
-    const auto& mlgn(traits::modeline_group_name());
+    const auto ln(traits::decoration::licence_name());
+    r.licence_name = s.select_field_by_name(ln);
+
+    const auto& mlgn(traits::decoration::modeline_group_name());
     r. modeline_group_name = s.select_field_by_name(mlgn);
-    r. generate_preamble = s.select_field_by_name(traits::generate_preamble());
 
-    using cgm = traits::code_generation_marker;
+    using cgm = traits::decoration::code_generation_marker;
     r. marker_add_date_time = s.select_field_by_name(cgm::add_date_time());
     r. marker_add_warning = s.select_field_by_name(cgm::add_warning());
     r. marker_message = s.select_field_by_name(cgm::message());
@@ -58,6 +62,10 @@ decoration_annotations_factory::make(const dynamic::object& o) const {
     const dynamic::field_selector fs(o);
 
     decoration_annotations r;
+    const auto& gd(field_definitions_.generate_decoration);
+    if (fs.has_field(gd))
+        r.generate_decoration(fs.get_boolean_content(gd));
+
     const auto& cn(field_definitions_.copyright_notice);
     if (fs.has_field(cn))
         r.copyright_notices(fs.get_text_collection_content(cn));
@@ -69,10 +77,6 @@ decoration_annotations_factory::make(const dynamic::object& o) const {
     const auto& mlgn(field_definitions_.modeline_group_name);
     if (fs.has_field(mlgn))
         r.modeline_group_name(fs.get_text_content(mlgn));
-
-    const auto& gp(field_definitions_.generate_preamble);
-    if (fs.has_field(gp))
-        r.generate_preamble(fs.get_boolean_content(gp));
 
     const auto madt(field_definitions_.marker_add_date_time);
     if (fs.has_field(madt))

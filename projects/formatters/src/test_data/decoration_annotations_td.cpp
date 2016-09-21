@@ -23,6 +23,17 @@
 
 namespace {
 
+bool create_bool(const unsigned int position) {
+    return (position % 2) == 0;
+}
+
+boost::optional<bool>
+create_boost_optional_bool(unsigned int position) {
+    boost::optional<bool> r(
+        create_bool(position));
+    return r;
+}
+
 std::string create_std_string(const unsigned int position) {
     std::ostringstream s;
     s << "a_string_" << position;
@@ -37,17 +48,6 @@ std::list<std::string> create_std_list_std_string(unsigned int position) {
     return r;
 }
 
-bool create_bool(const unsigned int position) {
-    return (position % 2) == 0;
-}
-
-boost::optional<bool>
-create_boost_optional_bool(unsigned int position) {
-    boost::optional<bool> r(
-        create_bool(position));
-    return r;
-}
-
 }
 
 namespace dogen {
@@ -57,10 +57,10 @@ decoration_annotations_generator::decoration_annotations_generator() : position_
 
 void decoration_annotations_generator::
 populate(const unsigned int position, result_type& v) {
-    v.copyright_notices(create_std_list_std_string(position + 0));
-    v.licence_name(create_std_string(position + 1));
-    v.modeline_group_name(create_std_string(position + 2));
-    v.generate_preamble(create_boost_optional_bool(position + 3));
+    v.generate_decoration(create_boost_optional_bool(position + 0));
+    v.copyright_notices(create_std_list_std_string(position + 1));
+    v.licence_name(create_std_string(position + 2));
+    v.modeline_group_name(create_std_string(position + 3));
     v.marker_add_date_time(create_boost_optional_bool(position + 4));
     v.marker_add_warning(create_boost_optional_bool(position + 5));
     v.marker_message(create_std_string(position + 6));

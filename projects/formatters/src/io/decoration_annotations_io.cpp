@@ -23,6 +23,21 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen/formatters/io/decoration_annotations_io.hpp"
 
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<bool>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<empty>\"";
+    s << " }";
+    return s;
+}
+
+}
+
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
     boost::replace_all(s, "\n", "<new_line>");
@@ -44,21 +59,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 }
 
-namespace boost {
-
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<bool>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<empty>\"";
-    s << " }";
-    return s;
-}
-
-}
-
 namespace dogen {
 namespace formatters {
 
@@ -71,10 +71,10 @@ std::ostream& operator<<(std::ostream& s, const decoration_annotations& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::formatters::decoration_annotations\"" << ", "
+      << "\"generate_decoration\": " << v.generate_decoration() << ", "
       << "\"copyright_notices\": " << v.copyright_notices() << ", "
       << "\"licence_name\": " << "\"" << tidy_up_string(v.licence_name()) << "\"" << ", "
       << "\"modeline_group_name\": " << "\"" << tidy_up_string(v.modeline_group_name()) << "\"" << ", "
-      << "\"generate_preamble\": " << v.generate_preamble() << ", "
       << "\"marker_add_date_time\": " << v.marker_add_date_time() << ", "
       << "\"marker_add_warning\": " << v.marker_add_warning() << ", "
       << "\"marker_message\": " << "\"" << tidy_up_string(v.marker_message()) << "\""

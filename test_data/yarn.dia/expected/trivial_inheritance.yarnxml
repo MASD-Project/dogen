@@ -116,8 +116,8 @@ in the context of inheritance.
 </documentation>
 					<extensions>
 						<fields>
-							<count>3</count>
-							<bucket_count>5</bucket_count>
+							<count>1</count>
+							<bucket_count>2</bucket_count>
 							<item_version>0</item_version>
 							<item class_id="26" tracking_level="0" version="0">
 								<first>yarn.dia.comment</first>
@@ -126,28 +126,6 @@ in the context of inheritance.
 										<px class_id="2" tracking_level="1" version="0" object_id="_2">
 											<value class_id="29" tracking_level="0" version="0"></value>
 											<content>true</content>
-										</px>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>licence_name</first>
-								<second>
-									<value>
-										<px class_id_reference="2" object_id="_3">
-											<value></value>
-											<content>gpl_v3</content>
-										</px>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>copyright_notice</first>
-								<second>
-									<value>
-										<px class_id_reference="2" object_id="_4">
-											<value></value>
-											<content>Copyright (C) 2012-2015 Marco Craveiro &lt;marco.craveiro@gmail.com&gt;</content>
 										</px>
 									</value>
 								</second>
@@ -200,7 +178,7 @@ in the context of inheritance.
 		</item>
 		<item>
 			<first>&lt;trivial_inheritance&gt;&lt;pkg2&gt;</first>
-			<second object_id="_5">
+			<second object_id="_3">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -256,7 +234,7 @@ in the context of inheritance.
 		</item>
 		<item>
 			<first>&lt;trivial_inheritance&gt;&lt;pkg1&gt;</first>
-			<second object_id="_6">
+			<second object_id="_4">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -312,7 +290,7 @@ in the context of inheritance.
 		</item>
 		<item>
 			<first>&lt;trivial_inheritance&gt;&lt;pkg3&gt;</first>
-			<second object_id="_7">
+			<second object_id="_5">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -388,7 +366,7 @@ in the context of inheritance.
 		<item_version>0</item_version>
 		<item class_id="34" tracking_level="0" version="0">
 			<first>&lt;trivial_inheritance&gt;&lt;non_final_leaf&gt;</first>
-			<second class_id="8" tracking_level="1" version="0" object_id="_8">
+			<second class_id="8" tracking_level="1" version="0" object_id="_6">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -624,7 +602,7 @@ in the context of inheritance.
 		</item>
 		<item>
 			<first>&lt;trivial_inheritance&gt;&lt;pkg4&gt;&lt;child_via_settings&gt;</first>
-			<second object_id="_9">
+			<second object_id="_7">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -832,7 +810,7 @@ in the context of inheritance.
 		</item>
 		<item>
 			<first>&lt;trivial_inheritance&gt;&lt;pkg3&gt;&lt;child_via_settings&gt;</first>
-			<second object_id="_10">
+			<second object_id="_8">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -1040,7 +1018,7 @@ in the context of inheritance.
 		</item>
 		<item>
 			<first>&lt;trivial_inheritance&gt;&lt;pkg1&gt;&lt;child_via_settings&gt;</first>
-			<second object_id="_11">
+			<second object_id="_9">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -1248,7 +1226,7 @@ in the context of inheritance.
 		</item>
 		<item>
 			<first>&lt;trivial_inheritance&gt;&lt;move_ctor_empty_descendant&gt;</first>
-			<second object_id="_12">
+			<second object_id="_10">
 				<element>
 					<documentation>Descendant class for scenario that tests code generated move contructors.
 </documentation>
@@ -1405,7 +1383,7 @@ in the context of inheritance.
 		</item>
 		<item>
 			<first>&lt;trivial_inheritance&gt;&lt;pkg1&gt;&lt;child&gt;</first>
-			<second object_id="_13">
+			<second object_id="_11">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -1644,7 +1622,7 @@ in the context of inheritance.
 		</item>
 		<item>
 			<first>&lt;trivial_inheritance&gt;&lt;base&gt;</first>
-			<second object_id="_14">
+			<second object_id="_12">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -1771,7 +1749,7 @@ in the context of inheritance.
 		</item>
 		<item>
 			<first>&lt;trivial_inheritance&gt;&lt;non_final_orphan&gt;</first>
-			<second object_id="_15">
+			<second object_id="_13">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -1977,7 +1955,7 @@ in the context of inheritance.
 		</item>
 		<item>
 			<first>&lt;trivial_inheritance&gt;&lt;child_via_settings&gt;</first>
-			<second object_id="_16">
+			<second object_id="_14">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -2183,7 +2161,7 @@ in the context of inheritance.
 		</item>
 		<item>
 			<first>&lt;trivial_inheritance&gt;&lt;pkg1&gt;&lt;parent&gt;</first>
-			<second object_id="_17">
+			<second object_id="_15">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -2391,7 +2369,7 @@ in the context of inheritance.
 		</item>
 		<item>
 			<first>&lt;trivial_inheritance&gt;&lt;move_ctor_base&gt;</first>
-			<second object_id="_18">
+			<second object_id="_16">
 				<element>
 					<documentation>Base class for scenario that tests code generated move contructors.
 </documentation>
@@ -2599,7 +2577,7 @@ in the context of inheritance.
 		</item>
 		<item>
 			<first>&lt;trivial_inheritance&gt;&lt;parent_without_members&gt;</first>
-			<second object_id="_19">
+			<second object_id="_17">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -2725,7 +2703,7 @@ in the context of inheritance.
 		</item>
 		<item>
 			<first>&lt;trivial_inheritance&gt;&lt;pkg2&gt;&lt;parent&gt;</first>
-			<second object_id="_20">
+			<second object_id="_18">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -2933,7 +2911,7 @@ in the context of inheritance.
 		</item>
 		<item>
 			<first>&lt;trivial_inheritance&gt;&lt;second_child_without_members&gt;</first>
-			<second object_id="_21">
+			<second object_id="_19">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -3089,7 +3067,7 @@ in the context of inheritance.
 		</item>
 		<item>
 			<first>&lt;trivial_inheritance&gt;&lt;third_child_with_members&gt;</first>
-			<second object_id="_22">
+			<second object_id="_20">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -3325,7 +3303,7 @@ in the context of inheritance.
 		</item>
 		<item>
 			<first>&lt;trivial_inheritance&gt;&lt;parent_with_members&gt;</first>
-			<second object_id="_23">
+			<second object_id="_21">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -3531,7 +3509,7 @@ in the context of inheritance.
 		</item>
 		<item>
 			<first>&lt;trivial_inheritance&gt;&lt;pkg3&gt;&lt;child&gt;</first>
-			<second object_id="_24">
+			<second object_id="_22">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -3770,7 +3748,7 @@ in the context of inheritance.
 		</item>
 		<item>
 			<first>&lt;trivial_inheritance&gt;&lt;child_without_members&gt;</first>
-			<second object_id="_25">
+			<second object_id="_23">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -3926,7 +3904,7 @@ in the context of inheritance.
 		</item>
 		<item>
 			<first>&lt;trivial_inheritance&gt;&lt;parent_outside&gt;</first>
-			<second object_id="_26">
+			<second object_id="_24">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -4132,7 +4110,7 @@ in the context of inheritance.
 		</item>
 		<item>
 			<first>&lt;trivial_inheritance&gt;&lt;child_with_members&gt;</first>
-			<second object_id="_27">
+			<second object_id="_25">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -4368,7 +4346,7 @@ in the context of inheritance.
 		</item>
 		<item>
 			<first>&lt;trivial_inheritance&gt;&lt;service&gt;</first>
-			<second object_id="_28">
+			<second object_id="_26">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -4494,7 +4472,7 @@ in the context of inheritance.
 		</item>
 		<item>
 			<first>&lt;trivial_inheritance&gt;&lt;descendant2&gt;</first>
-			<second object_id="_29">
+			<second object_id="_27">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -4730,7 +4708,7 @@ in the context of inheritance.
 		</item>
 		<item>
 			<first>&lt;trivial_inheritance&gt;&lt;pkg4&gt;&lt;child&gt;</first>
-			<second object_id="_30">
+			<second object_id="_28">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -4968,7 +4946,7 @@ in the context of inheritance.
 		</item>
 		<item>
 			<first>&lt;trivial_inheritance&gt;&lt;service_interface&gt;</first>
-			<second object_id="_31">
+			<second object_id="_29">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -5094,7 +5072,7 @@ in the context of inheritance.
 		</item>
 		<item>
 			<first>&lt;trivial_inheritance&gt;&lt;child_of_a_child2&gt;</first>
-			<second object_id="_32">
+			<second object_id="_30">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -5330,7 +5308,7 @@ in the context of inheritance.
 		</item>
 		<item>
 			<first>&lt;trivial_inheritance&gt;&lt;descendant1&gt;</first>
-			<second object_id="_33">
+			<second object_id="_31">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -5486,7 +5464,7 @@ in the context of inheritance.
 		</item>
 		<item>
 			<first>&lt;trivial_inheritance&gt;&lt;child_of_a_child1&gt;</first>
-			<second object_id="_34">
+			<second object_id="_32">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -5642,7 +5620,7 @@ in the context of inheritance.
 		</item>
 		<item>
 			<first>&lt;trivial_inheritance&gt;&lt;descendant3&gt;</first>
-			<second object_id="_35">
+			<second object_id="_33">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -5878,7 +5856,7 @@ in the context of inheritance.
 		</item>
 		<item>
 			<first>&lt;trivial_inheritance&gt;&lt;move_ctor_descendant&gt;</first>
-			<second object_id="_36">
+			<second object_id="_34">
 				<element>
 					<documentation>Descendant class for scenario that tests code generated move contructors.
 </documentation>

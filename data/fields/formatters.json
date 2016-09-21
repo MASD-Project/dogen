@@ -1,8 +1,20 @@
 [
     {
         "name" : {
+            "simple" : "generate_decoration",
+            "qualified" : "decoration.generate_decoration"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "formatters"
+        },
+        "value_type" : "boolean",
+        "definition_type" : "instance",
+        "scope" : "any"
+    },
+    {
+        "name" : {
             "simple" : "copyright_notice",
-            "qualified" : "copyright_notice"
+            "qualified" : "decoration.copyright_notice"
         },
         "ownership_hierarchy" : {
             "model_name" : "formatters"
@@ -14,7 +26,7 @@
     {
         "name" : {
             "simple" : "licence_name",
-            "qualified" : "licence_name"
+            "qualified" : "decoration.licence_name"
         },
         "ownership_hierarchy" : {
             "model_name" : "formatters"
@@ -26,7 +38,7 @@
     {
         "name" : {
             "simple" : "modeline_group_name",
-            "qualified" : "modeline_group_name"
+            "qualified" : "decoration.modeline_group_name"
         },
         "ownership_hierarchy" : {
             "model_name" : "formatters"
@@ -37,20 +49,8 @@
     },
     {
         "name" : {
-            "simple" : "generate_preamble",
-            "qualified" : "code_generation_marker.generate_preamble"
-        },
-        "ownership_hierarchy" : {
-            "model_name" : "formatters"
-        },
-        "value_type" : "boolean",
-        "definition_type" : "instance",
-        "scope" : "any"
-    },
-    {
-        "name" : {
             "simple" : "add_date_time",
-            "qualified" : "code_generation_marker.add_date_time"
+            "qualified" : "decoration.code_generation_marker.add_date_time"
         },
         "ownership_hierarchy" : {
             "model_name" : "formatters"
@@ -62,7 +62,7 @@
     {
         "name" : {
             "simple" : "add_warning",
-            "qualified" : "code_generation_marker.add_warning"
+            "qualified" : "decoration.code_generation_marker.add_warning"
         },
         "ownership_hierarchy" : {
             "model_name" : "formatters"
@@ -74,7 +74,7 @@
     {
         "name" : {
             "simple" : "message",
-            "qualified" : "code_generation_marker.message"
+            "qualified" : "decoration.code_generation_marker.message"
         },
         "ownership_hierarchy" : {
             "model_name" : "formatters"

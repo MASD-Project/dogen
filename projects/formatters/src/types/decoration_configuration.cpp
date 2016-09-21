@@ -24,34 +24,34 @@ namespace dogen {
 namespace formatters {
 
 decoration_configuration::decoration_configuration()
-    : generate_preamble_(static_cast<bool>(0)) { }
+    : generate_decoration_(static_cast<bool>(0)) { }
 
 decoration_configuration::decoration_configuration(decoration_configuration&& rhs)
-    : generate_preamble_(std::move(rhs.generate_preamble_)),
+    : generate_decoration_(std::move(rhs.generate_decoration_)),
       modeline_(std::move(rhs.modeline_)),
       licence_(std::move(rhs.licence_)),
       code_generation_marker_(std::move(rhs.code_generation_marker_)) { }
 
 decoration_configuration::decoration_configuration(
-    const bool generate_preamble,
+    const bool generate_decoration,
     const boost::optional<dogen::formatters::modeline>& modeline,
     const boost::optional<dogen::formatters::licence>& licence,
     const std::string& code_generation_marker)
-    : generate_preamble_(generate_preamble),
+    : generate_decoration_(generate_decoration),
       modeline_(modeline),
       licence_(licence),
       code_generation_marker_(code_generation_marker) { }
 
 void decoration_configuration::swap(decoration_configuration& other) noexcept {
     using std::swap;
-    swap(generate_preamble_, other.generate_preamble_);
+    swap(generate_decoration_, other.generate_decoration_);
     swap(modeline_, other.modeline_);
     swap(licence_, other.licence_);
     swap(code_generation_marker_, other.code_generation_marker_);
 }
 
 bool decoration_configuration::operator==(const decoration_configuration& rhs) const {
-    return generate_preamble_ == rhs.generate_preamble_ &&
+    return generate_decoration_ == rhs.generate_decoration_ &&
         modeline_ == rhs.modeline_ &&
         licence_ == rhs.licence_ &&
         code_generation_marker_ == rhs.code_generation_marker_;
@@ -63,12 +63,12 @@ decoration_configuration& decoration_configuration::operator=(decoration_configu
     return *this;
 }
 
-bool decoration_configuration::generate_preamble() const {
-    return generate_preamble_;
+bool decoration_configuration::generate_decoration() const {
+    return generate_decoration_;
 }
 
-void decoration_configuration::generate_preamble(const bool v) {
-    generate_preamble_ = v;
+void decoration_configuration::generate_decoration(const bool v) {
+    generate_decoration_ = v;
 }
 
 const boost::optional<dogen::formatters::modeline>& decoration_configuration::modeline() const {
