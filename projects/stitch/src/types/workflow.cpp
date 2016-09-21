@@ -33,7 +33,7 @@
 #include "dogen/formatters/types/filesystem_writer.hpp"
 #include "dogen/stitch/types/parser.hpp"
 #include "dogen/stitch/types/expander.hpp"
-#include "dogen/stitch/types/properties_factory.hpp"
+#include "dogen/stitch/types/configuration_factory.hpp"
 #include "dogen/stitch/types/workflow_error.hpp"
 #include "dogen/stitch/types/workflow.hpp"
 
@@ -156,14 +156,14 @@ std::forward_list<text_template> workflow::parse_text_templates_activity(
     return r;
 }
 
-void workflow::populate_properties_activity(
+void workflow::populate_configuration_activity(
     const dynamic::repository& dynamic_repository,
     const dogen::formatters::repository& formatters_repository,
     std::forward_list<text_template>& text_templates) const {
 
-    properties_factory f(dynamic_repository, formatters_repository);
+    configuration_factory f(dynamic_repository, formatters_repository);
     for (auto& tt : text_templates)
-        tt.properties(f.make(tt.extensions()));
+        tt.configuration(f.make(tt.extensions()));
 }
 
 std::forward_list<formatters::file> workflow::format_text_templates_activity(
@@ -194,7 +194,7 @@ void workflow::execute(const boost::filesystem::path& p) const {
 
     auto tt(parse_text_templates_activity(dynamic_rp, templates_as_strings));
     const auto formatters_rp(create_formatters_repository_activity());
-    populate_properties_activity(dynamic_rp, formatters_rp, tt);
+    populate_configuration_activity(dynamic_rp, formatters_rp, tt);
     const auto files(format_text_templates_activity(tt));
     write_files_activity(files);
 

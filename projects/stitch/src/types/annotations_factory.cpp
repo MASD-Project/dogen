@@ -25,12 +25,12 @@
 #include "dogen/dynamic/types/repository_selector.hpp"
 #include "dogen/stitch/types/traits.hpp"
 #include "dogen/stitch/types/building_error.hpp"
-#include "dogen/stitch/types/stitching_settings_factory.hpp"
+#include "dogen/stitch/types/annotations_factory.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("stitch.stitching_settings_factory"));
+auto lg(logger_factory("stitch.annotations_factory"));
 
 const std::string field_definition_not_found(
     "Could not find expected field definition: ");
@@ -40,11 +40,11 @@ const std::string field_definition_not_found(
 namespace dogen {
 namespace stitch {
 
-stitching_settings_factory::
-stitching_settings_factory(const dynamic::repository& rp)
+annotations_factory::
+annotations_factory(const dynamic::repository& rp)
     : formatter_properties_(make_formatter_properties(rp)) {}
 
-stitching_settings_factory::formatter_properties stitching_settings_factory::
+annotations_factory::formatter_properties annotations_factory::
 make_formatter_properties(const dynamic::repository& rp) const {
     formatter_properties r;
     bool found_stream_variable_name(false), found_template_path(false),
@@ -118,7 +118,7 @@ make_formatter_properties(const dynamic::repository& rp) const {
     return r;
 }
 
-std::string stitching_settings_factory::
+std::string annotations_factory::
 extract_stream_variable_name(const dynamic::object& o) const {
     using namespace dynamic;
     const field_selector fs(o);
@@ -126,7 +126,7 @@ extract_stream_variable_name(const dynamic::object& o) const {
     return fs.get_text_content_or_default(fp.stream_variable_name);
 }
 
-boost::optional<boost::filesystem::path> stitching_settings_factory::
+boost::optional<boost::filesystem::path> annotations_factory::
 extract_template_path(const dynamic::object& o) const {
     using namespace dynamic;
     const field_selector fs(o);
@@ -137,7 +137,7 @@ extract_template_path(const dynamic::object& o) const {
     return boost::filesystem::path(text);
 }
 
-boost::optional<boost::filesystem::path> stitching_settings_factory::
+boost::optional<boost::filesystem::path> annotations_factory::
 extract_output_path(const dynamic::object& o) const {
     using namespace dynamic;
     const field_selector fs(o);
@@ -148,7 +148,7 @@ extract_output_path(const dynamic::object& o) const {
     return boost::filesystem::path(text);
 }
 
-boost::optional<boost::filesystem::path> stitching_settings_factory::
+boost::optional<boost::filesystem::path> annotations_factory::
 extract_relative_output_directory(const dynamic::object& o) const {
     using namespace dynamic;
     const field_selector fs(o);
@@ -159,7 +159,7 @@ extract_relative_output_directory(const dynamic::object& o) const {
     return boost::filesystem::path(text);
 }
 
-std::list<std::string> stitching_settings_factory::
+std::list<std::string> annotations_factory::
 extract_inclusion_dependencies(const dynamic::object& o) const {
     std::list<std::string> r;
     using namespace dynamic;
@@ -171,7 +171,7 @@ extract_inclusion_dependencies(const dynamic::object& o) const {
     return fs.get_text_collection_content(fd);
 }
 
-std::list<std::string> stitching_settings_factory::
+std::list<std::string> annotations_factory::
 extract_containing_namespaces(const dynamic::object& o) const {
     std::list<std::string> r;
     using namespace dynamic;
@@ -188,9 +188,9 @@ extract_containing_namespaces(const dynamic::object& o) const {
     return splitter::split_scoped(s);
 }
 
-stitching_settings stitching_settings_factory::
+annotations annotations_factory::
 make(const dynamic::object& o) const {
-    stitching_settings r;
+    annotations r;
     r.stream_variable_name(extract_stream_variable_name(o));
     r.template_path(extract_template_path(o));
     r.output_path(extract_output_path(o));

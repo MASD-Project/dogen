@@ -18,24 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_STITCH_TEST_DATA_STITCHING_SETTINGS_TD_HPP
-#define DOGEN_STITCH_TEST_DATA_STITCHING_SETTINGS_TD_HPP
+#ifndef DOGEN_STITCH_TEST_DATA_ANNOTATIONS_TD_HPP
+#define DOGEN_STITCH_TEST_DATA_ANNOTATIONS_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/stitch/types/stitching_settings.hpp"
+#include "dogen/stitch/types/annotations.hpp"
 
 namespace dogen {
 namespace stitch {
 
-class stitching_settings_generator {
+class annotations_generator {
 public:
-    stitching_settings_generator();
+    annotations_generator();
 
 public:
-    typedef dogen::stitch::stitching_settings result_type;
+    typedef dogen::stitch::annotations result_type;
 
 public:
     static void populate(const unsigned int position, result_type& v);

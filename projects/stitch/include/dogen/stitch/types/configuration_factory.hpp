@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_STITCH_TYPES_PROPERTIES_FACTORY_HPP
-#define DOGEN_STITCH_TYPES_PROPERTIES_FACTORY_HPP
+#ifndef DOGEN_STITCH_TYPES_CONFIGURATION_FACTORY_HPP
+#define DOGEN_STITCH_TYPES_CONFIGURATION_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,8 +30,8 @@
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/formatters/types/repository.hpp"
 #include "dogen/formatters/types/decoration_configuration.hpp"
-#include "dogen/stitch/types/stitching_settings.hpp"
-#include "dogen/stitch/types/properties.hpp"
+#include "dogen/stitch/types/annotations.hpp"
+#include "dogen/stitch/types/configuration.hpp"
 
 namespace dogen {
 namespace stitch {
@@ -39,9 +39,9 @@ namespace stitch {
 /**
  * @brief Creates the settings bundle.
  */
-class properties_factory {
+class configuration_factory {
 public:
-    properties_factory(
+    configuration_factory(
         const dynamic::repository& dynamic_repository,
         const dogen::formatters::repository& formatters_repository);
 
@@ -55,14 +55,14 @@ private:
     /**
      * @brief Create the stitching settings.
      */
-    stitching_settings
-    make_stitching_settings(const dynamic::object& o) const;
+    annotations
+    make_annotations(const dynamic::object& o) const;
 
 public:
     /**
      * @brief Create the settings bundle.
      */
-    properties make(const dynamic::object& o) const;
+    configuration make(const dynamic::object& o) const;
 
 private:
     const dynamic::repository& dynamic_repository_;

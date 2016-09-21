@@ -18,36 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include "dogen/stitch/io/properties_io.hpp"
-#include "dogen/stitch/io/stitching_settings_io.hpp"
-#include "dogen/formatters/io/decoration_configuration_io.hpp"
+#ifndef DOGEN_STITCH_SERIALIZATION_CONFIGURATION_SER_HPP
+#define DOGEN_STITCH_SERIALIZATION_CONFIGURATION_SER_HPP
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <boost/serialization/split_free.hpp>
+#include "dogen/stitch/types/configuration.hpp"
+
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::stitch::configuration)
 namespace boost {
+namespace serialization {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::formatters::decoration_configuration>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+template<typename Archive>
+void save(Archive& ar, const dogen::stitch::configuration& v, unsigned int version);
 
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<empty>\"";
-    s << " }";
-    return s;
-}
-
-}
-
-namespace dogen {
-namespace stitch {
-
-std::ostream& operator<<(std::ostream& s, const properties& v) {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::stitch::properties\"" << ", "
-      << "\"decoration_configuration\": " << v.decoration_configuration() << ", "
-      << "\"stitching_settings\": " << v.stitching_settings()
-      << " }";
-    return(s);
-}
+template<typename Archive>
+void load(Archive& ar, dogen::stitch::configuration& v, unsigned int version);
 
 } }
+
+#endif

@@ -18,35 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_STITCH_TEST_DATA_PROPERTIES_TD_HPP
-#define DOGEN_STITCH_TEST_DATA_PROPERTIES_TD_HPP
+#ifndef DOGEN_STITCH_TYPES_CONFIGURATION_FACTORY_FWD_HPP
+#define DOGEN_STITCH_TYPES_CONFIGURATION_FACTORY_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/stitch/types/properties.hpp"
-
 namespace dogen {
 namespace stitch {
 
-class properties_generator {
-public:
-    properties_generator();
-
-public:
-    typedef dogen::stitch::properties result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
-};
+class configuration_factory;
 
 } }
 

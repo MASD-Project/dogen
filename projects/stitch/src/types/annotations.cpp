@@ -18,12 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/stitch/types/stitching_settings.hpp"
+#include "dogen/stitch/types/annotations.hpp"
 
 namespace dogen {
 namespace stitch {
 
-stitching_settings::stitching_settings(stitching_settings&& rhs)
+annotations::annotations(annotations&& rhs)
     : stream_variable_name_(std::move(rhs.stream_variable_name_)),
       template_path_(std::move(rhs.template_path_)),
       output_path_(std::move(rhs.output_path_)),
@@ -31,7 +31,7 @@ stitching_settings::stitching_settings(stitching_settings&& rhs)
       inclusion_dependencies_(std::move(rhs.inclusion_dependencies_)),
       containing_namespaces_(std::move(rhs.containing_namespaces_)) { }
 
-stitching_settings::stitching_settings(
+annotations::annotations(
     const std::string& stream_variable_name,
     const boost::optional<boost::filesystem::path>& template_path,
     const boost::optional<boost::filesystem::path>& output_path,
@@ -45,7 +45,7 @@ stitching_settings::stitching_settings(
       inclusion_dependencies_(inclusion_dependencies),
       containing_namespaces_(containing_namespaces) { }
 
-void stitching_settings::swap(stitching_settings& other) noexcept {
+void annotations::swap(annotations& other) noexcept {
     using std::swap;
     swap(stream_variable_name_, other.stream_variable_name_);
     swap(template_path_, other.template_path_);
@@ -55,7 +55,7 @@ void stitching_settings::swap(stitching_settings& other) noexcept {
     swap(containing_namespaces_, other.containing_namespaces_);
 }
 
-bool stitching_settings::operator==(const stitching_settings& rhs) const {
+bool annotations::operator==(const annotations& rhs) const {
     return stream_variable_name_ == rhs.stream_variable_name_ &&
         template_path_ == rhs.template_path_ &&
         output_path_ == rhs.output_path_ &&
@@ -64,105 +64,105 @@ bool stitching_settings::operator==(const stitching_settings& rhs) const {
         containing_namespaces_ == rhs.containing_namespaces_;
 }
 
-stitching_settings& stitching_settings::operator=(stitching_settings other) {
+annotations& annotations::operator=(annotations other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const std::string& stitching_settings::stream_variable_name() const {
+const std::string& annotations::stream_variable_name() const {
     return stream_variable_name_;
 }
 
-std::string& stitching_settings::stream_variable_name() {
+std::string& annotations::stream_variable_name() {
     return stream_variable_name_;
 }
 
-void stitching_settings::stream_variable_name(const std::string& v) {
+void annotations::stream_variable_name(const std::string& v) {
     stream_variable_name_ = v;
 }
 
-void stitching_settings::stream_variable_name(const std::string&& v) {
+void annotations::stream_variable_name(const std::string&& v) {
     stream_variable_name_ = std::move(v);
 }
 
-const boost::optional<boost::filesystem::path>& stitching_settings::template_path() const {
+const boost::optional<boost::filesystem::path>& annotations::template_path() const {
     return template_path_;
 }
 
-boost::optional<boost::filesystem::path>& stitching_settings::template_path() {
+boost::optional<boost::filesystem::path>& annotations::template_path() {
     return template_path_;
 }
 
-void stitching_settings::template_path(const boost::optional<boost::filesystem::path>& v) {
+void annotations::template_path(const boost::optional<boost::filesystem::path>& v) {
     template_path_ = v;
 }
 
-void stitching_settings::template_path(const boost::optional<boost::filesystem::path>&& v) {
+void annotations::template_path(const boost::optional<boost::filesystem::path>&& v) {
     template_path_ = std::move(v);
 }
 
-const boost::optional<boost::filesystem::path>& stitching_settings::output_path() const {
+const boost::optional<boost::filesystem::path>& annotations::output_path() const {
     return output_path_;
 }
 
-boost::optional<boost::filesystem::path>& stitching_settings::output_path() {
+boost::optional<boost::filesystem::path>& annotations::output_path() {
     return output_path_;
 }
 
-void stitching_settings::output_path(const boost::optional<boost::filesystem::path>& v) {
+void annotations::output_path(const boost::optional<boost::filesystem::path>& v) {
     output_path_ = v;
 }
 
-void stitching_settings::output_path(const boost::optional<boost::filesystem::path>&& v) {
+void annotations::output_path(const boost::optional<boost::filesystem::path>&& v) {
     output_path_ = std::move(v);
 }
 
-const boost::optional<boost::filesystem::path>& stitching_settings::relative_output_directory() const {
+const boost::optional<boost::filesystem::path>& annotations::relative_output_directory() const {
     return relative_output_directory_;
 }
 
-boost::optional<boost::filesystem::path>& stitching_settings::relative_output_directory() {
+boost::optional<boost::filesystem::path>& annotations::relative_output_directory() {
     return relative_output_directory_;
 }
 
-void stitching_settings::relative_output_directory(const boost::optional<boost::filesystem::path>& v) {
+void annotations::relative_output_directory(const boost::optional<boost::filesystem::path>& v) {
     relative_output_directory_ = v;
 }
 
-void stitching_settings::relative_output_directory(const boost::optional<boost::filesystem::path>&& v) {
+void annotations::relative_output_directory(const boost::optional<boost::filesystem::path>&& v) {
     relative_output_directory_ = std::move(v);
 }
 
-const std::list<std::string>& stitching_settings::inclusion_dependencies() const {
+const std::list<std::string>& annotations::inclusion_dependencies() const {
     return inclusion_dependencies_;
 }
 
-std::list<std::string>& stitching_settings::inclusion_dependencies() {
+std::list<std::string>& annotations::inclusion_dependencies() {
     return inclusion_dependencies_;
 }
 
-void stitching_settings::inclusion_dependencies(const std::list<std::string>& v) {
+void annotations::inclusion_dependencies(const std::list<std::string>& v) {
     inclusion_dependencies_ = v;
 }
 
-void stitching_settings::inclusion_dependencies(const std::list<std::string>&& v) {
+void annotations::inclusion_dependencies(const std::list<std::string>&& v) {
     inclusion_dependencies_ = std::move(v);
 }
 
-const std::list<std::string>& stitching_settings::containing_namespaces() const {
+const std::list<std::string>& annotations::containing_namespaces() const {
     return containing_namespaces_;
 }
 
-std::list<std::string>& stitching_settings::containing_namespaces() {
+std::list<std::string>& annotations::containing_namespaces() {
     return containing_namespaces_;
 }
 
-void stitching_settings::containing_namespaces(const std::list<std::string>& v) {
+void annotations::containing_namespaces(const std::list<std::string>& v) {
     containing_namespaces_ = v;
 }
 
-void stitching_settings::containing_namespaces(const std::list<std::string>&& v) {
+void annotations::containing_namespaces(const std::list<std::string>&& v) {
     containing_namespaces_ = std::move(v);
 }
 

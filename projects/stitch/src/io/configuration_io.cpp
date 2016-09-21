@@ -18,35 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_STITCH_HASH_STITCHING_SETTINGS_HASH_HPP
-#define DOGEN_STITCH_HASH_STITCHING_SETTINGS_HASH_HPP
+#include <ostream>
+#include "dogen/stitch/io/annotations_io.hpp"
+#include "dogen/stitch/io/configuration_io.hpp"
+#include "dogen/formatters/io/decoration_configuration_io.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace boost {
 
-#include <functional>
-#include "dogen/stitch/types/stitching_settings.hpp"
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::formatters::decoration_configuration>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<empty>\"";
+    s << " }";
+    return s;
+}
+
+}
 
 namespace dogen {
 namespace stitch {
 
-struct stitching_settings_hasher {
-public:
-    static std::size_t hash(const stitching_settings& v);
-};
+std::ostream& operator<<(std::ostream& s, const configuration& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::stitch::configuration\"" << ", "
+      << "\"decoration_configuration\": " << v.decoration_configuration() << ", "
+      << "\"annotations\": " << v.annotations()
+      << " }";
+    return(s);
+}
 
 } }
-
-namespace std {
-
-template<>
-struct hash<dogen::stitch::stitching_settings> {
-public:
-    size_t operator()(const dogen::stitch::stitching_settings& v) const {
-        return dogen::stitch::stitching_settings_hasher::hash(v);
-    }
-};
-
-}
-#endif

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_STITCH_TYPES_STITCHING_SETTINGS_FACTORY_HPP
-#define DOGEN_STITCH_TYPES_STITCHING_SETTINGS_FACTORY_HPP
+#ifndef DOGEN_STITCH_TYPES_ANNOTATIONS_FACTORY_HPP
+#define DOGEN_STITCH_TYPES_ANNOTATIONS_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,7 +30,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/repository.hpp"
-#include "dogen/stitch/types/stitching_settings.hpp"
+#include "dogen/stitch/types/annotations.hpp"
 
 namespace dogen {
 namespace stitch {
@@ -38,9 +38,9 @@ namespace stitch {
 /**
  * @brief Creates the stitching settings.
  */
-class stitching_settings_factory {
+class annotations_factory {
 public:
-    stitching_settings_factory(const dynamic::repository& rp);
+    annotations_factory(const dynamic::repository& rp);
 
 private:
     /**
@@ -102,7 +102,7 @@ public:
     /**
      * @brief Create the stitching settings.
      */
-    stitching_settings make(const dynamic::object& o) const;
+    annotations make(const dynamic::object& o) const;
 
 private:
     const formatter_properties formatter_properties_;

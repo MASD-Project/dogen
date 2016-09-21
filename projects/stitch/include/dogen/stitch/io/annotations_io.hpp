@@ -18,17 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_STITCH_TYPES_STITCHING_SETTINGS_FWD_HPP
-#define DOGEN_STITCH_TYPES_STITCHING_SETTINGS_FWD_HPP
+#ifndef DOGEN_STITCH_IO_ANNOTATIONS_IO_HPP
+#define DOGEN_STITCH_IO_ANNOTATIONS_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <iosfwd>
+#include "dogen/stitch/types/annotations.hpp"
+
 namespace dogen {
 namespace stitch {
 
-class stitching_settings;
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::stitch::annotations& v);
 
 } }
 

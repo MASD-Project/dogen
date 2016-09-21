@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_STITCH_TYPES_STITCHING_SETTINGS_HPP
-#define DOGEN_STITCH_TYPES_STITCHING_SETTINGS_HPP
+#ifndef DOGEN_STITCH_TYPES_ANNOTATIONS_HPP
+#define DOGEN_STITCH_TYPES_ANNOTATIONS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,22 +30,22 @@
 #include <algorithm>
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
-#include "dogen/stitch/serialization/stitching_settings_fwd_ser.hpp"
+#include "dogen/stitch/serialization/annotations_fwd_ser.hpp"
 
 namespace dogen {
 namespace stitch {
 
-class stitching_settings final {
+class annotations final {
 public:
-    stitching_settings() = default;
-    stitching_settings(const stitching_settings&) = default;
-    ~stitching_settings() = default;
+    annotations() = default;
+    annotations(const annotations&) = default;
+    ~annotations() = default;
 
 public:
-    stitching_settings(stitching_settings&& rhs);
+    annotations(annotations&& rhs);
 
 public:
-    stitching_settings(
+    annotations(
         const std::string& stream_variable_name,
         const boost::optional<boost::filesystem::path>& template_path,
         const boost::optional<boost::filesystem::path>& output_path,
@@ -55,10 +55,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::stitch::stitching_settings& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::stitch::annotations& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::stitch::stitching_settings& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::stitch::annotations& v, unsigned int version);
 
 public:
     const std::string& stream_variable_name() const;
@@ -92,14 +92,14 @@ public:
     void containing_namespaces(const std::list<std::string>&& v);
 
 public:
-    bool operator==(const stitching_settings& rhs) const;
-    bool operator!=(const stitching_settings& rhs) const {
+    bool operator==(const annotations& rhs) const;
+    bool operator!=(const annotations& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(stitching_settings& other) noexcept;
-    stitching_settings& operator=(stitching_settings other);
+    void swap(annotations& other) noexcept;
+    annotations& operator=(annotations other);
 
 private:
     std::string stream_variable_name_;
@@ -116,8 +116,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::stitch::stitching_settings& lhs,
-    dogen::stitch::stitching_settings& rhs) {
+    dogen::stitch::annotations& lhs,
+    dogen::stitch::annotations& rhs) {
     lhs.swap(rhs);
 }
 

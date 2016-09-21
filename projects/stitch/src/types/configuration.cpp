@@ -18,68 +18,68 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/stitch/types/properties.hpp"
+#include "dogen/stitch/types/configuration.hpp"
 
 namespace dogen {
 namespace stitch {
 
-properties::properties(properties&& rhs)
+configuration::configuration(configuration&& rhs)
     : decoration_configuration_(std::move(rhs.decoration_configuration_)),
-      stitching_settings_(std::move(rhs.stitching_settings_)) { }
+      annotations_(std::move(rhs.annotations_)) { }
 
-properties::properties(
+configuration::configuration(
     const boost::optional<dogen::formatters::decoration_configuration>& decoration_configuration,
-    const dogen::stitch::stitching_settings& stitching_settings)
+    const dogen::stitch::annotations& annotations)
     : decoration_configuration_(decoration_configuration),
-      stitching_settings_(stitching_settings) { }
+      annotations_(annotations) { }
 
-void properties::swap(properties& other) noexcept {
+void configuration::swap(configuration& other) noexcept {
     using std::swap;
     swap(decoration_configuration_, other.decoration_configuration_);
-    swap(stitching_settings_, other.stitching_settings_);
+    swap(annotations_, other.annotations_);
 }
 
-bool properties::operator==(const properties& rhs) const {
+bool configuration::operator==(const configuration& rhs) const {
     return decoration_configuration_ == rhs.decoration_configuration_ &&
-        stitching_settings_ == rhs.stitching_settings_;
+        annotations_ == rhs.annotations_;
 }
 
-properties& properties::operator=(properties other) {
+configuration& configuration::operator=(configuration other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const boost::optional<dogen::formatters::decoration_configuration>& properties::decoration_configuration() const {
+const boost::optional<dogen::formatters::decoration_configuration>& configuration::decoration_configuration() const {
     return decoration_configuration_;
 }
 
-boost::optional<dogen::formatters::decoration_configuration>& properties::decoration_configuration() {
+boost::optional<dogen::formatters::decoration_configuration>& configuration::decoration_configuration() {
     return decoration_configuration_;
 }
 
-void properties::decoration_configuration(const boost::optional<dogen::formatters::decoration_configuration>& v) {
+void configuration::decoration_configuration(const boost::optional<dogen::formatters::decoration_configuration>& v) {
     decoration_configuration_ = v;
 }
 
-void properties::decoration_configuration(const boost::optional<dogen::formatters::decoration_configuration>&& v) {
+void configuration::decoration_configuration(const boost::optional<dogen::formatters::decoration_configuration>&& v) {
     decoration_configuration_ = std::move(v);
 }
 
-const dogen::stitch::stitching_settings& properties::stitching_settings() const {
-    return stitching_settings_;
+const dogen::stitch::annotations& configuration::annotations() const {
+    return annotations_;
 }
 
-dogen::stitch::stitching_settings& properties::stitching_settings() {
-    return stitching_settings_;
+dogen::stitch::annotations& configuration::annotations() {
+    return annotations_;
 }
 
-void properties::stitching_settings(const dogen::stitch::stitching_settings& v) {
-    stitching_settings_ = v;
+void configuration::annotations(const dogen::stitch::annotations& v) {
+    annotations_ = v;
 }
 
-void properties::stitching_settings(const dogen::stitch::stitching_settings&& v) {
-    stitching_settings_ = std::move(v);
+void configuration::annotations(const dogen::stitch::annotations&& v) {
+    annotations_ = std::move(v);
 }
 
 } }

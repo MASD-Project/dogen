@@ -18,10 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/stitch/hash/line_hash.hpp"
-#include "dogen/dynamic/hash/object_hash.hpp"
-#include "dogen/stitch/hash/configuration_hash.hpp"
-#include "dogen/stitch/hash/text_template_hash.hpp"
+#include "dogen/stitch/hash/annotations_hash.hpp"
 
 namespace {
 
@@ -31,7 +28,23 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_list_dogen_stitch_line(const std::list<dogen::stitch::line>& v) {
+inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) {
+    std::size_t seed(0);
+    combine(seed, v.generic_string());
+    return seed;
+}
+
+inline std::size_t hash_boost_optional_boost_filesystem_path(const boost::optional<boost::filesystem::path>& v) {
+    std::size_t seed(0);
+
+    if (!v)
+        return seed;
+
+    combine(seed, hash_boost_filesystem_path(*v));
+    return seed;
+}
+
+inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -44,12 +57,15 @@ inline std::size_t hash_std_list_dogen_stitch_line(const std::list<dogen::stitch
 namespace dogen {
 namespace stitch {
 
-std::size_t text_template_hasher::hash(const text_template& v) {
+std::size_t annotations_hasher::hash(const annotations& v) {
     std::size_t seed(0);
 
-    combine(seed, v.configuration());
-    combine(seed, v.extensions());
-    combine(seed, hash_std_list_dogen_stitch_line(v.lines()));
+    combine(seed, v.stream_variable_name());
+    combine(seed, hash_boost_optional_boost_filesystem_path(v.template_path()));
+    combine(seed, hash_boost_optional_boost_filesystem_path(v.output_path()));
+    combine(seed, hash_boost_optional_boost_filesystem_path(v.relative_output_directory()));
+    combine(seed, hash_std_list_std_string(v.inclusion_dependencies()));
+    combine(seed, hash_std_list_std_string(v.containing_namespaces()));
 
     return seed;
 }

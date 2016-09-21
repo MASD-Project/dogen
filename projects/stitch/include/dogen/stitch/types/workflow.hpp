@@ -33,7 +33,7 @@
 #include "dogen/dynamic/types/ownership_hierarchy.hpp"
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/formatters/types/repository.hpp"
-#include "dogen/stitch/types/properties.hpp"
+#include "dogen/stitch/types/configuration.hpp"
 #include "dogen/stitch/types/text_template.hpp"
 #include "dogen/stitch/types/formatter.hpp"
 
@@ -119,9 +119,9 @@ private:
         >& text_templates_as_string) const;
 
     /**
-     * @brief Creates the properties.
+     * @brief Creates the configuration.
      */
-    void populate_properties_activity(
+    void populate_configuration_activity(
         const dynamic::repository& dynamic_repository,
         const dogen::formatters::repository& formatters_repository,
         std::forward_list<text_template>& text_templates) const;

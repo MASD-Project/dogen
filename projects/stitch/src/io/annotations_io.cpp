@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/stitch/io/stitching_settings_io.hpp"
+#include "dogen/stitch/io/annotations_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -61,9 +61,9 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 namespace dogen {
 namespace stitch {
 
-std::ostream& operator<<(std::ostream& s, const stitching_settings& v) {
+std::ostream& operator<<(std::ostream& s, const annotations& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::stitch::stitching_settings\"" << ", "
+      << "\"__type__\": " << "\"dogen::stitch::annotations\"" << ", "
       << "\"stream_variable_name\": " << "\"" << tidy_up_string(v.stream_variable_name()) << "\"" << ", "
       << "\"template_path\": " << v.template_path() << ", "
       << "\"output_path\": " << v.output_path() << ", "

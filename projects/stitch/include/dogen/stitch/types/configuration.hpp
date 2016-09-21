@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_STITCH_TYPES_PROPERTIES_HPP
-#define DOGEN_STITCH_TYPES_PROPERTIES_HPP
+#ifndef DOGEN_STITCH_TYPES_CONFIGURATION_HPP
+#define DOGEN_STITCH_TYPES_CONFIGURATION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,33 +27,33 @@
 
 #include <algorithm>
 #include <boost/optional.hpp>
-#include "dogen/stitch/types/stitching_settings.hpp"
-#include "dogen/stitch/serialization/properties_fwd_ser.hpp"
+#include "dogen/stitch/types/annotations.hpp"
 #include "dogen/formatters/types/decoration_configuration.hpp"
+#include "dogen/stitch/serialization/configuration_fwd_ser.hpp"
 
 namespace dogen {
 namespace stitch {
 
-class properties final {
+class configuration final {
 public:
-    properties() = default;
-    properties(const properties&) = default;
-    ~properties() = default;
+    configuration() = default;
+    configuration(const configuration&) = default;
+    ~configuration() = default;
 
 public:
-    properties(properties&& rhs);
+    configuration(configuration&& rhs);
 
 public:
-    properties(
+    configuration(
         const boost::optional<dogen::formatters::decoration_configuration>& decoration_configuration,
-        const dogen::stitch::stitching_settings& stitching_settings);
+        const dogen::stitch::annotations& annotations);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::stitch::properties& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::stitch::configuration& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::stitch::properties& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::stitch::configuration& v, unsigned int version);
 
 public:
     const boost::optional<dogen::formatters::decoration_configuration>& decoration_configuration() const;
@@ -61,24 +61,24 @@ public:
     void decoration_configuration(const boost::optional<dogen::formatters::decoration_configuration>& v);
     void decoration_configuration(const boost::optional<dogen::formatters::decoration_configuration>&& v);
 
-    const dogen::stitch::stitching_settings& stitching_settings() const;
-    dogen::stitch::stitching_settings& stitching_settings();
-    void stitching_settings(const dogen::stitch::stitching_settings& v);
-    void stitching_settings(const dogen::stitch::stitching_settings&& v);
+    const dogen::stitch::annotations& annotations() const;
+    dogen::stitch::annotations& annotations();
+    void annotations(const dogen::stitch::annotations& v);
+    void annotations(const dogen::stitch::annotations&& v);
 
 public:
-    bool operator==(const properties& rhs) const;
-    bool operator!=(const properties& rhs) const {
+    bool operator==(const configuration& rhs) const;
+    bool operator!=(const configuration& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(properties& other) noexcept;
-    properties& operator=(properties other);
+    void swap(configuration& other) noexcept;
+    configuration& operator=(configuration other);
 
 private:
     boost::optional<dogen::formatters::decoration_configuration> decoration_configuration_;
-    dogen::stitch::stitching_settings stitching_settings_;
+    dogen::stitch::annotations annotations_;
 };
 
 } }
@@ -87,8 +87,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::stitch::properties& lhs,
-    dogen::stitch::properties& rhs) {
+    dogen::stitch::configuration& lhs,
+    dogen::stitch::configuration& rhs) {
     lhs.swap(rhs);
 }
 

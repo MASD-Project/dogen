@@ -24,22 +24,22 @@ namespace dogen {
 namespace stitch {
 
 text_template::text_template(
-    const dogen::stitch::properties& properties,
+    const dogen::stitch::configuration& configuration,
     const dogen::dynamic::object& extensions,
     const std::list<dogen::stitch::line>& lines)
-    : properties_(properties),
+    : configuration_(configuration),
       extensions_(extensions),
       lines_(lines) { }
 
 void text_template::swap(text_template& other) noexcept {
     using std::swap;
-    swap(properties_, other.properties_);
+    swap(configuration_, other.configuration_);
     swap(extensions_, other.extensions_);
     swap(lines_, other.lines_);
 }
 
 bool text_template::operator==(const text_template& rhs) const {
-    return properties_ == rhs.properties_ &&
+    return configuration_ == rhs.configuration_ &&
         extensions_ == rhs.extensions_ &&
         lines_ == rhs.lines_;
 }
@@ -50,20 +50,20 @@ text_template& text_template::operator=(text_template other) {
     return *this;
 }
 
-const dogen::stitch::properties& text_template::properties() const {
-    return properties_;
+const dogen::stitch::configuration& text_template::configuration() const {
+    return configuration_;
 }
 
-dogen::stitch::properties& text_template::properties() {
-    return properties_;
+dogen::stitch::configuration& text_template::configuration() {
+    return configuration_;
 }
 
-void text_template::properties(const dogen::stitch::properties& v) {
-    properties_ = v;
+void text_template::configuration(const dogen::stitch::configuration& v) {
+    configuration_ = v;
 }
 
-void text_template::properties(const dogen::stitch::properties&& v) {
-    properties_ = std::move(v);
+void text_template::configuration(const dogen::stitch::configuration&& v) {
+    configuration_ = std::move(v);
 }
 
 const dogen::dynamic::object& text_template::extensions() const {

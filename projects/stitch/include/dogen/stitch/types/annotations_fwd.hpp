@@ -18,40 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/stitch/hash/properties_hash.hpp"
-#include "dogen/stitch/hash/stitching_settings_hash.hpp"
-#include "dogen/formatters/hash/decoration_configuration_hash.hpp"
+#ifndef DOGEN_STITCH_TYPES_ANNOTATIONS_FWD_HPP
+#define DOGEN_STITCH_TYPES_ANNOTATIONS_FWD_HPP
 
-namespace {
-
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value) {
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-inline std::size_t hash_boost_optional_dogen_formatters_decoration_configuration(const boost::optional<dogen::formatters::decoration_configuration>& v) {
-    std::size_t seed(0);
-
-    if (!v)
-        return seed;
-
-    combine(seed, *v);
-    return seed;
-}
-
-}
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace stitch {
 
-std::size_t properties_hasher::hash(const properties& v) {
-    std::size_t seed(0);
-
-    combine(seed, hash_boost_optional_dogen_formatters_decoration_configuration(v.decoration_configuration()));
-    combine(seed, v.stitching_settings());
-
-    return seed;
-}
+class annotations;
 
 } }
+
+#endif

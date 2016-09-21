@@ -29,7 +29,7 @@
 #include <algorithm>
 #include "dogen/stitch/types/line.hpp"
 #include "dogen/dynamic/types/object.hpp"
-#include "dogen/stitch/types/properties.hpp"
+#include "dogen/stitch/types/configuration.hpp"
 #include "dogen/stitch/serialization/text_template_fwd_ser.hpp"
 
 namespace dogen {
@@ -44,7 +44,7 @@ public:
 
 public:
     text_template(
-        const dogen::stitch::properties& properties,
+        const dogen::stitch::configuration& configuration,
         const dogen::dynamic::object& extensions,
         const std::list<dogen::stitch::line>& lines);
 
@@ -56,10 +56,10 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::stitch::text_template& v, unsigned int version);
 
 public:
-    const dogen::stitch::properties& properties() const;
-    dogen::stitch::properties& properties();
-    void properties(const dogen::stitch::properties& v);
-    void properties(const dogen::stitch::properties&& v);
+    const dogen::stitch::configuration& configuration() const;
+    dogen::stitch::configuration& configuration();
+    void configuration(const dogen::stitch::configuration& v);
+    void configuration(const dogen::stitch::configuration&& v);
 
     const dogen::dynamic::object& extensions() const;
     dogen::dynamic::object& extensions();
@@ -82,7 +82,7 @@ public:
     text_template& operator=(text_template other);
 
 private:
-    dogen::stitch::properties properties_;
+    dogen::stitch::configuration configuration_;
     dogen::dynamic::object extensions_;
     std::list<dogen::stitch::line> lines_;
 };

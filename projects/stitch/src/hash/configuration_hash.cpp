@@ -18,7 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/stitch/hash/stitching_settings_hash.hpp"
+#include "dogen/stitch/hash/annotations_hash.hpp"
+#include "dogen/stitch/hash/configuration_hash.hpp"
+#include "dogen/formatters/hash/decoration_configuration_hash.hpp"
 
 namespace {
 
@@ -28,27 +30,13 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) {
-    std::size_t seed(0);
-    combine(seed, v.generic_string());
-    return seed;
-}
-
-inline std::size_t hash_boost_optional_boost_filesystem_path(const boost::optional<boost::filesystem::path>& v) {
+inline std::size_t hash_boost_optional_dogen_formatters_decoration_configuration(const boost::optional<dogen::formatters::decoration_configuration>& v) {
     std::size_t seed(0);
 
     if (!v)
         return seed;
 
-    combine(seed, hash_boost_filesystem_path(*v));
-    return seed;
-}
-
-inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
+    combine(seed, *v);
     return seed;
 }
 
@@ -57,15 +45,11 @@ inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
 namespace dogen {
 namespace stitch {
 
-std::size_t stitching_settings_hasher::hash(const stitching_settings& v) {
+std::size_t configuration_hasher::hash(const configuration& v) {
     std::size_t seed(0);
 
-    combine(seed, v.stream_variable_name());
-    combine(seed, hash_boost_optional_boost_filesystem_path(v.template_path()));
-    combine(seed, hash_boost_optional_boost_filesystem_path(v.output_path()));
-    combine(seed, hash_boost_optional_boost_filesystem_path(v.relative_output_directory()));
-    combine(seed, hash_std_list_std_string(v.inclusion_dependencies()));
-    combine(seed, hash_std_list_std_string(v.containing_namespaces()));
+    combine(seed, hash_boost_optional_dogen_formatters_decoration_configuration(v.decoration_configuration()));
+    combine(seed, v.annotations());
 
     return seed;
 }

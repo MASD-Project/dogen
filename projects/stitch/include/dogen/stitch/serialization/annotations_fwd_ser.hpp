@@ -18,23 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_STITCH_SERIALIZATION_PROPERTIES_FWD_SER_HPP
-#define DOGEN_STITCH_SERIALIZATION_PROPERTIES_FWD_SER_HPP
+#ifndef DOGEN_STITCH_SERIALIZATION_ANNOTATIONS_FWD_SER_HPP
+#define DOGEN_STITCH_SERIALIZATION_ANNOTATIONS_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/stitch/types/properties_fwd.hpp"
+#include "dogen/stitch/types/annotations_fwd.hpp"
 
 namespace boost {
 namespace serialization {
 
 template<class Archive>
-void save(Archive& ar, const dogen::stitch::properties& v, unsigned int version);
+void save(Archive& ar, const dogen::stitch::annotations& v, unsigned int version);
 
 template<class Archive>
-void load(Archive& ar, dogen::stitch::properties& v, unsigned int version);
+void load(Archive& ar, dogen::stitch::annotations& v, unsigned int version);
 
 } }
 

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/stitch/test_data/properties_td.hpp"
-#include "dogen/stitch/test_data/stitching_settings_td.hpp"
+#include "dogen/stitch/test_data/annotations_td.hpp"
+#include "dogen/stitch/test_data/configuration_td.hpp"
 #include "dogen/formatters/test_data/decoration_configuration_td.hpp"
 
 namespace {
@@ -36,9 +36,9 @@ create_boost_optional_dogen_formatters_decoration_configuration(unsigned int pos
     return r;
 }
 
-dogen::stitch::stitching_settings
-create_dogen_stitch_stitching_settings(const unsigned int position) {
-    return dogen::stitch::stitching_settings_generator::create(position);
+dogen::stitch::annotations
+create_dogen_stitch_annotations(const unsigned int position) {
+    return dogen::stitch::annotations_generator::create(position);
 }
 
 }
@@ -46,30 +46,30 @@ create_dogen_stitch_stitching_settings(const unsigned int position) {
 namespace dogen {
 namespace stitch {
 
-properties_generator::properties_generator() : position_(0) { }
+configuration_generator::configuration_generator() : position_(0) { }
 
-void properties_generator::
+void configuration_generator::
 populate(const unsigned int position, result_type& v) {
     v.decoration_configuration(create_boost_optional_dogen_formatters_decoration_configuration(position + 0));
-    v.stitching_settings(create_dogen_stitch_stitching_settings(position + 1));
+    v.annotations(create_dogen_stitch_annotations(position + 1));
 }
 
-properties_generator::result_type
-properties_generator::create(const unsigned int position) {
-    properties r;
-    properties_generator::populate(position, r);
+configuration_generator::result_type
+configuration_generator::create(const unsigned int position) {
+    configuration r;
+    configuration_generator::populate(position, r);
     return r;
 }
 
-properties_generator::result_type*
-properties_generator::create_ptr(const unsigned int position) {
-    properties* p = new properties();
-    properties_generator::populate(position, *p);
+configuration_generator::result_type*
+configuration_generator::create_ptr(const unsigned int position) {
+    configuration* p = new configuration();
+    configuration_generator::populate(position, *p);
     return p;
 }
 
-properties_generator::result_type
-properties_generator::operator()() {
+configuration_generator::result_type
+configuration_generator::operator()() {
     return create(position_++);
 }
 

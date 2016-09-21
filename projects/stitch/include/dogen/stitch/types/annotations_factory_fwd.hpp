@@ -18,25 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_STITCH_SERIALIZATION_STITCHING_SETTINGS_SER_HPP
-#define DOGEN_STITCH_SERIALIZATION_STITCHING_SETTINGS_SER_HPP
+#ifndef DOGEN_STITCH_TYPES_ANNOTATIONS_FACTORY_FWD_HPP
+#define DOGEN_STITCH_TYPES_ANNOTATIONS_FACTORY_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/split_free.hpp>
-#include "dogen/stitch/types/stitching_settings.hpp"
+namespace dogen {
+namespace stitch {
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::stitch::stitching_settings)
-namespace boost {
-namespace serialization {
-
-template<typename Archive>
-void save(Archive& ar, const dogen::stitch::stitching_settings& v, unsigned int version);
-
-template<typename Archive>
-void load(Archive& ar, dogen::stitch::stitching_settings& v, unsigned int version);
+class annotations_factory;
 
 } }
 

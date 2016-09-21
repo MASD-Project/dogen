@@ -31,7 +31,7 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/utility/serialization/path.hpp"
-#include "dogen/stitch/serialization/stitching_settings_ser.hpp"
+#include "dogen/stitch/serialization/annotations_ser.hpp"
 
 namespace boost {
 namespace serialization {
@@ -61,7 +61,7 @@ namespace serialization {
 
 template<typename Archive>
 void save(Archive& ar,
-    const dogen::stitch::stitching_settings& v,
+    const dogen::stitch::annotations& v,
     const unsigned int /*version*/) {
     ar << make_nvp("stream_variable_name", v.stream_variable_name_);
     ar << make_nvp("template_path", v.template_path_);
@@ -73,7 +73,7 @@ void save(Archive& ar,
 
 template<typename Archive>
 void load(Archive& ar,
-    dogen::stitch::stitching_settings& v,
+    dogen::stitch::annotations& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("stream_variable_name", v.stream_variable_name_);
     ar >> make_nvp("template_path", v.template_path_);
@@ -88,16 +88,16 @@ void load(Archive& ar,
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const dogen::stitch::stitching_settings& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, dogen::stitch::stitching_settings& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const dogen::stitch::annotations& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, dogen::stitch::annotations& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const dogen::stitch::stitching_settings& v, unsigned int version);
-template void load(archive::text_iarchive& ar, dogen::stitch::stitching_settings& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const dogen::stitch::annotations& v, unsigned int version);
+template void load(archive::text_iarchive& ar, dogen::stitch::annotations& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const dogen::stitch::stitching_settings& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, dogen::stitch::stitching_settings& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const dogen::stitch::annotations& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, dogen::stitch::annotations& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const dogen::stitch::stitching_settings& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, dogen::stitch::stitching_settings& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const dogen::stitch::annotations& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, dogen::stitch::annotations& v, unsigned int version);
 
 } }

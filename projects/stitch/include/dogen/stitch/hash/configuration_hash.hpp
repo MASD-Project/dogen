@@ -18,23 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_STITCH_IO_PROPERTIES_IO_HPP
-#define DOGEN_STITCH_IO_PROPERTIES_IO_HPP
+#ifndef DOGEN_STITCH_HASH_CONFIGURATION_HASH_HPP
+#define DOGEN_STITCH_HASH_CONFIGURATION_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/stitch/types/properties.hpp"
+#include <functional>
+#include "dogen/stitch/types/configuration.hpp"
 
 namespace dogen {
 namespace stitch {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::stitch::properties& v);
+struct configuration_hasher {
+public:
+    static std::size_t hash(const configuration& v);
+};
 
 } }
 
+namespace std {
+
+template<>
+struct hash<dogen::stitch::configuration> {
+public:
+    size_t operator()(const dogen::stitch::configuration& v) const {
+        return dogen::stitch::configuration_hasher::hash(v);
+    }
+};
+
+}
 #endif

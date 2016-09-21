@@ -19,8 +19,8 @@
  *
  */
 #include "dogen/formatters/types/decoration_configuration_factory.hpp"
-#include "dogen/stitch/types/stitching_settings_factory.hpp"
-#include "dogen/stitch/types/properties_factory.hpp"
+#include "dogen/stitch/types/annotations_factory.hpp"
+#include "dogen/stitch/types/configuration_factory.hpp"
 
 namespace {
 
@@ -31,13 +31,13 @@ const std::string cpp_modeline_name("cpp");
 namespace dogen {
 namespace stitch {
 
-properties_factory::
-properties_factory(const dynamic::repository& dynamic_repository,
+configuration_factory::
+configuration_factory(const dynamic::repository& dynamic_repository,
     const dogen::formatters::repository& formatters_repository)
     : dynamic_repository_(dynamic_repository),
       formatters_repository_(formatters_repository) {}
 
-boost::optional<formatters::decoration_configuration> properties_factory::
+boost::optional<formatters::decoration_configuration> configuration_factory::
 make_decoration_configuration(const dynamic::object& o) const {
     using dogen::formatters::decoration_configuration_factory;
     const auto& drp(dynamic_repository_);
@@ -45,17 +45,17 @@ make_decoration_configuration(const dynamic::object& o) const {
     return f.make(cpp_modeline_name, o);
 }
 
-stitching_settings properties_factory::
-make_stitching_settings(const dynamic::object& o) const {
-    stitching_settings_factory f(dynamic_repository_);
+annotations configuration_factory::
+make_annotations(const dynamic::object& o) const {
+    annotations_factory f(dynamic_repository_);
     return f.make(o);
 }
 
-properties
-properties_factory::make(const dynamic::object& o) const {
-    properties r;
+configuration
+configuration_factory::make(const dynamic::object& o) const {
+    configuration r;
     r.decoration_configuration(make_decoration_configuration(o));
-    r.stitching_settings(make_stitching_settings(o));
+    r.annotations(make_annotations(o));
     return r;
 }
 

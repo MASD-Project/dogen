@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/stitch/test_data/stitching_settings_td.hpp"
+#include "dogen/stitch/test_data/annotations_td.hpp"
 
 namespace {
 
@@ -56,9 +56,9 @@ std::list<std::string> create_std_list_std_string(unsigned int position) {
 namespace dogen {
 namespace stitch {
 
-stitching_settings_generator::stitching_settings_generator() : position_(0) { }
+annotations_generator::annotations_generator() : position_(0) { }
 
-void stitching_settings_generator::
+void annotations_generator::
 populate(const unsigned int position, result_type& v) {
     v.stream_variable_name(create_std_string(position + 0));
     v.template_path(create_boost_optional_boost_filesystem_path(position + 1));
@@ -68,22 +68,22 @@ populate(const unsigned int position, result_type& v) {
     v.containing_namespaces(create_std_list_std_string(position + 5));
 }
 
-stitching_settings_generator::result_type
-stitching_settings_generator::create(const unsigned int position) {
-    stitching_settings r;
-    stitching_settings_generator::populate(position, r);
+annotations_generator::result_type
+annotations_generator::create(const unsigned int position) {
+    annotations r;
+    annotations_generator::populate(position, r);
     return r;
 }
 
-stitching_settings_generator::result_type*
-stitching_settings_generator::create_ptr(const unsigned int position) {
-    stitching_settings* p = new stitching_settings();
-    stitching_settings_generator::populate(position, *p);
+annotations_generator::result_type*
+annotations_generator::create_ptr(const unsigned int position) {
+    annotations* p = new annotations();
+    annotations_generator::populate(position, *p);
     return p;
 }
 
-stitching_settings_generator::result_type
-stitching_settings_generator::operator()() {
+annotations_generator::result_type
+annotations_generator::operator()() {
     return create(position_++);
 }
 

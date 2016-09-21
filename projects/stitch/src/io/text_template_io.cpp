@@ -21,7 +21,7 @@
 #include <ostream>
 #include "dogen/stitch/io/line_io.hpp"
 #include "dogen/dynamic/io/object_io.hpp"
-#include "dogen/stitch/io/properties_io.hpp"
+#include "dogen/stitch/io/configuration_io.hpp"
 #include "dogen/stitch/io/text_template_io.hpp"
 
 namespace std {
@@ -44,7 +44,7 @@ namespace stitch {
 std::ostream& operator<<(std::ostream& s, const text_template& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::stitch::text_template\"" << ", "
-      << "\"properties\": " << v.properties() << ", "
+      << "\"configuration\": " << v.configuration() << ", "
       << "\"extensions\": " << v.extensions() << ", "
       << "\"lines\": " << v.lines()
       << " }";

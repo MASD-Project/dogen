@@ -40,7 +40,7 @@ private:
      * @brief Creates an empty text template, with the exception of
      * the key settings.
      */
-    text_template make_text_template_with_trivial_settings() const;
+    text_template make_text_template_with_trivial_configuration() const;
 
     /**
      * @brief Makes @code how_many lines, each with a single text block.
@@ -214,8 +214,8 @@ public:
     text_template make_complex_structure() const;
 
     /**
-     * @brief Populate file properties in the template. Also includes
-     * a single line of text.
+     * @brief Populate decoration configuration in the template. Also
+     * includes a single line of text.
      */
     text_template make_with_decoration_configuration() const;
 
