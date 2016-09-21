@@ -30,7 +30,7 @@
 #include <forward_list>
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/repository.hpp"
-#include "dogen/formatters/types/file_configuration_workflow.hpp"
+#include "dogen/formatters/types/decoration_configuration_workflow.hpp"
 #include "dogen/options/types/cpp_options.hpp"
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/quilt.cpp/types/formattables/registrar.hpp"
@@ -83,7 +83,8 @@ private:
     /**
      * @brief Create the helper annotations repository.
      */
-    annotations::helper_annotations_repository create_helper_annotations_repository(
+    annotations::helper_annotations_repository
+    create_helper_annotations_repository(
         const dynamic::repository& drp, const yarn::model& m) const;
 
     /**
@@ -115,7 +116,7 @@ private:
      * @brief Creates the element properties.
      */
     element_properties_repository create_element_properties_repository(
-        const dogen::formatters::file_configuration_workflow& fpwf,
+        const dogen::formatters::decoration_configuration_workflow& fpwf,
         const annotations::helper_annotations_repository& hsrp,
         const annotations::aspect_annotations_repository& asrp,
         const annotations::streaming_annotations_repository& ssrp,
@@ -130,7 +131,7 @@ public:
     element_properties_repository execute(const options::cpp_options& opts,
         const dynamic::repository& drp,
         const dynamic::object& root_object,
-        const dogen::formatters::file_configuration_workflow& fpwf,
+        const dogen::formatters::decoration_configuration_workflow& fpwf,
         const formatters::container& fc,
         const annotations::streaming_annotations_repository& ssrp,
         const yarn::model& m) const;

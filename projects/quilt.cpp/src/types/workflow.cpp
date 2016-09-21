@@ -56,11 +56,11 @@ dogen::formatters::repository workflow::create_formatters_repository(
     return hw.hydrate(dirs);
 }
 
-dogen::formatters::file_configuration_workflow
-workflow::create_file_configuration_workflow(const dynamic::repository& drp,
+dogen::formatters::decoration_configuration_workflow
+workflow::create_decoration_configuration_workflow(const dynamic::repository& drp,
     const dogen::formatters::repository& frp,
     const dynamic::object& root_object) const {
-    dogen::formatters::file_configuration_workflow r(drp, frp, root_object);
+    dogen::formatters::decoration_configuration_workflow r(drp, frp, root_object);
     return r;
 }
 
@@ -90,7 +90,7 @@ formattables::element_properties_repository workflow::create_properties(
     const options::cpp_options& opts,
     const dynamic::repository& srp,
     const dynamic::object& root_object,
-    const dogen::formatters::file_configuration_workflow& fpwf,
+    const dogen::formatters::decoration_configuration_workflow& fpwf,
     const formatters::container& fc,
     const annotations::streaming_annotations_repository& ssrp,
     const yarn::model& m) const {
@@ -154,7 +154,7 @@ workflow::generate(const options::knitting_options& ko,
     const auto frp(create_formatters_repository(dirs));
 
     const auto ro(m.root_module().extensions());
-    const auto fpwf(create_file_configuration_workflow(drp, frp, ro));
+    const auto fpwf(create_decoration_configuration_workflow(drp, frp, ro));
 
     const auto osb(create_opaque_annotations_builder(drp));
     auto esrp(create_element_annotations_repository(osb, m));

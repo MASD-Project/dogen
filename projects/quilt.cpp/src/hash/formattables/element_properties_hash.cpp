@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/hash/file_configuration_hash.hpp"
+#include "dogen/formatters/hash/decoration_configuration_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/aspect_properties_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/helper_properties_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/element_properties_hash.hpp"
@@ -32,7 +32,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_boost_optional_dogen_formatters_file_configuration(const boost::optional<dogen::formatters::file_configuration>& v) {
+inline std::size_t hash_boost_optional_dogen_formatters_decoration_configuration(const boost::optional<dogen::formatters::decoration_configuration>& v) {
     std::size_t seed(0);
 
     if (!v)
@@ -69,7 +69,7 @@ namespace formattables {
 std::size_t element_properties_hasher::hash(const element_properties& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_boost_optional_dogen_formatters_file_configuration(v.file_configuration()));
+    combine(seed, hash_boost_optional_dogen_formatters_decoration_configuration(v.decoration_configuration()));
     combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formatter_properties(v.formatter_properties()));
     combine(seed, hash_std_list_dogen_quilt_cpp_formattables_helper_properties(v.helper_properties()));
     combine(seed, v.aspect_properties());

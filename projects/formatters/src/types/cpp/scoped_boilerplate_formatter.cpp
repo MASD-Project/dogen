@@ -27,25 +27,25 @@ namespace cpp {
 
 scoped_boilerplate_formatter::
 scoped_boilerplate_formatter(std::ostream& s,
-    const boost::optional<file_configuration>& fp,
+    const boost::optional<decoration_configuration>& dc,
     const std::list<std::string>& inclusion_dependencies,
     const std::string& header_guard)
-    : stream_(s), file_configuration_(fp),
+    : stream_(s), decoration_configuration_(dc),
       inclusion_dependencies_(inclusion_dependencies),
       header_guard_(header_guard) {
 
-    if (!file_configuration_)
+    if (!decoration_configuration_)
         return;
 
-    const auto& a(file_configuration_->decoration());
+    const auto& a(decoration_configuration_->decoration());
     formatter_.format_begin(stream_, a, inclusion_dependencies, header_guard);
 }
 
 scoped_boilerplate_formatter::~scoped_boilerplate_formatter() {
-    if (!file_configuration_)
+    if (!decoration_configuration_)
         return;
 
-    const auto& a(file_configuration_->decoration());
+    const auto& a(decoration_configuration_->decoration());
     formatter_.format_end(stream_, a, header_guard_);
 }
 

@@ -25689,7 +25689,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
                 <dia:string>#gs#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const boost::optional&lt;dogen::formatters::file_configuration&gt;#</dia:string>
+                <dia:string>#const boost::optional&lt;dogen::formatters::decoration_configuration&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -30619,10 +30619,10 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#file_configuration#</dia:string>
+            <dia:string>#decoration_configuration#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::optional&lt;formatters::file_configuration&gt;#</dia:string>
+            <dia:string>#boost::optional&lt;formatters::decoration_configuration&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

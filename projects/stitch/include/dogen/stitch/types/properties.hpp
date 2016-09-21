@@ -28,8 +28,8 @@
 #include <algorithm>
 #include <boost/optional.hpp>
 #include "dogen/stitch/types/stitching_settings.hpp"
-#include "dogen/formatters/types/file_configuration.hpp"
 #include "dogen/stitch/serialization/properties_fwd_ser.hpp"
+#include "dogen/formatters/types/decoration_configuration.hpp"
 
 namespace dogen {
 namespace stitch {
@@ -45,7 +45,7 @@ public:
 
 public:
     properties(
-        const boost::optional<dogen::formatters::file_configuration>& file_configuration,
+        const boost::optional<dogen::formatters::decoration_configuration>& decoration_configuration,
         const dogen::stitch::stitching_settings& stitching_settings);
 
 private:
@@ -56,10 +56,10 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::stitch::properties& v, unsigned int version);
 
 public:
-    const boost::optional<dogen::formatters::file_configuration>& file_configuration() const;
-    boost::optional<dogen::formatters::file_configuration>& file_configuration();
-    void file_configuration(const boost::optional<dogen::formatters::file_configuration>& v);
-    void file_configuration(const boost::optional<dogen::formatters::file_configuration>&& v);
+    const boost::optional<dogen::formatters::decoration_configuration>& decoration_configuration() const;
+    boost::optional<dogen::formatters::decoration_configuration>& decoration_configuration();
+    void decoration_configuration(const boost::optional<dogen::formatters::decoration_configuration>& v);
+    void decoration_configuration(const boost::optional<dogen::formatters::decoration_configuration>&& v);
 
     const dogen::stitch::stitching_settings& stitching_settings() const;
     dogen::stitch::stitching_settings& stitching_settings();
@@ -77,7 +77,7 @@ public:
     properties& operator=(properties other);
 
 private:
-    boost::optional<dogen::formatters::file_configuration> file_configuration_;
+    boost::optional<dogen::formatters::decoration_configuration> decoration_configuration_;
     dogen::stitch::stitching_settings stitching_settings_;
 };
 

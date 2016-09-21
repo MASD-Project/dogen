@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/formatters/test/mock_file_configuration_factory.hpp"
+#include "dogen/formatters/test/mock_decoration_configuration_factory.hpp"
 #include "dogen/stitch/test/mock_text_template_factory.hpp"
 
 namespace {
@@ -305,12 +305,13 @@ text_template mock_text_template_factory::make_complex_structure() const {
     return r;
 }
 
-text_template mock_text_template_factory::make_with_file_configuration() const {
-    dogen::formatters::test::mock_file_configuration_factory factory_;
-    const auto fp(factory_.make_file_configuration());
+text_template mock_text_template_factory::
+make_with_decoration_configuration() const {
+    dogen::formatters::test::mock_decoration_configuration_factory factory_;
+    const auto fp(factory_.make_decoration_configuration());
 
     text_template r(make_text_template_with_trivial_settings());
-    r.properties().file_configuration(fp);
+    r.properties().decoration_configuration(fp);
     r.lines(make_text_block_only_lines());
     return r;
 }

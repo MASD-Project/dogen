@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/formatters/test_data/file_configuration_td.hpp"
+#include "dogen/formatters/test_data/decoration_configuration_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/aspect_properties_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/helper_properties_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/element_properties_td.hpp"
@@ -27,15 +27,15 @@
 
 namespace {
 
-dogen::formatters::file_configuration
-create_dogen_formatters_file_configuration(const unsigned int position) {
-    return dogen::formatters::file_configuration_generator::create(position);
+dogen::formatters::decoration_configuration
+create_dogen_formatters_decoration_configuration(const unsigned int position) {
+    return dogen::formatters::decoration_configuration_generator::create(position);
 }
 
-boost::optional<dogen::formatters::file_configuration>
-create_boost_optional_dogen_formatters_file_configuration(unsigned int position) {
-    boost::optional<dogen::formatters::file_configuration> r(
-        create_dogen_formatters_file_configuration(position));
+boost::optional<dogen::formatters::decoration_configuration>
+create_boost_optional_dogen_formatters_decoration_configuration(unsigned int position) {
+    boost::optional<dogen::formatters::decoration_configuration> r(
+        create_dogen_formatters_decoration_configuration(position));
     return r;
 }
 
@@ -87,7 +87,7 @@ element_properties_generator::element_properties_generator() : position_(0) { }
 
 void element_properties_generator::
 populate(const unsigned int position, result_type& v) {
-    v.file_configuration(create_boost_optional_dogen_formatters_file_configuration(position + 0));
+    v.decoration_configuration(create_boost_optional_dogen_formatters_decoration_configuration(position + 0));
     v.formatter_properties(create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formatter_properties(position + 1));
     v.helper_properties(create_std_list_dogen_quilt_cpp_formattables_helper_properties(position + 2));
     v.aspect_properties(create_dogen_quilt_cpp_formattables_aspect_properties(position + 3));

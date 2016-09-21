@@ -29,7 +29,7 @@
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/formatters/types/repository.hpp"
-#include "dogen/formatters/types/file_configuration.hpp"
+#include "dogen/formatters/types/decoration_configuration.hpp"
 #include "dogen/stitch/types/stitching_settings.hpp"
 #include "dogen/stitch/types/properties.hpp"
 
@@ -49,8 +49,8 @@ private:
     /**
      * @brief Create the general settings.
      */
-    boost::optional<formatters::file_configuration>
-    make_file_configuration(const dynamic::object& o) const;
+    boost::optional<formatters::decoration_configuration>
+    make_decoration_configuration(const dynamic::object& o) const;
 
     /**
      * @brief Create the stitching settings.

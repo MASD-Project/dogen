@@ -202,12 +202,12 @@ public:
     make_scoped_namespace_formatter(const std::list<std::string>& ns);
 
     /**
-     * @brief Creates the preamble.
+     * @brief Creates the decoration preamble.
      */
     /**@{*/
     void make_decoration_preamble();
     void make_decoration_preamble(
-        const boost::optional<dogen::formatters::file_configuration> gs);
+        const boost::optional<dogen::formatters::decoration_configuration> dc);
     /**@}*/
 
     /**

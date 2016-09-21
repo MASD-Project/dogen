@@ -24,23 +24,23 @@ namespace dogen {
 namespace stitch {
 
 properties::properties(properties&& rhs)
-    : file_configuration_(std::move(rhs.file_configuration_)),
+    : decoration_configuration_(std::move(rhs.decoration_configuration_)),
       stitching_settings_(std::move(rhs.stitching_settings_)) { }
 
 properties::properties(
-    const boost::optional<dogen::formatters::file_configuration>& file_configuration,
+    const boost::optional<dogen::formatters::decoration_configuration>& decoration_configuration,
     const dogen::stitch::stitching_settings& stitching_settings)
-    : file_configuration_(file_configuration),
+    : decoration_configuration_(decoration_configuration),
       stitching_settings_(stitching_settings) { }
 
 void properties::swap(properties& other) noexcept {
     using std::swap;
-    swap(file_configuration_, other.file_configuration_);
+    swap(decoration_configuration_, other.decoration_configuration_);
     swap(stitching_settings_, other.stitching_settings_);
 }
 
 bool properties::operator==(const properties& rhs) const {
-    return file_configuration_ == rhs.file_configuration_ &&
+    return decoration_configuration_ == rhs.decoration_configuration_ &&
         stitching_settings_ == rhs.stitching_settings_;
 }
 
@@ -50,20 +50,20 @@ properties& properties::operator=(properties other) {
     return *this;
 }
 
-const boost::optional<dogen::formatters::file_configuration>& properties::file_configuration() const {
-    return file_configuration_;
+const boost::optional<dogen::formatters::decoration_configuration>& properties::decoration_configuration() const {
+    return decoration_configuration_;
 }
 
-boost::optional<dogen::formatters::file_configuration>& properties::file_configuration() {
-    return file_configuration_;
+boost::optional<dogen::formatters::decoration_configuration>& properties::decoration_configuration() {
+    return decoration_configuration_;
 }
 
-void properties::file_configuration(const boost::optional<dogen::formatters::file_configuration>& v) {
-    file_configuration_ = v;
+void properties::decoration_configuration(const boost::optional<dogen::formatters::decoration_configuration>& v) {
+    decoration_configuration_ = v;
 }
 
-void properties::file_configuration(const boost::optional<dogen::formatters::file_configuration>&& v) {
-    file_configuration_ = std::move(v);
+void properties::decoration_configuration(const boost::optional<dogen::formatters::decoration_configuration>&& v) {
+    decoration_configuration_ = std::move(v);
 }
 
 const dogen::stitch::stitching_settings& properties::stitching_settings() const {
