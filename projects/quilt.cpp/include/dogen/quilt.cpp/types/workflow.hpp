@@ -35,7 +35,7 @@
 #include "dogen/formatters/types/repository.hpp"
 #include "dogen/quilt/types/backend_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
-#include "dogen/formatters/types/file_properties_workflow.hpp"
+#include "dogen/formatters/types/file_configuration_workflow.hpp"
 #include "dogen/quilt.cpp/types/annotations/opaque_annotations_builder.hpp"
 #include "dogen/quilt.cpp/types/annotations/streaming_annotations_repository.hpp"
 #include "dogen/quilt.cpp/types/annotations/element_annotations_repository.hpp"
@@ -68,7 +68,7 @@ private:
     /**
      * @brief Create the file properties workflow.
      */
-    dogen::formatters::file_properties_workflow create_file_properties_workflow(
+    dogen::formatters::file_configuration_workflow create_file_configuration_workflow(
         const dynamic::repository& drp, const dogen::formatters::repository& frp,
         const dynamic::object& root_object) const;
 
@@ -100,7 +100,7 @@ private:
         create_properties(const options::cpp_options& opts,
         const dynamic::repository& srp,
         const dynamic::object& root_object,
-        const dogen::formatters::file_properties_workflow& fpwf,
+        const dogen::formatters::file_configuration_workflow& fpwf,
         const formatters::container& fc,
         const annotations::streaming_annotations_repository& ssrp,
         const yarn::model& m) const;

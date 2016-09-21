@@ -18,36 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TEST_DATA_FILE_PROPERTIES_TD_HPP
-#define DOGEN_FORMATTERS_TEST_DATA_FILE_PROPERTIES_TD_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include "dogen/formatters/types/file_properties.hpp"
+#include <ostream>
+#include <boost/io/ios_state.hpp>
+#include "dogen/formatters/io/decoration_io.hpp"
+#include "dogen/formatters/io/file_configuration_io.hpp"
 
 namespace dogen {
 namespace formatters {
 
-class file_properties_generator {
-public:
-    file_properties_generator();
+std::ostream& operator<<(std::ostream& s, const file_configuration& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
 
-public:
-    typedef dogen::formatters::file_properties result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
-};
+    s << " { "
+      << "\"__type__\": " << "\"dogen::formatters::file_configuration\"" << ", "
+      << "\"generate_preamble\": " << v.generate_preamble() << ", "
+      << "\"decoration\": " << v.decoration()
+      << " }";
+    return(s);
+}
 
 } }
-
-#endif

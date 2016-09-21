@@ -18,22 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_IO_FILE_PROPERTIES_IO_HPP
-#define DOGEN_FORMATTERS_IO_FILE_PROPERTIES_IO_HPP
+#ifndef DOGEN_FORMATTERS_TYPES_FILE_CONFIGURATION_FWD_HPP
+#define DOGEN_FORMATTERS_TYPES_FILE_CONFIGURATION_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/formatters/types/file_properties.hpp"
-
 namespace dogen {
 namespace formatters {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::formatters::file_properties& v);
+class file_configuration;
 
 } }
 

@@ -18,18 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TYPES_FILE_PROPERTIES_FACTORY_FWD_HPP
-#define DOGEN_FORMATTERS_TYPES_FILE_PROPERTIES_FACTORY_FWD_HPP
+#include "dogen/formatters/hash/decoration_hash.hpp"
+#include "dogen/formatters/hash/file_configuration_hash.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value) {
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+}
 
 namespace dogen {
 namespace formatters {
 
-class file_properties_factory;
+std::size_t file_configuration_hasher::hash(const file_configuration& v) {
+    std::size_t seed(0);
+
+    combine(seed, v.generate_preamble());
+    combine(seed, v.decoration());
+
+    return seed;
+}
 
 } }
-
-#endif

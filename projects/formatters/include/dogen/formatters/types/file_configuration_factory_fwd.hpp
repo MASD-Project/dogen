@@ -18,27 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/io/ios_state.hpp>
-#include "dogen/formatters/io/decoration_io.hpp"
-#include "dogen/formatters/io/file_properties_io.hpp"
+#ifndef DOGEN_FORMATTERS_TYPES_FILE_CONFIGURATION_FACTORY_FWD_HPP
+#define DOGEN_FORMATTERS_TYPES_FILE_CONFIGURATION_FACTORY_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace formatters {
 
-std::ostream& operator<<(std::ostream& s, const file_properties& v) {
-    boost::io::ios_flags_saver ifs(s);
-    s.setf(std::ios_base::boolalpha);
-    s.setf(std::ios::fixed, std::ios::floatfield);
-    s.precision(6);
-    s.setf(std::ios::showpoint);
-
-    s << " { "
-      << "\"__type__\": " << "\"dogen::formatters::file_properties\"" << ", "
-      << "\"generate_preamble\": " << v.generate_preamble() << ", "
-      << "\"decoration\": " << v.decoration()
-      << " }";
-    return(s);
-}
+class file_configuration_factory;
 
 } }
+
+#endif

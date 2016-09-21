@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TYPES_FILE_PROPERTIES_WORKFLOW_HPP
-#define DOGEN_FORMATTERS_TYPES_FILE_PROPERTIES_WORKFLOW_HPP
+#ifndef DOGEN_FORMATTERS_TYPES_FILE_CONFIGURATION_WORKFLOW_HPP
+#define DOGEN_FORMATTERS_TYPES_FILE_CONFIGURATION_WORKFLOW_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,48 +28,48 @@
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/formatters/types/repository.hpp"
-#include "dogen/formatters/types/file_properties.hpp"
+#include "dogen/formatters/types/file_configuration.hpp"
 #include "dogen/formatters/types/file_annotations_factory.hpp"
-#include "dogen/formatters/types/file_properties_factory.hpp"
+#include "dogen/formatters/types/file_configuration_factory.hpp"
 
 namespace dogen {
 namespace formatters {
 
-class file_properties_workflow {
+class file_configuration_workflow {
 public:
     /**
-     * @brief Initialise a new file properties workflow, without
+     * @brief Initialise a new file configuration workflow, without
      * access to fallbacks. This constructor is used by stitch.
      *
      * @param rp where to look up reference data.
      */
-    explicit file_properties_workflow(const dynamic::repository& drp,
+    explicit file_configuration_workflow(const dynamic::repository& drp,
         const repository& rp);
 
     /**
-     * @brief Initialise a new file properties workflow, with access
+     * @brief Initialise a new file configuration workflow, with access
      * to fallbacks. This constructor is used by quilt.cpp.
      *
      * @param rp where to look up reference data.
      * @param fallback object to use to construct defaults, if any.
      */
-    file_properties_workflow(const dynamic::repository& drp,
+    file_configuration_workflow(const dynamic::repository& drp,
         const repository& rp,
         const dynamic::object& fallback);
 
 public:
     /**
-     * @brief Generates file properties from the dynamic object.
+     * @brief Generates file configuration from the dynamic object.
      */
     /**@{*/
-    file_properties execute(const std::string& modeline_name) const;
-    file_properties execute(const std::string& modeline_name,
+    file_configuration execute(const std::string& modeline_name) const;
+    file_configuration execute(const std::string& modeline_name,
         const dynamic::object& o) const;
     /**@}*/
 
 private:
     const file_annotations_factory annotations_factory_;
-    const file_properties_factory properties_factory_;
+    const file_configuration_factory configuration_factory_;
 };
 
 } }

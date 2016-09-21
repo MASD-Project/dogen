@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/formatters/io/file_properties_io.hpp"
+#include "dogen/formatters/io/file_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/aspect_properties_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/helper_properties_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/element_properties_io.hpp"
@@ -28,7 +28,7 @@
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::formatters::file_properties>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::formatters::file_configuration>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)
@@ -88,7 +88,7 @@ namespace formattables {
 std::ostream& operator<<(std::ostream& s, const element_properties& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::element_properties\"" << ", "
-      << "\"file_properties\": " << v.file_properties() << ", "
+      << "\"file_configuration\": " << v.file_configuration() << ", "
       << "\"formatter_properties\": " << v.formatter_properties() << ", "
       << "\"helper_properties\": " << v.helper_properties() << ", "
       << "\"aspect_properties\": " << v.aspect_properties()

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TEST_MOCK_FILE_PROPERTIES_FACTORY_HPP
-#define DOGEN_FORMATTERS_TEST_MOCK_FILE_PROPERTIES_FACTORY_HPP
+#ifndef DOGEN_FORMATTERS_TEST_MOCK_FILE_CONFIGURATION_FACTORY_HPP
+#define DOGEN_FORMATTERS_TEST_MOCK_FILE_CONFIGURATION_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,13 +31,13 @@
 #include "dogen/formatters/types/modeline.hpp"
 #include "dogen/formatters/types/decoration.hpp"
 #include "dogen/formatters/types/modeline_locations.hpp"
-#include "dogen/formatters/types/file_properties.hpp"
+#include "dogen/formatters/types/file_configuration.hpp"
 
 namespace dogen {
 namespace formatters {
 namespace test {
 
-class mock_file_properties_factory {
+class mock_file_configuration_factory {
 public:
     /**
      * @brief Generates a mode line.
@@ -82,7 +82,7 @@ public:
     /**
      * @brief Creates the general settings.
      */
-    file_properties make_file_properties() const;
+    file_configuration make_file_configuration() const;
 };
 
 } } }

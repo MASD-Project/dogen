@@ -61,7 +61,7 @@ create_aspect_properties(const annotations::aspect_annotations_repository& asrp,
 }
 
 element_properties_repository element_properties_repository_factory::merge(
-    const dogen::formatters::file_properties_workflow& fpwf,
+    const dogen::formatters::file_configuration_workflow& fpwf,
     const helper_properties_repository& hprp,
     const aspect_properties_repository& asrp,
     const formatter_properties_repository& fprp) const {
@@ -74,11 +74,11 @@ element_properties_repository element_properties_repository_factory::merge(
 
         // FIXME: hack
         if (boost::contains(id, "CMakeLists"))
-            ep.file_properties(fpwf.execute(cmake_modeline_name));
+            ep.file_configuration(fpwf.execute(cmake_modeline_name));
         else if (boost::contains(id, "options.odb"))
-            ep.file_properties(fpwf.execute(odb_modeline_name));
+            ep.file_configuration(fpwf.execute(odb_modeline_name));
         else
-            ep.file_properties(fp);
+            ep.file_configuration(fp);
 
         ep.formatter_properties(pair.second);
         const auto i(hprp.by_id().find(id));
@@ -105,7 +105,7 @@ element_properties_repository element_properties_repository_factory::merge(
 }
 
 element_properties_repository element_properties_repository_factory::make(
-    const dogen::formatters::file_properties_workflow& fpwf,
+    const dogen::formatters::file_configuration_workflow& fpwf,
     const annotations::helper_annotations_repository& hsrp,
     const annotations::aspect_annotations_repository& asrp,
     const annotations::streaming_annotations_repository& ssrp,

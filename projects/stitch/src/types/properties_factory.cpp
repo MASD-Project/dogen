@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/types/file_properties_workflow.hpp"
+#include "dogen/formatters/types/file_configuration_workflow.hpp"
 #include "dogen/stitch/types/stitching_settings_factory.hpp"
 #include "dogen/stitch/types/properties_factory.hpp"
 
@@ -37,10 +37,10 @@ properties_factory(const dynamic::repository& dynamic_repository,
     : dynamic_repository_(dynamic_repository),
       formatters_repository_(formatters_repository) {}
 
-boost::optional<formatters::file_properties> properties_factory::
-make_file_properties(const dynamic::object& o) const {
-    using dogen::formatters::file_properties_workflow;
-    file_properties_workflow f(dynamic_repository_, formatters_repository_);
+boost::optional<formatters::file_configuration> properties_factory::
+make_file_configuration(const dynamic::object& o) const {
+    using dogen::formatters::file_configuration_workflow;
+    file_configuration_workflow f(dynamic_repository_, formatters_repository_);
     return f.execute(cpp_modeline_name, o);
 }
 
@@ -53,7 +53,7 @@ make_stitching_settings(const dynamic::object& o) const {
 properties
 properties_factory::make(const dynamic::object& o) const {
     properties r;
-    r.file_properties(make_file_properties(o));
+    r.file_configuration(make_file_configuration(o));
     r.stitching_settings(make_stitching_settings(o));
     return r;
 }

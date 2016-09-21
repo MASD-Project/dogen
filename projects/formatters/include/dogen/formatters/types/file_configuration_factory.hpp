@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TYPES_FILE_PROPERTIES_FACTORY_HPP
-#define DOGEN_FORMATTERS_TYPES_FILE_PROPERTIES_FACTORY_HPP
+#ifndef DOGEN_FORMATTERS_TYPES_FILE_CONFIGURATION_FACTORY_HPP
+#define DOGEN_FORMATTERS_TYPES_FILE_CONFIGURATION_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,25 +31,25 @@
 #include "dogen/formatters/types/repository.hpp"
 #include "dogen/formatters/types/modeline_group.hpp"
 #include "dogen/formatters/types/file_annotations.hpp"
-#include "dogen/formatters/types/file_properties.hpp"
+#include "dogen/formatters/types/file_configuration.hpp"
 
 namespace dogen {
 namespace formatters {
 
 /**
- * @brief Creates the file properties by extracting information from
+ * @brief Creates the file configuration by extracting information from
  * meta-data and then post-processing it.
  */
-class file_properties_factory {
+class file_configuration_factory {
 public:
-    file_properties_factory() = delete;
-    file_properties_factory(const file_properties_factory&) = default;
-    file_properties_factory(file_properties_factory&&) = default;
-    ~file_properties_factory() = default;
+    file_configuration_factory() = delete;
+    file_configuration_factory(const file_configuration_factory&) = default;
+    file_configuration_factory(file_configuration_factory&&) = default;
+    ~file_configuration_factory() = default;
 
 public:
-    explicit file_properties_factory(const repository& rp);
-    file_properties_factory(const repository& rp,
+    explicit file_configuration_factory(const repository& rp);
+    file_configuration_factory(const repository& rp,
         const file_annotations& fallback);
 
 private:
@@ -104,9 +104,9 @@ private:
 
 public:
     /**
-     * @brief Generates the file properties.
+     * @brief Generates the file configuration.
      */
-    file_properties
+    file_configuration
     make(const std::string& modeline_name, const file_annotations& fa) const;
 
 private:

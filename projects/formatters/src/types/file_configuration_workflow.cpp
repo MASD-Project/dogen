@@ -18,32 +18,32 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/types/file_properties_workflow.hpp"
+#include "dogen/formatters/types/file_configuration_workflow.hpp"
 
 namespace dogen {
 namespace formatters {
 
-file_properties_workflow::file_properties_workflow(
+file_configuration_workflow::file_configuration_workflow(
     const dynamic::repository& drp,
     const repository& rp)
-    : annotations_factory_(drp), properties_factory_(rp) { }
+    : annotations_factory_(drp), configuration_factory_(rp) { }
 
-file_properties_workflow::file_properties_workflow(
+file_configuration_workflow::file_configuration_workflow(
     const dynamic::repository& drp, const repository& rp,
     const dynamic::object& fallback)
     : annotations_factory_(drp),
-      properties_factory_(rp, annotations_factory_.make(fallback)) { }
+      configuration_factory_(rp, annotations_factory_.make(fallback)) { }
 
-file_properties file_properties_workflow::
+file_configuration file_configuration_workflow::
 execute(const std::string& modeline_name) const {
     const auto fa = file_annotations();
-    return properties_factory_.make(modeline_name, fa);
+    return configuration_factory_.make(modeline_name, fa);
 }
 
-file_properties file_properties_workflow::execute(
+file_configuration file_configuration_workflow::execute(
     const std::string& modeline_name, const dynamic::object& o) const {
     const auto fa(annotations_factory_.make(o));
-    return properties_factory_.make(modeline_name, fa);
+    return configuration_factory_.make(modeline_name, fa);
 }
 
 } }

@@ -36,8 +36,8 @@
 #include "dogen/formatters/serialization/comment_styles_ser.hpp"
 #include "dogen/formatters/serialization/modeline_field_ser.hpp"
 #include "dogen/formatters/serialization/modeline_group_ser.hpp"
-#include "dogen/formatters/serialization/file_properties_ser.hpp"
 #include "dogen/formatters/serialization/file_annotations_ser.hpp"
+#include "dogen/formatters/serialization/file_configuration_ser.hpp"
 #include "dogen/formatters/serialization/modeline_locations_ser.hpp"
 #include "dogen/formatters/serialization/infix_configuration_ser.hpp"
 

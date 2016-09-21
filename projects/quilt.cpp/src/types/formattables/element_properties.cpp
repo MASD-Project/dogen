@@ -26,31 +26,31 @@ namespace cpp {
 namespace formattables {
 
 element_properties::element_properties(element_properties&& rhs)
-    : file_properties_(std::move(rhs.file_properties_)),
+    : file_configuration_(std::move(rhs.file_configuration_)),
       formatter_properties_(std::move(rhs.formatter_properties_)),
       helper_properties_(std::move(rhs.helper_properties_)),
       aspect_properties_(std::move(rhs.aspect_properties_)) { }
 
 element_properties::element_properties(
-    const boost::optional<dogen::formatters::file_properties>& file_properties,
+    const boost::optional<dogen::formatters::file_configuration>& file_configuration,
     const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties>& formatter_properties,
     const std::list<dogen::quilt::cpp::formattables::helper_properties>& helper_properties,
     const dogen::quilt::cpp::formattables::aspect_properties& aspect_properties)
-    : file_properties_(file_properties),
+    : file_configuration_(file_configuration),
       formatter_properties_(formatter_properties),
       helper_properties_(helper_properties),
       aspect_properties_(aspect_properties) { }
 
 void element_properties::swap(element_properties& other) noexcept {
     using std::swap;
-    swap(file_properties_, other.file_properties_);
+    swap(file_configuration_, other.file_configuration_);
     swap(formatter_properties_, other.formatter_properties_);
     swap(helper_properties_, other.helper_properties_);
     swap(aspect_properties_, other.aspect_properties_);
 }
 
 bool element_properties::operator==(const element_properties& rhs) const {
-    return file_properties_ == rhs.file_properties_ &&
+    return file_configuration_ == rhs.file_configuration_ &&
         formatter_properties_ == rhs.formatter_properties_ &&
         helper_properties_ == rhs.helper_properties_ &&
         aspect_properties_ == rhs.aspect_properties_;
@@ -62,20 +62,20 @@ element_properties& element_properties::operator=(element_properties other) {
     return *this;
 }
 
-const boost::optional<dogen::formatters::file_properties>& element_properties::file_properties() const {
-    return file_properties_;
+const boost::optional<dogen::formatters::file_configuration>& element_properties::file_configuration() const {
+    return file_configuration_;
 }
 
-boost::optional<dogen::formatters::file_properties>& element_properties::file_properties() {
-    return file_properties_;
+boost::optional<dogen::formatters::file_configuration>& element_properties::file_configuration() {
+    return file_configuration_;
 }
 
-void element_properties::file_properties(const boost::optional<dogen::formatters::file_properties>& v) {
-    file_properties_ = v;
+void element_properties::file_configuration(const boost::optional<dogen::formatters::file_configuration>& v) {
+    file_configuration_ = v;
 }
 
-void element_properties::file_properties(const boost::optional<dogen::formatters::file_properties>&& v) {
-    file_properties_ = std::move(v);
+void element_properties::file_configuration(const boost::optional<dogen::formatters::file_configuration>&& v) {
+    file_configuration_ = std::move(v);
 }
 
 const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties>& element_properties::formatter_properties() const {

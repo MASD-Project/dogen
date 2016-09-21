@@ -18,58 +18,58 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/types/file_properties.hpp"
+#include "dogen/formatters/types/file_configuration.hpp"
 
 namespace dogen {
 namespace formatters {
 
-file_properties::file_properties()
+file_configuration::file_configuration()
     : generate_preamble_(static_cast<bool>(0)) { }
 
-file_properties::file_properties(
+file_configuration::file_configuration(
     const bool generate_preamble,
     const dogen::formatters::decoration& decoration)
     : generate_preamble_(generate_preamble),
       decoration_(decoration) { }
 
-void file_properties::swap(file_properties& other) noexcept {
+void file_configuration::swap(file_configuration& other) noexcept {
     using std::swap;
     swap(generate_preamble_, other.generate_preamble_);
     swap(decoration_, other.decoration_);
 }
 
-bool file_properties::operator==(const file_properties& rhs) const {
+bool file_configuration::operator==(const file_configuration& rhs) const {
     return generate_preamble_ == rhs.generate_preamble_ &&
         decoration_ == rhs.decoration_;
 }
 
-file_properties& file_properties::operator=(file_properties other) {
+file_configuration& file_configuration::operator=(file_configuration other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-bool file_properties::generate_preamble() const {
+bool file_configuration::generate_preamble() const {
     return generate_preamble_;
 }
 
-void file_properties::generate_preamble(const bool v) {
+void file_configuration::generate_preamble(const bool v) {
     generate_preamble_ = v;
 }
 
-const dogen::formatters::decoration& file_properties::decoration() const {
+const dogen::formatters::decoration& file_configuration::decoration() const {
     return decoration_;
 }
 
-dogen::formatters::decoration& file_properties::decoration() {
+dogen::formatters::decoration& file_configuration::decoration() {
     return decoration_;
 }
 
-void file_properties::decoration(const dogen::formatters::decoration& v) {
+void file_configuration::decoration(const dogen::formatters::decoration& v) {
     decoration_ = v;
 }
 
-void file_properties::decoration(const dogen::formatters::decoration&& v) {
+void file_configuration::decoration(const dogen::formatters::decoration&& v) {
     decoration_ = std::move(v);
 }
 

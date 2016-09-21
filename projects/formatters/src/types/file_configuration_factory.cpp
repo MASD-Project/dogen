@@ -23,12 +23,12 @@
 #include "dogen/formatters/types/hydration_workflow.hpp"
 #include "dogen/formatters/types/code_generation_marker_factory.hpp"
 #include "dogen/formatters/types/building_error.hpp"
-#include "dogen/formatters/types/file_properties_factory.hpp"
+#include "dogen/formatters/types/file_configuration_factory.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("formatters.file_properties_factory"));
+auto lg(logger_factory("formatters.file_configuration_factory"));
 
 const std::string missing_context_ptr("Context pointer is null");
 const std::string licence_not_found("Licence not found: ");
@@ -40,10 +40,10 @@ const std::string modeline_not_found("Modeline not found: ");
 namespace dogen {
 namespace formatters {
 
-file_properties_factory::file_properties_factory(const repository& rp)
+file_configuration_factory::file_configuration_factory(const repository& rp)
     : repository_(rp) { }
 
-file_properties_factory::file_properties_factory(const repository& rp,
+file_configuration_factory::file_configuration_factory(const repository& rp,
     const file_annotations& fallback)
     : repository_(rp),
       default_licence_text_(get_licence_text(fallback)),
@@ -53,7 +53,7 @@ file_properties_factory::file_properties_factory(const repository& rp,
       default_generate_preamble_(fallback.generate_preamble()) { }
 
 boost::optional<std::string>
-file_properties_factory::get_licence_text(const file_annotations& fa) const {
+file_configuration_factory::get_licence_text(const file_annotations& fa) const {
     if (fa.licence_name().empty())
         return boost::optional<std::string>();
 
@@ -67,7 +67,7 @@ file_properties_factory::get_licence_text(const file_annotations& fa) const {
 }
 
 boost::optional<licence>
-file_properties_factory::get_licence(const file_annotations& fa) const {
+file_configuration_factory::get_licence(const file_annotations& fa) const {
     const auto overriden_licence_text(get_licence_text(fa));
     const auto overriden_copyright_notices(fa.copyright_notices());
 
@@ -92,7 +92,7 @@ file_properties_factory::get_licence(const file_annotations& fa) const {
 }
 
 boost::optional<modeline_group>
-file_properties_factory::get_modeline_group(const file_annotations& fa) const {
+file_configuration_factory::get_modeline_group(const file_annotations& fa) const {
     if (fa.modeline_group_name().empty())
         return boost::optional<modeline_group>();
 
@@ -105,7 +105,7 @@ file_properties_factory::get_modeline_group(const file_annotations& fa) const {
     return i->second;
 }
 
-modeline file_properties_factory::get_modeline_from_group(
+modeline file_configuration_factory::get_modeline_from_group(
     const std::string& modeline_name, const modeline_group& mg) const {
     const auto i(mg.modelines().find(modeline_name));
     if (i == mg.modelines().end()) {
@@ -117,7 +117,7 @@ modeline file_properties_factory::get_modeline_from_group(
 }
 
 boost::optional<modeline>
-file_properties_factory::get_modeline(const std::string& modeline_name,
+file_configuration_factory::get_modeline(const std::string& modeline_name,
     const file_annotations& fa) const {
 
     const auto overridden_modeline_group(get_modeline_group(fa));
@@ -133,7 +133,7 @@ file_properties_factory::get_modeline(const std::string& modeline_name,
 }
 
 boost::optional<std::string>
-file_properties_factory::get_marker(const file_annotations& fa) const {
+file_configuration_factory::get_marker(const file_annotations& fa) const {
 
     const auto& msg(fa.marker_message());
     if (msg.empty())
@@ -145,7 +145,7 @@ file_properties_factory::get_marker(const file_annotations& fa) const {
     return f.make();
 }
 
-std::string file_properties_factory::
+std::string file_configuration_factory::
 get_marker_or_default(const file_annotations& fa) const {
     const auto overridden_marker(get_marker(fa));
     if (overridden_marker)
@@ -157,7 +157,7 @@ get_marker_or_default(const file_annotations& fa) const {
     return std::string();
 }
 
-bool file_properties_factory::
+bool file_configuration_factory::
 get_generate_preamble_or_default(const file_annotations& fa) const {
     const auto overriden_generate_preamble(fa.generate_preamble());
     if (!overriden_generate_preamble && !default_generate_preamble_)
@@ -169,14 +169,14 @@ get_generate_preamble_or_default(const file_annotations& fa) const {
         return *default_generate_preamble_;
 }
 
-file_properties file_properties_factory::make(const std::string& modeline_name,
+file_configuration file_configuration_factory::make(const std::string& modeline_name,
     const file_annotations& fa) const {
     const auto modeline(get_modeline(modeline_name, fa));
     const auto licence(get_licence(fa));
     const auto marker(get_marker_or_default(fa));
     const decoration d(modeline, licence, marker);
     const bool gp(get_generate_preamble_or_default(fa));
-    return file_properties(gp, d);
+    return file_configuration(gp, d);
 }
 
 } }

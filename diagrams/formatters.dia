@@ -3758,13 +3758,13 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#file_properties#</dia:string>
+        <dia:string>#file_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Properties pertaining to a file and common to all formatters.#</dia:string>
+        <dia:string>#Configuration pertaining to a file and common to all formatters.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -4780,7 +4780,7 @@ then make use of it.
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#file_properties_factory#</dia:string>
+        <dia:string>#file_configuration_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -4876,7 +4876,7 @@ then make use of it.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#file_properties#</dia:string>
+            <dia:string>#file_configuration#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -8904,10 +8904,10 @@ then make use of it.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#file_properties_#</dia:string>
+            <dia:string>#file_configuration_#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::optional&lt;formatters::file_properties&gt;#</dia:string>
+            <dia:string>#boost::optional&lt;formatters::file_configuration&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -9024,7 +9024,7 @@ then make use of it.
                 <dia:string>#fp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#boost::optional&lt;formatters::file_properties&gt;#</dia:string>
+                <dia:string>#boost::optional&lt;formatters::file_configuration&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -11584,7 +11584,7 @@ than one element.#</dia:string>
         <dia:real val="6.8000000000000007"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#file_properties_workflow#</dia:string>
+        <dia:string>#file_configuration_workflow#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -11674,7 +11674,7 @@ than one element.#</dia:string>
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#file_properties_workflow#</dia:string>
+            <dia:string>#file_configuration_workflow#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -11722,7 +11722,7 @@ than one element.#</dia:string>
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#file_properties_workflow#</dia:string>
+            <dia:string>#file_configuration_workflow#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -11793,7 +11793,7 @@ than one element.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#file_properties#</dia:string>
+            <dia:string>#file_configuration#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -11929,7 +11929,7 @@ than one element.#</dia:string>
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O87">
       <dia:attribute name="name">
-        <dia:string>#creates file properties using &gt;#</dia:string>
+        <dia:string>#creates file configuration using &gt;#</dia:string>
       </dia:attribute>
       <dia:attribute name="direction">
         <dia:enum val="1"/>

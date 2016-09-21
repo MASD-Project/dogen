@@ -25,7 +25,7 @@
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
-#include "dogen/formatters/test/mock_file_properties_factory.hpp"
+#include "dogen/formatters/test/mock_file_configuration_factory.hpp"
 #include "dogen/formatters/types/cpp/boilerplate_formatter.hpp"
 
 namespace {
@@ -34,7 +34,7 @@ const std::string test_module("formatters");
 const std::string test_suite("boilerplate_formatter_tests");
 const std::string empty;
 
-dogen::formatters::test::mock_file_properties_factory factory_;
+dogen::formatters::test::mock_file_configuration_factory factory_;
 const bool generate_premable(true);
 
 const std::string modeline_top(R"(/* -*- a_field: a_value -*-

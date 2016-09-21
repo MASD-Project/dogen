@@ -207,7 +207,7 @@ public:
     /**@{*/
     void make_decoration_preamble();
     void make_decoration_preamble(
-        const boost::optional<dogen::formatters::file_properties> gs);
+        const boost::optional<dogen::formatters::file_configuration> gs);
     /**@}*/
 
     /**

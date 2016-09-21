@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/formatters/test/mock_file_properties_factory.hpp"
+#include "dogen/formatters/test/mock_file_configuration_factory.hpp"
 
 namespace  {
 
@@ -34,7 +34,7 @@ namespace dogen {
 namespace formatters {
 namespace test {
 
-modeline mock_file_properties_factory::
+modeline mock_file_configuration_factory::
 make_modeline(const modeline_locations l) const {
     modeline r;
     r.editor(editors::emacs);
@@ -48,7 +48,7 @@ make_modeline(const modeline_locations l) const {
     return r;
 }
 
-licence mock_file_properties_factory::
+licence mock_file_configuration_factory::
 make_licence(const bool is_empty, const bool is_multiline) const {
     licence r;
     if (is_empty)
@@ -69,7 +69,7 @@ make_licence(const bool is_empty, const bool is_multiline) const {
     return r;
 }
 
-std::list<std::string> mock_file_properties_factory::make_includes(
+std::list<std::string> mock_file_configuration_factory::make_includes(
     const bool is_empty) const {
     std::list<std::string> r;
     if (is_empty)
@@ -83,17 +83,17 @@ std::list<std::string> mock_file_properties_factory::make_includes(
     return r;
 }
 
-std::string mock_file_properties_factory::
+std::string mock_file_configuration_factory::
 make_marker(const bool is_empty) const {
     return is_empty ? empty_marker : marker;
 }
 
-std::string mock_file_properties_factory::
+std::string mock_file_configuration_factory::
 make_header_guard(const bool is_empty) const {
     return is_empty ? empty_header_guard : header_guard;
 }
 
-decoration mock_file_properties_factory::
+decoration mock_file_configuration_factory::
 make_decoration(const modeline_locations ml, const bool use_multiline_licence,
     const bool use_empty_licence, const bool use_empty_marker) const {
     const auto inc(make_includes());
@@ -103,15 +103,15 @@ make_decoration(const modeline_locations ml, const bool use_multiline_licence,
     return r;
 }
 
-decoration mock_file_properties_factory::make_empty_decoration() const {
+decoration mock_file_configuration_factory::make_empty_decoration() const {
     const modeline m;
     licence l;
     const decoration r(m, l, make_marker(true/*use_empty_marker*/));
     return r;
 }
 
-file_properties mock_file_properties_factory::make_file_properties() const {
-    file_properties r;
+file_configuration mock_file_configuration_factory::make_file_configuration() const {
+    file_configuration r;
     r.decoration(make_decoration());
     return r;
 }

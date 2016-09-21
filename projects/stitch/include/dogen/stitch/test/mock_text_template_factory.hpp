@@ -217,7 +217,7 @@ public:
      * @brief Populate file properties in the template. Also includes
      * a single line of text.
      */
-    text_template make_with_file_properties() const;
+    text_template make_with_file_configuration() const;
 
     /**
      * @brief Populate containing namespace in the text template.

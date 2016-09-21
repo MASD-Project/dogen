@@ -275,7 +275,7 @@ dogen::formatters::cpp::scoped_boilerplate_formatter
 assistant::make_scoped_boilerplate_formatter() {
     ensure_formatter_properties_are_present();
     const auto& fmtp(*formatter_properties_);
-    const auto fp(context_.element_properties().file_properties());
+    const auto fp(context_.element_properties().file_configuration());
     return dogen::formatters::cpp::scoped_boilerplate_formatter(
         stream(), fp, fmtp.inclusion_dependencies(),
         fmtp.header_guard() ? *(fmtp.header_guard()) : empty);
@@ -289,12 +289,12 @@ assistant::make_scoped_namespace_formatter(const std::list<std::string>& ns) {
 }
 
 void assistant::make_decoration_preamble() {
-    const auto fp(context_.element_properties().file_properties());
+    const auto fp(context_.element_properties().file_configuration());
     make_decoration_preamble(fp);
 }
 
 void assistant::make_decoration_preamble(
-    const boost::optional<dogen::formatters::file_properties> fp) {
+    const boost::optional<dogen::formatters::file_configuration> fp) {
     if (!fp)
         return;
 

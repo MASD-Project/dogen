@@ -21,11 +21,11 @@
 #include <ostream>
 #include "dogen/stitch/io/properties_io.hpp"
 #include "dogen/stitch/io/stitching_settings_io.hpp"
-#include "dogen/formatters/io/file_properties_io.hpp"
+#include "dogen/formatters/io/file_configuration_io.hpp"
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::formatters::file_properties>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::formatters::file_configuration>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)
@@ -44,7 +44,7 @@ namespace stitch {
 std::ostream& operator<<(std::ostream& s, const properties& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::stitch::properties\"" << ", "
-      << "\"file_properties\": " << v.file_properties() << ", "
+      << "\"file_configuration\": " << v.file_configuration() << ", "
       << "\"stitching_settings\": " << v.stitching_settings()
       << " }";
     return(s);

@@ -120,7 +120,7 @@ create_formatter_properties(const dynamic::repository& drp,
 }
 
 element_properties_repository workflow::create_element_properties_repository(
-    const dogen::formatters::file_properties_workflow& fpwf,
+    const dogen::formatters::file_configuration_workflow& fpwf,
     const annotations::helper_annotations_repository& hsrp,
     const annotations::aspect_annotations_repository& asrp,
     const annotations::streaming_annotations_repository& ssrp,
@@ -134,7 +134,7 @@ element_properties_repository workflow::create_element_properties_repository(
 element_properties_repository workflow::execute(const options::cpp_options& opts,
     const dynamic::repository& drp,
     const dynamic::object& root_object,
-    const dogen::formatters::file_properties_workflow& fpwf,
+    const dogen::formatters::file_configuration_workflow& fpwf,
     const formatters::container& fc,
     const annotations::streaming_annotations_repository& ssrp,
     const yarn::model& m) const {
