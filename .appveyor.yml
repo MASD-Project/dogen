@@ -28,7 +28,7 @@ install:
   - cinst cmake
   - cmd: set PATH=C:\MinGW\bin;%PATH%
   - cmd: set PATH=%PATH%:"C:\Program Files\CMake\bin";"C:\Program Files (x86)\cmake\bin"
-  - "C:\Program Files\CMake\bin\cmake.exe" --version
+  - cmd: "C:\Program Files\CMake\bin\cmake.exe" --version
 
   #
   # conan
