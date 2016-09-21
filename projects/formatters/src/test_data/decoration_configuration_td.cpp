@@ -18,7 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/test_data/decoration_td.hpp"
+#include <sstream>
+#include "dogen/formatters/test_data/licence_td.hpp"
+#include "dogen/formatters/test_data/modeline_td.hpp"
 #include "dogen/formatters/test_data/decoration_configuration_td.hpp"
 
 namespace {
@@ -27,9 +29,34 @@ bool create_bool(const unsigned int position) {
     return (position % 2) == 0;
 }
 
-dogen::formatters::decoration
-create_dogen_formatters_decoration(const unsigned int position) {
-    return dogen::formatters::decoration_generator::create(position);
+dogen::formatters::modeline
+create_dogen_formatters_modeline(const unsigned int position) {
+    return dogen::formatters::modeline_generator::create(position);
+}
+
+boost::optional<dogen::formatters::modeline>
+create_boost_optional_dogen_formatters_modeline(unsigned int position) {
+    boost::optional<dogen::formatters::modeline> r(
+        create_dogen_formatters_modeline(position));
+    return r;
+}
+
+dogen::formatters::licence
+create_dogen_formatters_licence(const unsigned int position) {
+    return dogen::formatters::licence_generator::create(position);
+}
+
+boost::optional<dogen::formatters::licence>
+create_boost_optional_dogen_formatters_licence(unsigned int position) {
+    boost::optional<dogen::formatters::licence> r(
+        create_dogen_formatters_licence(position));
+    return r;
+}
+
+std::string create_std_string(const unsigned int position) {
+    std::ostringstream s;
+    s << "a_string_" << position;
+    return s.str();
 }
 
 }
@@ -42,7 +69,9 @@ decoration_configuration_generator::decoration_configuration_generator() : posit
 void decoration_configuration_generator::
 populate(const unsigned int position, result_type& v) {
     v.generate_preamble(create_bool(position + 0));
-    v.decoration(create_dogen_formatters_decoration(position + 1));
+    v.modeline(create_boost_optional_dogen_formatters_modeline(position + 1));
+    v.licence(create_boost_optional_dogen_formatters_licence(position + 2));
+    v.code_generation_marker(create_std_string(position + 3));
 }
 
 decoration_configuration_generator::result_type

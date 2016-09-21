@@ -70,22 +70,23 @@ add_licence(std::list<std::string>& content, const licence& l) const {
 
 void decoration_formatter::format_preamble(
     std::ostream& s, const comment_styles& single_line_cs,
-    const comment_styles& multi_line_cs, const decoration& d) const {
+    const comment_styles& multi_line_cs,
+    const decoration_configuration& dc) const {
 
     bool is_top(false);
     const auto top(modeline_locations::top);
-    bool has_modeline(d.modeline());
+    bool has_modeline(dc.modeline());
     std::list<std::string> content;
     if (has_modeline) {
-        is_top = d.modeline()->location() == top;
+        is_top = dc.modeline()->location() == top;
 
         if (is_top)
-            add_modeline(content, *d.modeline());
+            add_modeline(content, *dc.modeline());
     }
 
-    add_marker(content, d.code_generation_marker());
-    if (d.licence())
-        add_licence(content, *d.licence());
+    add_marker(content, dc.code_generation_marker());
+    if (dc.licence())
+        add_licence(content, *dc.licence());
 
     if (content.empty())
         return;
@@ -111,17 +112,18 @@ void decoration_formatter::format_preamble(
     }
 }
 
-void decoration_formatter::format_preamble(
-    std::ostream& s, const comment_styles& cs, const decoration& d) const {
-    format_preamble(s, cs, cs, d);
+void decoration_formatter::
+format_preamble(std::ostream& s, const comment_styles& cs,
+    const decoration_configuration& dc) const {
+    format_preamble(s, cs, cs, dc);
 }
 
 void decoration_formatter::format_postamble(std::ostream& s,
-    const comment_styles& cs, const decoration& d) const {
-    if (!d.modeline())
+    const comment_styles& cs, const decoration_configuration& dc) const {
+    if (!dc.modeline())
         return;
 
-    const auto m(*d.modeline());
+    const auto m(*dc.modeline());
     if (m.location() == modeline_locations::bottom) {
         std::list<std::string> content;
         add_modeline(content, m);

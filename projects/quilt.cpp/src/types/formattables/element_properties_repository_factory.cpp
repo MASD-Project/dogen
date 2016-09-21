@@ -61,24 +61,24 @@ create_aspect_properties(const annotations::aspect_annotations_repository& asrp,
 }
 
 element_properties_repository element_properties_repository_factory::merge(
-    const dogen::formatters::decoration_configuration_workflow& fpwf,
+    const dogen::formatters::decoration_configuration_factory& dcf,
     const helper_properties_repository& hprp,
     const aspect_properties_repository& asrp,
     const formatter_properties_repository& fprp) const {
 
     element_properties_repository r;
-    const auto fp(fpwf.execute(cpp_modeline_name));
+    const auto dc(dcf.make(cpp_modeline_name));
     for(const auto& pair : fprp.by_id()) {
         const auto& id(pair.first);
         auto& ep(r.by_id()[id]);
 
         // FIXME: hack
         if (boost::contains(id, "CMakeLists"))
-            ep.decoration_configuration(fpwf.execute(cmake_modeline_name));
+            ep.decoration_configuration(dcf.make(cmake_modeline_name));
         else if (boost::contains(id, "options.odb"))
-            ep.decoration_configuration(fpwf.execute(odb_modeline_name));
+            ep.decoration_configuration(dcf.make(odb_modeline_name));
         else
-            ep.decoration_configuration(fp);
+            ep.decoration_configuration(dc);
 
         ep.formatter_properties(pair.second);
         const auto i(hprp.by_id().find(id));
@@ -105,7 +105,7 @@ element_properties_repository element_properties_repository_factory::merge(
 }
 
 element_properties_repository element_properties_repository_factory::make(
-    const dogen::formatters::decoration_configuration_workflow& fpwf,
+    const dogen::formatters::decoration_configuration_factory& dcf,
     const annotations::helper_annotations_repository& hsrp,
     const annotations::aspect_annotations_repository& asrp,
     const annotations::streaming_annotations_repository& ssrp,
@@ -114,7 +114,7 @@ element_properties_repository element_properties_repository_factory::make(
     const yarn::model& m) const {
     const auto hprp(create_helper_properties(hsrp, ssrp, fc, m));
     const auto aprp(create_aspect_properties(asrp, m));
-    const auto r(merge(fpwf, hprp, aprp, fprp));
+    const auto r(merge(dcf, hprp, aprp, fprp));
     BOOST_LOG_SEV(lg, debug) << "Finished computing element properties:" << r;
     return r;
 }

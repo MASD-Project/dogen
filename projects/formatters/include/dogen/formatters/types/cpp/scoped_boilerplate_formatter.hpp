@@ -43,7 +43,7 @@ class scoped_boilerplate_formatter {
 public:
     scoped_boilerplate_formatter(
         std::ostream& s,
-        const boost::optional<decoration_configuration>& dc,
+        const boost::optional<decoration_configuration>& odc,
         const std::list<std::string>& inclusion_dependencies,
         const std::string& header_guard);
 

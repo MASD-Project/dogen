@@ -93,28 +93,23 @@ make_header_guard(const bool is_empty) const {
     return is_empty ? empty_header_guard : header_guard;
 }
 
-decoration mock_decoration_configuration_factory::
-make_decoration(const modeline_locations ml, const bool use_multiline_licence,
-    const bool use_empty_licence, const bool use_empty_marker) const {
+decoration_configuration mock_decoration_configuration_factory::
+make_decoration_configuration(const modeline_locations ml,
+    const bool use_multiline_licence, const bool use_empty_licence,
+    const bool use_empty_marker) const {
     const auto inc(make_includes());
     const auto m(make_modeline(ml));
     const auto l(make_licence(use_empty_licence, use_multiline_licence));
-    const decoration r(m, l, make_marker(use_empty_marker));
-    return r;
-}
-
-decoration mock_decoration_configuration_factory::make_empty_decoration() const {
-    const modeline m;
-    licence l;
-    const decoration r(m, l, make_marker(true/*use_empty_marker*/));
-    return r;
+    const auto mk(make_marker(use_empty_marker));
+    return decoration_configuration(true/*generate_preamble*/, m, l, mk);
 }
 
 decoration_configuration mock_decoration_configuration_factory::
-make_decoration_configuration() const {
-    decoration_configuration r;
-    r.decoration(make_decoration());
-    return r;
+make_empty_decoration_configuration() const {
+    const modeline m;
+    licence l;
+    const auto mk(make_marker(true/*empty_marker*/));
+    return decoration_configuration(true/*generate_preamble*/, m, l, mk);
 }
 
 } } }

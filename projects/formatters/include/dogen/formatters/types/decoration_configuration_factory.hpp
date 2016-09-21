@@ -27,32 +27,42 @@
 
 #include <string>
 #include <boost/optional.hpp>
+#include "dogen/dynamic/types/object.hpp"
+#include "dogen/dynamic/types/repository.hpp"
 #include "dogen/formatters/types/licence.hpp"
 #include "dogen/formatters/types/repository.hpp"
 #include "dogen/formatters/types/modeline_group.hpp"
 #include "dogen/formatters/types/decoration_annotations.hpp"
 #include "dogen/formatters/types/decoration_configuration.hpp"
+#include "dogen/formatters/types/decoration_annotations_factory.hpp"
 
 namespace dogen {
 namespace formatters {
 
 /**
- * @brief Creates the file configuration by extracting information from
- * meta-data and then post-processing it.
+ * @brief Creates the decoration configuration.
  */
 class decoration_configuration_factory {
 public:
-    decoration_configuration_factory() = delete;
-    decoration_configuration_factory(
-        const decoration_configuration_factory&) = default;
-    decoration_configuration_factory(
-        decoration_configuration_factory&&) = default;
-    ~decoration_configuration_factory() = default;
+    /**
+     * @brief Initialise a new decoration configuration factory,
+     * without access to fallbacks. This constructor is used by
+     * stitch.
+     *
+     * @param rp where to look up reference data.
+     */
+    decoration_configuration_factory(const dynamic::repository& drp,
+        const repository& rp);
 
-public:
-    explicit decoration_configuration_factory(const repository& rp);
-    decoration_configuration_factory(const repository& rp,
-        const decoration_annotations& fallback);
+    /**
+     * @brief Initialise a new decoration configuration factory, with
+     * access to fallbacks. This constructor is used by quilt.cpp.
+     *
+     * @param rp where to look up reference data.
+     * @param fallback object to use to construct defaults, if any.
+     */
+    decoration_configuration_factory(const dynamic::repository& drp,
+        const repository& rp, const dynamic::object& fallback);
 
 private:
     /**
@@ -107,15 +117,28 @@ private:
     bool
     get_generate_preamble_or_default(const decoration_annotations& fa) const;
 
-public:
+private:
     /**
-     * @brief Generates the file configuration.
+     * @brief Internal method to generate the decoration
+     * configuration.
      */
     decoration_configuration make(const std::string& modeline_name,
         const decoration_annotations& fa) const;
 
+public:
+    /**
+     * @brief Generates the decoration configuration.
+     */
+    /**@{*/
+    decoration_configuration make(const std::string& modeline_name) const;
+    decoration_configuration make(const std::string& modeline_name,
+        const dynamic::object& o) const;
+    /**@}*/
+
 private:
     const repository& repository_;
+    const decoration_annotations_factory annotations_factory_;
+    const decoration_annotations default_annotations_;
     const boost::optional<std::string> default_licence_text_;
     const boost::optional<std::list<std::string>> default_copyright_notices_;
     const boost::optional<modeline_group> default_modeline_group_;

@@ -289,18 +289,18 @@ assistant::make_scoped_namespace_formatter(const std::list<std::string>& ns) {
 }
 
 void assistant::make_decoration_preamble() {
-    const auto fp(context_.element_properties().decoration_configuration());
-    make_decoration_preamble(fp);
+    const auto dc(context_.element_properties().decoration_configuration());
+    make_decoration_preamble(dc);
 }
 
 void assistant::make_decoration_preamble(
-    const boost::optional<dogen::formatters::decoration_configuration> fp) {
-    if (!fp)
+    const boost::optional<dogen::formatters::decoration_configuration> dc) {
+    if (!dc)
         return;
 
     dogen::formatters::decoration_formatter af;
-    af.format_preamble(stream(), dogen::formatters::comment_styles::shell_style,
-        (*fp).decoration());
+    const auto comment_style(dogen::formatters::comment_styles::shell_style);
+    af.format_preamble(stream(), comment_style, *dc);
 }
 
 dogen::formatters::file assistant::

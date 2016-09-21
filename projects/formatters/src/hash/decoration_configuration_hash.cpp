@@ -18,7 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/hash/decoration_hash.hpp"
+#include "dogen/formatters/hash/licence_hash.hpp"
+#include "dogen/formatters/hash/modeline_hash.hpp"
 #include "dogen/formatters/hash/decoration_configuration_hash.hpp"
 
 namespace {
@@ -27,6 +28,26 @@ template <typename HashableType>
 inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+inline std::size_t hash_boost_optional_dogen_formatters_modeline(const boost::optional<dogen::formatters::modeline>& v) {
+    std::size_t seed(0);
+
+    if (!v)
+        return seed;
+
+    combine(seed, *v);
+    return seed;
+}
+
+inline std::size_t hash_boost_optional_dogen_formatters_licence(const boost::optional<dogen::formatters::licence>& v) {
+    std::size_t seed(0);
+
+    if (!v)
+        return seed;
+
+    combine(seed, *v);
+    return seed;
 }
 
 }
@@ -38,7 +59,9 @@ std::size_t decoration_configuration_hasher::hash(const decoration_configuration
     std::size_t seed(0);
 
     combine(seed, v.generate_preamble());
-    combine(seed, v.decoration());
+    combine(seed, hash_boost_optional_dogen_formatters_modeline(v.modeline()));
+    combine(seed, hash_boost_optional_dogen_formatters_licence(v.licence()));
+    combine(seed, v.code_generation_marker());
 
     return seed;
 }

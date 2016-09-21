@@ -27,7 +27,7 @@
 
 #include <iosfwd>
 #include "dogen/formatters/types/comment_styles.hpp"
-#include "dogen/formatters/types/decoration.hpp"
+#include "dogen/formatters/types/decoration_configuration.hpp"
 
 namespace dogen {
 namespace formatters {
@@ -52,13 +52,14 @@ private:
 
 public:
     void format_preamble(std::ostream& s, const comment_styles& single_line_cs,
-        const comment_styles& multi_line_cs, const decoration& d) const;
+        const comment_styles& multi_line_cs,
+        const decoration_configuration& dc) const;
 
     void format_preamble(std::ostream& s, const comment_styles& cs,
-        const decoration& d) const;
+        const decoration_configuration& dc) const;
 
     void format_postamble(std::ostream& s, const comment_styles& cs,
-        const decoration& d) const;
+        const decoration_configuration& dc) const;
 };
 
 } }

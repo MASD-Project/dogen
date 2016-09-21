@@ -41,16 +41,20 @@ namespace dogen {
 namespace formatters {
 
 decoration_configuration_factory::
-decoration_configuration_factory(const repository& rp) : repository_(rp) { }
+decoration_configuration_factory(const dynamic::repository& drp,
+    const repository& rp) : repository_(rp), annotations_factory_(drp),
+                            default_annotations_() { }
 
-decoration_configuration_factory::decoration_configuration_factory(
-    const repository& rp, const decoration_annotations& fallback)
-    : repository_(rp),
-      default_licence_text_(get_licence_text(fallback)),
-      default_copyright_notices_(fallback.copyright_notices()),
-      default_modeline_group_(get_modeline_group(fallback)),
-      default_marker_(get_marker(fallback)),
-      default_generate_preamble_(fallback.generate_preamble()) { }
+decoration_configuration_factory::
+decoration_configuration_factory(const dynamic::repository& drp,
+    const repository& rp, const dynamic::object& fallback)
+    : repository_(rp), annotations_factory_(drp),
+      default_annotations_(annotations_factory_.make(fallback)),
+      default_licence_text_(get_licence_text(default_annotations_)),
+      default_copyright_notices_(default_annotations_.copyright_notices()),
+      default_modeline_group_(get_modeline_group(default_annotations_)),
+      default_marker_(get_marker(default_annotations_)),
+      default_generate_preamble_(default_annotations_.generate_preamble()) {}
 
 boost::optional<std::string> decoration_configuration_factory::
 get_licence_text(const decoration_annotations& fa) const {
@@ -175,9 +179,21 @@ decoration_configuration_factory::make(const std::string& modeline_name,
     const auto modeline(get_modeline(modeline_name, fa));
     const auto licence(get_licence(fa));
     const auto marker(get_marker_or_default(fa));
-    const decoration d(modeline, licence, marker);
     const bool gp(get_generate_preamble_or_default(fa));
-    return decoration_configuration(gp, d);
+    decoration_configuration r(gp, modeline, licence, marker);
+    return r;
+}
+
+decoration_configuration decoration_configuration_factory::
+make(const std::string& modeline_name) const {
+    const auto da = decoration_annotations();
+    return make(modeline_name, da);
+}
+
+decoration_configuration decoration_configuration_factory::make(
+    const std::string& modeline_name, const dynamic::object& o) const {
+    const auto da(annotations_factory_.make(o));
+    return make(modeline_name, da);
 }
 
 } }

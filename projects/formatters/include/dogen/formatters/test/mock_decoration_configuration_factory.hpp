@@ -29,7 +29,6 @@
 #include <string>
 #include "dogen/formatters/types/licence.hpp"
 #include "dogen/formatters/types/modeline.hpp"
-#include "dogen/formatters/types/decoration.hpp"
 #include "dogen/formatters/types/modeline_locations.hpp"
 #include "dogen/formatters/types/decoration_configuration.hpp"
 
@@ -66,23 +65,21 @@ public:
     std::string make_header_guard(const bool is_empty = false) const;
 
     /**
-     * @brief Creates an decoration.
+     * @brief Creates a decoration configuration.
+     *
+     * If called without parameters, creates a decoration
+     * configuration with sensible defaults.
      */
-    decoration make_decoration(
+    decoration_configuration make_decoration_configuration(
         const modeline_locations ml = modeline_locations::top,
         const bool use_multiline_licence = false,
         const bool use_empty_licence = false,
         const bool use_empty_marker = false) const;
 
     /**
-     * @brief Creates an empty decoration.
+     * @brief Creates an empty decoration configuration.
      */
-    decoration make_empty_decoration() const;
-
-    /**
-     * @brief Creates the general settings.
-     */
-    decoration_configuration make_decoration_configuration() const;
+    decoration_configuration make_empty_decoration_configuration() const;
 };
 
 } } }

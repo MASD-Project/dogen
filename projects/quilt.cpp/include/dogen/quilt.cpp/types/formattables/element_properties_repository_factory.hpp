@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/formatters/types/decoration_configuration_workflow.hpp"
+#include "dogen/formatters/types/decoration_configuration_factory.hpp"
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/annotations/helper_annotations_repository.hpp"
@@ -54,14 +54,14 @@ private:
         const yarn::model& m) const;
 
     element_properties_repository merge(
-        const dogen::formatters::decoration_configuration_workflow& fpwf,
+        const dogen::formatters::decoration_configuration_factory& dcf,
         const helper_properties_repository& hprp,
         const aspect_properties_repository& asrp,
         const formatter_properties_repository& fprp) const;
 
 public:
     element_properties_repository make(
-        const dogen::formatters::decoration_configuration_workflow& fpwf,
+        const dogen::formatters::decoration_configuration_factory& dcf,
         const annotations::helper_annotations_repository& hsrp,
         const annotations::aspect_annotations_repository& asrp,
         const annotations::streaming_annotations_repository& ssrp,

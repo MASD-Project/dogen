@@ -30,7 +30,6 @@
 #include "dogen/formatters/types/editors.hpp"
 #include "dogen/formatters/types/licence.hpp"
 #include "dogen/formatters/types/modeline.hpp"
-#include "dogen/formatters/types/decoration.hpp"
 #include "dogen/formatters/types/formatters.hpp"
 #include "dogen/formatters/types/repository.hpp"
 #include "dogen/formatters/types/quote_types.hpp"
@@ -67,6 +66,5 @@
 #include "dogen/formatters/types/decoration_annotations_factory.hpp"
 #include "dogen/formatters/types/cpp/scoped_boilerplate_formatter.hpp"
 #include "dogen/formatters/types/decoration_configuration_factory.hpp"
-#include "dogen/formatters/types/decoration_configuration_workflow.hpp"
 
 #endif

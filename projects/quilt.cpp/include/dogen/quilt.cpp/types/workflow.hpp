@@ -35,7 +35,7 @@
 #include "dogen/formatters/types/repository.hpp"
 #include "dogen/quilt/types/backend_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
-#include "dogen/formatters/types/decoration_configuration_workflow.hpp"
+#include "dogen/formatters/types/decoration_configuration_factory.hpp"
 #include "dogen/quilt.cpp/types/annotations/opaque_annotations_builder.hpp"
 #include "dogen/quilt.cpp/types/annotations/streaming_annotations_repository.hpp"
 #include "dogen/quilt.cpp/types/annotations/element_annotations_repository.hpp"
@@ -66,10 +66,10 @@ private:
         const std::forward_list<boost::filesystem::path>& dirs) const;
 
     /**
-     * @brief Create the file properties workflow.
+     * @brief Create the decoration configuration factory.
      */
-    dogen::formatters::decoration_configuration_workflow
-    create_decoration_configuration_workflow(
+    dogen::formatters::decoration_configuration_factory
+    create_decoration_configuration_factory(
             const dynamic::repository& drp,
             const dogen::formatters::repository& frp,
             const dynamic::object& root_object) const;
@@ -100,9 +100,9 @@ private:
      */
     formattables::element_properties_repository
         create_properties(const options::cpp_options& opts,
-        const dynamic::repository& srp,
+        const dynamic::repository& drp,
         const dynamic::object& root_object,
-        const dogen::formatters::decoration_configuration_workflow& fpwf,
+        const dogen::formatters::decoration_configuration_factory& dcf,
         const formatters::container& fc,
         const annotations::streaming_annotations_repository& ssrp,
         const yarn::model& m) const;

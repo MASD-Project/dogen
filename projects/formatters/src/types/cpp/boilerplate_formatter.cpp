@@ -34,13 +34,13 @@ boilerplate_formatter::boilerplate_formatter(
       generate_header_guards_(generate_header_guards) { }
 
 void boilerplate_formatter::
-format_preamble(std::ostream& s, const decoration& d) const {
+format_preamble(std::ostream& s, const decoration_configuration& dc) const {
     if (!generate_preamble_)
         return;
 
     decoration_formatter af;
     af.format_preamble(s, comment_styles::cpp_style/*single line*/,
-        comment_styles::c_style/*multi-line*/, d);
+        comment_styles::c_style/*multi-line*/, dc);
 }
 
 void boilerplate_formatter::
@@ -71,25 +71,25 @@ format_includes(std::ostream& s, const std::list<std::string>& includes) const {
 }
 
 void boilerplate_formatter::
-format_begin(std::ostream& s, const decoration& a,
+format_begin(std::ostream& s, const decoration_configuration& dc,
     const std::list<std::string>& includes,
     const std::string& header_guard) const {
 
-    format_preamble(s, a);
+    format_preamble(s, dc);
     format_guards_begin(s, header_guard);
     format_includes(s, includes);
 }
 
 void boilerplate_formatter::
-format_postamble(std::ostream& s, const decoration& a) const {
+format_postamble(std::ostream& s, const decoration_configuration& dc) const {
     decoration_formatter af;
-    af.format_postamble(s, comment_styles::c_style, a);
+    af.format_postamble(s, comment_styles::c_style, dc);
 }
 
 void boilerplate_formatter::
-format_end(std::ostream& s, const decoration& a,
+format_end(std::ostream& s, const decoration_configuration& dc,
     const std::string& header_guard) const {
-    format_postamble(s, a);
+    format_postamble(s, dc);
     format_guards_end(s, header_guard);
 }
 

@@ -25,29 +25,36 @@
 #pragma once
 #endif
 
+#include <string>
 #include <algorithm>
-#include "dogen/formatters/types/decoration.hpp"
+#include <boost/optional.hpp>
+#include "dogen/formatters/types/licence.hpp"
+#include "dogen/formatters/types/modeline.hpp"
 #include "dogen/formatters/serialization/decoration_configuration_fwd_ser.hpp"
 
 namespace dogen {
 namespace formatters {
 
 /**
- * @brief Configuration pertaining to a file and common to all formatters.
+ * @brief Configuration pertaining to file decoration.
  */
 class decoration_configuration final {
 public:
     decoration_configuration(const decoration_configuration&) = default;
-    decoration_configuration(decoration_configuration&&) = default;
     ~decoration_configuration() = default;
 
 public:
     decoration_configuration();
 
 public:
+    decoration_configuration(decoration_configuration&& rhs);
+
+public:
     decoration_configuration(
         const bool generate_preamble,
-        const dogen::formatters::decoration& decoration);
+        const boost::optional<dogen::formatters::modeline>& modeline,
+        const boost::optional<dogen::formatters::licence>& licence,
+        const std::string& code_generation_marker);
 
 private:
     template<typename Archive>
@@ -66,13 +73,33 @@ public:
     /**@}*/
 
     /**
-     * @brief Decoration information for formatter.
+     * @brief Modeline to use in this file, if any.
      */
     /**@{*/
-    const dogen::formatters::decoration& decoration() const;
-    dogen::formatters::decoration& decoration();
-    void decoration(const dogen::formatters::decoration& v);
-    void decoration(const dogen::formatters::decoration&& v);
+    const boost::optional<dogen::formatters::modeline>& modeline() const;
+    boost::optional<dogen::formatters::modeline>& modeline();
+    void modeline(const boost::optional<dogen::formatters::modeline>& v);
+    void modeline(const boost::optional<dogen::formatters::modeline>&& v);
+    /**@}*/
+
+    /**
+     * @brief Licence to use in this file, if any.
+     */
+    /**@{*/
+    const boost::optional<dogen::formatters::licence>& licence() const;
+    boost::optional<dogen::formatters::licence>& licence();
+    void licence(const boost::optional<dogen::formatters::licence>& v);
+    void licence(const boost::optional<dogen::formatters::licence>&& v);
+    /**@}*/
+
+    /**
+     * @brief Code generation marker to use in this file.
+     */
+    /**@{*/
+    const std::string& code_generation_marker() const;
+    std::string& code_generation_marker();
+    void code_generation_marker(const std::string& v);
+    void code_generation_marker(const std::string&& v);
     /**@}*/
 
 public:
@@ -87,7 +114,9 @@ public:
 
 private:
     bool generate_preamble_;
-    dogen::formatters::decoration decoration_;
+    boost::optional<dogen::formatters::modeline> modeline_;
+    boost::optional<dogen::formatters::licence> licence_;
+    std::string code_generation_marker_;
 };
 
 } }

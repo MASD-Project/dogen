@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/types/decoration_configuration_workflow.hpp"
+#include "dogen/formatters/types/decoration_configuration_factory.hpp"
 #include "dogen/stitch/types/stitching_settings_factory.hpp"
 #include "dogen/stitch/types/properties_factory.hpp"
 
@@ -39,10 +39,10 @@ properties_factory(const dynamic::repository& dynamic_repository,
 
 boost::optional<formatters::decoration_configuration> properties_factory::
 make_decoration_configuration(const dynamic::object& o) const {
-    using dogen::formatters::decoration_configuration_workflow;
+    using dogen::formatters::decoration_configuration_factory;
     const auto& drp(dynamic_repository_);
-    decoration_configuration_workflow f(drp, formatters_repository_);
-    return f.execute(cpp_modeline_name, o);
+    decoration_configuration_factory f(drp, formatters_repository_);
+    return f.make(cpp_modeline_name, o);
 }
 
 stitching_settings properties_factory::

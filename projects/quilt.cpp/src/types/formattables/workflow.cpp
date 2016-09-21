@@ -120,7 +120,7 @@ create_formatter_properties(const dynamic::repository& drp,
 }
 
 element_properties_repository workflow::create_element_properties_repository(
-    const dogen::formatters::decoration_configuration_workflow& fpwf,
+    const dogen::formatters::decoration_configuration_factory& dcf,
     const annotations::helper_annotations_repository& hsrp,
     const annotations::aspect_annotations_repository& asrp,
     const annotations::streaming_annotations_repository& ssrp,
@@ -128,13 +128,13 @@ element_properties_repository workflow::create_element_properties_repository(
     const formatter_properties_repository& fprp,
     const yarn::model& m) const {
     element_properties_repository_factory f;
-    return f.make(fpwf, hsrp, asrp, ssrp, fc, fprp, m);
+    return f.make(dcf, hsrp, asrp, ssrp, fc, fprp, m);
 }
 
 element_properties_repository workflow::execute(const options::cpp_options& opts,
     const dynamic::repository& drp,
     const dynamic::object& root_object,
-    const dogen::formatters::decoration_configuration_workflow& fpwf,
+    const dogen::formatters::decoration_configuration_factory& dcf,
     const formatters::container& fc,
     const annotations::streaming_annotations_repository& ssrp,
     const yarn::model& m) const {
@@ -150,7 +150,7 @@ element_properties_repository workflow::execute(const options::cpp_options& opts
     const auto hsrp(create_helper_annotations_repository(drp, m));
     const auto asrp(create_aspect_annotations_repository(drp, m));
     const auto eprp(create_element_properties_repository(
-            fpwf, hsrp, asrp, ssrp, fc, fprp, m));
+            dcf, hsrp, asrp, ssrp, fc, fprp, m));
 
     BOOST_LOG_SEV(lg, debug) << "Finished creating properties.";
     return eprp;
