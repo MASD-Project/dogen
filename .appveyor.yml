@@ -19,38 +19,33 @@ platform:
 clone_depth: 5
 
 install:
-  # Workaround for CMake not wanting sh.exe on PATH for MinGW
-  - cmd: set PATH=%PATH%:C:\Program Files\Git\usr\bin;=%
+    - cinst cmake --version 3.4.3
 
-  #
-  # cmake
-  #
-  - cinst cmake --version 3.4.3
-  - cmd: set PATH=C:\MinGW\bin;%PATH%
-  - cmd: cmake --version
-
-  #
-  # conan
-  #
-  - cmd: echo "Installing conan..."
-  - cmd: set PYTHON="C:/Python27"
-  - cmd: set PATH=%PATH%;%PYTHON%/Scripts/
-  - cmd: pip.exe install conan
-  - cmd: set PATH=%PATH%;C:\Program Files (x86)\Conan\conan
-  - cmd: conan --version
+    # conan
+    - cmd: echo "Installing conan..."
+    # - ps: wget http://downloads.conan.io/latest_windows -OutFile conan_installer.exe
+    - cmd: set PYTHON="C:/Python27"
+    - cmd: set PATH=%PATH%;%PYTHON%/Scripts/
+    - cmd: pip.exe install conan
+    # - cmd: conan_installer.exe /VERYSILENT
+    - cmd: set PATH=%PATH%;C:\Program Files (x86)\Conan\conan
+    - cmd: conan --version
 
 before_build:
+  # Workaround for CMake not wanting sh.exe on PATH for MinGW
+  - cmd: set PATH=%PATH:C:\Program Files\Git\usr\bin;=%
+  - cmd: set PATH=C:\MinGW\bin;%PATH%
   - cmd: cd build
   - cmd: mkdir output
   - cmd: cd output
   - cmd: if "%configuration%"=="Release" conan install ../.. --file=.conanfile.txt
   - cmd: if "%configuration%"=="Debug" conan install ../.. --file=.conanfile.txt -s compiler="Visual Studio" -s compiler.version=14 -s arch=x86 -s build_type=Debug -s compiler.runtime=MDd
-    - cmd: cmake ../.. -DCMAKE_BUILD_TYPE=%configuration% -G "%generator%"
+  - cmd: cmake ../.. -DCMAKE_BUILD_TYPE=%configuration% -G "%generator%"
 
 build_script:
-  - cmd: if "%configuration%"=="Release" cmake.exe --build . --config "%configuration%"
-  - cmd: if "%configuration%"=="Debug"  cmake.exe --build . --config "%configuration%" --target knit
   # FIXME: different levels of borkage atm.
+  - cmd: if "%configuration%"=="Release" cmake --build . --config "%configuration%"
+  - cmd: if "%configuration%"=="Debug"  cmake --build . --config "%configuration%" --target knit
   # - cmd: cmake --build . --config "%configuration%" --target run_all_tests
 
 notifications:
