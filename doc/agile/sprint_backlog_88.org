@@ -13,45 +13,46 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-20 Tue 23:15]
+#+CAPTION: Clock summary at [2016-09-21 Wed 09:15]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *52:34* |       |       | 100.0 |
+| *Total time*                                                                | *53:47* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 52:34   |       |       | 100.0 |
-| Active                                                                      |         | 52:34 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  2:34 |   4.9 |
-| COMPLETED Fix chocolatey warning                                            |         |       |  0:08 |   0.3 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  0:27 |   0.9 |
+| Stories                                                                     | 53:47   |       |       | 100.0 |
+| Active                                                                      |         | 53:47 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  3:33 |   6.6 |
+| COMPLETED Fix chocolatey warning                                            |         |       |  0:08 |   0.2 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  0:27 |   0.8 |
 | COMPLETED Analysis on current state of file path generation                 |         |       |  0:57 |   1.8 |
 | CANCELLED Remove inclusion dependencies builder factory                     |         |       |  0:14 |   0.4 |
-| COMPLETED Analysis on formatters, elements and extensibility                |         |       |  1:18 |   2.5 |
-| COMPLETED Refactor =inclusion_dependencies_provider_interface=              |         |       |  1:12 |   2.3 |
+| COMPLETED Analysis on formatters, elements and extensibility                |         |       |  1:18 |   2.4 |
+| COMPLETED Refactor =inclusion_dependencies_provider_interface=              |         |       |  1:12 |   2.2 |
 | COMPLETED Investigate broken windows builds                                 |         |       |  0:32 |   1.0 |
-| COMPLETED Refactor path derivatives factory for usage in formatters         |         |       |  5:14 |  10.0 |
+| COMPLETED Refactor path derivatives factory for usage in formatters         |         |       |  5:14 |   9.7 |
 | COMPLETED Move file path generation to formatters                           |         |       |  1:58 |   3.7 |
-| CANCELLED Path derivatives factory generates all possible includes          |         |       |  3:07 |   5.9 |
+| CANCELLED Path derivatives factory generates all possible includes          |         |       |  3:07 |   5.8 |
 | COMPLETED Analysis on inclusion derivatives and path derivatives            |         |       |  1:04 |   2.0 |
-| COMPLETED Split path factory from provider factory                          |         |       |  2:32 |   4.8 |
-| COMPLETED Use providers when building inclusion directives                  |         |       | 12:01 |  22.9 |
+| COMPLETED Split path factory from provider factory                          |         |       |  2:32 |   4.7 |
+| COMPLETED Use providers when building inclusion directives                  |         |       | 12:01 |  22.3 |
 | COMPLETED Fix AppVeyor notifications                                        |         |       |  0:22 |   0.7 |
 | COMPLETED Static use of element types does more harm than good              |         |       |  0:32 |   1.0 |
-| COMPLETED Analysis: major rethink of the implementation of quilt            |         |       |  1:30 |   2.9 |
-| CANCELLED Create a simple Emacs mode for stitch                             |         |       |  1:12 |   2.3 |
-| COMPLETED Add facet folder and formatter enablement to formatter properties |         |       |  2:52 |   5.5 |
-| COMPLETED Move =cmakelists_info= to fabric                                  |         |       |  6:34 |  12.5 |
+| COMPLETED Analysis: major rethink of the implementation of quilt            |         |       |  1:30 |   2.8 |
+| CANCELLED Create a simple Emacs mode for stitch                             |         |       |  1:12 |   2.2 |
+| COMPLETED Add facet folder and formatter enablement to formatter properties |         |       |  2:52 |   5.3 |
+| COMPLETED Move =cmakelists_info= to fabric                                  |         |       |  6:34 |  12.2 |
 | COMPLETED Move =odb_options_info= to fabric                                 |         |       |  1:29 |   2.8 |
 | COMPLETED Remove =formattable_origin_type=                                  |         |       |  0:17 |   0.5 |
-| COMPLETED Remove formattable origin type                                    |         |       |  2:25 |   4.6 |
+| COMPLETED Remove formattable origin type                                    |         |       |  2:25 |   4.5 |
 | COMPLETED Rename config model to options                                    |         |       |  1:07 |   2.1 |
-| COMPLETED Rename annotation to decoration in formatters model               |         |       |  0:30 |   1.0 |
+| COMPLETED Rename annotation to decoration in formatters model               |         |       |  0:30 |   0.9 |
 | STARTED Big rename for "final" terminology clean up                         |         |       |  0:02 |   0.1 |
-| STARTED Add type index to name and to formatter interface                   |         |       |  0:24 |   0.8 |
+| STARTED Add type index to name and to formatter interface                   |         |       |  0:38 |   1.2 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-09-21 Wed 08:01]--[2016-09-21 Wed 09:00] =>  0:59
     CLOCK: [2016-09-17 Sat 19:43]--[2016-09-17 Sat 20:04] =>  0:21
     CLOCK: [2016-09-15 Thu 08:48]--[2016-09-15 Thu 09:01] =>  0:13
     CLOCK: [2016-09-13 Tue 20:09]--[2016-09-13 Tue 20:50] =>  0:41
@@ -923,6 +924,7 @@ it already in the formatters model. Perhaps that could be renamed to
 something else, freeing up the name?
 
 *** STARTED Add type index to name and to formatter interface         :story:
+    CLOCK: [2016-09-21 Wed 09:01]--[2016-09-21 Wed 09:15] =>  0:14
     CLOCK: [2016-09-20 Tue 22:51]--[2016-09-20 Tue 23:15] =>  0:24
 
 In preparation for the removal of the static formatters, we need to
