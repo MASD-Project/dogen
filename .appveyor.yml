@@ -27,6 +27,7 @@ install:
   #
   - cinst cmake
   - cmd: set PATH=C:\MinGW\bin;%PATH%
+  - cmd: set PATH=%PATH%:"C:\Program Files\CMake\bin";"C:\Program Files (x86)\cmake\bin"
   - cmake --version
 
   #
@@ -45,7 +46,6 @@ before_build:
   - cmd: cd output
   - cmd: if "%configuration%"=="Release" conan install ../.. --file=.conanfile.txt
   - cmd: if "%configuration%"=="Debug" conan install ../.. --file=.conanfile.txt -s compiler="Visual Studio" -s compiler.version=14 -s arch=x86 -s build_type=Debug -s compiler.runtime=MDd
-  - cmd: set PATH=%PATH%:"C:\Program Files\CMake\bin";"C:\Program Files (x86)\cmake\bin"
   - cmd: cmake ../.. -DCMAKE_BUILD_TYPE=%configuration% -G "%generator%"
 
 build_script:
