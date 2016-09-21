@@ -213,31 +213,6 @@ At present we are getting the following error:
 
 : Skipping a deployment with the bintray provider because this branch is not permitted
 
-*** Analysis work on handling varying levels of formatter optionality :story:
-
-In some cases the formatter may decide that it does not need to create
-a file. The only use case we have is the =namespace_info= where if
-there is no documentation one does not want to create a formatter. At
-present we filter out empty namespaces in the formatters' workflow,
-but this is not very clean because it now means the workflow needs to
-know about the formatter's logic.
-
-This would also make things cleaner for the services hack where we do
-not want to generate services for now. Actually not quite; for
-services we still need to generate skeletons. There are three cases:
-a) nothing should be generated, in which case we should filter these
-elements before hand b) something should be generated, but we may not
-actually overwrite the existing file and c) generate and write,
-regardless.
-
-Note that we do not need to change the stitch templates for this; the
-decision is done before we call the template.
-
-Tasks:
-
-- change formatter interfaces to return =boost::optional<file>=
-- change all formatters.
-
 *** Consider automatic injection of helpers                           :story:
 
 At present we are manually calling:
@@ -250,26 +225,6 @@ when adding the first helper to an existing template: one does not
 quite know why the helper is not coming through without
 investigating. One possible solution is to make the helper generation
 more "mandatory". Its not entirely obvious how this would work.
-
-*** Consider creating a single top-level settings class               :story:
-
-Since settings are nothing but meta-data, we should be able to read
-them all in one go. Further: we should be able to compute up front the
-inputs (root object, all other objects; sliced from the model) and the
-size of the outputs (vector of settings). It would be a totally
-parallelisable task. This also means we only need a single repository
-by id for all settings.
-
-This repository is then the input for the property workflow. Because
-properties follow a dependency graph, we would still need to compute
-them in some kind of order.
-
-Actually, this is not entirely true: for all elements in the target
-model we will have a single top-level class with all settings (or
-almost all, since some settings only make sense to the root object
-such as directory settings). However, for the reference models we will
-have less settings. We should probably do some taxonomy work here and
-try to figure out what categories of settings we have.
 
 *** =always_in_heap= is not a very good name                          :story:
 
@@ -333,6 +288,14 @@ need to come up with a good vocabulary around this.
 - type-dependent dynamic aspects: those that are connected to the
   types used in the file formatter.
 
+Merged stories:
+
+*Type-bound helpers and generic helpers*
+
+Not all helpers are bound to a type. We have the case of inserter
+helper in io which is used by main formatters directly. We need to
+make this distinction in the manual.
+
 *** Dump container of files in formatter workflow                     :story:
 
 At present we are polluting the log file with lots of entries for each
@@ -341,26 +304,6 @@ a container of file names. The problem is, if we dump the entire
 container we will also get the file contents. But if we create a
 temporary container we will have to pay the cost even though log level
 may not be enabled.
-
-*** Type-bound helpers and generic helpers                            :story:
-
-Not all helpers are bound to a type. We have the case of inserter
-helper in io which is used by main formatters directly. We need to
-make this distinction in the manual.
-
-*** Check which properties need to loop through the entire model      :story:
-
-In certain cases such as helpers we probably don't need to go through
-all types; only the target types matter. Ensure we are not processing
-other types for no reason.
-
-Merged stories:
-
-*Element properties includes non-target types*
-
-We seem to be generating a lot of element properties and formatter
-properties as well. We should only be generating these for the target
-model.
 
 *** Add validation for helper families                                :story:
 
@@ -404,13 +347,6 @@ to find a way to determine when to generate a forward declaration for
 a facet. This could be done via enablement, but we don't want to do
 too much hard-coding (e.g. if visitor then disable serialisation
 facet, etc).
-
-*** Add support for inlining                                          :story:
-
-We should be able to set a model-wide property that tells dogen to
-generate inline methods for properties. We could be more flexible and
-allow inlining at class level or just for a single property. We don't
-have any use cases for these at present.
 
 *** Computation of enablement values                                   :epic:
 
@@ -543,6 +479,43 @@ initial vectors for a given element. We just need to stop DFS'ing when
 we find a cycle. We can also cache the initial vectors for each
 element.
 
+Merged stories:
+
+*Formatters need different =enabled= defaults*
+
+We should be able to disable some formatters such as forward
+declarations. Some users may not require them. We can do this using
+dynamic extensions. We can either implement it in the backend or make
+all the formatters return an =std::optional<dogen::formatters::file>=
+and internally look for a =enabled= trait.
+
+We need to be able to distinguish "optional" formatters - those that
+can be disabled - and "mandatory" formatters - those that cannot. If a
+user requests the disabling of a mandatory formatter, we must
+throw. This must be handled in enabler.
+
+This story was merged with a previous one: Parameter to disable cpp
+file.
+
+#+begin_quote
+*Story*: As a dogen user, I want to disable cpp files so that I don't
+generate files with dummy content when I'm not using them.
+#+end_quote
+
+It would be really useful to define a implementation specific
+parameter which disables the generation of a cpp file for a
+service. This would stop us from having to create noddy translation
+units with dummy functions just to avoid having to define exclusion
+regexes.
+
+In some cases we may need a "enable by usage". For example,
+it would be great to be able to enable forward declarations only for
+those types for which we required them. Same with hash. We can detect
+this by looking at the generated include dependencies. However,
+because the include dependency only has a directive, we cannot tell
+which formatter it belonged to. This would require some augmenting of
+the directive to record the "origination" formatter.
+
 *** Indent stitch output using clang format                           :story:
 
 We need to indent the output coming out of stitch as it is not
@@ -590,41 +563,6 @@ formaters - they become flat - and then we always apply the indenter;
 either a clang based one or a simplified one. Either way, the code
 should live in formatters and make use of the language-specific
 folders as required.
-
-*** Formatters need different =enabled= defaults                      :story:
-
-We should be able to disable some formatters such as forward
-declarations. Some users may not require them. We can do this using
-dynamic extensions. We can either implement it in the backend or make
-all the formatters return an =std::optional<dogen::formatters::file>=
-and internally look for a =enabled= trait.
-
-We need to be able to distinguish "optional" formatters - those that
-can be disabled - and "mandatory" formatters - those that cannot. If a
-user requests the disabling of a mandatory formatter, we must
-throw. This must be handled in enabler.
-
-This story was merged with a previous one: Parameter to disable cpp
-file.
-
-#+begin_quote
-*Story*: As a dogen user, I want to disable cpp files so that I don't
-generate files with dummy content when I'm not using them.
-#+end_quote
-
-It would be really useful to define a implementation specific
-parameter which disables the generation of a cpp file for a
-service. This would stop us from having to create noddy translation
-units with dummy functions just to avoid having to define exclusion
-regexes.
-
-In some cases we may need a "enable by usage". For example,
-it would be great to be able to enable forward declarations only for
-those types for which we required them. Same with hash. We can detect
-this by looking at the generated include dependencies. However,
-because the include dependency only has a directive, we cannot tell
-which formatter it belonged to. This would require some augmenting of
-the directive to record the "origination" formatter.
 
 *** Consider using a proper JSON library                              :story:
 
@@ -726,19 +664,6 @@ all facets except for types. A few points:
   with full generation and so on. We probably also need "generation
   profiles" to go with "enablement profiles".
 
-*** Handle registration of services properly                          :story:
-
-We need a way to determine if a type which is part of a generalisation
-should be added to the registrar or not. In =generalisation_indexer=:
-
-:     // FIXME: massive hack. must not add leafs for services.
-
-One way would be to check if serialisation is enabled for that type
-and if not, skip the type.
-
-Another way is to check if the type is generatable. If not, skip
-it. If we do it this way we need to wait for the generatable clean up.
-
 *** Refactor code around model origination                            :story:
 
 - remove origin types and generation types, replacing it with just a
@@ -795,6 +720,19 @@ We need a good name for these. Candidates:
 - proxy model: represents something that exists in the outside
   world. e.g. =is_proxy=.
 
+*** Handle registration of services properly                          :story:
+
+We need a way to determine if a type which is part of a generalisation
+should be added to the registrar or not. In =generalisation_indexer=:
+
+:     // FIXME: massive hack. must not add leafs for services.
+
+One way would be to check if serialisation is enabled for that type
+and if not, skip the type.
+
+Another way is to check if the type is generatable. If not, skip
+it. If we do it this way we need to wait for the generatable clean up.
+
 *** Update copyright notices                                          :story:
 
 We need to update all notices to reflect personal ownership until DDC
@@ -802,30 +740,6 @@ was formed, and then ownership by DDC.
 
 - first update to personal ownership has been done, but we need to
   test if multiple copyright entries is properly supported.
-
-*** Do not compute inclusion directives for system models             :story:
-
-It seems we are computing inclusion directives and other path
-derivatives for system models:
-
-: {
-:   "__type__": "dogen::cpp::expansion::path_derivatives",
-:   "file_path": "/home/marco/Development/DomainDrivenConsulting/output/dogen/clang-3.5/stage/bin/../test_data/all_primitives/actual/std/include/std/serialization/unique_ptr_fwd_ser.hpp",
-:   "header_guard": "STD_SERIALIZATION_UNIQUE_PTR_FWD_SER_HPP",
-:   "inclusion_directive": "<quote>std/serialization/unique_ptr_fwd_ser.hpp<quote>"
-: }
-
-This comes out of the workflow, so we possibly are then ignoring it
-for the non-target types. So:
-
-- can we avoid computing these altogether?
-- are we ignoring it?
-
-Actually this is the usual problem with the "origin" of the type. We
-need a way to determine if this type needs computations or not. We
-need to create a story to clean up the =origin_type= and
-=generation_type= and then we can make use of it to determine if we
-need to compute inclusion, path etc or not.
 
 *** Consider renaming registrar in boost serialisation                :story:
 
@@ -883,37 +797,6 @@ Problem is, we either create the fileset as a non-generatable type -
 not ideal - or we create it as generatable and need to add this as a
 free function. We need to wait until dogen has support for merging
 code generation.
-
-*** Make JSON yarn a fully supported frontend                          :story:
-
-#+begin_quote
-*Story*: As a dogen user, I want to be able to write my domain models
-in JSON since I don't have any need for UML visualisation.
-#+end_quote
-
-At present we are using an yarn JSON format to supply Dogen the system
-libraries. However, there is nothing stopping us from having a
-full-blown JSON frontend useful for code generation. For this we need:
-
-- flag to state if its a target model or not;
-- ability to supply external module path;
-- ability to supply all of the missing information for yarn types
-  (properties for object, stereotypes, enumerations, etc).
-
-In order to test this we could generate a model from both Dia and JSON
-and make sure we arrive at the same yarn.
-
-As part of this work we probably need to create a new stage in the yarn
-pipeline where we populate:
-
-- inheritance related properties (is_parent, leaves, is_final)
-
-We need to look at the dia to sml transformer and see what it is doing
-that is also required by JSON and move it to yarn.
-
-We should have a look at the Boost Fusion approach:
-
-- [[http://jrruethe.github.io/blog/2015/05/21/boost-fusion-json-serializer/][Boost Fusion JSON Serialiser]]
 
 *** Integration of stitch and dogen                                   :story:
 
@@ -990,117 +873,15 @@ We should rename these. Perhaps:
 - =std_hash=
 - =boost_serialization=: a tad verbose, but quite explicit.
 
-*** Do not copy models in merger                                      :story:
-
-At present we are adding the partial models into the merger by copying
-them into an associative container. It would be nicer to avoid the
-copying as it adds no value. This should wait until we have a way to
-get performance numbers out.
-
-In fact do we even need to have a two step process? Can we not add and
-merge as we go along.
-
-*** Add top-level module names to yarn                                :story:
-
-In a couple of places we are computing the top-level modules. We
-should just compute it once and have this as part of the yarn model.
-
-Look for stories related to "model module" in case we have covered
-this already.
-
 *** "current" is not the best of names in name tree                   :story:
 
 We need to find a slightly more meaningful name for the "current" name
 on the name tree. It was just about alright and then we went and
 introduced =is_current_simple_type=, which is unintelligible.
 
-*** Code generation of dynamic instances                              :story:
+We could call it just "data" and drop "current" from flag.
 
-Note: this story probably should wait until we rename settings to
-annotations.
-
-We seem to have a pretty well established usage pattern for dynamic,
-so it may be a candidate for code generation. All we need is:
-
-- a stereotype to mark a class as dynamic; the attributes of the class
-  are dynamic fields, and their types must be one of the valid values
-  for dynamic fields. The default value is used for the field's
-  default value. Qualified name, ownership hierarchy, definition type,
-  scope, etc are supplied as meta-data.
-- stereotype name should be something like =DynamicFieldGroup=.
-- the injection of the settings class is done by looking at the
-  =DynamicFieldGroup= class and mapping the dynamic types to C++
-  types. Note: this mapping should be dynamic too so that we can use
-  it for other languages. We just need a meta-data tag for this, like
-  we do with default enum value.
-- the injection of the settings factory class is a bit more
-  complicated; we need to mark the object as a settings factory. At
-  present we have object types, but it was supposed to be removed
-  after a refactoring. Actually we just need to create a new kind of
-  element (=dynamic_settings_factory=?). In addition, settings factory
-  may also need to take in some parameters such as facet/formatter.
-- a stitch template that generates the settings factory.
-- a stitch template that registers the dynamic field definition;
-  instead of JSON we can just generate c++ code to perform the
-  injection.
-- we could also generate the repository and in most cases the
-  repository factory. The only case where this breaks down is when we
-  need to look at properties too.
-- we should have a number of knobs to control generation: a) generate
-  field injection b) generate settings factory c) generate repository
-  d) generate repository factory.
-
-We also need to merge the traits class directly into the factory. In
-the majority of cases, we have traits just to access the fields. But
-there are a few cases where we use traits for other purposes such as
-formatter naming.
-
-*** Consider using indices rather than associative containers          :epic:
-
-Once we generate the final model the model becomes constant; this
-means we can easily assign an [[https://en.wikipedia.org/wiki/Ordinal_number][ordinal number]] to each model
-element. These could be arranged so that we always start with
-generatable types first; this way we always generate dense
-containers - there are some cases where we need both generatable types
-and non-generatable types; in other cases we just need generatable
-types; we never need just non-generatable types. We also need to know
-the position of the first non-generatable type (or alternatively, the
-size of the generatable types set).
-
-Once we have this, we can start creating vectors with a fixed size
-(either total number of elements or just size of generatable
-types). We can also make it so that each name has an id which is the
-ordinal (another model post-processing activity). Actually we should
-call it "type index" or some other name because its a transient
-id. This means both properties and settings require no lookups at all
-since all positions are known beforehand (except in cases where the
-key of the associative container must be the =yarn::name= because we
-use it for processing).
-
-In theory, a similar approach can be done for formatters too. We know
-upfront what the ordinal number is for each formatter because they are
-all registered before we start processing. If formatters obtained
-their ordinal number at registration, wherever we are using a map of
-formatter name to a resource, we could use a fixed-size
-vector. However, formatters may be sparse in many cases (if not all
-cases?). For example, we do not have formatter properties for all
-formatters for every =yarn::name= because many (most) formatters don't
-make sense for every yarn type. Thus this is less applicable, at least
-for formatter properties. We need to look carefully at all use cases
-and see if there is any place where this approach is applicable. It is
-probably going to be more useful for formatters than elements.
-
-Tasks:
-
-- in resolver, assign element indices and update property names with
-  them.
-- change final model to have a vector of size maximum index (a
-  property of the intermediate model).
-- in the final model generation, for each type, look at its index and
-  populate the slot accordingly.
-- update quilt to use the indices where possible.
-
-*** Registrar in serialisation is not stable sorted         :reviewing:story:
+*** Registrar in serialisation is not stable sorted                   :story:
 
 We seem to have a traffic light diff on =registrar_ser.cpp=:
 
@@ -1111,26 +892,13 @@ We seem to have a traffic light diff on =registrar_ser.cpp=:
 
 This is probably a lack of a stable sort in model dependencies.
 
-*** Support only specific attributes for certain facets               :story:
-
-Whenever an object has a unique identifier, it may make sense to make
-use of it for:
-
-- hashing
-- equality
-- less than
-
-And so forth. For example, names and name trees don't really require
-comparing the entire state of the object. We need a way to mark
-properties against each facet in the meta-data.
-
 *** Rename methods parsing name trees                                 :story:
 
 We have a variety of names for the methods parsing name trees
 recursively. The best one seems to be =walk_name_tree=. We should use
 this name consistently.
 
-*** Add support for selectively disabling helpers on a family         :story:
+*** Add support for selectively disabling helpers on a family :reviewing:story:
 
 At present when a type belongs to a helper family it must provide all
 helpers across all facets. This means that we can't support the cases
@@ -3628,6 +3396,108 @@ depend only on the forward declarations.
 
 If we have enough time and disposition, we may sneak some of these
 in. This release is all about getting the architecture right.
+
+*** Support only specific attributes for certain facets               :story:
+
+Whenever an object has a unique identifier, it may make sense to make
+use of it for:
+
+- hashing
+- equality
+- less than
+
+And so forth. For example, names and name trees don't really require
+comparing the entire state of the object. We need a way to mark
+properties against each facet in the meta-data.
+
+*** Code generation of dynamic instances                              :story:
+
+Note: this story probably should wait until we rename settings to
+annotations.
+
+We seem to have a pretty well established usage pattern for dynamic,
+so it may be a candidate for code generation. All we need is:
+
+- a stereotype to mark a class as dynamic; the attributes of the class
+  are dynamic fields, and their types must be one of the valid values
+  for dynamic fields. The default value is used for the field's
+  default value. Qualified name, ownership hierarchy, definition type,
+  scope, etc are supplied as meta-data.
+- stereotype name should be something like =DynamicFieldGroup=.
+- the injection of the settings class is done by looking at the
+  =DynamicFieldGroup= class and mapping the dynamic types to C++
+  types. Note: this mapping should be dynamic too so that we can use
+  it for other languages. We just need a meta-data tag for this, like
+  we do with default enum value.
+- the injection of the settings factory class is a bit more
+  complicated; we need to mark the object as a settings factory. At
+  present we have object types, but it was supposed to be removed
+  after a refactoring. Actually we just need to create a new kind of
+  element (=dynamic_settings_factory=?). In addition, settings factory
+  may also need to take in some parameters such as facet/formatter.
+- a stitch template that generates the settings factory.
+- a stitch template that registers the dynamic field definition;
+  instead of JSON we can just generate c++ code to perform the
+  injection.
+- we could also generate the repository and in most cases the
+  repository factory. The only case where this breaks down is when we
+  need to look at properties too.
+- we should have a number of knobs to control generation: a) generate
+  field injection b) generate settings factory c) generate repository
+  d) generate repository factory.
+
+We also need to merge the traits class directly into the factory. In
+the majority of cases, we have traits just to access the fields. But
+there are a few cases where we use traits for other purposes such as
+formatter naming.
+
+*** Do not copy models in merger                                      :story:
+
+At present we are adding the partial models into the merger by copying
+them into an associative container. It would be nicer to avoid the
+copying as it adds no value. This should wait until we have a way to
+get performance numbers out.
+
+In fact do we even need to have a two step process? Can we not add and
+merge as we go along.
+
+*** Make JSON yarn a fully supported frontend                         :story:
+
+#+begin_quote
+*Story*: As a dogen user, I want to be able to write my domain models
+in JSON since I don't have any need for UML visualisation.
+#+end_quote
+
+At present we are using an yarn JSON format to supply Dogen the system
+libraries. However, there is nothing stopping us from having a
+full-blown JSON frontend useful for code generation. For this we need:
+
+- flag to state if its a target model or not;
+- ability to supply external module path;
+- ability to supply all of the missing information for yarn types
+  (properties for object, stereotypes, enumerations, etc).
+
+In order to test this we could generate a model from both Dia and JSON
+and make sure we arrive at the same yarn.
+
+As part of this work we probably need to create a new stage in the yarn
+pipeline where we populate:
+
+- inheritance related properties (is_parent, leaves, is_final)
+
+We need to look at the dia to sml transformer and see what it is doing
+that is also required by JSON and move it to yarn.
+
+We should have a look at the Boost Fusion approach:
+
+- [[http://jrruethe.github.io/blog/2015/05/21/boost-fusion-json-serializer/][Boost Fusion JSON Serialiser]]
+
+*** Add support for inlining                                          :story:
+
+We should be able to set a model-wide property that tells dogen to
+generate inline methods for properties. We could be more flexible and
+allow inlining at class level or just for a single property. We don't
+have any use cases for these at present.
 
 *** Add a file formatter interface to formatters                      :story:
 

@@ -58,6 +58,7 @@
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-09-21 Wed 22:00]--[2016-09-21 Wed 22:20] =>  0:20
     CLOCK: [2016-09-21 Wed 08:01]--[2016-09-21 Wed 09:00] =>  0:59
     CLOCK: [2016-09-17 Sat 19:43]--[2016-09-17 Sat 20:04] =>  0:21
     CLOCK: [2016-09-15 Thu 08:48]--[2016-09-15 Thu 09:01] =>  0:13
@@ -1078,6 +1079,89 @@ to organise the formatters.
 - formatter workflow now simply calls.
 - remove all element specific formatter interfaces.
 
+*** Check which properties need to loop through the entire model      :story:
+
+In certain cases such as helpers we probably don't need to go through
+all types; only the target types matter. Ensure we are not processing
+other types for no reason.
+
+Merged stories:
+
+*Element properties includes non-target types*
+
+We seem to be generating a lot of element properties and formatter
+properties as well. We should only be generating these for the target
+model.
+
+*** Consider using indices rather than associative containers          :epic:
+
+Once we generate the final model the model becomes constant; this
+means we can easily assign an [[https://en.wikipedia.org/wiki/Ordinal_number][ordinal number]] to each model
+element. These could be arranged so that we always start with
+generatable types first; this way we always generate dense
+containers - there are some cases where we need both generatable types
+and non-generatable types; in other cases we just need generatable
+types; we never need just non-generatable types. We also need to know
+the position of the first non-generatable type (or alternatively, the
+size of the generatable types set).
+
+Once we have this, we can start creating vectors with a fixed size
+(either total number of elements or just size of generatable
+types). We can also make it so that each name has an id which is the
+ordinal (another model post-processing activity). Actually we should
+call it "type index" or some other name because its a transient
+id. This means both properties and settings require no lookups at all
+since all positions are known beforehand (except in cases where the
+key of the associative container must be the =yarn::name= because we
+use it for processing).
+
+In theory, a similar approach can be done for formatters too. We know
+upfront what the ordinal number is for each formatter because they are
+all registered before we start processing. If formatters obtained
+their ordinal number at registration, wherever we are using a map of
+formatter name to a resource, we could use a fixed-size
+vector. However, formatters may be sparse in many cases (if not all
+cases?). For example, we do not have formatter properties for all
+formatters for every =yarn::name= because many (most) formatters don't
+make sense for every yarn type. Thus this is less applicable, at least
+for formatter properties. We need to look carefully at all use cases
+and see if there is any place where this approach is applicable. It is
+probably going to be more useful for formatters than elements.
+
+Tasks:
+
+- in resolver, assign element indices and update property names with
+  them.
+- change final model to have a vector of size maximum index (a
+  property of the intermediate model).
+- in the final model generation, for each type, look at its index and
+  populate the slot accordingly.
+- update quilt to use the indices where possible.
+
+*** Do not compute inclusion directives for system models             :story:
+
+It seems we are computing inclusion directives and other path
+derivatives for system models:
+
+: {
+:   "__type__": "dogen::cpp::expansion::path_derivatives",
+:   "file_path": "/home/marco/Development/DomainDrivenConsulting/output/dogen/clang-3.5/stage/bin/../test_data/all_primitives/actual/std/include/std/serialization/unique_ptr_fwd_ser.hpp",
+:   "header_guard": "STD_SERIALIZATION_UNIQUE_PTR_FWD_SER_HPP",
+:   "inclusion_directive": "<quote>std/serialization/unique_ptr_fwd_ser.hpp<quote>"
+: }
+
+This comes out of the workflow, so we possibly are then ignoring it
+for the non-target types. So:
+
+- can we avoid computing these altogether?
+- are we ignoring it?
+
+Actually this is the usual problem with the "origin" of the type. We
+need a way to determine if this type needs computations or not. We
+need to create a story to clean up the =origin_type= and
+=generation_type= and then we can make use of it to determine if we
+need to compute inclusion, path etc or not.
+
 *** Add formattable element                                           :story:
 
 Tasks:
@@ -1283,3 +1367,69 @@ be though; templates?
 
 We only need to generate the formatter properties for elements in the
 target model. Start from those instead of merging.
+
+*** CANCELLED Analysis work on handling varying levels of formatter optionality :story:
+    CLOSED: [2016-09-21 Wed 22:03]
+
+*Rationale*: we should handle this as part of the generation types
+clean up. There should be no optionality; if you get to the
+formatters, you must format.
+
+In some cases the formatter may decide that it does not need to create
+a file. The only use case we have is the =namespace_info= where if
+there is no documentation one does not want to create a formatter. At
+present we filter out empty namespaces in the formatters' workflow,
+but this is not very clean because it now means the workflow needs to
+know about the formatter's logic.
+
+This would also make things cleaner for the services hack where we do
+not want to generate services for now. Actually not quite; for
+services we still need to generate skeletons. There are three cases:
+a) nothing should be generated, in which case we should filter these
+elements before hand b) something should be generated, but we may not
+actually overwrite the existing file and c) generate and write,
+regardless.
+
+Note that we do not need to change the stitch templates for this; the
+decision is done before we call the template.
+
+Tasks:
+
+- change formatter interfaces to return =boost::optional<file>=
+- change all formatters.
+
+*** CANCELLED Consider creating a single top-level settings class     :story:
+    CLOSED: [2016-09-21 Wed 22:05]
+
+*Rationale*: This is not feasible in the current design; it would be a
+lot of work for not enough gain.
+
+Since settings are nothing but meta-data, we should be able to read
+them all in one go. Further: we should be able to compute up front the
+inputs (root object, all other objects; sliced from the model) and the
+size of the outputs (vector of settings). It would be a totally
+parallelisable task. This also means we only need a single repository
+by id for all settings.
+
+This repository is then the input for the property workflow. Because
+properties follow a dependency graph, we would still need to compute
+them in some kind of order.
+
+Actually, this is not entirely true: for all elements in the target
+model we will have a single top-level class with all settings (or
+almost all, since some settings only make sense to the root object
+such as directory settings). However, for the reference models we will
+have less settings. We should probably do some taxonomy work here and
+try to figure out what categories of settings we have.
+
+*** CANCELLED Add top-level module names to yarn                      :story:
+    CLOSED: [2016-09-21 Wed 22:15]
+
+*Rationale*: this is only done in locator and its pretty
+self-contained. We can revisit if this changes.
+
+In a couple of places we are computing the top-level modules. We
+should just compute it once and have this as part of the yarn model.
+
+Look for stories related to "model module" in case we have covered
+this already.
