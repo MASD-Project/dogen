@@ -25,7 +25,7 @@
 #include "dogen/formatters/types/hydration_workflow.hpp"
 #include "dogen/dynamic/types/workflow.hpp"
 #include "dogen/quilt.cpp/types/formatters/workflow.hpp"
-#include "dogen/quilt.cpp/types/properties/workflow.hpp"
+#include "dogen/quilt.cpp/types/formattables/workflow.hpp"
 #include "dogen/quilt.cpp/types/annotations/directory_names_annotations_factory.hpp"
 #include "dogen/quilt.cpp/types/annotations/aspect_annotations_repository_factory.hpp"
 #include "dogen/quilt.cpp/types/annotations/streaming_annotations_repository_factory.hpp"
@@ -86,7 +86,7 @@ workflow::create_element_annotations_repository(
     return f.make(osb, m);
 }
 
-properties::element_properties_repository workflow::create_properties(
+formattables::element_properties_repository workflow::create_properties(
     const options::cpp_options& opts,
     const dynamic::repository& srp,
     const dynamic::object& root_object,
@@ -95,7 +95,7 @@ properties::element_properties_repository workflow::create_properties(
     const annotations::streaming_annotations_repository& ssrp,
     const yarn::model& m) const {
 
-    properties::workflow fw;
+    formattables::workflow fw;
     return fw.execute(opts, srp, root_object, fpwf, fc, ssrp, m);
 }
 
@@ -113,7 +113,7 @@ workflow::extract_generatable_elements(const yarn::model& m) const {
 std::forward_list<dogen::formatters::file> workflow::
 format(const annotations::streaming_annotations_repository& ssrp,
     const annotations::element_annotations_repository& esrp,
-    const properties::element_properties_repository& eprp,
+    const formattables::element_properties_repository& eprp,
     const std::forward_list<
     boost::shared_ptr<yarn::element> >& elements) const {
     formatters::workflow wf;

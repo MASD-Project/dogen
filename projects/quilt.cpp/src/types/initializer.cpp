@@ -21,12 +21,12 @@
 #include "dogen/yarn/types/workflow.hpp"
 #include "dogen/quilt/types/workflow.hpp"
 #include "dogen/quilt.cpp/types/formatters/workflow.hpp"
-#include "dogen/quilt.cpp/types/properties/workflow.hpp"
+#include "dogen/quilt.cpp/types/formattables/workflow.hpp"
 #include "dogen/quilt.cpp/types/annotations/opaque_annotations_builder.hpp"
 #include "dogen/quilt.cpp/types/annotations/initializer.hpp"
 #include "dogen/quilt.cpp/types/formatters/initializer.hpp"
 #include "dogen/quilt.cpp/types/fabric/initializer.hpp"
-#include "dogen/quilt.cpp/types/properties/registrar.hpp"
+#include "dogen/quilt.cpp/types/formattables/registrar.hpp"
 #include "dogen/quilt.cpp/types/workflow.hpp"
 #include "dogen/quilt.cpp/types/initializer.hpp"
 
@@ -35,7 +35,7 @@ namespace quilt {
 namespace cpp {
 
 void initialize_providers(const formatters::registrar& fmt_rg) {
-    auto& prop_rg(properties::workflow::registrar());
+    auto& prop_rg(formattables::workflow::registrar());
     const auto c(fmt_rg.formatter_container());
     for (const auto& f : c.all_file_formatters())
         f->register_provider(prop_rg);

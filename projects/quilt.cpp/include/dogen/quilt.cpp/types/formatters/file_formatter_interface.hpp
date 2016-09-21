@@ -27,7 +27,7 @@
 
 #include <string>
 #include "dogen/dynamic/types/ownership_hierarchy.hpp"
-#include "dogen/quilt.cpp/types/properties/registrar.hpp"
+#include "dogen/quilt.cpp/types/formattables/registrar.hpp"
 #include "dogen/quilt.cpp/types/formatters/file_types.hpp"
 
 namespace dogen {
@@ -62,7 +62,7 @@ public:
      * @brief Registers an inclusion dependency providers this
      * formatter may know of.
      */
-    virtual void register_provider(properties::registrar& rg) const = 0;
+    virtual void register_provider(formattables::registrar& rg) const = 0;
 };
 
 } } } }

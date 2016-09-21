@@ -38,21 +38,21 @@ namespace formatters {
 namespace {
 
 class provider final :
-        public properties::provider_interface<fabric::cmakelists> {
+        public formattables::provider_interface<fabric::cmakelists> {
 public:
     std::string facet_name() const override;
     std::string formatter_name() const override;
 
     std::list<std::string> provide_inclusion_dependencies(
-        const properties::inclusion_dependencies_builder_factory& f,
+        const formattables::inclusion_dependencies_builder_factory& f,
         const fabric::cmakelists& p) const override;
 
-    properties::inclusion_path_support inclusion_path_support() const override;
+    formattables::inclusion_path_support inclusion_path_support() const override;
 
-    boost::filesystem::path provide_inclusion_path(const properties::locator& l,
+    boost::filesystem::path provide_inclusion_path(const formattables::locator& l,
         const yarn::name& n) const override;
 
-    boost::filesystem::path provide_full_path(const properties::locator& l,
+    boost::filesystem::path provide_full_path(const formattables::locator& l,
         const yarn::name& n) const override;
 };
 
@@ -65,27 +65,27 @@ std::string provider::formatter_name() const {
 }
 
 std::list<std::string> provider::provide_inclusion_dependencies(
-    const properties::inclusion_dependencies_builder_factory& /*f*/,
+    const formattables::inclusion_dependencies_builder_factory& /*f*/,
     const fabric::cmakelists& /*c*/) const {
 
     static std::list<std::string> r;
     return r;
 }
 
-properties::inclusion_path_support provider::
+formattables::inclusion_path_support provider::
 inclusion_path_support() const {
-    return properties::inclusion_path_support::is_default;
+    return formattables::inclusion_path_support::is_default;
 }
 
 boost::filesystem::path
-provider::provide_inclusion_path(const properties::locator& /*l*/,
+provider::provide_inclusion_path(const formattables::locator& /*l*/,
     const yarn::name& /*n*/) const {
     static boost::filesystem::path r;
     return r;
 }
 
 boost::filesystem::path
-provider::provide_full_path(const properties::locator& l,
+provider::provide_full_path(const formattables::locator& l,
     const yarn::name& n) const {
     return l.make_full_path_for_source_cmakelists(n, formatter_name());
 }
@@ -115,7 +115,7 @@ file_types source_cmakelists_formatter::file_type() const {
 }
 
 void source_cmakelists_formatter::
-register_provider(properties::registrar& rg) const {
+register_provider(formattables::registrar& rg) const {
     rg.register_provider(boost::make_shared<provider>());
 }
 

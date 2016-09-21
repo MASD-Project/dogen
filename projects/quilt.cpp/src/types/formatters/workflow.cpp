@@ -24,7 +24,7 @@
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/yarn/types/element_visitor.hpp"
 #include "dogen/quilt.cpp/types/workflow_error.hpp"
-#include "dogen/quilt.cpp/io/properties/formatter_properties_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/formatter_properties_io.hpp"
 #include "dogen/quilt.cpp/types/formatters/context.hpp"
 #include "dogen/quilt.cpp/types/formatters/element_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/workflow.hpp"
@@ -56,7 +56,7 @@ cpp::formatters::registrar& workflow::registrar() {
 std::forward_list<dogen::formatters::file>
 workflow::execute(const annotations::streaming_annotations_repository& ssrp,
     const annotations::element_annotations_repository& esrp,
-    const properties::element_properties_repository& eprp,
+    const formattables::element_properties_repository& eprp,
     const std::forward_list<
     boost::shared_ptr<yarn::element> >& elements) const {
 

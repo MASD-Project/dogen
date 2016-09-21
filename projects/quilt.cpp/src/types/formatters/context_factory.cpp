@@ -43,8 +43,8 @@ context_factory::empty_streaming_annotations_repository_ =
     annotations::streaming_annotations_repository();
 const annotations::element_annotations
 context_factory::empty_element_annotations_ = annotations::element_annotations();
-const properties::element_properties
-context_factory::empty_element_properties_ = properties::element_properties();
+const formattables::element_properties
+context_factory::empty_element_properties_ = formattables::element_properties();
 const std::unordered_map<
     std::string,
     std::unordered_map<
@@ -60,7 +60,7 @@ const std::unordered_map<
 context_factory::context_factory(
     const annotations::streaming_annotations_repository& ssrp,
     const annotations::element_annotations_repository& esrp,
-    const properties::element_properties_repository& eprp,
+    const formattables::element_properties_repository& eprp,
     const std::unordered_map<
     std::string, std::unordered_map<
     std::string,
@@ -68,7 +68,7 @@ context_factory::context_factory(
     : streaming_annotations_repository_(ssrp), element_annotations_(esrp),
       element_properties_(eprp), formatter_helpers_(helpers) {}
 
-const properties::element_properties& context_factory::
+const formattables::element_properties& context_factory::
 element_properties_for_id(const std::string& n) const {
     const auto& fp(element_properties_.by_id());
     const auto i(fp.find(n));

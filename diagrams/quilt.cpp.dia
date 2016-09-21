@@ -98,7 +98,7 @@
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#properties#</dia:string>
+        <dia:string>#formattables#</dia:string>
       </dia:attribute>
     </dia:object>
     <dia:object type="UML - LargePackage" version="0" id="O1">
@@ -660,7 +660,7 @@ seems like the least bad approach.
                 <dia:string>#r#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#properties::registrar&amp;#</dia:string>
+                <dia:string>#formattables::registrar&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -8554,7 +8554,7 @@ facet of the C++ language.
                 <dia:string>#f#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const std::forward_list&lt;std::shared_ptr&lt;properties::formattable&gt;&gt;&amp;#</dia:string>
+                <dia:string>#const std::forward_list&lt;std::shared_ptr&lt;formattables::formattable&gt;&gt;&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -8890,13 +8890,13 @@ for a given C++ entity.#</dia:string>
         <dia:point val="135,129"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="134.95,128.95;162.885,134.25"/>
+        <dia:rectangle val="134.95,128.95;163.27,134.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="135,129"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.835000000000001"/>
+        <dia:real val="28.219999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000002"/>
@@ -9101,13 +9101,13 @@ for a given C++ entity.#</dia:string>
         <dia:point val="186,146"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="185.95,145.95;240.45,149.65"/>
+        <dia:rectangle val="185.95,145.95;243.915,149.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="186,146"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="54.399999999999999"/>
+        <dia:real val="57.864999999999995"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -9474,7 +9474,7 @@ for a given C++ entity.#</dia:string>
         <dia:point val="86,122"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="85.95,121.95;105.045,129.35"/>
+        <dia:rectangle val="85.95,121.95;106.2,129.35"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -9483,7 +9483,7 @@ for a given C++ entity.#</dia:string>
         <dia:point val="86,122"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="18.995000000000001"/>
+        <dia:real val="20.150000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="7.2999999999999998"/>
@@ -9751,7 +9751,7 @@ the dynamic object.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::pair&lt;properties::element_properties_repository,std::forward_list&lt;std::shared_ptr&lt;properties::formattable&gt; &gt; &gt;#</dia:string>
+            <dia:string>#std::pair&lt;formattables::element_properties_repository,std::forward_list&lt;std::shared_ptr&lt;formattables::formattable&gt; &gt; &gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -9942,7 +9942,7 @@ to the grammmar of the C++ language.#</dia:string>
         <dia:point val="177.572,72.3834"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="175.612,72.3178;177.638,76.2858"/>
+        <dia:rectangle val="175.612,72.3178;177.638,76.2859"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -11331,13 +11331,13 @@ registry of all available formatters.#</dia:string>
         <dia:point val="237,163"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="236.95,162.95;244.973,165.25"/>
+        <dia:rectangle val="236.95,162.95;246.703,165.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="237,163"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.9224999999999994"/>
+        <dia:real val="9.6524999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.1999999999999997"/>
@@ -11442,13 +11442,13 @@ registry of all available formatters.#</dia:string>
         <dia:point val="291,146"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="290.95,145.95;331.205,151.05"/>
+        <dia:rectangle val="290.95,145.95;334.67,151.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="291,146"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="40.155000000000001"/>
+        <dia:real val="43.619999999999997"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5"/>
@@ -11656,13 +11656,13 @@ registry of all available formatters.#</dia:string>
         <dia:point val="193,129"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="192.95,128.95;220.885,134.25"/>
+        <dia:rectangle val="192.95,128.95;224.35,134.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="193,129"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.835000000000001"/>
+        <dia:real val="31.300000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000002"/>
@@ -11953,13 +11953,13 @@ registry of all available formatters.#</dia:string>
         <dia:point val="275,163"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="274.95,162.95;305.58,168.25"/>
+        <dia:rectangle val="274.95,162.95;306.735,168.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="275,163"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="30.530000000000001"/>
+        <dia:real val="31.685000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000002"/>
@@ -12636,13 +12636,13 @@ registry of all available formatters.#</dia:string>
         <dia:point val="148,198"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="147.95,197.95;190.515,204.85"/>
+        <dia:rectangle val="147.95,197.95;191.67,204.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="148,198"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="42.464999999999996"/>
+        <dia:real val="43.619999999999997"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.8000000000000007"/>
@@ -14946,7 +14946,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#rg#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const properties::registrar&amp;#</dia:string>
+                <dia:string>#const formattables::registrar&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -15183,7 +15183,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#f#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const properties::inclusion_dependencies_builder_factory&amp;#</dia:string>
+                <dia:string>#const formattables::inclusion_dependencies_builder_factory&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -15222,7 +15222,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#properties::inclusion_path_support#</dia:string>
+            <dia:string>#formattables::inclusion_path_support#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -15278,7 +15278,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#l#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const properties::locator&amp;#</dia:string>
+                <dia:string>#const formattables::locator&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -15343,7 +15343,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#l#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const properties::locator&amp;#</dia:string>
+                <dia:string>#const formattables::locator&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -15529,7 +15529,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#p#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#boost::shared_ptr&lt;properties::inclusion_dependencies_provider_interface&lt;yarn::module&gt;&gt;#</dia:string>
+                <dia:string>#boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;yarn::module&gt;&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -15577,7 +15577,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#p#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#boost::shared_ptr&lt;properties::inclusion_dependencies_provider_interface&lt;yarn::concept&gt;&gt;#</dia:string>
+                <dia:string>#boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;yarn::concept&gt;&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -15625,7 +15625,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#p#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#boost::shared_ptr&lt;properties::inclusion_dependencies_provider_interface&lt;yarn::primitive&gt;&gt;#</dia:string>
+                <dia:string>#boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;yarn::primitive&gt;&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -15673,7 +15673,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#p#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#boost::shared_ptr&lt;properties::inclusion_dependencies_provider_interface&lt;yarn::enumeration&gt;&gt;#</dia:string>
+                <dia:string>#boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;yarn::enumeration&gt;&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -15721,7 +15721,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#p#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#boost::shared_ptr&lt;properties::inclusion_dependencies_provider_interface&lt;yarn::object&gt;&gt;#</dia:string>
+                <dia:string>#boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;yarn::object&gt;&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -15769,7 +15769,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#p#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#boost::shared_ptr&lt;properties::inclusion_dependencies_provider_interface&lt;yarn::exception&gt;&gt;#</dia:string>
+                <dia:string>#boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;yarn::exception&gt;&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -15817,7 +15817,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#p#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#boost::shared_ptr&lt;properties::inclusion_dependencies_provider_interface&lt;yarn::visitor&gt;&gt;#</dia:string>
+                <dia:string>#boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;yarn::visitor&gt;&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -16023,7 +16023,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::forward_list&lt;boost::shared_ptr&lt;properties::inclusion_dependencies_provider_interface&lt;yarn::module&gt;&gt;#</dia:string>
+            <dia:string>#std::forward_list&lt;boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;yarn::module&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16053,7 +16053,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::forward_list&lt;boost::shared_ptr&lt;properties::inclusion_dependencies_provider_interface&lt;yarn::concept&gt;&gt;#</dia:string>
+            <dia:string>#std::forward_list&lt;boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;yarn::concept&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16083,7 +16083,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::forward_list&lt;boost::shared_ptr&lt;properties::inclusion_dependencies_provider_interface&lt;yarn::primitive&gt;&gt;#</dia:string>
+            <dia:string>#std::forward_list&lt;boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;yarn::primitive&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16113,7 +16113,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::forward_list&lt;boost::shared_ptr&lt;properties::inclusion_dependencies_provider_interface&lt;yarn::enumeration&gt;&gt;#</dia:string>
+            <dia:string>#std::forward_list&lt;boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;yarn::enumeration&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16143,7 +16143,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::forward_list&lt;boost::shared_ptr&lt;properties::inclusion_dependencies_provider_interface&lt;yarn::object&gt;&gt;#</dia:string>
+            <dia:string>#std::forward_list&lt;boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;yarn::object&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16173,7 +16173,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::forward_list&lt;boost::shared_ptr&lt;properties::inclusion_dependencies_provider_interface&lt;yarn::exception&gt;&gt;#</dia:string>
+            <dia:string>#std::forward_list&lt;boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;yarn::exception&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16203,7 +16203,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::forward_list&lt;boost::shared_ptr&lt;properties::inclusion_dependencies_provider_interface&lt;yarn::visitor&gt;&gt;#</dia:string>
+            <dia:string>#std::forward_list&lt;boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;yarn::visitor&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16508,7 +16508,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>#container_#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#properties::container#</dia:string>
+            <dia:string>#formattables::container#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -16531,7 +16531,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>#inclusion_directives_repository_#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#properties::inclusion_directives_repository#</dia:string>
+            <dia:string>#formattables::inclusion_directives_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -16602,7 +16602,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#c#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const properties::container&amp;#</dia:string>
+                <dia:string>#const formattables::container&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -17681,7 +17681,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#rg#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const properties::registrar&amp;#</dia:string>
+                <dia:string>#const formattables::registrar&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -17868,13 +17868,13 @@ main, or from another initialiser.#</dia:string>
         <dia:point val="193,214"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="192.95,213.95;228.2,221.65"/>
+        <dia:rectangle val="192.95,213.95;230.51,221.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="193,214"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="35.149999999999999"/>
+        <dia:real val="37.460000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="7.5999999999999996"/>
@@ -18390,7 +18390,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>#enablement_repository_#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#properties::enablement_repository#</dia:string>
+            <dia:string>#formattables::enablement_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -18413,7 +18413,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>#directives_repository_#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#properties::inclusion_directives_repository#</dia:string>
+            <dia:string>#formattables::inclusion_directives_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -18507,7 +18507,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#idrp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const properties::inclusion_directives_repository&amp;#</dia:string>
+                <dia:string>#const formattables::inclusion_directives_repository&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -19335,7 +19335,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#pdrp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const properties::path_derivatives_repository&amp;#</dia:string>
+                <dia:string>#const formattables::path_derivatives_repository&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -20293,7 +20293,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, properties::formatter_properties&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, formattables::formatter_properties&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -20500,7 +20500,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
             <dia:string>#by_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;yarn::name, std::unordered_map&lt;std::string, properties::path_derivatives&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;yarn::name, std::unordered_map&lt;std::string, formattables::path_derivatives&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -20770,7 +20770,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
             <dia:string>#by_id#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, std::unordered_map&lt;std::string, properties::formatter_properties&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, std::unordered_map&lt;std::string, formattables::formatter_properties&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -20981,7 +20981,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, properties::formatter_properties&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, formattables::formatter_properties&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -21007,7 +21007,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
                 <dia:string>#pd#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const std::unordered_map&lt;std::string,properties::path_derivatives&gt;&amp;#</dia:string>
+                <dia:string>#const std::unordered_map&lt;std::string,formattables::path_derivatives&gt;&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -23154,13 +23154,13 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:point val="120,146"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="119.95,145.95;143.65,151.25"/>
+        <dia:rectangle val="119.95,145.95;145.19,151.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="120,146"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="23.600000000000001"/>
+        <dia:real val="25.140000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000002"/>
@@ -23451,13 +23451,13 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:point val="154,146"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="153.95,145.95;180.345,148.85"/>
+        <dia:rectangle val="153.95,145.95;182.655,148.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="154,146"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="26.294999999999998"/>
+        <dia:real val="28.605"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.7999999999999998"/>
@@ -23622,7 +23622,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:point val="148.917,134.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="148.167,133.45;167.348,146.75"/>
+        <dia:rectangle val="148.167,133.45;168.443,146.75"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -23630,8 +23630,8 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       <dia:attribute name="orth_points">
         <dia:point val="148.917,134.2"/>
         <dia:point val="148.917,141"/>
-        <dia:point val="167.148,141"/>
-        <dia:point val="167.148,145.95"/>
+        <dia:point val="168.041,141"/>
+        <dia:point val="168.243,145.95"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -23864,7 +23864,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
                 <dia:string>#erp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const properties::enablement_repository&amp;#</dia:string>
+                <dia:string>#const formattables::enablement_repository&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -23881,7 +23881,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
                 <dia:string>#idrp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const properties::inclusion_directives_repository&amp;#</dia:string>
+                <dia:string>#const formattables::inclusion_directives_repository&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -23898,7 +23898,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
                 <dia:string>#ifrp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const properties::integrated_facet_repository&amp;#</dia:string>
+                <dia:string>#const formattables::integrated_facet_repository&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -23990,7 +23990,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:point val="262,-41.9166"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="253.948,-42.6666;262.75,-28.2"/>
+        <dia:rectangle val="253.947,-42.6666;262.75,-28.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -24312,13 +24312,13 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:point val="282,178"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="281.95,177.95;291.933,181.05"/>
+        <dia:rectangle val="281.95,177.95;293.663,181.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="282,178"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="9.8825000000000003"/>
+        <dia:real val="11.612500000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -25385,7 +25385,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
                 <dia:string>#c#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const properties::class_info&amp;#</dia:string>
+                <dia:string>#const formattables::class_info&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -25433,7 +25433,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
                 <dia:string>#p#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const properties::property_info&amp;#</dia:string>
+                <dia:string>#const formattables::property_info&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -25498,7 +25498,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
                 <dia:string>#p#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const properties::property_info&amp;#</dia:string>
+                <dia:string>#const formattables::property_info&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -26389,13 +26389,13 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:point val="164,214"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="163.95,213.95;186.495,217.65"/>
+        <dia:rectangle val="163.95,213.95;187.65,217.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="164,214"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="22.445"/>
+        <dia:real val="23.600000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -26676,7 +26676,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
             <dia:string>#element_properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#properties::element_properties#</dia:string>
+            <dia:string>#formattables::element_properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -26768,13 +26768,13 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:point val="258,198"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="257.95,197.95;266.25,200.85"/>
+        <dia:rectangle val="257.95,197.95;267.252,200.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="258,198"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.1999999999999993"/>
+        <dia:real val="9.2025000000000006"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.7999999999999998"/>
@@ -26903,13 +26903,13 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:point val="263,214"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="262.95,213.95;284.34,217.65"/>
+        <dia:rectangle val="262.95,213.95;285.495,217.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="263,214"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="21.289999999999999"/>
+        <dia:real val="22.445"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -27514,7 +27514,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
                 <dia:string>#hp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const properties::helper_properties&amp;#</dia:string>
+                <dia:string>#const formattables::helper_properties&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -27579,7 +27579,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
                 <dia:string>#hp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const properties::helper_properties&amp;#</dia:string>
+                <dia:string>#const formattables::helper_properties&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -27605,13 +27605,13 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:point val="291,198"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="290.95,197.95;316.96,200.85"/>
+        <dia:rectangle val="290.95,197.95;319.27,200.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="291,198"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="25.91"/>
+        <dia:real val="28.219999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.7999999999999998"/>
@@ -27740,13 +27740,13 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:point val="296,214"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="295.95,213.95;320.035,217.65"/>
+        <dia:rectangle val="295.95,213.95;321.19,217.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="296,214"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="23.984999999999999"/>
+        <dia:real val="25.140000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -28044,13 +28044,13 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:point val="399,151"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="398.95,150.95;427.655,160.85"/>
+        <dia:rectangle val="398.95,150.95;429.195,160.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="399,151"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="28.605"/>
+        <dia:real val="30.145"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="9.8000000000000007"/>
@@ -28194,7 +28194,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
             <dia:string>#formatter_properties_#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#properties::formatter_properties_repository#</dia:string>
+            <dia:string>#formattables::formatter_properties_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -28217,7 +28217,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
             <dia:string>#helper_properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#properties::helper_properties_repository#</dia:string>
+            <dia:string>#formattables::helper_properties_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -28305,7 +28305,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
                 <dia:string>#fprp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const properties::formatter_properties_repository&amp;#</dia:string>
+                <dia:string>#const formattables::formatter_properties_repository&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -29092,13 +29092,13 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:point val="389,52"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="388.95,51.95;414.96,62.85"/>
+        <dia:rectangle val="388.95,51.95;418.425,62.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="389,52"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="25.91"/>
+        <dia:real val="29.375"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="10.800000000000001"/>
@@ -29633,7 +29633,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
             <dia:string>#current#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#properties::helper_descriptor#</dia:string>
+            <dia:string>#formattables::helper_descriptor#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -29656,7 +29656,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
             <dia:string>#direct_descendants#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;properties::helper_descriptor&gt;#</dia:string>
+            <dia:string>#std::list&lt;formattables::helper_descriptor&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -29746,7 +29746,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:point val="383.985,56.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="383.235,55.65;402.155,70.05"/>
+        <dia:rectangle val="383.235,55.65;403.887,70.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -29754,8 +29754,8 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       <dia:attribute name="orth_points">
         <dia:point val="383.985,56.4"/>
         <dia:point val="383.985,70"/>
-        <dia:point val="401.955,70"/>
-        <dia:point val="401.955,62.8"/>
+        <dia:point val="403.688,70"/>
+        <dia:point val="403.688,62.8"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -29782,13 +29782,13 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:point val="401,15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="400.95,14.95;434.275,19.45"/>
+        <dia:rectangle val="400.95,14.95;436.585,19.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="401,15"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="33.225000000000001"/>
+        <dia:real val="35.535000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -30187,7 +30187,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;properties::helper_properties&gt;#</dia:string>
+            <dia:string>#std::list&lt;formattables::helper_properties&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -30272,17 +30272,17 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="434.225,19.4"/>
+        <dia:point val="436.535,19.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="413.295,18.65;434.975,34.8"/>
+        <dia:rectangle val="413.295,18.65;437.285,34.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="434.225,19.4"/>
-        <dia:point val="434.225,29"/>
+        <dia:point val="436.535,19.4"/>
+        <dia:point val="436.535,29"/>
         <dia:point val="413.345,29"/>
         <dia:point val="413.345,34"/>
       </dia:attribute>
@@ -30487,7 +30487,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
             <dia:string>#by_id#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, std::list&lt;properties::helper_properties&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, std::list&lt;formattables::helper_properties&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -30645,7 +30645,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
             <dia:string>#formatter_properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, properties::formatter_properties&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, formattables::formatter_properties&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -30668,7 +30668,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
             <dia:string>#helper_properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;properties::helper_properties&gt;#</dia:string>
+            <dia:string>#std::list&lt;formattables::helper_properties&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -30691,7 +30691,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
             <dia:string>#aspect_properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#properties::aspect_properties#</dia:string>
+            <dia:string>#formattables::aspect_properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -30970,7 +30970,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
             <dia:string>#by_id#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, properties::element_properties&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, formattables::element_properties&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -31647,13 +31647,13 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:point val="298,228"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="297.95,227.95;325.115,230.85"/>
+        <dia:rectangle val="297.95,227.95;327.425,230.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="298,228"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.064999999999998"/>
+        <dia:real val="29.375"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.7999999999999998"/>
@@ -31782,13 +31782,13 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:point val="266,242"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="265.95,241.95;278.822,245.65"/>
+        <dia:rectangle val="265.95,241.95;280.553,245.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="266,242"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.772499999999999"/>
+        <dia:real val="14.502500000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -31942,13 +31942,13 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:point val="295,242"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="294.95,241.95;317.88,245.65"/>
+        <dia:rectangle val="294.95,241.95;319.035,245.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="295,242"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="22.830000000000002"/>
+        <dia:real val="23.984999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -32210,7 +32210,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:point val="268.565,232.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="267.815,231.65;272.586,242.8"/>
+        <dia:rectangle val="267.815,231.65;273.451,242.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -32218,8 +32218,8 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       <dia:attribute name="orth_points">
         <dia:point val="268.565,232.4"/>
         <dia:point val="268.565,237.55"/>
-        <dia:point val="272.386,237.55"/>
-        <dia:point val="272.386,242"/>
+        <dia:point val="273.251,237.55"/>
+        <dia:point val="273.251,242"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -32780,7 +32780,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
             <dia:string>#by_id#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, properties::aspect_properties&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, formattables::aspect_properties&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -33235,13 +33235,13 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:point val="436,34"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="435.95,33.95;469.275,38.45"/>
+        <dia:rectangle val="435.95,33.95;471.585,38.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="436,34"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="33.225000000000001"/>
+        <dia:real val="35.535000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -33517,17 +33517,17 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="469.225,38.4"/>
+        <dia:point val="471.535,38.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="449.4,37.65;469.975,80.8"/>
+        <dia:rectangle val="449.4,37.65;472.285,80.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="469.225,38.4"/>
-        <dia:point val="469.225,70"/>
+        <dia:point val="471.535,38.4"/>
+        <dia:point val="471.535,70"/>
         <dia:point val="449.45,70"/>
         <dia:point val="449.45,80"/>
       </dia:attribute>
@@ -33733,13 +33733,13 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:point val="119,178"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="118.95,177.95;144.96,180.85"/>
+        <dia:rectangle val="118.95,177.95;147.27,180.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="119,178"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="25.91"/>
+        <dia:real val="28.219999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.7999999999999998"/>

@@ -29,7 +29,7 @@
 #include <string>
 #include "dogen/yarn/types/name_tree.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant_fwd.hpp"
-#include "dogen/quilt.cpp/types/properties/helper_properties_fwd.hpp"
+#include "dogen/quilt.cpp/types/formattables/helper_properties_fwd.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -50,9 +50,9 @@ public:
     virtual std::list<std::string> owning_facets() const = 0;
     virtual std::string helper_name() const = 0;
     virtual bool is_enabled(const assistant& a,
-        const properties::helper_properties& hp) const = 0;
+        const formattables::helper_properties& hp) const = 0;
     virtual void format(assistant& a,
-        const properties::helper_properties& hp) const = 0;
+        const formattables::helper_properties& hp) const = 0;
 };
 
 } } } }

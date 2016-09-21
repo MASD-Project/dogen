@@ -48,7 +48,7 @@ public:
 
     file_types file_type() const override;
 
-    void register_provider(properties::registrar& rg) const override;
+    void register_provider(formattables::registrar& rg) const override;
 
     dogen::formatters::file format(const context& ctx,
         const fabric::registrar& rg) const override;

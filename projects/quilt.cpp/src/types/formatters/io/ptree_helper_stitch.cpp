@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/properties/helper_properties.hpp"
+#include "dogen/quilt.cpp/types/formattables/helper_properties.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
@@ -63,12 +63,12 @@ std::string ptree_helper::helper_name() const {
 }
 
 bool ptree_helper::is_enabled(const assistant& a,
-    const properties::helper_properties& hp) const {
+    const formattables::helper_properties& hp) const {
     return a.is_streaming_enabled(hp);
 }
 
 void ptree_helper::
-format(assistant& a, const properties::helper_properties& hp) const {
+format(assistant& a, const formattables::helper_properties& hp) const {
     {
         const auto d(hp.current());
         const auto nt_qn(d.name_tree_qualified());

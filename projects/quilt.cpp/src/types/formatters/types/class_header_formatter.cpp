@@ -39,21 +39,21 @@ namespace types {
 namespace {
 
 class provider_hack final :
-        public properties::provider_interface<yarn::primitive> {
+        public formattables::provider_interface<yarn::primitive> {
 public:
     std::string facet_name() const override;
     std::string formatter_name() const override;
 
     std::list<std::string> provide_inclusion_dependencies(
-        const properties::inclusion_dependencies_builder_factory& f,
+        const formattables::inclusion_dependencies_builder_factory& f,
         const yarn::primitive& p) const override;
 
-    properties::inclusion_path_support inclusion_path_support() const override;
+    formattables::inclusion_path_support inclusion_path_support() const override;
 
-    boost::filesystem::path provide_inclusion_path(const properties::locator& l,
+    boost::filesystem::path provide_inclusion_path(const formattables::locator& l,
         const yarn::name& n) const override;
 
-    boost::filesystem::path provide_full_path(const properties::locator& l,
+    boost::filesystem::path provide_full_path(const formattables::locator& l,
         const yarn::name& n) const override;
 };
 
@@ -66,46 +66,46 @@ std::string provider_hack::formatter_name() const {
 }
 
 std::list<std::string> provider_hack::provide_inclusion_dependencies(
-    const properties::inclusion_dependencies_builder_factory& /*f*/,
+    const formattables::inclusion_dependencies_builder_factory& /*f*/,
     const yarn::primitive& /*p*/) const {
 
     static std::list<std::string> r;
     return r;
 }
 
-properties::inclusion_path_support provider_hack::
+formattables::inclusion_path_support provider_hack::
 inclusion_path_support() const {
-    return properties::inclusion_path_support::is_default;
+    return formattables::inclusion_path_support::is_default;
 }
 
 boost::filesystem::path
-provider_hack::provide_inclusion_path(const properties::locator& l,
+provider_hack::provide_inclusion_path(const formattables::locator& l,
     const yarn::name& n) const {
     return l.make_inclusion_path_for_cpp_header(n, formatter_name());
 }
 
 boost::filesystem::path
-provider_hack::provide_full_path(const properties::locator& l,
+provider_hack::provide_full_path(const formattables::locator& l,
     const yarn::name& n) const {
     return l.make_full_path_for_cpp_header(n, formatter_name());
 }
 
 class provider final :
-        public properties::provider_interface<yarn::object> {
+        public formattables::provider_interface<yarn::object> {
 public:
     std::string facet_name() const override;
     std::string formatter_name() const override;
 
     std::list<std::string> provide_inclusion_dependencies(
-        const properties::inclusion_dependencies_builder_factory& f,
+        const formattables::inclusion_dependencies_builder_factory& f,
         const yarn::object& o) const override;
 
-    properties::inclusion_path_support inclusion_path_support() const override;
+    formattables::inclusion_path_support inclusion_path_support() const override;
 
-    boost::filesystem::path provide_inclusion_path(const properties::locator& l,
+    boost::filesystem::path provide_inclusion_path(const formattables::locator& l,
         const yarn::name& n) const override;
 
-    boost::filesystem::path provide_full_path(const properties::locator& l,
+    boost::filesystem::path provide_full_path(const formattables::locator& l,
         const yarn::name& n) const override;
 };
 
@@ -118,7 +118,7 @@ std::string provider::formatter_name() const {
 }
 
 std::list<std::string> provider::provide_inclusion_dependencies(
-    const properties::inclusion_dependencies_builder_factory& f,
+    const formattables::inclusion_dependencies_builder_factory& f,
     const yarn::object& o) const {
 
     auto builder(f.make());
@@ -159,18 +159,18 @@ std::list<std::string> provider::provide_inclusion_dependencies(
     return builder.build();
 }
 
-properties::inclusion_path_support provider::inclusion_path_support() const {
-    return properties::inclusion_path_support::is_default;
+formattables::inclusion_path_support provider::inclusion_path_support() const {
+    return formattables::inclusion_path_support::is_default;
 }
 
 boost::filesystem::path
-provider::provide_inclusion_path(const properties::locator& l,
+provider::provide_inclusion_path(const formattables::locator& l,
     const yarn::name& n) const {
     return l.make_inclusion_path_for_cpp_header(n, formatter_name());
 }
 
 boost::filesystem::path
-provider::provide_full_path(const properties::locator& l,
+provider::provide_full_path(const formattables::locator& l,
     const yarn::name& n) const {
     return l.make_full_path_for_cpp_header(n, formatter_name());
 }
@@ -200,7 +200,7 @@ file_types class_header_formatter::file_type() const {
 }
 
 void class_header_formatter::
-register_provider(properties::registrar& rg) const {
+register_provider(formattables::registrar& rg) const {
     rg.register_provider(boost::make_shared<provider>());
     rg.register_provider(boost::make_shared<provider_hack>());
 }

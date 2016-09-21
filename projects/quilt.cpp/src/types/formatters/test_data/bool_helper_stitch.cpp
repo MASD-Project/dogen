@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/properties/helper_properties.hpp"
+#include "dogen/quilt.cpp/types/formattables/helper_properties.hpp"
 #include "dogen/quilt.cpp/types/formatters/test_data/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/formatters/test_data/bool_helper_stitch.hpp"
@@ -58,7 +58,7 @@ bool_helper::owning_facets() const {
 }
 
 bool bool_helper::is_enabled(const assistant& /*a*/,
-    const properties::helper_properties& /*hp*/) const {
+    const formattables::helper_properties& /*hp*/) const {
     return true;
 }
 
@@ -68,7 +68,7 @@ std::string bool_helper::helper_name() const {
 }
 
 void bool_helper::
-format(assistant& a, const properties::helper_properties& /*hp*/) const {
+format(assistant& a, const formattables::helper_properties& /*hp*/) const {
 a.stream() << std::endl;
 a.stream() << "bool create_bool(const unsigned int position) {" << std::endl;
 a.stream() << "    return (position % 2) == 0;" << std::endl;

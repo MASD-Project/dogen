@@ -50,21 +50,21 @@ namespace odb {
 namespace {
 
 class provider final :
-        public properties::provider_interface<fabric::odb_options> {
+        public formattables::provider_interface<fabric::odb_options> {
 public:
     std::string facet_name() const override;
     std::string formatter_name() const override;
 
     std::list<std::string> provide_inclusion_dependencies(
-        const properties::inclusion_dependencies_builder_factory& f,
+        const formattables::inclusion_dependencies_builder_factory& f,
         const fabric::odb_options& o) const override;
 
-    properties::inclusion_path_support inclusion_path_support() const override;
+    formattables::inclusion_path_support inclusion_path_support() const override;
 
-    boost::filesystem::path provide_inclusion_path(const properties::locator& l,
+    boost::filesystem::path provide_inclusion_path(const formattables::locator& l,
         const yarn::name& n) const override;
 
-    boost::filesystem::path provide_full_path(const properties::locator& l,
+    boost::filesystem::path provide_full_path(const formattables::locator& l,
         const yarn::name& n) const override;
 };
 
@@ -77,25 +77,25 @@ std::string provider::formatter_name() const {
 }
 
 std::list<std::string> provider::provide_inclusion_dependencies(
-    const properties::inclusion_dependencies_builder_factory& /*f*/,
+    const formattables::inclusion_dependencies_builder_factory& /*f*/,
     const fabric::odb_options& /*o*/) const {
     static std::list<std::string> r;
     return r;
 }
 
-properties::inclusion_path_support provider::inclusion_path_support() const {
-    return properties::inclusion_path_support::not_supported;
+formattables::inclusion_path_support provider::inclusion_path_support() const {
+    return formattables::inclusion_path_support::not_supported;
 }
 
 boost::filesystem::path
-provider::provide_inclusion_path(const properties::locator& /*l*/,
+provider::provide_inclusion_path(const formattables::locator& /*l*/,
     const yarn::name& n) const {
     BOOST_LOG_SEV(lg, error) << not_supported << n.id();
     BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.id()));
 }
 
 boost::filesystem::path
-provider::provide_full_path(const properties::locator& l,
+provider::provide_full_path(const formattables::locator& l,
     const yarn::name& n) const {
     return l.make_full_path_for_odb_options(n, formatter_name());
 }
@@ -125,7 +125,7 @@ file_types odb_options_formatter::file_type() const {
 }
 
 void odb_options_formatter::
-register_provider(properties::registrar& rg) const {
+register_provider(formattables::registrar& rg) const {
     rg.register_provider(boost::make_shared<provider>());
 }
 

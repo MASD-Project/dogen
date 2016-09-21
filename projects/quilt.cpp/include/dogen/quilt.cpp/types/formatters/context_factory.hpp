@@ -29,7 +29,7 @@
 #include "dogen/quilt.cpp/types/workflow_error.hpp"
 #include "dogen/quilt.cpp/types/annotations/streaming_annotations_repository.hpp"
 #include "dogen/quilt.cpp/types/annotations/element_annotations_repository.hpp"
-#include "dogen/quilt.cpp/types/properties/element_properties_repository.hpp"
+#include "dogen/quilt.cpp/types/formattables/element_properties_repository.hpp"
 #include "dogen/quilt.cpp/types/formatters/context.hpp"
 
 namespace dogen {
@@ -42,14 +42,14 @@ public:
     context_factory(
         const annotations::streaming_annotations_repository& ssrp,
         const annotations::element_annotations_repository& esrp,
-        const properties::element_properties_repository& fprp,
+        const formattables::element_properties_repository& fprp,
         const std::unordered_map<
         std::string, std::unordered_map<
         std::string,
         std::list<std::shared_ptr<helper_formatter_interface>>>>& helpers);
 
 private:
-    const properties::element_properties&
+    const formattables::element_properties&
     element_properties_for_id(const std::string& n) const;
 
     const annotations::element_annotations&
@@ -69,11 +69,11 @@ private:
             std::string,
             std::list<
                 std::shared_ptr<helper_formatter_interface>>>> empty_helpers_;
-    static const properties::element_properties empty_element_properties_;
+    static const formattables::element_properties empty_element_properties_;
     const annotations::streaming_annotations_repository&
     streaming_annotations_repository_;
     const annotations::element_annotations_repository& element_annotations_;
-    const properties::element_properties_repository& element_properties_;
+    const formattables::element_properties_repository& element_properties_;
     const std::unordered_map<
         std::string,
         std::unordered_map<std::string,

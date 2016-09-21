@@ -50,21 +50,21 @@ namespace test_data {
 
 namespace {
 
-class provider final : public properties::provider_interface<yarn::object> {
+class provider final : public formattables::provider_interface<yarn::object> {
 public:
     std::string facet_name() const override;
     std::string formatter_name() const override;
 
     std::list<std::string> provide_inclusion_dependencies(
-        const properties::inclusion_dependencies_builder_factory& f,
+        const formattables::inclusion_dependencies_builder_factory& f,
         const yarn::object& o) const override;
 
-    properties::inclusion_path_support inclusion_path_support() const override;
+    formattables::inclusion_path_support inclusion_path_support() const override;
 
-    boost::filesystem::path provide_inclusion_path(const properties::locator& l,
+    boost::filesystem::path provide_inclusion_path(const formattables::locator& l,
         const yarn::name& n) const override;
 
-    boost::filesystem::path provide_full_path(const properties::locator& l,
+    boost::filesystem::path provide_full_path(const formattables::locator& l,
         const yarn::name& n) const override;
 };
 
@@ -77,7 +77,7 @@ std::string provider::formatter_name() const {
 }
 
 std::list<std::string> provider::provide_inclusion_dependencies(
-    const properties::inclusion_dependencies_builder_factory& f,
+    const formattables::inclusion_dependencies_builder_factory& f,
     const yarn::object& o) const {
     auto builder(f.make());
     const auto ch_fn(traits::class_header_formatter_name());
@@ -95,12 +95,12 @@ std::list<std::string> provider::provide_inclusion_dependencies(
     return builder.build();
 }
 
-properties::inclusion_path_support provider::inclusion_path_support() const {
-    return properties::inclusion_path_support::not_supported;
+formattables::inclusion_path_support provider::inclusion_path_support() const {
+    return formattables::inclusion_path_support::not_supported;
 }
 
 boost::filesystem::path
-provider::provide_inclusion_path(const properties::locator& /*l*/,
+provider::provide_inclusion_path(const formattables::locator& /*l*/,
     const yarn::name& n) const {
 
     BOOST_LOG_SEV(lg, error) << not_supported << n.id();
@@ -108,7 +108,7 @@ provider::provide_inclusion_path(const properties::locator& /*l*/,
 }
 
 boost::filesystem::path
-provider::provide_full_path(const properties::locator& l,
+provider::provide_full_path(const formattables::locator& l,
     const yarn::name& n) const {
     return l.make_full_path_for_cpp_implementation(n, formatter_name());
 }
@@ -138,7 +138,7 @@ file_types class_implementation_formatter::file_type() const {
 }
 
 void class_implementation_formatter::
-register_provider(properties::registrar& rg) const {
+register_provider(formattables::registrar& rg) const {
     rg.register_provider(boost::make_shared<provider>());
 }
 

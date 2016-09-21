@@ -29,8 +29,8 @@
 #include "dogen/yarn/io/languages_io.hpp"
 #include "dogen/quilt.cpp/io/annotations/streaming_annotations_io.hpp"
 #include "dogen/quilt.cpp/io/annotations/helper_annotations_io.hpp"
-#include "dogen/quilt.cpp/io/properties/helper_properties_io.hpp"
-#include "dogen/quilt.cpp/types/properties/name_builder.hpp"
+#include "dogen/quilt.cpp/io/formattables/helper_properties_io.hpp"
+#include "dogen/quilt.cpp/types/formattables/name_builder.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/odb/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/traits.hpp"
@@ -162,12 +162,12 @@ void assistant::ensure_formatter_properties_are_present() const {
     BOOST_THROW_EXCEPTION(formatting_error(formatter_properties_missing + fn));
 }
 
-boost::optional<properties::formatter_properties> assistant::
+boost::optional<formattables::formatter_properties> assistant::
 obtain_formatter_properties(const std::string& formatter_name) const {
     const auto& fn(formatter_name);
     const auto i(context_.element_properties().formatter_properties().find(fn));
     if (i == context_.element_properties().formatter_properties().end())
-        return boost::optional<properties::formatter_properties>();
+        return boost::optional<formattables::formatter_properties>();
     return i->second;
 }
 
@@ -182,7 +182,7 @@ make_getter_setter_name(const yarn::attribute& attr) const {
 }
 
 std::list<std::string> assistant::make_namespaces(const yarn::name& n) const {
-    properties::name_builder b;
+    formattables::name_builder b;
     return b.namespace_list(n);
 }
 
@@ -384,7 +384,7 @@ std::string assistant::comment_inline(const std::string& c) const {
 }
 
 std::list<std::shared_ptr<formatters::helper_formatter_interface>>
-assistant::get_helpers(const properties::helper_properties& hp) const {
+assistant::get_helpers(const formattables::helper_properties& hp) const {
     const auto s(hp.current().helper_annotations());
 
     /*
@@ -421,7 +421,7 @@ bool assistant::is_io() const {
 }
 
 bool assistant::
-is_streaming_enabled(const properties::helper_properties& hp) const {
+is_streaming_enabled(const formattables::helper_properties& hp) const {
     /*
      * If the IO facet is globally disabled, we don't need streaming.
      */
@@ -509,7 +509,7 @@ std::string assistant::streaming_for_type(const yarn::name& n,
 }
 
 std::string assistant::
-streaming_for_type(const properties::helper_descriptor& hd,
+streaming_for_type(const formattables::helper_descriptor& hd,
     const std::string& s) const {
 
     const auto ss(hd.streaming_annotations());

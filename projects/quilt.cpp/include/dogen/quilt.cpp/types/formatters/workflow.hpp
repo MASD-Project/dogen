@@ -34,7 +34,7 @@
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/quilt.cpp/types/annotations/streaming_annotations_repository.hpp"
 #include "dogen/quilt.cpp/types/annotations/element_annotations_repository.hpp"
-#include "dogen/quilt.cpp/types/properties/element_properties_repository.hpp"
+#include "dogen/quilt.cpp/types/formattables/element_properties_repository.hpp"
 #include "dogen/quilt.cpp/types/formatters/registrar.hpp"
 #include "dogen/quilt.cpp/types/formatters/context_factory.hpp"
 
@@ -62,7 +62,7 @@ public:
     std::forward_list<dogen::formatters::file>
         execute(const annotations::streaming_annotations_repository& ssrp,
         const annotations::element_annotations_repository& esrp,
-        const properties::element_properties_repository& eprp,
+        const formattables::element_properties_repository& eprp,
         const std::forward_list<
         boost::shared_ptr<yarn::element> >& elements) const;
 

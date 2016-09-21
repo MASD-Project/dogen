@@ -43,7 +43,7 @@
 #include "dogen/quilt.cpp/types/annotations/opaque_annotations.hpp"
 #include "dogen/quilt.cpp/types/formatters/context.hpp"
 #include "dogen/quilt.cpp/types/formatters/file_types.hpp"
-#include "dogen/quilt.cpp/types/properties/helper_properties.hpp"
+#include "dogen/quilt.cpp/types/formattables/helper_properties.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -105,7 +105,7 @@ private:
      * @brief Obtains the formatter properties for the formatter as
      * given by the ownership hierarchy.
      */
-    boost::optional<properties::formatter_properties>
+    boost::optional<formattables::formatter_properties>
     obtain_formatter_properties(const std::string& formatter_name) const;
 
     /**
@@ -180,7 +180,7 @@ public:
      * @brief Returns true if the types facet is required to support
      * streaming or if we are in io facet.
      */
-    bool is_streaming_enabled(const properties::helper_properties& hp) const;
+    bool is_streaming_enabled(const formattables::helper_properties& hp) const;
 
 public:
     /**
@@ -243,7 +243,7 @@ public:
 
 private:
     std::list<std::shared_ptr<formatters::helper_formatter_interface>>
-    get_helpers(const properties::helper_properties& hp) const;
+    get_helpers(const formattables::helper_properties& hp) const;
 
     std::string streaming_for_type(const annotations::streaming_annotations& ss,
         const std::string& s) const;
@@ -260,7 +260,7 @@ public:
      * supplied type.
      */
     /**@{*/
-    std::string streaming_for_type(const properties::helper_descriptor& hd,
+    std::string streaming_for_type(const formattables::helper_descriptor& hd,
         const std::string& s) const;
     std::string streaming_for_type(const yarn::name& n,
         const std::string& s) const;
@@ -312,7 +312,7 @@ private:
     std::ostringstream stream_;
     boost::iostreams::filtering_ostream filtering_stream_;
     const context& context_;
-    const boost::optional<properties::formatter_properties>
+    const boost::optional<formattables::formatter_properties>
         formatter_properties_;
     const dynamic::ownership_hierarchy ownership_hierarchy_;
     const formatters::file_types file_type_;

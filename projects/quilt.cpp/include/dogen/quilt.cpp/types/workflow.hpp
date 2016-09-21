@@ -39,7 +39,7 @@
 #include "dogen/quilt.cpp/types/annotations/opaque_annotations_builder.hpp"
 #include "dogen/quilt.cpp/types/annotations/streaming_annotations_repository.hpp"
 #include "dogen/quilt.cpp/types/annotations/element_annotations_repository.hpp"
-#include "dogen/quilt.cpp/types/properties/element_properties_repository.hpp"
+#include "dogen/quilt.cpp/types/formattables/element_properties_repository.hpp"
 #include "dogen/yarn/types/model.hpp"
 
 namespace dogen {
@@ -96,7 +96,7 @@ private:
     /**
      * @brief Create the properties.
      */
-    properties::element_properties_repository
+    formattables::element_properties_repository
         create_properties(const options::cpp_options& opts,
         const dynamic::repository& srp,
         const dynamic::object& root_object,
@@ -117,7 +117,7 @@ private:
     std::forward_list<dogen::formatters::file>
     format(const annotations::streaming_annotations_repository& ssrp,
         const annotations::element_annotations_repository& esrp,
-        const properties::element_properties_repository& eprp,
+        const formattables::element_properties_repository& eprp,
         const std::forward_list<
         boost::shared_ptr<yarn::element> >& elements) const;
 

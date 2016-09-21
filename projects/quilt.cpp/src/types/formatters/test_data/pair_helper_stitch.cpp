@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/properties/helper_properties.hpp"
+#include "dogen/quilt.cpp/types/formattables/helper_properties.hpp"
 #include "dogen/quilt.cpp/types/formatters/test_data/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/formatters/test_data/pair_helper_stitch.hpp"
@@ -57,7 +57,7 @@ pair_helper::owning_facets() const {
 }
 
 bool pair_helper::is_enabled(const assistant& /*a*/,
-    const properties::helper_properties& /*hp*/) const {
+    const formattables::helper_properties& /*hp*/) const {
     return true;
 }
 
@@ -67,7 +67,7 @@ std::string pair_helper::helper_name() const {
 }
 
 void pair_helper::
-format(assistant& a, const properties::helper_properties& hp) const {
+format(assistant& a, const formattables::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
