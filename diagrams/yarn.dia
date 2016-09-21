@@ -16571,10 +16571,10 @@ This is used to break cycles where required.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#generalization_settings#</dia:string>
+            <dia:string>#generalization_annotations#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#generalization_settings#</dia:string>
+            <dia:string>#generalization_annotations#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -19035,10 +19035,10 @@ space.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#type_parameters_settings#</dia:string>
+            <dia:string>#type_parameters_annotations#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#type_parameters_settings#</dia:string>
+            <dia:string>#type_parameters_annotations#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -19080,7 +19080,7 @@ space.#</dia:string>
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#type_parameters_settings#</dia:string>
+        <dia:string>#type_parameters_annotations#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
@@ -19331,7 +19331,7 @@ space.#</dia:string>
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#type_parameters_settings_factory#</dia:string>
+        <dia:string>#type_parameters_annotations_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -19421,7 +19421,7 @@ space.#</dia:string>
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#type_parameters_settings_factory#</dia:string>
+            <dia:string>#type_parameters_annotations_factory#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -19475,7 +19475,7 @@ space.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#type_parameters_settings#</dia:string>
+            <dia:string>#type_parameters_annotations#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -19923,7 +19923,7 @@ space.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#settings_expander#</dia:string>
+        <dia:string>#annotations_expander#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -20239,7 +20239,7 @@ that belong to the yarn model.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#generalization_settings#</dia:string>
+        <dia:string>#generalization_annotations#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
@@ -20396,7 +20396,7 @@ that belong to the yarn model.#</dia:string>
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#generalization_settings_factory#</dia:string>
+        <dia:string>#generalization_annotations_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -20486,7 +20486,7 @@ that belong to the yarn model.#</dia:string>
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#generalisation_settings_factory#</dia:string>
+            <dia:string>#generalisation_annotations_factory#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -20540,7 +20540,7 @@ that belong to the yarn model.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#generalisation_settings#</dia:string>
+            <dia:string>#generalisation_annotations#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

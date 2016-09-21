@@ -63,9 +63,9 @@ private:
     void do_parsing_expansion(intermediate_model& im) const;
 
     /**
-     * @brief Performs a settings expansion on the model.
+     * @brief Performs a annotations expansion on the model.
      */
-    void do_settings_expansion(const dynamic::repository& drp,
+    void do_annotations_expansion(const dynamic::repository& drp,
         intermediate_model& im) const;
 
 public:

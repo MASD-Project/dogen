@@ -87,7 +87,7 @@ parse_attributes(const location& model_location,
 void parsing_expander::parse_parent(const location& model_location,
     const std::unordered_set<std::string>& top_level_modules, object& o) const {
 
-    if (!o.generalization_settings().parent())
+    if (!o.generalization_annotations().parent())
         return;
 
     if (o.parent()) {
@@ -96,7 +96,7 @@ void parsing_expander::parse_parent(const location& model_location,
         BOOST_THROW_EXCEPTION(expansion_error(parent_name_conflict + id));
     }
 
-    const auto str(*o.generalization_settings().parent());
+    const auto str(*o.generalization_annotations().parent());
     const auto pn(name_builder::build(model_location, top_level_modules, str));
     o.parent(pn);
 }

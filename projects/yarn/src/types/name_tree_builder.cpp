@@ -54,7 +54,7 @@ name_tree_builder::name_tree_builder(
       root_(new node) {
 
     current_ = root_;
-    BOOST_LOG_SEV(lg, debug) << "Initialised with settings:";
+    BOOST_LOG_SEV(lg, debug) << "Initialised with inputs:";
     BOOST_LOG_SEV(lg, debug) << " modules: " << top_level_modules_;
     BOOST_LOG_SEV(lg, debug) << " location: " << model_location_;
 }

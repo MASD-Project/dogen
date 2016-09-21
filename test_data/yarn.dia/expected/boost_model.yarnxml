@@ -373,14 +373,14 @@
 					<item_version>0</item_version>
 				</leaves>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
-				<generalization_settings class_id="40" tracking_level="0" version="0">
+				<generalization_annotations class_id="40" tracking_level="0" version="0">
 					<is_final class_id="41" tracking_level="0" version="0">
 						<initialized>0</initialized>
 					</is_final>
 					<parent class_id="42" tracking_level="0" version="0">
 						<initialized>0</initialized>
 					</parent>
-				</generalization_settings>
+				</generalization_annotations>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -397,11 +397,11 @@
 				</derived_visitor>
 				<is_visitation_root>0</is_visitation_root>
 				<is_visitation_leaf>0</is_visitation_leaf>
-				<type_parameters_settings class_id="43" tracking_level="0" version="0">
+				<type_parameters_annotations class_id="43" tracking_level="0" version="0">
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
-				</type_parameters_settings>
+				</type_parameters_annotations>
 				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
@@ -579,14 +579,14 @@
 					<item_version>0</item_version>
 				</leaves>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
-				<generalization_settings>
+				<generalization_annotations>
 					<is_final>
 						<initialized>0</initialized>
 					</is_final>
 					<parent>
 						<initialized>0</initialized>
 					</parent>
-				</generalization_settings>
+				</generalization_annotations>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -603,11 +603,11 @@
 				</derived_visitor>
 				<is_visitation_root>0</is_visitation_root>
 				<is_visitation_leaf>0</is_visitation_leaf>
-				<type_parameters_settings>
+				<type_parameters_annotations>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
-				</type_parameters_settings>
+				</type_parameters_annotations>
 				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
@@ -815,14 +815,14 @@
 					<item_version>0</item_version>
 				</leaves>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
-				<generalization_settings>
+				<generalization_annotations>
 					<is_final>
 						<initialized>0</initialized>
 					</is_final>
 					<parent>
 						<initialized>0</initialized>
 					</parent>
-				</generalization_settings>
+				</generalization_annotations>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -839,11 +839,11 @@
 				</derived_visitor>
 				<is_visitation_root>0</is_visitation_root>
 				<is_visitation_leaf>0</is_visitation_leaf>
-				<type_parameters_settings>
+				<type_parameters_annotations>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
-				</type_parameters_settings>
+				</type_parameters_annotations>
 				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
@@ -1104,14 +1104,14 @@
 					<item_version>0</item_version>
 				</leaves>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
-				<generalization_settings>
+				<generalization_annotations>
 					<is_final>
 						<initialized>0</initialized>
 					</is_final>
 					<parent>
 						<initialized>0</initialized>
 					</parent>
-				</generalization_settings>
+				</generalization_annotations>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -1128,11 +1128,11 @@
 				</derived_visitor>
 				<is_visitation_root>0</is_visitation_root>
 				<is_visitation_leaf>0</is_visitation_leaf>
-				<type_parameters_settings>
+				<type_parameters_annotations>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
-				</type_parameters_settings>
+				</type_parameters_annotations>
 				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
@@ -1310,14 +1310,14 @@
 					<item_version>0</item_version>
 				</leaves>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
-				<generalization_settings>
+				<generalization_annotations>
 					<is_final>
 						<initialized>0</initialized>
 					</is_final>
 					<parent>
 						<initialized>0</initialized>
 					</parent>
-				</generalization_settings>
+				</generalization_annotations>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -1334,11 +1334,11 @@
 				</derived_visitor>
 				<is_visitation_root>0</is_visitation_root>
 				<is_visitation_leaf>0</is_visitation_leaf>
-				<type_parameters_settings>
+				<type_parameters_annotations>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
-				</type_parameters_settings>
+				</type_parameters_annotations>
 				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
@@ -1996,14 +1996,14 @@
 					<item_version>0</item_version>
 				</leaves>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
-				<generalization_settings>
+				<generalization_annotations>
 					<is_final>
 						<initialized>0</initialized>
 					</is_final>
 					<parent>
 						<initialized>0</initialized>
 					</parent>
-				</generalization_settings>
+				</generalization_annotations>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -2020,11 +2020,11 @@
 				</derived_visitor>
 				<is_visitation_root>0</is_visitation_root>
 				<is_visitation_leaf>0</is_visitation_leaf>
-				<type_parameters_settings>
+				<type_parameters_annotations>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
-				</type_parameters_settings>
+				</type_parameters_annotations>
 				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
@@ -2442,14 +2442,14 @@
 					<item_version>0</item_version>
 				</leaves>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
-				<generalization_settings>
+				<generalization_annotations>
 					<is_final>
 						<initialized>0</initialized>
 					</is_final>
 					<parent>
 						<initialized>0</initialized>
 					</parent>
-				</generalization_settings>
+				</generalization_annotations>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -2466,11 +2466,11 @@
 				</derived_visitor>
 				<is_visitation_root>0</is_visitation_root>
 				<is_visitation_leaf>0</is_visitation_leaf>
-				<type_parameters_settings>
+				<type_parameters_annotations>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
-				</type_parameters_settings>
+				</type_parameters_annotations>
 				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
@@ -2808,14 +2808,14 @@
 					<item_version>0</item_version>
 				</leaves>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
-				<generalization_settings>
+				<generalization_annotations>
 					<is_final>
 						<initialized>0</initialized>
 					</is_final>
 					<parent>
 						<initialized>0</initialized>
 					</parent>
-				</generalization_settings>
+				</generalization_annotations>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -2832,11 +2832,11 @@
 				</derived_visitor>
 				<is_visitation_root>0</is_visitation_root>
 				<is_visitation_leaf>0</is_visitation_leaf>
-				<type_parameters_settings>
+				<type_parameters_annotations>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
-				</type_parameters_settings>
+				</type_parameters_annotations>
 				<object_type>1</object_type>
 				<modeled_concepts>
 					<count>0</count>
@@ -3254,14 +3254,14 @@
 					<item_version>0</item_version>
 				</leaves>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
-				<generalization_settings>
+				<generalization_annotations>
 					<is_final>
 						<initialized>0</initialized>
 					</is_final>
 					<parent>
 						<initialized>0</initialized>
 					</parent>
-				</generalization_settings>
+				</generalization_annotations>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -3278,11 +3278,11 @@
 				</derived_visitor>
 				<is_visitation_root>0</is_visitation_root>
 				<is_visitation_leaf>0</is_visitation_leaf>
-				<type_parameters_settings>
+				<type_parameters_annotations>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
-				</type_parameters_settings>
+				</type_parameters_annotations>
 				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
@@ -3860,14 +3860,14 @@
 					<item_version>0</item_version>
 				</leaves>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
-				<generalization_settings>
+				<generalization_annotations>
 					<is_final>
 						<initialized>0</initialized>
 					</is_final>
 					<parent>
 						<initialized>0</initialized>
 					</parent>
-				</generalization_settings>
+				</generalization_annotations>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -3884,11 +3884,11 @@
 				</derived_visitor>
 				<is_visitation_root>0</is_visitation_root>
 				<is_visitation_leaf>0</is_visitation_leaf>
-				<type_parameters_settings>
+				<type_parameters_annotations>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
-				</type_parameters_settings>
+				</type_parameters_annotations>
 				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
@@ -4146,14 +4146,14 @@
 					<item_version>0</item_version>
 				</leaves>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
-				<generalization_settings>
+				<generalization_annotations>
 					<is_final>
 						<initialized>0</initialized>
 					</is_final>
 					<parent>
 						<initialized>0</initialized>
 					</parent>
-				</generalization_settings>
+				</generalization_annotations>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -4170,11 +4170,11 @@
 				</derived_visitor>
 				<is_visitation_root>0</is_visitation_root>
 				<is_visitation_leaf>0</is_visitation_leaf>
-				<type_parameters_settings>
+				<type_parameters_annotations>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
-				</type_parameters_settings>
+				</type_parameters_annotations>
 				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>

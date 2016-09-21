@@ -40,8 +40,8 @@
 #include "dogen/yarn/hash/stereotypes_hash.hpp"
 #include "dogen/yarn/types/element_visitor_fwd.hpp"
 #include "dogen/yarn/serialization/object_fwd_ser.hpp"
-#include "dogen/yarn/types/generalization_settings.hpp"
-#include "dogen/yarn/types/type_parameters_settings.hpp"
+#include "dogen/yarn/types/generalization_annotations.hpp"
+#include "dogen/yarn/types/type_parameters_annotations.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -90,14 +90,14 @@ public:
         const boost::optional<dogen::yarn::name>& parent,
         const std::list<dogen::yarn::name>& leaves,
         const bool in_inheritance_relationship,
-        const dogen::yarn::generalization_settings& generalization_settings,
+        const dogen::yarn::generalization_annotations& generalization_annotations,
         const std::list<dogen::yarn::name>& transparent_associations,
         const std::list<dogen::yarn::name>& opaque_associations,
         const boost::optional<dogen::yarn::name>& base_visitor,
         const boost::optional<dogen::yarn::name>& derived_visitor,
         const bool is_visitation_root,
         const bool is_visitation_leaf,
-        const dogen::yarn::type_parameters_settings& type_parameters_settings,
+        const dogen::yarn::type_parameters_annotations& type_parameters_annotations,
         const dogen::yarn::object_types object_type,
         const std::list<dogen::yarn::name>& modeled_concepts,
         const std::list<dogen::yarn::name>& associative_container_keys,
@@ -247,10 +247,10 @@ public:
     void in_inheritance_relationship(const bool v);
     /**@}*/
 
-    const dogen::yarn::generalization_settings& generalization_settings() const;
-    dogen::yarn::generalization_settings& generalization_settings();
-    void generalization_settings(const dogen::yarn::generalization_settings& v);
-    void generalization_settings(const dogen::yarn::generalization_settings&& v);
+    const dogen::yarn::generalization_annotations& generalization_annotations() const;
+    dogen::yarn::generalization_annotations& generalization_annotations();
+    void generalization_annotations(const dogen::yarn::generalization_annotations& v);
+    void generalization_annotations(const dogen::yarn::generalization_annotations&& v);
 
     /**
      * @brief Elements that are involved in aggregation or composition relationships.
@@ -301,10 +301,10 @@ public:
     bool is_visitation_leaf() const;
     void is_visitation_leaf(const bool v);
 
-    const dogen::yarn::type_parameters_settings& type_parameters_settings() const;
-    dogen::yarn::type_parameters_settings& type_parameters_settings();
-    void type_parameters_settings(const dogen::yarn::type_parameters_settings& v);
-    void type_parameters_settings(const dogen::yarn::type_parameters_settings&& v);
+    const dogen::yarn::type_parameters_annotations& type_parameters_annotations() const;
+    dogen::yarn::type_parameters_annotations& type_parameters_annotations();
+    void type_parameters_annotations(const dogen::yarn::type_parameters_annotations& v);
+    void type_parameters_annotations(const dogen::yarn::type_parameters_annotations&& v);
 
     /**
      * @brief What kind of object is this.
@@ -374,14 +374,14 @@ private:
     boost::optional<dogen::yarn::name> parent_;
     std::list<dogen::yarn::name> leaves_;
     bool in_inheritance_relationship_;
-    dogen::yarn::generalization_settings generalization_settings_;
+    dogen::yarn::generalization_annotations generalization_annotations_;
     std::list<dogen::yarn::name> transparent_associations_;
     std::list<dogen::yarn::name> opaque_associations_;
     boost::optional<dogen::yarn::name> base_visitor_;
     boost::optional<dogen::yarn::name> derived_visitor_;
     bool is_visitation_root_;
     bool is_visitation_leaf_;
-    dogen::yarn::type_parameters_settings type_parameters_settings_;
+    dogen::yarn::type_parameters_annotations type_parameters_annotations_;
     dogen::yarn::object_types object_type_;
     std::list<dogen::yarn::name> modeled_concepts_;
     std::list<dogen::yarn::name> associative_container_keys_;

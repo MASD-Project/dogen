@@ -20,7 +20,7 @@
  */
 #include "dogen/yarn/types/modules_expander.hpp"
 #include "dogen/yarn/types/parsing_expander.hpp"
-#include "dogen/yarn/types/settings_expander.hpp"
+#include "dogen/yarn/types/annotations_expander.hpp"
 #include "dogen/yarn/types/descriptor_factory.hpp"
 #include "dogen/yarn/types/intermediate_model_factory.hpp"
 #include "dogen/yarn/types/pre_merge_workflow.hpp"
@@ -53,9 +53,9 @@ void pre_merge_workflow::do_parsing_expansion(intermediate_model& m) const {
     ex.expand(m);
 }
 
-void pre_merge_workflow::do_settings_expansion(const dynamic::repository& drp,
+void pre_merge_workflow::do_annotations_expansion(const dynamic::repository& drp,
     intermediate_model& m) const {
-    settings_expander ex(drp);
+    annotations_expander ex(drp);
     ex.expand(m);
 }
 
@@ -69,7 +69,7 @@ pre_merge_workflow::execute(const dynamic::repository& drp,
     auto r(obtain_intermediate_models(drp, rg, d));
     for (auto& im: r) {
         do_modules_expansion(im);
-        do_settings_expansion(drp, im);
+        do_annotations_expansion(drp, im);
         do_parsing_expansion(im);
     }
     return r;

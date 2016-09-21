@@ -60,7 +60,7 @@ update_and_collect_parent_ids(intermediate_model& im) const {
 
         /*
          * Resolve the name of the parent. This is required because it
-         * may have been supplied via settings, and as such, it may
+         * may have been supplied via annotations, and as such, it may
          * not be complete. We can't wait for the resolution step
          * because there is a circular dependency (resolution needs
          * injection and injection needs generalization, which needs
@@ -162,8 +162,8 @@ void generalization_expander::populate_generalizable_properties(
          /*
           * Handle the case where the user decided to override final.
           */
-         if (o.generalization_settings().is_final()) {
-             const auto is_final(*o.generalization_settings().is_final());
+         if (o.generalization_annotations().is_final()) {
+             const auto is_final(*o.generalization_annotations().is_final());
              if (is_final && o.is_parent()) {
                  BOOST_LOG_SEV(lg, error) << incompatible_is_final << id;
                  BOOST_THROW_EXCEPTION(
