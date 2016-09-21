@@ -40,13 +40,7 @@ before_build:
   - cmd: cd output
   - cmd: if "%configuration%"=="Release" conan install ../.. --file=.conanfile.txt
   - cmd: if "%configuration%"=="Debug" conan install ../.. --file=.conanfile.txt -s compiler="Visual Studio" -s compiler.version=14 -s arch=x86 -s build_type=Debug -s compiler.runtime=MDd
-    # FIMXE: try find out where cmake is
-  - cmd: dir "C:\Program Files\CMake\bin"
-  - cmd: dir "C:\Program Files"
-  - cmd: dir "C:\Program Files\CMake"
-  - cmd: dir "C:\Program Files (x86)"
-  - cmd: dir "C:\Program Files (x86)\CMake"
-  - cmd: set PATH=%PATH%:C:\Program Files\CMake\bin;C:\Program Files (x86)\cmake\bin
+  - cmd: set PATH=%PATH%:"C:\Program Files\CMake\bin";"C:\Program Files (x86)\cmake\bin"
   # Workaround for CMake not wanting sh.exe on PATH for MinGW
   - cmd: set PATH=%PATH:C:\Program Files\Git\usr\bin;=%
   - cmd: set PATH=C:\MinGW\bin;%PATH%
