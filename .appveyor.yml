@@ -19,20 +19,25 @@ platform:
 clone_depth: 5
 
 install:
-    #
-    # cmake
-    #
-    - cinst cmake
+  # Workaround for CMake not wanting sh.exe on PATH for MinGW
+  - cmd: set PATH=%PATH%:C:\Program Files\Git\usr\bin;=%
 
-    #
-    # conan
-    #
-    - cmd: echo "Installing conan..."
-    - cmd: set PYTHON="C:/Python27"
-    - cmd: set PATH=%PATH%;%PYTHON%/Scripts/
-    - cmd: pip.exe install conan
-    - cmd: set PATH=%PATH%;C:\Program Files (x86)\Conan\conan
-    - cmd: conan --version
+  #
+  # cmake
+  #
+  - cinst cmake
+  - cmd: set PATH=C:\MinGW\bin;%PATH%
+  - cmake --version
+
+  #
+  # conan
+  #
+  - cmd: echo "Installing conan..."
+  - cmd: set PYTHON="C:/Python27"
+  - cmd: set PATH=%PATH%;%PYTHON%/Scripts/
+  - cmd: pip.exe install conan
+  - cmd: set PATH=%PATH%;C:\Program Files (x86)\Conan\conan
+  - cmd: conan --version
 
 before_build:
   - cmd: cd build
@@ -41,9 +46,6 @@ before_build:
   - cmd: if "%configuration%"=="Release" conan install ../.. --file=.conanfile.txt
   - cmd: if "%configuration%"=="Debug" conan install ../.. --file=.conanfile.txt -s compiler="Visual Studio" -s compiler.version=14 -s arch=x86 -s build_type=Debug -s compiler.runtime=MDd
   - cmd: set PATH=%PATH%:"C:\Program Files\CMake\bin";"C:\Program Files (x86)\cmake\bin"
-  # Workaround for CMake not wanting sh.exe on PATH for MinGW
-  - cmd: set PATH=%PATH:C:\Program Files\Git\usr\bin;=%
-  - cmd: set PATH=C:\MinGW\bin;%PATH%
   - cmd: cmake ../.. -DCMAKE_BUILD_TYPE=%configuration% -G "%generator%"
 
 build_script:
