@@ -99,13 +99,13 @@ public:
     std::string get_product_name(const yarn::name& n) const;
 
 private:
-    void ensure_formatter_properties_are_present() const;
-
     /**
      * @brief Obtains the formatter properties for the formatter as
      * given by the ownership hierarchy.
+     *
+     * @pre Formatter properties must exist for the formatter.
      */
-    boost::optional<formattables::formatter_properties>
+    formattables::formatter_properties
     obtain_formatter_properties(const std::string& formatter_name) const;
 
     /**
@@ -312,8 +312,7 @@ private:
     std::ostringstream stream_;
     boost::iostreams::filtering_ostream filtering_stream_;
     const context& context_;
-    const boost::optional<formattables::formatter_properties>
-        formatter_properties_;
+    formattables::formatter_properties formatter_properties_;
     const dynamic::ownership_hierarchy ownership_hierarchy_;
     const formatters::file_types file_type_;
 };

@@ -153,21 +153,16 @@ std::string assistant::get_product_name(const yarn::name& n) const {
     return n.location().external_modules().front();
 }
 
-void assistant::ensure_formatter_properties_are_present() const {
-    if (formatter_properties_)
-        return;
-
-    const auto fn(ownership_hierarchy_.formatter_name());
-    BOOST_LOG_SEV(lg, error) << formatter_properties_missing << fn;
-    BOOST_THROW_EXCEPTION(formatting_error(formatter_properties_missing + fn));
-}
-
-boost::optional<formattables::formatter_properties> assistant::
+formattables::formatter_properties assistant::
 obtain_formatter_properties(const std::string& formatter_name) const {
     const auto& fn(formatter_name);
     const auto i(context_.element_properties().formatter_properties().find(fn));
-    if (i == context_.element_properties().formatter_properties().end())
-        return boost::optional<formattables::formatter_properties>();
+    if (i == context_.element_properties().formatter_properties().end()) {
+        BOOST_LOG_SEV(lg, error) << formatter_properties_missing
+                                 << formatter_name;
+        BOOST_THROW_EXCEPTION(formatting_error(formatter_properties_missing +
+                formatter_name));
+    }
     return i->second;
 }
 
@@ -188,16 +183,14 @@ std::list<std::string> assistant::make_namespaces(const yarn::name& n) const {
 
 bool assistant::
 is_formatter_enabled(const std::string& formatter_name) const {
-    ensure_formatter_properties_are_present();
-    const auto fp(*formatter_properties_);
+    const auto& fp(formatter_properties_);
     const auto i(fp.enabled_formatters().find(formatter_name));
     return i != fp.enabled_formatters().end();
 }
 
 std::string assistant::
 get_facet_directory_for_facet(const std::string& facet_name) const {
-    ensure_formatter_properties_are_present();
-    const auto& fdff(formatter_properties_->facet_directory_for_facet());
+    const auto& fdff(formatter_properties_.facet_directory_for_facet());
     const auto i(fdff.find(facet_name));
     if (i == fdff.end()) {
         BOOST_LOG_SEV(lg, error) << facet_directory_missing << facet_name;
@@ -253,11 +246,8 @@ bool assistant::is_odb_enabled() const {
 }
 
 void assistant::validate() const {
-    if (!formatter_properties_)
-        return;
-
     const auto& fn(ownership_hierarchy_.formatter_name());
-    const auto fp(*formatter_properties_);
+    const auto& fp(formatter_properties_);
     if (fp.file_path().empty()) {
         BOOST_LOG_SEV(lg, error) << file_path_not_set << fn;
         BOOST_THROW_EXCEPTION(formatting_error(file_path_not_set + fn));
@@ -273,8 +263,7 @@ void assistant::validate() const {
 
 dogen::formatters::cpp::scoped_boilerplate_formatter
 assistant::make_scoped_boilerplate_formatter() {
-    ensure_formatter_properties_are_present();
-    const auto& fp(*formatter_properties_);
+    const auto& fp(formatter_properties_);
     const auto dc(context_.element_properties().decoration_configuration());
     return dogen::formatters::cpp::scoped_boilerplate_formatter(
         stream(), dc, fp.inclusion_dependencies(),
@@ -305,8 +294,7 @@ void assistant::make_decoration_preamble(
 
 dogen::formatters::file assistant::
 make_file(const bool overwrite) const {
-    ensure_formatter_properties_are_present();
-    return make_file(formatter_properties_->file_path(), overwrite);
+    return make_file(formatter_properties_.file_path(), overwrite);
 }
 
 void assistant::comment(const std::string& c) {

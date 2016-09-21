@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-21 Wed 21:25]
+#+CAPTION: Clock summary at [2016-09-21 Wed 21:35]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *60:56* |       |       | 100.0 |
+| *Total time*                                                                | *61:06* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 60:56   |       |       | 100.0 |
-| Active                                                                      |         | 60:56 |       | 100.0 |
+| Stories                                                                     | 61:06   |       |       | 100.0 |
+| Active                                                                      |         | 61:06 |       | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  3:33 |   5.8 |
 | COMPLETED Fix chocolatey warning                                            |         |       |  0:08 |   0.2 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:27 |   0.7 |
@@ -32,25 +32,26 @@
 | COMPLETED Refactor path derivatives factory for usage in formatters         |         |       |  5:14 |   8.6 |
 | COMPLETED Move file path generation to formatters                           |         |       |  1:58 |   3.2 |
 | CANCELLED Path derivatives factory generates all possible includes          |         |       |  3:07 |   5.1 |
-| COMPLETED Analysis on inclusion derivatives and path derivatives            |         |       |  1:04 |   1.8 |
-| COMPLETED Split path factory from provider factory                          |         |       |  2:32 |   4.2 |
+| COMPLETED Analysis on inclusion derivatives and path derivatives            |         |       |  1:04 |   1.7 |
+| COMPLETED Split path factory from provider factory                          |         |       |  2:32 |   4.1 |
 | COMPLETED Use providers when building inclusion directives                  |         |       | 12:01 |  19.7 |
 | COMPLETED Fix AppVeyor notifications                                        |         |       |  0:22 |   0.6 |
 | COMPLETED Static use of element types does more harm than good              |         |       |  0:32 |   0.9 |
 | COMPLETED Analysis: major rethink of the implementation of quilt            |         |       |  1:30 |   2.5 |
 | CANCELLED Create a simple Emacs mode for stitch                             |         |       |  1:12 |   2.0 |
 | COMPLETED Add facet folder and formatter enablement to formatter properties |         |       |  2:52 |   4.7 |
-| COMPLETED Move =cmakelists_info= to fabric                                  |         |       |  6:34 |  10.8 |
+| COMPLETED Move =cmakelists_info= to fabric                                  |         |       |  6:34 |  10.7 |
 | COMPLETED Move =odb_options_info= to fabric                                 |         |       |  1:29 |   2.4 |
 | COMPLETED Remove =formattable_origin_type=                                  |         |       |  0:17 |   0.5 |
 | COMPLETED Remove formattable origin type                                    |         |       |  2:25 |   4.0 |
 | COMPLETED Rename config model to options                                    |         |       |  1:07 |   1.8 |
 | COMPLETED Rename annotation to decoration in formatters model               |         |       |  0:30 |   0.8 |
-| COMPLETED Fix appveyor Visual Studio build                                  |         |       |  1:04 |   1.8 |
+| COMPLETED Fix appveyor Visual Studio build                                  |         |       |  1:04 |   1.7 |
 | COMPLETED Big rename for "final" terminology clean up                       |         |       |  2:19 |   3.8 |
 | COMPLETED Tidy-up file configuration in formatters                          |         |       |  3:03 |   5.0 |
 | COMPLETED Stitch still uses "properties"                                    |         |       |  0:27 |   0.7 |
 | CANCELLED Add a stitch prefix to stitch fields                              |         |       |  0:03 |   0.1 |
+| COMPLETED Formatter properties are not optional in assistant                |         |       |  0:10 |   0.3 |
 | STARTED Add type index to name and to formatter interface                   |         |       |  0:53 |   1.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -985,7 +986,9 @@ stitch. This is a good idea, but we need to find a good name for the
 field group rather than just stitch. For now might as well leave it as
 is.
 
-*** Formatter properties are not optional in assistant                :story:
+*** COMPLETED Formatter properties are not optional in assistant      :story:
+    CLOSED: [2016-09-21 Wed 21:35]
+    CLOCK: [2016-09-21 Wed 21:25]--[2016-09-21 Wed 21:35] =>  0:10
 
 After the formattables refactor, the formatter properties are now
 mandatory for all elements. We should not allow them to be optional in
