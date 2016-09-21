@@ -32,6 +32,7 @@ install:
     - cmd: conan --version
 
 before_build:
+  - cmd: set PATH=%PATH:C:\Program Files\CMake\bin;
   # Workaround for CMake not wanting sh.exe on PATH for MinGW
   - cmd: set PATH=%PATH:C:\Program Files\Git\usr\bin;=%
   - cmd: set PATH=C:\MinGW\bin;%PATH%
