@@ -18,35 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_HASH_FILE_SETTINGS_HASH_HPP
-#define DOGEN_FORMATTERS_HASH_FILE_SETTINGS_HASH_HPP
+#ifndef DOGEN_FORMATTERS_IO_FILE_ANNOTATIONS_IO_HPP
+#define DOGEN_FORMATTERS_IO_FILE_ANNOTATIONS_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/formatters/types/file_settings.hpp"
+#include <iosfwd>
+#include "dogen/formatters/types/file_annotations.hpp"
 
 namespace dogen {
 namespace formatters {
 
-struct file_settings_hasher {
-public:
-    static std::size_t hash(const file_settings& v);
-};
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::formatters::file_annotations& v);
 
 } }
 
-namespace std {
-
-template<>
-struct hash<dogen::formatters::file_settings> {
-public:
-    size_t operator()(const dogen::formatters::file_settings& v) const {
-        return dogen::formatters::file_settings_hasher::hash(v);
-    }
-};
-
-}
 #endif

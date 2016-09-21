@@ -18,24 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_SERIALIZATION_FILE_SETTINGS_FWD_SER_HPP
-#define DOGEN_FORMATTERS_SERIALIZATION_FILE_SETTINGS_FWD_SER_HPP
+#ifndef DOGEN_FORMATTERS_HASH_FILE_ANNOTATIONS_HASH_HPP
+#define DOGEN_FORMATTERS_HASH_FILE_ANNOTATIONS_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/formatters/types/file_settings_fwd.hpp"
+#include <functional>
+#include "dogen/formatters/types/file_annotations.hpp"
 
-namespace boost {
-namespace serialization {
+namespace dogen {
+namespace formatters {
 
-template<class Archive>
-void save(Archive& ar, const dogen::formatters::file_settings& v, unsigned int version);
-
-template<class Archive>
-void load(Archive& ar, dogen::formatters::file_settings& v, unsigned int version);
+struct file_annotations_hasher {
+public:
+    static std::size_t hash(const file_annotations& v);
+};
 
 } }
 
+namespace std {
+
+template<>
+struct hash<dogen::formatters::file_annotations> {
+public:
+    size_t operator()(const dogen::formatters::file_annotations& v) const {
+        return dogen::formatters::file_annotations_hasher::hash(v);
+    }
+};
+
+}
 #endif

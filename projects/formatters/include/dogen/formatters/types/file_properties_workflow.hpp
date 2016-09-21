@@ -29,7 +29,7 @@
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/formatters/types/repository.hpp"
 #include "dogen/formatters/types/file_properties.hpp"
-#include "dogen/formatters/types/file_settings_factory.hpp"
+#include "dogen/formatters/types/file_annotations_factory.hpp"
 #include "dogen/formatters/types/file_properties_factory.hpp"
 
 namespace dogen {
@@ -68,7 +68,7 @@ public:
     /**@}*/
 
 private:
-    const file_settings_factory settings_factory_;
+    const file_annotations_factory annotations_factory_;
     const file_properties_factory properties_factory_;
 };
 

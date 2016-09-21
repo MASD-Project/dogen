@@ -18,24 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TEST_DATA_FILE_SETTINGS_TD_HPP
-#define DOGEN_FORMATTERS_TEST_DATA_FILE_SETTINGS_TD_HPP
+#ifndef DOGEN_FORMATTERS_TEST_DATA_FILE_ANNOTATIONS_TD_HPP
+#define DOGEN_FORMATTERS_TEST_DATA_FILE_ANNOTATIONS_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/formatters/types/file_settings.hpp"
+#include "dogen/formatters/types/file_annotations.hpp"
 
 namespace dogen {
 namespace formatters {
 
-class file_settings_generator {
+class file_annotations_generator {
 public:
-    file_settings_generator();
+    file_annotations_generator();
 
 public:
-    typedef dogen::formatters::file_settings result_type;
+    typedef dogen::formatters::file_annotations result_type;
 
 public:
     static void populate(const unsigned int position, result_type& v);

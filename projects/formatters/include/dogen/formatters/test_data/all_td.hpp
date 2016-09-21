@@ -32,12 +32,12 @@
 #include "dogen/formatters/test_data/decoration_td.hpp"
 #include "dogen/formatters/test_data/repository_td.hpp"
 #include "dogen/formatters/test_data/quote_types_td.hpp"
-#include "dogen/formatters/test_data/file_settings_td.hpp"
 #include "dogen/formatters/test_data/spacing_types_td.hpp"
 #include "dogen/formatters/test_data/comment_styles_td.hpp"
 #include "dogen/formatters/test_data/modeline_field_td.hpp"
 #include "dogen/formatters/test_data/modeline_group_td.hpp"
 #include "dogen/formatters/test_data/file_properties_td.hpp"
+#include "dogen/formatters/test_data/file_annotations_td.hpp"
 #include "dogen/formatters/test_data/modeline_locations_td.hpp"
 #include "dogen/formatters/test_data/infix_configuration_td.hpp"
 

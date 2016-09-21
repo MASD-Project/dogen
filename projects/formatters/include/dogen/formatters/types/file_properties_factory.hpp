@@ -30,7 +30,7 @@
 #include "dogen/formatters/types/licence.hpp"
 #include "dogen/formatters/types/repository.hpp"
 #include "dogen/formatters/types/modeline_group.hpp"
-#include "dogen/formatters/types/file_settings.hpp"
+#include "dogen/formatters/types/file_annotations.hpp"
 #include "dogen/formatters/types/file_properties.hpp"
 
 namespace dogen {
@@ -50,25 +50,25 @@ public:
 public:
     explicit file_properties_factory(const repository& rp);
     file_properties_factory(const repository& rp,
-        const file_settings& fallback);
+        const file_annotations& fallback);
 
 private:
     /**
      * @brief Obtains the licence text.
      */
     boost::optional<std::string>
-    get_licence_text(const file_settings& fs) const;
+    get_licence_text(const file_annotations& fa) const;
 
     /**
      * @brief Obtains a licence.
      */
-    boost::optional<licence> get_licence(const file_settings& fs) const;
+    boost::optional<licence> get_licence(const file_annotations& fa) const;
 
     /**
      * @brief Obtains the modeline group name.
      */
     boost::optional<modeline_group>
-    get_modeline_group(const file_settings& fs) const;
+    get_modeline_group(const file_annotations& fa) const;
 
     /**
      * @brief Returns the modeline for the supplied modeline name.
@@ -83,31 +83,31 @@ private:
      */
     boost::optional<modeline>
     get_modeline(const std::string& modeline_name,
-        const file_settings& fs) const;
+        const file_annotations& fa) const;
 
     /**
      * @brief Obtains a code generation marker.
      */
-    boost::optional<std::string> get_marker(const file_settings& fs) const;
+    boost::optional<std::string> get_marker(const file_annotations& fa) const;
 
     /**
-     * @brief Obtains the marker from the file settings; if none is
+     * @brief Obtains the marker from the file annotations; if none is
      * found, uses the default.
      */
-    std::string get_marker_or_default(const file_settings& fs) const;
+    std::string get_marker_or_default(const file_annotations& fa) const;
 
     /**
      * @brief Obtains the generate preamble; if none is found, uses
      * the default value.
      */
-    bool get_generate_preamble_or_default(const file_settings& fs) const;
+    bool get_generate_preamble_or_default(const file_annotations& fa) const;
 
 public:
     /**
      * @brief Generates the file properties.
      */
     file_properties
-    make(const std::string& modeline_name, const file_settings& fs) const;
+    make(const std::string& modeline_name, const file_annotations& fa) const;
 
 private:
     const repository& repository_;

@@ -18,17 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TYPES_FILE_SETTINGS_FWD_HPP
-#define DOGEN_FORMATTERS_TYPES_FILE_SETTINGS_FWD_HPP
+#ifndef DOGEN_FORMATTERS_SERIALIZATION_FILE_ANNOTATIONS_SER_HPP
+#define DOGEN_FORMATTERS_SERIALIZATION_FILE_ANNOTATIONS_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen {
-namespace formatters {
+#include <boost/serialization/split_free.hpp>
+#include "dogen/formatters/types/file_annotations.hpp"
 
-class file_settings;
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::formatters::file_annotations)
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+void save(Archive& ar, const dogen::formatters::file_annotations& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::formatters::file_annotations& v, unsigned int version);
 
 } }
 

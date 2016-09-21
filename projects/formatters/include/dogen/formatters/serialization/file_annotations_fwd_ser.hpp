@@ -18,25 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_SERIALIZATION_FILE_SETTINGS_SER_HPP
-#define DOGEN_FORMATTERS_SERIALIZATION_FILE_SETTINGS_SER_HPP
+#ifndef DOGEN_FORMATTERS_SERIALIZATION_FILE_ANNOTATIONS_FWD_SER_HPP
+#define DOGEN_FORMATTERS_SERIALIZATION_FILE_ANNOTATIONS_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/split_free.hpp>
-#include "dogen/formatters/types/file_settings.hpp"
+#include "dogen/formatters/types/file_annotations_fwd.hpp"
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::formatters::file_settings)
 namespace boost {
 namespace serialization {
 
-template<typename Archive>
-void save(Archive& ar, const dogen::formatters::file_settings& v, unsigned int version);
+template<class Archive>
+void save(Archive& ar, const dogen::formatters::file_annotations& v, unsigned int version);
 
-template<typename Archive>
-void load(Archive& ar, dogen::formatters::file_settings& v, unsigned int version);
+template<class Archive>
+void load(Archive& ar, dogen::formatters::file_annotations& v, unsigned int version);
 
 } }
 

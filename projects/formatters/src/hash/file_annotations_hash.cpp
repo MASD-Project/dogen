@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/hash/file_settings_hash.hpp"
+#include "dogen/formatters/hash/file_annotations_hash.hpp"
 
 namespace {
 
@@ -51,7 +51,7 @@ inline std::size_t hash_boost_optional_bool(const boost::optional<bool>& v) {
 namespace dogen {
 namespace formatters {
 
-std::size_t file_settings_hasher::hash(const file_settings& v) {
+std::size_t file_annotations_hasher::hash(const file_annotations& v) {
     std::size_t seed(0);
 
     combine(seed, hash_std_list_std_string(v.copyright_notices()));

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TYPES_FILE_SETTINGS_FACTORY_HPP
-#define DOGEN_FORMATTERS_TYPES_FILE_SETTINGS_FACTORY_HPP
+#ifndef DOGEN_FORMATTERS_TYPES_FILE_ANNOTATIONS_FACTORY_HPP
+#define DOGEN_FORMATTERS_TYPES_FILE_ANNOTATIONS_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,14 +28,14 @@
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/dynamic/types/field_definition.hpp"
-#include "dogen/formatters/types/file_settings.hpp"
+#include "dogen/formatters/types/file_annotations.hpp"
 
 namespace dogen {
 namespace formatters {
 
-class file_settings_factory {
+class file_annotations_factory {
 public:
-    explicit file_settings_factory(const dynamic::repository& rp);
+    explicit file_annotations_factory(const dynamic::repository& rp);
 
 private:
     struct field_definitions {
@@ -52,7 +52,7 @@ private:
     make_field_definitions(const dynamic::repository& rp) const;
 
 public:
-    file_settings make(const dynamic::object& o) const;
+    file_annotations make(const dynamic::object& o) const;
 
 private:
     const field_definitions field_definitions_;

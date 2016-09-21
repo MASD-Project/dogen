@@ -26,24 +26,24 @@ namespace formatters {
 file_properties_workflow::file_properties_workflow(
     const dynamic::repository& drp,
     const repository& rp)
-    : settings_factory_(drp), properties_factory_(rp) { }
+    : annotations_factory_(drp), properties_factory_(rp) { }
 
 file_properties_workflow::file_properties_workflow(
     const dynamic::repository& drp, const repository& rp,
     const dynamic::object& fallback)
-    : settings_factory_(drp),
-      properties_factory_(rp, settings_factory_.make(fallback)) { }
+    : annotations_factory_(drp),
+      properties_factory_(rp, annotations_factory_.make(fallback)) { }
 
 file_properties file_properties_workflow::
 execute(const std::string& modeline_name) const {
-    const auto fs = file_settings();
-    return properties_factory_.make(modeline_name, fs);
+    const auto fa = file_annotations();
+    return properties_factory_.make(modeline_name, fa);
 }
 
 file_properties file_properties_workflow::execute(
     const std::string& modeline_name, const dynamic::object& o) const {
-    const auto fs(settings_factory_.make(o));
-    return properties_factory_.make(modeline_name, fs);
+    const auto fa(annotations_factory_.make(o));
+    return properties_factory_.make(modeline_name, fa);
 }
 
 } }

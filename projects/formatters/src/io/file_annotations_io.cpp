@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen/formatters/io/file_settings_io.hpp"
+#include "dogen/formatters/io/file_annotations_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -62,7 +62,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<bool>& v)
 namespace dogen {
 namespace formatters {
 
-std::ostream& operator<<(std::ostream& s, const file_settings& v) {
+std::ostream& operator<<(std::ostream& s, const file_annotations& v) {
     boost::io::ios_flags_saver ifs(s);
     s.setf(std::ios_base::boolalpha);
     s.setf(std::ios::fixed, std::ios::floatfield);
@@ -70,7 +70,7 @@ std::ostream& operator<<(std::ostream& s, const file_settings& v) {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"dogen::formatters::file_settings\"" << ", "
+      << "\"__type__\": " << "\"dogen::formatters::file_annotations\"" << ", "
       << "\"copyright_notices\": " << v.copyright_notices() << ", "
       << "\"licence_name\": " << "\"" << tidy_up_string(v.licence_name()) << "\"" << ", "
       << "\"modeline_group_name\": " << "\"" << tidy_up_string(v.modeline_group_name()) << "\"" << ", "

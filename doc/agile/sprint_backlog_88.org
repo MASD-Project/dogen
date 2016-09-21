@@ -13,15 +13,15 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-21 Wed 09:15]
+#+CAPTION: Clock summary at [2016-09-21 Wed 09:44]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *53:47* |       |       | 100.0 |
+| *Total time*                                                                | *54:15* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 53:47   |       |       | 100.0 |
-| Active                                                                      |         | 53:47 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  3:33 |   6.6 |
+| Stories                                                                     | 54:15   |       |       | 100.0 |
+| Active                                                                      |         | 54:15 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  3:33 |   6.5 |
 | COMPLETED Fix chocolatey warning                                            |         |       |  0:08 |   0.2 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:27 |   0.8 |
 | COMPLETED Analysis on current state of file path generation                 |         |       |  0:57 |   1.8 |
@@ -29,25 +29,25 @@
 | COMPLETED Analysis on formatters, elements and extensibility                |         |       |  1:18 |   2.4 |
 | COMPLETED Refactor =inclusion_dependencies_provider_interface=              |         |       |  1:12 |   2.2 |
 | COMPLETED Investigate broken windows builds                                 |         |       |  0:32 |   1.0 |
-| COMPLETED Refactor path derivatives factory for usage in formatters         |         |       |  5:14 |   9.7 |
-| COMPLETED Move file path generation to formatters                           |         |       |  1:58 |   3.7 |
-| CANCELLED Path derivatives factory generates all possible includes          |         |       |  3:07 |   5.8 |
+| COMPLETED Refactor path derivatives factory for usage in formatters         |         |       |  5:14 |   9.6 |
+| COMPLETED Move file path generation to formatters                           |         |       |  1:58 |   3.6 |
+| CANCELLED Path derivatives factory generates all possible includes          |         |       |  3:07 |   5.7 |
 | COMPLETED Analysis on inclusion derivatives and path derivatives            |         |       |  1:04 |   2.0 |
 | COMPLETED Split path factory from provider factory                          |         |       |  2:32 |   4.7 |
-| COMPLETED Use providers when building inclusion directives                  |         |       | 12:01 |  22.3 |
+| COMPLETED Use providers when building inclusion directives                  |         |       | 12:01 |  22.2 |
 | COMPLETED Fix AppVeyor notifications                                        |         |       |  0:22 |   0.7 |
 | COMPLETED Static use of element types does more harm than good              |         |       |  0:32 |   1.0 |
 | COMPLETED Analysis: major rethink of the implementation of quilt            |         |       |  1:30 |   2.8 |
 | CANCELLED Create a simple Emacs mode for stitch                             |         |       |  1:12 |   2.2 |
 | COMPLETED Add facet folder and formatter enablement to formatter properties |         |       |  2:52 |   5.3 |
-| COMPLETED Move =cmakelists_info= to fabric                                  |         |       |  6:34 |  12.2 |
-| COMPLETED Move =odb_options_info= to fabric                                 |         |       |  1:29 |   2.8 |
+| COMPLETED Move =cmakelists_info= to fabric                                  |         |       |  6:34 |  12.1 |
+| COMPLETED Move =odb_options_info= to fabric                                 |         |       |  1:29 |   2.7 |
 | COMPLETED Remove =formattable_origin_type=                                  |         |       |  0:17 |   0.5 |
 | COMPLETED Remove formattable origin type                                    |         |       |  2:25 |   4.5 |
 | COMPLETED Rename config model to options                                    |         |       |  1:07 |   2.1 |
 | COMPLETED Rename annotation to decoration in formatters model               |         |       |  0:30 |   0.9 |
-| STARTED Big rename for "final" terminology clean up                         |         |       |  0:02 |   0.1 |
-| STARTED Add type index to name and to formatter interface                   |         |       |  0:38 |   1.2 |
+| STARTED Big rename for "final" terminology clean up                         |         |       |  0:15 |   0.5 |
+| STARTED Add type index to name and to formatter interface                   |         |       |  0:53 |   1.6 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -897,6 +897,7 @@ decorations. A decoration is defined to be the parts of the file which
 are not functionally dependent on the modeling element.
 
 *** STARTED Big rename for "final" terminology clean up               :story:
+    CLOCK: [2016-09-21 Wed 09:31]--[2016-09-21 Wed 09:44] =>  0:13
     CLOCK: [2016-09-17 Sat 19:41]--[2016-09-17 Sat 19:43] =>  0:02
 
 We now have a consistent vocabulary across all models. We need to do
@@ -924,6 +925,7 @@ it already in the formatters model. Perhaps that could be renamed to
 something else, freeing up the name?
 
 *** STARTED Add type index to name and to formatter interface         :story:
+    CLOCK: [2016-09-21 Wed 09:16]--[2016-09-21 Wed 09:31] =>  0:15
     CLOCK: [2016-09-21 Wed 09:01]--[2016-09-21 Wed 09:15] =>  0:14
     CLOCK: [2016-09-20 Tue 22:51]--[2016-09-20 Tue 23:15] =>  0:24
 
@@ -944,7 +946,24 @@ then its not trivial for all facets:
 - odb: similar problem as with serialisation.
 - io: should be fine, perhaps using typeid directly.
 
-But the main question is: why do we need type index in name?
+But the main question is: why do we need type index in name? From
+looking at the code, its not clear why we made this requirement (in
+light of the "formatter alias/default" support, which will allow us to
+find a formatter across element types). So we'll skip =yarn::name= and
+focus on =quilt.cpp= instead.
+
+Tasks:
+
+- add type index to file formatter interface
+- add format against element to file formatter interface
+- remove all other formatter interfaces
+- update all formatters to inherit directly from file formatter and to
+  dynamic cast element to the supported type. Assistant can provide a
+  helper for this.
+- formatter container is now: all formatters, formatters by type
+  index.
+- update registrar to register using type index.
+- update all uses of formatter container.
 
 *** Move odb options file into odb folder                             :story:
 
@@ -995,6 +1014,19 @@ Add workflow methods to execute the new formattables pipeline.
 
 Responsible for computing the inclusion dependencies.
 
+*** Create the notion of a formatter alias                            :story:
+
+We did a bit of a hack with mapping the facet to the default
+formatter. What we really need is the notion of an alias. It still
+looks like a formatter name (for example "header_formatter") but it
+must be first resolved into an actual formatter. For this we need a
+type index.
+
+Other names:
+
+- canonical formatter
+- reference formatter
+
 *** Add enabler to quilt.cpp                                          :story:
 
 Generates the enablement configuration.
@@ -1038,14 +1070,6 @@ Tasks:
   definitions from this list;
 - cache top-level fields and facet fields and copy results instead of
   re-reading them.
-
-*** Create the notion of a formatter alias                            :story:
-
-We did a bit of a hack with mapping the facet to the default
-formatter. What we really need is the notion of an alias. It still
-looks like a formatter name (for example "header_formatter") but it
-must be first resolved into an actual formatter. For this we need a
-type index.
 
 *** Move registration of providers to initialiser                     :story:
 

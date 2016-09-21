@@ -22,15 +22,16 @@
 #include "dogen/dynamic/types/repository_selector.hpp"
 #include "dogen/formatters/types/traits.hpp"
 #include "dogen/formatters/types/building_error.hpp"
-#include "dogen/formatters/types/file_settings_factory.hpp"
+#include "dogen/formatters/types/file_annotations_factory.hpp"
 
 namespace dogen {
 namespace formatters {
 
-file_settings_factory::file_settings_factory(const dynamic::repository& rp)
+file_annotations_factory::
+file_annotations_factory(const dynamic::repository& rp)
     : field_definitions_(make_field_definitions(rp)) { }
 
-file_settings_factory::field_definitions file_settings_factory::
+file_annotations_factory::field_definitions file_annotations_factory::
 make_field_definitions(const dynamic::repository& rp) const {
     const dynamic::repository_selector s(rp);
 
@@ -51,10 +52,10 @@ make_field_definitions(const dynamic::repository& rp) const {
     return r;
 }
 
-file_settings file_settings_factory::make(const dynamic::object& o) const {
+file_annotations file_annotations_factory::make(const dynamic::object& o) const {
     const dynamic::field_selector fs(o);
 
-    file_settings r;
+    file_annotations r;
     const auto& cn(field_definitions_.copyright_notice);
     if (fs.has_field(cn))
         r.copyright_notices(fs.get_text_collection_content(cn));

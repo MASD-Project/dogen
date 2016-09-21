@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/formatters/test_data/file_settings_td.hpp"
+#include "dogen/formatters/test_data/file_annotations_td.hpp"
 
 namespace {
 
@@ -53,9 +53,9 @@ create_boost_optional_bool(unsigned int position) {
 namespace dogen {
 namespace formatters {
 
-file_settings_generator::file_settings_generator() : position_(0) { }
+file_annotations_generator::file_annotations_generator() : position_(0) { }
 
-void file_settings_generator::
+void file_annotations_generator::
 populate(const unsigned int position, result_type& v) {
     v.copyright_notices(create_std_list_std_string(position + 0));
     v.licence_name(create_std_string(position + 1));
@@ -66,22 +66,22 @@ populate(const unsigned int position, result_type& v) {
     v.marker_message(create_std_string(position + 6));
 }
 
-file_settings_generator::result_type
-file_settings_generator::create(const unsigned int position) {
-    file_settings r;
-    file_settings_generator::populate(position, r);
+file_annotations_generator::result_type
+file_annotations_generator::create(const unsigned int position) {
+    file_annotations r;
+    file_annotations_generator::populate(position, r);
     return r;
 }
 
-file_settings_generator::result_type*
-file_settings_generator::create_ptr(const unsigned int position) {
-    file_settings* p = new file_settings();
-    file_settings_generator::populate(position, *p);
+file_annotations_generator::result_type*
+file_annotations_generator::create_ptr(const unsigned int position) {
+    file_annotations* p = new file_annotations();
+    file_annotations_generator::populate(position, *p);
     return p;
 }
 
-file_settings_generator::result_type
-file_settings_generator::operator()() {
+file_annotations_generator::result_type
+file_annotations_generator::operator()() {
     return create(position_++);
 }
 

@@ -32,12 +32,12 @@
 #include "dogen/formatters/hash/decoration_hash.hpp"
 #include "dogen/formatters/hash/repository_hash.hpp"
 #include "dogen/formatters/hash/quote_types_hash.hpp"
-#include "dogen/formatters/hash/file_settings_hash.hpp"
 #include "dogen/formatters/hash/spacing_types_hash.hpp"
 #include "dogen/formatters/hash/comment_styles_hash.hpp"
 #include "dogen/formatters/hash/modeline_field_hash.hpp"
 #include "dogen/formatters/hash/modeline_group_hash.hpp"
 #include "dogen/formatters/hash/file_properties_hash.hpp"
+#include "dogen/formatters/hash/file_annotations_hash.hpp"
 #include "dogen/formatters/hash/modeline_locations_hash.hpp"
 #include "dogen/formatters/hash/infix_configuration_hash.hpp"
 
