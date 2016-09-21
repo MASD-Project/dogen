@@ -210,12 +210,6 @@ public:
         const boost::optional<dogen::formatters::decoration_configuration> dc);
     /**@}*/
 
-    /**
-     * @brief Generates a file with the current contents of the
-     * stream.
-     */
-    dogen::formatters::file make_file(const bool overwrite = true) const;
-
 public:
     /**
      * @brief Adds a top-level comment with doxygen keywords.
@@ -305,8 +299,7 @@ public:
      * @brief Generates a file with the current contents of the
      * stream.
      */
-    dogen::formatters::file make_file(const boost::filesystem::path& full_path,
-        const bool overwrite = true) const;
+    dogen::formatters::file make_file() const;
 
 private:
     std::ostringstream stream_;

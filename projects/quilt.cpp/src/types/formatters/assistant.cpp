@@ -292,11 +292,6 @@ void assistant::make_decoration_preamble(
     af.format_preamble(stream(), comment_style, *dc);
 }
 
-dogen::formatters::file assistant::
-make_file(const bool overwrite) const {
-    return make_file(formatter_properties_.file_path(), overwrite);
-}
-
 void assistant::comment(const std::string& c) {
     if (c.empty())
         return;
@@ -561,12 +556,13 @@ std::ostream& assistant::stream() {
     return filtering_stream_;
 }
 
-dogen::formatters::file assistant::make_file(
-    const boost::filesystem::path& full_path, const bool overwrite) const {
+dogen::formatters::file assistant::make_file() const {
     dogen::formatters::file r;
     r.content(stream_.str());
-    r.path(full_path);
-    r.overwrite(overwrite);
+    r.path(formatter_properties_.file_path());
+
+    // FIXME: determine overwrite flag
+    // r.overwrite(overwrite);
     return r;
 }
 

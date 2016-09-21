@@ -11,24 +11,6 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
-*** Add a file formatter interface to formatters                      :story:
-
-It probably makes sense to have a top-level interface for file
-formatting in the formatters model. At present we have a lot of
-=quilt.cpp= specific things in there. Maybe we should just extract the
-common attributes and use them to create the generic interface.
-
-This still makes sense after the current refactor, but it requires
-some thinking.
-
-Notes:
-
-- formattable becomes a concept at the formatters' model level, but it
-  has just an id.
-- it seems we should be able to also have the formatters container and
-  even the formatters workflow in =formatters=; however, this would
-  increase the amount of casting required.
-
 *** Document the conceptual model                                     :story:
 
 We seem to be pretty close to the end of the conceptual model for
@@ -103,15 +85,6 @@ Notes:
   augment the include list with additional includes. However, we may
   not even need to be aware of this.
 
-*** Remove =optional<list>=                                           :story:
-
-We should not really be using optional<list>. The empty list is
-sufficient for this.
-
-Uses:
-
-- include provider. Fixed with other story.
-
 *** Run tests that are passing on windows                             :story:
 
 At present we have a release build on windows but we are not running
@@ -119,23 +92,7 @@ any tests. This is because some of the tests are failing at the
 moment. We should run all test suites that are green to ensure we
 don't regress without noticing.
 
-*** Consider removing the overwrite flag in =formatters::file=        :story:
-
-Investigate if the overwrite flag makes sense in file; it seems we
-only use it in two scenarios: force overwrite requested by user or
-file contents have changed, both of which can be done in the
-file_writer.
-
-Actually this flag is needed. It is required to handle the case where
-we do not code-generate files, unless they do not exist. For example,
-for service headers and implementation we should create the files, but
-then subsequently not touch them. The overwrite flag should be set to
-false. We need to figure out how to implement this and remove the
-hacks around file writing.
-
-For now we have abused this flag to allow legacy files overrides of
-the new world formatters. This is just until we move totally to new
-world though.
+Look at the stories with errors to determine which tests are passing.
 
 *** Vistor is only supported at the base class level                  :story:
 
@@ -3671,6 +3628,24 @@ depend only on the forward declarations.
 
 If we have enough time and disposition, we may sneak some of these
 in. This release is all about getting the architecture right.
+
+*** Add a file formatter interface to formatters                      :story:
+
+It probably makes sense to have a top-level interface for file
+formatting in the formatters model. At present we have a lot of
+=quilt.cpp= specific things in there. Maybe we should just extract the
+common attributes and use them to create the generic interface.
+
+This still makes sense after the current refactor, but it requires
+some thinking.
+
+Notes:
+
+- formattable becomes a concept at the formatters' model level, but it
+  has just an id.
+- it seems we should be able to also have the formatters container and
+  even the formatters workflow in =formatters=; however, this would
+  increase the amount of casting required.
 
 *** Consider enabling =-Wshadow=                                      :story:
 

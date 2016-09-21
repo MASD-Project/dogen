@@ -84,17 +84,7 @@ private:
         }
 
         files_.push_front(file);
-        if (!file.overwrite()) {
-            BOOST_LOG_SEV(lg, debug) << "Filename: "
-                                     << file.path().generic_string();
-            BOOST_LOG_SEV(lg, debug) << "Content: "
-                                     << (file.content().empty() ? "<empty>" :
-                                         file.content());
-            BOOST_LOG_SEV(lg, debug) << "Finished formatting: '" << id << "'";
-        } else {
-            BOOST_LOG_SEV(lg, debug) << "Not dumping file contents to log "
-                                     << "(overwrite is false).";
-        }
+        BOOST_LOG_SEV(lg, debug) << "Finished formatting: '" << id << "'";
     }
 
     template<typename Formatter, typename Formattable>
