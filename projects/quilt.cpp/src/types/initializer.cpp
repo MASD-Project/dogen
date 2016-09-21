@@ -22,8 +22,8 @@
 #include "dogen/quilt/types/workflow.hpp"
 #include "dogen/quilt.cpp/types/formatters/workflow.hpp"
 #include "dogen/quilt.cpp/types/properties/workflow.hpp"
-#include "dogen/quilt.cpp/types/settings/opaque_settings_builder.hpp"
-#include "dogen/quilt.cpp/types/settings/initializer.hpp"
+#include "dogen/quilt.cpp/types/annotations/opaque_annotations_builder.hpp"
+#include "dogen/quilt.cpp/types/annotations/initializer.hpp"
 #include "dogen/quilt.cpp/types/formatters/initializer.hpp"
 #include "dogen/quilt.cpp/types/fabric/initializer.hpp"
 #include "dogen/quilt.cpp/types/properties/registrar.hpp"
@@ -42,8 +42,9 @@ void initialize_providers(const formatters::registrar& fmt_rg) {
 }
 
 void initializer::initialize() {
-    using settings::opaque_settings_builder;
-    settings::initializer::initialize(opaque_settings_builder::registrar());
+    using annotations::opaque_annotations_builder;
+    annotations::initializer::initialize(
+        opaque_annotations_builder::registrar());
     formatters::initializer::initialize(formatters::workflow::registrar());
     initialize_providers(formatters::workflow::registrar());
     fabric::initializer::initialize(yarn::workflow::injector_registrar());

@@ -41,8 +41,8 @@ const std::string dot(".");
 const std::string separator("_");
 const std::string unsupported_file_type("File type not supported: ");
 
-const std::string missing_path_settings(
-    "Could not find any path settings for formatter: ");
+const std::string missing_path_annotations(
+    "Could not find any path annotations for formatter: ");
 const std::string empty_formatter_name("Empty formatter name was supplied.");
 }
 
@@ -67,8 +67,8 @@ private:
 
 locator::locator(
     const options::cpp_options& opts, const yarn::model& m,
-    const std::unordered_map<std::string, settings::path_settings>& ps)
-    : model_name_(m.name()), path_settings_(ps), module_ids_(module_ids(m)),
+    const std::unordered_map<std::string, annotations::path_annotations>& ps)
+    : model_name_(m.name()), path_annotations_(ps), module_ids_(module_ids(m)),
       project_path_(make_project_path(opts, m.name())) {}
 
 std::unordered_set<std::string> locator::
@@ -81,12 +81,12 @@ module_ids(const yarn::model& m) const {
     return c.result();
 }
 
-const settings::path_settings& locator::
-path_settings_for_formatter(const std::string& formatter_name) const {
-    const auto i(path_settings_.find(formatter_name));
-    if (i == path_settings_.end()) {
-        BOOST_LOG_SEV(lg, error) << missing_path_settings;
-        BOOST_THROW_EXCEPTION(building_error(missing_path_settings));
+const annotations::path_annotations& locator::
+path_annotations_for_formatter(const std::string& formatter_name) const {
+    const auto i(path_annotations_.find(formatter_name));
+    if (i == path_annotations_.end()) {
+        BOOST_LOG_SEV(lg, error) << missing_path_annotations;
+        BOOST_THROW_EXCEPTION(building_error(missing_path_annotations));
     }
 
     return i->second;
@@ -104,7 +104,7 @@ boost::filesystem::path locator::make_project_path(
 }
 
 boost::filesystem::path locator::
-make_facet_path(const settings::path_settings& ps, const std::string& extension,
+make_facet_path(const annotations::path_annotations& ps, const std::string& extension,
     const yarn::name& n) const {
     BOOST_LOG_SEV(lg, debug) << "Making facet path for: " << n.id();
 
@@ -153,7 +153,7 @@ make_facet_path(const settings::path_settings& ps, const std::string& extension,
 }
 
 boost::filesystem::path locator::make_inclusion_path(
-    const settings::path_settings& ps,
+    const annotations::path_annotations& ps,
     const std::string& extension,
     const yarn::name& n) const {
 
@@ -174,7 +174,7 @@ boost::filesystem::path locator::make_inclusion_path(
 
 boost::filesystem::path locator::make_inclusion_path_for_cpp_header(
     const yarn::name& n, const std::string& formatter_name) const {
-    const auto& ps(path_settings_for_formatter(formatter_name));
+    const auto& ps(path_annotations_for_formatter(formatter_name));
     const auto extension(ps.header_file_extension());
     return make_inclusion_path(ps, extension, n);
 }
@@ -183,7 +183,7 @@ boost::filesystem::path locator::make_full_path_for_cpp_header(
     const yarn::name& n, const std::string& formatter_name) const {
 
     auto r(project_path_);
-    const auto& ps(path_settings_for_formatter(formatter_name));
+    const auto& ps(path_annotations_for_formatter(formatter_name));
     r /= ps.include_directory_name();
 
     const auto extension(ps.header_file_extension());
@@ -196,7 +196,7 @@ boost::filesystem::path locator::make_full_path_for_cpp_implementation(
     const yarn::name& n, const std::string& formatter_name) const {
 
     auto r(project_path_);
-    const auto& ps(path_settings_for_formatter(formatter_name));
+    const auto& ps(path_annotations_for_formatter(formatter_name));
     r /= ps.source_directory_name();
 
     const auto extension(ps.implementation_file_extension());
@@ -216,7 +216,7 @@ boost::filesystem::path locator::make_full_path_for_include_cmakelists(
 boost::filesystem::path locator::make_full_path_for_source_cmakelists(
     const yarn::name& n, const std::string& formatter_name) const {
     auto r(project_path_);
-    const auto& ps(path_settings_for_formatter(formatter_name));
+    const auto& ps(path_annotations_for_formatter(formatter_name));
     r /= ps.source_directory_name();
     r /= n.simple() + ".txt"; // FIXME: hack for extension
     return r;
@@ -225,7 +225,7 @@ boost::filesystem::path locator::make_full_path_for_source_cmakelists(
 boost::filesystem::path locator::make_full_path_for_odb_options(
     const yarn::name& /*n*/, const std::string& formatter_name) const {
     auto r(project_path_);
-    const auto& ps(path_settings_for_formatter(formatter_name));
+    const auto& ps(path_annotations_for_formatter(formatter_name));
     r /= ps.source_directory_name();
     r /= "options.odb"; // FIXME: hack for filename
     return r;

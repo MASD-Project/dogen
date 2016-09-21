@@ -30,7 +30,7 @@
 #include <unordered_set>
 #include <boost/optional.hpp>
 #include "dogen/yarn/types/object.hpp"
-#include "dogen/quilt.cpp/types/settings/element_settings_repository.hpp"
+#include "dogen/quilt.cpp/types/annotations/element_annotations_repository.hpp"
 #include "dogen/quilt.cpp/types/properties/enablement_repository.hpp"
 #include "dogen/quilt.cpp/types/properties/inclusion_directives_repository.hpp"
 

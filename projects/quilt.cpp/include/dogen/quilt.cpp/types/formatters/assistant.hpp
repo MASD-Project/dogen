@@ -39,8 +39,8 @@
 #include "dogen/yarn/types/name_tree.hpp"
 #include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
 #include "dogen/formatters/types/cpp/scoped_boilerplate_formatter.hpp"
-#include "dogen/quilt.cpp/types/settings/odb_settings.hpp"
-#include "dogen/quilt.cpp/types/settings/opaque_settings.hpp"
+#include "dogen/quilt.cpp/types/annotations/odb_annotations.hpp"
+#include "dogen/quilt.cpp/types/annotations/opaque_annotations.hpp"
 #include "dogen/quilt.cpp/types/formatters/context.hpp"
 #include "dogen/quilt.cpp/types/formatters/file_types.hpp"
 #include "dogen/quilt.cpp/types/properties/helper_properties.hpp"
@@ -184,7 +184,7 @@ public:
 
 public:
     /**
-     * @brief Ensures all expected settings are available and set to
+     * @brief Ensures all expected annotations are available and set to
      * valid values.
      */
     void validate() const;
@@ -245,7 +245,7 @@ private:
     std::list<std::shared_ptr<formatters::helper_formatter_interface>>
     get_helpers(const properties::helper_properties& hp) const;
 
-    std::string streaming_for_type(const settings::streaming_settings& ss,
+    std::string streaming_for_type(const annotations::streaming_annotations& ss,
         const std::string& s) const;
 
 public:
@@ -274,26 +274,26 @@ public:
 
 private:
     /**
-     * @brief Retrieves the ODB settings from the opaque settings
+     * @brief Retrieves the ODB annotations from the opaque annotations
      * container, if they do exist.
      */
-    boost::shared_ptr<settings::odb_settings>
-        get_odb_settings(const std::unordered_map<std::string,
-            boost::shared_ptr<settings::opaque_settings> >& os) const;
+    boost::shared_ptr<annotations::odb_annotations>
+        get_odb_annotations(const std::unordered_map<std::string,
+            boost::shared_ptr<annotations::opaque_annotations> >& os) const;
 
 public:
     /**
-     * @brief Retrieves the ODB settings from the opaque settings
+     * @brief Retrieves the ODB annotations from the opaque annotations
      * container, if they do exist.
      */
-    boost::shared_ptr<settings::odb_settings> get_odb_settings() const;
+    boost::shared_ptr<annotations::odb_annotations> get_odb_annotations() const;
 
     /**
-     * @brief Retrieves the ODB settings for a given property from the
-     * opaque settings container, if they do exist.
+     * @brief Retrieves the ODB annotations for a given property from the
+     * opaque annotations container, if they do exist.
      */
-    boost::shared_ptr<settings::odb_settings>
-    get_odb_settings(const std::string& property_id) const;
+    boost::shared_ptr<annotations::odb_annotations>
+    get_odb_annotations(const std::string& property_id) const;
 
 public:
     /**

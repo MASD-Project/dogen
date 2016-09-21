@@ -26,7 +26,7 @@
 #endif
 
 #include "dogen/yarn/types/model.hpp"
-#include "dogen/quilt.cpp/types/settings/aspect_settings_repository.hpp"
+#include "dogen/quilt.cpp/types/annotations/aspect_annotations_repository.hpp"
 #include "dogen/quilt.cpp/types/properties/aspect_properties_repository.hpp"
 
 namespace dogen {
@@ -37,7 +37,7 @@ namespace properties {
 class aspect_properties_repository_factory {
 public:
     aspect_properties_repository make(
-        const settings::aspect_settings_repository& asrp,
+        const annotations::aspect_annotations_repository& asrp,
         const yarn::model& m) const;
 };
 

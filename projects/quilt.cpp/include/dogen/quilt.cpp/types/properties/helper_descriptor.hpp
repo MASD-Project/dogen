@@ -29,8 +29,8 @@
 #include <string>
 #include <algorithm>
 #include <boost/optional.hpp>
-#include "dogen/quilt.cpp/types/settings/helper_settings.hpp"
-#include "dogen/quilt.cpp/types/settings/streaming_settings.hpp"
+#include "dogen/quilt.cpp/types/annotations/helper_annotations.hpp"
+#include "dogen/quilt.cpp/types/annotations/streaming_annotations.hpp"
 #include "dogen/quilt.cpp/serialization/properties/helper_descriptor_fwd_ser.hpp"
 
 namespace dogen {
@@ -56,8 +56,8 @@ public:
         const std::string& name_qualified,
         const std::string& name_tree_qualified,
         const std::string& name_tree_identifiable,
-        const dogen::quilt::cpp::settings::helper_settings& helper_settings,
-        const boost::optional<dogen::quilt::cpp::settings::streaming_settings>& streaming_settings,
+        const dogen::quilt::cpp::annotations::helper_annotations& helper_annotations,
+        const boost::optional<dogen::quilt::cpp::annotations::streaming_annotations>& streaming_annotations,
         const bool is_simple_type,
         const bool requires_hashing_helper,
         const bool is_circular_dependency,
@@ -96,15 +96,15 @@ public:
     void name_tree_identifiable(const std::string& v);
     void name_tree_identifiable(const std::string&& v);
 
-    const dogen::quilt::cpp::settings::helper_settings& helper_settings() const;
-    dogen::quilt::cpp::settings::helper_settings& helper_settings();
-    void helper_settings(const dogen::quilt::cpp::settings::helper_settings& v);
-    void helper_settings(const dogen::quilt::cpp::settings::helper_settings&& v);
+    const dogen::quilt::cpp::annotations::helper_annotations& helper_annotations() const;
+    dogen::quilt::cpp::annotations::helper_annotations& helper_annotations();
+    void helper_annotations(const dogen::quilt::cpp::annotations::helper_annotations& v);
+    void helper_annotations(const dogen::quilt::cpp::annotations::helper_annotations&& v);
 
-    const boost::optional<dogen::quilt::cpp::settings::streaming_settings>& streaming_settings() const;
-    boost::optional<dogen::quilt::cpp::settings::streaming_settings>& streaming_settings();
-    void streaming_settings(const boost::optional<dogen::quilt::cpp::settings::streaming_settings>& v);
-    void streaming_settings(const boost::optional<dogen::quilt::cpp::settings::streaming_settings>&& v);
+    const boost::optional<dogen::quilt::cpp::annotations::streaming_annotations>& streaming_annotations() const;
+    boost::optional<dogen::quilt::cpp::annotations::streaming_annotations>& streaming_annotations();
+    void streaming_annotations(const boost::optional<dogen::quilt::cpp::annotations::streaming_annotations>& v);
+    void streaming_annotations(const boost::optional<dogen::quilt::cpp::annotations::streaming_annotations>&& v);
 
     bool is_simple_type() const;
     void is_simple_type(const bool v);
@@ -134,8 +134,8 @@ private:
     std::string name_qualified_;
     std::string name_tree_qualified_;
     std::string name_tree_identifiable_;
-    dogen::quilt::cpp::settings::helper_settings helper_settings_;
-    boost::optional<dogen::quilt::cpp::settings::streaming_settings> streaming_settings_;
+    dogen::quilt::cpp::annotations::helper_annotations helper_annotations_;
+    boost::optional<dogen::quilt::cpp::annotations::streaming_annotations> streaming_annotations_;
     bool is_simple_type_;
     bool requires_hashing_helper_;
     bool is_circular_dependency_;

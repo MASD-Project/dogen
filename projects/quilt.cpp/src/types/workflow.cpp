@@ -26,10 +26,10 @@
 #include "dogen/dynamic/types/workflow.hpp"
 #include "dogen/quilt.cpp/types/formatters/workflow.hpp"
 #include "dogen/quilt.cpp/types/properties/workflow.hpp"
-#include "dogen/quilt.cpp/types/settings/directory_names_settings_factory.hpp"
-#include "dogen/quilt.cpp/types/settings/aspect_settings_repository_factory.hpp"
-#include "dogen/quilt.cpp/types/settings/streaming_settings_repository_factory.hpp"
-#include "dogen/quilt.cpp/types/settings/element_settings_repository_factory.hpp"
+#include "dogen/quilt.cpp/types/annotations/directory_names_annotations_factory.hpp"
+#include "dogen/quilt.cpp/types/annotations/aspect_annotations_repository_factory.hpp"
+#include "dogen/quilt.cpp/types/annotations/streaming_annotations_repository_factory.hpp"
+#include "dogen/quilt.cpp/types/annotations/element_annotations_repository_factory.hpp"
 #include "dogen/quilt.cpp/types/workflow_error.hpp"
 #include "dogen/quilt.cpp/types/workflow.hpp"
 
@@ -64,25 +64,25 @@ workflow::create_file_properties_workflow(const dynamic::repository& drp,
     return r;
 }
 
-settings::opaque_settings_builder workflow::
-create_opaque_settings_builder(const dynamic::repository& drp) const {
-    settings::opaque_settings_builder r;
+annotations::opaque_annotations_builder workflow::
+create_opaque_annotations_builder(const dynamic::repository& drp) const {
+    annotations::opaque_annotations_builder r;
     r.setup(drp);
     r.validate();
     return r;
 }
 
-settings::streaming_settings_repository workflow::
-create_streaming_settings_repository(const dynamic::repository& drp,
+annotations::streaming_annotations_repository workflow::
+create_streaming_annotations_repository(const dynamic::repository& drp,
     const yarn::model& m) const {
-    settings::streaming_settings_repository_factory f;
+    annotations::streaming_annotations_repository_factory f;
     return f.make(drp, m);
 }
 
-settings::element_settings_repository
-workflow::create_element_settings_repository(
-    const settings::opaque_settings_builder& osb, const yarn::model& m) const {
-    settings::element_settings_repository_factory f;
+annotations::element_annotations_repository
+workflow::create_element_annotations_repository(
+    const annotations::opaque_annotations_builder& osb, const yarn::model& m) const {
+    annotations::element_annotations_repository_factory f;
     return f.make(osb, m);
 }
 
@@ -92,7 +92,7 @@ properties::element_properties_repository workflow::create_properties(
     const dynamic::object& root_object,
     const dogen::formatters::file_properties_workflow& fpwf,
     const formatters::container& fc,
-    const settings::streaming_settings_repository& ssrp,
+    const annotations::streaming_annotations_repository& ssrp,
     const yarn::model& m) const {
 
     properties::workflow fw;
@@ -111,8 +111,8 @@ workflow::extract_generatable_elements(const yarn::model& m) const {
 }
 
 std::forward_list<dogen::formatters::file> workflow::
-format(const settings::streaming_settings_repository& ssrp,
-    const settings::element_settings_repository& esrp,
+format(const annotations::streaming_annotations_repository& ssrp,
+    const annotations::element_annotations_repository& esrp,
     const properties::element_properties_repository& eprp,
     const std::forward_list<
     boost::shared_ptr<yarn::element> >& elements) const {
@@ -128,7 +128,7 @@ std::forward_list<boost::filesystem::path>
 workflow::managed_directories(const options::knitting_options& ko,
     const dynamic::repository& rp, const yarn::model& m) const {
     const auto ro(m.root_module().extensions());
-    settings::directory_names_settings_factory f(rp);
+    annotations::directory_names_annotations_factory f(rp);
     const auto dn(f.make(ro));
     const auto& mm(m.name().location().model_modules());
     const auto mn(boost::algorithm::join(mm, dot));
@@ -156,9 +156,9 @@ workflow::generate(const options::knitting_options& ko,
     const auto ro(m.root_module().extensions());
     const auto fpwf(create_file_properties_workflow(drp, frp, ro));
 
-    const auto osb(create_opaque_settings_builder(drp));
-    auto esrp(create_element_settings_repository(osb, m));
-    auto ssrp(create_streaming_settings_repository(drp, m));
+    const auto osb(create_opaque_annotations_builder(drp));
+    auto esrp(create_element_annotations_repository(osb, m));
+    auto ssrp(create_streaming_annotations_repository(drp, m));
 
     formatters::workflow::registrar().validate();
     const auto& fc(formatters::workflow::registrar().formatter_container());

@@ -83,7 +83,7 @@ void generator::visit(const dogen::yarn::object& o) {
 }
 
 aspect_properties_repository aspect_properties_repository_factory::make(
-    const settings::aspect_settings_repository& asrp,
+    const annotations::aspect_annotations_repository& asrp,
     const yarn::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started creating aspect properties"

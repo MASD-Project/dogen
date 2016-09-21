@@ -27,8 +27,8 @@
 
 #include <string>
 #include "dogen/quilt.cpp/types/workflow_error.hpp"
-#include "dogen/quilt.cpp/types/settings/streaming_settings_repository.hpp"
-#include "dogen/quilt.cpp/types/settings/element_settings_repository.hpp"
+#include "dogen/quilt.cpp/types/annotations/streaming_annotations_repository.hpp"
+#include "dogen/quilt.cpp/types/annotations/element_annotations_repository.hpp"
 #include "dogen/quilt.cpp/types/properties/element_properties_repository.hpp"
 #include "dogen/quilt.cpp/types/formatters/context.hpp"
 
@@ -40,8 +40,8 @@ namespace formatters {
 class context_factory {
 public:
     context_factory(
-        const settings::streaming_settings_repository& ssrp,
-        const settings::element_settings_repository& esrp,
+        const annotations::streaming_annotations_repository& ssrp,
+        const annotations::element_annotations_repository& esrp,
         const properties::element_properties_repository& fprp,
         const std::unordered_map<
         std::string, std::unordered_map<
@@ -52,17 +52,17 @@ private:
     const properties::element_properties&
     element_properties_for_id(const std::string& n) const;
 
-    const settings::element_settings&
-    element_settings_for_id(const std::string& n) const;
+    const annotations::element_annotations&
+    element_annotations_for_id(const std::string& n) const;
 
 public:
     context make(const std::string& id) const;
     context make_empty_context() const;
 
 private:
-    static const settings::streaming_settings_repository
-    empty_streaming_settings_repository_;
-    static const settings::element_settings empty_element_settings_;
+    static const annotations::streaming_annotations_repository
+    empty_streaming_annotations_repository_;
+    static const annotations::element_annotations empty_element_annotations_;
     static const std::unordered_map<
         std::string,
         std::unordered_map<
@@ -70,9 +70,9 @@ private:
             std::list<
                 std::shared_ptr<helper_formatter_interface>>>> empty_helpers_;
     static const properties::element_properties empty_element_properties_;
-    const settings::streaming_settings_repository&
-    streaming_settings_repository_;
-    const settings::element_settings_repository& element_settings_;
+    const annotations::streaming_annotations_repository&
+    streaming_annotations_repository_;
+    const annotations::element_annotations_repository& element_annotations_;
     const properties::element_properties_repository& element_properties_;
     const std::unordered_map<
         std::string,

@@ -19,9 +19,9 @@
  *
  */
 #include <sstream>
-#include "dogen/quilt.cpp/test_data/settings/helper_settings_td.hpp"
-#include "dogen/quilt.cpp/test_data/settings/streaming_settings_td.hpp"
 #include "dogen/quilt.cpp/test_data/properties/helper_descriptor_td.hpp"
+#include "dogen/quilt.cpp/test_data/annotations/helper_annotations_td.hpp"
+#include "dogen/quilt.cpp/test_data/annotations/streaming_annotations_td.hpp"
 
 namespace {
 
@@ -39,20 +39,20 @@ std::list<std::string> create_std_list_std_string(unsigned int position) {
     return r;
 }
 
-dogen::quilt::cpp::settings::helper_settings
-create_dogen_quilt_cpp_settings_helper_settings(const unsigned int position) {
-    return dogen::quilt::cpp::settings::helper_settings_generator::create(position);
+dogen::quilt::cpp::annotations::helper_annotations
+create_dogen_quilt_cpp_annotations_helper_annotations(const unsigned int position) {
+    return dogen::quilt::cpp::annotations::helper_annotations_generator::create(position);
 }
 
-dogen::quilt::cpp::settings::streaming_settings
-create_dogen_quilt_cpp_settings_streaming_settings(const unsigned int position) {
-    return dogen::quilt::cpp::settings::streaming_settings_generator::create(position);
+dogen::quilt::cpp::annotations::streaming_annotations
+create_dogen_quilt_cpp_annotations_streaming_annotations(const unsigned int position) {
+    return dogen::quilt::cpp::annotations::streaming_annotations_generator::create(position);
 }
 
-boost::optional<dogen::quilt::cpp::settings::streaming_settings>
-create_boost_optional_dogen_quilt_cpp_settings_streaming_settings(unsigned int position) {
-    boost::optional<dogen::quilt::cpp::settings::streaming_settings> r(
-        create_dogen_quilt_cpp_settings_streaming_settings(position));
+boost::optional<dogen::quilt::cpp::annotations::streaming_annotations>
+create_boost_optional_dogen_quilt_cpp_annotations_streaming_annotations(unsigned int position) {
+    boost::optional<dogen::quilt::cpp::annotations::streaming_annotations> r(
+        create_dogen_quilt_cpp_annotations_streaming_annotations(position));
     return r;
 }
 
@@ -76,8 +76,8 @@ populate(const unsigned int position, result_type& v) {
     v.name_qualified(create_std_string(position + 2));
     v.name_tree_qualified(create_std_string(position + 3));
     v.name_tree_identifiable(create_std_string(position + 4));
-    v.helper_settings(create_dogen_quilt_cpp_settings_helper_settings(position + 5));
-    v.streaming_settings(create_boost_optional_dogen_quilt_cpp_settings_streaming_settings(position + 6));
+    v.helper_annotations(create_dogen_quilt_cpp_annotations_helper_annotations(position + 5));
+    v.streaming_annotations(create_boost_optional_dogen_quilt_cpp_annotations_streaming_annotations(position + 6));
     v.is_simple_type(create_bool(position + 7));
     v.requires_hashing_helper(create_bool(position + 8));
     v.is_circular_dependency(create_bool(position + 9));

@@ -136,7 +136,7 @@
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#settings#</dia:string>
+        <dia:string>#annotations#</dia:string>
       </dia:attribute>
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O2">
@@ -8902,7 +8902,7 @@ for a given C++ entity.#</dia:string>
         <dia:real val="5.2000000000000002"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#element_settings_repository_factory#</dia:string>
+        <dia:string>#element_annotations_repository_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -8998,7 +8998,7 @@ for a given C++ entity.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#settings::element_settings_repository#</dia:string>
+            <dia:string>#annotations::element_annotations_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -9058,7 +9058,7 @@ for a given C++ entity.#</dia:string>
                 <dia:string>#osb#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const settings::opaque_settings_builder&amp;#</dia:string>
+                <dia:string>#const annotations::opaque_annotations_builder&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -9113,7 +9113,7 @@ for a given C++ entity.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#element_settings#</dia:string>
+        <dia:string>#element_annotations#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
@@ -9202,10 +9202,10 @@ for a given C++ entity.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#opaque_settings#</dia:string>
+            <dia:string>#opaque_annotations#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string,boost::shared_ptr&lt;settings::opaque_settings&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string,boost::shared_ptr&lt;annotations::opaque_annotations&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -9225,10 +9225,10 @@ for a given C++ entity.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#opaque_settings_for_property#</dia:string>
+            <dia:string>#opaque_annotations_for_property#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, std::unordered_map&lt;std::string,boost::shared_ptr&lt;settings::opaque_settings&gt;&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, std::unordered_map&lt;std::string,boost::shared_ptr&lt;annotations::opaque_annotations&gt;&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -9328,7 +9328,7 @@ for a given C++ entity.#</dia:string>
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O75">
       <dia:attribute name="name">
-        <dia:string>#creates element settings &gt;#</dia:string>
+        <dia:string>#creates element annotations &gt;#</dia:string>
       </dia:attribute>
       <dia:attribute name="direction">
         <dia:enum val="1"/>
@@ -9500,11 +9500,11 @@ for a given C++ entity.#</dia:string>
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#Settings for the C++ Model.
+            <dia:string>#Annotations for the C++ Model.
 
 This namespace contains all classes that model
-settings used by the formatters, as well as all
-classes required to extract those settings from
+annotations used by the formatters, as well as all
+classes required to extract those annotations from
 the dynamic object.
 
 #DOGEN dia.comment=true#</dia:string>
@@ -9845,7 +9845,7 @@ the dynamic object.
                 <dia:string>#brp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const settings::element_settings_repository&amp;#</dia:string>
+                <dia:string>#const annotations::element_annotations_repository&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -11343,7 +11343,7 @@ registry of all available formatters.#</dia:string>
         <dia:real val="2.1999999999999997"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#opaque_settings#</dia:string>
+        <dia:string>#opaque_annotations#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
@@ -11543,10 +11543,10 @@ registry of all available formatters.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#opaque_settings_factories_#</dia:string>
+            <dia:string>#opaque_annotations_factories_#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;boost::shared_ptr&lt;settings::opaque_settings_factory_interface&gt;&gt;#</dia:string>
+            <dia:string>#std::list&lt;boost::shared_ptr&lt;annotations::opaque_annotations_factory_interface&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -11568,7 +11568,7 @@ registry of all available formatters.#</dia:string>
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#register_opaque_settings_factory#</dia:string>
+            <dia:string>#register_opaque_annotations_factory#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -11600,7 +11600,7 @@ registry of all available formatters.#</dia:string>
                 <dia:string>#f#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#boost::shared_ptr&lt;opaque_settings_factory_interface&gt;#</dia:string>
+                <dia:string>#boost::shared_ptr&lt;opaque_annotations_factory_interface&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -11616,13 +11616,13 @@ registry of all available formatters.#</dia:string>
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#opaque_settings_factories#</dia:string>
+            <dia:string>#opaque_annotations_factories#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;boost::shared_ptr&lt;settings::opaque_settings_factory_interface&gt;&gt;#</dia:string>
+            <dia:string>#std::list&lt;boost::shared_ptr&lt;annotations::opaque_annotations_factory_interface&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -11668,7 +11668,7 @@ registry of all available formatters.#</dia:string>
         <dia:real val="5.2000000000000002"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#element_settings_factory#</dia:string>
+        <dia:string>#element_annotations_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -11758,7 +11758,7 @@ registry of all available formatters.#</dia:string>
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#element_settings_factory#</dia:string>
+            <dia:string>#element_annotations_factory#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -11807,7 +11807,7 @@ registry of all available formatters.#</dia:string>
                 <dia:string>#osb#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const settings::opaque_settings_builder&amp;#</dia:string>
+                <dia:string>#const annotations::opaque_annotations_builder&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -11829,7 +11829,7 @@ registry of all available formatters.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#settings::element_settings#</dia:string>
+            <dia:string>#annotations::element_annotations#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -11965,7 +11965,7 @@ registry of all available formatters.#</dia:string>
         <dia:real val="5.2000000000000002"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#opaque_settings_factory_interface#</dia:string>
+        <dia:string>#opaque_annotations_factory_interface#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -12085,7 +12085,7 @@ registry of all available formatters.#</dia:string>
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#settings_key#</dia:string>
+            <dia:string>#annotations_key#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -12121,7 +12121,7 @@ registry of all available formatters.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::shared_ptr&lt;special_formatter_settings&gt;#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;special_formatter_annotations&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -12329,7 +12329,7 @@ registry of all available formatters.#</dia:string>
         <dia:real val="9.1999999999999993"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#path_settings#</dia:string>
+        <dia:string>#path_annotations#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
@@ -12648,7 +12648,7 @@ registry of all available formatters.#</dia:string>
         <dia:real val="6.8000000000000007"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#path_settings_factory#</dia:string>
+        <dia:string>#path_annotations_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -12738,7 +12738,7 @@ registry of all available formatters.#</dia:string>
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#path_settings_factory#</dia:string>
+            <dia:string>#path_annotations_factory#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -12826,7 +12826,7 @@ registry of all available formatters.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, path_settings&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, path_annotations&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -13145,13 +13145,13 @@ registry of all available formatters.#</dia:string>
         <dia:real val="2.7999999999999998"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#odb_settings#</dia:string>
+        <dia:string>#odb_annotations#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Settings for ODB formatters.#</dia:string>
+        <dia:string>#Annotations for ODB formatters.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -14574,7 +14574,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#ps#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const std::unordered_map&lt;std::string,settings::path_settings&gt;&amp;#</dia:string>
+                <dia:string>#const std::unordered_map&lt;std::string,annotations::path_annotations&gt;&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -17880,7 +17880,7 @@ main, or from another initialiser.#</dia:string>
         <dia:real val="7.5999999999999996"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#inclusion_directive_settings_factory#</dia:string>
+        <dia:string>#inclusion_directive_annotations_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -17970,7 +17970,7 @@ main, or from another initialiser.#</dia:string>
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#inclusion_directive_settings_factory#</dia:string>
+            <dia:string>#inclusion_directive_annotations_factory#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -18100,13 +18100,13 @@ main, or from another initialiser.#</dia:string>
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#make_inclusion_directive_settings#</dia:string>
+            <dia:string>#make_inclusion_directive_annotations#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#inclusion_directive_settings#</dia:string>
+            <dia:string>#inclusion_directive_annotations#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -19787,7 +19787,7 @@ main, or from another initialiser.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#inclusion_directive_settings#</dia:string>
+        <dia:string>#inclusion_directive_annotations#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
@@ -22985,7 +22985,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#aspect_settings#</dia:string>
+        <dia:string>#aspect_annotations#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
@@ -23166,7 +23166,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:real val="5.2000000000000002"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#aspect_settings_factory#</dia:string>
+        <dia:string>#aspect_annotations_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -23256,7 +23256,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#aspect_settings_factory#</dia:string>
+            <dia:string>#aspect_annotations_factory#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -23327,7 +23327,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#settings::aspect_settings#</dia:string>
+            <dia:string>#annotations::aspect_annotations#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -23463,7 +23463,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:real val="2.7999999999999998"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#element_settings_repository#</dia:string>
+        <dia:string>#element_annotations_repository#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
@@ -23555,7 +23555,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
             <dia:string>#by_id#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, settings::element_settings&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, annotations::element_annotations&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -24324,7 +24324,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#odb_settings_factory#</dia:string>
+        <dia:string>#odb_annotations_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -24691,7 +24691,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:real val="7.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#opaque_settings_builder#</dia:string>
+        <dia:string>#opaque_annotations_builder#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -24783,7 +24783,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
             <dia:string>#registrar_#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#settings::registrar#</dia:string>
+            <dia:string>#annotations::registrar#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -24811,7 +24811,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#const settings::registrar&amp;#</dia:string>
+            <dia:string>#const annotations::registrar&amp;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -24919,7 +24919,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string,boost::shared_ptr&lt;settings::opaque_settings&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string,boost::shared_ptr&lt;annotations::opaque_annotations&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -26171,7 +26171,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#directory_names_settings#</dia:string>
+        <dia:string>#directory_names_annotations#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
@@ -26401,7 +26401,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#directory_names_settings_factory#</dia:string>
+        <dia:string>#directory_names_annotations_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -26497,7 +26497,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#directory_names_settings#</dia:string>
+            <dia:string>#directory_names_annotations#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -26650,10 +26650,10 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#element_settings#</dia:string>
+            <dia:string>#element_annotations#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#settings::element_settings#</dia:string>
+            <dia:string>#annotations::element_annotations#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -26780,13 +26780,13 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:real val="2.7999999999999998"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#helper_settings#</dia:string>
+        <dia:string>#helper_annotations#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Contains all settings related to formatter helpers.#</dia:string>
+        <dia:string>#Contains all annotations related to formatter helpers.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -26915,7 +26915,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#helper_settings_factory#</dia:string>
+        <dia:string>#helper_annotations_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -27011,7 +27011,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#helper_settings#</dia:string>
+            <dia:string>#helper_annotations#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -27617,7 +27617,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:real val="2.7999999999999998"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#helper_settings_repository#</dia:string>
+        <dia:string>#helper_annotations_repository#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
@@ -27709,7 +27709,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
             <dia:string>#by_id#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, settings::helper_settings&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, annotations::helper_annotations&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -27752,7 +27752,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#helper_settings_repository_factory#</dia:string>
+        <dia:string>#helper_annotations_repository_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -27848,7 +27848,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#helper_settings_repository#</dia:string>
+            <dia:string>#helper_annotations_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -28145,10 +28145,10 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#element_settings_repository_#</dia:string>
+            <dia:string>#element_annotations_repository_#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#settings::element_settings_repository#</dia:string>
+            <dia:string>#annotations::element_annotations_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -28168,10 +28168,10 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#helper_settings_#</dia:string>
+            <dia:string>#helper_annotations_#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#settings::helper_settings_repository#</dia:string>
+            <dia:string>#annotations::helper_annotations_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -28271,7 +28271,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
                 <dia:string>#brp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const settings::element_settings_repository&amp;#</dia:string>
+                <dia:string>#const annotations::element_annotations_repository&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -28288,7 +28288,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
                 <dia:string>#hsrp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const settings::helper_settings_repository&amp;#</dia:string>
+                <dia:string>#const annotations::helper_annotations_repository&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -29308,10 +29308,10 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#helper_settings#</dia:string>
+            <dia:string>#helper_annotations#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#settings::helper_settings#</dia:string>
+            <dia:string>#annotations::helper_annotations#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -29331,10 +29331,10 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#streaming_settings#</dia:string>
+            <dia:string>#streaming_annotations#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::optional&lt;settings::streaming_settings&gt;#</dia:string>
+            <dia:string>#boost::optional&lt;annotations::streaming_annotations&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -29916,7 +29916,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
                 <dia:string>#hs#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#std::unordered_map&lt;std::string, settings::helper_settings&gt;#</dia:string>
+                <dia:string>#std::unordered_map&lt;std::string, annotations::helper_annotations&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -30165,7 +30165,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
                 <dia:string>#hs#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#std::unordered_map&lt;std::string, settings::helper_settings&gt;#</dia:string>
+                <dia:string>#std::unordered_map&lt;std::string, annotations::helper_annotations&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -31478,7 +31478,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#streaming_settings#</dia:string>
+        <dia:string>#streaming_annotations#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
@@ -31659,7 +31659,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:real val="2.7999999999999998"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#streaming_settings_repository#</dia:string>
+        <dia:string>#streaming_annotations_repository#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
@@ -31751,7 +31751,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
             <dia:string>#by_id#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, settings::streaming_settings&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, annotations::streaming_annotations&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -31794,7 +31794,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#streaming_settings_factory#</dia:string>
+        <dia:string>#streaming_annotations_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -31954,7 +31954,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#streaming_settings_repository_factory#</dia:string>
+        <dia:string>#streaming_annotations_repository_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -32050,7 +32050,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#streaming_settings_repository#</dia:string>
+            <dia:string>#streaming_annotations_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -33017,7 +33017,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
                 <dia:string>#as#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#std::unordered_map&lt;std::string, settings::aspect_settings&gt;#</dia:string>
+                <dia:string>#std::unordered_map&lt;std::string, annotations::aspect_annotations&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -33369,7 +33369,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
                 <dia:string>#as#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#std::unordered_map&lt;std::string, settings::aspect_settings&gt;#</dia:string>
+                <dia:string>#std::unordered_map&lt;std::string, annotations::aspect_annotations&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -33568,7 +33568,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#aspect_settings_repository_factory#</dia:string>
+        <dia:string>#aspect_annotations_repository_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -33745,7 +33745,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:real val="2.7999999999999998"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#aspect_settings_repository#</dia:string>
+        <dia:string>#aspect_annotations_repository#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
@@ -33837,7 +33837,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
             <dia:string>#by_id#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, settings::aspect_settings&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, annotations::aspect_annotations&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

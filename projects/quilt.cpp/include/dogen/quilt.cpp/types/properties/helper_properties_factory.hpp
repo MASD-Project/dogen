@@ -33,8 +33,8 @@
 #include "dogen/yarn/types/attribute.hpp"
 #include "dogen/yarn/types/name_tree.hpp"
 #include "dogen/quilt.cpp/types/properties/helper_properties.hpp"
-#include "dogen/quilt.cpp/types/settings/helper_settings_repository.hpp"
-#include "dogen/quilt.cpp/types/settings/streaming_settings_repository.hpp"
+#include "dogen/quilt.cpp/types/annotations/helper_annotations_repository.hpp"
+#include "dogen/quilt.cpp/types/annotations/streaming_annotations_repository.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -46,17 +46,17 @@ public:
     helper_properties_factory(
         const std::unordered_map<std::string, std::unordered_set<std::string>>&
         facets_for_family,
-        const settings::helper_settings_repository& hsrp,
-        const settings::streaming_settings_repository& ssrp);
+        const annotations::helper_annotations_repository& hsrp,
+        const annotations::streaming_annotations_repository& ssrp);
 
 private:
     bool requires_hashing_helper(const std::string& family) const;
 
-    settings::helper_settings
-    helper_settings_for_id(const std::string& id) const;
+    annotations::helper_annotations
+    helper_annotations_for_id(const std::string& id) const;
 
-    boost::optional<settings::streaming_settings>
-    streaming_settings_for_id(const std::string& id) const;
+    boost::optional<annotations::streaming_annotations>
+    streaming_annotations_for_id(const std::string& id) const;
 
 private:
     boost::optional<helper_descriptor>
@@ -73,8 +73,8 @@ public:
 private:
     const std::unordered_map<std::string, std::unordered_set<std::string>>&
         facets_for_family_;
-    const settings::helper_settings_repository& helper_settings_;
-    const settings::streaming_settings_repository& streaming_settings_;
+    const annotations::helper_annotations_repository& helper_annotations_;
+    const annotations::streaming_annotations_repository& streaming_annotations_;
 };
 
 } } } }

@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/hash/settings/helper_settings_hash.hpp"
-#include "dogen/quilt.cpp/hash/settings/streaming_settings_hash.hpp"
 #include "dogen/quilt.cpp/hash/properties/helper_descriptor_hash.hpp"
+#include "dogen/quilt.cpp/hash/annotations/helper_annotations_hash.hpp"
+#include "dogen/quilt.cpp/hash/annotations/streaming_annotations_hash.hpp"
 
 namespace {
 
@@ -38,7 +38,7 @@ inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
     return seed;
 }
 
-inline std::size_t hash_boost_optional_dogen_quilt_cpp_settings_streaming_settings(const boost::optional<dogen::quilt::cpp::settings::streaming_settings>& v) {
+inline std::size_t hash_boost_optional_dogen_quilt_cpp_annotations_streaming_annotations(const boost::optional<dogen::quilt::cpp::annotations::streaming_annotations>& v) {
     std::size_t seed(0);
 
     if (!v)
@@ -63,8 +63,8 @@ std::size_t helper_descriptor_hasher::hash(const helper_descriptor& v) {
     combine(seed, v.name_qualified());
     combine(seed, v.name_tree_qualified());
     combine(seed, v.name_tree_identifiable());
-    combine(seed, v.helper_settings());
-    combine(seed, hash_boost_optional_dogen_quilt_cpp_settings_streaming_settings(v.streaming_settings()));
+    combine(seed, v.helper_annotations());
+    combine(seed, hash_boost_optional_dogen_quilt_cpp_annotations_streaming_annotations(v.streaming_annotations()));
     combine(seed, v.is_simple_type());
     combine(seed, v.requires_hashing_helper());
     combine(seed, v.is_circular_dependency());

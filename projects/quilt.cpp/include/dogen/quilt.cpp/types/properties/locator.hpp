@@ -32,7 +32,7 @@
 #include "dogen/options/types/cpp_options.hpp"
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/model.hpp"
-#include "dogen/quilt.cpp/types/settings/path_settings.hpp"
+#include "dogen/quilt.cpp/types/annotations/path_annotations.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -45,7 +45,7 @@ namespace properties {
 class locator {
 public:
     locator(const options::cpp_options& opts, const yarn::model& m,
-        const std::unordered_map<std::string, settings::path_settings>& ps);
+        const std::unordered_map<std::string, annotations::path_annotations>& ps);
 
 private:
     /**
@@ -55,11 +55,11 @@ private:
 
 private:
     /**
-     * @brief Given a formatter name, returns its path settings.
+     * @brief Given a formatter name, returns its path annotations.
      *
-     * @pre Formatter must have path settings.
+     * @pre Formatter must have path annotations.
      */
-    const settings::path_settings& path_settings_for_formatter(
+    const annotations::path_annotations& path_annotations_for_formatter(
         const std::string& formatter_name) const;
 
 private:
@@ -76,7 +76,7 @@ private:
      * The facet path segment is the same for both include and source
      * folders; it starts at the facet and includes the file name.
      */
-    boost::filesystem::path make_facet_path(const settings::path_settings& ps,
+    boost::filesystem::path make_facet_path(const annotations::path_annotations& ps,
         const std::string& extension, const yarn::name& n) const;
 
     /**
@@ -84,7 +84,7 @@ private:
      * directory for the supplied qualified name.
      */
     boost::filesystem::path make_inclusion_path(
-        const settings::path_settings& ps,
+        const annotations::path_annotations& ps,
         const std::string& extension,
         const yarn::name& n) const;
 
@@ -127,8 +127,8 @@ public:
 
 private:
     const yarn::name& model_name_;
-    const std::unordered_map<std::string, settings::path_settings>&
-    path_settings_;
+    const std::unordered_map<std::string, annotations::path_annotations>&
+    path_annotations_;
     const std::unordered_set<std::string> module_ids_;
     const boost::filesystem::path project_path_;
 };

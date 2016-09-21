@@ -37,8 +37,8 @@ helper_descriptor::helper_descriptor(helper_descriptor&& rhs)
       name_qualified_(std::move(rhs.name_qualified_)),
       name_tree_qualified_(std::move(rhs.name_tree_qualified_)),
       name_tree_identifiable_(std::move(rhs.name_tree_identifiable_)),
-      helper_settings_(std::move(rhs.helper_settings_)),
-      streaming_settings_(std::move(rhs.streaming_settings_)),
+      helper_annotations_(std::move(rhs.helper_annotations_)),
+      streaming_annotations_(std::move(rhs.streaming_annotations_)),
       is_simple_type_(std::move(rhs.is_simple_type_)),
       requires_hashing_helper_(std::move(rhs.requires_hashing_helper_)),
       is_circular_dependency_(std::move(rhs.is_circular_dependency_)),
@@ -50,8 +50,8 @@ helper_descriptor::helper_descriptor(
     const std::string& name_qualified,
     const std::string& name_tree_qualified,
     const std::string& name_tree_identifiable,
-    const dogen::quilt::cpp::settings::helper_settings& helper_settings,
-    const boost::optional<dogen::quilt::cpp::settings::streaming_settings>& streaming_settings,
+    const dogen::quilt::cpp::annotations::helper_annotations& helper_annotations,
+    const boost::optional<dogen::quilt::cpp::annotations::streaming_annotations>& streaming_annotations,
     const bool is_simple_type,
     const bool requires_hashing_helper,
     const bool is_circular_dependency,
@@ -61,8 +61,8 @@ helper_descriptor::helper_descriptor(
       name_qualified_(name_qualified),
       name_tree_qualified_(name_tree_qualified),
       name_tree_identifiable_(name_tree_identifiable),
-      helper_settings_(helper_settings),
-      streaming_settings_(streaming_settings),
+      helper_annotations_(helper_annotations),
+      streaming_annotations_(streaming_annotations),
       is_simple_type_(is_simple_type),
       requires_hashing_helper_(requires_hashing_helper),
       is_circular_dependency_(is_circular_dependency),
@@ -75,8 +75,8 @@ void helper_descriptor::swap(helper_descriptor& other) noexcept {
     swap(name_qualified_, other.name_qualified_);
     swap(name_tree_qualified_, other.name_tree_qualified_);
     swap(name_tree_identifiable_, other.name_tree_identifiable_);
-    swap(helper_settings_, other.helper_settings_);
-    swap(streaming_settings_, other.streaming_settings_);
+    swap(helper_annotations_, other.helper_annotations_);
+    swap(streaming_annotations_, other.streaming_annotations_);
     swap(is_simple_type_, other.is_simple_type_);
     swap(requires_hashing_helper_, other.requires_hashing_helper_);
     swap(is_circular_dependency_, other.is_circular_dependency_);
@@ -89,8 +89,8 @@ bool helper_descriptor::operator==(const helper_descriptor& rhs) const {
         name_qualified_ == rhs.name_qualified_ &&
         name_tree_qualified_ == rhs.name_tree_qualified_ &&
         name_tree_identifiable_ == rhs.name_tree_identifiable_ &&
-        helper_settings_ == rhs.helper_settings_ &&
-        streaming_settings_ == rhs.streaming_settings_ &&
+        helper_annotations_ == rhs.helper_annotations_ &&
+        streaming_annotations_ == rhs.streaming_annotations_ &&
         is_simple_type_ == rhs.is_simple_type_ &&
         requires_hashing_helper_ == rhs.requires_hashing_helper_ &&
         is_circular_dependency_ == rhs.is_circular_dependency_ &&
@@ -183,36 +183,36 @@ void helper_descriptor::name_tree_identifiable(const std::string&& v) {
     name_tree_identifiable_ = std::move(v);
 }
 
-const dogen::quilt::cpp::settings::helper_settings& helper_descriptor::helper_settings() const {
-    return helper_settings_;
+const dogen::quilt::cpp::annotations::helper_annotations& helper_descriptor::helper_annotations() const {
+    return helper_annotations_;
 }
 
-dogen::quilt::cpp::settings::helper_settings& helper_descriptor::helper_settings() {
-    return helper_settings_;
+dogen::quilt::cpp::annotations::helper_annotations& helper_descriptor::helper_annotations() {
+    return helper_annotations_;
 }
 
-void helper_descriptor::helper_settings(const dogen::quilt::cpp::settings::helper_settings& v) {
-    helper_settings_ = v;
+void helper_descriptor::helper_annotations(const dogen::quilt::cpp::annotations::helper_annotations& v) {
+    helper_annotations_ = v;
 }
 
-void helper_descriptor::helper_settings(const dogen::quilt::cpp::settings::helper_settings&& v) {
-    helper_settings_ = std::move(v);
+void helper_descriptor::helper_annotations(const dogen::quilt::cpp::annotations::helper_annotations&& v) {
+    helper_annotations_ = std::move(v);
 }
 
-const boost::optional<dogen::quilt::cpp::settings::streaming_settings>& helper_descriptor::streaming_settings() const {
-    return streaming_settings_;
+const boost::optional<dogen::quilt::cpp::annotations::streaming_annotations>& helper_descriptor::streaming_annotations() const {
+    return streaming_annotations_;
 }
 
-boost::optional<dogen::quilt::cpp::settings::streaming_settings>& helper_descriptor::streaming_settings() {
-    return streaming_settings_;
+boost::optional<dogen::quilt::cpp::annotations::streaming_annotations>& helper_descriptor::streaming_annotations() {
+    return streaming_annotations_;
 }
 
-void helper_descriptor::streaming_settings(const boost::optional<dogen::quilt::cpp::settings::streaming_settings>& v) {
-    streaming_settings_ = v;
+void helper_descriptor::streaming_annotations(const boost::optional<dogen::quilt::cpp::annotations::streaming_annotations>& v) {
+    streaming_annotations_ = v;
 }
 
-void helper_descriptor::streaming_settings(const boost::optional<dogen::quilt::cpp::settings::streaming_settings>&& v) {
-    streaming_settings_ = std::move(v);
+void helper_descriptor::streaming_annotations(const boost::optional<dogen::quilt::cpp::annotations::streaming_annotations>&& v) {
+    streaming_annotations_ = std::move(v);
 }
 
 bool helper_descriptor::is_simple_type() const {

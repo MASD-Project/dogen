@@ -36,9 +36,9 @@
 #include "dogen/quilt/types/backend_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/formatters/types/file_properties_workflow.hpp"
-#include "dogen/quilt.cpp/types/settings/opaque_settings_builder.hpp"
-#include "dogen/quilt.cpp/types/settings/streaming_settings_repository.hpp"
-#include "dogen/quilt.cpp/types/settings/element_settings_repository.hpp"
+#include "dogen/quilt.cpp/types/annotations/opaque_annotations_builder.hpp"
+#include "dogen/quilt.cpp/types/annotations/streaming_annotations_repository.hpp"
+#include "dogen/quilt.cpp/types/annotations/element_annotations_repository.hpp"
 #include "dogen/quilt.cpp/types/properties/element_properties_repository.hpp"
 #include "dogen/yarn/types/model.hpp"
 
@@ -73,24 +73,24 @@ private:
         const dynamic::object& root_object) const;
 
     /**
-     * @brief Creates the opaque settings builder.
+     * @brief Creates the opaque annotations builder.
      */
-    settings::opaque_settings_builder
-    create_opaque_settings_builder(const dynamic::repository& rp) const;
+    annotations::opaque_annotations_builder
+    create_opaque_annotations_builder(const dynamic::repository& rp) const;
 
     /**
-     * @brief Create the streaming settings repository.
+     * @brief Create the streaming annotations repository.
      */
-    settings::streaming_settings_repository
-        create_streaming_settings_repository(const dynamic::repository& drp,
+    annotations::streaming_annotations_repository
+        create_streaming_annotations_repository(const dynamic::repository& drp,
             const yarn::model& m) const;
 
     /**
-     * @brief Create the element settings repository
+     * @brief Create the element annotations repository
      */
-    settings::element_settings_repository
-    create_element_settings_repository(
-        const settings::opaque_settings_builder& osb,
+    annotations::element_annotations_repository
+    create_element_annotations_repository(
+        const annotations::opaque_annotations_builder& osb,
         const yarn::model& m) const;
 
     /**
@@ -102,7 +102,7 @@ private:
         const dynamic::object& root_object,
         const dogen::formatters::file_properties_workflow& fpwf,
         const formatters::container& fc,
-        const settings::streaming_settings_repository& ssrp,
+        const annotations::streaming_annotations_repository& ssrp,
         const yarn::model& m) const;
 
     /**
@@ -115,8 +115,8 @@ private:
      * @brief Create the files.
      */
     std::forward_list<dogen::formatters::file>
-    format(const settings::streaming_settings_repository& ssrp,
-        const settings::element_settings_repository& esrp,
+    format(const annotations::streaming_annotations_repository& ssrp,
+        const annotations::element_annotations_repository& esrp,
         const properties::element_properties_repository& eprp,
         const std::forward_list<
         boost::shared_ptr<yarn::element> >& elements) const;

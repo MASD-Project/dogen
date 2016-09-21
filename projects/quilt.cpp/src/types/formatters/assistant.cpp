@@ -27,8 +27,8 @@
 #include "dogen/formatters/types/decoration_formatter.hpp"
 #include "dogen/formatters/types/utility_formatter.hpp"
 #include "dogen/yarn/io/languages_io.hpp"
-#include "dogen/quilt.cpp/io/settings/streaming_settings_io.hpp"
-#include "dogen/quilt.cpp/io/settings/helper_settings_io.hpp"
+#include "dogen/quilt.cpp/io/annotations/streaming_annotations_io.hpp"
+#include "dogen/quilt.cpp/io/annotations/helper_annotations_io.hpp"
 #include "dogen/quilt.cpp/io/properties/helper_properties_io.hpp"
 #include "dogen/quilt.cpp/types/properties/name_builder.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/traits.hpp"
@@ -67,12 +67,12 @@ const std::string formatter_properties_missing(
     "Could not find formatter properties for formatter: ");
 const std::string facet_directory_missing(
     "Facet directory is missing for facet: ");
-const std::string unexpected_opaque_settings(
-    "Unexpectd opaque settings type.");
+const std::string unexpected_opaque_annotations(
+    "Unexpectd opaque annotations type.");
 const std::string family_not_found("Family not found: ");
 const std::string no_helpers_for_family("No helpers found for family: ");
 const std::string qn_missing("Could not find qualified name for language.");
-const std::string empty_settings("Helper properties must have settings.");
+const std::string empty_annotations("Helper properties must have annotations.");
 const std::string helpless_family("No registered helpers found for family: ");
 
 }
@@ -385,7 +385,7 @@ std::string assistant::comment_inline(const std::string& c) const {
 
 std::list<std::shared_ptr<formatters::helper_formatter_interface>>
 assistant::get_helpers(const properties::helper_properties& hp) const {
-    const auto s(hp.current().helper_settings());
+    const auto s(hp.current().helper_annotations());
 
     /*
      * A family must have at least one helper registered. This is a
@@ -475,11 +475,11 @@ void assistant::add_helper_methods() {
 }
 
 std::string assistant::streaming_for_type(
-    const settings::streaming_settings& ss, const std::string& s) const {
+    const annotations::streaming_annotations& ss, const std::string& s) const {
 
     std::ostringstream stream;
     dogen::formatters::utility_formatter uf(stream);
-    BOOST_LOG_SEV(lg, debug) << "Settings for streaming for type: " << ss;
+    BOOST_LOG_SEV(lg, debug) << "Annotations for streaming for type: " << ss;
     if (ss.remove_unprintable_characters())
         uf.insert_streamed("tidy_up_string(" + s + ")");
     else if (!ss.string_conversion_method().empty()) {
@@ -500,7 +500,7 @@ std::string assistant::streaming_for_type(
 std::string assistant::streaming_for_type(const yarn::name& n,
     const std::string& s) const {
 
-    const auto ssbid(context_.streaming_settings_repository().by_id());
+    const auto ssbid(context_.streaming_annotations_repository().by_id());
     const auto i(ssbid.find(n.id()));
     if (i == ssbid.end())
         return s;
@@ -512,7 +512,7 @@ std::string assistant::
 streaming_for_type(const properties::helper_descriptor& hd,
     const std::string& s) const {
 
-    const auto ss(hd.streaming_settings());
+    const auto ss(hd.streaming_annotations());
     if (!ss)
         return s;
 
@@ -533,40 +533,40 @@ requires_hashing_helper_method(const yarn::attribute& attr) const {
     return false;
 }
 
-boost::shared_ptr<settings::odb_settings> assistant::
-get_odb_settings(const std::unordered_map<std::string,
-    boost::shared_ptr<quilt::cpp::settings::opaque_settings>
+boost::shared_ptr<annotations::odb_annotations> assistant::
+get_odb_annotations(const std::unordered_map<std::string,
+    boost::shared_ptr<quilt::cpp::annotations::opaque_annotations>
     >& os) const {
     const auto fn(odb::traits::class_header_formatter_name());
     const auto i(os.find(fn));
     if (i == os.end())
-        return boost::shared_ptr<settings::odb_settings>();
+        return boost::shared_ptr<annotations::odb_annotations>();
 
-    auto r(boost::dynamic_pointer_cast<settings::odb_settings>(i->second));
+    auto r(boost::dynamic_pointer_cast<annotations::odb_annotations>(i->second));
     if (!r) {
-        BOOST_LOG_SEV(lg, error) << unexpected_opaque_settings;
-        BOOST_THROW_EXCEPTION(formatting_error(unexpected_opaque_settings));
+        BOOST_LOG_SEV(lg, error) << unexpected_opaque_annotations;
+        BOOST_THROW_EXCEPTION(formatting_error(unexpected_opaque_annotations));
     }
     return r;
 }
 
-boost::shared_ptr<settings::odb_settings>
-assistant::get_odb_settings() const {
-    const auto& os(context_.element_settings().opaque_settings());
-    return get_odb_settings(os);
+boost::shared_ptr<annotations::odb_annotations>
+assistant::get_odb_annotations() const {
+    const auto& os(context_.element_annotations().opaque_annotations());
+    return get_odb_annotations(os);
 }
 
-boost::shared_ptr<settings::odb_settings> assistant::
-get_odb_settings(const std::string& property_id) const {
+boost::shared_ptr<annotations::odb_annotations> assistant::
+get_odb_annotations(const std::string& property_id) const {
 
-    const auto& es(context_.element_settings());
-    const auto& osfp(es.opaque_settings_for_property());
+    const auto& es(context_.element_annotations());
+    const auto& osfp(es.opaque_annotations_for_property());
     const auto i(osfp.find(property_id));
     if (i == osfp.end())
-        return boost::shared_ptr<settings::odb_settings>();
+        return boost::shared_ptr<annotations::odb_annotations>();
 
     const auto& os(i->second);
-    return get_odb_settings(os);
+    return get_odb_annotations(os);
 }
 
 std::ostream& assistant::stream() {

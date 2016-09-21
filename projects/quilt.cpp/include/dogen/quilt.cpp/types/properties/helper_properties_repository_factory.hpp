@@ -30,8 +30,8 @@
 #include <unordered_set>
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
-#include "dogen/quilt.cpp/types/settings/helper_settings_repository.hpp"
-#include "dogen/quilt.cpp/types/settings/streaming_settings_repository.hpp"
+#include "dogen/quilt.cpp/types/annotations/helper_annotations_repository.hpp"
+#include "dogen/quilt.cpp/types/annotations/streaming_annotations_repository.hpp"
 #include "dogen/quilt.cpp/types/properties/helper_properties_repository.hpp"
 
 namespace dogen {
@@ -46,8 +46,8 @@ private:
 
 public:
     helper_properties_repository make(
-        const settings::helper_settings_repository& hsrp,
-        const settings::streaming_settings_repository& ssrp,
+        const annotations::helper_annotations_repository& hsrp,
+        const annotations::streaming_annotations_repository& ssrp,
         const formatters::container& fc,
         const yarn::model& m) const;
 };

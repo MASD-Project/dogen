@@ -112,8 +112,8 @@ facets_for_family(const formatters::container& fc) const {
 
 helper_properties_repository
 helper_properties_repository_factory::make(
-    const settings::helper_settings_repository& hsrp,
-    const settings::streaming_settings_repository& ssrp,
+    const annotations::helper_annotations_repository& hsrp,
+    const annotations::streaming_annotations_repository& ssrp,
     const formatters::container& fc,
     const yarn::model& m) const {
 

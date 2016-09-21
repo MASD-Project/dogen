@@ -26,9 +26,9 @@
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/io/forward_list_io.hpp"
 #include "dogen/yarn/types/element_visitor.hpp"
-#include "dogen/quilt.cpp/types/settings/path_settings_factory.hpp"
-#include "dogen/quilt.cpp/types/settings/helper_settings_repository_factory.hpp"
-#include "dogen/quilt.cpp/types/settings/aspect_settings_repository_factory.hpp"
+#include "dogen/quilt.cpp/types/annotations/path_annotations_factory.hpp"
+#include "dogen/quilt.cpp/types/annotations/helper_annotations_repository_factory.hpp"
+#include "dogen/quilt.cpp/types/annotations/aspect_annotations_repository_factory.hpp"
 #include "dogen/quilt.cpp/types/properties/path_derivatives_repository_factory.hpp"
 #include "dogen/quilt.cpp/types/properties/element_properties_repository_factory.hpp"
 #include "dogen/quilt.cpp/types/properties/formatter_properties_repository_factory.hpp"
@@ -55,29 +55,29 @@ properties::registrar& workflow::registrar() {
     return *registrar_;
 }
 
-std::unordered_map<std::string, settings::path_settings>
-workflow::create_path_settings(const dynamic::repository& drp,
+std::unordered_map<std::string, annotations::path_annotations>
+workflow::create_path_annotations(const dynamic::repository& drp,
     const dynamic::object& root_object,
     const formatters::container& fc) const {
 
-    BOOST_LOG_SEV(lg, debug) << "Creating path settings for root object.";
-    settings::path_settings_factory f(drp, fc.all_file_formatters());
+    BOOST_LOG_SEV(lg, debug) << "Creating path annotations for root object.";
+    annotations::path_annotations_factory f(drp, fc.all_file_formatters());
     const auto r(f.make(root_object));
-    BOOST_LOG_SEV(lg, debug) << "Created path settings for root object.";
+    BOOST_LOG_SEV(lg, debug) << "Created path annotations for root object.";
     return r;
 }
 
-settings::helper_settings_repository workflow::
-create_helper_settings_repository(const dynamic::repository& drp,
+annotations::helper_annotations_repository workflow::
+create_helper_annotations_repository(const dynamic::repository& drp,
     const yarn::model& m) const {
-    settings::helper_settings_repository_factory f;
+    annotations::helper_annotations_repository_factory f;
     return f.make(drp, m);
 }
 
 std::unordered_map<std::string, std::string> workflow::
 facet_directory_for_facet(const formatters::container& fc,
     const std::unordered_map<std::string,
-    settings::path_settings>& ps) const {
+    annotations::path_annotations>& ps) const {
 
     std::unordered_map<std::string, std::string> r;
     for (const auto& f : fc.all_file_formatters()) {
@@ -91,10 +91,10 @@ facet_directory_for_facet(const formatters::container& fc,
     return r;
 }
 
-settings::aspect_settings_repository
-workflow::create_aspect_settings_repository(
+annotations::aspect_annotations_repository
+workflow::create_aspect_annotations_repository(
     const dynamic::repository& drp, const yarn::model& m) const {
-    settings::aspect_settings_repository_factory f;
+    annotations::aspect_annotations_repository_factory f;
     return f.make(drp, m);
 }
 
@@ -121,9 +121,9 @@ create_formatter_properties(const dynamic::repository& drp,
 
 element_properties_repository workflow::create_element_properties_repository(
     const dogen::formatters::file_properties_workflow& fpwf,
-    const settings::helper_settings_repository& hsrp,
-    const settings::aspect_settings_repository& asrp,
-    const settings::streaming_settings_repository& ssrp,
+    const annotations::helper_annotations_repository& hsrp,
+    const annotations::aspect_annotations_repository& asrp,
+    const annotations::streaming_annotations_repository& ssrp,
     const formatters::container& fc,
     const formatter_properties_repository& fprp,
     const yarn::model& m) const {
@@ -136,19 +136,19 @@ element_properties_repository workflow::execute(const options::cpp_options& opts
     const dynamic::object& root_object,
     const dogen::formatters::file_properties_workflow& fpwf,
     const formatters::container& fc,
-    const settings::streaming_settings_repository& ssrp,
+    const annotations::streaming_annotations_repository& ssrp,
     const yarn::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started creating properties.";
 
     const auto& ro(root_object);
-    const auto ps(create_path_settings(drp, ro, fc));
+    const auto ps(create_path_annotations(drp, ro, fc));
     const locator l(opts, m, ps);
     const auto pdrp(create_path_derivatives_repository(l, m));
     const auto fdff(facet_directory_for_facet(fc, ps));
     auto fprp(create_formatter_properties(drp, ro, fdff, pdrp, l, fc, m));
 
-    const auto hsrp(create_helper_settings_repository(drp, m));
-    const auto asrp(create_aspect_settings_repository(drp, m));
+    const auto hsrp(create_helper_annotations_repository(drp, m));
+    const auto asrp(create_aspect_annotations_repository(drp, m));
     const auto eprp(create_element_properties_repository(
             fpwf, hsrp, asrp, ssrp, fc, fprp, m));
 

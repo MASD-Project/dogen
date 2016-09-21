@@ -25,7 +25,7 @@
 #include "dogen/quilt.cpp/types/properties/name_builder.hpp"
 #include "dogen/quilt.cpp/types/properties/building_error.hpp"
 #include "dogen/quilt.cpp/io/properties/helper_properties_io.hpp"
-#include "dogen/quilt.cpp/io/settings/helper_settings_io.hpp"
+#include "dogen/quilt.cpp/io/annotations/helper_annotations_io.hpp"
 #include "dogen/quilt.cpp/types/properties/helper_properties_factory.hpp"
 
 namespace {
@@ -39,7 +39,7 @@ const std::string empty_identifiable(
     "Identifiable was not generated correctly and is empty.");
 const std::string descriptor_expected(
     "Child name tree has no associated helper descriptor");
-const std::string missing_helper_settings("Helper settings not found for: ");
+const std::string missing_helper_annotations("Helper annotations not found for: ");
 
 }
 
@@ -61,10 +61,10 @@ inline std::string get_qualified(const Qualified& iaq) {
 helper_properties_factory::helper_properties_factory(
     const std::unordered_map<std::string, std::unordered_set<std::string>>&
     facets_for_family,
-    const settings::helper_settings_repository& hsrp,
-    const settings::streaming_settings_repository& ss)
-    : facets_for_family_(facets_for_family), helper_settings_(hsrp),
-      streaming_settings_(ss) { }
+    const annotations::helper_annotations_repository& hsrp,
+    const annotations::streaming_annotations_repository& ss)
+    : facets_for_family_(facets_for_family), helper_annotations_(hsrp),
+      streaming_annotations_(ss) { }
 
 bool helper_properties_factory::
 requires_hashing_helper(const std::string& family) const {
@@ -84,24 +84,24 @@ requires_hashing_helper(const std::string& family) const {
     return j != i->second.end();
 }
 
-settings::helper_settings helper_properties_factory::
-helper_settings_for_id(const std::string& id) const {
-    const auto i(helper_settings_.by_id().find(id));
-    if (i == helper_settings_.by_id().end()) {
-        BOOST_LOG_SEV(lg, debug) << missing_helper_settings << id;
-        BOOST_THROW_EXCEPTION(building_error(missing_helper_settings + id));
+annotations::helper_annotations helper_properties_factory::
+helper_annotations_for_id(const std::string& id) const {
+    const auto i(helper_annotations_.by_id().find(id));
+    if (i == helper_annotations_.by_id().end()) {
+        BOOST_LOG_SEV(lg, debug) << missing_helper_annotations << id;
+        BOOST_THROW_EXCEPTION(building_error(missing_helper_annotations + id));
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Found helper settings for type: " << id
-                             << ". Settings: " << i->second;
+    BOOST_LOG_SEV(lg, debug) << "Found helper annotations for type: " << id
+                             << ". Annotations: " << i->second;
     return i->second;
 }
 
-boost::optional<settings::streaming_settings> helper_properties_factory::
-streaming_settings_for_id(const std::string& id) const {
-    const auto i(streaming_settings_.by_id().find(id));
-    if (i == streaming_settings_.by_id().end())
-        return boost::optional<settings::streaming_settings>();
+boost::optional<annotations::streaming_annotations> helper_properties_factory::
+streaming_annotations_for_id(const std::string& id) const {
+    const auto i(streaming_annotations_.by_id().find(id));
+    if (i == streaming_annotations_.by_id().end())
+        return boost::optional<annotations::streaming_annotations>();
 
     return i->second;
 }
@@ -119,16 +119,16 @@ helper_properties_factory::make(const bool in_inheritance_relationship,
     r.namespaces(b.namespace_list(nt.current()));
     r.is_simple_type(nt.is_current_simple_type());
 
-    const auto ss(streaming_settings_for_id(id));
+    const auto ss(streaming_annotations_for_id(id));
     if (ss) {
-        r.streaming_settings(ss);
-        BOOST_LOG_SEV(lg, debug) << "Adding streaming settings for: " << id;
+        r.streaming_annotations(ss);
+        BOOST_LOG_SEV(lg, debug) << "Adding streaming annotations for: " << id;
     }
 
-    const auto hs(helper_settings_for_id(id));
-    r.helper_settings(hs);
+    const auto hs(helper_annotations_for_id(id));
+    r.helper_annotations(hs);
     r.requires_hashing_helper(requires_hashing_helper(hs.family()));
-    BOOST_LOG_SEV(lg, debug) << "Adding helper settings for: " << id;
+    BOOST_LOG_SEV(lg, debug) << "Adding helper annotations for: " << id;
 
     r.name_identifiable(nt.current().identifiable());
     r.name_qualified(get_qualified(nt.current()));

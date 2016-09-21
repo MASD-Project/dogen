@@ -30,7 +30,6 @@
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/yarn/types/model.hpp"
-#include "dogen/quilt.cpp/types/settings/path_settings.hpp"
 #include "dogen/quilt.cpp/types/properties/locator.hpp"
 #include "dogen/quilt.cpp/types/properties/registrar.hpp"
 #include "dogen/quilt.cpp/types/properties/path_derivatives_repository.hpp"

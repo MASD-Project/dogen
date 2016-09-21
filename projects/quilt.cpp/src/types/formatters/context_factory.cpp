@@ -38,11 +38,11 @@ namespace quilt {
 namespace cpp {
 namespace formatters {
 
-const settings::streaming_settings_repository
-context_factory::empty_streaming_settings_repository_ =
-    settings::streaming_settings_repository();
-const settings::element_settings
-context_factory::empty_element_settings_ = settings::element_settings();
+const annotations::streaming_annotations_repository
+context_factory::empty_streaming_annotations_repository_ =
+    annotations::streaming_annotations_repository();
+const annotations::element_annotations
+context_factory::empty_element_annotations_ = annotations::element_annotations();
 const properties::element_properties
 context_factory::empty_element_properties_ = properties::element_properties();
 const std::unordered_map<
@@ -58,14 +58,14 @@ const std::unordered_map<
         std::list<std::shared_ptr<helper_formatter_interface>>>>();
 
 context_factory::context_factory(
-    const settings::streaming_settings_repository& ssrp,
-    const settings::element_settings_repository& esrp,
+    const annotations::streaming_annotations_repository& ssrp,
+    const annotations::element_annotations_repository& esrp,
     const properties::element_properties_repository& eprp,
     const std::unordered_map<
     std::string, std::unordered_map<
     std::string,
     std::list<std::shared_ptr<helper_formatter_interface>>>>& helpers)
-    : streaming_settings_repository_(ssrp), element_settings_(esrp),
+    : streaming_annotations_repository_(ssrp), element_annotations_(esrp),
       element_properties_(eprp), formatter_helpers_(helpers) {}
 
 const properties::element_properties& context_factory::
@@ -80,27 +80,27 @@ element_properties_for_id(const std::string& n) const {
     return i->second;
 }
 
-const settings::element_settings& context_factory::
-element_settings_for_id(const std::string& n) const {
-    const auto& b(element_settings_.by_id());
+const annotations::element_annotations& context_factory::
+element_annotations_for_id(const std::string& n) const {
+    const auto& b(element_annotations_.by_id());
     const auto i(b.find(n));
     if (i == b.end()) {
-        // FIXME: we will return empty element_settingss due to the hackery we
+        // FIXME: we will return empty element_annotationss due to the hackery we
         // are doing at the moment in factory.
-        return empty_element_settings_;
+        return empty_element_annotations_;
     }
     return i->second;
 }
 
 context context_factory::make_empty_context() const {
-    return context(empty_streaming_settings_repository_,
-        empty_element_settings_, empty_element_properties_, empty_helpers_);
+    return context(empty_streaming_annotations_repository_,
+        empty_element_annotations_, empty_element_properties_, empty_helpers_);
 }
 
 context context_factory::make(const std::string& id) const {
     const auto& ep(element_properties_for_id(id));
-    const auto& es(element_settings_for_id(id));
-    const auto& ssrp(streaming_settings_repository_);
+    const auto& es(element_annotations_for_id(id));
+    const auto& ssrp(streaming_annotations_repository_);
     return context(ssrp, es, ep, formatter_helpers_);
 }
 

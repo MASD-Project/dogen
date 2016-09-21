@@ -34,12 +34,12 @@
 #include "dogen/options/types/cpp_options.hpp"
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/quilt.cpp/types/properties/registrar.hpp"
-#include "dogen/quilt.cpp/types/settings/path_settings.hpp"
-#include "dogen/quilt.cpp/types/settings/element_settings_repository.hpp"
-#include "dogen/quilt.cpp/types/settings/aspect_settings_repository.hpp"
-#include "dogen/quilt.cpp/types/settings/helper_settings_repository.hpp"
-#include "dogen/quilt.cpp/types/settings/aspect_settings_repository.hpp"
-#include "dogen/quilt.cpp/types/settings/streaming_settings_repository.hpp"
+#include "dogen/quilt.cpp/types/annotations/path_annotations.hpp"
+#include "dogen/quilt.cpp/types/annotations/element_annotations_repository.hpp"
+#include "dogen/quilt.cpp/types/annotations/aspect_annotations_repository.hpp"
+#include "dogen/quilt.cpp/types/annotations/helper_annotations_repository.hpp"
+#include "dogen/quilt.cpp/types/annotations/aspect_annotations_repository.hpp"
+#include "dogen/quilt.cpp/types/annotations/streaming_annotations_repository.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/properties/locator.hpp"
 #include "dogen/quilt.cpp/types/properties/path_derivatives_repository.hpp"
@@ -65,10 +65,10 @@ public:
 
 private:
     /**
-     * @brief Creates the path settings.
+     * @brief Creates the path annotations.
      */
-    std::unordered_map<std::string, settings::path_settings>
-    create_path_settings(const dynamic::repository& drp,
+    std::unordered_map<std::string, annotations::path_annotations>
+    create_path_annotations(const dynamic::repository& drp,
         const dynamic::object& root_object,
         const formatters::container& fc) const;
 
@@ -78,19 +78,19 @@ private:
     std::unordered_map<std::string, std::string>
     facet_directory_for_facet(const formatters::container& fc,
         const std::unordered_map<std::string,
-        settings::path_settings>& ps) const;
+        annotations::path_annotations>& ps) const;
 
     /**
-     * @brief Create the helper settings repository.
+     * @brief Create the helper annotations repository.
      */
-    settings::helper_settings_repository create_helper_settings_repository(
+    annotations::helper_annotations_repository create_helper_annotations_repository(
         const dynamic::repository& drp, const yarn::model& m) const;
 
     /**
-     * @brief Create the aspect settings repository
+     * @brief Create the aspect annotations repository
      */
-    settings::aspect_settings_repository
-    create_aspect_settings_repository(const dynamic::repository& drp,
+    annotations::aspect_annotations_repository
+    create_aspect_annotations_repository(const dynamic::repository& drp,
         const yarn::model& m) const;
 
     /**
@@ -116,9 +116,9 @@ private:
      */
     element_properties_repository create_element_properties_repository(
         const dogen::formatters::file_properties_workflow& fpwf,
-        const settings::helper_settings_repository& hsrp,
-        const settings::aspect_settings_repository& asrp,
-        const settings::streaming_settings_repository& ssrp,
+        const annotations::helper_annotations_repository& hsrp,
+        const annotations::aspect_annotations_repository& asrp,
+        const annotations::streaming_annotations_repository& ssrp,
         const formatters::container& fc,
         const formatter_properties_repository& fprp,
         const yarn::model& m) const;
@@ -132,7 +132,7 @@ public:
         const dynamic::object& root_object,
         const dogen::formatters::file_properties_workflow& fpwf,
         const formatters::container& fc,
-        const settings::streaming_settings_repository& ssrp,
+        const annotations::streaming_annotations_repository& ssrp,
         const yarn::model& m) const;
 
 private:

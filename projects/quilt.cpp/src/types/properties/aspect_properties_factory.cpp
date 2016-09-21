@@ -25,8 +25,8 @@ namespace quilt {
 namespace cpp {
 namespace properties {
 
-aspect_properties_factory::
-aspect_properties_factory(const settings::aspect_settings_repository& asrp)
+aspect_properties_factory::aspect_properties_factory(
+    const annotations::aspect_annotations_repository& asrp)
     : repository_(asrp) { }
 
 void aspect_properties_factory::compute_properties(const yarn::name_tree& nt,

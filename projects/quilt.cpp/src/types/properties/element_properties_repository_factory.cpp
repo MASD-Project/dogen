@@ -46,15 +46,15 @@ namespace cpp {
 namespace properties {
 
 helper_properties_repository element_properties_repository_factory::
-create_helper_properties(const settings::helper_settings_repository& hsrp,
-    const settings::streaming_settings_repository& ssrp,
+create_helper_properties(const annotations::helper_annotations_repository& hsrp,
+    const annotations::streaming_annotations_repository& ssrp,
     const formatters::container& fc, const yarn::model& m) const {
     helper_properties_repository_factory f;
     return f.make(hsrp, ssrp, fc, m);
 }
 
 aspect_properties_repository element_properties_repository_factory::
-create_aspect_properties(const settings::aspect_settings_repository& asrp,
+create_aspect_properties(const annotations::aspect_annotations_repository& asrp,
     const yarn::model& m) const {
     aspect_properties_repository_factory f;
     return f.make(asrp, m);
@@ -93,9 +93,9 @@ element_properties_repository element_properties_repository_factory::merge(
         const auto j(asrp.by_id().find(id));
         if (j != asrp.by_id().end()) {
             ep.aspect_properties(j->second);
-            BOOST_LOG_SEV(lg, trace) << "Found aspect settings for: " << id;
+            BOOST_LOG_SEV(lg, trace) << "Found aspect annotations for: " << id;
         } else {
-            BOOST_LOG_SEV(lg, trace) << "Did not find aspect settings for: "
+            BOOST_LOG_SEV(lg, trace) << "Did not find aspect annotations for: "
                                      << id;
         }
     }
@@ -106,9 +106,9 @@ element_properties_repository element_properties_repository_factory::merge(
 
 element_properties_repository element_properties_repository_factory::make(
     const dogen::formatters::file_properties_workflow& fpwf,
-    const settings::helper_settings_repository& hsrp,
-    const settings::aspect_settings_repository& asrp,
-    const settings::streaming_settings_repository& ssrp,
+    const annotations::helper_annotations_repository& hsrp,
+    const annotations::aspect_annotations_repository& asrp,
+    const annotations::streaming_annotations_repository& ssrp,
     const formatters::container& fc,
     const formatter_properties_repository& fprp,
     const yarn::model& m) const {

@@ -30,7 +30,7 @@
 #include "dogen/yarn/types/attribute.hpp"
 #include "dogen/yarn/types/name_tree.hpp"
 #include "dogen/quilt.cpp/types/properties/aspect_properties.hpp"
-#include "dogen/quilt.cpp/types/settings/aspect_settings_repository.hpp"
+#include "dogen/quilt.cpp/types/annotations/aspect_annotations_repository.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -40,7 +40,7 @@ namespace properties {
 class aspect_properties_factory {
 public:
     explicit aspect_properties_factory(
-        const settings::aspect_settings_repository& asrp);
+        const annotations::aspect_annotations_repository& asrp);
 
 private:
     void compute_properties(const yarn::name_tree& nt,
@@ -50,7 +50,7 @@ public:
     aspect_properties make(const std::list<yarn::attribute>& attributes) const;
 
 private:
-    const settings::aspect_settings_repository& repository_;
+    const annotations::aspect_annotations_repository& repository_;
 };
 
 } } } }

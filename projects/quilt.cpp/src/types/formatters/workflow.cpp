@@ -54,8 +54,8 @@ cpp::formatters::registrar& workflow::registrar() {
 }
 
 std::forward_list<dogen::formatters::file>
-workflow::execute(const settings::streaming_settings_repository& ssrp,
-    const settings::element_settings_repository& esrp,
+workflow::execute(const annotations::streaming_annotations_repository& ssrp,
+    const annotations::element_annotations_repository& esrp,
     const properties::element_properties_repository& eprp,
     const std::forward_list<
     boost::shared_ptr<yarn::element> >& elements) const {
