@@ -61,7 +61,7 @@ workflow::create_path_annotations(const dynamic::repository& drp,
     const formatters::container& fc) const {
 
     BOOST_LOG_SEV(lg, debug) << "Creating path annotations for root object.";
-    annotations::path_annotations_factory f(drp, fc.all_file_formatters());
+    annotations::path_annotations_factory f(drp, fc.file_formatters());
     const auto r(f.make(root_object));
     BOOST_LOG_SEV(lg, debug) << "Created path annotations for root object.";
     return r;
@@ -80,7 +80,7 @@ facet_directory_for_facet(const formatters::container& fc,
     annotations::path_annotations>& ps) const {
 
     std::unordered_map<std::string, std::string> r;
-    for (const auto& f : fc.all_file_formatters()) {
+    for (const auto& f : fc.file_formatters()) {
         const auto i(ps.find(f->ownership_hierarchy().formatter_name()));
         if ( i != ps.end()) {
             const auto fn(f->ownership_hierarchy().facet_name());

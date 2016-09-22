@@ -28,6 +28,7 @@
 #include <forward_list>
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
+#include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/context_factory.hpp"
 
 namespace dogen {
@@ -38,6 +39,11 @@ namespace formatters {
 class element_formatter final {
 public:
     element_formatter(const context_factory& f, const container& c);
+
+private:
+    std::forward_list<dogen::formatters::file> format(
+        const std::forward_list<std::shared_ptr<file_formatter_interface>>&
+        formatters, const yarn::element& e) const;
 
 public:
     std::forward_list<dogen::formatters::file>

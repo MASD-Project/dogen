@@ -72,7 +72,7 @@ make_field_definitions(const dynamic::repository& rp,
     const formatters::container& fc) const {
     std::unordered_map<std::string, field_definitions> r;
 
-    for (const auto f : fc.all_file_formatters()) {
+    for (const auto f : fc.file_formatters()) {
         const auto& oh(f->ownership_hierarchy());
         const auto fn(oh.formatter_name());
 

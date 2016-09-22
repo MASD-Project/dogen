@@ -37,7 +37,7 @@ namespace cpp {
 void initialize_providers(const formatters::registrar& fmt_rg) {
     auto& prop_rg(formattables::workflow::registrar());
     const auto c(fmt_rg.formatter_container());
-    for (const auto& f : c.all_file_formatters())
+    for (const auto& f : c.file_formatters())
         f->register_provider(prop_rg);
 }
 

@@ -25,59 +25,37 @@ namespace quilt {
 namespace cpp {
 namespace formatters {
 
-const std::forward_list<std::shared_ptr<file_formatter_interface>>&
-container::object_formatters() const {
-    return object_formatters_;
+std::unordered_map<
+    std::type_index,
+    std::forward_list<std::shared_ptr<file_formatter_interface>>>&
+container::file_formatters_by_type_index() {
+    return file_formatters_by_type_index_;
+}
+
+std::forward_list<std::shared_ptr<file_formatter_interface>>&
+container::file_formatters() {
+    return file_formatters_;
+}
+
+std::unordered_map<
+    std::string, std::unordered_map<
+                     std::string,
+                     std::list<
+                         std::shared_ptr<helper_formatter_interface>>>>&
+container::helper_formatters() {
+    return helper_formatters_;
+}
+
+const std::unordered_map<
+    std::type_index,
+    std::forward_list<std::shared_ptr<file_formatter_interface>>>&
+container::file_formatters_by_type_index() const {
+    return file_formatters_by_type_index_;
 }
 
 const std::forward_list<std::shared_ptr<file_formatter_interface>>&
-container::enumeration_formatters() const {
-    return enumeration_formatters_;
-}
-
-const std::forward_list<std::shared_ptr<file_formatter_interface>>&
-container::exception_formatters() const {
-    return exception_formatters_;
-}
-
-const std::forward_list<std::shared_ptr<file_formatter_interface>>&
-container::module_formatters() const {
-    return module_formatters_;
-}
-
-const std::forward_list<std::shared_ptr<file_formatter_interface>>&
-container::visitor_formatters() const {
-    return visitor_formatters_;
-}
-
-const std::forward_list<std::shared_ptr<file_formatter_interface>>&
-container::forward_declarations_formatters() const {
-    return forward_declarations_formatters_;
-}
-
-const std::forward_list<std::shared_ptr<file_formatter_interface>>&
-container::odb_options_formatters() const {
-    return odb_options_formatters_;
-}
-
-const std::forward_list<std::shared_ptr<file_formatter_interface>>&
-container::cmakelists_formatters() const {
-    return cmakelists_formatters_;
-}
-
-const std::forward_list<std::shared_ptr<file_formatter_interface>>&
-container::registrar_formatters() const {
-    return registrar_formatters_;
-}
-
-const std::forward_list<std::shared_ptr<file_formatter_interface>>&
-container::master_header_formatters() const {
-    return master_header_formatters_;
-}
-
-const std::forward_list<std::shared_ptr<file_formatter_interface>>&
-container::all_file_formatters() const {
-    return all_file_formatters_;
+container::file_formatters() const {
+    return file_formatters_;
 }
 
 const std::unordered_map<

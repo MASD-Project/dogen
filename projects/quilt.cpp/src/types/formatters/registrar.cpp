@@ -33,11 +33,13 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("quilt.cpp.formatters.registrar"));
 
-const std::string no_all_formatters("All formatters container is empty.");
-const std::string no_object_formatters("No object formatters provided.");
+const std::string no_file_formatters("File formatters container is empty.");
+const std::string no_file_formatters_by_type_index(
+    "No file formatters by type index provided.");
 const std::string no_forward_declarations_formatters(
     "No forward declarations formatters provided.");
-const std::string null_formatter("Formatter supplied is null");
+const std::string null_formatter("Formatter supplied is null.");
+const std::string duplicate_formatter_id("Duplicate formatter id: ");
 const std::string empty_family("Family cannot be empty.");
 const std::string null_formatter_helper("Formatter helper supplied is null");
 const std::string unsupported_element_type(
@@ -51,32 +53,39 @@ namespace cpp {
 namespace formatters {
 
 void registrar::validate() const {
+    /*
+     * We must have at least one registered formatter. This is a quick
+     * way of troubleshooting validation errors.
+     */
     const auto& fc(formatter_container_);
-    if (fc.object_formatters().empty()) {
-        BOOST_LOG_SEV(lg, error) << no_object_formatters;
-        BOOST_THROW_EXCEPTION(registrar_error(no_object_formatters));
-    }
-
-    if (fc.forward_declarations_formatters().empty()) {
-        BOOST_LOG_SEV(lg, error) << no_forward_declarations_formatters;
+    if (fc.file_formatters_by_type_index().empty()) {
+        BOOST_LOG_SEV(lg, error) << no_file_formatters_by_type_index;
         BOOST_THROW_EXCEPTION(
-            registrar_error(no_forward_declarations_formatters));
+            registrar_error(no_file_formatters_by_type_index));
     }
 
-    if (fc.all_file_formatters().empty()) {
-        BOOST_LOG_SEV(lg, error) << no_all_formatters;
-        BOOST_THROW_EXCEPTION(registrar_error(no_all_formatters));
+    if (fc.file_formatters().empty()) {
+        BOOST_LOG_SEV(lg, error) << no_file_formatters;
+        BOOST_THROW_EXCEPTION(
+            registrar_error(no_file_formatters));
+    }
+
+    /*
+     * Formatter id must be unique.
+     */
+    std::unordered_set<std::string> formatter_ids;
+    for (const auto& f : fc.file_formatters()) {
+        const auto id(f->id());
+        const auto i(formatter_ids.insert(id));
+        if (!i.second) {
+            BOOST_LOG_SEV(lg, error) << duplicate_formatter_id << id;
+            BOOST_THROW_EXCEPTION(registrar_error(duplicate_formatter_id + id));
+        }
     }
 
     BOOST_LOG_SEV(lg, debug) << "Registrar is in a valid state. Container: "
                              << fc;
     BOOST_LOG_SEV(lg, debug) << "Ownership hierarchy: " << ownership_hierarchy_;
-}
-
-void registrar::
-common_registration(std::shared_ptr<formatters::file_formatter_interface> f) {
-    ownership_hierarchy_.push_front(f->ownership_hierarchy());
-    formatter_container_.all_file_formatters_.push_front(f);
 }
 
 void registrar::register_formatter_helper(
@@ -100,33 +109,12 @@ register_formatter(std::shared_ptr<file_formatter_interface> f) {
     if (!f)
         BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
 
-    const auto eti(f->element_type_index());
-    if (eti == std::type_index(typeid(yarn::enumeration)))
-        formatter_container_.enumeration_formatters_.push_front(f);
-    else if (eti == std::type_index(typeid(yarn::object)))
-        formatter_container_.object_formatters_.push_front(f);
-    else if (eti == std::type_index(typeid(yarn::exception)))
-        formatter_container_.exception_formatters_.push_front(f);
-    else if (eti == std::type_index(typeid(yarn::module)))
-        formatter_container_.module_formatters_.push_front(f);
-    else if (eti == std::type_index(typeid(yarn::visitor)))
-        formatter_container_.visitor_formatters_.push_front(f);
-    else if (eti == std::type_index(typeid(yarn::visitor)))
-        formatter_container_.visitor_formatters_.push_front(f);
-    else if (eti == std::type_index(typeid(fabric::forward_declarations)))
-        formatter_container_.forward_declarations_formatters_.push_front(f);
-    else if (eti == std::type_index(typeid(fabric::odb_options)))
-        formatter_container_.odb_options_formatters_.push_front(f);
-    else if (eti == std::type_index(typeid(fabric::cmakelists)))
-        formatter_container_.cmakelists_formatters_.push_front(f);
-    else if (eti == std::type_index(typeid(fabric::registrar)))
-        formatter_container_.registrar_formatters_.push_front(f);
-    else if (eti == std::type_index(typeid(fabric::master_header)))
-        formatter_container_.master_header_formatters_.push_front(f);
-    else
-        BOOST_THROW_EXCEPTION(registrar_error(unsupported_element_type));
+    ownership_hierarchy_.push_front(f->ownership_hierarchy());
+    formatter_container_.file_formatters_.push_front(f);
 
-    common_registration(f);
+    auto& ffti(formatter_container_.file_formatters_by_type_index());
+    auto& ti(ffti[f->element_type_index()]);
+    ti.push_front(f);
 }
 
 const container& registrar::formatter_container() const {

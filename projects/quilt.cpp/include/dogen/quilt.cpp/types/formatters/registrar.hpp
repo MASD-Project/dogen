@@ -49,13 +49,6 @@ public:
      */
     void validate() const;
 
-private:
-    /**
-     * @brief Perform common registration.
-     */
-    void common_registration(
-        std::shared_ptr<formatters::file_formatter_interface> f);
-
 public:
     void register_formatter_helper(
         std::shared_ptr<helper_formatter_interface> fh);

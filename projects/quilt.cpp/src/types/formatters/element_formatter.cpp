@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
+#include <typeindex>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/quilt.cpp/types/fabric/element_visitor.hpp"
 #include "dogen/quilt.cpp/types/formatters/formatting_error.hpp"
 #include "dogen/quilt.cpp/types/formatters/element_formatter.hpp"
 
@@ -39,22 +39,17 @@ namespace quilt {
 namespace cpp {
 namespace formatters {
 
-namespace {
+element_formatter::
+element_formatter(const context_factory& f, const container& c)
+    : factory_(f), container_(c) { }
 
-class dispatcher : public fabric::element_visitor  {
-public:
-    dispatcher(const context_factory& f, const container& c) :
-        factory_(f), container_(c) {}
+std::forward_list<dogen::formatters::file> element_formatter::format(
+    const std::forward_list<std::shared_ptr<file_formatter_interface>>&
+    formatters, const yarn::element& e) const {
 
-public:
-    std::forward_list<dogen::formatters::file> files() {
-        return files_;
-    }
-
-private:
-    template<typename Formatter, typename YarnElement>
-    void format(const Formatter& f, const YarnElement& e) {
-
+    std::forward_list<dogen::formatters::file> r;
+    for (const auto& ptr : formatters) {
+        const auto& f(*ptr);
         const auto id(e.name().id());
         const auto fn(f.ownership_hierarchy().formatter_name());
         BOOST_LOG_SEV(lg, debug) << "Formatting: '" << id << "' with '"
@@ -72,87 +67,37 @@ private:
         const auto is_formatter_enabled(i->second.enabled());
         if (!is_formatter_enabled) {
             BOOST_LOG_SEV(lg, debug) << "Formatter not enabled for type.";
-            return;
+            continue;
         }
 
         auto file(f.format(ctx, e));
+        const auto pg(yarn::generation_types::partial_generation);
+        file.overwrite(e.generation_type() != pg);
 
         // FIXME: hack to handle services
-        if (e.generation_type() == yarn::generation_types::partial_generation) {
+        if (e.generation_type() == pg) {
             BOOST_LOG_SEV(lg, debug) << "Emptying out content.";
             file.content().clear();
         }
 
-        files_.push_front(file);
+        r.push_front(file);
         BOOST_LOG_SEV(lg, debug) << "Finished formatting: '" << id << "'";
     }
-
-    template<typename Formatter, typename Formattable>
-    void format(const std::forward_list<std::shared_ptr<Formatter>>& fc,
-        const Formattable& e) {
-        for (const auto f : fc)
-            format(*f, e);
-    }
-
-public:
-    /**
-     * @brief Converts the supplied entity into all supported
-     * representations.
-     */
-    void format(const yarn::element& e) {
-        e.accept(*this);
-    }
-
-public:
-    using fabric::element_visitor::visit;
-    void visit(const dogen::yarn::module& m) override {
-        format(container_.module_formatters(), m);
-    }
-    void visit(const yarn::enumeration& e) override {
-        format(container_.enumeration_formatters(), e);
-    }
-    void visit(const yarn::object& o) override {
-        format(container_.object_formatters(), o);
-    }
-    void visit(const yarn::exception& e) override {
-        format(container_.exception_formatters(), e);
-    }
-    void visit(const yarn::visitor& v) override {
-        format(container_.visitor_formatters(), v);
-    }
-    void visit(const fabric::registrar& rg) override {
-        format(container_.registrar_formatters(), rg);
-    }
-    void visit(const fabric::master_header& mh) override {
-        format(container_.master_header_formatters(), mh);
-    }
-    void visit(const fabric::forward_declarations& fd) override {
-        format(container_.forward_declarations_formatters(), fd);
-    }
-    void visit(const fabric::cmakelists& c) override {
-        format(container_.cmakelists_formatters(), c);
-    }
-    void visit(const fabric::odb_options& o) override {
-        format(container_.odb_options_formatters(), o);
-    }
-
-private:
-    const context_factory factory_;
-    const container& container_;
-    std::forward_list<dogen::formatters::file> files_;
-};
-
+    return r;
 }
-
-element_formatter::
-element_formatter(const context_factory& f, const container& c)
-    : factory_(f), container_(c) { }
 
 std::forward_list<dogen::formatters::file> element_formatter::
 format(const yarn::element& e) const {
-    dispatcher d(factory_, container_);
-    d.format(e);
-    return d.files();
+    const auto ti(std::type_index(typeid(e)));
+    const auto& i(container_.file_formatters_by_type_index().find(ti));
+    if (i == container_.file_formatters_by_type_index().end()) {
+        const auto id(e.name().id());
+        BOOST_LOG_SEV(lg, warn) << "No formatters found for element: " << id;
+        return std::forward_list<dogen::formatters::file>();
+    }
+
+    const auto r(format(i->second, e));
+    return r;
 }
 
 } } } }

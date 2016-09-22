@@ -13,47 +13,48 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-22 Thu 11:40]
+#+CAPTION: Clock summary at [2016-09-22 Thu 14:23]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *64:27* |       |       | 100.0 |
+| *Total time*                                                                | *66:29* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 64:27   |       |       | 100.0 |
-| Active                                                                      |         | 64:27 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  3:53 |   6.0 |
+| Stories                                                                     | 66:29   |       |       | 100.0 |
+| Active                                                                      |         | 66:29 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  3:53 |   5.8 |
 | COMPLETED Fix chocolatey warning                                            |         |       |  0:08 |   0.2 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:27 |   0.7 |
-| COMPLETED Analysis on current state of file path generation                 |         |       |  0:57 |   1.5 |
+| COMPLETED Analysis on current state of file path generation                 |         |       |  0:57 |   1.4 |
 | CANCELLED Remove inclusion dependencies builder factory                     |         |       |  0:14 |   0.4 |
 | COMPLETED Analysis on formatters, elements and extensibility                |         |       |  1:18 |   2.0 |
-| COMPLETED Refactor =inclusion_dependencies_provider_interface=              |         |       |  1:12 |   1.9 |
+| COMPLETED Refactor =inclusion_dependencies_provider_interface=              |         |       |  1:12 |   1.8 |
 | COMPLETED Investigate broken windows builds                                 |         |       |  0:32 |   0.8 |
-| COMPLETED Refactor path derivatives factory for usage in formatters         |         |       |  5:14 |   8.1 |
-| COMPLETED Move file path generation to formatters                           |         |       |  1:58 |   3.1 |
-| CANCELLED Path derivatives factory generates all possible includes          |         |       |  3:07 |   4.8 |
-| COMPLETED Analysis on inclusion derivatives and path derivatives            |         |       |  1:04 |   1.7 |
-| COMPLETED Split path factory from provider factory                          |         |       |  2:32 |   3.9 |
-| COMPLETED Use providers when building inclusion directives                  |         |       | 12:01 |  18.6 |
+| COMPLETED Refactor path derivatives factory for usage in formatters         |         |       |  5:14 |   7.9 |
+| COMPLETED Move file path generation to formatters                           |         |       |  1:58 |   3.0 |
+| CANCELLED Path derivatives factory generates all possible includes          |         |       |  3:07 |   4.7 |
+| COMPLETED Analysis on inclusion derivatives and path derivatives            |         |       |  1:04 |   1.6 |
+| COMPLETED Split path factory from provider factory                          |         |       |  2:32 |   3.8 |
+| COMPLETED Use providers when building inclusion directives                  |         |       | 12:01 |  18.1 |
 | COMPLETED Fix AppVeyor notifications                                        |         |       |  0:22 |   0.6 |
 | COMPLETED Static use of element types does more harm than good              |         |       |  0:32 |   0.8 |
 | COMPLETED Analysis: major rethink of the implementation of quilt            |         |       |  1:30 |   2.3 |
-| CANCELLED Create a simple Emacs mode for stitch                             |         |       |  1:12 |   1.9 |
-| COMPLETED Add facet folder and formatter enablement to formatter properties |         |       |  2:52 |   4.4 |
-| COMPLETED Move =cmakelists_info= to fabric                                  |         |       |  6:34 |  10.2 |
-| COMPLETED Move =odb_options_info= to fabric                                 |         |       |  1:29 |   2.3 |
+| CANCELLED Create a simple Emacs mode for stitch                             |         |       |  1:12 |   1.8 |
+| COMPLETED Add facet folder and formatter enablement to formatter properties |         |       |  2:52 |   4.3 |
+| COMPLETED Move =cmakelists_info= to fabric                                  |         |       |  6:34 |   9.9 |
+| COMPLETED Move =odb_options_info= to fabric                                 |         |       |  1:29 |   2.2 |
 | COMPLETED Remove =formattable_origin_type=                                  |         |       |  0:17 |   0.4 |
-| COMPLETED Remove formattable origin type                                    |         |       |  2:25 |   3.7 |
+| COMPLETED Remove formattable origin type                                    |         |       |  2:25 |   3.6 |
 | COMPLETED Rename config model to options                                    |         |       |  1:07 |   1.7 |
 | COMPLETED Rename annotation to decoration in formatters model               |         |       |  0:30 |   0.8 |
-| COMPLETED Fix appveyor Visual Studio build                                  |         |       |  1:04 |   1.7 |
-| COMPLETED Big rename for "final" terminology clean up                       |         |       |  2:19 |   3.6 |
-| COMPLETED Tidy-up file configuration in formatters                          |         |       |  3:03 |   4.7 |
+| COMPLETED Fix appveyor Visual Studio build                                  |         |       |  1:04 |   1.6 |
+| COMPLETED Big rename for "final" terminology clean up                       |         |       |  2:19 |   3.5 |
+| COMPLETED Tidy-up file configuration in formatters                          |         |       |  3:03 |   4.6 |
 | COMPLETED Stitch still uses "properties"                                    |         |       |  0:27 |   0.7 |
 | CANCELLED Add a stitch prefix to stitch fields                              |         |       |  0:03 |   0.1 |
 | COMPLETED Formatter properties are not optional in assistant                |         |       |  0:10 |   0.3 |
 | COMPLETED Consider removing the overwrite flag in =formatters::file=        |         |       |  0:22 |   0.6 |
-| STARTED Add type index to name and to formatter interface                   |         |       |  3:32 |   5.5 |
+| COMPLETED Handle module generability in yarn                                |         |       |  0:20 |   0.5 |
+| STARTED Add type index to name and to formatter interface                   |         |       |  5:14 |   7.9 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -1017,7 +1018,17 @@ For now we have abused this flag to allow legacy files overrides of
 the new world formatters. This is just until we move totally to new
 world though.
 
+*** COMPLETED Handle module generability in yarn                      :story:
+    CLOSED: [2016-09-22 Thu 13:34]
+    CLOCK: [2016-09-22 Thu 13:14]--[2016-09-22 Thu 13:34] =>  0:20
+
+At present we are filtering out modules in =quilt.cpp= just as we are
+about to format them. It probably makes more sense to update the
+generability in yarn.
+
 *** STARTED Add type index to name and to formatter interface         :story:
+    CLOCK: [2016-09-22 Thu 13:34]--[2016-09-22 Thu 14:23] =>  0:49
+    CLOCK: [2016-09-22 Thu 12:20]--[2016-09-22 Thu 13:13] =>  0:53
     CLOCK: [2016-09-22 Thu 09:01]--[2016-09-22 Thu 11:40] =>  2:39
     CLOCK: [2016-09-21 Wed 09:16]--[2016-09-21 Wed 09:31] =>  0:15
     CLOCK: [2016-09-21 Wed 09:01]--[2016-09-21 Wed 09:15] =>  0:14

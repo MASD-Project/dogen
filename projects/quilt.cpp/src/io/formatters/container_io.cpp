@@ -65,22 +65,30 @@ inline std::ostream& to_stream(std::ostream& s,
     return s;
 }
 
+inline std::ostream& to_stream(std::ostream& s,
+    const std::unordered_map<std::type_index,
+    std::forward_list<std::shared_ptr<file_formatter_interface>>>& ffti) {
+    s << "\"file_formatters_by_type_index\": " << "[ ";
+
+    for(auto i(ffti.begin()); i != ffti.end(); ++i) {
+        if (i != ffti.begin()) s << ", ";
+        s <<  "{ \"" << i->first.name() << "\":" << "[ ";
+        for(auto j(i->second.begin()); j != i->second.end(); ++j) {
+            if (j != i->second.begin()) s << ", ";
+                s <<  "\"" << (*j)->id() << "\"";
+        }
+            s << "] }";
+    }
+    s << "], ";
+    return s;
+}
+
 
 std::ostream& operator<<(std::ostream& s, const container& c) {
     s << "{ " << "\"__type__\": "
       << "\"dogen::quilt::cpp::formatters::container\", ";
-    to_stream(s, "object_formatters", c.object_formatters());
-    to_stream(s, "enumeration_formatters", c.enumeration_formatters());
-    to_stream(s, "exception_formatters", c.exception_formatters());
-    to_stream(s, "module_formatters", c.module_formatters());
-    to_stream(s, "visitor_formatters", c.visitor_formatters());
-    to_stream(s, "odb_options_formatters", c.odb_options_formatters());
-    to_stream(s, "cmakelists_formatters", c.cmakelists_formatters());
-    to_stream(s, "registrar_formatters", c.registrar_formatters());
-    to_stream(s, "master_header_formatters", c.master_header_formatters());
-    to_stream(s, "forward_declarations_formatters",
-        c.forward_declarations_formatters());
-    to_stream(s, "all_file_formatters", c.all_file_formatters());
+    to_stream(s, c.file_formatters_by_type_index());
+    to_stream(s, "all_file_formatters", c.file_formatters());
     to_stream(s, c.helper_formatters());
     s << " }";
     return s;
