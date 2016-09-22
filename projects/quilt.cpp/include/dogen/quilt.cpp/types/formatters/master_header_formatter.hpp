@@ -25,14 +25,14 @@
 #pragma once
 #endif
 
-#include "dogen/quilt.cpp/types/formatters/master_header_formatter_interface.hpp"
+#include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formatters {
 
-class master_header_formatter final : public master_header_formatter_interface {
+class master_header_formatter final : public file_formatter_interface {
 public:
     explicit master_header_formatter(const std::string& facet_name);
 
@@ -45,8 +45,10 @@ public:
 
     void register_provider(formattables::registrar& rg) const override;
 
+    std::type_index element_type_index() const override;
+
     dogen::formatters::file format(const context& ctx,
-        const fabric::master_header& mh) const override;
+        const yarn::element& e) const override;
 
 public:
     const dynamic::ownership_hierarchy ownership_hierarchy_;

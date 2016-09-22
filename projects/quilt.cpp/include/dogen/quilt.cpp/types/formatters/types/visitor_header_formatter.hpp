@@ -26,7 +26,7 @@
 #endif
 
 #include <string>
-#include "dogen/quilt.cpp/types/formatters/visitor_formatter_interface.hpp"
+#include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -37,7 +37,7 @@ namespace types {
 /**
  * @brief Creates the C++ domain representation for a visitor.
  */
-class visitor_header_formatter : public visitor_formatter_interface {
+class visitor_header_formatter : public file_formatter_interface {
 public:
     visitor_header_formatter() = default;
     visitor_header_formatter(const visitor_header_formatter&) = delete;
@@ -59,8 +59,10 @@ public:
 
     void register_provider(formattables::registrar& rg) const override;
 
+    std::type_index element_type_index() const override;
+
     dogen::formatters::file format(const context& ctx,
-        const yarn::visitor& v) const override;
+        const yarn::element& e) const override;
 };
 
 } } } } }

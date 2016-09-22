@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <typeinfo>
 #include <boost/make_shared.hpp>
 #include "dogen/quilt.cpp/types/fabric/master_header.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
@@ -130,10 +131,15 @@ register_provider(formattables::registrar& rg) const {
     rg.register_provider(boost::make_shared<provider>(fn, fmtn));
 }
 
-dogen::formatters::file
-master_header_formatter::format(const context& ctx,
-    const fabric::master_header& mh) const {
-    assistant a(ctx, ownership_hierarchy(), file_type(), mh.name().id());
+std::type_index master_header_formatter::element_type_index() const {
+    static auto r(std::type_index(typeid(fabric::master_header)));
+    return r;
+}
+
+dogen::formatters::file master_header_formatter::
+format(const context& ctx, const yarn::element& e) const {
+    assistant a(ctx, ownership_hierarchy(), file_type(), e.name().id());
+    const auto& mh(a.as<fabric::master_header>(e));
     const auto r(master_header_formatter_stitch(a, mh));
     return r;
 }

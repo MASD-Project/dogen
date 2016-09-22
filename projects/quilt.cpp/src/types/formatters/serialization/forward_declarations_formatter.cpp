@@ -19,6 +19,7 @@
  *
  */
 #include <sstream>
+#include <typeinfo>
 #include <boost/make_shared.hpp>
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
@@ -123,14 +124,21 @@ register_provider(formattables::registrar& rg) const {
     rg.register_provider(boost::make_shared<provider>());
 }
 
+std::type_index forward_declarations_formatter::element_type_index() const {
+    static auto r(std::type_index(typeid(fabric::forward_declarations)));
+    return r;
+}
+
 dogen::formatters::file forward_declarations_formatter::
-format(const context& ctx, const fabric::forward_declarations& fd) const {
+format(const context& ctx, const yarn::element& e) const {
+    assistant a(ctx, ownership_hierarchy(), file_type(), e.name().id());
+    const auto& fd(a.as<fabric::forward_declarations>(e));
+
     // FIXME: hack: legacy formatters do not support serialisation
     // forward declarations for some types.
     if (fd.is_enum() || fd.is_exception())
         return dogen::formatters::file();
 
-    assistant a(ctx, ownership_hierarchy(), file_type(), fd.name().id());
     const auto r(forward_declarations_formatter_stitch(a, fd));
     return r;
 }

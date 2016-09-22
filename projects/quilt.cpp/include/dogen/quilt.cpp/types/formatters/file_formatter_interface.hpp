@@ -26,8 +26,12 @@
 #endif
 
 #include <string>
+#include <typeindex>
 #include "dogen/dynamic/types/ownership_hierarchy.hpp"
+#include "dogen/formatters/types/file.hpp"
+#include "dogen/yarn/types/element.hpp"
 #include "dogen/quilt.cpp/types/formattables/registrar.hpp"
+#include "dogen/quilt.cpp/types/formatters/context.hpp"
 #include "dogen/quilt.cpp/types/formatters/file_types.hpp"
 
 namespace dogen {
@@ -63,6 +67,20 @@ public:
      * formatter may know of.
      */
     virtual void register_provider(formattables::registrar& rg) const = 0;
+
+
+    /**
+     * @brief Returns the type index of the element supported by this
+     * formatter.
+     */
+    virtual std::type_index element_type_index() const = 0;
+
+    /**
+     * @brief Generate a file representation for the element.
+     */
+    virtual dogen::formatters::file
+    format(const context& ctx, const yarn::element& e) const = 0;
+
 };
 
 } } } }

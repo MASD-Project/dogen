@@ -26,7 +26,7 @@
 #endif
 
 #include <boost/filesystem/path.hpp>
-#include "dogen/quilt.cpp/types/formatters/object_formatter_interface.hpp"
+#include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -34,7 +34,7 @@ namespace cpp {
 namespace formatters {
 namespace io {
 
-class class_header_formatter final : public object_formatter_interface {
+class class_header_formatter final : public file_formatter_interface {
 public:
     /**
      * @brief Returns the formatter name.
@@ -50,8 +50,10 @@ public:
 
     void register_provider(formattables::registrar& rg) const override;
 
+    std::type_index element_type_index() const override;
+
     dogen::formatters::file format(const context& ctx,
-        const yarn::object& o) const override;
+        const yarn::element& e) const override;
 };
 
 } } } } }

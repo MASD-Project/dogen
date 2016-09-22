@@ -19,6 +19,7 @@
  *
  */
 #include <sstream>
+#include <typeinfo>
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
@@ -59,10 +60,11 @@ public:
         const formattables::inclusion_dependencies_builder_factory& f,
         const fabric::forward_declarations& fd) const override;
 
-    formattables::inclusion_path_support inclusion_path_support() const override;
+    formattables::inclusion_path_support
+    inclusion_path_support() const override;
 
-    boost::filesystem::path provide_inclusion_path(const formattables::locator& l,
-        const yarn::name& n) const override;
+    boost::filesystem::path provide_inclusion_path(
+        const formattables::locator& l, const yarn::name& n) const override;
 
     boost::filesystem::path provide_full_path(const formattables::locator& l,
         const yarn::name& n) const override;
@@ -130,9 +132,15 @@ register_provider(formattables::registrar& rg) const {
     rg.register_provider(boost::make_shared<provider>());
 }
 
+std::type_index forward_declarations_formatter::element_type_index() const {
+    static auto r(std::type_index(typeid(fabric::forward_declarations)));
+    return r;
+}
+
 dogen::formatters::file forward_declarations_formatter::
-format(const context& ctx, const fabric::forward_declarations& fd) const {
-    assistant a(ctx, ownership_hierarchy(), file_type(), fd.name().id());
+format(const context& ctx, const yarn::element& e) const {
+    assistant a(ctx, ownership_hierarchy(), file_type(), e.name().id());
+    const auto& fd(a.as<fabric::forward_declarations>(e));
     const auto r(forward_declarations_formatter_stitch(a, fd));
     return r;
 }

@@ -26,7 +26,7 @@
 #endif
 
 #include <string>
-#include "dogen/quilt.cpp/types/formatters/odb_options_formatter_interface.hpp"
+#include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -34,7 +34,7 @@ namespace cpp {
 namespace formatters {
 namespace odb {
 
-class odb_options_formatter final : public odb_options_formatter_interface {
+class odb_options_formatter final : public file_formatter_interface {
 public:
     odb_options_formatter() = default;
     odb_options_formatter(const odb_options_formatter&) = delete;
@@ -56,8 +56,10 @@ public:
 
     void register_provider(formattables::registrar& rg) const override;
 
+    std::type_index element_type_index() const override;
+
     dogen::formatters::file
-    format(const context& ctx, const fabric::odb_options& o) const override;
+    format(const context& ctx, const yarn::element& e) const override;
 
 };
 

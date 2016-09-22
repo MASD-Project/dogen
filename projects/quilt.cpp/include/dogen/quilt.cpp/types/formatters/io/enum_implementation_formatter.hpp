@@ -26,7 +26,7 @@
 #endif
 
 #include <string>
-#include "dogen/quilt.cpp/types/formatters/enumeration_formatter_interface.hpp"
+#include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -37,7 +37,7 @@ namespace io {
 /**
  * @brief Creates the io implementation representation for an enumeration.
  */
-class enum_implementation_formatter : public enumeration_formatter_interface {
+class enum_implementation_formatter : public file_formatter_interface {
 public:
     enum_implementation_formatter() = default;
     enum_implementation_formatter(
@@ -61,8 +61,10 @@ public:
 
     void register_provider(formattables::registrar& rg) const override;
 
+    std::type_index element_type_index() const override;
+
     dogen::formatters::file format(const context& ctx,
-        const yarn::enumeration& e) const override;
+        const yarn::element& e) const override;
 };
 
 } } } } }

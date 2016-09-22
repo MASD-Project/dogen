@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <typeinfo>
 #include <boost/make_shared.hpp>
 #include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
@@ -120,10 +121,16 @@ register_provider(formattables::registrar& rg) const {
     rg.register_provider(boost::make_shared<provider>());
 }
 
+std::type_index enum_header_formatter::element_type_index() const {
+    static auto r(std::type_index(typeid(yarn::enumeration)));
+    return r;
+}
+
 dogen::formatters::file enum_header_formatter::
-format(const context& ctx, const yarn::enumeration& e) const {
+format(const context& ctx, const yarn::element& e) const {
     assistant a(ctx, ownership_hierarchy(), file_type(), e.name().id());
-    const auto r(enum_header_formatter_stitch(a, e));
+    const auto& ye(a.as<yarn::enumeration>(e));
+    const auto r(enum_header_formatter_stitch(a, ye));
     return r;
 }
 

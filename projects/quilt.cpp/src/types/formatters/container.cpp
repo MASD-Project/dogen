@@ -25,68 +25,57 @@ namespace quilt {
 namespace cpp {
 namespace formatters {
 
-const std::forward_list<
-    std::shared_ptr<formatters::object_formatter_interface>
->&
+const std::forward_list<std::shared_ptr<file_formatter_interface>>&
 container::object_formatters() const {
     return object_formatters_;
 }
 
-const std::forward_list<
-    std::shared_ptr<formatters::enumeration_formatter_interface>>&
+const std::forward_list<std::shared_ptr<file_formatter_interface>>&
 container::enumeration_formatters() const {
     return enumeration_formatters_;
 }
 
-const std::forward_list<std::shared_ptr<
-    formatters::exception_formatter_interface>>&
+const std::forward_list<std::shared_ptr<file_formatter_interface>>&
 container::exception_formatters() const {
     return exception_formatters_;
 }
 
-const std::forward_list<std::shared_ptr<
-    formatters::module_formatter_interface>>&
+const std::forward_list<std::shared_ptr<file_formatter_interface>>&
 container::module_formatters() const {
     return module_formatters_;
 }
 
-const std::forward_list<std::shared_ptr<
-    formatters::visitor_formatter_interface>>&
+const std::forward_list<std::shared_ptr<file_formatter_interface>>&
 container::visitor_formatters() const {
     return visitor_formatters_;
 }
 
-const std::forward_list<
-    std::shared_ptr<formatters::forward_declarations_formatter_interface>
-    >& container::forward_declarations_formatters() const {
+const std::forward_list<std::shared_ptr<file_formatter_interface>>&
+container::forward_declarations_formatters() const {
     return forward_declarations_formatters_;
 }
 
-const std::forward_list<
-    std::shared_ptr<formatters::odb_options_formatter_interface>
-    >& container::odb_options_formatters() const {
+const std::forward_list<std::shared_ptr<file_formatter_interface>>&
+container::odb_options_formatters() const {
     return odb_options_formatters_;
 }
 
-const std::forward_list<
-    std::shared_ptr<formatters::cmakelists_formatter_interface>
-    >& container::cmakelists_formatters() const {
+const std::forward_list<std::shared_ptr<file_formatter_interface>>&
+container::cmakelists_formatters() const {
     return cmakelists_formatters_;
 }
 
-const std::forward_list<
-    std::shared_ptr<formatters::registrar_formatter_interface>
-    >& container::registrar_formatters() const {
+const std::forward_list<std::shared_ptr<file_formatter_interface>>&
+container::registrar_formatters() const {
     return registrar_formatters_;
 }
 
-const std::forward_list<
-    std::shared_ptr<formatters::master_header_formatter_interface>
-    >& container::master_header_formatters() const {
+const std::forward_list<std::shared_ptr<file_formatter_interface>>&
+container::master_header_formatters() const {
     return master_header_formatters_;
 }
 
-const std::forward_list<std::shared_ptr<formatters::file_formatter_interface>>&
+const std::forward_list<std::shared_ptr<file_formatter_interface>>&
 container::all_file_formatters() const {
     return all_file_formatters_;
 }

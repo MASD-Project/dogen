@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <typeinfo>
 #include <boost/make_shared.hpp>
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
@@ -119,10 +120,16 @@ register_provider(formattables::registrar& rg) const {
     rg.register_provider(boost::make_shared<provider>());
 }
 
+std::type_index source_cmakelists_formatter::element_type_index() const {
+    static auto r(std::type_index(typeid(fabric::cmakelists)));
+    return r;
+}
+
 dogen::formatters::file source_cmakelists_formatter::
-format(const context& ctx, const fabric::cmakelists& c) const {
-    assistant a(ctx, ownership_hierarchy(), file_type(), c.name().id());
-    const auto r(source_cmakelists_formatter_stitch(a, c));
+format(const context& ctx, const yarn::element& e) const {
+    assistant a(ctx, ownership_hierarchy(), file_type(), e.name().id());
+    const auto& cm(a.as<fabric::cmakelists>(e));
+    const auto r(source_cmakelists_formatter_stitch(a, cm));
     return r;
 }
 

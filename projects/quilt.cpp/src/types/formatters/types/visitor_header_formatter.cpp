@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <typeinfo>
 #include <boost/make_shared.hpp>
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
@@ -125,10 +126,16 @@ register_provider(formattables::registrar& rg) const {
     rg.register_provider(boost::make_shared<provider>());
 }
 
+std::type_index visitor_header_formatter::element_type_index() const {
+    static auto r(std::type_index(typeid(yarn::visitor)));
+    return r;
+}
+
 dogen::formatters::file visitor_header_formatter::
-format(const context& ctx, const yarn::visitor& v) const {
-    assistant a(ctx, ownership_hierarchy(), file_type(), v.name().id());
-    const auto r(visitor_header_formatter_stitch(a, v));
+format(const context& ctx, const yarn::element& e) const {
+    assistant a(ctx, ownership_hierarchy(), file_type(), e.name().id());
+    const auto& yv(a.as<yarn::visitor>(e));
+    const auto r(visitor_header_formatter_stitch(a, yv));
     return r;
 }
 

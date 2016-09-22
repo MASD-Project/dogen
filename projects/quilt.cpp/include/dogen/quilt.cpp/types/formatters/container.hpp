@@ -29,16 +29,6 @@
 #include <forward_list>
 #include <unordered_map>
 #include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
-#include "dogen/quilt.cpp/types/formatters/object_formatter_interface.hpp"
-#include "dogen/quilt.cpp/types/formatters/enumeration_formatter_interface.hpp"
-#include "dogen/quilt.cpp/types/formatters/visitor_formatter_interface.hpp"
-#include "dogen/quilt.cpp/types/formatters/exception_formatter_interface.hpp"
-#include "dogen/quilt.cpp/types/formatters/module_formatter_interface.hpp"
-#include "dogen/quilt.cpp/types/formatters/odb_options_formatter_interface.hpp"
-#include "dogen/quilt.cpp/types/formatters/cmakelists_formatter_interface.hpp"
-#include "dogen/quilt.cpp/types/formatters/registrar_formatter_interface.hpp"
-#include "dogen/quilt.cpp/types/formatters/master_header_formatter_interface.hpp"
-#include "dogen/quilt.cpp/types/formatters/forward_declarations_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/helper_formatter_interface.hpp"
 
 namespace dogen {
@@ -59,90 +49,68 @@ public:
     /**
      * @brief Returns all available object formatters.
      */
-    const std::forward_list<
-        std::shared_ptr<formatters::object_formatter_interface>
-        >&
+    const std::forward_list<std::shared_ptr<file_formatter_interface>>&
     object_formatters() const;
 
     /**
      * @brief Returns all available enumeration formatters.
      */
-    const std::forward_list<
-        std::shared_ptr<formatters::enumeration_formatter_interface>
-        >&
+    const std::forward_list<std::shared_ptr<file_formatter_interface>>&
     enumeration_formatters() const;
 
     /**
      * @brief Returns all available exception formatters.
      */
-    const std::forward_list<
-        std::shared_ptr<formatters::exception_formatter_interface>
-        >&
+    const std::forward_list<std::shared_ptr<file_formatter_interface>>&
     exception_formatters() const;
 
     /**
      * @brief Returns all available module formatters.
      */
-    const std::forward_list<
-        std::shared_ptr<formatters::module_formatter_interface>
-        >&
+    const std::forward_list<std::shared_ptr<file_formatter_interface>>&
     module_formatters() const;
 
     /**
      * @brief Returns all available namespace formatters.
      */
-     const std::forward_list<
-         std::shared_ptr<formatters::visitor_formatter_interface>
-         >&
-     visitor_formatters() const;
+    const std::forward_list<std::shared_ptr<file_formatter_interface>>&
+    visitor_formatters() const;
 
     /**
      * @brief Returns all available forward declarations formatters.
      */
-    const std::forward_list<
-        std::shared_ptr<formatters::forward_declarations_formatter_interface>
-    >&
+    const std::forward_list<std::shared_ptr<file_formatter_interface>>&
     forward_declarations_formatters() const;
 
     /**
      * @brief Returns all available odb options formatters.
      */
-    const std::forward_list<
-        std::shared_ptr<formatters::odb_options_formatter_interface>
-        >&
+    const std::forward_list<std::shared_ptr<file_formatter_interface>>&
     odb_options_formatters() const;
 
     /**
      * @brief Returns all available CMakeLists formatters.
      */
-    const std::forward_list<
-        std::shared_ptr<formatters::cmakelists_formatter_interface>
-        >&
+    const std::forward_list<std::shared_ptr<file_formatter_interface>>&
     cmakelists_formatters() const;
 
     /**
      * @brief Returns all available registrar formatters.
      */
-    const std::forward_list<
-        std::shared_ptr<formatters::registrar_formatter_interface>
-        >&
+    const std::forward_list<std::shared_ptr<file_formatter_interface>>&
     registrar_formatters() const;
 
     /**
      * @brief Returns all available master header formatters.
      */
-    const std::forward_list<
-        std::shared_ptr<formatters::master_header_formatter_interface>
-        >&
+    const std::forward_list<std::shared_ptr<file_formatter_interface>>&
     master_header_formatters() const;
 
 public:
     /**
      * @brief Returns all available file formatters.
      */
-    const std::forward_list<
-        std::shared_ptr<formatters::file_formatter_interface>
-    >&
+    const std::forward_list<std::shared_ptr<file_formatter_interface>>&
     all_file_formatters() const;
 
 public:
@@ -154,35 +122,28 @@ public:
         helper_formatters() const;
 
 private:
-    std::forward_list<std::shared_ptr<formatters::object_formatter_interface>>
+    std::forward_list<std::shared_ptr<file_formatter_interface>>
     object_formatters_;
-    std::forward_list<std::shared_ptr<
-                          formatters::enumeration_formatter_interface>
-                      >
+    std::forward_list<std::shared_ptr<file_formatter_interface>>
     enumeration_formatters_;
-    std::forward_list<std::shared_ptr<
-        formatters::exception_formatter_interface>> exception_formatters_;
-    std::forward_list<std::shared_ptr<
-        formatters::module_formatter_interface>> module_formatters_;
-    std::forward_list<std::shared_ptr<
-        formatters::visitor_formatter_interface>> visitor_formatters_;
-    std::forward_list<std::shared_ptr<
-        formatters::forward_declarations_formatter_interface> >
+    std::forward_list<std::shared_ptr<file_formatter_interface>>
+    exception_formatters_;
+    std::forward_list<std::shared_ptr<file_formatter_interface>>
+    module_formatters_;
+    std::forward_list<std::shared_ptr<file_formatter_interface>>
+    visitor_formatters_;
+    std::forward_list<std::shared_ptr<file_formatter_interface>>
     forward_declarations_formatters_;
-    std::forward_list<std::shared_ptr<
-        formatters::odb_options_formatter_interface> >
+    std::forward_list<std::shared_ptr<file_formatter_interface>>
     odb_options_formatters_;
-    std::forward_list<std::shared_ptr<
-        formatters::cmakelists_formatter_interface> >
+    std::forward_list<std::shared_ptr<file_formatter_interface>>
     cmakelists_formatters_;
-    std::forward_list<std::shared_ptr<
-        formatters::registrar_formatter_interface> >
+    std::forward_list<std::shared_ptr<file_formatter_interface>>
     registrar_formatters_;
-    std::forward_list<std::shared_ptr<
-        formatters::master_header_formatter_interface> >
+    std::forward_list<std::shared_ptr<file_formatter_interface>>
     master_header_formatters_;
-    std::forward_list<std::shared_ptr<formatters::file_formatter_interface>>
-        all_file_formatters_;
+    std::forward_list<std::shared_ptr<file_formatter_interface>>
+    all_file_formatters_;
     std::unordered_map<
         std::string,
         std::unordered_map<std::string,

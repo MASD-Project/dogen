@@ -26,7 +26,7 @@
 #endif
 
 #include <string>
-#include "dogen/quilt.cpp/types/formatters/object_formatter_interface.hpp"
+#include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -37,7 +37,7 @@ namespace types {
 /**
  * @brief Creates the C++ domain representation for a class.
  */
-class class_implementation_formatter final : public object_formatter_interface {
+class class_implementation_formatter final : public file_formatter_interface {
 public:
     class_implementation_formatter() = default;
     class_implementation_formatter(
@@ -61,8 +61,10 @@ public:
 
     void register_provider(formattables::registrar& rg) const override;
 
+    std::type_index element_type_index() const override;
+
     dogen::formatters::file format(const context& ctx,
-        const yarn::object& o) const override;
+        const yarn::element& e) const override;
 };
 
 } } } } }

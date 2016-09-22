@@ -26,15 +26,14 @@
 #endif
 
 #include <string>
-#include "dogen/quilt.cpp/types/formatters/cmakelists_formatter_interface.hpp"
+#include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formatters {
 
-class source_cmakelists_formatter final
-  : public cmakelists_formatter_interface {
+class source_cmakelists_formatter final : public file_formatter_interface {
 public:
     source_cmakelists_formatter() = default;
     source_cmakelists_formatter(const source_cmakelists_formatter&) = delete;
@@ -56,8 +55,10 @@ public:
 
     void register_provider(formattables::registrar& rg) const override;
 
+    std::type_index element_type_index() const override;
+
     dogen::formatters::file
-    format(const context& ctx, const fabric::cmakelists& c) const override;
+    format(const context& ctx, const yarn::element& e) const override;
 };
 
 } } } }

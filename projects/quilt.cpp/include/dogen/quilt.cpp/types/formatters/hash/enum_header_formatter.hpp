@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/quilt.cpp/types/formatters/enumeration_formatter_interface.hpp"
+#include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -36,7 +36,7 @@ namespace hash {
 /**
  * @brief Creates the hash header representation for an enumeration.
  */
-class enum_header_formatter : public enumeration_formatter_interface {
+class enum_header_formatter : public file_formatter_interface {
 public:
     enum_header_formatter() = default;
     enum_header_formatter(const enum_header_formatter&) = delete;
@@ -58,8 +58,10 @@ public:
 
     void register_provider(formattables::registrar& rg) const override;
 
+    std::type_index element_type_index() const override;
+
     dogen::formatters::file
-    format(const context& ctx, const yarn::enumeration& e) const override;
+    format(const context& ctx, const yarn::element& e) const override;
 };
 
 } } } } }

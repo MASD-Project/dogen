@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/quilt.cpp/types/formatters/registrar_formatter_interface.hpp"
+#include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -33,7 +33,7 @@ namespace cpp {
 namespace formatters {
 namespace serialization {
 
-class registrar_header_formatter final : public registrar_formatter_interface {
+class registrar_header_formatter final : public file_formatter_interface {
 public:
     /**
      * @brief Returns the formatter name.
@@ -49,8 +49,10 @@ public:
 
     void register_provider(formattables::registrar& rg) const override;
 
+    std::type_index element_type_index() const override;
+
     dogen::formatters::file format(const context& ctx,
-        const fabric::registrar& rg) const override;
+        const yarn::element& e) const override;
 };
 
 } } } } }

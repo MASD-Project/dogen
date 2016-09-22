@@ -18,6 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
+#include <typeinfo>
+#include <typeindex>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/forward_list_io.hpp"
@@ -38,6 +40,8 @@ const std::string no_forward_declarations_formatters(
 const std::string null_formatter("Formatter supplied is null");
 const std::string empty_family("Family cannot be empty.");
 const std::string null_formatter_helper("Formatter helper supplied is null");
+const std::string unsupported_element_type(
+    "Element type is not supported by formatters.");
 
 }
 
@@ -91,102 +95,37 @@ void registrar::register_formatter_helper(
 }
 
 void registrar::
-register_formatter(std::shared_ptr<object_formatter_interface> f) {
+register_formatter(std::shared_ptr<file_formatter_interface> f) {
     // note: not logging by design
     if (!f)
         BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
 
-    formatter_container_.object_formatters_.push_front(f);
-    common_registration(f);
-}
+    const auto eti(f->element_type_index());
+    if (eti == std::type_index(typeid(yarn::enumeration)))
+        formatter_container_.enumeration_formatters_.push_front(f);
+    else if (eti == std::type_index(typeid(yarn::object)))
+        formatter_container_.object_formatters_.push_front(f);
+    else if (eti == std::type_index(typeid(yarn::exception)))
+        formatter_container_.exception_formatters_.push_front(f);
+    else if (eti == std::type_index(typeid(yarn::module)))
+        formatter_container_.module_formatters_.push_front(f);
+    else if (eti == std::type_index(typeid(yarn::visitor)))
+        formatter_container_.visitor_formatters_.push_front(f);
+    else if (eti == std::type_index(typeid(yarn::visitor)))
+        formatter_container_.visitor_formatters_.push_front(f);
+    else if (eti == std::type_index(typeid(fabric::forward_declarations)))
+        formatter_container_.forward_declarations_formatters_.push_front(f);
+    else if (eti == std::type_index(typeid(fabric::odb_options)))
+        formatter_container_.odb_options_formatters_.push_front(f);
+    else if (eti == std::type_index(typeid(fabric::cmakelists)))
+        formatter_container_.cmakelists_formatters_.push_front(f);
+    else if (eti == std::type_index(typeid(fabric::registrar)))
+        formatter_container_.registrar_formatters_.push_front(f);
+    else if (eti == std::type_index(typeid(fabric::master_header)))
+        formatter_container_.master_header_formatters_.push_front(f);
+    else
+        BOOST_THROW_EXCEPTION(registrar_error(unsupported_element_type));
 
-void registrar::register_formatter(
-    std::shared_ptr<enumeration_formatter_interface> f) {
-    // note: not logging by design
-    if (!f)
-        BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
-
-    formatter_container_.enumeration_formatters_.push_front(f);
-    common_registration(f);
-}
-
-void registrar::register_formatter(
-    std::shared_ptr<exception_formatter_interface> f) {
-    // note: not logging by design
-    if (!f)
-        BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
-
-    formatter_container_.exception_formatters_.push_front(f);
-    common_registration(f);
-}
-
-void registrar::register_formatter(
-    std::shared_ptr<module_formatter_interface> f) {
-    // note: not logging by design
-    if (!f)
-        BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
-
-    formatter_container_.module_formatters_.push_front(f);
-    common_registration(f);
-}
-
-void registrar::register_formatter(
-    std::shared_ptr<visitor_formatter_interface> f) {
-    // note: not logging by design
-    if (!f)
-        BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
-
-    formatter_container_.visitor_formatters_.push_front(f);
-    common_registration(f);
-}
-
-void registrar::register_formatter(
-    std::shared_ptr<forward_declarations_formatter_interface> f) {
-    // note: not logging by design
-    if (!f)
-        BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
-
-    formatter_container_.forward_declarations_formatters_.push_front(f);
-    common_registration(f);
-}
-
-void registrar::register_formatter(
-    std::shared_ptr<odb_options_formatter_interface> f) {
-    // note: not logging by design
-    if (!f)
-        BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
-
-    formatter_container_.odb_options_formatters_.push_front(f);
-    common_registration(f);
-}
-
-void registrar::register_formatter(
-    std::shared_ptr<cmakelists_formatter_interface> f) {
-    // note: not logging by design
-    if (!f)
-        BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
-
-    formatter_container_.cmakelists_formatters_.push_front(f);
-    common_registration(f);
-}
-
-void registrar::register_formatter(
-    std::shared_ptr<registrar_formatter_interface> f) {
-    // note: not logging by design
-    if (!f)
-        BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
-
-    formatter_container_.registrar_formatters_.push_front(f);
-    common_registration(f);
-}
-
-void registrar::register_formatter(
-    std::shared_ptr<master_header_formatter_interface> f) {
-    // note: not logging by design
-    if (!f)
-        BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
-
-    formatter_container_.master_header_formatters_.push_front(f);
     common_registration(f);
 }
 

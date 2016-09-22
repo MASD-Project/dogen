@@ -52,18 +52,16 @@ namespace {
 class generator final {
 private:
     struct header_formatters_container {
-        std::forward_list<
-            std::shared_ptr<formatters::object_formatter_interface>>
+        std::forward_list<std::shared_ptr<formatters::file_formatter_interface>>
         object_formatters;
-        std::forward_list<std::shared_ptr<
-            formatters::enumeration_formatter_interface>>
+        std::forward_list<std::shared_ptr<formatters::file_formatter_interface>>
         enumeration_formatters;
-        std::forward_list<std::shared_ptr<
-            formatters::exception_formatter_interface>> exception_formatters;
-        std::forward_list<std::shared_ptr<
-            formatters::module_formatter_interface>> module_formatters;
-        std::forward_list<std::shared_ptr<
-            formatters::visitor_formatter_interface>> visitor_formatters;
+        std::forward_list<std::shared_ptr<formatters::file_formatter_interface>>
+        exception_formatters;
+        std::forward_list<std::shared_ptr<formatters::file_formatter_interface>>
+        module_formatters;
+        std::forward_list<std::shared_ptr<formatters::file_formatter_interface>>
+        visitor_formatters;
     };
 
 public:

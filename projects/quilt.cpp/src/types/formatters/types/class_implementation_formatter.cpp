@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <typeinfo>
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
@@ -171,10 +172,16 @@ register_provider(formattables::registrar& rg) const {
     rg.register_provider(boost::make_shared<provider>());
 }
 
+std::type_index class_implementation_formatter::element_type_index() const {
+    static auto r(std::type_index(typeid(yarn::object)));
+    return r;
+}
+
 dogen::formatters::file class_implementation_formatter::
-format(const context& ctx, const yarn::object& o) const {
-    assistant a(ctx, ownership_hierarchy(), file_type(), o.name().id());
-    const auto r(class_implementation_formatter_stitch(a, o));
+format(const context& ctx, const yarn::element& e) const {
+    assistant a(ctx, ownership_hierarchy(), file_type(), e.name().id());
+    const auto& yo(a.as<yarn::object>(e));
+    const auto r(class_implementation_formatter_stitch(a, yo));
     return r;
 }
 

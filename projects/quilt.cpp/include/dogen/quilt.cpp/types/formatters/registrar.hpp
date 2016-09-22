@@ -32,15 +32,7 @@
 #include "dogen/dynamic/types/ownership_hierarchy.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/formatters/helper_formatter_interface.hpp"
-#include "dogen/quilt.cpp/types/formatters/enumeration_formatter_interface.hpp"
-#include "dogen/quilt.cpp/types/formatters/object_formatter_interface.hpp"
-#include "dogen/quilt.cpp/types/formatters/visitor_formatter_interface.hpp"
-#include "dogen/quilt.cpp/types/formatters/module_formatter_interface.hpp"
-#include "dogen/quilt.cpp/types/formatters/odb_options_formatter_interface.hpp"
-#include "dogen/quilt.cpp/types/formatters/cmakelists_formatter_interface.hpp"
-#include "dogen/quilt.cpp/types/formatters/registrar_formatter_interface.hpp"
-#include "dogen/quilt.cpp/types/formatters/master_header_formatter_interface.hpp"
-#include "dogen/quilt.cpp/types/formatters/forward_declarations_formatter_interface.hpp"
+#include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -70,59 +62,9 @@ public:
 
 public:
     /**
-     * @brief Registers a class formatter.
+     * @brief Registers a file formatter.
      */
-    void register_formatter(std::shared_ptr<object_formatter_interface> f);
-
-    /**
-     * @brief Registers an enum formatter.
-     */
-    void register_formatter(std::shared_ptr<enumeration_formatter_interface> f);
-
-    /**
-     * @brief Registers an exception formatter.
-     */
-    void register_formatter(std::shared_ptr<exception_formatter_interface> f);
-
-    /**
-     * @brief Registers a namespace formatter.
-     */
-    void register_formatter(std::shared_ptr<module_formatter_interface> f);
-
-    /**
-     * @brief Registers a visitor formatter.
-     */
-    void register_formatter(std::shared_ptr<visitor_formatter_interface> f);
-
-    /**
-     * @brief Registers a forward declaration formatter.
-     */
-    void register_formatter(
-        std::shared_ptr<forward_declarations_formatter_interface> f);
-
-    /**
-     * @brief Registers a odb options formatter.
-     */
-    void register_formatter(
-        std::shared_ptr<odb_options_formatter_interface> f);
-
-    /**
-     * @brief Registers a CMakeLists formatter.
-     */
-    void register_formatter(
-        std::shared_ptr<cmakelists_formatter_interface> f);
-
-    /**
-     * @brief Registers a registrar formatter.
-     */
-    void register_formatter(
-        std::shared_ptr<registrar_formatter_interface> f);
-
-    /**
-     * @brief Registers an master header formatter.
-     */
-    void register_formatter(
-        std::shared_ptr<master_header_formatter_interface> f);
+    void register_formatter(std::shared_ptr<file_formatter_interface> f);
 
 public:
     /**

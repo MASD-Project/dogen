@@ -59,6 +59,11 @@ public:
         const formatters::file_types ft, const std::string& id);
 
 public:
+    template<typename T>
+    T as(const yarn::element& e) {
+        return dynamic_cast<const T&>(e);
+    }
+
     /**
      * @brief Returns the text to use for a given class for the @code
      * final keyword. If non-empty, includes a trailing space.
