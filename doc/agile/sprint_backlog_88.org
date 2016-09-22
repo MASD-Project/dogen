@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-22 Thu 17:24]
+#+CAPTION: Clock summary at [2016-09-22 Thu 18:53]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *66:51* |       |       | 100.0 |
+| *Total time*                                                                | *67:21* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 66:51   |       |       | 100.0 |
-| Active                                                                      |         | 66:51 |       | 100.0 |
+| Stories                                                                     | 67:21   |       |       | 100.0 |
+| Active                                                                      |         | 67:21 |       | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  3:53 |   5.8 |
 | COMPLETED Fix chocolatey warning                                            |         |       |  0:08 |   0.2 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:27 |   0.7 |
@@ -31,10 +31,10 @@
 | COMPLETED Investigate broken windows builds                                 |         |       |  0:32 |   0.8 |
 | COMPLETED Refactor path derivatives factory for usage in formatters         |         |       |  5:14 |   7.8 |
 | COMPLETED Move file path generation to formatters                           |         |       |  1:58 |   2.9 |
-| CANCELLED Path derivatives factory generates all possible includes          |         |       |  3:07 |   4.7 |
+| CANCELLED Path derivatives factory generates all possible includes          |         |       |  3:07 |   4.6 |
 | COMPLETED Analysis on inclusion derivatives and path derivatives            |         |       |  1:04 |   1.6 |
 | COMPLETED Split path factory from provider factory                          |         |       |  2:32 |   3.8 |
-| COMPLETED Use providers when building inclusion directives                  |         |       | 12:01 |  18.0 |
+| COMPLETED Use providers when building inclusion directives                  |         |       | 12:01 |  17.8 |
 | COMPLETED Fix AppVeyor notifications                                        |         |       |  0:22 |   0.5 |
 | COMPLETED Static use of element types does more harm than good              |         |       |  0:32 |   0.8 |
 | COMPLETED Analysis: major rethink of the implementation of quilt            |         |       |  1:30 |   2.2 |
@@ -47,14 +47,15 @@
 | COMPLETED Rename config model to options                                    |         |       |  1:07 |   1.7 |
 | COMPLETED Rename annotation to decoration in formatters model               |         |       |  0:30 |   0.7 |
 | COMPLETED Fix appveyor Visual Studio build                                  |         |       |  1:04 |   1.6 |
-| COMPLETED Big rename for "final" terminology clean up                       |         |       |  2:19 |   3.5 |
-| COMPLETED Tidy-up file configuration in formatters                          |         |       |  3:03 |   4.6 |
+| COMPLETED Big rename for "final" terminology clean up                       |         |       |  2:19 |   3.4 |
+| COMPLETED Tidy-up file configuration in formatters                          |         |       |  3:03 |   4.5 |
 | COMPLETED Stitch still uses "properties"                                    |         |       |  0:27 |   0.7 |
 | CANCELLED Add a stitch prefix to stitch fields                              |         |       |  0:03 |   0.1 |
 | COMPLETED Formatter properties are not optional in assistant                |         |       |  0:10 |   0.2 |
 | COMPLETED Consider removing the overwrite flag in =formatters::file=        |         |       |  0:22 |   0.5 |
 | COMPLETED Handle module generability in yarn                                |         |       |  0:20 |   0.5 |
-| STARTED Add type index to name and to formatter interface                   |         |       |  5:36 |   8.4 |
+| STARTED Consider merging provider interface with file formatter             |         |       |  0:30 |   0.7 |
+| STARTED Add type index to name and to formatter interface                   |         |       |  5:36 |   8.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -1026,6 +1027,56 @@ At present we are filtering out modules in =quilt.cpp= just as we are
 about to format them. It probably makes more sense to update the
 generability in yarn.
 
+*** STARTED Consider merging provider interface with file formatter   :story:
+    CLOCK: [2016-09-22 Thu 18:41]--[2016-09-22 Thu 18:53] =>  0:12
+    CLOCK: [2016-09-22 Thu 18:22]--[2016-09-22 Thu 18:40] =>  0:18
+
+Originally we created the provider interface as an attempt to avoid
+cycles between formatters and formattables. The formattables generate
+inputs to the formatting process, but in order to generate those they
+need access to the formatters. So to break the cycle we supplied those
+inputs via the provider interface, which allowed formattables not to
+depend directly on formatters. However, in practice we still continued
+to have a circular dependency because we need the formatter container
+for a lot of the formattables:
+
+- helper properties use it to generate a mapping of helper family to
+  facet.
+- enablement uses it to generate the field definitions.
+- inclusion directives supplies it to the annotations factory also for
+  field definitions.
+
+So instead of solving the circular references problem, we just added
+more confusion to it. In addition, the current implementation requires
+a lot of boilerplate, with additional registrar and container and
+registration step. This adds to the formatters code.
+
+We can simplify all of this by merging provider into formatters. The
+only slight downside of this is that we now will need to have
+formatters even for types which we do not support such as
+primitives. We had a hack in place for these which won't work any
+longer.
+
+Tasks:
+
+- add relevant methods to formatter and implement them by copying code
+  from provider.
+- replace uses of provider with formatter interface.
+- remove provider, registrar, container and all implementations in
+  formatters.
+
+Merged stories:
+
+*Add include providers for all types*
+
+We need to implement the provider container support for primitives,
+modules and concepts.
+
+Update:
+
+- inclusion dependencies factory
+- provider container
+
 *** STARTED Add type index to name and to formatter interface         :story:
     CLOCK: [2016-09-22 Thu 17:02]--[2016-09-22 Thu 17:24] =>  0:22
     CLOCK: [2016-09-22 Thu 13:34]--[2016-09-22 Thu 14:23] =>  0:49
@@ -1254,6 +1305,14 @@ Generates the helper configuration.
 
 We need to generate the file properties for each formattable. The
 formatter must supply the modeline name and the
+
+*** Introduce the concept of proxy models                             :story:
+
+These are models that exist solely to bring types in, but do not
+define those types. Typically one uses a proxy model to expose
+non-dogen types into dogen. We could add a flag to models
+=is_proxy=. It would replace the notion of system models. We need to
+check the stories in the backlog around this.
 
 *** Move name builder into yarn                                       :story:
 

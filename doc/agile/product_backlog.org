@@ -1595,16 +1595,6 @@ some settings and a factory to pull out the managed directories from
 the root object. This could be done in =managed_directories=, by
 having an yarn model as input.
 
-*** Add include providers for all types                               :story:
-
-We need to implement the provider container support for primitives,
-modules and concepts.
-
-Update:
-
-- inclusion dependencies factory
-- provider container
-
 *** Header guard in formatters should be optional                     :story:
 
 At present we are relying on empty header guards to determine what to

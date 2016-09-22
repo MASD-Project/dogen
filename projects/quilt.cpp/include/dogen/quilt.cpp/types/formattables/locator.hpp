@@ -76,7 +76,8 @@ private:
      * The facet path segment is the same for both include and source
      * folders; it starts at the facet and includes the file name.
      */
-    boost::filesystem::path make_facet_path(const annotations::path_annotations& ps,
+    boost::filesystem::path make_facet_path(
+        const annotations::path_annotations& ps,
         const std::string& extension, const yarn::name& n) const;
 
     /**
