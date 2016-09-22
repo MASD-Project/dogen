@@ -8515,9 +8515,9 @@ it in anger with dogen:
 - comments for packages are missing.
 - cannot wrap attributes; this is a problem when we have attributes
   with very long types.
-- changing a diagram in the filesystem does not trigger any alerts
-  etc - its very easy to loose changes because one updates the files
-  from git but the diagram was opened in dia, and did not refresh.
+- changing a diagram in the filesystem does not trigger any alerts:
+  its very easy to loose changes because one updates the files from
+  git but the diagram was opened in dia, and did not refresh.
 - crossing lines (associations, etc) should "curve" up so that one can
   still follow the relationship.
 
@@ -8526,7 +8526,14 @@ It seems like dia is also using GitHub these days:
 https://github.com/GNOME/dia
 
 If we have a go at creating any patches for the above ideas we should
-submit a PR.
+submit a PR. This repo cannot be used to submit PRs.
+
+Investigation on Python: it seems its fairly trivial to extend dia
+using python:
+
+- [[https://wiki.gnome.org/Apps/Dia/Python][Dia Python Plugin]]
+- [[http://pastebin.com/pPkL3PxQ][Manipulating UML in Dia's Python Console]]
+- [[https://github.com/GNOME/dia/tree/master/plug-ins/python][Lots of examples of python scripts]]
 
 *** Consider adding YQL support                                        :epic:
 

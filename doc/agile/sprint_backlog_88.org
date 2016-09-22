@@ -1027,7 +1027,22 @@ At present we are filtering out modules in =quilt.cpp= just as we are
 about to format them. It probably makes more sense to update the
 generability in yarn.
 
+*** COMPLETED Do a cursory investigation of dia plugin support        :story:
+    CLOSED: [2016-09-22 Thu 21:05]
+    CLOCK: [2016-09-22 Thu 20:51]--[2016-09-22 Thu 21:05] =>  0:14
+    CLOCK: [2016-09-22 Thu 20:15]--[2016-09-22 Thu 20:50] =>  0:35
+
+We should have a quick at how hard it is to do a dia plugin to support
+dogen. We already have a story for this in backlog, so update it.
+
+It seems its fairly trivial to extend dia using Pything:
+
+- [[https://wiki.gnome.org/Apps/Dia/Python][Dia Python Plugin]]
+- [[http://pastebin.com/pPkL3PxQ][Manipulating UML in Dia's Python Console]]
+- [[https://github.com/GNOME/dia/tree/master/plug-ins/python][Lots of examples of python scripts]]
+
 *** STARTED Consider merging provider interface with file formatter   :story:
+
     CLOCK: [2016-09-22 Thu 18:41]--[2016-09-22 Thu 18:53] =>  0:12
     CLOCK: [2016-09-22 Thu 18:22]--[2016-09-22 Thu 18:40] =>  0:18
 
