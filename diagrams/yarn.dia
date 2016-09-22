@@ -1833,7 +1833,7 @@ combines them into an intermediate merged model.#</dia:string>
         <dia:point val="-197,-65"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-197.05,-65.05;-161.785,-35.25"/>
+        <dia:rectangle val="-197.05,-65.05;-157.55,-35.25"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1842,7 +1842,7 @@ combines them into an intermediate merged model.#</dia:string>
         <dia:point val="-197,-65"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="35.164999999999999"/>
+        <dia:real val="39.399999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="29.700000000000003"/>
@@ -16286,13 +16286,13 @@ This is used to break cycles where required.#</dia:string>
         <dia:point val="-178,-15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-178.05,-15.05;-158.585,-4.95"/>
+        <dia:rectangle val="-178.05,-15.05;-156.275,-4.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-178,-15"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="19.365000000000002"/>
+        <dia:real val="21.675000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="10"/>
@@ -18934,13 +18934,13 @@ space.#</dia:string>
         <dia:point val="-198,26"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-198.05,25.95;-177.815,29.65"/>
+        <dia:rectangle val="-198.05,25.95;-175.505,29.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-198,26"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="20.134999999999998"/>
+        <dia:real val="22.445"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -19281,17 +19281,17 @@ space.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-187.933,25.9502"/>
+        <dia:point val="-186.863,25.9502"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-188.683,20.25;-169.8,26.8"/>
+        <dia:rectangle val="-187.647,20.25;-169.8,26.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-187.933,25.9502"/>
-        <dia:point val="-187.933,21"/>
+        <dia:point val="-186.863,25.9502"/>
+        <dia:point val="-187.092,21"/>
         <dia:point val="-170,21"/>
         <dia:point val="-170,26"/>
       </dia:attribute>
@@ -19319,13 +19319,13 @@ space.#</dia:string>
         <dia:point val="-147,26"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-147.05,25.95;-121.425,30.45"/>
+        <dia:rectangle val="-147.05,25.95;-120.27,30.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-147,26"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="25.524999999999999"/>
+        <dia:real val="26.68"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -20384,13 +20384,13 @@ that belong to the yarn model.#</dia:string>
         <dia:point val="-147,38"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-147.05,37.95;-121.81,42.45"/>
+        <dia:rectangle val="-147.05,37.95;-120.655,42.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-147,38"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="25.140000000000001"/>
+        <dia:real val="26.294999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>

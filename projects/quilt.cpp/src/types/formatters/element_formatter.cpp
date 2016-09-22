@@ -106,11 +106,6 @@ public:
 public:
     using fabric::element_visitor::visit;
     void visit(const dogen::yarn::module& m) override {
-        // FIXME: hack. We should remove these from the pipeline
-        // earlier or make the return optional.
-        if (m.documentation().empty())
-            return;
-
         format(container_.module_formatters(), m);
     }
     void visit(const yarn::enumeration& e) override {
