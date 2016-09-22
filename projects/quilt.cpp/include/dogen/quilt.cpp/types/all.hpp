@@ -93,6 +93,7 @@
 #include "dogen/quilt.cpp/types/annotations/streaming_annotations.hpp"
 #include "dogen/quilt.cpp/types/formattables/formatter_properties.hpp"
 #include "dogen/quilt.cpp/types/formattables/enablement_repository.hpp"
+#include "dogen/quilt.cpp/types/formatters/inclusion_support_types.hpp"
 #include "dogen/quilt.cpp/types/formatters/master_header_formatter.hpp"
 #include "dogen/quilt.cpp/types/annotations/odb_annotations_factory.hpp"
 #include "dogen/quilt.cpp/types/fabric/forward_declarations_factory.hpp"

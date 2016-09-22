@@ -36,12 +36,6 @@ namespace types {
 
 class namespace_header_formatter final : public file_formatter_interface {
 public:
-    namespace_header_formatter() = default;
-    namespace_header_formatter(const namespace_header_formatter&) = delete;
-    namespace_header_formatter(namespace_header_formatter&&) = default;
-    ~namespace_header_formatter() noexcept = default;
-
-public:
     /**
      * @brief Returns the formatter name.
      */
@@ -49,17 +43,29 @@ public:
 
 public:
     std::string id() const override;
-
     dynamic::ownership_hierarchy ownership_hierarchy() const override;
+    std::type_index element_type_index() const override;
 
+public:
+    std::list<std::string> inclusion_dependencies(
+        const formattables::inclusion_dependencies_builder_factory& f,
+        const yarn::element& e) const override;
+
+    inclusion_support_types inclusion_support_type() const override;
+
+    boost::filesystem::path inclusion_path(
+        const formattables::locator& l, const yarn::name& n) const override;
+
+    boost::filesystem::path full_path(
+        const formattables::locator& l, const yarn::name& n) const override;
+
+public:
     file_types file_type() const override;
 
     void register_provider(formattables::registrar& rg) const override;
 
-    std::type_index element_type_index() const override;
-
-    dogen::formatters::file format(const context& ctx,
-        const yarn::element& e) const override;
+    dogen::formatters::file
+        format(const context& ctx, const yarn::element& e) const override;
 };
 
 } } } } }

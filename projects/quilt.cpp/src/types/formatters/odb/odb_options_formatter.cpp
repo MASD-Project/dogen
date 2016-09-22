@@ -121,6 +121,33 @@ odb_options_formatter::ownership_hierarchy() const {
     return r;
 }
 
+std::type_index odb_options_formatter::element_type_index() const {
+    static auto r(std::type_index(typeid(fabric::odb_options)));
+    return r;
+}
+
+std::list<std::string> odb_options_formatter::inclusion_dependencies(
+    const formattables::inclusion_dependencies_builder_factory& /*f*/,
+    const yarn::element& /*e*/) const {
+    static std::list<std::string> r;
+    return r;
+}
+
+inclusion_support_types odb_options_formatter::inclusion_support_type() const {
+    return inclusion_support_types::not_supported;
+}
+
+boost::filesystem::path odb_options_formatter::inclusion_path(
+    const formattables::locator& /*l*/, const yarn::name& n) const {
+    BOOST_LOG_SEV(lg, error) << not_supported << n.id();
+    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.id()));
+}
+
+boost::filesystem::path odb_options_formatter::full_path(
+    const formattables::locator& l, const yarn::name& n) const {
+    return l.make_full_path_for_odb_options(n, static_formatter_name());
+}
+
 file_types odb_options_formatter::file_type() const {
     return file_types::odb_options;
 }
@@ -130,15 +157,10 @@ register_provider(formattables::registrar& rg) const {
     rg.register_provider(boost::make_shared<provider>());
 }
 
-std::type_index odb_options_formatter::element_type_index() const {
-    static auto r(std::type_index(typeid(fabric::odb_options)));
-    return r;
-}
-
 dogen::formatters::file odb_options_formatter::
 format(const context& ctx, const yarn::element& e) const {
     assistant a(ctx, ownership_hierarchy(), file_type(), e.name().id());
-    const auto& oo(a.as<fabric::odb_options>(e));
+    const auto& oo(a.as<fabric::odb_options>(static_formatter_name(), e));
     const auto r(odb_options_formatter_stitch(a, oo));
     return r;
 }

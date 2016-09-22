@@ -115,6 +115,38 @@ forward_declarations_formatter::ownership_hierarchy() const {
     return r;
 }
 
+std::type_index forward_declarations_formatter::element_type_index() const {
+    static auto r(std::type_index(typeid(fabric::forward_declarations)));
+    return r;
+}
+
+std::list<std::string> forward_declarations_formatter::inclusion_dependencies(
+    const formattables::inclusion_dependencies_builder_factory& f,
+    const yarn::element& e) const {
+    auto builder(f.make());
+
+    using tp = formatters::types::traits;
+    const auto tp_fn(tp::forward_declarations_formatter_name());
+    builder.add(e.name(), tp_fn);
+
+    return builder.build();
+}
+
+inclusion_support_types forward_declarations_formatter::
+inclusion_support_type() const {
+    return inclusion_support_types::regular_support;
+}
+
+boost::filesystem::path forward_declarations_formatter::inclusion_path(
+    const formattables::locator& l, const yarn::name& n) const {
+    return l.make_inclusion_path_for_cpp_header(n, static_formatter_name());
+}
+
+boost::filesystem::path forward_declarations_formatter::full_path(
+    const formattables::locator& l, const yarn::name& n) const {
+    return l.make_inclusion_path_for_cpp_header(n, static_formatter_name());
+}
+
 file_types forward_declarations_formatter::file_type() const {
     return file_types::cpp_header;
 }
@@ -124,15 +156,11 @@ register_provider(formattables::registrar& rg) const {
     rg.register_provider(boost::make_shared<provider>());
 }
 
-std::type_index forward_declarations_formatter::element_type_index() const {
-    static auto r(std::type_index(typeid(fabric::forward_declarations)));
-    return r;
-}
-
 dogen::formatters::file forward_declarations_formatter::
 format(const context& ctx, const yarn::element& e) const {
     assistant a(ctx, ownership_hierarchy(), file_type(), e.name().id());
-    const auto& fd(a.as<fabric::forward_declarations>(e));
+    const auto fmtn(static_formatter_name());
+    const auto& fd(a.as<fabric::forward_declarations>(fmtn, e));
 
     // FIXME: hack: legacy formatters do not support serialisation
     // forward declarations for some types.

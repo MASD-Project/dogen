@@ -112,6 +112,37 @@ class_header_formatter::ownership_hierarchy() const {
     return r;
 }
 
+std::type_index class_header_formatter::element_type_index() const {
+    static auto r(std::type_index(typeid(yarn::object)));
+    return r;
+}
+
+std::list<std::string> class_header_formatter::inclusion_dependencies(
+    const formattables::inclusion_dependencies_builder_factory& f,
+    const yarn::element& e) const {
+    auto builder(f.make());
+    builder.add(inclusion_constants::std::iosfwd());
+
+    using types = formatters::types::traits;
+    builder.add(e.name(), types::traits::facet_name());
+
+    return builder.build();
+}
+
+inclusion_support_types class_header_formatter::inclusion_support_type() const {
+    return inclusion_support_types::canonical_support;
+}
+
+boost::filesystem::path class_header_formatter::inclusion_path(
+    const formattables::locator& l, const yarn::name& n) const {
+    return l.make_inclusion_path_for_cpp_header(n, static_formatter_name());
+}
+
+boost::filesystem::path class_header_formatter::full_path(
+    const formattables::locator& l, const yarn::name& n) const {
+    return l.make_full_path_for_cpp_header(n, static_formatter_name());
+}
+
 file_types class_header_formatter::file_type() const {
     return file_types::cpp_header;
 }
@@ -121,15 +152,11 @@ register_provider(formattables::registrar& rg) const {
     rg.register_provider(boost::make_shared<provider>());
 }
 
-std::type_index class_header_formatter::element_type_index() const {
-    static auto r(std::type_index(typeid(yarn::object)));
-    return r;
-}
 
 dogen::formatters::file class_header_formatter::
 format(const context& ctx, const yarn::element& e) const {
     assistant a(ctx, ownership_hierarchy(), file_type(), e.name().id());
-    const auto& yo(a.as<yarn::object>(e));
+    const auto& yo(a.as<yarn::object>(static_formatter_name(), e));
     const auto r(class_header_formatter_stitch(a, yo));
     return r;
 }

@@ -60,7 +60,8 @@ public:
 
 public:
     template<typename T>
-    T as(const yarn::element& e) {
+    static const T&
+    as(const std::string& /*formatter_name*/, const yarn::element& e) {
         return dynamic_cast<const T&>(e);
     }
 

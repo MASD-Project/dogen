@@ -20,14 +20,23 @@
  */
 #include <typeinfo>
 #include <boost/make_shared.hpp>
+#include <boost/throw_exception.hpp>
+#include "dogen/utility/log/logger.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
+#include "dogen/quilt.cpp/types/formatters/formatting_error.hpp"
 #include "dogen/quilt.cpp/types/formatters/include_cmakelists_formatter_stitch.hpp"
 #include "dogen/quilt.cpp/types/formatters/include_cmakelists_formatter.hpp"
 
 namespace {
 
+using namespace dogen::utility::log;
+using namespace dogen::quilt::cpp::formatters;
+static logger lg(
+    logger_factory(include_cmakelists_formatter::static_formatter_name()));
+
 const std::string empty;
+const std::string not_supported("Inclusion path is not supported: ");
 
 }
 
@@ -68,14 +77,13 @@ std::string provider::formatter_name() const {
 std::list<std::string> provider::provide_inclusion_dependencies(
     const formattables::inclusion_dependencies_builder_factory& /*f*/,
     const fabric::cmakelists& /*c*/) const {
-
     static std::list<std::string> r;
     return r;
 }
 
 formattables::inclusion_path_support provider::
 inclusion_path_support() const {
-    return formattables::inclusion_path_support::is_default;
+    return formattables::inclusion_path_support::not_supported;
 }
 
 boost::filesystem::path
@@ -111,6 +119,34 @@ ownership_hierarchy() const {
     return r;
 }
 
+std::type_index include_cmakelists_formatter::element_type_index() const {
+    static auto r(std::type_index(typeid(fabric::cmakelists)));
+    return r;
+}
+
+std::list<std::string> include_cmakelists_formatter::inclusion_dependencies(
+    const formattables::inclusion_dependencies_builder_factory& /*f*/,
+    const yarn::element& /*e*/) const {
+    static std::list<std::string> r;
+    return r;
+}
+
+inclusion_support_types include_cmakelists_formatter::
+inclusion_support_type() const {
+    return inclusion_support_types::not_supported;
+}
+
+boost::filesystem::path include_cmakelists_formatter::inclusion_path(
+    const formattables::locator& /*l*/, const yarn::name& n) const {
+    BOOST_LOG_SEV(lg, error) << not_supported << n.id();
+    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.id()));
+}
+
+boost::filesystem::path include_cmakelists_formatter::full_path(
+    const formattables::locator& l, const yarn::name& n) const {
+    return l.make_full_path_for_include_cmakelists(n, static_formatter_name());
+}
+
 file_types include_cmakelists_formatter::file_type() const {
     return file_types::cmakefile;
 }
@@ -120,15 +156,10 @@ register_provider(formattables::registrar& rg) const {
     rg.register_provider(boost::make_shared<provider>());
 }
 
-std::type_index include_cmakelists_formatter::element_type_index() const {
-    static auto r(std::type_index(typeid(fabric::cmakelists)));
-    return r;
-}
-
 dogen::formatters::file include_cmakelists_formatter::
 format(const context& ctx, const yarn::element& e) const {
     assistant a(ctx, ownership_hierarchy(), file_type(), e.name().id());
-    const auto& cm(a.as<fabric::cmakelists>(e));
+    const auto& cm(a.as<fabric::cmakelists>(static_formatter_name(), e));
     const auto r(include_cmakelists_formatter_stitch(a, cm));
     return r;
 }

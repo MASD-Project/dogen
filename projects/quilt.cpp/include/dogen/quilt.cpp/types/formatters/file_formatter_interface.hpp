@@ -27,10 +27,14 @@
 
 #include <string>
 #include <typeindex>
+#include <boost/filesystem/path.hpp>
 #include "dogen/dynamic/types/ownership_hierarchy.hpp"
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/yarn/types/element.hpp"
+#include "dogen/quilt.cpp/types/formattables/locator.hpp"
 #include "dogen/quilt.cpp/types/formattables/registrar.hpp"
+#include "dogen/quilt.cpp/types/formattables/inclusion_dependencies_builder_factory.hpp"
+#include "dogen/quilt.cpp/types/formatters/inclusion_support_types.hpp"
 #include "dogen/quilt.cpp/types/formatters/context.hpp"
 #include "dogen/quilt.cpp/types/formatters/file_types.hpp"
 
@@ -42,13 +46,13 @@ namespace formatters {
 class file_formatter_interface {
 public:
     file_formatter_interface() = default;
-    file_formatter_interface(const file_formatter_interface&) = delete;
     file_formatter_interface(file_formatter_interface&&) = default;
+    file_formatter_interface(const file_formatter_interface&) = delete;
     virtual ~file_formatter_interface() noexcept = 0;
 
 public:
     /**
-     * @brief Unique identifier for the formatter.
+     * @brief Unique identifier for the formatter in formatter space.
      */
     virtual std::string id() const = 0;
 
@@ -57,6 +61,42 @@ public:
      */
     virtual dynamic::ownership_hierarchy ownership_hierarchy() const = 0;
 
+    /**
+     * @brief Returns the type index of the element supported by this
+     * formatter.
+     */
+    virtual std::type_index element_type_index() const = 0;
+
+public:
+    /**
+     * @brief Creates the inclusion dependencies for this formatter
+     * against the supplied element.
+     */
+    virtual std::list<std::string> inclusion_dependencies(
+        const formattables::inclusion_dependencies_builder_factory& f,
+        const yarn::element& e) const = 0;
+
+    /**
+     * @brief Returns the level of support of inclusions by this
+     * formatter.
+     */
+    virtual inclusion_support_types inclusion_support_type() const = 0;
+
+    /**
+     * @brief Provide the inclusion path.
+     *
+     * @pre supports_inclusion must be true.
+     */
+    virtual boost::filesystem::path inclusion_path(
+        const formattables::locator& l, const yarn::name& n) const = 0;
+
+    /**
+     * @brief Provides the full path.
+     */
+    virtual boost::filesystem::path full_path(
+        const formattables::locator& l, const yarn::name& n) const = 0;
+
+public:
     /**
      * @brief Type of the file this formatter generates.
      */
@@ -68,19 +108,11 @@ public:
      */
     virtual void register_provider(formattables::registrar& rg) const = 0;
 
-
-    /**
-     * @brief Returns the type index of the element supported by this
-     * formatter.
-     */
-    virtual std::type_index element_type_index() const = 0;
-
     /**
      * @brief Generate a file representation for the element.
      */
     virtual dogen::formatters::file
     format(const context& ctx, const yarn::element& e) const = 0;
-
 };
 
 } } } }

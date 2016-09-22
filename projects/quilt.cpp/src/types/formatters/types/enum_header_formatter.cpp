@@ -64,10 +64,10 @@ std::string provider::formatter_name() const {
 }
 
 std::list<std::string> provider::provide_inclusion_dependencies(
-    const formattables::inclusion_dependencies_builder_factory& f,
+    const formattables::inclusion_dependencies_builder_factory& /*f*/,
     const yarn::enumeration& /*e*/) const {
-    auto builder(f.make());
-    return builder.build();
+    static std::list<std::string> r;
+    return r;
 }
 
 formattables::inclusion_path_support provider::inclusion_path_support() const {
@@ -106,6 +106,32 @@ ownership_hierarchy() const {
     return r;
 }
 
+std::type_index enum_header_formatter::element_type_index() const {
+    static auto r(std::type_index(typeid(yarn::enumeration)));
+    return r;
+}
+
+std::list<std::string> enum_header_formatter::inclusion_dependencies(
+    const formattables::inclusion_dependencies_builder_factory& /*f*/,
+    const yarn::element& /*e*/) const {
+    static std::list<std::string> r;
+    return r;
+}
+
+inclusion_support_types enum_header_formatter::inclusion_support_type() const {
+    return inclusion_support_types::canonical_support;
+}
+
+boost::filesystem::path enum_header_formatter::inclusion_path(
+    const formattables::locator& l, const yarn::name& n) const {
+    return l.make_inclusion_path_for_cpp_header(n, static_formatter_name());
+}
+
+boost::filesystem::path enum_header_formatter::full_path(
+    const formattables::locator& l, const yarn::name& n) const {
+    return l.make_inclusion_path_for_cpp_header(n, static_formatter_name());
+}
+
 file_types enum_header_formatter::file_type() const {
     return file_types::cpp_header;
 }
@@ -115,15 +141,10 @@ register_provider(formattables::registrar& rg) const {
     rg.register_provider(boost::make_shared<provider>());
 }
 
-std::type_index enum_header_formatter::element_type_index() const {
-    static auto r(std::type_index(typeid(yarn::enumeration)));
-    return r;
-}
-
 dogen::formatters::file enum_header_formatter::
 format(const context& ctx, const yarn::element& e) const {
     assistant a(ctx, ownership_hierarchy(), file_type(), e.name().id());
-    const auto& ye(a.as<yarn::enumeration>(e));
+    const auto& ye(a.as<yarn::enumeration>(static_formatter_name(), e));
     const auto r(enum_header_formatter_stitch(a, ye));
     return r;
 }

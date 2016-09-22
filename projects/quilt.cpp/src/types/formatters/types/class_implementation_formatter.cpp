@@ -132,7 +132,6 @@ formattables::inclusion_path_support provider::inclusion_path_support() const {
 boost::filesystem::path
 provider::provide_inclusion_path(const formattables::locator& /*l*/,
     const yarn::name& n) const {
-
     BOOST_LOG_SEV(lg, error) << not_supported << n.id();
     BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.id()));
 }
@@ -163,6 +162,76 @@ class_implementation_formatter::ownership_hierarchy() const {
     return r;
 }
 
+std::type_index class_implementation_formatter::element_type_index() const {
+    static auto r(std::type_index(typeid(yarn::object)));
+    return r;
+}
+
+std::list<std::string> class_implementation_formatter::inclusion_dependencies(
+    const formattables::inclusion_dependencies_builder_factory& f,
+    const yarn::element& e) const {
+    const auto& o(assistant::as<yarn::object>(static_formatter_name(), e));
+    auto builder(f.make());
+
+    const auto ch_fn(traits::class_header_formatter_name());
+    builder.add(o.name(), ch_fn);
+    builder.add(o.opaque_associations(), ch_fn);
+
+    const auto io_fn(formatters::io::traits::class_header_formatter_name());
+    const bool in_inheritance(o.is_parent() || o.is_child());
+    const bool io_enabled(builder.is_enabled(o.name(), io_fn));
+    const bool requires_io(io_enabled && in_inheritance);
+
+    if (!requires_io)
+        return builder.build();
+
+    const auto os(inclusion_constants::std::ostream());
+    builder.add(os);
+
+    const auto si(builder.make_special_includes(o));
+    if (si.requires_stream_manipulators)
+        builder.add(inclusion_constants::boost::io::ios_state());
+
+    if (si.has_std_string)
+        builder.add(inclusion_constants::boost::algorithm::string());
+
+    builder.add(o.transparent_associations(), io::traits::facet_name());
+    builder.add(o.opaque_associations(), io::traits::facet_name());
+    builder.add(o.parent(), io::traits::facet_name());
+
+    if (o.is_visitation_leaf()) {
+        /*
+         * Only leaves have a visitation implementation. Note that we
+         * don't bother including the base if we are already including
+         * the derived visitor.
+         */
+        const auto v_fn(traits::visitor_header_formatter_name());
+        if (o.derived_visitor())
+            builder.add(*o.derived_visitor(), v_fn);
+        else
+            builder.add(*o.base_visitor(), v_fn);
+    }
+
+    return builder.build();
+
+}
+
+inclusion_support_types class_implementation_formatter::
+inclusion_support_type() const {
+    return inclusion_support_types::not_supported;
+}
+
+boost::filesystem::path class_implementation_formatter::inclusion_path(
+    const formattables::locator& /*l*/, const yarn::name& n) const {
+    BOOST_LOG_SEV(lg, error) << not_supported << n.id();
+    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.id()));
+}
+
+boost::filesystem::path class_implementation_formatter::full_path(
+    const formattables::locator& l, const yarn::name& n) const {
+    return l.make_full_path_for_cpp_implementation(n, static_formatter_name());
+}
+
 file_types class_implementation_formatter::file_type() const {
     return file_types::cpp_implementation;
 }
@@ -172,16 +241,11 @@ register_provider(formattables::registrar& rg) const {
     rg.register_provider(boost::make_shared<provider>());
 }
 
-std::type_index class_implementation_formatter::element_type_index() const {
-    static auto r(std::type_index(typeid(yarn::object)));
-    return r;
-}
-
 dogen::formatters::file class_implementation_formatter::
 format(const context& ctx, const yarn::element& e) const {
     assistant a(ctx, ownership_hierarchy(), file_type(), e.name().id());
-    const auto& yo(a.as<yarn::object>(e));
-    const auto r(class_implementation_formatter_stitch(a, yo));
+    const auto& o(a.as<yarn::object>(static_formatter_name(), e));
+    const auto r(class_implementation_formatter_stitch(a, o));
     return r;
 }
 

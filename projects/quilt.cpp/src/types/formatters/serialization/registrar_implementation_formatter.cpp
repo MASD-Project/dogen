@@ -111,7 +111,6 @@ formattables::inclusion_path_support provider::inclusion_path_support() const {
 boost::filesystem::path
 provider::provide_inclusion_path(const formattables::locator& /*l*/,
     const yarn::name& n) const {
-
     BOOST_LOG_SEV(lg, error) << not_supported << n.id();
     BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.id()));
 }
@@ -142,6 +141,56 @@ registrar_implementation_formatter::ownership_hierarchy() const {
     return r;
 }
 
+std::type_index registrar_implementation_formatter::element_type_index() const {
+    static auto r(std::type_index(typeid(fabric::registrar)));
+    return r;
+}
+
+std::list<std::string> registrar_implementation_formatter::
+inclusion_dependencies(
+    const formattables::inclusion_dependencies_builder_factory& f,
+    const yarn::element& e) const {
+    const auto fmtn(static_formatter_name());
+    const auto& rg(assistant::as<fabric::registrar>(fmtn, e));
+    auto builder(f.make());
+
+    const auto rh_fn(traits::registrar_header_formatter_name());
+    builder.add(rg.name(), rh_fn);
+
+    using ic = inclusion_constants;
+    builder.add(ic::boost::archive::text_iarchive());
+    builder.add(ic::boost::archive::text_oarchive());
+    builder.add(ic::boost::archive::binary_iarchive());
+    builder.add(ic::boost::archive::binary_oarchive());
+    builder.add(ic::boost::archive::polymorphic_iarchive());
+    builder.add(ic::boost::archive::polymorphic_oarchive());
+
+    // XML serialisation
+    builder.add(ic::boost::archive::xml_iarchive());
+    builder.add(ic::boost::archive::xml_oarchive());
+
+    const auto ch_fn(traits::class_header_formatter_name());
+    builder.add(rg.leaves(), ch_fn);
+    builder.add(rg.registrar_dependencies(), traits::facet_name());
+    return builder.build();
+}
+
+inclusion_support_types registrar_implementation_formatter::
+inclusion_support_type() const {
+    return inclusion_support_types::not_supported;
+}
+
+boost::filesystem::path registrar_implementation_formatter::inclusion_path(
+    const formattables::locator& /*l*/, const yarn::name& n) const {
+    BOOST_LOG_SEV(lg, error) << not_supported << n.id();
+    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.id()));
+}
+
+boost::filesystem::path registrar_implementation_formatter::full_path(
+    const formattables::locator& l, const yarn::name& n) const {
+    return l.make_full_path_for_cpp_implementation(n, static_formatter_name());
+}
+
 file_types registrar_implementation_formatter::file_type() const {
     return file_types::cpp_implementation;
 }
@@ -151,15 +200,11 @@ register_provider(formattables::registrar& rg) const {
     rg.register_provider(boost::make_shared<provider>());
 }
 
-std::type_index registrar_implementation_formatter::element_type_index() const {
-    static auto r(std::type_index(typeid(fabric::registrar)));
-    return r;
-}
 
 dogen::formatters::file registrar_implementation_formatter::
 format(const context& ctx, const yarn::element& e) const {
     assistant a(ctx, ownership_hierarchy(), file_type(), e.name().id());
-    const auto& rg(a.as<fabric::registrar>(e));
+    const auto& rg(a.as<fabric::registrar>(static_formatter_name(), e));
     const auto r(registrar_implementation_formatter_stitch(a, rg));
     return r;
 }

@@ -120,6 +120,48 @@ master_header_formatter::ownership_hierarchy() const {
     return ownership_hierarchy_;
 }
 
+std::type_index master_header_formatter::element_type_index() const {
+    static auto r(std::type_index(typeid(fabric::master_header)));
+    return r;
+}
+
+std::list<std::string> master_header_formatter::inclusion_dependencies(
+    const formattables::inclusion_dependencies_builder_factory& f,
+    const yarn::element& e) const {
+    static const auto fctn(ownership_hierarchy_.facet_name());
+    static const auto fmtn(ownership_hierarchy_.formatter_name());
+    const auto& mh(assistant::as<fabric::master_header>(fmtn, e));
+
+    const auto i(mh.inclusion_by_facet().find(fctn));
+    if (i == mh.inclusion_by_facet().end())
+        return std::list<std::string>();
+
+    auto builder(f.make());
+    for (const auto& pair : i->second) {
+        const auto& fmtn(pair.first);
+        const auto& names(pair.second);
+        builder.add(names, fmtn);
+    }
+    return builder.build();
+}
+
+inclusion_support_types
+master_header_formatter::inclusion_support_type() const {
+    return inclusion_support_types::regular_support;
+}
+
+boost::filesystem::path master_header_formatter::inclusion_path(
+    const formattables::locator& l, const yarn::name& n) const {
+    static const auto fmtn(ownership_hierarchy_.formatter_name());
+    return l.make_inclusion_path_for_cpp_header(n, fmtn);
+}
+
+boost::filesystem::path master_header_formatter::full_path(
+    const formattables::locator& l, const yarn::name& n) const {
+    static const auto fmtn(ownership_hierarchy_.formatter_name());
+    return l.make_full_path_for_cpp_header(n, fmtn);
+}
+
 file_types master_header_formatter::file_type() const {
     return file_types::cpp_header;
 }
@@ -131,15 +173,11 @@ register_provider(formattables::registrar& rg) const {
     rg.register_provider(boost::make_shared<provider>(fn, fmtn));
 }
 
-std::type_index master_header_formatter::element_type_index() const {
-    static auto r(std::type_index(typeid(fabric::master_header)));
-    return r;
-}
-
 dogen::formatters::file master_header_formatter::
 format(const context& ctx, const yarn::element& e) const {
     assistant a(ctx, ownership_hierarchy(), file_type(), e.name().id());
-    const auto& mh(a.as<fabric::master_header>(e));
+    static const auto fmtn(ownership_hierarchy_.formatter_name());
+    const auto& mh(a.as<fabric::master_header>(fmtn, e));
     const auto r(master_header_formatter_stitch(a, mh));
     return r;
 }

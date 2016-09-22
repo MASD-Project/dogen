@@ -45,6 +45,7 @@
 #include "dogen/quilt.cpp/serialization/annotations/streaming_annotations_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/formatter_properties_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/enablement_repository_ser.hpp"
+#include "dogen/quilt.cpp/serialization/formatters/inclusion_support_types_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/inclusion_path_support_ser.hpp"
 #include "dogen/quilt.cpp/serialization/annotations/directory_names_annotations_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/path_derivatives_repository_ser.hpp"

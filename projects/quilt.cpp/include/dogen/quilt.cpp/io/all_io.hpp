@@ -45,6 +45,7 @@
 #include "dogen/quilt.cpp/io/annotations/streaming_annotations_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/formatter_properties_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/enablement_repository_io.hpp"
+#include "dogen/quilt.cpp/io/formatters/inclusion_support_types_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/inclusion_path_support_io.hpp"
 #include "dogen/quilt.cpp/io/annotations/directory_names_annotations_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/path_derivatives_repository_io.hpp"
