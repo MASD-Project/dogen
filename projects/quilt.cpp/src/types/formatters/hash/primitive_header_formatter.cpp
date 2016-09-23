@@ -20,6 +20,7 @@
  */
 #include <typeinfo>
 #include <boost/make_shared.hpp>
+#include "dogen/yarn/types/primitive.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/traits.hpp"
@@ -77,9 +78,6 @@ boost::filesystem::path primitive_header_formatter::full_path(
     const formattables::locator& l, const yarn::name& n) const {
     return l.make_full_path_for_cpp_header(n, static_formatter_name());
 }
-
-void primitive_header_formatter::
-register_provider(formattables::registrar& /*rg*/) const {}
 
 dogen::formatters::file primitive_header_formatter::
 format(const context& /*ctx*/, const yarn::element& /*e*/) const {

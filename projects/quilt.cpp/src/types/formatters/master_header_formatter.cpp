@@ -31,81 +31,6 @@ namespace quilt {
 namespace cpp {
 namespace formatters {
 
-namespace {
-
-class provider final :
-        public formattables::provider_interface<fabric::master_header> {
-public:
-    provider(const std::string& facet_name, const std::string& formatter_name);
-
-public:
-    std::string facet_name() const override;
-    std::string formatter_name() const override;
-
-    std::list<std::string> provide_inclusion_dependencies(
-        const formattables::inclusion_dependencies_builder_factory& f,
-            const fabric::master_header& mh) const override;
-
-    formattables::inclusion_path_support inclusion_path_support() const override;
-
-    boost::filesystem::path provide_inclusion_path(const formattables::locator& l,
-        const yarn::name& n) const override;
-
-    boost::filesystem::path provide_full_path(const formattables::locator& l,
-        const yarn::name& n) const override;
-
-private:
-    const std::string facet_name_;
-    const std::string formatter_name_;
-};
-
-provider::
-provider(const std::string& facet_name, const std::string& formatter_name)
-    : facet_name_(facet_name), formatter_name_(formatter_name) { }
-
-std::list<std::string> provider::provide_inclusion_dependencies(
-    const formattables::inclusion_dependencies_builder_factory& f,
-    const fabric::master_header& mh) const {
-
-    const auto i(mh.inclusion_by_facet().find(facet_name_));
-    if (i == mh.inclusion_by_facet().end())
-        return std::list<std::string>();
-
-    auto builder(f.make());
-    for (const auto& pair : i->second) {
-        const auto& fmtn(pair.first);
-        const auto& names(pair.second);
-        builder.add(names, fmtn);
-    }
-    return builder.build();
-}
-
-formattables::inclusion_path_support provider::inclusion_path_support() const {
-    return formattables::inclusion_path_support::regular;
-}
-
-boost::filesystem::path
-provider::provide_inclusion_path(const formattables::locator& l,
-    const yarn::name& n) const {
-    return l.make_inclusion_path_for_cpp_header(n, formatter_name());
-}
-
-boost::filesystem::path
-provider::provide_full_path(const formattables::locator& l,
-    const yarn::name& n) const {
-    return l.make_full_path_for_cpp_header(n, formatter_name());
-}
-
-std::string provider::facet_name() const {
-    return facet_name_;
-}
-
-std::string provider::formatter_name() const {
-    return formatter_name_;
-}
-
-}
-
 master_header_formatter::master_header_formatter(const std::string& facet_name)
     : ownership_hierarchy_(formatters::traits::model_name(), facet_name,
         traits::master_header_formatter_name(facet_name),
@@ -160,13 +85,6 @@ boost::filesystem::path master_header_formatter::full_path(
     const formattables::locator& l, const yarn::name& n) const {
     const auto fmtn(ownership_hierarchy_.formatter_name());
     return l.make_full_path_for_cpp_header(n, fmtn);
-}
-
-void master_header_formatter::
-register_provider(formattables::registrar& rg) const {
-    const auto fn(ownership_hierarchy_.facet_name());
-    const auto fmtn(ownership_hierarchy_.formatter_name());
-    rg.register_provider(boost::make_shared<provider>(fn, fmtn));
 }
 
 dogen::formatters::file master_header_formatter::

@@ -32,7 +32,6 @@
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/quilt.cpp/types/formattables/locator.hpp"
-#include "dogen/quilt.cpp/types/formattables/registrar.hpp"
 #include "dogen/quilt.cpp/types/formattables/inclusion_dependencies_builder_factory.hpp"
 #include "dogen/quilt.cpp/types/formatters/inclusion_support_types.hpp"
 #include "dogen/quilt.cpp/types/formatters/context.hpp"
@@ -96,12 +95,6 @@ public:
         const formattables::locator& l, const yarn::name& n) const = 0;
 
 public:
-    /**
-     * @brief Registers an inclusion dependency providers this
-     * formatter may know of.
-     */
-    virtual void register_provider(formattables::registrar& rg) const = 0;
-
     /**
      * @brief Generate a file representation for the element.
      */

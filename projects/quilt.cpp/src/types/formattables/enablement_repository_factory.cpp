@@ -27,6 +27,8 @@
 #include "dogen/yarn/types/concept.hpp"
 #include "dogen/yarn/types/primitive.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
+#include "dogen/yarn/types/exception.hpp"
+#include "dogen/yarn/types/visitor.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/quilt.cpp/types/fabric/registrar.hpp"
 #include "dogen/quilt.cpp/types/fabric/master_header.hpp"

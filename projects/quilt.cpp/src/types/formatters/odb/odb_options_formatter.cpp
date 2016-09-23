@@ -48,61 +48,6 @@ namespace cpp {
 namespace formatters {
 namespace odb {
 
-namespace {
-
-class provider final :
-        public formattables::provider_interface<fabric::odb_options> {
-public:
-    std::string facet_name() const override;
-    std::string formatter_name() const override;
-
-    std::list<std::string> provide_inclusion_dependencies(
-        const formattables::inclusion_dependencies_builder_factory& f,
-        const fabric::odb_options& o) const override;
-
-    formattables::inclusion_path_support inclusion_path_support() const override;
-
-    boost::filesystem::path provide_inclusion_path(const formattables::locator& l,
-        const yarn::name& n) const override;
-
-    boost::filesystem::path provide_full_path(const formattables::locator& l,
-        const yarn::name& n) const override;
-};
-
-std::string provider::facet_name() const {
-    return traits::facet_name();
-}
-
-std::string provider::formatter_name() const {
-    return odb_options_formatter::static_formatter_name();
-}
-
-std::list<std::string> provider::provide_inclusion_dependencies(
-    const formattables::inclusion_dependencies_builder_factory& /*f*/,
-    const fabric::odb_options& /*o*/) const {
-    static std::list<std::string> r;
-    return r;
-}
-
-formattables::inclusion_path_support provider::inclusion_path_support() const {
-    return formattables::inclusion_path_support::not_supported;
-}
-
-boost::filesystem::path
-provider::provide_inclusion_path(const formattables::locator& /*l*/,
-    const yarn::name& n) const {
-    BOOST_LOG_SEV(lg, error) << not_supported << n.id();
-    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.id()));
-}
-
-boost::filesystem::path
-provider::provide_full_path(const formattables::locator& l,
-    const yarn::name& n) const {
-    return l.make_full_path_for_odb_options(n, formatter_name());
-}
-
-}
-
 std::string odb_options_formatter::static_formatter_name() {
     return traits::odb_options_formatter_name();
 }
@@ -146,11 +91,6 @@ boost::filesystem::path odb_options_formatter::inclusion_path(
 boost::filesystem::path odb_options_formatter::full_path(
     const formattables::locator& l, const yarn::name& n) const {
     return l.make_full_path_for_odb_options(n, static_formatter_name());
-}
-
-void odb_options_formatter::
-register_provider(formattables::registrar& rg) const {
-    rg.register_provider(boost::make_shared<provider>());
 }
 
 dogen::formatters::file odb_options_formatter::

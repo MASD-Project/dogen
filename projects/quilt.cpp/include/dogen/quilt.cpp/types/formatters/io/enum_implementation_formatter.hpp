@@ -63,8 +63,6 @@ public:
         const formattables::locator& l, const yarn::name& n) const override;
 
 public:
-    void register_provider(formattables::registrar& rg) const override;
-
     dogen::formatters::file
     format(const context& ctx, const yarn::element& e) const override;
 };

@@ -34,19 +34,11 @@ namespace dogen {
 namespace quilt {
 namespace cpp {
 
-void initialize_providers(const formatters::registrar& fmt_rg) {
-    auto& prop_rg(formattables::workflow::registrar());
-    const auto c(fmt_rg.formatter_container());
-    for (const auto& f : c.file_formatters())
-        f->register_provider(prop_rg);
-}
-
 void initializer::initialize() {
     using annotations::opaque_annotations_builder;
     annotations::initializer::initialize(
         opaque_annotations_builder::registrar());
     formatters::initializer::initialize(formatters::workflow::registrar());
-    initialize_providers(formatters::workflow::registrar());
     fabric::initializer::initialize(yarn::workflow::injector_registrar());
     quilt::register_backend<workflow>(quilt::workflow::registrar());
 }

@@ -49,68 +49,6 @@ namespace cpp {
 namespace formatters {
 namespace io {
 
-namespace {
-
-class provider final :
-        public formattables::provider_interface<yarn::enumeration> {
-public:
-    std::string facet_name() const override;
-    std::string formatter_name() const override;
-
-    std::list<std::string> provide_inclusion_dependencies(
-        const formattables::inclusion_dependencies_builder_factory& f,
-        const yarn::enumeration& e) const override;
-
-    formattables::inclusion_path_support inclusion_path_support() const override;
-
-    boost::filesystem::path provide_inclusion_path(const formattables::locator& l,
-        const yarn::name& n) const override;
-
-    boost::filesystem::path provide_full_path(const formattables::locator& l,
-        const yarn::name& n) const override;
-};
-
-std::string provider::facet_name() const {
-    return traits::facet_name();
-}
-
-std::string provider::formatter_name() const {
-    return enum_implementation_formatter::static_formatter_name();
-}
-
-std::list<std::string> provider::provide_inclusion_dependencies(
-    const formattables::inclusion_dependencies_builder_factory& f,
-    const yarn::enumeration& e) const {
-    auto builder(f.make());
-
-    builder.add(inclusion_constants::std::ostream());
-    builder.add(inclusion_constants::std::stdexcept());
-    builder.add(inclusion_constants::std::string());
-
-    const auto eh_fn(traits::enum_header_formatter_name());
-    builder.add(e.name(), eh_fn);
-    return builder.build();
-}
-
-formattables::inclusion_path_support provider::inclusion_path_support() const {
-    return formattables::inclusion_path_support::not_supported;
-}
-
-boost::filesystem::path
-provider::provide_inclusion_path(const formattables::locator& /*l*/,
-    const yarn::name& n) const {
-    BOOST_LOG_SEV(lg, error) << not_supported << n.id();
-    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.id()));
-}
-
-boost::filesystem::path
-provider::provide_full_path(const formattables::locator& l,
-    const yarn::name& n) const {
-    return l.make_full_path_for_cpp_implementation(n, formatter_name());
-}
-
-}
-
 std::string enum_implementation_formatter::static_formatter_name() {
     return traits::enum_implementation_formatter_name();
 }
@@ -162,11 +100,6 @@ boost::filesystem::path enum_implementation_formatter::inclusion_path(
 boost::filesystem::path enum_implementation_formatter::full_path(
     const formattables::locator& l, const yarn::name& n) const {
     return l.make_full_path_for_cpp_implementation(n, static_formatter_name());
-}
-
-void enum_implementation_formatter::
-register_provider(formattables::registrar& rg) const {
-    rg.register_provider(boost::make_shared<provider>());
 }
 
 dogen::formatters::file enum_implementation_formatter::
