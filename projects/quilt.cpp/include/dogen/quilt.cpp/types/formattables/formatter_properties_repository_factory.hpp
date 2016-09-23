@@ -68,10 +68,8 @@ private:
      * @brief Create the inclusion directives repository.
      */
     inclusion_directives_repository create_inclusion_directives_repository(
-        const dynamic::repository& srp,
-        const formatters::container& fc,
-        const registrar& rg, const locator& l,
-        const yarn::model& m) const;
+        const dynamic::repository& srp, const formatters::container& fc,
+        const locator& l, const yarn::model& m) const;
 
     /**
      * @brief Create the inclusion dependencies repository.
@@ -110,8 +108,7 @@ public:
         const dynamic::repository& srp,
         const dynamic::object& root_object,
         const std::unordered_map<std::string, std::string>& fdff,
-        const path_derivatives_repository& pdrp,
-        const registrar& rg, const locator& l,
+        const path_derivatives_repository& pdrp, const locator& l,
         const formatters::container& fc,
         const yarn::model& m) const;
 };

@@ -72,7 +72,7 @@ private:
         std::type_index,
         std::forward_list<
             std::shared_ptr<formatters::file_formatter_interface>>>
-    filter_file_formatters_by_type_index(const formatters::container& fc);
+    filter_file_formatters_by_type_index(const formatters::container& fc) const;
 
     void process_element(const yarn::element& e);
 
@@ -129,7 +129,7 @@ std::unordered_map<
     std::forward_list<
         std::shared_ptr<formatters::file_formatter_interface>>>
 generator::filter_file_formatters_by_type_index(
-    const formatters::container& fc) {
+    const formatters::container& fc) const {
     std::unordered_map<
         std::type_index,
         std::forward_list<

@@ -116,7 +116,7 @@ create_formatter_properties(const dynamic::repository& drp,
     const yarn::model& m) const {
 
     formatter_properties_repository_factory f;
-    return f.make(drp, root_object, fdff, pdrp, registrar(), l, fc, m);
+    return f.make(drp, root_object, fdff, pdrp, l, fc, m);
 }
 
 element_properties_repository workflow::create_element_properties_repository(

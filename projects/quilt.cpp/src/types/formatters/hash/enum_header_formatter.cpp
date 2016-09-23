@@ -134,7 +134,7 @@ inclusion_support_types enum_header_formatter::inclusion_support_type() const {
 
 boost::filesystem::path enum_header_formatter::inclusion_path(
     const formattables::locator& l, const yarn::name& n) const {
-    return l.make_full_path_for_cpp_header(n, static_formatter_name());
+    return l.make_inclusion_path_for_cpp_header(n, static_formatter_name());
 }
 
 boost::filesystem::path enum_header_formatter::full_path(

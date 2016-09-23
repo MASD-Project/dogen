@@ -52,7 +52,7 @@ primitive_header_formatter::ownership_hierarchy() const {
 }
 
 std::type_index primitive_header_formatter::element_type_index() const {
-    static auto r(std::type_index(typeid(yarn::object)));
+    static auto r(std::type_index(typeid(yarn::primitive)));
     return r;
 }
 
