@@ -81,7 +81,8 @@ std::forward_list<dogen::formatters::file> element_formatter::format(
         }
 
         r.push_front(file);
-        BOOST_LOG_SEV(lg, debug) << "Finished formatting: '" << id << "'";
+        BOOST_LOG_SEV(lg, debug) << "Finished formatting: '" << id << "'"
+                                 << " File path: " << file.path();
     }
     return r;
 }

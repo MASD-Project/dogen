@@ -99,11 +99,10 @@ workflow::create_aspect_annotations_repository(
 }
 
 path_derivatives_repository workflow::
-create_path_derivatives_repository(
-    const locator& l,
-    const yarn::model& m) const {
+create_path_derivatives_repository(const formatters::container& fc,
+    const locator& l, const yarn::model& m) const {
     path_derivatives_repository_factory f;
-    return f.make(registrar(), l, m);
+    return f.make(fc, l, m);
 }
 
 formatter_properties_repository workflow::
@@ -143,7 +142,7 @@ element_properties_repository workflow::execute(const options::cpp_options& opts
     const auto& ro(root_object);
     const auto ps(create_path_annotations(drp, ro, fc));
     const locator l(opts, m, ps);
-    const auto pdrp(create_path_derivatives_repository(l, m));
+    const auto pdrp(create_path_derivatives_repository(fc, l, m));
     const auto fdff(facet_directory_for_facet(fc, ps));
     auto fprp(create_formatter_properties(drp, ro, fdff, pdrp, l, fc, m));
 

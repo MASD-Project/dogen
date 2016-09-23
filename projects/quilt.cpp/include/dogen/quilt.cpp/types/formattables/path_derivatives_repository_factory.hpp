@@ -30,8 +30,8 @@
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/yarn/types/model.hpp"
+#include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/formattables/locator.hpp"
-#include "dogen/quilt.cpp/types/formattables/registrar.hpp"
 #include "dogen/quilt.cpp/types/formattables/path_derivatives_repository.hpp"
 
 namespace dogen {
@@ -43,12 +43,29 @@ namespace formattables {
  * @brief Creates path derivatives repositories.
  */
 class path_derivatives_repository_factory {
+private:
+    /**
+     * @brief Converts a relative path to a header file into a C++
+     * header guard name.
+     */
+    std::string to_header_guard_name(const boost::filesystem::path& p) const;
+
+public:
+    typedef std::forward_list<
+    std::shared_ptr<formatters::file_formatter_interface>
+    > formatter_list_type;
+
+    void populate_repository(const formatter_list_type& formatters,
+        const locator& locator, const yarn::name& n,
+        path_derivatives_repository& pdrp) const;
+
 public:
     /**
      * @brief Create a path derivatives repository.
      */
     path_derivatives_repository
-    make(const registrar& rg, const locator& l, const yarn::model& m) const;
+    make(const formatters::container& fc, const locator& l,
+        const yarn::model& m) const;
 };
 
 } } } }

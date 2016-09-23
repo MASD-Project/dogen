@@ -125,8 +125,8 @@ bool inclusion_dependencies_builder::is_enabled(const yarn::name& n,
 
     const auto j(i->second.find(formatter_name));
     if (j == i->second.end()) {
-        BOOST_LOG_SEV(lg, warn) << formatter_name_not_found << formatter_name
-                                << " element id: " << n.id();
+        BOOST_LOG_SEV(lg, debug) << formatter_name_not_found << formatter_name
+                                 << " element id: " << n.id();
 
         // FIXME: hack
         BOOST_LOG_SEV(lg, debug) << "Trying by facet name.";

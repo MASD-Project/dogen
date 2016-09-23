@@ -65,12 +65,16 @@ private:
         if (id.empty())
             return;
 
-        // FIXME: biggest hack ever
         auto& deps(result_.by_name());
         const auto i(deps.find(n));
         if (i != deps.end()) {
-            BOOST_LOG_SEV(lg, error) << "before: " << i->second;
-            BOOST_LOG_SEV(lg, error) << "new: " << id;
+            BOOST_LOG_SEV(lg, debug) << "Original dependencies: " << i->second;
+            BOOST_LOG_SEV(lg, debug) << "Id: " << id;
+
+            // FIXME: biggest hack ever to handle forward declarations;
+            // these have the same name as the main object and so we need
+            // to merge them together. The formatter id's are
+            // different so there are no clashes.
             for (const auto& d : id) {
                 i->second[d.first] = d.second;
             }

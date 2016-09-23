@@ -121,7 +121,7 @@ master_header_formatter::ownership_hierarchy() const {
 }
 
 std::type_index master_header_formatter::element_type_index() const {
-    static auto r(std::type_index(typeid(fabric::master_header)));
+    auto r(std::type_index(typeid(fabric::master_header)));
     return r;
 }
 
@@ -152,13 +152,13 @@ master_header_formatter::inclusion_support_type() const {
 
 boost::filesystem::path master_header_formatter::inclusion_path(
     const formattables::locator& l, const yarn::name& n) const {
-    static const auto fmtn(ownership_hierarchy_.formatter_name());
+    const auto fmtn(ownership_hierarchy_.formatter_name());
     return l.make_inclusion_path_for_cpp_header(n, fmtn);
 }
 
 boost::filesystem::path master_header_formatter::full_path(
     const formattables::locator& l, const yarn::name& n) const {
-    static const auto fmtn(ownership_hierarchy_.formatter_name());
+    const auto fmtn(ownership_hierarchy_.formatter_name());
     return l.make_full_path_for_cpp_header(n, fmtn);
 }
 
@@ -173,7 +173,7 @@ dogen::formatters::file master_header_formatter::
 format(const context& ctx, const yarn::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, ownership_hierarchy(), false/*requires_header_guard*/, id);
-    static const auto fmtn(ownership_hierarchy_.formatter_name());
+    const auto fmtn(ownership_hierarchy_.formatter_name());
     const auto& mh(a.as<fabric::master_header>(fmtn, e));
     const auto r(master_header_formatter_stitch(a, mh));
     return r;

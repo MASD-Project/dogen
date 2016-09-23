@@ -13,41 +13,41 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-23 Fri 17:26]
+#+CAPTION: Clock summary at [2016-09-23 Fri 18:34]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *75:44* |       |       | 100.0 |
+| *Total time*                                                                | *76:25* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 75:44   |       |       | 100.0 |
-| Active                                                                      |         | 75:44 |       | 100.0 |
+| Stories                                                                     | 76:25   |       |       | 100.0 |
+| Active                                                                      |         | 76:25 |       | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  3:53 |   5.1 |
 | COMPLETED Fix chocolatey warning                                            |         |       |  0:08 |   0.2 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:27 |   0.6 |
-| COMPLETED Analysis on current state of file path generation                 |         |       |  0:57 |   1.3 |
+| COMPLETED Analysis on current state of file path generation                 |         |       |  0:57 |   1.2 |
 | CANCELLED Remove inclusion dependencies builder factory                     |         |       |  0:14 |   0.3 |
 | COMPLETED Analysis on formatters, elements and extensibility                |         |       |  1:18 |   1.7 |
 | COMPLETED Refactor =inclusion_dependencies_provider_interface=              |         |       |  1:12 |   1.6 |
 | COMPLETED Investigate broken windows builds                                 |         |       |  0:32 |   0.7 |
-| COMPLETED Refactor path derivatives factory for usage in formatters         |         |       |  5:14 |   6.9 |
+| COMPLETED Refactor path derivatives factory for usage in formatters         |         |       |  5:14 |   6.8 |
 | COMPLETED Move file path generation to formatters                           |         |       |  1:58 |   2.6 |
 | CANCELLED Path derivatives factory generates all possible includes          |         |       |  3:07 |   4.1 |
 | COMPLETED Analysis on inclusion derivatives and path derivatives            |         |       |  1:04 |   1.4 |
 | COMPLETED Split path factory from provider factory                          |         |       |  2:32 |   3.3 |
-| COMPLETED Use providers when building inclusion directives                  |         |       | 12:01 |  15.9 |
+| COMPLETED Use providers when building inclusion directives                  |         |       | 12:01 |  15.7 |
 | COMPLETED Fix AppVeyor notifications                                        |         |       |  0:22 |   0.5 |
 | COMPLETED Static use of element types does more harm than good              |         |       |  0:32 |   0.7 |
 | COMPLETED Analysis: major rethink of the implementation of quilt            |         |       |  1:30 |   2.0 |
 | CANCELLED Create a simple Emacs mode for stitch                             |         |       |  1:12 |   1.6 |
 | COMPLETED Add facet folder and formatter enablement to formatter properties |         |       |  2:52 |   3.8 |
-| COMPLETED Move =cmakelists_info= to fabric                                  |         |       |  6:34 |   8.7 |
-| COMPLETED Move =odb_options_info= to fabric                                 |         |       |  1:29 |   2.0 |
+| COMPLETED Move =cmakelists_info= to fabric                                  |         |       |  6:34 |   8.6 |
+| COMPLETED Move =odb_options_info= to fabric                                 |         |       |  1:29 |   1.9 |
 | COMPLETED Remove =formattable_origin_type=                                  |         |       |  0:17 |   0.4 |
 | COMPLETED Remove formattable origin type                                    |         |       |  2:25 |   3.2 |
 | COMPLETED Rename config model to options                                    |         |       |  1:07 |   1.5 |
 | COMPLETED Rename annotation to decoration in formatters model               |         |       |  0:30 |   0.7 |
 | COMPLETED Fix appveyor Visual Studio build                                  |         |       |  1:04 |   1.4 |
-| COMPLETED Big rename for "final" terminology clean up                       |         |       |  2:19 |   3.1 |
+| COMPLETED Big rename for "final" terminology clean up                       |         |       |  2:19 |   3.0 |
 | COMPLETED Tidy-up file configuration in formatters                          |         |       |  3:03 |   4.0 |
 | COMPLETED Stitch still uses "properties"                                    |         |       |  0:27 |   0.6 |
 | CANCELLED Add a stitch prefix to stitch fields                              |         |       |  0:03 |   0.1 |
@@ -55,8 +55,8 @@
 | COMPLETED Consider removing the overwrite flag in =formatters::file=        |         |       |  0:22 |   0.5 |
 | COMPLETED Handle module generability in yarn                                |         |       |  0:20 |   0.4 |
 | COMPLETED Do a cursory investigation of dia plugin support                  |         |       |  0:49 |   1.1 |
-| STARTED Consider merging provider interface with file formatter             |         |       |  8:04 |  10.7 |
-| STARTED Add type index to name and to formatter interface                   |         |       |  5:36 |   7.4 |
+| STARTED Consider merging provider interface with file formatter             |         |       |  8:45 |  11.5 |
+| STARTED Add type index to name and to formatter interface                   |         |       |  5:36 |   7.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -1043,6 +1043,8 @@ It seems its fairly trivial to extend dia using Pything:
 - [[https://github.com/GNOME/dia/tree/master/plug-ins/python][Lots of examples of python scripts]]
 
 *** STARTED Consider merging provider interface with file formatter   :story:
+    CLOCK: [2016-09-23 Fri 18:10]--[2016-09-23 Fri 18:34] =>  0:24
+    CLOCK: [2016-09-23 Fri 17:27]--[2016-09-23 Fri 17:44] =>  0:17
     CLOCK: [2016-09-23 Fri 16:49]--[2016-09-23 Fri 17:26] =>  0:37
     CLOCK: [2016-09-23 Fri 14:12]--[2016-09-23 Fri 15:39] =>  1:27
     CLOCK: [2016-09-23 Fri 13:17]--[2016-09-23 Fri 13:41] =>  0:24

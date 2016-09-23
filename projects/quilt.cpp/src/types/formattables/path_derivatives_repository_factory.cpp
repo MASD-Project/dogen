@@ -28,7 +28,6 @@
 #include "dogen/yarn/types/module.hpp"
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/quilt.cpp/types/formattables/building_error.hpp"
-#include "dogen/quilt.cpp/types/fabric/element_visitor.hpp"
 #include "dogen/quilt.cpp/io/formattables/path_derivatives_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/path_derivatives_repository_io.hpp"
 #include "dogen/quilt.cpp/types/formattables/path_derivatives_repository_factory.hpp"
@@ -46,6 +45,8 @@ const std::string dot(".");
 const std::string separator("_");
 
 const std::string duplicate_name("Duplicate name: ");
+const std::string formatter_not_found_for_type(
+    "Formatter not found for type: ");
 
 }
 
@@ -54,118 +55,7 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-namespace {
-
-/**
- * @brief Generates all path derivatives.
- */
-class generator final : public fabric::element_visitor {
-public:
-    generator(const container& c, const locator& l)
-        : container_(c), locator_(l) { }
-
-private:
-    /**
-     * @brief Converts a relative path to a header file into a C++
-     * header guard name.
-     */
-    std::string to_header_guard_name(const boost::filesystem::path& p) const;
-
-    /**
-     * @brief Generates all of the path derivatives for the formatters
-     * and qualified name.
-     */
-    template<typename YarnEntity>
-    void generate(const std::forward_list<
-        boost::shared_ptr<provider_interface<YarnEntity>>>& providers,
-        const yarn::name& n) {
-
-        BOOST_LOG_SEV(lg, debug) << "Processing name: " << n;
-        auto& map(result_.by_name()[n]);
-        for (const auto& p : providers) {
-            BOOST_LOG_SEV(lg, debug) << "Provider: "
-                                     << p->formatter_name();
-
-            path_derivatives pd;
-            pd.file_path(p->provide_full_path(locator_, n));
-            const auto ns(inclusion_path_support::not_supported);
-            if (p->inclusion_path_support() != ns) {
-                const auto ip(p->provide_inclusion_path(locator_, n));
-                pd.header_guard(to_header_guard_name(ip));
-            }
-            BOOST_LOG_SEV(lg, debug) << "New Path derivatives: " << pd;
-            const auto pair(std::make_pair(p->formatter_name(), pd));
-            const auto result(map.insert(pair));
-            const bool inserted(result.second);
-            if (!inserted) {
-                BOOST_LOG_SEV(lg, error) << duplicate_name << n.id()
-                                         << " formatter: "
-                                         << p->formatter_name();
-                BOOST_THROW_EXCEPTION(building_error(duplicate_name + n.id()));
-            }
-        }
-    }
-
-public:
-    using fabric::element_visitor::visit;
-    void visit(const yarn::module& m) override {
-        generate(container_.module_providers(), m.name());
-    }
-
-    void visit(const yarn::concept& c) override {
-        generate(container_.concept_providers(), c.name());
-    }
-
-    void visit(const yarn::primitive& p) override {
-        generate(container_.primitive_providers(), p.name());
-    }
-
-    void visit(const yarn::enumeration& e) override {
-        generate(container_.enumeration_providers(), e.name());
-    }
-
-    void visit(const yarn::object& o) override {
-        generate(container_.object_providers(), o.name());
-    }
-
-    void visit(const yarn::exception& e) override {
-        generate(container_.exception_providers(), e.name());
-    }
-
-    void visit(const yarn::visitor& v) override {
-        generate(container_.visitor_providers(), v.name());
-    }
-
-    void visit(const fabric::registrar& rg) override {
-        generate(container_.registrar_providers(), rg.name());
-    }
-
-    void visit(const fabric::master_header& mh) override {
-        generate(container_.master_header_providers(), mh.name());
-    }
-
-    void visit(const fabric::forward_declarations& fd) override {
-        generate(container_.forward_declarations_providers(), fd.name());
-    }
-
-    void visit(const fabric::cmakelists& c) override {
-        generate(container_.cmakelists_providers(), c.name());
-    }
-
-    void visit(const fabric::odb_options& o) override {
-        generate(container_.odb_options_providers(), o.name());
-    }
-
-public:
-    const path_derivatives_repository & result() const { return result_; }
-
-private:
-    const container& container_;
-    const locator& locator_;
-    path_derivatives_repository result_;
-};
-
-std::string generator::
+std::string  path_derivatives_repository_factory::
 to_header_guard_name(const boost::filesystem::path& p) const {
     bool is_first(true);
     std::ostringstream ss;
@@ -179,19 +69,56 @@ to_header_guard_name(const boost::filesystem::path& p) const {
     return ss.str();
 }
 
+void path_derivatives_repository_factory::populate_repository(
+    const formatter_list_type& formatters, const locator& locator,
+    const yarn::name& n, path_derivatives_repository& pdrp) const {
+
+    BOOST_LOG_SEV(lg, debug) << "Processing name: " << n;
+    auto& map(pdrp.by_name()[n]);
+    for (const auto& fmt : formatters) {
+        const auto fmtn(fmt->ownership_hierarchy().formatter_name());
+        BOOST_LOG_SEV(lg, debug) << "Formatter: " << fmtn;
+
+        path_derivatives pd;
+        pd.file_path(fmt->full_path(locator, n));
+        const auto ns(formatters::inclusion_support_types::not_supported);
+        if (fmt->inclusion_support_type() != ns) {
+            const auto ip(fmt->inclusion_path(locator, n));
+            pd.header_guard(to_header_guard_name(ip));
+        }
+
+        BOOST_LOG_SEV(lg, debug) << "Path derivatives: " << pd;
+        const auto pair(std::make_pair(fmtn, pd));
+        const auto result(map.insert(pair));
+        const bool inserted(result.second);
+        if (!inserted) {
+            BOOST_LOG_SEV(lg, error) << duplicate_name << n.id()
+                                     << " formatter: " << fmtn;
+            BOOST_THROW_EXCEPTION(building_error(duplicate_name + n.id()));
+        }
+    }
 }
 
-path_derivatives_repository path_derivatives_repository_factory::make(
-    const registrar& rg, const locator& l, const yarn::model& m) const {
+path_derivatives_repository path_derivatives_repository_factory::
+make(const formatters::container& fc, const locator& l,
+    const yarn::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Generating path derivatives repository.";
-    generator g(rg.container(), l);
+
+    path_derivatives_repository r;
+    const auto ffti(fc.file_formatters_by_type_index());
     for (const auto& ptr : m.elements()) {
         const auto& e(*ptr);
-        e.accept(g);
-    }
-    const auto r(g.result());
+        const auto id(e.name().id());
 
+        const auto ti(std::type_index(typeid(e)));
+        const auto i(ffti.find(ti));
+        if (i == ffti.end()) {
+            BOOST_LOG_SEV(lg, debug) << formatter_not_found_for_type << id;
+            continue;
+        }
+        populate_repository(i->second, l, e.name(), r);
+    }
     BOOST_LOG_SEV(lg, debug) << "Finished generating path derivatives"
                              << " repository. Result: " << r;
     return r;

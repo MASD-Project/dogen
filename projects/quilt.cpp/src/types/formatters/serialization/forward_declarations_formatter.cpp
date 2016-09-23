@@ -144,7 +144,7 @@ boost::filesystem::path forward_declarations_formatter::inclusion_path(
 
 boost::filesystem::path forward_declarations_formatter::full_path(
     const formattables::locator& l, const yarn::name& n) const {
-    return l.make_inclusion_path_for_cpp_header(n, static_formatter_name());
+    return l.make_full_path_for_cpp_header(n, static_formatter_name());
 }
 
 void forward_declarations_formatter::

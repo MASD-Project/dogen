@@ -60,7 +60,7 @@ workflow::execute(const annotations::streaming_annotations_repository& ssrp,
     const std::forward_list<
     boost::shared_ptr<yarn::element> >& elements) const {
 
-    BOOST_LOG_SEV(lg, info) << "Starting workflow - yarn version.";
+    BOOST_LOG_SEV(lg, info) << "Starting workflow.";
 
     std::forward_list<dogen::formatters::file> r;
     context_factory factory(ssrp, esrp, eprp, registrar().formatter_helpers());
@@ -74,7 +74,7 @@ workflow::execute(const annotations::streaming_annotations_repository& ssrp,
     for (const auto& file : r)
         BOOST_LOG_SEV(lg, debug) << "Name: " << file.path().generic_string();
 
-    BOOST_LOG_SEV(lg, info) << "Finished workflow - yarn version.";
+    BOOST_LOG_SEV(lg, info) << "Finished workflow.";
     return r;
 }
 
