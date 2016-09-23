@@ -13,32 +13,32 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-23 Fri 20:20]
+#+CAPTION: Clock summary at [2016-09-23 Fri 20:46]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *77:06* |       |       | 100.0 |
+| *Total time*                                                                | *77:30* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 77:06   |       |       | 100.0 |
-| Active                                                                      |         | 77:06 |       | 100.0 |
+| Stories                                                                     | 77:30   |       |       | 100.0 |
+| Active                                                                      |         | 77:30 |       | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  3:53 |   5.0 |
 | COMPLETED Fix chocolatey warning                                            |         |       |  0:08 |   0.2 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:27 |   0.6 |
 | COMPLETED Analysis on current state of file path generation                 |         |       |  0:57 |   1.2 |
 | CANCELLED Remove inclusion dependencies builder factory                     |         |       |  0:14 |   0.3 |
 | COMPLETED Analysis on formatters, elements and extensibility                |         |       |  1:18 |   1.7 |
-| COMPLETED Refactor =inclusion_dependencies_provider_interface=              |         |       |  1:12 |   1.6 |
+| COMPLETED Refactor =inclusion_dependencies_provider_interface=              |         |       |  1:12 |   1.5 |
 | COMPLETED Investigate broken windows builds                                 |         |       |  0:32 |   0.7 |
 | COMPLETED Refactor path derivatives factory for usage in formatters         |         |       |  5:14 |   6.8 |
-| COMPLETED Move file path generation to formatters                           |         |       |  1:58 |   2.6 |
+| COMPLETED Move file path generation to formatters                           |         |       |  1:58 |   2.5 |
 | CANCELLED Path derivatives factory generates all possible includes          |         |       |  3:07 |   4.0 |
 | COMPLETED Analysis on inclusion derivatives and path derivatives            |         |       |  1:04 |   1.4 |
 | COMPLETED Split path factory from provider factory                          |         |       |  2:32 |   3.3 |
-| COMPLETED Use providers when building inclusion directives                  |         |       | 12:01 |  15.6 |
+| COMPLETED Use providers when building inclusion directives                  |         |       | 12:01 |  15.5 |
 | COMPLETED Fix AppVeyor notifications                                        |         |       |  0:22 |   0.5 |
 | COMPLETED Static use of element types does more harm than good              |         |       |  0:32 |   0.7 |
 | COMPLETED Analysis: major rethink of the implementation of quilt            |         |       |  1:30 |   1.9 |
-| CANCELLED Create a simple Emacs mode for stitch                             |         |       |  1:12 |   1.6 |
+| CANCELLED Create a simple Emacs mode for stitch                             |         |       |  1:12 |   1.5 |
 | COMPLETED Add facet folder and formatter enablement to formatter properties |         |       |  2:52 |   3.7 |
 | COMPLETED Move =cmakelists_info= to fabric                                  |         |       |  6:34 |   8.5 |
 | COMPLETED Move =odb_options_info= to fabric                                 |         |       |  1:29 |   1.9 |
@@ -48,7 +48,7 @@
 | COMPLETED Rename annotation to decoration in formatters model               |         |       |  0:30 |   0.6 |
 | COMPLETED Fix appveyor Visual Studio build                                  |         |       |  1:04 |   1.4 |
 | COMPLETED Big rename for "final" terminology clean up                       |         |       |  2:19 |   3.0 |
-| COMPLETED Tidy-up file configuration in formatters                          |         |       |  3:03 |   4.0 |
+| COMPLETED Tidy-up file configuration in formatters                          |         |       |  3:03 |   3.9 |
 | COMPLETED Stitch still uses "properties"                                    |         |       |  0:27 |   0.6 |
 | CANCELLED Add a stitch prefix to stitch fields                              |         |       |  0:03 |   0.1 |
 | COMPLETED Formatter properties are not optional in assistant                |         |       |  0:10 |   0.2 |
@@ -56,7 +56,8 @@
 | COMPLETED Handle module generability in yarn                                |         |       |  0:20 |   0.4 |
 | COMPLETED Do a cursory investigation of dia plugin support                  |         |       |  0:49 |   1.1 |
 | COMPLETED Consider merging provider interface with file formatter           |         |       |  9:26 |  12.2 |
-| STARTED Add type index to name and to formatter interface                   |         |       |  5:36 |   7.3 |
+| COMPLETED Add type index to name and to formatter interface                 |         |       |  5:41 |   7.3 |
+| STARTED Add formattable element                                             |         |       |  0:19 |   0.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -1107,7 +1108,9 @@ Update:
 - inclusion dependencies factory
 - provider container
 
-*** STARTED Add type index to name and to formatter interface         :story:
+*** COMPLETED Add type index to name and to formatter interface       :story:
+    CLOSED: [2016-09-23 Fri 20:26]
+    CLOCK: [2016-09-23 Fri 20:21]--[2016-09-23 Fri 20:26] =>  0:05
     CLOCK: [2016-09-22 Thu 17:02]--[2016-09-22 Thu 17:24] =>  0:22
     CLOCK: [2016-09-22 Thu 13:34]--[2016-09-22 Thu 14:23] =>  0:49
     CLOCK: [2016-09-22 Thu 12:20]--[2016-09-22 Thu 13:13] =>  0:53
@@ -1152,16 +1155,10 @@ Tasks:
 - update registrar to register using type index.
 - update all uses of formatter container.
 
-*** Remove =optional<list>=                                           :story:
+*** COMPLETED Remove static formatter containers                      :story:
+    CLOSED: [2016-09-23 Fri 20:26]
 
-We should not really be using optional<list>. The empty list is
-sufficient for this.
-
-Uses:
-
-- include provider. Fixed with other story.
-
-*** Remove static formatter containers                                :story:
+*Rationale*: Implemented as part of other stories.
 
 Instead of having containers with separate types, use the type index
 to organise the formatters.
@@ -1173,64 +1170,31 @@ to organise the formatters.
 - formatter workflow now simply calls.
 - remove all element specific formatter interfaces.
 
-*** Check which properties need to loop through the entire model      :story:
-
-In certain cases such as helpers we probably don't need to go through
-all types; only the target types matter. Ensure we are not processing
-other types for no reason.
-
-Merged stories:
-
-*Element properties includes non-target types*
-
-We seem to be generating a lot of element properties and formatter
-properties as well. We should only be generating these for the target
-model.
-
-*** Consider using indices rather than associative containers          :epic:
-
-Once we generate the final model the model becomes constant; this
-means we can easily assign an [[https://en.wikipedia.org/wiki/Ordinal_number][ordinal number]] to each model
-element. These could be arranged so that we always start with
-generatable types first; this way we always generate dense
-containers - there are some cases where we need both generatable types
-and non-generatable types; in other cases we just need generatable
-types; we never need just non-generatable types. We also need to know
-the position of the first non-generatable type (or alternatively, the
-size of the generatable types set).
-
-Once we have this, we can start creating vectors with a fixed size
-(either total number of elements or just size of generatable
-types). We can also make it so that each name has an id which is the
-ordinal (another model post-processing activity). Actually we should
-call it "type index" or some other name because its a transient
-id. This means both properties and settings require no lookups at all
-since all positions are known beforehand (except in cases where the
-key of the associative container must be the =yarn::name= because we
-use it for processing).
-
-In theory, a similar approach can be done for formatters too. We know
-upfront what the ordinal number is for each formatter because they are
-all registered before we start processing. If formatters obtained
-their ordinal number at registration, wherever we are using a map of
-formatter name to a resource, we could use a fixed-size
-vector. However, formatters may be sparse in many cases (if not all
-cases?). For example, we do not have formatter properties for all
-formatters for every =yarn::name= because many (most) formatters don't
-make sense for every yarn type. Thus this is less applicable, at least
-for formatter properties. We need to look carefully at all use cases
-and see if there is any place where this approach is applicable. It is
-probably going to be more useful for formatters than elements.
+*** STARTED Add formattable element                                   :story:
+    CLOCK: [2016-09-23 Fri 20:27]--[2016-09-23 Fri 20:46] =>  0:19
 
 Tasks:
 
-- in resolver, assign element indices and update property names with
-  them.
-- change final model to have a vector of size maximum index (a
-  property of the intermediate model).
-- in the final model generation, for each type, look at its index and
-  populate the slot accordingly.
-- update quilt to use the indices where possible.
+- create a top-level type that has formatter, element properties and
+  element. Must be non-generatable. Add formattable id as the sum of
+  element id and formatter id.
+- add =formattables::model= as an unordered map of id to
+  formattable. Implement formatting workflow in terms of formattables
+  model. Add all context properties to model such as
+  streaming_settings_repository and helpers_. element_settings should
+  be merged with configuration.
+- remove formatting context and update formatting workflow to call a
+  visitor to resolve the element and then call the formatter.
+- add an enablement map for all formatters in the formatter
+  properties. For example: unordered set of enabled formatters. This
+  is used by assistant for "enabled". We should also populate it with
+  enabled facets so that helpers can determine their status (e.g. io
+  helpers when used from types
+
+*** Rename formattables properties to configuration                   :story:
+
+As part of the big rename we were supposed to rename all properties to
+configuration. We seem to have missed the ones inside of formattables.
 
 *** Do not compute inclusion directives for system models             :story:
 
@@ -1255,27 +1219,6 @@ need a way to determine if this type needs computations or not. We
 need to create a story to clean up the =origin_type= and
 =generation_type= and then we can make use of it to determine if we
 need to compute inclusion, path etc or not.
-
-*** Add formattable element                                           :story:
-
-Tasks:
-
-- rename properties back to formattables.
-- create a top-level type that has formatter, element properties and
-  element. Must be non-generatable. Add formattable id as the sum of
-  element id and formatter id.
-- add =formattables::model= as an unordered map of id to
-  formattable. Implement formatting workflow in terms of formattables
-  model. Add all context properties to model such as
-  streaming_settings_repository and helpers_. element_settings should
-  be merged with configuration.
-- remove formatting context and update formatting workflow to call a
-  visitor to resolve the element and then call the formatter.
-- add an enablement map for all formatters in the formatter
-  properties. For example: unordered set of enabled formatters. This
-  is used by assistant for "enabled". We should also populate it with
-  enabled facets so that helpers can determine their status (e.g. io
-  helpers when used from types
 
 *** Add transformer to quilt.cpp                                      :story:
 
@@ -1377,9 +1320,32 @@ Generates the header guards.
 
 Generates the aspect configuration.
 
+*** Check which properties need to loop through the entire model      :story:
+
+In certain cases such as helpers we probably don't need to go through
+all types; only the target types matter. Ensure we are not processing
+other types for no reason.
+
+Merged stories:
+
+*Element properties includes non-target types*
+
+We seem to be generating a lot of element properties and formatter
+properties as well. We should only be generating these for the target
+model.
+
 *** Add helper generator to quilt.cpp                                 :story:
 
 Generates the helper configuration.
+
+*** Remove =optional<list>=                                           :story:
+
+We should not really be using optional<list>. The empty list is
+sufficient for this.
+
+Uses:
+
+- include provider. Fixed with other story.
 
 *** Add file properties generator to to quilt.cpp                     :story:
 
@@ -1479,6 +1445,51 @@ to test it and ensure we didn't break anything.
 
 We should check to ensure that only one formatter per facet is
 declared the canonical formatter.
+
+*** Consider using indices rather than associative containers          :epic:
+
+Once we generate the final model the model becomes constant; this
+means we can easily assign an [[https://en.wikipedia.org/wiki/Ordinal_number][ordinal number]] to each model
+element. These could be arranged so that we always start with
+generatable types first; this way we always generate dense
+containers - there are some cases where we need both generatable types
+and non-generatable types; in other cases we just need generatable
+types; we never need just non-generatable types. We also need to know
+the position of the first non-generatable type (or alternatively, the
+size of the generatable types set).
+
+Once we have this, we can start creating vectors with a fixed size
+(either total number of elements or just size of generatable
+types). We can also make it so that each name has an id which is the
+ordinal (another model post-processing activity). Actually we should
+call it "type index" or some other name because its a transient
+id. This means both properties and settings require no lookups at all
+since all positions are known beforehand (except in cases where the
+key of the associative container must be the =yarn::name= because we
+use it for processing).
+
+In theory, a similar approach can be done for formatters too. We know
+upfront what the ordinal number is for each formatter because they are
+all registered before we start processing. If formatters obtained
+their ordinal number at registration, wherever we are using a map of
+formatter name to a resource, we could use a fixed-size
+vector. However, formatters may be sparse in many cases (if not all
+cases?). For example, we do not have formatter properties for all
+formatters for every =yarn::name= because many (most) formatters don't
+make sense for every yarn type. Thus this is less applicable, at least
+for formatter properties. We need to look carefully at all use cases
+and see if there is any place where this approach is applicable. It is
+probably going to be more useful for formatters than elements.
+
+Tasks:
+
+- in resolver, assign element indices and update property names with
+  them.
+- change final model to have a vector of size maximum index (a
+  property of the intermediate model).
+- in the final model generation, for each type, look at its index and
+  populate the slot accordingly.
+- update quilt to use the indices where possible.
 
 ** Deprecated
 *** CANCELLED Consider renaming formatters                            :story:

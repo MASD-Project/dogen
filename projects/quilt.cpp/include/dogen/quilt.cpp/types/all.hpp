@@ -53,6 +53,7 @@
 #include "dogen/quilt.cpp/types/annotations/initializer.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
 #include "dogen/quilt.cpp/types/fabric/registrar_factory.hpp"
+#include "dogen/quilt.cpp/types/formattables/formattable.hpp"
 #include "dogen/quilt.cpp/types/formattables/name_builder.hpp"
 #include "dogen/quilt.cpp/types/formatters/building_error.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/initializer.hpp"
