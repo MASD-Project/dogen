@@ -29,7 +29,7 @@
 #include "dogen/yarn/io/languages_io.hpp"
 #include "dogen/quilt.cpp/io/annotations/streaming_annotations_io.hpp"
 #include "dogen/quilt.cpp/io/annotations/helper_annotations_io.hpp"
-#include "dogen/quilt.cpp/io/formattables/helper_properties_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/helper_configuration_io.hpp"
 #include "dogen/quilt.cpp/types/formattables/name_builder.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/odb/traits.hpp"
@@ -63,7 +63,7 @@ const std::string file_path_not_set(
     "File path for formatter is not set. Formatter: ");
 const std::string header_guard_not_set(
     "Header guard for formatter is not set. Formatter: ");
-const std::string formatter_properties_missing(
+const std::string formatter_configuration_missing(
     "Could not find formatter properties for formatter: ");
 const std::string facet_directory_missing(
     "Facet directory is missing for facet: ");
@@ -97,7 +97,8 @@ get_identifiable_and_qualified(const IdentifiableAndQualified& iaq) {
 assistant::assistant(const context& ctx, const dynamic::ownership_hierarchy& oh,
     const bool requires_header_guard, const std::string& id) :
     context_(ctx),
-    formatter_properties_(obtain_formatter_properties(oh.formatter_name())),
+    formatter_configuration_(
+        obtain_formatter_configuration(oh.formatter_name())),
     ownership_hierarchy_(oh), requires_header_guard_(requires_header_guard) {
 
     BOOST_LOG_SEV(lg, debug) << "Processing element: " << id
@@ -152,14 +153,14 @@ std::string assistant::get_product_name(const yarn::name& n) const {
     return n.location().external_modules().front();
 }
 
-formattables::formatter_properties assistant::
-obtain_formatter_properties(const std::string& formatter_name) const {
-    const auto& fn(formatter_name);
-    const auto i(context_.element_properties().formatter_properties().find(fn));
-    if (i == context_.element_properties().formatter_properties().end()) {
-        BOOST_LOG_SEV(lg, error) << formatter_properties_missing
+formattables::formatter_configuration assistant::
+obtain_formatter_configuration(const std::string& formatter_name) const {
+    const auto& ec(context_.element_configuration());
+    const auto i(ec.formatter_configuration().find(formatter_name));
+    if (i == context_.element_configuration().formatter_configuration().end()) {
+        BOOST_LOG_SEV(lg, error) << formatter_configuration_missing
                                  << formatter_name;
-        BOOST_THROW_EXCEPTION(formatting_error(formatter_properties_missing +
+        BOOST_THROW_EXCEPTION(formatting_error(formatter_configuration_missing +
                 formatter_name));
     }
     return i->second;
@@ -182,14 +183,14 @@ std::list<std::string> assistant::make_namespaces(const yarn::name& n) const {
 
 bool assistant::
 is_formatter_enabled(const std::string& formatter_name) const {
-    const auto& fp(formatter_properties_);
+    const auto& fp(formatter_configuration_);
     const auto i(fp.enabled_formatters().find(formatter_name));
     return i != fp.enabled_formatters().end();
 }
 
 std::string assistant::
 get_facet_directory_for_facet(const std::string& facet_name) const {
-    const auto& fdff(formatter_properties_.facet_directory_for_facet());
+    const auto& fdff(formatter_configuration_.facet_directory_for_facet());
     const auto i(fdff.find(facet_name));
     if (i == fdff.end()) {
         BOOST_LOG_SEV(lg, error) << facet_directory_missing << facet_name;
@@ -205,18 +206,18 @@ std::string assistant::get_odb_facet_directory() const {
 }
 
 bool assistant::requires_manual_default_constructor() const {
-    const auto& ap(context_.element_properties().aspect_properties());
-    return ap.requires_manual_default_constructor();
+    const auto& ac(context_.element_configuration().aspect_configuration());
+    return ac.requires_manual_default_constructor();
 }
 
 bool assistant::requires_manual_move_constructor() const {
-    const auto& ap(context_.element_properties().aspect_properties());
-    return ap.requires_manual_move_constructor();
+    const auto& ac(context_.element_configuration().aspect_configuration());
+    return ac.requires_manual_move_constructor();
 }
 
 bool assistant::requires_stream_manipulators() const {
-    const auto& ap(context_.element_properties().aspect_properties());
-    return ap.requires_stream_manipulators();
+    const auto& ac(context_.element_configuration().aspect_configuration());
+    return ac.requires_stream_manipulators();
 }
 
 bool assistant::is_serialization_enabled() const {
@@ -246,7 +247,7 @@ bool assistant::is_odb_enabled() const {
 
 void assistant::validate() const {
     const auto& fn(ownership_hierarchy_.formatter_name());
-    const auto& fp(formatter_properties_);
+    const auto& fp(formatter_configuration_);
     if (fp.file_path().empty()) {
         BOOST_LOG_SEV(lg, error) << file_path_not_set << fn;
         BOOST_THROW_EXCEPTION(formatting_error(file_path_not_set + fn));
@@ -263,8 +264,8 @@ void assistant::validate() const {
 
 dogen::formatters::cpp::scoped_boilerplate_formatter
 assistant::make_scoped_boilerplate_formatter() {
-    const auto& fp(formatter_properties_);
-    const auto dc(context_.element_properties().decoration_configuration());
+    const auto& fp(formatter_configuration_);
+    const auto dc(context_.element_configuration().decoration_configuration());
     return dogen::formatters::cpp::scoped_boilerplate_formatter(
         stream(), dc, fp.inclusion_dependencies(),
         fp.header_guard() ? *(fp.header_guard()) : empty);
@@ -278,7 +279,7 @@ assistant::make_scoped_namespace_formatter(const std::list<std::string>& ns) {
 }
 
 void assistant::make_decoration_preamble() {
-    const auto dc(context_.element_properties().decoration_configuration());
+    const auto dc(context_.element_configuration().decoration_configuration());
     make_decoration_preamble(dc);
 }
 
@@ -367,8 +368,8 @@ std::string assistant::comment_inline(const std::string& c) const {
 }
 
 std::list<std::shared_ptr<formatters::helper_formatter_interface>>
-assistant::get_helpers(const formattables::helper_properties& hp) const {
-    const auto s(hp.current().helper_annotations());
+assistant::get_helpers(const formattables::helper_configuration& hc) const {
+    const auto s(hc.current().helper_annotations());
 
     /*
      * A family must have at least one helper registered. This is a
@@ -404,7 +405,7 @@ bool assistant::is_io() const {
 }
 
 bool assistant::
-is_streaming_enabled(const formattables::helper_properties& hp) const {
+is_streaming_enabled(const formattables::helper_configuration& hc) const {
     /*
      * If the IO facet is globally disabled, we don't need streaming.
      */
@@ -415,7 +416,7 @@ is_streaming_enabled(const formattables::helper_properties& hp) const {
      * If we are in the IO facet, and we are not in an inheritance
      * relationship we need streaming.
      */
-    if (is_io() && !hp.in_inheritance_relationship())
+    if (is_io() && !hc.in_inheritance_relationship())
         return true;
 
     /*
@@ -426,33 +427,33 @@ is_streaming_enabled(const formattables::helper_properties& hp) const {
     const auto cifn(tt::class_implementation_formatter_name());
     const auto fn(ownership_hierarchy_.formatter_name());
     bool in_types_class_implementation(fn == cifn);
-    return in_types_class_implementation && hp.in_inheritance_relationship();
+    return in_types_class_implementation && hc.in_inheritance_relationship();
 }
 
 void assistant::add_helper_methods() {
-    if (context_.element_properties().helper_properties().empty()) {
+    if (context_.element_configuration().helper_configuration().empty()) {
         // FIXME: supply target name as an argument and print its ID
         // FIXME: here. This needs to wait until we start using yarn
         // FIXME: types on all formatters.
         BOOST_LOG_SEV(lg, debug) << "No helper methods for: ";
     }
 
-    for (const auto& hp : context_.element_properties().helper_properties()) {
-        BOOST_LOG_SEV(lg, debug) << "Helper properties: " << hp;
-        const auto helpers(get_helpers(hp));
+    for (const auto& hc : context_.element_configuration().helper_configuration()) {
+        BOOST_LOG_SEV(lg, debug) << "Helper properties: " << hc;
+        const auto helpers(get_helpers(hc));
 
         /*
          * Check to see if the helper is enabled, given the system's
          * current configuration. If enabled, format it.
          */
         for (const auto& h : helpers) {
-            if (!h->is_enabled(*this, hp)) {
+            if (!h->is_enabled(*this, hc)) {
                 BOOST_LOG_SEV(lg, debug) << "Helper is not enabled." << h->id();
                 continue;
             }
 
             BOOST_LOG_SEV(lg, debug) << "Formatting with helper: " << h->id();
-            h->format(*this, hp);
+            h->format(*this, hc);
         }
     }
 }
@@ -504,9 +505,10 @@ streaming_for_type(const formattables::helper_descriptor& hd,
 
 bool assistant::
 requires_hashing_helper_method(const yarn::attribute& attr) const {
-    for (const auto& hp : context_.element_properties().helper_properties()) {
+    const auto& ec(context_.element_configuration());
+    for (const auto& hc : ec.helper_configuration()) {
         const auto ident(attr.parsed_type().identifiable());
-        const auto& desc(hp.current());
+        const auto& desc(hc.current());
         if (ident != desc.name_tree_identifiable())
             continue;
 
@@ -559,7 +561,7 @@ std::ostream& assistant::stream() {
 dogen::formatters::file assistant::make_file() const {
     dogen::formatters::file r;
     r.content(stream_.str());
-    r.path(formatter_properties_.file_path());
+    r.path(formatter_configuration_.file_path());
 
     // FIXME: determine overwrite flag
     // r.overwrite(overwrite);

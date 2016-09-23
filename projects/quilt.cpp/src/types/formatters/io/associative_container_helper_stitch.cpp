@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/formattables/helper_properties.hpp"
+#include "dogen/quilt.cpp/types/formattables/helper_configuration.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
@@ -66,20 +66,20 @@ std::string associative_container_helper::helper_name() const {
 }
 
 bool associative_container_helper::is_enabled(const assistant& a,
-    const formattables::helper_properties& hp) const {
-    return a.is_streaming_enabled(hp);
+    const formattables::helper_configuration& hc) const {
+    return a.is_streaming_enabled(hc);
 }
 
 void associative_container_helper::
-format(assistant& a, const formattables::helper_properties& hp) const {
+format(assistant& a, const formattables::helper_configuration& hc) const {
     {
-        const auto d(hp.current());
+        const auto d(hc.current());
         const auto qn(d.name_tree_qualified());
         auto snf(a.make_scoped_namespace_formatter(d.namespaces()));
 
-        if (hp.direct_descendants().size() == 2) {
-            const auto key(hp.direct_descendants().front());
-            const auto value(hp.direct_descendants().back());
+        if (hc.direct_descendants().size() == 2) {
+            const auto key(hc.direct_descendants().front());
+            const auto value(hc.direct_descendants().back());
 a.stream() << std::endl;
 a.stream() << "inline std::ostream& operator<<(std::ostream& s, const " << qn << "& v) {" << std::endl;
 a.stream() << "    s << \"[\";" << std::endl;
@@ -96,7 +96,7 @@ a.stream() << "    return s;" << std::endl;
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;
         } else {
-        const auto containee(hp.direct_descendants().front());
+        const auto containee(hc.direct_descendants().front());
 a.stream() << std::endl;
 a.stream() << "inline std::ostream& operator<<(std::ostream& s, const " << qn << "& v) {" << std::endl;
 a.stream() << "    s << \"[ \";" << std::endl;

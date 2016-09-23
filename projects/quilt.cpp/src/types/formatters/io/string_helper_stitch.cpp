@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/formattables/helper_properties.hpp"
+#include "dogen/quilt.cpp/types/formattables/helper_configuration.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
@@ -63,12 +63,12 @@ std::string string_helper::helper_name() const {
 }
 
 bool string_helper::is_enabled(const assistant& a,
-const formattables::helper_properties& hp) const {
-    return a.is_streaming_enabled(hp);
+const formattables::helper_configuration& hc) const {
+    return a.is_streaming_enabled(hc);
 }
 
 void string_helper::
-format(assistant& a, const formattables::helper_properties& /*hp*/) const {
+format(assistant& a, const formattables::helper_configuration& /*hc*/) const {
 a.stream() << "inline std::string tidy_up_string(std::string s) {" << std::endl;
 a.stream() << "    boost::replace_all(s, \"\\r\\n\", \"<new_line>\");" << std::endl;
 a.stream() << "    boost::replace_all(s, \"\\n\", \"<new_line>\");" << std::endl;

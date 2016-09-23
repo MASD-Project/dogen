@@ -29,7 +29,7 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen/quilt.cpp/types/formattables/helper_properties.hpp"
+#include "dogen/quilt.cpp/types/formattables/helper_configuration.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/helper_properties_repository_fwd_ser.hpp"
 
 namespace dogen {
@@ -45,7 +45,7 @@ public:
     ~helper_properties_repository() = default;
 
 public:
-    explicit helper_properties_repository(const std::unordered_map<std::string, std::list<dogen::quilt::cpp::formattables::helper_properties> >& by_id);
+    explicit helper_properties_repository(const std::unordered_map<std::string, std::list<dogen::quilt::cpp::formattables::helper_configuration> >& by_id);
 
 private:
     template<typename Archive>
@@ -55,10 +55,10 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::formattables::helper_properties_repository& v, unsigned int version);
 
 public:
-    const std::unordered_map<std::string, std::list<dogen::quilt::cpp::formattables::helper_properties> >& by_id() const;
-    std::unordered_map<std::string, std::list<dogen::quilt::cpp::formattables::helper_properties> >& by_id();
-    void by_id(const std::unordered_map<std::string, std::list<dogen::quilt::cpp::formattables::helper_properties> >& v);
-    void by_id(const std::unordered_map<std::string, std::list<dogen::quilt::cpp::formattables::helper_properties> >&& v);
+    const std::unordered_map<std::string, std::list<dogen::quilt::cpp::formattables::helper_configuration> >& by_id() const;
+    std::unordered_map<std::string, std::list<dogen::quilt::cpp::formattables::helper_configuration> >& by_id();
+    void by_id(const std::unordered_map<std::string, std::list<dogen::quilt::cpp::formattables::helper_configuration> >& v);
+    void by_id(const std::unordered_map<std::string, std::list<dogen::quilt::cpp::formattables::helper_configuration> >&& v);
 
 public:
     bool operator==(const helper_properties_repository& rhs) const;
@@ -71,7 +71,7 @@ public:
     helper_properties_repository& operator=(helper_properties_repository other);
 
 private:
-    std::unordered_map<std::string, std::list<dogen::quilt::cpp::formattables::helper_properties> > by_id_;
+    std::unordered_map<std::string, std::list<dogen::quilt::cpp::formattables::helper_configuration> > by_id_;
 };
 
 } } } }

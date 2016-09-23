@@ -28,7 +28,7 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen/quilt.cpp/types/formattables/formatter_properties.hpp"
+#include "dogen/quilt.cpp/types/formattables/formatter_configuration.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/formatter_properties_repository_fwd_ser.hpp"
 
 namespace dogen {
@@ -44,7 +44,7 @@ public:
     ~formatter_properties_repository() = default;
 
 public:
-    explicit formatter_properties_repository(const std::unordered_map<std::string, std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties> >& by_id);
+    explicit formatter_properties_repository(const std::unordered_map<std::string, std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration> >& by_id);
 
 private:
     template<typename Archive>
@@ -54,10 +54,10 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::formattables::formatter_properties_repository& v, unsigned int version);
 
 public:
-    const std::unordered_map<std::string, std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties> >& by_id() const;
-    std::unordered_map<std::string, std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties> >& by_id();
-    void by_id(const std::unordered_map<std::string, std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties> >& v);
-    void by_id(const std::unordered_map<std::string, std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties> >&& v);
+    const std::unordered_map<std::string, std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration> >& by_id() const;
+    std::unordered_map<std::string, std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration> >& by_id();
+    void by_id(const std::unordered_map<std::string, std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration> >& v);
+    void by_id(const std::unordered_map<std::string, std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration> >&& v);
 
 public:
     bool operator==(const formatter_properties_repository& rhs) const;
@@ -70,7 +70,7 @@ public:
     formatter_properties_repository& operator=(formatter_properties_repository other);
 
 private:
-    std::unordered_map<std::string, std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties> > by_id_;
+    std::unordered_map<std::string, std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration> > by_id_;
 };
 
 } } } }

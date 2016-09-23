@@ -5,7 +5,7 @@
 <#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/serialization/path_helper_stitch.hpp" #>
 <#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/assistant.hpp" #>
 <#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/serialization/traits.hpp" #>
-<#@ inclusion_dependency="dogen/quilt.cpp/types/formattables/helper_properties.hpp" #>
+<#@ inclusion_dependency="dogen/quilt.cpp/types/formattables/helper_configuration.hpp" #>
 <#@ containing_namespaces=dogen::quilt::cpp::formatters::serialization #>
 <#+
 
@@ -37,7 +37,7 @@ path_helper::owning_facets() const {
 }
 
 bool path_helper::is_enabled(const assistant& /*a*/,
-    const formattables::helper_properties& /*hp*/) const {
+    const formattables::helper_configuration& /*hc*/) const {
     return true;
 }
 
@@ -47,9 +47,9 @@ std::string path_helper::helper_name() const {
 }
 
 void path_helper::
-format(assistant& a, const formattables::helper_properties& hp) const {
+format(assistant& a, const formattables::helper_configuration& hc) const {
     {
-        const auto d(hp.current());
+        const auto d(hc.current());
         const auto nt_qn(d.name_tree_qualified());
 #>
 namespace boost {

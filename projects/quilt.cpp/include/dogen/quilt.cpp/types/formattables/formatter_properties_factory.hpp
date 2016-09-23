@@ -30,7 +30,7 @@
 #include <unordered_set>
 #include <unordered_map>
 #include "dogen/quilt.cpp/types/formattables/path_derivatives.hpp"
-#include "dogen/quilt.cpp/types/formattables/formatter_properties.hpp"
+#include "dogen/quilt.cpp/types/formattables/formatter_configuration.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -45,7 +45,7 @@ public:
     /**
      * @brief Create the formatter properties.
      */
-    std::unordered_map<std::string, formatter_properties>
+    std::unordered_map<std::string, formatter_configuration>
     make(const std::unordered_map<std::string, path_derivatives>&
         path_derivatives,
         const std::unordered_map<std::string, std::list<std::string> >&

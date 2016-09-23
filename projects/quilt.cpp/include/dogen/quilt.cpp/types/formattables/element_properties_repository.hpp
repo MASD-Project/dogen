@@ -28,7 +28,7 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen/quilt.cpp/types/formattables/element_properties.hpp"
+#include "dogen/quilt.cpp/types/formattables/element_configuration.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/element_properties_repository_fwd_ser.hpp"
 
 namespace dogen {
@@ -44,7 +44,7 @@ public:
     ~element_properties_repository() = default;
 
 public:
-    explicit element_properties_repository(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::element_properties>& by_id);
+    explicit element_properties_repository(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::element_configuration>& by_id);
 
 private:
     template<typename Archive>
@@ -54,10 +54,10 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::formattables::element_properties_repository& v, unsigned int version);
 
 public:
-    const std::unordered_map<std::string, dogen::quilt::cpp::formattables::element_properties>& by_id() const;
-    std::unordered_map<std::string, dogen::quilt::cpp::formattables::element_properties>& by_id();
-    void by_id(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::element_properties>& v);
-    void by_id(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::element_properties>&& v);
+    const std::unordered_map<std::string, dogen::quilt::cpp::formattables::element_configuration>& by_id() const;
+    std::unordered_map<std::string, dogen::quilt::cpp::formattables::element_configuration>& by_id();
+    void by_id(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::element_configuration>& v);
+    void by_id(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::element_configuration>&& v);
 
 public:
     bool operator==(const element_properties_repository& rhs) const;
@@ -70,7 +70,7 @@ public:
     element_properties_repository& operator=(element_properties_repository other);
 
 private:
-    std::unordered_map<std::string, dogen::quilt::cpp::formattables::element_properties> by_id_;
+    std::unordered_map<std::string, dogen::quilt::cpp::formattables::element_configuration> by_id_;
 };
 
 } } } }

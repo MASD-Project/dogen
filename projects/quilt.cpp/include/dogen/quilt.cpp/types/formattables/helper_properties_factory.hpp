@@ -32,7 +32,7 @@
 #include <boost/optional.hpp>
 #include "dogen/yarn/types/attribute.hpp"
 #include "dogen/yarn/types/name_tree.hpp"
-#include "dogen/quilt.cpp/types/formattables/helper_properties.hpp"
+#include "dogen/quilt.cpp/types/formattables/helper_configuration.hpp"
 #include "dogen/quilt.cpp/types/annotations/helper_annotations_repository.hpp"
 #include "dogen/quilt.cpp/types/annotations/streaming_annotations_repository.hpp"
 
@@ -63,10 +63,10 @@ private:
     make(const bool in_inheritance_relationship,
         const bool inherit_opaqueness_from_parent,
         const yarn::name_tree& nt, std::unordered_set<std::string>& done,
-        std::list<helper_properties>& properties) const;
+        std::list<helper_configuration>& configuration) const;
 
 public:
-    std::list<helper_properties>
+    std::list<helper_configuration>
     make(const bool in_inheritance_relationship,
         const std::list<yarn::attribute>& attributes) const;
 

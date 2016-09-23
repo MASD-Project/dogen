@@ -27,7 +27,7 @@
 
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
-#include "dogen/quilt.cpp/types/formattables/element_properties.hpp"
+#include "dogen/quilt.cpp/types/formattables/element_configuration.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/formattable_fwd_ser.hpp"
 
 namespace dogen {
@@ -45,7 +45,7 @@ public:
 public:
     formattable(
         const boost::shared_ptr<dogen::yarn::element>& element,
-        const dogen::quilt::cpp::formattables::element_properties& properties);
+        const dogen::quilt::cpp::formattables::element_configuration& configuration);
 
 private:
     template<typename Archive>
@@ -60,10 +60,10 @@ public:
     void element(const boost::shared_ptr<dogen::yarn::element>& v);
     void element(const boost::shared_ptr<dogen::yarn::element>&& v);
 
-    const dogen::quilt::cpp::formattables::element_properties& properties() const;
-    dogen::quilt::cpp::formattables::element_properties& properties();
-    void properties(const dogen::quilt::cpp::formattables::element_properties& v);
-    void properties(const dogen::quilt::cpp::formattables::element_properties&& v);
+    const dogen::quilt::cpp::formattables::element_configuration& configuration() const;
+    dogen::quilt::cpp::formattables::element_configuration& configuration();
+    void configuration(const dogen::quilt::cpp::formattables::element_configuration& v);
+    void configuration(const dogen::quilt::cpp::formattables::element_configuration&& v);
 
 public:
     bool operator==(const formattable& rhs) const;
@@ -77,7 +77,7 @@ public:
 
 private:
     boost::shared_ptr<dogen::yarn::element> element_;
-    dogen::quilt::cpp::formattables::element_properties properties_;
+    dogen::quilt::cpp::formattables::element_configuration configuration_;
 };
 
 } } } }

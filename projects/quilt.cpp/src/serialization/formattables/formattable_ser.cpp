@@ -30,7 +30,7 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/yarn/serialization/element_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/formattable_ser.hpp"
-#include "dogen/quilt.cpp/serialization/formattables/element_properties_ser.hpp"
+#include "dogen/quilt.cpp/serialization/formattables/element_configuration_ser.hpp"
 
 namespace boost {
 namespace serialization {
@@ -40,7 +40,7 @@ void save(Archive& ar,
     const dogen::quilt::cpp::formattables::formattable& v,
     const unsigned int /*version*/) {
     ar << make_nvp("element", v.element_);
-    ar << make_nvp("properties", v.properties_);
+    ar << make_nvp("configuration", v.configuration_);
 }
 
 template<typename Archive>
@@ -48,7 +48,7 @@ void load(Archive& ar,
     dogen::quilt::cpp::formattables::formattable& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("element", v.element_);
-    ar >> make_nvp("properties", v.properties_);
+    ar >> make_nvp("configuration", v.configuration_);
 }
 
 } }

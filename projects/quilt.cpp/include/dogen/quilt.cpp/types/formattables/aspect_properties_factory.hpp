@@ -29,7 +29,7 @@
 #include <boost/optional.hpp>
 #include "dogen/yarn/types/attribute.hpp"
 #include "dogen/yarn/types/name_tree.hpp"
-#include "dogen/quilt.cpp/types/formattables/aspect_properties.hpp"
+#include "dogen/quilt.cpp/types/formattables/aspect_configuration.hpp"
 #include "dogen/quilt.cpp/types/annotations/aspect_annotations_repository.hpp"
 
 namespace dogen {
@@ -44,10 +44,11 @@ public:
 
 private:
     void compute_properties(const yarn::name_tree& nt,
-        const bool is_top_level, aspect_properties& ap) const;
+        const bool is_top_level, aspect_configuration& ap) const;
 
 public:
-    aspect_properties make(const std::list<yarn::attribute>& attributes) const;
+    aspect_configuration make(
+        const std::list<yarn::attribute>& attributes) const;
 
 private:
     const annotations::aspect_annotations_repository& repository_;

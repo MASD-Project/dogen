@@ -28,7 +28,7 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen/quilt.cpp/types/formattables/aspect_properties.hpp"
+#include "dogen/quilt.cpp/types/formattables/aspect_configuration.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/aspect_properties_repository_fwd_ser.hpp"
 
 namespace dogen {
@@ -44,7 +44,7 @@ public:
     ~aspect_properties_repository() = default;
 
 public:
-    explicit aspect_properties_repository(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::aspect_properties>& by_id);
+    explicit aspect_properties_repository(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::aspect_configuration>& by_id);
 
 private:
     template<typename Archive>
@@ -54,10 +54,10 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::formattables::aspect_properties_repository& v, unsigned int version);
 
 public:
-    const std::unordered_map<std::string, dogen::quilt::cpp::formattables::aspect_properties>& by_id() const;
-    std::unordered_map<std::string, dogen::quilt::cpp::formattables::aspect_properties>& by_id();
-    void by_id(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::aspect_properties>& v);
-    void by_id(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::aspect_properties>&& v);
+    const std::unordered_map<std::string, dogen::quilt::cpp::formattables::aspect_configuration>& by_id() const;
+    std::unordered_map<std::string, dogen::quilt::cpp::formattables::aspect_configuration>& by_id();
+    void by_id(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::aspect_configuration>& v);
+    void by_id(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::aspect_configuration>&& v);
 
 public:
     bool operator==(const aspect_properties_repository& rhs) const;
@@ -70,7 +70,7 @@ public:
     aspect_properties_repository& operator=(aspect_properties_repository other);
 
 private:
-    std::unordered_map<std::string, dogen::quilt::cpp::formattables::aspect_properties> by_id_;
+    std::unordered_map<std::string, dogen::quilt::cpp::formattables::aspect_configuration> by_id_;
 };
 
 } } } }

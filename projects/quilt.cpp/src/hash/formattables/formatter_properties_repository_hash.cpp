@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/hash/formattables/formatter_properties_hash.hpp"
+#include "dogen/quilt.cpp/hash/formattables/formatter_configuration_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/formatter_properties_repository_hash.hpp"
 
 namespace {
@@ -29,7 +29,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formatter_properties(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties>& v) {
+inline std::size_t hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formatter_configuration(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -38,11 +38,11 @@ inline std::size_t hash_std_unordered_map_std_string_dogen_quilt_cpp_formattable
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formatter_properties(const std::unordered_map<std::string, std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties> >& v) {
+inline std::size_t hash_std_unordered_map_std_string_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formatter_configuration(const std::unordered_map<std::string, std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
-        combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formatter_properties(i.second));
+        combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formatter_configuration(i.second));
     }
     return seed;
 }
@@ -57,7 +57,7 @@ namespace formattables {
 std::size_t formatter_properties_repository_hasher::hash(const formatter_properties_repository& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_unordered_map_std_string_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formatter_properties(v.by_id()));
+    combine(seed, hash_std_unordered_map_std_string_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formatter_configuration(v.by_id()));
     return seed;
 }
 

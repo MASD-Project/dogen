@@ -37,19 +37,19 @@ namespace formattables {
 
 formattable::formattable(
     const boost::shared_ptr<dogen::yarn::element>& element,
-    const dogen::quilt::cpp::formattables::element_properties& properties)
+    const dogen::quilt::cpp::formattables::element_configuration& configuration)
     : element_(element),
-      properties_(properties) { }
+      configuration_(configuration) { }
 
 void formattable::swap(formattable& other) noexcept {
     using std::swap;
     swap(element_, other.element_);
-    swap(properties_, other.properties_);
+    swap(configuration_, other.configuration_);
 }
 
 bool formattable::operator==(const formattable& rhs) const {
     return element_ == rhs.element_ &&
-        properties_ == rhs.properties_;
+        configuration_ == rhs.configuration_;
 }
 
 formattable& formattable::operator=(formattable other) {
@@ -74,20 +74,20 @@ void formattable::element(const boost::shared_ptr<dogen::yarn::element>&& v) {
     element_ = std::move(v);
 }
 
-const dogen::quilt::cpp::formattables::element_properties& formattable::properties() const {
-    return properties_;
+const dogen::quilt::cpp::formattables::element_configuration& formattable::configuration() const {
+    return configuration_;
 }
 
-dogen::quilt::cpp::formattables::element_properties& formattable::properties() {
-    return properties_;
+dogen::quilt::cpp::formattables::element_configuration& formattable::configuration() {
+    return configuration_;
 }
 
-void formattable::properties(const dogen::quilt::cpp::formattables::element_properties& v) {
-    properties_ = v;
+void formattable::configuration(const dogen::quilt::cpp::formattables::element_configuration& v) {
+    configuration_ = v;
 }
 
-void formattable::properties(const dogen::quilt::cpp::formattables::element_properties&& v) {
-    properties_ = std::move(v);
+void formattable::configuration(const dogen::quilt::cpp::formattables::element_configuration&& v) {
+    configuration_ = std::move(v);
 }
 
 } } } }

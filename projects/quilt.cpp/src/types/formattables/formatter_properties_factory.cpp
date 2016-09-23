@@ -28,7 +28,7 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-std::unordered_map<std::string, formatter_properties>
+std::unordered_map<std::string, formatter_configuration>
 formatter_properties_factory::make(
     const std::unordered_map<std::string, path_derivatives>&
     path_derivatives,
@@ -39,7 +39,7 @@ formatter_properties_factory::make(
     std::unordered_map<std::string, std::string>
     facet_directory_for_facet) const {
 
-    std::unordered_map<std::string, formatter_properties> r;
+    std::unordered_map<std::string, formatter_configuration> r;
     for (const auto& pair : path_derivatives) {
         auto& entry(r[pair.first]);
         entry.file_path(pair.second.file_path());

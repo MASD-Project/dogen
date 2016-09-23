@@ -25,7 +25,7 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-formatter_properties_repository::formatter_properties_repository(const std::unordered_map<std::string, std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties> >& by_id)
+formatter_properties_repository::formatter_properties_repository(const std::unordered_map<std::string, std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration> >& by_id)
     : by_id_(by_id) { }
 
 void formatter_properties_repository::swap(formatter_properties_repository& other) noexcept {
@@ -43,19 +43,19 @@ formatter_properties_repository& formatter_properties_repository::operator=(form
     return *this;
 }
 
-const std::unordered_map<std::string, std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties> >& formatter_properties_repository::by_id() const {
+const std::unordered_map<std::string, std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration> >& formatter_properties_repository::by_id() const {
     return by_id_;
 }
 
-std::unordered_map<std::string, std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties> >& formatter_properties_repository::by_id() {
+std::unordered_map<std::string, std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration> >& formatter_properties_repository::by_id() {
     return by_id_;
 }
 
-void formatter_properties_repository::by_id(const std::unordered_map<std::string, std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties> >& v) {
+void formatter_properties_repository::by_id(const std::unordered_map<std::string, std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration> >& v) {
     by_id_ = v;
 }
 
-void formatter_properties_repository::by_id(const std::unordered_map<std::string, std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties> >&& v) {
+void formatter_properties_repository::by_id(const std::unordered_map<std::string, std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration> >&& v) {
     by_id_ = std::move(v);
 }
 

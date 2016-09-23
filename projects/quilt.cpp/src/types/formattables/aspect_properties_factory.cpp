@@ -30,13 +30,13 @@ aspect_properties_factory::aspect_properties_factory(
     : repository_(asrp) { }
 
 void aspect_properties_factory::compute_properties(const yarn::name_tree& nt,
-    const bool is_top_level, aspect_properties& ap) const {
+    const bool is_top_level, aspect_configuration& ac) const {
 
     for (const auto& c : nt.children())
-        compute_properties(c, false/*is_top_level*/, ap);
+        compute_properties(c, false/*is_top_level*/, ac);
 
     if (is_top_level && nt.is_current_simple_type())
-        ap.requires_manual_default_constructor(true);
+        ac.requires_manual_default_constructor(true);
 
     const auto i(repository_.by_id().find(nt.current().id()));
     if (i == repository_.by_id().end())
@@ -44,21 +44,21 @@ void aspect_properties_factory::compute_properties(const yarn::name_tree& nt,
 
     const auto as(i->second);
     if (as.requires_stream_manipulators())
-        ap.requires_stream_manipulators(true);
+        ac.requires_stream_manipulators(true);
 
     if (!is_top_level)
         return;
 
     if (as.requires_manual_default_constructor())
-        ap.requires_manual_default_constructor(true);
+        ac.requires_manual_default_constructor(true);
 
     if (as.requires_manual_move_constructor())
-        ap.requires_manual_move_constructor(true);
+        ac.requires_manual_move_constructor(true);
 }
 
-aspect_properties aspect_properties_factory::
+aspect_configuration aspect_properties_factory::
 make(const std::list<yarn::attribute>& attributes) const {
-    aspect_properties r;
+    aspect_configuration r;
     for (const auto a : attributes) {
         const auto& nt(a.parsed_type());
         compute_properties(nt, true/*is_top_level*/, r);

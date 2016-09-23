@@ -25,7 +25,7 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-element_properties_repository::element_properties_repository(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::element_properties>& by_id)
+element_properties_repository::element_properties_repository(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::element_configuration>& by_id)
     : by_id_(by_id) { }
 
 void element_properties_repository::swap(element_properties_repository& other) noexcept {
@@ -43,19 +43,19 @@ element_properties_repository& element_properties_repository::operator=(element_
     return *this;
 }
 
-const std::unordered_map<std::string, dogen::quilt::cpp::formattables::element_properties>& element_properties_repository::by_id() const {
+const std::unordered_map<std::string, dogen::quilt::cpp::formattables::element_configuration>& element_properties_repository::by_id() const {
     return by_id_;
 }
 
-std::unordered_map<std::string, dogen::quilt::cpp::formattables::element_properties>& element_properties_repository::by_id() {
+std::unordered_map<std::string, dogen::quilt::cpp::formattables::element_configuration>& element_properties_repository::by_id() {
     return by_id_;
 }
 
-void element_properties_repository::by_id(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::element_properties>& v) {
+void element_properties_repository::by_id(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::element_configuration>& v) {
     by_id_ = v;
 }
 
-void element_properties_repository::by_id(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::element_properties>&& v) {
+void element_properties_repository::by_id(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::element_configuration>&& v) {
     by_id_ = std::move(v);
 }
 

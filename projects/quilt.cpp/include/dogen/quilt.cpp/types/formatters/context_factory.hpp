@@ -49,7 +49,7 @@ public:
         std::list<std::shared_ptr<helper_formatter_interface>>>>& helpers);
 
 private:
-    const formattables::element_properties&
+    const formattables::element_configuration&
     element_properties_for_id(const std::string& n) const;
 
     const annotations::element_annotations&
@@ -69,11 +69,12 @@ private:
             std::string,
             std::list<
                 std::shared_ptr<helper_formatter_interface>>>> empty_helpers_;
-    static const formattables::element_properties empty_element_properties_;
+    static const formattables::element_configuration
+    empty_element_configuration_;
     const annotations::streaming_annotations_repository&
     streaming_annotations_repository_;
     const annotations::element_annotations_repository& element_annotations_;
-    const formattables::element_properties_repository& element_properties_;
+    const formattables::element_properties_repository& element_configuration_;
     const std::unordered_map<
         std::string,
         std::unordered_map<std::string,

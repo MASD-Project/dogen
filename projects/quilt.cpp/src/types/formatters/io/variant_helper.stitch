@@ -6,7 +6,7 @@
 <#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/assistant.hpp" #>
 <#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/io/traits.hpp" #>
 <#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/types/traits.hpp" #>
-<#@ inclusion_dependency="dogen/quilt.cpp/types/formattables/helper_properties.hpp" #>
+<#@ inclusion_dependency="dogen/quilt.cpp/types/formattables/helper_configuration.hpp" #>
 <#@ containing_namespaces=dogen::quilt::cpp::formatters::io #>
 <#+
 
@@ -43,14 +43,14 @@ std::string variant_helper::helper_name() const {
 }
 
 bool variant_helper::is_enabled(const assistant& a,
-const formattables::helper_properties& hp) const {
-    return a.is_streaming_enabled(hp);
+const formattables::helper_configuration& hc) const {
+    return a.is_streaming_enabled(hc);
 }
 
 void variant_helper::
-format(assistant& a, const formattables::helper_properties& hp) const {
+format(assistant& a, const formattables::helper_configuration& hc) const {
     {
-        const auto d(hp.current());
+        const auto d(hc.current());
         const auto nt_qn(d.name_tree_qualified());
         const auto n_qn(d.name_qualified());
         auto snf(a.make_scoped_namespace_formatter(d.namespaces()));
@@ -64,7 +64,7 @@ struct <#= d.name_tree_identifiable() #>_visitor : public boost::static_visitor<
 
     ~<#= d.name_tree_identifiable() #>_visitor() { stream_ << " }"; }
 <#+
-        for (const auto& dd : hp.direct_descendants()) {
+        for (const auto& dd : hc.direct_descendants()) {
 #>
 
     void operator()(const <#= dd.name_qualified() #><#= (dd.is_simple_type() ? "" : "&") #> v) const {

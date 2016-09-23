@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/quilt.cpp/io/formattables/helper_properties_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/helper_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/helper_properties_repository_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -32,7 +32,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::quilt::cpp::formattables::helper_properties>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::quilt::cpp::formattables::helper_configuration>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -46,7 +46,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::quilt::c
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::list<dogen::quilt::cpp::formattables::helper_properties> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::list<dogen::quilt::cpp::formattables::helper_configuration> >& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

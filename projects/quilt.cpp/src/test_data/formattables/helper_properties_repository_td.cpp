@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/quilt.cpp/test_data/formattables/helper_properties_td.hpp"
+#include "dogen/quilt.cpp/test_data/formattables/helper_configuration_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/helper_properties_repository_td.hpp"
 
 namespace {
@@ -30,23 +30,23 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-dogen::quilt::cpp::formattables::helper_properties
-create_dogen_quilt_cpp_formattables_helper_properties(const unsigned int position) {
-    return dogen::quilt::cpp::formattables::helper_properties_generator::create(position);
+dogen::quilt::cpp::formattables::helper_configuration
+create_dogen_quilt_cpp_formattables_helper_configuration(const unsigned int position) {
+    return dogen::quilt::cpp::formattables::helper_configuration_generator::create(position);
 }
 
-std::list<dogen::quilt::cpp::formattables::helper_properties> create_std_list_dogen_quilt_cpp_formattables_helper_properties(unsigned int position) {
-    std::list<dogen::quilt::cpp::formattables::helper_properties> r;
+std::list<dogen::quilt::cpp::formattables::helper_configuration> create_std_list_dogen_quilt_cpp_formattables_helper_configuration(unsigned int position) {
+    std::list<dogen::quilt::cpp::formattables::helper_configuration> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_dogen_quilt_cpp_formattables_helper_properties(position + i));
+        r.push_back(create_dogen_quilt_cpp_formattables_helper_configuration(position + i));
     }
     return r;
 }
 
-std::unordered_map<std::string, std::list<dogen::quilt::cpp::formattables::helper_properties> > create_std_unordered_map_std_string_std_list_dogen_quilt_cpp_formattables_helper_properties(unsigned int position) {
-    std::unordered_map<std::string, std::list<dogen::quilt::cpp::formattables::helper_properties> > r;
+std::unordered_map<std::string, std::list<dogen::quilt::cpp::formattables::helper_configuration> > create_std_unordered_map_std_string_std_list_dogen_quilt_cpp_formattables_helper_configuration(unsigned int position) {
+    std::unordered_map<std::string, std::list<dogen::quilt::cpp::formattables::helper_configuration> > r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_std_list_dogen_quilt_cpp_formattables_helper_properties(position + i)));
+        r.insert(std::make_pair(create_std_string(position + i), create_std_list_dogen_quilt_cpp_formattables_helper_configuration(position + i)));
     }
     return r;
 }
@@ -62,7 +62,7 @@ helper_properties_repository_generator::helper_properties_repository_generator()
 
 void helper_properties_repository_generator::
 populate(const unsigned int position, result_type& v) {
-    v.by_id(create_std_unordered_map_std_string_std_list_dogen_quilt_cpp_formattables_helper_properties(position + 0));
+    v.by_id(create_std_unordered_map_std_string_std_list_dogen_quilt_cpp_formattables_helper_configuration(position + 0));
 }
 
 helper_properties_repository_generator::result_type

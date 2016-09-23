@@ -80,10 +80,10 @@ element_properties_repository element_properties_repository_factory::merge(
         else
             ep.decoration_configuration(dc);
 
-        ep.formatter_properties(pair.second);
+        ep.formatter_configuration(pair.second);
         const auto i(hprp.by_id().find(id));
         if (i != hprp.by_id().end()) {
-            ep.helper_properties(i->second);
+            ep.helper_configuration(i->second);
             BOOST_LOG_SEV(lg, trace) << "Found helper properties for: " << id;
         } else {
             BOOST_LOG_SEV(lg, trace) << "Did not find helper properties for: "
@@ -92,7 +92,7 @@ element_properties_repository element_properties_repository_factory::merge(
 
         const auto j(asrp.by_id().find(id));
         if (j != asrp.by_id().end()) {
-            ep.aspect_properties(j->second);
+            ep.aspect_configuration(j->second);
             BOOST_LOG_SEV(lg, trace) << "Found aspect annotations for: " << id;
         } else {
             BOOST_LOG_SEV(lg, trace) << "Did not find aspect annotations for: "

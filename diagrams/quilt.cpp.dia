@@ -15608,13 +15608,13 @@ main, or from another initialiser.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O125">
       <dia:attribute name="obj_pos">
-        <dia:point val="71,18"/>
+        <dia:point val="69,18"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="70.95,17.95;99.27,24.85"/>
+        <dia:rectangle val="68.95,17.95;97.27,24.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="71,18"/>
+        <dia:point val="69,18"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="28.219999999999999"/>
@@ -15623,7 +15623,7 @@ main, or from another initialiser.#</dia:string>
         <dia:real val="6.8000000000000007"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#formatter_properties#</dia:string>
+        <dia:string>#formatter_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
@@ -16344,13 +16344,13 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:point val="227,34"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="226.95,33.95;269.13,36.85"/>
+        <dia:rectangle val="226.95,33.95;270.285,36.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="227,34"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="42.079999999999998"/>
+        <dia:real val="43.234999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.7999999999999998"/>
@@ -16448,7 +16448,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
             <dia:string>#by_id#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, std::unordered_map&lt;std::string, formattables::formatter_properties&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, std::unordered_map&lt;std::string, formattables::formatter_configuration&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -17972,7 +17972,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:point val="262,20.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="247.605,19.45;262.75,34.8"/>
+        <dia:rectangle val="248.567,19.45;262.75,34.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -17980,8 +17980,8 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       <dia:attribute name="orth_points">
         <dia:point val="262,20.2"/>
         <dia:point val="262,28"/>
-        <dia:point val="247.655,28"/>
-        <dia:point val="247.655,34"/>
+        <dia:point val="248.618,28"/>
+        <dia:point val="248.618,34"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -22135,10 +22135,10 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#element_properties#</dia:string>
+            <dia:string>#element_configuration#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#formattables::element_properties#</dia:string>
+            <dia:string>#formattables::element_configuration#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -24551,13 +24551,13 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O194">
       <dia:attribute name="obj_pos">
-        <dia:point val="99,30"/>
+        <dia:point val="119,33"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="98.95,29.95;128.425,40.85"/>
+        <dia:rectangle val="118.95,32.95;148.425,43.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="99,30"/>
+        <dia:point val="119,33"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="29.375"/>
@@ -24916,13 +24916,13 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O195">
       <dia:attribute name="obj_pos">
-        <dia:point val="124,18"/>
+        <dia:point val="128,18"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="123.95,17.95;148.805,22.45"/>
+        <dia:rectangle val="127.95,17.95;152.805,22.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="124,18"/>
+        <dia:point val="128,18"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="24.755000000000003"/>
@@ -24931,7 +24931,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#helper_properties#</dia:string>
+        <dia:string>#helper_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
@@ -25313,7 +25313,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:point val="401,19.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="375.792,18.65;401.75,34.8"/>
+        <dia:rectangle val="376.755,18.65;401.75,34.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -25321,8 +25321,8 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       <dia:attribute name="orth_points">
         <dia:point val="401,19.4"/>
         <dia:point val="401,29"/>
-        <dia:point val="375.842,29"/>
-        <dia:point val="375.842,34"/>
+        <dia:point val="376.805,29"/>
+        <dia:point val="376.805,34"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -25346,13 +25346,13 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O198">
       <dia:attribute name="obj_pos">
-        <dia:point val="395,34"/>
+        <dia:point val="396,34"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="394.95,33.95;432.51,39.25"/>
+        <dia:rectangle val="395.95,33.95;433.51,39.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="395,34"/>
+        <dia:point val="396,34"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="37.460000000000001"/>
@@ -25593,7 +25593,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:point val="436.535,19.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="413.295,18.65;437.285,34.8"/>
+        <dia:rectangle val="414.68,18.65;437.285,34.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -25601,8 +25601,8 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       <dia:attribute name="orth_points">
         <dia:point val="436.535,19.4"/>
         <dia:point val="436.535,29"/>
-        <dia:point val="413.345,29"/>
-        <dia:point val="413.345,34"/>
+        <dia:point val="414.73,29"/>
+        <dia:point val="414.73,34"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -25629,13 +25629,13 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:point val="360,34"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="359.95,33.95;392.505,36.85"/>
+        <dia:rectangle val="359.95,33.95;393.66,36.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="360,34"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="32.454999999999998"/>
+        <dia:real val="33.609999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.7999999999999998"/>
@@ -25733,7 +25733,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
             <dia:string>#by_id#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, std::list&lt;formattables::helper_properties&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, std::list&lt;formattables::helper_configuration&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -25764,25 +25764,25 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:point val="96,4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="95.95,3.95;131.2,9.25"/>
+        <dia:rectangle val="95.95,3.95;133.51,9.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="96,4"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="35.149999999999999"/>
+        <dia:real val="37.460000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#element_properties#</dia:string>
+        <dia:string>#element_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#All of the computed properties for an element.#</dia:string>
+        <dia:string>#All of the configuration associated with an element.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -25888,10 +25888,10 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#formatter_properties#</dia:string>
+            <dia:string>#formatter_configuration#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, formattables::formatter_properties&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, formattables::formatter_configuration&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -25911,10 +25911,10 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#helper_properties#</dia:string>
+            <dia:string>#helper_configuration#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;formattables::helper_properties&gt;#</dia:string>
+            <dia:string>#std::list&lt;formattables::helper_configuration&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -25934,10 +25934,10 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#aspect_properties#</dia:string>
+            <dia:string>#aspect_configuration#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#formattables::aspect_properties#</dia:string>
+            <dia:string>#formattables::aspect_configuration#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -25968,13 +25968,13 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:point val="326,80"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="325.95,79.95;354.655,82.85"/>
+        <dia:rectangle val="325.95,79.95;355.81,82.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="326,80"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="28.605"/>
+        <dia:real val="29.760000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.7999999999999998"/>
@@ -26072,7 +26072,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
             <dia:string>#by_id#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, formattables::element_properties&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, formattables::element_configuration&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -26139,7 +26139,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:point val="320.962,80"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="320.212,75.25;340.503,80.8"/>
+        <dia:rectangle val="320.212,75.25;341.08,80.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -26147,8 +26147,8 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       <dia:attribute name="orth_points">
         <dia:point val="320.962,80"/>
         <dia:point val="320.962,76"/>
-        <dia:point val="340.303,76"/>
-        <dia:point val="340.303,80"/>
+        <dia:point val="340.88,76"/>
+        <dia:point val="340.88,80"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -27345,13 +27345,13 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O214">
       <dia:attribute name="obj_pos">
-        <dia:point val="103,18"/>
+        <dia:point val="104,18"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="102.95,17.95;119.72,22.45"/>
+        <dia:rectangle val="103.95,17.95;120.72,22.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="103,18"/>
+        <dia:point val="104,18"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="16.669999999999998"/>
@@ -27360,7 +27360,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#aspect_properties#</dia:string>
+        <dia:string>#aspect_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
@@ -27529,13 +27529,13 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:point val="423,80"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="422.95,79.95;451.27,82.85"/>
+        <dia:rectangle val="422.95,79.95;452.425,82.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="423,80"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="28.219999999999999"/>
+        <dia:real val="29.375"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.7999999999999998"/>
@@ -27633,7 +27633,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
             <dia:string>#by_id#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, formattables::aspect_properties&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, formattables::aspect_configuration&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -28157,7 +28157,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:point val="471.535,38.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="451.17,37.65;472.285,80.8"/>
+        <dia:rectangle val="452.325,37.65;472.285,80.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -28165,8 +28165,8 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       <dia:attribute name="orth_points">
         <dia:point val="471.535,38.4"/>
         <dia:point val="471.535,70"/>
-        <dia:point val="451.22,70"/>
-        <dia:point val="451.22,80"/>
+        <dia:point val="452.375,70"/>
+        <dia:point val="452.375,80"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -31929,16 +31929,16 @@ and element.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O254">
       <dia:attribute name="obj_pos">
-        <dia:point val="112,-8"/>
+        <dia:point val="110,-8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="111.95,-8.05;129.875,-4.35"/>
+        <dia:rectangle val="109.95,-8.05;130.185,-4.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="112,-8"/>
+        <dia:point val="110,-8"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="17.824999999999999"/>
+        <dia:real val="20.134999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -32056,10 +32056,10 @@ and element.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#properties#</dia:string>
+            <dia:string>#configuration#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#formattables::element_properties#</dia:string>
+            <dia:string>#formattables::element_configuration#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -32123,19 +32123,19 @@ and element.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="120.912,-4.34991"/>
+        <dia:point val="120.067,-4.34991"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="113.525,-5.09991;121.662,5.6"/>
+        <dia:rectangle val="114.68,-5.09991;120.817,5.6"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="120.912,-4.34991"/>
-        <dia:point val="120.912,0"/>
-        <dia:point val="113.575,0"/>
-        <dia:point val="113.575,4"/>
+        <dia:point val="120.067,-4.34991"/>
+        <dia:point val="120.067,0"/>
+        <dia:point val="114.73,0"/>
+        <dia:point val="114.73,4"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -32198,7 +32198,7 @@ and element.#</dia:string>
         <dia:point val="96,9.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="85.06,8.45;96.75,19.6"/>
+        <dia:rectangle val="83.06,8.45;96.75,19.6"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -32206,8 +32206,8 @@ and element.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="96,9.2"/>
         <dia:point val="96,14"/>
-        <dia:point val="85.11,14"/>
-        <dia:point val="85.11,18"/>
+        <dia:point val="83.11,14"/>
+        <dia:point val="83.11,18"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -32267,19 +32267,19 @@ and element.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="113.575,9.2"/>
+        <dia:point val="114.73,9.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="111.285,8.45;114.325,19.6"/>
+        <dia:rectangle val="112.285,8.45;115.48,19.6"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="113.575,9.2"/>
-        <dia:point val="113.575,14"/>
-        <dia:point val="111.335,14"/>
-        <dia:point val="111.335,18"/>
+        <dia:point val="114.73,9.2"/>
+        <dia:point val="114.73,14"/>
+        <dia:point val="112.335,14"/>
+        <dia:point val="112.335,18"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -32339,19 +32339,19 @@ and element.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="131.15,9.2"/>
+        <dia:point val="133.46,9.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="130.4,8.45;136.577,19.6"/>
+        <dia:rectangle val="132.71,8.45;140.577,19.6"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="131.15,9.2"/>
-        <dia:point val="131.15,14"/>
-        <dia:point val="136.377,14"/>
-        <dia:point val="136.377,18"/>
+        <dia:point val="133.46,9.2"/>
+        <dia:point val="133.46,14"/>
+        <dia:point val="140.377,14"/>
+        <dia:point val="140.377,18"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -32370,6 +32370,78 @@ and element.#</dia:string>
       <dia:connections>
         <dia:connection handle="0" to="O201" connection="7"/>
         <dia:connection handle="1" to="O195" connection="1"/>
+      </dia:connections>
+      <dia:childnode parent="O0"/>
+    </dia:object>
+    <dia:object type="UML - Association" version="2" id="O259">
+      <dia:attribute name="name">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="direction">
+        <dia:enum val="1"/>
+      </dia:attribute>
+      <dia:attribute name="show_direction">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="assoc_type">
+        <dia:enum val="1"/>
+      </dia:attribute>
+      <dia:attribute name="role_a">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="multipicity_a">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="visibility_a">
+        <dia:enum val="3"/>
+      </dia:attribute>
+      <dia:attribute name="show_arrow_a">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="role_b">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="multipicity_b">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="visibility_b">
+        <dia:enum val="3"/>
+      </dia:attribute>
+      <dia:attribute name="show_arrow_b">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="obj_pos">
+        <dia:point val="140.377,22.4"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="133.637,21.65;141.127,34.6"/>
+      </dia:attribute>
+      <dia:attribute name="meta">
+        <dia:composite type="dict"/>
+      </dia:attribute>
+      <dia:attribute name="orth_points">
+        <dia:point val="140.377,22.4"/>
+        <dia:point val="140.377,28.05"/>
+        <dia:point val="133.688,28.05"/>
+        <dia:point val="133.688,33"/>
+      </dia:attribute>
+      <dia:attribute name="orth_orient">
+        <dia:enum val="1"/>
+        <dia:enum val="0"/>
+        <dia:enum val="1"/>
+      </dia:attribute>
+      <dia:attribute name="orth_autoroute">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="text_colour">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="line_colour">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:connections>
+        <dia:connection handle="0" to="O195" connection="6"/>
+        <dia:connection handle="1" to="O194" connection="1"/>
       </dia:connections>
       <dia:childnode parent="O0"/>
     </dia:object>

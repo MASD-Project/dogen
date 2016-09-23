@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/formattables/helper_properties.hpp"
+#include "dogen/quilt.cpp/types/formattables/helper_configuration.hpp"
 #include "dogen/quilt.cpp/types/formatters/test_data/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/formatters/test_data/associative_container_helper_stitch.hpp"
@@ -58,7 +58,7 @@ associative_container_helper::owning_facets() const {
 }
 
 bool associative_container_helper::is_enabled(const assistant& /*a*/,
-    const formattables::helper_properties& /*hp*/) const {
+    const formattables::helper_configuration& /*hc*/) const {
     return true;
 }
 
@@ -68,20 +68,20 @@ std::string associative_container_helper::helper_name() const {
 }
 
 void associative_container_helper::
-format(assistant& a, const formattables::helper_properties& hp) const {
-    const auto d(hp.current());
+format(assistant& a, const formattables::helper_configuration& hc) const {
+    const auto d(hc.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
 a.stream() << std::endl;
 a.stream() << qn << " create_" << ident << "(unsigned int position) {" << std::endl;
 a.stream() << "    " << qn << " r;" << std::endl;
 a.stream() << "    for (unsigned int i(0); i < 4; ++i) {" << std::endl;
-    if (hp.direct_descendants().size() == 1) {
-        const auto containee(hp.direct_descendants().front());
+    if (hc.direct_descendants().size() == 1) {
+        const auto containee(hc.direct_descendants().front());
 a.stream() << "        r.insert(create_" << containee.name_tree_identifiable() << "(position + i));" << std::endl;
-    } else if (hp.direct_descendants().size() == 2) {
-        const auto key(hp.direct_descendants().front());
-        const auto value(hp.direct_descendants().back());
+    } else if (hc.direct_descendants().size() == 2) {
+        const auto key(hc.direct_descendants().front());
+        const auto value(hc.direct_descendants().back());
 a.stream() << "        r.insert(std::make_pair(create_" << key.name_tree_identifiable() << "(position + i), create_" << value.name_tree_identifiable() << "(position + i)));" << std::endl;
     }
 a.stream() << "    }" << std::endl;

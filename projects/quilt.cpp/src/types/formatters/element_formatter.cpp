@@ -51,17 +51,17 @@ std::forward_list<dogen::formatters::file> element_formatter::format(
     for (const auto& ptr : formatters) {
         const auto& f(*ptr);
         const auto id(e.name().id());
-        const auto fn(f.ownership_hierarchy().formatter_name());
+        const auto fmtn(f.ownership_hierarchy().formatter_name());
         BOOST_LOG_SEV(lg, debug) << "Formatting: '" << id << "' with '"
-                                 << fn << "'";
+                                 << fmtn << "'";
 
         const auto ctx(factory_.make(e.name().id()));
-        const auto fp(ctx.element_properties().formatter_properties());
-        const auto i(fp.find(fn));
-        if (i == fp.end()) {
-            BOOST_LOG_SEV(lg, error) << formatter_properties_not_found << fn;
+        const auto fc(ctx.element_configuration().formatter_configuration());
+        const auto i(fc.find(fmtn));
+        if (i == fc.end()) {
+            BOOST_LOG_SEV(lg, error) << formatter_properties_not_found << fmtn;
             BOOST_THROW_EXCEPTION(
-                workflow_error(formatter_properties_not_found + fn));
+                workflow_error(formatter_properties_not_found + fmtn));
         }
 
         const auto is_formatter_enabled(i->second.enabled());

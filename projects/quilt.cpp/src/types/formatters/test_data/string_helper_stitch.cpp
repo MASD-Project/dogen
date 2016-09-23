@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/formattables/helper_properties.hpp"
+#include "dogen/quilt.cpp/types/formattables/helper_configuration.hpp"
 #include "dogen/quilt.cpp/types/formatters/test_data/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/formatters/test_data/string_helper_stitch.hpp"
@@ -59,7 +59,7 @@ string_helper::owning_facets() const {
 }
 
 bool string_helper::is_enabled(const assistant& /*a*/,
-    const formattables::helper_properties& /*hp*/) const {
+    const formattables::helper_configuration& /*hc*/) const {
     return true;
 }
 
@@ -69,7 +69,7 @@ std::string string_helper::helper_name() const {
 }
 
 void string_helper::
-format(assistant& a, const formattables::helper_properties& /*hp*/) const {
+format(assistant& a, const formattables::helper_configuration& /*hc*/) const {
 a.stream() << std::endl;
 a.stream() << "std::string create_std_string(const unsigned int position) {" << std::endl;
 a.stream() << "    std::ostringstream s;" << std::endl;

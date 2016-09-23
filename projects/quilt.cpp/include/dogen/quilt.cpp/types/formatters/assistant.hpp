@@ -42,7 +42,7 @@
 #include "dogen/quilt.cpp/types/annotations/odb_annotations.hpp"
 #include "dogen/quilt.cpp/types/annotations/opaque_annotations.hpp"
 #include "dogen/quilt.cpp/types/formatters/context.hpp"
-#include "dogen/quilt.cpp/types/formattables/helper_properties.hpp"
+#include "dogen/quilt.cpp/types/formattables/helper_configuration.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -110,8 +110,8 @@ private:
      *
      * @pre Formatter properties must exist for the formatter.
      */
-    formattables::formatter_properties
-    obtain_formatter_properties(const std::string& formatter_name) const;
+    formattables::formatter_configuration
+    obtain_formatter_configuration(const std::string& formatter_name) const;
 
     /**
      * @brief Returns true if the formatter is enabled, false
@@ -185,7 +185,8 @@ public:
      * @brief Returns true if the types facet is required to support
      * streaming or if we are in io facet.
      */
-    bool is_streaming_enabled(const formattables::helper_properties& hp) const;
+    bool is_streaming_enabled(
+        const formattables::helper_configuration& hc) const;
 
 public:
     /**
@@ -242,7 +243,7 @@ public:
 
 private:
     std::list<std::shared_ptr<formatters::helper_formatter_interface>>
-    get_helpers(const formattables::helper_properties& hp) const;
+    get_helpers(const formattables::helper_configuration& hc) const;
 
     std::string streaming_for_type(const annotations::streaming_annotations& ss,
         const std::string& s) const;
@@ -310,7 +311,7 @@ private:
     std::ostringstream stream_;
     boost::iostreams::filtering_ostream filtering_stream_;
     const context& context_;
-    formattables::formatter_properties formatter_properties_;
+    formattables::formatter_configuration formatter_configuration_;
     const dynamic::ownership_hierarchy ownership_hierarchy_;
     const bool requires_header_guard_;
 };

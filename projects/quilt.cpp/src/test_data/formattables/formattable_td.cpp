@@ -20,7 +20,7 @@
  */
 #include "dogen/yarn/test_data/element_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/formattable_td.hpp"
-#include "dogen/quilt.cpp/test_data/formattables/element_properties_td.hpp"
+#include "dogen/quilt.cpp/test_data/formattables/element_configuration_td.hpp"
 
 namespace {
 
@@ -36,9 +36,9 @@ create_boost_shared_ptr_dogen_yarn_element(unsigned int position) {
     return r;
 }
 
-dogen::quilt::cpp::formattables::element_properties
-create_dogen_quilt_cpp_formattables_element_properties(const unsigned int position) {
-    return dogen::quilt::cpp::formattables::element_properties_generator::create(position);
+dogen::quilt::cpp::formattables::element_configuration
+create_dogen_quilt_cpp_formattables_element_configuration(const unsigned int position) {
+    return dogen::quilt::cpp::formattables::element_configuration_generator::create(position);
 }
 
 }
@@ -53,7 +53,7 @@ formattable_generator::formattable_generator() : position_(0) { }
 void formattable_generator::
 populate(const unsigned int position, result_type& v) {
     v.element(create_boost_shared_ptr_dogen_yarn_element(position + 0));
-    v.properties(create_dogen_quilt_cpp_formattables_element_properties(position + 1));
+    v.configuration(create_dogen_quilt_cpp_formattables_element_configuration(position + 1));
 }
 
 formattable_generator::result_type

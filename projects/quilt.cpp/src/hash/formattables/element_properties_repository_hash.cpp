@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/hash/formattables/element_properties_hash.hpp"
+#include "dogen/quilt.cpp/hash/formattables/element_configuration_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/element_properties_repository_hash.hpp"
 
 namespace {
@@ -29,7 +29,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_element_properties(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::element_properties>& v) {
+inline std::size_t hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_element_configuration(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::element_configuration>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -48,7 +48,7 @@ namespace formattables {
 std::size_t element_properties_repository_hasher::hash(const element_properties_repository& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_element_properties(v.by_id()));
+    combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_element_configuration(v.by_id()));
     return seed;
 }
 

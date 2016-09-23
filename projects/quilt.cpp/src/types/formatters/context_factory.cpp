@@ -42,9 +42,11 @@ const annotations::streaming_annotations_repository
 context_factory::empty_streaming_annotations_repository_ =
     annotations::streaming_annotations_repository();
 const annotations::element_annotations
-context_factory::empty_element_annotations_ = annotations::element_annotations();
-const formattables::element_properties
-context_factory::empty_element_properties_ = formattables::element_properties();
+context_factory::empty_element_annotations_ =
+    annotations::element_annotations();
+const formattables::element_configuration
+context_factory::empty_element_configuration_ =
+    formattables::element_configuration();
 const std::unordered_map<
     std::string,
     std::unordered_map<
@@ -66,11 +68,11 @@ context_factory::context_factory(
     std::string,
     std::list<std::shared_ptr<helper_formatter_interface>>>>& helpers)
     : streaming_annotations_repository_(ssrp), element_annotations_(esrp),
-      element_properties_(eprp), formatter_helpers_(helpers) {}
+      element_configuration_(eprp), formatter_helpers_(helpers) {}
 
-const formattables::element_properties& context_factory::
+const formattables::element_configuration& context_factory::
 element_properties_for_id(const std::string& n) const {
-    const auto& fp(element_properties_.by_id());
+    const auto& fp(element_configuration_.by_id());
     const auto i(fp.find(n));
     if (i == fp.end()) {
         BOOST_LOG_SEV(lg, error) << formatter_properties_not_found << n;
@@ -94,7 +96,8 @@ element_annotations_for_id(const std::string& n) const {
 
 context context_factory::make_empty_context() const {
     return context(empty_streaming_annotations_repository_,
-        empty_element_annotations_, empty_element_properties_, empty_helpers_);
+        empty_element_annotations_, empty_element_configuration_,
+        empty_helpers_);
 }
 
 context context_factory::make(const std::string& id) const {

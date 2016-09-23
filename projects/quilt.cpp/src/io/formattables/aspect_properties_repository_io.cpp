@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/quilt.cpp/io/formattables/aspect_properties_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/aspect_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/aspect_properties_repository_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -32,7 +32,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::quilt::cpp::formattables::aspect_properties>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::quilt::cpp::formattables::aspect_configuration>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

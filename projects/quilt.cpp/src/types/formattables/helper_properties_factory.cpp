@@ -24,7 +24,7 @@
 #include "dogen/quilt.cpp/types/formatters/hash/traits.hpp"
 #include "dogen/quilt.cpp/types/formattables/name_builder.hpp"
 #include "dogen/quilt.cpp/types/formattables/building_error.hpp"
-#include "dogen/quilt.cpp/io/formattables/helper_properties_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/helper_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/annotations/helper_annotations_io.hpp"
 #include "dogen/quilt.cpp/types/formattables/helper_properties_factory.hpp"
 
@@ -110,7 +110,7 @@ boost::optional<helper_descriptor>
 helper_properties_factory::make(const bool in_inheritance_relationship,
     const bool inherit_opaqueness_from_parent, const yarn::name_tree& nt,
     std::unordered_set<std::string>& done,
-    std::list<helper_properties>& properties) const {
+    std::list<helper_configuration>& configuration) const {
     const auto id(nt.current().id());
     BOOST_LOG_SEV(lg, debug) << "Processing type: " << id;
 
@@ -144,11 +144,11 @@ helper_properties_factory::make(const bool in_inheritance_relationship,
     if (r.is_pointer())
         r.name_tree_identifiable().append("_ptr");
 
-    helper_properties hp;
-    hp.current(r);
+    helper_configuration hc;
+    hc.current(r);
 
     const auto iir(in_inheritance_relationship);
-    hp.in_inheritance_relationship(iir);
+    hc.in_inheritance_relationship(iir);
 
     /*
      * Note that we are processing the children even though the parent
@@ -164,7 +164,7 @@ helper_properties_factory::make(const bool in_inheritance_relationship,
          * children). If we have a child, we must have a descriptor.
          */
         const auto aco(nt.are_children_opaque());
-        const auto dd(make(iir, aco, c, done, properties));
+        const auto dd(make(iir, aco, c, done, configuration));
         if (!dd) {
             BOOST_LOG_SEV(lg, error) << descriptor_expected;
             BOOST_THROW_EXCEPTION(building_error(descriptor_expected));
@@ -175,9 +175,9 @@ helper_properties_factory::make(const bool in_inheritance_relationship,
             BOOST_LOG_SEV(lg, error) << empty_identifiable;
             BOOST_THROW_EXCEPTION(building_error(empty_identifiable));
         }
-        hp.direct_descendants().push_back(*dd);
+        hc.direct_descendants().push_back(*dd);
     }
-    BOOST_LOG_SEV(lg, debug) << "Helper properties: " << hp;
+    BOOST_LOG_SEV(lg, debug) << "Helper properties: " << hc;
 
     /*
      * Ensure we have not yet created a helper for this name
@@ -201,7 +201,7 @@ helper_properties_factory::make(const bool in_inheritance_relationship,
     }
 
     if (done.find(ident) == done.end()) {
-        properties.push_back(hp);
+        configuration.push_back(hc);
         done.insert(ident);
     } else {
         BOOST_LOG_SEV(lg, debug) << "Name tree already processed: "
@@ -210,16 +210,16 @@ helper_properties_factory::make(const bool in_inheritance_relationship,
     return r;
 }
 
-std::list<helper_properties> helper_properties_factory::
+std::list<helper_configuration> helper_properties_factory::
 make(const bool in_inheritance_relationship,
     const std::list<yarn::attribute>& attributes) const {
     if (attributes.empty()) {
         BOOST_LOG_SEV(lg, debug) << "No properties found.";
-        return std::list<helper_properties>();
+        return std::list<helper_configuration>();
     }
 
     BOOST_LOG_SEV(lg, debug) << "Properties found: " << attributes.size();
-    std::list<helper_properties> r;
+    std::list<helper_configuration> r;
     std::unordered_set<std::string> done;
     for (const auto a : attributes) {
         const auto& nt(a.parsed_type());

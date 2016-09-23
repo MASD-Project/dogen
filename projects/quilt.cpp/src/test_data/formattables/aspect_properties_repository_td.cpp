@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/quilt.cpp/test_data/formattables/aspect_properties_td.hpp"
+#include "dogen/quilt.cpp/test_data/formattables/aspect_configuration_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/aspect_properties_repository_td.hpp"
 
 namespace {
@@ -30,15 +30,15 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-dogen::quilt::cpp::formattables::aspect_properties
-create_dogen_quilt_cpp_formattables_aspect_properties(const unsigned int position) {
-    return dogen::quilt::cpp::formattables::aspect_properties_generator::create(position);
+dogen::quilt::cpp::formattables::aspect_configuration
+create_dogen_quilt_cpp_formattables_aspect_configuration(const unsigned int position) {
+    return dogen::quilt::cpp::formattables::aspect_configuration_generator::create(position);
 }
 
-std::unordered_map<std::string, dogen::quilt::cpp::formattables::aspect_properties> create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_aspect_properties(unsigned int position) {
-    std::unordered_map<std::string, dogen::quilt::cpp::formattables::aspect_properties> r;
+std::unordered_map<std::string, dogen::quilt::cpp::formattables::aspect_configuration> create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_aspect_configuration(unsigned int position) {
+    std::unordered_map<std::string, dogen::quilt::cpp::formattables::aspect_configuration> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_dogen_quilt_cpp_formattables_aspect_properties(position + i)));
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_quilt_cpp_formattables_aspect_configuration(position + i)));
     }
     return r;
 }
@@ -54,7 +54,7 @@ aspect_properties_repository_generator::aspect_properties_repository_generator()
 
 void aspect_properties_repository_generator::
 populate(const unsigned int position, result_type& v) {
-    v.by_id(create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_aspect_properties(position + 0));
+    v.by_id(create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_aspect_configuration(position + 0));
 }
 
 aspect_properties_repository_generator::result_type
