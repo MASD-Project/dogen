@@ -121,7 +121,8 @@ public:
     /**
      * @brief Executes the workflow.
      */
-    element_properties_repository execute(const options::cpp_options& opts,
+    element_properties_repository
+    execute(const options::cpp_options& opts,
         const dynamic::repository& drp,
         const dynamic::object& root_object,
         const dogen::formatters::decoration_configuration_factory& dcf,
