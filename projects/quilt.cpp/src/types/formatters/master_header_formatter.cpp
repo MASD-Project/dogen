@@ -128,8 +128,8 @@ std::type_index master_header_formatter::element_type_index() const {
 std::list<std::string> master_header_formatter::inclusion_dependencies(
     const formattables::inclusion_dependencies_builder_factory& f,
     const yarn::element& e) const {
-    static const auto fctn(ownership_hierarchy_.facet_name());
-    static const auto fmtn(ownership_hierarchy_.formatter_name());
+    const auto fctn(ownership_hierarchy_.facet_name());
+    const auto fmtn(ownership_hierarchy_.formatter_name());
     const auto& mh(assistant::as<fabric::master_header>(fmtn, e));
 
     const auto i(mh.inclusion_by_facet().find(fctn));

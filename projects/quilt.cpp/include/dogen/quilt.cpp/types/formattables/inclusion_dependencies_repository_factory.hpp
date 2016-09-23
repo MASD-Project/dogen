@@ -26,7 +26,7 @@
 #endif
 
 #include "dogen/yarn/types/model.hpp"
-#include "dogen/quilt.cpp/types/formattables/container.hpp"
+#include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/formattables/inclusion_dependencies_builder_factory.hpp"
 #include "dogen/quilt.cpp/types/formattables/inclusion_dependencies_repository.hpp"
 
@@ -44,8 +44,8 @@ public:
      * @brief Create the inclusion dependencies repository.
      */
     inclusion_dependencies_repository make(
-        const inclusion_dependencies_builder_factory& bf, const container& c,
-        const yarn::model& m) const;
+        const inclusion_dependencies_builder_factory& bf,
+        const formatters::container& fc, const yarn::model& m) const;
 };
 
 } } } }

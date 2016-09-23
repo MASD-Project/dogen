@@ -29,15 +29,7 @@
 #include <string>
 #include <unordered_map>
 #include "dogen/dynamic/types/repository.hpp"
-#include "dogen/yarn/types/module.hpp"
-#include "dogen/yarn/types/object.hpp"
-#include "dogen/yarn/types/concept.hpp"
-#include "dogen/yarn/types/primitive.hpp"
-#include "dogen/yarn/types/enumeration.hpp"
-#include "dogen/quilt.cpp/types/formattables/container.hpp"
-#include "dogen/quilt.cpp/types/fabric/registrar.hpp"
-#include "dogen/quilt.cpp/types/fabric/master_header.hpp"
-#include "dogen/quilt.cpp/types/fabric/forward_declarations.hpp"
+#include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/formattables/inclusion_directives_repository.hpp"
 #include "dogen/quilt.cpp/types/formattables/inclusion_dependencies_builder_factory.hpp"
 
@@ -52,72 +44,18 @@ namespace formattables {
 class inclusion_dependencies_factory {
 public:
     inclusion_dependencies_factory(
-        const inclusion_dependencies_builder_factory& f, const container& c);
+        const inclusion_dependencies_builder_factory& f,
+        const formatters::container& fc);
 public:
     /**
-     * @brief Makes inclusion dependencies for a module.
+     * @brief Makes inclusion dependencies for an element
      */
-    std::unordered_map<std::string, std::list<std::string> >
-    make(const yarn::module& m) const;
-
-    /**
-     * @brief Makes inclusion dependencies for a concept.
-     */
-    std::unordered_map<std::string, std::list<std::string> >
-    make(const yarn::concept& c) const;
-
-    /**
-     * @brief Makes inclusion dependencies for a primitive.
-     */
-    std::unordered_map<std::string, std::list<std::string> >
-    make(const yarn::primitive& p) const;
-
-    /**
-     * @brief Makes inclusion dependencies for an enumeration.
-     */
-    std::unordered_map<std::string, std::list<std::string> >
-    make(const yarn::enumeration& e) const;
-
-    /**
-     * @brief Makes inclusion dependencies for an object.
-     */
-    std::unordered_map<std::string, std::list<std::string> >
-    make(const yarn::object& o) const;
-
-    /**
-     * @brief Makes inclusion dependencies for an exception.
-     */
-    std::unordered_map<std::string, std::list<std::string> >
-    make(const yarn::exception& e) const;
-
-    /**
-     * @brief Makes inclusion dependencies for a visitor.
-     */
-    std::unordered_map<std::string, std::list<std::string> >
-    make(const yarn::visitor& v) const;
-
-    /**
-     * @brief Makes inclusion dependencies for a registrar.
-     */
-    std::unordered_map<std::string, std::list<std::string> >
-    make(const fabric::registrar& rg) const;
-
-    /**
-     * @brief Makes inclusion dependencies for a master header.
-     */
-    std::unordered_map<std::string, std::list<std::string> >
-    make(const fabric::master_header& mh) const;
-
-    /**
-     * @brief Makes inclusion dependencies for a forward declarations
-     * header.
-     */
-    std::unordered_map<std::string, std::list<std::string> >
-    make(const fabric::forward_declarations& fd) const;
+    std::unordered_map<std::string, std::list<std::string>>
+    make(const yarn::element& e) const;
 
 private:
     const inclusion_dependencies_builder_factory& factory_;
-    const container& container_;
+    const formatters::container& formatter_container_;
 };
 
 } } } }

@@ -124,12 +124,12 @@ private:
 }
 
 inclusion_dependencies_repository inclusion_dependencies_repository_factory::
-make(const inclusion_dependencies_builder_factory& bf, const container& c,
-    const yarn::model& m) const {
+make(const inclusion_dependencies_builder_factory& bf,
+    const formatters::container& fc, const yarn::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started creating inclusion dependencies.";
 
-    const inclusion_dependencies_factory idf(bf, c);
+    const inclusion_dependencies_factory idf(bf, fc);
     generator g(idf);
     for (const auto& ptr : m.elements()) {
         const auto& e(*ptr);

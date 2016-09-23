@@ -35,7 +35,6 @@
 #include "dogen/quilt.cpp/types/annotations/path_annotations.hpp"
 #include "dogen/quilt.cpp/types/annotations/element_annotations_repository.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
-#include "dogen/quilt.cpp/types/formattables/registrar.hpp"
 #include "dogen/quilt.cpp/types/formattables/locator.hpp"
 #include "dogen/quilt.cpp/types/formattables/enablement_repository.hpp"
 #include "dogen/quilt.cpp/types/formattables/path_derivatives_repository.hpp"
@@ -79,7 +78,7 @@ private:
      */
     inclusion_dependencies_repository create_inclusion_dependencies_repository(
         const inclusion_dependencies_builder_factory& bf,
-        const container& pc, const yarn::model& m) const;
+        const formatters::container& fc, const yarn::model& m) const;
 
     /**
      * @brief Creates the enablement repository.

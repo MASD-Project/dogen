@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <typeindex>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/quilt.cpp/types/formattables/building_error.hpp"
@@ -81,7 +82,6 @@ bool include_directive_comparer(
     return lhs < rhs;
 }
 
-
 }
 
 namespace dogen {
@@ -89,98 +89,47 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-template<typename YarnEntity>
-std::unordered_map<std::string, std::list<std::string> >
-generate(const inclusion_dependencies_builder_factory& f,
-    const std::forward_list<boost::shared_ptr<provider_interface<YarnEntity>>>&
-    providers, const YarnEntity& e) {
+inclusion_dependencies_factory::inclusion_dependencies_factory(
+    const inclusion_dependencies_builder_factory& f,
+    const formatters::container& fc)
+    : factory_(f), formatter_container_(fc) {}
 
+std::unordered_map<std::string, std::list<std::string>>
+inclusion_dependencies_factory::make(const yarn::element& e) const {
     const auto id(e.name().id());
     BOOST_LOG_SEV(lg, debug) << "Creating inclusion dependencies for: " << id;
 
     std::unordered_map<std::string, std::list<std::string> > r;
-    for (const auto p : providers) {
-        BOOST_LOG_SEV(lg, debug) << "Providing for: " << p->formatter_name();
-        auto deps(p->provide_inclusion_dependencies(f, e));
+    const auto ti(std::type_index(typeid(e)));
+    const auto i(formatter_container_.file_formatters_by_type_index().find(ti));
+    if (i == formatter_container_.file_formatters_by_type_index().end()) {
+        BOOST_LOG_SEV(lg, error) << "No formatters for type: " << ti.name();
+        return r;
+    }
+
+    for (const auto fmt : i->second) {
+        const auto fmtn(fmt->ownership_hierarchy().formatter_name());
+        BOOST_LOG_SEV(lg, debug) << "Providing for: " << fmtn;
+        auto deps(fmt->inclusion_dependencies(factory_, e));
 
         if (deps.empty())
             continue;
 
         deps.sort(include_directive_comparer);
         deps.unique();
-        const auto id_pair(std::make_pair(p->formatter_name(), deps));
+        const auto id_pair(std::make_pair(fmtn, deps));
         const bool inserted(r.insert(id_pair).second);
         if (!inserted) {
-            BOOST_LOG_SEV(lg, error) << duplicate_formatter_name
-                                     << p->formatter_name()
+            BOOST_LOG_SEV(lg, error) << duplicate_formatter_name << fmtn
                                      << " for type: " << id;
             BOOST_THROW_EXCEPTION(
-                building_error(duplicate_formatter_name + p->formatter_name()));
+                building_error(duplicate_formatter_name + fmtn));
         }
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished creating inclusion dependencies for: "
                              << id;
-
     return r;
-}
-
-inclusion_dependencies_factory::inclusion_dependencies_factory(
-    const inclusion_dependencies_builder_factory& f, const container& c)
-    : factory_(f), container_(c) {}
-
-std::unordered_map<std::string, std::list<std::string> >
-inclusion_dependencies_factory::make(const yarn::module& /*m*/) const {
-    std::unordered_map<std::string, std::list<std::string> > r;
-    return r;
-}
-
-std::unordered_map<std::string, std::list<std::string> >
-inclusion_dependencies_factory::make(const yarn::concept& /*c*/) const {
-    std::unordered_map<std::string, std::list<std::string> > r;
-    return r;
-}
-
-std::unordered_map<std::string, std::list<std::string> >
-inclusion_dependencies_factory::make(const yarn::primitive& /*p*/) const {
-    std::unordered_map<std::string, std::list<std::string> > r;
-    return r;
-}
-
-std::unordered_map<std::string, std::list<std::string> >
-inclusion_dependencies_factory::make(const yarn::enumeration& e) const {
-    return generate(factory_, container_.enumeration_providers(), e);
-}
-
-std::unordered_map<std::string, std::list<std::string> >
-inclusion_dependencies_factory::make(const yarn::object& o) const {
-    return generate(factory_, container_.object_providers(), o);
-}
-
-std::unordered_map<std::string, std::list<std::string> >
-inclusion_dependencies_factory::make(const yarn::exception& e) const {
-    return generate(factory_, container_.exception_providers(), e);
-}
-
-std::unordered_map<std::string, std::list<std::string> >
-inclusion_dependencies_factory::make(const yarn::visitor& v) const {
-    return generate(factory_, container_.visitor_providers(), v);
-}
-
-std::unordered_map<std::string, std::list<std::string> >
-inclusion_dependencies_factory::make(const fabric::registrar& rg) const {
-    return generate(factory_, container_.registrar_providers(), rg);
-}
-
-std::unordered_map<std::string, std::list<std::string> >
-inclusion_dependencies_factory::make(const fabric::master_header& mh) const {
-    return generate(factory_, container_.master_header_providers(), mh);
-}
-
-std::unordered_map<std::string, std::list<std::string> >
-inclusion_dependencies_factory::
-make(const fabric::forward_declarations& fd) const {
-    return generate(factory_, container_.forward_declarations_providers(), fd);
 }
 
 } } } }

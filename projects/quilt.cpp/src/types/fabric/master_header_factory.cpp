@@ -156,9 +156,9 @@ void generator::process_element(const yarn::element& e) {
     }
 
     for (const auto& f : i->second) {
-        const auto fn(f->ownership_hierarchy().facet_name());
+        const auto fctn(f->ownership_hierarchy().facet_name());
         const auto fmtn(f->ownership_hierarchy().formatter_name());
-        result_->inclusion_by_facet()[fn][fmtn].push_back(e.name());
+        result_->inclusion_by_facet()[fctn][fmtn].push_back(e.name());
     }
 }
 

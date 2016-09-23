@@ -54,9 +54,9 @@ create_inclusion_directives_repository(
 inclusion_dependencies_repository formatter_properties_repository_factory::
 create_inclusion_dependencies_repository(
     const inclusion_dependencies_builder_factory& bf,
-    const container& pc, const yarn::model& m) const {
+    const formatters::container& fc, const yarn::model& m) const {
     inclusion_dependencies_repository_factory f;
-    return f.make(bf, pc, m);
+    return f.make(bf, fc, m);
 }
 
 enablement_repository formatter_properties_repository_factory::
@@ -129,9 +129,8 @@ make(const dynamic::repository& srp, const dynamic::object& root_object,
     const auto idrp(create_inclusion_directives_repository(srp, fc, rg, l, m));
     const auto erp(create_enablement_repository(srp, root_object, fc, m));
 
-    const auto pc(rg.container());
     const inclusion_dependencies_builder_factory bf(erp, idrp);
-    const auto dprp(create_inclusion_dependencies_repository(bf, pc, m));
+    const auto dprp(create_inclusion_dependencies_repository(bf, fc, m));
 
     const auto mfd(merge(pdrp, dprp, erp, fdff));
     const auto r(create_formatter_properties(mfd));
