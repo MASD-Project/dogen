@@ -20,6 +20,7 @@
  */
 #include "dogen/quilt.cpp/types/formatters/hash/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/master_header_formatter.hpp"
+#include "dogen/quilt.cpp/types/formatters/hash/primitive_header_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/class_header_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/class_implementation_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/enum_header_formatter.hpp"
@@ -44,6 +45,7 @@ namespace hash {
 
 void initializer::initialize(registrar& rg) {
     register_formatter<master_header_formatter>(rg, traits::facet_name());
+    register_formatter<primitive_header_formatter>(rg);
     register_formatter<class_header_formatter>(rg);
     register_formatter<class_implementation_formatter>(rg);
     register_formatter<enum_header_formatter>(rg);

@@ -18,14 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_TEST_DATA_TRAITS_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_TEST_DATA_TRAITS_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_TEST_DATA_PRIMITIVE_HEADER_FORMATTER_FWD_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_TEST_DATA_PRIMITIVE_HEADER_FORMATTER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
-
-#include <string>
 
 namespace dogen {
 namespace quilt {
@@ -33,37 +31,7 @@ namespace cpp {
 namespace formatters {
 namespace test_data {
 
-struct traits {
-    /**
-     * @brief Name of this facet.
-     */
-    static std::string facet_name();
-
-    /**
-     * @brief Name of the class header formatter.
-     */
-    static std::string class_header_formatter_name();
-
-    /**
-     * @brief Name of the class implementation formatter.
-     */
-    static std::string class_implementation_formatter_name();
-
-    /**
-     * @brief Name of the enumeration header formatter.
-     */
-    static std::string enum_header_formatter_name();
-
-    /**
-     * @brief Name of the enumeration implementation formatter.
-     */
-    static std::string enum_implementation_formatter_name();
-
-    /**
-     * @brief Name of the primitive implementation formatter.
-     */
-    static std::string primitive_header_formatter_name();
-};
+class primitive_header_formatter;
 
 } } } } }
 

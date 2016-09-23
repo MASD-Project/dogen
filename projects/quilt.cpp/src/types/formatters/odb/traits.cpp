@@ -53,4 +53,9 @@ std::string traits::odb_pragma() {
     return r;
 }
 
+std::string traits::primitive_header_formatter_name() {
+    static std::string r(traits::facet_name() + ".primitive_header_formatter");
+    return r;
+}
+
 } } } } }

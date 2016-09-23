@@ -69,6 +69,10 @@ struct traits {
      */
     static std::string registrar_implementation_formatter_name();
 
+    /**
+     * @brief Name of the primitive implementation formatter.
+     */
+    static std::string primitive_header_formatter_name();
 };
 
 } } } } }

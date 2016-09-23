@@ -1043,6 +1043,9 @@ It seems its fairly trivial to extend dia using Pything:
 - [[https://github.com/GNOME/dia/tree/master/plug-ins/python][Lots of examples of python scripts]]
 
 *** STARTED Consider merging provider interface with file formatter   :story:
+    CLOCK: [2016-09-23 Fri 16:49]
+    CLOCK: [2016-09-23 Fri 14:12]--[2016-09-23 Fri 15:39] =>  1:27
+    CLOCK: [2016-09-23 Fri 13:17]--[2016-09-23 Fri 13:41] =>  0:24
     CLOCK: [2016-09-23 Fri 13:07]--[2016-09-23 Fri 13:16] =>  0:09
     CLOCK: [2016-09-23 Fri 11:52]--[2016-09-23 Fri 12:29] =>  0:37
     CLOCK: [2016-09-23 Fri 10:21]--[2016-09-23 Fri 11:51] =>  1:30
@@ -1292,6 +1295,47 @@ Other names:
 
 - canonical formatter
 - reference formatter
+
+We need to support a strange use case: where the formatter does not
+exist for a given element type. For example, we do not have primitive
+formatters, but there are directives set in them:
+
+#+begin_src json-mode
+        {
+            "meta_type" : "primitive",
+            "simple_name" : "uint64_t",
+            "extensions" : {
+                "quilt.cpp.helper.family" : "Number",
+                "quilt.cpp.aspect.requires_manual_default_constructor" : true,
+                "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<cstdint>",
+                "quilt.cpp.hash.class_header_formatter.inclusion_required" : false,
+                "quilt.cpp.io.class_header_formatter.inclusion_required" : false,
+                "quilt.cpp.test_data.class_header_formatter.inclusion_required" : false,
+                "quilt.cpp.serialization.class_header_formatter.inclusion_required" : false,
+                "quilt.cpp.odb.class_header_formatter.inclusion_required" : false
+            }
+        },
+#+end_src
+
+The problem with this is that if we do not have a formatter for
+primitives, then we will not read the directives. In the past this
+worked because we were processing the cross-product of formatters and
+element sub-types, so the mistake of
+=quilt.cpp.types.class_header_formatter.inclusion_directive= was
+actually resulted in the correct result. But of course, we cannot
+replace class_header_formatter with the correct formatter name (as we
+don't have one). Nor does it sound good to have to hard-code the
+formatter name against the type. One way to solve this is with
+canonical formatters:
+
+- use the canonical formatter name in the declaration
+- ensure we always read directives for the canonical formatter from
+  the meta-data.
+- when processing, only set the canonical formatter if it was not
+  already set by meta-data.
+
+When testing the fix, we need to delete the mock formaters created for
+primitives.
 
 *** Tidy-up of inclusion terminology                                  :story:
 

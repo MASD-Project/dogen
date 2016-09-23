@@ -73,6 +73,11 @@ struct traits {
      * @brief Name of the visitor header formatter.
      */
     static std::string visitor_header_formatter_name();
+
+    /**
+     * @brief Name of the primitive implementation formatter.
+     */
+    static std::string primitive_header_formatter_name();
 };
 
 } } } } }

@@ -58,6 +58,11 @@ struct traits {
      * @brief Name of the enumeration implementation formatter.
      */
     static std::string enum_implementation_formatter_name();
+
+    /**
+     * @brief Name of the primitive implementation formatter.
+     */
+    static std::string primitive_header_formatter_name();
 };
 
 } } } } }

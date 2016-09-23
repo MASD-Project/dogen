@@ -50,7 +50,13 @@ std::string traits::enum_header_formatter_name() {
 }
 
 std::string traits::enum_implementation_formatter_name() {
-    static std::string r(traits::facet_name() + ".enum_implementation_formatter");
+    static std::string r(traits::facet_name() +
+        ".enum_implementation_formatter");
+    return r;
+}
+
+std::string traits::primitive_header_formatter_name() {
+    static std::string r(traits::facet_name() + ".primitive_header_formatter");
     return r;
 }
 

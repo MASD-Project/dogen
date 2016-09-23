@@ -58,6 +58,11 @@ struct traits {
      * @brief The pragma used by the ODB compiler.
      */
     static std::string odb_pragma();
+
+    /**
+     * @brief Name of the primitive implementation formatter.
+     */
+    static std::string primitive_header_formatter_name();
 };
 
 } } } } }
