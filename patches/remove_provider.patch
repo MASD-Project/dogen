@@ -1,0 +1,291 @@
+diff --git a/doc/agile/sprint_backlog_88.org b/doc/agile/sprint_backlog_88.org
+index ac52f60..fa14bc5 100644
+--- a/doc/agile/sprint_backlog_88.org
++++ b/doc/agile/sprint_backlog_88.org
+@@ -1043,6 +1043,7 @@ It seems its fairly trivial to extend dia using Pything:
+ - [[https://github.com/GNOME/dia/tree/master/plug-ins/python][Lots of examples of python scripts]]
+ 
+ *** STARTED Consider merging provider interface with file formatter   :story:
++    CLOCK: [2016-09-23 Fri 13:17]--[2016-09-23 Fri 13:41] =>  0:24
+     CLOCK: [2016-09-23 Fri 13:07]--[2016-09-23 Fri 13:16] =>  0:09
+     CLOCK: [2016-09-23 Fri 11:52]--[2016-09-23 Fri 12:29] =>  0:37
+     CLOCK: [2016-09-23 Fri 10:21]--[2016-09-23 Fri 11:51] =>  1:30
+diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formattables/inclusion_directives_repository_factory.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formattables/inclusion_directives_repository_factory.hpp
+index cdea9c5..461d535 100644
+--- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formattables/inclusion_directives_repository_factory.hpp
++++ b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formattables/inclusion_directives_repository_factory.hpp
+@@ -29,9 +29,9 @@
+ #include <unordered_map>
+ #include "dogen/dynamic/types/repository.hpp"
+ #include "dogen/yarn/types/model.hpp"
++#include "dogen/quilt.cpp/types/annotations/inclusion_directive_annotations_factory.hpp"
+ #include "dogen/quilt.cpp/types/formatters/container.hpp"
+ #include "dogen/quilt.cpp/types/formattables/locator.hpp"
+-#include "dogen/quilt.cpp/types/formattables/registrar.hpp"
+ #include "dogen/quilt.cpp/types/formattables/path_derivatives_repository.hpp"
+ #include "dogen/quilt.cpp/types/formattables/inclusion_directives_repository.hpp"
+ 
+@@ -44,15 +44,43 @@ namespace formattables {
+  * @brief Creates the inclusion directives for an Yarn model.
+  */
+ class inclusion_directives_repository_factory {
++private:
++    typedef std::forward_list<
++        std::shared_ptr<formatters::file_formatter_interface>
++    > formatter_list_type;
++
++    formatter_list_type
++    filter_formatters(const formatter_list_type& formatters) const;
++
++    std::unordered_map<std::type_index, formatter_list_type>
++    filter_file_formatters_by_type_index(const formatters::container& fc) const;
++
++private:
++    /**
++     * @brief Inserts the inclusion directive.
++     */
++    void insert_inclusion_directive(const std::string& id,
++        const std::string& formatter_name, const std::string& directive,
++        inclusion_directives_repository& idrp) const;
++
++    /**
++     * @brief Converts a relative path to an inclusion directive.
++     */
++    std::string to_inclusion_directive(const boost::filesystem::path& p) const;
++
++public:
++    void populate_repository(const yarn::element& e,
++        const annotations::inclusion_directive_annotations_factory& factory,
++        const formatter_list_type& formatters,
++        const locator& locator, inclusion_directives_repository& idrp) const;
++
+ public:
+     /**
+      * @brief Create the inclusion directives for an Yarn model.
+      */
+     inclusion_directives_repository make(
+-        const dynamic::repository& drp,
+-        const formatters::container& fc,
+-        const registrar& rg, const locator& l,
+-        const yarn::model& m) const;
++        const dynamic::repository& drp, const formatters::container& fc,
++        const locator& l, const yarn::model& m) const;
+ };
+ 
+ } } } }
+diff --git a/projects/quilt.cpp/src/types/fabric/master_header_factory.cpp b/projects/quilt.cpp/src/types/fabric/master_header_factory.cpp
+index 5a2cec0..ff50f6b 100644
+--- a/projects/quilt.cpp/src/types/fabric/master_header_factory.cpp
++++ b/projects/quilt.cpp/src/types/fabric/master_header_factory.cpp
+@@ -72,7 +72,7 @@ private:
+         std::type_index,
+         std::forward_list<
+             std::shared_ptr<formatters::file_formatter_interface>>>
+-    filter_file_formatters_by_type_index(const formatters::container& fc);
++    filter_file_formatters_by_type_index(const formatters::container& fc) const;
+ 
+     void process_element(const yarn::element& e);
+ 
+@@ -129,7 +129,7 @@ std::unordered_map<
+     std::forward_list<
+         std::shared_ptr<formatters::file_formatter_interface>>>
+ generator::filter_file_formatters_by_type_index(
+-    const formatters::container& fc) {
++    const formatters::container& fc) const {
+     std::unordered_map<
+         std::type_index,
+         std::forward_list<
+diff --git a/projects/quilt.cpp/src/types/formattables/inclusion_directives_repository_factory.cpp b/projects/quilt.cpp/src/types/formattables/inclusion_directives_repository_factory.cpp
+index 37d8b04..700c4d4 100644
+--- a/projects/quilt.cpp/src/types/formattables/inclusion_directives_repository_factory.cpp
++++ b/projects/quilt.cpp/src/types/formattables/inclusion_directives_repository_factory.cpp
+@@ -31,7 +31,6 @@
+ #include "dogen/quilt.cpp/types/fabric/element_visitor.hpp"
+ #include "dogen/quilt.cpp/types/formattables/building_error.hpp"
+ #include "dogen/quilt.cpp/io/formattables/inclusion_directives_repository_io.hpp"
+-#include "dogen/quilt.cpp/types/annotations/inclusion_directive_annotations_factory.hpp"
+ #include "dogen/quilt.cpp/types/formattables/inclusion_directives_repository_factory.hpp"
+ 
+ namespace {
+@@ -348,19 +347,174 @@ to_inclusion_directive(const boost::filesystem::path& p) const {
+ 
+ }
+ 
++inclusion_directives_repository_factory::formatter_list_type
++inclusion_directives_repository_factory::
++filter_formatters(const formatter_list_type& formatters) const {
++    formatter_list_type r;
++
++    /*
++     * We are only interested in formatters that generate
++     * header files.
++     */
++    using formatters::inclusion_support_types;
++    static const auto ns(inclusion_support_types::not_supported);
++    for (const auto& f : formatters) {
++        if (f->inclusion_support_type() != ns)
++            r.push_front(f);
++    }
++    return r;
++}
++
++std::unordered_map<std::type_index,
++                   inclusion_directives_repository_factory::formatter_list_type>
++inclusion_directives_repository_factory::
++filter_file_formatters_by_type_index(const formatters::container& fc) const {
++    std::unordered_map<std::type_index, formatter_list_type> r;
++    for (const auto& pair : fc.file_formatters_by_type_index()) {
++        const auto& ti(pair.first);
++        const auto& fmts(pair.second);
++        r[ti] = filter_formatters(fmts);
++    }
++    return r;
++}
++
++void inclusion_directives_repository_factory::
++insert_inclusion_directive(const std::string& id,
++    const std::string& formatter_name, const std::string& directive,
++    inclusion_directives_repository& idrp) const {
++
++    if (directive.empty()) {
++        std::ostringstream s;
++        s << empty_include_directive << formatter_name << " for type: " << id;
++
++        const auto msg(s.str());
++        BOOST_LOG_SEV(lg, error) << msg;
++        BOOST_THROW_EXCEPTION(building_error(msg));
++    }
++
++    const auto fn_dir(std::make_pair(formatter_name, directive));
++    const auto pair(idrp.by_name()[id].insert(fn_dir));
++    if (pair.second)
++        return;
++
++    BOOST_LOG_SEV(lg, error) << duplicate_name << id;
++    BOOST_THROW_EXCEPTION(building_error(duplicate_name + id));
++}
++
++std::string inclusion_directives_repository_factory::
++to_inclusion_directive(const boost::filesystem::path& p) const {
++    std::ostringstream ss;
++    ss << double_quote << p.generic_string() << double_quote;
++    return ss.str();
++}
++
++void inclusion_directives_repository_factory::populate_repository(
++    const yarn::element& e,
++    const annotations::inclusion_directive_annotations_factory& factory,
++    const formatter_list_type& formatters, const locator& locator,
++    inclusion_directives_repository& idrp) const {
++
++    const auto& n(e.name());
++    const auto id(n.id());
++
++    /*
++     * First we extract the configuration for the generation of
++     * include directives for this element. Note that we generate
++     * this setting for _all elements_ even if the user did not
++     * specify any meta-data (we do so via defaults).
++     *
++     * The question we are asking is: "does this element require
++     * any inclusion directives at all, across all facets?". Not
++     * all elements do; for example bool, int and so on don't
++     * require any inclusions at all across all facets. If the
++     * user did not override this, we default it to true because
++     * normally elements require inclusion.
++     */
++    const auto& o(e.extensions());
++    const bool required(factory.make_top_level_inclusion_required(o));
++    if (!required) {
++        BOOST_LOG_SEV(lg, debug) << "Inclusion not required for element.";
++        return;
++    }
++
++    if (formatters.empty()) {
++        BOOST_LOG_SEV(lg, debug) << "No providers found.";
++        return;
++    }
++
++    /*
++     * Now we start working at the formatter level.
++     */
++    for (const auto& fmt : formatters) {
++        const auto fmtn(fmt->ownership_hierarchy().formatter_name());
++        BOOST_LOG_SEV(lg, debug) << "Formatter: " << fmtn;
++
++        /*
++         * Does the type require an inclusion directive for this
++         * specific formatter? Some types require inclusion
++         * directives for some formatters, but not for others. For
++         * example, we may need an include for serialising a
++         * std::list, but in test data we make use of helpers and
++         * thus do not require an include.
++         *
++         * Again, we default this to true.
++         */
++        const auto s(factory.make_inclusion_directive_annotations(fmtn, o));
++        if (!s.inclusion_required()) {
++            BOOST_LOG_SEV(lg, debug) << "Inclusion directive not required "
++                                     << " for formatter: " << fmtn;
++            continue;
++        }
++
++        /*
++         * Do the annotations provide a "hard-coded" inclusion directive?
++         * That is, the type had an hard-coded incantation for its
++         * include. This is the case for system models such as boost, std
++         * etc where we can't compute the inclusion directive.
++         */
++        std::string directive;
++        if (s.inclusion_directive())
++            directive = *s.inclusion_directive();
++        else {
++            /*
++             * Finally, we have no alternative but to compute the
++             * inclusion directive.
++             */
++            const auto path(fmt->inclusion_path(locator, n));
++            directive = to_inclusion_directive(path);
++        }
++
++        BOOST_LOG_SEV(lg, debug) << "Inclusion directive: " << directive;
++        insert_inclusion_directive(id, fmtn, directive, idrp);
++
++        /*
++         * If the provider is also the default for this facet and
++         * element, we need to register it against the facet
++         * too. Note that, for a given element type on a given
++         * facet, there can only be one default - or else we'll
++         * throw.
++         */
++        const auto cs(formatters::inclusion_support_types::canonical_support);
++        const auto fctn(fmt->ownership_hierarchy().facet_name());
++        if (fmt->inclusion_support_type() == cs) {
++            BOOST_LOG_SEV(lg, debug) << "Inserting default for: " << fctn;
++            insert_inclusion_directive(id, fctn, directive, idrp);
++        }
++    }
++}
++
+ inclusion_directives_repository inclusion_directives_repository_factory::make(
+-    const dynamic::repository& drp,
+-    const formatters::container& fc,
+-    const registrar& rg, const locator& l,
+-    const yarn::model& m) const {
++    const dynamic::repository& drp, const formatters::container& fc,
++    const locator& l, const yarn::model& m) const {
+ 
+     BOOST_LOG_SEV(lg, debug) << "Making inclusion directives repository.";
+-
++    const auto ffti(filter_file_formatters_by_type_index(fc));
+     const annotations::inclusion_directive_annotations_factory f(drp, fc);
+-    generator g(rg.container(), l, f);
+     for (const auto& ptr : m.elements()) {
+         const auto& e(*ptr);
+-        e.accept(g);
++
++        populate_repository
++
+     }
+     const auto r(g.result());
+ 
