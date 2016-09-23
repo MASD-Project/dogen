@@ -26,7 +26,6 @@
 #include "dogen/quilt.cpp/types/annotations/initializer.hpp"
 #include "dogen/quilt.cpp/types/formatters/initializer.hpp"
 #include "dogen/quilt.cpp/types/fabric/initializer.hpp"
-#include "dogen/quilt.cpp/types/formattables/registrar.hpp"
 #include "dogen/quilt.cpp/types/workflow.hpp"
 #include "dogen/quilt.cpp/types/initializer.hpp"
 

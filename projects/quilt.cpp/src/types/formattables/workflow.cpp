@@ -46,15 +46,6 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-std::shared_ptr<formattables::registrar> workflow::registrar_;
-
-formattables::registrar& workflow::registrar() {
-    if (!registrar_)
-        registrar_ = std::make_shared<formattables::registrar>();
-
-    return *registrar_;
-}
-
 std::unordered_map<std::string, annotations::path_annotations>
 workflow::create_path_annotations(const dynamic::repository& drp,
     const dynamic::object& root_object,

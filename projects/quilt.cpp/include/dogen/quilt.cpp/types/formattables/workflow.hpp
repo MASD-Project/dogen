@@ -33,7 +33,6 @@
 #include "dogen/formatters/types/decoration_configuration_factory.hpp"
 #include "dogen/options/types/cpp_options.hpp"
 #include "dogen/yarn/types/model.hpp"
-#include "dogen/quilt.cpp/types/formattables/registrar.hpp"
 #include "dogen/quilt.cpp/types/annotations/path_annotations.hpp"
 #include "dogen/quilt.cpp/types/annotations/element_annotations_repository.hpp"
 #include "dogen/quilt.cpp/types/annotations/aspect_annotations_repository.hpp"
@@ -56,13 +55,6 @@ namespace formattables {
  * Yarn elements.
  */
 class workflow {
-public:
-    /**
-     * @brief Returns the registrar. If it has not yet been
-     * initialised, initialises it.
-     */
-    static formattables::registrar& registrar();
-
 private:
     /**
      * @brief Creates the path annotations.
@@ -136,9 +128,6 @@ public:
         const formatters::container& fc,
         const annotations::streaming_annotations_repository& ssrp,
         const yarn::model& m) const;
-
-private:
-    static std::shared_ptr<formattables::registrar> registrar_;
 };
 
 } } } }

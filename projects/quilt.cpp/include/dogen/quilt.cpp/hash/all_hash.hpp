@@ -45,7 +45,6 @@
 #include "dogen/quilt.cpp/hash/formattables/formatter_properties_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/enablement_repository_hash.hpp"
 #include "dogen/quilt.cpp/hash/formatters/inclusion_support_types_hash.hpp"
-#include "dogen/quilt.cpp/hash/formattables/inclusion_path_support_hash.hpp"
 #include "dogen/quilt.cpp/hash/annotations/directory_names_annotations_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/path_derivatives_repository_hash.hpp"
 #include "dogen/quilt.cpp/hash/annotations/aspect_annotations_repository_hash.hpp"
