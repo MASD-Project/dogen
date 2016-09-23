@@ -42,7 +42,6 @@
 #include "dogen/quilt.cpp/types/annotations/odb_annotations.hpp"
 #include "dogen/quilt.cpp/types/annotations/opaque_annotations.hpp"
 #include "dogen/quilt.cpp/types/formatters/context.hpp"
-#include "dogen/quilt.cpp/types/formatters/file_types.hpp"
 #include "dogen/quilt.cpp/types/formattables/helper_properties.hpp"
 
 namespace dogen {
@@ -56,7 +55,7 @@ namespace formatters {
 class assistant final {
 public:
     assistant(const context& ctx, const dynamic::ownership_hierarchy& oh,
-        const formatters::file_types ft, const std::string& id);
+        const bool requires_header_guard, const std::string& id);
 
 public:
     template<typename T>
@@ -313,7 +312,7 @@ private:
     const context& context_;
     formattables::formatter_properties formatter_properties_;
     const dynamic::ownership_hierarchy ownership_hierarchy_;
-    const formatters::file_types file_type_;
+    const bool requires_header_guard_;
 };
 
 } } } }

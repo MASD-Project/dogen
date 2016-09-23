@@ -131,10 +131,6 @@ boost::filesystem::path registrar_header_formatter::full_path(
     return l.make_full_path_for_cpp_header(n, static_formatter_name());
 }
 
-file_types registrar_header_formatter::file_type() const {
-    return file_types::cpp_header;
-}
-
 void registrar_header_formatter::
 register_provider(formattables::registrar& rg) const {
     rg.register_provider(boost::make_shared<provider>());
@@ -143,7 +139,8 @@ register_provider(formattables::registrar& rg) const {
 
 dogen::formatters::file registrar_header_formatter::
 format(const context& ctx, const yarn::element& e) const {
-    assistant a(ctx, ownership_hierarchy(), file_type(), e.name().id());
+    const auto id(e.name().id());
+    assistant a(ctx, ownership_hierarchy(), false/*requires_header_guard*/, id);
     const auto& rg(a.as<fabric::registrar>(static_formatter_name(), e));
     const auto r(registrar_header_formatter_stitch(a, rg));
     return r;

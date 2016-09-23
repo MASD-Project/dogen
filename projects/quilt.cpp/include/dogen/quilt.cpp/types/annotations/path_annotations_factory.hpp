@@ -35,7 +35,6 @@
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/dynamic/types/field_definition.hpp"
 #include "dogen/quilt.cpp/types/annotations/path_annotations.hpp"
-#include "dogen/quilt.cpp/types/formatters/file_types.hpp"
 #include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 
 namespace dogen {
@@ -59,7 +58,6 @@ private:
      */
     struct field_definitions {
         std::string formatter_name;
-        quilt::cpp::formatters::file_types file_type;
         boost::optional<dynamic::field_definition> facet_directory;
         boost::optional<dynamic::field_definition> facet_postfix;
         dynamic::field_definition formatter_postfix;

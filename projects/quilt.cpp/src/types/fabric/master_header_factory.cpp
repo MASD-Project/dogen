@@ -115,9 +115,12 @@ generator::filter_formatters(const std::forward_list<std::shared_ptr<
      * We are only interested in formatters that generate
      * header files.
      */
-    for (const auto& f : formatters)
-        if (f->file_type() == formatters::file_types::cpp_header)
+    using formatters::inclusion_support_types;
+    static const auto ns(inclusion_support_types::not_supported);
+    for (const auto& f : formatters) {
+        if (f->inclusion_support_type() != ns)
             r.push_front(f);
+    }
     return r;
 }
 

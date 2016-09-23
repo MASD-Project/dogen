@@ -162,10 +162,6 @@ boost::filesystem::path master_header_formatter::full_path(
     return l.make_full_path_for_cpp_header(n, fmtn);
 }
 
-file_types master_header_formatter::file_type() const {
-    return file_types::cpp_header;
-}
-
 void master_header_formatter::
 register_provider(formattables::registrar& rg) const {
     const auto fn(ownership_hierarchy_.facet_name());
@@ -175,7 +171,8 @@ register_provider(formattables::registrar& rg) const {
 
 dogen::formatters::file master_header_formatter::
 format(const context& ctx, const yarn::element& e) const {
-    assistant a(ctx, ownership_hierarchy(), file_type(), e.name().id());
+    const auto id(e.name().id());
+    assistant a(ctx, ownership_hierarchy(), false/*requires_header_guard*/, id);
     static const auto fmtn(ownership_hierarchy_.formatter_name());
     const auto& mh(a.as<fabric::master_header>(fmtn, e));
     const auto r(master_header_formatter_stitch(a, mh));

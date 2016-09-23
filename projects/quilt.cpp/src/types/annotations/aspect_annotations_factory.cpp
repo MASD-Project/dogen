@@ -39,7 +39,8 @@ namespace quilt {
 namespace cpp {
 namespace annotations {
 
-aspect_annotations_factory::aspect_annotations_factory(const dynamic::repository& rp)
+aspect_annotations_factory::
+aspect_annotations_factory(const dynamic::repository& rp)
     : field_definitions_(make_field_definitions(rp)) {}
 
 aspect_annotations_factory::field_definitions aspect_annotations_factory::

@@ -19,15 +19,9 @@
  *
  */
 #include <sstream>
-#include "dogen/quilt.cpp/test_data/formatters/file_types_td.hpp"
 #include "dogen/quilt.cpp/test_data/annotations/path_annotations_td.hpp"
 
 namespace {
-
-dogen::quilt::cpp::formatters::file_types
-create_dogen_quilt_cpp_formatters_file_types(const unsigned int position) {
-    return dogen::quilt::cpp::formatters::file_types_generator::create(position);
-}
 
 std::string create_std_string(const unsigned int position) {
     std::ostringstream s;
@@ -50,15 +44,14 @@ path_annotations_generator::path_annotations_generator() : position_(0) { }
 
 void path_annotations_generator::
 populate(const unsigned int position, result_type& v) {
-    v.file_type(create_dogen_quilt_cpp_formatters_file_types(position + 0));
-    v.facet_directory(create_std_string(position + 1));
-    v.facet_postfix(create_std_string(position + 2));
-    v.formatter_postfix(create_std_string(position + 3));
-    v.include_directory_name(create_std_string(position + 4));
-    v.source_directory_name(create_std_string(position + 5));
-    v.disable_facet_directories(create_bool(position + 6));
-    v.header_file_extension(create_std_string(position + 7));
-    v.implementation_file_extension(create_std_string(position + 8));
+    v.facet_directory(create_std_string(position + 0));
+    v.facet_postfix(create_std_string(position + 1));
+    v.formatter_postfix(create_std_string(position + 2));
+    v.include_directory_name(create_std_string(position + 3));
+    v.source_directory_name(create_std_string(position + 4));
+    v.disable_facet_directories(create_bool(position + 5));
+    v.header_file_extension(create_std_string(position + 6));
+    v.implementation_file_extension(create_std_string(position + 7));
 }
 
 path_annotations_generator::result_type

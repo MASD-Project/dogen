@@ -81,7 +81,9 @@ make_field_definitions(const dynamic::repository& rp,
             BOOST_THROW_EXCEPTION(building_error(empty_formatter_name));
         }
 
-        if (f->file_type() != formatters::file_types::cpp_header) {
+        using formatters::inclusion_support_types;
+        static const auto ns(inclusion_support_types::not_supported);
+        if (f->inclusion_support_type() == ns) {
             BOOST_LOG_SEV(lg, debug) << "Skipping formatter: " << fn;
             continue;
         }

@@ -21,7 +21,6 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen/quilt.cpp/io/formatters/file_types_io.hpp"
 #include "dogen/quilt.cpp/io/annotations/path_annotations_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -45,7 +44,6 @@ std::ostream& operator<<(std::ostream& s, const path_annotations& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::annotations::path_annotations\"" << ", "
-      << "\"file_type\": " << v.file_type() << ", "
       << "\"facet_directory\": " << "\"" << tidy_up_string(v.facet_directory()) << "\"" << ", "
       << "\"facet_postfix\": " << "\"" << tidy_up_string(v.facet_postfix()) << "\"" << ", "
       << "\"formatter_postfix\": " << "\"" << tidy_up_string(v.formatter_postfix()) << "\"" << ", "

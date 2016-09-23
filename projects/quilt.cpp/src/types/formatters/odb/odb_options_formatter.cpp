@@ -148,10 +148,6 @@ boost::filesystem::path odb_options_formatter::full_path(
     return l.make_full_path_for_odb_options(n, static_formatter_name());
 }
 
-file_types odb_options_formatter::file_type() const {
-    return file_types::odb_options;
-}
-
 void odb_options_formatter::
 register_provider(formattables::registrar& rg) const {
     rg.register_provider(boost::make_shared<provider>());
@@ -159,7 +155,8 @@ register_provider(formattables::registrar& rg) const {
 
 dogen::formatters::file odb_options_formatter::
 format(const context& ctx, const yarn::element& e) const {
-    assistant a(ctx, ownership_hierarchy(), file_type(), e.name().id());
+    const auto id(e.name().id());
+    assistant a(ctx, ownership_hierarchy(), false/*requires_header_guard*/, id);
     const auto& oo(a.as<fabric::odb_options>(static_formatter_name(), e));
     const auto r(odb_options_formatter_stitch(a, oo));
     return r;

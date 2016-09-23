@@ -26,11 +26,9 @@ namespace cpp {
 namespace annotations {
 
 path_annotations::path_annotations()
-    : file_type_(static_cast<dogen::quilt::cpp::formatters::file_types>(0)),
-      disable_facet_directories_(static_cast<bool>(0)) { }
+    : disable_facet_directories_(static_cast<bool>(0)) { }
 
 path_annotations::path_annotations(
-    const dogen::quilt::cpp::formatters::file_types file_type,
     const std::string& facet_directory,
     const std::string& facet_postfix,
     const std::string& formatter_postfix,
@@ -39,8 +37,7 @@ path_annotations::path_annotations(
     const bool disable_facet_directories,
     const std::string& header_file_extension,
     const std::string& implementation_file_extension)
-    : file_type_(file_type),
-      facet_directory_(facet_directory),
+    : facet_directory_(facet_directory),
       facet_postfix_(facet_postfix),
       formatter_postfix_(formatter_postfix),
       include_directory_name_(include_directory_name),
@@ -51,7 +48,6 @@ path_annotations::path_annotations(
 
 void path_annotations::swap(path_annotations& other) noexcept {
     using std::swap;
-    swap(file_type_, other.file_type_);
     swap(facet_directory_, other.facet_directory_);
     swap(facet_postfix_, other.facet_postfix_);
     swap(formatter_postfix_, other.formatter_postfix_);
@@ -63,8 +59,7 @@ void path_annotations::swap(path_annotations& other) noexcept {
 }
 
 bool path_annotations::operator==(const path_annotations& rhs) const {
-    return file_type_ == rhs.file_type_ &&
-        facet_directory_ == rhs.facet_directory_ &&
+    return facet_directory_ == rhs.facet_directory_ &&
         facet_postfix_ == rhs.facet_postfix_ &&
         formatter_postfix_ == rhs.formatter_postfix_ &&
         include_directory_name_ == rhs.include_directory_name_ &&
@@ -78,14 +73,6 @@ path_annotations& path_annotations::operator=(path_annotations other) {
     using std::swap;
     swap(*this, other);
     return *this;
-}
-
-dogen::quilt::cpp::formatters::file_types path_annotations::file_type() const {
-    return file_type_;
-}
-
-void path_annotations::file_type(const dogen::quilt::cpp::formatters::file_types v) {
-    file_type_ = v;
 }
 
 const std::string& path_annotations::facet_directory() const {

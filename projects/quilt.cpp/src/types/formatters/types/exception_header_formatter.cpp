@@ -111,10 +111,6 @@ exception_header_formatter::ownership_hierarchy() const {
     return r;
 }
 
-file_types exception_header_formatter::file_type() const {
-    return file_types::cpp_header;
-}
-
 std::type_index exception_header_formatter::element_type_index() const {
     static auto r(std::type_index(typeid(yarn::exception)));
     return r;
@@ -151,7 +147,8 @@ register_provider(formattables::registrar& rg) const {
 
 dogen::formatters::file exception_header_formatter::
 format(const context& ctx, const yarn::element& e) const {
-    assistant a(ctx, ownership_hierarchy(), file_type(), e.name().id());
+    const auto id(e.name().id());
+    assistant a(ctx, ownership_hierarchy(), true/*requires_header_guard*/, id);
     const auto& ye(a.as<yarn::exception>(static_formatter_name(), e));
     const auto r(exception_header_formatter_stitch(a, ye));
     return r;

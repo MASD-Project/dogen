@@ -46,7 +46,6 @@
 #include "dogen/quilt.cpp/types/formatters/registrar.hpp"
 #include "dogen/quilt.cpp/types/annotations/registrar.hpp"
 #include "dogen/quilt.cpp/types/formattables/workflow.hpp"
-#include "dogen/quilt.cpp/types/formatters/file_types.hpp"
 #include "dogen/quilt.cpp/types/formatters/odb/traits.hpp"
 #include "dogen/quilt.cpp/types/fabric/element_visitor.hpp"
 #include "dogen/quilt.cpp/types/formattables/container.hpp"

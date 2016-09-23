@@ -164,19 +164,15 @@ boost::filesystem::path enum_implementation_formatter::full_path(
     return l.make_full_path_for_cpp_implementation(n, static_formatter_name());
 }
 
-file_types enum_implementation_formatter::file_type() const {
-    return file_types::cpp_implementation;
-}
-
 void enum_implementation_formatter::
 register_provider(formattables::registrar& rg) const {
     rg.register_provider(boost::make_shared<provider>());
 }
 
-
 dogen::formatters::file enum_implementation_formatter::
 format(const context& ctx, const yarn::element& e) const {
-    assistant a(ctx, ownership_hierarchy(), file_type(), e.name().id());
+    const auto id(e.name().id());
+    assistant a(ctx, ownership_hierarchy(), false/*requires_header_guard*/, id);
     const auto& ye(a.as<yarn::enumeration>(static_formatter_name(), e));
     const auto r(enum_implementation_formatter_stitch(a, ye));
     return r;

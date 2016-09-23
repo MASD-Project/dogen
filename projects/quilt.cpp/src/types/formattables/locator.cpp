@@ -24,7 +24,6 @@
 #include <boost/algorithm/string/join.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/element_visitor.hpp"
-#include "dogen/quilt.cpp/io/formatters/file_types_io.hpp"
 #include "dogen/quilt.cpp/types/formattables/building_error.hpp"
 #include "dogen/quilt.cpp/types/formattables/locator.hpp"
 
@@ -39,7 +38,6 @@ const std::string underscore("_");
 const std::string double_quote("\"");
 const std::string dot(".");
 const std::string separator("_");
-const std::string unsupported_file_type("File type not supported: ");
 
 const std::string missing_path_annotations(
     "Could not find any path annotations for formatter: ");

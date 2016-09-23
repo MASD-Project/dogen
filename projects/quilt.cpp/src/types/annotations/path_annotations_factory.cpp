@@ -99,7 +99,6 @@ path_annotations_factory::make_field_definitions(
     const formatters::file_formatter_interface& f) const {
 
     field_definitions r;
-    r.file_type = f.file_type();
     const auto oh(f.ownership_hierarchy());
     r.formatter_name = oh.formatter_name();
     setup_top_level_fields(rp, r);
@@ -133,7 +132,6 @@ create_annotations_for_formatter(const field_definitions& fd,
     const dynamic::object& o) const {
 
     path_annotations r;
-    r.file_type(fd.file_type);
 
     const dynamic::field_selector fs(o);
 

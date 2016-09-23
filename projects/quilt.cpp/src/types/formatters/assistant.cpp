@@ -94,12 +94,11 @@ get_identifiable_and_qualified(const IdentifiableAndQualified& iaq) {
     return std::make_pair(iaq.identifiable(), i->second);
 }
 
-assistant::assistant(const context& ctx,
-    const dynamic::ownership_hierarchy& oh, const formatters::file_types ft,
-    const std::string& id) :
+assistant::assistant(const context& ctx, const dynamic::ownership_hierarchy& oh,
+    const bool requires_header_guard, const std::string& id) :
     context_(ctx),
     formatter_properties_(obtain_formatter_properties(oh.formatter_name())),
-    ownership_hierarchy_(oh), file_type_(ft) {
+    ownership_hierarchy_(oh), requires_header_guard_(requires_header_guard) {
 
     BOOST_LOG_SEV(lg, debug) << "Processing element: " << id
                              << " using: " << oh.formatter_name();
@@ -253,11 +252,12 @@ void assistant::validate() const {
         BOOST_THROW_EXCEPTION(formatting_error(file_path_not_set + fn));
     }
 
-    if (file_type_ == file_types::cpp_header) {
-        if (!fp.header_guard() || fp.header_guard()->empty()) {
-            BOOST_LOG_SEV(lg, error) << header_guard_not_set << fn;
-            BOOST_THROW_EXCEPTION(formatting_error(header_guard_not_set + fn));
-        }
+    if (!requires_header_guard_)
+        return;
+
+    if (!fp.header_guard() || fp.header_guard()->empty()) {
+        BOOST_LOG_SEV(lg, error) << header_guard_not_set << fn;
+        BOOST_THROW_EXCEPTION(formatting_error(header_guard_not_set + fn));
     }
 }
 

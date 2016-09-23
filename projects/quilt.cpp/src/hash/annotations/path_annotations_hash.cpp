@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/hash/formatters/file_types_hash.hpp"
 #include "dogen/quilt.cpp/hash/annotations/path_annotations_hash.hpp"
 
 namespace {
@@ -39,7 +38,6 @@ namespace annotations {
 std::size_t path_annotations_hasher::hash(const path_annotations& v) {
     std::size_t seed(0);
 
-    combine(seed, v.file_type());
     combine(seed, v.facet_directory());
     combine(seed, v.facet_postfix());
     combine(seed, v.formatter_postfix());

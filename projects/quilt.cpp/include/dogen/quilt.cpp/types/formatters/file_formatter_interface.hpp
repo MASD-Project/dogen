@@ -36,7 +36,6 @@
 #include "dogen/quilt.cpp/types/formattables/inclusion_dependencies_builder_factory.hpp"
 #include "dogen/quilt.cpp/types/formatters/inclusion_support_types.hpp"
 #include "dogen/quilt.cpp/types/formatters/context.hpp"
-#include "dogen/quilt.cpp/types/formatters/file_types.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -97,11 +96,6 @@ public:
         const formattables::locator& l, const yarn::name& n) const = 0;
 
 public:
-    /**
-     * @brief Type of the file this formatter generates.
-     */
-    virtual file_types file_type() const = 0;
-
     /**
      * @brief Registers an inclusion dependency providers this
      * formatter may know of.

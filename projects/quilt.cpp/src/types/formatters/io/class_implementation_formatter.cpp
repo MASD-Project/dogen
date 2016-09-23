@@ -218,10 +218,6 @@ boost::filesystem::path class_implementation_formatter::full_path(
     return l.make_full_path_for_cpp_implementation(n, static_formatter_name());
 }
 
-file_types class_implementation_formatter::file_type() const {
-    return file_types::cpp_implementation;
-}
-
 void class_implementation_formatter::
 register_provider(formattables::registrar& rg) const {
     rg.register_provider(boost::make_shared<provider>());
@@ -230,7 +226,8 @@ register_provider(formattables::registrar& rg) const {
 
 dogen::formatters::file class_implementation_formatter::
 format(const context& ctx, const yarn::element& e) const {
-    assistant a(ctx, ownership_hierarchy(), file_type(), e.name().id());
+    const auto id(e.name().id());
+    assistant a(ctx, ownership_hierarchy(), false/*requires_header_guard*/, id);
     const auto& o(a.as<yarn::object>(static_formatter_name(), e));
     const auto r(class_implementation_formatter_stitch(a, o));
     return r;

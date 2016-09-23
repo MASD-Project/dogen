@@ -29,7 +29,6 @@
 #include "dogen/quilt.cpp/hash/fabric/cmakelists_hash.hpp"
 #include "dogen/quilt.cpp/hash/fabric/odb_options_hash.hpp"
 #include "dogen/quilt.cpp/hash/fabric/master_header_hash.hpp"
-#include "dogen/quilt.cpp/hash/formatters/file_types_hash.hpp"
 #include "dogen/quilt.cpp/hash/annotations/odb_annotations_hash.hpp"
 #include "dogen/quilt.cpp/hash/fabric/forward_declarations_hash.hpp"
 #include "dogen/quilt.cpp/hash/annotations/path_annotations_hash.hpp"

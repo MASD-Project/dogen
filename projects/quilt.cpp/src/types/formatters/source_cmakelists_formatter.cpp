@@ -147,10 +147,6 @@ boost::filesystem::path source_cmakelists_formatter::full_path(
     return l.make_full_path_for_source_cmakelists(n, static_formatter_name());
 }
 
-file_types source_cmakelists_formatter::file_type() const {
-    return file_types::cmakefile;
-}
-
 void source_cmakelists_formatter::
 register_provider(formattables::registrar& rg) const {
     rg.register_provider(boost::make_shared<provider>());
@@ -158,7 +154,8 @@ register_provider(formattables::registrar& rg) const {
 
 dogen::formatters::file source_cmakelists_formatter::
 format(const context& ctx, const yarn::element& e) const {
-    assistant a(ctx, ownership_hierarchy(), file_type(), e.name().id());
+    const auto id(e.name().id());
+    assistant a(ctx, ownership_hierarchy(), false/*requires_header_guard*/, id);
     const auto& cm(a.as<fabric::cmakelists>(static_formatter_name(), e));
     const auto r(source_cmakelists_formatter_stitch(a, cm));
     return r;

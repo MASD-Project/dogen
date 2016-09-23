@@ -27,7 +27,6 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen/quilt.cpp/types/formatters/file_types.hpp"
 #include "dogen/quilt.cpp/serialization/annotations/path_annotations_fwd_ser.hpp"
 
 namespace dogen {
@@ -46,7 +45,6 @@ public:
 
 public:
     path_annotations(
-        const dogen::quilt::cpp::formatters::file_types file_type,
         const std::string& facet_directory,
         const std::string& facet_postfix,
         const std::string& formatter_postfix,
@@ -64,9 +62,6 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::annotations::path_annotations& v, unsigned int version);
 
 public:
-    dogen::quilt::cpp::formatters::file_types file_type() const;
-    void file_type(const dogen::quilt::cpp::formatters::file_types v);
-
     const std::string& facet_directory() const;
     std::string& facet_directory();
     void facet_directory(const std::string& v);
@@ -116,7 +111,6 @@ public:
     path_annotations& operator=(path_annotations other);
 
 private:
-    dogen::quilt::cpp::formatters::file_types file_type_;
     std::string facet_directory_;
     std::string facet_postfix_;
     std::string formatter_postfix_;

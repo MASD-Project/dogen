@@ -55,8 +55,6 @@ public:
         const formattables::locator& l, const yarn::name& n) const override;
 
 public:
-    file_types file_type() const override;
-
     void register_provider(formattables::registrar& rg) const override;
 
     dogen::formatters::file

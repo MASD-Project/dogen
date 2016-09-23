@@ -28,7 +28,6 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/quilt.cpp/serialization/formatters/file_types_ser.hpp"
 #include "dogen/quilt.cpp/serialization/annotations/path_annotations_ser.hpp"
 
 namespace boost {
@@ -38,7 +37,6 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::quilt::cpp::annotations::path_annotations& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("file_type", v.file_type_);
     ar << make_nvp("facet_directory", v.facet_directory_);
     ar << make_nvp("facet_postfix", v.facet_postfix_);
     ar << make_nvp("formatter_postfix", v.formatter_postfix_);
@@ -53,7 +51,6 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::quilt::cpp::annotations::path_annotations& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("file_type", v.file_type_);
     ar >> make_nvp("facet_directory", v.facet_directory_);
     ar >> make_nvp("facet_postfix", v.facet_postfix_);
     ar >> make_nvp("formatter_postfix", v.formatter_postfix_);
