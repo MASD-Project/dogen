@@ -42,23 +42,36 @@ namespace formattables {
 
 std::unordered_map<std::string, formattable> transformer::
 transform(const formatters::container& fc, const yarn::model& m) const {
-    BOOST_LOG_SEV(lg, debug) << "Transforming yarn to formattables.";
+    BOOST_LOG_SEV(lg, debug) << "Transforming yarn to formattables."
+                             << " Elements in model: " << m.elements().size();
     std::unordered_map<std::string, formattable> r;
-    for (const auto& e : m.elements()) {
-        const auto id(e->name().id());
+    for (const auto& ptr : m.elements()) {
+        const auto& e(*ptr);
+        const auto id(e.name().id());
+        BOOST_LOG_SEV(lg, debug) << "Processing element: " << id;
 
-        formattable fbl;
-        fbl.element(e);
+        auto i(r.find(id));
+        if (i == r.end()) {
+            formattable fbl;
+            fbl.element(ptr);
+            const auto pair(std::make_pair(id, fbl));
+            const auto ret(r.insert(pair));
+            i = ret.first;
+            BOOST_LOG_SEV(lg, debug) << "Inserted element: " << id;
+        } else
+            BOOST_LOG_SEV(lg, debug) << "Element already inserted.";
 
+        auto& fbl(i->second);
         const auto ti(std::type_index(typeid(e)));
-        const auto i(fc.file_formatters_by_type_index().find(ti));
-        if (i == fc.file_formatters_by_type_index().end()) {
-            BOOST_LOG_SEV(lg, trace) << "Element has no formatters: " << id;
+        const auto j(fc.file_formatters_by_type_index().find(ti));
+        if (j == fc.file_formatters_by_type_index().end()) {
+            BOOST_LOG_SEV(lg, debug) << "Element has no formatters: " << id;
             continue;
         }
+        BOOST_LOG_SEV(lg, debug) << "Element has formatters " << id;
 
         auto& fmt_cfg(fbl.configuration().formatter_configuration());
-        for (const auto& fmt : i->second) {
+        for (const auto& fmt : j->second) {
             const auto fmtn(fmt->ownership_hierarchy().formatter_name());
             const auto pair(std::make_pair(fmtn, formatter_configuration()));
             const auto ret(fmt_cfg.insert(pair));
@@ -70,27 +83,24 @@ transform(const formatters::container& fc, const yarn::model& m) const {
             BOOST_LOG_SEV(lg, trace) << "Added formatter: " << fmtn
                                      << " to element: " << id;
         }
-
-        const auto pair(std::make_pair(id, fbl));
-        const auto ret(r.insert(pair));
-        if (!ret.second) {
-            BOOST_LOG_SEV(lg, error) << duplicate_element << id;
-            BOOST_THROW_EXCEPTION(transformation_error(duplicate_element + id));
-        }
-        BOOST_LOG_SEV(lg, trace) << "Inserted element: " << id;
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Finished transforming yarn to formattables.";
+    BOOST_LOG_SEV(lg, debug) << "Finished transforming yarn to formattables."
+                             << "Size: " << r.size();
     return r;
 }
 
 std::forward_list<formattable> transformer::transform(
     const std::unordered_map<std::string, formattable>& formattables) const {
-
+    BOOST_LOG_SEV(lg, debug) << "Transforming formattables to list. Size: "
+                             << formattables.size();
     std::forward_list<formattable> r;
     for (const auto& pair : formattables)
         r.push_front(pair.second);
 
+    const auto size(std::distance(r.begin(), r.end()));
+    BOOST_LOG_SEV(lg, debug) << "Finished transforming yarn to formattables."
+                             << " Size: " << size;
     return r;
 }
 

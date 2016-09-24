@@ -133,7 +133,9 @@ public:
 
 public:
     std::forward_list<formattable>
-    execute_new(const formatters::container& fc, const yarn::model& m) const;
+    execute_new(
+        const dynamic::repository& rp, const dynamic::object& root_object,
+        const formatters::container& fc, const yarn::model& m) const;
 };
 
 } } } }

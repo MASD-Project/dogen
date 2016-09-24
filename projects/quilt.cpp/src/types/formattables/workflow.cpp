@@ -149,9 +149,10 @@ element_properties_repository workflow::execute(const options::cpp_options& opts
 }
 
 std::forward_list<formattable> workflow::
-execute_new(const formatters::container& fc, const yarn::model& m) const {
+execute_new(const dynamic::repository& rp, const dynamic::object& root_object,
+    const formatters::container& fc, const yarn::model& m) const {
     pre_reduction_workflow pre_wk;
-    const auto formattables(pre_wk.execute(fc, m));
+    const auto formattables(pre_wk.execute(rp, root_object, fc, m));
 
     post_reduction_workflow post_wk;
     return post_wk.execute(fc, formattables);

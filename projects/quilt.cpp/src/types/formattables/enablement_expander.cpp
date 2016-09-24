@@ -41,6 +41,7 @@ const std::string global_configuration_not_found(
 const std::string local_configuration_not_found(
     "Could not find local enablement configuration for formatter: ");
 const std::string formatter_not_found("Formatter not found: ");
+const std::string element_not_found("Element not found: ");
 
 }
 
@@ -51,11 +52,11 @@ namespace formattables {
 
 enablement_expander::global_field_definitions_type
 enablement_expander::make_global_field_definitions(
-    const dynamic::repository& rp,
+    const dynamic::repository& drp,
     const formatters::container& fc) const {
 
     global_field_definitions_type r;
-    const dynamic::repository_selector s(rp);
+    const dynamic::repository_selector s(drp);
     for (const auto& f : fc.file_formatters()) {
         const auto oh(f->ownership_hierarchy());
 
@@ -99,11 +100,11 @@ enablement_expander::obtain_global_configurations(
 }
 
 enablement_expander::local_field_definitions_type
-enablement_expander::make_local_field_definitions(const dynamic::repository& rp,
+enablement_expander::make_local_field_definitions(const dynamic::repository& drp,
     const formatters::container& fc) const {
 
     local_field_definitions_type r;
-    const dynamic::repository_selector s(rp);
+    const dynamic::repository_selector s(drp);
     for (const auto& f : fc.file_formatters()) {
         local_field_definitions fd;
         const auto oh(f->ownership_hierarchy());
@@ -236,13 +237,33 @@ void enablement_expander::compute_enablement(
     }
 }
 
-void enablement_expander::expand(const dynamic::repository& rp,
+void enablement_expander::expand(const dynamic::repository& drp,
     const dynamic::object& root_object, const formatters::container& fc,
     std::unordered_map<std::string, formattable>& formattables) const {
 
-    const auto gfds(make_global_field_definitions(rp, fc));
+    /*
+     * Obtain the field definitions at the global level. These are the
+     * field definitions that only apply to the root object, as some
+     * of these fields do not exist anywhere else.
+     */
+    const auto gfds(make_global_field_definitions(drp, fc));
+
+    /*
+     * Read the values for the global field definitions.
+     */
     const auto gcs(obtain_global_configurations(gfds, root_object));
-    const auto lfds(make_local_field_definitions(rp, fc));
+
+    /*
+     * Create the fields for the local field definitions. These are
+     * made across all registered formatters.
+     */
+    const auto lfds(make_local_field_definitions(drp, fc));
+
+    /*
+     * Bucket the local field definitions by element type - i.e., we
+     * only care about those formatters which are valid for a
+     * particular element.
+     */
     const auto lfdsti(obtain_local_field_definitions_by_type_index(lfds, fc));
 
     for (auto& pair : formattables) {
@@ -250,10 +271,26 @@ void enablement_expander::expand(const dynamic::repository& rp,
         auto& formattable(pair.second);
         const auto& e(*formattable.element());
 
+        /*
+         * Now, for each formattable, find the corresponding local field
+         * definitions and use those to obtain the values of the local
+         * configuration.
+         */
         const auto ti(std::type_index(typeid(e)));
         const auto i(lfdsti.find(ti));
         if (i == lfdsti.end()) {
+            BOOST_LOG_SEV(lg, error) << element_not_found << id;
+            BOOST_THROW_EXCEPTION(expansion_error(element_not_found + id));
         }
+
+        auto lcs(obtain_local_configurations(i->second, e.extensions()));
+
+        /*
+         * Once we got both the global and the local configuration, we
+         * can then compute the enablement values for this
+         * formattable, across all the supported formatters.
+         */
+        compute_enablement(gcs, lcs, formattable);
     }
 }
 

@@ -108,6 +108,7 @@ private:
         const yarn::model& m) const;
 
     void test_new_formattables_workflow(
+        const dynamic::repository& rp, const dynamic::object& root_object,
         const formatters::container& fc, const yarn::model& m,
         const formattables::element_properties_repository& legacy) const;
 

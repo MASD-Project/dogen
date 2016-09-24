@@ -52,7 +52,7 @@ private:
     global_field_definitions_type;
 
     global_field_definitions_type make_global_field_definitions(
-        const dynamic::repository& rp, const formatters::container& fc) const;
+        const dynamic::repository& drp, const formatters::container& fc) const;
 
 private:
     typedef std::unordered_map<std::string, global_enablement_configuration>
@@ -94,7 +94,7 @@ private:
         formattable& f) const;
 
 public:
-    void expand(const dynamic::repository& rp,
+    void expand(const dynamic::repository& drp,
         const dynamic::object& root_object, const formatters::container& fc,
         std::unordered_map<std::string, formattable>& formattables) const;
 };

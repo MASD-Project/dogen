@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/quilt.cpp/types/formattables/enablement_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/transformer.hpp"
 #include "dogen/quilt.cpp/types/formattables/pre_reduction_workflow.hpp"
 
@@ -26,6 +27,14 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
+void pre_reduction_workflow::expand_enablement(const dynamic::repository& drp,
+    const dynamic::object& root_object, const formatters::container& fc,
+    std::unordered_map<std::string, formattable>& formattables) const {
+    enablement_expander ex;
+    ex.expand(drp, root_object, fc, formattables);
+}
+
+
 std::unordered_map<std::string, formattable> pre_reduction_workflow::
 transform(const formatters::container& fc, const yarn::model& m) const {
     transformer t;
@@ -33,8 +42,10 @@ transform(const formatters::container& fc, const yarn::model& m) const {
 }
 
 std::unordered_map<std::string, formattable> pre_reduction_workflow::
-execute(const formatters::container& fc, const yarn::model& m) const {
-    const auto r(transform(fc, m));
+execute(const dynamic::repository& /*drp*/, const dynamic::object& /*root_object*/,
+    const formatters::container& fc, const yarn::model& m) const {
+    auto r(transform(fc, m));
+    // expand_enablement(drp, root_object, fc, r);
     return r;
 }
 
