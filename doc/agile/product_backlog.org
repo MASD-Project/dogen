@@ -6687,6 +6687,13 @@ Links:
 
 These stories are far in the future or just plain crazy.
 
+*** Consider moving the doc folder into its own branch                :story:
+
+At present we are generating builds whenever we update the docs
+(agile, manual, etc). It probably makes more sense to have one or more
+orphan branches with documentation. We can then use git worktrees to
+manage these folders.
+
 *** Consider using the fmt library instead of iostreams               :story:
 
 It would be interesting to benchmark dogen using iostreams vs dogen
