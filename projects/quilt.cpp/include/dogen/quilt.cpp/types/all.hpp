@@ -95,6 +95,7 @@
 #include "dogen/quilt.cpp/types/annotations/streaming_annotations.hpp"
 #include "dogen/quilt.cpp/types/formattables/aspect_configuration.hpp"
 #include "dogen/quilt.cpp/types/formattables/helper_configuration.hpp"
+#include "dogen/quilt.cpp/types/formattables/transformation_error.hpp"
 #include "dogen/quilt.cpp/types/formattables/element_configuration.hpp"
 #include "dogen/quilt.cpp/types/formattables/enablement_repository.hpp"
 #include "dogen/quilt.cpp/types/formatters/inclusion_support_types.hpp"

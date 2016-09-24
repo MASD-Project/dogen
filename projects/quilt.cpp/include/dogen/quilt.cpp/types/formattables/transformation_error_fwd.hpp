@@ -18,43 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_TRANSFORMER_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_TRANSFORMER_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_TRANSFORMATION_ERROR_FWD_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_TRANSFORMATION_ERROR_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
-
-#include <string>
-#include <forward_list>
-#include <unordered_map>
-#include "dogen/yarn/types/model.hpp"
-#include "dogen/quilt.cpp/types/formatters/container.hpp"
-#include "dogen/quilt.cpp/types/formattables/formattable.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
 
-/**
- * @brief Provides a number of useful transformations in the
- * formattables space.
- */
-class transformer {
-public:
-    /**
-     * @brief Given a yarn model, produces the corresponding formattables.
-     */
-    std::unordered_map<std::string, formattable>
-    transform(const formatters::container& fc, const yarn::model& m) const;
-
-    /**
-     * @brief Given a map of formattables, flattens it into a list.
-     */
-    std::forward_list<formattable> transform(
-        const std::unordered_map<std::string, formattable>& formattables) const;
-};
+class transformation_error;
 
 } } } }
 

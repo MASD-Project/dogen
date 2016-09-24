@@ -18,19 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_TRANSFORMER_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_TRANSFORMER_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_TRANSFORMATION_ERROR_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_TRANSFORMATION_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <string>
-#include <forward_list>
-#include <unordered_map>
-#include "dogen/yarn/types/model.hpp"
-#include "dogen/quilt.cpp/types/formatters/container.hpp"
-#include "dogen/quilt.cpp/types/formattables/formattable.hpp"
+#include <boost/exception/info.hpp>
 
 namespace dogen {
 namespace quilt {
@@ -38,22 +34,21 @@ namespace cpp {
 namespace formattables {
 
 /**
- * @brief Provides a number of useful transformations in the
- * formattables space.
+ * @brief An error occurred during transformation.
  */
-class transformer {
+class transformation_error : public virtual std::exception, public virtual boost::exception {
 public:
-    /**
-     * @brief Given a yarn model, produces the corresponding formattables.
-     */
-    std::unordered_map<std::string, formattable>
-    transform(const formatters::container& fc, const yarn::model& m) const;
+    transformation_error() = default;
+    ~transformation_error() noexcept = default;
 
-    /**
-     * @brief Given a map of formattables, flattens it into a list.
-     */
-    std::forward_list<formattable> transform(
-        const std::unordered_map<std::string, formattable>& formattables) const;
+public:
+    transformation_error(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
 };
 
 } } } }
