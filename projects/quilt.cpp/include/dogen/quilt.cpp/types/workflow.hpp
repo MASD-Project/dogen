@@ -107,6 +107,10 @@ private:
         const annotations::streaming_annotations_repository& ssrp,
         const yarn::model& m) const;
 
+    void test_new_formattables_workflow(
+        const formatters::container& fc, const yarn::model& m,
+        const formattables::element_properties_repository& legacy) const;
+
     /**
      * @brief Returns only the generatable elements.
      */

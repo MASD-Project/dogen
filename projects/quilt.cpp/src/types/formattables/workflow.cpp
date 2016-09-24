@@ -32,6 +32,8 @@
 #include "dogen/quilt.cpp/types/formattables/path_derivatives_repository_factory.hpp"
 #include "dogen/quilt.cpp/types/formattables/element_properties_repository_factory.hpp"
 #include "dogen/quilt.cpp/types/formattables/formatter_properties_repository_factory.hpp"
+#include "dogen/quilt.cpp/types/formattables/pre_reduction_workflow.hpp"
+#include "dogen/quilt.cpp/types/formattables/post_reduction_workflow.hpp"
 #include "dogen/quilt.cpp/types/formattables/workflow.hpp"
 
 namespace {
@@ -144,6 +146,15 @@ element_properties_repository workflow::execute(const options::cpp_options& opts
 
     BOOST_LOG_SEV(lg, debug) << "Finished creating properties.";
     return eprp;
+}
+
+std::forward_list<formattable> workflow::
+execute_new(const formatters::container& fc, const yarn::model& m) const {
+    pre_reduction_workflow pre_wk;
+    const auto formattables(pre_wk.execute(fc, m));
+
+    post_reduction_workflow post_wk;
+    return post_wk.execute(fc, formattables);
 }
 
 } } } }

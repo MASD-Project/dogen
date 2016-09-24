@@ -40,6 +40,7 @@
 #include "dogen/quilt.cpp/types/annotations/aspect_annotations_repository.hpp"
 #include "dogen/quilt.cpp/types/annotations/streaming_annotations_repository.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
+#include "dogen/quilt.cpp/types/formattables/formattable.hpp"
 #include "dogen/quilt.cpp/types/formattables/locator.hpp"
 #include "dogen/quilt.cpp/types/formattables/path_derivatives_repository.hpp"
 #include "dogen/quilt.cpp/types/formattables/element_properties_repository.hpp"
@@ -129,6 +130,10 @@ public:
         const formatters::container& fc,
         const annotations::streaming_annotations_repository& ssrp,
         const yarn::model& m) const;
+
+public:
+    std::forward_list<formattable>
+    execute_new(const formatters::container& fc, const yarn::model& m) const;
 };
 
 } } } }

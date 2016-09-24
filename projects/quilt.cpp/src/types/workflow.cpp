@@ -98,7 +98,21 @@ formattables::element_properties_repository workflow::create_properties(
     const yarn::model& m) const {
 
     formattables::workflow fw;
-    return fw.execute(opts, srp, root_object, dcf, fc, ssrp, m);
+    const auto r(fw.execute(opts, srp, root_object, dcf, fc, ssrp, m));
+
+    test_new_formattables_workflow(fc, m, r);
+    return r;
+}
+
+void workflow::test_new_formattables_workflow(
+    const formatters::container& fc, const yarn::model& m,
+    const formattables::element_properties_repository& /*legacy*/) const {
+
+    formattables::workflow fw;
+    const auto newer(fw.execute_new(fc, m));
+
+    // diff relevant properties here.
+    // legacy
 }
 
 std::forward_list<boost::shared_ptr<yarn::element> >
