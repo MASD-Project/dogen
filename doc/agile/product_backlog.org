@@ -3665,6 +3665,11 @@ Actually an even easier way would be to generate IO for exceptions; we
 could simply create the exception, populate all data values, dump it
 to the log file and then throw the exception.
 
+We can then create a helper in utility to throw exceptions that
+performs both the throwing and the logging. It could be a function
+that assumes lg to be in the global namespace, as that is how we
+normally use it. We just need to populate the exception up front.
+
 *** Ensure an error info tag is not set already before we set it      :story:
 
 Now that we will start making use of error info tags in anger, one
