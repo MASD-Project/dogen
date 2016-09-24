@@ -33,14 +33,14 @@
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/formatters/types/repository.hpp"
+#include "dogen/formatters/types/decoration_configuration_factory.hpp"
+#include "dogen/yarn/types/model.hpp"
 #include "dogen/quilt/types/backend_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
-#include "dogen/formatters/types/decoration_configuration_factory.hpp"
 #include "dogen/quilt.cpp/types/annotations/opaque_annotations_builder.hpp"
 #include "dogen/quilt.cpp/types/annotations/streaming_annotations_repository.hpp"
 #include "dogen/quilt.cpp/types/annotations/element_annotations_repository.hpp"
 #include "dogen/quilt.cpp/types/formattables/element_properties_repository.hpp"
-#include "dogen/yarn/types/model.hpp"
 
 namespace dogen {
 namespace quilt {
