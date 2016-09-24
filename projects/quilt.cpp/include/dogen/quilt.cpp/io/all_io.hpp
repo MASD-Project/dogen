@@ -56,8 +56,10 @@
 #include "dogen/quilt.cpp/io/annotations/element_annotations_repository_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/element_properties_repository_io.hpp"
 #include "dogen/quilt.cpp/io/annotations/inclusion_directive_annotations_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/local_enablement_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/annotations/streaming_annotations_repository_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/formatter_properties_repository_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/global_enablement_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/inclusion_directives_repository_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/inclusion_dependencies_repository_io.hpp"
 

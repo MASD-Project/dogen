@@ -45,7 +45,6 @@ namespace formattables {
  */
 class enablement_repository_factory {
 private:
-private:
     struct field_definitions {
         dynamic::field_definition model_enabled;
         dynamic::field_definition facet_enabled;
