@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-25 Sun 10:25]
+#+CAPTION: Clock summary at [2016-09-25 Sun 11:00]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *87:04* |       |       | 100.0 |
+| *Total time*                                                                | *87:38* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 87:04   |       |       | 100.0 |
-| Active                                                                      |         | 87:04 |       | 100.0 |
+| Stories                                                                     | 87:38   |       |       | 100.0 |
+| Active                                                                      |         | 87:38 |       | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  4:10 |   4.8 |
 | COMPLETED Fix chocolatey warning                                            |         |       |  0:08 |   0.2 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:27 |   0.5 |
@@ -30,11 +30,11 @@
 | COMPLETED Refactor =inclusion_dependencies_provider_interface=              |         |       |  1:12 |   1.4 |
 | COMPLETED Investigate broken windows builds                                 |         |       |  0:32 |   0.6 |
 | COMPLETED Refactor path derivatives factory for usage in formatters         |         |       |  5:14 |   6.0 |
-| COMPLETED Move file path generation to formatters                           |         |       |  1:58 |   2.3 |
+| COMPLETED Move file path generation to formatters                           |         |       |  1:58 |   2.2 |
 | CANCELLED Path derivatives factory generates all possible includes          |         |       |  3:07 |   3.6 |
 | COMPLETED Analysis on inclusion derivatives and path derivatives            |         |       |  1:04 |   1.2 |
 | COMPLETED Split path factory from provider factory                          |         |       |  2:32 |   2.9 |
-| COMPLETED Use providers when building inclusion directives                  |         |       | 12:01 |  13.8 |
+| COMPLETED Use providers when building inclusion directives                  |         |       | 12:01 |  13.7 |
 | COMPLETED Fix AppVeyor notifications                                        |         |       |  0:22 |   0.4 |
 | COMPLETED Static use of element types does more harm than good              |         |       |  0:32 |   0.6 |
 | COMPLETED Analysis: major rethink of the implementation of quilt            |         |       |  1:30 |   1.7 |
@@ -47,7 +47,7 @@
 | COMPLETED Rename config model to options                                    |         |       |  1:07 |   1.3 |
 | COMPLETED Rename annotation to decoration in formatters model               |         |       |  0:30 |   0.6 |
 | COMPLETED Fix appveyor Visual Studio build                                  |         |       |  1:04 |   1.2 |
-| COMPLETED Big rename for "final" terminology clean up                       |         |       |  2:19 |   2.7 |
+| COMPLETED Big rename for "final" terminology clean up                       |         |       |  2:19 |   2.6 |
 | COMPLETED Tidy-up file configuration in formatters                          |         |       |  3:03 |   3.5 |
 | COMPLETED Stitch still uses "properties"                                    |         |       |  0:27 |   0.5 |
 | CANCELLED Add a stitch prefix to stitch fields                              |         |       |  0:03 |   0.1 |
@@ -60,8 +60,9 @@
 | COMPLETED Rename formattables properties to configuration                   |         |       |  1:04 |   1.2 |
 | COMPLETED Update quilt.cpp with pipeline classes                            |         |       |  0:44 |   0.8 |
 | COMPLETED Add transformer to quilt.cpp                                      |         |       |  1:28 |   1.7 |
-| COMPLETED Add enabler to quilt.cpp                                          |         |       |  5:59 |   6.9 |
+| COMPLETED Add enabler to quilt.cpp                                          |         |       |  5:59 |   6.8 |
 | STARTED Add formattable element                                             |         |       |  0:21 |   0.4 |
+| STARTED Add includer to quilt.cpp                                           |         |       |  0:34 |   0.6 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -1237,18 +1238,10 @@ Previous understanding:
   visitor to resolve the element and then call the formatter.
 - add an enablement map for all formatters in the formatter
 
-*** Add includer to quilt.cpp                                         :story:
+*** STARTED Add includer to quilt.cpp                                 :story:
+    CLOCK: [2016-09-25 Sun 10:26]--[2016-09-25 Sun 11:00] =>  0:34
 
 Responsible for computing the inclusion dependencies.
-
-*** Tidy-up of inclusion terminology                                  :story:
-
-Random notes:
-
-- imports and exports
-- some types support both (headers)
-- some support imports only (cpp)
-- some support neither (cmakelists, etc).
 
 *** Do not compute inclusion directives for system models             :story:
 
@@ -1273,6 +1266,15 @@ need a way to determine if this type needs computations or not. We
 need to create a story to clean up the =origin_type= and
 =generation_type= and then we can make use of it to determine if we
 need to compute inclusion, path etc or not.
+
+*** Tidy-up of inclusion terminology                                  :story:
+
+Random notes:
+
+- imports and exports
+- some types support both (headers)
+- some support imports only (cpp)
+- some support neither (cmakelists, etc).
 
 *** Add path generator to quilt.cpp                                   :story:
 
