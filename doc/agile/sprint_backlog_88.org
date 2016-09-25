@@ -13,56 +13,57 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-25 Sun 11:45]
+#+CAPTION: Clock summary at [2016-09-26 Mon 00:04]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *88:21* |       |       | 100.0 |
+| *Total time*                                                                | *91:16* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 88:21   |       |       | 100.0 |
-| Active                                                                      |         | 88:21 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  4:10 |   4.7 |
-| COMPLETED Fix chocolatey warning                                            |         |       |  0:08 |   0.2 |
+| Stories                                                                     | 91:16   |       |       | 100.0 |
+| Active                                                                      |         | 91:16 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  4:10 |   4.6 |
+| COMPLETED Fix chocolatey warning                                            |         |       |  0:08 |   0.1 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:27 |   0.5 |
-| COMPLETED Analysis on current state of file path generation                 |         |       |  0:57 |   1.1 |
+| COMPLETED Analysis on current state of file path generation                 |         |       |  0:57 |   1.0 |
 | CANCELLED Remove inclusion dependencies builder factory                     |         |       |  0:14 |   0.3 |
-| COMPLETED Analysis on formatters, elements and extensibility                |         |       |  1:18 |   1.5 |
-| COMPLETED Refactor =inclusion_dependencies_provider_interface=              |         |       |  1:12 |   1.4 |
+| COMPLETED Analysis on formatters, elements and extensibility                |         |       |  1:18 |   1.4 |
+| COMPLETED Refactor =inclusion_dependencies_provider_interface=              |         |       |  1:12 |   1.3 |
 | COMPLETED Investigate broken windows builds                                 |         |       |  0:32 |   0.6 |
-| COMPLETED Refactor path derivatives factory for usage in formatters         |         |       |  5:14 |   5.9 |
+| COMPLETED Refactor path derivatives factory for usage in formatters         |         |       |  5:14 |   5.7 |
 | COMPLETED Move file path generation to formatters                           |         |       |  1:58 |   2.2 |
-| CANCELLED Path derivatives factory generates all possible includes          |         |       |  3:07 |   3.5 |
+| CANCELLED Path derivatives factory generates all possible includes          |         |       |  3:07 |   3.4 |
 | COMPLETED Analysis on inclusion derivatives and path derivatives            |         |       |  1:04 |   1.2 |
-| COMPLETED Split path factory from provider factory                          |         |       |  2:32 |   2.9 |
-| COMPLETED Use providers when building inclusion directives                  |         |       | 12:01 |  13.6 |
+| COMPLETED Split path factory from provider factory                          |         |       |  2:32 |   2.8 |
+| COMPLETED Use providers when building inclusion directives                  |         |       | 12:01 |  13.2 |
 | COMPLETED Fix AppVeyor notifications                                        |         |       |  0:22 |   0.4 |
 | COMPLETED Static use of element types does more harm than good              |         |       |  0:32 |   0.6 |
-| COMPLETED Analysis: major rethink of the implementation of quilt            |         |       |  1:30 |   1.7 |
-| CANCELLED Create a simple Emacs mode for stitch                             |         |       |  1:12 |   1.4 |
-| COMPLETED Add facet folder and formatter enablement to formatter properties |         |       |  2:52 |   3.2 |
-| COMPLETED Move =cmakelists_info= to fabric                                  |         |       |  6:34 |   7.4 |
-| COMPLETED Move =odb_options_info= to fabric                                 |         |       |  1:29 |   1.7 |
+| COMPLETED Analysis: major rethink of the implementation of quilt            |         |       |  1:30 |   1.6 |
+| CANCELLED Create a simple Emacs mode for stitch                             |         |       |  1:12 |   1.3 |
+| COMPLETED Add facet folder and formatter enablement to formatter properties |         |       |  2:52 |   3.1 |
+| COMPLETED Move =cmakelists_info= to fabric                                  |         |       |  6:34 |   7.2 |
+| COMPLETED Move =odb_options_info= to fabric                                 |         |       |  1:29 |   1.6 |
 | COMPLETED Remove =formattable_origin_type=                                  |         |       |  0:17 |   0.3 |
-| COMPLETED Remove formattable origin type                                    |         |       |  2:25 |   2.7 |
-| COMPLETED Rename config model to options                                    |         |       |  1:07 |   1.3 |
-| COMPLETED Rename annotation to decoration in formatters model               |         |       |  0:30 |   0.6 |
+| COMPLETED Remove formattable origin type                                    |         |       |  2:25 |   2.6 |
+| COMPLETED Rename config model to options                                    |         |       |  1:07 |   1.2 |
+| COMPLETED Rename annotation to decoration in formatters model               |         |       |  0:30 |   0.5 |
 | COMPLETED Fix appveyor Visual Studio build                                  |         |       |  1:04 |   1.2 |
-| COMPLETED Big rename for "final" terminology clean up                       |         |       |  2:19 |   2.6 |
-| COMPLETED Tidy-up file configuration in formatters                          |         |       |  3:03 |   3.5 |
+| COMPLETED Big rename for "final" terminology clean up                       |         |       |  2:19 |   2.5 |
+| COMPLETED Tidy-up file configuration in formatters                          |         |       |  3:03 |   3.3 |
 | COMPLETED Stitch still uses "properties"                                    |         |       |  0:27 |   0.5 |
 | CANCELLED Add a stitch prefix to stitch fields                              |         |       |  0:03 |   0.1 |
 | COMPLETED Formatter properties are not optional in assistant                |         |       |  0:10 |   0.2 |
 | COMPLETED Consider removing the overwrite flag in =formatters::file=        |         |       |  0:22 |   0.4 |
 | COMPLETED Handle module generability in yarn                                |         |       |  0:20 |   0.4 |
 | COMPLETED Do a cursory investigation of dia plugin support                  |         |       |  0:49 |   0.9 |
-| COMPLETED Consider merging provider interface with file formatter           |         |       |  9:26 |  10.7 |
-| COMPLETED Add type index to name and to formatter interface                 |         |       |  5:41 |   6.4 |
+| COMPLETED Consider merging provider interface with file formatter           |         |       |  9:26 |  10.3 |
+| COMPLETED Add type index to name and to formatter interface                 |         |       |  5:41 |   6.2 |
 | COMPLETED Rename formattables properties to configuration                   |         |       |  1:04 |   1.2 |
 | COMPLETED Update quilt.cpp with pipeline classes                            |         |       |  0:44 |   0.8 |
-| COMPLETED Add transformer to quilt.cpp                                      |         |       |  1:28 |   1.7 |
-| COMPLETED Add enabler to quilt.cpp                                          |         |       |  5:59 |   6.8 |
+| COMPLETED Add transformer to quilt.cpp                                      |         |       |  1:28 |   1.6 |
+| COMPLETED Add enabler to quilt.cpp                                          |         |       |  5:59 |   6.6 |
+| COMPLETED Investigate using postgres to query JSON objects                  |         |       |  2:55 |   3.2 |
 | STARTED Add formattable element                                             |         |       |  0:21 |   0.4 |
-| STARTED Add includer to quilt.cpp                                           |         |       |  1:17 |   1.5 |
+| STARTED Add includer to quilt.cpp                                           |         |       |  1:17 |   1.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -1216,6 +1217,71 @@ Add workflow methods to execute the new formattables pipeline.
 
 Generates the enablement configuration.
 
+*** COMPLETED Investigate using postgres to query JSON objects        :story:
+    CLOSED: [2016-09-26 Mon 00:02]
+    CLOCK: [2016-09-25 Sun 21:01]--[2016-09-25 Sun 23:56] =>  2:55
+
+At present we are generating a lot of logging with useful information,
+but the large column sizes (10 MB or more) make emacs unusable. There
+are known issues with long columns on emacs, and no easy fixes for
+this. One alternative is to push the JSON objects into postgres and
+then use queries to analyse the data.
+
+This is actually really useful; in a short space of time one can come
+up with queries to slice and dice log data.
+
+*Useful queries/commands*
+
+Extracting models out of log file:
+
+: grep Final dogen.knitter.quilt.cpp.log > crap.txt
+: tail -n1 crap.txt  | cut -b 65- > ~/crap3.txt
+
+Loading data into postgres:
+
+: create table temp_json (values jsonb);
+: \copy temp_json from '~/crap3.json';
+
+Copying all elements from model into their own rows:
+
+: insert into temp_json
+: select jsonb_to_recordset(jsonb_array_elements(values->'elements')->'data')
+: from temp_json;
+
+Selecting a specific type:
+
+: select values from temp_json
+: where values->'__parent_0__'->'name'->'simple' = 'formattable'
+: from temp_json;
+
+Selecting by name and object type (for elements with multiple segments):
+
+: select jsonb_array_elements(values->'transparent_associations')
+: from temp_json where values->'__parent_0__'->'name'->>'simple' = 'formattable'
+: and values->>'__type__' like '%object%';
+
+Get all transparent associations:
+
+: select jsonb_array_elements(values->'transparent_associations')->'id'
+: from temp_json where values->'__parent_0__'->'name'->>'simple' = 'formattable'
+: and values->>'__type__' like '%object%';
+
+Opaque:
+
+: select jsonb_pretty(values->'opaque_associations')
+: from temp_json where values->'__parent_0__'->'name'->>'simple' = 'formattable'
+: and values->>'__type__' like '%object%';
+
+Switch off pager:
+
+: \pset pager
+
+Pretty print:
+
+: select jsonb_pretty(values->'opaque_associations')
+: from temp_json where values->'__parent_0__'->'name'->>'simple' = 'formattable'
+: and values->>'__type__' like '%object%';
+
 *** STARTED Add formattable element                                   :story:
     CLOCK: [2016-09-23 Fri 22:02]--[2016-09-23 Fri 22:04] =>  0:02
     CLOCK: [2016-09-23 Fri 20:27]--[2016-09-23 Fri 20:46] =>  0:19
@@ -1251,6 +1317,11 @@ Responsible for computing the inclusion dependencies.
   default initialised. Actually a better approach is to create two
   builder impls and to decide which one to use based on the
   constructor of the builder.
+
+*** Generation of formattable is incorrect                            :story:
+
+The new formattable type is generating an invalid header file. It is
+missing the forward declaration of the yarn element.
 
 *** Do not compute inclusion directives for system models             :story:
 
