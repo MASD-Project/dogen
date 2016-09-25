@@ -53,13 +53,15 @@ transform(const formatters::container& fc, const yarn::model& m) const {
         auto i(r.find(id));
         if (i == r.end()) {
             formattable fbl;
-            fbl.element(ptr);
+            fbl.element_segments().push_back(ptr);
             const auto pair(std::make_pair(id, fbl));
             const auto ret(r.insert(pair));
             i = ret.first;
             BOOST_LOG_SEV(lg, debug) << "Inserted element: " << id;
-        } else
+        } else {
+            i->second.element_segments().push_back(ptr);
             BOOST_LOG_SEV(lg, debug) << "Element already inserted.";
+        }
 
         auto& fbl(i->second);
         const auto ti(std::type_index(typeid(e)));

@@ -39,6 +39,20 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<boost::shared_ptr<dogen::yarn::element> >& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace quilt {
 namespace cpp {
@@ -47,7 +61,7 @@ namespace formattables {
 std::ostream& operator<<(std::ostream& s, const formattable& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::formattable\"" << ", "
-      << "\"element\": " << v.element() << ", "
+      << "\"element_segments\": " << v.element_segments() << ", "
       << "\"configuration\": " << v.configuration()
       << " }";
     return(s);

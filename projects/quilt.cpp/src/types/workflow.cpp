@@ -122,42 +122,50 @@ void workflow::test_new_formattables_workflow(
     }
 
     for (const auto& formattable: formattables) {
-        const auto& e(*formattable.element());
-        const auto& id(e.name().id());
-        const auto i(legacy.by_id().find(id));
-        if (i == legacy.by_id().end()) {
-            BOOST_LOG_SEV(lg, error) << "Could not find element id in legacy: "
-                                     << id;
-            BOOST_THROW_EXCEPTION(
-                workflow_error("Could not find element id in legacy: " + id));
-        }
-
-        const auto& legacy_fmt_cfgs(i->second.formatter_configuration());
-        const auto& elm_cfg(formattable.configuration());
-        const auto& fmt_cfgs(elm_cfg.formatter_configuration());
-        if (fmt_cfgs.size() > legacy_fmt_cfgs.size()) {
-            BOOST_LOG_SEV(lg, error) << "Incorrect size. Legacy: "
-                                     << legacy_fmt_cfgs.size()
-                                     << " formattables: " << fmt_cfgs.size();
-            BOOST_THROW_EXCEPTION(
-                workflow_error("New container has unexpected size."));
-        }
-
-        for (const auto& pair : fmt_cfgs) {
-            const auto fmtn(pair.first);
-            const auto k(legacy_fmt_cfgs.find(fmtn));
-            if (k == legacy_fmt_cfgs.end()) {
-                BOOST_LOG_SEV(lg, error) << "Formatter not found in legacy: "
-                                         << fmtn;
-                BOOST_THROW_EXCEPTION(
-                    workflow_error("Missing formatter: " + fmtn));
+        for (const auto& segment : formattable.element_segments()) {
+            const auto& e(*segment);
+            const auto& id(e.name().id());
+            const auto i(legacy.by_id().find(id));
+            if (i == legacy.by_id().end()) {
+                BOOST_LOG_SEV(lg, error)
+                    << "Could not find element id in legacy: "
+                    << id;
+                BOOST_THROW_EXCEPTION(workflow_error(
+                        "Could not find element id in legacy: " + id));
             }
-            if (pair.second.enabled() != k->second.enabled()) {
-                BOOST_LOG_SEV(lg, error) << "Enablement is different. Id: "
-                                         << id << " new: "
-                                         << pair.second.enabled()
-                                         << " legacy: " << k->second.enabled();
-                // BOOST_THROW_EXCEPTION(workflow_error("Different enablement."));
+
+            const auto& legacy_fmt_cfgs(i->second.formatter_configuration());
+            const auto& elm_cfg(formattable.configuration());
+            const auto& fmt_cfgs(elm_cfg.formatter_configuration());
+            if (fmt_cfgs.size() > legacy_fmt_cfgs.size()) {
+                BOOST_LOG_SEV(lg, error) << "Incorrect size. Legacy: "
+                                         << legacy_fmt_cfgs.size()
+                                         << " formattables: "
+                                         << fmt_cfgs.size();
+                BOOST_THROW_EXCEPTION(
+                    workflow_error("New container has unexpected size."));
+            }
+
+            for (const auto& pair : fmt_cfgs) {
+                const auto fmtn(pair.first);
+                const auto k(legacy_fmt_cfgs.find(fmtn));
+                if (k == legacy_fmt_cfgs.end()) {
+                    BOOST_LOG_SEV(lg, error)
+                        << "Formatter not found in legacy: "
+                        << fmtn;
+                    BOOST_THROW_EXCEPTION(
+                        workflow_error("Missing formatter: " + fmtn));
+            }
+                if (pair.second.enabled() != k->second.enabled()) {
+                    BOOST_LOG_SEV(lg, error) << "Enablement is different. Id: "
+                                             << id << " formatter: " << fmtn
+                                             << " new: "
+                                             << pair.second.enabled()
+                                             << " legacy: "
+                                             << k->second.enabled();
+                    BOOST_THROW_EXCEPTION(
+                        workflow_error("Different enablement."));
+                }
             }
         }
     }

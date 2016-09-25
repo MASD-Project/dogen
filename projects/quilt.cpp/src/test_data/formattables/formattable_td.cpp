@@ -36,6 +36,14 @@ create_boost_shared_ptr_dogen_yarn_element(unsigned int position) {
     return r;
 }
 
+std::list<boost::shared_ptr<dogen::yarn::element> > create_std_list_boost_shared_ptr_dogen_yarn_element(unsigned int position) {
+    std::list<boost::shared_ptr<dogen::yarn::element> > r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.push_back(create_boost_shared_ptr_dogen_yarn_element(position + i));
+    }
+    return r;
+}
+
 dogen::quilt::cpp::formattables::element_configuration
 create_dogen_quilt_cpp_formattables_element_configuration(const unsigned int position) {
     return dogen::quilt::cpp::formattables::element_configuration_generator::create(position);
@@ -52,7 +60,7 @@ formattable_generator::formattable_generator() : position_(0) { }
 
 void formattable_generator::
 populate(const unsigned int position, result_type& v) {
-    v.element(create_boost_shared_ptr_dogen_yarn_element(position + 0));
+    v.element_segments(create_std_list_boost_shared_ptr_dogen_yarn_element(position + 0));
     v.configuration(create_dogen_quilt_cpp_formattables_element_configuration(position + 1));
 }
 

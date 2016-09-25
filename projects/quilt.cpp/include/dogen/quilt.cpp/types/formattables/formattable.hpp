@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <list>
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
 #include "dogen/quilt.cpp/types/formattables/element_configuration.hpp"
@@ -44,7 +45,7 @@ public:
 
 public:
     formattable(
-        const boost::shared_ptr<dogen::yarn::element>& element,
+        const std::list<boost::shared_ptr<dogen::yarn::element> >& element_segments,
         const dogen::quilt::cpp::formattables::element_configuration& configuration);
 
 private:
@@ -55,10 +56,10 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::formattables::formattable& v, unsigned int version);
 
 public:
-    const boost::shared_ptr<dogen::yarn::element>& element() const;
-    boost::shared_ptr<dogen::yarn::element>& element();
-    void element(const boost::shared_ptr<dogen::yarn::element>& v);
-    void element(const boost::shared_ptr<dogen::yarn::element>&& v);
+    const std::list<boost::shared_ptr<dogen::yarn::element> >& element_segments() const;
+    std::list<boost::shared_ptr<dogen::yarn::element> >& element_segments();
+    void element_segments(const std::list<boost::shared_ptr<dogen::yarn::element> >& v);
+    void element_segments(const std::list<boost::shared_ptr<dogen::yarn::element> >&& v);
 
     const dogen::quilt::cpp::formattables::element_configuration& configuration() const;
     dogen::quilt::cpp::formattables::element_configuration& configuration();
@@ -76,7 +77,7 @@ public:
     formattable& operator=(formattable other);
 
 private:
-    boost::shared_ptr<dogen::yarn::element> element_;
+    std::list<boost::shared_ptr<dogen::yarn::element> > element_segments_;
     dogen::quilt::cpp::formattables::element_configuration configuration_;
 };
 

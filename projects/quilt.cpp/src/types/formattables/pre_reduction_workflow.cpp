@@ -42,10 +42,10 @@ transform(const formatters::container& fc, const yarn::model& m) const {
 }
 
 std::unordered_map<std::string, formattable> pre_reduction_workflow::
-execute(const dynamic::repository& /*drp*/, const dynamic::object& /*root_object*/,
+execute(const dynamic::repository& drp, const dynamic::object& root_object,
     const formatters::container& fc, const yarn::model& m) const {
     auto r(transform(fc, m));
-    // expand_enablement(drp, root_object, fc, r);
+    expand_enablement(drp, root_object, fc, r);
     return r;
 }
 

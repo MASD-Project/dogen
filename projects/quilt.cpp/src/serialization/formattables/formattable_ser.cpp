@@ -19,6 +19,7 @@
  *
  */
 #include <boost/serialization/nvp.hpp>
+#include <boost/serialization/list.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
@@ -39,7 +40,7 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::quilt::cpp::formattables::formattable& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("element", v.element_);
+    ar << make_nvp("element_segments", v.element_segments_);
     ar << make_nvp("configuration", v.configuration_);
 }
 
@@ -47,7 +48,7 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::quilt::cpp::formattables::formattable& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("element", v.element_);
+    ar >> make_nvp("element_segments", v.element_segments_);
     ar >> make_nvp("configuration", v.configuration_);
 }
 

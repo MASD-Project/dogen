@@ -48,6 +48,9 @@ private:
         dynamic::field_definition formatter_enabled;
     };
 
+    friend std::ostream& operator<<(std::ostream& s,
+        const enablement_expander::global_field_definitions& gfd);
+
     typedef std::unordered_map<std::string, global_field_definitions>
     global_field_definitions_type;
 
@@ -68,6 +71,9 @@ private:
         dynamic::field_definition supported;
     };
 
+    friend std::ostream& operator<<(std::ostream& s,
+        const enablement_expander::local_field_definitions& lfd);
+
     typedef std::unordered_map<std::string, local_field_definitions>
     local_field_definitions_type;
 
@@ -75,7 +81,7 @@ private:
         const dynamic::repository& rp, const formatters::container& fc) const;
 
     std::unordered_map<std::type_index, local_field_definitions_type>
-    obtain_local_field_definitions_by_type_index(
+    bucket_local_field_definitions_by_type_index(
         const local_field_definitions_type& lfds,
         const formatters::container& fc) const;
 
@@ -88,6 +94,10 @@ private:
         const dynamic::object& o) const;
 
 private:
+    bool has_user_defined_service(
+        const std::list<boost::shared_ptr<yarn::element>>&
+        element_segments) const;
+
     void compute_enablement(
         const global_enablement_configurations_type& gcs,
         const local_enablement_configurations_type& lcs,

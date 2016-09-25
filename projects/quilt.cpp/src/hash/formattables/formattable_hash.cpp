@@ -36,6 +36,14 @@ inline std::size_t hash_boost_shared_ptr_dogen_yarn_element(const boost::shared_
     return seed;
 }
 
+inline std::size_t hash_std_list_boost_shared_ptr_dogen_yarn_element(const std::list<boost::shared_ptr<dogen::yarn::element> >& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, hash_boost_shared_ptr_dogen_yarn_element(i));
+    }
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -46,7 +54,7 @@ namespace formattables {
 std::size_t formattable_hasher::hash(const formattable& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_boost_shared_ptr_dogen_yarn_element(v.element()));
+    combine(seed, hash_std_list_boost_shared_ptr_dogen_yarn_element(v.element_segments()));
     combine(seed, v.configuration());
 
     return seed;
