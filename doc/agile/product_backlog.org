@@ -623,48 +623,26 @@ unparsed types before merging. There is a circular dependency here.
 We somehow need a first pass to obtain all the primitives and a second
 pass to parse.
 
-*** Remove =service= stereotype                                       :story:
-
-This really just means non-generatable, or do not generate. We already
-have a stereotype for this. Remove =service= and any other stereotype
-which is not being used such as =value_object= etc.
-
-Actually, non-generatable is not a stereotype really. We should
-instead have some meta-data that can affect generation:
-
-- do not generate: do nothing at all. For references only. If a file
-  exists with this file name, it will be deleted as part of
-  housekeeping.
-- generate blank file if it doesn't exist: we don't even want a
-  template.
-- generate with content if it doesn't exist, do not touch otherwise:
-  what we call services at the moment. Generate a "template" that then
-  gets filled in manually.
-- generate and merge: merge the contents of the generated file with
-  the current contents in the file system. When we support merging.
-- generate and overwrite: generate the file and overwrite whatever
-  exists in the file system.
-
-This could be called "generation policy".
-
-The second behaviour we get for free with services is that we disable
-all facets except for types. A few points:
-
-- we may want to have io, serialisation, etc. This is not possible at
-  present. If a state of a service is made up of supported types, we
-  could even use existing code generation.
-- in order for this to be implemented correctly we need to hook in to
-  the enablement management somehow. In addition, it seems each facet
-  can have its own generation policy. For example we may want to
-  manually create types but automatically generate io.
-- the best way to handle this may be to setup "enablement profiles"
-  that the user can hook up to. For example we could have a "default"
-  profile that enables all facets (or uses facet defaults), a second
-  "service" profile that enables types with partial generation and io
-  with full generation and so on. We probably also need "generation
-  profiles" to go with "enablement profiles".
-
 *** Refactor code around model origination                            :story:
+
+We have the following use cases around generation type and
+origination:
+
+- serialisation registrar needs to know which of the references are
+  "real" (dogen; non-proxy) models and which are proxy models. We are
+  only interested in calling the registrars for the "real" models.
+- inclusion directives should only be generated for the target and
+  non-proxy models.
+- in a target model, we need to distinguish between elements for which
+  the overwrite flag will be false (services; non-generatable) and
+  those for which it will be true (all others).
+- in a target model, we need to determine which formatters will be
+  enabled for a given element. For services at present we just have
+  types. All other types enable all formatters.
+- we need to filter out all non-target elements before we code
+  generate.
+
+*Previous Understanding*
 
 - remove origin types and generation types, replacing it with just a
   boolean for is target. Actually we need something like:
@@ -719,6 +697,47 @@ We need a good name for these. Candidates:
 
 - proxy model: represents something that exists in the outside
   world. e.g. =is_proxy=.
+
+*Remove =service= stereotype*
+
+This really just means non-generatable, or do not generate. We already
+have a stereotype for this. Remove =service= and any other stereotype
+which is not being used such as =value_object= etc.
+
+Actually, non-generatable is not a stereotype really. We should
+instead have some meta-data that can affect generation:
+
+- do not generate: do nothing at all. For references only. If a file
+  exists with this file name, it will be deleted as part of
+  housekeeping.
+- generate blank file if it doesn't exist: we don't even want a
+  template.
+- generate with content if it doesn't exist, do not touch otherwise:
+  what we call services at the moment. Generate a "template" that then
+  gets filled in manually.
+- generate and merge: merge the contents of the generated file with
+  the current contents in the file system. When we support merging.
+- generate and overwrite: generate the file and overwrite whatever
+  exists in the file system.
+
+This could be called "generation policy".
+
+The second behaviour we get for free with services is that we disable
+all facets except for types. A few points:
+
+- we may want to have io, serialisation, etc. This is not possible at
+  present. If a state of a service is made up of supported types, we
+  could even use existing code generation.
+- in order for this to be implemented correctly we need to hook in to
+  the enablement management somehow. In addition, it seems each facet
+  can have its own generation policy. For example we may want to
+  manually create types but automatically generate io.
+- the best way to handle this may be to setup "enablement profiles"
+  that the user can hook up to. For example we could have a "default"
+  profile that enables all facets (or uses facet defaults), a second
+  "service" profile that enables types with partial generation and io
+  with full generation and so on. We probably also need "generation
+  profiles" to go with "enablement profiles".
 
 *** Handle registration of services properly                          :story:
 

@@ -13,15 +13,15 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-25 Sun 09:24]
+#+CAPTION: Clock summary at [2016-09-25 Sun 10:25]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *86:47* |       |       | 100.0 |
+| *Total time*                                                                | *87:04* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 86:47   |       |       | 100.0 |
-| Active                                                                      |         | 86:47 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  3:53 |   4.5 |
+| Stories                                                                     | 87:04   |       |       | 100.0 |
+| Active                                                                      |         | 87:04 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  4:10 |   4.8 |
 | COMPLETED Fix chocolatey warning                                            |         |       |  0:08 |   0.2 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:27 |   0.5 |
 | COMPLETED Analysis on current state of file path generation                 |         |       |  0:57 |   1.1 |
@@ -40,7 +40,7 @@
 | COMPLETED Analysis: major rethink of the implementation of quilt            |         |       |  1:30 |   1.7 |
 | CANCELLED Create a simple Emacs mode for stitch                             |         |       |  1:12 |   1.4 |
 | COMPLETED Add facet folder and formatter enablement to formatter properties |         |       |  2:52 |   3.3 |
-| COMPLETED Move =cmakelists_info= to fabric                                  |         |       |  6:34 |   7.6 |
+| COMPLETED Move =cmakelists_info= to fabric                                  |         |       |  6:34 |   7.5 |
 | COMPLETED Move =odb_options_info= to fabric                                 |         |       |  1:29 |   1.7 |
 | COMPLETED Remove =formattable_origin_type=                                  |         |       |  0:17 |   0.3 |
 | COMPLETED Remove formattable origin type                                    |         |       |  2:25 |   2.8 |
@@ -55,17 +55,18 @@
 | COMPLETED Consider removing the overwrite flag in =formatters::file=        |         |       |  0:22 |   0.4 |
 | COMPLETED Handle module generability in yarn                                |         |       |  0:20 |   0.4 |
 | COMPLETED Do a cursory investigation of dia plugin support                  |         |       |  0:49 |   0.9 |
-| COMPLETED Consider merging provider interface with file formatter           |         |       |  9:26 |  10.9 |
+| COMPLETED Consider merging provider interface with file formatter           |         |       |  9:26 |  10.8 |
 | COMPLETED Add type index to name and to formatter interface                 |         |       |  5:41 |   6.5 |
 | COMPLETED Rename formattables properties to configuration                   |         |       |  1:04 |   1.2 |
 | COMPLETED Update quilt.cpp with pipeline classes                            |         |       |  0:44 |   0.8 |
 | COMPLETED Add transformer to quilt.cpp                                      |         |       |  1:28 |   1.7 |
 | COMPLETED Add enabler to quilt.cpp                                          |         |       |  5:59 |   6.9 |
-| Add formattable element                                                     |         |       |  0:21 |   0.4 |
+| STARTED Add formattable element                                             |         |       |  0:21 |   0.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-09-25 Sun 10:08]--[2016-09-25 Sun 10:25] =>  0:17
     CLOCK: [2016-09-21 Wed 22:00]--[2016-09-21 Wed 22:20] =>  0:20
     CLOCK: [2016-09-21 Wed 08:01]--[2016-09-21 Wed 09:00] =>  0:59
     CLOCK: [2016-09-17 Sat 19:43]--[2016-09-17 Sat 20:04] =>  0:21
@@ -1214,7 +1215,7 @@ Add workflow methods to execute the new formattables pipeline.
 
 Generates the enablement configuration.
 
-*** Add formattable element                                           :story:
+*** STARTED Add formattable element                                   :story:
     CLOCK: [2016-09-23 Fri 22:02]--[2016-09-23 Fri 22:04] =>  0:02
     CLOCK: [2016-09-23 Fri 20:27]--[2016-09-23 Fri 20:46] =>  0:19
 
@@ -1236,8 +1237,18 @@ Previous understanding:
   visitor to resolve the element and then call the formatter.
 - add an enablement map for all formatters in the formatter
 
+*** Add includer to quilt.cpp                                         :story:
 
 Responsible for computing the inclusion dependencies.
+
+*** Tidy-up of inclusion terminology                                  :story:
+
+Random notes:
+
+- imports and exports
+- some types support both (headers)
+- some support imports only (cpp)
+- some support neither (cmakelists, etc).
 
 *** Do not compute inclusion directives for system models             :story:
 
@@ -1262,14 +1273,6 @@ need a way to determine if this type needs computations or not. We
 need to create a story to clean up the =origin_type= and
 =generation_type= and then we can make use of it to determine if we
 need to compute inclusion, path etc or not.
-
-*** Remove formatter id                                               :story:
-
-Not clear why we need this given we have formatter name.
-
-*** Add filter to quilt.cpp                                           :story:
-
-Removes the non-target formattables.
 
 *** Add path generator to quilt.cpp                                   :story:
 
@@ -1327,6 +1330,10 @@ Interestingly we could have different defaults for formatters in proxy
 models. For example, if a model is proxy we can assume that we should
 not compute inclusion paths. This could save a lot of time when
 specifying the models in JSON.
+
+*** Remove formatter id                                               :story:
+
+Not clear why we need this given we have formatter name.
 
 *** Create the notion of a formatter alias                            :story:
 
@@ -1388,14 +1395,9 @@ At present the injector is calling the formatters' workflow
 directly, in order to obtain the formatters' container. It should
 receive it as a parameter during initialisation.
 
-*** Tidy-up of inclusion terminology                                  :story:
+*** Add filter to quilt.cpp                                           :story:
 
-Random notes:
-
-- imports and exports
-- some types support both (headers)
-- some support imports only (cpp)
-- some support neither (cmakelists, etc).
+Removes the non-target formattables.
 
 *** Move name builder into yarn                                       :story:
 
