@@ -55,7 +55,7 @@ void life_cycle_manager::create_file_backend(
 
     auto backend(boost::make_shared<sinks::text_file_backend>(
             keywords::file_name = file_name.string(),
-            keywords::rotation_size = 100 * 1024 * 1024,
+            keywords::rotation_size = 200 * 1024 * 1024,
             keywords::time_based_rotation =
             sinks::file::rotation_at_time_point(12, 0, 0)));
     backend->auto_flush(true);

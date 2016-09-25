@@ -119,7 +119,8 @@ expand_object(const intermediate_model& im, object& o) const {
     }
 
     if (!o.opaque_associations().empty()) {
-        /* Ensure we remove any items which are simultaneously regular
+        /*
+         * Ensure we remove any items which are simultaneously regular
          * and weak associations.
          */
         remove_duplicates(o.opaque_associations(), transparent_associations);
