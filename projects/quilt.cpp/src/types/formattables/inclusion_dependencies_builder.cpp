@@ -55,17 +55,79 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-inclusion_dependencies_builder::
-inclusion_dependencies_builder(const enablement_repository& erp,
-    const inclusion_directives_repository& idrp)
-    : enablement_repository_(erp),
-      directives_repository_(idrp) { }
+class builder_impl {
+public:
+    virtual ~builder_impl() {}
 
-boost::optional<std::string>
-inclusion_dependencies_builder::get_inclusion_directive(
-    const yarn::name& n,
+public:
+    virtual bool is_enabled(const yarn::name& n,
+        const std::string& formatter_name) const = 0;
+    virtual boost::optional<std::string> get_inclusion_directive(
+        const yarn::name& n, const std::string& formatter_name) const = 0;
+};
+
+class legacy_builder_impl : public builder_impl {
+public:
+    legacy_builder_impl(const enablement_repository& erp,
+        const inclusion_directives_repository& drp);
+
+public:
+    bool is_enabled(const yarn::name& n,
+        const std::string& formatter_name) const override;
+    boost::optional<std::string> get_inclusion_directive(
+        const yarn::name& n, const std::string& formatter_name) const override;
+
+private:
+    const enablement_repository& enablement_repository_;
+    const inclusion_directives_repository& directives_repository_;
+};
+
+legacy_builder_impl::legacy_builder_impl(const enablement_repository& erp,
+    const inclusion_directives_repository& drp)
+    : enablement_repository_(erp), directives_repository_(drp) {}
+
+bool legacy_builder_impl::is_enabled(const yarn::name& n,
     const std::string& formatter_name) const {
+        const auto& en(enablement_repository_.by_name());
+    const auto i(en.find(n));
+    if (i == en.end()) {
+        BOOST_LOG_SEV(lg, error) << name_not_found << n.id();
+        BOOST_THROW_EXCEPTION(building_error(name_not_found + n.id()));
+    }
 
+    const auto j(i->second.find(formatter_name));
+    if (j == i->second.end()) {
+        BOOST_LOG_SEV(lg, debug) << formatter_name_not_found << formatter_name
+                                 << " element id: " << n.id();
+
+        // FIXME: hack
+        BOOST_LOG_SEV(lg, debug) << "Trying by facet name.";
+
+        for (const auto pair : i->second) {
+            if (boost::starts_with(pair.first, formatter_name)) {
+                BOOST_LOG_SEV(lg, debug) << "Using: " << pair.first
+                                         << " status: " << pair.second;
+                return pair.second;
+            }
+        }
+
+        BOOST_LOG_SEV(lg, error) << formatter_name_not_found << formatter_name
+                                 << " element id: " << n.id();
+        BOOST_THROW_EXCEPTION(
+            building_error(formatter_name_not_found + formatter_name));
+    }
+
+    const bool r(j->second);
+    if (!r) {
+        BOOST_LOG_SEV(lg, debug) << "Formatter disabled. Formatter: "
+                                 << formatter_name << " on type: "
+                                 << n.id() << "'";
+    }
+    return r;
+}
+
+boost::optional<std::string> legacy_builder_impl::get_inclusion_directive(
+    const yarn::name& n, const std::string& formatter_name) const {
     const auto& idn(directives_repository_.by_name());
     const auto i(idn.find(n.id()));
     if (i == idn.end())
@@ -76,6 +138,18 @@ inclusion_dependencies_builder::get_inclusion_directive(
         return boost::optional<std::string>();
 
     return j->second;
+}
+
+
+inclusion_dependencies_builder::
+inclusion_dependencies_builder(const enablement_repository& erp,
+    const inclusion_directives_repository& idrp)
+    : impl_(new legacy_builder_impl(erp, idrp)) {}
+
+boost::optional<std::string>
+inclusion_dependencies_builder::get_inclusion_directive(
+    const yarn::name& n, const std::string& formatter_name) const {
+    return impl_->get_inclusion_directive(n, formatter_name);
 }
 
 inclusion_dependencies_builder::special_includes
@@ -115,43 +189,7 @@ inclusion_dependencies_builder::make_special_includes(
 
 bool inclusion_dependencies_builder::is_enabled(const yarn::name& n,
     const std::string& formatter_name) const {
-
-    const auto& en(enablement_repository_.by_name());
-    const auto i(en.find(n));
-    if (i == en.end()) {
-        BOOST_LOG_SEV(lg, error) << name_not_found << n.id();
-        BOOST_THROW_EXCEPTION(building_error(name_not_found + n.id()));
-    }
-
-    const auto j(i->second.find(formatter_name));
-    if (j == i->second.end()) {
-        BOOST_LOG_SEV(lg, debug) << formatter_name_not_found << formatter_name
-                                 << " element id: " << n.id();
-
-        // FIXME: hack
-        BOOST_LOG_SEV(lg, debug) << "Trying by facet name.";
-
-        for (const auto pair : i->second) {
-            if (boost::starts_with(pair.first, formatter_name)) {
-                BOOST_LOG_SEV(lg, debug) << "Using: " << pair.first
-                                         << " status: " << pair.second;
-                return pair.second;
-            }
-        }
-
-        BOOST_LOG_SEV(lg, error) << formatter_name_not_found << formatter_name
-                                 << " element id: " << n.id();
-        BOOST_THROW_EXCEPTION(
-            building_error(formatter_name_not_found + formatter_name));
-    }
-
-    const bool r(j->second);
-    if (!r) {
-        BOOST_LOG_SEV(lg, debug) << "Formatter disabled. Formatter: "
-                                 << formatter_name << " on type: "
-                                 << n.id() << "'";
-    }
-    return r;
+    return impl_->is_enabled(n, formatter_name);
 }
 
 void inclusion_dependencies_builder::

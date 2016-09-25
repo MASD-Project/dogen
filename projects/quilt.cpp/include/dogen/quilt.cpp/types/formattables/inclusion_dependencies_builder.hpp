@@ -29,6 +29,7 @@
 #include <string>
 #include <unordered_set>
 #include <boost/optional.hpp>
+#include <boost/shared_ptr.hpp>
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/quilt.cpp/types/annotations/element_annotations_repository.hpp"
 #include "dogen/quilt.cpp/types/formattables/enablement_repository.hpp"
@@ -38,6 +39,8 @@ namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
+
+class builder_impl;
 
 /**
  * @brief Helps in building the inclusion dependencies for a given
@@ -121,8 +124,7 @@ public:
     std::list<std::string> build();
 
 private:
-    const enablement_repository& enablement_repository_;
-    const inclusion_directives_repository& directives_repository_;
+    boost::shared_ptr<builder_impl> impl_;
     std::list<std::string> inclusion_dependencies_;
 };
 
