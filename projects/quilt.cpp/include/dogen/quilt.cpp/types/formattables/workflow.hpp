@@ -133,8 +133,8 @@ public:
 
 public:
     std::forward_list<formattable>
-    execute_new(
-        const dynamic::repository& rp, const dynamic::object& root_object,
+    execute_new(const options::cpp_options& opts,
+        const dynamic::repository& drp, const dynamic::object& root_object,
         const formatters::container& fc, const yarn::model& m) const;
 };
 

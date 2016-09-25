@@ -100,17 +100,17 @@ formattables::element_properties_repository workflow::create_properties(
     formattables::workflow fw;
     const auto r(fw.execute(opts, drp, root_object, dcf, fc, ssrp, m));
 
-    test_new_formattables_workflow(drp, root_object, fc, m, r);
+    test_new_formattables_workflow(opts, drp, root_object, fc, m, r);
     return r;
 }
 
-void workflow::test_new_formattables_workflow(
+void workflow::test_new_formattables_workflow(const options::cpp_options& opts,
     const dynamic::repository& rp, const dynamic::object& root_object,
     const formatters::container& fc, const yarn::model& m,
     const formattables::element_properties_repository& legacy) const {
 
     formattables::workflow fw;
-    const auto formattables(fw.execute_new(rp, root_object, fc, m));
+    const auto formattables(fw.execute_new(opts, rp, root_object, fc, m));
 
     const auto fbl_sz(std::distance(formattables.begin(), formattables.end()));
     if (std::size_t(fbl_sz) != legacy.by_id().size()) {

@@ -32,6 +32,7 @@
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
+#include "dogen/quilt.cpp/types/formattables/locator.hpp"
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
 
 namespace dogen {
@@ -41,17 +42,23 @@ namespace formattables {
 
 class pre_reduction_workflow {
 public:
+    std::unordered_map<std::string, formattable>
+    transform(const formatters::container& fc, const yarn::model& m) const;
+
     void expand_enablement(const dynamic::repository& drp,
         const dynamic::object& root_object, const formatters::container& fc,
         std::unordered_map<std::string, formattable>& formattables) const;
 
-    std::unordered_map<std::string, formattable>
-    transform(const formatters::container& fc, const yarn::model& m) const;
+    void expand_inclusion(
+        const dynamic::repository& drp,
+        const formatters::container& fc, const locator& l,
+        std::unordered_map<std::string, formattable>& formattables) const;
 
 public:
     std::unordered_map<std::string, formattable>
     execute(const dynamic::repository& drp, const dynamic::object& root_object,
-        const formatters::container& fc, const yarn::model& m) const;
+        const formatters::container& fc, const locator& l,
+        const yarn::model& m) const;
 };
 
 } } } }

@@ -101,9 +101,9 @@ boost::filesystem::path locator::make_project_path(
     return r;
 }
 
-boost::filesystem::path locator::
-make_facet_path(const annotations::path_annotations& ps, const std::string& extension,
-    const yarn::name& n) const {
+boost::filesystem::path
+locator::make_facet_path(const annotations::path_annotations& ps,
+    const std::string& extension, const yarn::name& n) const {
     BOOST_LOG_SEV(lg, debug) << "Making facet path for: " << n.id();
 
     boost::filesystem::path r;

@@ -123,7 +123,8 @@ element_properties_repository workflow::create_element_properties_repository(
     return f.make(dcf, hsrp, asrp, ssrp, fc, fprp, m);
 }
 
-element_properties_repository workflow::execute(const options::cpp_options& opts,
+element_properties_repository workflow::
+execute(const options::cpp_options& opts,
     const dynamic::repository& drp,
     const dynamic::object& root_object,
     const dogen::formatters::decoration_configuration_factory& dcf,
@@ -149,10 +150,16 @@ element_properties_repository workflow::execute(const options::cpp_options& opts
 }
 
 std::forward_list<formattable> workflow::
-execute_new(const dynamic::repository& rp, const dynamic::object& root_object,
-    const formatters::container& fc, const yarn::model& m) const {
+execute_new(const options::cpp_options& opts, const dynamic::repository& drp,
+    const dynamic::object& root_object, const formatters::container& fc,
+    const yarn::model& m) const {
+
+    const auto& ro(root_object);
+    const auto ps(create_path_annotations(drp, ro, fc));
+    const locator l(opts, m, ps);
+
     pre_reduction_workflow pre_wk;
-    const auto formattables(pre_wk.execute(rp, root_object, fc, m));
+    const auto formattables(pre_wk.execute(drp, root_object, fc, l, m));
 
     post_reduction_workflow post_wk;
     return post_wk.execute(fc, formattables);
