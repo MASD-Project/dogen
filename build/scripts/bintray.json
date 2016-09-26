@@ -3,10 +3,10 @@
         "name": "auto-upload",
         "repo": "dogen",
         "subject": "mcraveiro",
-        "desc": "I was pushed completely automatically",
+        "desc": "The Domain Generator - Generates C++-11 source code for domain driven development.",
         "website_url": "www.jfrog.com",
-        "issue_tracker_url": "https://github.com/bintray/bintray-client-java/issues",
-        "vcs_url": "https://github.com/bintray/bintray-client-java.git",
+        "issue_tracker_url": "https://github.com/DomainDrivenConsulting/dogen/issues",
+        "vcs_url": "https://github.com/DomainDrivenConsulting/dogen",
         "github_use_tag_release_notes": true,
         "github_release_notes_file": "RELEASE.txt",
         "licenses": ["GPL3"],
@@ -15,10 +15,10 @@
         "public_stats": true
     },
     "version": {
-        "name": "0.85.0",
-        "desc": "Sprint 85",
-        "released": "2015-01-04",
-        "vcs_tag": "0.85.0",
+        "name": "0.88.0",
+        "desc": "Sprint 88",
+        "released": "2016-09-26",
+        "vcs_tag": "0.88.0",
         "gpgSign": false
     },
 
