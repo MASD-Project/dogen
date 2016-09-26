@@ -42,7 +42,6 @@ add_custom_target(run_${tests_name}
     WORKING_DIRECTORY ${stage_bin_dir}
     DEPENDS ${tests_name})
 add_dependencies(run_all_tests run_${tests_name})
-add_dependencies(run_windows_green_tests run_${tests_name})
 
 add_boost_tests(${name} ${files})
 
