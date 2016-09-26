@@ -333,6 +333,7 @@ message(STATUS "Using: ${stitcher_version}")
 # aggregate targets
 #
 add_custom_target(run_all_tests)
+add_custom_target(run_windows_green_tests)
 add_custom_target(rebase)
 add_custom_target(diff)
 add_custom_target(knit_and_stitch)

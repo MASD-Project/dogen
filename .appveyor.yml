@@ -51,6 +51,7 @@ build_script:
   - cmd: if "%configuration%"=="Debug"  cmake --build . --config "%configuration%" --target knit
   # FIXME: different levels of borkage atm.
   # - cmd: cmake --build . --config "%configuration%" --target run_all_tests
+  - cmd: cmake --build . --config "%configuration%" --target run_windows_green_tests
 
 notifications:
   - provider: Webhook

@@ -91,15 +91,6 @@ Notes:
   augment the include list with additional includes. However, we may
   not even need to be aware of this.
 
-*** Run tests that are passing on windows                             :story:
-
-At present we have a release build on windows but we are not running
-any tests. This is because some of the tests are failing at the
-moment. We should run all test suites that are green to ensure we
-don't regress without noticing.
-
-Look at the stories with errors to determine which tests are passing.
-
 *** Vistor is only supported at the base class level                  :story:
 
 Due to implementation constraints, we only support visitable at the

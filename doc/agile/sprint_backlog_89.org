@@ -13,24 +13,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-26 Mon 21:04]
+#+CAPTION: Clock summary at [2016-09-26 Mon 21:16]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *8:15* |      |      | 100.0 |
+| *Total time*                                                                | *8:25* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 8:15   |      |      | 100.0 |
-| Active                                                                      |        | 8:15 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:40 |   8.1 |
+| Stories                                                                     | 8:25   |      |      | 100.0 |
+| Active                                                                      |        | 8:25 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:40 |   7.9 |
 | COMPLETED Edit release notes for previous sprint                            |        |      | 0:07 |   1.4 |
-| COMPLETED Generation of formattable is incorrect                            |        |      | 2:30 |  30.3 |
+| COMPLETED Generation of formattable is incorrect                            |        |      | 2:30 |  29.7 |
 | COMPLETED Visitor includes are incorrect                                    |        |      | 0:20 |   4.0 |
-| COMPLETED Add includer to quilt.cpp                                         |        |      | 1:46 |  21.4 |
+| COMPLETED Add includer to quilt.cpp                                         |        |      | 1:46 |  21.0 |
 | COMPLETED Add reducer to quilt.cpp                                          |        |      | 0:22 |   4.4 |
 | COMPLETED Add new index to formtter container                               |        |      | 0:19 |   3.8 |
-| COMPLETED Add path expander to quilt.cpp                                    |        |      | 0:49 |   9.9 |
-| COMPLETED Add guard expander to quilt.cpp                                   |        |      | 0:27 |   5.5 |
-| COMPLETED Investigate borked travis build                                   |        |      | 0:37 |   7.5 |
+| COMPLETED Add path expander to quilt.cpp                                    |        |      | 0:49 |   9.7 |
+| COMPLETED Add guard expander to quilt.cpp                                   |        |      | 0:27 |   5.3 |
+| COMPLETED Investigate borked travis build                                   |        |      | 0:37 |   7.3 |
+| STARTED Run tests that are passing on windows                               |        |      | 0:10 |   2.0 |
 | STARTED Add decoration expander to quilt.cpp                                |        |      | 0:18 |   3.6 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -244,6 +245,16 @@ Problem reproduced locally, must have forgotten to run the tests.
 
 Actually, the problem persists. It seems this is related to clean
 builds. We seem to have lost service forward declarations.
+
+*** STARTED Run tests that are passing on windows                     :story:
+    CLOCK: [2016-09-26 Mon 21:06]--[2016-09-26 Mon 21:16] =>  0:10
+
+At present we have a release build on windows but we are not running
+any tests. This is because some of the tests are failing at the
+moment. We should run all test suites that are green to ensure we
+don't regress without noticing.
+
+Look at the stories with errors to determine which tests are passing.
 
 *** STARTED Add decoration expander to quilt.cpp                      :story:
     CLOCK: [2016-09-26 Mon 18:34]--[2016-09-26 Mon 18:52] =>  0:18
