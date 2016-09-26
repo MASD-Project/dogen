@@ -13,7 +13,7 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-26 Mon 00:04]
+#+CAPTION: Clock summary at [2016-09-26 Mon 09:47]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
@@ -21,7 +21,7 @@
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
 | Stories                                                                     | 91:16   |       |       | 100.0 |
 | Active                                                                      |         | 91:16 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  4:10 |   4.6 |
+| COMPLETED Sprint and product backlog grooming                               |         |       |  4:10 |   4.6 |
 | COMPLETED Fix chocolatey warning                                            |         |       |  0:08 |   0.1 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:27 |   0.5 |
 | COMPLETED Analysis on current state of file path generation                 |         |       |  0:57 |   1.0 |
@@ -62,12 +62,13 @@
 | COMPLETED Add transformer to quilt.cpp                                      |         |       |  1:28 |   1.6 |
 | COMPLETED Add enabler to quilt.cpp                                          |         |       |  5:59 |   6.6 |
 | COMPLETED Investigate using postgres to query JSON objects                  |         |       |  2:55 |   3.2 |
-| STARTED Add formattable element                                             |         |       |  0:21 |   0.4 |
-| STARTED Add includer to quilt.cpp                                           |         |       |  1:17 |   1.4 |
+| POSTPONED Add formattable element                                           |         |       |  0:21 |   0.4 |
+| POSTPONED Add includer to quilt.cpp                                         |         |       |  1:17 |   1.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
-*** STARTED Sprint and product backlog grooming                       :story:
+*** COMPLETED Sprint and product backlog grooming                     :story:
+    CLOSED: [2016-09-26 Mon 09:46]
     CLOCK: [2016-09-25 Sun 10:08]--[2016-09-25 Sun 10:25] =>  0:17
     CLOCK: [2016-09-21 Wed 22:00]--[2016-09-21 Wed 22:20] =>  0:20
     CLOCK: [2016-09-21 Wed 08:01]--[2016-09-21 Wed 09:00] =>  0:59
@@ -1282,7 +1283,8 @@ Pretty print:
 : from temp_json where values->'__parent_0__'->'name'->>'simple' = 'formattable'
 : and values->>'__type__' like '%object%';
 
-*** STARTED Add formattable element                                   :story:
+*** POSTPONED Add formattable element                                 :story:
+    CLOSED: [2016-09-26 Mon 09:46]
     CLOCK: [2016-09-23 Fri 22:02]--[2016-09-23 Fri 22:04] =>  0:02
     CLOCK: [2016-09-23 Fri 20:27]--[2016-09-23 Fri 20:46] =>  0:19
 
@@ -1304,7 +1306,8 @@ Previous understanding:
   visitor to resolve the element and then call the formatter.
 - add an enablement map for all formatters in the formatter
 
-*** STARTED Add includer to quilt.cpp                                 :story:
+*** POSTPONED Add includer to quilt.cpp                               :story:
+    CLOSED: [2016-09-26 Mon 09:46]
     CLOCK: [2016-09-25 Sun 11:29]--[2016-09-25 Sun 11:45] =>  0:16
     CLOCK: [2016-09-25 Sun 11:01]--[2016-09-25 Sun 11:28] =>  0:27
     CLOCK: [2016-09-25 Sun 10:26]--[2016-09-25 Sun 11:00] =>  0:34
@@ -1317,295 +1320,6 @@ Responsible for computing the inclusion dependencies.
   default initialised. Actually a better approach is to create two
   builder impls and to decide which one to use based on the
   constructor of the builder.
-
-*** Generation of formattable is incorrect                            :story:
-
-The new formattable type is generating an invalid header file. It is
-missing the forward declaration of the yarn element.
-
-*** Do not compute inclusion directives for system models             :story:
-
-It seems we are computing inclusion directives and other path
-derivatives for system models:
-
-: {
-:   "__type__": "dogen::cpp::expansion::path_derivatives",
-:   "file_path": "/home/marco/Development/DomainDrivenConsulting/output/dogen/clang-3.5/stage/bin/../test_data/all_primitives/actual/std/include/std/serialization/unique_ptr_fwd_ser.hpp",
-:   "header_guard": "STD_SERIALIZATION_UNIQUE_PTR_FWD_SER_HPP",
-:   "inclusion_directive": "<quote>std/serialization/unique_ptr_fwd_ser.hpp<quote>"
-: }
-
-This comes out of the workflow, so we possibly are then ignoring it
-for the non-target types. So:
-
-- can we avoid computing these altogether?
-- are we ignoring it?
-
-Actually this is the usual problem with the "origin" of the type. We
-need a way to determine if this type needs computations or not. We
-need to create a story to clean up the =origin_type= and
-=generation_type= and then we can make use of it to determine if we
-need to compute inclusion, path etc or not.
-
-*** Tidy-up of inclusion terminology                                  :story:
-
-Random notes:
-
-- imports and exports
-- some types support both (headers)
-- some support imports only (cpp)
-- some support neither (cmakelists, etc).
-
-*** Add path generator to quilt.cpp                                   :story:
-
-Generates the full paths.
-
-*** Add guard generator to quilt.cpp                                  :story:
-
-Generates the header guards.
-
-*** Add aspect generator to quilt.cpp                                 :story:
-
-Generates the aspect configuration.
-
-*** Check which properties need to loop through the entire model      :story:
-
-In certain cases such as helpers we probably don't need to go through
-all types; only the target types matter. Ensure we are not processing
-other types for no reason.
-
-Merged stories:
-
-*Element properties includes non-target types*
-
-We seem to be generating a lot of element properties and formatter
-properties as well. We should only be generating these for the target
-model.
-
-*** Add helper generator to quilt.cpp                                 :story:
-
-Generates the helper configuration.
-
-*** Remove =optional<list>=                                           :story:
-
-We should not really be using optional<list>. The empty list is
-sufficient for this.
-
-Uses:
-
-- include provider. Fixed with other story.
-
-*** Add file properties generator to to quilt.cpp                     :story:
-
-We need to generate the file properties for each formattable. The
-formatter must supply the modeline name and the
-
-*** Introduce the concept of proxy models                             :story:
-
-These are models that exist solely to bring types in, but do not
-define those types. Typically one uses a proxy model to expose
-non-dogen types into dogen. We could add a flag to models
-=is_proxy=. It would replace the notion of system models. We need to
-check the stories in the backlog around this.
-
-Interestingly we could have different defaults for formatters in proxy
-models. For example, if a model is proxy we can assume that we should
-not compute inclusion paths. This could save a lot of time when
-specifying the models in JSON.
-
-*** Remove formatter id                                               :story:
-
-Not clear why we need this given we have formatter name.
-
-*** Create the notion of a formatter alias                            :story:
-
-We did a bit of a hack with mapping the facet to the default
-formatter. What we really need is the notion of an alias. It still
-looks like a formatter name (for example "header_formatter") but it
-must be first resolved into an actual formatter. For this we need a
-type index.
-
-Other names:
-
-- canonical formatter
-- reference formatter
-
-We need to support a strange use case: where the formatter does not
-exist for a given element type. For example, we do not have primitive
-formatters, but there are directives set in them:
-
-#+begin_src json-mode
-        {
-            "meta_type" : "primitive",
-            "simple_name" : "uint64_t",
-            "extensions" : {
-                "quilt.cpp.helper.family" : "Number",
-                "quilt.cpp.aspect.requires_manual_default_constructor" : true,
-                "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<cstdint>",
-                "quilt.cpp.hash.class_header_formatter.inclusion_required" : false,
-                "quilt.cpp.io.class_header_formatter.inclusion_required" : false,
-                "quilt.cpp.test_data.class_header_formatter.inclusion_required" : false,
-                "quilt.cpp.serialization.class_header_formatter.inclusion_required" : false,
-                "quilt.cpp.odb.class_header_formatter.inclusion_required" : false
-            }
-        },
-#+end_src
-
-The problem with this is that if we do not have a formatter for
-primitives, then we will not read the directives. In the past this
-worked because we were processing the cross-product of formatters and
-element sub-types, so the mistake of
-=quilt.cpp.types.class_header_formatter.inclusion_directive= was
-actually resulted in the correct result. But of course, we cannot
-replace class_header_formatter with the correct formatter name (as we
-don't have one). Nor does it sound good to have to hard-code the
-formatter name against the type. One way to solve this is with
-canonical formatters:
-
-- use the canonical formatter name in the declaration
-- ensure we always read directives for the canonical formatter from
-  the meta-data.
-- when processing, only set the canonical formatter if it was not
-  already set by meta-data.
-
-When testing the fix, we need to delete the mock formaters created for
-primitives.
-
-*** Supply formatter's container to injector                          :story:
-
-At present the injector is calling the formatters' workflow
-directly, in order to obtain the formatters' container. It should
-receive it as a parameter during initialisation.
-
-*** Add filter to quilt.cpp                                           :story:
-
-Removes the non-target formattables.
-
-*** Move name builder into yarn                                       :story:
-
-At present we have name builder in quilt.cpp simply to build the
-merged namespaces. We should have some kind of utility for this in
-yarn.
-
-*** Refactor path settings factory                                    :story:
-
-Tasks:
-
-- get distinct list of facets across all formatters and generate field
-  definitions from this list;
-- cache top-level fields and facet fields and copy results instead of
-  re-reading them.
-
-*** Move registration of providers to initialiser                     :story:
-
-At present we are iterating through the formatters list in properties
-and manually registering all include providers via the interface. This
-is not ideal because the formatter interface needs to know of include
-providers, meaning we can't move it away from =quilt.cpp=.
-
-When we register a formatter we should also register the include
-provider too.
-
-Tasks:
-
-- add provider support directly to the formatters instead of another
-  class and remove registration from formatter interface.
-- add a static registrar for the include providers in workflow.
-- change initialiser to register the include providers from the same
-  shared pointer.
-
-*** Implement all formatter interfaces                                :story:
-
-We still have a couple of skeleton interfaces:
-
-- primitve
-- concepts
-
-We should throw if formatting is required.
-
-*** Formatters with duplicate names result in non-intuitive errors    :story:
-
-We added two formatters to io with the same name by mistake and the
-resulting error was not particularly enlightening:
-
-: std::exception::what: Qualified name defined more than once: cpp.io.enum_header_formatter.inclusion_required
-
-We should have a very early on validation to ensure formatters have
-distinct names.
-
-Merged stories:
-
-*Check for duplicate formatter names in formatter registrar*
-
-At present it is possible to register a formatter name more than
-once. Registrar should keep track of the names and throw if the name
-is duplicated.
-
-*** Initialise formatters in the formatter's translation unit         :story:
-
-At present we are initialising the formatters in each of the facet
-initialisers. However, it makes more sense to initialise them on the
-translation unit for each formatter. This will also make life easier
-when we move to a mustache world where there may not be a formatter
-header file at all.
-
-*** Move odb options file into odb folder                             :story:
-
-There is not particularly good reason for this file to exist at the
-src level.
-
-In order to implement this story we need to have a working odb setup
-to test it and ensure we didn't break anything.
-
-*** Add more validation to formatter registration                     :story:
-
-We should check to ensure that only one formatter per facet is
-declared the canonical formatter.
-
-*** Consider using indices rather than associative containers          :epic:
-
-Once we generate the final model the model becomes constant; this
-means we can easily assign an [[https://en.wikipedia.org/wiki/Ordinal_number][ordinal number]] to each model
-element. These could be arranged so that we always start with
-generatable types first; this way we always generate dense
-containers - there are some cases where we need both generatable types
-and non-generatable types; in other cases we just need generatable
-types; we never need just non-generatable types. We also need to know
-the position of the first non-generatable type (or alternatively, the
-size of the generatable types set).
-
-Once we have this, we can start creating vectors with a fixed size
-(either total number of elements or just size of generatable
-types). We can also make it so that each name has an id which is the
-ordinal (another model post-processing activity). Actually we should
-call it "type index" or some other name because its a transient
-id. This means both properties and settings require no lookups at all
-since all positions are known beforehand (except in cases where the
-key of the associative container must be the =yarn::name= because we
-use it for processing).
-
-In theory, a similar approach can be done for formatters too. We know
-upfront what the ordinal number is for each formatter because they are
-all registered before we start processing. If formatters obtained
-their ordinal number at registration, wherever we are using a map of
-formatter name to a resource, we could use a fixed-size
-vector. However, formatters may be sparse in many cases (if not all
-cases?). For example, we do not have formatter properties for all
-formatters for every =yarn::name= because many (most) formatters don't
-make sense for every yarn type. Thus this is less applicable, at least
-for formatter properties. We need to look carefully at all use cases
-and see if there is any place where this approach is applicable. It is
-probably going to be more useful for formatters than elements.
-
-Tasks:
-
-- in resolver, assign element indices and update property names with
-  them.
-- change final model to have a vector of size maximum index (a
-  property of the intermediate model).
-- in the final model generation, for each type, look at its index and
-  populate the slot accordingly.
-- update quilt to use the indices where possible.
 
 ** Deprecated
 *** CANCELLED Consider renaming formatters                            :story:
