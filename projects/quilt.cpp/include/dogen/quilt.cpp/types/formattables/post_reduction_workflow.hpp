@@ -29,6 +29,7 @@
 #include <forward_list>
 #include <unordered_map>
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
+#include "dogen/quilt.cpp/types/formattables/locator.hpp"
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
 
 namespace dogen {
@@ -38,13 +39,19 @@ namespace formattables {
 
 class post_reduction_workflow {
 private:
+    typedef std::unordered_map<std::string, formattable>
+    formattables_by_id_type;
+
+    void expand_file_paths(const formatters::container& fc, const locator& l,
+        formattables_by_id_type& formattables) const;
+
     std::forward_list<formattable>
-    transform(
-        const std::unordered_map<std::string, formattable>& formattables) const;
+    transform(const formattables_by_id_type& formattables) const;
 
 public:
-    std::forward_list<formattable> execute(const formatters::container& fc,
-        const std::unordered_map<std::string, formattable>& formattables) const;
+    std::forward_list<formattable>
+    execute(const formatters::container& fc, const locator& l,
+        std::unordered_map<std::string, formattable>& formattables) const;
 };
 
 } } } }

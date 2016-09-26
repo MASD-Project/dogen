@@ -163,10 +163,10 @@ execute_new(const options::cpp_options& opts, const dynamic::repository& drp,
     const auto formattables(pre_wk.execute(drp, root_object, fc, l, m));
 
     reducer rd;
-    const auto reduced_formattables(rd.reduce(formattables));
+    auto reduced_formattables(rd.reduce(formattables));
 
     post_reduction_workflow post_wk;
-    return post_wk.execute(fc, reduced_formattables);
+    return post_wk.execute(fc, l, reduced_formattables);
 }
 
 } } } }

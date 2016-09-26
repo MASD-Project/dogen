@@ -182,6 +182,16 @@ void workflow::test_new_formattables_workflow(const options::cpp_options& opts,
                     BOOST_THROW_EXCEPTION(
                         workflow_error("Different inclusion."));
                 }
+
+                if (pair.second.file_path() != k->second.file_path()) {
+                    BOOST_LOG_SEV(lg, error) << "File path is different. "
+                                             << "Id: " << id << " new: "
+                                             << pair.second.file_path()
+                                             << " old: "
+                                             << k->second.file_path();
+                    BOOST_THROW_EXCEPTION(
+                        workflow_error("Different file paths."));
+                }
             }
         }
     }

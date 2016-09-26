@@ -13,20 +13,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-26 Mon 15:39]
+#+CAPTION: Clock summary at [2016-09-26 Mon 17:49]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *5:45* |      |      | 100.0 |
+| *Total time*                                                                | *6:53* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 5:45   |      |      | 100.0 |
-| Active                                                                      |        | 5:45 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:40 |  11.6 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:07 |   2.0 |
-| COMPLETED Generation of formattable is incorrect                            |        |      | 2:30 |  43.5 |
-| COMPLETED Visitor includes are incorrect                                    |        |      | 0:20 |   5.8 |
-| COMPLETED Add includer to quilt.cpp                                         |        |      | 1:46 |  30.7 |
-| COMPLETED Add reducer to quilt.cpp                                          |        |      | 0:22 |   6.4 |
+| Stories                                                                     | 6:53   |      |      | 100.0 |
+| Active                                                                      |        | 6:53 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:40 |   9.7 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:07 |   1.7 |
+| COMPLETED Generation of formattable is incorrect                            |        |      | 2:30 |  36.3 |
+| COMPLETED Visitor includes are incorrect                                    |        |      | 0:20 |   4.8 |
+| COMPLETED Add includer to quilt.cpp                                         |        |      | 1:46 |  25.7 |
+| COMPLETED Add reducer to quilt.cpp                                          |        |      | 0:22 |   5.3 |
+| COMPLETED Add new index to formtter container                               |        |      | 0:19 |   4.6 |
+| COMPLETED Add path generator to quilt.cpp                                   |        |      | 0:49 |  11.9 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -187,7 +189,18 @@ need to compute inclusion, path etc or not.
 
 Removes all types that are non-generatable.
 
-*** Add path generator to quilt.cpp                                   :story:
+*** COMPLETED Add new index to formtter container                     :story:
+    CLOSED: [2016-09-26 Mon 17:48]
+    CLOCK: [2016-09-26 Mon 16:56]--[2016-09-26 Mon 17:15] =>  0:19
+
+It is actually quite useful to look for a formatter by formatter
+name. We should provide this in formatter container and use it from
+inclusion expander.
+
+*** COMPLETED Add path generator to quilt.cpp                         :story:
+    CLOSED: [2016-09-26 Mon 17:49]
+    CLOCK: [2016-09-26 Mon 17:16]--[2016-09-26 Mon 17:49] =>  0:33
+    CLOCK: [2016-09-26 Mon 16:39]--[2016-09-26 Mon 16:55] =>  0:16
 
 Generates the full paths.
 
