@@ -32,6 +32,7 @@
 #include <unordered_map>
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/element.hpp"
+#include "dogen/yarn/types/element_visitor_fwd.hpp"
 #include "dogen/quilt.cpp/serialization/fabric/master_header_fwd_ser.hpp"
 
 namespace dogen {

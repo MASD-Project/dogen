@@ -438,7 +438,8 @@ void assistant::add_helper_methods() {
         BOOST_LOG_SEV(lg, debug) << "No helper methods for: ";
     }
 
-    for (const auto& hc : context_.element_configuration().helper_configuration()) {
+    const auto& ec(context_.element_configuration());
+    for (const auto& hc : ec.helper_configuration()) {
         BOOST_LOG_SEV(lg, debug) << "Helper properties: " << hc;
         const auto helpers(get_helpers(hc));
 

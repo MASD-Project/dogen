@@ -77,7 +77,7 @@ void generator::visit(const dogen::yarn::object& o) {
         BOOST_LOG_SEV(lg, error) << duplicate_name << id;
         BOOST_THROW_EXCEPTION(building_error(duplicate_name + id));
     }
-    BOOST_LOG_SEV(lg, debug) << "Done creating helper instances for: " << id;
+    BOOST_LOG_SEV(lg, debug) << "Done creating aspect properties for: " << id;
 }
 
 }

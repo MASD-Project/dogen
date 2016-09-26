@@ -28,6 +28,7 @@
 #include <iosfwd>
 #include <algorithm>
 #include "dogen/yarn/types/element.hpp"
+#include "dogen/yarn/types/element_visitor_fwd.hpp"
 #include "dogen/quilt.cpp/serialization/fabric/odb_options_fwd_ser.hpp"
 
 namespace dogen {

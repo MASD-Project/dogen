@@ -28,6 +28,7 @@
 #include <list>
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
+#include "dogen/yarn/types/element_fwd.hpp"
 #include "dogen/quilt.cpp/types/formattables/element_configuration.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/formattable_fwd_ser.hpp"
 

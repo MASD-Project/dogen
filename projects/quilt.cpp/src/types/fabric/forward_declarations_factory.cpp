@@ -39,10 +39,12 @@ namespace fabric {
 
 class generator final {
 private:
-    boost::shared_ptr<forward_declarations> create(const yarn::name& n) const {
+    boost::shared_ptr<forward_declarations>
+    create(const yarn::name& n, const yarn::generation_types gt) const {
+
         auto r(boost::make_shared<forward_declarations>());
         r->name(n);
-        r->generation_type(yarn::generation_types::full_generation);
+        r->generation_type(gt);
         r->is_element_extension(true);
         return r;
     }
@@ -56,33 +58,22 @@ public:
     void operator()(const yarn::module&) {}
 
     void operator()(const dogen::yarn::visitor& v) {
-        if (v.generation_type() == yarn::generation_types::no_generation)
-            return;
-
-        result_.push_back(create(v.name()));
+        result_.push_back(create(v.name(), v.generation_type()));
     }
 
     void operator()(const yarn::enumeration& e) {
-        if (e.generation_type() == yarn::generation_types::no_generation)
-            return;
-        const auto fd(create(e.name()));
+        const auto fd(create(e.name(), e.generation_type()));
         fd->is_enum(true);
         fd->underlying_type(e.underlying_type());
         result_.push_back(fd);
     }
 
     void operator()(const yarn::object& o) {
-        if (o.generation_type() == yarn::generation_types::no_generation)
-            return;
-
-        result_.push_back(create(o.name()));
+        result_.push_back(create(o.name(), o.generation_type()));
     }
 
     void operator()(const yarn::exception& e) {
-        if (e.generation_type() == yarn::generation_types::no_generation)
-            return;
-
-        const auto fd(create(e.name()));
+        const auto fd(create(e.name(), e.generation_type()));
         fd->is_exception(true);
         result_.push_back(fd);
     }

@@ -13,17 +13,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-26 Mon 11:33]
+#+CAPTION: Clock summary at [2016-09-26 Mon 13:03]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *2:08* |      |      | 100.0 |
+| *Total time*                                                                | *3:14* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 2:08   |      |      | 100.0 |
-| Active                                                                      |        | 2:08 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:37 |  28.9 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:07 |   5.5 |
-| STARTED Generation of formattable is incorrect                              |        |      | 1:24 |  65.6 |
+| Stories                                                                     | 3:14   |      |      | 100.0 |
+| Active                                                                      |        | 3:14 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:37 |  19.1 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:07 |   3.6 |
+| COMPLETED Generation of formattable is incorrect                            |        |      | 2:30 |  77.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -50,7 +50,12 @@ We continue our long road of internal refactorings, focusing on the ```quilt.cpp
 For more details see the [sprint log](https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_88.org).
 #+end_src
 
-*** STARTED Generation of formattable is incorrect                    :story:
+*** COMPLETED Generation of formattable is incorrect                  :story:
+    CLOSED: [2016-09-26 Mon 13:03]
+    CLOCK: [2016-09-26 Mon 12:50]--[2016-09-26 Mon 13:03] =>  0:13
+    CLOCK: [2016-09-26 Mon 12:30]--[2016-09-26 Mon 12:49] =>  0:19
+    CLOCK: [2016-09-26 Mon 11:51]--[2016-09-26 Mon 12:16] =>  0:25
+    CLOCK: [2016-09-26 Mon 11:42]--[2016-09-26 Mon 11:51] =>  0:09
     CLOCK: [2016-09-26 Mon 10:09]--[2016-09-26 Mon 11:33] =>  1:24
 
 The new formattable type is generating an invalid header file. It is
@@ -118,6 +123,14 @@ seems we are not generating the forward declarations for element:
 No mention of forward declarations. The problem is fabric is only
 injecting forward declarations for the target model. we need to relax
 this and do it for all models.
+
+When we do this we seem to overwrite the helper configuration for
+types such as =boost::filesystem::path=.
+
+*** Visitor includes are incorrect                                    :story:
+
+We are adding an include to the descendants' header for no
+reason. Remove it.
 
 *** Add formattable element                                           :story:
 
@@ -225,7 +238,8 @@ Uses:
 *** Add file properties generator to to quilt.cpp                     :story:
 
 We need to generate the file properties for each formattable. The
-formatter must supply the modeline name and the
+formatter must supply the modeline name. At present we have a hack in
+element properties to determine the modeline.
 
 *** Introduce the concept of proxy models                             :story:
 
@@ -297,6 +311,12 @@ canonical formatters:
 
 When testing the fix, we need to delete the mock formaters created for
 primitives.
+
+As part of this work we need to review the need for
+=element_extension=, which seems unused at present. Actually it is
+used now in helper annotations repository factory, to ensure we don't
+generate annotations for the forward declarations and clobber the main
+object with it. This needs reviewing.
 
 *** Supply formatter's container to injector                          :story:
 

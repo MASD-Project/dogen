@@ -44,6 +44,12 @@ make(const dynamic::repository& rp, const yarn::model& m) const {
     helper_annotations_factory f(rp);
     for (const auto& ptr : m.elements()) {
         const auto& e(*ptr);
+        /*
+         * Ingore element extensions as they cannot have helpers.
+         */
+        if (e.is_element_extension())
+            continue;
+
         const auto hs(f.make(e.extensions()));
             r.by_id()[e.name().id()] = hs;
     }
