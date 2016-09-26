@@ -38,7 +38,6 @@
 #include "dogen/yarn/types/stereotypes.hpp"
 #include "dogen/yarn/types/object_types.hpp"
 #include "dogen/yarn/hash/stereotypes_hash.hpp"
-#include "dogen/yarn/types/element_visitor_fwd.hpp"
 #include "dogen/yarn/serialization/object_fwd_ser.hpp"
 #include "dogen/yarn/types/generalization_annotations.hpp"
 #include "dogen/yarn/types/type_parameters_annotations.hpp"

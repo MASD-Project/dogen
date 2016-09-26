@@ -13,17 +13,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-26 Mon 13:03]
+#+CAPTION: Clock summary at [2016-09-26 Mon 13:25]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *3:14* |      |      | 100.0 |
+| *Total time*                                                                | *3:34* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 3:14   |      |      | 100.0 |
-| Active                                                                      |        | 3:14 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:37 |  19.1 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:07 |   3.6 |
-| COMPLETED Generation of formattable is incorrect                            |        |      | 2:30 |  77.3 |
+| Stories                                                                     | 3:34   |      |      | 100.0 |
+| Active                                                                      |        | 3:34 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:37 |  17.3 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:07 |   3.3 |
+| COMPLETED Generation of formattable is incorrect                            |        |      | 2:30 |  70.1 |
+| COMPLETED Visitor includes are incorrect                                    |        |      | 0:20 |   9.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -127,7 +128,9 @@ this and do it for all models.
 When we do this we seem to overwrite the helper configuration for
 types such as =boost::filesystem::path=.
 
-*** STARTED Visitor includes are incorrect                            :story:
+*** COMPLETED Visitor includes are incorrect                          :story:
+    CLOSED: [2016-09-26 Mon 13:25]
+    CLOCK: [2016-09-26 Mon 13:17]--[2016-09-26 Mon 13:25] =>  0:08
     CLOCK: [2016-09-26 Mon 13:04]--[2016-09-26 Mon 13:16] =>  0:12
 
 We are adding an include to the descendants' header for no

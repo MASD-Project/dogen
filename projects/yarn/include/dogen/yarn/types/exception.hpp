@@ -28,7 +28,6 @@
 #include <iosfwd>
 #include <algorithm>
 #include "dogen/yarn/types/element.hpp"
-#include "dogen/yarn/types/element_visitor_fwd.hpp"
 #include "dogen/yarn/serialization/exception_fwd_ser.hpp"
 
 namespace dogen {
