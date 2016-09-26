@@ -11,6 +11,12 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Remove unused elements from yarn's final model                    :story:
+
+We could mark all used elements during resolution and then during the
+transformation into the final model, we could drop all unused
+elements.
+
 *** Document the conceptual model                                     :story:
 
 We seem to be pretty close to the end of the conceptual model for
