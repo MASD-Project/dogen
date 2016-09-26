@@ -92,11 +92,13 @@ std::list<std::string> class_header_formatter::inclusion_dependencies(
     using hash = formatters::hash::traits;
     builder.add(o.associative_container_keys(), hash::traits::facet_name());
 
-    if (o.is_visitation_root() || o.is_visitation_leaf()) {
+    if (o.is_visitation_root()) {
         /*
-         * On the header files we only care about the base visitor for
-         * all visitation cases; as such we can get away with a
-         * forward declaration.
+         * On the header files of the visitation root we only care
+         * about the base visitor; as such we can get away with a
+         * forward declaration. For the visitation leaves, since we
+         * must include the parent we do not need any additional
+         * includes.
          */
         builder.add(*o.base_visitor(), fwd_fn);
     }
