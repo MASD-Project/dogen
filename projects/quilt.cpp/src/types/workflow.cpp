@@ -22,6 +22,7 @@
 #include <boost/algorithm/string/join.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
+#include "dogen/utility/io/optional_io.hpp"
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/formatters/types/hydration_workflow.hpp"
 #include "dogen/dynamic/types/workflow.hpp"
@@ -192,6 +193,17 @@ void workflow::test_new_formattables_workflow(const options::cpp_options& opts,
                     BOOST_THROW_EXCEPTION(
                         workflow_error("Different file paths."));
                 }
+
+                if (pair.second.header_guard() != k->second.header_guard()) {
+                    BOOST_LOG_SEV(lg, error) << "Header guard is different. "
+                                             << "Id: " << id << " new: "
+                                             << pair.second.header_guard()
+                                             << " old: "
+                                             << k->second.header_guard();
+                    BOOST_THROW_EXCEPTION(
+                        workflow_error("Different header guard."));
+                }
+
             }
         }
     }

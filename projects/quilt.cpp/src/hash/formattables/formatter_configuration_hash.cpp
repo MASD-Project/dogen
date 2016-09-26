@@ -34,16 +34,6 @@ inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) 
     return seed;
 }
 
-inline std::size_t hash_boost_optional_std_string(const boost::optional<std::string>& v) {
-    std::size_t seed(0);
-
-    if (!v)
-        return seed;
-
-    combine(seed, *v);
-    return seed;
-}
-
 inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
@@ -81,7 +71,7 @@ std::size_t formatter_configuration_hasher::hash(const formatter_configuration& 
 
     combine(seed, v.enabled());
     combine(seed, hash_boost_filesystem_path(v.file_path()));
-    combine(seed, hash_boost_optional_std_string(v.header_guard()));
+    combine(seed, v.header_guard());
     combine(seed, hash_std_list_std_string(v.inclusion_dependencies()));
     combine(seed, hash_std_unordered_set_std_string(v.enabled_formatters()));
     combine(seed, hash_std_unordered_map_std_string_std_string(v.facet_directory_for_facet()));

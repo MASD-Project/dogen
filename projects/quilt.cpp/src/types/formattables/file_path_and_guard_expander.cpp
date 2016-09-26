@@ -19,15 +19,20 @@
  *
  */
 #include <boost/throw_exception.hpp>
+#include <boost/algorithm/string.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/quilt.cpp/types/formattables/expansion_error.hpp"
-#include "dogen/quilt.cpp/types/formattables/file_path_expander.hpp"
+#include "dogen/quilt.cpp/types/formattables/file_path_and_guard_expander.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("quilt.cpp.formattables.file_path_expander"));
+static logger lg(logger_factory(
+        "quilt.cpp.formattables.file_path_and_guard_expander"));
 
+const std::string empty;
+const std::string dot(".");
+const std::string separator("_");
 const std::string missing_formatter_name("Formatter name not found: ");
 
 }
@@ -37,7 +42,22 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-void file_path_expander::
+std::string file_path_and_guard_expander::
+to_header_guard(const boost::filesystem::path& p) const {
+    bool is_first(true);
+    std::ostringstream ss;
+    for (const auto& token : p) {
+        std::string s(token.string());
+        boost::replace_all(s, dot, separator);
+        boost::to_upper(s);
+        ss << (is_first ? empty : separator) << s;
+        is_first = false;
+    }
+    return ss.str();
+}
+
+
+void file_path_and_guard_expander::
 expand(const formatters::container& fc, const locator& l,
     std::unordered_map<std::string, formattable>& formattables) const {
 
@@ -73,6 +93,16 @@ expand(const formatters::container& fc, const locator& l,
 
             const auto& fmt(i->second);
             fmt_cfg.file_path(fmt->full_path(l, n));
+
+            /*
+             * If the formatter supports inclusion, we need to compute
+             * the header guard as well.
+             */
+            const auto ns(formatters::inclusion_support_types::not_supported);
+            if (fmt->inclusion_support_type() != ns) {
+                const auto ip(fmt->inclusion_path(l, n));
+                fmt_cfg.header_guard(to_header_guard(ip));
+            }
         }
     }
 }

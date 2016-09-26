@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/quilt.cpp/types/formattables/transformer.hpp"
-#include "dogen/quilt.cpp/types/formattables/file_path_expander.hpp"
+#include "dogen/quilt.cpp/types/formattables/file_path_and_guard_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/post_reduction_workflow.hpp"
 
 namespace dogen {
@@ -28,9 +28,9 @@ namespace cpp {
 namespace formattables {
 
 void post_reduction_workflow::
-expand_file_paths(const formatters::container& fc, const locator& l,
+expand_file_paths_and_guards(const formatters::container& fc, const locator& l,
     formattables_by_id_type& formattables) const {
-    file_path_expander ex;
+    file_path_and_guard_expander ex;
     ex.expand(fc, l, formattables);
 }
 
@@ -44,10 +44,8 @@ post_reduction_workflow::transform(
 std::forward_list<formattable> post_reduction_workflow::
 execute(const formatters::container& fc, const locator& l,
     std::unordered_map<std::string, formattable>& formattables) const {
-    expand_file_paths(fc, l, formattables);
+    expand_file_paths_and_guards(fc, l, formattables);
     auto r(transform(formattables));
-
-
     return r;
 }
 

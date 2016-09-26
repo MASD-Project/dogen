@@ -27,17 +27,20 @@
 
 #include <string>
 #include <unordered_map>
+#include <boost/filesystem/path.hpp>
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/formattables/locator.hpp"
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
-
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
 
-class file_path_expander {
+class file_path_and_guard_expander {
+private:
+    std::string to_header_guard(const boost::filesystem::path& p) const;
+
 public:
     void expand(const formatters::container& fc, const locator& l,
         std::unordered_map<std::string, formattable>& formattables) const;

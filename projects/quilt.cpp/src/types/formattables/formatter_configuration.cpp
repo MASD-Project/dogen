@@ -39,7 +39,7 @@ formatter_configuration::formatter_configuration(formatter_configuration&& rhs)
 formatter_configuration::formatter_configuration(
     const bool enabled,
     const boost::filesystem::path& file_path,
-    const boost::optional<std::string>& header_guard,
+    const std::string& header_guard,
     const std::list<std::string>& inclusion_dependencies,
     const std::unordered_set<std::string>& enabled_formatters,
     const std::unordered_map<std::string, std::string>& facet_directory_for_facet)
@@ -99,19 +99,19 @@ void formatter_configuration::file_path(const boost::filesystem::path&& v) {
     file_path_ = std::move(v);
 }
 
-const boost::optional<std::string>& formatter_configuration::header_guard() const {
+const std::string& formatter_configuration::header_guard() const {
     return header_guard_;
 }
 
-boost::optional<std::string>& formatter_configuration::header_guard() {
+std::string& formatter_configuration::header_guard() {
     return header_guard_;
 }
 
-void formatter_configuration::header_guard(const boost::optional<std::string>& v) {
+void formatter_configuration::header_guard(const std::string& v) {
     header_guard_ = v;
 }
 
-void formatter_configuration::header_guard(const boost::optional<std::string>&& v) {
+void formatter_configuration::header_guard(const std::string&& v) {
     header_guard_ = std::move(v);
 }
 

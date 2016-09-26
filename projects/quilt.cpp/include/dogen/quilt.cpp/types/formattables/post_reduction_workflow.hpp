@@ -42,7 +42,7 @@ private:
     typedef std::unordered_map<std::string, formattable>
     formattables_by_id_type;
 
-    void expand_file_paths(const formatters::container& fc, const locator& l,
+    void expand_file_paths_and_guards(const formatters::container& fc, const locator& l,
         formattables_by_id_type& formattables) const;
 
     std::forward_list<formattable>

@@ -30,7 +30,6 @@
 #include <algorithm>
 #include <unordered_map>
 #include <unordered_set>
-#include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
 #include "dogen/quilt.cpp/serialization/formattables/formatter_configuration_fwd_ser.hpp"
 
@@ -54,7 +53,7 @@ public:
     formatter_configuration(
         const bool enabled,
         const boost::filesystem::path& file_path,
-        const boost::optional<std::string>& header_guard,
+        const std::string& header_guard,
         const std::list<std::string>& inclusion_dependencies,
         const std::unordered_set<std::string>& enabled_formatters,
         const std::unordered_map<std::string, std::string>& facet_directory_for_facet);
@@ -75,10 +74,10 @@ public:
     void file_path(const boost::filesystem::path& v);
     void file_path(const boost::filesystem::path&& v);
 
-    const boost::optional<std::string>& header_guard() const;
-    boost::optional<std::string>& header_guard();
-    void header_guard(const boost::optional<std::string>& v);
-    void header_guard(const boost::optional<std::string>&& v);
+    const std::string& header_guard() const;
+    std::string& header_guard();
+    void header_guard(const std::string& v);
+    void header_guard(const std::string&& v);
 
     const std::list<std::string>& inclusion_dependencies() const;
     std::list<std::string>& inclusion_dependencies();
@@ -120,7 +119,7 @@ public:
 private:
     bool enabled_;
     boost::filesystem::path file_path_;
-    boost::optional<std::string> header_guard_;
+    std::string header_guard_;
     std::list<std::string> inclusion_dependencies_;
     std::unordered_set<std::string> enabled_formatters_;
     std::unordered_map<std::string, std::string> facet_directory_for_facet_;
