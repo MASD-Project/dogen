@@ -24,6 +24,7 @@
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/io/optional_io.hpp"
 #include "dogen/utility/filesystem/path.hpp"
+#include "dogen/formatters/io/decoration_configuration_io.hpp"
 #include "dogen/formatters/types/hydration_workflow.hpp"
 #include "dogen/dynamic/types/workflow.hpp"
 #include "dogen/quilt.cpp/types/formatters/workflow.hpp"
@@ -143,6 +144,18 @@ void workflow::test_new_formattables_workflow(const options::cpp_options& opts,
 
             const auto& legacy_fmt_cfgs(i->second.formatter_configuration());
             const auto& elm_cfg(formattable.configuration());
+
+            if (elm_cfg.decoration_configuration() !=
+                i->second.decoration_configuration()) {
+                BOOST_LOG_SEV(lg, error) << "Incorrect decoration. Legacy: "
+                                         << i->second.decoration_configuration()
+                                         << " new: "
+                                         << elm_cfg.decoration_configuration();
+                BOOST_THROW_EXCEPTION(
+                    workflow_error("Decoration is incorreact."));
+
+            }
+
             const auto& fmt_cfgs(elm_cfg.formatter_configuration());
             if (fmt_cfgs.size() > legacy_fmt_cfgs.size()) {
                 BOOST_LOG_SEV(lg, error) << "Incorrect size. Legacy: "
@@ -205,7 +218,6 @@ void workflow::test_new_formattables_workflow(const options::cpp_options& opts,
                     BOOST_THROW_EXCEPTION(
                         workflow_error("Different header guard."));
                 }
-
             }
         }
     }
