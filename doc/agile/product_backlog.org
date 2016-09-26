@@ -112,7 +112,7 @@ sanitizer.
 We are computing the set of all primitive id's in quilt but this
 should really be part of yarn.
 
-*** Handle "special includes" correctly                              ::story:
+*** Handle "special includes" correctly                               :story:
 
 We did a quick hack to handle "special includes": we simply "detected"
 them in include builder and then did the appropriate action in each of
@@ -212,6 +212,18 @@ Notes:
 At present we are getting the following error:
 
 : Skipping a deployment with the bintray provider because this branch is not permitted
+
+This was fixed. We are now getting the following errors:
+
+: Installing deploy dependencies
+: [Bintray Upload] Reading descriptor file: build/scripts/bintray.json
+: [Bintray Upload] Creating package 'auto-upload'...
+: [Bintray Upload] Bintray response: 400 Bad Request. License 'GPL3' does not exist
+: [Bintray Upload] Creating version '0.88.0'...
+: [Bintray Upload] Bintray response: 404 Not Found. Package 'auto-upload' was not found
+: [Bintray Upload] Warning: Path: build/output/Release/stage/pkg/*.deb does not exist.
+: [Bintray Upload] Publishing version '0.88.0' of package 'auto-upload'...
+: [Bintray Upload] Bintray response: 404 Not Found. Package 'auto-upload' was not found
 
 *** Add appveyor support for bintray                                  :story:
 
