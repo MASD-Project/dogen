@@ -87,7 +87,6 @@
 #include "dogen/quilt.cpp/types/formattables/enablement_factory.hpp"
 #include "dogen/quilt.cpp/types/formattables/inclusion_expander.hpp"
 #include "dogen/quilt.cpp/types/formatters/serialization/traits.hpp"
-#include "dogen/quilt.cpp/types/formattables/annotation_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/decoration_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/enablement_expander.hpp"
 #include "dogen/quilt.cpp/types/formatters/test_data/initializer.hpp"
