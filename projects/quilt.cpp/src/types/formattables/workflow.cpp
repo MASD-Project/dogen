@@ -33,6 +33,7 @@
 #include "dogen/quilt.cpp/types/formattables/element_properties_repository_factory.hpp"
 #include "dogen/quilt.cpp/types/formattables/formatter_properties_repository_factory.hpp"
 #include "dogen/quilt.cpp/types/formattables/pre_reduction_workflow.hpp"
+#include "dogen/quilt.cpp/types/formattables/reducer.hpp"
 #include "dogen/quilt.cpp/types/formattables/post_reduction_workflow.hpp"
 #include "dogen/quilt.cpp/types/formattables/workflow.hpp"
 
@@ -161,8 +162,11 @@ execute_new(const options::cpp_options& opts, const dynamic::repository& drp,
     pre_reduction_workflow pre_wk;
     const auto formattables(pre_wk.execute(drp, root_object, fc, l, m));
 
+    reducer rd;
+    const auto reduced_formattables(rd.reduce(formattables));
+
     post_reduction_workflow post_wk;
-    return post_wk.execute(fc, formattables);
+    return post_wk.execute(fc, reduced_formattables);
 }
 
 } } } }

@@ -113,6 +113,8 @@ void workflow::test_new_formattables_workflow(const options::cpp_options& opts,
     formattables::workflow fw;
     const auto formattables(fw.execute_new(opts, rp, root_object, fc, m));
 
+    /* check no longer works due to reduction.
+
     const auto fbl_sz(std::distance(formattables.begin(), formattables.end()));
     if (std::size_t(fbl_sz) != legacy.by_id().size()) {
         BOOST_LOG_SEV(lg, error) << "Main containers differ in size. Legacy: "
@@ -121,6 +123,7 @@ void workflow::test_new_formattables_workflow(const options::cpp_options& opts,
         BOOST_THROW_EXCEPTION(
             workflow_error("Containers have different sizes."));
     }
+    */
 
     for (const auto& formattable: formattables) {
         for (const auto& segment : formattable.element_segments()) {
