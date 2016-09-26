@@ -193,7 +193,7 @@ around this is to have a log file for the entire test suite and
 separate log files for each test as we have now. Initialisation
 logging would go in this main file.
 
-*** Add support for bintray                                           :story:
+*** Add travis support for bintray                                    :story:
 
 There is a new web application that interfaces with GitHub:
 [[https://bintray.com/][bintray]].
@@ -212,6 +212,15 @@ Notes:
 At present we are getting the following error:
 
 : Skipping a deployment with the bintray provider because this branch is not permitted
+
+*** Add appveyor support for bintray                                  :story:
+
+It seems appveyor also supports bintray:
+
+[[https://www.appveyor.com/docs/deployment/bintray/][Deploying to Bintray]]
+
+We need to change our targets to generate the MSI, and then try to
+deploy it over to bintray.
 
 *** Consider automatic injection of helpers                           :story:
 
