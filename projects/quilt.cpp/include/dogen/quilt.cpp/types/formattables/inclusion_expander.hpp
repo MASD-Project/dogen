@@ -75,7 +75,7 @@ private:
     inclusion_directives_container_type compute_inclusion_directives(
         const dynamic::repository& drp, const formatters::container& fc,
         const locator& l,
-        std::unordered_map<std::string, formattable>& formattables) const;
+        const std::unordered_map<std::string, formattable>& formattables) const;
 
 private:
     typedef std::unordered_map<std::string, std::list<std::string>>
@@ -86,10 +86,9 @@ private:
         const inclusion_dependencies_builder_factory& f,
         const yarn::element& e) const;
 
-    std::unordered_map<std::string, element_inclusion_dependencies_type>
-    compute_inclusion_dependencies(const formatters::container& fc,
+    void populate_inclusion_dependencies(const formatters::container& fc,
         const inclusion_directives_container_type& idc,
-        const std::unordered_map<std::string, formattable>& formattables) const;
+        std::unordered_map<std::string, formattable>& formattables) const;
 
 public:
     void expand(const dynamic::repository& drp, const formatters::container& fc,

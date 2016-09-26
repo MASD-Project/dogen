@@ -176,8 +176,8 @@ void workflow::test_new_formattables_workflow(const options::cpp_options& opts,
                                              << pair.second.inclusion_dependencies()
                                              << " old: "
                                              << k->second.inclusion_dependencies();
-                    // BOOST_THROW_EXCEPTION(
-                    // workflow_error("Different inclusion."));
+                    BOOST_THROW_EXCEPTION(
+                        workflow_error("Different inclusion."));
                 }
             }
         }

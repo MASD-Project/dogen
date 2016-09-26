@@ -39,6 +39,7 @@ const std::string boost_serialization_gregorian("greg_serialize.hpp");
 
 const std::string duplicate_element_name("Duplicate delement name: ");
 const std::string duplicate_formatter_name("Duplicate formatter name: ");
+const std::string missing_formatter_name("Formatter name not found: ");
 const std::string empty_include_directive("Include directive is empty.");
 const std::string formatter_not_found_for_type(
     "Formatter not found for type: ");
@@ -161,16 +162,16 @@ void inclusion_expander::compute_inclusion_directives(const yarn::element& e,
 
     /*
      * First we extract the configuration for the generation of
-     * include directives for this element. Note that we generate
-     * this setting for _all elements_ even if the user did not
-     * specify any meta-data (we do so via defaults).
+     * include directives for this element. Note that we generate this
+     * setting for _all elements_ even if the user did not specify any
+     * meta-data (we do so via defaults).
      *
-     * The question we are asking is: "does this element require
-     * any inclusion directives at all, across all facets?". Not
-     * all elements do; for example bool, int and so on don't
-     * require any inclusions at all across all facets. If the
-     * user did not override this, we default it to true because
-     * normally elements require inclusion.
+     * The question we are asking is: "does this element require any
+     * inclusion directives at all, across all facets?". Not all
+     * elements do; for example bool, int and so on don't require any
+     * inclusions at all across all facets. If the user did not
+     * override this, we default it to true because normally elements
+     * require inclusion.
      */
     const auto& o(e.extensions());
     const bool required(factory.make_top_level_inclusion_required(o));
@@ -180,7 +181,7 @@ void inclusion_expander::compute_inclusion_directives(const yarn::element& e,
     }
 
     if (formatters.empty()) {
-        BOOST_LOG_SEV(lg, debug) << "No providers found.";
+        BOOST_LOG_SEV(lg, debug) << "No formatters found.";
         return;
     }
 
@@ -193,11 +194,11 @@ void inclusion_expander::compute_inclusion_directives(const yarn::element& e,
 
         /*
          * Does the type require an inclusion directive for this
-         * specific formatter? Some types require inclusion
-         * directives for some formatters, but not for others. For
-         * example, we may need an include for serialising a
-         * std::list, but in test data we make use of helpers and
-         * thus do not require an include.
+         * specific formatter? Some types require inclusion directives
+         * for some formatters, but not for others. For example, we
+         * may need an include for serialising a std::list, but in
+         * test data we make use of helpers and thus do not require an
+         * include.
          *
          * Again, we default this to true.
          */
@@ -209,10 +210,11 @@ void inclusion_expander::compute_inclusion_directives(const yarn::element& e,
         }
 
         /*
-         * Do the annotations provide a "hard-coded" inclusion directive?
-         * That is, the type had an hard-coded incantation for its
-         * include. This is the case for system models such as boost, std
-         * etc where we can't compute the inclusion directive.
+         * Do the annotations provide a "hard-coded" inclusion
+         * directive?  That is, the type had an hard-coded incantation
+         * for its include. This is the case for system models such as
+         * boost, std etc where we can't compute the inclusion
+         * directive.
          */
         std::string directive;
         if (s.inclusion_directive())
@@ -230,11 +232,10 @@ void inclusion_expander::compute_inclusion_directives(const yarn::element& e,
         insert_inclusion_directive(id, fmtn, directive, idc);
 
         /*
-         * If the provider is also the default for this facet and
-         * element, we need to register it against the facet
-         * too. Note that, for a given element type on a given
-         * facet, there can only be one default - or else we'll
-         * throw.
+         * If the formatter is also the default for this facet and
+         * element, we need to register it against the facet too. Note
+         * that, for a given element type on a given facet, there can
+         * only be one default - or else we'll throw.
          */
         const auto cs(formatters::inclusion_support_types::canonical_support);
         const auto fctn(fmt->ownership_hierarchy().facet_name());
@@ -248,13 +249,26 @@ void inclusion_expander::compute_inclusion_directives(const yarn::element& e,
 inclusion_expander::inclusion_directives_container_type inclusion_expander::
 compute_inclusion_directives(const dynamic::repository& drp,
     const formatters::container& fc, const locator& l,
-    std::unordered_map<std::string, formattable>& formattables) const {
+    const std::unordered_map<std::string, formattable>& formattables) const {
 
     inclusion_directives_container_type r;
+
+    /*
+     * First we must make sure we only have formatters which generate
+     * files that can be included via an include directive. Filter out
+     * all of those that do not.
+     */
     const auto ffti(includible_formatters_by_type_index(fc));
+
+    /*
+     * Now, for all formattables and their associated element
+     * segments, find the formatters that support the element segment
+     * and compute the inclusion directive for it.
+     */
     const annotations::inclusion_directive_annotations_factory f(drp, fc);
     for (const auto& pair : formattables) {
         const auto& formattable(pair.second);
+
         for (const auto& segment : formattable.element_segments()) {
             const auto& e(*segment);
             const auto id(e.name().id());
@@ -265,6 +279,7 @@ compute_inclusion_directives(const dynamic::repository& drp,
                 BOOST_LOG_SEV(lg, debug) << formatter_not_found_for_type << id;
                 continue;
             }
+
             compute_inclusion_directives(e, f, i->second, l, r);
         }
     }
@@ -284,13 +299,14 @@ inclusion_expander::compute_inclusion_dependencies(
 
     /*
      * First we must obtain all formatters for the type of element we
-     * are building includes for. They must exist in the formatters'
-     * collection.
+     * are building includes for. They may or may not exist in the
+     * formatters' collection - for example, we do not have any
+     * formatters for concepts at present. If so, we're done.
      */
     const auto ti(std::type_index(typeid(e)));
     const auto i(fc.file_formatters_by_type_index().find(ti));
     if (i == fc.file_formatters_by_type_index().end()) {
-        BOOST_LOG_SEV(lg, error) << "No formatters for type: " << ti.name();
+        BOOST_LOG_SEV(lg, debug) << "No formatters for type: " << ti.name();
         return r;
     }
 
@@ -318,6 +334,7 @@ inclusion_expander::compute_inclusion_dependencies(
         /*
          * Now slot in the results, ensuring our formatter name is
          * unique.
+         *
          * FIXME: add validation for formatter registration so we can
          * remove this check.
          */
@@ -332,25 +349,22 @@ inclusion_expander::compute_inclusion_dependencies(
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished creating inclusion dependencies for: "
-                             << id;
+                             << id << ". Result: " << r;
 
     return r;
 }
 
-std::unordered_map<std::string,
-                   inclusion_expander::element_inclusion_dependencies_type>
-inclusion_expander::
-compute_inclusion_dependencies(const formatters::container& fc,
+void inclusion_expander::populate_inclusion_dependencies(
+    const formatters::container& fc,
     const inclusion_directives_container_type& idc,
-    const std::unordered_map<std::string, formattable>& formattables) const {
+    std::unordered_map<std::string, formattable>& formattables) const {
 
-    std::unordered_map<
-        std::string, inclusion_expander::element_inclusion_dependencies_type> r;
-
+    BOOST_LOG_SEV(lg, debug) << "Creating inclusion dependencies "
+                             << "for all formattables. ";
     inclusion_dependencies_builder_factory idf(idc, formattables);
-    for (const auto& pair : formattables) {
+    for (auto& pair : formattables) {
         const auto id(pair.first);
-        const auto& formattable(pair.second);
+        auto& formattable(pair.second);
 
         /*
          * We need to compute the inclusion dependencies for each
@@ -358,7 +372,7 @@ compute_inclusion_dependencies(const formatters::container& fc,
          * share the same element id so we can obtain a reference for
          * our container up front and populate it for each segment.
          */
-        auto& inclusions_for_id(r[id]);
+        auto& fmt_cfg(formattable.configuration().formatter_configuration());
         for (const auto& ptr : formattable.element_segments()) {
             const auto& e(*ptr);
 
@@ -380,25 +394,31 @@ compute_inclusion_dependencies(const formatters::container& fc,
                 continue;
 
             /*
-             * Copy across all of the dependencies for the
-             * element. This caters of the multi-segment elements,
-             * merging them all into a single set of
-             * dependencies. Note though that the formatter names must
-             * be unique across all segments.
+             * Copy across all of the dependencies for the element,
+             * across all supported formatters (that have inclusion
+             * dependencies). Note that this caters of the
+             * multi-segment elements, merging them all into a single
+             * set of dependencies.
              */
             for (const auto& dep_pair : deps) {
-                const auto inserted(inclusions_for_id.insert(dep_pair).second);
-                if (inserted)
-                    continue;
-
+                /*
+                 * First we need to obtain the configuration for this
+                 * formatter. It must have been initialised by the
+                 * transformer.
+                 */
                 const auto fmtn(dep_pair.first);
-                BOOST_LOG_SEV(lg, error) << duplicate_formatter_name << fmtn;
-                BOOST_THROW_EXCEPTION(
-                    expansion_error(duplicate_formatter_name + fmtn));
+                const auto i(fmt_cfg.find(fmtn));
+                if (i == fmt_cfg.end()) {
+                    BOOST_LOG_SEV(lg, error) << missing_formatter_name << fmtn;
+                    BOOST_THROW_EXCEPTION(
+                        expansion_error(missing_formatter_name + fmtn));
+                }
+                i->second.inclusion_dependencies(dep_pair.second);
             }
         }
     }
-    return r;
+    BOOST_LOG_SEV(lg, debug) << "Finished creating inclusion dependencies "
+                             << "for all formattables. ";
 }
 
 void inclusion_expander::expand(const dynamic::repository& drp,
@@ -406,7 +426,7 @@ void inclusion_expander::expand(const dynamic::repository& drp,
     std::unordered_map<std::string, formattable>& formattables) const {
 
     const auto idc(compute_inclusion_directives(drp, fc, l, formattables));
-    compute_inclusion_dependencies(fc, idc, formattables);
+    populate_inclusion_dependencies(fc, idc, formattables);
 }
 
 } } } }

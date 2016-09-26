@@ -13,18 +13,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-26 Mon 13:25]
+#+CAPTION: Clock summary at [2016-09-26 Mon 15:14]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *3:34* |      |      | 100.0 |
+| *Total time*                                                                | *5:20* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 3:34   |      |      | 100.0 |
-| Active                                                                      |        | 3:34 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:37 |  17.3 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:07 |   3.3 |
-| COMPLETED Generation of formattable is incorrect                            |        |      | 2:30 |  70.1 |
-| COMPLETED Visitor includes are incorrect                                    |        |      | 0:20 |   9.3 |
+| Stories                                                                     | 5:20   |      |      | 100.0 |
+| Active                                                                      |        | 5:20 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:37 |  11.6 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:07 |   2.2 |
+| COMPLETED Generation of formattable is incorrect                            |        |      | 2:30 |  46.9 |
+| COMPLETED Visitor includes are incorrect                                    |        |      | 0:20 |   6.2 |
+| COMPLETED Add includer to quilt.cpp                                         |        |      | 1:46 |  33.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -136,8 +137,21 @@ types such as =boost::filesystem::path=.
 We are adding an include to the descendants' header for no
 reason. Remove it.
 
-*** STARTED Add formattable element                                   :story:
+*** COMPLETED Add includer to quilt.cpp                               :story:
+    CLOSED: [2016-09-26 Mon 15:13]
+    CLOCK: [2016-09-26 Mon 14:43]--[2016-09-26 Mon 15:13] =>  0:30
     CLOCK: [2016-09-26 Mon 13:26]--[2016-09-26 Mon 14:42] =>  1:16
+
+Responsible for computing the inclusion dependencies.
+
+- add a flag in builder to choose new or old API. Supply formattables
+  container by ID and new directives repository. When using old API,
+  these are default initialised. With new API the other parameters are
+  default initialised. Actually a better approach is to create two
+  builder impls and to decide which one to use based on the
+  constructor of the builder.
+
+*** Add formattable element                                           :story:
 
 Create a top-level formattable type that is an aggregation of the
 element and the element configuration. Update workflow to output a
@@ -156,17 +170,6 @@ Previous understanding:
 - remove formatting context and update formatting workflow to call a
   visitor to resolve the element and then call the formatter.
 - add an enablement map for all formatters in the formatter
-
-*** Add includer to quilt.cpp                                         :story:
-
-Responsible for computing the inclusion dependencies.
-
-- add a flag in builder to choose new or old API. Supply formattables
-  container by ID and new directives repository. When using old API,
-  these are default initialised. With new API the other parameters are
-  default initialised. Actually a better approach is to create two
-  builder impls and to decide which one to use based on the
-  constructor of the builder.
 
 *** Do not compute inclusion directives for system models             :story:
 
@@ -262,6 +265,12 @@ specifying the models in JSON.
 *** Remove formatter id                                               :story:
 
 Not clear why we need this given we have formatter name.
+
+*** Remove include builder legacy api                                 :story:
+
+When implementing inclusion expander we did a number of ugly hacks to
+support both the legacy API and the new API. We need to remove all the
+impls etc we added, in builder, factory, etc.
 
 *** Create the notion of a formatter alias                            :story:
 
