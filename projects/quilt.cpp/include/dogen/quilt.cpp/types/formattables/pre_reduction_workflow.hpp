@@ -59,6 +59,9 @@ public:
         const dogen::formatters::decoration_configuration_factory& dcf,
         std::unordered_map<std::string, formattable>& formattables) const;
 
+    void expand_aspects(const dynamic::repository& drp,
+        std::unordered_map<std::string, formattable>& formattables) const;
+
 public:
     std::unordered_map<std::string, formattable>
     execute(const dynamic::repository& drp, const dynamic::object& root_object,

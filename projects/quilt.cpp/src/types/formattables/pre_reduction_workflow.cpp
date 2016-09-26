@@ -22,6 +22,7 @@
 #include "dogen/quilt.cpp/types/formattables/inclusion_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/enablement_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/decoration_expander.hpp"
+#include "dogen/quilt.cpp/types/formattables/aspect_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/pre_reduction_workflow.hpp"
 
 namespace dogen {
@@ -58,6 +59,11 @@ void pre_reduction_workflow::expand_decoration(
     ex.expand(dcf, formattables);
 }
 
+void pre_reduction_workflow::expand_aspects(const dynamic::repository& drp,
+    std::unordered_map<std::string, formattable>& formattables) const {
+    aspect_expander ex;
+    ex.expand(drp, formattables);
+}
 
 std::unordered_map<std::string, formattable> pre_reduction_workflow::
 execute(const dynamic::repository& drp, const dynamic::object& root_object,
@@ -68,6 +74,7 @@ execute(const dynamic::repository& drp, const dynamic::object& root_object,
     expand_enablement(drp, root_object, fc, r);
     expand_inclusion(drp, fc, l, r);
     expand_decoration(dcf, r);
+    expand_aspects(drp, r);
     return r;
 }
 
