@@ -44,7 +44,17 @@ private:
 
         auto r(boost::make_shared<forward_declarations>());
         r->name(n);
-        r->generation_type(gt);
+
+        /*
+         * Services come in as partial generation, but this doesn't
+         * make a lot of sense for forward declarations. Upgrade it to
+         * full generation.
+         *
+         */
+        if (gt == yarn::generation_types::partial_generation)
+            r->generation_type(yarn::generation_types::full_generation);
+        else
+            r->generation_type(gt);
         r->is_element_extension(true);
         return r;
     }
