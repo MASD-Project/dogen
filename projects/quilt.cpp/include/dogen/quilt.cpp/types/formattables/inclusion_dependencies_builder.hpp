@@ -28,12 +28,14 @@
 #include <list>
 #include <string>
 #include <unordered_set>
+#include <unordered_map>
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/quilt.cpp/types/annotations/element_annotations_repository.hpp"
 #include "dogen/quilt.cpp/types/formattables/enablement_repository.hpp"
 #include "dogen/quilt.cpp/types/formattables/inclusion_directives_repository.hpp"
+#include "dogen/quilt.cpp/types/formattables/formattable.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -70,6 +72,13 @@ public:
     inclusion_dependencies_builder(
         const enablement_repository& erp,
         const inclusion_directives_repository& idrp);
+
+public:
+    inclusion_dependencies_builder(const std::unordered_map<
+        std::string,
+        std::unordered_map<std::string, std::string>
+        >& inclusion_directives,
+        const std::unordered_map<std::string, formattable>& formattables);
 
 private:
     /**

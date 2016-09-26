@@ -88,7 +88,7 @@ legacy_builder_impl::legacy_builder_impl(const enablement_repository& erp,
 
 bool legacy_builder_impl::is_enabled(const yarn::name& n,
     const std::string& formatter_name) const {
-        const auto& en(enablement_repository_.by_name());
+    const auto& en(enablement_repository_.by_name());
     const auto i(en.find(n));
     if (i == en.end()) {
         BOOST_LOG_SEV(lg, error) << name_not_found << n.id();
@@ -140,11 +140,101 @@ boost::optional<std::string> legacy_builder_impl::get_inclusion_directive(
     return j->second;
 }
 
+class new_builder_impl : public builder_impl {
+public:
+    new_builder_impl(const std::unordered_map<std::string,
+        std::unordered_map<std::string, std::string>
+        >& inclusion_directives,
+        const std::unordered_map<std::string, formattable>& formattables);
+
+public:
+    bool is_enabled(const yarn::name& n,
+        const std::string& formatter_name) const override;
+    boost::optional<std::string> get_inclusion_directive(
+        const yarn::name& n, const std::string& formatter_name) const override;
+
+private:
+    const std::unordered_map<
+    std::string,
+    std::unordered_map<std::string, std::string>
+    >& inclusion_directives_;
+    const std::unordered_map<std::string, formattable>& formattables_;
+};
+
+new_builder_impl::new_builder_impl(const std::unordered_map<std::string,
+    std::unordered_map<std::string, std::string>
+    >& inclusion_directives,
+    const std::unordered_map<std::string, formattable>& formattables) :
+    inclusion_directives_(inclusion_directives), formattables_(formattables) {}
+
+bool new_builder_impl::is_enabled(const yarn::name& n,
+    const std::string& formatter_name) const {
+
+    const auto i(formattables_.find(n.id()));
+    if (i == formattables_.end()) {
+        BOOST_LOG_SEV(lg, error) << name_not_found << n.id();
+        BOOST_THROW_EXCEPTION(building_error(name_not_found + n.id()));
+    }
+
+    const auto& formattable(i->second);
+    const auto& fc(formattable.configuration().formatter_configuration());
+    const auto j(fc.find(formatter_name));
+    if (j == fc.end()) {
+        BOOST_LOG_SEV(lg, debug) << formatter_name_not_found << formatter_name
+                                 << " element id: " << n.id();
+
+        // FIXME: hack to cope with canonical formatter.
+        BOOST_LOG_SEV(lg, debug) << "Trying by facet name.";
+
+        for (const auto pair : fc) {
+            if (boost::starts_with(pair.first, formatter_name)) {
+                BOOST_LOG_SEV(lg, debug) << "Using: " << pair.first
+                                         << " status: "
+                                         << pair.second.enabled();
+                return pair.second.enabled();
+            }
+        }
+
+        BOOST_LOG_SEV(lg, error) << formatter_name_not_found << formatter_name
+                                 << " element id: " << n.id();
+        BOOST_THROW_EXCEPTION(
+            building_error(formatter_name_not_found + formatter_name));
+    }
+
+    const bool r(j->second.enabled());
+    if (!r) {
+        BOOST_LOG_SEV(lg, debug) << "Formatter disabled. Formatter: "
+                                 << formatter_name << " on type: "
+                                 << n.id() << "'";
+    }
+    return r;
+}
+
+boost::optional<std::string> new_builder_impl::get_inclusion_directive(
+    const yarn::name& n, const std::string& formatter_name) const {
+
+    const auto i(inclusion_directives_.find(n.id()));
+    if (i == inclusion_directives_.end())
+        return boost::optional<std::string>();
+
+    const auto j(i->second.find(formatter_name));
+    if (j == i->second.end())
+        return boost::optional<std::string>();
+
+    return j->second;
+}
 
 inclusion_dependencies_builder::
 inclusion_dependencies_builder(const enablement_repository& erp,
     const inclusion_directives_repository& idrp)
     : impl_(new legacy_builder_impl(erp, idrp)) {}
+
+inclusion_dependencies_builder::inclusion_dependencies_builder(
+    const std::unordered_map<std::string,
+    std::unordered_map<std::string, std::string>
+    >& inclusion_directives,
+    const std::unordered_map<std::string, formattable>& formattables)
+    : impl_(new new_builder_impl(inclusion_directives, formattables)) {}
 
 boost::optional<std::string>
 inclusion_dependencies_builder::get_inclusion_directive(

@@ -21,6 +21,8 @@
 #include <sstream>
 #include <typeindex>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/io/list_io.hpp"
+#include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/quilt.cpp/types/formattables/expansion_error.hpp"
 #include "dogen/quilt.cpp/types/formattables/inclusion_expander.hpp"
 
@@ -30,11 +32,62 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory(
         "quilt.cpp.formattables.inclusion_directives_repository_factory"));
 
+const char angle_bracket('<');
 const std::string double_quote("\"");
-const std::string duplicate_name("Duplicate name: ");
+const std::string boost_name("boost");
+const std::string boost_serialization_gregorian("greg_serialize.hpp");
+
+const std::string duplicate_element_name("Duplicate delement name: ");
+const std::string duplicate_formatter_name("Duplicate formatter name: ");
 const std::string empty_include_directive("Include directive is empty.");
 const std::string formatter_not_found_for_type(
     "Formatter not found for type: ");
+
+bool include_directive_comparer(
+    const std::string& lhs, const std::string& rhs) {
+
+    if (lhs.empty() || rhs.empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_include_directive;
+        using dogen::quilt::cpp::formattables::expansion_error;
+        BOOST_THROW_EXCEPTION(expansion_error(empty_include_directive));
+    }
+
+    const bool lhs_has_angle_brackets(lhs[0] == angle_bracket);
+    const bool rhs_has_angle_brackets(rhs[0] == angle_bracket);
+
+    if (lhs_has_angle_brackets && !rhs_has_angle_brackets)
+        return true;
+
+    if (!lhs_has_angle_brackets && rhs_has_angle_brackets)
+        return false;
+
+    if (lhs_has_angle_brackets && rhs_has_angle_brackets) {
+        const auto npos(std::string::npos);
+        const bool lhs_is_boost(lhs.find_first_of(boost_name) != npos);
+        const bool rhs_is_boost(rhs.find_first_of(boost_name) != npos);
+        if (!lhs_is_boost && rhs_is_boost)
+            return false;
+
+        if (lhs_is_boost && !rhs_is_boost)
+            return true;
+
+        // FIXME: hacks for headers that must be last
+        const bool lhs_is_gregorian(
+            lhs.find_first_of(boost_serialization_gregorian) != npos);
+        const bool rhs_is_gregorian(
+            rhs.find_first_of(boost_serialization_gregorian) != npos);
+        if (lhs_is_gregorian && !rhs_is_gregorian)
+            return true;
+
+        if (!lhs_is_gregorian && rhs_is_gregorian)
+            return false;
+    }
+
+    if (lhs.size() != rhs.size())
+        return lhs.size() < rhs.size();
+
+    return lhs < rhs;
+}
 
 }
 
@@ -90,12 +143,12 @@ void inclusion_expander::insert_inclusion_directive(const std::string& id,
     }
 
     const auto fn_dir(std::make_pair(formatter_name, directive));
-    const auto pair(idc[id].insert(fn_dir));
-    if (pair.second)
+    const auto inserted(idc[id].insert(fn_dir).second);
+    if (inserted)
         return;
 
-    BOOST_LOG_SEV(lg, error) << duplicate_name << id;
-    BOOST_THROW_EXCEPTION(expansion_error(duplicate_name + id));
+    BOOST_LOG_SEV(lg, error) << duplicate_element_name << id;
+    BOOST_THROW_EXCEPTION(expansion_error(duplicate_element_name + id));
 }
 
 void inclusion_expander::compute_inclusion_directives(const yarn::element& e,
@@ -218,12 +271,142 @@ compute_inclusion_directives(const dynamic::repository& drp,
     return r;
 }
 
+inclusion_expander::element_inclusion_dependencies_type
+inclusion_expander::compute_inclusion_dependencies(
+    const formatters::container& fc,
+    const inclusion_dependencies_builder_factory& idf,
+    const yarn::element& e) const {
+
+    const auto id(e.name().id());
+    BOOST_LOG_SEV(lg, debug) << "Creating inclusion dependencies for: " << id;
+
+    element_inclusion_dependencies_type r;
+
+    /*
+     * First we must obtain all formatters for the type of element we
+     * are building includes for. They must exist in the formatters'
+     * collection.
+     */
+    const auto ti(std::type_index(typeid(e)));
+    const auto i(fc.file_formatters_by_type_index().find(ti));
+    if (i == fc.file_formatters_by_type_index().end()) {
+        BOOST_LOG_SEV(lg, error) << "No formatters for type: " << ti.name();
+        return r;
+    }
+
+    for (const auto fmt : i->second) {
+        const auto fmtn(fmt->ownership_hierarchy().formatter_name());
+        BOOST_LOG_SEV(lg, debug) << "Providing for: " << fmtn;
+
+        /*
+         * Obtain the formatter's list of inclusion dependencies. If
+         * none, we're done.
+         */
+        auto deps(fmt->inclusion_dependencies(idf, e));
+        if (deps.empty())
+            continue;
+
+        /*
+         * Ensure the dependencies are sorted according to a well
+         * defined order and all duplicates are removed. Duplicates
+         * arise because an element may refer to another element more
+         * than once (e.g. list of T as well as vector of T).
+         */
+        deps.sort(include_directive_comparer);
+        deps.unique();
+
+        /*
+         * Now slot in the results, ensuring our formatter name is
+         * unique.
+         * FIXME: add validation for formatter registration so we can
+         * remove this check.
+         */
+        const auto pair(std::make_pair(fmtn, deps));
+        const bool inserted(r.insert(pair).second);
+        if (!inserted) {
+            BOOST_LOG_SEV(lg, error) << duplicate_formatter_name << fmtn
+                                     << " for type: " << id;
+            BOOST_THROW_EXCEPTION(
+                expansion_error(duplicate_formatter_name + fmtn));
+        }
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Finished creating inclusion dependencies for: "
+                             << id;
+
+    return r;
+}
+
+std::unordered_map<std::string,
+                   inclusion_expander::element_inclusion_dependencies_type>
+inclusion_expander::
+compute_inclusion_dependencies(const formatters::container& fc,
+    const inclusion_directives_container_type& idc,
+    const std::unordered_map<std::string, formattable>& formattables) const {
+
+    std::unordered_map<
+        std::string, inclusion_expander::element_inclusion_dependencies_type> r;
+
+    inclusion_dependencies_builder_factory idf(idc, formattables);
+    for (const auto& pair : formattables) {
+        const auto id(pair.first);
+        const auto& formattable(pair.second);
+
+        /*
+         * We need to compute the inclusion dependencies for each
+         * segment of this element. By definition, the segments all
+         * share the same element id so we can obtain a reference for
+         * our container up front and populate it for each segment.
+         */
+        auto& inclusions_for_id(r[id]);
+        for (const auto& ptr : formattable.element_segments()) {
+            const auto& e(*ptr);
+
+            /*
+             * We do not need to compute inclusion dependencies for
+             * elements that are not part of the target model. However, we
+             * do need them around for inclusion directives.
+             */
+            if (e.generation_type() == yarn::generation_types::no_generation)
+                continue;
+
+            /*
+             * Compute the dependencies for this segment of the
+             * element. If it does not have any dependencies, we
+             * haven't got any work to do.
+             */
+            const auto deps(compute_inclusion_dependencies(fc, idf, e));
+            if (deps.empty())
+                continue;
+
+            /*
+             * Copy across all of the dependencies for the
+             * element. This caters of the multi-segment elements,
+             * merging them all into a single set of
+             * dependencies. Note though that the formatter names must
+             * be unique across all segments.
+             */
+            for (const auto& dep_pair : deps) {
+                const auto inserted(inclusions_for_id.insert(dep_pair).second);
+                if (inserted)
+                    continue;
+
+                const auto fmtn(dep_pair.first);
+                BOOST_LOG_SEV(lg, error) << duplicate_formatter_name << fmtn;
+                BOOST_THROW_EXCEPTION(
+                    expansion_error(duplicate_formatter_name + fmtn));
+            }
+        }
+    }
+    return r;
+}
+
 void inclusion_expander::expand(const dynamic::repository& drp,
     const formatters::container& fc, const locator& l,
     std::unordered_map<std::string, formattable>& formattables) const {
 
-    compute_inclusion_directives(drp, fc, l, formattables);
-    // const auto idc
+    const auto idc(compute_inclusion_directives(drp, fc, l, formattables));
+    compute_inclusion_dependencies(fc, idc, formattables);
 }
 
 } } } }

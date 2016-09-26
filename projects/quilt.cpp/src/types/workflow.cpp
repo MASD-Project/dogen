@@ -21,6 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string/join.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/formatters/types/hydration_workflow.hpp"
 #include "dogen/dynamic/types/workflow.hpp"
@@ -155,7 +156,8 @@ void workflow::test_new_formattables_workflow(const options::cpp_options& opts,
                         << fmtn;
                     BOOST_THROW_EXCEPTION(
                         workflow_error("Missing formatter: " + fmtn));
-            }
+                }
+
                 if (pair.second.enabled() != k->second.enabled()) {
                     BOOST_LOG_SEV(lg, error) << "Enablement is different. Id: "
                                              << id << " formatter: " << fmtn
@@ -165,6 +167,17 @@ void workflow::test_new_formattables_workflow(const options::cpp_options& opts,
                                              << k->second.enabled();
                     BOOST_THROW_EXCEPTION(
                         workflow_error("Different enablement."));
+                }
+
+                if (pair.second.inclusion_dependencies() !=
+                    k->second.inclusion_dependencies()) {
+                    BOOST_LOG_SEV(lg, error) << "Dependencies are different. "
+                                             << "Id: " << id << " new: "
+                                             << pair.second.inclusion_dependencies()
+                                             << " old: "
+                                             << k->second.inclusion_dependencies();
+                    // BOOST_THROW_EXCEPTION(
+                    // workflow_error("Different inclusion."));
                 }
             }
         }

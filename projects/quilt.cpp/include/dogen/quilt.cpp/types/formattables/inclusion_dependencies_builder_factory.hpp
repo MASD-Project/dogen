@@ -25,12 +25,18 @@
 #pragma once
 #endif
 
+#include <string>
+#include <unordered_map>
+#include <boost/shared_ptr.hpp>
+#include "dogen/quilt.cpp/types/formattables/formattable.hpp"
 #include "dogen/quilt.cpp/types/formattables/inclusion_dependencies_builder.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
+
+class factory_impl;
 
 /**
  * @brief Creates inclusion dependencies builders.
@@ -51,14 +57,20 @@ public:
         const inclusion_directives_repository& idrp);
 
 public:
+    inclusion_dependencies_builder_factory(const std::unordered_map<
+        std::string,
+        std::unordered_map<std::string, std::string>
+        >& inclusion_directives,
+        const std::unordered_map<std::string, formattable>& formattables);
+
+public:
     /**
      * @brief Create an inclusion dependencies builder.
      */
     inclusion_dependencies_builder make() const;
 
 private:
-    const enablement_repository& enablement_repository_;
-    const inclusion_directives_repository& directives_repository_;
+    boost::shared_ptr<factory_impl> impl_;
 };
 
 } } } }
