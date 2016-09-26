@@ -1246,7 +1246,7 @@ Loading data into postgres:
 Copying all elements from model into their own rows:
 
 : insert into temp_json
-: select jsonb_to_recordset(jsonb_array_elements(values->'elements')->'data')
+: select jsonb_array_elements(values->'elements')->'data'
 : from temp_json;
 
 Selecting a specific type:
@@ -1282,6 +1282,13 @@ Pretty print:
 : select jsonb_pretty(values->'opaque_associations')
 : from temp_json where values->'__parent_0__'->'name'->>'simple' = 'formattable'
 : and values->>'__type__' like '%object%';
+
+Keys for an object:
+
+: select jsonb_object_keys(values)
+: from temp_json
+: where values->'__parent_0__'->'name'->>'simple' = 'formattable' and
+: values->>'__type__' like '%object%';
 
 *** POSTPONED Add formattable element                                 :story:
     CLOSED: [2016-09-26 Mon 09:46]

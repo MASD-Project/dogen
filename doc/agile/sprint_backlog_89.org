@@ -13,16 +13,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-26 Mon 10:11]
+#+CAPTION: Clock summary at [2016-09-26 Mon 11:33]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *0:44* |      |      | 100.0 |
+| *Total time*                                                                | *2:08* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 0:44   |      |      | 100.0 |
-| Active                                                                      |        | 0:44 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:37 |  84.1 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:07 |  15.9 |
+| Stories                                                                     | 2:08   |      |      | 100.0 |
+| Active                                                                      |        | 2:08 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:37 |  28.9 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:07 |   5.5 |
+| STARTED Generation of formattable is incorrect                              |        |      | 1:24 |  65.6 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -49,7 +50,76 @@ We continue our long road of internal refactorings, focusing on the ```quilt.cpp
 For more details see the [sprint log](https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_88.org).
 #+end_src
 
-*** STARTED Add formattable element                                   :story:
+*** STARTED Generation of formattable is incorrect                    :story:
+    CLOCK: [2016-09-26 Mon 10:09]--[2016-09-26 Mon 11:33] =>  1:24
+
+The new formattable type is generating an invalid header file. It is
+missing the forward declaration of the yarn element.
+
+Note: to login to postgres from emacs, [[http://emacs.1067599.n8.nabble.com/sql-postgresql-authentication-failure-td71620.html][leave server empty]].
+
+Load relevant data into postgres for querying:
+
+: grep dogen.knitter.quilt.cpp.log -e "Finished inclusion directives repository" > crap.txt
+: cut -b142- crap.txt > ~/inclusion.json
+: create table inclusion_directives_json (values jsonb);
+: \copy inclusion_directives_json from '~/inclusion.json';
+
+Now create a row per entry in the container:
+
+: create table inclusion_directives2_json (values jsonb);
+: insert into inclusion_directives2_json
+: select jsonb_array_elements(values->'by_name')
+: from inclusion_directives_json;
+
+Now find out type:
+
+: select values as val
+: from inclusion_directives2_json
+: where values::text like '%<dogen><quilt><cpp><formattables><formattable>%';
+
+And dump it to a file:
+
+: \copy (select values as val from inclusion_directives2_json
+: where values::text like '%<dogen><quilt><cpp><formattables><formattable>%')
+: to 'out.json';
+
+Actually this was for the directives. We need the same but for the dependencies:
+
+: grep dogen.knitter.quilt.cpp.log -e "Finished creating inclusion dependencies: " > crap.txt
+: cut -b144- crap.txt > ~/inclusion_deps.json
+: create table inclusion_deps2_json (values jsonb);
+: \copy inclusion_deps_json from '~/inclusion_deps.json';
+
+Split objects:
+
+: insert into inclusion_deps2_json
+: select jsonb_array_elements(values->'by_name')
+: from inclusion_deps_json;
+
+Find our object:
+
+: select values from inclusion_deps2_json
+: where values::text like '%<dogen><quilt><cpp><formattable>%';
+
+Save it:
+
+: copy (select values from inclusion_deps2_json where values::text
+: like '%<dogen><quilt><cpp><formattables><formattable>%')
+: to '~/deps.json';
+
+Actually the problem really was with the inclusion directives! It
+seems we are not generating the forward declarations for element:
+
+: select values as val
+: from inclusion_directives2_json
+: where values::text like '%<dogen><yarn><element>%';
+
+No mention of forward declarations. The problem is fabric is only
+injecting forward declarations for the target model. we need to relax
+this and do it for all models.
+
+*** Add formattable element                                           :story:
 
 Create a top-level formattable type that is an aggregation of the
 element and the element configuration. Update workflow to output a
@@ -69,7 +139,7 @@ Previous understanding:
   visitor to resolve the element and then call the formatter.
 - add an enablement map for all formatters in the formatter
 
-*** STARTED Add includer to quilt.cpp                                 :story:
+*** Add includer to quilt.cpp                                         :story:
 
 Responsible for computing the inclusion dependencies.
 
@@ -79,11 +149,6 @@ Responsible for computing the inclusion dependencies.
   default initialised. Actually a better approach is to create two
   builder impls and to decide which one to use based on the
   constructor of the builder.
-
-*** Generation of formattable is incorrect                            :story:
-
-The new formattable type is generating an invalid header file. It is
-missing the forward declaration of the yarn element.
 
 *** Do not compute inclusion directives for system models             :story:
 
