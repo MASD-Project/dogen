@@ -302,6 +302,13 @@ inclusion_expander::compute_inclusion_dependencies(
      * are building includes for. They may or may not exist in the
      * formatters' collection - for example, we do not have any
      * formatters for concepts at present. If so, we're done.
+     *
+     * Note also that we must query the formatters by type index
+     * rather than use the formatter configuration container
+     * directly. This is due to element segmentation, as we may have
+     * more than one element associated with an id. To generate the
+     * inclusion dependencies we must make sure we pick the pair of
+     * element and the formatters that support it.
      */
     const auto ti(std::type_index(typeid(e)));
     const auto i(fc.file_formatters_by_type_index().find(ti));

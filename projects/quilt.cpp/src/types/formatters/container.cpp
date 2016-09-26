@@ -32,6 +32,11 @@ container::file_formatters_by_type_index() {
     return file_formatters_by_type_index_;
 }
 
+std::unordered_map<std::string, std::shared_ptr<file_formatter_interface>>&
+container::file_formatters_by_formatter_name() {
+    return file_formatters_by_formatter_name_;
+}
+
 std::forward_list<std::shared_ptr<file_formatter_interface>>&
 container::file_formatters() {
     return file_formatters_;
@@ -51,6 +56,12 @@ const std::unordered_map<
     std::forward_list<std::shared_ptr<file_formatter_interface>>>&
 container::file_formatters_by_type_index() const {
     return file_formatters_by_type_index_;
+}
+
+const std::unordered_map<std::string,
+                         std::shared_ptr<file_formatter_interface>>&
+container::file_formatters_by_formatter_name() const {
+    return file_formatters_by_formatter_name_;
 }
 
 const std::forward_list<std::shared_ptr<file_formatter_interface>>&

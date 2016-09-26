@@ -70,19 +70,6 @@ void registrar::validate() const {
             registrar_error(no_file_formatters));
     }
 
-    /*
-     * Formatter id must be unique.
-     */
-    std::unordered_set<std::string> formatter_ids;
-    for (const auto& f : fc.file_formatters()) {
-        const auto id(f->id());
-        const auto i(formatter_ids.insert(id));
-        if (!i.second) {
-            BOOST_LOG_SEV(lg, error) << duplicate_formatter_id << id;
-            BOOST_THROW_EXCEPTION(registrar_error(duplicate_formatter_id + id));
-        }
-    }
-
     BOOST_LOG_SEV(lg, debug) << "Registrar is in a valid state. Container: "
                              << fc;
     BOOST_LOG_SEV(lg, debug) << "Ownership hierarchy: " << ownership_hierarchy_;
@@ -112,9 +99,26 @@ register_formatter(std::shared_ptr<file_formatter_interface> f) {
     ownership_hierarchy_.push_front(f->ownership_hierarchy());
     formatter_container_.file_formatters_.push_front(f);
 
+    /*
+     * Add the formatter to the index by element type index.
+     */
     auto& ffti(formatter_container_.file_formatters_by_type_index());
     auto& ti(ffti[f->element_type_index()]);
     ti.push_front(f);
+
+    /*
+     * Add formatter to the index by formatter name.  Inserting the
+     * formatter into this container has the helpful side-effect of
+     * ensuring the formatter id is unique in formatter space.
+     */
+    const auto fmtn(f->ownership_hierarchy().formatter_name());
+    auto& fffn(formatter_container_.file_formatters_by_formatter_name());
+    const auto pair(std::make_pair(fmtn, f));
+    const auto inserted(fffn.insert(pair).second);
+    if (!inserted) {
+        BOOST_LOG_SEV(lg, error) << duplicate_formatter_id << fmtn;
+        BOOST_THROW_EXCEPTION(registrar_error(duplicate_formatter_id + fmtn));
+    }
 }
 
 const container& registrar::formatter_container() const {
