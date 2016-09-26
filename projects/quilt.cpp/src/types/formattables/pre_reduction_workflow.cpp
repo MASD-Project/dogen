@@ -21,6 +21,7 @@
 #include "dogen/quilt.cpp/types/formattables/transformer.hpp"
 #include "dogen/quilt.cpp/types/formattables/inclusion_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/enablement_expander.hpp"
+#include "dogen/quilt.cpp/types/formattables/decoration_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/pre_reduction_workflow.hpp"
 
 namespace dogen {
@@ -50,13 +51,23 @@ void pre_reduction_workflow::expand_inclusion(
     ex.expand(drp, fc, l, formattables);
 }
 
+void pre_reduction_workflow::expand_decoration(
+    const dogen::formatters::decoration_configuration_factory& dcf,
+    std::unordered_map<std::string, formattable>& formattables) const {
+    decoration_expander ex;
+    ex.expand(dcf, formattables);
+}
+
+
 std::unordered_map<std::string, formattable> pre_reduction_workflow::
 execute(const dynamic::repository& drp, const dynamic::object& root_object,
+    const dogen::formatters::decoration_configuration_factory& dcf,
     const formatters::container& fc, const locator& l,
     const yarn::model& m) const {
     auto r(transform(fc, m));
     expand_enablement(drp, root_object, fc, r);
     expand_inclusion(drp, fc, l, r);
+    expand_decoration(dcf, r);
     return r;
 }
 

@@ -59,7 +59,8 @@ dogen::formatters::repository workflow::create_formatters_repository(
 }
 
 dogen::formatters::decoration_configuration_factory
-workflow::create_decoration_configuration_factory(const dynamic::repository& drp,
+workflow::create_decoration_configuration_factory(
+    const dynamic::repository& drp,
     const dogen::formatters::repository& frp,
     const dynamic::object& root_object) const {
     dogen::formatters::decoration_configuration_factory
@@ -102,17 +103,18 @@ formattables::element_properties_repository workflow::create_properties(
     formattables::workflow fw;
     const auto r(fw.execute(opts, drp, root_object, dcf, fc, ssrp, m));
 
-    test_new_formattables_workflow(opts, drp, root_object, fc, m, r);
+    test_new_formattables_workflow(opts, drp, root_object, dcf, fc, m, r);
     return r;
 }
 
 void workflow::test_new_formattables_workflow(const options::cpp_options& opts,
     const dynamic::repository& rp, const dynamic::object& root_object,
+    const dogen::formatters::decoration_configuration_factory& dcf,
     const formatters::container& fc, const yarn::model& m,
     const formattables::element_properties_repository& legacy) const {
 
     formattables::workflow fw;
-    const auto formattables(fw.execute_new(opts, rp, root_object, fc, m));
+    const auto formattables(fw.execute_new(opts, rp, root_object, dcf, fc, m));
 
     /* check no longer works due to reduction.
 

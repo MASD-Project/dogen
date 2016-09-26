@@ -31,6 +31,7 @@
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/yarn/types/model.hpp"
+#include "dogen/formatters/types/decoration_configuration_factory.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/formattables/locator.hpp"
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
@@ -54,9 +55,14 @@ public:
         const formatters::container& fc, const locator& l,
         std::unordered_map<std::string, formattable>& formattables) const;
 
+    void expand_decoration(
+        const dogen::formatters::decoration_configuration_factory& dcf,
+        std::unordered_map<std::string, formattable>& formattables) const;
+
 public:
     std::unordered_map<std::string, formattable>
     execute(const dynamic::repository& drp, const dynamic::object& root_object,
+        const dogen::formatters::decoration_configuration_factory& dcf,
         const formatters::container& fc, const locator& l,
         const yarn::model& m) const;
 };

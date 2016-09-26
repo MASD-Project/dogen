@@ -13,23 +13,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-26 Mon 18:17]
+#+CAPTION: Clock summary at [2016-09-26 Mon 18:52]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *7:20* |      |      | 100.0 |
+| *Total time*                                                                | *7:53* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 7:20   |      |      | 100.0 |
-| Active                                                                      |        | 7:20 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:40 |   9.1 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:07 |   1.6 |
-| COMPLETED Generation of formattable is incorrect                            |        |      | 2:30 |  34.1 |
-| COMPLETED Visitor includes are incorrect                                    |        |      | 0:20 |   4.5 |
-| COMPLETED Add includer to quilt.cpp                                         |        |      | 1:46 |  24.1 |
-| COMPLETED Add reducer to quilt.cpp                                          |        |      | 0:22 |   5.0 |
-| COMPLETED Add new index to formtter container                               |        |      | 0:19 |   4.3 |
-| COMPLETED Add path generator to quilt.cpp                                   |        |      | 0:49 |  11.1 |
-| COMPLETED Add guard generator to quilt.cpp                                  |        |      | 0:27 |   6.1 |
+| Stories                                                                     | 7:53   |      |      | 100.0 |
+| Active                                                                      |        | 7:53 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:40 |   8.5 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:07 |   1.5 |
+| COMPLETED Generation of formattable is incorrect                            |        |      | 2:30 |  31.7 |
+| COMPLETED Visitor includes are incorrect                                    |        |      | 0:20 |   4.2 |
+| COMPLETED Add includer to quilt.cpp                                         |        |      | 1:46 |  22.4 |
+| COMPLETED Add reducer to quilt.cpp                                          |        |      | 0:22 |   4.7 |
+| COMPLETED Add new index to formtter container                               |        |      | 0:19 |   4.0 |
+| COMPLETED Add path expander to quilt.cpp                                    |        |      | 0:49 |  10.4 |
+| COMPLETED Add guard expander to quilt.cpp                                   |        |      | 0:27 |   5.7 |
+| COMPLETED Investigate borked travis build                                   |        |      | 0:15 |   3.2 |
+| STARTED Add decoration expander to quilt.cpp                                |        |      | 0:18 |   3.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -198,18 +200,51 @@ It is actually quite useful to look for a formatter by formatter
 name. We should provide this in formatter container and use it from
 inclusion expander.
 
-*** COMPLETED Add path generator to quilt.cpp                         :story:
+*** COMPLETED Add path expander to quilt.cpp                          :story:
     CLOSED: [2016-09-26 Mon 17:49]
     CLOCK: [2016-09-26 Mon 17:16]--[2016-09-26 Mon 17:49] =>  0:33
     CLOCK: [2016-09-26 Mon 16:39]--[2016-09-26 Mon 16:55] =>  0:16
 
 Generates the full paths.
 
-*** COMPLETED Add guard generator to quilt.cpp                        :story:
+*** COMPLETED Add guard expander to quilt.cpp                         :story:
     CLOSED: [2016-09-26 Mon 18:17]
     CLOCK: [2016-09-26 Mon 17:50]--[2016-09-26 Mon 18:17] =>  0:27
 
 Generates the header guards. Merged with path generator.
+
+*** COMPLETED Investigate borked travis build                         :story:
+    CLOSED: [2016-09-26 Mon 18:38]
+    CLOCK: [2016-09-26 Mon 18:18]--[2016-09-26 Mon 18:33] =>  0:15
+
+We seem to have borked the build some how:
+
+https://travis-ci.org/DomainDrivenConsulting/dogen/builds/162785692
+https://travis-ci.org/DomainDrivenConsulting/dogen/builds/162801645
+
+Hopefully this is just due to not running tests locally. Checkout a
+worktree and check.
+
+: git worktree add ../dogen_1fd4399 origin/master
+: cd ../dogen_1fd4399/
+: mkdir build/output
+: build/scripts/build.linux.sh Release gcc /usr/local/personal run_knit.tests
+
+Problem reproduced locally, must have forgotten to run the tests.
+
+: Running 33 test cases...
+: ../../../../projects/knit/tests/workflow_tests.cpp(203): error: in "workflow_tests/trivial_inheritance_model_generates_expected_code": check generate_and_diff(target) has failed
+: ../../../../projects/knit/tests/workflow_tests.cpp(233): error: in "workflow_tests/std_model_generates_expected_code": check generate_and_diff(target) has failed
+: ../../../../projects/knit/tests/workflow_tests.cpp(239): error: in "workflow_tests/boost_model_generates_expected_code": check generate_and_diff(target) has failed
+: ../../../../projects/knit/tests/workflow_tests.cpp(245): error: in "workflow_tests/stereotypes_model_generates_expected_code": check generate_and_diff(target) has failed
+:
+: *** 4 failures are detected in the test module "knit_tests"
+: ninja: build stopped: subcommand failed.
+
+*** STARTED Add decoration expander to quilt.cpp                      :story:
+    CLOCK: [2016-09-26 Mon 18:34]--[2016-09-26 Mon 18:52] =>  0:18
+
+Generates the decoration.
 
 *** Add aspect generator to quilt.cpp                                 :story:
 

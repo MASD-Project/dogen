@@ -152,7 +152,9 @@ execute(const options::cpp_options& opts,
 
 std::forward_list<formattable> workflow::
 execute_new(const options::cpp_options& opts, const dynamic::repository& drp,
-    const dynamic::object& root_object, const formatters::container& fc,
+    const dynamic::object& root_object,
+    const dogen::formatters::decoration_configuration_factory& dcf,
+    const formatters::container& fc,
     const yarn::model& m) const {
 
     const auto& ro(root_object);
@@ -160,7 +162,7 @@ execute_new(const options::cpp_options& opts, const dynamic::repository& drp,
     const locator l(opts, m, ps);
 
     pre_reduction_workflow pre_wk;
-    const auto formattables(pre_wk.execute(drp, root_object, fc, l, m));
+    const auto formattables(pre_wk.execute(drp, root_object, dcf, fc, l, m));
 
     reducer rd;
     auto reduced_formattables(rd.reduce(formattables));
