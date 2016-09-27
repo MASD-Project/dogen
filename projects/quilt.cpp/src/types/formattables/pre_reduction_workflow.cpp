@@ -27,6 +27,7 @@
 #include "dogen/quilt.cpp/types/formattables/reducer.hpp"
 #include "dogen/quilt.cpp/types/formattables/file_path_and_guard_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/opaque_configuration_expander.hpp"
+#include "dogen/quilt.cpp/types/formattables/streaming_annotations_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/pre_reduction_workflow.hpp"
 
 namespace dogen {
@@ -96,6 +97,13 @@ expand_opaque_configuration(const dynamic::repository& drp,
     ex.expand(drp, formattables);
 }
 
+void pre_reduction_workflow::
+expand_streaming_annotations(const dynamic::repository& drp,
+    std::unordered_map<std::string, formattable>& formattables) const {
+    streaming_annotations_expander ex;
+    ex.expand(drp, formattables);
+}
+
 std::forward_list<formattable> pre_reduction_workflow::final_transform(
     const std::unordered_map<std::string, formattable>& formattables) const {
     transformer t;
@@ -114,9 +122,12 @@ execute(const dynamic::repository& drp, const dynamic::object& root_object,
     expand_decoration(dcf, formattables);
     expand_aspects(drp, formattables);
     expand_helpers(drp, fc, formattables);
+
     reduce(formattables);
+
     expand_file_paths_and_guards(fc, l, formattables);
     expand_opaque_configuration(drp, formattables);
+    expand_streaming_annotations(drp, formattables);
 
     const auto r(final_transform(formattables));
     return r;

@@ -78,6 +78,9 @@ public:
     void expand_opaque_configuration(const dynamic::repository& drp,
         std::unordered_map<std::string, formattable>& formattables) const;
 
+    void expand_streaming_annotations(const dynamic::repository& drp,
+        std::unordered_map<std::string, formattable>& formattables) const;
+
     std::forward_list<formattable> final_transform(
         const std::unordered_map<std::string, formattable>& formattables) const;
 
