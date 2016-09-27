@@ -42,6 +42,7 @@
 #include "dogen/quilt.cpp/test_data/annotations/streaming_annotations_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/aspect_configuration_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/helper_configuration_td.hpp"
+#include "dogen/quilt.cpp/test_data/formattables/opaque_configuration_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/element_configuration_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/enablement_repository_td.hpp"
 #include "dogen/quilt.cpp/test_data/formatters/inclusion_support_types_td.hpp"

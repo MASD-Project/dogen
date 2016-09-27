@@ -42,6 +42,7 @@
 #include "dogen/quilt.cpp/hash/annotations/streaming_annotations_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/aspect_configuration_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/helper_configuration_hash.hpp"
+#include "dogen/quilt.cpp/hash/formattables/opaque_configuration_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/element_configuration_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/enablement_repository_hash.hpp"
 #include "dogen/quilt.cpp/hash/formatters/inclusion_support_types_hash.hpp"

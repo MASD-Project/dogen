@@ -42,6 +42,7 @@
 #include "dogen/quilt.cpp/io/annotations/streaming_annotations_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/aspect_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/helper_configuration_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/opaque_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/element_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/enablement_repository_io.hpp"
 #include "dogen/quilt.cpp/io/formatters/inclusion_support_types_io.hpp"

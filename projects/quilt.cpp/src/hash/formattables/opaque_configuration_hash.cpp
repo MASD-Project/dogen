@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/quilt.cpp/hash/annotations/opaque_annotations_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/opaque_configuration_hash.hpp"
-#include "dogen/quilt.cpp/hash/formattables/formatter_configuration_hash.hpp"
 
 namespace {
 
@@ -29,33 +29,17 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) {
+inline std::size_t hash_boost_shared_ptr_dogen_quilt_cpp_annotations_opaque_annotations(const boost::shared_ptr<dogen::quilt::cpp::annotations::opaque_annotations>& v) {
     std::size_t seed(0);
-    combine(seed, v.generic_string());
+    combine(seed, *v);
     return seed;
 }
 
-inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
-inline std::size_t hash_std_unordered_set_std_string(const std::unordered_set<std::string>& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
-inline std::size_t hash_std_unordered_map_std_string_std_string(const std::unordered_map<std::string, std::string>& v) {
+inline std::size_t hash_std_unordered_map_std_string_boost_shared_ptr_dogen_quilt_cpp_annotations_opaque_annotations(const std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::annotations::opaque_annotations> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
-        combine(seed, i.second);
+        combine(seed, hash_boost_shared_ptr_dogen_quilt_cpp_annotations_opaque_annotations(i.second));
     }
     return seed;
 }
@@ -67,16 +51,11 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-std::size_t formatter_configuration_hasher::hash(const formatter_configuration& v) {
+std::size_t opaque_configuration_hasher::hash(const opaque_configuration& v) {
     std::size_t seed(0);
 
-    combine(seed, v.enabled());
-    combine(seed, hash_boost_filesystem_path(v.file_path()));
-    combine(seed, v.header_guard());
-    combine(seed, hash_std_list_std_string(v.inclusion_dependencies()));
-    combine(seed, hash_std_unordered_set_std_string(v.enabled_formatters()));
-    combine(seed, hash_std_unordered_map_std_string_std_string(v.facet_directory_for_facet()));
-    combine(seed, v.opaque_configuration());
+    combine(seed, hash_boost_shared_ptr_dogen_quilt_cpp_annotations_opaque_annotations(v.top_level()));
+    combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_dogen_quilt_cpp_annotations_opaque_annotations(v.property_level()));
 
     return seed;
 }

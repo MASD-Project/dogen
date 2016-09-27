@@ -42,6 +42,7 @@
 #include "dogen/quilt.cpp/serialization/annotations/streaming_annotations_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/aspect_configuration_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/helper_configuration_ser.hpp"
+#include "dogen/quilt.cpp/serialization/formattables/opaque_configuration_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/element_configuration_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/enablement_repository_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formatters/inclusion_support_types_ser.hpp"

@@ -407,15 +407,48 @@ At present it is possible to register a formatter name more than
 once. Registrar should keep track of the names and throw if the name
 is duplicated.
 
-*** Investigate element annotation support                            :story:
+*** STARTED Investigate element annotation support                    :story:
+    CLOCK: [2016-09-27 Tue 10:14]--[2016-09-27 Tue 10:42] =>  0:28
 
 The new formattables do not yet support element annotations. Figure
-out if we need to.
+out if we need to. Seems like we did a brutal hack and left the
+processing of "element annotations" to the formatters
+themselves. Also, now its clearer why we thought of an annotation
+expander (which we since removed).
+
+The right thing to do:
+
+- rename element annotations to opaque annotations
+- add opaque annotations to element configuration
+- add a opaque annotations expander to read them into the element
+  configuration.
+
+Actually we should just avoid the element annotations altogether as
+they make no sense at all. Create an opaque configuration and add it
+at the correct level in formatter configuration.
+
+*** Move facet directory to a better place                            :story:
+
+At present we have this property at the formatter configuration level,
+but its not clear why we need to duplicate it. In fact, it may even
+make more sense to have it at a higher level since its the same for
+all elements.
 
 *** Hook formattables into formatters                                 :story:
 
 Find a way to format out of the formattables container, side-by-side
 with the current formatting workflow.
+
+*** Clean up element segmentation                                     :story:
+
+Originally we added all element segments at the same level. But in
+truth:
+
+- there are always two segments;
+- one of which is the "master" segment: the one with "is element
+  extension" set to false.
+
+We should formalise this and make the configuration model reflect it.
 
 *** Remove formatter id                                               :story:
 

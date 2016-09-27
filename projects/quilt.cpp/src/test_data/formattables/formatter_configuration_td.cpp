@@ -19,6 +19,7 @@
  *
  */
 #include <sstream>
+#include "dogen/quilt.cpp/test_data/formattables/opaque_configuration_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/formatter_configuration_td.hpp"
 
 namespace {
@@ -64,6 +65,11 @@ std::unordered_map<std::string, std::string> create_std_unordered_map_std_string
     return r;
 }
 
+dogen::quilt::cpp::formattables::opaque_configuration
+create_dogen_quilt_cpp_formattables_opaque_configuration(const unsigned int position) {
+    return dogen::quilt::cpp::formattables::opaque_configuration_generator::create(position);
+}
+
 }
 
 namespace dogen {
@@ -81,6 +87,7 @@ populate(const unsigned int position, result_type& v) {
     v.inclusion_dependencies(create_std_list_std_string(position + 3));
     v.enabled_formatters(create_std_unordered_set_std_string(position + 4));
     v.facet_directory_for_facet(create_std_unordered_map_std_string_std_string(position + 5));
+    v.opaque_configuration(create_dogen_quilt_cpp_formattables_opaque_configuration(position + 6));
 }
 
 formatter_configuration_generator::result_type
