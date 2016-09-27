@@ -13,33 +13,34 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-27 Tue 10:03]
+#+CAPTION: Clock summary at [2016-09-27 Tue 10:13]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *11:38* |       |      | 100.0 |
+| *Total time*                                                                | *11:47* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 11:38   |       |      | 100.0 |
-| Active                                                                      |         | 11:38 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:40 |   5.7 |
+| Stories                                                                     | 11:47   |       |      | 100.0 |
+| Active                                                                      |         | 11:47 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:49 |   6.9 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:07 |   1.0 |
-| COMPLETED Generation of formattable is incorrect                            |         |       | 2:30 |  21.5 |
-| COMPLETED Visitor includes are incorrect                                    |         |       | 0:20 |   2.9 |
-| COMPLETED Add includer to quilt.cpp                                         |         |       | 1:46 |  15.2 |
-| COMPLETED Add reducer to quilt.cpp                                          |         |       | 0:22 |   3.2 |
+| COMPLETED Generation of formattable is incorrect                            |         |       | 2:30 |  21.2 |
+| COMPLETED Visitor includes are incorrect                                    |         |       | 0:20 |   2.8 |
+| COMPLETED Add includer to quilt.cpp                                         |         |       | 1:46 |  15.0 |
+| COMPLETED Add reducer to quilt.cpp                                          |         |       | 0:22 |   3.1 |
 | COMPLETED Add new index to formtter container                               |         |       | 0:19 |   2.7 |
-| COMPLETED Add path expander to quilt.cpp                                    |         |       | 0:49 |   7.0 |
-| COMPLETED Add guard expander to quilt.cpp                                   |         |       | 0:27 |   3.9 |
-| COMPLETED Investigate borked travis build                                   |         |       | 0:37 |   5.3 |
+| COMPLETED Add path expander to quilt.cpp                                    |         |       | 0:49 |   6.9 |
+| COMPLETED Add guard expander to quilt.cpp                                   |         |       | 0:27 |   3.8 |
+| COMPLETED Investigate borked travis build                                   |         |       | 0:37 |   5.2 |
 | COMPLETED Add decoration expander to quilt.cpp                              |         |       | 0:23 |   3.3 |
-| COMPLETED Add aspect expander to quilt.cpp                                  |         |       | 1:26 |  12.3 |
+| COMPLETED Add aspect expander to quilt.cpp                                  |         |       | 1:26 |  12.2 |
 | COMPLETED Run tests that are passing on windows                             |         |       | 0:10 |   1.4 |
-| COMPLETED Add helper expander to quilt.cpp                                  |         |       | 1:26 |  12.3 |
+| COMPLETED Add helper expander to quilt.cpp                                  |         |       | 1:26 |  12.2 |
 | COMPLETED Merge pre and post workflows                                      |         |       | 0:16 |   2.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-09-27 Tue 10:04]--[2016-09-27 Tue 10:13] =>  0:09
     CLOCK: [2016-09-26 Mon 15:36]--[2016-09-26 Mon 15:39] =>  0:03
     CLOCK: [2016-09-26 Mon 09:49]--[2016-09-26 Mon 10:00] =>  0:11
     CLOCK: [2016-09-26 Mon 09:22]--[2016-09-26 Mon 09:48] =>  0:26
@@ -196,6 +197,12 @@ need to compute inclusion, path etc or not.
 
 Removes all types that are non-generatable.
 
+Merged stories:
+
+*Add filter to quilt.cpp*
+
+Removes the non-target formattables.
+
 *** COMPLETED Add new index to formtter container                     :story:
     CLOSED: [2016-09-26 Mon 17:48]
     CLOCK: [2016-09-26 Mon 16:56]--[2016-09-26 Mon 17:15] =>  0:19
@@ -256,6 +263,14 @@ builds. We seem to have lost service forward declarations.
 
 Generates the decoration.
 
+Merged stories:
+
+*Add file properties generator to to quilt.cpp*
+
+We need to generate the file properties for each formattable. The
+formatter must supply the modeline name. At present we have a hack in
+element properties to determine the modeline.
+
 *** COMPLETED Add aspect expander to quilt.cpp                        :story:
     CLOSED: [2016-09-26 Mon 22:51]
     CLOCK: [2016-09-26 Mon 21:25]--[2016-09-26 Mon 22:51] =>  1:26
@@ -289,54 +304,11 @@ Generates the helper configuration.
 
 It seems we don't have much of a post reduction workflow. Merge them.
 
-*** Hook formattables into formatters                                 :story:
+*** COMPLETED Add formattable element                                 :story:
+    CLOSED: [2016-09-27 Tue 10:05]
 
-Find a way to format out of the formattables container, side-by-side
-with the current formatting workflow.
-
-*** Check which properties need to loop through the entire model      :story:
-
-In certain cases such as helpers we probably don't need to go through
-all types; only the target types matter. Ensure we are not processing
-other types for no reason.
-
-Merged stories:
-
-*Element properties includes non-target types*
-
-We seem to be generating a lot of element properties and formatter
-properties as well. We should only be generating these for the target
-model.
-
-*** Remove =optional<list>=                                           :story:
-
-We should not really be using optional<list>. The empty list is
-sufficient for this.
-
-Uses:
-
-- include provider. Fixed with other story.
-
-*** Add file properties generator to to quilt.cpp                     :story:
-
-We need to generate the file properties for each formattable. The
-formatter must supply the modeline name. At present we have a hack in
-element properties to determine the modeline.
-
-*** Introduce the concept of proxy models                             :story:
-
-These are models that exist solely to bring types in, but do not
-define those types. Typically one uses a proxy model to expose
-non-dogen types into dogen. We could add a flag to models
-=is_proxy=. It would replace the notion of system models. We need to
-check the stories in the backlog around this.
-
-Interestingly we could have different defaults for formatters in proxy
-models. For example, if a model is proxy we can assume that we should
-not compute inclusion paths. This could save a lot of time when
-specifying the models in JSON.
-
-*** Add formattable element                                           :story:
+*Rationale*: we introduced the type in the previous sprint. The
+hooking of it is a different story.
 
 Create a top-level formattable type that is an aggregation of the
 element and the element configuration. Update workflow to output a
@@ -356,6 +328,95 @@ Previous understanding:
   visitor to resolve the element and then call the formatter.
 - add an enablement map for all formatters in the formatter
 
+*** CANCELLED Move name builder into yarn                             :story:
+    CLOSED: [2016-09-27 Tue 10:07]
+
+*Rationale*: It was used only during formattables generation for the
+helpers. The one method was moved into the expander.
+
+At present we have name builder in quilt.cpp simply to build the
+merged namespaces. We should have some kind of utility for this in
+yarn.
+
+*** CANCELLED Move registration of providers to initialiser           :story:
+    CLOSED: [2016-09-27 Tue 10:07]
+
+*Rationale*: No longer applies since provider refactor.
+
+At present we are iterating through the formatters list in properties
+and manually registering all include providers via the interface. This
+is not ideal because the formatter interface needs to know of include
+providers, meaning we can't move it away from =quilt.cpp=.
+
+When we register a formatter we should also register the include
+provider too.
+
+Tasks:
+
+- add provider support directly to the formatters instead of another
+  class and remove registration from formatter interface.
+- add a static registrar for the include providers in workflow.
+- change initialiser to register the include providers from the same
+  shared pointer.
+
+*** CANCELLED Implement all formatter interfaces                      :story:
+    CLOSED: [2016-09-27 Tue 10:10]
+
+*Rationale*: we implemented primitives. there is no need to do this
+for concepts.
+
+We still have a couple of skeleton interfaces:
+
+- primitives
+- concepts
+
+We should throw if formatting is required.
+
+*** CANCELLED Remove =optional<list>=                                 :story:
+    CLOSED: [2016-09-27 Tue 10:12]
+
+*Rationale*: we've already done a few of these. This story is too much
+of an epic to be useful.
+
+We should not really be using optional<list>. The empty list is
+sufficient for this.
+
+Uses:
+
+- include provider. Fixed with other story.
+
+*** COMPLETED Formatters with duplicate names result in non-intuitive errors :story:
+    CLOSED: [2016-09-27 Tue 10:10]
+
+*Rationale*: completed with the addition of the formatter by formatter
+name container. We now get a duplicate formatter id exception.
+
+We added two formatters to io with the same name by mistake and the
+resulting error was not particularly enlightening:
+
+: std::exception::what: Qualified name defined more than once: cpp.io.enum_header_formatter.inclusion_required
+
+We should have a very early on validation to ensure formatters have
+distinct names.
+
+Merged stories:
+
+*Check for duplicate formatter names in formatter registrar*
+
+At present it is possible to register a formatter name more than
+once. Registrar should keep track of the names and throw if the name
+is duplicated.
+
+*** Investigate element annotation support                            :story:
+
+The new formattables do not yet support element annotations. Figure
+out if we need to.
+
+*** Hook formattables into formatters                                 :story:
+
+Find a way to format out of the formattables container, side-by-side
+with the current formatting workflow.
+
 *** Remove formatter id                                               :story:
 
 Not clear why we need this given we have formatter name.
@@ -365,6 +426,39 @@ Not clear why we need this given we have formatter name.
 When implementing inclusion expander we did a number of ugly hacks to
 support both the legacy API and the new API. We need to remove all the
 impls etc we added, in builder, factory, etc.
+
+*** Remove all of the legacy infrastructure                           :story:
+
+Includes:
+
+- repositories, repository factories in formattables, annotations.
+
+*** Check which properties need to loop through the entire model      :story:
+
+In certain cases such as helpers we probably don't need to go through
+all types; only the target types matter. Ensure we are not processing
+other types for no reason.
+
+Merged stories:
+
+*Element properties includes non-target types*
+
+We seem to be generating a lot of element properties and formatter
+properties as well. We should only be generating these for the target
+model.
+
+*** Introduce the concept of proxy models                             :story:
+
+These are models that exist solely to bring types in, but do not
+define those types. Typically one uses a proxy model to expose
+non-dogen types into dogen. We could add a flag to models
+=is_proxy=. It would replace the notion of system models. We need to
+check the stories in the backlog around this.
+
+Interestingly we could have different defaults for formatters in proxy
+models. For example, if a model is proxy we can assume that we should
+not compute inclusion paths. This could save a lot of time when
+specifying the models in JSON.
 
 *** Create the notion of a formatter alias                            :story:
 
@@ -441,16 +535,6 @@ At present the injector is calling the formatters' workflow
 directly, in order to obtain the formatters' container. It should
 receive it as a parameter during initialisation.
 
-*** Add filter to quilt.cpp                                           :story:
-
-Removes the non-target formattables.
-
-*** Move name builder into yarn                                       :story:
-
-At present we have name builder in quilt.cpp simply to build the
-merged namespaces. We should have some kind of utility for this in
-yarn.
-
 *** Refactor path settings factory                                    :story:
 
 Tasks:
@@ -459,51 +543,6 @@ Tasks:
   definitions from this list;
 - cache top-level fields and facet fields and copy results instead of
   re-reading them.
-
-*** Move registration of providers to initialiser                     :story:
-
-At present we are iterating through the formatters list in properties
-and manually registering all include providers via the interface. This
-is not ideal because the formatter interface needs to know of include
-providers, meaning we can't move it away from =quilt.cpp=.
-
-When we register a formatter we should also register the include
-provider too.
-
-Tasks:
-
-- add provider support directly to the formatters instead of another
-  class and remove registration from formatter interface.
-- add a static registrar for the include providers in workflow.
-- change initialiser to register the include providers from the same
-  shared pointer.
-
-*** Implement all formatter interfaces                                :story:
-
-We still have a couple of skeleton interfaces:
-
-- primitve
-- concepts
-
-We should throw if formatting is required.
-
-*** Formatters with duplicate names result in non-intuitive errors    :story:
-
-We added two formatters to io with the same name by mistake and the
-resulting error was not particularly enlightening:
-
-: std::exception::what: Qualified name defined more than once: cpp.io.enum_header_formatter.inclusion_required
-
-We should have a very early on validation to ensure formatters have
-distinct names.
-
-Merged stories:
-
-*Check for duplicate formatter names in formatter registrar*
-
-At present it is possible to register a formatter name more than
-once. Registrar should keep track of the names and throw if the name
-is duplicated.
 
 *** Initialise formatters in the formatter's translation unit         :story:
 
