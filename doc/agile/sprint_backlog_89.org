@@ -13,32 +13,33 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-27 Tue 21:17]
+#+CAPTION: Clock summary at [2016-09-27 Tue 21:51]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *14:43* |       |      | 100.0 |
+| *Total time*                                                                | *15:14* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 14:43   |       |      | 100.0 |
-| Active                                                                      |         | 14:43 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:49 |   5.5 |
+| Stories                                                                     | 15:14   |       |      | 100.0 |
+| Active                                                                      |         | 15:14 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:49 |   5.4 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:07 |   0.8 |
-| COMPLETED Generation of formattable is incorrect                            |         |       | 2:30 |  17.0 |
-| COMPLETED Visitor includes are incorrect                                    |         |       | 0:20 |   2.3 |
-| COMPLETED Add includer to quilt.cpp                                         |         |       | 1:46 |  12.0 |
-| COMPLETED Add reducer to quilt.cpp                                          |         |       | 0:22 |   2.5 |
-| COMPLETED Add new index to formtter container                               |         |       | 0:19 |   2.2 |
-| COMPLETED Add path expander to quilt.cpp                                    |         |       | 0:49 |   5.5 |
-| COMPLETED Add guard expander to quilt.cpp                                   |         |       | 0:27 |   3.1 |
-| COMPLETED Investigate borked travis build                                   |         |       | 0:37 |   4.2 |
-| COMPLETED Add decoration expander to quilt.cpp                              |         |       | 0:23 |   2.6 |
-| COMPLETED Add aspect expander to quilt.cpp                                  |         |       | 1:26 |   9.7 |
+| COMPLETED Generation of formattable is incorrect                            |         |       | 2:30 |  16.4 |
+| COMPLETED Visitor includes are incorrect                                    |         |       | 0:20 |   2.2 |
+| COMPLETED Add includer to quilt.cpp                                         |         |       | 1:46 |  11.6 |
+| COMPLETED Add reducer to quilt.cpp                                          |         |       | 0:22 |   2.4 |
+| COMPLETED Add new index to formtter container                               |         |       | 0:19 |   2.1 |
+| COMPLETED Add path expander to quilt.cpp                                    |         |       | 0:49 |   5.4 |
+| COMPLETED Add guard expander to quilt.cpp                                   |         |       | 0:27 |   3.0 |
+| COMPLETED Investigate borked travis build                                   |         |       | 0:37 |   4.0 |
+| COMPLETED Add decoration expander to quilt.cpp                              |         |       | 0:23 |   2.5 |
+| COMPLETED Add aspect expander to quilt.cpp                                  |         |       | 1:26 |   9.4 |
 | COMPLETED Run tests that are passing on windows                             |         |       | 0:10 |   1.1 |
-| COMPLETED Add helper expander to quilt.cpp                                  |         |       | 1:26 |   9.7 |
+| COMPLETED Add helper expander to quilt.cpp                                  |         |       | 1:26 |   9.4 |
 | COMPLETED Merge pre and post workflows                                      |         |       | 0:16 |   1.8 |
-| COMPLETED Fix bug in aspect and helper generation                           |         |       | 0:15 |   1.7 |
-| COMPLETED Investigate element annotation support                            |         |       | 2:05 |  14.2 |
-| COMPLETED Add streaming settings expander                                   |         |       | 0:36 |   4.1 |
+| COMPLETED Fix bug in aspect and helper generation                           |         |       | 0:15 |   1.6 |
+| COMPLETED Investigate element annotation support                            |         |       | 2:05 |  13.7 |
+| STARTED Add streaming settings expander                                     |         |       | 0:36 |   3.9 |
+| STARTED Create the formattables model                                       |         |       | 0:31 |   3.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -444,13 +445,42 @@ at the correct level in formatter configuration.
 Tried to add a verification step but its just too hard, what with
 shared pointers etc.
 
-*** COMPLETED Add streaming settings expander                         :story:
-    CLOSED: [2016-09-27 Tue 21:17]
+*** STARTED Add streaming settings expander                           :story:
     CLOCK: [2016-09-27 Tue 20:55]--[2016-09-27 Tue 21:17] =>  0:22
     CLOCK: [2016-09-27 Tue 20:40]--[2016-09-27 Tue 20:54] =>  0:14
 
 Add streaming settings to the element properties and populate them via
 a new expander.
+
+Actually we need to revert this change as these settings need to be
+across the whole model.
+
+*** STARTED Create the formattables model                             :story:
+    CLOCK: [2016-09-27 Tue 21:43]--[2016-09-27 Tue 21:50] =>  0:07
+    CLOCK: [2016-09-27 Tue 21:18]--[2016-09-27 Tue 21:42] =>  0:24
+
+There are a couple of properties that are shared by all
+formattables. One way of solving this is to create a top-level
+container for all formattables that also has these properties.
+
+- create model class
+- update workflow to return model
+- update verification code.
+- remove streaming settings from element, delete streaming expander.
+- update streaming annotations factory to return correct container.
+- create a model factory and a formattables factory. Model factory
+  simply assembles model. Formattables workflow hooks them together.
+
+*** Hook formattables into formatters                                 :story:
+
+Find a way to format out of the formattables container, side-by-side
+with the current formatting workflow.
+
+- remove element annotations from context, use element configuration
+  instead.
+- remove element configuration from context, supply it as a
+  parameter.
+- create a new formatters workflow that uses formattables.
 
 *** Move facet directory to a better place                            :story:
 
@@ -458,11 +488,6 @@ At present we have this property at the formatter configuration level,
 but its not clear why we need to duplicate it. In fact, it may even
 make more sense to have it at a higher level since its the same for
 all elements.
-
-*** Hook formattables into formatters                                 :story:
-
-Find a way to format out of the formattables container, side-by-side
-with the current formatting workflow.
 
 *** Clean up element segmentation                                     :story:
 

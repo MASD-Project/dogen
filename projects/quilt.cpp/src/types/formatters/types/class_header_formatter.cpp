@@ -103,7 +103,6 @@ std::list<std::string> class_header_formatter::inclusion_dependencies(
         builder.add(*o.base_visitor(), fwd_fn);
     }
     return builder.build();
-
 }
 
 inclusion_support_types class_header_formatter::
