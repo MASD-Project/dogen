@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/formatters/hash/decoration_configuration_hash.hpp"
+#include "dogen/quilt.cpp/hash/annotations/streaming_annotations_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/aspect_configuration_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/helper_configuration_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/element_configuration_hash.hpp"
@@ -59,6 +60,16 @@ inline std::size_t hash_std_list_dogen_quilt_cpp_formattables_helper_configurati
     return seed;
 }
 
+inline std::size_t hash_boost_optional_dogen_quilt_cpp_annotations_streaming_annotations(const boost::optional<dogen::quilt::cpp::annotations::streaming_annotations>& v) {
+    std::size_t seed(0);
+
+    if (!v)
+        return seed;
+
+    combine(seed, *v);
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -73,6 +84,7 @@ std::size_t element_configuration_hasher::hash(const element_configuration& v) {
     combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formatter_configuration(v.formatter_configuration()));
     combine(seed, hash_std_list_dogen_quilt_cpp_formattables_helper_configuration(v.helper_configuration()));
     combine(seed, v.aspect_configuration());
+    combine(seed, hash_boost_optional_dogen_quilt_cpp_annotations_streaming_annotations(v.streaming_annotations()));
 
     return seed;
 }

@@ -20,6 +20,7 @@
  */
 #include <sstream>
 #include "dogen/formatters/test_data/decoration_configuration_td.hpp"
+#include "dogen/quilt.cpp/test_data/annotations/streaming_annotations_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/aspect_configuration_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/helper_configuration_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/element_configuration_td.hpp"
@@ -76,6 +77,18 @@ create_dogen_quilt_cpp_formattables_aspect_configuration(const unsigned int posi
     return dogen::quilt::cpp::formattables::aspect_configuration_generator::create(position);
 }
 
+dogen::quilt::cpp::annotations::streaming_annotations
+create_dogen_quilt_cpp_annotations_streaming_annotations(const unsigned int position) {
+    return dogen::quilt::cpp::annotations::streaming_annotations_generator::create(position);
+}
+
+boost::optional<dogen::quilt::cpp::annotations::streaming_annotations>
+create_boost_optional_dogen_quilt_cpp_annotations_streaming_annotations(unsigned int position) {
+    boost::optional<dogen::quilt::cpp::annotations::streaming_annotations> r(
+        create_dogen_quilt_cpp_annotations_streaming_annotations(position));
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -91,6 +104,7 @@ populate(const unsigned int position, result_type& v) {
     v.formatter_configuration(create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formatter_configuration(position + 1));
     v.helper_configuration(create_std_list_dogen_quilt_cpp_formattables_helper_configuration(position + 2));
     v.aspect_configuration(create_dogen_quilt_cpp_formattables_aspect_configuration(position + 3));
+    v.streaming_annotations(create_boost_optional_dogen_quilt_cpp_annotations_streaming_annotations(position + 4));
 }
 
 element_configuration_generator::result_type

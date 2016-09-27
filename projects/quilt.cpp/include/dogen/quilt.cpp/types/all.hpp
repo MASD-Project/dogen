@@ -147,6 +147,7 @@
 #include "dogen/quilt.cpp/types/formattables/inclusion_dependencies_builder.hpp"
 #include "dogen/quilt.cpp/types/formattables/inclusion_dependencies_factory.hpp"
 #include "dogen/quilt.cpp/types/formattables/local_enablement_configuration.hpp"
+#include "dogen/quilt.cpp/types/formattables/streaming_annotations_expander.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/enum_implementation_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/test_data/class_header_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/exception_header_formatter.hpp"

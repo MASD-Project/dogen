@@ -32,6 +32,7 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/formatters/serialization/decoration_configuration_ser.hpp"
+#include "dogen/quilt.cpp/serialization/annotations/streaming_annotations_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/aspect_configuration_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/helper_configuration_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/element_configuration_ser.hpp"
@@ -48,6 +49,7 @@ void save(Archive& ar,
     ar << make_nvp("formatter_configuration", v.formatter_configuration_);
     ar << make_nvp("helper_configuration", v.helper_configuration_);
     ar << make_nvp("aspect_configuration", v.aspect_configuration_);
+    ar << make_nvp("streaming_annotations", v.streaming_annotations_);
 }
 
 template<typename Archive>
@@ -58,6 +60,7 @@ void load(Archive& ar,
     ar >> make_nvp("formatter_configuration", v.formatter_configuration_);
     ar >> make_nvp("helper_configuration", v.helper_configuration_);
     ar >> make_nvp("aspect_configuration", v.aspect_configuration_);
+    ar >> make_nvp("streaming_annotations", v.streaming_annotations_);
 }
 
 } }

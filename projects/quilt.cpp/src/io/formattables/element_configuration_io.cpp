@@ -21,6 +21,7 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "dogen/formatters/io/decoration_configuration_io.hpp"
+#include "dogen/quilt.cpp/io/annotations/streaming_annotations_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/aspect_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/helper_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/element_configuration_io.hpp"
@@ -80,6 +81,21 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::quilt::c
 
 }
 
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::quilt::cpp::annotations::streaming_annotations>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<empty>\"";
+    s << " }";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace quilt {
 namespace cpp {
@@ -91,7 +107,8 @@ std::ostream& operator<<(std::ostream& s, const element_configuration& v) {
       << "\"decoration_configuration\": " << v.decoration_configuration() << ", "
       << "\"formatter_configuration\": " << v.formatter_configuration() << ", "
       << "\"helper_configuration\": " << v.helper_configuration() << ", "
-      << "\"aspect_configuration\": " << v.aspect_configuration()
+      << "\"aspect_configuration\": " << v.aspect_configuration() << ", "
+      << "\"streaming_annotations\": " << v.streaming_annotations()
       << " }";
     return(s);
 }
