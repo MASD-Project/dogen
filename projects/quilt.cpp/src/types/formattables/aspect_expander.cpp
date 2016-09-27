@@ -20,6 +20,7 @@
  */
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
+#include "dogen/yarn/types/element.hpp"
 #include "dogen/quilt.cpp/io/annotations/aspect_annotations_io.hpp"
 #include "dogen/quilt.cpp/types/annotations/aspect_annotations_factory.hpp"
 #include "dogen/quilt.cpp/types/formattables/aspect_expander.hpp"
@@ -36,14 +37,14 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-std::unordered_map<std::string, annotations::aspect_annotations>
+aspect_expander::aspect_annotations_type
 aspect_expander::obtain_aspect_annotations(const dynamic::repository& drp,
     const std::unordered_map<std::string, formattable>& formattables) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started creating aspect annotations.";
 
     annotations::aspect_annotations_factory f(drp);
-    std::unordered_map<std::string, annotations::aspect_annotations> r;
+    aspect_annotations_type r;
     for (auto& pair : formattables) {
         const auto id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
@@ -92,11 +93,12 @@ void aspect_expander::walk_name_tree(const yarn::name_tree& nt,
         ac.requires_manual_move_constructor(true);
 }
 
-aspect_configuration aspect_expander::compute_aspect_configuration(
-    const aspect_annotations_type& aa,
-    const std::list<yarn::attribute>& attributes) const {
+aspect_configuration
+aspect_expander::compute_aspect_configuration(const aspect_annotations_type& aa,
+    const std::list<yarn::attribute>& attr) const {
+
     aspect_configuration r;
-    for (const auto a : attributes) {
+    for (const auto a : attr) {
         const auto& nt(a.parsed_type());
         walk_name_tree(nt, true/*is_top_level*/, aa, r);
     }

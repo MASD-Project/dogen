@@ -26550,16 +26550,16 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O206">
       <dia:attribute name="obj_pos">
-        <dia:point val="167,178"/>
+        <dia:point val="158,178"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="166.95,177.95;181.553,181.65"/>
+        <dia:rectangle val="157.95,177.95;185.885,181.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="167,178"/>
+        <dia:point val="158,178"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="14.502500000000001"/>
+        <dia:real val="27.835000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -26661,7 +26661,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>##</dia:string>
+            <dia:string>#boost::optional&lt;streaming_annotations&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -26981,7 +26981,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:point val="181.565,167.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="174.201,166.65;182.315,178.8"/>
+        <dia:rectangle val="171.867,166.65;182.315,178.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -26989,8 +26989,8 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       <dia:attribute name="orth_points">
         <dia:point val="181.565,167.4"/>
         <dia:point val="181.565,173"/>
-        <dia:point val="174.251,173"/>
-        <dia:point val="174.251,178"/>
+        <dia:point val="171.917,173"/>
+        <dia:point val="171.917,178"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

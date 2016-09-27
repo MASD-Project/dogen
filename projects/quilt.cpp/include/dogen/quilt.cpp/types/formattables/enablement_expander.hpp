@@ -49,7 +49,7 @@ private:
     };
 
     friend std::ostream& operator<<(std::ostream& s,
-        const enablement_expander::global_field_definitions& gfd);
+        const global_field_definitions& v);
 
     typedef std::unordered_map<std::string, global_field_definitions>
     global_field_definitions_type;
@@ -72,7 +72,7 @@ private:
     };
 
     friend std::ostream& operator<<(std::ostream& s,
-        const enablement_expander::local_field_definitions& lfd);
+        const local_field_definitions& v);
 
     typedef std::unordered_map<std::string, local_field_definitions>
     local_field_definitions_type;

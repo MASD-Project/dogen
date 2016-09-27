@@ -46,12 +46,13 @@ private:
     obtain_aspect_annotations(const dynamic::repository& drp,
         const std::unordered_map<std::string, formattable>& formattables) const;
 
+private:
     void walk_name_tree(const yarn::name_tree& nt, const bool is_top_level,
         const aspect_annotations_type& aa, aspect_configuration& ac) const;
 
     aspect_configuration compute_aspect_configuration(
         const aspect_annotations_type& aa,
-        const std::list<yarn::attribute>& attributes) const;
+        const std::list<yarn::attribute>& attr) const;
 
     void populate_aspect_configuration(
         const aspect_annotations_type& aa,

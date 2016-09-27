@@ -30,6 +30,7 @@
 #include "dogen/quilt.cpp/types/formatters/workflow.hpp"
 #include "dogen/quilt.cpp/types/formattables/workflow.hpp"
 #include "dogen/quilt.cpp/io/formattables/aspect_configuration_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/helper_configuration_io.hpp"
 #include "dogen/quilt.cpp/types/annotations/directory_names_annotations_factory.hpp"
 #include "dogen/quilt.cpp/types/annotations/aspect_annotations_repository_factory.hpp"
 #include "dogen/quilt.cpp/types/annotations/streaming_annotations_repository_factory.hpp"
@@ -156,6 +157,17 @@ void workflow::test_new_formattables_workflow(const options::cpp_options& opts,
                 BOOST_THROW_EXCEPTION(
                     workflow_error("Decoration is incorreact."));
 
+            }
+
+            if (elm_cfg.helper_configuration() !=
+                i->second.helper_configuration()) {
+                BOOST_LOG_SEV(lg, error) << "Incorrect helper cfg. id: " << id
+                                         << " Legacy: "
+                                         << i->second.helper_configuration()
+                                         << " new: "
+                                         << elm_cfg.helper_configuration();
+                BOOST_THROW_EXCEPTION(
+                    workflow_error("Helper is incorreact."));
             }
 
             if (elm_cfg.aspect_configuration() !=
