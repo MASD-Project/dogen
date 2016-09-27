@@ -417,7 +417,9 @@ It seems we are updating non-target types for these configurations but
 we weren't before. This caused a break in the verification that
 somehow was not spotted.
 
-*** STARTED Investigate element annotation support                    :story:
+*** COMPLETED Investigate element annotation support                  :story:
+    CLOSED: [2016-09-27 Tue 20:39]
+    CLOCK: [2016-09-27 Tue 20:17]--[2016-09-27 Tue 20:39] =>  0:22
     CLOCK: [2016-09-27 Tue 10:59]--[2016-09-27 Tue 12:14] =>  1:15
     CLOCK: [2016-09-27 Tue 10:14]--[2016-09-27 Tue 10:42] =>  0:28
 
@@ -437,6 +439,9 @@ The right thing to do:
 Actually we should just avoid the element annotations altogether as
 they make no sense at all. Create an opaque configuration and add it
 at the correct level in formatter configuration.
+
+Tried to add a verification step but its just too hard, what with
+shared pointers etc.
 
 *** Move facet directory to a better place                            :story:
 
