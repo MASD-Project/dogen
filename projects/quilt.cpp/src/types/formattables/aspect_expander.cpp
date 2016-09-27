@@ -116,14 +116,34 @@ void aspect_expander::populate_aspect_configuration(
         auto& formattable(pair.second);
         auto& cfg(formattable.configuration());
         for (const auto& segment : formattable.element_segments()) {
-
+            /*
+             * We only want to process the master segment; the
+             * extensions can be ignored.
+             */
             if (segment->is_element_extension())
                 continue;
 
+            /*
+             * We are only interested in yarn objects; all other
+             * element types do not need helpers.
+             */
             const auto ptr(dynamic_cast<const yarn::object*>(segment.get()));
             if (ptr == nullptr)
                 continue;
 
+            /*
+             * We only need to generate the aspect configuration for
+             * elements of the target model. However, we can't perform
+             * this after reduction because the aspectq annotations
+             * must be build prior to reduction or else we will not
+             * get aspects for referenced models.
+             */
+            if (ptr->generation_type() == yarn::generation_types::no_generation)
+                continue;
+
+            /*
+             * Update the aspect configuration.
+             */
             const auto& attr(ptr->local_attributes());
             const auto ac(compute_aspect_configuration(aa, attr));
             cfg.aspect_configuration(ac);
