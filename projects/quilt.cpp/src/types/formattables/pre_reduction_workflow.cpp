@@ -24,6 +24,8 @@
 #include "dogen/quilt.cpp/types/formattables/decoration_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/aspect_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/helper_expander.hpp"
+#include "dogen/quilt.cpp/types/formattables/reducer.hpp"
+#include "dogen/quilt.cpp/types/formattables/file_path_and_guard_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/pre_reduction_workflow.hpp"
 
 namespace dogen {
@@ -32,7 +34,7 @@ namespace cpp {
 namespace formattables {
 
 std::unordered_map<std::string, formattable> pre_reduction_workflow::
-transform(const formatters::container& fc, const yarn::model& m) const {
+initial_transform(const formatters::container& fc, const yarn::model& m) const {
     transformer t;
     return t.transform(fc, m);
 }
@@ -73,20 +75,41 @@ void pre_reduction_workflow::expand_helpers(const dynamic::repository& drp,
     ex.expand(drp, fc, formattables);
 }
 
-std::unordered_map<std::string, formattable> pre_reduction_workflow::
+std::unordered_map<std::string, formattable> pre_reduction_workflow::reduce(
+    std::unordered_map<std::string, formattable>& formattables) const {
+    reducer rd;
+    return rd.reduce(formattables);
+}
+
+void pre_reduction_workflow::expand_file_paths_and_guards(
+    const formatters::container& fc, const locator& l,
+    formattables_by_id_type& formattables) const {
+    file_path_and_guard_expander ex;
+    ex.expand(fc, l, formattables);
+}
+
+std::forward_list<formattable> pre_reduction_workflow::final_transform(
+    const std::unordered_map<std::string, formattable>& formattables) const {
+    transformer t;
+    return t.transform(formattables);
+}
+
+std::forward_list<formattable> pre_reduction_workflow::
 execute(const dynamic::repository& drp, const dynamic::object& root_object,
     const dogen::formatters::decoration_configuration_factory& dcf,
     const formatters::container& fc, const locator& l,
     const yarn::model& m) const {
 
-    auto r(transform(fc, m));
+    auto formattables(initial_transform(fc, m));
+    expand_enablement(drp, root_object, fc, formattables);
+    expand_inclusion(drp, fc, l, formattables);
+    expand_decoration(dcf, formattables);
+    expand_aspects(drp, formattables);
+    expand_helpers(drp, fc, formattables);
+    reduce(formattables);
+    expand_file_paths_and_guards(fc, l, formattables);
 
-    expand_enablement(drp, root_object, fc, r);
-    expand_inclusion(drp, fc, l, r);
-    expand_decoration(dcf, r);
-    expand_aspects(drp, r);
-    expand_helpers(drp, fc, r);
-
+    const auto r(final_transform(formattables));
     return r;
 }
 

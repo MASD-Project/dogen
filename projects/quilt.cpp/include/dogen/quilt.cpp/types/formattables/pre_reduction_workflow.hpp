@@ -43,8 +43,8 @@ namespace formattables {
 
 class pre_reduction_workflow {
 public:
-    std::unordered_map<std::string, formattable>
-    transform(const formatters::container& fc, const yarn::model& m) const;
+    std::unordered_map<std::string, formattable> initial_transform(
+        const formatters::container& fc, const yarn::model& m) const;
 
     void expand_enablement(const dynamic::repository& drp,
         const dynamic::object& root_object, const formatters::container& fc,
@@ -66,8 +66,20 @@ public:
         const formatters::container& fc,
         std::unordered_map<std::string, formattable>& formattables) const;
 
+    std::unordered_map<std::string, formattable> reduce(
+        std::unordered_map<std::string, formattable>& formattables) const;
+
+    typedef std::unordered_map<std::string, formattable>
+    formattables_by_id_type;
+
+    void expand_file_paths_and_guards(const formatters::container& fc,
+        const locator& l, formattables_by_id_type& formattables) const;
+
+    std::forward_list<formattable> final_transform(
+        const std::unordered_map<std::string, formattable>& formattables) const;
+
 public:
-    std::unordered_map<std::string, formattable>
+    std::forward_list<formattable>
     execute(const dynamic::repository& drp, const dynamic::object& root_object,
         const dogen::formatters::decoration_configuration_factory& dcf,
         const formatters::container& fc, const locator& l,

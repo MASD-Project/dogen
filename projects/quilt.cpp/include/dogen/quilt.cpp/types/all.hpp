@@ -105,7 +105,6 @@
 #include "dogen/quilt.cpp/types/formatters/io/enum_header_formatter.hpp"
 #include "dogen/quilt.cpp/types/annotations/path_annotations_factory.hpp"
 #include "dogen/quilt.cpp/types/formattables/formatter_configuration.hpp"
-#include "dogen/quilt.cpp/types/formattables/post_reduction_workflow.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/class_header_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/odb/enum_header_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/odb/odb_options_formatter.hpp"
