@@ -75,6 +75,9 @@ public:
     void expand_file_paths_and_guards(const formatters::container& fc,
         const locator& l, formattables_by_id_type& formattables) const;
 
+    void expand_opaque_configuration(const dynamic::repository& drp,
+        std::unordered_map<std::string, formattable>& formattables) const;
+
     std::forward_list<formattable> final_transform(
         const std::unordered_map<std::string, formattable>& formattables) const;
 

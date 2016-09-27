@@ -21,6 +21,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/yarn/types/element.hpp"
+#include "dogen/yarn/types/object.hpp"
 #include "dogen/quilt.cpp/io/annotations/aspect_annotations_io.hpp"
 #include "dogen/quilt.cpp/types/annotations/aspect_annotations_factory.hpp"
 #include "dogen/quilt.cpp/types/formattables/aspect_expander.hpp"

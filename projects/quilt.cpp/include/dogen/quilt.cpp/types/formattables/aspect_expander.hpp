@@ -25,11 +25,14 @@
 #pragma once
 #endif
 
+#include <list>
 #include <string>
 #include <unordered_map>
 #include "dogen/dynamic/types/repository.hpp"
-#include "dogen/quilt.cpp/types/formatters/container.hpp"
+#include "dogen/yarn/types/name_tree.hpp"
+#include "dogen/yarn/types/attribute.hpp"
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
+#include "dogen/quilt.cpp/types/formattables/aspect_configuration.hpp"
 #include "dogen/quilt.cpp/types/annotations/aspect_annotations.hpp"
 
 namespace dogen {

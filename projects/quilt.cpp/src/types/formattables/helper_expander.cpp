@@ -36,7 +36,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("quilt.cpp.annotations.helper_expander"));
+static logger lg(logger_factory("quilt.cpp.formattables.helper_expander"));
 
 const std::string qn_missing("Could not find qualified name for language.");
 const std::string descriptor_expected(

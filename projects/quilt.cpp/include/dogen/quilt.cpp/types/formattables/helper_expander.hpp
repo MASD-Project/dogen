@@ -27,9 +27,12 @@
 
 #include <unordered_map>
 #include "dogen/dynamic/types/repository.hpp"
+#include "dogen/yarn/types/name_tree.hpp"
+#include "dogen/yarn/types/attribute.hpp"
 #include "dogen/quilt.cpp/types/annotations/helper_annotations.hpp"
 #include "dogen/quilt.cpp/types/annotations/streaming_annotations.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
+#include "dogen/quilt.cpp/types/formattables/helper_configuration.hpp"
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
 
 namespace dogen {
