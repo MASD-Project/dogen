@@ -6724,6 +6724,40 @@ Links:
 
 These stories are far in the future or just plain crazy.
 
+*** Model anonymizer and slicer                                       :story:
+
+A user may create a model which triggers a problem in dogen. For
+example it may cause it to abort code generation, or generate invalid
+code, etc. The user may not have the desire to spend time creating a
+small test model that reproduces the bug and they may not be able to
+send us the full model (or models, if there are references). One way
+in which we could make this use case simpler is to generate an
+anonymized version of the model.
+
+The anonymizer takes an intermediate model and maps every element to a
+generated name such as =object_0=, =object_1= and so forth. We should
+only do this for non-system types (non-proxy models).
+
+For extra bonus points, the anonymizer should use a hash of the
+element id such that an element always maps to the same anonymized
+element. Actually if we generalise this slightly: we could create a
+class that given a map of element ids (old to new), produces a new
+model by replacing those elements. This means if we give it first map
+A it will convert model a into a'. If we then give it A^-1, it will
+reverse the transformation converting a' back into a. Making it
+generic may have other uses such as renaming.
+
+In addition, the user may not want to send us an entire model. It is
+likely the problem is contained with one or a few elements. We could
+have an additional tool that takes a model and a set of element ids
+and generates a second model with just that element and all of its
+dependencies. For extra bonus points we should be able to give it a
+property id and only that property is preserved. It could also
+collapse all references of external models (non-proxy) into the same
+model.
+
+Users could run the slicer first and then the anonymizer.
+
 *** Consider moving the doc folder into its own branch                :story:
 
 At present we are generating builds whenever we update the docs
