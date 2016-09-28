@@ -40,6 +40,7 @@
 #include "dogen/quilt.cpp/types/annotations/aspect_annotations_repository.hpp"
 #include "dogen/quilt.cpp/types/annotations/streaming_annotations_repository.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
+#include "dogen/quilt.cpp/types/formattables/model.hpp"
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
 #include "dogen/quilt.cpp/types/formattables/locator.hpp"
 #include "dogen/quilt.cpp/types/formattables/path_derivatives_repository.hpp"
@@ -132,8 +133,7 @@ public:
         const yarn::model& m) const;
 
 public:
-    std::forward_list<formattable>
-    execute_new(const options::cpp_options& opts,
+    model execute_new(const options::cpp_options& opts,
         const dynamic::repository& drp, const dynamic::object& root_object,
         const dogen::formatters::decoration_configuration_factory& dcf,
         const formatters::container& fc, const yarn::model& m) const;

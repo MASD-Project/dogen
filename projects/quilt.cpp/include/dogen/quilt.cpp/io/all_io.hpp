@@ -28,6 +28,7 @@
 #include "dogen/quilt.cpp/io/fabric/registrar_io.hpp"
 #include "dogen/quilt.cpp/io/fabric/cmakelists_io.hpp"
 #include "dogen/quilt.cpp/io/fabric/odb_options_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/model_io.hpp"
 #include "dogen/quilt.cpp/io/fabric/master_header_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/formattable_io.hpp"
 #include "dogen/quilt.cpp/io/annotations/odb_annotations_io.hpp"

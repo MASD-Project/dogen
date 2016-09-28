@@ -18,28 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_STREAMING_ANNOTATIONS_EXPANDER_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_STREAMING_ANNOTATIONS_EXPANDER_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_MODEL_FWD_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_MODEL_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
-
-#include <string>
-#include <unordered_map>
-#include "dogen/dynamic/types/repository.hpp"
-#include "dogen/quilt.cpp/types/formattables/formattable.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
 
-class streaming_annotations_expander {
-public:
-    void expand(const dynamic::repository& drp,
-        std::unordered_map<std::string, formattable>& formattables) const;
-};
+class model;
 
 } } } }
 

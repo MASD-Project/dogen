@@ -18,15 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_PRE_REDUCTION_WORKFLOW_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_PRE_REDUCTION_WORKFLOW_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_FORMATTABLES_FACTORY_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_FORMATTABLES_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <list>
 #include <string>
-#include <forward_list>
 #include <unordered_map>
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/repository.hpp"
@@ -41,7 +41,7 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-class pre_reduction_workflow {
+class formattables_factory {
 public:
     std::unordered_map<std::string, formattable> initial_transform(
         const formatters::container& fc, const yarn::model& m) const;
@@ -78,15 +78,12 @@ public:
     void expand_opaque_configuration(const dynamic::repository& drp,
         std::unordered_map<std::string, formattable>& formattables) const;
 
-    void expand_streaming_annotations(const dynamic::repository& drp,
-        std::unordered_map<std::string, formattable>& formattables) const;
-
-    std::forward_list<formattable> final_transform(
+    std::list<formattable> final_transform(
         const std::unordered_map<std::string, formattable>& formattables) const;
 
 public:
-    std::forward_list<formattable>
-    execute(const dynamic::repository& drp, const dynamic::object& root_object,
+    std::list<formattable>
+    make(const dynamic::repository& drp, const dynamic::object& root_object,
         const dogen::formatters::decoration_configuration_factory& dcf,
         const formatters::container& fc, const locator& l,
         const yarn::model& m) const;

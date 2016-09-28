@@ -92,17 +92,16 @@ transform(const formatters::container& fc, const yarn::model& m) const {
     return r;
 }
 
-std::forward_list<formattable> transformer::transform(
+std::list<formattable> transformer::transform(
     const std::unordered_map<std::string, formattable>& formattables) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming formattables to list. Size: "
                              << formattables.size();
-    std::forward_list<formattable> r;
+    std::list<formattable> r;
     for (const auto& pair : formattables)
         r.push_front(pair.second);
 
-    const auto size(std::distance(r.begin(), r.end()));
     BOOST_LOG_SEV(lg, debug) << "Finished transforming yarn to formattables."
-                             << " Size: " << size;
+                             << " Size: " << r.size();
     return r;
 }
 

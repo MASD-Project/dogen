@@ -27,28 +27,27 @@
 #include "dogen/quilt.cpp/types/formattables/reducer.hpp"
 #include "dogen/quilt.cpp/types/formattables/file_path_and_guard_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/opaque_configuration_expander.hpp"
-#include "dogen/quilt.cpp/types/formattables/streaming_annotations_expander.hpp"
-#include "dogen/quilt.cpp/types/formattables/pre_reduction_workflow.hpp"
+#include "dogen/quilt.cpp/types/formattables/formattables_factory.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
 
-std::unordered_map<std::string, formattable> pre_reduction_workflow::
+std::unordered_map<std::string, formattable> formattables_factory::
 initial_transform(const formatters::container& fc, const yarn::model& m) const {
     transformer t;
     return t.transform(fc, m);
 }
 
-void pre_reduction_workflow::expand_enablement(const dynamic::repository& drp,
+void formattables_factory::expand_enablement(const dynamic::repository& drp,
     const dynamic::object& root_object, const formatters::container& fc,
     std::unordered_map<std::string, formattable>& formattables) const {
     enablement_expander ex;
     ex.expand(drp, root_object, fc, formattables);
 }
 
-void pre_reduction_workflow::expand_inclusion(
+void formattables_factory::expand_inclusion(
     const dynamic::repository& drp, const formatters::container& fc,
     const locator& l,
     std::unordered_map<std::string, formattable>& formattables) const {
@@ -57,61 +56,54 @@ void pre_reduction_workflow::expand_inclusion(
     ex.expand(drp, fc, l, formattables);
 }
 
-void pre_reduction_workflow::expand_decoration(
+void formattables_factory::expand_decoration(
     const dogen::formatters::decoration_configuration_factory& dcf,
     std::unordered_map<std::string, formattable>& formattables) const {
     decoration_expander ex;
     ex.expand(dcf, formattables);
 }
 
-void pre_reduction_workflow::expand_aspects(const dynamic::repository& drp,
+void formattables_factory::expand_aspects(const dynamic::repository& drp,
     std::unordered_map<std::string, formattable>& formattables) const {
     aspect_expander ex;
     ex.expand(drp, formattables);
 }
 
-void pre_reduction_workflow::expand_helpers(const dynamic::repository& drp,
+void formattables_factory::expand_helpers(const dynamic::repository& drp,
     const formatters::container& fc,
     std::unordered_map<std::string, formattable>& formattables) const {
     helper_expander ex;
     ex.expand(drp, fc, formattables);
 }
 
-std::unordered_map<std::string, formattable> pre_reduction_workflow::reduce(
+std::unordered_map<std::string, formattable> formattables_factory::reduce(
     std::unordered_map<std::string, formattable>& formattables) const {
     reducer rd;
     return rd.reduce(formattables);
 }
 
-void pre_reduction_workflow::expand_file_paths_and_guards(
+void formattables_factory::expand_file_paths_and_guards(
     const formatters::container& fc, const locator& l,
     formattables_by_id_type& formattables) const {
     file_path_and_guard_expander ex;
     ex.expand(fc, l, formattables);
 }
 
-void pre_reduction_workflow::
+void formattables_factory::
 expand_opaque_configuration(const dynamic::repository& drp,
     std::unordered_map<std::string, formattable>& formattables) const {
     opaque_configuration_expander ex;
     ex.expand(drp, formattables);
 }
 
-void pre_reduction_workflow::
-expand_streaming_annotations(const dynamic::repository& drp,
-    std::unordered_map<std::string, formattable>& formattables) const {
-    streaming_annotations_expander ex;
-    ex.expand(drp, formattables);
-}
-
-std::forward_list<formattable> pre_reduction_workflow::final_transform(
+std::list<formattable> formattables_factory::final_transform(
     const std::unordered_map<std::string, formattable>& formattables) const {
     transformer t;
     return t.transform(formattables);
 }
 
-std::forward_list<formattable> pre_reduction_workflow::
-execute(const dynamic::repository& drp, const dynamic::object& root_object,
+std::list<formattable> formattables_factory::make(
+    const dynamic::repository& drp, const dynamic::object& root_object,
     const dogen::formatters::decoration_configuration_factory& dcf,
     const formatters::container& fc, const locator& l,
     const yarn::model& m) const {
@@ -127,7 +119,6 @@ execute(const dynamic::repository& drp, const dynamic::object& root_object,
 
     expand_file_paths_and_guards(fc, l, formattables);
     expand_opaque_configuration(drp, formattables);
-    expand_streaming_annotations(drp, formattables);
 
     const auto r(final_transform(formattables));
     return r;

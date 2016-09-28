@@ -18,20 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_PRE_REDUCTION_WORKFLOW_FWD_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_PRE_REDUCTION_WORKFLOW_FWD_HPP
+#ifndef DOGEN_QUILT_CPP_HASH_FORMATTABLES_MODEL_HASH_HPP
+#define DOGEN_QUILT_CPP_HASH_FORMATTABLES_MODEL_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
+
+#include <functional>
+#include "dogen/quilt.cpp/types/formattables/model.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
 
-class pre_reduction_workflow;
+struct model_hasher {
+public:
+    static std::size_t hash(const model& v);
+};
 
 } } } }
 
+namespace std {
+
+template<>
+struct hash<dogen::quilt::cpp::formattables::model> {
+public:
+    size_t operator()(const dogen::quilt::cpp::formattables::model& v) const {
+        return dogen::quilt::cpp::formattables::model_hasher::hash(v);
+    }
+};
+
+}
 #endif

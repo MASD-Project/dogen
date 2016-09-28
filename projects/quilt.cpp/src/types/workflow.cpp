@@ -117,7 +117,7 @@ void workflow::test_new_formattables_workflow(const options::cpp_options& opts,
     const formattables::element_properties_repository& legacy) const {
 
     formattables::workflow fw;
-    const auto formattables(fw.execute_new(opts, rp, root_object, dcf, fc, m));
+    const auto fm(fw.execute_new(opts, rp, root_object, dcf, fc, m));
 
     /* check no longer works due to reduction.
 
@@ -131,7 +131,7 @@ void workflow::test_new_formattables_workflow(const options::cpp_options& opts,
     }
     */
 
-    for (const auto& formattable: formattables) {
+    for (const auto& formattable: fm.formattables()) {
         for (const auto& segment : formattable.element_segments()) {
             const auto& e(*segment);
             const auto& id(e.name().id());

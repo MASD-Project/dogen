@@ -31,7 +31,6 @@
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include "dogen/formatters/types/decoration_configuration.hpp"
-#include "dogen/quilt.cpp/types/annotations/streaming_annotations.hpp"
 #include "dogen/quilt.cpp/types/formattables/aspect_configuration.hpp"
 #include "dogen/quilt.cpp/types/formattables/helper_configuration.hpp"
 #include "dogen/quilt.cpp/types/formattables/formatter_configuration.hpp"
@@ -59,8 +58,7 @@ public:
         const boost::optional<dogen::formatters::decoration_configuration>& decoration_configuration,
         const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration>& formatter_configuration,
         const std::list<dogen::quilt::cpp::formattables::helper_configuration>& helper_configuration,
-        const dogen::quilt::cpp::formattables::aspect_configuration& aspect_configuration,
-        const boost::optional<dogen::quilt::cpp::annotations::streaming_annotations>& streaming_annotations);
+        const dogen::quilt::cpp::formattables::aspect_configuration& aspect_configuration);
 
 private:
     template<typename Archive>
@@ -90,11 +88,6 @@ public:
     void aspect_configuration(const dogen::quilt::cpp::formattables::aspect_configuration& v);
     void aspect_configuration(const dogen::quilt::cpp::formattables::aspect_configuration&& v);
 
-    const boost::optional<dogen::quilt::cpp::annotations::streaming_annotations>& streaming_annotations() const;
-    boost::optional<dogen::quilt::cpp::annotations::streaming_annotations>& streaming_annotations();
-    void streaming_annotations(const boost::optional<dogen::quilt::cpp::annotations::streaming_annotations>& v);
-    void streaming_annotations(const boost::optional<dogen::quilt::cpp::annotations::streaming_annotations>&& v);
-
 public:
     bool operator==(const element_configuration& rhs) const;
     bool operator!=(const element_configuration& rhs) const {
@@ -110,7 +103,6 @@ private:
     std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration> formatter_configuration_;
     std::list<dogen::quilt::cpp::formattables::helper_configuration> helper_configuration_;
     dogen::quilt::cpp::formattables::aspect_configuration aspect_configuration_;
-    boost::optional<dogen::quilt::cpp::annotations::streaming_annotations> streaming_annotations_;
 };
 
 } } } }

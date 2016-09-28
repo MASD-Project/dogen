@@ -19,16 +19,14 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn/types/element.hpp"
-#include "dogen/yarn/types/object.hpp"
+#include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/quilt.cpp/types/annotations/streaming_annotations_factory.hpp"
-#include "dogen/quilt.cpp/types/formattables/streaming_annotations_expander.hpp"
+#include "dogen/quilt.cpp/types/formattables/model_factory.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory(
-        "quilt.cpp.formattables.streaming_annotations_expander"));
+static logger lg(logger_factory("quilt.cpp.formattables.model_factory"));
 
 }
 
@@ -37,16 +35,29 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-void streaming_annotations_expander::expand(const dynamic::repository& drp,
-    std::unordered_map<std::string, formattable>& formattables) const {
+std::unordered_map<std::string, std::string> model_factory::
+facet_directory_for_facet(const std::unordered_map<std::string,
+    annotations::path_annotations>& pa, const formatters::container& fc) const {
+
+    std::unordered_map<std::string, std::string> r;
+    for (const auto& f : fc.file_formatters()) {
+        const auto i(pa.find(f->ownership_hierarchy().formatter_name()));
+        if ( i != pa.end()) {
+            const auto fn(f->ownership_hierarchy().facet_name());
+            r[fn] = i->second.facet_directory();
+        }
+    }
+    BOOST_LOG_SEV(lg, debug) << "Facet directory for facet: " << r;
+    return r;
+}
+
+std::unordered_map<std::string, annotations::streaming_annotations>
+model_factory::make_streaming_annotations(const dynamic::repository& drp,
+    const std::list<formattable>& formattables) const {
 
     annotations::streaming_annotations_factory f(drp);
-    for (auto& pair : formattables) {
-        const auto id(pair.first);
-        BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
-
-        auto& formattable(pair.second);
-        auto& cfg(formattable.configuration());
+    std::unordered_map<std::string, annotations::streaming_annotations> r;
+    for (const auto& formattable : formattables) {
         for (const auto& segment : formattable.element_segments()) {
             /*
              * We only want to process the master segment; the
@@ -64,9 +75,27 @@ void streaming_annotations_expander::expand(const dynamic::repository& drp,
                 continue;
 
             const auto& e(*ptr);
-            cfg.streaming_annotations(f.make(e.extensions()));
+            const auto ss(f.make(e.extensions()));
+            if (!ss)
+                continue;
+
+            r[e.name().id()] = *ss;
         }
     }
+    return r;
+}
+
+model model_factory::make(const dynamic::repository& drp,
+    const std::unordered_map< std::string, annotations::path_annotations>& pa,
+    const formatters::container& fc,
+    const std::list<formattable>& formattables) const {
+
+    model r;
+    r.formattables(formattables);
+    r.streaming_annotations(make_streaming_annotations(drp, formattables));
+    r.facet_directory_for_facet(facet_directory_for_facet(pa, fc));
+
+    return r;
 }
 
 } } } }

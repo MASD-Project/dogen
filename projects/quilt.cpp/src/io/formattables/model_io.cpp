@@ -20,26 +20,9 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/formatters/io/decoration_configuration_io.hpp"
-#include "dogen/quilt.cpp/io/formattables/aspect_configuration_io.hpp"
-#include "dogen/quilt.cpp/io/formattables/helper_configuration_io.hpp"
-#include "dogen/quilt.cpp/io/formattables/element_configuration_io.hpp"
-#include "dogen/quilt.cpp/io/formattables/formatter_configuration_io.hpp"
-
-namespace boost {
-
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::formatters::decoration_configuration>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<empty>\"";
-    s << " }";
-    return s;
-}
-
-}
+#include "dogen/quilt.cpp/io/formattables/model_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/formattable_io.hpp"
+#include "dogen/quilt.cpp/io/annotations/streaming_annotations_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -50,7 +33,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::quilt::cpp::annotations::streaming_annotations>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -68,7 +51,25 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::quilt::cpp::formattables::helper_configuration>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::string>& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->second) << "\"";
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::quilt::cpp::formattables::formattable>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -85,13 +86,12 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-std::ostream& operator<<(std::ostream& s, const element_configuration& v) {
+std::ostream& operator<<(std::ostream& s, const model& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::element_configuration\"" << ", "
-      << "\"decoration_configuration\": " << v.decoration_configuration() << ", "
-      << "\"formatter_configuration\": " << v.formatter_configuration() << ", "
-      << "\"helper_configuration\": " << v.helper_configuration() << ", "
-      << "\"aspect_configuration\": " << v.aspect_configuration()
+      << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::model\"" << ", "
+      << "\"streaming_annotations\": " << v.streaming_annotations() << ", "
+      << "\"facet_directory_for_facet\": " << v.facet_directory_for_facet() << ", "
+      << "\"formattables\": " << v.formattables()
       << " }";
     return(s);
 }

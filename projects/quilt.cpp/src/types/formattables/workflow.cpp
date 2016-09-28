@@ -32,7 +32,8 @@
 #include "dogen/quilt.cpp/types/formattables/path_derivatives_repository_factory.hpp"
 #include "dogen/quilt.cpp/types/formattables/element_properties_repository_factory.hpp"
 #include "dogen/quilt.cpp/types/formattables/formatter_properties_repository_factory.hpp"
-#include "dogen/quilt.cpp/types/formattables/pre_reduction_workflow.hpp"
+#include "dogen/quilt.cpp/types/formattables/model_factory.hpp"
+#include "dogen/quilt.cpp/types/formattables/formattables_factory.hpp"
 #include "dogen/quilt.cpp/types/formattables/workflow.hpp"
 
 namespace {
@@ -148,17 +149,21 @@ execute(const options::cpp_options& opts,
     return eprp;
 }
 
-std::forward_list<formattable> workflow::
-execute_new(const options::cpp_options& opts, const dynamic::repository& drp,
-    const dynamic::object& root_object,
+model workflow::execute_new(const options::cpp_options& opts,
+    const dynamic::repository& drp, const dynamic::object& root_object,
     const dogen::formatters::decoration_configuration_factory& dcf,
     const formatters::container& fc,
     const yarn::model& m) const {
 
-    const auto ps(create_path_annotations(drp, root_object, fc));
-    const locator l(opts, m, ps);
-    pre_reduction_workflow pre_wk;
-    const auto r(pre_wk.execute(drp, root_object, dcf, fc, l, m));
+    const auto pa(create_path_annotations(drp, root_object, fc));
+    const locator l(opts, m, pa);
+
+    formattables_factory ff;
+    const auto formattables(ff.make(drp, root_object, dcf, fc, l, m));
+
+    model_factory mf;
+    const auto r(mf.make(drp, pa, fc, formattables));
+
     return r;
 }
 

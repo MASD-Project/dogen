@@ -13,33 +13,33 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-27 Tue 21:51]
+#+CAPTION: Clock summary at [2016-09-28 Wed 09:31]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *15:14* |       |      | 100.0 |
+| *Total time*                                                                | *16:15* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 15:14   |       |      | 100.0 |
-| Active                                                                      |         | 15:14 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:49 |   5.4 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:07 |   0.8 |
-| COMPLETED Generation of formattable is incorrect                            |         |       | 2:30 |  16.4 |
-| COMPLETED Visitor includes are incorrect                                    |         |       | 0:20 |   2.2 |
-| COMPLETED Add includer to quilt.cpp                                         |         |       | 1:46 |  11.6 |
-| COMPLETED Add reducer to quilt.cpp                                          |         |       | 0:22 |   2.4 |
-| COMPLETED Add new index to formtter container                               |         |       | 0:19 |   2.1 |
-| COMPLETED Add path expander to quilt.cpp                                    |         |       | 0:49 |   5.4 |
-| COMPLETED Add guard expander to quilt.cpp                                   |         |       | 0:27 |   3.0 |
-| COMPLETED Investigate borked travis build                                   |         |       | 0:37 |   4.0 |
-| COMPLETED Add decoration expander to quilt.cpp                              |         |       | 0:23 |   2.5 |
-| COMPLETED Add aspect expander to quilt.cpp                                  |         |       | 1:26 |   9.4 |
-| COMPLETED Run tests that are passing on windows                             |         |       | 0:10 |   1.1 |
-| COMPLETED Add helper expander to quilt.cpp                                  |         |       | 1:26 |   9.4 |
-| COMPLETED Merge pre and post workflows                                      |         |       | 0:16 |   1.8 |
-| COMPLETED Fix bug in aspect and helper generation                           |         |       | 0:15 |   1.6 |
-| COMPLETED Investigate element annotation support                            |         |       | 2:05 |  13.7 |
-| STARTED Add streaming settings expander                                     |         |       | 0:36 |   3.9 |
-| STARTED Create the formattables model                                       |         |       | 0:31 |   3.4 |
+| Stories                                                                     | 16:15   |       |      | 100.0 |
+| Active                                                                      |         | 16:15 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:49 |   5.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:07 |   0.7 |
+| COMPLETED Generation of formattable is incorrect                            |         |       | 2:30 |  15.4 |
+| COMPLETED Visitor includes are incorrect                                    |         |       | 0:20 |   2.1 |
+| COMPLETED Add includer to quilt.cpp                                         |         |       | 1:46 |  10.9 |
+| COMPLETED Add reducer to quilt.cpp                                          |         |       | 0:22 |   2.3 |
+| COMPLETED Add new index to formtter container                               |         |       | 0:19 |   1.9 |
+| COMPLETED Add path expander to quilt.cpp                                    |         |       | 0:49 |   5.0 |
+| COMPLETED Add guard expander to quilt.cpp                                   |         |       | 0:27 |   2.8 |
+| COMPLETED Investigate borked travis build                                   |         |       | 0:37 |   3.8 |
+| COMPLETED Add decoration expander to quilt.cpp                              |         |       | 0:23 |   2.4 |
+| COMPLETED Add aspect expander to quilt.cpp                                  |         |       | 1:26 |   8.8 |
+| COMPLETED Run tests that are passing on windows                             |         |       | 0:10 |   1.0 |
+| COMPLETED Add helper expander to quilt.cpp                                  |         |       | 1:26 |   8.8 |
+| COMPLETED Merge pre and post workflows                                      |         |       | 0:16 |   1.6 |
+| COMPLETED Fix bug in aspect and helper generation                           |         |       | 0:15 |   1.5 |
+| COMPLETED Investigate element annotation support                            |         |       | 2:05 |  12.8 |
+| STARTED Add streaming settings expander                                     |         |       | 0:36 |   3.7 |
+| STARTED Create the formattables model                                       |         |       | 1:32 |   9.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -456,6 +456,7 @@ Actually we need to revert this change as these settings need to be
 across the whole model.
 
 *** STARTED Create the formattables model                             :story:
+    CLOCK: [2016-09-28 Wed 08:30]--[2016-09-28 Wed 09:31] =>  1:01
     CLOCK: [2016-09-27 Tue 21:43]--[2016-09-27 Tue 21:50] =>  0:07
     CLOCK: [2016-09-27 Tue 21:18]--[2016-09-27 Tue 21:42] =>  0:24
 

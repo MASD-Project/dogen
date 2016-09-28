@@ -18,42 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_TRANSFORMER_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_TRANSFORMER_HPP
+#ifndef DOGEN_QUILT_CPP_TEST_DATA_FORMATTABLES_MODEL_TD_HPP
+#define DOGEN_QUILT_CPP_TEST_DATA_FORMATTABLES_MODEL_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <list>
-#include <string>
-#include <unordered_map>
-#include "dogen/yarn/types/model.hpp"
-#include "dogen/quilt.cpp/types/formatters/container.hpp"
-#include "dogen/quilt.cpp/types/formattables/formattable.hpp"
+#include "dogen/quilt.cpp/types/formattables/model.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
 
-/**
- * @brief Provides a number of useful transformations in the
- * formattables space.
- */
-class transformer {
+class model_generator {
 public:
-    /**
-     * @brief Given a yarn model, produces the corresponding formattables.
-     */
-    std::unordered_map<std::string, formattable>
-    transform(const formatters::container& fc, const yarn::model& m) const;
+    model_generator();
 
-    /**
-     * @brief Given a map of formattables, flattens it into a list.
-     */
-    std::list<formattable> transform(
-        const std::unordered_map<std::string, formattable>& formattables) const;
+public:
+    typedef dogen::quilt::cpp::formattables::model result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
 };
 
 } } } }

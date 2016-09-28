@@ -18,11 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/hash/decoration_configuration_hash.hpp"
-#include "dogen/quilt.cpp/hash/formattables/aspect_configuration_hash.hpp"
-#include "dogen/quilt.cpp/hash/formattables/helper_configuration_hash.hpp"
-#include "dogen/quilt.cpp/hash/formattables/element_configuration_hash.hpp"
-#include "dogen/quilt.cpp/hash/formattables/formatter_configuration_hash.hpp"
+#include "dogen/quilt.cpp/hash/formattables/model_hash.hpp"
+#include "dogen/quilt.cpp/hash/formattables/formattable_hash.hpp"
+#include "dogen/quilt.cpp/hash/annotations/streaming_annotations_hash.hpp"
 
 namespace {
 
@@ -32,17 +30,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_boost_optional_dogen_formatters_decoration_configuration(const boost::optional<dogen::formatters::decoration_configuration>& v) {
-    std::size_t seed(0);
-
-    if (!v)
-        return seed;
-
-    combine(seed, *v);
-    return seed;
-}
-
-inline std::size_t hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formatter_configuration(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration>& v) {
+inline std::size_t hash_std_unordered_map_std_string_dogen_quilt_cpp_annotations_streaming_annotations(const std::unordered_map<std::string, dogen::quilt::cpp::annotations::streaming_annotations>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -51,7 +39,16 @@ inline std::size_t hash_std_unordered_map_std_string_dogen_quilt_cpp_formattable
     return seed;
 }
 
-inline std::size_t hash_std_list_dogen_quilt_cpp_formattables_helper_configuration(const std::list<dogen::quilt::cpp::formattables::helper_configuration>& v) {
+inline std::size_t hash_std_unordered_map_std_string_std_string(const std::unordered_map<std::string, std::string>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, i.second);
+    }
+    return seed;
+}
+
+inline std::size_t hash_std_list_dogen_quilt_cpp_formattables_formattable(const std::list<dogen::quilt::cpp::formattables::formattable>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -66,13 +63,12 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-std::size_t element_configuration_hasher::hash(const element_configuration& v) {
+std::size_t model_hasher::hash(const model& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_boost_optional_dogen_formatters_decoration_configuration(v.decoration_configuration()));
-    combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formatter_configuration(v.formatter_configuration()));
-    combine(seed, hash_std_list_dogen_quilt_cpp_formattables_helper_configuration(v.helper_configuration()));
-    combine(seed, v.aspect_configuration());
+    combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_annotations_streaming_annotations(v.streaming_annotations()));
+    combine(seed, hash_std_unordered_map_std_string_std_string(v.facet_directory_for_facet()));
+    combine(seed, hash_std_list_dogen_quilt_cpp_formattables_formattable(v.formattables()));
 
     return seed;
 }
