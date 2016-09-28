@@ -22,11 +22,9 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
-#include "dogen/yarn/types/element_visitor.hpp"
 #include "dogen/quilt.cpp/types/workflow_error.hpp"
 #include "dogen/quilt.cpp/io/formattables/formatter_configuration_io.hpp"
 #include "dogen/quilt.cpp/types/formatters/context.hpp"
-#include "dogen/quilt.cpp/types/formatters/element_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/workflow.hpp"
 
 namespace {
@@ -116,7 +114,7 @@ workflow::format(const formattables::model& fm, const yarn::element& e,
 }
 
 std::forward_list<dogen::formatters::file>
-workflow::execute_new(const formattables::model& fm) const {
+workflow::execute(const formattables::model& fm) const {
     std::forward_list<dogen::formatters::file> r;
     for (const auto& formattable : fm.formattables()) {
         const auto& fmt_cfg(formattable.configuration());
@@ -125,30 +123,6 @@ workflow::execute_new(const formattables::model& fm) const {
             r.splice_after(r.before_begin(), format(fm, e, fmt_cfg));
         }
     }
-    return r;
-}
-
-std::forward_list<dogen::formatters::file>
-workflow::execute(const annotations::streaming_annotations_repository& ssrp,
-    const formattables::element_properties_repository& eprp,
-    const std::forward_list<
-    boost::shared_ptr<yarn::element> >& elements) const {
-
-    BOOST_LOG_SEV(lg, info) << "Starting workflow.";
-
-    std::forward_list<dogen::formatters::file> r;
-    context_factory factory(ssrp, eprp, registrar().formatter_helpers());
-    element_formatter ef(factory, registrar().formatter_container());
-    for (const auto e : elements) {
-        BOOST_LOG_SEV(lg, debug) << "Processing element: " << e->name().id();
-        r.splice_after(r.before_begin(), ef.format(*e));
-    }
-
-    BOOST_LOG_SEV(lg, debug) << "Files generated: ";
-    for (const auto& file : r)
-        BOOST_LOG_SEV(lg, debug) << "Name: " << file.path().generic_string();
-
-    BOOST_LOG_SEV(lg, info) << "Finished workflow.";
     return r;
 }
 

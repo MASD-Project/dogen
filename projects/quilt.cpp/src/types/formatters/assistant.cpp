@@ -31,7 +31,6 @@
 #include "dogen/quilt.cpp/io/annotations/streaming_annotations_io.hpp"
 #include "dogen/quilt.cpp/io/annotations/helper_annotations_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/helper_configuration_io.hpp"
-#include "dogen/quilt.cpp/types/formattables/name_builder.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/odb/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/traits.hpp"
@@ -179,8 +178,28 @@ make_getter_setter_name(const yarn::attribute& attr) const {
 }
 
 std::list<std::string> assistant::make_namespaces(const yarn::name& n) const {
-    formattables::name_builder b;
-    return b.namespace_list(n);
+    const auto& l(n.location());
+    std::list<std::string> r(l.external_modules());
+
+    for (const auto& m : l.model_modules())
+        r.push_back(m);
+
+    for (const auto& m : l.internal_modules())
+        r.push_back(m);
+
+    /* if the name belongs to the model's module, we need to remove the
+     * module's simple name from the module path (it is in both the
+     * module path and it is also the module's simple name).
+     */
+    const bool no_internal_modules(l.internal_modules().empty());
+    const bool has_model_modules(!l.model_modules().empty());
+    const bool is_model_name(no_internal_modules && has_model_modules &&
+        n.simple() == l.model_modules().back());
+
+    if (is_model_name)
+        r.pop_back();
+
+    return r;
 }
 
 bool assistant::

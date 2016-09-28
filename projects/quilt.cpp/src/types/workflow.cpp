@@ -79,94 +79,6 @@ create_opaque_annotations_builder(const dynamic::repository& drp) const {
     return r;
 }
 
-annotations::streaming_annotations_repository workflow::
-create_streaming_annotations_repository(const dynamic::repository& drp,
-    const yarn::model& m) const {
-    annotations::streaming_annotations_repository_factory f;
-    return f.make(drp, m);
-}
-
-annotations::element_annotations_repository
-workflow::create_element_annotations_repository(
-    const annotations::opaque_annotations_builder& osb,
-    const yarn::model& m) const {
-    annotations::element_annotations_repository_factory f;
-    return f.make(osb, m);
-}
-
-formattables::element_properties_repository workflow::create_properties(
-    const options::cpp_options& opts,
-    const dynamic::repository& drp,
-    const dynamic::object& root_object,
-    const dogen::formatters::decoration_configuration_factory& dcf,
-    const formatters::container& fc,
-    const annotations::streaming_annotations_repository& ssrp,
-    const annotations::element_annotations_repository& esrp,
-    const yarn::model& m) const {
-
-    formattables::workflow fw;
-    auto r(fw.execute(opts, drp, root_object, dcf, fc, ssrp, m));
-
-    for (const auto& pair : esrp.by_id()) {
-        const auto i(r.by_id().find(pair.first));
-        if (i != r.by_id().end()) {
-            auto& fmt_cfgs(i->second.formatter_configuration());
-            const auto& ea(pair.second);
-            for (const auto& pair : ea.opaque_annotations()) {
-                BOOST_LOG_SEV(lg, debug) << "Found opaque annotation.";
-
-                const auto fmtn(pair.first);
-                const auto k(fmt_cfgs.find(fmtn));
-                if (k != fmt_cfgs.end()) {
-                    BOOST_LOG_SEV(lg, debug) << "Found fmt: " << fmtn;
-                    k->second.opaque_configuration().top_level(pair.second);
-                } else
-                    BOOST_LOG_SEV(lg, debug) << "Did not find fmt: " << fmtn;
-            }
-
-            for (const auto& pair : ea.opaque_annotations_for_property()) {
-                BOOST_LOG_SEV(lg, debug) << "Found opaque annotation for prop.";
-                const auto propid(pair.first);
-                for (const auto& pair2 : pair.second) {
-                    const auto fmtn(pair2.first);
-                    const auto k(fmt_cfgs.find(fmtn));
-                    if (k != fmt_cfgs.end()) {
-                        BOOST_LOG_SEV(lg, debug) << "Found fmt (prop): "
-                                                 << fmtn;
-
-                        k->second.opaque_configuration().property_level()
-                            [propid] = pair2.second;
-                    } else {
-                        BOOST_LOG_SEV(lg, debug) << "Did not find fmt (prop): "
-                                                 << fmtn << " prop: " << propid;
-                    }
-                }
-            }
-        }
-    }
-    return r;
-}
-
-std::forward_list<boost::shared_ptr<yarn::element> >
-workflow::extract_generatable_elements(const yarn::model& m) const {
-    std::forward_list<boost::shared_ptr<yarn::element> > r;
-
-    for (const auto& e : m.elements()) {
-        if (e->generation_type() != yarn::generation_types::no_generation)
-            r.push_front(e);
-    }
-    return r;
-}
-
-std::forward_list<dogen::formatters::file> workflow::
-format(const annotations::streaming_annotations_repository& ssrp,
-    const formattables::element_properties_repository& eprp,
-    const std::forward_list<
-    boost::shared_ptr<yarn::element> >& elements) const {
-    formatters::workflow wf;
-    return wf.execute(ssrp, eprp, elements);
-}
-
 std::string workflow::name() const {
     return ::id;
 }
@@ -204,23 +116,11 @@ workflow::generate(const options::knitting_options& ko,
     const auto dcf(create_decoration_configuration_factory(drp, frp, ro));
     const auto& fc(formatters::workflow::registrar().formatter_container());
 
-    // const auto osb(create_opaque_annotations_builder(drp));
-    // auto esrp(create_element_annotations_repository(osb, m));
-    // auto ssrp(create_streaming_annotations_repository(drp, m));
-
-    // formatters::workflow::registrar().validate();
-
-    // const auto& cpp(ko.cpp());
-    // const auto eprp(create_properties(cpp, drp, ro, dcf, fc, ssrp, esrp, m));
-
-    // const auto elements(extract_generatable_elements(m));
-    // auto r(format(ssrp, eprp, elements));
-
     formattables::workflow fw;
-    const auto fm(fw.execute_new(ko.cpp(), drp, ro, dcf, fc, m));
+    const auto fm(fw.execute(ko.cpp(), drp, ro, dcf, fc, m));
 
     formatters::workflow wf;
-    const auto r(wf.execute_new(fm));
+    const auto r(wf.execute(fm));
 
     BOOST_LOG_SEV(lg, debug) << "Finished C++ backend.";
     return r;

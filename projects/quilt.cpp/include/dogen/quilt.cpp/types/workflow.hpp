@@ -38,9 +38,6 @@
 #include "dogen/quilt/types/backend_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/annotations/opaque_annotations_builder.hpp"
-#include "dogen/quilt.cpp/types/annotations/streaming_annotations_repository.hpp"
-#include "dogen/quilt.cpp/types/annotations/element_annotations_repository.hpp"
-#include "dogen/quilt.cpp/types/formattables/element_properties_repository.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -79,49 +76,6 @@ private:
      */
     annotations::opaque_annotations_builder
     create_opaque_annotations_builder(const dynamic::repository& rp) const;
-
-    /**
-     * @brief Create the streaming annotations repository.
-     */
-    annotations::streaming_annotations_repository
-        create_streaming_annotations_repository(const dynamic::repository& drp,
-            const yarn::model& m) const;
-
-    /**
-     * @brief Create the element annotations repository
-     */
-    annotations::element_annotations_repository
-    create_element_annotations_repository(
-        const annotations::opaque_annotations_builder& osb,
-        const yarn::model& m) const;
-
-    /**
-     * @brief Create the properties.
-     */
-    formattables::element_properties_repository
-    create_properties(const options::cpp_options& opts,
-        const dynamic::repository& drp,
-        const dynamic::object& root_object,
-        const dogen::formatters::decoration_configuration_factory& dcf,
-        const formatters::container& fc,
-        const annotations::streaming_annotations_repository& ssrp,
-        const annotations::element_annotations_repository& esrp,
-        const yarn::model& m) const;
-
-    /**
-     * @brief Returns only the generatable elements.
-     */
-    std::forward_list<boost::shared_ptr<yarn::element> >
-    extract_generatable_elements(const yarn::model& m) const;
-
-    /**
-     * @brief Create the files.
-     */
-    std::forward_list<dogen::formatters::file>
-    format(const annotations::streaming_annotations_repository& ssrp,
-        const formattables::element_properties_repository& eprp,
-        const std::forward_list<
-        boost::shared_ptr<yarn::element> >& elements) const;
 
 public:
     std::string name() const override;

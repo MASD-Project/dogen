@@ -30,22 +30,14 @@
 #include <forward_list>
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/repository.hpp"
-#include "dogen/formatters/types/decoration_configuration_factory.hpp"
 #include "dogen/options/types/cpp_options.hpp"
+#include "dogen/formatters/types/decoration_configuration_factory.hpp"
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/quilt.cpp/types/annotations/path_annotations.hpp"
-#include "dogen/quilt.cpp/types/annotations/element_annotations_repository.hpp"
-#include "dogen/quilt.cpp/types/annotations/aspect_annotations_repository.hpp"
-#include "dogen/quilt.cpp/types/annotations/helper_annotations_repository.hpp"
-#include "dogen/quilt.cpp/types/annotations/aspect_annotations_repository.hpp"
-#include "dogen/quilt.cpp/types/annotations/streaming_annotations_repository.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/formattables/model.hpp"
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
 #include "dogen/quilt.cpp/types/formattables/locator.hpp"
-#include "dogen/quilt.cpp/types/formattables/path_derivatives_repository.hpp"
-#include "dogen/quilt.cpp/types/formattables/element_properties_repository.hpp"
-#include "dogen/quilt.cpp/types/formattables/formatter_properties_repository.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -66,79 +58,12 @@ private:
         const dynamic::object& root_object,
         const formatters::container& fc) const;
 
-    /**
-     * @brief Computes the facet directory name of each facet.
-     */
-    std::unordered_map<std::string, std::string>
-    facet_directory_for_facet(const formatters::container& fc,
-        const std::unordered_map<std::string,
-        annotations::path_annotations>& ps) const;
-
-    /**
-     * @brief Create the helper annotations repository.
-     */
-    annotations::helper_annotations_repository
-    create_helper_annotations_repository(
-        const dynamic::repository& drp, const yarn::model& m) const;
-
-    /**
-     * @brief Create the aspect annotations repository
-     */
-    annotations::aspect_annotations_repository
-    create_aspect_annotations_repository(const dynamic::repository& drp,
-        const yarn::model& m) const;
-
-    /**
-     * @brief Create the path derivatives repository.
-     */
-    path_derivatives_repository create_path_derivatives_repository(
-        const formatters::container& fc, const locator& l,
-        const yarn::model& m) const;
-
-    /**
-     * @brief Creates the formatter properties.
-     */
-    formatter_properties_repository
-    create_formatter_properties(const dynamic::repository& drp,
-        const dynamic::object& root_object,
-        const std::unordered_map<std::string, std::string>& fdff,
-        const path_derivatives_repository& pdrp,
-        const locator& l,
-        const formatters::container& fc,
-        const yarn::model& m) const;
-
-    /**
-     * @brief Creates the element properties.
-     */
-    element_properties_repository create_element_properties_repository(
-        const dogen::formatters::decoration_configuration_factory& dcf,
-        const annotations::helper_annotations_repository& hsrp,
-        const annotations::aspect_annotations_repository& asrp,
-        const annotations::streaming_annotations_repository& ssrp,
-        const formatters::container& fc,
-        const formatter_properties_repository& fprp,
-        const yarn::model& m) const;
-
-public:
-    /**
-     * @brief Executes the workflow.
-     */
-    element_properties_repository
-    execute(const options::cpp_options& opts,
-        const dynamic::repository& drp,
-        const dynamic::object& root_object,
-        const dogen::formatters::decoration_configuration_factory& dcf,
-        const formatters::container& fc,
-        const annotations::streaming_annotations_repository& ssrp,
-        const yarn::model& m) const;
-
-private:
     std::unordered_map<std::string, annotations::streaming_annotations>
     make_streaming_annotations(const dynamic::repository& drp,
         const yarn::model& m) const;
 
 public:
-    model execute_new(const options::cpp_options& opts,
+    model execute(const options::cpp_options& opts,
         const dynamic::repository& drp, const dynamic::object& root_object,
         const dogen::formatters::decoration_configuration_factory& dcf,
         const formatters::container& fc, const yarn::model& m) const;

@@ -36,8 +36,6 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-class factory_impl;
-
 /**
  * @brief Creates inclusion dependencies builders.
  *
@@ -52,11 +50,6 @@ class factory_impl;
  */
 class inclusion_dependencies_builder_factory final {
 public:
-    inclusion_dependencies_builder_factory(
-        const enablement_repository& erp,
-        const inclusion_directives_repository& idrp);
-
-public:
     inclusion_dependencies_builder_factory(const std::unordered_map<
         std::string,
         std::unordered_map<std::string, std::string>
@@ -70,7 +63,11 @@ public:
     inclusion_dependencies_builder make() const;
 
 private:
-    boost::shared_ptr<factory_impl> impl_;
+    const std::unordered_map<std::string,
+                             std::unordered_map<std::string, std::string>
+                             >& inclusion_directives_;
+    const std::unordered_map<std::string, formattable>& formattables_;
+    std::list<std::string> inclusion_dependencies_;
 };
 
 } } } }

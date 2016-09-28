@@ -32,12 +32,8 @@
 #include <boost/shared_ptr.hpp>
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/yarn/types/element.hpp"
-#include "dogen/quilt.cpp/types/annotations/streaming_annotations_repository.hpp"
-#include "dogen/quilt.cpp/types/annotations/element_annotations_repository.hpp"
-#include "dogen/quilt.cpp/types/formattables/element_properties_repository.hpp"
 #include "dogen/quilt.cpp/types/formattables/model.hpp"
 #include "dogen/quilt.cpp/types/formatters/registrar.hpp"
-#include "dogen/quilt.cpp/types/formatters/context_factory.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -62,18 +58,7 @@ private:
 
 public:
     std::forward_list<dogen::formatters::file>
-    execute_new(const formattables::model& fm) const;
-
-public:
-    /**
-     * @brief Converts the supplied entity into all supported
-     * representations.
-     */
-    std::forward_list<dogen::formatters::file>
-        execute(const annotations::streaming_annotations_repository& ssrp,
-        const formattables::element_properties_repository& eprp,
-        const std::forward_list<
-        boost::shared_ptr<yarn::element> >& elements) const;
+    execute(const formattables::model& fm) const;
 
 private:
     static std::shared_ptr<cpp::formatters::registrar> registrar_;
