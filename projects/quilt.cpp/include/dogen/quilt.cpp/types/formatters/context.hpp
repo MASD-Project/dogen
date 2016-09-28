@@ -30,7 +30,7 @@
 #include <algorithm>
 #include <unordered_map>
 #include "dogen/quilt.cpp/types/annotations/element_annotations.hpp"
-#include "dogen/quilt.cpp/types/annotations/streaming_annotations_repository.hpp"
+#include "dogen/quilt.cpp/types/annotations/streaming_annotations.hpp"
 #include "dogen/quilt.cpp/types/formattables/element_configuration.hpp"
 #include "dogen/quilt.cpp/types/formatters/helper_formatter_interface.hpp"
 
@@ -45,14 +45,16 @@ namespace formatters {
 class context final {
 public:
     context(
-        const annotations::streaming_annotations_repository& ssrp,
+        const std::unordered_map<std::string,
+        annotations::streaming_annotations>& sa,
         const formattables::element_configuration& element_configuration,
         const std::unordered_map<std::string, std::unordered_map<std::string,
         std::list<std::shared_ptr<helper_formatter_interface>>>>& helpers);
 
 public:
-    const annotations::streaming_annotations_repository&
-    streaming_annotations_repository() const;
+    const std::unordered_map<std::string, annotations::streaming_annotations>&
+    streaming_annotations() const;
+
     const formattables::element_configuration& element_configuration() const;
     const std::unordered_map<
         std::string,
@@ -62,8 +64,8 @@ public:
         helpers() const;
 
 private:
-    const annotations::streaming_annotations_repository&
-    streaming_annotations_repository_;
+    const std::unordered_map<std::string, annotations::streaming_annotations>&
+    streaming_annotations_;
     const formattables::element_configuration& element_configuration_;
     const std::unordered_map<
         std::string,

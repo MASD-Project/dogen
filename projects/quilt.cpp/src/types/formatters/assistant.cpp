@@ -485,9 +485,9 @@ std::string assistant::streaming_for_type(
 std::string assistant::streaming_for_type(const yarn::name& n,
     const std::string& s) const {
 
-    const auto ssbid(context_.streaming_annotations_repository().by_id());
-    const auto i(ssbid.find(n.id()));
-    if (i == ssbid.end())
+    const auto sa(context_.streaming_annotations());
+    const auto i(sa.find(n.id()));
+    if (i == sa.end())
         return s;
 
     return streaming_for_type(i->second, s);

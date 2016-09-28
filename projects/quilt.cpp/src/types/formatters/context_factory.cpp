@@ -79,14 +79,14 @@ element_properties_for_id(const std::string& n) const {
 }
 
 context context_factory::make_empty_context() const {
-    return context(empty_streaming_annotations_repository_,
+    return context(empty_streaming_annotations_repository_.by_id(),
         empty_element_configuration_, empty_helpers_);
 }
 
 context context_factory::make(const std::string& id) const {
     const auto& ep(element_properties_for_id(id));
     const auto& ssrp(streaming_annotations_repository_);
-    return context(ssrp, ep, formatter_helpers_);
+    return context(ssrp.by_id(), ep, formatter_helpers_);
 }
 
 } } } }

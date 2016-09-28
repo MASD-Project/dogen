@@ -26,17 +26,17 @@ namespace cpp {
 namespace formatters {
 
 context::context(
-    const annotations::streaming_annotations_repository& ssrp,
-    const formattables::element_configuration& element_configuration,
+    const std::unordered_map<std::string, annotations::streaming_annotations>&
+    sa, const formattables::element_configuration& element_configuration,
     const std::unordered_map<std::string, std::unordered_map<std::string,
     std::list<std::shared_ptr<helper_formatter_interface>>>>& helpers)
-    : streaming_annotations_repository_(ssrp),
+    : streaming_annotations_(sa),
       element_configuration_(element_configuration),
       helpers_(helpers) { }
 
-const annotations::streaming_annotations_repository& context::
-streaming_annotations_repository() const {
-    return streaming_annotations_repository_;
+const std::unordered_map<std::string, annotations::streaming_annotations>&
+context::streaming_annotations() const {
+    return streaming_annotations_;
 }
 
 const formattables::element_configuration&
