@@ -108,12 +108,6 @@ private:
         const annotations::element_annotations_repository& esrp,
         const yarn::model& m) const;
 
-    void test_new_formattables_workflow(const options::cpp_options& opts,
-        const dynamic::repository& rp, const dynamic::object& root_object,
-        const dogen::formatters::decoration_configuration_factory& dcf,
-        const formatters::container& fc, const yarn::model& m,
-        const formattables::element_properties_repository& legacy) const;
-
     /**
      * @brief Returns only the generatable elements.
      */

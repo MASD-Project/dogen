@@ -144,148 +144,7 @@ formattables::element_properties_repository workflow::create_properties(
             }
         }
     }
-
-    test_new_formattables_workflow(opts, drp, root_object, dcf, fc, m, r);
     return r;
-}
-
-void workflow::test_new_formattables_workflow(const options::cpp_options& opts,
-    const dynamic::repository& rp, const dynamic::object& root_object,
-    const dogen::formatters::decoration_configuration_factory& dcf,
-    const formatters::container& fc, const yarn::model& m,
-    const formattables::element_properties_repository& legacy) const {
-
-    formattables::workflow fw;
-    const auto fm(fw.execute_new(opts, rp, root_object, dcf, fc, m));
-
-    /* check no longer works due to reduction.
-
-    const auto fbl_sz(std::distance(formattables.begin(), formattables.end()));
-    if (std::size_t(fbl_sz) != legacy.by_id().size()) {
-        BOOST_LOG_SEV(lg, error) << "Main containers differ in size. Legacy: "
-                                 << legacy.by_id().size()
-                                 << " formattables: " << fbl_sz;
-        BOOST_THROW_EXCEPTION(
-            workflow_error("Containers have different sizes."));
-    }
-    */
-
-    for (const auto& formattable: fm.formattables()) {
-        for (const auto& segment : formattable.element_segments()) {
-            const auto& e(*segment);
-            const auto& id(e.name().id());
-            const auto i(legacy.by_id().find(id));
-            if (i == legacy.by_id().end()) {
-                BOOST_LOG_SEV(lg, error)
-                    << "Could not find element id in legacy: "
-                    << id;
-                BOOST_THROW_EXCEPTION(workflow_error(
-                        "Could not find element id in legacy: " + id));
-            }
-
-            const auto& legacy_fmt_cfgs(i->second.formatter_configuration());
-            const auto& elm_cfg(formattable.configuration());
-
-            if (elm_cfg.decoration_configuration() !=
-                i->second.decoration_configuration()) {
-                BOOST_LOG_SEV(lg, error) << "Incorrect decoration. id: " << id
-                                         << " Legacy: "
-                                         << i->second.decoration_configuration()
-                                         << " new: "
-                                         << elm_cfg.decoration_configuration();
-                BOOST_THROW_EXCEPTION(
-                    workflow_error("Decoration is incorreact."));
-
-            }
-
-            if (elm_cfg.helper_configuration() !=
-                i->second.helper_configuration()) {
-                BOOST_LOG_SEV(lg, error) << "Incorrect helper cfg. id: " << id
-                                         << " Legacy: "
-                                         << i->second.helper_configuration()
-                                         << " new: "
-                                         << elm_cfg.helper_configuration();
-                BOOST_THROW_EXCEPTION(
-                    workflow_error("Helper is incorreact."));
-            }
-
-            if (elm_cfg.aspect_configuration() !=
-                i->second.aspect_configuration()) {
-                BOOST_LOG_SEV(lg, error) << "Incorrect aspect config. id: "
-                                         << id << " Legacy: "
-                                         << i->second.aspect_configuration()
-                                         << " new: "
-                                         << elm_cfg.aspect_configuration();
-                BOOST_THROW_EXCEPTION(
-                    workflow_error("Aspect config is incorreact."));
-
-            }
-
-            const auto& fmt_cfgs(elm_cfg.formatter_configuration());
-            if (fmt_cfgs.size() > legacy_fmt_cfgs.size()) {
-                BOOST_LOG_SEV(lg, error) << "Incorrect size. Legacy: "
-                                         << legacy_fmt_cfgs.size()
-                                         << " formattables: "
-                                         << fmt_cfgs.size();
-                BOOST_THROW_EXCEPTION(
-                    workflow_error("New container has unexpected size."));
-            }
-
-            for (const auto& pair : fmt_cfgs) {
-                const auto fmtn(pair.first);
-                const auto k(legacy_fmt_cfgs.find(fmtn));
-                if (k == legacy_fmt_cfgs.end()) {
-                    BOOST_LOG_SEV(lg, error)
-                        << "Formatter not found in legacy: "
-                        << fmtn;
-                    BOOST_THROW_EXCEPTION(
-                        workflow_error("Missing formatter: " + fmtn));
-                }
-
-                if (pair.second.enabled() != k->second.enabled()) {
-                    BOOST_LOG_SEV(lg, error) << "Enablement is different. Id: "
-                                             << id << " formatter: " << fmtn
-                                             << " new: "
-                                             << pair.second.enabled()
-                                             << " legacy: "
-                                             << k->second.enabled();
-                    BOOST_THROW_EXCEPTION(
-                        workflow_error("Different enablement."));
-                }
-
-                if (pair.second.inclusion_dependencies() !=
-                    k->second.inclusion_dependencies()) {
-                    BOOST_LOG_SEV(lg, error) << "Dependencies are different. "
-                                             << "Id: " << id << " new: "
-                                             << pair.second.inclusion_dependencies()
-                                             << " old: "
-                                             << k->second.inclusion_dependencies();
-                    BOOST_THROW_EXCEPTION(
-                        workflow_error("Different inclusion."));
-                }
-
-                if (pair.second.file_path() != k->second.file_path()) {
-                    BOOST_LOG_SEV(lg, error) << "File path is different. "
-                                             << "Id: " << id << " new: "
-                                             << pair.second.file_path()
-                                             << " old: "
-                                             << k->second.file_path();
-                    BOOST_THROW_EXCEPTION(
-                        workflow_error("Different file paths."));
-                }
-
-                if (pair.second.header_guard() != k->second.header_guard()) {
-                    BOOST_LOG_SEV(lg, error) << "Header guard is different. "
-                                             << "Id: " << id << " new: "
-                                             << pair.second.header_guard()
-                                             << " old: "
-                                             << k->second.header_guard();
-                    BOOST_THROW_EXCEPTION(
-                        workflow_error("Different header guard."));
-                }
-            }
-        }
-    }
 }
 
 std::forward_list<boost::shared_ptr<yarn::element> >
@@ -356,6 +215,12 @@ workflow::generate(const options::knitting_options& ko,
 
     const auto elements(extract_generatable_elements(m));
     auto r(format(ssrp, eprp, elements));
+
+    // formattables::workflow fw;
+    // const auto fm(fw.execute_new(ko.cpp(), drp, ro, dcf, fc, m));
+
+    // formatters::workflow wf;
+    // const auto r(wf.execute_new(fm));
 
     BOOST_LOG_SEV(lg, debug) << "Finished C++ backend.";
     return r;

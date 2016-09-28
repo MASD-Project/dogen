@@ -76,10 +76,10 @@ void formattables_factory::expand_helpers(const dynamic::repository& drp,
     ex.expand(drp, fc, formattables);
 }
 
-std::unordered_map<std::string, formattable> formattables_factory::reduce(
+void formattables_factory::reduce(
     std::unordered_map<std::string, formattable>& formattables) const {
     reducer rd;
-    return rd.reduce(formattables);
+    rd.reduce(formattables);
 }
 
 void formattables_factory::expand_file_paths_and_guards(

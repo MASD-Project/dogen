@@ -36,9 +36,8 @@ namespace formattables {
 
 class reducer {
 public:
-    std::unordered_map<std::string, formattable>
-    reduce(
-        const std::unordered_map<std::string, formattable>& formattables) const;
+    void reduce(
+        std::unordered_map<std::string, formattable>& formattables) const;
 };
 
 } } } }

@@ -61,25 +61,32 @@ workflow::format(const formattables::model& fm, const yarn::element& e,
     const auto id(e.name().id());
     BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
 
-    const auto& fc(registrar().formatter_container());
-    const auto& ffbfn(fc.file_formatters_by_formatter_name());
+    const auto ti(std::type_index(typeid(e)));
+    BOOST_LOG_SEV(lg, debug) << "Type index: " << ti.name();
 
     std::forward_list<dogen::formatters::file> r;
-    auto& fmtt_cfgs(ec.formatter_configuration());
-    for (const auto& pair : fmtt_cfgs) {
-        const auto& fmtn(pair.first);
-        const auto& fmt_cfg(pair.second);
-        const auto i(ffbfn.find(fmtn));
-        if (i == ffbfn.end()) {
-            BOOST_LOG_SEV(lg, error) << missing_formatter << fmtn;
-            BOOST_THROW_EXCEPTION(
-                workflow_error(missing_formatter + fmtn));
-        }
+    const auto& fc(registrar().formatter_container());
+    const auto i(fc.file_formatters_by_type_index().find(ti));
+    if (i == fc.file_formatters_by_type_index().end()) {
+        BOOST_LOG_SEV(lg, debug) << "No formatters for type: " << ti.name();
+        return r;
+    }
 
-        const auto& formatter(*i->second);
+    auto& fmt_cfgs(ec.formatter_configuration());
+    const auto& fmts(i->second);
+    for (const auto& fmt_ptr : fmts) {
+        const auto& fmt(*fmt_ptr);
+        const auto fmtn(fmt.ownership_hierarchy().formatter_name());
         BOOST_LOG_SEV(lg, debug) << "Formatting: '" << id << "' with '"
                                  << fmtn << "'";
 
+        const auto j(fmt_cfgs.find(fmtn));
+        if (j == fmt_cfgs.end()) {
+            BOOST_LOG_SEV(lg, error) << missing_formatter << fmtn;
+            BOOST_THROW_EXCEPTION(workflow_error(missing_formatter + fmtn));
+        }
+
+        const auto& fmt_cfg(j->second);
         const auto is_formatter_enabled(fmt_cfg.enabled());
         if (!is_formatter_enabled) {
             BOOST_LOG_SEV(lg, debug) << "Formatter is disabled.";
@@ -91,7 +98,7 @@ workflow::format(const formattables::model& fm, const yarn::element& e,
         const auto ffff(fm.facet_directory_for_facet());
         context ctx(sa, ec, ffff, hf);
 
-        auto file(formatter.format(ctx, e));
+        auto file(fmt.format(ctx, e));
         const auto pg(yarn::generation_types::partial_generation);
         file.overwrite(e.generation_type() != pg);
 

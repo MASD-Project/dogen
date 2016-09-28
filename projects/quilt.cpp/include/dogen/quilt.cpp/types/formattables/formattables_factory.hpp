@@ -66,7 +66,7 @@ public:
         const formatters::container& fc,
         std::unordered_map<std::string, formattable>& formattables) const;
 
-    std::unordered_map<std::string, formattable> reduce(
+    void reduce(
         std::unordered_map<std::string, formattable>& formattables) const;
 
     typedef std::unordered_map<std::string, formattable>

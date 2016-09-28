@@ -191,7 +191,7 @@ is_formatter_enabled(const std::string& formatter_name) const {
 
 std::string assistant::
 get_facet_directory_for_facet(const std::string& facet_name) const {
-    const auto& fdff(formatter_configuration_.facet_directory_for_facet());
+    const auto& fdff(context_.facet_directory_for_facet());
     const auto i(fdff.find(facet_name));
     if (i == fdff.end()) {
         BOOST_LOG_SEV(lg, error) << facet_directory_missing << facet_name;
