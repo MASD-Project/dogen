@@ -29,7 +29,6 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen/quilt.cpp/types/annotations/element_annotations.hpp"
 #include "dogen/quilt.cpp/types/annotations/streaming_annotations.hpp"
 #include "dogen/quilt.cpp/types/formattables/element_configuration.hpp"
 #include "dogen/quilt.cpp/types/formatters/helper_formatter_interface.hpp"

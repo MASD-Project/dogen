@@ -13,35 +13,35 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-28 Wed 22:21]
+#+CAPTION: Clock summary at [2016-09-28 Wed 22:49]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *20:56* |       |      | 100.0 |
+| *Total time*                                                                | *21:22* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 20:56   |       |      | 100.0 |
-| Active                                                                      |         | 20:56 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:49 |   3.9 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:07 |   0.6 |
-| COMPLETED Generation of formattable is incorrect                            |         |       | 2:30 |  11.9 |
+| Stories                                                                     | 21:22   |       |      | 100.0 |
+| Active                                                                      |         | 21:22 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:49 |   3.8 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:07 |   0.5 |
+| COMPLETED Generation of formattable is incorrect                            |         |       | 2:30 |  11.7 |
 | COMPLETED Visitor includes are incorrect                                    |         |       | 0:20 |   1.6 |
-| COMPLETED Add includer to quilt.cpp                                         |         |       | 1:46 |   8.4 |
-| COMPLETED Add reducer to quilt.cpp                                          |         |       | 0:22 |   1.8 |
+| COMPLETED Add includer to quilt.cpp                                         |         |       | 1:46 |   8.3 |
+| COMPLETED Add reducer to quilt.cpp                                          |         |       | 0:22 |   1.7 |
 | COMPLETED Add new index to formtter container                               |         |       | 0:19 |   1.5 |
-| COMPLETED Add path expander to quilt.cpp                                    |         |       | 0:49 |   3.9 |
+| COMPLETED Add path expander to quilt.cpp                                    |         |       | 0:49 |   3.8 |
 | COMPLETED Add guard expander to quilt.cpp                                   |         |       | 0:27 |   2.1 |
 | COMPLETED Investigate borked travis build                                   |         |       | 0:37 |   2.9 |
 | COMPLETED Add decoration expander to quilt.cpp                              |         |       | 0:23 |   1.8 |
-| COMPLETED Add aspect expander to quilt.cpp                                  |         |       | 1:26 |   6.8 |
+| COMPLETED Add aspect expander to quilt.cpp                                  |         |       | 1:26 |   6.7 |
 | COMPLETED Run tests that are passing on windows                             |         |       | 0:10 |   0.8 |
-| COMPLETED Add helper expander to quilt.cpp                                  |         |       | 1:26 |   6.8 |
-| COMPLETED Merge pre and post workflows                                      |         |       | 0:16 |   1.3 |
+| COMPLETED Add helper expander to quilt.cpp                                  |         |       | 1:26 |   6.7 |
+| COMPLETED Merge pre and post workflows                                      |         |       | 0:16 |   1.2 |
 | COMPLETED Fix bug in aspect and helper generation                           |         |       | 0:15 |   1.2 |
-| COMPLETED Investigate element annotation support                            |         |       | 2:05 |  10.0 |
-| CANCELLED Add streaming settings expander                                   |         |       | 0:36 |   2.9 |
-| COMPLETED Create the formattables model                                     |         |       | 1:32 |   7.3 |
-| COMPLETED Hook formattables into formatters                                 |         |       | 3:58 |  18.9 |
-| STARTED Remove include builder legacy api                                   |         |       | 0:43 |   3.4 |
+| COMPLETED Investigate element annotation support                            |         |       | 2:05 |   9.8 |
+| CANCELLED Add streaming settings expander                                   |         |       | 0:36 |   2.8 |
+| COMPLETED Create the formattables model                                     |         |       | 1:32 |   7.2 |
+| COMPLETED Hook formattables into formatters                                 |         |       | 3:58 |  18.6 |
+| COMPLETED Remove include builder legacy classes                             |         |       | 1:09 |   5.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -500,12 +500,26 @@ with the current formatting workflow.
 We were generating empty contexts before in context factory, but this
 should not be required any longer.
 
-*** STARTED Remove include builder legacy api                         :story:
+*** COMPLETED Remove include builder legacy classes                   :story:
+    CLOSED: [2016-09-28 Wed 22:48]
+    CLOCK: [2016-09-28 Wed 22:22]--[2016-09-28 Wed 22:48] =>  0:26
     CLOCK: [2016-09-28 Wed 21:38]--[2016-09-28 Wed 22:21] =>  0:43
 
 When implementing inclusion expander we did a number of ugly hacks to
 support both the legacy API and the new API. We need to remove all the
 impls etc we added, in builder, factory, etc.
+
+Merged stories:
+
+*Remove all of the legacy infrastructure*
+
+Includes:
+
+- repositories, repository factories in formattables, annotations.
+
+*** Remove formatter id                                               :story:
+
+Not clear why we need this given we have formatter name.
 
 *** Move enabled formatters to element configuration                  :story:
 
@@ -516,13 +530,6 @@ should be at the element level.
 
 Figure out if element configuration is context or if it is better
 expressed as a stand alone formatting parameter.
-
-*** Move facet directory to a better place                            :story:
-
-At present we have this property at the formatter configuration level,
-but its not clear why we need to duplicate it. In fact, it may even
-make more sense to have it at a higher level since its the same for
-all elements.
 
 *** Clean up element segmentation                                     :story:
 
@@ -535,42 +542,12 @@ truth:
 
 We should formalise this and make the configuration model reflect it.
 
-*** Remove formatter id                                               :story:
+*** Move facet directory to a better place                            :story:
 
-Not clear why we need this given we have formatter name.
-
-*** Remove all of the legacy infrastructure                           :story:
-
-Includes:
-
-- repositories, repository factories in formattables, annotations.
-
-*** Check which properties need to loop through the entire model      :story:
-
-In certain cases such as helpers we probably don't need to go through
-all types; only the target types matter. Ensure we are not processing
-other types for no reason.
-
-Merged stories:
-
-*Element properties includes non-target types*
-
-We seem to be generating a lot of element properties and formatter
-properties as well. We should only be generating these for the target
-model.
-
-*** Introduce the concept of proxy models                             :story:
-
-These are models that exist solely to bring types in, but do not
-define those types. Typically one uses a proxy model to expose
-non-dogen types into dogen. We could add a flag to models
-=is_proxy=. It would replace the notion of system models. We need to
-check the stories in the backlog around this.
-
-Interestingly we could have different defaults for formatters in proxy
-models. For example, if a model is proxy we can assume that we should
-not compute inclusion paths. This could save a lot of time when
-specifying the models in JSON.
+At present we have this property at the formatter configuration level,
+but its not clear why we need to duplicate it. In fact, it may even
+make more sense to have it at a higher level since its the same for
+all elements.
 
 *** Create the notion of a formatter alias                            :story:
 
@@ -647,14 +624,18 @@ At present the injector is calling the formatters' workflow
 directly, in order to obtain the formatters' container. It should
 receive it as a parameter during initialisation.
 
-*** Refactor path settings factory                                    :story:
+*** Introduce the concept of proxy models                             :story:
 
-Tasks:
+These are models that exist solely to bring types in, but do not
+define those types. Typically one uses a proxy model to expose
+non-dogen types into dogen. We could add a flag to models
+=is_proxy=. It would replace the notion of system models. We need to
+check the stories in the backlog around this.
 
-- get distinct list of facets across all formatters and generate field
-  definitions from this list;
-- cache top-level fields and facet fields and copy results instead of
-  re-reading them.
+Interestingly we could have different defaults for formatters in proxy
+models. For example, if a model is proxy we can assume that we should
+not compute inclusion paths. This could save a lot of time when
+specifying the models in JSON.
 
 *** Initialise formatters in the formatter's translation unit         :story:
 
@@ -664,6 +645,34 @@ translation unit for each formatter. This will also make life easier
 when we move to a mustache world where there may not be a formatter
 header file at all.
 
+*** Add more validation to formatter registration                     :story:
+
+We should check to ensure that only one formatter per facet is
+declared the canonical formatter.
+
+*** Refactor path settings factory                                    :story:
+
+Tasks:
+
+- get distinct list of facets across all formatters and generate field
+  definitions from this list;
+- cache top-level fields and facet fields and copy results instead of
+  re-reading them.
+
+*** Check which properties need to loop through the entire model      :story:
+
+In certain cases such as helpers we probably don't need to go through
+all types; only the target types matter. Ensure we are not processing
+other types for no reason.
+
+Merged stories:
+
+*Element properties includes non-target types*
+
+We seem to be generating a lot of element properties and formatter
+properties as well. We should only be generating these for the target
+model.
+
 *** Move odb options file into odb folder                             :story:
 
 There is not particularly good reason for this file to exist at the
@@ -671,11 +680,6 @@ src level.
 
 In order to implement this story we need to have a working odb setup
 to test it and ensure we didn't break anything.
-
-*** Add more validation to formatter registration                     :story:
-
-We should check to ensure that only one formatter per facet is
-declared the canonical formatter.
 
 *** Consider using indices rather than associative containers          :epic:
 

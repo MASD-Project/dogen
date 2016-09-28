@@ -38,7 +38,6 @@
 #include "dogen/quilt.cpp/serialization/annotations/helper_annotations_ser.hpp"
 #include "dogen/quilt.cpp/serialization/annotations/opaque_annotations_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/helper_descriptor_ser.hpp"
-#include "dogen/quilt.cpp/serialization/annotations/element_annotations_ser.hpp"
 #include "dogen/quilt.cpp/serialization/annotations/streaming_annotations_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/aspect_configuration_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/helper_configuration_ser.hpp"
@@ -47,12 +46,8 @@
 #include "dogen/quilt.cpp/serialization/formatters/inclusion_support_types_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/formatter_configuration_ser.hpp"
 #include "dogen/quilt.cpp/serialization/annotations/directory_names_annotations_ser.hpp"
-#include "dogen/quilt.cpp/serialization/annotations/aspect_annotations_repository_ser.hpp"
-#include "dogen/quilt.cpp/serialization/annotations/helper_annotations_repository_ser.hpp"
-#include "dogen/quilt.cpp/serialization/annotations/element_annotations_repository_ser.hpp"
 #include "dogen/quilt.cpp/serialization/annotations/inclusion_directive_annotations_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/local_enablement_configuration_ser.hpp"
-#include "dogen/quilt.cpp/serialization/annotations/streaming_annotations_repository_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/global_enablement_configuration_ser.hpp"
 
 #endif

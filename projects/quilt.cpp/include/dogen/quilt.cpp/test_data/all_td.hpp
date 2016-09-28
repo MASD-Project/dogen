@@ -38,7 +38,6 @@
 #include "dogen/quilt.cpp/test_data/annotations/helper_annotations_td.hpp"
 #include "dogen/quilt.cpp/test_data/annotations/opaque_annotations_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/helper_descriptor_td.hpp"
-#include "dogen/quilt.cpp/test_data/annotations/element_annotations_td.hpp"
 #include "dogen/quilt.cpp/test_data/annotations/streaming_annotations_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/aspect_configuration_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/helper_configuration_td.hpp"
@@ -47,12 +46,8 @@
 #include "dogen/quilt.cpp/test_data/formatters/inclusion_support_types_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/formatter_configuration_td.hpp"
 #include "dogen/quilt.cpp/test_data/annotations/directory_names_annotations_td.hpp"
-#include "dogen/quilt.cpp/test_data/annotations/aspect_annotations_repository_td.hpp"
-#include "dogen/quilt.cpp/test_data/annotations/helper_annotations_repository_td.hpp"
-#include "dogen/quilt.cpp/test_data/annotations/element_annotations_repository_td.hpp"
 #include "dogen/quilt.cpp/test_data/annotations/inclusion_directive_annotations_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/local_enablement_configuration_td.hpp"
-#include "dogen/quilt.cpp/test_data/annotations/streaming_annotations_repository_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/global_enablement_configuration_td.hpp"
 
 #endif

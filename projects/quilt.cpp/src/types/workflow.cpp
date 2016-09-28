@@ -32,9 +32,6 @@
 #include "dogen/quilt.cpp/io/formattables/aspect_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/helper_configuration_io.hpp"
 #include "dogen/quilt.cpp/types/annotations/directory_names_annotations_factory.hpp"
-#include "dogen/quilt.cpp/types/annotations/aspect_annotations_repository_factory.hpp"
-#include "dogen/quilt.cpp/types/annotations/streaming_annotations_repository_factory.hpp"
-#include "dogen/quilt.cpp/types/annotations/element_annotations_repository_factory.hpp"
 #include "dogen/quilt.cpp/types/workflow_error.hpp"
 #include "dogen/quilt.cpp/types/workflow.hpp"
 

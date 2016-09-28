@@ -38,7 +38,6 @@
 #include "dogen/quilt.cpp/hash/annotations/helper_annotations_hash.hpp"
 #include "dogen/quilt.cpp/hash/annotations/opaque_annotations_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/helper_descriptor_hash.hpp"
-#include "dogen/quilt.cpp/hash/annotations/element_annotations_hash.hpp"
 #include "dogen/quilt.cpp/hash/annotations/streaming_annotations_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/aspect_configuration_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/helper_configuration_hash.hpp"
@@ -47,12 +46,8 @@
 #include "dogen/quilt.cpp/hash/formatters/inclusion_support_types_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/formatter_configuration_hash.hpp"
 #include "dogen/quilt.cpp/hash/annotations/directory_names_annotations_hash.hpp"
-#include "dogen/quilt.cpp/hash/annotations/aspect_annotations_repository_hash.hpp"
-#include "dogen/quilt.cpp/hash/annotations/helper_annotations_repository_hash.hpp"
-#include "dogen/quilt.cpp/hash/annotations/element_annotations_repository_hash.hpp"
 #include "dogen/quilt.cpp/hash/annotations/inclusion_directive_annotations_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/local_enablement_configuration_hash.hpp"
-#include "dogen/quilt.cpp/hash/annotations/streaming_annotations_repository_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/global_enablement_configuration_hash.hpp"
 
 #endif
