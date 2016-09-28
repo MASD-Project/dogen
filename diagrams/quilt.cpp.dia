@@ -202,7 +202,7 @@
         <dia:point val="337,118.083"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="336.95,117.033;559.05,242.133"/>
+        <dia:rectangle val="336.95,117.033;551.05,242.133"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -211,7 +211,7 @@
         <dia:point val="337,118.083"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="222"/>
+        <dia:real val="214"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="124"/>
@@ -387,13 +387,13 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O6">
       <dia:attribute name="obj_pos">
-        <dia:point val="358,151"/>
+        <dia:point val="359,151"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="357.95,150.95;391.66,163.45"/>
+        <dia:rectangle val="358.95,150.95;392.66,163.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="358,151"/>
+        <dia:point val="359,151"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="33.609999999999999"/>
@@ -8793,7 +8793,7 @@ registry of all available formatters.#</dia:string>
         <dia:point val="242.81,169.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="221.477,169.05;243.56,178.8"/>
+        <dia:rectangle val="221.478,169.05;243.56,178.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -18918,7 +18918,7 @@ an enumeration, false otherwise.#</dia:string>
         <dia:point val="546.745,22.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="545.995,21.85;569.043,34.8"/>
+        <dia:rectangle val="545.995,21.85;569.042,34.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -20503,13 +20503,13 @@ an enumeration, false otherwise.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O159">
       <dia:attribute name="obj_pos">
-        <dia:point val="396,151"/>
+        <dia:point val="398,151"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="395.95,150.95;407.398,156.25"/>
+        <dia:rectangle val="397.95,150.95;409.398,156.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="396,151"/>
+        <dia:point val="398,151"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="11.3475"/>
@@ -20721,19 +20721,19 @@ and element.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="374.805,151"/>
+        <dia:point val="375.805,151"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="374.055,144.25;401.874,151.8"/>
+        <dia:rectangle val="375.055,144.25;403.874,151.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="374.805,151"/>
-        <dia:point val="374.805,145"/>
-        <dia:point val="401.674,145"/>
-        <dia:point val="401.674,150.95"/>
+        <dia:point val="375.805,151"/>
+        <dia:point val="375.805,145"/>
+        <dia:point val="403.674,145"/>
+        <dia:point val="403.674,150.95"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -25649,7 +25649,7 @@ and element.#</dia:string>
         <dia:point val="348.943,6.5833"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="343.283,-4.8667;349.693,8.1833"/>
+        <dia:rectangle val="343.283,-4.8667;349.693,7.3833"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -25898,7 +25898,7 @@ and element.#</dia:string>
         <dia:point val="326.748,42.6833"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="325.998,41.9333;335.883,44.2833"/>
+        <dia:rectangle val="325.998,41.9333;335.883,43.5333"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -25970,7 +25970,7 @@ and element.#</dia:string>
         <dia:point val="352.061,41.5833"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="351.311,14.1333;363.253,43.1833"/>
+        <dia:rectangle val="351.311,14.1333;363.253,42.3833"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -26225,7 +26225,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:point val="359.601,-34.0167"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="358.851,-34.7667;373.218,-21.8665"/>
+        <dia:rectangle val="358.851,-34.7667;373.218,-22.6665"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -26457,7 +26457,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:point val="446.725,-8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="359.551,-43.05;447.475,-6.4"/>
+        <dia:rectangle val="359.551,-43.75;447.475,-7.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -26529,7 +26529,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:point val="268.751,6.5833"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="268.001,-17.05;314.315,8.1833"/>
+        <dia:rectangle val="268.001,-17.05;314.315,7.3833"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -26601,7 +26601,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:point val="298.805,76"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="295.783,48.3333;299.555,77.6"/>
+        <dia:rectangle val="295.783,48.3333;299.555,76.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -26673,7 +26673,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:point val="315.61,83.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="314.86,-4.45;446.925,88.8"/>
+        <dia:rectangle val="314.86,-4.45;446.925,88.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -26745,7 +26745,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:point val="423,136.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="422.25,135.65;441.785,152.6"/>
+        <dia:rectangle val="422.25,135.65;441.785,151.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
