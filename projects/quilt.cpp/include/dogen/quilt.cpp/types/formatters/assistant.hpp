@@ -272,15 +272,6 @@ public:
      */
     bool requires_hashing_helper_method(const yarn::attribute& attr) const;
 
-private:
-    /**
-     * @brief Retrieves the ODB annotations from the opaque annotations
-     * container, if they do exist.
-     */
-    boost::shared_ptr<annotations::odb_annotations>
-        get_odb_annotations(const std::unordered_map<std::string,
-            boost::shared_ptr<annotations::opaque_annotations> >& os) const;
-
 public:
     /**
      * @brief Retrieves the ODB annotations from the opaque annotations

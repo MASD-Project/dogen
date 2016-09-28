@@ -41,9 +41,6 @@ namespace formatters {
 const annotations::streaming_annotations_repository
 context_factory::empty_streaming_annotations_repository_ =
     annotations::streaming_annotations_repository();
-const annotations::element_annotations
-context_factory::empty_element_annotations_ =
-    annotations::element_annotations();
 const formattables::element_configuration
 context_factory::empty_element_configuration_ =
     formattables::element_configuration();
@@ -61,14 +58,13 @@ const std::unordered_map<
 
 context_factory::context_factory(
     const annotations::streaming_annotations_repository& ssrp,
-    const annotations::element_annotations_repository& esrp,
     const formattables::element_properties_repository& eprp,
     const std::unordered_map<
     std::string, std::unordered_map<
     std::string,
     std::list<std::shared_ptr<helper_formatter_interface>>>>& helpers)
-    : streaming_annotations_repository_(ssrp), element_annotations_(esrp),
-      element_configuration_(eprp), formatter_helpers_(helpers) {}
+    : streaming_annotations_repository_(ssrp), element_configuration_(eprp),
+      formatter_helpers_(helpers) {}
 
 const formattables::element_configuration& context_factory::
 element_properties_for_id(const std::string& n) const {
@@ -82,29 +78,15 @@ element_properties_for_id(const std::string& n) const {
     return i->second;
 }
 
-const annotations::element_annotations& context_factory::
-element_annotations_for_id(const std::string& n) const {
-    const auto& b(element_annotations_.by_id());
-    const auto i(b.find(n));
-    if (i == b.end()) {
-        // FIXME: we will return empty element_annotationss due to the hackery we
-        // are doing at the moment in factory.
-        return empty_element_annotations_;
-    }
-    return i->second;
-}
-
 context context_factory::make_empty_context() const {
     return context(empty_streaming_annotations_repository_,
-        empty_element_annotations_, empty_element_configuration_,
-        empty_helpers_);
+        empty_element_configuration_, empty_helpers_);
 }
 
 context context_factory::make(const std::string& id) const {
     const auto& ep(element_properties_for_id(id));
-    const auto& es(element_annotations_for_id(id));
     const auto& ssrp(streaming_annotations_repository_);
-    return context(ssrp, es, ep, formatter_helpers_);
+    return context(ssrp, ep, formatter_helpers_);
 }
 
 } } } }

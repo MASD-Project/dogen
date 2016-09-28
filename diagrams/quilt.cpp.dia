@@ -21876,10 +21876,10 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#element_annotations#</dia:string>
+            <dia:string>#streaming_annotations_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#annotations::element_annotations#</dia:string>
+            <dia:string>#annotations::streaming_annotations_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

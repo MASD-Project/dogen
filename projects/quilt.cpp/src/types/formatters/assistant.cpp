@@ -69,6 +69,7 @@ const std::string facet_directory_missing(
     "Facet directory is missing for facet: ");
 const std::string unexpected_opaque_annotations(
     "Unexpectd opaque annotations type.");
+const std::string null_opaque_annotations("Opaque annotations are null: ");
 const std::string family_not_found("Family not found: ");
 const std::string no_helpers_for_family("No helpers found for family: ");
 const std::string qn_missing("Could not find qualified name for language.");
@@ -518,16 +519,15 @@ requires_hashing_helper_method(const yarn::attribute& attr) const {
     return false;
 }
 
-boost::shared_ptr<annotations::odb_annotations> assistant::
-get_odb_annotations(const std::unordered_map<std::string,
-    boost::shared_ptr<quilt::cpp::annotations::opaque_annotations>
-    >& os) const {
-    const auto fn(odb::traits::class_header_formatter_name());
-    const auto i(os.find(fn));
-    if (i == os.end())
+boost::shared_ptr<annotations::odb_annotations>
+assistant::get_odb_annotations() const {
+    const auto& opq_cfg(formatter_configuration_.opaque_configuration());
+    const auto oc(opq_cfg.top_level());
+
+    if (!oc)
         return boost::shared_ptr<annotations::odb_annotations>();
 
-    auto r(boost::dynamic_pointer_cast<annotations::odb_annotations>(i->second));
+    auto r(boost::dynamic_pointer_cast<annotations::odb_annotations>(oc));
     if (!r) {
         BOOST_LOG_SEV(lg, error) << unexpected_opaque_annotations;
         BOOST_THROW_EXCEPTION(formatting_error(unexpected_opaque_annotations));
@@ -535,23 +535,26 @@ get_odb_annotations(const std::unordered_map<std::string,
     return r;
 }
 
-boost::shared_ptr<annotations::odb_annotations>
-assistant::get_odb_annotations() const {
-    const auto& os(context_.element_annotations().opaque_annotations());
-    return get_odb_annotations(os);
-}
-
 boost::shared_ptr<annotations::odb_annotations> assistant::
 get_odb_annotations(const std::string& property_id) const {
-
-    const auto& es(context_.element_annotations());
-    const auto& osfp(es.opaque_annotations_for_property());
-    const auto i(osfp.find(property_id));
-    if (i == osfp.end())
+    const auto& opq_cfg(formatter_configuration_.opaque_configuration());
+    const auto& oc(opq_cfg.property_level());
+    const auto i(oc.find(property_id));
+    if (i == oc.end())
         return boost::shared_ptr<annotations::odb_annotations>();
 
-    const auto& os(i->second);
-    return get_odb_annotations(os);
+    const auto ocp(i->second);
+    if (!ocp) {
+        BOOST_LOG_SEV(lg, error) << null_opaque_annotations;
+        BOOST_THROW_EXCEPTION(formatting_error(null_opaque_annotations));
+    }
+
+    auto r(boost::dynamic_pointer_cast<annotations::odb_annotations>(ocp));
+    if (!r) {
+        BOOST_LOG_SEV(lg, error) << unexpected_opaque_annotations;
+        BOOST_THROW_EXCEPTION(formatting_error(unexpected_opaque_annotations));
+    }
+    return r;
 }
 
 std::ostream& assistant::stream() {

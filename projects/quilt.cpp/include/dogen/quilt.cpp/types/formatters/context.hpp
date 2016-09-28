@@ -46,7 +46,6 @@ class context final {
 public:
     context(
         const annotations::streaming_annotations_repository& ssrp,
-        const annotations::element_annotations& element_annotations,
         const formattables::element_configuration& element_configuration,
         const std::unordered_map<std::string, std::unordered_map<std::string,
         std::list<std::shared_ptr<helper_formatter_interface>>>>& helpers);
@@ -54,7 +53,6 @@ public:
 public:
     const annotations::streaming_annotations_repository&
     streaming_annotations_repository() const;
-    const annotations::element_annotations& element_annotations() const;
     const formattables::element_configuration& element_configuration() const;
     const std::unordered_map<
         std::string,
@@ -66,7 +64,6 @@ public:
 private:
     const annotations::streaming_annotations_repository&
     streaming_annotations_repository_;
-    const annotations::element_annotations& element_annotations_;
     const formattables::element_configuration& element_configuration_;
     const std::unordered_map<
         std::string,

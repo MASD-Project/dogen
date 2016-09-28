@@ -99,12 +99,13 @@ private:
      * @brief Create the properties.
      */
     formattables::element_properties_repository
-        create_properties(const options::cpp_options& opts,
+    create_properties(const options::cpp_options& opts,
         const dynamic::repository& drp,
         const dynamic::object& root_object,
         const dogen::formatters::decoration_configuration_factory& dcf,
         const formatters::container& fc,
         const annotations::streaming_annotations_repository& ssrp,
+        const annotations::element_annotations_repository& esrp,
         const yarn::model& m) const;
 
     void test_new_formattables_workflow(const options::cpp_options& opts,
@@ -124,7 +125,6 @@ private:
      */
     std::forward_list<dogen::formatters::file>
     format(const annotations::streaming_annotations_repository& ssrp,
-        const annotations::element_annotations_repository& esrp,
         const formattables::element_properties_repository& eprp,
         const std::forward_list<
         boost::shared_ptr<yarn::element> >& elements) const;

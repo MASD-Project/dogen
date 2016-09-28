@@ -61,7 +61,6 @@ public:
      */
     std::forward_list<dogen::formatters::file>
         execute(const annotations::streaming_annotations_repository& ssrp,
-        const annotations::element_annotations_repository& esrp,
         const formattables::element_properties_repository& eprp,
         const std::forward_list<
         boost::shared_ptr<yarn::element> >& elements) const;

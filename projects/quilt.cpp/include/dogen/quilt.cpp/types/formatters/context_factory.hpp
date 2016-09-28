@@ -41,7 +41,6 @@ class context_factory {
 public:
     context_factory(
         const annotations::streaming_annotations_repository& ssrp,
-        const annotations::element_annotations_repository& esrp,
         const formattables::element_properties_repository& fprp,
         const std::unordered_map<
         std::string, std::unordered_map<
@@ -52,9 +51,6 @@ private:
     const formattables::element_configuration&
     element_properties_for_id(const std::string& n) const;
 
-    const annotations::element_annotations&
-    element_annotations_for_id(const std::string& n) const;
-
 public:
     context make(const std::string& id) const;
     context make_empty_context() const;
@@ -62,7 +58,6 @@ public:
 private:
     static const annotations::streaming_annotations_repository
     empty_streaming_annotations_repository_;
-    static const annotations::element_annotations empty_element_annotations_;
     static const std::unordered_map<
         std::string,
         std::unordered_map<
@@ -73,7 +68,6 @@ private:
     empty_element_configuration_;
     const annotations::streaming_annotations_repository&
     streaming_annotations_repository_;
-    const annotations::element_annotations_repository& element_annotations_;
     const formattables::element_properties_repository& element_configuration_;
     const std::unordered_map<
         std::string,
