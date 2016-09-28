@@ -34,6 +34,7 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("quit.cpp.formatters.workflow"));
 
+const std::string missing_formatter("Formatter not found: ");
 const std::string formatter_properties_not_found(
     "Could not find properties for formatter: ");
 
@@ -51,6 +52,73 @@ cpp::formatters::registrar& workflow::registrar() {
         registrar_ = std::make_shared<cpp::formatters::registrar>();
 
     return *registrar_;
+}
+
+std::forward_list<dogen::formatters::file>
+workflow::format(const formattables::model& fm, const yarn::element& e,
+    const formattables::element_configuration& ec) const {
+
+    const auto id(e.name().id());
+    BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
+
+    const auto& fc(registrar().formatter_container());
+    const auto& ffbfn(fc.file_formatters_by_formatter_name());
+
+    std::forward_list<dogen::formatters::file> r;
+    auto& fmtt_cfgs(ec.formatter_configuration());
+    for (const auto& pair : fmtt_cfgs) {
+        const auto& fmtn(pair.first);
+        const auto& fmt_cfg(pair.second);
+        const auto i(ffbfn.find(fmtn));
+        if (i == ffbfn.end()) {
+            BOOST_LOG_SEV(lg, error) << missing_formatter << fmtn;
+            BOOST_THROW_EXCEPTION(
+                workflow_error(missing_formatter + fmtn));
+        }
+
+        const auto& formatter(*i->second);
+        BOOST_LOG_SEV(lg, debug) << "Formatting: '" << id << "' with '"
+                                 << fmtn << "'";
+
+        const auto is_formatter_enabled(fmt_cfg.enabled());
+        if (!is_formatter_enabled) {
+            BOOST_LOG_SEV(lg, debug) << "Formatter is disabled.";
+            continue;
+        }
+
+        const auto& hf(fc.helper_formatters());
+        const auto& sa(fm.streaming_annotations());
+        const auto ffff(fm.facet_directory_for_facet());
+        context ctx(sa, ec, ffff, hf);
+
+        auto file(formatter.format(ctx, e));
+        const auto pg(yarn::generation_types::partial_generation);
+        file.overwrite(e.generation_type() != pg);
+
+        // FIXME: hack to handle services
+        if (e.generation_type() == pg) {
+            BOOST_LOG_SEV(lg, debug) << "Emptying out content.";
+            file.content().clear();
+        }
+
+        r.push_front(file);
+        BOOST_LOG_SEV(lg, debug) << "Finished formatting. id: " << id
+                                 << " File path: " << file.path();
+    }
+    return r;
+}
+
+std::forward_list<dogen::formatters::file>
+workflow::execute_new(const formattables::model& fm) const {
+    std::forward_list<dogen::formatters::file> r;
+    for (const auto& formattable : fm.formattables()) {
+        const auto& fmt_cfg(formattable.configuration());
+        for (const auto& segment : formattable.element_segments()) {
+            const auto& e(*segment);
+            r.splice_after(r.before_begin(), format(fm, e, fmt_cfg));
+        }
+    }
+    return r;
 }
 
 std::forward_list<dogen::formatters::file>

@@ -35,6 +35,7 @@
 #include "dogen/quilt.cpp/types/annotations/streaming_annotations_repository.hpp"
 #include "dogen/quilt.cpp/types/annotations/element_annotations_repository.hpp"
 #include "dogen/quilt.cpp/types/formattables/element_properties_repository.hpp"
+#include "dogen/quilt.cpp/types/formattables/model.hpp"
 #include "dogen/quilt.cpp/types/formatters/registrar.hpp"
 #include "dogen/quilt.cpp/types/formatters/context_factory.hpp"
 
@@ -53,6 +54,15 @@ public:
      * initialised, initialises it.
      */
     static cpp::formatters::registrar& registrar();
+
+private:
+    std::forward_list<dogen::formatters::file>
+    format(const formattables::model& fm, const yarn::element& e,
+        const formattables::element_configuration& ec) const;
+
+public:
+    std::forward_list<dogen::formatters::file>
+    execute_new(const formattables::model& fm) const;
 
 public:
     /**
