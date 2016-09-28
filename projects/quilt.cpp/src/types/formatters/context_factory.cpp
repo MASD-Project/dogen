@@ -38,24 +38,6 @@ namespace quilt {
 namespace cpp {
 namespace formatters {
 
-const annotations::streaming_annotations_repository
-context_factory::empty_streaming_annotations_repository_ =
-    annotations::streaming_annotations_repository();
-const formattables::element_configuration
-context_factory::empty_element_configuration_ =
-    formattables::element_configuration();
-const std::unordered_map<
-    std::string,
-    std::unordered_map<
-        std::string,
-        std::list<std::shared_ptr<helper_formatter_interface>>>>
-    context_factory::
-    empty_helpers_ = std::unordered_map<
-    std::string,
-    std::unordered_map<
-        std::string,
-        std::list<std::shared_ptr<helper_formatter_interface>>>>();
-
 context_factory::context_factory(
     const annotations::streaming_annotations_repository& ssrp,
     const formattables::element_properties_repository& eprp,
@@ -78,15 +60,15 @@ element_properties_for_id(const std::string& n) const {
     return i->second;
 }
 
-context context_factory::make_empty_context() const {
-    return context(empty_streaming_annotations_repository_.by_id(),
-        empty_element_configuration_, empty_helpers_);
-}
-
 context context_factory::make(const std::string& id) const {
     const auto& ep(element_properties_for_id(id));
     const auto& ssrp(streaming_annotations_repository_);
-    return context(ssrp.by_id(), ep, formatter_helpers_);
+
+    const auto& pair(*ep.formatter_configuration().begin());
+    const auto& fmt_cfg(pair.second);
+
+    return context(ssrp.by_id(), ep, fmt_cfg.facet_directory_for_facet(),
+        formatter_helpers_);
 }
 
 } } } }

@@ -53,19 +53,8 @@ private:
 
 public:
     context make(const std::string& id) const;
-    context make_empty_context() const;
 
 private:
-    static const annotations::streaming_annotations_repository
-    empty_streaming_annotations_repository_;
-    static const std::unordered_map<
-        std::string,
-        std::unordered_map<
-            std::string,
-            std::list<
-                std::shared_ptr<helper_formatter_interface>>>> empty_helpers_;
-    static const formattables::element_configuration
-    empty_element_configuration_;
     const annotations::streaming_annotations_repository&
     streaming_annotations_repository_;
     const formattables::element_properties_repository& element_configuration_;

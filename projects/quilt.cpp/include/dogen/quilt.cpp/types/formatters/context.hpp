@@ -48,10 +48,15 @@ public:
         const std::unordered_map<std::string,
         annotations::streaming_annotations>& sa,
         const formattables::element_configuration& element_configuration,
+        const std::unordered_map<std::string, std::string>&
+        facet_directory_for_facet,
         const std::unordered_map<std::string, std::unordered_map<std::string,
         std::list<std::shared_ptr<helper_formatter_interface>>>>& helpers);
 
 public:
+    const std::unordered_map<std::string, std::string>&
+    facet_directory_for_facet() const;
+
     const std::unordered_map<std::string, annotations::streaming_annotations>&
     streaming_annotations() const;
 
@@ -67,6 +72,8 @@ private:
     const std::unordered_map<std::string, annotations::streaming_annotations>&
     streaming_annotations_;
     const formattables::element_configuration& element_configuration_;
+    const std::unordered_map<std::string, std::string>&
+        facet_directory_for_facet_;
     const std::unordered_map<
         std::string,
         std::unordered_map<

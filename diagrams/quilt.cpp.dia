@@ -21775,7 +21775,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:point val="435,151"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="434.95,150.95;490.22,156.25"/>
+        <dia:rectangle val="434.95,150.95;490.22,157.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="435,151"/>
@@ -21784,7 +21784,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:real val="55.170000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.2000000000000011"/>
+        <dia:real val="6.0000000000000009"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#context#</dia:string>
@@ -21926,6 +21926,29 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::unordered_map&lt;std::string, std::unordered_map&lt;std::string, std::list&lt;std::shared_ptr&lt;formatters::helper_formatter_interface&gt;&gt;&gt;&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#facet_directory_for_facet#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::unordered_map&lt;std::string, std::string&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -24210,7 +24233,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:point val="489,172"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="462.535,156.15;489.75,172.8"/>
+        <dia:rectangle val="462.535,156.95;489.75,172.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -24219,7 +24242,7 @@ Note that the facet directory may be empty if the user disabled facet folders.#<
         <dia:point val="489,172"/>
         <dia:point val="489,167"/>
         <dia:point val="462.585,167"/>
-        <dia:point val="462.585,156.2"/>
+        <dia:point val="462.585,157"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
