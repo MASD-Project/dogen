@@ -43,13 +43,11 @@ private:
         annotations::path_annotations>& pa,
         const formatters::container& fc) const;
 
-    std::unordered_map<std::string, annotations::streaming_annotations>
-    make_streaming_annotations(const dynamic::repository& drp,
-        const std::list<formattable>& formattables) const;
-
 public:
-    model make(const dynamic::repository& drp, const std::unordered_map<
-        std::string, annotations::path_annotations>& pa,
+    model make(const std::unordered_map<std::string,
+        annotations::path_annotations>& pa,
+        const std::unordered_map<std::string,
+        annotations::streaming_annotations>& sa,
         const formatters::container& fc,
         const std::list<formattable>& formattables) const;
 };

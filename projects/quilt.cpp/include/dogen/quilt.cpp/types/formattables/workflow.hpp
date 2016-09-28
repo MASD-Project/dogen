@@ -132,6 +132,11 @@ public:
         const annotations::streaming_annotations_repository& ssrp,
         const yarn::model& m) const;
 
+private:
+    std::unordered_map<std::string, annotations::streaming_annotations>
+    make_streaming_annotations(const dynamic::repository& drp,
+        const yarn::model& m) const;
+
 public:
     model execute_new(const options::cpp_options& opts,
         const dynamic::repository& drp, const dynamic::object& root_object,

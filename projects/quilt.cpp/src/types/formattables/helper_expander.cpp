@@ -169,10 +169,10 @@ helper_expander::streaming_annotations_for_id(const annotations& a,
     if (i == a.streaming_annotations.end())
         return boost::optional<cpp::annotations::streaming_annotations>();
 
+    BOOST_LOG_SEV(lg, debug) << "Found streaming annotations for type: " << id
+                             << ". Annotations: " << i->second;
     return i->second;
 }
-
-
 
 std::list<std::string>
 helper_expander::namespace_list(const yarn::name& n) const {
@@ -215,15 +215,12 @@ boost::optional<helper_descriptor> helper_expander::walk_name_tree(
     r.is_simple_type(nt.is_current_simple_type());
 
     const auto ss(streaming_annotations_for_id(a, id));
-    if (ss) {
+    if (ss)
         r.streaming_annotations(ss);
-        BOOST_LOG_SEV(lg, debug) << "Adding streaming annotations for: " << id;
-    }
 
     const auto hs(helper_annotations_for_id(a, id));
     r.helper_annotations(hs);
     r.requires_hashing_helper(requires_hashing_helper(fff, hs.family()));
-    BOOST_LOG_SEV(lg, debug) << "Adding helper annotations for: " << id;
 
     r.name_identifiable(nt.current().identifiable());
     r.name_qualified(get_qualified(nt.current()));

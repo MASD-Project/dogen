@@ -23,6 +23,7 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/typeindex_io.hpp"
+#include "dogen/utility/io/unordered_set_io.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/dynamic/types/field_selector.hpp"
@@ -316,6 +317,7 @@ void enablement_expander::compute_enablement(
         BOOST_LOG_SEV(lg, debug) << "Enablement for: " << fmtn
                                  << " value: " << fmt_cfg.enabled();
     }
+
     BOOST_LOG_SEV(lg, debug) << "Finished computed enablement.";
 }
 
@@ -349,6 +351,8 @@ void enablement_expander::expand(const dynamic::repository& drp,
      */
     const auto lfdsti(bucket_local_field_definitions_by_type_index(lfds, fc));
 
+    // FIXME: massive hack to compute enabled formatters
+    std::unordered_set<std::string> enabled_formatters;
     for (auto& pair : formattables) {
         const auto id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
@@ -385,7 +389,31 @@ void enablement_expander::expand(const dynamic::repository& drp,
              */
             compute_enablement(gcs, lcs, formattable);
         }
+
+        // FIXME: massive hack to compute enabled formatters
+        const auto& cfg(formattable.configuration());
+        for (const auto& pair : cfg.formatter_configuration()) {
+            const auto& fmtn(pair.first);
+            const auto& fmt_cfg(pair.second);
+            if (fmt_cfg.enabled())
+                enabled_formatters.insert(fmtn);
+        }
     }
+
+    // FIXME: massive hack to compute enabled formatters
+    BOOST_LOG_SEV(lg, debug) << "Enabled formatters: "
+                             << enabled_formatters;
+
+    for (auto& pair : formattables) {
+        auto& formattable(pair.second);
+        auto& cfg(formattable.configuration());
+
+        for (auto& pair : cfg.formatter_configuration()) {
+            auto& fmt_cfg(pair.second);
+            fmt_cfg.enabled_formatters(enabled_formatters);
+        }
+    }
+
     BOOST_LOG_SEV(lg, debug) << "Finished expanding enablement.";
 }
 

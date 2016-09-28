@@ -20,7 +20,6 @@
  */
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
-#include "dogen/quilt.cpp/types/annotations/streaming_annotations_factory.hpp"
 #include "dogen/quilt.cpp/types/formattables/model_factory.hpp"
 
 namespace {
@@ -51,48 +50,16 @@ facet_directory_for_facet(const std::unordered_map<std::string,
     return r;
 }
 
-std::unordered_map<std::string, annotations::streaming_annotations>
-model_factory::make_streaming_annotations(const dynamic::repository& drp,
-    const std::list<formattable>& formattables) const {
-
-    annotations::streaming_annotations_factory f(drp);
-    std::unordered_map<std::string, annotations::streaming_annotations> r;
-    for (const auto& formattable : formattables) {
-        for (const auto& segment : formattable.element_segments()) {
-            /*
-             * We only want to process the master segment; the
-             * extensions can be ignored.
-             */
-            if (segment->is_element_extension())
-                continue;
-
-            /*
-             * We are only interested in yarn objects; all other
-             * element types do not need helpers.
-             */
-            const auto ptr(dynamic_cast<const yarn::object*>(segment.get()));
-            if (ptr == nullptr)
-                continue;
-
-            const auto& e(*ptr);
-            const auto ss(f.make(e.extensions()));
-            if (!ss)
-                continue;
-
-            r[e.name().id()] = *ss;
-        }
-    }
-    return r;
-}
-
-model model_factory::make(const dynamic::repository& drp,
-    const std::unordered_map< std::string, annotations::path_annotations>& pa,
+model model_factory::make(const std::unordered_map< std::string,
+    annotations::path_annotations>& pa,
+    const std::unordered_map<std::string,
+    annotations::streaming_annotations>& sa,
     const formatters::container& fc,
     const std::list<formattable>& formattables) const {
 
     model r;
     r.formattables(formattables);
-    r.streaming_annotations(make_streaming_annotations(drp, formattables));
+    r.streaming_annotations(sa);
     r.facet_directory_for_facet(facet_directory_for_facet(pa, fc));
 
     return r;

@@ -25,6 +25,8 @@
 #include "dogen/utility/io/memory_io.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/io/forward_list_io.hpp"
+#include "dogen/quilt.cpp/io/annotations/streaming_annotations_io.hpp"
+#include "dogen/quilt.cpp/types/annotations/streaming_annotations_factory.hpp"
 #include "dogen/yarn/types/element_visitor.hpp"
 #include "dogen/quilt.cpp/types/annotations/path_annotations_factory.hpp"
 #include "dogen/quilt.cpp/types/annotations/helper_annotations_repository_factory.hpp"
@@ -149,6 +151,26 @@ execute(const options::cpp_options& opts,
     return eprp;
 }
 
+std::unordered_map<std::string, annotations::streaming_annotations>
+workflow::make_streaming_annotations(const dynamic::repository& drp,
+    const yarn::model& m) const {
+
+    annotations::streaming_annotations_factory f(drp);
+    std::unordered_map<std::string, annotations::streaming_annotations> r;
+    for (const auto& ptr : m.elements()) {
+        const auto& e(*ptr);
+        const auto ss(f.make(e.extensions()));
+        if (!ss)
+            continue;
+
+        r[e.name().id()] = *ss;
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Model-level streaming annotations: " << r;
+    return r;
+}
+
+
 model workflow::execute_new(const options::cpp_options& opts,
     const dynamic::repository& drp, const dynamic::object& root_object,
     const dogen::formatters::decoration_configuration_factory& dcf,
@@ -161,8 +183,10 @@ model workflow::execute_new(const options::cpp_options& opts,
     formattables_factory ff;
     const auto formattables(ff.make(drp, root_object, dcf, fc, l, m));
 
+    const auto sa(make_streaming_annotations(drp, m));
+
     model_factory mf;
-    const auto r(mf.make(drp, pa, fc, formattables));
+    const auto r(mf.make(pa, sa, fc, formattables));
 
     return r;
 }

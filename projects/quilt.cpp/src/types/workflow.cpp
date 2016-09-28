@@ -202,25 +202,25 @@ workflow::generate(const options::knitting_options& ko,
 
     const auto ro(m.root_module().extensions());
     const auto dcf(create_decoration_configuration_factory(drp, frp, ro));
-
-    const auto osb(create_opaque_annotations_builder(drp));
-    auto esrp(create_element_annotations_repository(osb, m));
-    auto ssrp(create_streaming_annotations_repository(drp, m));
-
-    formatters::workflow::registrar().validate();
     const auto& fc(formatters::workflow::registrar().formatter_container());
 
-    const auto& cpp(ko.cpp());
-    const auto eprp(create_properties(cpp, drp, ro, dcf, fc, ssrp, esrp, m));
+    // const auto osb(create_opaque_annotations_builder(drp));
+    // auto esrp(create_element_annotations_repository(osb, m));
+    // auto ssrp(create_streaming_annotations_repository(drp, m));
 
-    const auto elements(extract_generatable_elements(m));
-    auto r(format(ssrp, eprp, elements));
+    // formatters::workflow::registrar().validate();
 
-    // formattables::workflow fw;
-    // const auto fm(fw.execute_new(ko.cpp(), drp, ro, dcf, fc, m));
+    // const auto& cpp(ko.cpp());
+    // const auto eprp(create_properties(cpp, drp, ro, dcf, fc, ssrp, esrp, m));
 
-    // formatters::workflow wf;
-    // const auto r(wf.execute_new(fm));
+    // const auto elements(extract_generatable_elements(m));
+    // auto r(format(ssrp, eprp, elements));
+
+    formattables::workflow fw;
+    const auto fm(fw.execute_new(ko.cpp(), drp, ro, dcf, fc, m));
+
+    formatters::workflow wf;
+    const auto r(wf.execute_new(fm));
 
     BOOST_LOG_SEV(lg, debug) << "Finished C++ backend.";
     return r;

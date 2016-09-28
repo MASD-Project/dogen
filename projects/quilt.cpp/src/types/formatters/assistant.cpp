@@ -22,6 +22,7 @@
 #include <boost/pointer_cast.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/io/unordered_set_io.hpp"
 #include "dogen/formatters/types/indent_filter.hpp"
 #include "dogen/formatters/types/comment_formatter.hpp"
 #include "dogen/formatters/types/decoration_formatter.hpp"
@@ -185,6 +186,10 @@ std::list<std::string> assistant::make_namespaces(const yarn::name& n) const {
 bool assistant::
 is_formatter_enabled(const std::string& formatter_name) const {
     const auto& fp(formatter_configuration_);
+
+    BOOST_LOG_SEV(lg, error) << "enabled fmts: "
+                             << fp.enabled_formatters();
+
     const auto i(fp.enabled_formatters().find(formatter_name));
     return i != fp.enabled_formatters().end();
 }
