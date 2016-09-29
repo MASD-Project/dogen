@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/throw_exception.hpp>
 #include <boost/algorithm/string/join.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
@@ -29,9 +28,6 @@
 #include "dogen/dynamic/types/workflow.hpp"
 #include "dogen/quilt.cpp/types/formatters/workflow.hpp"
 #include "dogen/quilt.cpp/types/formattables/workflow.hpp"
-#include "dogen/quilt.cpp/io/formattables/aspect_configuration_io.hpp"
-#include "dogen/quilt.cpp/io/formattables/helper_configuration_io.hpp"
-#include "dogen/quilt.cpp/types/workflow_error.hpp"
 #include "dogen/quilt.cpp/types/workflow.hpp"
 
 namespace {
@@ -51,8 +47,11 @@ namespace cpp {
 
 workflow::~workflow() noexcept { }
 
-dogen::formatters::repository workflow::create_formatters_repository(
-    const std::forward_list<boost::filesystem::path>& dirs) const {
+dogen::formatters::repository workflow::create_formatters_repository() const {
+
+    const auto dir(dogen::utility::filesystem::data_files_directory());
+    const auto dirs(std::forward_list<boost::filesystem::path> { dir });
+
     dogen::formatters::hydration_workflow hw;
     return hw.hydrate(dirs);
 }
@@ -62,8 +61,9 @@ workflow::create_decoration_configuration_factory(
     const dynamic::repository& drp,
     const dogen::formatters::repository& frp,
     const dynamic::object& root_object) const {
-    dogen::formatters::decoration_configuration_factory
-        r(drp, frp, root_object);
+
+    using dogen::formatters::decoration_configuration_factory;
+    decoration_configuration_factory r(drp, frp, root_object);
     return r;
 }
 
@@ -73,6 +73,16 @@ create_opaque_annotations_builder(const dynamic::repository& drp) const {
     r.setup(drp);
     r.validate();
     return r;
+}
+
+formattables::model workflow::create_formattables_model(
+    const options::cpp_options& opts,
+    const dynamic::repository& drp, const dynamic::object& root_object,
+    const dogen::formatters::decoration_configuration_factory& dcf,
+    const formatters::container& fc, const yarn::model& m) const {
+
+    formattables::workflow fw;
+    return fw.execute(opts, drp, root_object, dcf, fc, m);
 }
 
 std::string workflow::name() const {
@@ -89,6 +99,12 @@ workflow::managed_directories(const options::knitting_options& ko,
     return r;
 }
 
+std::forward_list<dogen::formatters::file>
+workflow::format(const formattables::model& fm) const {
+    formatters::workflow wf;
+    return wf.execute(fm);
+}
+
 std::forward_list<dynamic::ownership_hierarchy>
 workflow::ownership_hierarchy() const {
     using formatters::workflow;
@@ -99,23 +115,16 @@ std::forward_list<dogen::formatters::file>
 workflow::generate(const options::knitting_options& ko,
     const dynamic::repository& drp,
     const yarn::model& m) const {
-    BOOST_LOG_SEV(lg, debug) << "Started C++ backend.";
+    BOOST_LOG_SEV(lg, debug) << "Started backend.";
 
-    const auto dir(dogen::utility::filesystem::data_files_directory());
-    const auto dirs(std::forward_list<boost::filesystem::path> { dir });
-    const auto frp(create_formatters_repository(dirs));
-
+    const auto frp(create_formatters_repository());
     const auto ro(m.root_module().extensions());
     const auto dcf(create_decoration_configuration_factory(drp, frp, ro));
     const auto& fc(formatters::workflow::registrar().formatter_container());
+    const auto fm(create_formattables_model(ko.cpp(), drp, ro, dcf, fc, m));
+    const auto r(format(fm));
 
-    formattables::workflow fw;
-    const auto fm(fw.execute(ko.cpp(), drp, ro, dcf, fc, m));
-
-    formatters::workflow wf;
-    const auto r(wf.execute(fm));
-
-    BOOST_LOG_SEV(lg, debug) << "Finished C++ backend.";
+    BOOST_LOG_SEV(lg, debug) << "Finished backend.";
     return r;
 }
 

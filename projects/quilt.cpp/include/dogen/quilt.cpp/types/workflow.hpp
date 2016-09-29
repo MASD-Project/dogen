@@ -37,6 +37,7 @@
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/quilt/types/backend_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
+#include "dogen/quilt.cpp/types/formattables/model.hpp"
 #include "dogen/quilt.cpp/types/annotations/opaque_annotations_builder.hpp"
 
 namespace dogen {
@@ -59,8 +60,7 @@ private:
     /**
      * @brief Creates the formatters' repository.
      */
-    dogen::formatters::repository create_formatters_repository(
-        const std::forward_list<boost::filesystem::path>& dirs) const;
+    dogen::formatters::repository create_formatters_repository() const;
 
     /**
      * @brief Create the decoration configuration factory.
@@ -76,6 +76,21 @@ private:
      */
     annotations::opaque_annotations_builder
     create_opaque_annotations_builder(const dynamic::repository& rp) const;
+
+    /**
+     * @brief Create the formattables representation of the yarn model.
+     */
+    formattables::model create_formattables_model(
+        const options::cpp_options& opts,
+        const dynamic::repository& drp, const dynamic::object& root_object,
+        const dogen::formatters::decoration_configuration_factory& dcf,
+        const formatters::container& fc, const yarn::model& m) const;
+
+    /**
+     * @brief Create the files representation of the formattables model.
+     */
+    std::forward_list<dogen::formatters::file>
+    format(const formattables::model& fm) const;
 
 public:
     std::string name() const override;
