@@ -57,6 +57,13 @@ public:
     assistant(const context& ctx, const dynamic::ownership_hierarchy& oh,
         const bool requires_header_guard, const std::string& id);
 
+private:
+    /**
+     * @brief Ensures all expected annotations are available and set to
+     * valid values.
+     */
+    void validate() const;
+
 public:
     template<typename T>
     static const T&
@@ -68,8 +75,7 @@ public:
      * @brief Returns the text to use for a given class for the @code
      * final keyword. If non-empty, includes a trailing space.
      */
-    static std::string
-    make_final_keyword_text(const yarn::object& o);
+    static std::string make_final_keyword_text(const yarn::object& o);
 
     /**
      * @brief Returns the by-ref to use given the property.
@@ -80,9 +86,8 @@ public:
      * @brief Makes the return type of a setter, taking into account
      * fluency.
      */
-    static std::string
-    make_setter_return_type(const std::string& containing_type_name,
-        const yarn::attribute& attr);
+    static std::string make_setter_return_type(
+        const std::string& containing_type_name, const yarn::attribute& attr);
 
     /**
      * @brief Obtains the qualified name.
@@ -105,8 +110,8 @@ public:
 
 private:
     /**
-     * @brief Obtains the formatter properties for the formatter as
-     * given by the ownership hierarchy.
+     * @brief Obtains the formatter properties for the formatter
+     * identified by formatter name.
      *
      * @pre Formatter properties must exist for the formatter.
      */
@@ -129,8 +134,22 @@ public:
     std::string get_odb_facet_directory() const;
 
 public:
+    /**
+     * @brief If true, the current element requires a manually
+     * implemented default constructor.
+     */
     bool requires_manual_default_constructor() const;
+
+    /**
+     * @brief If true, the current element requires a manually
+     * implemented move constructor.
+     */
     bool requires_manual_move_constructor() const;
+
+    /**
+     * @brief If true, the current element requires stream
+     * manipulators to be setup.
+     */
     bool requires_stream_manipulators() const;
 
 public:
@@ -189,12 +208,6 @@ public:
         const formattables::helper_configuration& hc) const;
 
 public:
-    /**
-     * @brief Ensures all expected annotations are available and set to
-     * valid values.
-     */
-    void validate() const;
-
     /**
      * @brief Returns a scoped boilerplate formatter.
      */

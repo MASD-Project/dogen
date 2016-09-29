@@ -23,6 +23,7 @@
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/yarn/io/languages_io.hpp"
+#include "dogen/yarn/types/name_flattener.hpp"
 #include "dogen/quilt.cpp/types/annotations/helper_annotations_factory.hpp"
 #include "dogen/quilt.cpp/types/annotations/streaming_annotations_factory.hpp"
 #include "dogen/quilt.cpp/io/annotations/helper_annotations_io.hpp"
@@ -176,28 +177,8 @@ helper_expander::streaming_annotations_for_id(const annotations& a,
 
 std::list<std::string>
 helper_expander::namespace_list(const yarn::name& n) const {
-    const auto& l(n.location());
-    std::list<std::string> r(l.external_modules());
-
-    for (const auto& m : l.model_modules())
-        r.push_back(m);
-
-    for (const auto& m : l.internal_modules())
-        r.push_back(m);
-
-    /* if the name belongs to the model's module, we need to remove the
-     * module's simple name from the module path (it is in both the
-     * module path and it is also the module's simple name).
-     */
-    const bool no_internal_modules(l.internal_modules().empty());
-    const bool has_model_modules(!l.model_modules().empty());
-    const bool is_model_name(no_internal_modules && has_model_modules &&
-        n.simple() == l.model_modules().back());
-
-    if (is_model_name)
-        r.pop_back();
-
-    return r;
+    yarn::name_flattener nf;
+    return nf.flatten(n);
 }
 
 boost::optional<helper_descriptor> helper_expander::walk_name_tree(

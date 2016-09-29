@@ -61,6 +61,7 @@
 #include "dogen/yarn/types/parsing_error.hpp"
 #include "dogen/yarn/types/building_error.hpp"
 #include "dogen/yarn/types/indexing_error.hpp"
+#include "dogen/yarn/types/name_flattener.hpp"
 #include "dogen/yarn/types/pretty_printer.hpp"
 #include "dogen/yarn/types/printing_error.hpp"
 #include "dogen/yarn/types/element_visitor.hpp"
