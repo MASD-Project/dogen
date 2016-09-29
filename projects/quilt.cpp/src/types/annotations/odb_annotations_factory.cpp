@@ -31,9 +31,10 @@
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("quilt.cpp.annotations.odb_annotations_factory"));
+static logger
+lg(logger_factory("quilt.cpp.annotations.odb_annotations_factory"));
 
-const std::string factory_not_setup("Factory has not been setup");
+const std::string factory_not_initialised("Factory has not been initialised.");
 
 }
 
@@ -42,34 +43,35 @@ namespace quilt {
 namespace cpp {
 namespace annotations {
 
+odb_annotations_factory::odb_annotations_factory() : initialised_(false) {}
+
 odb_annotations_factory::~odb_annotations_factory() noexcept { }
 
 std::string odb_annotations_factory::annotations_key() const {
     return formatters::odb::traits::class_header_formatter_name();
 }
 
-void odb_annotations_factory::setup(const dynamic::repository& rp) {
-    field_definitions_ = boost::make_shared<field_definitions>();
-    const dynamic::repository_selector s(rp);
+void odb_annotations_factory::setup(const dynamic::repository& drp) {
+    const dynamic::repository_selector s(drp);
     const auto& cc(formatters::odb::traits::odb_pragma());
-    field_definitions_->odb_pragma = s.select_field_by_name(cc);
+    field_definitions_.odb_pragma = s.select_field_by_name(cc);
+    initialised_ = true;
 }
 
 boost::shared_ptr<opaque_annotations> odb_annotations_factory::
 make(const dynamic::object& o) const {
-    if (!field_definitions_) {
-        BOOST_LOG_SEV(lg, error) << factory_not_setup;
-        BOOST_THROW_EXCEPTION(building_error(factory_not_setup));
+
+    if (!initialised_) {
+        BOOST_LOG_SEV(lg, error) << factory_not_initialised;
+        BOOST_THROW_EXCEPTION(building_error(factory_not_initialised));
     }
 
-
     const dynamic::field_selector fs(o);
-    const auto& fd(field_definitions_->odb_pragma);
-    if (!fs.has_field(fd))
+    if (!fs.has_field(field_definitions_.odb_pragma))
         return boost::shared_ptr<opaque_annotations>();
 
     boost::shared_ptr<odb_annotations> r(new odb_annotations());
-    r->pragmas(fs.get_text_collection_content(fd));
+    r->pragmas(fs.get_text_collection_content(field_definitions_.odb_pragma));
     return r;
 }
 

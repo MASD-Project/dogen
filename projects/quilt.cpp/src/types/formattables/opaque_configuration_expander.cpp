@@ -40,9 +40,7 @@ namespace formattables {
 
 annotations::opaque_annotations_builder opaque_configuration_expander::
 create_opaque_annotations_builder(const dynamic::repository& drp) const {
-    annotations::opaque_annotations_builder r;
-    r.setup(drp);
-    r.validate();
+    annotations::opaque_annotations_builder r(drp);
     return r;
 }
 

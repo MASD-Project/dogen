@@ -38,7 +38,7 @@ namespace annotations {
 
 class streaming_annotations_factory {
 public:
-    explicit streaming_annotations_factory(const dynamic::repository& rp);
+    explicit streaming_annotations_factory(const dynamic::repository& drp);
 
 private:
     struct field_definitions {
@@ -47,7 +47,7 @@ private:
         dynamic::field_definition remove_unprintable_characters;
     };
 
-    field_definitions make_field_definitions(const dynamic::repository& rp);
+    field_definitions make_field_definitions(const dynamic::repository& drp);
 
 public:
     boost::optional<streaming_annotations> make(const dynamic::object& o) const;

@@ -37,14 +37,14 @@ namespace annotations {
 
 class helper_annotations_factory {
 public:
-    explicit helper_annotations_factory(const dynamic::repository& rp);
+    explicit helper_annotations_factory(const dynamic::repository& drp);
 
 private:
     struct field_definitions {
         dynamic::field_definition family;
     };
 
-    field_definitions make_field_definitions(const dynamic::repository& rp);
+    field_definitions make_field_definitions(const dynamic::repository& drp);
 
 public:
     helper_annotations make(const dynamic::object& o) const;

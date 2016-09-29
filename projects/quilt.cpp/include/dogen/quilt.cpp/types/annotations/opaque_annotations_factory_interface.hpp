@@ -57,7 +57,7 @@ public:
     virtual void setup(const dynamic::repository& rp) = 0;
 
     /**
-     * @brief Produces the special annotations for this formatter.
+     * @brief Produces the opaque annotations.
      */
     virtual boost::shared_ptr<opaque_annotations>
     make(const dynamic::object& o) const = 0;

@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include <boost/shared_ptr.hpp>
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/dynamic/types/field_definition.hpp"
 #include "dogen/quilt.cpp/types/annotations/opaque_annotations_factory_interface.hpp"
@@ -35,14 +34,13 @@ namespace quilt {
 namespace cpp {
 namespace annotations {
 
-class odb_annotations_factory final : public opaque_annotations_factory_interface {
+class odb_annotations_factory final
+    : public opaque_annotations_factory_interface {
 public:
+    odb_annotations_factory();
     ~odb_annotations_factory() noexcept;
 
 private:
-    /**
-     * @brief All field definitions we require.
-     */
     struct field_definitions {
         dynamic::field_definition odb_pragma;
     };
@@ -50,13 +48,19 @@ private:
 public:
     std::string annotations_key() const override;
 
-    void setup(const dynamic::repository& rp) override;
+    void setup(const dynamic::repository& drp) override;
 
     boost::shared_ptr<opaque_annotations>
-        make(const dynamic::object& o) const override;
+    make(const dynamic::object& o) const override;
 
 private:
-    boost::shared_ptr<field_definitions> field_definitions_;
+    /*
+     * We need to keep track of initialisation because we cannot
+     * initialise the factory on construction, as we do not have
+     * access to the dynamic repository.
+     */
+    bool initialised_;
+    field_definitions field_definitions_;
 };
 
 } } } }

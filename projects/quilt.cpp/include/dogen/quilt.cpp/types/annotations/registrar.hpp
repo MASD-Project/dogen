@@ -46,7 +46,7 @@ public:
 
 public:
     /**
-     * @brief Registers a opaque annotations factory.
+     * @brief Registers an opaque annotations factory.
      */
     void register_opaque_annotations_factory(
         boost::shared_ptr<opaque_annotations_factory_interface> f);
@@ -56,7 +56,7 @@ public:
      */
     const std::forward_list<
         boost::shared_ptr<opaque_annotations_factory_interface>
-        >& opaque_annotations_factories() const;
+    >& opaque_annotations_factories() const;
 
 private:
     std::forward_list<

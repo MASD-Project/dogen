@@ -46,12 +46,14 @@ public:
     static cpp::annotations::registrar& registrar();
 
 public:
+    explicit opaque_annotations_builder(const dynamic::repository& drp);
+
+private:
     /**
      * @brief Sets up the builder.
      */
-    void setup(const dynamic::repository& rp);
+    void setup(const dynamic::repository& drp);
 
-public:
     /**
      * @brief Ensures the builder is in a valid state.
      */

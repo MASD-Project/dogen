@@ -43,10 +43,10 @@ namespace cpp {
 namespace annotations {
 
 inclusion_directive_annotations_factory::
-inclusion_directive_annotations_factory(const dynamic::repository& rp,
+inclusion_directive_annotations_factory(const dynamic::repository& drp,
     const formatters::container& fc)
-    : field_definitions_(make_field_definitions(rp, fc)),
-      inclusion_required_(get_top_level_inclusion_required_field(rp)) {}
+    : field_definitions_(make_field_definitions(drp, fc)),
+      inclusion_required_(get_top_level_inclusion_required_field(drp)) {}
 
 inclusion_directive_annotations_factory::field_definitions
 inclusion_directive_annotations_factory::make_field_definitions(
@@ -74,21 +74,16 @@ make_field_definitions(const dynamic::repository& rp,
 
     for (const auto f : fc.file_formatters()) {
         const auto& oh(f->ownership_hierarchy());
-        const auto fn(oh.formatter_name());
-
-        if (fn.empty()) {
-            BOOST_LOG_SEV(lg, error) << empty_formatter_name;
-            BOOST_THROW_EXCEPTION(building_error(empty_formatter_name));
-        }
+        const auto fmtn(oh.formatter_name());
 
         using formatters::inclusion_support_types;
         static const auto ns(inclusion_support_types::not_supported);
         if (f->inclusion_support_type() == ns) {
-            BOOST_LOG_SEV(lg, debug) << "Skipping formatter: " << fn;
+            BOOST_LOG_SEV(lg, debug) << "Skipping formatter: " << fmtn;
             continue;
         }
 
-        r[oh.formatter_name()] = make_field_definitions(rp, fn);
+        r[fmtn] = make_field_definitions(rp, fmtn);
     }
     return r;
 }

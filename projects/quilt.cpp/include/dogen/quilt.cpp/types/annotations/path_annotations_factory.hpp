@@ -47,9 +47,9 @@ namespace annotations {
  */
 class path_annotations_factory {
 public:
-    path_annotations_factory(const dynamic::repository& rp,
+    path_annotations_factory(const dynamic::repository& drp,
         const std::forward_list<
-        std::shared_ptr<formatters::file_formatter_interface>>& formatters);
+            std::shared_ptr<formatters::file_formatter_interface>>& formatters);
 
 private:
     /**
@@ -71,19 +71,19 @@ private:
     /**
      * @brief Sets up top-level fields.
      */
-    void setup_top_level_fields(const dynamic::repository& rp,
+    void setup_top_level_fields(const dynamic::repository& drp,
         field_definitions& fd) const;
 
     /**
      * @brief Sets up facet fields.
      */
-    void setup_facet_fields(const dynamic::repository& rp,
+    void setup_facet_fields(const dynamic::repository& drp,
         const std::string& facet_name, field_definitions& fd) const;
 
     /**
      * @brief Sets up formatter fields.
      */
-    void setup_formatter_fields(const dynamic::repository& rp,
+    void setup_formatter_fields(const dynamic::repository& drp,
         const std::string& formatter_name,
         field_definitions& fp) const;
 
@@ -91,8 +91,7 @@ private:
      * @brief Creates the set of field definitions for a given
      * formatter.
      */
-    field_definitions make_field_definitions(
-        const dynamic::repository& rp,
+    field_definitions make_field_definitions(const dynamic::repository& drp,
         const formatters::file_formatter_interface& f) const;
 
     /**
@@ -100,7 +99,7 @@ private:
      * repository data and the registered formatters.
      */
     std::unordered_map<std::string, field_definitions>
-    make_field_definitions(const dynamic::repository& rp,
+    make_field_definitions(const dynamic::repository& drp,
         const std::forward_list<
             std::shared_ptr<formatters::file_formatter_interface>
         >& formatters) const;
@@ -109,8 +108,8 @@ private:
     /**
      * @brief Creates the path annotations for a given formatter.
      */
-    path_annotations create_annotations_for_formatter(const field_definitions& fd,
-        const dynamic::object& o) const;
+    path_annotations create_annotations_for_formatter(
+        const field_definitions& fd, const dynamic::object& o) const;
 
 public:
     /**
@@ -122,7 +121,7 @@ public:
     make(const dynamic::object& o) const;
 
 private:
-    const std::unordered_map<std::string, field_definitions>
+   const std::unordered_map<std::string, field_definitions>
     field_definitions_;
 };
 

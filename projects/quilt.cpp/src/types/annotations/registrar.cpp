@@ -60,7 +60,7 @@ void registrar::register_opaque_annotations_factory(
 
 const std::forward_list<
     boost::shared_ptr<opaque_annotations_factory_interface>
-    >& registrar::opaque_annotations_factories() const {
+>& registrar::opaque_annotations_factories() const {
     return opaque_annotations_factories_;
 }
 

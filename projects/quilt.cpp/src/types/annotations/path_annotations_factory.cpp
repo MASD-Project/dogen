@@ -29,7 +29,8 @@
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("quilt.cpp.annotations.path_annotations_factory"));
+static logger
+lg(logger_factory("quilt.cpp.annotations.path_annotations_factory"));
 
 const std::string empty_formatter_name("Formatter name is empty.");
 
@@ -41,15 +42,15 @@ namespace cpp {
 namespace annotations {
 
 path_annotations_factory::
-path_annotations_factory(const dynamic::repository& rp,
+path_annotations_factory(const dynamic::repository& drp,
     const std::forward_list<
     std::shared_ptr<formatters::file_formatter_interface>>& formatters)
-    : field_definitions_(make_field_definitions(rp, formatters)) { }
+    : field_definitions_(make_field_definitions(drp, formatters)) { }
 
 void path_annotations_factory::setup_top_level_fields(
-    const dynamic::repository& rp, field_definitions& fd) const {
+    const dynamic::repository& drp, field_definitions& fd) const {
 
-    const dynamic::repository_selector s(rp);
+    const dynamic::repository_selector s(drp);
     const auto& idn(traits::cpp::include_directory_name());
     fd.include_directory_name = s.select_field_by_name(idn);
 
@@ -67,12 +68,11 @@ void path_annotations_factory::setup_top_level_fields(
 }
 
 void path_annotations_factory::setup_facet_fields(
-    const dynamic::repository& rp,
-    const std::string& facet_name,
+    const dynamic::repository& drp, const std::string& facet_name,
     path_annotations_factory::field_definitions& fd) const {
 
     const auto& fn(facet_name);
-    const dynamic::repository_selector s(rp);
+    const dynamic::repository_selector s(drp);
 
     auto dir(s.try_select_field_by_name(fn, traits::directory()));
     if (dir)
@@ -84,33 +84,31 @@ void path_annotations_factory::setup_facet_fields(
 }
 
 void path_annotations_factory::setup_formatter_fields(
-    const dynamic::repository& rp,
-    const std::string& formatter_name,
+    const dynamic::repository& drp, const std::string& formatter_name,
     path_annotations_factory::field_definitions& fd) const {
 
     const auto& fn(formatter_name);
-    const dynamic::repository_selector s(rp);
+    const dynamic::repository_selector s(drp);
     fd.formatter_postfix = s.select_field_by_name(fn, traits::postfix());
 }
 
 path_annotations_factory::field_definitions
-path_annotations_factory::make_field_definitions(
-    const dynamic::repository& rp,
+path_annotations_factory::make_field_definitions(const dynamic::repository& drp,
     const formatters::file_formatter_interface& f) const {
 
     field_definitions r;
     const auto oh(f.ownership_hierarchy());
     r.formatter_name = oh.formatter_name();
-    setup_top_level_fields(rp, r);
-    setup_facet_fields(rp, oh.facet_name(), r);
-    setup_formatter_fields(rp, oh.formatter_name(), r);
+    setup_top_level_fields(drp, r);
+    setup_facet_fields(drp, oh.facet_name(), r);
+    setup_formatter_fields(drp, oh.formatter_name(), r);
 
     return r;
 }
 
 std::unordered_map<std::string, path_annotations_factory::field_definitions>
 path_annotations_factory::make_field_definitions(
-    const dynamic::repository& rp,
+    const dynamic::repository& drp,
     const std::forward_list<
     std::shared_ptr<formatters::file_formatter_interface>>& formatters) const {
     std::unordered_map<std::string, field_definitions> r;
@@ -121,9 +119,8 @@ path_annotations_factory::make_field_definitions(
             BOOST_LOG_SEV(lg, error) << empty_formatter_name;
             BOOST_THROW_EXCEPTION(building_error(empty_formatter_name));
         }
-        r[oh.formatter_name()] = make_field_definitions(rp, *f);
+        r[oh.formatter_name()] = make_field_definitions(drp, *f);
     }
-
     return r;
 }
 
@@ -132,7 +129,6 @@ create_annotations_for_formatter(const field_definitions& fd,
     const dynamic::object& o) const {
 
     path_annotations r;
-
     const dynamic::field_selector fs(o);
 
     if (fd.facet_directory)

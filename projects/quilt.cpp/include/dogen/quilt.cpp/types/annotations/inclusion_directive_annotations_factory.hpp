@@ -46,76 +46,45 @@ namespace annotations {
 class inclusion_directive_annotations_factory {
 public:
     inclusion_directive_annotations_factory(
-        const dynamic::repository& rp, const formatters::container& fc);
+        const dynamic::repository& drp, const formatters::container& fc);
 
 private:
-    /**
-     * @brief All field definitions we require.
-     */
     struct field_definitions {
         dynamic::field_definition inclusion_directive;
         dynamic::field_definition inclusion_required;
     };
 
-    /**
-     * @brief Creates the set of field definitions for a given
-     * formatter.
-     */
     field_definitions make_field_definitions(const dynamic::repository& rp,
         const std::string& formatter_name) const;
 
-    /**
-     * @brief Generates all of the field definitions, using the
-     * repository data and the registered formatters.
-     */
     std::unordered_map<std::string, field_definitions>
     make_field_definitions(const dynamic::repository& rp,
         const formatters::container& fc) const;
 
-    /**
-     * @brief Gets up the top-level (non-formatter specific) inclusion
-     * required field.
-     */
     dynamic::field_definition get_top_level_inclusion_required_field(
         const dynamic::repository& rp) const;
 
 private:
-    /**
-     * @brief Obtains the inclusion directive for a given formatter.
-     */
     boost::optional<std::string> obtain_inclusion_directive_for_formatter(
         const field_definitions& fd,
         const dynamic::object& o) const;
 
-    /**
-     * @brief Obtains the inclusion required flag for a given formatter.
-     */
     bool obtain_inclusion_required_for_formatter(
         const field_definitions& fd,
         const dynamic::object& o) const;
 
-    /**
-     * @brief Obtains the value of the inclusion required flag.
-     */
     bool obtain_top_level_inclusion_required(
         const dynamic::object& o) const;
 
 public:
-    /**
-     * @brief Produces the top-level flag for inclusion.
-     */
     bool make_top_level_inclusion_required(const dynamic::object& o) const;
 
-    /**
-     * @brief Produce the inclusion directive annotations for a given
-     * formatter.
-     */
     inclusion_directive_annotations make_inclusion_directive_annotations(
         const std::string& formatter_name, const dynamic::object& o) const;
 
 private:
     const std::unordered_map<std::string, field_definitions> field_definitions_;
-    dynamic::field_definition inclusion_required_;
+    const dynamic::field_definition inclusion_required_;
 };
 
 } } } }

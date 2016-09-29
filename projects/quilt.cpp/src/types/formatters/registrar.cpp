@@ -39,11 +39,13 @@ const std::string no_file_formatters_by_type_index(
 const std::string no_forward_declarations_formatters(
     "No forward declarations formatters provided.");
 const std::string null_formatter("Formatter supplied is null.");
-const std::string duplicate_formatter_id("Duplicate formatter id: ");
+
+const std::string empty_formatter_name("Formatter name is empty.");
+const std::string empty_facet_name("Facet name is empty.");
+const std::string empty_model_name("Model name is empty.");
+const std::string duplicate_formatter_name("Duplicate formatter name: ");
 const std::string empty_family("Family cannot be empty.");
 const std::string null_formatter_helper("Formatter helper supplied is null");
-const std::string unsupported_element_type(
-    "Element type is not supported by formatters.");
 
 }
 
@@ -96,7 +98,17 @@ register_formatter(std::shared_ptr<file_formatter_interface> f) {
     if (!f)
         BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
 
-    ownership_hierarchy_.push_front(f->ownership_hierarchy());
+    const auto& oh(f->ownership_hierarchy());
+    if (oh.formatter_name().empty())
+        BOOST_THROW_EXCEPTION(registrar_error(empty_formatter_name));
+
+    if (oh.facet_name().empty())
+        BOOST_THROW_EXCEPTION(registrar_error(empty_facet_name));
+
+    if (oh.model_name().empty())
+        BOOST_THROW_EXCEPTION(registrar_error(empty_model_name));
+
+    ownership_hierarchy_.push_front(oh);
     formatter_container_.file_formatters_.push_front(f);
 
     /*
@@ -111,13 +123,13 @@ register_formatter(std::shared_ptr<file_formatter_interface> f) {
      * formatter into this container has the helpful side-effect of
      * ensuring the formatter id is unique in formatter space.
      */
-    const auto fmtn(f->ownership_hierarchy().formatter_name());
+    const auto fmtn(oh.formatter_name());
     auto& fffn(formatter_container_.file_formatters_by_formatter_name());
     const auto pair(std::make_pair(fmtn, f));
     const auto inserted(fffn.insert(pair).second);
     if (!inserted) {
-        BOOST_LOG_SEV(lg, error) << duplicate_formatter_id << fmtn;
-        BOOST_THROW_EXCEPTION(registrar_error(duplicate_formatter_id + fmtn));
+        BOOST_LOG_SEV(lg, error) << duplicate_formatter_name << fmtn;
+        BOOST_THROW_EXCEPTION(registrar_error(duplicate_formatter_name + fmtn));
     }
 }
 

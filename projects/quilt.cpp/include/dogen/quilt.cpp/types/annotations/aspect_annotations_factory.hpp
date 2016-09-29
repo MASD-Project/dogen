@@ -37,33 +37,21 @@ namespace quilt {
 namespace cpp {
 namespace annotations {
 
-/**
- * @brief Creates the aspect annotations.
- */
 class aspect_annotations_factory {
 public:
-    explicit aspect_annotations_factory(const dynamic::repository& rp);
+    explicit aspect_annotations_factory(const dynamic::repository& drp);
 
 private:
-    /**
-     * @brief All field definitions we require.
-     */
     struct field_definitions {
         dynamic::field_definition requires_manual_default_constructor;
         dynamic::field_definition requires_manual_move_constructor;
         dynamic::field_definition requires_stream_manipulators;
     };
 
-    /**
-     * @brief Creates all of field definitions.
-     */
-    field_definitions make_field_definitions(
-        const dynamic::repository& rp) const;
+    field_definitions
+    make_field_definitions(const dynamic::repository& drp) const;
 
 public:
-    /**
-     * @brief Produces the aspect annotations.
-     */
     boost::optional<aspect_annotations> make(const dynamic::object& o) const;
 
 private:

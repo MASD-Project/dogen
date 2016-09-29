@@ -18,7 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/quilt.cpp/types/annotations/building_error.hpp"
 #include "dogen/quilt.cpp/types/annotations/opaque_annotations_builder.hpp"
 #include "dogen/quilt.cpp/types/annotations/opaque_annotations_factory_interface.hpp"
 
@@ -26,6 +28,8 @@ namespace {
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory("quilt.cpp.annotations.opaque_annotations_builder"));
+
+const std::string duplicate_annotation_key("Duplicate annotation key: ");
 
 }
 
@@ -42,6 +46,12 @@ cpp::annotations::registrar& opaque_annotations_builder::registrar() {
         registrar_ = std::make_shared<cpp::annotations::registrar>();
 
     return *registrar_;
+}
+
+opaque_annotations_builder::
+opaque_annotations_builder(const dynamic::repository& drp) {
+    setup(drp);
+    validate();
 }
 
 void opaque_annotations_builder::validate() const {
@@ -61,21 +71,29 @@ void opaque_annotations_builder::validate() const {
     BOOST_LOG_SEV(lg, debug) << "Finished validating workflow.";
 }
 
-void opaque_annotations_builder::setup(const dynamic::repository& rp) {
+void opaque_annotations_builder::setup(const dynamic::repository& drp) {
     BOOST_LOG_SEV(lg, debug) << "Setting up all opaque annotations factories.";
     const auto& factories(registrar().opaque_annotations_factories());
     for (auto f : factories)
-        f->setup(rp);
+        f->setup(drp);
 }
 
 std::unordered_map<std::string, boost::shared_ptr<opaque_annotations>>
 opaque_annotations_builder::build(const dynamic::object& o) const {
-
     std::unordered_map<std::string, boost::shared_ptr<opaque_annotations> > r;
     for (const auto f : registrar().opaque_annotations_factories()) {
-        auto os(f->make(o));
-        if (os)
-            r[f->annotations_key()] = os;
+        auto oa(f->make(o));
+        if (!oa)
+            continue;
+
+        const auto key(f->annotations_key());
+        const auto pair(std::make_pair(key, oa));
+        const auto inserted(r.insert(pair).second);
+        if (inserted)
+            continue;
+
+        BOOST_LOG_SEV(lg, error) << duplicate_annotation_key << key;
+        BOOST_THROW_EXCEPTION(building_error(duplicate_annotation_key + key));
     }
     return r;
 }

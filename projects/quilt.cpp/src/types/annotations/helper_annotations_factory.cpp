@@ -29,17 +29,16 @@ namespace cpp {
 namespace annotations {
 
 helper_annotations_factory::
-helper_annotations_factory(const dynamic::repository& rp)
-    : field_definitions_(make_field_definitions(rp)) { }
+helper_annotations_factory(const dynamic::repository& drp)
+    : field_definitions_(make_field_definitions(drp)) { }
 
 helper_annotations_factory::field_definitions helper_annotations_factory::
-make_field_definitions(const dynamic::repository& rp) {
+make_field_definitions(const dynamic::repository& drp) {
     field_definitions r;
+    const dynamic::repository_selector s(drp);
 
-    const dynamic::repository_selector s(rp);
     const auto hf(traits::cpp::helper::family());
     r.family = s.select_field_by_name(hf);
-
     return r;
 }
 

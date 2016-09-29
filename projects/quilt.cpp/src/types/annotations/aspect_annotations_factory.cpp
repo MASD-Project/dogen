@@ -28,7 +28,8 @@
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("quilt.cpp.annotations.aspect_annotations_factory"));
+static logger
+lg(logger_factory("quilt.cpp.annotations.aspect_annotations_factory"));
 
 const std::string empty_formatter_name("Formatter name is empty.");
 
@@ -40,14 +41,14 @@ namespace cpp {
 namespace annotations {
 
 aspect_annotations_factory::
-aspect_annotations_factory(const dynamic::repository& rp)
-    : field_definitions_(make_field_definitions(rp)) {}
+aspect_annotations_factory(const dynamic::repository& drp)
+    : field_definitions_(make_field_definitions(drp)) {}
 
 aspect_annotations_factory::field_definitions aspect_annotations_factory::
-make_field_definitions(const dynamic::repository& rp) const {
+make_field_definitions(const dynamic::repository& drp) const {
 
     field_definitions r;
-    const dynamic::repository_selector rs(rp);
+    const dynamic::repository_selector rs(drp);
     typedef traits::cpp::aspect aspect;
 
     const auto& rmdc(aspect::requires_manual_default_constructor());
@@ -68,30 +69,30 @@ aspect_annotations_factory::make(const dynamic::object& o) const {
 
     const dynamic::field_selector fs(o);
     const auto& fd(field_definitions_);
-    bool found(false);
+    bool found_any(false);
 
     if (fs.has_field(fd.requires_manual_default_constructor))
-        found = true;
+        found_any = true;
 
     r.requires_manual_default_constructor(
         fs.get_boolean_content_or_default(
             fd.requires_manual_default_constructor));
 
     if (fs.has_field(fd.requires_manual_move_constructor))
-        found = true;
+        found_any = true;
 
     r.requires_manual_move_constructor(
         fs.get_boolean_content_or_default(
             fd.requires_manual_move_constructor));
 
     if (fs.has_field(fd.requires_stream_manipulators))
-        found = true;
+        found_any = true;
 
     r.requires_stream_manipulators(
         fs.get_boolean_content_or_default(
             fd.requires_stream_manipulators));
 
-    if (found)
+    if (found_any)
         return r;
 
     return boost::optional<aspect_annotations>();

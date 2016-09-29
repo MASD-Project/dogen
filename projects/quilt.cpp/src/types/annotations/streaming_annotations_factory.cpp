@@ -29,15 +29,15 @@ namespace cpp {
 namespace annotations {
 
 streaming_annotations_factory::
-streaming_annotations_factory(const dynamic::repository& rp)
-    : field_definitions_(make_field_definitions(rp)) { }
+streaming_annotations_factory(const dynamic::repository& drp)
+    : field_definitions_(make_field_definitions(drp)) { }
 
 streaming_annotations_factory::field_definitions
 streaming_annotations_factory::
-make_field_definitions(const dynamic::repository& rp) {
+make_field_definitions(const dynamic::repository& drp) {
     field_definitions r;
 
-    const dynamic::repository_selector s(rp);
+    const dynamic::repository_selector s(drp);
     const auto scm(traits::cpp::streaming::string_conversion_method());
     r.string_conversion_method = s.select_field_by_name(scm);
 
@@ -52,30 +52,31 @@ make_field_definitions(const dynamic::repository& rp) {
 
 boost::optional<streaming_annotations>
 streaming_annotations_factory::make(const dynamic::object& o) const {
+
+    bool found_any(false);
     streaming_annotations r;
     const auto& fd(field_definitions_);
     const dynamic::field_selector fs(o);
-    bool has_annotations(false);
 
     const auto& rq(fd.requires_quoting);
     if (fs.has_field(rq)) {
-        has_annotations = true;
         r.requires_quoting(fs.get_boolean_content_or_default(rq));
+        found_any = true;
     }
 
     const auto& scm(fd.string_conversion_method);
     if (fs.has_field(scm)) {
-        has_annotations = true;
         r.string_conversion_method(fs.get_text_content_or_default(scm));
+        found_any = true;
     }
 
     const auto& ruc(fd.remove_unprintable_characters);
     if (fs.has_field(ruc)) {
-        has_annotations = true;
         r.remove_unprintable_characters(fs.get_boolean_content_or_default(ruc));
+        found_any = true;
     }
 
-    if (!has_annotations)
+    if (!found_any)
         return boost::optional<streaming_annotations>();
 
     return r;
