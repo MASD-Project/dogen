@@ -61,6 +61,10 @@ if (UNIX)
     endif()
 endif()
 
+if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+    set(CMAKE_COMPILER_IS_CLANGXX "TRUE")
+endif()
+
 if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANGXX)
     # enable as many warnings as possible
     set(warning_flags "-Wall -Wextra")
