@@ -31,16 +31,15 @@
 #include "dogen/quilt.cpp/types/formattables/workflow.hpp"
 #include "dogen/quilt.cpp/io/formattables/aspect_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/helper_configuration_io.hpp"
-#include "dogen/quilt.cpp/types/annotations/directory_names_annotations_factory.hpp"
 #include "dogen/quilt.cpp/types/workflow_error.hpp"
 #include "dogen/quilt.cpp/types/workflow.hpp"
 
 namespace {
 
-const std::string id("quilt.cpp.workflow");
+const std::string name("quilt.cpp.workflow");
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory(id));
+static logger lg(logger_factory(name));
 
 const std::string dot(".");
 
@@ -77,15 +76,13 @@ create_opaque_annotations_builder(const dynamic::repository& drp) const {
 }
 
 std::string workflow::name() const {
-    return ::id;
+    return ::name;
 }
 
 std::forward_list<boost::filesystem::path>
 workflow::managed_directories(const options::knitting_options& ko,
-    const dynamic::repository& rp, const yarn::model& m) const {
+    const dynamic::repository& /*rp*/, const yarn::model& m) const {
     const auto ro(m.root_module().extensions());
-    annotations::directory_names_annotations_factory f(rp);
-    const auto dn(f.make(ro));
     const auto& mm(m.name().location().model_modules());
     const auto mn(boost::algorithm::join(mm, dot));
     std::forward_list<boost::filesystem::path> r;

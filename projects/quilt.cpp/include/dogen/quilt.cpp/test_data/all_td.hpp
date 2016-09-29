@@ -45,7 +45,6 @@
 #include "dogen/quilt.cpp/test_data/formattables/element_configuration_td.hpp"
 #include "dogen/quilt.cpp/test_data/formatters/inclusion_support_types_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/formatter_configuration_td.hpp"
-#include "dogen/quilt.cpp/test_data/annotations/directory_names_annotations_td.hpp"
 #include "dogen/quilt.cpp/test_data/annotations/inclusion_directive_annotations_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/local_enablement_configuration_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/global_enablement_configuration_td.hpp"

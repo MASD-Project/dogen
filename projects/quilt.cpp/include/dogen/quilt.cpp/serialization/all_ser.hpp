@@ -45,7 +45,6 @@
 #include "dogen/quilt.cpp/serialization/formattables/element_configuration_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formatters/inclusion_support_types_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/formatter_configuration_ser.hpp"
-#include "dogen/quilt.cpp/serialization/annotations/directory_names_annotations_ser.hpp"
 #include "dogen/quilt.cpp/serialization/annotations/inclusion_directive_annotations_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/local_enablement_configuration_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/global_enablement_configuration_ser.hpp"
