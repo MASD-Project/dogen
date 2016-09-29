@@ -58,8 +58,7 @@ public:
      */
     virtual std::forward_list<boost::filesystem::path>
     managed_directories(const options::knitting_options& ko,
-        const dynamic::repository& rp,
-        const yarn::model& m) const = 0;
+        const yarn::name& model_name) const = 0;
 
     /**
      * @brief Complete ownership hierarchy for this backend, listing

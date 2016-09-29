@@ -57,7 +57,7 @@ workflow::managed_directories(const yarn::model& m) const {
     const auto& ko(knitting_options_);
     std::forward_list<boost::filesystem::path> r;
     for(const auto b : registrar().backends()) {
-        const auto md(b->managed_directories(ko, repository_, m));
+        const auto md(b->managed_directories(ko, m.name()));
         for (const auto& d : md)
             r.push_front(d);
     }

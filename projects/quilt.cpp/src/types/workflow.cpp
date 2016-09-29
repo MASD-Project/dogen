@@ -81,9 +81,8 @@ std::string workflow::name() const {
 
 std::forward_list<boost::filesystem::path>
 workflow::managed_directories(const options::knitting_options& ko,
-    const dynamic::repository& /*rp*/, const yarn::model& m) const {
-    const auto ro(m.root_module().extensions());
-    const auto& mm(m.name().location().model_modules());
+    const yarn::name& model_name) const {
+    const auto& mm(model_name.location().model_modules());
     const auto mn(boost::algorithm::join(mm, dot));
     std::forward_list<boost::filesystem::path> r;
     r.push_front(ko.cpp().project_directory_path() / mn);
