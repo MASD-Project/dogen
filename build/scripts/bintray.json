@@ -24,6 +24,7 @@
     "files":
         [
             { "includePattern": "build/output/Release/gcc-6/stage/pkg/*.deb" }
+            { "includePattern": "build/output/Release/gcc-6/stage/pkg/*.dmg" }
         ],
     "publish": true
 }
