@@ -48,8 +48,8 @@ compiler="$1"
 shift
 if [ "${compiler}" = "clang" ]; then
     echo "* Compiler: ${compiler}"
-    export CC=clang-3.7
-    export CXX=clang++-3.7
+    export CC=clang
+    export CXX=clang++
 else
     echo "* Unrecognised compiler: ${compiler}"
     exit
