@@ -74,7 +74,7 @@ cmake_name="cmake-3.4.1-Linux-x86_64"
 cmake_tar="${cmake_name}.tar.gz"
 cmake_input="https://cmake.org/files/v3.4/${cmake_tar}"
 cmake_output="/tmp/${cmake_tar}"
-wget --no-check-certificate ${cmake_package} -O ${cmake_output}
+wget --no-check-certificate ${cmake_tar} -O ${cmake_output}
 tar xf ${cmake_output} -C /tmp
 sudo cp -r /tmp/${cmake_name}/* /usr
 
