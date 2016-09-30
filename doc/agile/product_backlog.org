@@ -4706,6 +4706,18 @@ become very readable.
 These stories are good candidates for the subsequent release. This
 release will be all about adding new features.
 
+*** Split include and source directories                              :story:
+
+We removed a feature due to lack of use cases: splitting source and
+include directories. It allowed having them placed in different
+top-level directories. It also meant that the computation of managed
+directories required access to the root object. In case we need to
+reactivate this story (if we find a use case), we keep track of the
+commits that removed the feature here.
+
+2cd2d89 * quilt.cpp: tidy-up annotations
+8e2e0e4 * quilt.cpp: tidy-up main workflow
+
 *** Strong type aliasing                                              :story:
 
 One extremely useful feature would be to create "aliases" for types
