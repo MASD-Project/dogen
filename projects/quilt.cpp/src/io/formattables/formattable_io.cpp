@@ -61,7 +61,8 @@ namespace formattables {
 std::ostream& operator<<(std::ostream& s, const formattable& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::formattable\"" << ", "
-      << "\"element_segments\": " << v.element_segments() << ", "
+      << "\"master_segment\": " << v.master_segment() << ", "
+      << "\"all_segments\": " << v.all_segments() << ", "
       << "\"configuration\": " << v.configuration()
       << " }";
     return(s);

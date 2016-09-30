@@ -44,6 +44,7 @@ std::unordered_map<std::string, formattable> transformer::
 transform(const formatters::container& fc, const yarn::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming yarn to formattables."
                              << " Elements in model: " << m.elements().size();
+
     std::unordered_map<std::string, formattable> r;
     for (const auto& ptr : m.elements()) {
         const auto& e(*ptr);
@@ -53,17 +54,18 @@ transform(const formatters::container& fc, const yarn::model& m) const {
         auto i(r.find(id));
         if (i == r.end()) {
             formattable fbl;
-            fbl.element_segments().push_back(ptr);
             const auto pair(std::make_pair(id, fbl));
             const auto ret(r.insert(pair));
             i = ret.first;
             BOOST_LOG_SEV(lg, debug) << "Inserted element: " << id;
-        } else {
-            i->second.element_segments().push_back(ptr);
-            BOOST_LOG_SEV(lg, debug) << "Element already inserted.";
-        }
+        } else
+            BOOST_LOG_SEV(lg, debug) << "Element already inserted. ";
 
         auto& fbl(i->second);
+        fbl.all_segments().push_back(ptr);
+        if (!e.is_element_extension())
+            fbl.master_segment(ptr);
+
         const auto ti(std::type_index(typeid(e)));
         const auto j(fc.file_formatters_by_type_index().find(ti));
         if (j == fc.file_formatters_by_type_index().end()) {

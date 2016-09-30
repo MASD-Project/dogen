@@ -261,16 +261,17 @@ compute_inclusion_directives(const dynamic::repository& drp,
      */
     const auto ffti(includible_formatters_by_type_index(fc));
 
+    const annotations::inclusion_directive_annotations_factory f(drp, fc);
+
     /*
      * Now, for all formattables and their associated element
      * segments, find the formatters that support the element segment
      * and compute the inclusion directive for it.
      */
-    const annotations::inclusion_directive_annotations_factory f(drp, fc);
     for (const auto& pair : formattables) {
         const auto& formattable(pair.second);
 
-        for (const auto& segment : formattable.element_segments()) {
+        for (const auto& segment : formattable.all_segments()) {
             const auto& e(*segment);
             const auto id(e.name().id());
             const auto ti(std::type_index(typeid(e)));
@@ -381,7 +382,7 @@ void inclusion_expander::populate_inclusion_dependencies(
          * our container up front and populate it for each segment.
          */
         auto& fmt_cfg(formattable.configuration().formatter_configuration());
-        for (const auto& ptr : formattable.element_segments()) {
+        for (const auto& ptr : formattable.all_segments()) {
             const auto& e(*ptr);
 
             /*

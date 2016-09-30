@@ -141,16 +141,13 @@ void opaque_configuration_expander::populate_opaque_configuration(
 
         auto& formattable(pair.second);
         auto& fmtt_cfgs(formattable.configuration().formatter_configuration());
-        for (const auto& segment : formattable.element_segments()) {
-            /*
-             * We only want to process the master segment; the
-             * extensions can be ignored.
-             */
-            if (segment->is_element_extension())
-                continue;
 
-            populate_opaque_configuration(b, *segment, fmtt_cfgs);
-        }
+        /*
+         * We only want to process the master segment; the
+         * extensions can be ignored.
+         */
+        auto& segment(*formattable.master_segment());
+        populate_opaque_configuration(b, segment, fmtt_cfgs);
     }
 }
 

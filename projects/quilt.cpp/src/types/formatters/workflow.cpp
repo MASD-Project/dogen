@@ -118,7 +118,7 @@ workflow::execute(const formattables::model& fm) const {
     std::forward_list<dogen::formatters::file> r;
     for (const auto& formattable : fm.formattables()) {
         const auto& fmt_cfg(formattable.configuration());
-        for (const auto& segment : formattable.element_segments()) {
+        for (const auto& segment : formattable.all_segments()) {
             const auto& e(*segment);
             r.splice_after(r.before_begin(), format(fm, e, fmt_cfg));
         }

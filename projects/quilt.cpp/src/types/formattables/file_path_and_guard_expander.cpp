@@ -67,11 +67,10 @@ expand(const formatters::container& fc, const locator& l,
         auto& formattable(pair.second);
 
         /*
-         * All segments are mapped to the same name, so we can pick
-         * one at random. A formattable must have at least one
-         * segment, so we can rely on its presence.
+         * It doesn't really matter which segment we choose here since
+         * they are both mapped to the same name.
          */
-        const auto& e(*formattable.element_segments().front());
+        const auto& e(*formattable.master_segment());
         const auto n(e.name());
         auto& cfg(formattable.configuration());
 

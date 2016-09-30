@@ -54,7 +54,8 @@ namespace formattables {
 std::size_t formattable_hasher::hash(const formattable& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_list_boost_shared_ptr_dogen_yarn_element(v.element_segments()));
+    combine(seed, hash_boost_shared_ptr_dogen_yarn_element(v.master_segment()));
+    combine(seed, hash_std_list_boost_shared_ptr_dogen_yarn_element(v.all_segments()));
     combine(seed, v.configuration());
 
     return seed;

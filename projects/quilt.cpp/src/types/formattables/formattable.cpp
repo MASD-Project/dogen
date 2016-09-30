@@ -36,19 +36,23 @@ namespace cpp {
 namespace formattables {
 
 formattable::formattable(
-    const std::list<boost::shared_ptr<dogen::yarn::element> >& element_segments,
+    const boost::shared_ptr<dogen::yarn::element>& master_segment,
+    const std::list<boost::shared_ptr<dogen::yarn::element> >& all_segments,
     const dogen::quilt::cpp::formattables::element_configuration& configuration)
-    : element_segments_(element_segments),
+    : master_segment_(master_segment),
+      all_segments_(all_segments),
       configuration_(configuration) { }
 
 void formattable::swap(formattable& other) noexcept {
     using std::swap;
-    swap(element_segments_, other.element_segments_);
+    swap(master_segment_, other.master_segment_);
+    swap(all_segments_, other.all_segments_);
     swap(configuration_, other.configuration_);
 }
 
 bool formattable::operator==(const formattable& rhs) const {
-    return element_segments_ == rhs.element_segments_ &&
+    return master_segment_ == rhs.master_segment_ &&
+        all_segments_ == rhs.all_segments_ &&
         configuration_ == rhs.configuration_;
 }
 
@@ -58,20 +62,36 @@ formattable& formattable::operator=(formattable other) {
     return *this;
 }
 
-const std::list<boost::shared_ptr<dogen::yarn::element> >& formattable::element_segments() const {
-    return element_segments_;
+const boost::shared_ptr<dogen::yarn::element>& formattable::master_segment() const {
+    return master_segment_;
 }
 
-std::list<boost::shared_ptr<dogen::yarn::element> >& formattable::element_segments() {
-    return element_segments_;
+boost::shared_ptr<dogen::yarn::element>& formattable::master_segment() {
+    return master_segment_;
 }
 
-void formattable::element_segments(const std::list<boost::shared_ptr<dogen::yarn::element> >& v) {
-    element_segments_ = v;
+void formattable::master_segment(const boost::shared_ptr<dogen::yarn::element>& v) {
+    master_segment_ = v;
 }
 
-void formattable::element_segments(const std::list<boost::shared_ptr<dogen::yarn::element> >&& v) {
-    element_segments_ = std::move(v);
+void formattable::master_segment(const boost::shared_ptr<dogen::yarn::element>&& v) {
+    master_segment_ = std::move(v);
+}
+
+const std::list<boost::shared_ptr<dogen::yarn::element> >& formattable::all_segments() const {
+    return all_segments_;
+}
+
+std::list<boost::shared_ptr<dogen::yarn::element> >& formattable::all_segments() {
+    return all_segments_;
+}
+
+void formattable::all_segments(const std::list<boost::shared_ptr<dogen::yarn::element> >& v) {
+    all_segments_ = v;
+}
+
+void formattable::all_segments(const std::list<boost::shared_ptr<dogen::yarn::element> >&& v) {
+    all_segments_ = std::move(v);
 }
 
 const dogen::quilt::cpp::formattables::element_configuration& formattable::configuration() const {

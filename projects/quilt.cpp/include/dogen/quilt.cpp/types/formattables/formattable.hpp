@@ -46,7 +46,8 @@ public:
 
 public:
     formattable(
-        const std::list<boost::shared_ptr<dogen::yarn::element> >& element_segments,
+        const boost::shared_ptr<dogen::yarn::element>& master_segment,
+        const std::list<boost::shared_ptr<dogen::yarn::element> >& all_segments,
         const dogen::quilt::cpp::formattables::element_configuration& configuration);
 
 private:
@@ -57,10 +58,15 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::formattables::formattable& v, unsigned int version);
 
 public:
-    const std::list<boost::shared_ptr<dogen::yarn::element> >& element_segments() const;
-    std::list<boost::shared_ptr<dogen::yarn::element> >& element_segments();
-    void element_segments(const std::list<boost::shared_ptr<dogen::yarn::element> >& v);
-    void element_segments(const std::list<boost::shared_ptr<dogen::yarn::element> >&& v);
+    const boost::shared_ptr<dogen::yarn::element>& master_segment() const;
+    boost::shared_ptr<dogen::yarn::element>& master_segment();
+    void master_segment(const boost::shared_ptr<dogen::yarn::element>& v);
+    void master_segment(const boost::shared_ptr<dogen::yarn::element>&& v);
+
+    const std::list<boost::shared_ptr<dogen::yarn::element> >& all_segments() const;
+    std::list<boost::shared_ptr<dogen::yarn::element> >& all_segments();
+    void all_segments(const std::list<boost::shared_ptr<dogen::yarn::element> >& v);
+    void all_segments(const std::list<boost::shared_ptr<dogen::yarn::element> >&& v);
 
     const dogen::quilt::cpp::formattables::element_configuration& configuration() const;
     dogen::quilt::cpp::formattables::element_configuration& configuration();
@@ -78,7 +84,8 @@ public:
     formattable& operator=(formattable other);
 
 private:
-    std::list<boost::shared_ptr<dogen::yarn::element> > element_segments_;
+    boost::shared_ptr<dogen::yarn::element> master_segment_;
+    std::list<boost::shared_ptr<dogen::yarn::element> > all_segments_;
     dogen::quilt::cpp::formattables::element_configuration configuration_;
 };
 

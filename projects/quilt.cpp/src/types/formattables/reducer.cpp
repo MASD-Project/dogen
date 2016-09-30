@@ -42,7 +42,7 @@ void reducer::reduce(
     BOOST_LOG_SEV(lg, debug) << "Original size: " << formattables.size();
     for (const auto& pair : formattables) {
         const auto& formattable(pair.second);
-        const auto& e(*formattable.element_segments().front());
+        const auto& e(*formattable.master_segment());
         if (e.generation_type() == yarn::generation_types::no_generation)
             continue;
 

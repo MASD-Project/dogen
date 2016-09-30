@@ -91,17 +91,12 @@ helper_expander::obtain_annotations(const dynamic::repository& drp,
         BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
 
         auto& formattable(pair.second);
-        for (const auto& segment : formattable.element_segments()) {
+        auto& segment(*formattable.master_segment());
+        const auto streaming_annotation(saf.make(segment.extensions()));
+        if (streaming_annotation)
+            r.streaming_annotations[id] = *streaming_annotation;
 
-            if (segment->is_element_extension())
-                continue;
-
-            const auto streaming_annotation(saf.make(segment->extensions()));
-            if (streaming_annotation)
-                r.streaming_annotations[id] = *streaming_annotation;
-
-            r.helper_annotations[id] = haf.make(segment->extensions());
-        }
+        r.helper_annotations[id] = haf.make(segment.extensions());
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished making the annotations. Result:" << r;
@@ -324,40 +319,38 @@ void helper_expander::populate_helper_configuration(const annotations& a,
 
         auto& formattable(pair.second);
         auto& cfg(formattable.configuration());
-        for (const auto& segment : formattable.element_segments()) {
-            /*
-             * We only want to process the master segment; the
-             * extensions can be ignored.
-             */
-            if (segment->is_element_extension())
-                continue;
 
-            /*
-             * We are only interested in yarn objects; all other
-             * element types do not need helpers.
-             */
-            const auto ptr(dynamic_cast<const yarn::object*>(segment.get()));
-            if (ptr == nullptr)
-                continue;
+        /*
+         * We only want to process the master segment; the
+         * extensions can be ignored.
+         */
+        auto& segment(formattable.master_segment());
 
-            /*
-             * We only need to generate helpers for the target
-             * model. However, we can't perform this after reduction
-             * because the helper annotations must be build prior to
-             * reduction or else we will not get helpers for
-             * referenced models.
-             */
-            if (ptr->generation_type() == yarn::generation_types::no_generation)
-                continue;
+        /*
+         * We only need to generate helpers for the target
+         * model. However, we can't perform this after reduction
+         * because the helper annotations must be build prior to
+         * reduction or else we will not get helpers for
+         * referenced models.
+         */
+        if (segment->generation_type() == yarn::generation_types::no_generation)
+            continue;
 
-            /*
-             * Update the helper configuration.
-             */
-            const auto& attrs(ptr->local_attributes());
-            const auto iir(ptr->in_inheritance_relationship());
-            const auto hc(compute_helper_configuration(a, fff, iir, attrs));
-            cfg.helper_configuration(hc);
-        }
+        /*
+         * We are only interested in yarn objects; all other
+         * element types do not need helpers.
+         */
+        const auto ptr(dynamic_cast<const yarn::object*>(segment.get()));
+        if (ptr == nullptr)
+            continue;
+
+        /*
+         * Update the helper configuration.
+         */
+        const auto& attrs(ptr->local_attributes());
+        const auto iir(ptr->in_inheritance_relationship());
+        const auto hc(compute_helper_configuration(a, fff, iir, attrs));
+        cfg.helper_configuration(hc);
     }
 }
 

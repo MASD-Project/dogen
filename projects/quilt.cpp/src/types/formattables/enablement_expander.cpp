@@ -227,8 +227,7 @@ obtain_local_configurations(const local_field_definitions_type& lfd,
 }
 
 bool enablement_expander::has_user_defined_service(
-    const std::list<boost::shared_ptr<
-    yarn::element>>& element_segments) const {
+    const std::list<boost::shared_ptr<yarn::element>>& element_segments) const {
 
     for (const auto& segment : element_segments) {
         auto object_ptr(dynamic_cast<const yarn::object*>(segment.get()));
@@ -243,10 +242,10 @@ bool enablement_expander::has_user_defined_service(
 
 void enablement_expander::compute_enablement(
     const global_enablement_configurations_type& gcs,
-    const local_enablement_configurations_type& lcs, formattable& f) const {
+    const local_enablement_configurations_type& lcs, formattable& fbl) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started computing enablement.";
-    for (auto& pair : f.configuration().formatter_configuration()) {
+    for (auto& pair : fbl.configuration().formatter_configuration()) {
         const auto fmtn(pair.first);
 
         /*
@@ -292,7 +291,7 @@ void enablement_expander::compute_enablement(
          * services at present. This is achieved with the below hack
          * for now.
          */
-        if (has_user_defined_service(f.element_segments())) {
+        if (has_user_defined_service(fbl.all_segments())) {
             const auto types_prefix("quilt.cpp.types.");
             const auto is_types(boost::starts_with(fmtn, types_prefix));
             fmt_cfg.enabled(is_types);
@@ -358,7 +357,7 @@ void enablement_expander::expand(const dynamic::repository& drp,
         BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
 
         auto& formattable(pair.second);
-        for (const auto& segment : formattable.element_segments()) {
+        for (const auto& segment : formattable.all_segments()) {
             const auto& e(*segment);
 
             /*

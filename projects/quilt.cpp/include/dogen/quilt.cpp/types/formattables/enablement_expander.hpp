@@ -101,7 +101,7 @@ private:
     void compute_enablement(
         const global_enablement_configurations_type& gcs,
         const local_enablement_configurations_type& lcs,
-        formattable& f) const;
+        formattable& fbl) const;
 
 public:
     void expand(const dynamic::repository& drp,
