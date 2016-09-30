@@ -58,12 +58,12 @@ install:
   - source ${BUILD_DIR}/travis.install.${TRAVIS_OS_NAME}.sh
 
 script:
-  - if [[ $TRAVIS_OS_NAME == 'linux' ]]; export THIRD_PARTY="/tmp/dogen_deps/dogen_deps_gcc_5.3_linux_amd64"; fi
-  - if [[ $TRAVIS_OS_NAME == 'linux' ]]; export TARGET="package run_all_tests"; fi
-  - if [[ $TRAVIS_OS_NAME == 'osx' ]]; export THIRD_PARTY="/tmp/dogen_deps/dogen_deps_clang_7_3_0_osx_amd64"; fi
-  - if [[ $TRAVIS_OS_NAME == 'osx' ]]; export TARGET="package run_all_tests"; fi
+  - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then export THIRD_PARTY="/tmp/dogen_deps/dogen_deps_gcc_5.3_linux_amd64"; fi
+  - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then export TARGET="package run_all_tests"; fi
+  - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then export THIRD_PARTY="/tmp/dogen_deps/dogen_deps_clang_7_3_0_osx_amd64"; fi
+  - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then export TARGET="package run_all_tests"; fi
   - ${BUILD_DIR}/build.${TRAVIS_OS_NAME}.sh ${BUILD_TYPE} ${COMPILER} ${THIRD_PARTY} ${TARGET}
-  - if [[ $TRAVIS_OS_NAME == 'linux' ]]; ${BUILD_DIR}/test_package.sh; fi
+  - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then ${BUILD_DIR}/test_package.sh; fi
 
 notifications:
   email:

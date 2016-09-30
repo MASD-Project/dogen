@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Copyright (C) 2012-2016 Marco Craveiro <marco.craveiro@gmail.com>
 #
