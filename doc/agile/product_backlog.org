@@ -3095,6 +3095,8 @@ We need a class responsible for checking the consistency of the yarn
 model. There are several things we need to check for non-merged
 models:
 
+- there must be at least one element for a given id with
+  =is_element_extension= set to false.
 - ensure that we can only define identity once across concepts and
   parents
 - concepts must have at least one property (or method).
