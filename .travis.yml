@@ -30,10 +30,10 @@ matrix:
   include:
     - os: osx
       compiler: clang
-      env: BUILD_TYPE=Release
+      env: BUILD_TYPE=Release COMPILER="clang"
     - os: osx
       compiler: clang
-      env: BUILD_TYPE=Debug
+      env: BUILD_TYPE=Debug COMPILER="clang"
     - os: linux
       compiler: gcc
       env: BUILD_TYPE=Release DEPLOY="1" COMPILER="gcc"
