@@ -50,8 +50,9 @@ private:
      * @brief Returns all available file formatters by type indx.
      */
     std::unordered_map<
-    std::type_index,
-    std::forward_list<std::shared_ptr<file_formatter_interface>>>&
+        std::type_index,
+        std::forward_list<std::shared_ptr<file_formatter_interface>>
+    >&
     file_formatters_by_type_index();
 
     /**
@@ -107,12 +108,12 @@ public:
     std::unordered_map<std::string,
                        std::list<
                            std::shared_ptr<helper_formatter_interface>>>>&
-        helper_formatters() const;
+    helper_formatters() const;
 
 private:
     std::unordered_map<
-    std::type_index,
-    std::forward_list<std::shared_ptr<file_formatter_interface>>>
+        std::type_index,
+        std::forward_list<std::shared_ptr<file_formatter_interface>>>
     file_formatters_by_type_index_;
     std::unordered_map<std::string, std::shared_ptr<file_formatter_interface>>
     file_formatters_by_formatter_name_;

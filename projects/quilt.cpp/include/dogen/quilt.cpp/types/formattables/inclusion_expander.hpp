@@ -42,6 +42,30 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
+/**
+ * @brief Generates all inclusion dependencies.
+ *
+ * In formattables we use two similar terms with very different
+ * meanings: inclusion directive and inclusion dependency.
+ *
+ * An inclusion directive is a string with delimiters but without the
+ * #include pragma. For example "a/b/c.hpp" and <a/b/c.hpp> are
+ * inclusion directives; note that the quotes and angle brackets are
+ * part of the directive. There should be an inclusion directive
+ * associated with every pair (name, formatter name). The inclusion
+ * directive repository contains the complete set of inclusion
+ * directives - the inclusion directives universe if you'd like.
+ *
+ * Inclusion dependencies are a set of inclusion directives. They are
+ * also associated with a pair (name, formatter). The inclusion
+ * dependencies for each formatter are created by the formatter
+ * themselves since they are relative to the formatter (i.e. for the
+ * same element different formatters will generate different
+ * dependencies). It uses the inclusion directives precomputed from
+ * the model to assemble the inclusion dependencies that the formatter
+ * needs in order to generate a compilable C++ file.
+ *
+ */
 class inclusion_expander {
 private:
     typedef std::forward_list<
