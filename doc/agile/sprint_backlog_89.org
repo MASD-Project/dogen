@@ -13,39 +13,40 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-30 Fri 12:37]
+#+CAPTION: Clock summary at [2016-09-30 Fri 22:04]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *26:47* |       |      | 100.0 |
+| *Total time*                                                                | *27:41* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 26:47   |       |      | 100.0 |
-| Active                                                                      |         | 26:47 |      | 100.0 |
+| Stories                                                                     | 27:41   |       |      | 100.0 |
+| Active                                                                      |         | 27:41 |      | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:49 |   3.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:07 |   0.4 |
-| COMPLETED Generation of formattable is incorrect                            |         |       | 2:30 |   9.3 |
+| COMPLETED Generation of formattable is incorrect                            |         |       | 2:30 |   9.0 |
 | COMPLETED Visitor includes are incorrect                                    |         |       | 0:20 |   1.2 |
-| COMPLETED Add includer to quilt.cpp                                         |         |       | 1:46 |   6.6 |
-| COMPLETED Add reducer to quilt.cpp                                          |         |       | 0:22 |   1.4 |
-| COMPLETED Add new index to formtter container                               |         |       | 0:19 |   1.2 |
+| COMPLETED Add includer to quilt.cpp                                         |         |       | 1:46 |   6.4 |
+| COMPLETED Add reducer to quilt.cpp                                          |         |       | 0:22 |   1.3 |
+| COMPLETED Add new index to formtter container                               |         |       | 0:19 |   1.1 |
 | COMPLETED Add path expander to quilt.cpp                                    |         |       | 0:49 |   3.0 |
-| COMPLETED Add guard expander to quilt.cpp                                   |         |       | 0:27 |   1.7 |
-| COMPLETED Investigate borked travis build                                   |         |       | 0:37 |   2.3 |
+| COMPLETED Add guard expander to quilt.cpp                                   |         |       | 0:27 |   1.6 |
+| COMPLETED Investigate borked travis build                                   |         |       | 0:37 |   2.2 |
 | COMPLETED Add decoration expander to quilt.cpp                              |         |       | 0:23 |   1.4 |
-| COMPLETED Add aspect expander to quilt.cpp                                  |         |       | 1:26 |   5.4 |
+| COMPLETED Add aspect expander to quilt.cpp                                  |         |       | 1:26 |   5.2 |
 | COMPLETED Run tests that are passing on windows                             |         |       | 0:10 |   0.6 |
-| COMPLETED Add helper expander to quilt.cpp                                  |         |       | 1:26 |   5.4 |
+| COMPLETED Add helper expander to quilt.cpp                                  |         |       | 1:26 |   5.2 |
 | COMPLETED Merge pre and post workflows                                      |         |       | 0:16 |   1.0 |
 | COMPLETED Fix bug in aspect and helper generation                           |         |       | 0:15 |   0.9 |
-| COMPLETED Investigate element annotation support                            |         |       | 2:05 |   7.8 |
+| COMPLETED Investigate element annotation support                            |         |       | 2:05 |   7.5 |
 | CANCELLED Add streaming settings expander                                   |         |       | 0:36 |   2.2 |
-| COMPLETED Create the formattables model                                     |         |       | 1:32 |   5.7 |
-| COMPLETED Hook formattables into formatters                                 |         |       | 3:58 |  14.8 |
-| COMPLETED Remove empty context                                              |         |       | 1:09 |   4.3 |
-| COMPLETED Review main classes in quilt.cpp                                  |         |       | 3:42 |  13.8 |
-| COMPLETED Clean up element segmentation                                     |         |       | 1:20 |   5.0 |
+| COMPLETED Create the formattables model                                     |         |       | 1:32 |   5.5 |
+| COMPLETED Hook formattables into formatters                                 |         |       | 3:58 |  14.3 |
+| COMPLETED Remove empty context                                              |         |       | 1:09 |   4.2 |
+| COMPLETED Review main classes in quilt.cpp                                  |         |       | 3:42 |  13.4 |
+| COMPLETED Clean up element segmentation                                     |         |       | 1:20 |   4.8 |
 | STARTED Remove formatter id                                                 |         |       | 0:04 |   0.2 |
-| STARTED Generate formatter interfaces                                       |         |       | 0:19 |   1.2 |
+| STARTED Generate formatter interfaces                                       |         |       | 0:19 |   1.1 |
+| STARTED Get OSX build to compile code                                       |         |       | 0:54 |   3.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -621,6 +622,22 @@ Notes:
   etc. Includes will be particularly special because we need to
   augment the include list with additional includes. However, we may
   not even need to be aware of this.
+
+*** STARTED Get OSX build to compile code                             :story:
+    CLOCK: [2016-09-30 Fri 21:10]--[2016-09-30 Fri 22:04] =>  0:54
+
+We've added the initial support for OSX. However, it still needs a lot
+of work:
+
+- we can't install the conan package because we don't know how to
+  install pkg files. We should raise a ticket on conan for this.
+- Alternatively we could build boost ourselves and upload it to
+  DropBox.
+
+Notes:
+
+- [[http://www.mactech.com/articles/mactech/Vol.26/26.02/TheFlatPackage/index.html][The Flat Package]]
+- [[https://docs.travis-ci.com/user/multi-os/][Matrix with multiple OSs]]
 
 *** Move enabled formatters to a higher level                         :story:
 

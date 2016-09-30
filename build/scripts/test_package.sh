@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Copyright (C) 2012-2016 Marco Craveiro <marco.craveiro@gmail.com>
 #
@@ -17,15 +17,6 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-
-#
-# deps
-#
-dropbox="https://dl.dropboxusercontent.com/u/541873/packages"
-package="dogen_deps_clang_7_3_0_osx_amd64.tar.bz2"
-input_location="${dropbox}/${package}"
-output_location="/tmp/${package}"
-extract_dir="/tmp/dogen_deps"
-curl -o ${output_location} ${input_location}
-mkdir ${extract_dir}
-tar -zxf ${output_location} -C ${extract_dir}
+sudo dpkg -i stage/pkg/dogen_*_amd64-applications.deb
+cd /tmp
+/usr/bin/dogen.knitter --version

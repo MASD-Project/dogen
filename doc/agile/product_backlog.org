@@ -6094,21 +6094,6 @@ CDash has bitrotted and is no longer working.
 - we need to get the build green on the Windows agent again.
 - we need to get the linux agent up and running again.
 
-*** Get OSX build to compile code                                     :story:
-
-We've added the initial support for OSX. However, it still needs a lot
-of work:
-
-- we can't install the conan package because we don't know how to
-  install pkg files. We should raise a ticket on conan for this.
-- Alternatively we could build boost ourselves and upload it to
-  DropBox.
-
-Notes:
-
-- [[http://www.mactech.com/articles/mactech/Vol.26/26.02/TheFlatPackage/index.html][The Flat Package]]
-- [[https://docs.travis-ci.com/user/multi-os/][Matrix with multiple OSs]]
-
 *** Assorted improvements to CMake files                               :epic:
 
 It seems we are not using proper CMake idioms to pick up compiler
