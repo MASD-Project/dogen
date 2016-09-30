@@ -64,7 +64,7 @@ script:
   - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then export THIRD_PARTY="/tmp/dogen_deps/dogen_deps_clang_7_3_0_osx_amd64"; fi
   - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then export DYLD_LIBRARY_PATH="/tmp/dogen_deps/dogen_deps_clang_7_3_0_osx_amd64/lib"; fi
 
-  - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then export TARGET="package run_all_tests"; fi
+  - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then export TARGET="package"; fi
   - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then export PATH=${THIRD_PARTY}/bin:${PATH}; fi
   - ${BUILD_DIR}/build.${TRAVIS_OS_NAME}.sh ${BUILD_TYPE} ${COMPILER} ${THIRD_PARTY} ${TARGET}
   - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then ${BUILD_DIR}/test_package.sh; fi
