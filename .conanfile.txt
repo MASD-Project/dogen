@@ -1,5 +1,4 @@
 [requires]
-Boost/1.60.0@lasote/stable
 libxml2/2.9.3@lasote/stable
 
 [generators]
