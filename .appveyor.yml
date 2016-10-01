@@ -24,7 +24,7 @@ install:
   #
   - cinst cmake --version 3.4.3
   - cmd: cmake --version
-  - cmd: BUILD_DIR=build/scripts
+  - cmd: set BUILD_DIR=build/scripts
   - ps: .\${BUILD_DIR}\appveyor.install.windows.ps1
 
 before_build:
