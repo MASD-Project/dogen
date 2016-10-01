@@ -79,6 +79,13 @@ $build_type_dir="${compiler_dir}/${build_type}";
 if (!(Test-Path -Path $build_type_dir)) {
     New-Item -ItemType directory -Path $build_type_dir | Out-Null
 }
+
+if ($build_type -eq "Release") {
+    conan install ../../.. --file=.conanfile.txt
+} elseif ($build_type -eq "Debug") {
+    conan install ../../.. --file=.conanfile.txt -s compiler="Visual Studio" -s compiler.version=14 -s arch=x86 -s build_type=Debug -s compiler.runtime=MDd
+}
+
 #
 # CMake setup
 #
@@ -91,4 +98,4 @@ $cmake_defines="${cmake_defines} -DWITH_LATEX=OFF"
 write-host "* Starting build.";
 cd ${build_type_dir}
 cmake ${product_dir} ${cmake_defines} -G ${generator}
-cmake --build . --config ${configuration%} --target ${target}
+cmake --build . --config $build_type --target ${target}

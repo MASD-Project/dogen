@@ -28,3 +28,19 @@ write-host "Dogen deps: ${output_location}"
 mkdir ${extract_dir} | Out-Null
 cd ${extract_dir}
 7z x ../${package} > $null;
+
+#
+# conan
+#
+write-host "Installing conan..."
+$env:PYTHON = "C:/Python27"
+$env:PATH += ";$env:PYTHON/Scripts"
+pip.exe install conan
+$env:PATH += ";C:\Program Files (x86)\Conan\conan"
+conan --version
+
+#
+# cmake
+#
+cinst cmake --version 3.4.3
+cmake --version

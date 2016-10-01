@@ -19,35 +19,10 @@ platform:
 clone_depth: 1
 
 install:
-  #
-  # conan
-  #
-  - cmd: echo "Installing conan..."
-  - cmd: set PYTHON="C:/Python27"
-  - cmd: set PATH=%PATH%;%PYTHON%/Scripts/
-  - cmd: pip.exe install conan
-  - cmd: set PATH=%PATH%;C:\Program Files (x86)\Conan\conan
-  - cmd: conan --version
-
-  #
-  # cmake
-  #
-  - cinst cmake --version 3.4.3
-  - ps: cmake --version
-
   - ps: $project_dir="$pwd";
   - ps: .\build\scripts\appveyor.install.windows.ps1
 
 build_script:
-  - cmd: cd build
-  - cmd: mkdir output
-  - cmd: cd output
-  - cmd: mkdir msvc
-  - cmd: cd msvc
-  - cmd: mkdir %configuration%
-  - cmd: cd %configuration%
-  - cmd: if "%configuration%"=="Release" conan install ../../.. --file=.conanfile.txt
-  - cmd: if "%configuration%"=="Debug" conan install ../../.. --file=.conanfile.txt -s compiler="Visual Studio" -s compiler.version=14 -s arch=x86 -s build_type=Debug -s compiler.runtime=MDd
   - ps: $build_type="$env:configuration"
   - ps: $third_party="$env:temp\dogen_deps\dogen_deps_vc14_windows_amd64";
   - ps: $target="package run_windows_green_tests";
