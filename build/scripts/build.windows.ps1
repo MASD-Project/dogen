@@ -32,7 +32,7 @@ function Get-ScriptDirectory {
 # Root directory for the product.
 #
 $dir=Get-ScriptDirectory;
-$product_dir="${dir}/../..";
+$product_dir="${dir}\..\..";
 write-host "* Product directory: ${product_dir}";
 
 #
@@ -40,6 +40,7 @@ write-host "* Product directory: ${product_dir}";
 #
 if ($compiler -eq "msvc") {
     $generator="Visual Studio 14 2015 Win64";
+    write-host "* compiler: ${compiler}";
 } else {
     write-host "* Unrecognised compiler: ${compiler}";
     exit 1
@@ -66,17 +67,17 @@ write-host "* Target: '${target}'";
 #
 $output_dir="${product_dir}/build/output";
 if (!(Test-Path -Path $output_dir)) {
-    New-Item -ItemType directory -Path $output_dir
+    New-Item -ItemType directory -Path $output_dir | Out-Null
 }
 
 $compiler_dir="${output_dir}/${compiler}";
 if (!(Test-Path -Path $compiler_dir)) {
-    New-Item -ItemType directory -Path $compiler_dir
+    New-Item -ItemType directory -Path $compiler_dir | Out-Null
 }
 
 $build_type_dir="${compiler_dir}/${build_type}";
 if (!(Test-Path -Path $build_type_dir)) {
-    New-Item -ItemType directory -Path $build_type_dir
+    New-Item -ItemType directory -Path $build_type_dir | Out-Null
 }
 #
 # CMake setup
