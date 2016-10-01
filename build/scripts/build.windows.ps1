@@ -52,8 +52,8 @@ if ([string]::IsNullOrEmpty($third_party)) {
     write-host "* Third party: NOT PROVIDED";
 } else {
     write-host "* Third party: ${third_party}";
-    $env:CMAKE_INCLUDE_PATH=${third_party}\include
-    $env:CMAKE_LIBRARY_PATH=${third_party}\lib
+    $env:CMAKE_INCLUDE_PATH="${third_party}\include";
+    $env:CMAKE_LIBRARY_PATH="${third_party}\lib";
 }
 
 #
