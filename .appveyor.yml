@@ -19,7 +19,7 @@ platform:
 clone_depth: 1
 
 install:
-  - ps: $BUILD_DIR=build/scripts
+  - ps: $BUILD_DIR= "build/scripts";
   - ps: ./${BUILD_DIR}/appveyor.install.windows.ps1
 
   #
