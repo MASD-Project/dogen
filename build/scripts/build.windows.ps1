@@ -1,5 +1,3 @@
-#!/bin/bash
-#
 # Copyright (C) 2012-2016 Marco Craveiro <marco.craveiro@gmail.com>
 #
 # This program is free software; you can redistribute it and/or modify
@@ -67,25 +65,23 @@ write-host "* Target: '${target}'";
 # Setup directories
 #
 $output_dir="${product_dir}/build/output";
-if [[ ! -e $output_dir ]]; then
-    mkdir $output_dir
-fi
+if (!(Test-Path -Path $output_dir)) {
+    New-Item -ItemType directory -Path $output_dir
+}
 
-$compiler_dir="${output_dir}/${CC}";
-if [[ ! -e $compiler_dir ]]; then
-    mkdir $compiler_dir
-fi
+$compiler_dir="${output_dir}/${compiler}";
+if (!(Test-Path -Path $compiler_dir)) {
+    New-Item -ItemType directory -Path $compiler_dir
+}
 
 $build_type_dir="${compiler_dir}/${build_type}";
-if [[ ! -e $build_type_dir ]]; then
-    mkdir $build_type_dir
-fi
-
+if (!(Test-Path -Path $build_type_dir)) {
+    New-Item -ItemType directory -Path $build_type_dir
+}
 #
 # CMake setup
 #
 $cmake_defines="-DCMAKE_BUILD_TYPE=${build_type}"
-$cmake_defines="${cmake_defines} -DCMAKE_EXPORT_COMPILE_COMMANDS=TRUE"
 $cmake_defines="${cmake_defines} -DWITH_LATEX=OFF"
 
 #
@@ -93,4 +89,5 @@ $cmake_defines="${cmake_defines} -DWITH_LATEX=OFF"
 #
 write-host "* Starting build.";
 cd ${build_type_dir}
-cmake ${product_dir} ${cmake_defines} && make -j5 ${target}
+cmake ${product_dir} ${cmake_defines} -G ${generator}
+cmake --build . --config ${configuration%} --target ${target}

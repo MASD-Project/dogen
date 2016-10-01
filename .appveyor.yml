@@ -7,7 +7,7 @@ branches:
 environment:
   matrix:
     # - generator: "MinGW Makefiles"
-    - generator: "Visual Studio 14 2015 Win64"
+    - COMPILER: msvc
 
 configuration:
   - Debug
@@ -24,34 +24,20 @@ install:
   #
   - cinst cmake --version 3.4.3
   - cmd: cmake --version
-
-  #
-  # conan
-  #
-  - cmd: echo "Installing conan..."
-  - cmd: set PYTHON="C:/Python27"
-  - cmd: set PATH=%PATH%;%PYTHON%/Scripts/
-  - cmd: pip.exe install conan
-  - cmd: set PATH=%PATH%;C:\Program Files (x86)\Conan\conan
-  - cmd: conan --version
+  - cmd: BUILD_DIR=build/scripts
+  - ps: .\${BUILD_DIR}\appveyor.install.windows.ps1
 
 before_build:
   # Workaround for CMake not wanting sh.exe on PATH for MinGW
   - cmd: set PATH=%PATH%:C:\Program Files\Git\usr\bin;=%
   - cmd: set PATH=C:\MinGW\bin;%PATH%
-  - cmd: cd build
-  - cmd: mkdir output
-  - cmd: cd output
-  - cmd: if "%configuration%"=="Release" conan install ../.. --file=.conanfile.txt
-  - cmd: if "%configuration%"=="Debug" conan install ../.. --file=.conanfile.txt -s compiler="Visual Studio" -s compiler.version=14 -s arch=x86 -s build_type=Debug -s compiler.runtime=MDd
-  - cmd: cmake ../.. -DCMAKE_BUILD_TYPE=%configuration% -G "%generator%"
+  - ps: .\${BUILD_DIR}\appveyor.install.windows.ps1
 
 build_script:
-  - cmd: if "%configuration%"=="Release" cmake --build . --config "%configuration%"
-  - cmd: if "%configuration%"=="Debug"  cmake --build . --config "%configuration%" --target knit
-  # FIXME: different levels of borkage atm.
-  # - cmd: cmake --build . --config "%configuration%" --target run_all_tests
-  - cmd: if "%configuration%"=="Release" cmake --build . --config "%configuration%" --target run_windows_green_tests
+  - cmd: set THIRD_PARTY="/tmp/dogen_deps/dogen_deps_clang_7_3_0_osx_amd64";
+  - cmd: set TARGET="package run_windows_green_tests";
+  - cmd: set BUILD_TYPE="%configuration%"
+  - ps: .\${BUILD_DIR}\build.windows.ps1 ${BUILD_TYPE} ${COMPILER} ${TARGET}
 
 notifications:
   - provider: Webhook
