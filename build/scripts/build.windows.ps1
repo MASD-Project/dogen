@@ -80,6 +80,7 @@ if (!(Test-Path -Path $build_type_dir)) {
     New-Item -ItemType directory -Path $build_type_dir | Out-Null
 }
 
+cd ${build_type_dir}
 if ($build_type -eq "Release") {
     conan install ../../.. --file=.conanfile.txt
 } elseif ($build_type -eq "Debug") {
@@ -96,6 +97,5 @@ $cmake_defines="${cmake_defines} -DWITH_LATEX=OFF"
 # Build
 #
 write-host "* Starting build.";
-cd ${build_type_dir}
 cmake ${product_dir} ${cmake_defines} -G ${generator}
 cmake --build . --config $build_type --target ${target}
