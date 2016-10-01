@@ -20,7 +20,7 @@ clone_depth: 1
 
 install:
   - ps: $BUILD_DIR="build\scripts";
-  - ps: .\${BUILD_DIR}\appveyor.install.windows.ps1
+  - ps: .\$BUILD_DIR\appveyor.install.windows.ps1
 
   #
   # cmake
@@ -33,7 +33,7 @@ build_script:
   - ps: $TARGET="package run_windows_green_tests";
   - ps: $BUILD_TYPE="%configuration%"
   - ps: ls
-  - ps: .\${BUILD_DIR}\build.windows.ps1 -build_type $BUILD_TYPE -compiler $COMPILER -third_party $THIRD_PARTY -target $TARGET
+  - ps: .\$BUILD_DIR\build.windows.ps1 -build_type $BUILD_TYPE -compiler $COMPILER -third_party $THIRD_PARTY -target $TARGET
 
 notifications:
   - provider: Webhook
