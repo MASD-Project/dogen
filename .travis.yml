@@ -66,7 +66,7 @@ script:
     fi
   - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
         export THIRD_PARTY="/tmp/dogen_deps/dogen_deps_clang_7_3_0_osx_amd64";
-        export TARGET="package run_all_tests";
+        export TARGET="package";
     fi
   - ${BUILD_DIR}/build.${TRAVIS_OS_NAME}.sh ${BUILD_TYPE} ${COMPILER} ${THIRD_PARTY} ${TARGET}
   - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then ${BUILD_DIR}/test_package.linux.sh; fi

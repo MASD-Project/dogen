@@ -112,3 +112,5 @@ fi
 echo "* Starting build."
 cd ${build_type_dir}
 cmake ${product_dir} ${cmake_defines} && make -j5 ${target}
+echo "DYLD_LIBRARY_PATH: $DYLD_LIBRARY_PATH"
+otool -L /Users/travis/build/DomainDrivenConsulting/dogen/build/output/clang/Release/stage/bin/dogen.seam.tests
