@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-01 Sat 22:50]
+#+CAPTION: Clock summary at [2016-10-01 Sat 23:03]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *33:41* |       |      | 100.0 |
+| *Total time*                                                                | *33:52* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 33:41   |       |      | 100.0 |
-| Active                                                                      |         | 33:41 |      | 100.0 |
+| Stories                                                                     | 33:52   |       |      | 100.0 |
+| Active                                                                      |         | 33:52 |      | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:49 |   2.4 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:07 |   0.3 |
 | COMPLETED Generation of formattable is incorrect                            |         |       | 2:30 |   7.4 |
@@ -32,21 +32,21 @@
 | COMPLETED Add guard expander to quilt.cpp                                   |         |       | 0:27 |   1.3 |
 | COMPLETED Investigate borked travis build                                   |         |       | 0:37 |   1.8 |
 | COMPLETED Add decoration expander to quilt.cpp                              |         |       | 0:23 |   1.1 |
-| COMPLETED Add aspect expander to quilt.cpp                                  |         |       | 1:26 |   4.3 |
+| COMPLETED Add aspect expander to quilt.cpp                                  |         |       | 1:26 |   4.2 |
 | COMPLETED Run tests that are passing on windows                             |         |       | 0:10 |   0.5 |
-| COMPLETED Add helper expander to quilt.cpp                                  |         |       | 1:26 |   4.3 |
+| COMPLETED Add helper expander to quilt.cpp                                  |         |       | 1:26 |   4.2 |
 | COMPLETED Merge pre and post workflows                                      |         |       | 0:16 |   0.8 |
 | COMPLETED Fix bug in aspect and helper generation                           |         |       | 0:15 |   0.7 |
 | COMPLETED Investigate element annotation support                            |         |       | 2:05 |   6.2 |
 | CANCELLED Add streaming settings expander                                   |         |       | 0:36 |   1.8 |
-| COMPLETED Create the formattables model                                     |         |       | 1:32 |   4.6 |
-| COMPLETED Hook formattables into formatters                                 |         |       | 3:58 |  11.8 |
+| COMPLETED Create the formattables model                                     |         |       | 1:32 |   4.5 |
+| COMPLETED Hook formattables into formatters                                 |         |       | 3:58 |  11.7 |
 | COMPLETED Remove empty context                                              |         |       | 1:09 |   3.4 |
-| COMPLETED Review main classes in quilt.cpp                                  |         |       | 3:42 |  11.0 |
-| COMPLETED Clean up element segmentation                                     |         |       | 1:20 |   4.0 |
+| COMPLETED Review main classes in quilt.cpp                                  |         |       | 3:42 |  10.9 |
+| COMPLETED Clean up element segmentation                                     |         |       | 1:20 |   3.9 |
+| COMPLETED Get OSX build to compile code                                     |         |       | 7:05 |  20.9 |
 | STARTED Remove formatter id                                                 |         |       | 0:04 |   0.2 |
 | STARTED Generate formatter interfaces                                       |         |       | 0:19 |   0.9 |
-| STARTED Get OSX build to compile code                                       |         |       | 6:54 |  20.5 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -547,6 +547,28 @@ truth:
 
 We should formalise this and make the configuration model reflect it.
 
+*** COMPLETED Get OSX build to compile code                           :story:
+    CLOSED: [2016-10-01 Sat 23:02]
+    CLOCK: [2016-10-01 Sat 22:52]--[2016-10-01 Sat 23:03] =>  0:11
+    CLOCK: [2016-10-01 Sat 20:31]--[2016-10-01 Sat 22:51] =>  2:20
+    CLOCK: [2016-10-01 Sat 12:30]--[2016-10-01 Sat 13:40] =>  1:10
+    CLOCK: [2016-09-30 Fri 23:52]--[2016-10-01 Sat 00:35] =>  0:43
+    CLOCK: [2016-09-30 Fri 22:05]--[2016-09-30 Fri 23:52] =>  1:47
+    CLOCK: [2016-09-30 Fri 21:10]--[2016-09-30 Fri 22:04] =>  0:54
+
+We've added the initial support for OSX. However, it still needs a lot
+of work:
+
+- we can't install the conan package because we don't know how to
+  install pkg files. We should raise a ticket on conan for this.
+- Alternatively we could build boost ourselves and upload it to
+  DropBox.
+
+Notes:
+
+- [[http://www.mactech.com/articles/mactech/Vol.26/26.02/TheFlatPackage/index.html][The Flat Package]]
+- [[https://docs.travis-ci.com/user/multi-os/][Matrix with multiple OSs]]
+
 *** STARTED Remove formatter id                                       :story:
     CLOCK: [2016-09-28 Wed 22:49]--[2016-09-28 Wed 22:53] =>  0:04
 
@@ -622,26 +644,6 @@ Notes:
   etc. Includes will be particularly special because we need to
   augment the include list with additional includes. However, we may
   not even need to be aware of this.
-
-*** STARTED Get OSX build to compile code                             :story:
-    CLOCK: [2016-10-01 Sat 20:31]--[2016-10-01 Sat 22:51] =>  2:20
-    CLOCK: [2016-10-01 Sat 12:30]--[2016-10-01 Sat 13:40] =>  1:10
-    CLOCK: [2016-09-30 Fri 23:52]--[2016-10-01 Sat 00:35] =>  0:43
-    CLOCK: [2016-09-30 Fri 22:05]--[2016-09-30 Fri 23:52] =>  1:47
-    CLOCK: [2016-09-30 Fri 21:10]--[2016-09-30 Fri 22:04] =>  0:54
-
-We've added the initial support for OSX. However, it still needs a lot
-of work:
-
-- we can't install the conan package because we don't know how to
-  install pkg files. We should raise a ticket on conan for this.
-- Alternatively we could build boost ourselves and upload it to
-  DropBox.
-
-Notes:
-
-- [[http://www.mactech.com/articles/mactech/Vol.26/26.02/TheFlatPackage/index.html][The Flat Package]]
-- [[https://docs.travis-ci.com/user/multi-os/][Matrix with multiple OSs]]
 
 *** Move enabled formatters to a higher level                         :story:
 
