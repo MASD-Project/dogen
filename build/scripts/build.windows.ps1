@@ -42,7 +42,7 @@ if ($compiler -eq "msvc") {
     $generator="Visual Studio 14 2015 Win64";
 } else {
     write-host "* Unrecognised compiler: ${compiler}";
-    exit
+    exit 1
 }
 
 #

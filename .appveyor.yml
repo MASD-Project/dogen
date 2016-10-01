@@ -7,7 +7,7 @@ branches:
 environment:
   matrix:
     # - generator: "MinGW Makefiles"
-    - COMPILER: msvc
+    - compiler: msvc
 
 configuration:
   - Debug
@@ -29,13 +29,11 @@ install:
   - ps: cmake --version
 
 build_script:
-  - ps: $THIRD_PARTY="$env:temp\dogen_deps\dogen_deps_vc14_windows_amd64";
-  - ps: $TARGET="package run_windows_green_tests";
-  - ps: $BUILD_TYPE="%configuration%"
-  - ps: ls
+  - ps: $build_type="%configuration%"
+  - ps: $third_party="$env:temp\dogen_deps\dogen_deps_vc14_windows_amd64";
+  - ps: $target="package run_windows_green_tests";
   - ps: cd $project_dir
-  - ps: ls
-  - ps: .\build\scripts\build.windows.ps1 -build_type $BUILD_TYPE -compiler $COMPILER -third_party $THIRD_PARTY -target $TARGET
+  - ps: .\build\scripts\build.windows.ps1 -build_type $build_type -compiler $env:compiler -third_party $third_party -target $target
 
 notifications:
   - provider: Webhook
