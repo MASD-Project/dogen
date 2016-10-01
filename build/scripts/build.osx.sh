@@ -114,3 +114,4 @@ cd ${build_type_dir}
 cmake ${product_dir} ${cmake_defines} && make -j5 ${target}
 echo "DYLD_LIBRARY_PATH: $DYLD_LIBRARY_PATH"
 otool -L /Users/travis/build/DomainDrivenConsulting/dogen/build/output/clang/${build_type}/stage/bin/dogen.utility.tests
+otool -L /tmp/dogen_deps/dogen_deps_clang_7_3_0_osx_amd64/lib/libxml2.2.dylib
