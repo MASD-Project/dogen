@@ -22,11 +22,7 @@ $input_location="${dropbox}/${package}"
 $output_location="$env:temp/${package}"
 $extract_dir="$env:temp/dogen_deps"
 
-write-host ${input_location}
-write-host ${output_location}
 wget ${input_location} -OutFile ${output_location}
-
-ls $env:temp
 mkdir ${extract_dir}
 cd ${extract_dir}
 7z x ../${package} > $null;
