@@ -19,8 +19,8 @@ platform:
 clone_depth: 1
 
 install:
-  - ps: $BUILD_DIR= "build/scripts";
-  - ps: ./${BUILD_DIR}/appveyor.install.windows.ps1
+  - ps: $BUILD_DIR="build\scripts";
+  - ps: .\${BUILD_DIR}\appveyor.install.windows.ps1
 
   #
   # cmake
@@ -29,11 +29,11 @@ install:
   - ps: cmake --version
 
 build_script:
-  - ps: $THIRD_PARTY="C:/TEMP/dogen_deps_vc14_windows_amd64";
+  - ps: $THIRD_PARTY="$env:temp\dogen_deps\dogen_deps_vc14_windows_amd64";
   - ps: $TARGET="package run_windows_green_tests";
   - ps: $BUILD_TYPE="%configuration%"
   - ps: ls
-  - ps: ./${BUILD_DIR}/build.windows.ps1 -build_type $BUILD_TYPE -compiler $COMPILER -third_party $THIRD_PARTY -target $TARGET
+  - ps: .\${BUILD_DIR}\build.windows.ps1 -build_type $BUILD_TYPE -compiler $COMPILER -third_party $THIRD_PARTY -target $TARGET
 
 notifications:
   - provider: Webhook
