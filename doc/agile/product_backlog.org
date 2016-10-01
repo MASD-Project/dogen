@@ -6043,6 +6043,13 @@ See:
 At present our MinGW build is borked because we do not have a boost
 build. Create one and add it to DropBox or Conan.
 
+In order to add support for appveyor we need to fix the path:
+
+:  # Workaround for CMake not wanting sh.exe on PATH for MinGW
+:  - ps: PATH=%PATH%:C:\Program Files\Git\usr\bin;=%
+: before_build:
+:  - ps: set PATH=C:\MinGW\bin;%PATH%
+
 *** Add support for coverity analysis                                 :story:
 
 We've created a project and added the badge but we have not yet setup
