@@ -25,19 +25,18 @@ install:
   - cinst cmake --version 3.4.3
   - cmd: cmake --version
   - cmd: set BUILD_DIR=build/scripts
-  - ps: .\${BUILD_DIR}\appveyor.install.windows.ps1
+  - ps: .\$env:BUILD_DIR\appveyor.install.windows.ps1
 
 before_build:
   # Workaround for CMake not wanting sh.exe on PATH for MinGW
   - cmd: set PATH=%PATH%:C:\Program Files\Git\usr\bin;=%
   - cmd: set PATH=C:\MinGW\bin;%PATH%
-  - ps: .\${BUILD_DIR}\appveyor.install.windows.ps1
 
 build_script:
-  - cmd: set THIRD_PARTY="/tmp/dogen_deps/dogen_deps_clang_7_3_0_osx_amd64";
+  - cmd: set THIRD_PARTY="C:/TEMP/dogen_deps_vc14_windows_amd64";
   - cmd: set TARGET="package run_windows_green_tests";
   - cmd: set BUILD_TYPE="%configuration%"
-  - ps: .\${BUILD_DIR}\build.windows.ps1 ${BUILD_TYPE} ${COMPILER} ${TARGET}
+  - ps: .\$env:BUILD_DIR\build.windows.ps1 -build_type $env:BUILD_TYPE -compiler $env:COMPILER -third_party $env:THIRD_PARTY -target $env:TARGET
 
 notifications:
   - provider: Webhook

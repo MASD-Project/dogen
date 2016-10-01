@@ -20,6 +20,7 @@ param (
     [string]$build_type = "Release",
     [string]$compiler = "msvc",
     [string]$third_party = "",
+    [string[]]$target = @()
 )
 
 function Get-ScriptDirectory {
