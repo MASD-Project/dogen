@@ -67,7 +67,7 @@ else
     echo "* Third party: ${third_party}"
     export CMAKE_INCLUDE_PATH=${third_party}/include
     export CMAKE_LIBRARY_PATH=${third_party}/lib
-    export DYLD_LIBRARY_PATH=${third_party}/lib
+    export DYLD_FALLBACK_LIBRARY_PATH=${third_party}/lib
     export PATH=${third_party}/bin:${PATH};
 fi
 
@@ -112,7 +112,7 @@ fi
 echo "* Starting build."
 cd ${build_type_dir}
 cmake ${product_dir} ${cmake_defines} && make -j5 ${target}
-echo "DYLD_LIBRARY_PATH: $DYLD_LIBRARY_PATH"
+echo "DYLD_FALLBACK_LIBRARY_PATH: $DYLD_FALLBACK_LIBRARY_PATH"
 /Users/travis/build/DomainDrivenConsulting/dogen/build/output/clang/Release/stage/bin/dogen.utility.tests
 otool -L /Users/travis/build/DomainDrivenConsulting/dogen/build/output/clang/${build_type}/stage/bin/dogen.utility.tests
 otool -L /tmp/dogen_deps/dogen_deps_clang_7_3_0_osx_amd64/lib/libxml2.2.dylib
