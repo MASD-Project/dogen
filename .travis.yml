@@ -54,7 +54,6 @@ addons:
     sources:
       - ubuntu-toolchain-r-test
 
-
 install:
   - export BUILD_DIR=build/scripts
   - source ${BUILD_DIR}/travis.install.${TRAVIS_OS_NAME}.sh
@@ -66,7 +65,7 @@ script:
     fi
   - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
         export THIRD_PARTY="/tmp/dogen_deps/dogen_deps_clang_7_3_0_osx_amd64";
-        export TARGET="run_utility.tests";
+        export TARGET="package run_all_tests";
     fi
   - ${BUILD_DIR}/build.${TRAVIS_OS_NAME}.sh ${BUILD_TYPE} ${COMPILER} ${THIRD_PARTY} ${TARGET}
   - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then ${BUILD_DIR}/test_package.linux.sh; fi
