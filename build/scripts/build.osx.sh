@@ -67,6 +67,8 @@ else
     echo "* Third party: ${third_party}"
     export CMAKE_INCLUDE_PATH=${third_party}/include
     export CMAKE_LIBRARY_PATH=${third_party}/lib
+    export DYLD_LIBRARY_PATH=${third_party}/lib:$DYLD_LIBRARY_PATH
+    export PATH=${third_party}/bin:${PATH};
 fi
 
 #
