@@ -17,13 +17,14 @@
 # MA 02110-1301, USA.
 #
 $dropbox="https://dl.dropboxusercontent.com/u/541873/packages"
-$version=1
+$version=2
 $package="dogen_deps_vc14_windows_amd64_v${version}.7z"
 $input_location="${dropbox}/${package}"
 $output_location="$env:temp/${package}"
 $extract_dir="$env:temp/dogen_deps"
 
 wget ${input_location} -OutFile ${output_location}
-mkdir ${extract_dir}
+write-host "Dogen deps: ${output_location}"
+mkdir ${extract_dir} | Out-Null
 cd ${extract_dir}
 7z x ../${package} > $null;
