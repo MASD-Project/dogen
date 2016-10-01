@@ -37,7 +37,8 @@ build_script:
   - cmd: set THIRD_PARTY="C:/TEMP/dogen_deps_vc14_windows_amd64";
   - cmd: set TARGET="package run_windows_green_tests";
   - cmd: set BUILD_TYPE="%configuration%"
-  - ps: . $env:BUILD_DIR\build.windows.ps1 -build_type $env:BUILD_TYPE -compiler $env:COMPILER -third_party $env:THIRD_PARTY -target $env:TARGET
+  - ps: ls
+  - ps: . $env:BUILD_DIR/build.windows.ps1 -build_type $env:BUILD_TYPE -compiler $env:COMPILER -third_party $env:THIRD_PARTY -target $env:TARGET
 
 notifications:
   - provider: Webhook
