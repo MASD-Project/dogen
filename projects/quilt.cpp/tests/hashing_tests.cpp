@@ -42,7 +42,25 @@ BOOST_AUTO_TEST_SUITE(hashing_tests)
 BOOST_AUTO_TEST_CASE(validate_hashing) {
     SETUP_TEST_LOG("validate_hashing");
 
+    test_hashing<formattables::model_generator>();
+    test_hashing<formattables::formattable_generator>();
+    test_hashing<formattables::opaque_configuration_generator>();
+    test_hashing<formattables::element_configuration_generator>();
+    test_hashing<formattables::global_enablement_configuration_generator>();
+    test_hashing<formattables::formatter_configuration_generator>();
+    test_hashing<formattables::helper_configuration_generator>();
+    test_hashing<formattables::aspect_configuration_generator>();
+    test_hashing<formattables::helper_descriptor_generator>();
+    test_hashing<annotations::streaming_annotations_generator>();
+    test_hashing<annotations::path_annotations_generator>();
+    test_hashing<annotations::aspect_annotations_generator>();
+    test_hashing<annotations::inclusion_directive_annotations_generator>();
+    test_hashing<annotations::helper_annotations_generator>();
     test_hashing<fabric::registrar_generator>();
- }
+    test_hashing<fabric::cmakelists_generator>();
+    test_hashing<fabric::odb_options_generator>();
+    test_hashing<fabric::master_header_generator>();
+    test_hashing<fabric::forward_declarations_generator>();
+}
 
 BOOST_AUTO_TEST_SUITE_END()

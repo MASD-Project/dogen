@@ -50,15 +50,32 @@ BOOST_AUTO_TEST_SUITE(serialization_tests)
 BOOST_AUTO_TEST_CASE(validate_serialization) {
     SETUP_TEST_LOG("validate_serialization");
 
+    roundtrip_type<formattables::model_generator>();
+    roundtrip_type<formattables::formattable_generator>();
+    roundtrip_type<formattables::opaque_configuration_generator>();
+    roundtrip_type<formattables::element_configuration_generator>();
+    roundtrip_type<formattables::global_enablement_configuration_generator>();
+    roundtrip_type<formattables::formatter_configuration_generator>();
+    roundtrip_type<formattables::helper_configuration_generator>();
+    roundtrip_type<formattables::aspect_configuration_generator>();
+    roundtrip_type<formattables::helper_descriptor_generator>();
+    roundtrip_type<annotations::streaming_annotations_generator>();
+    roundtrip_type<annotations::path_annotations_generator>();
+    roundtrip_type<annotations::aspect_annotations_generator>();
+    roundtrip_type<annotations::inclusion_directive_annotations_generator>();
+    roundtrip_type<annotations::helper_annotations_generator>();
     roundtrip_type<fabric::registrar_generator>();
+    roundtrip_type<fabric::cmakelists_generator>();
+    roundtrip_type<fabric::odb_options_generator>();
+    roundtrip_type<fabric::master_header_generator>();
+    roundtrip_type<fabric::forward_declarations_generator>();
 
     boost::shared_ptr<dogen::yarn::element> el(
         fabric::registrar_generator::create_ptr(2));
 
     dogen::utility::test::serialization_tester<
         boost::shared_ptr<dogen::yarn::element>
-        >::
-        all_roundtrips_produce_the_same_entity(el);
+    >::all_roundtrips_produce_the_same_entity(el);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

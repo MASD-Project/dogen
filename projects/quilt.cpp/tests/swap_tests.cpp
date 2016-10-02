@@ -41,7 +41,25 @@ BOOST_AUTO_TEST_SUITE(swap_tests)
 BOOST_AUTO_TEST_CASE(validate_swap) {
     SETUP_TEST_LOG("validate_swap");
 
+    test_swap<formattables::model_generator>();
+    test_swap<formattables::formattable_generator>();
+    test_swap<formattables::opaque_configuration_generator>();
+    test_swap<formattables::element_configuration_generator>();
+    test_swap<formattables::global_enablement_configuration_generator>();
+    test_swap<formattables::formatter_configuration_generator>();
+    test_swap<formattables::helper_configuration_generator>();
+    test_swap<formattables::aspect_configuration_generator>();
+    test_swap<formattables::helper_descriptor_generator>();
+    test_swap<annotations::streaming_annotations_generator>();
+    test_swap<annotations::path_annotations_generator>();
+    test_swap<annotations::aspect_annotations_generator>();
+    test_swap<annotations::inclusion_directive_annotations_generator>();
+    test_swap<annotations::helper_annotations_generator>();
     test_swap<fabric::registrar_generator>();
+    test_swap<fabric::cmakelists_generator>();
+    test_swap<fabric::odb_options_generator>();
+    test_swap<fabric::master_header_generator>();
+    test_swap<fabric::forward_declarations_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

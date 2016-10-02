@@ -41,7 +41,25 @@ BOOST_AUTO_TEST_SUITE(io_tests)
 BOOST_AUTO_TEST_CASE(validate_io) {
     SETUP_TEST_LOG("validate_io");
 
+    test_io<formattables::model_generator>();
+    test_io<formattables::formattable_generator>();
+    test_io<formattables::opaque_configuration_generator>();
+    test_io<formattables::element_configuration_generator>();
+    test_io<formattables::global_enablement_configuration_generator>();
+    test_io<formattables::formatter_configuration_generator>();
+    test_io<formattables::helper_configuration_generator>();
+    test_io<formattables::aspect_configuration_generator>();
+    test_io<formattables::helper_descriptor_generator>();
+    test_io<annotations::streaming_annotations_generator>();
+    test_io<annotations::path_annotations_generator>();
+    test_io<annotations::aspect_annotations_generator>();
+    test_io<annotations::inclusion_directive_annotations_generator>();
+    test_io<annotations::helper_annotations_generator>();
     test_io<fabric::registrar_generator>();
+    test_io<fabric::cmakelists_generator>();
+    test_io<fabric::odb_options_generator>();
+    test_io<fabric::master_header_generator>();
+    test_io<fabric::forward_declarations_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

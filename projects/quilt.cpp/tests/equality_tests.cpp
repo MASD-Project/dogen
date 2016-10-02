@@ -42,7 +42,25 @@ BOOST_AUTO_TEST_SUITE(equality_tests)
 BOOST_AUTO_TEST_CASE(validate_equality) {
     SETUP_TEST_LOG("validate_equality");
 
+    test_equality<formattables::model_generator>();
+    test_equality<formattables::formattable_generator>();
+    test_equality<formattables::opaque_configuration_generator>();
+    test_equality<formattables::element_configuration_generator>();
+    test_equality<formattables::global_enablement_configuration_generator>();
+    test_equality<formattables::formatter_configuration_generator>();
+    test_equality<formattables::helper_configuration_generator>();
+    test_equality<formattables::aspect_configuration_generator>();
+    test_equality<formattables::helper_descriptor_generator>();
+    test_equality<annotations::streaming_annotations_generator>();
+    test_equality<annotations::path_annotations_generator>();
+    test_equality<annotations::aspect_annotations_generator>();
+    test_equality<annotations::inclusion_directive_annotations_generator>();
+    test_equality<annotations::helper_annotations_generator>();
     test_equality<fabric::registrar_generator>();
+    test_equality<fabric::cmakelists_generator>();
+    test_equality<fabric::odb_options_generator>();
+    test_equality<fabric::master_header_generator>();
+    test_equality<fabric::forward_declarations_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

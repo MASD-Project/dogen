@@ -41,7 +41,26 @@ BOOST_AUTO_TEST_SUITE(move_assignment_copy_tests)
 BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
     SETUP_TEST_LOG("validate_move_assignment_copy");
 
-        test_move_assignment_copy<fabric::registrar_generator>();
+    test_move_assignment_copy<fabric::registrar_generator>();
+    test_move_assignment_copy<formattables::model_generator>();
+    test_move_assignment_copy<formattables::formattable_generator>();
+    test_move_assignment_copy<formattables::opaque_configuration_generator>();
+    test_move_assignment_copy<formattables::element_configuration_generator>();
+    test_move_assignment_copy<formattables::global_enablement_configuration_generator>();
+    test_move_assignment_copy<formattables::formatter_configuration_generator>();
+    test_move_assignment_copy<formattables::helper_configuration_generator>();
+    test_move_assignment_copy<formattables::aspect_configuration_generator>();
+    test_move_assignment_copy<formattables::helper_descriptor_generator>();
+    test_move_assignment_copy<annotations::streaming_annotations_generator>();
+    test_move_assignment_copy<annotations::path_annotations_generator>();
+    test_move_assignment_copy<annotations::aspect_annotations_generator>();
+    test_move_assignment_copy<annotations::inclusion_directive_annotations_generator>();
+    test_move_assignment_copy<annotations::helper_annotations_generator>();
+    test_move_assignment_copy<fabric::registrar_generator>();
+    test_move_assignment_copy<fabric::cmakelists_generator>();
+    test_move_assignment_copy<fabric::odb_options_generator>();
+    test_move_assignment_copy<fabric::master_header_generator>();
+    test_move_assignment_copy<fabric::forward_declarations_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()
