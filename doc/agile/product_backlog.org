@@ -6003,6 +6003,25 @@ error at model building time if an user tries to do this.
 Stuff that is not directly related to the problem domain but its
 needed by Dogen.
 
+*** Fix the dynamic linker errors in OSX when running tests           :story:
+
+At present we are building for OSX but not running the tests. Most of
+the tests should actually pass, if only we could run them. The problem
+is that DYLD_LIBRARY_PATH is not being supplied to make, resulting in
+dynamic linker errors:
+
+: dyld: Library not loaded: /Users/marco/Development/local/lib/libxml2.2.dylib
+:  Referenced from: /Users/travis/build/DomainDrivenConsulting/dogen/build/output/clang/Release/stage/bin/dogen.utility.tests
+:  Reason: Incompatible library version: dogen.utility.tests requires version 12.0.0 or later, but libxml2.2.dylib provides version 10.0.0
+: /bin/sh: line 1:  1692 Trace/BPT trap: 5       /Users/travis/build/DomainDrivenConsulting/dogen/build/output/clang/Release/stage/bin/dogen.utility.tests
+
+We tried both =DYLD_LIBRARY_PATH= and =DYLD_FALLBACK_LIBRARY_PATH=.
+If we do run the tests manually inside the main script we get the
+linking to work, as proved in [[https://travis-ci.org/DomainDrivenConsulting/dogen/jobs/164335824][this build]].
+
+- [[https://forums.developer.apple.com/thread/9233][DYLD_LIBRARY_PATH and make]]: according to this article, fallback
+  should have fixed the problem but didn't.
+
 *** Reduce build times to avoid timeouts                              :story:
 
 At present we get random build time violations on travis due to builds
