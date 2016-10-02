@@ -13,45 +13,47 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-02 Sun 10:49]
+#+CAPTION: Clock summary at [2016-10-02 Sun 18:56]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *35:21* |       |      | 100.0 |
+| *Total time*                                                                | *39:10* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 35:21   |       |      | 100.0 |
-| Active                                                                      |         | 35:21 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:49 |   2.3 |
+| Stories                                                                     | 39:10   |       |      | 100.0 |
+| Active                                                                      |         | 39:10 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:53 |   4.8 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:07 |   0.3 |
-| COMPLETED Generation of formattable is incorrect                            |         |       | 2:30 |   7.1 |
+| COMPLETED Generation of formattable is incorrect                            |         |       | 2:30 |   6.4 |
 | COMPLETED Visitor includes are incorrect                                    |         |       | 0:20 |   0.9 |
-| COMPLETED Add includer to quilt.cpp                                         |         |       | 1:46 |   5.0 |
-| COMPLETED Add reducer to quilt.cpp                                          |         |       | 0:22 |   1.0 |
-| COMPLETED Add new index to formtter container                               |         |       | 0:19 |   0.9 |
-| COMPLETED Add path expander to quilt.cpp                                    |         |       | 0:49 |   2.3 |
-| COMPLETED Add guard expander to quilt.cpp                                   |         |       | 0:27 |   1.3 |
-| COMPLETED Investigate borked travis build                                   |         |       | 0:37 |   1.7 |
-| COMPLETED Add decoration expander to quilt.cpp                              |         |       | 0:23 |   1.1 |
-| COMPLETED Add aspect expander to quilt.cpp                                  |         |       | 1:26 |   4.1 |
-| COMPLETED Run tests that are passing on windows                             |         |       | 0:10 |   0.5 |
-| COMPLETED Add helper expander to quilt.cpp                                  |         |       | 1:26 |   4.1 |
-| COMPLETED Merge pre and post workflows                                      |         |       | 0:16 |   0.8 |
-| COMPLETED Fix bug in aspect and helper generation                           |         |       | 0:15 |   0.7 |
-| COMPLETED Investigate element annotation support                            |         |       | 2:05 |   5.9 |
-| CANCELLED Add streaming settings expander                                   |         |       | 0:36 |   1.7 |
-| COMPLETED Create the formattables model                                     |         |       | 1:32 |   4.3 |
-| COMPLETED Hook formattables into formatters                                 |         |       | 3:58 |  11.2 |
-| COMPLETED Remove empty context                                              |         |       | 1:09 |   3.3 |
-| COMPLETED Review main classes in quilt.cpp                                  |         |       | 3:42 |  10.5 |
-| COMPLETED Clean up element segmentation                                     |         |       | 1:20 |   3.8 |
-| COMPLETED Get OSX build to compile code                                     |         |       | 7:05 |  20.0 |
-| STARTED Add a banner to readme                                              |         |       | 1:29 |   4.2 |
+| COMPLETED Add includer to quilt.cpp                                         |         |       | 1:46 |   4.5 |
+| COMPLETED Add reducer to quilt.cpp                                          |         |       | 0:22 |   0.9 |
+| COMPLETED Add new index to formtter container                               |         |       | 0:19 |   0.8 |
+| COMPLETED Add path expander to quilt.cpp                                    |         |       | 0:49 |   2.1 |
+| COMPLETED Add guard expander to quilt.cpp                                   |         |       | 0:27 |   1.1 |
+| COMPLETED Investigate borked travis build                                   |         |       | 0:37 |   1.6 |
+| COMPLETED Add decoration expander to quilt.cpp                              |         |       | 0:23 |   1.0 |
+| COMPLETED Add aspect expander to quilt.cpp                                  |         |       | 1:26 |   3.7 |
+| COMPLETED Run tests that are passing on windows                             |         |       | 0:10 |   0.4 |
+| COMPLETED Add helper expander to quilt.cpp                                  |         |       | 1:26 |   3.7 |
+| COMPLETED Merge pre and post workflows                                      |         |       | 0:16 |   0.7 |
+| COMPLETED Fix bug in aspect and helper generation                           |         |       | 0:15 |   0.6 |
+| COMPLETED Investigate element annotation support                            |         |       | 2:05 |   5.3 |
+| CANCELLED Add streaming settings expander                                   |         |       | 0:36 |   1.5 |
+| COMPLETED Create the formattables model                                     |         |       | 1:32 |   3.9 |
+| COMPLETED Hook formattables into formatters                                 |         |       | 3:58 |  10.1 |
+| COMPLETED Remove empty context                                              |         |       | 1:09 |   2.9 |
+| COMPLETED Review main classes in quilt.cpp                                  |         |       | 3:42 |   9.4 |
+| COMPLETED Clean up element segmentation                                     |         |       | 1:20 |   3.4 |
+| COMPLETED Get OSX build to compile code                                     |         |       | 7:05 |  18.1 |
+| COMPLETED Add a banner to readme                                            |         |       | 1:29 |   3.8 |
 | STARTED Remove formatter id                                                 |         |       | 0:04 |   0.2 |
-| STARTED Generate formatter interfaces                                       |         |       | 0:19 |   0.9 |
+| STARTED Generate formatter interfaces                                       |         |       | 0:19 |   0.8 |
+| STARTED Analysis around terminology in formatting space                     |         |       | 2:45 |   7.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-10-02 Sun 10:50]--[2016-10-02 Sun 11:54] =>  1:04
     CLOCK: [2016-09-27 Tue 10:04]--[2016-09-27 Tue 10:13] =>  0:09
     CLOCK: [2016-09-26 Mon 15:36]--[2016-09-26 Mon 15:39] =>  0:03
     CLOCK: [2016-09-26 Mon 09:49]--[2016-09-26 Mon 10:00] =>  0:11
@@ -570,7 +572,8 @@ Notes:
 - [[http://www.mactech.com/articles/mactech/Vol.26/26.02/TheFlatPackage/index.html][The Flat Package]]
 - [[https://docs.travis-ci.com/user/multi-os/][Matrix with multiple OSs]]
 
-*** STARTED Add a banner to readme                                    :story:
+*** COMPLETED Add a banner to readme                                  :story:
+    CLOSED: [2016-10-02 Sun 11:54]
     CLOCK: [2016-10-02 Sun 09:20]--[2016-10-02 Sun 10:49] =>  1:29
 
 It would be nice to have some kind of banner to make the readme a bit
@@ -651,6 +654,81 @@ Notes:
   etc. Includes will be particularly special because we need to
   augment the include list with additional includes. However, we may
   not even need to be aware of this.
+
+*** STARTED Analysis around terminology in formatting space           :story:
+    CLOCK: [2016-10-02 Sun 17:08]--[2016-10-02 Sun 18:55] =>  1:47
+    CLOCK: [2016-10-02 Sun 16:09]--[2016-10-02 Sun 17:07] =>  0:58
+
+One part of the language which has not yet been clarified is around
+formatters. We use the term "formatter" to mean several things:
+
+- a formatting function in formatting space which produces a file; and
+  we think of this file as also an entity in formatting space;
+- a formatting function in formatting space which produces a part of a
+  file - an aspect; we call these helpers at present.
+- all of the infrastructure around file generation such as
+  boilerplate, etc - the formatters model.
+
+The biggest problem is that this conceptual approach does not
+distinguish between the formatter and the conceptual entity underlying
+it.
+
+Another way of looking at this is that we have the artefact space,
+made up of all the entities that compose a project. An artefact maps
+one to one to a file, but a file is a specific representation on a
+filesystem, file server etc whereas the artefact is the conceptual
+notion behind it. However, the content of the file and the content of
+the artefact are byte-wise identical for a given (imaginary) artefact
+id. One takes an artefact in memory and expresses it as a file.
+
+Artefacts are instances of archetypes. An archetype of an artefact is
+akin to a class of an object; it is its meta-type. Archetypes live in
+archetype space, which is partitioned hierarchically by facet,
+sub-kernel and kernel.
+
+Archetypes are uniquely identified by their id. An example of an
+archetype id is =quilt.cpp.types.class_header=, where =quilt= is the
+kernel, =cpp= is the sub-kernel, =types= the facet and =class_header=
+the archetype group. Configuration/annotations binds to archetype ids.
+
+Formatting functions (i.e. formatters) take in a set of arguments and
+generate artefacts. Formatters inherit the taxonomy of the archetype
+of the artefacts they generate. The formatter id is the archetype id
+plus the postfix =_formatter=. Formatters are also grouped like
+archetypes: =class_header= etc, but they are also support additional
+arbitrary grouping via labels (header files, cmakefiles, etc).
+
+Modeling space is made up of entities. Entities abstract one or more
+archetypes. One entity is represented by a set of element segments
+with a cardinality of one or two. One of the elements is called the
+master element and the other is called the extension element.
+
+There is a stereotype called =formatter=. When a type is marked as
+=formatter= the user must supply a stitch template in the filesystem
+with a name of the class and the extension =.stitch=. The wale
+templates are fixed. Wale templates must be part of dogen data. The
+expected stitch sections must be present (include dependencies,
+format).
+
+=quilt.cpp= has a formatting mode which intercepts the stereotype and
+then does additional processing such as if "non-generatable" only
+generate if there is no file, if formatter do wale/stitch, etc.
+
+Renames:
+
+- file: artefact
+- file formatter: artefact formatter
+- ownership_hierarchy: archetype_location, model_name becomes kernel,
+  facet name becomes facet and formatter name archetype. Add
+  sub-kernel.
+
+*** Remove formatter level facet folders                              :story:
+
+We seem to have two of these, but the real one is at the model level.
+
+*** Move enabled formatters to element configuration                  :story:
+
+All elements have the same view of enabled formatters.
 
 *** Move enabled formatters to a higher level                         :story:
 
