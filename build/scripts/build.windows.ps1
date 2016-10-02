@@ -97,7 +97,7 @@ $cmake_defines="${cmake_defines} -DWITH_LATEX=OFF"
 # Build
 #
 write-host "* Starting build.";
-$command = "cmake ${product_dir} ${cmake_defines} -G ${generator}";
+$command = "cmake ${product_dir} ${cmake_defines} -G '${generator}'";
 Invoke-Expression -Command $command
 if (! $?) {
     write-host "Error whilst configuring."
