@@ -97,5 +97,16 @@ $cmake_defines="${cmake_defines} -DWITH_LATEX=OFF"
 # Build
 #
 write-host "* Starting build.";
-cmake ${product_dir} ${cmake_defines} -G ${generator}
-cmake --build . --config $build_type --target ${target}
+$command = "cmake ${product_dir} ${cmake_defines} -G ${generator}";
+Invoke-Expression -Command $command
+if (! $?) {
+    write-host "Error whilst configuring."
+    exit 1
+}
+
+$command = "cmake --build . --config $build_type --target ${target}";
+Invoke-Expression -Command $command
+if (! $?) {
+    write-host "Error whilst running target ${target}."
+    exit 1
+}
