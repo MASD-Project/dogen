@@ -99,14 +99,14 @@ $cmake_defines="${cmake_defines} -DWITH_LATEX=OFF"
 write-host "* Starting build.";
 $command = "cmake ${product_dir} ${cmake_defines} -G '${generator}'";
 Invoke-Expression -Command $command
-if (! $?) {
+if ($LastExitCode -ne 0) {
     write-host "Error whilst configuring."
     exit 1
 }
 
 $command = "cmake --build . --config $build_type --target ${target}";
 Invoke-Expression -Command $command
-if (! $?) {
+if ($LastExitCode -ne 0) {
     write-host "Error whilst running target ${target}."
     exit 1
 }
