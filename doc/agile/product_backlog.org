@@ -17,20 +17,28 @@ We could mark all used elements during resolution and then during the
 transformation into the final model, we could drop all unused
 elements.
 
+Merged stories:
+
+*Filter out unused types from final model*
+
+When we finished assembling the model we should be able to determine
+which supporting types are in use and drop those that are not. This
+can be done just before building the final model (or as part of that
+task).
+
+We should have a class responsible for removing all types from a model
+which are not in use. This could be done as part of model assembly.
+
+One way this could be achieved is by adding a "usages" property,
+computed during resolution. Resolver could keep track of the
+non-target names that are in use and return those.
+
 *** Document the conceptual model                                     :story:
 
 We seem to be pretty close to the end of the conceptual model for
 dogen. We should write it up whilst its still fresh. We should try to
 use mathematical notation where possible to practice it. We should
 also get it reviewed.
-
-*** Vistor is only supported at the base class level                  :story:
-
-Due to implementation constraints, we only support visitable at the
-base class level. Add an exception if users attempt to use visitable
-stereotype in a class that has parents.
-
-Note: is this true? We are using derived visitable in C++ model.
 
 *** Add test model sanitizer to test models target                    :story:
 
@@ -123,47 +131,6 @@ around this is to have a log file for the entire test suite and
 separate log files for each test as we have now. Initialisation
 logging would go in this main file.
 
-*** Add travis support for bintray                                    :story:
-
-There is a new web application that interfaces with GitHub:
-[[https://bintray.com/][bintray]].
-
-- add JSON validation to bintray deployment descriptor.
-
-Notes:
-
-- an account was created [[https://bintray.com/mcraveiro][linked to GitHub]].
-- it supports the uploads of [[https://bintray.com/mcraveiro/deb][debs]].
-- [[https://bintray.com/docs/usermanual/uploads/uploads_howdoiuploadmystufftobintray.html][How Do I Upload My Stuff to Bintray?]]
-- [[https://github.com/tim-janik/beast][Beast]] project [[https://raw.githubusercontent.com/tim-janik/beast/master/README.md][README]] with emblems
-- Beast [[https://github.com/tim-janik/beast/blob/master/.travis.yml][travis.yml]]
-- [[https://github.com/tim-janik/rapicorn/blob/master/citool.sh.][citool.sh]] script from [[https://github.com/tim-janik/rapicorn][Rapicorn]] project and their [[https://raw.githubusercontent.com/tim-janik/rapicorn/master/README.md][README]].
-
-At present we are getting the following error:
-
-: Skipping a deployment with the bintray provider because this branch is not permitted
-
-This was fixed. We are now getting the following errors:
-
-: Installing deploy dependencies
-: [Bintray Upload] Reading descriptor file: build/scripts/bintray.json
-: [Bintray Upload] Creating package 'auto-upload'...
-: [Bintray Upload] Bintray response: 400 Bad Request. License 'GPL3' does not exist
-: [Bintray Upload] Creating version '0.88.0'...
-: [Bintray Upload] Bintray response: 404 Not Found. Package 'auto-upload' was not found
-: [Bintray Upload] Warning: Path: build/output/Release/stage/pkg/*.deb does not exist.
-: [Bintray Upload] Publishing version '0.88.0' of package 'auto-upload'...
-: [Bintray Upload] Bintray response: 404 Not Found. Package 'auto-upload' was not found
-
-*** Add appveyor support for bintray                                  :story:
-
-It seems appveyor also supports bintray:
-
-[[https://www.appveyor.com/docs/deployment/bintray/][Deploying to Bintray]]
-
-We need to change our targets to generate the MSI, and then try to
-deploy it over to bintray.
-
 *** Consider automatic injection of helpers                           :story:
 
 At present we are manually calling:
@@ -183,16 +150,6 @@ What the name is trying to say is: I have a type parameter and that
 type parameter is always allocated in the heap. But it does not quite
 convey that at all - it seems like the type itself is always in heap
 the way we use it in resolver.
-
-*** Check generation type before dispatching element                  :story:
-
-At present we are doing this check in =visit=:
-
-:     if (o.generation_type() == yarn::generation_types::no_generation)
-:        return;
-
-If we did it before the =visit= call we'd save the cost of
-dispatching.
 
 *** Add test with smart pointer in base class                         :story:
 
@@ -467,18 +424,6 @@ because the include dependency only has a directive, we cannot tell
 which formatter it belonged to. This would require some augmenting of
 the directive to record the "origination" formatter.
 
-*** Indent stitch output using clang format                           :story:
-
-We need to indent the output coming out of stitch as it is not
-suitable for reading as-is.
-
-This article has a good example of how to consume clang, but
-unfortunately its not about indenting:
-
-- [[https://bbannier.github.io/blog/2015/05/02/Writing-a-basic-clang-static-analysis-check.html][Writing a basic clang static analysis check]]
-- [[http://zed0.co.uk/clang-format-configurator/][clang-format configurator]]
-- [[http://clangformat.com/][online clang format]] - older site
-
 *** Use clang format in knit                                          :story:
 
 We need to indent the output coming out of knit. At present our stitch
@@ -493,7 +438,7 @@ indentation right. In most cases we don't. We need to:
   default set of options or a user supplied set of options (via a
   command line parameter).
 
-Merged with other story:
+Merged Stories:
 
 We should generate un-indented c++ code and then rely on clang-format
 to do the indentation. We can allow users to supply their own
@@ -514,6 +459,20 @@ formaters - they become flat - and then we always apply the indenter;
 either a clang based one or a simplified one. Either way, the code
 should live in formatters and make use of the language-specific
 folders as required.
+
+*Indent stitch output using clang format*
+
+*Rationale*: we should just merge the final output, not each tool's.
+
+We need to indent the output coming out of stitch as it is not
+suitable for reading as-is.
+
+This article has a good example of how to consume clang, but
+unfortunately its not about indenting:
+
+- [[https://bbannier.github.io/blog/2015/05/02/Writing-a-basic-clang-static-analysis-check.html][Writing a basic clang static analysis check]]
+- [[http://zed0.co.uk/clang-format-configurator/][clang-format configurator]]
+- [[http://clangformat.com/][online clang format]] - older site
 
 *** Consider using a proper JSON library                              :story:
 
@@ -538,7 +497,7 @@ b2cce41 * third party: remove includes and rapid json
 
 Merged stories:
 
-Add support for JSON serialisation
+*Add support for JSON serialisation*
 
 We should have proper JSON serialisation support, for both reading and
 writing. We can then implement IO in terms of JSON.
@@ -574,122 +533,6 @@ unparsed types before merging. There is a circular dependency here.
 We somehow need a first pass to obtain all the primitives and a second
 pass to parse.
 
-*** Refactor code around model origination                            :story:
-
-We have the following use cases around generation type and
-origination:
-
-- serialisation registrar needs to know which of the references are
-  "real" (dogen; non-proxy) models and which are proxy models. We are
-  only interested in calling the registrars for the "real" models.
-- inclusion directives should only be generated for the target and
-  non-proxy models.
-- in a target model, we need to distinguish between elements for which
-  the overwrite flag will be false (services; non-generatable) and
-  those for which it will be true (all others).
-- in a target model, we need to determine which formatters will be
-  enabled for a given element. For services at present we just have
-  types. All other types enable all formatters.
-- we need to filter out all non-target elements before we code
-  generate.
-
-*Previous Understanding*
-
-- remove origin types and generation types, replacing it with just a
-  boolean for is target. Actually we need something like:
-  proxy_reference, non_proxy_reference, target. We also need a good
-  name for this enumeration.
-- add a model-level flag: is empty. It is true if there are no model
-  elements. has_generatable_types is then is_target && !is_empty.
-- at present we are using origin type to determine whether to create a
-  registrar, etc in cpp model. There is no other use case for
-  this. This is done in several places due to the bad handling of C++
-  specific types. Grep for =references= in =cpp= to find all
-  locations. We could split references into two (dogen, non-dogen). Or
-  references could have a origin type too.
-- we should also replace has generatable types with something more
-  like "target model has types" or "is target model empty". The idea
-  we are trying to capture is that the target model contained at least
-  one type. This could be set by the merger when it processes the
-  target model.
-
-*Previous Understanding*
-
-In the past we added a number of knobs around generation, all with
-their own problems:
-
-- =origin_types=: was the model/type created by the user or the
-  system. in reality this means did the model come from Dia or
-  JSON. this is confusing as the user can also add JSON files (their
-  own model library) and in the future the user can use JSON
-  exclusively without needed Dia at all.
-- =generation_types=: if the model is target, all types are to be
-  generated /unless/ they are not properly supported, in which case
-  they are to be "partially" generated (as is the case with
-  services). This is a formatter decision and yarn should not know
-  anything about it. Actually this is not quite true; users may want
-  to stop generation.
-
-These can be replaced by a single enumeration that indicates if the
-type/model is target or not.
-
-This work should be integrated with the model types story.
-
-Merged stories:
-
-*Split references into dogen and non-dogen models*
-
-If we had two containers of references, one for dogen models and
-another one for non-dogen models - which we could give a nice name, to
-imply its foreign origin - we could then use the dogen references for
-registrar, etc. This is a replacement for the origin type.
-
-We need a good name for these. Candidates:
-
-- proxy model: represents something that exists in the outside
-  world. e.g. =is_proxy=.
-
-*Remove =service= stereotype*
-
-This really just means non-generatable, or do not generate. We already
-have a stereotype for this. Remove =service= and any other stereotype
-which is not being used such as =value_object= etc.
-
-Actually, non-generatable is not a stereotype really. We should
-instead have some meta-data that can affect generation:
-
-- do not generate: do nothing at all. For references only. If a file
-  exists with this file name, it will be deleted as part of
-  housekeeping.
-- generate blank file if it doesn't exist: we don't even want a
-  template.
-- generate with content if it doesn't exist, do not touch otherwise:
-  what we call services at the moment. Generate a "template" that then
-  gets filled in manually.
-- generate and merge: merge the contents of the generated file with
-  the current contents in the file system. When we support merging.
-- generate and overwrite: generate the file and overwrite whatever
-  exists in the file system.
-
-This could be called "generation policy".
-
-The second behaviour we get for free with services is that we disable
-all facets except for types. A few points:
-
-- we may want to have io, serialisation, etc. This is not possible at
-  present. If a state of a service is made up of supported types, we
-  could even use existing code generation.
-- in order for this to be implemented correctly we need to hook in to
-  the enablement management somehow. In addition, it seems each facet
-  can have its own generation policy. For example we may want to
-  manually create types but automatically generate io.
-- the best way to handle this may be to setup "enablement profiles"
-  that the user can hook up to. For example we could have a "default"
-  profile that enables all facets (or uses facet defaults), a second
-  "service" profile that enables types with partial generation and io
-  with full generation and so on. We probably also need "generation
-  profiles" to go with "enablement profiles".
-
 *** Handle registration of services properly                          :story:
 
 We need a way to determine if a type which is part of a generalisation
@@ -710,124 +553,6 @@ was formed, and then ownership by DDC.
 
 - first update to personal ownership has been done, but we need to
   test if multiple copyright entries is properly supported.
-
-*** Consider renaming registrar in boost serialisation                :story:
-
-At present we have a registrar formatter that does the boost
-serialisation work. However, the name =registrar= is a bit too
-generic; we may for example add formatters for static registrars. We
-should rename this formatter to something more meaningful. Also the
-name registrar is already well understood to mean static registrar.
-
-This is a big problem now that we cannot add a type with the name
-registrar to the main model as it clashes with the serialisation
-registrar.
-
-We could simply name it serialisation registrar or some such name that
-is very unlikely to clash. We should then have a validation rule that
-stops users from defining types with that name.
-
-We need to go through all of the renamed registrars and fix them.
-
-Another option is to allow users to supply a name via meta-data to
-avoid name clashes. We could error when the user has defined a type.
-
-Actually, since the clash is only internal - the names we are
-generating on the fly are clashing with the user defined names - we
-should probably have a "postfix" that can be added in case of
-clashes. The generated code will not cause problems, its just the
-formattables pipeline.
-
-*** Duplicate fields in JSON result in non-intuitive errors           :story:
-
-By mistake we added the same field twice in JSON:
-
-:            "extensions" : {
-:                "cpp.types.class_header_formatter.inclusion_directive" : "<boost/property_tree/ptree.hpp>",
-:                "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/property_tree/ptree_serialization.hpp>",
-:                "cpp.io.class_header_formatter.inclusion_directive" : "<boost/property_tree/json_parser.hpp>",
-:                "cpp.io.class_implementation_formatter.inclusion_directive" : "<boost/property_tree/json_parser.hpp>",
-:                "cpp.io.class_implementation_formatter.inclusion_directive" : "<boost/property_tree/json_parser.hpp>",
-:                "cpp.hash.class_header_formatter.inclusion_required" : false
-
-The resulting error message was not particularly helpful:
-
-: 2015-06-17 13:56:06.658500 [DEBUG] [sml.json_hydrator] Processing type: <boost><property_tree><ptree>
-: 2015-06-17 13:56:06.658519 [ERROR] [dynamic.field_instance_factory] Expected at most one element
-
-*** Consider adding =fileset= to formatters' model                    :story:
-
-We are using collections of files quite a bit, and it makes sense to
-create an abstraction for it such as a =fileset=. However, for this to
-work properly we need to add at least one basic behaviours: the
-ability to merge two file sets. Or else we will end up having to
-unpack the files, then merging them, then creating a new fileset.
-
-Problem is, we either create the fileset as a non-generatable type -
-not ideal - or we create it as generatable and need to add this as a
-free function. We need to wait until dogen has support for merging
-code generation.
-
-*** Integration of stitch and dogen                                   :story:
-
-Now that we have implemented stitch and proved it works (more or
-less), we need to think how we can make using stitch from dogen
-easier. At present there is not integration at all:
-
-- users need to create regexes to ensure dogen does not trample on
-  stitch files:
-
-:    --ignore-files-matching-regex .*stitch
-:    --ignore-files-matching-regex .*_stitch.hpp
-:    --ignore-files-matching-regex .*_stitch.cpp
-
-- users need to manually create a header file for each stitch
-  template.
-- users need to create stitch targets and run them to ensure the
-  templates have been expanded. This means its possible to get dogen
-  and stitch out of sync (but for now not a big problem).
-
-In the ideal world, when we knit a model it would be nice if it could
-also stitch as required. This could be achieved as follows:
-
-- Create a meta-data tag that tells dogen a type has an associated
-  stitch template with it.
-- Create =cpp= types that represent the stitch header and
-  implementation.
-- Transformer needs to look for the meta-data tag and instantiate the
-  =cpp= types.
-- Create a =cpp= formatter for the header, as per regular
-  formatters. The slight challenge here is that the formatter needs to
-  be instantiable across facets, which we do not support at the
-  moment.
-- Create a cpp formatter for the implementation which instantiates
-  stitch with the template and uses it to create a file. Same
-  challenge as with the header.
-
-*Previous Understanding*
-
-- stitch can still be integrated with dogen. We could use meta-data to
-  link a formatter (well, any class that needs stitch really, but at
-  present just a formatter) with a stitch template. For example, a
-  =class_header_formatter= could have a "is stitchable" flag set to
-  on. This would then mean that dogen would look for a
-  =class_header_formatter.stitch= file in the same directory as the
-  CPP file. It would then use that to create a
-  =class_header_formatter_stitch.cpp= file. It would also
-  ignore/generate a =class_header_formatter_stitch.hpp= file and
-  automatically add it to the inclusion dependencies of
-  =class_header_formatter.cpp=. These are injected into stitch as we
-  instantiate the template since stitch supports meta-data (we do need
-  a way to inject the meta-data from dogen into the meta-data in the
-  template; perhaps a kvp container passed in to the stitch workflow
-  which could then be handed over to the parser). All these files are
-  automatically added to the list of "exceptions" for housekeeping so
-  that they do not get deleted. However, stitch would not know
-  anything at all about any of this; this is all knitter's
-  functionality. The problem is at present we haven't got a good place
-  to perform the stitching as part of knitter's workflows. Perhaps as
-  part of the expansion, we could set a number of stitch fields which
-  would then be picked up by some knit-specific workflow classes.
 
 *** Rename hash and serialization facets                              :story:
 
@@ -868,7 +593,7 @@ We have a variety of names for the methods parsing name trees
 recursively. The best one seems to be =walk_name_tree=. We should use
 this name consistently.
 
-*** Add support for selectively disabling helpers on a family :reviewing:story:
+*** Add support for selectively disabling helpers on a family         :story:
 
 At present when a type belongs to a helper family it must provide all
 helpers across all facets. This means that we can't support the cases
@@ -893,203 +618,6 @@ not able to cope with this use case. Changes required:
 - update the helper settings to read this new field.
 - enabled method now checks the helper properties.
 
-*** Consider caching "all modules" in location                        :story:
-
-At present we are adding the module lists together to build the
-qualified name; location could have a "all modules" list that
-concatenates external, model and internal modules. We should look at
-performance before doing this change though.
-
-We are also using this information in =quilt.cpp= via the name builder
-(this is the only reason it cannot be removed). Adding it to the
-name/location is a bit painful since we use it in a lot of places, but
-we have other options:
-
-- create a service to do the merging and do it on the fly
-- add a method to nameable with the flat module list.
-
-Merged stories:
-
-*Add "namespaces" to name*
-
-Name should have a flat class with all namespaces in yarn, instead of
-generating it on every formatter.
-
-*** Consider reducing the number of qname lookups in cpp model        :story:
-
-At present we are still using =yarn::name= in a lot of repositories in
-quilt. We already had one go in moving to id's but there are still
-quite a few left. Investigate to see if there are more that can be
-moved.
-
-*** Use official boost with windows                                   :story:
-
-We tried replacing the conan boost with the official boost but it
-resulted in additional errors:
-
-: libboost_system-vc140-mt-sgd-1_62.lib(error_code.obj) : error LNK2038:
-:   mismatch detected for 'RuntimeLibrary': value 'MTd_StaticDebug' doesn't
-:   match value 'MDd_DynamicDebug' in equality_tests.obj
-:   [C:\projects\dogen\build\output\msvc\Debug\projects\dia\tests\dia.tests.vcxproj]
-: libboost_serialization-vc140-mt-sgd-1_62.lib(basic_oarchive.obj) : error LNK2038:
-:   mismatch detected for 'RuntimeLibrary': value 'MTd_StaticDebug' doesn't match
-:   value 'MDd_DynamicDebug' in equality_tests.obj
-:   [C:\projects\dogen\build\output\msvc\Debug\projects\dia\tests\dia.tests.vcxproj]
-: libboost_serialization-vc140-mt-sgd-1_62.lib(extended_type_info.obj) : error LNK2038:
-:   mismatch detected for 'RuntimeLibrary': value 'MTd_StaticDebug' doesn't match
-:   value 'MDd_DynamicDebug' in equality_tests.obj
-:   [C:\projects\dogen\build\output\msvc\Debug\projects\dia\tests\dia.tests.vcxproj]
-: ...
-
-- see [[https://ci.appveyor.com/project/mcraveiro/dogen/build/2.2.485/job/6rseroy5hk2akvxe][this build]] for details.
-- boost binaries sourced [[https://sourceforge.net/projects/boost/files/boost-binaries/1.62.0/][from here]], boost_1_62_0-msvc-14.0-64.exe
-- binraries still available in dropbox, code to use them still in
-  appveyor.install.windows.ps1.
-
-*** Windows build release test failures                               :epic:
-
-Dia tests:
-
-: [00:27:30] C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppCommon.targets(171,5): error MSB6006: "cmd.exe" exited with code -1073741515. [C:\projects\dogen\build\output\projects\dia\tests\run_dia.tests.vcxproj]
-
-Dia hydrator tests:
-
-: [00:27:31] unknown location : fatal error : in "modeline_group_hydrator_tests/hydrating_emacs_modeline_group_results_in_expected_modelines": class std::runtime_error: Error during test [C:\projects\dogen\build\output\projects\formatters\tests\run_formatters.tests.vcx
-: [00:27:31] proj]
-: [00:27:31]   C:\projects\dogen\projects\formatters\tests\modeline_group_hydrator_tests.cpp(142): last checkpoint: hydrating_emacs_modeline_group_results_in_expected_modelines
-: [00:27:31]
-: [00:27:31]   *** 1 failure is detected in the test module "formatters_tests"
-
-Knit:
-
-: [00:27:35] C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppCommon.targets(171,5): error MSB6006: "cmd.exe" exited with code -1073741515. [C:\projects\dogen\build\output\projects\knit\tests\run_knit.tests.vcxproj]
-: [00:27:35] Done Building Project "C:\projects\dogen\build\output\projects\knit\tests\run_knit.tests.vcxproj" (default targets) -- FAILED.
-
-Stitch:
-: [00:27:36]   C:\projects\dogen\projects\utility\src\test_data\validating_resolver.cpp(39): Throw in function class boost::filesystem::path __cdecl dogen::utility::test_data::validating_resolver::resolve(class boost::filesystem::path)
-: [00:27:36]   Dynamic exception type: class boost::exception_detail::clone_impl<class dogen::utility::filesystem::file_not_found>
-: [00:27:36]   std::exception::what: File not found: C:\projects\dogen\build\output\bin\../test_data\stitch/input/simple_template.stitch
-: [00:27:36] unknown location : fatal error : in "workflow_tests/simple_template_results_in_expected_output": class std::runtime_error: Error during test [C:\projects\dogen\build\output\projects\stitch\tests\run_stitch.tests.vcxproj]
-: [00:27:36]   C:\projects\dogen\projects\stitch\tests\workflow_tests.cpp(48): last checkpoint: simple_template_results_in_expected_output
-: [00:27:36]
-: [00:27:36]   C:\projects\dogen\projects\utility\src\test_data\validating_resolver.cpp(39): Throw in function class boost::filesystem::path __cdecl dogen::utility::test_data::validating_resolver::resolve(class boost::filesystem::path)
-: [00:27:36]   Dynamic exception type: class boost::exception_detail::clone_impl<class dogen::utility::filesystem::file_not_found>
-: [00:27:36]   std::exception::what: File not found: C:\projects\dogen\build\output\bin\../test_data\stitch/input/complex_template.stitch
-: [00:27:36]
-: [00:27:36]   C:\projects\dogen\projects\utility\src\test_data\validating_resolver.cpp(39): Throw in function class boost::filesystem::path __cdecl dogen::utility::test_data::validating_resolver::resolve(class boost::filesystem::path)
-: [00:27:36]   Dynamic exception type: class boost::exception_detail::clone_impl<class dogen::utility::filesystem::file_not_found>
-: [00:27:36]   std::exception::what: File not found: C:\projects\dogen\build\output\bin\../test_data\stitch/input/empty_template.stitch
-: [00:27:36]
-: [00:27:36]   *** 3 failures are detected in the test module "stitch_tests"
-<snip>
-
-Test model sanitizer:
-
-: [00:27:39]   CMake does not need to re-run because C:\projects\dogen\build\output\projects\test_models\test_model_sanitizer\tests\CMakeFiles\generate.stamp is up-to-date.
-: [00:27:39]   Running 127 test cases...
-: [00:27:39] C:/projects/dogen/projects/utility/include/dogen/utility/test/hash_tester.hpp(57): error : in "std_model_tests/validate_hashing": check hasher(a) == hasher(b) has failed [C:\projects\dogen\build\output\projects\test_models\test_model_sanitizer\tests\run_test_model_sanitizer.tests.vcxproj]
-: [00:27:39] C:/projects/dogen/projects/utility/include/dogen/utility/test/hash_tester.hpp(57): error : in "std_model_tests/validate_hashing": check hasher(a) == hasher(b) has failed [C:\projects\dogen\build\output\projects\test_models\test_model_sanitizer\tests\run_te
-: [00:27:39] st_model_sanitizer.tests.vcxproj]
-: [00:27:40]
-: [00:27:40]   *** 2 failures are detected in the test module "test_model_sanitizer_tests"
-
-Yarn.dia:
-
-: [00:27:42]   C:\projects\dogen\projects\utility\src\test_data\validating_resolver.cpp(39): Throw in function class boost::filesystem::path __cdecl dogen::utility::test_data::validating_resolver::resolve(class boost::filesystem::path)
-: [00:27:42]   Dynamic exception type: class boost::exception_detail::clone_impl<class dogen::utility::filesystem::file_not_found>
-: [00:27:42]   std::exception::what: File not found: C:\projects\dogen\build\output\bin\../test_data\yarn.dia/expected/class_in_a_package.diaxml
-: [00:27:42] unknown location : fatal error : in "workflow_tests/class_in_a_package_dia_transforms_into_expected_yarn": class std::runtime_error: Error during test [C:\projects\dogen\build\output\projects\yarn.dia\tests\run_yarn.dia.tests.vcxproj]
-: [00:27:42]   C:\projects\dogen\projects\yarn.dia\tests\workflow_tests.cpp(85): last checkpoint: class_in_a_package_dia_transforms_into_expected_yarn
-
-Yarn.Json
-
-: [00:27:42]   Building Custom Rule C:/projects/dogen/projects/yarn.json/tests/CMakeLists.txt
-: [00:27:42]   CMake does not need to re-run because C:\projects\dogen\build\output\projects\yarn.json\tests\CMakeFiles\generate.stamp is up-to-date.
-: [00:27:42]   Running 12 test cases...
-: [00:27:42]
-: [00:27:42]   C:\projects\dogen\projects\yarn.json\src\types\hydrator.cpp(251): Throw in function class dogen::yarn::intermediate_model __cdecl dogen::yarn::json::hydrator::hydrate(class std::basic_istream<char,struct std::char_traits<char> > &) const
-: [00:27:42]   Dynamic exception type: class boost::exception_detail::clone_impl<class dogen::yarn::json::hydration_error>
-: [00:27:42]   std::exception::what: Failed to parse JSON file<unspecified file>(1): expected value
-: [00:27:42] unknown location : fatal error : in "hydrator_tests/cpp_std_model_hydrates_into_expected_model": class std::runtime_error: Error during test [C:\projects\dogen\build\output\projects\yarn.json\tests\run_yarn.json.tests.vcxproj]
-: [00:27:42]   C:\projects\dogen\projects\yarn.json\tests\hydrator_tests.cpp(386): last checkpoint: cpp_std_model_hydrates_into_expected_model
-
-Yarn:
-
-: [00:27:42] C:/projects/dogen/projects/utility/include/dogen/utility/test/hash_tester.hpp(57): error : in "hashing_tests/validate_hashing": check hasher(a) == hasher(b) has failed [C:\projects\dogen\build\output\projects\yarn\tests\run_yarn.tests.vcxproj]
-: [00:27:42] C:/projects/dogen/projects/utility/include/dogen/utility/test/hash_tester.hpp(57): error : in "hashing_tests/validate_hashing": check hasher(a) == hasher(b) has failed [C:\projects\dogen\build\output\projects\yarn\tests\run_yarn.tests.vcxproj]
-: [00:27:42] C:/projects/dogen/projects/utility/include/dogen/utility/test/hash_tester.hpp(57): error : in "hashing_tests/validate_hashing": check hasher(a) == hasher(b) has failed [C:\projects\dogen\build\output\projects\yarn\tests\run_yarn.tests.vcxproj]
-: [00:27:44]
-: [00:27:44]   *** 3 failures are detected in the test module "yarn_tests"
-
-*** Windows build debug failures                                      :epic:
-
-The windows debug build fails to link with the following errors:
-
-: C:\projects\dogen\build\output\projects\config\tests\config.tests.vcxproj" (default target) (14) ->
-: (Link target) ->
-:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\config\tests\config.tests.vcxproj]
-: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
-: "C:\projects\dogen\build\output\projects\dia\tests\dia.tests.vcxproj" (default target) (17) ->
-:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\dia\tests\dia.tests.vcxproj]
-: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
-: "C:\projects\dogen\build\output\projects\dynamic\tests\dynamic.tests.vcxproj" (default target) (21) ->
-:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\dynamic\tests\dynamic.tests.vcxproj]
-: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
-: "C:\projects\dogen\build\output\projects\formatters\tests\formatters.tests.vcxproj" (default target) (29) ->
-:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\formatters\tests\formatters.tests.vcxproj]
-: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
-: "C:\projects\dogen\build\output\projects\knit\tests\knit.tests.vcxproj" (default target) (36) ->
-:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\knit\tests\knit.tests.vcxproj]
-: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
-: "C:\projects\dogen\build\output\projects\knitter\src\knitter.vcxproj" (default target) (37) ->
-:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\knitter\src\knitter.vcxproj]
-: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
-: "C:\projects\dogen\build\output\projects\knitter\tests\knitter.tests.vcxproj" (default target) (38) ->
-:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\knitter\tests\knitter.tests.vcxproj]
-: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
-: "C:\projects\dogen\build\output\projects\quilt.cpp\tests\quilt.cpp.tests.vcxproj" (default target) (39) ->
-:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\quilt.cpp\tests\quilt.cpp.tests.vcxproj]
-: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
-: "C:\projects\dogen\build\output\projects\quilt\tests\quilt.tests.vcxproj" (default target) (40) ->
-:   libboost_log-vc140-mt-gd-1_60.lib(default_attribute_names.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\quilt\tests\quilt.tests.vcxproj]
-: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
-: "C:\projects\dogen\build\output\projects\test_models\seam\tests\seam.tests.vcxproj" (default target) (41) ->
-:   libboost_log-vc140-mt-gd-1_60.lib(core.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\test_models\seam\tests\seam.tests.vcxproj]
-: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
-: "C:\projects\dogen\build\output\projects\stitch\tests\stitch.tests.vcxproj" (default target) (46) ->
-:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\stitch\tests\stitch.tests.vcxproj]
-: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
-: "C:\projects\dogen\build\output\projects\stitcher\src\stitcher.vcxproj" (default target) (47) ->
-:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\stitcher\src\stitcher.vcxproj]
-: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
-: "C:\projects\dogen\build\output\projects\stitcher\tests\stitcher.tests.vcxproj" (default target) (48) ->
-:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\stitcher\tests\stitcher.tests.vcxproj]
-: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
-: "C:\projects\dogen\build\output\projects\test_models\test_model_sanitizer\tests\test_model_sanitizer.tests.vcxproj" (default target) (49) ->
-:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\test_models\test_model_sanitizer\tests\test_model_sanitizer.tests.vcxproj]
-: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
-: "C:\projects\dogen\build\output\projects\utility\tests\utility.tests.vcxproj" (default target) (53) ->
-:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\utility\tests\utility.tests.vcxproj]
-: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
-: "C:\projects\dogen\build\output\projects\yarn.dia\tests\yarn.dia.tests.vcxproj" (default target) (54) ->
-:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\yarn.dia\tests\yarn.dia.tests.vcxproj]
-: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
-: "C:\projects\dogen\build\output\projects\yarn.json\tests\yarn.json.tests.vcxproj" (default target) (55) ->
-:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\yarn.json\tests\yarn.json.tests.vcxproj]
-: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
-: "C:\projects\dogen\build\output\projects\yarn\tests\yarn.tests.vcxproj" (default target) (56) ->
-:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\yarn\tests\yarn.tests.vcxproj]
-:     910 Warning(s)
-:     18 Error(s)
-
-This appears to be a mixing of 32-bit and 64-bit settings somewhere in
-the boost tests, according to SO:
-
-[[http://stackoverflow.com/questions/3563756/fatal-error-lnk1112-module-machine-type-x64-conflicts-with-target-machine-typ][fatal error LNK1112: module machine type 'x64' conflicts with target
-machine type 'X86']]
-
-Debug build is back down to =knit= target again.
-
 *** Add tests to inheritance test model                               :story:
 
 We should make sure types' use of IO kicks in via the inheritance test
@@ -1112,49 +640,6 @@ At present you can try to build the codegen knitting targets even
 before you built knitter. We should make them conditional on detecting
 =knitter=. We just need to make sure this is not cached by CMake.
 
-*** Group the file related fields under a prefix                      :story:
-
-Now we have =element= as a prefix, it probably makes sense to also
-group the fields that are related to file names, paths etc. These
-could be under =file= or perhaps =paths=? Examples:
-
-- =quilt.cpp.file.include_directory_name=
-- =quilt.cpp.source_directory_name=
-
-*** Implement qualified name efficiently                              :story:
-
-We used a =std::map= to store qualified names. In practice, we don't
-need something this expensive.
-
-- instead of mapping names to languages, we could map them to
-  "styles". There are only a few "styles" across all programming
-  languages (e.g. =.= separated, =::= separated and so on).
-- we can also create an array of these styles. We know up front how
-  many styles there are.
-- finally we can create a enumeration to access the array. At present
-  this is not possible because we cannot disable invalid, nor is it
-  possible to move it to a different position (e.g. last). Also we
-  will have to static cast the enum to access the int, which is not
-  very pretty.
-
-Once all of this is done we can simply do, at O(1):
-
-: name.qualified[static_cast<unsigned int>(styles::double_colon_separated_style)]
-
-We can prettify it a bit: [[http://stackoverflow.com/questions/8357240/how-to-automatically-convert-strongly-typed-enum-into-int][How to automatically convert strongly typed
-enum into int?]]
-
-: template <typename E>
-: constexpr typename std::underlying_type<E>::type to_underlying(E e) {
-:     return static_cast<typename std::underlying_type<E>::type>(e);
-: }
-:
-: std::cout << foo(to_underlying(b::B2)) << std::endl;
-
-Giving us:
-
-: name.qualified[to_underlying(styles::double_colon_separated_style)]
-
 *** Create utility methods for =__type__= etc                         :story:
 
 At present we've hard-coded the field name for =__type__= and so forth
@@ -1170,12 +655,12 @@ hard-coded things:
 - string helper variables: =<new_line>=, =<quote>=
 - =tidy_up_string=
 
-*** Add support for file properties overrides                         :story:
+*** Add support for decoration configuration overrides                :story:
 
-At present we have hard-coded the file properties (old general
-settings) to be read from the root object only. In an ideal world, we
-should be able to override some of these such as the copyrights. It
-may not make sense to be able to override them all though.
+At present we have hard-coded the decoration configuration to be read
+from the root object only. In an ideal world, we should be able to
+override some of these such as the copyrights. It may not make sense
+to be able to override them all though.
 
 *** Why do we need helpers and io for some types?                     :story:
 
@@ -1218,15 +703,6 @@ JSON:
 This implies we are not calling =tidy_up_string=. This can be tested
 by creating a container of =filesystem::path=.
 
-*** Element formatter should have a container api                     :story:
-
-In general, where the client is performing a loop over a well known
-container and then calling a method, we should add an API for that
-well known container. This is the case with the element formatter.
-
-This also reduces the number of splices done by the calling code. All
-the logging should be done in the element formatter as well.
-
 *** Add logging to all top-level workflow activities                  :story:
 
 We need to make sure the log file is narrating a story. For this we
@@ -1249,42 +725,6 @@ We need to replace uses of =tab-width= in cmake files with
 
 We need to do this for both code generated and manually generated
 files.
-
-*** Recursive structures result in crashes                            :story:
-
-If one defines a tree node with a parent and children (such as =node=
-in =yarn=) dogen generates code that recurses inifinitely. This is
-because the structure contains a parent and we loop through the parent
-back to itself and so on. To stop this from happening we need to tell
-dogen to exclude certain fields. For example, we could mark =parent=
-as a cycle. This is then interpreted by the io feature as a "do not
-follow the pointer" (just dump its memory address). We could have a
-manipulator that tells the =boost::shared_ptr= io to skip its payload,
-much like we do when the pointer is empty.
-
-In summary:
-
-- add a tag to mark a property as circular. Do not confuse this with
-  name tree cycles which are at the type level.
-- create a manipulator that is set when a circular property is
-  found. Set it appropriately.
-- on all pointer code (io, comparisons, etc) check for the
-  manipulator; if set, do not dereference the pointer. For equality do
-  a pointer comparison, for io dump the address, etc.
-
-*** Using =std::set<std::string>= causes compilation errors           :story:
-
-In theory sets of strings (and any other type that has =operator<=
-should work out of the box, even though we do not support sets of
-dogen types. However, when we tried to use a set of strings we got a
-whole load of compilation errors in serialisation, etc.
-
-*** Using =std::unordered_map<my_enum, ...>= fails equality           :story:
-
-We changed the map in =name= to an unordered map and suddenly the
-equality tests started to fail. Since we use it for strings quite a
-lot, it may be related to the fact that we used an enum? Add a test
-case on the test models and see if we can reproduce it.
 
 *** Stitcher log file names look weird                                :story:
 
@@ -1327,6 +767,18 @@ should be pluggable into these. Ranges also come to mind.
 
 *** Helper methods should have their own includes                     :story:
 
+This should be fairly straightforward:
+
+- ensure we compute helpers before we do includes in formattables
+  factory;
+- add include API to helpers (=inclusion_dependencies=)
+- during inclusion expansion, go through all helpers associated with a
+  element and ask them for their dependencies.
+- note that we still need a good solution for the "special helpers" in
+  order for this to work.
+
+*Previous Understanding*
+
 When a formatter relies on the helper methods, we have a problem: we
 need to determine the required includes from the main formatter
 without knowing what the helper methods may need. We have hacked this
@@ -1356,28 +808,9 @@ should be handled the same was as odb parameters, but because that is
 done with a massive hack, we are not going to extend the hack to
 copyright holders.
 
-*** Filter out unused types from final model                          :story:
-
-When we finished assembling the model we should be able to determine
-which supporting types are in use and drop those that are not. This
-can be done just before building the final model (or as part of that
-task).
-
-We should have a class responsible for removing all types from a model
-which are not in use. This could be done as part of model assembly.
-
-One way this could be achieved is by adding a "usages" property,
-computed during resolution. Resolver could keep track of the
-non-target names that are in use and return those.
-
 *** Services and leaves are not properly handled                      :story:
 
 We are manually ignoring services when calculating leaves.
-
-*** Use dots in data files extensions                                 :story:
-
-At the moment we use extensions such as =xmlyarn=. It should really be
-=.xml.yarn= or something of the kind.
 
 *** Add tests to identifier parser with invalid names                 :story:
 
@@ -1386,137 +819,6 @@ We need to handle properly the following cases:
 - totally blank name.
 - template with angle brackets but nothing inside: =a<>=.
 - template with angle brackets, type and then a comma: =a<b,>=.
-
-*** Stitch meta-templates                                             :story:
-
-*Note*: re-read story [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_64.org#code-generating-formatters-as-text-templates][Code-generating formatters as text templates]] as
-some of these ideas were already there. Also: see [[https://github.com/no1msd/mstch][mstch]].
-
-In the quest for defining a single stitch template which then becomes
-a formatter - without any additional infrastructure required at all -
-we hit on an idea: stitch meta-templates. Basically we would have two
-different kinds of inputs to stitch: the template itself and the
-meta-template. Meta-template is a provisional name. The meta-template
-would define the formatter layout:
-
-- class definition, using a stitch variable for the yarn element type
-- registration of the formatter
-- definition of a method for the includes
-- definition of a method for the stitching
-
-These last two would result in the creation of "regions". These
-regions must then be "instantiated" in the template. This could easily
-be achieved with some kind of new element:
-
-: <#% region "includes">
-
-Or some such stitch construct. All lines after this line are part of
-the region "includes" until a new region is defined. The region is
-stitched and then transposed to the place in the meta-template where
-it was defined, for example:
-
-: int f(int a, int b) {
-: <#% region "includes">
-: }
-
-Would result in copying across the region into these brackets. This
-will make defining multiple functions very easy, without having to
-supply command line arguments, etc.
-
-Notes:
-
-- meta-templates are supplied as command line arguments.
-- potential extension: =meta.stitch=
-- stitch should still work on non-meta-template mode.
-- some of these ideas had already been covered on another story but
-  can't find it in backlog. It could be part of the original stitch
-  epic. We need to revisit it to see if it contains additional
-  insights.
-- when an error occurs, it would be great if we could pin point the
-  error to the template or to the meta-template. This is more of a
-  concern when we add clang compilation support.
-
-Further thoughts:
-
-- there are two approaches for this: we could integrate stitch tighter
-  with knit and have it return "chunks" of processed code instead of
-  files. As per story "Integration of stitch and dogen", dogen would
-  then be responsible for writing the header file as per methods
-  defined in the class diagram. Each method would be marked as a
-  region. Meta-data in the class associates a template with the
-  class. Knitter uses stitch to convert the template into regions, and
-  then takes these regions and inserts them into a generated
-  file. This approach is very clever and requires a lot of machinery.
-- the easier approach uses meta-templates. Class diagram associates
-  both meta-template and template with class via meta-data. We could
-  possibly also have a stitch stereotype to make it clearer. Yarn has
-  a stitch class with attributes of these parameters. Dogen
-  instantiates stitch (probably within quilt) with the parameters and
-  generates the file. Actually we probably can't have this in quilt
-  because we still need formatter properties.
-
-*** Perform an in-depth product backlog groom                          :epic:
-
-We now have lots of references to types (and models) that have been
-refactored away - either renamed or deleted altogether. As we are
-reaching the final form for =yarn= and =quilt=, we need to go
-through all the stories and update them to the new world.
-
-- add two todos to the backlog: not reviewed, reviewed
-  (=<REVIEWING>=). Actually, added org mode tag support for this to
-  make it more obvious and filterable.
-- mark all stores as not reviewed
-- go through all the stories and mark them suitably as we review them.
-
-*** Create a set of definitions for tagging and meta-data             :story:
-
-We still use these terms frequently. We should define them in dynamic
-to have specific meanings.
-
-*** Refactor ownership hierarchy                                      :story:
-
-Start implementing the archetype logic. Basically there is a artefact
-unique identifier
-
-- rename it to =artefact_descriptor=.
-- remove all dia fields; these are now file importer specific and
-  never reach dynamic.
-- add =kernel= field. This is set to =stitch= or =quilt=.
-- rename formatter field to =kind=
-
-Merged stories:
-
-*Consider adding "application" to ownership hierarchy*
-
-Not all fields make sense to all tools in the dogen suite; some are
-knit specific, some are stitch specific and some are shared. At
-present this is not a problem because stitch loads up all of knit's
-fields and assumes users won't make use of them. If they do, nothing
-bad "should" happen. But a better way to solve this may be to only
-load fields that belong to an application. We could add "application"
-to ownership hierarchy, and filter on that. Note though that we would
-need some way of saying "all applications" (e.g. at present, leave the
-field blank).
-
-*Consider renaming =ownership_hierarchy=*
-
-We came up with the name =ownership_hierarchy= because we could not
-think of anything else. However, it is not a particularly good name,
-and it is increasingly so now that we need to use it across models. We
-need a better name for this value type.
-
-This work must be integrated with the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_69.org#thoughts-on-cpp-refactoring][archetype work]].
-
-*Split knitting from stitching settings*
-
-*Rationale*: with "kernel" we will have quilt and stitch.
-
-At present we only have a single common directory with all of the
-available fields. Not all fields apply to both stitching and
-knitting - but some do. We need a way to filter these. One possibility
-is to use an approach similar to the formatter groups in the ownership
-hierarchy. For now we simply have fields that have no meaning in
-stitching but can be supplied by users.
 
 *** Models should have an associated language                          :epic:
 
@@ -1549,96 +851,6 @@ A first step for this would be to have a language enumeration in yarn
 which is a property of the model, and one entry of which is "language
 agnostic".
 
-*** Handling of managed directories is incorrect                      :story:
-
-At present we are querying the yarn dia importer to figure out what
-the managed directories are. These are basically the top-level
-directories from where we want the housekeeper to operate. In reality
-this is (or can be placed) in the meta-data. We should be able to
-extract the managed directories from the meta-data as a step in one of
-the workflows.
-
-This can be done by the backend. It does mean that we should be
-returning a composite type from generation:
-
-- list of files;
-- list of managed directories.
-
-Alternatively we could have a =managed_directories= method that takes
-in an yarn model and then internally reads in the meta-data for a given
-model to produce the list.
-
-*Merged with previous story*
-
-Compute managed directories from knitting options
-
-At present the backend is returning empty managed directories. This
-means housekeeping will fail in the new world. We need to change the
-interface of this method to take in the knitting options and return
-the managed directories.
-
-This is not entirely trivial. At present the managed directories are
-computed in the locator. It takes into account split project, etc to
-come up with all the directories used by the backend. We need to make
-these decisions during path expansion, expect we only need manged
-directories for the root object. However we do not know which object
-is the root object at present, during the expansion. We could identify
-it via the QName and the yarn model in context thought. We could then
-populate the managed directories as a text collection. We then need
-some settings and a factory to pull out the managed directories from
-the root object. This could be done in =managed_directories=, by
-having an yarn model as input.
-
-*** Header guard in formatters should be optional                     :story:
-
-At present we are relying on empty header guards to determine what to
-do in boilerplate. We should use boost optional.
-
-*** Create more "utility" members for formatters                      :story:
-
-One way of making the templates a bit more manageable is to avoid
-having really complex conditions. We could simplify these by giving
-them intelligible names and making them properties of the
-formattables - mainly class info as that's where the complexity seems
-to stem from. For example:
-
-: if ((!c.all_properties().empty() || c.is_parent()) && !c.is_immutable()) {
-
-could be replaced with =has_swap=, or perhaps even =has_public_swap= /
-=has_protected_swap=.
-
-*** Use pointer container                                             :story:
-
-We should look for cases where we can simplify things using pointer
-containers. Two use cases spring to mind:
-
-- at present we are using shared pointers on all registrars. This
-  makes no sense as the pointer ownership is clear (the registrar owns
-  the pointer). We should use a boost pointer container and pass
-  references around, via reference wrapper where required.
-- model has a container of shared pointer of element. We don't really
-  need the shared pointer abilities; once allocated these are pretty
-  const.
-
-*** Add support for formatter and facet dependencies                  :story:
-
-Once we are finished with the refactoring of the C++ model, we should
-add a way of declaring dependencies between facets and between
-formatters. We may not need dependencies between facets as these are
-actually a manifestation of the formatter dependencies.
-
-These are required to ensure users have not chosen some invalid
-combination of formatters (for example disable serialisation when a
-formatter requires it). It is also required when a given
-facet/formatter is not supported (for example when an STL type does
-not support serialisation out of the box).
-
-Note that the dependencies are not just static. For example, the types
-facet depends on the hash facet if the user decides to add a
-=std::unordered_map= of a user defined type to another user defined
-type. We need to make sure we take these run-time dependencies into
-account too.
-
 *** Consider renaming formatter groups and model groups to sets       :story:
 
 We should try to keep the words groups and sets to their mathematical
@@ -1646,12 +858,6 @@ as much as possible - modulus our limited understanding. As such,
 where we are using "group" we probably mean "set" since there is no
 associated operation with the set; it is merely a way of gathering
 elements.
-
-*** Consider generating the diagram targets from files in directory   :story:
-
-Once references are supplied as meta-data, we could conceivably create
-a loop in CMake to generates all of the knitting targets based on the
-contents of the diagrams directory.
 
 *** Top-level "inclusion required" should be "tribool"                :story:
 
@@ -1728,17 +934,6 @@ with:
 As per stitch template. We should probably add a "is swappable" flag
 at the yarn level for this.
 
-*** Create the =needle= library                                       :story:
-
-We need to create a library with support code that is used by the
-models. At present it is needed for =io= and =test_data=. However, we
-ran into [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_67.org#update-legacy-formatters-to-use-needle-for-io][a lot of difficulties]] when we tried to implement it for =io=
-using templates.
-
-For the previous attempt to create the needle library see this commit:
-
-feb4750 * integration needle: remove project and includes
-
 *** Consider changing fields where "qualified name" is not qualified  :story:
 
 At present, the the qualified field name is not always a prefix +
@@ -1752,38 +947,6 @@ annotation rename.
 
 This may even be a more wide-ranging question: why do users need to
 know who owns the field? e.g. =dia.comment=, do I care?
-
-*** Improve streaming of empty expressions in stitch                  :spike:
-
-We have a problem with empty expressions:
-
-: <#= #>
-
-Results in:
-
-: s << <<
-
-We need to ignore empty expressions.
-
-*** Contents change check is done twice                               :story:
-
-We seem to check twice if a file has changed:
-
-: 2015-04-26 12:37:28.451464 [DEBUG] [formatters.filesystem_writer] File contents have not changed, and force write is false so not writing.
-: 2015-04-26 12:37:28.451486 [DEBUG] [formatters.filesystem_writer] File contents have not changed, and force write is false so not writing.
-
-This is in stitch but it should be the same for knit.
-
-*** Stitch does not handle directories very well                      :story:
-
-At present we seem to generate log files called =.= when we use stitch
-against a directory. This should only happen if we use =.= on the
-target parameter, e.g.:
-
-: --target .
-
-Not sure why it is happening when we call stitch from CMake since it
-should use the full path to the =cpp= directory.
 
 *** Update dynamic section in manual                                  :story:
 
@@ -1831,76 +994,6 @@ suitable in documentation:
 - *End Marker*: #>. Can also be specialised to "end X marker",
   e.g. end directive marker is #>.
 
-*** Add kvp support to =identifier_parser=                            :story:
-
-We have code to split kvps all over the place. We should do this in a
-single pace, and use boost spirit or tokenizer. For one such
-implementation with spirit see:
-
-[[http://boost-spirit.com/home/2010/02/24/parsing-skippers-and-skipping-parsers/][Parsing Skippers and Skipping Parsers]]
-
-*** Assignment operator seems to pass types by value                  :story:
-
-The code for the operator is as follows:
-
-:         stream_ << indenter_ << ci.name() << "& operator=(" << ci.name()
-:                << " other);" << std::endl;
-
-If this is the case we need to fix it and regenerate all models.
-
-Actually we have implemented assignment in terms of swap, so that is
-why we copy. We need to figure out if this was a good idea. Raise
-story in backlog.
-
-: diff --git a/projects/cpp/src/types/formatters/types/class_header_formatter.stitch b/projects/cpp/src/types/formatters/types/class_header_formatter.stitch
-: index f9f91af..663f0ac 100644
-: --- a/projects/cpp/src/types/formatters/types/class_header_formatter.stitch
-: +++ b/projects/cpp/src/types/formatters/types/class_header_formatter.stitch
-: @@ -253,7 +253,7 @@ public:
-:  <#+
-:                  if (!c.is_parent()) {
-:  #>
-: -    <#= c.name() #>& operator=(<#= c.name() #> other);
-: +    <#= c.name() #>& operator=(<#= c.name() #>& other);
-:  <#+
-:                  }
-:              }
-: diff --git a/projects/cpp_formatters/src/types/class_declaration.cpp b/projects/cpp_formatters/src/types/class_declaration.cpp
-: index c2eeb3c..534ab69 100644
-: --- a/projects/cpp_formatters/src/types/class_declaration.cpp
-: +++ b/projects/cpp_formatters/src/types/class_declaration.cpp
-: @@ -457,8 +457,8 @@ void class_declaration::swap_and_assignment(
-:
-:      // assignment is only available in leaf classes - MEC++-33
-:      if (!ci.is_parent()) {
-: -        stream_ << indenter_ << ci.name() << "& operator=(" << ci.name()
-: -                << " other);" << std::endl;
-: +        stream_ << indenter_ << ci.name() << "& operator=(const " << ci.name()
-: +                << "& other);" << std::endl;
-:      }
-:
-:      utility_.blank_line();
-: diff --git a/projects/cpp_formatters/src/types/class_implementation.cpp b/projects/cpp_formatters/src/types/class_implementation.cpp
-: index 5c9fe50..9276701 100644
-: --- a/projects/cpp_formatters/src/types/class_implementation.cpp
-: +++ b/projects/cpp_formatters/src/types/class_implementation.cpp
-: @@ -456,8 +456,8 @@ assignment_operator(const cpp::formattables::class_info& ci) {
-:          return;
-:
-:      stream_ << indenter_ << ci.name() << "& "
-: -            << ci.name() << "::operator=(" << ci.name()
-: -            << " other) ";
-: +            << ci.name() << "::operator=(const " << ci.name()
-: +            << "& other) ";
-:
-:      utility_.open_scope();
-:      {
-
-*** Rename sequence formatter                                         :story:
-
-The =sequence_formatter= is actually not a formatter, but a helper or
-assistant.
-
 *** Add validation for field definitions                              :story:
 
 Perform some validation in repository workflow:
@@ -1917,15 +1010,6 @@ in C++ mode; this only makes sense because we do not have CMake and
 ODB formatters. However, when these are added we will need to filter
 the formatters further. For example, C++ formatters (both headers and
 implementation) need inclusion dependencies but CMake files don't.
-
-*** Consider supporting multiple formatter groups                     :story:
-
-In some cases it would be nice for a field to belong to multiple
-groups. For example =integrated_facet= is only applicable to class
-header formatters. We could implement this by making the formatter
-group a collection and having formatters belong to multiple groups.
-
-This work must be integrated with the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_69.org#thoughts-on-cpp-refactoring][archetype work]].
 
 *** Some test models do not build on run all specs                    :story:
 
@@ -1958,59 +1042,26 @@ we do a bit better:
 But it requires a lot of context to know whats going on. We need to
 append more details to the exception.
 
-*** Investigate boost log config files                                :story:
+Merged stories:
 
-Our log files are growing quite a bit. We don't really want to log any
-less since the logging is very useful for troubleshooting. However, at
-any one time we just need to look at one or a couple of
-components. What we really need is something like log4j, where we can
-change log levels for a component or all components in a hierarchy. We
-need to investigate boost log solutions for this.
+*Duplicate fields in JSON result in non-intuitive errors*
 
-It seems we cannot change severity per component ("channel") with our
-current setup. We need something akin to this:
+By mistake we added the same field twice in JSON:
 
-- [[http://www.boost.org/doc/libs/1_57_0/libs/log/doc/html/log/detailed/expressions.html#log.detailed.expressions.predicates.channel_severity_filter][Severity threshold per channel filter]]
+:            "extensions" : {
+:                "cpp.types.class_header_formatter.inclusion_directive" : "<boost/property_tree/ptree.hpp>",
+:                "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/property_tree/ptree_serialization.hpp>",
+:                "cpp.io.class_header_formatter.inclusion_directive" : "<boost/property_tree/json_parser.hpp>",
+:                "cpp.io.class_implementation_formatter.inclusion_directive" : "<boost/property_tree/json_parser.hpp>",
+:                "cpp.io.class_implementation_formatter.inclusion_directive" : "<boost/property_tree/json_parser.hpp>",
+:                "cpp.hash.class_header_formatter.inclusion_required" : false
 
-This could be implemented as follows:
+The resulting error message was not particularly helpful:
 
-Create a log config file (say =logging.ini=) that contains a list of
-strings and valid severities:
+: 2015-06-17 13:56:06.658500 [DEBUG] [sml.json_hydrator] Processing type: <boost><property_tree><ptree>
+: 2015-06-17 13:56:06.658519 [ERROR] [dynamic.field_instance_factory] Expected at most one element
 
-: root = trace
-: cpp = debug
-: cpp.settings = info
-
-and so on. When the log is being initialised, a sorted list with these
-is loaded into memory. It is sorted by channel name. Note that =root=
-is a special value and is always at the bottom of the list (or even
-removed from the list altogether and handled specially). If root was
-not defined in the config file, we set it to a default. Note also that
-we convert the severity strings into enums, with adequate validation.
-
-Once the list is setup, we then loop through all the channels that
-have been defined. There is an assumption that all channels were
-defined statically and thus have already been defined by the time we
-initialise the log. This needs to be verified.
-
-For each channel, we loop through all values from the file - other
-than root - applying them as a regex against the channel name. Note
-that we sorted them so the closest match should be last. For each
-value that matches, we set the severity accordingly. If no matches are
-found, we apply the root setting.
-
-Some other tidbits:
-
-- we can now remove the =verbose= option, or perhaps it should be used
-  as a short-hand for the log configuration? if so we need a rule that
-  determines which one to use when both are present.
-- we could monitor the config file for changes, although for dogen
-  this is overkill.
-- if sorting proves too hard we could just say that the regexes are
-  applied in the order provided by the user, with the exception of
-  root.
-
-*** Consider adding support for formatter tagging                     :story:
+*** Consider adding support for formatter tags or labels              :story:
 
 At present there is a presumption that if a formatter belongs to say
 =types= it cannot belong to any other facet. This means facets are
@@ -2092,9 +1143,45 @@ The release will not be made unless these stories are closed, but we
 won't be addressing them in the near term. This release is all about
 getting the architecture right.
 
-*** Property types are always fully qualified                         :story:
+*** Using =std::set<std::string>= causes compilation errors           :story:
 
-When we code generate non-primitive properties we always fully qualify
+In theory sets of strings (and any other type that has =operator<=
+should work out of the box, even though we do not support sets of
+dogen types. However, when we tried to use a set of strings we got a
+whole load of compilation errors in serialisation, etc.
+
+*** Using =std::unordered_map<my_enum, ...>= fails equality           :story:
+
+We changed the map in =name= to an unordered map and suddenly the
+equality tests started to fail. Since we use it for strings quite a
+lot, it may be related to the fact that we used an enum? Add a test
+case on the test models and see if we can reproduce it.
+
+*** Recursive structures result in crashes                            :story:
+
+If one defines a tree node with a parent and children (such as =node=
+in =yarn=) dogen generates code that recurses inifinitely. This is
+because the structure contains a parent and we loop through the parent
+back to itself and so on. To stop this from happening we need to tell
+dogen to exclude certain fields. For example, we could mark =parent=
+as a cycle. This is then interpreted by the io feature as a "do not
+follow the pointer" (just dump its memory address). We could have a
+manipulator that tells the =boost::shared_ptr= io to skip its payload,
+much like we do when the pointer is empty.
+
+In summary:
+
+- add a tag to mark a property as circular. Do not confuse this with
+  name tree cycles which are at the type level.
+- create a manipulator that is set when a circular property is
+  found. Set it appropriately.
+- on all pointer code (io, comparisons, etc) check for the
+  manipulator; if set, do not dereference the pointer. For equality do
+  a pointer comparison, for io dump the address, etc.
+
+*** Attribute types are always fully qualified                        :story:
+
+When we code generate non-primitive attributes we always fully qualify
 them even if they are on the same namespace as the containing
 type. This should be easy to fix by extending the resolver to take in
 the internal module path of the context. We could even recurse up the
@@ -2133,35 +1220,40 @@ The right thing to do is to throw a more sensible exception such as
 Once we have a use case for default values in text collections we
 should add it.
 
-*** Consider adding enumerations in dynamic                           :story:
-
-This story is bound to already exist in backlog so do another
-search. The idea is that we should be able to define a field and all
-of its valid values. For extra bonus points, we should be able to
-assign an enumeration and get the string conversion done
-automatically; for example by having a string to enum code generated,
-and supplying that function as a type parameter into dynamic. Then
-dynamic's field selector would create the instances of the enumeration.
-
-Previous stories:
-
-*Create a domain field definitions*
-
-In addition to default values, it should be possible to supply a list
-of possible values for a field definition - a domain. When processing
-the values we can then check that it is part of the domain and if not
-throw. This is required for the include types and for the family
-types. At present this is only applicable to string fields.
-
-In this sense, =boolean= is just a special case where the list is know
-up front. We should re-implement =boolean= this way. Possibly even add
-synonyms (e.g. =true=, =false=, =0=, =1=)?
-
 *** Consider allowing renaming of "internal" types                    :story:
 
 Users may want to change the =_visitor= postfix for visitors or the
 boost serialisation registrar name. This could be achieved via
 meta-data.
+
+Merged stories:
+
+*Consider renaming registrar in boost serialisation*
+
+At present we have a registrar formatter that does the boost
+serialisation work. However, the name =registrar= is a bit too
+generic; we may for example add formatters for static registrars. We
+should rename this formatter to something more meaningful. Also the
+name registrar is already well understood to mean static registrar.
+
+This is a big problem now that we cannot add a type with the name
+registrar to the main model as it clashes with the serialisation
+registrar.
+
+We could simply name it serialisation registrar or some such name that
+is very unlikely to clash. We should then have a validation rule that
+stops users from defining types with that name.
+
+We need to go through all of the renamed registrars and fix them.
+
+Another option is to allow users to supply a name via meta-data to
+avoid name clashes. We could error when the user has defined a type.
+
+Actually, since the clash is only internal - the names we are
+generating on the fly are clashing with the user defined names - we
+should probably have a "postfix" that can be added in case of
+clashes. The generated code will not cause problems, its just the
+formattables pipeline.
 
 *** Add =interface= stereotype                                        :story:
 
@@ -2180,42 +1272,6 @@ on its own right.
 
 We copied across the code for the module expander test from yarn json
 but didn't actually finished implementing it.
-
-*** Create =src= and =include= facets                                 :story:
-
-At present we have some formatters that are not in the traditional
-facets such as =types=, etc. We should make facets for them. We need
-to check what the current facet name is. There should only be one case
-of this, the CMakeLists formatters.
-
-*** Add more types to =quilt::cpp= canned tests                       :story:
-
-Originally we used the =*_info= types in the canned tests, but these
-are all about to be removed. We need to hunt for types in the
-=quilt::cpp= model and add those to the canned tests.
-
-*** Create a UML profile to formalise yarn concepts                    :epic:
-
-Profile should include the hashable, etc changes.
-
-*** Create a map between UML/MOF terminology and yarn                  :epic:
-
-It would be helpful to know what a yarn type means in terms of
-UML/MOF, and perhaps even explain why we have chosen certain names
-instead of the UML ones. We should also cover the modeling of
-relationships and the relation between yarn concepts and UML/MOF
-classes. This will form a chapter in the manual.
-
-The UML specification is available [[http://www.omg.org/spec/UML/2.5/][here]] and MOF specification is
-available [[http://www.omg.org/spec/MOF/2.5][here]].
-
-We need a way to uniquely identify a property. This could be done by
-appending the containing type's qualified name to the property name.
-
-See also [[http://www.uml-diagrams.org/][The Unified Modeling Language]] for a more accessible
-treatment.
-
-See [[http://www-01.ibm.com/support/knowledgecenter/SS5JSH_9.1.2/com.ibm.xtools.transform.uml2.cpp.doc/topics/rucppprofile.html][Stereotypes of the UML-to-C++ transformation profile]] for ideas.
 
 *** Add support for Language Agnostic Models (LAM)                    :story:
 
@@ -2305,7 +1361,7 @@ example =$(facet_name)= could be made to mean the facet name. With
 just support for this we could probably handle all of the use cases
 except for =postfix=.
 
-*** Consider using the same API as boost property tree in selector    :story:
+*** Consider using the same API as boost property tree in selector :reviewing:story:
 
 At present we have the type of the value in the method names in the
 selector, e.g. =get_text_content=. It would be better to have a =get=
@@ -3052,6 +2108,11 @@ We need a class responsible for checking the consistency of the yarn
 model. There are several things we need to check for non-merged
 models:
 
+- vistor is only supported at the base class level: due to
+  implementation constraints, we only support visitable at the base
+  class level. Add an exception if users attempt to use visitable
+  stereotype in a class that has parents. Note: is this true? We are
+  using derived visitable in C++ model.
 - there must be at least one element for a given id with
   =is_element_extension= set to false.
 - ensure that we can only define identity once across concepts and
@@ -3382,6 +2443,131 @@ depend only on the forward declarations.
 
 If we have enough time and disposition, we may sneak some of these
 in. This release is all about getting the architecture right.
+
+*** Assignment operator seems to pass types by value                  :story:
+
+The code for the operator is as follows:
+
+:         stream_ << indenter_ << ci.name() << "& operator=(" << ci.name()
+:                << " other);" << std::endl;
+
+If this is the case we need to fix it and regenerate all models.
+
+Actually we have implemented assignment in terms of swap, so that is
+why we copy. We need to figure out if this was a good idea. Raise
+story in backlog.
+
+: diff --git a/projects/cpp/src/types/formatters/types/class_header_formatter.stitch b/projects/cpp/src/types/formatters/types/class_header_formatter.stitch
+: index f9f91af..663f0ac 100644
+: --- a/projects/cpp/src/types/formatters/types/class_header_formatter.stitch
+: +++ b/projects/cpp/src/types/formatters/types/class_header_formatter.stitch
+: @@ -253,7 +253,7 @@ public:
+:  <#+
+:                  if (!c.is_parent()) {
+:  #>
+: -    <#= c.name() #>& operator=(<#= c.name() #> other);
+: +    <#= c.name() #>& operator=(<#= c.name() #>& other);
+:  <#+
+:                  }
+:              }
+: diff --git a/projects/cpp_formatters/src/types/class_declaration.cpp b/projects/cpp_formatters/src/types/class_declaration.cpp
+: index c2eeb3c..534ab69 100644
+: --- a/projects/cpp_formatters/src/types/class_declaration.cpp
+: +++ b/projects/cpp_formatters/src/types/class_declaration.cpp
+: @@ -457,8 +457,8 @@ void class_declaration::swap_and_assignment(
+:
+:      // assignment is only available in leaf classes - MEC++-33
+:      if (!ci.is_parent()) {
+: -        stream_ << indenter_ << ci.name() << "& operator=(" << ci.name()
+: -                << " other);" << std::endl;
+: +        stream_ << indenter_ << ci.name() << "& operator=(const " << ci.name()
+: +                << "& other);" << std::endl;
+:      }
+:
+:      utility_.blank_line();
+: diff --git a/projects/cpp_formatters/src/types/class_implementation.cpp b/projects/cpp_formatters/src/types/class_implementation.cpp
+: index 5c9fe50..9276701 100644
+: --- a/projects/cpp_formatters/src/types/class_implementation.cpp
+: +++ b/projects/cpp_formatters/src/types/class_implementation.cpp
+: @@ -456,8 +456,8 @@ assignment_operator(const cpp::formattables::class_info& ci) {
+:          return;
+:
+:      stream_ << indenter_ << ci.name() << "& "
+: -            << ci.name() << "::operator=(" << ci.name()
+: -            << " other) ";
+: +            << ci.name() << "::operator=(const " << ci.name()
+: +            << "& other) ";
+:
+:      utility_.open_scope();
+:      {
+
+*** Rename sequence formatter                                         :story:
+
+The =sequence_formatter= is actually not a formatter, but a helper or
+assistant.
+
+*** Improve streaming of empty expressions in stitch                  :story:
+
+We have a problem with empty expressions:
+
+: <#= #>
+
+Results in:
+
+: s << <<
+
+We need to ignore empty expressions.
+
+*** Contents change check is done twice                               :story:
+
+We seem to check twice if a file has changed:
+
+: 2015-04-26 12:37:28.451464 [DEBUG] [formatters.filesystem_writer] File contents have not changed, and force write is false so not writing.
+: 2015-04-26 12:37:28.451486 [DEBUG] [formatters.filesystem_writer] File contents have not changed, and force write is false so not writing.
+
+This is in stitch but it should be the same for knit.
+
+*** Stitch does not handle directories very well                      :story:
+
+At present we seem to generate log files called =.= when we use stitch
+against a directory. This should only happen if we use =.= on the
+target parameter, e.g.:
+
+: --target .
+
+Not sure why it is happening when we call stitch from CMake since it
+should use the full path to the =cpp= directory.
+
+*** Use pointer container                                             :story:
+
+We should look for cases where we can simplify things using pointer
+containers. Two use cases spring to mind:
+
+- at present we are using shared pointers on all registrars. This
+  makes no sense as the pointer ownership is clear (the registrar owns
+  the pointer). We should use a boost pointer container and pass
+  references around, via reference wrapper where required.
+- model has a container of shared pointer of element. We don't really
+  need the shared pointer abilities; once allocated these are pretty
+  const.
+
+*** Create more "utility" members for formatters                       :epic:
+
+One way of making the templates a bit more manageable is to avoid
+having really complex conditions. We could simplify these by giving
+them intelligible names and making them properties of the
+formattables - mainly class info as that's where the complexity seems
+to stem from. For example:
+
+: if ((!c.all_properties().empty() || c.is_parent()) && !c.is_immutable()) {
+
+could be replaced with =has_swap=, or perhaps even =has_public_swap= /
+=has_protected_swap=.
+
+*** Use dots in data files extensions                                 :story:
+
+At the moment we use extensions such as =xmlyarn=. It should really be
+=.xml.yarn= or something of the kind.
 
 *** Support only specific attributes for certain facets               :story:
 
@@ -4665,6 +3851,141 @@ become very readable.
 These stories are good candidates for the subsequent release. This
 release will be all about adding new features.
 
+*** Create a UML profile to formalise yarn concepts                    :epic:
+
+Profile should include the hashable, etc changes.
+
+*** Create a map between UML/MOF terminology and yarn                  :epic:
+
+It would be helpful to know what a yarn type means in terms of
+UML/MOF, and perhaps even explain why we have chosen certain names
+instead of the UML ones. We should also cover the modeling of
+relationships and the relation between yarn concepts and UML/MOF
+classes. This will form a chapter in the manual.
+
+The UML specification is available [[http://www.omg.org/spec/UML/2.5/][here]] and MOF specification is
+available [[http://www.omg.org/spec/MOF/2.5][here]].
+
+We need a way to uniquely identify a property. This could be done by
+appending the containing type's qualified name to the property name.
+
+See also [[http://www.uml-diagrams.org/][The Unified Modeling Language]] for a more accessible
+treatment.
+
+See [[http://www-01.ibm.com/support/knowledgecenter/SS5JSH_9.1.2/com.ibm.xtools.transform.uml2.cpp.doc/topics/rucppprofile.html][Stereotypes of the UML-to-C++ transformation profile]] for ideas.
+
+*** Consider adding enumerations in dynamic                           :story:
+
+This story is bound to already exist in backlog so do another
+search. The idea is that we should be able to define a field and all
+of its valid values. For extra bonus points, we should be able to
+assign an enumeration and get the string conversion done
+automatically; for example by having a string to enum code generated,
+and supplying that function as a type parameter into dynamic. Then
+dynamic's field selector would create the instances of the enumeration.
+
+Previous stories:
+
+*Create a domain field definitions*
+
+In addition to default values, it should be possible to supply a list
+of possible values for a field definition - a domain. When processing
+the values we can then check that it is part of the domain and if not
+throw. This is required for the include types and for the family
+types. At present this is only applicable to string fields.
+
+In this sense, =boolean= is just a special case where the list is know
+up front. We should re-implement =boolean= this way. Possibly even add
+synonyms (e.g. =true=, =false=, =0=, =1=)?
+
+*** Investigate boost log config files                                :story:
+
+Our log files are growing quite a bit. We don't really want to log any
+less since the logging is very useful for troubleshooting. However, at
+any one time we just need to look at one or a couple of
+components. What we really need is something like log4j, where we can
+change log levels for a component or all components in a hierarchy. We
+need to investigate boost log solutions for this.
+
+It seems we cannot change severity per component ("channel") with our
+current setup. We need something akin to this:
+
+- [[http://www.boost.org/doc/libs/1_57_0/libs/log/doc/html/log/detailed/expressions.html#log.detailed.expressions.predicates.channel_severity_filter][Severity threshold per channel filter]]
+
+This could be implemented as follows:
+
+Create a log config file (say =logging.ini=) that contains a list of
+strings and valid severities:
+
+: root = trace
+: cpp = debug
+: cpp.settings = info
+
+and so on. When the log is being initialised, a sorted list with these
+is loaded into memory. It is sorted by channel name. Note that =root=
+is a special value and is always at the bottom of the list (or even
+removed from the list altogether and handled specially). If root was
+not defined in the config file, we set it to a default. Note also that
+we convert the severity strings into enums, with adequate validation.
+
+Once the list is setup, we then loop through all the channels that
+have been defined. There is an assumption that all channels were
+defined statically and thus have already been defined by the time we
+initialise the log. This needs to be verified.
+
+For each channel, we loop through all values from the file - other
+than root - applying them as a regex against the channel name. Note
+that we sorted them so the closest match should be last. For each
+value that matches, we set the severity accordingly. If no matches are
+found, we apply the root setting.
+
+Some other tidbits:
+
+- we can now remove the =verbose= option, or perhaps it should be used
+  as a short-hand for the log configuration? if so we need a rule that
+  determines which one to use when both are present.
+- we could monitor the config file for changes, although for dogen
+  this is overkill.
+- if sorting proves too hard we could just say that the regexes are
+  applied in the order provided by the user, with the exception of
+  root.
+
+*** Create the =needle= library                                       :story:
+
+We need to create a library with support code that is used by the
+models. At present it is needed for =io= and =test_data=. However, we
+ran into [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_67.org#update-legacy-formatters-to-use-needle-for-io][a lot of difficulties]] when we tried to implement it for =io=
+using templates.
+
+For the previous attempt to create the needle library see this commit:
+
+feb4750 * integration needle: remove project and includes
+
+*** Consider generating the diagram targets from files in directory   :story:
+
+Once references are supplied as meta-data, we could conceivably create
+a loop in CMake to generates all of the knitting targets based on the
+contents of the diagrams directory.
+
+*** Add support for formatter and facet dependencies                  :story:
+
+Once we are finished with the refactoring of the C++ model, we should
+add a way of declaring dependencies between facets and between
+formatters. We may not need dependencies between facets as these are
+actually a manifestation of the formatter dependencies.
+
+These are required to ensure users have not chosen some invalid
+combination of formatters (for example disable serialisation when a
+formatter requires it). It is also required when a given
+facet/formatter is not supported (for example when an STL type does
+not support serialisation out of the box).
+
+Note that the dependencies are not just static. For example, the types
+facet depends on the hash facet if the user decides to add a
+=std::unordered_map= of a user defined type to another user defined
+type. We need to make sure we take these run-time dependencies into
+account too.
+
 *** Split include and source directories                              :story:
 
 We removed a feature due to lack of use cases: splitting source and
@@ -4766,11 +4087,9 @@ One thing to bear in mind though is that the labeling is done at the
 yarn level; and for a given yarn entity, we may have a number of
 formattables. Should all be passed in?
 
-This work must be integrated with the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_69.org#thoughts-on-cpp-refactoring][archetype work]].
-
 Merged stories:
 
-Types that share one file
+*Types that share one file*
 
 #+begin_quote
 *Story*: As a dogen user, I want to generate a single file for a
@@ -6002,6 +5321,215 @@ error at model building time if an user tries to do this.
 
 Stuff that is not directly related to the problem domain but its
 needed by Dogen.
+
+*** Use official boost with windows                                   :story:
+
+We tried replacing the conan boost with the official boost but it
+resulted in additional errors:
+
+: libboost_system-vc140-mt-sgd-1_62.lib(error_code.obj) : error LNK2038:
+:   mismatch detected for 'RuntimeLibrary': value 'MTd_StaticDebug' doesn't
+:   match value 'MDd_DynamicDebug' in equality_tests.obj
+:   [C:\projects\dogen\build\output\msvc\Debug\projects\dia\tests\dia.tests.vcxproj]
+: libboost_serialization-vc140-mt-sgd-1_62.lib(basic_oarchive.obj) : error LNK2038:
+:   mismatch detected for 'RuntimeLibrary': value 'MTd_StaticDebug' doesn't match
+:   value 'MDd_DynamicDebug' in equality_tests.obj
+:   [C:\projects\dogen\build\output\msvc\Debug\projects\dia\tests\dia.tests.vcxproj]
+: libboost_serialization-vc140-mt-sgd-1_62.lib(extended_type_info.obj) : error LNK2038:
+:   mismatch detected for 'RuntimeLibrary': value 'MTd_StaticDebug' doesn't match
+:   value 'MDd_DynamicDebug' in equality_tests.obj
+:   [C:\projects\dogen\build\output\msvc\Debug\projects\dia\tests\dia.tests.vcxproj]
+: ...
+
+- see [[https://ci.appveyor.com/project/mcraveiro/dogen/build/2.2.485/job/6rseroy5hk2akvxe][this build]] for details.
+- boost binaries sourced [[https://sourceforge.net/projects/boost/files/boost-binaries/1.62.0/][from here]], boost_1_62_0-msvc-14.0-64.exe
+- binraries still available in dropbox, code to use them still in
+  appveyor.install.windows.ps1.
+
+*** Windows build release test failures                               :epic:
+
+Dia tests:
+
+: [00:27:30] C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppCommon.targets(171,5): error MSB6006: "cmd.exe" exited with code -1073741515. [C:\projects\dogen\build\output\projects\dia\tests\run_dia.tests.vcxproj]
+
+Dia hydrator tests:
+
+: [00:27:31] unknown location : fatal error : in "modeline_group_hydrator_tests/hydrating_emacs_modeline_group_results_in_expected_modelines": class std::runtime_error: Error during test [C:\projects\dogen\build\output\projects\formatters\tests\run_formatters.tests.vcx
+: [00:27:31] proj]
+: [00:27:31]   C:\projects\dogen\projects\formatters\tests\modeline_group_hydrator_tests.cpp(142): last checkpoint: hydrating_emacs_modeline_group_results_in_expected_modelines
+: [00:27:31]
+: [00:27:31]   *** 1 failure is detected in the test module "formatters_tests"
+
+Knit:
+
+: [00:27:35] C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppCommon.targets(171,5): error MSB6006: "cmd.exe" exited with code -1073741515. [C:\projects\dogen\build\output\projects\knit\tests\run_knit.tests.vcxproj]
+: [00:27:35] Done Building Project "C:\projects\dogen\build\output\projects\knit\tests\run_knit.tests.vcxproj" (default targets) -- FAILED.
+
+Stitch:
+: [00:27:36]   C:\projects\dogen\projects\utility\src\test_data\validating_resolver.cpp(39): Throw in function class boost::filesystem::path __cdecl dogen::utility::test_data::validating_resolver::resolve(class boost::filesystem::path)
+: [00:27:36]   Dynamic exception type: class boost::exception_detail::clone_impl<class dogen::utility::filesystem::file_not_found>
+: [00:27:36]   std::exception::what: File not found: C:\projects\dogen\build\output\bin\../test_data\stitch/input/simple_template.stitch
+: [00:27:36] unknown location : fatal error : in "workflow_tests/simple_template_results_in_expected_output": class std::runtime_error: Error during test [C:\projects\dogen\build\output\projects\stitch\tests\run_stitch.tests.vcxproj]
+: [00:27:36]   C:\projects\dogen\projects\stitch\tests\workflow_tests.cpp(48): last checkpoint: simple_template_results_in_expected_output
+: [00:27:36]
+: [00:27:36]   C:\projects\dogen\projects\utility\src\test_data\validating_resolver.cpp(39): Throw in function class boost::filesystem::path __cdecl dogen::utility::test_data::validating_resolver::resolve(class boost::filesystem::path)
+: [00:27:36]   Dynamic exception type: class boost::exception_detail::clone_impl<class dogen::utility::filesystem::file_not_found>
+: [00:27:36]   std::exception::what: File not found: C:\projects\dogen\build\output\bin\../test_data\stitch/input/complex_template.stitch
+: [00:27:36]
+: [00:27:36]   C:\projects\dogen\projects\utility\src\test_data\validating_resolver.cpp(39): Throw in function class boost::filesystem::path __cdecl dogen::utility::test_data::validating_resolver::resolve(class boost::filesystem::path)
+: [00:27:36]   Dynamic exception type: class boost::exception_detail::clone_impl<class dogen::utility::filesystem::file_not_found>
+: [00:27:36]   std::exception::what: File not found: C:\projects\dogen\build\output\bin\../test_data\stitch/input/empty_template.stitch
+: [00:27:36]
+: [00:27:36]   *** 3 failures are detected in the test module "stitch_tests"
+<snip>
+
+Test model sanitizer:
+
+: [00:27:39]   CMake does not need to re-run because C:\projects\dogen\build\output\projects\test_models\test_model_sanitizer\tests\CMakeFiles\generate.stamp is up-to-date.
+: [00:27:39]   Running 127 test cases...
+: [00:27:39] C:/projects/dogen/projects/utility/include/dogen/utility/test/hash_tester.hpp(57): error : in "std_model_tests/validate_hashing": check hasher(a) == hasher(b) has failed [C:\projects\dogen\build\output\projects\test_models\test_model_sanitizer\tests\run_test_model_sanitizer.tests.vcxproj]
+: [00:27:39] C:/projects/dogen/projects/utility/include/dogen/utility/test/hash_tester.hpp(57): error : in "std_model_tests/validate_hashing": check hasher(a) == hasher(b) has failed [C:\projects\dogen\build\output\projects\test_models\test_model_sanitizer\tests\run_te
+: [00:27:39] st_model_sanitizer.tests.vcxproj]
+: [00:27:40]
+: [00:27:40]   *** 2 failures are detected in the test module "test_model_sanitizer_tests"
+
+Yarn.dia:
+
+: [00:27:42]   C:\projects\dogen\projects\utility\src\test_data\validating_resolver.cpp(39): Throw in function class boost::filesystem::path __cdecl dogen::utility::test_data::validating_resolver::resolve(class boost::filesystem::path)
+: [00:27:42]   Dynamic exception type: class boost::exception_detail::clone_impl<class dogen::utility::filesystem::file_not_found>
+: [00:27:42]   std::exception::what: File not found: C:\projects\dogen\build\output\bin\../test_data\yarn.dia/expected/class_in_a_package.diaxml
+: [00:27:42] unknown location : fatal error : in "workflow_tests/class_in_a_package_dia_transforms_into_expected_yarn": class std::runtime_error: Error during test [C:\projects\dogen\build\output\projects\yarn.dia\tests\run_yarn.dia.tests.vcxproj]
+: [00:27:42]   C:\projects\dogen\projects\yarn.dia\tests\workflow_tests.cpp(85): last checkpoint: class_in_a_package_dia_transforms_into_expected_yarn
+
+Yarn.Json
+
+: [00:27:42]   Building Custom Rule C:/projects/dogen/projects/yarn.json/tests/CMakeLists.txt
+: [00:27:42]   CMake does not need to re-run because C:\projects\dogen\build\output\projects\yarn.json\tests\CMakeFiles\generate.stamp is up-to-date.
+: [00:27:42]   Running 12 test cases...
+: [00:27:42]
+: [00:27:42]   C:\projects\dogen\projects\yarn.json\src\types\hydrator.cpp(251): Throw in function class dogen::yarn::intermediate_model __cdecl dogen::yarn::json::hydrator::hydrate(class std::basic_istream<char,struct std::char_traits<char> > &) const
+: [00:27:42]   Dynamic exception type: class boost::exception_detail::clone_impl<class dogen::yarn::json::hydration_error>
+: [00:27:42]   std::exception::what: Failed to parse JSON file<unspecified file>(1): expected value
+: [00:27:42] unknown location : fatal error : in "hydrator_tests/cpp_std_model_hydrates_into_expected_model": class std::runtime_error: Error during test [C:\projects\dogen\build\output\projects\yarn.json\tests\run_yarn.json.tests.vcxproj]
+: [00:27:42]   C:\projects\dogen\projects\yarn.json\tests\hydrator_tests.cpp(386): last checkpoint: cpp_std_model_hydrates_into_expected_model
+
+Yarn:
+
+: [00:27:42] C:/projects/dogen/projects/utility/include/dogen/utility/test/hash_tester.hpp(57): error : in "hashing_tests/validate_hashing": check hasher(a) == hasher(b) has failed [C:\projects\dogen\build\output\projects\yarn\tests\run_yarn.tests.vcxproj]
+: [00:27:42] C:/projects/dogen/projects/utility/include/dogen/utility/test/hash_tester.hpp(57): error : in "hashing_tests/validate_hashing": check hasher(a) == hasher(b) has failed [C:\projects\dogen\build\output\projects\yarn\tests\run_yarn.tests.vcxproj]
+: [00:27:42] C:/projects/dogen/projects/utility/include/dogen/utility/test/hash_tester.hpp(57): error : in "hashing_tests/validate_hashing": check hasher(a) == hasher(b) has failed [C:\projects\dogen\build\output\projects\yarn\tests\run_yarn.tests.vcxproj]
+: [00:27:44]
+: [00:27:44]   *** 3 failures are detected in the test module "yarn_tests"
+
+*** Windows build debug failures                                      :epic:
+
+The windows debug build fails to link with the following errors:
+
+: C:\projects\dogen\build\output\projects\config\tests\config.tests.vcxproj" (default target) (14) ->
+: (Link target) ->
+:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\config\tests\config.tests.vcxproj]
+: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
+: "C:\projects\dogen\build\output\projects\dia\tests\dia.tests.vcxproj" (default target) (17) ->
+:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\dia\tests\dia.tests.vcxproj]
+: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
+: "C:\projects\dogen\build\output\projects\dynamic\tests\dynamic.tests.vcxproj" (default target) (21) ->
+:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\dynamic\tests\dynamic.tests.vcxproj]
+: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
+: "C:\projects\dogen\build\output\projects\formatters\tests\formatters.tests.vcxproj" (default target) (29) ->
+:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\formatters\tests\formatters.tests.vcxproj]
+: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
+: "C:\projects\dogen\build\output\projects\knit\tests\knit.tests.vcxproj" (default target) (36) ->
+:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\knit\tests\knit.tests.vcxproj]
+: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
+: "C:\projects\dogen\build\output\projects\knitter\src\knitter.vcxproj" (default target) (37) ->
+:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\knitter\src\knitter.vcxproj]
+: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
+: "C:\projects\dogen\build\output\projects\knitter\tests\knitter.tests.vcxproj" (default target) (38) ->
+:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\knitter\tests\knitter.tests.vcxproj]
+: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
+: "C:\projects\dogen\build\output\projects\quilt.cpp\tests\quilt.cpp.tests.vcxproj" (default target) (39) ->
+:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\quilt.cpp\tests\quilt.cpp.tests.vcxproj]
+: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
+: "C:\projects\dogen\build\output\projects\quilt\tests\quilt.tests.vcxproj" (default target) (40) ->
+:   libboost_log-vc140-mt-gd-1_60.lib(default_attribute_names.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\quilt\tests\quilt.tests.vcxproj]
+: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
+: "C:\projects\dogen\build\output\projects\test_models\seam\tests\seam.tests.vcxproj" (default target) (41) ->
+:   libboost_log-vc140-mt-gd-1_60.lib(core.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\test_models\seam\tests\seam.tests.vcxproj]
+: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
+: "C:\projects\dogen\build\output\projects\stitch\tests\stitch.tests.vcxproj" (default target) (46) ->
+:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\stitch\tests\stitch.tests.vcxproj]
+: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
+: "C:\projects\dogen\build\output\projects\stitcher\src\stitcher.vcxproj" (default target) (47) ->
+:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\stitcher\src\stitcher.vcxproj]
+: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
+: "C:\projects\dogen\build\output\projects\stitcher\tests\stitcher.tests.vcxproj" (default target) (48) ->
+:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\stitcher\tests\stitcher.tests.vcxproj]
+: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
+: "C:\projects\dogen\build\output\projects\test_models\test_model_sanitizer\tests\test_model_sanitizer.tests.vcxproj" (default target) (49) ->
+:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\test_models\test_model_sanitizer\tests\test_model_sanitizer.tests.vcxproj]
+: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
+: "C:\projects\dogen\build\output\projects\utility\tests\utility.tests.vcxproj" (default target) (53) ->
+:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\utility\tests\utility.tests.vcxproj]
+: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
+: "C:\projects\dogen\build\output\projects\yarn.dia\tests\yarn.dia.tests.vcxproj" (default target) (54) ->
+:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\yarn.dia\tests\yarn.dia.tests.vcxproj]
+: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
+: "C:\projects\dogen\build\output\projects\yarn.json\tests\yarn.json.tests.vcxproj" (default target) (55) ->
+:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\yarn.json\tests\yarn.json.tests.vcxproj]
+: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
+: "C:\projects\dogen\build\output\projects\yarn\tests\yarn.tests.vcxproj" (default target) (56) ->
+:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\yarn\tests\yarn.tests.vcxproj]
+:     910 Warning(s)
+:     18 Error(s)
+
+This appears to be a mixing of 32-bit and 64-bit settings somewhere in
+the boost tests, according to SO:
+
+[[http://stackoverflow.com/questions/3563756/fatal-error-lnk1112-module-machine-type-x64-conflicts-with-target-machine-typ][fatal error LNK1112: module machine type 'x64' conflicts with target
+machine type 'X86']]
+
+Debug build is back down to =knit= target again.
+
+*** Add travis support for bintray                                    :story:
+
+There is a new web application that interfaces with GitHub:
+[[https://bintray.com/][bintray]].
+
+- add JSON validation to bintray deployment descriptor.
+
+Notes:
+
+- an account was created [[https://bintray.com/mcraveiro][linked to GitHub]].
+- it supports the uploads of [[https://bintray.com/mcraveiro/deb][debs]].
+- [[https://bintray.com/docs/usermanual/uploads/uploads_howdoiuploadmystufftobintray.html][How Do I Upload My Stuff to Bintray?]]
+- [[https://github.com/tim-janik/beast][Beast]] project [[https://raw.githubusercontent.com/tim-janik/beast/master/README.md][README]] with emblems
+- Beast [[https://github.com/tim-janik/beast/blob/master/.travis.yml][travis.yml]]
+- [[https://github.com/tim-janik/rapicorn/blob/master/citool.sh.][citool.sh]] script from [[https://github.com/tim-janik/rapicorn][Rapicorn]] project and their [[https://raw.githubusercontent.com/tim-janik/rapicorn/master/README.md][README]].
+
+At present we are getting the following error:
+
+: Skipping a deployment with the bintray provider because this branch is not permitted
+
+This was fixed. We are now getting the following errors:
+
+: Installing deploy dependencies
+: [Bintray Upload] Reading descriptor file: build/scripts/bintray.json
+: [Bintray Upload] Creating package 'auto-upload'...
+: [Bintray Upload] Bintray response: 400 Bad Request. License 'GPL3' does not exist
+: [Bintray Upload] Creating version '0.88.0'...
+: [Bintray Upload] Bintray response: 404 Not Found. Package 'auto-upload' was not found
+: [Bintray Upload] Warning: Path: build/output/Release/stage/pkg/*.deb does not exist.
+: [Bintray Upload] Publishing version '0.88.0' of package 'auto-upload'...
+: [Bintray Upload] Bintray response: 404 Not Found. Package 'auto-upload' was not found
+
+*** Add appveyor support for bintray                                  :story:
+
+It seems appveyor also supports bintray:
+
+[[https://www.appveyor.com/docs/deployment/bintray/][Deploying to Bintray]]
+
+We need to change our targets to generate the MSI, and then try to
+deploy it over to bintray.
 
 *** Fix the dynamic linker errors in OSX when running tests           :story:
 

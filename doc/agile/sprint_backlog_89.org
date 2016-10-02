@@ -13,46 +13,48 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-02 Sun 18:56]
+#+CAPTION: Clock summary at [2016-10-02 Sun 21:41]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *39:10* |       |      | 100.0 |
+| *Total time*                                                                | *40:34* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 39:10   |       |      | 100.0 |
-| Active                                                                      |         | 39:10 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:53 |   4.8 |
+| Stories                                                                     | 40:34   |       |      | 100.0 |
+| Active                                                                      |         | 40:34 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 3:17 |   8.1 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:07 |   0.3 |
-| COMPLETED Generation of formattable is incorrect                            |         |       | 2:30 |   6.4 |
-| COMPLETED Visitor includes are incorrect                                    |         |       | 0:20 |   0.9 |
-| COMPLETED Add includer to quilt.cpp                                         |         |       | 1:46 |   4.5 |
+| COMPLETED Generation of formattable is incorrect                            |         |       | 2:30 |   6.2 |
+| COMPLETED Visitor includes are incorrect                                    |         |       | 0:20 |   0.8 |
+| COMPLETED Add includer to quilt.cpp                                         |         |       | 1:46 |   4.4 |
 | COMPLETED Add reducer to quilt.cpp                                          |         |       | 0:22 |   0.9 |
 | COMPLETED Add new index to formtter container                               |         |       | 0:19 |   0.8 |
-| COMPLETED Add path expander to quilt.cpp                                    |         |       | 0:49 |   2.1 |
+| COMPLETED Add path expander to quilt.cpp                                    |         |       | 0:49 |   2.0 |
 | COMPLETED Add guard expander to quilt.cpp                                   |         |       | 0:27 |   1.1 |
-| COMPLETED Investigate borked travis build                                   |         |       | 0:37 |   1.6 |
-| COMPLETED Add decoration expander to quilt.cpp                              |         |       | 0:23 |   1.0 |
-| COMPLETED Add aspect expander to quilt.cpp                                  |         |       | 1:26 |   3.7 |
+| COMPLETED Investigate borked travis build                                   |         |       | 0:37 |   1.5 |
+| COMPLETED Add decoration expander to quilt.cpp                              |         |       | 0:23 |   0.9 |
+| COMPLETED Add aspect expander to quilt.cpp                                  |         |       | 1:26 |   3.5 |
 | COMPLETED Run tests that are passing on windows                             |         |       | 0:10 |   0.4 |
-| COMPLETED Add helper expander to quilt.cpp                                  |         |       | 1:26 |   3.7 |
+| COMPLETED Add helper expander to quilt.cpp                                  |         |       | 1:26 |   3.5 |
 | COMPLETED Merge pre and post workflows                                      |         |       | 0:16 |   0.7 |
 | COMPLETED Fix bug in aspect and helper generation                           |         |       | 0:15 |   0.6 |
-| COMPLETED Investigate element annotation support                            |         |       | 2:05 |   5.3 |
+| COMPLETED Investigate element annotation support                            |         |       | 2:05 |   5.1 |
 | CANCELLED Add streaming settings expander                                   |         |       | 0:36 |   1.5 |
-| COMPLETED Create the formattables model                                     |         |       | 1:32 |   3.9 |
-| COMPLETED Hook formattables into formatters                                 |         |       | 3:58 |  10.1 |
-| COMPLETED Remove empty context                                              |         |       | 1:09 |   2.9 |
-| COMPLETED Review main classes in quilt.cpp                                  |         |       | 3:42 |   9.4 |
-| COMPLETED Clean up element segmentation                                     |         |       | 1:20 |   3.4 |
-| COMPLETED Get OSX build to compile code                                     |         |       | 7:05 |  18.1 |
-| COMPLETED Add a banner to readme                                            |         |       | 1:29 |   3.8 |
+| COMPLETED Create the formattables model                                     |         |       | 1:32 |   3.8 |
+| COMPLETED Hook formattables into formatters                                 |         |       | 3:58 |   9.8 |
+| COMPLETED Remove empty context                                              |         |       | 1:09 |   2.8 |
+| COMPLETED Review main classes in quilt.cpp                                  |         |       | 3:42 |   9.1 |
+| COMPLETED Clean up element segmentation                                     |         |       | 1:20 |   3.3 |
+| COMPLETED Get OSX build to compile code                                     |         |       | 7:05 |  17.5 |
+| COMPLETED Add a banner to readme                                            |         |       | 1:29 |   3.7 |
 | STARTED Remove formatter id                                                 |         |       | 0:04 |   0.2 |
 | STARTED Generate formatter interfaces                                       |         |       | 0:19 |   0.8 |
-| STARTED Analysis around terminology in formatting space                     |         |       | 2:45 |   7.0 |
+| STARTED Analysis around terminology in formatting space                     |         |       | 2:45 |   6.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-10-02 Sun 21:25]--[2016-10-02 Sun 21:40] =>  0:15
+    CLOCK: [2016-10-02 Sun 20:15]--[2016-10-02 Sun 21:24] =>  1:09
     CLOCK: [2016-10-02 Sun 10:50]--[2016-10-02 Sun 11:54] =>  1:04
     CLOCK: [2016-09-27 Tue 10:04]--[2016-09-27 Tue 10:13] =>  0:09
     CLOCK: [2016-09-26 Mon 15:36]--[2016-09-26 Mon 15:39] =>  0:03
@@ -655,6 +657,74 @@ Notes:
   augment the include list with additional includes. However, we may
   not even need to be aware of this.
 
+*Stitch meta-templates*
+
+*Note*: re-read story [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_64.org#code-generating-formatters-as-text-templates][Code-generating formatters as text templates]] as
+some of these ideas were already there. Also: see [[https://github.com/no1msd/mstch][mstch]].
+
+In the quest for defining a single stitch template which then becomes
+a formatter - without any additional infrastructure required at all -
+we hit on an idea: stitch meta-templates. Basically we would have two
+different kinds of inputs to stitch: the template itself and the
+meta-template. Meta-template is a provisional name. The meta-template
+would define the formatter layout:
+
+- class definition, using a stitch variable for the yarn element type
+- registration of the formatter
+- definition of a method for the includes
+- definition of a method for the stitching
+
+These last two would result in the creation of "regions". These
+regions must then be "instantiated" in the template. This could easily
+be achieved with some kind of new element:
+
+: <#% region "includes">
+
+Or some such stitch construct. All lines after this line are part of
+the region "includes" until a new region is defined. The region is
+stitched and then transposed to the place in the meta-template where
+it was defined, for example:
+
+: int f(int a, int b) {
+: <#% region "includes">
+: }
+
+Would result in copying across the region into these brackets. This
+will make defining multiple functions very easy, without having to
+supply command line arguments, etc.
+
+Notes:
+
+- meta-templates are supplied as command line arguments.
+- potential extension: =meta.stitch=
+- stitch should still work on non-meta-template mode.
+- some of these ideas had already been covered on another story but
+  can't find it in backlog. It could be part of the original stitch
+  epic. We need to revisit it to see if it contains additional
+  insights.
+- when an error occurs, it would be great if we could pin point the
+  error to the template or to the meta-template. This is more of a
+  concern when we add clang compilation support.
+
+Further thoughts:
+
+- there are two approaches for this: we could integrate stitch tighter
+  with knit and have it return "chunks" of processed code instead of
+  files. As per story "Integration of stitch and dogen", dogen would
+  then be responsible for writing the header file as per methods
+  defined in the class diagram. Each method would be marked as a
+  region. Meta-data in the class associates a template with the
+  class. Knitter uses stitch to convert the template into regions, and
+  then takes these regions and inserts them into a generated
+  file. This approach is very clever and requires a lot of machinery.
+- the easier approach uses meta-templates. Class diagram associates
+  both meta-template and template with class via meta-data. We could
+  possibly also have a stitch stereotype to make it clearer. Yarn has
+  a stitch class with attributes of these parameters. Dogen
+  instantiates stitch (probably within quilt) with the parameters and
+  generates the file. Actually we probably can't have this in quilt
+  because we still need formatter properties.
+
 *** STARTED Analysis around terminology in formatting space           :story:
     CLOCK: [2016-10-02 Sun 17:08]--[2016-10-02 Sun 18:55] =>  1:47
     CLOCK: [2016-10-02 Sun 16:09]--[2016-10-02 Sun 17:07] =>  0:58
@@ -721,6 +791,309 @@ Renames:
 - ownership_hierarchy: archetype_location, model_name becomes kernel,
   facet name becomes facet and formatter name archetype. Add
   sub-kernel.
+
+*** Add more types to =quilt::cpp= canned tests                       :story:
+
+Originally we used the =*_info= types in the canned tests, but these
+are all about to be removed. We need to hunt for types in the
+=quilt::cpp= model and add those to the canned tests.
+
+*** Remove formatter group                                            :story:
+
+It seems we are not using this at present.
+
+Merged stories:
+
+*Consider supporting multiple formatter groups*
+
+In some cases it would be nice for a field to belong to multiple
+groups. For example =integrated_facet= is only applicable to class
+header formatters. We could implement this by making the formatter
+group a collection and having formatters belong to multiple groups.
+
+*** Refactor code around model origination                            :story:
+
+We have the following use cases around generation type and
+origination:
+
+- serialisation registrar needs to know which of the references are
+  "real" (dogen; non-proxy) models and which are proxy models. We are
+  only interested in calling the registrars for the "real" models.
+- inclusion directives should only be generated for the target and
+  non-proxy models.
+- in a target model, we need to distinguish between elements for which
+  the overwrite flag will be false (services; non-generatable) and
+  those for which it will be true (all others).
+- in a target model, we need to determine which formatters will be
+  enabled for a given element. For services at present we just have
+  types. All other types enable all formatters.
+- we need to filter out all non-target elements before we code
+  generate.
+
+*Previous Understanding*
+
+- remove origin types and generation types, replacing it with just a
+  boolean for is target. Actually we need something like:
+  proxy_reference, non_proxy_reference, target. We also need a good
+  name for this enumeration.
+- add a model-level flag: is empty. It is true if there are no model
+  elements. has_generatable_types is then is_target && !is_empty.
+- at present we are using origin type to determine whether to create a
+  registrar, etc in cpp model. There is no other use case for
+  this. This is done in several places due to the bad handling of C++
+  specific types. Grep for =references= in =cpp= to find all
+  locations. We could split references into two (dogen, non-dogen). Or
+  references could have a origin type too.
+- we should also replace has generatable types with something more
+  like "target model has types" or "is target model empty". The idea
+  we are trying to capture is that the target model contained at least
+  one type. This could be set by the merger when it processes the
+  target model.
+
+*Previous Understanding*
+
+In the past we added a number of knobs around generation, all with
+their own problems:
+
+- =origin_types=: was the model/type created by the user or the
+  system. in reality this means did the model come from Dia or
+  JSON. this is confusing as the user can also add JSON files (their
+  own model library) and in the future the user can use JSON
+  exclusively without needed Dia at all.
+- =generation_types=: if the model is target, all types are to be
+  generated /unless/ they are not properly supported, in which case
+  they are to be "partially" generated (as is the case with
+  services). This is a formatter decision and yarn should not know
+  anything about it. Actually this is not quite true; users may want
+  to stop generation.
+
+These can be replaced by a single enumeration that indicates if the
+type/model is target or not.
+
+This work should be integrated with the model types story.
+
+Merged stories:
+
+*Split references into dogen and non-dogen models*
+
+If we had two containers of references, one for dogen models and
+another one for non-dogen models - which we could give a nice name, to
+imply its foreign origin - we could then use the dogen references for
+registrar, etc. This is a replacement for the origin type.
+
+We need a good name for these. Candidates:
+
+- proxy model: represents something that exists in the outside
+  world. e.g. =is_proxy=.
+
+*Remove =service= stereotype*
+
+This really just means non-generatable, or do not generate. We already
+have a stereotype for this. Remove =service= and any other stereotype
+which is not being used such as =value_object= etc.
+
+Actually, non-generatable is not a stereotype really. We should
+instead have some meta-data that can affect generation:
+
+- do not generate: do nothing at all. For references only. If a file
+  exists with this file name, it will be deleted as part of
+  housekeeping.
+- generate blank file if it doesn't exist: we don't even want a
+  template.
+- generate with content if it doesn't exist, do not touch otherwise:
+  what we call services at the moment. Generate a "template" that then
+  gets filled in manually.
+- generate and merge: merge the contents of the generated file with
+  the current contents in the file system. When we support merging.
+- generate and overwrite: generate the file and overwrite whatever
+  exists in the file system.
+
+This could be called "generation policy".
+
+The second behaviour we get for free with services is that we disable
+all facets except for types. A few points:
+
+- we may want to have io, serialisation, etc. This is not possible at
+  present. If a state of a service is made up of supported types, we
+  could even use existing code generation.
+- in order for this to be implemented correctly we need to hook in to
+  the enablement management somehow. In addition, it seems each facet
+  can have its own generation policy. For example we may want to
+  manually create types but automatically generate io.
+- the best way to handle this may be to setup "enablement profiles"
+  that the user can hook up to. For example we could have a "default"
+  profile that enables all facets (or uses facet defaults), a second
+  "service" profile that enables types with partial generation and io
+  with full generation and so on. We probably also need "generation
+  profiles" to go with "enablement profiles".
+
+*** Refactor ownership hierarchy                                      :story:
+
+Start implementing the archetype logic. Basically there is a artefact
+unique identifier
+
+- rename it to =artefact_descriptor=.
+- remove all dia fields; these are now file importer specific and
+  never reach dynamic.
+- add =kernel= field. This is set to =stitch= or =quilt=.
+- rename formatter field to =kind=
+
+Merged stories:
+
+*Consider adding "application" to ownership hierarchy*
+
+Not all fields make sense to all tools in the dogen suite; some are
+knit specific, some are stitch specific and some are shared. At
+present this is not a problem because stitch loads up all of knit's
+fields and assumes users won't make use of them. If they do, nothing
+bad "should" happen. But a better way to solve this may be to only
+load fields that belong to an application. We could add "application"
+to ownership hierarchy, and filter on that. Note though that we would
+need some way of saying "all applications" (e.g. at present, leave the
+field blank).
+
+*Consider renaming =ownership_hierarchy=*
+
+We came up with the name =ownership_hierarchy= because we could not
+think of anything else. However, it is not a particularly good name,
+and it is increasingly so now that we need to use it across models. We
+need a better name for this value type.
+
+This work must be integrated with the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_69.org#thoughts-on-cpp-refactoring][archetype work]].
+
+*Split knitting from stitching settings*
+
+*Rationale*: with "kernel" we will have quilt and stitch.
+
+At present we only have a single common directory with all of the
+available fields. Not all fields apply to both stitching and
+knitting - but some do. We need a way to filter these. One possibility
+is to use an approach similar to the formatter groups in the ownership
+hierarchy. For now we simply have fields that have no meaning in
+stitching but can be supplied by users.
+
+*** Check generation type before dispatching element                  :story:
+
+At present we are doing this check in =visit=:
+
+:     if (o.generation_type() == yarn::generation_types::no_generation)
+:        return;
+
+If we did it before the =visit= call we'd save the cost of
+dispatching.
+
+*** Implement qualified name efficiently                              :story:
+
+We should move qualified names to quilt. We can create a simple map of
+id to qualified name and add that to the formattables model.
+
+*Previous Understanding*
+
+We used a =std::map= to store qualified names. In practice, we don't
+need something this expensive.
+
+- instead of mapping names to languages, we could map them to
+  "styles". There are only a few "styles" across all programming
+  languages (e.g. =.= separated, =::= separated and so on).
+- we can also create an array of these styles. We know up front how
+  many styles there are.
+- finally we can create a enumeration to access the array. At present
+  this is not possible because we cannot disable invalid, nor is it
+  possible to move it to a different position (e.g. last). Also we
+  will have to static cast the enum to access the int, which is not
+  very pretty.
+
+Once all of this is done we can simply do, at O(1):
+
+: name.qualified[static_cast<unsigned int>(styles::double_colon_separated_style)]
+
+We can prettify it a bit: [[http://stackoverflow.com/questions/8357240/how-to-automatically-convert-strongly-typed-enum-into-int][How to automatically convert strongly typed
+enum into int?]]
+
+: template <typename E>
+: constexpr typename std::underlying_type<E>::type to_underlying(E e) {
+:     return static_cast<typename std::underlying_type<E>::type>(e);
+: }
+:
+: std::cout << foo(to_underlying(b::B2)) << std::endl;
+
+Giving us:
+
+: name.qualified[to_underlying(styles::double_colon_separated_style)]
+
+*** Integration of stitch and dogen                                   :story:
+
+Now that we have implemented stitch and proved it works (more or
+less), we need to think how we can make using stitch from dogen
+easier. At present there is not integration at all:
+
+- users need to create regexes to ensure dogen does not trample on
+  stitch files:
+
+:    --ignore-files-matching-regex .*stitch
+:    --ignore-files-matching-regex .*_stitch.hpp
+:    --ignore-files-matching-regex .*_stitch.cpp
+
+- users need to manually create a header file for each stitch
+  template.
+- users need to create stitch targets and run them to ensure the
+  templates have been expanded. This means its possible to get dogen
+  and stitch out of sync (but for now not a big problem).
+
+In the ideal world, when we knit a model it would be nice if it could
+also stitch as required. This could be achieved as follows:
+
+- Create a meta-data tag that tells dogen a type has an associated
+  stitch template with it.
+- Create =cpp= types that represent the stitch header and
+  implementation.
+- Transformer needs to look for the meta-data tag and instantiate the
+  =cpp= types.
+- Create a =cpp= formatter for the header, as per regular
+  formatters. The slight challenge here is that the formatter needs to
+  be instantiable across facets, which we do not support at the
+  moment.
+- Create a cpp formatter for the implementation which instantiates
+  stitch with the template and uses it to create a file. Same
+  challenge as with the header.
+
+*Previous Understanding*
+
+- stitch can still be integrated with dogen. We could use meta-data to
+  link a formatter (well, any class that needs stitch really, but at
+  present just a formatter) with a stitch template. For example, a
+  =class_header_formatter= could have a "is stitchable" flag set to
+  on. This would then mean that dogen would look for a
+  =class_header_formatter.stitch= file in the same directory as the
+  CPP file. It would then use that to create a
+  =class_header_formatter_stitch.cpp= file. It would also
+  ignore/generate a =class_header_formatter_stitch.hpp= file and
+  automatically add it to the inclusion dependencies of
+  =class_header_formatter.cpp=. These are injected into stitch as we
+  instantiate the template since stitch supports meta-data (we do need
+  a way to inject the meta-data from dogen into the meta-data in the
+  template; perhaps a kvp container passed in to the stitch workflow
+  which could then be handed over to the parser). All these files are
+  automatically added to the list of "exceptions" for housekeeping so
+  that they do not get deleted. However, stitch would not know
+  anything at all about any of this; this is all knitter's
+  functionality. The problem is at present we haven't got a good place
+  to perform the stitching as part of knitter's workflows. Perhaps as
+  part of the expansion, we could set a number of stitch fields which
+  would then be picked up by some knit-specific workflow classes.
+
+*** Consider adding =fileset= to formatters' model                    :story:
+
+We are using collections of files quite a bit, and it makes sense to
+create an abstraction for it such as a =fileset=. However, for this to
+work properly we need to add at least one basic behaviours: the
+ability to merge two file sets. Or else we will end up having to
+unpack the files, then merging them, then creating a new fileset.
+
+Problem is, we either create the fileset as a non-generatable type -
+not ideal - or we create it as generatable and need to add this as a
+free function. We need to wait until dogen has support for merging
+code generation.
 
 *** Remove formatter level facet folders                              :story:
 
@@ -933,3 +1306,159 @@ Tasks:
 - update quilt to use the indices where possible.
 
 ** Deprecated
+*** CANCELLED Consider caching "all modules" in location              :story:
+    CLOSED: [2016-10-02 Sun 20:39]
+
+*Rationale*: we don't have enough use cases to justify the
+cost. Instead we created the name flattener in yarn.
+
+At present we are adding the module lists together to build the
+qualified name; location could have a "all modules" list that
+concatenates external, model and internal modules. We should look at
+performance before doing this change though.
+
+We are also using this information in =quilt.cpp= via the name builder
+(this is the only reason it cannot be removed). Adding it to the
+name/location is a bit painful since we use it in a lot of places, but
+we have other options:
+
+- create a service to do the merging and do it on the fly
+- add a method to nameable with the flat module list.
+
+Merged stories:
+
+*Add "namespaces" to name*
+
+Name should have a flat class with all namespaces in yarn, instead of
+generating it on every formatter.
+*** CANCELLED Consider reducing the number of qname lookups in cpp model :story:
+    CLOSED: [2016-10-02 Sun 20:40]
+
+*Rationale*: The refactoring of quilt reduced the look-ups.
+
+At present we are still using =yarn::name= in a lot of repositories in
+quilt. We already had one go in moving to id's but there are still
+quite a few left. Investigate to see if there are more that can be
+moved.
+
+*** CANCELLED Group the file related fields under a prefix            :story:
+    CLOSED: [2016-10-02 Sun 20:42]
+
+*Rationale*: this does not line up with the new understanding of the
+conceptual model.
+
+Now we have =element= as a prefix, it probably makes sense to also
+group the fields that are related to file names, paths etc. These
+could be under =file= or perhaps =paths=? Examples:
+
+- =quilt.cpp.file.include_directory_name=
+- =quilt.cpp.source_directory_name=
+
+*** CANCELLED Element formatter should have a container api           :story:
+    CLOSED: [2016-10-02 Sun 20:45]
+
+*Rationale*: Not applicable after the =quilt.cpp= refactor.
+
+In general, where the client is performing a loop over a well known
+container and then calling a method, we should add an API for that
+well known container. This is the case with the element formatter.
+
+This also reduces the number of splices done by the calling code. All
+the logging should be done in the element formatter as well.
+
+*** CANCELLED Perform an in-depth product backlog groom                :epic:
+    CLOSED: [2016-10-02 Sun 21:04]
+
+*Rationale*: we've added the tags; the process is continuous so the
+story does not add any value.
+
+We now have lots of references to types (and models) that have been
+refactored away - either renamed or deleted altogether. As we are
+reaching the final form for =yarn= and =quilt=, we need to go
+through all the stories and update them to the new world.
+
+- add two todos to the backlog: not reviewed, reviewed
+  (=<REVIEWING>=). Actually, added org mode tag support for this to
+  make it more obvious and filterable.
+- mark all stores as not reviewed
+- go through all the stories and mark them suitably as we review them.
+
+*** CANCELLED Create a set of definitions for tagging and meta-data   :story:
+    CLOSED: [2016-10-02 Sun 21:12]
+
+*Rationale*: This is part of the conceptual model work.
+
+We still use these terms frequently. We should define them in dynamic
+to have specific meanings.
+*** CANCELLED Handling of managed directories is incorrect            :story:
+    CLOSED: [2016-10-02 Sun 21:14]
+
+*Rationale*: its not clear this is a problem at present.
+
+At present we are querying the yarn dia importer to figure out what
+the managed directories are. These are basically the top-level
+directories from where we want the housekeeper to operate. In reality
+this is (or can be placed) in the meta-data. We should be able to
+extract the managed directories from the meta-data as a step in one of
+the workflows.
+
+This can be done by the backend. It does mean that we should be
+returning a composite type from generation:
+
+- list of files;
+- list of managed directories.
+
+Alternatively we could have a =managed_directories= method that takes
+in an yarn model and then internally reads in the meta-data for a given
+model to produce the list.
+
+*Merged with previous story*
+
+Compute managed directories from knitting options
+
+At present the backend is returning empty managed directories. This
+means housekeeping will fail in the new world. We need to change the
+interface of this method to take in the knitting options and return
+the managed directories.
+
+This is not entirely trivial. At present the managed directories are
+computed in the locator. It takes into account split project, etc to
+come up with all the directories used by the backend. We need to make
+these decisions during path expansion, expect we only need manged
+directories for the root object. However we do not know which object
+is the root object at present, during the expansion. We could identify
+it via the QName and the yarn model in context thought. We could then
+populate the managed directories as a text collection. We then need
+some settings and a factory to pull out the managed directories from
+the root object. This could be done in =managed_directories=, by
+having an yarn model as input.
+
+*** CANCELLED Header guard in formatters should be optional           :story:
+    CLOSED: [2016-10-02 Sun 21:15]
+
+*Rationale*: new approach is to use =empty()= where available.
+
+At present we are relying on empty header guards to determine what to
+do in boilerplate. We should use boost optional.
+
+*** CANCELLED Add kvp support to =identifier_parser=                  :story:
+    CLOSED: [2016-10-02 Sun 21:24]
+
+*Rationale*: This is only done in yarn.dia these days.
+
+We have code to split kvps all over the place. We should do this in a
+single pace, and use boost spirit or tokenizer. For one such
+implementation with spirit see:
+
+[[http://boost-spirit.com/home/2010/02/24/parsing-skippers-and-skipping-parsers/][Parsing Skippers and Skipping Parsers]]
+*** CANCELLED Create =src= and =include= facets                       :story:
+    CLOSED: [2016-10-02 Sun 21:36]
+
+*Rationale*: according to the new conceptual model, these are not
+facets; the formatter is just selecting a different physical location
+for the artefact.
+
+At present we have some formatters that are not in the traditional
+facets such as =types=, etc. We should make facets for them. We need
+to check what the current facet name is. There should only be one case
+of this, the CMakeLists formatters.
