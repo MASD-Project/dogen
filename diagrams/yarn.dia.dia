@@ -1404,7 +1404,7 @@ into its yarn representation.#</dia:string>
         <dia:point val="109.22,8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="108.47,-4.65;129.657,8.8"/>
+        <dia:rectangle val="108.47,-4.65;129.658,8.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2523,17 +2523,17 @@ that make up dogen instructions.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-26,8"/>
+        <dia:point val="-25,8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-49.7475,1.25;-25.25,8.8"/>
+        <dia:rectangle val="-49.7475,1.25;-24.25,8.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-26,8"/>
-        <dia:point val="-26,2"/>
+        <dia:point val="-25,8"/>
+        <dia:point val="-25,2"/>
         <dia:point val="-49.6975,2"/>
         <dia:point val="-49.6975,8"/>
       </dia:attribute>
@@ -2594,17 +2594,17 @@ that make up dogen instructions.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-26,22.6"/>
+        <dia:point val="-25,22.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-69.1325,21.85;-25.25,36.8"/>
+        <dia:rectangle val="-69.1325,21.85;-24.25,36.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-26,22.6"/>
-        <dia:point val="-26,27"/>
+        <dia:point val="-25,22.6"/>
+        <dia:point val="-25,27"/>
         <dia:point val="-69.0825,27"/>
         <dia:point val="-69.0825,36"/>
       </dia:attribute>
@@ -2665,17 +2665,17 @@ that make up dogen instructions.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-14.0075,8"/>
+        <dia:point val="-12.6225,8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-14.7575,-14.75;129.657,8.8"/>
+        <dia:rectangle val="-13.3725,-14.75;129.658,8.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-14.0075,8"/>
-        <dia:point val="-14.0075,-14"/>
+        <dia:point val="-12.6225,8"/>
+        <dia:point val="-12.6225,-14"/>
         <dia:point val="129.458,-14"/>
         <dia:point val="129.458,-9"/>
       </dia:attribute>
@@ -2736,17 +2736,17 @@ that make up dogen instructions.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-2.015,8"/>
+        <dia:point val="-0.245,8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-2.765,-2.75;81.2,8.8"/>
+        <dia:rectangle val="-0.995,-2.75;81.2,8.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-2.015,8"/>
-        <dia:point val="-2.015,-2"/>
+        <dia:point val="-0.245,8"/>
+        <dia:point val="-0.245,-2"/>
         <dia:point val="81,-2"/>
         <dia:point val="81,8"/>
       </dia:attribute>
@@ -2771,13 +2771,13 @@ that make up dogen instructions.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O18">
       <dia:attribute name="obj_pos">
-        <dia:point val="-26,8"/>
+        <dia:point val="-25,8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-26.05,7.95;-1.195,22.65"/>
+        <dia:rectangle val="-25.05,7.95;-0.195,22.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-26,8"/>
+        <dia:point val="-25,8"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="24.755000000000003"/>
@@ -3842,17 +3842,17 @@ that make up dogen instructions.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-14.0075,22.6"/>
+        <dia:point val="-12.6225,22.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-28.05,21.85;-13.2575,36.8"/>
+        <dia:rectangle val="-28.05,21.85;-11.8725,36.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-14.0075,22.6"/>
-        <dia:point val="-14.0075,29"/>
+        <dia:point val="-12.6225,22.6"/>
+        <dia:point val="-12.6225,29"/>
         <dia:point val="-28,29"/>
         <dia:point val="-28,36"/>
       </dia:attribute>
@@ -6077,7 +6077,7 @@ On the case of a UML note, represents the text of the note.#</dia:string>
         <dia:point val="-128,-15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-128.05,-15.05;-92.785,69.95"/>
+        <dia:rectangle val="-128.05,-15.05;-88.55,70.75"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6086,10 +6086,10 @@ On the case of a UML note, represents the text of the note.#</dia:string>
         <dia:point val="-128,-15"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="35.164999999999999"/>
+        <dia:real val="39.399999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="84.899999999999991"/>
+        <dia:real val="85.700000000000003"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -7352,17 +7352,17 @@ manageable format.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-2.015,22.6"/>
+        <dia:point val="-0.245,22.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-2.765,11.55;32.2,29.05"/>
+        <dia:rectangle val="-0.995,11.55;32.2,29.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-2.015,22.6"/>
-        <dia:point val="-2.015,29"/>
+        <dia:point val="-0.245,22.6"/>
+        <dia:point val="-0.245,29"/>
         <dia:point val="32,29"/>
         <dia:point val="32,11.6"/>
       </dia:attribute>
