@@ -39,7 +39,6 @@ std::size_t ownership_hierarchy_hasher::hash(const ownership_hierarchy& v) {
     combine(seed, v.model_name());
     combine(seed, v.facet_name());
     combine(seed, v.formatter_name());
-    combine(seed, v.formatter_group_name());
 
     return seed;
 }

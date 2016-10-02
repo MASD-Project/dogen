@@ -62,8 +62,7 @@ dynamic::ownership_hierarchy enum_implementation_formatter::
 ownership_hierarchy() const {
     static dynamic::ownership_hierarchy
         r(formatters::traits::model_name(), traits::facet_name(),
-            enum_implementation_formatter::static_formatter_name(),
-            formatters::traits::implementation_formatter_group_name());
+            enum_implementation_formatter::static_formatter_name());
     return r;
 }
 

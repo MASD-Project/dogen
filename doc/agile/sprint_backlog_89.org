@@ -13,19 +13,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-02 Sun 21:41]
+#+CAPTION: Clock summary at [2016-10-02 Sun 22:05]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *40:34* |       |      | 100.0 |
+| *Total time*                                                                | *40:57* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 40:34   |       |      | 100.0 |
-| Active                                                                      |         | 40:34 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 3:17 |   8.1 |
+| Stories                                                                     | 40:57   |       |      | 100.0 |
+| Active                                                                      |         | 40:57 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 3:17 |   8.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:07 |   0.3 |
-| COMPLETED Generation of formattable is incorrect                            |         |       | 2:30 |   6.2 |
+| COMPLETED Generation of formattable is incorrect                            |         |       | 2:30 |   6.1 |
 | COMPLETED Visitor includes are incorrect                                    |         |       | 0:20 |   0.8 |
-| COMPLETED Add includer to quilt.cpp                                         |         |       | 1:46 |   4.4 |
+| COMPLETED Add includer to quilt.cpp                                         |         |       | 1:46 |   4.3 |
 | COMPLETED Add reducer to quilt.cpp                                          |         |       | 0:22 |   0.9 |
 | COMPLETED Add new index to formtter container                               |         |       | 0:19 |   0.8 |
 | COMPLETED Add path expander to quilt.cpp                                    |         |       | 0:49 |   2.0 |
@@ -39,16 +39,17 @@
 | COMPLETED Fix bug in aspect and helper generation                           |         |       | 0:15 |   0.6 |
 | COMPLETED Investigate element annotation support                            |         |       | 2:05 |   5.1 |
 | CANCELLED Add streaming settings expander                                   |         |       | 0:36 |   1.5 |
-| COMPLETED Create the formattables model                                     |         |       | 1:32 |   3.8 |
-| COMPLETED Hook formattables into formatters                                 |         |       | 3:58 |   9.8 |
+| COMPLETED Create the formattables model                                     |         |       | 1:32 |   3.7 |
+| COMPLETED Hook formattables into formatters                                 |         |       | 3:58 |   9.7 |
 | COMPLETED Remove empty context                                              |         |       | 1:09 |   2.8 |
-| COMPLETED Review main classes in quilt.cpp                                  |         |       | 3:42 |   9.1 |
+| COMPLETED Review main classes in quilt.cpp                                  |         |       | 3:42 |   9.0 |
 | COMPLETED Clean up element segmentation                                     |         |       | 1:20 |   3.3 |
-| COMPLETED Get OSX build to compile code                                     |         |       | 7:05 |  17.5 |
-| COMPLETED Add a banner to readme                                            |         |       | 1:29 |   3.7 |
+| COMPLETED Get OSX build to compile code                                     |         |       | 7:05 |  17.3 |
+| COMPLETED Add a banner to readme                                            |         |       | 1:29 |   3.6 |
+| COMPLETED Remove formatter group                                            |         |       | 0:23 |   0.9 |
 | STARTED Remove formatter id                                                 |         |       | 0:04 |   0.2 |
 | STARTED Generate formatter interfaces                                       |         |       | 0:19 |   0.8 |
-| STARTED Analysis around terminology in formatting space                     |         |       | 2:45 |   6.8 |
+| STARTED Analysis around terminology in formatting space                     |         |       | 2:45 |   6.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -581,6 +582,21 @@ Notes:
 It would be nice to have some kind of banner to make the readme a bit
 more interesting.
 
+*** COMPLETED Remove formatter group                                  :story:
+    CLOSED: [2016-10-02 Sun 22:05]
+    CLOCK: [2016-10-02 Sun 21:42]--[2016-10-02 Sun 22:05] =>  0:23
+
+It seems we are not using this at present.
+
+Merged stories:
+
+*Consider supporting multiple formatter groups*
+
+In some cases it would be nice for a field to belong to multiple
+groups. For example =integrated_facet= is only applicable to class
+header formatters. We could implement this by making the formatter
+group a collection and having formatters belong to multiple groups.
+
 *** STARTED Remove formatter id                                       :story:
     CLOCK: [2016-09-28 Wed 22:49]--[2016-09-28 Wed 22:53] =>  0:04
 
@@ -797,19 +813,6 @@ Renames:
 Originally we used the =*_info= types in the canned tests, but these
 are all about to be removed. We need to hunt for types in the
 =quilt::cpp= model and add those to the canned tests.
-
-*** Remove formatter group                                            :story:
-
-It seems we are not using this at present.
-
-Merged stories:
-
-*Consider supporting multiple formatter groups*
-
-In some cases it would be nice for a field to belong to multiple
-groups. For example =integrated_facet= is only applicable to class
-header formatters. We could implement this by making the formatter
-group a collection and having formatters belong to multiple groups.
 
 *** Refactor code around model origination                            :story:
 

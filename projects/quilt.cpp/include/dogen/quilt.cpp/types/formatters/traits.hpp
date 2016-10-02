@@ -39,16 +39,6 @@ struct traits {
     static std::string model_name();
 
     /**
-     * @brief Name of the header formatter group.
-     */
-    static std::string header_formatter_group_name();
-
-    /**
-     * @brief Name of the header formatter group.
-     */
-    static std::string implementation_formatter_group_name();
-
-    /**
      * @brief Name of the master header formatter for a given facet.
      */
     static std::string master_header_formatter_name(

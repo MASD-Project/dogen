@@ -37,7 +37,6 @@ const std::string empty_header_guard;
 const std::string model_name("stitch");
 const std::string facet_name("types");
 const std::string formatter_name("stitch.formatter");
-const std::string group_name;
 
 const std::string inserter("<<");
 const std::string endl("std::endl;");
@@ -134,7 +133,7 @@ void formatter::format_line_with_single_block(const std::string& stream_name,
 
 dynamic::ownership_hierarchy formatter::ownership_hierarchy() const {
     static dynamic::ownership_hierarchy
-        r(model_name, facet_name, formatter_name, group_name);
+        r(model_name, facet_name, formatter_name);
     return r;
 }
 

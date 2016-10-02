@@ -35,7 +35,6 @@ using namespace dogen::quilt::cpp::formatters;
 static logger lg(
     logger_factory(source_cmakelists_formatter::static_formatter_name()));
 
-const std::string empty;
 const std::string not_supported("Inclusion path is not supported: ");
 
 }
@@ -58,8 +57,7 @@ dynamic::ownership_hierarchy source_cmakelists_formatter::
 ownership_hierarchy() const {
     static dynamic::ownership_hierarchy
         r(formatters::traits::model_name(), traits::cmake_facet_name(),
-            source_cmakelists_formatter::static_formatter_name(),
-            empty/*group name*/);
+            source_cmakelists_formatter::static_formatter_name());
     return r;
 }
 

@@ -41,7 +41,6 @@ populate(const unsigned int position, result_type& v) {
     v.model_name(create_std_string(position + 0));
     v.facet_name(create_std_string(position + 1));
     v.formatter_name(create_std_string(position + 2));
-    v.formatter_group_name(create_std_string(position + 3));
 }
 
 ownership_hierarchy_generator::result_type

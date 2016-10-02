@@ -68,7 +68,7 @@
         <dia:point val="-80,-47"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-80.05,-47.05;-44.785,-37.25"/>
+        <dia:rectangle val="-80.05,-47.05;-40.55,-36.45"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -77,10 +77,10 @@
         <dia:point val="-80,-47"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="35.164999999999999"/>
+        <dia:real val="39.399999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="9.7000000000000011"/>
+        <dia:real val="10.500000000000002"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -3603,16 +3603,16 @@ content of fields.#</dia:string>
         <dia:point val="19,-28"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="18.95,-28.05;32.64,-22.75"/>
+        <dia:rectangle val="18.95,-28.05;30.33,-23.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="19,-28"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.59"/>
+        <dia:real val="11.279999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.2000000000000011"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#ownership_hierarchy#</dia:string>
@@ -3775,31 +3775,6 @@ any.#</dia:string>
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#formatter_group_name#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::string#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Name of the group to which this formatter belongs to, if any.
-
-Formatter groups can span facets.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -3848,7 +3823,7 @@ Formatter groups can span facets.#</dia:string>
         <dia:point val="30,-14"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="25.745,-22.85;30.75,-13.2"/>
+        <dia:rectangle val="24.59,-23.65;30.75,-13.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3856,8 +3831,8 @@ Formatter groups can span facets.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="30,-14"/>
         <dia:point val="30,-19"/>
-        <dia:point val="25.795,-19"/>
-        <dia:point val="25.795,-22.8"/>
+        <dia:point val="24.64,-19"/>
+        <dia:point val="24.64,-23.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

@@ -56,9 +56,6 @@ const std::string facet_name_not_empty(
 const std::string formatter_name_not_empty(
     "Field definition type is formatter template but facet name is not empty. "
     "Field: ");
-const std::string formatter_group_not_empty(
-    "Field definition type is global or facet template but formatter group is "
-    "not empty. Field: ");
 const std::string unsupported_definition_type(
     "Field definition type is not supported: ");
 
@@ -143,12 +140,6 @@ void instantiator::validate(const field_definition& fd) const {
             BOOST_THROW_EXCEPTION(
                 instantiation_error(formatter_name_not_empty + sn));
         }
-
-        if (!fd.ownership_hierarchy().formatter_group_name().empty()) {
-            BOOST_LOG_SEV(lg, error) << formatter_group_not_empty << sn;
-            BOOST_THROW_EXCEPTION(
-                instantiation_error(formatter_group_not_empty + sn));
-        }
     }
 
     if (fd.definition_type() == field_definition_types::facet_template) {
@@ -156,12 +147,6 @@ void instantiator::validate(const field_definition& fd) const {
             BOOST_LOG_SEV(lg, error) << facet_name_not_empty << sn;
             BOOST_THROW_EXCEPTION(
                 instantiation_error(facet_name_not_empty + sn));
-        }
-
-        if (!fd.ownership_hierarchy().formatter_group_name().empty()) {
-            BOOST_LOG_SEV(lg, error) << formatter_group_not_empty << sn;
-            BOOST_THROW_EXCEPTION(
-                instantiation_error(formatter_group_not_empty + sn));
         }
 
         if (!fd.ownership_hierarchy().formatter_name().empty()) {
@@ -196,7 +181,6 @@ instantiator::instantiate_global_template(const field_definition& fd) const {
         instance_fd.ownership_hierarchy().model_name(model_name);
         instance_fd.ownership_hierarchy().facet_name(empty);
         instance_fd.ownership_hierarchy().formatter_name(empty);
-        instance_fd.ownership_hierarchy().formatter_group_name(empty);
         r.push_back(instance_fd);
 
         const auto& facet_names(pair.second);
@@ -207,7 +191,6 @@ instantiator::instantiate_global_template(const field_definition& fd) const {
             instance_fd.ownership_hierarchy().model_name(model_name);
             instance_fd.ownership_hierarchy().facet_name(facet_name);
             instance_fd.ownership_hierarchy().formatter_name(empty);
-            instance_fd.ownership_hierarchy().formatter_group_name(empty);
             r.push_back(instance_fd);
         }
     }

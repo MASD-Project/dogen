@@ -50,8 +50,7 @@ public:
     ownership_hierarchy(
         const std::string& model_name,
         const std::string& facet_name,
-        const std::string& formatter_name,
-        const std::string& formatter_group_name);
+        const std::string& formatter_name);
 
 private:
     template<typename Archive>
@@ -91,18 +90,6 @@ public:
     void formatter_name(const std::string&& v);
     /**@}*/
 
-    /**
-     * @brief Name of the group to which this formatter belongs to, if any.
-     *
-     * Formatter groups can span facets.
-     */
-    /**@{*/
-    const std::string& formatter_group_name() const;
-    std::string& formatter_group_name();
-    void formatter_group_name(const std::string& v);
-    void formatter_group_name(const std::string&& v);
-    /**@}*/
-
 public:
     bool operator==(const ownership_hierarchy& rhs) const;
     bool operator!=(const ownership_hierarchy& rhs) const {
@@ -117,7 +104,6 @@ private:
     std::string model_name_;
     std::string facet_name_;
     std::string formatter_name_;
-    std::string formatter_group_name_;
 };
 
 } }

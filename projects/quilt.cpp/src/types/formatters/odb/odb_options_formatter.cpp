@@ -61,8 +61,7 @@ dynamic::ownership_hierarchy
 odb_options_formatter::ownership_hierarchy() const {
     static dynamic::ownership_hierarchy
         r(formatters::traits::model_name(), traits::facet_name(),
-            odb_options_formatter::static_formatter_name(),
-            formatters::traits::header_formatter_group_name());
+            odb_options_formatter::static_formatter_name());
     return r;
 }
 

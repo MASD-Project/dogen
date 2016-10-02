@@ -30,16 +30,6 @@ std::string traits::model_name() {
     return r;
 }
 
-std::string traits::header_formatter_group_name() {
-    static std::string r("quilt.cpp.header_files");
-    return r;
-}
-
-std::string traits::implementation_formatter_group_name() {
-    static std::string r("quilt.cpp.implementation_files");
-    return r;
-}
-
 std::string traits::
 master_header_formatter_name(const std::string& facet_name) {
     return facet_name + ".master_header_formatter";

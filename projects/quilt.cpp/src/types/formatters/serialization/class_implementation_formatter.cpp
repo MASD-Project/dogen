@@ -61,8 +61,7 @@ dynamic::ownership_hierarchy
 class_implementation_formatter::ownership_hierarchy() const {
     static dynamic::ownership_hierarchy
         r(formatters::traits::model_name(), traits::facet_name(),
-            class_implementation_formatter::static_formatter_name(),
-            formatters::traits::implementation_formatter_group_name());
+            class_implementation_formatter::static_formatter_name());
     return r;
 }
 
