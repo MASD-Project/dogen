@@ -38,7 +38,7 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/build/cmake)
 
 # options
 option(WITH_DOXYGEN "Build the project documentation" off)
-option(WITH_LATEX "Build all LaTeX documents. Requires pdflatex and beamer." off)
+option(WITH_LATEX "Build LaTeX documents. Requires pdflatex and beamer." off)
 option(WITH_PROFILING "Build the project with profiling support" off)
 option(WITH_COVERALLS "Generate coveralls coverage." off)
 option(WITH_MINIMAL_PACKAGING "Package just the main application" off)
