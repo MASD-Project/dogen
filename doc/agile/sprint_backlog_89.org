@@ -6,55 +6,58 @@
 * Mission Statement
 
 - finish refactoring quilt.cpp.
-- introduce wale templates.
+- tidy-up services, origin types and generation types.
+- start work on wale templates.
 
 * Stories
 
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-02 Sun 22:21]
+#+CAPTION: Clock summary at [2016-10-03 Mon 10:21]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *41:12* |       |      | 100.0 |
+| *Total time*                                                                | *43:11* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 41:12   |       |      | 100.0 |
-| Active                                                                      |         | 41:12 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 3:17 |   8.0 |
+| Stories                                                                     | 43:11   |       |      | 100.0 |
+| Active                                                                      |         | 43:11 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 4:37 |  10.7 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:07 |   0.3 |
-| COMPLETED Generation of formattable is incorrect                            |         |       | 2:30 |   6.1 |
+| COMPLETED Generation of formattable is incorrect                            |         |       | 2:30 |   5.8 |
 | COMPLETED Visitor includes are incorrect                                    |         |       | 0:20 |   0.8 |
-| COMPLETED Add includer to quilt.cpp                                         |         |       | 1:46 |   4.3 |
-| COMPLETED Add reducer to quilt.cpp                                          |         |       | 0:22 |   0.9 |
-| COMPLETED Add new index to formtter container                               |         |       | 0:19 |   0.8 |
-| COMPLETED Add path expander to quilt.cpp                                    |         |       | 0:49 |   2.0 |
-| COMPLETED Add guard expander to quilt.cpp                                   |         |       | 0:27 |   1.1 |
-| COMPLETED Investigate borked travis build                                   |         |       | 0:37 |   1.5 |
+| COMPLETED Add includer to quilt.cpp                                         |         |       | 1:46 |   4.1 |
+| COMPLETED Add reducer to quilt.cpp                                          |         |       | 0:22 |   0.8 |
+| COMPLETED Add new index to formtter container                               |         |       | 0:19 |   0.7 |
+| COMPLETED Add path expander to quilt.cpp                                    |         |       | 0:49 |   1.9 |
+| COMPLETED Add guard expander to quilt.cpp                                   |         |       | 0:27 |   1.0 |
+| COMPLETED Investigate borked travis build                                   |         |       | 0:37 |   1.4 |
 | COMPLETED Add decoration expander to quilt.cpp                              |         |       | 0:23 |   0.9 |
-| COMPLETED Add aspect expander to quilt.cpp                                  |         |       | 1:26 |   3.5 |
+| COMPLETED Add aspect expander to quilt.cpp                                  |         |       | 1:26 |   3.3 |
 | COMPLETED Run tests that are passing on windows                             |         |       | 0:10 |   0.4 |
-| COMPLETED Add helper expander to quilt.cpp                                  |         |       | 1:26 |   3.5 |
+| COMPLETED Add helper expander to quilt.cpp                                  |         |       | 1:26 |   3.3 |
 | COMPLETED Merge pre and post workflows                                      |         |       | 0:16 |   0.6 |
 | COMPLETED Fix bug in aspect and helper generation                           |         |       | 0:15 |   0.6 |
-| COMPLETED Investigate element annotation support                            |         |       | 2:05 |   5.1 |
-| CANCELLED Add streaming settings expander                                   |         |       | 0:36 |   1.5 |
-| COMPLETED Create the formattables model                                     |         |       | 1:32 |   3.7 |
-| COMPLETED Hook formattables into formatters                                 |         |       | 3:58 |   9.6 |
-| COMPLETED Remove empty context                                              |         |       | 1:09 |   2.8 |
-| COMPLETED Review main classes in quilt.cpp                                  |         |       | 3:42 |   9.0 |
-| COMPLETED Clean up element segmentation                                     |         |       | 1:20 |   3.2 |
-| COMPLETED Get OSX build to compile code                                     |         |       | 7:05 |  17.2 |
-| COMPLETED Add a banner to readme                                            |         |       | 1:29 |   3.6 |
+| COMPLETED Investigate element annotation support                            |         |       | 2:05 |   4.8 |
+| CANCELLED Add streaming settings expander                                   |         |       | 0:36 |   1.4 |
+| COMPLETED Create the formattables model                                     |         |       | 1:32 |   3.6 |
+| COMPLETED Hook formattables into formatters                                 |         |       | 3:58 |   9.2 |
+| COMPLETED Remove empty context                                              |         |       | 1:09 |   2.7 |
+| COMPLETED Review main classes in quilt.cpp                                  |         |       | 3:42 |   8.6 |
+| COMPLETED Clean up element segmentation                                     |         |       | 1:20 |   3.1 |
+| COMPLETED Get OSX build to compile code                                     |         |       | 7:05 |  16.4 |
+| COMPLETED Add a banner to readme                                            |         |       | 1:29 |   3.4 |
 | COMPLETED Remove formatter group                                            |         |       | 0:23 |   0.9 |
 | COMPLETED Add more types to =quilt::cpp= canned tests                       |         |       | 0:15 |   0.6 |
-| STARTED Remove formatter id                                                 |         |       | 0:04 |   0.2 |
-| STARTED Generate formatter interfaces                                       |         |       | 0:19 |   0.8 |
-| STARTED Analysis around terminology in formatting space                     |         |       | 2:45 |   6.7 |
+| CANCELLED Remove formatter id                                               |         |       | 0:04 |   0.2 |
+| COMPLETED Analysis around terminology in formatting space                   |         |       | 3:24 |   7.9 |
+| STARTED Generate formatter interfaces                                       |         |       | 0:19 |   0.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-10-03 Mon 10:17]--[2016-10-03 Mon 10:21] =>  0:04
+    CLOCK: [2016-10-03 Mon 09:00]--[2016-10-03 Mon 10:16] =>  1:16
     CLOCK: [2016-10-02 Sun 21:25]--[2016-10-02 Sun 21:40] =>  0:15
     CLOCK: [2016-10-02 Sun 20:15]--[2016-10-02 Sun 21:24] =>  1:09
     CLOCK: [2016-10-02 Sun 10:50]--[2016-10-02 Sun 11:54] =>  1:04
@@ -606,13 +609,96 @@ Originally we used the =*_info= types in the canned tests, but these
 are all about to be removed. We need to hunt for types in the
 =quilt::cpp= model and add those to the canned tests.
 
-*** STARTED Remove formatter id                                       :story:
+*** COMPLETED Consider renaming model module to root module           :story:
+    CLOSED: [2016-10-03 Mon 08:38]
+
+*Rationale*: this seems to have been already done.
+
+It would be more sensible to call it root module rather than model
+module. We should also create a root module property in the model to
+make it easier to locate.
+
+*** CANCELLED Remove formatter id                                     :story:
+    CLOSED: [2016-10-03 Mon 10:13]
     CLOCK: [2016-09-28 Wed 22:49]--[2016-09-28 Wed 22:53] =>  0:04
+
+*Rationale*: in the new world, formatter names are different from
+artefact names so we will need something like formatter id.
 
 Not clear why we need this given we have formatter name.
 
 Actually this requires a little bit of thinking as we use the id's in
 the helper formatters.
+
+*** COMPLETED Analysis around terminology in formatting space         :story:
+    CLOSED: [2016-10-03 Mon 10:19]
+    CLOCK: [2016-10-03 Mon 08:20]--[2016-10-03 Mon 08:59] =>  0:39
+    CLOCK: [2016-10-02 Sun 17:08]--[2016-10-02 Sun 18:55] =>  1:47
+    CLOCK: [2016-10-02 Sun 16:09]--[2016-10-02 Sun 17:07] =>  0:58
+
+One part of the language which has not yet been clarified is around
+formatters. We use the term "formatter" to mean several things:
+
+- a formatting function in formatting space which produces a file; and
+  we think of this file as also an entity in formatting space;
+- a formatting function in formatting space which produces a part of a
+  file - an aspect; we call these helpers at present.
+- all of the infrastructure around file generation such as
+  boilerplate, etc - the formatters model.
+
+The biggest problem is that this conceptual approach does not
+distinguish between the formatter and the conceptual entity underlying
+it.
+
+Another way of looking at this is that we have the artefact space,
+made up of all the entities that compose a project. An artefact maps
+one to one to a file, but a file is a specific representation on a
+filesystem, file server etc whereas the artefact is the conceptual
+notion behind it. However, the content of the file and the content of
+the artefact are byte-wise identical for a given (imaginary) artefact
+id. One takes an artefact in memory and expresses it as a file.
+
+Artefacts are instances of archetypes. An archetype of an artefact is
+akin to a class of an object; it is its meta-type. Archetypes live in
+archetype space, which is partitioned hierarchically by facet,
+sub-kernel and kernel.
+
+Archetypes are uniquely identified by their id. An example of an
+archetype id is =quilt.cpp.types.class_header=, where =quilt= is the
+kernel, =cpp= is the sub-kernel, =types= the facet and =class_header=
+the archetype group. Configuration/annotations binds to archetype ids.
+
+Formatting functions (i.e. formatters) take in a set of arguments and
+generate artefacts. Formatters inherit the taxonomy of the archetype
+of the artefacts they generate. The formatter id is the archetype id
+plus the postfix =_formatter=. Formatters are also grouped like
+archetypes: =class_header= etc, but they are also support additional
+arbitrary grouping via labels (header files, cmakefiles, etc).
+
+Modeling space is made up of entities. Entities abstract one or more
+archetypes. One entity is represented by a set of element segments
+with a cardinality of one or two. One of the elements is called the
+master element and the other is called the extension element.
+
+There is a stereotype called =formatter=. When a type is marked as
+=formatter= the user must supply a stitch template in the filesystem
+with a name of the class and the extension =.stitch=. The wale
+templates are fixed. Wale templates must be part of dogen data. The
+expected stitch sections must be present (include dependencies,
+format).
+
+=quilt.cpp= has a formatting mode which intercepts the stereotype and
+then does additional processing such as if "non-generatable" only
+generate if there is no file, if formatter do wale/stitch, etc.
+
+Renames:
+
+- file: artefact
+- file formatter: artefact formatter
+- ownership_hierarchy: archetype_location, model_name becomes kernel,
+  facet name becomes facet and formatter name archetype. Add
+  sub-kernel.
+- Element concept becomes Entity.
 
 *** STARTED Generate formatter interfaces                              :epic:
     CLOCK: [2016-09-30 Fri 10:58]--[2016-09-30 Fri 11:17] =>  0:19
@@ -750,72 +836,75 @@ Further thoughts:
   generates the file. Actually we probably can't have this in quilt
   because we still need formatter properties.
 
-*** STARTED Analysis around terminology in formatting space           :story:
-    CLOCK: [2016-10-02 Sun 17:08]--[2016-10-02 Sun 18:55] =>  1:47
-    CLOCK: [2016-10-02 Sun 16:09]--[2016-10-02 Sun 17:07] =>  0:58
+*** Add the concept of hand-crafting                                  :story:
 
-One part of the language which has not yet been clarified is around
-formatters. We use the term "formatter" to mean several things:
+An element can be marked with the stereotype of handcrafted. We then
+have several things to determine for this element:
 
-- a formatting function in formatting space which produces a file; and
-  we think of this file as also an entity in formatting space;
-- a formatting function in formatting space which produces a part of a
-  file - an aspect; we call these helpers at present.
-- all of the infrastructure around file generation such as
-  boilerplate, etc - the formatters model.
+- which formatters are disabled due to handcraft mode (e.g. all facets
+  other than types);
+- which formatters are enabled, but should only generate if there
+  isn't a file already in the file system (e.g. class header and class
+  implementation in types)
+- which formatters are enabled and should generate as usual
+  (e.g. forward declarations in types).
 
-The biggest problem is that this conceptual approach does not
-distinguish between the formatter and the conceptual entity underlying
-it.
+We must also allow users to override these settings so that:
 
-Another way of looking at this is that we have the artefact space,
-made up of all the entities that compose a project. An artefact maps
-one to one to a file, but a file is a specific representation on a
-filesystem, file server etc whereas the artefact is the conceptual
-notion behind it. However, the content of the file and the content of
-the artefact are byte-wise identical for a given (imaginary) artefact
-id. One takes an artefact in memory and expresses it as a file.
+- they can disable the types facet if required;
+- they can provide their own implementations for other facets;
+- they can ask the code generator to generate one for them
+  (serialisation, io).
 
-Artefacts are instances of archetypes. An archetype of an artefact is
-akin to a class of an object; it is its meta-type. Archetypes live in
-archetype space, which is partitioned hierarchically by facet,
-sub-kernel and kernel.
+Finally, for the common case, we do not want users to have to set lots
+of meta-data; we need a sensible default behaviour.
 
-Archetypes are uniquely identified by their id. An example of an
-archetype id is =quilt.cpp.types.class_header=, where =quilt= is the
-kernel, =cpp= is the sub-kernel, =types= the facet and =class_header=
-the archetype group. Configuration/annotations binds to archetype ids.
+Actually, from a purely functional perspective, what is handcrafting?
+It is a shorthand for:
 
-Formatting functions (i.e. formatters) take in a set of arguments and
-generate artefacts. Formatters inherit the taxonomy of the archetype
-of the artefacts they generate. The formatter id is the archetype id
-plus the postfix =_formatter=. Formatters are also grouped like
-archetypes: =class_header= etc, but they are also support additional
-arbitrary grouping via labels (header files, cmakefiles, etc).
+- disable a set of formatters;
+- enable another set of formatters;
+- for a subset of the enabled formatters, generate only if there is no
+  file in the filesystem, otherwise do nothing;
+- for another subset of the enabled formatters, generate as usual.
+- do not add leaves to the registrar (unless asked to).
 
-Modeling space is made up of entities. Entities abstract one or more
-archetypes. One entity is represented by a set of element segments
-with a cardinality of one or two. One of the elements is called the
-master element and the other is called the extension element.
+One can conceive the notion of an enablement profile. These can be
+global or local. We can also have overwritting profiles. These can
+only be local. A sub-set of the enabled formatters can be set to
+overwrite=false. Examples:
 
-There is a stereotype called =formatter=. When a type is marked as
-=formatter= the user must supply a stitch template in the filesystem
-with a name of the class and the extension =.stitch=. The wale
-templates are fixed. Wale templates must be part of dogen data. The
-expected stitch sections must be present (include dependencies,
-format).
+- default enablement profile: "enable all". Enables all facets and
+  formatters.
+- types and a facet profiles: "types and serialisation", "types and
+  io" etc.
+- "types class only": generates class header and implementation.
+- default overwrite profile: "overwrite all". Overwrites all
+  artefacts.
 
-=quilt.cpp= has a formatting mode which intercepts the stereotype and
-then does additional processing such as if "non-generatable" only
-generate if there is no file, if formatter do wale/stitch, etc.
+Now handcrafting becomes much easier:
 
-Renames:
+- add meta-data to quilt: a) a way of specifying profiles for
+  overwriting and enabling b) a way of specifying if leaves contribute
+  to registration or not.
+- define a set of profiles in data for overwriting and enabling. Users
+  can provide their own profile directories.
+- Link the overwriting and enabling with stereotypes: given a
+  stereotype, we could map to a default profile. Actually this is more
+  of a profile group. We could then state that a stereotype maps to a
+  profile group.
 
-- file: artefact
-- file formatter: artefact formatter
-- ownership_hierarchy: archetype_location, model_name becomes kernel,
-  facet name becomes facet and formatter name archetype. Add
-  sub-kernel.
+Tasks:
+
+- add data files to specify profiles, with classes to read them in
+  from JSON. Profiles must be settable to global or local.
+- add meta-data to allow users to supply a profile (local or global).
+- update enablement expander to look for profiles.
+- update all facet test models to use profiles.
+- add a stereotype of handcrafted with a default profile.
+- add a flag for leaf management. It defaults to true, unless
+  handcrafted. Add meta-data to allow overriding flag (or create story
+  for it as we don't yet have a use case).
 
 *** Refactor code around model origination                            :story:
 
@@ -933,6 +1022,42 @@ all facets except for types. A few points:
   with full generation and so on. We probably also need "generation
   profiles" to go with "enablement profiles".
 
+*** Handle registration of services properly                          :story:
+
+We need a flag to determine if a class should contribute its leaves or
+not. By default, if it is hand-crafted it does not contribute
+leaves. This could (eventually) be overridable by users.
+
+*Previous Understanding*
+
+We need a way to determine if a type which is part of a generalisation
+should be added to the registrar or not. In =generalisation_indexer=:
+
+:     // FIXME: massive hack. must not add leafs for services.
+
+One way would be to check if serialisation is enabled for that type
+and if not, skip the type.
+
+Another way is to check if the type is generatable. If not, skip
+it. If we do it this way we need to wait for the generatable clean up.
+
+*** Perform the archetype / artefact renames                          :story:
+
+As per analysis story, we need to tidy-up terminology.
+
+Renames:
+
+- file: artefact
+- file formatter: artefact formatter
+- ownership_hierarchy: archetype_location, model_name becomes kernel,
+  facet name becomes facet and formatter name archetype. Add
+  sub-kernel.
+- Element concept becomes Entity.
+
+*** Remove =original_model_name=                                      :story:
+
+This does not seem to be used any longer.
+
 *** Refactor ownership hierarchy                                      :story:
 
 Start implementing the archetype logic. Basically there is a artefact
@@ -978,15 +1103,9 @@ is to use an approach similar to the formatter groups in the ownership
 hierarchy. For now we simply have fields that have no meaning in
 stitching but can be supplied by users.
 
-*** Check generation type before dispatching element                  :story:
+*** Remove formatter level facet folders                              :story:
 
-At present we are doing this check in =visit=:
-
-:     if (o.generation_type() == yarn::generation_types::no_generation)
-:        return;
-
-If we did it before the =visit= call we'd save the cost of
-dispatching.
+We seem to have two of these, but the real one is at the model level.
 
 *** Implement qualified name efficiently                              :story:
 
@@ -1101,10 +1220,6 @@ not ideal - or we create it as generatable and need to add this as a
 free function. We need to wait until dogen has support for merging
 code generation.
 
-*** Remove formatter level facet folders                              :story:
-
-We seem to have two of these, but the real one is at the model level.
-
 *** Move enabled formatters to element configuration                  :story:
 
 All elements have the same view of enabled formatters.
@@ -1120,6 +1235,16 @@ formatter.
 
 Figure out if element configuration is context or if it is better
 expressed as a stand alone formatting parameter.
+
+*** Check generation type before dispatching element                  :story:
+
+At present we are doing this check in =visit=:
+
+:     if (o.generation_type() == yarn::generation_types::no_generation)
+:        return;
+
+If we did it before the =visit= call we'd save the cost of
+dispatching.
 
 *** Formatter repository should be created in quilt                   :story:
 

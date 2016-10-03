@@ -533,19 +533,6 @@ unparsed types before merging. There is a circular dependency here.
 We somehow need a first pass to obtain all the primitives and a second
 pass to parse.
 
-*** Handle registration of services properly                          :story:
-
-We need a way to determine if a type which is part of a generalisation
-should be added to the registrar or not. In =generalisation_indexer=:
-
-:     // FIXME: massive hack. must not add leafs for services.
-
-One way would be to check if serialisation is enabled for that type
-and if not, skip the type.
-
-Another way is to check if the type is generatable. If not, skip
-it. If we do it this way we need to wait for the generatable clean up.
-
 *** Update copyright notices                                          :story:
 
 We need to update all notices to reflect personal ownership until DDC
@@ -1113,12 +1100,6 @@ have a nested structure with namespaces containing types.
 
 We should still support "implied" modules because it makes the file
 format less verbose for the common use case though.
-
-*** Consider renaming model module to root module                     :story:
-
-It would be more sensible to call it root module rather than model
-module. We should also create a root module property in the model to
-make it easier to locate.
 
 *** Add importers and backends to =info= command line option          :story:
 
