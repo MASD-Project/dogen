@@ -18,28 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_REDUCER_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_REDUCER_HPP
+#ifndef DOGEN_QUILT_CPP_SERIALIZATION_FORMATTABLES_FACET_CONFIGURATION_SER_HPP
+#define DOGEN_QUILT_CPP_SERIALIZATION_FORMATTABLES_FACET_CONFIGURATION_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <string>
-#include <unordered_map>
-#include "dogen/quilt.cpp/types/formattables/formattable.hpp"
-#include "dogen/quilt.cpp/types/formattables/model.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen/quilt.cpp/types/formattables/facet_configuration.hpp"
 
-namespace dogen {
-namespace quilt {
-namespace cpp {
-namespace formattables {
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::quilt::cpp::formattables::facet_configuration)
+namespace boost {
+namespace serialization {
 
-class reducer {
-public:
-    void reduce(model& fm) const;
-};
+template<typename Archive>
+void save(Archive& ar, const dogen::quilt::cpp::formattables::facet_configuration& v, unsigned int version);
 
-} } } }
+template<typename Archive>
+void load(Archive& ar, dogen::quilt::cpp::formattables::facet_configuration& v, unsigned int version);
+
+} }
 
 #endif

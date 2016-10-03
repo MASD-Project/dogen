@@ -172,9 +172,9 @@ std::string assistant::get_product_name(const yarn::name& n) const {
 
 formattables::formatter_configuration assistant::
 obtain_formatter_configuration(const std::string& formatter_name) const {
-    const auto& ec(context_.element_configuration());
-    const auto i(ec.formatter_configuration().find(formatter_name));
-    if (i == context_.element_configuration().formatter_configuration().end()) {
+    const auto& ecfg(context_.element_configuration());
+    const auto i(ecfg.formatter_configurations().find(formatter_name));
+    if (i == ecfg.formatter_configurations().end()) {
         BOOST_LOG_SEV(lg, error) << formatter_configuration_missing
                                  << formatter_name;
         BOOST_THROW_EXCEPTION(formatting_error(formatter_configuration_missing +
@@ -200,13 +200,13 @@ std::list<std::string> assistant::make_namespaces(const yarn::name& n) const {
 
 bool assistant::
 is_formatter_enabled(const std::string& formatter_name) const {
-    const auto& fp(formatter_configuration_);
+    const auto& fmt_cfg(formatter_configuration_);
 
-    BOOST_LOG_SEV(lg, error) << "enabled fmts: "
-                             << fp.enabled_formatters();
+    BOOST_LOG_SEV(lg, error) << "Enabled formatters: "
+                             << fmt_cfg.enabled_formatters();
 
-    const auto i(fp.enabled_formatters().find(formatter_name));
-    return i != fp.enabled_formatters().end();
+    const auto i(fmt_cfg.enabled_formatters().find(formatter_name));
+    return i != fmt_cfg.enabled_formatters().end();
 }
 
 std::string assistant::
@@ -268,10 +268,15 @@ bool assistant::is_odb_enabled() const {
 
 dogen::formatters::cpp::scoped_boilerplate_formatter
 assistant::make_scoped_boilerplate_formatter() {
-    const auto& fp(formatter_configuration_);
-    const auto dc(context_.element_configuration().decoration_configuration());
-    return dogen::formatters::cpp::scoped_boilerplate_formatter(
-        stream(), dc, fp.inclusion_dependencies(), fp.header_guard());
+    const auto& ecfg(context_.element_configuration());
+    const auto& dcfg(ecfg.decoration_configuration());
+
+    const auto& fmt_cfg(formatter_configuration_);
+    const auto& deps(fmt_cfg.inclusion_dependencies());
+    const auto& hg(fmt_cfg.header_guard());
+
+    using dogen::formatters::cpp::scoped_boilerplate_formatter;
+    return scoped_boilerplate_formatter(stream(), dcfg, deps, hg);
 }
 
 dogen::formatters::cpp::scoped_namespace_formatter
@@ -434,30 +439,30 @@ is_streaming_enabled(const formattables::helper_configuration& hc) const {
 }
 
 void assistant::add_helper_methods() {
-    if (context_.element_configuration().helper_configuration().empty()) {
+    if (context_.element_configuration().helper_configurations().empty()) {
         // FIXME: supply target name as an argument and print its ID
         // FIXME: here. This needs to wait until we start using yarn
         // FIXME: types on all formatters.
         BOOST_LOG_SEV(lg, debug) << "No helper methods for: ";
     }
 
-    const auto& ec(context_.element_configuration());
-    for (const auto& hc : ec.helper_configuration()) {
-        BOOST_LOG_SEV(lg, debug) << "Helper properties: " << hc;
-        const auto helpers(get_helpers(hc));
+    const auto& ecfg(context_.element_configuration());
+    for (const auto& hlp_cfg : ecfg.helper_configurations()) {
+        BOOST_LOG_SEV(lg, debug) << "Helper configuration: " << hlp_cfg;
+        const auto helpers(get_helpers(hlp_cfg));
 
         /*
          * Check to see if the helper is enabled, given the system's
          * current configuration. If enabled, format it.
          */
         for (const auto& h : helpers) {
-            if (!h->is_enabled(*this, hc)) {
+            if (!h->is_enabled(*this, hlp_cfg)) {
                 BOOST_LOG_SEV(lg, debug) << "Helper is not enabled." << h->id();
                 continue;
             }
 
             BOOST_LOG_SEV(lg, debug) << "Formatting with helper: " << h->id();
-            h->format(*this, hc);
+            h->format(*this, hlp_cfg);
         }
     }
 }
@@ -509,10 +514,10 @@ streaming_for_type(const formattables::helper_descriptor& hd,
 
 bool assistant::
 requires_hashing_helper_method(const yarn::attribute& attr) const {
-    const auto& ec(context_.element_configuration());
-    for (const auto& hc : ec.helper_configuration()) {
+    const auto& ecfg(context_.element_configuration());
+    for (const auto& hlp_cfg : ecfg.helper_configurations()) {
         const auto ident(attr.parsed_type().identifiable());
-        const auto& desc(hc.current());
+        const auto& desc(hlp_cfg.current());
         if (ident != desc.name_tree_identifiable())
             continue;
 

@@ -381,7 +381,8 @@ void inclusion_expander::populate_inclusion_dependencies(
          * share the same element id so we can obtain a reference for
          * our container up front and populate it for each segment.
          */
-        auto& fmt_cfg(formattable.configuration().formatter_configuration());
+        auto& ecfg(formattable.element_configuration());
+        auto& fmt_cfg(ecfg.formatter_configurations());
         for (const auto& ptr : formattable.all_segments()) {
             const auto& e(*ptr);
 
@@ -431,11 +432,10 @@ void inclusion_expander::populate_inclusion_dependencies(
 }
 
 void inclusion_expander::expand(const dynamic::repository& drp,
-    const formatters::container& fc, const locator& l,
-    std::unordered_map<std::string, formattable>& formattables) const {
+    const formatters::container& fc, const locator& l, model& fm) const {
 
-    const auto idc(compute_inclusion_directives(drp, fc, l, formattables));
-    populate_inclusion_dependencies(fc, idc, formattables);
+    const auto idc(compute_inclusion_directives(drp, fc, l, fm.formattables()));
+    populate_inclusion_dependencies(fc, idc, fm.formattables());
 }
 
 } } } }

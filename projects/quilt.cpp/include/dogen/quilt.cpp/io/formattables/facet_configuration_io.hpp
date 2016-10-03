@@ -18,19 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_MODEL_FACTORY_FWD_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_MODEL_FACTORY_FWD_HPP
+#ifndef DOGEN_QUILT_CPP_IO_FORMATTABLES_FACET_CONFIGURATION_IO_HPP
+#define DOGEN_QUILT_CPP_IO_FORMATTABLES_FACET_CONFIGURATION_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
+
+#include <iosfwd>
+#include "dogen/quilt.cpp/types/formattables/facet_configuration.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
 
-class model_factory;
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::quilt::cpp::formattables::facet_configuration& v);
 
 } } } }
 

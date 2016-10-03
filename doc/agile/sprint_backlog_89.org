@@ -14,48 +14,51 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-03 Mon 16:05]
+#+CAPTION: Clock summary at [2016-10-03 Mon 22:29]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *48:08* |       |      | 100.0 |
+| *Total time*                                                                | *52:09* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 48:08   |       |      | 100.0 |
-| Active                                                                      |         | 48:08 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 4:37 |   9.6 |
+| Stories                                                                     | 52:09   |       |      | 100.0 |
+| Active                                                                      |         | 52:09 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 4:37 |   8.9 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:07 |   0.2 |
-| COMPLETED Generation of formattable is incorrect                            |         |       | 2:30 |   5.2 |
-| COMPLETED Visitor includes are incorrect                                    |         |       | 0:20 |   0.7 |
-| COMPLETED Add includer to quilt.cpp                                         |         |       | 1:46 |   3.7 |
-| COMPLETED Add reducer to quilt.cpp                                          |         |       | 0:22 |   0.8 |
-| COMPLETED Add new index to formtter container                               |         |       | 0:19 |   0.7 |
-| COMPLETED Add path expander to quilt.cpp                                    |         |       | 0:49 |   1.7 |
+| COMPLETED Generation of formattable is incorrect                            |         |       | 2:30 |   4.8 |
+| COMPLETED Visitor includes are incorrect                                    |         |       | 0:20 |   0.6 |
+| COMPLETED Add includer to quilt.cpp                                         |         |       | 1:46 |   3.4 |
+| COMPLETED Add reducer to quilt.cpp                                          |         |       | 0:22 |   0.7 |
+| COMPLETED Add new index to formtter container                               |         |       | 0:19 |   0.6 |
+| COMPLETED Add path expander to quilt.cpp                                    |         |       | 0:49 |   1.6 |
 | COMPLETED Add guard expander to quilt.cpp                                   |         |       | 0:27 |   0.9 |
-| COMPLETED Investigate borked travis build                                   |         |       | 0:37 |   1.3 |
-| COMPLETED Add decoration expander to quilt.cpp                              |         |       | 0:23 |   0.8 |
-| COMPLETED Add aspect expander to quilt.cpp                                  |         |       | 1:26 |   3.0 |
+| COMPLETED Investigate borked travis build                                   |         |       | 0:37 |   1.2 |
+| COMPLETED Add decoration expander to quilt.cpp                              |         |       | 0:23 |   0.7 |
+| COMPLETED Add aspect expander to quilt.cpp                                  |         |       | 1:26 |   2.7 |
 | COMPLETED Run tests that are passing on windows                             |         |       | 0:10 |   0.3 |
-| COMPLETED Add helper expander to quilt.cpp                                  |         |       | 1:26 |   3.0 |
-| COMPLETED Merge pre and post workflows                                      |         |       | 0:16 |   0.6 |
+| COMPLETED Add helper expander to quilt.cpp                                  |         |       | 1:26 |   2.7 |
+| COMPLETED Merge pre and post workflows                                      |         |       | 0:16 |   0.5 |
 | COMPLETED Fix bug in aspect and helper generation                           |         |       | 0:15 |   0.5 |
-| COMPLETED Investigate element annotation support                            |         |       | 2:05 |   4.3 |
+| COMPLETED Investigate element annotation support                            |         |       | 2:05 |   4.0 |
 | CANCELLED Add streaming settings expander                                   |         |       | 0:36 |   1.2 |
-| COMPLETED Create the formattables model                                     |         |       | 1:32 |   3.2 |
-| COMPLETED Hook formattables into formatters                                 |         |       | 3:58 |   8.2 |
-| COMPLETED Remove empty context                                              |         |       | 1:09 |   2.4 |
-| COMPLETED Review main classes in quilt.cpp                                  |         |       | 3:42 |   7.7 |
-| COMPLETED Clean up element segmentation                                     |         |       | 1:20 |   2.8 |
-| COMPLETED Get OSX build to compile code                                     |         |       | 7:05 |  14.7 |
-| COMPLETED Add a banner to readme                                            |         |       | 1:29 |   3.1 |
-| COMPLETED Remove formatter group                                            |         |       | 0:23 |   0.8 |
+| COMPLETED Create the formattables model                                     |         |       | 1:32 |   2.9 |
+| COMPLETED Hook formattables into formatters                                 |         |       | 3:58 |   7.6 |
+| COMPLETED Remove empty context                                              |         |       | 1:09 |   2.2 |
+| COMPLETED Review main classes in quilt.cpp                                  |         |       | 3:42 |   7.1 |
+| COMPLETED Clean up element segmentation                                     |         |       | 1:20 |   2.6 |
+| COMPLETED Get OSX build to compile code                                     |         |       | 7:05 |  13.6 |
+| COMPLETED Add a banner to readme                                            |         |       | 1:29 |   2.8 |
+| COMPLETED Remove formatter group                                            |         |       | 0:23 |   0.7 |
 | COMPLETED Add more types to =quilt::cpp= canned tests                       |         |       | 0:15 |   0.5 |
 | CANCELLED Remove formatter id                                               |         |       | 0:04 |   0.1 |
-| COMPLETED Analysis around terminology in formatting space                   |         |       | 3:24 |   7.1 |
-| COMPLETED Remove =original_model_name=                                      |         |       | 0:16 |   0.6 |
-| COMPLETED Refactor code around model origination                            |         |       | 4:08 |   8.6 |
+| COMPLETED Analysis around terminology in formatting space                   |         |       | 3:24 |   6.5 |
+| COMPLETED Remove =original_model_name=                                      |         |       | 0:16 |   0.5 |
+| COMPLETED Refactor code around model origination                            |         |       | 4:08 |   7.9 |
 | COMPLETED Remove formatter level facet folders                              |         |       | 0:06 |   0.2 |
-| STARTED Generate formatter interfaces                                       |         |       | 0:19 |   0.7 |
-| STARTED Handle registration of services properly                            |         |       | 0:27 |   0.9 |
+| COMPLETED Consider removing the "fake" primitive formatters                 |         |       | 0:01 |   0.0 |
+| STARTED Generate formatter interfaces                                       |         |       | 0:19 |   0.6 |
+| STARTED Handle registration of services properly                            |         |       | 2:13 |   4.3 |
+| STARTED Expander refactor in =quilt.cpp=                                    |         |       | 1:34 |   3.0 |
+| STARTED Create the notion of a formatter alias                              |         |       | 0:40 |   1.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -876,6 +879,76 @@ but its not clear why we need to duplicate it. In fact, it may even
 make more sense to have it at a higher level since its the same for
 all elements.
 
+*** COMPLETED Consider removing the "fake" primitive formatters       :story:
+    CLOSED: [2016-10-03 Mon 20:38]
+    CLOCK: [2016-10-03 Mon 20:37]--[2016-10-03 Mon 20:38] =>  0:01
+
+It is actually not possible to remove these formatters without major
+changes to the code. Instead, we introduce the notion of "pseudo"
+formatters which do not actually format (they will throw if attempts
+are made). Pseudo formatters make the conceptual model consistent and
+work well with aliases.
+
+*Previous Understanding*
+
+We need to support a strange use case: where the formatter does not
+exist for a given element type. For example, we do not have primitive
+formatters, but there are directives set in them:
+
+#+begin_src json-mode
+        {
+            "meta_type" : "primitive",
+            "simple_name" : "uint64_t",
+            "extensions" : {
+                "quilt.cpp.helper.family" : "Number",
+                "quilt.cpp.aspect.requires_manual_default_constructor" : true,
+                "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<cstdint>",
+                "quilt.cpp.hash.class_header_formatter.inclusion_required" : false,
+                "quilt.cpp.io.class_header_formatter.inclusion_required" : false,
+                "quilt.cpp.test_data.class_header_formatter.inclusion_required" : false,
+                "quilt.cpp.serialization.class_header_formatter.inclusion_required" : false,
+                "quilt.cpp.odb.class_header_formatter.inclusion_required" : false
+            }
+        },
+#+end_src
+
+The problem with this is that if we do not have a formatter for
+primitives, then we will not read the directives. In the past this
+worked because we were processing the cross-product of formatters and
+element sub-types, so the mistake of
+=quilt.cpp.types.class_header_formatter.inclusion_directive= was
+actually resulted in the correct result. But of course, we cannot
+replace class_header_formatter with the correct formatter name (as we
+don't have one). Nor does it sound good to have to hard-code the
+formatter name against the type. One way to solve this is with
+canonical formatters:
+
+- use the canonical formatter name in the declaration
+- ensure we always read directives for the canonical formatter from
+  the meta-data.
+- when processing, only set the canonical formatter if it was not
+  already set by meta-data.
+
+When testing the fix, we need to delete the mock formaters created for
+primitives.
+
+Actually this won't work. This is because we do not have a canonical
+formatter for these types. What we need instead is to read and store
+these fields by facet as well. This is a bit of a problem because we
+are now saying that some times we want to resolve a facet name into a
+canonical formatter, but some other times we want to resolve a facet
+name directly into a inclusion directive. We could do as follows:
+
+- first try as is;
+- if failed, try resolving name using facet to canonical.
+
+Basically, we need to extract enablement information from
+formattables. This container is then augmented with facet
+information. This is obtained in two ways:
+
+- using facet directives directly, if available;
+- mapping facet to canonical and using the canonical;
+
 *** STARTED Generate formatter interfaces                              :epic:
     CLOCK: [2016-09-30 Fri 10:58]--[2016-09-30 Fri 11:17] =>  0:19
 
@@ -1012,7 +1085,120 @@ Further thoughts:
   generates the file. Actually we probably can't have this in quilt
   because we still need formatter properties.
 
-*** STARTED Add the concept of hand-crafting                          :story:
+*** STARTED Handle registration of services properly                  :story:
+    CLOCK: [2016-10-03 Mon 20:01]--[2016-10-03 Mon 20:08] =>  0:07
+    CLOCK: [2016-10-03 Mon 17:55]--[2016-10-03 Mon 19:02] =>  1:07
+    CLOCK: [2016-10-03 Mon 16:07]--[2016-10-03 Mon 16:39] =>  0:32
+    CLOCK: [2016-10-03 Mon 15:44]--[2016-10-03 Mon 15:58] =>  0:14
+    CLOCK: [2016-10-03 Mon 15:31]--[2016-10-03 Mon 15:44] =>  0:13
+
+The only way to do this is to filter the list of leaves by enabled
+formatters. We need a container of enabled formatters by element id at
+the formattable model level.
+
+Problems:
+
+- we need to be able to cope with lookups by facet id, e.g. is odb
+  facet enabled? I don't necessarily have a qname or if I do, it may
+  not have all of the formatters required (e.g. cmakelists).
+- we need to be able to cope with lookups by canonical formatter name,
+  e.g. I have included name x in types but I don't know what formatter
+  it corresponds to.
+
+Tasks:
+
+- add a "facet dependencies" to formatter interface. Add a "enabled
+  facet dependencies" to formatter configuration. During enablement,
+  check to see if the facet dependency is enabled and if so, add it to
+  the container. During formatting, assistant supplies a "is facet
+  dependency enabled" method that queries the container. This is used
+  for odb in cmakelists.
+
+*Previous Understanding*
+
+We need a flag to determine if a class should contribute its leaves or
+not. By default, if it is hand-crafted it does not contribute
+leaves. This could (eventually) be overridable by users.
+
+*Previous Understanding*
+
+We need a way to determine if a type which is part of a generalisation
+should be added to the registrar or not. In =generalisation_indexer=:
+
+:     // FIXME: massive hack. must not add leafs for services.
+
+One way would be to check if serialisation is enabled for that type
+and if not, skip the type.
+
+Another way is to check if the type is generatable. If not, skip
+it. If we do it this way we need to wait for the generatable clean up.
+
+*** STARTED Expander refactor in =quilt.cpp=                          :story:
+    CLOCK: [2016-10-03 Mon 20:59]--[2016-10-03 Mon 22:29] =>  1:30
+    CLOCK: [2016-10-03 Mon 20:53]--[2016-10-03 Mon 20:57] =>  0:04
+
+We found some fundamental impedance mismatches whilst handling
+enablement, which mean we need to change the expanders once again.
+
+Tasks:
+
+- change model to map of formattable.
+- add facet configuration with enabled and directory.
+- make the expanders "model expanders" rather than formattable
+  expanders.
+- update the file path expander to also compute the facet directories
+- update the enablement expander to also compute: a) facet enabelment
+  b) enablement by id.
+- update assistant with a "is facet xxx enabled".
+
+Merged stories:
+
+*Add facet configuration to element configuration*
+
+At present we need:
+
+- facet folder
+- enabled
+
+We need to also add a "is facet enabled" method in assistant.
+
+*** STARTED Create the notion of a formatter alias                    :story:
+    CLOCK: [2016-10-03 Mon 20:39]--[2016-10-03 Mon 20:51] =>  0:12
+    CLOCK: [2016-10-03 Mon 20:09]--[2016-10-03 Mon 20:37] =>  0:28
+
+Tasks:
+
+- add a new trait for canonical formatters: facet + ".canonical";
+- create a map of canonical formatter to actual formatter during model
+  generation. Supply the map to the inclusion expander and from there
+  to the inclusion builder.
+- before we build the includes, first resolve it against the map; if
+  it resolves, use the formatter name from resolution, if not use the
+  original.
+- map is copied across to model and from model into context.
+- when formatting registrar, for each leaf ask if the formatter is
+  enabled. Supply the id of the leaf and the serialisation facet; use
+  the map to resolve the facet to a formatter name. If the id is not
+  enabled, do not add it to registrar.
+- in assistant, replace "is serialisation enabled" etc with calls to
+  the canonical formatter instead. Remove those that are not in
+  use. Make the name reflect the fact that we are looking at the
+  canonical formatter.
+
+*Previous Understanding*
+
+We did a bit of a hack with mapping the facet to the default
+formatter. What we really need is the notion of an alias. It still
+looks like a formatter name (for example "header_formatter") but it
+must be first resolved into an actual formatter. For this we need a
+type index.
+
+Other names:
+
+- canonical formatter
+- reference formatter
+
+*** Add the concept of hand-crafting                                  :story:
 
 An element can be marked with the stereotype of handcrafted. We then
 have several things to determine for this element:
@@ -1082,33 +1268,6 @@ Tasks:
   handcrafted. Add meta-data to allow overriding flag (or create story
   for it as we don't yet have a use case).
 - remove object_type
-
-*** STARTED Handle registration of services properly                  :story:
-    CLOCK: [2016-10-03 Mon 15:44]--[2016-10-03 Mon 15:58] =>  0:14
-    CLOCK: [2016-10-03 Mon 15:31]--[2016-10-03 Mon 15:44] =>  0:13
-
-The only way to do this is to filter the list of leaves by enabled
-formatters. We need a container of enabled formatters by element id at
-the formattable model level.
-
-*Previous Understanding*
-
-We need a flag to determine if a class should contribute its leaves or
-not. By default, if it is hand-crafted it does not contribute
-leaves. This could (eventually) be overridable by users.
-
-*Previous Understanding*
-
-We need a way to determine if a type which is part of a generalisation
-should be added to the registrar or not. In =generalisation_indexer=:
-
-:     // FIXME: massive hack. must not add leafs for services.
-
-One way would be to check if serialisation is enabled for that type
-and if not, skip the type.
-
-Another way is to check if the type is generatable. If not, skip
-it. If we do it this way we need to wait for the generatable clean up.
 
 *** Perform the archetype / artefact renames                          :story:
 
@@ -1312,66 +1471,6 @@ dispatching.
 At present we are creating the formatter repository in
 =quilt.cpp=. However it will be shared by all backends in the
 kernel. Move it up to =quilt= level and supply it as a paramter to the backends.
-
-*** Create the notion of a formatter alias                            :story:
-
-We did a bit of a hack with mapping the facet to the default
-formatter. What we really need is the notion of an alias. It still
-looks like a formatter name (for example "header_formatter") but it
-must be first resolved into an actual formatter. For this we need a
-type index.
-
-Other names:
-
-- canonical formatter
-- reference formatter
-
-We need to support a strange use case: where the formatter does not
-exist for a given element type. For example, we do not have primitive
-formatters, but there are directives set in them:
-
-#+begin_src json-mode
-        {
-            "meta_type" : "primitive",
-            "simple_name" : "uint64_t",
-            "extensions" : {
-                "quilt.cpp.helper.family" : "Number",
-                "quilt.cpp.aspect.requires_manual_default_constructor" : true,
-                "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<cstdint>",
-                "quilt.cpp.hash.class_header_formatter.inclusion_required" : false,
-                "quilt.cpp.io.class_header_formatter.inclusion_required" : false,
-                "quilt.cpp.test_data.class_header_formatter.inclusion_required" : false,
-                "quilt.cpp.serialization.class_header_formatter.inclusion_required" : false,
-                "quilt.cpp.odb.class_header_formatter.inclusion_required" : false
-            }
-        },
-#+end_src
-
-The problem with this is that if we do not have a formatter for
-primitives, then we will not read the directives. In the past this
-worked because we were processing the cross-product of formatters and
-element sub-types, so the mistake of
-=quilt.cpp.types.class_header_formatter.inclusion_directive= was
-actually resulted in the correct result. But of course, we cannot
-replace class_header_formatter with the correct formatter name (as we
-don't have one). Nor does it sound good to have to hard-code the
-formatter name against the type. One way to solve this is with
-canonical formatters:
-
-- use the canonical formatter name in the declaration
-- ensure we always read directives for the canonical formatter from
-  the meta-data.
-- when processing, only set the canonical formatter if it was not
-  already set by meta-data.
-
-When testing the fix, we need to delete the mock formaters created for
-primitives.
-
-As part of this work we need to review the need for
-=element_extension=, which seems unused at present. Actually it is
-used now in helper annotations repository factory, to ensure we don't
-generate annotations for the forward declarations and clobber the main
-object with it. This needs reviewing.
 
 *** Tidy-up of inclusion terminology                                  :story:
 

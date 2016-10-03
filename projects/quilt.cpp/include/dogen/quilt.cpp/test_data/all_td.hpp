@@ -38,6 +38,7 @@
 #include "dogen/quilt.cpp/test_data/annotations/helper_annotations_td.hpp"
 #include "dogen/quilt.cpp/test_data/annotations/opaque_annotations_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/helper_descriptor_td.hpp"
+#include "dogen/quilt.cpp/test_data/formattables/facet_configuration_td.hpp"
 #include "dogen/quilt.cpp/test_data/annotations/streaming_annotations_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/aspect_configuration_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/helper_configuration_td.hpp"

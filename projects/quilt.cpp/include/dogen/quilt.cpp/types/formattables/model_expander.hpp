@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_FORMATTABLES_FACTORY_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_FORMATTABLES_FACTORY_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_MODEL_EXPANDER_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_MODEL_EXPANDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -34,59 +34,45 @@
 #include "dogen/formatters/types/decoration_configuration_factory.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/formattables/locator.hpp"
-#include "dogen/quilt.cpp/types/formattables/formattable.hpp"
+#include "dogen/quilt.cpp/types/formattables/model.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
 
-class formattables_factory {
-public:
-    std::unordered_map<std::string, formattable> initial_transform(
-        const formatters::container& fc, const yarn::model& m) const;
-
+class model_expander {
+private:
     void expand_enablement(const dynamic::repository& drp,
         const dynamic::object& root_object, const formatters::container& fc,
-        std::unordered_map<std::string, formattable>& formattables) const;
+        model& fm) const;
 
     void expand_inclusion(
         const dynamic::repository& drp,
-        const formatters::container& fc, const locator& l,
-        std::unordered_map<std::string, formattable>& formattables) const;
+        const formatters::container& fc, const locator& l, model& fm) const;
 
     void expand_decoration(
         const dogen::formatters::decoration_configuration_factory& dcf,
-        std::unordered_map<std::string, formattable>& formattables) const;
+        model& fm) const;
 
-    void expand_aspects(const dynamic::repository& drp,
-        std::unordered_map<std::string, formattable>& formattables) const;
+    void expand_aspects(const dynamic::repository& drp, model& fm) const;
 
     void expand_helpers(const dynamic::repository& drp,
-        const formatters::container& fc,
-        std::unordered_map<std::string, formattable>& formattables) const;
+        const formatters::container& fc, model& fm) const;
 
-    void reduce(
-        std::unordered_map<std::string, formattable>& formattables) const;
-
-    typedef std::unordered_map<std::string, formattable>
-    formattables_by_id_type;
+    void reduce(model& fm) const;
 
     void expand_file_paths_and_guards(const formatters::container& fc,
-        const locator& l, formattables_by_id_type& formattables) const;
+        const locator& l, model& fm) const;
 
     void expand_opaque_configuration(const dynamic::repository& drp,
-        std::unordered_map<std::string, formattable>& formattables) const;
-
-    std::list<formattable> final_transform(
-        const std::unordered_map<std::string, formattable>& formattables) const;
+        model& fm) const;
 
 public:
-    std::list<formattable>
-    make(const dynamic::repository& drp, const dynamic::object& root_object,
+    void expand(const dynamic::repository& drp,
+        const dynamic::object& root_object,
         const dogen::formatters::decoration_configuration_factory& dcf,
-        const formatters::container& fc, const locator& l,
-        const yarn::model& m) const;
+        const formatters::container& fc, const locator& l, model& fm) const;
 };
 
 } } } }

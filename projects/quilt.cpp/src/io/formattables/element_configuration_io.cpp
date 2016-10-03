@@ -21,6 +21,7 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "dogen/formatters/io/decoration_configuration_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/facet_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/aspect_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/helper_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/element_configuration_io.hpp"
@@ -80,6 +81,24 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::quilt::c
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_configuration>& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace quilt {
 namespace cpp {
@@ -89,9 +108,10 @@ std::ostream& operator<<(std::ostream& s, const element_configuration& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::element_configuration\"" << ", "
       << "\"decoration_configuration\": " << v.decoration_configuration() << ", "
-      << "\"formatter_configuration\": " << v.formatter_configuration() << ", "
-      << "\"helper_configuration\": " << v.helper_configuration() << ", "
-      << "\"aspect_configuration\": " << v.aspect_configuration()
+      << "\"aspect_configuration\": " << v.aspect_configuration() << ", "
+      << "\"formatter_configurations\": " << v.formatter_configurations() << ", "
+      << "\"helper_configurations\": " << v.helper_configurations() << ", "
+      << "\"facet_configurations\": " << v.facet_configurations()
       << " }";
     return(s);
 }

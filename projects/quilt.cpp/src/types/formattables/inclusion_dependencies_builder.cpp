@@ -121,16 +121,17 @@ bool inclusion_dependencies_builder::is_enabled(const yarn::name& n,
     }
 
     const auto& formattable(i->second);
-    const auto& fc(formattable.configuration().formatter_configuration());
-    const auto j(fc.find(formatter_name));
-    if (j == fc.end()) {
+    const auto& ecfg(formattable.element_configuration());
+    const auto& fmt_cfgs(ecfg.formatter_configurations());
+    const auto j(fmt_cfgs.find(formatter_name));
+    if (j == fmt_cfgs.end()) {
         BOOST_LOG_SEV(lg, debug) << formatter_name_not_found << formatter_name
                                  << " element id: " << n.id();
 
         // FIXME: hack to cope with canonical formatter.
         BOOST_LOG_SEV(lg, debug) << "Trying by facet name.";
 
-        for (const auto pair : fc) {
+        for (const auto pair : fmt_cfgs) {
             if (boost::starts_with(pair.first, formatter_name)) {
                 BOOST_LOG_SEV(lg, debug) << "Using: " << pair.first
                                          << " status: "

@@ -18,28 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_REDUCER_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_REDUCER_HPP
+#include <ostream>
+#include <boost/io/ios_state.hpp>
+#include <boost/algorithm/string.hpp>
+#include "dogen/quilt.cpp/io/formattables/facet_configuration_io.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <string>
-#include <unordered_map>
-#include "dogen/quilt.cpp/types/formattables/formattable.hpp"
-#include "dogen/quilt.cpp/types/formattables/model.hpp"
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
 
-class reducer {
-public:
-    void reduce(model& fm) const;
-};
+std::ostream& operator<<(std::ostream& s, const facet_configuration& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
+    s << " { "
+      << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::facet_configuration\"" << ", "
+      << "\"enabled\": " << v.enabled() << ", "
+      << "\"directory\": " << "\"" << tidy_up_string(v.directory()) << "\""
+      << " }";
+    return(s);
+}
 
 } } } }
-
-#endif

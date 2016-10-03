@@ -110,7 +110,7 @@ void aspect_expander::populate_aspect_configuration(
         BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
 
         auto& formattable(pair.second);
-        auto& cfg(formattable.configuration());
+        auto& ecfg(formattable.element_configuration());
 
         /*
          * We only want to process the master segment; the
@@ -141,16 +141,15 @@ void aspect_expander::populate_aspect_configuration(
          */
         const auto& attr(ptr->local_attributes());
         const auto ac(compute_aspect_configuration(aa, attr));
-        cfg.aspect_configuration(ac);
+        ecfg.aspect_configuration(ac);
     }
 }
 
 void aspect_expander::
-expand(const dynamic::repository& drp,
-    std::unordered_map<std::string, formattable>& formattables) const {
-
-    const auto aspect_annotations(obtain_aspect_annotations(drp, formattables));
-    populate_aspect_configuration(aspect_annotations, formattables);
+expand(const dynamic::repository& drp, model& fm) const {
+    auto& fbls(fm.formattables());
+    const auto aspect_annotations(obtain_aspect_annotations(drp, fbls));
+    populate_aspect_configuration(aspect_annotations, fbls);
 }
 
 } } } }

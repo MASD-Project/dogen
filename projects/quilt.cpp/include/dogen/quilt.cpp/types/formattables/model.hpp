@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include <list>
 #include <string>
 #include <algorithm>
 #include <unordered_map>
@@ -49,7 +48,7 @@ public:
     model(
         const std::unordered_map<std::string, dogen::quilt::cpp::annotations::streaming_annotations>& streaming_annotations,
         const std::unordered_map<std::string, std::string>& facet_directory_for_facet,
-        const std::list<dogen::quilt::cpp::formattables::formattable>& formattables);
+        const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formattable>& formattables);
 
 private:
     template<typename Archive>
@@ -76,10 +75,10 @@ public:
     void facet_directory_for_facet(const std::unordered_map<std::string, std::string>&& v);
     /**@}*/
 
-    const std::list<dogen::quilt::cpp::formattables::formattable>& formattables() const;
-    std::list<dogen::quilt::cpp::formattables::formattable>& formattables();
-    void formattables(const std::list<dogen::quilt::cpp::formattables::formattable>& v);
-    void formattables(const std::list<dogen::quilt::cpp::formattables::formattable>&& v);
+    const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formattable>& formattables() const;
+    std::unordered_map<std::string, dogen::quilt::cpp::formattables::formattable>& formattables();
+    void formattables(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formattable>& v);
+    void formattables(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formattable>&& v);
 
 public:
     bool operator==(const model& rhs) const;
@@ -94,7 +93,7 @@ public:
 private:
     std::unordered_map<std::string, dogen::quilt::cpp::annotations::streaming_annotations> streaming_annotations_;
     std::unordered_map<std::string, std::string> facet_directory_for_facet_;
-    std::list<dogen::quilt::cpp::formattables::formattable> formattables_;
+    std::unordered_map<std::string, dogen::quilt::cpp::formattables::formattable> formattables_;
 };
 
 } } } }

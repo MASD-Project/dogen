@@ -38,22 +38,22 @@ namespace formattables {
 formattable::formattable(
     const boost::shared_ptr<dogen::yarn::element>& master_segment,
     const std::list<boost::shared_ptr<dogen::yarn::element> >& all_segments,
-    const dogen::quilt::cpp::formattables::element_configuration& configuration)
+    const dogen::quilt::cpp::formattables::element_configuration& element_configuration)
     : master_segment_(master_segment),
       all_segments_(all_segments),
-      configuration_(configuration) { }
+      element_configuration_(element_configuration) { }
 
 void formattable::swap(formattable& other) noexcept {
     using std::swap;
     swap(master_segment_, other.master_segment_);
     swap(all_segments_, other.all_segments_);
-    swap(configuration_, other.configuration_);
+    swap(element_configuration_, other.element_configuration_);
 }
 
 bool formattable::operator==(const formattable& rhs) const {
     return master_segment_ == rhs.master_segment_ &&
         all_segments_ == rhs.all_segments_ &&
-        configuration_ == rhs.configuration_;
+        element_configuration_ == rhs.element_configuration_;
 }
 
 formattable& formattable::operator=(formattable other) {
@@ -94,20 +94,20 @@ void formattable::all_segments(const std::list<boost::shared_ptr<dogen::yarn::el
     all_segments_ = std::move(v);
 }
 
-const dogen::quilt::cpp::formattables::element_configuration& formattable::configuration() const {
-    return configuration_;
+const dogen::quilt::cpp::formattables::element_configuration& formattable::element_configuration() const {
+    return element_configuration_;
 }
 
-dogen::quilt::cpp::formattables::element_configuration& formattable::configuration() {
-    return configuration_;
+dogen::quilt::cpp::formattables::element_configuration& formattable::element_configuration() {
+    return element_configuration_;
 }
 
-void formattable::configuration(const dogen::quilt::cpp::formattables::element_configuration& v) {
-    configuration_ = v;
+void formattable::element_configuration(const dogen::quilt::cpp::formattables::element_configuration& v) {
+    element_configuration_ = v;
 }
 
-void formattable::configuration(const dogen::quilt::cpp::formattables::element_configuration&& v) {
-    configuration_ = std::move(v);
+void formattable::element_configuration(const dogen::quilt::cpp::formattables::element_configuration&& v) {
+    element_configuration_ = std::move(v);
 }
 
 } } } }

@@ -31,6 +31,7 @@
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/formattables/locator.hpp"
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
+#include "dogen/quilt.cpp/types/formattables/model.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -43,7 +44,7 @@ private:
 
 public:
     void expand(const formatters::container& fc, const locator& l,
-        std::unordered_map<std::string, formattable>& formattables) const;
+        model& fm) const;
 };
 
 } } } }

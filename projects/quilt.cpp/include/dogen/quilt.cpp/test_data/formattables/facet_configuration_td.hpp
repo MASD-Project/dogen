@@ -18,26 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_REDUCER_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_REDUCER_HPP
+#ifndef DOGEN_QUILT_CPP_TEST_DATA_FORMATTABLES_FACET_CONFIGURATION_TD_HPP
+#define DOGEN_QUILT_CPP_TEST_DATA_FORMATTABLES_FACET_CONFIGURATION_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <string>
-#include <unordered_map>
-#include "dogen/quilt.cpp/types/formattables/formattable.hpp"
-#include "dogen/quilt.cpp/types/formattables/model.hpp"
+#include "dogen/quilt.cpp/types/formattables/facet_configuration.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
 
-class reducer {
+class facet_configuration_generator {
 public:
-    void reduce(model& fm) const;
+    facet_configuration_generator();
+
+public:
+    typedef dogen::quilt::cpp::formattables::facet_configuration result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
 };
 
 } } } }

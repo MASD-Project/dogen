@@ -34,6 +34,7 @@
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/formattables/helper_configuration.hpp"
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
+#include "dogen/quilt.cpp/types/formattables/model.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -86,7 +87,7 @@ private:
         std::list<helper_configuration>& configuration) const;
 
     std::list<helper_configuration>
-    compute_helper_configuration(const annotations& a,
+    compute_helper_configurations(const annotations& a,
         const facets_for_family_type& fff,
         const bool in_inheritance_relationship,
         const std::list<yarn::attribute>& attrs) const;
@@ -97,7 +98,7 @@ private:
 
 public:
     void expand(const dynamic::repository& drp, const formatters::container& fc,
-        std::unordered_map<std::string, formattable>& formattables) const;
+        model& fm) const;
 };
 
 } } } }

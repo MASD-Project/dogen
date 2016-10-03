@@ -28,8 +28,8 @@
 #include "dogen/quilt.cpp/io/annotations/streaming_annotations_io.hpp"
 #include "dogen/quilt.cpp/types/annotations/path_annotations_factory.hpp"
 #include "dogen/quilt.cpp/types/annotations/streaming_annotations_factory.hpp"
-#include "dogen/quilt.cpp/types/formattables/model_factory.hpp"
-#include "dogen/quilt.cpp/types/formattables/formattables_factory.hpp"
+#include "dogen/quilt.cpp/types/formattables/transformer.hpp"
+#include "dogen/quilt.cpp/types/formattables/model_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/workflow.hpp"
 
 namespace {
@@ -44,9 +44,8 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-std::unordered_map<std::string, annotations::path_annotations>
-workflow::create_path_annotations(const dynamic::repository& drp,
-    const dynamic::object& root_object,
+workflow::path_annotations_type workflow::make_path_annotations(
+    const dynamic::repository& drp, const dynamic::object& root_object,
     const formatters::container& fc) const {
 
     BOOST_LOG_SEV(lg, debug) << "Creating path annotations for root object.";
@@ -75,23 +74,56 @@ workflow::make_streaming_annotations(const dynamic::repository& drp,
     return r;
 }
 
+std::unordered_map<std::string, std::string> workflow::
+facet_directory_for_facet(const std::unordered_map<std::string,
+    annotations::path_annotations>& pa, const formatters::container& fc) const {
+
+    std::unordered_map<std::string, std::string> r;
+    for (const auto& f : fc.file_formatters()) {
+        const auto i(pa.find(f->ownership_hierarchy().formatter_name()));
+        if ( i != pa.end()) {
+            const auto fn(f->ownership_hierarchy().facet_name());
+            r[fn] = i->second.facet_directory();
+        }
+    }
+    BOOST_LOG_SEV(lg, debug) << "Facet directory for facet: " << r;
+    return r;
+}
+
+model workflow::make_model(const dynamic::repository& drp,
+    const path_annotations_type& pa, const formatters::container& fc,
+    const yarn::model& m) const {
+
+    model r;
+    transformer t;
+    r.formattables(t.transform(fc, m));
+
+    r.facet_directory_for_facet(facet_directory_for_facet(pa, fc));
+
+    const auto sa(make_streaming_annotations(drp, m));
+    r.streaming_annotations(sa);
+
+    return r;
+}
+
+void workflow::expand_model(
+    const dynamic::repository& drp, const dynamic::object& root_object,
+    const dogen::formatters::decoration_configuration_factory& dcf,
+    const formatters::container& fc, const locator& l, model& fm) const {
+    model_expander ex;
+    ex.expand(drp, root_object, dcf, fc, l, fm);
+}
+
 model workflow::execute(const options::cpp_options& opts,
     const dynamic::repository& drp, const dynamic::object& root_object,
     const dogen::formatters::decoration_configuration_factory& dcf,
     const formatters::container& fc,
     const yarn::model& m) const {
 
-    const auto pa(create_path_annotations(drp, root_object, fc));
+    const auto pa(make_path_annotations(drp, root_object, fc));
     const locator l(opts, m, pa);
-
-    formattables_factory ff;
-    const auto formattables(ff.make(drp, root_object, dcf, fc, l, m));
-
-    const auto sa(make_streaming_annotations(drp, m));
-
-    model_factory mf;
-    const auto r(mf.make(pa, sa, fc, formattables));
-
+    auto r(make_model(drp, pa, fc, m));
+    expand_model(drp, root_object, dcf, fc, l, r);
     return r;
 }
 

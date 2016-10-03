@@ -74,11 +74,11 @@ transform(const formatters::container& fc, const yarn::model& m) const {
         }
         BOOST_LOG_SEV(lg, debug) << "Element has formatters " << id;
 
-        auto& fmt_cfg(fbl.configuration().formatter_configuration());
+        auto& fmt_cfgs(fbl.element_configuration().formatter_configurations());
         for (const auto& fmt : j->second) {
             const auto fmtn(fmt->ownership_hierarchy().formatter_name());
             const auto pair(std::make_pair(fmtn, formatter_configuration()));
-            const auto ret(fmt_cfg.insert(pair));
+            const auto ret(fmt_cfgs.insert(pair));
             if (!ret.second) {
                 BOOST_LOG_SEV(lg, error) << duplicate_formatter << fmtn;
                 BOOST_THROW_EXCEPTION(
@@ -91,19 +91,6 @@ transform(const formatters::container& fc, const yarn::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Finished transforming yarn to formattables."
                              << "Size: " << r.size();
-    return r;
-}
-
-std::list<formattable> transformer::transform(
-    const std::unordered_map<std::string, formattable>& formattables) const {
-    BOOST_LOG_SEV(lg, debug) << "Transforming formattables to list. Size: "
-                             << formattables.size();
-    std::list<formattable> r;
-    for (const auto& pair : formattables)
-        r.push_front(pair.second);
-
-    BOOST_LOG_SEV(lg, debug) << "Finished transforming yarn to formattables."
-                             << " Size: " << r.size();
     return r;
 }
 

@@ -38,6 +38,7 @@
 #include "dogen/quilt.cpp/types/formattables/model.hpp"
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
 #include "dogen/quilt.cpp/types/formattables/locator.hpp"
+#include "dogen/quilt.cpp/types/formattables/model.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -53,14 +54,29 @@ private:
     /**
      * @brief Creates the path annotations.
      */
-    std::unordered_map<std::string, annotations::path_annotations>
-    create_path_annotations(const dynamic::repository& drp,
+    typedef std::unordered_map<std::string, annotations::path_annotations>
+    path_annotations_type;
+
+    path_annotations_type make_path_annotations(const dynamic::repository& drp,
         const dynamic::object& root_object,
         const formatters::container& fc) const;
 
     std::unordered_map<std::string, annotations::streaming_annotations>
     make_streaming_annotations(const dynamic::repository& drp,
         const yarn::model& m) const;
+
+    std::unordered_map<std::string, std::string>
+    facet_directory_for_facet(const path_annotations_type& pa,
+        const formatters::container& fc) const;
+
+    model make_model(const dynamic::repository& drp,
+        const path_annotations_type& pa, const formatters::container& fc,
+        const yarn::model& m) const;
+
+    void expand_model(
+        const dynamic::repository& drp, const dynamic::object& root_object,
+        const dogen::formatters::decoration_configuration_factory& dcf,
+        const formatters::container& fc, const locator& l, model& fm) const;
 
 public:
     model execute(const options::cpp_options& opts,

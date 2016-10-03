@@ -42,7 +42,7 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("master_segment", v.master_segment_);
     ar << make_nvp("all_segments", v.all_segments_);
-    ar << make_nvp("configuration", v.configuration_);
+    ar << make_nvp("element_configuration", v.element_configuration_);
 }
 
 template<typename Archive>
@@ -51,7 +51,7 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("master_segment", v.master_segment_);
     ar >> make_nvp("all_segments", v.all_segments_);
-    ar >> make_nvp("configuration", v.configuration_);
+    ar >> make_nvp("element_configuration", v.element_configuration_);
 }
 
 } }

@@ -58,11 +58,10 @@ to_header_guard(const boost::filesystem::path& p) const {
 
 
 void file_path_and_guard_expander::
-expand(const formatters::container& fc, const locator& l,
-    std::unordered_map<std::string, formattable>& formattables) const {
+expand(const formatters::container& fc, const locator& l, model& fm) const {
 
     const auto fffn(fc.file_formatters_by_formatter_name());
-    for (auto& pair : formattables) {
+    for (auto& pair : fm.formattables()) {
         const auto id(pair.first);
         auto& formattable(pair.second);
 
@@ -72,14 +71,14 @@ expand(const formatters::container& fc, const locator& l,
          */
         const auto& e(*formattable.master_segment());
         const auto n(e.name());
-        auto& cfg(formattable.configuration());
+        auto& ecfg(formattable.element_configuration());
 
         /*
          * Go thorough all the formatter configurations. For each,
          * find the associated formatter and ask it to generate the
          * full path for the file.
          */
-        for (auto& fmt_cfg_pair : cfg.formatter_configuration()) {
+        for (auto& fmt_cfg_pair : ecfg.formatter_configurations()) {
             const auto fmtn(fmt_cfg_pair.first);
             auto& fmt_cfg(fmt_cfg_pair.second);
 

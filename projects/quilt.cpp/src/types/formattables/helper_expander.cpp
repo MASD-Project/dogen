@@ -278,7 +278,7 @@ boost::optional<helper_descriptor> helper_expander::walk_name_tree(
     return r;
 }
 
-std::list<helper_configuration> helper_expander::compute_helper_configuration(
+std::list<helper_configuration> helper_expander::compute_helper_configurations(
     const annotations& a, const facets_for_family_type& fff,
     const bool in_inheritance_relationship,
     const std::list<yarn::attribute>& attrs) const {
@@ -318,7 +318,7 @@ void helper_expander::populate_helper_configuration(const annotations& a,
         BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
 
         auto& formattable(pair.second);
-        auto& cfg(formattable.configuration());
+        auto& ecfg(formattable.element_configuration());
 
         /*
          * We only want to process the master segment; the
@@ -349,17 +349,16 @@ void helper_expander::populate_helper_configuration(const annotations& a,
          */
         const auto& attrs(ptr->local_attributes());
         const auto iir(ptr->in_inheritance_relationship());
-        const auto hc(compute_helper_configuration(a, fff, iir, attrs));
-        cfg.helper_configuration(hc);
+        const auto hlp_cfgs(compute_helper_configurations(a, fff, iir, attrs));
+        ecfg.helper_configurations(hlp_cfgs);
     }
 }
 
 void helper_expander::expand(const dynamic::repository& drp,
-    const formatters::container& fc,
-    std::unordered_map<std::string, formattable>& formattables) const {
+    const formatters::container& fc, model& fm) const {
 
-    const auto a(obtain_annotations(drp, formattables));
-    populate_helper_configuration(a, fc, formattables);
+    const auto a(obtain_annotations(drp, fm.formattables()));
+    populate_helper_configuration(a, fc, fm.formattables());
 }
 
 } } } }

@@ -38,6 +38,7 @@
 #include "dogen/quilt.cpp/io/annotations/helper_annotations_io.hpp"
 #include "dogen/quilt.cpp/io/annotations/opaque_annotations_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/helper_descriptor_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/facet_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/annotations/streaming_annotations_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/aspect_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/helper_configuration_io.hpp"

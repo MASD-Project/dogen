@@ -34,6 +34,7 @@
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
 #include "dogen/quilt.cpp/types/formattables/aspect_configuration.hpp"
 #include "dogen/quilt.cpp/types/annotations/aspect_annotations.hpp"
+#include "dogen/quilt.cpp/types/formattables/model.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -62,8 +63,7 @@ private:
         std::unordered_map<std::string, formattable>& formattables) const;
 
 public:
-    void expand(const dynamic::repository& drp,
-        std::unordered_map<std::string, formattable>& formattables) const;
+    void expand(const dynamic::repository& drp, model& fm) const;
 
 };
 

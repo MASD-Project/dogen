@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include <list>
 #include <string>
 #include <unordered_map>
 #include "dogen/yarn/types/model.hpp"
@@ -48,12 +47,6 @@ public:
      */
     std::unordered_map<std::string, formattable>
     transform(const formatters::container& fc, const yarn::model& m) const;
-
-    /**
-     * @brief Given a map of formattables, flattens it into a list.
-     */
-    std::list<formattable> transform(
-        const std::unordered_map<std::string, formattable>& formattables) const;
 };
 
 } } } }

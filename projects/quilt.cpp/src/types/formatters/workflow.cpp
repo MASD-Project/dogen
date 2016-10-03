@@ -70,7 +70,7 @@ workflow::format(const formattables::model& fm, const yarn::element& e,
         return r;
     }
 
-    auto& fmt_cfgs(ec.formatter_configuration());
+    auto& fmt_cfgs(ec.formatter_configurations());
     const auto& fmts(i->second);
     for (const auto& fmt_ptr : fmts) {
         const auto& fmt(*fmt_ptr);
@@ -116,11 +116,12 @@ workflow::format(const formattables::model& fm, const yarn::element& e,
 std::forward_list<dogen::formatters::file>
 workflow::execute(const formattables::model& fm) const {
     std::forward_list<dogen::formatters::file> r;
-    for (const auto& formattable : fm.formattables()) {
-        const auto& fmt_cfg(formattable.configuration());
+    for (const auto& pair : fm.formattables()) {
+        const auto& formattable(pair.second);
+        const auto& ecfgs(formattable.element_configuration());
         for (const auto& segment : formattable.all_segments()) {
             const auto& e(*segment);
-            r.splice_after(r.before_begin(), format(fm, e, fmt_cfg));
+            r.splice_after(r.before_begin(), format(fm, e, ecfgs));
         }
     }
     return r;

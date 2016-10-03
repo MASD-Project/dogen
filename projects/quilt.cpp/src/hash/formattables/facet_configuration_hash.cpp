@@ -18,9 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/hash/element_hash.hpp"
-#include "dogen/quilt.cpp/hash/formattables/formattable_hash.hpp"
-#include "dogen/quilt.cpp/hash/formattables/element_configuration_hash.hpp"
+#include "dogen/quilt.cpp/hash/formattables/facet_configuration_hash.hpp"
 
 namespace {
 
@@ -30,20 +28,6 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_boost_shared_ptr_dogen_yarn_element(const boost::shared_ptr<dogen::yarn::element>& v) {
-    std::size_t seed(0);
-    combine(seed, *v);
-    return seed;
-}
-
-inline std::size_t hash_std_list_boost_shared_ptr_dogen_yarn_element(const std::list<boost::shared_ptr<dogen::yarn::element> >& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, hash_boost_shared_ptr_dogen_yarn_element(i));
-    }
-    return seed;
-}
-
 }
 
 namespace dogen {
@@ -51,12 +35,11 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-std::size_t formattable_hasher::hash(const formattable& v) {
+std::size_t facet_configuration_hasher::hash(const facet_configuration& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_boost_shared_ptr_dogen_yarn_element(v.master_segment()));
-    combine(seed, hash_std_list_boost_shared_ptr_dogen_yarn_element(v.all_segments()));
-    combine(seed, v.element_configuration());
+    combine(seed, v.enabled());
+    combine(seed, v.directory());
 
     return seed;
 }

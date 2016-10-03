@@ -18,40 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_MODEL_FACTORY_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_MODEL_FACTORY_HPP
+#ifndef DOGEN_QUILT_CPP_HASH_FORMATTABLES_FACET_CONFIGURATION_HASH_HPP
+#define DOGEN_QUILT_CPP_HASH_FORMATTABLES_FACET_CONFIGURATION_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <list>
-#include "dogen/dynamic/types/repository.hpp"
-#include "dogen/quilt.cpp/types/formatters/container.hpp"
-#include "dogen/quilt.cpp/types/formattables/model.hpp"
-#include "dogen/quilt.cpp/types/formattables/formattable.hpp"
+#include <functional>
+#include "dogen/quilt.cpp/types/formattables/facet_configuration.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
 
-class model_factory {
-private:
-    std::unordered_map<std::string, std::string>
-    facet_directory_for_facet(const std::unordered_map<std::string,
-        annotations::path_annotations>& pa,
-        const formatters::container& fc) const;
-
+struct facet_configuration_hasher {
 public:
-    model make(const std::unordered_map<std::string,
-        annotations::path_annotations>& pa,
-        const std::unordered_map<std::string,
-        annotations::streaming_annotations>& sa,
-        const formatters::container& fc,
-        const std::list<formattable>& formattables) const;
+    static std::size_t hash(const facet_configuration& v);
 };
 
 } } } }
 
+namespace std {
+
+template<>
+struct hash<dogen::quilt::cpp::formattables::facet_configuration> {
+public:
+    size_t operator()(const dogen::quilt::cpp::formattables::facet_configuration& v) const {
+        return dogen::quilt::cpp::formattables::facet_configuration_hasher::hash(v);
+    }
+};
+
+}
 #endif

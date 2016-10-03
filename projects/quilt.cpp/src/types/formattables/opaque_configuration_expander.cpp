@@ -140,22 +140,22 @@ void opaque_configuration_expander::populate_opaque_configuration(
         BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
 
         auto& formattable(pair.second);
-        auto& fmtt_cfgs(formattable.configuration().formatter_configuration());
+        auto& ecfg(formattable.element_configuration());
+        auto& fmt_cfgs(ecfg.formatter_configurations());
 
         /*
          * We only want to process the master segment; the
          * extensions can be ignored.
          */
         auto& segment(*formattable.master_segment());
-        populate_opaque_configuration(b, segment, fmtt_cfgs);
+        populate_opaque_configuration(b, segment, fmt_cfgs);
     }
 }
 
-void opaque_configuration_expander::expand(const dynamic::repository& drp,
-    std::unordered_map<std::string, formattable>& formattables) const {
-
+void opaque_configuration_expander::
+expand(const dynamic::repository& drp, model& fm) const {
     const auto b(create_opaque_annotations_builder(drp));
-    populate_opaque_configuration(b, formattables);
+    populate_opaque_configuration(b, fm.formattables());
 }
 
 } } } }

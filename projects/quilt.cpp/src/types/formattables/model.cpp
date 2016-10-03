@@ -28,7 +28,7 @@ namespace formattables {
 model::model(
     const std::unordered_map<std::string, dogen::quilt::cpp::annotations::streaming_annotations>& streaming_annotations,
     const std::unordered_map<std::string, std::string>& facet_directory_for_facet,
-    const std::list<dogen::quilt::cpp::formattables::formattable>& formattables)
+    const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formattable>& formattables)
     : streaming_annotations_(streaming_annotations),
       facet_directory_for_facet_(facet_directory_for_facet),
       formattables_(formattables) { }
@@ -84,19 +84,19 @@ void model::facet_directory_for_facet(const std::unordered_map<std::string, std:
     facet_directory_for_facet_ = std::move(v);
 }
 
-const std::list<dogen::quilt::cpp::formattables::formattable>& model::formattables() const {
+const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formattable>& model::formattables() const {
     return formattables_;
 }
 
-std::list<dogen::quilt::cpp::formattables::formattable>& model::formattables() {
+std::unordered_map<std::string, dogen::quilt::cpp::formattables::formattable>& model::formattables() {
     return formattables_;
 }
 
-void model::formattables(const std::list<dogen::quilt::cpp::formattables::formattable>& v) {
+void model::formattables(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formattable>& v) {
     formattables_ = v;
 }
 
-void model::formattables(const std::list<dogen::quilt::cpp::formattables::formattable>&& v) {
+void model::formattables(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formattable>&& v) {
     formattables_ = std::move(v);
 }
 

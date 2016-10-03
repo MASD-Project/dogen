@@ -245,7 +245,7 @@ void enablement_expander::compute_enablement(
     const local_enablement_configurations_type& lcs, formattable& fbl) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started computing enablement.";
-    for (auto& pair : fbl.configuration().formatter_configuration()) {
+    for (auto& pair : fbl.element_configuration().formatter_configurations()) {
         const auto fmtn(pair.first);
 
         /*
@@ -322,7 +322,7 @@ void enablement_expander::compute_enablement(
 
 void enablement_expander::expand(const dynamic::repository& drp,
     const dynamic::object& root_object, const formatters::container& fc,
-    std::unordered_map<std::string, formattable>& formattables) const {
+    model& fm) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started expanding enablement.";
     /*
@@ -352,7 +352,7 @@ void enablement_expander::expand(const dynamic::repository& drp,
 
     // FIXME: massive hack to compute enabled formatters
     std::unordered_set<std::string> enabled_formatters;
-    for (auto& pair : formattables) {
+    for (auto& pair : fm.formattables()) {
         const auto id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
 
@@ -390,8 +390,8 @@ void enablement_expander::expand(const dynamic::repository& drp,
         }
 
         // FIXME: massive hack to compute enabled formatters
-        const auto& cfg(formattable.configuration());
-        for (const auto& pair : cfg.formatter_configuration()) {
+        const auto& ecfg(formattable.element_configuration());
+        for (const auto& pair : ecfg.formatter_configurations()) {
             const auto& fmtn(pair.first);
             const auto& fmt_cfg(pair.second);
             if (fmt_cfg.enabled())
@@ -403,11 +403,11 @@ void enablement_expander::expand(const dynamic::repository& drp,
     BOOST_LOG_SEV(lg, debug) << "Enabled formatters: "
                              << enabled_formatters;
 
-    for (auto& pair : formattables) {
+    for (auto& pair : fm.formattables()) {
         auto& formattable(pair.second);
-        auto& cfg(formattable.configuration());
+        auto& ecfg(formattable.element_configuration());
 
-        for (auto& pair : cfg.formatter_configuration()) {
+        for (auto& pair : ecfg.formatter_configurations()) {
             auto& fmt_cfg(pair.second);
             fmt_cfg.enabled_formatters(enabled_formatters);
         }

@@ -63,7 +63,7 @@ std::ostream& operator<<(std::ostream& s, const formattable& v) {
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::formattable\"" << ", "
       << "\"master_segment\": " << v.master_segment() << ", "
       << "\"all_segments\": " << v.all_segments() << ", "
-      << "\"configuration\": " << v.configuration()
+      << "\"element_configuration\": " << v.element_configuration()
       << " }";
     return(s);
 }

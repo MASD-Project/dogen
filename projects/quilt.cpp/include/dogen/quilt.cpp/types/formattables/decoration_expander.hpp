@@ -29,6 +29,7 @@
 #include <unordered_map>
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
 #include "dogen/formatters/types/decoration_configuration_factory.hpp"
+#include "dogen/quilt.cpp/types/formattables/model.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -38,7 +39,7 @@ namespace formattables {
 class decoration_expander {
 public:
     void expand(const dogen::formatters::decoration_configuration_factory& dcf,
-        std::unordered_map<std::string, formattable>& formattables) const;
+        model& fm) const;
 };
 
 } } } }

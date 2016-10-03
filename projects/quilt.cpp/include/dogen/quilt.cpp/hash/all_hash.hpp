@@ -38,6 +38,7 @@
 #include "dogen/quilt.cpp/hash/annotations/helper_annotations_hash.hpp"
 #include "dogen/quilt.cpp/hash/annotations/opaque_annotations_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/helper_descriptor_hash.hpp"
+#include "dogen/quilt.cpp/hash/formattables/facet_configuration_hash.hpp"
 #include "dogen/quilt.cpp/hash/annotations/streaming_annotations_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/aspect_configuration_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/helper_configuration_hash.hpp"

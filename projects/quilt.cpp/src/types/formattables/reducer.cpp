@@ -34,13 +34,12 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-void reducer::reduce(
-    std::unordered_map<std::string, formattable>& formattables) const {
+void reducer::reduce(model& fm) const {
     std::unordered_map<std::string, formattable> reduced;
 
     BOOST_LOG_SEV(lg, debug) << "Starting reduction.";
-    BOOST_LOG_SEV(lg, debug) << "Original size: " << formattables.size();
-    for (const auto& pair : formattables) {
+    BOOST_LOG_SEV(lg, debug) << "Original size: " << fm.formattables().size();
+    for (const auto& pair : fm.formattables()) {
         const auto& formattable(pair.second);
         const auto& e(*formattable.master_segment());
         if (e.generation_type() == yarn::generation_types::no_generation)
@@ -49,8 +48,8 @@ void reducer::reduce(
         reduced.insert(pair);
     }
 
-    formattables.swap(reduced);
-    BOOST_LOG_SEV(lg, debug) << "Reduced size: " << formattables.size();
+    fm.formattables().swap(reduced);
+    BOOST_LOG_SEV(lg, debug) << "Reduced size: " << fm.formattables().size();
 }
 
 } } } }

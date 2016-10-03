@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/formatters/hash/decoration_configuration_hash.hpp"
+#include "dogen/quilt.cpp/hash/formattables/facet_configuration_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/aspect_configuration_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/helper_configuration_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/element_configuration_hash.hpp"
@@ -59,6 +60,15 @@ inline std::size_t hash_std_list_dogen_quilt_cpp_formattables_helper_configurati
     return seed;
 }
 
+inline std::size_t hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_facet_configuration(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_configuration>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, i.second);
+    }
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -70,9 +80,10 @@ std::size_t element_configuration_hasher::hash(const element_configuration& v) {
     std::size_t seed(0);
 
     combine(seed, hash_boost_optional_dogen_formatters_decoration_configuration(v.decoration_configuration()));
-    combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formatter_configuration(v.formatter_configuration()));
-    combine(seed, hash_std_list_dogen_quilt_cpp_formattables_helper_configuration(v.helper_configuration()));
     combine(seed, v.aspect_configuration());
+    combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formatter_configuration(v.formatter_configurations()));
+    combine(seed, hash_std_list_dogen_quilt_cpp_formattables_helper_configuration(v.helper_configurations()));
+    combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_facet_configuration(v.facet_configurations()));
 
     return seed;
 }

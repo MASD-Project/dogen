@@ -31,6 +31,7 @@
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include "dogen/formatters/types/decoration_configuration.hpp"
+#include "dogen/quilt.cpp/types/formattables/facet_configuration.hpp"
 #include "dogen/quilt.cpp/types/formattables/aspect_configuration.hpp"
 #include "dogen/quilt.cpp/types/formattables/helper_configuration.hpp"
 #include "dogen/quilt.cpp/types/formattables/formatter_configuration.hpp"
@@ -56,9 +57,10 @@ public:
 public:
     element_configuration(
         const boost::optional<dogen::formatters::decoration_configuration>& decoration_configuration,
-        const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration>& formatter_configuration,
-        const std::list<dogen::quilt::cpp::formattables::helper_configuration>& helper_configuration,
-        const dogen::quilt::cpp::formattables::aspect_configuration& aspect_configuration);
+        const dogen::quilt::cpp::formattables::aspect_configuration& aspect_configuration,
+        const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration>& formatter_configurations,
+        const std::list<dogen::quilt::cpp::formattables::helper_configuration>& helper_configurations,
+        const std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_configuration>& facet_configurations);
 
 private:
     template<typename Archive>
@@ -73,20 +75,25 @@ public:
     void decoration_configuration(const boost::optional<dogen::formatters::decoration_configuration>& v);
     void decoration_configuration(const boost::optional<dogen::formatters::decoration_configuration>&& v);
 
-    const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration>& formatter_configuration() const;
-    std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration>& formatter_configuration();
-    void formatter_configuration(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration>& v);
-    void formatter_configuration(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration>&& v);
-
-    const std::list<dogen::quilt::cpp::formattables::helper_configuration>& helper_configuration() const;
-    std::list<dogen::quilt::cpp::formattables::helper_configuration>& helper_configuration();
-    void helper_configuration(const std::list<dogen::quilt::cpp::formattables::helper_configuration>& v);
-    void helper_configuration(const std::list<dogen::quilt::cpp::formattables::helper_configuration>&& v);
-
     const dogen::quilt::cpp::formattables::aspect_configuration& aspect_configuration() const;
     dogen::quilt::cpp::formattables::aspect_configuration& aspect_configuration();
     void aspect_configuration(const dogen::quilt::cpp::formattables::aspect_configuration& v);
     void aspect_configuration(const dogen::quilt::cpp::formattables::aspect_configuration&& v);
+
+    const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration>& formatter_configurations() const;
+    std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration>& formatter_configurations();
+    void formatter_configurations(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration>& v);
+    void formatter_configurations(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration>&& v);
+
+    const std::list<dogen::quilt::cpp::formattables::helper_configuration>& helper_configurations() const;
+    std::list<dogen::quilt::cpp::formattables::helper_configuration>& helper_configurations();
+    void helper_configurations(const std::list<dogen::quilt::cpp::formattables::helper_configuration>& v);
+    void helper_configurations(const std::list<dogen::quilt::cpp::formattables::helper_configuration>&& v);
+
+    const std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_configuration>& facet_configurations() const;
+    std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_configuration>& facet_configurations();
+    void facet_configurations(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_configuration>& v);
+    void facet_configurations(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_configuration>&& v);
 
 public:
     bool operator==(const element_configuration& rhs) const;
@@ -100,9 +107,10 @@ public:
 
 private:
     boost::optional<dogen::formatters::decoration_configuration> decoration_configuration_;
-    std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration> formatter_configuration_;
-    std::list<dogen::quilt::cpp::formattables::helper_configuration> helper_configuration_;
     dogen::quilt::cpp::formattables::aspect_configuration aspect_configuration_;
+    std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration> formatter_configurations_;
+    std::list<dogen::quilt::cpp::formattables::helper_configuration> helper_configurations_;
+    std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_configuration> facet_configurations_;
 };
 
 } } } }

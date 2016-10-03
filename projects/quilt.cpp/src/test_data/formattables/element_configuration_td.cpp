@@ -20,6 +20,7 @@
  */
 #include <sstream>
 #include "dogen/formatters/test_data/decoration_configuration_td.hpp"
+#include "dogen/quilt.cpp/test_data/formattables/facet_configuration_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/aspect_configuration_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/helper_configuration_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/element_configuration_td.hpp"
@@ -37,6 +38,11 @@ create_boost_optional_dogen_formatters_decoration_configuration(unsigned int pos
     boost::optional<dogen::formatters::decoration_configuration> r(
         create_dogen_formatters_decoration_configuration(position));
     return r;
+}
+
+dogen::quilt::cpp::formattables::aspect_configuration
+create_dogen_quilt_cpp_formattables_aspect_configuration(const unsigned int position) {
+    return dogen::quilt::cpp::formattables::aspect_configuration_generator::create(position);
 }
 
 std::string create_std_string(const unsigned int position) {
@@ -71,9 +77,17 @@ std::list<dogen::quilt::cpp::formattables::helper_configuration> create_std_list
     return r;
 }
 
-dogen::quilt::cpp::formattables::aspect_configuration
-create_dogen_quilt_cpp_formattables_aspect_configuration(const unsigned int position) {
-    return dogen::quilt::cpp::formattables::aspect_configuration_generator::create(position);
+dogen::quilt::cpp::formattables::facet_configuration
+create_dogen_quilt_cpp_formattables_facet_configuration(const unsigned int position) {
+    return dogen::quilt::cpp::formattables::facet_configuration_generator::create(position);
+}
+
+std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_configuration> create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_facet_configuration(unsigned int position) {
+    std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_configuration> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_quilt_cpp_formattables_facet_configuration(position + i)));
+    }
+    return r;
 }
 
 }
@@ -88,9 +102,10 @@ element_configuration_generator::element_configuration_generator() : position_(0
 void element_configuration_generator::
 populate(const unsigned int position, result_type& v) {
     v.decoration_configuration(create_boost_optional_dogen_formatters_decoration_configuration(position + 0));
-    v.formatter_configuration(create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formatter_configuration(position + 1));
-    v.helper_configuration(create_std_list_dogen_quilt_cpp_formattables_helper_configuration(position + 2));
-    v.aspect_configuration(create_dogen_quilt_cpp_formattables_aspect_configuration(position + 3));
+    v.aspect_configuration(create_dogen_quilt_cpp_formattables_aspect_configuration(position + 1));
+    v.formatter_configurations(create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formatter_configuration(position + 2));
+    v.helper_configurations(create_std_list_dogen_quilt_cpp_formattables_helper_configuration(position + 3));
+    v.facet_configurations(create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_facet_configuration(position + 4));
 }
 
 element_configuration_generator::result_type

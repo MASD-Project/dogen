@@ -41,21 +41,21 @@ namespace formattables {
 
 void decoration_expander::
 expand(const dogen::formatters::decoration_configuration_factory& dcf,
-    std::unordered_map<std::string, formattable>& formattables) const {
+    model& fm) const {
 
     const auto dc(dcf.make(cpp_modeline_name));
-    for (auto& pair : formattables) {
+    for (auto& pair : fm.formattables()) {
         const auto id(pair.first);
         auto& formattable(pair.second);
-        auto& cfg(formattable.configuration());
+        auto& ecfg(formattable.element_configuration());
 
         // FIXME: hack
         if (boost::contains(id, "CMakeLists"))
-            cfg.decoration_configuration(dcf.make(cmake_modeline_name));
+            ecfg.decoration_configuration(dcf.make(cmake_modeline_name));
         else if (boost::contains(id, "options.odb"))
-            cfg.decoration_configuration(dcf.make(odb_modeline_name));
+            ecfg.decoration_configuration(dcf.make(odb_modeline_name));
         else
-            cfg.decoration_configuration(dc);
+            ecfg.decoration_configuration(dc);
     }
 }
 

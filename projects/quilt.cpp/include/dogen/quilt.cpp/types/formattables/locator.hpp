@@ -45,7 +45,8 @@ namespace formattables {
 class locator {
 public:
     locator(const options::cpp_options& opts, const yarn::model& m,
-        const std::unordered_map<std::string, annotations::path_annotations>& ps);
+        const std::unordered_map<std::string,
+        annotations::path_annotations>& ps);
 
 private:
     /**

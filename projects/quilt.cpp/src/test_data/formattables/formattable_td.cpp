@@ -62,7 +62,7 @@ void formattable_generator::
 populate(const unsigned int position, result_type& v) {
     v.master_segment(create_boost_shared_ptr_dogen_yarn_element(position + 0));
     v.all_segments(create_std_list_boost_shared_ptr_dogen_yarn_element(position + 1));
-    v.configuration(create_dogen_quilt_cpp_formattables_element_configuration(position + 2));
+    v.element_configuration(create_dogen_quilt_cpp_formattables_element_configuration(position + 2));
 }
 
 formattable_generator::result_type
