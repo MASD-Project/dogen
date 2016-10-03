@@ -19281,17 +19281,17 @@ space.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-186.784,25.9502"/>
+        <dia:point val="-186.779,25.9502"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-187.536,20.25;-169.8,26.8"/>
+        <dia:rectangle val="-187.53,20.25;-169.8,26.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-186.784,25.9502"/>
-        <dia:point val="-186.801,21"/>
+        <dia:point val="-186.779,25.9502"/>
+        <dia:point val="-186.784,21"/>
         <dia:point val="-170,21"/>
         <dia:point val="-170,26"/>
       </dia:attribute>
@@ -23583,7 +23583,7 @@ that belong to the yarn model.#</dia:string>
         <dia:point val="-113.273,-14.9068"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-113.323,-14.9568;-90.7777,-11.2568"/>
+        <dia:rectangle val="-113.323,-14.9568;-90.778,-11.2568"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-113.273,-14.9068"/>
@@ -23778,16 +23778,16 @@ that belong to the yarn model.#</dia:string>
         <dia:point val="-76,-11.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-90.8273,-13.1568;-75.25,-9.9"/>
+        <dia:rectangle val="-90.8277,-13.8568;-75.25,-10.65"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
         <dia:point val="-76,-11.5"/>
-        <dia:point val="-83.7387,-11.5"/>
-        <dia:point val="-83.7387,-13.1068"/>
-        <dia:point val="-90.7773,-13.1068"/>
+        <dia:point val="-83.7388,-11.5"/>
+        <dia:point val="-83.7388,-13.1068"/>
+        <dia:point val="-90.7777,-13.1068"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="0"/>
