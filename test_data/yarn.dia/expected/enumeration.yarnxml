@@ -89,7 +89,7 @@
 						<identifiable>enumeration_pkg1</identifiable>
 					</name>
 					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
+					<origin_type>4</origin_type>
 					<contained_by class_id="24" tracking_level="0" version="0">
 						<initialized>0</initialized>
 					</contained_by>
@@ -226,7 +226,7 @@
 						<identifiable>enumeration_pkg1_shape_types</identifiable>
 					</name>
 					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
+					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
 					</contained_by>
@@ -333,7 +333,7 @@
 						<identifiable>enumeration_colour_types</identifiable>
 					</name>
 					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
+					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
 					</contained_by>
@@ -443,7 +443,7 @@ this is a long comment
 						<identifiable>enumeration_book_types</identifiable>
 					</name>
 					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
+					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
 					</contained_by>
@@ -547,7 +547,7 @@ this is a long comment
 						<identifiable>enumeration_a_class</identifiable>
 					</name>
 					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
+					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
 					</contained_by>

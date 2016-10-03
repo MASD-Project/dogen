@@ -61,5 +61,18 @@
         "value_type" : "text",
         "definition_type" : "instance",
         "scope" : "entity"
+    },
+    {
+        "name" : {
+            "simple" : "is_proxy_model",
+            "qualified" : "yarn.is_proxy_model"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "yarn"
+        },
+        "value_type" : "boolean",
+        "definition_type" : "instance",
+        "scope" : "root_module",
+        "default_value" : false
     }
 ]

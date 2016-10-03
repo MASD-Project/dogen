@@ -58,6 +58,12 @@ private:
     void expand_modules(intermediate_model& im) const;
 
     /**
+     * @brief Performs the expansion of the origin type.
+     */
+    void expand_origin(const dynamic::repository& drp,
+        intermediate_model& im) const;
+
+    /**
      * @brief Performs a annotations expansion on the model.
      */
     void expand_annotations(const dynamic::repository& drp,

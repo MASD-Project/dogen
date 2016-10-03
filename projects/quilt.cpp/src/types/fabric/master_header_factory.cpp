@@ -103,6 +103,7 @@ generator::create_master_header(const yarn::name& model_name) {
     auto r(boost::make_shared<master_header>());
     yarn::name_factory f;
     r->name(f.build_element_in_model(model_name, master_header_name));
+    r->origin_type(yarn::origin_types::target);
     return r;
 }
 

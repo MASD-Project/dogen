@@ -89,7 +89,7 @@
 						<identifiable>std_model_pkg1</identifiable>
 					</name>
 					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
+					<origin_type>4</origin_type>
 					<contained_by class_id="24" tracking_level="0" version="0">
 						<initialized>0</initialized>
 					</contained_by>
@@ -230,7 +230,7 @@
 						<identifiable>std_model_primitives</identifiable>
 					</name>
 					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
+					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
 					</contained_by>
@@ -996,7 +996,7 @@
 						<identifiable>std_model_pkg1_class_c</identifiable>
 					</name>
 					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
+					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
 					</contained_by>
@@ -1283,7 +1283,7 @@
 						<identifiable>std_model_base</identifiable>
 					</name>
 					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
+					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
 					</contained_by>
@@ -1488,7 +1488,7 @@
 						<identifiable>std_model_class_j</identifiable>
 					</name>
 					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
+					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
 					</contained_by>
@@ -1853,7 +1853,7 @@
 						<identifiable>std_model_class_b</identifiable>
 					</name>
 					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
+					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
 					</contained_by>
@@ -2458,7 +2458,7 @@
 						<identifiable>std_model_class_d</identifiable>
 					</name>
 					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
+					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
 					</contained_by>
@@ -3063,7 +3063,7 @@
 						<identifiable>std_model_class_a</identifiable>
 					</name>
 					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
+					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
 					</contained_by>
@@ -3349,7 +3349,7 @@
 						<identifiable>std_model_class_e</identifiable>
 					</name>
 					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
+					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
 					</contained_by>
@@ -3954,7 +3954,7 @@
 						<identifiable>std_model_class_h</identifiable>
 					</name>
 					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
+					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
 					</contained_by>
@@ -4239,7 +4239,7 @@
 						<identifiable>std_model_class_f</identifiable>
 					</name>
 					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
+					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
 					</contained_by>
@@ -4604,7 +4604,7 @@
 						<identifiable>std_model_some_service</identifiable>
 					</name>
 					<generation_type>2</generation_type>
-					<origin_type>1</origin_type>
+					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
 					</contained_by>
@@ -5049,7 +5049,7 @@
 						<identifiable>std_model_class_g</identifiable>
 					</name>
 					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
+					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
 					</contained_by>
@@ -5414,7 +5414,7 @@
 						<identifiable>std_model_derived</identifiable>
 					</name>
 					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
+					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
 					</contained_by>

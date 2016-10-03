@@ -1,7 +1,9 @@
 {
     "model_name" : "boost",
     "documentation" : "Boost Library types.",
-    "origin" : "system",
+    "extensions" : {
+        "yarn.is_proxy_model" : true
+    },
     "elements" : [
         {
             "meta_type" : "object",

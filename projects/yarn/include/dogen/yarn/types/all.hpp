@@ -67,6 +67,7 @@
 #include "dogen/yarn/types/element_visitor.hpp"
 #include "dogen/yarn/types/expansion_error.hpp"
 #include "dogen/yarn/types/injection_error.hpp"
+#include "dogen/yarn/types/origin_expander.hpp"
 #include "dogen/yarn/types/persister_error.hpp"
 #include "dogen/yarn/types/registrar_error.hpp"
 #include "dogen/yarn/types/concept_expander.hpp"

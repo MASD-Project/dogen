@@ -102,7 +102,7 @@
 						<identifiable>comments_package_package2</identifiable>
 					</name>
 					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
+					<origin_type>4</origin_type>
 					<contained_by class_id="28" tracking_level="0" version="0">
 						<initialized>0</initialized>
 					</contained_by>
@@ -169,7 +169,7 @@
 						<identifiable>comments_package</identifiable>
 					</name>
 					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
+					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
 					</contained_by>
@@ -317,7 +317,7 @@ third line with &quot;quote&quot;
 						<identifiable>comments_multi_line</identifiable>
 					</name>
 					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
+					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
 					</contained_by>
@@ -443,7 +443,7 @@ third line with &quot;quote&quot;
 						<identifiable>comments_one_line</identifiable>
 					</name>
 					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
+					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
 					</contained_by>

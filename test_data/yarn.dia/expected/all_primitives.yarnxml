@@ -175,7 +175,7 @@
 						<identifiable>all_primitives_a_class</identifiable>
 					</name>
 					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
+					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
 					</contained_by>

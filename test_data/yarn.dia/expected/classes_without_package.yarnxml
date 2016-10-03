@@ -175,7 +175,7 @@
 						<identifiable>classes_without_package_class_5</identifiable>
 					</name>
 					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
+					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
 					</contained_by>
@@ -380,7 +380,7 @@
 						<identifiable>classes_without_package_class_1</identifiable>
 					</name>
 					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
+					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
 					</contained_by>
@@ -585,7 +585,7 @@
 						<identifiable>classes_without_package_class_2</identifiable>
 					</name>
 					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
+					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
 					</contained_by>
@@ -790,7 +790,7 @@
 						<identifiable>classes_without_package_class_4</identifiable>
 					</name>
 					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
+					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
 					</contained_by>
@@ -995,7 +995,7 @@
 						<identifiable>classes_without_package_class_3</identifiable>
 					</name>
 					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
+					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
 					</contained_by>

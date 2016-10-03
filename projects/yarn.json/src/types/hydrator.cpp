@@ -46,9 +46,6 @@ const std::string bool_true("true");
 const std::string bool_false("false");
 
 const std::string documentation_key("documentation");
-const std::string origin_key("origin");
-const std::string origin_system_value("system");
-const std::string origin_user_value("user");
 const std::string elements_key("elements");
 
 const std::string meta_type_key("meta_type");
@@ -68,7 +65,6 @@ const std::string invalid_json_file("Failed to parse JSON file");
 const std::string invalid_option_in_json_file(
     "Failed to read option in JSON file: ");
 const std::string invalid_path("Failed to find JSON path: ");
-const std::string invalid_origin("Invalid value for origin: ");
 const std::string invalid_meta_type("Invalid value for meta type: ");
 const std::string model_has_no_types("Did not find any elements in model");
 const std::string missing_module("Could not find module: ");
@@ -138,7 +134,7 @@ void hydrator::read_element(const boost::property_tree::ptree& pt,
     const auto lambda([&](yarn::element& e) {
             BOOST_LOG_SEV(lg, debug) << "Processing element: " << n.id();
             e.name(n);
-            e.origin_type(m.origin_type());
+            e.origin_type(origin_types::not_yet_determined);
             e.generation_type(m.generation_type());
             e.in_global_module(in_global_module);
 
@@ -184,21 +180,10 @@ yarn::intermediate_model hydrator::read_stream(
     r.name(nf.build_model_name(model_name_value));
     BOOST_LOG_SEV(lg, debug) << "Processing model: " << r.name().id();
 
-    // FIXME: hack for now
-    if (is_target)
-        r.origin_type(yarn::origin_types::target);
-    else {
-        const auto origin_value(pt.get<std::string>(origin_key));
-        if (origin_value == origin_system_value)
-            r.origin_type(yarn::origin_types::proxy_reference);
-        else if (origin_value == origin_user_value)
-            r.origin_type(yarn::origin_types::proxy_reference);
-        else {
-            BOOST_LOG_SEV(lg, error) << invalid_origin << origin_value;
-            BOOST_THROW_EXCEPTION(hydration_error(
-                    invalid_origin + origin_value));
-        }
-    }
+    const auto tg(origin_types::target);
+    const auto nyd(origin_types::not_yet_determined);
+    const auto ot(is_target ? tg : nyd);
+    r.origin_type(ot);
 
     yarn::module m;
     const auto scope(dynamic::scope_types::root_module);
@@ -209,7 +194,7 @@ yarn::intermediate_model hydrator::read_stream(
         m.documentation(*documentation);
 
     m.name(r.name());
-    m.origin_type(r.origin_type());
+    m.origin_type(origin_types::not_yet_determined);
     m.generation_type(r.generation_type());
     r.modules().insert(std::make_pair(m.name().id(), m));
 

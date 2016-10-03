@@ -60,7 +60,7 @@ public:
     const std::unordered_map<std::string, std::list<std::string>>&
     result();
 
-public:
+private:
     std::unordered_map<std::string, std::list<std::string>>
         distinct_internal_moduless_;
 };

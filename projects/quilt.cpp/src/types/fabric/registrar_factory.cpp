@@ -55,6 +55,7 @@ registrar_factory::build(const yarn::intermediate_model& im) const {
     std::list<boost::shared_ptr<yarn::element>> r;
 
     auto rg(build(im.name()));
+    rg->origin_type(im.origin_type());
     rg->generation_type(yarn::generation_types::full_generation);
     for (const auto& l : im.leaves())
         rg->leaves().push_back(l);
@@ -73,6 +74,7 @@ registrar_factory::build(const yarn::intermediate_model& im) const {
         rg->model_dependencies().push_back(ref);
 
         auto ref_rg(build(ref));
+        ref_rg->origin_type(origin_type);
         ref_rg->generation_type(yarn::generation_types::no_generation);
         r.push_back(ref_rg);
         rg->registrar_dependencies().push_back(ref_rg->name());

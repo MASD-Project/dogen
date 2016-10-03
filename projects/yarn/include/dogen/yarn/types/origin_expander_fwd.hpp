@@ -18,32 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TRAITS_FWD_HPP
-#define DOGEN_YARN_TYPES_TRAITS_FWD_HPP
+#ifndef DOGEN_YARN_TYPES_ORIGIN_EXPANDER_FWD_HPP
+#define DOGEN_YARN_TYPES_ORIGIN_EXPANDER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <string>
-
 namespace dogen {
 namespace yarn {
 
-struct traits {
-    static std::string is_proxy_model();
-
-    struct type_parameters {
-        static std::string variable_number_of_parameters();
-        static std::string type_parameters_count();
-        static std::string type_parameters_always_in_heap();
-    };
-
-    struct generalization {
-        static std::string is_final();
-        static std::string parent();
-    };
-};
+class origin_expander;
 
 } }
 

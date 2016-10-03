@@ -1,7 +1,9 @@
 {
     "model_name" : "hardware",
     "documentation" : "Hardware-provided primitive types.",
-    "origin" : "system",
+    "extensions" : {
+        "yarn.is_proxy_model" : true
+    },
     "elements" : [
         {
             "meta_type" : "primitive",

@@ -182,7 +182,7 @@ void transformer::update_element(const processed_object& o, const profile& p,
     yarn::element& e) {
 
     e.generation_type(generation_type(p));
-    e.origin_type(context_.model().origin_type());
+    e.origin_type(origin_types::not_yet_determined);
 
     const auto package_id(o.child_node_id());
     bool is_in_package(!package_id.empty());

@@ -64,13 +64,11 @@ const std::string hardware_model_name("hardware");
 
 const std::string missing_model_name("model_name");
 const std::string missing_type_name("simple_name");
-const std::string missing_origin("origin");
 const std::string missing_elements("elements");
 
 const std::string trivial_model(R"({
     "model_name" : "a_model",
     "documentation" : "a_doc",
-    "origin" : "system",
     "elements" : [
         {
             "meta_type" : "object",
@@ -84,7 +82,6 @@ const std::string trivial_model(R"({
 const std::string tagged_model(R"({
     "model_name" : "a_model",
     "documentation" : "a_doc",
-    "origin" : "system",
     "extensions" : {
             "model_key" : "model_value",
             "some_key" : "some_value"
@@ -105,7 +102,6 @@ const std::string tagged_model(R"({
 
 const std::string no_documentation_model(R"({
     "model_name" : "a_model",
-    "origin" : "system",
     "elements" : [
         {
             "meta_type" : "object",
@@ -116,7 +112,6 @@ const std::string no_documentation_model(R"({
 )");
 
 const std::string no_name_model(R"({
-    "origin" : "system",
     "elements" : [
         {
             "meta_type" : "object",
@@ -128,7 +123,6 @@ const std::string no_name_model(R"({
 
 const std::string no_type_name_model(R"({
     "model_name" : "a_model",
-    "origin" : "system",
     "elements" : [
         {
             "meta_type" : "object"
@@ -137,33 +131,19 @@ const std::string no_type_name_model(R"({
   }
 )");
 
-const std::string no_origin_model(R"({
-    "model_name" : "a_model",
-    "elements" : [
-        {
-            "meta_type" : "object",
-            "simple_name" : "a_type"
-        }
-     ]
-  }
-)");
-
 const std::string no_elements_model(R"({
-    "model_name" : "a_model",
-    "origin" : "system"
+    "model_name" : "a_model"
   }
 )");
 
 const std::string empty_elements_model(R"({
     "model_name" : "a_model",
-    "origin" : "system",
     "elements" : [ ]
   }
 )");
 
 const std::string internal_modules_model(R"({
     "model_name" : "a_model",
-    "origin" : "system",
     "elements" : [
         {
             "meta_type" : "object",
@@ -336,12 +316,6 @@ BOOST_AUTO_TEST_CASE(no_type_name_model_throws) {
     BOOST_CHECK_EXCEPTION(hydrate(no_type_name_model), hydration_error, c);
 }
 
-BOOST_AUTO_TEST_CASE(no_origin_model_throws) {
-    SETUP_TEST_LOG_SOURCE("no_origin_model_throws");
-    contains_checker<hydration_error> c(missing_origin);
-    BOOST_CHECK_EXCEPTION(hydrate(no_origin_model), hydration_error, c);
-}
-
 BOOST_AUTO_TEST_CASE(no_elements_model_throws) {
     SETUP_TEST_LOG_SOURCE("no_elements_model_throws");
     contains_checker<hydration_error> c(missing_elements);
@@ -394,9 +368,6 @@ BOOST_AUTO_TEST_CASE(cpp_std_model_hydrates_into_expected_model) {
     BOOST_CHECK(m.name().location().model_modules().front() ==
         cpp_std_model_name);
 
-    const auto pr(dogen::yarn::origin_types::proxy_reference);
-    BOOST_CHECK(m.origin_type() == pr);
-
     const auto& objects(m.objects());
     BOOST_CHECK(!objects.empty());
     for (const auto& pair : objects) {
@@ -407,7 +378,6 @@ BOOST_AUTO_TEST_CASE(cpp_std_model_hydrates_into_expected_model) {
         BOOST_CHECK(n.location().model_modules().front() ==
             cpp_std_model_name);
         BOOST_CHECK(n.location().external_modules().empty());
-        BOOST_CHECK(o.origin_type() == pr);
 
         using dogen::yarn::object_types;
         const auto ot(o.object_type());
@@ -449,8 +419,6 @@ BOOST_AUTO_TEST_CASE(cpp_boost_model_hydrates_into_expected_model) {
     BOOST_CHECK(m.name().location().model_modules().front() ==
         cpp_boost_model_name);
 
-    BOOST_CHECK(m.origin_type() == dogen::yarn::origin_types::proxy_reference);
-
     const auto& objects(m.objects());
     BOOST_CHECK(!objects.empty());
     for (const auto& pair : objects) {
@@ -483,7 +451,6 @@ BOOST_AUTO_TEST_CASE(hardware_model_hydrates_into_expected_model) {
     BOOST_REQUIRE(m.name().location().model_modules().size() == 1);
     BOOST_CHECK(*(m.name().location().model_modules().begin())
         == hardware_model_name);
-    BOOST_CHECK(m.origin_type() == dogen::yarn::origin_types::proxy_reference);
 
     BOOST_CHECK(m.objects().empty());
     const auto primitives(m.primitives());

@@ -18,31 +18,43 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TRAITS_FWD_HPP
-#define DOGEN_YARN_TYPES_TRAITS_FWD_HPP
+#ifndef DOGEN_YARN_TYPES_ORIGIN_EXPANDER_HPP
+#define DOGEN_YARN_TYPES_ORIGIN_EXPANDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <string>
+#include "dogen/dynamic/types/object.hpp"
+#include "dogen/dynamic/types/repository.hpp"
+#include "dogen/dynamic/types/field_selector.hpp"
+#include "dogen/dynamic/types/field_definition.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
 namespace yarn {
 
-struct traits {
-    static std::string is_proxy_model();
+class origin_expander {
+public:
+    explicit origin_expander(const dynamic::repository& rp);
 
-    struct type_parameters {
-        static std::string variable_number_of_parameters();
-        static std::string type_parameters_count();
-        static std::string type_parameters_always_in_heap();
+private:
+    struct field_definitions {
+        dynamic::field_definition is_proxy_model;
     };
 
-    struct generalization {
-        static std::string is_final();
-        static std::string parent();
-    };
+    field_definitions make_field_definitions(
+        const dynamic::repository& rp) const;
+
+    bool is_proxy_model(const intermediate_model& im) const;
+    origin_types compute_origin_types(const intermediate_model& im,
+        const bool is_proxy_model) const;
+
+public:
+    void expand(intermediate_model& im) const;
+
+private:
+    const field_definitions field_definitions_;
 };
 
 } }

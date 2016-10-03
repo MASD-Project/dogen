@@ -43,8 +43,8 @@ std::ostream& operator<<(std::ostream& s, const origin_types& v) {
     case origin_types::non_proxy_reference:
         attr = "\"non_proxy_reference\"";
         break;
-    case origin_types::unknown:
-        attr = "\"unknown\"";
+    case origin_types::not_yet_determined:
+        attr = "\"not_yet_determined\"";
         break;
     default:
         throw std::invalid_argument("Invalid value for origin_types");

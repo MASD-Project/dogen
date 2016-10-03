@@ -40,10 +40,12 @@ namespace fabric {
 class generator final {
 private:
     boost::shared_ptr<forward_declarations>
-    create(const yarn::name& n, const yarn::generation_types gt) const {
+    create(const yarn::name& n, const yarn::origin_types ot,
+        const yarn::generation_types gt) const {
 
         auto r(boost::make_shared<forward_declarations>());
         r->name(n);
+        r->origin_type(ot);
 
         /*
          * Services come in as partial generation, but this doesn't
@@ -68,22 +70,30 @@ public:
     void operator()(const yarn::module&) {}
 
     void operator()(const dogen::yarn::visitor& v) {
-        result_.push_back(create(v.name(), v.generation_type()));
+        const auto ot(v.origin_type());
+        const auto gt(v.generation_type());
+        result_.push_back(create(v.name(), ot, gt));
     }
 
     void operator()(const yarn::enumeration& e) {
-        const auto fd(create(e.name(), e.generation_type()));
+        const auto ot(e.origin_type());
+        const auto gt(e.generation_type());
+        const auto fd(create(e.name(), ot, gt));
         fd->is_enum(true);
         fd->underlying_type(e.underlying_type());
         result_.push_back(fd);
     }
 
     void operator()(const yarn::object& o) {
-        result_.push_back(create(o.name(), o.generation_type()));
+        const auto ot(o.origin_type());
+        const auto gt(o.generation_type());
+        result_.push_back(create(o.name(), ot, gt));
     }
 
     void operator()(const yarn::exception& e) {
-        const auto fd(create(e.name(), e.generation_type()));
+        const auto ot(e.origin_type());
+        const auto gt(e.generation_type());
+        const auto fd(create(e.name(), ot, gt));
         fd->is_exception(true);
         result_.push_back(fd);
     }

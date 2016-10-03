@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/yarn/types/modules_expander.hpp"
+#include "dogen/yarn/types/origin_expander.hpp"
 #include "dogen/yarn/types/parsing_expander.hpp"
 #include "dogen/yarn/types/annotations_expander.hpp"
 #include "dogen/yarn/types/descriptor_factory.hpp"
@@ -43,9 +44,15 @@ obtain_intermediate_models(
     return f.execute(drp, rg, d);
 }
 
-void pre_merge_workflow::expand_modules(intermediate_model& m) const {
+void pre_merge_workflow::expand_modules(intermediate_model& im) const {
     modules_expander ex;
-    ex.expand(m);
+    ex.expand(im);
+}
+
+void pre_merge_workflow::expand_origin(const dynamic::repository& drp,
+    intermediate_model& im) const {
+    origin_expander ex(drp);
+    ex.expand(im);
 }
 
 void pre_merge_workflow::expand_annotations(const dynamic::repository& drp,
@@ -54,9 +61,9 @@ void pre_merge_workflow::expand_annotations(const dynamic::repository& drp,
     ex.expand(m);
 }
 
-void pre_merge_workflow::expand_parsing(intermediate_model& m) const {
+void pre_merge_workflow::expand_parsing(intermediate_model& im) const {
     parsing_expander ex;
-    ex.expand(m);
+    ex.expand(im);
 }
 
 std::list<intermediate_model>
@@ -69,6 +76,7 @@ pre_merge_workflow::execute(const dynamic::repository& drp,
     auto r(obtain_intermediate_models(drp, rg, d));
     for (auto& im: r) {
         expand_modules(im);
+        expand_origin(drp, im);
         expand_annotations(drp, im);
         expand_parsing(im);
     }
