@@ -43,19 +43,19 @@ obtain_intermediate_models(
     return f.execute(drp, rg, d);
 }
 
-void pre_merge_workflow::do_modules_expansion(intermediate_model& m) const {
+void pre_merge_workflow::expand_modules(intermediate_model& m) const {
     modules_expander ex;
     ex.expand(m);
 }
 
-void pre_merge_workflow::do_parsing_expansion(intermediate_model& m) const {
-    parsing_expander ex;
+void pre_merge_workflow::expand_annotations(const dynamic::repository& drp,
+    intermediate_model& m) const {
+    annotations_expander ex(drp);
     ex.expand(m);
 }
 
-void pre_merge_workflow::do_annotations_expansion(const dynamic::repository& drp,
-    intermediate_model& m) const {
-    annotations_expander ex(drp);
+void pre_merge_workflow::expand_parsing(intermediate_model& m) const {
+    parsing_expander ex;
     ex.expand(m);
 }
 
@@ -68,9 +68,9 @@ pre_merge_workflow::execute(const dynamic::repository& drp,
     const auto d(obtain_descriptors(dirs, io));
     auto r(obtain_intermediate_models(drp, rg, d));
     for (auto& im: r) {
-        do_modules_expansion(im);
-        do_annotations_expansion(drp, im);
-        do_parsing_expansion(im);
+        expand_modules(im);
+        expand_annotations(drp, im);
+        expand_parsing(im);
     }
     return r;
 }

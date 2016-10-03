@@ -55,18 +55,18 @@ private:
     /**
      * @brief Performs a module expansion on the model.
      */
-    void do_modules_expansion(intermediate_model& im) const;
-
-    /**
-     * @brief Performs a local attribute expansion on the model.
-     */
-    void do_parsing_expansion(intermediate_model& im) const;
+    void expand_modules(intermediate_model& im) const;
 
     /**
      * @brief Performs a annotations expansion on the model.
      */
-    void do_annotations_expansion(const dynamic::repository& drp,
+    void expand_annotations(const dynamic::repository& drp,
         intermediate_model& im) const;
+
+    /**
+     * @brief Performs a local attribute expansion on the model.
+     */
+    void expand_parsing(intermediate_model& im) const;
 
 public:
     /**
