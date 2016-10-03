@@ -53,7 +53,8 @@ intermediate_model::intermediate_model(
     const std::unordered_map<std::string, dogen::yarn::visitor>& visitors,
     const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> >& injected_elements,
     const bool has_generatable_types,
-    const dogen::yarn::indices& indices)
+    const dogen::yarn::indices& indices,
+    const dogen::yarn::module& root_module)
     : name_(name),
       origin_type_(origin_type),
       generation_type_(generation_type),
@@ -68,7 +69,8 @@ intermediate_model::intermediate_model(
       visitors_(visitors),
       injected_elements_(injected_elements),
       has_generatable_types_(has_generatable_types),
-      indices_(indices) { }
+      indices_(indices),
+      root_module_(root_module) { }
 
 void intermediate_model::swap(intermediate_model& other) noexcept {
     using std::swap;
@@ -87,6 +89,7 @@ void intermediate_model::swap(intermediate_model& other) noexcept {
     swap(injected_elements_, other.injected_elements_);
     swap(has_generatable_types_, other.has_generatable_types_);
     swap(indices_, other.indices_);
+    swap(root_module_, other.root_module_);
 }
 
 bool intermediate_model::operator==(const intermediate_model& rhs) const {
@@ -104,7 +107,8 @@ bool intermediate_model::operator==(const intermediate_model& rhs) const {
         visitors_ == rhs.visitors_ &&
         injected_elements_ == rhs.injected_elements_ &&
         has_generatable_types_ == rhs.has_generatable_types_ &&
-        indices_ == rhs.indices_;
+        indices_ == rhs.indices_ &&
+        root_module_ == rhs.root_module_;
 }
 
 intermediate_model& intermediate_model::operator=(intermediate_model other) {
@@ -327,6 +331,22 @@ void intermediate_model::indices(const dogen::yarn::indices& v) {
 
 void intermediate_model::indices(const dogen::yarn::indices&& v) {
     indices_ = std::move(v);
+}
+
+const dogen::yarn::module& intermediate_model::root_module() const {
+    return root_module_;
+}
+
+dogen::yarn::module& intermediate_model::root_module() {
+    return root_module_;
+}
+
+void intermediate_model::root_module(const dogen::yarn::module& v) {
+    root_module_ = v;
+}
+
+void intermediate_model::root_module(const dogen::yarn::module&& v) {
+    root_module_ = std::move(v);
 }
 
 } }

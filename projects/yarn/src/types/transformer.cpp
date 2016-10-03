@@ -32,7 +32,6 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("yarn.transformer"));
 
 const std::string duplicate_qualified_name("Duplicate qualified name: ");
-const std::string missing_root_module("Root module not found: ");
 
 }
 
@@ -99,16 +98,9 @@ private:
 }
 
 model transformer::transform(const intermediate_model& im) const {
-    const auto i(im.modules().find(im.name().id()));
-    if (i == im.modules().end()) {
-        const auto id(im.name().id());
-        BOOST_LOG_SEV(lg, error) << missing_root_module << id;
-        BOOST_THROW_EXCEPTION(transformation_error(missing_root_module + id));
-    }
-
     model r;
     r.name(im.name());
-    r.root_module(i->second);
+    r.root_module(im.root_module());
     r.has_generatable_types(im.has_generatable_types());
 
     generator g(r);

@@ -216,6 +216,7 @@ populate(const unsigned int position, result_type& v) {
     v.injected_elements(create_std_unordered_map_std_string_boost_shared_ptr_dogen_yarn_element(position + 12));
     v.has_generatable_types(create_bool(position + 13));
     v.indices(create_dogen_yarn_indices(position + 14));
+    v.root_module(create_dogen_yarn_module(position + 15));
 }
 
 intermediate_model_generator::result_type

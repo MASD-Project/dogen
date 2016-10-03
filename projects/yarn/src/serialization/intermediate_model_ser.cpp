@@ -67,6 +67,7 @@ void save(Archive& ar,
     ar << make_nvp("injected_elements", v.injected_elements_);
     ar << make_nvp("has_generatable_types", v.has_generatable_types_);
     ar << make_nvp("indices", v.indices_);
+    ar << make_nvp("root_module", v.root_module_);
 }
 
 template<typename Archive>
@@ -88,6 +89,7 @@ void load(Archive& ar,
     ar >> make_nvp("injected_elements", v.injected_elements_);
     ar >> make_nvp("has_generatable_types", v.has_generatable_types_);
     ar >> make_nvp("indices", v.indices_);
+    ar >> make_nvp("root_module", v.root_module_);
 }
 
 } }

@@ -260,7 +260,8 @@ std::ostream& operator<<(std::ostream& s, const intermediate_model& v) {
       << "\"visitors\": " << v.visitors() << ", "
       << "\"injected_elements\": " << v.injected_elements() << ", "
       << "\"has_generatable_types\": " << v.has_generatable_types() << ", "
-      << "\"indices\": " << v.indices()
+      << "\"indices\": " << v.indices() << ", "
+      << "\"root_module\": " << v.root_module()
       << " }";
     return(s);
 }

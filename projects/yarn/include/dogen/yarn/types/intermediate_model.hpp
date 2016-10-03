@@ -76,7 +76,8 @@ public:
         const std::unordered_map<std::string, dogen::yarn::visitor>& visitors,
         const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> >& injected_elements,
         const bool has_generatable_types,
-        const dogen::yarn::indices& indices);
+        const dogen::yarn::indices& indices,
+        const dogen::yarn::module& root_module);
 
 private:
     template<typename Archive>
@@ -222,6 +223,11 @@ public:
     void indices(const dogen::yarn::indices& v);
     void indices(const dogen::yarn::indices&& v);
 
+    const dogen::yarn::module& root_module() const;
+    dogen::yarn::module& root_module();
+    void root_module(const dogen::yarn::module& v);
+    void root_module(const dogen::yarn::module&& v);
+
 public:
     bool operator==(const intermediate_model& rhs) const;
     bool operator!=(const intermediate_model& rhs) const {
@@ -248,6 +254,7 @@ private:
     std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> > injected_elements_;
     bool has_generatable_types_;
     dogen::yarn::indices indices_;
+    dogen::yarn::module root_module_;
 };
 
 } }

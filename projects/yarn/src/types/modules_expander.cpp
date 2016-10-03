@@ -34,6 +34,7 @@ auto lg(logger_factory("yarn.modules_expander"));
 
 const std::string separator(".");
 const std::string missing_module("Could not find module: ");
+const std::string missing_root_module("Root module not found: ");
 
 }
 
@@ -184,6 +185,16 @@ void updater::update(element& e) {
 
 }
 
+void modules_expander::populate_root_module(intermediate_model& im) const {
+    const auto i(im.modules().find(im.name().id()));
+    if (i == im.modules().end()) {
+        const auto id(im.name().id());
+        BOOST_LOG_SEV(lg, error) << missing_root_module << id;
+        BOOST_THROW_EXCEPTION(expansion_error(missing_root_module + id));
+    }
+    im.root_module(i->second);
+}
+
 void modules_expander::create_missing_modules(intermediate_model& im) const {
     internal_modules_builder b;
     yarn::elements_traversal(im, b);
@@ -236,6 +247,7 @@ update_module_generability(intermediate_model& im) const {
 }
 
 void modules_expander::expand(intermediate_model& im) const {
+    populate_root_module(im);
     create_missing_modules(im);
     expand_containing_module(im);
     update_module_generability(im);

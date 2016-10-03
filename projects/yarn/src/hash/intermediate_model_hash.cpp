@@ -158,6 +158,7 @@ std::size_t intermediate_model_hasher::hash(const intermediate_model& v) {
     combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_dogen_yarn_element(v.injected_elements()));
     combine(seed, v.has_generatable_types());
     combine(seed, v.indices());
+    combine(seed, v.root_module());
 
     return seed;
 }

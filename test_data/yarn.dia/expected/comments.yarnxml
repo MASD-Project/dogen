@@ -799,6 +799,53 @@ a second line
 			<item_version>0</item_version>
 		</elements_referable_by_attributes>
 	</indices>
+	<root_module object_id="_8">
+		<element>
+			<documentation></documentation>
+			<extensions>
+				<fields>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</fields>
+			</extensions>
+			<name>
+				<id></id>
+				<simple></simple>
+				<qualified>
+					<count>0</count>
+					<item_version>0</item_version>
+				</qualified>
+				<location>
+					<external_modules>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_modules>
+					<model_modules>
+						<count>0</count>
+						<item_version>0</item_version>
+					</model_modules>
+					<internal_modules>
+						<count>0</count>
+						<item_version>0</item_version>
+					</internal_modules>
+					<element></element>
+				</location>
+				<identifiable></identifiable>
+			</name>
+			<generation_type>0</generation_type>
+			<origin_type>0</origin_type>
+			<contained_by>
+				<initialized>0</initialized>
+			</contained_by>
+			<in_global_module>0</in_global_module>
+			<is_element_extension>0</is_element_extension>
+		</element>
+		<members>
+			<count>0</count>
+			<item_version>0</item_version>
+		</members>
+	</root_module>
 </entity>
 </boost_serialization>
 
