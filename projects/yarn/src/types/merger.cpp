@@ -129,7 +129,7 @@ void merger::add_target(const intermediate_model& target) {
     merged_model_.leaves(target.leaves());
     merged_model_.modules(target.modules());
     merged_model_.references(target.references());
-    merged_model_.is_target(true);
+    merged_model_.origin_type(target.origin_type());
 
     BOOST_LOG_SEV(lg, debug) << "added target model: " << id;
 }
@@ -137,7 +137,7 @@ void merger::add_target(const intermediate_model& target) {
 void merger::add(const intermediate_model& m) {
     require_not_has_merged();
 
-    if (m.is_target())
+    if (m.origin_type() == origin_types::target)
         add_target(m);
 
     BOOST_LOG_SEV(lg, debug) << "adding model: '"

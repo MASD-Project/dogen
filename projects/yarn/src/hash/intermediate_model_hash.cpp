@@ -157,7 +157,6 @@ std::size_t intermediate_model_hasher::hash(const intermediate_model& v) {
     combine(seed, hash_std_unordered_map_std_string_dogen_yarn_exception(v.exceptions()));
     combine(seed, hash_std_unordered_map_std_string_dogen_yarn_visitor(v.visitors()));
     combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_dogen_yarn_element(v.injected_elements()));
-    combine(seed, v.is_target());
     combine(seed, v.has_generatable_types());
     combine(seed, v.indices());
 

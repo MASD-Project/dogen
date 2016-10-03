@@ -70,7 +70,7 @@ visitor stereotypes_expander::create_visitor(const object& o, const location& l,
     visitor r;
     r.name(n);
     r.generation_type(gt);
-    r.origin_type(origin_types::system);
+    r.origin_type(o.origin_type());
     r.documentation(visitor_doc + o.name().simple());
 
     if (leaves.empty()) {

@@ -194,7 +194,7 @@ dogen::yarn::intermediate_model hydrate(std::istream& s) {
     const auto w(mock_workflow_factory::non_validating_workflow(rp));
 
     dogen::yarn::json::hydrator h(w);
-    return h.hydrate(s);
+    return h.hydrate(s, false/*is_target*/);
 }
 
 dogen::yarn::intermediate_model hydrate(const boost::filesystem::path& p) {
@@ -393,7 +393,9 @@ BOOST_AUTO_TEST_CASE(cpp_std_model_hydrates_into_expected_model) {
     BOOST_REQUIRE(m.name().location().model_modules().size() == 1);
     BOOST_CHECK(m.name().location().model_modules().front() ==
         cpp_std_model_name);
-    BOOST_CHECK(m.origin_type() == dogen::yarn::origin_types::system);
+
+    const auto pr(dogen::yarn::origin_types::proxy_reference);
+    BOOST_CHECK(m.origin_type() == pr);
 
     const auto& objects(m.objects());
     BOOST_CHECK(!objects.empty());
@@ -405,7 +407,7 @@ BOOST_AUTO_TEST_CASE(cpp_std_model_hydrates_into_expected_model) {
         BOOST_CHECK(n.location().model_modules().front() ==
             cpp_std_model_name);
         BOOST_CHECK(n.location().external_modules().empty());
-        BOOST_CHECK(o.origin_type() == dogen::yarn::origin_types::system);
+        BOOST_CHECK(o.origin_type() == pr);
 
         using dogen::yarn::object_types;
         const auto ot(o.object_type());
@@ -447,7 +449,7 @@ BOOST_AUTO_TEST_CASE(cpp_boost_model_hydrates_into_expected_model) {
     BOOST_CHECK(m.name().location().model_modules().front() ==
         cpp_boost_model_name);
 
-    BOOST_CHECK(m.origin_type() == dogen::yarn::origin_types::system);
+    BOOST_CHECK(m.origin_type() == dogen::yarn::origin_types::proxy_reference);
 
     const auto& objects(m.objects());
     BOOST_CHECK(!objects.empty());
@@ -481,7 +483,7 @@ BOOST_AUTO_TEST_CASE(hardware_model_hydrates_into_expected_model) {
     BOOST_REQUIRE(m.name().location().model_modules().size() == 1);
     BOOST_CHECK(*(m.name().location().model_modules().begin())
         == hardware_model_name);
-    BOOST_CHECK(m.origin_type() == dogen::yarn::origin_types::system);
+    BOOST_CHECK(m.origin_type() == dogen::yarn::origin_types::proxy_reference);
 
     BOOST_CHECK(m.objects().empty());
     const auto primitives(m.primitives());

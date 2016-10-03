@@ -90,6 +90,7 @@ bool has_duplicate_attribute_names(const Stateful& s,
 using dogen::utility::test::contains_checker;
 using dogen::yarn::expansion_error;
 using dogen::utility::test::asserter;
+using origin_types = dogen::yarn::origin_types;
 using object_types = dogen::yarn::test::mock_intermediate_model_factory::
 object_types;
 using attribute_types = dogen::yarn::test::mock_intermediate_model_factory::
@@ -126,8 +127,10 @@ BOOST_AUTO_TEST_CASE(model_with_single_type_and_no_attributes_is_untouched_by_at
 BOOST_AUTO_TEST_CASE(model_with_type_with_attribute_results_in_expected_indices) {
     SETUP_TEST_LOG_SOURCE("model_with_type_with_attribute_results_in_expected_indices");
 
-    auto m(factory.object_with_attribute(object_types::value_object,
-            attribute_types::unsigned_int));
+    const auto ot(origin_types::target);
+    const auto objt(object_types::value_object);
+    const auto at(attribute_types::unsigned_int);
+    auto m(factory.object_with_attribute(ot, objt, at));
     BOOST_LOG_SEV(lg, debug) << "before expansion: " << m;
 
     dogen::yarn::attributes_expander ex;
@@ -390,7 +393,7 @@ BOOST_AUTO_TEST_CASE(model_with_third_degree_inheritance_that_does_not_model_con
     SETUP_TEST_LOG_SOURCE("model_with_third_degree_inheritance_that_does_not_model_concepts_but_has_attributes_results_in_expected_indices");
 
     auto m(factory.object_with_third_degree_parent_in_same_model(
-            true/*has_attribute*/));
+            origin_types::target, true/*has_attribute*/));
     BOOST_LOG_SEV(lg, debug) << "before expansion: " << m;
 
     BOOST_REQUIRE(m.objects().size() == 4);

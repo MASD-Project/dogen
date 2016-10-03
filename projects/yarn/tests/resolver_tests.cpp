@@ -125,8 +125,7 @@ BOOST_AUTO_TEST_CASE(object_with_attribute_type_in_the_same_model_resolves_succe
 BOOST_AUTO_TEST_CASE(object_with_attribute_type_in_different_model_results_in_successful_merge) {
     SETUP_TEST_LOG_SOURCE("object_with_attribute_type_in_different_model_results_in_successful_merge");
 
-    auto m(factory.object_with_attribute_type_in_different_model());
-    m[0].is_target(true);
+    const auto m(factory.object_with_attribute_type_in_different_model());
 
     dogen::yarn::merger mg;
     mg.add(m[0]);
@@ -176,8 +175,7 @@ BOOST_AUTO_TEST_CASE(object_with_missing_attribute_type_throws) {
 BOOST_AUTO_TEST_CASE(object_with_parent_in_the_same_model_resolves_successfully) {
     SETUP_TEST_LOG_SOURCE("object_with_parent_in_the_same_model_resolves_successfully");
     dogen::yarn::merger mg;
-    auto m(factory.object_with_parent_in_the_same_model());
-    m.is_target(true);
+    const auto m(factory.object_with_parent_in_the_same_model());
     mg.add(m);
     auto combined(mg.merge());
     BOOST_CHECK(combined.objects().size() == 2);
@@ -209,9 +207,7 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_the_same_model_resolves_successfully)
 BOOST_AUTO_TEST_CASE(object_with_parent_in_different_models_resolves_successfully) {
     SETUP_TEST_LOG_SOURCE("object_with_parent_in_different_models_resolves_successfully");
 
-    auto m(factory.object_with_parent_in_different_models());
-    m[0].is_target(true);
-
+    const auto m(factory.object_with_parent_in_different_models());
     dogen::yarn::merger mg;
     mg.add(m[0]);
     mg.add(m[1]);
@@ -244,9 +240,7 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_different_models_resolves_successfull
 
 BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_same_model_resolves_successfully) {
     SETUP_TEST_LOG_SOURCE("object_with_third_degree_parent_in_same_model_resolves_successfully");
-    auto m(factory.object_with_third_degree_parent_in_same_model());
-    m.is_target(true);
-
+    const auto m(factory.object_with_third_degree_parent_in_same_model());
     dogen::yarn::merger mg;
     mg.add(m);
 
@@ -295,7 +289,6 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_missing_within_single_model
     SETUP_TEST_LOG("object_with_third_degree_parent_missing_within_single_model_throws");
     dogen::yarn::merger mg;
     auto m(factory.object_with_third_degree_parent_missing());
-    m.is_target(true);
     mg.add(m);
     mg.merge();
 
@@ -307,8 +300,7 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_missing_within_single_model
 BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_different_models_resolves_successfully) {
     SETUP_TEST_LOG_SOURCE("object_with_third_degree_parent_in_different_models_resolves_successfully");
 
-    auto a(factory.object_with_third_degree_parent_in_different_models());
-    a[0].is_target(true);
+    const auto a(factory.object_with_third_degree_parent_in_different_models());
 
     dogen::yarn::merger mg;
     mg.add(a[0]);
@@ -346,9 +338,8 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_different_models_resolve
 BOOST_AUTO_TEST_CASE(object_with_missing_third_degree_parent_in_different_models_throws) {
     SETUP_TEST_LOG("object_with_missing_third_degree_parent_in_different_models_throws");
     dogen::yarn::merger mg;
-    auto a(
+    const auto a(
         factory.object_with_missing_third_degree_parent_in_different_models());
-    a[0].is_target(true);
     mg.add(a[0]);
     mg.add(a[1]);
     mg.add(a[2]);

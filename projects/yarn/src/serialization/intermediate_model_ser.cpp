@@ -66,7 +66,6 @@ void save(Archive& ar,
     ar << make_nvp("exceptions", v.exceptions_);
     ar << make_nvp("visitors", v.visitors_);
     ar << make_nvp("injected_elements", v.injected_elements_);
-    ar << make_nvp("is_target", v.is_target_);
     ar << make_nvp("has_generatable_types", v.has_generatable_types_);
     ar << make_nvp("indices", v.indices_);
 }
@@ -89,7 +88,6 @@ void load(Archive& ar,
     ar >> make_nvp("exceptions", v.exceptions_);
     ar >> make_nvp("visitors", v.visitors_);
     ar >> make_nvp("injected_elements", v.injected_elements_);
-    ar >> make_nvp("is_target", v.is_target_);
     ar >> make_nvp("has_generatable_types", v.has_generatable_types_);
     ar >> make_nvp("indices", v.indices_);
 }

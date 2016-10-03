@@ -60,7 +60,7 @@ private:
      * @brief Creates a module representing the model.
      */
     yarn::module create_module_for_model(const yarn::name& n,
-        const bool is_target) const;
+        const yarn::origin_types ot) const;
 
 private:
     /**

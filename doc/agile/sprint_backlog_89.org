@@ -14,44 +14,45 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-03 Mon 10:21]
+#+CAPTION: Clock summary at [2016-10-03 Mon 12:43]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *43:11* |       |      | 100.0 |
+| *Total time*                                                                | *45:32* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 43:11   |       |      | 100.0 |
-| Active                                                                      |         | 43:11 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 4:37 |  10.7 |
+| Stories                                                                     | 45:32   |       |      | 100.0 |
+| Active                                                                      |         | 45:32 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 4:37 |  10.1 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:07 |   0.3 |
-| COMPLETED Generation of formattable is incorrect                            |         |       | 2:30 |   5.8 |
-| COMPLETED Visitor includes are incorrect                                    |         |       | 0:20 |   0.8 |
-| COMPLETED Add includer to quilt.cpp                                         |         |       | 1:46 |   4.1 |
+| COMPLETED Generation of formattable is incorrect                            |         |       | 2:30 |   5.5 |
+| COMPLETED Visitor includes are incorrect                                    |         |       | 0:20 |   0.7 |
+| COMPLETED Add includer to quilt.cpp                                         |         |       | 1:46 |   3.9 |
 | COMPLETED Add reducer to quilt.cpp                                          |         |       | 0:22 |   0.8 |
 | COMPLETED Add new index to formtter container                               |         |       | 0:19 |   0.7 |
-| COMPLETED Add path expander to quilt.cpp                                    |         |       | 0:49 |   1.9 |
+| COMPLETED Add path expander to quilt.cpp                                    |         |       | 0:49 |   1.8 |
 | COMPLETED Add guard expander to quilt.cpp                                   |         |       | 0:27 |   1.0 |
 | COMPLETED Investigate borked travis build                                   |         |       | 0:37 |   1.4 |
-| COMPLETED Add decoration expander to quilt.cpp                              |         |       | 0:23 |   0.9 |
-| COMPLETED Add aspect expander to quilt.cpp                                  |         |       | 1:26 |   3.3 |
+| COMPLETED Add decoration expander to quilt.cpp                              |         |       | 0:23 |   0.8 |
+| COMPLETED Add aspect expander to quilt.cpp                                  |         |       | 1:26 |   3.1 |
 | COMPLETED Run tests that are passing on windows                             |         |       | 0:10 |   0.4 |
-| COMPLETED Add helper expander to quilt.cpp                                  |         |       | 1:26 |   3.3 |
+| COMPLETED Add helper expander to quilt.cpp                                  |         |       | 1:26 |   3.1 |
 | COMPLETED Merge pre and post workflows                                      |         |       | 0:16 |   0.6 |
-| COMPLETED Fix bug in aspect and helper generation                           |         |       | 0:15 |   0.6 |
-| COMPLETED Investigate element annotation support                            |         |       | 2:05 |   4.8 |
-| CANCELLED Add streaming settings expander                                   |         |       | 0:36 |   1.4 |
-| COMPLETED Create the formattables model                                     |         |       | 1:32 |   3.6 |
-| COMPLETED Hook formattables into formatters                                 |         |       | 3:58 |   9.2 |
-| COMPLETED Remove empty context                                              |         |       | 1:09 |   2.7 |
-| COMPLETED Review main classes in quilt.cpp                                  |         |       | 3:42 |   8.6 |
-| COMPLETED Clean up element segmentation                                     |         |       | 1:20 |   3.1 |
-| COMPLETED Get OSX build to compile code                                     |         |       | 7:05 |  16.4 |
-| COMPLETED Add a banner to readme                                            |         |       | 1:29 |   3.4 |
-| COMPLETED Remove formatter group                                            |         |       | 0:23 |   0.9 |
-| COMPLETED Add more types to =quilt::cpp= canned tests                       |         |       | 0:15 |   0.6 |
-| CANCELLED Remove formatter id                                               |         |       | 0:04 |   0.2 |
-| COMPLETED Analysis around terminology in formatting space                   |         |       | 3:24 |   7.9 |
+| COMPLETED Fix bug in aspect and helper generation                           |         |       | 0:15 |   0.5 |
+| COMPLETED Investigate element annotation support                            |         |       | 2:05 |   4.6 |
+| CANCELLED Add streaming settings expander                                   |         |       | 0:36 |   1.3 |
+| COMPLETED Create the formattables model                                     |         |       | 1:32 |   3.4 |
+| COMPLETED Hook formattables into formatters                                 |         |       | 3:58 |   8.7 |
+| COMPLETED Remove empty context                                              |         |       | 1:09 |   2.5 |
+| COMPLETED Review main classes in quilt.cpp                                  |         |       | 3:42 |   8.1 |
+| COMPLETED Clean up element segmentation                                     |         |       | 1:20 |   2.9 |
+| COMPLETED Get OSX build to compile code                                     |         |       | 7:05 |  15.6 |
+| COMPLETED Add a banner to readme                                            |         |       | 1:29 |   3.3 |
+| COMPLETED Remove formatter group                                            |         |       | 0:23 |   0.8 |
+| COMPLETED Add more types to =quilt::cpp= canned tests                       |         |       | 0:15 |   0.5 |
+| CANCELLED Remove formatter id                                               |         |       | 0:04 |   0.1 |
+| COMPLETED Analysis around terminology in formatting space                   |         |       | 3:24 |   7.5 |
 | STARTED Generate formatter interfaces                                       |         |       | 0:19 |   0.7 |
+| STARTED Refactor code around model origination                              |         |       | 2:21 |   5.2 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -836,77 +837,8 @@ Further thoughts:
   generates the file. Actually we probably can't have this in quilt
   because we still need formatter properties.
 
-*** Add the concept of hand-crafting                                  :story:
-
-An element can be marked with the stereotype of handcrafted. We then
-have several things to determine for this element:
-
-- which formatters are disabled due to handcraft mode (e.g. all facets
-  other than types);
-- which formatters are enabled, but should only generate if there
-  isn't a file already in the file system (e.g. class header and class
-  implementation in types)
-- which formatters are enabled and should generate as usual
-  (e.g. forward declarations in types).
-
-We must also allow users to override these settings so that:
-
-- they can disable the types facet if required;
-- they can provide their own implementations for other facets;
-- they can ask the code generator to generate one for them
-  (serialisation, io).
-
-Finally, for the common case, we do not want users to have to set lots
-of meta-data; we need a sensible default behaviour.
-
-Actually, from a purely functional perspective, what is handcrafting?
-It is a shorthand for:
-
-- disable a set of formatters;
-- enable another set of formatters;
-- for a subset of the enabled formatters, generate only if there is no
-  file in the filesystem, otherwise do nothing;
-- for another subset of the enabled formatters, generate as usual.
-- do not add leaves to the registrar (unless asked to).
-
-One can conceive the notion of an enablement profile. These can be
-global or local. We can also have overwritting profiles. These can
-only be local. A sub-set of the enabled formatters can be set to
-overwrite=false. Examples:
-
-- default enablement profile: "enable all". Enables all facets and
-  formatters.
-- types and a facet profiles: "types and serialisation", "types and
-  io" etc.
-- "types class only": generates class header and implementation.
-- default overwrite profile: "overwrite all". Overwrites all
-  artefacts.
-
-Now handcrafting becomes much easier:
-
-- add meta-data to quilt: a) a way of specifying profiles for
-  overwriting and enabling b) a way of specifying if leaves contribute
-  to registration or not.
-- define a set of profiles in data for overwriting and enabling. Users
-  can provide their own profile directories.
-- Link the overwriting and enabling with stereotypes: given a
-  stereotype, we could map to a default profile. Actually this is more
-  of a profile group. We could then state that a stereotype maps to a
-  profile group.
-
-Tasks:
-
-- add data files to specify profiles, with classes to read them in
-  from JSON. Profiles must be settable to global or local.
-- add meta-data to allow users to supply a profile (local or global).
-- update enablement expander to look for profiles.
-- update all facet test models to use profiles.
-- add a stereotype of handcrafted with a default profile.
-- add a flag for leaf management. It defaults to true, unless
-  handcrafted. Add meta-data to allow overriding flag (or create story
-  for it as we don't yet have a use case).
-
-*** Refactor code around model origination                            :story:
+*** STARTED Refactor code around model origination                    :story:
+    CLOCK: [2016-10-03 Mon 10:22]--[2016-10-03 Mon 12:43] =>  2:21
 
 We have the following use cases around generation type and
 origination:
@@ -924,6 +856,18 @@ origination:
   types. All other types enable all formatters.
 - we need to filter out all non-target elements before we code
   generate.
+
+Tasks:
+
+- add field for is proxy reference
+- add new enum in origin types for not yet determined
+- in yarn, read field; if set to proxy reference, update all model
+  elements.
+- update json code to stop reading origin types, remove it from json
+  and add it as a field in meta-data. Alternatively, JSON has the
+  flag, and field is specific to dia; frontend just sets the model
+  origin and leaves the rest as undetermined; yarn pipeline sets it
+  correctly.
 
 *Previous Understanding*
 
@@ -1021,6 +965,92 @@ all facets except for types. A few points:
   "service" profile that enables types with partial generation and io
   with full generation and so on. We probably also need "generation
   profiles" to go with "enablement profiles".
+
+*Allow creating "system" models in Dia*
+
+With the "proxy/non-proxy" models refactoring, we now have all the
+bits in place to allow users to create "system" models from Dia (what
+we now call proxy models). The only tasks missing are:
+
+- add meta-data to dia subsystem to allow users to supply a "is proxy"
+  flag.
+- post-process model if is proxy flag is set, updating all types to
+  proxy references.
+
+Actually this is probably best handled in yarn, so that dia and json
+have common logic. We should just add the fields and add the
+processing in yarn somewhere.
+
+*** Add the concept of hand-crafting                                  :story:
+
+An element can be marked with the stereotype of handcrafted. We then
+have several things to determine for this element:
+
+- which formatters are disabled due to handcraft mode (e.g. all facets
+  other than types);
+- which formatters are enabled, but should only generate if there
+  isn't a file already in the file system (e.g. class header and class
+  implementation in types)
+- which formatters are enabled and should generate as usual
+  (e.g. forward declarations in types).
+
+We must also allow users to override these settings so that:
+
+- they can disable the types facet if required;
+- they can provide their own implementations for other facets;
+- they can ask the code generator to generate one for them
+  (serialisation, io).
+
+Finally, for the common case, we do not want users to have to set lots
+of meta-data; we need a sensible default behaviour.
+
+Actually, from a purely functional perspective, what is handcrafting?
+It is a shorthand for:
+
+- disable a set of formatters;
+- enable another set of formatters;
+- for a subset of the enabled formatters, generate only if there is no
+  file in the filesystem, otherwise do nothing;
+- for another subset of the enabled formatters, generate as usual.
+- do not add leaves to the registrar (unless asked to).
+
+One can conceive the notion of an enablement profile. These can be
+global or local. We can also have overwritting profiles. These can
+only be local. A sub-set of the enabled formatters can be set to
+overwrite=false. Examples:
+
+- default enablement profile: "enable all". Enables all facets and
+  formatters.
+- types and a facet profiles: "types and serialisation", "types and
+  io" etc.
+- "types class only": generates class header and implementation.
+- default overwrite profile: "overwrite all". Overwrites all
+  artefacts.
+
+Now handcrafting becomes much easier:
+
+- add meta-data to quilt: a) a way of specifying profiles for
+  overwriting and enabling b) a way of specifying if leaves contribute
+  to registration or not.
+- define a set of profiles in data for overwriting and enabling. Users
+  can provide their own profile directories.
+- Link the overwriting and enabling with stereotypes: given a
+  stereotype, we could map to a default profile. Actually this is more
+  of a profile group. We could then state that a stereotype maps to a
+  profile group.
+
+Tasks:
+
+- add data files to specify profiles, with classes to read them in
+  from JSON. Profiles must be settable to global or local.
+- add meta-data to allow users to supply a profile (local or global).
+- update enablement expander to look for profiles.
+- update all facet test models to use profiles.
+- add a stereotype of handcrafted with a default profile.
+- add a flag for leaf management. It defaults to true, unless
+  handcrafted. Add meta-data to allow overriding flag (or create story
+  for it as we don't yet have a use case).
+- remove object_type
 
 *** Handle registration of services properly                          :story:
 

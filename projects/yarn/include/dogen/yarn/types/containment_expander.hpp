@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include "dogen/yarn/types/origin_types.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
@@ -35,7 +36,7 @@ private:
     /**
      * @brief Creates the module to represent the global namespace.
      */
-    module create_global_module() const;
+    module create_global_module(const origin_types ot) const;
 
     /**
      * @brief Injects the global module, and makes all modules that do

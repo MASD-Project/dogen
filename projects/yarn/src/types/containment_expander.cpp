@@ -51,10 +51,10 @@ inline void add_containing_module_to_non_contained_entities(
     }
 }
 
-module containment_expander::create_global_module() const {
+module containment_expander::create_global_module(const origin_types ot) const {
     module r;
     r.generation_type(generation_types::no_generation);
-    r.origin_type(origin_types::system);
+    r.origin_type(ot);
     r.documentation(global_module_doc);
     return r;
 }
@@ -63,7 +63,7 @@ void containment_expander::inject_global_module(intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Injecting global module for: "
                              << im.name().id();
 
-    const auto gm(create_global_module());
+    const auto gm(create_global_module(im.origin_type()));
     const auto gmn(gm.name());
     const auto i(im.modules().find(gmn.id()));
     if (i != im.modules().end()) {

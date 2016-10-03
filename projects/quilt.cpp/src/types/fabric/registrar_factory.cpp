@@ -66,7 +66,7 @@ registrar_factory::build(const yarn::intermediate_model& im) const {
 
     for (const auto& pair : im.references()) {
         const auto origin_type(pair.second);
-        if (origin_type == yarn::origin_types::system)
+        if (origin_type == yarn::origin_types::proxy_reference)
             continue;
 
         const auto ref(pair.first);

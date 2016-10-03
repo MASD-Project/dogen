@@ -186,14 +186,20 @@ yarn::intermediate_model hydrator::read_stream(
     r.name(nf.build_model_name(model_name_value));
     BOOST_LOG_SEV(lg, debug) << "Processing model: " << r.name().id();
 
-    const auto origin_value(pt.get<std::string>(origin_key));
-    if (origin_value == origin_system_value)
-        r.origin_type(yarn::origin_types::system);
-    else if (origin_value == origin_user_value)
-        r.origin_type(yarn::origin_types::system);
+    // FIXME: hack for now
+    if (is_target)
+        r.origin_type(yarn::origin_types::target);
     else {
-        BOOST_LOG_SEV(lg, error) << invalid_origin << origin_value;
-        BOOST_THROW_EXCEPTION(hydration_error(invalid_origin + origin_value));
+        const auto origin_value(pt.get<std::string>(origin_key));
+        if (origin_value == origin_system_value)
+            r.origin_type(yarn::origin_types::proxy_reference);
+        else if (origin_value == origin_user_value)
+            r.origin_type(yarn::origin_types::proxy_reference);
+        else {
+            BOOST_LOG_SEV(lg, error) << invalid_origin << origin_value;
+            BOOST_THROW_EXCEPTION(hydration_error(
+                    invalid_origin + origin_value));
+        }
     }
 
     yarn::module m;
@@ -238,11 +244,11 @@ to_object_type(const boost::optional<std::string>& s) const {
     BOOST_THROW_EXCEPTION(hydration_error(invalid_object_type + ot));
 }
 
-yarn::intermediate_model hydrator::hydrate(std::istream& s) const {
+intermediate_model hydrator::
+hydrate(std::istream& s, const bool is_target) const {
     BOOST_LOG_SEV(lg, debug) << "Parsing JSON stream.";
     using namespace boost::property_tree;
     try {
-        const bool is_target(false);
         auto r(read_stream(s, is_target));
         BOOST_LOG_SEV(lg, debug) << "Parsed JSON stream successfully.";
         return r;
@@ -260,8 +266,8 @@ yarn::intermediate_model hydrator::hydrate(std::istream& s) const {
     }
 }
 
-yarn::intermediate_model hydrator::
-hydrate(const boost::filesystem::path& p) const {
+intermediate_model hydrator::
+hydrate(const boost::filesystem::path& p, const bool is_target) const {
     const auto gs(p.generic_string());
     BOOST_LOG_SEV(lg, debug) << "Parsing JSON file: " << gs;
     boost::filesystem::ifstream s(p);
@@ -271,7 +277,7 @@ hydrate(const boost::filesystem::path& p) const {
         BOOST_THROW_EXCEPTION(hydration_error(failed_to_open_file + gs));
     }
 
-    const auto r(hydrate(s));
+    const auto r(hydrate(s, is_target));
     BOOST_LOG_SEV(lg, debug) << "Parsed JSON file successfully.";
     return r;
 }

@@ -51,7 +51,7 @@ std::list<std::string> frontend::supported_extensions() const {
 yarn::intermediate_model frontend::
 execute(const dynamic::workflow& w, const yarn::descriptor& d) {
     yarn::json::hydrator h(w);
-    return h.hydrate(d.path());
+    return h.hydrate(d.path(), d.is_target());
 }
 
 } } }

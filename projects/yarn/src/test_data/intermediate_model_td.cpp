@@ -215,9 +215,8 @@ populate(const unsigned int position, result_type& v) {
     v.exceptions(create_std_unordered_map_std_string_dogen_yarn_exception(position + 11));
     v.visitors(create_std_unordered_map_std_string_dogen_yarn_visitor(position + 12));
     v.injected_elements(create_std_unordered_map_std_string_boost_shared_ptr_dogen_yarn_element(position + 13));
-    v.is_target(create_bool(position + 14));
-    v.has_generatable_types(create_bool(position + 15));
-    v.indices(create_dogen_yarn_indices(position + 16));
+    v.has_generatable_types(create_bool(position + 14));
+    v.indices(create_dogen_yarn_indices(position + 15));
 }
 
 intermediate_model_generator::result_type

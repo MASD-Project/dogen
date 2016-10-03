@@ -334,7 +334,6 @@
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</injected_elements>
-	<is_target>1</is_target>
 	<has_generatable_types>0</has_generatable_types>
 	<indices class_id="45" tracking_level="0" version="0">
 		<objects_always_in_heap class_id="46" tracking_level="0" version="0">

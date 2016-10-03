@@ -59,6 +59,7 @@ const mock_intermediate_model_factory factory(flags);
 using dogen::utility::test::contains_checker;
 using dogen::yarn::expansion_error;
 using dogen::utility::test::asserter;
+using origin_types = dogen::yarn::origin_types;
 using object_types = dogen::yarn::test::mock_intermediate_model_factory::
     object_types;
 using attribute_types = dogen::yarn::test::mock_intermediate_model_factory::
@@ -97,9 +98,11 @@ BOOST_AUTO_TEST_CASE(model_with_single_type_and_no_attributes_is_untouched_by_co
 BOOST_AUTO_TEST_CASE(model_with_type_with_attribute_is_untouched_by_concept_expander) {
     SETUP_TEST_LOG_SOURCE("model_with_type_with_attribute_is_untouched_by_concept_expander");
 
+    const auto ot(origin_types::target);
+    const auto objt(object_types::value_object);
     const auto pt(attribute_types::unsigned_int);
-    auto a(factory.object_with_attribute(object_types::value_object, pt));
-    const auto e(factory.object_with_attribute(object_types::value_object, pt));
+    auto a(factory.object_with_attribute(ot, objt, pt));
+    const auto e(factory.object_with_attribute(ot, objt, pt));
 
     BOOST_LOG_SEV(lg, debug) << "before expansion: " << a;
 

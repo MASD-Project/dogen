@@ -56,6 +56,7 @@ const mock_intermediate_model_factory factory(flags);
 using dogen::utility::test::contains_checker;
 using dogen::yarn::expansion_error;
 using dogen::utility::test::asserter;
+using origin_types = dogen::yarn::origin_types;
 using object_types = dogen::yarn::test::mock_intermediate_model_factory::
     object_types;
 using attribute_types = dogen::yarn::test::mock_intermediate_model_factory::
@@ -94,7 +95,9 @@ BOOST_AUTO_TEST_CASE(model_with_single_type_and_no_attributes_is_untouched_by_as
 BOOST_AUTO_TEST_CASE(model_with_type_with_attribute_results_in_expected_indices) {
     SETUP_TEST_LOG_SOURCE("model_with_type_with_attribute_results_in_expected_indices");
 
-    auto m(factory.object_with_attribute(object_types::value_object,
+    auto m(factory.object_with_attribute(
+            origin_types::target,
+            object_types::value_object,
             attribute_types::unsigned_int));
     BOOST_LOG_SEV(lg, debug) << "before expansion: " << m;
 
@@ -209,7 +212,7 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_multiple_attributes_of_different_typ
     SETUP_TEST_LOG_SOURCE("model_with_object_with_multiple_attributes_of_different_types_that_are_repeated_results_in_expected_indices");
 
     auto m(factory.object_with_group_of_attributes_of_different_types(
-            true/*repeat_group*/));
+            origin_types::target, true/*repeat_group*/));
     BOOST_LOG_SEV(lg, debug) << "before expansion: " << m;
 
     dogen::yarn::association_expander ex;
@@ -267,9 +270,10 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_multiple_attributes_of_different_typ
 BOOST_AUTO_TEST_CASE(object_with_unsigned_int_attribute_results_in_expected_indices) {
     SETUP_TEST_LOG_SOURCE("object_with_unsigned_int_attribute_results_in_expected_indices");
 
-    const auto ot(object_types::value_object);
+    const auto ot(origin_types::target);
+    const auto objt(object_types::value_object);
     const auto pt(attribute_types::unsigned_int);
-    auto m(factory.object_with_attribute(ot, pt));
+    auto m(factory.object_with_attribute(ot, objt, pt));
     BOOST_REQUIRE(m.objects().size() == 1);
     BOOST_REQUIRE(m.objects().begin()->second.local_attributes().size() == 1);
     BOOST_LOG_SEV(lg, debug) << "before expansion: " << m;
@@ -296,9 +300,10 @@ BOOST_AUTO_TEST_CASE(object_with_unsigned_int_attribute_results_in_expected_indi
 BOOST_AUTO_TEST_CASE(object_with_bool_attribute_results_in_expected_indices) {
     SETUP_TEST_LOG_SOURCE("object_with_bool_attribute_results_in_expected_indices");
 
-    const auto ot(object_types::value_object);
+    const auto ot(origin_types::target);
+    const auto objt(object_types::value_object);
     const auto pt(attribute_types::boolean);
-    auto m(factory.object_with_attribute(ot, pt));
+    auto m(factory.object_with_attribute(ot, objt, pt));
     BOOST_REQUIRE(m.objects().size() == 1);
     BOOST_REQUIRE(m.objects().begin()->second.local_attributes().size() == 1);
     BOOST_LOG_SEV(lg, debug) << "before expansion: " << m;
@@ -325,9 +330,10 @@ BOOST_AUTO_TEST_CASE(object_with_bool_attribute_results_in_expected_indices) {
 BOOST_AUTO_TEST_CASE(object_with_object_attribute_results_in_expected_indices) {
     SETUP_TEST_LOG_SOURCE("object_with_object_attribute_results_in_expected_indices");
 
-    const auto ot(object_types::value_object);
+    const auto ot(origin_types::target);
+    const auto objt(object_types::value_object);
     const auto pt(attribute_types::value_object);
-    auto m(factory.object_with_attribute(ot, pt));
+    auto m(factory.object_with_attribute(ot, objt, pt));
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
     BOOST_REQUIRE(m.objects().size() == 2);
 
@@ -366,9 +372,10 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_missing_object_attribute_throws) {
 BOOST_AUTO_TEST_CASE(object_with_std_pair_attribute_results_in_expected_indices) {
     SETUP_TEST_LOG_SOURCE("object_with_std_pair_attribute_results_in_expected_indices");
 
-    const auto ot(object_types::value_object);
+    const auto ot(origin_types::target);
+    const auto objt(object_types::value_object);
     const auto pt(attribute_types::std_pair);
-    auto m(factory.object_with_attribute(ot, pt));
+    auto m(factory.object_with_attribute(ot, objt, pt));
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
 
     dogen::yarn::association_expander ex;
@@ -398,9 +405,10 @@ BOOST_AUTO_TEST_CASE(object_with_std_pair_attribute_results_in_expected_indices)
 BOOST_AUTO_TEST_CASE(object_with_boost_variant_attribute_results_in_expected_indices) {
     SETUP_TEST_LOG_SOURCE("object_with_boost_variant_attribute_results_in_expected_indices");
 
-    const auto ot(object_types::value_object);
+    const auto ot(origin_types::target);
+    const auto objt(object_types::value_object);
     const auto pt(attribute_types::boost_variant);
-    auto m(factory.object_with_attribute(ot, pt));
+    auto m(factory.object_with_attribute(ot, objt, pt));
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
     BOOST_REQUIRE(m.objects().size() == 2);
     BOOST_REQUIRE(m.primitives().size() == 2);
@@ -441,9 +449,10 @@ BOOST_AUTO_TEST_CASE(object_with_boost_variant_attribute_results_in_expected_ind
 BOOST_AUTO_TEST_CASE(object_with_std_string_attribute_results_in_expected_indices) {
     SETUP_TEST_LOG_SOURCE("object_with_std_string_attribute_results_in_expected_indices");
 
-    const auto ot(object_types::value_object);
+    const auto ot(origin_types::target);
+    const auto objt(object_types::value_object);
     const auto pt(attribute_types::std_string);
-    auto m(factory.object_with_attribute(ot, pt));
+    auto m(factory.object_with_attribute(ot, objt, pt));
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
 
     dogen::yarn::association_expander ex;
@@ -470,9 +479,10 @@ BOOST_AUTO_TEST_CASE(object_with_std_string_attribute_results_in_expected_indice
 BOOST_AUTO_TEST_CASE(object_with_boost_shared_ptr_attribute_results_in_expected_indices) {
     SETUP_TEST_LOG_SOURCE("object_with_boost_shared_ptr_attribute_results_in_expected_indices");
 
-    const auto ot(object_types::value_object);
+    const auto ot(origin_types::target);
+    const auto objt(object_types::value_object);
     const auto pt(attribute_types::boost_shared_ptr);
-    auto m(factory.object_with_attribute(ot, pt));
+    auto m(factory.object_with_attribute(ot, objt, pt));
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
     BOOST_REQUIRE(m.objects().size() == 3);
 

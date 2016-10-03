@@ -55,7 +55,7 @@ private:
      * @brief Returns the generation type for the model, depending on
      * whether it is a target model or not.
      */
-    yarn::generation_types generation_type(const bool is_target) const;
+    generation_types generation_type(const bool is_target) const;
 
     /**
      * @brief Returns the model name for all names other than the
@@ -83,27 +83,28 @@ private:
     /**
      * @brief Reads the entire stream as a property tree.
      */
-    yarn::intermediate_model read_stream(
+    intermediate_model read_stream(
         std::istream& s, const bool is_target) const;
 
     /**
      * @brief Converts a string to a value in the object types
      * enumeration.
      */
-    yarn::object_types
+    object_types
     to_object_type(const boost::optional<std::string>& s) const;
 
 public:
     /**
      * @brief Hydrates the model from the JSON stream.
      */
-    yarn::intermediate_model hydrate(std::istream& s) const;
+    intermediate_model hydrate(std::istream& s, const bool is_target) const;
 
     /**
      * @brief Opens up the file at path and then hydrates the model
      * from the JSON stream.
      */
-    yarn::intermediate_model hydrate(const boost::filesystem::path& p) const;
+    intermediate_model
+    hydrate(const boost::filesystem::path& p, const bool is_target) const;
 
 private:
     const dynamic::workflow dynamic_workflow_;

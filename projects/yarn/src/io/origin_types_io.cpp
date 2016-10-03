@@ -34,11 +34,14 @@ std::ostream& operator<<(std::ostream& s, const origin_types& v) {
     case origin_types::invalid:
         attr = "\"invalid\"";
         break;
-    case origin_types::user:
-        attr = "\"user\"";
+    case origin_types::target:
+        attr = "\"target\"";
         break;
-    case origin_types::system:
-        attr = "\"system\"";
+    case origin_types::proxy_reference:
+        attr = "\"proxy_reference\"";
+        break;
+    case origin_types::non_proxy_reference:
+        attr = "\"non_proxy_reference\"";
         break;
     case origin_types::unknown:
         attr = "\"unknown\"";

@@ -53,12 +53,12 @@ workflow::create_name_for_model(const std::string& model_name,
 }
 
 yarn::module workflow::create_module_for_model(const yarn::name& n,
-    const bool is_target) const {
+    const yarn::origin_types ot) const {
 
     yarn::module r;
     r.name(n);
-    r.origin_type(yarn::origin_types::user);
-    r.generation_type(is_target ?
+    r.origin_type(ot);
+    r.generation_type(ot == yarn::origin_types::target ?
         yarn::generation_types::full_generation :
         yarn::generation_types::no_generation);
     return r;
@@ -73,10 +73,19 @@ void workflow::initialise_context_activity(const std::string& model_name,
     m.original_model_name(model_name);
     BOOST_LOG_SEV(lg, debug) << "Model: " << m.name().id();
 
-    m.origin_type(yarn::origin_types::user);
-    m.is_target(is_target);
+    /*
+     * If we are not a target model, we start by assuming we are a
+     * non-proxy reference. This may not be true, as the user may have
+     * set the proxy reference flag in the meta-data, but we have no
+     * way of knowing just yet. To solve this, we do a post-processing
+     * step to update the origin types for proxy references.
+     */
+    const auto tg(origin_types::target);
+    const auto npr(origin_types::non_proxy_reference);
+    const auto ot(is_target ? tg : npr);
 
-    const auto mm(create_module_for_model(m.name(), is_target));
+    m.origin_type(ot);
+    const auto mm(create_module_for_model(m.name(), ot));
     m.modules().insert(std::make_pair(mm.name().id(), mm));
 }
 
@@ -125,6 +134,10 @@ yarn::intermediate_model workflow::execute(const dogen::dia::diagram& diagram,
     initialise_context_activity(model_name, external_modules, is_target);
     graph_to_context_activity(generate_graph_activity(diagram));
 
+    /*
+     * FIXME: if the model's origin type is set to proxy reference, we
+     * need to go thorough all types and update them.
+     */
     BOOST_LOG_SEV(lg, debug) << "Final model: " << context_.model();
     return context_.model();
 }

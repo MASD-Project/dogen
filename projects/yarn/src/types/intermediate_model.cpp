@@ -36,7 +36,6 @@ namespace yarn {
 intermediate_model::intermediate_model()
     : origin_type_(static_cast<dogen::yarn::origin_types>(0)),
       generation_type_(static_cast<dogen::yarn::generation_types>(0)),
-      is_target_(static_cast<bool>(0)),
       has_generatable_types_(static_cast<bool>(0)) { }
 
 intermediate_model::intermediate_model(
@@ -54,7 +53,6 @@ intermediate_model::intermediate_model(
     const std::unordered_map<std::string, dogen::yarn::exception>& exceptions,
     const std::unordered_map<std::string, dogen::yarn::visitor>& visitors,
     const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> >& injected_elements,
-    const bool is_target,
     const bool has_generatable_types,
     const dogen::yarn::indices& indices)
     : name_(name),
@@ -71,7 +69,6 @@ intermediate_model::intermediate_model(
       exceptions_(exceptions),
       visitors_(visitors),
       injected_elements_(injected_elements),
-      is_target_(is_target),
       has_generatable_types_(has_generatable_types),
       indices_(indices) { }
 
@@ -91,7 +88,6 @@ void intermediate_model::swap(intermediate_model& other) noexcept {
     swap(exceptions_, other.exceptions_);
     swap(visitors_, other.visitors_);
     swap(injected_elements_, other.injected_elements_);
-    swap(is_target_, other.is_target_);
     swap(has_generatable_types_, other.has_generatable_types_);
     swap(indices_, other.indices_);
 }
@@ -111,7 +107,6 @@ bool intermediate_model::operator==(const intermediate_model& rhs) const {
         exceptions_ == rhs.exceptions_ &&
         visitors_ == rhs.visitors_ &&
         injected_elements_ == rhs.injected_elements_ &&
-        is_target_ == rhs.is_target_ &&
         has_generatable_types_ == rhs.has_generatable_types_ &&
         indices_ == rhs.indices_;
 }
@@ -328,14 +323,6 @@ void intermediate_model::injected_elements(const std::unordered_map<std::string,
 
 void intermediate_model::injected_elements(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> >&& v) {
     injected_elements_ = std::move(v);
-}
-
-bool intermediate_model::is_target() const {
-    return is_target_;
-}
-
-void intermediate_model::is_target(const bool v) {
-    is_target_ = v;
 }
 
 bool intermediate_model::has_generatable_types() const {

@@ -85,7 +85,7 @@ void transformer::require_is_transformable(const processed_object& po) const {
 
 yarn::generation_types transformer::generation_type(const profile& p) const {
     using yarn::generation_types;
-    if (!context_.model().is_target())
+    if (context_.model().origin_type() != yarn::origin_types::target)
         return generation_types::no_generation;
 
     if (p.is_non_generatable() || p.is_service())
@@ -182,7 +182,7 @@ void transformer::update_element(const processed_object& o, const profile& p,
     yarn::element& e) {
 
     e.generation_type(generation_type(p));
-    e.origin_type(yarn::origin_types::user);
+    e.origin_type(context_.model().origin_type());
 
     const auto package_id(o.child_node_id());
     bool is_in_package(!package_id.empty());

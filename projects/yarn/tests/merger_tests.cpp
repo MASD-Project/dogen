@@ -64,15 +64,16 @@ BOOST_AUTO_TEST_SUITE(merger_tests)
 BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n_objects_in_merged_model) {
     SETUP_TEST_LOG_SOURCE("merging_n_distinct_models_with_one_object_each_results_in_n_objects_in_merged_model");
 
-    auto target(factory.make_single_type_model(0));
-    target.is_target(true);
+    const auto tg(dogen::yarn::origin_types::target);
+    const auto target(factory.make_single_type_model(tg, 0));
 
     dogen::yarn::merger mg;
     mg.add(target);
 
     const unsigned int n(5);
+    const auto npr(dogen::yarn::origin_types::non_proxy_reference);
     for (unsigned int i(1); i < n; ++i) {
-        const auto m(factory.make_single_type_model(i));
+        const auto m(factory.make_single_type_model(npr, i));
         mg.add(m);
     }
 
@@ -89,7 +90,7 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n
     BOOST_CHECK(combined.references().size() == 4);
 
     for (const auto pair : combined.references())
-        BOOST_CHECK(pair.second == dogen::yarn::origin_types::user);
+        BOOST_CHECK(pair.second == npr);
 
     std::set<std::string> object_names;
     std::set<std::string> model_names;
@@ -131,8 +132,9 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n
 BOOST_AUTO_TEST_CASE(merging_empty_model_results_in_empty_merged_model) {
     SETUP_TEST_LOG_SOURCE("merging_empty_model_results_in_empty_merged_model");
     dogen::yarn::merger mg;
-    dogen::yarn::intermediate_model m;
-    m.is_target(true);
+    const auto tg(dogen::yarn::origin_types::target);
+    const auto m(factory.make_empty_model(tg));
+
     BOOST_CHECK(!mg.has_target());
     mg.add(m);
     BOOST_CHECK(mg.has_target());
@@ -148,8 +150,8 @@ BOOST_AUTO_TEST_CASE(merging_empty_model_results_in_empty_merged_model) {
 
 BOOST_AUTO_TEST_CASE(type_with_incorrect_model_name_throws) {
     SETUP_TEST_LOG("type_with_incorrect_model_name_throws");
-    auto m(factory.make_single_type_model());
-    m.is_target(true);
+    const auto ot(dogen::yarn::origin_types::target);
+    auto m(factory.make_single_type_model(ot));
 
     m.name().location().model_modules().clear();
     m.name().location().model_modules().push_back(invalid_model_name);
@@ -164,8 +166,8 @@ BOOST_AUTO_TEST_CASE(type_with_incorrect_model_name_throws) {
 BOOST_AUTO_TEST_CASE(type_with_inconsistent_key_value_pair_throws) {
     SETUP_TEST_LOG("type_with_inconsistent_key_value_pair_throws");
 
-    auto m(factory.make_multi_type_model(0, 2));
-    m.is_target(true);
+    const auto ot(dogen::yarn::origin_types::target);
+    auto m(factory.make_multi_type_model(0, 2, ot));
     m.objects().begin()->second.name().id(invalid_id);
 
     dogen::yarn::merger mg;
@@ -178,7 +180,8 @@ BOOST_AUTO_TEST_CASE(type_with_inconsistent_key_value_pair_throws) {
 BOOST_AUTO_TEST_CASE(not_adding_a_target_throws) {
     SETUP_TEST_LOG("not_adding_a_target_throws");
 
-    const auto m(factory.make_single_type_model());
+    const auto npr(dogen::yarn::origin_types::non_proxy_reference);
+    const auto m(factory.make_single_type_model(npr));
     dogen::yarn::merger mg;
     mg.add(m);
 
@@ -188,11 +191,9 @@ BOOST_AUTO_TEST_CASE(not_adding_a_target_throws) {
 
 BOOST_AUTO_TEST_CASE(adding_more_than_one_target_throws) {
     SETUP_TEST_LOG("adding_more_than_one_target_throws");
-    auto m0(factory.make_single_type_model(0));
-    m0.is_target(true);
-
-    auto m1(factory.make_single_type_model(1));
-    m1.is_target(true);
+    const auto ot(dogen::yarn::origin_types::target);
+    const auto m0(factory.make_single_type_model(ot, 0));
+    const auto m1(factory.make_single_type_model(ot, 1));
 
     dogen::yarn::merger mg;
     mg.add(m0);
@@ -204,7 +205,6 @@ BOOST_AUTO_TEST_CASE(adding_more_than_one_target_throws) {
 BOOST_AUTO_TEST_CASE(merging_more_than_once_throws) {
     SETUP_TEST_LOG("merging_more_than_once_throws");
     auto m(factory.make_single_type_model());
-    m.is_target(true);
 
     dogen::yarn::merger mg;
     mg.add(m);
