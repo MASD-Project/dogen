@@ -59,24 +59,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::s
 
 }
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::string>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->second) << "\"";
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
-}
-
 namespace dogen {
 namespace quilt {
 namespace cpp {
@@ -96,7 +78,6 @@ std::ostream& operator<<(std::ostream& s, const formatter_configuration& v) {
       << "\"header_guard\": " << "\"" << tidy_up_string(v.header_guard()) << "\"" << ", "
       << "\"inclusion_dependencies\": " << v.inclusion_dependencies() << ", "
       << "\"enabled_formatters\": " << v.enabled_formatters() << ", "
-      << "\"facet_directory_for_facet\": " << v.facet_directory_for_facet() << ", "
       << "\"opaque_configuration\": " << v.opaque_configuration()
       << " }";
     return(s);

@@ -14,17 +14,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-03 Mon 15:30]
+#+CAPTION: Clock summary at [2016-10-03 Mon 16:05]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *47:35* |       |      | 100.0 |
+| *Total time*                                                                | *48:08* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 47:35   |       |      | 100.0 |
-| Active                                                                      |         | 47:35 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 4:37 |   9.7 |
+| Stories                                                                     | 48:08   |       |      | 100.0 |
+| Active                                                                      |         | 48:08 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 4:37 |   9.6 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:07 |   0.2 |
-| COMPLETED Generation of formattable is incorrect                            |         |       | 2:30 |   5.3 |
+| COMPLETED Generation of formattable is incorrect                            |         |       | 2:30 |   5.2 |
 | COMPLETED Visitor includes are incorrect                                    |         |       | 0:20 |   0.7 |
 | COMPLETED Add includer to quilt.cpp                                         |         |       | 1:46 |   3.7 |
 | COMPLETED Add reducer to quilt.cpp                                          |         |       | 0:22 |   0.8 |
@@ -34,26 +34,28 @@
 | COMPLETED Investigate borked travis build                                   |         |       | 0:37 |   1.3 |
 | COMPLETED Add decoration expander to quilt.cpp                              |         |       | 0:23 |   0.8 |
 | COMPLETED Add aspect expander to quilt.cpp                                  |         |       | 1:26 |   3.0 |
-| COMPLETED Run tests that are passing on windows                             |         |       | 0:10 |   0.4 |
+| COMPLETED Run tests that are passing on windows                             |         |       | 0:10 |   0.3 |
 | COMPLETED Add helper expander to quilt.cpp                                  |         |       | 1:26 |   3.0 |
 | COMPLETED Merge pre and post workflows                                      |         |       | 0:16 |   0.6 |
 | COMPLETED Fix bug in aspect and helper generation                           |         |       | 0:15 |   0.5 |
-| COMPLETED Investigate element annotation support                            |         |       | 2:05 |   4.4 |
-| CANCELLED Add streaming settings expander                                   |         |       | 0:36 |   1.3 |
+| COMPLETED Investigate element annotation support                            |         |       | 2:05 |   4.3 |
+| CANCELLED Add streaming settings expander                                   |         |       | 0:36 |   1.2 |
 | COMPLETED Create the formattables model                                     |         |       | 1:32 |   3.2 |
-| COMPLETED Hook formattables into formatters                                 |         |       | 3:58 |   8.3 |
+| COMPLETED Hook formattables into formatters                                 |         |       | 3:58 |   8.2 |
 | COMPLETED Remove empty context                                              |         |       | 1:09 |   2.4 |
-| COMPLETED Review main classes in quilt.cpp                                  |         |       | 3:42 |   7.8 |
+| COMPLETED Review main classes in quilt.cpp                                  |         |       | 3:42 |   7.7 |
 | COMPLETED Clean up element segmentation                                     |         |       | 1:20 |   2.8 |
-| COMPLETED Get OSX build to compile code                                     |         |       | 7:05 |  14.9 |
+| COMPLETED Get OSX build to compile code                                     |         |       | 7:05 |  14.7 |
 | COMPLETED Add a banner to readme                                            |         |       | 1:29 |   3.1 |
 | COMPLETED Remove formatter group                                            |         |       | 0:23 |   0.8 |
 | COMPLETED Add more types to =quilt::cpp= canned tests                       |         |       | 0:15 |   0.5 |
 | CANCELLED Remove formatter id                                               |         |       | 0:04 |   0.1 |
 | COMPLETED Analysis around terminology in formatting space                   |         |       | 3:24 |   7.1 |
 | COMPLETED Remove =original_model_name=                                      |         |       | 0:16 |   0.6 |
-| COMPLETED Refactor code around model origination                            |         |       | 4:08 |   8.7 |
+| COMPLETED Refactor code around model origination                            |         |       | 4:08 |   8.6 |
+| COMPLETED Remove formatter level facet folders                              |         |       | 0:06 |   0.2 |
 | STARTED Generate formatter interfaces                                       |         |       | 0:19 |   0.7 |
+| STARTED Handle registration of services properly                            |         |       | 0:27 |   0.9 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -858,6 +860,22 @@ Actually this is probably best handled in yarn, so that dia and json
 have common logic. We should just add the fields and add the
 processing in yarn somewhere.
 
+*** COMPLETED Remove formatter level facet folders                    :story:
+    CLOSED: [2016-10-03 Mon 16:02]
+    CLOCK: [2016-10-03 Mon 16:03]--[2016-10-03 Mon 16:05] =>  0:02
+    CLOCK: [2016-10-03 Mon 15:58]--[2016-10-03 Mon 16:02] =>  0:04
+
+We seem to have two of these, but the real one is at the model level.
+
+Merged stories:
+
+*Move facet directory to a better place*
+
+At present we have this property at the formatter configuration level,
+but its not clear why we need to duplicate it. In fact, it may even
+make more sense to have it at a higher level since its the same for
+all elements.
+
 *** STARTED Generate formatter interfaces                              :epic:
     CLOCK: [2016-09-30 Fri 10:58]--[2016-09-30 Fri 11:17] =>  0:19
 
@@ -994,7 +1012,7 @@ Further thoughts:
   generates the file. Actually we probably can't have this in quilt
   because we still need formatter properties.
 
-*** Add the concept of hand-crafting                                  :story:
+*** STARTED Add the concept of hand-crafting                          :story:
 
 An element can be marked with the stereotype of handcrafted. We then
 have several things to determine for this element:
@@ -1065,7 +1083,15 @@ Tasks:
   for it as we don't yet have a use case).
 - remove object_type
 
-*** Handle registration of services properly                          :story:
+*** STARTED Handle registration of services properly                  :story:
+    CLOCK: [2016-10-03 Mon 15:44]--[2016-10-03 Mon 15:58] =>  0:14
+    CLOCK: [2016-10-03 Mon 15:31]--[2016-10-03 Mon 15:44] =>  0:13
+
+The only way to do this is to filter the list of leaves by enabled
+formatters. We need a container of enabled formatters by element id at
+the formattable model level.
+
+*Previous Understanding*
 
 We need a flag to determine if a class should contribute its leaves or
 not. By default, if it is hand-crafted it does not contribute
@@ -1141,10 +1167,6 @@ knitting - but some do. We need a way to filter these. One possibility
 is to use an approach similar to the formatter groups in the ownership
 hierarchy. For now we simply have fields that have no meaning in
 stitching but can be supplied by users.
-
-*** Remove formatter level facet folders                              :story:
-
-We seem to have two of these, but the real one is at the model level.
 
 *** Implement qualified name efficiently                              :story:
 
@@ -1290,13 +1312,6 @@ dispatching.
 At present we are creating the formatter repository in
 =quilt.cpp=. However it will be shared by all backends in the
 kernel. Move it up to =quilt= level and supply it as a paramter to the backends.
-
-*** Move facet directory to a better place                            :story:
-
-At present we have this property at the formatter configuration level,
-but its not clear why we need to duplicate it. In fact, it may even
-make more sense to have it at a higher level since its the same for
-all elements.
 
 *** Create the notion of a formatter alias                            :story:
 

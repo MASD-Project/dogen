@@ -28,7 +28,6 @@
 #include <list>
 #include <string>
 #include <algorithm>
-#include <unordered_map>
 #include <unordered_set>
 #include <boost/filesystem/path.hpp>
 #include "dogen/quilt.cpp/types/formattables/opaque_configuration.hpp"
@@ -57,7 +56,6 @@ public:
         const std::string& header_guard,
         const std::list<std::string>& inclusion_dependencies,
         const std::unordered_set<std::string>& enabled_formatters,
-        const std::unordered_map<std::string, std::string>& facet_directory_for_facet,
         const dogen::quilt::cpp::formattables::opaque_configuration& opaque_configuration);
 
 private:
@@ -96,18 +94,6 @@ public:
     void enabled_formatters(const std::unordered_set<std::string>&& v);
     /**@}*/
 
-    /**
-     * @brief Maps a facet name to its facet directory.
-     *
-     * Note that the facet directory may be empty if the user disabled facet folders.
-     */
-    /**@{*/
-    const std::unordered_map<std::string, std::string>& facet_directory_for_facet() const;
-    std::unordered_map<std::string, std::string>& facet_directory_for_facet();
-    void facet_directory_for_facet(const std::unordered_map<std::string, std::string>& v);
-    void facet_directory_for_facet(const std::unordered_map<std::string, std::string>&& v);
-    /**@}*/
-
     const dogen::quilt::cpp::formattables::opaque_configuration& opaque_configuration() const;
     dogen::quilt::cpp::formattables::opaque_configuration& opaque_configuration();
     void opaque_configuration(const dogen::quilt::cpp::formattables::opaque_configuration& v);
@@ -129,7 +115,6 @@ private:
     std::string header_guard_;
     std::list<std::string> inclusion_dependencies_;
     std::unordered_set<std::string> enabled_formatters_;
-    std::unordered_map<std::string, std::string> facet_directory_for_facet_;
     dogen::quilt::cpp::formattables::opaque_configuration opaque_configuration_;
 };
 
