@@ -55,7 +55,6 @@ std::size_t element_hasher::hash(const element& v) {
     combine(seed, v.name());
     combine(seed, v.generation_type());
     combine(seed, v.origin_type());
-    combine(seed, v.original_model_name());
     combine(seed, hash_boost_optional_dogen_yarn_name(v.contained_by()));
     combine(seed, v.in_global_module());
     combine(seed, v.is_element_extension());

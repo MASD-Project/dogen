@@ -58,7 +58,6 @@ void save(Archive& ar,
     ar << make_nvp("name", v.name_);
     ar << make_nvp("generation_type", v.generation_type_);
     ar << make_nvp("origin_type", v.origin_type_);
-    ar << make_nvp("original_model_name", v.original_model_name_);
     ar << make_nvp("contained_by", v.contained_by_);
     ar << make_nvp("in_global_module", v.in_global_module_);
     ar << make_nvp("is_element_extension", v.is_element_extension_);
@@ -73,7 +72,6 @@ void load(Archive& ar,
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("generation_type", v.generation_type_);
     ar >> make_nvp("origin_type", v.origin_type_);
-    ar >> make_nvp("original_model_name", v.original_model_name_);
     ar >> make_nvp("contained_by", v.contained_by_);
     ar >> make_nvp("in_global_module", v.in_global_module_);
     ar >> make_nvp("is_element_extension", v.is_element_extension_);

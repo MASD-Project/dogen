@@ -68,7 +68,6 @@ public:
         const dogen::yarn::name& name,
         const dogen::yarn::generation_types generation_type,
         const dogen::yarn::origin_types origin_type,
-        const std::string& original_model_name,
         const boost::optional<dogen::yarn::name>& contained_by,
         const bool in_global_module,
         const bool is_element_extension,

@@ -51,12 +51,6 @@ public:
 
 private:
     /**
-     * @brief Creates the name for the model.
-     */
-    yarn::name create_name_for_model(const std::string& model_name,
-        const std::string& external_modules) const;
-
-    /**
      * @brief Creates a module representing the model.
      */
     yarn::module create_module_for_model(const yarn::name& n,

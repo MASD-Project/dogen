@@ -32,7 +32,6 @@
 		<identifiable>empty_package</identifiable>
 	</name>
 	<origin_type>1</origin_type>
-	<original_model_name>empty_package</original_model_name>
 	<generation_type>0</generation_type>
 	<references class_id="17" tracking_level="0" version="0">
 		<count>0</count>
@@ -91,7 +90,6 @@
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
-					<original_model_name></original_model_name>
 					<contained_by class_id="24" tracking_level="0" version="0">
 						<initialized>0</initialized>
 					</contained_by>
@@ -147,7 +145,6 @@
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
-					<original_model_name></original_model_name>
 					<contained_by>
 						<initialized>0</initialized>
 					</contained_by>

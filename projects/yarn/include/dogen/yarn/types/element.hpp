@@ -65,7 +65,6 @@ public:
         const dogen::yarn::name& name,
         const dogen::yarn::generation_types generation_type,
         const dogen::yarn::origin_types origin_type,
-        const std::string& original_model_name,
         const boost::optional<dogen::yarn::name>& contained_by,
         const bool in_global_module,
         const bool is_element_extension);
@@ -138,16 +137,6 @@ public:
     /**@}*/
 
     /**
-     * @brief Name of the model where the element came from.
-     */
-    /**@{*/
-    const std::string& original_model_name() const;
-    std::string& original_model_name();
-    void original_model_name(const std::string& v);
-    void original_model_name(const std::string&& v);
-    /**@}*/
-
-    /**
      * @brief Name of the module in which we are contained.
      */
     /**@{*/
@@ -187,7 +176,6 @@ private:
     dogen::yarn::name name_;
     dogen::yarn::generation_types generation_type_;
     dogen::yarn::origin_types origin_type_;
-    std::string original_model_name_;
     boost::optional<dogen::yarn::name> contained_by_;
     bool in_global_module_;
     bool is_element_extension_;

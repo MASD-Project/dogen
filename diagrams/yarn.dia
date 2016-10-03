@@ -5302,17 +5302,17 @@ can make use of these types.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-139.398,-1"/>
+        <dia:point val="-140.745,-1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-147.95,-9.05;-138.648,-0.2"/>
+        <dia:rectangle val="-147.95,-9.05;-139.995,-0.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-139.398,-1"/>
-        <dia:point val="-139.398,-6"/>
+        <dia:point val="-140.745,-1"/>
+        <dia:point val="-140.745,-6"/>
         <dia:point val="-147.9,-6"/>
         <dia:point val="-147.9,-9"/>
       </dia:attribute>
@@ -6739,16 +6739,16 @@ etc.#</dia:string>
         <dia:point val="-146,-1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-146.05,-1.05;-132.745,3.45"/>
+        <dia:rectangle val="-146.05,-1.05;-135.44,2.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-146,-1"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.205"/>
+        <dia:real val="10.51"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#DeterminableOrigin#</dia:string>
@@ -6861,29 +6861,6 @@ etc.#</dia:string>
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#original_model_name#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::string#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Name of the model where the element came from.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -6893,17 +6870,17 @@ etc.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O61">
       <dia:attribute name="obj_pos">
-        <dia:point val="-139.398,3.4"/>
+        <dia:point val="-140.745,2.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-140.248,3.35;-109.582,14.05"/>
+        <dia:rectangle val="-141.595,2.55;-109.582,14.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-139.398,3.4"/>
-        <dia:point val="-139.398,9"/>
+        <dia:point val="-140.745,2.6"/>
+        <dia:point val="-140.745,9"/>
         <dia:point val="-109.632,9"/>
         <dia:point val="-109.632,14"/>
       </dia:attribute>
@@ -12418,13 +12395,13 @@ are not modules, such as attributes, inner classes, etc.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O98">
       <dia:attribute name="obj_pos">
-        <dia:point val="69,-14"/>
+        <dia:point val="73,-14"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="68.95,-14.05;83.795,-10.35"/>
+        <dia:rectangle val="72.95,-14.05;87.795,-10.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="69,-14"/>
+        <dia:point val="73,-14"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="14.744999999999999"/>
@@ -12772,17 +12749,17 @@ are not modules, such as attributes, inner classes, etc.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="76.3725,-10.4"/>
+        <dia:point val="80.3725,-10.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="76.3225,-10.45;94.75,-0.2"/>
+        <dia:rectangle val="80.3225,-10.45;94.75,-0.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="76.3725,-10.4"/>
-        <dia:point val="76.3725,-6"/>
+        <dia:point val="80.3725,-10.4"/>
+        <dia:point val="80.3725,-6"/>
         <dia:point val="94,-6"/>
         <dia:point val="94,-1"/>
       </dia:attribute>
@@ -17396,16 +17373,16 @@ across all elements in the model.#</dia:string>
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O141">
       <dia:attribute name="obj_pos">
-        <dia:point val="68,-4"/>
+        <dia:point val="62,-7"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="67.95,-4.05;82.04,-0.65"/>
+        <dia:rectangle val="61.95,-7.05;76.04,-3.65"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="68,-4"/>
+        <dia:point val="62,-7"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="13.99"/>
@@ -17436,7 +17413,7 @@ but the module does not yet exist.#</dia:string>
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="68.35,-2.755"/>
+            <dia:point val="62.35,-5.755"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -17449,17 +17426,17 @@ but the module does not yet exist.#</dia:string>
     </dia:object>
     <dia:object type="UML - Message" version="0" id="O142">
       <dia:attribute name="obj_pos">
-        <dia:point val="74.995,-4"/>
+        <dia:point val="68.995,-7"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="68.6739,-10.7099;75.0657,-3.92933"/>
+        <dia:rectangle val="68.9245,-10.7373;73.297,-6.92952"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
-        <dia:point val="74.995,-4"/>
-        <dia:point val="69,-10.4"/>
+        <dia:point val="68.995,-7"/>
+        <dia:point val="73,-10.4"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
@@ -17474,7 +17451,7 @@ but the module does not yet exist.#</dia:string>
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="71.9976,-6.7001"/>
+        <dia:point val="70.9976,-8.2001"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O141" connection="1"/>
@@ -21438,7 +21415,7 @@ that belong to the yarn model.#</dia:string>
         <dia:point val="29.7875,-15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="29.0375,-19.75;76.5725,-13.2"/>
+        <dia:rectangle val="29.0375,-19.75;80.5725,-13.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -21446,8 +21423,8 @@ that belong to the yarn model.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="29.7875,-15"/>
         <dia:point val="29.7875,-19"/>
-        <dia:point val="76.3725,-19"/>
-        <dia:point val="76.3725,-14"/>
+        <dia:point val="80.3725,-19"/>
+        <dia:point val="80.3725,-14"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

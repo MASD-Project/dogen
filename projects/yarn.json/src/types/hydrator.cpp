@@ -179,10 +179,8 @@ yarn::intermediate_model hydrator::read_stream(
     boost::property_tree::ptree pt;
     read_json(s, pt);
 
-    const auto model_name_value(pt.get<std::string>(model_name_key));
-    r.original_model_name(model_name_value);
-
     yarn::name_factory nf;
+    const auto model_name_value(pt.get<std::string>(model_name_key));
     r.name(nf.build_model_name(model_name_value));
     BOOST_LOG_SEV(lg, debug) << "Processing model: " << r.name().id();
 

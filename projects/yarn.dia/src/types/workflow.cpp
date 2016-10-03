@@ -44,14 +44,6 @@ namespace dia {
 
 workflow::workflow(const dynamic::workflow& w) : dynamic_workflow_(w) { }
 
-yarn::name
-workflow::create_name_for_model(const std::string& model_name,
-    const std::string& external_modules) const {
-
-    yarn::name_factory nf;
-    return nf.build_model_name(model_name, external_modules);
-}
-
 yarn::module workflow::create_module_for_model(const yarn::name& n,
     const yarn::origin_types ot) const {
 
@@ -67,10 +59,14 @@ yarn::module workflow::create_module_for_model(const yarn::name& n,
 void workflow::initialise_context_activity(const std::string& model_name,
     const std::string& external_modules, bool is_target) {
 
+    /*
+     * Reset the context in case we've been called several times.
+     */
     context_ = context();
+
     auto& m(context_.model());
-    m.name(create_name_for_model(model_name, external_modules));
-    m.original_model_name(model_name);
+    yarn::name_factory nf;
+    m.name(nf.build_model_name(model_name, external_modules));
     BOOST_LOG_SEV(lg, debug) << "Model: " << m.name().id();
 
     /*

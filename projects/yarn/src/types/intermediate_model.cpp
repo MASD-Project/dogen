@@ -41,7 +41,6 @@ intermediate_model::intermediate_model()
 intermediate_model::intermediate_model(
     const dogen::yarn::name& name,
     const dogen::yarn::origin_types origin_type,
-    const std::string& original_model_name,
     const dogen::yarn::generation_types generation_type,
     const std::unordered_map<dogen::yarn::name, dogen::yarn::origin_types>& references,
     const std::unordered_set<dogen::yarn::name>& leaves,
@@ -57,7 +56,6 @@ intermediate_model::intermediate_model(
     const dogen::yarn::indices& indices)
     : name_(name),
       origin_type_(origin_type),
-      original_model_name_(original_model_name),
       generation_type_(generation_type),
       references_(references),
       leaves_(leaves),
@@ -76,7 +74,6 @@ void intermediate_model::swap(intermediate_model& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
     swap(origin_type_, other.origin_type_);
-    swap(original_model_name_, other.original_model_name_);
     swap(generation_type_, other.generation_type_);
     swap(references_, other.references_);
     swap(leaves_, other.leaves_);
@@ -95,7 +92,6 @@ void intermediate_model::swap(intermediate_model& other) noexcept {
 bool intermediate_model::operator==(const intermediate_model& rhs) const {
     return name_ == rhs.name_ &&
         origin_type_ == rhs.origin_type_ &&
-        original_model_name_ == rhs.original_model_name_ &&
         generation_type_ == rhs.generation_type_ &&
         references_ == rhs.references_ &&
         leaves_ == rhs.leaves_ &&
@@ -139,22 +135,6 @@ dogen::yarn::origin_types intermediate_model::origin_type() const {
 
 void intermediate_model::origin_type(const dogen::yarn::origin_types v) {
     origin_type_ = v;
-}
-
-const std::string& intermediate_model::original_model_name() const {
-    return original_model_name_;
-}
-
-std::string& intermediate_model::original_model_name() {
-    return original_model_name_;
-}
-
-void intermediate_model::original_model_name(const std::string& v) {
-    original_model_name_ = v;
-}
-
-void intermediate_model::original_model_name(const std::string&& v) {
-    original_model_name_ = std::move(v);
 }
 
 dogen::yarn::generation_types intermediate_model::generation_type() const {

@@ -35,13 +35,6 @@
 #include "dogen/yarn/io/generation_types_io.hpp"
 #include "dogen/yarn/io/intermediate_model_io.hpp"
 
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    return s;
-}
-
 namespace std {
 
 inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::yarn::name, dogen::yarn::origin_types>& v) {
@@ -72,6 +65,13 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen:
     return s;
 }
 
+}
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
 }
 
 namespace std {
@@ -248,7 +248,6 @@ std::ostream& operator<<(std::ostream& s, const intermediate_model& v) {
       << "\"__type__\": " << "\"dogen::yarn::intermediate_model\"" << ", "
       << "\"name\": " << v.name() << ", "
       << "\"origin_type\": " << v.origin_type() << ", "
-      << "\"original_model_name\": " << "\"" << tidy_up_string(v.original_model_name()) << "\"" << ", "
       << "\"generation_type\": " << v.generation_type() << ", "
       << "\"references\": " << v.references() << ", "
       << "\"leaves\": " << v.leaves() << ", "
