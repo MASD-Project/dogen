@@ -249,17 +249,17 @@ void enablement_expander::compute_enablement(
         const auto fmtn(pair.first);
 
         /*
-         * As we may be processing a segmented element, not all
+         * As we may be processing a segmented entity, not all
          * formatters need to be present in the local
-         * configuration. For example, an element may be segmented
-         * into an object and a forward declaration; in this case,
-         * when we are processing the object, we will still see the
-         * forward declaration formatters in the formattable
-         * configuration since the transformer merged all segments of
-         * the element together. However, these are not present in the
-         * local configuration container because we are only
-         * processing one segment at a time. So, we need to ignore the
-         * segments we are not processing.
+         * configuration. For example, an entity may be segmented into
+         * an object and a forward declaration; in this case, when we
+         * are processing the object, we will still see the forward
+         * declaration formatters in the formattable configuration
+         * since the transformer merged all segments of the element
+         * together. However, these are not present in the local
+         * configuration container because we are only processing one
+         * segment at a time. So, we need to ignore the formatters for
+         * the segments we are not processing.
          */
         const auto j(lcs.find(fmtn));
         if (j == lcs.end()) {
