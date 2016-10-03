@@ -29,6 +29,7 @@
 #include <algorithm>
 #include <unordered_map>
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
+#include "dogen/quilt.cpp/types/formattables/facet_configuration.hpp"
 #include "dogen/quilt.cpp/types/annotations/streaming_annotations.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/model_fwd_ser.hpp"
 
@@ -48,7 +49,8 @@ public:
     model(
         const std::unordered_map<std::string, dogen::quilt::cpp::annotations::streaming_annotations>& streaming_annotations,
         const std::unordered_map<std::string, std::string>& facet_directory_for_facet,
-        const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formattable>& formattables);
+        const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formattable>& formattables,
+        const std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_configuration>& facet_configurations);
 
 private:
     template<typename Archive>
@@ -80,6 +82,11 @@ public:
     void formattables(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formattable>& v);
     void formattables(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formattable>&& v);
 
+    const std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_configuration>& facet_configurations() const;
+    std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_configuration>& facet_configurations();
+    void facet_configurations(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_configuration>& v);
+    void facet_configurations(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_configuration>&& v);
+
 public:
     bool operator==(const model& rhs) const;
     bool operator!=(const model& rhs) const {
@@ -94,6 +101,7 @@ private:
     std::unordered_map<std::string, dogen::quilt::cpp::annotations::streaming_annotations> streaming_annotations_;
     std::unordered_map<std::string, std::string> facet_directory_for_facet_;
     std::unordered_map<std::string, dogen::quilt::cpp::formattables::formattable> formattables_;
+    std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_configuration> facet_configurations_;
 };
 
 } } } }

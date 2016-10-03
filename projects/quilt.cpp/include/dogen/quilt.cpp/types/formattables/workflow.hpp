@@ -45,15 +45,8 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-/**
- * @brief Generates a list of properties from a given container of
- * Yarn elements.
- */
 class workflow {
 private:
-    /**
-     * @brief Creates the path annotations.
-     */
     typedef std::unordered_map<std::string, annotations::path_annotations>
     path_annotations_type;
 
@@ -76,7 +69,8 @@ private:
     void expand_model(
         const dynamic::repository& drp, const dynamic::object& root_object,
         const dogen::formatters::decoration_configuration_factory& dcf,
-        const formatters::container& fc, const locator& l, model& fm) const;
+        const path_annotations_type& pa, const formatters::container& fc,
+        const locator& l, model& fm) const;
 
 public:
     model execute(const options::cpp_options& opts,

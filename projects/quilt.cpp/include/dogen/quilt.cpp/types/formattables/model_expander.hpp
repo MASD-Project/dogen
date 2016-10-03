@@ -32,6 +32,7 @@
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/formatters/types/decoration_configuration_factory.hpp"
+#include "dogen/quilt.cpp/types/annotations/path_annotations.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/formattables/locator.hpp"
 #include "dogen/quilt.cpp/types/formattables/model.hpp"
@@ -68,10 +69,16 @@ private:
     void expand_opaque_configuration(const dynamic::repository& drp,
         model& fm) const;
 
+    void expand_facet_directories(const std::unordered_map<std::string,
+        annotations::path_annotations>& pa, const formatters::container& fc,
+        model& fm) const;
+
 public:
     void expand(const dynamic::repository& drp,
         const dynamic::object& root_object,
         const dogen::formatters::decoration_configuration_factory& dcf,
+        const std::unordered_map<std::string,
+        annotations::path_annotations>& pa,
         const formatters::container& fc, const locator& l, model& fm) const;
 };
 

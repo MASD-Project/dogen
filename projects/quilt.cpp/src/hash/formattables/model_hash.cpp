@@ -20,6 +20,7 @@
  */
 #include "dogen/quilt.cpp/hash/formattables/model_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/formattable_hash.hpp"
+#include "dogen/quilt.cpp/hash/formattables/facet_configuration_hash.hpp"
 #include "dogen/quilt.cpp/hash/annotations/streaming_annotations_hash.hpp"
 
 namespace {
@@ -57,6 +58,15 @@ inline std::size_t hash_std_unordered_map_std_string_dogen_quilt_cpp_formattable
     return seed;
 }
 
+inline std::size_t hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_facet_configuration(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_configuration>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, i.second);
+    }
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -70,6 +80,7 @@ std::size_t model_hasher::hash(const model& v) {
     combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_annotations_streaming_annotations(v.streaming_annotations()));
     combine(seed, hash_std_unordered_map_std_string_std_string(v.facet_directory_for_facet()));
     combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formattable(v.formattables()));
+    combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_facet_configuration(v.facet_configurations()));
 
     return seed;
 }

@@ -31,6 +31,7 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/quilt.cpp/serialization/formattables/model_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/formattable_ser.hpp"
+#include "dogen/quilt.cpp/serialization/formattables/facet_configuration_ser.hpp"
 #include "dogen/quilt.cpp/serialization/annotations/streaming_annotations_ser.hpp"
 
 namespace boost {
@@ -43,6 +44,7 @@ void save(Archive& ar,
     ar << make_nvp("streaming_annotations", v.streaming_annotations_);
     ar << make_nvp("facet_directory_for_facet", v.facet_directory_for_facet_);
     ar << make_nvp("formattables", v.formattables_);
+    ar << make_nvp("facet_configurations", v.facet_configurations_);
 }
 
 template<typename Archive>
@@ -52,6 +54,7 @@ void load(Archive& ar,
     ar >> make_nvp("streaming_annotations", v.streaming_annotations_);
     ar >> make_nvp("facet_directory_for_facet", v.facet_directory_for_facet_);
     ar >> make_nvp("formattables", v.formattables_);
+    ar >> make_nvp("facet_configurations", v.facet_configurations_);
 }
 
 } }

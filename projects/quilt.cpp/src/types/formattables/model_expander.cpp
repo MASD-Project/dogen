@@ -27,6 +27,7 @@
 #include "dogen/quilt.cpp/types/formattables/reducer.hpp"
 #include "dogen/quilt.cpp/types/formattables/file_path_and_guard_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/opaque_configuration_expander.hpp"
+#include "dogen/quilt.cpp/types/formattables/facet_directory_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/model_expander.hpp"
 
 namespace dogen {
@@ -85,9 +86,18 @@ expand_opaque_configuration(const dynamic::repository& drp, model& fm) const {
     ex.expand(drp, fm);
 }
 
+void model_expander::
+expand_facet_directories(const std::unordered_map<std::string,
+    annotations::path_annotations>& pa, const formatters::container& fc,
+    model& fm) const {
+    facet_directory_expander ex;
+    ex.expand(pa, fc, fm);
+}
+
 void model_expander::expand(
     const dynamic::repository& drp, const dynamic::object& root_object,
     const dogen::formatters::decoration_configuration_factory& dcf,
+    const std::unordered_map<std::string, annotations::path_annotations>& pa,
     const formatters::container& fc, const locator& l, model& fm) const {
 
     expand_enablement(drp, root_object, fc, fm);
@@ -100,6 +110,7 @@ void model_expander::expand(
 
     expand_file_paths_and_guards(fc, l, fm);
     expand_opaque_configuration(drp, fm);
+    expand_facet_directories(pa, fc, fm);
 }
 
 } } } }

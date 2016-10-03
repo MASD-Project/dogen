@@ -21,6 +21,7 @@
 #include <sstream>
 #include "dogen/quilt.cpp/test_data/formattables/model_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/formattable_td.hpp"
+#include "dogen/quilt.cpp/test_data/formattables/facet_configuration_td.hpp"
 #include "dogen/quilt.cpp/test_data/annotations/streaming_annotations_td.hpp"
 
 namespace {
@@ -65,6 +66,19 @@ std::unordered_map<std::string, dogen::quilt::cpp::formattables::formattable> cr
     return r;
 }
 
+dogen::quilt::cpp::formattables::facet_configuration
+create_dogen_quilt_cpp_formattables_facet_configuration(const unsigned int position) {
+    return dogen::quilt::cpp::formattables::facet_configuration_generator::create(position);
+}
+
+std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_configuration> create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_facet_configuration(unsigned int position) {
+    std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_configuration> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_quilt_cpp_formattables_facet_configuration(position + i)));
+    }
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -79,6 +93,7 @@ populate(const unsigned int position, result_type& v) {
     v.streaming_annotations(create_std_unordered_map_std_string_dogen_quilt_cpp_annotations_streaming_annotations(position + 0));
     v.facet_directory_for_facet(create_std_unordered_map_std_string_std_string(position + 1));
     v.formattables(create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formattable(position + 2));
+    v.facet_configurations(create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_facet_configuration(position + 3));
 }
 
 model_generator::result_type

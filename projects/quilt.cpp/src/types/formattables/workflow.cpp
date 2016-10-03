@@ -75,8 +75,8 @@ workflow::make_streaming_annotations(const dynamic::repository& drp,
 }
 
 std::unordered_map<std::string, std::string> workflow::
-facet_directory_for_facet(const std::unordered_map<std::string,
-    annotations::path_annotations>& pa, const formatters::container& fc) const {
+facet_directory_for_facet(const path_annotations_type& pa,
+    const formatters::container& fc) const {
 
     std::unordered_map<std::string, std::string> r;
     for (const auto& f : fc.file_formatters()) {
@@ -97,7 +97,6 @@ model workflow::make_model(const dynamic::repository& drp,
     model r;
     transformer t;
     r.formattables(t.transform(fc, m));
-
     r.facet_directory_for_facet(facet_directory_for_facet(pa, fc));
 
     const auto sa(make_streaming_annotations(drp, m));
@@ -109,9 +108,10 @@ model workflow::make_model(const dynamic::repository& drp,
 void workflow::expand_model(
     const dynamic::repository& drp, const dynamic::object& root_object,
     const dogen::formatters::decoration_configuration_factory& dcf,
-    const formatters::container& fc, const locator& l, model& fm) const {
+    const path_annotations_type& pa, const formatters::container& fc,
+    const locator& l, model& fm) const {
     model_expander ex;
-    ex.expand(drp, root_object, dcf, fc, l, fm);
+    ex.expand(drp, root_object, dcf, pa, fc, l, fm);
 }
 
 model workflow::execute(const options::cpp_options& opts,
@@ -123,7 +123,7 @@ model workflow::execute(const options::cpp_options& opts,
     const auto pa(make_path_annotations(drp, root_object, fc));
     const locator l(opts, m, pa);
     auto r(make_model(drp, pa, fc, m));
-    expand_model(drp, root_object, dcf, fc, l, r);
+    expand_model(drp, root_object, dcf, pa, fc, l, r);
     return r;
 }
 

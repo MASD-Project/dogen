@@ -29,20 +29,17 @@ element_configuration::element_configuration(element_configuration&& rhs)
     : decoration_configuration_(std::move(rhs.decoration_configuration_)),
       aspect_configuration_(std::move(rhs.aspect_configuration_)),
       formatter_configurations_(std::move(rhs.formatter_configurations_)),
-      helper_configurations_(std::move(rhs.helper_configurations_)),
-      facet_configurations_(std::move(rhs.facet_configurations_)) { }
+      helper_configurations_(std::move(rhs.helper_configurations_)) { }
 
 element_configuration::element_configuration(
     const boost::optional<dogen::formatters::decoration_configuration>& decoration_configuration,
     const dogen::quilt::cpp::formattables::aspect_configuration& aspect_configuration,
     const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration>& formatter_configurations,
-    const std::list<dogen::quilt::cpp::formattables::helper_configuration>& helper_configurations,
-    const std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_configuration>& facet_configurations)
+    const std::list<dogen::quilt::cpp::formattables::helper_configuration>& helper_configurations)
     : decoration_configuration_(decoration_configuration),
       aspect_configuration_(aspect_configuration),
       formatter_configurations_(formatter_configurations),
-      helper_configurations_(helper_configurations),
-      facet_configurations_(facet_configurations) { }
+      helper_configurations_(helper_configurations) { }
 
 void element_configuration::swap(element_configuration& other) noexcept {
     using std::swap;
@@ -50,15 +47,13 @@ void element_configuration::swap(element_configuration& other) noexcept {
     swap(aspect_configuration_, other.aspect_configuration_);
     swap(formatter_configurations_, other.formatter_configurations_);
     swap(helper_configurations_, other.helper_configurations_);
-    swap(facet_configurations_, other.facet_configurations_);
 }
 
 bool element_configuration::operator==(const element_configuration& rhs) const {
     return decoration_configuration_ == rhs.decoration_configuration_ &&
         aspect_configuration_ == rhs.aspect_configuration_ &&
         formatter_configurations_ == rhs.formatter_configurations_ &&
-        helper_configurations_ == rhs.helper_configurations_ &&
-        facet_configurations_ == rhs.facet_configurations_;
+        helper_configurations_ == rhs.helper_configurations_;
 }
 
 element_configuration& element_configuration::operator=(element_configuration other) {
@@ -129,22 +124,6 @@ void element_configuration::helper_configurations(const std::list<dogen::quilt::
 
 void element_configuration::helper_configurations(const std::list<dogen::quilt::cpp::formattables::helper_configuration>&& v) {
     helper_configurations_ = std::move(v);
-}
-
-const std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_configuration>& element_configuration::facet_configurations() const {
-    return facet_configurations_;
-}
-
-std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_configuration>& element_configuration::facet_configurations() {
-    return facet_configurations_;
-}
-
-void element_configuration::facet_configurations(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_configuration>& v) {
-    facet_configurations_ = v;
-}
-
-void element_configuration::facet_configurations(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_configuration>&& v) {
-    facet_configurations_ = std::move(v);
 }
 
 } } } }
