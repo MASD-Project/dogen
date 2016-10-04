@@ -26,30 +26,20 @@ namespace cpp {
 namespace formatters {
 
 context::context(
-    const std::unordered_map<std::string, annotations::streaming_annotations>&
-    sa, const formattables::element_configuration& element_configuration,
-    const std::unordered_map<std::string, formattables::facet_configuration>&
-    facet_configurations, const std::unordered_map<std::string,
-    std::unordered_map<std::string, std::list<std::shared_ptr<
-    helper_formatter_interface>>>>& helpers)
-    : streaming_annotations_(sa),
-      element_configuration_(element_configuration),
-      facet_configurations_(facet_configurations),
+    const formattables::element_configuration& element_configuration,
+    const formattables::model& fm,
+    const std::unordered_map<std::string, std::unordered_map<std::string,
+    std::list<std::shared_ptr<helper_formatter_interface>>>>& helpers)
+    : element_configuration_(element_configuration), model_(fm),
       helpers_(helpers) { }
-
-const std::unordered_map<std::string, annotations::streaming_annotations>&
-context::streaming_annotations() const {
-    return streaming_annotations_;
-}
 
 const formattables::element_configuration&
 context::element_configuration() const {
     return element_configuration_;
 }
 
-const std::unordered_map<std::string, formattables::facet_configuration>&
-context::facet_configurations() const {
-    return facet_configurations_;
+const formattables::model& context::model() const {
+    return model_;
 }
 
 const std::unordered_map<

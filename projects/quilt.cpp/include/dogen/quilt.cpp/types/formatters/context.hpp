@@ -29,9 +29,8 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen/quilt.cpp/types/annotations/streaming_annotations.hpp"
+#include "dogen/quilt.cpp/types/formattables/model.hpp"
 #include "dogen/quilt.cpp/types/formattables/element_configuration.hpp"
-#include "dogen/quilt.cpp/types/formattables/facet_configuration.hpp"
 #include "dogen/quilt.cpp/types/formatters/helper_formatter_interface.hpp"
 
 namespace dogen {
@@ -44,24 +43,15 @@ namespace formatters {
  */
 class context final {
 public:
-    context(
-        const std::unordered_map<std::string,
-        annotations::streaming_annotations>& sa,
-        const formattables::element_configuration&
-        element_configurations,
-        const std::unordered_map<std::string,
-        formattables::facet_configuration>& facet_configurations,
-        const std::unordered_map<std::string, std::unordered_map<std::string,
-        std::list<std::shared_ptr<helper_formatter_interface>>>>& helpers);
+    context(const formattables::element_configuration& element_configuration,
+        const formattables::model& fm, const std::unordered_map<std::string,
+        std::unordered_map<std::string, std::list<std::shared_ptr<
+        helper_formatter_interface>>>>& helpers);
 
 public:
-    const std::unordered_map<std::string, annotations::streaming_annotations>&
-    streaming_annotations() const;
-
     const formattables::element_configuration& element_configuration() const;
 
-    const std::unordered_map<std::string, formattables::facet_configuration>&
-        facet_configurations() const;
+    const formattables::model& model() const;
 
     const std::unordered_map<
         std::string,
@@ -71,11 +61,8 @@ public:
         helpers() const;
 
 private:
-    const std::unordered_map<std::string, annotations::streaming_annotations>&
-    streaming_annotations_;
     const formattables::element_configuration& element_configuration_;
-    const std::unordered_map<std::string, formattables::facet_configuration>&
-    facet_configurations_;
+    const formattables::model& model_;
     const std::unordered_map<
         std::string,
         std::unordered_map<

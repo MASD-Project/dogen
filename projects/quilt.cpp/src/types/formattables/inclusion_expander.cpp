@@ -39,7 +39,6 @@ const std::string boost_name("boost");
 const std::string boost_serialization_gregorian("greg_serialize.hpp");
 
 const std::string duplicate_element_name("Duplicate delement name: ");
-const std::string duplicate_formatter_name("Duplicate formatter name: ");
 const std::string missing_formatter_name("Formatter name not found: ");
 const std::string empty_include_directive("Include directive is empty.");
 const std::string formatter_not_found_for_type(
@@ -330,18 +329,12 @@ inclusion_expander::compute_inclusion_dependencies(
         /*
          * Now slot in the results, ensuring our formatter name is
          * unique.
-         *
-         * FIXME: add validation for formatter registration so we can
+         * Now slot in the results. We have guaranteed in the
+         * registrar that the formatter name is unique, so no need to
+         * check.
          * remove this check.
          */
-        const auto pair(std::make_pair(fmtn, deps));
-        const bool inserted(r.insert(pair).second);
-        if (!inserted) {
-            BOOST_LOG_SEV(lg, error) << duplicate_formatter_name << fmtn
-                                     << " for type: " << id;
-            BOOST_THROW_EXCEPTION(
-                expansion_error(duplicate_formatter_name + fmtn));
-        }
+        r[fmtn] = deps;
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished creating inclusion dependencies for: "

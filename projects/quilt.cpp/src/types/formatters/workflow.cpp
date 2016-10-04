@@ -91,10 +91,9 @@ workflow::format(const formattables::model& fm, const yarn::element& e,
             continue;
         }
 
-        const auto& hf(fc.helper_formatters());
-        const auto& sa(fm.streaming_annotations());
+        const auto& hlp_fmt(fc.helper_formatters());
         const auto fct_cfgs(fm.facet_configurations());
-        context ctx(sa, ec, fct_cfgs, hf);
+        context ctx(ec, fm, hlp_fmt);
 
         auto file(fmt.format(ctx, e));
         const auto pg(yarn::generation_types::partial_generation);

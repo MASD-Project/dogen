@@ -187,7 +187,7 @@ obtain_formatter_configuration(const std::string& formatter_name) const {
 
 formattables::facet_configuration assistant::
 obtain_facet_configuration(const std::string& facet_name) const {
-    const auto& fct_cfg(context_.facet_configurations());
+    const auto& fct_cfg(context_.model().facet_configurations());
     const auto i(fct_cfg.find(facet_name));
     if (i == fct_cfg.end()) {
         BOOST_LOG_SEV(lg, error) << facet_configuration_missing
@@ -504,7 +504,7 @@ std::string assistant::streaming_for_type(
 std::string assistant::streaming_for_type(const yarn::name& n,
     const std::string& s) const {
 
-    const auto sa(context_.streaming_annotations());
+    const auto sa(context_.model().streaming_annotations());
     const auto i(sa.find(n.id()));
     if (i == sa.end())
         return s;
