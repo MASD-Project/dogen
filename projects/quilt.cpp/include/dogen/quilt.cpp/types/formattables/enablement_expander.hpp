@@ -66,8 +66,8 @@ private:
         const global_field_definitions_type& gfds,
         const dynamic::object& root_object) const;
 
-    void update_facet_enablement(model& fm,
-        const global_enablement_configurations_type& gcs) const;
+    void update_facet_enablement(const formatters::container& fc,
+        const global_enablement_configurations_type& gcs, model& fm) const;
 
 private:
     struct local_field_definitions {

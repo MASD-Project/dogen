@@ -28,7 +28,6 @@
 #include <list>
 #include <string>
 #include <algorithm>
-#include <unordered_set>
 #include <boost/filesystem/path.hpp>
 #include "dogen/quilt.cpp/types/formattables/opaque_configuration.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/formatter_configuration_fwd_ser.hpp"
@@ -55,7 +54,6 @@ public:
         const boost::filesystem::path& file_path,
         const std::string& header_guard,
         const std::list<std::string>& inclusion_dependencies,
-        const std::unordered_set<std::string>& enabled_formatters,
         const dogen::quilt::cpp::formattables::opaque_configuration& opaque_configuration);
 
 private:
@@ -84,16 +82,6 @@ public:
     void inclusion_dependencies(const std::list<std::string>& v);
     void inclusion_dependencies(const std::list<std::string>&& v);
 
-    /**
-     * @brief Set of all the enabled formatters for this element.
-     */
-    /**@{*/
-    const std::unordered_set<std::string>& enabled_formatters() const;
-    std::unordered_set<std::string>& enabled_formatters();
-    void enabled_formatters(const std::unordered_set<std::string>& v);
-    void enabled_formatters(const std::unordered_set<std::string>&& v);
-    /**@}*/
-
     const dogen::quilt::cpp::formattables::opaque_configuration& opaque_configuration() const;
     dogen::quilt::cpp::formattables::opaque_configuration& opaque_configuration();
     void opaque_configuration(const dogen::quilt::cpp::formattables::opaque_configuration& v);
@@ -114,7 +102,6 @@ private:
     boost::filesystem::path file_path_;
     std::string header_guard_;
     std::list<std::string> inclusion_dependencies_;
-    std::unordered_set<std::string> enabled_formatters_;
     dogen::quilt::cpp::formattables::opaque_configuration opaque_configuration_;
 };
 

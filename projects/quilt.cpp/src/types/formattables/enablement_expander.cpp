@@ -139,13 +139,37 @@ enablement_expander::obtain_global_configurations(
     return r;
 }
 
-void enablement_expander::update_facet_enablement(model& fm,
-    const global_enablement_configurations_type& gcs) const {
+void enablement_expander::update_facet_enablement(
+    const formatters::container& fc,
+    const global_enablement_configurations_type& gcs, model& fm) const {
     BOOST_LOG_SEV(lg, debug) << "Updating facet enablement.";
 
+    /*
+     * For each formatter on our global configurations: find the facet
+     * to which the formatter belongs to, and update the enabled value
+     * of that facet in the main facet container.
+     *
+     * Note that this is all a bit silly - we're doing this N times
+     * for one facet (where N is the number of formatters for that
+     * facet) rather than just read the facet field and update it
+     * once.
+     *
+     * FIXME: implement this properly.
+     */
+    const auto& fffn(fc.file_formatters_by_formatter_name());
     auto& fct_cfgs(fm.facet_configurations());
     for (const auto& pair : gcs) {
-        const auto fctn(pair.first);
+        const auto fmtn(pair.first);
+        const auto i(fffn.find(fmtn));
+        if (i == fffn.end()) {
+            BOOST_LOG_SEV(lg, error) << formatter_not_found << fmtn;
+            BOOST_THROW_EXCEPTION(
+                expansion_error(formatter_not_found + fmtn));
+        }
+
+        const auto& fmt(*i->second);
+        const auto& oh(fmt.ownership_hierarchy());
+        const auto fctn(oh.facet_name());
         const auto& gc(pair.second);
         fct_cfgs[fctn].enabled(gc.facet_enabled());
     }
@@ -353,7 +377,7 @@ void enablement_expander::expand(const dynamic::repository& drp,
      * the facet configurations with it.
      */
     const auto gcs(obtain_global_configurations(gfds, root_object));
-    update_facet_enablement(fm, gcs);
+    update_facet_enablement(fc, gcs, fm);
 
     /*
      * Create the fields for the local field definitions. These are
@@ -368,8 +392,6 @@ void enablement_expander::expand(const dynamic::repository& drp,
      */
     const auto lfdsti(bucket_local_field_definitions_by_type_index(lfds, fc));
 
-    // FIXME: massive hack to compute enabled formatters
-    std::unordered_set<std::string> enabled_formatters;
     for (auto& pair : fm.formattables()) {
         const auto id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
@@ -405,29 +427,6 @@ void enablement_expander::expand(const dynamic::repository& drp,
              * formattable, across all the supported formatters.
              */
             compute_enablement(gcs, lcs, formattable);
-        }
-
-        // FIXME: massive hack to compute enabled formatters
-        const auto& ecfg(formattable.element_configuration());
-        for (const auto& pair : ecfg.formatter_configurations()) {
-            const auto& fmtn(pair.first);
-            const auto& fmt_cfg(pair.second);
-            if (fmt_cfg.enabled())
-                enabled_formatters.insert(fmtn);
-        }
-    }
-
-    // FIXME: massive hack to compute enabled formatters
-    BOOST_LOG_SEV(lg, debug) << "Enabled formatters: "
-                             << enabled_formatters;
-
-    for (auto& pair : fm.formattables()) {
-        auto& formattable(pair.second);
-        auto& ecfg(formattable.element_configuration());
-
-        for (auto& pair : ecfg.formatter_configurations()) {
-            auto& fmt_cfg(pair.second);
-            fmt_cfg.enabled_formatters(enabled_formatters);
         }
     }
 

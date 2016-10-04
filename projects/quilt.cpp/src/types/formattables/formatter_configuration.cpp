@@ -33,7 +33,6 @@ formatter_configuration::formatter_configuration(formatter_configuration&& rhs)
       file_path_(std::move(rhs.file_path_)),
       header_guard_(std::move(rhs.header_guard_)),
       inclusion_dependencies_(std::move(rhs.inclusion_dependencies_)),
-      enabled_formatters_(std::move(rhs.enabled_formatters_)),
       opaque_configuration_(std::move(rhs.opaque_configuration_)) { }
 
 formatter_configuration::formatter_configuration(
@@ -41,13 +40,11 @@ formatter_configuration::formatter_configuration(
     const boost::filesystem::path& file_path,
     const std::string& header_guard,
     const std::list<std::string>& inclusion_dependencies,
-    const std::unordered_set<std::string>& enabled_formatters,
     const dogen::quilt::cpp::formattables::opaque_configuration& opaque_configuration)
     : enabled_(enabled),
       file_path_(file_path),
       header_guard_(header_guard),
       inclusion_dependencies_(inclusion_dependencies),
-      enabled_formatters_(enabled_formatters),
       opaque_configuration_(opaque_configuration) { }
 
 void formatter_configuration::swap(formatter_configuration& other) noexcept {
@@ -56,7 +53,6 @@ void formatter_configuration::swap(formatter_configuration& other) noexcept {
     swap(file_path_, other.file_path_);
     swap(header_guard_, other.header_guard_);
     swap(inclusion_dependencies_, other.inclusion_dependencies_);
-    swap(enabled_formatters_, other.enabled_formatters_);
     swap(opaque_configuration_, other.opaque_configuration_);
 }
 
@@ -65,7 +61,6 @@ bool formatter_configuration::operator==(const formatter_configuration& rhs) con
         file_path_ == rhs.file_path_ &&
         header_guard_ == rhs.header_guard_ &&
         inclusion_dependencies_ == rhs.inclusion_dependencies_ &&
-        enabled_formatters_ == rhs.enabled_formatters_ &&
         opaque_configuration_ == rhs.opaque_configuration_;
 }
 
@@ -129,22 +124,6 @@ void formatter_configuration::inclusion_dependencies(const std::list<std::string
 
 void formatter_configuration::inclusion_dependencies(const std::list<std::string>&& v) {
     inclusion_dependencies_ = std::move(v);
-}
-
-const std::unordered_set<std::string>& formatter_configuration::enabled_formatters() const {
-    return enabled_formatters_;
-}
-
-std::unordered_set<std::string>& formatter_configuration::enabled_formatters() {
-    return enabled_formatters_;
-}
-
-void formatter_configuration::enabled_formatters(const std::unordered_set<std::string>& v) {
-    enabled_formatters_ = v;
-}
-
-void formatter_configuration::enabled_formatters(const std::unordered_set<std::string>&& v) {
-    enabled_formatters_ = std::move(v);
 }
 
 const dogen::quilt::cpp::formattables::opaque_configuration& formatter_configuration::opaque_configuration() const {

@@ -32,6 +32,7 @@
 #include "dogen/quilt.cpp/io/annotations/streaming_annotations_io.hpp"
 #include "dogen/quilt.cpp/io/annotations/helper_annotations_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/helper_configuration_io.hpp"
+#include "dogen/quilt.cpp/types/formattables/canonical_formatter_resolver.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/odb/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/traits.hpp"
@@ -215,14 +216,8 @@ std::list<std::string> assistant::make_namespaces(const yarn::name& n) const {
 
 bool assistant::
 is_formatter_enabled(const std::string& formatter_name) const {
-    // FIXME: needs formatter aliases.
-    // const auto& fmt_cfg(obtain_formatter_configuration(formatter_name));
-    // return fmt_cfg.enabled();
-    const auto& fmt_cfg(formatter_configuration_);
-    BOOST_LOG_SEV(lg, error) << "Enabled formatters: "
-                             << fmt_cfg.enabled_formatters();
-    const auto i(fmt_cfg.enabled_formatters().find(formatter_name));
-    return i != fmt_cfg.enabled_formatters().end();
+    const auto& fmt_cfg(obtain_formatter_configuration(formatter_name));
+    return fmt_cfg.enabled();
 }
 
 bool assistant::
@@ -274,7 +269,7 @@ bool assistant::is_io_enabled() const {
 
 bool assistant::is_odb_facet_enabled() const {
     using formatters::odb::traits;
-    return is_formatter_enabled(traits::class_header_formatter_name());
+    return is_facet_enabled(traits::facet_name());
 }
 
 dogen::formatters::cpp::scoped_boilerplate_formatter
