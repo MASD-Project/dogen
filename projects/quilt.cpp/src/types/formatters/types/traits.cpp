@@ -32,9 +32,13 @@ std::string traits::facet_name() {
     return r;
 }
 
+std::string traits::canonical_formatter_name() {
+    static std::string r(traits::facet_name() + ".canonical_formatter");
+    return r;
+}
+
 std::string traits::class_header_formatter_name() {
-    static std::string r(formatters::traits::class_header_formatter_name(
-            traits::facet_name()));
+    static std::string r(traits::facet_name() + ".class_header_formatter");
     return r;
 }
 

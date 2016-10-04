@@ -40,6 +40,11 @@ struct traits {
     static std::string facet_name();
 
     /**
+     * @brief Name of the canonical formatter
+     */
+    static std::string canonical_formatter_name();
+
+    /**
      * @brief Name of the class header formatter.
      */
     static std::string class_header_formatter_name();
