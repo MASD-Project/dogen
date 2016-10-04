@@ -49,7 +49,7 @@ expand(const dogen::formatters::decoration_configuration_factory& dcf,
         auto& formattable(pair.second);
         auto& ecfg(formattable.element_configuration());
 
-        // FIXME: hack
+        // FIXME: obtain the modeline name from the formatter
         if (boost::contains(id, "CMakeLists"))
             ecfg.decoration_configuration(dcf.make(cmake_modeline_name));
         else if (boost::contains(id, "options.odb"))

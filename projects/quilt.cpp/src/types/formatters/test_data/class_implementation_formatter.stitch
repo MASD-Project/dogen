@@ -92,7 +92,6 @@ populate(const unsigned int position, result_type& v) {
 #>
     return <#= sn #>(
 <#+
-                    // FIXME: hack
                     if (o.local_attributes().empty())
 #>
 

@@ -154,7 +154,7 @@ void enablement_expander::update_facet_enablement(
      * facet) rather than just read the facet field and update it
      * once.
      *
-     * FIXME: implement this properly.
+     * FIXME: read facet fields here instead of reusing configuration.
      */
     const auto& fffn(fc.file_formatters_by_formatter_name());
     auto& fct_cfgs(fm.facet_configurations());

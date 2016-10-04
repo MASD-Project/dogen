@@ -503,7 +503,7 @@ std::string assistant::streaming_for_type(
     if (ss.remove_unprintable_characters())
         uf.insert_streamed("tidy_up_string(" + s + ")");
     else if (!ss.string_conversion_method().empty()) {
-        // FIXME: hack!
+        // FIXME: hack to determine if we are being dereferenced.
         std::string s1(s);
         const auto i(s1.find('*'));
         if (i != std::string::npos)

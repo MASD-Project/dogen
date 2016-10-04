@@ -14,15 +14,15 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-04 Tue 18:55]
+#+CAPTION: Clock summary at [2016-10-04 Tue 19:05]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *58:03* |       |      | 100.0 |
+| *Total time*                                                                | *58:12* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 58:03   |       |      | 100.0 |
-| Active                                                                      |         | 58:03 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 4:37 |   8.0 |
+| Stories                                                                     | 58:12   |       |      | 100.0 |
+| Active                                                                      |         | 58:12 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 4:37 |   7.9 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:07 |   0.2 |
 | COMPLETED Generation of formattable is incorrect                            |         |       | 2:30 |   4.3 |
 | COMPLETED Visitor includes are incorrect                                    |         |       | 0:20 |   0.6 |
@@ -46,20 +46,20 @@
 | COMPLETED Review main classes in quilt.cpp                                  |         |       | 3:42 |   6.4 |
 | COMPLETED Clean up element segmentation                                     |         |       | 1:20 |   2.3 |
 | COMPLETED Get OSX build to compile code                                     |         |       | 7:05 |  12.2 |
-| COMPLETED Add a banner to readme                                            |         |       | 1:29 |   2.6 |
+| COMPLETED Add a banner to readme                                            |         |       | 1:29 |   2.5 |
 | COMPLETED Remove formatter group                                            |         |       | 0:23 |   0.7 |
 | COMPLETED Add more types to =quilt::cpp= canned tests                       |         |       | 0:15 |   0.4 |
 | CANCELLED Remove formatter id                                               |         |       | 0:04 |   0.1 |
-| COMPLETED Analysis around terminology in formatting space                   |         |       | 3:24 |   5.9 |
+| COMPLETED Analysis around terminology in formatting space                   |         |       | 3:24 |   5.8 |
 | COMPLETED Remove =original_model_name=                                      |         |       | 0:16 |   0.5 |
 | COMPLETED Refactor code around model origination                            |         |       | 4:08 |   7.1 |
 | COMPLETED Remove formatter level facet folders                              |         |       | 0:06 |   0.2 |
 | COMPLETED Consider removing the "fake" primitive formatters                 |         |       | 0:01 |   0.0 |
-| COMPLETED Expander refactor in =quilt.cpp=                                  |         |       | 3:03 |   5.3 |
+| COMPLETED Expander refactor in =quilt.cpp=                                  |         |       | 3:03 |   5.2 |
 | COMPLETED Create the notion of a formatter alias                            |         |       | 3:15 |   5.6 |
 | COMPLETED Remove enabled formatters from formatter configuration            |         |       | 0:22 |   0.6 |
 | COMPLETED Handle registration of services properly                          |         |       | 3:41 |   6.3 |
-| STARTED Generate formatter interfaces                                       |         |       | 0:19 |   0.5 |
+| STARTED Generate formatter interfaces                                       |         |       | 0:28 |   0.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -1096,6 +1096,7 @@ Another way is to check if the type is generatable. If not, skip
 it. If we do it this way we need to wait for the generatable clean up.
 
 *** STARTED Generate formatter interfaces                              :epic:
+    CLOCK: [2016-10-04 Tue 18:56]--[2016-10-04 Tue 19:05] =>  0:09
     CLOCK: [2016-09-30 Fri 10:58]--[2016-09-30 Fri 11:17] =>  0:19
 
 We should create another template language, in addition to stitch:

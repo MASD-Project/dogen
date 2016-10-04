@@ -92,7 +92,6 @@ a.stream() << sn << "_generator::result_type" << std::endl;
 a.stream() << sn << "_generator::create(const unsigned int" << (no_arg ? "/*position*/" : " position") << ") {" << std::endl;
                 if (o.is_immutable()) {
 a.stream() << "    return " << sn << "(" << std::endl;
-                    // FIXME: hack
                     if (o.local_attributes().empty())
 a.stream() << std::endl;
                     else {
