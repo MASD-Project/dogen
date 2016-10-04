@@ -18,10 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
+#include <set>
+#include <iterator>
 #include <typeinfo>
 #include <typeindex>
+#include <algorithm>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/io/set_io.hpp"
 #include "dogen/utility/io/forward_list_io.hpp"
 #include "dogen/dynamic/io/ownership_hierarchy_io.hpp"
 #include "dogen/quilt.cpp/io/formatters/container_io.hpp"
@@ -39,7 +43,10 @@ const std::string no_file_formatters_by_type_index(
 const std::string no_forward_declarations_formatters(
     "No forward declarations formatters provided.");
 const std::string null_formatter("Formatter supplied is null.");
-
+const std::string facets_missing_canonical_formatter(
+    "One or more facets have been declared without a canonical formatter");
+const std::string more_than_one_canonical_formatter(
+    "Found more than one canonical formatter for a facet: ");
 const std::string empty_formatter_name("Formatter name is empty.");
 const std::string empty_facet_name("Facet name is empty.");
 const std::string empty_model_name("Model name is empty.");
@@ -64,6 +71,53 @@ void registrar::validate() const {
         BOOST_LOG_SEV(lg, error) << no_file_formatters_by_type_index;
         BOOST_THROW_EXCEPTION(
             registrar_error(no_file_formatters_by_type_index));
+    }
+
+    /*
+     * Validate the registered canonical formatters.
+     */
+    const auto cs(inclusion_support_types::canonical_support);
+    for (const auto& pair : fc.file_formatters_by_type_index()) {
+        const auto& ti(pair.first);
+        const auto& formatters(pair.second);
+        std::set<std::string> facets_found;
+        std::set<std::string> all_facets;
+        for (const auto& ptr : formatters) {
+            const auto& formatter(*ptr);
+            const auto& oh(formatter.ownership_hierarchy());
+            const auto fctn(oh.facet_name());
+            all_facets.insert(fctn);
+            if (formatter.inclusion_support_type() != cs)
+                continue;
+
+            /*
+             * We can only have one canonical formatter per type per facet.
+             */
+            const auto i(facets_found.find(fctn));
+            if (i != facets_found.end()) {
+                const auto fmtn(oh.formatter_name());
+                BOOST_LOG_SEV(lg, error) << more_than_one_canonical_formatter
+                                         << fctn << " formatter: " << fmtn
+                                         << " type: " << ti.name();
+                BOOST_THROW_EXCEPTION(registrar_error(
+                        more_than_one_canonical_formatter + fctn));
+            }
+            facets_found.insert(fctn);
+        }
+
+        /*
+         * We must have one canonical formatter per type per facet.
+         */
+        std::set<std::string> result;
+        std::set_difference(all_facets.begin(), all_facets.end(),
+            facets_found.begin(), facets_found.end(),
+            std::inserter(result, result.end()));
+        if (!result.empty()) {
+            BOOST_LOG_SEV(lg, error) << facets_missing_canonical_formatter
+                                     << " : " << result;
+            BOOST_THROW_EXCEPTION(
+                registrar_error(facets_missing_canonical_formatter));
+        }
     }
 
     if (fc.file_formatters().empty()) {

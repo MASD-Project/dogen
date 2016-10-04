@@ -76,6 +76,14 @@ std::list<dogen::quilt::cpp::formattables::helper_configuration> create_std_list
     return r;
 }
 
+std::unordered_map<std::string, std::string> create_std_unordered_map_std_string_std_string(unsigned int position) {
+    std::unordered_map<std::string, std::string> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(std::make_pair(create_std_string(position + i), create_std_string(position + i)));
+    }
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -91,6 +99,7 @@ populate(const unsigned int position, result_type& v) {
     v.aspect_configuration(create_dogen_quilt_cpp_formattables_aspect_configuration(position + 1));
     v.formatter_configurations(create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formatter_configuration(position + 2));
     v.helper_configurations(create_std_list_dogen_quilt_cpp_formattables_helper_configuration(position + 3));
+    v.canonical_formatter_to_formatter(create_std_unordered_map_std_string_std_string(position + 4));
 }
 
 element_configuration_generator::result_type

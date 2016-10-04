@@ -59,6 +59,15 @@ inline std::size_t hash_std_list_dogen_quilt_cpp_formattables_helper_configurati
     return seed;
 }
 
+inline std::size_t hash_std_unordered_map_std_string_std_string(const std::unordered_map<std::string, std::string>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, i.second);
+    }
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -73,6 +82,7 @@ std::size_t element_configuration_hasher::hash(const element_configuration& v) {
     combine(seed, v.aspect_configuration());
     combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formatter_configuration(v.formatter_configurations()));
     combine(seed, hash_std_list_dogen_quilt_cpp_formattables_helper_configuration(v.helper_configurations()));
+    combine(seed, hash_std_unordered_map_std_string_std_string(v.canonical_formatter_to_formatter()));
 
     return seed;
 }

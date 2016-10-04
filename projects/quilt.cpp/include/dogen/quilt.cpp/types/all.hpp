@@ -119,6 +119,8 @@
 #include "dogen/quilt.cpp/types/formatters/types/class_header_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/primitive_header_formatter.hpp"
 #include "dogen/quilt.cpp/types/annotations/streaming_annotations_factory.hpp"
+#include "dogen/quilt.cpp/types/formattables/canonical_formatter_expander.hpp"
+#include "dogen/quilt.cpp/types/formattables/canonical_formatter_resolver.hpp"
 #include "dogen/quilt.cpp/types/formattables/file_path_and_guard_expander.hpp"
 #include "dogen/quilt.cpp/types/formatters/odb/primitive_header_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/visitor_header_formatter.hpp"

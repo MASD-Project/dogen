@@ -48,6 +48,7 @@ void save(Archive& ar,
     ar << make_nvp("aspect_configuration", v.aspect_configuration_);
     ar << make_nvp("formatter_configurations", v.formatter_configurations_);
     ar << make_nvp("helper_configurations", v.helper_configurations_);
+    ar << make_nvp("canonical_formatter_to_formatter", v.canonical_formatter_to_formatter_);
 }
 
 template<typename Archive>
@@ -58,6 +59,7 @@ void load(Archive& ar,
     ar >> make_nvp("aspect_configuration", v.aspect_configuration_);
     ar >> make_nvp("formatter_configurations", v.formatter_configurations_);
     ar >> make_nvp("helper_configurations", v.helper_configurations_);
+    ar >> make_nvp("canonical_formatter_to_formatter", v.canonical_formatter_to_formatter_);
 }
 
 } }

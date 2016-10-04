@@ -58,7 +58,8 @@ public:
         const boost::optional<dogen::formatters::decoration_configuration>& decoration_configuration,
         const dogen::quilt::cpp::formattables::aspect_configuration& aspect_configuration,
         const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration>& formatter_configurations,
-        const std::list<dogen::quilt::cpp::formattables::helper_configuration>& helper_configurations);
+        const std::list<dogen::quilt::cpp::formattables::helper_configuration>& helper_configurations,
+        const std::unordered_map<std::string, std::string>& canonical_formatter_to_formatter);
 
 private:
     template<typename Archive>
@@ -88,6 +89,11 @@ public:
     void helper_configurations(const std::list<dogen::quilt::cpp::formattables::helper_configuration>& v);
     void helper_configurations(const std::list<dogen::quilt::cpp::formattables::helper_configuration>&& v);
 
+    const std::unordered_map<std::string, std::string>& canonical_formatter_to_formatter() const;
+    std::unordered_map<std::string, std::string>& canonical_formatter_to_formatter();
+    void canonical_formatter_to_formatter(const std::unordered_map<std::string, std::string>& v);
+    void canonical_formatter_to_formatter(const std::unordered_map<std::string, std::string>&& v);
+
 public:
     bool operator==(const element_configuration& rhs) const;
     bool operator!=(const element_configuration& rhs) const {
@@ -103,6 +109,7 @@ private:
     dogen::quilt::cpp::formattables::aspect_configuration aspect_configuration_;
     std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration> formatter_configurations_;
     std::list<dogen::quilt::cpp::formattables::helper_configuration> helper_configurations_;
+    std::unordered_map<std::string, std::string> canonical_formatter_to_formatter_;
 };
 
 } } } }

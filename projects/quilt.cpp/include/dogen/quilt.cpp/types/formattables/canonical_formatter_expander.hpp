@@ -18,40 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/formatters/traits.hpp"
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_CANONICAL_FORMATTER_EXPANDER_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_CANONICAL_FORMATTER_EXPANDER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/quilt.cpp/types/formatters/container.hpp"
+#include "dogen/quilt.cpp/types/formattables/model.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
-namespace formatters {
+namespace formattables {
 
-std::string traits::model_name() {
-    static std::string r("quilt.cpp");
-    return r;
-}
-
-std::string traits::
-master_header_formatter_name(const std::string& facet_name) {
-    return facet_name + ".master_header_formatter";
-}
-
-std::string traits::cmake_facet_name() {
-    static std::string r("quilt.cpp.cmake");
-    return r;
-}
-
-std::string traits::include_cmakelists_formatter_name() {
-    static std::string r("quilt.cpp.cmake.include_cmakelists");
-    return r;
-}
-
-std::string traits::source_cmakelists_formatter_name() {
-    static std::string r("quilt.cpp.cmake.source_cmakelists");
-    return r;
-}
-
-std::string traits::canonical_formatter_name(const std::string& facet_name) {
-    return facet_name + ".canonical";
-}
+class canonical_formatter_expander {
+public:
+    void expand(const formatters::container& fc, model& fm) const;
+};
 
 } } } }
+
+#endif

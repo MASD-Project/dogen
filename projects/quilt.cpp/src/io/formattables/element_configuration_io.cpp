@@ -80,6 +80,24 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::quilt::c
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::string>& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->second) << "\"";
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace quilt {
 namespace cpp {
@@ -91,7 +109,8 @@ std::ostream& operator<<(std::ostream& s, const element_configuration& v) {
       << "\"decoration_configuration\": " << v.decoration_configuration() << ", "
       << "\"aspect_configuration\": " << v.aspect_configuration() << ", "
       << "\"formatter_configurations\": " << v.formatter_configurations() << ", "
-      << "\"helper_configurations\": " << v.helper_configurations()
+      << "\"helper_configurations\": " << v.helper_configurations() << ", "
+      << "\"canonical_formatter_to_formatter\": " << v.canonical_formatter_to_formatter()
       << " }";
     return(s);
 }

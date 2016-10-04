@@ -48,6 +48,9 @@ private:
         const dynamic::object& root_object, const formatters::container& fc,
         model& fm) const;
 
+    void expand_canonical_formatters(const formatters::container& fc,
+        model& fm) const;
+
     void expand_inclusion(
         const dynamic::repository& drp,
         const formatters::container& fc, const locator& l, model& fm) const;

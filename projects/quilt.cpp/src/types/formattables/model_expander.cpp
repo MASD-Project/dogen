@@ -28,6 +28,7 @@
 #include "dogen/quilt.cpp/types/formattables/file_path_and_guard_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/opaque_configuration_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/facet_directory_expander.hpp"
+#include "dogen/quilt.cpp/types/formattables/canonical_formatter_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/model_expander.hpp"
 
 namespace dogen {
@@ -42,10 +43,15 @@ void model_expander::expand_enablement(const dynamic::repository& drp,
     ex.expand(drp, root_object, fc, fm);
 }
 
+void model_expander::
+expand_canonical_formatters(const formatters::container& fc, model& fm) const {
+    canonical_formatter_expander ex;
+    ex.expand(fc, fm);
+}
+
 void model_expander::expand_inclusion(
     const dynamic::repository& drp, const formatters::container& fc,
     const locator& l, model& fm) const {
-
     inclusion_expander ex;
     ex.expand(drp, fc, l, fm);
 }
@@ -101,6 +107,7 @@ void model_expander::expand(
     const formatters::container& fc, const locator& l, model& fm) const {
 
     expand_enablement(drp, root_object, fc, fm);
+    expand_canonical_formatters(fc, fm);
     expand_inclusion(drp, fc, l, fm);
     expand_decoration(dcf, fm);
     expand_aspects(drp, fm);
