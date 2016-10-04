@@ -211,14 +211,15 @@ is_formatter_enabled(const std::string& formatter_name) const {
 
 std::string assistant::
 get_facet_directory_for_facet(const std::string& facet_name) const {
-    const auto& fdff(context_.facet_directory_for_facet());
-    const auto i(fdff.find(facet_name));
-    if (i == fdff.end()) {
+    const auto& fct_cfgs(context_.facet_configurations());
+    const auto i(fct_cfgs.find(facet_name));
+    if (i == fct_cfgs.end()) {
         BOOST_LOG_SEV(lg, error) << facet_directory_missing << facet_name;
         BOOST_THROW_EXCEPTION(
             formatting_error(facet_directory_missing + facet_name));
     }
-    return i->second;
+    const auto& fct_cfg(i->second);
+    return fct_cfg.directory();
 }
 
 std::string assistant::get_odb_facet_directory() const {

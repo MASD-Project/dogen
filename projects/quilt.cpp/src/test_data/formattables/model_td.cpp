@@ -45,14 +45,6 @@ std::unordered_map<std::string, dogen::quilt::cpp::annotations::streaming_annota
     return r;
 }
 
-std::unordered_map<std::string, std::string> create_std_unordered_map_std_string_std_string(unsigned int position) {
-    std::unordered_map<std::string, std::string> r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_std_string(position + i)));
-    }
-    return r;
-}
-
 dogen::quilt::cpp::formattables::formattable
 create_dogen_quilt_cpp_formattables_formattable(const unsigned int position) {
     return dogen::quilt::cpp::formattables::formattable_generator::create(position);
@@ -91,9 +83,8 @@ model_generator::model_generator() : position_(0) { }
 void model_generator::
 populate(const unsigned int position, result_type& v) {
     v.streaming_annotations(create_std_unordered_map_std_string_dogen_quilt_cpp_annotations_streaming_annotations(position + 0));
-    v.facet_directory_for_facet(create_std_unordered_map_std_string_std_string(position + 1));
-    v.formattables(create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formattable(position + 2));
-    v.facet_configurations(create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_facet_configuration(position + 3));
+    v.formattables(create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formattable(position + 1));
+    v.facet_configurations(create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_facet_configuration(position + 2));
 }
 
 model_generator::result_type

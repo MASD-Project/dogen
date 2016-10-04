@@ -27,25 +27,21 @@ namespace formattables {
 
 model::model(
     const std::unordered_map<std::string, dogen::quilt::cpp::annotations::streaming_annotations>& streaming_annotations,
-    const std::unordered_map<std::string, std::string>& facet_directory_for_facet,
     const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formattable>& formattables,
     const std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_configuration>& facet_configurations)
     : streaming_annotations_(streaming_annotations),
-      facet_directory_for_facet_(facet_directory_for_facet),
       formattables_(formattables),
       facet_configurations_(facet_configurations) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
     swap(streaming_annotations_, other.streaming_annotations_);
-    swap(facet_directory_for_facet_, other.facet_directory_for_facet_);
     swap(formattables_, other.formattables_);
     swap(facet_configurations_, other.facet_configurations_);
 }
 
 bool model::operator==(const model& rhs) const {
     return streaming_annotations_ == rhs.streaming_annotations_ &&
-        facet_directory_for_facet_ == rhs.facet_directory_for_facet_ &&
         formattables_ == rhs.formattables_ &&
         facet_configurations_ == rhs.facet_configurations_;
 }
@@ -70,22 +66,6 @@ void model::streaming_annotations(const std::unordered_map<std::string, dogen::q
 
 void model::streaming_annotations(const std::unordered_map<std::string, dogen::quilt::cpp::annotations::streaming_annotations>&& v) {
     streaming_annotations_ = std::move(v);
-}
-
-const std::unordered_map<std::string, std::string>& model::facet_directory_for_facet() const {
-    return facet_directory_for_facet_;
-}
-
-std::unordered_map<std::string, std::string>& model::facet_directory_for_facet() {
-    return facet_directory_for_facet_;
-}
-
-void model::facet_directory_for_facet(const std::unordered_map<std::string, std::string>& v) {
-    facet_directory_for_facet_ = v;
-}
-
-void model::facet_directory_for_facet(const std::unordered_map<std::string, std::string>&& v) {
-    facet_directory_for_facet_ = std::move(v);
 }
 
 const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formattable>& model::formattables() const {

@@ -48,7 +48,6 @@ public:
 public:
     model(
         const std::unordered_map<std::string, dogen::quilt::cpp::annotations::streaming_annotations>& streaming_annotations,
-        const std::unordered_map<std::string, std::string>& facet_directory_for_facet,
         const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formattable>& formattables,
         const std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_configuration>& facet_configurations);
 
@@ -64,18 +63,6 @@ public:
     std::unordered_map<std::string, dogen::quilt::cpp::annotations::streaming_annotations>& streaming_annotations();
     void streaming_annotations(const std::unordered_map<std::string, dogen::quilt::cpp::annotations::streaming_annotations>& v);
     void streaming_annotations(const std::unordered_map<std::string, dogen::quilt::cpp::annotations::streaming_annotations>&& v);
-
-    /**
-     * @brief Maps a facet name to its facet directory.
-     *
-     * Note that the facet directory may be empty if the user disabled facet folders.
-     */
-    /**@{*/
-    const std::unordered_map<std::string, std::string>& facet_directory_for_facet() const;
-    std::unordered_map<std::string, std::string>& facet_directory_for_facet();
-    void facet_directory_for_facet(const std::unordered_map<std::string, std::string>& v);
-    void facet_directory_for_facet(const std::unordered_map<std::string, std::string>&& v);
-    /**@}*/
 
     const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formattable>& formattables() const;
     std::unordered_map<std::string, dogen::quilt::cpp::formattables::formattable>& formattables();
@@ -99,7 +86,6 @@ public:
 
 private:
     std::unordered_map<std::string, dogen::quilt::cpp::annotations::streaming_annotations> streaming_annotations_;
-    std::unordered_map<std::string, std::string> facet_directory_for_facet_;
     std::unordered_map<std::string, dogen::quilt::cpp::formattables::formattable> formattables_;
     std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_configuration> facet_configurations_;
 };

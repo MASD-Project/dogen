@@ -28,13 +28,13 @@ namespace formatters {
 context::context(
     const std::unordered_map<std::string, annotations::streaming_annotations>&
     sa, const formattables::element_configuration& element_configuration,
-    const std::unordered_map<std::string, std::string>&
-    facet_directory_for_facet,
-    const std::unordered_map<std::string, std::unordered_map<std::string,
-    std::list<std::shared_ptr<helper_formatter_interface>>>>& helpers)
+    const std::unordered_map<std::string, formattables::facet_configuration>&
+    facet_configurations, const std::unordered_map<std::string,
+    std::unordered_map<std::string, std::list<std::shared_ptr<
+    helper_formatter_interface>>>>& helpers)
     : streaming_annotations_(sa),
       element_configuration_(element_configuration),
-      facet_directory_for_facet_(facet_directory_for_facet),
+      facet_configurations_(facet_configurations),
       helpers_(helpers) { }
 
 const std::unordered_map<std::string, annotations::streaming_annotations>&
@@ -47,9 +47,9 @@ context::element_configuration() const {
     return element_configuration_;
 }
 
-const std::unordered_map<std::string, std::string>&
-context::facet_directory_for_facet() const {
-    return facet_directory_for_facet_;
+const std::unordered_map<std::string, formattables::facet_configuration>&
+context::facet_configurations() const {
+    return facet_configurations_;
 }
 
 const std::unordered_map<

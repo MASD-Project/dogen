@@ -74,34 +74,13 @@ workflow::make_streaming_annotations(const dynamic::repository& drp,
     return r;
 }
 
-std::unordered_map<std::string, std::string> workflow::
-facet_directory_for_facet(const path_annotations_type& pa,
-    const formatters::container& fc) const {
-
-    std::unordered_map<std::string, std::string> r;
-    for (const auto& f : fc.file_formatters()) {
-        const auto i(pa.find(f->ownership_hierarchy().formatter_name()));
-        if ( i != pa.end()) {
-            const auto fn(f->ownership_hierarchy().facet_name());
-            r[fn] = i->second.facet_directory();
-        }
-    }
-    BOOST_LOG_SEV(lg, debug) << "Facet directory for facet: " << r;
-    return r;
-}
-
 model workflow::make_model(const dynamic::repository& drp,
-    const path_annotations_type& pa, const formatters::container& fc,
-    const yarn::model& m) const {
-
+    const formatters::container& fc, const yarn::model& m) const {
     model r;
     transformer t;
     r.formattables(t.transform(fc, m));
-    r.facet_directory_for_facet(facet_directory_for_facet(pa, fc));
-
     const auto sa(make_streaming_annotations(drp, m));
     r.streaming_annotations(sa);
-
     return r;
 }
 
@@ -120,10 +99,12 @@ model workflow::execute(const options::cpp_options& opts,
     const formatters::container& fc,
     const yarn::model& m) const {
 
+    auto r(make_model(drp, fc, m));
+
     const auto pa(make_path_annotations(drp, root_object, fc));
     const locator l(opts, m, pa);
-    auto r(make_model(drp, pa, fc, m));
     expand_model(drp, root_object, dcf, pa, fc, l, r);
+
     return r;
 }
 

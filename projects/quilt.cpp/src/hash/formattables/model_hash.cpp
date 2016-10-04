@@ -40,15 +40,6 @@ inline std::size_t hash_std_unordered_map_std_string_dogen_quilt_cpp_annotations
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_std_string(const std::unordered_map<std::string, std::string>& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i.first);
-        combine(seed, i.second);
-    }
-    return seed;
-}
-
 inline std::size_t hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formattable(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formattable>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
@@ -78,7 +69,6 @@ std::size_t model_hasher::hash(const model& v) {
     std::size_t seed(0);
 
     combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_annotations_streaming_annotations(v.streaming_annotations()));
-    combine(seed, hash_std_unordered_map_std_string_std_string(v.facet_directory_for_facet()));
     combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formattable(v.formattables()));
     combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_facet_configuration(v.facet_configurations()));
 

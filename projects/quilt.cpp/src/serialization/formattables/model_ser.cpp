@@ -42,7 +42,6 @@ void save(Archive& ar,
     const dogen::quilt::cpp::formattables::model& v,
     const unsigned int /*version*/) {
     ar << make_nvp("streaming_annotations", v.streaming_annotations_);
-    ar << make_nvp("facet_directory_for_facet", v.facet_directory_for_facet_);
     ar << make_nvp("formattables", v.formattables_);
     ar << make_nvp("facet_configurations", v.facet_configurations_);
 }
@@ -52,7 +51,6 @@ void load(Archive& ar,
     dogen::quilt::cpp::formattables::model& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("streaming_annotations", v.streaming_annotations_);
-    ar >> make_nvp("facet_directory_for_facet", v.facet_directory_for_facet_);
     ar >> make_nvp("formattables", v.formattables_);
     ar >> make_nvp("facet_configurations", v.facet_configurations_);
 }

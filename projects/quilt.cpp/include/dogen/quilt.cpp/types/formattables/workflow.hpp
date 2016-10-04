@@ -27,7 +27,7 @@
 
 #include <memory>
 #include <utility>
-#include <forward_list>
+#include <unordered_map>
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/options/types/cpp_options.hpp"
@@ -58,13 +58,8 @@ private:
     make_streaming_annotations(const dynamic::repository& drp,
         const yarn::model& m) const;
 
-    std::unordered_map<std::string, std::string>
-    facet_directory_for_facet(const path_annotations_type& pa,
-        const formatters::container& fc) const;
-
     model make_model(const dynamic::repository& drp,
-        const path_annotations_type& pa, const formatters::container& fc,
-        const yarn::model& m) const;
+        const formatters::container& fc, const yarn::model& m) const;
 
     void expand_model(
         const dynamic::repository& drp, const dynamic::object& root_object,

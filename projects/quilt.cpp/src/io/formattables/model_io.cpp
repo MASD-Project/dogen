@@ -52,24 +52,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::string>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->second) << "\"";
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
-}
-
-namespace std {
-
 inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formattable>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
@@ -113,7 +95,6 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::model\"" << ", "
       << "\"streaming_annotations\": " << v.streaming_annotations() << ", "
-      << "\"facet_directory_for_facet\": " << v.facet_directory_for_facet() << ", "
       << "\"formattables\": " << v.formattables() << ", "
       << "\"facet_configurations\": " << v.facet_configurations()
       << " }";
