@@ -59,8 +59,8 @@ public:
 
 private:
     /**
-     * @brief Ensures all expected annotations are available and set to
-     * valid values.
+     * @brief Ensures the required configuration is available and set
+     * to reasonable values.
      */
     void validate() const;
 
@@ -115,8 +115,15 @@ private:
      *
      * @pre Formatter configuration must exist for the formatter.
      */
-    formattables::formatter_configuration
-    obtain_formatter_configuration(const std::string& formatter_name) const;
+    /**@{*/
+    const formattables::formatter_configuration&
+    obtain_formatter_configuration(
+        const formattables::element_configuration& ecfg,
+        const std::string& formatter_name) const;
+    const formattables::formatter_configuration&
+    obtain_formatter_configuration(const std::string& element_id,
+        const std::string& formatter_name) const;
+    /**@}*/
 
     /**
      * @brief Obtains the facet configuration for the facet
@@ -302,6 +309,15 @@ public:
      */
     boost::shared_ptr<annotations::odb_annotations>
     get_odb_annotations(const std::string& property_id) const;
+
+public:
+    /**
+     * @brief Returns the subset of names for which the supplied
+     * formatter is enabled.
+     */
+    std::list<yarn::name>
+    names_with_enabled_formatter(const std::string& formatter_name,
+        const std::list<yarn::name> names) const;
 
 public:
     /**

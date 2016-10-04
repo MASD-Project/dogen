@@ -74,6 +74,7 @@ const std::string unexpected_opaque_annotations(
     "Unexpectd opaque annotations type.");
 const std::string null_opaque_annotations("Opaque annotations are null: ");
 const std::string family_not_found("Family not found: ");
+const std::string element_not_found("Element not found: ");
 const std::string no_helpers_for_family("No helpers found for family: ");
 const std::string qn_missing("Could not find qualified name for language.");
 const std::string empty_annotations("Helper properties must have annotations.");
@@ -101,8 +102,8 @@ get_identifiable_and_qualified(const IdentifiableAndQualified& iaq) {
 assistant::assistant(const context& ctx, const dynamic::ownership_hierarchy& oh,
     const bool requires_header_guard, const std::string& id) :
     context_(ctx),
-    formatter_configuration_(
-        obtain_formatter_configuration(oh.formatter_name())),
+    formatter_configuration_(obtain_formatter_configuration(
+            context_.element_configuration(), oh.formatter_name())),
     ownership_hierarchy_(oh), requires_header_guard_(requires_header_guard) {
 
     BOOST_LOG_SEV(lg, debug) << "Processing element: " << id
@@ -173,9 +174,9 @@ std::string assistant::get_product_name(const yarn::name& n) const {
     return n.location().external_modules().front();
 }
 
-formattables::formatter_configuration assistant::
-obtain_formatter_configuration(const std::string& formatter_name) const {
-    const auto& ecfg(context_.element_configuration());
+const formattables::formatter_configuration& assistant::
+obtain_formatter_configuration(const formattables::element_configuration& ecfg,
+    const std::string& formatter_name) const {
     const auto i(ecfg.formatter_configurations().find(formatter_name));
     if (i == ecfg.formatter_configurations().end()) {
         BOOST_LOG_SEV(lg, error) << formatter_configuration_missing
@@ -184,6 +185,24 @@ obtain_formatter_configuration(const std::string& formatter_name) const {
                 formatter_name));
     }
     return i->second;
+}
+
+const formattables::formatter_configuration& assistant::
+obtain_formatter_configuration(const std::string& element_id,
+    const std::string& formatter_name) const {
+
+    const auto& formattables(context_.model().formattables());
+    formattables::canonical_formatter_resolver res(formattables);
+
+    const auto resolved_fmtn(res.resolve(element_id, formatter_name));
+    const auto i(formattables.find(element_id));
+    if (i == formattables.end()) {
+        BOOST_LOG_SEV(lg, error) << element_not_found << element_id;
+        BOOST_THROW_EXCEPTION(formatting_error(element_not_found + element_id));
+    }
+
+    const auto& ecfg(i->second.element_configuration());
+    return obtain_formatter_configuration(ecfg, resolved_fmtn);
 }
 
 formattables::facet_configuration assistant::
@@ -216,7 +235,8 @@ std::list<std::string> assistant::make_namespaces(const yarn::name& n) const {
 
 bool assistant::
 is_formatter_enabled(const std::string& formatter_name) const {
-    const auto& fmt_cfg(obtain_formatter_configuration(formatter_name));
+    const auto& ecfg(context_.element_configuration());
+    const auto& fmt_cfg(obtain_formatter_configuration(ecfg, formatter_name));
     return fmt_cfg.enabled();
 }
 
@@ -302,6 +322,7 @@ void assistant::make_decoration_preamble(
     if (!dc)
         return;
 
+    // FIXME: we should not hard code the comment styles.
     dogen::formatters::decoration_formatter af;
     const auto comment_style(dogen::formatters::comment_styles::shell_style);
     af.format_preamble(stream(), comment_style, *dc);
@@ -567,6 +588,22 @@ get_odb_annotations(const std::string& property_id) const {
     if (!r) {
         BOOST_LOG_SEV(lg, error) << unexpected_opaque_annotations;
         BOOST_THROW_EXCEPTION(formatting_error(unexpected_opaque_annotations));
+    }
+    return r;
+}
+
+std::list<yarn::name> assistant::
+names_with_enabled_formatter(const std::string& formatter_name,
+    const std::list<yarn::name> names) const {
+    std::list<yarn::name> r;
+    for (const auto& n : names) {
+        const auto id(n.id());
+        BOOST_LOG_SEV(lg, debug) << "Checking enablement for name: " << id;
+        const auto& fmt_cfg(obtain_formatter_configuration(id, formatter_name));
+        if (!fmt_cfg.enabled())
+            continue;
+
+        r.push_back(n);
     }
     return r;
 }

@@ -77,19 +77,11 @@ update_and_collect_parent_ids(intermediate_model& im) const {
 void generalization_expander::populate_properties_up_the_generalization_tree(
     const yarn::name& leaf, intermediate_model& im, yarn::object& o) const {
 
-    // FIXME: massive hack. must not add leaves for services.
-    const auto uds(object_types::user_defined_service);
-    const bool skip_leaf(o.object_type() == uds);
-    if (skip_leaf) {
-        BOOST_LOG_SEV(lg, debug) << "Filtering out leaves for type: "
-                                 << o.name().id();
-    }
-
     /*
      * Add the leaf to all nodes of the tree except for the leaf node
      * itself.
      */
-    if (!o.is_leaf() && !skip_leaf)
+    if (!o.is_leaf())
         o.leaves().push_back(leaf);
 
     /*
@@ -97,9 +89,6 @@ void generalization_expander::populate_properties_up_the_generalization_tree(
      * generalisation tree.
      */
     if (!o.parent()) {
-        if (skip_leaf)
-            return;
-
         /*
          * If the leaf name belongs to the target model, add it to
          * the model's list of leaves. Ignore non-target leaves.

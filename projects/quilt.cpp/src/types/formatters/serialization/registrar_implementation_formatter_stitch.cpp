@@ -20,6 +20,7 @@
  */
 #include "dogen/formatters/types/cpp/scoped_boilerplate_formatter.hpp"
 #include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
+#include "dogen/quilt.cpp/types/formatters/serialization/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/serialization/registrar_implementation_formatter_stitch.hpp"
 
 namespace dogen {
@@ -37,7 +38,8 @@ dogen::formatters::file registrar_implementation_formatter_stitch(
             const auto ns(a.make_namespaces(rg.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
             const auto deps(rg.model_dependencies());
-            const auto leaves(rg.leaves());
+            const auto cfmtn(traits::canonical_formatter_name());
+            const auto leaves(a.names_with_enabled_formatter(cfmtn, rg.leaves()));
             const bool has_types(!deps.empty() || !leaves.empty());
             const std::string arg_name(has_types ? " ar" : "");
 a.stream() << std::endl;
