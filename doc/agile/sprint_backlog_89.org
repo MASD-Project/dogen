@@ -14,15 +14,15 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-04 Tue 19:05]
+#+CAPTION: Clock summary at [2016-10-04 Tue 19:19]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *58:12* |       |      | 100.0 |
+| *Total time*                                                                | *58:25* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 58:12   |       |      | 100.0 |
-| Active                                                                      |         | 58:12 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 4:37 |   7.9 |
+| Stories                                                                     | 58:25   |       |      | 100.0 |
+| Active                                                                      |         | 58:25 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 4:50 |   8.3 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:07 |   0.2 |
 | COMPLETED Generation of formattable is incorrect                            |         |       | 2:30 |   4.3 |
 | COMPLETED Visitor includes are incorrect                                    |         |       | 0:20 |   0.6 |
@@ -43,9 +43,9 @@
 | COMPLETED Create the formattables model                                     |         |       | 1:32 |   2.6 |
 | COMPLETED Hook formattables into formatters                                 |         |       | 3:58 |   6.8 |
 | COMPLETED Remove empty context                                              |         |       | 1:09 |   2.0 |
-| COMPLETED Review main classes in quilt.cpp                                  |         |       | 3:42 |   6.4 |
+| COMPLETED Review main classes in quilt.cpp                                  |         |       | 3:42 |   6.3 |
 | COMPLETED Clean up element segmentation                                     |         |       | 1:20 |   2.3 |
-| COMPLETED Get OSX build to compile code                                     |         |       | 7:05 |  12.2 |
+| COMPLETED Get OSX build to compile code                                     |         |       | 7:05 |  12.1 |
 | COMPLETED Add a banner to readme                                            |         |       | 1:29 |   2.5 |
 | COMPLETED Remove formatter group                                            |         |       | 0:23 |   0.7 |
 | COMPLETED Add more types to =quilt::cpp= canned tests                       |         |       | 0:15 |   0.4 |
@@ -64,6 +64,7 @@
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-10-04 Tue 19:06]--[2016-10-04 Tue 19:19] =>  0:13
     CLOCK: [2016-10-03 Mon 10:17]--[2016-10-03 Mon 10:21] =>  0:04
     CLOCK: [2016-10-03 Mon 09:00]--[2016-10-03 Mon 10:16] =>  1:16
     CLOCK: [2016-10-02 Sun 21:25]--[2016-10-02 Sun 21:40] =>  0:15
@@ -1095,6 +1096,72 @@ and if not, skip the type.
 Another way is to check if the type is generatable. If not, skip
 it. If we do it this way we need to wait for the generatable clean up.
 
+*** CANCELLED Supply formatter's container to injector                :story:
+    CLOSED: [2016-10-04 Tue 19:11]
+
+*Rationale*: this would involve having to remove the utility method
+for registration. In this particular case we'll keep the lack of
+transparency.
+
+At present the injector is calling the formatters' workflow
+directly, in order to obtain the formatters' container. It should
+receive it as a parameter during initialisation.
+
+*** COMPLETED Introduce the concept of proxy models                   :story:
+    CLOSED: [2016-10-04 Tue 19:12]
+
+*Rationale*: this was completed as part of the origin types refactor.
+
+These are models that exist solely to bring types in, but do not
+define those types. Typically one uses a proxy model to expose
+non-dogen types into dogen. We could add a flag to models
+=is_proxy=. It would replace the notion of system models. We need to
+check the stories in the backlog around this.
+
+Interestingly we could have different defaults for formatters in proxy
+models. For example, if a model is proxy we can assume that we should
+not compute inclusion paths. This could save a lot of time when
+specifying the models in JSON.
+
+*** COMPLETED Add more validation to formatter registration           :story:
+    CLOSED: [2016-10-04 Tue 19:12]
+
+*Rationale*: this was completed as part of the leaves tidy-up.
+
+We should check to ensure that only one formatter per facet is
+declared the canonical formatter.
+
+*** COMPLETED Check which properties need to loop through the entire model :story:
+    CLOSED: [2016-10-04 Tue 19:14]
+
+*Rationale*: the expander rewrite took care of this; all expanders are
+now filtering as required.
+
+In certain cases such as helpers we probably don't need to go through
+all types; only the target types matter. Ensure we are not processing
+other types for no reason.
+
+Merged stories:
+
+*Element properties includes non-target types*
+
+We seem to be generating a lot of element properties and formatter
+properties as well. We should only be generating these for the target
+model.
+
+*** COMPLETED Check generation type before dispatching element        :story:
+    CLOSED: [2016-10-04 Tue 19:15]
+
+*Rationale*: This was addressed with the expanders refactor.
+
+At present we are doing this check in =visit=:
+
+:     if (o.generation_type() == yarn::generation_types::no_generation)
+:        return;
+
+If we did it before the =visit= call we'd save the cost of
+dispatching.
+
 *** STARTED Generate formatter interfaces                              :epic:
     CLOCK: [2016-10-04 Tue 18:56]--[2016-10-04 Tue 19:05] =>  0:09
     CLOCK: [2016-09-30 Fri 10:58]--[2016-09-30 Fri 11:17] =>  0:19
@@ -1232,20 +1299,6 @@ Further thoughts:
   generates the file. Actually we probably can't have this in quilt
   because we still need formatter properties.
 
-*** Order of headers is hard-coded                                    :story:
-
-In inclusion expander, we have hacked the sorting:
-
-:        // FIXME: hacks for headers that must be last
-:        const bool lhs_is_gregorian(
-:            lhs.find_first_of(boost_serialization_gregorian) != npos);
-:        const bool rhs_is_gregorian(
-:            rhs.find_first_of(boost_serialization_gregorian) != npos);
-:        if (lhs_is_gregorian && !rhs_is_gregorian)
-:            return true;
-
-This could be handled via meta-data, supplying some kind of flag (sort last?).
-
 *** Add the concept of hand-crafting                                  :story:
 
 An element can be marked with the stereotype of handcrafted. We then
@@ -1316,6 +1369,20 @@ Tasks:
   handcrafted. Add meta-data to allow overriding flag (or create story
   for it as we don't yet have a use case).
 - remove object_type
+
+*** Order of headers is hard-coded                                    :story:
+
+In inclusion expander, we have hacked the sorting:
+
+:        // FIXME: hacks for headers that must be last
+:        const bool lhs_is_gregorian(
+:            lhs.find_first_of(boost_serialization_gregorian) != npos);
+:        const bool rhs_is_gregorian(
+:            rhs.find_first_of(boost_serialization_gregorian) != npos);
+:        if (lhs_is_gregorian && !rhs_is_gregorian)
+:            return true;
+
+This could be handled via meta-data, supplying some kind of flag (sort last?).
 
 *** Perform the archetype / artefact renames                          :story:
 
@@ -1488,31 +1555,10 @@ not ideal - or we create it as generatable and need to add this as a
 free function. We need to wait until dogen has support for merging
 code generation.
 
-*** Move enabled formatters to element configuration                  :story:
-
-All elements have the same view of enabled formatters.
-
-*** Move enabled formatters to a higher level                         :story:
-
-At present we have =enabled_formatters= at the formatter level. This
-should be at the element level. It can't be model level because
-eventually we will have different enablement configurations for each
-formatter.
-
 *** Consider supplying element configuration as a parameter           :story:
 
 Figure out if element configuration is context or if it is better
 expressed as a stand alone formatting parameter.
-
-*** Check generation type before dispatching element                  :story:
-
-At present we are doing this check in =visit=:
-
-:     if (o.generation_type() == yarn::generation_types::no_generation)
-:        return;
-
-If we did it before the =visit= call we'd save the cost of
-dispatching.
 
 *** Formatter repository should be created in quilt                   :story:
 
@@ -1529,25 +1575,6 @@ Random notes:
 - some support imports only (cpp)
 - some support neither (cmakelists, etc).
 
-*** Supply formatter's container to injector                          :story:
-
-At present the injector is calling the formatters' workflow
-directly, in order to obtain the formatters' container. It should
-receive it as a parameter during initialisation.
-
-*** Introduce the concept of proxy models                             :story:
-
-These are models that exist solely to bring types in, but do not
-define those types. Typically one uses a proxy model to expose
-non-dogen types into dogen. We could add a flag to models
-=is_proxy=. It would replace the notion of system models. We need to
-check the stories in the backlog around this.
-
-Interestingly we could have different defaults for formatters in proxy
-models. For example, if a model is proxy we can assume that we should
-not compute inclusion paths. This could save a lot of time when
-specifying the models in JSON.
-
 *** Initialise formatters in the formatter's translation unit         :story:
 
 At present we are initialising the formatters in each of the facet
@@ -1556,12 +1583,11 @@ translation unit for each formatter. This will also make life easier
 when we move to a mustache world where there may not be a formatter
 header file at all.
 
-*** Add more validation to formatter registration                     :story:
+*** Refactor path annotations factory                                 :story:
 
-We should check to ensure that only one formatter per facet is
-declared the canonical formatter.
-
-*** Refactor path settings factory                                    :story:
+As part of this work we should also look at how the facet directory
+expander is computing the facet directory; we are going through all
+formatters. We could just read the facet information.
 
 Tasks:
 
@@ -1570,20 +1596,6 @@ Tasks:
 - cache top-level fields and facet fields and copy results instead of
   re-reading them.
 
-*** Check which properties need to loop through the entire model      :story:
-
-In certain cases such as helpers we probably don't need to go through
-all types; only the target types matter. Ensure we are not processing
-other types for no reason.
-
-Merged stories:
-
-*Element properties includes non-target types*
-
-We seem to be generating a lot of element properties and formatter
-properties as well. We should only be generating these for the target
-model.
-
 *** Move odb options file into odb folder                             :story:
 
 There is not particularly good reason for this file to exist at the
@@ -1591,51 +1603,6 @@ src level.
 
 In order to implement this story we need to have a working odb setup
 to test it and ensure we didn't break anything.
-
-*** Consider using indices rather than associative containers          :epic:
-
-Once we generate the final model the model becomes constant; this
-means we can easily assign an [[https://en.wikipedia.org/wiki/Ordinal_number][ordinal number]] to each model
-element. These could be arranged so that we always start with
-generatable types first; this way we always generate dense
-containers - there are some cases where we need both generatable types
-and non-generatable types; in other cases we just need generatable
-types; we never need just non-generatable types. We also need to know
-the position of the first non-generatable type (or alternatively, the
-size of the generatable types set).
-
-Once we have this, we can start creating vectors with a fixed size
-(either total number of elements or just size of generatable
-types). We can also make it so that each name has an id which is the
-ordinal (another model post-processing activity). Actually we should
-call it "type index" or some other name because its a transient
-id. This means both properties and settings require no lookups at all
-since all positions are known beforehand (except in cases where the
-key of the associative container must be the =yarn::name= because we
-use it for processing).
-
-In theory, a similar approach can be done for formatters too. We know
-upfront what the ordinal number is for each formatter because they are
-all registered before we start processing. If formatters obtained
-their ordinal number at registration, wherever we are using a map of
-formatter name to a resource, we could use a fixed-size
-vector. However, formatters may be sparse in many cases (if not all
-cases?). For example, we do not have formatter properties for all
-formatters for every =yarn::name= because many (most) formatters don't
-make sense for every yarn type. Thus this is less applicable, at least
-for formatter properties. We need to look carefully at all use cases
-and see if there is any place where this approach is applicable. It is
-probably going to be more useful for formatters than elements.
-
-Tasks:
-
-- in resolver, assign element indices and update property names with
-  them.
-- change final model to have a vector of size maximum index (a
-  property of the intermediate model).
-- in the final model generation, for each type, look at its index and
-  populate the slot accordingly.
-- update quilt to use the indices where possible.
 
 ** Deprecated
 *** CANCELLED Consider caching "all modules" in location              :story:
@@ -1794,3 +1761,19 @@ At present we have some formatters that are not in the traditional
 facets such as =types=, etc. We should make facets for them. We need
 to check what the current facet name is. There should only be one case
 of this, the CMakeLists formatters.
+*** CANCELLED Move enabled formatters to element configuration        :story:
+    CLOSED: [2016-10-04 Tue 19:08]
+
+*Rationale*: this is now handled correctly.
+
+All elements have the same view of enabled formatters.
+
+*** CANCELLED Move enabled formatters to a higher level               :story:
+    CLOSED: [2016-10-04 Tue 19:09]
+
+*Rationale*: this is now handled correctly.
+
+At present we have =enabled_formatters= at the formatter level. This
+should be at the element level. It can't be model level because
+eventually we will have different enablement configurations for each
+formatter.

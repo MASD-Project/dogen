@@ -3832,6 +3832,51 @@ become very readable.
 These stories are good candidates for the subsequent release. This
 release will be all about adding new features.
 
+*** Consider using indices rather than associative containers          :epic:
+
+Once we generate the final model the model becomes constant; this
+means we can easily assign an [[https://en.wikipedia.org/wiki/Ordinal_number][ordinal number]] to each model
+element. These could be arranged so that we always start with
+generatable types first; this way we always generate dense
+containers - there are some cases where we need both generatable types
+and non-generatable types; in other cases we just need generatable
+types; we never need just non-generatable types. We also need to know
+the position of the first non-generatable type (or alternatively, the
+size of the generatable types set).
+
+Once we have this, we can start creating vectors with a fixed size
+(either total number of elements or just size of generatable
+types). We can also make it so that each name has an id which is the
+ordinal (another model post-processing activity). Actually we should
+call it "type index" or some other name because its a transient
+id. This means both properties and settings require no lookups at all
+since all positions are known beforehand (except in cases where the
+key of the associative container must be the =yarn::name= because we
+use it for processing).
+
+In theory, a similar approach can be done for formatters too. We know
+upfront what the ordinal number is for each formatter because they are
+all registered before we start processing. If formatters obtained
+their ordinal number at registration, wherever we are using a map of
+formatter name to a resource, we could use a fixed-size
+vector. However, formatters may be sparse in many cases (if not all
+cases?). For example, we do not have formatter properties for all
+formatters for every =yarn::name= because many (most) formatters don't
+make sense for every yarn type. Thus this is less applicable, at least
+for formatter properties. We need to look carefully at all use cases
+and see if there is any place where this approach is applicable. It is
+probably going to be more useful for formatters than elements.
+
+Tasks:
+
+- in resolver, assign element indices and update property names with
+  them.
+- change final model to have a vector of size maximum index (a
+  property of the intermediate model).
+- in the final model generation, for each type, look at its index and
+  populate the slot accordingly.
+- update quilt to use the indices where possible.
+
 *** Create a UML profile to formalise yarn concepts                    :epic:
 
 Profile should include the hashable, etc changes.
