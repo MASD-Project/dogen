@@ -973,6 +973,12 @@ Tasks:
 - update the enablement expander to also compute: a) facet enabelment
   b) enablement by id.
 - update assistant with a "is facet xxx enabled".
+- add a "facet dependencies" to formatter interface. Add a "enabled
+  facet dependencies" to formatter configuration. During enablement,
+  check to see if the facet dependency is enabled and if so, add it to
+  the container. During formatting, assistant supplies a "is facet
+  dependency enabled" method that queries the container. This is used
+  for odb in cmakelists.
 
 Merged stories:
 
@@ -1162,6 +1168,7 @@ Further thoughts:
   because we still need formatter properties.
 
 *** STARTED Handle registration of services properly                  :story:
+    CLOCK: [2016-10-04 Tue 13:15]--[2016-10-04 Tue 13:20] =>  0:05
     CLOCK: [2016-10-03 Mon 20:01]--[2016-10-03 Mon 20:08] =>  0:07
     CLOCK: [2016-10-03 Mon 17:55]--[2016-10-03 Mon 19:02] =>  1:07
     CLOCK: [2016-10-03 Mon 16:07]--[2016-10-03 Mon 16:39] =>  0:32
@@ -1181,14 +1188,16 @@ Problems:
   e.g. I have included name x in types but I don't know what formatter
   it corresponds to.
 
+Both of these problems have been addressed on their own stories. We
+can now tackle leaves.
+
 Tasks:
 
-- add a "facet dependencies" to formatter interface. Add a "enabled
-  facet dependencies" to formatter configuration. During enablement,
-  check to see if the facet dependency is enabled and if so, add it to
-  the container. During formatting, assistant supplies a "is facet
-  dependency enabled" method that queries the container. This is used
-  for odb in cmakelists.
+- change context to have the entire formattables model; setup the
+  resolver and use it in is formatter name enabled.
+- use the resolver to check if each leaf is enabled for serialisation
+  using the canonical formatter. This can be a helper method in
+  assistant.
 
 *Previous Understanding*
 
