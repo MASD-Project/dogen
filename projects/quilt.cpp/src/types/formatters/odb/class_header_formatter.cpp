@@ -63,8 +63,10 @@ std::list<std::string> class_header_formatter::inclusion_dependencies(
     const auto& o(assistant::as<yarn::object>(static_formatter_name(), e));
     auto builder(f.make());
     builder.add(o.name(), types::traits::class_header_formatter_name());
-    builder.add(o.transparent_associations(), traits::facet_name());
-    builder.add(o.opaque_associations(), traits::facet_name());
+
+    const auto cfmtn(traits::canonical_formatter_name());
+    builder.add(o.transparent_associations(), cfmtn);
+    builder.add(o.opaque_associations(), cfmtn);
 
     const auto self_fn(class_header_formatter::static_formatter_name());
     builder.add(o.parent(), self_fn);

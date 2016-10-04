@@ -24,6 +24,7 @@
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/quilt.cpp/types/formattables/building_error.hpp"
+#include "dogen/quilt.cpp/types/formattables/canonical_formatter_resolver.hpp"
 #include "dogen/quilt.cpp/types/formattables/inclusion_dependencies_builder.hpp"
 
 namespace {
@@ -127,21 +128,6 @@ bool inclusion_dependencies_builder::is_enabled(const yarn::name& n,
     if (j == fmt_cfgs.end()) {
         BOOST_LOG_SEV(lg, debug) << formatter_name_not_found << formatter_name
                                  << " element id: " << n.id();
-
-        // FIXME: hack to cope with canonical formatter.
-        BOOST_LOG_SEV(lg, debug) << "Trying by facet name.";
-
-        for (const auto pair : fmt_cfgs) {
-            if (boost::starts_with(pair.first, formatter_name)) {
-                BOOST_LOG_SEV(lg, debug) << "Using: " << pair.first
-                                         << " status: "
-                                         << pair.second.enabled();
-                return pair.second.enabled();
-            }
-        }
-
-        BOOST_LOG_SEV(lg, error) << formatter_name_not_found << formatter_name
-                                 << " element id: " << n.id();
         BOOST_THROW_EXCEPTION(
             building_error(formatter_name_not_found + formatter_name));
     }
@@ -153,7 +139,6 @@ bool inclusion_dependencies_builder::is_enabled(const yarn::name& n,
                                  << n.id() << "'";
     }
     return r;
-
 }
 
 void inclusion_dependencies_builder::
@@ -167,10 +152,13 @@ add(const std::string& inclusion_directive) {
 
 void inclusion_dependencies_builder::
 add(const yarn::name& n, const std::string& formatter_name) {
-    if (!is_enabled(n, formatter_name))
+    canonical_formatter_resolver res(formattables_);
+    const auto resolved_fmtn(res.resolve(n.id(), formatter_name));
+
+    if (!is_enabled(n, resolved_fmtn))
         return;
 
-    const auto id(get_inclusion_directive(n, formatter_name));
+    const auto id(get_inclusion_directive(n, resolved_fmtn));
     if (id)
         add(*id);
 }

@@ -84,10 +84,11 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
     if (si.has_path || si.has_std_string)
         builder.add(inclusion_constants::std::sstream());
 
-    builder.add(o.transparent_associations(), traits::facet_name());
-    builder.add(o.opaque_associations(), traits::facet_name());
-    builder.add(o.parent(), traits::facet_name());
-    builder.add(o.leaves(), traits::facet_name());
+    const auto cfmtn(traits::canonical_formatter_name());
+    builder.add(o.transparent_associations(), cfmtn);
+    builder.add(o.opaque_associations(), cfmtn);
+    builder.add(o.parent(), cfmtn);
+    builder.add(o.leaves(), cfmtn);
 
     return builder.build();
 }

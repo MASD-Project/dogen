@@ -231,19 +231,6 @@ void inclusion_expander::compute_inclusion_directives(const yarn::element& e,
 
         BOOST_LOG_SEV(lg, debug) << "Inclusion directive: " << directive;
         insert_inclusion_directive(id, fmtn, directive, idc);
-
-        /*
-         * If the formatter is also the default for this facet and
-         * element, we need to register it against the facet too. Note
-         * that, for a given element type on a given facet, there can
-         * only be one default - or else we'll throw.
-         */
-        const auto cs(formatters::inclusion_support_types::canonical_support);
-        const auto fctn(fmt->ownership_hierarchy().facet_name());
-        if (fmt->inclusion_support_type() == cs) {
-            BOOST_LOG_SEV(lg, debug) << "Inserting default for: " << fctn;
-            insert_inclusion_directive(id, fctn, directive, idc);
-        }
     }
 }
 

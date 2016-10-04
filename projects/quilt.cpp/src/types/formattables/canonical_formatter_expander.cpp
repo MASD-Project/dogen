@@ -27,7 +27,8 @@
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("quilt.cpp.formattables.enablement_expander"));
+static logger lg(logger_factory(
+        "quilt.cpp.formattables.canonical_formatter_expander"));
 
 }
 
@@ -81,10 +82,13 @@ expand(const formatters::container& fc, model& fm) const {
 
                 const auto& oh(formatter.ownership_hierarchy());
                 const auto fmtn(oh.formatter_name());
+                const auto fctn(oh.facet_name());
 
                 using formatters::traits;
-                const auto cfmtn(traits::canonical_formatter_name(fmtn));
+                const auto cfmtn(traits::canonical_formatter_name(fctn));
                 ecfg.canonical_formatter_to_formatter()[cfmtn] = fmtn;
+                BOOST_LOG_SEV(lg, debug) << "Mapping " << cfmtn
+                                         << " to " << fmtn;
             }
         }
     }

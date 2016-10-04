@@ -99,9 +99,10 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
     if (si.has_std_string)
         builder.add(inclusion_constants::boost::algorithm::string());
 
-    builder.add(o.transparent_associations(), io::traits::facet_name());
-    builder.add(o.opaque_associations(), io::traits::facet_name());
-    builder.add(o.parent(), io::traits::facet_name());
+    const auto io_cfmtn(io::traits::canonical_formatter_name());
+    builder.add(o.transparent_associations(), io_cfmtn);
+    builder.add(o.opaque_associations(), io_cfmtn);
+    builder.add(o.parent(), io_cfmtn);
 
     if (o.is_visitation_leaf()) {
         /*

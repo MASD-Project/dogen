@@ -18,40 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/formatters/traits.hpp"
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_RESOLUTION_ERROR_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_RESOLUTION_ERROR_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <string>
+#include <boost/exception/info.hpp>
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
-namespace formatters {
+namespace formattables {
 
-std::string traits::model_name() {
-    static std::string r("quilt.cpp");
-    return r;
-}
+class resolution_error : public virtual std::exception, public virtual boost::exception {
+public:
+    resolution_error() = default;
+    ~resolution_error() noexcept = default;
 
-std::string traits::
-master_header_formatter_name(const std::string& facet_name) {
-    return facet_name + ".master_header_formatter";
-}
+public:
+    resolution_error(const std::string& message) : message_(message) { }
 
-std::string traits::cmake_facet_name() {
-    static std::string r("quilt.cpp.cmake");
-    return r;
-}
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
 
-std::string traits::include_cmakelists_formatter_name() {
-    static std::string r("quilt.cpp.cmake.include_cmakelists");
-    return r;
-}
-
-std::string traits::source_cmakelists_formatter_name() {
-    static std::string r("quilt.cpp.cmake.source_cmakelists");
-    return r;
-}
-
-std::string traits::canonical_formatter_name(const std::string& facet_name) {
-    return facet_name + ".canonical_formatter";
-}
+private:
+    const std::string message_;
+};
 
 } } } }
+
+#endif

@@ -63,8 +63,8 @@ std::list<std::string> class_header_formatter::inclusion_dependencies(
     auto builder(f.make());
     builder.add(inclusion_constants::std::iosfwd());
 
-    using types = formatters::types::traits;
-    builder.add(e.name(), types::traits::facet_name());
+    using traits = formatters::types::traits;
+    builder.add(e.name(), traits::canonical_formatter_name());
 
     return builder.build();
 }

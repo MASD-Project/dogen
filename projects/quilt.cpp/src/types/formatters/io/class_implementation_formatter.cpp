@@ -81,7 +81,7 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
 
     builder.add(o.opaque_associations(), ch_fn);
 
-    const auto io_fctn(formatters::io::traits::facet_name());
+    const auto io_cfmtn(formatters::io::traits::canonical_formatter_name());
     const auto self_fn(class_implementation_formatter::static_formatter_name());
     const bool io_enabled(builder.is_enabled(o.name(), self_fn));
 
@@ -106,9 +106,9 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
     if (si.has_variant)
         builder.add(inclusion_constants::boost::visitor::apply_visitor());
 
-    builder.add(o.transparent_associations(), io_fctn);
-    builder.add(o.opaque_associations(), io_fctn);
-    builder.add(o.parent(), io_fctn);
+    builder.add(o.transparent_associations(), io_cfmtn);
+    builder.add(o.opaque_associations(), io_cfmtn);
+    builder.add(o.parent(), io_cfmtn);
 
     return builder.build();
 }

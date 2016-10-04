@@ -76,16 +76,17 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
     const yarn::element& e) const {
 
     const auto& o(assistant::as<yarn::object>(static_formatter_name(), e));
+    const auto cfmtn(traits::canonical_formatter_name());
     auto builder(f.make());
-    builder.add(o.name(), traits::facet_name());
+    builder.add(o.name(), cfmtn);
 
     const auto si(builder.make_special_includes(o));
     if (si.has_variant)
         builder.add(inclusion_constants::boost::visitor::apply_visitor());
 
-    builder.add(o.transparent_associations(), traits::facet_name());
-    builder.add(o.opaque_associations(), traits::facet_name());
-    builder.add(o.parent(), traits::facet_name());
+    builder.add(o.transparent_associations(), cfmtn);
+    builder.add(o.opaque_associations(), cfmtn);
+    builder.add(o.parent(), cfmtn);
 
     return builder.build();
 }

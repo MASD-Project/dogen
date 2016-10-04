@@ -76,6 +76,7 @@
 #include "dogen/quilt.cpp/types/formattables/expansion_error.hpp"
 #include "dogen/quilt.cpp/types/formattables/helper_expander.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/initializer.hpp"
+#include "dogen/quilt.cpp/types/formattables/resolution_error.hpp"
 #include "dogen/quilt.cpp/types/annotations/aspect_annotations.hpp"
 #include "dogen/quilt.cpp/types/annotations/helper_annotations.hpp"
 #include "dogen/quilt.cpp/types/annotations/opaque_annotations.hpp"

@@ -14,51 +14,51 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-04 Tue 12:04]
+#+CAPTION: Clock summary at [2016-10-04 Tue 13:14]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *55:04* |       |      | 100.0 |
+| *Total time*                                                                | *56:13* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 55:04   |       |      | 100.0 |
-| Active                                                                      |         | 55:04 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 4:37 |   8.4 |
+| Stories                                                                     | 56:13   |       |      | 100.0 |
+| Active                                                                      |         | 56:13 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 4:37 |   8.2 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:07 |   0.2 |
-| COMPLETED Generation of formattable is incorrect                            |         |       | 2:30 |   4.5 |
+| COMPLETED Generation of formattable is incorrect                            |         |       | 2:30 |   4.4 |
 | COMPLETED Visitor includes are incorrect                                    |         |       | 0:20 |   0.6 |
-| COMPLETED Add includer to quilt.cpp                                         |         |       | 1:46 |   3.2 |
+| COMPLETED Add includer to quilt.cpp                                         |         |       | 1:46 |   3.1 |
 | COMPLETED Add reducer to quilt.cpp                                          |         |       | 0:22 |   0.7 |
 | COMPLETED Add new index to formtter container                               |         |       | 0:19 |   0.6 |
 | COMPLETED Add path expander to quilt.cpp                                    |         |       | 0:49 |   1.5 |
 | COMPLETED Add guard expander to quilt.cpp                                   |         |       | 0:27 |   0.8 |
 | COMPLETED Investigate borked travis build                                   |         |       | 0:37 |   1.1 |
 | COMPLETED Add decoration expander to quilt.cpp                              |         |       | 0:23 |   0.7 |
-| COMPLETED Add aspect expander to quilt.cpp                                  |         |       | 1:26 |   2.6 |
+| COMPLETED Add aspect expander to quilt.cpp                                  |         |       | 1:26 |   2.5 |
 | COMPLETED Run tests that are passing on windows                             |         |       | 0:10 |   0.3 |
-| COMPLETED Add helper expander to quilt.cpp                                  |         |       | 1:26 |   2.6 |
+| COMPLETED Add helper expander to quilt.cpp                                  |         |       | 1:26 |   2.5 |
 | COMPLETED Merge pre and post workflows                                      |         |       | 0:16 |   0.5 |
-| COMPLETED Fix bug in aspect and helper generation                           |         |       | 0:15 |   0.5 |
-| COMPLETED Investigate element annotation support                            |         |       | 2:05 |   3.8 |
+| COMPLETED Fix bug in aspect and helper generation                           |         |       | 0:15 |   0.4 |
+| COMPLETED Investigate element annotation support                            |         |       | 2:05 |   3.7 |
 | CANCELLED Add streaming settings expander                                   |         |       | 0:36 |   1.1 |
-| COMPLETED Create the formattables model                                     |         |       | 1:32 |   2.8 |
-| COMPLETED Hook formattables into formatters                                 |         |       | 3:58 |   7.2 |
-| COMPLETED Remove empty context                                              |         |       | 1:09 |   2.1 |
-| COMPLETED Review main classes in quilt.cpp                                  |         |       | 3:42 |   6.7 |
+| COMPLETED Create the formattables model                                     |         |       | 1:32 |   2.7 |
+| COMPLETED Hook formattables into formatters                                 |         |       | 3:58 |   7.1 |
+| COMPLETED Remove empty context                                              |         |       | 1:09 |   2.0 |
+| COMPLETED Review main classes in quilt.cpp                                  |         |       | 3:42 |   6.6 |
 | COMPLETED Clean up element segmentation                                     |         |       | 1:20 |   2.4 |
-| COMPLETED Get OSX build to compile code                                     |         |       | 7:05 |  12.9 |
-| COMPLETED Add a banner to readme                                            |         |       | 1:29 |   2.7 |
+| COMPLETED Get OSX build to compile code                                     |         |       | 7:05 |  12.6 |
+| COMPLETED Add a banner to readme                                            |         |       | 1:29 |   2.6 |
 | COMPLETED Remove formatter group                                            |         |       | 0:23 |   0.7 |
-| COMPLETED Add more types to =quilt::cpp= canned tests                       |         |       | 0:15 |   0.5 |
+| COMPLETED Add more types to =quilt::cpp= canned tests                       |         |       | 0:15 |   0.4 |
 | CANCELLED Remove formatter id                                               |         |       | 0:04 |   0.1 |
-| COMPLETED Analysis around terminology in formatting space                   |         |       | 3:24 |   6.2 |
+| COMPLETED Analysis around terminology in formatting space                   |         |       | 3:24 |   6.0 |
 | COMPLETED Remove =original_model_name=                                      |         |       | 0:16 |   0.5 |
-| COMPLETED Refactor code around model origination                            |         |       | 4:08 |   7.5 |
+| COMPLETED Refactor code around model origination                            |         |       | 4:08 |   7.4 |
 | COMPLETED Remove formatter level facet folders                              |         |       | 0:06 |   0.2 |
 | COMPLETED Consider removing the "fake" primitive formatters                 |         |       | 0:01 |   0.0 |
-| COMPLETED Expander refactor in =quilt.cpp=                                  |         |       | 3:03 |   5.5 |
+| COMPLETED Expander refactor in =quilt.cpp=                                  |         |       | 3:03 |   5.4 |
+| COMPLETED Create the notion of a formatter alias                            |         |       | 3:15 |   5.8 |
 | STARTED Generate formatter interfaces                                       |         |       | 0:19 |   0.6 |
-| STARTED Handle registration of services properly                            |         |       | 2:13 |   4.0 |
-| STARTED Create the notion of a formatter alias                              |         |       | 2:06 |   3.8 |
+| STARTED Handle registration of services properly                            |         |       | 2:13 |   3.9 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -985,6 +985,46 @@ At present we need:
 
 We need to also add a "is facet enabled" method in assistant.
 
+*** COMPLETED Create the notion of a formatter alias                  :story:
+    CLOSED: [2016-10-04 Tue 13:14]
+    CLOCK: [2016-10-04 Tue 12:05]--[2016-10-04 Tue 13:14] =>  1:09
+    CLOCK: [2016-10-04 Tue 10:51]--[2016-10-04 Tue 12:04] =>  1:13
+    CLOCK: [2016-10-04 Tue 10:37]--[2016-10-04 Tue 10:50] =>  0:13
+    CLOCK: [2016-10-03 Mon 20:39]--[2016-10-03 Mon 20:51] =>  0:12
+    CLOCK: [2016-10-03 Mon 20:09]--[2016-10-03 Mon 20:37] =>  0:28
+
+Tasks:
+
+- add a new trait for canonical formatters: facet + ".canonical";
+- create a map of canonical formatter to actual formatter during model
+  generation. Supply the map to the inclusion expander and from there
+  to the inclusion builder.
+- before we build the includes, first resolve it against the map; if
+  it resolves, use the formatter name from resolution, if not use the
+  original.
+- map is copied across to model and from model into context.
+- when formatting registrar, for each leaf ask if the formatter is
+  enabled. Supply the id of the leaf and the serialisation facet; use
+  the map to resolve the facet to a formatter name. If the id is not
+  enabled, do not add it to registrar.
+- in assistant, replace "is serialisation enabled" etc with calls to
+  the canonical formatter instead. Remove those that are not in
+  use. Make the name reflect the fact that we are looking at the
+  canonical formatter.
+
+*Previous Understanding*
+
+We did a bit of a hack with mapping the facet to the default
+formatter. What we really need is the notion of an alias. It still
+looks like a formatter name (for example "header_formatter") but it
+must be first resolved into an actual formatter. For this we need a
+type index.
+
+Other names:
+
+- canonical formatter
+- reference formatter
+
 *** STARTED Generate formatter interfaces                              :epic:
     CLOCK: [2016-09-30 Fri 10:58]--[2016-09-30 Fri 11:17] =>  0:19
 
@@ -1168,44 +1208,6 @@ and if not, skip the type.
 
 Another way is to check if the type is generatable. If not, skip
 it. If we do it this way we need to wait for the generatable clean up.
-
-*** STARTED Create the notion of a formatter alias                    :story:
-    CLOCK: [2016-10-04 Tue 10:51]--[2016-10-04 Tue 12:04] =>  1:13
-    CLOCK: [2016-10-04 Tue 10:37]--[2016-10-04 Tue 10:50] =>  0:13
-    CLOCK: [2016-10-03 Mon 20:39]--[2016-10-03 Mon 20:51] =>  0:12
-    CLOCK: [2016-10-03 Mon 20:09]--[2016-10-03 Mon 20:37] =>  0:28
-
-Tasks:
-
-- add a new trait for canonical formatters: facet + ".canonical";
-- create a map of canonical formatter to actual formatter during model
-  generation. Supply the map to the inclusion expander and from there
-  to the inclusion builder.
-- before we build the includes, first resolve it against the map; if
-  it resolves, use the formatter name from resolution, if not use the
-  original.
-- map is copied across to model and from model into context.
-- when formatting registrar, for each leaf ask if the formatter is
-  enabled. Supply the id of the leaf and the serialisation facet; use
-  the map to resolve the facet to a formatter name. If the id is not
-  enabled, do not add it to registrar.
-- in assistant, replace "is serialisation enabled" etc with calls to
-  the canonical formatter instead. Remove those that are not in
-  use. Make the name reflect the fact that we are looking at the
-  canonical formatter.
-
-*Previous Understanding*
-
-We did a bit of a hack with mapping the facet to the default
-formatter. What we really need is the notion of an alias. It still
-looks like a formatter name (for example "header_formatter") but it
-must be first resolved into an actual formatter. For this we need a
-type index.
-
-Other names:
-
-- canonical formatter
-- reference formatter
 
 *** Add the concept of hand-crafting                                  :story:
 
