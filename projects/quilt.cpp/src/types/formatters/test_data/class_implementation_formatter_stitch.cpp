@@ -36,7 +36,7 @@ class_implementation_formatter_stitch(assistant& a, const yarn::object& o) {
         auto sbf(a.make_scoped_boilerplate_formatter());
         if (!o.local_attributes().empty()) {
 a.stream() << "namespace {" << std::endl;
-        a.add_helper_methods();
+        a.add_helper_methods(o.name().id());
 a.stream() << std::endl;
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;

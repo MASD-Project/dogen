@@ -15246,7 +15246,7 @@ main, or from another initialiser.#</dia:string>
         <dia:point val="215,204.917"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="214.95,204.867;270.22,209.367"/>
+        <dia:rectangle val="214.95,204.867;270.22,210.167"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="215,204.917"/>
@@ -15255,7 +15255,7 @@ main, or from another initialiser.#</dia:string>
         <dia:real val="55.170000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#context#</dia:string>
@@ -15351,6 +15351,29 @@ main, or from another initialiser.#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#formattables::model#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#element_configuration#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#formattables::element_configuration#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

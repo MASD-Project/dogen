@@ -26,7 +26,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
 <#+
         }
 
-        a.add_helper_methods();
+        a.add_helper_methods(o.name().id());
 #>
 
 }

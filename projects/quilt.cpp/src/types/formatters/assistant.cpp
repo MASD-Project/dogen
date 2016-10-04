@@ -444,12 +444,11 @@ is_streaming_enabled(const formattables::helper_configuration& hc) const {
     return in_types_class_implementation && hc.in_inheritance_relationship();
 }
 
-void assistant::add_helper_methods() {
+void assistant::add_helper_methods(const std::string& element_id) {
+    BOOST_LOG_SEV(lg, debug) << "Generating helper methods. Element: "
+                             << element_id;
     if (context_.element_configuration().helper_configurations().empty()) {
-        // FIXME: supply target name as an argument and print its ID
-        // FIXME: here. This needs to wait until we start using yarn
-        // FIXME: types on all formatters.
-        BOOST_LOG_SEV(lg, debug) << "No helper methods for: ";
+        BOOST_LOG_SEV(lg, debug) << "No helper methods found.";
     }
 
     const auto& ecfg(context_.element_configuration());
@@ -471,6 +470,7 @@ void assistant::add_helper_methods() {
             h->format(*this, hlp_cfg);
         }
     }
+    BOOST_LOG_SEV(lg, debug) << "Finished generating helper methods.";
 }
 
 std::string assistant::streaming_for_type(

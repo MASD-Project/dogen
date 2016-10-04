@@ -18,7 +18,7 @@ class_implementation_formatter_stitch(assistant& a, const yarn::object& o) {
 #>
 namespace {
 <#+
-        a.add_helper_methods();
+        a.add_helper_methods(o.name().id());
 #>
 
 }

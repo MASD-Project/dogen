@@ -35,7 +35,7 @@ dogen::formatters::file class_implementation_formatter_stitch(
         const auto sn(o.name().simple());
         const auto qn(a.get_qualified_name(o.name()));
         auto sbf(a.make_scoped_boilerplate_formatter());
-        a.add_helper_methods();
+        a.add_helper_methods(o.name().id());
 
         {
             const auto ns(a.make_namespaces(o.name()));

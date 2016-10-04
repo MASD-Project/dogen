@@ -270,7 +270,7 @@ public:
      * @brief Creates any helper methods that may be required for this
      * formatter.
      */
-    void add_helper_methods();
+    void add_helper_methods(const std::string& element_id);
 
     /**
      * @brief Returns the correct streaming invocation for the
