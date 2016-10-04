@@ -64,7 +64,9 @@ const std::string file_path_not_set(
 const std::string header_guard_not_set(
     "Header guard for formatter is not set. Formatter: ");
 const std::string formatter_configuration_missing(
-    "Could not find formatter properties for formatter: ");
+    "Could not find formatter configuration for formatter: ");
+const std::string facet_configuration_missing(
+    "Could not find facet configuration for formatter: ");
 const std::string facet_directory_missing(
     "Facet directory is missing for facet: ");
 const std::string unexpected_opaque_annotations(
@@ -183,6 +185,19 @@ obtain_formatter_configuration(const std::string& formatter_name) const {
     return i->second;
 }
 
+formattables::facet_configuration assistant::
+obtain_facet_configuration(const std::string& facet_name) const {
+    const auto& fct_cfg(context_.facet_configurations());
+    const auto i(fct_cfg.find(facet_name));
+    if (i == fct_cfg.end()) {
+        BOOST_LOG_SEV(lg, error) << facet_configuration_missing
+                                 << facet_name;
+        BOOST_THROW_EXCEPTION(formatting_error(facet_configuration_missing +
+                facet_name));
+    }
+    return i->second;
+}
+
 std::string assistant::
 make_member_variable_name(const yarn::attribute& attr) const {
     return attr.name().simple() + member_variable_postfix;
@@ -200,25 +215,30 @@ std::list<std::string> assistant::make_namespaces(const yarn::name& n) const {
 
 bool assistant::
 is_formatter_enabled(const std::string& formatter_name) const {
+    // FIXME: needs formatter aliases.
+    // const auto& fmt_cfg(obtain_formatter_configuration(formatter_name));
+    // return fmt_cfg.enabled();
     const auto& fmt_cfg(formatter_configuration_);
-
     BOOST_LOG_SEV(lg, error) << "Enabled formatters: "
                              << fmt_cfg.enabled_formatters();
-
     const auto i(fmt_cfg.enabled_formatters().find(formatter_name));
     return i != fmt_cfg.enabled_formatters().end();
 }
 
+bool assistant::
+is_facet_enabled(const std::string& facet_name) const {
+    const auto& fct_cfg(obtain_facet_configuration(facet_name));
+    return fct_cfg.enabled();
+}
+
 std::string assistant::
 get_facet_directory_for_facet(const std::string& facet_name) const {
-    const auto& fct_cfgs(context_.facet_configurations());
-    const auto i(fct_cfgs.find(facet_name));
-    if (i == fct_cfgs.end()) {
+    const auto& fct_cfg(obtain_facet_configuration(facet_name));
+    if (fct_cfg.directory().empty()) {
         BOOST_LOG_SEV(lg, error) << facet_directory_missing << facet_name;
         BOOST_THROW_EXCEPTION(
             formatting_error(facet_directory_missing + facet_name));
     }
-    const auto& fct_cfg(i->second);
     return fct_cfg.directory();
 }
 
@@ -252,17 +272,7 @@ bool assistant::is_io_enabled() const {
     return is_formatter_enabled(traits::class_header_formatter_name());
 }
 
-bool assistant::is_hash_enabled() const {
-    using formatters::hash::traits;
-    return is_formatter_enabled(traits::class_header_formatter_name());
-}
-
-bool assistant::is_test_data_enabled() const {
-    using formatters::test_data::traits;
-    return is_formatter_enabled(traits::class_header_formatter_name());
-}
-
-bool assistant::is_odb_enabled() const {
+bool assistant::is_odb_facet_enabled() const {
     using formatters::odb::traits;
     return is_formatter_enabled(traits::class_header_formatter_name());
 }

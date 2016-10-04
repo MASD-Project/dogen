@@ -29,6 +29,7 @@
 #include "dogen/dynamic/types/field_selector.hpp"
 #include "dogen/dynamic/types/repository_selector.hpp"
 #include "dogen/dynamic/io/field_definition_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/facet_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/local_enablement_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/global_enablement_configuration_io.hpp"
 #include "dogen/quilt.cpp/types/formattables/expansion_error.hpp"
@@ -116,7 +117,7 @@ enablement_expander::obtain_global_configurations(
     const std::unordered_map<std::string, global_field_definitions>& gfd,
     const dynamic::object& root_object) const {
 
-    BOOST_LOG_SEV(lg, debug) << "Creating global enablement configuration..";
+    BOOST_LOG_SEV(lg, debug) << "Creating global enablement configuration.";
 
     global_enablement_configurations_type r;
     const dynamic::field_selector fs(root_object);
@@ -136,6 +137,21 @@ enablement_expander::obtain_global_configurations(
     BOOST_LOG_SEV(lg, debug) << "Created global enablement configuration. "
                              << "Result: " << r;
     return r;
+}
+
+void enablement_expander::update_facet_enablement(model& fm,
+    const global_enablement_configurations_type& gcs) const {
+    BOOST_LOG_SEV(lg, debug) << "Updating facet enablement.";
+
+    auto& fct_cfgs(fm.facet_configurations());
+    for (const auto& pair : gcs) {
+        const auto fctn(pair.first);
+        const auto& gc(pair.second);
+        fct_cfgs[fctn].enabled(gc.facet_enabled());
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Finished updating facet enablement."
+                             << "Result: " << fm.facet_configurations();
 }
 
 enablement_expander::local_field_definitions_type
@@ -333,9 +349,11 @@ void enablement_expander::expand(const dynamic::repository& drp,
     const auto gfds(make_global_field_definitions(drp, fc));
 
     /*
-     * Read the values for the global field definitions.
+     * Read the values for the global field definitions, and update
+     * the facet configurations with it.
      */
     const auto gcs(obtain_global_configurations(gfds, root_object));
+    update_facet_enablement(fm, gcs);
 
     /*
      * Create the fields for the local field definitions. These are

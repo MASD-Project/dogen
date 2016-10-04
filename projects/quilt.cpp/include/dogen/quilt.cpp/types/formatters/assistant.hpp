@@ -110,19 +110,33 @@ public:
 
 private:
     /**
-     * @brief Obtains the formatter properties for the formatter
+     * @brief Obtains the formatter configuration for the formatter
      * identified by formatter name.
      *
-     * @pre Formatter properties must exist for the formatter.
+     * @pre Formatter configuration must exist for the formatter.
      */
     formattables::formatter_configuration
     obtain_formatter_configuration(const std::string& formatter_name) const;
+
+    /**
+     * @brief Obtains the facet configuration for the facet
+     * identified by facet name.
+     *
+     * @pre Facet configuration must exist for the facet.
+     */
+    formattables::facet_configuration
+    obtain_facet_configuration(const std::string& facet_name) const;
 
     /**
      * @brief Returns true if the formatter is enabled, false
      * otherwise.
      */
     bool is_formatter_enabled(const std::string& formatter_name) const;
+
+    /**
+     * @brief Returns true if the facet is enabled, false otherwise.
+     */
+    bool is_facet_enabled(const std::string& facet_name) const;
 
     /**
      * @brief Returns the folder for the current facet.
@@ -180,19 +194,9 @@ public:
     bool is_io_enabled() const;
 
     /**
-     * @brief Returns true if hash is enabled.
-     */
-    bool is_hash_enabled() const;
-
-    /**
-     * @brief Returns true if test data is enabled.
-     */
-    bool is_test_data_enabled() const;
-
-    /**
      * @brief Returns true if odb is enabled.
      */
-    bool is_odb_enabled() const;
+    bool is_odb_facet_enabled() const;
 
     /**
      * @brief Returns true if the current formatter belongs to the io

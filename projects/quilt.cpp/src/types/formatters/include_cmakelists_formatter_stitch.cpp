@@ -39,7 +39,7 @@ a.stream() << "    DIRECTORY include/" << std::endl;
 a.stream() << "    DESTINATION include/" << std::endl;
 a.stream() << "    COMPONENT headers" << std::endl;
 a.stream() << "    FILES_MATCHING PATTERN \"*.hpp\")" << std::endl;
-        if (a.is_odb_enabled()) {
+        if (a.is_odb_facet_enabled()) {
             const auto model_name(a.get_identifiable_model_name(c.name()));
             const auto product_name(a.get_product_name(c.name()));
             const auto odb_folder(a.get_odb_facet_directory());
