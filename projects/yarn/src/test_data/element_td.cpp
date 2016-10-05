@@ -29,6 +29,7 @@
 #include "dogen/yarn/test_data/exception_td.hpp"
 #include "dogen/yarn/test_data/primitive_td.hpp"
 #include "dogen/yarn/test_data/enumeration_td.hpp"
+#include "dogen/yarn/test_data/stereotypes_td.hpp"
 #include "dogen/yarn/test_data/origin_types_td.hpp"
 #include "dogen/yarn/test_data/generation_types_td.hpp"
 
@@ -71,6 +72,19 @@ bool create_bool(const unsigned int position) {
     return (position % 2) == 0;
 }
 
+dogen::yarn::stereotypes
+create_dogen_yarn_stereotypes(const unsigned int position) {
+    return dogen::yarn::stereotypes_generator::create(position);
+}
+
+std::unordered_set<dogen::yarn::stereotypes> create_std_unordered_set_dogen_yarn_stereotypes(unsigned int position) {
+    std::unordered_set<dogen::yarn::stereotypes> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(create_dogen_yarn_stereotypes(position + i));
+    }
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -85,7 +99,8 @@ populate(const unsigned int position, result_type& v) {
     v.origin_type(create_dogen_yarn_origin_types(position + 4));
     v.contained_by(create_boost_optional_dogen_yarn_name(position + 5));
     v.in_global_module(create_bool(position + 6));
-    v.is_element_extension(create_bool(position + 7));
+    v.stereotypes(create_std_unordered_set_dogen_yarn_stereotypes(position + 7));
+    v.is_element_extension(create_bool(position + 8));
 }
 
 element_generator::result_type*

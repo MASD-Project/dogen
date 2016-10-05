@@ -37,6 +37,12 @@ std::ostream& operator<<(std::ostream& s, const stereotypes& v) {
     case stereotypes::visitable:
         attr = "\"visitable\"";
         break;
+    case stereotypes::formatter:
+        attr = "\"formatter\"";
+        break;
+    case stereotypes::handcrafted:
+        attr = "\"handcrafted\"";
+        break;
     default:
         throw std::invalid_argument("Invalid value for stereotypes");
     }

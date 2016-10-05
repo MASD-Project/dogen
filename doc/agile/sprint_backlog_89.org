@@ -1407,6 +1407,33 @@ Further thoughts:
   generates the file. Actually we probably can't have this in quilt
   because we still need formatter properties.
 
+*** COMPLETED Move stereotypes to element                             :story:
+    CLOSED: [2016-10-05 Wed 21:46]
+    CLOCK: [2016-10-05 Wed 21:25]--[2016-10-05 Wed 21:46] =>  0:21
+
+We need to have the ability to add stereotypes to any element.
+
+*** Push stereotypes processing into yarn                             :story:
+
+At present we have stereotypes as an enum, and the frontends are
+responsible for resolving the stereotypes. This is not ideal:
+
+- we assume unknown stereotypes are concepts;
+- we map visitable to a flag to map it to a stereotype;
+- we map fluent to a flag;
+- we had to hack in the profile stereotype binding;
+- the same work will have to be done in other frontends (e.g. JSON).
+
+The right thing is:
+
+- make stereotypes a string container;
+- frontend simply populates the container and does not judgements;
+- *all* stereotypes are put in the container; rule of thumb is, if its
+  a UML stereotype then it must go in the container;
+- stereotypes expander figures out if the stereotype is one that is
+  actionable within yarn (visitor, modeled concepts) or one to
+  pass-through (binding stereotypes.
+
 *** Merge annotations with formattables                               :story:
 
 Originally we split annotations from formattables because we thought

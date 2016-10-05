@@ -24,6 +24,7 @@
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/dynamic/io/object_io.hpp"
+#include "dogen/yarn/io/stereotypes_io.hpp"
 #include "dogen/yarn/io/origin_types_io.hpp"
 #include "dogen/yarn/io/generation_types_io.hpp"
 
@@ -49,6 +50,20 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::ya
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen::yarn::stereotypes>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace yarn {
 
@@ -66,6 +81,7 @@ element::element(element&& rhs)
       origin_type_(std::move(rhs.origin_type_)),
       contained_by_(std::move(rhs.contained_by_)),
       in_global_module_(std::move(rhs.in_global_module_)),
+      stereotypes_(std::move(rhs.stereotypes_)),
       is_element_extension_(std::move(rhs.is_element_extension_)) { }
 
 element::element(
@@ -76,6 +92,7 @@ element::element(
     const dogen::yarn::origin_types origin_type,
     const boost::optional<dogen::yarn::name>& contained_by,
     const bool in_global_module,
+    const std::unordered_set<dogen::yarn::stereotypes>& stereotypes,
     const bool is_element_extension)
     : documentation_(documentation),
       extensions_(extensions),
@@ -84,6 +101,7 @@ element::element(
       origin_type_(origin_type),
       contained_by_(contained_by),
       in_global_module_(in_global_module),
+      stereotypes_(stereotypes),
       is_element_extension_(is_element_extension) { }
 
 void element::to_stream(std::ostream& s) const {
@@ -102,6 +120,7 @@ void element::to_stream(std::ostream& s) const {
       << "\"origin_type\": " << origin_type_ << ", "
       << "\"contained_by\": " << contained_by_ << ", "
       << "\"in_global_module\": " << in_global_module_ << ", "
+      << "\"stereotypes\": " << stereotypes_ << ", "
       << "\"is_element_extension\": " << is_element_extension_
       << " }";
 }
@@ -115,6 +134,7 @@ void element::swap(element& other) noexcept {
     swap(origin_type_, other.origin_type_);
     swap(contained_by_, other.contained_by_);
     swap(in_global_module_, other.in_global_module_);
+    swap(stereotypes_, other.stereotypes_);
     swap(is_element_extension_, other.is_element_extension_);
 }
 
@@ -126,6 +146,7 @@ bool element::compare(const element& rhs) const {
         origin_type_ == rhs.origin_type_ &&
         contained_by_ == rhs.contained_by_ &&
         in_global_module_ == rhs.in_global_module_ &&
+        stereotypes_ == rhs.stereotypes_ &&
         is_element_extension_ == rhs.is_element_extension_;
 }
 
@@ -215,6 +236,22 @@ bool element::in_global_module() const {
 
 void element::in_global_module(const bool v) {
     in_global_module_ = v;
+}
+
+const std::unordered_set<dogen::yarn::stereotypes>& element::stereotypes() const {
+    return stereotypes_;
+}
+
+std::unordered_set<dogen::yarn::stereotypes>& element::stereotypes() {
+    return stereotypes_;
+}
+
+void element::stereotypes(const std::unordered_set<dogen::yarn::stereotypes>& v) {
+    stereotypes_ = v;
+}
+
+void element::stereotypes(const std::unordered_set<dogen::yarn::stereotypes>&& v) {
+    stereotypes_ = std::move(v);
 }
 
 bool element::is_element_extension() const {

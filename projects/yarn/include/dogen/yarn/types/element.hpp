@@ -28,10 +28,13 @@
 #include <iosfwd>
 #include <string>
 #include <algorithm>
+#include <unordered_set>
 #include <boost/optional.hpp>
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/dynamic/types/object.hpp"
+#include "dogen/yarn/types/stereotypes.hpp"
 #include "dogen/yarn/types/origin_types.hpp"
+#include "dogen/yarn/hash/stereotypes_hash.hpp"
 #include "dogen/yarn/types/generation_types.hpp"
 #include "dogen/yarn/types/element_visitor_fwd.hpp"
 #include "dogen/yarn/serialization/element_fwd_ser.hpp"
@@ -67,6 +70,7 @@ public:
         const dogen::yarn::origin_types origin_type,
         const boost::optional<dogen::yarn::name>& contained_by,
         const bool in_global_module,
+        const std::unordered_set<dogen::yarn::stereotypes>& stereotypes,
         const bool is_element_extension);
 
 private:
@@ -154,6 +158,11 @@ public:
     void in_global_module(const bool v);
     /**@}*/
 
+    const std::unordered_set<dogen::yarn::stereotypes>& stereotypes() const;
+    std::unordered_set<dogen::yarn::stereotypes>& stereotypes();
+    void stereotypes(const std::unordered_set<dogen::yarn::stereotypes>& v);
+    void stereotypes(const std::unordered_set<dogen::yarn::stereotypes>&& v);
+
     /**
      * @brief If true, this element extends another element with the same id.
      */
@@ -178,6 +187,7 @@ private:
     dogen::yarn::origin_types origin_type_;
     boost::optional<dogen::yarn::name> contained_by_;
     bool in_global_module_;
+    std::unordered_set<dogen::yarn::stereotypes> stereotypes_;
     bool is_element_extension_;
 };
 

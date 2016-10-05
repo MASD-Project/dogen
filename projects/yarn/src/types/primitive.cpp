@@ -38,6 +38,7 @@ primitive::primitive(
     const dogen::yarn::origin_types origin_type,
     const boost::optional<dogen::yarn::name>& contained_by,
     const bool in_global_module,
+    const std::unordered_set<dogen::yarn::stereotypes>& stereotypes,
     const bool is_element_extension,
     const bool is_default_enumeration_type)
     : dogen::yarn::element(
@@ -48,6 +49,7 @@ primitive::primitive(
       origin_type,
       contained_by,
       in_global_module,
+      stereotypes,
       is_element_extension),
       is_default_enumeration_type_(is_default_enumeration_type) { }
 

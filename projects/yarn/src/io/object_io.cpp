@@ -24,7 +24,6 @@
 #include "dogen/yarn/io/object_io.hpp"
 #include "dogen/yarn/io/element_io.hpp"
 #include "dogen/yarn/io/attribute_io.hpp"
-#include "dogen/yarn/io/stereotypes_io.hpp"
 #include "dogen/yarn/io/object_types_io.hpp"
 #include "dogen/yarn/io/generalization_annotations_io.hpp"
 #include "dogen/yarn/io/type_parameters_annotations_io.hpp"

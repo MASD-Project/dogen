@@ -94,9 +94,14 @@
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<stereotypes class_id="25" tracking_level="0" version="0">
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
-				<members class_id="25" tracking_level="0" version="0">
+				<members class_id="26" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</members>
@@ -117,12 +122,12 @@ in the context of inheritance.
 							<count>1</count>
 							<bucket_count>2</bucket_count>
 							<item_version>0</item_version>
-							<item class_id="26" tracking_level="0" version="0">
+							<item class_id="27" tracking_level="0" version="0">
 								<first>yarn.dia.comment</first>
-								<second class_id="27" tracking_level="0" version="0">
-									<value class_id="28" tracking_level="0" version="1">
+								<second class_id="28" tracking_level="0" version="0">
+									<value class_id="29" tracking_level="0" version="1">
 										<px class_id="2" tracking_level="1" version="0" object_id="_2">
-											<value class_id="29" tracking_level="0" version="0"></value>
+											<value class_id="30" tracking_level="0" version="0"></value>
 											<content>true</content>
 										</px>
 									</value>
@@ -165,6 +170,11 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<stereotypes>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
 				<members>
@@ -220,6 +230,11 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<stereotypes>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
 				<members>
@@ -275,6 +290,11 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<stereotypes>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
 				<members>
@@ -330,6 +350,11 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<stereotypes>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
 				<members>
@@ -339,26 +364,26 @@ in the context of inheritance.
 			</second>
 		</item>
 	</modules>
-	<concepts class_id="30" tracking_level="0" version="0">
+	<concepts class_id="31" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</concepts>
-	<primitives class_id="31" tracking_level="0" version="0">
+	<primitives class_id="32" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
-	<enumerations class_id="32" tracking_level="0" version="0">
+	<enumerations class_id="33" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</enumerations>
-	<objects class_id="33" tracking_level="0" version="0">
+	<objects class_id="34" tracking_level="0" version="0">
 		<count>29</count>
 		<bucket_count>47</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="34" tracking_level="0" version="0">
+		<item class_id="35" tracking_level="0" version="0">
 			<first>&lt;trivial_inheritance&gt;&lt;non_final_leaf&gt;</first>
 			<second class_id="8" tracking_level="1" version="0" object_id="_6">
 				<element>
@@ -405,16 +430,21 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<stereotypes>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
-				<all_attributes class_id="35" tracking_level="0" version="0">
+				<all_attributes class_id="36" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</all_attributes>
 				<local_attributes>
 					<count>1</count>
 					<item_version>0</item_version>
-					<item class_id="36" tracking_level="0" version="0">
+					<item class_id="37" tracking_level="0" version="0">
 						<documentation></documentation>
 						<extensions>
 							<fields>
@@ -453,7 +483,7 @@ in the context of inheritance.
 							<identifiable>trivial_inheritance_non_final_leaf_prop_0</identifiable>
 						</name>
 						<unparsed_type>int</unparsed_type>
-						<parsed_type class_id="37" tracking_level="0" version="0">
+						<parsed_type class_id="38" tracking_level="0" version="0">
 							<current>
 								<id></id>
 								<simple></simple>
@@ -478,7 +508,7 @@ in the context of inheritance.
 								</location>
 								<identifiable></identifiable>
 							</current>
-							<children class_id="38" tracking_level="0" version="0">
+							<children class_id="39" tracking_level="0" version="0">
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
@@ -495,7 +525,7 @@ in the context of inheritance.
 						<is_fluent>0</is_fluent>
 					</item>
 				</local_attributes>
-				<inherited_attributes class_id="39" tracking_level="0" version="0">
+				<inherited_attributes class_id="40" tracking_level="0" version="0">
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
@@ -547,11 +577,11 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</leaves>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
-				<generalization_annotations class_id="40" tracking_level="0" version="0">
-					<is_final class_id="41" tracking_level="0" version="0">
+				<generalization_annotations class_id="41" tracking_level="0" version="0">
+					<is_final class_id="42" tracking_level="0" version="0">
 						<initialized>0</initialized>
 					</is_final>
-					<parent class_id="42" tracking_level="0" version="0">
+					<parent class_id="43" tracking_level="0" version="0">
 						<initialized>0</initialized>
 					</parent>
 				</generalization_annotations>
@@ -571,7 +601,7 @@ in the context of inheritance.
 				</derived_visitor>
 				<is_visitation_root>0</is_visitation_root>
 				<is_visitation_leaf>0</is_visitation_leaf>
-				<type_parameters_annotations class_id="43" tracking_level="0" version="0">
+				<type_parameters_annotations class_id="44" tracking_level="0" version="0">
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
@@ -586,11 +616,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
-				<stereotypes class_id="44" tracking_level="0" version="0">
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</stereotypes>
 			</second>
 		</item>
 		<item>
@@ -641,6 +666,11 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<stereotypes>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
@@ -793,11 +823,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
-				<stereotypes>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</stereotypes>
 			</second>
 		</item>
 		<item>
@@ -848,6 +873,11 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<stereotypes>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
@@ -1000,11 +1030,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
-				<stereotypes>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</stereotypes>
 			</second>
 		</item>
 		<item>
@@ -1055,6 +1080,11 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<stereotypes>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
@@ -1207,11 +1237,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
-				<stereotypes>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</stereotypes>
 			</second>
 		</item>
 		<item>
@@ -1262,6 +1287,11 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<stereotypes>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
@@ -1363,11 +1393,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
-				<stereotypes>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</stereotypes>
 			</second>
 		</item>
 		<item>
@@ -1418,6 +1443,11 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<stereotypes>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
@@ -1601,11 +1631,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
-				<stereotypes>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</stereotypes>
 			</second>
 		</item>
 		<item>
@@ -1655,6 +1680,12 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<stereotypes>
+						<count>1</count>
+						<bucket_count>2</bucket_count>
+						<item_version>0</item_version>
+						<item>1</item>
+					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
@@ -1726,12 +1757,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
-				<stereotypes>
-					<count>1</count>
-					<bucket_count>2</bucket_count>
-					<item_version>0</item_version>
-					<item>1</item>
-				</stereotypes>
 			</second>
 		</item>
 		<item>
@@ -1781,6 +1806,11 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<stereotypes>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
@@ -1932,11 +1962,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
-				<stereotypes>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</stereotypes>
 			</second>
 		</item>
 		<item>
@@ -1986,6 +2011,11 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<stereotypes>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
@@ -2137,11 +2167,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
-				<stereotypes>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</stereotypes>
 			</second>
 		</item>
 		<item>
@@ -2192,6 +2217,11 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<stereotypes>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
@@ -2344,11 +2374,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
-				<stereotypes>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</stereotypes>
 			</second>
 		</item>
 		<item>
@@ -2399,6 +2424,11 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<stereotypes>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
@@ -2551,11 +2581,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
-				<stereotypes>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</stereotypes>
 			</second>
 		</item>
 		<item>
@@ -2605,6 +2630,11 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<stereotypes>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
@@ -2676,11 +2706,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
-				<stereotypes>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</stereotypes>
 			</second>
 		</item>
 		<item>
@@ -2731,6 +2756,11 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<stereotypes>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
@@ -2883,11 +2913,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
-				<stereotypes>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</stereotypes>
 			</second>
 		</item>
 		<item>
@@ -2937,6 +2962,11 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<stereotypes>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
@@ -3038,11 +3068,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
-				<stereotypes>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</stereotypes>
 			</second>
 		</item>
 		<item>
@@ -3092,6 +3117,11 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<stereotypes>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
@@ -3273,11 +3303,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
-				<stereotypes>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</stereotypes>
 			</second>
 		</item>
 		<item>
@@ -3327,6 +3352,11 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<stereotypes>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
@@ -3478,11 +3508,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
-				<stereotypes>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</stereotypes>
 			</second>
 		</item>
 		<item>
@@ -3533,6 +3558,11 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<stereotypes>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
@@ -3716,11 +3746,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
-				<stereotypes>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</stereotypes>
 			</second>
 		</item>
 		<item>
@@ -3770,6 +3795,11 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<stereotypes>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
@@ -3871,11 +3901,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
-				<stereotypes>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</stereotypes>
 			</second>
 		</item>
 		<item>
@@ -3925,6 +3950,11 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<stereotypes>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
@@ -4076,11 +4106,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
-				<stereotypes>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</stereotypes>
 			</second>
 		</item>
 		<item>
@@ -4130,6 +4155,11 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<stereotypes>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
@@ -4311,11 +4341,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
-				<stereotypes>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</stereotypes>
 			</second>
 		</item>
 		<item>
@@ -4365,6 +4390,11 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<stereotypes>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
@@ -4436,11 +4466,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
-				<stereotypes>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</stereotypes>
 			</second>
 		</item>
 		<item>
@@ -4490,6 +4515,11 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<stereotypes>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
@@ -4671,11 +4701,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
-				<stereotypes>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</stereotypes>
 			</second>
 		</item>
 		<item>
@@ -4726,6 +4751,11 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<stereotypes>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
@@ -4908,11 +4938,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
-				<stereotypes>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</stereotypes>
 			</second>
 		</item>
 		<item>
@@ -4962,6 +4987,11 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<stereotypes>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
@@ -5033,11 +5063,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
-				<stereotypes>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</stereotypes>
 			</second>
 		</item>
 		<item>
@@ -5087,6 +5112,11 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<stereotypes>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
@@ -5268,11 +5298,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
-				<stereotypes>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</stereotypes>
 			</second>
 		</item>
 		<item>
@@ -5322,6 +5347,11 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<stereotypes>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
@@ -5423,11 +5453,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
-				<stereotypes>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</stereotypes>
 			</second>
 		</item>
 		<item>
@@ -5477,6 +5502,11 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<stereotypes>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
@@ -5578,11 +5608,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
-				<stereotypes>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</stereotypes>
 			</second>
 		</item>
 		<item>
@@ -5632,6 +5657,11 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<stereotypes>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
@@ -5813,11 +5843,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
-				<stereotypes>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</stereotypes>
 			</second>
 		</item>
 		<item>
@@ -5868,6 +5893,11 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<stereotypes>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
@@ -6050,11 +6080,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
-				<stereotypes>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</stereotypes>
 			</second>
 		</item>
 	</objects>
@@ -6126,6 +6151,11 @@ in the context of inheritance.
 				<initialized>0</initialized>
 			</contained_by>
 			<in_global_module>0</in_global_module>
+			<stereotypes>
+				<count>0</count>
+				<bucket_count>1</bucket_count>
+				<item_version>0</item_version>
+			</stereotypes>
 			<is_element_extension>0</is_element_extension>
 		</element>
 		<members>

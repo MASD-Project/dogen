@@ -70,6 +70,7 @@ visitor::visitor(
     const dogen::yarn::origin_types origin_type,
     const boost::optional<dogen::yarn::name>& contained_by,
     const bool in_global_module,
+    const std::unordered_set<dogen::yarn::stereotypes>& stereotypes,
     const bool is_element_extension,
     const std::list<dogen::yarn::name>& visits,
     const boost::optional<dogen::yarn::name>& parent)
@@ -81,6 +82,7 @@ visitor::visitor(
       origin_type,
       contained_by,
       in_global_module,
+      stereotypes,
       is_element_extension),
       visits_(visits),
       parent_(parent) { }

@@ -220,8 +220,15 @@ void transformer::to_object(const processed_object& po, const profile& p,
         o.stereotypes().insert(yarn::stereotypes::visitable);
 
     for (const auto us : p.unknown_stereotypes()) {
-        const auto n(to_name(us));
-        o.modeled_concepts().push_back(n);
+        // FIXME: hack to handle new stereotypes
+        if (us == "formatter")
+            o.stereotypes().insert(yarn::stereotypes::formatter);
+        else if (us == "handcrafted")
+            o.stereotypes().insert(yarn::stereotypes::handcrafted);
+        else {
+            const auto n(to_name(us));
+            o.modeled_concepts().push_back(n);
+        }
     }
 
     for (const auto& p : po.attributes())

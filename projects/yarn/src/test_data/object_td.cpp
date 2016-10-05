@@ -22,7 +22,6 @@
 #include "dogen/yarn/test_data/object_td.hpp"
 #include "dogen/yarn/test_data/element_td.hpp"
 #include "dogen/yarn/test_data/attribute_td.hpp"
-#include "dogen/yarn/test_data/stereotypes_td.hpp"
 #include "dogen/yarn/test_data/object_types_td.hpp"
 #include "dogen/yarn/test_data/generalization_annotations_td.hpp"
 #include "dogen/yarn/test_data/type_parameters_annotations_td.hpp"
@@ -89,19 +88,6 @@ create_dogen_yarn_object_types(const unsigned int position) {
     return dogen::yarn::object_types_generator::create(position);
 }
 
-dogen::yarn::stereotypes
-create_dogen_yarn_stereotypes(const unsigned int position) {
-    return dogen::yarn::stereotypes_generator::create(position);
-}
-
-std::unordered_set<dogen::yarn::stereotypes> create_std_unordered_set_dogen_yarn_stereotypes(unsigned int position) {
-    std::unordered_set<dogen::yarn::stereotypes> r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.insert(create_dogen_yarn_stereotypes(position + i));
-    }
-    return r;
-}
-
 }
 
 namespace dogen {
@@ -137,7 +123,6 @@ populate(const unsigned int position, result_type& v) {
     v.modeled_concepts(create_std_list_dogen_yarn_name(position + 22));
     v.associative_container_keys(create_std_list_dogen_yarn_name(position + 23));
     v.provides_opaqueness(create_bool(position + 24));
-    v.stereotypes(create_std_unordered_set_dogen_yarn_stereotypes(position + 25));
 }
 
 object_generator::result_type

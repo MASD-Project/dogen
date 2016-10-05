@@ -107,9 +107,14 @@
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<stereotypes class_id="29" tracking_level="0" version="0">
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
-				<members class_id="29" tracking_level="0" version="0">
+				<members class_id="30" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</members>
@@ -174,6 +179,11 @@
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<stereotypes>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
 				<members>
@@ -243,6 +253,11 @@ This comment will be applied to the model namespace itself.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<stereotypes>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
 				<members>
@@ -252,26 +267,26 @@ This comment will be applied to the model namespace itself.
 			</second>
 		</item>
 	</modules>
-	<concepts class_id="30" tracking_level="0" version="0">
+	<concepts class_id="31" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</concepts>
-	<primitives class_id="31" tracking_level="0" version="0">
+	<primitives class_id="32" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
-	<enumerations class_id="32" tracking_level="0" version="0">
+	<enumerations class_id="33" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</enumerations>
-	<objects class_id="33" tracking_level="0" version="0">
+	<objects class_id="34" tracking_level="0" version="0">
 		<count>2</count>
 		<bucket_count>5</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="34" tracking_level="0" version="0">
+		<item class_id="35" tracking_level="0" version="0">
 			<first>&lt;comments&gt;&lt;multi_line&gt;</first>
 			<second class_id="8" tracking_level="1" version="0" object_id="_6">
 				<element>
@@ -322,9 +337,14 @@ third line with &quot;quote&quot;
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<stereotypes>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
-				<all_attributes class_id="35" tracking_level="0" version="0">
+				<all_attributes class_id="36" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</all_attributes>
@@ -332,7 +352,7 @@ third line with &quot;quote&quot;
 					<count>0</count>
 					<item_version>0</item_version>
 				</local_attributes>
-				<inherited_attributes class_id="36" tracking_level="0" version="0">
+				<inherited_attributes class_id="37" tracking_level="0" version="0">
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
@@ -354,11 +374,11 @@ third line with &quot;quote&quot;
 					<item_version>0</item_version>
 				</leaves>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
-				<generalization_annotations class_id="37" tracking_level="0" version="0">
-					<is_final class_id="38" tracking_level="0" version="0">
+				<generalization_annotations class_id="38" tracking_level="0" version="0">
+					<is_final class_id="39" tracking_level="0" version="0">
 						<initialized>0</initialized>
 					</is_final>
-					<parent class_id="39" tracking_level="0" version="0">
+					<parent class_id="40" tracking_level="0" version="0">
 						<initialized>0</initialized>
 					</parent>
 				</generalization_annotations>
@@ -378,7 +398,7 @@ third line with &quot;quote&quot;
 				</derived_visitor>
 				<is_visitation_root>0</is_visitation_root>
 				<is_visitation_leaf>0</is_visitation_leaf>
-				<type_parameters_annotations class_id="40" tracking_level="0" version="0">
+				<type_parameters_annotations class_id="41" tracking_level="0" version="0">
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
@@ -393,11 +413,6 @@ third line with &quot;quote&quot;
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
-				<stereotypes class_id="41" tracking_level="0" version="0">
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</stereotypes>
 			</second>
 		</item>
 		<item>
@@ -448,6 +463,11 @@ third line with &quot;quote&quot;
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<stereotypes>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
@@ -763,11 +783,6 @@ a second line
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
-				<stereotypes>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</stereotypes>
 			</second>
 		</item>
 	</objects>
@@ -839,6 +854,11 @@ a second line
 				<initialized>0</initialized>
 			</contained_by>
 			<in_global_module>0</in_global_module>
+			<stereotypes>
+				<count>0</count>
+				<bucket_count>1</bucket_count>
+				<item_version>0</item_version>
+			</stereotypes>
 			<is_element_extension>0</is_element_extension>
 		</element>
 		<members>

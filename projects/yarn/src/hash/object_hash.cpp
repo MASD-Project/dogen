@@ -22,7 +22,6 @@
 #include "dogen/yarn/hash/object_hash.hpp"
 #include "dogen/yarn/hash/element_hash.hpp"
 #include "dogen/yarn/hash/attribute_hash.hpp"
-#include "dogen/yarn/hash/stereotypes_hash.hpp"
 #include "dogen/yarn/hash/object_types_hash.hpp"
 #include "dogen/yarn/hash/generalization_annotations_hash.hpp"
 #include "dogen/yarn/hash/type_parameters_annotations_hash.hpp"
@@ -70,14 +69,6 @@ inline std::size_t hash_std_list_dogen_yarn_name(const std::list<dogen::yarn::na
     return seed;
 }
 
-inline std::size_t hash_std_unordered_set_dogen_yarn_stereotypes(const std::unordered_set<dogen::yarn::stereotypes>& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
 }
 
 namespace dogen {
@@ -113,7 +104,6 @@ std::size_t object_hasher::hash(const object& v) {
     combine(seed, hash_std_list_dogen_yarn_name(v.modeled_concepts()));
     combine(seed, hash_std_list_dogen_yarn_name(v.associative_container_keys()));
     combine(seed, v.provides_opaqueness());
-    combine(seed, hash_std_unordered_set_dogen_yarn_stereotypes(v.stereotypes()));
 
     return seed;
 }

@@ -94,9 +94,14 @@
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<stereotypes class_id="25" tracking_level="0" version="0">
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
-				<members class_id="25" tracking_level="0" version="0">
+				<members class_id="26" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</members>
@@ -149,6 +154,11 @@
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<stereotypes>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
 				<members>
@@ -158,44 +168,44 @@
 			</second>
 		</item>
 	</modules>
-	<concepts class_id="26" tracking_level="0" version="0">
+	<concepts class_id="27" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</concepts>
-	<primitives class_id="27" tracking_level="0" version="0">
+	<primitives class_id="28" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
-	<enumerations class_id="28" tracking_level="0" version="0">
+	<enumerations class_id="29" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</enumerations>
-	<objects class_id="29" tracking_level="0" version="0">
+	<objects class_id="30" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</objects>
-	<exceptions class_id="30" tracking_level="0" version="0">
+	<exceptions class_id="31" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</exceptions>
-	<visitors class_id="31" tracking_level="0" version="0">
+	<visitors class_id="32" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</visitors>
-	<injected_elements class_id="32" tracking_level="0" version="0">
+	<injected_elements class_id="33" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</injected_elements>
 	<has_generatable_types>0</has_generatable_types>
-	<indices class_id="33" tracking_level="0" version="0">
-		<objects_always_in_heap class_id="34" tracking_level="0" version="0">
+	<indices class_id="34" tracking_level="0" version="0">
+		<objects_always_in_heap class_id="35" tracking_level="0" version="0">
 			<count>0</count>
 			<bucket_count>1</bucket_count>
 			<item_version>0</item_version>
@@ -246,6 +256,11 @@
 				<initialized>0</initialized>
 			</contained_by>
 			<in_global_module>0</in_global_module>
+			<stereotypes>
+				<count>0</count>
+				<bucket_count>1</bucket_count>
+				<item_version>0</item_version>
+			</stereotypes>
 			<is_element_extension>0</is_element_extension>
 		</element>
 		<members>

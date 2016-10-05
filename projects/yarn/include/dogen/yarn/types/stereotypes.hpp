@@ -30,7 +30,9 @@ namespace yarn {
 
 enum class stereotypes : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
-    visitable = 1
+    visitable = 1,
+    formatter = 2,
+    handcrafted = 3
 };
 
 } }

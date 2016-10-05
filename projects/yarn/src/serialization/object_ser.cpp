@@ -28,14 +28,12 @@
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/serialization/unordered_map.hpp>
-#include <boost/serialization/unordered_set.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/yarn/serialization/name_ser.hpp"
 #include "dogen/yarn/serialization/object_ser.hpp"
 #include "dogen/yarn/serialization/element_ser.hpp"
 #include "dogen/yarn/serialization/attribute_ser.hpp"
-#include "dogen/yarn/serialization/stereotypes_ser.hpp"
 #include "dogen/yarn/serialization/object_types_ser.hpp"
 #include "dogen/yarn/serialization/generalization_annotations_ser.hpp"
 #include "dogen/yarn/serialization/type_parameters_annotations_ser.hpp"
@@ -78,7 +76,6 @@ void save(Archive& ar,
     ar << make_nvp("modeled_concepts", v.modeled_concepts_);
     ar << make_nvp("associative_container_keys", v.associative_container_keys_);
     ar << make_nvp("provides_opaqueness", v.provides_opaqueness_);
-    ar << make_nvp("stereotypes", v.stereotypes_);
 }
 
 template<typename Archive>
@@ -112,7 +109,6 @@ void load(Archive& ar,
     ar >> make_nvp("modeled_concepts", v.modeled_concepts_);
     ar >> make_nvp("associative_container_keys", v.associative_container_keys_);
     ar >> make_nvp("provides_opaqueness", v.provides_opaqueness_);
-    ar >> make_nvp("stereotypes", v.stereotypes_);
 }
 
 } }
