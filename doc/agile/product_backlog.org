@@ -256,6 +256,16 @@ a facet. This could be done via enablement, but we don't want to do
 too much hard-coding (e.g. if visitor then disable serialisation
 facet, etc).
 
+Ideally we should support some kind of "on-demand" generation: if
+anyone references a forward declaration we generate it, if no one does
+we don't. Users are still free to force a forward declaration to be
+generated via meta-data.
+
+This could be achieved by keeping track of usage in include
+builder. Formatters would have an additional knob: generate always,
+generate if referenced. If "generate if referenced", we would wait for
+at least one reference in include builder.
+
 *** Computation of enablement values                                   :epic:
 
 Note: this story is still *very* sketchy.
