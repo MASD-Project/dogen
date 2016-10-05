@@ -67,7 +67,8 @@ private:
 
     profile_group_types merge(const profile_group_types& original) const;
 
-    void populate_model(const std::string& profile_configuration,
+    void populate_model(
+        const dynamic::repository& drp, const dynamic::object& root_object,
         const profile_group_types& pgs, model& fm) const;
 
 public:

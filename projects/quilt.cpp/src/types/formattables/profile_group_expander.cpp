@@ -26,6 +26,7 @@
 #include "dogen/dynamic/io/field_definition_io.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/formattables/expansion_error.hpp"
+#include "dogen/quilt.cpp/io/formattables/profile_types_io.hpp"
 #include "dogen/quilt.cpp/types/formattables/profile_group_hydrator.hpp"
 #include "dogen/quilt.cpp/types/formattables/profile_group_merger.hpp"
 #include "dogen/quilt.cpp/types/formattables/profile_group_expander.hpp"
@@ -41,6 +42,13 @@ const std::string invalid_formatter_name("Invalid formatter name: ");
 const std::string no_profile_groups("Expected at least one profile group.");
 const std::string parent_not_found(
     "Parent not found in profile group container: ");
+const std::string invalid_profile_configuration(
+    "Invalid profile configuration: ");
+const std::string missing_profile_configuration(
+    "Missing profile configuration: ");
+const std::string  duplicate_bind(
+    "More than one profile configuration bind to the same stereotype: ");
+const std::string too_many_binds("Stereotype bound more than once: ");
 
 }
 
@@ -176,10 +184,139 @@ profile_group_expander::merge(const profile_group_types& original) const {
     return mg.merge(original);
 }
 
-void profile_group_expander::
-populate_model(const std::string& /*profile_configuration*/,
-    const profile_group_types& /*pgs*/, model& /*fm*/) const {
+void profile_group_expander::populate_model(const dynamic::repository& drp,
+    const dynamic::object& root_object, const profile_group_types& pgs,
+    model& fm) const {
+    BOOST_LOG_SEV(lg, debug) << "Populating model with profile groups.";
 
+    /*
+     * First setup the global profile.
+     */
+    const auto fd(make_field_definitions(drp));
+    const auto global_cfg(obtain_profile_configuration(fd, root_object));
+    const auto i(pgs.find(global_cfg));
+    if (i == pgs.end()) {
+        BOOST_LOG_SEV(lg, error) << invalid_profile_configuration << global_cfg;
+        BOOST_THROW_EXCEPTION(
+            expansion_error(invalid_profile_configuration + global_cfg));
+    }
+
+    const auto& gpg(i->second);
+    fm.global_profile_group(gpg);
+
+    /*
+     * Create a map of configurations to binding stereotypes.
+     */
+    profile_group_types binding_stereotypes;
+    for (const auto& pair : pgs) {
+        const auto pgn(pair.first);
+        const auto& pg(pair.second);
+        const auto bts(pg.bind_to_stereotype());
+        if (bts.empty())
+            continue;
+
+        const auto stereotype_pair(std::make_pair(bts, pg));
+        const auto inserted(binding_stereotypes.insert(stereotype_pair).second);
+        if (!inserted) {
+            BOOST_LOG_SEV(lg, error) << duplicate_bind << bts
+                                     << " profile: " << pgn;
+            BOOST_THROW_EXCEPTION(expansion_error(duplicate_bind + bts));
+        }
+    }
+
+    /*
+     * Now go through all the master segments and setup the local
+     * configuration.
+     */
+    for (auto& pair : fm.formattables()) {
+        const auto id(pair.first);
+
+        auto& formattable(pair.second);
+        const auto& e(*formattable.master_segment());
+
+        /*
+         * We only care about the target model elements.
+         */
+        if (e.origin_type() != yarn::origin_types::target)
+            continue;
+
+        BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
+
+        /*
+         * First see if we bind to any of the defined stereotypes. We
+         * can only bind to one.
+         */
+        boost::optional<profile_group> bound;
+        for (const auto s : e.stereotypes()) {
+            // FIXME: hack until stereotypes are strings
+            std::string str;
+            if (s == yarn::stereotypes::formatter)
+                str = "formatter";
+            else if (s == yarn::stereotypes::handcrafted)
+                str = "handcrafted";
+
+            const auto i(binding_stereotypes.find(str));
+            if (i != binding_stereotypes.end()) {
+                if (bound) {
+                    BOOST_LOG_SEV(lg, error) << too_many_binds << str
+                                             << " type: " << id;
+                    BOOST_THROW_EXCEPTION(
+                        expansion_error(too_many_binds + str));
+                }
+                const auto& lpg(i->second);
+                bound = lpg;
+            }
+        }
+
+        if (bound) {
+            auto& ecfg(formattable.element_configuration());
+            ecfg.local_profile_group(*bound);
+            BOOST_LOG_SEV(lg, debug) << "Stereotype-bound profile group: "
+                                     << bound->name();
+            continue;
+        }
+
+        /*
+         * Now look at the profile configuration. We only care about
+         * cases where the local profile configuration is different
+         * from the global profile configuration; if they are the
+         * same, there is no point in setting it up.
+         */
+        const auto local_cfg(obtain_profile_configuration(fd,e.extensions()));
+        if (local_cfg == global_cfg) {
+            BOOST_LOG_SEV(lg, debug) << "Local profile group configuration "
+                                     << "is same as global: " << local_cfg;
+            continue;
+        }
+
+        /*
+         * Locate the profile group for the configuration, ensuring
+         * its of the correct type, and slot it in.
+         */
+        const auto i(pgs.find(local_cfg));
+        if (i == pgs.end()) {
+            BOOST_LOG_SEV(lg, error) << missing_profile_configuration
+                                     << local_cfg;
+            BOOST_THROW_EXCEPTION(
+                expansion_error(missing_profile_configuration + local_cfg));
+        }
+
+        const auto& lpg(i->second);
+        if (lpg.profile_type() != profile_types::local) {
+            BOOST_LOG_SEV(lg, error) << invalid_profile_configuration
+                                     << local_cfg
+                                     << " expected type to be local but is: "
+                                     << lpg.profile_type();
+            BOOST_THROW_EXCEPTION(
+                expansion_error(invalid_profile_configuration + local_cfg));
+        }
+
+        auto& ecfg(formattable.element_configuration());
+        ecfg.local_profile_group(lpg);
+        BOOST_LOG_SEV(lg, debug) << "Set profile group: " << local_cfg;
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Populated model with profile groups.";
 }
 
 void profile_group_expander::expand(
@@ -190,9 +327,7 @@ void profile_group_expander::expand(
     const auto original(hydrate(data_directories));
     validate(fc, original);
     const auto merged(merge(original));
-    const auto fd(make_field_definitions(drp));
-    const auto prf_cfg(obtain_profile_configuration(fd, root_object));
-    populate_model(prf_cfg, merged, fm);
+    populate_model(drp, root_object, merged, fm);
 }
 
 } } } }

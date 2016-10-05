@@ -14,15 +14,15 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-05 Wed 21:03]
+#+CAPTION: Clock summary at [2016-10-05 Wed 22:14]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *66:53* |       |      | 100.0 |
+| *Total time*                                                                | *68:01* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 66:53   |       |      | 100.0 |
-| Active                                                                      |         | 66:53 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 5:15 |   7.8 |
+| Stories                                                                     | 68:01   |       |      | 100.0 |
+| Active                                                                      |         | 68:01 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 5:15 |   7.7 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:07 |   0.2 |
 | COMPLETED Generation of formattable is incorrect                            |         |       | 2:30 |   3.7 |
 | COMPLETED Visitor includes are incorrect                                    |         |       | 0:20 |   0.5 |
@@ -41,25 +41,26 @@
 | COMPLETED Investigate element annotation support                            |         |       | 2:05 |   3.1 |
 | CANCELLED Add streaming settings expander                                   |         |       | 0:36 |   0.9 |
 | COMPLETED Create the formattables model                                     |         |       | 1:32 |   2.3 |
-| COMPLETED Hook formattables into formatters                                 |         |       | 3:58 |   5.9 |
+| COMPLETED Hook formattables into formatters                                 |         |       | 3:58 |   5.8 |
 | COMPLETED Remove empty context                                              |         |       | 1:09 |   1.7 |
-| COMPLETED Review main classes in quilt.cpp                                  |         |       | 3:42 |   5.5 |
+| COMPLETED Review main classes in quilt.cpp                                  |         |       | 3:42 |   5.4 |
 | COMPLETED Clean up element segmentation                                     |         |       | 1:20 |   2.0 |
-| COMPLETED Get OSX build to compile code                                     |         |       | 7:05 |  10.6 |
+| COMPLETED Get OSX build to compile code                                     |         |       | 7:05 |  10.4 |
 | COMPLETED Add a banner to readme                                            |         |       | 1:29 |   2.2 |
 | COMPLETED Remove formatter group                                            |         |       | 0:23 |   0.6 |
 | COMPLETED Add more types to =quilt::cpp= canned tests                       |         |       | 0:15 |   0.4 |
 | CANCELLED Remove formatter id                                               |         |       | 0:04 |   0.1 |
-| COMPLETED Analysis around terminology in formatting space                   |         |       | 3:24 |   5.1 |
+| COMPLETED Analysis around terminology in formatting space                   |         |       | 3:24 |   5.0 |
 | COMPLETED Remove =original_model_name=                                      |         |       | 0:16 |   0.4 |
-| COMPLETED Refactor code around model origination                            |         |       | 4:08 |   6.2 |
+| COMPLETED Refactor code around model origination                            |         |       | 4:08 |   6.1 |
 | COMPLETED Remove formatter level facet folders                              |         |       | 0:06 |   0.1 |
 | COMPLETED Consider removing the "fake" primitive formatters                 |         |       | 0:01 |   0.0 |
-| COMPLETED Expander refactor in =quilt.cpp=                                  |         |       | 3:03 |   4.6 |
-| COMPLETED Create the notion of a formatter alias                            |         |       | 3:15 |   4.9 |
+| COMPLETED Expander refactor in =quilt.cpp=                                  |         |       | 3:03 |   4.5 |
+| COMPLETED Create the notion of a formatter alias                            |         |       | 3:15 |   4.8 |
 | COMPLETED Remove enabled formatters from formatter configuration            |         |       | 0:22 |   0.5 |
-| COMPLETED Handle registration of services properly                          |         |       | 3:41 |   5.5 |
-| STARTED Add support for profiles                                            |         |       | 8:03 |  12.0 |
+| COMPLETED Handle registration of services properly                          |         |       | 3:41 |   5.4 |
+| COMPLETED Move stereotypes to element                                       |         |       | 0:21 |   0.5 |
+| STARTED Add support for profiles                                            |         |       | 8:50 |  13.0 |
 | STARTED Generate formatter interfaces                                       |         |       | 0:28 |   0.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -1164,7 +1165,15 @@ At present we are doing this check in =visit=:
 If we did it before the =visit= call we'd save the cost of
 dispatching.
 
+*** COMPLETED Move stereotypes to element                             :story:
+    CLOSED: [2016-10-05 Wed 21:46]
+    CLOCK: [2016-10-05 Wed 21:25]--[2016-10-05 Wed 21:46] =>  0:21
+
+We need to have the ability to add stereotypes to any element.
+
 *** STARTED Add support for profiles                                  :story:
+    CLOCK: [2016-10-05 Wed 21:47]--[2016-10-05 Wed 22:14] =>  0:27
+    CLOCK: [2016-10-05 Wed 21:04]--[2016-10-05 Wed 21:24] =>  0:20
     CLOCK: [2016-10-05 Wed 20:46]--[2016-10-05 Wed 21:03] =>  0:17
     CLOCK: [2016-10-05 Wed 15:22]--[2016-10-05 Wed 18:14] =>  2:52
     CLOCK: [2016-10-05 Wed 14:53]--[2016-10-05 Wed 15:21] =>  0:28
@@ -1406,12 +1415,6 @@ Further thoughts:
   instantiates stitch (probably within quilt) with the parameters and
   generates the file. Actually we probably can't have this in quilt
   because we still need formatter properties.
-
-*** COMPLETED Move stereotypes to element                             :story:
-    CLOSED: [2016-10-05 Wed 21:46]
-    CLOCK: [2016-10-05 Wed 21:25]--[2016-10-05 Wed 21:46] =>  0:21
-
-We need to have the ability to add stereotypes to any element.
 
 *** Push stereotypes processing into yarn                             :story:
 
