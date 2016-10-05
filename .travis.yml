@@ -25,6 +25,8 @@ git:
   depth: 5
 
 matrix:
+  allow_failures:
+    - os: osx
   include:
     - os: osx
       compiler: clang
@@ -58,19 +60,14 @@ install:
 
 script:
   - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then
+        export TARGET="package run_all_tests";
         export THIRD_PARTY="/tmp/dogen_deps/dogen_deps_gcc_5.3_linux_amd64";
     fi
   - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
         export THIRD_PARTY="/tmp/dogen_deps/dogen_deps_clang_7_3_0_osx_amd64";
+        export TARGET="package";
     fi
-
-  # Build everything first
-  - ${BUILD_DIR}/build.${TRAVIS_OS_NAME}.sh ${BUILD_TYPE} ${COMPILER} ${THIRD_PARTY}
-  # Run tests only on linux as they are borked on osx
-  - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then ${BUILD_DIR}/build.${TRAVIS_OS_NAME}.sh ${BUILD_TYPE} ${COMPILER} ${THIRD_PARTY} run_all_tests; fi
-  # Package with wait as we take a long time on osx
-  - travis_wait ${BUILD_DIR}/build.${TRAVIS_OS_NAME}.sh ${BUILD_TYPE} ${COMPILER} ${THIRD_PARTY} package
-  # Test package only on linux as we don't know how to do it on osx
+  - ${BUILD_DIR}/build.${TRAVIS_OS_NAME}.sh ${BUILD_TYPE} ${COMPILER} ${THIRD_PARTY} ${TARGET}
   - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then ${BUILD_DIR}/test_package.linux.sh; fi
 
 notifications:
