@@ -18,45 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_PROFILE_GROUP_EXPANDER_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_PROFILE_GROUP_EXPANDER_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_MERGE_ERROR_FWD_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_MERGE_ERROR_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
-
-#include <string>
-#include <forward_list>
-#include <unordered_map>
-#include <boost/filesystem/path.hpp>
-#include "dogen/quilt.cpp/types/formatters/container.hpp"
-#include "dogen/quilt.cpp/types/formattables/model.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
 
-class profile_group_expander {
-private:
-    typedef std::unordered_map<std::string, profile_group> profile_group_types;
-
-    profile_group_types hydrate(
-        const std::forward_list<boost::filesystem::path>&
-        data_directories) const;
-
-    void validate(const formatters::container& fc,
-        const profile_group_types& pgs) const;
-
-    profile_group_types merge(const profile_group_types& original) const;
-
-    void populate_model(const profile_group_types& pgs, model& fm) const;
-
-public:
-    void expand(
-        const std::forward_list<boost::filesystem::path>& data_directories,
-        const formatters::container& fc, model& fm) const;
-};
+class merge_error;
 
 } } } }
 

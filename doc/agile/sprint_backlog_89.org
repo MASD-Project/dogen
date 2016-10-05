@@ -14,52 +14,52 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-05 Wed 15:21]
+#+CAPTION: Clock summary at [2016-10-05 Wed 18:14]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *63:19* |       |      | 100.0 |
+| *Total time*                                                                | *66:11* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 63:19   |       |      | 100.0 |
-| Active                                                                      |         | 63:19 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 4:50 |   7.6 |
+| Stories                                                                     | 66:11   |       |      | 100.0 |
+| Active                                                                      |         | 66:11 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 4:50 |   7.3 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:07 |   0.2 |
-| COMPLETED Generation of formattable is incorrect                            |         |       | 2:30 |   3.9 |
+| COMPLETED Generation of formattable is incorrect                            |         |       | 2:30 |   3.8 |
 | COMPLETED Visitor includes are incorrect                                    |         |       | 0:20 |   0.5 |
-| COMPLETED Add includer to quilt.cpp                                         |         |       | 1:46 |   2.8 |
+| COMPLETED Add includer to quilt.cpp                                         |         |       | 1:46 |   2.7 |
 | COMPLETED Add reducer to quilt.cpp                                          |         |       | 0:22 |   0.6 |
 | COMPLETED Add new index to formtter container                               |         |       | 0:19 |   0.5 |
-| COMPLETED Add path expander to quilt.cpp                                    |         |       | 0:49 |   1.3 |
+| COMPLETED Add path expander to quilt.cpp                                    |         |       | 0:49 |   1.2 |
 | COMPLETED Add guard expander to quilt.cpp                                   |         |       | 0:27 |   0.7 |
-| COMPLETED Investigate borked travis build                                   |         |       | 0:37 |   1.0 |
+| COMPLETED Investigate borked travis build                                   |         |       | 0:37 |   0.9 |
 | COMPLETED Add decoration expander to quilt.cpp                              |         |       | 0:23 |   0.6 |
-| COMPLETED Add aspect expander to quilt.cpp                                  |         |       | 1:26 |   2.3 |
+| COMPLETED Add aspect expander to quilt.cpp                                  |         |       | 1:26 |   2.2 |
 | COMPLETED Run tests that are passing on windows                             |         |       | 0:10 |   0.3 |
-| COMPLETED Add helper expander to quilt.cpp                                  |         |       | 1:26 |   2.3 |
+| COMPLETED Add helper expander to quilt.cpp                                  |         |       | 1:26 |   2.2 |
 | COMPLETED Merge pre and post workflows                                      |         |       | 0:16 |   0.4 |
 | COMPLETED Fix bug in aspect and helper generation                           |         |       | 0:15 |   0.4 |
-| COMPLETED Investigate element annotation support                            |         |       | 2:05 |   3.3 |
+| COMPLETED Investigate element annotation support                            |         |       | 2:05 |   3.1 |
 | CANCELLED Add streaming settings expander                                   |         |       | 0:36 |   0.9 |
-| COMPLETED Create the formattables model                                     |         |       | 1:32 |   2.4 |
-| COMPLETED Hook formattables into formatters                                 |         |       | 3:58 |   6.3 |
-| COMPLETED Remove empty context                                              |         |       | 1:09 |   1.8 |
-| COMPLETED Review main classes in quilt.cpp                                  |         |       | 3:42 |   5.8 |
-| COMPLETED Clean up element segmentation                                     |         |       | 1:20 |   2.1 |
-| COMPLETED Get OSX build to compile code                                     |         |       | 7:05 |  11.2 |
-| COMPLETED Add a banner to readme                                            |         |       | 1:29 |   2.3 |
+| COMPLETED Create the formattables model                                     |         |       | 1:32 |   2.3 |
+| COMPLETED Hook formattables into formatters                                 |         |       | 3:58 |   6.0 |
+| COMPLETED Remove empty context                                              |         |       | 1:09 |   1.7 |
+| COMPLETED Review main classes in quilt.cpp                                  |         |       | 3:42 |   5.6 |
+| COMPLETED Clean up element segmentation                                     |         |       | 1:20 |   2.0 |
+| COMPLETED Get OSX build to compile code                                     |         |       | 7:05 |  10.7 |
+| COMPLETED Add a banner to readme                                            |         |       | 1:29 |   2.2 |
 | COMPLETED Remove formatter group                                            |         |       | 0:23 |   0.6 |
 | COMPLETED Add more types to =quilt::cpp= canned tests                       |         |       | 0:15 |   0.4 |
 | CANCELLED Remove formatter id                                               |         |       | 0:04 |   0.1 |
-| COMPLETED Analysis around terminology in formatting space                   |         |       | 3:24 |   5.4 |
+| COMPLETED Analysis around terminology in formatting space                   |         |       | 3:24 |   5.1 |
 | COMPLETED Remove =original_model_name=                                      |         |       | 0:16 |   0.4 |
-| COMPLETED Refactor code around model origination                            |         |       | 4:08 |   6.5 |
+| COMPLETED Refactor code around model origination                            |         |       | 4:08 |   6.2 |
 | COMPLETED Remove formatter level facet folders                              |         |       | 0:06 |   0.2 |
 | COMPLETED Consider removing the "fake" primitive formatters                 |         |       | 0:01 |   0.0 |
-| COMPLETED Expander refactor in =quilt.cpp=                                  |         |       | 3:03 |   4.8 |
-| COMPLETED Create the notion of a formatter alias                            |         |       | 3:15 |   5.1 |
+| COMPLETED Expander refactor in =quilt.cpp=                                  |         |       | 3:03 |   4.6 |
+| COMPLETED Create the notion of a formatter alias                            |         |       | 3:15 |   4.9 |
 | COMPLETED Remove enabled formatters from formatter configuration            |         |       | 0:22 |   0.6 |
-| COMPLETED Handle registration of services properly                          |         |       | 3:41 |   5.8 |
-| STARTED Add support for profiles                                            |         |       | 4:54 |   7.7 |
+| COMPLETED Handle registration of services properly                          |         |       | 3:41 |   5.6 |
+| STARTED Add support for profiles                                            |         |       | 7:46 |  11.7 |
 | STARTED Generate formatter interfaces                                       |         |       | 0:28 |   0.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -1164,6 +1164,7 @@ If we did it before the =visit= call we'd save the cost of
 dispatching.
 
 *** STARTED Add support for profiles                                  :story:
+    CLOCK: [2016-10-05 Wed 15:22]--[2016-10-05 Wed 18:14] =>  2:52
     CLOCK: [2016-10-05 Wed 14:53]--[2016-10-05 Wed 15:21] =>  0:28
     CLOCK: [2016-10-05 Wed 13:01]--[2016-10-05 Wed 14:52] =>  1:51
     CLOCK: [2016-10-05 Wed 11:40]--[2016-10-05 Wed 12:15] =>  0:35
@@ -1175,6 +1176,8 @@ At present we have to manually add a lot of configuration to each
 model. In truth, most of the configuration is the same for a group of
 models. It would be great to provide canned configurations that users
 can reuse (or add their own) and then refer to in the model.
+
+- add overwrite on all facet/formatter profiles.
 
 Tasks:
 

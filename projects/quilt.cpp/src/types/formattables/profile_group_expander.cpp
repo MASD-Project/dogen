@@ -23,6 +23,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/quilt.cpp/types/formattables/expansion_error.hpp"
 #include "dogen/quilt.cpp/types/formattables/profile_group_hydrator.hpp"
+#include "dogen/quilt.cpp/types/formattables/profile_group_merger.hpp"
 #include "dogen/quilt.cpp/types/formattables/profile_group_expander.hpp"
 
 using namespace dogen::utility::log;
@@ -34,6 +35,8 @@ auto lg(logger_factory("quilt.cpp.formattables.profile_group_expander"));
 const std::string invalid_facet_name("Invalid facet name: ");
 const std::string invalid_formatter_name("Invalid formatter name: ");
 const std::string no_profile_groups("Expected at least one profile group.");
+const std::string parent_not_found(
+    "Parent not found in profile group container: ");
 
 }
 
@@ -64,7 +67,7 @@ void profile_group_expander::validate(const formatters::container& fc,
     }
 
     /*
-     * First we gather all facet and formater names.
+     * Gather all distinct facet and formater names.
      */
     std::unordered_set<std::string> facet_names;
     std::unordered_set<std::string> formatter_names;
@@ -79,15 +82,27 @@ void profile_group_expander::validate(const formatters::container& fc,
         formatter_names.insert(fmtn);
     }
 
-    /*
-     * Then we check to see if the facet and formatter names used in
-     * profiles have been defined.
-     */
     for (const auto& pair : pgs) {
         const auto& pgn(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Validating: " << pgn;
 
+        /*
+         * All parents must exist in the container.
+         */
         const auto& pg(pair.second);
+        for (const auto parent : pg.parents()) {
+            const auto i(pgs.find(parent));
+            if (i == pgs.end()) {
+                BOOST_LOG_SEV(lg, error) << parent_not_found << parent;
+                BOOST_THROW_EXCEPTION(
+                    expansion_error(parent_not_found + parent));
+            }
+        }
+
+        /*
+         * Facet names used in profiles must have been defined in
+         * formatter container.
+         */
         for (const auto& pair : pg.facet_profiles()) {
             const auto fctn(pair.first);
             const auto i(facet_names.find(fctn));
@@ -98,6 +113,10 @@ void profile_group_expander::validate(const formatters::container& fc,
             }
         }
 
+        /*
+         * Formatter names used in profiles must have been defined in
+         * formatter container.
+         */
         for (const auto& pair : pg.formatter_profiles()) {
             const auto fmtn(pair.first);
             const auto i(formatter_names.find(fmtn));
@@ -107,15 +126,15 @@ void profile_group_expander::validate(const formatters::container& fc,
                     expansion_error(invalid_formatter_name + fmtn));
             }
         }
-
         BOOST_LOG_SEV(lg, debug) << "Validated profile group.";
     }
 }
 
 profile_group_expander::profile_group_types
-profile_group_expander::merge(const profile_group_types& /*pgs*/) const {
+profile_group_expander::merge(const profile_group_types& original) const {
     profile_group_expander::profile_group_types r;
-    return r;
+    profile_group_merger mg;
+    return mg.merge(original);
 }
 
 void profile_group_expander::

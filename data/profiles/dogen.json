@@ -1,6 +1,6 @@
 {
     "name" : "dogen",
-    "parent" : [ "default" ],
+    "parents" : [ "default" ],
     "decoration_profile" : {
         "licence_name" : "gpl_v3",
         "copyright_notices" : [
