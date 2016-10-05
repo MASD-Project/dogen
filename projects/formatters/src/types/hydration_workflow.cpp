@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/filesystem/file.hpp"
 #include "dogen/formatters/io/modeline_group_io.hpp"
 #include "dogen/utility/io/forward_list_io.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"

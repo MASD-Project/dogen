@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/quilt.cpp/types/formattables/profile_group_hydrator.hpp"
 #include "dogen/quilt.cpp/types/formattables/profile_group_expander.hpp"
 
 namespace dogen {
@@ -28,9 +29,14 @@ namespace formattables {
 profile_group_expander::profile_group_types
 profile_group_expander::
 hydrate(const std::forward_list<boost::filesystem::path>&
-    /*data_directories*/) const {
-    profile_group_expander::profile_group_types r;
-    return r;
+    data_directories) const {
+    profile_group_hydrator h;
+    return h.hydrate(data_directories);
+}
+
+void profile_group_expander::check_profile_groups(
+    const formatters::container& /*fc*/, const profile_group_types& /*pgs*/) const {
+
 }
 
 profile_group_expander::profile_group_types
@@ -46,9 +52,10 @@ populate_model(const profile_group_types& /*pgs*/, model& /*fm*/) const {
 
 void profile_group_expander::expand(
     const std::forward_list<boost::filesystem::path>& data_directories,
-    model& fm) const {
+    const formatters::container& fc, model& fm) const {
 
     const auto original(hydrate(data_directories));
+    check_profile_groups(fc, original);
     const auto merged(merge(original));
     populate_model(merged, fm);
 }

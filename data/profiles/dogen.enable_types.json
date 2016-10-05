@@ -1,6 +1,6 @@
 {
     "name" : "dogen.enable_types",
-    "parent" : [ "dogen" ],
+    "parents" : [ "dogen" ],
     "default_facet_profile" : {
         "enabled" : false
     },

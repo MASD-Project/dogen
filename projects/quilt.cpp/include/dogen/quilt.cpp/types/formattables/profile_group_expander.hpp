@@ -25,8 +25,11 @@
 #pragma once
 #endif
 
+#include <string>
 #include <forward_list>
+#include <unordered_map>
 #include <boost/filesystem/path.hpp>
+#include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/formattables/model.hpp"
 
 namespace dogen {
@@ -43,6 +46,9 @@ private:
         const std::forward_list<boost::filesystem::path>&
         data_directories) const;
 
+    void check_profile_groups(const formatters::container& fc,
+        const profile_group_types& pgs) const;
+
     profile_group_types merge(const profile_group_types& pgs) const;
 
     void populate_model(const profile_group_types& pgs, model& fm) const;
@@ -50,7 +56,7 @@ private:
 public:
     void expand(
         const std::forward_list<boost::filesystem::path>& data_directories,
-        model& fm) const;
+        const formatters::container& fc, model& fm) const;
 };
 
 } } } }

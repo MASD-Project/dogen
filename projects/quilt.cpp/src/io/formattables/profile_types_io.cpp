@@ -36,11 +36,11 @@ std::ostream& operator<<(std::ostream& s, const profile_types& v) {
     case profile_types::invalid:
         attr = "\"invalid\"";
         break;
-    case profile_types::local:
-        attr = "\"local\"";
-        break;
     case profile_types::global:
         attr = "\"global\"";
+        break;
+    case profile_types::local:
+        attr = "\"local\"";
         break;
     default:
         throw std::invalid_argument("Invalid value for profile_types");

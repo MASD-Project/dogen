@@ -110,7 +110,7 @@ profile_group_generator::profile_group_generator() : position_(0) { }
 void profile_group_generator::
 populate(const unsigned int position, result_type& v) {
     v.name(create_std_string(position + 0));
-    v.parent(create_std_list_std_string(position + 1));
+    v.parents(create_std_list_std_string(position + 1));
     v.profile_type(create_dogen_quilt_cpp_formattables_profile_types(position + 2));
     v.bind_to_stereotype(create_std_string(position + 3));
     v.decoration_profile(create_boost_optional_dogen_quilt_cpp_formattables_decoration_profile(position + 4));

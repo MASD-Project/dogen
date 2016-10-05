@@ -137,7 +137,7 @@ std::ostream& operator<<(std::ostream& s, const profile_group& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::profile_group\"" << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
-      << "\"parent\": " << v.parent() << ", "
+      << "\"parents\": " << v.parents() << ", "
       << "\"profile_type\": " << v.profile_type() << ", "
       << "\"bind_to_stereotype\": " << "\"" << tidy_up_string(v.bind_to_stereotype()) << "\"" << ", "
       << "\"decoration_profile\": " << v.decoration_profile() << ", "

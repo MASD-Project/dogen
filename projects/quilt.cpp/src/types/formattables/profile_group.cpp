@@ -30,7 +30,7 @@ profile_group::profile_group()
 
 profile_group::profile_group(profile_group&& rhs)
     : name_(std::move(rhs.name_)),
-      parent_(std::move(rhs.parent_)),
+      parents_(std::move(rhs.parents_)),
       profile_type_(std::move(rhs.profile_type_)),
       bind_to_stereotype_(std::move(rhs.bind_to_stereotype_)),
       decoration_profile_(std::move(rhs.decoration_profile_)),
@@ -41,7 +41,7 @@ profile_group::profile_group(profile_group&& rhs)
 
 profile_group::profile_group(
     const std::string& name,
-    const std::list<std::string>& parent,
+    const std::list<std::string>& parents,
     const dogen::quilt::cpp::formattables::profile_types profile_type,
     const std::string& bind_to_stereotype,
     const boost::optional<dogen::quilt::cpp::formattables::decoration_profile>& decoration_profile,
@@ -50,7 +50,7 @@ profile_group::profile_group(
     const std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_profile>& facet_profiles,
     const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_profile>& formatter_profiles)
     : name_(name),
-      parent_(parent),
+      parents_(parents),
       profile_type_(profile_type),
       bind_to_stereotype_(bind_to_stereotype),
       decoration_profile_(decoration_profile),
@@ -62,7 +62,7 @@ profile_group::profile_group(
 void profile_group::swap(profile_group& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
-    swap(parent_, other.parent_);
+    swap(parents_, other.parents_);
     swap(profile_type_, other.profile_type_);
     swap(bind_to_stereotype_, other.bind_to_stereotype_);
     swap(decoration_profile_, other.decoration_profile_);
@@ -74,7 +74,7 @@ void profile_group::swap(profile_group& other) noexcept {
 
 bool profile_group::operator==(const profile_group& rhs) const {
     return name_ == rhs.name_ &&
-        parent_ == rhs.parent_ &&
+        parents_ == rhs.parents_ &&
         profile_type_ == rhs.profile_type_ &&
         bind_to_stereotype_ == rhs.bind_to_stereotype_ &&
         decoration_profile_ == rhs.decoration_profile_ &&
@@ -106,20 +106,20 @@ void profile_group::name(const std::string&& v) {
     name_ = std::move(v);
 }
 
-const std::list<std::string>& profile_group::parent() const {
-    return parent_;
+const std::list<std::string>& profile_group::parents() const {
+    return parents_;
 }
 
-std::list<std::string>& profile_group::parent() {
-    return parent_;
+std::list<std::string>& profile_group::parents() {
+    return parents_;
 }
 
-void profile_group::parent(const std::list<std::string>& v) {
-    parent_ = v;
+void profile_group::parents(const std::list<std::string>& v) {
+    parents_ = v;
 }
 
-void profile_group::parent(const std::list<std::string>&& v) {
-    parent_ = std::move(v);
+void profile_group::parents(const std::list<std::string>&& v) {
+    parents_ = std::move(v);
 }
 
 dogen::quilt::cpp::formattables::profile_types profile_group::profile_type() const {

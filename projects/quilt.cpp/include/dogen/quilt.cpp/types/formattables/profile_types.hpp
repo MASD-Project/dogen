@@ -32,8 +32,8 @@ namespace formattables {
 
 enum class profile_types : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
-    local = 1,
-    global = 2
+    global = 1,
+    local = 2
 };
 
 } } } }

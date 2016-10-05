@@ -31,14 +31,10 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("formatters.modeline_group_hydrator"));
 
-const std::string empty;
 const std::string invalid_json_file("Failed to parse JSON file: ");
 const std::string invalid_option_in_json_file(
     "Failed to read option in JSON file: ");
 const std::string invalid_path("Failed to find path: ");
-const std::string invalid_directory("Not a directory: ");
-const std::string directory_not_found("Could not find directory: ");
-const std::string editor_not_supplied("Editor was not supplied");
 const std::string invalid_editor("Invalid or unsupported editor: ");
 const std::string invalid_location(
     "Invalid or unsupported modeline location: ");

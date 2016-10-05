@@ -99,7 +99,7 @@ std::size_t profile_group_hasher::hash(const profile_group& v) {
     std::size_t seed(0);
 
     combine(seed, v.name());
-    combine(seed, hash_std_list_std_string(v.parent()));
+    combine(seed, hash_std_list_std_string(v.parents()));
     combine(seed, v.profile_type());
     combine(seed, v.bind_to_stereotype());
     combine(seed, hash_boost_optional_dogen_quilt_cpp_formattables_decoration_profile(v.decoration_profile()));

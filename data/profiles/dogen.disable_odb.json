@@ -1,6 +1,6 @@
 {
     "name" : "dogen.disable_odb",
-    "parent" : [ "dogen" ],
+    "parents" : [ "dogen" ],
     "facet_profiles" : [
         {
             "facet_name" : "quilt.cpp.odb",

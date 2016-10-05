@@ -1,6 +1,6 @@
 {
-    "name" : "dogen.handcrafted",
+    "name" : "dogen.formatters",
     "profile_type" : "global",
-    "parent" : [ "dogen.enable_types" ],
+    "parents" : [ "dogen.enable_types" ],
     "bind_to_stereotype" : "formatters"
 }

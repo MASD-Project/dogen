@@ -1,6 +1,6 @@
 {
     "name" : "dogen.enable_types_hash",
-    "parent" : [ "dogen.enable_types" ],
+    "parents" : [ "dogen.enable_types" ],
     "facet_profiles" : [
         {
             "facet_name" : "quilt.cpp.hash",

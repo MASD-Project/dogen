@@ -55,7 +55,7 @@ public:
 public:
     profile_group(
         const std::string& name,
-        const std::list<std::string>& parent,
+        const std::list<std::string>& parents,
         const dogen::quilt::cpp::formattables::profile_types profile_type,
         const std::string& bind_to_stereotype,
         const boost::optional<dogen::quilt::cpp::formattables::decoration_profile>& decoration_profile,
@@ -77,10 +77,10 @@ public:
     void name(const std::string& v);
     void name(const std::string&& v);
 
-    const std::list<std::string>& parent() const;
-    std::list<std::string>& parent();
-    void parent(const std::list<std::string>& v);
-    void parent(const std::list<std::string>&& v);
+    const std::list<std::string>& parents() const;
+    std::list<std::string>& parents();
+    void parents(const std::list<std::string>& v);
+    void parents(const std::list<std::string>&& v);
 
     dogen::quilt::cpp::formattables::profile_types profile_type() const;
     void profile_type(const dogen::quilt::cpp::formattables::profile_types v);
@@ -127,7 +127,7 @@ public:
 
 private:
     std::string name_;
-    std::list<std::string> parent_;
+    std::list<std::string> parents_;
     dogen::quilt::cpp::formattables::profile_types profile_type_;
     std::string bind_to_stereotype_;
     boost::optional<dogen::quilt::cpp::formattables::decoration_profile> decoration_profile_;

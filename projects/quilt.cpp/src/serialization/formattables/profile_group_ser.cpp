@@ -45,7 +45,7 @@ void save(Archive& ar,
     const dogen::quilt::cpp::formattables::profile_group& v,
     const unsigned int /*version*/) {
     ar << make_nvp("name", v.name_);
-    ar << make_nvp("parent", v.parent_);
+    ar << make_nvp("parents", v.parents_);
     ar << make_nvp("profile_type", v.profile_type_);
     ar << make_nvp("bind_to_stereotype", v.bind_to_stereotype_);
     ar << make_nvp("decoration_profile", v.decoration_profile_);
@@ -60,7 +60,7 @@ void load(Archive& ar,
     dogen::quilt::cpp::formattables::profile_group& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("name", v.name_);
-    ar >> make_nvp("parent", v.parent_);
+    ar >> make_nvp("parents", v.parents_);
     ar >> make_nvp("profile_type", v.profile_type_);
     ar >> make_nvp("bind_to_stereotype", v.bind_to_stereotype_);
     ar >> make_nvp("decoration_profile", v.decoration_profile_);
