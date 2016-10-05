@@ -1,0 +1,10 @@
+{
+    "name" : "dogen.disable_cmake",
+    "parent" : [ "dogen" ],
+    "facet_profiles" : [
+        {
+            "facet_name" : "quilt.cpp.cmake",
+            "enabled" : false
+        }
+    ]
+}

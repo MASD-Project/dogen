@@ -1,0 +1,13 @@
+{
+    "name" : "dogen.enable_types",
+    "parent" : [ "dogen" ],
+    "default_facet_profile" : {
+        "enabled" : false
+    },
+    "facet_profiles" : [
+        {
+            "facet_name" : "quilt.cpp.types",
+            "enabled" : true
+        }
+    ]
+}

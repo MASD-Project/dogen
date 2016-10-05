@@ -1,0 +1,4 @@
+{
+    "name" : "dogen.disable_odb_cmake",
+    "parent" : [ "dogen.disable_cmake", "dogen.disable_odb" ]
+}

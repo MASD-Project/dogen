@@ -1,0 +1,8 @@
+{
+    "name" : "default",
+    "profile_type" : "global",
+    "default_facet_profile" : {
+        "enabled" : true,
+        "overwrite" : true
+    }
+}

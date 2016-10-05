@@ -1,0 +1,11 @@
+{
+    "name" : "dogen",
+    "parent" : [ "default" ],
+    "decoration_profile" : {
+        "licence_name" : "gpl_v3",
+        "copyright_notices" : [
+            "Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>"
+        ],
+        "modeline_group_name" : "emacs"
+    }
+}
