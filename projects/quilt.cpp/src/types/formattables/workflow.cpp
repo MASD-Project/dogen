@@ -85,25 +85,27 @@ model workflow::make_model(const dynamic::repository& drp,
 }
 
 void workflow::expand_model(
+    const std::forward_list<boost::filesystem::path>& data_directories,
     const dynamic::repository& drp, const dynamic::object& root_object,
     const dogen::formatters::decoration_configuration_factory& dcf,
     const path_annotations_type& pa, const formatters::container& fc,
     const locator& l, model& fm) const {
     model_expander ex;
-    ex.expand(drp, root_object, dcf, pa, fc, l, fm);
+    ex.expand(data_directories, drp, root_object, dcf, pa, fc, l, fm);
 }
 
-model workflow::execute(const options::cpp_options& opts,
-    const dynamic::repository& drp, const dynamic::object& root_object,
+model workflow::execute(
+    const std::forward_list<boost::filesystem::path>& data_directories,
+    const options::cpp_options& opts, const dynamic::repository& drp,
+    const dynamic::object& root_object,
     const dogen::formatters::decoration_configuration_factory& dcf,
-    const formatters::container& fc,
-    const yarn::model& m) const {
+    const formatters::container& fc, const yarn::model& m) const {
 
     auto r(make_model(drp, fc, m));
 
     const auto pa(make_path_annotations(drp, root_object, fc));
     const locator l(opts, m, pa);
-    expand_model(drp, root_object, dcf, pa, fc, l, r);
+    expand_model(data_directories, drp, root_object, dcf, pa, fc, l, r);
 
     return r;
 }

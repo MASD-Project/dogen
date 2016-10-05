@@ -44,6 +44,10 @@ namespace formattables {
 
 class model_expander {
 private:
+    void expand_profile_groups(
+        const std::forward_list<boost::filesystem::path>& dirs,
+        model& fm) const;
+
     void expand_enablement(const dynamic::repository& drp,
         const dynamic::object& root_object, const formatters::container& fc,
         model& fm) const;
@@ -77,7 +81,8 @@ private:
         model& fm) const;
 
 public:
-    void expand(const dynamic::repository& drp,
+    void expand(const std::forward_list<boost::filesystem::path>& dirs,
+        const dynamic::repository& drp,
         const dynamic::object& root_object,
         const dogen::formatters::decoration_configuration_factory& dcf,
         const std::unordered_map<std::string,

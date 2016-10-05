@@ -47,13 +47,18 @@ namespace cpp {
 
 workflow::~workflow() noexcept { }
 
-dogen::formatters::repository workflow::create_formatters_repository() const {
-
+std::forward_list<boost::filesystem::path> workflow::
+make_data_directories() const {
     const auto dir(dogen::utility::filesystem::data_files_directory());
-    const auto dirs(std::forward_list<boost::filesystem::path> { dir });
+    const auto r(std::forward_list<boost::filesystem::path> { dir });
+    return r;
+}
 
+dogen::formatters::repository workflow::
+create_formatters_repository(
+    const std::forward_list<boost::filesystem::path>& data_directories) const {
     dogen::formatters::hydration_workflow hw;
-    return hw.hydrate(dirs);
+    return hw.hydrate(data_directories);
 }
 
 dogen::formatters::decoration_configuration_factory
@@ -74,13 +79,14 @@ create_opaque_annotations_builder(const dynamic::repository& drp) const {
 }
 
 formattables::model workflow::create_formattables_model(
+    const std::forward_list<boost::filesystem::path>& data_directories,
     const options::cpp_options& opts,
     const dynamic::repository& drp, const dynamic::object& root_object,
     const dogen::formatters::decoration_configuration_factory& dcf,
     const formatters::container& fc, const yarn::model& m) const {
 
     formattables::workflow fw;
-    return fw.execute(opts, drp, root_object, dcf, fc, m);
+    return fw.execute(data_directories, opts, drp, root_object, dcf, fc, m);
 }
 
 std::string workflow::name() const {
@@ -115,11 +121,12 @@ workflow::generate(const options::knitting_options& ko,
     const yarn::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started backend.";
 
-    const auto frp(create_formatters_repository());
+    const auto dd(make_data_directories());
+    const auto frp(create_formatters_repository(dd));
     const auto ro(m.root_module().extensions());
     const auto dcf(create_decoration_configuration_factory(drp, frp, ro));
     const auto& fc(formatters::workflow::registrar().formatter_container());
-    const auto fm(create_formattables_model(ko.cpp(), drp, ro, dcf, fc, m));
+    const auto fm(create_formattables_model(dd, ko.cpp(), drp, ro, dcf, fc, m));
     const auto r(format(fm));
 
     BOOST_LOG_SEV(lg, debug) << "Finished backend.";

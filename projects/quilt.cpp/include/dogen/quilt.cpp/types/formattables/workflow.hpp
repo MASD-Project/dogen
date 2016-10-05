@@ -62,13 +62,16 @@ private:
         const formatters::container& fc, const yarn::model& m) const;
 
     void expand_model(
+        const std::forward_list<boost::filesystem::path>& data_directories,
         const dynamic::repository& drp, const dynamic::object& root_object,
         const dogen::formatters::decoration_configuration_factory& dcf,
         const path_annotations_type& pa, const formatters::container& fc,
         const locator& l, model& fm) const;
 
 public:
-    model execute(const options::cpp_options& opts,
+    model execute(
+        const std::forward_list<boost::filesystem::path>& data_directories,
+        const options::cpp_options& opts,
         const dynamic::repository& drp, const dynamic::object& root_object,
         const dogen::formatters::decoration_configuration_factory& dcf,
         const formatters::container& fc, const yarn::model& m) const;

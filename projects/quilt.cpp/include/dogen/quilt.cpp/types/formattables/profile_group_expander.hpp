@@ -18,19 +18,40 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_PROFILE_EXPANDER_FWD_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_PROFILE_EXPANDER_FWD_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_PROFILE_GROUP_EXPANDER_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_PROFILE_GROUP_EXPANDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
+
+#include <forward_list>
+#include <boost/filesystem/path.hpp>
+#include "dogen/quilt.cpp/types/formattables/model.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
 
-class profile_expander;
+class profile_group_expander {
+private:
+    typedef std::unordered_map<std::string, formattables::profile_group>
+    profile_group_types;
+
+    profile_group_types hydrate(
+        const std::forward_list<boost::filesystem::path>&
+        data_directories) const;
+
+    profile_group_types merge(const profile_group_types& pgs) const;
+
+    void populate_model(const profile_group_types& pgs, model& fm) const;
+
+public:
+    void expand(
+        const std::forward_list<boost::filesystem::path>& data_directories,
+        model& fm) const;
+};
 
 } } } }
 

@@ -18,9 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/formattables/transformer.hpp"
-#include "dogen/quilt.cpp/types/formattables/inclusion_expander.hpp"
+#include "dogen/quilt.cpp/types/formattables/profile_group_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/enablement_expander.hpp"
+#include "dogen/quilt.cpp/types/formattables/canonical_formatter_expander.hpp"
+#include "dogen/quilt.cpp/types/formattables/inclusion_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/decoration_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/aspect_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/helper_expander.hpp"
@@ -28,13 +29,19 @@
 #include "dogen/quilt.cpp/types/formattables/file_path_and_guard_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/opaque_configuration_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/facet_directory_expander.hpp"
-#include "dogen/quilt.cpp/types/formattables/canonical_formatter_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/model_expander.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
+
+void model_expander::expand_profile_groups(
+    const std::forward_list<boost::filesystem::path>& dirs,
+    model& fm) const {
+    profile_group_expander ex;
+    ex.expand(dirs, fm);
+}
 
 void model_expander::expand_enablement(const dynamic::repository& drp,
     const dynamic::object& root_object, const formatters::container& fc,
@@ -101,11 +108,13 @@ expand_facet_directories(const std::unordered_map<std::string,
 }
 
 void model_expander::expand(
+    const std::forward_list<boost::filesystem::path>& dirs,
     const dynamic::repository& drp, const dynamic::object& root_object,
     const dogen::formatters::decoration_configuration_factory& dcf,
     const std::unordered_map<std::string, annotations::path_annotations>& pa,
     const formatters::container& fc, const locator& l, model& fm) const {
 
+    expand_profile_groups(dirs, fm);
     expand_enablement(drp, root_object, fc, fm);
     expand_canonical_formatters(fc, fm);
     expand_inclusion(drp, fc, l, fm);

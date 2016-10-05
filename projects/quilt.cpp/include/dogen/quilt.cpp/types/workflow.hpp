@@ -57,10 +57,13 @@ public:
     ~workflow() noexcept;
 
 private:
+    std::forward_list<boost::filesystem::path> make_data_directories() const;
+
     /**
      * @brief Creates the formatters' repository.
      */
-    dogen::formatters::repository create_formatters_repository() const;
+    dogen::formatters::repository create_formatters_repository(const
+        std::forward_list<boost::filesystem::path>& data_directories) const;
 
     /**
      * @brief Create the decoration configuration factory.
@@ -81,6 +84,7 @@ private:
      * @brief Create the formattables representation of the yarn model.
      */
     formattables::model create_formattables_model(
+        const std::forward_list<boost::filesystem::path>& data_directories,
         const options::cpp_options& opts,
         const dynamic::repository& drp, const dynamic::object& root_object,
         const dogen::formatters::decoration_configuration_factory& dcf,
