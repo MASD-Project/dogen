@@ -14,14 +14,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-05 Wed 23:13]
+#+CAPTION: Clock summary at [2016-10-05 Wed 23:24]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *68:58* |       |      | 100.0 |
+| *Total time*                                                                | *69:09* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 68:58   |       |      | 100.0 |
-| Active                                                                      |         | 68:58 |      | 100.0 |
+| Stories                                                                     | 69:09   |       |      | 100.0 |
+| Active                                                                      |         | 69:09 |      | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       | 5:15 |   7.6 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:07 |   0.2 |
 | COMPLETED Generation of formattable is incorrect                            |         |       | 2:30 |   3.6 |
@@ -41,12 +41,12 @@
 | COMPLETED Investigate element annotation support                            |         |       | 2:05 |   3.0 |
 | CANCELLED Add streaming settings expander                                   |         |       | 0:36 |   0.9 |
 | COMPLETED Create the formattables model                                     |         |       | 1:32 |   2.2 |
-| COMPLETED Hook formattables into formatters                                 |         |       | 3:58 |   5.8 |
+| COMPLETED Hook formattables into formatters                                 |         |       | 3:58 |   5.7 |
 | COMPLETED Remove empty context                                              |         |       | 1:09 |   1.7 |
 | COMPLETED Review main classes in quilt.cpp                                  |         |       | 3:42 |   5.4 |
 | COMPLETED Clean up element segmentation                                     |         |       | 1:20 |   1.9 |
-| COMPLETED Get OSX build to compile code                                     |         |       | 7:05 |  10.3 |
-| COMPLETED Add a banner to readme                                            |         |       | 1:29 |   2.2 |
+| COMPLETED Get OSX build to compile code                                     |         |       | 7:05 |  10.2 |
+| COMPLETED Add a banner to readme                                            |         |       | 1:29 |   2.1 |
 | COMPLETED Remove formatter group                                            |         |       | 0:23 |   0.6 |
 | COMPLETED Add more types to =quilt::cpp= canned tests                       |         |       | 0:15 |   0.4 |
 | CANCELLED Remove formatter id                                               |         |       | 0:04 |   0.1 |
@@ -60,7 +60,7 @@
 | COMPLETED Remove enabled formatters from formatter configuration            |         |       | 0:22 |   0.5 |
 | COMPLETED Handle registration of services properly                          |         |       | 3:41 |   5.3 |
 | COMPLETED Move stereotypes to element                                       |         |       | 0:21 |   0.5 |
-| STARTED Add support for profiles                                            |         |       | 9:47 |  14.2 |
+| STARTED Add support for profiles                                            |         |       | 9:58 |  14.4 |
 | STARTED Generate formatter interfaces                                       |         |       | 0:28 |   0.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -1172,6 +1172,7 @@ dispatching.
 We need to have the ability to add stereotypes to any element.
 
 *** STARTED Add support for profiles                                  :story:
+    CLOCK: [2016-10-05 Wed 23:13]--[2016-10-05 Wed 23:24] =>  0:11
     CLOCK: [2016-10-05 Wed 22:15]--[2016-10-05 Wed 23:12] =>  0:57
     CLOCK: [2016-10-05 Wed 21:47]--[2016-10-05 Wed 22:14] =>  0:27
     CLOCK: [2016-10-05 Wed 21:04]--[2016-10-05 Wed 21:24] =>  0:20
