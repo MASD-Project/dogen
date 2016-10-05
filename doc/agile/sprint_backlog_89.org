@@ -14,17 +14,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-05 Wed 22:14]
+#+CAPTION: Clock summary at [2016-10-05 Wed 23:13]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *68:01* |       |      | 100.0 |
+| *Total time*                                                                | *68:58* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 68:01   |       |      | 100.0 |
-| Active                                                                      |         | 68:01 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 5:15 |   7.7 |
+| Stories                                                                     | 68:58   |       |      | 100.0 |
+| Active                                                                      |         | 68:58 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 5:15 |   7.6 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:07 |   0.2 |
-| COMPLETED Generation of formattable is incorrect                            |         |       | 2:30 |   3.7 |
+| COMPLETED Generation of formattable is incorrect                            |         |       | 2:30 |   3.6 |
 | COMPLETED Visitor includes are incorrect                                    |         |       | 0:20 |   0.5 |
 | COMPLETED Add includer to quilt.cpp                                         |         |       | 1:46 |   2.6 |
 | COMPLETED Add reducer to quilt.cpp                                          |         |       | 0:22 |   0.5 |
@@ -38,29 +38,29 @@
 | COMPLETED Add helper expander to quilt.cpp                                  |         |       | 1:26 |   2.1 |
 | COMPLETED Merge pre and post workflows                                      |         |       | 0:16 |   0.4 |
 | COMPLETED Fix bug in aspect and helper generation                           |         |       | 0:15 |   0.4 |
-| COMPLETED Investigate element annotation support                            |         |       | 2:05 |   3.1 |
+| COMPLETED Investigate element annotation support                            |         |       | 2:05 |   3.0 |
 | CANCELLED Add streaming settings expander                                   |         |       | 0:36 |   0.9 |
-| COMPLETED Create the formattables model                                     |         |       | 1:32 |   2.3 |
+| COMPLETED Create the formattables model                                     |         |       | 1:32 |   2.2 |
 | COMPLETED Hook formattables into formatters                                 |         |       | 3:58 |   5.8 |
 | COMPLETED Remove empty context                                              |         |       | 1:09 |   1.7 |
 | COMPLETED Review main classes in quilt.cpp                                  |         |       | 3:42 |   5.4 |
-| COMPLETED Clean up element segmentation                                     |         |       | 1:20 |   2.0 |
-| COMPLETED Get OSX build to compile code                                     |         |       | 7:05 |  10.4 |
+| COMPLETED Clean up element segmentation                                     |         |       | 1:20 |   1.9 |
+| COMPLETED Get OSX build to compile code                                     |         |       | 7:05 |  10.3 |
 | COMPLETED Add a banner to readme                                            |         |       | 1:29 |   2.2 |
 | COMPLETED Remove formatter group                                            |         |       | 0:23 |   0.6 |
 | COMPLETED Add more types to =quilt::cpp= canned tests                       |         |       | 0:15 |   0.4 |
 | CANCELLED Remove formatter id                                               |         |       | 0:04 |   0.1 |
-| COMPLETED Analysis around terminology in formatting space                   |         |       | 3:24 |   5.0 |
+| COMPLETED Analysis around terminology in formatting space                   |         |       | 3:24 |   4.9 |
 | COMPLETED Remove =original_model_name=                                      |         |       | 0:16 |   0.4 |
-| COMPLETED Refactor code around model origination                            |         |       | 4:08 |   6.1 |
+| COMPLETED Refactor code around model origination                            |         |       | 4:08 |   6.0 |
 | COMPLETED Remove formatter level facet folders                              |         |       | 0:06 |   0.1 |
 | COMPLETED Consider removing the "fake" primitive formatters                 |         |       | 0:01 |   0.0 |
-| COMPLETED Expander refactor in =quilt.cpp=                                  |         |       | 3:03 |   4.5 |
-| COMPLETED Create the notion of a formatter alias                            |         |       | 3:15 |   4.8 |
+| COMPLETED Expander refactor in =quilt.cpp=                                  |         |       | 3:03 |   4.4 |
+| COMPLETED Create the notion of a formatter alias                            |         |       | 3:15 |   4.7 |
 | COMPLETED Remove enabled formatters from formatter configuration            |         |       | 0:22 |   0.5 |
-| COMPLETED Handle registration of services properly                          |         |       | 3:41 |   5.4 |
+| COMPLETED Handle registration of services properly                          |         |       | 3:41 |   5.3 |
 | COMPLETED Move stereotypes to element                                       |         |       | 0:21 |   0.5 |
-| STARTED Add support for profiles                                            |         |       | 8:50 |  13.0 |
+| STARTED Add support for profiles                                            |         |       | 9:47 |  14.2 |
 | STARTED Generate formatter interfaces                                       |         |       | 0:28 |   0.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -1172,6 +1172,7 @@ dispatching.
 We need to have the ability to add stereotypes to any element.
 
 *** STARTED Add support for profiles                                  :story:
+    CLOCK: [2016-10-05 Wed 22:15]--[2016-10-05 Wed 23:12] =>  0:57
     CLOCK: [2016-10-05 Wed 21:47]--[2016-10-05 Wed 22:14] =>  0:27
     CLOCK: [2016-10-05 Wed 21:04]--[2016-10-05 Wed 21:24] =>  0:20
     CLOCK: [2016-10-05 Wed 20:46]--[2016-10-05 Wed 21:03] =>  0:17
@@ -1188,15 +1189,42 @@ model. In truth, most of the configuration is the same for a group of
 models. It would be great to provide canned configurations that users
 can reuse (or add their own) and then refer to in the model.
 
-- add overwrite on all facet/formatter profiles.
-
 Tasks:
 
 - add data files to specify profiles, with classes to read them in
   from JSON. Profiles must be settable to global or local.
 - add meta-data to allow users to supply a profile (local or global).
 - update enablement expander to look for profiles.
+- update decoration expander to use profiles.
 - update all facet test models to use profiles.
+
+Algorithm:
+
+- for each formatter, get its facet. Need formatter container.
+- set model enabled or default it.
+- see if facet enabled is set on meta-data.
+  - if it is, set it.
+  - if its not, see if there is a default facet profile. If so, see if
+    its enabled or not.
+  - if there is no default facet profile, see if there is a facet
+    specific profile. If so, see if its enabled or not.
+  - if nothing was found, get the default value of the meta-data.
+- see if formatter enabled is set on meta-data.
+  - if it is, set it.
+  - if its not, see if there is a default formatter profile. If so,
+    see if its enabled or not.
+  - if there is no default formatter profile, see if there is a
+    formatter specific profile. If so, see if its enabled or not.
+  - if nothing was found, get the default value of the meta-data.
+
+*** Finish overwriting support                                        :story:
+
+With profiles we have all the pieces in place to support overwrites,
+but there is some linkage missing:
+
+- global/local configuration needs to have an overwrite flag;
+- need to populate formatter configuration on the back of that;
+- need to read flag from formatter configuration and set it on file.
 
 *** STARTED Link profiles to stereotypes                              :story:
 

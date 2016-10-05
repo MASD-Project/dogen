@@ -27,12 +27,14 @@
 
 #include <typeindex>
 #include <unordered_map>
+#include <boost/optional.hpp>
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/dynamic/types/field_definition.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/formattables/local_enablement_configuration.hpp"
 #include "dogen/quilt.cpp/types/formattables/global_enablement_configuration.hpp"
+#include "dogen/quilt.cpp/types/formattables/profile_group.hpp"
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
 #include "dogen/quilt.cpp/types/formattables/model.hpp"
 
@@ -64,7 +66,8 @@ private:
 
     global_enablement_configurations_type obtain_global_configurations(
         const global_field_definitions_type& gfds,
-        const dynamic::object& root_object) const;
+        const dynamic::object& root_object, const formatters::container& fc,
+        const profile_group& gpg) const;
 
     void update_facet_enablement(const formatters::container& fc,
         const global_enablement_configurations_type& gcs, model& fm) const;
@@ -95,7 +98,8 @@ private:
 
     local_enablement_configurations_type obtain_local_configurations(
         const local_field_definitions_type& lfds,
-        const dynamic::object& o) const;
+        const dynamic::object& o, const formatters::container& fc,
+        const boost::optional<profile_group>& lpg) const;
 
 private:
     bool has_user_defined_service(
