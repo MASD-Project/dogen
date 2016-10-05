@@ -38,9 +38,10 @@ namespace formattables {
 
 void model_expander::expand_profile_groups(
     const std::forward_list<boost::filesystem::path>& dirs,
+    const dynamic::repository& drp, const dynamic::object& root_object,
     const formatters::container& fc, model& fm) const {
     profile_group_expander ex;
-    ex.expand(dirs, fc, fm);
+    ex.expand(dirs, drp, root_object, fc, fm);
 }
 
 void model_expander::expand_enablement(const dynamic::repository& drp,
@@ -114,7 +115,7 @@ void model_expander::expand(
     const std::unordered_map<std::string, annotations::path_annotations>& pa,
     const formatters::container& fc, const locator& l, model& fm) const {
 
-    expand_profile_groups(dirs, fc, fm);
+    expand_profile_groups(dirs, drp, root_object, fc, fm);
     expand_enablement(drp, root_object, fc, fm);
     expand_canonical_formatters(fc, fm);
     expand_inclusion(drp, fc, l, fm);

@@ -29,6 +29,9 @@
 #include <forward_list>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
+#include "dogen/dynamic/types/object.hpp"
+#include "dogen/dynamic/types/repository.hpp"
+
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/formattables/model.hpp"
 
@@ -38,6 +41,20 @@ namespace cpp {
 namespace formattables {
 
 class profile_group_expander {
+private:
+    struct field_definitions {
+        dynamic::field_definition profile;
+    };
+
+    friend std::ostream& operator<<(std::ostream& s,
+        const field_definitions& v);
+
+    field_definitions make_field_definitions(
+        const dynamic::repository& drp) const;
+
+    std::string obtain_profile_configuration(const field_definitions& fd,
+        const dynamic::object& root_object) const;
+
 private:
     typedef std::unordered_map<std::string, profile_group> profile_group_types;
 
@@ -50,11 +67,13 @@ private:
 
     profile_group_types merge(const profile_group_types& original) const;
 
-    void populate_model(const profile_group_types& pgs, model& fm) const;
+    void populate_model(const std::string& profile_configuration,
+        const profile_group_types& pgs, model& fm) const;
 
 public:
     void expand(
         const std::forward_list<boost::filesystem::path>& data_directories,
+        const dynamic::repository& drp, const dynamic::object& root_object,
         const formatters::container& fc, model& fm) const;
 };
 

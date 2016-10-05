@@ -21,6 +21,10 @@
 #include <unordered_set>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/dynamic/types/field_selector.hpp"
+#include "dogen/dynamic/types/repository_selector.hpp"
+#include "dogen/dynamic/io/field_definition_io.hpp"
+#include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/formattables/expansion_error.hpp"
 #include "dogen/quilt.cpp/types/formattables/profile_group_hydrator.hpp"
 #include "dogen/quilt.cpp/types/formattables/profile_group_merger.hpp"
@@ -44,6 +48,41 @@ namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
+
+inline std::ostream& operator<<(std::ostream& s,
+    const profile_group_expander::field_definitions& v) {
+
+    s << " { "
+      << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::"
+      << "profile_group_expander::field_definitions\"" << ", "
+      << "\"profile\": " << v.profile
+      << " }";
+
+    return s;
+}
+
+profile_group_expander::field_definitions
+profile_group_expander::make_field_definitions(
+    const dynamic::repository& drp) const {
+    BOOST_LOG_SEV(lg, debug) << "Creating field definitions.";
+
+    field_definitions r;
+    const dynamic::repository_selector s(drp);
+    const auto& mn(formatters::traits::model_name());
+    r.profile = s.select_field_by_name(mn, "profile");
+
+    BOOST_LOG_SEV(lg, debug) << "Created field definitions. Result: " << r;
+    return r;
+}
+
+std::string profile_group_expander::obtain_profile_configuration(
+    const field_definitions& fd, const dynamic::object& root_object) const {
+    BOOST_LOG_SEV(lg, debug) << "Reading profile configuration.";
+    const dynamic::field_selector fs(root_object);
+    const auto r(fs.get_text_content_or_default(fd.profile));
+    BOOST_LOG_SEV(lg, debug) << "Profile configuration: " << r;
+    return r;
+}
 
 profile_group_expander::profile_group_types
 profile_group_expander::
@@ -138,18 +177,22 @@ profile_group_expander::merge(const profile_group_types& original) const {
 }
 
 void profile_group_expander::
-populate_model(const profile_group_types& /*pgs*/, model& /*fm*/) const {
+populate_model(const std::string& /*profile_configuration*/,
+    const profile_group_types& /*pgs*/, model& /*fm*/) const {
 
 }
 
 void profile_group_expander::expand(
     const std::forward_list<boost::filesystem::path>& data_directories,
+    const dynamic::repository& drp, const dynamic::object& root_object,
     const formatters::container& fc, model& fm) const {
 
     const auto original(hydrate(data_directories));
     validate(fc, original);
     const auto merged(merge(original));
-    populate_model(merged, fm);
+    const auto fd(make_field_definitions(drp));
+    const auto prf_cfg(obtain_profile_configuration(fd, root_object));
+    populate_model(prf_cfg, merged, fm);
 }
 
 } } } }

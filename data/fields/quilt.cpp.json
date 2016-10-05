@@ -25,6 +25,19 @@
     },
     {
         "name" : {
+            "simple" : "profile",
+            "qualified" : "quilt.cpp.profile"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "quilt.cpp"
+        },
+        "value_type" : "text",
+        "definition_type" : "instance",
+        "scope" : "entity",
+        "default_value" : "default"
+    },
+    {
+        "name" : {
             "simple" : "file_path"
         },
         "ownership_hierarchy" : {

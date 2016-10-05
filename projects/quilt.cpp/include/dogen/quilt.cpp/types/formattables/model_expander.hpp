@@ -46,6 +46,7 @@ class model_expander {
 private:
     void expand_profile_groups(
         const std::forward_list<boost::filesystem::path>& dirs,
+        const dynamic::repository& drp, const dynamic::object& root_object,
         const formatters::container& fc, model& fm) const;
 
     void expand_enablement(const dynamic::repository& drp,

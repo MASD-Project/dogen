@@ -141,16 +141,16 @@
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O2">
       <dia:attribute name="obj_pos">
-        <dia:point val="2,-18"/>
+        <dia:point val="-15,-18"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="1.95,-18.05;41.45,-10.65"/>
+        <dia:rectangle val="-15.05,-18.05;24.45,-10.65"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="2,-18"/>
+        <dia:point val="-15,-18"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="39.399999999999999"/>
@@ -186,7 +186,7 @@
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="2.35,-16.755"/>
+            <dia:point val="-14.65,-16.755"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -6490,16 +6490,16 @@ for a given C++ entity.#</dia:string>
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O62">
       <dia:attribute name="obj_pos">
-        <dia:point val="11.9997,176.083"/>
+        <dia:point val="-11,176"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="11.9497,176.033;32.1997,183.433"/>
+        <dia:rectangle val="-11.05,175.95;9.2,183.35"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="11.9997,176.083"/>
+        <dia:point val="-11,176"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="20.150000000000002"/>
@@ -6535,7 +6535,7 @@ the dynamic object.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="12.3497,177.328"/>
+            <dia:point val="-10.65,177.245"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
