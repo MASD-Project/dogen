@@ -48,9 +48,14 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
     test_equality<formattables::element_configuration_generator>();
     test_equality<formattables::global_enablement_configuration_generator>();
     test_equality<formattables::formatter_configuration_generator>();
+    test_equality<formattables::facet_configuration_generator>();
     test_equality<formattables::helper_configuration_generator>();
     test_equality<formattables::aspect_configuration_generator>();
     test_equality<formattables::helper_descriptor_generator>();
+    test_equality<formattables::decoration_profile_generator>();
+    test_equality<formattables::facet_profile_generator>();
+    test_equality<formattables::formatter_profile_generator>();
+    test_equality<formattables::profile_types_generator>();
     test_equality<annotations::streaming_annotations_generator>();
     test_equality<annotations::path_annotations_generator>();
     test_equality<annotations::aspect_annotations_generator>();

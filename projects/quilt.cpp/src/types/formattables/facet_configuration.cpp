@@ -26,22 +26,27 @@ namespace cpp {
 namespace formattables {
 
 facet_configuration::facet_configuration()
-    : enabled_(static_cast<bool>(0)) { }
+    : enabled_(static_cast<bool>(0)),
+      overwrite_(static_cast<bool>(0)) { }
 
 facet_configuration::facet_configuration(
     const bool enabled,
+    const bool overwrite,
     const std::string& directory)
     : enabled_(enabled),
+      overwrite_(overwrite),
       directory_(directory) { }
 
 void facet_configuration::swap(facet_configuration& other) noexcept {
     using std::swap;
     swap(enabled_, other.enabled_);
+    swap(overwrite_, other.overwrite_);
     swap(directory_, other.directory_);
 }
 
 bool facet_configuration::operator==(const facet_configuration& rhs) const {
     return enabled_ == rhs.enabled_ &&
+        overwrite_ == rhs.overwrite_ &&
         directory_ == rhs.directory_;
 }
 
@@ -57,6 +62,14 @@ bool facet_configuration::enabled() const {
 
 void facet_configuration::enabled(const bool v) {
     enabled_ = v;
+}
+
+bool facet_configuration::overwrite() const {
+    return overwrite_;
+}
+
+void facet_configuration::overwrite(const bool v) {
+    overwrite_ = v;
 }
 
 const std::string& facet_configuration::directory() const {

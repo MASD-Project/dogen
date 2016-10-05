@@ -21,6 +21,7 @@
 #include <sstream>
 #include "dogen/quilt.cpp/test_data/formattables/model_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/formattable_td.hpp"
+#include "dogen/quilt.cpp/test_data/formattables/profile_group_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/facet_configuration_td.hpp"
 #include "dogen/quilt.cpp/test_data/annotations/streaming_annotations_td.hpp"
 
@@ -71,6 +72,11 @@ std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_configura
     return r;
 }
 
+dogen::quilt::cpp::formattables::profile_group
+create_dogen_quilt_cpp_formattables_profile_group(const unsigned int position) {
+    return dogen::quilt::cpp::formattables::profile_group_generator::create(position);
+}
+
 }
 
 namespace dogen {
@@ -85,6 +91,7 @@ populate(const unsigned int position, result_type& v) {
     v.streaming_annotations(create_std_unordered_map_std_string_dogen_quilt_cpp_annotations_streaming_annotations(position + 0));
     v.formattables(create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formattable(position + 1));
     v.facet_configurations(create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_facet_configuration(position + 2));
+    v.global_profile_group(create_dogen_quilt_cpp_formattables_profile_group(position + 3));
 }
 
 model_generator::result_type

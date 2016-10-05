@@ -50,6 +50,10 @@ BOOST_AUTO_TEST_CASE(validate_swap) {
     test_swap<formattables::helper_configuration_generator>();
     test_swap<formattables::aspect_configuration_generator>();
     test_swap<formattables::helper_descriptor_generator>();
+    test_swap<formattables::decoration_profile_generator>();
+    test_swap<formattables::facet_profile_generator>();
+    test_swap<formattables::formatter_profile_generator>();
+    test_swap<formattables::profile_types_generator>();
     test_swap<annotations::streaming_annotations_generator>();
     test_swap<annotations::path_annotations_generator>();
     test_swap<annotations::aspect_annotations_generator>();

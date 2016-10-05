@@ -38,6 +38,7 @@ void save(Archive& ar,
     const dogen::quilt::cpp::formattables::facet_configuration& v,
     const unsigned int /*version*/) {
     ar << make_nvp("enabled", v.enabled_);
+    ar << make_nvp("overwrite", v.overwrite_);
     ar << make_nvp("directory", v.directory_);
 }
 
@@ -46,6 +47,7 @@ void load(Archive& ar,
     dogen::quilt::cpp::formattables::facet_configuration& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("enabled", v.enabled_);
+    ar >> make_nvp("overwrite", v.overwrite_);
     ar >> make_nvp("directory", v.directory_);
 }
 

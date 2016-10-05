@@ -31,6 +31,7 @@
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include "dogen/formatters/types/decoration_configuration.hpp"
+#include "dogen/quilt.cpp/types/formattables/profile_group.hpp"
 #include "dogen/quilt.cpp/types/formattables/aspect_configuration.hpp"
 #include "dogen/quilt.cpp/types/formattables/helper_configuration.hpp"
 #include "dogen/quilt.cpp/types/formattables/formatter_configuration.hpp"
@@ -59,7 +60,8 @@ public:
         const dogen::quilt::cpp::formattables::aspect_configuration& aspect_configuration,
         const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration>& formatter_configurations,
         const std::list<dogen::quilt::cpp::formattables::helper_configuration>& helper_configurations,
-        const std::unordered_map<std::string, std::string>& canonical_formatter_to_formatter);
+        const std::unordered_map<std::string, std::string>& canonical_formatter_to_formatter,
+        const boost::optional<dogen::quilt::cpp::formattables::profile_group>& local_profile_group);
 
 private:
     template<typename Archive>
@@ -94,6 +96,11 @@ public:
     void canonical_formatter_to_formatter(const std::unordered_map<std::string, std::string>& v);
     void canonical_formatter_to_formatter(const std::unordered_map<std::string, std::string>&& v);
 
+    const boost::optional<dogen::quilt::cpp::formattables::profile_group>& local_profile_group() const;
+    boost::optional<dogen::quilt::cpp::formattables::profile_group>& local_profile_group();
+    void local_profile_group(const boost::optional<dogen::quilt::cpp::formattables::profile_group>& v);
+    void local_profile_group(const boost::optional<dogen::quilt::cpp::formattables::profile_group>&& v);
+
 public:
     bool operator==(const element_configuration& rhs) const;
     bool operator!=(const element_configuration& rhs) const {
@@ -110,6 +117,7 @@ private:
     std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration> formatter_configurations_;
     std::list<dogen::quilt::cpp::formattables::helper_configuration> helper_configurations_;
     std::unordered_map<std::string, std::string> canonical_formatter_to_formatter_;
+    boost::optional<dogen::quilt::cpp::formattables::profile_group> local_profile_group_;
 };
 
 } } } }

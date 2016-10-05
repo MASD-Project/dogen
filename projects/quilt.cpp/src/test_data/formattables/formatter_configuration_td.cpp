@@ -66,10 +66,11 @@ formatter_configuration_generator::formatter_configuration_generator() : positio
 void formatter_configuration_generator::
 populate(const unsigned int position, result_type& v) {
     v.enabled(create_bool(position + 0));
-    v.file_path(create_boost_filesystem_path(position + 1));
-    v.header_guard(create_std_string(position + 2));
-    v.inclusion_dependencies(create_std_list_std_string(position + 3));
-    v.opaque_configuration(create_dogen_quilt_cpp_formattables_opaque_configuration(position + 4));
+    v.overwrite(create_bool(position + 1));
+    v.file_path(create_boost_filesystem_path(position + 2));
+    v.header_guard(create_std_string(position + 3));
+    v.inclusion_dependencies(create_std_list_std_string(position + 4));
+    v.opaque_configuration(create_dogen_quilt_cpp_formattables_opaque_configuration(position + 5));
 }
 
 formatter_configuration_generator::result_type

@@ -26,10 +26,12 @@ namespace cpp {
 namespace formattables {
 
 formatter_configuration::formatter_configuration()
-    : enabled_(static_cast<bool>(0)) { }
+    : enabled_(static_cast<bool>(0)),
+      overwrite_(static_cast<bool>(0)) { }
 
 formatter_configuration::formatter_configuration(formatter_configuration&& rhs)
     : enabled_(std::move(rhs.enabled_)),
+      overwrite_(std::move(rhs.overwrite_)),
       file_path_(std::move(rhs.file_path_)),
       header_guard_(std::move(rhs.header_guard_)),
       inclusion_dependencies_(std::move(rhs.inclusion_dependencies_)),
@@ -37,11 +39,13 @@ formatter_configuration::formatter_configuration(formatter_configuration&& rhs)
 
 formatter_configuration::formatter_configuration(
     const bool enabled,
+    const bool overwrite,
     const boost::filesystem::path& file_path,
     const std::string& header_guard,
     const std::list<std::string>& inclusion_dependencies,
     const dogen::quilt::cpp::formattables::opaque_configuration& opaque_configuration)
     : enabled_(enabled),
+      overwrite_(overwrite),
       file_path_(file_path),
       header_guard_(header_guard),
       inclusion_dependencies_(inclusion_dependencies),
@@ -50,6 +54,7 @@ formatter_configuration::formatter_configuration(
 void formatter_configuration::swap(formatter_configuration& other) noexcept {
     using std::swap;
     swap(enabled_, other.enabled_);
+    swap(overwrite_, other.overwrite_);
     swap(file_path_, other.file_path_);
     swap(header_guard_, other.header_guard_);
     swap(inclusion_dependencies_, other.inclusion_dependencies_);
@@ -58,6 +63,7 @@ void formatter_configuration::swap(formatter_configuration& other) noexcept {
 
 bool formatter_configuration::operator==(const formatter_configuration& rhs) const {
     return enabled_ == rhs.enabled_ &&
+        overwrite_ == rhs.overwrite_ &&
         file_path_ == rhs.file_path_ &&
         header_guard_ == rhs.header_guard_ &&
         inclusion_dependencies_ == rhs.inclusion_dependencies_ &&
@@ -76,6 +82,14 @@ bool formatter_configuration::enabled() const {
 
 void formatter_configuration::enabled(const bool v) {
     enabled_ = v;
+}
+
+bool formatter_configuration::overwrite() const {
+    return overwrite_;
+}
+
+void formatter_configuration::overwrite(const bool v) {
+    overwrite_ = v;
 }
 
 const boost::filesystem::path& formatter_configuration::file_path() const {

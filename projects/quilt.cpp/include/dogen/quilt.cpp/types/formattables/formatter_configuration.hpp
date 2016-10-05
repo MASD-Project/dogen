@@ -51,6 +51,7 @@ public:
 public:
     formatter_configuration(
         const bool enabled,
+        const bool overwrite,
         const boost::filesystem::path& file_path,
         const std::string& header_guard,
         const std::list<std::string>& inclusion_dependencies,
@@ -66,6 +67,9 @@ private:
 public:
     bool enabled() const;
     void enabled(const bool v);
+
+    bool overwrite() const;
+    void overwrite(const bool v);
 
     const boost::filesystem::path& file_path() const;
     boost::filesystem::path& file_path();
@@ -99,6 +103,7 @@ public:
 
 private:
     bool enabled_;
+    bool overwrite_;
     boost::filesystem::path file_path_;
     std::string header_guard_;
     std::list<std::string> inclusion_dependencies_;

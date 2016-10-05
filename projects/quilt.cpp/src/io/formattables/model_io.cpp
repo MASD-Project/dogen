@@ -22,6 +22,7 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen/quilt.cpp/io/formattables/model_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/formattable_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/profile_group_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/facet_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/annotations/streaming_annotations_io.hpp"
 
@@ -96,7 +97,8 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::model\"" << ", "
       << "\"streaming_annotations\": " << v.streaming_annotations() << ", "
       << "\"formattables\": " << v.formattables() << ", "
-      << "\"facet_configurations\": " << v.facet_configurations()
+      << "\"facet_configurations\": " << v.facet_configurations() << ", "
+      << "\"global_profile_group\": " << v.global_profile_group()
       << " }";
     return(s);
 }

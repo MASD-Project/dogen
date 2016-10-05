@@ -45,7 +45,8 @@ facet_configuration_generator::facet_configuration_generator() : position_(0) { 
 void facet_configuration_generator::
 populate(const unsigned int position, result_type& v) {
     v.enabled(create_bool(position + 0));
-    v.directory(create_std_string(position + 1));
+    v.overwrite(create_bool(position + 1));
+    v.directory(create_std_string(position + 2));
 }
 
 facet_configuration_generator::result_type

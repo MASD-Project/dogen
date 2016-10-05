@@ -46,6 +46,7 @@ public:
 public:
     facet_configuration(
         const bool enabled,
+        const bool overwrite,
         const std::string& directory);
 
 private:
@@ -58,6 +59,9 @@ private:
 public:
     bool enabled() const;
     void enabled(const bool v);
+
+    bool overwrite() const;
+    void overwrite(const bool v);
 
     const std::string& directory() const;
     std::string& directory();
@@ -76,6 +80,7 @@ public:
 
 private:
     bool enabled_;
+    bool overwrite_;
     std::string directory_;
 };
 

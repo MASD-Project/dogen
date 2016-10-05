@@ -60,6 +60,7 @@ std::ostream& operator<<(std::ostream& s, const formatter_configuration& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::formatter_configuration\"" << ", "
       << "\"enabled\": " << v.enabled() << ", "
+      << "\"overwrite\": " << v.overwrite() << ", "
       << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\"" << ", "
       << "\"header_guard\": " << "\"" << tidy_up_string(v.header_guard()) << "\"" << ", "
       << "\"inclusion_dependencies\": " << v.inclusion_dependencies() << ", "

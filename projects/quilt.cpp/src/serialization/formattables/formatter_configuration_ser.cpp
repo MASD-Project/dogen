@@ -64,6 +64,7 @@ void save(Archive& ar,
     const dogen::quilt::cpp::formattables::formatter_configuration& v,
     const unsigned int /*version*/) {
     ar << make_nvp("enabled", v.enabled_);
+    ar << make_nvp("overwrite", v.overwrite_);
     ar << make_nvp("file_path", v.file_path_);
     ar << make_nvp("header_guard", v.header_guard_);
     ar << make_nvp("inclusion_dependencies", v.inclusion_dependencies_);
@@ -75,6 +76,7 @@ void load(Archive& ar,
     dogen::quilt::cpp::formattables::formatter_configuration& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("enabled", v.enabled_);
+    ar >> make_nvp("overwrite", v.overwrite_);
     ar >> make_nvp("file_path", v.file_path_);
     ar >> make_nvp("header_guard", v.header_guard_);
     ar >> make_nvp("inclusion_dependencies", v.inclusion_dependencies_);

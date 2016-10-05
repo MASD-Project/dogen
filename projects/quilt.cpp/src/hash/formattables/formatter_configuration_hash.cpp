@@ -54,6 +54,7 @@ std::size_t formatter_configuration_hasher::hash(const formatter_configuration& 
     std::size_t seed(0);
 
     combine(seed, v.enabled());
+    combine(seed, v.overwrite());
     combine(seed, hash_boost_filesystem_path(v.file_path()));
     combine(seed, v.header_guard());
     combine(seed, hash_std_list_std_string(v.inclusion_dependencies()));

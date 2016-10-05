@@ -21,6 +21,7 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "dogen/formatters/io/decoration_configuration_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/profile_group_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/aspect_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/helper_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/element_configuration_io.hpp"
@@ -98,6 +99,21 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::quilt::cpp::formattables::profile_group>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<empty>\"";
+    s << " }";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace quilt {
 namespace cpp {
@@ -110,7 +126,8 @@ std::ostream& operator<<(std::ostream& s, const element_configuration& v) {
       << "\"aspect_configuration\": " << v.aspect_configuration() << ", "
       << "\"formatter_configurations\": " << v.formatter_configurations() << ", "
       << "\"helper_configurations\": " << v.helper_configurations() << ", "
-      << "\"canonical_formatter_to_formatter\": " << v.canonical_formatter_to_formatter()
+      << "\"canonical_formatter_to_formatter\": " << v.canonical_formatter_to_formatter() << ", "
+      << "\"local_profile_group\": " << v.local_profile_group()
       << " }";
     return(s);
 }

@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/formatters/hash/decoration_configuration_hash.hpp"
+#include "dogen/quilt.cpp/hash/formattables/profile_group_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/aspect_configuration_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/helper_configuration_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/element_configuration_hash.hpp"
@@ -68,6 +69,16 @@ inline std::size_t hash_std_unordered_map_std_string_std_string(const std::unord
     return seed;
 }
 
+inline std::size_t hash_boost_optional_dogen_quilt_cpp_formattables_profile_group(const boost::optional<dogen::quilt::cpp::formattables::profile_group>& v) {
+    std::size_t seed(0);
+
+    if (!v)
+        return seed;
+
+    combine(seed, *v);
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -83,6 +94,7 @@ std::size_t element_configuration_hasher::hash(const element_configuration& v) {
     combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formatter_configuration(v.formatter_configurations()));
     combine(seed, hash_std_list_dogen_quilt_cpp_formattables_helper_configuration(v.helper_configurations()));
     combine(seed, hash_std_unordered_map_std_string_std_string(v.canonical_formatter_to_formatter()));
+    combine(seed, hash_boost_optional_dogen_quilt_cpp_formattables_profile_group(v.local_profile_group()));
 
     return seed;
 }
