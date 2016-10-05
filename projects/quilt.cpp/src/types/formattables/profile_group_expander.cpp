@@ -18,8 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
+#include <unordered_set>
+#include <boost/throw_exception.hpp>
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/quilt.cpp/types/formattables/expansion_error.hpp"
 #include "dogen/quilt.cpp/types/formattables/profile_group_hydrator.hpp"
 #include "dogen/quilt.cpp/types/formattables/profile_group_expander.hpp"
+
+using namespace dogen::utility::log;
+
+namespace {
+
+auto lg(logger_factory("quilt.cpp.formattables.profile_group_expander"));
+
+const std::string invalid_facet_name("Invalid facet name: ");
+const std::string invalid_formatter_name("Invalid formatter name: ");
+const std::string no_profile_groups("Expected at least one profile group.");
+
+}
 
 namespace dogen {
 namespace quilt {
@@ -34,9 +50,66 @@ hydrate(const std::forward_list<boost::filesystem::path>&
     return h.hydrate(data_directories);
 }
 
-void profile_group_expander::check_profile_groups(
-    const formatters::container& /*fc*/, const profile_group_types& /*pgs*/) const {
+void profile_group_expander::validate(const formatters::container& fc,
+    const profile_group_types& pgs) const {
+    BOOST_LOG_SEV(lg, debug) << "Validating profile groups.";
 
+    /*
+     * We expect at least one profile group. This is a simple sanity
+     * check to avoid dodgy installations, etc.
+     */
+    if (pgs.empty()) {
+        BOOST_LOG_SEV(lg, error) << no_profile_groups;
+        BOOST_THROW_EXCEPTION(expansion_error(no_profile_groups));
+    }
+
+    /*
+     * First we gather all facet and formater names.
+     */
+    std::unordered_set<std::string> facet_names;
+    std::unordered_set<std::string> formatter_names;
+    for (const auto ptr : fc.file_formatters()) {
+        const auto& f(*ptr);
+        const auto& oh(f.ownership_hierarchy());
+
+        const auto fctn(oh.facet_name());
+        facet_names.insert(fctn);
+
+        const auto fmtn(oh.formatter_name());
+        formatter_names.insert(fmtn);
+    }
+
+    /*
+     * Then we check to see if the facet and formatter names used in
+     * profiles have been defined.
+     */
+    for (const auto& pair : pgs) {
+        const auto& pgn(pair.first);
+        BOOST_LOG_SEV(lg, debug) << "Validating: " << pgn;
+
+        const auto& pg(pair.second);
+        for (const auto& pair : pg.facet_profiles()) {
+            const auto fctn(pair.first);
+            const auto i(facet_names.find(fctn));
+            if (i == facet_names.end()) {
+                BOOST_LOG_SEV(lg, error) << invalid_facet_name << fctn;
+                BOOST_THROW_EXCEPTION(
+                    expansion_error(invalid_facet_name + fctn));
+            }
+        }
+
+        for (const auto& pair : pg.formatter_profiles()) {
+            const auto fmtn(pair.first);
+            const auto i(formatter_names.find(fmtn));
+            if (i == formatter_names.end()) {
+                BOOST_LOG_SEV(lg, error) << invalid_formatter_name << fmtn;
+                BOOST_THROW_EXCEPTION(
+                    expansion_error(invalid_formatter_name + fmtn));
+            }
+        }
+
+        BOOST_LOG_SEV(lg, debug) << "Validated profile group.";
+    }
 }
 
 profile_group_expander::profile_group_types
@@ -55,7 +128,7 @@ void profile_group_expander::expand(
     const formatters::container& fc, model& fm) const {
 
     const auto original(hydrate(data_directories));
-    check_profile_groups(fc, original);
+    validate(fc, original);
     const auto merged(merge(original));
     populate_model(merged, fm);
 }

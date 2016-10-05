@@ -39,6 +39,7 @@ const std::string profile_dir("profiles");
 const std::string group_name_key("name");
 const std::string parents_key("parents");
 const std::string bind_to_stereotype_key("bind_to_stereotype");
+const std::string decoration_profile_key("decoration_profile");
 const std::string facet_name_key("facet_name");
 const std::string formatter_name_key("formatter_name");
 const std::string profile_type_key("profile_type");
@@ -46,7 +47,9 @@ const std::string default_facet_profile_key("default_facet_profile");
 const std::string default_formatter_profile_key("default_formatter_profile");
 const std::string facet_profiles_key("facet_profiles");
 const std::string formatter_profiles_key("formatter_profiles");
-
+const std::string licence_name_key("licence_name");
+const std::string copyright_notices_key("copyright_notices");
+const std::string modeline_group_name_key("modeline_group_name");
 const std::string profile_type_global_value("global");
 const std::string profile_type_local_value("local");
 const std::string enabled_key("enabled");
@@ -97,6 +100,29 @@ profile_group_hydrator::to_profile_type(const std::string v) const {
 
     BOOST_LOG_SEV(lg, error) << invalid_profile_type << v;
     BOOST_THROW_EXCEPTION(hydration_error(invalid_profile_type + v));
+}
+
+decoration_profile profile_group_hydrator::
+read_decoration_profile(const boost::property_tree::ptree& pt) const {
+    decoration_profile r;
+
+    const auto ln(pt.get_optional<std::string>(licence_name_key));
+    if (ln)
+        r.licence_name(*ln);
+
+    const auto i = pt.find(copyright_notices_key);
+    if (i != pt.not_found()) {
+        for (auto j(i->second.begin()); j != i->second.end(); ++j) {
+            const auto cn(j->second.get_value<std::string>());
+            r.copyright_notices().push_back(cn);
+        }
+    }
+
+    const auto mgn(pt.get_optional<std::string>(modeline_group_name_key));
+    if (mgn)
+        r.modeline_group_name(*mgn);
+
+    return r;
 }
 
 std::pair<std::string, facet_profile> profile_group_hydrator::
@@ -184,7 +210,6 @@ read_formatter_profiles(const boost::property_tree::ptree& pt) const {
     return r;
 }
 
-
 profile_group profile_group_hydrator::read_stream(std::istream& s) const {
     using namespace boost::property_tree;
     ptree pt;
@@ -213,6 +238,10 @@ profile_group profile_group_hydrator::read_stream(std::istream& s) const {
             BOOST_THROW_EXCEPTION(hydration_error(empty_stereotype_name));
         }
     }
+
+    i = pt.find(decoration_profile_key);
+    if (i != pt.not_found())
+        r.decoration_profile(read_decoration_profile(i->second));
 
     const auto prft(pt.get_optional<std::string>(profile_type_key));
     if (prft)

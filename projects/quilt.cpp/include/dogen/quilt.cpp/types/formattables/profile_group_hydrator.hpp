@@ -48,6 +48,9 @@ private:
 
     profile_types to_profile_type(const std::string v) const;
 
+    decoration_profile
+    read_decoration_profile(const boost::property_tree::ptree& pt) const;
+
     std::pair<std::string, facet_profile>
     read_facet_profile(const boost::property_tree::ptree& pt) const;
 

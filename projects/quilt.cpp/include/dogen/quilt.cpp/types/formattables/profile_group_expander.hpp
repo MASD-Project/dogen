@@ -46,7 +46,7 @@ private:
         const std::forward_list<boost::filesystem::path>&
         data_directories) const;
 
-    void check_profile_groups(const formatters::container& fc,
+    void validate(const formatters::container& fc,
         const profile_group_types& pgs) const;
 
     profile_group_types merge(const profile_group_types& pgs) const;
