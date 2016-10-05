@@ -65,6 +65,7 @@
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-10-05 Wed 20:20]--[2016-10-05 Wed 20:45] =>  0:25
     CLOCK: [2016-10-04 Tue 19:06]--[2016-10-04 Tue 19:19] =>  0:13
     CLOCK: [2016-10-03 Mon 10:17]--[2016-10-03 Mon 10:21] =>  0:04
     CLOCK: [2016-10-03 Mon 09:00]--[2016-10-03 Mon 10:16] =>  1:16
@@ -1186,6 +1187,27 @@ Tasks:
 - add meta-data to allow users to supply a profile (local or global).
 - update enablement expander to look for profiles.
 - update all facet test models to use profiles.
+
+*** Merge annotations with formattables                               :story:
+
+Originally we split annotations from formattables because we thought
+they had enough responsibilities to stand on their own as
+classes. However, its now clear that the only job of the annotations
+is to provide data for one expander. It makes a lot more sense to have
+it all in one class.
+
+Tasks:
+
+- merge path annotations with model expander
+- create separate annotations for facet directory expander
+- merge streaming annotations and helper annotations with helper
+  expander
+- merge inclusion directive annotations with inclusion expander and
+  possibly get rid of factory
+- merge aspect annotations with aspect expander
+- merge opaque annotations with opaque annotations expander and move
+  all other opaque classes into formattables
+- delete annotations namespace.
 
 *** STARTED Link profiles to stereotypes                              :story:
 
