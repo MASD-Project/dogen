@@ -40,7 +40,7 @@
 #include "dogen/yarn.dia/types/initializer.hpp"
 #include "dogen/yarn.dia/types/transformer.hpp"
 #include "dogen/yarn.dia/types/object_types.hpp"
-#include "dogen/yarn.dia/types/bulding_error.hpp"
+#include "dogen/yarn.dia/types/building_error.hpp"
 #include "dogen/yarn.dia/types/graphing_error.hpp"
 #include "dogen/yarn.dia/types/profiled_object.hpp"
 #include "dogen/yarn.dia/types/object_processor.hpp"

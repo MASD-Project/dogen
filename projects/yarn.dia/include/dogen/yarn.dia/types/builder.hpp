@@ -29,7 +29,7 @@
 #include <string>
 #include <unordered_map>
 #include "dogen/yarn/types/name.hpp"
-#include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn.dia/types/transformer.hpp"
 #include "dogen/yarn.dia/types/profiled_object.hpp"
 
@@ -38,26 +38,35 @@ namespace yarn {
 namespace dia {
 
 class builder {
-/*public:
-    builder(transformer& transformer, const std::unordered_map<
+public:
+    builder(const std::string& model_name, const std::string& external_modules,
+        const bool is_target, const dynamic::workflow& w,
+        transformer& transformer, const std::unordered_map<
         std::string, std::list<std::string>>& child_id_to_parent_ids);
 
 private:
-    void update_documentation(const processed_object& o) const;
+    yarn::module create_module_for_model(const yarn::name& n,
+        const yarn::origin_types ot) const;
 
-private:
+    yarn::intermediate_model initialise_model(const std::string& model_name,
+        const std::string& external_modules, bool is_target) const;
 
+    yarn::module& module_for_name(const yarn::name& n);
+    yarn::module& module_for_id(const std::string& id);
+
+    void update_documentation(const processed_object& o);
 
 public:
     void add(const profiled_object& o);
-    yarn::model build();
+    yarn::intermediate_model build();
 
 private:
     const std::unordered_map<std::string,
                              std::list<std::string>>& child_id_to_parent_ids_;
+    const dynamic::workflow& dynamic_workflow_;
     transformer& transformer_;
     std::unordered_map<std::string, yarn::name> id_to_name_;
-    yarn::model model_;*/
+    yarn::intermediate_model model_;
 };
 
 } } }

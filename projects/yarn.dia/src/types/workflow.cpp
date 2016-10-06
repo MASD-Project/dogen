@@ -113,14 +113,16 @@ generate_graph_activity(const std::list<profiled_object>& pos) {
     return g.graph();
 }
 
-void workflow::graph_to_context_activity(const graph_type& g) {
-    transformer_ = std::unique_ptr<transformer>(
-        new transformer(dynamic_workflow_, context_));
-    auto lambda([&](const profiled_object& o) {
-            transformer_->transform(o.object(), o.profile());
-        });
-    visitor v(lambda);
+yarn::intermediate_model workflow::graph_to_context_activity(
+    const std::string& model_name, const std::string& external_modules,
+    const bool is_target, const graph_type& g) {
+    auto t = std::make_unique<transformer>(dynamic_workflow_, context_);
+    auto b = std::make_unique<builder>(model_name, external_modules,
+        is_target, dynamic_workflow_, *t, context_.child_id_to_parent_ids());
+
+    visitor v(*b);
     boost::depth_first_search(g, boost::visitor(v));
+    return b->build();
 }
 
 yarn::intermediate_model workflow::execute(const dogen::dia::diagram& d,
@@ -132,10 +134,12 @@ yarn::intermediate_model workflow::execute(const dogen::dia::diagram& d,
     validate_profiled_objects(reduced);
 
     initialise_context_activity(model_name, external_modules, is_target);
-    graph_to_context_activity(generate_graph_activity(reduced));
+    const auto g(generate_graph_activity(reduced));
+    const auto r(graph_to_context_activity(
+            model_name, external_modules, is_target, g));
 
-    BOOST_LOG_SEV(lg, debug) << "Final model: " << context_.model();
-    return context_.model();
+    BOOST_LOG_SEV(lg, debug) << "Final model: " << r;
+    return r;
 }
 
 } } }

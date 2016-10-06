@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_DIA_TYPES_BULDING_ERROR_HPP
-#define DOGEN_YARN_DIA_TYPES_BULDING_ERROR_HPP
+#ifndef DOGEN_YARN_DIA_TYPES_BUILDING_ERROR_HPP
+#define DOGEN_YARN_DIA_TYPES_BUILDING_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -32,13 +32,13 @@ namespace dogen {
 namespace yarn {
 namespace dia {
 
-class bulding_error : public virtual std::exception, public virtual boost::exception {
+class building_error : public virtual std::exception, public virtual boost::exception {
 public:
-    bulding_error() = default;
-    ~bulding_error() noexcept = default;
+    building_error() = default;
+    ~building_error() noexcept = default;
 
 public:
-    bulding_error(const std::string& message) : message_(message) { }
+    building_error(const std::string& message) : message_(message) { }
 
 public:
     const char* what() const noexcept { return(message_.c_str()); }

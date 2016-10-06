@@ -29,6 +29,7 @@
 #include <functional>
 #include <boost/graph/depth_first_search.hpp>
 #include "dogen/yarn.dia/types/grapher.hpp"
+#include "dogen/yarn.dia/types/builder.hpp"
 #include "dogen/yarn.dia/types/profiled_object.hpp"
 
 namespace dogen {
@@ -43,21 +44,18 @@ public:
     visitor(visitor&&) = default;
 
 public:
-    typedef std::function<void(const profiled_object&)> function_type;
-
-public:
-    explicit visitor(const function_type& function);
+    explicit visitor(builder& builder);
 
 public:
     template<typename Vertex, typename Graph>
     void finish_vertex(const Vertex& u, const Graph& g) {
-        const auto o(g[u]);
+        const auto& o(g[u]);
         if (o.object().id() != grapher::root_id())
-            function_(std::cref(o));
+            builder_.add(o); // std::cref(
     }
 
 private:
-    function_type function_;
+    builder& builder_;
 };
 
 } } }

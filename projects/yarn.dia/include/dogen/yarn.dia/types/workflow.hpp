@@ -32,8 +32,8 @@
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn.dia/types/context.hpp"
 #include "dogen/yarn.dia/types/profiler.hpp"
+#include "dogen/yarn.dia/types/builder.hpp"
 #include "dogen/yarn.dia/types/validator.hpp"
-#include "dogen/yarn.dia/types/transformer.hpp"
 #include "dogen/yarn.dia/types/grapher.hpp"
 
 namespace dogen {
@@ -81,7 +81,9 @@ private:
      * @brief Transforms the entire graph of processed objects into a
      * Yarn model.
      */
-    void graph_to_context_activity(const graph_type& g);
+    yarn::intermediate_model graph_to_context_activity(
+        const std::string& model_name, const std::string& external_modules,
+        const bool is_target, const graph_type& g);
 
 public:
     yarn::intermediate_model execute(const dogen::dia::diagram& diagram,
