@@ -51,8 +51,9 @@ std::ostream& operator<<(std::ostream& s, const local_enablement_configuration& 
 
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::local_enablement_configuration\"" << ", "
-      << "\"enabled\": " << v.enabled() << ", "
-      << "\"supported\": " << v.supported()
+      << "\"facet_enabled\": " << v.facet_enabled() << ", "
+      << "\"formatter_enabled\": " << v.formatter_enabled() << ", "
+      << "\"facet_supported\": " << v.facet_supported()
       << " }";
     return(s);
 }

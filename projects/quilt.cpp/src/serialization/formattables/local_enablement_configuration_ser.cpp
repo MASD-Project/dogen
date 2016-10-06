@@ -37,16 +37,18 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::quilt::cpp::formattables::local_enablement_configuration& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("enabled", v.enabled_);
-    ar << make_nvp("supported", v.supported_);
+    ar << make_nvp("facet_enabled", v.facet_enabled_);
+    ar << make_nvp("formatter_enabled", v.formatter_enabled_);
+    ar << make_nvp("facet_supported", v.facet_supported_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
     dogen::quilt::cpp::formattables::local_enablement_configuration& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("enabled", v.enabled_);
-    ar >> make_nvp("supported", v.supported_);
+    ar >> make_nvp("facet_enabled", v.facet_enabled_);
+    ar >> make_nvp("formatter_enabled", v.formatter_enabled_);
+    ar >> make_nvp("facet_supported", v.facet_supported_);
 }
 
 } }

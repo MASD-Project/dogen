@@ -74,8 +74,9 @@ private:
 
 private:
     struct local_field_definitions {
-        dynamic::field_definition enabled;
-        dynamic::field_definition supported;
+        dynamic::field_definition facet_enabled;
+        dynamic::field_definition formatter_enabled;
+        dynamic::field_definition facet_supported;
     };
 
     friend std::ostream& operator<<(std::ostream& s,

@@ -48,8 +48,9 @@ namespace formattables {
 std::size_t local_enablement_configuration_hasher::hash(const local_enablement_configuration& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_boost_optional_bool(v.enabled()));
-    combine(seed, v.supported());
+    combine(seed, hash_boost_optional_bool(v.facet_enabled()));
+    combine(seed, hash_boost_optional_bool(v.formatter_enabled()));
+    combine(seed, v.facet_supported());
 
     return seed;
 }

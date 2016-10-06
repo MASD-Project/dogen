@@ -44,8 +44,9 @@ local_enablement_configuration_generator::local_enablement_configuration_generat
 
 void local_enablement_configuration_generator::
 populate(const unsigned int position, result_type& v) {
-    v.enabled(create_boost_optional_bool(position + 0));
-    v.supported(create_bool(position + 1));
+    v.facet_enabled(create_boost_optional_bool(position + 0));
+    v.formatter_enabled(create_boost_optional_bool(position + 1));
+    v.facet_supported(create_bool(position + 2));
 }
 
 local_enablement_configuration_generator::result_type

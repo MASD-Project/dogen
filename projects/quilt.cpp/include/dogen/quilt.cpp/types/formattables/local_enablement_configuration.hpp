@@ -47,8 +47,9 @@ public:
 
 public:
     local_enablement_configuration(
-        const boost::optional<bool>& enabled,
-        const bool supported);
+        const boost::optional<bool>& facet_enabled,
+        const boost::optional<bool>& formatter_enabled,
+        const bool facet_supported);
 
 private:
     template<typename Archive>
@@ -58,13 +59,18 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::formattables::local_enablement_configuration& v, unsigned int version);
 
 public:
-    const boost::optional<bool>& enabled() const;
-    boost::optional<bool>& enabled();
-    void enabled(const boost::optional<bool>& v);
-    void enabled(const boost::optional<bool>&& v);
+    const boost::optional<bool>& facet_enabled() const;
+    boost::optional<bool>& facet_enabled();
+    void facet_enabled(const boost::optional<bool>& v);
+    void facet_enabled(const boost::optional<bool>&& v);
 
-    bool supported() const;
-    void supported(const bool v);
+    const boost::optional<bool>& formatter_enabled() const;
+    boost::optional<bool>& formatter_enabled();
+    void formatter_enabled(const boost::optional<bool>& v);
+    void formatter_enabled(const boost::optional<bool>&& v);
+
+    bool facet_supported() const;
+    void facet_supported(const bool v);
 
 public:
     bool operator==(const local_enablement_configuration& rhs) const;
@@ -77,8 +83,9 @@ public:
     local_enablement_configuration& operator=(local_enablement_configuration other);
 
 private:
-    boost::optional<bool> enabled_;
-    bool supported_;
+    boost::optional<bool> facet_enabled_;
+    boost::optional<bool> formatter_enabled_;
+    bool facet_supported_;
 };
 
 } } } }

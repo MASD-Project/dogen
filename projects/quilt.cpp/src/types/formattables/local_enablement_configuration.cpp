@@ -26,27 +26,32 @@ namespace cpp {
 namespace formattables {
 
 local_enablement_configuration::local_enablement_configuration()
-    : supported_(static_cast<bool>(0)) { }
+    : facet_supported_(static_cast<bool>(0)) { }
 
 local_enablement_configuration::local_enablement_configuration(local_enablement_configuration&& rhs)
-    : enabled_(std::move(rhs.enabled_)),
-      supported_(std::move(rhs.supported_)) { }
+    : facet_enabled_(std::move(rhs.facet_enabled_)),
+      formatter_enabled_(std::move(rhs.formatter_enabled_)),
+      facet_supported_(std::move(rhs.facet_supported_)) { }
 
 local_enablement_configuration::local_enablement_configuration(
-    const boost::optional<bool>& enabled,
-    const bool supported)
-    : enabled_(enabled),
-      supported_(supported) { }
+    const boost::optional<bool>& facet_enabled,
+    const boost::optional<bool>& formatter_enabled,
+    const bool facet_supported)
+    : facet_enabled_(facet_enabled),
+      formatter_enabled_(formatter_enabled),
+      facet_supported_(facet_supported) { }
 
 void local_enablement_configuration::swap(local_enablement_configuration& other) noexcept {
     using std::swap;
-    swap(enabled_, other.enabled_);
-    swap(supported_, other.supported_);
+    swap(facet_enabled_, other.facet_enabled_);
+    swap(formatter_enabled_, other.formatter_enabled_);
+    swap(facet_supported_, other.facet_supported_);
 }
 
 bool local_enablement_configuration::operator==(const local_enablement_configuration& rhs) const {
-    return enabled_ == rhs.enabled_ &&
-        supported_ == rhs.supported_;
+    return facet_enabled_ == rhs.facet_enabled_ &&
+        formatter_enabled_ == rhs.formatter_enabled_ &&
+        facet_supported_ == rhs.facet_supported_;
 }
 
 local_enablement_configuration& local_enablement_configuration::operator=(local_enablement_configuration other) {
@@ -55,28 +60,44 @@ local_enablement_configuration& local_enablement_configuration::operator=(local_
     return *this;
 }
 
-const boost::optional<bool>& local_enablement_configuration::enabled() const {
-    return enabled_;
+const boost::optional<bool>& local_enablement_configuration::facet_enabled() const {
+    return facet_enabled_;
 }
 
-boost::optional<bool>& local_enablement_configuration::enabled() {
-    return enabled_;
+boost::optional<bool>& local_enablement_configuration::facet_enabled() {
+    return facet_enabled_;
 }
 
-void local_enablement_configuration::enabled(const boost::optional<bool>& v) {
-    enabled_ = v;
+void local_enablement_configuration::facet_enabled(const boost::optional<bool>& v) {
+    facet_enabled_ = v;
 }
 
-void local_enablement_configuration::enabled(const boost::optional<bool>&& v) {
-    enabled_ = std::move(v);
+void local_enablement_configuration::facet_enabled(const boost::optional<bool>&& v) {
+    facet_enabled_ = std::move(v);
 }
 
-bool local_enablement_configuration::supported() const {
-    return supported_;
+const boost::optional<bool>& local_enablement_configuration::formatter_enabled() const {
+    return formatter_enabled_;
 }
 
-void local_enablement_configuration::supported(const bool v) {
-    supported_ = v;
+boost::optional<bool>& local_enablement_configuration::formatter_enabled() {
+    return formatter_enabled_;
+}
+
+void local_enablement_configuration::formatter_enabled(const boost::optional<bool>& v) {
+    formatter_enabled_ = v;
+}
+
+void local_enablement_configuration::formatter_enabled(const boost::optional<bool>&& v) {
+    formatter_enabled_ = std::move(v);
+}
+
+bool local_enablement_configuration::facet_supported() const {
+    return facet_supported_;
+}
+
+void local_enablement_configuration::facet_supported(const bool v) {
+    facet_supported_ = v;
 }
 
 } } } }

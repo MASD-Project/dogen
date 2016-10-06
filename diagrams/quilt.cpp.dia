@@ -24406,16 +24406,16 @@ and element.#</dia:string>
         <dia:point val="48,63"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="47.95,62.95;62.8775,66.65"/>
+        <dia:rectangle val="47.95,62.95;64.335,67.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="48,63"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="14.827500000000001"/>
+        <dia:real val="16.285"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3.6000000000000001"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#local_enablement_configuration#</dia:string>
@@ -24507,7 +24507,7 @@ and element.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#enabled#</dia:string>
+            <dia:string>#facet_enabled#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#boost::optional&lt;bool&gt;#</dia:string>
@@ -24530,7 +24530,30 @@ and element.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#supported#</dia:string>
+            <dia:string>#formatter_enabled#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#boost::optional&lt;bool&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#facet_supported#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#bool#</dia:string>
@@ -24672,7 +24695,7 @@ and element.#</dia:string>
         <dia:point val="44.495,82.9512"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="43.745,66.55;55.6138,83.7512"/>
+        <dia:rectangle val="43.745,67.35;56.3425,83.7512"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -24680,8 +24703,8 @@ and element.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="44.495,82.9512"/>
         <dia:point val="44.495,76.5833"/>
-        <dia:point val="55.4138,76.5833"/>
-        <dia:point val="55.4138,66.6"/>
+        <dia:point val="56.1425,76.5833"/>
+        <dia:point val="56.1425,67.4"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
