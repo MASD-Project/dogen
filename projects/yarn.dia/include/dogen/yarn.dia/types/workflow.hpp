@@ -30,7 +30,6 @@
 #include "dogen/dia/types/diagram_fwd.hpp"
 #include "dogen/dynamic/types/workflow.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
-#include "dogen/yarn.dia/types/context.hpp"
 #include "dogen/yarn.dia/types/profiler.hpp"
 #include "dogen/yarn.dia/types/builder.hpp"
 #include "dogen/yarn.dia/types/validator.hpp"
@@ -67,23 +66,23 @@ private:
 
 private:
     /**
-     * @brief Reset context and set it up with arguments supplied.
-     */
-    void initialise_context_activity(const std::string& model_name,
-        const std::string& external_modules, const bool is_target);
-
-    /**
      * @brief Setup the DAG of processed objects.
      */
-    graph_type generate_graph_activity(const std::list<profiled_object>& pos);
+    std::pair<graph_type,
+              const std::unordered_map<std::string, std::list<std::string>>
+              >
+     generate_graph(const std::list<profiled_object>& pos);
+
+    builder create_builder(const std::string& model_name,
+        const std::string& external_modules, const bool is_target,
+        const std::unordered_map<std::string, std::list<std::string>>&
+        child_id_to_parent_ids) const;
 
     /**
      * @brief Transforms the entire graph of processed objects into a
      * Yarn model.
      */
-    yarn::intermediate_model graph_to_context_activity(
-        const std::string& model_name, const std::string& external_modules,
-        const bool is_target, const graph_type& g);
+    yarn::intermediate_model generate_model(builder& b, const graph_type& g);
 
 public:
     yarn::intermediate_model execute(const dogen::dia::diagram& diagram,

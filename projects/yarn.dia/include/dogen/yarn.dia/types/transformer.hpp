@@ -30,8 +30,13 @@
 #include "dogen/dia/types/object.hpp"
 #include "dogen/dynamic/types/workflow.hpp"
 #include "dogen/dynamic/types/scope_types.hpp"
+#include "dogen/yarn/types/enumeration.hpp"
+#include "dogen/yarn/types/exception.hpp"
+#include "dogen/yarn/types/concept.hpp"
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/yarn/types/object.hpp"
+#include "dogen/yarn/types/module.hpp"
+#include "dogen/dia/types/attribute.hpp"
 #include "dogen/yarn.dia/types/processed_object.hpp"
 #include "dogen/yarn.dia/types/processed_attribute.hpp"
 #include "dogen/yarn.dia/types/context.hpp"
@@ -57,14 +62,7 @@ public:
      *
      * @pre model in context must be populated.
      */
-    transformer(const dynamic::workflow& w, context& c);
-
-private:
-    /**
-     * @brief Ensure that the processed object implies an yarn type
-     * which is supported by the transformer.
-     */
-    void require_is_transformable(const processed_object& o) const;
+    transformer(const dynamic::workflow& w, const context& c);
 
 private:
     /**
@@ -121,7 +119,7 @@ private:
      *
      * @pre module must exist in context.
      */
-    yarn::module& module_for_name(const yarn::name& n);
+    const yarn::module& module_for_name(const yarn::name& n) const;
 
     /**
      * @brief Returns the module associated with a dia package id.
@@ -129,7 +127,7 @@ private:
      * @pre pkg_id must be a valid package ID in the diagram.
      * @pre corresponding module must have already been generated.
      */
-    yarn::module& module_for_id(const std::string& id);
+    const yarn::module& module_for_id(const std::string& id) const;
 
     /**
      * @brief Update the yarn element using the processed object and
@@ -180,14 +178,6 @@ public:
     yarn::module to_module(const processed_object& o, const profile& p);
 
     /**
-     * @brief Converts a dia object of type UML note into
-     * documentation, if the appropriate dogen tags are found.
-     *
-     * @param o Dia object which contains a UML note.
-     */
-    void from_note(const processed_object& o);
-
-    /**
      * @brief Converts a dia object with a stereotype of concept
      * into a yarn concept.
      *
@@ -196,29 +186,7 @@ public:
     yarn::concept to_concept(const processed_object& o, const profile& p);
 
 private:
-    /**
-     * @brief Dispatches the objects to the correct transformation.
-     *
-     * @pre Object must be transformable.
-     */
-    void dispatch(const processed_object& o, const profile& p);
-
-public:
-    /**
-     * @brief Checks if the processed object implies an yarn type which
-     * is supported by the transformer.
-     */
-    bool is_transformable(const processed_object& o) const;
-
-    /**
-     * @brief Transform a dia object.
-     *
-     * @pre Object must be transformable.
-     */
-    void transform(const processed_object& o, const profile& p);
-
-private:
-    context& context_;
+    const context& context_;
     const dynamic::workflow& dynamic_workflow_;
 };
 

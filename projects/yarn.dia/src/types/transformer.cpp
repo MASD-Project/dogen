@@ -24,11 +24,8 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn/types/module.hpp"
-#include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/dia/types/composite.hpp"
-#include "dogen/dia/types/attribute.hpp"
 #include "dogen/yarn.dia/types/traits.hpp"
 #include "dogen/yarn.dia/types/transformation_error.hpp"
 #include "dogen/yarn.dia/io/object_types_io.hpp"
@@ -68,19 +65,10 @@ namespace dogen {
 namespace yarn {
 namespace dia {
 
-transformer::transformer(const dynamic::workflow& w, context& c)
+transformer::transformer(const dynamic::workflow& w, const context& c)
     : context_(c), dynamic_workflow_(w) {
 
     BOOST_LOG_SEV(lg, debug) << "Initial context: " << context_;
-}
-
-void transformer::require_is_transformable(const processed_object& po) const {
-    if (!is_transformable(po)) {
-        const auto type(boost::lexical_cast<std::string>(po.object_type()));
-        BOOST_LOG_SEV(lg, error) << object_has_invalid_type << type;
-        BOOST_THROW_EXCEPTION(
-            transformation_error(object_has_invalid_type + type));
-    }
 }
 
 yarn::generation_types transformer::generation_type(const profile& p) const {
@@ -116,7 +104,7 @@ yarn::name transformer::to_name(const std::string& n,
     return f.build_element_in_module(module_n, n);
 }
 
-yarn::module& transformer::module_for_name(const yarn::name& n) {
+const yarn::module& transformer::module_for_name(const yarn::name& n) const {
     auto i(context_.model().modules().find(n.id()));
     if (i == context_.model().modules().end()) {
         const auto sn(n.simple());
@@ -127,7 +115,7 @@ yarn::module& transformer::module_for_name(const yarn::name& n) {
     return i->second;
 }
 
-yarn::module& transformer::module_for_id(const std::string& id) {
+const yarn::module& transformer::module_for_id(const std::string& id) const {
     if (id.empty()) {
         BOOST_LOG_SEV(lg, error) << empty_package_id;
         BOOST_THROW_EXCEPTION(transformation_error(empty_package_id));
@@ -202,7 +190,6 @@ void transformer::update_element(const processed_object& o, const profile& p,
         e.name(to_name(o.name()));
     }
 
-    context_.id_to_name().insert(std::make_pair(o.id(), e.name()));
     e.documentation(o.comment().documentation());
 
     const auto& kvps(o.comment().key_value_pairs());
@@ -270,12 +257,8 @@ transformer::to_object(const processed_object& po, const profile& p,
                                  << o.name().id();
     }
 
-    context_.id_to_name().insert(std::make_pair(po.id(), o.name()));
     o.is_immutable(p.is_immutable());
-
     o.object_type(ot);
-    auto& objects(context_.model().objects());
-    objects.insert(std::make_pair(o.name().id(), o));
     return o;
 }
 
@@ -285,9 +268,6 @@ transformer::to_exception(const processed_object& o, const profile& p) {
 
     yarn::exception e;
     update_element(o, p, e);
-
-    auto& exceptions(context_.model().exceptions());
-    exceptions.insert(std::make_pair(e.name().id(), e));
     return e;
 }
 
@@ -320,8 +300,6 @@ transformer::to_enumeration(const processed_object& o, const profile& p) {
         e.enumerators().push_back(enumerator);
         enumerator_names.insert(enumerator.name());
     }
-    auto& enumerations(context_.model().enumerations());
-    enumerations.insert(std::make_pair(e.name().id(), e));
     return e;
 }
 
@@ -331,39 +309,7 @@ transformer::to_module(const processed_object& o, const profile& p) {
 
     yarn::module m;
     update_element(o, p, m);
-    auto& modules(context_.model().modules());
-    modules.insert(std::make_pair(m.name().id(), m));
     return m;
-}
-
-void transformer::from_note(const processed_object& o) {
-    BOOST_LOG_SEV(lg, debug) << "Object is a note: " << o.id()
-                             << ". Note text: '"
-                             << o.comment().original_content() << "'";
-
-    if (o.comment().original_content().empty() ||
-        !o.comment().applicable_to_parent_object())
-        return;
-
-    const auto& documentation(o.comment().documentation());
-    const auto& kvps(o.comment().key_value_pairs());
-    const auto& model(context_.model());
-
-    using dynamic::scope_types;
-    if (o.child_node_id().empty()) {
-        auto& module(module_for_name(model.name()));
-        module.documentation(documentation);
-
-        const auto scope(scope_types::root_module);
-        module.extensions(dynamic_workflow_.execute(scope, kvps));
-        return;
-    }
-
-    yarn::module& module(module_for_id(o.child_node_id()));
-    module.documentation(documentation);
-
-    const auto scope(scope_types::any_module);
-    module.extensions(dynamic_workflow_.execute(scope, kvps));
 }
 
 yarn::concept
@@ -399,45 +345,7 @@ transformer::to_concept(const processed_object& o, const profile& p) {
         }
     }
 
-    auto& concepts(context_.model().concepts());
-    concepts.insert(std::make_pair(c.name().id(), c));
     return c;
-}
-
-bool transformer::is_transformable(const processed_object& o) const {
-    const auto ot(o.object_type());
-    return
-        ot == object_types::uml_large_package ||
-        ot == object_types::uml_generalization ||
-        ot == object_types::uml_class ||
-        ot == object_types::uml_note;
-}
-
-void transformer::dispatch(const processed_object& o, const profile& p) {
-    if (p.is_uml_large_package())
-        to_module(o, p);
-    else if (p.is_uml_note())
-        from_note(o);
-    else if (p.is_enumeration())
-        to_enumeration(o, p);
-    else if (p.is_concept())
-        to_concept(o, p);
-    else if (p.is_exception())
-        to_exception(o, p);
-    else if (p.is_service())
-        to_object(o, p, yarn::object_types::user_defined_service);
-    else
-        to_object(o, p, yarn::object_types::user_defined_value_object);
-}
-
-void transformer::transform(const processed_object& o, const profile& p) {
-    BOOST_LOG_SEV(lg, debug) << "Starting to transform: " << o.id();
-    BOOST_LOG_SEV(lg, debug) << "Object contents: " << o;
-
-    require_is_transformable(o);
-    dispatch(o, p);
-
-    BOOST_LOG_SEV(lg, debug) << "Transformed: " << o.id();
 }
 
 } } }

@@ -30,6 +30,7 @@
 #include <unordered_map>
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn.dia/types/context.hpp"
 #include "dogen/yarn.dia/types/transformer.hpp"
 #include "dogen/yarn.dia/types/profiled_object.hpp"
 
@@ -41,8 +42,8 @@ class builder {
 public:
     builder(const std::string& model_name, const std::string& external_modules,
         const bool is_target, const dynamic::workflow& w,
-        transformer& transformer, const std::unordered_map<
-        std::string, std::list<std::string>>& child_id_to_parent_ids);
+        const std::unordered_map<std::string, std::list<std::string>>&
+        child_id_to_parent_ids);
 
 private:
     yarn::module create_module_for_model(const yarn::name& n,
@@ -61,12 +62,8 @@ public:
     yarn::intermediate_model build();
 
 private:
-    const std::unordered_map<std::string,
-                             std::list<std::string>>& child_id_to_parent_ids_;
     const dynamic::workflow& dynamic_workflow_;
-    transformer& transformer_;
-    std::unordered_map<std::string, yarn::name> id_to_name_;
-    yarn::intermediate_model model_;
+    context context_;
 };
 
 } } }

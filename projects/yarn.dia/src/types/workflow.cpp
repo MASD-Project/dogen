@@ -77,52 +77,33 @@ yarn::module workflow::create_module_for_model(const yarn::name& n,
     return r;
 }
 
-void workflow::initialise_context_activity(const std::string& model_name,
-    const std::string& external_modules, bool is_target) {
-
-    /*
-     * Reset the context in case we've been called several times.
-     */
-    context_ = context();
-
-    auto& m(context_.model());
-    yarn::name_factory nf;
-    m.name(nf.build_model_name(model_name, external_modules));
-    BOOST_LOG_SEV(lg, debug) << "Model: " << m.name().id();
-
-    /*
-     * If we are not a target model, nothing else can be said about it
-     * at this point in time.
-     */
-    const auto tg(origin_types::target);
-    const auto nyd(origin_types::not_yet_determined);
-    const auto ot(is_target ? tg : nyd);
-
-    m.origin_type(ot);
-    const auto mm(create_module_for_model(m.name(), ot));
-    m.modules().insert(std::make_pair(mm.name().id(), mm));
-}
-
-graph_type workflow::
-generate_graph_activity(const std::list<profiled_object>& pos) {
+std::pair<graph_type,
+          const std::unordered_map<std::string, std::list<std::string>>
+          >
+workflow::generate_graph(const std::list<profiled_object>& pos) {
     grapher g;
-    object_processor op;
     g.add(pos);
     g.generate();
-    context_.child_id_to_parent_ids(g.child_id_to_parent_ids());
-    return g.graph();
+    const auto r(std::make_pair(g.graph(), g.child_id_to_parent_ids()));
+    return r;
 }
 
-yarn::intermediate_model workflow::graph_to_context_activity(
-    const std::string& model_name, const std::string& external_modules,
-    const bool is_target, const graph_type& g) {
-    auto t = std::make_unique<transformer>(dynamic_workflow_, context_);
-    auto b = std::make_unique<builder>(model_name, external_modules,
-        is_target, dynamic_workflow_, *t, context_.child_id_to_parent_ids());
+builder workflow::create_builder(const std::string& model_name,
+    const std::string& external_modules, const bool is_target,
+    const std::unordered_map<std::string, std::list<std::string>>&
+    child_id_to_parent_ids) const {
 
-    visitor v(*b);
+    builder b(model_name, external_modules, is_target,
+        dynamic_workflow_, child_id_to_parent_ids);
+    return b;
+}
+
+yarn::intermediate_model
+workflow::generate_model(builder& b, const graph_type& g) {
+
+    visitor v(b);
     boost::depth_first_search(g, boost::visitor(v));
-    return b->build();
+    return b.build();
 }
 
 yarn::intermediate_model workflow::execute(const dogen::dia::diagram& d,
@@ -132,11 +113,11 @@ yarn::intermediate_model workflow::execute(const dogen::dia::diagram& d,
     const auto original(create_profiled_objects(d));
     const auto reduced(reduce_profiled_objects(original));
     validate_profiled_objects(reduced);
-
-    initialise_context_activity(model_name, external_modules, is_target);
-    const auto g(generate_graph_activity(reduced));
-    const auto r(graph_to_context_activity(
-            model_name, external_modules, is_target, g));
+    const auto pair(generate_graph(reduced));
+    const auto& g(pair.first);
+    const auto& child_id_to_parent_ids(pair.second);
+    auto b(create_builder(model_name, external_modules, is_target, child_id_to_parent_ids));
+    const auto r(generate_model(b, g));
 
     BOOST_LOG_SEV(lg, debug) << "Final model: " << r;
     return r;
