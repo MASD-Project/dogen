@@ -2113,8 +2113,9 @@ models:
   names.
 - type names, model names, etc must not contain spaces or other
   invalid characters. They should also not be a keyword on the target
-  language (e.g. =if=, etc.). We should use a identifier parser for
-  name validation.
+  language (e.g. =if=, =default=, etc.). We should use a identifier
+  parser for name validation. We should have a data file that lists
+  keywords by language.
 - the name of all keys in objects, etc must be part of the current
   model.
 - the qnames of all types as keys are consistent with the values.
