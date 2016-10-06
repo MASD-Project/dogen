@@ -1585,33 +1585,6 @@ workflow does in each model.
 We should only implement this story when all of the major refactoring
 has been done.
 
-*** Refactor =yarn.dia= transformer                                   :story:
-
-- rename context to repository and make it const for the
-  transformer. The only reason why we are mutating it now is because
-  of the =id_to_name= container. It must be possible to update this
-  container from outside the transformer.
-- transformer should just return a list of elements for a given
-  processed object; we should then dispatch the list and insert the
-  elements into the appropriate containers.
-- in workflow =transformation_activity= we should move the logic of
-  defaulting to value object into the profiler.
-- the transformer should ensure only zero or one notes can exist for a
-  module.
-- the setting of the documentation should be done as a separate step
-  in transformation - i.e. look for =dia.comment= field, if set, use
-  its value to populate documentation. This could be done to all types
-  for completeness.
-- the workflow should not be creating transformers half-way
-  through. They should be as stateless as possible.
-- tests need to be cleaned up - we need to check for text of the
-  exception being thrown.
-
-Actually this is not quite so straight forward. We could move the
-logic of dispatching outside of transformer, but we have to bear in
-mind we are traversing a graph, so this would have to be done in the
-graph itself - not ideal. This story needs more thinking.
-
 *** Update comments in C++ model                                      :story:
 
 We have a very large blurb in this model that is rather old, and

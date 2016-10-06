@@ -7,62 +7,63 @@
 
 - finish refactoring quilt.cpp.
 - tidy-up services, origin types and generation types.
-- start work on wale templates.
 
 * Stories
 
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-06 Thu 11:47]
+#+CAPTION: Clock summary at [2016-10-06 Thu 17:06]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *72:04* |       |       | 100.0 |
+| *Total time*                                                                | *75:07* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 72:04   |       |       | 100.0 |
-| Active                                                                      |         | 72:04 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  5:30 |   7.6 |
+| Stories                                                                     | 75:07   |       |       | 100.0 |
+| Active                                                                      |         | 75:07 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  5:30 |   7.3 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:07 |   0.2 |
-| COMPLETED Generation of formattable is incorrect                            |         |       |  2:30 |   3.5 |
-| COMPLETED Visitor includes are incorrect                                    |         |       |  0:20 |   0.5 |
-| COMPLETED Add includer to quilt.cpp                                         |         |       |  1:46 |   2.5 |
+| COMPLETED Generation of formattable is incorrect                            |         |       |  2:30 |   3.3 |
+| COMPLETED Visitor includes are incorrect                                    |         |       |  0:20 |   0.4 |
+| COMPLETED Add includer to quilt.cpp                                         |         |       |  1:46 |   2.4 |
 | COMPLETED Add reducer to quilt.cpp                                          |         |       |  0:22 |   0.5 |
 | COMPLETED Add new index to formtter container                               |         |       |  0:19 |   0.4 |
 | COMPLETED Add path expander to quilt.cpp                                    |         |       |  0:49 |   1.1 |
 | COMPLETED Add guard expander to quilt.cpp                                   |         |       |  0:27 |   0.6 |
-| COMPLETED Investigate borked travis build                                   |         |       |  0:37 |   0.9 |
+| COMPLETED Investigate borked travis build                                   |         |       |  0:37 |   0.8 |
 | COMPLETED Add decoration expander to quilt.cpp                              |         |       |  0:23 |   0.5 |
-| COMPLETED Add aspect expander to quilt.cpp                                  |         |       |  1:26 |   2.0 |
+| COMPLETED Add aspect expander to quilt.cpp                                  |         |       |  1:26 |   1.9 |
 | COMPLETED Run tests that are passing on windows                             |         |       |  0:10 |   0.2 |
-| COMPLETED Add helper expander to quilt.cpp                                  |         |       |  1:26 |   2.0 |
+| COMPLETED Add helper expander to quilt.cpp                                  |         |       |  1:26 |   1.9 |
 | COMPLETED Merge pre and post workflows                                      |         |       |  0:16 |   0.4 |
 | COMPLETED Fix bug in aspect and helper generation                           |         |       |  0:15 |   0.3 |
-| COMPLETED Investigate element annotation support                            |         |       |  2:05 |   2.9 |
+| COMPLETED Investigate element annotation support                            |         |       |  2:05 |   2.8 |
 | CANCELLED Add streaming settings expander                                   |         |       |  0:36 |   0.8 |
-| COMPLETED Create the formattables model                                     |         |       |  1:32 |   2.1 |
-| COMPLETED Hook formattables into formatters                                 |         |       |  3:58 |   5.5 |
-| COMPLETED Remove empty context                                              |         |       |  1:09 |   1.6 |
-| COMPLETED Review main classes in quilt.cpp                                  |         |       |  3:42 |   5.1 |
-| COMPLETED Clean up element segmentation                                     |         |       |  1:20 |   1.9 |
-| COMPLETED Get OSX build to compile code                                     |         |       |  7:05 |   9.8 |
-| COMPLETED Add a banner to readme                                            |         |       |  1:29 |   2.1 |
+| COMPLETED Create the formattables model                                     |         |       |  1:32 |   2.0 |
+| COMPLETED Hook formattables into formatters                                 |         |       |  3:58 |   5.3 |
+| COMPLETED Remove empty context                                              |         |       |  1:09 |   1.5 |
+| COMPLETED Review main classes in quilt.cpp                                  |         |       |  3:42 |   4.9 |
+| COMPLETED Clean up element segmentation                                     |         |       |  1:20 |   1.8 |
+| COMPLETED Get OSX build to compile code                                     |         |       |  7:05 |   9.4 |
+| COMPLETED Add a banner to readme                                            |         |       |  1:29 |   2.0 |
 | COMPLETED Remove formatter group                                            |         |       |  0:23 |   0.5 |
 | COMPLETED Add more types to =quilt::cpp= canned tests                       |         |       |  0:15 |   0.3 |
 | CANCELLED Remove formatter id                                               |         |       |  0:04 |   0.1 |
-| COMPLETED Analysis around terminology in formatting space                   |         |       |  3:24 |   4.7 |
+| COMPLETED Analysis around terminology in formatting space                   |         |       |  3:24 |   4.5 |
 | COMPLETED Remove =original_model_name=                                      |         |       |  0:16 |   0.4 |
-| COMPLETED Refactor code around model origination                            |         |       |  4:08 |   5.7 |
+| COMPLETED Refactor code around model origination                            |         |       |  4:08 |   5.5 |
 | COMPLETED Remove formatter level facet folders                              |         |       |  0:06 |   0.1 |
 | COMPLETED Consider removing the "fake" primitive formatters                 |         |       |  0:01 |   0.0 |
-| COMPLETED Expander refactor in =quilt.cpp=                                  |         |       |  3:03 |   4.2 |
-| COMPLETED Create the notion of a formatter alias                            |         |       |  3:15 |   4.5 |
+| COMPLETED Expander refactor in =quilt.cpp=                                  |         |       |  3:03 |   4.1 |
+| COMPLETED Create the notion of a formatter alias                            |         |       |  3:15 |   4.3 |
 | COMPLETED Remove enabled formatters from formatter configuration            |         |       |  0:22 |   0.5 |
-| COMPLETED Handle registration of services properly                          |         |       |  3:41 |   5.1 |
+| COMPLETED Handle registration of services properly                          |         |       |  3:41 |   4.9 |
 | COMPLETED Move stereotypes to element                                       |         |       |  0:21 |   0.5 |
 | COMPLETED Improve project banner                                            |         |       |  0:32 |   0.7 |
-| CANCELLED Add support for profiles                                          |         |       | 10:40 |  14.8 |
-| STARTED Rewrite profile support                                             |         |       |  1:26 |   2.0 |
+| CANCELLED Add support for profiles                                          |         |       | 10:40 |  14.2 |
+| STARTED Refactor =yarn.dia= transformer                                     |         |       |  2:43 |   3.6 |
+| STARTED Create a dynamic expander in yarn                                   |         |       |  0:20 |   0.4 |
+| STARTED Rewrite profile support                                             |         |       |  1:26 |   1.9 |
 | STARTED Generate formatter interfaces                                       |         |       |  0:28 |   0.6 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -1232,7 +1233,48 @@ Algorithm:
     formatter specific profile. If so, see if its enabled or not.
   - if nothing was found, get the default value of the meta-data.
 
-*** Create a dynamic expander in yarn                                 :story:
+*** STARTED Refactor =yarn.dia= transformer                           :story:
+    CLOCK: [2016-10-06 Thu 15:40]--[2016-10-06 Thu 17:06] =>  1:26
+    CLOCK: [2016-10-06 Thu 13:23]--[2016-10-06 Thu 14:40] =>  1:17
+
+Renames:
+
+- processed object => object
+- object processor => object factory
+- profiler => profile factory
+- processed comment => comment
+- processed attribute => attribute
+- comment processor => comment factory
+
+Tasks:
+
+- rename context to repository and make it const for the
+  transformer. The only reason why we are mutating it now is because
+  of the =id_to_name= container. It must be possible to update this
+  container from outside the transformer.
+- transformer should just return an element for a given processed
+  object; we should then dispatch the list and insert the elements
+  into the appropriate containers.
+- in workflow =transformation_activity= we should move the logic of
+  defaulting to value object into the profiler.
+- the transformer should ensure only zero or one notes can exist for a
+  module.
+- the setting of the documentation should be done as a separate step
+  in transformation - i.e. look for =dia.comment= field, if set, use
+  its value to populate documentation. This could be done to all types
+  for completeness.
+- the workflow should not be creating transformers half-way
+  through. They should be as stateless as possible.
+- tests need to be cleaned up - we need to check for text of the
+  exception being thrown.
+
+Actually this is not quite so straight forward. We could move the
+logic of dispatching outside of transformer, but we have to bear in
+mind we are traversing a graph, so this would have to be done in the
+graph itself - not ideal. This story needs more thinking.
+
+*** STARTED Create a dynamic expander in yarn                         :story:
+    CLOCK: [2016-10-06 Thu 13:03]--[2016-10-06 Thu 13:23] =>  0:20
 
 We need to move this work from the front end into yarn.
 
@@ -1428,6 +1470,10 @@ Further thoughts:
   instantiates stitch (probably within quilt) with the parameters and
   generates the file. Actually we probably can't have this in quilt
   because we still need formatter properties.
+
+*** Rename properties to attributes in opaque configuration           :story:
+
+This was missed in rename.
 
 *** Push stereotypes processing into yarn                             :story:
 
