@@ -18,29 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DYNAMIC_IO_ALL_IO_HPP
-#define DOGEN_DYNAMIC_IO_ALL_IO_HPP
+#ifndef DOGEN_DYNAMIC_SERIALIZATION_PROFILE_SER_HPP
+#define DOGEN_DYNAMIC_SERIALIZATION_PROFILE_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/dynamic/io/name_io.hpp"
-#include "dogen/dynamic/io/text_io.hpp"
-#include "dogen/dynamic/io/value_io.hpp"
-#include "dogen/dynamic/io/number_io.hpp"
-#include "dogen/dynamic/io/object_io.hpp"
-#include "dogen/dynamic/io/boolean_io.hpp"
-#include "dogen/dynamic/io/profile_io.hpp"
-#include "dogen/dynamic/io/repository_io.hpp"
-#include "dogen/dynamic/io/scope_types_io.hpp"
-#include "dogen/dynamic/io/value_types_io.hpp"
-#include "dogen/dynamic/io/field_instance_io.hpp"
-#include "dogen/dynamic/io/text_collection_io.hpp"
-#include "dogen/dynamic/io/field_definition_io.hpp"
-#include "dogen/dynamic/io/profile_repository_io.hpp"
-#include "dogen/dynamic/io/ownership_hierarchy_io.hpp"
-#include "dogen/dynamic/io/field_definition_types_io.hpp"
-#include "dogen/dynamic/io/field_instance_definition_io.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen/dynamic/types/profile.hpp"
+
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::dynamic::profile)
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+void save(Archive& ar, const dogen::dynamic::profile& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::dynamic::profile& v, unsigned int version);
+
+} }
 
 #endif

@@ -18,29 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DYNAMIC_HASH_ALL_HASH_HPP
-#define DOGEN_DYNAMIC_HASH_ALL_HASH_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include "dogen/dynamic/hash/name_hash.hpp"
-#include "dogen/dynamic/hash/text_hash.hpp"
-#include "dogen/dynamic/hash/value_hash.hpp"
-#include "dogen/dynamic/hash/number_hash.hpp"
-#include "dogen/dynamic/hash/object_hash.hpp"
-#include "dogen/dynamic/hash/boolean_hash.hpp"
 #include "dogen/dynamic/hash/profile_hash.hpp"
-#include "dogen/dynamic/hash/repository_hash.hpp"
-#include "dogen/dynamic/hash/scope_types_hash.hpp"
-#include "dogen/dynamic/hash/value_types_hash.hpp"
-#include "dogen/dynamic/hash/field_instance_hash.hpp"
-#include "dogen/dynamic/hash/text_collection_hash.hpp"
-#include "dogen/dynamic/hash/field_definition_hash.hpp"
 #include "dogen/dynamic/hash/profile_repository_hash.hpp"
-#include "dogen/dynamic/hash/ownership_hierarchy_hash.hpp"
-#include "dogen/dynamic/hash/field_definition_types_hash.hpp"
-#include "dogen/dynamic/hash/field_instance_definition_hash.hpp"
 
-#endif
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value) {
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+inline std::size_t hash_std_unordered_map_std_string_dogen_dynamic_profile(const std::unordered_map<std::string, dogen::dynamic::profile>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, i.second);
+    }
+    return seed;
+}
+
+}
+
+namespace dogen {
+namespace dynamic {
+
+std::size_t profile_repository_hasher::hash(const profile_repository& v) {
+    std::size_t seed(0);
+
+    combine(seed, v.default_profile());
+    combine(seed, hash_std_unordered_map_std_string_dogen_dynamic_profile(v.profiles_by_name()));
+
+    return seed;
+}
+
+} }

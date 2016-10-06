@@ -1,0 +1,25 @@
+{
+    "name" : "default",
+    "fields" : [
+        {
+            "name" : {
+                "simple" : "enabled"
+            },
+            "ownership_hierarchy" : {
+                "model_name" : "quilt.cpp"
+            },
+            "definition_type" : "facet_template",
+            "value" : true
+        },
+        {
+            "name" : {
+                "simple" : "overwrite"
+            },
+            "ownership_hierarchy" : {
+                "model_name" : "quilt.cpp"
+            },
+            "definition_type" : "facet_template",
+            "value" : true
+        }
+    ]
+}
