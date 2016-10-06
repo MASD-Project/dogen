@@ -18,23 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_DIA_IO_CONTEXT_IO_HPP
-#define DOGEN_YARN_DIA_IO_CONTEXT_IO_HPP
+#ifndef DOGEN_YARN_DIA_TYPES_REPOSITORY_SELECTOR_FWD_HPP
+#define DOGEN_YARN_DIA_TYPES_REPOSITORY_SELECTOR_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/yarn.dia/types/context.hpp"
-
 namespace dogen {
 namespace yarn {
 namespace dia {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::yarn::dia::context& v);
+class repository_selector;
 
 } } }
 

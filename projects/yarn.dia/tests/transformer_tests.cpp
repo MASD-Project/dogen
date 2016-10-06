@@ -31,7 +31,7 @@
 #include "dogen/yarn.dia/types/transformer.hpp"
 #include "dogen/yarn.dia/types/profiler.hpp"
 #include "dogen/yarn.dia/types/transformation_error.hpp"
-#include "dogen/yarn.dia/io/context_io.hpp"
+#include "dogen/yarn.dia/io/repository_io.hpp"
 #include "dogen/yarn.dia/types/processed_object.hpp"
 #include "dogen/yarn.dia/test/mock_processed_object_factory.hpp"
 #include "dogen/dynamic/test/mock_repository_factory.hpp"
@@ -93,8 +93,8 @@ dogen::yarn::name mock_model_name(const std::string& mn) {
     return nf.build_model_name(mn);;
 }
 
-dogen::yarn::dia::context mock_context(const std::string& model_name) {
-    dogen::yarn::dia::context r;
+dogen::yarn::dia::repository mock_repository(const std::string& model_name) {
+    dogen::yarn::dia::repository r;
     r.model().name(mock_model_name(model_name));
 
     dogen::yarn::module m;
@@ -103,13 +103,13 @@ dogen::yarn::dia::context mock_context(const std::string& model_name) {
     return r;
 }
 
-dogen::yarn::dia::context mock_context() {
-    return mock_context(model_name);
+dogen::yarn::dia::repository mock_repository() {
+    return mock_repository(model_name);
 }
 
 dogen::dynamic::repository empty_repository;
 
-void transform(dogen::yarn::dia::context& c,
+void transform(dogen::yarn::dia::repository& c,
     std::initializer_list<dogen::yarn::dia::processed_object> lpo) {
 
     using namespace dogen::dynamic::test;
@@ -131,7 +131,7 @@ BOOST_AUTO_TEST_SUITE(transformer_tests)
 BOOST_AUTO_TEST_CASE(empty_named_uml_class_throws) {
     SETUP_TEST_LOG_SOURCE("empty_named_uml_class_throws");
 
-    auto c(mock_context());
+    auto c(mock_repository());
     contains_checker<transformation_error> cc(empty_name);
     const auto po(mock_processed_object_factory::make_empty_named_class());
     BOOST_CHECK_EXCEPTION(transform(c, {po}), transformation_error, cc);
@@ -140,10 +140,10 @@ BOOST_AUTO_TEST_CASE(empty_named_uml_class_throws) {
 BOOST_AUTO_TEST_CASE(uml_class_with_no_stereotype_transforms_into_expected_value_object) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_no_stereotype_transforms_into_expected_value_object");
     const auto po(mock_processed_object_factory::make_class());
-    auto c(mock_context(model_name));
+    auto c(mock_repository(model_name));
     transform(c, {po});
 
-    BOOST_LOG_SEV(lg, debug) << "context: " << c;
+    BOOST_LOG_SEV(lg, debug) << "repository: " << c;
     BOOST_REQUIRE(c.model().objects().size() == 1);
 
     const auto& o(c.model().objects().begin()->second);
@@ -168,12 +168,12 @@ BOOST_AUTO_TEST_CASE(uml_class_with_no_stereotype_transforms_into_expected_value
 BOOST_AUTO_TEST_CASE(uml_class_with_value_object_stereotype_transforms_into_expected_value_object) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_value_object_stereotype_transforms_into_expected_value_object");
 
-    auto c(mock_context());
+    auto c(mock_repository());
     const auto st(value_object_stereotype);
     const auto po(mock_processed_object_factory::make_class(0, st));
     transform(c, {po});
 
-    BOOST_LOG_SEV(lg, debug) << "context: " << c;
+    BOOST_LOG_SEV(lg, debug) << "repository: " << c;
     BOOST_CHECK(c.model().enumerations().empty());
     BOOST_CHECK(c.model().primitives().empty());
     BOOST_REQUIRE(c.model().objects().size() == 1);
@@ -199,12 +199,12 @@ BOOST_AUTO_TEST_CASE(uml_class_with_value_object_stereotype_transforms_into_expe
 BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_transforms_into_expected_enumeration) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_enumeration_stereotype_transforms_into_expected_enumeration");
 
-    auto c(mock_context());
+    auto c(mock_repository());
     const auto st(enumeration_stereotype);
     const auto po(mock_processed_object_factory::make_class(0, st));
     transform(c, {po});
 
-    BOOST_LOG_SEV(lg, debug) << "context: " << c;
+    BOOST_LOG_SEV(lg, debug) << "repository: " << c;
     BOOST_CHECK(c.model().objects().empty());
     BOOST_CHECK(c.model().primitives().empty());
     BOOST_REQUIRE(c.model().enumerations().size() == 1);
@@ -228,12 +228,12 @@ BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_transforms_into_expec
 BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_transforms_into_expected_value_object) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_exception_stereotype_transforms_into_expected_value_object");
 
-    auto c(mock_context());
+    auto c(mock_repository());
     const auto st(exception_stereotype);
     const auto po(mock_processed_object_factory::make_class(0, st));
     transform(c, {po});
 
-    BOOST_LOG_SEV(lg, debug) << "context: " << c;
+    BOOST_LOG_SEV(lg, debug) << "repository: " << c;
     BOOST_CHECK(c.model().enumerations().empty());
     BOOST_CHECK(c.model().primitives().empty());
     BOOST_CHECK(c.model().objects().empty());
@@ -258,12 +258,12 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_transforms_into_expecte
 BOOST_AUTO_TEST_CASE(uml_class_with_service_stereotype_transforms_into_expected_service) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_service_stereotype_transforms_into_expected_service");
 
-    auto c(mock_context());
+    auto c(mock_repository());
     const auto st(service_stereotype);
     const auto po(mock_processed_object_factory::make_class(0, st));
     transform(c, {po});
 
-    BOOST_LOG_SEV(lg, debug) << "context: " << c;
+    BOOST_LOG_SEV(lg, debug) << "repository: " << c;
     BOOST_CHECK(c.model().enumerations().empty());
     BOOST_CHECK(c.model().primitives().empty());
     BOOST_REQUIRE(c.model().objects().size() == 1);
@@ -289,11 +289,11 @@ BOOST_AUTO_TEST_CASE(uml_class_with_service_stereotype_transforms_into_expected_
 BOOST_AUTO_TEST_CASE(uml_large_package_transforms_into_expected_module) {
     SETUP_TEST_LOG_SOURCE("uml_large_package_transforms_into_expected_module");
 
-    auto c(mock_context(model_name));
+    auto c(mock_repository(model_name));
     const auto po(mock_processed_object_factory::make_large_package());
     transform(c, {po});
 
-    BOOST_LOG_SEV(lg, debug) << "context: " << c;
+    BOOST_LOG_SEV(lg, debug) << "repository: " << c;
     BOOST_CHECK(c.model().objects().empty());
     BOOST_REQUIRE(c.model().modules().size() == 2);
 
@@ -314,12 +314,12 @@ BOOST_AUTO_TEST_CASE(uml_large_package_transforms_into_expected_module) {
 BOOST_AUTO_TEST_CASE(uml_class_in_package_transforms_into_expected_object) {
     SETUP_TEST_LOG_SOURCE("uml_class_in_package_transforms_into_expected_object");
 
-    auto c(mock_context(model_name));
+    auto c(mock_repository(model_name));
     const auto po(
         mock_processed_object_factory::make_class_inside_large_package());
     transform(c, {po[0], po[1]});
 
-    BOOST_LOG_SEV(lg, debug) << "context: " << c;
+    BOOST_LOG_SEV(lg, debug) << "repository: " << c;
 
     BOOST_REQUIRE(c.model().modules().size() == 2);
     std::string module_name;
@@ -357,13 +357,13 @@ BOOST_AUTO_TEST_CASE(uml_class_in_package_transforms_into_expected_object) {
 BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_in_package_transforms_into_expected_enumeration) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_enumeration_stereotype_in_package_transforms_into_expected_enumeration");
 
-    auto c(mock_context(model_name));
+    auto c(mock_repository(model_name));
     const auto st(enumeration_stereotype);
     const auto po(
         mock_processed_object_factory::make_class_inside_large_package(0, st));
     transform(c, {po[0], po[1]});
 
-    BOOST_LOG_SEV(lg, debug) << "context: " << c;
+    BOOST_LOG_SEV(lg, debug) << "repository: " << c;
 
     BOOST_REQUIRE(c.model().modules().size() == 2);
     std::string module_name;
@@ -400,13 +400,13 @@ BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_in_package_transforms
 BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_in_package_transforms_into_expected_exception) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_exception_stereotype_in_package_transforms_into_expected_exception");
 
-    auto c(mock_context(model_name));
+    auto c(mock_repository(model_name));
     const auto st(exception_stereotype);
     const auto po(
         mock_processed_object_factory::make_class_inside_large_package(0, st));
     transform(c, {po[0], po[1]});
 
-    BOOST_LOG_SEV(lg, debug) << "context: " << c;
+    BOOST_LOG_SEV(lg, debug) << "repository: " << c;
 
     BOOST_REQUIRE(c.model().modules().size() == 2);
     std::string module_name;
@@ -439,13 +439,13 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_in_package_transforms_i
 BOOST_AUTO_TEST_CASE(uml_class_with_service_stereotype_in_package_transforms_into_expected_service) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_service_stereotype_in_package_transforms_into_expected_service");
 
-    auto c(mock_context(model_name));
+    auto c(mock_repository(model_name));
     const auto st(service_stereotype);
     const auto po(
         mock_processed_object_factory::make_class_inside_large_package(0, st));
     transform(c, {po[0], po[1]});
 
-    BOOST_LOG_SEV(lg, debug) << "context: " << c;
+    BOOST_LOG_SEV(lg, debug) << "repository: " << c;
 
     BOOST_REQUIRE(c.model().modules().size() == 2);
     std::string module_name;
@@ -479,7 +479,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_service_stereotype_in_package_transforms_int
 
 BOOST_AUTO_TEST_CASE(uml_class_in_non_existing_package_throws) {
     SETUP_TEST_LOG_SOURCE("uml_class_in_non_existing_package_throws");
-    auto c(mock_context(model_name));
+    auto c(mock_repository(model_name));
     auto po(mock_processed_object_factory::make_class_inside_large_package());
     contains_checker<transformation_error> cc(missing_name);
     BOOST_CHECK_EXCEPTION(transform(c, {po[1]}), transformation_error, cc);
@@ -500,12 +500,12 @@ BOOST_AUTO_TEST_CASE(uml_class_in_non_existing_package_throws) {
 BOOST_AUTO_TEST_CASE(uml_class_in_two_packages_transforms_into_expected_object) {
     SETUP_TEST_LOG_SOURCE("uml_class_in_two_packages_transforms_into_expected_object");
 
-    auto c(mock_context(model_name));
+    auto c(mock_repository(model_name));
     const auto po(
         mock_processed_object_factory::make_class_inside_two_large_packages());
     transform(c, {po[0], po[1], po[2]});
 
-    BOOST_LOG_SEV(lg, debug) << "context: " << c;
+    BOOST_LOG_SEV(lg, debug) << "repository: " << c;
 
     BOOST_REQUIRE(c.model().modules().size() == 3);
     std::list<dogen::yarn::module> module_list;
@@ -567,13 +567,13 @@ BOOST_AUTO_TEST_CASE(uml_class_in_two_packages_transforms_into_expected_object) 
 BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_in_two_packages_transforms_into_expected_enumeration) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_enumeration_stereotype_in_two_packages_transforms_into_expected_enumeration");
 
-    auto c(mock_context(model_name));
+    auto c(mock_repository(model_name));
     const auto st(enumeration_stereotype);
     const auto po(mock_processed_object_factory::
         make_class_inside_two_large_packages(0, st));
     transform(c, {po[0], po[1], po[2]});
 
-    BOOST_LOG_SEV(lg, debug) << "context: " << c;
+    BOOST_LOG_SEV(lg, debug) << "repository: " << c;
 
     BOOST_REQUIRE(c.model().modules().size() == 3);
     std::list<dogen::yarn::module> module_list;
@@ -632,13 +632,13 @@ BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_in_two_packages_trans
 BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_in_two_packages_transforms_into_expected_exception) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_exception_stereotype_in_two_packages_transforms_into_expected_exception");
 
-    auto c(mock_context(model_name));
+    auto c(mock_repository(model_name));
     const auto st(exception_stereotype);
     const auto po(mock_processed_object_factory::
         make_class_inside_two_large_packages(0, st));
     transform(c, {po[0], po[1], po[2]});
 
-    BOOST_LOG_SEV(lg, debug) << "context: " << c;
+    BOOST_LOG_SEV(lg, debug) << "repository: " << c;
 
     BOOST_REQUIRE(c.model().modules().size() == 3);
     std::list<dogen::yarn::module> module_list;
@@ -696,13 +696,13 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_in_two_packages_transfo
 BOOST_AUTO_TEST_CASE(uml_class_with_service_stereotype_in_two_packages_transforms_into_expected_service) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_service_stereotype_in_two_packages_transforms_into_expected_service");
 
-    auto c(mock_context(model_name));
+    auto c(mock_repository(model_name));
     const auto st(service_stereotype);
     const auto po(mock_processed_object_factory::
         make_class_inside_two_large_packages(0, st));
     transform(c, {po[0], po[1], po[2]});
 
-    BOOST_LOG_SEV(lg, debug) << "context: " << c;
+    BOOST_LOG_SEV(lg, debug) << "repository: " << c;
 
     BOOST_REQUIRE(c.model().modules().size() == 3);
     std::list<dogen::yarn::module> module_list;
@@ -763,11 +763,11 @@ BOOST_AUTO_TEST_CASE(uml_class_with_service_stereotype_in_two_packages_transform
 BOOST_AUTO_TEST_CASE(uml_note_with_marker_transforms_into_model_comments) {
     SETUP_TEST_LOG_SOURCE("uml_note_with_marker_transforms_into_model_comments");
 
-    auto c(mock_context(model_name));
+    auto c(mock_repository(model_name));
     const auto po(mock_processed_object_factory::make_uml_note_with_marker());
     transform(c, {po});
 
-    BOOST_LOG_SEV(lg, debug) << "context: " << c;
+    BOOST_LOG_SEV(lg, debug) << "repository: " << c;
 
     BOOST_REQUIRE(c.model().modules().size() == 1);
     const auto m(c.model().modules().begin()->second);
@@ -782,11 +782,11 @@ BOOST_AUTO_TEST_CASE(uml_note_with_marker_transforms_into_model_comments) {
 BOOST_AUTO_TEST_CASE(uml_note_with_text_but_no_marker_does_nothing) {
     SETUP_TEST_LOG_SOURCE("uml_note_with_text_but_no_marker_does_nothing");
 
-    auto c(mock_context(model_name));
+    auto c(mock_repository(model_name));
     const auto po(mock_processed_object_factory::make_uml_note());
     transform(c, {po});
 
-    BOOST_LOG_SEV(lg, debug) << "context: " << c;
+    BOOST_LOG_SEV(lg, debug) << "repository: " << c;
     BOOST_REQUIRE(c.model().modules().size() == 1);
     const auto m(c.model().modules().begin()->second);
     BOOST_REQUIRE(m.name().location().model_modules().size() == 1);
@@ -800,11 +800,11 @@ BOOST_AUTO_TEST_CASE(uml_note_with_text_but_no_marker_does_nothing) {
 BOOST_AUTO_TEST_CASE(empty_uml_note_does_nothing) {
     SETUP_TEST_LOG_SOURCE("empty_uml_note_does_nothing");
 
-    auto c(mock_context(model_name));
+    auto c(mock_repository(model_name));
     const auto po(mock_processed_object_factory::make_empty_uml_note());
     transform(c, {po});
 
-    BOOST_LOG_SEV(lg, debug) << "context: " << c;
+    BOOST_LOG_SEV(lg, debug) << "repository: " << c;
     const auto m(c.model().modules().begin()->second);
     BOOST_REQUIRE(m.name().location().model_modules().size() == 1);
     BOOST_CHECK(m.name().location().model_modules().front() ==
@@ -817,12 +817,12 @@ BOOST_AUTO_TEST_CASE(empty_uml_note_does_nothing) {
 BOOST_AUTO_TEST_CASE(uml_note_with_marker_inside_package_transforms_into_package_comments) {
     SETUP_TEST_LOG_SOURCE("uml_note_with_marker_inside_package_transforms_into_package_comments");
 
-    auto c(mock_context(model_name));
+    auto c(mock_repository(model_name));
     const auto po(mock_processed_object_factory::
         make_uml_note_with_marker_inside_large_package());
     transform(c, {po[0], po[1]});
 
-    BOOST_LOG_SEV(lg, debug) << "context: " << c;
+    BOOST_LOG_SEV(lg, debug) << "repository: " << c;
 
     BOOST_REQUIRE(c.model().modules().size() == 2);
     for (const auto& pair : c.model().modules()) {
@@ -845,12 +845,12 @@ BOOST_AUTO_TEST_CASE(uml_note_with_marker_inside_package_transforms_into_package
 
 BOOST_AUTO_TEST_CASE(uml_note_with_text_but_no_marker_inside_package_does_nothing) {
     SETUP_TEST_LOG_SOURCE("uml_note_with_text_but_no_marker_inside_package_does_nothing");
-    auto c(mock_context(model_name));
+    auto c(mock_repository(model_name));
     const auto po(mock_processed_object_factory::
         make_uml_note_inside_large_package());
     transform(c, {po[0], po[1]});
 
-    BOOST_LOG_SEV(lg, debug) << "context: " << c;
+    BOOST_LOG_SEV(lg, debug) << "repository: " << c;
     BOOST_REQUIRE(c.model().modules().size() == 2);
 
     for (const auto& pair : c.model().modules()) {
@@ -873,12 +873,12 @@ BOOST_AUTO_TEST_CASE(uml_note_with_text_but_no_marker_inside_package_does_nothin
 BOOST_AUTO_TEST_CASE(empty_uml_note_inside_package_does_nothing) {
     SETUP_TEST_LOG_SOURCE("empty_uml_note_inside_package_does_nothing");
 
-    auto c(mock_context(model_name));
+    auto c(mock_repository(model_name));
     const auto po(mock_processed_object_factory::
         make_empty_uml_note_inside_large_package());
     transform(c, {po[0], po[1]});
 
-    BOOST_LOG_SEV(lg, debug) << "context: " << c;
+    BOOST_LOG_SEV(lg, debug) << "repository: " << c;
     BOOST_REQUIRE(c.model().modules().size() == 2);
     for (const auto& pair : c.model().modules()) {
         const auto& m(pair.second);
@@ -900,7 +900,7 @@ BOOST_AUTO_TEST_CASE(empty_uml_note_inside_package_does_nothing) {
 BOOST_AUTO_TEST_CASE(uml_class_with_inheritance_results_in_expected_object) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_inheritance_results_in_expected_object");
 
-    auto c(mock_context(model_name));
+    auto c(mock_repository(model_name));
     const auto po(mock_processed_object_factory::make_generalization());
     const auto con(po[0].connection());
     BOOST_REQUIRE(con);
@@ -908,7 +908,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_inheritance_results_in_expected_object) {
     c.child_id_to_parent_ids().insert(std::make_pair(con->second, parents));
 
     transform(c, {po[1], po[2]});
-    BOOST_LOG_SEV(lg, debug) << "context: " << c;
+    BOOST_LOG_SEV(lg, debug) << "repository: " << c;
 
     BOOST_CHECK(c.model().modules().size() == 1);
     const auto m(c.model().modules().begin()->second);
@@ -935,11 +935,11 @@ BOOST_AUTO_TEST_CASE(uml_class_with_inheritance_results_in_expected_object) {
 BOOST_AUTO_TEST_CASE(uml_class_with_one_attribute_transforms_into_value_object_with_one_attribute) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_one_attribute_transforms_into_value_object_with_one_attribute");
 
-    auto c(mock_context());
+    auto c(mock_repository());
     const auto po(mock_processed_object_factory::make_class_with_attribute());
     transform(c, {po});
 
-    BOOST_LOG_SEV(lg, debug) << "context: " << c;
+    BOOST_LOG_SEV(lg, debug) << "repository: " << c;
     BOOST_CHECK(c.model().enumerations().empty());
     BOOST_CHECK(c.model().primitives().empty());
     BOOST_REQUIRE(c.model().objects().size() == 1);

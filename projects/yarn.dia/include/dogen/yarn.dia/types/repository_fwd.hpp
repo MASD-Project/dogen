@@ -18,36 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_DIA_HASH_CONTEXT_HASH_HPP
-#define DOGEN_YARN_DIA_HASH_CONTEXT_HASH_HPP
+#ifndef DOGEN_YARN_DIA_TYPES_REPOSITORY_FWD_HPP
+#define DOGEN_YARN_DIA_TYPES_REPOSITORY_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/yarn.dia/types/context.hpp"
-
 namespace dogen {
 namespace yarn {
 namespace dia {
 
-struct context_hasher {
-public:
-    static std::size_t hash(const context& v);
-};
+class repository;
 
 } } }
 
-namespace std {
-
-template<>
-struct hash<dogen::yarn::dia::context> {
-public:
-    size_t operator()(const dogen::yarn::dia::context& v) const {
-        return dogen::yarn::dia::context_hasher::hash(v);
-    }
-};
-
-}
 #endif

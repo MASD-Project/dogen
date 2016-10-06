@@ -41,7 +41,7 @@ BOOST_AUTO_TEST_SUITE(swap_tests)
 BOOST_AUTO_TEST_CASE(validate_swap) {
     SETUP_TEST_LOG("validate_swap");
 
-    test_swap<context_generator>();
+    test_swap<repository_generator>();
     test_swap<profile_generator>();
     test_swap<object_types_generator>();
     test_swap<processed_object_generator>();

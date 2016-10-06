@@ -20,7 +20,7 @@
  */
 #include <sstream>
 #include "dogen/yarn/test_data/name_td.hpp"
-#include "dogen/yarn.dia/test_data/context_td.hpp"
+#include "dogen/yarn.dia/test_data/repository_td.hpp"
 #include "dogen/yarn/test_data/intermediate_model_td.hpp"
 
 namespace {
@@ -71,31 +71,31 @@ namespace dogen {
 namespace yarn {
 namespace dia {
 
-context_generator::context_generator() : position_(0) { }
+repository_generator::repository_generator() : position_(0) { }
 
-void context_generator::
+void repository_generator::
 populate(const unsigned int position, result_type& v) {
     v.child_id_to_parent_ids(create_std_unordered_map_std_string_std_list_std_string(position + 0));
     v.id_to_name(create_std_unordered_map_std_string_dogen_yarn_name(position + 1));
     v.model(create_dogen_yarn_intermediate_model(position + 2));
 }
 
-context_generator::result_type
-context_generator::create(const unsigned int position) {
-    context r;
-    context_generator::populate(position, r);
+repository_generator::result_type
+repository_generator::create(const unsigned int position) {
+    repository r;
+    repository_generator::populate(position, r);
     return r;
 }
 
-context_generator::result_type*
-context_generator::create_ptr(const unsigned int position) {
-    context* p = new context();
-    context_generator::populate(position, *p);
+repository_generator::result_type*
+repository_generator::create_ptr(const unsigned int position) {
+    repository* p = new repository();
+    repository_generator::populate(position, *p);
     return p;
 }
 
-context_generator::result_type
-context_generator::operator()() {
+repository_generator::result_type
+repository_generator::operator()() {
     return create(position_++);
 }
 

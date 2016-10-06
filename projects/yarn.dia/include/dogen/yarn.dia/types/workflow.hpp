@@ -91,10 +91,6 @@ public:
         bool is_target);
 
 private:
-    context context_;
-    profiler profiler_;
-    validator validator_;
-    std::unique_ptr<transformer> transformer_;
     const dynamic::workflow& dynamic_workflow_;
 };
 

@@ -18,24 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_DIA_SERIALIZATION_CONTEXT_FWD_SER_HPP
-#define DOGEN_YARN_DIA_SERIALIZATION_CONTEXT_FWD_SER_HPP
+#ifndef DOGEN_YARN_DIA_TEST_DATA_REPOSITORY_TD_HPP
+#define DOGEN_YARN_DIA_TEST_DATA_REPOSITORY_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/yarn.dia/types/context_fwd.hpp"
+#include "dogen/yarn.dia/types/repository.hpp"
 
-namespace boost {
-namespace serialization {
+namespace dogen {
+namespace yarn {
+namespace dia {
 
-template<class Archive>
-void save(Archive& ar, const dogen::yarn::dia::context& v, unsigned int version);
+class repository_generator {
+public:
+    repository_generator();
 
-template<class Archive>
-void load(Archive& ar, dogen::yarn::dia::context& v, unsigned int version);
+public:
+    typedef dogen::yarn::dia::repository result_type;
 
-} }
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
+
+} } }
 
 #endif

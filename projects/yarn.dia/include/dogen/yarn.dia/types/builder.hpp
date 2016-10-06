@@ -30,7 +30,7 @@
 #include <unordered_map>
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
-#include "dogen/yarn.dia/types/context.hpp"
+#include "dogen/yarn.dia/types/repository.hpp"
 #include "dogen/yarn.dia/types/transformer.hpp"
 #include "dogen/yarn.dia/types/profiled_object.hpp"
 
@@ -63,7 +63,7 @@ public:
 
 private:
     const dynamic::workflow& dynamic_workflow_;
-    context context_;
+    repository repository_;
 };
 
 } } }

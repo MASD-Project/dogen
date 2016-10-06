@@ -18,13 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn.dia/types/context.hpp"
+#include "dogen/yarn.dia/types/repository.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace dia {
 
-context::context(
+repository::repository(
     const std::unordered_map<std::string, std::list<std::string> >& child_id_to_parent_ids,
     const std::unordered_map<std::string, dogen::yarn::name>& id_to_name,
     const dogen::yarn::intermediate_model& model)
@@ -32,70 +32,70 @@ context::context(
       id_to_name_(id_to_name),
       model_(model) { }
 
-void context::swap(context& other) noexcept {
+void repository::swap(repository& other) noexcept {
     using std::swap;
     swap(child_id_to_parent_ids_, other.child_id_to_parent_ids_);
     swap(id_to_name_, other.id_to_name_);
     swap(model_, other.model_);
 }
 
-bool context::operator==(const context& rhs) const {
+bool repository::operator==(const repository& rhs) const {
     return child_id_to_parent_ids_ == rhs.child_id_to_parent_ids_ &&
         id_to_name_ == rhs.id_to_name_ &&
         model_ == rhs.model_;
 }
 
-context& context::operator=(context other) {
+repository& repository::operator=(repository other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const std::unordered_map<std::string, std::list<std::string> >& context::child_id_to_parent_ids() const {
+const std::unordered_map<std::string, std::list<std::string> >& repository::child_id_to_parent_ids() const {
     return child_id_to_parent_ids_;
 }
 
-std::unordered_map<std::string, std::list<std::string> >& context::child_id_to_parent_ids() {
+std::unordered_map<std::string, std::list<std::string> >& repository::child_id_to_parent_ids() {
     return child_id_to_parent_ids_;
 }
 
-void context::child_id_to_parent_ids(const std::unordered_map<std::string, std::list<std::string> >& v) {
+void repository::child_id_to_parent_ids(const std::unordered_map<std::string, std::list<std::string> >& v) {
     child_id_to_parent_ids_ = v;
 }
 
-void context::child_id_to_parent_ids(const std::unordered_map<std::string, std::list<std::string> >&& v) {
+void repository::child_id_to_parent_ids(const std::unordered_map<std::string, std::list<std::string> >&& v) {
     child_id_to_parent_ids_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::yarn::name>& context::id_to_name() const {
+const std::unordered_map<std::string, dogen::yarn::name>& repository::id_to_name() const {
     return id_to_name_;
 }
 
-std::unordered_map<std::string, dogen::yarn::name>& context::id_to_name() {
+std::unordered_map<std::string, dogen::yarn::name>& repository::id_to_name() {
     return id_to_name_;
 }
 
-void context::id_to_name(const std::unordered_map<std::string, dogen::yarn::name>& v) {
+void repository::id_to_name(const std::unordered_map<std::string, dogen::yarn::name>& v) {
     id_to_name_ = v;
 }
 
-void context::id_to_name(const std::unordered_map<std::string, dogen::yarn::name>&& v) {
+void repository::id_to_name(const std::unordered_map<std::string, dogen::yarn::name>&& v) {
     id_to_name_ = std::move(v);
 }
 
-const dogen::yarn::intermediate_model& context::model() const {
+const dogen::yarn::intermediate_model& repository::model() const {
     return model_;
 }
 
-dogen::yarn::intermediate_model& context::model() {
+dogen::yarn::intermediate_model& repository::model() {
     return model_;
 }
 
-void context::model(const dogen::yarn::intermediate_model& v) {
+void repository::model(const dogen::yarn::intermediate_model& v) {
     model_ = v;
 }
 
-void context::model(const dogen::yarn::intermediate_model&& v) {
+void repository::model(const dogen::yarn::intermediate_model&& v) {
     model_ = std::move(v);
 }
 

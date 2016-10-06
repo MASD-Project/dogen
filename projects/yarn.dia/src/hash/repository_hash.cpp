@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/yarn/hash/name_hash.hpp"
-#include "dogen/yarn.dia/hash/context_hash.hpp"
+#include "dogen/yarn.dia/hash/repository_hash.hpp"
 #include "dogen/yarn/hash/intermediate_model_hash.hpp"
 
 namespace {
@@ -62,7 +62,7 @@ namespace dogen {
 namespace yarn {
 namespace dia {
 
-std::size_t context_hasher::hash(const context& v) {
+std::size_t repository_hasher::hash(const repository& v) {
     std::size_t seed(0);
 
     combine(seed, hash_std_unordered_map_std_string_std_list_std_string(v.child_id_to_parent_ids()));

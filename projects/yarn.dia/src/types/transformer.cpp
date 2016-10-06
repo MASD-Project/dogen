@@ -26,12 +26,11 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/dia/types/composite.hpp"
-#include "dogen/yarn.dia/types/traits.hpp"
 #include "dogen/yarn.dia/types/transformation_error.hpp"
 #include "dogen/yarn.dia/io/object_types_io.hpp"
 #include "dogen/yarn.dia/types/processed_object.hpp"
 #include "dogen/yarn.dia/io/processed_object_io.hpp"
-#include "dogen/yarn.dia/io/context_io.hpp"
+#include "dogen/yarn.dia/io/repository_io.hpp"
 #include "dogen/yarn.dia/types/validator.hpp"
 #include "dogen/yarn.dia/types/transformer.hpp"
 
@@ -65,15 +64,15 @@ namespace dogen {
 namespace yarn {
 namespace dia {
 
-transformer::transformer(const dynamic::workflow& w, const context& c)
-    : context_(c), dynamic_workflow_(w) {
+transformer::transformer(const dynamic::workflow& w, const repository& rp)
+    : repository_(rp), dynamic_workflow_(w) {
 
-    BOOST_LOG_SEV(lg, debug) << "Initial context: " << context_;
+    BOOST_LOG_SEV(lg, debug) << "Initial repository: " << repository_;
 }
 
 yarn::generation_types transformer::generation_type(const profile& p) const {
     using yarn::generation_types;
-    if (context_.model().origin_type() != yarn::origin_types::target)
+    if (repository_.model().origin_type() != yarn::origin_types::target)
         return generation_types::no_generation;
 
     if (p.is_non_generatable() || p.is_service())
@@ -89,7 +88,7 @@ yarn::name transformer::to_name(const std::string& n) const {
     }
 
     yarn::name_factory f;
-    return f.build_element_in_model(context_.model().name(), n);
+    return f.build_element_in_model(repository_.model().name(), n);
 }
 
 yarn::name transformer::to_name(const std::string& n,
@@ -105,8 +104,8 @@ yarn::name transformer::to_name(const std::string& n,
 }
 
 const yarn::module& transformer::module_for_name(const yarn::name& n) const {
-    auto i(context_.model().modules().find(n.id()));
-    if (i == context_.model().modules().end()) {
+    auto i(repository_.model().modules().find(n.id()));
+    if (i == repository_.model().modules().end()) {
         const auto sn(n.simple());
         BOOST_LOG_SEV(lg, error) << missing_module_for_name << sn;
         BOOST_THROW_EXCEPTION(
@@ -121,8 +120,8 @@ const yarn::module& transformer::module_for_id(const std::string& id) const {
         BOOST_THROW_EXCEPTION(transformation_error(empty_package_id));
     }
 
-    const auto i(context_.id_to_name().find(id));
-    if (i == context_.id_to_name().end()) {
+    const auto i(repository_.id_to_name().find(id));
+    if (i == repository_.id_to_name().end()) {
         BOOST_LOG_SEV(lg, error) << missing_name_for_id << id;
         BOOST_THROW_EXCEPTION(transformation_error(missing_name_for_id + id));
     }
@@ -222,8 +221,8 @@ transformer::to_object(const processed_object& po, const profile& p,
     for (const auto& p : po.attributes())
         o.local_attributes().push_back(to_attribute(o.name(), p));
 
-    const auto i(context_.child_id_to_parent_ids().find(po.id()));
-    if (i != context_.child_id_to_parent_ids().end()) {
+    const auto i(repository_.child_id_to_parent_ids().find(po.id()));
+    if (i != repository_.child_id_to_parent_ids().end()) {
         if (i->second.empty()) {
             BOOST_LOG_SEV(lg, error) << empty_parent_container << po.id();
             BOOST_THROW_EXCEPTION(
@@ -237,8 +236,8 @@ transformer::to_object(const processed_object& po, const profile& p,
         }
 
         const auto parent_name(i->second.front());
-        const auto j(context_.id_to_name().find(parent_name));
-        if (j == context_.id_to_name().end()) {
+        const auto j(repository_.id_to_name().find(parent_name));
+        if (j == repository_.id_to_name().end()) {
             BOOST_LOG_SEV(lg, error) << "Object has a parent but "
                                      << " there is no Name mapping defined."
                                      << " Child ID: '" << po.id()
@@ -320,8 +319,8 @@ transformer::to_concept(const processed_object& o, const profile& p) {
     for (const auto& prop : o.attributes())
         c.local_attributes().push_back(to_attribute(c.name(), prop));
 
-    const auto i(context_.child_id_to_parent_ids().find(o.id()));
-    c.is_child(i != context_.child_id_to_parent_ids().end());
+    const auto i(repository_.child_id_to_parent_ids().find(o.id()));
+    c.is_child(i != repository_.child_id_to_parent_ids().end());
     if (c.is_child()) {
         if (i->second.empty()) {
             BOOST_LOG_SEV(lg, error) << empty_parent_container << o.id();
@@ -330,8 +329,8 @@ transformer::to_concept(const processed_object& o, const profile& p) {
         }
 
         for (const auto& concept_id : i->second) {
-            const auto j(context_.id_to_name().find(concept_id));
-            if (j == context_.id_to_name().end()) {
+            const auto j(repository_.id_to_name().find(concept_id));
+            if (j == repository_.id_to_name().end()) {
                 BOOST_LOG_SEV(lg, error) << "Object has a parent but "
                                          << " there is no name mapping."
                                          << " Child ID: '" << o.id()

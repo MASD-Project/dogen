@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "dogen/yarn/io/name_io.hpp"
-#include "dogen/yarn.dia/io/context_io.hpp"
+#include "dogen/yarn.dia/io/repository_io.hpp"
 #include "dogen/yarn/io/intermediate_model_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -85,9 +85,9 @@ namespace dogen {
 namespace yarn {
 namespace dia {
 
-std::ostream& operator<<(std::ostream& s, const context& v) {
+std::ostream& operator<<(std::ostream& s, const repository& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::yarn::dia::context\"" << ", "
+      << "\"__type__\": " << "\"dogen::yarn::dia::repository\"" << ", "
       << "\"child_id_to_parent_ids\": " << v.child_id_to_parent_ids() << ", "
       << "\"id_to_name\": " << v.id_to_name() << ", "
       << "\"model\": " << v.model()

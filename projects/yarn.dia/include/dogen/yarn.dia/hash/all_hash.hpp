@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include "dogen/yarn.dia/hash/context_hash.hpp"
 #include "dogen/yarn.dia/hash/profile_hash.hpp"
+#include "dogen/yarn.dia/hash/repository_hash.hpp"
 #include "dogen/yarn.dia/hash/object_types_hash.hpp"
 #include "dogen/yarn.dia/hash/profiled_object_hash.hpp"
 #include "dogen/yarn.dia/hash/processed_object_hash.hpp"

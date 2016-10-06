@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_DIA_TYPES_CONTEXT_HPP
-#define DOGEN_YARN_DIA_TYPES_CONTEXT_HPP
+#ifndef DOGEN_YARN_DIA_TYPES_REPOSITORY_HPP
+#define DOGEN_YARN_DIA_TYPES_REPOSITORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,34 +31,34 @@
 #include <unordered_map>
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
-#include "dogen/yarn.dia/serialization/context_fwd_ser.hpp"
+#include "dogen/yarn.dia/serialization/repository_fwd_ser.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace dia {
 
 /**
- * @brief Collects all the information required by the visitor as it traverses the graph.
+ * @brief Collects all the information required by the builder.
  */
-class context final {
+class repository final {
 public:
-    context() = default;
-    context(const context&) = default;
-    context(context&&) = default;
-    ~context() = default;
+    repository() = default;
+    repository(const repository&) = default;
+    repository(repository&&) = default;
+    ~repository() = default;
 
 public:
-    context(
+    repository(
         const std::unordered_map<std::string, std::list<std::string> >& child_id_to_parent_ids,
         const std::unordered_map<std::string, dogen::yarn::name>& id_to_name,
         const dogen::yarn::intermediate_model& model);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::yarn::dia::context& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::yarn::dia::repository& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::yarn::dia::context& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::yarn::dia::repository& v, unsigned int version);
 
 public:
     /**
@@ -92,14 +92,14 @@ public:
     /**@}*/
 
 public:
-    bool operator==(const context& rhs) const;
-    bool operator!=(const context& rhs) const {
+    bool operator==(const repository& rhs) const;
+    bool operator!=(const repository& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(context& other) noexcept;
-    context& operator=(context other);
+    void swap(repository& other) noexcept;
+    repository& operator=(repository other);
 
 private:
     std::unordered_map<std::string, std::list<std::string> > child_id_to_parent_ids_;
@@ -113,8 +113,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::yarn::dia::context& lhs,
-    dogen::yarn::dia::context& rhs) {
+    dogen::yarn::dia::repository& lhs,
+    dogen::yarn::dia::repository& rhs) {
     lhs.swap(rhs);
 }
 

@@ -25,7 +25,6 @@
 #include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn.dia/types/grapher.hpp"
-#include "dogen/yarn.dia/types/context.hpp"
 #include "dogen/yarn.dia/types/visitor.hpp"
 #include "dogen/yarn.dia/types/transformer.hpp"
 #include "dogen/yarn.dia/types/object_processor.hpp"

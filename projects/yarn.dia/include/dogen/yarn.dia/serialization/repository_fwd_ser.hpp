@@ -18,34 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/test/unit_test.hpp>
-#include "dogen/utility/test/logging.hpp"
-#include "dogen/utility/test/canned_tests.hpp"
-#include "dogen/yarn.dia/types/all.hpp"
-#include "dogen/yarn.dia/io/all_io.hpp"
-#include "dogen/yarn.dia/test_data/all_td.hpp"
+#ifndef DOGEN_YARN_DIA_SERIALIZATION_REPOSITORY_FWD_SER_HPP
+#define DOGEN_YARN_DIA_SERIALIZATION_REPOSITORY_FWD_SER_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-const std::string empty;
-const std::string test_module("yarn.dia");
-const std::string test_suite("equality_tests");
+#include "dogen/yarn.dia/types/repository_fwd.hpp"
 
-}
+namespace boost {
+namespace serialization {
 
-using namespace dogen::yarn::dia;
-using namespace dogen::utility::test;
+template<class Archive>
+void save(Archive& ar, const dogen::yarn::dia::repository& v, unsigned int version);
 
-BOOST_AUTO_TEST_SUITE(equality_tests)
+template<class Archive>
+void load(Archive& ar, dogen::yarn::dia::repository& v, unsigned int version);
 
-BOOST_AUTO_TEST_CASE(validate_equality) {
-    SETUP_TEST_LOG("validate_equality");
+} }
 
-    test_equality<repository_generator>();
-    test_equality<profile_generator>();
-    test_equality<object_types_generator>();
-    test_equality<processed_object_generator>();
-    test_equality<processed_attribute_generator>();
-}
-
-BOOST_AUTO_TEST_SUITE_END()
+#endif

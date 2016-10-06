@@ -39,7 +39,7 @@
 #include "dogen/dia/types/attribute.hpp"
 #include "dogen/yarn.dia/types/processed_object.hpp"
 #include "dogen/yarn.dia/types/processed_attribute.hpp"
-#include "dogen/yarn.dia/types/context.hpp"
+#include "dogen/yarn.dia/types/repository.hpp"
 #include "dogen/yarn.dia/types/profile.hpp"
 
 namespace dogen {
@@ -60,9 +60,9 @@ public:
     /**
      * @brief Initialises the transformer.
      *
-     * @pre model in context must be populated.
+     * @pre model in repository must be populated.
      */
-    transformer(const dynamic::workflow& w, const context& c);
+    transformer(const dynamic::workflow& w, const repository& rp);
 
 private:
     /**
@@ -117,7 +117,7 @@ private:
     /**
      * @brief Returns the module associated with a name.
      *
-     * @pre module must exist in context.
+     * @pre module must exist in repository.
      */
     const yarn::module& module_for_name(const yarn::name& n) const;
 
@@ -186,7 +186,7 @@ public:
     yarn::concept to_concept(const processed_object& o, const profile& p);
 
 private:
-    const context& context_;
+    const repository& repository_;
     const dynamic::workflow& dynamic_workflow_;
 };
 
