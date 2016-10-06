@@ -23,6 +23,7 @@
 #include <boost/graph/depth_first_search.hpp>
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/utility/test/logging.hpp"
+#include "dogen/yarn.dia/io/profiled_object_io.hpp"
 #include "dogen/yarn.dia/io/processed_object_io.hpp"
 #include "dogen/yarn.dia/test/mock_processed_object_factory.hpp"
 #include "dogen/yarn.dia/types/graphing_error.hpp"
@@ -33,7 +34,7 @@
 using namespace dogen::yarn::dia;
 using dogen::utility::test::asserter;
 using dogen::utility::test::contains_checker;
-using dogen::yarn::dia::test::mock_processed_object_factory;
+using factory = dogen::yarn::dia::test::mock_processed_object_factory;
 
 namespace  {
 
@@ -49,8 +50,8 @@ bool is_root_id(const std::string id) {
 
 class visitor : public boost::default_dfs_visitor {
 public:
-    explicit visitor(std::list<dogen::yarn::dia::processed_object>& o)
-        : objects_(o) {}
+    explicit visitor(std::list<dogen::yarn::dia::profiled_object>& po)
+        : objects_(po) {}
 
 public:
     template<typename Vertex, typename Graph>
@@ -59,8 +60,24 @@ public:
     }
 
 private:
-    std::list<dogen::yarn::dia::processed_object>& objects_;
+    std::list<dogen::yarn::dia::profiled_object>& objects_;
 };
+
+dogen::yarn::dia::profiled_object
+make_profiled_object(const processed_object& po) {
+    dogen::yarn::dia::profiled_object r;
+    r.object(po);
+    return r;
+}
+
+template<typename Container>
+std::list<dogen::yarn::dia::profiled_object>
+make_profiled_object(const Container& c) {
+    std::list<dogen::yarn::dia::profiled_object> r;
+    for (const auto& o : c)
+        r.push_back(make_profiled_object(o));
+    return r;
+}
 
 }
 
@@ -72,80 +89,80 @@ BOOST_AUTO_TEST_SUITE(grapher_tests)
 BOOST_AUTO_TEST_CASE(not_adding_objects_to_graph_produces_only_root_object) {
     SETUP_TEST_LOG_SOURCE("not_adding_objects_to_graph_produces_only_root_object");
 
-    std::list<dogen::yarn::dia::processed_object> o;
-    visitor v(o);
+    std::list<dogen::yarn::dia::profiled_object> pos;
+    visitor v(pos);
 
     dogen::yarn::dia::grapher g;
     g.generate();
     boost::depth_first_search(g.graph(), boost::visitor(v));
-    BOOST_LOG_SEV(lg, debug) << o;
+    BOOST_LOG_SEV(lg, debug) << pos;
 
-    BOOST_REQUIRE(o.size() == 1);
-    BOOST_CHECK(is_root_id(o.back().id()));
+    BOOST_REQUIRE(pos.size() == 1);
+    BOOST_CHECK(is_root_id(pos.back().object().id()));
 }
 
 BOOST_AUTO_TEST_CASE(adding_unrelated_objects_produces_expected_order) {
     SETUP_TEST_LOG_SOURCE("adding_unrelated_objects_produces_expected_order");
     dogen::yarn::dia::grapher g;
-    g.add(mock_processed_object_factory::make_large_package(0));
-    g.add(mock_processed_object_factory::make_class(1));
-    g.add(mock_processed_object_factory::make_class(2));
+    g.add(make_profiled_object(factory::make_large_package(0)));
+    g.add(make_profiled_object(factory::make_class(1)));
+    g.add(make_profiled_object(factory::make_class(2)));
 
-    std::list<dogen::yarn::dia::processed_object> o;
-    visitor v(o);
+    std::list<dogen::yarn::dia::profiled_object> pos;
+    visitor v(pos);
     g.generate();
     boost::depth_first_search(g.graph(), boost::visitor(v));
-    BOOST_LOG_SEV(lg, debug) << o;
+    BOOST_LOG_SEV(lg, debug) << pos;
 
-    BOOST_REQUIRE(o.size() == 4);
+    BOOST_REQUIRE(pos.size() == 4);
 
-    auto i(o.begin());
-    BOOST_CHECK(i->id() == mock_processed_object_factory::to_oject_id(0));
-    BOOST_CHECK((++i)->id() == mock_processed_object_factory::to_oject_id(1));
-    BOOST_CHECK((++i)->id() == mock_processed_object_factory::to_oject_id(2));
-    BOOST_CHECK(is_root_id((++i)->id()));
+    auto i(pos.begin());
+    BOOST_CHECK(i->object().id() == factory::to_oject_id(0));
+    BOOST_CHECK((++i)->object().id() == factory::to_oject_id(1));
+    BOOST_CHECK((++i)->object().id() == factory::to_oject_id(2));
+    BOOST_CHECK(is_root_id((++i)->object().id()));
 }
 
 BOOST_AUTO_TEST_CASE(adding_generalization_produces_expected_order) {
     SETUP_TEST_LOG_SOURCE("adding_generalization_produces_expected_order");
 
     dogen::yarn::dia::grapher g;
-    g.add(mock_processed_object_factory::make_generalization(0));
+    g.add(make_profiled_object(factory::make_generalization(0)));
 
-    std::list<dogen::yarn::dia::processed_object> o;
-    visitor v(o);
+    std::list<dogen::yarn::dia::profiled_object> pos;
+    visitor v(pos);
     g.generate();
     boost::depth_first_search(g.graph(), boost::visitor(v));
-    BOOST_LOG_SEV(lg, debug) << o;
+    BOOST_LOG_SEV(lg, debug) << pos;
 
-    BOOST_REQUIRE(o.size() == 3);
+    BOOST_REQUIRE(pos.size() == 3);
 
-    auto i(o.begin());
-    BOOST_CHECK(i->id() == mock_processed_object_factory::to_oject_id(1));
-    BOOST_CHECK((++i)->id() == mock_processed_object_factory::to_oject_id(2));
-    BOOST_CHECK(is_root_id((++i)->id()));
+    auto i(pos.begin());
+    BOOST_CHECK(i->object().id() == factory::to_oject_id(1));
+    BOOST_CHECK((++i)->object().id() == factory::to_oject_id(2));
+    BOOST_CHECK(is_root_id((++i)->object().id()));
 }
 
 BOOST_AUTO_TEST_CASE(adding_generalization_inside_package_produces_expected_order) {
     SETUP_TEST_LOG_SOURCE("adding_generalization_inside_package_produces_expected_order");
 
     dogen::yarn::dia::grapher g;
-    g.add(mock_processed_object_factory::
-        make_generalization_inside_large_package(0));
+    g.add(make_profiled_object(
+            factory::make_generalization_inside_large_package(0)));
 
-    std::list<dogen::yarn::dia::processed_object> o;
-    visitor v(o);
+    std::list<dogen::yarn::dia::profiled_object> pos;
+    visitor v(pos);
     g.generate();
     boost::depth_first_search(g.graph(), boost::visitor(v));
-    BOOST_LOG_SEV(lg, debug) << o;
+    BOOST_LOG_SEV(lg, debug) << pos;
 
-    BOOST_REQUIRE(o.size() == 4);
+    BOOST_REQUIRE(pos.size() == 4);
 
-    auto i(o.begin());
-    BOOST_CHECK(i->id() == mock_processed_object_factory::to_oject_id(0));
-    BOOST_CHECK((++i)->id() == mock_processed_object_factory::to_oject_id(1));
-    BOOST_CHECK((++i)->id() == mock_processed_object_factory::to_oject_id(2));
-    BOOST_CHECK(is_root_id((++i)->id()));
+    auto i(pos.begin());
+    BOOST_CHECK(i->object().id() == factory::to_oject_id(0));
+    BOOST_CHECK((++i)->object().id() == factory::to_oject_id(1));
+    BOOST_CHECK((++i)->object().id() == factory::to_oject_id(2));
+    BOOST_CHECK(is_root_id((++i)->object().id()));
 }
 
 BOOST_AUTO_TEST_CASE(generating_after_graph_has_been_generated_throws) {
@@ -153,7 +170,6 @@ BOOST_AUTO_TEST_CASE(generating_after_graph_has_been_generated_throws) {
 
     dogen::yarn::dia::grapher g;
     g.generate();
-    const auto o(mock_processed_object_factory::make_class(0));
     contains_checker<graphing_error> c(graph_generated);
     BOOST_CHECK_EXCEPTION(g.generate(), graphing_error, c);
 }
@@ -163,7 +179,7 @@ BOOST_AUTO_TEST_CASE(adding_object_after_graph_has_been_generated_throws) {
 
     dogen::yarn::dia::grapher g1;
     g1.generate();
-    const auto o(mock_processed_object_factory::make_class(0));
+    const auto o(make_profiled_object(factory::make_class(0)));
     contains_checker<graphing_error> c(graph_generated);
     BOOST_CHECK_EXCEPTION(g1.add(o), graphing_error, c);
 
@@ -177,7 +193,7 @@ BOOST_AUTO_TEST_CASE(querying_state_before_generating_throws) {
     SETUP_TEST_LOG("querying_state_before_generating_throws");
 
     dogen::yarn::dia::grapher g;
-    const auto o(mock_processed_object_factory::make_class(0));
+    const auto o(make_profiled_object(factory::make_class(0)));
     contains_checker<graphing_error> c(graph_not_generated);
     BOOST_CHECK_EXCEPTION(g.graph(), graphing_error, c);
     BOOST_CHECK_EXCEPTION(g.child_id_to_parent_ids(), graphing_error, c);
@@ -187,7 +203,7 @@ BOOST_AUTO_TEST_CASE(generating_graph_with_first_degree_cycle_throws) {
     SETUP_TEST_LOG("generating_graph_with_first_degree_cycle_throws");
 
     dogen::yarn::dia::grapher g;
-    g.add(mock_processed_object_factory::make_first_degree_cycle(0));
+    g.add(make_profiled_object(factory::make_first_degree_cycle(0)));
     contains_checker<graphing_error> c(graph_has_cycle);
     BOOST_CHECK_EXCEPTION(g.generate(), graphing_error, c);
 }

@@ -27,6 +27,7 @@
 
 #include <string>
 #include "dogen/yarn.dia/types/profile.hpp"
+#include "dogen/yarn.dia/types/profiled_object.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -94,14 +95,16 @@ private:
     /**
      * @brief Check the UML related flags.
      */
-    void validate_uml(const profile& p);
+    void validate_uml(const profile& p) const;
 
 public:
     /**
      * @brief Throws an exception of the object profile is not
      * considered to be valid.
      */
-    void validate(const profile& p);
+    void validate(const profile& p) const;
+
+    void validate(const std::list<profiled_object>& pos) const;
 };
 
 } } }

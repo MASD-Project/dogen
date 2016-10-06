@@ -50,6 +50,15 @@ public:
     explicit workflow(const dynamic::workflow& w);
 
 private:
+    std::list<profiled_object>
+    create_profiled_objects(const dogen::dia::diagram& d) const;
+
+    std::list<profiled_object>
+    reduce_profiled_objects(const std::list<profiled_object>& pos) const;
+
+    void validate_profiled_objects(const std::list<profiled_object>& pos) const;
+
+private:
     /**
      * @brief Creates a module representing the model.
      */
@@ -66,13 +75,7 @@ private:
     /**
      * @brief Setup the DAG of processed objects.
      */
-    graph_type generate_graph_activity(const dogen::dia::diagram& diagram);
-
-    /**
-     * @brief Perform the transformation sub-workflow on the supplied
-     * processed object.
-     */
-    void transformation_activity(const processed_object& o);
+    graph_type generate_graph_activity(const std::list<profiled_object>& pos);
 
     /**
      * @brief Transforms the entire graph of processed objects into a

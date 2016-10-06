@@ -93,12 +93,20 @@ process_stereotype(profile& o, const std::string& s) const {
     }
 }
 
+void profiler::post_process(profile& p) const {
+    bool nothing_set(!p.is_enumeration() && !p.is_exception() &&
+        !p.is_value_object() && !p.is_service() && !p.is_concept());
+    if (p.is_uml_class() && nothing_set)
+        p.is_value_object(true);
+}
+
 profile profiler::generate(const processed_object& o) {
     BOOST_LOG_SEV(lg, debug) << "Generating profile for: " << o.id();
 
     profile r;
     process_object_type(r, o.object_type());
     process_stereotype(r, o.stereotype());
+    post_process(r);
 
     BOOST_LOG_SEV(lg, debug) << "Generated profile for "  << o.id()
                              << ". result: " << r;

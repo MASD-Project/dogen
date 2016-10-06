@@ -38,8 +38,6 @@ const std::string root_id("__root__");
 const std::string graph_already_generated("Graph has already been generated");
 const std::string graph_not_yet_generated("Graph has not yet been generated");
 const std::string found_cycle_in_graph("Graph has a cycle: ");
-const std::string irrelevant_object(
-    "Attempt to add object not relevant to graph: ");
 
 }
 
@@ -67,17 +65,17 @@ public:
 
     template<typename Vertex, typename Graph>
     void discover_vertex(const Vertex& u, const Graph& g) {
-        state_->stream_ << "(" << g[u].id();
+        state_->stream_ << "(" << g[u].object().id();
     }
 
     void back_edge(graph_type::edge_descriptor e, const graph_type& g) {
-        state_->stream_ << "(" << g[target(e, g)].id();
+        const auto id(g[target(e, g)].object().id());
+        state_->stream_ << "(" << id;
         BOOST_LOG_SEV(lg, error) << found_cycle_in_graph
-                                 << g[target(e, g)].id() << ". Graph as sexp: "
+                                 << id << ". Graph as sexp: "
                                  << state_->stream_.str();
 
-        BOOST_THROW_EXCEPTION(graphing_error(found_cycle_in_graph +
-                boost::lexical_cast<std::string>(g[target(e, g)].id())));
+        BOOST_THROW_EXCEPTION(graphing_error(found_cycle_in_graph + id));
     }
 
     const std::string sexp() { return state_->stream_.str(); }
@@ -88,8 +86,8 @@ private:
 
 grapher::grapher()
     : generated_(false), root_vertex_(boost::add_vertex(graph_)) {
-    processed_object root;
-    root.id(::root_id);
+    profiled_object root;
+    root.object().id(::root_id);
     graph_[root_vertex_] = root;
     id_to_vertex_.insert(std::make_pair(::root_id, root_vertex_));
 }
@@ -125,15 +123,6 @@ void grapher::require_generated() const {
         BOOST_LOG_SEV(lg, error) << graph_not_yet_generated;
         BOOST_THROW_EXCEPTION(graphing_error(graph_not_yet_generated));
     }
-}
-
-bool grapher::is_relevant(const processed_object& o) const {
-    const auto ot(o.object_type());
-    return
-        ot == object_types::uml_large_package ||
-        ot == object_types::uml_generalization ||
-        ot == object_types::uml_class ||
-        ot == object_types::uml_note;
 }
 
 void grapher::
@@ -202,21 +191,17 @@ void grapher::process_connections(const processed_object& o) {
     }
 }
 
-void grapher::add(const processed_object& o) {
+void grapher::add(const profiled_object& po) {
     require_not_generated();
 
-    if (!is_relevant(o)) {
-        BOOST_LOG_SEV(lg, error) << irrelevant_object << o.id();
-        BOOST_THROW_EXCEPTION(graphing_error(irrelevant_object + o.id()));
-    }
-
+    const auto& o(po.object());
     if (o.connection()) {
         process_connections(o);
         return;
     }
 
     const auto v(vertex_for_id(o.id()));
-    graph_[v] = o;
+    graph_[v] = po;
     process_child_node(v, o);
 }
 

@@ -1234,6 +1234,8 @@ Algorithm:
   - if nothing was found, get the default value of the meta-data.
 
 *** STARTED Refactor =yarn.dia= transformer                           :story:
+    CLOCK: [2016-10-06 Thu 22:23]--[2016-10-06 Thu 22:46] =>  0:23
+    CLOCK: [2016-10-06 Thu 20:36]--[2016-10-06 Thu 21:33] =>  0:57
     CLOCK: [2016-10-06 Thu 20:20]--[2016-10-06 Thu 20:35] =>  0:15
     CLOCK: [2016-10-06 Thu 15:40]--[2016-10-06 Thu 17:06] =>  1:26
     CLOCK: [2016-10-06 Thu 13:23]--[2016-10-06 Thu 14:40] =>  1:17
@@ -1246,6 +1248,10 @@ Renames:
 - processed comment => comment
 - processed attribute => attribute
 - comment processor => comment factory
+
+Renames abandoned; they cause clashes with the names in dia. There are
+no good alternatives, so we'll just stick with "processed" as a way of
+distinguishing names across models.
 
 Tasks:
 

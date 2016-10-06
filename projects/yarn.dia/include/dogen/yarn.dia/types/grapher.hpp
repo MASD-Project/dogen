@@ -30,6 +30,7 @@
 #include <unordered_set>
 #include <boost/graph/adjacency_list.hpp>
 #include "dogen/yarn.dia/types/object_types.hpp"
+#include "dogen/yarn.dia/types/profiled_object.hpp"
 #include "dogen/yarn.dia/types/processed_object.hpp"
 
 namespace dogen {
@@ -40,7 +41,7 @@ namespace dia {
  * @brief Graph of dependencies between dia objects.
  */
 typedef boost::adjacency_list<
-    boost::setS, boost::vecS, boost::directedS, processed_object
+    boost::setS, boost::vecS, boost::directedS, profiled_object
     > graph_type;
 
 /**
@@ -55,7 +56,8 @@ private:
     id_to_vertex_type;
 
     typedef std::unordered_map<std::string,
-                               std::list<std::string> > child_id_to_parent_ids_type;
+                               std::list<std::string>
+                               > child_id_to_parent_ids_type;
 
 public:
     grapher();
@@ -101,18 +103,12 @@ public:
 
 public:
     /**
-     * @brief Returns true if the object can be added to the object
-     * graph, false otherwise.
-     */
-    bool is_relevant(const processed_object& o) const;
-
-    /**
      * @brief Adds an object to the graph.
      *
      * @pre The graph must not yet have been generated.
      * @pre The object must be relevant to the graph.
      */
-    void add(const processed_object& o);
+    void add(const profiled_object& o);
 
     /**
      * @brief Adds a container of objects to the graph.

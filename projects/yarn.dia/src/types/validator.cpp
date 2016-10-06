@@ -139,7 +139,7 @@ void validator::validate_yarn(const profile& p) const {
     }
 }
 
-void validator::validate_uml(const profile& p) {
+void validator::validate_uml(const profile& p) const {
     const auto types(count_uml_types(p));
 
     if (types == 0) {
@@ -153,9 +153,14 @@ void validator::validate_uml(const profile& p) {
     }
 }
 
-void validator::validate(const profile& p) {
+void validator::validate(const profile& p) const {
     validate_uml(p);
     validate_yarn(p);
+}
+
+void validator::validate(const std::list<profiled_object>& pos) const {
+    for (const auto& po : pos)
+        validate(po.profile());
 }
 
 } } }

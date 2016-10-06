@@ -95,7 +95,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_no_stereotypes_transforms_into_expected_prof
 
     BOOST_LOG_SEV(lg, debug) << "actual:" << p;
     BOOST_CHECK(p.is_uml_class());
-    BOOST_CHECK(total_count(p) == 1);
+    BOOST_CHECK(total_count(p) == 2);
 }
 
 BOOST_AUTO_TEST_CASE(uml_note_transforms_into_expected_profile) {
@@ -199,7 +199,7 @@ BOOST_AUTO_TEST_CASE(stereotyped_class_transforms_into_expected_profile) {
 
     BOOST_LOG_SEV(lg, debug) << "actual 3:" << p;
     BOOST_CHECK(is_valid_uml_class(p));
-    BOOST_CHECK(stereotype_count(p) == 4);
+    BOOST_CHECK(stereotype_count(p) == 5);
     BOOST_CHECK(p.is_non_generatable());
     BOOST_CHECK(p.is_visitable());
     BOOST_CHECK(p.is_immutable());

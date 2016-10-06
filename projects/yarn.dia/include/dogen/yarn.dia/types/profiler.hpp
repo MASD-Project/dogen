@@ -56,6 +56,8 @@ private:
      */
     void process_stereotype(profile& o, const std::string& s) const;
 
+    void post_process(profile& o) const;
+
 public:
     /**
      * @brief Perform the profiling.
