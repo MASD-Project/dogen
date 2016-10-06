@@ -18,19 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_DIA_IO_ALL_IO_HPP
-#define DOGEN_YARN_DIA_IO_ALL_IO_HPP
+#ifndef DOGEN_YARN_DIA_TEST_DATA_PROFILED_OBJECT_TD_HPP
+#define DOGEN_YARN_DIA_TEST_DATA_PROFILED_OBJECT_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/yarn.dia/io/context_io.hpp"
-#include "dogen/yarn.dia/io/profile_io.hpp"
-#include "dogen/yarn.dia/io/object_types_io.hpp"
-#include "dogen/yarn.dia/io/profiled_object_io.hpp"
-#include "dogen/yarn.dia/io/processed_object_io.hpp"
-#include "dogen/yarn.dia/io/processed_comment_io.hpp"
-#include "dogen/yarn.dia/io/processed_attribute_io.hpp"
+#include "dogen/yarn.dia/types/profiled_object.hpp"
+
+namespace dogen {
+namespace yarn {
+namespace dia {
+
+class profiled_object_generator {
+public:
+    profiled_object_generator();
+
+public:
+    typedef dogen::yarn::dia::profiled_object result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
+
+} } }
 
 #endif

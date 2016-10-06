@@ -139,7 +139,7 @@ private:
     void update_element(const processed_object& o, const profile& p,
         yarn::element& e);
 
-private:
+public:
     /**
      * @brief Converts a processed object containing a UML class with
      * a stereotype of exception to a yarn exception.
@@ -149,7 +149,7 @@ private:
      *
      * @pre profile must have the exception flag set.
      */
-    void to_exception(const processed_object& o, const profile& p);
+    yarn::exception to_exception(const processed_object& o, const profile& p);
 
     /**
      * @brief Converts Dia a object containing a UML class with a
@@ -160,7 +160,7 @@ private:
      *
      * @pre profile must have the value object flag set.
      */
-    void to_object(const processed_object& po, const profile& p,
+    yarn::object to_object(const processed_object& po, const profile& p,
         const yarn::object_types ot);
 
     /**
@@ -168,7 +168,8 @@ private:
      *
      * @param o the Dia UML class containing an enumeration.
      */
-    void to_enumeration(const processed_object& o, const profile& p);
+    yarn::enumeration to_enumeration(const processed_object& o,
+        const profile& p);
 
     /**
      * @brief Converts a dia object of type large UML package into a
@@ -176,7 +177,7 @@ private:
      *
      * @param o Dia object which contains a UML package.
      */
-    void to_module(const processed_object& o, const profile& p);
+    yarn::module to_module(const processed_object& o, const profile& p);
 
     /**
      * @brief Converts a dia object of type UML note into
@@ -192,7 +193,7 @@ private:
      *
      * @param o Dia object which contains a concept.
      */
-    void to_concept(const processed_object& o, const profile& p);
+    yarn::concept to_concept(const processed_object& o, const profile& p);
 
 private:
     /**

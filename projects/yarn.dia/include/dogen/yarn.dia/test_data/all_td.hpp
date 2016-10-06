@@ -28,6 +28,7 @@
 #include "dogen/yarn.dia/test_data/context_td.hpp"
 #include "dogen/yarn.dia/test_data/profile_td.hpp"
 #include "dogen/yarn.dia/test_data/object_types_td.hpp"
+#include "dogen/yarn.dia/test_data/profiled_object_td.hpp"
 #include "dogen/yarn.dia/test_data/processed_object_td.hpp"
 #include "dogen/yarn.dia/test_data/processed_comment_td.hpp"
 #include "dogen/yarn.dia/test_data/processed_attribute_td.hpp"

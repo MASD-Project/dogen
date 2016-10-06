@@ -18,19 +18,31 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_DIA_IO_ALL_IO_HPP
-#define DOGEN_YARN_DIA_IO_ALL_IO_HPP
+#include "dogen/yarn.dia/hash/profile_hash.hpp"
+#include "dogen/yarn.dia/hash/profiled_object_hash.hpp"
+#include "dogen/yarn.dia/hash/processed_object_hash.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace {
 
-#include "dogen/yarn.dia/io/context_io.hpp"
-#include "dogen/yarn.dia/io/profile_io.hpp"
-#include "dogen/yarn.dia/io/object_types_io.hpp"
-#include "dogen/yarn.dia/io/profiled_object_io.hpp"
-#include "dogen/yarn.dia/io/processed_object_io.hpp"
-#include "dogen/yarn.dia/io/processed_comment_io.hpp"
-#include "dogen/yarn.dia/io/processed_attribute_io.hpp"
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value) {
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
 
-#endif
+}
+
+namespace dogen {
+namespace yarn {
+namespace dia {
+
+std::size_t profiled_object_hasher::hash(const profiled_object& v) {
+    std::size_t seed(0);
+
+    combine(seed, v.object());
+    combine(seed, v.profile());
+
+    return seed;
+}
+
+} } }

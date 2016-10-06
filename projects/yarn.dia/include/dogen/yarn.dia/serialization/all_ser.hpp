@@ -28,6 +28,7 @@
 #include "dogen/yarn.dia/serialization/context_ser.hpp"
 #include "dogen/yarn.dia/serialization/profile_ser.hpp"
 #include "dogen/yarn.dia/serialization/object_types_ser.hpp"
+#include "dogen/yarn.dia/serialization/profiled_object_ser.hpp"
 #include "dogen/yarn.dia/serialization/processed_object_ser.hpp"
 #include "dogen/yarn.dia/serialization/processed_comment_ser.hpp"
 #include "dogen/yarn.dia/serialization/processed_attribute_ser.hpp"

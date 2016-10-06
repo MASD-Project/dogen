@@ -18,19 +18,48 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_DIA_IO_ALL_IO_HPP
-#define DOGEN_YARN_DIA_IO_ALL_IO_HPP
+#ifndef DOGEN_YARN_DIA_TYPES_BUILDER_HPP
+#define DOGEN_YARN_DIA_TYPES_BUILDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/yarn.dia/io/context_io.hpp"
-#include "dogen/yarn.dia/io/profile_io.hpp"
-#include "dogen/yarn.dia/io/object_types_io.hpp"
-#include "dogen/yarn.dia/io/profiled_object_io.hpp"
-#include "dogen/yarn.dia/io/processed_object_io.hpp"
-#include "dogen/yarn.dia/io/processed_comment_io.hpp"
-#include "dogen/yarn.dia/io/processed_attribute_io.hpp"
+#include <list>
+#include <string>
+#include <unordered_map>
+#include "dogen/yarn/types/name.hpp"
+#include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn.dia/types/transformer.hpp"
+#include "dogen/yarn.dia/types/profiled_object.hpp"
+
+namespace dogen {
+namespace yarn {
+namespace dia {
+
+class builder {
+/*public:
+    builder(transformer& transformer, const std::unordered_map<
+        std::string, std::list<std::string>>& child_id_to_parent_ids);
+
+private:
+    void update_documentation(const processed_object& o) const;
+
+private:
+
+
+public:
+    void add(const profiled_object& o);
+    yarn::model build();
+
+private:
+    const std::unordered_map<std::string,
+                             std::list<std::string>>& child_id_to_parent_ids_;
+    transformer& transformer_;
+    std::unordered_map<std::string, yarn::name> id_to_name_;
+    yarn::model model_;*/
+};
+
+} } }
 
 #endif

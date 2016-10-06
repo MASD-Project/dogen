@@ -27,9 +27,11 @@
 
 #include "dogen/yarn.dia/types/dia.hpp"
 #include "dogen/yarn.dia/types/traits.hpp"
+#include "dogen/yarn.dia/types/builder.hpp"
 #include "dogen/yarn.dia/types/context.hpp"
 #include "dogen/yarn.dia/types/grapher.hpp"
 #include "dogen/yarn.dia/types/profile.hpp"
+#include "dogen/yarn.dia/types/reducer.hpp"
 #include "dogen/yarn.dia/types/visitor.hpp"
 #include "dogen/yarn.dia/types/frontend.hpp"
 #include "dogen/yarn.dia/types/profiler.hpp"
@@ -38,7 +40,9 @@
 #include "dogen/yarn.dia/types/initializer.hpp"
 #include "dogen/yarn.dia/types/transformer.hpp"
 #include "dogen/yarn.dia/types/object_types.hpp"
+#include "dogen/yarn.dia/types/bulding_error.hpp"
 #include "dogen/yarn.dia/types/graphing_error.hpp"
+#include "dogen/yarn.dia/types/profiled_object.hpp"
 #include "dogen/yarn.dia/types/object_processor.hpp"
 #include "dogen/yarn.dia/types/processed_object.hpp"
 #include "dogen/yarn.dia/types/processing_error.hpp"
@@ -47,5 +51,6 @@
 #include "dogen/yarn.dia/types/processed_comment.hpp"
 #include "dogen/yarn.dia/types/processed_attribute.hpp"
 #include "dogen/yarn.dia/types/transformation_error.hpp"
+#include "dogen/yarn.dia/types/profiled_object_factory.hpp"
 
 #endif

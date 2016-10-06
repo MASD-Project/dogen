@@ -210,7 +210,8 @@ void transformer::update_element(const processed_object& o, const profile& p,
     e.extensions(dynamic_workflow_.execute(scope, kvps));
 }
 
-void transformer::to_object(const processed_object& po, const profile& p,
+yarn::object
+transformer::to_object(const processed_object& po, const profile& p,
     const yarn::object_types ot) {
     yarn::object o;
     update_element(po, p, o);
@@ -275,9 +276,11 @@ void transformer::to_object(const processed_object& po, const profile& p,
     o.object_type(ot);
     auto& objects(context_.model().objects());
     objects.insert(std::make_pair(o.name().id(), o));
+    return o;
 }
 
-void transformer::to_exception(const processed_object& o, const profile& p) {
+yarn::exception
+transformer::to_exception(const processed_object& o, const profile& p) {
     BOOST_LOG_SEV(lg, debug) << "Object is an exception: " << o.id();
 
     yarn::exception e;
@@ -285,9 +288,11 @@ void transformer::to_exception(const processed_object& o, const profile& p) {
 
     auto& exceptions(context_.model().exceptions());
     exceptions.insert(std::make_pair(e.name().id(), e));
+    return e;
 }
 
-void transformer::to_enumeration(const processed_object& o, const profile& p) {
+yarn::enumeration
+transformer::to_enumeration(const processed_object& o, const profile& p) {
     BOOST_LOG_SEV(lg, debug) << "Object is an enumeration: " << o.id();
     yarn::enumeration e;
     update_element(o, p, e);
@@ -317,15 +322,18 @@ void transformer::to_enumeration(const processed_object& o, const profile& p) {
     }
     auto& enumerations(context_.model().enumerations());
     enumerations.insert(std::make_pair(e.name().id(), e));
+    return e;
 }
 
-void transformer::to_module(const processed_object& o, const profile& p) {
+yarn::module
+transformer::to_module(const processed_object& o, const profile& p) {
     BOOST_LOG_SEV(lg, debug) << "Object is a module: " << o.id();
 
     yarn::module m;
     update_element(o, p, m);
     auto& modules(context_.model().modules());
     modules.insert(std::make_pair(m.name().id(), m));
+    return m;
 }
 
 void transformer::from_note(const processed_object& o) {
@@ -358,7 +366,8 @@ void transformer::from_note(const processed_object& o) {
     module.extensions(dynamic_workflow_.execute(scope, kvps));
 }
 
-void transformer::to_concept(const processed_object& o, const profile& p) {
+yarn::concept
+transformer::to_concept(const processed_object& o, const profile& p) {
     yarn::concept c;
     update_element(o, p, c);
 
@@ -392,6 +401,7 @@ void transformer::to_concept(const processed_object& o, const profile& p) {
 
     auto& concepts(context_.model().concepts());
     concepts.insert(std::make_pair(c.name().id(), c));
+    return c;
 }
 
 bool transformer::is_transformable(const processed_object& o) const {

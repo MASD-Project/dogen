@@ -18,19 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_DIA_IO_ALL_IO_HPP
-#define DOGEN_YARN_DIA_IO_ALL_IO_HPP
+#ifndef DOGEN_YARN_DIA_TYPES_REDUCER_FWD_HPP
+#define DOGEN_YARN_DIA_TYPES_REDUCER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/yarn.dia/io/context_io.hpp"
-#include "dogen/yarn.dia/io/profile_io.hpp"
-#include "dogen/yarn.dia/io/object_types_io.hpp"
-#include "dogen/yarn.dia/io/profiled_object_io.hpp"
-#include "dogen/yarn.dia/io/processed_object_io.hpp"
-#include "dogen/yarn.dia/io/processed_comment_io.hpp"
-#include "dogen/yarn.dia/io/processed_attribute_io.hpp"
+namespace dogen {
+namespace yarn {
+namespace dia {
+
+class reducer;
+
+} } }
 
 #endif
