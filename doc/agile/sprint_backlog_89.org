@@ -1171,6 +1171,12 @@ dispatching.
 
 We need to have the ability to add stereotypes to any element.
 
+*** COMPLETED Improve project banner                                  :story:
+    CLOSED: [2016-10-06 Thu 09:13]
+    CLOCK: [2016-10-06 Thu 08:45]--[2016-10-06 Thu 09:13] =>  0:28
+
+Do a couple of minor cosmetic changes to project banner.
+
 *** STARTED Add support for profiles                                  :story:
     CLOCK: [2016-10-05 Wed 23:13]--[2016-10-05 Wed 23:24] =>  0:11
     CLOCK: [2016-10-05 Wed 22:15]--[2016-10-05 Wed 23:12] =>  0:57
