@@ -14,22 +14,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-06 Thu 09:56]
+#+CAPTION: Clock summary at [2016-10-06 Thu 11:47]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *70:23* |       |       | 100.0 |
+| *Total time*                                                                | *72:04* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 70:23   |       |       | 100.0 |
-| Active                                                                      |         | 70:23 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  5:15 |   7.5 |
+| Stories                                                                     | 72:04   |       |       | 100.0 |
+| Active                                                                      |         | 72:04 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  5:30 |   7.6 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:07 |   0.2 |
-| COMPLETED Generation of formattable is incorrect                            |         |       |  2:30 |   3.6 |
+| COMPLETED Generation of formattable is incorrect                            |         |       |  2:30 |   3.5 |
 | COMPLETED Visitor includes are incorrect                                    |         |       |  0:20 |   0.5 |
 | COMPLETED Add includer to quilt.cpp                                         |         |       |  1:46 |   2.5 |
 | COMPLETED Add reducer to quilt.cpp                                          |         |       |  0:22 |   0.5 |
 | COMPLETED Add new index to formtter container                               |         |       |  0:19 |   0.4 |
-| COMPLETED Add path expander to quilt.cpp                                    |         |       |  0:49 |   1.2 |
+| COMPLETED Add path expander to quilt.cpp                                    |         |       |  0:49 |   1.1 |
 | COMPLETED Add guard expander to quilt.cpp                                   |         |       |  0:27 |   0.6 |
 | COMPLETED Investigate borked travis build                                   |         |       |  0:37 |   0.9 |
 | COMPLETED Add decoration expander to quilt.cpp                              |         |       |  0:23 |   0.5 |
@@ -37,36 +37,40 @@
 | COMPLETED Run tests that are passing on windows                             |         |       |  0:10 |   0.2 |
 | COMPLETED Add helper expander to quilt.cpp                                  |         |       |  1:26 |   2.0 |
 | COMPLETED Merge pre and post workflows                                      |         |       |  0:16 |   0.4 |
-| COMPLETED Fix bug in aspect and helper generation                           |         |       |  0:15 |   0.4 |
-| COMPLETED Investigate element annotation support                            |         |       |  2:05 |   3.0 |
-| CANCELLED Add streaming settings expander                                   |         |       |  0:36 |   0.9 |
-| COMPLETED Create the formattables model                                     |         |       |  1:32 |   2.2 |
-| COMPLETED Hook formattables into formatters                                 |         |       |  3:58 |   5.6 |
+| COMPLETED Fix bug in aspect and helper generation                           |         |       |  0:15 |   0.3 |
+| COMPLETED Investigate element annotation support                            |         |       |  2:05 |   2.9 |
+| CANCELLED Add streaming settings expander                                   |         |       |  0:36 |   0.8 |
+| COMPLETED Create the formattables model                                     |         |       |  1:32 |   2.1 |
+| COMPLETED Hook formattables into formatters                                 |         |       |  3:58 |   5.5 |
 | COMPLETED Remove empty context                                              |         |       |  1:09 |   1.6 |
-| COMPLETED Review main classes in quilt.cpp                                  |         |       |  3:42 |   5.3 |
+| COMPLETED Review main classes in quilt.cpp                                  |         |       |  3:42 |   5.1 |
 | COMPLETED Clean up element segmentation                                     |         |       |  1:20 |   1.9 |
-| COMPLETED Get OSX build to compile code                                     |         |       |  7:05 |  10.1 |
+| COMPLETED Get OSX build to compile code                                     |         |       |  7:05 |   9.8 |
 | COMPLETED Add a banner to readme                                            |         |       |  1:29 |   2.1 |
 | COMPLETED Remove formatter group                                            |         |       |  0:23 |   0.5 |
-| COMPLETED Add more types to =quilt::cpp= canned tests                       |         |       |  0:15 |   0.4 |
+| COMPLETED Add more types to =quilt::cpp= canned tests                       |         |       |  0:15 |   0.3 |
 | CANCELLED Remove formatter id                                               |         |       |  0:04 |   0.1 |
-| COMPLETED Analysis around terminology in formatting space                   |         |       |  3:24 |   4.8 |
+| COMPLETED Analysis around terminology in formatting space                   |         |       |  3:24 |   4.7 |
 | COMPLETED Remove =original_model_name=                                      |         |       |  0:16 |   0.4 |
-| COMPLETED Refactor code around model origination                            |         |       |  4:08 |   5.9 |
+| COMPLETED Refactor code around model origination                            |         |       |  4:08 |   5.7 |
 | COMPLETED Remove formatter level facet folders                              |         |       |  0:06 |   0.1 |
 | COMPLETED Consider removing the "fake" primitive formatters                 |         |       |  0:01 |   0.0 |
-| COMPLETED Expander refactor in =quilt.cpp=                                  |         |       |  3:03 |   4.3 |
-| COMPLETED Create the notion of a formatter alias                            |         |       |  3:15 |   4.6 |
+| COMPLETED Expander refactor in =quilt.cpp=                                  |         |       |  3:03 |   4.2 |
+| COMPLETED Create the notion of a formatter alias                            |         |       |  3:15 |   4.5 |
 | COMPLETED Remove enabled formatters from formatter configuration            |         |       |  0:22 |   0.5 |
-| COMPLETED Handle registration of services properly                          |         |       |  3:41 |   5.2 |
+| COMPLETED Handle registration of services properly                          |         |       |  3:41 |   5.1 |
 | COMPLETED Move stereotypes to element                                       |         |       |  0:21 |   0.5 |
-| COMPLETED Improve project banner                                            |         |       |  0:32 |   0.8 |
-| STARTED Add support for profiles                                            |         |       | 10:40 |  15.2 |
-| STARTED Generate formatter interfaces                                       |         |       |  0:28 |   0.7 |
+| COMPLETED Improve project banner                                            |         |       |  0:32 |   0.7 |
+| CANCELLED Add support for profiles                                          |         |       | 10:40 |  14.8 |
+| STARTED Rewrite profile support                                             |         |       |  1:26 |   2.0 |
+| STARTED Generate formatter interfaces                                       |         |       |  0:28 |   0.6 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-10-06 Thu 11:44]--[2016-10-06 Thu 11:47] =>  0:03
+    CLOCK: [2016-10-06 Thu 11:36]--[2016-10-06 Thu 11:43] =>  0:07
+    CLOCK: [2016-10-06 Thu 11:30]--[2016-10-06 Thu 11:35] =>  0:05
     CLOCK: [2016-10-05 Wed 20:20]--[2016-10-05 Wed 20:45] =>  0:25
     CLOCK: [2016-10-04 Tue 19:06]--[2016-10-04 Tue 19:19] =>  0:13
     CLOCK: [2016-10-03 Mon 10:17]--[2016-10-03 Mon 10:21] =>  0:04
@@ -1179,7 +1183,8 @@ We need to have the ability to add stereotypes to any element.
 
 Do a couple of minor cosmetic changes to project banner.
 
-*** STARTED Add support for profiles                                  :story:
+*** CANCELLED Add support for profiles                                :story:
+    CLOSED: [2016-10-06 Thu 10:21]
     CLOCK: [2016-10-06 Thu 09:14]--[2016-10-06 Thu 09:56] =>  0:42
     CLOCK: [2016-10-05 Wed 23:13]--[2016-10-05 Wed 23:24] =>  0:11
     CLOCK: [2016-10-05 Wed 22:15]--[2016-10-05 Wed 23:12] =>  0:57
@@ -1227,6 +1232,57 @@ Algorithm:
     formatter specific profile. If so, see if its enabled or not.
   - if nothing was found, get the default value of the meta-data.
 
+*** Create a dynamic expander in yarn                                 :story:
+
+We need to move this work from the front end into yarn.
+
+Tasks:
+
+- add a map of string to raw kvps in intermediate model. Populate it
+  from the frontend.
+- remove all uses of dynamic in the frontends
+- add an expander that takes the map and generates the dynamic
+  objects. Update intermediate model with them.
+- change dynamic workflow to take all of the objects in one go (plus
+  the root object name) and return all dynamic objects against the
+  element id.
+
+*** Clean up terminology in dynamic                                   :story:
+
+We have to do a number of renames to make space for profilers:
+
+- rename fields to field_definitions in data;
+- rename definition types to instantiation types;
+- hydration workflow is field definition factory
+- json hydrator is field definition hydrator
+- repository is field definition repository
+- repository factory should be merged into field definition factory
+- repository selector is field definition selector
+
+*** STARTED Rewrite profile support                                   :story:
+    CLOCK: [2016-10-06 Thu 10:20]--[2016-10-06 Thu 11:30] =>  1:10
+    CLOCK: [2016-10-06 Thu 10:03]--[2016-10-06 Thu 10:19] =>  0:16
+
+Our first stab at implementing profiles was a valiant effort but sadly
+it was not the right approach. Profiles need to be implemented
+directly into dynamic, and they must be totally transparent to the
+layers above.
+
+The profile structure is very similar to what we did in v1, but we
+must implement it in terms of dynamic infrastructure:
+
+- we need to make use of dynamic templates to expand facets and
+  formatters, and to refer to instances;
+
+Tasks:
+
+- implement all of the new dynamic classes
+- remove profiles in quilt.cpp and ensure the code works with the
+  profile expansion. Update models to make use of global profiles.
+- we need to supply a list of stereotypes to dynamic workflow, against
+  the id's that have them. If we can find a profile with the
+  stereotype name, apply it.
+
 *** Finish overwriting support                                        :story:
 
 With profiles we have all the pieces in place to support overwrites,
@@ -1235,87 +1291,6 @@ but there is some linkage missing:
 - global/local configuration needs to have an overwrite flag;
 - need to populate formatter configuration on the back of that;
 - need to read flag from formatter configuration and set it on file.
-
-*** STARTED Link profiles to stereotypes                              :story:
-
-Once we have profiles, we need to have a way to link them to
-stereotypes. At present we only have two use cases:
-
-- hand-crafted
-- formatter
-
-When we spot one of these, we should then automatically look for a
-profile with this name. If found apply it locally.
-
-*Previous Understanding*
-
-An element can be marked with the stereotype of handcrafted. We then
-have several things to determine for this element:
-
-- which formatters are disabled due to handcraft mode (e.g. all facets
-  other than types);
-- which formatters are enabled, but should only generate if there
-  isn't a file already in the file system (e.g. class header and class
-  implementation in types)
-- which formatters are enabled and should generate as usual
-  (e.g. forward declarations in types).
-
-We must also allow users to override these settings so that:
-
-- they can disable the types facet if required;
-- they can provide their own implementations for other facets;
-- they can ask the code generator to generate one for them
-  (serialisation, io).
-
-Finally, for the common case, we do not want users to have to set lots
-of meta-data; we need a sensible default behaviour.
-
-Actually, from a purely functional perspective, what is handcrafting?
-It is a shorthand for:
-
-- disable a set of formatters;
-- enable another set of formatters;
-- for a subset of the enabled formatters, generate only if there is no
-  file in the filesystem, otherwise do nothing;
-- for another subset of the enabled formatters, generate as usual.
-- do not add leaves to the registrar (unless asked to).
-
-One can conceive the notion of an enablement profile. These can be
-global or local. We can also have overwritting profiles. These can
-only be local. A sub-set of the enabled formatters can be set to
-overwrite=false. Examples:
-
-- default enablement profile: "enable all". Enables all facets and
-  formatters.
-- types and a facet profiles: "types and serialisation", "types and
-  io" etc.
-- "types class only": generates class header and implementation.
-- default overwrite profile: "overwrite all". Overwrites all
-  artefacts.
-
-Now handcrafting becomes much easier:
-
-- add meta-data to quilt: a) a way of specifying profiles for
-  overwriting and enabling b) a way of specifying if leaves contribute
-  to registration or not.
-- define a set of profiles in data for overwriting and enabling. Users
-  can provide their own profile directories.
-- Link the overwriting and enabling with stereotypes: given a
-  stereotype, we could map to a default profile. Actually this is more
-  of a profile group. We could then state that a stereotype maps to a
-  profile group.
-
-Note: we don't need to do leaf management:
-
-#+begin_quote
-- add a flag for leaf management. It defaults to true, unless
-  handcrafted. Add meta-data to allow overriding flag (or create story
-  for it as we don't yet have a use case).
-#+end_quote
-
-We just need to enable/disable serialisation and the code will work.
-
-- add a stereotype of handcrafted with a default profile.
 
 *** STARTED Generate formatter interfaces                              :epic:
     CLOCK: [2016-10-04 Tue 18:56]--[2016-10-04 Tue 19:05] =>  0:09
@@ -1468,12 +1443,97 @@ responsible for resolving the stereotypes. This is not ideal:
 The right thing is:
 
 - make stereotypes a string container;
-- frontend simply populates the container and does not judgements;
+- frontend simply populates the container and does not judgement;
 - *all* stereotypes are put in the container; rule of thumb is, if its
   a UML stereotype then it must go in the container;
 - stereotypes expander figures out if the stereotype is one that is
   actionable within yarn (visitor, modeled concepts) or one to
-  pass-through (binding stereotypes.
+  pass-through (binding stereotypes).
+- during dynamic expansion, we supply a list of _all_ stereotypes
+  against ids. If there is a match, they are used as profiles.
+
+Merged stories:
+
+*Link profiles to stereotypes*
+
+Once we have profiles, we need to have a way to link them to
+stereotypes. At present we only have two use cases:
+
+- hand-crafted
+- formatter
+
+When we spot one of these, we should then automatically look for a
+profile with this name. If found apply it locally.
+
+*Previous Understanding*
+
+An element can be marked with the stereotype of handcrafted. We then
+have several things to determine for this element:
+
+- which formatters are disabled due to handcraft mode (e.g. all facets
+  other than types);
+- which formatters are enabled, but should only generate if there
+  isn't a file already in the file system (e.g. class header and class
+  implementation in types)
+- which formatters are enabled and should generate as usual
+  (e.g. forward declarations in types).
+
+We must also allow users to override these settings so that:
+
+- they can disable the types facet if required;
+- they can provide their own implementations for other facets;
+- they can ask the code generator to generate one for them
+  (serialisation, io).
+
+Finally, for the common case, we do not want users to have to set lots
+of meta-data; we need a sensible default behaviour.
+
+Actually, from a purely functional perspective, what is handcrafting?
+It is a shorthand for:
+
+- disable a set of formatters;
+- enable another set of formatters;
+- for a subset of the enabled formatters, generate only if there is no
+  file in the filesystem, otherwise do nothing;
+- for another subset of the enabled formatters, generate as usual.
+- do not add leaves to the registrar (unless asked to).
+
+One can conceive the notion of an enablement profile. These can be
+global or local. We can also have overwritting profiles. These can
+only be local. A sub-set of the enabled formatters can be set to
+overwrite=false. Examples:
+
+- default enablement profile: "enable all". Enables all facets and
+  formatters.
+- types and a facet profiles: "types and serialisation", "types and
+  io" etc.
+- "types class only": generates class header and implementation.
+- default overwrite profile: "overwrite all". Overwrites all
+  artefacts.
+
+Now handcrafting becomes much easier:
+
+- add meta-data to quilt: a) a way of specifying profiles for
+  overwriting and enabling b) a way of specifying if leaves contribute
+  to registration or not.
+- define a set of profiles in data for overwriting and enabling. Users
+  can provide their own profile directories.
+- Link the overwriting and enabling with stereotypes: given a
+  stereotype, we could map to a default profile. Actually this is more
+  of a profile group. We could then state that a stereotype maps to a
+  profile group.
+
+Note: we don't need to do leaf management:
+
+#+begin_quote
+- add a flag for leaf management. It defaults to true, unless
+  handcrafted. Add meta-data to allow overriding flag (or create story
+  for it as we don't yet have a use case).
+#+end_quote
+
+We just need to enable/disable serialisation and the code will work.
+
+- add a stereotype of handcrafted with a default profile.
 
 *** Merge annotations with formattables                               :story:
 
