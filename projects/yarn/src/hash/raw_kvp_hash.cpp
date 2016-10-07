@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/hash/indices_hash.hpp"
 #include "dogen/yarn/hash/raw_kvp_hash.hpp"
 
 namespace {
@@ -29,19 +28,27 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_unordered_set_std_string(const std::unordered_set<std::string>& v) {
+inline std::size_t hash_std_pair_std_string_std_string(const std::pair<std::string, std::string>& v) {
+    std::size_t seed(0);
+
+    combine(seed, v.first);
+    combine(seed, v.second);
+    return seed;
+}
+
+inline std::size_t hash_std_list_std_pair_std_string_std_string(const std::list<std::pair<std::string, std::string> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
-        combine(seed, i);
+        combine(seed, hash_std_pair_std_string_std_string(i));
     }
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_dogen_yarn_raw_kvp(const std::unordered_map<std::string, dogen::yarn::raw_kvp>& v) {
+inline std::size_t hash_std_unordered_map_std_string_std_list_std_pair_std_string_std_string(const std::unordered_map<std::string, std::list<std::pair<std::string, std::string> > >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
-        combine(seed, i.second);
+        combine(seed, hash_std_list_std_pair_std_string_std_string(i.second));
     }
     return seed;
 }
@@ -51,12 +58,11 @@ inline std::size_t hash_std_unordered_map_std_string_dogen_yarn_raw_kvp(const st
 namespace dogen {
 namespace yarn {
 
-std::size_t indices_hasher::hash(const indices& v) {
+std::size_t raw_kvp_hasher::hash(const raw_kvp& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_unordered_set_std_string(v.objects_always_in_heap()));
-    combine(seed, hash_std_unordered_set_std_string(v.elements_referable_by_attributes()));
-    combine(seed, hash_std_unordered_map_std_string_dogen_yarn_raw_kvp(v.raw_kvps()));
+    combine(seed, hash_std_list_std_pair_std_string_std_string(v.element()));
+    combine(seed, hash_std_unordered_map_std_string_std_list_std_pair_std_string_std_string(v.attributes()));
 
     return seed;
 }

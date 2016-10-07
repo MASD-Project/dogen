@@ -20,7 +20,6 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/yarn/io/indices_io.hpp"
 #include "dogen/yarn/io/raw_kvp_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -32,11 +31,24 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::string>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, std::string>& v) {
+    s << "{ " << "\"__type__\": " << "\"std::pair\"" << ", ";
+
+    s << "\"first\": " << "\"" << tidy_up_string(v.first) << "\"" << ", ";
+    s << "\"second\": " << "\"" << tidy_up_string(v.second) << "\"";
+    s << " }";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::pair<std::string, std::string> >& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
-        s << "\"" << tidy_up_string(*i) << "\"";
+        s << *i;
     }
     s << "] ";
     return s;
@@ -46,7 +58,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::s
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::yarn::raw_kvp>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::list<std::pair<std::string, std::string> > >& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -65,12 +77,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 namespace dogen {
 namespace yarn {
 
-std::ostream& operator<<(std::ostream& s, const indices& v) {
+std::ostream& operator<<(std::ostream& s, const raw_kvp& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::yarn::indices\"" << ", "
-      << "\"objects_always_in_heap\": " << v.objects_always_in_heap() << ", "
-      << "\"elements_referable_by_attributes\": " << v.elements_referable_by_attributes() << ", "
-      << "\"raw_kvps\": " << v.raw_kvps()
+      << "\"__type__\": " << "\"dogen::yarn::raw_kvp\"" << ", "
+      << "\"element\": " << v.element() << ", "
+      << "\"attributes\": " << v.attributes()
       << " }";
     return(s);
 }

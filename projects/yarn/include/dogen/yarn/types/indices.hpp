@@ -27,7 +27,9 @@
 
 #include <string>
 #include <algorithm>
+#include <unordered_map>
 #include <unordered_set>
+#include "dogen/yarn/types/raw_kvp.hpp"
 #include "dogen/yarn/serialization/indices_fwd_ser.hpp"
 
 namespace dogen {
@@ -43,7 +45,8 @@ public:
 public:
     indices(
         const std::unordered_set<std::string>& objects_always_in_heap,
-        const std::unordered_set<std::string>& elements_referable_by_attributes);
+        const std::unordered_set<std::string>& elements_referable_by_attributes,
+        const std::unordered_map<std::string, dogen::yarn::raw_kvp>& raw_kvps);
 
 private:
     template<typename Archive>
@@ -63,6 +66,11 @@ public:
     void elements_referable_by_attributes(const std::unordered_set<std::string>& v);
     void elements_referable_by_attributes(const std::unordered_set<std::string>&& v);
 
+    const std::unordered_map<std::string, dogen::yarn::raw_kvp>& raw_kvps() const;
+    std::unordered_map<std::string, dogen::yarn::raw_kvp>& raw_kvps();
+    void raw_kvps(const std::unordered_map<std::string, dogen::yarn::raw_kvp>& v);
+    void raw_kvps(const std::unordered_map<std::string, dogen::yarn::raw_kvp>&& v);
+
 public:
     bool operator==(const indices& rhs) const;
     bool operator!=(const indices& rhs) const {
@@ -76,6 +84,7 @@ public:
 private:
     std::unordered_set<std::string> objects_always_in_heap_;
     std::unordered_set<std::string> elements_referable_by_attributes_;
+    std::unordered_map<std::string, dogen::yarn::raw_kvp> raw_kvps_;
 };
 
 } }

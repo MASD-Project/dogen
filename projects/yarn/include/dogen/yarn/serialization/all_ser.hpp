@@ -33,6 +33,7 @@
 #include "dogen/yarn/serialization/concept_ser.hpp"
 #include "dogen/yarn/serialization/element_ser.hpp"
 #include "dogen/yarn/serialization/indices_ser.hpp"
+#include "dogen/yarn/serialization/raw_kvp_ser.hpp"
 #include "dogen/yarn/serialization/visitor_ser.hpp"
 #include "dogen/yarn/serialization/location_ser.hpp"
 #include "dogen/yarn/serialization/attribute_ser.hpp"

@@ -33,6 +33,7 @@
 #include "dogen/yarn/io/concept_io.hpp"
 #include "dogen/yarn/io/element_io.hpp"
 #include "dogen/yarn/io/indices_io.hpp"
+#include "dogen/yarn/io/raw_kvp_io.hpp"
 #include "dogen/yarn/io/visitor_io.hpp"
 #include "dogen/yarn/io/location_io.hpp"
 #include "dogen/yarn/io/attribute_io.hpp"
