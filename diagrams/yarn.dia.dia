@@ -1717,16 +1717,16 @@ into its yarn representation.#</dia:string>
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O11">
       <dia:attribute name="obj_pos">
-        <dia:point val="-67,56"/>
+        <dia:point val="-70,55"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-67.05,55.95;-53.73,60.95"/>
+        <dia:rectangle val="-70.05,54.95;-56.73,59.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-67,56"/>
+        <dia:point val="-70,55"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="13.220000000000001"/>
@@ -1759,7 +1759,7 @@ that make up dogen instructions.#</dia:string>
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="-66.65,57.245"/>
+            <dia:point val="-69.65,56.245"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -1772,16 +1772,16 @@ that make up dogen instructions.#</dia:string>
     </dia:object>
     <dia:object type="UML - Message" version="0" id="O12">
       <dia:attribute name="obj_pos">
-        <dia:point val="-67,60.9"/>
+        <dia:point val="-63.39,59.9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-72.8567,60.8298;-66.9298,68.2847"/>
+        <dia:rectangle val="-72.813,59.8294;-63.3194,68.3323"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
-        <dia:point val="-67,60.9"/>
+        <dia:point val="-63.39,59.9"/>
         <dia:point val="-72.51,68"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
@@ -1797,10 +1797,10 @@ that make up dogen instructions.#</dia:string>
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="-69.7545,64.9501"/>
+        <dia:point val="-67.9495,64.4501"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O11" connection="5"/>
+        <dia:connection handle="0" to="O11" connection="6"/>
         <dia:connection handle="1" to="O10" connection="1"/>
       </dia:connections>
     </dia:object>

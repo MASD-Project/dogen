@@ -22,6 +22,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/yarn.dia/types/building_error.hpp"
+#include "dogen/yarn.dia/types/repository_selector.hpp"
 #include "dogen/yarn.dia/types/builder.hpp"
 
 namespace {
@@ -46,7 +47,7 @@ builder::builder(const std::string& model_name,
     child_id_to_parent_ids) :
     dynamic_workflow_(w) {
 
-    repository_.model(initialise_model(model_name, external_modules, is_target));
+    repository_.model(setup_model(model_name, external_modules, is_target));
     repository_.child_id_to_parent_ids(child_id_to_parent_ids);
 }
 
@@ -63,9 +64,8 @@ yarn::module builder::create_module_for_model(const yarn::name& n,
     return r;
 }
 
-yarn::intermediate_model builder::initialise_model(
-    const std::string& model_name, const std::string& external_modules,
-    bool is_target) const {
+yarn::intermediate_model builder::setup_model(const std::string& model_name,
+    const std::string& external_modules, bool is_target) const {
 
     yarn::intermediate_model r;
     yarn::name_factory nf;
@@ -87,31 +87,6 @@ yarn::intermediate_model builder::initialise_model(
     return r;
 }
 
-yarn::module& builder::module_for_name(const yarn::name& n) {
-    auto i(repository_.model().modules().find(n.id()));
-    if (i == repository_.model().modules().end()) {
-        const auto sn(n.simple());
-        BOOST_LOG_SEV(lg, error) << missing_module_for_name << sn;
-        BOOST_THROW_EXCEPTION(building_error(missing_module_for_name + sn));
-    }
-    return i->second;
-}
-
-yarn::module& builder::module_for_id(const std::string& id) {
-    if (id.empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_package_id;
-        BOOST_THROW_EXCEPTION(building_error(empty_package_id));
-    }
-
-    const auto i(repository_.id_to_name().find(id));
-    if (i == repository_.id_to_name().end()) {
-        BOOST_LOG_SEV(lg, error) << missing_name_for_id << id;
-        BOOST_THROW_EXCEPTION(building_error(missing_name_for_id + id));
-    }
-
-    return module_for_name(i->second);
-}
-
 void builder::update_documentation(const processed_object& o) {
     BOOST_LOG_SEV(lg, debug) << "Object is a note: " << o.id()
                              << ". Note text: '"
@@ -125,8 +100,9 @@ void builder::update_documentation(const processed_object& o) {
     const auto& kvps(o.comment().key_value_pairs());
 
     using dynamic::scope_types;
+    repository_selector rs(repository_);
     if (o.child_node_id().empty()) {
-        auto& module(module_for_name(repository_.model().name()));
+        auto& module(rs.module_for_name(repository_.model().name()));
         module.documentation(documentation);
 
         const auto scope(scope_types::root_module);
@@ -134,7 +110,7 @@ void builder::update_documentation(const processed_object& o) {
         return;
     }
 
-    yarn::module& module(module_for_id(o.child_node_id()));
+    yarn::module& module(rs.module_for_id(o.child_node_id()));
     module.documentation(documentation);
 
     const auto scope(scope_types::any_module);
@@ -145,34 +121,24 @@ void builder::add(const profiled_object& po) {
     const auto& p(po.profile());
     const auto& o(po.object());
 
-    transformer t(dynamic_workflow_, repository_);
     auto& im(repository_.model());
-    auto& itn(repository_.id_to_name());
+    transformer t(dynamic_workflow_, repository_);
+
     if (p.is_uml_note())
         update_documentation(o);
-    else if (p.is_uml_large_package()) {
-        const auto m(t.to_module(o, p));
-        im.modules().insert(std::make_pair(m.name().id(), m));
-        itn.insert(std::make_pair(o.id(), m.name()));
-    } else if (p.is_enumeration()) {
-        const auto e(t.to_enumeration(o, p));
-        im.enumerations().insert(std::make_pair(e.name().id(), e));
-        itn.insert(std::make_pair(o.id(), e.name()));
-    } else if (p.is_concept()) {
-        const auto c(t.to_concept(o, p));
-        im.concepts().insert(std::make_pair(c.name().id(), c));
-        itn.insert(std::make_pair(o.id(), c.name()));
-    } else if (p.is_exception()) {
-        const auto e(t.to_exception(o, p));
-        im.exceptions().insert(std::make_pair(e.name().id(), e));
-        itn.insert(std::make_pair(o.id(), e.name()));
+    else if (p.is_uml_large_package())
+        add(im.modules(), t.to_module(o, p), o.id());
+    else if (p.is_enumeration())
+        add(im.enumerations(), t.to_enumeration(o, p), o.id());
+    else if (p.is_concept())
+        add(im.concepts(), t.to_concept(o, p), o.id());
+    else if (p.is_exception()) {
+        add(im.exceptions(), t.to_exception(o, p), o.id());
     } else {
         const auto ot(p.is_service() ?
             yarn::object_types::user_defined_service :
             yarn::object_types::user_defined_value_object);
-        const auto yo(t.to_object(o, p, ot));
-        im.objects().insert(std::make_pair(yo.name().id(), yo));
-        itn.insert(std::make_pair(o.id(), yo.name()));
+        add(im.objects(), t.to_object(o, p, ot), o.id());
     }
 }
 

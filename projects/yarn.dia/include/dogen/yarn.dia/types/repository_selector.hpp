@@ -34,9 +34,9 @@ namespace dogen {
 namespace yarn {
 namespace dia {
 
-class repository_selector {
+class const_repository_selector {
 public:
-    explicit repository_selector(const repository rp);
+    explicit const_repository_selector(const repository& rp);
 
 private:
     void validate_id(const std::string& id) const;
@@ -65,11 +65,34 @@ public:
      */
     std::list<yarn::name> parent_names_for_id(const std::string& id) const;
 
-
     yarn::name name_for_id(const std::string& id) const;
 
 private:
-    const repository repository_;
+    const repository& repository_;
+};
+
+class repository_selector {
+public:
+    explicit repository_selector(repository& rp);
+
+public:
+    /**
+     * @brief Returns the module associated with a name.
+     *
+     * @pre module must exist in repository.
+     */
+    yarn::module& module_for_name(const yarn::name& n);
+
+    /**
+     * @brief Returns the module associated with a dia package id.
+     *
+     * @pre id must be a valid package ID in the diagram.
+     * @pre corresponding module must have already been generated.
+     */
+    yarn::module& module_for_id(const std::string& id);
+
+private:
+    repository& repository_;
 };
 
 } } }

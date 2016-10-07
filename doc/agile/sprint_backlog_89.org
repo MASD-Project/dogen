@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-07 Fri 10:06]
+#+CAPTION: Clock summary at [2016-10-07 Fri 10:31]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *79:47* |       |       | 100.0 |
+| *Total time*                                                                | *80:11* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 79:47   |       |       | 100.0 |
-| Active                                                                      |         | 79:47 |       | 100.0 |
+| Stories                                                                     | 80:11   |       |       | 100.0 |
+| Active                                                                      |         | 80:11 |       | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  5:30 |   6.9 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:07 |   0.1 |
 | COMPLETED Generation of formattable is incorrect                            |         |       |  2:30 |   3.1 |
@@ -38,18 +38,18 @@
 | COMPLETED Merge pre and post workflows                                      |         |       |  0:16 |   0.3 |
 | COMPLETED Fix bug in aspect and helper generation                           |         |       |  0:15 |   0.3 |
 | COMPLETED Investigate element annotation support                            |         |       |  2:05 |   2.6 |
-| CANCELLED Add streaming settings expander                                   |         |       |  0:36 |   0.8 |
+| CANCELLED Add streaming settings expander                                   |         |       |  0:36 |   0.7 |
 | COMPLETED Create the formattables model                                     |         |       |  1:32 |   1.9 |
-| COMPLETED Hook formattables into formatters                                 |         |       |  3:58 |   5.0 |
+| COMPLETED Hook formattables into formatters                                 |         |       |  3:58 |   4.9 |
 | COMPLETED Remove empty context                                              |         |       |  1:09 |   1.4 |
 | COMPLETED Review main classes in quilt.cpp                                  |         |       |  3:42 |   4.6 |
 | COMPLETED Clean up element segmentation                                     |         |       |  1:20 |   1.7 |
-| COMPLETED Get OSX build to compile code                                     |         |       |  7:05 |   8.9 |
-| COMPLETED Add a banner to readme                                            |         |       |  1:29 |   1.9 |
+| COMPLETED Get OSX build to compile code                                     |         |       |  7:05 |   8.8 |
+| COMPLETED Add a banner to readme                                            |         |       |  1:29 |   1.8 |
 | COMPLETED Remove formatter group                                            |         |       |  0:23 |   0.5 |
 | COMPLETED Add more types to =quilt::cpp= canned tests                       |         |       |  0:15 |   0.3 |
 | CANCELLED Remove formatter id                                               |         |       |  0:04 |   0.1 |
-| COMPLETED Analysis around terminology in formatting space                   |         |       |  3:24 |   4.3 |
+| COMPLETED Analysis around terminology in formatting space                   |         |       |  3:24 |   4.2 |
 | COMPLETED Remove =original_model_name=                                      |         |       |  0:16 |   0.3 |
 | COMPLETED Refactor code around model origination                            |         |       |  4:08 |   5.2 |
 | COMPLETED Remove formatter level facet folders                              |         |       |  0:06 |   0.1 |
@@ -60,8 +60,8 @@
 | COMPLETED Handle registration of services properly                          |         |       |  3:41 |   4.6 |
 | COMPLETED Move stereotypes to element                                       |         |       |  0:21 |   0.4 |
 | COMPLETED Improve project banner                                            |         |       |  0:32 |   0.7 |
-| CANCELLED Add support for profiles                                          |         |       | 10:40 |  13.4 |
-| STARTED Refactor =yarn.dia= transformer                                     |         |       |  7:23 |   9.3 |
+| CANCELLED Add support for profiles                                          |         |       | 10:40 |  13.3 |
+| STARTED Refactor =yarn.dia= transformer                                     |         |       |  7:47 |   9.7 |
 | STARTED Create a dynamic expander in yarn                                   |         |       |  0:20 |   0.4 |
 | STARTED Rewrite profile support                                             |         |       |  1:26 |   1.8 |
 | STARTED Generate formatter interfaces                                       |         |       |  0:28 |   0.6 |
@@ -1234,6 +1234,7 @@ Algorithm:
   - if nothing was found, get the default value of the meta-data.
 
 *** STARTED Refactor =yarn.dia= transformer                           :story:
+    CLOCK: [2016-10-07 Fri 10:07]--[2016-10-07 Fri 10:31] =>  0:24
     CLOCK: [2016-10-07 Fri 09:01]--[2016-10-07 Fri 10:06] =>  1:05
     CLOCK: [2016-10-07 Fri 00:23]--[2016-10-07 Fri 00:48] =>  0:25
     CLOCK: [2016-10-06 Thu 23:34]--[2016-10-07 Fri 00:22] =>  0:48

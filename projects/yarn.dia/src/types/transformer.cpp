@@ -140,8 +140,8 @@ void transformer::update_element(const processed_object& o, const profile& p,
          * Create the element name taking into account the
          * packages the element is contained in.
          */
-        const repository_selector rs(repository_);
-        const auto& module(rs.module_for_id(package_id));
+        const_repository_selector crs(repository_);
+        const auto& module(crs.module_for_id(package_id));
         e.name(to_name(o.name(), module.name()));
     } else {
         /*
@@ -196,8 +196,8 @@ transformer::to_object(const processed_object& po, const profile& p,
     /*
      * If we have any parents, setup generalisation properties.
      */
-    const repository_selector rs(repository_);
-    const auto parent_names(rs.parent_names_for_id(po.id()));
+    const_repository_selector crs(repository_);
+    const auto parent_names(crs.parent_names_for_id(po.id()));
     if (!parent_names.empty()) {
         /*
          * Ensure we have at most one parent as we do not support
@@ -291,8 +291,8 @@ transformer::to_concept(const processed_object& o, const profile& p) {
     for (const auto& attr : o.attributes())
         r.local_attributes().push_back(to_attribute(r.name(), attr));
 
-    const repository_selector rs(repository_);
-    const auto parent_names(rs.parent_names_for_id(o.id()));
+    const_repository_selector crs(repository_);
+    const auto parent_names(crs.parent_names_for_id(o.id()));
     r.is_child(!parent_names.empty());
 
     if (parent_names.empty()) {

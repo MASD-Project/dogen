@@ -40,19 +40,19 @@ namespace dogen {
 namespace yarn {
 namespace dia {
 
-repository_selector::repository_selector(const repository rp)
+const_repository_selector::const_repository_selector(const repository& rp)
     : repository_(rp) {}
 
-void repository_selector::validate_id(const std::string& id) const {
+void const_repository_selector::validate_id(const std::string& id) const {
     if (id.empty()) {
         BOOST_LOG_SEV(lg, error) << empty_package_id;
         BOOST_THROW_EXCEPTION(selection_error(empty_package_id));
     }
 }
 
-const yarn::module& repository_selector::
+const yarn::module& const_repository_selector::
 module_for_name(const yarn::name& n) const {
-    auto i(repository_.model().modules().find(n.id()));
+    const auto i(repository_.model().modules().find(n.id()));
     if (i == repository_.model().modules().end()) {
         const auto sn(n.simple());
         BOOST_LOG_SEV(lg, error) << missing_module_for_name << sn;
@@ -61,13 +61,13 @@ module_for_name(const yarn::name& n) const {
     return i->second;
 }
 
-const yarn::module& repository_selector::
+const yarn::module& const_repository_selector::
 module_for_id(const std::string& id) const {
     const auto n(name_for_id(id));
     return module_for_name(n);
 }
 
-std::list<yarn::name> repository_selector::
+std::list<yarn::name> const_repository_selector::
 parent_names_for_id(const std::string& id) const {
     validate_id(id);
 
@@ -98,7 +98,7 @@ parent_names_for_id(const std::string& id) const {
     return r;
 }
 
-yarn::name repository_selector::name_for_id(const std::string& id) const {
+yarn::name const_repository_selector::name_for_id(const std::string& id) const {
     validate_id(id);
     const auto i(repository_.id_to_name().find(id));
     if (i == repository_.id_to_name().end()) {
@@ -106,6 +106,25 @@ yarn::name repository_selector::name_for_id(const std::string& id) const {
         BOOST_THROW_EXCEPTION(selection_error(missing_name_for_id + id));
     }
     return i->second;
+}
+
+repository_selector::repository_selector(repository& rp)
+    : repository_(rp) {}
+
+yarn::module& repository_selector::module_for_name(const yarn::name& n) {
+    const auto i(repository_.model().modules().find(n.id()));
+    if (i == repository_.model().modules().end()) {
+        const auto sn(n.simple());
+        BOOST_LOG_SEV(lg, error) << missing_module_for_name << sn;
+        BOOST_THROW_EXCEPTION(selection_error(missing_module_for_name + sn));
+    }
+    return i->second;
+}
+
+yarn::module& repository_selector::module_for_id(const std::string& id) {
+    const_repository_selector crs(repository_);
+    const auto n(crs.name_for_id(id));
+    return module_for_name(n);
 }
 
 } } }

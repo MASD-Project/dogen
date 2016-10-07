@@ -46,14 +46,20 @@ public:
         child_id_to_parent_ids);
 
 private:
+    template<typename Element>
+    void add(std::unordered_map<std::string, Element>& container,
+        const Element& e, const std::string& id) {
+        container.insert(std::make_pair(e.name().id(), e));
+        auto& itn(repository_.id_to_name());
+        itn.insert(std::make_pair(id, e.name()));
+    }
+
+private:
     yarn::module create_module_for_model(const yarn::name& n,
         const yarn::origin_types ot) const;
 
-    yarn::intermediate_model initialise_model(const std::string& model_name,
+    yarn::intermediate_model setup_model(const std::string& model_name,
         const std::string& external_modules, bool is_target) const;
-
-    yarn::module& module_for_name(const yarn::name& n);
-    yarn::module& module_for_id(const std::string& id);
 
     void update_documentation(const processed_object& o);
 
