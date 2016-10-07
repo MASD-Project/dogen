@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_RAW_KVP_HPP
-#define DOGEN_YARN_TYPES_RAW_KVP_HPP
+#ifndef DOGEN_DYNAMIC_TYPES_RAW_AGGREGATE_HPP
+#define DOGEN_DYNAMIC_TYPES_RAW_AGGREGATE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,29 +30,29 @@
 #include <utility>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen/yarn/serialization/raw_kvp_fwd_ser.hpp"
+#include "dogen/dynamic/serialization/raw_aggregate_fwd_ser.hpp"
 
 namespace dogen {
-namespace yarn {
+namespace dynamic {
 
-class raw_kvp final {
+class raw_aggregate final {
 public:
-    raw_kvp() = default;
-    raw_kvp(const raw_kvp&) = default;
-    raw_kvp(raw_kvp&&) = default;
-    ~raw_kvp() = default;
+    raw_aggregate() = default;
+    raw_aggregate(const raw_aggregate&) = default;
+    raw_aggregate(raw_aggregate&&) = default;
+    ~raw_aggregate() = default;
 
 public:
-    raw_kvp(
+    raw_aggregate(
         const std::list<std::pair<std::string, std::string> >& element,
         const std::unordered_map<std::string, std::list<std::pair<std::string, std::string> > >& attributes);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::yarn::raw_kvp& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::dynamic::raw_aggregate& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::yarn::raw_kvp& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::dynamic::raw_aggregate& v, unsigned int version);
 
 public:
     const std::list<std::pair<std::string, std::string> >& element() const;
@@ -66,14 +66,14 @@ public:
     void attributes(const std::unordered_map<std::string, std::list<std::pair<std::string, std::string> > >&& v);
 
 public:
-    bool operator==(const raw_kvp& rhs) const;
-    bool operator!=(const raw_kvp& rhs) const {
+    bool operator==(const raw_aggregate& rhs) const;
+    bool operator!=(const raw_aggregate& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(raw_kvp& other) noexcept;
-    raw_kvp& operator=(raw_kvp other);
+    void swap(raw_aggregate& other) noexcept;
+    raw_aggregate& operator=(raw_aggregate other);
 
 private:
     std::list<std::pair<std::string, std::string> > element_;
@@ -86,8 +86,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::yarn::raw_kvp& lhs,
-    dogen::yarn::raw_kvp& rhs) {
+    dogen::dynamic::raw_aggregate& lhs,
+    dogen::dynamic::raw_aggregate& rhs) {
     lhs.swap(rhs);
 }
 

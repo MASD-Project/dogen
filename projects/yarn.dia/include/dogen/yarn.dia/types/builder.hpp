@@ -51,7 +51,7 @@ private:
     yarn::intermediate_model setup_model(const std::string& model_name,
         const std::string& external_modules, bool is_target) const;
 
-    void update_raw_kvps(const yarn::name& n, const profiled_object& po);
+    void update_raw_aggregate(const yarn::name& n, const profiled_object& po);
 
     void update_documentation(const profiled_object& po);
 

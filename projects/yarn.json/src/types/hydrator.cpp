@@ -84,8 +84,8 @@ yarn::generation_types hydrator::generation_type(const bool is_target) const {
         yarn::generation_types::no_generation;
 }
 
-std::list<std::pair<std::string, std::string>> hydrator::
-read_kvps(const boost::property_tree::ptree& pt) const {
+std::list<std::pair<std::string, std::string>>
+hydrator::read_kvps(const boost::property_tree::ptree& pt) const {
 
     std::list<std::pair<std::string, std::string>> r;
     const auto i(pt.find(extensions_key));
@@ -100,21 +100,21 @@ read_kvps(const boost::property_tree::ptree& pt) const {
     return r;
 }
 
-void hydrator::insert_raw_kvps(const yarn::name& owner,
+void hydrator::insert_raw_meta_data(const yarn::name& owner,
     const std::list<std::pair<std::string, std::string>>& kvps,
     intermediate_model& im) const {
 
     if (kvps.empty())
         return;
 
-    yarn::raw_kvp rk;
-    rk.element(kvps);
-    const auto pair(std::make_pair(owner.id(), rk));
-    const bool inserted(im.indices().raw_kvps().insert(pair).second);
+    dynamic::raw_aggregate ra;
+    ra.element(kvps);
+    const auto id(owner.id());
+    const auto pair(std::make_pair(id, ra));
+    const bool inserted(im.indices().raw_aggregates().insert(pair).second);
     if (!inserted) {
-        BOOST_LOG_SEV(lg, error) << duplicate_element_id << owner.id();
-        BOOST_THROW_EXCEPTION(
-            hydration_error(duplicate_element_id + owner.id()));
+        BOOST_LOG_SEV(lg, error) << duplicate_element_id << id;
+        BOOST_THROW_EXCEPTION(hydration_error(duplicate_element_id + id));
     }
 }
 
@@ -157,7 +157,7 @@ void hydrator::read_element(const boost::property_tree::ptree& pt,
                 e.documentation(*documentation);
 
             const auto kvps(read_kvps(pt));
-            insert_raw_kvps(e.name(), kvps, im);
+            insert_raw_meta_data(e.name(), kvps, im);
         });
 
     const auto meta_type_value(pt.get<std::string>(meta_type_key));
@@ -214,7 +214,7 @@ read_stream(std::istream& s, const bool is_target) const {
 
     yarn::module m;
     const auto kvps(read_kvps(pt));
-    insert_raw_kvps(r.name(), kvps, r);
+    insert_raw_meta_data(r.name(), kvps, r);
 
     const auto documentation(pt.get_optional<std::string>(documentation_key));
     if (documentation)

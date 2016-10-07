@@ -18,7 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/hash/raw_kvp_hash.hpp"
+#include "dogen/dynamic/hash/object_hash.hpp"
+#include "dogen/dynamic/hash/object_aggregate_hash.hpp"
 
 namespace {
 
@@ -28,27 +29,11 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_pair_std_string_std_string(const std::pair<std::string, std::string>& v) {
-    std::size_t seed(0);
-
-    combine(seed, v.first);
-    combine(seed, v.second);
-    return seed;
-}
-
-inline std::size_t hash_std_list_std_pair_std_string_std_string(const std::list<std::pair<std::string, std::string> >& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, hash_std_pair_std_string_std_string(i));
-    }
-    return seed;
-}
-
-inline std::size_t hash_std_unordered_map_std_string_std_list_std_pair_std_string_std_string(const std::unordered_map<std::string, std::list<std::pair<std::string, std::string> > >& v) {
+inline std::size_t hash_std_unordered_map_std_string_dogen_dynamic_object(const std::unordered_map<std::string, dogen::dynamic::object>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
-        combine(seed, hash_std_list_std_pair_std_string_std_string(i.second));
+        combine(seed, i.second);
     }
     return seed;
 }
@@ -56,13 +41,13 @@ inline std::size_t hash_std_unordered_map_std_string_std_list_std_pair_std_strin
 }
 
 namespace dogen {
-namespace yarn {
+namespace dynamic {
 
-std::size_t raw_kvp_hasher::hash(const raw_kvp& v) {
+std::size_t object_aggregate_hasher::hash(const object_aggregate& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_list_std_pair_std_string_std_string(v.element()));
-    combine(seed, hash_std_unordered_map_std_string_std_list_std_pair_std_string_std_string(v.attributes()));
+    combine(seed, v.element());
+    combine(seed, hash_std_unordered_map_std_string_dogen_dynamic_object(v.attributes()));
 
     return seed;
 }

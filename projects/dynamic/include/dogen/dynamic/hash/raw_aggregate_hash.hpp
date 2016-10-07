@@ -18,24 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_SERIALIZATION_RAW_KVP_FWD_SER_HPP
-#define DOGEN_YARN_SERIALIZATION_RAW_KVP_FWD_SER_HPP
+#ifndef DOGEN_DYNAMIC_HASH_RAW_AGGREGATE_HASH_HPP
+#define DOGEN_DYNAMIC_HASH_RAW_AGGREGATE_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/yarn/types/raw_kvp_fwd.hpp"
+#include <functional>
+#include "dogen/dynamic/types/raw_aggregate.hpp"
 
-namespace boost {
-namespace serialization {
+namespace dogen {
+namespace dynamic {
 
-template<class Archive>
-void save(Archive& ar, const dogen::yarn::raw_kvp& v, unsigned int version);
-
-template<class Archive>
-void load(Archive& ar, dogen::yarn::raw_kvp& v, unsigned int version);
+struct raw_aggregate_hasher {
+public:
+    static std::size_t hash(const raw_aggregate& v);
+};
 
 } }
 
+namespace std {
+
+template<>
+struct hash<dogen::dynamic::raw_aggregate> {
+public:
+    size_t operator()(const dogen::dynamic::raw_aggregate& v) const {
+        return dogen::dynamic::raw_aggregate_hasher::hash(v);
+    }
+};
+
+}
 #endif

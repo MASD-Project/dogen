@@ -26,22 +26,22 @@ namespace yarn {
 indices::indices(
     const std::unordered_set<std::string>& objects_always_in_heap,
     const std::unordered_set<std::string>& elements_referable_by_attributes,
-    const std::unordered_map<std::string, dogen::yarn::raw_kvp>& raw_kvps)
+    const std::unordered_map<std::string, dogen::dynamic::raw_aggregate>& raw_aggregates)
     : objects_always_in_heap_(objects_always_in_heap),
       elements_referable_by_attributes_(elements_referable_by_attributes),
-      raw_kvps_(raw_kvps) { }
+      raw_aggregates_(raw_aggregates) { }
 
 void indices::swap(indices& other) noexcept {
     using std::swap;
     swap(objects_always_in_heap_, other.objects_always_in_heap_);
     swap(elements_referable_by_attributes_, other.elements_referable_by_attributes_);
-    swap(raw_kvps_, other.raw_kvps_);
+    swap(raw_aggregates_, other.raw_aggregates_);
 }
 
 bool indices::operator==(const indices& rhs) const {
     return objects_always_in_heap_ == rhs.objects_always_in_heap_ &&
         elements_referable_by_attributes_ == rhs.elements_referable_by_attributes_ &&
-        raw_kvps_ == rhs.raw_kvps_;
+        raw_aggregates_ == rhs.raw_aggregates_;
 }
 
 indices& indices::operator=(indices other) {
@@ -82,20 +82,20 @@ void indices::elements_referable_by_attributes(const std::unordered_set<std::str
     elements_referable_by_attributes_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::yarn::raw_kvp>& indices::raw_kvps() const {
-    return raw_kvps_;
+const std::unordered_map<std::string, dogen::dynamic::raw_aggregate>& indices::raw_aggregates() const {
+    return raw_aggregates_;
 }
 
-std::unordered_map<std::string, dogen::yarn::raw_kvp>& indices::raw_kvps() {
-    return raw_kvps_;
+std::unordered_map<std::string, dogen::dynamic::raw_aggregate>& indices::raw_aggregates() {
+    return raw_aggregates_;
 }
 
-void indices::raw_kvps(const std::unordered_map<std::string, dogen::yarn::raw_kvp>& v) {
-    raw_kvps_ = v;
+void indices::raw_aggregates(const std::unordered_map<std::string, dogen::dynamic::raw_aggregate>& v) {
+    raw_aggregates_ = v;
 }
 
-void indices::raw_kvps(const std::unordered_map<std::string, dogen::yarn::raw_kvp>&& v) {
-    raw_kvps_ = std::move(v);
+void indices::raw_aggregates(const std::unordered_map<std::string, dogen::dynamic::raw_aggregate>&& v) {
+    raw_aggregates_ = std::move(v);
 }
 
 } }

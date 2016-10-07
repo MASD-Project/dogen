@@ -33,7 +33,6 @@
 #include "dogen/yarn/hash/concept_hash.hpp"
 #include "dogen/yarn/hash/element_hash.hpp"
 #include "dogen/yarn/hash/indices_hash.hpp"
-#include "dogen/yarn/hash/raw_kvp_hash.hpp"
 #include "dogen/yarn/hash/visitor_hash.hpp"
 #include "dogen/yarn/hash/location_hash.hpp"
 #include "dogen/yarn/hash/attribute_hash.hpp"

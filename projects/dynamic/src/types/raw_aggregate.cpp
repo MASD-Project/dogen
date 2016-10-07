@@ -18,63 +18,63 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/types/raw_kvp.hpp"
+#include "dogen/dynamic/types/raw_aggregate.hpp"
 
 namespace dogen {
-namespace yarn {
+namespace dynamic {
 
-raw_kvp::raw_kvp(
+raw_aggregate::raw_aggregate(
     const std::list<std::pair<std::string, std::string> >& element,
     const std::unordered_map<std::string, std::list<std::pair<std::string, std::string> > >& attributes)
     : element_(element),
       attributes_(attributes) { }
 
-void raw_kvp::swap(raw_kvp& other) noexcept {
+void raw_aggregate::swap(raw_aggregate& other) noexcept {
     using std::swap;
     swap(element_, other.element_);
     swap(attributes_, other.attributes_);
 }
 
-bool raw_kvp::operator==(const raw_kvp& rhs) const {
+bool raw_aggregate::operator==(const raw_aggregate& rhs) const {
     return element_ == rhs.element_ &&
         attributes_ == rhs.attributes_;
 }
 
-raw_kvp& raw_kvp::operator=(raw_kvp other) {
+raw_aggregate& raw_aggregate::operator=(raw_aggregate other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const std::list<std::pair<std::string, std::string> >& raw_kvp::element() const {
+const std::list<std::pair<std::string, std::string> >& raw_aggregate::element() const {
     return element_;
 }
 
-std::list<std::pair<std::string, std::string> >& raw_kvp::element() {
+std::list<std::pair<std::string, std::string> >& raw_aggregate::element() {
     return element_;
 }
 
-void raw_kvp::element(const std::list<std::pair<std::string, std::string> >& v) {
+void raw_aggregate::element(const std::list<std::pair<std::string, std::string> >& v) {
     element_ = v;
 }
 
-void raw_kvp::element(const std::list<std::pair<std::string, std::string> >&& v) {
+void raw_aggregate::element(const std::list<std::pair<std::string, std::string> >&& v) {
     element_ = std::move(v);
 }
 
-const std::unordered_map<std::string, std::list<std::pair<std::string, std::string> > >& raw_kvp::attributes() const {
+const std::unordered_map<std::string, std::list<std::pair<std::string, std::string> > >& raw_aggregate::attributes() const {
     return attributes_;
 }
 
-std::unordered_map<std::string, std::list<std::pair<std::string, std::string> > >& raw_kvp::attributes() {
+std::unordered_map<std::string, std::list<std::pair<std::string, std::string> > >& raw_aggregate::attributes() {
     return attributes_;
 }
 
-void raw_kvp::attributes(const std::unordered_map<std::string, std::list<std::pair<std::string, std::string> > >& v) {
+void raw_aggregate::attributes(const std::unordered_map<std::string, std::list<std::pair<std::string, std::string> > >& v) {
     attributes_ = v;
 }
 
-void raw_kvp::attributes(const std::unordered_map<std::string, std::list<std::pair<std::string, std::string> > >&& v) {
+void raw_aggregate::attributes(const std::unordered_map<std::string, std::list<std::pair<std::string, std::string> > >&& v) {
     attributes_ = std::move(v);
 }
 

@@ -18,35 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_HASH_RAW_KVP_HASH_HPP
-#define DOGEN_YARN_HASH_RAW_KVP_HASH_HPP
+#ifndef DOGEN_DYNAMIC_TYPES_OBJECT_AGGREGATE_FWD_HPP
+#define DOGEN_DYNAMIC_TYPES_OBJECT_AGGREGATE_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/yarn/types/raw_kvp.hpp"
-
 namespace dogen {
-namespace yarn {
+namespace dynamic {
 
-struct raw_kvp_hasher {
-public:
-    static std::size_t hash(const raw_kvp& v);
-};
+class object_aggregate;
 
 } }
 
-namespace std {
-
-template<>
-struct hash<dogen::yarn::raw_kvp> {
-public:
-    size_t operator()(const dogen::yarn::raw_kvp& v) const {
-        return dogen::yarn::raw_kvp_hasher::hash(v);
-    }
-};
-
-}
 #endif

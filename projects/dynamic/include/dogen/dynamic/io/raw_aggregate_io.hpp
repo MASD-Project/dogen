@@ -18,35 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TEST_DATA_RAW_KVP_TD_HPP
-#define DOGEN_YARN_TEST_DATA_RAW_KVP_TD_HPP
+#ifndef DOGEN_DYNAMIC_IO_RAW_AGGREGATE_IO_HPP
+#define DOGEN_DYNAMIC_IO_RAW_AGGREGATE_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/yarn/types/raw_kvp.hpp"
+#include <iosfwd>
+#include "dogen/dynamic/types/raw_aggregate.hpp"
 
 namespace dogen {
-namespace yarn {
+namespace dynamic {
 
-class raw_kvp_generator {
-public:
-    raw_kvp_generator();
-
-public:
-    typedef dogen::yarn::raw_kvp result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
-};
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::dynamic::raw_aggregate& v);
 
 } }
 

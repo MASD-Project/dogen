@@ -18,22 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_IO_RAW_KVP_IO_HPP
-#define DOGEN_YARN_IO_RAW_KVP_IO_HPP
+#ifndef DOGEN_DYNAMIC_SERIALIZATION_RAW_AGGREGATE_FWD_SER_HPP
+#define DOGEN_DYNAMIC_SERIALIZATION_RAW_AGGREGATE_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/yarn/types/raw_kvp.hpp"
+#include "dogen/dynamic/types/raw_aggregate_fwd.hpp"
 
-namespace dogen {
-namespace yarn {
+namespace boost {
+namespace serialization {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::yarn::raw_kvp& v);
+template<class Archive>
+void save(Archive& ar, const dogen::dynamic::raw_aggregate& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, dogen::dynamic::raw_aggregate& v, unsigned int version);
 
 } }
 

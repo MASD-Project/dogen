@@ -18,25 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_SERIALIZATION_RAW_KVP_SER_HPP
-#define DOGEN_YARN_SERIALIZATION_RAW_KVP_SER_HPP
+#ifndef DOGEN_DYNAMIC_TYPES_RAW_AGGREGATE_FWD_HPP
+#define DOGEN_DYNAMIC_TYPES_RAW_AGGREGATE_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/split_free.hpp>
-#include "dogen/yarn/types/raw_kvp.hpp"
+namespace dogen {
+namespace dynamic {
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::yarn::raw_kvp)
-namespace boost {
-namespace serialization {
-
-template<typename Archive>
-void save(Archive& ar, const dogen::yarn::raw_kvp& v, unsigned int version);
-
-template<typename Archive>
-void load(Archive& ar, dogen::yarn::raw_kvp& v, unsigned int version);
+class raw_aggregate;
 
 } }
 

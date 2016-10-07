@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/yarn/test_data/raw_kvp_td.hpp"
+#include "dogen/dynamic/test_data/raw_aggregate_td.hpp"
 
 namespace {
 
@@ -56,32 +56,32 @@ std::unordered_map<std::string, std::list<std::pair<std::string, std::string> > 
 }
 
 namespace dogen {
-namespace yarn {
+namespace dynamic {
 
-raw_kvp_generator::raw_kvp_generator() : position_(0) { }
+raw_aggregate_generator::raw_aggregate_generator() : position_(0) { }
 
-void raw_kvp_generator::
+void raw_aggregate_generator::
 populate(const unsigned int position, result_type& v) {
     v.element(create_std_list_std_pair_std_string_std_string(position + 0));
     v.attributes(create_std_unordered_map_std_string_std_list_std_pair_std_string_std_string(position + 1));
 }
 
-raw_kvp_generator::result_type
-raw_kvp_generator::create(const unsigned int position) {
-    raw_kvp r;
-    raw_kvp_generator::populate(position, r);
+raw_aggregate_generator::result_type
+raw_aggregate_generator::create(const unsigned int position) {
+    raw_aggregate r;
+    raw_aggregate_generator::populate(position, r);
     return r;
 }
 
-raw_kvp_generator::result_type*
-raw_kvp_generator::create_ptr(const unsigned int position) {
-    raw_kvp* p = new raw_kvp();
-    raw_kvp_generator::populate(position, *p);
+raw_aggregate_generator::result_type*
+raw_aggregate_generator::create_ptr(const unsigned int position) {
+    raw_aggregate* p = new raw_aggregate();
+    raw_aggregate_generator::populate(position, *p);
     return p;
 }
 
-raw_kvp_generator::result_type
-raw_kvp_generator::operator()() {
+raw_aggregate_generator::result_type
+raw_aggregate_generator::operator()() {
     return create(position_++);
 }
 

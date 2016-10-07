@@ -27,31 +27,28 @@
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/serialization/unordered_map.hpp>
-#include <boost/serialization/unordered_set.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/yarn/serialization/indices_ser.hpp"
-#include "dogen/dynamic/serialization/raw_aggregate_ser.hpp"
+#include "dogen/dynamic/serialization/object_ser.hpp"
+#include "dogen/dynamic/serialization/object_aggregate_ser.hpp"
 
 namespace boost {
 namespace serialization {
 
 template<typename Archive>
 void save(Archive& ar,
-    const dogen::yarn::indices& v,
+    const dogen::dynamic::object_aggregate& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("objects_always_in_heap", v.objects_always_in_heap_);
-    ar << make_nvp("elements_referable_by_attributes", v.elements_referable_by_attributes_);
-    ar << make_nvp("raw_aggregates", v.raw_aggregates_);
+    ar << make_nvp("element", v.element_);
+    ar << make_nvp("attributes", v.attributes_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
-    dogen::yarn::indices& v,
+    dogen::dynamic::object_aggregate& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("objects_always_in_heap", v.objects_always_in_heap_);
-    ar >> make_nvp("elements_referable_by_attributes", v.elements_referable_by_attributes_);
-    ar >> make_nvp("raw_aggregates", v.raw_aggregates_);
+    ar >> make_nvp("element", v.element_);
+    ar >> make_nvp("attributes", v.attributes_);
 }
 
 } }
@@ -59,16 +56,16 @@ void load(Archive& ar,
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const dogen::yarn::indices& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, dogen::yarn::indices& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const dogen::dynamic::object_aggregate& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, dogen::dynamic::object_aggregate& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const dogen::yarn::indices& v, unsigned int version);
-template void load(archive::text_iarchive& ar, dogen::yarn::indices& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const dogen::dynamic::object_aggregate& v, unsigned int version);
+template void load(archive::text_iarchive& ar, dogen::dynamic::object_aggregate& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const dogen::yarn::indices& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, dogen::yarn::indices& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const dogen::dynamic::object_aggregate& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, dogen::dynamic::object_aggregate& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const dogen::yarn::indices& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, dogen::yarn::indices& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const dogen::dynamic::object_aggregate& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, dogen::dynamic::object_aggregate& v, unsigned int version);
 
 } }

@@ -37,7 +37,6 @@
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/yarn/types/indexer.hpp"
 #include "dogen/yarn/types/indices.hpp"
-#include "dogen/yarn/types/raw_kvp.hpp"
 #include "dogen/yarn/types/visitor.hpp"
 #include "dogen/yarn/types/location.hpp"
 #include "dogen/yarn/types/resolver.hpp"

@@ -912,7 +912,7 @@ this is a long comment
 			<bucket_count>1</bucket_count>
 			<item_version>0</item_version>
 		</elements_referable_by_attributes>
-		<raw_kvps class_id="49" tracking_level="0" version="0">
+		<raw_aggregates class_id="49" tracking_level="0" version="0">
 			<count>1</count>
 			<bucket_count>2</bucket_count>
 			<item_version>0</item_version>
@@ -946,7 +946,7 @@ this is a long comment
 					</attributes>
 				</second>
 			</item>
-		</raw_kvps>
+		</raw_aggregates>
 	</indices>
 	<root_module object_id="_6">
 		<element>

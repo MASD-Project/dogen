@@ -20,7 +20,8 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/yarn/io/raw_kvp_io.hpp"
+#include "dogen/dynamic/io/object_io.hpp"
+#include "dogen/dynamic/io/object_aggregate_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -31,34 +32,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, std::string>& v) {
-    s << "{ " << "\"__type__\": " << "\"std::pair\"" << ", ";
-
-    s << "\"first\": " << "\"" << tidy_up_string(v.first) << "\"" << ", ";
-    s << "\"second\": " << "\"" << tidy_up_string(v.second) << "\"";
-    s << " }";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<std::pair<std::string, std::string> >& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::list<std::pair<std::string, std::string> > >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::dynamic::object>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -75,11 +49,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 }
 
 namespace dogen {
-namespace yarn {
+namespace dynamic {
 
-std::ostream& operator<<(std::ostream& s, const raw_kvp& v) {
+std::ostream& operator<<(std::ostream& s, const object_aggregate& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::yarn::raw_kvp\"" << ", "
+      << "\"__type__\": " << "\"dogen::dynamic::object_aggregate\"" << ", "
       << "\"element\": " << v.element() << ", "
       << "\"attributes\": " << v.attributes()
       << " }";

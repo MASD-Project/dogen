@@ -18,17 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_RAW_KVP_FWD_HPP
-#define DOGEN_YARN_TYPES_RAW_KVP_FWD_HPP
+#ifndef DOGEN_DYNAMIC_TEST_DATA_OBJECT_AGGREGATE_TD_HPP
+#define DOGEN_DYNAMIC_TEST_DATA_OBJECT_AGGREGATE_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen {
-namespace yarn {
+#include "dogen/dynamic/types/object_aggregate.hpp"
 
-class raw_kvp;
+namespace dogen {
+namespace dynamic {
+
+class object_aggregate_generator {
+public:
+    object_aggregate_generator();
+
+public:
+    typedef dogen::dynamic::object_aggregate result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 } }
 

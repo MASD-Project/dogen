@@ -33,7 +33,6 @@
 #include "dogen/yarn/test_data/concept_td.hpp"
 #include "dogen/yarn/test_data/element_td.hpp"
 #include "dogen/yarn/test_data/indices_td.hpp"
-#include "dogen/yarn/test_data/raw_kvp_td.hpp"
 #include "dogen/yarn/test_data/visitor_td.hpp"
 #include "dogen/yarn/test_data/location_td.hpp"
 #include "dogen/yarn/test_data/attribute_td.hpp"
