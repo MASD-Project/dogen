@@ -43,6 +43,7 @@
 #include "dogen/yarn.dia/types/building_error.hpp"
 #include "dogen/yarn.dia/types/graphing_error.hpp"
 #include "dogen/yarn.dia/types/profiled_object.hpp"
+#include "dogen/yarn.dia/types/selection_error.hpp"
 #include "dogen/yarn.dia/types/object_processor.hpp"
 #include "dogen/yarn.dia/types/processed_object.hpp"
 #include "dogen/yarn.dia/types/processing_error.hpp"

@@ -32,6 +32,7 @@
 #include "dogen/yarn.dia/io/processed_object_io.hpp"
 #include "dogen/yarn.dia/io/repository_io.hpp"
 #include "dogen/yarn.dia/types/validator.hpp"
+#include "dogen/yarn.dia/types/repository_selector.hpp"
 #include "dogen/yarn.dia/types/transformer.hpp"
 
 namespace {
@@ -40,13 +41,8 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("yarn.dia.transformer"));
 
 const std::string empty;
+const std::string duplicate_enumerator("Duplicate enumerator name: ");
 const std::string empty_dia_object_name("Dia object name is empty");
-const std::string empty_package_id("Supplied package id is empty");
-const std::string parent_not_found("Object has a parent but its not defined: ");
-const std::string empty_parent_container(
-    "Object has an entry in child to parent container but its empty: ");
-const std::string missing_module_for_name("Missing module for name: ");
-const std::string missing_name_for_id("Missing name for dia object ID: ");
 const std::string type_attribute_expected(
     "Could not find type attribute. ID: ");
 const std::string invalid_type_string(
@@ -81,60 +77,29 @@ yarn::generation_types transformer::generation_type(const profile& p) const {
     return generation_types::full_generation;
 }
 
-yarn::name transformer::to_name(const std::string& n) const {
+void transformer::validate_dia_object_name(const std::string& n) const {
     if (n.empty()) {
         BOOST_LOG_SEV(lg, error) << empty_dia_object_name;
         BOOST_THROW_EXCEPTION(transformation_error(empty_dia_object_name));
     }
+}
 
+yarn::name transformer::to_name(const std::string& n) const {
+    validate_dia_object_name(n);
     yarn::name_factory f;
     return f.build_element_in_model(repository_.model().name(), n);
 }
 
-yarn::name transformer::to_name(const std::string& n,
-    const yarn::name& module_n) const {
-
-    if (n.empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_dia_object_name;
-        BOOST_THROW_EXCEPTION(transformation_error(empty_dia_object_name));
-    }
-
+yarn::name transformer::
+to_name(const std::string& n, const yarn::name& module_n) const {
+    validate_dia_object_name(n);
     yarn::name_factory f;
     return f.build_element_in_module(module_n, n);
 }
 
-const yarn::module& transformer::module_for_name(const yarn::name& n) const {
-    auto i(repository_.model().modules().find(n.id()));
-    if (i == repository_.model().modules().end()) {
-        const auto sn(n.simple());
-        BOOST_LOG_SEV(lg, error) << missing_module_for_name << sn;
-        BOOST_THROW_EXCEPTION(
-            transformation_error(missing_module_for_name + sn));
-    }
-    return i->second;
-}
-
-const yarn::module& transformer::module_for_id(const std::string& id) const {
-    if (id.empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_package_id;
-        BOOST_THROW_EXCEPTION(transformation_error(empty_package_id));
-    }
-
-    const auto i(repository_.id_to_name().find(id));
-    if (i == repository_.id_to_name().end()) {
-        BOOST_LOG_SEV(lg, error) << missing_name_for_id << id;
-        BOOST_THROW_EXCEPTION(transformation_error(missing_name_for_id + id));
-    }
-
-    return module_for_name(i->second);
-}
-
 yarn::attribute transformer::to_attribute(const yarn::name& owning_element,
     const processed_attribute& a) const {
-    if (a.name().empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_dia_object_name;
-        BOOST_THROW_EXCEPTION(transformation_error(empty_dia_object_name));
-    }
+    validate_dia_object_name(a.name());
 
     yarn::name_factory f;
     const auto n(f.build_attribute_name(owning_element, a.name()));
@@ -153,15 +118,12 @@ yarn::attribute transformer::to_attribute(const yarn::name& owning_element,
 
 yarn::enumerator transformer::to_enumerator(const processed_attribute& a,
     const unsigned int position) const {
+    validate_dia_object_name(a.name());
+
     yarn::enumerator r;
     r.name(a.name());
     r.value(boost::lexical_cast<std::string>(position));
     r.documentation(a.comment().documentation());
-
-    if (r.name().empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_dia_object_name;
-        BOOST_THROW_EXCEPTION(transformation_error(empty_dia_object_name));
-    }
     return r;
 }
 
@@ -178,7 +140,8 @@ void transformer::update_element(const processed_object& o, const profile& p,
          * Create the element name taking into account the
          * packages the element is contained in.
          */
-        const auto& module(module_for_id(package_id));
+        const repository_selector rs(repository_);
+        const auto& module(rs.module_for_id(package_id));
         e.name(to_name(o.name(), module.name()));
     } else {
         /*
@@ -199,71 +162,67 @@ void transformer::update_element(const processed_object& o, const profile& p,
 yarn::object
 transformer::to_object(const processed_object& po, const profile& p,
     const yarn::object_types ot) {
-    yarn::object o;
-    update_element(po, p, o);
+    BOOST_LOG_SEV(lg, debug) << "Transforming dia object to object: "
+                             << po.id();
 
-    o.is_fluent(p.is_fluent());
+    yarn::object r;
+    update_element(po, p, r);
+
+    r.is_fluent(p.is_fluent());
+    r.is_immutable(p.is_immutable());
+    r.object_type(ot);
+
+    /*
+     * Handle the stereotypes.
+     * FIXME: hack to handle new stereotypes
+     */
     if (p.is_visitable())
-        o.stereotypes().insert(yarn::stereotypes::visitable);
+        r.stereotypes().insert(yarn::stereotypes::visitable);
 
     for (const auto us : p.unknown_stereotypes()) {
-        // FIXME: hack to handle new stereotypes
         if (us == "formatter")
-            o.stereotypes().insert(yarn::stereotypes::formatter);
+            r.stereotypes().insert(yarn::stereotypes::formatter);
         else if (us == "handcrafted")
-            o.stereotypes().insert(yarn::stereotypes::handcrafted);
+            r.stereotypes().insert(yarn::stereotypes::handcrafted);
         else {
             const auto n(to_name(us));
-            o.modeled_concepts().push_back(n);
+            r.modeled_concepts().push_back(n);
         }
     }
 
     for (const auto& p : po.attributes())
-        o.local_attributes().push_back(to_attribute(o.name(), p));
+        r.local_attributes().push_back(to_attribute(r.name(), p));
 
-    const auto i(repository_.child_id_to_parent_ids().find(po.id()));
-    if (i != repository_.child_id_to_parent_ids().end()) {
-        if (i->second.empty()) {
-            BOOST_LOG_SEV(lg, error) << empty_parent_container << po.id();
-            BOOST_THROW_EXCEPTION(
-                transformation_error(empty_parent_container + po.id()));
-        }
-
-        if (i->second.size() > 1) {
+    /*
+     * If we have any parents, setup generalisation properties.
+     */
+    const repository_selector rs(repository_);
+    const auto parent_names(rs.parent_names_for_id(po.id()));
+    if (!parent_names.empty()) {
+        /*
+         * Ensure we have at most one parent as we do not support
+         * multiple inheritance for objects.
+         */
+        if (parent_names.size() > 1) {
             BOOST_LOG_SEV(lg, error) << multiple_inheritance << po.id();
             BOOST_THROW_EXCEPTION(
                 transformation_error(multiple_inheritance + po.id()));
         }
 
-        const auto parent_name(i->second.front());
-        const auto j(repository_.id_to_name().find(parent_name));
-        if (j == repository_.id_to_name().end()) {
-            BOOST_LOG_SEV(lg, error) << "Object has a parent but "
-                                     << " there is no Name mapping defined."
-                                     << " Child ID: '" << po.id()
-                                     << "' Parent ID: '" << parent_name << "'";
+        const auto parent_name(parent_names.front());
+        r.parent(parent_name);
+        BOOST_LOG_SEV(lg, debug) << "Set parent. Child: " << r.name().id()
+                                 << " parent: " << parent_name.id();
+    } else
+        BOOST_LOG_SEV(lg, debug) << "Object has no parent: " << r.name().id();
 
-            BOOST_THROW_EXCEPTION(
-                transformation_error(parent_not_found + po.id()));
-        }
-
-        BOOST_LOG_SEV(lg, debug) << "Setting parent for: "
-                                 << o.name().id() << " as "
-                                 << j->second.id();
-        o.parent(j->second);
-    } else {
-        BOOST_LOG_SEV(lg, debug) << "Object has no parent: "
-                                 << o.name().id();
-    }
-
-    o.is_immutable(p.is_immutable());
-    o.object_type(ot);
-    return o;
+    return r;
 }
 
 yarn::exception
 transformer::to_exception(const processed_object& o, const profile& p) {
-    BOOST_LOG_SEV(lg, debug) << "Object is an exception: " << o.id();
+    BOOST_LOG_SEV(lg, debug) << "Transforming dia object to exception: "
+                             << o.id();
 
     yarn::exception e;
     update_element(o, p, e);
@@ -272,79 +231,78 @@ transformer::to_exception(const processed_object& o, const profile& p) {
 
 yarn::enumeration
 transformer::to_enumeration(const processed_object& o, const profile& p) {
-    BOOST_LOG_SEV(lg, debug) << "Object is an enumeration: " << o.id();
-    yarn::enumeration e;
-    update_element(o, p, e);
+    BOOST_LOG_SEV(lg, debug) << "Transforming dia object to enumeration: "
+                             << o.id();
 
+    yarn::enumeration r;
+    update_element(o, p, r);
+
+    /*
+     * Setup the invalid enumeration.
+     */
     dogen::yarn::enumerator invalid;
     invalid.name("invalid");
     invalid.documentation("Represents an uninitialised enum");
     invalid.value("0");
-    e.enumerators().push_back(invalid);
+    r.enumerators().push_back(invalid);
 
     std::set<std::string> enumerator_names;
     enumerator_names.insert(invalid.name());
 
-    unsigned int pos(1);
-    for (const auto& p : o.attributes()) {
-        auto enumerator(to_enumerator(p, pos++));
-
+    /*
+     * Convert each attribute into an enumerator, ensuring the
+     * enumerator names is unique within this enumeration. For each
+     * enumerator we compute a position. Note that the zeroth position
+     * is already taken by invalid, so we skip it.
+     */
+    unsigned int pos(0);
+    for (const auto& attr : o.attributes()) {
+        auto enumerator(to_enumerator(attr, ++pos));
         const auto i(enumerator_names.find(enumerator.name()));
         if (i != enumerator_names.end()) {
-            BOOST_LOG_SEV(lg, error) << "Duplicate enumerator name: "
+            BOOST_LOG_SEV(lg, error) << duplicate_enumerator
                                      << enumerator.name();
-            BOOST_THROW_EXCEPTION(transformation_error(
-                    "Duplicate enumerator name: " + enumerator.name()));
+            BOOST_THROW_EXCEPTION(
+                transformation_error(duplicate_enumerator + enumerator.name()));
         }
-        e.enumerators().push_back(enumerator);
         enumerator_names.insert(enumerator.name());
+        r.enumerators().push_back(enumerator);
     }
-    return e;
+    return r;
 }
 
 yarn::module
 transformer::to_module(const processed_object& o, const profile& p) {
-    BOOST_LOG_SEV(lg, debug) << "Object is a module: " << o.id();
+    BOOST_LOG_SEV(lg, debug) << "Transforming dia object to module: " << o.id();
 
-    yarn::module m;
-    update_element(o, p, m);
-    return m;
+    yarn::module r;
+    update_element(o, p, r);
+    return r;
 }
 
 yarn::concept
 transformer::to_concept(const processed_object& o, const profile& p) {
-    yarn::concept c;
-    update_element(o, p, c);
+    BOOST_LOG_SEV(lg, debug) << "Transforming dia object to concept: "
+                             << o.id();
 
-    for (const auto& prop : o.attributes())
-        c.local_attributes().push_back(to_attribute(c.name(), prop));
+    yarn::concept r;
+    update_element(o, p, r);
 
-    const auto i(repository_.child_id_to_parent_ids().find(o.id()));
-    c.is_child(i != repository_.child_id_to_parent_ids().end());
-    if (c.is_child()) {
-        if (i->second.empty()) {
-            BOOST_LOG_SEV(lg, error) << empty_parent_container << o.id();
-            BOOST_THROW_EXCEPTION(
-                transformation_error(empty_parent_container + o.id()));
-        }
+    for (const auto& attr : o.attributes())
+        r.local_attributes().push_back(to_attribute(r.name(), attr));
 
-        for (const auto& concept_id : i->second) {
-            const auto j(repository_.id_to_name().find(concept_id));
-            if (j == repository_.id_to_name().end()) {
-                BOOST_LOG_SEV(lg, error) << "Object has a parent but "
-                                         << " there is no name mapping."
-                                         << " Child ID: '" << o.id()
-                                         << "' Parent ID: '" << concept_id
-                                         << "'";
+    const repository_selector rs(repository_);
+    const auto parent_names(rs.parent_names_for_id(o.id()));
+    r.is_child(!parent_names.empty());
 
-                BOOST_THROW_EXCEPTION(
-                    transformation_error(parent_not_found + o.id()));
-            }
-            c.refines().push_back(j->second);
-        }
+    if (parent_names.empty()) {
+        BOOST_LOG_SEV(lg, debug) << "Object has no parent: " << r.name().id();
+        return r;
     }
 
-    return c;
+    for (const auto parent_name : parent_names)
+        r.refines().push_back(parent_name);
+    return r;
 }
 
 } } }

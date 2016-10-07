@@ -70,6 +70,11 @@ private:
      */
     yarn::generation_types generation_type(const profile& p) const;
 
+    /**
+     * @brief Ensure the dia object name is valid.
+     */
+    void validate_dia_object_name(const std::string& n) const;
+
 private:
     /**
      * @brief Creates a name using the name provided and the package
@@ -114,21 +119,6 @@ private:
         const unsigned int value) const;
 
 private:
-    /**
-     * @brief Returns the module associated with a name.
-     *
-     * @pre module must exist in repository.
-     */
-    const yarn::module& module_for_name(const yarn::name& n) const;
-
-    /**
-     * @brief Returns the module associated with a dia package id.
-     *
-     * @pre pkg_id must be a valid package ID in the diagram.
-     * @pre corresponding module must have already been generated.
-     */
-    const yarn::module& module_for_id(const std::string& id) const;
-
     /**
      * @brief Update the yarn element using the processed object and
      * the profile. Also adds element's name to the containing
