@@ -58,20 +58,17 @@ private:
     generation_types generation_type(const bool is_target) const;
 
     /**
-     * @brief Returns the model name for all names other than the
-     * model itself.
-     *
-     * This hack is required purely for the hardware model, which has
-     * no model name for types, etc.
+     * @brief Reads the key value pairs from the property tree.
      */
-    std::string model_name(const yarn::intermediate_model& m) const;
+    std::list<std::pair<std::string, std::string>>
+    read_kvps(const boost::property_tree::ptree& pt) const;
 
     /**
      * @brief Creates the dynamic object by reading meta-data from the
      * property tree.
      */
     dynamic::object create_dynamic_extensions(
-        const boost::property_tree::ptree& pt,
+        const std::list<std::pair<std::string, std::string>>& kvps,
         const dynamic::scope_types st) const;
 
     /**

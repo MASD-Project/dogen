@@ -86,20 +86,30 @@ yarn::generation_types hydrator::generation_type(const bool is_target) const {
         yarn::generation_types::no_generation;
 }
 
-dynamic::object hydrator::
-create_dynamic_extensions(const boost::property_tree::ptree& pt,
-    const dynamic::scope_types st) const {
+std::list<std::pair<std::string, std::string>> hydrator::
+read_kvps(const boost::property_tree::ptree& pt) const {
+
+    std::list<std::pair<std::string, std::string>> r;
     const auto i(pt.find(extensions_key));
     if (i == pt.not_found())
-        return dynamic::object();
+        return r;
 
-    dynamic::object r;
-    std::list<std::pair<std::string, std::string> > kvps;
     for (auto j(i->second.begin()); j != i->second.end(); ++j) {
         const auto field_name(j->first);
         const auto field_value(j->second.get_value<std::string>());
-        kvps.push_back(std::make_pair(field_name, field_value));
+        r.push_back(std::make_pair(field_name, field_value));
     }
+    return r;
+}
+
+dynamic::object hydrator::
+create_dynamic_extensions(
+    const std::list<std::pair<std::string, std::string>>& kvps,
+    const dynamic::scope_types st) const {
+    if (kvps.empty())
+        return dynamic::object();
+
+    dynamic::object r;
     return dynamic_workflow_.execute(st, kvps);
 }
 
@@ -142,7 +152,8 @@ void hydrator::read_element(const boost::property_tree::ptree& pt,
                 e.documentation(*documentation);
 
             const auto scope(dynamic::scope_types::entity);
-            e.extensions(create_dynamic_extensions(pt, scope));
+            const auto kvps(read_kvps(pt));
+            e.extensions(create_dynamic_extensions(kvps, scope));
         });
 
     const auto meta_type_value(pt.get<std::string>(meta_type_key));
@@ -187,7 +198,8 @@ yarn::intermediate_model hydrator::read_stream(
 
     yarn::module m;
     const auto scope(dynamic::scope_types::root_module);
-    m.extensions(create_dynamic_extensions(pt, scope));
+    const auto kvps(read_kvps(pt));
+    m.extensions(create_dynamic_extensions(kvps, scope));
 
     const auto documentation(pt.get_optional<std::string>(documentation_key));
     if (documentation)
