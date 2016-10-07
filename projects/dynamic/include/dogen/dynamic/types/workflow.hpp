@@ -33,6 +33,8 @@
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/dynamic/types/scope_types.hpp"
+#include "dogen/dynamic/types/object_aggregate.hpp"
+#include "dogen/dynamic/types/raw_aggregate.hpp"
 #include "dogen/dynamic/types/field_definition.hpp"
 
 
@@ -95,6 +97,10 @@ public:
     object execute(const scope_types scope,
         const std::list<std::pair<std::string, std::string>>&
         raw_data) const;
+
+    std::unordered_map<std::string, object_aggregate>
+    execute(const std::string& root_object_id, const std::unordered_map<
+        std::string, raw_aggregate>& raw_aggregates) const;
 
 private:
     const repository& repository_;

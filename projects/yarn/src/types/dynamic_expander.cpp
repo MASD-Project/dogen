@@ -41,9 +41,9 @@ namespace yarn {
 
 class updater {
 public:
-    updater(const dynamic::repository& drp, const yarn::name& model_name,
-        const std::unordered_map<std::string, dynamic::raw_aggregate>&
-        raw_aggregates);
+    updater(const yarn::name& model_name,
+        const std::unordered_map<std::string, dynamic::object_aggregate>&
+        object_aggregates);
 
 private:
 
@@ -52,19 +52,15 @@ private:
         const auto id(e.name().id());
         BOOST_LOG_SEV(lg, debug) << "Processing element: " << id;
 
-        const auto i(raw_aggregates_.find(id));
-        if (i == raw_aggregates_.end()) {
-            BOOST_LOG_SEV(lg, debug) << "No raw meta-data for element: " << id;
+        const auto i(object_aggregates_.find(id));
+        if (i == object_aggregates_.end()) {
+            BOOST_LOG_SEV(lg, debug) << "No dynamic objects for element: "
+                                     << id;
             return;
         }
-        const auto& ra(i->second);
-        const auto is_root_module(e.name() == model_name_);
-        const auto scope(is_root_module ?
-            dynamic::scope_types::root_module :
-            dynamic::scope_types::entity);
-        e.extensions(workflow_.execute(scope, ra.element()));
-        BOOST_LOG_SEV(lg, debug) << "Created dynamic object for element."
-                                 << " Scope: " << scope;
+
+        e.extensions(i->second.element());
+        BOOST_LOG_SEV(lg, debug) << "Updated dynamic object for element.";
     }
 
     template<typename ExtensibleAndStateful>
@@ -72,27 +68,26 @@ private:
         const auto id(eas.name().id());
         BOOST_LOG_SEV(lg, debug) << "Processing element: " << id;
 
-        const auto i(raw_aggregates_.find(id));
-        if (i == raw_aggregates_.end()) {
-            BOOST_LOG_SEV(lg, debug) << "No kvps for element: " << id;
+        const auto i(object_aggregates_.find(id));
+        if (i == object_aggregates_.end()) {
+            BOOST_LOG_SEV(lg, debug) << "No dynamic objects for element: "
+                                     << id;
             return;
         }
-        const auto& ra(i->second);
-        const auto scope(dynamic::scope_types::entity);
-        eas.extensions(workflow_.execute(scope, ra.element()));
+
+        const auto& oa(i->second);
+        eas.extensions(oa.element());
 
         for (auto& attr : eas.local_attributes()) {
             const auto n(attr.name().simple());
-            const auto j(ra.attributes().find(n));
-            if (j == ra.attributes().end()) {
+            const auto j(oa.attributes().find(n));
+            if (j == oa.attributes().end()) {
                 BOOST_LOG_SEV(lg, debug) << "No kvps for attribute: " << n
                                          << ". Element: " << eas.name().id();
                 continue;
             }
 
-            const auto& ra(j->second);
-            const auto scope(dynamic::scope_types::property);
-            attr.extensions(workflow_.execute(scope, ra));
+            attr.extensions(j->second);
             BOOST_LOG_SEV(lg, debug) << "Created dynamic object for attribute: "
                                      << n;
         }
@@ -109,16 +104,15 @@ public:
     void operator()(yarn::visitor& v) { update_extensible(v); }
 
 private:
-    const dynamic::workflow workflow_;
     const yarn::name model_name_;
-    const std::unordered_map<std::string, dynamic::raw_aggregate>&
-    raw_aggregates_;
+    const std::unordered_map<std::string, dynamic::object_aggregate>&
+    object_aggregates_;
 };
 
-updater::updater(const dynamic::repository& drp, const yarn::name& model_name,
-    const std::unordered_map<std::string, dynamic::raw_aggregate>&
-    raw_aggregates) : workflow_(drp), model_name_(model_name),
-                      raw_aggregates_(raw_aggregates) {}
+updater::updater(const yarn::name& model_name,
+    const std::unordered_map<std::string, dynamic::object_aggregate>&
+    object_aggregates) : model_name_(model_name),
+                         object_aggregates_(object_aggregates) {}
 
 void dynamic_expander::
 expand(const dynamic::repository& drp, intermediate_model& im) const {
@@ -126,7 +120,9 @@ expand(const dynamic::repository& drp, intermediate_model& im) const {
                              << im.name().id();
     BOOST_LOG_SEV(lg, debug) << "Raw kvps: " << im.indices().raw_aggregates();
 
-    updater u(drp, im.name(), im.indices().raw_aggregates());
+    const dynamic::workflow w(drp);
+    const auto oas(w.execute(im.name().id(), im.indices().raw_aggregates()));
+    updater u(im.name(), oas);
     yarn::elements_traversal(im, u);
 
     BOOST_LOG_SEV(lg, debug) << "Finished dynamic expansion.";

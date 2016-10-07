@@ -124,4 +124,30 @@ object workflow::execute(const scope_types current_scope,
     return object(fields);
 }
 
+std::unordered_map<std::string, object_aggregate> workflow::
+execute(const std::string& root_object_id, const std::unordered_map<
+    std::string, raw_aggregate>& raw_aggregates) const {
+
+    std::unordered_map<std::string, object_aggregate> r;
+    for (const auto& pair : raw_aggregates) {
+        const auto id(pair.first);
+        const auto is_root_module(id == root_object_id);
+        const auto scope(is_root_module ?
+            dynamic::scope_types::root_module :
+            dynamic::scope_types::entity);
+
+        const auto& ra(pair.second);
+        object_aggregate oa;
+        oa.element(execute(scope, ra.element()));
+        for (const auto& pair : ra.attributes()) {
+            const auto attr_id(pair.first);
+            const auto& attr(pair.second);
+            const auto scope(dynamic::scope_types::property);
+            oa.attributes()[attr_id] = execute(scope, attr);
+        }
+        r[id] = oa;
+    }
+    return r;
+}
+
 } }

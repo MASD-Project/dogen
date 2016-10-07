@@ -13,15 +13,15 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-07 Fri 23:59]
+#+CAPTION: Clock summary at [2016-10-08 Sat 00:19]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *86:26* |       |       | 100.0 |
+| *Total time*                                                                | *86:45* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 86:26   |       |       | 100.0 |
-| Active                                                                      |         | 86:26 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  5:30 |   6.4 |
+| Stories                                                                     | 86:45   |       |       | 100.0 |
+| Active                                                                      |         | 86:45 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  5:30 |   6.3 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:07 |   0.1 |
 | COMPLETED Generation of formattable is incorrect                            |         |       |  2:30 |   2.9 |
 | COMPLETED Visitor includes are incorrect                                    |         |       |  0:20 |   0.4 |
@@ -55,14 +55,14 @@
 | COMPLETED Remove formatter level facet folders                              |         |       |  0:06 |   0.1 |
 | COMPLETED Consider removing the "fake" primitive formatters                 |         |       |  0:01 |   0.0 |
 | COMPLETED Expander refactor in =quilt.cpp=                                  |         |       |  3:03 |   3.5 |
-| COMPLETED Create the notion of a formatter alias                            |         |       |  3:15 |   3.8 |
+| COMPLETED Create the notion of a formatter alias                            |         |       |  3:15 |   3.7 |
 | COMPLETED Remove enabled formatters from formatter configuration            |         |       |  0:22 |   0.4 |
-| COMPLETED Handle registration of services properly                          |         |       |  3:41 |   4.3 |
+| COMPLETED Handle registration of services properly                          |         |       |  3:41 |   4.2 |
 | COMPLETED Move stereotypes to element                                       |         |       |  0:21 |   0.4 |
 | COMPLETED Improve project banner                                            |         |       |  0:32 |   0.6 |
 | CANCELLED Add support for profiles                                          |         |       | 10:40 |  12.3 |
 | COMPLETED Refactor =yarn.dia= transformer                                   |         |       |  8:49 |  10.2 |
-| STARTED Create a dynamic expander in yarn                                   |         |       |  5:33 |   6.4 |
+| COMPLETED Create a dynamic expander in yarn                                 |         |       |  5:52 |   6.8 |
 | STARTED Rewrite profile support                                             |         |       |  1:26 |   1.7 |
 | STARTED Generate formatter interfaces                                       |         |       |  0:28 |   0.5 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
@@ -1288,8 +1288,10 @@ logic of dispatching outside of transformer, but we have to bear in
 mind we are traversing a graph, so this would have to be done in the
 graph itself - not ideal. This story needs more thinking.
 
-*** STARTED Create a dynamic expander in yarn                         :story:
-    CLOCK: [2016-10-07 Fri 23:06]--[2016-10-07 Fri 23:58] =>  0:52
+*** COMPLETED Create a dynamic expander in yarn                       :story:
+    CLOSED: [2016-10-08 Sat 00:19]
+    CLOCK: [2016-10-08 Sat 00:01]--[2016-10-08 Sat 00:19] =>  0:18
+    CLOCK: [2016-10-07 Fri 23:06]--[2016-10-07 Fri 23:59] =>  0:52
     CLOCK: [2016-10-07 Fri 23:01]--[2016-10-07 Fri 23:05] =>  0:04
     CLOCK: [2016-10-07 Fri 22:20]--[2016-10-07 Fri 23:00] =>  0:40
     CLOCK: [2016-10-07 Fri 18:44]--[2016-10-07 Fri 19:01] =>  0:17
@@ -1308,7 +1310,6 @@ We need to move this work from the front end into yarn.
 Notes:
 
 - move raw kvps to dynamic
-- rename property scope type to attribute in dynamic
 - as first step, add dynamic expander doing one object at a time;
   remove all references to workflow.
 - look at stitch code and see how this refactor will impact it.
@@ -1328,6 +1329,9 @@ Tasks:
 
 We have to do a number of renames to make space for profilers:
 
+- rename object aggregates to something slightly more sensible as it
+  clashes with previous uses of the term aggregation in dynamic.
+- rename property scope type to attribute in dynamic
 - rename fields to field_definitions in data;
 - rename definition types to instantiation types;
 - hydration workflow is field definition factory
