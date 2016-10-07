@@ -72,16 +72,22 @@ private:
         const dynamic::scope_types st) const;
 
     /**
+     * @brief Inserts the raw kvps into the model's indicies.
+     */
+    void insert_raw_kvps(const yarn::name& owner,
+        const std::list<std::pair<std::string, std::string>>& kvps,
+        intermediate_model& im) const;
+
+    /**
      * @brief Reads an element from the property tree.
      */
     void read_element(const boost::property_tree::ptree& pt,
-        yarn::intermediate_model& m) const;
+        yarn::intermediate_model& im) const;
 
     /**
      * @brief Reads the entire stream as a property tree.
      */
-    intermediate_model read_stream(
-        std::istream& s, const bool is_target) const;
+    intermediate_model read_stream(std::istream& s, const bool is_target) const;
 
     /**
      * @brief Converts a string to a value in the object types

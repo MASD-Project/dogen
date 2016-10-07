@@ -70,6 +70,7 @@ const std::string model_has_no_types("Did not find any elements in model");
 const std::string missing_module("Could not find module: ");
 const std::string failed_to_open_file("Failed to open file: ");
 const std::string invalid_object_type("Invalid or unsupported object type: ");
+const std::string duplicate_element_id("Duplicate element id: ");
 
 }
 
@@ -102,8 +103,7 @@ read_kvps(const boost::property_tree::ptree& pt) const {
     return r;
 }
 
-dynamic::object hydrator::
-create_dynamic_extensions(
+dynamic::object hydrator::create_dynamic_extensions(
     const std::list<std::pair<std::string, std::string>>& kvps,
     const dynamic::scope_types st) const {
     if (kvps.empty())
@@ -113,13 +113,31 @@ create_dynamic_extensions(
     return dynamic_workflow_.execute(st, kvps);
 }
 
+void hydrator::insert_raw_kvps(const yarn::name& owner,
+    const std::list<std::pair<std::string, std::string>>& kvps,
+    intermediate_model& im) const {
+
+    if (kvps.empty())
+        return;
+
+    yarn::raw_kvp rk;
+    rk.element(kvps);
+    const auto pair(std::make_pair(owner.id(), rk));
+    const bool inserted(im.indices().raw_kvps().insert(pair).second);
+    if (!inserted) {
+        BOOST_LOG_SEV(lg, error) << duplicate_element_id << owner.id();
+        BOOST_THROW_EXCEPTION(
+            hydration_error(duplicate_element_id + owner.id()));
+    }
+}
+
 void hydrator::read_element(const boost::property_tree::ptree& pt,
-    yarn::intermediate_model& m) const {
+    yarn::intermediate_model& im) const {
 
     yarn::name_builder b;
     const auto in_global_module(pt.get(in_global_module_key, false));
     if (!in_global_module)
-        b.model_name(m.name().location());
+        b.model_name(im.name().location());
 
     const auto simple_name_value(pt.get<std::string>(simple_name_key));
     b.simple_name(simple_name_value);
@@ -145,7 +163,7 @@ void hydrator::read_element(const boost::property_tree::ptree& pt,
             BOOST_LOG_SEV(lg, debug) << "Processing element: " << n.id();
             e.name(n);
             e.origin_type(origin_types::not_yet_determined);
-            e.generation_type(m.generation_type());
+            e.generation_type(im.generation_type());
             e.in_global_module(in_global_module);
 
             if (documentation)
@@ -153,6 +171,7 @@ void hydrator::read_element(const boost::property_tree::ptree& pt,
 
             const auto scope(dynamic::scope_types::entity);
             const auto kvps(read_kvps(pt));
+            insert_raw_kvps(e.name(), kvps, im);
             e.extensions(create_dynamic_extensions(kvps, scope));
         });
 
@@ -163,13 +182,25 @@ void hydrator::read_element(const boost::property_tree::ptree& pt,
 
         const auto ot(pt.get_optional<std::string>(object_type_key));
         o.object_type(to_object_type(ot));
-        m.objects().insert(std::make_pair(n.id(), o));
+        const auto pair(std::make_pair(n.id(), o));
+        const bool inserted(im.objects().insert(pair).second);
+        if (!inserted) {
+            BOOST_LOG_SEV(lg, error) << duplicate_element_id << n.id();
+            BOOST_THROW_EXCEPTION(
+                hydration_error(duplicate_element_id + n.id()));
+        }
     } else if (meta_type_value == meta_type_primitive_value) {
         yarn::primitive p;
         const auto dit(pt.get(is_default_enumeration_type_key, false));
         p.is_default_enumeration_type(dit);
         lambda(p);
-        m.primitives().insert(std::make_pair(n.id(), p));
+        const auto pair(std::make_pair(n.id(), p));
+        const bool inserted(im.primitives().insert(pair).second);
+        if (!inserted) {
+            BOOST_LOG_SEV(lg, error) << duplicate_element_id << n.id();
+            BOOST_THROW_EXCEPTION(
+                hydration_error(duplicate_element_id + n.id()));
+        }
     }
     else {
         BOOST_LOG_SEV(lg, error) << invalid_meta_type << meta_type_value;
@@ -178,8 +209,8 @@ void hydrator::read_element(const boost::property_tree::ptree& pt,
     }
 }
 
-yarn::intermediate_model hydrator::read_stream(
-    std::istream& s, const bool is_target) const {
+yarn::intermediate_model hydrator::
+read_stream(std::istream& s, const bool is_target) const {
     yarn::intermediate_model r;
     r.generation_type(generation_type(is_target));
 
@@ -199,6 +230,7 @@ yarn::intermediate_model hydrator::read_stream(
     yarn::module m;
     const auto scope(dynamic::scope_types::root_module);
     const auto kvps(read_kvps(pt));
+    insert_raw_kvps(r.name(), kvps, r);
     m.extensions(create_dynamic_extensions(kvps, scope));
 
     const auto documentation(pt.get_optional<std::string>(documentation_key));
