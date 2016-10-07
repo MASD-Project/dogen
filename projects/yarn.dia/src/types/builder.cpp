@@ -23,6 +23,7 @@
 #include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/yarn.dia/types/building_error.hpp"
 #include "dogen/yarn.dia/types/repository_selector.hpp"
+#include "dogen/yarn.dia/types/building_error.hpp"
 #include "dogen/yarn.dia/types/builder.hpp"
 
 namespace {
@@ -33,12 +34,39 @@ static logger lg(logger_factory("yarn.dia.builder"));
 const std::string empty_package_id("Supplied package id is empty");
 const std::string missing_module_for_name("Missing module for name: ");
 const std::string missing_name_for_id("Missing name for dia object ID: ");
+const std::string duplicate_element_id("Element id already exists: ");
+const std::string duplicate_attribute_name("Attribute name already exists: ");
+const std::string duplicate_dia_id("Duplicate dia id: ");
 
 }
 
 namespace dogen {
 namespace yarn {
 namespace dia {
+
+template<typename Element> void add_element(
+    std::unordered_map<std::string, name>& id_to_name,
+    std::unordered_map<std::string, Element>& container,
+    const Element& e, const std::string& id) {
+
+    const auto element_pair(std::make_pair(e.name().id(), e));
+    bool inserted(container.insert(element_pair).second);
+    if (!inserted) {
+        BOOST_LOG_SEV(lg, error) << duplicate_element_id << e.name().id();
+        BOOST_THROW_EXCEPTION(
+            building_error(duplicate_element_id + e.name().id()));
+    }
+    BOOST_LOG_SEV(lg, debug) << "Added element to model " << e.name().id();
+
+    const auto id_name_pair(std::make_pair(id, e.name()));
+    inserted = id_to_name.insert(id_name_pair).second;
+    if (!inserted) {
+        BOOST_LOG_SEV(lg, error) << duplicate_dia_id << id;
+        BOOST_THROW_EXCEPTION(building_error(duplicate_dia_id + id));
+    }
+    BOOST_LOG_SEV(lg, debug) << "Mapped " << id << " to "
+                             << e.name().id();
+}
 
 builder::builder(const std::string& model_name,
     const std::string& external_modules, bool is_target,
@@ -117,28 +145,67 @@ void builder::update_documentation(const processed_object& o) {
     module.extensions(dynamic_workflow_.execute(scope, kvps));
 }
 
+void builder::update_raw_kvps(const profiled_object& po) {
+    auto& raw_kvps(repository_.model().indices().raw_kvps());
+    yarn::raw_kvp rk;
+    rk.element(po.object().comment().key_value_pairs());
+    for (const auto& attr : po.object().attributes()) {
+        const auto& attr_kvps(attr.comment().key_value_pairs());
+        if (attr_kvps.empty())
+            continue;
+
+        const auto pair(std::make_pair(attr.name(), attr_kvps));
+        const auto inserted(rk.attributes().insert(pair).second);
+        if (!inserted) {
+            BOOST_LOG_SEV(lg, error) << duplicate_attribute_name << attr.name();
+            BOOST_THROW_EXCEPTION(
+                building_error(duplicate_attribute_name + attr.name()));
+        }
+    }
+
+    bool has_kvps(!rk.element().empty() || !rk.attributes().empty());
+    if (!has_kvps)
+        return;
+
+    const_repository_selector crs(repository_);
+    const auto n(crs.name_for_id(po.object().id()));
+    const auto pair(std::make_pair(n.id(), rk));;
+    const bool inserted(raw_kvps.insert(pair).second);
+    if (!inserted) {
+        BOOST_LOG_SEV(lg, error) << duplicate_element_id << n.id();
+        BOOST_THROW_EXCEPTION(building_error(duplicate_element_id + n.id()));
+    }
+}
+
 void builder::add(const profiled_object& po) {
     auto& im(repository_.model());
+    auto& itn(repository_.id_to_name());
     transformer t(dynamic_workflow_, repository_);
 
     const auto id(po.object().id());
     const auto& p(po.profile());
-    if (p.is_uml_note())
+    if (p.is_uml_note()) {
+        /*
+         * For notes we just need to update the existing module; there
+         * is no further processing to be done.
+         */
         update_documentation(po.object());
-    else if (p.is_uml_large_package())
-        add(im.modules(), t.to_module(po), id);
+        return;
+    } else if (p.is_uml_large_package())
+        add_element(itn, im.modules(), t.to_module(po), id);
     else if (p.is_enumeration())
-        add(im.enumerations(), t.to_enumeration(po), id);
+        add_element(itn, im.enumerations(), t.to_enumeration(po), id);
     else if (p.is_concept())
-        add(im.concepts(), t.to_concept(po), id);
+        add_element(itn, im.concepts(), t.to_concept(po), id);
     else if (p.is_exception()) {
-        add(im.exceptions(), t.to_exception(po), id);
+        add_element(itn, im.exceptions(), t.to_exception(po), id);
     } else {
         const auto ot(p.is_service() ?
             yarn::object_types::user_defined_service :
             yarn::object_types::user_defined_value_object);
-        add(im.objects(), t.to_object(po, ot), id);
+        add_element(itn, im.objects(), t.to_object(po, ot), id);
     }
+    update_raw_kvps(po);
 }
 
 yarn::intermediate_model builder::build() {

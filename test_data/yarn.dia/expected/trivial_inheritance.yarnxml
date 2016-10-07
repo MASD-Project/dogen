@@ -6111,9 +6111,117 @@ in the context of inheritance.
 			<item_version>0</item_version>
 		</elements_referable_by_attributes>
 		<raw_kvps class_id="50" tracking_level="0" version="0">
-			<count>0</count>
-			<bucket_count>1</bucket_count>
+			<count>6</count>
+			<bucket_count>11</bucket_count>
 			<item_version>0</item_version>
+			<item class_id="51" tracking_level="0" version="0">
+				<first>&lt;trivial_inheritance&gt;&lt;non_final_orphan&gt;</first>
+				<second class_id="52" tracking_level="0" version="0">
+					<element class_id="53" tracking_level="0" version="0">
+						<count>1</count>
+						<item_version>0</item_version>
+						<item class_id="54" tracking_level="0" version="0">
+							<first>yarn.generalization.is_final</first>
+							<second>false</second>
+						</item>
+					</element>
+					<attributes class_id="55" tracking_level="0" version="0">
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</attributes>
+				</second>
+			</item>
+			<item>
+				<first>&lt;trivial_inheritance&gt;&lt;non_final_leaf&gt;</first>
+				<second>
+					<element>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>
+							<first>yarn.generalization.is_final</first>
+							<second>false</second>
+						</item>
+					</element>
+					<attributes>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</attributes>
+				</second>
+			</item>
+			<item>
+				<first>&lt;trivial_inheritance&gt;&lt;child_via_settings&gt;</first>
+				<second>
+					<element>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>
+							<first>yarn.generalization.parent</first>
+							<second>parent_with_members</second>
+						</item>
+					</element>
+					<attributes>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</attributes>
+				</second>
+			</item>
+			<item>
+				<first>&lt;trivial_inheritance&gt;&lt;pkg4&gt;&lt;child_via_settings&gt;</first>
+				<second>
+					<element>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>
+							<first>yarn.generalization.parent</first>
+							<second>parent_outside</second>
+						</item>
+					</element>
+					<attributes>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</attributes>
+				</second>
+			</item>
+			<item>
+				<first>&lt;trivial_inheritance&gt;&lt;pkg1&gt;&lt;child_via_settings&gt;</first>
+				<second>
+					<element>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>
+							<first>yarn.generalization.parent</first>
+							<second>pkg1::parent</second>
+						</item>
+					</element>
+					<attributes>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</attributes>
+				</second>
+			</item>
+			<item>
+				<first>&lt;trivial_inheritance&gt;&lt;pkg3&gt;&lt;child_via_settings&gt;</first>
+				<second>
+					<element>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>
+							<first>yarn.generalization.parent</first>
+							<second>pkg2::parent</second>
+						</item>
+					</element>
+					<attributes>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</attributes>
+				</second>
+			</item>
 		</raw_kvps>
 	</indices>
 	<root_module object_id="_35">
