@@ -1289,6 +1289,7 @@ mind we are traversing a graph, so this would have to be done in the
 graph itself - not ideal. This story needs more thinking.
 
 *** STARTED Create a dynamic expander in yarn                         :story:
+    CLOCK: [2016-10-07 Fri 15:31]--[2016-10-07 Fri 15:59] =>  0:28
     CLOCK: [2016-10-07 Fri 13:09]--[2016-10-07 Fri 13:15] =>  0:06
     CLOCK: [2016-10-07 Fri 12:53]--[2016-10-07 Fri 13:08] =>  0:15
     CLOCK: [2016-10-07 Fri 12:46]--[2016-10-07 Fri 12:52] =>  0:06

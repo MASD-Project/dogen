@@ -215,8 +215,8 @@ void modules_expander::create_missing_modules(intermediate_model& im) const {
 }
 
 void modules_expander::expand_containing_module(intermediate_model& im) const {
-    updater g(im);
-    yarn::elements_traversal(im, g);
+    updater u(im);
+    yarn::elements_traversal(im, u);
 }
 
 void modules_expander::
