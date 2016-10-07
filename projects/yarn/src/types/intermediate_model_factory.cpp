@@ -20,7 +20,6 @@
  */
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
-#include "dogen/dynamic/types/workflow.hpp"
 #include "dogen/yarn/types/persister.hpp"
 #include "dogen/yarn/io/intermediate_model_io.hpp"
 #include "dogen/yarn/io/descriptor_io.hpp"
@@ -37,17 +36,15 @@ namespace dogen {
 namespace yarn {
 
 std::list<intermediate_model>
-intermediate_model_factory::execute(const dynamic::repository& drp,
-    frontend_registrar& rg,
+intermediate_model_factory::execute(frontend_registrar& rg,
     const std::list<descriptor>& descriptors) {
     BOOST_LOG_SEV(lg, debug) << "Creating intermediate models. "
                              << "Descriptors: " << descriptors;
 
-    const dynamic::workflow w(drp);
     std::list<intermediate_model> r;
     for (const auto& d : descriptors) {
         auto& f(rg.frontend_for_extension(d.extension()));
-        r.push_back(f.execute(w, d));
+        r.push_back(f.execute(d));
     }
 
     BOOST_LOG_SEV(lg, debug) << "Created intermediate models. Total: "

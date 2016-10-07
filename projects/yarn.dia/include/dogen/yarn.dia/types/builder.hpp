@@ -41,9 +41,8 @@ namespace dia {
 class builder {
 public:
     builder(const std::string& model_name, const std::string& external_modules,
-        const bool is_target, const dynamic::workflow& w,
-        const std::unordered_map<std::string, std::list<std::string>>&
-        child_id_to_parent_ids);
+        const bool is_target, const std::unordered_map<std::string,
+        std::list<std::string>>& child_id_to_parent_ids);
 
 private:
     yarn::module create_module_for_model(const yarn::name& n,
@@ -52,16 +51,15 @@ private:
     yarn::intermediate_model setup_model(const std::string& model_name,
         const std::string& external_modules, bool is_target) const;
 
-    void update_documentation(const processed_object& o);
+    void update_raw_kvps(const yarn::name& n, const profiled_object& po);
 
-    void update_raw_kvps(const profiled_object& po);
+    void update_documentation(const profiled_object& po);
 
 public:
     void add(const profiled_object& po);
     yarn::intermediate_model build();
 
 private:
-    const dynamic::workflow& dynamic_workflow_;
     repository repository_;
 };
 

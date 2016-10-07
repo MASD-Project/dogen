@@ -27,8 +27,6 @@
 
 #include <string>
 #include <memory>
-#include "dogen/dynamic/types/workflow.hpp"
-#include "dogen/dynamic/types/scope_types.hpp"
 #include "dogen/dia/types/object.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/yarn/types/exception.hpp"
@@ -64,7 +62,7 @@ public:
      * @pre model in repository must be populated with all the types
      * required by the current step of transformation.
      */
-    transformer(const dynamic::workflow& w, const repository& rp);
+    explicit transformer(const repository& rp);
 
 private:
     /**
@@ -173,7 +171,6 @@ public:
 
 private:
     const repository& repository_;
-    const dynamic::workflow& dynamic_workflow_;
 };
 
 } } }

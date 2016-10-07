@@ -78,9 +78,6 @@ namespace dogen {
 namespace yarn {
 namespace json {
 
-hydrator::hydrator(const dynamic::workflow& w)
-    : dynamic_workflow_(w) { }
-
 yarn::generation_types hydrator::generation_type(const bool is_target) const {
     return is_target ?
         yarn::generation_types::full_generation :
@@ -101,16 +98,6 @@ read_kvps(const boost::property_tree::ptree& pt) const {
         r.push_back(std::make_pair(field_name, field_value));
     }
     return r;
-}
-
-dynamic::object hydrator::create_dynamic_extensions(
-    const std::list<std::pair<std::string, std::string>>& kvps,
-    const dynamic::scope_types st) const {
-    if (kvps.empty())
-        return dynamic::object();
-
-    dynamic::object r;
-    return dynamic_workflow_.execute(st, kvps);
 }
 
 void hydrator::insert_raw_kvps(const yarn::name& owner,
@@ -169,10 +156,8 @@ void hydrator::read_element(const boost::property_tree::ptree& pt,
             if (documentation)
                 e.documentation(*documentation);
 
-            const auto scope(dynamic::scope_types::entity);
             const auto kvps(read_kvps(pt));
             insert_raw_kvps(e.name(), kvps, im);
-            e.extensions(create_dynamic_extensions(kvps, scope));
         });
 
     const auto meta_type_value(pt.get<std::string>(meta_type_key));
@@ -228,10 +213,8 @@ read_stream(std::istream& s, const bool is_target) const {
     r.origin_type(ot);
 
     yarn::module m;
-    const auto scope(dynamic::scope_types::root_module);
     const auto kvps(read_kvps(pt));
     insert_raw_kvps(r.name(), kvps, r);
-    m.extensions(create_dynamic_extensions(kvps, scope));
 
     const auto documentation(pt.get_optional<std::string>(documentation_key));
     if (documentation)

@@ -49,8 +49,7 @@ private:
      * @brief Obtains all intermediate models.
      */
     std::list<intermediate_model> obtain_intermediate_models(
-        const dynamic::repository& drp, frontend_registrar& rg,
-        const std::list<descriptor>& d) const;
+        frontend_registrar& rg, const std::list<descriptor>& d) const;
 
     /**
      * @brief Performs a module expansion on the model.

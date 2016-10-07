@@ -29,7 +29,6 @@
 #include <boost/optional.hpp>
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/descriptor.hpp"
-#include "dogen/dynamic/types/workflow.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -63,8 +62,7 @@ public:
      * @note Method is non-const by design at the moment as some
      * frontends have state.
      */
-    virtual intermediate_model execute(const dynamic::workflow& w,
-        const descriptor& d) = 0;
+    virtual intermediate_model execute(const descriptor& d) = 0;
 };
 
 } }

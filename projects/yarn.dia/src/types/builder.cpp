@@ -20,7 +20,9 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/io/pair_io.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
+#include "dogen/yarn/io/raw_kvp_io.hpp"
 #include "dogen/yarn.dia/types/building_error.hpp"
 #include "dogen/yarn.dia/types/repository_selector.hpp"
 #include "dogen/yarn.dia/types/building_error.hpp"
@@ -70,11 +72,8 @@ template<typename Element> void add_element(
 
 builder::builder(const std::string& model_name,
     const std::string& external_modules, bool is_target,
-    const dynamic::workflow& w,
     const std::unordered_map<std::string, std::list<std::string> >&
-    child_id_to_parent_ids) :
-    dynamic_workflow_(w) {
-
+    child_id_to_parent_ids) {
     repository_.model(setup_model(model_name, external_modules, is_target));
     repository_.child_id_to_parent_ids(child_id_to_parent_ids);
 }
@@ -115,39 +114,9 @@ yarn::intermediate_model builder::setup_model(const std::string& model_name,
     return r;
 }
 
-void builder::update_documentation(const processed_object& o) {
-    BOOST_LOG_SEV(lg, debug) << "Object is a note: " << o.id()
-                             << ". Note text: '"
-                             << o.comment().original_content() << "'";
-
-    if (o.comment().original_content().empty() ||
-        !o.comment().applicable_to_parent_object())
-        return;
-
-    const auto& documentation(o.comment().documentation());
-    const auto& kvps(o.comment().key_value_pairs());
-
-    using dynamic::scope_types;
-    repository_selector rs(repository_);
-    if (o.child_node_id().empty()) {
-        auto& module(rs.module_for_name(repository_.model().name()));
-        module.documentation(documentation);
-
-        const auto scope(scope_types::root_module);
-        module.extensions(dynamic_workflow_.execute(scope, kvps));
-        return;
-    }
-
-    yarn::module& module(rs.module_for_id(o.child_node_id()));
-    module.documentation(documentation);
-
-    const auto scope(scope_types::any_module);
-    module.extensions(dynamic_workflow_.execute(scope, kvps));
-}
-
-void builder::update_raw_kvps(const profiled_object& po) {
-    auto& raw_kvps(repository_.model().indices().raw_kvps());
+void builder::update_raw_kvps(const yarn::name& n, const profiled_object& po) {
     yarn::raw_kvp rk;
+    auto& raw_kvps(repository_.model().indices().raw_kvps());
     rk.element(po.object().comment().key_value_pairs());
     for (const auto& attr : po.object().attributes()) {
         const auto& attr_kvps(attr.comment().key_value_pairs());
@@ -163,13 +132,14 @@ void builder::update_raw_kvps(const profiled_object& po) {
         }
     }
 
-    bool has_kvps(!rk.element().empty() || !rk.attributes().empty());
-    if (!has_kvps)
+    bool no_kvps(rk.element().empty() && rk.attributes().empty());
+    if (no_kvps)
         return;
 
     const_repository_selector crs(repository_);
-    const auto n(crs.name_for_id(po.object().id()));
     const auto pair(std::make_pair(n.id(), rk));;
+    BOOST_LOG_SEV(lg, debug) << "Inserting kvps: " << pair;
+
     const bool inserted(raw_kvps.insert(pair).second);
     if (!inserted) {
         BOOST_LOG_SEV(lg, error) << duplicate_element_id << n.id();
@@ -177,35 +147,66 @@ void builder::update_raw_kvps(const profiled_object& po) {
     }
 }
 
+void builder::update_documentation(const profiled_object& po) {
+    const auto& o(po.object());
+    BOOST_LOG_SEV(lg, debug) << "Object is a note: "
+                             << o.id()
+                             << ". Note text: '"
+                             << o.comment().original_content() << "'";
+
+    if (o.comment().original_content().empty() ||
+        !o.comment().applicable_to_parent_object())
+        return;
+
+    const auto& documentation(o.comment().documentation());
+
+    repository_selector rs(repository_);
+    if (o.child_node_id().empty()) {
+        auto& module(rs.module_for_name(repository_.model().name()));
+        module.documentation(documentation);
+        update_raw_kvps(module.name(), po);
+        return;
+    }
+
+    yarn::module& module(rs.module_for_id(o.child_node_id()));
+    module.documentation(documentation);
+    update_raw_kvps(module.name(), po);
+}
+
 void builder::add(const profiled_object& po) {
     auto& im(repository_.model());
     auto& itn(repository_.id_to_name());
-    transformer t(dynamic_workflow_, repository_);
+    transformer t(repository_);
 
     const auto id(po.object().id());
     const auto& p(po.profile());
     if (p.is_uml_note()) {
-        /*
-         * For notes we just need to update the existing module; there
-         * is no further processing to be done.
-         */
-        update_documentation(po.object());
+        update_documentation(po);
         return;
-    } else if (p.is_uml_large_package())
-        add_element(itn, im.modules(), t.to_module(po), id);
-    else if (p.is_enumeration())
-        add_element(itn, im.enumerations(), t.to_enumeration(po), id);
-    else if (p.is_concept())
-        add_element(itn, im.concepts(), t.to_concept(po), id);
-    else if (p.is_exception()) {
-        add_element(itn, im.exceptions(), t.to_exception(po), id);
+    } else if (p.is_uml_large_package()) {
+        const auto m(t.to_module(po));
+        add_element(itn, im.modules(), m, id);
+        update_raw_kvps(m.name(), po);
+    } else if (p.is_enumeration()) {
+        const auto e(t.to_enumeration(po));
+        add_element(itn, im.enumerations(), e, id);
+        update_raw_kvps(e.name(), po);
+    } else if (p.is_concept()) {
+        const auto c(t.to_concept(po));
+        add_element(itn, im.concepts(), c, id);
+        update_raw_kvps(c.name(), po);
+    } else if (p.is_exception()) {
+        const auto e(t.to_exception(po));
+        add_element(itn, im.exceptions(), e, id);
+        update_raw_kvps(e.name(), po);
     } else {
         const auto ot(p.is_service() ?
             yarn::object_types::user_defined_service :
             yarn::object_types::user_defined_value_object);
-        add_element(itn, im.objects(), t.to_object(po, ot), id);
+        const auto o(t.to_object(po, ot));
+        add_element(itn, im.objects(), o, id);
+        update_raw_kvps(o.name(), po);
     }
-    update_raw_kvps(po);
 }
 
 yarn::intermediate_model builder::build() {

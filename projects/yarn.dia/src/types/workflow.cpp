@@ -42,8 +42,6 @@ namespace dogen {
 namespace yarn {
 namespace dia {
 
-workflow::workflow(const dynamic::workflow& w) : dynamic_workflow_(w) { }
-
 std::list<profiled_object> workflow::
 create_profiled_objects(const dogen::dia::diagram& d) const {
     profiled_object_factory f;
@@ -78,8 +76,7 @@ builder workflow::create_builder(const std::string& model_name,
     const std::unordered_map<std::string, std::list<std::string>>&
     child_id_to_parent_ids) const {
 
-    builder b(model_name, external_modules, is_target,
-        dynamic_workflow_, child_id_to_parent_ids);
+    builder b(model_name, external_modules, is_target, child_id_to_parent_ids);
     return b;
 }
 

@@ -20,12 +20,14 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/io/unordered_map_io.hpp"
+#include "dogen/dynamic/io/scope_types_io.hpp"
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/workflow.hpp"
+#include "dogen/yarn/io/raw_kvp_io.hpp"
 #include "dogen/yarn/types/expansion_error.hpp"
 #include "dogen/yarn/types/elements_traversal.hpp"
 #include "dogen/yarn/types/dynamic_expander.hpp"
-
 
 namespace {
 
@@ -40,7 +42,7 @@ namespace yarn {
 class updater {
 public:
     updater(const dynamic::repository& drp, const yarn::name& model_name,
-        const std::unordered_map<std::string, dogen::yarn::raw_kvp>& raw_kvps);
+        const std::unordered_map<std::string, raw_kvp>& raw_kvps);
 
 private:
 
@@ -60,6 +62,8 @@ private:
             dynamic::scope_types::root_module :
             dynamic::scope_types::entity);
         e.extensions(workflow_.execute(scope, raw_kvp.element()));
+        BOOST_LOG_SEV(lg, debug) << "Created dynamic object for element."
+                                 << " Scope: " << scope;
     }
 
     template<typename ExtensibleAndStateful>
@@ -88,7 +92,10 @@ private:
             const auto& raw_kvp(j->second);
             const auto scope(dynamic::scope_types::property);
             attr.extensions(workflow_.execute(scope, raw_kvp));
+            BOOST_LOG_SEV(lg, debug) << "Created dynamic object for attribute: "
+                                     << n;
         }
+        BOOST_LOG_SEV(lg, debug) << "Created dynamic object for element.";
     }
 
 public:
@@ -103,7 +110,7 @@ public:
 private:
     const dynamic::workflow workflow_;
     const yarn::name model_name_;
-    const std::unordered_map<std::string, dogen::yarn::raw_kvp>& raw_kvps_;
+    const std::unordered_map<std::string, raw_kvp>& raw_kvps_;
 };
 
 updater::updater(const dynamic::repository& drp, const yarn::name& model_name,
@@ -112,8 +119,14 @@ updater::updater(const dynamic::repository& drp, const yarn::name& model_name,
 
 void dynamic_expander::
 expand(const dynamic::repository& drp, intermediate_model& im) const {
+    BOOST_LOG_SEV(lg, debug) << "Starting dynamic expansion for model: "
+                             << im.name().id();
+    BOOST_LOG_SEV(lg, debug) << "Raw kvps: " << im.indices().raw_kvps();
+
     updater u(drp, im.name(), im.indices().raw_kvps());
     yarn::elements_traversal(im, u);
+
+    BOOST_LOG_SEV(lg, debug) << "Finished dynamic expansion.";
 }
 
 } }

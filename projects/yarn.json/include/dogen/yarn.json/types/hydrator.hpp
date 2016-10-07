@@ -28,9 +28,6 @@
 #include <iosfwd>
 #include <boost/filesystem/path.hpp>
 #include <boost/property_tree/ptree.hpp>
-#include "dogen/dynamic/types/object.hpp"
-#include "dogen/dynamic/types/workflow.hpp"
-#include "dogen/dynamic/types/scope_types.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
@@ -43,12 +40,10 @@ namespace json {
  */
 class hydrator {
 public:
+    hydrator() = default;
     hydrator(const hydrator&) = default;
     hydrator(hydrator&&) = default;
     ~hydrator() noexcept = default;
-
-public:
-    explicit hydrator(const dynamic::workflow& w);
 
 private:
     /**
@@ -62,14 +57,6 @@ private:
      */
     std::list<std::pair<std::string, std::string>>
     read_kvps(const boost::property_tree::ptree& pt) const;
-
-    /**
-     * @brief Creates the dynamic object by reading meta-data from the
-     * property tree.
-     */
-    dynamic::object create_dynamic_extensions(
-        const std::list<std::pair<std::string, std::string>>& kvps,
-        const dynamic::scope_types st) const;
 
     /**
      * @brief Inserts the raw kvps into the model's indicies.
@@ -108,9 +95,6 @@ public:
      */
     intermediate_model
     hydrate(const boost::filesystem::path& p, const bool is_target) const;
-
-private:
-    const dynamic::workflow dynamic_workflow_;
 };
 
 } } }

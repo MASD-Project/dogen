@@ -50,9 +50,7 @@ public:
      * registered frontends.
      */
     std::list<intermediate_model>
-    execute(const dynamic::repository& drp,
-        frontend_registrar& rg,
-        const std::list<descriptor>& descriptors);
+    execute(frontend_registrar& rg, const std::list<descriptor>& descriptors);
 };
 
 } }

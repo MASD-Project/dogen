@@ -50,14 +50,13 @@ std::list<std::string> frontend::supported_extensions() const {
     return extensions;
 }
 
-yarn::intermediate_model frontend::
-execute(const dynamic::workflow& w, const yarn::descriptor& d) {
+yarn::intermediate_model frontend::execute(const yarn::descriptor& d) {
     BOOST_LOG_SEV(lg, debug) << "Processing Dia diagram. ";
 
     dogen::dia::hydrator h(d.path());
     dogen::dia::diagram diagram(h.hydrate());
 
-    dogen::yarn::dia::workflow wf(w);
+    dogen::yarn::dia::workflow wf;
     const std::string name(d.path().stem().string());
     const auto emp(d.external_modules());
     const auto r(wf.execute(diagram, name, emp, d.is_target()));

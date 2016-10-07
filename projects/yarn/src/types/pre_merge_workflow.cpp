@@ -38,11 +38,10 @@ obtain_descriptors(const std::list<boost::filesystem::path>& dirs,
 }
 
 std::list<intermediate_model> pre_merge_workflow::
-obtain_intermediate_models(
-    const dynamic::repository& drp, frontend_registrar& rg,
+obtain_intermediate_models(frontend_registrar& rg,
     const std::list<descriptor>& d) const {
     intermediate_model_factory f;
-    return f.execute(drp, rg, d);
+    return f.execute(rg, d);
 }
 
 void pre_merge_workflow::expand_modules(intermediate_model& im) const {
@@ -80,10 +79,15 @@ pre_merge_workflow::execute(const dynamic::repository& drp,
     frontend_registrar& rg) const {
 
     const auto d(obtain_descriptors(dirs, io));
-    auto r(obtain_intermediate_models(drp, rg, d));
+    auto r(obtain_intermediate_models(rg, d));
     for (auto& im: r) {
-        expand_modules(im);
+        /*
+         * We must expand dynamic objects first to ensure the root
+         * module is populated with dynamic properties before being
+         * copied over.
+         */
         expand_dynamic_objects(drp, im);
+        expand_modules(im);
         expand_origin(drp, im);
         expand_annotations(drp, im);
         expand_parsing(im);

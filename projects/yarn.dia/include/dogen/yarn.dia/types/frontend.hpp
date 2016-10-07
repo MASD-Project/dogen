@@ -41,8 +41,7 @@ public:
 public:
     std::string id() const override;
     std::list<std::string> supported_extensions() const override;
-    yarn::intermediate_model execute(const dynamic::workflow& w,
-        const yarn::descriptor& d) override;
+    yarn::intermediate_model execute(const yarn::descriptor& d) override;
 };
 
 } } }

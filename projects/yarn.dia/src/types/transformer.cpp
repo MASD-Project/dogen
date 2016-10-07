@@ -51,9 +51,7 @@ namespace dogen {
 namespace yarn {
 namespace dia {
 
-transformer::transformer(const dynamic::workflow& w, const repository& rp)
-    : repository_(rp), dynamic_workflow_(w) {
-
+transformer::transformer(const repository& rp) : repository_(rp) {
     BOOST_LOG_SEV(lg, debug) << "Initial repository: " << repository_;
 }
 
@@ -99,11 +97,6 @@ yarn::attribute transformer::to_attribute(const yarn::name& owning_element,
     r.name(n);
     r.unparsed_type(a.type());
     r.documentation(a.comment().documentation());
-
-    const auto& kvps(a.comment().key_value_pairs());
-    const auto scope(dynamic::scope_types::property);
-    r.extensions(dynamic_workflow_.execute(scope, kvps));
-
     return r;
 }
 
@@ -144,10 +137,6 @@ update_element(const profiled_object& po, yarn::element& e) const {
     }
 
     e.documentation(po.object().comment().documentation());
-
-    const auto& kvps(po.object().comment().key_value_pairs());
-    const auto scope(dynamic::scope_types::entity);
-    e.extensions(dynamic_workflow_.execute(scope, kvps));
 }
 
 yarn::object transformer::to_object(const profiled_object& po,

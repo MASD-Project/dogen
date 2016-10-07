@@ -65,10 +65,7 @@ bool test_workflow(
     using namespace dogen::dynamic::test;
     mock_repository_factory rf;
     const auto rp(rf.make());
-    const auto dynamic_workflow(
-        mock_workflow_factory::non_validating_workflow(rp));
-
-    workflow w(dynamic_workflow);
+    workflow w;
     dogen::yarn::intermediate_model
         actual(w.execute(i, model_name, epp, is_target));
     return asserter::assert_object(expected_path, actual_path, actual);

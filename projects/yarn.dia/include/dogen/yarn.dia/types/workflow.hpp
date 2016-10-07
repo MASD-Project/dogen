@@ -28,7 +28,6 @@
 #include <string>
 #include <memory>
 #include "dogen/dia/types/diagram_fwd.hpp"
-#include "dogen/dynamic/types/workflow.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn.dia/types/profiler.hpp"
 #include "dogen/yarn.dia/types/builder.hpp"
@@ -41,12 +40,10 @@ namespace dia {
 
 class workflow {
 public:
+    workflow() = default;
     workflow(const workflow&) = delete;
     workflow(workflow&&) = default;
     ~workflow() = default;
-
-public:
-    explicit workflow(const dynamic::workflow& w);
 
 private:
     std::list<profiled_object>
@@ -82,9 +79,6 @@ public:
         const std::string& model_name,
         const std::string& external_modules,
         bool is_target);
-
-private:
-    const dynamic::workflow& dynamic_workflow_;
 };
 
 } } }

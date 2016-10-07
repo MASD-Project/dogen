@@ -114,20 +114,9 @@
 					<documentation></documentation>
 					<extensions>
 						<fields>
-							<count>1</count>
-							<bucket_count>2</bucket_count>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-							<item class_id="27" tracking_level="0" version="0">
-								<first>yarn.dia.comment</first>
-								<second class_id="28" tracking_level="0" version="0">
-									<value class_id="29" tracking_level="0" version="1">
-										<px class_id="2" tracking_level="1" version="0" object_id="_2">
-											<value class_id="30" tracking_level="0" version="0"></value>
-											<content>true</content>
-										</px>
-									</value>
-								</second>
-							</item>
 						</fields>
 					</extensions>
 					<name>
@@ -179,28 +168,28 @@
 			</second>
 		</item>
 	</modules>
-	<concepts class_id="31" tracking_level="0" version="0">
+	<concepts class_id="27" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</concepts>
-	<primitives class_id="32" tracking_level="0" version="0">
+	<primitives class_id="28" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
-	<enumerations class_id="33" tracking_level="0" version="0">
+	<enumerations class_id="29" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</enumerations>
-	<objects class_id="34" tracking_level="0" version="0">
+	<objects class_id="30" tracking_level="0" version="0">
 		<count>11</count>
 		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="35" tracking_level="0" version="0">
+		<item class_id="31" tracking_level="0" version="0">
 			<first>&lt;boost_model&gt;&lt;class_h&gt;</first>
-			<second class_id="8" tracking_level="1" version="0" object_id="_3">
+			<second class_id="8" tracking_level="1" version="0" object_id="_2">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -252,14 +241,14 @@
 					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
-				<all_attributes class_id="36" tracking_level="0" version="0">
+				<all_attributes class_id="32" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</all_attributes>
 				<local_attributes>
 					<count>1</count>
 					<item_version>0</item_version>
-					<item class_id="37" tracking_level="0" version="0">
+					<item class_id="33" tracking_level="0" version="0">
 						<documentation></documentation>
 						<extensions>
 							<fields>
@@ -298,7 +287,7 @@
 							<identifiable>boost_model_class_h_prop_0</identifiable>
 						</name>
 						<unparsed_type>boost::property_tree::ptree</unparsed_type>
-						<parsed_type class_id="38" tracking_level="0" version="0">
+						<parsed_type class_id="34" tracking_level="0" version="0">
 							<current>
 								<id></id>
 								<simple></simple>
@@ -323,7 +312,7 @@
 								</location>
 								<identifiable></identifiable>
 							</current>
-							<children class_id="39" tracking_level="0" version="0">
+							<children class_id="35" tracking_level="0" version="0">
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
@@ -340,7 +329,7 @@
 						<is_fluent>0</is_fluent>
 					</item>
 				</local_attributes>
-				<inherited_attributes class_id="40" tracking_level="0" version="0">
+				<inherited_attributes class_id="36" tracking_level="0" version="0">
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
@@ -362,11 +351,11 @@
 					<item_version>0</item_version>
 				</leaves>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
-				<generalization_annotations class_id="41" tracking_level="0" version="0">
-					<is_final class_id="42" tracking_level="0" version="0">
+				<generalization_annotations class_id="37" tracking_level="0" version="0">
+					<is_final class_id="38" tracking_level="0" version="0">
 						<initialized>0</initialized>
 					</is_final>
-					<parent class_id="43" tracking_level="0" version="0">
+					<parent class_id="39" tracking_level="0" version="0">
 						<initialized>0</initialized>
 					</parent>
 				</generalization_annotations>
@@ -386,7 +375,7 @@
 				</derived_visitor>
 				<is_visitation_root>0</is_visitation_root>
 				<is_visitation_leaf>0</is_visitation_leaf>
-				<type_parameters_annotations class_id="44" tracking_level="0" version="0">
+				<type_parameters_annotations class_id="40" tracking_level="0" version="0">
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
@@ -405,7 +394,7 @@
 		</item>
 		<item>
 			<first>&lt;boost_model&gt;&lt;class_a&gt;</first>
-			<second object_id="_4">
+			<second object_id="_3">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -610,7 +599,7 @@
 		</item>
 		<item>
 			<first>&lt;boost_model&gt;&lt;class_derived&gt;</first>
-			<second object_id="_5">
+			<second object_id="_4">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -845,7 +834,7 @@
 		</item>
 		<item>
 			<first>&lt;boost_model&gt;&lt;pkg1&gt;&lt;class_c&gt;</first>
-			<second object_id="_6">
+			<second object_id="_5">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -1133,7 +1122,7 @@
 		</item>
 		<item>
 			<first>&lt;boost_model&gt;&lt;class_base&gt;</first>
-			<second object_id="_7">
+			<second object_id="_6">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -1338,7 +1327,7 @@
 		</item>
 		<item>
 			<first>&lt;boost_model&gt;&lt;class_b&gt;</first>
-			<second object_id="_8">
+			<second object_id="_7">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -2023,7 +2012,7 @@
 		</item>
 		<item>
 			<first>&lt;boost_model&gt;&lt;class_d&gt;</first>
-			<second object_id="_9">
+			<second object_id="_8">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -2468,7 +2457,7 @@
 		</item>
 		<item>
 			<first>&lt;boost_model&gt;&lt;some_service&gt;</first>
-			<second object_id="_10">
+			<second object_id="_9">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -2833,7 +2822,7 @@
 		</item>
 		<item>
 			<first>&lt;boost_model&gt;&lt;class_e&gt;</first>
-			<second object_id="_11">
+			<second object_id="_10">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -3278,7 +3267,7 @@
 		</item>
 		<item>
 			<first>&lt;boost_model&gt;&lt;class_f&gt;</first>
-			<second object_id="_12">
+			<second object_id="_11">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -3883,7 +3872,7 @@
 		</item>
 		<item>
 			<first>&lt;boost_model&gt;&lt;class_g&gt;</first>
-			<second object_id="_13">
+			<second object_id="_12">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -4167,24 +4156,24 @@
 			</second>
 		</item>
 	</objects>
-	<exceptions class_id="45" tracking_level="0" version="0">
+	<exceptions class_id="41" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</exceptions>
-	<visitors class_id="46" tracking_level="0" version="0">
+	<visitors class_id="42" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</visitors>
-	<injected_elements class_id="47" tracking_level="0" version="0">
+	<injected_elements class_id="43" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</injected_elements>
 	<has_generatable_types>0</has_generatable_types>
-	<indices class_id="48" tracking_level="0" version="0">
-		<objects_always_in_heap class_id="49" tracking_level="0" version="0">
+	<indices class_id="44" tracking_level="0" version="0">
+		<objects_always_in_heap class_id="45" tracking_level="0" version="0">
 			<count>0</count>
 			<bucket_count>1</bucket_count>
 			<item_version>0</item_version>
@@ -4194,13 +4183,43 @@
 			<bucket_count>1</bucket_count>
 			<item_version>0</item_version>
 		</elements_referable_by_attributes>
-		<raw_kvps class_id="50" tracking_level="0" version="0">
-			<count>0</count>
-			<bucket_count>1</bucket_count>
+		<raw_kvps class_id="46" tracking_level="0" version="0">
+			<count>1</count>
+			<bucket_count>2</bucket_count>
 			<item_version>0</item_version>
+			<item class_id="47" tracking_level="0" version="0">
+				<first>&lt;boost_model&gt;</first>
+				<second class_id="48" tracking_level="0" version="0">
+					<element class_id="49" tracking_level="0" version="0">
+						<count>4</count>
+						<item_version>0</item_version>
+						<item class_id="50" tracking_level="0" version="0">
+							<first>yarn.dia.comment</first>
+							<second>true</second>
+						</item>
+						<item>
+							<first>decoration.licence_name</first>
+							<second>gpl_v3</second>
+						</item>
+						<item>
+							<first>decoration.copyright_notice</first>
+							<second>Copyright (C) 2012-2015 Marco Craveiro &lt;marco.craveiro@gmail.com&gt;</second>
+						</item>
+						<item>
+							<first>decoration.modeline_group_name</first>
+							<second>emacs</second>
+						</item>
+					</element>
+					<attributes class_id="51" tracking_level="0" version="0">
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</attributes>
+				</second>
+			</item>
 		</raw_kvps>
 	</indices>
-	<root_module object_id="_14">
+	<root_module object_id="_13">
 		<element>
 			<documentation></documentation>
 			<extensions>
