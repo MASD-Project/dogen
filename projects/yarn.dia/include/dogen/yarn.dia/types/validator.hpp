@@ -99,11 +99,15 @@ private:
 
 public:
     /**
-     * @brief Throws an exception of the object profile is not
-     * considered to be valid.
+     * @brief Validates a profile.
+     *
      */
     void validate(const profile& p) const;
 
+    /**
+     * @brief Throws an exception if any of the profiled objects are
+     * not considered to be valid.
+     */
     void validate(const std::list<profiled_object>& pos) const;
 };
 

@@ -40,7 +40,6 @@ const std::string too_many_uml_types("Too many UML types.");
 const std::string too_many_yarn_types("Can only have one yarn type set.");
 const std::string stereotypes_require_uml_class(
     "Only UML classes can have stereotypes.");
-
 const std::string object_options_on_non_object(
     "Only yarn objects can have object options");
 const std::string concepts_require_yarn_object(
@@ -95,14 +94,14 @@ unsigned int validator::count_uml_types(const profile& p) const {
 void validator::validate_yarn(const profile& p) const {
     const auto types(count_yarn_types(p));
     const auto object_flags(count_yarn_object_flags(p));
-    const bool has_yarn_flags(
-        types != 0 || object_flags != 0 || !p.unknown_stereotypes().empty());
+    const bool has_yarn_flags(types != 0 || object_flags != 0 ||
+        !p.unknown_stereotypes().empty());
 
     if (!has_yarn_flags)
         return; // nothing to validate.
 
     /*
-     * only UML classes are allowed to have YARN flags.
+     * Only UML classes are allowed to have yarn flags.
      */
     if (!p.is_uml_class()) {
         BOOST_LOG_SEV(lg, error) << stereotypes_require_uml_class;
@@ -110,8 +109,8 @@ void validator::validate_yarn(const profile& p) const {
     }
 
     /*
-     *  we can have at most one YARN type. Zero is fine as
-     * someone above us will provide defaulting.
+     * We can have at most one yarn type. Zero is fine as someone
+     * above us will provide defaulting.
      */
     if (types > 1) {
         BOOST_LOG_SEV(lg, error) << too_many_yarn_types;
@@ -119,10 +118,10 @@ void validator::validate_yarn(const profile& p) const {
     }
 
     if (is_object(p))
-        return; // nothing else to validate for YARN objects.
+        return; // nothing else to validate for yarn objects.
 
     /*
-     * non YARN objects are not allowed to have object flags.
+     * Non-yarn objects are not allowed to have object flags.
      */
     if (object_flags > 0) {
         BOOST_LOG_SEV(lg, error) << object_options_on_non_object;
@@ -130,7 +129,7 @@ void validator::validate_yarn(const profile& p) const {
     }
 
     /*
-     *  non YARN objects are not allowed to have concepts.
+     * Non-yarn objects are not allowed to have concepts.
      */
     if (!p.unknown_stereotypes().empty()) {
         BOOST_LOG_SEV(lg, error) << concepts_require_yarn_object << ": "

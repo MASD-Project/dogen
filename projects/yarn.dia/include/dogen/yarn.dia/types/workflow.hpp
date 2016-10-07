@@ -59,13 +59,6 @@ private:
 
 private:
     /**
-     * @brief Creates a module representing the model.
-     */
-    yarn::module create_module_for_model(const yarn::name& n,
-        const yarn::origin_types ot) const;
-
-private:
-    /**
      * @brief Setup the DAG of processed objects.
      */
     std::pair<graph_type,

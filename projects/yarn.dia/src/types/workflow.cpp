@@ -19,15 +19,13 @@
  *
  */
 #include <boost/graph/depth_first_search.hpp>
+#include "dogen/utility/log/logger.hpp"
 #include "dogen/dia/types/diagram.hpp"
+#include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/io/intermediate_model_io.hpp"
-#include "dogen/yarn/types/name_factory.hpp"
-#include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn.dia/types/grapher.hpp"
 #include "dogen/yarn.dia/types/visitor.hpp"
-#include "dogen/yarn.dia/types/transformer.hpp"
-#include "dogen/yarn.dia/types/object_processor.hpp"
 #include "dogen/yarn.dia/types/reducer.hpp"
 #include "dogen/yarn.dia/types/validator.hpp"
 #include "dogen/yarn.dia/types/profiled_object_factory.hpp"
@@ -64,18 +62,6 @@ validate_profiled_objects(const std::list<profiled_object>& pos) const {
     vd.validate(pos);
 }
 
-yarn::module workflow::create_module_for_model(const yarn::name& n,
-    const yarn::origin_types ot) const {
-
-    yarn::module r;
-    r.name(n);
-    r.origin_type(ot);
-    r.generation_type(ot == yarn::origin_types::target ?
-        yarn::generation_types::full_generation :
-        yarn::generation_types::no_generation);
-    return r;
-}
-
 std::pair<graph_type,
           const std::unordered_map<std::string, std::list<std::string>>
           >
@@ -99,7 +85,6 @@ builder workflow::create_builder(const std::string& model_name,
 
 yarn::intermediate_model
 workflow::generate_model(builder& b, const graph_type& g) {
-
     visitor v(b);
     boost::depth_first_search(g, boost::visitor(v));
     return b.build();
@@ -109,13 +94,27 @@ yarn::intermediate_model workflow::execute(const dogen::dia::diagram& d,
     const std::string& model_name, const std::string& external_modules,
     bool is_target) {
 
+    /*
+     * Convert the original dia diagram into a list of dia objects
+     * reading for processing.
+     */
     const auto original(create_profiled_objects(d));
     const auto reduced(reduce_profiled_objects(original));
     validate_profiled_objects(reduced);
+
+    /*
+     * Create a dependency graph of the objects, and a map of children
+     * to their respective parents.
+     */
     const auto pair(generate_graph(reduced));
     const auto& g(pair.first);
-    const auto& child_id_to_parent_ids(pair.second);
-    auto b(create_builder(model_name, external_modules, is_target, child_id_to_parent_ids));
+    const auto& ctp(pair.second);
+
+    /*
+     * Go through the dependency graph and build a yarn model from
+     * it.
+     */
+    auto b(create_builder(model_name, external_modules, is_target, ctp));
     const auto r(generate_model(b, g));
 
     BOOST_LOG_SEV(lg, debug) << "Final model: " << r;

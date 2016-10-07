@@ -13,15 +13,15 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-07 Fri 10:31]
+#+CAPTION: Clock summary at [2016-10-07 Fri 11:07]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *80:11* |       |       | 100.0 |
+| *Total time*                                                                | *80:46* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 80:11   |       |       | 100.0 |
-| Active                                                                      |         | 80:11 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  5:30 |   6.9 |
+| Stories                                                                     | 80:46   |       |       | 100.0 |
+| Active                                                                      |         | 80:46 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  5:30 |   6.8 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:07 |   0.1 |
 | COMPLETED Generation of formattable is incorrect                            |         |       |  2:30 |   3.1 |
 | COMPLETED Visitor includes are incorrect                                    |         |       |  0:20 |   0.4 |
@@ -51,17 +51,17 @@
 | CANCELLED Remove formatter id                                               |         |       |  0:04 |   0.1 |
 | COMPLETED Analysis around terminology in formatting space                   |         |       |  3:24 |   4.2 |
 | COMPLETED Remove =original_model_name=                                      |         |       |  0:16 |   0.3 |
-| COMPLETED Refactor code around model origination                            |         |       |  4:08 |   5.2 |
+| COMPLETED Refactor code around model origination                            |         |       |  4:08 |   5.1 |
 | COMPLETED Remove formatter level facet folders                              |         |       |  0:06 |   0.1 |
 | COMPLETED Consider removing the "fake" primitive formatters                 |         |       |  0:01 |   0.0 |
 | COMPLETED Expander refactor in =quilt.cpp=                                  |         |       |  3:03 |   3.8 |
-| COMPLETED Create the notion of a formatter alias                            |         |       |  3:15 |   4.1 |
+| COMPLETED Create the notion of a formatter alias                            |         |       |  3:15 |   4.0 |
 | COMPLETED Remove enabled formatters from formatter configuration            |         |       |  0:22 |   0.5 |
 | COMPLETED Handle registration of services properly                          |         |       |  3:41 |   4.6 |
 | COMPLETED Move stereotypes to element                                       |         |       |  0:21 |   0.4 |
 | COMPLETED Improve project banner                                            |         |       |  0:32 |   0.7 |
-| CANCELLED Add support for profiles                                          |         |       | 10:40 |  13.3 |
-| STARTED Refactor =yarn.dia= transformer                                     |         |       |  7:47 |   9.7 |
+| CANCELLED Add support for profiles                                          |         |       | 10:40 |  13.2 |
+| STARTED Refactor =yarn.dia= transformer                                     |         |       |  8:22 |  10.4 |
 | STARTED Create a dynamic expander in yarn                                   |         |       |  0:20 |   0.4 |
 | STARTED Rewrite profile support                                             |         |       |  1:26 |   1.8 |
 | STARTED Generate formatter interfaces                                       |         |       |  0:28 |   0.6 |
@@ -1234,6 +1234,7 @@ Algorithm:
   - if nothing was found, get the default value of the meta-data.
 
 *** STARTED Refactor =yarn.dia= transformer                           :story:
+    CLOCK: [2016-10-07 Fri 10:32]--[2016-10-07 Fri 11:07] =>  0:35
     CLOCK: [2016-10-07 Fri 10:07]--[2016-10-07 Fri 10:31] =>  0:24
     CLOCK: [2016-10-07 Fri 09:01]--[2016-10-07 Fri 10:06] =>  1:05
     CLOCK: [2016-10-07 Fri 00:23]--[2016-10-07 Fri 00:48] =>  0:25

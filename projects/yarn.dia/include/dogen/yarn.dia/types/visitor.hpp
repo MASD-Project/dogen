@@ -51,7 +51,7 @@ public:
     void finish_vertex(const Vertex& u, const Graph& g) {
         const auto& o(g[u]);
         if (o.object().id() != grapher::root_id())
-            builder_.add(o); // std::cref(
+            builder_.add(o);
     }
 
 private:

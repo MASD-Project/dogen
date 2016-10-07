@@ -118,27 +118,26 @@ void builder::update_documentation(const processed_object& o) {
 }
 
 void builder::add(const profiled_object& po) {
-    const auto& p(po.profile());
-    const auto& o(po.object());
-
     auto& im(repository_.model());
     transformer t(dynamic_workflow_, repository_);
 
+    const auto id(po.object().id());
+    const auto& p(po.profile());
     if (p.is_uml_note())
-        update_documentation(o);
+        update_documentation(po.object());
     else if (p.is_uml_large_package())
-        add(im.modules(), t.to_module(o, p), o.id());
+        add(im.modules(), t.to_module(po), id);
     else if (p.is_enumeration())
-        add(im.enumerations(), t.to_enumeration(o, p), o.id());
+        add(im.enumerations(), t.to_enumeration(po), id);
     else if (p.is_concept())
-        add(im.concepts(), t.to_concept(o, p), o.id());
+        add(im.concepts(), t.to_concept(po), id);
     else if (p.is_exception()) {
-        add(im.exceptions(), t.to_exception(o, p), o.id());
+        add(im.exceptions(), t.to_exception(po), id);
     } else {
         const auto ot(p.is_service() ?
             yarn::object_types::user_defined_service :
             yarn::object_types::user_defined_value_object);
-        add(im.objects(), t.to_object(o, p, ot), o.id());
+        add(im.objects(), t.to_object(po, ot), id);
     }
 }
 
