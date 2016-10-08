@@ -49,7 +49,7 @@ const std::string model_value("model_value");
 const std::string some_key("some_key");
 const std::string some_value("some_value");
 const std::string type_key("type_key");
-const bool type_value(true);
+// const bool type_value(true);
 const std::string internal_modules_key("modules");
 const std::string internal_modules_value_1("module_1");
 const std::string internal_modules_value_2("module_2");
