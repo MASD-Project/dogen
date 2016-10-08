@@ -17,28 +17,28 @@
 # MA 02110-1301, USA.
 #
 
-# $dropbox="https://dl.dropboxusercontent.com/u/541873/packages"
-# $version=3
-# $package="dogen_deps_vc14_windows_amd64_v${version}.7z"
-# $input_location="${dropbox}/${package}"
-# $output_location="$env:temp/${package}"
-# $extract_dir="$env:temp/dogen_deps"
+$dropbox="https://dl.dropboxusercontent.com/u/541873/packages"
+$version=3
+$package="dogen_deps_vc14_windows_amd64_v${version}.7z"
+$input_location="${dropbox}/${package}"
+$output_location="$env:temp/${package}"
+$extract_dir="$env:temp/dogen_deps"
 
-# wget ${input_location} -OutFile ${output_location}
-# write-host "Dogen deps: ${output_location}"
-# mkdir ${extract_dir} | Out-Null
-# cd ${extract_dir}
-# 7z x ../${package} > $null;
+wget ${input_location} -OutFile ${output_location}
+write-host "Dogen deps: ${output_location}"
+mkdir ${extract_dir} | Out-Null
+cd ${extract_dir}
+7z x ../${package} > $null;
 
 #
 # conan
 #
-write-host "Installing conan..."
-$env:PYTHON = "C:/Python27"
-$env:PATH += ";$env:PYTHON/Scripts"
-pip.exe install conan
-$env:PATH += ";C:\Program Files (x86)\Conan\conan"
-conan --version
+# write-host "Installing conan..."
+# $env:PYTHON = "C:/Python27"
+# $env:PATH += ";$env:PYTHON/Scripts"
+# pip.exe install conan
+# $env:PATH += ";C:\Program Files (x86)\Conan\conan"
+# conan --version
 
 #
 # cmake
