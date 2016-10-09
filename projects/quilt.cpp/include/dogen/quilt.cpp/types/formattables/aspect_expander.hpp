@@ -28,12 +28,13 @@
 #include <list>
 #include <string>
 #include <unordered_map>
+#include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/repository.hpp"
+#include "dogen/dynamic/types/field_definition.hpp"
 #include "dogen/yarn/types/name_tree.hpp"
 #include "dogen/yarn/types/attribute.hpp"
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
 #include "dogen/quilt.cpp/types/formattables/aspect_configuration.hpp"
-#include "dogen/quilt.cpp/types/annotations/aspect_annotations.hpp"
 #include "dogen/quilt.cpp/types/formattables/model.hpp"
 
 namespace dogen {
@@ -43,28 +44,43 @@ namespace formattables {
 
 class aspect_expander {
 private:
-    typedef std::unordered_map<std::string, annotations::aspect_annotations>
-    aspect_annotations_type;
+    struct field_definitions {
+        dynamic::field_definition requires_manual_default_constructor;
+        dynamic::field_definition requires_manual_move_constructor;
+        dynamic::field_definition requires_stream_manipulators;
+    };
 
-    aspect_annotations_type
-    obtain_aspect_annotations(const dynamic::repository& drp,
+    friend std::ostream& operator<<(std::ostream& s,
+        const field_definitions& v);
+
+    field_definitions
+    make_field_definitions(const dynamic::repository& drp) const;
+
+    boost::optional<aspect_configuration> make_aspect_configuration(
+        const field_definitions& fds, const dynamic::object& o) const;
+
+private:
+    typedef std::unordered_map<std::string, aspect_configuration>
+    aspect_configurations_type;
+
+    aspect_configurations_type
+    obtain_aspect_configurations(const dynamic::repository& drp,
         const std::unordered_map<std::string, formattable>& formattables) const;
 
 private:
     void walk_name_tree(const yarn::name_tree& nt, const bool is_top_level,
-        const aspect_annotations_type& aa, aspect_configuration& ac) const;
+        const aspect_configurations_type& acs, aspect_configuration& ac) const;
 
     aspect_configuration compute_aspect_configuration(
-        const aspect_annotations_type& aa,
+        const aspect_configurations_type& acs,
         const std::list<yarn::attribute>& attr) const;
 
     void populate_aspect_configuration(
-        const aspect_annotations_type& aa,
+        const aspect_configurations_type& acs,
         std::unordered_map<std::string, formattable>& formattables) const;
 
 public:
     void expand(const dynamic::repository& drp, model& fm) const;
-
 };
 
 } } } }

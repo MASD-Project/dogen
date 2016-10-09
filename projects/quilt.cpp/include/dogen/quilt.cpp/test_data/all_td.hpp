@@ -37,7 +37,6 @@
 #include "dogen/quilt.cpp/test_data/annotations/odb_annotations_td.hpp"
 #include "dogen/quilt.cpp/test_data/fabric/forward_declarations_td.hpp"
 #include "dogen/quilt.cpp/test_data/annotations/path_annotations_td.hpp"
-#include "dogen/quilt.cpp/test_data/annotations/aspect_annotations_td.hpp"
 #include "dogen/quilt.cpp/test_data/annotations/opaque_annotations_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/formatter_profile_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/helper_descriptor_td.hpp"

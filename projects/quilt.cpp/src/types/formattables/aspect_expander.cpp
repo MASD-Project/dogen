@@ -20,10 +20,13 @@
  */
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
+#include "dogen/dynamic/types/field_selector.hpp"
+#include "dogen/dynamic/types/repository_selector.hpp"
+#include "dogen/dynamic/io/field_definition_io.hpp"
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/yarn/types/object.hpp"
-#include "dogen/quilt.cpp/io/annotations/aspect_annotations_io.hpp"
-#include "dogen/quilt.cpp/types/annotations/aspect_annotations_factory.hpp"
+#include "dogen/quilt.cpp/types/traits.hpp"
+#include "dogen/quilt.cpp/io/formattables/aspect_configuration_io.hpp"
 #include "dogen/quilt.cpp/types/formattables/aspect_expander.hpp"
 
 namespace {
@@ -38,41 +41,111 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-aspect_expander::aspect_annotations_type
-aspect_expander::obtain_aspect_annotations(const dynamic::repository& drp,
+std::ostream&
+operator<<(std::ostream& s, const aspect_expander::field_definitions& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::"
+      << "aspect_expander::field_definitions\"" << ", "
+      << "\"requires_manual_default_constructor\": "
+      << v.requires_manual_default_constructor << ", "
+      << "\"requires_manual_move_constructor\": "
+      << v.requires_manual_move_constructor << ", "
+      << "\"requires_stream_manipulators\": "
+      << v.requires_stream_manipulators
+      << " }";
+
+    return s;
+}
+
+aspect_expander::field_definitions
+aspect_expander::make_field_definitions(const dynamic::repository& drp) const {
+    field_definitions r;
+
+    const dynamic::repository_selector rs(drp);
+    typedef traits::cpp::aspect aspect;
+
+    const auto& rmdc(aspect::requires_manual_default_constructor());
+    r.requires_manual_default_constructor = rs.select_field_by_name(rmdc);
+
+    const auto& rmmc(aspect::requires_manual_move_constructor());
+    r.requires_manual_move_constructor = rs.select_field_by_name(rmmc);
+
+    const auto& rsm(aspect::requires_stream_manipulators());
+    r.requires_stream_manipulators = rs.select_field_by_name(rsm);
+
+    return r;
+}
+
+boost::optional<aspect_configuration> aspect_expander::
+make_aspect_configuration(const field_definitions& fds,
+    const dynamic::object& o) const {
+    aspect_configuration r;
+
+    const dynamic::field_selector fs(o);
+    bool found_any(false);
+
+    if (fs.has_field(fds.requires_manual_default_constructor))
+        found_any = true;
+
+    r.requires_manual_default_constructor(
+        fs.get_boolean_content_or_default(
+            fds.requires_manual_default_constructor));
+
+    if (fs.has_field(fds.requires_manual_move_constructor))
+        found_any = true;
+
+    r.requires_manual_move_constructor(
+        fs.get_boolean_content_or_default(
+            fds.requires_manual_move_constructor));
+
+    if (fs.has_field(fds.requires_stream_manipulators))
+        found_any = true;
+
+    r.requires_stream_manipulators(
+        fs.get_boolean_content_or_default(
+            fds.requires_stream_manipulators));
+
+    if (found_any)
+        return r;
+
+    return boost::optional<aspect_configuration>();
+}
+
+aspect_expander::aspect_configurations_type
+aspect_expander::obtain_aspect_configurations(const dynamic::repository& drp,
     const std::unordered_map<std::string, formattable>& formattables) const {
 
-    BOOST_LOG_SEV(lg, debug) << "Started creating aspect annotations.";
+    BOOST_LOG_SEV(lg, debug) << "Started creating aspect configuration.";
 
-    annotations::aspect_annotations_factory f(drp);
-    aspect_annotations_type r;
+    const auto fds(make_field_definitions(drp));
+    aspect_configurations_type r;
     for (auto& pair : formattables) {
         const auto id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
 
         auto& formattable(pair.second);
         const auto& segment(*formattable.master_segment());
-        const auto aspect_annotation(f.make(segment.extensions()));
-        if (aspect_annotation)
-            r[id] = *aspect_annotation;
+        const auto ac(make_aspect_configuration(fds, segment.extensions()));
+        if (ac)
+            r[id] = *ac;
     }
-    BOOST_LOG_SEV(lg, debug) << "Finished creating aspect annotations. Result: "
-                             << r;
+    BOOST_LOG_SEV(lg, debug) << "Finished creating aspect configurations. "
+                             << "Result: " << r;
     return r;
 }
 
 void aspect_expander::walk_name_tree(const yarn::name_tree& nt,
-    const bool is_top_level, const aspect_annotations_type& aa,
+    const bool is_top_level, const aspect_configurations_type& acs,
     aspect_configuration& ac) const {
 
     for (const auto& c : nt.children())
-        walk_name_tree(c, false/*is_top_level*/, aa, ac);
+        walk_name_tree(c, false/*is_top_level*/, acs, ac);
 
     if (is_top_level && nt.is_current_simple_type())
         ac.requires_manual_default_constructor(true);
 
-    const auto i(aa.find(nt.current().id()));
-    if (i == aa.end())
+    const auto i(acs.find(nt.current().id()));
+    if (i == acs.end())
         return;
 
     const auto as(i->second);
@@ -90,19 +163,20 @@ void aspect_expander::walk_name_tree(const yarn::name_tree& nt,
 }
 
 aspect_configuration
-aspect_expander::compute_aspect_configuration(const aspect_annotations_type& aa,
+aspect_expander::compute_aspect_configuration(
+    const aspect_configurations_type& acs,
     const std::list<yarn::attribute>& attr) const {
 
     aspect_configuration r;
     for (const auto a : attr) {
         const auto& nt(a.parsed_type());
-        walk_name_tree(nt, true/*is_top_level*/, aa, r);
+        walk_name_tree(nt, true/*is_top_level*/, acs, r);
     }
     return r;
 }
 
 void aspect_expander::populate_aspect_configuration(
-    const aspect_annotations_type& aa,
+    const aspect_configurations_type& acs,
     std::unordered_map<std::string, formattable>& formattables) const {
 
     for (auto& pair : formattables) {
@@ -129,9 +203,9 @@ void aspect_expander::populate_aspect_configuration(
         /*
          * We only need to generate the aspect configuration for
          * elements of the target model. However, we can't perform
-         * this after reduction because the aspectq annotations
-         * must be build prior to reduction or else we will not
-         * get aspects for referenced models.
+         * this after reduction because the aspect configurations must
+         * be build prior to reduction or else we will not get aspects
+         * for referenced models.
          */
         if (ptr->generation_type() == yarn::generation_types::no_generation)
             continue;
@@ -140,16 +214,15 @@ void aspect_expander::populate_aspect_configuration(
          * Update the aspect configuration.
          */
         const auto& attr(ptr->local_attributes());
-        const auto ac(compute_aspect_configuration(aa, attr));
+        const auto ac(compute_aspect_configuration(acs, attr));
         ecfg.aspect_configuration(ac);
     }
 }
 
 void aspect_expander::
 expand(const dynamic::repository& drp, model& fm) const {
-    auto& fbls(fm.formattables());
-    const auto aspect_annotations(obtain_aspect_annotations(drp, fbls));
-    populate_aspect_configuration(aspect_annotations, fbls);
+    const auto acs(obtain_aspect_configurations(drp, fm.formattables()));
+    populate_aspect_configuration(acs, fm.formattables());
 }
 
 } } } }
