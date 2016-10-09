@@ -13,19 +13,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-09 Sun 22:55]
+#+CAPTION: Clock summary at [2016-10-09 Sun 23:21]
 | <75>                                                                        |          |        |       |       |
 | Headline                                                                    | Time     |        |       |     % |
 |-----------------------------------------------------------------------------+----------+--------+-------+-------|
-| *Total time*                                                                | *100:54* |        |       | 100.0 |
+| *Total time*                                                                | *101:19* |        |       | 100.0 |
 |-----------------------------------------------------------------------------+----------+--------+-------+-------|
-| Stories                                                                     | 100:54   |        |       | 100.0 |
-| Active                                                                      |          | 100:54 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |          |        |  5:36 |   5.6 |
+| Stories                                                                     | 101:19   |        |       | 100.0 |
+| Active                                                                      |          | 101:19 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |          |        |  5:36 |   5.5 |
 | COMPLETED Edit release notes for previous sprint                            |          |        |  0:07 |   0.1 |
 | COMPLETED Generation of formattable is incorrect                            |          |        |  2:30 |   2.5 |
 | COMPLETED Visitor includes are incorrect                                    |          |        |  0:20 |   0.3 |
-| COMPLETED Add includer to quilt.cpp                                         |          |        |  1:46 |   1.8 |
+| COMPLETED Add includer to quilt.cpp                                         |          |        |  1:46 |   1.7 |
 | COMPLETED Add reducer to quilt.cpp                                          |          |        |  0:22 |   0.4 |
 | COMPLETED Add new index to formtter container                               |          |        |  0:19 |   0.3 |
 | COMPLETED Add path expander to quilt.cpp                                    |          |        |  0:49 |   0.8 |
@@ -57,10 +57,10 @@
 | COMPLETED Expander refactor in =quilt.cpp=                                  |          |        |  3:03 |   3.0 |
 | COMPLETED Create the notion of a formatter alias                            |          |        |  3:15 |   3.2 |
 | COMPLETED Remove enabled formatters from formatter configuration            |          |        |  0:22 |   0.4 |
-| COMPLETED Handle registration of services properly                          |          |        |  3:41 |   3.7 |
+| COMPLETED Handle registration of services properly                          |          |        |  3:41 |   3.6 |
 | COMPLETED Move stereotypes to element                                       |          |        |  0:21 |   0.3 |
 | COMPLETED Improve project banner                                            |          |        |  0:32 |   0.5 |
-| CANCELLED Add support for profiles                                          |          |        | 10:40 |  10.6 |
+| CANCELLED Add support for profiles                                          |          |        | 10:40 |  10.5 |
 | COMPLETED Move emacs to rtags                                               |          |        |  5:28 |   5.4 |
 | COMPLETED Refactor =yarn.dia= transformer                                   |          |        |  8:49 |   8.7 |
 | COMPLETED Create a dynamic expander in yarn                                 |          |        |  5:52 |   5.8 |
@@ -68,8 +68,8 @@
 | COMPLETED Merge helper annotations with helper expander                     |          |        |  0:14 |   0.2 |
 | COMPLETED Merge aspect annotations with expander                            |          |        |  0:16 |   0.3 |
 | COMPLETED Merge inclusion directive annotations                             |          |        |  0:59 |   1.0 |
-| STARTED Merge path annotations with locator                                 |          |        |  2:09 |   2.1 |
-| STARTED Merge annotations with formattables                                 |          |        |  2:35 |   2.6 |
+| COMPLETED Merge path annotations with locator                               |          |        |  2:34 |   2.5 |
+| STARTED Merge annotations with formattables                                 |          |        |  2:35 |   2.5 |
 | STARTED Clean up terminology in dynamic                                     |          |        |  1:07 |   1.1 |
 | STARTED Rewrite profile support                                             |          |        |  1:26 |   1.4 |
 | STARTED Generate formatter interfaces                                       |          |        |  0:28 |   0.5 |
@@ -1377,14 +1377,17 @@ Get rid of the annotations for aspects.
 
 Get rid of the annotations for inclusion directives.
 
-*** STARTED Merge path annotations with locator                       :story:
+*** COMPLETED Merge path annotations with locator                     :story:
+    CLOSED: [2016-10-09 Sun 23:21]
+    CLOCK: [2016-10-09 Sun 22:56]--[2016-10-09 Sun 23:21] =>  0:25
     CLOCK: [2016-10-09 Sun 21:38]--[2016-10-09 Sun 22:55] =>  1:17
     CLOCK: [2016-10-09 Sun 20:45]--[2016-10-09 Sun 21:37] =>  0:52
 
 The only class using path annotations is now the locator. Move all the
 infrastructure to generate them into locator.
 
-*** Refactor facet directory expander                                 :story:
+*** COMPLETED Refactor facet directory expander                       :story:
+    CLOSED: [2016-10-09 Sun 23:21]
 
 Read meta-data for directory name direclty rather than use path
 annotations.

@@ -64,7 +64,9 @@ BOOST_AUTO_TEST_CASE(validate_serialization) {
     roundtrip_type<formattables::formatter_profile_generator>();
     roundtrip_type<formattables::profile_types_generator>();
     roundtrip_type<formattables::streaming_configuration_generator>();
-    roundtrip_type<annotations::path_annotations_generator>();
+    roundtrip_type<formattables::locator_configuration_generator>();
+    roundtrip_type<formattables::locator_facet_configuration_generator>();
+    roundtrip_type<formattables::locator_formatter_configuration_generator>();
     roundtrip_type<formattables::inclusion_directive_configuration_generator>();
     roundtrip_type<fabric::registrar_generator>();
     roundtrip_type<fabric::cmakelists_generator>();

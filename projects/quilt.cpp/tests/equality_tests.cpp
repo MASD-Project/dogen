@@ -58,7 +58,9 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
     test_equality<formattables::profile_types_generator>();
     test_equality<formattables::streaming_configuration_generator>();
     test_equality<formattables::inclusion_directive_configuration_generator>();
-    test_equality<annotations::path_annotations_generator>();
+    test_equality<formattables::locator_configuration_generator>();
+    test_equality<formattables::locator_facet_configuration_generator>();
+    test_equality<formattables::locator_formatter_configuration_generator>();
     test_equality<fabric::registrar_generator>();
     test_equality<fabric::cmakelists_generator>();
     test_equality<fabric::odb_options_generator>();

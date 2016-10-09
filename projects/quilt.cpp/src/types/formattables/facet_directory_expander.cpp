@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formattables/facet_directory_expander.hpp"
 
 namespace dogen {
@@ -26,17 +25,11 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-void facet_directory_expander::expand(
-    const std::unordered_map<std::string, annotations::path_annotations>& pa,
-    const formatters::container& fc, model& fm) const {
-
-    for (const auto& f : fc.file_formatters()) {
-        const auto i(pa.find(f->ownership_hierarchy().formatter_name()));
-        if (i == pa.end())
-            continue;
-
-        const auto fctn(f->ownership_hierarchy().facet_name());
-        fm.facet_configurations()[fctn].directory(i->second.facet_directory());
+void facet_directory_expander::expand(const locator& l, model& fm) const {
+    for (const auto& pair : l.facet_directories()) {
+        const auto fctn(pair.first);
+        const auto fct_dir(pair.second);
+        fm.facet_configurations()[fctn].directory(fct_dir);
     }
 }
 

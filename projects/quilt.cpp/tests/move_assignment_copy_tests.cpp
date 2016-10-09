@@ -57,7 +57,9 @@ BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
     test_move_assignment_copy<formattables::profile_types_generator>();
     test_move_assignment_copy<formattables::streaming_configuration_generator>();
     test_move_assignment_copy<formattables::inclusion_directive_configuration_generator>();
-    test_move_assignment_copy<annotations::path_annotations_generator>();
+    test_move_assignment_copy<formattables::locator_configuration_generator>();
+    test_move_assignment_copy<formattables::locator_facet_configuration_generator>();
+    test_move_assignment_copy<formattables::locator_formatter_configuration_generator>();
     test_move_assignment_copy<fabric::registrar_generator>();
     test_move_assignment_copy<fabric::cmakelists_generator>();
     test_move_assignment_copy<fabric::odb_options_generator>();

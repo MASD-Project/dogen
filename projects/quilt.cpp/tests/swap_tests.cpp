@@ -56,7 +56,9 @@ BOOST_AUTO_TEST_CASE(validate_swap) {
     test_swap<formattables::profile_types_generator>();
     test_swap<formattables::streaming_configuration_generator>();
     test_swap<formattables::inclusion_directive_configuration_generator>();
-    test_swap<annotations::path_annotations_generator>();
+    test_swap<formattables::locator_configuration_generator>();
+    test_swap<formattables::locator_facet_configuration_generator>();
+    test_swap<formattables::locator_formatter_configuration_generator>();
     test_swap<fabric::registrar_generator>();
     test_swap<fabric::cmakelists_generator>();
     test_swap<fabric::odb_options_generator>();

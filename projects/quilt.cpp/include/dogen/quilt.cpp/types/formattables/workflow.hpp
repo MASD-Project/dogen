@@ -33,7 +33,6 @@
 #include "dogen/options/types/cpp_options.hpp"
 #include "dogen/formatters/types/decoration_configuration_factory.hpp"
 #include "dogen/yarn/types/model.hpp"
-#include "dogen/quilt.cpp/types/annotations/path_annotations.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/formattables/model.hpp"
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
@@ -53,13 +52,6 @@ private:
     std::unordered_set<std::string>
     obtain_module_ids(const yarn::model& m) const;
 
-    typedef std::unordered_map<std::string, annotations::path_annotations>
-    path_annotations_type;
-
-    path_annotations_type make_path_annotations(const dynamic::repository& drp,
-        const dynamic::object& root_object,
-        const formatters::container& fc) const;
-
     model
     make_model(const formatters::container& fc, const yarn::model& m) const;
 
@@ -67,8 +59,7 @@ private:
         const std::forward_list<boost::filesystem::path>& data_directories,
         const dynamic::repository& drp, const dynamic::object& root_object,
         const dogen::formatters::decoration_configuration_factory& dcf,
-        const path_annotations_type& pa, const formatters::container& fc,
-        const locator& l, model& fm) const;
+        const formatters::container& fc, const locator& l, model& fm) const;
 
 public:
     model execute(

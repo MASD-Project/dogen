@@ -26,7 +26,6 @@
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/io/forward_list_io.hpp"
 #include "dogen/yarn/types/element_visitor.hpp"
-#include "dogen/quilt.cpp/types/annotations/path_annotations_factory.hpp"
 #include "dogen/quilt.cpp/types/formattables/transformer.hpp"
 #include "dogen/quilt.cpp/types/formattables/model_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/workflow.hpp"
@@ -68,17 +67,6 @@ workflow::obtain_module_ids(const yarn::model& m) const {
     return c.result();
 }
 
-workflow::path_annotations_type workflow::make_path_annotations(
-    const dynamic::repository& drp, const dynamic::object& root_object,
-    const formatters::container& fc) const {
-
-    BOOST_LOG_SEV(lg, debug) << "Creating path annotations for root object.";
-    annotations::path_annotations_factory f(drp, fc.file_formatters());
-    const auto r(f.make(root_object));
-    BOOST_LOG_SEV(lg, debug) << "Created path annotations for root object.";
-    return r;
-}
-
 model workflow::
 make_model(const formatters::container& fc, const yarn::model& m) const {
     model r;
@@ -91,10 +79,10 @@ void workflow::expand_model(
     const std::forward_list<boost::filesystem::path>& data_directories,
     const dynamic::repository& drp, const dynamic::object& root_object,
     const dogen::formatters::decoration_configuration_factory& dcf,
-    const path_annotations_type& pa, const formatters::container& fc,
+    const formatters::container& fc,
     const locator& l, model& fm) const {
     model_expander ex;
-    ex.expand(data_directories, drp, root_object, dcf, pa, fc, l, fm);
+    ex.expand(data_directories, drp, root_object, dcf, fc, l, fm);
 }
 
 model workflow::execute(
@@ -106,11 +94,10 @@ model workflow::execute(
 
     auto r(make_model(fc, m));
 
-    const auto pa(make_path_annotations(drp, root_object, fc));
     const auto module_ids(obtain_module_ids(m));
     const auto pdp(opts.project_directory_path());
     const locator l(pdp, drp, fc, root_object, m.name(), module_ids);
-    expand_model(data_directories, drp, root_object, dcf, pa, fc, l, r);
+    expand_model(data_directories, drp, root_object, dcf, fc, l, r);
 
     return r;
 }

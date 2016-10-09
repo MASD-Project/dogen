@@ -57,7 +57,9 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
     test_hashing<formattables::formatter_profile_generator>();
     test_hashing<formattables::profile_types_generator>();
     test_hashing<formattables::streaming_configuration_generator>();
-    test_hashing<annotations::path_annotations_generator>();
+    test_hashing<formattables::locator_configuration_generator>();
+    test_hashing<formattables::locator_facet_configuration_generator>();
+    test_hashing<formattables::locator_formatter_configuration_generator>();
     test_hashing<formattables::inclusion_directive_configuration_generator>();
     test_hashing<fabric::registrar_generator>();
     test_hashing<fabric::cmakelists_generator>();

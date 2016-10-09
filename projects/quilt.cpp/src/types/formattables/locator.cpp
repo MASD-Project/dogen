@@ -89,8 +89,8 @@ locator::field_definitions locator::make_field_definitions(
 
         r.formatters_field_definitions[fmtn] = fmt_fds;
 
-        if (processed_facets.find(fctn) != processed_facets.end() &&
-            fmt_fds.facet_directory) {
+        const bool done(processed_facets.find(fctn) != processed_facets.end());
+        if (fmt_fds.facet_directory && !done) {
             processed_facets.insert(fctn);
             facet_field_definitions fct_fds;
             fct_fds.directory = *fmt_fds.facet_directory;
@@ -325,6 +325,19 @@ boost::filesystem::path locator::make_full_path_for_odb_options(
     auto r(project_path_);
     r /= configuration_.source_directory_name();
     r /= "options.odb"; // FIXME: hack for filename
+    return r;
+}
+
+std::unordered_map<std::string, std::string>
+locator::facet_directories() const {
+    std::unordered_map<std::string, std::string> r;
+
+    for (const auto& pair : configuration_.facet_configurations()) {
+        const auto fctn(pair.first);
+        const auto fct_cfg(pair.second);
+        r[fctn] = fct_cfg.directory();
+    }
+
     return r;
 }
 

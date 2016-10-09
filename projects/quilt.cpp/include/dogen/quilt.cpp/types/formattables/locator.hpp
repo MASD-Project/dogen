@@ -28,8 +28,10 @@
 #include <string>
 #include <unordered_set>
 #include <unordered_map>
+#include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
 #include "dogen/dynamic/types/repository.hpp"
+#include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/field_definition.hpp"
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
@@ -154,6 +156,9 @@ public:
      */
     boost::filesystem::path make_full_path_for_odb_options(
         const yarn::name& n, const std::string& formatter_name) const;
+
+public:
+    std::unordered_map<std::string, std::string> facet_directories() const;
 
 private:
     const yarn::name& model_name_;

@@ -36,7 +36,6 @@
 #include "dogen/quilt.cpp/hash/formattables/profile_types_hash.hpp"
 #include "dogen/quilt.cpp/hash/annotations/odb_annotations_hash.hpp"
 #include "dogen/quilt.cpp/hash/fabric/forward_declarations_hash.hpp"
-#include "dogen/quilt.cpp/hash/annotations/path_annotations_hash.hpp"
 #include "dogen/quilt.cpp/hash/annotations/opaque_annotations_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/formatter_profile_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/helper_descriptor_hash.hpp"

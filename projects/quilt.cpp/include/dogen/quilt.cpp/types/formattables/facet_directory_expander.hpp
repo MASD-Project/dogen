@@ -26,8 +26,7 @@
 #endif
 
 #include <unordered_map>
-#include "dogen/quilt.cpp/types/annotations/path_annotations.hpp"
-#include "dogen/quilt.cpp/types/formatters/container.hpp"
+#include "dogen/quilt.cpp/types/formattables/locator.hpp"
 #include "dogen/quilt.cpp/types/formattables/model.hpp"
 
 namespace dogen {
@@ -37,9 +36,7 @@ namespace formattables {
 
 class facet_directory_expander {
 public:
-    void expand(const std::unordered_map<std::string,
-        annotations::path_annotations>& pa, const formatters::container& fc,
-        model& fm) const;
+    void expand(const locator& l, model& fm) const;
 };
 
 } } } }

@@ -55,7 +55,9 @@ BOOST_AUTO_TEST_CASE(validate_io) {
     test_io<formattables::formatter_profile_generator>();
     test_io<formattables::profile_types_generator>();
     test_io<formattables::streaming_configuration_generator>();
-    test_io<annotations::path_annotations_generator>();
+    test_io<formattables::locator_configuration_generator>();
+    test_io<formattables::locator_facet_configuration_generator>();
+    test_io<formattables::locator_formatter_configuration_generator>();
     test_io<formattables::inclusion_directive_configuration_generator>();
     test_io<fabric::registrar_generator>();
     test_io<fabric::cmakelists_generator>();

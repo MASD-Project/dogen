@@ -108,18 +108,15 @@ expand_opaque_configuration(const dynamic::repository& drp, model& fm) const {
 }
 
 void model_expander::
-expand_facet_directories(const std::unordered_map<std::string,
-    annotations::path_annotations>& pa, const formatters::container& fc,
-    model& fm) const {
+expand_facet_directories(const locator& l,model& fm) const {
     facet_directory_expander ex;
-    ex.expand(pa, fc, fm);
+    ex.expand(l, fm);
 }
 
 void model_expander::expand(
     const std::forward_list<boost::filesystem::path>& dirs,
     const dynamic::repository& drp, const dynamic::object& root_object,
     const dogen::formatters::decoration_configuration_factory& dcf,
-    const std::unordered_map<std::string, annotations::path_annotations>& pa,
     const formatters::container& fc, const locator& l, model& fm) const {
 
     expand_streaming_configuration(drp, fm);
@@ -135,7 +132,7 @@ void model_expander::expand(
 
     expand_file_paths_and_guards(fc, l, fm);
     expand_opaque_configuration(drp, fm);
-    expand_facet_directories(pa, fc, fm);
+    expand_facet_directories(l, fm);
 }
 
 } } } }
