@@ -38,7 +38,6 @@
 #include "dogen/quilt.cpp/serialization/fabric/forward_declarations_ser.hpp"
 #include "dogen/quilt.cpp/serialization/annotations/path_annotations_ser.hpp"
 #include "dogen/quilt.cpp/serialization/annotations/aspect_annotations_ser.hpp"
-#include "dogen/quilt.cpp/serialization/annotations/helper_annotations_ser.hpp"
 #include "dogen/quilt.cpp/serialization/annotations/opaque_annotations_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/formatter_profile_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/helper_descriptor_ser.hpp"

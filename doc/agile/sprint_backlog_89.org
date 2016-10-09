@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-09 Sun 16:28]
+#+CAPTION: Clock summary at [2016-10-09 Sun 16:43]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *91:42* |       |       | 100.0 |
+| *Total time*                                                                | *91:56* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 91:42   |       |       | 100.0 |
-| Active                                                                      |         | 91:42 |       | 100.0 |
+| Stories                                                                     | 91:56   |       |       | 100.0 |
+| Active                                                                      |         | 91:56 |       | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  5:30 |   6.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:07 |   0.1 |
 | COMPLETED Generation of formattable is incorrect                            |         |       |  2:30 |   2.7 |
@@ -64,6 +64,7 @@
 | COMPLETED Refactor =yarn.dia= transformer                                   |         |       |  8:49 |   9.6 |
 | COMPLETED Create a dynamic expander in yarn                                 |         |       |  5:52 |   6.4 |
 | COMPLETED Create a streaming configuration expander                         |         |       |  1:15 |   1.4 |
+| COMPLETED Merge helper annotations with helper expander                     |         |       |  0:14 |   0.3 |
 | STARTED Merge annotations with formattables                                 |         |       |  2:35 |   2.8 |
 | STARTED Clean up terminology in dynamic                                     |         |       |  1:07 |   1.2 |
 | STARTED Rewrite profile support                                             |         |       |  1:26 |   1.6 |
@@ -1339,7 +1340,9 @@ Tasks:
 - make use of container in helper expander.
 - delete streaming annotations, factory etc in annotations.
 
-*** Merge helper annotations with helper expander
+*** COMPLETED Merge helper annotations with helper expander
+    CLOSED: [2016-10-09 Sun 16:43]
+    CLOCK: [2016-10-09 Sun 16:29]--[2016-10-09 Sun 16:43] =>  0:14
 
 - Move code from annotations.
 

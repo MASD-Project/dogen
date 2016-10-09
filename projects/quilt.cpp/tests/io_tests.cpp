@@ -58,7 +58,6 @@ BOOST_AUTO_TEST_CASE(validate_io) {
     test_io<annotations::path_annotations_generator>();
     test_io<annotations::aspect_annotations_generator>();
     test_io<annotations::inclusion_directive_annotations_generator>();
-    test_io<annotations::helper_annotations_generator>();
     test_io<fabric::registrar_generator>();
     test_io<fabric::cmakelists_generator>();
     test_io<fabric::odb_options_generator>();

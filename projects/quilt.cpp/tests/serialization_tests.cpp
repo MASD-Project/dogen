@@ -67,7 +67,6 @@ BOOST_AUTO_TEST_CASE(validate_serialization) {
     roundtrip_type<annotations::path_annotations_generator>();
     roundtrip_type<annotations::aspect_annotations_generator>();
     roundtrip_type<annotations::inclusion_directive_annotations_generator>();
-    roundtrip_type<annotations::helper_annotations_generator>();
     roundtrip_type<fabric::registrar_generator>();
     roundtrip_type<fabric::cmakelists_generator>();
     roundtrip_type<fabric::odb_options_generator>();

@@ -60,8 +60,7 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
     test_hashing<annotations::path_annotations_generator>();
     test_hashing<annotations::aspect_annotations_generator>();
     test_hashing<annotations::inclusion_directive_annotations_generator>();
-    test_hashing<annotations::helper_annotations_generator>();
-    test_hashing<fabric::registrar_generator>();
+        test_hashing<fabric::registrar_generator>();
     test_hashing<fabric::cmakelists_generator>();
     test_hashing<fabric::odb_options_generator>();
     test_hashing<fabric::master_header_generator>();

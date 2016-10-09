@@ -38,7 +38,6 @@
 #include "dogen/quilt.cpp/io/fabric/forward_declarations_io.hpp"
 #include "dogen/quilt.cpp/io/annotations/path_annotations_io.hpp"
 #include "dogen/quilt.cpp/io/annotations/aspect_annotations_io.hpp"
-#include "dogen/quilt.cpp/io/annotations/helper_annotations_io.hpp"
 #include "dogen/quilt.cpp/io/annotations/opaque_annotations_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/formatter_profile_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/helper_descriptor_io.hpp"

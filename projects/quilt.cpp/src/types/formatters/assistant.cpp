@@ -30,7 +30,6 @@
 #include "dogen/yarn/io/languages_io.hpp"
 #include "dogen/yarn/types/name_flattener.hpp"
 #include "dogen/quilt.cpp/io/formattables/streaming_configuration_io.hpp"
-#include "dogen/quilt.cpp/io/annotations/helper_annotations_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/helper_configuration_io.hpp"
 #include "dogen/quilt.cpp/types/formattables/canonical_formatter_resolver.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/traits.hpp"

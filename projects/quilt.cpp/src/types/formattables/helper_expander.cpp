@@ -21,11 +21,13 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_set_io.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
+#include "dogen/dynamic/types/field_selector.hpp"
+#include "dogen/dynamic/types/field_definition.hpp"
+#include "dogen/dynamic/types/repository_selector.hpp"
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/yarn/io/languages_io.hpp"
 #include "dogen/yarn/types/name_flattener.hpp"
-#include "dogen/quilt.cpp/types/annotations/helper_annotations_factory.hpp"
-#include "dogen/quilt.cpp/io/annotations/helper_annotations_io.hpp"
+#include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/quilt.cpp/io/formattables/streaming_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/helper_configuration_io.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/traits.hpp"
@@ -80,15 +82,19 @@ helper_expander::context helper_expander::make_context(
     context r;
     r.streaming_configurations = fm.streaming_configurations();
 
-    cpp::annotations::helper_annotations_factory haf(drp);
+    const dynamic::repository_selector s(drp);
+    const auto hf(traits::cpp::helper::family());
+    const auto fd(s.select_field_by_name(hf));
+
     for (auto& pair : fm.formattables()) {
         const auto id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
 
         auto& formattable(pair.second);
         auto& segment(*formattable.master_segment());
-        const auto a(haf.make(segment.extensions()));
-        r.helper_families[id] = a.family();
+        const dynamic::field_selector fs(segment.extensions());
+        const auto fam(fs.get_text_content_or_default(fd));
+        r.helper_families[id] = fam;
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished making the context. Result:" << r;

@@ -59,7 +59,6 @@ BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
     test_move_assignment_copy<annotations::path_annotations_generator>();
     test_move_assignment_copy<annotations::aspect_annotations_generator>();
     test_move_assignment_copy<annotations::inclusion_directive_annotations_generator>();
-    test_move_assignment_copy<annotations::helper_annotations_generator>();
     test_move_assignment_copy<fabric::registrar_generator>();
     test_move_assignment_copy<fabric::cmakelists_generator>();
     test_move_assignment_copy<fabric::odb_options_generator>();
