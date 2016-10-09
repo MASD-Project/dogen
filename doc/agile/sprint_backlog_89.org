@@ -13,15 +13,15 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-09 Sun 18:01]
+#+CAPTION: Clock summary at [2016-10-09 Sun 18:08]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *98:39* |       |       | 100.0 |
+| *Total time*                                                                | *98:45* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 98:39   |       |       | 100.0 |
-| Active                                                                      |         | 98:39 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  5:30 |   5.6 |
+| Stories                                                                     | 98:45   |       |       | 100.0 |
+| Active                                                                      |         | 98:45 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  5:36 |   5.7 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:07 |   0.1 |
 | COMPLETED Generation of formattable is incorrect                            |         |       |  2:30 |   2.5 |
 | COMPLETED Visitor includes are incorrect                                    |         |       |  0:20 |   0.3 |
@@ -42,7 +42,7 @@
 | COMPLETED Create the formattables model                                     |         |       |  1:32 |   1.6 |
 | COMPLETED Hook formattables into formatters                                 |         |       |  3:58 |   4.0 |
 | COMPLETED Remove empty context                                              |         |       |  1:09 |   1.2 |
-| COMPLETED Review main classes in quilt.cpp                                  |         |       |  3:42 |   3.8 |
+| COMPLETED Review main classes in quilt.cpp                                  |         |       |  3:42 |   3.7 |
 | COMPLETED Clean up element segmentation                                     |         |       |  1:20 |   1.4 |
 | COMPLETED Get OSX build to compile code                                     |         |       |  7:05 |   7.2 |
 | COMPLETED Add a banner to readme                                            |         |       |  1:29 |   1.5 |
@@ -76,6 +76,7 @@
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-10-09 Sun 18:02]--[2016-10-09 Sun 18:08] =>  0:06
     CLOCK: [2016-10-06 Thu 11:44]--[2016-10-06 Thu 11:47] =>  0:03
     CLOCK: [2016-10-06 Thu 11:36]--[2016-10-06 Thu 11:43] =>  0:07
     CLOCK: [2016-10-06 Thu 11:30]--[2016-10-06 Thu 11:35] =>  0:05
@@ -1375,6 +1376,36 @@ Get rid of the annotations for aspects.
 
 Get rid of the annotations for inclusion directives.
 
+*** Refactor facet directory expander                                 :story:
+
+Read meta-data for directory name direclty rather than use path
+annotations.
+
+Merged stories:
+
+*Refactor path annotations factory*
+
+As part of this work we should also look at how the facet directory
+expander is computing the facet directory; we are going through all
+formatters. We could just read the facet information.
+
+Tasks:
+
+- get distinct list of facets across all formatters and generate field
+  definitions from this list;
+- cache top-level fields and facet fields and copy results instead of
+  re-reading them.
+
+*** Merge path annotations with locator                               :story:
+
+The only class using path annotations is now the locator. Move all the
+infrastructure to generate them into locator.
+
+*** Merge opaque annotations with opaque expander                     :story:
+
+In addition we need to move all the other code (registrar, etc) into
+formattables.
+
 *** STARTED Merge annotations with formattables                        :epic:
     CLOCK: [2016-10-09 Sun 10:41]--[2016-10-09 Sun 13:14] =>  2:33
     CLOCK: [2016-10-08 Sat 10:41]--[2016-10-08 Sat 10:43] =>  0:02
@@ -1398,7 +1429,11 @@ Tasks:
   all other opaque classes into formattables
 - delete annotations namespace.
 
-*** Drop annotations prefix in yarn                                   :story:
+Actually this is an epic, so we'll track tasks on its own stories.
+
+Merged stories:
+
+*Drop annotations prefix in yarn*
 
 Tasks:
 
@@ -1959,19 +1994,6 @@ initialisers. However, it makes more sense to initialise them on the
 translation unit for each formatter. This will also make life easier
 when we move to a mustache world where there may not be a formatter
 header file at all.
-
-*** Refactor path annotations factory                                 :story:
-
-As part of this work we should also look at how the facet directory
-expander is computing the facet directory; we are going through all
-formatters. We could just read the facet information.
-
-Tasks:
-
-- get distinct list of facets across all formatters and generate field
-  definitions from this list;
-- cache top-level fields and facet fields and copy results instead of
-  re-reading them.
 
 *** Move odb options file into odb folder                             :story:
 
