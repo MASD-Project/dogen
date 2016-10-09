@@ -25,12 +25,10 @@
 #include "dogen/yarn/io/languages_io.hpp"
 #include "dogen/yarn/types/name_flattener.hpp"
 #include "dogen/quilt.cpp/types/annotations/helper_annotations_factory.hpp"
-#include "dogen/quilt.cpp/types/annotations/streaming_annotations_factory.hpp"
 #include "dogen/quilt.cpp/io/annotations/helper_annotations_io.hpp"
-#include "dogen/quilt.cpp/io/annotations/streaming_annotations_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/streaming_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/helper_configuration_io.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/traits.hpp"
-#include "dogen/quilt.cpp/types/annotations/streaming_annotations_factory.hpp"
 #include "dogen/quilt.cpp/types/formattables/expansion_error.hpp"
 #include "dogen/quilt.cpp/types/formattables/helper_expander.hpp"
 
@@ -42,7 +40,7 @@ static logger lg(logger_factory("quilt.cpp.formattables.helper_expander"));
 const std::string qn_missing("Could not find qualified name for language.");
 const std::string descriptor_expected(
     "Child name tree has no associated helper descriptor");
-const std::string missing_helper_annotations(
+const std::string missing_helper_family(
     "Helper annotations not found for: ");
 const std::string empty_identifiable(
     "Identifiable was not generated correctly and is empty.");
@@ -64,42 +62,37 @@ inline std::string get_qualified(const Qualified& iaq) {
     return i->second;
 }
 
-inline std::ostream&
-operator<<(std::ostream& s, const helper_expander::annotations& v) {
-
+std::ostream& operator<<(std::ostream& s, const helper_expander::context& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::"
-      << "helper_expander::annotations\"" << ", "
-      << "\"helper_annotations\": " << v.helper_annotations << ", "
-      << "\"streaming_annotations\": " << v.streaming_annotations
+      << "helper_expander::context\"" << ", "
+      << "\"helper_families\": " << v.helper_families << ", "
+      << "\"streaming_configurations\": " << v.streaming_configurations
       << " }";
 
     return s;
 }
 
-helper_expander::annotations
-helper_expander::obtain_annotations(const dynamic::repository& drp,
-    const std::unordered_map<std::string, formattable>& formattables) const {
-    BOOST_LOG_SEV(lg, debug) << "Started making the annotations.";
+helper_expander::context helper_expander::make_context(
+    const dynamic::repository& drp, const model& fm) const {
 
-    annotations r;
+    BOOST_LOG_SEV(lg, debug) << "Started making the context.";
+    context r;
+    r.streaming_configurations = fm.streaming_configurations();
+
     cpp::annotations::helper_annotations_factory haf(drp);
-    cpp::annotations::streaming_annotations_factory saf(drp);
-
-    for (auto& pair : formattables) {
+    for (auto& pair : fm.formattables()) {
         const auto id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
 
         auto& formattable(pair.second);
         auto& segment(*formattable.master_segment());
-        const auto streaming_annotation(saf.make(segment.extensions()));
-        if (streaming_annotation)
-            r.streaming_annotations[id] = *streaming_annotation;
-
-        r.helper_annotations[id] = haf.make(segment.extensions());
+        const auto a(haf.make(segment.extensions()));
+        r.helper_families[id] = a.family();
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Finished making the annotations. Result:" << r;
+    BOOST_LOG_SEV(lg, debug) << "Finished making the context. Result:" << r;
+
     return r;
 }
 
@@ -143,13 +136,13 @@ bool helper_expander::requires_hashing_helper(const facets_for_family_type& fff,
     return j != i->second.end();
 }
 
-const cpp::annotations::helper_annotations& helper_expander::
-helper_annotations_for_id(const annotations& a, const std::string& id) const {
+std::string helper_expander::helper_family_for_id(
+    const context& ctx, const std::string& id) const {
 
-    const auto i(a.helper_annotations.find(id));
-    if (i == a.helper_annotations.end()) {
-        BOOST_LOG_SEV(lg, debug) << missing_helper_annotations << id;
-        BOOST_THROW_EXCEPTION(expansion_error(missing_helper_annotations + id));
+    const auto i(ctx.helper_families.find(id));
+    if (i == ctx.helper_families.end()) {
+        BOOST_LOG_SEV(lg, debug) << missing_helper_family << id;
+        BOOST_THROW_EXCEPTION(expansion_error(missing_helper_family + id));
     }
 
     BOOST_LOG_SEV(lg, debug) << "Found helper annotations for type: " << id
@@ -157,16 +150,16 @@ helper_annotations_for_id(const annotations& a, const std::string& id) const {
     return i->second;
 }
 
-boost::optional<annotations::streaming_annotations>
-helper_expander::streaming_annotations_for_id(const annotations& a,
+boost::optional<formattables::streaming_configuration>
+helper_expander::streaming_configuration_for_id(const context& ctx,
     const std::string& id) const {
 
-    const auto i(a.streaming_annotations.find(id));
-    if (i == a.streaming_annotations.end())
-        return boost::optional<cpp::annotations::streaming_annotations>();
+    const auto i(ctx.streaming_configurations.find(id));
+    if (i == ctx.streaming_configurations.end())
+        return boost::optional<formattables::streaming_configuration>();
 
-    BOOST_LOG_SEV(lg, debug) << "Found streaming annotations for type: " << id
-                             << ". Annotations: " << i->second;
+    BOOST_LOG_SEV(lg, debug) << "Found streaming configuration for type: " << id
+                             << ". Configuration: " << i->second;
     return i->second;
 }
 
@@ -177,11 +170,11 @@ helper_expander::namespace_list(const yarn::name& n) const {
 }
 
 boost::optional<helper_descriptor> helper_expander::walk_name_tree(
-    const annotations& a, const facets_for_family_type& fff,
+    const context& ctx, const facets_for_family_type& fff,
     const bool in_inheritance_relationship,
     const bool inherit_opaqueness_from_parent, const yarn::name_tree& nt,
     std::unordered_set<std::string>& done,
-    std::list<helper_configuration>& configuration) const {
+    std::list<helper_configuration>& hcs) const {
 
     const auto id(nt.current().id());
     BOOST_LOG_SEV(lg, debug) << "Processing type: " << id;
@@ -190,13 +183,13 @@ boost::optional<helper_descriptor> helper_expander::walk_name_tree(
     r.namespaces(namespace_list(nt.current()));
     r.is_simple_type(nt.is_current_simple_type());
 
-    const auto ss(streaming_annotations_for_id(a, id));
-    if (ss)
-        r.streaming_annotations(ss);
+    const auto sc(streaming_configuration_for_id(ctx, id));
+    if (sc)
+        r.streaming_configuration(sc);
 
-    const auto hs(helper_annotations_for_id(a, id));
-    r.helper_annotations(hs);
-    r.requires_hashing_helper(requires_hashing_helper(fff, hs.family()));
+    const auto fam(helper_family_for_id(ctx, id));
+    r.family(fam);
+    r.requires_hashing_helper(requires_hashing_helper(fff, fam));
 
     r.name_identifiable(nt.current().identifiable());
     r.name_qualified(get_qualified(nt.current()));
@@ -232,7 +225,7 @@ boost::optional<helper_descriptor> helper_expander::walk_name_tree(
          * children). If we have a child, we must have a descriptor.
          */
         const auto aco(nt.are_children_opaque());
-        const auto dd(walk_name_tree(a, fff, iir, aco, c, done, configuration));
+        const auto dd(walk_name_tree(ctx, fff, iir, aco, c, done, hcs));
         if (!dd) {
             BOOST_LOG_SEV(lg, error) << descriptor_expected;
             BOOST_THROW_EXCEPTION(expansion_error(descriptor_expected));
@@ -269,7 +262,7 @@ boost::optional<helper_descriptor> helper_expander::walk_name_tree(
     }
 
     if (done.find(ident) == done.end()) {
-        configuration.push_back(hc);
+        hcs.push_back(hc);
         done.insert(ident);
     } else {
         BOOST_LOG_SEV(lg, debug) << "Name tree already processed: "
@@ -279,7 +272,7 @@ boost::optional<helper_descriptor> helper_expander::walk_name_tree(
 }
 
 std::list<helper_configuration> helper_expander::compute_helper_configurations(
-    const annotations& a, const facets_for_family_type& fff,
+    const context& ctx, const facets_for_family_type& fff,
     const bool in_inheritance_relationship,
     const std::list<yarn::attribute>& attrs) const {
 
@@ -298,7 +291,7 @@ std::list<helper_configuration> helper_expander::compute_helper_configurations(
     const bool iir(in_inheritance_relationship);
     for (const auto attr : attrs) {
         const auto& nt(attr.parsed_type());
-        walk_name_tree(a, fff, iir, opaqueness_from_parent, nt, done, r);
+        walk_name_tree(ctx, fff, iir, opaqueness_from_parent, nt, done, r);
     }
 
     if (r.empty())
@@ -308,7 +301,7 @@ std::list<helper_configuration> helper_expander::compute_helper_configurations(
     return r;
 }
 
-void helper_expander::populate_helper_configuration(const annotations& a,
+void helper_expander::populate_helper_configuration(const context& ctx,
     const formatters::container& fc,
     std::unordered_map<std::string, formattable>& formattables) const {
 
@@ -349,16 +342,15 @@ void helper_expander::populate_helper_configuration(const annotations& a,
          */
         const auto& attrs(ptr->local_attributes());
         const auto iir(ptr->in_inheritance_relationship());
-        const auto hlp_cfgs(compute_helper_configurations(a, fff, iir, attrs));
+        const auto hlp_cfgs(compute_helper_configurations(ctx, fff, iir, attrs));
         ecfg.helper_configurations(hlp_cfgs);
     }
 }
 
 void helper_expander::expand(const dynamic::repository& drp,
     const formatters::container& fc, model& fm) const {
-
-    const auto a(obtain_annotations(drp, fm.formattables()));
-    populate_helper_configuration(a, fc, fm.formattables());
+    const auto ctx(make_context(drp, fm));
+    populate_helper_configuration(ctx, fc, fm.formattables());
 }
 
 } } } }

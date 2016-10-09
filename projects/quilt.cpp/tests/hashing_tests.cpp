@@ -56,7 +56,7 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
     test_hashing<formattables::facet_profile_generator>();
     test_hashing<formattables::formatter_profile_generator>();
     test_hashing<formattables::profile_types_generator>();
-    test_hashing<annotations::streaming_annotations_generator>();
+    test_hashing<formattables::streaming_configuration_generator>();
     test_hashing<annotations::path_annotations_generator>();
     test_hashing<annotations::aspect_annotations_generator>();
     test_hashing<annotations::inclusion_directive_annotations_generator>();

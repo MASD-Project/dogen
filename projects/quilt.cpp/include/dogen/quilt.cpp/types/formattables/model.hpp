@@ -31,8 +31,8 @@
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
 #include "dogen/quilt.cpp/types/formattables/profile_group.hpp"
 #include "dogen/quilt.cpp/types/formattables/facet_configuration.hpp"
-#include "dogen/quilt.cpp/types/annotations/streaming_annotations.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/model_fwd_ser.hpp"
+#include "dogen/quilt.cpp/types/formattables/streaming_configuration.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -48,7 +48,7 @@ public:
 
 public:
     model(
-        const std::unordered_map<std::string, dogen::quilt::cpp::annotations::streaming_annotations>& streaming_annotations,
+        const std::unordered_map<std::string, dogen::quilt::cpp::formattables::streaming_configuration>& streaming_configurations,
         const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formattable>& formattables,
         const std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_configuration>& facet_configurations,
         const dogen::quilt::cpp::formattables::profile_group& global_profile_group);
@@ -61,10 +61,10 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::formattables::model& v, unsigned int version);
 
 public:
-    const std::unordered_map<std::string, dogen::quilt::cpp::annotations::streaming_annotations>& streaming_annotations() const;
-    std::unordered_map<std::string, dogen::quilt::cpp::annotations::streaming_annotations>& streaming_annotations();
-    void streaming_annotations(const std::unordered_map<std::string, dogen::quilt::cpp::annotations::streaming_annotations>& v);
-    void streaming_annotations(const std::unordered_map<std::string, dogen::quilt::cpp::annotations::streaming_annotations>&& v);
+    const std::unordered_map<std::string, dogen::quilt::cpp::formattables::streaming_configuration>& streaming_configurations() const;
+    std::unordered_map<std::string, dogen::quilt::cpp::formattables::streaming_configuration>& streaming_configurations();
+    void streaming_configurations(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::streaming_configuration>& v);
+    void streaming_configurations(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::streaming_configuration>&& v);
 
     const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formattable>& formattables() const;
     std::unordered_map<std::string, dogen::quilt::cpp::formattables::formattable>& formattables();
@@ -92,7 +92,7 @@ public:
     model& operator=(model other);
 
 private:
-    std::unordered_map<std::string, dogen::quilt::cpp::annotations::streaming_annotations> streaming_annotations_;
+    std::unordered_map<std::string, dogen::quilt::cpp::formattables::streaming_configuration> streaming_configurations_;
     std::unordered_map<std::string, dogen::quilt::cpp::formattables::formattable> formattables_;
     std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_configuration> facet_configurations_;
     dogen::quilt::cpp::formattables::profile_group global_profile_group_;

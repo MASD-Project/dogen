@@ -18,31 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/hash/annotations/streaming_annotations_hash.hpp"
+#ifndef DOGEN_QUILT_CPP_SERIALIZATION_FORMATTABLES_STREAMING_CONFIGURATION_FWD_SER_HPP
+#define DOGEN_QUILT_CPP_SERIALIZATION_FORMATTABLES_STREAMING_CONFIGURATION_FWD_SER_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value) {
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
+#include "dogen/quilt.cpp/types/formattables/streaming_configuration_fwd.hpp"
 
-}
+namespace boost {
+namespace serialization {
 
-namespace dogen {
-namespace quilt {
-namespace cpp {
-namespace annotations {
+template<class Archive>
+void save(Archive& ar, const dogen::quilt::cpp::formattables::streaming_configuration& v, unsigned int version);
 
-std::size_t streaming_annotations_hasher::hash(const streaming_annotations& v) {
-    std::size_t seed(0);
+template<class Archive>
+void load(Archive& ar, dogen::quilt::cpp::formattables::streaming_configuration& v, unsigned int version);
 
-    combine(seed, v.requires_quoting());
-    combine(seed, v.string_conversion_method());
-    combine(seed, v.remove_unprintable_characters());
+} }
 
-    return seed;
-}
-
-} } } }
+#endif

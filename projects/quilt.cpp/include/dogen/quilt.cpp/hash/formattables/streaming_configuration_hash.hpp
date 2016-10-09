@@ -18,20 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_ANNOTATIONS_STREAMING_ANNOTATIONS_FWD_HPP
-#define DOGEN_QUILT_CPP_TYPES_ANNOTATIONS_STREAMING_ANNOTATIONS_FWD_HPP
+#ifndef DOGEN_QUILT_CPP_HASH_FORMATTABLES_STREAMING_CONFIGURATION_HASH_HPP
+#define DOGEN_QUILT_CPP_HASH_FORMATTABLES_STREAMING_CONFIGURATION_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <functional>
+#include "dogen/quilt.cpp/types/formattables/streaming_configuration.hpp"
+
 namespace dogen {
 namespace quilt {
 namespace cpp {
-namespace annotations {
+namespace formattables {
 
-class streaming_annotations;
+struct streaming_configuration_hasher {
+public:
+    static std::size_t hash(const streaming_configuration& v);
+};
 
 } } } }
 
+namespace std {
+
+template<>
+struct hash<dogen::quilt::cpp::formattables::streaming_configuration> {
+public:
+    size_t operator()(const dogen::quilt::cpp::formattables::streaming_configuration& v) const {
+        return dogen::quilt::cpp::formattables::streaming_configuration_hasher::hash(v);
+    }
+};
+
+}
 #endif

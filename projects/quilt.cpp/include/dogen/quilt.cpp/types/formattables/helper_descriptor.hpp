@@ -29,8 +29,7 @@
 #include <string>
 #include <algorithm>
 #include <boost/optional.hpp>
-#include "dogen/quilt.cpp/types/annotations/helper_annotations.hpp"
-#include "dogen/quilt.cpp/types/annotations/streaming_annotations.hpp"
+#include "dogen/quilt.cpp/types/formattables/streaming_configuration.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/helper_descriptor_fwd_ser.hpp"
 
 namespace dogen {
@@ -51,13 +50,13 @@ public:
 
 public:
     helper_descriptor(
+        const std::string& family,
         const std::list<std::string>& namespaces,
         const std::string& name_identifiable,
         const std::string& name_qualified,
         const std::string& name_tree_qualified,
         const std::string& name_tree_identifiable,
-        const dogen::quilt::cpp::annotations::helper_annotations& helper_annotations,
-        const boost::optional<dogen::quilt::cpp::annotations::streaming_annotations>& streaming_annotations,
+        const boost::optional<dogen::quilt::cpp::formattables::streaming_configuration>& streaming_configuration,
         const bool is_simple_type,
         const bool requires_hashing_helper,
         const bool is_circular_dependency,
@@ -71,6 +70,11 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::formattables::helper_descriptor& v, unsigned int version);
 
 public:
+    const std::string& family() const;
+    std::string& family();
+    void family(const std::string& v);
+    void family(const std::string&& v);
+
     const std::list<std::string>& namespaces() const;
     std::list<std::string>& namespaces();
     void namespaces(const std::list<std::string>& v);
@@ -96,15 +100,10 @@ public:
     void name_tree_identifiable(const std::string& v);
     void name_tree_identifiable(const std::string&& v);
 
-    const dogen::quilt::cpp::annotations::helper_annotations& helper_annotations() const;
-    dogen::quilt::cpp::annotations::helper_annotations& helper_annotations();
-    void helper_annotations(const dogen::quilt::cpp::annotations::helper_annotations& v);
-    void helper_annotations(const dogen::quilt::cpp::annotations::helper_annotations&& v);
-
-    const boost::optional<dogen::quilt::cpp::annotations::streaming_annotations>& streaming_annotations() const;
-    boost::optional<dogen::quilt::cpp::annotations::streaming_annotations>& streaming_annotations();
-    void streaming_annotations(const boost::optional<dogen::quilt::cpp::annotations::streaming_annotations>& v);
-    void streaming_annotations(const boost::optional<dogen::quilt::cpp::annotations::streaming_annotations>&& v);
+    const boost::optional<dogen::quilt::cpp::formattables::streaming_configuration>& streaming_configuration() const;
+    boost::optional<dogen::quilt::cpp::formattables::streaming_configuration>& streaming_configuration();
+    void streaming_configuration(const boost::optional<dogen::quilt::cpp::formattables::streaming_configuration>& v);
+    void streaming_configuration(const boost::optional<dogen::quilt::cpp::formattables::streaming_configuration>&& v);
 
     bool is_simple_type() const;
     void is_simple_type(const bool v);
@@ -129,13 +128,13 @@ public:
     helper_descriptor& operator=(helper_descriptor other);
 
 private:
+    std::string family_;
     std::list<std::string> namespaces_;
     std::string name_identifiable_;
     std::string name_qualified_;
     std::string name_tree_qualified_;
     std::string name_tree_identifiable_;
-    dogen::quilt::cpp::annotations::helper_annotations helper_annotations_;
-    boost::optional<dogen::quilt::cpp::annotations::streaming_annotations> streaming_annotations_;
+    boost::optional<dogen::quilt::cpp::formattables::streaming_configuration> streaming_configuration_;
     bool is_simple_type_;
     bool requires_hashing_helper_;
     bool is_circular_dependency_;

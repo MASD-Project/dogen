@@ -29,7 +29,7 @@
 #include "dogen/formatters/types/utility_formatter.hpp"
 #include "dogen/yarn/io/languages_io.hpp"
 #include "dogen/yarn/types/name_flattener.hpp"
-#include "dogen/quilt.cpp/io/annotations/streaming_annotations_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/streaming_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/annotations/helper_annotations_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/helper_configuration_io.hpp"
 #include "dogen/quilt.cpp/types/formattables/canonical_formatter_resolver.hpp"
@@ -404,13 +404,11 @@ std::string assistant::comment_inline(const std::string& c) const {
 
 std::list<std::shared_ptr<formatters::helper_formatter_interface>>
 assistant::get_helpers(const formattables::helper_configuration& hc) const {
-    const auto s(hc.current().helper_annotations());
-
     /*
      * A family must have at least one helper registered. This is a
      * good way to detect spurious families in data files.
      */
-    const auto fam(s.family());
+    const auto fam(hc.current().family());
     const auto i(context_.helpers().find(fam));
     if (i == context_.helpers().end()) {
         BOOST_LOG_SEV(lg, error) << no_helpers_for_family << fam;
@@ -494,22 +492,23 @@ void assistant::add_helper_methods(const std::string& element_id) {
     BOOST_LOG_SEV(lg, debug) << "Finished generating helper methods.";
 }
 
-std::string assistant::streaming_for_type(
-    const annotations::streaming_annotations& ss, const std::string& s) const {
+std::string assistant::
+streaming_for_type(const formattables::streaming_configuration& sc,
+    const std::string& s) const {
 
     std::ostringstream stream;
     dogen::formatters::utility_formatter uf(stream);
-    BOOST_LOG_SEV(lg, debug) << "Annotations for streaming for type: " << ss;
-    if (ss.remove_unprintable_characters())
+    BOOST_LOG_SEV(lg, debug) << "Streaming configuration for type: " << sc;
+    if (sc.remove_unprintable_characters())
         uf.insert_streamed("tidy_up_string(" + s + ")");
-    else if (!ss.string_conversion_method().empty()) {
+    else if (!sc.string_conversion_method().empty()) {
         // FIXME: hack to determine if we are being dereferenced.
         std::string s1(s);
         const auto i(s1.find('*'));
         if (i != std::string::npos)
             s1 = "(" + s + ")";
-        uf.insert_streamed(s1 + "." + ss.string_conversion_method());
-    } else if (ss.requires_quoting())
+        uf.insert_streamed(s1 + "." + sc.string_conversion_method());
+    } else if (sc.requires_quoting())
         uf.insert_streamed(s);
     else
         uf.insert(s);
@@ -520,9 +519,9 @@ std::string assistant::streaming_for_type(
 std::string assistant::streaming_for_type(const yarn::name& n,
     const std::string& s) const {
 
-    const auto sa(context_.model().streaming_annotations());
-    const auto i(sa.find(n.id()));
-    if (i == sa.end())
+    const auto str_cfgs(context_.model().streaming_configurations());
+    const auto i(str_cfgs.find(n.id()));
+    if (i == str_cfgs.end())
         return s;
 
     return streaming_for_type(i->second, s);
@@ -532,11 +531,11 @@ std::string assistant::
 streaming_for_type(const formattables::helper_descriptor& hd,
     const std::string& s) const {
 
-    const auto ss(hd.streaming_annotations());
-    if (!ss)
+    const auto sc(hd.streaming_configuration());
+    if (!sc)
         return s;
 
-    return streaming_for_type(*ss, s);
+    return streaming_for_type(*sc, s);
 }
 
 bool assistant::

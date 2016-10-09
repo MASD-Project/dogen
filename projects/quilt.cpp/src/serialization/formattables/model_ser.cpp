@@ -33,7 +33,7 @@
 #include "dogen/quilt.cpp/serialization/formattables/formattable_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/profile_group_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/facet_configuration_ser.hpp"
-#include "dogen/quilt.cpp/serialization/annotations/streaming_annotations_ser.hpp"
+#include "dogen/quilt.cpp/serialization/formattables/streaming_configuration_ser.hpp"
 
 namespace boost {
 namespace serialization {
@@ -42,7 +42,7 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::quilt::cpp::formattables::model& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("streaming_annotations", v.streaming_annotations_);
+    ar << make_nvp("streaming_configurations", v.streaming_configurations_);
     ar << make_nvp("formattables", v.formattables_);
     ar << make_nvp("facet_configurations", v.facet_configurations_);
     ar << make_nvp("global_profile_group", v.global_profile_group_);
@@ -52,7 +52,7 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::quilt::cpp::formattables::model& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("streaming_annotations", v.streaming_annotations_);
+    ar >> make_nvp("streaming_configurations", v.streaming_configurations_);
     ar >> make_nvp("formattables", v.formattables_);
     ar >> make_nvp("facet_configurations", v.facet_configurations_);
     ar >> make_nvp("global_profile_group", v.global_profile_group_);

@@ -18,25 +18,31 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_IO_ANNOTATIONS_STREAMING_ANNOTATIONS_IO_HPP
-#define DOGEN_QUILT_CPP_IO_ANNOTATIONS_STREAMING_ANNOTATIONS_IO_HPP
+#include "dogen/quilt.cpp/hash/formattables/streaming_configuration_hash.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace {
 
-#include <iosfwd>
-#include "dogen/quilt.cpp/types/annotations/streaming_annotations.hpp"
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value) {
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+}
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
-namespace annotations {
+namespace formattables {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::quilt::cpp::annotations::streaming_annotations& v);
+std::size_t streaming_configuration_hasher::hash(const streaming_configuration& v) {
+    std::size_t seed(0);
+
+    combine(seed, v.requires_quoting());
+    combine(seed, v.string_conversion_method());
+    combine(seed, v.remove_unprintable_characters());
+
+    return seed;
+}
 
 } } } }
-
-#endif

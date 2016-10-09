@@ -18,37 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_HASH_ANNOTATIONS_STREAMING_ANNOTATIONS_HASH_HPP
-#define DOGEN_QUILT_CPP_HASH_ANNOTATIONS_STREAMING_ANNOTATIONS_HASH_HPP
+#ifndef DOGEN_QUILT_CPP_SERIALIZATION_FORMATTABLES_STREAMING_CONFIGURATION_SER_HPP
+#define DOGEN_QUILT_CPP_SERIALIZATION_FORMATTABLES_STREAMING_CONFIGURATION_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/quilt.cpp/types/annotations/streaming_annotations.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen/quilt.cpp/types/formattables/streaming_configuration.hpp"
 
-namespace dogen {
-namespace quilt {
-namespace cpp {
-namespace annotations {
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::quilt::cpp::formattables::streaming_configuration)
+namespace boost {
+namespace serialization {
 
-struct streaming_annotations_hasher {
-public:
-    static std::size_t hash(const streaming_annotations& v);
-};
+template<typename Archive>
+void save(Archive& ar, const dogen::quilt::cpp::formattables::streaming_configuration& v, unsigned int version);
 
-} } } }
+template<typename Archive>
+void load(Archive& ar, dogen::quilt::cpp::formattables::streaming_configuration& v, unsigned int version);
 
-namespace std {
+} }
 
-template<>
-struct hash<dogen::quilt::cpp::annotations::streaming_annotations> {
-public:
-    size_t operator()(const dogen::quilt::cpp::annotations::streaming_annotations& v) const {
-        return dogen::quilt::cpp::annotations::streaming_annotations_hasher::hash(v);
-    }
-};
-
-}
 #endif

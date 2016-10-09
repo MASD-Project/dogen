@@ -24,7 +24,7 @@
 #include "dogen/quilt.cpp/io/formattables/formattable_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/profile_group_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/facet_configuration_io.hpp"
-#include "dogen/quilt.cpp/io/annotations/streaming_annotations_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/streaming_configuration_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -35,7 +35,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::quilt::cpp::annotations::streaming_annotations>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::quilt::cpp::formattables::streaming_configuration>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -95,7 +95,7 @@ namespace formattables {
 std::ostream& operator<<(std::ostream& s, const model& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::model\"" << ", "
-      << "\"streaming_annotations\": " << v.streaming_annotations() << ", "
+      << "\"streaming_configurations\": " << v.streaming_configurations() << ", "
       << "\"formattables\": " << v.formattables() << ", "
       << "\"facet_configurations\": " << v.facet_configurations() << ", "
       << "\"global_profile_group\": " << v.global_profile_group()

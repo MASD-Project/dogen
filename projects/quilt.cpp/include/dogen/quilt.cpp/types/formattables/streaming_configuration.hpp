@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_ANNOTATIONS_STREAMING_ANNOTATIONS_HPP
-#define DOGEN_QUILT_CPP_TYPES_ANNOTATIONS_STREAMING_ANNOTATIONS_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_STREAMING_CONFIGURATION_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_STREAMING_CONFIGURATION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,34 +27,34 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen/quilt.cpp/serialization/annotations/streaming_annotations_fwd_ser.hpp"
+#include "dogen/quilt.cpp/serialization/formattables/streaming_configuration_fwd_ser.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
-namespace annotations {
+namespace formattables {
 
-class streaming_annotations final {
+class streaming_configuration final {
 public:
-    streaming_annotations(const streaming_annotations&) = default;
-    streaming_annotations(streaming_annotations&&) = default;
-    ~streaming_annotations() = default;
-
-public:
-    streaming_annotations();
+    streaming_configuration(const streaming_configuration&) = default;
+    streaming_configuration(streaming_configuration&&) = default;
+    ~streaming_configuration() = default;
 
 public:
-    streaming_annotations(
+    streaming_configuration();
+
+public:
+    streaming_configuration(
         const bool requires_quoting,
         const std::string& string_conversion_method,
         const bool remove_unprintable_characters);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::quilt::cpp::annotations::streaming_annotations& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::quilt::cpp::formattables::streaming_configuration& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::annotations::streaming_annotations& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::formattables::streaming_configuration& v, unsigned int version);
 
 public:
     bool requires_quoting() const;
@@ -69,14 +69,14 @@ public:
     void remove_unprintable_characters(const bool v);
 
 public:
-    bool operator==(const streaming_annotations& rhs) const;
-    bool operator!=(const streaming_annotations& rhs) const {
+    bool operator==(const streaming_configuration& rhs) const;
+    bool operator!=(const streaming_configuration& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(streaming_annotations& other) noexcept;
-    streaming_annotations& operator=(streaming_annotations other);
+    void swap(streaming_configuration& other) noexcept;
+    streaming_configuration& operator=(streaming_configuration other);
 
 private:
     bool requires_quoting_;
@@ -90,8 +90,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::quilt::cpp::annotations::streaming_annotations& lhs,
-    dogen::quilt::cpp::annotations::streaming_annotations& rhs) {
+    dogen::quilt::cpp::formattables::streaming_configuration& lhs,
+    dogen::quilt::cpp::formattables::streaming_configuration& rhs) {
     lhs.swap(rhs);
 }
 

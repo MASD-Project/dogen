@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_ANNOTATIONS_STREAMING_ANNOTATIONS_FACTORY_HPP
-#define DOGEN_QUILT_CPP_TYPES_ANNOTATIONS_STREAMING_ANNOTATIONS_FACTORY_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_STREAMING_CONFIGURATION_EXPANDER_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_STREAMING_CONFIGURATION_EXPANDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,17 +29,15 @@
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/dynamic/types/field_definition.hpp"
-#include "dogen/quilt.cpp/types/annotations/streaming_annotations.hpp"
+#include "dogen/quilt.cpp/types/formattables/streaming_configuration.hpp"
+#include "dogen/quilt.cpp/types/formattables/model.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
-namespace annotations {
+namespace formattables {
 
-class streaming_annotations_factory {
-public:
-    explicit streaming_annotations_factory(const dynamic::repository& drp);
-
+class streaming_configuration_expander {
 private:
     struct field_definitions {
         dynamic::field_definition requires_quoting;
@@ -47,13 +45,17 @@ private:
         dynamic::field_definition remove_unprintable_characters;
     };
 
-    field_definitions make_field_definitions(const dynamic::repository& drp);
+    friend std::ostream& operator<<(std::ostream& s,
+        const field_definitions& v);
+
+    field_definitions
+    make_field_definitions(const dynamic::repository& drp) const;
+
+    boost::optional<streaming_configuration> make_streaming_configuration(
+        const field_definitions& fds, const dynamic::object& o) const;
 
 public:
-    boost::optional<streaming_annotations> make(const dynamic::object& o) const;
-
-private:
-    const field_definitions field_definitions_;
+    void expand(const dynamic::repository& drp, model& fm) const;
 };
 
 } } } }

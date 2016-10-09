@@ -25,9 +25,7 @@
 #include "dogen/utility/io/memory_io.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/io/forward_list_io.hpp"
-#include "dogen/quilt.cpp/io/annotations/streaming_annotations_io.hpp"
 #include "dogen/quilt.cpp/types/annotations/path_annotations_factory.hpp"
-#include "dogen/quilt.cpp/types/annotations/streaming_annotations_factory.hpp"
 #include "dogen/quilt.cpp/types/formattables/transformer.hpp"
 #include "dogen/quilt.cpp/types/formattables/model_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/workflow.hpp"
@@ -55,32 +53,11 @@ workflow::path_annotations_type workflow::make_path_annotations(
     return r;
 }
 
-std::unordered_map<std::string, annotations::streaming_annotations>
-workflow::make_streaming_annotations(const dynamic::repository& drp,
-    const yarn::model& m) const {
-
-    annotations::streaming_annotations_factory f(drp);
-    std::unordered_map<std::string, annotations::streaming_annotations> r;
-    for (const auto& ptr : m.elements()) {
-        const auto& e(*ptr);
-        const auto ss(f.make(e.extensions()));
-        if (!ss)
-            continue;
-
-        r[e.name().id()] = *ss;
-    }
-
-    BOOST_LOG_SEV(lg, debug) << "Model-level streaming annotations: " << r;
-    return r;
-}
-
-model workflow::make_model(const dynamic::repository& drp,
-    const formatters::container& fc, const yarn::model& m) const {
+model workflow::
+make_model(const formatters::container& fc, const yarn::model& m) const {
     model r;
     transformer t;
     r.formattables(t.transform(fc, m));
-    const auto sa(make_streaming_annotations(drp, m));
-    r.streaming_annotations(sa);
     return r;
 }
 
@@ -101,7 +78,7 @@ model workflow::execute(
     const dogen::formatters::decoration_configuration_factory& dcf,
     const formatters::container& fc, const yarn::model& m) const {
 
-    auto r(make_model(drp, fc, m));
+    auto r(make_model(fc, m));
 
     const auto pa(make_path_annotations(drp, root_object, fc));
     const locator l(opts, m, pa);

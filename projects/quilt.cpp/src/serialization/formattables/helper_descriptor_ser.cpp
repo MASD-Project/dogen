@@ -30,9 +30,8 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/quilt.cpp/serialization/annotations/helper_annotations_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/helper_descriptor_ser.hpp"
-#include "dogen/quilt.cpp/serialization/annotations/streaming_annotations_ser.hpp"
+#include "dogen/quilt.cpp/serialization/formattables/streaming_configuration_ser.hpp"
 
 namespace boost {
 namespace serialization {
@@ -41,13 +40,13 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::quilt::cpp::formattables::helper_descriptor& v,
     const unsigned int /*version*/) {
+    ar << make_nvp("family", v.family_);
     ar << make_nvp("namespaces", v.namespaces_);
     ar << make_nvp("name_identifiable", v.name_identifiable_);
     ar << make_nvp("name_qualified", v.name_qualified_);
     ar << make_nvp("name_tree_qualified", v.name_tree_qualified_);
     ar << make_nvp("name_tree_identifiable", v.name_tree_identifiable_);
-    ar << make_nvp("helper_annotations", v.helper_annotations_);
-    ar << make_nvp("streaming_annotations", v.streaming_annotations_);
+    ar << make_nvp("streaming_configuration", v.streaming_configuration_);
     ar << make_nvp("is_simple_type", v.is_simple_type_);
     ar << make_nvp("requires_hashing_helper", v.requires_hashing_helper_);
     ar << make_nvp("is_circular_dependency", v.is_circular_dependency_);
@@ -58,13 +57,13 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::quilt::cpp::formattables::helper_descriptor& v,
     const unsigned int /*version*/) {
+    ar >> make_nvp("family", v.family_);
     ar >> make_nvp("namespaces", v.namespaces_);
     ar >> make_nvp("name_identifiable", v.name_identifiable_);
     ar >> make_nvp("name_qualified", v.name_qualified_);
     ar >> make_nvp("name_tree_qualified", v.name_tree_qualified_);
     ar >> make_nvp("name_tree_identifiable", v.name_tree_identifiable_);
-    ar >> make_nvp("helper_annotations", v.helper_annotations_);
-    ar >> make_nvp("streaming_annotations", v.streaming_annotations_);
+    ar >> make_nvp("streaming_configuration", v.streaming_configuration_);
     ar >> make_nvp("is_simple_type", v.is_simple_type_);
     ar >> make_nvp("requires_hashing_helper", v.requires_hashing_helper_);
     ar >> make_nvp("is_circular_dependency", v.is_circular_dependency_);

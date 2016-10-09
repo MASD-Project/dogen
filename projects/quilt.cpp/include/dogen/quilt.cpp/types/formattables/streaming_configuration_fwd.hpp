@@ -18,26 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_SERIALIZATION_ANNOTATIONS_STREAMING_ANNOTATIONS_SER_HPP
-#define DOGEN_QUILT_CPP_SERIALIZATION_ANNOTATIONS_STREAMING_ANNOTATIONS_SER_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_STREAMING_CONFIGURATION_FWD_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_STREAMING_CONFIGURATION_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/split_free.hpp>
-#include "dogen/quilt.cpp/types/annotations/streaming_annotations.hpp"
+namespace dogen {
+namespace quilt {
+namespace cpp {
+namespace formattables {
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::quilt::cpp::annotations::streaming_annotations)
-namespace boost {
-namespace serialization {
+class streaming_configuration;
 
-template<typename Archive>
-void save(Archive& ar, const dogen::quilt::cpp::annotations::streaming_annotations& v, unsigned int version);
-
-template<typename Archive>
-void load(Archive& ar, dogen::quilt::cpp::annotations::streaming_annotations& v, unsigned int version);
-
-} }
+} } } }
 
 #endif

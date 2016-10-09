@@ -269,7 +269,8 @@ private:
     std::list<std::shared_ptr<formatters::helper_formatter_interface>>
     get_helpers(const formattables::helper_configuration& hc) const;
 
-    std::string streaming_for_type(const annotations::streaming_annotations& ss,
+    std::string
+    streaming_for_type(const formattables::streaming_configuration& sc,
         const std::string& s) const;
 
 public:

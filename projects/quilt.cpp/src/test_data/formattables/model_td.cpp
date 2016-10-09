@@ -23,7 +23,7 @@
 #include "dogen/quilt.cpp/test_data/formattables/formattable_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/profile_group_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/facet_configuration_td.hpp"
-#include "dogen/quilt.cpp/test_data/annotations/streaming_annotations_td.hpp"
+#include "dogen/quilt.cpp/test_data/formattables/streaming_configuration_td.hpp"
 
 namespace {
 
@@ -33,15 +33,15 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-dogen::quilt::cpp::annotations::streaming_annotations
-create_dogen_quilt_cpp_annotations_streaming_annotations(const unsigned int position) {
-    return dogen::quilt::cpp::annotations::streaming_annotations_generator::create(position);
+dogen::quilt::cpp::formattables::streaming_configuration
+create_dogen_quilt_cpp_formattables_streaming_configuration(const unsigned int position) {
+    return dogen::quilt::cpp::formattables::streaming_configuration_generator::create(position);
 }
 
-std::unordered_map<std::string, dogen::quilt::cpp::annotations::streaming_annotations> create_std_unordered_map_std_string_dogen_quilt_cpp_annotations_streaming_annotations(unsigned int position) {
-    std::unordered_map<std::string, dogen::quilt::cpp::annotations::streaming_annotations> r;
+std::unordered_map<std::string, dogen::quilt::cpp::formattables::streaming_configuration> create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_streaming_configuration(unsigned int position) {
+    std::unordered_map<std::string, dogen::quilt::cpp::formattables::streaming_configuration> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_dogen_quilt_cpp_annotations_streaming_annotations(position + i)));
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_quilt_cpp_formattables_streaming_configuration(position + i)));
     }
     return r;
 }
@@ -88,7 +88,7 @@ model_generator::model_generator() : position_(0) { }
 
 void model_generator::
 populate(const unsigned int position, result_type& v) {
-    v.streaming_annotations(create_std_unordered_map_std_string_dogen_quilt_cpp_annotations_streaming_annotations(position + 0));
+    v.streaming_configurations(create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_streaming_configuration(position + 0));
     v.formattables(create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formattable(position + 1));
     v.facet_configurations(create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_facet_configuration(position + 2));
     v.global_profile_group(create_dogen_quilt_cpp_formattables_profile_group(position + 3));

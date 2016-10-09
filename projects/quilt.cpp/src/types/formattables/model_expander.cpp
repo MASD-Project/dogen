@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/quilt.cpp/types/formattables/streaming_configuration_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/profile_group_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/enablement_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/canonical_formatter_expander.hpp"
@@ -35,6 +36,12 @@ namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
+
+void model_expander::expand_streaming_configuration(
+    const dynamic::repository& drp, model& fm) const {
+    streaming_configuration_expander ex;
+    ex.expand(drp, fm);
+}
 
 void model_expander::expand_profile_groups(
     const std::forward_list<boost::filesystem::path>& dirs,
@@ -115,6 +122,7 @@ void model_expander::expand(
     const std::unordered_map<std::string, annotations::path_annotations>& pa,
     const formatters::container& fc, const locator& l, model& fm) const {
 
+    expand_streaming_configuration(drp, fm);
     expand_profile_groups(dirs, drp, root_object, fc, fm);
     expand_enablement(drp, root_object, fc, fm);
     expand_canonical_formatters(fc, fm);

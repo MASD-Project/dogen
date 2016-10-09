@@ -63,7 +63,7 @@ BOOST_AUTO_TEST_CASE(validate_serialization) {
     roundtrip_type<formattables::facet_profile_generator>();
     roundtrip_type<formattables::formatter_profile_generator>();
     roundtrip_type<formattables::profile_types_generator>();
-    roundtrip_type<annotations::streaming_annotations_generator>();
+    roundtrip_type<formattables::streaming_configuration_generator>();
     roundtrip_type<annotations::path_annotations_generator>();
     roundtrip_type<annotations::aspect_annotations_generator>();
     roundtrip_type<annotations::inclusion_directive_annotations_generator>();

@@ -54,12 +54,8 @@ private:
         const dynamic::object& root_object,
         const formatters::container& fc) const;
 
-    std::unordered_map<std::string, annotations::streaming_annotations>
-    make_streaming_annotations(const dynamic::repository& drp,
-        const yarn::model& m) const;
-
-    model make_model(const dynamic::repository& drp,
-        const formatters::container& fc, const yarn::model& m) const;
+    model
+    make_model(const formatters::container& fc, const yarn::model& m) const;
 
     void expand_model(
         const std::forward_list<boost::filesystem::path>& data_directories,
