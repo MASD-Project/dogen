@@ -24,6 +24,7 @@
 #include <boost/algorithm/string/join.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/element_visitor.hpp"
+#include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formattables/building_error.hpp"
 #include "dogen/quilt.cpp/types/formattables/locator.hpp"
 

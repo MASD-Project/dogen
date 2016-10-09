@@ -32,6 +32,7 @@
 #include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/yarn/types/elements_traversal.hpp"
 #include "dogen/quilt.cpp/types/fabric/master_header.hpp"
+#include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/fabric/master_header_factory.hpp"
 
 namespace {

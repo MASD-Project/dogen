@@ -30,6 +30,7 @@
 #include "dogen/dynamic/types/repository_selector.hpp"
 #include "dogen/dynamic/io/field_definition_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/facet_configuration_io.hpp"
+#include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 #include "dogen/quilt.cpp/io/formattables/local_enablement_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/global_enablement_configuration_io.hpp"
 #include "dogen/quilt.cpp/types/formattables/expansion_error.hpp"

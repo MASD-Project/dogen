@@ -25,11 +25,13 @@
 #pragma once
 #endif
 
+#include <list>
 #include <memory>
+#include <typeindex>
 #include <forward_list>
 #include <unordered_map>
-#include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
-#include "dogen/quilt.cpp/types/formatters/helper_formatter_interface.hpp"
+#include "dogen/quilt.cpp/types/formatters/file_formatter_interface_fwd.hpp"
+#include "dogen/quilt.cpp/types/formatters/helper_formatter_interface_fwd.hpp"
 
 namespace dogen {
 namespace quilt {

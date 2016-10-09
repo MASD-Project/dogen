@@ -25,6 +25,7 @@
 #include "dogen/dynamic/types/repository_selector.hpp"
 #include "dogen/dynamic/io/field_definition_io.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
+#include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formattables/expansion_error.hpp"
 #include "dogen/quilt.cpp/io/formattables/profile_types_io.hpp"
 #include "dogen/quilt.cpp/types/formattables/profile_group_hydrator.hpp"

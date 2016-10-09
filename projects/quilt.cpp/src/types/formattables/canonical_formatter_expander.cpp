@@ -20,7 +20,9 @@
  */
 #include <typeindex>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/types/element.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
+#include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/inclusion_support_types.hpp"
 #include "dogen/quilt.cpp/types/formattables/canonical_formatter_expander.hpp"
 
