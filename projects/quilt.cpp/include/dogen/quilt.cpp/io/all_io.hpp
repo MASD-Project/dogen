@@ -49,8 +49,8 @@
 #include "dogen/quilt.cpp/io/formatters/inclusion_support_types_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/formatter_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/streaming_configuration_io.hpp"
-#include "dogen/quilt.cpp/io/annotations/inclusion_directive_annotations_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/local_enablement_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/global_enablement_configuration_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/inclusion_directive_configuration_io.hpp"
 
 #endif

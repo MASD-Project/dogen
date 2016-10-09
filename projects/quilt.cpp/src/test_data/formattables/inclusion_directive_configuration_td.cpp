@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/quilt.cpp/test_data/annotations/inclusion_directive_annotations_td.hpp"
+#include "dogen/quilt.cpp/test_data/formattables/inclusion_directive_configuration_td.hpp"
 
 namespace {
 
@@ -33,44 +33,37 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-boost::optional<std::string>
-create_boost_optional_std_string(unsigned int position) {
-    boost::optional<std::string> r(
-        create_std_string(position));
-    return r;
-}
-
 }
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
-namespace annotations {
+namespace formattables {
 
-inclusion_directive_annotations_generator::inclusion_directive_annotations_generator() : position_(0) { }
+inclusion_directive_configuration_generator::inclusion_directive_configuration_generator() : position_(0) { }
 
-void inclusion_directive_annotations_generator::
+void inclusion_directive_configuration_generator::
 populate(const unsigned int position, result_type& v) {
     v.inclusion_required(create_bool(position + 0));
-    v.inclusion_directive(create_boost_optional_std_string(position + 1));
+    v.inclusion_directive(create_std_string(position + 1));
 }
 
-inclusion_directive_annotations_generator::result_type
-inclusion_directive_annotations_generator::create(const unsigned int position) {
-    inclusion_directive_annotations r;
-    inclusion_directive_annotations_generator::populate(position, r);
+inclusion_directive_configuration_generator::result_type
+inclusion_directive_configuration_generator::create(const unsigned int position) {
+    inclusion_directive_configuration r;
+    inclusion_directive_configuration_generator::populate(position, r);
     return r;
 }
 
-inclusion_directive_annotations_generator::result_type*
-inclusion_directive_annotations_generator::create_ptr(const unsigned int position) {
-    inclusion_directive_annotations* p = new inclusion_directive_annotations();
-    inclusion_directive_annotations_generator::populate(position, *p);
+inclusion_directive_configuration_generator::result_type*
+inclusion_directive_configuration_generator::create_ptr(const unsigned int position) {
+    inclusion_directive_configuration* p = new inclusion_directive_configuration();
+    inclusion_directive_configuration_generator::populate(position, *p);
     return p;
 }
 
-inclusion_directive_annotations_generator::result_type
-inclusion_directive_annotations_generator::operator()() {
+inclusion_directive_configuration_generator::result_type
+inclusion_directive_configuration_generator::operator()() {
     return create(position_++);
 }
 

@@ -73,7 +73,7 @@ streaming_configuration_expander::make_field_definitions(
     const auto ruc(traits::cpp::streaming::remove_unprintable_characters());
     r.remove_unprintable_characters = s.select_field_by_name(ruc);
 
-    BOOST_LOG_SEV(lg, debug) << "field definitions. Result: " << r;
+    BOOST_LOG_SEV(lg, debug) << "Created field definitions. Result: " << r;
 
     return r;
 }

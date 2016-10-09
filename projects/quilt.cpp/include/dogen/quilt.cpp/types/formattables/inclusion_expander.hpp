@@ -31,7 +31,8 @@
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
 #include "dogen/dynamic/types/repository.hpp"
-#include "dogen/quilt.cpp/types/annotations/inclusion_directive_annotations_factory.hpp"
+#include "dogen/dynamic/types/field_definition.hpp"
+#include "dogen/quilt.cpp/types/formattables/inclusion_directive_configuration.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/formattables/locator.hpp"
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
@@ -69,6 +70,33 @@ namespace formattables {
  */
 class inclusion_expander {
 private:
+    struct formattater_field_definitions {
+        dynamic::field_definition inclusion_directive;
+        dynamic::field_definition inclusion_required;
+    };
+    friend std::ostream& operator<<(std::ostream& s,
+        const formattater_field_definitions& v);
+
+    struct field_definitions {
+        dynamic::field_definition inclusion_required;
+        std::unordered_map<std::string, formattater_field_definitions>
+        formattaters_field_definitions;
+    };
+    friend std::ostream& operator<<(std::ostream& s,
+        const field_definitions& v);
+
+
+    field_definitions make_field_definitions(const dynamic::repository& drp,
+        const formatters::container& fc) const;
+
+    bool make_top_level_inclusion_required(const field_definitions& fds,
+        const dynamic::object& o) const;
+
+    inclusion_directive_configuration make_inclusion_directive_configuration(
+        const field_definitions& fds,const std::string& formatter_name,
+        const dynamic::object& o) const;
+
+private:
     typedef std::forward_list<
     std::shared_ptr<formatters::file_formatter_interface>
     > formatter_list_type;
@@ -88,17 +116,17 @@ private:
                                >
     inclusion_directives_container_type;
 
-    void insert_inclusion_directive(const std::string& id,
-        const std::string& formatter_name, const std::string& directive,
+    void insert_inclusion_directive(
+        const std::string& id, const std::string& formatter_name,
+        const std::string& directive,
         inclusion_directives_container_type& idc) const;
 
-    void compute_inclusion_directives(const yarn::element& e,
-        const annotations::inclusion_directive_annotations_factory& factory,
-        const formatter_list_type& formatters, const locator& l,
-        inclusion_directives_container_type& idc) const;
+    void compute_inclusion_directives(const field_definitions& fds,
+        const yarn::element& e, const formatter_list_type& formatters,
+        const locator& l, inclusion_directives_container_type& idc) const;
 
     inclusion_directives_container_type compute_inclusion_directives(
-        const dynamic::repository& drp, const formatters::container& fc,
+        const field_definitions& fds, const formatters::container& fc,
         const locator& l,
         const std::unordered_map<std::string, formattable>& formattables) const;
 

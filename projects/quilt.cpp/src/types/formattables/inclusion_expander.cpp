@@ -24,6 +24,10 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
+#include "dogen/dynamic/types/field_selector.hpp"
+#include "dogen/dynamic/types/repository_selector.hpp"
+#include "dogen/dynamic/io/field_definition_io.hpp"
+#include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formattables/expansion_error.hpp"
 #include "dogen/quilt.cpp/types/formattables/inclusion_expander.hpp"
 
@@ -43,6 +47,7 @@ const std::string missing_formatter_name("Formatter name not found: ");
 const std::string empty_include_directive("Include directive is empty.");
 const std::string formatter_not_found_for_type(
     "Formatter not found for type: ");
+const std::string empty_formatter_name("Formatter name is empty.");
 
 bool include_directive_comparer(
     const std::string& lhs, const std::string& rhs) {
@@ -96,6 +101,104 @@ namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
+
+std::ostream& operator<<(std::ostream& s,
+    const inclusion_expander::formattater_field_definitions& v) {
+
+    s << " { "
+      << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::"
+      << "inclusion_expander::formatters_field_definitions\"" << ", "
+      << "\"inclusion_directive\": " << v.inclusion_directive << ", "
+      << "\"inclusion_directive\": " << v.inclusion_directive
+      << " }";
+
+    return s;
+}
+
+std::ostream& operator<<(std::ostream& s,
+    const inclusion_expander::field_definitions& v) {
+
+    s << " { "
+      << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::"
+      << "inclusion_expander::field_definitions\"" << ", "
+      << "\"inclusion_required\": " << v.inclusion_required << ", "
+      << "\"formattaters_field_definitions\": "
+      << v.formattaters_field_definitions
+      << " }";
+
+    return s;
+}
+
+inclusion_expander::field_definitions inclusion_expander::
+make_field_definitions(const dynamic::repository& drp,
+    const formatters::container& fc) const {
+    BOOST_LOG_SEV(lg, debug) << "Creating field definitions.";
+
+    field_definitions r;
+    const dynamic::repository_selector s(drp);
+    const auto ir(traits::cpp::inclusion_required());
+    r.inclusion_required = s.select_field_by_name(ir);
+
+    for (const auto f : fc.file_formatters()) {
+        const auto& oh(f->ownership_hierarchy());
+        const auto fmtn(oh.formatter_name());
+
+        using formatters::inclusion_support_types;
+        static const auto ns(inclusion_support_types::not_supported);
+        if (f->inclusion_support_type() == ns) {
+            BOOST_LOG_SEV(lg, debug) << "Skipping formatter: " << fmtn;
+            continue;
+        }
+
+        formattater_field_definitions ffds;
+        const auto& id(traits::inclusion_directive());
+        ffds.inclusion_directive = s.select_field_by_name(fmtn, id);
+
+        // note: redefinition by design as scopes are different.
+        const auto& ir(traits::inclusion_required());
+        ffds.inclusion_required = s.select_field_by_name(fmtn, ir);
+        r.formattaters_field_definitions[fmtn] = ffds;
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Created field definitions. Result: " << r;
+    return r;
+}
+
+bool inclusion_expander::make_top_level_inclusion_required(
+    const field_definitions& fds, const dynamic::object& o) const {
+    const dynamic::field_selector fs(o);
+    return fs.get_boolean_content_or_default(fds.inclusion_required);
+}
+
+inclusion_directive_configuration
+inclusion_expander::make_inclusion_directive_configuration(
+    const field_definitions& fds,const std::string& formatter_name,
+    const dynamic::object& o) const {
+
+    if (formatter_name.empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_formatter_name;
+        BOOST_THROW_EXCEPTION(expansion_error(empty_formatter_name));
+    }
+
+    const auto i(fds.formattaters_field_definitions.find(formatter_name));
+    if (i == fds.formattaters_field_definitions.end()) {
+        BOOST_LOG_SEV(lg, error) << missing_formatter_name;
+        BOOST_THROW_EXCEPTION(expansion_error(missing_formatter_name));
+    }
+
+    const auto& ffd(i->second);
+    const dynamic::field_selector fs(o);
+    inclusion_directive_configuration r;
+
+    const auto& ir(ffd.inclusion_required);
+    r.inclusion_required(fs.get_boolean_content_or_default(ir));
+
+    const auto id(ffd.inclusion_directive);
+    if (fs.has_field(id))
+        r.inclusion_directive(fs.get_text_content(id));
+
+    return r;
+}
 
 inclusion_expander::formatter_list_type
 inclusion_expander::
@@ -152,8 +255,8 @@ void inclusion_expander::insert_inclusion_directive(const std::string& id,
     BOOST_THROW_EXCEPTION(expansion_error(duplicate_element_name + id));
 }
 
-void inclusion_expander::compute_inclusion_directives(const yarn::element& e,
-    const annotations::inclusion_directive_annotations_factory& factory,
+void inclusion_expander::compute_inclusion_directives(
+    const field_definitions& fds, const yarn::element& e,
     const formatter_list_type& formatters, const locator& l,
     inclusion_directives_container_type& idc) const {
 
@@ -161,9 +264,9 @@ void inclusion_expander::compute_inclusion_directives(const yarn::element& e,
     const auto id(n.id());
 
     /*
-     * First we extract the configuration for the generation of
-     * include directives for this element. Note that we generate this
-     * setting for _all elements_ even if the user did not specify any
+     * First we extract the data required to generated include
+     * directives for this element. Note that we generate this setting
+     * for _all elements_ even if the user did not specify any
      * meta-data (we do so via defaults).
      *
      * The question we are asking is: "does this element require any
@@ -174,14 +277,9 @@ void inclusion_expander::compute_inclusion_directives(const yarn::element& e,
      * require inclusion.
      */
     const auto& o(e.extensions());
-    const bool required(factory.make_top_level_inclusion_required(o));
+    const bool required(make_top_level_inclusion_required(fds, o));
     if (!required) {
         BOOST_LOG_SEV(lg, debug) << "Inclusion not required for element.";
-        return;
-    }
-
-    if (formatters.empty()) {
-        BOOST_LOG_SEV(lg, debug) << "No formatters found.";
         return;
     }
 
@@ -202,8 +300,8 @@ void inclusion_expander::compute_inclusion_directives(const yarn::element& e,
          *
          * Again, we default this to true.
          */
-        const auto s(factory.make_inclusion_directive_annotations(fmtn, o));
-        if (!s.inclusion_required()) {
+        const auto id_cfg(make_inclusion_directive_configuration(fds, fmtn, o));
+        if (!id_cfg.inclusion_required()) {
             BOOST_LOG_SEV(lg, debug) << "Inclusion directive not required "
                                      << " for formatter: " << fmtn;
             continue;
@@ -217,8 +315,8 @@ void inclusion_expander::compute_inclusion_directives(const yarn::element& e,
          * directive.
          */
         std::string directive;
-        if (s.inclusion_directive())
-            directive = *s.inclusion_directive();
+        if (!id_cfg.inclusion_directive().empty())
+            directive = id_cfg.inclusion_directive();
         else {
             /*
              * Finally, we have no alternative but to compute the
@@ -234,7 +332,7 @@ void inclusion_expander::compute_inclusion_directives(const yarn::element& e,
 }
 
 inclusion_expander::inclusion_directives_container_type inclusion_expander::
-compute_inclusion_directives(const dynamic::repository& drp,
+compute_inclusion_directives(const field_definitions& fds,
     const formatters::container& fc, const locator& l,
     const std::unordered_map<std::string, formattable>& formattables) const {
 
@@ -243,11 +341,9 @@ compute_inclusion_directives(const dynamic::repository& drp,
     /*
      * First we must make sure we only have formatters which generate
      * files that can be included via an include directive. Filter out
-     * all of those that do not.
+     * all of those that do not, and bucket them all by type index.
      */
     const auto ffti(includible_formatters_by_type_index(fc));
-
-    const annotations::inclusion_directive_annotations_factory f(drp, fc);
 
     /*
      * Now, for all formattables and their associated element
@@ -263,12 +359,12 @@ compute_inclusion_directives(const dynamic::repository& drp,
             const auto ti(std::type_index(typeid(e)));
 
             const auto i(ffti.find(ti));
-            if (i == ffti.end()) {
+            if (i == ffti.end() || i->second.empty()) {
                 BOOST_LOG_SEV(lg, debug) << formatter_not_found_for_type << id;
                 continue;
             }
 
-            compute_inclusion_directives(e, f, i->second, l, r);
+            compute_inclusion_directives(fds, e, i->second, l, r);
         }
     }
     return r;
@@ -414,7 +510,8 @@ void inclusion_expander::populate_inclusion_dependencies(
 void inclusion_expander::expand(const dynamic::repository& drp,
     const formatters::container& fc, const locator& l, model& fm) const {
 
-    const auto idc(compute_inclusion_directives(drp, fc, l, fm.formattables()));
+    const auto fds(make_field_definitions(drp, fc));
+    const auto idc(compute_inclusion_directives(fds, fc, l, fm.formattables()));
     populate_inclusion_dependencies(fc, idc, fm.formattables());
 }
 

@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen/quilt.cpp/io/annotations/inclusion_directive_annotations_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/inclusion_directive_configuration_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -30,27 +30,12 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace boost {
-
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<std::string>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << "\"" << tidy_up_string(*v) << "\"";
-    else
-        s << "\"data\": ""\"<empty>\"";
-    s << " }";
-    return s;
-}
-
-}
-
 namespace dogen {
 namespace quilt {
 namespace cpp {
-namespace annotations {
+namespace formattables {
 
-std::ostream& operator<<(std::ostream& s, const inclusion_directive_annotations& v) {
+std::ostream& operator<<(std::ostream& s, const inclusion_directive_configuration& v) {
     boost::io::ios_flags_saver ifs(s);
     s.setf(std::ios_base::boolalpha);
     s.setf(std::ios::fixed, std::ios::floatfield);
@@ -58,9 +43,9 @@ std::ostream& operator<<(std::ostream& s, const inclusion_directive_annotations&
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"dogen::quilt::cpp::annotations::inclusion_directive_annotations\"" << ", "
+      << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::inclusion_directive_configuration\"" << ", "
       << "\"inclusion_required\": " << v.inclusion_required() << ", "
-      << "\"inclusion_directive\": " << v.inclusion_directive()
+      << "\"inclusion_directive\": " << "\"" << tidy_up_string(v.inclusion_directive()) << "\""
       << " }";
     return(s);
 }

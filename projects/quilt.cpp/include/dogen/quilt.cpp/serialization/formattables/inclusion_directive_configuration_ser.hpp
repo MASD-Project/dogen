@@ -18,20 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_ANNOTATIONS_INCLUSION_DIRECTIVE_ANNOTATIONS_FACTORY_FWD_HPP
-#define DOGEN_QUILT_CPP_TYPES_ANNOTATIONS_INCLUSION_DIRECTIVE_ANNOTATIONS_FACTORY_FWD_HPP
+#ifndef DOGEN_QUILT_CPP_SERIALIZATION_FORMATTABLES_INCLUSION_DIRECTIVE_CONFIGURATION_SER_HPP
+#define DOGEN_QUILT_CPP_SERIALIZATION_FORMATTABLES_INCLUSION_DIRECTIVE_CONFIGURATION_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen {
-namespace quilt {
-namespace cpp {
-namespace annotations {
+#include <boost/serialization/split_free.hpp>
+#include "dogen/quilt.cpp/types/formattables/inclusion_directive_configuration.hpp"
 
-class inclusion_directive_annotations_factory;
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::quilt::cpp::formattables::inclusion_directive_configuration)
+namespace boost {
+namespace serialization {
 
-} } } }
+template<typename Archive>
+void save(Archive& ar, const dogen::quilt::cpp::formattables::inclusion_directive_configuration& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::quilt::cpp::formattables::inclusion_directive_configuration& v, unsigned int version);
+
+} }
 
 #endif

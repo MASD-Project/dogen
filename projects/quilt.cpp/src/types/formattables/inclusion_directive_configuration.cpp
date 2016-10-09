@@ -18,64 +18,60 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/annotations/inclusion_directive_annotations.hpp"
+#include "dogen/quilt.cpp/types/formattables/inclusion_directive_configuration.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
-namespace annotations {
+namespace formattables {
 
-inclusion_directive_annotations::inclusion_directive_annotations()
+inclusion_directive_configuration::inclusion_directive_configuration()
     : inclusion_required_(static_cast<bool>(0)) { }
 
-inclusion_directive_annotations::inclusion_directive_annotations(inclusion_directive_annotations&& rhs)
-    : inclusion_required_(std::move(rhs.inclusion_required_)),
-      inclusion_directive_(std::move(rhs.inclusion_directive_)) { }
-
-inclusion_directive_annotations::inclusion_directive_annotations(
+inclusion_directive_configuration::inclusion_directive_configuration(
     const bool inclusion_required,
-    const boost::optional<std::string>& inclusion_directive)
+    const std::string& inclusion_directive)
     : inclusion_required_(inclusion_required),
       inclusion_directive_(inclusion_directive) { }
 
-void inclusion_directive_annotations::swap(inclusion_directive_annotations& other) noexcept {
+void inclusion_directive_configuration::swap(inclusion_directive_configuration& other) noexcept {
     using std::swap;
     swap(inclusion_required_, other.inclusion_required_);
     swap(inclusion_directive_, other.inclusion_directive_);
 }
 
-bool inclusion_directive_annotations::operator==(const inclusion_directive_annotations& rhs) const {
+bool inclusion_directive_configuration::operator==(const inclusion_directive_configuration& rhs) const {
     return inclusion_required_ == rhs.inclusion_required_ &&
         inclusion_directive_ == rhs.inclusion_directive_;
 }
 
-inclusion_directive_annotations& inclusion_directive_annotations::operator=(inclusion_directive_annotations other) {
+inclusion_directive_configuration& inclusion_directive_configuration::operator=(inclusion_directive_configuration other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-bool inclusion_directive_annotations::inclusion_required() const {
+bool inclusion_directive_configuration::inclusion_required() const {
     return inclusion_required_;
 }
 
-void inclusion_directive_annotations::inclusion_required(const bool v) {
+void inclusion_directive_configuration::inclusion_required(const bool v) {
     inclusion_required_ = v;
 }
 
-const boost::optional<std::string>& inclusion_directive_annotations::inclusion_directive() const {
+const std::string& inclusion_directive_configuration::inclusion_directive() const {
     return inclusion_directive_;
 }
 
-boost::optional<std::string>& inclusion_directive_annotations::inclusion_directive() {
+std::string& inclusion_directive_configuration::inclusion_directive() {
     return inclusion_directive_;
 }
 
-void inclusion_directive_annotations::inclusion_directive(const boost::optional<std::string>& v) {
+void inclusion_directive_configuration::inclusion_directive(const std::string& v) {
     inclusion_directive_ = v;
 }
 
-void inclusion_directive_annotations::inclusion_directive(const boost::optional<std::string>&& v) {
+void inclusion_directive_configuration::inclusion_directive(const std::string&& v) {
     inclusion_directive_ = std::move(v);
 }
 

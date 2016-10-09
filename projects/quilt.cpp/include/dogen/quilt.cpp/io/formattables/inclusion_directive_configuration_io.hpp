@@ -18,24 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_IO_ANNOTATIONS_INCLUSION_DIRECTIVE_ANNOTATIONS_IO_HPP
-#define DOGEN_QUILT_CPP_IO_ANNOTATIONS_INCLUSION_DIRECTIVE_ANNOTATIONS_IO_HPP
+#ifndef DOGEN_QUILT_CPP_IO_FORMATTABLES_INCLUSION_DIRECTIVE_CONFIGURATION_IO_HPP
+#define DOGEN_QUILT_CPP_IO_FORMATTABLES_INCLUSION_DIRECTIVE_CONFIGURATION_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen/quilt.cpp/types/annotations/inclusion_directive_annotations.hpp"
+#include "dogen/quilt.cpp/types/formattables/inclusion_directive_configuration.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
-namespace annotations {
+namespace formattables {
 
 std::ostream&
 operator<<(std::ostream& s,
-     const dogen::quilt::cpp::annotations::inclusion_directive_annotations& v);
+     const dogen::quilt::cpp::formattables::inclusion_directive_configuration& v);
 
 } } } }
 

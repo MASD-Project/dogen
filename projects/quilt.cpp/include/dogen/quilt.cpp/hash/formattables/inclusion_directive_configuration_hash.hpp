@@ -18,24 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_SERIALIZATION_ANNOTATIONS_INCLUSION_DIRECTIVE_ANNOTATIONS_FWD_SER_HPP
-#define DOGEN_QUILT_CPP_SERIALIZATION_ANNOTATIONS_INCLUSION_DIRECTIVE_ANNOTATIONS_FWD_SER_HPP
+#ifndef DOGEN_QUILT_CPP_HASH_FORMATTABLES_INCLUSION_DIRECTIVE_CONFIGURATION_HASH_HPP
+#define DOGEN_QUILT_CPP_HASH_FORMATTABLES_INCLUSION_DIRECTIVE_CONFIGURATION_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/quilt.cpp/types/annotations/inclusion_directive_annotations_fwd.hpp"
+#include <functional>
+#include "dogen/quilt.cpp/types/formattables/inclusion_directive_configuration.hpp"
 
-namespace boost {
-namespace serialization {
+namespace dogen {
+namespace quilt {
+namespace cpp {
+namespace formattables {
 
-template<class Archive>
-void save(Archive& ar, const dogen::quilt::cpp::annotations::inclusion_directive_annotations& v, unsigned int version);
+struct inclusion_directive_configuration_hasher {
+public:
+    static std::size_t hash(const inclusion_directive_configuration& v);
+};
 
-template<class Archive>
-void load(Archive& ar, dogen::quilt::cpp::annotations::inclusion_directive_annotations& v, unsigned int version);
+} } } }
 
-} }
+namespace std {
 
+template<>
+struct hash<dogen::quilt::cpp::formattables::inclusion_directive_configuration> {
+public:
+    size_t operator()(const dogen::quilt::cpp::formattables::inclusion_directive_configuration& v) const {
+        return dogen::quilt::cpp::formattables::inclusion_directive_configuration_hasher::hash(v);
+    }
+};
+
+}
 #endif
