@@ -25,6 +25,7 @@
 #include "dogen/utility/io/memory_io.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/io/forward_list_io.hpp"
+#include "dogen/yarn/types/element_visitor.hpp"
 #include "dogen/quilt.cpp/types/annotations/path_annotations_factory.hpp"
 #include "dogen/quilt.cpp/types/formattables/transformer.hpp"
 #include "dogen/quilt.cpp/types/formattables/model_expander.hpp"
@@ -41,6 +42,31 @@ namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
+
+class module_id_collector : public yarn::element_visitor {
+public:
+    const std::unordered_set<std::string>& result() { return module_ids_; }
+
+public:
+    using yarn::element_visitor::visit;
+    void visit(const yarn::module& m) override {
+        module_ids_.insert(m.name().id());
+    }
+
+private:
+    std::unordered_set<std::string> module_ids_;
+};
+
+
+std::unordered_set<std::string>
+workflow::obtain_module_ids(const yarn::model& m) const {
+    module_id_collector c;
+    for (const auto& ptr : m.elements()) {
+        const auto& e(*ptr);
+        e.accept(c);
+    }
+    return c.result();
+}
 
 workflow::path_annotations_type workflow::make_path_annotations(
     const dynamic::repository& drp, const dynamic::object& root_object,
@@ -81,7 +107,9 @@ model workflow::execute(
     auto r(make_model(fc, m));
 
     const auto pa(make_path_annotations(drp, root_object, fc));
-    const locator l(opts, m, pa);
+    const auto module_ids(obtain_module_ids(m));
+    const auto pdp(opts.project_directory_path());
+    const locator l(pdp, drp, fc, root_object, m.name(), module_ids);
     expand_model(data_directories, drp, root_object, dcf, pa, fc, l, r);
 
     return r;

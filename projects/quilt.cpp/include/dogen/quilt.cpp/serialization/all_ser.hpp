@@ -46,11 +46,14 @@
 #include "dogen/quilt.cpp/serialization/formattables/helper_configuration_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/opaque_configuration_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/element_configuration_ser.hpp"
+#include "dogen/quilt.cpp/serialization/formattables/locator_configuration_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formatters/inclusion_support_types_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/formatter_configuration_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/streaming_configuration_ser.hpp"
+#include "dogen/quilt.cpp/serialization/formattables/locator_facet_configuration_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/local_enablement_configuration_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/global_enablement_configuration_ser.hpp"
+#include "dogen/quilt.cpp/serialization/formattables/locator_formatter_configuration_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/inclusion_directive_configuration_ser.hpp"
 
 #endif

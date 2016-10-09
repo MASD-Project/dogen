@@ -47,6 +47,12 @@ namespace formattables {
 
 class workflow {
 private:
+    /**
+     * @brief Retrieves the ids of all the modules in the model.
+     */
+    std::unordered_set<std::string>
+    obtain_module_ids(const yarn::model& m) const;
+
     typedef std::unordered_map<std::string, annotations::path_annotations>
     path_annotations_type;
 

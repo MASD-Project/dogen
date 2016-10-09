@@ -46,11 +46,14 @@
 #include "dogen/quilt.cpp/io/formattables/helper_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/opaque_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/element_configuration_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/locator_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formatters/inclusion_support_types_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/formatter_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/streaming_configuration_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/locator_facet_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/local_enablement_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/global_enablement_configuration_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/locator_formatter_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/inclusion_directive_configuration_io.hpp"
 
 #endif

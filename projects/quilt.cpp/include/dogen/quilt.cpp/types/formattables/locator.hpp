@@ -29,10 +29,11 @@
 #include <unordered_set>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
-#include "dogen/options/types/cpp_options.hpp"
+#include "dogen/dynamic/types/repository.hpp"
+#include "dogen/dynamic/types/field_definition.hpp"
 #include "dogen/yarn/types/name.hpp"
-#include "dogen/yarn/types/model.hpp"
-#include "dogen/quilt.cpp/types/annotations/path_annotations.hpp"
+#include "dogen/quilt.cpp/types/formatters/container.hpp"
+#include "dogen/quilt.cpp/types/formattables/locator_configuration.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -44,23 +45,52 @@ namespace formattables {
  */
 class locator {
 public:
-    locator(const options::cpp_options& opts, const yarn::model& m,
-        const std::unordered_map<std::string,
-        annotations::path_annotations>& ps);
+    locator(
+        const boost::filesystem::path& project_directory_path,
+        const dynamic::repository& drp, const formatters::container& fc,
+        const dynamic::object& root_object, const yarn::name& model_name,
+        const std::unordered_set<std::string>& module_ids);
+
+private:
+    struct facet_field_definitions {
+        dynamic::field_definition directory;
+        dynamic::field_definition postfix;
+    };
+
+    struct formatter_field_definitions {
+        boost::optional<dynamic::field_definition> facet_directory;
+        boost::optional<dynamic::field_definition> facet_postfix;
+        dynamic::field_definition formatter_postfix;
+    };
+
+    struct field_definitions {
+        std::unordered_map<std::string, facet_field_definitions>
+        facets_field_definitions;
+        std::unordered_map<std::string, formatter_field_definitions>
+        formatters_field_definitions;
+        dynamic::field_definition header_file_extension;
+        dynamic::field_definition implementation_file_extension;
+        dynamic::field_definition include_directory_name;
+        dynamic::field_definition source_directory_name;
+        dynamic::field_definition disable_facet_directories;
+    };
+
+    field_definitions make_field_definitions(const dynamic::repository& drp,
+        const formatters::container& fc) const;
+
+    locator_configuration make_configuration(const field_definitions& fds,
+        const dynamic::object& o) const;
+
+    locator_configuration make_configuration(const dynamic::repository& drp,
+        const formatters::container& fc, const dynamic::object& o);
 
 private:
     /**
-     * @brief Retrieves the ids of all the modules in the model.
-     */
-    std::unordered_set<std::string> module_ids(const yarn::model& m) const;
-
-private:
-    /**
-     * @brief Given a formatter name, returns its path annotations.
+     * @brief Given a formatter name, returns its configuration.
      *
-     * @pre Formatter must have path annotations.
+     * @pre Formatter must have a configuration.
      */
-    const annotations::path_annotations& path_annotations_for_formatter(
+    const locator_formatter_configuration& configuration_for_formatter(
         const std::string& formatter_name) const;
 
 private:
@@ -68,7 +98,7 @@ private:
      * @brief Returns the absolute path to the project folder.
      */
     boost::filesystem::path make_project_path(
-        const options::cpp_options& opts,
+        const boost::filesystem::path& project_directory_path,
         const yarn::name& model_name) const;
 
     /**
@@ -77,8 +107,7 @@ private:
      * The facet path segment is the same for both include and source
      * folders; it starts at the facet and includes the file name.
      */
-    boost::filesystem::path make_facet_path(
-        const annotations::path_annotations& ps,
+    boost::filesystem::path make_facet_path(const std::string& formatter_name,
         const std::string& extension, const yarn::name& n) const;
 
     /**
@@ -86,8 +115,7 @@ private:
      * directory for the supplied qualified name.
      */
     boost::filesystem::path make_inclusion_path(
-        const annotations::path_annotations& ps,
-        const std::string& extension,
+        const std::string& formatter_name, const std::string& extension,
         const yarn::name& n) const;
 
 public:
@@ -129,8 +157,7 @@ public:
 
 private:
     const yarn::name& model_name_;
-    const std::unordered_map<std::string, annotations::path_annotations>&
-    path_annotations_;
+    const locator_configuration configuration_;
     const std::unordered_set<std::string> module_ids_;
     const boost::filesystem::path project_path_;
 };

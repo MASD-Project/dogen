@@ -46,11 +46,14 @@
 #include "dogen/quilt.cpp/hash/formattables/helper_configuration_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/opaque_configuration_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/element_configuration_hash.hpp"
+#include "dogen/quilt.cpp/hash/formattables/locator_configuration_hash.hpp"
 #include "dogen/quilt.cpp/hash/formatters/inclusion_support_types_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/formatter_configuration_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/streaming_configuration_hash.hpp"
+#include "dogen/quilt.cpp/hash/formattables/locator_facet_configuration_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/local_enablement_configuration_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/global_enablement_configuration_hash.hpp"
+#include "dogen/quilt.cpp/hash/formattables/locator_formatter_configuration_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/inclusion_directive_configuration_hash.hpp"
 
 #endif

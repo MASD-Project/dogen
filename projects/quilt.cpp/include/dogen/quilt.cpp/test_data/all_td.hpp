@@ -46,11 +46,14 @@
 #include "dogen/quilt.cpp/test_data/formattables/helper_configuration_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/opaque_configuration_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/element_configuration_td.hpp"
+#include "dogen/quilt.cpp/test_data/formattables/locator_configuration_td.hpp"
 #include "dogen/quilt.cpp/test_data/formatters/inclusion_support_types_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/formatter_configuration_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/streaming_configuration_td.hpp"
+#include "dogen/quilt.cpp/test_data/formattables/locator_facet_configuration_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/local_enablement_configuration_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/global_enablement_configuration_td.hpp"
+#include "dogen/quilt.cpp/test_data/formattables/locator_formatter_configuration_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/inclusion_directive_configuration_td.hpp"
 
 #endif
