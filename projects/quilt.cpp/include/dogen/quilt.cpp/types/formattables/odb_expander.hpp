@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_ODB_CONFIGURATION_EXPANDER_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_ODB_CONFIGURATION_EXPANDER_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_ODB_EXPANDER_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_ODB_EXPANDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,7 +30,7 @@
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/dynamic/types/field_definition.hpp"
 #include "dogen/yarn/types/object.hpp"
-#include "dogen/quilt.cpp/types/formattables/odb_configuration.hpp"
+#include "dogen/quilt.cpp/types/formattables/odb_properties.hpp"
 #include "dogen/quilt.cpp/types/formattables/model.hpp"
 
 namespace dogen {
@@ -38,7 +38,7 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-class odb_configuration_expander {
+class odb_expander {
 private:
     struct field_definitions {
         dynamic::field_definition odb_pragma;
@@ -54,7 +54,7 @@ private:
         const field_definitions& fds, const dynamic::object& o) const;
 
 private:
-    boost::optional<odb_configuration> compute_odb_configuration(
+    boost::optional<odb_properties> compute_odb_configuration(
         const field_definitions& fds, const yarn::object& o) const;
 
 public:

@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/quilt.cpp/io/formattables/odb_configuration_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/odb_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -66,9 +66,9 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-std::ostream& operator<<(std::ostream& s, const odb_configuration& v) {
+std::ostream& operator<<(std::ostream& s, const odb_properties& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::odb_configuration\"" << ", "
+      << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::odb_properties\"" << ", "
       << "\"top_level_odb_pragmas\": " << v.top_level_odb_pragmas() << ", "
       << "\"attribute_level_odb_pragmas\": " << v.attribute_level_odb_pragmas()
       << " }";

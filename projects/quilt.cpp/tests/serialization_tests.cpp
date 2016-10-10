@@ -52,7 +52,7 @@ BOOST_AUTO_TEST_CASE(validate_serialization) {
 
     roundtrip_type<formattables::model_generator>();
     roundtrip_type<formattables::formattable_generator>();
-    roundtrip_type<formattables::odb_configuration_generator>();
+    roundtrip_type<formattables::odb_properties_generator>();
     roundtrip_type<formattables::element_properties_generator>();
     roundtrip_type<formattables::global_enablement_configuration_generator>();
     roundtrip_type<formattables::formatter_properties_generator>();

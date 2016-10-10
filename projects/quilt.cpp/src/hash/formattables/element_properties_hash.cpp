@@ -20,9 +20,9 @@
  */
 #include "dogen/formatters/hash/decoration_configuration_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/profile_group_hash.hpp"
+#include "dogen/quilt.cpp/hash/formattables/odb_properties_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/aspect_properties_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/helper_properties_hash.hpp"
-#include "dogen/quilt.cpp/hash/formattables/odb_configuration_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/element_properties_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/formatter_properties_hash.hpp"
 
@@ -80,7 +80,7 @@ inline std::size_t hash_boost_optional_dogen_quilt_cpp_formattables_profile_grou
     return seed;
 }
 
-inline std::size_t hash_boost_optional_dogen_quilt_cpp_formattables_odb_configuration(const boost::optional<dogen::quilt::cpp::formattables::odb_configuration>& v) {
+inline std::size_t hash_boost_optional_dogen_quilt_cpp_formattables_odb_properties(const boost::optional<dogen::quilt::cpp::formattables::odb_properties>& v) {
     std::size_t seed(0);
 
     if (!v)
@@ -106,7 +106,7 @@ std::size_t element_properties_hasher::hash(const element_properties& v) {
     combine(seed, hash_std_list_dogen_quilt_cpp_formattables_helper_properties(v.helper_properties()));
     combine(seed, hash_std_unordered_map_std_string_std_string(v.canonical_formatter_to_formatter()));
     combine(seed, hash_boost_optional_dogen_quilt_cpp_formattables_profile_group(v.local_profile_group()));
-    combine(seed, hash_boost_optional_dogen_quilt_cpp_formattables_odb_configuration(v.odb_configuration()));
+    combine(seed, hash_boost_optional_dogen_quilt_cpp_formattables_odb_properties(v.odb_properties()));
 
     return seed;
 }

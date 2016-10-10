@@ -18,65 +18,65 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/formattables/odb_configuration.hpp"
+#include "dogen/quilt.cpp/types/formattables/odb_properties.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
 
-odb_configuration::odb_configuration(
+odb_properties::odb_properties(
     const std::list<std::string>& top_level_odb_pragmas,
     const std::unordered_map<std::string, std::list<std::string> >& attribute_level_odb_pragmas)
     : top_level_odb_pragmas_(top_level_odb_pragmas),
       attribute_level_odb_pragmas_(attribute_level_odb_pragmas) { }
 
-void odb_configuration::swap(odb_configuration& other) noexcept {
+void odb_properties::swap(odb_properties& other) noexcept {
     using std::swap;
     swap(top_level_odb_pragmas_, other.top_level_odb_pragmas_);
     swap(attribute_level_odb_pragmas_, other.attribute_level_odb_pragmas_);
 }
 
-bool odb_configuration::operator==(const odb_configuration& rhs) const {
+bool odb_properties::operator==(const odb_properties& rhs) const {
     return top_level_odb_pragmas_ == rhs.top_level_odb_pragmas_ &&
         attribute_level_odb_pragmas_ == rhs.attribute_level_odb_pragmas_;
 }
 
-odb_configuration& odb_configuration::operator=(odb_configuration other) {
+odb_properties& odb_properties::operator=(odb_properties other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const std::list<std::string>& odb_configuration::top_level_odb_pragmas() const {
+const std::list<std::string>& odb_properties::top_level_odb_pragmas() const {
     return top_level_odb_pragmas_;
 }
 
-std::list<std::string>& odb_configuration::top_level_odb_pragmas() {
+std::list<std::string>& odb_properties::top_level_odb_pragmas() {
     return top_level_odb_pragmas_;
 }
 
-void odb_configuration::top_level_odb_pragmas(const std::list<std::string>& v) {
+void odb_properties::top_level_odb_pragmas(const std::list<std::string>& v) {
     top_level_odb_pragmas_ = v;
 }
 
-void odb_configuration::top_level_odb_pragmas(const std::list<std::string>&& v) {
+void odb_properties::top_level_odb_pragmas(const std::list<std::string>&& v) {
     top_level_odb_pragmas_ = std::move(v);
 }
 
-const std::unordered_map<std::string, std::list<std::string> >& odb_configuration::attribute_level_odb_pragmas() const {
+const std::unordered_map<std::string, std::list<std::string> >& odb_properties::attribute_level_odb_pragmas() const {
     return attribute_level_odb_pragmas_;
 }
 
-std::unordered_map<std::string, std::list<std::string> >& odb_configuration::attribute_level_odb_pragmas() {
+std::unordered_map<std::string, std::list<std::string> >& odb_properties::attribute_level_odb_pragmas() {
     return attribute_level_odb_pragmas_;
 }
 
-void odb_configuration::attribute_level_odb_pragmas(const std::unordered_map<std::string, std::list<std::string> >& v) {
+void odb_properties::attribute_level_odb_pragmas(const std::unordered_map<std::string, std::list<std::string> >& v) {
     attribute_level_odb_pragmas_ = v;
 }
 
-void odb_configuration::attribute_level_odb_pragmas(const std::unordered_map<std::string, std::list<std::string> >&& v) {
+void odb_properties::attribute_level_odb_pragmas(const std::unordered_map<std::string, std::list<std::string> >&& v) {
     attribute_level_odb_pragmas_ = std::move(v);
 }
 

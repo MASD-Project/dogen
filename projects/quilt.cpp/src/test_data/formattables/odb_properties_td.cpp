@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/quilt.cpp/test_data/formattables/odb_configuration_td.hpp"
+#include "dogen/quilt.cpp/test_data/formattables/odb_properties_td.hpp"
 
 namespace {
 
@@ -52,30 +52,30 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-odb_configuration_generator::odb_configuration_generator() : position_(0) { }
+odb_properties_generator::odb_properties_generator() : position_(0) { }
 
-void odb_configuration_generator::
+void odb_properties_generator::
 populate(const unsigned int position, result_type& v) {
     v.top_level_odb_pragmas(create_std_list_std_string(position + 0));
     v.attribute_level_odb_pragmas(create_std_unordered_map_std_string_std_list_std_string(position + 1));
 }
 
-odb_configuration_generator::result_type
-odb_configuration_generator::create(const unsigned int position) {
-    odb_configuration r;
-    odb_configuration_generator::populate(position, r);
+odb_properties_generator::result_type
+odb_properties_generator::create(const unsigned int position) {
+    odb_properties r;
+    odb_properties_generator::populate(position, r);
     return r;
 }
 
-odb_configuration_generator::result_type*
-odb_configuration_generator::create_ptr(const unsigned int position) {
-    odb_configuration* p = new odb_configuration();
-    odb_configuration_generator::populate(position, *p);
+odb_properties_generator::result_type*
+odb_properties_generator::create_ptr(const unsigned int position) {
+    odb_properties* p = new odb_properties();
+    odb_properties_generator::populate(position, *p);
     return p;
 }
 
-odb_configuration_generator::result_type
-odb_configuration_generator::operator()() {
+odb_properties_generator::result_type
+odb_properties_generator::operator()() {
     return create(position_++);
 }
 

@@ -18,23 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_SERIALIZATION_FORMATTABLES_ODB_CONFIGURATION_FWD_SER_HPP
-#define DOGEN_QUILT_CPP_SERIALIZATION_FORMATTABLES_ODB_CONFIGURATION_FWD_SER_HPP
+#ifndef DOGEN_QUILT_CPP_SERIALIZATION_FORMATTABLES_ODB_PROPERTIES_SER_HPP
+#define DOGEN_QUILT_CPP_SERIALIZATION_FORMATTABLES_ODB_PROPERTIES_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/quilt.cpp/types/formattables/odb_configuration_fwd.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen/quilt.cpp/types/formattables/odb_properties.hpp"
 
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::quilt::cpp::formattables::odb_properties)
 namespace boost {
 namespace serialization {
 
-template<class Archive>
-void save(Archive& ar, const dogen::quilt::cpp::formattables::odb_configuration& v, unsigned int version);
+template<typename Archive>
+void save(Archive& ar, const dogen::quilt::cpp::formattables::odb_properties& v, unsigned int version);
 
-template<class Archive>
-void load(Archive& ar, dogen::quilt::cpp::formattables::odb_configuration& v, unsigned int version);
+template<typename Archive>
+void load(Archive& ar, dogen::quilt::cpp::formattables::odb_properties& v, unsigned int version);
 
 } }
 

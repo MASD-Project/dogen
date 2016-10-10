@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/hash/formattables/odb_configuration_hash.hpp"
+#include "dogen/quilt.cpp/hash/formattables/odb_properties_hash.hpp"
 
 namespace {
 
@@ -52,7 +52,7 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-std::size_t odb_configuration_hasher::hash(const odb_configuration& v) {
+std::size_t odb_properties_hasher::hash(const odb_properties& v) {
     std::size_t seed(0);
 
     combine(seed, hash_std_list_std_string(v.top_level_odb_pragmas()));

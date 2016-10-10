@@ -33,9 +33,9 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/formatters/serialization/decoration_configuration_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/profile_group_ser.hpp"
+#include "dogen/quilt.cpp/serialization/formattables/odb_properties_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/aspect_properties_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/helper_properties_ser.hpp"
-#include "dogen/quilt.cpp/serialization/formattables/odb_configuration_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/element_properties_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/formatter_properties_ser.hpp"
 
@@ -52,7 +52,7 @@ void save(Archive& ar,
     ar << make_nvp("helper_properties", v.helper_properties_);
     ar << make_nvp("canonical_formatter_to_formatter", v.canonical_formatter_to_formatter_);
     ar << make_nvp("local_profile_group", v.local_profile_group_);
-    ar << make_nvp("odb_configuration", v.odb_configuration_);
+    ar << make_nvp("odb_properties", v.odb_properties_);
 }
 
 template<typename Archive>
@@ -65,7 +65,7 @@ void load(Archive& ar,
     ar >> make_nvp("helper_properties", v.helper_properties_);
     ar >> make_nvp("canonical_formatter_to_formatter", v.canonical_formatter_to_formatter_);
     ar >> make_nvp("local_profile_group", v.local_profile_group_);
-    ar >> make_nvp("odb_configuration", v.odb_configuration_);
+    ar >> make_nvp("odb_properties", v.odb_properties_);
 }
 
 } }

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_ODB_CONFIGURATION_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_ODB_CONFIGURATION_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_ODB_PROPERTIES_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_ODB_PROPERTIES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,31 +29,31 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen/quilt.cpp/serialization/formattables/odb_configuration_fwd_ser.hpp"
+#include "dogen/quilt.cpp/serialization/formattables/odb_properties_fwd_ser.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
 
-class odb_configuration final {
+class odb_properties final {
 public:
-    odb_configuration() = default;
-    odb_configuration(const odb_configuration&) = default;
-    odb_configuration(odb_configuration&&) = default;
-    ~odb_configuration() = default;
+    odb_properties() = default;
+    odb_properties(const odb_properties&) = default;
+    odb_properties(odb_properties&&) = default;
+    ~odb_properties() = default;
 
 public:
-    odb_configuration(
+    odb_properties(
         const std::list<std::string>& top_level_odb_pragmas,
         const std::unordered_map<std::string, std::list<std::string> >& attribute_level_odb_pragmas);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::quilt::cpp::formattables::odb_configuration& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::quilt::cpp::formattables::odb_properties& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::formattables::odb_configuration& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::formattables::odb_properties& v, unsigned int version);
 
 public:
     const std::list<std::string>& top_level_odb_pragmas() const;
@@ -67,14 +67,14 @@ public:
     void attribute_level_odb_pragmas(const std::unordered_map<std::string, std::list<std::string> >&& v);
 
 public:
-    bool operator==(const odb_configuration& rhs) const;
-    bool operator!=(const odb_configuration& rhs) const {
+    bool operator==(const odb_properties& rhs) const;
+    bool operator!=(const odb_properties& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(odb_configuration& other) noexcept;
-    odb_configuration& operator=(odb_configuration other);
+    void swap(odb_properties& other) noexcept;
+    odb_properties& operator=(odb_properties other);
 
 private:
     std::list<std::string> top_level_odb_pragmas_;
@@ -87,8 +87,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::quilt::cpp::formattables::odb_configuration& lhs,
-    dogen::quilt::cpp::formattables::odb_configuration& rhs) {
+    dogen::quilt::cpp::formattables::odb_properties& lhs,
+    dogen::quilt::cpp::formattables::odb_properties& rhs) {
     lhs.swap(rhs);
 }
 

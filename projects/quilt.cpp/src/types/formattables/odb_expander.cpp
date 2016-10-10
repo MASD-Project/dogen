@@ -24,14 +24,14 @@
 #include "dogen/dynamic/types/repository_selector.hpp"
 #include "dogen/dynamic/io/field_definition_io.hpp"
 #include "dogen/quilt.cpp/types/formatters/odb/traits.hpp"
-#include "dogen/quilt.cpp/io/formattables/odb_configuration_io.hpp"
-#include "dogen/quilt.cpp/types/formattables/odb_configuration_expander.hpp"
+#include "dogen/quilt.cpp/io/formattables/odb_properties_io.hpp"
+#include "dogen/quilt.cpp/types/formattables/odb_expander.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
 static logger
-lg(logger_factory("quilt.cpp.formattables.odb_configuration_expander"));
+lg(logger_factory("quilt.cpp.formattables.odb_expander"));
 
 }
 
@@ -41,18 +41,18 @@ namespace cpp {
 namespace formattables {
 
 std::ostream& operator<<(std::ostream& s,
-    const odb_configuration_expander::field_definitions& v) {
+    const odb_expander::field_definitions& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::"
-      << "odb_configuration_expander::field_definitions\"" << ", "
+      << "odb_expander::field_definitions\"" << ", "
       << "\"odb_pragma\": " << v.odb_pragma
       << " }";
 
     return s;
 }
 
-odb_configuration_expander::field_definitions odb_configuration_expander::
+odb_expander::field_definitions odb_expander::
 make_field_definitions(const dynamic::repository& drp) const {
     BOOST_LOG_SEV(lg, debug) << "Creating field definitions.";
 
@@ -65,7 +65,7 @@ make_field_definitions(const dynamic::repository& drp) const {
     return r;
 }
 
-std::list<std::string> odb_configuration_expander::make_odb_pragmas(
+std::list<std::string> odb_expander::make_odb_pragmas(
     const field_definitions& fds, const dynamic::object& o) const {
 
     const dynamic::field_selector fs(o);
@@ -75,11 +75,11 @@ std::list<std::string> odb_configuration_expander::make_odb_pragmas(
     return fs.get_text_collection_content(fds.odb_pragma);
 }
 
-boost::optional<odb_configuration>
-odb_configuration_expander::compute_odb_configuration(
+boost::optional<odb_properties>
+odb_expander::compute_odb_configuration(
     const field_definitions& fds, const yarn::object& o) const {
 
-    odb_configuration r;
+    odb_properties r;
     r.top_level_odb_pragmas(make_odb_pragmas(fds, o.extensions()));
     for (const auto& attr : o.local_attributes()) {
         const auto id(attr.name().id());
@@ -96,10 +96,10 @@ odb_configuration_expander::compute_odb_configuration(
     if (has_pragmas)
         return r;
 
-    return boost::optional<odb_configuration>();
+    return boost::optional<odb_properties>();
 }
 
-void odb_configuration_expander::
+void odb_expander::
 expand(const dynamic::repository& drp, model& fm) const {
     BOOST_LOG_SEV(lg, debug) << "Started expanding odb configuration.";
     const auto fds(make_field_definitions(drp));
@@ -135,7 +135,7 @@ expand(const dynamic::repository& drp, model& fm) const {
 
         const auto& o(*ptr);
         auto& eprops(formattable.element_properties());
-        eprops.odb_configuration(compute_odb_configuration(fds, o));
+        eprops.odb_properties(compute_odb_configuration(fds, o));
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished expanding odb configuration. ";

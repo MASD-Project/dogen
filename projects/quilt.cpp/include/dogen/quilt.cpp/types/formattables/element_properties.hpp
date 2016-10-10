@@ -32,9 +32,9 @@
 #include <boost/optional.hpp>
 #include "dogen/formatters/types/decoration_configuration.hpp"
 #include "dogen/quilt.cpp/types/formattables/profile_group.hpp"
+#include "dogen/quilt.cpp/types/formattables/odb_properties.hpp"
 #include "dogen/quilt.cpp/types/formattables/aspect_properties.hpp"
 #include "dogen/quilt.cpp/types/formattables/helper_properties.hpp"
-#include "dogen/quilt.cpp/types/formattables/odb_configuration.hpp"
 #include "dogen/quilt.cpp/types/formattables/formatter_properties.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/element_properties_fwd_ser.hpp"
 
@@ -63,7 +63,7 @@ public:
         const std::list<dogen::quilt::cpp::formattables::helper_properties>& helper_properties,
         const std::unordered_map<std::string, std::string>& canonical_formatter_to_formatter,
         const boost::optional<dogen::quilt::cpp::formattables::profile_group>& local_profile_group,
-        const boost::optional<dogen::quilt::cpp::formattables::odb_configuration>& odb_configuration);
+        const boost::optional<dogen::quilt::cpp::formattables::odb_properties>& odb_properties);
 
 private:
     template<typename Archive>
@@ -103,10 +103,10 @@ public:
     void local_profile_group(const boost::optional<dogen::quilt::cpp::formattables::profile_group>& v);
     void local_profile_group(const boost::optional<dogen::quilt::cpp::formattables::profile_group>&& v);
 
-    const boost::optional<dogen::quilt::cpp::formattables::odb_configuration>& odb_configuration() const;
-    boost::optional<dogen::quilt::cpp::formattables::odb_configuration>& odb_configuration();
-    void odb_configuration(const boost::optional<dogen::quilt::cpp::formattables::odb_configuration>& v);
-    void odb_configuration(const boost::optional<dogen::quilt::cpp::formattables::odb_configuration>&& v);
+    const boost::optional<dogen::quilt::cpp::formattables::odb_properties>& odb_properties() const;
+    boost::optional<dogen::quilt::cpp::formattables::odb_properties>& odb_properties();
+    void odb_properties(const boost::optional<dogen::quilt::cpp::formattables::odb_properties>& v);
+    void odb_properties(const boost::optional<dogen::quilt::cpp::formattables::odb_properties>&& v);
 
 public:
     bool operator==(const element_properties& rhs) const;
@@ -125,7 +125,7 @@ private:
     std::list<dogen::quilt::cpp::formattables::helper_properties> helper_properties_;
     std::unordered_map<std::string, std::string> canonical_formatter_to_formatter_;
     boost::optional<dogen::quilt::cpp::formattables::profile_group> local_profile_group_;
-    boost::optional<dogen::quilt::cpp::formattables::odb_configuration> odb_configuration_;
+    boost::optional<dogen::quilt::cpp::formattables::odb_properties> odb_properties_;
 };
 
 } } } }

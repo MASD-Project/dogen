@@ -550,21 +550,21 @@ requires_hashing_helper_method(const yarn::attribute& attr) const {
 
 std::list<std::string> assistant::get_odb_pragmas() const {
     const auto& eprops(context_.element_properties());
-    const auto& odb_cfg(eprops.odb_configuration());
-    if (!odb_cfg)
+    const auto& odb_props(eprops.odb_properties());
+    if (!odb_props)
         return std::list<std::string>();
 
-    return odb_cfg->top_level_odb_pragmas();
+    return odb_props->top_level_odb_pragmas();
 }
 
 std::list<std::string>
 assistant::get_odb_pragmas(const std::string& attr_id) const {
     const auto& eprops(context_.element_properties());
-    const auto& odb_cfg(eprops.odb_configuration());
-    if (!odb_cfg)
+    const auto& odb_props(eprops.odb_properties());
+    if (!odb_props)
         return std::list<std::string>();
 
-    const auto& attr_pragmas(odb_cfg->attribute_level_odb_pragmas());
+    const auto& attr_pragmas(odb_props->attribute_level_odb_pragmas());
     const auto i(attr_pragmas.find(attr_id));
     if (i == attr_pragmas.end())
         return std::list<std::string>();

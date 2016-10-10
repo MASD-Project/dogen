@@ -18,37 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_HASH_FORMATTABLES_ODB_CONFIGURATION_HASH_HPP
-#define DOGEN_QUILT_CPP_HASH_FORMATTABLES_ODB_CONFIGURATION_HASH_HPP
+#ifndef DOGEN_QUILT_CPP_SERIALIZATION_FORMATTABLES_ODB_PROPERTIES_FWD_SER_HPP
+#define DOGEN_QUILT_CPP_SERIALIZATION_FORMATTABLES_ODB_PROPERTIES_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/quilt.cpp/types/formattables/odb_configuration.hpp"
+#include "dogen/quilt.cpp/types/formattables/odb_properties_fwd.hpp"
 
-namespace dogen {
-namespace quilt {
-namespace cpp {
-namespace formattables {
+namespace boost {
+namespace serialization {
 
-struct odb_configuration_hasher {
-public:
-    static std::size_t hash(const odb_configuration& v);
-};
+template<class Archive>
+void save(Archive& ar, const dogen::quilt::cpp::formattables::odb_properties& v, unsigned int version);
 
-} } } }
+template<class Archive>
+void load(Archive& ar, dogen::quilt::cpp::formattables::odb_properties& v, unsigned int version);
 
-namespace std {
+} }
 
-template<>
-struct hash<dogen::quilt::cpp::formattables::odb_configuration> {
-public:
-    size_t operator()(const dogen::quilt::cpp::formattables::odb_configuration& v) const {
-        return dogen::quilt::cpp::formattables::odb_configuration_hasher::hash(v);
-    }
-};
-
-}
 #endif
