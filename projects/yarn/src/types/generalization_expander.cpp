@@ -21,9 +21,12 @@
 #include "dogen/utility/io/unordered_set_io.hpp"
 #include "dogen/utility/io/optional_io.hpp"
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/dynamic/types/field_selector.hpp"
+#include "dogen/yarn/io/name_io.hpp"
+#include "dogen/yarn/types/traits.hpp"
 #include "dogen/yarn/types/resolver.hpp"
 #include "dogen/yarn/types/expansion_error.hpp"
-#include "dogen/yarn/io/name_io.hpp"
+#include "dogen/dynamic/types/repository_selector.hpp"
 #include "dogen/yarn/types/generalization_expander.hpp"
 
 namespace {
@@ -44,6 +47,27 @@ inline bool operator<(const name& lhs, const name& rhs) {
     return lhs.id() < rhs.id();
 }
 
+generalization_expander::field_definitions
+generalization_expander::make_field_definitions(
+    const dynamic::repository& drp) const {
+
+    field_definitions r;
+    const dynamic::repository_selector rs(drp);
+    r.is_final = rs.select_field_by_name(traits::generalization::is_final());
+    return r;
+}
+
+boost::optional<bool>
+generalization_expander::make_is_final(const field_definitions& fds,
+    const dynamic::object& o) const {
+    const dynamic::field_selector fs(o);
+
+    if (fs.has_field(fds.is_final))
+        return fs.get_boolean_content(fds.is_final);
+
+    return boost::optional<bool>();
+}
+
 std::unordered_set<std::string> generalization_expander::
 update_and_collect_parent_ids(intermediate_model& im) const {
     BOOST_LOG_SEV(lg, debug) << "Updating and collecting parent ids.";
@@ -60,7 +84,7 @@ update_and_collect_parent_ids(intermediate_model& im) const {
 
         /*
          * Resolve the name of the parent. This is required because it
-         * may have been supplied via annotations, and as such, it may
+         * may have been supplied via meta-data, and as such, it may
          * not be complete. We can't wait for the resolution step
          * because there is a circular dependency (resolution needs
          * injection and injection needs generalization, which needs
@@ -75,7 +99,8 @@ update_and_collect_parent_ids(intermediate_model& im) const {
 }
 
 void generalization_expander::populate_properties_up_the_generalization_tree(
-    const yarn::name& leaf, intermediate_model& im, yarn::object& o) const {
+    const field_definitions& fds, const yarn::name& leaf,
+    intermediate_model& im, yarn::object& o) const {
 
     /*
      * Add the leaf to all nodes of the tree except for the leaf node
@@ -109,7 +134,7 @@ void generalization_expander::populate_properties_up_the_generalization_tree(
     }
 
     auto& parent(j->second);
-    populate_properties_up_the_generalization_tree(leaf, im, parent);
+    populate_properties_up_the_generalization_tree(fds, leaf, im, parent);
 
     if (!parent.parent()) {
         /*
@@ -127,7 +152,8 @@ void generalization_expander::populate_properties_up_the_generalization_tree(
     }
 }
 
-void generalization_expander::populate_generalizable_properties(
+void generalization_expander::
+populate_generalizable_properties(const field_definitions& fds,
     const std::unordered_set<std::string>& parent_ids,
     intermediate_model& im) const {
 
@@ -151,14 +177,14 @@ void generalization_expander::populate_generalizable_properties(
          /*
           * Handle the case where the user decided to override final.
           */
-         if (o.generalization_annotations().is_final()) {
-             const auto is_final(*o.generalization_annotations().is_final());
-             if (is_final && o.is_parent()) {
+         const auto is_final(make_is_final(fds, o.extensions()));
+         if (is_final) {
+             if (*is_final && o.is_parent()) {
                  BOOST_LOG_SEV(lg, error) << incompatible_is_final << id;
                  BOOST_THROW_EXCEPTION(
                      expansion_error(incompatible_is_final + id));
              }
-             o.is_final(is_final);
+             o.is_final(*is_final);
          } else {
              /*
               * By default we setup all childless types and leaf types
@@ -181,7 +207,7 @@ void generalization_expander::populate_generalizable_properties(
          if (!o.is_leaf())
              continue;
 
-         populate_properties_up_the_generalization_tree(o.name(), im, o);
+         populate_properties_up_the_generalization_tree(fds, o.name(), im, o);
     }
 }
 
@@ -192,9 +218,12 @@ void generalization_expander::sort_leaves(intermediate_model& im) const {
     }
 }
 
-void generalization_expander::expand(intermediate_model& im) const {
+void generalization_expander::
+expand(const dynamic::repository& drp, intermediate_model& im) const {
     const auto parent_ids(update_and_collect_parent_ids(im));
-    populate_generalizable_properties(parent_ids, im);
+
+    const auto fds(make_field_definitions(drp));
+    populate_generalizable_properties(fds, parent_ids, im);
     sort_leaves(im);
 }
 

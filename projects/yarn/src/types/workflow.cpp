@@ -93,9 +93,9 @@ merge_intermediate_models(const std::list<intermediate_model>& im) const {
 }
 
 void workflow::post_process_merged_intermediate_model(
-    intermediate_model& im) const {
+    const dynamic::repository& drp, intermediate_model& im) const {
     post_merge_workflow w;
-    return w.execute(injector_registrar(), im);
+    return w.execute(drp, injector_registrar(), im);
 }
 
 model workflow::transform_intermediate_model(
@@ -110,7 +110,7 @@ model workflow::execute(const dynamic::repository& drp,
 
     const auto im(obtain_intermediate_models(drp, dirs, io));
     auto mim(merge_intermediate_models(im));
-    post_process_merged_intermediate_model(mim);
+    post_process_merged_intermediate_model(drp, mim);
     auto r(transform_intermediate_model(mim));
 
     BOOST_LOG_SEV(lg, debug) << "Final model: " << r;

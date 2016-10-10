@@ -26,6 +26,8 @@
 #endif
 
 #include <unordered_set>
+#include "dogen/dynamic/types/repository.hpp"
+#include "dogen/dynamic/types/field_definition.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/name.hpp"
@@ -35,21 +37,32 @@ namespace yarn {
 
 class generalization_expander {
 private:
+    struct field_definitions {
+        dynamic::field_definition is_final;
+    };
+
+    field_definitions
+    make_field_definitions(const dynamic::repository& drp) const;
+
+    boost::optional<bool> make_is_final(const field_definitions& fds,
+        const dynamic::object& o) const;
+
+private:
     std::unordered_set<std::string>
     update_and_collect_parent_ids(intermediate_model& im) const;
 
     void populate_properties_up_the_generalization_tree(
-        const yarn::name& leaf, intermediate_model& im,
-        yarn::object& o) const;
+        const field_definitions& fds, const yarn::name& leaf,
+        intermediate_model& im, yarn::object& o) const;
 
-    void populate_generalizable_properties(
+    void populate_generalizable_properties(const field_definitions& fds,
         const std::unordered_set<std::string>& parent_ids,
         intermediate_model& im) const;
 
     void sort_leaves(intermediate_model& im) const;
 
 public:
-    void expand(intermediate_model& im) const;
+    void expand(const dynamic::repository& rp, intermediate_model& im) const;
 };
 
 } }

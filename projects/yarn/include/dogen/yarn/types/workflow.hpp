@@ -74,7 +74,8 @@ private:
     /**
      * @brief Executes the post-processing.
      */
-    void post_process_merged_intermediate_model(intermediate_model& im) const;
+    void post_process_merged_intermediate_model(const dynamic::repository& drp,
+        intermediate_model& im) const;
 
     /**
      * @brief Transforms the intermediate model to the final
