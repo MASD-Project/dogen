@@ -217,7 +217,7 @@ public:
      * @brief Populate decoration configuration in the template. Also
      * includes a single line of text.
      */
-    text_template make_with_decoration_configuration() const;
+    text_template make_with_decoration_properties() const;
 
     /**
      * @brief Populate containing namespace in the text template.

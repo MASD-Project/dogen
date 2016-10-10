@@ -18,22 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_IO_DECORATION_CONFIGURATION_IO_HPP
-#define DOGEN_FORMATTERS_IO_DECORATION_CONFIGURATION_IO_HPP
+#ifndef DOGEN_FORMATTERS_SERIALIZATION_DECORATION_PROPERTIES_FWD_SER_HPP
+#define DOGEN_FORMATTERS_SERIALIZATION_DECORATION_PROPERTIES_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/formatters/types/decoration_configuration.hpp"
+#include "dogen/formatters/types/decoration_properties_fwd.hpp"
 
-namespace dogen {
-namespace formatters {
+namespace boost {
+namespace serialization {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::formatters::decoration_configuration& v);
+template<class Archive>
+void save(Archive& ar, const dogen::formatters::decoration_properties& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, dogen::formatters::decoration_properties& v, unsigned int version);
 
 } }
 

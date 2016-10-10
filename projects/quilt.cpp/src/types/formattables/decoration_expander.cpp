@@ -40,10 +40,10 @@ namespace cpp {
 namespace formattables {
 
 void decoration_expander::
-expand(const dogen::formatters::decoration_configuration_factory& dcf,
+expand(const dogen::formatters::decoration_properties_factory& dpf,
     model& fm) const {
 
-    const auto dc(dcf.make(cpp_modeline_name));
+    const auto dc(dpf.make(cpp_modeline_name));
     for (auto& pair : fm.formattables()) {
         const auto id(pair.first);
         auto& formattable(pair.second);
@@ -51,11 +51,11 @@ expand(const dogen::formatters::decoration_configuration_factory& dcf,
 
         // FIXME: obtain the modeline name from the formatter
         if (boost::contains(id, "CMakeLists"))
-            eprops.decoration_configuration(dcf.make(cmake_modeline_name));
+            eprops.decoration_properties(dpf.make(cmake_modeline_name));
         else if (boost::contains(id, "options.odb"))
-            eprops.decoration_configuration(dcf.make(odb_modeline_name));
+            eprops.decoration_properties(dpf.make(odb_modeline_name));
         else
-            eprops.decoration_configuration(dc);
+            eprops.decoration_properties(dc);
     }
 }
 

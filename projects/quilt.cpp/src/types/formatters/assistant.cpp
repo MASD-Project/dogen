@@ -289,15 +289,15 @@ bool assistant::is_odb_facet_enabled() const {
 
 dogen::formatters::cpp::scoped_boilerplate_formatter
 assistant::make_scoped_boilerplate_formatter() {
-    const auto& eprops(context_.element_properties());
-    const auto& dcfg(eprops.decoration_configuration());
+    const auto& ep(context_.element_properties());
+    const auto& dp(ep.decoration_properties());
 
-    const auto& fmt_cfg(formatter_properties_);
-    const auto& deps(fmt_cfg.inclusion_dependencies());
-    const auto& hg(fmt_cfg.header_guard());
+    const auto& fmt_props(formatter_properties_);
+    const auto& deps(fmt_props.inclusion_dependencies());
+    const auto& hg(fmt_props.header_guard());
 
     using dogen::formatters::cpp::scoped_boilerplate_formatter;
-    return scoped_boilerplate_formatter(stream(), dcfg, deps, hg);
+    return scoped_boilerplate_formatter(stream(), dp, deps, hg);
 }
 
 dogen::formatters::cpp::scoped_namespace_formatter
@@ -308,12 +308,12 @@ assistant::make_scoped_namespace_formatter(const std::list<std::string>& ns) {
 }
 
 void assistant::make_decoration_preamble() {
-    const auto dc(context_.element_properties().decoration_configuration());
+    const auto dc(context_.element_properties().decoration_properties());
     make_decoration_preamble(dc);
 }
 
 void assistant::make_decoration_preamble(
-    const boost::optional<dogen::formatters::decoration_configuration> dc) {
+    const boost::optional<dogen::formatters::decoration_properties> dc) {
     if (!dc)
         return;
 

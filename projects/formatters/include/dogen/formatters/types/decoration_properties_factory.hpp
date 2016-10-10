@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TYPES_DECORATION_CONFIGURATION_FACTORY_HPP
-#define DOGEN_FORMATTERS_TYPES_DECORATION_CONFIGURATION_FACTORY_HPP
+#ifndef DOGEN_FORMATTERS_TYPES_DECORATION_PROPERTIES_FACTORY_HPP
+#define DOGEN_FORMATTERS_TYPES_DECORATION_PROPERTIES_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -33,7 +33,7 @@
 #include "dogen/formatters/types/repository.hpp"
 #include "dogen/formatters/types/modeline_group.hpp"
 #include "dogen/formatters/types/decoration_annotations.hpp"
-#include "dogen/formatters/types/decoration_configuration.hpp"
+#include "dogen/formatters/types/decoration_properties.hpp"
 #include "dogen/formatters/types/decoration_annotations_factory.hpp"
 
 namespace dogen {
@@ -42,7 +42,7 @@ namespace formatters {
 /**
  * @brief Creates the decoration configuration.
  */
-class decoration_configuration_factory {
+class decoration_properties_factory {
 public:
     /**
      * @brief Initialise a new decoration configuration factory,
@@ -51,7 +51,7 @@ public:
      *
      * @param rp where to look up reference data.
      */
-    decoration_configuration_factory(const dynamic::repository& drp,
+    decoration_properties_factory(const dynamic::repository& drp,
         const repository& rp);
 
     /**
@@ -61,7 +61,7 @@ public:
      * @param rp where to look up reference data.
      * @param fallback object to use to construct defaults, if any.
      */
-    decoration_configuration_factory(const dynamic::repository& drp,
+    decoration_properties_factory(const dynamic::repository& drp,
         const repository& rp, const dynamic::object& fallback);
 
 private:
@@ -122,7 +122,7 @@ private:
      * @brief Internal method to generate the decoration
      * configuration.
      */
-    decoration_configuration make(const std::string& modeline_name,
+    decoration_properties make(const std::string& modeline_name,
         const decoration_annotations& fa) const;
 
 public:
@@ -130,8 +130,8 @@ public:
      * @brief Generates the decoration configuration.
      */
     /**@{*/
-    decoration_configuration make(const std::string& modeline_name) const;
-    decoration_configuration make(const std::string& modeline_name,
+    decoration_properties make(const std::string& modeline_name) const;
+    decoration_properties make(const std::string& modeline_name,
         const dynamic::object& o) const;
     /**@}*/
 

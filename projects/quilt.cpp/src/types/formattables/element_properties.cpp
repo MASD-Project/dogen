@@ -26,7 +26,7 @@ namespace cpp {
 namespace formattables {
 
 element_properties::element_properties(element_properties&& rhs)
-    : decoration_configuration_(std::move(rhs.decoration_configuration_)),
+    : decoration_properties_(std::move(rhs.decoration_properties_)),
       aspect_properties_(std::move(rhs.aspect_properties_)),
       formatter_properties_(std::move(rhs.formatter_properties_)),
       helper_properties_(std::move(rhs.helper_properties_)),
@@ -35,14 +35,14 @@ element_properties::element_properties(element_properties&& rhs)
       odb_properties_(std::move(rhs.odb_properties_)) { }
 
 element_properties::element_properties(
-    const boost::optional<dogen::formatters::decoration_configuration>& decoration_configuration,
+    const boost::optional<dogen::formatters::decoration_properties>& decoration_properties,
     const dogen::quilt::cpp::formattables::aspect_properties& aspect_properties,
     const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties>& formatter_properties,
     const std::list<dogen::quilt::cpp::formattables::helper_properties>& helper_properties,
     const std::unordered_map<std::string, std::string>& canonical_formatter_to_formatter,
     const boost::optional<dogen::quilt::cpp::formattables::profile_group>& local_profile_group,
     const boost::optional<dogen::quilt::cpp::formattables::odb_properties>& odb_properties)
-    : decoration_configuration_(decoration_configuration),
+    : decoration_properties_(decoration_properties),
       aspect_properties_(aspect_properties),
       formatter_properties_(formatter_properties),
       helper_properties_(helper_properties),
@@ -52,7 +52,7 @@ element_properties::element_properties(
 
 void element_properties::swap(element_properties& other) noexcept {
     using std::swap;
-    swap(decoration_configuration_, other.decoration_configuration_);
+    swap(decoration_properties_, other.decoration_properties_);
     swap(aspect_properties_, other.aspect_properties_);
     swap(formatter_properties_, other.formatter_properties_);
     swap(helper_properties_, other.helper_properties_);
@@ -62,7 +62,7 @@ void element_properties::swap(element_properties& other) noexcept {
 }
 
 bool element_properties::operator==(const element_properties& rhs) const {
-    return decoration_configuration_ == rhs.decoration_configuration_ &&
+    return decoration_properties_ == rhs.decoration_properties_ &&
         aspect_properties_ == rhs.aspect_properties_ &&
         formatter_properties_ == rhs.formatter_properties_ &&
         helper_properties_ == rhs.helper_properties_ &&
@@ -77,20 +77,20 @@ element_properties& element_properties::operator=(element_properties other) {
     return *this;
 }
 
-const boost::optional<dogen::formatters::decoration_configuration>& element_properties::decoration_configuration() const {
-    return decoration_configuration_;
+const boost::optional<dogen::formatters::decoration_properties>& element_properties::decoration_properties() const {
+    return decoration_properties_;
 }
 
-boost::optional<dogen::formatters::decoration_configuration>& element_properties::decoration_configuration() {
-    return decoration_configuration_;
+boost::optional<dogen::formatters::decoration_properties>& element_properties::decoration_properties() {
+    return decoration_properties_;
 }
 
-void element_properties::decoration_configuration(const boost::optional<dogen::formatters::decoration_configuration>& v) {
-    decoration_configuration_ = v;
+void element_properties::decoration_properties(const boost::optional<dogen::formatters::decoration_properties>& v) {
+    decoration_properties_ = v;
 }
 
-void element_properties::decoration_configuration(const boost::optional<dogen::formatters::decoration_configuration>&& v) {
-    decoration_configuration_ = std::move(v);
+void element_properties::decoration_properties(const boost::optional<dogen::formatters::decoration_properties>&& v) {
+    decoration_properties_ = std::move(v);
 }
 
 const dogen::quilt::cpp::formattables::aspect_properties& element_properties::aspect_properties() const {

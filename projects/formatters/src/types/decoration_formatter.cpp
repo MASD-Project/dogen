@@ -71,7 +71,7 @@ add_licence(std::list<std::string>& content, const licence& l) const {
 void decoration_formatter::format_preamble(
     std::ostream& s, const comment_styles& single_line_cs,
     const comment_styles& multi_line_cs,
-    const decoration_configuration& dc) const {
+    const decoration_properties& dc) const {
 
     bool is_top(false);
     const auto top(modeline_locations::top);
@@ -114,12 +114,12 @@ void decoration_formatter::format_preamble(
 
 void decoration_formatter::
 format_preamble(std::ostream& s, const comment_styles& cs,
-    const decoration_configuration& dc) const {
+    const decoration_properties& dc) const {
     format_preamble(s, cs, cs, dc);
 }
 
 void decoration_formatter::format_postamble(std::ostream& s,
-    const comment_styles& cs, const decoration_configuration& dc) const {
+    const comment_styles& cs, const decoration_properties& dc) const {
     if (!dc.modeline())
         return;
 

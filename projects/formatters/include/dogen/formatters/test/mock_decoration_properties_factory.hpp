@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TEST_MOCK_DECORATION_CONFIGURATION_FACTORY_HPP
-#define DOGEN_FORMATTERS_TEST_MOCK_DECORATION_CONFIGURATION_FACTORY_HPP
+#ifndef DOGEN_FORMATTERS_TEST_MOCK_DECORATION_PROPERTIES_FACTORY_HPP
+#define DOGEN_FORMATTERS_TEST_MOCK_DECORATION_PROPERTIES_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,13 +30,13 @@
 #include "dogen/formatters/types/licence.hpp"
 #include "dogen/formatters/types/modeline.hpp"
 #include "dogen/formatters/types/modeline_locations.hpp"
-#include "dogen/formatters/types/decoration_configuration.hpp"
+#include "dogen/formatters/types/decoration_properties.hpp"
 
 namespace dogen {
 namespace formatters {
 namespace test {
 
-class mock_decoration_configuration_factory {
+class mock_decoration_properties_factory {
 public:
     /**
      * @brief Generates a mode line.
@@ -65,21 +65,21 @@ public:
     std::string make_header_guard(const bool is_empty = false) const;
 
     /**
-     * @brief Creates a decoration configuration.
+     * @brief Creates the decoration properties.
      *
-     * If called without parameters, creates a decoration
-     * configuration with sensible defaults.
+     * If called without parameters, creates decoration
+     * properties with sensible defaults.
      */
-    decoration_configuration make_decoration_configuration(
+    decoration_properties make_decoration_properties(
         const modeline_locations ml = modeline_locations::top,
         const bool use_multiline_licence = false,
         const bool use_empty_licence = false,
         const bool use_empty_marker = false) const;
 
     /**
-     * @brief Creates an empty decoration configuration.
+     * @brief Creates empty decoration properties.
      */
-    decoration_configuration make_empty_decoration_configuration() const;
+    decoration_properties make_empty_decoration_properties() const;
 };
 
 } } }

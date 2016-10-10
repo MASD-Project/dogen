@@ -23,7 +23,7 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen/formatters/io/licence_io.hpp"
 #include "dogen/formatters/io/modeline_io.hpp"
-#include "dogen/formatters/io/decoration_configuration_io.hpp"
+#include "dogen/formatters/io/decoration_properties_io.hpp"
 
 namespace boost {
 
@@ -65,7 +65,7 @@ inline std::string tidy_up_string(std::string s) {
 namespace dogen {
 namespace formatters {
 
-std::ostream& operator<<(std::ostream& s, const decoration_configuration& v) {
+std::ostream& operator<<(std::ostream& s, const decoration_properties& v) {
     boost::io::ios_flags_saver ifs(s);
     s.setf(std::ios_base::boolalpha);
     s.setf(std::ios::fixed, std::ios::floatfield);
@@ -73,7 +73,7 @@ std::ostream& operator<<(std::ostream& s, const decoration_configuration& v) {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"dogen::formatters::decoration_configuration\"" << ", "
+      << "\"__type__\": " << "\"dogen::formatters::decoration_properties\"" << ", "
       << "\"generate_decoration\": " << v.generate_decoration() << ", "
       << "\"modeline\": " << v.modeline() << ", "
       << "\"licence\": " << v.licence() << ", "

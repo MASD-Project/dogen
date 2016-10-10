@@ -18,25 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_SERIALIZATION_DECORATION_CONFIGURATION_SER_HPP
-#define DOGEN_FORMATTERS_SERIALIZATION_DECORATION_CONFIGURATION_SER_HPP
+#ifndef DOGEN_FORMATTERS_SERIALIZATION_DECORATION_PROPERTIES_SER_HPP
+#define DOGEN_FORMATTERS_SERIALIZATION_DECORATION_PROPERTIES_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <boost/serialization/split_free.hpp>
-#include "dogen/formatters/types/decoration_configuration.hpp"
+#include "dogen/formatters/types/decoration_properties.hpp"
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::formatters::decoration_configuration)
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::formatters::decoration_properties)
 namespace boost {
 namespace serialization {
 
 template<typename Archive>
-void save(Archive& ar, const dogen::formatters::decoration_configuration& v, unsigned int version);
+void save(Archive& ar, const dogen::formatters::decoration_properties& v, unsigned int version);
 
 template<typename Archive>
-void load(Archive& ar, dogen::formatters::decoration_configuration& v, unsigned int version);
+void load(Archive& ar, dogen::formatters::decoration_properties& v, unsigned int version);
 
 } }
 

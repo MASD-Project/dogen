@@ -30,7 +30,7 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/stitch/serialization/annotations_ser.hpp"
 #include "dogen/stitch/serialization/configuration_ser.hpp"
-#include "dogen/formatters/serialization/decoration_configuration_ser.hpp"
+#include "dogen/formatters/serialization/decoration_properties_ser.hpp"
 
 namespace boost {
 namespace serialization {
@@ -39,7 +39,7 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::stitch::configuration& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("decoration_configuration", v.decoration_configuration_);
+    ar << make_nvp("decoration_properties", v.decoration_properties_);
     ar << make_nvp("annotations", v.annotations_);
 }
 
@@ -47,7 +47,7 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::stitch::configuration& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("decoration_configuration", v.decoration_configuration_);
+    ar >> make_nvp("decoration_properties", v.decoration_properties_);
     ar >> make_nvp("annotations", v.annotations_);
 }
 

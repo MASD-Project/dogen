@@ -151,7 +151,7 @@ dogen::formatters::file formatter::format(const text_template& tt) const {
     {
         const auto& id(ss.inclusion_dependencies());
         dogen::formatters::cpp::scoped_boilerplate_formatter
-            sbf(s, tt.configuration().decoration_configuration(), id,
+            sbf(s, tt.configuration().decoration_properties(), id,
                 empty_header_guard);
 
         dogen::formatters::cpp::scoped_namespace_formatter snf(

@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/formatters/test/mock_decoration_configuration_factory.hpp"
+#include "dogen/formatters/test/mock_decoration_properties_factory.hpp"
 
 namespace  {
 
@@ -34,7 +34,7 @@ namespace dogen {
 namespace formatters {
 namespace test {
 
-modeline mock_decoration_configuration_factory::
+modeline mock_decoration_properties_factory::
 make_modeline(const modeline_locations l) const {
     modeline r;
     r.editor(editors::emacs);
@@ -48,7 +48,7 @@ make_modeline(const modeline_locations l) const {
     return r;
 }
 
-licence mock_decoration_configuration_factory::
+licence mock_decoration_properties_factory::
 make_licence(const bool is_empty, const bool is_multiline) const {
     licence r;
     if (is_empty)
@@ -69,7 +69,7 @@ make_licence(const bool is_empty, const bool is_multiline) const {
     return r;
 }
 
-std::list<std::string> mock_decoration_configuration_factory::make_includes(
+std::list<std::string> mock_decoration_properties_factory::make_includes(
     const bool is_empty) const {
     std::list<std::string> r;
     if (is_empty)
@@ -83,33 +83,33 @@ std::list<std::string> mock_decoration_configuration_factory::make_includes(
     return r;
 }
 
-std::string mock_decoration_configuration_factory::
+std::string mock_decoration_properties_factory::
 make_marker(const bool is_empty) const {
     return is_empty ? empty_marker : marker;
 }
 
-std::string mock_decoration_configuration_factory::
+std::string mock_decoration_properties_factory::
 make_header_guard(const bool is_empty) const {
     return is_empty ? empty_header_guard : header_guard;
 }
 
-decoration_configuration mock_decoration_configuration_factory::
-make_decoration_configuration(const modeline_locations ml,
+decoration_properties mock_decoration_properties_factory::
+make_decoration_properties(const modeline_locations ml,
     const bool use_multiline_licence, const bool use_empty_licence,
     const bool use_empty_marker) const {
     const auto inc(make_includes());
     const auto m(make_modeline(ml));
     const auto l(make_licence(use_empty_licence, use_multiline_licence));
     const auto mk(make_marker(use_empty_marker));
-    return decoration_configuration(true/*generate_preamble*/, m, l, mk);
+    return decoration_properties(true/*generate_preamble*/, m, l, mk);
 }
 
-decoration_configuration mock_decoration_configuration_factory::
-make_empty_decoration_configuration() const {
+decoration_properties mock_decoration_properties_factory::
+make_empty_decoration_properties() const {
     const modeline m;
     licence l;
     const auto mk(make_marker(true/*empty_marker*/));
-    return decoration_configuration(true/*generate_preamble*/, m, l, mk);
+    return decoration_properties(true/*generate_preamble*/, m, l, mk);
 }
 
 } } }

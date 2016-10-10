@@ -31,7 +31,7 @@
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/yarn/types/model.hpp"
-#include "dogen/formatters/types/decoration_configuration_factory.hpp"
+#include "dogen/formatters/types/decoration_properties_factory.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/formattables/locator.hpp"
 #include "dogen/quilt.cpp/types/formattables/model.hpp"
@@ -62,7 +62,7 @@ private:
         const formatters::container& fc, const locator& l, model& fm) const;
 
     void expand_decoration(
-        const dogen::formatters::decoration_configuration_factory& dcf,
+        const dogen::formatters::decoration_properties_factory& dpf,
         model& fm) const;
 
     void expand_aspects(const dynamic::repository& drp, model& fm) const;
@@ -83,7 +83,7 @@ public:
     void expand(const std::forward_list<boost::filesystem::path>& dirs,
         const dynamic::repository& drp,
         const dynamic::object& root_object,
-        const dogen::formatters::decoration_configuration_factory& dcf,
+        const dogen::formatters::decoration_properties_factory& dpf,
         const formatters::container& fc, const locator& l, model& fm) const;
 };
 

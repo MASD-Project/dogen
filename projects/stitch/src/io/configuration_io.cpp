@@ -21,11 +21,11 @@
 #include <ostream>
 #include "dogen/stitch/io/annotations_io.hpp"
 #include "dogen/stitch/io/configuration_io.hpp"
-#include "dogen/formatters/io/decoration_configuration_io.hpp"
+#include "dogen/formatters/io/decoration_properties_io.hpp"
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::formatters::decoration_configuration>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::formatters::decoration_properties>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)
@@ -44,7 +44,7 @@ namespace stitch {
 std::ostream& operator<<(std::ostream& s, const configuration& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::stitch::configuration\"" << ", "
-      << "\"decoration_configuration\": " << v.decoration_configuration() << ", "
+      << "\"decoration_properties\": " << v.decoration_properties() << ", "
       << "\"annotations\": " << v.annotations()
       << " }";
     return(s);

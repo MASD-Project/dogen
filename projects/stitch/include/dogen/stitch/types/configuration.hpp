@@ -28,7 +28,7 @@
 #include <algorithm>
 #include <boost/optional.hpp>
 #include "dogen/stitch/types/annotations.hpp"
-#include "dogen/formatters/types/decoration_configuration.hpp"
+#include "dogen/formatters/types/decoration_properties.hpp"
 #include "dogen/stitch/serialization/configuration_fwd_ser.hpp"
 
 namespace dogen {
@@ -45,7 +45,7 @@ public:
 
 public:
     configuration(
-        const boost::optional<dogen::formatters::decoration_configuration>& decoration_configuration,
+        const boost::optional<dogen::formatters::decoration_properties>& decoration_properties,
         const dogen::stitch::annotations& annotations);
 
 private:
@@ -56,10 +56,10 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::stitch::configuration& v, unsigned int version);
 
 public:
-    const boost::optional<dogen::formatters::decoration_configuration>& decoration_configuration() const;
-    boost::optional<dogen::formatters::decoration_configuration>& decoration_configuration();
-    void decoration_configuration(const boost::optional<dogen::formatters::decoration_configuration>& v);
-    void decoration_configuration(const boost::optional<dogen::formatters::decoration_configuration>&& v);
+    const boost::optional<dogen::formatters::decoration_properties>& decoration_properties() const;
+    boost::optional<dogen::formatters::decoration_properties>& decoration_properties();
+    void decoration_properties(const boost::optional<dogen::formatters::decoration_properties>& v);
+    void decoration_properties(const boost::optional<dogen::formatters::decoration_properties>&& v);
 
     const dogen::stitch::annotations& annotations() const;
     dogen::stitch::annotations& annotations();
@@ -77,7 +77,7 @@ public:
     configuration& operator=(configuration other);
 
 private:
-    boost::optional<dogen::formatters::decoration_configuration> decoration_configuration_;
+    boost::optional<dogen::formatters::decoration_properties> decoration_properties_;
     dogen::stitch::annotations annotations_;
 };
 

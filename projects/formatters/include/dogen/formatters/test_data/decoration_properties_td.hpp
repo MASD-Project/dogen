@@ -18,35 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_HASH_DECORATION_CONFIGURATION_HASH_HPP
-#define DOGEN_FORMATTERS_HASH_DECORATION_CONFIGURATION_HASH_HPP
+#ifndef DOGEN_FORMATTERS_TEST_DATA_DECORATION_PROPERTIES_TD_HPP
+#define DOGEN_FORMATTERS_TEST_DATA_DECORATION_PROPERTIES_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/formatters/types/decoration_configuration.hpp"
+#include "dogen/formatters/types/decoration_properties.hpp"
 
 namespace dogen {
 namespace formatters {
 
-struct decoration_configuration_hasher {
+class decoration_properties_generator {
 public:
-    static std::size_t hash(const decoration_configuration& v);
+    decoration_properties_generator();
+
+public:
+    typedef dogen::formatters::decoration_properties result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
 };
 
 } }
 
-namespace std {
-
-template<>
-struct hash<dogen::formatters::decoration_configuration> {
-public:
-    size_t operator()(const dogen::formatters::decoration_configuration& v) const {
-        return dogen::formatters::decoration_configuration_hasher::hash(v);
-    }
-};
-
-}
 #endif

@@ -13002,10 +13002,10 @@ main, or from another initialiser.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#decoration_configuration#</dia:string>
+            <dia:string>#decoration_properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::optional&lt;formatters::decoration_configuration&gt;#</dia:string>
+            <dia:string>#boost::optional&lt;formatters::decoration_properties&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

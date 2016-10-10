@@ -24,23 +24,23 @@ namespace dogen {
 namespace stitch {
 
 configuration::configuration(configuration&& rhs)
-    : decoration_configuration_(std::move(rhs.decoration_configuration_)),
+    : decoration_properties_(std::move(rhs.decoration_properties_)),
       annotations_(std::move(rhs.annotations_)) { }
 
 configuration::configuration(
-    const boost::optional<dogen::formatters::decoration_configuration>& decoration_configuration,
+    const boost::optional<dogen::formatters::decoration_properties>& decoration_properties,
     const dogen::stitch::annotations& annotations)
-    : decoration_configuration_(decoration_configuration),
+    : decoration_properties_(decoration_properties),
       annotations_(annotations) { }
 
 void configuration::swap(configuration& other) noexcept {
     using std::swap;
-    swap(decoration_configuration_, other.decoration_configuration_);
+    swap(decoration_properties_, other.decoration_properties_);
     swap(annotations_, other.annotations_);
 }
 
 bool configuration::operator==(const configuration& rhs) const {
-    return decoration_configuration_ == rhs.decoration_configuration_ &&
+    return decoration_properties_ == rhs.decoration_properties_ &&
         annotations_ == rhs.annotations_;
 }
 
@@ -50,20 +50,20 @@ configuration& configuration::operator=(configuration other) {
     return *this;
 }
 
-const boost::optional<dogen::formatters::decoration_configuration>& configuration::decoration_configuration() const {
-    return decoration_configuration_;
+const boost::optional<dogen::formatters::decoration_properties>& configuration::decoration_properties() const {
+    return decoration_properties_;
 }
 
-boost::optional<dogen::formatters::decoration_configuration>& configuration::decoration_configuration() {
-    return decoration_configuration_;
+boost::optional<dogen::formatters::decoration_properties>& configuration::decoration_properties() {
+    return decoration_properties_;
 }
 
-void configuration::decoration_configuration(const boost::optional<dogen::formatters::decoration_configuration>& v) {
-    decoration_configuration_ = v;
+void configuration::decoration_properties(const boost::optional<dogen::formatters::decoration_properties>& v) {
+    decoration_properties_ = v;
 }
 
-void configuration::decoration_configuration(const boost::optional<dogen::formatters::decoration_configuration>&& v) {
-    decoration_configuration_ = std::move(v);
+void configuration::decoration_properties(const boost::optional<dogen::formatters::decoration_properties>&& v) {
+    decoration_properties_ = std::move(v);
 }
 
 const dogen::stitch::annotations& configuration::annotations() const {

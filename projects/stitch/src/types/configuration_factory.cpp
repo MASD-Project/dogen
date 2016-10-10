@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/types/decoration_configuration_factory.hpp"
+#include "dogen/formatters/types/decoration_properties_factory.hpp"
 #include "dogen/stitch/types/annotations_factory.hpp"
 #include "dogen/stitch/types/configuration_factory.hpp"
 
@@ -37,11 +37,11 @@ configuration_factory(const dynamic::repository& dynamic_repository,
     : dynamic_repository_(dynamic_repository),
       formatters_repository_(formatters_repository) {}
 
-boost::optional<formatters::decoration_configuration> configuration_factory::
-make_decoration_configuration(const dynamic::object& o) const {
-    using dogen::formatters::decoration_configuration_factory;
+boost::optional<formatters::decoration_properties> configuration_factory::
+make_decoration_properties(const dynamic::object& o) const {
+    using dogen::formatters::decoration_properties_factory;
     const auto& drp(dynamic_repository_);
-    decoration_configuration_factory f(drp, formatters_repository_);
+    decoration_properties_factory f(drp, formatters_repository_);
     return f.make(cpp_modeline_name, o);
 }
 
@@ -54,7 +54,7 @@ make_annotations(const dynamic::object& o) const {
 configuration
 configuration_factory::make(const dynamic::object& o) const {
     configuration r;
-    r.decoration_configuration(make_decoration_configuration(o));
+    r.decoration_properties(make_decoration_properties(o));
     r.annotations(make_annotations(o));
     return r;
 }

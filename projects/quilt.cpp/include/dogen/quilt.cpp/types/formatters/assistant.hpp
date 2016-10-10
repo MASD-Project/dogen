@@ -234,7 +234,7 @@ public:
     /**@{*/
     void make_decoration_preamble();
     void make_decoration_preamble(
-        const boost::optional<dogen::formatters::decoration_configuration> dc);
+        const boost::optional<dogen::formatters::decoration_properties> dc);
     /**@}*/
 
 public:

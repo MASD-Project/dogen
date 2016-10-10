@@ -37,7 +37,7 @@
 #include "dogen/formatters/test_data/modeline_group_td.hpp"
 #include "dogen/formatters/test_data/modeline_locations_td.hpp"
 #include "dogen/formatters/test_data/infix_configuration_td.hpp"
+#include "dogen/formatters/test_data/decoration_properties_td.hpp"
 #include "dogen/formatters/test_data/decoration_annotations_td.hpp"
-#include "dogen/formatters/test_data/decoration_configuration_td.hpp"
 
 #endif

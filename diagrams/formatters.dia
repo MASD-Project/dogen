@@ -3758,7 +3758,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#decoration_configuration#</dia:string>
+        <dia:string>#decoration_properties#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
@@ -4575,7 +4575,7 @@ then make use of it.
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#decoration_configuration_factory#</dia:string>
+        <dia:string>#decoration_properties_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -8575,13 +8575,13 @@ then make use of it.
         <dia:point val="114,-23"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="113.95,-23.05;148.045,-13.15"/>
+        <dia:rectangle val="113.95,-23.05;146.89,-13.15"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="114,-23"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="33.994999999999997"/>
+        <dia:real val="32.839999999999996"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="9.8000000000000007"/>
@@ -8699,10 +8699,10 @@ then make use of it.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#decoration_configuration_#</dia:string>
+            <dia:string>#decoration_properties_#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::optional&lt;formatters::decoration_configuration&gt;#</dia:string>
+            <dia:string>#boost::optional&lt;formatters::decoration_properties&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -8816,10 +8816,10 @@ then make use of it.
             </dia:composite>
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#fp#</dia:string>
+                <dia:string>#dp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#boost::optional&lt;formatters::decoration_configuration&gt;#</dia:string>
+                <dia:string>#boost::optional&lt;formatters::decoration_properties&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -9438,17 +9438,17 @@ then make use of it.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="129.265,-23"/>
+        <dia:point val="130.42,-23"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="99.09,-27.75;130.015,-21.2"/>
+        <dia:rectangle val="99.09,-27.75;131.17,-21.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="129.265,-23"/>
-        <dia:point val="129.265,-27"/>
+        <dia:point val="130.42,-23"/>
+        <dia:point val="130.42,-27"/>
         <dia:point val="99.14,-27"/>
         <dia:point val="99.14,-22"/>
       </dia:attribute>

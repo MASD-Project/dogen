@@ -23,12 +23,12 @@
 #include "dogen/formatters/types/hydration_workflow.hpp"
 #include "dogen/formatters/types/code_generation_marker_factory.hpp"
 #include "dogen/formatters/types/building_error.hpp"
-#include "dogen/formatters/types/decoration_configuration_factory.hpp"
+#include "dogen/formatters/types/decoration_properties_factory.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("formatters.decoration_configuration_factory"));
+auto lg(logger_factory("formatters.decoration_properties_factory"));
 
 const std::string missing_context_ptr("Context pointer is null");
 const std::string licence_not_found("Licence not found: ");
@@ -40,13 +40,13 @@ const std::string modeline_not_found("Modeline not found: ");
 namespace dogen {
 namespace formatters {
 
-decoration_configuration_factory::
-decoration_configuration_factory(const dynamic::repository& drp,
+decoration_properties_factory::
+decoration_properties_factory(const dynamic::repository& drp,
     const repository& rp) : repository_(rp), annotations_factory_(drp),
                             default_annotations_() { }
 
-decoration_configuration_factory::
-decoration_configuration_factory(const dynamic::repository& drp,
+decoration_properties_factory::
+decoration_properties_factory(const dynamic::repository& drp,
     const repository& rp, const dynamic::object& fallback)
     : repository_(rp), annotations_factory_(drp),
       default_annotations_(annotations_factory_.make(fallback)),
@@ -56,7 +56,7 @@ decoration_configuration_factory(const dynamic::repository& drp,
       default_modeline_group_(get_modeline_group(default_annotations_)),
       default_marker_(get_marker(default_annotations_)) {}
 
-boost::optional<std::string> decoration_configuration_factory::
+boost::optional<std::string> decoration_properties_factory::
 get_licence_text(const decoration_annotations& fa) const {
     if (fa.licence_name().empty())
         return boost::optional<std::string>();
@@ -70,7 +70,7 @@ get_licence_text(const decoration_annotations& fa) const {
     return i->second;
 }
 
-boost::optional<licence> decoration_configuration_factory::
+boost::optional<licence> decoration_properties_factory::
 get_licence(const decoration_annotations& fa) const {
     const auto overriden_licence_text(get_licence_text(fa));
     const auto overriden_copyright_notices(fa.copyright_notices());
@@ -95,7 +95,7 @@ get_licence(const decoration_annotations& fa) const {
     return r;
 }
 
-boost::optional<modeline_group> decoration_configuration_factory::
+boost::optional<modeline_group> decoration_properties_factory::
 get_modeline_group(const decoration_annotations& fa) const {
     if (fa.modeline_group_name().empty())
         return boost::optional<modeline_group>();
@@ -109,7 +109,7 @@ get_modeline_group(const decoration_annotations& fa) const {
     return i->second;
 }
 
-modeline decoration_configuration_factory::get_modeline_from_group(
+modeline decoration_properties_factory::get_modeline_from_group(
     const std::string& modeline_name, const modeline_group& mg) const {
     const auto i(mg.modelines().find(modeline_name));
     if (i == mg.modelines().end()) {
@@ -121,7 +121,7 @@ modeline decoration_configuration_factory::get_modeline_from_group(
 }
 
 boost::optional<modeline>
-decoration_configuration_factory::get_modeline(const std::string& modeline_name,
+decoration_properties_factory::get_modeline(const std::string& modeline_name,
     const decoration_annotations& fa) const {
 
     const auto overridden_modeline_group(get_modeline_group(fa));
@@ -136,7 +136,7 @@ decoration_configuration_factory::get_modeline(const std::string& modeline_name,
     return get_modeline_from_group(modeline_name, *default_modeline_group_);
 }
 
-boost::optional<std::string> decoration_configuration_factory::
+boost::optional<std::string> decoration_properties_factory::
 get_marker(const decoration_annotations& fa) const {
 
     const auto& msg(fa.marker_message());
@@ -149,7 +149,7 @@ get_marker(const decoration_annotations& fa) const {
     return f.make();
 }
 
-std::string decoration_configuration_factory::
+std::string decoration_properties_factory::
 get_marker_or_default(const decoration_annotations& fa) const {
     const auto overridden_marker(get_marker(fa));
     if (overridden_marker)
@@ -161,7 +161,7 @@ get_marker_or_default(const decoration_annotations& fa) const {
     return std::string();
 }
 
-bool decoration_configuration_factory::
+bool decoration_properties_factory::
 get_generate_decoration_or_default(const decoration_annotations& fa) const {
     const auto overriden_generate_decoration(fa.generate_decoration());
     if (!overriden_generate_decoration && !default_generate_decoration_)
@@ -173,24 +173,24 @@ get_generate_decoration_or_default(const decoration_annotations& fa) const {
         return *default_generate_decoration_;
 }
 
-decoration_configuration
-decoration_configuration_factory::make(const std::string& modeline_name,
+decoration_properties
+decoration_properties_factory::make(const std::string& modeline_name,
     const decoration_annotations& fa) const {
     const auto modeline(get_modeline(modeline_name, fa));
     const auto licence(get_licence(fa));
     const auto marker(get_marker_or_default(fa));
     const bool gd(get_generate_decoration_or_default(fa));
-    decoration_configuration r(gd, modeline, licence, marker);
+    decoration_properties r(gd, modeline, licence, marker);
     return r;
 }
 
-decoration_configuration decoration_configuration_factory::
+decoration_properties decoration_properties_factory::
 make(const std::string& modeline_name) const {
     const auto da = decoration_annotations();
     return make(modeline_name, da);
 }
 
-decoration_configuration decoration_configuration_factory::make(
+decoration_properties decoration_properties_factory::make(
     const std::string& modeline_name, const dynamic::object& o) const {
     const auto da(annotations_factory_.make(o));
     return make(modeline_name, da);

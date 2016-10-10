@@ -21,7 +21,7 @@
 #include <sstream>
 #include "dogen/formatters/test_data/licence_td.hpp"
 #include "dogen/formatters/test_data/modeline_td.hpp"
-#include "dogen/formatters/test_data/decoration_configuration_td.hpp"
+#include "dogen/formatters/test_data/decoration_properties_td.hpp"
 
 namespace {
 
@@ -64,9 +64,9 @@ std::string create_std_string(const unsigned int position) {
 namespace dogen {
 namespace formatters {
 
-decoration_configuration_generator::decoration_configuration_generator() : position_(0) { }
+decoration_properties_generator::decoration_properties_generator() : position_(0) { }
 
-void decoration_configuration_generator::
+void decoration_properties_generator::
 populate(const unsigned int position, result_type& v) {
     v.generate_decoration(create_bool(position + 0));
     v.modeline(create_boost_optional_dogen_formatters_modeline(position + 1));
@@ -74,22 +74,22 @@ populate(const unsigned int position, result_type& v) {
     v.code_generation_marker(create_std_string(position + 3));
 }
 
-decoration_configuration_generator::result_type
-decoration_configuration_generator::create(const unsigned int position) {
-    decoration_configuration r;
-    decoration_configuration_generator::populate(position, r);
+decoration_properties_generator::result_type
+decoration_properties_generator::create(const unsigned int position) {
+    decoration_properties r;
+    decoration_properties_generator::populate(position, r);
     return r;
 }
 
-decoration_configuration_generator::result_type*
-decoration_configuration_generator::create_ptr(const unsigned int position) {
-    decoration_configuration* p = new decoration_configuration();
-    decoration_configuration_generator::populate(position, *p);
+decoration_properties_generator::result_type*
+decoration_properties_generator::create_ptr(const unsigned int position) {
+    decoration_properties* p = new decoration_properties();
+    decoration_properties_generator::populate(position, *p);
     return p;
 }
 
-decoration_configuration_generator::result_type
-decoration_configuration_generator::operator()() {
+decoration_properties_generator::result_type
+decoration_properties_generator::operator()() {
     return create(position_++);
 }
 

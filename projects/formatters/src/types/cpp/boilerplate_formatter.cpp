@@ -34,7 +34,7 @@ boilerplate_formatter::boilerplate_formatter(
       generate_header_guards_(generate_header_guards) { }
 
 void boilerplate_formatter::
-format_preamble(std::ostream& s, const decoration_configuration& dc) const {
+format_preamble(std::ostream& s, const decoration_properties& dc) const {
     if (!generate_preamble_)
         return;
 
@@ -71,7 +71,7 @@ format_includes(std::ostream& s, const std::list<std::string>& includes) const {
 }
 
 void boilerplate_formatter::
-format_begin(std::ostream& s, const decoration_configuration& dc,
+format_begin(std::ostream& s, const decoration_properties& dc,
     const std::list<std::string>& includes,
     const std::string& header_guard) const {
 
@@ -81,13 +81,13 @@ format_begin(std::ostream& s, const decoration_configuration& dc,
 }
 
 void boilerplate_formatter::
-format_postamble(std::ostream& s, const decoration_configuration& dc) const {
+format_postamble(std::ostream& s, const decoration_properties& dc) const {
     decoration_formatter af;
     af.format_postamble(s, comment_styles::c_style, dc);
 }
 
 void boilerplate_formatter::
-format_end(std::ostream& s, const decoration_configuration& dc,
+format_end(std::ostream& s, const decoration_properties& dc,
     const std::string& header_guard) const {
     format_postamble(s, dc);
     format_guards_end(s, header_guard);

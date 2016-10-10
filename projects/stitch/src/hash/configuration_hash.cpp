@@ -20,7 +20,7 @@
  */
 #include "dogen/stitch/hash/annotations_hash.hpp"
 #include "dogen/stitch/hash/configuration_hash.hpp"
-#include "dogen/formatters/hash/decoration_configuration_hash.hpp"
+#include "dogen/formatters/hash/decoration_properties_hash.hpp"
 
 namespace {
 
@@ -30,7 +30,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_boost_optional_dogen_formatters_decoration_configuration(const boost::optional<dogen::formatters::decoration_configuration>& v) {
+inline std::size_t hash_boost_optional_dogen_formatters_decoration_properties(const boost::optional<dogen::formatters::decoration_properties>& v) {
     std::size_t seed(0);
 
     if (!v)
@@ -48,7 +48,7 @@ namespace stitch {
 std::size_t configuration_hasher::hash(const configuration& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_boost_optional_dogen_formatters_decoration_configuration(v.decoration_configuration()));
+    combine(seed, hash_boost_optional_dogen_formatters_decoration_properties(v.decoration_properties()));
     combine(seed, v.annotations());
 
     return seed;

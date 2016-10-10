@@ -20,19 +20,19 @@
  */
 #include "dogen/stitch/test_data/annotations_td.hpp"
 #include "dogen/stitch/test_data/configuration_td.hpp"
-#include "dogen/formatters/test_data/decoration_configuration_td.hpp"
+#include "dogen/formatters/test_data/decoration_properties_td.hpp"
 
 namespace {
 
-dogen::formatters::decoration_configuration
-create_dogen_formatters_decoration_configuration(const unsigned int position) {
-    return dogen::formatters::decoration_configuration_generator::create(position);
+dogen::formatters::decoration_properties
+create_dogen_formatters_decoration_properties(const unsigned int position) {
+    return dogen::formatters::decoration_properties_generator::create(position);
 }
 
-boost::optional<dogen::formatters::decoration_configuration>
-create_boost_optional_dogen_formatters_decoration_configuration(unsigned int position) {
-    boost::optional<dogen::formatters::decoration_configuration> r(
-        create_dogen_formatters_decoration_configuration(position));
+boost::optional<dogen::formatters::decoration_properties>
+create_boost_optional_dogen_formatters_decoration_properties(unsigned int position) {
+    boost::optional<dogen::formatters::decoration_properties> r(
+        create_dogen_formatters_decoration_properties(position));
     return r;
 }
 
@@ -50,7 +50,7 @@ configuration_generator::configuration_generator() : position_(0) { }
 
 void configuration_generator::
 populate(const unsigned int position, result_type& v) {
-    v.decoration_configuration(create_boost_optional_dogen_formatters_decoration_configuration(position + 0));
+    v.decoration_properties(create_boost_optional_dogen_formatters_decoration_properties(position + 0));
     v.annotations(create_dogen_stitch_annotations(position + 1));
 }
 

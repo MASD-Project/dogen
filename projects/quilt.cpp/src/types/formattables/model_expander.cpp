@@ -72,10 +72,10 @@ void model_expander::expand_inclusion(
 }
 
 void model_expander::expand_decoration(
-    const dogen::formatters::decoration_configuration_factory& dcf,
+    const dogen::formatters::decoration_properties_factory& dpf,
     model& fm) const {
     decoration_expander ex;
-    ex.expand(dcf, fm);
+    ex.expand(dpf, fm);
 }
 
 void model_expander::expand_aspects(const dynamic::repository& drp,
@@ -116,7 +116,7 @@ expand_facet_directories(const locator& l,model& fm) const {
 void model_expander::expand(
     const std::forward_list<boost::filesystem::path>& dirs,
     const dynamic::repository& drp, const dynamic::object& root_object,
-    const dogen::formatters::decoration_configuration_factory& dcf,
+    const dogen::formatters::decoration_properties_factory& dpf,
     const formatters::container& fc, const locator& l, model& fm) const {
 
     /*
@@ -139,7 +139,7 @@ void model_expander::expand(
      */
     expand_canonical_formatters(fc, fm);
     expand_inclusion(drp, fc, l, fm);
-    expand_decoration(dcf, fm);
+    expand_decoration(dpf, fm);
     expand_aspects(drp, fm);
     expand_helpers(drp, fc, fm);
 

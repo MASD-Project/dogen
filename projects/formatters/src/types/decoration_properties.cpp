@@ -18,21 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/types/decoration_configuration.hpp"
+#include "dogen/formatters/types/decoration_properties.hpp"
 
 namespace dogen {
 namespace formatters {
 
-decoration_configuration::decoration_configuration()
+decoration_properties::decoration_properties()
     : generate_decoration_(static_cast<bool>(0)) { }
 
-decoration_configuration::decoration_configuration(decoration_configuration&& rhs)
+decoration_properties::decoration_properties(decoration_properties&& rhs)
     : generate_decoration_(std::move(rhs.generate_decoration_)),
       modeline_(std::move(rhs.modeline_)),
       licence_(std::move(rhs.licence_)),
       code_generation_marker_(std::move(rhs.code_generation_marker_)) { }
 
-decoration_configuration::decoration_configuration(
+decoration_properties::decoration_properties(
     const bool generate_decoration,
     const boost::optional<dogen::formatters::modeline>& modeline,
     const boost::optional<dogen::formatters::licence>& licence,
@@ -42,7 +42,7 @@ decoration_configuration::decoration_configuration(
       licence_(licence),
       code_generation_marker_(code_generation_marker) { }
 
-void decoration_configuration::swap(decoration_configuration& other) noexcept {
+void decoration_properties::swap(decoration_properties& other) noexcept {
     using std::swap;
     swap(generate_decoration_, other.generate_decoration_);
     swap(modeline_, other.modeline_);
@@ -50,72 +50,72 @@ void decoration_configuration::swap(decoration_configuration& other) noexcept {
     swap(code_generation_marker_, other.code_generation_marker_);
 }
 
-bool decoration_configuration::operator==(const decoration_configuration& rhs) const {
+bool decoration_properties::operator==(const decoration_properties& rhs) const {
     return generate_decoration_ == rhs.generate_decoration_ &&
         modeline_ == rhs.modeline_ &&
         licence_ == rhs.licence_ &&
         code_generation_marker_ == rhs.code_generation_marker_;
 }
 
-decoration_configuration& decoration_configuration::operator=(decoration_configuration other) {
+decoration_properties& decoration_properties::operator=(decoration_properties other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-bool decoration_configuration::generate_decoration() const {
+bool decoration_properties::generate_decoration() const {
     return generate_decoration_;
 }
 
-void decoration_configuration::generate_decoration(const bool v) {
+void decoration_properties::generate_decoration(const bool v) {
     generate_decoration_ = v;
 }
 
-const boost::optional<dogen::formatters::modeline>& decoration_configuration::modeline() const {
+const boost::optional<dogen::formatters::modeline>& decoration_properties::modeline() const {
     return modeline_;
 }
 
-boost::optional<dogen::formatters::modeline>& decoration_configuration::modeline() {
+boost::optional<dogen::formatters::modeline>& decoration_properties::modeline() {
     return modeline_;
 }
 
-void decoration_configuration::modeline(const boost::optional<dogen::formatters::modeline>& v) {
+void decoration_properties::modeline(const boost::optional<dogen::formatters::modeline>& v) {
     modeline_ = v;
 }
 
-void decoration_configuration::modeline(const boost::optional<dogen::formatters::modeline>&& v) {
+void decoration_properties::modeline(const boost::optional<dogen::formatters::modeline>&& v) {
     modeline_ = std::move(v);
 }
 
-const boost::optional<dogen::formatters::licence>& decoration_configuration::licence() const {
+const boost::optional<dogen::formatters::licence>& decoration_properties::licence() const {
     return licence_;
 }
 
-boost::optional<dogen::formatters::licence>& decoration_configuration::licence() {
+boost::optional<dogen::formatters::licence>& decoration_properties::licence() {
     return licence_;
 }
 
-void decoration_configuration::licence(const boost::optional<dogen::formatters::licence>& v) {
+void decoration_properties::licence(const boost::optional<dogen::formatters::licence>& v) {
     licence_ = v;
 }
 
-void decoration_configuration::licence(const boost::optional<dogen::formatters::licence>&& v) {
+void decoration_properties::licence(const boost::optional<dogen::formatters::licence>&& v) {
     licence_ = std::move(v);
 }
 
-const std::string& decoration_configuration::code_generation_marker() const {
+const std::string& decoration_properties::code_generation_marker() const {
     return code_generation_marker_;
 }
 
-std::string& decoration_configuration::code_generation_marker() {
+std::string& decoration_properties::code_generation_marker() {
     return code_generation_marker_;
 }
 
-void decoration_configuration::code_generation_marker(const std::string& v) {
+void decoration_properties::code_generation_marker(const std::string& v) {
     code_generation_marker_ = v;
 }
 
-void decoration_configuration::code_generation_marker(const std::string&& v) {
+void decoration_properties::code_generation_marker(const std::string&& v) {
     code_generation_marker_ = std::move(v);
 }
 

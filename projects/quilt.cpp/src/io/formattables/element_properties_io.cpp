@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/formatters/io/decoration_configuration_io.hpp"
+#include "dogen/formatters/io/decoration_properties_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/profile_group_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/odb_properties_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/aspect_properties_io.hpp"
@@ -30,7 +30,7 @@
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::formatters::decoration_configuration>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::formatters::decoration_properties>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)
@@ -138,7 +138,7 @@ namespace formattables {
 std::ostream& operator<<(std::ostream& s, const element_properties& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::element_properties\"" << ", "
-      << "\"decoration_configuration\": " << v.decoration_configuration() << ", "
+      << "\"decoration_properties\": " << v.decoration_properties() << ", "
       << "\"aspect_properties\": " << v.aspect_properties() << ", "
       << "\"formatter_properties\": " << v.formatter_properties() << ", "
       << "\"helper_properties\": " << v.helper_properties() << ", "

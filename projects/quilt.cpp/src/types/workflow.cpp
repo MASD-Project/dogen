@@ -23,7 +23,7 @@
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/io/optional_io.hpp"
 #include "dogen/utility/filesystem/path.hpp"
-#include "dogen/formatters/io/decoration_configuration_io.hpp"
+#include "dogen/formatters/io/decoration_properties_io.hpp"
 #include "dogen/formatters/types/hydration_workflow.hpp"
 #include "dogen/dynamic/types/workflow.hpp"
 #include "dogen/quilt.cpp/types/formatters/workflow.hpp"
@@ -61,14 +61,14 @@ create_formatters_repository(
     return hw.hydrate(data_directories);
 }
 
-dogen::formatters::decoration_configuration_factory
-workflow::create_decoration_configuration_factory(
+dogen::formatters::decoration_properties_factory
+workflow::create_decoration_properties_factory(
     const dynamic::repository& drp,
     const dogen::formatters::repository& frp,
     const dynamic::object& root_object) const {
 
-    using dogen::formatters::decoration_configuration_factory;
-    decoration_configuration_factory r(drp, frp, root_object);
+    using dogen::formatters::decoration_properties_factory;
+    decoration_properties_factory r(drp, frp, root_object);
     return r;
 }
 
@@ -76,11 +76,11 @@ formattables::model workflow::create_formattables_model(
     const std::forward_list<boost::filesystem::path>& data_directories,
     const options::cpp_options& opts,
     const dynamic::repository& drp, const dynamic::object& root_object,
-    const dogen::formatters::decoration_configuration_factory& dcf,
+    const dogen::formatters::decoration_properties_factory& dpf,
     const formatters::container& fc, const yarn::model& m) const {
 
     formattables::workflow fw;
-    return fw.execute(data_directories, opts, drp, root_object, dcf, fc, m);
+    return fw.execute(data_directories, opts, drp, root_object, dpf, fc, m);
 }
 
 std::string workflow::name() const {
@@ -118,9 +118,9 @@ workflow::generate(const options::knitting_options& ko,
     const auto dd(make_data_directories());
     const auto frp(create_formatters_repository(dd));
     const auto ro(m.root_module().extensions());
-    const auto dcf(create_decoration_configuration_factory(drp, frp, ro));
+    const auto dpf(create_decoration_properties_factory(drp, frp, ro));
     const auto& fc(formatters::workflow::registrar().formatter_container());
-    const auto fm(create_formattables_model(dd, ko.cpp(), drp, ro, dcf, fc, m));
+    const auto fm(create_formattables_model(dd, ko.cpp(), drp, ro, dpf, fc, m));
     const auto r(format(fm));
 
     BOOST_LOG_SEV(lg, debug) << "Finished backend.";

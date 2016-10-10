@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TYPES_DECORATION_CONFIGURATION_HPP
-#define DOGEN_FORMATTERS_TYPES_DECORATION_CONFIGURATION_HPP
+#ifndef DOGEN_FORMATTERS_TYPES_DECORATION_PROPERTIES_HPP
+#define DOGEN_FORMATTERS_TYPES_DECORATION_PROPERTIES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,7 +30,7 @@
 #include <boost/optional.hpp>
 #include "dogen/formatters/types/licence.hpp"
 #include "dogen/formatters/types/modeline.hpp"
-#include "dogen/formatters/serialization/decoration_configuration_fwd_ser.hpp"
+#include "dogen/formatters/serialization/decoration_properties_fwd_ser.hpp"
 
 namespace dogen {
 namespace formatters {
@@ -38,19 +38,19 @@ namespace formatters {
 /**
  * @brief Configuration pertaining to file decoration.
  */
-class decoration_configuration final {
+class decoration_properties final {
 public:
-    decoration_configuration(const decoration_configuration&) = default;
-    ~decoration_configuration() = default;
+    decoration_properties(const decoration_properties&) = default;
+    ~decoration_properties() = default;
 
 public:
-    decoration_configuration();
+    decoration_properties();
 
 public:
-    decoration_configuration(decoration_configuration&& rhs);
+    decoration_properties(decoration_properties&& rhs);
 
 public:
-    decoration_configuration(
+    decoration_properties(
         const bool generate_decoration,
         const boost::optional<dogen::formatters::modeline>& modeline,
         const boost::optional<dogen::formatters::licence>& licence,
@@ -58,10 +58,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::formatters::decoration_configuration& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::formatters::decoration_properties& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::formatters::decoration_configuration& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::formatters::decoration_properties& v, unsigned int version);
 
 public:
     /**
@@ -103,14 +103,14 @@ public:
     /**@}*/
 
 public:
-    bool operator==(const decoration_configuration& rhs) const;
-    bool operator!=(const decoration_configuration& rhs) const {
+    bool operator==(const decoration_properties& rhs) const;
+    bool operator!=(const decoration_properties& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(decoration_configuration& other) noexcept;
-    decoration_configuration& operator=(decoration_configuration other);
+    void swap(decoration_properties& other) noexcept;
+    decoration_properties& operator=(decoration_properties other);
 
 private:
     bool generate_decoration_;
@@ -125,8 +125,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::formatters::decoration_configuration& lhs,
-    dogen::formatters::decoration_configuration& rhs) {
+    dogen::formatters::decoration_properties& lhs,
+    dogen::formatters::decoration_properties& rhs) {
     lhs.swap(rhs);
 }
 

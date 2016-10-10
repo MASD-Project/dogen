@@ -37,7 +37,7 @@
 #include "dogen/formatters/serialization/modeline_group_ser.hpp"
 #include "dogen/formatters/serialization/modeline_locations_ser.hpp"
 #include "dogen/formatters/serialization/infix_configuration_ser.hpp"
+#include "dogen/formatters/serialization/decoration_properties_ser.hpp"
 #include "dogen/formatters/serialization/decoration_annotations_ser.hpp"
-#include "dogen/formatters/serialization/decoration_configuration_ser.hpp"
 
 #endif
