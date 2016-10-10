@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TYPES_DECORATION_ANNOTATIONS_HPP
-#define DOGEN_FORMATTERS_TYPES_DECORATION_ANNOTATIONS_HPP
+#ifndef DOGEN_FORMATTERS_TYPES_DECORATION_CONFIGURATION_HPP
+#define DOGEN_FORMATTERS_TYPES_DECORATION_CONFIGURATION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,22 +29,22 @@
 #include <string>
 #include <algorithm>
 #include <boost/optional.hpp>
-#include "dogen/formatters/serialization/decoration_annotations_fwd_ser.hpp"
+#include "dogen/formatters/serialization/decoration_configuration_fwd_ser.hpp"
 
 namespace dogen {
 namespace formatters {
 
-class decoration_annotations final {
+class decoration_configuration final {
 public:
-    decoration_annotations() = default;
-    decoration_annotations(const decoration_annotations&) = default;
-    ~decoration_annotations() = default;
+    decoration_configuration() = default;
+    decoration_configuration(const decoration_configuration&) = default;
+    ~decoration_configuration() = default;
 
 public:
-    decoration_annotations(decoration_annotations&& rhs);
+    decoration_configuration(decoration_configuration&& rhs);
 
 public:
-    decoration_annotations(
+    decoration_configuration(
         const boost::optional<bool>& generate_decoration,
         const std::list<std::string>& copyright_notices,
         const std::string& licence_name,
@@ -55,10 +55,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::formatters::decoration_annotations& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::formatters::decoration_configuration& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::formatters::decoration_annotations& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::formatters::decoration_configuration& v, unsigned int version);
 
 public:
     const boost::optional<bool>& generate_decoration() const;
@@ -97,14 +97,14 @@ public:
     void marker_message(const std::string&& v);
 
 public:
-    bool operator==(const decoration_annotations& rhs) const;
-    bool operator!=(const decoration_annotations& rhs) const {
+    bool operator==(const decoration_configuration& rhs) const;
+    bool operator!=(const decoration_configuration& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(decoration_annotations& other) noexcept;
-    decoration_annotations& operator=(decoration_annotations other);
+    void swap(decoration_configuration& other) noexcept;
+    decoration_configuration& operator=(decoration_configuration other);
 
 private:
     boost::optional<bool> generate_decoration_;
@@ -122,8 +122,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::formatters::decoration_annotations& lhs,
-    dogen::formatters::decoration_annotations& rhs) {
+    dogen::formatters::decoration_configuration& lhs,
+    dogen::formatters::decoration_configuration& rhs) {
     lhs.swap(rhs);
 }
 

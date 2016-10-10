@@ -18,23 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_SERIALIZATION_DECORATION_ANNOTATIONS_FWD_SER_HPP
-#define DOGEN_FORMATTERS_SERIALIZATION_DECORATION_ANNOTATIONS_FWD_SER_HPP
+#ifndef DOGEN_FORMATTERS_TYPES_DECORATION_CONFIGURATION_FWD_HPP
+#define DOGEN_FORMATTERS_TYPES_DECORATION_CONFIGURATION_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/formatters/types/decoration_annotations_fwd.hpp"
+namespace dogen {
+namespace formatters {
 
-namespace boost {
-namespace serialization {
-
-template<class Archive>
-void save(Archive& ar, const dogen::formatters::decoration_annotations& v, unsigned int version);
-
-template<class Archive>
-void load(Archive& ar, dogen::formatters::decoration_annotations& v, unsigned int version);
+class decoration_configuration;
 
 } }
 

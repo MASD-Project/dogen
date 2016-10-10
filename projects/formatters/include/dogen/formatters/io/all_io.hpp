@@ -38,6 +38,6 @@
 #include "dogen/formatters/io/modeline_locations_io.hpp"
 #include "dogen/formatters/io/infix_configuration_io.hpp"
 #include "dogen/formatters/io/decoration_properties_io.hpp"
-#include "dogen/formatters/io/decoration_annotations_io.hpp"
+#include "dogen/formatters/io/decoration_configuration_io.hpp"
 
 #endif

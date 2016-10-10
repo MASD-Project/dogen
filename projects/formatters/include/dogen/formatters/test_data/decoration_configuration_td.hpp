@@ -18,22 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_IO_DECORATION_ANNOTATIONS_IO_HPP
-#define DOGEN_FORMATTERS_IO_DECORATION_ANNOTATIONS_IO_HPP
+#ifndef DOGEN_FORMATTERS_TEST_DATA_DECORATION_CONFIGURATION_TD_HPP
+#define DOGEN_FORMATTERS_TEST_DATA_DECORATION_CONFIGURATION_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/formatters/types/decoration_annotations.hpp"
+#include "dogen/formatters/types/decoration_configuration.hpp"
 
 namespace dogen {
 namespace formatters {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::formatters::decoration_annotations& v);
+class decoration_configuration_generator {
+public:
+    decoration_configuration_generator();
+
+public:
+    typedef dogen::formatters::decoration_configuration result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 } }
 

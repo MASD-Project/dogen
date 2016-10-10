@@ -18,18 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TYPES_DECORATION_ANNOTATIONS_FWD_HPP
-#define DOGEN_FORMATTERS_TYPES_DECORATION_ANNOTATIONS_FWD_HPP
+#ifndef DOGEN_FORMATTERS_HASH_DECORATION_CONFIGURATION_HASH_HPP
+#define DOGEN_FORMATTERS_HASH_DECORATION_CONFIGURATION_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <functional>
+#include "dogen/formatters/types/decoration_configuration.hpp"
+
 namespace dogen {
 namespace formatters {
 
-class decoration_annotations;
+struct decoration_configuration_hasher {
+public:
+    static std::size_t hash(const decoration_configuration& v);
+};
 
 } }
 
+namespace std {
+
+template<>
+struct hash<dogen::formatters::decoration_configuration> {
+public:
+    size_t operator()(const dogen::formatters::decoration_configuration& v) const {
+        return dogen::formatters::decoration_configuration_hasher::hash(v);
+    }
+};
+
+}
 #endif

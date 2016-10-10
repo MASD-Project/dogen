@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/formatters/test_data/decoration_annotations_td.hpp"
+#include "dogen/formatters/test_data/decoration_configuration_td.hpp"
 
 namespace {
 
@@ -53,9 +53,9 @@ std::list<std::string> create_std_list_std_string(unsigned int position) {
 namespace dogen {
 namespace formatters {
 
-decoration_annotations_generator::decoration_annotations_generator() : position_(0) { }
+decoration_configuration_generator::decoration_configuration_generator() : position_(0) { }
 
-void decoration_annotations_generator::
+void decoration_configuration_generator::
 populate(const unsigned int position, result_type& v) {
     v.generate_decoration(create_boost_optional_bool(position + 0));
     v.copyright_notices(create_std_list_std_string(position + 1));
@@ -66,22 +66,22 @@ populate(const unsigned int position, result_type& v) {
     v.marker_message(create_std_string(position + 6));
 }
 
-decoration_annotations_generator::result_type
-decoration_annotations_generator::create(const unsigned int position) {
-    decoration_annotations r;
-    decoration_annotations_generator::populate(position, r);
+decoration_configuration_generator::result_type
+decoration_configuration_generator::create(const unsigned int position) {
+    decoration_configuration r;
+    decoration_configuration_generator::populate(position, r);
     return r;
 }
 
-decoration_annotations_generator::result_type*
-decoration_annotations_generator::create_ptr(const unsigned int position) {
-    decoration_annotations* p = new decoration_annotations();
-    decoration_annotations_generator::populate(position, *p);
+decoration_configuration_generator::result_type*
+decoration_configuration_generator::create_ptr(const unsigned int position) {
+    decoration_configuration* p = new decoration_configuration();
+    decoration_configuration_generator::populate(position, *p);
     return p;
 }
 
-decoration_annotations_generator::result_type
-decoration_annotations_generator::operator()() {
+decoration_configuration_generator::result_type
+decoration_configuration_generator::operator()() {
     return create(position_++);
 }
 

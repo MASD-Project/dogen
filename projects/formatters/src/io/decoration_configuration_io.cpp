@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen/formatters/io/decoration_annotations_io.hpp"
+#include "dogen/formatters/io/decoration_configuration_io.hpp"
 
 namespace boost {
 
@@ -62,7 +62,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 namespace dogen {
 namespace formatters {
 
-std::ostream& operator<<(std::ostream& s, const decoration_annotations& v) {
+std::ostream& operator<<(std::ostream& s, const decoration_configuration& v) {
     boost::io::ios_flags_saver ifs(s);
     s.setf(std::ios_base::boolalpha);
     s.setf(std::ios::fixed, std::ios::floatfield);
@@ -70,7 +70,7 @@ std::ostream& operator<<(std::ostream& s, const decoration_annotations& v) {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"dogen::formatters::decoration_annotations\"" << ", "
+      << "\"__type__\": " << "\"dogen::formatters::decoration_configuration\"" << ", "
       << "\"generate_decoration\": " << v.generate_decoration() << ", "
       << "\"copyright_notices\": " << v.copyright_notices() << ", "
       << "\"licence_name\": " << "\"" << tidy_up_string(v.licence_name()) << "\"" << ", "

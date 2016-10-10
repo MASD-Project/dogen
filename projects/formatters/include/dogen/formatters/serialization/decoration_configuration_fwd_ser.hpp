@@ -18,35 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TEST_DATA_DECORATION_ANNOTATIONS_TD_HPP
-#define DOGEN_FORMATTERS_TEST_DATA_DECORATION_ANNOTATIONS_TD_HPP
+#ifndef DOGEN_FORMATTERS_SERIALIZATION_DECORATION_CONFIGURATION_FWD_SER_HPP
+#define DOGEN_FORMATTERS_SERIALIZATION_DECORATION_CONFIGURATION_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/formatters/types/decoration_annotations.hpp"
+#include "dogen/formatters/types/decoration_configuration_fwd.hpp"
 
-namespace dogen {
-namespace formatters {
+namespace boost {
+namespace serialization {
 
-class decoration_annotations_generator {
-public:
-    decoration_annotations_generator();
+template<class Archive>
+void save(Archive& ar, const dogen::formatters::decoration_configuration& v, unsigned int version);
 
-public:
-    typedef dogen::formatters::decoration_annotations result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
-};
+template<class Archive>
+void load(Archive& ar, dogen::formatters::decoration_configuration& v, unsigned int version);
 
 } }
 

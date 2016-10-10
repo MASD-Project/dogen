@@ -38,6 +38,6 @@
 #include "dogen/formatters/hash/modeline_locations_hash.hpp"
 #include "dogen/formatters/hash/infix_configuration_hash.hpp"
 #include "dogen/formatters/hash/decoration_properties_hash.hpp"
-#include "dogen/formatters/hash/decoration_annotations_hash.hpp"
+#include "dogen/formatters/hash/decoration_configuration_hash.hpp"
 
 #endif

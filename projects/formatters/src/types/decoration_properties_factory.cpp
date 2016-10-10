@@ -20,6 +20,9 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/dynamic/types/field_selector.hpp"
+#include "dogen/dynamic/types/repository_selector.hpp"
+#include "dogen/formatters/types/traits.hpp"
 #include "dogen/formatters/types/hydration_workflow.hpp"
 #include "dogen/formatters/types/code_generation_marker_factory.hpp"
 #include "dogen/formatters/types/building_error.hpp"
@@ -42,22 +45,87 @@ namespace formatters {
 
 decoration_properties_factory::
 decoration_properties_factory(const dynamic::repository& drp,
-    const repository& rp) : repository_(rp), annotations_factory_(drp),
-                            default_annotations_() { }
+    const repository& rp) : repository_(rp),
+                            field_definitions_(make_field_definitions(drp)),
+                            default_configuration_() { }
 
 decoration_properties_factory::
 decoration_properties_factory(const dynamic::repository& drp,
     const repository& rp, const dynamic::object& fallback)
-    : repository_(rp), annotations_factory_(drp),
-      default_annotations_(annotations_factory_.make(fallback)),
-      default_generate_decoration_(default_annotations_.generate_decoration()),
-      default_licence_text_(get_licence_text(default_annotations_)),
-      default_copyright_notices_(default_annotations_.copyright_notices()),
-      default_modeline_group_(get_modeline_group(default_annotations_)),
-      default_marker_(get_marker(default_annotations_)) {}
+    : repository_(rp),
+      field_definitions_(make_field_definitions(drp)),
+      default_configuration_(make_decoration_configuration(fallback)),
+      default_generate_decoration_(
+          default_configuration_.generate_decoration()),
+      default_licence_text_(get_licence_text(default_configuration_)),
+      default_copyright_notices_(default_configuration_.copyright_notices()),
+      default_modeline_group_(get_modeline_group(default_configuration_)),
+      default_marker_(get_marker(default_configuration_)) {}
+
+decoration_properties_factory::field_definitions
+decoration_properties_factory::
+make_field_definitions(const dynamic::repository& rp) const {
+    const dynamic::repository_selector s(rp);
+
+    field_definitions r;
+    const auto gd(traits::decoration::generate_decoration());
+    r.generate_decoration = s.select_field_by_name(gd);
+
+    const auto cn(traits::decoration::copyright_notices());
+    r.copyright_notice = s.select_field_by_name(cn);
+
+    const auto ln(traits::decoration::licence_name());
+    r.licence_name = s.select_field_by_name(ln);
+
+    const auto& mlgn(traits::decoration::modeline_group_name());
+    r. modeline_group_name = s.select_field_by_name(mlgn);
+
+    using cgm = traits::decoration::code_generation_marker;
+    r. marker_add_date_time = s.select_field_by_name(cgm::add_date_time());
+    r. marker_add_warning = s.select_field_by_name(cgm::add_warning());
+    r. marker_message = s.select_field_by_name(cgm::message());
+
+    return r;
+}
+
+decoration_configuration decoration_properties_factory::
+make_decoration_configuration(const dynamic::object& o) const {
+    const dynamic::field_selector fs(o);
+
+    decoration_configuration r;
+    const auto& gd(field_definitions_.generate_decoration);
+    if (fs.has_field(gd))
+        r.generate_decoration(fs.get_boolean_content(gd));
+
+    const auto& cn(field_definitions_.copyright_notice);
+    if (fs.has_field(cn))
+        r.copyright_notices(fs.get_text_collection_content(cn));
+
+    const auto& ln(field_definitions_.licence_name);
+    if (fs.has_field(ln))
+        r.licence_name(fs.get_text_content(ln));
+
+    const auto& mlgn(field_definitions_.modeline_group_name);
+    if (fs.has_field(mlgn))
+        r.modeline_group_name(fs.get_text_content(mlgn));
+
+    const auto madt(field_definitions_.marker_add_date_time);
+    if (fs.has_field(madt))
+        r.marker_add_date_time(fs.get_boolean_content(madt));
+
+    const auto maw(field_definitions_.marker_add_warning);
+    if (fs.has_field(maw))
+        r.marker_add_date_time(fs.get_boolean_content(maw));
+
+    const auto msg(field_definitions_.marker_message);
+    if (fs.has_field(msg))
+        r.marker_message(fs.get_text_content(msg));
+
+    return r;
+}
 
 boost::optional<std::string> decoration_properties_factory::
-get_licence_text(const decoration_annotations& fa) const {
+get_licence_text(const decoration_configuration& fa) const {
     if (fa.licence_name().empty())
         return boost::optional<std::string>();
 
@@ -71,7 +139,7 @@ get_licence_text(const decoration_annotations& fa) const {
 }
 
 boost::optional<licence> decoration_properties_factory::
-get_licence(const decoration_annotations& fa) const {
+get_licence(const decoration_configuration& fa) const {
     const auto overriden_licence_text(get_licence_text(fa));
     const auto overriden_copyright_notices(fa.copyright_notices());
 
@@ -96,7 +164,7 @@ get_licence(const decoration_annotations& fa) const {
 }
 
 boost::optional<modeline_group> decoration_properties_factory::
-get_modeline_group(const decoration_annotations& fa) const {
+get_modeline_group(const decoration_configuration& fa) const {
     if (fa.modeline_group_name().empty())
         return boost::optional<modeline_group>();
 
@@ -122,7 +190,7 @@ modeline decoration_properties_factory::get_modeline_from_group(
 
 boost::optional<modeline>
 decoration_properties_factory::get_modeline(const std::string& modeline_name,
-    const decoration_annotations& fa) const {
+    const decoration_configuration& fa) const {
 
     const auto overridden_modeline_group(get_modeline_group(fa));
     if (!overridden_modeline_group && !default_modeline_group_)
@@ -137,7 +205,7 @@ decoration_properties_factory::get_modeline(const std::string& modeline_name,
 }
 
 boost::optional<std::string> decoration_properties_factory::
-get_marker(const decoration_annotations& fa) const {
+get_marker(const decoration_configuration& fa) const {
 
     const auto& msg(fa.marker_message());
     if (msg.empty())
@@ -150,7 +218,7 @@ get_marker(const decoration_annotations& fa) const {
 }
 
 std::string decoration_properties_factory::
-get_marker_or_default(const decoration_annotations& fa) const {
+get_marker_or_default(const decoration_configuration& fa) const {
     const auto overridden_marker(get_marker(fa));
     if (overridden_marker)
         return *overridden_marker;
@@ -162,7 +230,7 @@ get_marker_or_default(const decoration_annotations& fa) const {
 }
 
 bool decoration_properties_factory::
-get_generate_decoration_or_default(const decoration_annotations& fa) const {
+get_generate_decoration_or_default(const decoration_configuration& fa) const {
     const auto overriden_generate_decoration(fa.generate_decoration());
     if (!overriden_generate_decoration && !default_generate_decoration_)
         return true; // FIXME: fairly random default.
@@ -175,7 +243,7 @@ get_generate_decoration_or_default(const decoration_annotations& fa) const {
 
 decoration_properties
 decoration_properties_factory::make(const std::string& modeline_name,
-    const decoration_annotations& fa) const {
+    const decoration_configuration& fa) const {
     const auto modeline(get_modeline(modeline_name, fa));
     const auto licence(get_licence(fa));
     const auto marker(get_marker_or_default(fa));
@@ -186,14 +254,14 @@ decoration_properties_factory::make(const std::string& modeline_name,
 
 decoration_properties decoration_properties_factory::
 make(const std::string& modeline_name) const {
-    const auto da = decoration_annotations();
+    const auto da = decoration_configuration();
     return make(modeline_name, da);
 }
 
 decoration_properties decoration_properties_factory::make(
     const std::string& modeline_name, const dynamic::object& o) const {
-    const auto da(annotations_factory_.make(o));
-    return make(modeline_name, da);
+    const auto dc(make_decoration_configuration(o));
+    return make(modeline_name, dc);
 }
 
 } }

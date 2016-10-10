@@ -32,9 +32,8 @@
 #include "dogen/formatters/types/licence.hpp"
 #include "dogen/formatters/types/repository.hpp"
 #include "dogen/formatters/types/modeline_group.hpp"
-#include "dogen/formatters/types/decoration_annotations.hpp"
+#include "dogen/formatters/types/decoration_configuration.hpp"
 #include "dogen/formatters/types/decoration_properties.hpp"
-#include "dogen/formatters/types/decoration_annotations_factory.hpp"
 
 namespace dogen {
 namespace formatters {
@@ -65,23 +64,40 @@ public:
         const repository& rp, const dynamic::object& fallback);
 
 private:
+    struct field_definitions {
+        dynamic::field_definition generate_decoration;
+        dynamic::field_definition copyright_notice;
+        dynamic::field_definition licence_name;
+        dynamic::field_definition modeline_group_name;
+        dynamic::field_definition marker_add_date_time;
+        dynamic::field_definition marker_add_warning;
+        dynamic::field_definition marker_message;
+    };
+
+    field_definitions
+    make_field_definitions(const dynamic::repository& rp) const;
+
+    decoration_configuration
+    make_decoration_configuration(const dynamic::object& o) const;
+
+private:
     /**
      * @brief Obtains the licence text.
      */
     boost::optional<std::string>
-    get_licence_text(const decoration_annotations& fa) const;
+    get_licence_text(const decoration_configuration& dc) const;
 
     /**
      * @brief Obtains a licence.
      */
     boost::optional<licence>
-    get_licence(const decoration_annotations& fa) const;
+    get_licence(const decoration_configuration& dc) const;
 
     /**
      * @brief Obtains the modeline group name.
      */
     boost::optional<modeline_group>
-    get_modeline_group(const decoration_annotations& fa) const;
+    get_modeline_group(const decoration_configuration& fa) const;
 
     /**
      * @brief Returns the modeline for the supplied modeline name.
@@ -96,26 +112,26 @@ private:
      */
     boost::optional<modeline>
     get_modeline(const std::string& modeline_name,
-        const decoration_annotations& fa) const;
+        const decoration_configuration& fa) const;
 
     /**
      * @brief Obtains a code generation marker.
      */
     boost::optional<std::string>
-    get_marker(const decoration_annotations& fa) const;
+    get_marker(const decoration_configuration& fa) const;
 
     /**
-     * @brief Obtains the marker from the file annotations; if none is
-     * found, uses the default.
+     * @brief Obtains the marker from the decoration configuration; if
+     * none is found, uses the default.
      */
-    std::string get_marker_or_default(const decoration_annotations& fa) const;
+    std::string get_marker_or_default(const decoration_configuration& dc) const;
 
     /**
      * @brief Obtains the generate decoration field value, if
      * available; if not, uses the default value.
      */
-    bool
-    get_generate_decoration_or_default(const decoration_annotations& fa) const;
+    bool get_generate_decoration_or_default(
+        const decoration_configuration& dc) const;
 
 private:
     /**
@@ -123,7 +139,7 @@ private:
      * configuration.
      */
     decoration_properties make(const std::string& modeline_name,
-        const decoration_annotations& fa) const;
+        const decoration_configuration& dc) const;
 
 public:
     /**
@@ -137,8 +153,8 @@ public:
 
 private:
     const repository& repository_;
-    const decoration_annotations_factory annotations_factory_;
-    const decoration_annotations default_annotations_;
+    const field_definitions field_definitions_;
+    const decoration_configuration default_configuration_;
     const boost::optional<bool> default_generate_decoration_;
     const boost::optional<std::string> default_licence_text_;
     const boost::optional<std::list<std::string>> default_copyright_notices_;
