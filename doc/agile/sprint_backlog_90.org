@@ -1,0 +1,653 @@
+#+title: Sprint Backlog 90
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: STARTED | COMPLETED CANCELLED POSTPONED
+#+tags: { story(s) epic(e) }
+
+* Mission Statement
+
+- refactor dyamic and implement profiles
+- fix services
+- implement wale templates
+
+* Stories
+
+** Active
+
+#+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
+#+CAPTION: Clock summary at [2016-10-10 Mon 09:02]
+| <75>                                                                        |        |      |      |       |
+| Headline                                                                    | Time   |      |      |     % |
+|-----------------------------------------------------------------------------+--------+------+------+-------|
+| *Total time*                                                                | *0:22* |      |      | 100.0 |
+|-----------------------------------------------------------------------------+--------+------+------+-------|
+| Stories                                                                     | 0:22   |      |      | 100.0 |
+| Active                                                                      |        | 0:22 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:22 | 100.0 |
+#+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
+#+end:
+
+*** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-10-10 Mon 08:40]--[2016-10-10 Mon 09:02] =>  0:22
+
+Updates to sprint and product backlog.
+
+*** COMPLETED Edit release notes for previous sprint                  :story:
+    CLOSED: [2016-10-10 Mon 09:34]
+    CLOCK: [2016-10-10 Mon 09:28]--[2016-10-10 Mon 09:34] =>  0:06
+
+Add github release notes for v88.
+
+Title: Dogen v0.89.0, "Cubal"
+
+#+begin_src markdown
+Overview
+=======
+The refactorings continue, mainly focusing on the ```quilt.cpp``` model but with changes all over the code base. The only user visible change is:
+
+- improvement on visitor inclusions for descendants.
+
+For more details see the [sprint log](https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_89.org).
+
+#+end_src
+
+*** STARTED Improve bintray support                                   :story:
+    CLOCK: [2016-10-10 Mon 09:02]--[2016-10-10 Mon 09:28] =>  0:26
+
+As with every end of sprint, try to massage bintray a bit more and see
+if we can fix some of the errors of the previous sprint.
+
+*** Merge opaque annotations with opaque expander                     :story:
+
+In addition we need to move all the other code (registrar, etc) into
+formattables.
+
+*** Merge annotations with formattables                                :epic:
+
+Originally we split annotations from formattables because we thought
+they had enough responsibilities to stand on their own as
+classes. However, its now clear that the only job of the annotations
+is to provide data for one expander. It makes a lot more sense to have
+it all in one class.
+
+Tasks:
+
+- merge path annotations with model expander
+- create separate annotations for facet directory expander
+- merge streaming annotations and helper annotations with helper
+  expander
+- merge inclusion directive annotations with inclusion expander and
+  possibly get rid of factory
+- merge aspect annotations with aspect expander
+- merge opaque annotations with opaque annotations expander and move
+  all other opaque classes into formattables
+- delete annotations namespace.
+
+Actually this is an epic, so we'll track tasks on its own stories.
+
+Merged stories:
+
+*Drop annotations prefix in yarn*
+
+Tasks:
+
+- merge traits into each factory;
+- do not use the name annotations - just drop the prefix.
+
+*** Investigate helper generation in formattables                     :story:
+
+We seem to be generating an helper for every node of every name tree,
+regardless of whether the name needs a helper or not. Intuitively, we
+should check the family and the streaming settings; if both of these
+are empty then there should not be a need for a helper. But maybe
+there is more to it.
+
+*** Clean up terminology in dynamic                                   :story:
+
+We have to do a number of renames to make space for profilers:
+
+- rename object aggregates to something slightly more sensible as it
+  clashes with previous uses of the term aggregation in dynamic.
+- rename property scope type to attribute in dynamic
+- rename fields to field_definitions in data;
+- rename definition types to instantiation types;
+- hydration workflow is field definition factory
+- json hydrator is field definition hydrator
+- repository is field definition repository
+- repository factory should be merged into field definition factory
+- repository selector is field definition selector
+
+Actually this rename is a bit more profound than we originally
+anticipated. The objective of dynamic is to provide a way to annotate
+objects in yarn (well, anywhere in theory). Interpreting some
+[[https://en.wikipedia.org/wiki/Text_annotation][annotation terminology]] fairly liberally we have:
+
+- fields folder renamed to annotations.
+- dynamic -> annotations
+- object -> annotation. The marker for the annotation is the linkage
+  between the annotation and the yarn element it annotates. Fields
+  become the body of the annotation.
+- field instance -> entry.
+- field instance definition -> entry template.
+- field definition -> split into type and type template. JSON file can
+  contain both. Add some kind of meta-data to figure out the type.
+- field definition types: template types
+- json_hydrator -> type_hydrator
+- repository ->  type_repository
+- repository workflow: merge repository factory, repository workflow,
+  hydration workflow into a type repository factory.
+- raw aggregate: scribbles, scribble group?
+- object aggregate: annotation group (and top level container
+  annotation groups). In annotation group we have parent and
+  children. Also add a flag for is master/root.
+- scopes: remove unused scopes. Rest of the scopes should be root,
+  top-level, child (avoid references to yarn concepts).
+- workflow: annotation groups factory. Takes in scribble groups.
+
+*** Rewrite profile support                                           :story:
+
+Our first stab at implementing profiles was a valiant effort but sadly
+it was not the right approach. Profiles need to be implemented
+directly into dynamic, and they must be totally transparent to the
+layers above.
+
+The profile structure is very similar to what we did in v1, but we
+must implement it in terms of dynamic infrastructure:
+
+- we need to make use of dynamic templates to expand facets and
+  formatters, and to refer to instances;
+
+Tasks:
+
+- implement all of the new dynamic classes
+- remove profiles in quilt.cpp and ensure the code works with the
+  profile expansion. Update models to make use of global profiles.
+- we need to supply a list of stereotypes to dynamic workflow, against
+  the id's that have them. If we can find a profile with the
+  stereotype name, apply it.
+
+*** Generate formatter interfaces                                      :epic:
+
+We should create another template language, in addition to stitch:
+"wale". Wale is a very simple language that has templates that just do
+token replacement. The tokens must have a special format:
+={{{TOKEN}}}=. We receive a map of keys to values and do a blind
+replacement to the keys on the wale document.
+
+This links to stitch as follows:
+
+- create a single file implementation of a formatter. It will
+  implement both the provider interface and the appropriate formatter
+  interface. It will call the stitch method to start off with. There
+  are no headers, just cpp. It does the formatter registration.
+- add support in stitch for "named sections": its possible to start a
+  section and assign it a name. A stitch template will have two
+  sections: inclusion provision and formatting.
+- add support in stitch for "wale variables". These are just kvp's
+  defined at the top:
+
+: <#@ wale.variable="formatter_name=abcd" #>
+
+  wale variables and sections are converted into a kvp container for
+  wale input. Examples: facet, formatter name, etc.
+- convert the formatter code into a wale template, adding wale
+  variables as required.
+- update stitch to detect wale usage and to call wale in those
+  cases. This could be done by supplying a wale template:
+
+: <#@ wale.template="abcd.wale" #>
+
+- note that wale could be useful outside of stitch, for example for
+  dart: we could wale-lise utility and then instantiate it for a given
+  project.
+
+*Previous Understanding*
+
+It should be possible to generate some trivial types such as formatter
+interfaces, formatter container, registrar and so on. For this we
+need:
+
+- a mustache type template;
+- a set of fields from yarn types to be exposed to mustache;
+- a list of types to iterate through.
+
+Once we got this we could instantiate the templates. To integrate this
+with knit we would need some way of specifying which types the
+iteration would be over. We could mark a specific type with a given
+stereotype, and then supply say the base class ("all leaf descendants
+of xyz"). Dogen would then locate the descendants and for each call
+the template.
+
+For registrar and container its a bit trickier because we want a
+collection of types in one go.
+
+We also need a way to keep these templates away from the main (user
+visible) code, since they are useful only for dogen.
+
+See also [[https://github.com/cierelabs/boostache/tree/develop][boostache]].
+
+Notes:
+
+- we will need some "special" tags for copyright, includes
+  etc. Includes will be particularly special because we need to
+  augment the include list with additional includes. However, we may
+  not even need to be aware of this.
+
+*Stitch meta-templates*
+
+*Note*: re-read story [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_64.org#code-generating-formatters-as-text-templates][Code-generating formatters as text templates]] as
+some of these ideas were already there. Also: see [[https://github.com/no1msd/mstch][mstch]].
+
+In the quest for defining a single stitch template which then becomes
+a formatter - without any additional infrastructure required at all -
+we hit on an idea: stitch meta-templates. Basically we would have two
+different kinds of inputs to stitch: the template itself and the
+meta-template. Meta-template is a provisional name. The meta-template
+would define the formatter layout:
+
+- class definition, using a stitch variable for the yarn element type
+- registration of the formatter
+- definition of a method for the includes
+- definition of a method for the stitching
+
+These last two would result in the creation of "regions". These
+regions must then be "instantiated" in the template. This could easily
+be achieved with some kind of new element:
+
+: <#% region "includes">
+
+Or some such stitch construct. All lines after this line are part of
+the region "includes" until a new region is defined. The region is
+stitched and then transposed to the place in the meta-template where
+it was defined, for example:
+
+: int f(int a, int b) {
+: <#% region "includes">
+: }
+
+Would result in copying across the region into these brackets. This
+will make defining multiple functions very easy, without having to
+supply command line arguments, etc.
+
+Notes:
+
+- meta-templates are supplied as command line arguments.
+- potential extension: =meta.stitch=
+- stitch should still work on non-meta-template mode.
+- some of these ideas had already been covered on another story but
+  can't find it in backlog. It could be part of the original stitch
+  epic. We need to revisit it to see if it contains additional
+  insights.
+- when an error occurs, it would be great if we could pin point the
+  error to the template or to the meta-template. This is more of a
+  concern when we add clang compilation support.
+
+Further thoughts:
+
+- there are two approaches for this: we could integrate stitch tighter
+  with knit and have it return "chunks" of processed code instead of
+  files. As per story "Integration of stitch and dogen", dogen would
+  then be responsible for writing the header file as per methods
+  defined in the class diagram. Each method would be marked as a
+  region. Meta-data in the class associates a template with the
+  class. Knitter uses stitch to convert the template into regions, and
+  then takes these regions and inserts them into a generated
+  file. This approach is very clever and requires a lot of machinery.
+- the easier approach uses meta-templates. Class diagram associates
+  both meta-template and template with class via meta-data. We could
+  possibly also have a stitch stereotype to make it clearer. Yarn has
+  a stitch class with attributes of these parameters. Dogen
+  instantiates stitch (probably within quilt) with the parameters and
+  generates the file. Actually we probably can't have this in quilt
+  because we still need formatter properties.
+
+*** Fix transformer tests and hydrator tests                          :story:
+
+A number of tests got disabled as part of the dynamic refactor. Fix
+them.
+
+*** Rename properties to attributes in opaque configuration           :story:
+
+This was missed in rename.
+
+*** Finish overwriting support                                        :story:
+
+With profiles we have all the pieces in place to support overwrites,
+but there is some linkage missing:
+
+- global/local configuration needs to have an overwrite flag;
+- need to populate formatter configuration on the back of that;
+- need to read flag from formatter configuration and set it on file.
+
+*** Push stereotypes processing into yarn                             :story:
+
+At present we have stereotypes as an enum, and the frontends are
+responsible for resolving the stereotypes. This is not ideal:
+
+- we assume unknown stereotypes are concepts;
+- we map visitable to a flag to map it to a stereotype;
+- we map fluent to a flag;
+- we had to hack in the profile stereotype binding;
+- the same work will have to be done in other frontends (e.g. JSON).
+
+The right thing is:
+
+- make stereotypes a string container;
+- frontend simply populates the container and does not judgement;
+- *all* stereotypes are put in the container; rule of thumb is, if its
+  a UML stereotype then it must go in the container;
+- stereotypes expander figures out if the stereotype is one that is
+  actionable within yarn (immutable, visitor, modeled concepts) or one
+  to pass-through (binding stereotypes).
+- during dynamic expansion, we supply a list of _all_ stereotypes
+  against ids. If there is a match, they are used as profiles.
+
+Merged stories:
+
+*Link profiles to stereotypes*
+
+Once we have profiles, we need to have a way to link them to
+stereotypes. At present we only have two use cases:
+
+- hand-crafted
+- formatter
+
+When we spot one of these, we should then automatically look for a
+profile with this name. If found apply it locally.
+
+*Previous Understanding*
+
+An element can be marked with the stereotype of handcrafted. We then
+have several things to determine for this element:
+
+- which formatters are disabled due to handcraft mode (e.g. all facets
+  other than types);
+- which formatters are enabled, but should only generate if there
+  isn't a file already in the file system (e.g. class header and class
+  implementation in types)
+- which formatters are enabled and should generate as usual
+  (e.g. forward declarations in types).
+
+We must also allow users to override these settings so that:
+
+- they can disable the types facet if required;
+- they can provide their own implementations for other facets;
+- they can ask the code generator to generate one for them
+  (serialisation, io).
+
+Finally, for the common case, we do not want users to have to set lots
+of meta-data; we need a sensible default behaviour.
+
+Actually, from a purely functional perspective, what is handcrafting?
+It is a shorthand for:
+
+- disable a set of formatters;
+- enable another set of formatters;
+- for a subset of the enabled formatters, generate only if there is no
+  file in the filesystem, otherwise do nothing;
+- for another subset of the enabled formatters, generate as usual.
+- do not add leaves to the registrar (unless asked to).
+
+One can conceive the notion of an enablement profile. These can be
+global or local. We can also have overwritting profiles. These can
+only be local. A sub-set of the enabled formatters can be set to
+overwrite=false. Examples:
+
+- default enablement profile: "enable all". Enables all facets and
+  formatters.
+- types and a facet profiles: "types and serialisation", "types and
+  io" etc.
+- "types class only": generates class header and implementation.
+- default overwrite profile: "overwrite all". Overwrites all
+  artefacts.
+
+Now handcrafting becomes much easier:
+
+- add meta-data to quilt: a) a way of specifying profiles for
+  overwriting and enabling b) a way of specifying if leaves contribute
+  to registration or not.
+- define a set of profiles in data for overwriting and enabling. Users
+  can provide their own profile directories.
+- Link the overwriting and enabling with stereotypes: given a
+  stereotype, we could map to a default profile. Actually this is more
+  of a profile group. We could then state that a stereotype maps to a
+  profile group.
+
+Note: we don't need to do leaf management:
+
+#+begin_quote
+- add a flag for leaf management. It defaults to true, unless
+  handcrafted. Add meta-data to allow overriding flag (or create story
+  for it as we don't yet have a use case).
+#+end_quote
+
+We just need to enable/disable serialisation and the code will work.
+
+- add a stereotype of handcrafted with a default profile.
+
+*** Remove object types in yarn                                       :story:
+
+We need to figure out if this enumeration is still in use and if not
+what needs to be done to remove it.
+
+*** Order of headers is hard-coded                                    :story:
+
+In inclusion expander, we have hacked the sorting:
+
+:        // FIXME: hacks for headers that must be last
+:        const bool lhs_is_gregorian(
+:            lhs.find_first_of(boost_serialization_gregorian) != npos);
+:        const bool rhs_is_gregorian(
+:            rhs.find_first_of(boost_serialization_gregorian) != npos);
+:        if (lhs_is_gregorian && !rhs_is_gregorian)
+:            return true;
+
+This could be handled via meta-data, supplying some kind of flag (sort last?).
+
+*** Perform the archetype / artefact renames                          :story:
+
+As per analysis story, we need to tidy-up terminology.
+
+Renames:
+
+- file: artefact
+- file formatter: artefact formatter
+- ownership_hierarchy: archetype_location, model_name becomes kernel,
+  facet name becomes facet and formatter name archetype. Add
+  sub-kernel.
+- Element concept becomes Entity.
+
+*** Refactor ownership hierarchy                                      :story:
+
+Start implementing the archetype logic. Basically there is a artefact
+unique identifier
+
+- rename it to =artefact_descriptor=.
+- remove all dia fields; these are now file importer specific and
+  never reach dynamic.
+- add =kernel= field. This is set to =stitch= or =quilt=.
+- rename formatter field to =kind=
+
+Merged stories:
+
+*Consider adding "application" to ownership hierarchy*
+
+Not all fields make sense to all tools in the dogen suite; some are
+knit specific, some are stitch specific and some are shared. At
+present this is not a problem because stitch loads up all of knit's
+fields and assumes users won't make use of them. If they do, nothing
+bad "should" happen. But a better way to solve this may be to only
+load fields that belong to an application. We could add "application"
+to ownership hierarchy, and filter on that. Note though that we would
+need some way of saying "all applications" (e.g. at present, leave the
+field blank).
+
+*Consider renaming =ownership_hierarchy=*
+
+We came up with the name =ownership_hierarchy= because we could not
+think of anything else. However, it is not a particularly good name,
+and it is increasingly so now that we need to use it across models. We
+need a better name for this value type.
+
+This work must be integrated with the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_69.org#thoughts-on-cpp-refactoring][archetype work]].
+
+*Split knitting from stitching settings*
+
+*Rationale*: with "kernel" we will have quilt and stitch.
+
+At present we only have a single common directory with all of the
+available fields. Not all fields apply to both stitching and
+knitting - but some do. We need a way to filter these. One possibility
+is to use an approach similar to the formatter groups in the ownership
+hierarchy. For now we simply have fields that have no meaning in
+stitching but can be supplied by users.
+
+*** Implement qualified name efficiently                              :story:
+
+We should move qualified names to quilt. We can create a simple map of
+id to qualified name and add that to the formattables model.
+
+*Previous Understanding*
+
+We used a =std::map= to store qualified names. In practice, we don't
+need something this expensive.
+
+- instead of mapping names to languages, we could map them to
+  "styles". There are only a few "styles" across all programming
+  languages (e.g. =.= separated, =::= separated and so on).
+- we can also create an array of these styles. We know up front how
+  many styles there are.
+- finally we can create a enumeration to access the array. At present
+  this is not possible because we cannot disable invalid, nor is it
+  possible to move it to a different position (e.g. last). Also we
+  will have to static cast the enum to access the int, which is not
+  very pretty.
+
+Once all of this is done we can simply do, at O(1):
+
+: name.qualified[static_cast<unsigned int>(styles::double_colon_separated_style)]
+
+We can prettify it a bit: [[http://stackoverflow.com/questions/8357240/how-to-automatically-convert-strongly-typed-enum-into-int][How to automatically convert strongly typed
+enum into int?]]
+
+: template <typename E>
+: constexpr typename std::underlying_type<E>::type to_underlying(E e) {
+:     return static_cast<typename std::underlying_type<E>::type>(e);
+: }
+:
+: std::cout << foo(to_underlying(b::B2)) << std::endl;
+
+Giving us:
+
+: name.qualified[to_underlying(styles::double_colon_separated_style)]
+
+*** Integration of stitch and dogen                                   :story:
+
+Now that we have implemented stitch and proved it works (more or
+less), we need to think how we can make using stitch from dogen
+easier. At present there is not integration at all:
+
+- users need to create regexes to ensure dogen does not trample on
+  stitch files:
+
+:    --ignore-files-matching-regex .*stitch
+:    --ignore-files-matching-regex .*_stitch.hpp
+:    --ignore-files-matching-regex .*_stitch.cpp
+
+- users need to manually create a header file for each stitch
+  template.
+- users need to create stitch targets and run them to ensure the
+  templates have been expanded. This means its possible to get dogen
+  and stitch out of sync (but for now not a big problem).
+
+In the ideal world, when we knit a model it would be nice if it could
+also stitch as required. This could be achieved as follows:
+
+- Create a meta-data tag that tells dogen a type has an associated
+  stitch template with it.
+- Create =cpp= types that represent the stitch header and
+  implementation.
+- Transformer needs to look for the meta-data tag and instantiate the
+  =cpp= types.
+- Create a =cpp= formatter for the header, as per regular
+  formatters. The slight challenge here is that the formatter needs to
+  be instantiable across facets, which we do not support at the
+  moment.
+- Create a cpp formatter for the implementation which instantiates
+  stitch with the template and uses it to create a file. Same
+  challenge as with the header.
+
+*Previous Understanding*
+
+- stitch can still be integrated with dogen. We could use meta-data to
+  link a formatter (well, any class that needs stitch really, but at
+  present just a formatter) with a stitch template. For example, a
+  =class_header_formatter= could have a "is stitchable" flag set to
+  on. This would then mean that dogen would look for a
+  =class_header_formatter.stitch= file in the same directory as the
+  CPP file. It would then use that to create a
+  =class_header_formatter_stitch.cpp= file. It would also
+  ignore/generate a =class_header_formatter_stitch.hpp= file and
+  automatically add it to the inclusion dependencies of
+  =class_header_formatter.cpp=. These are injected into stitch as we
+  instantiate the template since stitch supports meta-data (we do need
+  a way to inject the meta-data from dogen into the meta-data in the
+  template; perhaps a kvp container passed in to the stitch workflow
+  which could then be handed over to the parser). All these files are
+  automatically added to the list of "exceptions" for housekeeping so
+  that they do not get deleted. However, stitch would not know
+  anything at all about any of this; this is all knitter's
+  functionality. The problem is at present we haven't got a good place
+  to perform the stitching as part of knitter's workflows. Perhaps as
+  part of the expansion, we could set a number of stitch fields which
+  would then be picked up by some knit-specific workflow classes.
+
+*** Consider adding =fileset= to formatters' model                    :story:
+
+We are using collections of files quite a bit, and it makes sense to
+create an abstraction for it such as a =fileset=. However, for this to
+work properly we need to add at least one basic behaviours: the
+ability to merge two file sets. Or else we will end up having to
+unpack the files, then merging them, then creating a new fileset.
+
+Problem is, we either create the fileset as a non-generatable type -
+not ideal - or we create it as generatable and need to add this as a
+free function. We need to wait until dogen has support for merging
+code generation.
+
+*** Consider supplying element configuration as a parameter           :story:
+
+Figure out if element configuration is context or if it is better
+expressed as a stand alone formatting parameter.
+
+*** Formatter repository should be created in quilt                   :story:
+
+At present we are creating the formatter repository in
+=quilt.cpp=. However it will be shared by all backends in the
+kernel. Move it up to =quilt= level and supply it as a paramter to the backends.
+
+*** Tidy-up of inclusion terminology                                  :story:
+
+Random notes:
+
+- imports and exports
+- some types support both (headers)
+- some support imports only (cpp)
+- some support neither (cmakelists, etc).
+
+*** Initialise formatters in the formatter's translation unit         :story:
+
+At present we are initialising the formatters in each of the facet
+initialisers. However, it makes more sense to initialise them on the
+translation unit for each formatter. This will also make life easier
+when we move to a mustache world where there may not be a formatter
+header file at all.
+
+*** Move odb options file into odb folder                             :story:
+
+There is not particularly good reason for this file to exist at the
+src level.
+
+In order to implement this story we need to have a working odb setup
+to test it and ensure we didn't break anything.
+
+** Deprecated
