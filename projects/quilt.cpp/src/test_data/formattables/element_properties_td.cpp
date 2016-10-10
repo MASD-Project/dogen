@@ -22,9 +22,9 @@
 #include "dogen/formatters/test_data/decoration_configuration_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/profile_group_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/odb_configuration_td.hpp"
+#include "dogen/quilt.cpp/test_data/formattables/element_properties_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/aspect_configuration_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/helper_configuration_td.hpp"
-#include "dogen/quilt.cpp/test_data/formattables/element_configuration_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/formatter_configuration_td.hpp"
 
 namespace {
@@ -117,9 +117,9 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-element_configuration_generator::element_configuration_generator() : position_(0) { }
+element_properties_generator::element_properties_generator() : position_(0) { }
 
-void element_configuration_generator::
+void element_properties_generator::
 populate(const unsigned int position, result_type& v) {
     v.decoration_configuration(create_boost_optional_dogen_formatters_decoration_configuration(position + 0));
     v.aspect_configuration(create_dogen_quilt_cpp_formattables_aspect_configuration(position + 1));
@@ -130,22 +130,22 @@ populate(const unsigned int position, result_type& v) {
     v.odb_configuration(create_boost_optional_dogen_quilt_cpp_formattables_odb_configuration(position + 6));
 }
 
-element_configuration_generator::result_type
-element_configuration_generator::create(const unsigned int position) {
-    element_configuration r;
-    element_configuration_generator::populate(position, r);
+element_properties_generator::result_type
+element_properties_generator::create(const unsigned int position) {
+    element_properties r;
+    element_properties_generator::populate(position, r);
     return r;
 }
 
-element_configuration_generator::result_type*
-element_configuration_generator::create_ptr(const unsigned int position) {
-    element_configuration* p = new element_configuration();
-    element_configuration_generator::populate(position, *p);
+element_properties_generator::result_type*
+element_properties_generator::create_ptr(const unsigned int position) {
+    element_properties* p = new element_properties();
+    element_properties_generator::populate(position, *p);
     return p;
 }
 
-element_configuration_generator::result_type
-element_configuration_generator::operator()() {
+element_properties_generator::result_type
+element_properties_generator::operator()() {
     return create(position_++);
 }
 

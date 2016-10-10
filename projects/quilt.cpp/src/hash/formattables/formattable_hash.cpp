@@ -20,7 +20,7 @@
  */
 #include "dogen/yarn/hash/element_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/formattable_hash.hpp"
-#include "dogen/quilt.cpp/hash/formattables/element_configuration_hash.hpp"
+#include "dogen/quilt.cpp/hash/formattables/element_properties_hash.hpp"
 
 namespace {
 
@@ -56,7 +56,7 @@ std::size_t formattable_hasher::hash(const formattable& v) {
 
     combine(seed, hash_boost_shared_ptr_dogen_yarn_element(v.master_segment()));
     combine(seed, hash_std_list_boost_shared_ptr_dogen_yarn_element(v.all_segments()));
-    combine(seed, v.element_configuration());
+    combine(seed, v.element_properties());
 
     return seed;
 }

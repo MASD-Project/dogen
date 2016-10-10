@@ -66,8 +66,8 @@ std::string canonical_formatter_resolver::resolve(const std::string& element_id,
     }
 
     const auto& formattable(i->second);
-    const auto& ecfg(formattable.element_configuration());
-    const auto& cftf(ecfg.canonical_formatter_to_formatter());
+    const auto& eprops(formattable.element_properties());
+    const auto& cftf(eprops.canonical_formatter_to_formatter());
     const auto j(cftf.find(formatter_name));
     if (j == cftf.end()) {
         BOOST_LOG_SEV(lg, error) << missing_canonical_formatter

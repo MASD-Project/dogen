@@ -18,14 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/formattables/element_configuration.hpp"
+#include "dogen/quilt.cpp/types/formattables/element_properties.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
 
-element_configuration::element_configuration(element_configuration&& rhs)
+element_properties::element_properties(element_properties&& rhs)
     : decoration_configuration_(std::move(rhs.decoration_configuration_)),
       aspect_configuration_(std::move(rhs.aspect_configuration_)),
       formatter_configurations_(std::move(rhs.formatter_configurations_)),
@@ -34,7 +34,7 @@ element_configuration::element_configuration(element_configuration&& rhs)
       local_profile_group_(std::move(rhs.local_profile_group_)),
       odb_configuration_(std::move(rhs.odb_configuration_)) { }
 
-element_configuration::element_configuration(
+element_properties::element_properties(
     const boost::optional<dogen::formatters::decoration_configuration>& decoration_configuration,
     const dogen::quilt::cpp::formattables::aspect_configuration& aspect_configuration,
     const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration>& formatter_configurations,
@@ -50,7 +50,7 @@ element_configuration::element_configuration(
       local_profile_group_(local_profile_group),
       odb_configuration_(odb_configuration) { }
 
-void element_configuration::swap(element_configuration& other) noexcept {
+void element_properties::swap(element_properties& other) noexcept {
     using std::swap;
     swap(decoration_configuration_, other.decoration_configuration_);
     swap(aspect_configuration_, other.aspect_configuration_);
@@ -61,7 +61,7 @@ void element_configuration::swap(element_configuration& other) noexcept {
     swap(odb_configuration_, other.odb_configuration_);
 }
 
-bool element_configuration::operator==(const element_configuration& rhs) const {
+bool element_properties::operator==(const element_properties& rhs) const {
     return decoration_configuration_ == rhs.decoration_configuration_ &&
         aspect_configuration_ == rhs.aspect_configuration_ &&
         formatter_configurations_ == rhs.formatter_configurations_ &&
@@ -71,121 +71,121 @@ bool element_configuration::operator==(const element_configuration& rhs) const {
         odb_configuration_ == rhs.odb_configuration_;
 }
 
-element_configuration& element_configuration::operator=(element_configuration other) {
+element_properties& element_properties::operator=(element_properties other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const boost::optional<dogen::formatters::decoration_configuration>& element_configuration::decoration_configuration() const {
+const boost::optional<dogen::formatters::decoration_configuration>& element_properties::decoration_configuration() const {
     return decoration_configuration_;
 }
 
-boost::optional<dogen::formatters::decoration_configuration>& element_configuration::decoration_configuration() {
+boost::optional<dogen::formatters::decoration_configuration>& element_properties::decoration_configuration() {
     return decoration_configuration_;
 }
 
-void element_configuration::decoration_configuration(const boost::optional<dogen::formatters::decoration_configuration>& v) {
+void element_properties::decoration_configuration(const boost::optional<dogen::formatters::decoration_configuration>& v) {
     decoration_configuration_ = v;
 }
 
-void element_configuration::decoration_configuration(const boost::optional<dogen::formatters::decoration_configuration>&& v) {
+void element_properties::decoration_configuration(const boost::optional<dogen::formatters::decoration_configuration>&& v) {
     decoration_configuration_ = std::move(v);
 }
 
-const dogen::quilt::cpp::formattables::aspect_configuration& element_configuration::aspect_configuration() const {
+const dogen::quilt::cpp::formattables::aspect_configuration& element_properties::aspect_configuration() const {
     return aspect_configuration_;
 }
 
-dogen::quilt::cpp::formattables::aspect_configuration& element_configuration::aspect_configuration() {
+dogen::quilt::cpp::formattables::aspect_configuration& element_properties::aspect_configuration() {
     return aspect_configuration_;
 }
 
-void element_configuration::aspect_configuration(const dogen::quilt::cpp::formattables::aspect_configuration& v) {
+void element_properties::aspect_configuration(const dogen::quilt::cpp::formattables::aspect_configuration& v) {
     aspect_configuration_ = v;
 }
 
-void element_configuration::aspect_configuration(const dogen::quilt::cpp::formattables::aspect_configuration&& v) {
+void element_properties::aspect_configuration(const dogen::quilt::cpp::formattables::aspect_configuration&& v) {
     aspect_configuration_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration>& element_configuration::formatter_configurations() const {
+const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration>& element_properties::formatter_configurations() const {
     return formatter_configurations_;
 }
 
-std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration>& element_configuration::formatter_configurations() {
+std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration>& element_properties::formatter_configurations() {
     return formatter_configurations_;
 }
 
-void element_configuration::formatter_configurations(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration>& v) {
+void element_properties::formatter_configurations(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration>& v) {
     formatter_configurations_ = v;
 }
 
-void element_configuration::formatter_configurations(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration>&& v) {
+void element_properties::formatter_configurations(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration>&& v) {
     formatter_configurations_ = std::move(v);
 }
 
-const std::list<dogen::quilt::cpp::formattables::helper_configuration>& element_configuration::helper_configurations() const {
+const std::list<dogen::quilt::cpp::formattables::helper_configuration>& element_properties::helper_configurations() const {
     return helper_configurations_;
 }
 
-std::list<dogen::quilt::cpp::formattables::helper_configuration>& element_configuration::helper_configurations() {
+std::list<dogen::quilt::cpp::formattables::helper_configuration>& element_properties::helper_configurations() {
     return helper_configurations_;
 }
 
-void element_configuration::helper_configurations(const std::list<dogen::quilt::cpp::formattables::helper_configuration>& v) {
+void element_properties::helper_configurations(const std::list<dogen::quilt::cpp::formattables::helper_configuration>& v) {
     helper_configurations_ = v;
 }
 
-void element_configuration::helper_configurations(const std::list<dogen::quilt::cpp::formattables::helper_configuration>&& v) {
+void element_properties::helper_configurations(const std::list<dogen::quilt::cpp::formattables::helper_configuration>&& v) {
     helper_configurations_ = std::move(v);
 }
 
-const std::unordered_map<std::string, std::string>& element_configuration::canonical_formatter_to_formatter() const {
+const std::unordered_map<std::string, std::string>& element_properties::canonical_formatter_to_formatter() const {
     return canonical_formatter_to_formatter_;
 }
 
-std::unordered_map<std::string, std::string>& element_configuration::canonical_formatter_to_formatter() {
+std::unordered_map<std::string, std::string>& element_properties::canonical_formatter_to_formatter() {
     return canonical_formatter_to_formatter_;
 }
 
-void element_configuration::canonical_formatter_to_formatter(const std::unordered_map<std::string, std::string>& v) {
+void element_properties::canonical_formatter_to_formatter(const std::unordered_map<std::string, std::string>& v) {
     canonical_formatter_to_formatter_ = v;
 }
 
-void element_configuration::canonical_formatter_to_formatter(const std::unordered_map<std::string, std::string>&& v) {
+void element_properties::canonical_formatter_to_formatter(const std::unordered_map<std::string, std::string>&& v) {
     canonical_formatter_to_formatter_ = std::move(v);
 }
 
-const boost::optional<dogen::quilt::cpp::formattables::profile_group>& element_configuration::local_profile_group() const {
+const boost::optional<dogen::quilt::cpp::formattables::profile_group>& element_properties::local_profile_group() const {
     return local_profile_group_;
 }
 
-boost::optional<dogen::quilt::cpp::formattables::profile_group>& element_configuration::local_profile_group() {
+boost::optional<dogen::quilt::cpp::formattables::profile_group>& element_properties::local_profile_group() {
     return local_profile_group_;
 }
 
-void element_configuration::local_profile_group(const boost::optional<dogen::quilt::cpp::formattables::profile_group>& v) {
+void element_properties::local_profile_group(const boost::optional<dogen::quilt::cpp::formattables::profile_group>& v) {
     local_profile_group_ = v;
 }
 
-void element_configuration::local_profile_group(const boost::optional<dogen::quilt::cpp::formattables::profile_group>&& v) {
+void element_properties::local_profile_group(const boost::optional<dogen::quilt::cpp::formattables::profile_group>&& v) {
     local_profile_group_ = std::move(v);
 }
 
-const boost::optional<dogen::quilt::cpp::formattables::odb_configuration>& element_configuration::odb_configuration() const {
+const boost::optional<dogen::quilt::cpp::formattables::odb_configuration>& element_properties::odb_configuration() const {
     return odb_configuration_;
 }
 
-boost::optional<dogen::quilt::cpp::formattables::odb_configuration>& element_configuration::odb_configuration() {
+boost::optional<dogen::quilt::cpp::formattables::odb_configuration>& element_properties::odb_configuration() {
     return odb_configuration_;
 }
 
-void element_configuration::odb_configuration(const boost::optional<dogen::quilt::cpp::formattables::odb_configuration>& v) {
+void element_properties::odb_configuration(const boost::optional<dogen::quilt::cpp::formattables::odb_configuration>& v) {
     odb_configuration_ = v;
 }
 
-void element_configuration::odb_configuration(const boost::optional<dogen::quilt::cpp::formattables::odb_configuration>&& v) {
+void element_properties::odb_configuration(const boost::optional<dogen::quilt::cpp::formattables::odb_configuration>&& v) {
     odb_configuration_ = std::move(v);
 }
 

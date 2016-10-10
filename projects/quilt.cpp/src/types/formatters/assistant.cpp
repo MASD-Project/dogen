@@ -98,7 +98,7 @@ assistant::assistant(const context& ctx, const dynamic::ownership_hierarchy& oh,
     const bool requires_header_guard, const std::string& id) :
     context_(ctx),
     formatter_configuration_(obtain_formatter_configuration(
-            context_.element_configuration(), oh.formatter_name())),
+            context_.element_properties(), oh.formatter_name())),
     ownership_hierarchy_(oh), requires_header_guard_(requires_header_guard) {
 
     BOOST_LOG_SEV(lg, debug) << "Processing element: " << id
@@ -170,10 +170,10 @@ std::string assistant::get_product_name(const yarn::name& n) const {
 }
 
 const formattables::formatter_configuration& assistant::
-obtain_formatter_configuration(const formattables::element_configuration& ecfg,
+obtain_formatter_configuration(const formattables::element_properties& eprops,
     const std::string& formatter_name) const {
-    const auto i(ecfg.formatter_configurations().find(formatter_name));
-    if (i == ecfg.formatter_configurations().end()) {
+    const auto i(eprops.formatter_configurations().find(formatter_name));
+    if (i == eprops.formatter_configurations().end()) {
         BOOST_LOG_SEV(lg, error) << formatter_configuration_missing
                                  << formatter_name;
         BOOST_THROW_EXCEPTION(formatting_error(formatter_configuration_missing +
@@ -196,8 +196,8 @@ obtain_formatter_configuration(const std::string& element_id,
         BOOST_THROW_EXCEPTION(formatting_error(element_not_found + element_id));
     }
 
-    const auto& ecfg(i->second.element_configuration());
-    return obtain_formatter_configuration(ecfg, resolved_fmtn);
+    const auto& eprops(i->second.element_properties());
+    return obtain_formatter_configuration(eprops, resolved_fmtn);
 }
 
 formattables::facet_configuration assistant::
@@ -230,8 +230,8 @@ std::list<std::string> assistant::make_namespaces(const yarn::name& n) const {
 
 bool assistant::
 is_formatter_enabled(const std::string& formatter_name) const {
-    const auto& ecfg(context_.element_configuration());
-    const auto& fmt_cfg(obtain_formatter_configuration(ecfg, formatter_name));
+    const auto& eprops(context_.element_properties());
+    const auto& fmt_cfg(obtain_formatter_configuration(eprops, formatter_name));
     return fmt_cfg.enabled();
 }
 
@@ -258,17 +258,17 @@ std::string assistant::get_odb_facet_directory() const {
 }
 
 bool assistant::requires_manual_default_constructor() const {
-    const auto& ac(context_.element_configuration().aspect_configuration());
+    const auto& ac(context_.element_properties().aspect_configuration());
     return ac.requires_manual_default_constructor();
 }
 
 bool assistant::requires_manual_move_constructor() const {
-    const auto& ac(context_.element_configuration().aspect_configuration());
+    const auto& ac(context_.element_properties().aspect_configuration());
     return ac.requires_manual_move_constructor();
 }
 
 bool assistant::requires_stream_manipulators() const {
-    const auto& ac(context_.element_configuration().aspect_configuration());
+    const auto& ac(context_.element_properties().aspect_configuration());
     return ac.requires_stream_manipulators();
 }
 
@@ -289,8 +289,8 @@ bool assistant::is_odb_facet_enabled() const {
 
 dogen::formatters::cpp::scoped_boilerplate_formatter
 assistant::make_scoped_boilerplate_formatter() {
-    const auto& ecfg(context_.element_configuration());
-    const auto& dcfg(ecfg.decoration_configuration());
+    const auto& eprops(context_.element_properties());
+    const auto& dcfg(eprops.decoration_configuration());
 
     const auto& fmt_cfg(formatter_configuration_);
     const auto& deps(fmt_cfg.inclusion_dependencies());
@@ -308,7 +308,7 @@ assistant::make_scoped_namespace_formatter(const std::list<std::string>& ns) {
 }
 
 void assistant::make_decoration_preamble() {
-    const auto dc(context_.element_configuration().decoration_configuration());
+    const auto dc(context_.element_properties().decoration_configuration());
     make_decoration_preamble(dc);
 }
 
@@ -461,12 +461,12 @@ is_streaming_enabled(const formattables::helper_configuration& hc) const {
 void assistant::add_helper_methods(const std::string& element_id) {
     BOOST_LOG_SEV(lg, debug) << "Generating helper methods. Element: "
                              << element_id;
-    if (context_.element_configuration().helper_configurations().empty()) {
+    if (context_.element_properties().helper_configurations().empty()) {
         BOOST_LOG_SEV(lg, debug) << "No helper methods found.";
     }
 
-    const auto& ecfg(context_.element_configuration());
-    for (const auto& hlp_cfg : ecfg.helper_configurations()) {
+    const auto& eprops(context_.element_properties());
+    for (const auto& hlp_cfg : eprops.helper_configurations()) {
         BOOST_LOG_SEV(lg, debug) << "Helper configuration: " << hlp_cfg;
         const auto helpers(get_helpers(hlp_cfg));
 
@@ -535,8 +535,8 @@ streaming_for_type(const formattables::helper_descriptor& hd,
 
 bool assistant::
 requires_hashing_helper_method(const yarn::attribute& attr) const {
-    const auto& ecfg(context_.element_configuration());
-    for (const auto& hlp_cfg : ecfg.helper_configurations()) {
+    const auto& eprops(context_.element_properties());
+    for (const auto& hlp_cfg : eprops.helper_configurations()) {
         const auto ident(attr.parsed_type().identifiable());
         const auto& desc(hlp_cfg.current());
         if (ident != desc.name_tree_identifiable())
@@ -549,8 +549,8 @@ requires_hashing_helper_method(const yarn::attribute& attr) const {
 }
 
 std::list<std::string> assistant::get_odb_pragmas() const {
-    const auto& ecfg(context_.element_configuration());
-    const auto& odb_cfg(ecfg.odb_configuration());
+    const auto& eprops(context_.element_properties());
+    const auto& odb_cfg(eprops.odb_configuration());
     if (!odb_cfg)
         return std::list<std::string>();
 
@@ -559,8 +559,8 @@ std::list<std::string> assistant::get_odb_pragmas() const {
 
 std::list<std::string>
 assistant::get_odb_pragmas(const std::string& attr_id) const {
-    const auto& ecfg(context_.element_configuration());
-    const auto& odb_cfg(ecfg.odb_configuration());
+    const auto& eprops(context_.element_properties());
+    const auto& odb_cfg(eprops.odb_configuration());
     if (!odb_cfg)
         return std::list<std::string>();
 

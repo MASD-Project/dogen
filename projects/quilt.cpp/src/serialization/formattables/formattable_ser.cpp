@@ -31,7 +31,7 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/yarn/serialization/element_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/formattable_ser.hpp"
-#include "dogen/quilt.cpp/serialization/formattables/element_configuration_ser.hpp"
+#include "dogen/quilt.cpp/serialization/formattables/element_properties_ser.hpp"
 
 namespace boost {
 namespace serialization {
@@ -42,7 +42,7 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("master_segment", v.master_segment_);
     ar << make_nvp("all_segments", v.all_segments_);
-    ar << make_nvp("element_configuration", v.element_configuration_);
+    ar << make_nvp("element_properties", v.element_properties_);
 }
 
 template<typename Archive>
@@ -51,7 +51,7 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("master_segment", v.master_segment_);
     ar >> make_nvp("all_segments", v.all_segments_);
-    ar >> make_nvp("element_configuration", v.element_configuration_);
+    ar >> make_nvp("element_properties", v.element_properties_);
 }
 
 } }

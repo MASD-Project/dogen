@@ -21,7 +21,7 @@
 #include <ostream>
 #include "dogen/yarn/io/element_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/formattable_io.hpp"
-#include "dogen/quilt.cpp/io/formattables/element_configuration_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/element_properties_io.hpp"
 
 namespace boost {
 
@@ -63,7 +63,7 @@ std::ostream& operator<<(std::ostream& s, const formattable& v) {
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::formattable\"" << ", "
       << "\"master_segment\": " << v.master_segment() << ", "
       << "\"all_segments\": " << v.all_segments() << ", "
-      << "\"element_configuration\": " << v.element_configuration()
+      << "\"element_properties\": " << v.element_properties()
       << " }";
     return(s);
 }

@@ -45,7 +45,7 @@ BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
     test_move_assignment_copy<formattables::model_generator>();
     test_move_assignment_copy<formattables::formattable_generator>();
     test_move_assignment_copy<formattables::odb_configuration_generator>();
-    test_move_assignment_copy<formattables::element_configuration_generator>();
+    test_move_assignment_copy<formattables::element_properties_generator>();
     test_move_assignment_copy<formattables::global_enablement_configuration_generator>();
     test_move_assignment_copy<formattables::formatter_configuration_generator>();
     test_move_assignment_copy<formattables::helper_configuration_generator>();

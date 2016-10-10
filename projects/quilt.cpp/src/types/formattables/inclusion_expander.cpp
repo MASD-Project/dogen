@@ -458,8 +458,8 @@ void inclusion_expander::populate_inclusion_dependencies(
          * share the same element id so we can obtain a reference for
          * our container up front and populate it for each segment.
          */
-        auto& ecfg(formattable.element_configuration());
-        auto& fmt_cfg(ecfg.formatter_configurations());
+        auto& eprops(formattable.element_properties());
+        auto& fmt_cfg(eprops.formatter_configurations());
         for (const auto& ptr : formattable.all_segments()) {
             const auto& e(*ptr);
 

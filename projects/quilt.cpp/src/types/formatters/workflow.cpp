@@ -54,7 +54,7 @@ cpp::formatters::registrar& workflow::registrar() {
 
 std::forward_list<dogen::formatters::file>
 workflow::format(const formattables::model& fm, const yarn::element& e,
-    const formattables::element_configuration& ec) const {
+    const formattables::element_properties& ep) const {
 
     const auto id(e.name().id());
     BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
@@ -70,7 +70,7 @@ workflow::format(const formattables::model& fm, const yarn::element& e,
         return r;
     }
 
-    auto& fmt_cfgs(ec.formatter_configurations());
+    auto& fmt_cfgs(ep.formatter_configurations());
     const auto& fmts(i->second);
     for (const auto& fmt_ptr : fmts) {
         const auto& fmt(*fmt_ptr);
@@ -93,7 +93,7 @@ workflow::format(const formattables::model& fm, const yarn::element& e,
 
         const auto& hlp_fmt(fc.helper_formatters());
         const auto fct_cfgs(fm.facet_configurations());
-        context ctx(ec, fm, hlp_fmt);
+        context ctx(ep, fm, hlp_fmt);
 
         auto file(fmt.format(ctx, e));
         const auto pg(yarn::generation_types::partial_generation);
@@ -117,10 +117,10 @@ workflow::execute(const formattables::model& fm) const {
     std::forward_list<dogen::formatters::file> r;
     for (const auto& pair : fm.formattables()) {
         const auto& formattable(pair.second);
-        const auto& ecfgs(formattable.element_configuration());
+        const auto& eprops(formattable.element_properties());
         for (const auto& segment : formattable.all_segments()) {
             const auto& e(*segment);
-            r.splice_after(r.before_begin(), format(fm, e, ecfgs));
+            r.splice_after(r.before_begin(), format(fm, e, eprops));
         }
     }
     return r;

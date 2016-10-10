@@ -54,7 +54,7 @@ public:
 private:
     std::forward_list<dogen::formatters::file>
     format(const formattables::model& fm, const yarn::element& e,
-        const formattables::element_configuration& ec) const;
+        const formattables::element_properties& ep) const;
 
 public:
     std::forward_list<dogen::formatters::file>

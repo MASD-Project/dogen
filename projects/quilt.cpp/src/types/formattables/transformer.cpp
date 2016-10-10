@@ -75,7 +75,7 @@ transform(const formatters::container& fc, const yarn::model& m) const {
         }
         BOOST_LOG_SEV(lg, debug) << "Element has formatters " << id;
 
-        auto& fmt_cfgs(fbl.element_configuration().formatter_configurations());
+        auto& fmt_cfgs(fbl.element_properties().formatter_configurations());
         for (const auto& fmt : j->second) {
             const auto fmtn(fmt->ownership_hierarchy().formatter_name());
             const auto pair(std::make_pair(fmtn, formatter_configuration()));

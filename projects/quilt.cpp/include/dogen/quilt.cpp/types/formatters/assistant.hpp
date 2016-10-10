@@ -116,7 +116,7 @@ private:
     /**@{*/
     const formattables::formatter_configuration&
     obtain_formatter_configuration(
-        const formattables::element_configuration& ecfg,
+        const formattables::element_properties& eprops,
         const std::string& formatter_name) const;
     const formattables::formatter_configuration&
     obtain_formatter_configuration(const std::string& element_id,

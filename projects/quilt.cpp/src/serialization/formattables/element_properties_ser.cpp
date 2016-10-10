@@ -34,9 +34,9 @@
 #include "dogen/formatters/serialization/decoration_configuration_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/profile_group_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/odb_configuration_ser.hpp"
+#include "dogen/quilt.cpp/serialization/formattables/element_properties_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/aspect_configuration_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/helper_configuration_ser.hpp"
-#include "dogen/quilt.cpp/serialization/formattables/element_configuration_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/formatter_configuration_ser.hpp"
 
 namespace boost {
@@ -44,7 +44,7 @@ namespace serialization {
 
 template<typename Archive>
 void save(Archive& ar,
-    const dogen::quilt::cpp::formattables::element_configuration& v,
+    const dogen::quilt::cpp::formattables::element_properties& v,
     const unsigned int /*version*/) {
     ar << make_nvp("decoration_configuration", v.decoration_configuration_);
     ar << make_nvp("aspect_configuration", v.aspect_configuration_);
@@ -57,7 +57,7 @@ void save(Archive& ar,
 
 template<typename Archive>
 void load(Archive& ar,
-    dogen::quilt::cpp::formattables::element_configuration& v,
+    dogen::quilt::cpp::formattables::element_properties& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("decoration_configuration", v.decoration_configuration_);
     ar >> make_nvp("aspect_configuration", v.aspect_configuration_);
@@ -73,16 +73,16 @@ void load(Archive& ar,
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const dogen::quilt::cpp::formattables::element_configuration& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, dogen::quilt::cpp::formattables::element_configuration& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const dogen::quilt::cpp::formattables::element_properties& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, dogen::quilt::cpp::formattables::element_properties& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const dogen::quilt::cpp::formattables::element_configuration& v, unsigned int version);
-template void load(archive::text_iarchive& ar, dogen::quilt::cpp::formattables::element_configuration& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const dogen::quilt::cpp::formattables::element_properties& v, unsigned int version);
+template void load(archive::text_iarchive& ar, dogen::quilt::cpp::formattables::element_properties& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const dogen::quilt::cpp::formattables::element_configuration& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, dogen::quilt::cpp::formattables::element_configuration& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const dogen::quilt::cpp::formattables::element_properties& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, dogen::quilt::cpp::formattables::element_properties& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const dogen::quilt::cpp::formattables::element_configuration& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, dogen::quilt::cpp::formattables::element_configuration& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const dogen::quilt::cpp::formattables::element_properties& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, dogen::quilt::cpp::formattables::element_properties& v, unsigned int version);
 
 } }

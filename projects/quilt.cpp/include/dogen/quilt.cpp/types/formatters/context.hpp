@@ -30,7 +30,7 @@
 #include <algorithm>
 #include <unordered_map>
 #include "dogen/quilt.cpp/types/formattables/model.hpp"
-#include "dogen/quilt.cpp/types/formattables/element_configuration.hpp"
+#include "dogen/quilt.cpp/types/formattables/element_properties.hpp"
 #include "dogen/quilt.cpp/types/formatters/helper_formatter_interface.hpp"
 
 namespace dogen {
@@ -43,13 +43,13 @@ namespace formatters {
  */
 class context final {
 public:
-    context(const formattables::element_configuration& element_configuration,
+    context(const formattables::element_properties& element_properties,
         const formattables::model& fm, const std::unordered_map<std::string,
         std::unordered_map<std::string, std::list<std::shared_ptr<
         helper_formatter_interface>>>>& helpers);
 
 public:
-    const formattables::element_configuration& element_configuration() const;
+    const formattables::element_properties& element_properties() const;
 
     const formattables::model& model() const;
 
@@ -61,7 +61,7 @@ public:
         helpers() const;
 
 private:
-    const formattables::element_configuration& element_configuration_;
+    const formattables::element_properties& element_properties_;
     const formattables::model& model_;
     const std::unordered_map<
         std::string,

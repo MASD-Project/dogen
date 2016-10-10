@@ -47,15 +47,15 @@ expand(const dogen::formatters::decoration_configuration_factory& dcf,
     for (auto& pair : fm.formattables()) {
         const auto id(pair.first);
         auto& formattable(pair.second);
-        auto& ecfg(formattable.element_configuration());
+        auto& eprops(formattable.element_properties());
 
         // FIXME: obtain the modeline name from the formatter
         if (boost::contains(id, "CMakeLists"))
-            ecfg.decoration_configuration(dcf.make(cmake_modeline_name));
+            eprops.decoration_configuration(dcf.make(cmake_modeline_name));
         else if (boost::contains(id, "options.odb"))
-            ecfg.decoration_configuration(dcf.make(odb_modeline_name));
+            eprops.decoration_configuration(dcf.make(odb_modeline_name));
         else
-            ecfg.decoration_configuration(dc);
+            eprops.decoration_configuration(dc);
     }
 }
 

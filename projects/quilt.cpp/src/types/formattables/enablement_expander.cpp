@@ -479,7 +479,7 @@ void enablement_expander::compute_enablement(
     const local_enablement_configurations_type& lcs, formattable& fbl) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started computing enablement.";
-    for (auto& pair : fbl.element_configuration().formatter_configurations()) {
+    for (auto& pair : fbl.element_properties().formatter_configurations()) {
         const auto fmtn(pair.first);
 
         /*
@@ -602,8 +602,8 @@ void enablement_expander::expand(const dynamic::repository& drp,
         BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
 
         auto& formattable(pair.second);
-        const auto& ecfg(formattable.element_configuration());
-        const auto& lpg(ecfg.local_profile_group());
+        const auto& eprops(formattable.element_properties());
+        const auto& lpg(eprops.local_profile_group());
         for (const auto& segment : formattable.all_segments()) {
             const auto& e(*segment);
 

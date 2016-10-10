@@ -20,7 +20,7 @@
  */
 #include "dogen/yarn/test_data/element_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/formattable_td.hpp"
-#include "dogen/quilt.cpp/test_data/formattables/element_configuration_td.hpp"
+#include "dogen/quilt.cpp/test_data/formattables/element_properties_td.hpp"
 
 namespace {
 
@@ -44,9 +44,9 @@ std::list<boost::shared_ptr<dogen::yarn::element> > create_std_list_boost_shared
     return r;
 }
 
-dogen::quilt::cpp::formattables::element_configuration
-create_dogen_quilt_cpp_formattables_element_configuration(const unsigned int position) {
-    return dogen::quilt::cpp::formattables::element_configuration_generator::create(position);
+dogen::quilt::cpp::formattables::element_properties
+create_dogen_quilt_cpp_formattables_element_properties(const unsigned int position) {
+    return dogen::quilt::cpp::formattables::element_properties_generator::create(position);
 }
 
 }
@@ -62,7 +62,7 @@ void formattable_generator::
 populate(const unsigned int position, result_type& v) {
     v.master_segment(create_boost_shared_ptr_dogen_yarn_element(position + 0));
     v.all_segments(create_std_list_boost_shared_ptr_dogen_yarn_element(position + 1));
-    v.element_configuration(create_dogen_quilt_cpp_formattables_element_configuration(position + 2));
+    v.element_properties(create_dogen_quilt_cpp_formattables_element_properties(position + 2));
 }
 
 formattable_generator::result_type

@@ -21,9 +21,9 @@
 #include "dogen/formatters/hash/decoration_configuration_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/profile_group_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/odb_configuration_hash.hpp"
+#include "dogen/quilt.cpp/hash/formattables/element_properties_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/aspect_configuration_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/helper_configuration_hash.hpp"
-#include "dogen/quilt.cpp/hash/formattables/element_configuration_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/formatter_configuration_hash.hpp"
 
 namespace {
@@ -97,7 +97,7 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-std::size_t element_configuration_hasher::hash(const element_configuration& v) {
+std::size_t element_properties_hasher::hash(const element_properties& v) {
     std::size_t seed(0);
 
     combine(seed, hash_boost_optional_dogen_formatters_decoration_configuration(v.decoration_configuration()));

@@ -72,14 +72,14 @@ expand(const formatters::container& fc, const locator& l, model& fm) const {
          */
         const auto& e(*formattable.master_segment());
         const auto n(e.name());
-        auto& ecfg(formattable.element_configuration());
+        auto& eprops(formattable.element_properties());
 
         /*
          * Go thorough all the formatter configurations. For each,
          * find the associated formatter and ask it to generate the
          * full path for the file.
          */
-        for (auto& fmt_cfg_pair : ecfg.formatter_configurations()) {
+        for (auto& fmt_cfg_pair : eprops.formatter_configurations()) {
             const auto fmtn(fmt_cfg_pair.first);
             auto& fmt_cfg(fmt_cfg_pair.second);
 

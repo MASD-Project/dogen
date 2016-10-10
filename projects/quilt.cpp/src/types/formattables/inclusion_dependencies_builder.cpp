@@ -122,8 +122,8 @@ bool inclusion_dependencies_builder::is_enabled(const yarn::name& n,
     }
 
     const auto& formattable(i->second);
-    const auto& ecfg(formattable.element_configuration());
-    const auto& fmt_cfgs(ecfg.formatter_configurations());
+    const auto& eprops(formattable.element_properties());
+    const auto& fmt_cfgs(eprops.formatter_configurations());
     const auto j(fmt_cfgs.find(formatter_name));
     if (j == fmt_cfgs.end()) {
         BOOST_LOG_SEV(lg, debug) << formatter_name_not_found << formatter_name

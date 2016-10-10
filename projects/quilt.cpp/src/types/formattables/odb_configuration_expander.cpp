@@ -134,8 +134,8 @@ expand(const dynamic::repository& drp, model& fm) const {
             continue;
 
         const auto& o(*ptr);
-        auto& ecfg(formattable.element_configuration());
-        ecfg.odb_configuration(compute_odb_configuration(fds, o));
+        auto& eprops(formattable.element_properties());
+        eprops.odb_configuration(compute_odb_configuration(fds, o));
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished expanding odb configuration. ";

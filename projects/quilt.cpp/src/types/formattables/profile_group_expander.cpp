@@ -270,8 +270,8 @@ void profile_group_expander::populate_model(const dynamic::repository& drp,
         }
 
         if (bound) {
-            auto& ecfg(formattable.element_configuration());
-            ecfg.local_profile_group(*bound);
+            auto& eprops(formattable.element_properties());
+            eprops.local_profile_group(*bound);
             BOOST_LOG_SEV(lg, debug) << "Stereotype-bound profile group: "
                                      << bound->name();
             continue;
@@ -312,8 +312,8 @@ void profile_group_expander::populate_model(const dynamic::repository& drp,
                 expansion_error(invalid_profile_configuration + local_cfg));
         }
 
-        auto& ecfg(formattable.element_configuration());
-        ecfg.local_profile_group(lpg);
+        auto& eprops(formattable.element_properties());
+        eprops.local_profile_group(lpg);
         BOOST_LOG_SEV(lg, debug) << "Set profile group: " << local_cfg;
     }
 

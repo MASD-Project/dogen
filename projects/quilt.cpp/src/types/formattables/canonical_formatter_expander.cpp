@@ -50,7 +50,7 @@ expand(const formatters::container& fc, model& fm) const {
         BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
 
         auto& formattable(pair.second);
-        auto& ecfg(pair.second.element_configuration());
+        auto& eprops(pair.second.element_properties());
         for (const auto& segment : formattable.all_segments()) {
             const auto& e(*segment);
 
@@ -88,7 +88,7 @@ expand(const formatters::container& fc, model& fm) const {
 
                 using formatters::traits;
                 const auto cfmtn(traits::canonical_formatter_name(fctn));
-                ecfg.canonical_formatter_to_formatter()[cfmtn] = fmtn;
+                eprops.canonical_formatter_to_formatter()[cfmtn] = fmtn;
                 BOOST_LOG_SEV(lg, debug) << "Mapping " << cfmtn
                                          << " to " << fmtn;
             }

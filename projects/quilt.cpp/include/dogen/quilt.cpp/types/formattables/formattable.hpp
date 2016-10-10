@@ -29,7 +29,7 @@
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
 #include "dogen/yarn/types/element_fwd.hpp"
-#include "dogen/quilt.cpp/types/formattables/element_configuration.hpp"
+#include "dogen/quilt.cpp/types/formattables/element_properties.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/formattable_fwd_ser.hpp"
 
 namespace dogen {
@@ -48,7 +48,7 @@ public:
     formattable(
         const boost::shared_ptr<dogen::yarn::element>& master_segment,
         const std::list<boost::shared_ptr<dogen::yarn::element> >& all_segments,
-        const dogen::quilt::cpp::formattables::element_configuration& element_configuration);
+        const dogen::quilt::cpp::formattables::element_properties& element_properties);
 
 private:
     template<typename Archive>
@@ -68,10 +68,10 @@ public:
     void all_segments(const std::list<boost::shared_ptr<dogen::yarn::element> >& v);
     void all_segments(const std::list<boost::shared_ptr<dogen::yarn::element> >&& v);
 
-    const dogen::quilt::cpp::formattables::element_configuration& element_configuration() const;
-    dogen::quilt::cpp::formattables::element_configuration& element_configuration();
-    void element_configuration(const dogen::quilt::cpp::formattables::element_configuration& v);
-    void element_configuration(const dogen::quilt::cpp::formattables::element_configuration&& v);
+    const dogen::quilt::cpp::formattables::element_properties& element_properties() const;
+    dogen::quilt::cpp::formattables::element_properties& element_properties();
+    void element_properties(const dogen::quilt::cpp::formattables::element_properties& v);
+    void element_properties(const dogen::quilt::cpp::formattables::element_properties&& v);
 
 public:
     bool operator==(const formattable& rhs) const;
@@ -86,7 +86,7 @@ public:
 private:
     boost::shared_ptr<dogen::yarn::element> master_segment_;
     std::list<boost::shared_ptr<dogen::yarn::element> > all_segments_;
-    dogen::quilt::cpp::formattables::element_configuration element_configuration_;
+    dogen::quilt::cpp::formattables::element_properties element_properties_;
 };
 
 } } } }

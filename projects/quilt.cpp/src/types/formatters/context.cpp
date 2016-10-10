@@ -26,16 +26,16 @@ namespace cpp {
 namespace formatters {
 
 context::context(
-    const formattables::element_configuration& element_configuration,
+    const formattables::element_properties& element_properties,
     const formattables::model& fm,
     const std::unordered_map<std::string, std::unordered_map<std::string,
     std::list<std::shared_ptr<helper_formatter_interface>>>>& helpers)
-    : element_configuration_(element_configuration), model_(fm),
+    : element_properties_(element_properties), model_(fm),
       helpers_(helpers) { }
 
-const formattables::element_configuration&
-context::element_configuration() const {
-    return element_configuration_;
+const formattables::element_properties&
+context::element_properties() const {
+    return element_properties_;
 }
 
 const formattables::model& context::model() const {

@@ -318,7 +318,7 @@ void helper_expander::populate_helper_configuration(const context& ctx,
         BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
 
         auto& formattable(pair.second);
-        auto& ecfg(formattable.element_configuration());
+        auto& eprops(formattable.element_properties());
 
         /*
          * We only want to process the master segment; the
@@ -349,8 +349,9 @@ void helper_expander::populate_helper_configuration(const context& ctx,
          */
         const auto& attrs(ptr->local_attributes());
         const auto iir(ptr->in_inheritance_relationship());
-        const auto hlp_cfgs(compute_helper_configurations(ctx, fff, iir, attrs));
-        ecfg.helper_configurations(hlp_cfgs);
+        const auto hlp_cfgs(
+            compute_helper_configurations(ctx, fff, iir, attrs));
+        eprops.helper_configurations(hlp_cfgs);
     }
 }
 

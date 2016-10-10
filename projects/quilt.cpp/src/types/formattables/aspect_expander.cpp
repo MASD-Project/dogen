@@ -184,7 +184,7 @@ void aspect_expander::populate_aspect_configuration(
         BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
 
         auto& formattable(pair.second);
-        auto& ecfg(formattable.element_configuration());
+        auto& eprops(formattable.element_properties());
 
         /*
          * We only want to process the master segment; the
@@ -215,7 +215,7 @@ void aspect_expander::populate_aspect_configuration(
          */
         const auto& attr(ptr->local_attributes());
         const auto ac(compute_aspect_configuration(acs, attr));
-        ecfg.aspect_configuration(ac);
+        eprops.aspect_configuration(ac);
     }
 }
 

@@ -97,6 +97,37 @@ formattables.
 
 Grep the project for anyone still using this term and remove it.
 
+*** COMPLETED Rename properties to attributes in opaque configuration :story:
+    CLOSED: [2016-10-10 Mon 11:19]
+
+This was missed in rename.
+
+*** STARTED Solve the issue of too many "configurations"              :story:
+    CLOCK: [2016-10-10 Mon 11:11]--[2016-10-10 Mon 12:00] =>  0:49
+
+We need a name for the "transient" configuration which is used inside
+factories and expanders to generate the "main" configuration. This is
+a common problem in quilt.cpp which we chose to ignore, but needs to
+be addressed as it is confusing to have so many classes with the
+postfix "configuration".
+
+One possible setup:
+
+- properties: data that is inferred from yarn and augmented in
+  formatter space. It is a "property" of the original data.
+- configuration: data used by the expander/factory internally in order
+  to do its work. It may come from meta-data/annotations, but it may
+  also come from other sources.
+
+With these definitions the ubiquitous language becomes clear for all
+four related terms: properties, configuration, attributes and
+annotations.
+
+Tasks:
+
+- rename all classes using configuration that should be using
+  properties.
+
 *** Merge decoration configuration and annotations factories          :story:
 
 As with quilt, get rid of the separation between annotations and
@@ -143,6 +174,112 @@ objects in yarn (well, anywhere in theory). Interpreting some
 - scopes: remove unused scopes. Rest of the scopes should be root,
   top-level, child (avoid references to yarn concepts).
 - workflow: annotation groups factory. Takes in scribble groups.
+
+*** Push stereotypes processing into yarn                             :story:
+
+At present we have stereotypes as an enum, and the frontends are
+responsible for resolving the stereotypes. This is not ideal:
+
+- we assume unknown stereotypes are concepts;
+- we map visitable to a flag to map it to a stereotype;
+- we map fluent to a flag;
+- we had to hack in the profile stereotype binding;
+- the same work will have to be done in other frontends (e.g. JSON).
+
+The right thing is:
+
+- make stereotypes a string container;
+- frontend simply populates the container and does not judgement;
+- *all* stereotypes are put in the container; rule of thumb is, if its
+  a UML stereotype then it must go in the container;
+- stereotypes expander figures out if the stereotype is one that is
+  actionable within yarn (immutable, visitor, modeled concepts) or one
+  to pass-through (binding stereotypes).
+- during dynamic expansion, we supply a list of _all_ stereotypes
+  against ids. If there is a match, they are used as profiles.
+
+Merged stories:
+
+*Link profiles to stereotypes*
+
+Once we have profiles, we need to have a way to link them to
+stereotypes. At present we only have two use cases:
+
+- hand-crafted
+- formatter
+
+When we spot one of these, we should then automatically look for a
+profile with this name. If found apply it locally.
+
+*Previous Understanding*
+
+An element can be marked with the stereotype of handcrafted. We then
+have several things to determine for this element:
+
+- which formatters are disabled due to handcraft mode (e.g. all facets
+  other than types);
+- which formatters are enabled, but should only generate if there
+  isn't a file already in the file system (e.g. class header and class
+  implementation in types)
+- which formatters are enabled and should generate as usual
+  (e.g. forward declarations in types).
+
+We must also allow users to override these settings so that:
+
+- they can disable the types facet if required;
+- they can provide their own implementations for other facets;
+- they can ask the code generator to generate one for them
+  (serialisation, io).
+
+Finally, for the common case, we do not want users to have to set lots
+of meta-data; we need a sensible default behaviour.
+
+Actually, from a purely functional perspective, what is handcrafting?
+It is a shorthand for:
+
+- disable a set of formatters;
+- enable another set of formatters;
+- for a subset of the enabled formatters, generate only if there is no
+  file in the filesystem, otherwise do nothing;
+- for another subset of the enabled formatters, generate as usual.
+- do not add leaves to the registrar (unless asked to).
+
+One can conceive the notion of an enablement profile. These can be
+global or local. We can also have overwritting profiles. These can
+only be local. A sub-set of the enabled formatters can be set to
+overwrite=false. Examples:
+
+- default enablement profile: "enable all". Enables all facets and
+  formatters.
+- types and a facet profiles: "types and serialisation", "types and
+  io" etc.
+- "types class only": generates class header and implementation.
+- default overwrite profile: "overwrite all". Overwrites all
+  artefacts.
+
+Now handcrafting becomes much easier:
+
+- add meta-data to quilt: a) a way of specifying profiles for
+  overwriting and enabling b) a way of specifying if leaves contribute
+  to registration or not.
+- define a set of profiles in data for overwriting and enabling. Users
+  can provide their own profile directories.
+- Link the overwriting and enabling with stereotypes: given a
+  stereotype, we could map to a default profile. Actually this is more
+  of a profile group. We could then state that a stereotype maps to a
+  profile group.
+
+Note: we don't need to do leaf management:
+
+#+begin_quote
+- add a flag for leaf management. It defaults to true, unless
+  handcrafted. Add meta-data to allow overriding flag (or create story
+  for it as we don't yet have a use case).
+#+end_quote
+
+We just need to enable/disable serialisation and the code will work.
+
+- add a stereotype of handcrafted with a default profile.
 
 *** Rewrite profile support                                           :story:
 
@@ -306,10 +443,6 @@ Further thoughts:
 A number of tests got disabled as part of the dynamic refactor. Fix
 them.
 
-*** Rename properties to attributes in opaque configuration           :story:
-
-This was missed in rename.
-
 *** Finish overwriting support                                        :story:
 
 With profiles we have all the pieces in place to support overwrites,
@@ -318,112 +451,6 @@ but there is some linkage missing:
 - global/local configuration needs to have an overwrite flag;
 - need to populate formatter configuration on the back of that;
 - need to read flag from formatter configuration and set it on file.
-
-*** Push stereotypes processing into yarn                             :story:
-
-At present we have stereotypes as an enum, and the frontends are
-responsible for resolving the stereotypes. This is not ideal:
-
-- we assume unknown stereotypes are concepts;
-- we map visitable to a flag to map it to a stereotype;
-- we map fluent to a flag;
-- we had to hack in the profile stereotype binding;
-- the same work will have to be done in other frontends (e.g. JSON).
-
-The right thing is:
-
-- make stereotypes a string container;
-- frontend simply populates the container and does not judgement;
-- *all* stereotypes are put in the container; rule of thumb is, if its
-  a UML stereotype then it must go in the container;
-- stereotypes expander figures out if the stereotype is one that is
-  actionable within yarn (immutable, visitor, modeled concepts) or one
-  to pass-through (binding stereotypes).
-- during dynamic expansion, we supply a list of _all_ stereotypes
-  against ids. If there is a match, they are used as profiles.
-
-Merged stories:
-
-*Link profiles to stereotypes*
-
-Once we have profiles, we need to have a way to link them to
-stereotypes. At present we only have two use cases:
-
-- hand-crafted
-- formatter
-
-When we spot one of these, we should then automatically look for a
-profile with this name. If found apply it locally.
-
-*Previous Understanding*
-
-An element can be marked with the stereotype of handcrafted. We then
-have several things to determine for this element:
-
-- which formatters are disabled due to handcraft mode (e.g. all facets
-  other than types);
-- which formatters are enabled, but should only generate if there
-  isn't a file already in the file system (e.g. class header and class
-  implementation in types)
-- which formatters are enabled and should generate as usual
-  (e.g. forward declarations in types).
-
-We must also allow users to override these settings so that:
-
-- they can disable the types facet if required;
-- they can provide their own implementations for other facets;
-- they can ask the code generator to generate one for them
-  (serialisation, io).
-
-Finally, for the common case, we do not want users to have to set lots
-of meta-data; we need a sensible default behaviour.
-
-Actually, from a purely functional perspective, what is handcrafting?
-It is a shorthand for:
-
-- disable a set of formatters;
-- enable another set of formatters;
-- for a subset of the enabled formatters, generate only if there is no
-  file in the filesystem, otherwise do nothing;
-- for another subset of the enabled formatters, generate as usual.
-- do not add leaves to the registrar (unless asked to).
-
-One can conceive the notion of an enablement profile. These can be
-global or local. We can also have overwritting profiles. These can
-only be local. A sub-set of the enabled formatters can be set to
-overwrite=false. Examples:
-
-- default enablement profile: "enable all". Enables all facets and
-  formatters.
-- types and a facet profiles: "types and serialisation", "types and
-  io" etc.
-- "types class only": generates class header and implementation.
-- default overwrite profile: "overwrite all". Overwrites all
-  artefacts.
-
-Now handcrafting becomes much easier:
-
-- add meta-data to quilt: a) a way of specifying profiles for
-  overwriting and enabling b) a way of specifying if leaves contribute
-  to registration or not.
-- define a set of profiles in data for overwriting and enabling. Users
-  can provide their own profile directories.
-- Link the overwriting and enabling with stereotypes: given a
-  stereotype, we could map to a default profile. Actually this is more
-  of a profile group. We could then state that a stereotype maps to a
-  profile group.
-
-Note: we don't need to do leaf management:
-
-#+begin_quote
-- add a flag for leaf management. It defaults to true, unless
-  handcrafted. Add meta-data to allow overriding flag (or create story
-  for it as we don't yet have a use case).
-#+end_quote
-
-We just need to enable/disable serialisation and the code will work.
-
-- add a stereotype of handcrafted with a default profile.
 
 *** Remove object types in yarn                                       :story:
 

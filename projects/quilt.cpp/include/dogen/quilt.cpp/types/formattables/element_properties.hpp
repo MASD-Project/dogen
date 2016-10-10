@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_ELEMENT_CONFIGURATION_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_ELEMENT_CONFIGURATION_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_ELEMENT_PROPERTIES_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_ELEMENT_PROPERTIES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -36,7 +36,7 @@
 #include "dogen/quilt.cpp/types/formattables/aspect_configuration.hpp"
 #include "dogen/quilt.cpp/types/formattables/helper_configuration.hpp"
 #include "dogen/quilt.cpp/types/formattables/formatter_configuration.hpp"
-#include "dogen/quilt.cpp/serialization/formattables/element_configuration_fwd_ser.hpp"
+#include "dogen/quilt.cpp/serialization/formattables/element_properties_fwd_ser.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -44,19 +44,19 @@ namespace cpp {
 namespace formattables {
 
 /**
- * @brief All of the configuration associated with an element.
+ * @brief All of the properties associated with an element.
  */
-class element_configuration final {
+class element_properties final {
 public:
-    element_configuration() = default;
-    element_configuration(const element_configuration&) = default;
-    ~element_configuration() = default;
+    element_properties() = default;
+    element_properties(const element_properties&) = default;
+    ~element_properties() = default;
 
 public:
-    element_configuration(element_configuration&& rhs);
+    element_properties(element_properties&& rhs);
 
 public:
-    element_configuration(
+    element_properties(
         const boost::optional<dogen::formatters::decoration_configuration>& decoration_configuration,
         const dogen::quilt::cpp::formattables::aspect_configuration& aspect_configuration,
         const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration>& formatter_configurations,
@@ -67,10 +67,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::quilt::cpp::formattables::element_configuration& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::quilt::cpp::formattables::element_properties& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::formattables::element_configuration& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::formattables::element_properties& v, unsigned int version);
 
 public:
     const boost::optional<dogen::formatters::decoration_configuration>& decoration_configuration() const;
@@ -109,14 +109,14 @@ public:
     void odb_configuration(const boost::optional<dogen::quilt::cpp::formattables::odb_configuration>&& v);
 
 public:
-    bool operator==(const element_configuration& rhs) const;
-    bool operator!=(const element_configuration& rhs) const {
+    bool operator==(const element_properties& rhs) const;
+    bool operator!=(const element_properties& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(element_configuration& other) noexcept;
-    element_configuration& operator=(element_configuration other);
+    void swap(element_properties& other) noexcept;
+    element_properties& operator=(element_properties other);
 
 private:
     boost::optional<dogen::formatters::decoration_configuration> decoration_configuration_;
@@ -134,8 +134,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::quilt::cpp::formattables::element_configuration& lhs,
-    dogen::quilt::cpp::formattables::element_configuration& rhs) {
+    dogen::quilt::cpp::formattables::element_properties& lhs,
+    dogen::quilt::cpp::formattables::element_properties& rhs) {
     lhs.swap(rhs);
 }
 
