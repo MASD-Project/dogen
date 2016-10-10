@@ -88,7 +88,7 @@ if [[ ! -e $output_dir ]]; then
     mkdir $output_dir
 fi
 
-compiler_dir="${output_dir}/${CC}";
+compiler_dir="${output_dir}/${compiler}";
 if [[ ! -e $compiler_dir ]]; then
     mkdir $compiler_dir
 fi
