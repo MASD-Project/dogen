@@ -49,6 +49,7 @@ BOOST_AUTO_TEST_CASE(validate_swap) {
     test_swap<formattables::formatter_properties_generator>();
     test_swap<formattables::helper_properties_generator>();
     test_swap<formattables::aspect_properties_generator>();
+    test_swap<formattables::facet_properties_generator>();
     test_swap<formattables::helper_descriptor_generator>();
     test_swap<formattables::decoration_profile_generator>();
     test_swap<formattables::facet_profile_generator>();

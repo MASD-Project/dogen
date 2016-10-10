@@ -18,25 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_IO_FORMATTABLES_FACET_CONFIGURATION_IO_HPP
-#define DOGEN_QUILT_CPP_IO_FORMATTABLES_FACET_CONFIGURATION_IO_HPP
+#ifndef DOGEN_QUILT_CPP_HASH_FORMATTABLES_FACET_PROPERTIES_HASH_HPP
+#define DOGEN_QUILT_CPP_HASH_FORMATTABLES_FACET_PROPERTIES_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/quilt.cpp/types/formattables/facet_configuration.hpp"
+#include <functional>
+#include "dogen/quilt.cpp/types/formattables/facet_properties.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::quilt::cpp::formattables::facet_configuration& v);
+struct facet_properties_hasher {
+public:
+    static std::size_t hash(const facet_properties& v);
+};
 
 } } } }
 
+namespace std {
+
+template<>
+struct hash<dogen::quilt::cpp::formattables::facet_properties> {
+public:
+    size_t operator()(const dogen::quilt::cpp::formattables::facet_properties& v) const {
+        return dogen::quilt::cpp::formattables::facet_properties_hasher::hash(v);
+    }
+};
+
+}
 #endif

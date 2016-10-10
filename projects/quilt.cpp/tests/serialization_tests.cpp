@@ -58,6 +58,7 @@ BOOST_AUTO_TEST_CASE(validate_serialization) {
     roundtrip_type<formattables::formatter_properties_generator>();
     roundtrip_type<formattables::helper_properties_generator>();
     roundtrip_type<formattables::aspect_properties_generator>();
+    roundtrip_type<formattables::facet_properties_generator>();
     roundtrip_type<formattables::helper_descriptor_generator>();
     roundtrip_type<formattables::decoration_profile_generator>();
     roundtrip_type<formattables::facet_profile_generator>();

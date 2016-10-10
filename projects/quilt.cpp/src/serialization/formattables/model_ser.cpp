@@ -32,7 +32,7 @@
 #include "dogen/quilt.cpp/serialization/formattables/model_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/formattable_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/profile_group_ser.hpp"
-#include "dogen/quilt.cpp/serialization/formattables/facet_configuration_ser.hpp"
+#include "dogen/quilt.cpp/serialization/formattables/facet_properties_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/streaming_configuration_ser.hpp"
 
 namespace boost {
@@ -44,7 +44,7 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("streaming_configurations", v.streaming_configurations_);
     ar << make_nvp("formattables", v.formattables_);
-    ar << make_nvp("facet_configurations", v.facet_configurations_);
+    ar << make_nvp("facet_properties", v.facet_properties_);
     ar << make_nvp("global_profile_group", v.global_profile_group_);
 }
 
@@ -54,7 +54,7 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("streaming_configurations", v.streaming_configurations_);
     ar >> make_nvp("formattables", v.formattables_);
-    ar >> make_nvp("facet_configurations", v.facet_configurations_);
+    ar >> make_nvp("facet_properties", v.facet_properties_);
     ar >> make_nvp("global_profile_group", v.global_profile_group_);
 }
 

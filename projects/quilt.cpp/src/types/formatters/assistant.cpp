@@ -65,7 +65,7 @@ const std::string header_guard_not_set(
     "Header guard for formatter is not set. Formatter: ");
 const std::string formatter_properties_missing(
     "Could not find formatter configuration for formatter: ");
-const std::string facet_configuration_missing(
+const std::string facet_properties_missing(
     "Could not find facet configuration for formatter: ");
 const std::string facet_directory_missing(
     "Facet directory is missing for facet: ");
@@ -200,14 +200,14 @@ obtain_formatter_properties(const std::string& element_id,
     return obtain_formatter_properties(eprops, resolved_fmtn);
 }
 
-formattables::facet_configuration assistant::
-obtain_facet_configuration(const std::string& facet_name) const {
-    const auto& fct_cfg(context_.model().facet_configurations());
+formattables::facet_properties assistant::
+obtain_facet_properties(const std::string& facet_name) const {
+    const auto& fct_cfg(context_.model().facet_properties());
     const auto i(fct_cfg.find(facet_name));
     if (i == fct_cfg.end()) {
-        BOOST_LOG_SEV(lg, error) << facet_configuration_missing
+        BOOST_LOG_SEV(lg, error) << facet_properties_missing
                                  << facet_name;
-        BOOST_THROW_EXCEPTION(formatting_error(facet_configuration_missing +
+        BOOST_THROW_EXCEPTION(formatting_error(facet_properties_missing +
                 facet_name));
     }
     return i->second;
@@ -237,13 +237,13 @@ is_formatter_enabled(const std::string& formatter_name) const {
 
 bool assistant::
 is_facet_enabled(const std::string& facet_name) const {
-    const auto& fct_cfg(obtain_facet_configuration(facet_name));
+    const auto& fct_cfg(obtain_facet_properties(facet_name));
     return fct_cfg.enabled();
 }
 
 std::string assistant::
 get_facet_directory_for_facet(const std::string& facet_name) const {
-    const auto& fct_cfg(obtain_facet_configuration(facet_name));
+    const auto& fct_cfg(obtain_facet_properties(facet_name));
     if (fct_cfg.directory().empty()) {
         BOOST_LOG_SEV(lg, error) << facet_directory_missing << facet_name;
         BOOST_THROW_EXCEPTION(

@@ -23,7 +23,7 @@
 #include "dogen/quilt.cpp/io/formattables/model_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/formattable_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/profile_group_io.hpp"
-#include "dogen/quilt.cpp/io/formattables/facet_configuration_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/facet_properties_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/streaming_configuration_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -71,7 +71,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_configuration>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_properties>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -97,7 +97,7 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::model\"" << ", "
       << "\"streaming_configurations\": " << v.streaming_configurations() << ", "
       << "\"formattables\": " << v.formattables() << ", "
-      << "\"facet_configurations\": " << v.facet_configurations() << ", "
+      << "\"facet_properties\": " << v.facet_properties() << ", "
       << "\"global_profile_group\": " << v.global_profile_group()
       << " }";
     return(s);

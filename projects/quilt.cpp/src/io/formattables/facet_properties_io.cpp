@@ -18,20 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_FACET_CONFIGURATION_FWD_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_FACET_CONFIGURATION_FWD_HPP
+#include <ostream>
+#include <boost/io/ios_state.hpp>
+#include <boost/algorithm/string.hpp>
+#include "dogen/quilt.cpp/io/formattables/facet_properties_io.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
 
-class facet_configuration;
+std::ostream& operator<<(std::ostream& s, const facet_properties& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
+    s << " { "
+      << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::facet_properties\"" << ", "
+      << "\"enabled\": " << v.enabled() << ", "
+      << "\"overwrite\": " << v.overwrite() << ", "
+      << "\"directory\": " << "\"" << tidy_up_string(v.directory()) << "\""
+      << " }";
+    return(s);
+}
 
 } } } }
-
-#endif

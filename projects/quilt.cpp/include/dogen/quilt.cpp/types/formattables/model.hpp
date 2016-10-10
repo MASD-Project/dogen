@@ -30,7 +30,7 @@
 #include <unordered_map>
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
 #include "dogen/quilt.cpp/types/formattables/profile_group.hpp"
-#include "dogen/quilt.cpp/types/formattables/facet_configuration.hpp"
+#include "dogen/quilt.cpp/types/formattables/facet_properties.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/model_fwd_ser.hpp"
 #include "dogen/quilt.cpp/types/formattables/streaming_configuration.hpp"
 
@@ -50,7 +50,7 @@ public:
     model(
         const std::unordered_map<std::string, dogen::quilt::cpp::formattables::streaming_configuration>& streaming_configurations,
         const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formattable>& formattables,
-        const std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_configuration>& facet_configurations,
+        const std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_properties>& facet_properties,
         const dogen::quilt::cpp::formattables::profile_group& global_profile_group);
 
 private:
@@ -71,10 +71,10 @@ public:
     void formattables(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formattable>& v);
     void formattables(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formattable>&& v);
 
-    const std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_configuration>& facet_configurations() const;
-    std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_configuration>& facet_configurations();
-    void facet_configurations(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_configuration>& v);
-    void facet_configurations(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_configuration>&& v);
+    const std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_properties>& facet_properties() const;
+    std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_properties>& facet_properties();
+    void facet_properties(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_properties>& v);
+    void facet_properties(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_properties>&& v);
 
     const dogen::quilt::cpp::formattables::profile_group& global_profile_group() const;
     dogen::quilt::cpp::formattables::profile_group& global_profile_group();
@@ -94,7 +94,7 @@ public:
 private:
     std::unordered_map<std::string, dogen::quilt::cpp::formattables::streaming_configuration> streaming_configurations_;
     std::unordered_map<std::string, dogen::quilt::cpp::formattables::formattable> formattables_;
-    std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_configuration> facet_configurations_;
+    std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_properties> facet_properties_;
     dogen::quilt::cpp::formattables::profile_group global_profile_group_;
 };
 

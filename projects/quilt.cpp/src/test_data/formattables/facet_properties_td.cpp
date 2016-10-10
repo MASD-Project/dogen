@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/quilt.cpp/test_data/formattables/facet_configuration_td.hpp"
+#include "dogen/quilt.cpp/test_data/formattables/facet_properties_td.hpp"
 
 namespace {
 
@@ -40,31 +40,31 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-facet_configuration_generator::facet_configuration_generator() : position_(0) { }
+facet_properties_generator::facet_properties_generator() : position_(0) { }
 
-void facet_configuration_generator::
+void facet_properties_generator::
 populate(const unsigned int position, result_type& v) {
     v.enabled(create_bool(position + 0));
     v.overwrite(create_bool(position + 1));
     v.directory(create_std_string(position + 2));
 }
 
-facet_configuration_generator::result_type
-facet_configuration_generator::create(const unsigned int position) {
-    facet_configuration r;
-    facet_configuration_generator::populate(position, r);
+facet_properties_generator::result_type
+facet_properties_generator::create(const unsigned int position) {
+    facet_properties r;
+    facet_properties_generator::populate(position, r);
     return r;
 }
 
-facet_configuration_generator::result_type*
-facet_configuration_generator::create_ptr(const unsigned int position) {
-    facet_configuration* p = new facet_configuration();
-    facet_configuration_generator::populate(position, *p);
+facet_properties_generator::result_type*
+facet_properties_generator::create_ptr(const unsigned int position) {
+    facet_properties* p = new facet_properties();
+    facet_properties_generator::populate(position, *p);
     return p;
 }
 
-facet_configuration_generator::result_type
-facet_configuration_generator::operator()() {
+facet_properties_generator::result_type
+facet_properties_generator::operator()() {
     return create(position_++);
 }
 

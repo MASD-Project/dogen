@@ -49,6 +49,7 @@ BOOST_AUTO_TEST_CASE(validate_io) {
     test_io<formattables::formatter_properties_generator>();
     test_io<formattables::helper_properties_generator>();
     test_io<formattables::aspect_properties_generator>();
+    test_io<formattables::facet_properties_generator>();
     test_io<formattables::helper_descriptor_generator>();
     test_io<formattables::decoration_profile_generator>();
     test_io<formattables::facet_profile_generator>();

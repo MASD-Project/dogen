@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_FACET_CONFIGURATION_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_FACET_CONFIGURATION_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_FACET_PROPERTIES_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_FACET_PROPERTIES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,34 +27,34 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen/quilt.cpp/serialization/formattables/facet_configuration_fwd_ser.hpp"
+#include "dogen/quilt.cpp/serialization/formattables/facet_properties_fwd_ser.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
 
-class facet_configuration final {
+class facet_properties final {
 public:
-    facet_configuration(const facet_configuration&) = default;
-    facet_configuration(facet_configuration&&) = default;
-    ~facet_configuration() = default;
+    facet_properties(const facet_properties&) = default;
+    facet_properties(facet_properties&&) = default;
+    ~facet_properties() = default;
 
 public:
-    facet_configuration();
+    facet_properties();
 
 public:
-    facet_configuration(
+    facet_properties(
         const bool enabled,
         const bool overwrite,
         const std::string& directory);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::quilt::cpp::formattables::facet_configuration& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::quilt::cpp::formattables::facet_properties& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::formattables::facet_configuration& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::formattables::facet_properties& v, unsigned int version);
 
 public:
     bool enabled() const;
@@ -69,14 +69,14 @@ public:
     void directory(const std::string&& v);
 
 public:
-    bool operator==(const facet_configuration& rhs) const;
-    bool operator!=(const facet_configuration& rhs) const {
+    bool operator==(const facet_properties& rhs) const;
+    bool operator!=(const facet_properties& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(facet_configuration& other) noexcept;
-    facet_configuration& operator=(facet_configuration other);
+    void swap(facet_properties& other) noexcept;
+    facet_properties& operator=(facet_properties other);
 
 private:
     bool enabled_;
@@ -90,8 +90,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::quilt::cpp::formattables::facet_configuration& lhs,
-    dogen::quilt::cpp::formattables::facet_configuration& rhs) {
+    dogen::quilt::cpp::formattables::facet_properties& lhs,
+    dogen::quilt::cpp::formattables::facet_properties& rhs) {
     lhs.swap(rhs);
 }
 

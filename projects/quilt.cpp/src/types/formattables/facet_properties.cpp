@@ -18,18 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/formattables/facet_configuration.hpp"
+#include "dogen/quilt.cpp/types/formattables/facet_properties.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
 
-facet_configuration::facet_configuration()
+facet_properties::facet_properties()
     : enabled_(static_cast<bool>(0)),
       overwrite_(static_cast<bool>(0)) { }
 
-facet_configuration::facet_configuration(
+facet_properties::facet_properties(
     const bool enabled,
     const bool overwrite,
     const std::string& directory)
@@ -37,54 +37,54 @@ facet_configuration::facet_configuration(
       overwrite_(overwrite),
       directory_(directory) { }
 
-void facet_configuration::swap(facet_configuration& other) noexcept {
+void facet_properties::swap(facet_properties& other) noexcept {
     using std::swap;
     swap(enabled_, other.enabled_);
     swap(overwrite_, other.overwrite_);
     swap(directory_, other.directory_);
 }
 
-bool facet_configuration::operator==(const facet_configuration& rhs) const {
+bool facet_properties::operator==(const facet_properties& rhs) const {
     return enabled_ == rhs.enabled_ &&
         overwrite_ == rhs.overwrite_ &&
         directory_ == rhs.directory_;
 }
 
-facet_configuration& facet_configuration::operator=(facet_configuration other) {
+facet_properties& facet_properties::operator=(facet_properties other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-bool facet_configuration::enabled() const {
+bool facet_properties::enabled() const {
     return enabled_;
 }
 
-void facet_configuration::enabled(const bool v) {
+void facet_properties::enabled(const bool v) {
     enabled_ = v;
 }
 
-bool facet_configuration::overwrite() const {
+bool facet_properties::overwrite() const {
     return overwrite_;
 }
 
-void facet_configuration::overwrite(const bool v) {
+void facet_properties::overwrite(const bool v) {
     overwrite_ = v;
 }
 
-const std::string& facet_configuration::directory() const {
+const std::string& facet_properties::directory() const {
     return directory_;
 }
 
-std::string& facet_configuration::directory() {
+std::string& facet_properties::directory() {
     return directory_;
 }
 
-void facet_configuration::directory(const std::string& v) {
+void facet_properties::directory(const std::string& v) {
     directory_ = v;
 }
 
-void facet_configuration::directory(const std::string&& v) {
+void facet_properties::directory(const std::string&& v) {
     directory_ = std::move(v);
 }
 

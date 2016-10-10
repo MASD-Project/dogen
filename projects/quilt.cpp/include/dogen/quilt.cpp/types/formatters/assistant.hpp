@@ -129,8 +129,8 @@ private:
      *
      * @pre Facet configuration must exist for the facet.
      */
-    formattables::facet_configuration
-    obtain_facet_configuration(const std::string& facet_name) const;
+    formattables::facet_properties
+    obtain_facet_properties(const std::string& facet_name) const;
 
     /**
      * @brief Returns true if the formatter is enabled, false

@@ -28,25 +28,25 @@ namespace formattables {
 model::model(
     const std::unordered_map<std::string, dogen::quilt::cpp::formattables::streaming_configuration>& streaming_configurations,
     const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formattable>& formattables,
-    const std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_configuration>& facet_configurations,
+    const std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_properties>& facet_properties,
     const dogen::quilt::cpp::formattables::profile_group& global_profile_group)
     : streaming_configurations_(streaming_configurations),
       formattables_(formattables),
-      facet_configurations_(facet_configurations),
+      facet_properties_(facet_properties),
       global_profile_group_(global_profile_group) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
     swap(streaming_configurations_, other.streaming_configurations_);
     swap(formattables_, other.formattables_);
-    swap(facet_configurations_, other.facet_configurations_);
+    swap(facet_properties_, other.facet_properties_);
     swap(global_profile_group_, other.global_profile_group_);
 }
 
 bool model::operator==(const model& rhs) const {
     return streaming_configurations_ == rhs.streaming_configurations_ &&
         formattables_ == rhs.formattables_ &&
-        facet_configurations_ == rhs.facet_configurations_ &&
+        facet_properties_ == rhs.facet_properties_ &&
         global_profile_group_ == rhs.global_profile_group_;
 }
 
@@ -88,20 +88,20 @@ void model::formattables(const std::unordered_map<std::string, dogen::quilt::cpp
     formattables_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_configuration>& model::facet_configurations() const {
-    return facet_configurations_;
+const std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_properties>& model::facet_properties() const {
+    return facet_properties_;
 }
 
-std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_configuration>& model::facet_configurations() {
-    return facet_configurations_;
+std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_properties>& model::facet_properties() {
+    return facet_properties_;
 }
 
-void model::facet_configurations(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_configuration>& v) {
-    facet_configurations_ = v;
+void model::facet_properties(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_properties>& v) {
+    facet_properties_ = v;
 }
 
-void model::facet_configurations(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_configuration>&& v) {
-    facet_configurations_ = std::move(v);
+void model::facet_properties(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_properties>&& v) {
+    facet_properties_ = std::move(v);
 }
 
 const dogen::quilt::cpp::formattables::profile_group& model::global_profile_group() const {

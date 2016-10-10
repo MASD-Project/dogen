@@ -18,31 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/hash/formattables/facet_configuration_hash.hpp"
+#ifndef DOGEN_QUILT_CPP_TEST_DATA_FORMATTABLES_FACET_PROPERTIES_TD_HPP
+#define DOGEN_QUILT_CPP_TEST_DATA_FORMATTABLES_FACET_PROPERTIES_TD_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value) {
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-}
+#include "dogen/quilt.cpp/types/formattables/facet_properties.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
 
-std::size_t facet_configuration_hasher::hash(const facet_configuration& v) {
-    std::size_t seed(0);
+class facet_properties_generator {
+public:
+    facet_properties_generator();
 
-    combine(seed, v.enabled());
-    combine(seed, v.overwrite());
-    combine(seed, v.directory());
+public:
+    typedef dogen::quilt::cpp::formattables::facet_properties result_type;
 
-    return seed;
-}
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 } } } }
+
+#endif

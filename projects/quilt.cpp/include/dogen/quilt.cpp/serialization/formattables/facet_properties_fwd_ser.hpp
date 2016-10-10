@@ -18,37 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_HASH_FORMATTABLES_FACET_CONFIGURATION_HASH_HPP
-#define DOGEN_QUILT_CPP_HASH_FORMATTABLES_FACET_CONFIGURATION_HASH_HPP
+#ifndef DOGEN_QUILT_CPP_SERIALIZATION_FORMATTABLES_FACET_PROPERTIES_FWD_SER_HPP
+#define DOGEN_QUILT_CPP_SERIALIZATION_FORMATTABLES_FACET_PROPERTIES_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/quilt.cpp/types/formattables/facet_configuration.hpp"
+#include "dogen/quilt.cpp/types/formattables/facet_properties_fwd.hpp"
 
-namespace dogen {
-namespace quilt {
-namespace cpp {
-namespace formattables {
+namespace boost {
+namespace serialization {
 
-struct facet_configuration_hasher {
-public:
-    static std::size_t hash(const facet_configuration& v);
-};
+template<class Archive>
+void save(Archive& ar, const dogen::quilt::cpp::formattables::facet_properties& v, unsigned int version);
 
-} } } }
+template<class Archive>
+void load(Archive& ar, dogen::quilt::cpp::formattables::facet_properties& v, unsigned int version);
 
-namespace std {
+} }
 
-template<>
-struct hash<dogen::quilt::cpp::formattables::facet_configuration> {
-public:
-    size_t operator()(const dogen::quilt::cpp::formattables::facet_configuration& v) const {
-        return dogen::quilt::cpp::formattables::facet_configuration_hasher::hash(v);
-    }
-};
-
-}
 #endif

@@ -29,7 +29,7 @@
 #include "dogen/dynamic/types/field_selector.hpp"
 #include "dogen/dynamic/types/repository_selector.hpp"
 #include "dogen/dynamic/io/field_definition_io.hpp"
-#include "dogen/quilt.cpp/io/formattables/facet_configuration_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/facet_properties_io.hpp"
 #include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 #include "dogen/quilt.cpp/io/formattables/local_enablement_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/global_enablement_configuration_io.hpp"
@@ -255,7 +255,7 @@ void enablement_expander::update_facet_enablement(
      * FIXME: read facet fields here instead of reusing configuration.
      */
     const auto& fffn(fc.file_formatters_by_formatter_name());
-    auto& fct_cfgs(fm.facet_configurations());
+    auto& fct_cfgs(fm.facet_properties());
     for (const auto& pair : gcs) {
         const auto fmtn(pair.first);
         const auto i(fffn.find(fmtn));
@@ -273,7 +273,7 @@ void enablement_expander::update_facet_enablement(
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished updating facet enablement."
-                             << "Result: " << fm.facet_configurations();
+                             << "Result: " << fm.facet_properties();
 }
 
 enablement_expander::local_field_definitions_type

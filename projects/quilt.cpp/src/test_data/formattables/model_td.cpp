@@ -22,7 +22,7 @@
 #include "dogen/quilt.cpp/test_data/formattables/model_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/formattable_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/profile_group_td.hpp"
-#include "dogen/quilt.cpp/test_data/formattables/facet_configuration_td.hpp"
+#include "dogen/quilt.cpp/test_data/formattables/facet_properties_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/streaming_configuration_td.hpp"
 
 namespace {
@@ -59,15 +59,15 @@ std::unordered_map<std::string, dogen::quilt::cpp::formattables::formattable> cr
     return r;
 }
 
-dogen::quilt::cpp::formattables::facet_configuration
-create_dogen_quilt_cpp_formattables_facet_configuration(const unsigned int position) {
-    return dogen::quilt::cpp::formattables::facet_configuration_generator::create(position);
+dogen::quilt::cpp::formattables::facet_properties
+create_dogen_quilt_cpp_formattables_facet_properties(const unsigned int position) {
+    return dogen::quilt::cpp::formattables::facet_properties_generator::create(position);
 }
 
-std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_configuration> create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_facet_configuration(unsigned int position) {
-    std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_configuration> r;
+std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_properties> create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_facet_properties(unsigned int position) {
+    std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_properties> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_dogen_quilt_cpp_formattables_facet_configuration(position + i)));
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_quilt_cpp_formattables_facet_properties(position + i)));
     }
     return r;
 }
@@ -90,7 +90,7 @@ void model_generator::
 populate(const unsigned int position, result_type& v) {
     v.streaming_configurations(create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_streaming_configuration(position + 0));
     v.formattables(create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formattable(position + 1));
-    v.facet_configurations(create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_facet_configuration(position + 2));
+    v.facet_properties(create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_facet_properties(position + 2));
     v.global_profile_group(create_dogen_quilt_cpp_formattables_profile_group(position + 3));
 }
 

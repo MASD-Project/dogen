@@ -21147,10 +21147,10 @@ and element.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#facet_configurations#</dia:string>
+            <dia:string>#facet_properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, formattables::facet_configuration&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, formattables::facet_properties&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -21576,7 +21576,7 @@ and element.#</dia:string>
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#facet_configuration#</dia:string>
+        <dia:string>#facet_properties#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>

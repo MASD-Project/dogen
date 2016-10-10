@@ -29,7 +29,7 @@ void facet_directory_expander::expand(const locator& l, model& fm) const {
     for (const auto& pair : l.facet_directories()) {
         const auto fctn(pair.first);
         const auto fct_dir(pair.second);
-        fm.facet_configurations()[fctn].directory(fct_dir);
+        fm.facet_properties()[fctn].directory(fct_dir);
     }
 }
 

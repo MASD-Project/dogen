@@ -92,7 +92,7 @@ workflow::format(const formattables::model& fm, const yarn::element& e,
         }
 
         const auto& hlp_fmt(fc.helper_formatters());
-        const auto fct_cfgs(fm.facet_configurations());
+        const auto fct_cfgs(fm.facet_properties());
         context ctx(ep, fm, hlp_fmt);
 
         auto file(fmt.format(ctx, e));
