@@ -22,7 +22,7 @@
 #include "dogen/quilt.cpp/hash/formattables/formattable_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/profile_group_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/facet_properties_hash.hpp"
-#include "dogen/quilt.cpp/hash/formattables/streaming_configuration_hash.hpp"
+#include "dogen/quilt.cpp/hash/formattables/streaming_properties_hash.hpp"
 
 namespace {
 
@@ -32,7 +32,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_streaming_configuration(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::streaming_configuration>& v) {
+inline std::size_t hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_streaming_properties(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::streaming_properties>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -69,7 +69,7 @@ namespace formattables {
 std::size_t model_hasher::hash(const model& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_streaming_configuration(v.streaming_configurations()));
+    combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_streaming_properties(v.streaming_properties()));
     combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formattable(v.formattables()));
     combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_facet_properties(v.facet_properties()));
     combine(seed, v.global_profile_group());

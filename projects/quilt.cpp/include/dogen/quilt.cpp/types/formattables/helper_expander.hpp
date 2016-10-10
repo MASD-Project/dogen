@@ -29,7 +29,7 @@
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/yarn/types/name_tree.hpp"
 #include "dogen/yarn/types/attribute.hpp"
-#include "dogen/quilt.cpp/types/formattables/streaming_configuration.hpp"
+#include "dogen/quilt.cpp/types/formattables/streaming_properties.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/formattables/helper_properties.hpp"
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
@@ -44,8 +44,8 @@ class helper_expander {
 private:
     struct context {
         std::unordered_map<std::string, std::string> helper_families;
-        std::unordered_map<std::string, streaming_configuration>
-        streaming_configurations;
+        std::unordered_map<std::string, streaming_properties>
+        streaming_propertiess;
     };
     friend std::ostream& operator<<(std::ostream& s, const context& v);
 
@@ -64,7 +64,7 @@ private:
     std::string helper_family_for_id(const context& ctx,
         const std::string& id) const;
 
-    boost::optional<streaming_configuration> streaming_configuration_for_id(
+    boost::optional<streaming_properties> streaming_properties_for_id(
         const context& ctx, const std::string& id) const;
 
     std::list<std::string> namespace_list(const yarn::name& n) const;

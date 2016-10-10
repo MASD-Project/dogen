@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/quilt.cpp/hash/formattables/helper_descriptor_hash.hpp"
-#include "dogen/quilt.cpp/hash/formattables/streaming_configuration_hash.hpp"
+#include "dogen/quilt.cpp/hash/formattables/streaming_properties_hash.hpp"
 
 namespace {
 
@@ -37,7 +37,7 @@ inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
     return seed;
 }
 
-inline std::size_t hash_boost_optional_dogen_quilt_cpp_formattables_streaming_configuration(const boost::optional<dogen::quilt::cpp::formattables::streaming_configuration>& v) {
+inline std::size_t hash_boost_optional_dogen_quilt_cpp_formattables_streaming_properties(const boost::optional<dogen::quilt::cpp::formattables::streaming_properties>& v) {
     std::size_t seed(0);
 
     if (!v)
@@ -63,7 +63,7 @@ std::size_t helper_descriptor_hasher::hash(const helper_descriptor& v) {
     combine(seed, v.name_qualified());
     combine(seed, v.name_tree_qualified());
     combine(seed, v.name_tree_identifiable());
-    combine(seed, hash_boost_optional_dogen_quilt_cpp_formattables_streaming_configuration(v.streaming_configuration()));
+    combine(seed, hash_boost_optional_dogen_quilt_cpp_formattables_streaming_properties(v.streaming_properties()));
     combine(seed, v.is_simple_type());
     combine(seed, v.requires_hashing_helper());
     combine(seed, v.is_circular_dependency());

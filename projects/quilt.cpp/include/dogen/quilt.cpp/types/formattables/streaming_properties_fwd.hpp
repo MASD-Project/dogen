@@ -18,31 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/hash/formattables/streaming_configuration_hash.hpp"
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_STREAMING_PROPERTIES_FWD_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_STREAMING_PROPERTIES_FWD_HPP
 
-namespace {
-
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value) {
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-}
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
 
-std::size_t streaming_configuration_hasher::hash(const streaming_configuration& v) {
-    std::size_t seed(0);
-
-    combine(seed, v.requires_quoting());
-    combine(seed, v.string_conversion_method());
-    combine(seed, v.remove_unprintable_characters());
-
-    return seed;
-}
+class streaming_properties;
 
 } } } }
+
+#endif

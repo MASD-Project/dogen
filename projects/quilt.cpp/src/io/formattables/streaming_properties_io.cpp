@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen/quilt.cpp/io/formattables/streaming_configuration_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/streaming_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -35,7 +35,7 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-std::ostream& operator<<(std::ostream& s, const streaming_configuration& v) {
+std::ostream& operator<<(std::ostream& s, const streaming_properties& v) {
     boost::io::ios_flags_saver ifs(s);
     s.setf(std::ios_base::boolalpha);
     s.setf(std::ios::fixed, std::ios::floatfield);
@@ -43,7 +43,7 @@ std::ostream& operator<<(std::ostream& s, const streaming_configuration& v) {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::streaming_configuration\"" << ", "
+      << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::streaming_properties\"" << ", "
       << "\"requires_quoting\": " << v.requires_quoting() << ", "
       << "\"string_conversion_method\": " << "\"" << tidy_up_string(v.string_conversion_method()) << "\"" << ", "
       << "\"remove_unprintable_characters\": " << v.remove_unprintable_characters()

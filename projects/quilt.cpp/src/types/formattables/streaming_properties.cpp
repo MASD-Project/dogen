@@ -18,18 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/formattables/streaming_configuration.hpp"
+#include "dogen/quilt.cpp/types/formattables/streaming_properties.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
 
-streaming_configuration::streaming_configuration()
+streaming_properties::streaming_properties()
     : requires_quoting_(static_cast<bool>(0)),
       remove_unprintable_characters_(static_cast<bool>(0)) { }
 
-streaming_configuration::streaming_configuration(
+streaming_properties::streaming_properties(
     const bool requires_quoting,
     const std::string& string_conversion_method,
     const bool remove_unprintable_characters)
@@ -37,54 +37,54 @@ streaming_configuration::streaming_configuration(
       string_conversion_method_(string_conversion_method),
       remove_unprintable_characters_(remove_unprintable_characters) { }
 
-void streaming_configuration::swap(streaming_configuration& other) noexcept {
+void streaming_properties::swap(streaming_properties& other) noexcept {
     using std::swap;
     swap(requires_quoting_, other.requires_quoting_);
     swap(string_conversion_method_, other.string_conversion_method_);
     swap(remove_unprintable_characters_, other.remove_unprintable_characters_);
 }
 
-bool streaming_configuration::operator==(const streaming_configuration& rhs) const {
+bool streaming_properties::operator==(const streaming_properties& rhs) const {
     return requires_quoting_ == rhs.requires_quoting_ &&
         string_conversion_method_ == rhs.string_conversion_method_ &&
         remove_unprintable_characters_ == rhs.remove_unprintable_characters_;
 }
 
-streaming_configuration& streaming_configuration::operator=(streaming_configuration other) {
+streaming_properties& streaming_properties::operator=(streaming_properties other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-bool streaming_configuration::requires_quoting() const {
+bool streaming_properties::requires_quoting() const {
     return requires_quoting_;
 }
 
-void streaming_configuration::requires_quoting(const bool v) {
+void streaming_properties::requires_quoting(const bool v) {
     requires_quoting_ = v;
 }
 
-const std::string& streaming_configuration::string_conversion_method() const {
+const std::string& streaming_properties::string_conversion_method() const {
     return string_conversion_method_;
 }
 
-std::string& streaming_configuration::string_conversion_method() {
+std::string& streaming_properties::string_conversion_method() {
     return string_conversion_method_;
 }
 
-void streaming_configuration::string_conversion_method(const std::string& v) {
+void streaming_properties::string_conversion_method(const std::string& v) {
     string_conversion_method_ = v;
 }
 
-void streaming_configuration::string_conversion_method(const std::string&& v) {
+void streaming_properties::string_conversion_method(const std::string&& v) {
     string_conversion_method_ = std::move(v);
 }
 
-bool streaming_configuration::remove_unprintable_characters() const {
+bool streaming_properties::remove_unprintable_characters() const {
     return remove_unprintable_characters_;
 }
 
-void streaming_configuration::remove_unprintable_characters(const bool v) {
+void streaming_properties::remove_unprintable_characters(const bool v) {
     remove_unprintable_characters_ = v;
 }
 

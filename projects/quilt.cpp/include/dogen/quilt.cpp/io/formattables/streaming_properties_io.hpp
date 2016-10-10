@@ -18,37 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TEST_DATA_FORMATTABLES_STREAMING_CONFIGURATION_TD_HPP
-#define DOGEN_QUILT_CPP_TEST_DATA_FORMATTABLES_STREAMING_CONFIGURATION_TD_HPP
+#ifndef DOGEN_QUILT_CPP_IO_FORMATTABLES_STREAMING_PROPERTIES_IO_HPP
+#define DOGEN_QUILT_CPP_IO_FORMATTABLES_STREAMING_PROPERTIES_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/quilt.cpp/types/formattables/streaming_configuration.hpp"
+#include <iosfwd>
+#include "dogen/quilt.cpp/types/formattables/streaming_properties.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
 
-class streaming_configuration_generator {
-public:
-    streaming_configuration_generator();
-
-public:
-    typedef dogen::quilt::cpp::formattables::streaming_configuration result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
-};
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::quilt::cpp::formattables::streaming_properties& v);
 
 } } } }
 

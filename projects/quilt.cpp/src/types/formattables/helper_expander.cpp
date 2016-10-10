@@ -28,7 +28,7 @@
 #include "dogen/yarn/io/languages_io.hpp"
 #include "dogen/yarn/types/name_flattener.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
-#include "dogen/quilt.cpp/io/formattables/streaming_configuration_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/streaming_properties_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/helper_properties_io.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
@@ -70,7 +70,7 @@ std::ostream& operator<<(std::ostream& s, const helper_expander::context& v) {
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::"
       << "helper_expander::context\"" << ", "
       << "\"helper_families\": " << v.helper_families << ", "
-      << "\"streaming_configurations\": " << v.streaming_configurations
+      << "\"streaming_propertiess\": " << v.streaming_propertiess
       << " }";
 
     return s;
@@ -81,7 +81,7 @@ helper_expander::context helper_expander::make_context(
 
     BOOST_LOG_SEV(lg, debug) << "Started making the context.";
     context r;
-    r.streaming_configurations = fm.streaming_configurations();
+    r.streaming_propertiess = fm.streaming_properties();
 
     const dynamic::repository_selector s(drp);
     const auto hf(traits::cpp::helper::family());
@@ -157,13 +157,13 @@ std::string helper_expander::helper_family_for_id(
     return i->second;
 }
 
-boost::optional<formattables::streaming_configuration>
-helper_expander::streaming_configuration_for_id(const context& ctx,
+boost::optional<formattables::streaming_properties>
+helper_expander::streaming_properties_for_id(const context& ctx,
     const std::string& id) const {
 
-    const auto i(ctx.streaming_configurations.find(id));
-    if (i == ctx.streaming_configurations.end())
-        return boost::optional<formattables::streaming_configuration>();
+    const auto i(ctx.streaming_propertiess.find(id));
+    if (i == ctx.streaming_propertiess.end())
+        return boost::optional<formattables::streaming_properties>();
 
     BOOST_LOG_SEV(lg, debug) << "Found streaming configuration for type: " << id
                              << ". Configuration: " << i->second;
@@ -190,9 +190,9 @@ boost::optional<helper_descriptor> helper_expander::walk_name_tree(
     r.namespaces(namespace_list(nt.current()));
     r.is_simple_type(nt.is_current_simple_type());
 
-    const auto sc(streaming_configuration_for_id(ctx, id));
+    const auto sc(streaming_properties_for_id(ctx, id));
     if (sc)
-        r.streaming_configuration(sc);
+        r.streaming_properties(sc);
 
     const auto fam(helper_family_for_id(ctx, id));
     r.family(fam);

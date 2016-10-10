@@ -29,7 +29,7 @@
 #include "dogen/formatters/types/utility_formatter.hpp"
 #include "dogen/yarn/io/languages_io.hpp"
 #include "dogen/yarn/types/name_flattener.hpp"
-#include "dogen/quilt.cpp/io/formattables/streaming_configuration_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/streaming_properties_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/helper_properties_io.hpp"
 #include "dogen/quilt.cpp/types/formattables/canonical_formatter_resolver.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/traits.hpp"
@@ -488,7 +488,7 @@ void assistant::add_helper_methods(const std::string& element_id) {
 }
 
 std::string assistant::
-streaming_for_type(const formattables::streaming_configuration& sc,
+streaming_for_type(const formattables::streaming_properties& sc,
     const std::string& s) const {
 
     std::ostringstream stream;
@@ -514,7 +514,7 @@ streaming_for_type(const formattables::streaming_configuration& sc,
 std::string assistant::streaming_for_type(const yarn::name& n,
     const std::string& s) const {
 
-    const auto str_cfgs(context_.model().streaming_configurations());
+    const auto str_cfgs(context_.model().streaming_properties());
     const auto i(str_cfgs.find(n.id()));
     if (i == str_cfgs.end())
         return s;
@@ -526,7 +526,7 @@ std::string assistant::
 streaming_for_type(const formattables::helper_descriptor& hd,
     const std::string& s) const {
 
-    const auto sc(hd.streaming_configuration());
+    const auto sc(hd.streaming_properties());
     if (!sc)
         return s;
 

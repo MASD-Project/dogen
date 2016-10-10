@@ -31,7 +31,7 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/quilt.cpp/serialization/formattables/helper_descriptor_ser.hpp"
-#include "dogen/quilt.cpp/serialization/formattables/streaming_configuration_ser.hpp"
+#include "dogen/quilt.cpp/serialization/formattables/streaming_properties_ser.hpp"
 
 namespace boost {
 namespace serialization {
@@ -46,7 +46,7 @@ void save(Archive& ar,
     ar << make_nvp("name_qualified", v.name_qualified_);
     ar << make_nvp("name_tree_qualified", v.name_tree_qualified_);
     ar << make_nvp("name_tree_identifiable", v.name_tree_identifiable_);
-    ar << make_nvp("streaming_configuration", v.streaming_configuration_);
+    ar << make_nvp("streaming_properties", v.streaming_properties_);
     ar << make_nvp("is_simple_type", v.is_simple_type_);
     ar << make_nvp("requires_hashing_helper", v.requires_hashing_helper_);
     ar << make_nvp("is_circular_dependency", v.is_circular_dependency_);
@@ -63,7 +63,7 @@ void load(Archive& ar,
     ar >> make_nvp("name_qualified", v.name_qualified_);
     ar >> make_nvp("name_tree_qualified", v.name_tree_qualified_);
     ar >> make_nvp("name_tree_identifiable", v.name_tree_identifiable_);
-    ar >> make_nvp("streaming_configuration", v.streaming_configuration_);
+    ar >> make_nvp("streaming_properties", v.streaming_properties_);
     ar >> make_nvp("is_simple_type", v.is_simple_type_);
     ar >> make_nvp("requires_hashing_helper", v.requires_hashing_helper_);
     ar >> make_nvp("is_circular_dependency", v.is_circular_dependency_);

@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/quilt.cpp/test_data/formattables/streaming_configuration_td.hpp"
+#include "dogen/quilt.cpp/test_data/formattables/streaming_properties_td.hpp"
 
 namespace {
 
@@ -40,31 +40,31 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-streaming_configuration_generator::streaming_configuration_generator() : position_(0) { }
+streaming_properties_generator::streaming_properties_generator() : position_(0) { }
 
-void streaming_configuration_generator::
+void streaming_properties_generator::
 populate(const unsigned int position, result_type& v) {
     v.requires_quoting(create_bool(position + 0));
     v.string_conversion_method(create_std_string(position + 1));
     v.remove_unprintable_characters(create_bool(position + 2));
 }
 
-streaming_configuration_generator::result_type
-streaming_configuration_generator::create(const unsigned int position) {
-    streaming_configuration r;
-    streaming_configuration_generator::populate(position, r);
+streaming_properties_generator::result_type
+streaming_properties_generator::create(const unsigned int position) {
+    streaming_properties r;
+    streaming_properties_generator::populate(position, r);
     return r;
 }
 
-streaming_configuration_generator::result_type*
-streaming_configuration_generator::create_ptr(const unsigned int position) {
-    streaming_configuration* p = new streaming_configuration();
-    streaming_configuration_generator::populate(position, *p);
+streaming_properties_generator::result_type*
+streaming_properties_generator::create_ptr(const unsigned int position) {
+    streaming_properties* p = new streaming_properties();
+    streaming_properties_generator::populate(position, *p);
     return p;
 }
 
-streaming_configuration_generator::result_type
-streaming_configuration_generator::operator()() {
+streaming_properties_generator::result_type
+streaming_properties_generator::operator()() {
     return create(position_++);
 }
 

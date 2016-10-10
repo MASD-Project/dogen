@@ -20,7 +20,7 @@
  */
 #include <sstream>
 #include "dogen/quilt.cpp/test_data/formattables/helper_descriptor_td.hpp"
-#include "dogen/quilt.cpp/test_data/formattables/streaming_configuration_td.hpp"
+#include "dogen/quilt.cpp/test_data/formattables/streaming_properties_td.hpp"
 
 namespace {
 
@@ -38,15 +38,15 @@ std::list<std::string> create_std_list_std_string(unsigned int position) {
     return r;
 }
 
-dogen::quilt::cpp::formattables::streaming_configuration
-create_dogen_quilt_cpp_formattables_streaming_configuration(const unsigned int position) {
-    return dogen::quilt::cpp::formattables::streaming_configuration_generator::create(position);
+dogen::quilt::cpp::formattables::streaming_properties
+create_dogen_quilt_cpp_formattables_streaming_properties(const unsigned int position) {
+    return dogen::quilt::cpp::formattables::streaming_properties_generator::create(position);
 }
 
-boost::optional<dogen::quilt::cpp::formattables::streaming_configuration>
-create_boost_optional_dogen_quilt_cpp_formattables_streaming_configuration(unsigned int position) {
-    boost::optional<dogen::quilt::cpp::formattables::streaming_configuration> r(
-        create_dogen_quilt_cpp_formattables_streaming_configuration(position));
+boost::optional<dogen::quilt::cpp::formattables::streaming_properties>
+create_boost_optional_dogen_quilt_cpp_formattables_streaming_properties(unsigned int position) {
+    boost::optional<dogen::quilt::cpp::formattables::streaming_properties> r(
+        create_dogen_quilt_cpp_formattables_streaming_properties(position));
     return r;
 }
 
@@ -71,7 +71,7 @@ populate(const unsigned int position, result_type& v) {
     v.name_qualified(create_std_string(position + 3));
     v.name_tree_qualified(create_std_string(position + 4));
     v.name_tree_identifiable(create_std_string(position + 5));
-    v.streaming_configuration(create_boost_optional_dogen_quilt_cpp_formattables_streaming_configuration(position + 6));
+    v.streaming_properties(create_boost_optional_dogen_quilt_cpp_formattables_streaming_properties(position + 6));
     v.is_simple_type(create_bool(position + 7));
     v.requires_hashing_helper(create_bool(position + 8));
     v.is_circular_dependency(create_bool(position + 9));

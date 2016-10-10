@@ -22,7 +22,7 @@
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen/quilt.cpp/io/formattables/helper_descriptor_io.hpp"
-#include "dogen/quilt.cpp/io/formattables/streaming_configuration_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/streaming_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -47,7 +47,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::quilt::cpp::formattables::streaming_configuration>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::quilt::cpp::formattables::streaming_properties>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)
@@ -80,7 +80,7 @@ std::ostream& operator<<(std::ostream& s, const helper_descriptor& v) {
       << "\"name_qualified\": " << "\"" << tidy_up_string(v.name_qualified()) << "\"" << ", "
       << "\"name_tree_qualified\": " << "\"" << tidy_up_string(v.name_tree_qualified()) << "\"" << ", "
       << "\"name_tree_identifiable\": " << "\"" << tidy_up_string(v.name_tree_identifiable()) << "\"" << ", "
-      << "\"streaming_configuration\": " << v.streaming_configuration() << ", "
+      << "\"streaming_properties\": " << v.streaming_properties() << ", "
       << "\"is_simple_type\": " << v.is_simple_type() << ", "
       << "\"requires_hashing_helper\": " << v.requires_hashing_helper() << ", "
       << "\"is_circular_dependency\": " << v.is_circular_dependency() << ", "

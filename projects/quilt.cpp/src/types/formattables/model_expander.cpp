@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/formattables/streaming_configuration_expander.hpp"
+#include "dogen/quilt.cpp/types/formattables/streaming_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/profile_group_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/enablement_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/canonical_formatter_expander.hpp"
@@ -37,9 +37,9 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-void model_expander::expand_streaming_configuration(
-    const dynamic::repository& drp, model& fm) const {
-    streaming_configuration_expander ex;
+void model_expander::
+expand_streaming(const dynamic::repository& drp, model& fm) const {
+    streaming_expander ex;
     ex.expand(drp, fm);
 }
 
@@ -102,7 +102,7 @@ void model_expander::expand_file_paths_and_guards(
 }
 
 void model_expander::
-expand_odb_configuration(const dynamic::repository& drp, model& fm) const {
+expand_odb(const dynamic::repository& drp, model& fm) const {
     odb_expander ex;
     ex.expand(drp, fm);
 }
@@ -119,19 +119,38 @@ void model_expander::expand(
     const dogen::formatters::decoration_configuration_factory& dcf,
     const formatters::container& fc, const locator& l, model& fm) const {
 
-    expand_streaming_configuration(drp, fm);
+    /*
+     * Streaming expansion must be done before helper expansion as the
+     * helpers need the streaminging properties.
+     */
+    expand_streaming(drp, fm);
     expand_profile_groups(dirs, drp, root_object, fc, fm);
+
+    /*
+     * Enablement expansion must be done before inclusion because
+     * inclusion relies on it to know which formatters are enabled.
+     */
     expand_enablement(drp, root_object, fc, fm);
+
+    /*
+     * Canonical formatter expansion must be done before inclusion
+     * because we use the canonical formatter notation to find
+     * inclusion directives.
+     */
     expand_canonical_formatters(fc, fm);
     expand_inclusion(drp, fc, l, fm);
     expand_decoration(dcf, fm);
     expand_aspects(drp, fm);
     expand_helpers(drp, fc, fm);
 
+    /*
+     * All of the above expansions must be performed prior to
+     * reduction because we require types from external models.
+     */
     reduce(fm);
 
     expand_file_paths_and_guards(fc, l, fm);
-    expand_odb_configuration(drp, fm);
+    expand_odb(drp, fm);
     expand_facet_directories(l, fm);
 }
 

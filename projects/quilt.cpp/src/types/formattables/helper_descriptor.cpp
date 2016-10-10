@@ -38,7 +38,7 @@ helper_descriptor::helper_descriptor(helper_descriptor&& rhs)
       name_qualified_(std::move(rhs.name_qualified_)),
       name_tree_qualified_(std::move(rhs.name_tree_qualified_)),
       name_tree_identifiable_(std::move(rhs.name_tree_identifiable_)),
-      streaming_configuration_(std::move(rhs.streaming_configuration_)),
+      streaming_properties_(std::move(rhs.streaming_properties_)),
       is_simple_type_(std::move(rhs.is_simple_type_)),
       requires_hashing_helper_(std::move(rhs.requires_hashing_helper_)),
       is_circular_dependency_(std::move(rhs.is_circular_dependency_)),
@@ -51,7 +51,7 @@ helper_descriptor::helper_descriptor(
     const std::string& name_qualified,
     const std::string& name_tree_qualified,
     const std::string& name_tree_identifiable,
-    const boost::optional<dogen::quilt::cpp::formattables::streaming_configuration>& streaming_configuration,
+    const boost::optional<dogen::quilt::cpp::formattables::streaming_properties>& streaming_properties,
     const bool is_simple_type,
     const bool requires_hashing_helper,
     const bool is_circular_dependency,
@@ -62,7 +62,7 @@ helper_descriptor::helper_descriptor(
       name_qualified_(name_qualified),
       name_tree_qualified_(name_tree_qualified),
       name_tree_identifiable_(name_tree_identifiable),
-      streaming_configuration_(streaming_configuration),
+      streaming_properties_(streaming_properties),
       is_simple_type_(is_simple_type),
       requires_hashing_helper_(requires_hashing_helper),
       is_circular_dependency_(is_circular_dependency),
@@ -76,7 +76,7 @@ void helper_descriptor::swap(helper_descriptor& other) noexcept {
     swap(name_qualified_, other.name_qualified_);
     swap(name_tree_qualified_, other.name_tree_qualified_);
     swap(name_tree_identifiable_, other.name_tree_identifiable_);
-    swap(streaming_configuration_, other.streaming_configuration_);
+    swap(streaming_properties_, other.streaming_properties_);
     swap(is_simple_type_, other.is_simple_type_);
     swap(requires_hashing_helper_, other.requires_hashing_helper_);
     swap(is_circular_dependency_, other.is_circular_dependency_);
@@ -90,7 +90,7 @@ bool helper_descriptor::operator==(const helper_descriptor& rhs) const {
         name_qualified_ == rhs.name_qualified_ &&
         name_tree_qualified_ == rhs.name_tree_qualified_ &&
         name_tree_identifiable_ == rhs.name_tree_identifiable_ &&
-        streaming_configuration_ == rhs.streaming_configuration_ &&
+        streaming_properties_ == rhs.streaming_properties_ &&
         is_simple_type_ == rhs.is_simple_type_ &&
         requires_hashing_helper_ == rhs.requires_hashing_helper_ &&
         is_circular_dependency_ == rhs.is_circular_dependency_ &&
@@ -199,20 +199,20 @@ void helper_descriptor::name_tree_identifiable(const std::string&& v) {
     name_tree_identifiable_ = std::move(v);
 }
 
-const boost::optional<dogen::quilt::cpp::formattables::streaming_configuration>& helper_descriptor::streaming_configuration() const {
-    return streaming_configuration_;
+const boost::optional<dogen::quilt::cpp::formattables::streaming_properties>& helper_descriptor::streaming_properties() const {
+    return streaming_properties_;
 }
 
-boost::optional<dogen::quilt::cpp::formattables::streaming_configuration>& helper_descriptor::streaming_configuration() {
-    return streaming_configuration_;
+boost::optional<dogen::quilt::cpp::formattables::streaming_properties>& helper_descriptor::streaming_properties() {
+    return streaming_properties_;
 }
 
-void helper_descriptor::streaming_configuration(const boost::optional<dogen::quilt::cpp::formattables::streaming_configuration>& v) {
-    streaming_configuration_ = v;
+void helper_descriptor::streaming_properties(const boost::optional<dogen::quilt::cpp::formattables::streaming_properties>& v) {
+    streaming_properties_ = v;
 }
 
-void helper_descriptor::streaming_configuration(const boost::optional<dogen::quilt::cpp::formattables::streaming_configuration>&& v) {
-    streaming_configuration_ = std::move(v);
+void helper_descriptor::streaming_properties(const boost::optional<dogen::quilt::cpp::formattables::streaming_properties>&& v) {
+    streaming_properties_ = std::move(v);
 }
 
 bool helper_descriptor::is_simple_type() const {

@@ -25,14 +25,14 @@
 #include "dogen/dynamic/types/repository_selector.hpp"
 #include "dogen/dynamic/io/field_definition_io.hpp"
 #include "dogen/yarn/types/element.hpp"
-#include "dogen/quilt.cpp/io/formattables/streaming_configuration_io.hpp"
-#include "dogen/quilt.cpp/types/formattables/streaming_configuration_expander.hpp"
+#include "dogen/quilt.cpp/io/formattables/streaming_properties_io.hpp"
+#include "dogen/quilt.cpp/types/formattables/streaming_expander.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
 static logger
-lg(logger_factory("quilt.cpp.formattables.streaming_configuration_expander"));
+lg(logger_factory("quilt.cpp.formattables.streaming_expander"));
 
 }
 
@@ -42,11 +42,11 @@ namespace cpp {
 namespace formattables {
 
 std::ostream& operator<<(std::ostream& s,
-    const streaming_configuration_expander::field_definitions& v) {
+    const streaming_expander::field_definitions& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::"
-      << "streaming_configuration_expander::field_definitions\"" << ", "
+      << "streaming_expander::field_definitions\"" << ", "
       << "\"requires_quoting\": " << v.requires_quoting << ", "
       << "\"string_conversion_method\": " << v.string_conversion_method << ", "
       << "\"remove_unprintable_characters\": "
@@ -56,8 +56,8 @@ std::ostream& operator<<(std::ostream& s,
     return s;
 }
 
-streaming_configuration_expander::field_definitions
-streaming_configuration_expander::make_field_definitions(
+streaming_expander::field_definitions
+streaming_expander::make_field_definitions(
     const dynamic::repository& drp) const {
     BOOST_LOG_SEV(lg, debug) << "Creating field definitions.";
 
@@ -78,13 +78,13 @@ streaming_configuration_expander::make_field_definitions(
     return r;
 }
 
-boost::optional<streaming_configuration>
-streaming_configuration_expander::make_streaming_configuration(
+boost::optional<streaming_properties>
+streaming_expander::make_streaming_properties(
     const field_definitions& fds, const dynamic::object& o) const {
 
     BOOST_LOG_SEV(lg, debug) << "Creating streaming configuration.";
     bool found_any(false);
-    streaming_configuration r;
+    streaming_properties r;
     const dynamic::field_selector fs(o);
 
     const auto& rq(fds.requires_quoting);
@@ -106,14 +106,14 @@ streaming_configuration_expander::make_streaming_configuration(
     }
 
     if (!found_any)
-        return boost::optional<streaming_configuration>();
+        return boost::optional<streaming_properties>();
 
     BOOST_LOG_SEV(lg, debug) << "Created streaming configuration. "
                              << "Result: " << r;
     return r;
 }
 
-void streaming_configuration_expander::
+void streaming_expander::
 expand(const dynamic::repository& drp, model& fm) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started expanding streaming configuration.";
@@ -130,15 +130,15 @@ expand(const dynamic::repository& drp, model& fm) const {
          */
         auto segment(formattable.master_segment());
         const auto& e(*segment);
-        const auto sc(make_streaming_configuration(fds, e.extensions()));
+        const auto sc(make_streaming_properties(fds, e.extensions()));
         if (!sc)
             continue;
 
-        fm.streaming_configurations()[id] = *sc;
+        fm.streaming_properties()[id] = *sc;
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished expanding streaming configuration. "
-                             << "Result: "<< fm.streaming_configurations();
+                             << "Result: "<< fm.streaming_properties();
 }
 
 } } } }

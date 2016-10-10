@@ -43,8 +43,7 @@ namespace formattables {
 
 class model_expander {
 private:
-    void expand_streaming_configuration(const dynamic::repository& drp,
-        model& fm) const;
+    void expand_streaming(const dynamic::repository& drp, model& fm) const;
 
     void expand_profile_groups(
         const std::forward_list<boost::filesystem::path>& dirs,
@@ -76,8 +75,7 @@ private:
     void expand_file_paths_and_guards(const formatters::container& fc,
         const locator& l, model& fm) const;
 
-    void expand_odb_configuration(const dynamic::repository& drp,
-        model& fm) const;
+    void expand_odb(const dynamic::repository& drp, model& fm) const;
 
     void expand_facet_directories(const locator& l, model& fm) const;
 

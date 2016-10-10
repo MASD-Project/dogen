@@ -26,25 +26,25 @@ namespace cpp {
 namespace formattables {
 
 model::model(
-    const std::unordered_map<std::string, dogen::quilt::cpp::formattables::streaming_configuration>& streaming_configurations,
+    const std::unordered_map<std::string, dogen::quilt::cpp::formattables::streaming_properties>& streaming_properties,
     const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formattable>& formattables,
     const std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_properties>& facet_properties,
     const dogen::quilt::cpp::formattables::profile_group& global_profile_group)
-    : streaming_configurations_(streaming_configurations),
+    : streaming_properties_(streaming_properties),
       formattables_(formattables),
       facet_properties_(facet_properties),
       global_profile_group_(global_profile_group) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
-    swap(streaming_configurations_, other.streaming_configurations_);
+    swap(streaming_properties_, other.streaming_properties_);
     swap(formattables_, other.formattables_);
     swap(facet_properties_, other.facet_properties_);
     swap(global_profile_group_, other.global_profile_group_);
 }
 
 bool model::operator==(const model& rhs) const {
-    return streaming_configurations_ == rhs.streaming_configurations_ &&
+    return streaming_properties_ == rhs.streaming_properties_ &&
         formattables_ == rhs.formattables_ &&
         facet_properties_ == rhs.facet_properties_ &&
         global_profile_group_ == rhs.global_profile_group_;
@@ -56,20 +56,20 @@ model& model::operator=(model other) {
     return *this;
 }
 
-const std::unordered_map<std::string, dogen::quilt::cpp::formattables::streaming_configuration>& model::streaming_configurations() const {
-    return streaming_configurations_;
+const std::unordered_map<std::string, dogen::quilt::cpp::formattables::streaming_properties>& model::streaming_properties() const {
+    return streaming_properties_;
 }
 
-std::unordered_map<std::string, dogen::quilt::cpp::formattables::streaming_configuration>& model::streaming_configurations() {
-    return streaming_configurations_;
+std::unordered_map<std::string, dogen::quilt::cpp::formattables::streaming_properties>& model::streaming_properties() {
+    return streaming_properties_;
 }
 
-void model::streaming_configurations(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::streaming_configuration>& v) {
-    streaming_configurations_ = v;
+void model::streaming_properties(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::streaming_properties>& v) {
+    streaming_properties_ = v;
 }
 
-void model::streaming_configurations(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::streaming_configuration>&& v) {
-    streaming_configurations_ = std::move(v);
+void model::streaming_properties(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::streaming_properties>&& v) {
+    streaming_properties_ = std::move(v);
 }
 
 const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formattable>& model::formattables() const {

@@ -18,37 +18,31 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_HASH_FORMATTABLES_STREAMING_CONFIGURATION_HASH_HPP
-#define DOGEN_QUILT_CPP_HASH_FORMATTABLES_STREAMING_CONFIGURATION_HASH_HPP
+#include "dogen/quilt.cpp/hash/formattables/streaming_properties_hash.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace {
 
-#include <functional>
-#include "dogen/quilt.cpp/types/formattables/streaming_configuration.hpp"
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value) {
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+}
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
 
-struct streaming_configuration_hasher {
-public:
-    static std::size_t hash(const streaming_configuration& v);
-};
+std::size_t streaming_properties_hasher::hash(const streaming_properties& v) {
+    std::size_t seed(0);
+
+    combine(seed, v.requires_quoting());
+    combine(seed, v.string_conversion_method());
+    combine(seed, v.remove_unprintable_characters());
+
+    return seed;
+}
 
 } } } }
-
-namespace std {
-
-template<>
-struct hash<dogen::quilt::cpp::formattables::streaming_configuration> {
-public:
-    size_t operator()(const dogen::quilt::cpp::formattables::streaming_configuration& v) const {
-        return dogen::quilt::cpp::formattables::streaming_configuration_hasher::hash(v);
-    }
-};
-
-}
-#endif

@@ -267,7 +267,7 @@ private:
     get_helpers(const formattables::helper_properties& hp) const;
 
     std::string
-    streaming_for_type(const formattables::streaming_configuration& sc,
+    streaming_for_type(const formattables::streaming_properties& sc,
         const std::string& s) const;
 
 public:
