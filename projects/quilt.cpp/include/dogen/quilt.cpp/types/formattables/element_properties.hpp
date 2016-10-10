@@ -33,9 +33,9 @@
 #include "dogen/formatters/types/decoration_configuration.hpp"
 #include "dogen/quilt.cpp/types/formattables/profile_group.hpp"
 #include "dogen/quilt.cpp/types/formattables/aspect_properties.hpp"
+#include "dogen/quilt.cpp/types/formattables/helper_properties.hpp"
 #include "dogen/quilt.cpp/types/formattables/odb_configuration.hpp"
 #include "dogen/quilt.cpp/types/formattables/formatter_properties.hpp"
-#include "dogen/quilt.cpp/types/formattables/helper_configuration.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/element_properties_fwd_ser.hpp"
 
 namespace dogen {
@@ -60,7 +60,7 @@ public:
         const boost::optional<dogen::formatters::decoration_configuration>& decoration_configuration,
         const dogen::quilt::cpp::formattables::aspect_properties& aspect_properties,
         const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties>& formatter_properties,
-        const std::list<dogen::quilt::cpp::formattables::helper_configuration>& helper_configurations,
+        const std::list<dogen::quilt::cpp::formattables::helper_properties>& helper_properties,
         const std::unordered_map<std::string, std::string>& canonical_formatter_to_formatter,
         const boost::optional<dogen::quilt::cpp::formattables::profile_group>& local_profile_group,
         const boost::optional<dogen::quilt::cpp::formattables::odb_configuration>& odb_configuration);
@@ -88,10 +88,10 @@ public:
     void formatter_properties(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties>& v);
     void formatter_properties(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties>&& v);
 
-    const std::list<dogen::quilt::cpp::formattables::helper_configuration>& helper_configurations() const;
-    std::list<dogen::quilt::cpp::formattables::helper_configuration>& helper_configurations();
-    void helper_configurations(const std::list<dogen::quilt::cpp::formattables::helper_configuration>& v);
-    void helper_configurations(const std::list<dogen::quilt::cpp::formattables::helper_configuration>&& v);
+    const std::list<dogen::quilt::cpp::formattables::helper_properties>& helper_properties() const;
+    std::list<dogen::quilt::cpp::formattables::helper_properties>& helper_properties();
+    void helper_properties(const std::list<dogen::quilt::cpp::formattables::helper_properties>& v);
+    void helper_properties(const std::list<dogen::quilt::cpp::formattables::helper_properties>&& v);
 
     const std::unordered_map<std::string, std::string>& canonical_formatter_to_formatter() const;
     std::unordered_map<std::string, std::string>& canonical_formatter_to_formatter();
@@ -122,7 +122,7 @@ private:
     boost::optional<dogen::formatters::decoration_configuration> decoration_configuration_;
     dogen::quilt::cpp::formattables::aspect_properties aspect_properties_;
     std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties> formatter_properties_;
-    std::list<dogen::quilt::cpp::formattables::helper_configuration> helper_configurations_;
+    std::list<dogen::quilt::cpp::formattables::helper_properties> helper_properties_;
     std::unordered_map<std::string, std::string> canonical_formatter_to_formatter_;
     boost::optional<dogen::quilt::cpp::formattables::profile_group> local_profile_group_;
     boost::optional<dogen::quilt::cpp::formattables::odb_configuration> odb_configuration_;

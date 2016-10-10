@@ -18,40 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/hash/formattables/helper_descriptor_hash.hpp"
-#include "dogen/quilt.cpp/hash/formattables/helper_configuration_hash.hpp"
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_HELPER_PROPERTIES_FWD_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_HELPER_PROPERTIES_FWD_HPP
 
-namespace {
-
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value) {
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-inline std::size_t hash_std_list_dogen_quilt_cpp_formattables_helper_descriptor(const std::list<dogen::quilt::cpp::formattables::helper_descriptor>& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
-}
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
 
-std::size_t helper_configuration_hasher::hash(const helper_configuration& v) {
-    std::size_t seed(0);
-
-    combine(seed, v.current());
-    combine(seed, hash_std_list_dogen_quilt_cpp_formattables_helper_descriptor(v.direct_descendants()));
-    combine(seed, v.in_inheritance_relationship());
-
-    return seed;
-}
+class helper_properties;
 
 } } } }
+
+#endif

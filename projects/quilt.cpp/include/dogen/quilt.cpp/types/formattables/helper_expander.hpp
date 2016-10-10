@@ -31,7 +31,7 @@
 #include "dogen/yarn/types/attribute.hpp"
 #include "dogen/quilt.cpp/types/formattables/streaming_configuration.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
-#include "dogen/quilt.cpp/types/formattables/helper_configuration.hpp"
+#include "dogen/quilt.cpp/types/formattables/helper_properties.hpp"
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
 #include "dogen/quilt.cpp/types/formattables/model.hpp"
 
@@ -75,15 +75,15 @@ private:
         const bool in_inheritance_relationship,
         const bool inherit_opaqueness_from_parent, const yarn::name_tree& nt,
         std::unordered_set<std::string>& done,
-        std::list<helper_configuration>& hcs) const;
+        std::list<helper_properties>& hps) const;
 
-    std::list<helper_configuration>
-    compute_helper_configurations(const context& ctx,
+    std::list<helper_properties>
+    compute_helper_properties(const context& ctx,
         const facets_for_family_type& fff,
         const bool in_inheritance_relationship,
         const std::list<yarn::attribute>& attrs) const;
 
-    void populate_helper_configuration(const context& ctx,
+    void populate_helper_properties(const context& ctx,
         const formatters::container& fc,
         std::unordered_map<std::string, formattable>& formattables) const;
 

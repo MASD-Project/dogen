@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/formattables/helper_configuration.hpp"
+#include "dogen/quilt.cpp/types/formattables/helper_properties.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
@@ -63,14 +63,14 @@ std::string variant_helper::helper_name() const {
 }
 
 bool variant_helper::is_enabled(const assistant& a,
-const formattables::helper_configuration& hc) const {
-    return a.is_streaming_enabled(hc);
+const formattables::helper_properties& hp) const {
+    return a.is_streaming_enabled(hp);
 }
 
 void variant_helper::
-format(assistant& a, const formattables::helper_configuration& hc) const {
+format(assistant& a, const formattables::helper_properties& hp) const {
     {
-        const auto d(hc.current());
+        const auto d(hp.current());
         const auto nt_qn(d.name_tree_qualified());
         const auto n_qn(d.name_qualified());
         auto snf(a.make_scoped_namespace_formatter(d.namespaces()));
@@ -82,7 +82,7 @@ a.stream() << "        s << \"\\\"data\\\": \";" << std::endl;
 a.stream() << "    }" << std::endl;
 a.stream() << std::endl;
 a.stream() << "    ~" << d.name_tree_identifiable() << "_visitor() { stream_ << \" }\"; }" << std::endl;
-        for (const auto& dd : hc.direct_descendants()) {
+        for (const auto& dd : hp.direct_descendants()) {
 a.stream() << std::endl;
 a.stream() << "    void operator()(const " << dd.name_qualified() << (dd.is_simple_type() ? "" : "&") << " v) const {" << std::endl;
             if (dd.is_simple_type()) {

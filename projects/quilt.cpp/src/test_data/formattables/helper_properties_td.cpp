@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/quilt.cpp/test_data/formattables/helper_descriptor_td.hpp"
-#include "dogen/quilt.cpp/test_data/formattables/helper_configuration_td.hpp"
+#include "dogen/quilt.cpp/test_data/formattables/helper_properties_td.hpp"
 
 namespace {
 
@@ -47,31 +47,31 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-helper_configuration_generator::helper_configuration_generator() : position_(0) { }
+helper_properties_generator::helper_properties_generator() : position_(0) { }
 
-void helper_configuration_generator::
+void helper_properties_generator::
 populate(const unsigned int position, result_type& v) {
     v.current(create_dogen_quilt_cpp_formattables_helper_descriptor(position + 0));
     v.direct_descendants(create_std_list_dogen_quilt_cpp_formattables_helper_descriptor(position + 1));
     v.in_inheritance_relationship(create_bool(position + 2));
 }
 
-helper_configuration_generator::result_type
-helper_configuration_generator::create(const unsigned int position) {
-    helper_configuration r;
-    helper_configuration_generator::populate(position, r);
+helper_properties_generator::result_type
+helper_properties_generator::create(const unsigned int position) {
+    helper_properties r;
+    helper_properties_generator::populate(position, r);
     return r;
 }
 
-helper_configuration_generator::result_type*
-helper_configuration_generator::create_ptr(const unsigned int position) {
-    helper_configuration* p = new helper_configuration();
-    helper_configuration_generator::populate(position, *p);
+helper_properties_generator::result_type*
+helper_properties_generator::create_ptr(const unsigned int position) {
+    helper_properties* p = new helper_properties();
+    helper_properties_generator::populate(position, *p);
     return p;
 }
 
-helper_configuration_generator::result_type
-helper_configuration_generator::operator()() {
+helper_properties_generator::result_type
+helper_properties_generator::operator()() {
     return create(position_++);
 }
 

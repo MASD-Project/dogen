@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/formattables/helper_configuration.hpp"
+#include "dogen/quilt.cpp/types/formattables/helper_properties.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
@@ -63,18 +63,18 @@ std::string optional_helper::helper_name() const {
 }
 
 bool optional_helper::is_enabled(const assistant& a,
-    const formattables::helper_configuration& hc) const {
-    return a.is_streaming_enabled(hc);
+    const formattables::helper_properties& hp) const {
+    return a.is_streaming_enabled(hp);
 }
 
 void optional_helper::
-format(assistant& a, const formattables::helper_configuration& hc) const {
+format(assistant& a, const formattables::helper_properties& hp) const {
     {
-        const auto d(hc.current());
+        const auto d(hp.current());
         const auto nt_qn(d.name_tree_qualified());
         const auto n_qn(d.name_qualified());
         auto snf(a.make_scoped_namespace_formatter(d.namespaces()));
-        const auto containee(hc.direct_descendants().front());
+        const auto containee(hp.direct_descendants().front());
 a.stream() << std::endl;
 a.stream() << "inline std::ostream& operator<<(std::ostream& s, const " << nt_qn << "& v) {" << std::endl;
 a.stream() << "    s << \"{ \" << \"\\\"__type__\\\": \" << \"\\\"" << n_qn << "\\\"\" << \", \";" << std::endl;

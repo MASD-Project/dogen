@@ -30,7 +30,7 @@
 #include "dogen/yarn/io/languages_io.hpp"
 #include "dogen/yarn/types/name_flattener.hpp"
 #include "dogen/quilt.cpp/io/formattables/streaming_configuration_io.hpp"
-#include "dogen/quilt.cpp/io/formattables/helper_configuration_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/helper_properties_io.hpp"
 #include "dogen/quilt.cpp/types/formattables/canonical_formatter_resolver.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/odb/traits.hpp"
@@ -398,12 +398,12 @@ std::string assistant::comment_inline(const std::string& c) const {
 }
 
 std::list<std::shared_ptr<formatters::helper_formatter_interface>>
-assistant::get_helpers(const formattables::helper_configuration& hc) const {
+assistant::get_helpers(const formattables::helper_properties& hp) const {
     /*
      * A family must have at least one helper registered. This is a
      * good way to detect spurious families in data files.
      */
-    const auto fam(hc.current().family());
+    const auto fam(hp.current().family());
     const auto i(context_.helpers().find(fam));
     if (i == context_.helpers().end()) {
         BOOST_LOG_SEV(lg, error) << no_helpers_for_family << fam;
@@ -433,7 +433,7 @@ bool assistant::is_io() const {
 }
 
 bool assistant::
-is_streaming_enabled(const formattables::helper_configuration& hc) const {
+is_streaming_enabled(const formattables::helper_properties& hp) const {
     /*
      * If the IO facet is globally disabled, we don't need streaming.
      */
@@ -444,7 +444,7 @@ is_streaming_enabled(const formattables::helper_configuration& hc) const {
      * If we are in the IO facet, and we are not in an inheritance
      * relationship we need streaming.
      */
-    if (is_io() && !hc.in_inheritance_relationship())
+    if (is_io() && !hp.in_inheritance_relationship())
         return true;
 
     /*
@@ -455,18 +455,18 @@ is_streaming_enabled(const formattables::helper_configuration& hc) const {
     const auto cifn(tt::class_implementation_formatter_name());
     const auto fn(ownership_hierarchy_.formatter_name());
     bool in_types_class_implementation(fn == cifn);
-    return in_types_class_implementation && hc.in_inheritance_relationship();
+    return in_types_class_implementation && hp.in_inheritance_relationship();
 }
 
 void assistant::add_helper_methods(const std::string& element_id) {
     BOOST_LOG_SEV(lg, debug) << "Generating helper methods. Element: "
                              << element_id;
-    if (context_.element_properties().helper_configurations().empty()) {
+    if (context_.element_properties().helper_properties().empty()) {
         BOOST_LOG_SEV(lg, debug) << "No helper methods found.";
     }
 
     const auto& eprops(context_.element_properties());
-    for (const auto& hlp_cfg : eprops.helper_configurations()) {
+    for (const auto& hlp_cfg : eprops.helper_properties()) {
         BOOST_LOG_SEV(lg, debug) << "Helper configuration: " << hlp_cfg;
         const auto helpers(get_helpers(hlp_cfg));
 
@@ -536,7 +536,7 @@ streaming_for_type(const formattables::helper_descriptor& hd,
 bool assistant::
 requires_hashing_helper_method(const yarn::attribute& attr) const {
     const auto& eprops(context_.element_properties());
-    for (const auto& hlp_cfg : eprops.helper_configurations()) {
+    for (const auto& hlp_cfg : eprops.helper_properties()) {
         const auto ident(attr.parsed_type().identifiable());
         const auto& desc(hlp_cfg.current());
         if (ident != desc.name_tree_identifiable())

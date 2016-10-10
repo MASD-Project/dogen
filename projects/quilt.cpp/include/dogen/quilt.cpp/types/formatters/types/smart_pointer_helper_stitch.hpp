@@ -42,9 +42,9 @@ public:
     std::list<std::string> owning_facets() const override;
     std::string helper_name() const override;
     bool is_enabled(const assistant& a,
-        const formattables::helper_configuration& hc) const override;
+        const formattables::helper_properties& hc) const override;
     void format(assistant& a,
-        const formattables::helper_configuration& hc) const override;
+        const formattables::helper_properties& hc) const override;
 };
 
 } } } } }

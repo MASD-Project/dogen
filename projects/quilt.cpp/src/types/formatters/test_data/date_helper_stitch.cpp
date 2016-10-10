@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/formattables/helper_configuration.hpp"
+#include "dogen/quilt.cpp/types/formattables/helper_properties.hpp"
 #include "dogen/quilt.cpp/types/formatters/test_data/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/formatters/test_data/date_helper_stitch.hpp"
@@ -57,7 +57,7 @@ date_helper::owning_facets() const {
 }
 
 bool date_helper::is_enabled(const assistant& /*a*/,
-    const formattables::helper_configuration& /*hc*/) const {
+    const formattables::helper_properties& /*hp*/) const {
     return true;
 }
 
@@ -67,8 +67,8 @@ std::string date_helper::helper_name() const {
 }
 
 void date_helper::
-format(assistant& a, const formattables::helper_configuration& hc) const {
-    const auto d(hc.current());
+format(assistant& a, const formattables::helper_properties& hp) const {
+    const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
 a.stream() << std::endl;

@@ -40,7 +40,7 @@
 #include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
 #include "dogen/formatters/types/cpp/scoped_boilerplate_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/context.hpp"
-#include "dogen/quilt.cpp/types/formattables/helper_configuration.hpp"
+#include "dogen/quilt.cpp/types/formattables/helper_properties.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -213,8 +213,7 @@ public:
      * @brief Returns true if the types facet is required to support
      * streaming or if we are in io facet.
      */
-    bool is_streaming_enabled(
-        const formattables::helper_configuration& hc) const;
+    bool is_streaming_enabled(const formattables::helper_properties& hp) const;
 
 public:
     /**
@@ -265,7 +264,7 @@ public:
 
 private:
     std::list<std::shared_ptr<formatters::helper_formatter_interface>>
-    get_helpers(const formattables::helper_configuration& hc) const;
+    get_helpers(const formattables::helper_properties& hp) const;
 
     std::string
     streaming_for_type(const formattables::streaming_configuration& sc,

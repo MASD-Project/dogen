@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/formattables/helper_configuration.hpp"
+#include "dogen/quilt.cpp/types/formattables/helper_properties.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
 
-helper_configuration::helper_configuration()
+helper_properties::helper_properties()
     : in_inheritance_relationship_(static_cast<bool>(0)) { }
 
-helper_configuration::helper_configuration(
+helper_properties::helper_properties(
     const dogen::quilt::cpp::formattables::helper_descriptor& current,
     const std::list<dogen::quilt::cpp::formattables::helper_descriptor>& direct_descendants,
     const bool in_inheritance_relationship)
@@ -36,62 +36,62 @@ helper_configuration::helper_configuration(
       direct_descendants_(direct_descendants),
       in_inheritance_relationship_(in_inheritance_relationship) { }
 
-void helper_configuration::swap(helper_configuration& other) noexcept {
+void helper_properties::swap(helper_properties& other) noexcept {
     using std::swap;
     swap(current_, other.current_);
     swap(direct_descendants_, other.direct_descendants_);
     swap(in_inheritance_relationship_, other.in_inheritance_relationship_);
 }
 
-bool helper_configuration::operator==(const helper_configuration& rhs) const {
+bool helper_properties::operator==(const helper_properties& rhs) const {
     return current_ == rhs.current_ &&
         direct_descendants_ == rhs.direct_descendants_ &&
         in_inheritance_relationship_ == rhs.in_inheritance_relationship_;
 }
 
-helper_configuration& helper_configuration::operator=(helper_configuration other) {
+helper_properties& helper_properties::operator=(helper_properties other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const dogen::quilt::cpp::formattables::helper_descriptor& helper_configuration::current() const {
+const dogen::quilt::cpp::formattables::helper_descriptor& helper_properties::current() const {
     return current_;
 }
 
-dogen::quilt::cpp::formattables::helper_descriptor& helper_configuration::current() {
+dogen::quilt::cpp::formattables::helper_descriptor& helper_properties::current() {
     return current_;
 }
 
-void helper_configuration::current(const dogen::quilt::cpp::formattables::helper_descriptor& v) {
+void helper_properties::current(const dogen::quilt::cpp::formattables::helper_descriptor& v) {
     current_ = v;
 }
 
-void helper_configuration::current(const dogen::quilt::cpp::formattables::helper_descriptor&& v) {
+void helper_properties::current(const dogen::quilt::cpp::formattables::helper_descriptor&& v) {
     current_ = std::move(v);
 }
 
-const std::list<dogen::quilt::cpp::formattables::helper_descriptor>& helper_configuration::direct_descendants() const {
+const std::list<dogen::quilt::cpp::formattables::helper_descriptor>& helper_properties::direct_descendants() const {
     return direct_descendants_;
 }
 
-std::list<dogen::quilt::cpp::formattables::helper_descriptor>& helper_configuration::direct_descendants() {
+std::list<dogen::quilt::cpp::formattables::helper_descriptor>& helper_properties::direct_descendants() {
     return direct_descendants_;
 }
 
-void helper_configuration::direct_descendants(const std::list<dogen::quilt::cpp::formattables::helper_descriptor>& v) {
+void helper_properties::direct_descendants(const std::list<dogen::quilt::cpp::formattables::helper_descriptor>& v) {
     direct_descendants_ = v;
 }
 
-void helper_configuration::direct_descendants(const std::list<dogen::quilt::cpp::formattables::helper_descriptor>&& v) {
+void helper_properties::direct_descendants(const std::list<dogen::quilt::cpp::formattables::helper_descriptor>&& v) {
     direct_descendants_ = std::move(v);
 }
 
-bool helper_configuration::in_inheritance_relationship() const {
+bool helper_properties::in_inheritance_relationship() const {
     return in_inheritance_relationship_;
 }
 
-void helper_configuration::in_inheritance_relationship(const bool v) {
+void helper_properties::in_inheritance_relationship(const bool v) {
     in_inheritance_relationship_ = v;
 }
 

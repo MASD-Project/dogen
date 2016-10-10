@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include "dogen/quilt.cpp/io/formattables/helper_descriptor_io.hpp"
-#include "dogen/quilt.cpp/io/formattables/helper_configuration_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/helper_properties_io.hpp"
 
 namespace std {
 
@@ -42,7 +42,7 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-std::ostream& operator<<(std::ostream& s, const helper_configuration& v) {
+std::ostream& operator<<(std::ostream& s, const helper_properties& v) {
     boost::io::ios_flags_saver ifs(s);
     s.setf(std::ios_base::boolalpha);
     s.setf(std::ios::fixed, std::ios::floatfield);
@@ -50,7 +50,7 @@ std::ostream& operator<<(std::ostream& s, const helper_configuration& v) {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::helper_configuration\"" << ", "
+      << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::helper_properties\"" << ", "
       << "\"current\": " << v.current() << ", "
       << "\"direct_descendants\": " << v.direct_descendants() << ", "
       << "\"in_inheritance_relationship\": " << v.in_inheritance_relationship()

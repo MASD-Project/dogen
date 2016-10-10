@@ -18,26 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_SERIALIZATION_FORMATTABLES_HELPER_CONFIGURATION_SER_HPP
-#define DOGEN_QUILT_CPP_SERIALIZATION_FORMATTABLES_HELPER_CONFIGURATION_SER_HPP
+#ifndef DOGEN_QUILT_CPP_TEST_DATA_FORMATTABLES_HELPER_PROPERTIES_TD_HPP
+#define DOGEN_QUILT_CPP_TEST_DATA_FORMATTABLES_HELPER_PROPERTIES_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/split_free.hpp>
-#include "dogen/quilt.cpp/types/formattables/helper_configuration.hpp"
+#include "dogen/quilt.cpp/types/formattables/helper_properties.hpp"
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::quilt::cpp::formattables::helper_configuration)
-namespace boost {
-namespace serialization {
+namespace dogen {
+namespace quilt {
+namespace cpp {
+namespace formattables {
 
-template<typename Archive>
-void save(Archive& ar, const dogen::quilt::cpp::formattables::helper_configuration& v, unsigned int version);
+class helper_properties_generator {
+public:
+    helper_properties_generator();
 
-template<typename Archive>
-void load(Archive& ar, dogen::quilt::cpp::formattables::helper_configuration& v, unsigned int version);
+public:
+    typedef dogen::quilt::cpp::formattables::helper_properties result_type;
 
-} }
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
+
+} } } }
 
 #endif

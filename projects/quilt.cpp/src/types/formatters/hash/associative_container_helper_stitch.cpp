@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/formattables/helper_configuration.hpp"
+#include "dogen/quilt.cpp/types/formattables/helper_properties.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/associative_container_helper_stitch.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/traits.hpp"
 #include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
@@ -63,19 +63,19 @@ std::string associative_container_helper::helper_name() const {
 }
 
 bool associative_container_helper::is_enabled(const assistant& /*a*/,
-    const formattables::helper_configuration& /*hc*/) const {
+    const formattables::helper_properties& /*hp*/) const {
     return true;
 }
 
 void associative_container_helper::
-format(assistant& a, const formattables::helper_configuration& hc) const {
-    const auto d(hc.current());
+format(assistant& a, const formattables::helper_properties& hp) const {
+    const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
 
-    if (hc.direct_descendants().size() == 2) {
-        const auto key(hc.direct_descendants().front());
-        const auto value(hc.direct_descendants().back());
+    if (hp.direct_descendants().size() == 2) {
+        const auto key(hp.direct_descendants().front());
+        const auto value(hp.direct_descendants().back());
 a.stream() << std::endl;
 a.stream() << "inline std::size_t hash_" << ident << "(const " << qn << "& v) {" << std::endl;
 a.stream() << "    std::size_t seed(0);" << std::endl;
@@ -93,7 +93,7 @@ a.stream() << "    }" << std::endl;
 a.stream() << "    return seed;" << std::endl;
 a.stream() << "}" << std::endl;
     } else {
-        const auto containee(hc.direct_descendants().front());
+        const auto containee(hp.direct_descendants().front());
 a.stream() << std::endl;
 a.stream() << "inline std::size_t hash_" << ident << "(const " << qn << "& v) {" << std::endl;
 a.stream() << "    std::size_t seed(0);" << std::endl;

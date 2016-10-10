@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_HELPER_CONFIGURATION_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_HELPER_CONFIGURATION_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_HELPER_PROPERTIES_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_HELPER_PROPERTIES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,34 +28,34 @@
 #include <list>
 #include <algorithm>
 #include "dogen/quilt.cpp/types/formattables/helper_descriptor.hpp"
-#include "dogen/quilt.cpp/serialization/formattables/helper_configuration_fwd_ser.hpp"
+#include "dogen/quilt.cpp/serialization/formattables/helper_properties_fwd_ser.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
 
-class helper_configuration final {
+class helper_properties final {
 public:
-    helper_configuration(const helper_configuration&) = default;
-    helper_configuration(helper_configuration&&) = default;
-    ~helper_configuration() = default;
+    helper_properties(const helper_properties&) = default;
+    helper_properties(helper_properties&&) = default;
+    ~helper_properties() = default;
 
 public:
-    helper_configuration();
+    helper_properties();
 
 public:
-    helper_configuration(
+    helper_properties(
         const dogen::quilt::cpp::formattables::helper_descriptor& current,
         const std::list<dogen::quilt::cpp::formattables::helper_descriptor>& direct_descendants,
         const bool in_inheritance_relationship);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::quilt::cpp::formattables::helper_configuration& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::quilt::cpp::formattables::helper_properties& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::formattables::helper_configuration& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::formattables::helper_properties& v, unsigned int version);
 
 public:
     const dogen::quilt::cpp::formattables::helper_descriptor& current() const;
@@ -72,14 +72,14 @@ public:
     void in_inheritance_relationship(const bool v);
 
 public:
-    bool operator==(const helper_configuration& rhs) const;
-    bool operator!=(const helper_configuration& rhs) const {
+    bool operator==(const helper_properties& rhs) const;
+    bool operator!=(const helper_properties& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(helper_configuration& other) noexcept;
-    helper_configuration& operator=(helper_configuration other);
+    void swap(helper_properties& other) noexcept;
+    helper_properties& operator=(helper_properties other);
 
 private:
     dogen::quilt::cpp::formattables::helper_descriptor current_;
@@ -93,8 +93,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::quilt::cpp::formattables::helper_configuration& lhs,
-    dogen::quilt::cpp::formattables::helper_configuration& rhs) {
+    dogen::quilt::cpp::formattables::helper_properties& lhs,
+    dogen::quilt::cpp::formattables::helper_properties& rhs) {
     lhs.swap(rhs);
 }
 

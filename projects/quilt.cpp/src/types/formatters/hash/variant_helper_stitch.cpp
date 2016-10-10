@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/formattables/helper_configuration.hpp"
+#include "dogen/quilt.cpp/types/formattables/helper_properties.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/variant_helper_stitch.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
@@ -63,21 +63,21 @@ std::string variant_helper::helper_name() const {
 }
 
 bool variant_helper::is_enabled(const assistant& /*a*/,
-    const formattables::helper_configuration& /*hc*/) const {
+    const formattables::helper_properties& /*hp*/) const {
     return true;
 }
 
 void variant_helper::
-format(assistant& a, const formattables::helper_configuration& hc) const {
-    const auto d(hc.current());
+format(assistant& a, const formattables::helper_properties& hp) const {
+    const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
-    const auto key(hc.direct_descendants().front());
-    const auto value(hc.direct_descendants().back());
+    const auto key(hp.direct_descendants().front());
+    const auto value(hp.direct_descendants().back());
 a.stream() << std::endl;
 a.stream() << "struct " << ident << "_visitor : public boost::static_visitor<> {" << std::endl;
 a.stream() << "    " << ident << "_visitor() : hash(0) {}" << std::endl;
-    for (const auto& dd : hc.direct_descendants()) {
+    for (const auto& dd : hp.direct_descendants()) {
 a.stream() << "    void operator()(const " << dd.name_qualified() << (dd.is_simple_type() ? "" : "&") << " v) const {" << std::endl;
         if (!dd.requires_hashing_helper())
 a.stream() << "        combine(hash, v);" << std::endl;

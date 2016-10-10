@@ -29,7 +29,7 @@
 #include "dogen/yarn/types/name_flattener.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/quilt.cpp/io/formattables/streaming_configuration_io.hpp"
-#include "dogen/quilt.cpp/io/formattables/helper_configuration_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/helper_properties_io.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/helper_formatter_interface.hpp"
@@ -181,7 +181,7 @@ boost::optional<helper_descriptor> helper_expander::walk_name_tree(
     const bool in_inheritance_relationship,
     const bool inherit_opaqueness_from_parent, const yarn::name_tree& nt,
     std::unordered_set<std::string>& done,
-    std::list<helper_configuration>& hcs) const {
+    std::list<helper_properties>& hps) const {
 
     const auto id(nt.current().id());
     BOOST_LOG_SEV(lg, debug) << "Processing type: " << id;
@@ -212,7 +212,7 @@ boost::optional<helper_descriptor> helper_expander::walk_name_tree(
     if (r.is_pointer())
         r.name_tree_identifiable().append("_ptr");
 
-    helper_configuration hc;
+    helper_properties hc;
     hc.current(r);
 
     const auto iir(in_inheritance_relationship);
@@ -232,7 +232,7 @@ boost::optional<helper_descriptor> helper_expander::walk_name_tree(
          * children). If we have a child, we must have a descriptor.
          */
         const auto aco(nt.are_children_opaque());
-        const auto dd(walk_name_tree(ctx, fff, iir, aco, c, done, hcs));
+        const auto dd(walk_name_tree(ctx, fff, iir, aco, c, done, hps));
         if (!dd) {
             BOOST_LOG_SEV(lg, error) << descriptor_expected;
             BOOST_THROW_EXCEPTION(expansion_error(descriptor_expected));
@@ -269,7 +269,7 @@ boost::optional<helper_descriptor> helper_expander::walk_name_tree(
     }
 
     if (done.find(ident) == done.end()) {
-        hcs.push_back(hc);
+        hps.push_back(hc);
         done.insert(ident);
     } else {
         BOOST_LOG_SEV(lg, debug) << "Name tree already processed: "
@@ -278,14 +278,14 @@ boost::optional<helper_descriptor> helper_expander::walk_name_tree(
     return r;
 }
 
-std::list<helper_configuration> helper_expander::compute_helper_configurations(
+std::list<helper_properties> helper_expander::compute_helper_properties(
     const context& ctx, const facets_for_family_type& fff,
     const bool in_inheritance_relationship,
     const std::list<yarn::attribute>& attrs) const {
 
-    BOOST_LOG_SEV(lg, debug) << "Started making helper configuration.";
+    BOOST_LOG_SEV(lg, debug) << "Started making helper properties.";
 
-    std::list<helper_configuration> r;
+    std::list<helper_properties> r;
     if (attrs.empty()) {
         BOOST_LOG_SEV(lg, debug) << "No properties found.";
         return r;
@@ -304,11 +304,11 @@ std::list<helper_configuration> helper_expander::compute_helper_configurations(
     if (r.empty())
         BOOST_LOG_SEV(lg, debug) << "No helper properties found.";
 
-    BOOST_LOG_SEV(lg, debug) << "Finished making helper configuration.";
+    BOOST_LOG_SEV(lg, debug) << "Finished making helper properties.";
     return r;
 }
 
-void helper_expander::populate_helper_configuration(const context& ctx,
+void helper_expander::populate_helper_properties(const context& ctx,
     const formatters::container& fc,
     std::unordered_map<std::string, formattable>& formattables) const {
 
@@ -329,7 +329,7 @@ void helper_expander::populate_helper_configuration(const context& ctx,
         /*
          * We only need to generate helpers for the target
          * model. However, we can't perform this after reduction
-         * because the helper configuration must be build prior to
+         * because the helper properties must be build prior to
          * reduction or else we will not get helpers for referenced
          * models.
          */
@@ -345,20 +345,20 @@ void helper_expander::populate_helper_configuration(const context& ctx,
             continue;
 
         /*
-         * Update the helper configuration.
+         * Update the helper properties.
          */
         const auto& attrs(ptr->local_attributes());
         const auto iir(ptr->in_inheritance_relationship());
         const auto hlp_cfgs(
-            compute_helper_configurations(ctx, fff, iir, attrs));
-        eprops.helper_configurations(hlp_cfgs);
+            compute_helper_properties(ctx, fff, iir, attrs));
+        eprops.helper_properties(hlp_cfgs);
     }
 }
 
 void helper_expander::expand(const dynamic::repository& drp,
     const formatters::container& fc, model& fm) const {
     const auto ctx(make_context(drp, fm));
-    populate_helper_configuration(ctx, fc, fm.formattables());
+    populate_helper_properties(ctx, fc, fm.formattables());
 }
 
 } } } }

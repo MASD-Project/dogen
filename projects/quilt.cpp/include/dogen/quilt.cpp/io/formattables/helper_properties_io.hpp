@@ -18,15 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_IO_FORMATTABLES_HELPER_CONFIGURATION_IO_HPP
-#define DOGEN_QUILT_CPP_IO_FORMATTABLES_HELPER_CONFIGURATION_IO_HPP
+#ifndef DOGEN_QUILT_CPP_IO_FORMATTABLES_HELPER_PROPERTIES_IO_HPP
+#define DOGEN_QUILT_CPP_IO_FORMATTABLES_HELPER_PROPERTIES_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen/quilt.cpp/types/formattables/helper_configuration.hpp"
+#include "dogen/quilt.cpp/types/formattables/helper_properties.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -35,7 +35,7 @@ namespace formattables {
 
 std::ostream&
 operator<<(std::ostream& s,
-     const dogen::quilt::cpp::formattables::helper_configuration& v);
+     const dogen::quilt::cpp::formattables::helper_properties& v);
 
 } } } }
 
