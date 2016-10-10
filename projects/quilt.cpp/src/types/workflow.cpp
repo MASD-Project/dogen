@@ -72,12 +72,6 @@ workflow::create_decoration_configuration_factory(
     return r;
 }
 
-annotations::opaque_annotations_builder workflow::
-create_opaque_annotations_builder(const dynamic::repository& drp) const {
-    annotations::opaque_annotations_builder r(drp);
-    return r;
-}
-
 formattables::model workflow::create_formattables_model(
     const std::forward_list<boost::filesystem::path>& data_directories,
     const options::cpp_options& opts,

@@ -38,7 +38,6 @@
 #include "dogen/quilt/types/backend_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/formattables/model.hpp"
-#include "dogen/quilt.cpp/types/annotations/opaque_annotations_builder.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -73,12 +72,6 @@ private:
             const dynamic::repository& drp,
             const dogen::formatters::repository& frp,
             const dynamic::object& root_object) const;
-
-    /**
-     * @brief Creates the opaque annotations builder.
-     */
-    annotations::opaque_annotations_builder
-    create_opaque_annotations_builder(const dynamic::repository& rp) const;
 
     /**
      * @brief Create the formattables representation of the yarn model.

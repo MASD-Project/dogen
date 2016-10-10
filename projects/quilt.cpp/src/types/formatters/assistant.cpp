@@ -73,7 +73,6 @@ const std::string family_not_found("Family not found: ");
 const std::string element_not_found("Element not found: ");
 const std::string no_helpers_for_family("No helpers found for family: ");
 const std::string qn_missing("Could not find qualified name for language.");
-const std::string empty_annotations("Helper properties must have annotations.");
 const std::string helpless_family("No registered helpers found for family: ");
 
 }

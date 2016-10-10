@@ -14,17 +14,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-10 Mon 09:48]
+#+CAPTION: Clock summary at [2016-10-10 Mon 11:06]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *1:07* |      |      | 100.0 |
+| *Total time*                                                                | *2:24* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 1:07   |      |      | 100.0 |
-| Active                                                                      |        | 1:07 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:22 |  32.8 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:19 |  28.4 |
-| COMPLETED Improve bintray support                                           |        |      | 0:26 |  38.8 |
+| Stories                                                                     | 2:24   |      |      | 100.0 |
+| Active                                                                      |        | 2:24 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:22 |  15.3 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:19 |  13.2 |
+| COMPLETED Improve bintray support                                           |        |      | 0:26 |  18.1 |
+| COMPLETED Refactor opaque infrastructure                                    |        |      | 1:17 |  53.5 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -59,8 +60,10 @@ For more details see the [sprint log](https://github.com/DomainDrivenConsulting/
 As with every end of sprint, try to massage bintray a bit more and see
 if we can fix some of the errors of the previous sprint.
 
-*** STARTED Refactor opaque infrastructure                            :story:
-    CLOCK: [2016-10-10 Mon 09:48]--[2016-10-10 Mon 10:58] =>  1:10
+*** COMPLETED Refactor opaque infrastructure                          :story:
+    CLOSED: [2016-10-10 Mon 11:06]
+    CLOCK: [2016-10-10 Mon 11:00]--[2016-10-10 Mon 11:06] =>  0:06
+    CLOCK: [2016-10-10 Mon 09:48]--[2016-10-10 Mon 10:59] =>  1:11
 
 We seem to have created a mini-cottage-industry around opaqueness. The
 original idea was to provide some infrastructure for formatters to
@@ -86,46 +89,6 @@ Tasks:
 
 In addition we need to move all the other code (registrar, etc) into
 formattables.
-
-*** Merge annotations with formattables                                :epic:
-
-Originally we split annotations from formattables because we thought
-they had enough responsibilities to stand on their own as
-classes. However, its now clear that the only job of the annotations
-is to provide data for one expander. It makes a lot more sense to have
-it all in one class.
-
-Tasks:
-
-- merge path annotations with model expander
-- create separate annotations for facet directory expander
-- merge streaming annotations and helper annotations with helper
-  expander
-- merge inclusion directive annotations with inclusion expander and
-  possibly get rid of factory
-- merge aspect annotations with aspect expander
-- merge opaque annotations with opaque annotations expander and move
-  all other opaque classes into formattables
-- delete annotations namespace.
-
-Actually this is an epic, so we'll track tasks on its own stories.
-
-Merged stories:
-
-*Drop annotations prefix in yarn*
-
-Tasks:
-
-- merge traits into each factory;
-- do not use the name annotations - just drop the prefix.
-
-*** Investigate helper generation in formattables                     :story:
-
-We seem to be generating an helper for every node of every name tree,
-regardless of whether the name needs a helper or not. Intuitively, we
-should check the family and the streaming settings; if both of these
-are empty then there should not be a need for a helper. But maybe
-there is more to it.
 
 *** Clean up terminology in dynamic                                   :story:
 
@@ -481,6 +444,14 @@ Renames:
   facet name becomes facet and formatter name archetype. Add
   sub-kernel.
 - Element concept becomes Entity.
+
+*** Investigate helper generation in formattables                     :story:
+
+We seem to be generating an helper for every node of every name tree,
+regardless of whether the name needs a helper or not. Intuitively, we
+should check the family and the streaming settings; if both of these
+are empty then there should not be a need for a helper. But maybe
+there is more to it.
 
 *** Refactor ownership hierarchy                                      :story:
 
