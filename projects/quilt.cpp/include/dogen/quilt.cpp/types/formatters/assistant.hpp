@@ -297,14 +297,12 @@ public:
 
 public:
     /**
-     * @brief Retrieves the ODB annotations from the opaque annotations
-     * container, if they do exist.
+     * @brief Retrieves the ODB pragmas for the element.
      */
     std::list<std::string> get_odb_pragmas() const;
 
     /**
-     * @brief Retrieves the ODB annotations for a given property from the
-     * opaque annotations container, if they do exist.
+     * @brief Retrieves the ODB pragmas for a given attribute.
      */
     std::list<std::string> get_odb_pragmas(const std::string& attr_id) const;
 

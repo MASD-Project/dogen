@@ -309,7 +309,7 @@ void inclusion_expander::compute_inclusion_directives(
         }
 
         /*
-         * Do the annotations provide a "hard-coded" inclusion
+         * Does the configuration provide a "hard-coded" inclusion
          * directive?  That is, the type had an hard-coded incantation
          * for its include. This is the case for system models such as
          * boost, std etc where we can't compute the inclusion

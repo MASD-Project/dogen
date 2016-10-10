@@ -44,8 +44,7 @@ static logger lg(logger_factory("quilt.cpp.formattables.helper_expander"));
 const std::string qn_missing("Could not find qualified name for language.");
 const std::string descriptor_expected(
     "Child name tree has no associated helper descriptor");
-const std::string missing_helper_family(
-    "Helper annotations not found for: ");
+const std::string missing_helper_family("Helper family not found for: ");
 const std::string empty_identifiable(
     "Identifiable was not generated correctly and is empty.");
 
@@ -153,8 +152,8 @@ std::string helper_expander::helper_family_for_id(
         BOOST_THROW_EXCEPTION(expansion_error(missing_helper_family + id));
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Found helper annotations for type: " << id
-                             << ". Annotations: " << i->second;
+    BOOST_LOG_SEV(lg, debug) << "Found helper family for type: " << id
+                             << ". Family:" << i->second;
     return i->second;
 }
 
@@ -330,9 +329,9 @@ void helper_expander::populate_helper_configuration(const context& ctx,
         /*
          * We only need to generate helpers for the target
          * model. However, we can't perform this after reduction
-         * because the helper annotations must be build prior to
-         * reduction or else we will not get helpers for
-         * referenced models.
+         * because the helper configuration must be build prior to
+         * reduction or else we will not get helpers for referenced
+         * models.
          */
         if (segment->generation_type() == yarn::generation_types::no_generation)
             continue;
