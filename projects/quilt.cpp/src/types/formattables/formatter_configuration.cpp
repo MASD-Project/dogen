@@ -34,22 +34,19 @@ formatter_configuration::formatter_configuration(formatter_configuration&& rhs)
       overwrite_(std::move(rhs.overwrite_)),
       file_path_(std::move(rhs.file_path_)),
       header_guard_(std::move(rhs.header_guard_)),
-      inclusion_dependencies_(std::move(rhs.inclusion_dependencies_)),
-      opaque_configuration_(std::move(rhs.opaque_configuration_)) { }
+      inclusion_dependencies_(std::move(rhs.inclusion_dependencies_)) { }
 
 formatter_configuration::formatter_configuration(
     const bool enabled,
     const bool overwrite,
     const boost::filesystem::path& file_path,
     const std::string& header_guard,
-    const std::list<std::string>& inclusion_dependencies,
-    const dogen::quilt::cpp::formattables::opaque_configuration& opaque_configuration)
+    const std::list<std::string>& inclusion_dependencies)
     : enabled_(enabled),
       overwrite_(overwrite),
       file_path_(file_path),
       header_guard_(header_guard),
-      inclusion_dependencies_(inclusion_dependencies),
-      opaque_configuration_(opaque_configuration) { }
+      inclusion_dependencies_(inclusion_dependencies) { }
 
 void formatter_configuration::swap(formatter_configuration& other) noexcept {
     using std::swap;
@@ -58,7 +55,6 @@ void formatter_configuration::swap(formatter_configuration& other) noexcept {
     swap(file_path_, other.file_path_);
     swap(header_guard_, other.header_guard_);
     swap(inclusion_dependencies_, other.inclusion_dependencies_);
-    swap(opaque_configuration_, other.opaque_configuration_);
 }
 
 bool formatter_configuration::operator==(const formatter_configuration& rhs) const {
@@ -66,8 +62,7 @@ bool formatter_configuration::operator==(const formatter_configuration& rhs) con
         overwrite_ == rhs.overwrite_ &&
         file_path_ == rhs.file_path_ &&
         header_guard_ == rhs.header_guard_ &&
-        inclusion_dependencies_ == rhs.inclusion_dependencies_ &&
-        opaque_configuration_ == rhs.opaque_configuration_;
+        inclusion_dependencies_ == rhs.inclusion_dependencies_;
 }
 
 formatter_configuration& formatter_configuration::operator=(formatter_configuration other) {
@@ -138,22 +133,6 @@ void formatter_configuration::inclusion_dependencies(const std::list<std::string
 
 void formatter_configuration::inclusion_dependencies(const std::list<std::string>&& v) {
     inclusion_dependencies_ = std::move(v);
-}
-
-const dogen::quilt::cpp::formattables::opaque_configuration& formatter_configuration::opaque_configuration() const {
-    return opaque_configuration_;
-}
-
-dogen::quilt::cpp::formattables::opaque_configuration& formatter_configuration::opaque_configuration() {
-    return opaque_configuration_;
-}
-
-void formatter_configuration::opaque_configuration(const dogen::quilt::cpp::formattables::opaque_configuration& v) {
-    opaque_configuration_ = v;
-}
-
-void formatter_configuration::opaque_configuration(const dogen::quilt::cpp::formattables::opaque_configuration&& v) {
-    opaque_configuration_ = std::move(v);
 }
 
 } } } }

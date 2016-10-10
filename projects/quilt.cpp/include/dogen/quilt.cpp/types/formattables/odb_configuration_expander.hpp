@@ -18,19 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_OPAQUE_CONFIGURATION_EXPANDER_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_OPAQUE_CONFIGURATION_EXPANDER_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_ODB_CONFIGURATION_EXPANDER_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_ODB_CONFIGURATION_EXPANDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <string>
-#include <unordered_map>
+#include <list>
+#include <boost/optional.hpp>
 #include "dogen/dynamic/types/repository.hpp"
-#include "dogen/yarn/types/element.hpp"
-#include "dogen/quilt.cpp/types/annotations/opaque_annotations_builder.hpp"
-#include "dogen/quilt.cpp/types/formattables/formattable.hpp"
+#include "dogen/dynamic/types/field_definition.hpp"
+#include "dogen/yarn/types/object.hpp"
+#include "dogen/quilt.cpp/types/formattables/odb_configuration.hpp"
 #include "dogen/quilt.cpp/types/formattables/model.hpp"
 
 namespace dogen {
@@ -38,23 +38,24 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-class opaque_configuration_expander {
+class odb_configuration_expander {
 private:
-    annotations::opaque_annotations_builder
-    create_opaque_annotations_builder(const dynamic::repository& drp) const;
+    struct field_definitions {
+        dynamic::field_definition odb_pragma;
+    };
+
+    friend std::ostream& operator<<(std::ostream& s,
+        const field_definitions& v);
+
+    field_definitions
+    make_field_definitions(const dynamic::repository& drp) const;
+
+    std::list<std::string> make_odb_pragmas(
+        const field_definitions& fds, const dynamic::object& o) const;
 
 private:
-    typedef std::unordered_map<std::string, formatter_configuration>
-    formatter_configurations_type;
-
-    void populate_opaque_configuration(
-        const annotations::opaque_annotations_builder& b,
-        const yarn::element& e,
-        formatter_configurations_type& fmt_cfgs) const;
-
-    void populate_opaque_configuration(
-        const annotations::opaque_annotations_builder& b,
-        std::unordered_map<std::string, formattable>& formattables) const;
+    boost::optional<odb_configuration> compute_odb_configuration(
+        const field_definitions& fds, const yarn::object& o) const;
 
 public:
     void expand(const dynamic::repository& drp, model& fm) const;

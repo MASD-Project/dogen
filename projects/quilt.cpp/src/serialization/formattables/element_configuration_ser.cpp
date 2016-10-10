@@ -33,6 +33,7 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/formatters/serialization/decoration_configuration_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/profile_group_ser.hpp"
+#include "dogen/quilt.cpp/serialization/formattables/odb_configuration_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/aspect_configuration_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/helper_configuration_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/element_configuration_ser.hpp"
@@ -51,6 +52,7 @@ void save(Archive& ar,
     ar << make_nvp("helper_configurations", v.helper_configurations_);
     ar << make_nvp("canonical_formatter_to_formatter", v.canonical_formatter_to_formatter_);
     ar << make_nvp("local_profile_group", v.local_profile_group_);
+    ar << make_nvp("odb_configuration", v.odb_configuration_);
 }
 
 template<typename Archive>
@@ -63,6 +65,7 @@ void load(Archive& ar,
     ar >> make_nvp("helper_configurations", v.helper_configurations_);
     ar >> make_nvp("canonical_formatter_to_formatter", v.canonical_formatter_to_formatter_);
     ar >> make_nvp("local_profile_group", v.local_profile_group_);
+    ar >> make_nvp("odb_configuration", v.odb_configuration_);
 }
 
 } }

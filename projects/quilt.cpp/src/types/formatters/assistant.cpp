@@ -69,9 +69,6 @@ const std::string facet_configuration_missing(
     "Could not find facet configuration for formatter: ");
 const std::string facet_directory_missing(
     "Facet directory is missing for facet: ");
-const std::string unexpected_opaque_annotations(
-    "Unexpectd opaque annotations type.");
-const std::string null_opaque_annotations("Opaque annotations are null: ");
 const std::string family_not_found("Family not found: ");
 const std::string element_not_found("Element not found: ");
 const std::string no_helpers_for_family("No helpers found for family: ");
@@ -552,42 +549,28 @@ requires_hashing_helper_method(const yarn::attribute& attr) const {
     return false;
 }
 
-boost::shared_ptr<annotations::odb_annotations>
-assistant::get_odb_annotations() const {
-    const auto& opq_cfg(formatter_configuration_.opaque_configuration());
-    const auto oc(opq_cfg.top_level());
+std::list<std::string> assistant::get_odb_pragmas() const {
+    const auto& ecfg(context_.element_configuration());
+    const auto& odb_cfg(ecfg.odb_configuration());
+    if (!odb_cfg)
+        return std::list<std::string>();
 
-    if (!oc)
-        return boost::shared_ptr<annotations::odb_annotations>();
-
-    auto r(boost::dynamic_pointer_cast<annotations::odb_annotations>(oc));
-    if (!r) {
-        BOOST_LOG_SEV(lg, error) << unexpected_opaque_annotations;
-        BOOST_THROW_EXCEPTION(formatting_error(unexpected_opaque_annotations));
-    }
-    return r;
+    return odb_cfg->top_level_odb_pragmas();
 }
 
-boost::shared_ptr<annotations::odb_annotations> assistant::
-get_odb_annotations(const std::string& property_id) const {
-    const auto& opq_cfg(formatter_configuration_.opaque_configuration());
-    const auto& oc(opq_cfg.property_level());
-    const auto i(oc.find(property_id));
-    if (i == oc.end())
-        return boost::shared_ptr<annotations::odb_annotations>();
+std::list<std::string>
+assistant::get_odb_pragmas(const std::string& attr_id) const {
+    const auto& ecfg(context_.element_configuration());
+    const auto& odb_cfg(ecfg.odb_configuration());
+    if (!odb_cfg)
+        return std::list<std::string>();
 
-    const auto ocp(i->second);
-    if (!ocp) {
-        BOOST_LOG_SEV(lg, error) << null_opaque_annotations;
-        BOOST_THROW_EXCEPTION(formatting_error(null_opaque_annotations));
-    }
+    const auto& attr_pragmas(odb_cfg->attribute_level_odb_pragmas());
+    const auto i(attr_pragmas.find(attr_id));
+    if (i == attr_pragmas.end())
+        return std::list<std::string>();
 
-    auto r(boost::dynamic_pointer_cast<annotations::odb_annotations>(ocp));
-    if (!r) {
-        BOOST_LOG_SEV(lg, error) << unexpected_opaque_annotations;
-        BOOST_THROW_EXCEPTION(formatting_error(unexpected_opaque_annotations));
-    }
-    return r;
+    return i->second;
 }
 
 std::list<yarn::name> assistant::

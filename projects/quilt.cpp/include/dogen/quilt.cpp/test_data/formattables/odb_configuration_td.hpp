@@ -18,26 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TEST_DATA_FORMATTABLES_OPAQUE_CONFIGURATION_TD_HPP
-#define DOGEN_QUILT_CPP_TEST_DATA_FORMATTABLES_OPAQUE_CONFIGURATION_TD_HPP
+#ifndef DOGEN_QUILT_CPP_TEST_DATA_FORMATTABLES_ODB_CONFIGURATION_TD_HPP
+#define DOGEN_QUILT_CPP_TEST_DATA_FORMATTABLES_ODB_CONFIGURATION_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/quilt.cpp/types/formattables/opaque_configuration.hpp"
+#include "dogen/quilt.cpp/types/formattables/odb_configuration.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
 
-class opaque_configuration_generator {
+class odb_configuration_generator {
 public:
-    opaque_configuration_generator();
+    odb_configuration_generator();
 
 public:
-    typedef dogen::quilt::cpp::formattables::opaque_configuration result_type;
+    typedef dogen::quilt::cpp::formattables::odb_configuration result_type;
 
 public:
     static void populate(const unsigned int position, result_type& v);

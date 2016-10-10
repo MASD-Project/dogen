@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/hash/formattables/opaque_configuration_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/formatter_configuration_hash.hpp"
 
 namespace {
@@ -58,7 +57,6 @@ std::size_t formatter_configuration_hasher::hash(const formatter_configuration& 
     combine(seed, hash_boost_filesystem_path(v.file_path()));
     combine(seed, v.header_guard());
     combine(seed, hash_std_list_std_string(v.inclusion_dependencies()));
-    combine(seed, v.opaque_configuration());
 
     return seed;
 }

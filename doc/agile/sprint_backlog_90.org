@@ -14,15 +14,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-10 Mon 09:02]
+#+CAPTION: Clock summary at [2016-10-10 Mon 09:48]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *0:22* |      |      | 100.0 |
+| *Total time*                                                                | *1:07* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 0:22   |      |      | 100.0 |
-| Active                                                                      |        | 0:22 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:22 | 100.0 |
+| Stories                                                                     | 1:07   |      |      | 100.0 |
+| Active                                                                      |        | 1:07 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:22 |  32.8 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:19 |  28.4 |
+| COMPLETED Improve bintray support                                           |        |      | 0:26 |  38.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -33,6 +35,7 @@ Updates to sprint and product backlog.
 
 *** COMPLETED Edit release notes for previous sprint                  :story:
     CLOSED: [2016-10-10 Mon 09:34]
+    CLOCK: [2016-10-10 Mon 09:35]--[2016-10-10 Mon 09:48] =>  0:13
     CLOCK: [2016-10-10 Mon 09:28]--[2016-10-10 Mon 09:34] =>  0:06
 
 Add github release notes for v88.
@@ -41,22 +44,45 @@ Title: Dogen v0.89.0, "Cubal"
 
 #+begin_src markdown
 Overview
-=======
+========
 The refactorings continue, mainly focusing on the ```quilt.cpp``` model but with changes all over the code base. The only user visible change is:
 
 - improvement on visitor inclusions for descendants.
 
 For more details see the [sprint log](https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_89.org).
-
 #+end_src
 
-*** STARTED Improve bintray support                                   :story:
+*** COMPLETED Improve bintray support                                 :story:
+    CLOSED: [2016-10-10 Mon 09:46]
     CLOCK: [2016-10-10 Mon 09:02]--[2016-10-10 Mon 09:28] =>  0:26
 
 As with every end of sprint, try to massage bintray a bit more and see
 if we can fix some of the errors of the previous sprint.
 
-*** Merge opaque annotations with opaque expander                     :story:
+*** STARTED Refactor opaque infrastructure                            :story:
+    CLOCK: [2016-10-10 Mon 09:48]--[2016-10-10 Mon 10:58] =>  1:10
+
+We seem to have created a mini-cottage-industry around opaqueness. The
+original idea was to provide some infrastructure for formatters to
+have their own settings in a way that is transparent to quilt.cpp. In
+practice:
+
+- we just have the odb formatter using them and it doesn't require
+  opacity (any more than any other formatter does). We just need to
+  ensure this configuration is not mandatory.
+- we are not sure this will really work for other formatters; we may
+  have hacked things for the odb formatter.
+
+We should wait for a proper external use case of this
+functionality. In the mean time, get rid of all of this paraphernalia
+and implement this just like we do all other formatters.
+
+Tasks:
+
+- create odb configuration and odb expander.
+- remove all opaque stuff.
+
+*Previous understanding*
 
 In addition we need to move all the other code (registrar, etc) into
 formattables.

@@ -44,7 +44,7 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
 
     test_hashing<formattables::model_generator>();
     test_hashing<formattables::formattable_generator>();
-    test_hashing<formattables::opaque_configuration_generator>();
+    test_hashing<formattables::odb_configuration_generator>();
     test_hashing<formattables::element_configuration_generator>();
     test_hashing<formattables::global_enablement_configuration_generator>();
     test_hashing<formattables::formatter_configuration_generator>();

@@ -21,6 +21,7 @@
 #include <sstream>
 #include "dogen/formatters/test_data/decoration_configuration_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/profile_group_td.hpp"
+#include "dogen/quilt.cpp/test_data/formattables/odb_configuration_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/aspect_configuration_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/helper_configuration_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/element_configuration_td.hpp"
@@ -97,6 +98,18 @@ create_boost_optional_dogen_quilt_cpp_formattables_profile_group(unsigned int po
     return r;
 }
 
+dogen::quilt::cpp::formattables::odb_configuration
+create_dogen_quilt_cpp_formattables_odb_configuration(const unsigned int position) {
+    return dogen::quilt::cpp::formattables::odb_configuration_generator::create(position);
+}
+
+boost::optional<dogen::quilt::cpp::formattables::odb_configuration>
+create_boost_optional_dogen_quilt_cpp_formattables_odb_configuration(unsigned int position) {
+    boost::optional<dogen::quilt::cpp::formattables::odb_configuration> r(
+        create_dogen_quilt_cpp_formattables_odb_configuration(position));
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -114,6 +127,7 @@ populate(const unsigned int position, result_type& v) {
     v.helper_configurations(create_std_list_dogen_quilt_cpp_formattables_helper_configuration(position + 3));
     v.canonical_formatter_to_formatter(create_std_unordered_map_std_string_std_string(position + 4));
     v.local_profile_group(create_boost_optional_dogen_quilt_cpp_formattables_profile_group(position + 5));
+    v.odb_configuration(create_boost_optional_dogen_quilt_cpp_formattables_odb_configuration(position + 6));
 }
 
 element_configuration_generator::result_type

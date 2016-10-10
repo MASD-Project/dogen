@@ -21,7 +21,6 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen/quilt.cpp/io/formattables/opaque_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/formatter_configuration_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -63,8 +62,7 @@ std::ostream& operator<<(std::ostream& s, const formatter_configuration& v) {
       << "\"overwrite\": " << v.overwrite() << ", "
       << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\"" << ", "
       << "\"header_guard\": " << "\"" << tidy_up_string(v.header_guard()) << "\"" << ", "
-      << "\"inclusion_dependencies\": " << v.inclusion_dependencies() << ", "
-      << "\"opaque_configuration\": " << v.opaque_configuration()
+      << "\"inclusion_dependencies\": " << v.inclusion_dependencies()
       << " }";
     return(s);
 }

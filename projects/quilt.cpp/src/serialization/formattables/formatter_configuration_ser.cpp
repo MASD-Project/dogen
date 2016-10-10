@@ -30,7 +30,6 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/utility/serialization/path.hpp"
-#include "dogen/quilt.cpp/serialization/formattables/opaque_configuration_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/formatter_configuration_ser.hpp"
 
 namespace boost {
@@ -68,7 +67,6 @@ void save(Archive& ar,
     ar << make_nvp("file_path", v.file_path_);
     ar << make_nvp("header_guard", v.header_guard_);
     ar << make_nvp("inclusion_dependencies", v.inclusion_dependencies_);
-    ar << make_nvp("opaque_configuration", v.opaque_configuration_);
 }
 
 template<typename Archive>
@@ -80,7 +78,6 @@ void load(Archive& ar,
     ar >> make_nvp("file_path", v.file_path_);
     ar >> make_nvp("header_guard", v.header_guard_);
     ar >> make_nvp("inclusion_dependencies", v.inclusion_dependencies_);
-    ar >> make_nvp("opaque_configuration", v.opaque_configuration_);
 }
 
 } }

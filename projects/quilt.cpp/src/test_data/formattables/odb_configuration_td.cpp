@@ -19,20 +19,9 @@
  *
  */
 #include <sstream>
-#include "dogen/quilt.cpp/test_data/formattables/formatter_configuration_td.hpp"
+#include "dogen/quilt.cpp/test_data/formattables/odb_configuration_td.hpp"
 
 namespace {
-
-bool create_bool(const unsigned int position) {
-    return (position % 2) == 0;
-}
-
-boost::filesystem::path
-create_boost_filesystem_path(const unsigned int position) {
-    std::ostringstream s;
-    s << "/a/path/number_" << position;
-    return boost::filesystem::path(s.str());
-}
 
 std::string create_std_string(const unsigned int position) {
     std::ostringstream s;
@@ -48,6 +37,14 @@ std::list<std::string> create_std_list_std_string(unsigned int position) {
     return r;
 }
 
+std::unordered_map<std::string, std::list<std::string> > create_std_unordered_map_std_string_std_list_std_string(unsigned int position) {
+    std::unordered_map<std::string, std::list<std::string> > r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(std::make_pair(create_std_string(position + i), create_std_list_std_string(position + i)));
+    }
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -55,33 +52,30 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-formatter_configuration_generator::formatter_configuration_generator() : position_(0) { }
+odb_configuration_generator::odb_configuration_generator() : position_(0) { }
 
-void formatter_configuration_generator::
+void odb_configuration_generator::
 populate(const unsigned int position, result_type& v) {
-    v.enabled(create_bool(position + 0));
-    v.overwrite(create_bool(position + 1));
-    v.file_path(create_boost_filesystem_path(position + 2));
-    v.header_guard(create_std_string(position + 3));
-    v.inclusion_dependencies(create_std_list_std_string(position + 4));
+    v.top_level_odb_pragmas(create_std_list_std_string(position + 0));
+    v.attribute_level_odb_pragmas(create_std_unordered_map_std_string_std_list_std_string(position + 1));
 }
 
-formatter_configuration_generator::result_type
-formatter_configuration_generator::create(const unsigned int position) {
-    formatter_configuration r;
-    formatter_configuration_generator::populate(position, r);
+odb_configuration_generator::result_type
+odb_configuration_generator::create(const unsigned int position) {
+    odb_configuration r;
+    odb_configuration_generator::populate(position, r);
     return r;
 }
 
-formatter_configuration_generator::result_type*
-formatter_configuration_generator::create_ptr(const unsigned int position) {
-    formatter_configuration* p = new formatter_configuration();
-    formatter_configuration_generator::populate(position, *p);
+odb_configuration_generator::result_type*
+odb_configuration_generator::create_ptr(const unsigned int position) {
+    odb_configuration* p = new odb_configuration();
+    odb_configuration_generator::populate(position, *p);
     return p;
 }
 
-formatter_configuration_generator::result_type
-formatter_configuration_generator::operator()() {
+odb_configuration_generator::result_type
+odb_configuration_generator::operator()() {
     return create(position_++);
 }
 

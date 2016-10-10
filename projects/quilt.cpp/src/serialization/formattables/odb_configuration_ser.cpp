@@ -19,6 +19,7 @@
  *
  */
 #include <boost/serialization/nvp.hpp>
+#include <boost/serialization/list.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/string.hpp>
@@ -26,30 +27,28 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
-#include <boost/serialization/shared_ptr.hpp>
 #include <boost/serialization/unordered_map.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/quilt.cpp/serialization/annotations/opaque_annotations_ser.hpp"
-#include "dogen/quilt.cpp/serialization/formattables/opaque_configuration_ser.hpp"
+#include "dogen/quilt.cpp/serialization/formattables/odb_configuration_ser.hpp"
 
 namespace boost {
 namespace serialization {
 
 template<typename Archive>
 void save(Archive& ar,
-    const dogen::quilt::cpp::formattables::opaque_configuration& v,
+    const dogen::quilt::cpp::formattables::odb_configuration& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("top_level", v.top_level_);
-    ar << make_nvp("property_level", v.property_level_);
+    ar << make_nvp("top_level_odb_pragmas", v.top_level_odb_pragmas_);
+    ar << make_nvp("attribute_level_odb_pragmas", v.attribute_level_odb_pragmas_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
-    dogen::quilt::cpp::formattables::opaque_configuration& v,
+    dogen::quilt::cpp::formattables::odb_configuration& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("top_level", v.top_level_);
-    ar >> make_nvp("property_level", v.property_level_);
+    ar >> make_nvp("top_level_odb_pragmas", v.top_level_odb_pragmas_);
+    ar >> make_nvp("attribute_level_odb_pragmas", v.attribute_level_odb_pragmas_);
 }
 
 } }
@@ -57,16 +56,16 @@ void load(Archive& ar,
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const dogen::quilt::cpp::formattables::opaque_configuration& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, dogen::quilt::cpp::formattables::opaque_configuration& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const dogen::quilt::cpp::formattables::odb_configuration& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, dogen::quilt::cpp::formattables::odb_configuration& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const dogen::quilt::cpp::formattables::opaque_configuration& v, unsigned int version);
-template void load(archive::text_iarchive& ar, dogen::quilt::cpp::formattables::opaque_configuration& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const dogen::quilt::cpp::formattables::odb_configuration& v, unsigned int version);
+template void load(archive::text_iarchive& ar, dogen::quilt::cpp::formattables::odb_configuration& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const dogen::quilt::cpp::formattables::opaque_configuration& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, dogen::quilt::cpp::formattables::opaque_configuration& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const dogen::quilt::cpp::formattables::odb_configuration& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, dogen::quilt::cpp::formattables::odb_configuration& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const dogen::quilt::cpp::formattables::opaque_configuration& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, dogen::quilt::cpp::formattables::opaque_configuration& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const dogen::quilt::cpp::formattables::odb_configuration& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, dogen::quilt::cpp::formattables::odb_configuration& v, unsigned int version);
 
 } }

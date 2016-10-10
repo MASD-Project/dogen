@@ -20,24 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/quilt.cpp/io/annotations/opaque_annotations_io.hpp"
-#include "dogen/quilt.cpp/io/formattables/opaque_configuration_io.hpp"
-
-namespace boost {
-
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::quilt::cpp::annotations::opaque_annotations>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
-      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<empty>\"";
-    s << " }";
-    return s;
-}
-
-}
+#include "dogen/quilt.cpp/io/formattables/odb_configuration_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -48,7 +31,21 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::annotations::opaque_annotations> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << tidy_up_string(*i) << "\"";
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::list<std::string> >& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -69,11 +66,11 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-std::ostream& operator<<(std::ostream& s, const opaque_configuration& v) {
+std::ostream& operator<<(std::ostream& s, const odb_configuration& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::opaque_configuration\"" << ", "
-      << "\"top_level\": " << v.top_level() << ", "
-      << "\"property_level\": " << v.property_level()
+      << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::odb_configuration\"" << ", "
+      << "\"top_level_odb_pragmas\": " << v.top_level_odb_pragmas() << ", "
+      << "\"attribute_level_odb_pragmas\": " << v.attribute_level_odb_pragmas()
       << " }";
     return(s);
 }

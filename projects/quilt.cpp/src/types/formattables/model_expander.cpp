@@ -28,7 +28,7 @@
 #include "dogen/quilt.cpp/types/formattables/helper_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/reducer.hpp"
 #include "dogen/quilt.cpp/types/formattables/file_path_and_guard_expander.hpp"
-#include "dogen/quilt.cpp/types/formattables/opaque_configuration_expander.hpp"
+#include "dogen/quilt.cpp/types/formattables/odb_configuration_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/facet_directory_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/model_expander.hpp"
 
@@ -102,8 +102,8 @@ void model_expander::expand_file_paths_and_guards(
 }
 
 void model_expander::
-expand_opaque_configuration(const dynamic::repository& drp, model& fm) const {
-    opaque_configuration_expander ex;
+expand_odb_configuration(const dynamic::repository& drp, model& fm) const {
+    odb_configuration_expander ex;
     ex.expand(drp, fm);
 }
 
@@ -131,7 +131,7 @@ void model_expander::expand(
     reduce(fm);
 
     expand_file_paths_and_guards(fc, l, fm);
-    expand_opaque_configuration(drp, fm);
+    expand_odb_configuration(drp, fm);
     expand_facet_directories(l, fm);
 }
 

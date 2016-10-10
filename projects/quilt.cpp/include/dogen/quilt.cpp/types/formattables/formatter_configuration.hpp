@@ -29,7 +29,6 @@
 #include <string>
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
-#include "dogen/quilt.cpp/types/formattables/opaque_configuration.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/formatter_configuration_fwd_ser.hpp"
 
 namespace dogen {
@@ -54,8 +53,7 @@ public:
         const bool overwrite,
         const boost::filesystem::path& file_path,
         const std::string& header_guard,
-        const std::list<std::string>& inclusion_dependencies,
-        const dogen::quilt::cpp::formattables::opaque_configuration& opaque_configuration);
+        const std::list<std::string>& inclusion_dependencies);
 
 private:
     template<typename Archive>
@@ -86,11 +84,6 @@ public:
     void inclusion_dependencies(const std::list<std::string>& v);
     void inclusion_dependencies(const std::list<std::string>&& v);
 
-    const dogen::quilt::cpp::formattables::opaque_configuration& opaque_configuration() const;
-    dogen::quilt::cpp::formattables::opaque_configuration& opaque_configuration();
-    void opaque_configuration(const dogen::quilt::cpp::formattables::opaque_configuration& v);
-    void opaque_configuration(const dogen::quilt::cpp::formattables::opaque_configuration&& v);
-
 public:
     bool operator==(const formatter_configuration& rhs) const;
     bool operator!=(const formatter_configuration& rhs) const {
@@ -107,7 +100,6 @@ private:
     boost::filesystem::path file_path_;
     std::string header_guard_;
     std::list<std::string> inclusion_dependencies_;
-    dogen::quilt::cpp::formattables::opaque_configuration opaque_configuration_;
 };
 
 } } } }

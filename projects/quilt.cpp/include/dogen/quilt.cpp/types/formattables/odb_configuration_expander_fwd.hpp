@@ -18,26 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_SERIALIZATION_FORMATTABLES_OPAQUE_CONFIGURATION_SER_HPP
-#define DOGEN_QUILT_CPP_SERIALIZATION_FORMATTABLES_OPAQUE_CONFIGURATION_SER_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_ODB_CONFIGURATION_EXPANDER_FWD_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_ODB_CONFIGURATION_EXPANDER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/split_free.hpp>
-#include "dogen/quilt.cpp/types/formattables/opaque_configuration.hpp"
+namespace dogen {
+namespace quilt {
+namespace cpp {
+namespace formattables {
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::quilt::cpp::formattables::opaque_configuration)
-namespace boost {
-namespace serialization {
+class odb_configuration_expander;
 
-template<typename Archive>
-void save(Archive& ar, const dogen::quilt::cpp::formattables::opaque_configuration& v, unsigned int version);
-
-template<typename Archive>
-void load(Archive& ar, dogen::quilt::cpp::formattables::opaque_configuration& v, unsigned int version);
-
-} }
+} } } }
 
 #endif

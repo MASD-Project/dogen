@@ -302,14 +302,13 @@ public:
      * @brief Retrieves the ODB annotations from the opaque annotations
      * container, if they do exist.
      */
-    boost::shared_ptr<annotations::odb_annotations> get_odb_annotations() const;
+    std::list<std::string> get_odb_pragmas() const;
 
     /**
      * @brief Retrieves the ODB annotations for a given property from the
      * opaque annotations container, if they do exist.
      */
-    boost::shared_ptr<annotations::odb_annotations>
-    get_odb_annotations(const std::string& property_id) const;
+    std::list<std::string> get_odb_pragmas(const std::string& attr_id) const;
 
 public:
     /**
