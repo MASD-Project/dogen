@@ -18,29 +18,31 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/io/ios_state.hpp>
-#include "dogen/quilt.cpp/io/formattables/aspect_configuration_io.hpp"
+#include "dogen/quilt.cpp/hash/formattables/aspect_properties_hash.hpp"
+
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value) {
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+}
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
 
-std::ostream& operator<<(std::ostream& s, const aspect_configuration& v) {
-    boost::io::ios_flags_saver ifs(s);
-    s.setf(std::ios_base::boolalpha);
-    s.setf(std::ios::fixed, std::ios::floatfield);
-    s.precision(6);
-    s.setf(std::ios::showpoint);
+std::size_t aspect_properties_hasher::hash(const aspect_properties& v) {
+    std::size_t seed(0);
 
-    s << " { "
-      << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::aspect_configuration\"" << ", "
-      << "\"requires_manual_default_constructor\": " << v.requires_manual_default_constructor() << ", "
-      << "\"requires_manual_move_constructor\": " << v.requires_manual_move_constructor() << ", "
-      << "\"requires_stream_manipulators\": " << v.requires_stream_manipulators()
-      << " }";
-    return(s);
+    combine(seed, v.requires_manual_default_constructor());
+    combine(seed, v.requires_manual_move_constructor());
+    combine(seed, v.requires_stream_manipulators());
+
+    return seed;
 }
 
 } } } }

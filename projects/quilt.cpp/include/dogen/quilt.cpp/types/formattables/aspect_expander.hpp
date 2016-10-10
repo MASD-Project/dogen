@@ -34,7 +34,7 @@
 #include "dogen/yarn/types/name_tree.hpp"
 #include "dogen/yarn/types/attribute.hpp"
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
-#include "dogen/quilt.cpp/types/formattables/aspect_configuration.hpp"
+#include "dogen/quilt.cpp/types/formattables/aspect_properties.hpp"
 #include "dogen/quilt.cpp/types/formattables/model.hpp"
 
 namespace dogen {
@@ -56,27 +56,27 @@ private:
     field_definitions
     make_field_definitions(const dynamic::repository& drp) const;
 
-    boost::optional<aspect_configuration> make_aspect_configuration(
+    boost::optional<aspect_properties> make_aspect_properties(
         const field_definitions& fds, const dynamic::object& o) const;
 
 private:
-    typedef std::unordered_map<std::string, aspect_configuration>
-    aspect_configurations_type;
+    typedef std::unordered_map<std::string, aspect_properties>
+    aspect_properties_type;
 
-    aspect_configurations_type
-    obtain_aspect_configurations(const dynamic::repository& drp,
+    aspect_properties_type
+    obtain_aspect_properties(const dynamic::repository& drp,
         const std::unordered_map<std::string, formattable>& formattables) const;
 
 private:
     void walk_name_tree(const yarn::name_tree& nt, const bool is_top_level,
-        const aspect_configurations_type& acs, aspect_configuration& ac) const;
+        const aspect_properties_type& element_aps, aspect_properties& ac) const;
 
-    aspect_configuration compute_aspect_configuration(
-        const aspect_configurations_type& acs,
+    aspect_properties compute_aspect_properties(
+        const aspect_properties_type& element_aps,
         const std::list<yarn::attribute>& attr) const;
 
-    void populate_aspect_configuration(
-        const aspect_configurations_type& acs,
+    void populate_aspect_properties(
+        const aspect_properties_type& element_aps,
         std::unordered_map<std::string, formattable>& formattables) const;
 
 public:

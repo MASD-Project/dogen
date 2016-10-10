@@ -14,19 +14,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-10 Mon 11:12]
+#+CAPTION: Clock summary at [2016-10-10 Mon 12:20]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *2:29* |      |      | 100.0 |
+| *Total time*                                                                | *3:37* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 2:29   |      |      | 100.0 |
-| Active                                                                      |        | 2:29 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:22 |  14.8 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:19 |  12.8 |
-| COMPLETED Improve bintray support                                           |        |      | 0:26 |  17.4 |
-| COMPLETED Refactor opaque infrastructure                                    |        |      | 1:17 |  51.7 |
-| COMPLETED Remove any remnants of annotations from quilt                     |        |      | 0:05 |   3.4 |
+| Stories                                                                     | 3:37   |      |      | 100.0 |
+| Active                                                                      |        | 3:37 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:22 |  10.1 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:19 |   8.8 |
+| COMPLETED Improve bintray support                                           |        |      | 0:26 |  12.0 |
+| COMPLETED Refactor opaque infrastructure                                    |        |      | 1:17 |  35.5 |
+| COMPLETED Remove any remnants of annotations from quilt                     |        |      | 0:05 |   2.3 |
+| STARTED Solve the issue of too many "configurations"                        |        |      | 1:08 |  31.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -103,6 +104,7 @@ Grep the project for anyone still using this term and remove it.
 This was missed in rename.
 
 *** STARTED Solve the issue of too many "configurations"              :story:
+    CLOCK: [2016-10-10 Mon 12:01]--[2016-10-10 Mon 12:20] =>  0:19
     CLOCK: [2016-10-10 Mon 11:11]--[2016-10-10 Mon 12:00] =>  0:49
 
 We need a name for the "transient" configuration which is used inside

@@ -33,9 +33,9 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/formatters/serialization/decoration_configuration_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/profile_group_ser.hpp"
+#include "dogen/quilt.cpp/serialization/formattables/aspect_properties_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/odb_configuration_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/element_properties_ser.hpp"
-#include "dogen/quilt.cpp/serialization/formattables/aspect_configuration_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/helper_configuration_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/formatter_configuration_ser.hpp"
 
@@ -47,7 +47,7 @@ void save(Archive& ar,
     const dogen::quilt::cpp::formattables::element_properties& v,
     const unsigned int /*version*/) {
     ar << make_nvp("decoration_configuration", v.decoration_configuration_);
-    ar << make_nvp("aspect_configuration", v.aspect_configuration_);
+    ar << make_nvp("aspect_properties", v.aspect_properties_);
     ar << make_nvp("formatter_configurations", v.formatter_configurations_);
     ar << make_nvp("helper_configurations", v.helper_configurations_);
     ar << make_nvp("canonical_formatter_to_formatter", v.canonical_formatter_to_formatter_);
@@ -60,7 +60,7 @@ void load(Archive& ar,
     dogen::quilt::cpp::formattables::element_properties& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("decoration_configuration", v.decoration_configuration_);
-    ar >> make_nvp("aspect_configuration", v.aspect_configuration_);
+    ar >> make_nvp("aspect_properties", v.aspect_properties_);
     ar >> make_nvp("formatter_configurations", v.formatter_configurations_);
     ar >> make_nvp("helper_configurations", v.helper_configurations_);
     ar >> make_nvp("canonical_formatter_to_formatter", v.canonical_formatter_to_formatter_);

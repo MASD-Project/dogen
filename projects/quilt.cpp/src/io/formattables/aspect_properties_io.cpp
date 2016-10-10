@@ -18,38 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TEST_DATA_FORMATTABLES_ASPECT_CONFIGURATION_TD_HPP
-#define DOGEN_QUILT_CPP_TEST_DATA_FORMATTABLES_ASPECT_CONFIGURATION_TD_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include "dogen/quilt.cpp/types/formattables/aspect_configuration.hpp"
+#include <ostream>
+#include <boost/io/ios_state.hpp>
+#include "dogen/quilt.cpp/io/formattables/aspect_properties_io.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
 
-class aspect_configuration_generator {
-public:
-    aspect_configuration_generator();
+std::ostream& operator<<(std::ostream& s, const aspect_properties& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
 
-public:
-    typedef dogen::quilt::cpp::formattables::aspect_configuration result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
-};
+    s << " { "
+      << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::aspect_properties\"" << ", "
+      << "\"requires_manual_default_constructor\": " << v.requires_manual_default_constructor() << ", "
+      << "\"requires_manual_move_constructor\": " << v.requires_manual_move_constructor() << ", "
+      << "\"requires_stream_manipulators\": " << v.requires_stream_manipulators()
+      << " }";
+    return(s);
+}
 
 } } } }
-
-#endif

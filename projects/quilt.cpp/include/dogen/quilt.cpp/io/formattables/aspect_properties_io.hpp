@@ -18,31 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/hash/formattables/aspect_configuration_hash.hpp"
+#ifndef DOGEN_QUILT_CPP_IO_FORMATTABLES_ASPECT_PROPERTIES_IO_HPP
+#define DOGEN_QUILT_CPP_IO_FORMATTABLES_ASPECT_PROPERTIES_IO_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value) {
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-}
+#include <iosfwd>
+#include "dogen/quilt.cpp/types/formattables/aspect_properties.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
 
-std::size_t aspect_configuration_hasher::hash(const aspect_configuration& v) {
-    std::size_t seed(0);
-
-    combine(seed, v.requires_manual_default_constructor());
-    combine(seed, v.requires_manual_move_constructor());
-    combine(seed, v.requires_stream_manipulators());
-
-    return seed;
-}
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::quilt::cpp::formattables::aspect_properties& v);
 
 } } } }
+
+#endif

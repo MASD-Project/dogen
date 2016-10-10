@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/test_data/formattables/aspect_configuration_td.hpp"
+#include "dogen/quilt.cpp/test_data/formattables/aspect_properties_td.hpp"
 
 namespace {
 
@@ -33,31 +33,31 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-aspect_configuration_generator::aspect_configuration_generator() : position_(0) { }
+aspect_properties_generator::aspect_properties_generator() : position_(0) { }
 
-void aspect_configuration_generator::
+void aspect_properties_generator::
 populate(const unsigned int position, result_type& v) {
     v.requires_manual_default_constructor(create_bool(position + 0));
     v.requires_manual_move_constructor(create_bool(position + 1));
     v.requires_stream_manipulators(create_bool(position + 2));
 }
 
-aspect_configuration_generator::result_type
-aspect_configuration_generator::create(const unsigned int position) {
-    aspect_configuration r;
-    aspect_configuration_generator::populate(position, r);
+aspect_properties_generator::result_type
+aspect_properties_generator::create(const unsigned int position) {
+    aspect_properties r;
+    aspect_properties_generator::populate(position, r);
     return r;
 }
 
-aspect_configuration_generator::result_type*
-aspect_configuration_generator::create_ptr(const unsigned int position) {
-    aspect_configuration* p = new aspect_configuration();
-    aspect_configuration_generator::populate(position, *p);
+aspect_properties_generator::result_type*
+aspect_properties_generator::create_ptr(const unsigned int position) {
+    aspect_properties* p = new aspect_properties();
+    aspect_properties_generator::populate(position, *p);
     return p;
 }
 
-aspect_configuration_generator::result_type
-aspect_configuration_generator::operator()() {
+aspect_properties_generator::result_type
+aspect_properties_generator::operator()() {
     return create(position_++);
 }
 

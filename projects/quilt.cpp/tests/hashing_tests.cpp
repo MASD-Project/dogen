@@ -50,7 +50,7 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
     test_hashing<formattables::formatter_configuration_generator>();
     test_hashing<formattables::facet_configuration_generator>();
     test_hashing<formattables::helper_configuration_generator>();
-    test_hashing<formattables::aspect_configuration_generator>();
+    test_hashing<formattables::aspect_properties_generator>();
     test_hashing<formattables::helper_descriptor_generator>();
     test_hashing<formattables::decoration_profile_generator>();
     test_hashing<formattables::facet_profile_generator>();

@@ -49,7 +49,7 @@ BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
     test_move_assignment_copy<formattables::global_enablement_configuration_generator>();
     test_move_assignment_copy<formattables::formatter_configuration_generator>();
     test_move_assignment_copy<formattables::helper_configuration_generator>();
-    test_move_assignment_copy<formattables::aspect_configuration_generator>();
+    test_move_assignment_copy<formattables::aspect_properties_generator>();
     test_move_assignment_copy<formattables::helper_descriptor_generator>();
     test_move_assignment_copy<formattables::decoration_profile_generator>();
     test_move_assignment_copy<formattables::facet_profile_generator>();

@@ -258,18 +258,18 @@ std::string assistant::get_odb_facet_directory() const {
 }
 
 bool assistant::requires_manual_default_constructor() const {
-    const auto& ac(context_.element_properties().aspect_configuration());
-    return ac.requires_manual_default_constructor();
+    const auto& ap(context_.element_properties().aspect_properties());
+    return ap.requires_manual_default_constructor();
 }
 
 bool assistant::requires_manual_move_constructor() const {
-    const auto& ac(context_.element_properties().aspect_configuration());
-    return ac.requires_manual_move_constructor();
+    const auto& ap(context_.element_properties().aspect_properties());
+    return ap.requires_manual_move_constructor();
 }
 
 bool assistant::requires_stream_manipulators() const {
-    const auto& ac(context_.element_properties().aspect_configuration());
-    return ac.requires_stream_manipulators();
+    const auto& ap(context_.element_properties().aspect_properties());
+    return ap.requires_stream_manipulators();
 }
 
 bool assistant::is_serialization_enabled() const {

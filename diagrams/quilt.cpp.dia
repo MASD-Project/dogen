@@ -13025,10 +13025,10 @@ main, or from another initialiser.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#aspect_configuration#</dia:string>
+            <dia:string>#aspect_properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#formattables::aspect_configuration#</dia:string>
+            <dia:string>#formattables::aspect_properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -13186,7 +13186,7 @@ main, or from another initialiser.#</dia:string>
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#aspect_configuration#</dia:string>
+        <dia:string>#aspect_properties#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>

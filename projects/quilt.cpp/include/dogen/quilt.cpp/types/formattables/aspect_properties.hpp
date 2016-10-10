@@ -18,42 +18,42 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_ASPECT_CONFIGURATION_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_ASPECT_CONFIGURATION_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_ASPECT_PROPERTIES_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_ASPECT_PROPERTIES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <algorithm>
-#include "dogen/quilt.cpp/serialization/formattables/aspect_configuration_fwd_ser.hpp"
+#include "dogen/quilt.cpp/serialization/formattables/aspect_properties_fwd_ser.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
 
-class aspect_configuration final {
+class aspect_properties final {
 public:
-    aspect_configuration(const aspect_configuration&) = default;
-    aspect_configuration(aspect_configuration&&) = default;
-    ~aspect_configuration() = default;
+    aspect_properties(const aspect_properties&) = default;
+    aspect_properties(aspect_properties&&) = default;
+    ~aspect_properties() = default;
 
 public:
-    aspect_configuration();
+    aspect_properties();
 
 public:
-    aspect_configuration(
+    aspect_properties(
         const bool requires_manual_default_constructor,
         const bool requires_manual_move_constructor,
         const bool requires_stream_manipulators);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::quilt::cpp::formattables::aspect_configuration& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::quilt::cpp::formattables::aspect_properties& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::formattables::aspect_configuration& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::formattables::aspect_properties& v, unsigned int version);
 
 public:
     bool requires_manual_default_constructor() const;
@@ -66,14 +66,14 @@ public:
     void requires_stream_manipulators(const bool v);
 
 public:
-    bool operator==(const aspect_configuration& rhs) const;
-    bool operator!=(const aspect_configuration& rhs) const {
+    bool operator==(const aspect_properties& rhs) const;
+    bool operator!=(const aspect_properties& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(aspect_configuration& other) noexcept;
-    aspect_configuration& operator=(aspect_configuration other);
+    void swap(aspect_properties& other) noexcept;
+    aspect_properties& operator=(aspect_properties other);
 
 private:
     bool requires_manual_default_constructor_;
@@ -87,8 +87,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::quilt::cpp::formattables::aspect_configuration& lhs,
-    dogen::quilt::cpp::formattables::aspect_configuration& rhs) {
+    dogen::quilt::cpp::formattables::aspect_properties& lhs,
+    dogen::quilt::cpp::formattables::aspect_properties& rhs) {
     lhs.swap(rhs);
 }
 

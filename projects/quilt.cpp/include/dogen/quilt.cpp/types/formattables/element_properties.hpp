@@ -32,8 +32,8 @@
 #include <boost/optional.hpp>
 #include "dogen/formatters/types/decoration_configuration.hpp"
 #include "dogen/quilt.cpp/types/formattables/profile_group.hpp"
+#include "dogen/quilt.cpp/types/formattables/aspect_properties.hpp"
 #include "dogen/quilt.cpp/types/formattables/odb_configuration.hpp"
-#include "dogen/quilt.cpp/types/formattables/aspect_configuration.hpp"
 #include "dogen/quilt.cpp/types/formattables/helper_configuration.hpp"
 #include "dogen/quilt.cpp/types/formattables/formatter_configuration.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/element_properties_fwd_ser.hpp"
@@ -58,7 +58,7 @@ public:
 public:
     element_properties(
         const boost::optional<dogen::formatters::decoration_configuration>& decoration_configuration,
-        const dogen::quilt::cpp::formattables::aspect_configuration& aspect_configuration,
+        const dogen::quilt::cpp::formattables::aspect_properties& aspect_properties,
         const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration>& formatter_configurations,
         const std::list<dogen::quilt::cpp::formattables::helper_configuration>& helper_configurations,
         const std::unordered_map<std::string, std::string>& canonical_formatter_to_formatter,
@@ -78,10 +78,10 @@ public:
     void decoration_configuration(const boost::optional<dogen::formatters::decoration_configuration>& v);
     void decoration_configuration(const boost::optional<dogen::formatters::decoration_configuration>&& v);
 
-    const dogen::quilt::cpp::formattables::aspect_configuration& aspect_configuration() const;
-    dogen::quilt::cpp::formattables::aspect_configuration& aspect_configuration();
-    void aspect_configuration(const dogen::quilt::cpp::formattables::aspect_configuration& v);
-    void aspect_configuration(const dogen::quilt::cpp::formattables::aspect_configuration&& v);
+    const dogen::quilt::cpp::formattables::aspect_properties& aspect_properties() const;
+    dogen::quilt::cpp::formattables::aspect_properties& aspect_properties();
+    void aspect_properties(const dogen::quilt::cpp::formattables::aspect_properties& v);
+    void aspect_properties(const dogen::quilt::cpp::formattables::aspect_properties&& v);
 
     const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration>& formatter_configurations() const;
     std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration>& formatter_configurations();
@@ -120,7 +120,7 @@ public:
 
 private:
     boost::optional<dogen::formatters::decoration_configuration> decoration_configuration_;
-    dogen::quilt::cpp::formattables::aspect_configuration aspect_configuration_;
+    dogen::quilt::cpp::formattables::aspect_properties aspect_properties_;
     std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration> formatter_configurations_;
     std::list<dogen::quilt::cpp::formattables::helper_configuration> helper_configurations_;
     std::unordered_map<std::string, std::string> canonical_formatter_to_formatter_;

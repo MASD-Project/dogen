@@ -26,7 +26,7 @@
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
-#include "dogen/quilt.cpp/io/formattables/aspect_configuration_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/aspect_properties_io.hpp"
 #include "dogen/quilt.cpp/types/formattables/aspect_expander.hpp"
 
 namespace {
@@ -76,10 +76,10 @@ aspect_expander::make_field_definitions(const dynamic::repository& drp) const {
     return r;
 }
 
-boost::optional<aspect_configuration> aspect_expander::
-make_aspect_configuration(const field_definitions& fds,
+boost::optional<aspect_properties> aspect_expander::
+make_aspect_properties(const field_definitions& fds,
     const dynamic::object& o) const {
-    aspect_configuration r;
+    aspect_properties r;
 
     const dynamic::field_selector fs(o);
     bool found_any(false);
@@ -108,24 +108,24 @@ make_aspect_configuration(const field_definitions& fds,
     if (found_any)
         return r;
 
-    return boost::optional<aspect_configuration>();
+    return boost::optional<aspect_properties>();
 }
 
-aspect_expander::aspect_configurations_type
-aspect_expander::obtain_aspect_configurations(const dynamic::repository& drp,
+aspect_expander::aspect_properties_type
+aspect_expander::obtain_aspect_properties(const dynamic::repository& drp,
     const std::unordered_map<std::string, formattable>& formattables) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started creating aspect configuration.";
 
     const auto fds(make_field_definitions(drp));
-    aspect_configurations_type r;
+    aspect_properties_type r;
     for (auto& pair : formattables) {
         const auto id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
 
         auto& formattable(pair.second);
         const auto& segment(*formattable.master_segment());
-        const auto ac(make_aspect_configuration(fds, segment.extensions()));
+        const auto ac(make_aspect_properties(fds, segment.extensions()));
         if (ac)
             r[id] = *ac;
     }
@@ -135,48 +135,48 @@ aspect_expander::obtain_aspect_configurations(const dynamic::repository& drp,
 }
 
 void aspect_expander::walk_name_tree(const yarn::name_tree& nt,
-    const bool is_top_level, const aspect_configurations_type& acs,
-    aspect_configuration& ac) const {
+    const bool is_top_level, const aspect_properties_type& element_aps,
+    aspect_properties& ap) const {
 
     for (const auto& c : nt.children())
-        walk_name_tree(c, false/*is_top_level*/, acs, ac);
+        walk_name_tree(c, false/*is_top_level*/, element_aps, ap);
 
     if (is_top_level && nt.is_current_simple_type())
-        ac.requires_manual_default_constructor(true);
+        ap.requires_manual_default_constructor(true);
 
-    const auto i(acs.find(nt.current().id()));
-    if (i == acs.end())
+    const auto i(element_aps.find(nt.current().id()));
+    if (i == element_aps.end())
         return;
 
-    const auto as(i->second);
-    if (as.requires_stream_manipulators())
-        ac.requires_stream_manipulators(true);
+    const auto element_ap(i->second);
+    if (element_ap.requires_stream_manipulators())
+        ap.requires_stream_manipulators(true);
 
     if (!is_top_level)
         return;
 
-    if (as.requires_manual_default_constructor())
-        ac.requires_manual_default_constructor(true);
+    if (element_ap.requires_manual_default_constructor())
+        ap.requires_manual_default_constructor(true);
 
-    if (as.requires_manual_move_constructor())
-        ac.requires_manual_move_constructor(true);
+    if (element_ap.requires_manual_move_constructor())
+        ap.requires_manual_move_constructor(true);
 }
 
-aspect_configuration
-aspect_expander::compute_aspect_configuration(
-    const aspect_configurations_type& acs,
+aspect_properties
+aspect_expander::compute_aspect_properties(
+    const aspect_properties_type& element_aps,
     const std::list<yarn::attribute>& attr) const {
 
-    aspect_configuration r;
+    aspect_properties r;
     for (const auto a : attr) {
         const auto& nt(a.parsed_type());
-        walk_name_tree(nt, true/*is_top_level*/, acs, r);
+        walk_name_tree(nt, true/*is_top_level*/, element_aps, r);
     }
     return r;
 }
 
-void aspect_expander::populate_aspect_configuration(
-    const aspect_configurations_type& acs,
+void aspect_expander::populate_aspect_properties(
+    const aspect_properties_type& element_aps,
     std::unordered_map<std::string, formattable>& formattables) const {
 
     for (auto& pair : formattables) {
@@ -214,15 +214,15 @@ void aspect_expander::populate_aspect_configuration(
          * Update the aspect configuration.
          */
         const auto& attr(ptr->local_attributes());
-        const auto ac(compute_aspect_configuration(acs, attr));
-        eprops.aspect_configuration(ac);
+        const auto element_ap(compute_aspect_properties(element_aps, attr));
+        eprops.aspect_properties(element_ap);
     }
 }
 
 void aspect_expander::
 expand(const dynamic::repository& drp, model& fm) const {
-    const auto acs(obtain_aspect_configurations(drp, fm.formattables()));
-    populate_aspect_configuration(acs, fm.formattables());
+    const auto element_aps(obtain_aspect_properties(drp, fm.formattables()));
+    populate_aspect_properties(element_aps, fm.formattables());
 }
 
 } } } }

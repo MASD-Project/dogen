@@ -22,9 +22,9 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen/formatters/io/decoration_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/profile_group_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/aspect_properties_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/odb_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/element_properties_io.hpp"
-#include "dogen/quilt.cpp/io/formattables/aspect_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/helper_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/formatter_configuration_io.hpp"
 
@@ -139,7 +139,7 @@ std::ostream& operator<<(std::ostream& s, const element_properties& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::element_properties\"" << ", "
       << "\"decoration_configuration\": " << v.decoration_configuration() << ", "
-      << "\"aspect_configuration\": " << v.aspect_configuration() << ", "
+      << "\"aspect_properties\": " << v.aspect_properties() << ", "
       << "\"formatter_configurations\": " << v.formatter_configurations() << ", "
       << "\"helper_configurations\": " << v.helper_configurations() << ", "
       << "\"canonical_formatter_to_formatter\": " << v.canonical_formatter_to_formatter() << ", "
