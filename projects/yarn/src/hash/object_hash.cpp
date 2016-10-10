@@ -23,7 +23,6 @@
 #include "dogen/yarn/hash/element_hash.hpp"
 #include "dogen/yarn/hash/attribute_hash.hpp"
 #include "dogen/yarn/hash/object_types_hash.hpp"
-#include "dogen/yarn/hash/generalization_annotations_hash.hpp"
 #include "dogen/yarn/hash/type_parameters_annotations_hash.hpp"
 
 namespace {
@@ -92,7 +91,6 @@ std::size_t object_hasher::hash(const object& v) {
     combine(seed, hash_boost_optional_dogen_yarn_name(v.parent()));
     combine(seed, hash_std_list_dogen_yarn_name(v.leaves()));
     combine(seed, v.in_inheritance_relationship());
-    combine(seed, v.generalization_annotations());
     combine(seed, hash_std_list_dogen_yarn_name(v.transparent_associations()));
     combine(seed, hash_std_list_dogen_yarn_name(v.opaque_associations()));
     combine(seed, hash_boost_optional_dogen_yarn_name(v.base_visitor()));

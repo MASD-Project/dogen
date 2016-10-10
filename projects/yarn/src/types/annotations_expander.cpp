@@ -19,8 +19,6 @@
  *
  */
 #include "dogen/yarn/types/type_parameters_annotations_factory.hpp"
-#include "dogen/yarn/types/generalization_annotations_factory.hpp"
-#include "dogen/yarn/types/generalization_annotations.hpp"
 #include "dogen/yarn/types/type_parameters_annotations.hpp"
 #include "dogen/yarn/types/annotations_expander.hpp"
 
@@ -37,17 +35,10 @@ void annotations_expander::expand_type_annotations(object& o) const {
     o.type_parameters_annotations(s);
 }
 
-void annotations_expander::expand_generalization_annotations(object& o) const {
-    generalization_annotations_factory f(dynamic_repository_);
-    const auto s(f.make(o.extensions()));
-    o.generalization_annotations(s);
-}
-
 void annotations_expander::expand(intermediate_model& m) const {
     for (auto& pair : m.objects()) {
         auto& o(pair.second);
         expand_type_annotations(o);
-        expand_generalization_annotations(o);
     }
 }
 

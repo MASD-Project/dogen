@@ -96,10 +96,8 @@
 #include "dogen/yarn/types/stereotypes_expander.hpp"
 #include "dogen/yarn/types/transformation_error.hpp"
 #include "dogen/yarn/types/generalization_expander.hpp"
-#include "dogen/yarn/types/generalization_annotations.hpp"
 #include "dogen/yarn/types/intermediate_model_factory.hpp"
 #include "dogen/yarn/types/type_parameters_annotations.hpp"
-#include "dogen/yarn/types/generalization_annotations_factory.hpp"
 #include "dogen/yarn/types/type_parameters_annotations_factory.hpp"
 
 #endif

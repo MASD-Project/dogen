@@ -35,7 +35,6 @@
 #include "dogen/yarn/serialization/element_ser.hpp"
 #include "dogen/yarn/serialization/attribute_ser.hpp"
 #include "dogen/yarn/serialization/object_types_ser.hpp"
-#include "dogen/yarn/serialization/generalization_annotations_ser.hpp"
 #include "dogen/yarn/serialization/type_parameters_annotations_ser.hpp"
 
 BOOST_CLASS_TRACKING(
@@ -64,7 +63,6 @@ void save(Archive& ar,
     ar << make_nvp("parent", v.parent_);
     ar << make_nvp("leaves", v.leaves_);
     ar << make_nvp("in_inheritance_relationship", v.in_inheritance_relationship_);
-    ar << make_nvp("generalization_annotations", v.generalization_annotations_);
     ar << make_nvp("transparent_associations", v.transparent_associations_);
     ar << make_nvp("opaque_associations", v.opaque_associations_);
     ar << make_nvp("base_visitor", v.base_visitor_);
@@ -97,7 +95,6 @@ void load(Archive& ar,
     ar >> make_nvp("parent", v.parent_);
     ar >> make_nvp("leaves", v.leaves_);
     ar >> make_nvp("in_inheritance_relationship", v.in_inheritance_relationship_);
-    ar >> make_nvp("generalization_annotations", v.generalization_annotations_);
     ar >> make_nvp("transparent_associations", v.transparent_associations_);
     ar >> make_nvp("opaque_associations", v.opaque_associations_);
     ar >> make_nvp("base_visitor", v.base_visitor_);

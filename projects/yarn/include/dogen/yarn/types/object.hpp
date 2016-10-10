@@ -36,7 +36,6 @@
 #include "dogen/yarn/types/attribute.hpp"
 #include "dogen/yarn/types/object_types.hpp"
 #include "dogen/yarn/serialization/object_fwd_ser.hpp"
-#include "dogen/yarn/types/generalization_annotations.hpp"
 #include "dogen/yarn/types/type_parameters_annotations.hpp"
 
 namespace dogen {
@@ -86,7 +85,6 @@ public:
         const boost::optional<dogen::yarn::name>& parent,
         const std::list<dogen::yarn::name>& leaves,
         const bool in_inheritance_relationship,
-        const dogen::yarn::generalization_annotations& generalization_annotations,
         const std::list<dogen::yarn::name>& transparent_associations,
         const std::list<dogen::yarn::name>& opaque_associations,
         const boost::optional<dogen::yarn::name>& base_visitor,
@@ -242,11 +240,6 @@ public:
     void in_inheritance_relationship(const bool v);
     /**@}*/
 
-    const dogen::yarn::generalization_annotations& generalization_annotations() const;
-    dogen::yarn::generalization_annotations& generalization_annotations();
-    void generalization_annotations(const dogen::yarn::generalization_annotations& v);
-    void generalization_annotations(const dogen::yarn::generalization_annotations&& v);
-
     /**
      * @brief Elements that are involved in aggregation or composition relationships.
      */
@@ -364,7 +357,6 @@ private:
     boost::optional<dogen::yarn::name> parent_;
     std::list<dogen::yarn::name> leaves_;
     bool in_inheritance_relationship_;
-    dogen::yarn::generalization_annotations generalization_annotations_;
     std::list<dogen::yarn::name> transparent_associations_;
     std::list<dogen::yarn::name> opaque_associations_;
     boost::optional<dogen::yarn::name> base_visitor_;

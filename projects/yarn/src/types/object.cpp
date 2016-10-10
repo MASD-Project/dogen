@@ -26,7 +26,6 @@
 #include "dogen/yarn/io/attribute_io.hpp"
 #include "dogen/yarn/io/object_types_io.hpp"
 #include "dogen/yarn/types/element_visitor.hpp"
-#include "dogen/yarn/io/generalization_annotations_io.hpp"
 #include "dogen/yarn/io/type_parameters_annotations_io.hpp"
 
 namespace std {
@@ -122,7 +121,6 @@ object::object(object&& rhs)
       parent_(std::move(rhs.parent_)),
       leaves_(std::move(rhs.leaves_)),
       in_inheritance_relationship_(std::move(rhs.in_inheritance_relationship_)),
-      generalization_annotations_(std::move(rhs.generalization_annotations_)),
       transparent_associations_(std::move(rhs.transparent_associations_)),
       opaque_associations_(std::move(rhs.opaque_associations_)),
       base_visitor_(std::move(rhs.base_visitor_)),
@@ -158,7 +156,6 @@ object::object(
     const boost::optional<dogen::yarn::name>& parent,
     const std::list<dogen::yarn::name>& leaves,
     const bool in_inheritance_relationship,
-    const dogen::yarn::generalization_annotations& generalization_annotations,
     const std::list<dogen::yarn::name>& transparent_associations,
     const std::list<dogen::yarn::name>& opaque_associations,
     const boost::optional<dogen::yarn::name>& base_visitor,
@@ -193,7 +190,6 @@ object::object(
       parent_(parent),
       leaves_(leaves),
       in_inheritance_relationship_(in_inheritance_relationship),
-      generalization_annotations_(generalization_annotations),
       transparent_associations_(transparent_associations),
       opaque_associations_(opaque_associations),
       base_visitor_(base_visitor),
@@ -248,7 +244,6 @@ void object::to_stream(std::ostream& s) const {
       << "\"parent\": " << parent_ << ", "
       << "\"leaves\": " << leaves_ << ", "
       << "\"in_inheritance_relationship\": " << in_inheritance_relationship_ << ", "
-      << "\"generalization_annotations\": " << generalization_annotations_ << ", "
       << "\"transparent_associations\": " << transparent_associations_ << ", "
       << "\"opaque_associations\": " << opaque_associations_ << ", "
       << "\"base_visitor\": " << base_visitor_ << ", "
@@ -280,7 +275,6 @@ void object::swap(object& other) noexcept {
     swap(parent_, other.parent_);
     swap(leaves_, other.leaves_);
     swap(in_inheritance_relationship_, other.in_inheritance_relationship_);
-    swap(generalization_annotations_, other.generalization_annotations_);
     swap(transparent_associations_, other.transparent_associations_);
     swap(opaque_associations_, other.opaque_associations_);
     swap(base_visitor_, other.base_visitor_);
@@ -315,7 +309,6 @@ bool object::operator==(const object& rhs) const {
         parent_ == rhs.parent_ &&
         leaves_ == rhs.leaves_ &&
         in_inheritance_relationship_ == rhs.in_inheritance_relationship_ &&
-        generalization_annotations_ == rhs.generalization_annotations_ &&
         transparent_associations_ == rhs.transparent_associations_ &&
         opaque_associations_ == rhs.opaque_associations_ &&
         base_visitor_ == rhs.base_visitor_ &&
@@ -485,22 +478,6 @@ bool object::in_inheritance_relationship() const {
 
 void object::in_inheritance_relationship(const bool v) {
     in_inheritance_relationship_ = v;
-}
-
-const dogen::yarn::generalization_annotations& object::generalization_annotations() const {
-    return generalization_annotations_;
-}
-
-dogen::yarn::generalization_annotations& object::generalization_annotations() {
-    return generalization_annotations_;
-}
-
-void object::generalization_annotations(const dogen::yarn::generalization_annotations& v) {
-    generalization_annotations_ = v;
-}
-
-void object::generalization_annotations(const dogen::yarn::generalization_annotations&& v) {
-    generalization_annotations_ = std::move(v);
 }
 
 const std::list<dogen::yarn::name>& object::transparent_associations() const {

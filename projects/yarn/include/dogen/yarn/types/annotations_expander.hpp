@@ -38,7 +38,6 @@ public:
 
 private:
     void expand_type_annotations(object& o) const;
-    void expand_generalization_annotations(object& o) const;
 
 public:
     void expand(intermediate_model& m) const;

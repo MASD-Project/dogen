@@ -566,14 +566,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</leaves>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
-				<generalization_annotations class_id="37" tracking_level="0" version="0">
-					<is_final class_id="38" tracking_level="0" version="0">
-						<initialized>0</initialized>
-					</is_final>
-					<parent class_id="39" tracking_level="0" version="0">
-						<initialized>0</initialized>
-					</parent>
-				</generalization_annotations>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -590,7 +582,7 @@ in the context of inheritance.
 				</derived_visitor>
 				<is_visitation_root>0</is_visitation_root>
 				<is_visitation_leaf>0</is_visitation_leaf>
-				<type_parameters_annotations class_id="40" tracking_level="0" version="0">
+				<type_parameters_annotations class_id="37" tracking_level="0" version="0">
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
@@ -773,14 +765,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</leaves>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
-				<generalization_annotations>
-					<is_final>
-						<initialized>0</initialized>
-					</is_final>
-					<parent>
-						<initialized>0</initialized>
-					</parent>
-				</generalization_annotations>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -980,14 +964,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</leaves>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
-				<generalization_annotations>
-					<is_final>
-						<initialized>0</initialized>
-					</is_final>
-					<parent>
-						<initialized>0</initialized>
-					</parent>
-				</generalization_annotations>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -1187,14 +1163,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</leaves>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
-				<generalization_annotations>
-					<is_final>
-						<initialized>0</initialized>
-					</is_final>
-					<parent>
-						<initialized>0</initialized>
-					</parent>
-				</generalization_annotations>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -1343,14 +1311,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</leaves>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
-				<generalization_annotations>
-					<is_final>
-						<initialized>0</initialized>
-					</is_final>
-					<parent>
-						<initialized>0</initialized>
-					</parent>
-				</generalization_annotations>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -1581,14 +1541,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</leaves>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
-				<generalization_annotations>
-					<is_final>
-						<initialized>0</initialized>
-					</is_final>
-					<parent>
-						<initialized>0</initialized>
-					</parent>
-				</generalization_annotations>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -1707,14 +1659,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</leaves>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
-				<generalization_annotations>
-					<is_final>
-						<initialized>0</initialized>
-					</is_final>
-					<parent>
-						<initialized>0</initialized>
-					</parent>
-				</generalization_annotations>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -1912,14 +1856,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</leaves>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
-				<generalization_annotations>
-					<is_final>
-						<initialized>0</initialized>
-					</is_final>
-					<parent>
-						<initialized>0</initialized>
-					</parent>
-				</generalization_annotations>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -2117,14 +2053,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</leaves>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
-				<generalization_annotations>
-					<is_final>
-						<initialized>0</initialized>
-					</is_final>
-					<parent>
-						<initialized>0</initialized>
-					</parent>
-				</generalization_annotations>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -2324,14 +2252,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</leaves>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
-				<generalization_annotations>
-					<is_final>
-						<initialized>0</initialized>
-					</is_final>
-					<parent>
-						<initialized>0</initialized>
-					</parent>
-				</generalization_annotations>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -2531,14 +2451,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</leaves>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
-				<generalization_annotations>
-					<is_final>
-						<initialized>0</initialized>
-					</is_final>
-					<parent>
-						<initialized>0</initialized>
-					</parent>
-				</generalization_annotations>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -2656,14 +2568,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</leaves>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
-				<generalization_annotations>
-					<is_final>
-						<initialized>0</initialized>
-					</is_final>
-					<parent>
-						<initialized>0</initialized>
-					</parent>
-				</generalization_annotations>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -2863,14 +2767,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</leaves>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
-				<generalization_annotations>
-					<is_final>
-						<initialized>0</initialized>
-					</is_final>
-					<parent>
-						<initialized>0</initialized>
-					</parent>
-				</generalization_annotations>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -3018,14 +2914,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</leaves>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
-				<generalization_annotations>
-					<is_final>
-						<initialized>0</initialized>
-					</is_final>
-					<parent>
-						<initialized>0</initialized>
-					</parent>
-				</generalization_annotations>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -3253,14 +3141,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</leaves>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
-				<generalization_annotations>
-					<is_final>
-						<initialized>0</initialized>
-					</is_final>
-					<parent>
-						<initialized>0</initialized>
-					</parent>
-				</generalization_annotations>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -3458,14 +3338,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</leaves>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
-				<generalization_annotations>
-					<is_final>
-						<initialized>0</initialized>
-					</is_final>
-					<parent>
-						<initialized>0</initialized>
-					</parent>
-				</generalization_annotations>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -3696,14 +3568,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</leaves>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
-				<generalization_annotations>
-					<is_final>
-						<initialized>0</initialized>
-					</is_final>
-					<parent>
-						<initialized>0</initialized>
-					</parent>
-				</generalization_annotations>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -3851,14 +3715,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</leaves>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
-				<generalization_annotations>
-					<is_final>
-						<initialized>0</initialized>
-					</is_final>
-					<parent>
-						<initialized>0</initialized>
-					</parent>
-				</generalization_annotations>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -4056,14 +3912,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</leaves>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
-				<generalization_annotations>
-					<is_final>
-						<initialized>0</initialized>
-					</is_final>
-					<parent>
-						<initialized>0</initialized>
-					</parent>
-				</generalization_annotations>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -4291,14 +4139,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</leaves>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
-				<generalization_annotations>
-					<is_final>
-						<initialized>0</initialized>
-					</is_final>
-					<parent>
-						<initialized>0</initialized>
-					</parent>
-				</generalization_annotations>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -4416,14 +4256,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</leaves>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
-				<generalization_annotations>
-					<is_final>
-						<initialized>0</initialized>
-					</is_final>
-					<parent>
-						<initialized>0</initialized>
-					</parent>
-				</generalization_annotations>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -4651,14 +4483,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</leaves>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
-				<generalization_annotations>
-					<is_final>
-						<initialized>0</initialized>
-					</is_final>
-					<parent>
-						<initialized>0</initialized>
-					</parent>
-				</generalization_annotations>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -4888,14 +4712,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</leaves>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
-				<generalization_annotations>
-					<is_final>
-						<initialized>0</initialized>
-					</is_final>
-					<parent>
-						<initialized>0</initialized>
-					</parent>
-				</generalization_annotations>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -5013,14 +4829,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</leaves>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
-				<generalization_annotations>
-					<is_final>
-						<initialized>0</initialized>
-					</is_final>
-					<parent>
-						<initialized>0</initialized>
-					</parent>
-				</generalization_annotations>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -5248,14 +5056,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</leaves>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
-				<generalization_annotations>
-					<is_final>
-						<initialized>0</initialized>
-					</is_final>
-					<parent>
-						<initialized>0</initialized>
-					</parent>
-				</generalization_annotations>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -5403,14 +5203,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</leaves>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
-				<generalization_annotations>
-					<is_final>
-						<initialized>0</initialized>
-					</is_final>
-					<parent>
-						<initialized>0</initialized>
-					</parent>
-				</generalization_annotations>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -5558,14 +5350,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</leaves>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
-				<generalization_annotations>
-					<is_final>
-						<initialized>0</initialized>
-					</is_final>
-					<parent>
-						<initialized>0</initialized>
-					</parent>
-				</generalization_annotations>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -5793,14 +5577,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</leaves>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
-				<generalization_annotations>
-					<is_final>
-						<initialized>0</initialized>
-					</is_final>
-					<parent>
-						<initialized>0</initialized>
-					</parent>
-				</generalization_annotations>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -6030,14 +5806,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</leaves>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
-				<generalization_annotations>
-					<is_final>
-						<initialized>0</initialized>
-					</is_final>
-					<parent>
-						<initialized>0</initialized>
-					</parent>
-				</generalization_annotations>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -6072,24 +5840,24 @@ in the context of inheritance.
 			</second>
 		</item>
 	</objects>
-	<exceptions class_id="41" tracking_level="0" version="0">
+	<exceptions class_id="38" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</exceptions>
-	<visitors class_id="42" tracking_level="0" version="0">
+	<visitors class_id="39" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</visitors>
-	<injected_elements class_id="43" tracking_level="0" version="0">
+	<injected_elements class_id="40" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</injected_elements>
 	<has_generatable_types>0</has_generatable_types>
-	<indices class_id="44" tracking_level="0" version="0">
-		<objects_always_in_heap class_id="45" tracking_level="0" version="0">
+	<indices class_id="41" tracking_level="0" version="0">
+		<objects_always_in_heap class_id="42" tracking_level="0" version="0">
 			<count>0</count>
 			<bucket_count>1</bucket_count>
 			<item_version>0</item_version>
@@ -6099,22 +5867,22 @@ in the context of inheritance.
 			<bucket_count>1</bucket_count>
 			<item_version>0</item_version>
 		</elements_referable_by_attributes>
-		<raw_aggregates class_id="46" tracking_level="0" version="0">
+		<raw_aggregates class_id="43" tracking_level="0" version="0">
 			<count>7</count>
 			<bucket_count>11</bucket_count>
 			<item_version>0</item_version>
-			<item class_id="47" tracking_level="0" version="0">
+			<item class_id="44" tracking_level="0" version="0">
 				<first>&lt;trivial_inheritance&gt;&lt;non_final_orphan&gt;</first>
-				<second class_id="48" tracking_level="0" version="0">
-					<element class_id="49" tracking_level="0" version="0">
+				<second class_id="45" tracking_level="0" version="0">
+					<element class_id="46" tracking_level="0" version="0">
 						<count>1</count>
 						<item_version>0</item_version>
-						<item class_id="50" tracking_level="0" version="0">
+						<item class_id="47" tracking_level="0" version="0">
 							<first>yarn.generalization.is_final</first>
 							<second>false</second>
 						</item>
 					</element>
-					<attributes class_id="51" tracking_level="0" version="0">
+					<attributes class_id="48" tracking_level="0" version="0">
 						<count>0</count>
 						<bucket_count>1</bucket_count>
 						<item_version>0</item_version>
