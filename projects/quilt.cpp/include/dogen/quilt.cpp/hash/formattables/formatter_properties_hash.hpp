@@ -18,25 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_IO_FORMATTABLES_FORMATTER_CONFIGURATION_IO_HPP
-#define DOGEN_QUILT_CPP_IO_FORMATTABLES_FORMATTER_CONFIGURATION_IO_HPP
+#ifndef DOGEN_QUILT_CPP_HASH_FORMATTABLES_FORMATTER_PROPERTIES_HASH_HPP
+#define DOGEN_QUILT_CPP_HASH_FORMATTABLES_FORMATTER_PROPERTIES_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/quilt.cpp/types/formattables/formatter_configuration.hpp"
+#include <functional>
+#include "dogen/quilt.cpp/types/formattables/formatter_properties.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::quilt::cpp::formattables::formatter_configuration& v);
+struct formatter_properties_hasher {
+public:
+    static std::size_t hash(const formatter_properties& v);
+};
 
 } } } }
 
+namespace std {
+
+template<>
+struct hash<dogen::quilt::cpp::formattables::formatter_properties> {
+public:
+    size_t operator()(const dogen::quilt::cpp::formattables::formatter_properties& v) const {
+        return dogen::quilt::cpp::formattables::formatter_properties_hasher::hash(v);
+    }
+};
+
+}
 #endif

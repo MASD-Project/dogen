@@ -46,7 +46,7 @@ BOOST_AUTO_TEST_CASE(validate_swap) {
     test_swap<formattables::odb_configuration_generator>();
     test_swap<formattables::element_properties_generator>();
     test_swap<formattables::global_enablement_configuration_generator>();
-    test_swap<formattables::formatter_configuration_generator>();
+    test_swap<formattables::formatter_properties_generator>();
     test_swap<formattables::helper_configuration_generator>();
     test_swap<formattables::aspect_properties_generator>();
     test_swap<formattables::helper_descriptor_generator>();

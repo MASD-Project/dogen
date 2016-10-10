@@ -459,7 +459,7 @@ void inclusion_expander::populate_inclusion_dependencies(
          * our container up front and populate it for each segment.
          */
         auto& eprops(formattable.element_properties());
-        auto& fmt_cfg(eprops.formatter_configurations());
+        auto& fmt_props(eprops.formatter_properties());
         for (const auto& ptr : formattable.all_segments()) {
             const auto& e(*ptr);
 
@@ -494,8 +494,8 @@ void inclusion_expander::populate_inclusion_dependencies(
                  * transformer.
                  */
                 const auto fmtn(dep_pair.first);
-                const auto i(fmt_cfg.find(fmtn));
-                if (i == fmt_cfg.end()) {
+                const auto i(fmt_props.find(fmtn));
+                if (i == fmt_props.end()) {
                     BOOST_LOG_SEV(lg, error) << missing_formatter_name << fmtn;
                     BOOST_THROW_EXCEPTION(
                         expansion_error(missing_formatter_name + fmtn));

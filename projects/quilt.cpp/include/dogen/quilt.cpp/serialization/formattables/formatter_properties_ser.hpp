@@ -18,37 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_HASH_FORMATTABLES_FORMATTER_CONFIGURATION_HASH_HPP
-#define DOGEN_QUILT_CPP_HASH_FORMATTABLES_FORMATTER_CONFIGURATION_HASH_HPP
+#ifndef DOGEN_QUILT_CPP_SERIALIZATION_FORMATTABLES_FORMATTER_PROPERTIES_SER_HPP
+#define DOGEN_QUILT_CPP_SERIALIZATION_FORMATTABLES_FORMATTER_PROPERTIES_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/quilt.cpp/types/formattables/formatter_configuration.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen/quilt.cpp/types/formattables/formatter_properties.hpp"
 
-namespace dogen {
-namespace quilt {
-namespace cpp {
-namespace formattables {
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::quilt::cpp::formattables::formatter_properties)
+namespace boost {
+namespace serialization {
 
-struct formatter_configuration_hasher {
-public:
-    static std::size_t hash(const formatter_configuration& v);
-};
+template<typename Archive>
+void save(Archive& ar, const dogen::quilt::cpp::formattables::formatter_properties& v, unsigned int version);
 
-} } } }
+template<typename Archive>
+void load(Archive& ar, dogen::quilt::cpp::formattables::formatter_properties& v, unsigned int version);
 
-namespace std {
+} }
 
-template<>
-struct hash<dogen::quilt::cpp::formattables::formatter_configuration> {
-public:
-    size_t operator()(const dogen::quilt::cpp::formattables::formatter_configuration& v) const {
-        return dogen::quilt::cpp::formattables::formatter_configuration_hasher::hash(v);
-    }
-};
-
-}
 #endif

@@ -25,8 +25,8 @@
 #include "dogen/quilt.cpp/io/formattables/aspect_properties_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/odb_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/element_properties_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/formatter_properties_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/helper_configuration_io.hpp"
-#include "dogen/quilt.cpp/io/formattables/formatter_configuration_io.hpp"
 
 namespace boost {
 
@@ -52,7 +52,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -140,7 +140,7 @@ std::ostream& operator<<(std::ostream& s, const element_properties& v) {
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::element_properties\"" << ", "
       << "\"decoration_configuration\": " << v.decoration_configuration() << ", "
       << "\"aspect_properties\": " << v.aspect_properties() << ", "
-      << "\"formatter_configurations\": " << v.formatter_configurations() << ", "
+      << "\"formatter_properties\": " << v.formatter_properties() << ", "
       << "\"helper_configurations\": " << v.helper_configurations() << ", "
       << "\"canonical_formatter_to_formatter\": " << v.canonical_formatter_to_formatter() << ", "
       << "\"local_profile_group\": " << v.local_profile_group() << ", "

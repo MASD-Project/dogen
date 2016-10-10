@@ -36,8 +36,8 @@
 #include "dogen/quilt.cpp/serialization/formattables/aspect_properties_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/odb_configuration_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/element_properties_ser.hpp"
+#include "dogen/quilt.cpp/serialization/formattables/formatter_properties_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/helper_configuration_ser.hpp"
-#include "dogen/quilt.cpp/serialization/formattables/formatter_configuration_ser.hpp"
 
 namespace boost {
 namespace serialization {
@@ -48,7 +48,7 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("decoration_configuration", v.decoration_configuration_);
     ar << make_nvp("aspect_properties", v.aspect_properties_);
-    ar << make_nvp("formatter_configurations", v.formatter_configurations_);
+    ar << make_nvp("formatter_properties", v.formatter_properties_);
     ar << make_nvp("helper_configurations", v.helper_configurations_);
     ar << make_nvp("canonical_formatter_to_formatter", v.canonical_formatter_to_formatter_);
     ar << make_nvp("local_profile_group", v.local_profile_group_);
@@ -61,7 +61,7 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("decoration_configuration", v.decoration_configuration_);
     ar >> make_nvp("aspect_properties", v.aspect_properties_);
-    ar >> make_nvp("formatter_configurations", v.formatter_configurations_);
+    ar >> make_nvp("formatter_properties", v.formatter_properties_);
     ar >> make_nvp("helper_configurations", v.helper_configurations_);
     ar >> make_nvp("canonical_formatter_to_formatter", v.canonical_formatter_to_formatter_);
     ar >> make_nvp("local_profile_group", v.local_profile_group_);

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_FORMATTER_CONFIGURATION_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_FORMATTER_CONFIGURATION_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_FORMATTER_PROPERTIES_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_FORMATTER_PROPERTIES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,26 +29,26 @@
 #include <string>
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
-#include "dogen/quilt.cpp/serialization/formattables/formatter_configuration_fwd_ser.hpp"
+#include "dogen/quilt.cpp/serialization/formattables/formatter_properties_fwd_ser.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
 
-class formatter_configuration final {
+class formatter_properties final {
 public:
-    formatter_configuration(const formatter_configuration&) = default;
-    ~formatter_configuration() = default;
+    formatter_properties(const formatter_properties&) = default;
+    ~formatter_properties() = default;
 
 public:
-    formatter_configuration();
+    formatter_properties();
 
 public:
-    formatter_configuration(formatter_configuration&& rhs);
+    formatter_properties(formatter_properties&& rhs);
 
 public:
-    formatter_configuration(
+    formatter_properties(
         const bool enabled,
         const bool overwrite,
         const boost::filesystem::path& file_path,
@@ -57,10 +57,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::quilt::cpp::formattables::formatter_configuration& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::quilt::cpp::formattables::formatter_properties& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::formattables::formatter_configuration& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::formattables::formatter_properties& v, unsigned int version);
 
 public:
     bool enabled() const;
@@ -85,14 +85,14 @@ public:
     void inclusion_dependencies(const std::list<std::string>&& v);
 
 public:
-    bool operator==(const formatter_configuration& rhs) const;
-    bool operator!=(const formatter_configuration& rhs) const {
+    bool operator==(const formatter_properties& rhs) const;
+    bool operator!=(const formatter_properties& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(formatter_configuration& other) noexcept;
-    formatter_configuration& operator=(formatter_configuration other);
+    void swap(formatter_properties& other) noexcept;
+    formatter_properties& operator=(formatter_properties other);
 
 private:
     bool enabled_;
@@ -108,8 +108,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::quilt::cpp::formattables::formatter_configuration& lhs,
-    dogen::quilt::cpp::formattables::formatter_configuration& rhs) {
+    dogen::quilt::cpp::formattables::formatter_properties& lhs,
+    dogen::quilt::cpp::formattables::formatter_properties& rhs) {
     lhs.swap(rhs);
 }
 

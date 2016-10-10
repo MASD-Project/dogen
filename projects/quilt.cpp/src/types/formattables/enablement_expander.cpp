@@ -479,7 +479,7 @@ void enablement_expander::compute_enablement(
     const local_enablement_configurations_type& lcs, formattable& fbl) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started computing enablement.";
-    for (auto& pair : fbl.element_properties().formatter_configurations()) {
+    for (auto& pair : fbl.element_properties().formatter_properties()) {
         const auto fmtn(pair.first);
 
         /*
@@ -513,10 +513,10 @@ void enablement_expander::compute_enablement(
          * If either the entire model model or facet have been
          * disabled globally, the formatter will be disabled too.
          */
-        auto& fmt_cfg(pair.second);
+        auto& fmt_props(pair.second);
         const auto gc(i->second);
         if (!gc.model_enabled() || !gc.facet_enabled()) {
-            fmt_cfg.enabled(false);
+            fmt_props.enabled(false);
             continue;
         }
 
@@ -528,7 +528,7 @@ void enablement_expander::compute_enablement(
         if (has_user_defined_service(fbl.all_segments())) {
             const auto types_prefix("quilt.cpp.types.");
             const auto is_types(boost::starts_with(fmtn, types_prefix));
-            fmt_cfg.enabled(is_types);
+            fmt_props.enabled(is_types);
             continue;
         }
 
@@ -538,7 +538,7 @@ void enablement_expander::compute_enablement(
          * configuration.
          */
         if (lc.formatter_enabled()) {
-            fmt_cfg.enabled(*lc.formatter_enabled());
+            fmt_props.enabled(*lc.formatter_enabled());
             continue;
         }
 
@@ -548,7 +548,7 @@ void enablement_expander::compute_enablement(
          * configuration.
          */
         if (lc.facet_enabled()) {
-            fmt_cfg.enabled(*lc.facet_enabled());
+            fmt_props.enabled(*lc.facet_enabled());
             continue;
         }
 
@@ -556,9 +556,9 @@ void enablement_expander::compute_enablement(
          * If nothing else has been set, use the global enablement
          * flag for the formatter.
          */
-        fmt_cfg.enabled(gc.formatter_enabled());
+        fmt_props.enabled(gc.formatter_enabled());
         BOOST_LOG_SEV(lg, debug) << "Enablement for: " << fmtn
-                                 << " value: " << fmt_cfg.enabled();
+                                 << " value: " << fmt_props.enabled();
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished computed enablement.";

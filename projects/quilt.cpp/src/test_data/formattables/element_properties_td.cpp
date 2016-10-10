@@ -24,8 +24,8 @@
 #include "dogen/quilt.cpp/test_data/formattables/aspect_properties_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/odb_configuration_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/element_properties_td.hpp"
+#include "dogen/quilt.cpp/test_data/formattables/formatter_properties_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/helper_configuration_td.hpp"
-#include "dogen/quilt.cpp/test_data/formattables/formatter_configuration_td.hpp"
 
 namespace {
 
@@ -52,15 +52,15 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-dogen::quilt::cpp::formattables::formatter_configuration
-create_dogen_quilt_cpp_formattables_formatter_configuration(const unsigned int position) {
-    return dogen::quilt::cpp::formattables::formatter_configuration_generator::create(position);
+dogen::quilt::cpp::formattables::formatter_properties
+create_dogen_quilt_cpp_formattables_formatter_properties(const unsigned int position) {
+    return dogen::quilt::cpp::formattables::formatter_properties_generator::create(position);
 }
 
-std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration> create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formatter_configuration(unsigned int position) {
-    std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_configuration> r;
+std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties> create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formatter_properties(unsigned int position) {
+    std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_dogen_quilt_cpp_formattables_formatter_configuration(position + i)));
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_quilt_cpp_formattables_formatter_properties(position + i)));
     }
     return r;
 }
@@ -123,7 +123,7 @@ void element_properties_generator::
 populate(const unsigned int position, result_type& v) {
     v.decoration_configuration(create_boost_optional_dogen_formatters_decoration_configuration(position + 0));
     v.aspect_properties(create_dogen_quilt_cpp_formattables_aspect_properties(position + 1));
-    v.formatter_configurations(create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formatter_configuration(position + 2));
+    v.formatter_properties(create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formatter_properties(position + 2));
     v.helper_configurations(create_std_list_dogen_quilt_cpp_formattables_helper_configuration(position + 3));
     v.canonical_formatter_to_formatter(create_std_unordered_map_std_string_std_string(position + 4));
     v.local_profile_group(create_boost_optional_dogen_quilt_cpp_formattables_profile_group(position + 5));

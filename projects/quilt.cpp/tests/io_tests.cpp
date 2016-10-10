@@ -46,7 +46,7 @@ BOOST_AUTO_TEST_CASE(validate_io) {
     test_io<formattables::odb_configuration_generator>();
     test_io<formattables::element_properties_generator>();
     test_io<formattables::global_enablement_configuration_generator>();
-    test_io<formattables::formatter_configuration_generator>();
+    test_io<formattables::formatter_properties_generator>();
     test_io<formattables::helper_configuration_generator>();
     test_io<formattables::aspect_properties_generator>();
     test_io<formattables::helper_descriptor_generator>();

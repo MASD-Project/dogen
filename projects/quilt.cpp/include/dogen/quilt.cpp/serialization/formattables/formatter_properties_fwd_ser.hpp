@@ -18,20 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_FORMATTER_CONFIGURATION_FWD_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_FORMATTER_CONFIGURATION_FWD_HPP
+#ifndef DOGEN_QUILT_CPP_SERIALIZATION_FORMATTABLES_FORMATTER_PROPERTIES_FWD_SER_HPP
+#define DOGEN_QUILT_CPP_SERIALIZATION_FORMATTABLES_FORMATTER_PROPERTIES_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen {
-namespace quilt {
-namespace cpp {
-namespace formattables {
+#include "dogen/quilt.cpp/types/formattables/formatter_properties_fwd.hpp"
 
-class formatter_configuration;
+namespace boost {
+namespace serialization {
 
-} } } }
+template<class Archive>
+void save(Archive& ar, const dogen::quilt::cpp::formattables::formatter_properties& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, dogen::quilt::cpp::formattables::formatter_properties& v, unsigned int version);
+
+} }
 
 #endif

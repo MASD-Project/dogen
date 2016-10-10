@@ -21,7 +21,7 @@
 #include <typeindex>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/quilt.cpp/types/formattables/formatter_configuration.hpp"
+#include "dogen/quilt.cpp/types/formattables/formatter_properties.hpp"
 #include "dogen/quilt.cpp/types/formattables/transformation_error.hpp"
 #include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formattables/transformer.hpp"
@@ -75,11 +75,11 @@ transform(const formatters::container& fc, const yarn::model& m) const {
         }
         BOOST_LOG_SEV(lg, debug) << "Element has formatters " << id;
 
-        auto& fmt_cfgs(fbl.element_properties().formatter_configurations());
+        auto& fmt_props(fbl.element_properties().formatter_properties());
         for (const auto& fmt : j->second) {
             const auto fmtn(fmt->ownership_hierarchy().formatter_name());
-            const auto pair(std::make_pair(fmtn, formatter_configuration()));
-            const auto ret(fmt_cfgs.insert(pair));
+            const auto pair(std::make_pair(fmtn, formatter_properties()));
+            const auto ret(fmt_props.insert(pair));
             if (!ret.second) {
                 BOOST_LOG_SEV(lg, error) << duplicate_formatter << fmtn;
                 BOOST_THROW_EXCEPTION(

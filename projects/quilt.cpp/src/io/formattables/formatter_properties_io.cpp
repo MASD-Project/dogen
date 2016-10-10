@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen/quilt.cpp/io/formattables/formatter_configuration_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/formatter_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -49,7 +49,7 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-std::ostream& operator<<(std::ostream& s, const formatter_configuration& v) {
+std::ostream& operator<<(std::ostream& s, const formatter_properties& v) {
     boost::io::ios_flags_saver ifs(s);
     s.setf(std::ios_base::boolalpha);
     s.setf(std::ios::fixed, std::ios::floatfield);
@@ -57,7 +57,7 @@ std::ostream& operator<<(std::ostream& s, const formatter_configuration& v) {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::formatter_configuration\"" << ", "
+      << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::formatter_properties\"" << ", "
       << "\"enabled\": " << v.enabled() << ", "
       << "\"overwrite\": " << v.overwrite() << ", "
       << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\"" << ", "

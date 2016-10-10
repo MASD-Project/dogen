@@ -23,7 +23,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/quilt.cpp/types/workflow_error.hpp"
-#include "dogen/quilt.cpp/io/formattables/formatter_configuration_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/formatter_properties_io.hpp"
 #include "dogen/quilt.cpp/types/formatters/context.hpp"
 #include "dogen/quilt.cpp/types/formatters/workflow.hpp"
 
@@ -70,7 +70,7 @@ workflow::format(const formattables::model& fm, const yarn::element& e,
         return r;
     }
 
-    auto& fmt_cfgs(ep.formatter_configurations());
+    auto& fmt_props(ep.formatter_properties());
     const auto& fmts(i->second);
     for (const auto& fmt_ptr : fmts) {
         const auto& fmt(*fmt_ptr);
@@ -78,8 +78,8 @@ workflow::format(const formattables::model& fm, const yarn::element& e,
         BOOST_LOG_SEV(lg, debug) << "Formatting: '" << id << "' with '"
                                  << fmtn << "'";
 
-        const auto j(fmt_cfgs.find(fmtn));
-        if (j == fmt_cfgs.end()) {
+        const auto j(fmt_props.find(fmtn));
+        if (j == fmt_props.end()) {
             BOOST_LOG_SEV(lg, error) << missing_formatter << fmtn;
             BOOST_THROW_EXCEPTION(workflow_error(missing_formatter + fmtn));
         }
