@@ -47,8 +47,8 @@
 #include "dogen/yarn/io/stereotypes_io.hpp"
 #include "dogen/yarn/io/object_types_io.hpp"
 #include "dogen/yarn/io/origin_types_io.hpp"
+#include "dogen/yarn/io/type_parameters_io.hpp"
 #include "dogen/yarn/io/generation_types_io.hpp"
 #include "dogen/yarn/io/intermediate_model_io.hpp"
-#include "dogen/yarn/io/type_parameters_annotations_io.hpp"
 
 #endif

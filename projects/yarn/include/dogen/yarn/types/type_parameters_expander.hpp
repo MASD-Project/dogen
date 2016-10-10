@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TYPE_PARAMETERS_ANNOTATIONS_FACTORY_HPP
-#define DOGEN_YARN_TYPES_TYPE_PARAMETERS_ANNOTATIONS_FACTORY_HPP
+#ifndef DOGEN_YARN_TYPES_TYPE_PARAMETERS_EXPANDER_HPP
+#define DOGEN_YARN_TYPES_TYPE_PARAMETERS_EXPANDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,18 +27,14 @@
 
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/repository.hpp"
-#include "dogen/dynamic/types/field_selector.hpp"
 #include "dogen/dynamic/types/field_definition.hpp"
-#include "dogen/yarn/types/type_parameters_annotations.hpp"
-
+#include "dogen/yarn/types/type_parameters.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
 namespace yarn {
 
-class type_parameters_annotations_factory {
-public:
-    explicit type_parameters_annotations_factory(const dynamic::repository& rp);
-
+class type_parameters_expander {
 private:
     struct field_definitions {
         dynamic::field_definition variable_number_of_parameters;
@@ -47,13 +43,16 @@ private:
     };
 
     field_definitions make_field_definitions(
-        const dynamic::repository& rp) const;
+        const dynamic::repository& drp) const;
 
-public:
-    type_parameters_annotations make(const dynamic::object& o) const;
+    type_parameters make_type_parameters(const field_definitions& fds,
+        const dynamic::object& o) const;
 
 private:
-    const field_definitions field_definitions_;
+    void expand_type_parameters(const field_definitions& fds, object& o) const;
+
+public:
+    void expand(const dynamic::repository& drp, intermediate_model& m) const;
 };
 
 } }

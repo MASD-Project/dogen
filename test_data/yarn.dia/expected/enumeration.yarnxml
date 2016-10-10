@@ -859,11 +859,11 @@ this is a long comment
 				</derived_visitor>
 				<is_visitation_root>0</is_visitation_root>
 				<is_visitation_leaf>0</is_visitation_leaf>
-				<type_parameters_annotations class_id="40" tracking_level="0" version="0">
+				<type_parameters class_id="40" tracking_level="0" version="0">
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
-				</type_parameters_annotations>
+				</type_parameters>
 				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>

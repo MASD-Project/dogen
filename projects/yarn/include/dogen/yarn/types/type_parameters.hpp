@@ -18,40 +18,40 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TYPE_PARAMETERS_ANNOTATIONS_HPP
-#define DOGEN_YARN_TYPES_TYPE_PARAMETERS_ANNOTATIONS_HPP
+#ifndef DOGEN_YARN_TYPES_TYPE_PARAMETERS_HPP
+#define DOGEN_YARN_TYPES_TYPE_PARAMETERS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <algorithm>
-#include "dogen/yarn/serialization/type_parameters_annotations_fwd_ser.hpp"
+#include "dogen/yarn/serialization/type_parameters_fwd_ser.hpp"
 
 namespace dogen {
 namespace yarn {
 
-class type_parameters_annotations final {
+class type_parameters final {
 public:
-    type_parameters_annotations(const type_parameters_annotations&) = default;
-    type_parameters_annotations(type_parameters_annotations&&) = default;
-    ~type_parameters_annotations() = default;
+    type_parameters(const type_parameters&) = default;
+    type_parameters(type_parameters&&) = default;
+    ~type_parameters() = default;
 
 public:
-    type_parameters_annotations();
+    type_parameters();
 
 public:
-    type_parameters_annotations(
+    type_parameters(
         const bool variable_number_of_parameters,
         const unsigned int count,
         const bool always_in_heap);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::yarn::type_parameters_annotations& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::yarn::type_parameters& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::yarn::type_parameters_annotations& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::yarn::type_parameters& v, unsigned int version);
 
 public:
     bool variable_number_of_parameters() const;
@@ -64,14 +64,14 @@ public:
     void always_in_heap(const bool v);
 
 public:
-    bool operator==(const type_parameters_annotations& rhs) const;
-    bool operator!=(const type_parameters_annotations& rhs) const {
+    bool operator==(const type_parameters& rhs) const;
+    bool operator!=(const type_parameters& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(type_parameters_annotations& other) noexcept;
-    type_parameters_annotations& operator=(type_parameters_annotations other);
+    void swap(type_parameters& other) noexcept;
+    type_parameters& operator=(type_parameters other);
 
 private:
     bool variable_number_of_parameters_;
@@ -85,8 +85,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::yarn::type_parameters_annotations& lhs,
-    dogen::yarn::type_parameters_annotations& rhs) {
+    dogen::yarn::type_parameters& lhs,
+    dogen::yarn::type_parameters& rhs) {
     lhs.swap(rhs);
 }
 

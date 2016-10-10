@@ -70,6 +70,7 @@
 #include "dogen/yarn/types/origin_expander.hpp"
 #include "dogen/yarn/types/persister_error.hpp"
 #include "dogen/yarn/types/registrar_error.hpp"
+#include "dogen/yarn/types/type_parameters.hpp"
 #include "dogen/yarn/types/concept_expander.hpp"
 #include "dogen/yarn/types/dynamic_expander.hpp"
 #include "dogen/yarn/types/generation_types.hpp"
@@ -90,14 +91,12 @@
 #include "dogen/yarn/types/pre_merge_workflow.hpp"
 #include "dogen/yarn/types/attributes_expander.hpp"
 #include "dogen/yarn/types/post_merge_workflow.hpp"
-#include "dogen/yarn/types/annotations_expander.hpp"
 #include "dogen/yarn/types/association_expander.hpp"
 #include "dogen/yarn/types/containment_expander.hpp"
 #include "dogen/yarn/types/stereotypes_expander.hpp"
 #include "dogen/yarn/types/transformation_error.hpp"
 #include "dogen/yarn/types/generalization_expander.hpp"
+#include "dogen/yarn/types/type_parameters_expander.hpp"
 #include "dogen/yarn/types/intermediate_model_factory.hpp"
-#include "dogen/yarn/types/type_parameters_annotations.hpp"
-#include "dogen/yarn/types/type_parameters_annotations_factory.hpp"
 
 #endif

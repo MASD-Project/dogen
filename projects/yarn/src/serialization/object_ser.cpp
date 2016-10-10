@@ -35,7 +35,7 @@
 #include "dogen/yarn/serialization/element_ser.hpp"
 #include "dogen/yarn/serialization/attribute_ser.hpp"
 #include "dogen/yarn/serialization/object_types_ser.hpp"
-#include "dogen/yarn/serialization/type_parameters_annotations_ser.hpp"
+#include "dogen/yarn/serialization/type_parameters_ser.hpp"
 
 BOOST_CLASS_TRACKING(
     dogen::yarn::object,
@@ -69,7 +69,7 @@ void save(Archive& ar,
     ar << make_nvp("derived_visitor", v.derived_visitor_);
     ar << make_nvp("is_visitation_root", v.is_visitation_root_);
     ar << make_nvp("is_visitation_leaf", v.is_visitation_leaf_);
-    ar << make_nvp("type_parameters_annotations", v.type_parameters_annotations_);
+    ar << make_nvp("type_parameters", v.type_parameters_);
     ar << make_nvp("object_type", v.object_type_);
     ar << make_nvp("modeled_concepts", v.modeled_concepts_);
     ar << make_nvp("associative_container_keys", v.associative_container_keys_);
@@ -101,7 +101,7 @@ void load(Archive& ar,
     ar >> make_nvp("derived_visitor", v.derived_visitor_);
     ar >> make_nvp("is_visitation_root", v.is_visitation_root_);
     ar >> make_nvp("is_visitation_leaf", v.is_visitation_leaf_);
-    ar >> make_nvp("type_parameters_annotations", v.type_parameters_annotations_);
+    ar >> make_nvp("type_parameters", v.type_parameters_);
     ar >> make_nvp("object_type", v.object_type_);
     ar >> make_nvp("modeled_concepts", v.modeled_concepts_);
     ar >> make_nvp("associative_container_keys", v.associative_container_keys_);

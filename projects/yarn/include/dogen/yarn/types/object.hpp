@@ -35,8 +35,8 @@
 #include "dogen/yarn/hash/name_hash.hpp"
 #include "dogen/yarn/types/attribute.hpp"
 #include "dogen/yarn/types/object_types.hpp"
+#include "dogen/yarn/types/type_parameters.hpp"
 #include "dogen/yarn/serialization/object_fwd_ser.hpp"
-#include "dogen/yarn/types/type_parameters_annotations.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -91,7 +91,7 @@ public:
         const boost::optional<dogen::yarn::name>& derived_visitor,
         const bool is_visitation_root,
         const bool is_visitation_leaf,
-        const dogen::yarn::type_parameters_annotations& type_parameters_annotations,
+        const dogen::yarn::type_parameters& type_parameters,
         const dogen::yarn::object_types object_type,
         const std::list<dogen::yarn::name>& modeled_concepts,
         const std::list<dogen::yarn::name>& associative_container_keys,
@@ -289,10 +289,10 @@ public:
     bool is_visitation_leaf() const;
     void is_visitation_leaf(const bool v);
 
-    const dogen::yarn::type_parameters_annotations& type_parameters_annotations() const;
-    dogen::yarn::type_parameters_annotations& type_parameters_annotations();
-    void type_parameters_annotations(const dogen::yarn::type_parameters_annotations& v);
-    void type_parameters_annotations(const dogen::yarn::type_parameters_annotations&& v);
+    const dogen::yarn::type_parameters& type_parameters() const;
+    dogen::yarn::type_parameters& type_parameters();
+    void type_parameters(const dogen::yarn::type_parameters& v);
+    void type_parameters(const dogen::yarn::type_parameters&& v);
 
     /**
      * @brief What kind of object is this.
@@ -363,7 +363,7 @@ private:
     boost::optional<dogen::yarn::name> derived_visitor_;
     bool is_visitation_root_;
     bool is_visitation_leaf_;
-    dogen::yarn::type_parameters_annotations type_parameters_annotations_;
+    dogen::yarn::type_parameters type_parameters_;
     dogen::yarn::object_types object_type_;
     std::list<dogen::yarn::name> modeled_concepts_;
     std::list<dogen::yarn::name> associative_container_keys_;

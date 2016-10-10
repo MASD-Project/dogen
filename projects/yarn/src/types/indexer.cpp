@@ -43,7 +43,7 @@ void indexer::index(intermediate_model& m) const {
 
     for (const auto& pair : m.objects()) {
         idx.elements_referable_by_attributes().insert(pair.first);
-        if (pair.second.type_parameters_annotations().always_in_heap())
+        if (pair.second.type_parameters().always_in_heap())
             idx.objects_always_in_heap().insert(pair.first);
     }
 

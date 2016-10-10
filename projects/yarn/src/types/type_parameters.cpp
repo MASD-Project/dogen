@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/types/type_parameters_annotations.hpp"
+#include "dogen/yarn/types/type_parameters.hpp"
 
 namespace dogen {
 namespace yarn {
 
-type_parameters_annotations::type_parameters_annotations()
+type_parameters::type_parameters()
     : variable_number_of_parameters_(static_cast<bool>(0)),
       count_(static_cast<unsigned int>(0)),
       always_in_heap_(static_cast<bool>(0)) { }
 
-type_parameters_annotations::type_parameters_annotations(
+type_parameters::type_parameters(
     const bool variable_number_of_parameters,
     const unsigned int count,
     const bool always_in_heap)
@@ -36,46 +36,46 @@ type_parameters_annotations::type_parameters_annotations(
       count_(count),
       always_in_heap_(always_in_heap) { }
 
-void type_parameters_annotations::swap(type_parameters_annotations& other) noexcept {
+void type_parameters::swap(type_parameters& other) noexcept {
     using std::swap;
     swap(variable_number_of_parameters_, other.variable_number_of_parameters_);
     swap(count_, other.count_);
     swap(always_in_heap_, other.always_in_heap_);
 }
 
-bool type_parameters_annotations::operator==(const type_parameters_annotations& rhs) const {
+bool type_parameters::operator==(const type_parameters& rhs) const {
     return variable_number_of_parameters_ == rhs.variable_number_of_parameters_ &&
         count_ == rhs.count_ &&
         always_in_heap_ == rhs.always_in_heap_;
 }
 
-type_parameters_annotations& type_parameters_annotations::operator=(type_parameters_annotations other) {
+type_parameters& type_parameters::operator=(type_parameters other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-bool type_parameters_annotations::variable_number_of_parameters() const {
+bool type_parameters::variable_number_of_parameters() const {
     return variable_number_of_parameters_;
 }
 
-void type_parameters_annotations::variable_number_of_parameters(const bool v) {
+void type_parameters::variable_number_of_parameters(const bool v) {
     variable_number_of_parameters_ = v;
 }
 
-unsigned int type_parameters_annotations::count() const {
+unsigned int type_parameters::count() const {
     return count_;
 }
 
-void type_parameters_annotations::count(const unsigned int v) {
+void type_parameters::count(const unsigned int v) {
     count_ = v;
 }
 
-bool type_parameters_annotations::always_in_heap() const {
+bool type_parameters::always_in_heap() const {
     return always_in_heap_;
 }
 
-void type_parameters_annotations::always_in_heap(const bool v) {
+void type_parameters::always_in_heap(const bool v) {
     always_in_heap_ = v;
 }
 

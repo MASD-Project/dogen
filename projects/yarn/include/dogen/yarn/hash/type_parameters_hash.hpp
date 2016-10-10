@@ -18,29 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/hash/type_parameters_annotations_hash.hpp"
+#ifndef DOGEN_YARN_HASH_TYPE_PARAMETERS_HASH_HPP
+#define DOGEN_YARN_HASH_TYPE_PARAMETERS_HASH_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value) {
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-}
+#include <functional>
+#include "dogen/yarn/types/type_parameters.hpp"
 
 namespace dogen {
 namespace yarn {
 
-std::size_t type_parameters_annotations_hasher::hash(const type_parameters_annotations& v) {
-    std::size_t seed(0);
-
-    combine(seed, v.variable_number_of_parameters());
-    combine(seed, v.count());
-    combine(seed, v.always_in_heap());
-
-    return seed;
-}
+struct type_parameters_hasher {
+public:
+    static std::size_t hash(const type_parameters& v);
+};
 
 } }
+
+namespace std {
+
+template<>
+struct hash<dogen::yarn::type_parameters> {
+public:
+    size_t operator()(const dogen::yarn::type_parameters& v) const {
+        return dogen::yarn::type_parameters_hasher::hash(v);
+    }
+};
+
+}
+#endif

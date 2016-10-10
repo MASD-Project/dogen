@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/test_data/type_parameters_annotations_td.hpp"
+#include "dogen/yarn/test_data/type_parameters_td.hpp"
 
 namespace {
 
@@ -35,31 +35,31 @@ unsigned int create_unsigned_int(const unsigned int position) {
 namespace dogen {
 namespace yarn {
 
-type_parameters_annotations_generator::type_parameters_annotations_generator() : position_(0) { }
+type_parameters_generator::type_parameters_generator() : position_(0) { }
 
-void type_parameters_annotations_generator::
+void type_parameters_generator::
 populate(const unsigned int position, result_type& v) {
     v.variable_number_of_parameters(create_bool(position + 0));
     v.count(create_unsigned_int(position + 1));
     v.always_in_heap(create_bool(position + 2));
 }
 
-type_parameters_annotations_generator::result_type
-type_parameters_annotations_generator::create(const unsigned int position) {
-    type_parameters_annotations r;
-    type_parameters_annotations_generator::populate(position, r);
+type_parameters_generator::result_type
+type_parameters_generator::create(const unsigned int position) {
+    type_parameters r;
+    type_parameters_generator::populate(position, r);
     return r;
 }
 
-type_parameters_annotations_generator::result_type*
-type_parameters_annotations_generator::create_ptr(const unsigned int position) {
-    type_parameters_annotations* p = new type_parameters_annotations();
-    type_parameters_annotations_generator::populate(position, *p);
+type_parameters_generator::result_type*
+type_parameters_generator::create_ptr(const unsigned int position) {
+    type_parameters* p = new type_parameters();
+    type_parameters_generator::populate(position, *p);
     return p;
 }
 
-type_parameters_annotations_generator::result_type
-type_parameters_annotations_generator::operator()() {
+type_parameters_generator::result_type
+type_parameters_generator::operator()() {
     return create(position_++);
 }
 

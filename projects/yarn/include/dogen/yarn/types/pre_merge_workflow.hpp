@@ -70,9 +70,9 @@ private:
         intermediate_model& im) const;
 
     /**
-     * @brief Performs a annotations expansion on the model.
+     * @brief Performs a type parameters expansion on the model.
      */
-    void expand_annotations(const dynamic::repository& drp,
+    void expand_type_parameters(const dynamic::repository& drp,
         intermediate_model& im) const;
 
     /**

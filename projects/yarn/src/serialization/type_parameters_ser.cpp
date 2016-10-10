@@ -27,14 +27,14 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/yarn/serialization/type_parameters_annotations_ser.hpp"
+#include "dogen/yarn/serialization/type_parameters_ser.hpp"
 
 namespace boost {
 namespace serialization {
 
 template<typename Archive>
 void save(Archive& ar,
-    const dogen::yarn::type_parameters_annotations& v,
+    const dogen::yarn::type_parameters& v,
     const unsigned int /*version*/) {
     ar << make_nvp("variable_number_of_parameters", v.variable_number_of_parameters_);
     ar << make_nvp("count", v.count_);
@@ -43,7 +43,7 @@ void save(Archive& ar,
 
 template<typename Archive>
 void load(Archive& ar,
-    dogen::yarn::type_parameters_annotations& v,
+    dogen::yarn::type_parameters& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("variable_number_of_parameters", v.variable_number_of_parameters_);
     ar >> make_nvp("count", v.count_);
@@ -55,16 +55,16 @@ void load(Archive& ar,
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const dogen::yarn::type_parameters_annotations& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, dogen::yarn::type_parameters_annotations& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const dogen::yarn::type_parameters& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, dogen::yarn::type_parameters& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const dogen::yarn::type_parameters_annotations& v, unsigned int version);
-template void load(archive::text_iarchive& ar, dogen::yarn::type_parameters_annotations& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const dogen::yarn::type_parameters& v, unsigned int version);
+template void load(archive::text_iarchive& ar, dogen::yarn::type_parameters& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const dogen::yarn::type_parameters_annotations& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, dogen::yarn::type_parameters_annotations& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const dogen::yarn::type_parameters& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, dogen::yarn::type_parameters& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const dogen::yarn::type_parameters_annotations& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, dogen::yarn::type_parameters_annotations& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const dogen::yarn::type_parameters& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, dogen::yarn::type_parameters& v, unsigned int version);
 
 } }

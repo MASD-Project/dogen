@@ -18,34 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_ANNOTATIONS_EXPANDER_HPP
-#define DOGEN_YARN_TYPES_ANNOTATIONS_EXPANDER_HPP
+#include "dogen/yarn/hash/type_parameters_hash.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace {
 
-#include "dogen/dynamic/types/object.hpp"
-#include "dogen/dynamic/types/repository.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value) {
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+}
 
 namespace dogen {
 namespace yarn {
 
-class annotations_expander {
-public:
-    explicit annotations_expander(const dynamic::repository& drp);
+std::size_t type_parameters_hasher::hash(const type_parameters& v) {
+    std::size_t seed(0);
 
-private:
-    void expand_type_annotations(object& o) const;
+    combine(seed, v.variable_number_of_parameters());
+    combine(seed, v.count());
+    combine(seed, v.always_in_heap());
 
-public:
-    void expand(intermediate_model& m) const;
-
-private:
-    const dynamic::repository& dynamic_repository_;
-};
+    return seed;
+}
 
 } }
-
-#endif

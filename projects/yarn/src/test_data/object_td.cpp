@@ -23,7 +23,7 @@
 #include "dogen/yarn/test_data/element_td.hpp"
 #include "dogen/yarn/test_data/attribute_td.hpp"
 #include "dogen/yarn/test_data/object_types_td.hpp"
-#include "dogen/yarn/test_data/type_parameters_annotations_td.hpp"
+#include "dogen/yarn/test_data/type_parameters_td.hpp"
 
 namespace {
 
@@ -72,9 +72,9 @@ std::list<dogen::yarn::name> create_std_list_dogen_yarn_name(unsigned int positi
     return r;
 }
 
-dogen::yarn::type_parameters_annotations
-create_dogen_yarn_type_parameters_annotations(const unsigned int position) {
-    return dogen::yarn::type_parameters_annotations_generator::create(position);
+dogen::yarn::type_parameters
+create_dogen_yarn_type_parameters(const unsigned int position) {
+    return dogen::yarn::type_parameters_generator::create(position);
 }
 
 dogen::yarn::object_types
@@ -111,7 +111,7 @@ populate(const unsigned int position, result_type& v) {
     v.derived_visitor(create_boost_optional_dogen_yarn_name(position + 16));
     v.is_visitation_root(create_bool(position + 17));
     v.is_visitation_leaf(create_bool(position + 18));
-    v.type_parameters_annotations(create_dogen_yarn_type_parameters_annotations(position + 19));
+    v.type_parameters(create_dogen_yarn_type_parameters(position + 19));
     v.object_type(create_dogen_yarn_object_types(position + 20));
     v.modeled_concepts(create_std_list_dogen_yarn_name(position + 21));
     v.associative_container_keys(create_std_list_dogen_yarn_name(position + 22));

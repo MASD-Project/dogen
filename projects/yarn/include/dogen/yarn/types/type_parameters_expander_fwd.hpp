@@ -18,22 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_IO_TYPE_PARAMETERS_ANNOTATIONS_IO_HPP
-#define DOGEN_YARN_IO_TYPE_PARAMETERS_ANNOTATIONS_IO_HPP
+#ifndef DOGEN_YARN_TYPES_TYPE_PARAMETERS_EXPANDER_FWD_HPP
+#define DOGEN_YARN_TYPES_TYPE_PARAMETERS_EXPANDER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/yarn/types/type_parameters_annotations.hpp"
-
 namespace dogen {
 namespace yarn {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::yarn::type_parameters_annotations& v);
+class type_parameters_expander;
 
 } }
 

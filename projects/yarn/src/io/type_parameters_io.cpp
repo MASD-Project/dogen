@@ -18,36 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TEST_DATA_TYPE_PARAMETERS_ANNOTATIONS_TD_HPP
-#define DOGEN_YARN_TEST_DATA_TYPE_PARAMETERS_ANNOTATIONS_TD_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include "dogen/yarn/types/type_parameters_annotations.hpp"
+#include <ostream>
+#include <boost/io/ios_state.hpp>
+#include "dogen/yarn/io/type_parameters_io.hpp"
 
 namespace dogen {
 namespace yarn {
 
-class type_parameters_annotations_generator {
-public:
-    type_parameters_annotations_generator();
+std::ostream& operator<<(std::ostream& s, const type_parameters& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
 
-public:
-    typedef dogen::yarn::type_parameters_annotations result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
-};
+    s << " { "
+      << "\"__type__\": " << "\"dogen::yarn::type_parameters\"" << ", "
+      << "\"variable_number_of_parameters\": " << v.variable_number_of_parameters() << ", "
+      << "\"count\": " << v.count() << ", "
+      << "\"always_in_heap\": " << v.always_in_heap()
+      << " }";
+    return(s);
+}
 
 } }
-
-#endif

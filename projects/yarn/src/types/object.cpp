@@ -25,8 +25,8 @@
 #include "dogen/yarn/io/element_io.hpp"
 #include "dogen/yarn/io/attribute_io.hpp"
 #include "dogen/yarn/io/object_types_io.hpp"
+#include "dogen/yarn/io/type_parameters_io.hpp"
 #include "dogen/yarn/types/element_visitor.hpp"
-#include "dogen/yarn/io/type_parameters_annotations_io.hpp"
 
 namespace std {
 
@@ -127,7 +127,7 @@ object::object(object&& rhs)
       derived_visitor_(std::move(rhs.derived_visitor_)),
       is_visitation_root_(std::move(rhs.is_visitation_root_)),
       is_visitation_leaf_(std::move(rhs.is_visitation_leaf_)),
-      type_parameters_annotations_(std::move(rhs.type_parameters_annotations_)),
+      type_parameters_(std::move(rhs.type_parameters_)),
       object_type_(std::move(rhs.object_type_)),
       modeled_concepts_(std::move(rhs.modeled_concepts_)),
       associative_container_keys_(std::move(rhs.associative_container_keys_)),
@@ -162,7 +162,7 @@ object::object(
     const boost::optional<dogen::yarn::name>& derived_visitor,
     const bool is_visitation_root,
     const bool is_visitation_leaf,
-    const dogen::yarn::type_parameters_annotations& type_parameters_annotations,
+    const dogen::yarn::type_parameters& type_parameters,
     const dogen::yarn::object_types object_type,
     const std::list<dogen::yarn::name>& modeled_concepts,
     const std::list<dogen::yarn::name>& associative_container_keys,
@@ -196,7 +196,7 @@ object::object(
       derived_visitor_(derived_visitor),
       is_visitation_root_(is_visitation_root),
       is_visitation_leaf_(is_visitation_leaf),
-      type_parameters_annotations_(type_parameters_annotations),
+      type_parameters_(type_parameters),
       object_type_(object_type),
       modeled_concepts_(modeled_concepts),
       associative_container_keys_(associative_container_keys),
@@ -250,7 +250,7 @@ void object::to_stream(std::ostream& s) const {
       << "\"derived_visitor\": " << derived_visitor_ << ", "
       << "\"is_visitation_root\": " << is_visitation_root_ << ", "
       << "\"is_visitation_leaf\": " << is_visitation_leaf_ << ", "
-      << "\"type_parameters_annotations\": " << type_parameters_annotations_ << ", "
+      << "\"type_parameters\": " << type_parameters_ << ", "
       << "\"object_type\": " << object_type_ << ", "
       << "\"modeled_concepts\": " << modeled_concepts_ << ", "
       << "\"associative_container_keys\": " << associative_container_keys_ << ", "
@@ -281,7 +281,7 @@ void object::swap(object& other) noexcept {
     swap(derived_visitor_, other.derived_visitor_);
     swap(is_visitation_root_, other.is_visitation_root_);
     swap(is_visitation_leaf_, other.is_visitation_leaf_);
-    swap(type_parameters_annotations_, other.type_parameters_annotations_);
+    swap(type_parameters_, other.type_parameters_);
     swap(object_type_, other.object_type_);
     swap(modeled_concepts_, other.modeled_concepts_);
     swap(associative_container_keys_, other.associative_container_keys_);
@@ -315,7 +315,7 @@ bool object::operator==(const object& rhs) const {
         derived_visitor_ == rhs.derived_visitor_ &&
         is_visitation_root_ == rhs.is_visitation_root_ &&
         is_visitation_leaf_ == rhs.is_visitation_leaf_ &&
-        type_parameters_annotations_ == rhs.type_parameters_annotations_ &&
+        type_parameters_ == rhs.type_parameters_ &&
         object_type_ == rhs.object_type_ &&
         modeled_concepts_ == rhs.modeled_concepts_ &&
         associative_container_keys_ == rhs.associative_container_keys_ &&
@@ -560,20 +560,20 @@ void object::is_visitation_leaf(const bool v) {
     is_visitation_leaf_ = v;
 }
 
-const dogen::yarn::type_parameters_annotations& object::type_parameters_annotations() const {
-    return type_parameters_annotations_;
+const dogen::yarn::type_parameters& object::type_parameters() const {
+    return type_parameters_;
 }
 
-dogen::yarn::type_parameters_annotations& object::type_parameters_annotations() {
-    return type_parameters_annotations_;
+dogen::yarn::type_parameters& object::type_parameters() {
+    return type_parameters_;
 }
 
-void object::type_parameters_annotations(const dogen::yarn::type_parameters_annotations& v) {
-    type_parameters_annotations_ = v;
+void object::type_parameters(const dogen::yarn::type_parameters& v) {
+    type_parameters_ = v;
 }
 
-void object::type_parameters_annotations(const dogen::yarn::type_parameters_annotations&& v) {
-    type_parameters_annotations_ = std::move(v);
+void object::type_parameters(const dogen::yarn::type_parameters&& v) {
+    type_parameters_ = std::move(v);
 }
 
 dogen::yarn::object_types object::object_type() const {

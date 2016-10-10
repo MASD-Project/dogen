@@ -22,7 +22,7 @@
 #include "dogen/yarn/types/dynamic_expander.hpp"
 #include "dogen/yarn/types/origin_expander.hpp"
 #include "dogen/yarn/types/parsing_expander.hpp"
-#include "dogen/yarn/types/annotations_expander.hpp"
+#include "dogen/yarn/types/type_parameters_expander.hpp"
 #include "dogen/yarn/types/descriptor_factory.hpp"
 #include "dogen/yarn/types/intermediate_model_factory.hpp"
 #include "dogen/yarn/types/pre_merge_workflow.hpp"
@@ -61,10 +61,10 @@ void pre_merge_workflow::expand_origin(const dynamic::repository& drp,
     ex.expand(im);
 }
 
-void pre_merge_workflow::expand_annotations(const dynamic::repository& drp,
-    intermediate_model& m) const {
-    annotations_expander ex(drp);
-    ex.expand(m);
+void pre_merge_workflow::expand_type_parameters(const dynamic::repository& drp,
+    intermediate_model& im) const {
+    type_parameters_expander ex;
+    ex.expand(drp, im);
 }
 
 void pre_merge_workflow::
@@ -90,7 +90,7 @@ pre_merge_workflow::execute(const dynamic::repository& drp,
         expand_dynamic_objects(drp, im);
         expand_modules(im);
         expand_origin(drp, im);
-        expand_annotations(drp, im);
+        expand_type_parameters(drp, im);
         expand_parsing(drp, im);
     }
     return r;

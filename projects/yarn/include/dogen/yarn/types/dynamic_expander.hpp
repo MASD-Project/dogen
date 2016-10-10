@@ -31,6 +31,10 @@
 namespace dogen {
 namespace yarn {
 
+/**
+ * @brief Reads raw meta-data and uses it to create the dynamic
+ * objects.
+ */
 class dynamic_expander {
 public:
     void expand(const dynamic::repository& drp, intermediate_model& im) const;

@@ -18,17 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TYPE_PARAMETERS_ANNOTATIONS_FACTORY_FWD_HPP
-#define DOGEN_YARN_TYPES_TYPE_PARAMETERS_ANNOTATIONS_FACTORY_FWD_HPP
+#ifndef DOGEN_YARN_SERIALIZATION_TYPE_PARAMETERS_SER_HPP
+#define DOGEN_YARN_SERIALIZATION_TYPE_PARAMETERS_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen {
-namespace yarn {
+#include <boost/serialization/split_free.hpp>
+#include "dogen/yarn/types/type_parameters.hpp"
 
-class type_parameters_annotations_factory;
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::yarn::type_parameters)
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+void save(Archive& ar, const dogen::yarn::type_parameters& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::yarn::type_parameters& v, unsigned int version);
 
 } }
 

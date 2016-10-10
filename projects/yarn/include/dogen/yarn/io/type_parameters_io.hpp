@@ -18,23 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_SERIALIZATION_TYPE_PARAMETERS_ANNOTATIONS_FWD_SER_HPP
-#define DOGEN_YARN_SERIALIZATION_TYPE_PARAMETERS_ANNOTATIONS_FWD_SER_HPP
+#ifndef DOGEN_YARN_IO_TYPE_PARAMETERS_IO_HPP
+#define DOGEN_YARN_IO_TYPE_PARAMETERS_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/yarn/types/type_parameters_annotations_fwd.hpp"
+#include <iosfwd>
+#include "dogen/yarn/types/type_parameters.hpp"
 
-namespace boost {
-namespace serialization {
+namespace dogen {
+namespace yarn {
 
-template<class Archive>
-void save(Archive& ar, const dogen::yarn::type_parameters_annotations& v, unsigned int version);
-
-template<class Archive>
-void load(Archive& ar, dogen::yarn::type_parameters_annotations& v, unsigned int version);
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::yarn::type_parameters& v);
 
 } }
 
