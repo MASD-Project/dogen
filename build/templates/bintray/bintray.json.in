@@ -4,7 +4,7 @@
         "repo": "dogen",
         "subject": "mcraveiro",
         "desc": "The Domain Generator - Generates C++-11 source code for domain driven development.",
-        "website_url": "www.jfrog.com",
+        "website_url": "https://github.com/DomainDrivenConsulting/dogen",
         "issue_tracker_url": "https://github.com/DomainDrivenConsulting/dogen/issues",
         "vcs_url": "https://github.com/DomainDrivenConsulting/dogen",
         "github_use_tag_release_notes": true,
@@ -14,17 +14,17 @@
         "public_stats": true
     },
     "version": {
-        "name": "0.88.0",
-        "desc": "Sprint 88",
-        "released": "2016-09-26",
-        "vcs_tag": "0.88.0",
+        "name": "${DOGEN_VERSION}",
+        "desc": "Sprint ${DOGEN_MINOR_VERSION}",
+        "released": "${BUILD_DATE}",
+        "vcs_tag": "v${DOGEN_VERSION}",
         "gpgSign": false
     },
 
     "files":
         [
-            { "includePattern": "build/output/Release/gcc-6/stage/pkg/*.deb" }
-            { "includePattern": "build/output/Release/gcc-6/stage/pkg/*.dmg" }
+            { "includePattern": "${DOGEN_PACKAGE_DIR}/*.deb" }
+            { "includePattern": "${DOGEN_PACKAGE_DIR}/*.dmg" }
         ],
     "publish": true
 }

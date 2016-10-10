@@ -203,6 +203,7 @@ set(stage_pkg_dir ${stage_dir}/pkg)
 if(NOT EXISTS "${stage_pkg_dir}")
     make_directory("${stage_pkg_dir}")
 endif()
+set(DOGEN_PACKAGE_DIR "${stage_pkg_dir}")
 
 set(stage_lib_dir ${stage_dir}/lib)
 if(NOT EXISTS "${stage_lib_dir}")

@@ -32,3 +32,7 @@ message(STATUS "Transformed mainpage.dox.")
 set(htaccess_template "${CMAKE_CURRENT_SOURCE_DIR}/doxygen/htaccess")
 configure_file(${htaccess_template} ${stage_doxygen_dir}/.htaccess)
 message(STATUS "Transformed htaccess.")
+
+set(bintray_template "${CMAKE_CURRENT_SOURCE_DIR}/bintray/bintray.json.in")
+configure_file(${bintray_template} ${stage_pkg_dir}/bintray.json)
+message(STATUS "Transformed bintray.")
