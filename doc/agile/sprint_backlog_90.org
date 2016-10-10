@@ -14,20 +14,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-10 Mon 21:55]
+#+CAPTION: Clock summary at [2016-10-10 Mon 22:17]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *6:48* |      |      | 100.0 |
+| *Total time*                                                                | *7:09* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 6:48   |      |      | 100.0 |
-| Active                                                                      |        | 6:48 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:22 |   5.4 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:19 |   4.7 |
-| COMPLETED Improve bintray support                                           |        |      | 0:26 |   6.4 |
-| COMPLETED Refactor opaque infrastructure                                    |        |      | 1:17 |  18.9 |
+| Stories                                                                     | 7:09   |      |      | 100.0 |
+| Active                                                                      |        | 7:09 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:22 |   5.1 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:19 |   4.4 |
+| COMPLETED Improve bintray support                                           |        |      | 0:26 |   6.1 |
+| COMPLETED Refactor opaque infrastructure                                    |        |      | 1:17 |  17.9 |
 | COMPLETED Remove any remnants of annotations from quilt                     |        |      | 0:05 |   1.2 |
-| COMPLETED Solve the issue of too many "configurations"                      |        |      | 4:19 |  63.5 |
+| COMPLETED Solve the issue of too many "configurations"                      |        |      | 4:01 |  56.2 |
+| COMPLETED Merge decoration configuration and annotations factories          |        |      | 0:18 |   4.2 |
+| STARTED Move annotation factories into expander in yarn                     |        |      | 0:19 |   4.4 |
+| STARTED Clean up terminology in dynamic                                     |        |      | 0:02 |   0.5 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -105,7 +108,6 @@ This was missed in rename.
 
 *** COMPLETED Solve the issue of too many "configurations"            :story:
     CLOSED: [2016-10-10 Mon 21:37]
-    CLOCK: [2016-10-10 Mon 21:37]--[2016-10-10 Mon 21:55] =>  0:18
     CLOCK: [2016-10-10 Mon 20:51]--[2016-10-10 Mon 21:36] =>  0:45
     CLOCK: [2016-10-10 Mon 20:23]--[2016-10-10 Mon 20:50] =>  0:27
     CLOCK: [2016-10-10 Mon 19:50]--[2016-10-10 Mon 20:22] =>  0:32
@@ -138,18 +140,21 @@ Tasks:
 - rename all classes using configuration that should be using
   properties.
 
-*** Merge decoration configuration and annotations factories          :story:
+*** COMPLETED Merge decoration configuration and annotations factories :story:
+    CLOSED: [2016-10-10 Mon 21:56]
+    CLOCK: [2016-10-10 Mon 21:37]--[2016-10-10 Mon 21:55] =>  0:18
 
 As with quilt, get rid of the separation between annotations and
 configuration.
 
-*** Clean up annotations and configuration in stitch                  :story:
+*** STARTED Move annotation factories into expander in yarn           :story:
+    CLOCK: [2016-10-10 Mon 21:58]--[2016-10-10 Mon 22:17] =>  0:19
 
-We deliberately skipped stitch on the clean up exercise for
-configuration/annotations, so we could look at it when doing wale
-templates.
+There were a couple of instances left out in the configuration
+refactor, in yarn.
 
-*** Clean up terminology in dynamic                                   :story:
+*** STARTED Clean up terminology in dynamic                           :story:
+    CLOCK: [2016-10-10 Mon 21:56]--[2016-10-10 Mon 21:58] =>  0:02
 
 We have to do a number of renames to make space for profilers:
 
@@ -458,6 +463,12 @@ Further thoughts:
 
 A number of tests got disabled as part of the dynamic refactor. Fix
 them.
+
+*** Clean up annotations and configuration in stitch                  :story:
+
+We deliberately skipped stitch on the clean up exercise for
+configuration/annotations, so we could look at it when doing wale
+templates.
 
 *** Finish overwriting support                                        :story:
 

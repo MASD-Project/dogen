@@ -76,9 +76,10 @@ private:
         intermediate_model& im) const;
 
     /**
-     * @brief Performs a local attribute expansion on the model.
+     * @brief Expand all parts of the model which require parsing.
      */
-    void expand_parsing(intermediate_model& im) const;
+    void expand_parsing(const dynamic::repository& drp,
+        intermediate_model& im) const;
 
 public:
     /**

@@ -22,6 +22,9 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_set_io.hpp"
+#include "dogen/dynamic/types/field_selector.hpp"
+#include "dogen/dynamic/types/repository_selector.hpp"
+#include "dogen/yarn/types/traits.hpp"
 #include "dogen/yarn/types/name_tree_parser.hpp"
 #include "dogen/yarn/types/name_builder.hpp"
 #include "dogen/yarn/types/expansion_error.hpp"
@@ -39,6 +42,23 @@ const std::string parent_name_conflict(
 
 namespace dogen {
 namespace yarn {
+
+parsing_expander::field_definitions
+parsing_expander::make_field_definitions(const dynamic::repository& rp) const {
+    field_definitions r;
+    const dynamic::repository_selector rs(rp);
+    r.parent = rs.select_field_by_name(traits::generalization::parent());
+    return r;
+}
+
+std::string parsing_expander::
+make_parent(const field_definitions& fds, const dynamic::object& o) const {
+    const dynamic::field_selector fs(o);
+    if (fs.has_field(fds.parent))
+        return fs.get_text_content(fds.parent);
+
+    return std::string();
+}
 
 std::unordered_set<std::string>
 parsing_expander::obtain_top_level_modules(const intermediate_model& m) const {
@@ -84,31 +104,47 @@ parse_attributes(const location& model_location,
     }
 }
 
-void parsing_expander::parse_parent(const location& model_location,
+void parsing_expander::
+parse_parent(const field_definitions& fds, const location& model_location,
     const std::unordered_set<std::string>& top_level_modules, object& o) const {
 
-    if (!o.generalization_annotations().parent())
+    /*
+     * Obtain the parent name from the meta-data. If there is no
+     * parent name there is nothing to do.
+     */
+    const auto parent(make_parent(fds, o.extensions()));
+    if (parent.empty())
         return;
 
+    /*
+     * If we've already have a parent name, this means there are now
+     * two conflicting sources of parenting information so bomb out.
+     */
     if (o.parent()) {
         const auto& id(o.name().id());
         BOOST_LOG_SEV(lg, error) << parent_name_conflict << id;
         BOOST_THROW_EXCEPTION(expansion_error(parent_name_conflict + id));
     }
 
-    const auto str(*o.generalization_annotations().parent());
-    const auto pn(name_builder::build(model_location, top_level_modules, str));
+    /*
+     * Convert the string obtained via meta-data into a yarn name and
+     * set it as our parent name.
+     */
+    const auto& tpm(top_level_modules);
+    const auto pn(name_builder::build(model_location, tpm, parent));
     o.parent(pn);
 }
 
-void parsing_expander::expand(intermediate_model& m) const {
+void parsing_expander::
+expand(const dynamic::repository& drp, intermediate_model& m) const {
+    const auto fds(make_field_definitions(drp));
     const auto tlmn(obtain_top_level_modules(m));
     const auto ml(m.name().location());
 
     for (auto& pair : m.objects()) {
         auto& o(pair.second);
         parse_attributes(ml, tlmn, o.local_attributes());
-        parse_parent(ml, tlmn, o);
+        parse_parent(fds, ml, tlmn, o);
     }
 
     for (auto& pair : m.concepts()) {

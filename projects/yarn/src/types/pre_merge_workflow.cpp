@@ -67,9 +67,10 @@ void pre_merge_workflow::expand_annotations(const dynamic::repository& drp,
     ex.expand(m);
 }
 
-void pre_merge_workflow::expand_parsing(intermediate_model& im) const {
+void pre_merge_workflow::
+expand_parsing(const dynamic::repository& drp, intermediate_model& im) const {
     parsing_expander ex;
-    ex.expand(im);
+    ex.expand(drp, im);
 }
 
 std::list<intermediate_model>
@@ -90,7 +91,7 @@ pre_merge_workflow::execute(const dynamic::repository& drp,
         expand_modules(im);
         expand_origin(drp, im);
         expand_annotations(drp, im);
-        expand_parsing(im);
+        expand_parsing(drp, im);
     }
     return r;
 }

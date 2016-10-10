@@ -26,6 +26,8 @@
 #endif
 
 #include <string>
+#include "dogen/dynamic/types/repository.hpp"
+#include "dogen/dynamic/types/field_definition.hpp"
 #include "dogen/yarn/types/name_tree.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 
@@ -42,6 +44,17 @@ namespace yarn {
  * expander.
  */
 class parsing_expander {
+private:
+    struct field_definitions {
+        dynamic::field_definition parent;
+    };
+
+    field_definitions make_field_definitions(
+        const dynamic::repository& drp) const;
+
+    std::string make_parent(const field_definitions& fds,
+        const dynamic::object& o) const;
+
 private:
     /**
      * @brief Returns all of the top-level modules in the supplied
@@ -61,7 +74,8 @@ private:
     /**
      * @brief Parses parent name in the supplied object.
      */
-    void parse_parent(const location& model_location,
+    void parse_parent(const field_definitions& fds,
+        const location& model_location,
         const std::unordered_set<std::string>& top_level_modules,
         object& o) const;
 
@@ -69,7 +83,7 @@ public:
     /**
      * Execute the property expansion against the model.
      */
-    void expand(intermediate_model& m) const;
+    void expand(const dynamic::repository& drp, intermediate_model& m) const;
 };
 
 } }
