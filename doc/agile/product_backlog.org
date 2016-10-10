@@ -11,6 +11,18 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Clean up odb implementation                                       :story:
+
+When we start using odb in anger we need to tidy-up how it is
+implemented. We need to split the concepts which properly belong in
+yarn such as identity, primary key, foreign key, etc from those that
+are odb specific (perhaps schema name etc). odb formatter simply maps
+yarn concepts to odb concepts rather than having its own. We need to
+dig out the stories around key support.
+
+This story should only be done when we are building real databases
+with odb.
+
 *** Remove unused elements from yarn's final model                    :story:
 
 We could mark all used elements during resolution and then during the
