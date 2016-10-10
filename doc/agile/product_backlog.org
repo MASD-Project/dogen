@@ -5544,6 +5544,20 @@ This was fixed. We are now getting the following errors:
 : [Bintray Upload] Publishing version '0.88.0' of package 'auto-upload'...
 : [Bintray Upload] Bintray response: 404 Not Found. Package 'auto-upload' was not found
 
+Actually now we can't even find the bintray file:
+
+: Installing deploy dependencies
+: [Bintray Upload] Reading descriptor file: build/output/gcc/Release/stage/pkg/bintray.json
+: /home/travis/.rvm/gems/ruby-2.2.5/gems/dpl-1.8.21/lib/dpl/provider/bintray.rb:54:in `read': No such file or directory @ rb_sysopen - build/output/gcc/Release/stage/pkg/bintray.json (Errno::ENOENT)
+:   from /home/travis/.rvm/gems/ruby-2.2.5/gems/dpl-1.8.21/lib/dpl/provider/bintray.rb:54:in `read_descriptor'
+:   from /home/travis/.rvm/gems/ruby-2.2.5/gems/dpl-1.8.21/lib/dpl/provider/bintray.rb:443:in `deploy'
+:   from /home/travis/.rvm/gems/ruby-2.2.5/gems/dpl-1.8.21/lib/dpl/cli.rb:32:in `run'
+:   from /home/travis/.rvm/gems/ruby-2.2.5/gems/dpl-1.8.21/lib/dpl/cli.rb:7:in `run'
+:   from /home/travis/.rvm/gems/ruby-2.2.5/gems/dpl-1.8.21/bin/dpl:5:in `<top (required)>'
+:   from /home/travis/.rvm/gems/ruby-2.2.5/bin/dpl:23:in `load'
+:   from /home/travis/.rvm/gems/ruby-2.2.5/bin/dpl:23:in `<main>'
+: failed to deploy
+
 *** Add appveyor support for bintray                                  :story:
 
 It seems appveyor also supports bintray:
