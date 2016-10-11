@@ -14,23 +14,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-11 Tue 20:43]
+#+CAPTION: Clock summary at [2016-10-11 Tue 22:28]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *16:09* |       |      | 100.0 |
+| *Total time*                                                                | *17:53* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 16:09   |       |      | 100.0 |
-| Active                                                                      |         | 16:09 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:22 |   2.3 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:19 |   2.0 |
-| COMPLETED Improve bintray support                                           |         |       | 0:26 |   2.7 |
-| COMPLETED Refactor opaque infrastructure                                    |         |       | 1:17 |   7.9 |
+| Stories                                                                     | 17:53   |       |      | 100.0 |
+| Active                                                                      |         | 17:53 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:22 |   2.1 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:19 |   1.8 |
+| COMPLETED Improve bintray support                                           |         |       | 0:26 |   2.4 |
+| COMPLETED Refactor opaque infrastructure                                    |         |       | 1:17 |   7.2 |
 | COMPLETED Remove any remnants of annotations from quilt                     |         |       | 0:05 |   0.5 |
-| COMPLETED Solve the issue of too many "configurations"                      |         |       | 4:01 |  24.9 |
-| COMPLETED Merge decoration configuration and annotations factories          |         |       | 0:18 |   1.9 |
-| COMPLETED Move annotation factories into expander in yarn                   |         |       | 1:11 |   7.3 |
-| STARTED Clean up terminology in dynamic                                     |         |       | 8:10 |  50.6 |
+| COMPLETED Solve the issue of too many "configurations"                      |         |       | 4:01 |  22.5 |
+| COMPLETED Merge decoration configuration and annotations factories          |         |       | 0:18 |   1.7 |
+| COMPLETED Move annotation factories into expander in yarn                   |         |       | 1:11 |   6.6 |
+| STARTED Clean up terminology in dynamic                                     |         |       | 9:54 |  55.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -158,6 +158,7 @@ There were a couple of instances left out in the configuration
 refactor, in yarn.
 
 *** STARTED Clean up terminology in dynamic                           :story:
+    CLOCK: [2016-10-11 Tue 20:44]--[2016-10-11 Tue 22:28] =>  1:44
     CLOCK: [2016-10-11 Tue 19:45]--[2016-10-11 Tue 20:43] =>  0:58
     CLOCK: [2016-10-11 Tue 17:06]--[2016-10-11 Tue 17:13] =>  0:07
     CLOCK: [2016-10-11 Tue 17:04]--[2016-10-11 Tue 17:05] =>  0:01
@@ -207,13 +208,13 @@ Done:
   between the annotation and the yarn element it annotates. Fields
   become the body of the annotation.
 - workflow: annotation groups factory. Takes in scribble groups.
-
-Todo:
-
 - field instance -> merge this with value; there is no reason to have
   two classes. We need to look at the factories and see if we can
   merge them together.
-- field instance definition -> entry template.
+
+To do:
+
+- field instance definition -> entry type.
 - field definition -> split into type and type template. JSON file can
   contain both. Add some kind of meta-data to figure out the type.
 - field definition types: template types
@@ -223,6 +224,13 @@ Todo:
   hydration workflow into a type repository factory.
 - scopes: remove unused scopes. Rest of the scopes should be root,
   top-level, child (avoid references to yarn concepts).
+
+Large renames:
+
+- field definition -> type
+- repository -> type repository
+- repository selector -> type repository selector
+- workflow -> type repository workflow
 
 *** Registrar in quilt is not being generated                         :story:
 
