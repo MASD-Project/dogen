@@ -32,7 +32,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/annotations/types/repository.hpp"
 #include "dogen/annotations/types/annotation.hpp"
-#include "dogen/annotations/types/field_definition.hpp"
+#include "dogen/annotations/types/type.hpp"
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/formattables/locator_configuration.hpp"
@@ -49,27 +49,27 @@ class locator {
 public:
     locator(
         const boost::filesystem::path& project_directory_path,
-        const annotations::repository& drp, const formatters::container& fc,
+        const annotations::repository& arp, const formatters::container& fc,
         const annotations::annotation& root, const yarn::name& model_name,
         const std::unordered_set<std::string>& module_ids);
 
 private:
-    struct facet_field_definitions {
+    struct facet_type_group {
         annotations::type directory;
         annotations::type postfix;
     };
 
-    struct formatter_field_definitions {
+    struct formatter_type_group {
         boost::optional<annotations::type> facet_directory;
         boost::optional<annotations::type> facet_postfix;
         annotations::type formatter_postfix;
     };
 
-    struct field_definitions {
-        std::unordered_map<std::string, facet_field_definitions>
-        facets_field_definitions;
-        std::unordered_map<std::string, formatter_field_definitions>
-        formatters_field_definitions;
+    struct type_group {
+        std::unordered_map<std::string, facet_type_group>
+        facets_type_group;
+        std::unordered_map<std::string, formatter_type_group>
+        formatters_type_group;
         annotations::type header_file_extension;
         annotations::type implementation_file_extension;
         annotations::type include_directory_name;
@@ -77,13 +77,13 @@ private:
         annotations::type disable_facet_directories;
     };
 
-    field_definitions make_field_definitions(const annotations::repository& drp,
+    type_group make_type_group(const annotations::repository& arp,
         const formatters::container& fc) const;
 
-    locator_configuration make_configuration(const field_definitions& fds,
+    locator_configuration make_configuration(const type_group& tg,
         const annotations::annotation& o) const;
 
-    locator_configuration make_configuration(const annotations::repository& drp,
+    locator_configuration make_configuration(const annotations::repository& arp,
         const formatters::container& fc, const annotations::annotation& o);
 
 private:

@@ -18,21 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TEST_DATA_FIELD_DEFINITION_TD_HPP
-#define DOGEN_ANNOTATIONS_TEST_DATA_FIELD_DEFINITION_TD_HPP
+#ifndef DOGEN_ANNOTATIONS_TEST_DATA_TYPE_TD_HPP
+#define DOGEN_ANNOTATIONS_TEST_DATA_TYPE_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/annotations/types/field_definition.hpp"
+#include "dogen/annotations/types/type.hpp"
 
 namespace dogen {
 namespace annotations {
 
-class field_definition_generator {
+class type_generator {
 public:
-    field_definition_generator();
+    type_generator();
 
 public:
     typedef dogen::annotations::type result_type;

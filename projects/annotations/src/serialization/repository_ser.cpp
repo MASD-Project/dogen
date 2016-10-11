@@ -30,8 +30,8 @@
 #include <boost/serialization/unordered_map.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
+#include "dogen/annotations/serialization/type_ser.hpp"
 #include "dogen/annotations/serialization/repository_ser.hpp"
-#include "dogen/annotations/serialization/field_definition_ser.hpp"
 
 namespace boost {
 namespace serialization {

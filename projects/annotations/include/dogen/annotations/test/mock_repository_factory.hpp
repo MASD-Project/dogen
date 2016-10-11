@@ -22,7 +22,7 @@
 #define DOGEN_ANNOTATIONS_TEST_MOCK_REPOSITORY_FACTORY_HPP
 
 #include <list>
-#include "dogen/annotations/types/field_definition.hpp"
+#include "dogen/annotations/types/type.hpp"
 #include "dogen/annotations/types/repository.hpp"
 
 namespace dogen {
@@ -38,7 +38,7 @@ private:
      * @brief Adds the field definition to the repository, populating
      * all of the required containers.
      */
-    void add_field_definition(const type& fd, repository& rp) const;
+    void add_type(const type& fd, repository& rp) const;
 
 public:
     /**

@@ -28,7 +28,7 @@
 #include <list>
 #include <boost/optional.hpp>
 #include "dogen/annotations/types/repository.hpp"
-#include "dogen/annotations/types/field_definition.hpp"
+#include "dogen/annotations/types/type.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/quilt.cpp/types/formattables/odb_properties.hpp"
 #include "dogen/quilt.cpp/types/formattables/model.hpp"
@@ -40,25 +40,23 @@ namespace formattables {
 
 class odb_expander {
 private:
-    struct field_definitions {
+    struct type_group {
         annotations::type odb_pragma;
     };
 
-    friend std::ostream& operator<<(std::ostream& s,
-        const field_definitions& v);
+    friend std::ostream& operator<<(std::ostream& s, const type_group& v);
 
-    field_definitions
-    make_field_definitions(const annotations::repository& drp) const;
+    type_group make_type_group(const annotations::repository& arp) const;
 
     std::list<std::string> make_odb_pragmas(
-        const field_definitions& fds, const annotations::annotation& o) const;
+        const type_group& tg, const annotations::annotation& o) const;
 
 private:
     boost::optional<odb_properties> compute_odb_configuration(
-        const field_definitions& fds, const yarn::object& o) const;
+        const type_group& tg, const yarn::object& o) const;
 
 public:
-    void expand(const annotations::repository& drp, model& fm) const;
+    void expand(const annotations::repository& arp, model& fm) const;
 };
 
 } } } }

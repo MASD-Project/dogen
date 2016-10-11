@@ -30,7 +30,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/annotations/types/repository.hpp"
 #include "dogen/annotations/types/ownership_hierarchy.hpp"
-#include "dogen/annotations/types/field_definition.hpp"
+#include "dogen/annotations/types/type.hpp"
 
 namespace dogen {
 namespace annotations {

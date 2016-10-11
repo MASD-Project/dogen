@@ -62,24 +62,24 @@ create_formatters_repository(
 
 dogen::formatters::decoration_properties_factory
 workflow::create_decoration_properties_factory(
-    const annotations::repository& drp,
+    const annotations::repository& arp,
     const dogen::formatters::repository& frp,
     const annotations::annotation& root) const {
 
     using dogen::formatters::decoration_properties_factory;
-    decoration_properties_factory r(drp, frp, root);
+    decoration_properties_factory r(arp, frp, root);
     return r;
 }
 
 formattables::model workflow::create_formattables_model(
     const std::forward_list<boost::filesystem::path>& data_directories,
     const options::cpp_options& opts,
-    const annotations::repository& drp, const annotations::annotation& root,
+    const annotations::repository& arp, const annotations::annotation& root,
     const dogen::formatters::decoration_properties_factory& dpf,
     const formatters::container& fc, const yarn::model& m) const {
 
     formattables::workflow fw;
-    return fw.execute(data_directories, opts, drp, root, dpf, fc, m);
+    return fw.execute(data_directories, opts, arp, root, dpf, fc, m);
 }
 
 std::string workflow::name() const {
@@ -110,16 +110,16 @@ workflow::ownership_hierarchy() const {
 
 std::forward_list<dogen::formatters::file>
 workflow::generate(const options::knitting_options& ko,
-    const annotations::repository& drp,
+    const annotations::repository& arp,
     const yarn::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started backend.";
 
     const auto dd(make_data_directories());
     const auto frp(create_formatters_repository(dd));
     const auto ro(m.root_module().annotation());
-    const auto dpf(create_decoration_properties_factory(drp, frp, ro));
+    const auto dpf(create_decoration_properties_factory(arp, frp, ro));
     const auto& fc(formatters::workflow::registrar().formatter_container());
-    const auto fm(create_formattables_model(dd, ko.cpp(), drp, ro, dpf, fc, m));
+    const auto fm(create_formattables_model(dd, ko.cpp(), arp, ro, dpf, fc, m));
     const auto r(format(fm));
 
     BOOST_LOG_SEV(lg, debug) << "Finished backend.";

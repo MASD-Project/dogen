@@ -27,6 +27,7 @@
 
 #include "dogen/annotations/serialization/name_ser.hpp"
 #include "dogen/annotations/serialization/text_ser.hpp"
+#include "dogen/annotations/serialization/type_ser.hpp"
 #include "dogen/annotations/serialization/value_ser.hpp"
 #include "dogen/annotations/serialization/number_ser.hpp"
 #include "dogen/annotations/serialization/boolean_ser.hpp"
@@ -39,7 +40,6 @@
 #include "dogen/annotations/serialization/scribble_group_ser.hpp"
 #include "dogen/annotations/serialization/text_collection_ser.hpp"
 #include "dogen/annotations/serialization/annotation_group_ser.hpp"
-#include "dogen/annotations/serialization/field_definition_ser.hpp"
 #include "dogen/annotations/serialization/profile_repository_ser.hpp"
 #include "dogen/annotations/serialization/ownership_hierarchy_ser.hpp"
 #include "dogen/annotations/serialization/field_definition_types_ser.hpp"

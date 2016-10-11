@@ -21,7 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/annotations/types/workflow_error.hpp"
-#include "dogen/annotations/test/mock_field_definition_factory.hpp"
+#include "dogen/annotations/test/mock_type_factory.hpp"
 #include "dogen/annotations/test/mock_repository_factory.hpp"
 
 namespace {
@@ -38,7 +38,7 @@ namespace dogen {
 namespace annotations {
 namespace test {
 
-void mock_repository_factory::add_field_definition(
+void mock_repository_factory::add_type(
     const type& fd, repository& rp) const {
 
     const auto n(fd.name().qualified());
@@ -60,11 +60,11 @@ repository mock_repository_factory::make(
     repository r;
 
     for (const auto& fd : additional_fields)
-        add_field_definition(fd, r);
+        add_type(fd, r);
 
-    mock_field_definition_factory f;
-    for (const auto& fd : f.make_canned_field_definitions())
-        add_field_definition(fd, r);
+    mock_type_factory f;
+    for (const auto& fd : f.make_canned_types())
+        add_type(fd, r);
 
     return r;
 }

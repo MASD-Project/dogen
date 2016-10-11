@@ -35,7 +35,7 @@
 #include "dogen/annotations/types/scope_types.hpp"
 #include "dogen/annotations/types/annotation_group.hpp"
 #include "dogen/annotations/types/scribble_group.hpp"
-#include "dogen/annotations/types/field_definition.hpp"
+#include "dogen/annotations/types/type.hpp"
 
 
 namespace dogen {
@@ -51,22 +51,20 @@ public:
      *
      *
      * @param repository All field definitions.
-     * @param throw_on_missing_field_definition If true, any
+     * @param throw_on_missing_type If true, any
      * annotations extensions for which a field definition does not
      * exist will result in an exception. If false, they will be
      * ignored.
      */
     explicit annotation_groups_factory(
-        const repository& rp,
-        const bool throw_on_missing_field_definition = true);
+        const repository& rp, const bool throw_on_missing_type = true);
 
 private:
     /**
      * @brief Returns the field definition for the qualified name, if
      * one exists.
      */
-    boost::optional<type>
-    obtain_field_definition(const std::string& n) const;
+    boost::optional<type> obtain_type(const std::string& n) const;
 
     /**
      * @brief Ensures the field definition is valid for the current
@@ -105,7 +103,7 @@ public:
 
 private:
     const repository& repository_;
-    const bool throw_on_missing_field_definition_;
+    const bool throw_on_missing_type_;
 };
 
 } }

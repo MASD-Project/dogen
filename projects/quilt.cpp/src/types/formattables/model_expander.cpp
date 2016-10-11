@@ -38,24 +38,24 @@ namespace cpp {
 namespace formattables {
 
 void model_expander::
-expand_streaming(const annotations::repository& drp, model& fm) const {
+expand_streaming(const annotations::repository& arp, model& fm) const {
     streaming_expander ex;
-    ex.expand(drp, fm);
+    ex.expand(arp, fm);
 }
 
 void model_expander::expand_profile_groups(
     const std::forward_list<boost::filesystem::path>& dirs,
-    const annotations::repository& drp, const annotations::annotation& root,
+    const annotations::repository& arp, const annotations::annotation& root,
     const formatters::container& fc, model& fm) const {
     profile_group_expander ex;
-    ex.expand(dirs, drp, root, fc, fm);
+    ex.expand(dirs, arp, root, fc, fm);
 }
 
-void model_expander::expand_enablement(const annotations::repository& drp,
+void model_expander::expand_enablement(const annotations::repository& arp,
     const annotations::annotation& root_object, const formatters::container& fc,
     model& fm) const {
     enablement_expander ex;
-    ex.expand(drp, root_object, fc, fm);
+    ex.expand(arp, root_object, fc, fm);
 }
 
 void model_expander::
@@ -65,10 +65,10 @@ expand_canonical_formatters(const formatters::container& fc, model& fm) const {
 }
 
 void model_expander::expand_inclusion(
-    const annotations::repository& drp, const formatters::container& fc,
+    const annotations::repository& arp, const formatters::container& fc,
     const locator& l, model& fm) const {
     inclusion_expander ex;
-    ex.expand(drp, fc, l, fm);
+    ex.expand(arp, fc, l, fm);
 }
 
 void model_expander::expand_decoration(
@@ -78,16 +78,16 @@ void model_expander::expand_decoration(
     ex.expand(dpf, fm);
 }
 
-void model_expander::expand_aspects(const annotations::repository& drp,
+void model_expander::expand_aspects(const annotations::repository& arp,
     model& fm) const {
     aspect_expander ex;
-    ex.expand(drp, fm);
+    ex.expand(arp, fm);
 }
 
-void model_expander::expand_helpers(const annotations::repository& drp,
+void model_expander::expand_helpers(const annotations::repository& arp,
     const formatters::container& fc, model& fm) const {
     helper_expander ex;
-    ex.expand(drp, fc, fm);
+    ex.expand(arp, fc, fm);
 }
 
 void model_expander::reduce(model& fm) const {
@@ -102,9 +102,9 @@ void model_expander::expand_file_paths_and_guards(
 }
 
 void model_expander::
-expand_odb(const annotations::repository& drp, model& fm) const {
+expand_odb(const annotations::repository& arp, model& fm) const {
     odb_expander ex;
-    ex.expand(drp, fm);
+    ex.expand(arp, fm);
 }
 
 void model_expander::
@@ -115,7 +115,7 @@ expand_facet_directories(const locator& l,model& fm) const {
 
 void model_expander::expand(
     const std::forward_list<boost::filesystem::path>& dirs,
-    const annotations::repository& drp, const annotations::annotation& root,
+    const annotations::repository& arp, const annotations::annotation& root,
     const dogen::formatters::decoration_properties_factory& dpf,
     const formatters::container& fc, const locator& l, model& fm) const {
 
@@ -123,14 +123,14 @@ void model_expander::expand(
      * Streaming expansion must be done before helper expansion as the
      * helpers need the streaminging properties.
      */
-    expand_streaming(drp, fm);
-    expand_profile_groups(dirs, drp, root, fc, fm);
+    expand_streaming(arp, fm);
+    expand_profile_groups(dirs, arp, root, fc, fm);
 
     /*
      * Enablement expansion must be done before inclusion because
      * inclusion relies on it to know which formatters are enabled.
      */
-    expand_enablement(drp, root, fc, fm);
+    expand_enablement(arp, root, fc, fm);
 
     /*
      * Canonical formatter expansion must be done before inclusion
@@ -138,10 +138,10 @@ void model_expander::expand(
      * inclusion directives.
      */
     expand_canonical_formatters(fc, fm);
-    expand_inclusion(drp, fc, l, fm);
+    expand_inclusion(arp, fc, l, fm);
     expand_decoration(dpf, fm);
-    expand_aspects(drp, fm);
-    expand_helpers(drp, fc, fm);
+    expand_aspects(arp, fm);
+    expand_helpers(arp, fc, fm);
 
     /*
      * All of the above expansions must be performed prior to
@@ -150,7 +150,7 @@ void model_expander::expand(
     reduce(fm);
 
     expand_file_paths_and_guards(fc, l, fm);
-    expand_odb(drp, fm);
+    expand_odb(arp, fm);
     expand_facet_directories(l, fm);
 }
 

@@ -24,7 +24,7 @@
 #include <boost/test/unit_test.hpp>
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/io/list_io.hpp"
-#include "dogen/annotations/io/field_definition_io.hpp"
+#include "dogen/annotations/io/type_io.hpp"
 #include "dogen/annotations/types/json_hydrator.hpp"
 
 namespace {

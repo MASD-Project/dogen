@@ -41,17 +41,15 @@ namespace formattables {
 
 class profile_group_expander {
 private:
-    struct field_definitions {
+    struct type_group {
         annotations::type profile;
     };
 
-    friend std::ostream& operator<<(std::ostream& s,
-        const field_definitions& v);
+    friend std::ostream& operator<<(std::ostream& s, const type_group& v);
 
-    field_definitions make_field_definitions(
-        const annotations::repository& drp) const;
+    type_group make_type_group(const annotations::repository& arp) const;
 
-    std::string obtain_profile_configuration(const field_definitions& fd,
+    std::string obtain_profile_configuration(const type_group& tg,
         const annotations::annotation& root) const;
 
 private:
@@ -67,13 +65,13 @@ private:
     profile_group_types merge(const profile_group_types& original) const;
 
     void populate_model(
-        const annotations::repository& drp, const annotations::annotation& root,
+        const annotations::repository& arp, const annotations::annotation& root,
         const profile_group_types& pgs, model& fm) const;
 
 public:
     void expand(
         const std::forward_list<boost::filesystem::path>& data_directories,
-        const annotations::repository& drp, const annotations::annotation& root,
+        const annotations::repository& arp, const annotations::annotation& root,
         const formatters::container& fc, model& fm) const;
 };
 

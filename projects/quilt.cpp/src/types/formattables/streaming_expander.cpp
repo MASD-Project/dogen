@@ -23,7 +23,7 @@
 #include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/annotations/types/field_selector.hpp"
 #include "dogen/annotations/types/repository_selector.hpp"
-#include "dogen/annotations/io/field_definition_io.hpp"
+#include "dogen/annotations/io/type_io.hpp"
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/quilt.cpp/io/formattables/streaming_properties_io.hpp"
 #include "dogen/quilt.cpp/types/formattables/streaming_expander.hpp"
@@ -42,11 +42,11 @@ namespace cpp {
 namespace formattables {
 
 std::ostream& operator<<(std::ostream& s,
-    const streaming_expander::field_definitions& v) {
+    const streaming_expander::type_group& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::"
-      << "streaming_expander::field_definitions\"" << ", "
+      << "streaming_expander::type_group\"" << ", "
       << "\"requires_quoting\": " << v.requires_quoting << ", "
       << "\"string_conversion_method\": " << v.string_conversion_method << ", "
       << "\"remove_unprintable_characters\": "
@@ -56,14 +56,14 @@ std::ostream& operator<<(std::ostream& s,
     return s;
 }
 
-streaming_expander::field_definitions
-streaming_expander::make_field_definitions(
-    const annotations::repository& drp) const {
+streaming_expander::type_group
+streaming_expander::make_type_group(
+    const annotations::repository& arp) const {
     BOOST_LOG_SEV(lg, debug) << "Creating field definitions.";
 
-    field_definitions r;
+    type_group r;
 
-    const annotations::repository_selector s(drp);
+    const annotations::repository_selector s(arp);
     const auto scm(traits::cpp::streaming::string_conversion_method());
     r.string_conversion_method = s.select_field_by_name(scm);
 
@@ -80,26 +80,26 @@ streaming_expander::make_field_definitions(
 
 boost::optional<streaming_properties>
 streaming_expander::make_streaming_properties(
-    const field_definitions& fds, const annotations::annotation& a) const {
+    const type_group& tg, const annotations::annotation& a) const {
 
     BOOST_LOG_SEV(lg, debug) << "Creating streaming configuration.";
     bool found_any(false);
     streaming_properties r;
     const annotations::field_selector fs(a);
 
-    const auto& rq(fds.requires_quoting);
+    const auto& rq(tg.requires_quoting);
     if (fs.has_field(rq)) {
         r.requires_quoting(fs.get_boolean_content_or_default(rq));
         found_any = true;
     }
 
-    const auto& scm(fds.string_conversion_method);
+    const auto& scm(tg.string_conversion_method);
     if (fs.has_field(scm)) {
         r.string_conversion_method(fs.get_text_content_or_default(scm));
         found_any = true;
     }
 
-    const auto& ruc(fds.remove_unprintable_characters);
+    const auto& ruc(tg.remove_unprintable_characters);
     if (fs.has_field(ruc)) {
         r.remove_unprintable_characters(fs.get_boolean_content_or_default(ruc));
         found_any = true;
@@ -114,10 +114,10 @@ streaming_expander::make_streaming_properties(
 }
 
 void streaming_expander::
-expand(const annotations::repository& drp, model& fm) const {
+expand(const annotations::repository& arp, model& fm) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started expanding streaming configuration.";
-    const auto fds(make_field_definitions(drp));
+    const auto tg(make_type_group(arp));
     for (auto& pair : fm.formattables()) {
         const auto id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
@@ -130,7 +130,7 @@ expand(const annotations::repository& drp, model& fm) const {
          */
         auto segment(formattable.master_segment());
         const auto& e(*segment);
-        const auto sc(make_streaming_properties(fds, e.annotation()));
+        const auto sc(make_streaming_properties(tg, e.annotation()));
         if (!sc)
             continue;
 

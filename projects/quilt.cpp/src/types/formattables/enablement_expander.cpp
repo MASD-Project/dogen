@@ -28,7 +28,7 @@
 #include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/annotations/types/field_selector.hpp"
 #include "dogen/annotations/types/repository_selector.hpp"
-#include "dogen/annotations/io/field_definition_io.hpp"
+#include "dogen/annotations/io/type_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/facet_properties_io.hpp"
 #include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 #include "dogen/quilt.cpp/io/formattables/local_enablement_configuration_io.hpp"
@@ -58,11 +58,11 @@ namespace cpp {
 namespace formattables {
 
 inline std::ostream& operator<<(std::ostream& s,
-    const enablement_expander::global_field_definitions& v) {
+    const enablement_expander::global_type_group& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::"
-      << "enablement_expander::global_field_definitions\"" << ", "
+      << "enablement_expander::global_type_group\"" << ", "
       << "\"model_enabled\": " << v.model_enabled << ", "
       << "\"facet_enabled\": " << v.facet_enabled << ", "
       << "\"formatter_enabled\": " << v.formatter_enabled
@@ -72,11 +72,11 @@ inline std::ostream& operator<<(std::ostream& s,
 }
 
 inline std::ostream& operator<<(std::ostream& s,
-    const enablement_expander::local_field_definitions& v) {
+    const enablement_expander::local_type_group& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::"
-      << "enablement_expander::local_field_definitions\"" << ", "
+      << "enablement_expander::local_type_group\"" << ", "
       << "\"facet_enabled\": " << v.facet_enabled << ", "
       << "\"formatter_enabled\": " << v.formatter_enabled << ", "
       << "\"supported\": " << v.facet_supported
@@ -85,19 +85,19 @@ inline std::ostream& operator<<(std::ostream& s,
     return s;
 }
 
-enablement_expander::global_field_definitions_type
-enablement_expander::make_global_field_definitions(
-    const annotations::repository& drp,
+enablement_expander::global_type_group_type
+enablement_expander::make_global_type_group(
+    const annotations::repository& arp,
     const formatters::container& fc) const {
 
     BOOST_LOG_SEV(lg, debug) << "Creating global field definitions.";
 
-    global_field_definitions_type r;
-    const annotations::repository_selector s(drp);
+    global_type_group_type r;
+    const annotations::repository_selector s(arp);
     for (const auto& f : fc.file_formatters()) {
         const auto oh(f->ownership_hierarchy());
 
-        global_field_definitions fd;
+        global_type_group fd;
         const auto& mn(oh.model_name());
         fd.model_enabled = s.select_field_by_name(mn, traits::enabled());
 
@@ -117,7 +117,7 @@ enablement_expander::make_global_field_definitions(
 
 enablement_expander::global_enablement_configurations_type
 enablement_expander::obtain_global_configurations(
-    const std::unordered_map<std::string, global_field_definitions>& gfd,
+    const std::unordered_map<std::string, global_type_group>& gfd,
     const annotations::annotation& root, const formatters::container& fc,
     const profile_group& gpg) const {
 
@@ -276,16 +276,16 @@ void enablement_expander::update_facet_enablement(
                              << "Result: " << fm.facet_properties();
 }
 
-enablement_expander::local_field_definitions_type
-enablement_expander::make_local_field_definitions(
-    const annotations::repository& drp, const formatters::container& fc) const {
+enablement_expander::local_type_group_type
+enablement_expander::make_local_type_group(
+    const annotations::repository& arp, const formatters::container& fc) const {
 
     BOOST_LOG_SEV(lg, debug) << "Creating local field definitions.";
 
-    local_field_definitions_type r;
-    const annotations::repository_selector s(drp);
+    local_type_group_type r;
+    const annotations::repository_selector s(arp);
     for (const auto& f : fc.file_formatters()) {
-        local_field_definitions fd;
+        local_type_group fd;
         const auto oh(f->ownership_hierarchy());
 
         const auto& fctn(oh.facet_name());
@@ -304,26 +304,26 @@ enablement_expander::make_local_field_definitions(
 }
 
 std::unordered_map<std::type_index,
-                   enablement_expander::local_field_definitions_type>
-enablement_expander::bucket_local_field_definitions_by_type_index(
-    const local_field_definitions_type& lfds,
+                   enablement_expander::local_type_group_type>
+enablement_expander::bucket_local_type_group_by_type_index(
+    const local_type_group_type& ltg,
     const formatters::container& fc) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started bucketing local field definitions "
                              << "by type index.";
     std::unordered_map<std::type_index,
-                       enablement_expander::local_field_definitions_type> r;
+                       enablement_expander::local_type_group_type> r;
 
     const auto& ffti(fc.file_formatters_by_type_index());
     for (const auto& pair: ffti) {
         const auto& ti(pair.first);
         const auto& fmts(pair.second);
 
-        local_field_definitions_type& lfd(r[ti]);
+        local_type_group_type& lfd(r[ti]);
         for (const auto& fmt: fmts) {
             const auto fmtn(fmt->ownership_hierarchy().formatter_name());
-            const auto i(lfds.find(fmtn));
-            if (i == lfds.end()) {
+            const auto i(ltg.find(fmtn));
+            if (i == ltg.end()) {
                 BOOST_LOG_SEV(lg, error) << formatter_not_found << fmtn;
                 BOOST_THROW_EXCEPTION(
                     expansion_error(formatter_not_found + fmtn));
@@ -345,7 +345,7 @@ enablement_expander::bucket_local_field_definitions_by_type_index(
 }
 
 enablement_expander::local_enablement_configurations_type enablement_expander::
-obtain_local_configurations(const local_field_definitions_type& lfd,
+obtain_local_configurations(const local_type_group_type& lfd,
     const annotations::annotation& o,  const formatters::container& fc,
     const boost::optional<profile_group>& lpg) const {
 
@@ -564,7 +564,7 @@ void enablement_expander::compute_enablement(
     BOOST_LOG_SEV(lg, debug) << "Finished computed enablement.";
 }
 
-void enablement_expander::expand(const annotations::repository& drp,
+void enablement_expander::expand(const annotations::repository& arp,
     const annotations::annotation& root, const formatters::container& fc,
     model& fm) const {
 
@@ -574,28 +574,28 @@ void enablement_expander::expand(const annotations::repository& drp,
      * field definitions that only apply to the root object, as some
      * of these fields do not exist anywhere else.
      */
-    const auto gfds(make_global_field_definitions(drp, fc));
+    const auto gtg(make_global_type_group(arp, fc));
 
     /*
      * Read the values for the global field definitions, and update
      * the facet configurations with it.
      */
     const auto gpg(fm.global_profile_group());
-    const auto gcs(obtain_global_configurations(gfds, root, fc, gpg));
+    const auto gcs(obtain_global_configurations(gtg, root, fc, gpg));
     update_facet_enablement(fc, gcs, fm);
 
     /*
      * Create the fields for the local field definitions. These are
      * made across all registered formatters.
      */
-    const auto lfds(make_local_field_definitions(drp, fc));
+    const auto ltg(make_local_type_group(arp, fc));
 
     /*
      * Bucket the local field definitions by element type - i.e., we
      * only care about those formatters which are valid for a
      * particular element.
      */
-    const auto lfdsti(bucket_local_field_definitions_by_type_index(lfds, fc));
+    const auto ltgti(bucket_local_type_group_by_type_index(ltg, fc));
 
     for (auto& pair : fm.formattables()) {
         const auto id(pair.first);
@@ -619,8 +619,8 @@ void enablement_expander::expand(const annotations::repository& drp,
              * Not all elements have formatters; for example, concepts
              * don't have any at present. If so, skip the element.
              */
-            const auto i(lfdsti.find(ti));
-            if (i == lfdsti.end()) {
+            const auto i(ltgti.find(ti));
+            if (i == ltgti.end()) {
                 BOOST_LOG_SEV(lg, debug) << "Element has no formatters, "
                                          << " so nothing enable.";
                 continue;

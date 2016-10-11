@@ -26,12 +26,11 @@
 namespace dogen {
 namespace yarn {
 
-type_parameters_expander::field_definitions
-type_parameters_expander::
-make_field_definitions(const annotations::repository& drp) const {
+type_parameters_expander::type_group type_parameters_expander::
+make_type_group(const annotations::repository& arp) const {
 
-    field_definitions r;
-    const annotations::repository_selector s(drp);
+    type_group r;
+    const annotations::repository_selector s(arp);
     const auto& vnp(traits::type_parameters::variable_number_of_parameters());
     r.variable_number_of_parameters = s.select_field_by_name(vnp);
 
@@ -45,35 +44,35 @@ make_field_definitions(const annotations::repository& drp) const {
 }
 
 type_parameters
-type_parameters_expander::make_type_parameters(const field_definitions& fds,
+type_parameters_expander::make_type_parameters(const type_group& tg,
     const annotations::annotation& a) const {
     type_parameters r;
     const annotations::field_selector fs(a);
 
-    const auto& vnp(fds.variable_number_of_parameters);
+    const auto& vnp(tg.variable_number_of_parameters);
     r.variable_number_of_parameters(fs.get_boolean_content_or_default(vnp));
 
-    const auto& tpc(fds.type_parameters_count);
+    const auto& tpc(tg.type_parameters_count);
     r.count(fs.get_number_content_or_default(tpc));
 
-    const auto& aih(fds.type_parameters_always_in_heap);
+    const auto& aih(tg.type_parameters_always_in_heap);
     r.always_in_heap(fs.get_boolean_content_or_default(aih));
 
     return r;
 }
 
 void type_parameters_expander::
-expand_type_parameters(const field_definitions& fds, object& o) const {
-    const auto tp(make_type_parameters(fds, o.annotation()));
+expand_type_parameters(const type_group& tg, object& o) const {
+    const auto tp(make_type_parameters(tg, o.annotation()));
     o.type_parameters(tp);
 }
 
 void type_parameters_expander::
-expand(const annotations::repository& drp, intermediate_model& m) const {
-    const auto fds(make_field_definitions(drp));
+expand(const annotations::repository& arp, intermediate_model& m) const {
+    const auto tg(make_type_group(arp));
     for (auto& pair : m.objects()) {
         auto& o(pair.second);
-        expand_type_parameters(fds, o);
+        expand_type_parameters(tg, o);
     }
 }
 

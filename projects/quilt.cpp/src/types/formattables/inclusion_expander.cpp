@@ -26,7 +26,7 @@
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/annotations/types/field_selector.hpp"
 #include "dogen/annotations/types/repository_selector.hpp"
-#include "dogen/annotations/io/field_definition_io.hpp"
+#include "dogen/annotations/io/type_io.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formattables/expansion_error.hpp"
@@ -104,11 +104,11 @@ namespace cpp {
 namespace formattables {
 
 std::ostream& operator<<(std::ostream& s,
-    const inclusion_expander::formattater_field_definitions& v) {
+    const inclusion_expander::formattater_type_group& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::"
-      << "inclusion_expander::formatters_field_definitions\"" << ", "
+      << "inclusion_expander::formatters_type_group\"" << ", "
       << "\"inclusion_directive\": " << v.inclusion_directive << ", "
       << "\"inclusion_directive\": " << v.inclusion_directive
       << " }";
@@ -117,26 +117,26 @@ std::ostream& operator<<(std::ostream& s,
 }
 
 std::ostream& operator<<(std::ostream& s,
-    const inclusion_expander::field_definitions& v) {
+    const inclusion_expander::type_group& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::"
-      << "inclusion_expander::field_definitions\"" << ", "
+      << "inclusion_expander::type_group\"" << ", "
       << "\"inclusion_required\": " << v.inclusion_required << ", "
-      << "\"formattaters_field_definitions\": "
-      << v.formattaters_field_definitions
+      << "\"formattaters_type_group\": "
+      << v.formattaters_type_group
       << " }";
 
     return s;
 }
 
-inclusion_expander::field_definitions inclusion_expander::
-make_field_definitions(const annotations::repository& drp,
+inclusion_expander::type_group inclusion_expander::
+make_type_group(const annotations::repository& arp,
     const formatters::container& fc) const {
     BOOST_LOG_SEV(lg, debug) << "Creating field definitions.";
 
-    field_definitions r;
-    const annotations::repository_selector s(drp);
+    type_group r;
+    const annotations::repository_selector s(arp);
     const auto ir(traits::cpp::inclusion_required());
     r.inclusion_required = s.select_field_by_name(ir);
 
@@ -151,14 +151,14 @@ make_field_definitions(const annotations::repository& drp,
             continue;
         }
 
-        formattater_field_definitions ffds;
+        formattater_type_group ftg;
         const auto& id(traits::inclusion_directive());
-        ffds.inclusion_directive = s.select_field_by_name(fmtn, id);
+        ftg.inclusion_directive = s.select_field_by_name(fmtn, id);
 
         // note: redefinition by design as scopes are different.
         const auto& ir(traits::inclusion_required());
-        ffds.inclusion_required = s.select_field_by_name(fmtn, ir);
-        r.formattaters_field_definitions[fmtn] = ffds;
+        ftg.inclusion_required = s.select_field_by_name(fmtn, ir);
+        r.formattaters_type_group[fmtn] = ftg;
     }
 
     BOOST_LOG_SEV(lg, debug) << "Created field definitions. Result: " << r;
@@ -166,14 +166,14 @@ make_field_definitions(const annotations::repository& drp,
 }
 
 bool inclusion_expander::make_top_level_inclusion_required(
-    const field_definitions& fds, const annotations::annotation& o) const {
+    const type_group& tg, const annotations::annotation& o) const {
     const annotations::field_selector fs(o);
-    return fs.get_boolean_content_or_default(fds.inclusion_required);
+    return fs.get_boolean_content_or_default(tg.inclusion_required);
 }
 
 inclusion_directive_configuration
 inclusion_expander::make_inclusion_directive_configuration(
-    const field_definitions& fds,const std::string& formatter_name,
+    const type_group& tg,const std::string& formatter_name,
     const annotations::annotation& o) const {
 
     if (formatter_name.empty()) {
@@ -181,8 +181,8 @@ inclusion_expander::make_inclusion_directive_configuration(
         BOOST_THROW_EXCEPTION(expansion_error(empty_formatter_name));
     }
 
-    const auto i(fds.formattaters_field_definitions.find(formatter_name));
-    if (i == fds.formattaters_field_definitions.end()) {
+    const auto i(tg.formattaters_type_group.find(formatter_name));
+    if (i == tg.formattaters_type_group.end()) {
         BOOST_LOG_SEV(lg, error) << missing_formatter_name;
         BOOST_THROW_EXCEPTION(expansion_error(missing_formatter_name));
     }
@@ -257,7 +257,7 @@ void inclusion_expander::insert_inclusion_directive(const std::string& id,
 }
 
 void inclusion_expander::compute_inclusion_directives(
-    const field_definitions& fds, const yarn::element& e,
+    const type_group& tg, const yarn::element& e,
     const formatter_list_type& formatters, const locator& l,
     inclusion_directives_container_type& idc) const {
 
@@ -278,7 +278,7 @@ void inclusion_expander::compute_inclusion_directives(
      * require inclusion.
      */
     const auto& o(e.annotation());
-    const bool required(make_top_level_inclusion_required(fds, o));
+    const bool required(make_top_level_inclusion_required(tg, o));
     if (!required) {
         BOOST_LOG_SEV(lg, debug) << "Inclusion not required for element.";
         return;
@@ -301,7 +301,7 @@ void inclusion_expander::compute_inclusion_directives(
          *
          * Again, we default this to true.
          */
-        const auto id_cfg(make_inclusion_directive_configuration(fds, fmtn, o));
+        const auto id_cfg(make_inclusion_directive_configuration(tg, fmtn, o));
         if (!id_cfg.inclusion_required()) {
             BOOST_LOG_SEV(lg, debug) << "Inclusion directive not required "
                                      << " for formatter: " << fmtn;
@@ -333,7 +333,7 @@ void inclusion_expander::compute_inclusion_directives(
 }
 
 inclusion_expander::inclusion_directives_container_type inclusion_expander::
-compute_inclusion_directives(const field_definitions& fds,
+compute_inclusion_directives(const type_group& tg,
     const formatters::container& fc, const locator& l,
     const std::unordered_map<std::string, formattable>& formattables) const {
 
@@ -365,7 +365,7 @@ compute_inclusion_directives(const field_definitions& fds,
                 continue;
             }
 
-            compute_inclusion_directives(fds, e, i->second, l, r);
+            compute_inclusion_directives(tg, e, i->second, l, r);
         }
     }
     return r;
@@ -508,11 +508,11 @@ void inclusion_expander::populate_inclusion_dependencies(
                              << "for all formattables. ";
 }
 
-void inclusion_expander::expand(const annotations::repository& drp,
+void inclusion_expander::expand(const annotations::repository& arp,
     const formatters::container& fc, const locator& l, model& fm) const {
 
-    const auto fds(make_field_definitions(drp, fc));
-    const auto idc(compute_inclusion_directives(fds, fc, l, fm.formattables()));
+    const auto tg(make_type_group(arp, fc));
+    const auto idc(compute_inclusion_directives(tg, fc, l, fm.formattables()));
     populate_inclusion_dependencies(fc, idc, fm.formattables());
 }
 

@@ -20,10 +20,10 @@
  */
 #include <ostream>
 #include "dogen/annotations/io/name_io.hpp"
+#include "dogen/annotations/io/type_io.hpp"
 #include "dogen/annotations/io/value_io.hpp"
 #include "dogen/annotations/io/scope_types_io.hpp"
 #include "dogen/annotations/io/value_types_io.hpp"
-#include "dogen/annotations/io/field_definition_io.hpp"
 #include "dogen/annotations/io/ownership_hierarchy_io.hpp"
 #include "dogen/annotations/io/field_definition_types_io.hpp"
 
@@ -48,7 +48,7 @@ namespace annotations {
 
 std::ostream& operator<<(std::ostream& s, const type& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::annotations::field_definition\"" << ", "
+      << "\"__type__\": " << "\"dogen::annotations::type\"" << ", "
       << "\"name\": " << v.name() << ", "
       << "\"value_type\": " << v.value_type() << ", "
       << "\"scope\": " << v.scope() << ", "

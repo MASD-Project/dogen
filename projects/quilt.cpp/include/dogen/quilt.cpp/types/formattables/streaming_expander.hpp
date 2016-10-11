@@ -28,7 +28,7 @@
 #include <boost/optional.hpp>
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/repository.hpp"
-#include "dogen/annotations/types/field_definition.hpp"
+#include "dogen/annotations/types/type.hpp"
 #include "dogen/quilt.cpp/types/formattables/streaming_properties.hpp"
 #include "dogen/quilt.cpp/types/formattables/model.hpp"
 
@@ -39,23 +39,23 @@ namespace formattables {
 
 class streaming_expander {
 private:
-    struct field_definitions {
+    struct type_group {
         annotations::type requires_quoting;
         annotations::type string_conversion_method;
         annotations::type remove_unprintable_characters;
     };
 
     friend std::ostream& operator<<(std::ostream& s,
-        const field_definitions& v);
+        const type_group& v);
 
-    field_definitions
-    make_field_definitions(const annotations::repository& drp) const;
+    type_group
+    make_type_group(const annotations::repository& arp) const;
 
     boost::optional<streaming_properties> make_streaming_properties(
-        const field_definitions& fds, const annotations::annotation& a) const;
+        const type_group& tg, const annotations::annotation& a) const;
 
 public:
-    void expand(const annotations::repository& drp, model& fm) const;
+    void expand(const annotations::repository& arp, model& fm) const;
 };
 
 } } } }

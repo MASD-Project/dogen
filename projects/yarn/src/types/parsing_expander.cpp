@@ -43,19 +43,19 @@ const std::string parent_name_conflict(
 namespace dogen {
 namespace yarn {
 
-parsing_expander::field_definitions parsing_expander::make_field_definitions(
-    const annotations::repository& rp) const {
-    field_definitions r;
-    const annotations::repository_selector rs(rp);
+parsing_expander::type_group parsing_expander::make_type_group(
+    const annotations::repository& arp) const {
+    type_group r;
+    const annotations::repository_selector rs(arp);
     r.parent = rs.select_field_by_name(traits::generalization::parent());
     return r;
 }
 
 std::string parsing_expander::
-make_parent(const field_definitions& fds, const annotations::annotation& o) const {
+make_parent(const type_group& tg, const annotations::annotation& o) const {
     const annotations::field_selector fs(o);
-    if (fs.has_field(fds.parent))
-        return fs.get_text_content(fds.parent);
+    if (fs.has_field(tg.parent))
+        return fs.get_text_content(tg.parent);
 
     return std::string();
 }
@@ -105,14 +105,14 @@ parse_attributes(const location& model_location,
 }
 
 void parsing_expander::
-parse_parent(const field_definitions& fds, const location& model_location,
+parse_parent(const type_group& tg, const location& model_location,
     const std::unordered_set<std::string>& top_level_modules, object& o) const {
 
     /*
      * Obtain the parent name from the meta-data. If there is no
      * parent name there is nothing to do.
      */
-    const auto parent(make_parent(fds, o.annotation()));
+    const auto parent(make_parent(tg, o.annotation()));
     if (parent.empty())
         return;
 
@@ -136,15 +136,15 @@ parse_parent(const field_definitions& fds, const location& model_location,
 }
 
 void parsing_expander::
-expand(const annotations::repository& drp, intermediate_model& m) const {
-    const auto fds(make_field_definitions(drp));
+expand(const annotations::repository& arp, intermediate_model& m) const {
+    const auto tg(make_type_group(arp));
     const auto tlmn(obtain_top_level_modules(m));
     const auto ml(m.name().location());
 
     for (auto& pair : m.objects()) {
         auto& o(pair.second);
         parse_attributes(ml, tlmn, o.local_attributes());
-        parse_parent(fds, ml, tlmn, o);
+        parse_parent(tg, ml, tlmn, o);
     }
 
     for (auto& pair : m.concepts()) {

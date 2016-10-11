@@ -53,19 +53,19 @@ namespace cpp {
 namespace formattables {
 
 locator::locator(const boost::filesystem::path& project_directory_path,
-    const annotations::repository& drp, const formatters::container& fc,
+    const annotations::repository& arp, const formatters::container& fc,
     const annotations::annotation& root, const yarn::name& model_name,
     const std::unordered_set<std::string>& module_ids)
     : model_name_(model_name),
-      configuration_(make_configuration(drp, fc, root)),
+      configuration_(make_configuration(arp, fc, root)),
       module_ids_(module_ids),
       project_path_(make_project_path(project_directory_path, model_name)) {}
 
-locator::field_definitions locator::make_field_definitions(
-    const annotations::repository& drp, const formatters::container& fc) const {
+locator::type_group locator::make_type_group(
+    const annotations::repository& arp, const formatters::container& fc) const {
 
-    field_definitions r;
-    const annotations::repository_selector s(drp);
+    type_group r;
+    const annotations::repository_selector s(arp);
 
     std::unordered_set<std::string> processed_facets;
     for (const auto ptr : fc.file_formatters()) {
@@ -75,27 +75,27 @@ locator::field_definitions locator::make_field_definitions(
         const auto fmtn(oh.formatter_name());
         const auto fctn(oh.facet_name());
         const auto pf(traits::postfix());
-        formatter_field_definitions fmt_fds;
+        formatter_type_group fmt_tg;
         const auto pfix(traits::postfix());
-        fmt_fds.formatter_postfix = s.select_field_by_name(fmtn, pfix);
+        fmt_tg.formatter_postfix = s.select_field_by_name(fmtn, pfix);
 
         auto dir(s.try_select_field_by_name(fctn, traits::directory()));
         if (dir)
-            fmt_fds.facet_directory = *dir;
+            fmt_tg.facet_directory = *dir;
 
         auto postfix(s.try_select_field_by_name(fctn, traits::postfix()));
         if (postfix)
-            fmt_fds.facet_postfix = *postfix;
+            fmt_tg.facet_postfix = *postfix;
 
-        r.formatters_field_definitions[fmtn] = fmt_fds;
+        r.formatters_type_group[fmtn] = fmt_tg;
 
         const bool done(processed_facets.find(fctn) != processed_facets.end());
-        if (fmt_fds.facet_directory && !done) {
+        if (fmt_tg.facet_directory && !done) {
             processed_facets.insert(fctn);
-            facet_field_definitions fct_fds;
-            fct_fds.directory = *fmt_fds.facet_directory;
-            fct_fds.postfix = *fmt_fds.facet_postfix;
-            r.facets_field_definitions[fctn] = fct_fds;
+            facet_type_group fct_tg;
+            fct_tg.directory = *fmt_tg.facet_directory;
+            fct_tg.postfix = *fmt_tg.facet_postfix;
+            r.facets_type_group[fctn] = fct_tg;
         }
 
         const auto& idn(traits::cpp::include_directory_name());
@@ -118,65 +118,65 @@ locator::field_definitions locator::make_field_definitions(
 }
 
 locator_configuration locator::make_configuration(
-    const field_definitions& fds, const annotations::annotation& o) const {
+    const type_group& tg, const annotations::annotation& o) const {
 
     locator_configuration r;
     const annotations::field_selector fs(o);
 
-    for (const auto& pair : fds.facets_field_definitions) {
+    for (const auto& pair : tg.facets_type_group) {
         const auto fctn(pair.first);
-        const auto& fct_fds(pair.second);
+        const auto& fct_tg(pair.second);
         locator_facet_configuration fct_cfg;
-        fct_cfg.directory(fs.get_text_content_or_default(fct_fds.directory));
-        fct_cfg.postfix(fs.get_text_content_or_default(fct_fds.postfix));
+        fct_cfg.directory(fs.get_text_content_or_default(fct_tg.directory));
+        fct_cfg.postfix(fs.get_text_content_or_default(fct_tg.postfix));
         r.facet_configurations()[fctn] = fct_cfg;
     }
 
-    for (const auto& pair : fds.formatters_field_definitions) {
+    for (const auto& pair : tg.formatters_type_group) {
         const auto fmtn(pair.first);
-        const auto fmt_fds(pair.second);
+        const auto fmt_tg(pair.second);
         locator_formatter_configuration fmt_cfg;
 
-        if (fmt_fds.facet_directory) {
-            const auto fd(*fmt_fds.facet_directory);
+        if (fmt_tg.facet_directory) {
+            const auto fd(*fmt_tg.facet_directory);
             fmt_cfg.facet_directory(fs.get_text_content_or_default(fd));
         }
 
-        if (fmt_fds.facet_postfix) {
-            const auto fd(*fmt_fds.facet_postfix);
+        if (fmt_tg.facet_postfix) {
+            const auto fd(*fmt_tg.facet_postfix);
             fmt_cfg.facet_postfix(fs.get_text_content_or_default(fd));
         }
 
-        const auto pfix(fmt_fds.formatter_postfix);
+        const auto pfix(fmt_tg.formatter_postfix);
         fmt_cfg.formatter_postfix(fs.get_text_content_or_default(pfix));
 
         r.formatter_configurations()[fmtn] = fmt_cfg;
     }
 
-    const auto& hfe(fds.header_file_extension);
+    const auto& hfe(tg.header_file_extension);
     r.header_file_extension(fs.get_text_content_or_default(hfe));
 
-    const auto& ife(fds.implementation_file_extension);
+    const auto& ife(tg.implementation_file_extension);
     r.implementation_file_extension(fs.get_text_content_or_default(ife));
 
-    const auto& idn(fds.include_directory_name);
+    const auto& idn(tg.include_directory_name);
     r.include_directory_name(fs.get_text_content_or_default(idn));
 
-    const auto& sdn(fds.source_directory_name);
+    const auto& sdn(tg.source_directory_name);
     r.source_directory_name(fs.get_text_content_or_default(sdn));
 
-    const auto& dfd(fds.disable_facet_directories);
+    const auto& dfd(tg.disable_facet_directories);
     r.disable_facet_directories(fs.get_boolean_content_or_default(dfd));
 
     return r;
 }
 
 locator_configuration locator::make_configuration(
-    const annotations::repository& drp, const formatters::container& fc,
+    const annotations::repository& arp, const formatters::container& fc,
     const annotations::annotation& o) {
 
-    const auto fds(make_field_definitions (drp, fc));
-    const auto r(make_configuration(fds, o));
+    const auto tg(make_type_group (arp, fc));
+    const auto r(make_configuration(tg, o));
     return r;
 }
 

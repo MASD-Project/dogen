@@ -24,9 +24,9 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/io/list_io.hpp"
-#include "dogen/annotations/test/mock_field_definition_factory.hpp"
+#include "dogen/annotations/test/mock_type_factory.hpp"
 #include "dogen/annotations/test/mock_repository_factory.hpp"
-#include "dogen/annotations/types/field_definition.hpp"
+#include "dogen/annotations/types/type.hpp"
 #include "dogen/annotations/types/field_selector.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
@@ -155,12 +155,12 @@ const std::string internal_modules_model(R"({
 
 dogen::annotations::repository create_repository() {
     using namespace dogen::annotations;
-    test::mock_field_definition_factory f;
+    test::mock_type_factory f;
 
     std::list<type> fds;
-    fds.push_back(f.make_field_definition(model_key));
-    fds.push_back(f.make_field_definition(some_key));
-    fds.push_back(f.make_field_definition(type_key, value_types::boolean));
+    fds.push_back(f.make_type(model_key));
+    fds.push_back(f.make_type(some_key));
+    fds.push_back(f.make_type(type_key, value_types::boolean));
 
     test::mock_repository_factory rf;
     return rf.make(fds);

@@ -27,6 +27,7 @@
 
 #include "dogen/annotations/io/name_io.hpp"
 #include "dogen/annotations/io/text_io.hpp"
+#include "dogen/annotations/io/type_io.hpp"
 #include "dogen/annotations/io/value_io.hpp"
 #include "dogen/annotations/io/number_io.hpp"
 #include "dogen/annotations/io/boolean_io.hpp"
@@ -39,7 +40,6 @@
 #include "dogen/annotations/io/scribble_group_io.hpp"
 #include "dogen/annotations/io/text_collection_io.hpp"
 #include "dogen/annotations/io/annotation_group_io.hpp"
-#include "dogen/annotations/io/field_definition_io.hpp"
 #include "dogen/annotations/io/profile_repository_io.hpp"
 #include "dogen/annotations/io/ownership_hierarchy_io.hpp"
 #include "dogen/annotations/io/field_definition_types_io.hpp"

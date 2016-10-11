@@ -19,10 +19,10 @@
  *
  */
 #include "dogen/annotations/hash/name_hash.hpp"
+#include "dogen/annotations/hash/type_hash.hpp"
 #include "dogen/annotations/hash/value_hash.hpp"
 #include "dogen/annotations/hash/scope_types_hash.hpp"
 #include "dogen/annotations/hash/value_types_hash.hpp"
-#include "dogen/annotations/hash/field_definition_hash.hpp"
 #include "dogen/annotations/hash/ownership_hierarchy_hash.hpp"
 #include "dogen/annotations/hash/field_definition_types_hash.hpp"
 
@@ -45,7 +45,7 @@ inline std::size_t hash_boost_shared_ptr_dogen_annotations_value(const boost::sh
 namespace dogen {
 namespace annotations {
 
-std::size_t field_definition_hasher::hash(const type& v) {
+std::size_t type_hasher::hash(const type& v) {
     std::size_t seed(0);
 
     combine(seed, v.name());

@@ -35,7 +35,7 @@
 #include "dogen/annotations/types/value_types.hpp"
 #include "dogen/annotations/types/field_definition_types.hpp"
 #include "dogen/annotations/types/ownership_hierarchy.hpp"
-#include "dogen/annotations/types/field_definition.hpp"
+#include "dogen/annotations/types/type.hpp"
 
 namespace dogen {
 namespace annotations {

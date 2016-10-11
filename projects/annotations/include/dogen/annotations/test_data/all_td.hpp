@@ -27,6 +27,7 @@
 
 #include "dogen/annotations/test_data/name_td.hpp"
 #include "dogen/annotations/test_data/text_td.hpp"
+#include "dogen/annotations/test_data/type_td.hpp"
 #include "dogen/annotations/test_data/value_td.hpp"
 #include "dogen/annotations/test_data/number_td.hpp"
 #include "dogen/annotations/test_data/boolean_td.hpp"
@@ -39,7 +40,6 @@
 #include "dogen/annotations/test_data/scribble_group_td.hpp"
 #include "dogen/annotations/test_data/text_collection_td.hpp"
 #include "dogen/annotations/test_data/annotation_group_td.hpp"
-#include "dogen/annotations/test_data/field_definition_td.hpp"
 #include "dogen/annotations/test_data/profile_repository_td.hpp"
 #include "dogen/annotations/test_data/ownership_hierarchy_td.hpp"
 #include "dogen/annotations/test_data/field_definition_types_td.hpp"

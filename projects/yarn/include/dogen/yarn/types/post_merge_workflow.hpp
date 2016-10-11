@@ -77,7 +77,7 @@ private:
     /**
      * @brief Expand all generalization relationships.
      */
-    void expand_generalizations(const annotations::repository& drp,
+    void expand_generalizations(const annotations::repository& arp,
         intermediate_model& im) const;
 
     /**
@@ -111,7 +111,7 @@ public:
     /**
      * @brief Executes the post-merge workflow.
      */
-    void execute(const annotations::repository& drp,
+    void execute(const annotations::repository& arp,
         const injector_registrar& rg, intermediate_model& im) const;
 };
 

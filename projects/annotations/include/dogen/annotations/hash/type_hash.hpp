@@ -18,20 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_HASH_FIELD_DEFINITION_HASH_HPP
-#define DOGEN_ANNOTATIONS_HASH_FIELD_DEFINITION_HASH_HPP
+#ifndef DOGEN_ANNOTATIONS_HASH_TYPE_HASH_HPP
+#define DOGEN_ANNOTATIONS_HASH_TYPE_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <functional>
-#include "dogen/annotations/types/field_definition.hpp"
+#include "dogen/annotations/types/type.hpp"
 
 namespace dogen {
 namespace annotations {
 
-struct field_definition_hasher {
+struct type_hasher {
 public:
     static std::size_t hash(const type& v);
 };
@@ -44,7 +44,7 @@ template<>
 struct hash<dogen::annotations::type> {
 public:
     size_t operator()(const dogen::annotations::type& v) const {
-        return dogen::annotations::field_definition_hasher::hash(v);
+        return dogen::annotations::type_hasher::hash(v);
     }
 };
 

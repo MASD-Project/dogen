@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_FIELD_DEFINITION_HPP
-#define DOGEN_ANNOTATIONS_TYPES_FIELD_DEFINITION_HPP
+#ifndef DOGEN_ANNOTATIONS_TYPES_TYPE_HPP
+#define DOGEN_ANNOTATIONS_TYPES_TYPE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -32,8 +32,8 @@
 #include "dogen/annotations/types/scope_types.hpp"
 #include "dogen/annotations/types/value_types.hpp"
 #include "dogen/annotations/types/ownership_hierarchy.hpp"
+#include "dogen/annotations/serialization/type_fwd_ser.hpp"
 #include "dogen/annotations/types/field_definition_types.hpp"
-#include "dogen/annotations/serialization/field_definition_fwd_ser.hpp"
 
 namespace dogen {
 namespace annotations {

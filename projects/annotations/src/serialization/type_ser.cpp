@@ -29,10 +29,10 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/annotations/serialization/name_ser.hpp"
+#include "dogen/annotations/serialization/type_ser.hpp"
 #include "dogen/annotations/serialization/value_ser.hpp"
 #include "dogen/annotations/serialization/scope_types_ser.hpp"
 #include "dogen/annotations/serialization/value_types_ser.hpp"
-#include "dogen/annotations/serialization/field_definition_ser.hpp"
 #include "dogen/annotations/serialization/ownership_hierarchy_ser.hpp"
 #include "dogen/annotations/serialization/field_definition_types_ser.hpp"
 

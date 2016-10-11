@@ -18,15 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_SERIALIZATION_FIELD_DEFINITION_SER_HPP
-#define DOGEN_ANNOTATIONS_SERIALIZATION_FIELD_DEFINITION_SER_HPP
+#ifndef DOGEN_ANNOTATIONS_SERIALIZATION_TYPE_SER_HPP
+#define DOGEN_ANNOTATIONS_SERIALIZATION_TYPE_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <boost/serialization/split_free.hpp>
-#include "dogen/annotations/types/field_definition.hpp"
+#include "dogen/annotations/types/type.hpp"
 
 BOOST_SERIALIZATION_SPLIT_FREE(dogen::annotations::type)
 namespace boost {

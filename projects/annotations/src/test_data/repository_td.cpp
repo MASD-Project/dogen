@@ -19,20 +19,20 @@
  *
  */
 #include <sstream>
+#include "dogen/annotations/test_data/type_td.hpp"
 #include "dogen/annotations/test_data/repository_td.hpp"
-#include "dogen/annotations/test_data/field_definition_td.hpp"
 
 namespace {
 
 dogen::annotations::type
-create_dogen_annotations_field_definition(const unsigned int position) {
-    return dogen::annotations::field_definition_generator::create(position);
+create_dogen_annotations_type(const unsigned int position) {
+    return dogen::annotations::type_generator::create(position);
 }
 
-std::list<dogen::annotations::type> create_std_list_dogen_annotations_field_definition(unsigned int position) {
+std::list<dogen::annotations::type> create_std_list_dogen_annotations_type(unsigned int position) {
     std::list<dogen::annotations::type> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_dogen_annotations_field_definition(position + i));
+        r.push_back(create_dogen_annotations_type(position + i));
     }
     return r;
 }
@@ -43,18 +43,18 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-std::unordered_map<std::string, dogen::annotations::type> create_std_unordered_map_std_string_dogen_annotations_field_definition(unsigned int position) {
+std::unordered_map<std::string, dogen::annotations::type> create_std_unordered_map_std_string_dogen_annotations_type(unsigned int position) {
     std::unordered_map<std::string, dogen::annotations::type> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_dogen_annotations_field_definition(position + i)));
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_annotations_type(position + i)));
     }
     return r;
 }
 
-std::unordered_map<std::string, std::list<dogen::annotations::type> > create_std_unordered_map_std_string_std_list_dogen_annotations_field_definition(unsigned int position) {
+std::unordered_map<std::string, std::list<dogen::annotations::type> > create_std_unordered_map_std_string_std_list_dogen_annotations_type(unsigned int position) {
     std::unordered_map<std::string, std::list<dogen::annotations::type> > r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_std_list_dogen_annotations_field_definition(position + i)));
+        r.insert(std::make_pair(create_std_string(position + i), create_std_list_dogen_annotations_type(position + i)));
     }
     return r;
 }
@@ -68,11 +68,11 @@ repository_generator::repository_generator() : position_(0) { }
 
 void repository_generator::
 populate(const unsigned int position, result_type& v) {
-    v.all_field_definitions(create_std_list_dogen_annotations_field_definition(position + 0));
-    v.field_definitions_by_name(create_std_unordered_map_std_string_dogen_annotations_field_definition(position + 1));
-    v.field_definitions_by_facet_name(create_std_unordered_map_std_string_std_list_dogen_annotations_field_definition(position + 2));
-    v.field_definitions_by_formatter_name(create_std_unordered_map_std_string_std_list_dogen_annotations_field_definition(position + 3));
-    v.field_definitions_by_model_name(create_std_unordered_map_std_string_std_list_dogen_annotations_field_definition(position + 4));
+    v.all_field_definitions(create_std_list_dogen_annotations_type(position + 0));
+    v.field_definitions_by_name(create_std_unordered_map_std_string_dogen_annotations_type(position + 1));
+    v.field_definitions_by_facet_name(create_std_unordered_map_std_string_std_list_dogen_annotations_type(position + 2));
+    v.field_definitions_by_formatter_name(create_std_unordered_map_std_string_std_list_dogen_annotations_type(position + 3));
+    v.field_definitions_by_model_name(create_std_unordered_map_std_string_std_list_dogen_annotations_type(position + 4));
 }
 
 repository_generator::result_type

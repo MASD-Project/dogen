@@ -29,7 +29,7 @@
 #include <forward_list>
 #include <unordered_set>
 #include <unordered_map>
-#include "dogen/annotations/types/field_definition.hpp"
+#include "dogen/annotations/types/type.hpp"
 #include "dogen/annotations/types/ownership_hierarchy.hpp"
 
 namespace dogen {

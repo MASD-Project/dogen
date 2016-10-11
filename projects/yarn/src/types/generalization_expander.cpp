@@ -47,23 +47,22 @@ inline bool operator<(const name& lhs, const name& rhs) {
     return lhs.id() < rhs.id();
 }
 
-generalization_expander::field_definitions
-generalization_expander::make_field_definitions(
-    const annotations::repository& drp) const {
+generalization_expander::type_group generalization_expander::make_type_group(
+    const annotations::repository& arp) const {
 
-    field_definitions r;
-    const annotations::repository_selector rs(drp);
+    type_group r;
+    const annotations::repository_selector rs(arp);
     r.is_final = rs.select_field_by_name(traits::generalization::is_final());
     return r;
 }
 
 boost::optional<bool>
-generalization_expander::make_is_final(const field_definitions& fds,
-    const annotations::annotation& o) const {
-    const annotations::field_selector fs(o);
+generalization_expander::make_is_final(const type_group& tg,
+    const annotations::annotation& a) const {
+    const annotations::field_selector fs(a);
 
-    if (fs.has_field(fds.is_final))
-        return fs.get_boolean_content(fds.is_final);
+    if (fs.has_field(tg.is_final))
+        return fs.get_boolean_content(tg.is_final);
 
     return boost::optional<bool>();
 }
@@ -99,7 +98,7 @@ update_and_collect_parent_ids(intermediate_model& im) const {
 }
 
 void generalization_expander::populate_properties_up_the_generalization_tree(
-    const field_definitions& fds, const yarn::name& leaf,
+    const type_group& tg, const yarn::name& leaf,
     intermediate_model& im, yarn::object& o) const {
 
     /*
@@ -134,7 +133,7 @@ void generalization_expander::populate_properties_up_the_generalization_tree(
     }
 
     auto& parent(j->second);
-    populate_properties_up_the_generalization_tree(fds, leaf, im, parent);
+    populate_properties_up_the_generalization_tree(tg, leaf, im, parent);
 
     if (!parent.parent()) {
         /*
@@ -153,7 +152,7 @@ void generalization_expander::populate_properties_up_the_generalization_tree(
 }
 
 void generalization_expander::
-populate_generalizable_properties(const field_definitions& fds,
+populate_generalizable_properties(const type_group& tg,
     const std::unordered_set<std::string>& parent_ids,
     intermediate_model& im) const {
 
@@ -177,7 +176,7 @@ populate_generalizable_properties(const field_definitions& fds,
          /*
           * Handle the case where the user decided to override final.
           */
-         const auto is_final(make_is_final(fds, o.annotation()));
+         const auto is_final(make_is_final(tg, o.annotation()));
          if (is_final) {
              if (*is_final && o.is_parent()) {
                  BOOST_LOG_SEV(lg, error) << incompatible_is_final << id;
@@ -207,7 +206,7 @@ populate_generalizable_properties(const field_definitions& fds,
          if (!o.is_leaf())
              continue;
 
-         populate_properties_up_the_generalization_tree(fds, o.name(), im, o);
+         populate_properties_up_the_generalization_tree(tg, o.name(), im, o);
     }
 }
 
@@ -219,11 +218,11 @@ void generalization_expander::sort_leaves(intermediate_model& im) const {
 }
 
 void generalization_expander::
-expand(const annotations::repository& drp, intermediate_model& im) const {
+expand(const annotations::repository& arp, intermediate_model& im) const {
     const auto parent_ids(update_and_collect_parent_ids(im));
 
-    const auto fds(make_field_definitions(drp));
-    populate_generalizable_properties(fds, parent_ids, im);
+    const auto tg(make_type_group(arp));
+    populate_generalizable_properties(tg, parent_ids, im);
     sort_leaves(im);
 }
 

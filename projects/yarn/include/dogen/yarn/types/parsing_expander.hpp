@@ -27,7 +27,7 @@
 
 #include <string>
 #include "dogen/annotations/types/repository.hpp"
-#include "dogen/annotations/types/field_definition.hpp"
+#include "dogen/annotations/types/type.hpp"
 #include "dogen/yarn/types/name_tree.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 
@@ -45,15 +45,14 @@ namespace yarn {
  */
 class parsing_expander {
 private:
-    struct field_definitions {
+    struct type_group {
         annotations::type parent;
     };
 
-    field_definitions make_field_definitions(
-        const annotations::repository& drp) const;
+    type_group make_type_group(const annotations::repository& arp) const;
 
-    std::string make_parent(const field_definitions& fds,
-        const annotations::annotation& o) const;
+    std::string make_parent(const type_group& tg,
+        const annotations::annotation& a) const;
 
 private:
     /**
@@ -74,8 +73,7 @@ private:
     /**
      * @brief Parses parent name in the supplied object.
      */
-    void parse_parent(const field_definitions& fds,
-        const location& model_location,
+    void parse_parent(const type_group& tg, const location& model_location,
         const std::unordered_set<std::string>& top_level_modules,
         object& o) const;
 
@@ -83,7 +81,7 @@ public:
     /**
      * Execute the property expansion against the model.
      */
-    void expand(const annotations::repository& drp, intermediate_model& m) const;
+    void expand(const annotations::repository& arp, intermediate_model& m) const;
 };
 
 } }

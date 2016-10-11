@@ -18,14 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_SERIALIZATION_FIELD_DEFINITION_FWD_SER_HPP
-#define DOGEN_ANNOTATIONS_SERIALIZATION_FIELD_DEFINITION_FWD_SER_HPP
+#ifndef DOGEN_ANNOTATIONS_SERIALIZATION_TYPE_FWD_SER_HPP
+#define DOGEN_ANNOTATIONS_SERIALIZATION_TYPE_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/annotations/types/field_definition_fwd.hpp"
+#include "dogen/annotations/types/type_fwd.hpp"
 
 namespace boost {
 namespace serialization {

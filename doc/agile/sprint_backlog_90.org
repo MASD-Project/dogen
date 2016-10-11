@@ -14,23 +14,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-11 Tue 22:37]
+#+CAPTION: Clock summary at [2016-10-11 Tue 23:47]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *18:01* |       |       | 100.0 |
+| *Total time*                                                                | *19:10* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 18:01   |       |       | 100.0 |
-| Active                                                                      |         | 18:01 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  0:22 |   2.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  0:19 |   1.8 |
-| COMPLETED Improve bintray support                                           |         |       |  0:26 |   2.4 |
-| COMPLETED Refactor opaque infrastructure                                    |         |       |  1:17 |   7.1 |
-| COMPLETED Remove any remnants of annotations from quilt                     |         |       |  0:05 |   0.5 |
-| COMPLETED Solve the issue of too many "configurations"                      |         |       |  4:01 |  22.3 |
-| COMPLETED Merge decoration configuration and annotations factories          |         |       |  0:18 |   1.7 |
-| COMPLETED Move annotation factories into expander in yarn                   |         |       |  1:11 |   6.6 |
-| STARTED Clean up terminology in dynamic                                     |         |       | 10:02 |  55.7 |
+| Stories                                                                     | 19:10   |       |       | 100.0 |
+| Active                                                                      |         | 19:10 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  0:22 |   1.9 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  0:19 |   1.7 |
+| COMPLETED Improve bintray support                                           |         |       |  0:26 |   2.3 |
+| COMPLETED Refactor opaque infrastructure                                    |         |       |  1:17 |   6.7 |
+| COMPLETED Remove any remnants of annotations from quilt                     |         |       |  0:05 |   0.4 |
+| COMPLETED Solve the issue of too many "configurations"                      |         |       |  4:01 |  21.0 |
+| COMPLETED Merge decoration configuration and annotations factories          |         |       |  0:18 |   1.6 |
+| COMPLETED Move annotation factories into expander in yarn                   |         |       |  1:11 |   6.2 |
+| STARTED Clean up terminology in dynamic                                     |         |       | 11:11 |  58.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -158,6 +158,7 @@ There were a couple of instances left out in the configuration
 refactor, in yarn.
 
 *** STARTED Clean up terminology in dynamic                           :story:
+    CLOCK: [2016-10-11 Tue 22:38]--[2016-10-11 Tue 23:47] =>  1:09
     CLOCK: [2016-10-11 Tue 22:29]--[2016-10-11 Tue 22:37] =>  0:08
     CLOCK: [2016-10-11 Tue 20:44]--[2016-10-11 Tue 22:28] =>  1:44
     CLOCK: [2016-10-11 Tue 19:45]--[2016-10-11 Tue 20:43] =>  0:58

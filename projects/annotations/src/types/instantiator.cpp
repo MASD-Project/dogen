@@ -27,7 +27,7 @@
 #include "dogen/utility/io/unordered_set_io.hpp"
 #include "dogen/annotations/io/field_definition_types_io.hpp"
 #include "dogen/annotations/io/ownership_hierarchy_io.hpp"
-#include "dogen/annotations/io/field_definition_io.hpp"
+#include "dogen/annotations/io/type_io.hpp"
 #include "dogen/annotations/types/field_definition_types.hpp"
 #include "dogen/annotations/types/instantiation_error.hpp"
 #include "dogen/annotations/types/instantiator.hpp"

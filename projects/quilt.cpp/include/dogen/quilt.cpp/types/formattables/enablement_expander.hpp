@@ -30,7 +30,7 @@
 #include <boost/optional.hpp>
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/repository.hpp"
-#include "dogen/annotations/types/field_definition.hpp"
+#include "dogen/annotations/types/type.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/formattables/local_enablement_configuration.hpp"
 #include "dogen/quilt.cpp/types/formattables/global_enablement_configuration.hpp"
@@ -45,20 +45,20 @@ namespace formattables {
 
 class enablement_expander {
 private:
-    struct global_field_definitions {
+    struct global_type_group {
         annotations::type model_enabled;
         annotations::type facet_enabled;
         annotations::type formatter_enabled;
     };
 
     friend std::ostream& operator<<(std::ostream& s,
-        const global_field_definitions& v);
+        const global_type_group& v);
 
-    typedef std::unordered_map<std::string, global_field_definitions>
-    global_field_definitions_type;
+    typedef std::unordered_map<std::string, global_type_group>
+    global_type_group_type;
 
-    global_field_definitions_type make_global_field_definitions(
-        const annotations::repository& drp,
+    global_type_group_type make_global_type_group(
+        const annotations::repository& arp,
         const formatters::container& fc) const;
 
 private:
@@ -66,7 +66,7 @@ private:
     global_enablement_configurations_type;
 
     global_enablement_configurations_type obtain_global_configurations(
-        const global_field_definitions_type& gfds,
+        const global_type_group_type& gtg,
         const annotations::annotation& root, const formatters::container& fc,
         const profile_group& gpg) const;
 
@@ -74,25 +74,25 @@ private:
         const global_enablement_configurations_type& gcs, model& fm) const;
 
 private:
-    struct local_field_definitions {
+    struct local_type_group {
         annotations::type facet_enabled;
         annotations::type formatter_enabled;
         annotations::type facet_supported;
     };
 
     friend std::ostream& operator<<(std::ostream& s,
-        const local_field_definitions& v);
+        const local_type_group& v);
 
-    typedef std::unordered_map<std::string, local_field_definitions>
-    local_field_definitions_type;
+    typedef std::unordered_map<std::string, local_type_group>
+    local_type_group_type;
 
-    local_field_definitions_type
-    make_local_field_definitions(const annotations::repository& rp,
+    local_type_group_type
+    make_local_type_group(const annotations::repository& rp,
         const formatters::container& fc) const;
 
-    std::unordered_map<std::type_index, local_field_definitions_type>
-    bucket_local_field_definitions_by_type_index(
-        const local_field_definitions_type& lfds,
+    std::unordered_map<std::type_index, local_type_group_type>
+    bucket_local_type_group_by_type_index(
+        const local_type_group_type& ltg,
         const formatters::container& fc) const;
 
 private:
@@ -100,7 +100,7 @@ private:
     local_enablement_configurations_type;
 
     local_enablement_configurations_type obtain_local_configurations(
-        const local_field_definitions_type& lfds,
+        const local_type_group_type& ltg,
         const annotations::annotation& o, const formatters::container& fc,
         const boost::optional<profile_group>& lpg) const;
 
@@ -115,7 +115,7 @@ private:
         formattable& fbl) const;
 
 public:
-    void expand(const annotations::repository& drp,
+    void expand(const annotations::repository& arp,
         const annotations::annotation& root, const formatters::container& fc,
         model& fm) const;
 };

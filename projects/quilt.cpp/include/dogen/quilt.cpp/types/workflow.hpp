@@ -69,7 +69,7 @@ private:
      */
     dogen::formatters::decoration_properties_factory
     create_decoration_properties_factory(
-            const annotations::repository& drp,
+            const annotations::repository& arp,
             const dogen::formatters::repository& frp,
             const annotations::annotation& root) const;
 
@@ -79,7 +79,7 @@ private:
     formattables::model create_formattables_model(
         const std::forward_list<boost::filesystem::path>& data_directories,
         const options::cpp_options& opts,
-        const annotations::repository& drp,
+        const annotations::repository& arp,
         const annotations::annotation& root,
         const dogen::formatters::decoration_properties_factory& dpf,
         const formatters::container& fc, const yarn::model& m) const;
@@ -102,7 +102,7 @@ public:
 
     std::forward_list<dogen::formatters::file> generate(
         const options::knitting_options& ko,
-        const annotations::repository& drp,
+        const annotations::repository& arp,
         const yarn::model& m) const override;
 };
 

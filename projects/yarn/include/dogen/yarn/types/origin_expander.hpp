@@ -27,33 +27,29 @@
 
 #include "dogen/annotations/types/repository.hpp"
 #include "dogen/annotations/types/field_selector.hpp"
-#include "dogen/annotations/types/field_definition.hpp"
+#include "dogen/annotations/types/type.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
 namespace yarn {
 
 class origin_expander {
-public:
-    explicit origin_expander(const annotations::repository& arp);
-
 private:
-    struct field_definitions {
+    struct type_group {
         annotations::type is_proxy_model;
     };
 
-    field_definitions make_field_definitions(
-        const annotations::repository& arp) const;
+    type_group make_type_group(const annotations::repository& arp) const;
 
-    bool is_proxy_model(const intermediate_model& im) const;
+    bool is_proxy_model(const type_group& tg,
+        const intermediate_model& im) const;
+
     origin_types compute_origin_types(const intermediate_model& im,
         const bool is_proxy_model) const;
 
 public:
-    void expand(intermediate_model& im) const;
-
-private:
-    const field_definitions field_definitions_;
+    void expand(const annotations::repository& arp,
+        intermediate_model& im) const;
 };
 
 } }

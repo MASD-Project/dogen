@@ -27,7 +27,7 @@
 
 #include <string>
 #include <boost/optional.hpp>
-#include "dogen/annotations/types/field_definition.hpp"
+#include "dogen/annotations/types/type.hpp"
 #include "dogen/annotations/types/repository.hpp"
 
 namespace dogen {

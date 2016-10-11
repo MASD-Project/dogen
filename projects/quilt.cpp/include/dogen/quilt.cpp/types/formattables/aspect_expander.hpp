@@ -30,7 +30,7 @@
 #include <unordered_map>
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/repository.hpp"
-#include "dogen/annotations/types/field_definition.hpp"
+#include "dogen/annotations/types/type.hpp"
 #include "dogen/yarn/types/name_tree.hpp"
 #include "dogen/yarn/types/attribute.hpp"
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
@@ -44,27 +44,25 @@ namespace formattables {
 
 class aspect_expander {
 private:
-    struct field_definitions {
+    struct type_group {
         annotations::type requires_manual_default_constructor;
         annotations::type requires_manual_move_constructor;
         annotations::type requires_stream_manipulators;
     };
 
-    friend std::ostream& operator<<(std::ostream& s,
-        const field_definitions& v);
+    friend std::ostream& operator<<(std::ostream& s, const type_group& v);
 
-    field_definitions
-    make_field_definitions(const annotations::repository& drp) const;
+    type_group make_type_group(const annotations::repository& arp) const;
 
     boost::optional<aspect_properties> make_aspect_properties(
-        const field_definitions& fds, const annotations::annotation& a) const;
+        const type_group& tg, const annotations::annotation& a) const;
 
 private:
     typedef std::unordered_map<std::string, aspect_properties>
     aspect_properties_type;
 
     aspect_properties_type
-    obtain_aspect_properties(const annotations::repository& drp,
+    obtain_aspect_properties(const annotations::repository& arp,
         const std::unordered_map<std::string, formattable>& formattables) const;
 
 private:
@@ -80,7 +78,7 @@ private:
         std::unordered_map<std::string, formattable>& formattables) const;
 
 public:
-    void expand(const annotations::repository& drp, model& fm) const;
+    void expand(const annotations::repository& arp, model& fm) const;
 };
 
 } } } }

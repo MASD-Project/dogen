@@ -28,7 +28,7 @@
 #include <list>
 #include <forward_list>
 #include <boost/filesystem/path.hpp>
-#include "dogen/annotations/types/field_definition.hpp"
+#include "dogen/annotations/types/type.hpp"
 
 namespace dogen {
 namespace annotations {

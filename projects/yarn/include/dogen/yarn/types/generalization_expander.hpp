@@ -27,7 +27,7 @@
 
 #include <unordered_set>
 #include "dogen/annotations/types/repository.hpp"
-#include "dogen/annotations/types/field_definition.hpp"
+#include "dogen/annotations/types/type.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/name.hpp"
@@ -37,32 +37,32 @@ namespace yarn {
 
 class generalization_expander {
 private:
-    struct field_definitions {
+    struct type_group {
         annotations::type is_final;
     };
 
-    field_definitions
-    make_field_definitions(const annotations::repository& drp) const;
+    type_group make_type_group(const annotations::repository& arp) const;
 
-    boost::optional<bool> make_is_final(const field_definitions& fds,
-        const annotations::annotation& o) const;
+    boost::optional<bool> make_is_final(const type_group& tg,
+        const annotations::annotation& a) const;
 
 private:
     std::unordered_set<std::string>
     update_and_collect_parent_ids(intermediate_model& im) const;
 
     void populate_properties_up_the_generalization_tree(
-        const field_definitions& fds, const yarn::name& leaf,
+        const type_group& tg, const yarn::name& leaf,
         intermediate_model& im, yarn::object& o) const;
 
-    void populate_generalizable_properties(const field_definitions& fds,
+    void populate_generalizable_properties(const type_group& tg,
         const std::unordered_set<std::string>& parent_ids,
         intermediate_model& im) const;
 
     void sort_leaves(intermediate_model& im) const;
 
 public:
-    void expand(const annotations::repository& rp, intermediate_model& im) const;
+    void
+    expand(const annotations::repository& arp, intermediate_model& im) const;
 };
 
 } }

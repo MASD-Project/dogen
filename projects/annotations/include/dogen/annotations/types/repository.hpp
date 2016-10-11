@@ -29,7 +29,7 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen/annotations/types/field_definition.hpp"
+#include "dogen/annotations/types/type.hpp"
 #include "dogen/annotations/serialization/repository_fwd_ser.hpp"
 
 namespace dogen {

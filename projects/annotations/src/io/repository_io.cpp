@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
+#include "dogen/annotations/io/type_io.hpp"
 #include "dogen/annotations/io/repository_io.hpp"
-#include "dogen/annotations/io/field_definition_io.hpp"
 
 namespace std {
 

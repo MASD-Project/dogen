@@ -27,6 +27,7 @@
 
 #include "dogen/annotations/types/name.hpp"
 #include "dogen/annotations/types/text.hpp"
+#include "dogen/annotations/types/type.hpp"
 #include "dogen/annotations/types/value.hpp"
 #include "dogen/annotations/types/merger.hpp"
 #include "dogen/annotations/types/number.hpp"
@@ -50,7 +51,6 @@
 #include "dogen/annotations/types/selection_error.hpp"
 #include "dogen/annotations/types/text_collection.hpp"
 #include "dogen/annotations/types/annotation_group.hpp"
-#include "dogen/annotations/types/field_definition.hpp"
 #include "dogen/annotations/types/profile_hydrator.hpp"
 #include "dogen/annotations/types/hydration_workflow.hpp"
 #include "dogen/annotations/types/profile_repository.hpp"

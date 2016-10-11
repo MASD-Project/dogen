@@ -77,17 +77,17 @@ make_model(const formatters::container& fc, const yarn::model& m) const {
 
 void workflow::expand_model(
     const std::forward_list<boost::filesystem::path>& data_directories,
-    const annotations::repository& drp, const annotations::annotation& root,
+    const annotations::repository& arp, const annotations::annotation& root,
     const dogen::formatters::decoration_properties_factory& dpf,
     const formatters::container& fc,
     const locator& l, model& fm) const {
     model_expander ex;
-    ex.expand(data_directories, drp, root, dpf, fc, l, fm);
+    ex.expand(data_directories, arp, root, dpf, fc, l, fm);
 }
 
 model workflow::execute(
     const std::forward_list<boost::filesystem::path>& data_directories,
-    const options::cpp_options& opts, const annotations::repository& drp,
+    const options::cpp_options& opts, const annotations::repository& arp,
     const annotations::annotation& root,
     const dogen::formatters::decoration_properties_factory& dpf,
     const formatters::container& fc, const yarn::model& m) const {
@@ -96,8 +96,8 @@ model workflow::execute(
 
     const auto module_ids(obtain_module_ids(m));
     const auto pdp(opts.project_directory_path());
-    const locator l(pdp, drp, fc, root, m.name(), module_ids);
-    expand_model(data_directories, drp, root, dpf, fc, l, r);
+    const locator l(pdp, arp, fc, root, m.name(), module_ids);
+    expand_model(data_directories, arp, root, dpf, fc, l, r);
 
     return r;
 }

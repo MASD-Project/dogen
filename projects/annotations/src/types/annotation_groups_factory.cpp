@@ -24,7 +24,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/annotations/io/scope_types_io.hpp"
-#include "dogen/annotations/io/field_definition_io.hpp"
+#include "dogen/annotations/io/type_io.hpp"
 #include "dogen/annotations/types/value_factory.hpp"
 #include "dogen/annotations/types/building_error.hpp"
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
@@ -36,9 +36,9 @@ static logger lg(logger_factory("annotations.annotation_groups_factory"));
 
 const std::string expected_scope(" Expected scope: ");
 const std::string actual_scope(" Actual scope: ");
-const std::string duplicate_field_definition(
+const std::string duplicate_type(
     "Field definition already inserted: ");
-const std::string field_definition_not_found(
+const std::string type_not_found(
     "Field definition not found: ");
 const std::string field_used_in_invalid_scope(
     "Field used in invalid scope: ");
@@ -49,22 +49,22 @@ namespace dogen {
 namespace annotations {
 
 annotation_groups_factory::annotation_groups_factory(const repository& rp,
-    const bool throw_on_missing_field_definition)
+    const bool throw_on_missing_type)
     : repository_(rp),
-      throw_on_missing_field_definition_(throw_on_missing_field_definition) { }
+      throw_on_missing_type_(throw_on_missing_type) { }
 
 boost::optional<type> annotation_groups_factory::
-obtain_field_definition(const std::string& n) const {
+obtain_type(const std::string& n) const {
     const auto i(repository_.field_definitions_by_name().find(n));
     if (i == repository_.field_definitions_by_name().end()) {
-        if (throw_on_missing_field_definition_) {
-            BOOST_LOG_SEV(lg, error) << field_definition_not_found << n;
+        if (throw_on_missing_type_) {
+            BOOST_LOG_SEV(lg, error) << type_not_found << n;
 
             BOOST_THROW_EXCEPTION(
-                building_error(field_definition_not_found + n));
+                building_error(type_not_found + n));
         }
 
-        BOOST_LOG_SEV(lg, warn) << field_definition_not_found << n;
+        BOOST_LOG_SEV(lg, warn) << type_not_found << n;
         return boost::optional<type>();
     }
     return i->second;
@@ -94,7 +94,7 @@ annotation annotation_groups_factory::create_annotation(
     std::unordered_map<std::string, boost::shared_ptr<value>> entries;
     for (auto kvp : aggregated_scribble_entries) {
         const auto& k(kvp.first);
-        const auto fd(obtain_field_definition(k));
+        const auto fd(obtain_type(k));
         if (!fd)
             continue;
 

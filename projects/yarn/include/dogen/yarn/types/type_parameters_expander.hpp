@@ -27,7 +27,7 @@
 
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/repository.hpp"
-#include "dogen/annotations/types/field_definition.hpp"
+#include "dogen/annotations/types/type.hpp"
 #include "dogen/yarn/types/type_parameters.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 
@@ -36,23 +36,22 @@ namespace yarn {
 
 class type_parameters_expander {
 private:
-    struct field_definitions {
+    struct type_group {
         annotations::type variable_number_of_parameters;
         annotations::type type_parameters_count;
         annotations::type type_parameters_always_in_heap;
     };
 
-    field_definitions make_field_definitions(
-        const annotations::repository& drp) const;
+    type_group make_type_group(const annotations::repository& arp) const;
 
-    type_parameters make_type_parameters(const field_definitions& fds,
+    type_parameters make_type_parameters(const type_group& tg,
         const annotations::annotation& a) const;
 
 private:
-    void expand_type_parameters(const field_definitions& fds, object& o) const;
+    void expand_type_parameters(const type_group& tg, object& o) const;
 
 public:
-    void expand(const annotations::repository& drp,
+    void expand(const annotations::repository& arp,
         intermediate_model& m) const;
 };
 

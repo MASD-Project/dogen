@@ -18,12 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TEST_MOCK_FIELD_DEFINITION_FACTORY_HPP
-#define DOGEN_ANNOTATIONS_TEST_MOCK_FIELD_DEFINITION_FACTORY_HPP
+#ifndef DOGEN_ANNOTATIONS_TEST_MOCK_TYPE_FACTORY_HPP
+#define DOGEN_ANNOTATIONS_TEST_MOCK_TYPE_FACTORY_HPP
 
 #include <list>
 #include "dogen/annotations/types/value_types.hpp"
-#include "dogen/annotations/types/field_definition.hpp"
+#include "dogen/annotations/types/type.hpp"
 
 namespace dogen {
 namespace annotations {
@@ -32,7 +32,7 @@ namespace test {
 /**
  * @brief Generates field definitions.
  */
-class mock_field_definition_factory {
+class mock_type_factory {
 private:
     /**
      * @brief Creat the containing namespaces field.
@@ -59,13 +59,13 @@ public:
      * @brief Creates a set of canned field definitions, needed for
      * testing.
      */
-    std::list<type> make_canned_field_definitions() const;
+    std::list<type> make_canned_types() const;
 
     /**
      * @brief Creates a field definition with most values set to
      * sensible defaults.
      */
-    type make_field_definition(const std::string n,
+    type make_type(const std::string n,
         value_types vt = value_types::text) const;
 };
 

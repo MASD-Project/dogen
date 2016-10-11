@@ -18,13 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/annotations/test/mock_field_definition_factory.hpp"
+#include "dogen/annotations/test/mock_type_factory.hpp"
 
 namespace dogen {
 namespace annotations {
 namespace test {
 
-type mock_field_definition_factory::containing_namespaces() const {
+type mock_type_factory::containing_namespaces() const {
     type r;
     r.name().simple("containing_namespaces");
     r.name().qualified("containing_namespaces");
@@ -35,7 +35,7 @@ type mock_field_definition_factory::containing_namespaces() const {
     return r;
 }
 
-type mock_field_definition_factory::copyright_notice() const {
+type mock_type_factory::copyright_notice() const {
     type r;
     r.name().simple("copyright_notice");
     r.name().qualified("copyright_notice");
@@ -46,7 +46,7 @@ type mock_field_definition_factory::copyright_notice() const {
     return r;
 }
 
-type mock_field_definition_factory::licence_name() const {
+type mock_type_factory::licence_name() const {
     type r;
     r.name().simple("licence_name");
     r.name().qualified("licence_name");
@@ -57,7 +57,7 @@ type mock_field_definition_factory::licence_name() const {
     return r;
 }
 
-type mock_field_definition_factory::create_comment() const {
+type mock_type_factory::create_comment() const {
     type r;
     r.name().simple("comment");
     r.name().qualified("yarn.dia.comment");
@@ -68,8 +68,7 @@ type mock_field_definition_factory::create_comment() const {
     return r;
 }
 
-std::list<type> mock_field_definition_factory::
-make_canned_field_definitions() const {
+std::list<type> mock_type_factory::make_canned_types() const {
     std::list<type> r;
     r.push_back(create_comment());
     r.push_back(licence_name());
@@ -78,8 +77,7 @@ make_canned_field_definitions() const {
     return r;
 }
 
-type mock_field_definition_factory::
-make_field_definition(const std::string n, value_types vt) const {
+type mock_type_factory::make_type(const std::string n, value_types vt) const {
     type r;
     r.name().simple(n);
     r.name().qualified(n);

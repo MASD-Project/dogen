@@ -19,10 +19,10 @@
  *
  */
 #include "dogen/annotations/test_data/name_td.hpp"
+#include "dogen/annotations/test_data/type_td.hpp"
 #include "dogen/annotations/test_data/value_td.hpp"
 #include "dogen/annotations/test_data/scope_types_td.hpp"
 #include "dogen/annotations/test_data/value_types_td.hpp"
-#include "dogen/annotations/test_data/field_definition_td.hpp"
 #include "dogen/annotations/test_data/ownership_hierarchy_td.hpp"
 #include "dogen/annotations/test_data/field_definition_types_td.hpp"
 
@@ -70,9 +70,9 @@ create_dogen_annotations_field_definition_types(const unsigned int position) {
 namespace dogen {
 namespace annotations {
 
-field_definition_generator::field_definition_generator() : position_(0) { }
+type_generator::type_generator() : position_(0) { }
 
-void field_definition_generator::
+void type_generator::
 populate(const unsigned int position, result_type& v) {
     v.name(create_dogen_annotations_name(position + 0));
     v.value_type(create_dogen_annotations_value_types(position + 1));
@@ -82,22 +82,22 @@ populate(const unsigned int position, result_type& v) {
     v.definition_type(create_dogen_annotations_field_definition_types(position + 5));
 }
 
-field_definition_generator::result_type
-field_definition_generator::create(const unsigned int position) {
+type_generator::result_type
+type_generator::create(const unsigned int position) {
     type r;
-    field_definition_generator::populate(position, r);
+    type_generator::populate(position, r);
     return r;
 }
 
-field_definition_generator::result_type*
-field_definition_generator::create_ptr(const unsigned int position) {
+type_generator::result_type*
+type_generator::create_ptr(const unsigned int position) {
     type* p = new type();
-    field_definition_generator::populate(position, *p);
+    type_generator::populate(position, *p);
     return p;
 }
 
-field_definition_generator::result_type
-field_definition_generator::operator()() {
+type_generator::result_type
+type_generator::operator()() {
     return create(position_++);
 }
 

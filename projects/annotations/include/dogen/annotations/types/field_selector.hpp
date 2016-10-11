@@ -27,7 +27,7 @@
 
 #include <list>
 #include <string>
-#include "dogen/annotations/types/field_definition.hpp"
+#include "dogen/annotations/types/type.hpp"
 #include "dogen/annotations/types/value.hpp"
 #include "dogen/annotations/types/annotation.hpp"
 

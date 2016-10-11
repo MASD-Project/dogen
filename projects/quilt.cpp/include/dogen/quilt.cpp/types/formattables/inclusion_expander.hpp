@@ -31,7 +31,7 @@
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
 #include "dogen/annotations/types/repository.hpp"
-#include "dogen/annotations/types/field_definition.hpp"
+#include "dogen/annotations/types/type.hpp"
 #include "dogen/quilt.cpp/types/formattables/inclusion_directive_configuration.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/formattables/locator.hpp"
@@ -70,30 +70,30 @@ namespace formattables {
  */
 class inclusion_expander {
 private:
-    struct formattater_field_definitions {
+    struct formattater_type_group {
         annotations::type inclusion_directive;
         annotations::type inclusion_required;
     };
     friend std::ostream& operator<<(std::ostream& s,
-        const formattater_field_definitions& v);
+        const formattater_type_group& v);
 
-    struct field_definitions {
+    struct type_group {
         annotations::type inclusion_required;
-        std::unordered_map<std::string, formattater_field_definitions>
-        formattaters_field_definitions;
+        std::unordered_map<std::string, formattater_type_group>
+        formattaters_type_group;
     };
     friend std::ostream& operator<<(std::ostream& s,
-        const field_definitions& v);
+        const type_group& v);
 
 
-    field_definitions make_field_definitions(const annotations::repository& drp,
+    type_group make_type_group(const annotations::repository& arp,
         const formatters::container& fc) const;
 
-    bool make_top_level_inclusion_required(const field_definitions& fds,
+    bool make_top_level_inclusion_required(const type_group& tg,
         const annotations::annotation& o) const;
 
     inclusion_directive_configuration make_inclusion_directive_configuration(
-        const field_definitions& fds,const std::string& formatter_name,
+        const type_group& tg,const std::string& formatter_name,
         const annotations::annotation& o) const;
 
 private:
@@ -121,12 +121,12 @@ private:
         const std::string& directive,
         inclusion_directives_container_type& idc) const;
 
-    void compute_inclusion_directives(const field_definitions& fds,
+    void compute_inclusion_directives(const type_group& tg,
         const yarn::element& e, const formatter_list_type& formatters,
         const locator& l, inclusion_directives_container_type& idc) const;
 
     inclusion_directives_container_type compute_inclusion_directives(
-        const field_definitions& fds, const formatters::container& fc,
+        const type_group& tg, const formatters::container& fc,
         const locator& l,
         const std::unordered_map<std::string, formattable>& formattables) const;
 
@@ -144,7 +144,7 @@ private:
         std::unordered_map<std::string, formattable>& formattables) const;
 
 public:
-    void expand(const annotations::repository& drp,
+    void expand(const annotations::repository& arp,
         const formatters::container& fc, const locator& l, model& fm) const;
 };
 

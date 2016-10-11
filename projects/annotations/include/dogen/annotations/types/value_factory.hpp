@@ -29,7 +29,7 @@
 #include <string>
 #include <boost/shared_ptr.hpp>
 #include "dogen/annotations/types/value.hpp"
-#include "dogen/annotations/types/field_definition.hpp"
+#include "dogen/annotations/types/type.hpp"
 
 namespace dogen {
 namespace annotations {

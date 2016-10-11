@@ -22,7 +22,7 @@
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/annotations/types/field_selector.hpp"
 #include "dogen/annotations/types/repository_selector.hpp"
-#include "dogen/annotations/io/field_definition_io.hpp"
+#include "dogen/annotations/io/type_io.hpp"
 #include "dogen/quilt.cpp/types/formatters/odb/traits.hpp"
 #include "dogen/quilt.cpp/io/formattables/odb_properties_io.hpp"
 #include "dogen/quilt.cpp/types/formattables/odb_expander.hpp"
@@ -41,23 +41,23 @@ namespace cpp {
 namespace formattables {
 
 std::ostream& operator<<(std::ostream& s,
-    const odb_expander::field_definitions& v) {
+    const odb_expander::type_group& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::"
-      << "odb_expander::field_definitions\"" << ", "
+      << "odb_expander::type_group\"" << ", "
       << "\"odb_pragma\": " << v.odb_pragma
       << " }";
 
     return s;
 }
 
-odb_expander::field_definitions odb_expander::
-make_field_definitions(const annotations::repository& drp) const {
+odb_expander::type_group odb_expander::
+make_type_group(const annotations::repository& arp) const {
     BOOST_LOG_SEV(lg, debug) << "Creating field definitions.";
 
-    field_definitions r;
-    const annotations::repository_selector s(drp);
+    type_group r;
+    const annotations::repository_selector s(arp);
     const auto& cc(formatters::odb::traits::odb_pragma());
     r.odb_pragma = s.select_field_by_name(cc);
 
@@ -66,24 +66,24 @@ make_field_definitions(const annotations::repository& drp) const {
 }
 
 std::list<std::string> odb_expander::make_odb_pragmas(
-    const field_definitions& fds, const annotations::annotation& o) const {
+    const type_group& tg, const annotations::annotation& o) const {
 
     const annotations::field_selector fs(o);
-    if (!fs.has_field(fds.odb_pragma))
+    if (!fs.has_field(tg.odb_pragma))
         return std::list<std::string>();
 
-    return fs.get_text_collection_content(fds.odb_pragma);
+    return fs.get_text_collection_content(tg.odb_pragma);
 }
 
 boost::optional<odb_properties>
 odb_expander::compute_odb_configuration(
-    const field_definitions& fds, const yarn::object& o) const {
+    const type_group& tg, const yarn::object& o) const {
 
     odb_properties r;
-    r.top_level_odb_pragmas(make_odb_pragmas(fds, o.annotation()));
+    r.top_level_odb_pragmas(make_odb_pragmas(tg, o.annotation()));
     for (const auto& attr : o.local_attributes()) {
         const auto id(attr.name().id());
-        const auto pragmas(make_odb_pragmas(fds, attr.annotation()));
+        const auto pragmas(make_odb_pragmas(tg, attr.annotation()));
         if (pragmas.empty())
             continue;
 
@@ -100,9 +100,9 @@ odb_expander::compute_odb_configuration(
 }
 
 void odb_expander::
-expand(const annotations::repository& drp, model& fm) const {
+expand(const annotations::repository& arp, model& fm) const {
     BOOST_LOG_SEV(lg, debug) << "Started expanding odb configuration.";
-    const auto fds(make_field_definitions(drp));
+    const auto tg(make_type_group(arp));
     for (auto& pair : fm.formattables()) {
         const auto id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
@@ -135,7 +135,7 @@ expand(const annotations::repository& drp, model& fm) const {
 
         const auto& o(*ptr);
         auto& eprops(formattable.element_properties());
-        eprops.odb_properties(compute_odb_configuration(fds, o));
+        eprops.odb_properties(compute_odb_configuration(tg, o));
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished expanding odb configuration. ";

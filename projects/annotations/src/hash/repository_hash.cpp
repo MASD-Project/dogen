@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/annotations/hash/type_hash.hpp"
 #include "dogen/annotations/hash/repository_hash.hpp"
-#include "dogen/annotations/hash/field_definition_hash.hpp"
 
 namespace {
 
@@ -29,7 +29,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_list_dogen_annotations_field_definition(const std::list<dogen::annotations::type>& v) {
+inline std::size_t hash_std_list_dogen_annotations_type(const std::list<dogen::annotations::type>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -37,7 +37,7 @@ inline std::size_t hash_std_list_dogen_annotations_field_definition(const std::l
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_dogen_annotations_field_definition(const std::unordered_map<std::string, dogen::annotations::type>& v) {
+inline std::size_t hash_std_unordered_map_std_string_dogen_annotations_type(const std::unordered_map<std::string, dogen::annotations::type>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -46,11 +46,11 @@ inline std::size_t hash_std_unordered_map_std_string_dogen_annotations_field_def
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_std_list_dogen_annotations_field_definition(const std::unordered_map<std::string, std::list<dogen::annotations::type> >& v) {
+inline std::size_t hash_std_unordered_map_std_string_std_list_dogen_annotations_type(const std::unordered_map<std::string, std::list<dogen::annotations::type> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
-        combine(seed, hash_std_list_dogen_annotations_field_definition(i.second));
+        combine(seed, hash_std_list_dogen_annotations_type(i.second));
     }
     return seed;
 }
@@ -63,11 +63,11 @@ namespace annotations {
 std::size_t repository_hasher::hash(const repository& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_list_dogen_annotations_field_definition(v.all_field_definitions()));
-    combine(seed, hash_std_unordered_map_std_string_dogen_annotations_field_definition(v.field_definitions_by_name()));
-    combine(seed, hash_std_unordered_map_std_string_std_list_dogen_annotations_field_definition(v.field_definitions_by_facet_name()));
-    combine(seed, hash_std_unordered_map_std_string_std_list_dogen_annotations_field_definition(v.field_definitions_by_formatter_name()));
-    combine(seed, hash_std_unordered_map_std_string_std_list_dogen_annotations_field_definition(v.field_definitions_by_model_name()));
+    combine(seed, hash_std_list_dogen_annotations_type(v.all_field_definitions()));
+    combine(seed, hash_std_unordered_map_std_string_dogen_annotations_type(v.field_definitions_by_name()));
+    combine(seed, hash_std_unordered_map_std_string_std_list_dogen_annotations_type(v.field_definitions_by_facet_name()));
+    combine(seed, hash_std_unordered_map_std_string_std_list_dogen_annotations_type(v.field_definitions_by_formatter_name()));
+    combine(seed, hash_std_unordered_map_std_string_std_list_dogen_annotations_type(v.field_definitions_by_model_name()));
 
     return seed;
 }

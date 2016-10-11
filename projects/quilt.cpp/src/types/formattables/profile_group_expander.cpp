@@ -23,7 +23,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/annotations/types/field_selector.hpp"
 #include "dogen/annotations/types/repository_selector.hpp"
-#include "dogen/annotations/io/field_definition_io.hpp"
+#include "dogen/annotations/io/type_io.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formattables/expansion_error.hpp"
@@ -59,24 +59,24 @@ namespace cpp {
 namespace formattables {
 
 inline std::ostream& operator<<(std::ostream& s,
-    const profile_group_expander::field_definitions& v) {
+    const profile_group_expander::type_group& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::"
-      << "profile_group_expander::field_definitions\"" << ", "
+      << "profile_group_expander::type_group\"" << ", "
       << "\"profile\": " << v.profile
       << " }";
 
     return s;
 }
 
-profile_group_expander::field_definitions
-profile_group_expander::make_field_definitions(
-    const annotations::repository& drp) const {
+profile_group_expander::type_group
+profile_group_expander::make_type_group(
+    const annotations::repository& arp) const {
     BOOST_LOG_SEV(lg, debug) << "Creating field definitions.";
 
-    field_definitions r;
-    const annotations::repository_selector s(drp);
+    type_group r;
+    const annotations::repository_selector s(arp);
     const auto& mn(formatters::traits::model_name());
     r.profile = s.select_field_by_name(mn, "profile");
 
@@ -85,10 +85,10 @@ profile_group_expander::make_field_definitions(
 }
 
 std::string profile_group_expander::obtain_profile_configuration(
-    const field_definitions& fd, const annotations::annotation& root) const {
+    const type_group& tg, const annotations::annotation& root) const {
     BOOST_LOG_SEV(lg, debug) << "Reading profile configuration.";
     const annotations::field_selector fs(root);
-    const auto r(fs.get_text_content_or_default(fd.profile));
+    const auto r(fs.get_text_content_or_default(tg.profile));
     BOOST_LOG_SEV(lg, debug) << "Profile configuration: " << r;
     return r;
 }
@@ -185,7 +185,7 @@ profile_group_expander::merge(const profile_group_types& original) const {
     return mg.merge(original);
 }
 
-void profile_group_expander::populate_model(const annotations::repository& drp,
+void profile_group_expander::populate_model(const annotations::repository& arp,
     const annotations::annotation& root, const profile_group_types& pgs,
     model& fm) const {
     BOOST_LOG_SEV(lg, debug) << "Populating model with profile groups.";
@@ -193,7 +193,7 @@ void profile_group_expander::populate_model(const annotations::repository& drp,
     /*
      * First setup the global profile.
      */
-    const auto fd(make_field_definitions(drp));
+    const auto fd(make_type_group(arp));
     const auto global_cfg(obtain_profile_configuration(fd, root));
     const auto i(pgs.find(global_cfg));
     if (i == pgs.end()) {
@@ -322,13 +322,13 @@ void profile_group_expander::populate_model(const annotations::repository& drp,
 
 void profile_group_expander::expand(
     const std::forward_list<boost::filesystem::path>& data_directories,
-    const annotations::repository& drp, const annotations::annotation& root,
+    const annotations::repository& arp, const annotations::annotation& root,
     const formatters::container& fc, model& fm) const {
 
     const auto original(hydrate(data_directories));
     validate(fc, original);
     const auto merged(merge(original));
-    populate_model(drp, root, merged, fm);
+    populate_model(arp, root, merged, fm);
 }
 
 } } } }

@@ -22,7 +22,7 @@
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/annotations/types/field_selector.hpp"
 #include "dogen/annotations/types/repository_selector.hpp"
-#include "dogen/annotations/io/field_definition_io.hpp"
+#include "dogen/annotations/io/type_io.hpp"
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
@@ -42,10 +42,10 @@ namespace cpp {
 namespace formattables {
 
 std::ostream&
-operator<<(std::ostream& s, const aspect_expander::field_definitions& v) {
+operator<<(std::ostream& s, const aspect_expander::type_group& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::"
-      << "aspect_expander::field_definitions\"" << ", "
+      << "aspect_expander::type_group\"" << ", "
       << "\"requires_manual_default_constructor\": "
       << v.requires_manual_default_constructor << ", "
       << "\"requires_manual_move_constructor\": "
@@ -57,11 +57,11 @@ operator<<(std::ostream& s, const aspect_expander::field_definitions& v) {
     return s;
 }
 
-aspect_expander::field_definitions aspect_expander::
-make_field_definitions(const annotations::repository& drp) const {
-    field_definitions r;
+aspect_expander::type_group aspect_expander::
+make_type_group(const annotations::repository& arp) const {
+    type_group r;
 
-    const annotations::repository_selector rs(drp);
+    const annotations::repository_selector rs(arp);
     typedef traits::cpp::aspect aspect;
 
     const auto& rmdc(aspect::requires_manual_default_constructor());
@@ -77,33 +77,33 @@ make_field_definitions(const annotations::repository& drp) const {
 }
 
 boost::optional<aspect_properties> aspect_expander::
-make_aspect_properties(const field_definitions& fds,
+make_aspect_properties(const type_group& tg,
     const annotations::annotation& a) const {
     aspect_properties r;
 
     const annotations::field_selector fs(a);
     bool found_any(false);
 
-    if (fs.has_field(fds.requires_manual_default_constructor))
+    if (fs.has_field(tg.requires_manual_default_constructor))
         found_any = true;
 
     r.requires_manual_default_constructor(
         fs.get_boolean_content_or_default(
-            fds.requires_manual_default_constructor));
+            tg.requires_manual_default_constructor));
 
-    if (fs.has_field(fds.requires_manual_move_constructor))
+    if (fs.has_field(tg.requires_manual_move_constructor))
         found_any = true;
 
     r.requires_manual_move_constructor(
         fs.get_boolean_content_or_default(
-            fds.requires_manual_move_constructor));
+            tg.requires_manual_move_constructor));
 
-    if (fs.has_field(fds.requires_stream_manipulators))
+    if (fs.has_field(tg.requires_stream_manipulators))
         found_any = true;
 
     r.requires_stream_manipulators(
         fs.get_boolean_content_or_default(
-            fds.requires_stream_manipulators));
+            tg.requires_stream_manipulators));
 
     if (found_any)
         return r;
@@ -112,12 +112,12 @@ make_aspect_properties(const field_definitions& fds,
 }
 
 aspect_expander::aspect_properties_type
-aspect_expander::obtain_aspect_properties(const annotations::repository& drp,
+aspect_expander::obtain_aspect_properties(const annotations::repository& arp,
     const std::unordered_map<std::string, formattable>& formattables) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started creating aspect configuration.";
 
-    const auto fds(make_field_definitions(drp));
+    const auto tg(make_type_group(arp));
     aspect_properties_type r;
     for (auto& pair : formattables) {
         const auto id(pair.first);
@@ -125,7 +125,7 @@ aspect_expander::obtain_aspect_properties(const annotations::repository& drp,
 
         auto& formattable(pair.second);
         const auto& segment(*formattable.master_segment());
-        const auto ac(make_aspect_properties(fds, segment.annotation()));
+        const auto ac(make_aspect_properties(tg, segment.annotation()));
         if (ac)
             r[id] = *ac;
     }
@@ -220,8 +220,8 @@ void aspect_expander::populate_aspect_properties(
 }
 
 void aspect_expander::
-expand(const annotations::repository& drp, model& fm) const {
-    const auto element_aps(obtain_aspect_properties(drp, fm.formattables()));
+expand(const annotations::repository& arp, model& fm) const {
+    const auto element_aps(obtain_aspect_properties(arp, fm.formattables()));
     populate_aspect_properties(element_aps, fm.formattables());
 }
 

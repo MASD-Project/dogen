@@ -64,23 +64,20 @@ private:
 
 }
 
-origin_expander::origin_expander(const annotations::repository& rp)
-    : field_definitions_(make_field_definitions(rp)) {}
+origin_expander::type_group origin_expander::
+make_type_group(const annotations::repository& arp) const {
 
-origin_expander::field_definitions origin_expander::make_field_definitions(
-    const annotations::repository& rp) const {
-
-    field_definitions r;
-    const annotations::repository_selector rs(rp);
+    type_group r;
+    const annotations::repository_selector rs(arp);
     r.is_proxy_model = rs.select_field_by_name(traits::is_proxy_model());
     return r;
 }
 
-bool origin_expander::is_proxy_model(const intermediate_model& im) const {
+bool origin_expander::
+is_proxy_model(const type_group& tg, const intermediate_model& im) const {
     const auto& o(im.root_module().annotation());
     const annotations::field_selector fs(o);
-    const auto& fd(field_definitions_);
-    const bool r(fs.get_boolean_content_or_default(fd.is_proxy_model));
+    const bool r(fs.get_boolean_content_or_default(tg.is_proxy_model));
     BOOST_LOG_SEV(lg, debug) << "Read is proxy model: " << r
                              << " for model: " << im.name().id();
     return r;
@@ -102,8 +99,10 @@ origin_types origin_expander::compute_origin_types(const intermediate_model& im,
     return origin_types::non_proxy_reference;
 }
 
-void origin_expander::expand(intermediate_model& im) const {
-    const auto ipm(is_proxy_model(im));
+void origin_expander::
+expand(const annotations::repository& arp, intermediate_model& im) const {
+    const auto tg(make_type_group(arp));
+    const auto ipm(is_proxy_model(tg, im));
     const auto ot(compute_origin_types(im, ipm));
     im.origin_type(ot);
 
