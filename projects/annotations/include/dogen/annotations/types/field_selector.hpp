@@ -57,6 +57,7 @@ public:
     bool has_field(const field_definition& fd) const;
     /**@}*/
 
+private:
     /**
      * @brief Returns a field from an object.
      *
