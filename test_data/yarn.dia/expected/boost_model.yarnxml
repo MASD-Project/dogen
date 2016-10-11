@@ -53,11 +53,11 @@
 				<element class_id="21" tracking_level="0" version="0">
 					<documentation></documentation>
 					<annotation class_id="22" tracking_level="0" version="0">
-						<body class_id="23" tracking_level="0" version="0">
+						<entries class_id="23" tracking_level="0" version="0">
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;boost_model&gt;&lt;pkg1&gt;</id>
@@ -113,11 +113,11 @@
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;boost_model&gt;</id>
@@ -193,11 +193,11 @@
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;boost_model&gt;&lt;class_h&gt;</id>
@@ -251,11 +251,11 @@
 					<item class_id="33" tracking_level="0" version="0">
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;boost_model&gt;&lt;class_h&gt;&lt;prop_0&gt;</id>
@@ -390,11 +390,11 @@
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;boost_model&gt;&lt;class_a&gt;</id>
@@ -448,11 +448,11 @@
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;boost_model&gt;&lt;class_a&gt;&lt;prop_0&gt;</id>
@@ -587,11 +587,11 @@
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;boost_model&gt;&lt;class_derived&gt;</id>
@@ -645,11 +645,11 @@
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;boost_model&gt;&lt;class_derived&gt;&lt;prop_1&gt;</id>
@@ -814,11 +814,11 @@
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;boost_model&gt;&lt;pkg1&gt;&lt;class_c&gt;</id>
@@ -873,11 +873,11 @@
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;boost_model&gt;&lt;pkg1&gt;&lt;class_c&gt;&lt;prop_0&gt;</id>
@@ -954,11 +954,11 @@
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;boost_model&gt;&lt;pkg1&gt;&lt;class_c&gt;&lt;prop_1&gt;</id>
@@ -1094,11 +1094,11 @@
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;boost_model&gt;&lt;class_base&gt;</id>
@@ -1152,11 +1152,11 @@
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;boost_model&gt;&lt;class_base&gt;&lt;prop_0&gt;</id>
@@ -1291,11 +1291,11 @@
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;boost_model&gt;&lt;class_b&gt;</id>
@@ -1349,11 +1349,11 @@
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;boost_model&gt;&lt;class_b&gt;&lt;prop_0&gt;</id>
@@ -1429,11 +1429,11 @@
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;boost_model&gt;&lt;class_b&gt;&lt;prop_1&gt;</id>
@@ -1509,11 +1509,11 @@
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;boost_model&gt;&lt;class_b&gt;&lt;prop_2&gt;</id>
@@ -1589,11 +1589,11 @@
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;boost_model&gt;&lt;class_b&gt;&lt;prop_3&gt;</id>
@@ -1669,11 +1669,11 @@
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;boost_model&gt;&lt;class_b&gt;&lt;prop_4&gt;</id>
@@ -1749,11 +1749,11 @@
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;boost_model&gt;&lt;class_b&gt;&lt;prop_5&gt;</id>
@@ -1829,11 +1829,11 @@
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;boost_model&gt;&lt;class_b&gt;&lt;prop_6&gt;</id>
@@ -1968,11 +1968,11 @@
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;boost_model&gt;&lt;class_d&gt;</id>
@@ -2026,11 +2026,11 @@
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;boost_model&gt;&lt;class_d&gt;&lt;prop_0&gt;</id>
@@ -2106,11 +2106,11 @@
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;boost_model&gt;&lt;class_d&gt;&lt;prop_1&gt;</id>
@@ -2186,11 +2186,11 @@
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;boost_model&gt;&lt;class_d&gt;&lt;prop_2&gt;</id>
@@ -2266,11 +2266,11 @@
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;boost_model&gt;&lt;class_d&gt;&lt;prop_3&gt;</id>
@@ -2405,11 +2405,11 @@
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;boost_model&gt;&lt;some_service&gt;</id>
@@ -2463,11 +2463,11 @@
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;boost_model&gt;&lt;some_service&gt;&lt;prop_0&gt;</id>
@@ -2543,11 +2543,11 @@
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;boost_model&gt;&lt;some_service&gt;&lt;prop_1&gt;</id>
@@ -2623,11 +2623,11 @@
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;boost_model&gt;&lt;some_service&gt;&lt;prop_2&gt;</id>
@@ -2762,11 +2762,11 @@
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;boost_model&gt;&lt;class_e&gt;</id>
@@ -2820,11 +2820,11 @@
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;boost_model&gt;&lt;class_e&gt;&lt;prop_0&gt;</id>
@@ -2900,11 +2900,11 @@
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;boost_model&gt;&lt;class_e&gt;&lt;prop_1&gt;</id>
@@ -2980,11 +2980,11 @@
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;boost_model&gt;&lt;class_e&gt;&lt;prop_2&gt;</id>
@@ -3060,11 +3060,11 @@
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;boost_model&gt;&lt;class_e&gt;&lt;prop_3&gt;</id>
@@ -3199,11 +3199,11 @@
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;boost_model&gt;&lt;class_f&gt;</id>
@@ -3257,11 +3257,11 @@
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;boost_model&gt;&lt;class_f&gt;&lt;prop_0&gt;</id>
@@ -3337,11 +3337,11 @@
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;boost_model&gt;&lt;class_f&gt;&lt;prop_1&gt;</id>
@@ -3417,11 +3417,11 @@
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;boost_model&gt;&lt;class_f&gt;&lt;prop_2&gt;</id>
@@ -3497,11 +3497,11 @@
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;boost_model&gt;&lt;class_f&gt;&lt;prop_3&gt;</id>
@@ -3577,11 +3577,11 @@
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;boost_model&gt;&lt;class_f&gt;&lt;prop_4&gt;</id>
@@ -3657,11 +3657,11 @@
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;boost_model&gt;&lt;class_f&gt;&lt;prop_5&gt;</id>
@@ -3796,11 +3796,11 @@
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;boost_model&gt;&lt;class_g&gt;</id>
@@ -3854,11 +3854,11 @@
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;boost_model&gt;&lt;class_g&gt;&lt;prop_0&gt;</id>
@@ -3934,11 +3934,11 @@
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;boost_model&gt;&lt;class_g&gt;&lt;prop_1&gt;</id>
@@ -4137,11 +4137,11 @@
 		<element>
 			<documentation></documentation>
 			<annotation>
-				<body>
+				<entries>
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
-				</body>
+				</entries>
 			</annotation>
 			<name>
 				<id></id>

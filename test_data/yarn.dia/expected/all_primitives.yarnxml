@@ -53,11 +53,11 @@
 				<element class_id="21" tracking_level="0" version="0">
 					<documentation></documentation>
 					<annotation class_id="22" tracking_level="0" version="0">
-						<body class_id="23" tracking_level="0" version="0">
+						<entries class_id="23" tracking_level="0" version="0">
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;all_primitives&gt;</id>
@@ -133,11 +133,11 @@
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;all_primitives&gt;&lt;a_class&gt;</id>
@@ -191,11 +191,11 @@
 					<item class_id="33" tracking_level="0" version="0">
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;all_primitives&gt;&lt;a_class&gt;&lt;bool_property&gt;</id>
@@ -271,11 +271,11 @@
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;all_primitives&gt;&lt;a_class&gt;&lt;char_property&gt;</id>
@@ -351,11 +351,11 @@
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;all_primitives&gt;&lt;a_class&gt;&lt;uchar_property&gt;</id>
@@ -431,11 +431,11 @@
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;all_primitives&gt;&lt;a_class&gt;&lt;int_property&gt;</id>
@@ -511,11 +511,11 @@
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;all_primitives&gt;&lt;a_class&gt;&lt;uint_property&gt;</id>
@@ -591,11 +591,11 @@
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;all_primitives&gt;&lt;a_class&gt;&lt;long_property&gt;</id>
@@ -671,11 +671,11 @@
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;all_primitives&gt;&lt;a_class&gt;&lt;ulong_property&gt;</id>
@@ -751,11 +751,11 @@
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;all_primitives&gt;&lt;a_class&gt;&lt;long_long_property&gt;</id>
@@ -831,11 +831,11 @@
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;all_primitives&gt;&lt;a_class&gt;&lt;ulong_long_property&gt;</id>
@@ -911,11 +911,11 @@
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;all_primitives&gt;&lt;a_class&gt;&lt;short_property&gt;</id>
@@ -991,11 +991,11 @@
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;all_primitives&gt;&lt;a_class&gt;&lt;ushort_property&gt;</id>
@@ -1071,11 +1071,11 @@
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;all_primitives&gt;&lt;a_class&gt;&lt;double_property&gt;</id>
@@ -1151,11 +1151,11 @@
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;all_primitives&gt;&lt;a_class&gt;&lt;float_property&gt;</id>
@@ -1354,11 +1354,11 @@
 		<element>
 			<documentation></documentation>
 			<annotation>
-				<body>
+				<entries>
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
-				</body>
+				</entries>
 			</annotation>
 			<name>
 				<id></id>

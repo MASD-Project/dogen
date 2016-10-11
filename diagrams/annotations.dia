@@ -1650,13 +1650,13 @@ yet imposing some constraints on the shape of the data.
         <dia:point val="111,18"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="110.95,17.95;131.955,20.85"/>
+        <dia:rectangle val="110.95,17.95;133.11,20.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="111,18"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="20.905000000000001"/>
+        <dia:real val="22.059999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.7999999999999998"/>
@@ -1751,7 +1751,7 @@ yet imposing some constraints on the shape of the data.
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#body#</dia:string>
+            <dia:string>#entries#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::unordered_map&lt;std::string,field_instance&gt;#</dia:string>
@@ -1760,7 +1760,7 @@ yet imposing some constraints on the shape of the data.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#All field instances associated with this object, by qualified name.#</dia:string>
+            <dia:string>#All entries in this annotation. Each entry is a key-value-pair of id and value.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -3224,7 +3224,7 @@ yet imposing some constraints on the shape of the data.
         <dia:point val="175.645,21.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="131.855,20.75;176.395,29.05"/>
+        <dia:rectangle val="133.01,20.75;176.395,29.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3232,8 +3232,8 @@ yet imposing some constraints on the shape of the data.
       <dia:attribute name="orth_points">
         <dia:point val="175.645,21.6"/>
         <dia:point val="175.645,29"/>
-        <dia:point val="131.905,29"/>
-        <dia:point val="131.905,20.8"/>
+        <dia:point val="133.06,29"/>
+        <dia:point val="133.06,20.8"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -10154,7 +10154,7 @@ any.#</dia:string>
         <dia:point val="127.843,8.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="121.403,7.45;128.593,18.8"/>
+        <dia:rectangle val="121.98,7.45;128.593,18.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -10162,8 +10162,8 @@ any.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="127.843,8.2"/>
         <dia:point val="127.843,13"/>
-        <dia:point val="121.453,13"/>
-        <dia:point val="121.453,18"/>
+        <dia:point val="122.03,13"/>
+        <dia:point val="122.03,18"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -10543,7 +10543,7 @@ any.#</dia:string>
         <dia:point val="171,-10.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="131.855,-11.15;171.75,18.8"/>
+        <dia:rectangle val="133.01,-11.15;171.75,18.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -10551,8 +10551,8 @@ any.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="171,-10.4"/>
         <dia:point val="171,13"/>
-        <dia:point val="131.905,13"/>
-        <dia:point val="131.905,18"/>
+        <dia:point val="133.06,13"/>
+        <dia:point val="133.06,18"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

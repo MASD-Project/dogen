@@ -45,7 +45,7 @@ public:
     ~annotation() = default;
 
 public:
-    explicit annotation(const std::unordered_map<std::string, dogen::annotations::field_instance>& body);
+    explicit annotation(const std::unordered_map<std::string, dogen::annotations::field_instance>& entries);
 
 private:
     template<typename Archive>
@@ -56,13 +56,13 @@ private:
 
 public:
     /**
-     * @brief All field instances associated with this object, by qualified name.
+     * @brief All entries in this annotation. Each entry is a key-value-pair of id and value.
      */
     /**@{*/
-    const std::unordered_map<std::string, dogen::annotations::field_instance>& body() const;
-    std::unordered_map<std::string, dogen::annotations::field_instance>& body();
-    void body(const std::unordered_map<std::string, dogen::annotations::field_instance>& v);
-    void body(const std::unordered_map<std::string, dogen::annotations::field_instance>&& v);
+    const std::unordered_map<std::string, dogen::annotations::field_instance>& entries() const;
+    std::unordered_map<std::string, dogen::annotations::field_instance>& entries();
+    void entries(const std::unordered_map<std::string, dogen::annotations::field_instance>& v);
+    void entries(const std::unordered_map<std::string, dogen::annotations::field_instance>&& v);
     /**@}*/
 
 public:
@@ -76,7 +76,7 @@ public:
     annotation& operator=(annotation other);
 
 private:
-    std::unordered_map<std::string, dogen::annotations::field_instance> body_;
+    std::unordered_map<std::string, dogen::annotations::field_instance> entries_;
 };
 
 } }

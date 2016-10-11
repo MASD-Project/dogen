@@ -71,7 +71,7 @@ void expander::expand(
 
     const annotations::field_instance_factory f;
     const auto v(f.make_text(absolute_output_directory.generic_string()));
-    a.body()[traits::output_path()] = v;
+    a.entries()[traits::output_path()] = v;
 
     BOOST_LOG_SEV(lg, debug) << "After expansion: " << a;
 }

@@ -62,8 +62,8 @@ void field_selector::ensure_default_value(const field_definition& fd) const {
 }
 
 bool field_selector::has_field(const std::string& qualified_field_name) const {
-    const auto i(annotation_.body().find(qualified_field_name));
-    return (i != annotation_.body().end());
+    const auto i(annotation_.entries().find(qualified_field_name));
+    return (i != annotation_.entries().end());
 }
 
 bool field_selector::has_field(const field_definition& fd) const {
@@ -72,9 +72,9 @@ bool field_selector::has_field(const field_definition& fd) const {
 
 const field_instance& field_selector::
 get_field(const std::string& qualified_field_name) const {
-    const auto i(annotation_.body().find(qualified_field_name));
+    const auto i(annotation_.entries().find(qualified_field_name));
 
-    if (i == annotation_.body().end()) {
+    if (i == annotation_.entries().end()) {
         BOOST_LOG_SEV(lg, error) << field_not_found << qualified_field_name;
         BOOST_THROW_EXCEPTION(selection_error(field_not_found
                 + qualified_field_name));

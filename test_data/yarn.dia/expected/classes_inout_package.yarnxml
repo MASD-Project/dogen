@@ -53,11 +53,11 @@
 				<element class_id="21" tracking_level="0" version="0">
 					<documentation></documentation>
 					<annotation class_id="22" tracking_level="0" version="0">
-						<body class_id="23" tracking_level="0" version="0">
+						<entries class_id="23" tracking_level="0" version="0">
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;classes_inout_package&gt;&lt;package_1&gt;</id>
@@ -113,11 +113,11 @@
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;classes_inout_package&gt;</id>
@@ -193,11 +193,11 @@
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;classes_inout_package&gt;&lt;class_2&gt;</id>
@@ -251,11 +251,11 @@
 					<item class_id="33" tracking_level="0" version="0">
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;classes_inout_package&gt;&lt;class_2&gt;&lt;prop_0&gt;</id>
@@ -390,11 +390,11 @@
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;classes_inout_package&gt;&lt;package_1&gt;&lt;class_1&gt;</id>
@@ -449,11 +449,11 @@
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;classes_inout_package&gt;&lt;package_1&gt;&lt;class_1&gt;&lt;prop_0&gt;</id>
@@ -653,11 +653,11 @@
 		<element>
 			<documentation></documentation>
 			<annotation>
-				<body>
+				<entries>
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
-				</body>
+				</entries>
 			</annotation>
 			<name>
 				<id></id>

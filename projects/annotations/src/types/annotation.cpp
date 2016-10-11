@@ -23,16 +23,16 @@
 namespace dogen {
 namespace annotations {
 
-annotation::annotation(const std::unordered_map<std::string, dogen::annotations::field_instance>& body)
-    : body_(body) { }
+annotation::annotation(const std::unordered_map<std::string, dogen::annotations::field_instance>& entries)
+    : entries_(entries) { }
 
 void annotation::swap(annotation& other) noexcept {
     using std::swap;
-    swap(body_, other.body_);
+    swap(entries_, other.entries_);
 }
 
 bool annotation::operator==(const annotation& rhs) const {
-    return body_ == rhs.body_;
+    return entries_ == rhs.entries_;
 }
 
 annotation& annotation::operator=(annotation other) {
@@ -41,20 +41,20 @@ annotation& annotation::operator=(annotation other) {
     return *this;
 }
 
-const std::unordered_map<std::string, dogen::annotations::field_instance>& annotation::body() const {
-    return body_;
+const std::unordered_map<std::string, dogen::annotations::field_instance>& annotation::entries() const {
+    return entries_;
 }
 
-std::unordered_map<std::string, dogen::annotations::field_instance>& annotation::body() {
-    return body_;
+std::unordered_map<std::string, dogen::annotations::field_instance>& annotation::entries() {
+    return entries_;
 }
 
-void annotation::body(const std::unordered_map<std::string, dogen::annotations::field_instance>& v) {
-    body_ = v;
+void annotation::entries(const std::unordered_map<std::string, dogen::annotations::field_instance>& v) {
+    entries_ = v;
 }
 
-void annotation::body(const std::unordered_map<std::string, dogen::annotations::field_instance>&& v) {
-    body_ = std::move(v);
+void annotation::entries(const std::unordered_map<std::string, dogen::annotations::field_instance>&& v) {
+    entries_ = std::move(v);
 }
 
 } }

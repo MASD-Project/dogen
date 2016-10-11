@@ -52,7 +52,7 @@ annotation_generator::annotation_generator() : position_(0) { }
 
 void annotation_generator::
 populate(const unsigned int position, result_type& v) {
-    v.body(create_std_unordered_map_std_string_dogen_annotations_field_instance(position + 0));
+    v.entries(create_std_unordered_map_std_string_dogen_annotations_field_instance(position + 0));
 }
 
 annotation_generator::result_type

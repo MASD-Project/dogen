@@ -361,7 +361,7 @@ BOOST_AUTO_TEST_CASE(licence_directive_results_in_expected_template) {
     BOOST_LOG_SEV(lg, debug) << "Result: " << tt;
 
     BOOST_CHECK(tt.lines().empty());
-    BOOST_REQUIRE(tt.annotation().body().size() == 1);
+    BOOST_REQUIRE(tt.annotation().entries().size() == 1);
     dogen::annotations::field_selector fs(tt.annotation());
     BOOST_CHECK(fs.get_text_content(licence_name) == licence_value);
 }
@@ -372,7 +372,7 @@ BOOST_AUTO_TEST_CASE(multiple_directives_results_in_expected_template) {
     BOOST_LOG_SEV(lg, debug) << "Result: " << tt;
 
     BOOST_CHECK(tt.lines().empty());
-    BOOST_REQUIRE(tt.annotation().body().size() == 2);
+    BOOST_REQUIRE(tt.annotation().entries().size() == 2);
     dogen::annotations::field_selector fs(tt.annotation());
     BOOST_CHECK(fs.get_text_content(licence_name) == licence_value);
     BOOST_CHECK(
@@ -532,7 +532,7 @@ BOOST_AUTO_TEST_CASE(namespaces_directive_results_in_expected_template) {
     BOOST_LOG_SEV(lg, debug) << "Result: " << tt;
 
     BOOST_CHECK(tt.lines().empty());
-    BOOST_REQUIRE(tt.annotation().body().size() == 1);
+    BOOST_REQUIRE(tt.annotation().entries().size() == 1);
     dogen::annotations::field_selector fs(tt.annotation());
     BOOST_CHECK(fs.get_text_content(namespaces_name) == namespaces_value);
 }

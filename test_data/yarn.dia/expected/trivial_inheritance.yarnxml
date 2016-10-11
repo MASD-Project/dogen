@@ -53,11 +53,11 @@
 				<element class_id="21" tracking_level="0" version="0">
 					<documentation></documentation>
 					<annotation class_id="22" tracking_level="0" version="0">
-						<body class_id="23" tracking_level="0" version="0">
+						<entries class_id="23" tracking_level="0" version="0">
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;pkg4&gt;</id>
@@ -118,11 +118,11 @@ in the context of inheritance.
 
 </documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;</id>
@@ -178,11 +178,11 @@ in the context of inheritance.
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;pkg2&gt;</id>
@@ -238,11 +238,11 @@ in the context of inheritance.
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;pkg1&gt;</id>
@@ -298,11 +298,11 @@ in the context of inheritance.
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;pkg3&gt;</id>
@@ -378,11 +378,11 @@ in the context of inheritance.
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;non_final_leaf&gt;</id>
@@ -436,11 +436,11 @@ in the context of inheritance.
 					<item class_id="33" tracking_level="0" version="0">
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;non_final_leaf&gt;&lt;prop_0&gt;</id>
@@ -605,11 +605,11 @@ in the context of inheritance.
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;pkg4&gt;&lt;child_via_settings&gt;</id>
@@ -664,11 +664,11 @@ in the context of inheritance.
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;pkg4&gt;&lt;child_via_settings&gt;&lt;prop_1&gt;</id>
@@ -804,11 +804,11 @@ in the context of inheritance.
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;pkg3&gt;&lt;child_via_settings&gt;</id>
@@ -863,11 +863,11 @@ in the context of inheritance.
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;pkg3&gt;&lt;child_via_settings&gt;&lt;prop_1&gt;</id>
@@ -1003,11 +1003,11 @@ in the context of inheritance.
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;pkg1&gt;&lt;child_via_settings&gt;</id>
@@ -1062,11 +1062,11 @@ in the context of inheritance.
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;pkg1&gt;&lt;child_via_settings&gt;&lt;prop_1&gt;</id>
@@ -1203,11 +1203,11 @@ in the context of inheritance.
 					<documentation>Descendant class for scenario that tests code generated move contructors.
 </documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;move_ctor_empty_descendant&gt;</id>
@@ -1350,11 +1350,11 @@ in the context of inheritance.
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;pkg1&gt;&lt;child&gt;</id>
@@ -1409,11 +1409,11 @@ in the context of inheritance.
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;pkg1&gt;&lt;child&gt;&lt;prop_1&gt;</id>
@@ -1580,11 +1580,11 @@ in the context of inheritance.
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;base&gt;</id>
@@ -1698,11 +1698,11 @@ in the context of inheritance.
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;non_final_orphan&gt;</id>
@@ -1756,11 +1756,11 @@ in the context of inheritance.
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;non_final_orphan&gt;&lt;prop_0&gt;</id>
@@ -1895,11 +1895,11 @@ in the context of inheritance.
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;child_via_settings&gt;</id>
@@ -1953,11 +1953,11 @@ in the context of inheritance.
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;child_via_settings&gt;&lt;prop_1&gt;</id>
@@ -2092,11 +2092,11 @@ in the context of inheritance.
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;pkg1&gt;&lt;parent&gt;</id>
@@ -2151,11 +2151,11 @@ in the context of inheritance.
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;pkg1&gt;&lt;parent&gt;&lt;prop_0&gt;</id>
@@ -2292,11 +2292,11 @@ in the context of inheritance.
 					<documentation>Base class for scenario that tests code generated move contructors.
 </documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;move_ctor_base&gt;</id>
@@ -2351,11 +2351,11 @@ in the context of inheritance.
 						<documentation>Force manual move constructor.
 </documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;move_ctor_base&gt;&lt;prop_0&gt;</id>
@@ -2490,11 +2490,11 @@ in the context of inheritance.
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;parent_without_members&gt;</id>
@@ -2607,11 +2607,11 @@ in the context of inheritance.
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;pkg2&gt;&lt;parent&gt;</id>
@@ -2666,11 +2666,11 @@ in the context of inheritance.
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;pkg2&gt;&lt;parent&gt;&lt;prop_0&gt;</id>
@@ -2806,11 +2806,11 @@ in the context of inheritance.
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;second_child_without_members&gt;</id>
@@ -2953,11 +2953,11 @@ in the context of inheritance.
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;third_child_with_members&gt;</id>
@@ -3011,11 +3011,11 @@ in the context of inheritance.
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;third_child_with_members&gt;&lt;prop_1&gt;</id>
@@ -3180,11 +3180,11 @@ in the context of inheritance.
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;parent_with_members&gt;</id>
@@ -3238,11 +3238,11 @@ in the context of inheritance.
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;parent_with_members&gt;&lt;prop_0&gt;</id>
@@ -3377,11 +3377,11 @@ in the context of inheritance.
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;pkg3&gt;&lt;child&gt;</id>
@@ -3436,11 +3436,11 @@ in the context of inheritance.
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;pkg3&gt;&lt;child&gt;&lt;prop_1&gt;</id>
@@ -3607,11 +3607,11 @@ in the context of inheritance.
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;child_without_members&gt;</id>
@@ -3754,11 +3754,11 @@ in the context of inheritance.
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;parent_outside&gt;</id>
@@ -3812,11 +3812,11 @@ in the context of inheritance.
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;parent_outside&gt;&lt;prop_0&gt;</id>
@@ -3951,11 +3951,11 @@ in the context of inheritance.
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;child_with_members&gt;</id>
@@ -4009,11 +4009,11 @@ in the context of inheritance.
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;child_with_members&gt;&lt;prop_0&gt;</id>
@@ -4178,11 +4178,11 @@ in the context of inheritance.
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;service&gt;</id>
@@ -4295,11 +4295,11 @@ in the context of inheritance.
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;descendant2&gt;</id>
@@ -4353,11 +4353,11 @@ in the context of inheritance.
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;descendant2&gt;&lt;prop_0&gt;</id>
@@ -4522,11 +4522,11 @@ in the context of inheritance.
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;pkg4&gt;&lt;child&gt;</id>
@@ -4581,11 +4581,11 @@ in the context of inheritance.
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;pkg4&gt;&lt;child&gt;&lt;prop_1&gt;</id>
@@ -4751,11 +4751,11 @@ in the context of inheritance.
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;service_interface&gt;</id>
@@ -4868,11 +4868,11 @@ in the context of inheritance.
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;child_of_a_child2&gt;</id>
@@ -4926,11 +4926,11 @@ in the context of inheritance.
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;child_of_a_child2&gt;&lt;prop_2&gt;</id>
@@ -5095,11 +5095,11 @@ in the context of inheritance.
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;descendant1&gt;</id>
@@ -5242,11 +5242,11 @@ in the context of inheritance.
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;child_of_a_child1&gt;</id>
@@ -5389,11 +5389,11 @@ in the context of inheritance.
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;descendant3&gt;</id>
@@ -5447,11 +5447,11 @@ in the context of inheritance.
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;descendant3&gt;&lt;prop_0&gt;</id>
@@ -5617,11 +5617,11 @@ in the context of inheritance.
 					<documentation>Descendant class for scenario that tests code generated move contructors.
 </documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;move_ctor_descendant&gt;</id>
@@ -5676,11 +5676,11 @@ in the context of inheritance.
 						<documentation>Force manual move constructor.
 </documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;move_ctor_descendant&gt;&lt;prop_1&gt;</id>
@@ -6029,11 +6029,11 @@ in the context of inheritance.
 		<element>
 			<documentation></documentation>
 			<annotation>
-				<body>
+				<entries>
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
-				</body>
+				</entries>
 			</annotation>
 			<name>
 				<id></id>

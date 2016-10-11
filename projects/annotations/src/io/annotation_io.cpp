@@ -54,7 +54,7 @@ namespace annotations {
 std::ostream& operator<<(std::ostream& s, const annotation& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::annotations::annotation\"" << ", "
-      << "\"body\": " << v.body()
+      << "\"entries\": " << v.entries()
       << " }";
     return(s);
 }

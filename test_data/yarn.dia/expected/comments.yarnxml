@@ -54,11 +54,11 @@
 					<documentation>package2
 </documentation>
 					<annotation class_id="22" tracking_level="0" version="0">
-						<body class_id="23" tracking_level="0" version="0">
+						<entries class_id="23" tracking_level="0" version="0">
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;comments&gt;&lt;package&gt;&lt;package2&gt;</id>
@@ -116,11 +116,11 @@
 					<documentation>package
 </documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;comments&gt;&lt;package&gt;</id>
@@ -179,11 +179,11 @@
 This comment will be applied to the model namespace itself.
 </documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;comments&gt;</id>
@@ -263,11 +263,11 @@ second line
 third line with &quot;quote&quot;
 </documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;comments&gt;&lt;multi_line&gt;</id>
@@ -381,11 +381,11 @@ third line with &quot;quote&quot;
 					<documentation>this is the brief comment
 </documentation>
 					<annotation>
-						<body>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</body>
+						</entries>
 					</annotation>
 					<name>
 						<id>&lt;comments&gt;&lt;one_line&gt;</id>
@@ -440,11 +440,11 @@ third line with &quot;quote&quot;
 						<documentation>another brief comment
 </documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;comments&gt;&lt;one_line&gt;&lt;prop_0&gt;</id>
@@ -523,11 +523,11 @@ third line with &quot;quote&quot;
 a second line
 </documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;comments&gt;&lt;one_line&gt;&lt;prop_1&gt;</id>
@@ -603,11 +603,11 @@ a second line
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<body>
+							<entries>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</body>
+							</entries>
 						</annotation>
 						<name>
 							<id>&lt;comments&gt;&lt;one_line&gt;&lt;prop_2&gt;</id>
@@ -846,11 +846,11 @@ a second line
 		<element>
 			<documentation></documentation>
 			<annotation>
-				<body>
+				<entries>
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
-				</body>
+				</entries>
 			</annotation>
 			<name>
 				<id></id>
