@@ -25,7 +25,7 @@ namespace stitch {
 
 text_template::text_template(
     const dogen::stitch::properties& properties,
-    const dogen::annotations::object& annotation,
+    const dogen::annotations::annotation& annotation,
     const std::list<dogen::stitch::line>& lines)
     : properties_(properties),
       annotation_(annotation),
@@ -66,19 +66,19 @@ void text_template::properties(const dogen::stitch::properties&& v) {
     properties_ = std::move(v);
 }
 
-const dogen::annotations::object& text_template::annotation() const {
+const dogen::annotations::annotation& text_template::annotation() const {
     return annotation_;
 }
 
-dogen::annotations::object& text_template::annotation() {
+dogen::annotations::annotation& text_template::annotation() {
     return annotation_;
 }
 
-void text_template::annotation(const dogen::annotations::object& v) {
+void text_template::annotation(const dogen::annotations::annotation& v) {
     annotation_ = v;
 }
 
-void text_template::annotation(const dogen::annotations::object&& v) {
+void text_template::annotation(const dogen::annotations::annotation&& v) {
     annotation_ = std::move(v);
 }
 

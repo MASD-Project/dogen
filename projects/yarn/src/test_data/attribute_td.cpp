@@ -32,7 +32,7 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-dogen::annotations::object
+dogen::annotations::annotation
 create_dogen_annotations_object(const unsigned int position) {
     return dogen::annotations::object_generator::create(position);
 }

@@ -51,7 +51,7 @@ decoration_properties_factory(const annotations::repository& drp,
 
 decoration_properties_factory::
 decoration_properties_factory(const annotations::repository& drp,
-    const repository& rp, const annotations::object& fallback)
+    const repository& rp, const annotations::annotation& fallback)
     : repository_(rp),
       field_definitions_(make_field_definitions(drp)),
       default_configuration_(make_decoration_configuration(fallback)),
@@ -89,7 +89,7 @@ make_field_definitions(const annotations::repository& rp) const {
 }
 
 decoration_configuration decoration_properties_factory::
-make_decoration_configuration(const annotations::object& o) const {
+make_decoration_configuration(const annotations::annotation& o) const {
     const annotations::field_selector fs(o);
 
     decoration_configuration r;
@@ -259,7 +259,7 @@ make(const std::string& modeline_name) const {
 }
 
 decoration_properties decoration_properties_factory::make(
-    const std::string& modeline_name, const annotations::object& o) const {
+    const std::string& modeline_name, const annotations::annotation& o) const {
     const auto dc(make_decoration_configuration(o));
     return make(modeline_name, dc);
 }

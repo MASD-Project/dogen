@@ -48,7 +48,7 @@ public:
         const std::string& name,
         const std::list<std::string>& parents,
         const std::unordered_map<std::string, dogen::annotations::field_instance_definition>& instance_definitions,
-        const dogen::annotations::object& content);
+        const dogen::annotations::annotation& content);
 
 private:
     template<typename Archive>
@@ -73,10 +73,10 @@ public:
     void instance_definitions(const std::unordered_map<std::string, dogen::annotations::field_instance_definition>& v);
     void instance_definitions(const std::unordered_map<std::string, dogen::annotations::field_instance_definition>&& v);
 
-    const dogen::annotations::object& content() const;
-    dogen::annotations::object& content();
-    void content(const dogen::annotations::object& v);
-    void content(const dogen::annotations::object&& v);
+    const dogen::annotations::annotation& content() const;
+    dogen::annotations::annotation& content();
+    void content(const dogen::annotations::annotation& v);
+    void content(const dogen::annotations::annotation&& v);
 
 public:
     bool operator==(const profile& rhs) const;
@@ -92,7 +92,7 @@ private:
     std::string name_;
     std::list<std::string> parents_;
     std::unordered_map<std::string, dogen::annotations::field_instance_definition> instance_definitions_;
-    dogen::annotations::object content_;
+    dogen::annotations::annotation content_;
 };
 
 } }

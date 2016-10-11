@@ -40,7 +40,7 @@ namespace stitch {
 
 void expander::expand(
     const boost::optional<boost::filesystem::path>& template_path,
-    annotations::object& o) const {
+    annotations::annotation& o) const {
 
     BOOST_LOG_SEV(lg, debug) << "Before expansion: " << o;
 

@@ -50,7 +50,7 @@ public:
 public:
     attribute(
         const std::string& documentation,
-        const dogen::annotations::object& annotation,
+        const dogen::annotations::annotation& annotation,
         const dogen::yarn::name& name,
         const std::string& unparsed_type,
         const dogen::yarn::name_tree& parsed_type,
@@ -83,10 +83,10 @@ public:
      * @brief Annotation for this element.
      */
     /**@{*/
-    const dogen::annotations::object& annotation() const;
-    dogen::annotations::object& annotation();
-    void annotation(const dogen::annotations::object& v);
-    void annotation(const dogen::annotations::object&& v);
+    const dogen::annotations::annotation& annotation() const;
+    dogen::annotations::annotation& annotation();
+    void annotation(const dogen::annotations::annotation& v);
+    void annotation(const dogen::annotations::annotation&& v);
     /**@}*/
 
     /**
@@ -149,7 +149,7 @@ public:
 
 private:
     std::string documentation_;
-    dogen::annotations::object annotation_;
+    dogen::annotations::annotation annotation_;
     dogen::yarn::name name_;
     std::string unparsed_type_;
     dogen::yarn::name_tree parsed_type_;

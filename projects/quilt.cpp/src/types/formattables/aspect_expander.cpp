@@ -78,7 +78,7 @@ make_field_definitions(const annotations::repository& drp) const {
 
 boost::optional<aspect_properties> aspect_expander::
 make_aspect_properties(const field_definitions& fds,
-    const annotations::object& o) const {
+    const annotations::annotation& o) const {
     aspect_properties r;
 
     const annotations::field_selector fs(o);

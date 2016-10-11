@@ -57,7 +57,7 @@ private:
      * @brief Expands the annotations object.
      */
     void perform_expansion(const boost::filesystem::path& p,
-        annotations::object& o) const;
+        annotations::annotation& o) const;
 
 private:
     /**

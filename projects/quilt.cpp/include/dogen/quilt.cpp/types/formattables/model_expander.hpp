@@ -47,11 +47,11 @@ private:
 
     void expand_profile_groups(
         const std::forward_list<boost::filesystem::path>& dirs,
-        const annotations::repository& drp, const annotations::object& root_object,
+        const annotations::repository& drp, const annotations::annotation& root_object,
         const formatters::container& fc, model& fm) const;
 
     void expand_enablement(const annotations::repository& drp,
-        const annotations::object& root_object, const formatters::container& fc,
+        const annotations::annotation& root_object, const formatters::container& fc,
         model& fm) const;
 
     void expand_canonical_formatters(const formatters::container& fc,
@@ -82,7 +82,7 @@ private:
 public:
     void expand(const std::forward_list<boost::filesystem::path>& dirs,
         const annotations::repository& drp,
-        const annotations::object& root_object,
+        const annotations::annotation& root_object,
         const dogen::formatters::decoration_properties_factory& dpf,
         const formatters::container& fc, const locator& l, model& fm) const;
 };

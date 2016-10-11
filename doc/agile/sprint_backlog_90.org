@@ -158,6 +158,7 @@ There were a couple of instances left out in the configuration
 refactor, in yarn.
 
 *** STARTED Clean up terminology in dynamic                           :story:
+    CLOCK: [2016-10-11 Tue 15:05]--[2016-10-11 Tue 15:30] =>  0:25
     CLOCK: [2016-10-11 Tue 14:40]--[2016-10-11 Tue 14:42] =>  0:02
     CLOCK: [2016-10-11 Tue 14:31]--[2016-10-11 Tue 14:39] =>  0:08
     CLOCK: [2016-10-11 Tue 13:39]--[2016-10-11 Tue 14:30] =>  0:51
@@ -190,14 +191,14 @@ objects in yarn (well, anywhere in theory). Interpreting some
   here. However, we will need a way to figure out which ones are
   profiles and which are annotation types. Perhaps the extension could
   become =annotation_types.json=.
-- object -> annotation. The marker for the annotation is the linkage
-  between the annotation and the yarn element it annotates. Fields
-  become the body of the annotation.
-- workflow: annotation groups factory. Takes in scribble groups.
 - raw aggregate: scribbles, scribble group?
 - object aggregate: annotation group (and top level container
   annotation groups). In annotation group we have parent and
   children. Also add a flag for is master/root.
+- object -> annotation. The marker for the annotation is the linkage
+  between the annotation and the yarn element it annotates. Fields
+  become the body of the annotation.
+- workflow: annotation groups factory. Takes in scribble groups.
 - field instance -> entry.
 - field instance definition -> entry template.
 - field definition -> split into type and type template. JSON file can

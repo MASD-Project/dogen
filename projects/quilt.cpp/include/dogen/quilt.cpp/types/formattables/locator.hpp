@@ -50,7 +50,7 @@ public:
     locator(
         const boost::filesystem::path& project_directory_path,
         const annotations::repository& drp, const formatters::container& fc,
-        const annotations::object& root_object, const yarn::name& model_name,
+        const annotations::annotation& root_object, const yarn::name& model_name,
         const std::unordered_set<std::string>& module_ids);
 
 private:
@@ -81,10 +81,10 @@ private:
         const formatters::container& fc) const;
 
     locator_configuration make_configuration(const field_definitions& fds,
-        const annotations::object& o) const;
+        const annotations::annotation& o) const;
 
     locator_configuration make_configuration(const annotations::repository& drp,
-        const formatters::container& fc, const annotations::object& o);
+        const formatters::container& fc, const annotations::annotation& o);
 
 private:
     /**

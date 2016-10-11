@@ -59,7 +59,7 @@ generalization_expander::make_field_definitions(
 
 boost::optional<bool>
 generalization_expander::make_is_final(const field_definitions& fds,
-    const annotations::object& o) const {
+    const annotations::annotation& o) const {
     const annotations::field_selector fs(o);
 
     if (fs.has_field(fds.is_final))

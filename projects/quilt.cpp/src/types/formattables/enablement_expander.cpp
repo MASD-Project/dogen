@@ -118,7 +118,7 @@ enablement_expander::make_global_field_definitions(
 enablement_expander::global_enablement_configurations_type
 enablement_expander::obtain_global_configurations(
     const std::unordered_map<std::string, global_field_definitions>& gfd,
-    const annotations::object& root_object, const formatters::container& fc,
+    const annotations::annotation& root_object, const formatters::container& fc,
     const profile_group& gpg) const {
 
     BOOST_LOG_SEV(lg, debug) << "Creating global enablement configuration.";
@@ -346,7 +346,7 @@ enablement_expander::bucket_local_field_definitions_by_type_index(
 
 enablement_expander::local_enablement_configurations_type enablement_expander::
 obtain_local_configurations(const local_field_definitions_type& lfd,
-    const annotations::object& o,  const formatters::container& fc,
+    const annotations::annotation& o,  const formatters::container& fc,
     const boost::optional<profile_group>& lpg) const {
 
     BOOST_LOG_SEV(lg, debug) << "Obtaining local configurations.";
@@ -565,7 +565,7 @@ void enablement_expander::compute_enablement(
 }
 
 void enablement_expander::expand(const annotations::repository& drp,
-    const annotations::object& root_object, const formatters::container& fc,
+    const annotations::annotation& root_object, const formatters::container& fc,
     model& fm) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started expanding enablement.";

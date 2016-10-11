@@ -315,7 +315,7 @@ void insert_object(dogen::yarn::intermediate_model& m,
     m.objects().insert(std::make_pair(o.name().id(), o));
 }
 
-void add_test_annotationss(dogen::annotations::object& o) {
+void add_test_annotationss(dogen::annotations::annotation& o) {
     using namespace dogen::annotations;
 
     value_factory f;

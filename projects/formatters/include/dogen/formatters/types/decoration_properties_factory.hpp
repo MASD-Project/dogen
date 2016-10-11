@@ -61,7 +61,7 @@ public:
      * @param fallback object to use to construct defaults, if any.
      */
     decoration_properties_factory(const annotations::repository& drp,
-        const repository& rp, const annotations::object& fallback);
+        const repository& rp, const annotations::annotation& fallback);
 
 private:
     struct field_definitions {
@@ -78,7 +78,7 @@ private:
     make_field_definitions(const annotations::repository& rp) const;
 
     decoration_configuration
-    make_decoration_configuration(const annotations::object& o) const;
+    make_decoration_configuration(const annotations::annotation& o) const;
 
 private:
     /**
@@ -148,7 +148,7 @@ public:
     /**@{*/
     decoration_properties make(const std::string& modeline_name) const;
     decoration_properties make(const std::string& modeline_name,
-        const annotations::object& o) const;
+        const annotations::annotation& o) const;
     /**@}*/
 
 private:

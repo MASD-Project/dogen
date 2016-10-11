@@ -35,7 +35,7 @@ public:
     object_generator();
 
 public:
-    typedef dogen::annotations::object result_type;
+    typedef dogen::annotations::annotation result_type;
 
 public:
     static void populate(const unsigned int position, result_type& v);

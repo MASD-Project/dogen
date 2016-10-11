@@ -28,7 +28,7 @@ namespace yarn {
 
 exception::exception(
     const std::string& documentation,
-    const dogen::annotations::object& annotation,
+    const dogen::annotations::annotation& annotation,
     const dogen::yarn::name& name,
     const dogen::yarn::generation_types generation_type,
     const dogen::yarn::origin_types origin_type,

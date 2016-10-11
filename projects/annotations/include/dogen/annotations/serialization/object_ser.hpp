@@ -28,15 +28,15 @@
 #include <boost/serialization/split_free.hpp>
 #include "dogen/annotations/types/object.hpp"
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::annotations::object)
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::annotations::annotation)
 namespace boost {
 namespace serialization {
 
 template<typename Archive>
-void save(Archive& ar, const dogen::annotations::object& v, unsigned int version);
+void save(Archive& ar, const dogen::annotations::annotation& v, unsigned int version);
 
 template<typename Archive>
-void load(Archive& ar, dogen::annotations::object& v, unsigned int version);
+void load(Archive& ar, dogen::annotations::annotation& v, unsigned int version);
 
 } }
 

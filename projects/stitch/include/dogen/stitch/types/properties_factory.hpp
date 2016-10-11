@@ -50,19 +50,19 @@ private:
      * @brief Create the decoration properties.
      */
     boost::optional<formatters::decoration_properties>
-    make_decoration_properties(const annotations::object& o) const;
+    make_decoration_properties(const annotations::annotation& o) const;
 
     /**
      * @brief Create the stitching settings.
      */
     stitching_properties
-    make_stitching_properties(const annotations::object& o) const;
+    make_stitching_properties(const annotations::annotation& o) const;
 
 public:
     /**
      * @brief Create the settings bundle.
      */
-    properties make(const annotations::object& o) const;
+    properties make(const annotations::annotation& o) const;
 
 private:
     const annotations::repository& annotations_repository_;

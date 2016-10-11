@@ -51,7 +51,7 @@ const std::string no_default_value(
 namespace dogen {
 namespace annotations {
 
-field_selector::field_selector(const object& o) : object_(o) { }
+field_selector::field_selector(const annotation& o) : object_(o) { }
 
 void field_selector::ensure_default_value(const field_definition& fd) const {
     if (!fd.default_value()) {

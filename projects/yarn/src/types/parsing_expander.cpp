@@ -52,7 +52,7 @@ parsing_expander::field_definitions parsing_expander::make_field_definitions(
 }
 
 std::string parsing_expander::
-make_parent(const field_definitions& fds, const annotations::object& o) const {
+make_parent(const field_definitions& fds, const annotations::annotation& o) const {
     const annotations::field_selector fs(o);
     if (fs.has_field(fds.parent))
         return fs.get_text_content(fds.parent);

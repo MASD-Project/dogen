@@ -38,7 +38,7 @@ properties_factory::properties_factory(
       formatters_repository_(formatters_repository) {}
 
 boost::optional<formatters::decoration_properties> properties_factory::
-make_decoration_properties(const annotations::object& o) const {
+make_decoration_properties(const annotations::annotation& o) const {
     using dogen::formatters::decoration_properties_factory;
     const auto& drp(annotations_repository_);
     decoration_properties_factory f(drp, formatters_repository_);
@@ -46,13 +46,13 @@ make_decoration_properties(const annotations::object& o) const {
 }
 
 stitching_properties properties_factory::
-make_stitching_properties(const annotations::object& o) const {
+make_stitching_properties(const annotations::annotation& o) const {
     stitching_properties_factory f(annotations_repository_);
     return f.make(o);
 }
 
 properties
-properties_factory::make(const annotations::object& o) const {
+properties_factory::make(const annotations::annotation& o) const {
     properties r;
     r.decoration_properties(make_decoration_properties(o));
     r.stitching_properties(make_stitching_properties(o));

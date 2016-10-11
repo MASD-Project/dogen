@@ -67,7 +67,7 @@ private:
 
     global_enablement_configurations_type obtain_global_configurations(
         const global_field_definitions_type& gfds,
-        const annotations::object& root_object, const formatters::container& fc,
+        const annotations::annotation& root_object, const formatters::container& fc,
         const profile_group& gpg) const;
 
     void update_facet_enablement(const formatters::container& fc,
@@ -101,7 +101,7 @@ private:
 
     local_enablement_configurations_type obtain_local_configurations(
         const local_field_definitions_type& lfds,
-        const annotations::object& o, const formatters::container& fc,
+        const annotations::annotation& o, const formatters::container& fc,
         const boost::optional<profile_group>& lpg) const;
 
 private:
@@ -116,7 +116,7 @@ private:
 
 public:
     void expand(const annotations::repository& drp,
-        const annotations::object& root_object, const formatters::container& fc,
+        const annotations::annotation& root_object, const formatters::container& fc,
         model& fm) const;
 };
 

@@ -64,7 +64,7 @@ public:
 public:
     element(
         const std::string& documentation,
-        const dogen::annotations::object& annotation,
+        const dogen::annotations::annotation& annotation,
         const dogen::yarn::name& name,
         const dogen::yarn::generation_types generation_type,
         const dogen::yarn::origin_types origin_type,
@@ -108,10 +108,10 @@ public:
      * @brief Annotation for this element.
      */
     /**@{*/
-    const dogen::annotations::object& annotation() const;
-    dogen::annotations::object& annotation();
-    void annotation(const dogen::annotations::object& v);
-    void annotation(const dogen::annotations::object&& v);
+    const dogen::annotations::annotation& annotation() const;
+    dogen::annotations::annotation& annotation();
+    void annotation(const dogen::annotations::annotation& v);
+    void annotation(const dogen::annotations::annotation&& v);
     /**@}*/
 
     /**
@@ -181,7 +181,7 @@ protected:
 
 private:
     std::string documentation_;
-    dogen::annotations::object annotation_;
+    dogen::annotations::annotation annotation_;
     dogen::yarn::name name_;
     dogen::yarn::generation_types generation_type_;
     dogen::yarn::origin_types origin_type_;

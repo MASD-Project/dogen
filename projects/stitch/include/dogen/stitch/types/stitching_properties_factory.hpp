@@ -63,43 +63,43 @@ private:
      * @brief Extracts the stream variable name.
      */
     std::string
-    extract_stream_variable_name(const annotations::object& o) const;
+    extract_stream_variable_name(const annotations::annotation& o) const;
 
     /**
      * @brief Extracts the template path.
      */
     boost::optional<boost::filesystem::path>
-    extract_template_path(const annotations::object& o) const;
+    extract_template_path(const annotations::annotation& o) const;
 
     /**
      * @brief Extracts the file path.
      */
     boost::optional<boost::filesystem::path>
-    extract_output_path(const annotations::object& o) const;
+    extract_output_path(const annotations::annotation& o) const;
 
     /**
      * @brief Extracts the relative output directory.
      */
     boost::optional<boost::filesystem::path>
-    extract_relative_output_directory(const annotations::object& o) const;
+    extract_relative_output_directory(const annotations::annotation& o) const;
 
     /**
      * @brief Extracts inclusion dependencies.
      */
     std::list<std::string>
-    extract_inclusion_dependencies(const annotations::object& o) const;
+    extract_inclusion_dependencies(const annotations::annotation& o) const;
 
     /**
      * @brief Extract containing namespaces.
      */
     std::list<std::string>
-    extract_containing_namespaces(const annotations::object& o) const;
+    extract_containing_namespaces(const annotations::annotation& o) const;
 
 public:
     /**
      * @brief Create the stitching settings.
      */
-    stitching_properties make(const annotations::object& o) const;
+    stitching_properties make(const annotations::annotation& o) const;
 
 private:
     const field_definitions field_definitions_;

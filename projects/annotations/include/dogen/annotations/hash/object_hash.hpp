@@ -33,7 +33,7 @@ namespace annotations {
 
 struct object_hasher {
 public:
-    static std::size_t hash(const object& v);
+    static std::size_t hash(const annotation& v);
 };
 
 } }
@@ -41,9 +41,9 @@ public:
 namespace std {
 
 template<>
-struct hash<dogen::annotations::object> {
+struct hash<dogen::annotations::annotation> {
 public:
-    size_t operator()(const dogen::annotations::object& v) const {
+    size_t operator()(const dogen::annotations::annotation& v) const {
         return dogen::annotations::object_hasher::hash(v);
     }
 };

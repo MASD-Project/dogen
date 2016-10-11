@@ -51,7 +51,7 @@ private:
     make_field_definitions(const annotations::repository& drp) const;
 
     std::list<std::string> make_odb_pragmas(
-        const field_definitions& fds, const annotations::object& o) const;
+        const field_definitions& fds, const annotations::annotation& o) const;
 
 private:
     boost::optional<odb_properties> compute_odb_configuration(

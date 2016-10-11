@@ -166,7 +166,7 @@ make_field_definitions(const annotations::repository& drp,
 }
 
 bool inclusion_expander::make_top_level_inclusion_required(
-    const field_definitions& fds, const annotations::object& o) const {
+    const field_definitions& fds, const annotations::annotation& o) const {
     const annotations::field_selector fs(o);
     return fs.get_boolean_content_or_default(fds.inclusion_required);
 }
@@ -174,7 +174,7 @@ bool inclusion_expander::make_top_level_inclusion_required(
 inclusion_directive_configuration
 inclusion_expander::make_inclusion_directive_configuration(
     const field_definitions& fds,const std::string& formatter_name,
-    const annotations::object& o) const {
+    const annotations::annotation& o) const {
 
     if (formatter_name.empty()) {
         BOOST_LOG_SEV(lg, error) << empty_formatter_name;

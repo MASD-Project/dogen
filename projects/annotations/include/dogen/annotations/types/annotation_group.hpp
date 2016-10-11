@@ -46,8 +46,8 @@ public:
 
 public:
     annotation_group(
-        const dogen::annotations::object& parent,
-        const std::unordered_map<std::string, dogen::annotations::object>& children);
+        const dogen::annotations::annotation& parent,
+        const std::unordered_map<std::string, dogen::annotations::annotation>& children);
 
 private:
     template<typename Archive>
@@ -61,20 +61,20 @@ public:
      * @brief Top-level annotation.
      */
     /**@{*/
-    const dogen::annotations::object& parent() const;
-    dogen::annotations::object& parent();
-    void parent(const dogen::annotations::object& v);
-    void parent(const dogen::annotations::object&& v);
+    const dogen::annotations::annotation& parent() const;
+    dogen::annotations::annotation& parent();
+    void parent(const dogen::annotations::annotation& v);
+    void parent(const dogen::annotations::annotation&& v);
     /**@}*/
 
     /**
      * @brief Child annotations.
      */
     /**@{*/
-    const std::unordered_map<std::string, dogen::annotations::object>& children() const;
-    std::unordered_map<std::string, dogen::annotations::object>& children();
-    void children(const std::unordered_map<std::string, dogen::annotations::object>& v);
-    void children(const std::unordered_map<std::string, dogen::annotations::object>&& v);
+    const std::unordered_map<std::string, dogen::annotations::annotation>& children() const;
+    std::unordered_map<std::string, dogen::annotations::annotation>& children();
+    void children(const std::unordered_map<std::string, dogen::annotations::annotation>& v);
+    void children(const std::unordered_map<std::string, dogen::annotations::annotation>&& v);
     /**@}*/
 
 public:
@@ -88,8 +88,8 @@ public:
     annotation_group& operator=(annotation_group other);
 
 private:
-    dogen::annotations::object parent_;
-    std::unordered_map<std::string, dogen::annotations::object> children_;
+    dogen::annotations::annotation parent_;
+    std::unordered_map<std::string, dogen::annotations::annotation> children_;
 };
 
 } }

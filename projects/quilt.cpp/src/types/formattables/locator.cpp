@@ -54,7 +54,7 @@ namespace formattables {
 
 locator::locator(const boost::filesystem::path& project_directory_path,
     const annotations::repository& drp, const formatters::container& fc,
-    const annotations::object& root, const yarn::name& model_name,
+    const annotations::annotation& root, const yarn::name& model_name,
     const std::unordered_set<std::string>& module_ids)
     : model_name_(model_name),
       configuration_(make_configuration(drp, fc, root)),
@@ -118,7 +118,7 @@ locator::field_definitions locator::make_field_definitions(
 }
 
 locator_configuration locator::make_configuration(
-    const field_definitions& fds, const annotations::object& o) const {
+    const field_definitions& fds, const annotations::annotation& o) const {
 
     locator_configuration r;
     const annotations::field_selector fs(o);
@@ -173,7 +173,7 @@ locator_configuration locator::make_configuration(
 
 locator_configuration locator::make_configuration(
     const annotations::repository& drp, const formatters::container& fc,
-    const annotations::object& o) {
+    const annotations::annotation& o) {
 
     const auto fds(make_field_definitions (drp, fc));
     const auto r(make_configuration(fds, o));

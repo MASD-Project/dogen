@@ -66,7 +66,7 @@ make_field_definitions(const annotations::repository& drp) const {
 }
 
 std::list<std::string> odb_expander::make_odb_pragmas(
-    const field_definitions& fds, const annotations::object& o) const {
+    const field_definitions& fds, const annotations::annotation& o) const {
 
     const annotations::field_selector fs(o);
     if (!fs.has_field(fds.odb_pragma))

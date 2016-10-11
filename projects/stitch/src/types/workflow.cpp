@@ -56,7 +56,7 @@ namespace stitch {
 workflow::workflow() : formatter_() {}
 
 void workflow::perform_expansion(const boost::filesystem::path& p,
-    annotations::object& o) const {
+    annotations::annotation& o) const {
     expander e;
     e.expand(p, o);
 }

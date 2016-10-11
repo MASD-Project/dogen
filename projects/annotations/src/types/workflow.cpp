@@ -122,11 +122,11 @@ compute_scope_for_id(const std::string& root_annotation_id,
     return is_root ? scope_types::root_module : scope_types::entity;
 }
 
-object workflow::
+annotation workflow::
 execute(const scope_types scope, const scribble& scribble) const {
     auto aggregated_entries(aggregate_scribble_entries(scribble));
     auto fields(create_fields(scope, aggregated_entries));
-    return object(fields);
+    return annotation(fields);
 }
 
 std::unordered_map<std::string, annotation_group>

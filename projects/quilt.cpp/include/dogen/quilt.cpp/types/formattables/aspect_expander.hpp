@@ -57,7 +57,7 @@ private:
     make_field_definitions(const annotations::repository& drp) const;
 
     boost::optional<aspect_properties> make_aspect_properties(
-        const field_definitions& fds, const annotations::object& o) const;
+        const field_definitions& fds, const annotations::annotation& o) const;
 
 private:
     typedef std::unordered_map<std::string, aspect_properties>

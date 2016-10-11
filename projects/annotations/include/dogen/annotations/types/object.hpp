@@ -37,22 +37,22 @@ namespace annotations {
 /**
  * @brief Represents a set of annotations.
  */
-class object final {
+class annotation final {
 public:
-    object() = default;
-    object(const object&) = default;
-    object(object&&) = default;
-    ~object() = default;
+    annotation() = default;
+    annotation(const annotation&) = default;
+    annotation(annotation&&) = default;
+    ~annotation() = default;
 
 public:
-    explicit object(const std::unordered_map<std::string, dogen::annotations::field_instance>& fields);
+    explicit annotation(const std::unordered_map<std::string, dogen::annotations::field_instance>& fields);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::annotations::object& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::annotations::annotation& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::annotations::object& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::annotations::annotation& v, unsigned int version);
 
 public:
     /**
@@ -66,14 +66,14 @@ public:
     /**@}*/
 
 public:
-    bool operator==(const object& rhs) const;
-    bool operator!=(const object& rhs) const {
+    bool operator==(const annotation& rhs) const;
+    bool operator!=(const annotation& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(object& other) noexcept;
-    object& operator=(object other);
+    void swap(annotation& other) noexcept;
+    annotation& operator=(annotation other);
 
 private:
     std::unordered_map<std::string, dogen::annotations::field_instance> fields_;
@@ -85,8 +85,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::annotations::object& lhs,
-    dogen::annotations::object& rhs) {
+    dogen::annotations::annotation& lhs,
+    dogen::annotations::annotation& rhs) {
     lhs.swap(rhs);
 }
 

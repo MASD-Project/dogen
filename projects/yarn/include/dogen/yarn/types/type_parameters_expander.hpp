@@ -46,7 +46,7 @@ private:
         const annotations::repository& drp) const;
 
     type_parameters make_type_parameters(const field_definitions& fds,
-        const annotations::object& o) const;
+        const annotations::annotation& o) const;
 
 private:
     void expand_type_parameters(const field_definitions& fds, object& o) const;

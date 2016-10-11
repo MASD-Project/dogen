@@ -27,7 +27,7 @@ profile::profile(
     const std::string& name,
     const std::list<std::string>& parents,
     const std::unordered_map<std::string, dogen::annotations::field_instance_definition>& instance_definitions,
-    const dogen::annotations::object& content)
+    const dogen::annotations::annotation& content)
     : name_(name),
       parents_(parents),
       instance_definitions_(instance_definitions),
@@ -102,19 +102,19 @@ void profile::instance_definitions(const std::unordered_map<std::string, dogen::
     instance_definitions_ = std::move(v);
 }
 
-const dogen::annotations::object& profile::content() const {
+const dogen::annotations::annotation& profile::content() const {
     return content_;
 }
 
-dogen::annotations::object& profile::content() {
+dogen::annotations::annotation& profile::content() {
     return content_;
 }
 
-void profile::content(const dogen::annotations::object& v) {
+void profile::content(const dogen::annotations::annotation& v) {
     content_ = v;
 }
 
-void profile::content(const dogen::annotations::object&& v) {
+void profile::content(const dogen::annotations::annotation&& v) {
     content_ = std::move(v);
 }
 

@@ -45,7 +45,7 @@ public:
 public:
     text_template(
         const dogen::stitch::properties& properties,
-        const dogen::annotations::object& annotation,
+        const dogen::annotations::annotation& annotation,
         const std::list<dogen::stitch::line>& lines);
 
 private:
@@ -61,10 +61,10 @@ public:
     void properties(const dogen::stitch::properties& v);
     void properties(const dogen::stitch::properties&& v);
 
-    const dogen::annotations::object& annotation() const;
-    dogen::annotations::object& annotation();
-    void annotation(const dogen::annotations::object& v);
-    void annotation(const dogen::annotations::object&& v);
+    const dogen::annotations::annotation& annotation() const;
+    dogen::annotations::annotation& annotation();
+    void annotation(const dogen::annotations::annotation& v);
+    void annotation(const dogen::annotations::annotation&& v);
 
     const std::list<dogen::stitch::line>& lines() const;
     std::list<dogen::stitch::line>& lines();
@@ -83,7 +83,7 @@ public:
 
 private:
     dogen::stitch::properties properties_;
-    dogen::annotations::object annotation_;
+    dogen::annotations::annotation annotation_;
     std::list<dogen::stitch::line> lines_;
 };
 

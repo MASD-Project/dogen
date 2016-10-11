@@ -90,11 +90,11 @@ private:
         const formatters::container& fc) const;
 
     bool make_top_level_inclusion_required(const field_definitions& fds,
-        const annotations::object& o) const;
+        const annotations::annotation& o) const;
 
     inclusion_directive_configuration make_inclusion_directive_configuration(
         const field_definitions& fds,const std::string& formatter_name,
-        const annotations::object& o) const;
+        const annotations::annotation& o) const;
 
 private:
     typedef std::forward_list<

@@ -45,7 +45,7 @@ private:
     make_field_definitions(const annotations::repository& drp) const;
 
     boost::optional<bool> make_is_final(const field_definitions& fds,
-        const annotations::object& o) const;
+        const annotations::annotation& o) const;
 
 private:
     std::unordered_set<std::string>

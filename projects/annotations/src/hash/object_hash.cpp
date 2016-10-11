@@ -43,7 +43,7 @@ inline std::size_t hash_std_unordered_map_std_string_dogen_annotations_field_ins
 namespace dogen {
 namespace annotations {
 
-std::size_t object_hasher::hash(const object& v) {
+std::size_t object_hasher::hash(const annotation& v) {
     std::size_t seed(0);
 
     combine(seed, hash_std_unordered_map_std_string_dogen_annotations_field_instance(v.fields()));

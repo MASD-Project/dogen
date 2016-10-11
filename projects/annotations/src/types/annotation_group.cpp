@@ -24,8 +24,8 @@ namespace dogen {
 namespace annotations {
 
 annotation_group::annotation_group(
-    const dogen::annotations::object& parent,
-    const std::unordered_map<std::string, dogen::annotations::object>& children)
+    const dogen::annotations::annotation& parent,
+    const std::unordered_map<std::string, dogen::annotations::annotation>& children)
     : parent_(parent),
       children_(children) { }
 
@@ -46,35 +46,35 @@ annotation_group& annotation_group::operator=(annotation_group other) {
     return *this;
 }
 
-const dogen::annotations::object& annotation_group::parent() const {
+const dogen::annotations::annotation& annotation_group::parent() const {
     return parent_;
 }
 
-dogen::annotations::object& annotation_group::parent() {
+dogen::annotations::annotation& annotation_group::parent() {
     return parent_;
 }
 
-void annotation_group::parent(const dogen::annotations::object& v) {
+void annotation_group::parent(const dogen::annotations::annotation& v) {
     parent_ = v;
 }
 
-void annotation_group::parent(const dogen::annotations::object&& v) {
+void annotation_group::parent(const dogen::annotations::annotation&& v) {
     parent_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::annotations::object>& annotation_group::children() const {
+const std::unordered_map<std::string, dogen::annotations::annotation>& annotation_group::children() const {
     return children_;
 }
 
-std::unordered_map<std::string, dogen::annotations::object>& annotation_group::children() {
+std::unordered_map<std::string, dogen::annotations::annotation>& annotation_group::children() {
     return children_;
 }
 
-void annotation_group::children(const std::unordered_map<std::string, dogen::annotations::object>& v) {
+void annotation_group::children(const std::unordered_map<std::string, dogen::annotations::annotation>& v) {
     children_ = v;
 }
 
-void annotation_group::children(const std::unordered_map<std::string, dogen::annotations::object>&& v) {
+void annotation_group::children(const std::unordered_map<std::string, dogen::annotations::annotation>&& v) {
     children_ = std::move(v);
 }
 

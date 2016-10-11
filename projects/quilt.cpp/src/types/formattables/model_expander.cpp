@@ -45,14 +45,14 @@ expand_streaming(const annotations::repository& drp, model& fm) const {
 
 void model_expander::expand_profile_groups(
     const std::forward_list<boost::filesystem::path>& dirs,
-    const annotations::repository& drp, const annotations::object& root_object,
+    const annotations::repository& drp, const annotations::annotation& root_object,
     const formatters::container& fc, model& fm) const {
     profile_group_expander ex;
     ex.expand(dirs, drp, root_object, fc, fm);
 }
 
 void model_expander::expand_enablement(const annotations::repository& drp,
-    const annotations::object& root_object, const formatters::container& fc,
+    const annotations::annotation& root_object, const formatters::container& fc,
     model& fm) const {
     enablement_expander ex;
     ex.expand(drp, root_object, fc, fm);
@@ -115,7 +115,7 @@ expand_facet_directories(const locator& l,model& fm) const {
 
 void model_expander::expand(
     const std::forward_list<boost::filesystem::path>& dirs,
-    const annotations::repository& drp, const annotations::object& root_object,
+    const annotations::repository& drp, const annotations::annotation& root_object,
     const dogen::formatters::decoration_properties_factory& dpf,
     const formatters::container& fc, const locator& l, model& fm) const {
 

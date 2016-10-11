@@ -29,7 +29,7 @@ attribute::attribute()
 
 attribute::attribute(
     const std::string& documentation,
-    const dogen::annotations::object& annotation,
+    const dogen::annotations::annotation& annotation,
     const dogen::yarn::name& name,
     const std::string& unparsed_type,
     const dogen::yarn::name_tree& parsed_type,
@@ -86,19 +86,19 @@ void attribute::documentation(const std::string&& v) {
     documentation_ = std::move(v);
 }
 
-const dogen::annotations::object& attribute::annotation() const {
+const dogen::annotations::annotation& attribute::annotation() const {
     return annotation_;
 }
 
-dogen::annotations::object& attribute::annotation() {
+dogen::annotations::annotation& attribute::annotation() {
     return annotation_;
 }
 
-void attribute::annotation(const dogen::annotations::object& v) {
+void attribute::annotation(const dogen::annotations::annotation& v) {
     annotation_ = v;
 }
 
-void attribute::annotation(const dogen::annotations::object&& v) {
+void attribute::annotation(const dogen::annotations::annotation&& v) {
     annotation_ = std::move(v);
 }
 

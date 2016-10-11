@@ -41,7 +41,7 @@ public:
      * @brief Execute the expansion.
      */
     void expand(const boost::optional<boost::filesystem::path>& template_path,
-        annotations::object& o) const;
+        annotations::annotation& o) const;
 };
 
 } }

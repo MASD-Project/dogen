@@ -71,7 +71,7 @@ private:
     create_decoration_properties_factory(
             const annotations::repository& drp,
             const dogen::formatters::repository& frp,
-            const annotations::object& root_object) const;
+            const annotations::annotation& root_object) const;
 
     /**
      * @brief Create the formattables representation of the yarn model.
@@ -80,7 +80,7 @@ private:
         const std::forward_list<boost::filesystem::path>& data_directories,
         const options::cpp_options& opts,
         const annotations::repository& drp,
-        const annotations::object& root_object,
+        const annotations::annotation& root_object,
         const dogen::formatters::decoration_properties_factory& dpf,
         const formatters::container& fc, const yarn::model& m) const;
 

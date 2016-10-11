@@ -40,7 +40,7 @@ namespace annotations {
  */
 class field_selector {
 public:
-    explicit field_selector(const object& o);
+    explicit field_selector(const annotation& o);
 
 private:
     /**
@@ -191,7 +191,7 @@ public:
     int get_number_content_or_default(const field_definition& fd) const;
 
 private:
-    const object& object_;
+    const annotation& object_;
 };
 
 } }

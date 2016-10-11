@@ -24,7 +24,7 @@
 
 namespace {
 
-dogen::annotations::object
+dogen::annotations::annotation
 create_dogen_annotations_object(const unsigned int position) {
     return dogen::annotations::object_generator::create(position);
 }
@@ -35,8 +35,8 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-std::unordered_map<std::string, dogen::annotations::object> create_std_unordered_map_std_string_dogen_annotations_object(unsigned int position) {
-    std::unordered_map<std::string, dogen::annotations::object> r;
+std::unordered_map<std::string, dogen::annotations::annotation> create_std_unordered_map_std_string_dogen_annotations_object(unsigned int position) {
+    std::unordered_map<std::string, dogen::annotations::annotation> r;
     for (unsigned int i(0); i < 4; ++i) {
         r.insert(std::make_pair(create_std_string(position + i), create_dogen_annotations_object(position + i)));
     }

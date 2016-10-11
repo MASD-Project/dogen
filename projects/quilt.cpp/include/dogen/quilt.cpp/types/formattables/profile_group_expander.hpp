@@ -52,7 +52,7 @@ private:
         const annotations::repository& drp) const;
 
     std::string obtain_profile_configuration(const field_definitions& fd,
-        const annotations::object& root_object) const;
+        const annotations::annotation& root_object) const;
 
 private:
     typedef std::unordered_map<std::string, profile_group> profile_group_types;
@@ -67,13 +67,13 @@ private:
     profile_group_types merge(const profile_group_types& original) const;
 
     void populate_model(
-        const annotations::repository& drp, const annotations::object& root_object,
+        const annotations::repository& drp, const annotations::annotation& root_object,
         const profile_group_types& pgs, model& fm) const;
 
 public:
     void expand(
         const std::forward_list<boost::filesystem::path>& data_directories,
-        const annotations::repository& drp, const annotations::object& root_object,
+        const annotations::repository& drp, const annotations::annotation& root_object,
         const formatters::container& fc, model& fm) const;
 };
 

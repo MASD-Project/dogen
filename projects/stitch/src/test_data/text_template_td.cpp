@@ -30,7 +30,7 @@ create_dogen_stitch_properties(const unsigned int position) {
     return dogen::stitch::properties_generator::create(position);
 }
 
-dogen::annotations::object
+dogen::annotations::annotation
 create_dogen_annotations_object(const unsigned int position) {
     return dogen::annotations::object_generator::create(position);
 }

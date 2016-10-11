@@ -28,7 +28,7 @@
 namespace dogen {
 namespace annotations {
 
-class object;
+class annotation;
 
 } }
 

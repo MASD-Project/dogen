@@ -120,7 +120,7 @@ stitching_properties_factory::make_field_definitions(
 }
 
 std::string stitching_properties_factory::
-extract_stream_variable_name(const annotations::object& o) const {
+extract_stream_variable_name(const annotations::annotation& o) const {
     using namespace annotations;
     const field_selector fs(o);
     const auto& fds(field_definitions_);
@@ -128,7 +128,7 @@ extract_stream_variable_name(const annotations::object& o) const {
 }
 
 boost::optional<boost::filesystem::path> stitching_properties_factory::
-extract_template_path(const annotations::object& o) const {
+extract_template_path(const annotations::annotation& o) const {
     using namespace annotations;
     const field_selector fs(o);
     if (!fs.has_field(traits::template_path()))
@@ -139,7 +139,7 @@ extract_template_path(const annotations::object& o) const {
 }
 
 boost::optional<boost::filesystem::path> stitching_properties_factory::
-extract_output_path(const annotations::object& o) const {
+extract_output_path(const annotations::annotation& o) const {
     using namespace annotations;
     const field_selector fs(o);
     if (!fs.has_field(traits::output_path()))
@@ -150,7 +150,7 @@ extract_output_path(const annotations::object& o) const {
 }
 
 boost::optional<boost::filesystem::path> stitching_properties_factory::
-extract_relative_output_directory(const annotations::object& o) const {
+extract_relative_output_directory(const annotations::annotation& o) const {
     using namespace annotations;
     const field_selector fs(o);
     if (!fs.has_field(traits::relative_output_directory()))
@@ -161,7 +161,7 @@ extract_relative_output_directory(const annotations::object& o) const {
 }
 
 std::list<std::string> stitching_properties_factory::
-extract_inclusion_dependencies(const annotations::object& o) const {
+extract_inclusion_dependencies(const annotations::annotation& o) const {
     std::list<std::string> r;
     using namespace annotations;
     const field_selector fs(o);
@@ -173,7 +173,7 @@ extract_inclusion_dependencies(const annotations::object& o) const {
 }
 
 std::list<std::string> stitching_properties_factory::
-extract_containing_namespaces(const annotations::object& o) const {
+extract_containing_namespaces(const annotations::annotation& o) const {
     std::list<std::string> r;
     using namespace annotations;
     const field_selector fs(o);
@@ -190,7 +190,7 @@ extract_containing_namespaces(const annotations::object& o) const {
 }
 
 stitching_properties stitching_properties_factory::
-make(const annotations::object& o) const {
+make(const annotations::annotation& o) const {
     stitching_properties r;
     r.stream_variable_name(extract_stream_variable_name(o));
     r.template_path(extract_template_path(o));

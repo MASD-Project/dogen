@@ -97,7 +97,7 @@ public:
     /**
      * @brief Produce the annotations object.
      */
-    object execute(const scope_types scope, const scribble& scribble) const;
+    annotation execute(const scope_types scope, const scribble& scribble) const;
 
     std::unordered_map<std::string, annotation_group>
     execute(const std::string& root_object_id,

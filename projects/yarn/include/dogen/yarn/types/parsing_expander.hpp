@@ -53,7 +53,7 @@ private:
         const annotations::repository& drp) const;
 
     std::string make_parent(const field_definitions& fds,
-        const annotations::object& o) const;
+        const annotations::annotation& o) const;
 
 private:
     /**

@@ -145,7 +145,7 @@ public:
     };
 
 public:
-    typedef std::function<void(annotations::object& o)>
+    typedef std::function<void(annotations::annotation& o)>
     annotation_function_type;
 
 public:

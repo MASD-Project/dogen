@@ -85,7 +85,7 @@ profile_group_expander::make_field_definitions(
 }
 
 std::string profile_group_expander::obtain_profile_configuration(
-    const field_definitions& fd, const annotations::object& root_object) const {
+    const field_definitions& fd, const annotations::annotation& root_object) const {
     BOOST_LOG_SEV(lg, debug) << "Reading profile configuration.";
     const annotations::field_selector fs(root_object);
     const auto r(fs.get_text_content_or_default(fd.profile));
@@ -186,7 +186,7 @@ profile_group_expander::merge(const profile_group_types& original) const {
 }
 
 void profile_group_expander::populate_model(const annotations::repository& drp,
-    const annotations::object& root_object, const profile_group_types& pgs,
+    const annotations::annotation& root_object, const profile_group_types& pgs,
     model& fm) const {
     BOOST_LOG_SEV(lg, debug) << "Populating model with profile groups.";
 
@@ -322,7 +322,7 @@ void profile_group_expander::populate_model(const annotations::repository& drp,
 
 void profile_group_expander::expand(
     const std::forward_list<boost::filesystem::path>& data_directories,
-    const annotations::repository& drp, const annotations::object& root_object,
+    const annotations::repository& drp, const annotations::annotation& root_object,
     const formatters::container& fc, model& fm) const {
 
     const auto original(hydrate(data_directories));

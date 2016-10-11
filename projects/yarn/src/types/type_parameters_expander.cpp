@@ -46,7 +46,7 @@ make_field_definitions(const annotations::repository& drp) const {
 
 type_parameters
 type_parameters_expander::make_type_parameters(const field_definitions& fds,
-    const annotations::object& o) const {
+    const annotations::annotation& o) const {
     type_parameters r;
     const annotations::field_selector fs(o);
 

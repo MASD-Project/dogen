@@ -51,7 +51,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 namespace dogen {
 namespace annotations {
 
-std::ostream& operator<<(std::ostream& s, const object& v) {
+std::ostream& operator<<(std::ostream& s, const annotation& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::annotations::object\"" << ", "
       << "\"fields\": " << v.fields()
