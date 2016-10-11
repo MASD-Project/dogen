@@ -18,12 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/annotations/types/value.hpp"
 #include "dogen/annotations/types/annotation.hpp"
+
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<dogen::annotations::value>& lhs,
+const boost::shared_ptr<dogen::annotations::value>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+}
 
 namespace dogen {
 namespace annotations {
 
-annotation::annotation(const std::unordered_map<std::string, dogen::annotations::field_instance>& entries)
+annotation::annotation(const std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> >& entries)
     : entries_(entries) { }
 
 void annotation::swap(annotation& other) noexcept {
@@ -41,19 +51,19 @@ annotation& annotation::operator=(annotation other) {
     return *this;
 }
 
-const std::unordered_map<std::string, dogen::annotations::field_instance>& annotation::entries() const {
+const std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> >& annotation::entries() const {
     return entries_;
 }
 
-std::unordered_map<std::string, dogen::annotations::field_instance>& annotation::entries() {
+std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> >& annotation::entries() {
     return entries_;
 }
 
-void annotation::entries(const std::unordered_map<std::string, dogen::annotations::field_instance>& v) {
+void annotation::entries(const std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> >& v) {
     entries_ = v;
 }
 
-void annotation::entries(const std::unordered_map<std::string, dogen::annotations::field_instance>&& v) {
+void annotation::entries(const std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> >&& v) {
     entries_ = std::move(v);
 }
 

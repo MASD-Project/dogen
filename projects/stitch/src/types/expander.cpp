@@ -21,8 +21,8 @@
 #include <boost/filesystem/operations.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/annotations/io/annotation_io.hpp"
+#include "dogen/annotations/types/value_factory.hpp"
 #include "dogen/annotations/types/field_selector.hpp"
-#include "dogen/annotations/types/field_instance_factory.hpp"
 #include "dogen/stitch/types/traits.hpp"
 #include "dogen/stitch/types/expander.hpp"
 
@@ -69,7 +69,7 @@ void expander::expand(
 
     absolute_output_directory /= output_filename;
 
-    const annotations::field_instance_factory f;
+    const annotations::value_factory f;
     const auto v(f.make_text(absolute_output_directory.generic_string()));
     a.entries()[traits::output_path()] = v;
 

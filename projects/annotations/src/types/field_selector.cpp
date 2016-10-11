@@ -70,7 +70,7 @@ bool field_selector::has_field(const field_definition& fd) const {
     return has_field(fd.name().qualified());
 }
 
-const field_instance& field_selector::
+const value& field_selector::
 get_field(const std::string& qualified_field_name) const {
     const auto i(annotation_.entries().find(qualified_field_name));
 
@@ -80,11 +80,10 @@ get_field(const std::string& qualified_field_name) const {
                 + qualified_field_name));
     }
 
-    return i->second;
+    return *i->second;
 }
 
-const field_instance& field_selector::
-get_field(const field_definition& fd) const {
+const value& field_selector::get_field(const field_definition& fd) const {
     return get_field(fd.name().qualified());
 }
 
@@ -100,8 +99,7 @@ std::string field_selector::get_text_content(const value& v) {
 
 std::string field_selector::
 get_text_content(const std::string& qualified_field_name) const {
-    const auto& f(get_field(qualified_field_name));
-    const auto& v(*f.value());
+    const auto& v(get_field(qualified_field_name));
 
     try {
         return get_text_content(v);
@@ -147,8 +145,7 @@ std::string field_selector::get_text_content(const field_definition& fd) const {
 
 std::list<std::string> field_selector::
 get_text_collection_content(const std::string& qualified_field_name) const {
-    const auto& f(get_field(qualified_field_name));
-    const auto& v(*f.value());
+    const auto& v(get_field(qualified_field_name));
 
     try {
         const auto& tc(dynamic_cast<const text_collection&>(v));
@@ -196,8 +193,8 @@ bool field_selector::get_boolean_content(const value& v) {
 
 bool field_selector::
 get_boolean_content(const std::string& qualified_field_name) const {
-    const auto& f(get_field(qualified_field_name));
-    const auto& v(*f.value());
+    const auto& v(get_field(qualified_field_name));
+
     try {
         return get_boolean_content(v);
     } catch(boost::exception& e) {
@@ -241,8 +238,8 @@ int field_selector::get_number_content(const value& v) {
 
 int field_selector::
 get_number_content(const std::string& qualified_field_name) const {
-    const auto& f(get_field(qualified_field_name));
-    const auto& v(*f.value());
+    const auto& v(get_field(qualified_field_name));
+
     try {
         return get_number_content(v);
     } catch(boost::exception& e) {

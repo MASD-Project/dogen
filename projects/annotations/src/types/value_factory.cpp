@@ -40,6 +40,11 @@ const std::string invalid_numeric_value(
 const std::string invalid_boolean_value(
     "Invalid boolean value: ");
 
+const std::string value_type_not_supported(
+    "Value type is not supported by factory: ");
+const std::string expected_at_most_one_element(
+    "Expected at most one element");
+
 /**
  * @brief Provides support for "true" and "false" as Boolean values.
  */
@@ -83,6 +88,23 @@ bool value_factory::to_bool(const std::string& s) const {
     }
 }
 
+void value_factory::ensure_at_most_one_element(
+    const std::list<std::string>& raw_values) const {
+
+    if (raw_values.empty())
+        return;
+
+    const auto i(++raw_values.begin());
+    if (i != raw_values.end()) {
+        BOOST_LOG_SEV(lg, error) << expected_at_most_one_element;
+        BOOST_THROW_EXCEPTION(building_error(expected_at_most_one_element));
+    }
+}
+
+bool value_factory::is_collection(const value_types vt) const {
+    return vt == value_types::text_collection;
+}
+
 boost::shared_ptr<value> value_factory::make_text(const std::string& v) const {
     return boost::make_shared<text>(v);
 }
@@ -109,6 +131,29 @@ value_factory::make_number(const std::string& v) const {
 
 boost::shared_ptr<value> value_factory::make_number(const int v) const {
     return boost::make_shared<number>(v);
+}
+
+boost::shared_ptr<value> value_factory::make(const field_definition& fd,
+    const std::list<std::string>& v) const {
+
+    if (!is_collection(fd.value_type()))
+        ensure_at_most_one_element(v);
+
+    switch (fd.value_type()) {
+    case value_types::text:
+        return make_text(v.front());
+    case value_types::text_collection:
+        return make_text_collection(v);
+    case value_types::boolean:
+        return make_boolean(v.front());
+    case value_types::number:
+        return make_number(v.front());
+    default:
+        break;
+    }
+    BOOST_LOG_SEV(lg, error) << value_type_not_supported << fd.value_type();
+    BOOST_THROW_EXCEPTION(building_error(value_type_not_supported +
+            boost::lexical_cast<std::string>(fd.value_type())));
 }
 
 } }

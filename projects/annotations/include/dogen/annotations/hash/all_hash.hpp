@@ -36,7 +36,6 @@
 #include "dogen/annotations/hash/repository_hash.hpp"
 #include "dogen/annotations/hash/scope_types_hash.hpp"
 #include "dogen/annotations/hash/value_types_hash.hpp"
-#include "dogen/annotations/hash/field_instance_hash.hpp"
 #include "dogen/annotations/hash/scribble_group_hash.hpp"
 #include "dogen/annotations/hash/text_collection_hash.hpp"
 #include "dogen/annotations/hash/annotation_group_hash.hpp"

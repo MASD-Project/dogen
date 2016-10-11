@@ -26,11 +26,12 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
+#include <boost/serialization/shared_ptr.hpp>
 #include <boost/serialization/unordered_map.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
+#include "dogen/annotations/serialization/value_ser.hpp"
 #include "dogen/annotations/serialization/annotation_ser.hpp"
-#include "dogen/annotations/serialization/field_instance_ser.hpp"
 
 namespace boost {
 namespace serialization {

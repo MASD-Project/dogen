@@ -28,7 +28,7 @@
 #include <list>
 #include <string>
 #include "dogen/annotations/types/field_definition.hpp"
-#include "dogen/annotations/types/field_instance.hpp"
+#include "dogen/annotations/types/value.hpp"
 #include "dogen/annotations/types/annotation.hpp"
 
 namespace dogen {
@@ -63,9 +63,9 @@ public:
      * @pre has_field must be true.
      */
     /**@{*/
-    const field_instance&
+    const value&
     get_field(const std::string& qualified_field_name) const;
-    const field_instance& get_field(const field_definition& fd) const;
+    const value& get_field(const field_definition& fd) const;
     /**@}*/
 
 public:

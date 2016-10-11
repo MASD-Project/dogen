@@ -23,9 +23,9 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
-#include "dogen/annotations/io/field_definition_io.hpp"
 #include "dogen/annotations/io/scope_types_io.hpp"
-#include "dogen/annotations/types/field_instance_factory.hpp"
+#include "dogen/annotations/io/field_definition_io.hpp"
+#include "dogen/annotations/types/value_factory.hpp"
 #include "dogen/annotations/types/building_error.hpp"
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
 
@@ -85,28 +85,29 @@ void annotation_groups_factory::validate_scope(const field_definition& fd,
     }
 }
 
-std::unordered_map<std::string, field_instance>
-annotation_groups_factory::create_fields(const scope_types current_scope,
+annotation annotation_groups_factory::create_annotation(
+    const scope_types current_scope,
     const std::unordered_map<std::string, std::list<std::string>>&
     aggregated_scribble_entries) const {
 
-    std::unordered_map<std::string, field_instance> r;
-    field_instance_factory f;
-    for (auto pair : aggregated_scribble_entries) {
-        const auto& n(pair.first);
-        const auto fd(obtain_field_definition(n));
+    value_factory f;
+    std::unordered_map<std::string, boost::shared_ptr<value>> entries;
+    for (auto kvp : aggregated_scribble_entries) {
+        const auto& k(kvp.first);
+        const auto fd(obtain_field_definition(k));
         if (!fd)
             continue;
 
         validate_scope(*fd, current_scope);
-        const auto& values(pair.second);
-        r[n] = f.make(*fd, values);
+        const auto& v(kvp.second);
+        entries[k] = f.make(*fd, v);
     }
-    return r;
+    return annotation(entries);
 }
 
-std::unordered_map<std::string, std::list<std::string>>
-annotation_groups_factory::aggregate_scribble_entries(const scribble& scribble) const {
+std::unordered_map<std::string, std::list<std::string >>
+annotation_groups_factory::
+aggregate_scribble_entries(const scribble& scribble) const {
     std::unordered_map<std::string, std::list<std::string> > r;
 
     for (const auto& entry : scribble.entries())
@@ -125,8 +126,8 @@ compute_scope_for_id(const std::string& root_annotation_id,
 annotation annotation_groups_factory::
 build(const scope_types scope, const scribble& scribble) const {
     auto aggregated_entries(aggregate_scribble_entries(scribble));
-    auto fields(create_fields(scope, aggregated_entries));
-    return annotation(fields);
+    auto r(create_annotation(scope, aggregated_entries));
+    return r;
 }
 
 std::unordered_map<std::string, annotation_group>

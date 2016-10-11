@@ -29,6 +29,7 @@
 #include <string>
 #include <boost/shared_ptr.hpp>
 #include "dogen/annotations/types/value.hpp"
+#include "dogen/annotations/types/field_definition.hpp"
 
 namespace dogen {
 namespace annotations {
@@ -51,6 +52,16 @@ private:
      * @pre s must be a valid bool.
      */
     bool to_bool(const std::string& s) const;
+
+    /**
+     * @brief Throws if the collection has more than one element.
+     */
+    void ensure_at_most_one_element(const std::list<std::string>& v) const;
+
+    /**
+     * @brief Returns true if the value type refers to a collection.
+     */
+    bool is_collection(const value_types vt) const;
 
 public:
     /**
@@ -79,6 +90,20 @@ public:
     boost::shared_ptr<value> make_number(const std::string& v) const;
     boost::shared_ptr<value> make_number(const int v) const;
     /**@}*/
+
+public:
+    /**
+     * @brief Creates a field instance given a definition, the
+     * original key and zero or more values.
+     *
+     * @pre If values has more than one element, the field's value
+     * type must be a collection.
+     *
+     * @pre Values must be valid according to the type in the field
+     * definition.
+     */
+    boost::shared_ptr<value> make(const field_definition& fd,
+        const std::list<std::string>& v) const;
 };
 
 } }

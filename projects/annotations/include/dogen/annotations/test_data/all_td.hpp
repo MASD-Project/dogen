@@ -36,7 +36,6 @@
 #include "dogen/annotations/test_data/repository_td.hpp"
 #include "dogen/annotations/test_data/scope_types_td.hpp"
 #include "dogen/annotations/test_data/value_types_td.hpp"
-#include "dogen/annotations/test_data/field_instance_td.hpp"
 #include "dogen/annotations/test_data/scribble_group_td.hpp"
 #include "dogen/annotations/test_data/text_collection_td.hpp"
 #include "dogen/annotations/test_data/annotation_group_td.hpp"

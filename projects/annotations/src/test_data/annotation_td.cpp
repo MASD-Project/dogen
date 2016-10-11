@@ -19,8 +19,8 @@
  *
  */
 #include <sstream>
+#include "dogen/annotations/test_data/value_td.hpp"
 #include "dogen/annotations/test_data/annotation_td.hpp"
-#include "dogen/annotations/test_data/field_instance_td.hpp"
 
 namespace {
 
@@ -30,15 +30,22 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-dogen::annotations::field_instance
-create_dogen_annotations_field_instance(const unsigned int position) {
-    return dogen::annotations::field_instance_generator::create(position);
+dogen::annotations::value*
+create_dogen_annotations_value_ptr(const unsigned int position) {
+    return dogen::annotations::value_generator::create_ptr(position);
 }
 
-std::unordered_map<std::string, dogen::annotations::field_instance> create_std_unordered_map_std_string_dogen_annotations_field_instance(unsigned int position) {
-    std::unordered_map<std::string, dogen::annotations::field_instance> r;
+boost::shared_ptr<dogen::annotations::value>
+create_boost_shared_ptr_dogen_annotations_value(unsigned int position) {
+    boost::shared_ptr<dogen::annotations::value> r(
+        create_dogen_annotations_value_ptr(position));
+    return r;
+}
+
+std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> > create_std_unordered_map_std_string_boost_shared_ptr_dogen_annotations_value(unsigned int position) {
+    std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> > r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_dogen_annotations_field_instance(position + i)));
+        r.insert(std::make_pair(create_std_string(position + i), create_boost_shared_ptr_dogen_annotations_value(position + i)));
     }
     return r;
 }
@@ -52,7 +59,7 @@ annotation_generator::annotation_generator() : position_(0) { }
 
 void annotation_generator::
 populate(const unsigned int position, result_type& v) {
-    v.entries(create_std_unordered_map_std_string_dogen_annotations_field_instance(position + 0));
+    v.entries(create_std_unordered_map_std_string_boost_shared_ptr_dogen_annotations_value(position + 0));
 }
 
 annotation_generator::result_type

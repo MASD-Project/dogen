@@ -36,7 +36,6 @@
 #include "dogen/annotations/serialization/repository_ser.hpp"
 #include "dogen/annotations/serialization/scope_types_ser.hpp"
 #include "dogen/annotations/serialization/value_types_ser.hpp"
-#include "dogen/annotations/serialization/field_instance_ser.hpp"
 #include "dogen/annotations/serialization/scribble_group_ser.hpp"
 #include "dogen/annotations/serialization/text_collection_ser.hpp"
 #include "dogen/annotations/serialization/annotation_group_ser.hpp"

@@ -36,7 +36,6 @@
 #include "dogen/annotations/io/repository_io.hpp"
 #include "dogen/annotations/io/scope_types_io.hpp"
 #include "dogen/annotations/io/value_types_io.hpp"
-#include "dogen/annotations/io/field_instance_io.hpp"
 #include "dogen/annotations/io/scribble_group_io.hpp"
 #include "dogen/annotations/io/text_collection_io.hpp"
 #include "dogen/annotations/io/annotation_group_io.hpp"

@@ -77,10 +77,9 @@ private:
 
 private:
     /**
-     * @brief Converts the raw data into a set of field instances.
+     * @brief Converts the raw data into an annotation.
      */
-    std::unordered_map<std::string, field_instance>
-    create_fields(const scope_types current_scope,
+    annotation create_annotation(const scope_types current_scope,
         const std::unordered_map<std::string, std::list<std::string>>&
         aggregated_scribble_entries) const;
 

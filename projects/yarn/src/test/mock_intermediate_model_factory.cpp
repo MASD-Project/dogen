@@ -320,20 +320,19 @@ void add_test_annotationss(dogen::annotations::annotation& a) {
 
     value_factory f;
     a.entries().insert(std::make_pair(licence_name_key,
-            field_instance(f.make_text(licence_name_value))));
+            f.make_text(licence_name_value)));
 
     a.entries().insert(std::make_pair(copyright_notices_key,
-            field_instance(f.make_text(copyright_notices_value))));
+            f.make_text(copyright_notices_value)));
 
     a.entries().insert(std::make_pair(modeline_group_name_key,
-            field_instance(f.make_text(modeline_group_name_value))));
+            f.make_text(modeline_group_name_value)));
 
     a.entries().insert(std::make_pair(code_generation_marker_message_key,
-            field_instance(
-                f.make_text(code_generation_marker_message_value))));
+            f.make_text(code_generation_marker_message_value)));
 
     a.entries().insert(std::make_pair(generate_preamble_key,
-            field_instance(f.make_text(generate_preamble_value))));
+            f.make_text(generate_preamble_value)));
 }
 
 }

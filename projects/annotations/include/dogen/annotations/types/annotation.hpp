@@ -28,7 +28,8 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen/annotations/types/field_instance.hpp"
+#include <boost/shared_ptr.hpp>
+#include "dogen/annotations/types/value_fwd.hpp"
 #include "dogen/annotations/serialization/annotation_fwd_ser.hpp"
 
 namespace dogen {
@@ -45,7 +46,7 @@ public:
     ~annotation() = default;
 
 public:
-    explicit annotation(const std::unordered_map<std::string, dogen::annotations::field_instance>& entries);
+    explicit annotation(const std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> >& entries);
 
 private:
     template<typename Archive>
@@ -59,10 +60,10 @@ public:
      * @brief All entries in this annotation. Each entry is a key-value-pair of id and value.
      */
     /**@{*/
-    const std::unordered_map<std::string, dogen::annotations::field_instance>& entries() const;
-    std::unordered_map<std::string, dogen::annotations::field_instance>& entries();
-    void entries(const std::unordered_map<std::string, dogen::annotations::field_instance>& v);
-    void entries(const std::unordered_map<std::string, dogen::annotations::field_instance>&& v);
+    const std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> >& entries() const;
+    std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> >& entries();
+    void entries(const std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> >& v);
+    void entries(const std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> >&& v);
     /**@}*/
 
 public:
@@ -76,7 +77,7 @@ public:
     annotation& operator=(annotation other);
 
 private:
-    std::unordered_map<std::string, dogen::annotations::field_instance> entries_;
+    std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> > entries_;
 };
 
 } }
