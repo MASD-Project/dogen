@@ -21,7 +21,7 @@
 #include "dogen/yarn/hash/name_hash.hpp"
 #include "dogen/yarn/hash/attribute_hash.hpp"
 #include "dogen/yarn/hash/name_tree_hash.hpp"
-#include "dogen/annotations/hash/object_hash.hpp"
+#include "dogen/annotations/hash/annotation_hash.hpp"
 
 namespace {
 

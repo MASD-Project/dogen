@@ -78,10 +78,10 @@ make_field_definitions(const annotations::repository& drp) const {
 
 boost::optional<aspect_properties> aspect_expander::
 make_aspect_properties(const field_definitions& fds,
-    const annotations::annotation& o) const {
+    const annotations::annotation& a) const {
     aspect_properties r;
 
-    const annotations::field_selector fs(o);
+    const annotations::field_selector fs(a);
     bool found_any(false);
 
     if (fs.has_field(fds.requires_manual_default_constructor))

@@ -27,7 +27,7 @@
 
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
-#include "dogen/annotations/types/object.hpp"
+#include "dogen/annotations/types/annotation.hpp"
 
 namespace dogen {
 namespace stitch {
@@ -41,7 +41,7 @@ public:
      * @brief Execute the expansion.
      */
     void expand(const boost::optional<boost::filesystem::path>& template_path,
-        annotations::annotation& o) const;
+        annotations::annotation& a) const;
 };
 
 } }

@@ -26,7 +26,7 @@
 #endif
 
 #include <boost/optional.hpp>
-#include "dogen/annotations/types/object.hpp"
+#include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/repository.hpp"
 #include "dogen/annotations/types/field_definition.hpp"
 #include "dogen/quilt.cpp/types/formattables/streaming_properties.hpp"
@@ -52,7 +52,7 @@ private:
     make_field_definitions(const annotations::repository& drp) const;
 
     boost::optional<streaming_properties> make_streaming_properties(
-        const field_definitions& fds, const annotations::annotation& o) const;
+        const field_definitions& fds, const annotations::annotation& a) const;
 
 public:
     void expand(const annotations::repository& drp, model& fm) const;

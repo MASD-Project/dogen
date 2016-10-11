@@ -25,8 +25,8 @@
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/yarn/io/stereotypes_io.hpp"
 #include "dogen/yarn/io/origin_types_io.hpp"
-#include "dogen/annotations/io/object_io.hpp"
 #include "dogen/yarn/io/generation_types_io.hpp"
+#include "dogen/annotations/io/annotation_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");

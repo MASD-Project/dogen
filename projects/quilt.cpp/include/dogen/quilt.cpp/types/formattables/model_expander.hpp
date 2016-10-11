@@ -28,7 +28,7 @@
 #include <list>
 #include <string>
 #include <unordered_map>
-#include "dogen/annotations/types/object.hpp"
+#include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/repository.hpp"
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/formatters/types/decoration_properties_factory.hpp"
@@ -47,19 +47,19 @@ private:
 
     void expand_profile_groups(
         const std::forward_list<boost::filesystem::path>& dirs,
-        const annotations::repository& drp, const annotations::annotation& root_object,
+        const annotations::repository& drp, const annotations::annotation& root,
         const formatters::container& fc, model& fm) const;
 
     void expand_enablement(const annotations::repository& drp,
-        const annotations::annotation& root_object, const formatters::container& fc,
+        const annotations::annotation& root, const formatters::container& fc,
         model& fm) const;
 
     void expand_canonical_formatters(const formatters::container& fc,
         model& fm) const;
 
     void expand_inclusion(
-        const annotations::repository& drp,
-        const formatters::container& fc, const locator& l, model& fm) const;
+        const annotations::repository& drp, const formatters::container& fc,
+        const locator& l, model& fm) const;
 
     void expand_decoration(
         const dogen::formatters::decoration_properties_factory& dpf,
@@ -81,8 +81,7 @@ private:
 
 public:
     void expand(const std::forward_list<boost::filesystem::path>& dirs,
-        const annotations::repository& drp,
-        const annotations::annotation& root_object,
+        const annotations::repository& drp, const annotations::annotation& root,
         const dogen::formatters::decoration_properties_factory& dpf,
         const formatters::container& fc, const locator& l, model& fm) const;
 };

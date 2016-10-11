@@ -315,24 +315,24 @@ void insert_object(dogen::yarn::intermediate_model& m,
     m.objects().insert(std::make_pair(o.name().id(), o));
 }
 
-void add_test_annotationss(dogen::annotations::annotation& o) {
+void add_test_annotationss(dogen::annotations::annotation& a) {
     using namespace dogen::annotations;
 
     value_factory f;
-    o.fields().insert(std::make_pair(licence_name_key,
+    a.body().insert(std::make_pair(licence_name_key,
             field_instance(f.make_text(licence_name_value))));
 
-    o.fields().insert(std::make_pair(copyright_notices_key,
+    a.body().insert(std::make_pair(copyright_notices_key,
             field_instance(f.make_text(copyright_notices_value))));
 
-    o.fields().insert(std::make_pair(modeline_group_name_key,
+    a.body().insert(std::make_pair(modeline_group_name_key,
             field_instance(f.make_text(modeline_group_name_value))));
 
-    o.fields().insert(std::make_pair(code_generation_marker_message_key,
+    a.body().insert(std::make_pair(code_generation_marker_message_key,
             field_instance(
                 f.make_text(code_generation_marker_message_value))));
 
-    o.fields().insert(std::make_pair(generate_preamble_key,
+    a.body().insert(std::make_pair(generate_preamble_key,
             field_instance(f.make_text(generate_preamble_value))));
 }
 

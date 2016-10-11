@@ -18,15 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_IO_OBJECT_IO_HPP
-#define DOGEN_ANNOTATIONS_IO_OBJECT_IO_HPP
+#ifndef DOGEN_ANNOTATIONS_IO_ANNOTATION_IO_HPP
+#define DOGEN_ANNOTATIONS_IO_ANNOTATION_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen/annotations/types/object.hpp"
+#include "dogen/annotations/types/annotation.hpp"
 
 namespace dogen {
 namespace annotations {

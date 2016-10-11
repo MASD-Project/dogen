@@ -20,8 +20,8 @@
  */
 #include "dogen/stitch/hash/line_hash.hpp"
 #include "dogen/stitch/hash/properties_hash.hpp"
-#include "dogen/annotations/hash/object_hash.hpp"
 #include "dogen/stitch/hash/text_template_hash.hpp"
+#include "dogen/annotations/hash/annotation_hash.hpp"
 
 namespace {
 

@@ -27,7 +27,7 @@
 
 #include <string>
 #include <boost/optional.hpp>
-#include "dogen/annotations/types/object.hpp"
+#include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/repository.hpp"
 #include "dogen/formatters/types/licence.hpp"
 #include "dogen/formatters/types/repository.hpp"
@@ -78,7 +78,7 @@ private:
     make_field_definitions(const annotations::repository& rp) const;
 
     decoration_configuration
-    make_decoration_configuration(const annotations::annotation& o) const;
+    make_decoration_configuration(const annotations::annotation& a) const;
 
 private:
     /**

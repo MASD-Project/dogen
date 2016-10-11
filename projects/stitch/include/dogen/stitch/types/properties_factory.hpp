@@ -26,7 +26,7 @@
 #endif
 
 #include <boost/optional.hpp>
-#include "dogen/annotations/types/object.hpp"
+#include "dogen/annotations/types/annotations.hpp"
 #include "dogen/annotations/types/repository.hpp"
 #include "dogen/formatters/types/repository.hpp"
 #include "dogen/formatters/types/decoration_properties.hpp"
@@ -50,19 +50,19 @@ private:
      * @brief Create the decoration properties.
      */
     boost::optional<formatters::decoration_properties>
-    make_decoration_properties(const annotations::annotation& o) const;
+    make_decoration_properties(const annotations::annotation& a) const;
 
     /**
      * @brief Create the stitching settings.
      */
     stitching_properties
-    make_stitching_properties(const annotations::annotation& o) const;
+    make_stitching_properties(const annotations::annotation& a) const;
 
 public:
     /**
      * @brief Create the settings bundle.
      */
-    properties make(const annotations::annotation& o) const;
+    properties make(const annotations::annotation& a) const;
 
 private:
     const annotations::repository& annotations_repository_;

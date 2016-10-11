@@ -28,7 +28,7 @@
 #include <string>
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
-#include "dogen/annotations/types/object.hpp"
+#include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/repository.hpp"
 #include "dogen/stitch/types/stitching_properties.hpp"
 
@@ -63,25 +63,25 @@ private:
      * @brief Extracts the stream variable name.
      */
     std::string
-    extract_stream_variable_name(const annotations::annotation& o) const;
+    extract_stream_variable_name(const annotations::annotation& a) const;
 
     /**
      * @brief Extracts the template path.
      */
     boost::optional<boost::filesystem::path>
-    extract_template_path(const annotations::annotation& o) const;
+    extract_template_path(const annotations::annotation& a) const;
 
     /**
      * @brief Extracts the file path.
      */
     boost::optional<boost::filesystem::path>
-    extract_output_path(const annotations::annotation& o) const;
+    extract_output_path(const annotations::annotation& a) const;
 
     /**
      * @brief Extracts the relative output directory.
      */
     boost::optional<boost::filesystem::path>
-    extract_relative_output_directory(const annotations::annotation& o) const;
+    extract_relative_output_directory(const annotations::annotation& a) const;
 
     /**
      * @brief Extracts inclusion dependencies.
@@ -93,13 +93,13 @@ private:
      * @brief Extract containing namespaces.
      */
     std::list<std::string>
-    extract_containing_namespaces(const annotations::annotation& o) const;
+    extract_containing_namespaces(const annotations::annotation& a) const;
 
 public:
     /**
      * @brief Create the stitching settings.
      */
-    stitching_properties make(const annotations::annotation& o) const;
+    stitching_properties make(const annotations::annotation& a) const;
 
 private:
     const field_definitions field_definitions_;

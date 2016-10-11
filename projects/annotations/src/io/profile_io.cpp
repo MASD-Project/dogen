@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/annotations/io/object_io.hpp"
 #include "dogen/annotations/io/profile_io.hpp"
+#include "dogen/annotations/io/annotation_io.hpp"
 #include "dogen/annotations/io/field_instance_definition_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {

@@ -28,7 +28,7 @@
 #include <typeindex>
 #include <unordered_map>
 #include <boost/optional.hpp>
-#include "dogen/annotations/types/object.hpp"
+#include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/repository.hpp"
 #include "dogen/annotations/types/field_definition.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
@@ -67,7 +67,7 @@ private:
 
     global_enablement_configurations_type obtain_global_configurations(
         const global_field_definitions_type& gfds,
-        const annotations::annotation& root_object, const formatters::container& fc,
+        const annotations::annotation& root, const formatters::container& fc,
         const profile_group& gpg) const;
 
     void update_facet_enablement(const formatters::container& fc,
@@ -116,7 +116,7 @@ private:
 
 public:
     void expand(const annotations::repository& drp,
-        const annotations::annotation& root_object, const formatters::container& fc,
+        const annotations::annotation& root, const formatters::container& fc,
         model& fm) const;
 };
 

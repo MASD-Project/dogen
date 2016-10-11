@@ -22,8 +22,8 @@
 #include "dogen/yarn/hash/element_hash.hpp"
 #include "dogen/yarn/hash/stereotypes_hash.hpp"
 #include "dogen/yarn/hash/origin_types_hash.hpp"
-#include "dogen/annotations/hash/object_hash.hpp"
 #include "dogen/yarn/hash/generation_types_hash.hpp"
+#include "dogen/annotations/hash/annotation_hash.hpp"
 
 namespace {
 

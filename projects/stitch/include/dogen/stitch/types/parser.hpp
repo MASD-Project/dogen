@@ -30,7 +30,6 @@
 #include "dogen/stitch/types/line.hpp"
 #include "dogen/stitch/types/block.hpp"
 #include "dogen/stitch/types/text_template.hpp"
-#include "dogen/annotations/types/object.hpp"
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
 
 namespace dogen {

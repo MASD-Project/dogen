@@ -80,12 +80,12 @@ streaming_expander::make_field_definitions(
 
 boost::optional<streaming_properties>
 streaming_expander::make_streaming_properties(
-    const field_definitions& fds, const annotations::annotation& o) const {
+    const field_definitions& fds, const annotations::annotation& a) const {
 
     BOOST_LOG_SEV(lg, debug) << "Creating streaming configuration.";
     bool found_any(false);
     streaming_properties r;
-    const annotations::field_selector fs(o);
+    const annotations::field_selector fs(a);
 
     const auto& rq(fds.requires_quoting);
     if (fs.has_field(rq)) {

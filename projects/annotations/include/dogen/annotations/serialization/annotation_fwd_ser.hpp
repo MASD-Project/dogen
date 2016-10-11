@@ -18,17 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_OBJECT_FWD_HPP
-#define DOGEN_ANNOTATIONS_TYPES_OBJECT_FWD_HPP
+#ifndef DOGEN_ANNOTATIONS_SERIALIZATION_ANNOTATION_FWD_SER_HPP
+#define DOGEN_ANNOTATIONS_SERIALIZATION_ANNOTATION_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen {
-namespace annotations {
+#include "dogen/annotations/types/annotation_fwd.hpp"
 
-class annotation;
+namespace boost {
+namespace serialization {
+
+template<class Archive>
+void save(Archive& ar, const dogen::annotations::annotation& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, dogen::annotations::annotation& v, unsigned int version);
 
 } }
 

@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/annotations/test_data/object_td.hpp"
+#include "dogen/annotations/test_data/annotation_td.hpp"
 #include "dogen/annotations/test_data/field_instance_td.hpp"
 
 namespace {
@@ -48,29 +48,29 @@ std::unordered_map<std::string, dogen::annotations::field_instance> create_std_u
 namespace dogen {
 namespace annotations {
 
-object_generator::object_generator() : position_(0) { }
+annotation_generator::annotation_generator() : position_(0) { }
 
-void object_generator::
+void annotation_generator::
 populate(const unsigned int position, result_type& v) {
-    v.fields(create_std_unordered_map_std_string_dogen_annotations_field_instance(position + 0));
+    v.body(create_std_unordered_map_std_string_dogen_annotations_field_instance(position + 0));
 }
 
-object_generator::result_type
-object_generator::create(const unsigned int position) {
+annotation_generator::result_type
+annotation_generator::create(const unsigned int position) {
     annotation r;
-    object_generator::populate(position, r);
+    annotation_generator::populate(position, r);
     return r;
 }
 
-object_generator::result_type*
-object_generator::create_ptr(const unsigned int position) {
+annotation_generator::result_type*
+annotation_generator::create_ptr(const unsigned int position) {
     annotation* p = new annotation();
-    object_generator::populate(position, *p);
+    annotation_generator::populate(position, *p);
     return p;
 }
 
-object_generator::result_type
-object_generator::operator()() {
+annotation_generator::result_type
+annotation_generator::operator()() {
     return create(position_++);
 }
 

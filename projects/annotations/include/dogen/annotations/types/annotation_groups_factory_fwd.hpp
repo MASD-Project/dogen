@@ -18,36 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/annotations/hash/object_hash.hpp"
-#include "dogen/annotations/hash/field_instance_hash.hpp"
+#ifndef DOGEN_ANNOTATIONS_TYPES_ANNOTATION_GROUPS_FACTORY_FWD_HPP
+#define DOGEN_ANNOTATIONS_TYPES_ANNOTATION_GROUPS_FACTORY_FWD_HPP
 
-namespace {
-
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value) {
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-inline std::size_t hash_std_unordered_map_std_string_dogen_annotations_field_instance(const std::unordered_map<std::string, dogen::annotations::field_instance>& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i.first);
-        combine(seed, i.second);
-    }
-    return seed;
-}
-
-}
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace annotations {
 
-std::size_t object_hasher::hash(const annotation& v) {
-    std::size_t seed(0);
-
-    combine(seed, hash_std_unordered_map_std_string_dogen_annotations_field_instance(v.fields()));
-    return seed;
-}
+class annotation_groups_factory;
 
 } }
+
+#endif

@@ -30,7 +30,7 @@
 #include <forward_list>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
-#include "dogen/annotations/types/object.hpp"
+#include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/repository.hpp"
 #include "dogen/formatters/types/repository.hpp"
 #include "dogen/formatters/types/decoration_properties_factory.hpp"
@@ -71,7 +71,7 @@ private:
     create_decoration_properties_factory(
             const annotations::repository& drp,
             const dogen::formatters::repository& frp,
-            const annotations::annotation& root_object) const;
+            const annotations::annotation& root) const;
 
     /**
      * @brief Create the formattables representation of the yarn model.
@@ -80,7 +80,7 @@ private:
         const std::forward_list<boost::filesystem::path>& data_directories,
         const options::cpp_options& opts,
         const annotations::repository& drp,
-        const annotations::annotation& root_object,
+        const annotations::annotation& root,
         const dogen::formatters::decoration_properties_factory& dpf,
         const formatters::container& fc, const yarn::model& m) const;
 

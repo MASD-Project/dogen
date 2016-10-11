@@ -31,7 +31,7 @@
 #include "dogen/yarn/serialization/name_ser.hpp"
 #include "dogen/yarn/serialization/attribute_ser.hpp"
 #include "dogen/yarn/serialization/name_tree_ser.hpp"
-#include "dogen/annotations/serialization/object_ser.hpp"
+#include "dogen/annotations/serialization/annotation_ser.hpp"
 
 namespace boost {
 namespace serialization {

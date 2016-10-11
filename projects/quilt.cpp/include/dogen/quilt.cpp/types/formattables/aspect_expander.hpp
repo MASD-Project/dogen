@@ -28,7 +28,7 @@
 #include <list>
 #include <string>
 #include <unordered_map>
-#include "dogen/annotations/types/object.hpp"
+#include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/repository.hpp"
 #include "dogen/annotations/types/field_definition.hpp"
 #include "dogen/yarn/types/name_tree.hpp"
@@ -57,7 +57,7 @@ private:
     make_field_definitions(const annotations::repository& drp) const;
 
     boost::optional<aspect_properties> make_aspect_properties(
-        const field_definitions& fds, const annotations::annotation& o) const;
+        const field_definitions& fds, const annotations::annotation& a) const;
 
 private:
     typedef std::unordered_map<std::string, aspect_properties>

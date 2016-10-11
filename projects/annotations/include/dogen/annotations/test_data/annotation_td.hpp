@@ -18,17 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_WORKFLOW_FWD_HPP
-#define DOGEN_ANNOTATIONS_TYPES_WORKFLOW_FWD_HPP
+#ifndef DOGEN_ANNOTATIONS_TEST_DATA_ANNOTATION_TD_HPP
+#define DOGEN_ANNOTATIONS_TEST_DATA_ANNOTATION_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include "dogen/annotations/types/annotation.hpp"
+
 namespace dogen {
 namespace annotations {
 
-class workflow;
+class annotation_generator {
+public:
+    annotation_generator();
+
+public:
+    typedef dogen::annotations::annotation result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 } }
 

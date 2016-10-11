@@ -21,8 +21,8 @@
 #include <ostream>
 #include "dogen/stitch/io/line_io.hpp"
 #include "dogen/stitch/io/properties_io.hpp"
-#include "dogen/annotations/io/object_io.hpp"
 #include "dogen/stitch/io/text_template_io.hpp"
+#include "dogen/annotations/io/annotation_io.hpp"
 
 namespace std {
 

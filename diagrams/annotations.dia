@@ -3221,17 +3221,17 @@ yet imposing some constraints on the shape of the data.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="174.875,21.6"/>
+        <dia:point val="175.645,21.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="131.855,20.75;175.625,29.05"/>
+        <dia:rectangle val="131.855,20.75;176.395,29.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="174.875,21.6"/>
-        <dia:point val="174.875,29"/>
+        <dia:point val="175.645,21.6"/>
+        <dia:point val="175.645,29"/>
         <dia:point val="131.905,29"/>
         <dia:point val="131.905,20.8"/>
       </dia:attribute>
@@ -9180,7 +9180,7 @@ any.#</dia:string>
             <dia:string>#content#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#object#</dia:string>
+            <dia:string>#annotation#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -10966,17 +10966,17 @@ any.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="174.875,18"/>
+        <dia:point val="175.645,18"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="174.125,9.55;186.2,18.8"/>
+        <dia:rectangle val="174.895,9.55;186.2,18.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="174.875,18"/>
-        <dia:point val="174.875,13"/>
+        <dia:point val="175.645,18"/>
+        <dia:point val="175.645,13"/>
         <dia:point val="186,13"/>
         <dia:point val="186,9.6"/>
       </dia:attribute>
@@ -11437,13 +11437,13 @@ any.#</dia:string>
         <dia:point val="165,18"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="164.95,17.95;184.8,21.65"/>
+        <dia:rectangle val="164.95,17.95;186.34,21.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="165,18"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="19.75"/>
+        <dia:real val="21.289999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -11541,7 +11541,7 @@ any.#</dia:string>
             <dia:string>#parent#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#object#</dia:string>
+            <dia:string>#annotation#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -11564,7 +11564,7 @@ any.#</dia:string>
             <dia:string>#children#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, object&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, annotation&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

@@ -29,7 +29,7 @@
 #include <boost/serialization/unordered_map.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/annotations/serialization/object_ser.hpp"
+#include "dogen/annotations/serialization/annotation_ser.hpp"
 #include "dogen/annotations/serialization/field_instance_ser.hpp"
 
 namespace boost {
@@ -39,14 +39,14 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::annotations::annotation& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("fields", v.fields_);
+    ar << make_nvp("body", v.body_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
     dogen::annotations::annotation& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("fields", v.fields_);
+    ar >> make_nvp("body", v.body_);
 }
 
 } }

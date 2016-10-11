@@ -46,9 +46,9 @@ make_field_definitions(const annotations::repository& drp) const {
 
 type_parameters
 type_parameters_expander::make_type_parameters(const field_definitions& fds,
-    const annotations::annotation& o) const {
+    const annotations::annotation& a) const {
     type_parameters r;
-    const annotations::field_selector fs(o);
+    const annotations::field_selector fs(a);
 
     const auto& vnp(fds.variable_number_of_parameters);
     r.variable_number_of_parameters(fs.get_boolean_content_or_default(vnp));

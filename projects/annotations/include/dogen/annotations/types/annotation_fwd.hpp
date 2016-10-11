@@ -18,35 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_HASH_OBJECT_HASH_HPP
-#define DOGEN_ANNOTATIONS_HASH_OBJECT_HASH_HPP
+#ifndef DOGEN_ANNOTATIONS_TYPES_ANNOTATION_FWD_HPP
+#define DOGEN_ANNOTATIONS_TYPES_ANNOTATION_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/annotations/types/object.hpp"
-
 namespace dogen {
 namespace annotations {
 
-struct object_hasher {
-public:
-    static std::size_t hash(const annotation& v);
-};
+class annotation;
 
 } }
 
-namespace std {
-
-template<>
-struct hash<dogen::annotations::annotation> {
-public:
-    size_t operator()(const dogen::annotations::annotation& v) const {
-        return dogen::annotations::object_hasher::hash(v);
-    }
-};
-
-}
 #endif

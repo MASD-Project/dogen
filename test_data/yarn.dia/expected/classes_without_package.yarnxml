@@ -53,11 +53,11 @@
 				<element class_id="21" tracking_level="0" version="0">
 					<documentation></documentation>
 					<annotation class_id="22" tracking_level="0" version="0">
-						<fields class_id="23" tracking_level="0" version="0">
+						<body class_id="23" tracking_level="0" version="0">
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</fields>
+						</body>
 					</annotation>
 					<name>
 						<id>&lt;classes_without_package&gt;</id>
@@ -133,11 +133,11 @@
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<fields>
+						<body>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</fields>
+						</body>
 					</annotation>
 					<name>
 						<id>&lt;classes_without_package&gt;&lt;class_5&gt;</id>
@@ -191,11 +191,11 @@
 					<item class_id="33" tracking_level="0" version="0">
 						<documentation></documentation>
 						<annotation>
-							<fields>
+							<body>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</fields>
+							</body>
 						</annotation>
 						<name>
 							<id>&lt;classes_without_package&gt;&lt;class_5&gt;&lt;prop_0&gt;</id>
@@ -330,11 +330,11 @@
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<fields>
+						<body>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</fields>
+						</body>
 					</annotation>
 					<name>
 						<id>&lt;classes_without_package&gt;&lt;class_1&gt;</id>
@@ -388,11 +388,11 @@
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<fields>
+							<body>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</fields>
+							</body>
 						</annotation>
 						<name>
 							<id>&lt;classes_without_package&gt;&lt;class_1&gt;&lt;prop_0&gt;</id>
@@ -527,11 +527,11 @@
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<fields>
+						<body>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</fields>
+						</body>
 					</annotation>
 					<name>
 						<id>&lt;classes_without_package&gt;&lt;class_2&gt;</id>
@@ -585,11 +585,11 @@
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<fields>
+							<body>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</fields>
+							</body>
 						</annotation>
 						<name>
 							<id>&lt;classes_without_package&gt;&lt;class_2&gt;&lt;prop_0&gt;</id>
@@ -724,11 +724,11 @@
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<fields>
+						<body>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</fields>
+						</body>
 					</annotation>
 					<name>
 						<id>&lt;classes_without_package&gt;&lt;class_4&gt;</id>
@@ -782,11 +782,11 @@
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<fields>
+							<body>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</fields>
+							</body>
 						</annotation>
 						<name>
 							<id>&lt;classes_without_package&gt;&lt;class_4&gt;&lt;prop_0&gt;</id>
@@ -921,11 +921,11 @@
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<fields>
+						<body>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</fields>
+						</body>
 					</annotation>
 					<name>
 						<id>&lt;classes_without_package&gt;&lt;class_3&gt;</id>
@@ -979,11 +979,11 @@
 					<item>
 						<documentation></documentation>
 						<annotation>
-							<fields>
+							<body>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</fields>
+							</body>
 						</annotation>
 						<name>
 							<id>&lt;classes_without_package&gt;&lt;class_3&gt;&lt;prop_0&gt;</id>
@@ -1182,11 +1182,11 @@
 		<element>
 			<documentation></documentation>
 			<annotation>
-				<fields>
+				<body>
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
-				</fields>
+				</body>
 			</annotation>
 			<name>
 				<id></id>

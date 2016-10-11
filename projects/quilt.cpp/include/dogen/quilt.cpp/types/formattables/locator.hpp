@@ -31,7 +31,7 @@
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
 #include "dogen/annotations/types/repository.hpp"
-#include "dogen/annotations/types/object.hpp"
+#include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/field_definition.hpp"
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
@@ -50,7 +50,7 @@ public:
     locator(
         const boost::filesystem::path& project_directory_path,
         const annotations::repository& drp, const formatters::container& fc,
-        const annotations::annotation& root_object, const yarn::name& model_name,
+        const annotations::annotation& root, const yarn::name& model_name,
         const std::unordered_set<std::string>& module_ids);
 
 private:

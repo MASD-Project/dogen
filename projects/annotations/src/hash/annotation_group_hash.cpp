@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/annotations/hash/object_hash.hpp"
+#include "dogen/annotations/hash/annotation_hash.hpp"
 #include "dogen/annotations/hash/annotation_group_hash.hpp"
 
 namespace {
@@ -29,7 +29,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_unordered_map_std_string_dogen_annotations_object(const std::unordered_map<std::string, dogen::annotations::annotation>& v) {
+inline std::size_t hash_std_unordered_map_std_string_dogen_annotations_annotation(const std::unordered_map<std::string, dogen::annotations::annotation>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -47,7 +47,7 @@ std::size_t annotation_group_hasher::hash(const annotation_group& v) {
     std::size_t seed(0);
 
     combine(seed, v.parent());
-    combine(seed, hash_std_unordered_map_std_string_dogen_annotations_object(v.children()));
+    combine(seed, hash_std_unordered_map_std_string_dogen_annotations_annotation(v.children()));
 
     return seed;
 }

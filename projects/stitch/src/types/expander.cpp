@@ -20,7 +20,7 @@
  */
 #include <boost/filesystem/operations.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/annotations/io/object_io.hpp"
+#include "dogen/annotations/io/annotation_io.hpp"
 #include "dogen/annotations/types/field_selector.hpp"
 #include "dogen/annotations/types/field_instance_factory.hpp"
 #include "dogen/stitch/types/traits.hpp"
@@ -40,9 +40,9 @@ namespace stitch {
 
 void expander::expand(
     const boost::optional<boost::filesystem::path>& template_path,
-    annotations::annotation& o) const {
+    annotations::annotation& a) const {
 
-    BOOST_LOG_SEV(lg, debug) << "Before expansion: " << o;
+    BOOST_LOG_SEV(lg, debug) << "Before expansion: " << a;
 
     if (!template_path) {
         BOOST_LOG_SEV(lg, debug)
@@ -56,7 +56,7 @@ void expander::expand(
     std::string output_filename(template_path->stem().generic_string());
     output_filename += stitch_postfix;
 
-    const annotations::field_selector fs(o);
+    const annotations::field_selector fs(a);
     boost::filesystem::path absolute_output_directory;
     if (fs.has_field(traits::relative_output_directory())) {
         const auto tc(fs.get_text_content(traits::relative_output_directory()));
@@ -71,9 +71,9 @@ void expander::expand(
 
     const annotations::field_instance_factory f;
     const auto v(f.make_text(absolute_output_directory.generic_string()));
-    o.fields()[traits::output_path()] = v;
+    a.body()[traits::output_path()] = v;
 
-    BOOST_LOG_SEV(lg, debug) << "After expansion: " << o;
+    BOOST_LOG_SEV(lg, debug) << "After expansion: " << a;
 }
 
 } }

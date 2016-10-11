@@ -56,9 +56,9 @@ namespace stitch {
 workflow::workflow() : formatter_() {}
 
 void workflow::perform_expansion(const boost::filesystem::path& p,
-    annotations::annotation& o) const {
+    annotations::annotation& a) const {
     expander e;
-    e.expand(p, o);
+    e.expand(p, a);
 }
 
 std::forward_list<boost::filesystem::path> workflow::

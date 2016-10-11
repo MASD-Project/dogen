@@ -45,10 +45,10 @@ expand_streaming(const annotations::repository& drp, model& fm) const {
 
 void model_expander::expand_profile_groups(
     const std::forward_list<boost::filesystem::path>& dirs,
-    const annotations::repository& drp, const annotations::annotation& root_object,
+    const annotations::repository& drp, const annotations::annotation& root,
     const formatters::container& fc, model& fm) const {
     profile_group_expander ex;
-    ex.expand(dirs, drp, root_object, fc, fm);
+    ex.expand(dirs, drp, root, fc, fm);
 }
 
 void model_expander::expand_enablement(const annotations::repository& drp,
@@ -115,7 +115,7 @@ expand_facet_directories(const locator& l,model& fm) const {
 
 void model_expander::expand(
     const std::forward_list<boost::filesystem::path>& dirs,
-    const annotations::repository& drp, const annotations::annotation& root_object,
+    const annotations::repository& drp, const annotations::annotation& root,
     const dogen::formatters::decoration_properties_factory& dpf,
     const formatters::container& fc, const locator& l, model& fm) const {
 
@@ -124,13 +124,13 @@ void model_expander::expand(
      * helpers need the streaminging properties.
      */
     expand_streaming(drp, fm);
-    expand_profile_groups(dirs, drp, root_object, fc, fm);
+    expand_profile_groups(dirs, drp, root, fc, fm);
 
     /*
      * Enablement expansion must be done before inclusion because
      * inclusion relies on it to know which formatters are enabled.
      */
-    expand_enablement(drp, root_object, fc, fm);
+    expand_enablement(drp, root, fc, fm);
 
     /*
      * Canonical formatter expansion must be done before inclusion

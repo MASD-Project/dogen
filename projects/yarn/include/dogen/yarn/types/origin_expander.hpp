@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen/annotations/types/object.hpp"
 #include "dogen/annotations/types/repository.hpp"
 #include "dogen/annotations/types/field_selector.hpp"
 #include "dogen/annotations/types/field_definition.hpp"

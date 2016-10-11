@@ -41,8 +41,8 @@
 #include "dogen/yarn/serialization/enumeration_ser.hpp"
 #include "dogen/yarn/serialization/stereotypes_ser.hpp"
 #include "dogen/yarn/serialization/origin_types_ser.hpp"
-#include "dogen/annotations/serialization/object_ser.hpp"
 #include "dogen/yarn/serialization/generation_types_ser.hpp"
+#include "dogen/annotations/serialization/annotation_ser.hpp"
 
 BOOST_CLASS_TRACKING(
     dogen::yarn::element,

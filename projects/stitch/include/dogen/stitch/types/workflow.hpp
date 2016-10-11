@@ -28,7 +28,7 @@
 #include <string>
 #include <forward_list>
 #include <boost/filesystem/path.hpp>
-#include "dogen/annotations/types/object.hpp"
+#include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/repository.hpp"
 #include "dogen/annotations/types/ownership_hierarchy.hpp"
 #include "dogen/formatters/types/file.hpp"
@@ -57,7 +57,7 @@ private:
      * @brief Expands the annotations object.
      */
     void perform_expansion(const boost::filesystem::path& p,
-        annotations::annotation& o) const;
+        annotations::annotation& a) const;
 
 private:
     /**

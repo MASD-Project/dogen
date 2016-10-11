@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/annotations/types/object.hpp"
+#include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/repository.hpp"
 #include "dogen/annotations/types/field_definition.hpp"
 #include "dogen/yarn/types/type_parameters.hpp"
@@ -46,7 +46,7 @@ private:
         const annotations::repository& drp) const;
 
     type_parameters make_type_parameters(const field_definitions& fds,
-        const annotations::annotation& o) const;
+        const annotations::annotation& a) const;
 
 private:
     void expand_type_parameters(const field_definitions& fds, object& o) const;

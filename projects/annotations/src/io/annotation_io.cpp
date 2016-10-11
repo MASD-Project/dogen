@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/annotations/io/object_io.hpp"
+#include "dogen/annotations/io/annotation_io.hpp"
 #include "dogen/annotations/io/field_instance_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -53,8 +53,8 @@ namespace annotations {
 
 std::ostream& operator<<(std::ostream& s, const annotation& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::annotations::object\"" << ", "
-      << "\"fields\": " << v.fields()
+      << "\"__type__\": " << "\"dogen::annotations::annotation\"" << ", "
+      << "\"body\": " << v.body()
       << " }";
     return(s);
 }

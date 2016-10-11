@@ -118,13 +118,13 @@ enablement_expander::make_global_field_definitions(
 enablement_expander::global_enablement_configurations_type
 enablement_expander::obtain_global_configurations(
     const std::unordered_map<std::string, global_field_definitions>& gfd,
-    const annotations::annotation& root_object, const formatters::container& fc,
+    const annotations::annotation& root, const formatters::container& fc,
     const profile_group& gpg) const {
 
     BOOST_LOG_SEV(lg, debug) << "Creating global enablement configuration.";
 
     global_enablement_configurations_type r;
-    const annotations::field_selector fs(root_object);
+    const annotations::field_selector fs(root);
     const auto& fffn(fc.file_formatters_by_formatter_name());
     for (const auto& pair : gfd) {
         const auto& fmtn(pair.first);
@@ -565,7 +565,7 @@ void enablement_expander::compute_enablement(
 }
 
 void enablement_expander::expand(const annotations::repository& drp,
-    const annotations::annotation& root_object, const formatters::container& fc,
+    const annotations::annotation& root, const formatters::container& fc,
     model& fm) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started expanding enablement.";
@@ -581,7 +581,7 @@ void enablement_expander::expand(const annotations::repository& drp,
      * the facet configurations with it.
      */
     const auto gpg(fm.global_profile_group());
-    const auto gcs(obtain_global_configurations(gfds, root_object, fc, gpg));
+    const auto gcs(obtain_global_configurations(gfds, root, fc, gpg));
     update_facet_enablement(fc, gcs, fm);
 
     /*

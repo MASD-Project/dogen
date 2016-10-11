@@ -29,7 +29,7 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen/annotations/types/object.hpp"
+#include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/serialization/profile_fwd_ser.hpp"
 #include "dogen/annotations/types/field_instance_definition.hpp"
 

@@ -3320,13 +3320,13 @@ for Java, etc.#</dia:string>
         <dia:point val="-112,-1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-112.05,-1.05;-99.13,2.65"/>
+        <dia:rectangle val="-112.05,-1.05;-97.59,2.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-112,-1"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.82"/>
+        <dia:real val="14.359999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -3424,7 +3424,7 @@ for Java, etc.#</dia:string>
             <dia:string>#annotation#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#annotations::object#</dia:string>
+            <dia:string>#annotations::annotation#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -3626,17 +3626,17 @@ for Java, etc.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O31">
       <dia:attribute name="obj_pos">
-        <dia:point val="-105.59,2.6"/>
+        <dia:point val="-104.82,2.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-109.682,2.55;-104.74,14.05"/>
+        <dia:rectangle val="-109.682,2.55;-103.97,14.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-105.59,2.6"/>
-        <dia:point val="-105.59,9"/>
+        <dia:point val="-104.82,2.6"/>
+        <dia:point val="-104.82,9"/>
         <dia:point val="-109.632,9"/>
         <dia:point val="-109.632,14"/>
       </dia:attribute>

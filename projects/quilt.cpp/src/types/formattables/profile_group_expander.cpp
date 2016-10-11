@@ -85,9 +85,9 @@ profile_group_expander::make_field_definitions(
 }
 
 std::string profile_group_expander::obtain_profile_configuration(
-    const field_definitions& fd, const annotations::annotation& root_object) const {
+    const field_definitions& fd, const annotations::annotation& root) const {
     BOOST_LOG_SEV(lg, debug) << "Reading profile configuration.";
-    const annotations::field_selector fs(root_object);
+    const annotations::field_selector fs(root);
     const auto r(fs.get_text_content_or_default(fd.profile));
     BOOST_LOG_SEV(lg, debug) << "Profile configuration: " << r;
     return r;
@@ -186,7 +186,7 @@ profile_group_expander::merge(const profile_group_types& original) const {
 }
 
 void profile_group_expander::populate_model(const annotations::repository& drp,
-    const annotations::annotation& root_object, const profile_group_types& pgs,
+    const annotations::annotation& root, const profile_group_types& pgs,
     model& fm) const {
     BOOST_LOG_SEV(lg, debug) << "Populating model with profile groups.";
 
@@ -194,7 +194,7 @@ void profile_group_expander::populate_model(const annotations::repository& drp,
      * First setup the global profile.
      */
     const auto fd(make_field_definitions(drp));
-    const auto global_cfg(obtain_profile_configuration(fd, root_object));
+    const auto global_cfg(obtain_profile_configuration(fd, root));
     const auto i(pgs.find(global_cfg));
     if (i == pgs.end()) {
         BOOST_LOG_SEV(lg, error) << invalid_profile_configuration << global_cfg;
@@ -322,13 +322,13 @@ void profile_group_expander::populate_model(const annotations::repository& drp,
 
 void profile_group_expander::expand(
     const std::forward_list<boost::filesystem::path>& data_directories,
-    const annotations::repository& drp, const annotations::annotation& root_object,
+    const annotations::repository& drp, const annotations::annotation& root,
     const formatters::container& fc, model& fm) const {
 
     const auto original(hydrate(data_directories));
     validate(fc, original);
     const auto merged(merge(original));
-    populate_model(drp, root_object, merged, fm);
+    populate_model(drp, root, merged, fm);
 }
 
 } } } }

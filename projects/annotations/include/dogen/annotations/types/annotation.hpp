@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_OBJECT_HPP
-#define DOGEN_ANNOTATIONS_TYPES_OBJECT_HPP
+#ifndef DOGEN_ANNOTATIONS_TYPES_ANNOTATION_HPP
+#define DOGEN_ANNOTATIONS_TYPES_ANNOTATION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,13 +29,13 @@
 #include <algorithm>
 #include <unordered_map>
 #include "dogen/annotations/types/field_instance.hpp"
-#include "dogen/annotations/serialization/object_fwd_ser.hpp"
+#include "dogen/annotations/serialization/annotation_fwd_ser.hpp"
 
 namespace dogen {
 namespace annotations {
 
 /**
- * @brief Represents a set of annotations.
+ * @brief Represents an annotation that can be associated with an external object.
  */
 class annotation final {
 public:
@@ -45,7 +45,7 @@ public:
     ~annotation() = default;
 
 public:
-    explicit annotation(const std::unordered_map<std::string, dogen::annotations::field_instance>& fields);
+    explicit annotation(const std::unordered_map<std::string, dogen::annotations::field_instance>& body);
 
 private:
     template<typename Archive>
@@ -59,10 +59,10 @@ public:
      * @brief All field instances associated with this object, by qualified name.
      */
     /**@{*/
-    const std::unordered_map<std::string, dogen::annotations::field_instance>& fields() const;
-    std::unordered_map<std::string, dogen::annotations::field_instance>& fields();
-    void fields(const std::unordered_map<std::string, dogen::annotations::field_instance>& v);
-    void fields(const std::unordered_map<std::string, dogen::annotations::field_instance>&& v);
+    const std::unordered_map<std::string, dogen::annotations::field_instance>& body() const;
+    std::unordered_map<std::string, dogen::annotations::field_instance>& body();
+    void body(const std::unordered_map<std::string, dogen::annotations::field_instance>& v);
+    void body(const std::unordered_map<std::string, dogen::annotations::field_instance>&& v);
     /**@}*/
 
 public:
@@ -76,7 +76,7 @@ public:
     annotation& operator=(annotation other);
 
 private:
-    std::unordered_map<std::string, dogen::annotations::field_instance> fields_;
+    std::unordered_map<std::string, dogen::annotations::field_instance> body_;
 };
 
 } }

@@ -53,11 +53,11 @@
 				<element class_id="21" tracking_level="0" version="0">
 					<documentation></documentation>
 					<annotation class_id="22" tracking_level="0" version="0">
-						<fields class_id="23" tracking_level="0" version="0">
+						<body class_id="23" tracking_level="0" version="0">
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</fields>
+						</body>
 					</annotation>
 					<name>
 						<id>&lt;exception&gt;&lt;pkg&gt;</id>
@@ -113,11 +113,11 @@
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<fields>
+						<body>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</fields>
+						</body>
 					</annotation>
 					<name>
 						<id>&lt;exception&gt;</id>
@@ -193,11 +193,11 @@
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<fields>
+						<body>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</fields>
+						</body>
 					</annotation>
 					<name>
 						<id>&lt;exception&gt;&lt;a_class&gt;</id>
@@ -251,11 +251,11 @@
 					<item class_id="33" tracking_level="0" version="0">
 						<documentation></documentation>
 						<annotation>
-							<fields>
+							<body>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-							</fields>
+							</body>
 						</annotation>
 						<name>
 							<id>&lt;exception&gt;&lt;a_class&gt;&lt;prop_0&gt;</id>
@@ -395,11 +395,11 @@
 				<element>
 					<documentation></documentation>
 					<annotation>
-						<fields>
+						<body>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</fields>
+						</body>
 					</annotation>
 					<name>
 						<id>&lt;exception&gt;&lt;pkg&gt;&lt;catastrophic_error&gt;</id>
@@ -453,11 +453,11 @@
 					<documentation>this is an exception
 </documentation>
 					<annotation>
-						<fields>
+						<body>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</fields>
+						</body>
 					</annotation>
 					<name>
 						<id>&lt;exception&gt;&lt;my_error&gt;</id>
@@ -568,11 +568,11 @@
 		<element>
 			<documentation></documentation>
 			<annotation>
-				<fields>
+				<body>
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
-				</fields>
+				</body>
 			</annotation>
 			<name>
 				<id></id>

@@ -206,7 +206,7 @@ BOOST_AUTO_TEST_CASE(trivial_model_hydrates_into_expected_model) {
     {
         const auto& pair(*m.modules().begin());
         BOOST_CHECK(pair.second.documentation() == documentation);
-        BOOST_CHECK(pair.second.annotation().fields().empty());
+        BOOST_CHECK(pair.second.annotation().body().empty());
     }
 
     BOOST_REQUIRE(m.objects().size() == 1);

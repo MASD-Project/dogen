@@ -22,7 +22,6 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/annotations/io/scope_types_io.hpp"
-#include "dogen/annotations/types/object.hpp"
 #include "dogen/annotations/io/scribble_group_io.hpp"
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
 #include "dogen/yarn/types/expansion_error.hpp"

@@ -19,14 +19,14 @@
  *
  */
 #include <sstream>
-#include "dogen/annotations/test_data/object_td.hpp"
+#include "dogen/annotations/test_data/annotation_td.hpp"
 #include "dogen/annotations/test_data/annotation_group_td.hpp"
 
 namespace {
 
 dogen::annotations::annotation
-create_dogen_annotations_object(const unsigned int position) {
-    return dogen::annotations::object_generator::create(position);
+create_dogen_annotations_annotation(const unsigned int position) {
+    return dogen::annotations::annotation_generator::create(position);
 }
 
 std::string create_std_string(const unsigned int position) {
@@ -35,10 +35,10 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-std::unordered_map<std::string, dogen::annotations::annotation> create_std_unordered_map_std_string_dogen_annotations_object(unsigned int position) {
+std::unordered_map<std::string, dogen::annotations::annotation> create_std_unordered_map_std_string_dogen_annotations_annotation(unsigned int position) {
     std::unordered_map<std::string, dogen::annotations::annotation> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_dogen_annotations_object(position + i)));
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_annotations_annotation(position + i)));
     }
     return r;
 }
@@ -52,8 +52,8 @@ annotation_group_generator::annotation_group_generator() : position_(0) { }
 
 void annotation_group_generator::
 populate(const unsigned int position, result_type& v) {
-    v.parent(create_dogen_annotations_object(position + 0));
-    v.children(create_std_unordered_map_std_string_dogen_annotations_object(position + 1));
+    v.parent(create_dogen_annotations_annotation(position + 0));
+    v.children(create_std_unordered_map_std_string_dogen_annotations_annotation(position + 1));
 }
 
 annotation_group_generator::result_type

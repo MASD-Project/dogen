@@ -20,8 +20,8 @@
  */
 #include "dogen/stitch/test_data/line_td.hpp"
 #include "dogen/stitch/test_data/properties_td.hpp"
-#include "dogen/annotations/test_data/object_td.hpp"
 #include "dogen/stitch/test_data/text_template_td.hpp"
+#include "dogen/annotations/test_data/annotation_td.hpp"
 
 namespace {
 
@@ -31,8 +31,8 @@ create_dogen_stitch_properties(const unsigned int position) {
 }
 
 dogen::annotations::annotation
-create_dogen_annotations_object(const unsigned int position) {
-    return dogen::annotations::object_generator::create(position);
+create_dogen_annotations_annotation(const unsigned int position) {
+    return dogen::annotations::annotation_generator::create(position);
 }
 
 dogen::stitch::line
@@ -58,7 +58,7 @@ text_template_generator::text_template_generator() : position_(0) { }
 void text_template_generator::
 populate(const unsigned int position, result_type& v) {
     v.properties(create_dogen_stitch_properties(position + 0));
-    v.annotation(create_dogen_annotations_object(position + 1));
+    v.annotation(create_dogen_annotations_annotation(position + 1));
     v.lines(create_std_list_dogen_stitch_line(position + 2));
 }
 

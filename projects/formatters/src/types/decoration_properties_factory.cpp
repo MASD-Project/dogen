@@ -89,8 +89,8 @@ make_field_definitions(const annotations::repository& rp) const {
 }
 
 decoration_configuration decoration_properties_factory::
-make_decoration_configuration(const annotations::annotation& o) const {
-    const annotations::field_selector fs(o);
+make_decoration_configuration(const annotations::annotation& a) const {
+    const annotations::field_selector fs(a);
 
     decoration_configuration r;
     const auto& gd(field_definitions_.generate_decoration);

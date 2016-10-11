@@ -30,7 +30,7 @@
 #include <utility>
 #include <unordered_map>
 #include <boost/optional.hpp>
-#include "dogen/annotations/types/object.hpp"
+#include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/repository.hpp"
 #include "dogen/annotations/types/scope_types.hpp"
 #include "dogen/annotations/types/annotation_group.hpp"

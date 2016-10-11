@@ -18,36 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TEST_DATA_OBJECT_TD_HPP
-#define DOGEN_ANNOTATIONS_TEST_DATA_OBJECT_TD_HPP
+#include "dogen/annotations/hash/annotation_hash.hpp"
+#include "dogen/annotations/hash/field_instance_hash.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace {
 
-#include "dogen/annotations/types/object.hpp"
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value) {
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+inline std::size_t hash_std_unordered_map_std_string_dogen_annotations_field_instance(const std::unordered_map<std::string, dogen::annotations::field_instance>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, i.second);
+    }
+    return seed;
+}
+
+}
 
 namespace dogen {
 namespace annotations {
 
-class object_generator {
-public:
-    object_generator();
+std::size_t annotation_hasher::hash(const annotation& v) {
+    std::size_t seed(0);
 
-public:
-    typedef dogen::annotations::annotation result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
-};
+    combine(seed, hash_std_unordered_map_std_string_dogen_annotations_field_instance(v.body()));
+    return seed;
+}
 
 } }
-
-#endif

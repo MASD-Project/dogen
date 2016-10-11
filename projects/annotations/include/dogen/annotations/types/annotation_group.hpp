@@ -28,7 +28,7 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen/annotations/types/object.hpp"
+#include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/serialization/annotation_group_fwd_ser.hpp"
 
 namespace dogen {

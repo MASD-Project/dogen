@@ -51,7 +51,7 @@ const std::string no_default_value(
 namespace dogen {
 namespace annotations {
 
-field_selector::field_selector(const annotation& o) : object_(o) { }
+field_selector::field_selector(const annotation& a) : annotation_(a) { }
 
 void field_selector::ensure_default_value(const field_definition& fd) const {
     if (!fd.default_value()) {
@@ -62,8 +62,8 @@ void field_selector::ensure_default_value(const field_definition& fd) const {
 }
 
 bool field_selector::has_field(const std::string& qualified_field_name) const {
-    const auto i(object_.fields().find(qualified_field_name));
-    return (i != object_.fields().end());
+    const auto i(annotation_.body().find(qualified_field_name));
+    return (i != annotation_.body().end());
 }
 
 bool field_selector::has_field(const field_definition& fd) const {
@@ -72,9 +72,9 @@ bool field_selector::has_field(const field_definition& fd) const {
 
 const field_instance& field_selector::
 get_field(const std::string& qualified_field_name) const {
-    const auto i(object_.fields().find(qualified_field_name));
+    const auto i(annotation_.body().find(qualified_field_name));
 
-    if (i == object_.fields().end()) {
+    if (i == annotation_.body().end()) {
         BOOST_LOG_SEV(lg, error) << field_not_found << qualified_field_name;
         BOOST_THROW_EXCEPTION(selection_error(field_not_found
                 + qualified_field_name));

@@ -29,7 +29,7 @@
 #include <algorithm>
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/name_tree.hpp"
-#include "dogen/annotations/types/object.hpp"
+#include "dogen/annotations/types/annotation.hpp"
 #include "dogen/yarn/serialization/attribute_fwd_ser.hpp"
 
 namespace dogen {

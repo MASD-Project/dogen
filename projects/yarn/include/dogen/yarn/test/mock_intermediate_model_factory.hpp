@@ -30,7 +30,7 @@
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
 #include "dogen/yarn/types/intermediate_model.hpp"
-#include "dogen/annotations/types/object.hpp"
+#include "dogen/annotations/types/annotation.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -145,7 +145,7 @@ public:
     };
 
 public:
-    typedef std::function<void(annotations::annotation& o)>
+    typedef std::function<void(annotations::annotation&)>
     annotation_function_type;
 
 public:

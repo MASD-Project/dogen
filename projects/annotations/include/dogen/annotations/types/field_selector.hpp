@@ -29,7 +29,7 @@
 #include <string>
 #include "dogen/annotations/types/field_definition.hpp"
 #include "dogen/annotations/types/field_instance.hpp"
-#include "dogen/annotations/types/object.hpp"
+#include "dogen/annotations/types/annotation.hpp"
 
 namespace dogen {
 namespace annotations {
@@ -40,7 +40,7 @@ namespace annotations {
  */
 class field_selector {
 public:
-    explicit field_selector(const annotation& o);
+    explicit field_selector(const annotation& a);
 
 private:
     /**
@@ -191,7 +191,7 @@ public:
     int get_number_content_or_default(const field_definition& fd) const;
 
 private:
-    const annotation& object_;
+    const annotation& annotation_;
 };
 
 } }

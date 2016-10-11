@@ -29,7 +29,7 @@
 #include <algorithm>
 #include "dogen/stitch/types/line.hpp"
 #include "dogen/stitch/types/properties.hpp"
-#include "dogen/annotations/types/object.hpp"
+#include "dogen/annotations/types/annotation.hpp"
 #include "dogen/stitch/serialization/text_template_fwd_ser.hpp"
 
 namespace dogen {

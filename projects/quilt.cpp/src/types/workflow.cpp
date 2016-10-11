@@ -64,22 +64,22 @@ dogen::formatters::decoration_properties_factory
 workflow::create_decoration_properties_factory(
     const annotations::repository& drp,
     const dogen::formatters::repository& frp,
-    const annotations::annotation& root_object) const {
+    const annotations::annotation& root) const {
 
     using dogen::formatters::decoration_properties_factory;
-    decoration_properties_factory r(drp, frp, root_object);
+    decoration_properties_factory r(drp, frp, root);
     return r;
 }
 
 formattables::model workflow::create_formattables_model(
     const std::forward_list<boost::filesystem::path>& data_directories,
     const options::cpp_options& opts,
-    const annotations::repository& drp, const annotations::annotation& root_object,
+    const annotations::repository& drp, const annotations::annotation& root,
     const dogen::formatters::decoration_properties_factory& dpf,
     const formatters::container& fc, const yarn::model& m) const {
 
     formattables::workflow fw;
-    return fw.execute(data_directories, opts, drp, root_object, dpf, fc, m);
+    return fw.execute(data_directories, opts, drp, root, dpf, fc, m);
 }
 
 std::string workflow::name() const {
