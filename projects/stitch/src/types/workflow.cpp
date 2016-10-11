@@ -42,7 +42,7 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("stitch.workflow"));
 
-const std::string fields_dir("fields");
+const std::string annotations_dir("annotations");
 const std::string stitch_extension(".stitch");
 const std::string no_template_paths("No paths to text templates found.");
 const std::string empty_template("Template has no content: ");
@@ -128,7 +128,7 @@ create_formatters_repository_activity() const {
 annotations::repository workflow::create_annotations_repository_activity(
     const std::forward_list<annotations::ownership_hierarchy>& oh) const {
     using namespace dogen::utility::filesystem;
-    const auto dir(data_files_directory() / fields_dir);
+    const auto dir(data_files_directory() / annotations_dir);
     annotations::repository_workflow w;
     return w.execute(oh, std::forward_list<boost::filesystem::path> { dir });
 }

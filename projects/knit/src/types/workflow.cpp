@@ -47,7 +47,7 @@ const std::string binary_extension(".bin");
 const std::string target_postfix("_target");
 const std::string library_dir("library");
 const std::string merged("merged_");
-const std::string fields_dir("fields");
+const std::string annotations_dir("annotations");
 const std::string invalid_archive_type("Invalid or unexpected archive type");
 const std::string incorrect_stdout_options(
     "Configuration for output to stdout is incorrect");
@@ -84,7 +84,7 @@ obtain_ownership_hierarchy_activity() const {
 annotations::repository workflow::setup_annotations_repository_activity(
     const std::forward_list<annotations::ownership_hierarchy>& oh) const {
     using namespace dogen::utility::filesystem;
-    const auto dir(data_files_directory() / fields_dir);
+    const auto dir(data_files_directory() / annotations_dir);
     annotations::repository_workflow w;
     return w.execute(oh, std::forward_list<boost::filesystem::path> { dir });
 }
