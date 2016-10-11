@@ -29,7 +29,7 @@
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include "dogen/annotations/types/annotation.hpp"
-#include "dogen/annotations/types/repository.hpp"
+#include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/annotations/types/type.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/formattables/local_enablement_configuration.hpp"

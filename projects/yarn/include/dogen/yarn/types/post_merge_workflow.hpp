@@ -27,7 +27,7 @@
 
 #include <list>
 #include <utility>
-#include "dogen/annotations/types/repository.hpp"
+#include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/injector_registrar.hpp"
 #include "dogen/yarn/types/element.hpp"

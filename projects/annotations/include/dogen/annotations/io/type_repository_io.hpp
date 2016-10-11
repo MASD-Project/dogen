@@ -18,35 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TEST_DATA_REPOSITORY_TD_HPP
-#define DOGEN_ANNOTATIONS_TEST_DATA_REPOSITORY_TD_HPP
+#ifndef DOGEN_ANNOTATIONS_IO_TYPE_REPOSITORY_IO_HPP
+#define DOGEN_ANNOTATIONS_IO_TYPE_REPOSITORY_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/annotations/types/repository.hpp"
+#include <iosfwd>
+#include "dogen/annotations/types/type_repository.hpp"
 
 namespace dogen {
 namespace annotations {
 
-class repository_generator {
-public:
-    repository_generator();
-
-public:
-    typedef dogen::annotations::type_repository result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
-};
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::annotations::type_repository& v);
 
 } }
 

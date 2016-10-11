@@ -29,7 +29,7 @@
 #include <forward_list>
 #include <boost/filesystem/path.hpp>
 #include "dogen/annotations/types/annotation.hpp"
-#include "dogen/annotations/types/repository.hpp"
+#include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/annotations/types/ownership_hierarchy.hpp"
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/formatters/types/repository.hpp"

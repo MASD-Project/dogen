@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "dogen/annotations/io/type_io.hpp"
-#include "dogen/annotations/io/repository_io.hpp"
+#include "dogen/annotations/io/type_repository_io.hpp"
 
 namespace std {
 
@@ -85,12 +85,12 @@ namespace annotations {
 
 std::ostream& operator<<(std::ostream& s, const type_repository& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::annotations::repository\"" << ", "
-      << "\"all_field_definitions\": " << v.all_field_definitions() << ", "
-      << "\"field_definitions_by_name\": " << v.field_definitions_by_name() << ", "
-      << "\"field_definitions_by_facet_name\": " << v.field_definitions_by_facet_name() << ", "
-      << "\"field_definitions_by_formatter_name\": " << v.field_definitions_by_formatter_name() << ", "
-      << "\"field_definitions_by_model_name\": " << v.field_definitions_by_model_name()
+      << "\"__type__\": " << "\"dogen::annotations::type_repository\"" << ", "
+      << "\"all_types\": " << v.all_types() << ", "
+      << "\"types_by_name\": " << v.types_by_name() << ", "
+      << "\"types_by_facet_name\": " << v.types_by_facet_name() << ", "
+      << "\"types_by_formatter_name\": " << v.types_by_formatter_name() << ", "
+      << "\"types_by_model_name\": " << v.types_by_model_name()
       << " }";
     return(s);
 }

@@ -25,7 +25,7 @@
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/annotations/test/mock_type_factory.hpp"
-#include "dogen/annotations/test/mock_repository_factory.hpp"
+#include "dogen/annotations/test/mock_type_repository_factory.hpp"
 #include "dogen/annotations/types/type.hpp"
 #include "dogen/annotations/types/field_selector.hpp"
 #include "dogen/yarn/types/object.hpp"
@@ -162,7 +162,7 @@ dogen::annotations::type_repository create_repository() {
     fds.push_back(f.make_type(some_key));
     fds.push_back(f.make_type(type_key, value_types::boolean));
 
-    test::mock_repository_factory rf;
+    test::mock_type_repository_factory rf;
     return rf.make(fds);
 }
 

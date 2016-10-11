@@ -28,7 +28,7 @@
 #include <string>
 #include <boost/optional.hpp>
 #include "dogen/annotations/types/type.hpp"
-#include "dogen/annotations/types/repository.hpp"
+#include "dogen/annotations/types/type_repository.hpp"
 
 namespace dogen {
 namespace annotations {

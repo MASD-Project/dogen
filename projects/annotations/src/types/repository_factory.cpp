@@ -39,12 +39,12 @@ namespace annotations {
 type_repository
 repository_factory::make(const std::list<type>& fds) const {
     type_repository r;
-    r.all_field_definitions(fds);
+    r.all_types(fds);
 
     for (const auto& fd : fds) {
         const auto n(fd.name().qualified());
         const auto pair(std::make_pair(n, fd));
-        const auto result(r.field_definitions_by_name().insert(pair));
+        const auto result(r.types_by_name().insert(pair));
         if (!result.second) {
             BOOST_LOG_SEV(lg, error) << duplicate_qualified_name << n;
             BOOST_THROW_EXCEPTION(building_error(duplicate_qualified_name + n));
@@ -52,14 +52,14 @@ repository_factory::make(const std::list<type>& fds) const {
 
         const auto& oh(fd.ownership_hierarchy());
         if (!oh.facet_name().empty())
-            r.field_definitions_by_facet_name()[oh.facet_name()].push_back(fd);
+            r.types_by_facet_name()[oh.facet_name()].push_back(fd);
 
         if (!oh.formatter_name().empty())
-            r.field_definitions_by_formatter_name()[oh.formatter_name()]
+            r.types_by_formatter_name()[oh.formatter_name()]
                 .push_back(fd);
 
         if (!oh.model_name().empty())
-            r.field_definitions_by_model_name()[oh.model_name()]
+            r.types_by_model_name()[oh.model_name()]
                 .push_back(fd);
     }
 

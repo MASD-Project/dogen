@@ -22,7 +22,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/forward_list_io.hpp"
-#include "dogen/annotations/io/repository_io.hpp"
+#include "dogen/annotations/io/type_repository_io.hpp"
 #include "dogen/annotations/io/ownership_hierarchy_io.hpp"
 #include "dogen/annotations/types/instantiator.hpp"
 #include "dogen/annotations/types/workflow_error.hpp"

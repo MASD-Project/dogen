@@ -31,7 +31,7 @@
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
 #include "dogen/annotations/types/annotation.hpp"
-#include "dogen/annotations/types/repository.hpp"
+#include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/formatters/types/repository.hpp"
 #include "dogen/formatters/types/decoration_properties_factory.hpp"
 #include "dogen/yarn/types/model.hpp"

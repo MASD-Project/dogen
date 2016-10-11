@@ -20,7 +20,7 @@
  */
 #include <sstream>
 #include "dogen/annotations/test_data/type_td.hpp"
-#include "dogen/annotations/test_data/repository_td.hpp"
+#include "dogen/annotations/test_data/type_repository_td.hpp"
 
 namespace {
 
@@ -64,33 +64,33 @@ std::unordered_map<std::string, std::list<dogen::annotations::type> > create_std
 namespace dogen {
 namespace annotations {
 
-repository_generator::repository_generator() : position_(0) { }
+type_repository_generator::type_repository_generator() : position_(0) { }
 
-void repository_generator::
+void type_repository_generator::
 populate(const unsigned int position, result_type& v) {
-    v.all_field_definitions(create_std_list_dogen_annotations_type(position + 0));
-    v.field_definitions_by_name(create_std_unordered_map_std_string_dogen_annotations_type(position + 1));
-    v.field_definitions_by_facet_name(create_std_unordered_map_std_string_std_list_dogen_annotations_type(position + 2));
-    v.field_definitions_by_formatter_name(create_std_unordered_map_std_string_std_list_dogen_annotations_type(position + 3));
-    v.field_definitions_by_model_name(create_std_unordered_map_std_string_std_list_dogen_annotations_type(position + 4));
+    v.all_types(create_std_list_dogen_annotations_type(position + 0));
+    v.types_by_name(create_std_unordered_map_std_string_dogen_annotations_type(position + 1));
+    v.types_by_facet_name(create_std_unordered_map_std_string_std_list_dogen_annotations_type(position + 2));
+    v.types_by_formatter_name(create_std_unordered_map_std_string_std_list_dogen_annotations_type(position + 3));
+    v.types_by_model_name(create_std_unordered_map_std_string_std_list_dogen_annotations_type(position + 4));
 }
 
-repository_generator::result_type
-repository_generator::create(const unsigned int position) {
+type_repository_generator::result_type
+type_repository_generator::create(const unsigned int position) {
     type_repository r;
-    repository_generator::populate(position, r);
+    type_repository_generator::populate(position, r);
     return r;
 }
 
-repository_generator::result_type*
-repository_generator::create_ptr(const unsigned int position) {
+type_repository_generator::result_type*
+type_repository_generator::create_ptr(const unsigned int position) {
     type_repository* p = new type_repository();
-    repository_generator::populate(position, *p);
+    type_repository_generator::populate(position, *p);
     return p;
 }
 
-repository_generator::result_type
-repository_generator::operator()() {
+type_repository_generator::result_type
+type_repository_generator::operator()() {
     return create(position_++);
 }
 

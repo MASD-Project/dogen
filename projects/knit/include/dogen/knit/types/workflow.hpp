@@ -31,7 +31,7 @@
 #include <functional>
 #include <forward_list>
 #include <boost/filesystem/path.hpp>
-#include "dogen/annotations/types/repository.hpp"
+#include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/options/types/knitting_options.hpp"
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/yarn/types/descriptor.hpp"

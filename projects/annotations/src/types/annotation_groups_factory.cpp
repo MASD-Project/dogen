@@ -55,8 +55,8 @@ annotation_groups_factory::annotation_groups_factory(const type_repository& rp,
 
 boost::optional<type> annotation_groups_factory::
 obtain_type(const std::string& n) const {
-    const auto i(repository_.field_definitions_by_name().find(n));
-    if (i == repository_.field_definitions_by_name().end()) {
+    const auto i(repository_.types_by_name().find(n));
+    if (i == repository_.types_by_name().end()) {
         if (throw_on_missing_type_) {
             BOOST_LOG_SEV(lg, error) << type_not_found << n;
 

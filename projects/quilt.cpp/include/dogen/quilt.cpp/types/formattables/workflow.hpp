@@ -29,7 +29,7 @@
 #include <utility>
 #include <unordered_map>
 #include "dogen/annotations/types/annotation.hpp"
-#include "dogen/annotations/types/repository.hpp"
+#include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/options/types/cpp_options.hpp"
 #include "dogen/formatters/types/decoration_properties_factory.hpp"
 #include "dogen/yarn/types/model.hpp"

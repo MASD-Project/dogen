@@ -29,7 +29,7 @@
 #include <forward_list>
 #include <boost/filesystem/path.hpp>
 #include "dogen/options/types/knitting_options.hpp"
-#include "dogen/annotations/types/repository.hpp"
+#include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/quilt/types/backend_registrar.hpp"

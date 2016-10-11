@@ -1,0 +1,141 @@
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#include "dogen/annotations/types/type_repository.hpp"
+
+namespace dogen {
+namespace annotations {
+
+type_repository::type_repository(
+    const std::list<dogen::annotations::type>& all_types,
+    const std::unordered_map<std::string, dogen::annotations::type>& types_by_name,
+    const std::unordered_map<std::string, std::list<dogen::annotations::type> >& types_by_facet_name,
+    const std::unordered_map<std::string, std::list<dogen::annotations::type> >& types_by_formatter_name,
+    const std::unordered_map<std::string, std::list<dogen::annotations::type> >& types_by_model_name)
+    : all_types_(all_types),
+      types_by_name_(types_by_name),
+      types_by_facet_name_(types_by_facet_name),
+      types_by_formatter_name_(types_by_formatter_name),
+      types_by_model_name_(types_by_model_name) { }
+
+void type_repository::swap(type_repository& other) noexcept {
+    using std::swap;
+    swap(all_types_, other.all_types_);
+    swap(types_by_name_, other.types_by_name_);
+    swap(types_by_facet_name_, other.types_by_facet_name_);
+    swap(types_by_formatter_name_, other.types_by_formatter_name_);
+    swap(types_by_model_name_, other.types_by_model_name_);
+}
+
+bool type_repository::operator==(const type_repository& rhs) const {
+    return all_types_ == rhs.all_types_ &&
+        types_by_name_ == rhs.types_by_name_ &&
+        types_by_facet_name_ == rhs.types_by_facet_name_ &&
+        types_by_formatter_name_ == rhs.types_by_formatter_name_ &&
+        types_by_model_name_ == rhs.types_by_model_name_;
+}
+
+type_repository& type_repository::operator=(type_repository other) {
+    using std::swap;
+    swap(*this, other);
+    return *this;
+}
+
+const std::list<dogen::annotations::type>& type_repository::all_types() const {
+    return all_types_;
+}
+
+std::list<dogen::annotations::type>& type_repository::all_types() {
+    return all_types_;
+}
+
+void type_repository::all_types(const std::list<dogen::annotations::type>& v) {
+    all_types_ = v;
+}
+
+void type_repository::all_types(const std::list<dogen::annotations::type>&& v) {
+    all_types_ = std::move(v);
+}
+
+const std::unordered_map<std::string, dogen::annotations::type>& type_repository::types_by_name() const {
+    return types_by_name_;
+}
+
+std::unordered_map<std::string, dogen::annotations::type>& type_repository::types_by_name() {
+    return types_by_name_;
+}
+
+void type_repository::types_by_name(const std::unordered_map<std::string, dogen::annotations::type>& v) {
+    types_by_name_ = v;
+}
+
+void type_repository::types_by_name(const std::unordered_map<std::string, dogen::annotations::type>&& v) {
+    types_by_name_ = std::move(v);
+}
+
+const std::unordered_map<std::string, std::list<dogen::annotations::type> >& type_repository::types_by_facet_name() const {
+    return types_by_facet_name_;
+}
+
+std::unordered_map<std::string, std::list<dogen::annotations::type> >& type_repository::types_by_facet_name() {
+    return types_by_facet_name_;
+}
+
+void type_repository::types_by_facet_name(const std::unordered_map<std::string, std::list<dogen::annotations::type> >& v) {
+    types_by_facet_name_ = v;
+}
+
+void type_repository::types_by_facet_name(const std::unordered_map<std::string, std::list<dogen::annotations::type> >&& v) {
+    types_by_facet_name_ = std::move(v);
+}
+
+const std::unordered_map<std::string, std::list<dogen::annotations::type> >& type_repository::types_by_formatter_name() const {
+    return types_by_formatter_name_;
+}
+
+std::unordered_map<std::string, std::list<dogen::annotations::type> >& type_repository::types_by_formatter_name() {
+    return types_by_formatter_name_;
+}
+
+void type_repository::types_by_formatter_name(const std::unordered_map<std::string, std::list<dogen::annotations::type> >& v) {
+    types_by_formatter_name_ = v;
+}
+
+void type_repository::types_by_formatter_name(const std::unordered_map<std::string, std::list<dogen::annotations::type> >&& v) {
+    types_by_formatter_name_ = std::move(v);
+}
+
+const std::unordered_map<std::string, std::list<dogen::annotations::type> >& type_repository::types_by_model_name() const {
+    return types_by_model_name_;
+}
+
+std::unordered_map<std::string, std::list<dogen::annotations::type> >& type_repository::types_by_model_name() {
+    return types_by_model_name_;
+}
+
+void type_repository::types_by_model_name(const std::unordered_map<std::string, std::list<dogen::annotations::type> >& v) {
+    types_by_model_name_ = v;
+}
+
+void type_repository::types_by_model_name(const std::unordered_map<std::string, std::list<dogen::annotations::type> >&& v) {
+    types_by_model_name_ = std::move(v);
+}
+
+} }

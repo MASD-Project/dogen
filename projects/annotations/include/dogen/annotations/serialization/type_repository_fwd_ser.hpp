@@ -18,22 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_IO_REPOSITORY_IO_HPP
-#define DOGEN_ANNOTATIONS_IO_REPOSITORY_IO_HPP
+#ifndef DOGEN_ANNOTATIONS_SERIALIZATION_TYPE_REPOSITORY_FWD_SER_HPP
+#define DOGEN_ANNOTATIONS_SERIALIZATION_TYPE_REPOSITORY_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/annotations/types/repository.hpp"
+#include "dogen/annotations/types/type_repository_fwd.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace boost {
+namespace serialization {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::annotations::type_repository& v);
+template<class Archive>
+void save(Archive& ar, const dogen::annotations::type_repository& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, dogen::annotations::type_repository& v, unsigned int version);
 
 } }
 

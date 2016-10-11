@@ -26,7 +26,7 @@
 #endif
 
 #include <unordered_map>
-#include "dogen/annotations/types/repository.hpp"
+#include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/yarn/types/name_tree.hpp"
 #include "dogen/yarn/types/attribute.hpp"
 #include "dogen/quilt.cpp/types/formattables/streaming_properties.hpp"

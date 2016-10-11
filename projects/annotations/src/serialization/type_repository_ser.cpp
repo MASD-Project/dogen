@@ -31,7 +31,7 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/annotations/serialization/type_ser.hpp"
-#include "dogen/annotations/serialization/repository_ser.hpp"
+#include "dogen/annotations/serialization/type_repository_ser.hpp"
 
 namespace boost {
 namespace serialization {
@@ -40,22 +40,22 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::annotations::type_repository& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("all_field_definitions", v.all_field_definitions_);
-    ar << make_nvp("field_definitions_by_name", v.field_definitions_by_name_);
-    ar << make_nvp("field_definitions_by_facet_name", v.field_definitions_by_facet_name_);
-    ar << make_nvp("field_definitions_by_formatter_name", v.field_definitions_by_formatter_name_);
-    ar << make_nvp("field_definitions_by_model_name", v.field_definitions_by_model_name_);
+    ar << make_nvp("all_types", v.all_types_);
+    ar << make_nvp("types_by_name", v.types_by_name_);
+    ar << make_nvp("types_by_facet_name", v.types_by_facet_name_);
+    ar << make_nvp("types_by_formatter_name", v.types_by_formatter_name_);
+    ar << make_nvp("types_by_model_name", v.types_by_model_name_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
     dogen::annotations::type_repository& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("all_field_definitions", v.all_field_definitions_);
-    ar >> make_nvp("field_definitions_by_name", v.field_definitions_by_name_);
-    ar >> make_nvp("field_definitions_by_facet_name", v.field_definitions_by_facet_name_);
-    ar >> make_nvp("field_definitions_by_formatter_name", v.field_definitions_by_formatter_name_);
-    ar >> make_nvp("field_definitions_by_model_name", v.field_definitions_by_model_name_);
+    ar >> make_nvp("all_types", v.all_types_);
+    ar >> make_nvp("types_by_name", v.types_by_name_);
+    ar >> make_nvp("types_by_facet_name", v.types_by_facet_name_);
+    ar >> make_nvp("types_by_formatter_name", v.types_by_formatter_name_);
+    ar >> make_nvp("types_by_model_name", v.types_by_model_name_);
 }
 
 } }

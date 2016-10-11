@@ -29,7 +29,7 @@
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
 #include "dogen/annotations/types/annotation.hpp"
-#include "dogen/annotations/types/repository.hpp"
+#include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/stitch/types/stitching_properties.hpp"
 
 namespace dogen {

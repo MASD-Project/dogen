@@ -18,37 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TEST_MOCK_REPOSITORY_FACTORY_HPP
-#define DOGEN_ANNOTATIONS_TEST_MOCK_REPOSITORY_FACTORY_HPP
+#ifndef DOGEN_ANNOTATIONS_TEST_DATA_TYPE_REPOSITORY_TD_HPP
+#define DOGEN_ANNOTATIONS_TEST_DATA_TYPE_REPOSITORY_TD_HPP
 
-#include <list>
-#include "dogen/annotations/types/type.hpp"
-#include "dogen/annotations/types/repository.hpp"
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/annotations/types/type_repository.hpp"
 
 namespace dogen {
 namespace annotations {
-namespace test {
 
-/**
- * @brief Generates a mock repository with a number of fields in it.
- */
-class mock_repository_factory {
-private:
-    /**
-     * @brief Adds the field definition to the repository, populating
-     * all of the required containers.
-     */
-    void add_type(const type& fd, type_repository& rp) const;
+class type_repository_generator {
+public:
+    type_repository_generator();
 
 public:
-    /**
-     * @brief Creates the repository with canned fields, adding any
-     * additional fields the user may supply.
-     */
-    type_repository make(const std::list<type>& additional_fields =
-        std::list<type> {});
+    typedef dogen::annotations::type_repository result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
 };
 
-} } }
+} }
 
 #endif

@@ -50,7 +50,7 @@ qualify(const std::string& prefix, const std::string& field_name) const {
 
 boost::optional<const type&> repository_selector::
 try_select_field_by_name(const std::string& n) const {
-    const auto& c(repository_.field_definitions_by_name());
+    const auto& c(repository_.types_by_name());
     const auto i(c.find(n));
     if (i == c.end())
         return boost::optional<const type&>();
@@ -82,7 +82,7 @@ const type& repository_selector::select_field_by_name(
 
 const std::list<type>& repository_selector::
 select_fields_by_formatter_name(const std::string& n) const {
-    const auto& c(repository_.field_definitions_by_formatter_name());
+    const auto& c(repository_.types_by_formatter_name());
     const auto i(c.find(n));
     if (i == c.end()) {
         BOOST_LOG_SEV(lg, error) << no_fields_for_formatter << n;
@@ -93,7 +93,7 @@ select_fields_by_formatter_name(const std::string& n) const {
 
 const std::list<type>& repository_selector::
 select_fields_by_facet_name(const std::string& n) const {
-    const auto& c(repository_.field_definitions_by_facet_name());
+    const auto& c(repository_.types_by_facet_name());
     const auto i(c.find(n));
     if (i == c.end()) {
         BOOST_LOG_SEV(lg, error) << no_fields_for_facet << n;
@@ -104,7 +104,7 @@ select_fields_by_facet_name(const std::string& n) const {
 
 const std::list<type>& repository_selector::
 select_fields_by_model_name(const std::string& n) const {
-    const auto& c(repository_.field_definitions_by_model_name());
+    const auto& c(repository_.types_by_model_name());
     const auto i(c.find(n));
     if (i == c.end()) {
         BOOST_LOG_SEV(lg, error) << no_fields_for_model << n;

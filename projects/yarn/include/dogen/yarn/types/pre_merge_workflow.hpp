@@ -24,7 +24,7 @@
 #pragma once
 #endif
 
-#include "dogen/annotations/types/repository.hpp"
+#include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/options/types/input_options.hpp"
 #include "dogen/yarn/types/descriptor.hpp"
 #include "dogen/yarn/types/frontend_registrar.hpp"

@@ -22,12 +22,12 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/annotations/types/workflow_error.hpp"
 #include "dogen/annotations/test/mock_type_factory.hpp"
-#include "dogen/annotations/test/mock_repository_factory.hpp"
+#include "dogen/annotations/test/mock_type_repository_factory.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("annotations.test.mock_repository_factory"));
+static logger lg(logger_factory("annotations.test.mock_type_repository_factory"));
 
 const std::string duplicate_qualified_name(
     "Qualified name defined more than once: ");
@@ -38,33 +38,32 @@ namespace dogen {
 namespace annotations {
 namespace test {
 
-void mock_repository_factory::add_type(
-    const type& fd, type_repository& rp) const {
+void mock_type_repository_factory::add_type(
+    const type& t, type_repository& trp) const {
 
-    const auto n(fd.name().qualified());
-    const auto pair(std::make_pair(n, fd));
-    const auto result(rp.field_definitions_by_name().insert(pair));
+    const auto n(t.name().qualified());
+    const auto pair(std::make_pair(n, t));
+    const auto result(trp.types_by_name().insert(pair));
     if (!result.second) {
         BOOST_LOG_SEV(lg, error) << duplicate_qualified_name << n;
         BOOST_THROW_EXCEPTION(workflow_error(duplicate_qualified_name + n));
     }
 
-    const auto& oh(fd.ownership_hierarchy());
-    rp.field_definitions_by_facet_name()[oh.facet_name()].push_back(fd);
-    rp.field_definitions_by_formatter_name()[oh.formatter_name()]
-        .push_back(fd);
+    const auto& oh(t.ownership_hierarchy());
+    trp.types_by_facet_name()[oh.facet_name()].push_back(t);
+    trp.types_by_formatter_name()[oh.formatter_name()].push_back(t);
 }
 
-type_repository mock_repository_factory::make(
-    const std::list<type>& additional_fields) {
+type_repository mock_type_repository_factory::
+make(const std::list<type>& additional_types) {
     type_repository r;
 
-    for (const auto& fd : additional_fields)
-        add_type(fd, r);
+    for (const auto& at : additional_types)
+        add_type(at, r);
 
     mock_type_factory f;
-    for (const auto& fd : f.make_canned_types())
-        add_type(fd, r);
+    for (const auto& t : f.make_canned_types())
+        add_type(t, r);
 
     return r;
 }

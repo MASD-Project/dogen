@@ -18,26 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_SERIALIZATION_REPOSITORY_SER_HPP
-#define DOGEN_ANNOTATIONS_SERIALIZATION_REPOSITORY_SER_HPP
+#ifndef DOGEN_ANNOTATIONS_HASH_TYPE_REPOSITORY_HASH_HPP
+#define DOGEN_ANNOTATIONS_HASH_TYPE_REPOSITORY_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/split_free.hpp>
-#include "dogen/annotations/types/repository.hpp"
+#include <functional>
+#include "dogen/annotations/types/type_repository.hpp"
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::annotations::type_repository)
-namespace boost {
-namespace serialization {
+namespace dogen {
+namespace annotations {
 
-template<typename Archive>
-void save(Archive& ar, const dogen::annotations::type_repository& v, unsigned int version);
-
-template<typename Archive>
-void load(Archive& ar, dogen::annotations::type_repository& v, unsigned int version);
+struct type_repository_hasher {
+public:
+    static std::size_t hash(const type_repository& v);
+};
 
 } }
 
+namespace std {
+
+template<>
+struct hash<dogen::annotations::type_repository> {
+public:
+    size_t operator()(const dogen::annotations::type_repository& v) const {
+        return dogen::annotations::type_repository_hasher::hash(v);
+    }
+};
+
+}
 #endif

@@ -30,7 +30,7 @@
 #include <forward_list>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
-#include "dogen/annotations/types/repository.hpp"
+#include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/annotations/types/type.hpp"
 #include "dogen/quilt.cpp/types/formattables/inclusion_directive_configuration.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"

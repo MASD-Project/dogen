@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/annotations/hash/type_hash.hpp"
-#include "dogen/annotations/hash/repository_hash.hpp"
+#include "dogen/annotations/hash/type_repository_hash.hpp"
 
 namespace {
 
@@ -60,14 +60,14 @@ inline std::size_t hash_std_unordered_map_std_string_std_list_dogen_annotations_
 namespace dogen {
 namespace annotations {
 
-std::size_t repository_hasher::hash(const type_repository& v) {
+std::size_t type_repository_hasher::hash(const type_repository& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_list_dogen_annotations_type(v.all_field_definitions()));
-    combine(seed, hash_std_unordered_map_std_string_dogen_annotations_type(v.field_definitions_by_name()));
-    combine(seed, hash_std_unordered_map_std_string_std_list_dogen_annotations_type(v.field_definitions_by_facet_name()));
-    combine(seed, hash_std_unordered_map_std_string_std_list_dogen_annotations_type(v.field_definitions_by_formatter_name()));
-    combine(seed, hash_std_unordered_map_std_string_std_list_dogen_annotations_type(v.field_definitions_by_model_name()));
+    combine(seed, hash_std_list_dogen_annotations_type(v.all_types()));
+    combine(seed, hash_std_unordered_map_std_string_dogen_annotations_type(v.types_by_name()));
+    combine(seed, hash_std_unordered_map_std_string_std_list_dogen_annotations_type(v.types_by_facet_name()));
+    combine(seed, hash_std_unordered_map_std_string_std_list_dogen_annotations_type(v.types_by_formatter_name()));
+    combine(seed, hash_std_unordered_map_std_string_std_list_dogen_annotations_type(v.types_by_model_name()));
 
     return seed;
 }

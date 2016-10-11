@@ -30,7 +30,7 @@
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
 #include "dogen/annotations/types/annotation.hpp"
-#include "dogen/annotations/types/repository.hpp"
+#include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/formattables/model.hpp"
 

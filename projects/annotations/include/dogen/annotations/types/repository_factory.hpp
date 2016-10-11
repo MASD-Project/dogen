@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/annotations/types/repository.hpp"
+#include "dogen/annotations/types/type_repository.hpp"
 
 namespace dogen {
 namespace annotations {

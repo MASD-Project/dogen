@@ -18,24 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_SERIALIZATION_REPOSITORY_FWD_SER_HPP
-#define DOGEN_ANNOTATIONS_SERIALIZATION_REPOSITORY_FWD_SER_HPP
+#ifndef DOGEN_ANNOTATIONS_TEST_MOCK_TYPE_REPOSITORY_FACTORY_HPP
+#define DOGEN_ANNOTATIONS_TEST_MOCK_TYPE_REPOSITORY_FACTORY_HPP
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+#include <list>
+#include "dogen/annotations/types/type.hpp"
+#include "dogen/annotations/types/type_repository.hpp"
 
-#include "dogen/annotations/types/repository_fwd.hpp"
+namespace dogen {
+namespace annotations {
+namespace test {
 
-namespace boost {
-namespace serialization {
+/**
+ * @brief Generates a mock type repository with a number of types in
+ * it.
+ */
+class mock_type_repository_factory {
+private:
+    /**
+     * @brief Adds the type to the repository, populating all of the
+     * required containers.
+     */
+    void add_type(const type& t, type_repository& trp) const;
 
-template<class Archive>
-void save(Archive& ar, const dogen::annotations::type_repository& v, unsigned int version);
+public:
+    /**
+     * @brief Creates the repository with canned types, adding any
+     * additional types the user may supply.
+     */
+    type_repository make(const std::list<type>& additional_types =
+        std::list<type> {});
+};
 
-template<class Archive>
-void load(Archive& ar, dogen::annotations::type_repository& v, unsigned int version);
-
-} }
+} } }
 
 #endif
