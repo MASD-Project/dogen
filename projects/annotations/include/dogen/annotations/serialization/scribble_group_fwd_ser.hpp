@@ -18,35 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TEST_DATA_OBJECT_AGGREGATE_TD_HPP
-#define DOGEN_ANNOTATIONS_TEST_DATA_OBJECT_AGGREGATE_TD_HPP
+#ifndef DOGEN_ANNOTATIONS_SERIALIZATION_SCRIBBLE_GROUP_FWD_SER_HPP
+#define DOGEN_ANNOTATIONS_SERIALIZATION_SCRIBBLE_GROUP_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/annotations/types/object_aggregate.hpp"
+#include "dogen/annotations/types/scribble_group_fwd.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace boost {
+namespace serialization {
 
-class object_aggregate_generator {
-public:
-    object_aggregate_generator();
+template<class Archive>
+void save(Archive& ar, const dogen::annotations::scribble_group& v, unsigned int version);
 
-public:
-    typedef dogen::annotations::object_aggregate result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
-};
+template<class Archive>
+void load(Archive& ar, dogen::annotations::scribble_group& v, unsigned int version);
 
 } }
 

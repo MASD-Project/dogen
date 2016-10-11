@@ -28,6 +28,7 @@
 #include <list>
 #include <string>
 #include <unordered_map>
+#include "dogen/annotations/types/scribble.hpp"
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn.dia/types/repository.hpp"
@@ -51,7 +52,7 @@ private:
     yarn::intermediate_model setup_model(const std::string& model_name,
         const std::string& external_modules, bool is_target) const;
 
-    void update_raw_aggregate(const yarn::name& n, const profiled_object& po);
+    void update_scribble_group(const yarn::name& n, const profiled_object& po);
 
     void update_documentation(const profiled_object& po);
 

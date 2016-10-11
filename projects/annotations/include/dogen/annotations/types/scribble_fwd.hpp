@@ -18,38 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/annotations/hash/object_hash.hpp"
-#include "dogen/annotations/hash/object_aggregate_hash.hpp"
+#ifndef DOGEN_ANNOTATIONS_TYPES_SCRIBBLE_FWD_HPP
+#define DOGEN_ANNOTATIONS_TYPES_SCRIBBLE_FWD_HPP
 
-namespace {
-
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value) {
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-inline std::size_t hash_std_unordered_map_std_string_dogen_annotations_object(const std::unordered_map<std::string, dogen::annotations::object>& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i.first);
-        combine(seed, i.second);
-    }
-    return seed;
-}
-
-}
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace annotations {
 
-std::size_t object_aggregate_hasher::hash(const object_aggregate& v) {
-    std::size_t seed(0);
-
-    combine(seed, v.element());
-    combine(seed, hash_std_unordered_map_std_string_dogen_annotations_object(v.attributes()));
-
-    return seed;
-}
+class scribble;
 
 } }
+
+#endif

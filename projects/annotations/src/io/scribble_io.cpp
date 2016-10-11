@@ -20,8 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/annotations/io/object_io.hpp"
-#include "dogen/annotations/io/object_aggregate_io.hpp"
+#include "dogen/annotations/io/scribble_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -32,17 +31,26 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::annotations::object>& v) {
-    s << "[";
+inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, std::string>& v) {
+    s << "{ " << "\"__type__\": " << "\"std::pair\"" << ", ";
+
+    s << "\"first\": " << "\"" << tidy_up_string(v.first) << "\"" << ", ";
+    s << "\"second\": " << "\"" << tidy_up_string(v.second) << "\"";
+    s << " }";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::pair<std::string, std::string> >& v) {
+    s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
+        s << *i;
     }
-    s << " ] ";
+    s << "] ";
     return s;
 }
 
@@ -51,11 +59,10 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 namespace dogen {
 namespace annotations {
 
-std::ostream& operator<<(std::ostream& s, const object_aggregate& v) {
+std::ostream& operator<<(std::ostream& s, const scribble& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::annotations::object_aggregate\"" << ", "
-      << "\"element\": " << v.element() << ", "
-      << "\"attributes\": " << v.attributes()
+      << "\"__type__\": " << "\"dogen::annotations::scribble\"" << ", "
+      << "\"entries\": " << v.entries()
       << " }";
     return(s);
 }

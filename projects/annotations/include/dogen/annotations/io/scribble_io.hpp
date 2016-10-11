@@ -18,23 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_SERIALIZATION_OBJECT_AGGREGATE_FWD_SER_HPP
-#define DOGEN_ANNOTATIONS_SERIALIZATION_OBJECT_AGGREGATE_FWD_SER_HPP
+#ifndef DOGEN_ANNOTATIONS_IO_SCRIBBLE_IO_HPP
+#define DOGEN_ANNOTATIONS_IO_SCRIBBLE_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/annotations/types/object_aggregate_fwd.hpp"
+#include <iosfwd>
+#include "dogen/annotations/types/scribble.hpp"
 
-namespace boost {
-namespace serialization {
+namespace dogen {
+namespace annotations {
 
-template<class Archive>
-void save(Archive& ar, const dogen::annotations::object_aggregate& v, unsigned int version);
-
-template<class Archive>
-void load(Archive& ar, dogen::annotations::object_aggregate& v, unsigned int version);
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::annotations::scribble& v);
 
 } }
 

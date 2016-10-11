@@ -59,9 +59,9 @@ private:
     read_kvps(const boost::property_tree::ptree& pt) const;
 
     /**
-     * @brief Inserts the raw meta-data into the model's indicies.
+     * @brief Inserts the scribbles into the model's indicies.
      */
-    void insert_raw_meta_data(const yarn::name& owner,
+    void insert_scribbles(const yarn::name& owner,
         const std::list<std::pair<std::string, std::string>>& kvps,
         intermediate_model& im) const;
 

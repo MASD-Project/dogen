@@ -20,7 +20,8 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/annotations/io/raw_aggregate_io.hpp"
+#include "dogen/annotations/io/scribble_io.hpp"
+#include "dogen/annotations/io/scribble_group_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -31,34 +32,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, std::string>& v) {
-    s << "{ " << "\"__type__\": " << "\"std::pair\"" << ", ";
-
-    s << "\"first\": " << "\"" << tidy_up_string(v.first) << "\"" << ", ";
-    s << "\"second\": " << "\"" << tidy_up_string(v.second) << "\"";
-    s << " }";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<std::pair<std::string, std::string> >& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::list<std::pair<std::string, std::string> > >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::annotations::scribble>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -77,11 +51,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 namespace dogen {
 namespace annotations {
 
-std::ostream& operator<<(std::ostream& s, const raw_aggregate& v) {
+std::ostream& operator<<(std::ostream& s, const scribble_group& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::annotations::raw_aggregate\"" << ", "
-      << "\"element\": " << v.element() << ", "
-      << "\"attributes\": " << v.attributes()
+      << "\"__type__\": " << "\"dogen::annotations::scribble_group\"" << ", "
+      << "\"parent\": " << v.parent() << ", "
+      << "\"children\": " << v.children()
       << " }";
     return(s);
 }

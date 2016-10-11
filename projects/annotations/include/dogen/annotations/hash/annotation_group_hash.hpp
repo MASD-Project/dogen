@@ -18,22 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_HASH_RAW_AGGREGATE_HASH_HPP
-#define DOGEN_ANNOTATIONS_HASH_RAW_AGGREGATE_HASH_HPP
+#ifndef DOGEN_ANNOTATIONS_HASH_ANNOTATION_GROUP_HASH_HPP
+#define DOGEN_ANNOTATIONS_HASH_ANNOTATION_GROUP_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <functional>
-#include "dogen/annotations/types/raw_aggregate.hpp"
+#include "dogen/annotations/types/annotation_group.hpp"
 
 namespace dogen {
 namespace annotations {
 
-struct raw_aggregate_hasher {
+struct annotation_group_hasher {
 public:
-    static std::size_t hash(const raw_aggregate& v);
+    static std::size_t hash(const annotation_group& v);
 };
 
 } }
@@ -41,10 +41,10 @@ public:
 namespace std {
 
 template<>
-struct hash<dogen::annotations::raw_aggregate> {
+struct hash<dogen::annotations::annotation_group> {
 public:
-    size_t operator()(const dogen::annotations::raw_aggregate& v) const {
-        return dogen::annotations::raw_aggregate_hasher::hash(v);
+    size_t operator()(const dogen::annotations::annotation_group& v) const {
+        return dogen::annotations::annotation_group_hasher::hash(v);
     }
 };
 

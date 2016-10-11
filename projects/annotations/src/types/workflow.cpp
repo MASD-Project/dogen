@@ -85,25 +85,14 @@ void workflow::validate_scope(const field_definition& fd,
     }
 }
 
-std::unordered_map<std::string, std::list<std::string> >
-workflow::aggregate_raw_data_activity(
-    const std::list<std::pair<std::string, std::string> >&
-    raw_data) const {
-    std::unordered_map<std::string, std::list<std::string> > r;
-
-    for (const auto& rd : raw_data)
-        r[rd.first].push_front(rd.second);
-
-    return r;
-}
-
 std::unordered_map<std::string, field_instance>
-workflow::create_fields_activity(
-    const std::unordered_map<std::string, std::list<std::string> >&
-    aggregated_data, const scope_types current_scope) const {
+workflow::create_fields(const scope_types current_scope,
+    const std::unordered_map<std::string, std::list<std::string>>&
+    aggregated_scribble_entries) const {
+
     std::unordered_map<std::string, field_instance> r;
     field_instance_factory f;
-    for (auto pair : aggregated_data) {
+    for (auto pair : aggregated_scribble_entries) {
         const auto& n(pair.first);
         const auto fd(obtain_field_definition(n));
         if (!fd)
@@ -116,35 +105,50 @@ workflow::create_fields_activity(
     return r;
 }
 
-object workflow::execute(const scope_types current_scope,
-    const std::list<std::pair<std::string, std::string>>&
-    raw_data) const {
-    auto aggregated_raw_data(aggregate_raw_data_activity(raw_data));
-    auto fields(create_fields_activity(aggregated_raw_data, current_scope));
+std::unordered_map<std::string, std::list<std::string>>
+workflow::aggregate_scribble_entries(const scribble& scribble) const {
+    std::unordered_map<std::string, std::list<std::string> > r;
+
+    for (const auto& entry : scribble.entries())
+        r[entry.first].push_front(entry.second);
+
+    return r;
+}
+
+scope_types workflow::
+compute_scope_for_id(const std::string& root_annotation_id,
+    const std::string& current_id) const {
+    const auto is_root(current_id == root_annotation_id);
+    return is_root ? scope_types::root_module : scope_types::entity;
+}
+
+object workflow::
+execute(const scope_types scope, const scribble& scribble) const {
+    auto aggregated_entries(aggregate_scribble_entries(scribble));
+    auto fields(create_fields(scope, aggregated_entries));
     return object(fields);
 }
 
-std::unordered_map<std::string, object_aggregate> workflow::
-execute(const std::string& root_object_id, const std::unordered_map<
-    std::string, raw_aggregate>& raw_aggregates) const {
+std::unordered_map<std::string, annotation_group>
+workflow::execute(const std::string& root_annotation_id,
+    const std::unordered_map<std::string, scribble_group>& scribble_groups
+    ) const {
 
-    std::unordered_map<std::string, object_aggregate> r;
-    for (const auto& pair : raw_aggregates) {
+    std::unordered_map<std::string, annotation_group> r;
+    for (const auto& pair : scribble_groups) {
         const auto id(pair.first);
-        const auto is_root_module(id == root_object_id);
-        const auto scope(is_root_module ?
-            scope_types::root_module : scope_types::entity);
+        const auto& scribble(pair.second);
+        annotation_group ag;
+        const auto scope(compute_scope_for_id(root_annotation_id, id));
+        ag.parent(execute(scope, scribble.parent()));
 
-        const auto& ra(pair.second);
-        object_aggregate oa;
-        oa.element(execute(scope, ra.element()));
-        for (const auto& pair : ra.attributes()) {
-            const auto attr_id(pair.first);
-            const auto& attr(pair.second);
+        for (const auto& pair : scribble.children()) {
+            const auto child_id(pair.first);
+            const auto& child(pair.second);
             const auto scope(scope_types::property);
-            oa.attributes()[attr_id] = execute(scope, attr);
+            ag.children()[child_id] = execute(scope, child);
         }
-        r[id] = oa;
+        r[id] = ag;
     }
     return r;
 }

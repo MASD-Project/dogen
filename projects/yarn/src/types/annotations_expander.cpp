@@ -24,7 +24,7 @@
 #include "dogen/annotations/io/scope_types_io.hpp"
 #include "dogen/annotations/types/object.hpp"
 #include "dogen/annotations/types/workflow.hpp"
-#include "dogen/annotations/io/raw_aggregate_io.hpp"
+#include "dogen/annotations/io/scribble_group_io.hpp"
 #include "dogen/yarn/types/expansion_error.hpp"
 #include "dogen/yarn/types/elements_traversal.hpp"
 #include "dogen/yarn/types/annotations_expander.hpp"
@@ -42,8 +42,8 @@ namespace yarn {
 class updater {
 public:
     updater(const yarn::name& model_name,
-        const std::unordered_map<std::string, annotations::object_aggregate>&
-        object_aggregates);
+        const std::unordered_map<std::string, annotations::annotation_group>&
+        annotation_groups);
 
 private:
 
@@ -52,13 +52,14 @@ private:
         const auto id(e.name().id());
         BOOST_LOG_SEV(lg, debug) << "Processing element: " << id;
 
-        const auto i(object_aggregates_.find(id));
-        if (i == object_aggregates_.end()) {
-            BOOST_LOG_SEV(lg, debug) << "No annotations for element: " << id;
+        const auto i(annotation_groups_.find(id));
+        if (i == annotation_groups_.end()) {
+            BOOST_LOG_SEV(lg, debug) << "No scribble groups for element: "
+                                     << id;
             return;
         }
 
-        e.annotation(i->second.element());
+        e.annotation(i->second.parent());
         BOOST_LOG_SEV(lg, debug) << "Updated annotations for element.";
     }
 
@@ -67,20 +68,20 @@ private:
         const auto id(eas.name().id());
         BOOST_LOG_SEV(lg, debug) << "Processing element: " << id;
 
-        const auto i(object_aggregates_.find(id));
-        if (i == object_aggregates_.end()) {
-            BOOST_LOG_SEV(lg, debug) << "No annotations for element: " << id;
+        const auto i(annotation_groups_.find(id));
+        if (i == annotation_groups_.end()) {
+            BOOST_LOG_SEV(lg, debug) << "No scribble group for element: " << id;
             return;
         }
 
-        const auto& oa(i->second);
-        eas.annotation(oa.element());
+        const auto& ag(i->second);
+        eas.annotation(ag.parent());
 
         for (auto& attr : eas.local_attributes()) {
             const auto n(attr.name().simple());
-            const auto j(oa.attributes().find(n));
-            if (j == oa.attributes().end()) {
-                BOOST_LOG_SEV(lg, debug) << "No kvps for attribute: " << n
+            const auto j(ag.children().find(n));
+            if (j == ag.children().end()) {
+                BOOST_LOG_SEV(lg, debug) << "Attribute has no annotation: " << n
                                          << ". Element: " << eas.name().id();
                 continue;
             }
@@ -103,24 +104,25 @@ public:
 
 private:
     const yarn::name model_name_;
-    const std::unordered_map<std::string, annotations::object_aggregate>&
-    object_aggregates_;
+    const std::unordered_map<std::string, annotations::annotation_group>&
+    annotation_groups_;
 };
 
 updater::updater(const yarn::name& model_name,
-    const std::unordered_map<std::string, annotations::object_aggregate>&
-    object_aggregates) : model_name_(model_name),
-                         object_aggregates_(object_aggregates) {}
+    const std::unordered_map<std::string, annotations::annotation_group>&
+    annotation_groups) : model_name_(model_name),
+                         annotation_groups_(annotation_groups) {}
 
 void annotations_expander::
 expand(const annotations::repository& drp, intermediate_model& im) const {
     BOOST_LOG_SEV(lg, debug) << "Starting annotations expansion for model: "
                              << im.name().id();
-    BOOST_LOG_SEV(lg, debug) << "Raw kvps: " << im.indices().raw_aggregates();
+    BOOST_LOG_SEV(lg, debug) << "Scribble groups: "
+                             << im.indices().scribble_groups();
 
     const annotations::workflow w(drp);
-    const auto oas(w.execute(im.name().id(), im.indices().raw_aggregates()));
-    updater u(im.name(), oas);
+    const auto sgrps(w.execute(im.name().id(), im.indices().scribble_groups()));
+    updater u(im.name(), sgrps);
     yarn::elements_traversal(im, u);
 
     BOOST_LOG_SEV(lg, debug) << "Finished annotations expansion.";

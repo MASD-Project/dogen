@@ -29,26 +29,26 @@
 #include <boost/serialization/unordered_map.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/annotations/serialization/object_ser.hpp"
-#include "dogen/annotations/serialization/object_aggregate_ser.hpp"
+#include "dogen/annotations/serialization/scribble_ser.hpp"
+#include "dogen/annotations/serialization/scribble_group_ser.hpp"
 
 namespace boost {
 namespace serialization {
 
 template<typename Archive>
 void save(Archive& ar,
-    const dogen::annotations::object_aggregate& v,
+    const dogen::annotations::scribble_group& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("element", v.element_);
-    ar << make_nvp("attributes", v.attributes_);
+    ar << make_nvp("parent", v.parent_);
+    ar << make_nvp("children", v.children_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
-    dogen::annotations::object_aggregate& v,
+    dogen::annotations::scribble_group& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("element", v.element_);
-    ar >> make_nvp("attributes", v.attributes_);
+    ar >> make_nvp("parent", v.parent_);
+    ar >> make_nvp("children", v.children_);
 }
 
 } }
@@ -56,16 +56,16 @@ void load(Archive& ar,
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const dogen::annotations::object_aggregate& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, dogen::annotations::object_aggregate& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const dogen::annotations::scribble_group& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, dogen::annotations::scribble_group& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const dogen::annotations::object_aggregate& v, unsigned int version);
-template void load(archive::text_iarchive& ar, dogen::annotations::object_aggregate& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const dogen::annotations::scribble_group& v, unsigned int version);
+template void load(archive::text_iarchive& ar, dogen::annotations::scribble_group& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const dogen::annotations::object_aggregate& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, dogen::annotations::object_aggregate& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const dogen::annotations::scribble_group& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, dogen::annotations::scribble_group& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const dogen::annotations::object_aggregate& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, dogen::annotations::object_aggregate& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const dogen::annotations::scribble_group& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, dogen::annotations::scribble_group& v, unsigned int version);
 
 } }

@@ -345,7 +345,8 @@ text_template parser::parse(const std::string& s) const {
     if (!kvps.empty()) {
         using annotations::scope_types;
         const auto scope(scope_types::root_module);
-        r.annotation(annotations_workflow_.execute(scope, kvps));
+        const auto scribble = annotations::scribble(kvps);
+        r.annotation(annotations_workflow_.execute(scope, scribble));
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished parsing.";

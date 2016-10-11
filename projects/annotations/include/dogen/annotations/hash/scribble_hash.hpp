@@ -18,18 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_OBJECT_AGGREGATE_FWD_HPP
-#define DOGEN_ANNOTATIONS_TYPES_OBJECT_AGGREGATE_FWD_HPP
+#ifndef DOGEN_ANNOTATIONS_HASH_SCRIBBLE_HASH_HPP
+#define DOGEN_ANNOTATIONS_HASH_SCRIBBLE_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <functional>
+#include "dogen/annotations/types/scribble.hpp"
+
 namespace dogen {
 namespace annotations {
 
-class object_aggregate;
+struct scribble_hasher {
+public:
+    static std::size_t hash(const scribble& v);
+};
 
 } }
 
+namespace std {
+
+template<>
+struct hash<dogen::annotations::scribble> {
+public:
+    size_t operator()(const dogen::annotations::scribble& v) const {
+        return dogen::annotations::scribble_hasher::hash(v);
+    }
+};
+
+}
 #endif

@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/annotations/test_data/raw_aggregate_td.hpp"
+#include "dogen/annotations/test_data/scribble_td.hpp"
 
 namespace {
 
@@ -45,43 +45,34 @@ std::list<std::pair<std::string, std::string> > create_std_list_std_pair_std_str
     return r;
 }
 
-std::unordered_map<std::string, std::list<std::pair<std::string, std::string> > > create_std_unordered_map_std_string_std_list_std_pair_std_string_std_string(unsigned int position) {
-    std::unordered_map<std::string, std::list<std::pair<std::string, std::string> > > r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_std_list_std_pair_std_string_std_string(position + i)));
-    }
-    return r;
-}
-
 }
 
 namespace dogen {
 namespace annotations {
 
-raw_aggregate_generator::raw_aggregate_generator() : position_(0) { }
+scribble_generator::scribble_generator() : position_(0) { }
 
-void raw_aggregate_generator::
+void scribble_generator::
 populate(const unsigned int position, result_type& v) {
-    v.element(create_std_list_std_pair_std_string_std_string(position + 0));
-    v.attributes(create_std_unordered_map_std_string_std_list_std_pair_std_string_std_string(position + 1));
+    v.entries(create_std_list_std_pair_std_string_std_string(position + 0));
 }
 
-raw_aggregate_generator::result_type
-raw_aggregate_generator::create(const unsigned int position) {
-    raw_aggregate r;
-    raw_aggregate_generator::populate(position, r);
+scribble_generator::result_type
+scribble_generator::create(const unsigned int position) {
+    scribble r;
+    scribble_generator::populate(position, r);
     return r;
 }
 
-raw_aggregate_generator::result_type*
-raw_aggregate_generator::create_ptr(const unsigned int position) {
-    raw_aggregate* p = new raw_aggregate();
-    raw_aggregate_generator::populate(position, *p);
+scribble_generator::result_type*
+scribble_generator::create_ptr(const unsigned int position) {
+    scribble* p = new scribble();
+    scribble_generator::populate(position, *p);
     return p;
 }
 
-raw_aggregate_generator::result_type
-raw_aggregate_generator::operator()() {
+scribble_generator::result_type
+scribble_generator::operator()() {
     return create(position_++);
 }
 

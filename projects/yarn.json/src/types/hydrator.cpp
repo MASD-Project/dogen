@@ -24,6 +24,7 @@
 #include <boost/filesystem/fstream.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/annotations/types/scribble_group.hpp"
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/primitive.hpp"
@@ -101,18 +102,18 @@ hydrator::read_kvps(const boost::property_tree::ptree& pt) const {
     return r;
 }
 
-void hydrator::insert_raw_meta_data(const yarn::name& owner,
+void hydrator::insert_scribbles(const yarn::name& owner,
     const std::list<std::pair<std::string, std::string>>& kvps,
     intermediate_model& im) const {
 
     if (kvps.empty())
         return;
 
-    annotations::raw_aggregate ra;
-    ra.element(kvps);
+    annotations::scribble_group sgrp;
+    sgrp.parent(annotations::scribble(kvps));
     const auto id(owner.id());
-    const auto pair(std::make_pair(id, ra));
-    const bool inserted(im.indices().raw_aggregates().insert(pair).second);
+    const auto pair(std::make_pair(id, sgrp));
+    const bool inserted(im.indices().scribble_groups().insert(pair).second);
     if (!inserted) {
         BOOST_LOG_SEV(lg, error) << duplicate_element_id << id;
         BOOST_THROW_EXCEPTION(hydration_error(duplicate_element_id + id));
@@ -158,7 +159,7 @@ void hydrator::read_element(const boost::property_tree::ptree& pt,
                 e.documentation(*documentation);
 
             const auto kvps(read_kvps(pt));
-            insert_raw_meta_data(e.name(), kvps, im);
+            insert_scribbles(e.name(), kvps, im);
         });
 
     const auto meta_type_value(pt.get<std::string>(meta_type_key));
@@ -215,7 +216,7 @@ read_stream(std::istream& s, const bool is_target) const {
 
     yarn::module m;
     const auto kvps(read_kvps(pt));
-    insert_raw_meta_data(r.name(), kvps, r);
+    insert_scribbles(r.name(), kvps, r);
 
     const auto documentation(pt.get_optional<std::string>(documentation_key));
     if (documentation)

@@ -21,7 +21,8 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/pair_io.hpp"
-#include "dogen/annotations/io/raw_aggregate_io.hpp"
+#include "dogen/annotations/types/scribble_group.hpp"
+#include "dogen/annotations/io/scribble_group_io.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/yarn.dia/types/building_error.hpp"
 #include "dogen/yarn.dia/types/repository_selector.hpp"
@@ -115,17 +116,20 @@ yarn::intermediate_model builder::setup_model(const std::string& model_name,
 }
 
 void builder::
-update_raw_aggregate(const yarn::name& n, const profiled_object& po) {
-    annotations::raw_aggregate ra;
-    auto& raw_aggregates(repository_.model().indices().raw_aggregates());
-    ra.element(po.object().comment().key_value_pairs());
+update_scribble_group(const yarn::name& n, const profiled_object& po) {
+    annotations::scribble_group sg;
+    const auto& kvps(po.object().comment().key_value_pairs());
+    sg.parent(annotations::scribble(kvps));
+
     for (const auto& attr : po.object().attributes()) {
-        const auto& attr_kvps(attr.comment().key_value_pairs());
-        if (attr_kvps.empty())
+        const auto& kvps(attr.comment().key_value_pairs());
+        if (kvps.empty())
             continue;
 
-        const auto pair(std::make_pair(attr.name(), attr_kvps));
-        const auto inserted(ra.attributes().insert(pair).second);
+
+        const auto scribble = annotations::scribble(kvps);
+        const auto pair(std::make_pair(attr.name(), scribble));
+        const auto&inserted(sg.children().insert(pair).second);
         if (!inserted) {
             BOOST_LOG_SEV(lg, error) << duplicate_attribute_name << attr.name();
             BOOST_THROW_EXCEPTION(
@@ -133,15 +137,15 @@ update_raw_aggregate(const yarn::name& n, const profiled_object& po) {
         }
     }
 
-    bool no_kvps(ra.element().empty() && ra.attributes().empty());
+    bool no_kvps(sg.parent().entries().empty() && sg.children().empty());
     if (no_kvps)
         return;
 
-    const_repository_selector crs(repository_);
-    const auto pair(std::make_pair(n.id(), ra));;
-    BOOST_LOG_SEV(lg, debug) << "Inserting meta-data: " << pair;
+    const auto pair(std::make_pair(n.id(), sg));
+    BOOST_LOG_SEV(lg, debug) << "Inserting scribble group: " << pair;
 
-    const bool inserted(raw_aggregates.insert(pair).second);
+    auto& sgrps(repository_.model().indices().scribble_groups());
+    const bool inserted(sgrps.insert(pair).second);
     if (!inserted) {
         BOOST_LOG_SEV(lg, error) << duplicate_element_id << n.id();
         BOOST_THROW_EXCEPTION(building_error(duplicate_element_id + n.id()));
@@ -165,13 +169,13 @@ void builder::update_documentation(const profiled_object& po) {
     if (o.child_node_id().empty()) {
         auto& module(rs.module_for_name(repository_.model().name()));
         module.documentation(documentation);
-        update_raw_aggregate(module.name(), po);
+        update_scribble_group(module.name(), po);
         return;
     }
 
     yarn::module& module(rs.module_for_id(o.child_node_id()));
     module.documentation(documentation);
-    update_raw_aggregate(module.name(), po);
+    update_scribble_group(module.name(), po);
 }
 
 void builder::add(const profiled_object& po) {
@@ -187,26 +191,26 @@ void builder::add(const profiled_object& po) {
     } else if (p.is_uml_large_package()) {
         const auto m(t.to_module(po));
         add_element(itn, im.modules(), m, id);
-        update_raw_aggregate(m.name(), po);
+        update_scribble_group(m.name(), po);
     } else if (p.is_enumeration()) {
         const auto e(t.to_enumeration(po));
         add_element(itn, im.enumerations(), e, id);
-        update_raw_aggregate(e.name(), po);
+        update_scribble_group(e.name(), po);
     } else if (p.is_concept()) {
         const auto c(t.to_concept(po));
         add_element(itn, im.concepts(), c, id);
-        update_raw_aggregate(c.name(), po);
+        update_scribble_group(c.name(), po);
     } else if (p.is_exception()) {
         const auto e(t.to_exception(po));
         add_element(itn, im.exceptions(), e, id);
-        update_raw_aggregate(e.name(), po);
+        update_scribble_group(e.name(), po);
     } else {
         const auto ot(p.is_service() ?
             yarn::object_types::user_defined_service :
             yarn::object_types::user_defined_value_object);
         const auto o(t.to_object(po, ot));
         add_element(itn, im.objects(), o, id);
-        update_raw_aggregate(o.name(), po);
+        update_scribble_group(o.name(), po);
     }
 }
 

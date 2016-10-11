@@ -21128,13 +21128,13 @@ space.#</dia:string>
         <dia:point val="70,90"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="69.95,89.95;99.81,94.45"/>
+        <dia:rectangle val="69.95,89.95;100.58,94.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="70,90"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="29.760000000000002"/>
+        <dia:real val="30.530000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -21275,10 +21275,10 @@ space.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#raw_aggregates#</dia:string>
+            <dia:string>#scribble_groups#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, annotations::raw_aggregate&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, annotations::scribble_group&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -21344,7 +21344,7 @@ space.#</dia:string>
         <dia:point val="69.4575,79.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="68.7075,78.45;84.9786,90.7499"/>
+        <dia:rectangle val="68.7075,78.45;85.465,90.7499"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -21352,8 +21352,8 @@ space.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="69.4575,79.2"/>
         <dia:point val="69.4575,86"/>
-        <dia:point val="84.6006,86"/>
-        <dia:point val="84.7786,89.9499"/>
+        <dia:point val="85.265,86"/>
+        <dia:point val="85.265,89.9499"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

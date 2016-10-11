@@ -26,22 +26,22 @@ namespace yarn {
 indices::indices(
     const std::unordered_set<std::string>& objects_always_in_heap,
     const std::unordered_set<std::string>& elements_referable_by_attributes,
-    const std::unordered_map<std::string, dogen::annotations::raw_aggregate>& raw_aggregates)
+    const std::unordered_map<std::string, dogen::annotations::scribble_group>& scribble_groups)
     : objects_always_in_heap_(objects_always_in_heap),
       elements_referable_by_attributes_(elements_referable_by_attributes),
-      raw_aggregates_(raw_aggregates) { }
+      scribble_groups_(scribble_groups) { }
 
 void indices::swap(indices& other) noexcept {
     using std::swap;
     swap(objects_always_in_heap_, other.objects_always_in_heap_);
     swap(elements_referable_by_attributes_, other.elements_referable_by_attributes_);
-    swap(raw_aggregates_, other.raw_aggregates_);
+    swap(scribble_groups_, other.scribble_groups_);
 }
 
 bool indices::operator==(const indices& rhs) const {
     return objects_always_in_heap_ == rhs.objects_always_in_heap_ &&
         elements_referable_by_attributes_ == rhs.elements_referable_by_attributes_ &&
-        raw_aggregates_ == rhs.raw_aggregates_;
+        scribble_groups_ == rhs.scribble_groups_;
 }
 
 indices& indices::operator=(indices other) {
@@ -82,20 +82,20 @@ void indices::elements_referable_by_attributes(const std::unordered_set<std::str
     elements_referable_by_attributes_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::annotations::raw_aggregate>& indices::raw_aggregates() const {
-    return raw_aggregates_;
+const std::unordered_map<std::string, dogen::annotations::scribble_group>& indices::scribble_groups() const {
+    return scribble_groups_;
 }
 
-std::unordered_map<std::string, dogen::annotations::raw_aggregate>& indices::raw_aggregates() {
-    return raw_aggregates_;
+std::unordered_map<std::string, dogen::annotations::scribble_group>& indices::scribble_groups() {
+    return scribble_groups_;
 }
 
-void indices::raw_aggregates(const std::unordered_map<std::string, dogen::annotations::raw_aggregate>& v) {
-    raw_aggregates_ = v;
+void indices::scribble_groups(const std::unordered_map<std::string, dogen::annotations::scribble_group>& v) {
+    scribble_groups_ = v;
 }
 
-void indices::raw_aggregates(const std::unordered_map<std::string, dogen::annotations::raw_aggregate>&& v) {
-    raw_aggregates_ = std::move(v);
+void indices::scribble_groups(const std::unordered_map<std::string, dogen::annotations::scribble_group>&& v) {
+    scribble_groups_ = std::move(v);
 }
 
 } }

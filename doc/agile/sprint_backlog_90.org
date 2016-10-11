@@ -14,23 +14,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-11 Tue 12:57]
+#+CAPTION: Clock summary at [2016-10-11 Tue 14:42]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *11:27* |       |      | 100.0 |
+| *Total time*                                                                | *13:08* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 11:27   |       |      | 100.0 |
-| Active                                                                      |         | 11:27 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:22 |   3.2 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:19 |   2.8 |
-| COMPLETED Improve bintray support                                           |         |       | 0:26 |   3.8 |
-| COMPLETED Refactor opaque infrastructure                                    |         |       | 1:17 |  11.2 |
-| COMPLETED Remove any remnants of annotations from quilt                     |         |       | 0:05 |   0.7 |
-| COMPLETED Solve the issue of too many "configurations"                      |         |       | 4:01 |  35.1 |
-| COMPLETED Merge decoration configuration and annotations factories          |         |       | 0:18 |   2.6 |
-| COMPLETED Move annotation factories into expander in yarn                   |         |       | 1:11 |  10.3 |
-| STARTED Clean up terminology in dynamic                                     |         |       | 3:28 |  30.3 |
+| Stories                                                                     | 13:08   |       |      | 100.0 |
+| Active                                                                      |         | 13:08 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:22 |   2.8 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:19 |   2.4 |
+| COMPLETED Improve bintray support                                           |         |       | 0:26 |   3.3 |
+| COMPLETED Refactor opaque infrastructure                                    |         |       | 1:17 |   9.8 |
+| COMPLETED Remove any remnants of annotations from quilt                     |         |       | 0:05 |   0.6 |
+| COMPLETED Solve the issue of too many "configurations"                      |         |       | 4:01 |  30.6 |
+| COMPLETED Merge decoration configuration and annotations factories          |         |       | 0:18 |   2.3 |
+| COMPLETED Move annotation factories into expander in yarn                   |         |       | 1:11 |   9.0 |
+| STARTED Clean up terminology in dynamic                                     |         |       | 5:09 |  39.2 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -158,6 +158,10 @@ There were a couple of instances left out in the configuration
 refactor, in yarn.
 
 *** STARTED Clean up terminology in dynamic                           :story:
+    CLOCK: [2016-10-11 Tue 14:40]--[2016-10-11 Tue 14:42] =>  0:02
+    CLOCK: [2016-10-11 Tue 14:31]--[2016-10-11 Tue 14:39] =>  0:08
+    CLOCK: [2016-10-11 Tue 13:39]--[2016-10-11 Tue 14:30] =>  0:51
+    CLOCK: [2016-10-11 Tue 12:58]--[2016-10-11 Tue 13:38] =>  0:40
     CLOCK: [2016-10-11 Tue 12:45]--[2016-10-11 Tue 12:57] =>  0:12
     CLOCK: [2016-10-11 Tue 09:30]--[2016-10-11 Tue 12:44] =>  3:14
     CLOCK: [2016-10-10 Mon 21:56]--[2016-10-10 Mon 21:58] =>  0:02
@@ -189,6 +193,11 @@ objects in yarn (well, anywhere in theory). Interpreting some
 - object -> annotation. The marker for the annotation is the linkage
   between the annotation and the yarn element it annotates. Fields
   become the body of the annotation.
+- workflow: annotation groups factory. Takes in scribble groups.
+- raw aggregate: scribbles, scribble group?
+- object aggregate: annotation group (and top level container
+  annotation groups). In annotation group we have parent and
+  children. Also add a flag for is master/root.
 - field instance -> entry.
 - field instance definition -> entry template.
 - field definition -> split into type and type template. JSON file can
@@ -198,13 +207,8 @@ objects in yarn (well, anywhere in theory). Interpreting some
 - repository ->  type_repository
 - repository workflow: merge repository factory, repository workflow,
   hydration workflow into a type repository factory.
-- raw aggregate: scribbles, scribble group?
-- object aggregate: annotation group (and top level container
-  annotation groups). In annotation group we have parent and
-  children. Also add a flag for is master/root.
 - scopes: remove unused scopes. Rest of the scopes should be root,
   top-level, child (avoid references to yarn concepts).
-- workflow: annotation groups factory. Takes in scribble groups.
 
 *** Registrar in quilt is not being generated                         :story:
 

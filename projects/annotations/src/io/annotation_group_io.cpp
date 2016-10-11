@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/yarn/io/indices_io.hpp"
-#include "dogen/annotations/io/scribble_group_io.hpp"
+#include "dogen/annotations/io/object_io.hpp"
+#include "dogen/annotations/io/annotation_group_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -32,21 +32,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::string>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "\"" << tidy_up_string(*i) << "\"";
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::annotations::scribble_group>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::annotations::object>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -63,14 +49,13 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 }
 
 namespace dogen {
-namespace yarn {
+namespace annotations {
 
-std::ostream& operator<<(std::ostream& s, const indices& v) {
+std::ostream& operator<<(std::ostream& s, const annotation_group& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::yarn::indices\"" << ", "
-      << "\"objects_always_in_heap\": " << v.objects_always_in_heap() << ", "
-      << "\"elements_referable_by_attributes\": " << v.elements_referable_by_attributes() << ", "
-      << "\"scribble_groups\": " << v.scribble_groups()
+      << "\"__type__\": " << "\"dogen::annotations::annotation_group\"" << ", "
+      << "\"parent\": " << v.parent() << ", "
+      << "\"children\": " << v.children()
       << " }";
     return(s);
 }

@@ -18,36 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TEST_DATA_RAW_AGGREGATE_TD_HPP
-#define DOGEN_ANNOTATIONS_TEST_DATA_RAW_AGGREGATE_TD_HPP
+#include "dogen/annotations/hash/scribble_hash.hpp"
+#include "dogen/annotations/hash/scribble_group_hash.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace {
 
-#include "dogen/annotations/types/raw_aggregate.hpp"
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value) {
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+inline std::size_t hash_std_unordered_map_std_string_dogen_annotations_scribble(const std::unordered_map<std::string, dogen::annotations::scribble>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, i.second);
+    }
+    return seed;
+}
+
+}
 
 namespace dogen {
 namespace annotations {
 
-class raw_aggregate_generator {
-public:
-    raw_aggregate_generator();
+std::size_t scribble_group_hasher::hash(const scribble_group& v) {
+    std::size_t seed(0);
 
-public:
-    typedef dogen::annotations::raw_aggregate result_type;
+    combine(seed, v.parent());
+    combine(seed, hash_std_unordered_map_std_string_dogen_annotations_scribble(v.children()));
 
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
-};
+    return seed;
+}
 
 } }
-
-#endif

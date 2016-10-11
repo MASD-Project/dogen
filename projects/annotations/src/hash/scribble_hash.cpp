@@ -18,8 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/hash/indices_hash.hpp"
-#include "dogen/annotations/hash/scribble_group_hash.hpp"
+#include "dogen/annotations/hash/scribble_hash.hpp"
 
 namespace {
 
@@ -29,19 +28,18 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_unordered_set_std_string(const std::unordered_set<std::string>& v) {
+inline std::size_t hash_std_pair_std_string_std_string(const std::pair<std::string, std::string>& v) {
     std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
+
+    combine(seed, v.first);
+    combine(seed, v.second);
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_dogen_annotations_scribble_group(const std::unordered_map<std::string, dogen::annotations::scribble_group>& v) {
+inline std::size_t hash_std_list_std_pair_std_string_std_string(const std::list<std::pair<std::string, std::string> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
-        combine(seed, i.first);
-        combine(seed, i.second);
+        combine(seed, hash_std_pair_std_string_std_string(i));
     }
     return seed;
 }
@@ -49,15 +47,12 @@ inline std::size_t hash_std_unordered_map_std_string_dogen_annotations_scribble_
 }
 
 namespace dogen {
-namespace yarn {
+namespace annotations {
 
-std::size_t indices_hasher::hash(const indices& v) {
+std::size_t scribble_hasher::hash(const scribble& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_unordered_set_std_string(v.objects_always_in_heap()));
-    combine(seed, hash_std_unordered_set_std_string(v.elements_referable_by_attributes()));
-    combine(seed, hash_std_unordered_map_std_string_dogen_annotations_scribble_group(v.scribble_groups()));
-
+    combine(seed, hash_std_list_std_pair_std_string_std_string(v.entries()));
     return seed;
 }
 

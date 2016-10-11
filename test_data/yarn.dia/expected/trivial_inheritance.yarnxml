@@ -5867,149 +5867,163 @@ in the context of inheritance.
 			<bucket_count>1</bucket_count>
 			<item_version>0</item_version>
 		</elements_referable_by_attributes>
-		<raw_aggregates class_id="43" tracking_level="0" version="0">
+		<scribble_groups class_id="43" tracking_level="0" version="0">
 			<count>7</count>
 			<bucket_count>11</bucket_count>
 			<item_version>0</item_version>
 			<item class_id="44" tracking_level="0" version="0">
 				<first>&lt;trivial_inheritance&gt;&lt;non_final_orphan&gt;</first>
 				<second class_id="45" tracking_level="0" version="0">
-					<element class_id="46" tracking_level="0" version="0">
-						<count>1</count>
-						<item_version>0</item_version>
-						<item class_id="47" tracking_level="0" version="0">
-							<first>yarn.generalization.is_final</first>
-							<second>false</second>
-						</item>
-					</element>
-					<attributes class_id="48" tracking_level="0" version="0">
+					<parent class_id="46" tracking_level="0" version="0">
+						<entries class_id="47" tracking_level="0" version="0">
+							<count>1</count>
+							<item_version>0</item_version>
+							<item class_id="48" tracking_level="0" version="0">
+								<first>yarn.generalization.is_final</first>
+								<second>false</second>
+							</item>
+						</entries>
+					</parent>
+					<children class_id="49" tracking_level="0" version="0">
 						<count>0</count>
 						<bucket_count>1</bucket_count>
 						<item_version>0</item_version>
-					</attributes>
+					</children>
 				</second>
 			</item>
 			<item>
 				<first>&lt;trivial_inheritance&gt;&lt;non_final_leaf&gt;</first>
 				<second>
-					<element>
-						<count>1</count>
-						<item_version>0</item_version>
-						<item>
-							<first>yarn.generalization.is_final</first>
-							<second>false</second>
-						</item>
-					</element>
-					<attributes>
+					<parent>
+						<entries>
+							<count>1</count>
+							<item_version>0</item_version>
+							<item>
+								<first>yarn.generalization.is_final</first>
+								<second>false</second>
+							</item>
+						</entries>
+					</parent>
+					<children>
 						<count>0</count>
 						<bucket_count>1</bucket_count>
 						<item_version>0</item_version>
-					</attributes>
+					</children>
 				</second>
 			</item>
 			<item>
 				<first>&lt;trivial_inheritance&gt;&lt;pkg4&gt;&lt;child_via_settings&gt;</first>
 				<second>
-					<element>
-						<count>1</count>
-						<item_version>0</item_version>
-						<item>
-							<first>yarn.generalization.parent</first>
-							<second>parent_outside</second>
-						</item>
-					</element>
-					<attributes>
+					<parent>
+						<entries>
+							<count>1</count>
+							<item_version>0</item_version>
+							<item>
+								<first>yarn.generalization.parent</first>
+								<second>parent_outside</second>
+							</item>
+						</entries>
+					</parent>
+					<children>
 						<count>0</count>
 						<bucket_count>1</bucket_count>
 						<item_version>0</item_version>
-					</attributes>
+					</children>
 				</second>
 			</item>
 			<item>
 				<first>&lt;trivial_inheritance&gt;</first>
 				<second>
-					<element>
-						<count>4</count>
-						<item_version>0</item_version>
-						<item>
-							<first>yarn.dia.comment</first>
-							<second>true</second>
-						</item>
-						<item>
-							<first>decoration.licence_name</first>
-							<second>gpl_v3</second>
-						</item>
-						<item>
-							<first>decoration.copyright_notice</first>
-							<second>Copyright (C) 2012-2015 Marco Craveiro &lt;marco.craveiro@gmail.com&gt;</second>
-						</item>
-						<item>
-							<first>decoration.modeline_group_name</first>
-							<second>emacs</second>
-						</item>
-					</element>
-					<attributes>
+					<parent>
+						<entries>
+							<count>4</count>
+							<item_version>0</item_version>
+							<item>
+								<first>yarn.dia.comment</first>
+								<second>true</second>
+							</item>
+							<item>
+								<first>decoration.licence_name</first>
+								<second>gpl_v3</second>
+							</item>
+							<item>
+								<first>decoration.copyright_notice</first>
+								<second>Copyright (C) 2012-2015 Marco Craveiro &lt;marco.craveiro@gmail.com&gt;</second>
+							</item>
+							<item>
+								<first>decoration.modeline_group_name</first>
+								<second>emacs</second>
+							</item>
+						</entries>
+					</parent>
+					<children>
 						<count>0</count>
 						<bucket_count>1</bucket_count>
 						<item_version>0</item_version>
-					</attributes>
+					</children>
 				</second>
 			</item>
 			<item>
 				<first>&lt;trivial_inheritance&gt;&lt;pkg1&gt;&lt;child_via_settings&gt;</first>
 				<second>
-					<element>
-						<count>1</count>
-						<item_version>0</item_version>
-						<item>
-							<first>yarn.generalization.parent</first>
-							<second>pkg1::parent</second>
-						</item>
-					</element>
-					<attributes>
+					<parent>
+						<entries>
+							<count>1</count>
+							<item_version>0</item_version>
+							<item>
+								<first>yarn.generalization.parent</first>
+								<second>pkg1::parent</second>
+							</item>
+						</entries>
+					</parent>
+					<children>
 						<count>0</count>
 						<bucket_count>1</bucket_count>
 						<item_version>0</item_version>
-					</attributes>
+					</children>
 				</second>
 			</item>
 			<item>
 				<first>&lt;trivial_inheritance&gt;&lt;pkg3&gt;&lt;child_via_settings&gt;</first>
 				<second>
-					<element>
-						<count>1</count>
-						<item_version>0</item_version>
-						<item>
-							<first>yarn.generalization.parent</first>
-							<second>pkg2::parent</second>
-						</item>
-					</element>
-					<attributes>
+					<parent>
+						<entries>
+							<count>1</count>
+							<item_version>0</item_version>
+							<item>
+								<first>yarn.generalization.parent</first>
+								<second>pkg2::parent</second>
+							</item>
+						</entries>
+					</parent>
+					<children>
 						<count>0</count>
 						<bucket_count>1</bucket_count>
 						<item_version>0</item_version>
-					</attributes>
+					</children>
 				</second>
 			</item>
 			<item>
 				<first>&lt;trivial_inheritance&gt;&lt;child_via_settings&gt;</first>
 				<second>
-					<element>
-						<count>1</count>
-						<item_version>0</item_version>
-						<item>
-							<first>yarn.generalization.parent</first>
-							<second>parent_with_members</second>
-						</item>
-					</element>
-					<attributes>
+					<parent>
+						<entries>
+							<count>1</count>
+							<item_version>0</item_version>
+							<item>
+								<first>yarn.generalization.parent</first>
+								<second>parent_with_members</second>
+							</item>
+						</entries>
+					</parent>
+					<children>
 						<count>0</count>
 						<bucket_count>1</bucket_count>
 						<item_version>0</item_version>
-					</attributes>
+					</children>
 				</second>
 			</item>
-		</raw_aggregates>
+		</scribble_groups>
 	</indices>
 	<root_module object_id="_34">
 		<element>

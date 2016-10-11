@@ -33,8 +33,8 @@
 #include "dogen/annotations/types/object.hpp"
 #include "dogen/annotations/types/repository.hpp"
 #include "dogen/annotations/types/scope_types.hpp"
-#include "dogen/annotations/types/object_aggregate.hpp"
-#include "dogen/annotations/types/raw_aggregate.hpp"
+#include "dogen/annotations/types/annotation_group.hpp"
+#include "dogen/annotations/types/scribble_group.hpp"
 #include "dogen/annotations/types/field_definition.hpp"
 
 
@@ -77,31 +77,32 @@ private:
 
 private:
     /**
-     * @brief Aggregate raw data by key.
-     */
-    std::unordered_map<std::string, std::list<std::string> >
-    aggregate_raw_data_activity(
-        const std::list<std::pair<std::string, std::string> >&
-        raw_data) const;
-
-    /**
      * @brief Converts the raw data into a set of field instances.
      */
-    std::unordered_map<std::string, field_instance> create_fields_activity(
-        const std::unordered_map<std::string, std::list<std::string> >&
-        aggregated_data, const scope_types current_scope) const;
+    std::unordered_map<std::string, field_instance>
+    create_fields(const scope_types current_scope,
+        const std::unordered_map<std::string, std::list<std::string>>&
+        aggregated_scribble_entries) const;
+
+    /**
+     * @brief Aggregate scribble entry data by key.
+     */
+    std::unordered_map<std::string, std::list<std::string>>
+        aggregate_scribble_entries(const scribble& scribble) const;
+
+    scope_types compute_scope_for_id(const std::string& root_object_id,
+        const std::string& current_id) const;
 
 public:
     /**
      * @brief Produce the annotations object.
      */
-    object execute(const scope_types scope,
-        const std::list<std::pair<std::string, std::string>>&
-        raw_data) const;
+    object execute(const scope_types scope, const scribble& scribble) const;
 
-    std::unordered_map<std::string, object_aggregate>
-    execute(const std::string& root_object_id, const std::unordered_map<
-        std::string, raw_aggregate>& raw_aggregates) const;
+    std::unordered_map<std::string, annotation_group>
+    execute(const std::string& root_object_id,
+        const std::unordered_map<std::string, scribble_group>& scribble_groups
+        ) const;
 
 private:
     const repository& repository_;

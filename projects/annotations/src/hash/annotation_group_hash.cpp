@@ -18,7 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/annotations/hash/raw_aggregate_hash.hpp"
+#include "dogen/annotations/hash/object_hash.hpp"
+#include "dogen/annotations/hash/annotation_group_hash.hpp"
 
 namespace {
 
@@ -28,27 +29,11 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_pair_std_string_std_string(const std::pair<std::string, std::string>& v) {
-    std::size_t seed(0);
-
-    combine(seed, v.first);
-    combine(seed, v.second);
-    return seed;
-}
-
-inline std::size_t hash_std_list_std_pair_std_string_std_string(const std::list<std::pair<std::string, std::string> >& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, hash_std_pair_std_string_std_string(i));
-    }
-    return seed;
-}
-
-inline std::size_t hash_std_unordered_map_std_string_std_list_std_pair_std_string_std_string(const std::unordered_map<std::string, std::list<std::pair<std::string, std::string> > >& v) {
+inline std::size_t hash_std_unordered_map_std_string_dogen_annotations_object(const std::unordered_map<std::string, dogen::annotations::object>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
-        combine(seed, hash_std_list_std_pair_std_string_std_string(i.second));
+        combine(seed, i.second);
     }
     return seed;
 }
@@ -58,11 +43,11 @@ inline std::size_t hash_std_unordered_map_std_string_std_list_std_pair_std_strin
 namespace dogen {
 namespace annotations {
 
-std::size_t raw_aggregate_hasher::hash(const raw_aggregate& v) {
+std::size_t annotation_group_hasher::hash(const annotation_group& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_list_std_pair_std_string_std_string(v.element()));
-    combine(seed, hash_std_unordered_map_std_string_std_list_std_pair_std_string_std_string(v.attributes()));
+    combine(seed, v.parent());
+    combine(seed, hash_std_unordered_map_std_string_dogen_annotations_object(v.children()));
 
     return seed;
 }

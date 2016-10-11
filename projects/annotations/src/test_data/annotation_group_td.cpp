@@ -20,7 +20,7 @@
  */
 #include <sstream>
 #include "dogen/annotations/test_data/object_td.hpp"
-#include "dogen/annotations/test_data/object_aggregate_td.hpp"
+#include "dogen/annotations/test_data/annotation_group_td.hpp"
 
 namespace {
 
@@ -48,30 +48,30 @@ std::unordered_map<std::string, dogen::annotations::object> create_std_unordered
 namespace dogen {
 namespace annotations {
 
-object_aggregate_generator::object_aggregate_generator() : position_(0) { }
+annotation_group_generator::annotation_group_generator() : position_(0) { }
 
-void object_aggregate_generator::
+void annotation_group_generator::
 populate(const unsigned int position, result_type& v) {
-    v.element(create_dogen_annotations_object(position + 0));
-    v.attributes(create_std_unordered_map_std_string_dogen_annotations_object(position + 1));
+    v.parent(create_dogen_annotations_object(position + 0));
+    v.children(create_std_unordered_map_std_string_dogen_annotations_object(position + 1));
 }
 
-object_aggregate_generator::result_type
-object_aggregate_generator::create(const unsigned int position) {
-    object_aggregate r;
-    object_aggregate_generator::populate(position, r);
+annotation_group_generator::result_type
+annotation_group_generator::create(const unsigned int position) {
+    annotation_group r;
+    annotation_group_generator::populate(position, r);
     return r;
 }
 
-object_aggregate_generator::result_type*
-object_aggregate_generator::create_ptr(const unsigned int position) {
-    object_aggregate* p = new object_aggregate();
-    object_aggregate_generator::populate(position, *p);
+annotation_group_generator::result_type*
+annotation_group_generator::create_ptr(const unsigned int position) {
+    annotation_group* p = new annotation_group();
+    annotation_group_generator::populate(position, *p);
     return p;
 }
 
-object_aggregate_generator::result_type
-object_aggregate_generator::operator()() {
+annotation_group_generator::result_type
+annotation_group_generator::operator()() {
     return create(position_++);
 }
 

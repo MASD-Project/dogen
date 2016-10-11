@@ -18,25 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_SERIALIZATION_RAW_AGGREGATE_SER_HPP
-#define DOGEN_ANNOTATIONS_SERIALIZATION_RAW_AGGREGATE_SER_HPP
+#ifndef DOGEN_ANNOTATIONS_IO_SCRIBBLE_GROUP_IO_HPP
+#define DOGEN_ANNOTATIONS_IO_SCRIBBLE_GROUP_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/split_free.hpp>
-#include "dogen/annotations/types/raw_aggregate.hpp"
+#include <iosfwd>
+#include "dogen/annotations/types/scribble_group.hpp"
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::annotations::raw_aggregate)
-namespace boost {
-namespace serialization {
+namespace dogen {
+namespace annotations {
 
-template<typename Archive>
-void save(Archive& ar, const dogen::annotations::raw_aggregate& v, unsigned int version);
-
-template<typename Archive>
-void load(Archive& ar, dogen::annotations::raw_aggregate& v, unsigned int version);
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::annotations::scribble_group& v);
 
 } }
 
