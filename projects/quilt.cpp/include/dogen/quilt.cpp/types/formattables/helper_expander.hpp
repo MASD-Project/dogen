@@ -26,7 +26,7 @@
 #endif
 
 #include <unordered_map>
-#include "dogen/dynamic/types/repository.hpp"
+#include "dogen/annotations/types/repository.hpp"
 #include "dogen/yarn/types/name_tree.hpp"
 #include "dogen/yarn/types/attribute.hpp"
 #include "dogen/quilt.cpp/types/formattables/streaming_properties.hpp"
@@ -49,7 +49,8 @@ private:
     };
     friend std::ostream& operator<<(std::ostream& s, const context& v);
 
-    context make_context(const dynamic::repository& drp, const model& fm) const;
+    context make_context(const annotations::repository& drp,
+        const model& fm) const;
 
 private:
     typedef std::unordered_map<std::string, std::unordered_set<std::string>>
@@ -88,8 +89,8 @@ private:
         std::unordered_map<std::string, formattable>& formattables) const;
 
 public:
-    void expand(const dynamic::repository& drp, const formatters::container& fc,
-        model& fm) const;
+    void expand(const annotations::repository& drp,
+        const formatters::container& fc, model& fm) const;
 };
 
 } } } }

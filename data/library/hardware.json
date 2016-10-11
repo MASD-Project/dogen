@@ -1,7 +1,7 @@
 {
     "model_name" : "hardware",
     "documentation" : "Hardware-provided primitive types.",
-    "extensions" : {
+    "annotation" : {
         "yarn.is_proxy_model" : true
     },
     "elements" : [
@@ -9,7 +9,7 @@
             "meta_type" : "primitive",
             "simple_name" : "bool",
             "in_global_module" : true,
-            "extensions" : {
+            "annotation" : {
                 "quilt.cpp.helper.family" : "Boolean",
                 "quilt.cpp.inclusion_required" : false,
                 "quilt.cpp.aspect.requires_stream_manipulators" : true,
@@ -20,7 +20,7 @@
             "meta_type" : "primitive",
             "simple_name" : "char",
             "in_global_module" : true,
-            "extensions" : {
+            "annotation" : {
                 "quilt.cpp.helper.family" : "Character",
                 "quilt.cpp.streaming.remove_unprintable_characters" : false,
                 "quilt.cpp.streaming.requires_quoting" : true,
@@ -32,7 +32,7 @@
             "meta_type" : "primitive",
             "simple_name" : "unsigned char",
             "in_global_module" : true,
-            "extensions" : {
+            "annotation" : {
                 "quilt.cpp.helper.family" : "Character",
                 "quilt.cpp.streaming.remove_unprintable_characters" : false,
                 "quilt.cpp.streaming.requires_quoting" : true,
@@ -44,7 +44,7 @@
             "meta_type" : "primitive",
             "simple_name" : "int",
             "in_global_module" : true,
-            "extensions" : {
+            "annotation" : {
                 "quilt.cpp.helper.family" : "Number",
                 "quilt.cpp.inclusion_required" : false,
                 "quilt.cpp.aspect.requires_manual_default_constructor" : true
@@ -55,7 +55,7 @@
             "simple_name" : "unsigned int",
             "is_default_enumeration_type" : true,
             "in_global_module" : true,
-            "extensions" : {
+            "annotation" : {
                 "quilt.cpp.helper.family" : "Number",
                 "quilt.cpp.inclusion_required" : false,
                 "quilt.cpp.aspect.requires_manual_default_constructor" : true
@@ -65,7 +65,7 @@
             "meta_type" : "primitive",
             "simple_name" : "short",
             "in_global_module" : true,
-            "extensions" : {
+            "annotation" : {
                 "quilt.cpp.helper.family" : "Number",
                 "quilt.cpp.inclusion_required" : false,
                 "quilt.cpp.aspect.requires_manual_default_constructor" : true
@@ -75,7 +75,7 @@
             "meta_type" : "primitive",
             "simple_name" : "unsigned short",
             "in_global_module" : true,
-            "extensions" : {
+            "annotation" : {
                 "quilt.cpp.helper.family" : "Number",
                 "quilt.cpp.inclusion_required" : false,
                 "quilt.cpp.aspect.requires_manual_default_constructor" : true
@@ -85,7 +85,7 @@
             "meta_type" : "primitive",
             "simple_name" : "long",
             "in_global_module" : true,
-            "extensions" : {
+            "annotation" : {
                 "quilt.cpp.helper.family" : "Number",
                 "quilt.cpp.inclusion_required" : false,
                 "quilt.cpp.aspect.requires_manual_default_constructor" : true
@@ -95,7 +95,7 @@
             "meta_type" : "primitive",
             "simple_name" : "unsigned long",
             "in_global_module" : true,
-            "extensions" : {
+            "annotation" : {
                 "quilt.cpp.helper.family" : "Number",
                 "quilt.cpp.inclusion_required" : false,
                 "quilt.cpp.aspect.requires_manual_default_constructor" : true
@@ -105,7 +105,7 @@
             "meta_type" : "primitive",
             "simple_name" : "long long",
             "in_global_module" : true,
-            "extensions" : {
+            "annotation" : {
                 "quilt.cpp.helper.family" : "Number",
                 "quilt.cpp.inclusion_required" : false,
                 "quilt.cpp.aspect.requires_manual_default_constructor" : true
@@ -115,7 +115,7 @@
             "meta_type" : "primitive",
             "simple_name" : "unsigned long long",
             "in_global_module" : true,
-            "extensions" : {
+            "annotation" : {
                 "quilt.cpp.helper.family" : "Number",
                 "quilt.cpp.inclusion_required" : false,
                 "quilt.cpp.aspect.requires_manual_default_constructor" : true
@@ -125,7 +125,7 @@
             "meta_type" : "primitive",
             "simple_name" : "float",
             "in_global_module" : true,
-            "extensions" : {
+            "annotation" : {
                 "quilt.cpp.helper.family" : "Number",
                 "quilt.cpp.inclusion_required" : false,
                 "quilt.cpp.aspect.requires_manual_default_constructor" : true
@@ -135,7 +135,7 @@
             "meta_type" : "primitive",
             "simple_name" : "double",
             "in_global_module" : true,
-            "extensions" : {
+            "annotation" : {
                 "quilt.cpp.helper.family" : "Number",
                 "quilt.cpp.inclusion_required" : false,
                 "quilt.cpp.aspect.requires_stream_manipulators" : true,
@@ -146,7 +146,7 @@
             "meta_type" : "primitive",
             "simple_name" : "long double",
             "in_global_module" : true,
-            "extensions" : {
+            "annotation" : {
                 "quilt.cpp.helper.family" : "Number",
                 "quilt.cpp.inclusion_required" : false,
                 "quilt.cpp.aspect.requires_stream_manipulators" : true,

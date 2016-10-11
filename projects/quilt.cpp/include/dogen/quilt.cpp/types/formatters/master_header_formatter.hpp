@@ -38,7 +38,7 @@ public:
 
 public:
     std::string id() const override;
-    dynamic::ownership_hierarchy ownership_hierarchy() const override;
+    annotations::ownership_hierarchy ownership_hierarchy() const override;
     std::type_index element_type_index() const override;
 
 public:
@@ -59,7 +59,7 @@ public:
         format(const context& ctx, const yarn::element& e) const override;
 
 private:
-    const dynamic::ownership_hierarchy ownership_hierarchy_;
+    const annotations::ownership_hierarchy ownership_hierarchy_;
 
 };
 

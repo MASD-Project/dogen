@@ -25,10 +25,10 @@
 #pragma once
 #endif
 
-#include "dogen/dynamic/types/object.hpp"
-#include "dogen/dynamic/types/repository.hpp"
-#include "dogen/dynamic/types/field_selector.hpp"
-#include "dogen/dynamic/types/field_definition.hpp"
+#include "dogen/annotations/types/object.hpp"
+#include "dogen/annotations/types/repository.hpp"
+#include "dogen/annotations/types/field_selector.hpp"
+#include "dogen/annotations/types/field_definition.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
@@ -36,15 +36,15 @@ namespace yarn {
 
 class origin_expander {
 public:
-    explicit origin_expander(const dynamic::repository& rp);
+    explicit origin_expander(const annotations::repository& arp);
 
 private:
     struct field_definitions {
-        dynamic::field_definition is_proxy_model;
+        annotations::field_definition is_proxy_model;
     };
 
     field_definitions make_field_definitions(
-        const dynamic::repository& rp) const;
+        const annotations::repository& arp) const;
 
     bool is_proxy_model(const intermediate_model& im) const;
     origin_types compute_origin_types(const intermediate_model& im,

@@ -23,8 +23,8 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/join.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/dynamic/types/field_selector.hpp"
-#include "dogen/dynamic/types/repository_selector.hpp"
+#include "dogen/annotations/types/field_selector.hpp"
+#include "dogen/annotations/types/repository_selector.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formattables/building_error.hpp"
 #include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
@@ -53,8 +53,8 @@ namespace cpp {
 namespace formattables {
 
 locator::locator(const boost::filesystem::path& project_directory_path,
-    const dynamic::repository& drp, const formatters::container& fc,
-    const dynamic::object& root, const yarn::name& model_name,
+    const annotations::repository& drp, const formatters::container& fc,
+    const annotations::object& root, const yarn::name& model_name,
     const std::unordered_set<std::string>& module_ids)
     : model_name_(model_name),
       configuration_(make_configuration(drp, fc, root)),
@@ -62,10 +62,10 @@ locator::locator(const boost::filesystem::path& project_directory_path,
       project_path_(make_project_path(project_directory_path, model_name)) {}
 
 locator::field_definitions locator::make_field_definitions(
-    const dynamic::repository& drp, const formatters::container& fc) const {
+    const annotations::repository& drp, const formatters::container& fc) const {
 
     field_definitions r;
-    const dynamic::repository_selector s(drp);
+    const annotations::repository_selector s(drp);
 
     std::unordered_set<std::string> processed_facets;
     for (const auto ptr : fc.file_formatters()) {
@@ -118,10 +118,10 @@ locator::field_definitions locator::make_field_definitions(
 }
 
 locator_configuration locator::make_configuration(
-    const field_definitions& fds, const dynamic::object& o) const {
+    const field_definitions& fds, const annotations::object& o) const {
 
     locator_configuration r;
-    const dynamic::field_selector fs(o);
+    const annotations::field_selector fs(o);
 
     for (const auto& pair : fds.facets_field_definitions) {
         const auto fctn(pair.first);
@@ -172,8 +172,8 @@ locator_configuration locator::make_configuration(
 }
 
 locator_configuration locator::make_configuration(
-    const dynamic::repository& drp, const formatters::container& fc,
-    const dynamic::object& o) {
+    const annotations::repository& drp, const formatters::container& fc,
+    const annotations::object& o) {
 
     const auto fds(make_field_definitions (drp, fc));
     const auto r(make_configuration(fds, o));

@@ -43,7 +43,8 @@ namespace quilt {
 std::shared_ptr<backend_registrar> workflow::registrar_;
 
 workflow::workflow(const options::knitting_options& o,
-    const dynamic::repository& rp) : knitting_options_(o), repository_(rp) { }
+    const annotations::repository& arp)
+    : knitting_options_(o), repository_(arp) { }
 
 backend_registrar& workflow::registrar() {
     if (!registrar_)

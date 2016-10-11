@@ -22,8 +22,8 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_set_io.hpp"
-#include "dogen/dynamic/types/field_selector.hpp"
-#include "dogen/dynamic/types/repository_selector.hpp"
+#include "dogen/annotations/types/field_selector.hpp"
+#include "dogen/annotations/types/repository_selector.hpp"
 #include "dogen/yarn/types/traits.hpp"
 #include "dogen/yarn/types/name_tree_parser.hpp"
 #include "dogen/yarn/types/name_builder.hpp"
@@ -43,17 +43,17 @@ const std::string parent_name_conflict(
 namespace dogen {
 namespace yarn {
 
-parsing_expander::field_definitions
-parsing_expander::make_field_definitions(const dynamic::repository& rp) const {
+parsing_expander::field_definitions parsing_expander::make_field_definitions(
+    const annotations::repository& rp) const {
     field_definitions r;
-    const dynamic::repository_selector rs(rp);
+    const annotations::repository_selector rs(rp);
     r.parent = rs.select_field_by_name(traits::generalization::parent());
     return r;
 }
 
 std::string parsing_expander::
-make_parent(const field_definitions& fds, const dynamic::object& o) const {
-    const dynamic::field_selector fs(o);
+make_parent(const field_definitions& fds, const annotations::object& o) const {
+    const annotations::field_selector fs(o);
     if (fs.has_field(fds.parent))
         return fs.get_text_content(fds.parent);
 
@@ -112,7 +112,7 @@ parse_parent(const field_definitions& fds, const location& model_location,
      * Obtain the parent name from the meta-data. If there is no
      * parent name there is nothing to do.
      */
-    const auto parent(make_parent(fds, o.extensions()));
+    const auto parent(make_parent(fds, o.annotation()));
     if (parent.empty())
         return;
 
@@ -136,7 +136,7 @@ parse_parent(const field_definitions& fds, const location& model_location,
 }
 
 void parsing_expander::
-expand(const dynamic::repository& drp, intermediate_model& m) const {
+expand(const annotations::repository& drp, intermediate_model& m) const {
     const auto fds(make_field_definitions(drp));
     const auto tlmn(obtain_top_level_modules(m));
     const auto ml(m.name().location());

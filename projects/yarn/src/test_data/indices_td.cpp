@@ -20,7 +20,7 @@
  */
 #include <sstream>
 #include "dogen/yarn/test_data/indices_td.hpp"
-#include "dogen/dynamic/test_data/raw_aggregate_td.hpp"
+#include "dogen/annotations/test_data/raw_aggregate_td.hpp"
 
 namespace {
 
@@ -38,15 +38,15 @@ std::unordered_set<std::string> create_std_unordered_set_std_string(unsigned int
     return r;
 }
 
-dogen::dynamic::raw_aggregate
-create_dogen_dynamic_raw_aggregate(const unsigned int position) {
-    return dogen::dynamic::raw_aggregate_generator::create(position);
+dogen::annotations::raw_aggregate
+create_dogen_annotations_raw_aggregate(const unsigned int position) {
+    return dogen::annotations::raw_aggregate_generator::create(position);
 }
 
-std::unordered_map<std::string, dogen::dynamic::raw_aggregate> create_std_unordered_map_std_string_dogen_dynamic_raw_aggregate(unsigned int position) {
-    std::unordered_map<std::string, dogen::dynamic::raw_aggregate> r;
+std::unordered_map<std::string, dogen::annotations::raw_aggregate> create_std_unordered_map_std_string_dogen_annotations_raw_aggregate(unsigned int position) {
+    std::unordered_map<std::string, dogen::annotations::raw_aggregate> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_dogen_dynamic_raw_aggregate(position + i)));
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_annotations_raw_aggregate(position + i)));
     }
     return r;
 }
@@ -62,7 +62,7 @@ void indices_generator::
 populate(const unsigned int position, result_type& v) {
     v.objects_always_in_heap(create_std_unordered_set_std_string(position + 0));
     v.elements_referable_by_attributes(create_std_unordered_set_std_string(position + 1));
-    v.raw_aggregates(create_std_unordered_map_std_string_dogen_dynamic_raw_aggregate(position + 2));
+    v.raw_aggregates(create_std_unordered_map_std_string_dogen_annotations_raw_aggregate(position + 2));
 }
 
 indices_generator::result_type

@@ -26,7 +26,7 @@ namespace yarn {
 indices::indices(
     const std::unordered_set<std::string>& objects_always_in_heap,
     const std::unordered_set<std::string>& elements_referable_by_attributes,
-    const std::unordered_map<std::string, dogen::dynamic::raw_aggregate>& raw_aggregates)
+    const std::unordered_map<std::string, dogen::annotations::raw_aggregate>& raw_aggregates)
     : objects_always_in_heap_(objects_always_in_heap),
       elements_referable_by_attributes_(elements_referable_by_attributes),
       raw_aggregates_(raw_aggregates) { }
@@ -82,19 +82,19 @@ void indices::elements_referable_by_attributes(const std::unordered_set<std::str
     elements_referable_by_attributes_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::dynamic::raw_aggregate>& indices::raw_aggregates() const {
+const std::unordered_map<std::string, dogen::annotations::raw_aggregate>& indices::raw_aggregates() const {
     return raw_aggregates_;
 }
 
-std::unordered_map<std::string, dogen::dynamic::raw_aggregate>& indices::raw_aggregates() {
+std::unordered_map<std::string, dogen::annotations::raw_aggregate>& indices::raw_aggregates() {
     return raw_aggregates_;
 }
 
-void indices::raw_aggregates(const std::unordered_map<std::string, dogen::dynamic::raw_aggregate>& v) {
+void indices::raw_aggregates(const std::unordered_map<std::string, dogen::annotations::raw_aggregate>& v) {
     raw_aggregates_ = v;
 }
 
-void indices::raw_aggregates(const std::unordered_map<std::string, dogen::dynamic::raw_aggregate>&& v) {
+void indices::raw_aggregates(const std::unordered_map<std::string, dogen::annotations::raw_aggregate>&& v) {
     raw_aggregates_ = std::move(v);
 }
 

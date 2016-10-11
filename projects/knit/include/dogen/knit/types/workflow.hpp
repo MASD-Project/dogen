@@ -31,7 +31,7 @@
 #include <functional>
 #include <forward_list>
 #include <boost/filesystem/path.hpp>
-#include "dogen/dynamic/types/repository.hpp"
+#include "dogen/annotations/types/repository.hpp"
 #include "dogen/options/types/knitting_options.hpp"
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/yarn/types/descriptor.hpp"
@@ -93,19 +93,20 @@ private:
      * @brief Obtains the complete ownership hierarchy across all
      * backends.
      */
-    std::forward_list<dynamic::ownership_hierarchy>
+    std::forward_list<annotations::ownership_hierarchy>
     obtain_ownership_hierarchy_activity() const;
 
     /**
-     * @brief Sets up the dynamic repository.
+     * @brief Sets up the annotations repository.
      */
-    dynamic::repository setup_dynamic_repository_activity(
-        const std::forward_list<dynamic::ownership_hierarchy>& oh) const;
+    annotations::repository setup_annotations_repository_activity(
+        const std::forward_list<annotations::ownership_hierarchy>& oh) const;
 
     /**
      * @brief Obtain the yarn model.
      */
-    yarn::model obtain_yarn_model_activity(const dynamic::repository& rp) const;
+    yarn::model obtain_yarn_model_activity(
+        const annotations::repository& rp) const;
 
     /**
      * @brief Performs a housekeeping run for the supplied directories.

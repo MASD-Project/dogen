@@ -28,17 +28,17 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/knit/serialization/registrar_ser.hpp"
 #include "dogen/yarn/serialization/registrar_ser.hpp"
-#include "dogen/dynamic/serialization/registrar_ser.hpp"
 #include "dogen/options/serialization/registrar_ser.hpp"
 #include "dogen/quilt.cpp/serialization/registrar_ser.hpp"
 #include "dogen/formatters/serialization/registrar_ser.hpp"
+#include "dogen/annotations/serialization/registrar_ser.hpp"
 
 namespace dogen {
 namespace knit {
 
 template<typename Archive>
 void register_types(Archive& ar) {
-    dogen::dynamic::register_types(ar);
+    dogen::annotations::register_types(ar);
     dogen::formatters::register_types(ar);
     dogen::yarn::register_types(ar);
     dogen::options::register_types(ar);

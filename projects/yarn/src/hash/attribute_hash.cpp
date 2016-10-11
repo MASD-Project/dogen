@@ -19,9 +19,9 @@
  *
  */
 #include "dogen/yarn/hash/name_hash.hpp"
-#include "dogen/dynamic/hash/object_hash.hpp"
 #include "dogen/yarn/hash/attribute_hash.hpp"
 #include "dogen/yarn/hash/name_tree_hash.hpp"
+#include "dogen/annotations/hash/object_hash.hpp"
 
 namespace {
 
@@ -40,7 +40,7 @@ std::size_t attribute_hasher::hash(const attribute& v) {
     std::size_t seed(0);
 
     combine(seed, v.documentation());
-    combine(seed, v.extensions());
+    combine(seed, v.annotation());
     combine(seed, v.name());
     combine(seed, v.unparsed_type());
     combine(seed, v.parsed_type());

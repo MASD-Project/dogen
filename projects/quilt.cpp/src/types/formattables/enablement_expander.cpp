@@ -26,9 +26,9 @@
 #include "dogen/utility/io/unordered_set_io.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
-#include "dogen/dynamic/types/field_selector.hpp"
-#include "dogen/dynamic/types/repository_selector.hpp"
-#include "dogen/dynamic/io/field_definition_io.hpp"
+#include "dogen/annotations/types/field_selector.hpp"
+#include "dogen/annotations/types/repository_selector.hpp"
+#include "dogen/annotations/io/field_definition_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/facet_properties_io.hpp"
 #include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 #include "dogen/quilt.cpp/io/formattables/local_enablement_configuration_io.hpp"
@@ -87,13 +87,13 @@ inline std::ostream& operator<<(std::ostream& s,
 
 enablement_expander::global_field_definitions_type
 enablement_expander::make_global_field_definitions(
-    const dynamic::repository& drp,
+    const annotations::repository& drp,
     const formatters::container& fc) const {
 
     BOOST_LOG_SEV(lg, debug) << "Creating global field definitions.";
 
     global_field_definitions_type r;
-    const dynamic::repository_selector s(drp);
+    const annotations::repository_selector s(drp);
     for (const auto& f : fc.file_formatters()) {
         const auto oh(f->ownership_hierarchy());
 
@@ -118,13 +118,13 @@ enablement_expander::make_global_field_definitions(
 enablement_expander::global_enablement_configurations_type
 enablement_expander::obtain_global_configurations(
     const std::unordered_map<std::string, global_field_definitions>& gfd,
-    const dynamic::object& root_object, const formatters::container& fc,
+    const annotations::object& root_object, const formatters::container& fc,
     const profile_group& gpg) const {
 
     BOOST_LOG_SEV(lg, debug) << "Creating global enablement configuration.";
 
     global_enablement_configurations_type r;
-    const dynamic::field_selector fs(root_object);
+    const annotations::field_selector fs(root_object);
     const auto& fffn(fc.file_formatters_by_formatter_name());
     for (const auto& pair : gfd) {
         const auto& fmtn(pair.first);
@@ -278,12 +278,12 @@ void enablement_expander::update_facet_enablement(
 
 enablement_expander::local_field_definitions_type
 enablement_expander::make_local_field_definitions(
-    const dynamic::repository& drp, const formatters::container& fc) const {
+    const annotations::repository& drp, const formatters::container& fc) const {
 
     BOOST_LOG_SEV(lg, debug) << "Creating local field definitions.";
 
     local_field_definitions_type r;
-    const dynamic::repository_selector s(drp);
+    const annotations::repository_selector s(drp);
     for (const auto& f : fc.file_formatters()) {
         local_field_definitions fd;
         const auto oh(f->ownership_hierarchy());
@@ -346,12 +346,12 @@ enablement_expander::bucket_local_field_definitions_by_type_index(
 
 enablement_expander::local_enablement_configurations_type enablement_expander::
 obtain_local_configurations(const local_field_definitions_type& lfd,
-    const dynamic::object& o,  const formatters::container& fc,
+    const annotations::object& o,  const formatters::container& fc,
     const boost::optional<profile_group>& lpg) const {
 
     BOOST_LOG_SEV(lg, debug) << "Obtaining local configurations.";
     local_enablement_configurations_type r;
-    const dynamic::field_selector fs(o);
+    const annotations::field_selector fs(o);
     for (const auto& pair : lfd) {
         const auto& fmtn(pair.first);
         const auto& fd(pair.second);
@@ -564,8 +564,8 @@ void enablement_expander::compute_enablement(
     BOOST_LOG_SEV(lg, debug) << "Finished computed enablement.";
 }
 
-void enablement_expander::expand(const dynamic::repository& drp,
-    const dynamic::object& root_object, const formatters::container& fc,
+void enablement_expander::expand(const annotations::repository& drp,
+    const annotations::object& root_object, const formatters::container& fc,
     model& fm) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started expanding enablement.";
@@ -627,7 +627,7 @@ void enablement_expander::expand(const dynamic::repository& drp,
             }
 
             const auto& fd(i->second);
-            auto lcs(obtain_local_configurations(fd, e.extensions(), fc, lpg));
+            auto lcs(obtain_local_configurations(fd, e.annotation(), fc, lpg));
 
             /*
              * Once we got both the global and the local configuration, we

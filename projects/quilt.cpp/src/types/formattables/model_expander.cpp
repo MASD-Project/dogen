@@ -38,21 +38,21 @@ namespace cpp {
 namespace formattables {
 
 void model_expander::
-expand_streaming(const dynamic::repository& drp, model& fm) const {
+expand_streaming(const annotations::repository& drp, model& fm) const {
     streaming_expander ex;
     ex.expand(drp, fm);
 }
 
 void model_expander::expand_profile_groups(
     const std::forward_list<boost::filesystem::path>& dirs,
-    const dynamic::repository& drp, const dynamic::object& root_object,
+    const annotations::repository& drp, const annotations::object& root_object,
     const formatters::container& fc, model& fm) const {
     profile_group_expander ex;
     ex.expand(dirs, drp, root_object, fc, fm);
 }
 
-void model_expander::expand_enablement(const dynamic::repository& drp,
-    const dynamic::object& root_object, const formatters::container& fc,
+void model_expander::expand_enablement(const annotations::repository& drp,
+    const annotations::object& root_object, const formatters::container& fc,
     model& fm) const {
     enablement_expander ex;
     ex.expand(drp, root_object, fc, fm);
@@ -65,7 +65,7 @@ expand_canonical_formatters(const formatters::container& fc, model& fm) const {
 }
 
 void model_expander::expand_inclusion(
-    const dynamic::repository& drp, const formatters::container& fc,
+    const annotations::repository& drp, const formatters::container& fc,
     const locator& l, model& fm) const {
     inclusion_expander ex;
     ex.expand(drp, fc, l, fm);
@@ -78,13 +78,13 @@ void model_expander::expand_decoration(
     ex.expand(dpf, fm);
 }
 
-void model_expander::expand_aspects(const dynamic::repository& drp,
+void model_expander::expand_aspects(const annotations::repository& drp,
     model& fm) const {
     aspect_expander ex;
     ex.expand(drp, fm);
 }
 
-void model_expander::expand_helpers(const dynamic::repository& drp,
+void model_expander::expand_helpers(const annotations::repository& drp,
     const formatters::container& fc, model& fm) const {
     helper_expander ex;
     ex.expand(drp, fc, fm);
@@ -102,7 +102,7 @@ void model_expander::expand_file_paths_and_guards(
 }
 
 void model_expander::
-expand_odb(const dynamic::repository& drp, model& fm) const {
+expand_odb(const annotations::repository& drp, model& fm) const {
     odb_expander ex;
     ex.expand(drp, fm);
 }
@@ -115,7 +115,7 @@ expand_facet_directories(const locator& l,model& fm) const {
 
 void model_expander::expand(
     const std::forward_list<boost::filesystem::path>& dirs,
-    const dynamic::repository& drp, const dynamic::object& root_object,
+    const annotations::repository& drp, const annotations::object& root_object,
     const dogen::formatters::decoration_properties_factory& dpf,
     const formatters::container& fc, const locator& l, model& fm) const {
 

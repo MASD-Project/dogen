@@ -54,11 +54,12 @@ const std::string meta_type_primitive_value("primitive");
 
 const std::string simple_name_key("simple_name");
 const std::string internal_modules_key("internal_modules");
-const std::string extensions_key("extensions");
+const std::string annotations_key("annotation");
 
 const std::string object_type_key("object_type");
 const std::string object_type_smart_pointer_value("smart_pointer");
-const std::string object_type_associative_container_value("associative_container");
+const std::string object_type_associative_container_value(
+    "associative_container");
 const std::string object_type_sequence_container_value("sequence_container");
 
 const std::string invalid_json_file("Failed to parse JSON file");
@@ -88,7 +89,7 @@ std::list<std::pair<std::string, std::string>>
 hydrator::read_kvps(const boost::property_tree::ptree& pt) const {
 
     std::list<std::pair<std::string, std::string>> r;
-    const auto i(pt.find(extensions_key));
+    const auto i(pt.find(annotations_key));
     if (i == pt.not_found())
         return r;
 
@@ -107,7 +108,7 @@ void hydrator::insert_raw_meta_data(const yarn::name& owner,
     if (kvps.empty())
         return;
 
-    dynamic::raw_aggregate ra;
+    annotations::raw_aggregate ra;
     ra.element(kvps);
     const auto id(owner.id());
     const auto pair(std::make_pair(id, ra));

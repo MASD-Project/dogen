@@ -23,9 +23,9 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/types/element.hpp"
-#include "dogen/dynamic/io/object_io.hpp"
 #include "dogen/yarn/io/stereotypes_io.hpp"
 #include "dogen/yarn/io/origin_types_io.hpp"
+#include "dogen/annotations/io/object_io.hpp"
 #include "dogen/yarn/io/generation_types_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -75,7 +75,7 @@ element::element()
 
 element::element(element&& rhs)
     : documentation_(std::move(rhs.documentation_)),
-      extensions_(std::move(rhs.extensions_)),
+      annotation_(std::move(rhs.annotation_)),
       name_(std::move(rhs.name_)),
       generation_type_(std::move(rhs.generation_type_)),
       origin_type_(std::move(rhs.origin_type_)),
@@ -86,7 +86,7 @@ element::element(element&& rhs)
 
 element::element(
     const std::string& documentation,
-    const dogen::dynamic::object& extensions,
+    const dogen::annotations::object& annotation,
     const dogen::yarn::name& name,
     const dogen::yarn::generation_types generation_type,
     const dogen::yarn::origin_types origin_type,
@@ -95,7 +95,7 @@ element::element(
     const std::unordered_set<dogen::yarn::stereotypes>& stereotypes,
     const bool is_element_extension)
     : documentation_(documentation),
-      extensions_(extensions),
+      annotation_(annotation),
       name_(name),
       generation_type_(generation_type),
       origin_type_(origin_type),
@@ -114,7 +114,7 @@ void element::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::element\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(documentation_) << "\"" << ", "
-      << "\"extensions\": " << extensions_ << ", "
+      << "\"annotation\": " << annotation_ << ", "
       << "\"name\": " << name_ << ", "
       << "\"generation_type\": " << generation_type_ << ", "
       << "\"origin_type\": " << origin_type_ << ", "
@@ -128,7 +128,7 @@ void element::to_stream(std::ostream& s) const {
 void element::swap(element& other) noexcept {
     using std::swap;
     swap(documentation_, other.documentation_);
-    swap(extensions_, other.extensions_);
+    swap(annotation_, other.annotation_);
     swap(name_, other.name_);
     swap(generation_type_, other.generation_type_);
     swap(origin_type_, other.origin_type_);
@@ -140,7 +140,7 @@ void element::swap(element& other) noexcept {
 
 bool element::compare(const element& rhs) const {
     return documentation_ == rhs.documentation_ &&
-        extensions_ == rhs.extensions_ &&
+        annotation_ == rhs.annotation_ &&
         name_ == rhs.name_ &&
         generation_type_ == rhs.generation_type_ &&
         origin_type_ == rhs.origin_type_ &&
@@ -166,20 +166,20 @@ void element::documentation(const std::string&& v) {
     documentation_ = std::move(v);
 }
 
-const dogen::dynamic::object& element::extensions() const {
-    return extensions_;
+const dogen::annotations::object& element::annotation() const {
+    return annotation_;
 }
 
-dogen::dynamic::object& element::extensions() {
-    return extensions_;
+dogen::annotations::object& element::annotation() {
+    return annotation_;
 }
 
-void element::extensions(const dogen::dynamic::object& v) {
-    extensions_ = v;
+void element::annotation(const dogen::annotations::object& v) {
+    annotation_ = v;
 }
 
-void element::extensions(const dogen::dynamic::object&& v) {
-    extensions_ = std::move(v);
+void element::annotation(const dogen::annotations::object&& v) {
+    annotation_ = std::move(v);
 }
 
 const dogen::yarn::name& element::name() const {

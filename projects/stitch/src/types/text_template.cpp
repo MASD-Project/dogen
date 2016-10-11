@@ -24,23 +24,23 @@ namespace dogen {
 namespace stitch {
 
 text_template::text_template(
-    const dogen::stitch::configuration& configuration,
-    const dogen::dynamic::object& extensions,
+    const dogen::stitch::properties& properties,
+    const dogen::annotations::object& annotation,
     const std::list<dogen::stitch::line>& lines)
-    : configuration_(configuration),
-      extensions_(extensions),
+    : properties_(properties),
+      annotation_(annotation),
       lines_(lines) { }
 
 void text_template::swap(text_template& other) noexcept {
     using std::swap;
-    swap(configuration_, other.configuration_);
-    swap(extensions_, other.extensions_);
+    swap(properties_, other.properties_);
+    swap(annotation_, other.annotation_);
     swap(lines_, other.lines_);
 }
 
 bool text_template::operator==(const text_template& rhs) const {
-    return configuration_ == rhs.configuration_ &&
-        extensions_ == rhs.extensions_ &&
+    return properties_ == rhs.properties_ &&
+        annotation_ == rhs.annotation_ &&
         lines_ == rhs.lines_;
 }
 
@@ -50,36 +50,36 @@ text_template& text_template::operator=(text_template other) {
     return *this;
 }
 
-const dogen::stitch::configuration& text_template::configuration() const {
-    return configuration_;
+const dogen::stitch::properties& text_template::properties() const {
+    return properties_;
 }
 
-dogen::stitch::configuration& text_template::configuration() {
-    return configuration_;
+dogen::stitch::properties& text_template::properties() {
+    return properties_;
 }
 
-void text_template::configuration(const dogen::stitch::configuration& v) {
-    configuration_ = v;
+void text_template::properties(const dogen::stitch::properties& v) {
+    properties_ = v;
 }
 
-void text_template::configuration(const dogen::stitch::configuration&& v) {
-    configuration_ = std::move(v);
+void text_template::properties(const dogen::stitch::properties&& v) {
+    properties_ = std::move(v);
 }
 
-const dogen::dynamic::object& text_template::extensions() const {
-    return extensions_;
+const dogen::annotations::object& text_template::annotation() const {
+    return annotation_;
 }
 
-dogen::dynamic::object& text_template::extensions() {
-    return extensions_;
+dogen::annotations::object& text_template::annotation() {
+    return annotation_;
 }
 
-void text_template::extensions(const dogen::dynamic::object& v) {
-    extensions_ = v;
+void text_template::annotation(const dogen::annotations::object& v) {
+    annotation_ = v;
 }
 
-void text_template::extensions(const dogen::dynamic::object&& v) {
-    extensions_ = std::move(v);
+void text_template::annotation(const dogen::annotations::object&& v) {
+    annotation_ = std::move(v);
 }
 
 const std::list<dogen::stitch::line>& text_template::lines() const {

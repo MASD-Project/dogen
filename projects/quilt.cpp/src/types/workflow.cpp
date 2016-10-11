@@ -25,7 +25,7 @@
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/formatters/io/decoration_properties_io.hpp"
 #include "dogen/formatters/types/hydration_workflow.hpp"
-#include "dogen/dynamic/types/workflow.hpp"
+#include "dogen/annotations/types/workflow.hpp"
 #include "dogen/quilt.cpp/types/formatters/workflow.hpp"
 #include "dogen/quilt.cpp/types/formattables/workflow.hpp"
 #include "dogen/quilt.cpp/types/workflow.hpp"
@@ -63,9 +63,9 @@ create_formatters_repository(
 
 dogen::formatters::decoration_properties_factory
 workflow::create_decoration_properties_factory(
-    const dynamic::repository& drp,
+    const annotations::repository& drp,
     const dogen::formatters::repository& frp,
-    const dynamic::object& root_object) const {
+    const annotations::object& root_object) const {
 
     using dogen::formatters::decoration_properties_factory;
     decoration_properties_factory r(drp, frp, root_object);
@@ -75,7 +75,7 @@ workflow::create_decoration_properties_factory(
 formattables::model workflow::create_formattables_model(
     const std::forward_list<boost::filesystem::path>& data_directories,
     const options::cpp_options& opts,
-    const dynamic::repository& drp, const dynamic::object& root_object,
+    const annotations::repository& drp, const annotations::object& root_object,
     const dogen::formatters::decoration_properties_factory& dpf,
     const formatters::container& fc, const yarn::model& m) const {
 
@@ -103,7 +103,7 @@ workflow::format(const formattables::model& fm) const {
     return wf.execute(fm);
 }
 
-std::forward_list<dynamic::ownership_hierarchy>
+std::forward_list<annotations::ownership_hierarchy>
 workflow::ownership_hierarchy() const {
     using formatters::workflow;
     return workflow::registrar().ownership_hierarchy();
@@ -111,13 +111,13 @@ workflow::ownership_hierarchy() const {
 
 std::forward_list<dogen::formatters::file>
 workflow::generate(const options::knitting_options& ko,
-    const dynamic::repository& drp,
+    const annotations::repository& drp,
     const yarn::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started backend.";
 
     const auto dd(make_data_directories());
     const auto frp(create_formatters_repository(dd));
-    const auto ro(m.root_module().extensions());
+    const auto ro(m.root_module().annotation());
     const auto dpf(create_decoration_properties_factory(drp, frp, ro));
     const auto& fc(formatters::workflow::registrar().formatter_container());
     const auto fm(create_formattables_model(dd, ko.cpp(), drp, ro, dpf, fc, m));

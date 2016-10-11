@@ -30,8 +30,8 @@
 #include <forward_list>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
-#include "dogen/dynamic/types/object.hpp"
-#include "dogen/dynamic/types/repository.hpp"
+#include "dogen/annotations/types/object.hpp"
+#include "dogen/annotations/types/repository.hpp"
 #include "dogen/formatters/types/repository.hpp"
 #include "dogen/formatters/types/decoration_properties_factory.hpp"
 #include "dogen/yarn/types/model.hpp"
@@ -69,9 +69,9 @@ private:
      */
     dogen::formatters::decoration_properties_factory
     create_decoration_properties_factory(
-            const dynamic::repository& drp,
+            const annotations::repository& drp,
             const dogen::formatters::repository& frp,
-            const dynamic::object& root_object) const;
+            const annotations::object& root_object) const;
 
     /**
      * @brief Create the formattables representation of the yarn model.
@@ -79,7 +79,8 @@ private:
     formattables::model create_formattables_model(
         const std::forward_list<boost::filesystem::path>& data_directories,
         const options::cpp_options& opts,
-        const dynamic::repository& drp, const dynamic::object& root_object,
+        const annotations::repository& drp,
+        const annotations::object& root_object,
         const dogen::formatters::decoration_properties_factory& dpf,
         const formatters::container& fc, const yarn::model& m) const;
 
@@ -96,12 +97,12 @@ public:
     managed_directories(const options::knitting_options& ko,
         const yarn::name& model_name) const override;
 
-    std::forward_list<dynamic::ownership_hierarchy>
+    std::forward_list<annotations::ownership_hierarchy>
         ownership_hierarchy() const override;
 
     std::forward_list<dogen::formatters::file> generate(
         const options::knitting_options& ko,
-        const dynamic::repository& drp,
+        const annotations::repository& drp,
         const yarn::model& m) const override;
 };
 

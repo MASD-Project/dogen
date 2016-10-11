@@ -27,7 +27,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/set_io.hpp"
 #include "dogen/utility/io/forward_list_io.hpp"
-#include "dogen/dynamic/io/ownership_hierarchy_io.hpp"
+#include "dogen/annotations/io/ownership_hierarchy_io.hpp"
 #include "dogen/quilt.cpp/io/formatters/container_io.hpp"
 #include "dogen/quilt.cpp/types/formatters/registrar_error.hpp"
 #include "dogen/quilt.cpp/types/formatters/registrar.hpp"
@@ -191,7 +191,7 @@ const container& registrar::formatter_container() const {
     return formatter_container_;
 }
 
-const std::forward_list<dynamic::ownership_hierarchy>&
+const std::forward_list<annotations::ownership_hierarchy>&
 registrar::ownership_hierarchy() const {
     return ownership_hierarchy_;
 }

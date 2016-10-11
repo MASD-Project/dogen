@@ -26,7 +26,7 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/asserter.hpp"
-#include "dogen/dynamic/test/mock_workflow_factory.hpp"
+#include "dogen/annotations/test/mock_workflow_factory.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/yarn.dia/types/transformer.hpp"
 #include "dogen/yarn.dia/types/profiler.hpp"
@@ -34,8 +34,8 @@
 #include "dogen/yarn.dia/io/repository_io.hpp"
 #include "dogen/yarn.dia/types/processed_object.hpp"
 #include "dogen/yarn.dia/test/mock_processed_object_factory.hpp"
-#include "dogen/dynamic/test/mock_repository_factory.hpp"
-#include "dogen/dynamic/test/mock_workflow_factory.hpp"
+#include "dogen/annotations/test/mock_repository_factory.hpp"
+#include "dogen/annotations/test/mock_workflow_factory.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
 
 using namespace dogen::yarn::dia;
@@ -107,12 +107,12 @@ dogen::yarn::dia::repository mock_repository() {
     return mock_repository(model_name);
 }
 
-dogen::dynamic::repository empty_repository;
+dogen::annotations::repository empty_repository;
 
 void transform(dogen::yarn::dia::repository& c,
     std::initializer_list<dogen::yarn::dia::processed_object> lpo) {
 
-    using namespace dogen::dynamic::test;
+    using namespace dogen::annotations::test;
     mock_repository_factory rf;
     const auto rp(rf.make());
     const auto w(mock_workflow_factory::non_validating_workflow(rp));
@@ -776,7 +776,7 @@ BOOST_AUTO_TEST_CASE(uml_note_with_marker_transforms_into_model_comments) {
         model_name);
     BOOST_CHECK(m.name().simple() == model_name);
     BOOST_CHECK(!m.documentation().empty());
-    BOOST_CHECK(m.extensions().fields().size() == 1);
+    BOOST_CHECK(m.annotations().fields().size() == 1);
 }
 
 BOOST_AUTO_TEST_CASE(uml_note_with_text_but_no_marker_does_nothing) {
@@ -794,7 +794,7 @@ BOOST_AUTO_TEST_CASE(uml_note_with_text_but_no_marker_does_nothing) {
         model_name);
     BOOST_CHECK(m.name().simple() == model_name);
     BOOST_CHECK(m.documentation().empty());
-    BOOST_CHECK(m.extensions().fields().empty());
+    BOOST_CHECK(m.annotations().fields().empty());
 }
 
 BOOST_AUTO_TEST_CASE(empty_uml_note_does_nothing) {
@@ -811,7 +811,7 @@ BOOST_AUTO_TEST_CASE(empty_uml_note_does_nothing) {
         model_name);
     BOOST_CHECK(m.name().simple() == model_name);
     BOOST_CHECK(m.documentation().empty());
-    BOOST_CHECK(m.extensions().fields().empty());
+    BOOST_CHECK(m.annotations().fields().empty());
 }
 
 BOOST_AUTO_TEST_CASE(uml_note_with_marker_inside_package_transforms_into_package_comments) {
@@ -834,11 +834,11 @@ BOOST_AUTO_TEST_CASE(uml_note_with_marker_inside_package_transforms_into_package
             BOOST_CHECK(l.model_modules().front() == model_name);
             BOOST_CHECK(m.name().simple() == model_name);
             BOOST_CHECK(m.documentation().empty());
-            BOOST_CHECK(m.extensions().fields().empty());
+            BOOST_CHECK(m.annotations().fields().empty());
         } else {
             BOOST_CHECK(!m.name().simple().empty());
             BOOST_CHECK(!m.documentation().empty());
-            BOOST_CHECK(!m.extensions().fields().empty());
+            BOOST_CHECK(!m.annotations().fields().empty());
         }
     }
 }
@@ -861,11 +861,11 @@ BOOST_AUTO_TEST_CASE(uml_note_with_text_but_no_marker_inside_package_does_nothin
             BOOST_CHECK(l.model_modules().front() == model_name);
             BOOST_CHECK(m.name().simple() == model_name);
             BOOST_CHECK(m.documentation().empty());
-            BOOST_CHECK(m.extensions().fields().empty());
+            BOOST_CHECK(m.annotations().fields().empty());
         } else {
             BOOST_CHECK(!m.name().simple().empty());
             BOOST_CHECK(m.documentation().empty());
-            BOOST_CHECK(m.extensions().fields().empty());
+            BOOST_CHECK(m.annotations().fields().empty());
         }
     }
 }
@@ -888,11 +888,11 @@ BOOST_AUTO_TEST_CASE(empty_uml_note_inside_package_does_nothing) {
             BOOST_CHECK(l.model_modules().front() == model_name);
             BOOST_CHECK(m.name().simple() == model_name);
             BOOST_CHECK(m.documentation().empty());
-            BOOST_CHECK(m.extensions().fields().empty());
+            BOOST_CHECK(m.annotations().fields().empty());
         } else {
             BOOST_CHECK(!m.name().simple().empty());
             BOOST_CHECK(m.documentation().empty());
-            BOOST_CHECK(m.extensions().fields().empty());
+            BOOST_CHECK(m.annotations().fields().empty());
         }
     }
 }

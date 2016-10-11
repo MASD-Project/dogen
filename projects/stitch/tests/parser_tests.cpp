@@ -21,9 +21,9 @@
 #include <boost/test/unit_test.hpp>
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
-#include "dogen/dynamic/types/field_selector.hpp"
-#include "dogen/dynamic/test/mock_repository_factory.hpp"
-#include "dogen/dynamic/test/mock_workflow_factory.hpp"
+#include "dogen/annotations/types/field_selector.hpp"
+#include "dogen/annotations/test/mock_repository_factory.hpp"
+#include "dogen/annotations/test/mock_workflow_factory.hpp"
 #include "dogen/stitch/io/text_template_io.hpp"
 #include "dogen/stitch/types/parsing_error.hpp"
 #include "dogen/stitch/types/parser.hpp"
@@ -142,7 +142,7 @@ const std::string invalid_characters("Invalid characters used");
 
 dogen::stitch::text_template
 parse(const std::string& s) {
-    using namespace dogen::dynamic::test;
+    using namespace dogen::annotations::test;
     mock_repository_factory rf;
     const auto rp(rf.make());
     const auto w(mock_workflow_factory::non_validating_workflow(rp));
@@ -361,8 +361,8 @@ BOOST_AUTO_TEST_CASE(licence_directive_results_in_expected_template) {
     BOOST_LOG_SEV(lg, debug) << "Result: " << tt;
 
     BOOST_CHECK(tt.lines().empty());
-    BOOST_REQUIRE(tt.extensions().fields().size() == 1);
-    dogen::dynamic::field_selector fs(tt.extensions());
+    BOOST_REQUIRE(tt.annotation().fields().size() == 1);
+    dogen::annotations::field_selector fs(tt.annotation());
     BOOST_CHECK(fs.get_text_content(licence_name) == licence_value);
 }
 
@@ -372,8 +372,8 @@ BOOST_AUTO_TEST_CASE(multiple_directives_results_in_expected_template) {
     BOOST_LOG_SEV(lg, debug) << "Result: " << tt;
 
     BOOST_CHECK(tt.lines().empty());
-    BOOST_REQUIRE(tt.extensions().fields().size() == 2);
-    dogen::dynamic::field_selector fs(tt.extensions());
+    BOOST_REQUIRE(tt.annotation().fields().size() == 2);
+    dogen::annotations::field_selector fs(tt.annotation());
     BOOST_CHECK(fs.get_text_content(licence_name) == licence_value);
     BOOST_CHECK(
         fs.get_text_content(copyright_notice_name) == copyright_notice_value);
@@ -532,8 +532,8 @@ BOOST_AUTO_TEST_CASE(namespaces_directive_results_in_expected_template) {
     BOOST_LOG_SEV(lg, debug) << "Result: " << tt;
 
     BOOST_CHECK(tt.lines().empty());
-    BOOST_REQUIRE(tt.extensions().fields().size() == 1);
-    dogen::dynamic::field_selector fs(tt.extensions());
+    BOOST_REQUIRE(tt.annotation().fields().size() == 1);
+    dogen::annotations::field_selector fs(tt.annotation());
     BOOST_CHECK(fs.get_text_content(namespaces_name) == namespaces_value);
 }
 

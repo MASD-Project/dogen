@@ -53,13 +53,13 @@
 				<element class_id="21" tracking_level="0" version="0">
 					<documentation>package2
 </documentation>
-					<extensions class_id="22" tracking_level="0" version="0">
+					<annotation class_id="22" tracking_level="0" version="0">
 						<fields class_id="23" tracking_level="0" version="0">
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;comments&gt;&lt;package&gt;&lt;package2&gt;</id>
 						<simple>package2</simple>
@@ -115,13 +115,13 @@
 				<element>
 					<documentation>package
 </documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;comments&gt;&lt;package&gt;</id>
 						<simple>package</simple>
@@ -178,13 +178,13 @@
 
 This comment will be applied to the model namespace itself.
 </documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;comments&gt;</id>
 						<simple>comments</simple>
@@ -262,13 +262,13 @@ This comment will be applied to the model namespace itself.
 second line
 third line with &quot;quote&quot;
 </documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;comments&gt;&lt;multi_line&gt;</id>
 						<simple>multi_line</simple>
@@ -380,13 +380,13 @@ third line with &quot;quote&quot;
 				<element>
 					<documentation>this is the brief comment
 </documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;comments&gt;&lt;one_line&gt;</id>
 						<simple>one_line</simple>
@@ -439,13 +439,13 @@ third line with &quot;quote&quot;
 					<item class_id="35" tracking_level="0" version="0">
 						<documentation>another brief comment
 </documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;comments&gt;&lt;one_line&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
@@ -522,13 +522,13 @@ third line with &quot;quote&quot;
 
 a second line
 </documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;comments&gt;&lt;one_line&gt;&lt;prop_1&gt;</id>
 							<simple>prop_1</simple>
@@ -602,13 +602,13 @@ a second line
 					</item>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;comments&gt;&lt;one_line&gt;&lt;prop_2&gt;</id>
 							<simple>prop_2</simple>
@@ -839,13 +839,13 @@ a second line
 	<root_module object_id="_5">
 		<element>
 			<documentation></documentation>
-			<extensions>
+			<annotation>
 				<fields>
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</fields>
-			</extensions>
+			</annotation>
 			<name>
 				<id></id>
 				<simple></simple>

@@ -42,7 +42,7 @@ public:
 
 public:
     std::string id() const override;
-    dynamic::ownership_hierarchy ownership_hierarchy() const override;
+    annotations::ownership_hierarchy ownership_hierarchy() const override;
     std::type_index element_type_index() const override;
 
 public:

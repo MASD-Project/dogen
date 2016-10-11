@@ -33,8 +33,8 @@
 #include "dogen/utility/test/exception_checkers.hpp"
 #include "dogen/dia/test/diagram_serialization_helper.hpp"
 #include "dogen/yarn/serialization/registrar_ser.hpp"
-#include "dogen/dynamic/test/mock_repository_factory.hpp"
-#include "dogen/dynamic/test/mock_workflow_factory.hpp"
+#include "dogen/annotations/test/mock_repository_factory.hpp"
+#include "dogen/annotations/test/mock_workflow_factory.hpp"
 #include "dogen/yarn.dia/types/workflow.hpp"
 
 template<typename Archive> void register_types(Archive& ar) {
@@ -62,7 +62,7 @@ bool test_workflow(
     const bool is_target(true);
     const std::string model_name(input_path.stem().string());
 
-    using namespace dogen::dynamic::test;
+    using namespace dogen::annotations::test;
     mock_repository_factory rf;
     const auto rp(rf.make());
     workflow w;

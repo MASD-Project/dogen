@@ -772,7 +772,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::forward_list&lt;dynamic::ownership_hierarchy&gt;#</dia:string>
+            <dia:string>#std::forward_list&lt;annotations::ownership_hierarchy&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -910,7 +910,7 @@
                 <dia:string>#rp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const dynamic::repository&amp;#</dia:string>
+                <dia:string>#const annotations::repository&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>

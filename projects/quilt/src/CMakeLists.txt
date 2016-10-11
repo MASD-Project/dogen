@@ -33,7 +33,7 @@ target_link_libraries(${name}
     utility
     options
     formatters
-    dynamic
+    annotations
     yarn
     ${Boost_LIBRARIES})
 

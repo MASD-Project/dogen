@@ -23,7 +23,7 @@
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/filesystem/file.hpp"
 #include "dogen/utility/exception/invalid_enum_value.hpp"
-#include "dogen/dynamic/types/repository_workflow.hpp"
+#include "dogen/annotations/types/repository_workflow.hpp"
 #include "dogen/options/types/knitting_options_validator.hpp"
 #include "dogen/options/io/knitting_options_io.hpp"
 #include "dogen/yarn/types/workflow.hpp"
@@ -71,9 +71,9 @@ bool workflow::housekeeping_required() const {
     return knitting_options_.output().delete_extra_files();
 }
 
-std::forward_list<dynamic::ownership_hierarchy> workflow::
+std::forward_list<annotations::ownership_hierarchy> workflow::
 obtain_ownership_hierarchy_activity() const {
-    std::forward_list<dynamic::ownership_hierarchy> r;
+    std::forward_list<annotations::ownership_hierarchy> r;
     const auto& rg(quilt::workflow::registrar());
     for (const auto b : rg.backends())
         r.splice_after(r.before_begin(), b->ownership_hierarchy());
@@ -81,16 +81,16 @@ obtain_ownership_hierarchy_activity() const {
     return r;
 }
 
-dynamic::repository workflow::setup_dynamic_repository_activity(
-    const std::forward_list<dynamic::ownership_hierarchy>& oh) const {
+annotations::repository workflow::setup_annotations_repository_activity(
+    const std::forward_list<annotations::ownership_hierarchy>& oh) const {
     using namespace dogen::utility::filesystem;
     const auto dir(data_files_directory() / fields_dir);
-    dynamic::repository_workflow w;
+    annotations::repository_workflow w;
     return w.execute(oh, std::forward_list<boost::filesystem::path> { dir });
 }
 
 yarn::model workflow::
-obtain_yarn_model_activity(const dynamic::repository& rp) const {
+obtain_yarn_model_activity(const annotations::repository& rp) const {
 
     using namespace dogen::utility::filesystem;
     const auto dir(data_files_directory() / library_dir);
@@ -143,7 +143,7 @@ void workflow::execute() const {
 
     try {
         const auto oh(obtain_ownership_hierarchy_activity());
-        const auto rp(setup_dynamic_repository_activity(oh));
+        const auto rp(setup_annotations_repository_activity(oh));
         const auto m(obtain_yarn_model_activity(rp));
 
         if (!m.has_generatable_types()) {

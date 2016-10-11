@@ -29,14 +29,14 @@ attribute::attribute()
 
 attribute::attribute(
     const std::string& documentation,
-    const dogen::dynamic::object& extensions,
+    const dogen::annotations::object& annotation,
     const dogen::yarn::name& name,
     const std::string& unparsed_type,
     const dogen::yarn::name_tree& parsed_type,
     const bool is_immutable,
     const bool is_fluent)
     : documentation_(documentation),
-      extensions_(extensions),
+      annotation_(annotation),
       name_(name),
       unparsed_type_(unparsed_type),
       parsed_type_(parsed_type),
@@ -46,7 +46,7 @@ attribute::attribute(
 void attribute::swap(attribute& other) noexcept {
     using std::swap;
     swap(documentation_, other.documentation_);
-    swap(extensions_, other.extensions_);
+    swap(annotation_, other.annotation_);
     swap(name_, other.name_);
     swap(unparsed_type_, other.unparsed_type_);
     swap(parsed_type_, other.parsed_type_);
@@ -56,7 +56,7 @@ void attribute::swap(attribute& other) noexcept {
 
 bool attribute::operator==(const attribute& rhs) const {
     return documentation_ == rhs.documentation_ &&
-        extensions_ == rhs.extensions_ &&
+        annotation_ == rhs.annotation_ &&
         name_ == rhs.name_ &&
         unparsed_type_ == rhs.unparsed_type_ &&
         parsed_type_ == rhs.parsed_type_ &&
@@ -86,20 +86,20 @@ void attribute::documentation(const std::string&& v) {
     documentation_ = std::move(v);
 }
 
-const dogen::dynamic::object& attribute::extensions() const {
-    return extensions_;
+const dogen::annotations::object& attribute::annotation() const {
+    return annotation_;
 }
 
-dogen::dynamic::object& attribute::extensions() {
-    return extensions_;
+dogen::annotations::object& attribute::annotation() {
+    return annotation_;
 }
 
-void attribute::extensions(const dogen::dynamic::object& v) {
-    extensions_ = v;
+void attribute::annotation(const dogen::annotations::object& v) {
+    annotation_ = v;
 }
 
-void attribute::extensions(const dogen::dynamic::object&& v) {
-    extensions_ = std::move(v);
+void attribute::annotation(const dogen::annotations::object&& v) {
+    annotation_ = std::move(v);
 }
 
 const dogen::yarn::name& attribute::name() const {

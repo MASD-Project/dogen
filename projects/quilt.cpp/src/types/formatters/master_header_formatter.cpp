@@ -39,7 +39,7 @@ std::string master_header_formatter::id() const {
     return ownership_hierarchy().formatter_name();
 }
 
-dynamic::ownership_hierarchy
+annotations::ownership_hierarchy
 master_header_formatter::ownership_hierarchy() const {
     return ownership_hierarchy_;
 }

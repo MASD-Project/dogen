@@ -30,7 +30,7 @@
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
 #include "dogen/yarn/types/intermediate_model.hpp"
-#include "dogen/dynamic/types/object.hpp"
+#include "dogen/annotations/types/object.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -145,8 +145,8 @@ public:
     };
 
 public:
-    typedef std::function<void(dynamic::object& o)>
-    dynamic_extension_function_type;
+    typedef std::function<void(annotations::object& o)>
+    annotation_function_type;
 
 public:
     /**
@@ -154,7 +154,7 @@ public:
      * yarn pipeline, as given by the flags supplied.
      */
     explicit mock_intermediate_model_factory(const flags& f,
-        dynamic_extension_function_type fn = dynamic_extension_function_type());
+        annotation_function_type fn = annotation_function_type());
 
 public:
     /**
@@ -518,7 +518,7 @@ public:
 
 private:
     const flags flags_;
-    dynamic_extension_function_type dynamic_extension_function_;
+    annotation_function_type annotation_function_;
 };
 
 } } }

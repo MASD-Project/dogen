@@ -30,7 +30,7 @@ namespace fabric {
 
 odb_options::odb_options(
     const std::string& documentation,
-    const dogen::dynamic::object& extensions,
+    const dogen::annotations::object& annotation,
     const dogen::yarn::name& name,
     const dogen::yarn::generation_types generation_type,
     const dogen::yarn::origin_types origin_type,
@@ -40,7 +40,7 @@ odb_options::odb_options(
     const bool is_element_extension)
     : dogen::yarn::element(
       documentation,
-      extensions,
+      annotation,
       name,
       generation_type,
       origin_type,

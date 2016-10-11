@@ -21,9 +21,9 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_set_io.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
-#include "dogen/dynamic/types/field_selector.hpp"
-#include "dogen/dynamic/types/field_definition.hpp"
-#include "dogen/dynamic/types/repository_selector.hpp"
+#include "dogen/annotations/types/field_selector.hpp"
+#include "dogen/annotations/types/field_definition.hpp"
+#include "dogen/annotations/types/repository_selector.hpp"
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/yarn/io/languages_io.hpp"
 #include "dogen/yarn/types/name_flattener.hpp"
@@ -77,13 +77,13 @@ std::ostream& operator<<(std::ostream& s, const helper_expander::context& v) {
 }
 
 helper_expander::context helper_expander::make_context(
-    const dynamic::repository& drp, const model& fm) const {
+    const annotations::repository& drp, const model& fm) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started making the context.";
     context r;
     r.streaming_propertiess = fm.streaming_properties();
 
-    const dynamic::repository_selector s(drp);
+    const annotations::repository_selector s(drp);
     const auto hf(traits::cpp::helper::family());
     const auto fd(s.select_field_by_name(hf));
 
@@ -93,7 +93,7 @@ helper_expander::context helper_expander::make_context(
 
         auto& formattable(pair.second);
         auto& segment(*formattable.master_segment());
-        const dynamic::field_selector fs(segment.extensions());
+        const annotations::field_selector fs(segment.annotation());
         const auto fam(fs.get_text_content_or_default(fd));
         r.helper_families[id] = fam;
     }
@@ -355,7 +355,7 @@ void helper_expander::populate_helper_properties(const context& ctx,
     }
 }
 
-void helper_expander::expand(const dynamic::repository& drp,
+void helper_expander::expand(const annotations::repository& drp,
     const formatters::container& fc, model& fm) const {
     const auto ctx(make_context(drp, fm));
     populate_helper_properties(ctx, fc, fm.formattables());

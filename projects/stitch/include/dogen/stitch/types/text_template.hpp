@@ -28,8 +28,8 @@
 #include <list>
 #include <algorithm>
 #include "dogen/stitch/types/line.hpp"
-#include "dogen/dynamic/types/object.hpp"
-#include "dogen/stitch/types/configuration.hpp"
+#include "dogen/stitch/types/properties.hpp"
+#include "dogen/annotations/types/object.hpp"
 #include "dogen/stitch/serialization/text_template_fwd_ser.hpp"
 
 namespace dogen {
@@ -44,8 +44,8 @@ public:
 
 public:
     text_template(
-        const dogen::stitch::configuration& configuration,
-        const dogen::dynamic::object& extensions,
+        const dogen::stitch::properties& properties,
+        const dogen::annotations::object& annotation,
         const std::list<dogen::stitch::line>& lines);
 
 private:
@@ -56,15 +56,15 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::stitch::text_template& v, unsigned int version);
 
 public:
-    const dogen::stitch::configuration& configuration() const;
-    dogen::stitch::configuration& configuration();
-    void configuration(const dogen::stitch::configuration& v);
-    void configuration(const dogen::stitch::configuration&& v);
+    const dogen::stitch::properties& properties() const;
+    dogen::stitch::properties& properties();
+    void properties(const dogen::stitch::properties& v);
+    void properties(const dogen::stitch::properties&& v);
 
-    const dogen::dynamic::object& extensions() const;
-    dogen::dynamic::object& extensions();
-    void extensions(const dogen::dynamic::object& v);
-    void extensions(const dogen::dynamic::object&& v);
+    const dogen::annotations::object& annotation() const;
+    dogen::annotations::object& annotation();
+    void annotation(const dogen::annotations::object& v);
+    void annotation(const dogen::annotations::object&& v);
 
     const std::list<dogen::stitch::line>& lines() const;
     std::list<dogen::stitch::line>& lines();
@@ -82,8 +82,8 @@ public:
     text_template& operator=(text_template other);
 
 private:
-    dogen::stitch::configuration configuration_;
-    dogen::dynamic::object extensions_;
+    dogen::stitch::properties properties_;
+    dogen::annotations::object annotation_;
     std::list<dogen::stitch::line> lines_;
 };
 

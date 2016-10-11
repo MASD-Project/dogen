@@ -101,7 +101,7 @@ resolve_element_references(intermediate_model& im) const {
     rs.resolve(im);
 }
 
-void post_merge_workflow::expand_generalizations(const dynamic::repository& drp,
+void post_merge_workflow::expand_generalizations(const annotations::repository& drp,
     intermediate_model& im) const {
     generalization_expander ex;
     ex.expand(drp, im);
@@ -133,7 +133,7 @@ void post_merge_workflow::inject_model(const injector_registrar& rg,
     ex.expand(rg, im);
 }
 
-void post_merge_workflow::execute(const dynamic::repository& drp,
+void post_merge_workflow::execute(const annotations::repository& drp,
     const injector_registrar& rg, intermediate_model& im) const {
     BOOST_LOG_SEV(lg, debug) << "Starting workflow.";
 

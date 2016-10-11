@@ -40,7 +40,7 @@ private:
      * @brief Creates an empty text template, with the exception of
      * the key settings.
      */
-    text_template make_text_template_with_trivial_configuration() const;
+    text_template make_text_template_with_trivial_properties() const;
 
     /**
      * @brief Makes @code how_many lines, each with a single text block.

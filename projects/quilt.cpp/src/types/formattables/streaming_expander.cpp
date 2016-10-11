@@ -21,9 +21,9 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
-#include "dogen/dynamic/types/field_selector.hpp"
-#include "dogen/dynamic/types/repository_selector.hpp"
-#include "dogen/dynamic/io/field_definition_io.hpp"
+#include "dogen/annotations/types/field_selector.hpp"
+#include "dogen/annotations/types/repository_selector.hpp"
+#include "dogen/annotations/io/field_definition_io.hpp"
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/quilt.cpp/io/formattables/streaming_properties_io.hpp"
 #include "dogen/quilt.cpp/types/formattables/streaming_expander.hpp"
@@ -58,12 +58,12 @@ std::ostream& operator<<(std::ostream& s,
 
 streaming_expander::field_definitions
 streaming_expander::make_field_definitions(
-    const dynamic::repository& drp) const {
+    const annotations::repository& drp) const {
     BOOST_LOG_SEV(lg, debug) << "Creating field definitions.";
 
     field_definitions r;
 
-    const dynamic::repository_selector s(drp);
+    const annotations::repository_selector s(drp);
     const auto scm(traits::cpp::streaming::string_conversion_method());
     r.string_conversion_method = s.select_field_by_name(scm);
 
@@ -80,12 +80,12 @@ streaming_expander::make_field_definitions(
 
 boost::optional<streaming_properties>
 streaming_expander::make_streaming_properties(
-    const field_definitions& fds, const dynamic::object& o) const {
+    const field_definitions& fds, const annotations::object& o) const {
 
     BOOST_LOG_SEV(lg, debug) << "Creating streaming configuration.";
     bool found_any(false);
     streaming_properties r;
-    const dynamic::field_selector fs(o);
+    const annotations::field_selector fs(o);
 
     const auto& rq(fds.requires_quoting);
     if (fs.has_field(rq)) {
@@ -114,7 +114,7 @@ streaming_expander::make_streaming_properties(
 }
 
 void streaming_expander::
-expand(const dynamic::repository& drp, model& fm) const {
+expand(const annotations::repository& drp, model& fm) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started expanding streaming configuration.";
     const auto fds(make_field_definitions(drp));
@@ -130,7 +130,7 @@ expand(const dynamic::repository& drp, model& fm) const {
          */
         auto segment(formattable.master_segment());
         const auto& e(*segment);
-        const auto sc(make_streaming_properties(fds, e.extensions()));
+        const auto sc(make_streaming_properties(fds, e.annotation()));
         if (!sc)
             continue;
 

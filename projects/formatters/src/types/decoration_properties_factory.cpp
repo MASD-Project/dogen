@@ -20,8 +20,8 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/dynamic/types/field_selector.hpp"
-#include "dogen/dynamic/types/repository_selector.hpp"
+#include "dogen/annotations/types/field_selector.hpp"
+#include "dogen/annotations/types/repository_selector.hpp"
 #include "dogen/formatters/types/traits.hpp"
 #include "dogen/formatters/types/hydration_workflow.hpp"
 #include "dogen/formatters/types/code_generation_marker_factory.hpp"
@@ -44,14 +44,14 @@ namespace dogen {
 namespace formatters {
 
 decoration_properties_factory::
-decoration_properties_factory(const dynamic::repository& drp,
+decoration_properties_factory(const annotations::repository& drp,
     const repository& rp) : repository_(rp),
                             field_definitions_(make_field_definitions(drp)),
                             default_configuration_() { }
 
 decoration_properties_factory::
-decoration_properties_factory(const dynamic::repository& drp,
-    const repository& rp, const dynamic::object& fallback)
+decoration_properties_factory(const annotations::repository& drp,
+    const repository& rp, const annotations::object& fallback)
     : repository_(rp),
       field_definitions_(make_field_definitions(drp)),
       default_configuration_(make_decoration_configuration(fallback)),
@@ -64,8 +64,8 @@ decoration_properties_factory(const dynamic::repository& drp,
 
 decoration_properties_factory::field_definitions
 decoration_properties_factory::
-make_field_definitions(const dynamic::repository& rp) const {
-    const dynamic::repository_selector s(rp);
+make_field_definitions(const annotations::repository& rp) const {
+    const annotations::repository_selector s(rp);
 
     field_definitions r;
     const auto gd(traits::decoration::generate_decoration());
@@ -89,8 +89,8 @@ make_field_definitions(const dynamic::repository& rp) const {
 }
 
 decoration_configuration decoration_properties_factory::
-make_decoration_configuration(const dynamic::object& o) const {
-    const dynamic::field_selector fs(o);
+make_decoration_configuration(const annotations::object& o) const {
+    const annotations::field_selector fs(o);
 
     decoration_configuration r;
     const auto& gd(field_definitions_.generate_decoration);
@@ -259,7 +259,7 @@ make(const std::string& modeline_name) const {
 }
 
 decoration_properties decoration_properties_factory::make(
-    const std::string& modeline_name, const dynamic::object& o) const {
+    const std::string& modeline_name, const annotations::object& o) const {
     const auto dc(make_decoration_configuration(o));
     return make(modeline_name, dc);
 }

@@ -27,8 +27,8 @@
 
 #include <string>
 #include <boost/optional.hpp>
-#include "dogen/dynamic/types/object.hpp"
-#include "dogen/dynamic/types/repository.hpp"
+#include "dogen/annotations/types/object.hpp"
+#include "dogen/annotations/types/repository.hpp"
 #include "dogen/formatters/types/licence.hpp"
 #include "dogen/formatters/types/repository.hpp"
 #include "dogen/formatters/types/modeline_group.hpp"
@@ -50,7 +50,7 @@ public:
      *
      * @param rp where to look up reference data.
      */
-    decoration_properties_factory(const dynamic::repository& drp,
+    decoration_properties_factory(const annotations::repository& drp,
         const repository& rp);
 
     /**
@@ -60,25 +60,25 @@ public:
      * @param rp where to look up reference data.
      * @param fallback object to use to construct defaults, if any.
      */
-    decoration_properties_factory(const dynamic::repository& drp,
-        const repository& rp, const dynamic::object& fallback);
+    decoration_properties_factory(const annotations::repository& drp,
+        const repository& rp, const annotations::object& fallback);
 
 private:
     struct field_definitions {
-        dynamic::field_definition generate_decoration;
-        dynamic::field_definition copyright_notice;
-        dynamic::field_definition licence_name;
-        dynamic::field_definition modeline_group_name;
-        dynamic::field_definition marker_add_date_time;
-        dynamic::field_definition marker_add_warning;
-        dynamic::field_definition marker_message;
+        annotations::field_definition generate_decoration;
+        annotations::field_definition copyright_notice;
+        annotations::field_definition licence_name;
+        annotations::field_definition modeline_group_name;
+        annotations::field_definition marker_add_date_time;
+        annotations::field_definition marker_add_warning;
+        annotations::field_definition marker_message;
     };
 
     field_definitions
-    make_field_definitions(const dynamic::repository& rp) const;
+    make_field_definitions(const annotations::repository& rp) const;
 
     decoration_configuration
-    make_decoration_configuration(const dynamic::object& o) const;
+    make_decoration_configuration(const annotations::object& o) const;
 
 private:
     /**
@@ -148,7 +148,7 @@ public:
     /**@{*/
     decoration_properties make(const std::string& modeline_name) const;
     decoration_properties make(const std::string& modeline_name,
-        const dynamic::object& o) const;
+        const annotations::object& o) const;
     /**@}*/
 
 private:

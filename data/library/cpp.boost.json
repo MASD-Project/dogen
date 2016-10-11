@@ -1,7 +1,7 @@
 {
     "model_name" : "boost",
     "documentation" : "Boost Library types.",
-    "extensions" : {
+    "annotation" : {
         "yarn.is_proxy_model" : true
     },
     "elements" : [
@@ -9,7 +9,7 @@
             "meta_type" : "object",
             "simple_name" : "shared_ptr",
             "object_type" : "smart_pointer",
-            "extensions" : {
+            "annotation" : {
                 "quilt.cpp.helper.family" : "SmartPointer",
                 "yarn.type_parameters.count" : 1,
                 "yarn.type_parameters.always_in_heap" : true,
@@ -25,7 +25,7 @@
             "meta_type" : "object",
             "simple_name" : "weak_ptr",
             "object_type" : "smart_pointer",
-            "extensions" : {
+            "annotation" : {
                 "quilt.cpp.helper.family" : "SmartPointer",
                 "yarn.type_parameters.count" : 1,
                 "yarn.type_parameters.always_in_heap" : true,
@@ -41,7 +41,7 @@
             "meta_type" : "object",
             "simple_name" : "scoped_ptr",
             "object_type" : "smart_pointer",
-            "extensions" : {
+            "annotation" : {
                 "quilt.cpp.helper.family" : "SmartPointer",
                 "yarn.type_parameters.count" : 1,
                 "yarn.type_parameters.always_in_heap" : true,
@@ -56,7 +56,7 @@
         {
             "meta_type" : "object",
             "simple_name" : "optional",
-            "extensions" : {
+            "annotation" : {
                 "quilt.cpp.helper.family" : "Optional",
                 "yarn.type_parameters.count" : 1,
                 "yarn.type_parameters.always_in_heap" : false,
@@ -72,7 +72,7 @@
         {
             "meta_type" : "object",
             "simple_name" : "variant",
-            "extensions" : {
+            "annotation" : {
                 "quilt.cpp.helper.family" : "BoostVariant",
                 "yarn.type_parameters.variable_number_of_parameters" : true,
                 "quilt.cpp.aspect.requires_manual_move_constructor" : true,
@@ -90,7 +90,7 @@
             "internal_modules" : [
                 "asio"
             ],
-            "extensions" : {
+            "annotation" : {
                 "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<boost/asio/io_service.hpp>"
             }
         },
@@ -100,7 +100,7 @@
             "internal_modules" : [
                 "asio", "ip", "tcp"
             ],
-            "extensions" : {
+            "annotation" : {
                 "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<boost/asio/ip/tcp.hpp>"
             }
         },
@@ -110,7 +110,7 @@
             "internal_modules" : [
                 "asio", "ip", "tcp"
             ],
-            "extensions" : {
+            "annotation" : {
                 "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<boost/asio/ip/tcp.hpp>"
             }
         },
@@ -120,7 +120,7 @@
             "internal_modules" : [
                 "filesystem"
             ],
-            "extensions" : {
+            "annotation" : {
                 "quilt.cpp.helper.family" : "BoostPath",
                 "quilt.cpp.streaming.string_conversion_method" : "generic_string()",
                 "quilt.cpp.aspect.requires_manual_move_constructor" : true,
@@ -138,7 +138,7 @@
             "internal_modules" : [
                 "gregorian"
             ],
-            "extensions" : {
+            "annotation" : {
                 "quilt.cpp.helper.family" : "BoostDate",
                 "quilt.cpp.streaming.requires_quoting" : true,
                 "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<boost/date_time/gregorian/gregorian_types.hpp>",
@@ -156,7 +156,7 @@
             "internal_modules" : [
                 "posix_time"
             ],
-            "extensions" : {
+            "annotation" : {
                 "quilt.cpp.helper.family" : "BoostPTime",
                 "quilt.cpp.streaming.requires_quoting" : true,
                 "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<boost/date_time/posix_time/posix_time_types.hpp>",
@@ -174,7 +174,7 @@
             "internal_modules" : [
                 "posix_time"
             ],
-            "extensions" : {
+            "annotation" : {
                 "quilt.cpp.helper.family" : "BoostTimeDuration",
                 "quilt.cpp.streaming.requires_quoting" : true,
                 "quilt.cpp.aspect.requires_manual_move_constructor" : true,
@@ -193,7 +193,7 @@
             "internal_modules" : [
                 "property_tree"
             ],
-            "extensions" : {
+            "annotation" : {
                 "quilt.cpp.helper.family" : "BoostPTree",
                 "quilt.cpp.aspect.requires_manual_move_constructor" : true,
                 "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<boost/property_tree/ptree.hpp>",

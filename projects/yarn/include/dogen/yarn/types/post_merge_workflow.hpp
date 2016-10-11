@@ -27,7 +27,7 @@
 
 #include <list>
 #include <utility>
-#include "dogen/dynamic/types/repository.hpp"
+#include "dogen/annotations/types/repository.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/injector_registrar.hpp"
 #include "dogen/yarn/types/element.hpp"
@@ -77,7 +77,7 @@ private:
     /**
      * @brief Expand all generalization relationships.
      */
-    void expand_generalizations(const dynamic::repository& drp,
+    void expand_generalizations(const annotations::repository& drp,
         intermediate_model& im) const;
 
     /**
@@ -111,8 +111,8 @@ public:
     /**
      * @brief Executes the post-merge workflow.
      */
-    void execute(const dynamic::repository& drp, const injector_registrar& rg,
-        intermediate_model& im) const;
+    void execute(const annotations::repository& drp,
+        const injector_registrar& rg, intermediate_model& im) const;
 };
 
 } }

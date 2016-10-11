@@ -20,7 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/dynamic/types/repository_selector.hpp"
+#include "dogen/annotations/types/repository_selector.hpp"
 #include "dogen/yarn/types/traits.hpp"
 #include "dogen/yarn/types/expansion_error.hpp"
 #include "dogen/yarn/types/elements_traversal.hpp"
@@ -64,21 +64,21 @@ private:
 
 }
 
-origin_expander::origin_expander(const dynamic::repository& rp)
+origin_expander::origin_expander(const annotations::repository& rp)
     : field_definitions_(make_field_definitions(rp)) {}
 
 origin_expander::field_definitions origin_expander::make_field_definitions(
-    const dynamic::repository& rp) const {
+    const annotations::repository& rp) const {
 
     field_definitions r;
-    const dynamic::repository_selector rs(rp);
+    const annotations::repository_selector rs(rp);
     r.is_proxy_model = rs.select_field_by_name(traits::is_proxy_model());
     return r;
 }
 
 bool origin_expander::is_proxy_model(const intermediate_model& im) const {
-    const auto& o(im.root_module().extensions());
-    const dynamic::field_selector fs(o);
+    const auto& o(im.root_module().annotation());
+    const annotations::field_selector fs(o);
     const auto& fd(field_definitions_);
     const bool r(fs.get_boolean_content_or_default(fd.is_proxy_model));
     BOOST_LOG_SEV(lg, debug) << "Read is proxy model: " << r

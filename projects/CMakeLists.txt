@@ -177,7 +177,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/utility/include
     ${CMAKE_SOURCE_DIR}/projects/knit/include
     ${CMAKE_SOURCE_DIR}/projects/knitter/include
-    ${CMAKE_SOURCE_DIR}/projects/dynamic/include
+    ${CMAKE_SOURCE_DIR}/projects/annotations/include
     ${CMAKE_SOURCE_DIR}/projects/stitch/include
     ${CMAKE_SOURCE_DIR}/projects/stitcher/include
     )
@@ -209,8 +209,8 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/knit/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/knit/tests)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/knitter/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/knitter/tests)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dynamic/src)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dynamic/tests)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/annotations/src)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/annotations/tests)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/stitch/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/stitch/tests)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/stitcher/src)

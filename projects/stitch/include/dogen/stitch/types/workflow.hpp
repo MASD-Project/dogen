@@ -28,12 +28,12 @@
 #include <string>
 #include <forward_list>
 #include <boost/filesystem/path.hpp>
-#include "dogen/dynamic/types/object.hpp"
-#include "dogen/dynamic/types/repository.hpp"
-#include "dogen/dynamic/types/ownership_hierarchy.hpp"
+#include "dogen/annotations/types/object.hpp"
+#include "dogen/annotations/types/repository.hpp"
+#include "dogen/annotations/types/ownership_hierarchy.hpp"
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/formatters/types/repository.hpp"
-#include "dogen/stitch/types/configuration.hpp"
+#include "dogen/stitch/types/properties.hpp"
 #include "dogen/stitch/types/text_template.hpp"
 #include "dogen/stitch/types/formatter.hpp"
 
@@ -54,10 +54,10 @@ public:
 
 private:
     /**
-     * @brief Expands the dynamic object.
+     * @brief Expands the annotations object.
      */
     void perform_expansion(const boost::filesystem::path& p,
-        dynamic::object& o) const;
+        annotations::object& o) const;
 
 private:
     /**
@@ -94,7 +94,7 @@ private:
     /**
      * @brief Obtains the ownership hierarchy.
      */
-    std::forward_list<dynamic::ownership_hierarchy>
+    std::forward_list<annotations::ownership_hierarchy>
     obtain_ownership_hierarchy_activity() const;
 
     /**
@@ -103,26 +103,26 @@ private:
     dogen::formatters::repository create_formatters_repository_activity() const;
 
     /**
-     * @brief Sets up the dynamic repository.
+     * @brief Sets up the annotations repository.
      */
-    dynamic::repository create_dynamic_repository_activity(
-        const std::forward_list<dynamic::ownership_hierarchy>& oh)
+    annotations::repository create_annotations_repository_activity(
+        const std::forward_list<annotations::ownership_hierarchy>& oh)
         const;
 
     /**
      * @brief Parses all of the strings that contain text templates.
      */
     std::forward_list<text_template> parse_text_templates_activity(
-        const dynamic::repository& rp,
+        const annotations::repository& rp,
         const std::forward_list<
         std::pair<boost::filesystem::path, std::string>
         >& text_templates_as_string) const;
 
     /**
-     * @brief Creates the configuration.
+     * @brief Creates the properties.
      */
-    void populate_configuration_activity(
-        const dynamic::repository& dynamic_repository,
+    void populate_properties_activity(
+        const annotations::repository& annotations_repository,
         const dogen::formatters::repository& formatters_repository,
         std::forward_list<text_template>& text_templates) const;
 

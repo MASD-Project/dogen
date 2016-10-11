@@ -52,13 +52,13 @@
 			<second class_id="7" tracking_level="1" version="0" object_id="_0">
 				<element class_id="21" tracking_level="0" version="0">
 					<documentation></documentation>
-					<extensions class_id="22" tracking_level="0" version="0">
+					<annotation class_id="22" tracking_level="0" version="0">
 						<fields class_id="23" tracking_level="0" version="0">
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;class_in_a_package&gt;&lt;package1&gt;</id>
 						<simple>package1</simple>
@@ -112,13 +112,13 @@
 			<second object_id="_1">
 				<element>
 					<documentation></documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;class_in_a_package&gt;</id>
 						<simple>class_in_a_package</simple>
@@ -192,13 +192,13 @@
 			<second class_id="8" tracking_level="1" version="0" object_id="_2">
 				<element>
 					<documentation></documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;class_in_a_package&gt;&lt;package1&gt;&lt;first_class&gt;</id>
 						<simple>first_class</simple>
@@ -251,13 +251,13 @@
 					<item_version>0</item_version>
 					<item class_id="33" tracking_level="0" version="0">
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;class_in_a_package&gt;&lt;package1&gt;&lt;first_class&gt;&lt;public_attribute&gt;</id>
 							<simple>public_attribute</simple>
@@ -332,13 +332,13 @@
 					</item>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;class_in_a_package&gt;&lt;package1&gt;&lt;first_class&gt;&lt;private_attribute&gt;</id>
 							<simple>private_attribute</simple>
@@ -534,13 +534,13 @@
 	<root_module object_id="_3">
 		<element>
 			<documentation></documentation>
-			<extensions>
+			<annotation>
 				<fields>
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</fields>
-			</extensions>
+			</annotation>
 			<name>
 				<id></id>
 				<simple></simple>

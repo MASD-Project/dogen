@@ -28,8 +28,8 @@
 #include <forward_list>
 #include <boost/filesystem/path.hpp>
 #include "dogen/options/types/knitting_options.hpp"
-#include "dogen/dynamic/types/repository.hpp"
-#include "dogen/dynamic/types/ownership_hierarchy.hpp"
+#include "dogen/annotations/types/repository.hpp"
+#include "dogen/annotations/types/ownership_hierarchy.hpp"
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/formatters/types/file.hpp"
 
@@ -64,7 +64,7 @@ public:
      * @brief Complete ownership hierarchy for this backend, listing
      * all available models, facet and formatters.
      */
-    virtual std::forward_list<dynamic::ownership_hierarchy>
+    virtual std::forward_list<annotations::ownership_hierarchy>
     ownership_hierarchy() const = 0;
 
     /**
@@ -75,7 +75,7 @@ public:
      */
     virtual std::forward_list<formatters::file> generate(
         const options::knitting_options& ko,
-        const dynamic::repository& rp,
+        const annotations::repository& arp,
         const yarn::model& m) const = 0;
 };
 

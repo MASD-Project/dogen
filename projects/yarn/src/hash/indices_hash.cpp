@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/yarn/hash/indices_hash.hpp"
-#include "dogen/dynamic/hash/raw_aggregate_hash.hpp"
+#include "dogen/annotations/hash/raw_aggregate_hash.hpp"
 
 namespace {
 
@@ -37,7 +37,7 @@ inline std::size_t hash_std_unordered_set_std_string(const std::unordered_set<st
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_dogen_dynamic_raw_aggregate(const std::unordered_map<std::string, dogen::dynamic::raw_aggregate>& v) {
+inline std::size_t hash_std_unordered_map_std_string_dogen_annotations_raw_aggregate(const std::unordered_map<std::string, dogen::annotations::raw_aggregate>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -56,7 +56,7 @@ std::size_t indices_hasher::hash(const indices& v) {
 
     combine(seed, hash_std_unordered_set_std_string(v.objects_always_in_heap()));
     combine(seed, hash_std_unordered_set_std_string(v.elements_referable_by_attributes()));
-    combine(seed, hash_std_unordered_map_std_string_dogen_dynamic_raw_aggregate(v.raw_aggregates()));
+    combine(seed, hash_std_unordered_map_std_string_dogen_annotations_raw_aggregate(v.raw_aggregates()));
 
     return seed;
 }

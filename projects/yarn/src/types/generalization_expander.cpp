@@ -21,12 +21,12 @@
 #include "dogen/utility/io/unordered_set_io.hpp"
 #include "dogen/utility/io/optional_io.hpp"
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/dynamic/types/field_selector.hpp"
+#include "dogen/annotations/types/field_selector.hpp"
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/types/traits.hpp"
 #include "dogen/yarn/types/resolver.hpp"
 #include "dogen/yarn/types/expansion_error.hpp"
-#include "dogen/dynamic/types/repository_selector.hpp"
+#include "dogen/annotations/types/repository_selector.hpp"
 #include "dogen/yarn/types/generalization_expander.hpp"
 
 namespace {
@@ -49,18 +49,18 @@ inline bool operator<(const name& lhs, const name& rhs) {
 
 generalization_expander::field_definitions
 generalization_expander::make_field_definitions(
-    const dynamic::repository& drp) const {
+    const annotations::repository& drp) const {
 
     field_definitions r;
-    const dynamic::repository_selector rs(drp);
+    const annotations::repository_selector rs(drp);
     r.is_final = rs.select_field_by_name(traits::generalization::is_final());
     return r;
 }
 
 boost::optional<bool>
 generalization_expander::make_is_final(const field_definitions& fds,
-    const dynamic::object& o) const {
-    const dynamic::field_selector fs(o);
+    const annotations::object& o) const {
+    const annotations::field_selector fs(o);
 
     if (fs.has_field(fds.is_final))
         return fs.get_boolean_content(fds.is_final);
@@ -177,7 +177,7 @@ populate_generalizable_properties(const field_definitions& fds,
          /*
           * Handle the case where the user decided to override final.
           */
-         const auto is_final(make_is_final(fds, o.extensions()));
+         const auto is_final(make_is_final(fds, o.annotation()));
          if (is_final) {
              if (*is_final && o.is_parent()) {
                  BOOST_LOG_SEV(lg, error) << incompatible_is_final << id;
@@ -219,7 +219,7 @@ void generalization_expander::sort_leaves(intermediate_model& im) const {
 }
 
 void generalization_expander::
-expand(const dynamic::repository& drp, intermediate_model& im) const {
+expand(const annotations::repository& drp, intermediate_model& im) const {
     const auto parent_ids(update_and_collect_parent_ids(im));
 
     const auto fds(make_field_definitions(drp));

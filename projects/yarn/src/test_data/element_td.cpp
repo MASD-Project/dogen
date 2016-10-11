@@ -25,12 +25,12 @@
 #include "dogen/yarn/test_data/concept_td.hpp"
 #include "dogen/yarn/test_data/element_td.hpp"
 #include "dogen/yarn/test_data/visitor_td.hpp"
-#include "dogen/dynamic/test_data/object_td.hpp"
 #include "dogen/yarn/test_data/exception_td.hpp"
 #include "dogen/yarn/test_data/primitive_td.hpp"
 #include "dogen/yarn/test_data/enumeration_td.hpp"
 #include "dogen/yarn/test_data/stereotypes_td.hpp"
 #include "dogen/yarn/test_data/origin_types_td.hpp"
+#include "dogen/annotations/test_data/object_td.hpp"
 #include "dogen/yarn/test_data/generation_types_td.hpp"
 
 namespace {
@@ -41,9 +41,9 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-dogen::dynamic::object
-create_dogen_dynamic_object(const unsigned int position) {
-    return dogen::dynamic::object_generator::create(position);
+dogen::annotations::object
+create_dogen_annotations_object(const unsigned int position) {
+    return dogen::annotations::object_generator::create(position);
 }
 
 dogen::yarn::name
@@ -93,7 +93,7 @@ namespace yarn {
 void element_generator::
 populate(const unsigned int position, result_type& v) {
     v.documentation(create_std_string(position + 0));
-    v.extensions(create_dogen_dynamic_object(position + 1));
+    v.annotation(create_dogen_annotations_object(position + 1));
     v.name(create_dogen_yarn_name(position + 2));
     v.generation_type(create_dogen_yarn_generation_types(position + 3));
     v.origin_type(create_dogen_yarn_origin_types(position + 4));

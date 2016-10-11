@@ -24,11 +24,11 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/io/list_io.hpp"
-#include "dogen/dynamic/test/mock_field_definition_factory.hpp"
-#include "dogen/dynamic/test/mock_repository_factory.hpp"
-#include "dogen/dynamic/test/mock_workflow_factory.hpp"
-#include "dogen/dynamic/types/field_definition.hpp"
-#include "dogen/dynamic/types/field_selector.hpp"
+#include "dogen/annotations/test/mock_field_definition_factory.hpp"
+#include "dogen/annotations/test/mock_repository_factory.hpp"
+#include "dogen/annotations/test/mock_workflow_factory.hpp"
+#include "dogen/annotations/types/field_definition.hpp"
+#include "dogen/annotations/types/field_selector.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/io/intermediate_model_io.hpp"
@@ -154,8 +154,8 @@ const std::string internal_modules_model(R"({
   }
 )");
 
-dogen::dynamic::repository create_repository() {
-    using namespace dogen::dynamic;
+dogen::annotations::repository create_repository() {
+    using namespace dogen::annotations;
     test::mock_field_definition_factory f;
 
     std::list<field_definition> fds;
@@ -170,7 +170,7 @@ dogen::dynamic::repository create_repository() {
 dogen::yarn::intermediate_model hydrate(std::istream& s) {
     const auto rp(create_repository());
 
-    using dogen::dynamic::test::mock_workflow_factory;
+    using dogen::annotations::test::mock_workflow_factory;
     dogen::yarn::json::hydrator h;
     return h.hydrate(s, false/*is_target*/);
 }
@@ -208,7 +208,7 @@ BOOST_AUTO_TEST_CASE(trivial_model_hydrates_into_expected_model) {
     {
         const auto& pair(*m.modules().begin());
         BOOST_CHECK(pair.second.documentation() == documentation);
-        BOOST_CHECK(pair.second.extensions().fields().empty());
+        BOOST_CHECK(pair.second.annotation().fields().empty());
     }
 
     BOOST_REQUIRE(m.objects().size() == 1);
@@ -238,7 +238,7 @@ BOOST_AUTO_TEST_CASE(tagged_model_hydrates_into_expected_model) {
     BOOST_CHECK(ml.internal_modules().empty());
     BOOST_CHECK(ml.external_modules().empty());
 
-    using namespace dogen::dynamic;
+    using namespace dogen::annotations;
     BOOST_REQUIRE(m.modules().size() == 1);
     {
         const auto& pair(*m.modules().begin());

@@ -24,9 +24,9 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
-#include "dogen/dynamic/types/field_selector.hpp"
-#include "dogen/dynamic/types/repository_selector.hpp"
-#include "dogen/dynamic/io/field_definition_io.hpp"
+#include "dogen/annotations/types/field_selector.hpp"
+#include "dogen/annotations/types/repository_selector.hpp"
+#include "dogen/annotations/io/field_definition_io.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formattables/expansion_error.hpp"
@@ -131,12 +131,12 @@ std::ostream& operator<<(std::ostream& s,
 }
 
 inclusion_expander::field_definitions inclusion_expander::
-make_field_definitions(const dynamic::repository& drp,
+make_field_definitions(const annotations::repository& drp,
     const formatters::container& fc) const {
     BOOST_LOG_SEV(lg, debug) << "Creating field definitions.";
 
     field_definitions r;
-    const dynamic::repository_selector s(drp);
+    const annotations::repository_selector s(drp);
     const auto ir(traits::cpp::inclusion_required());
     r.inclusion_required = s.select_field_by_name(ir);
 
@@ -166,15 +166,15 @@ make_field_definitions(const dynamic::repository& drp,
 }
 
 bool inclusion_expander::make_top_level_inclusion_required(
-    const field_definitions& fds, const dynamic::object& o) const {
-    const dynamic::field_selector fs(o);
+    const field_definitions& fds, const annotations::object& o) const {
+    const annotations::field_selector fs(o);
     return fs.get_boolean_content_or_default(fds.inclusion_required);
 }
 
 inclusion_directive_configuration
 inclusion_expander::make_inclusion_directive_configuration(
     const field_definitions& fds,const std::string& formatter_name,
-    const dynamic::object& o) const {
+    const annotations::object& o) const {
 
     if (formatter_name.empty()) {
         BOOST_LOG_SEV(lg, error) << empty_formatter_name;
@@ -188,7 +188,7 @@ inclusion_expander::make_inclusion_directive_configuration(
     }
 
     const auto& ffd(i->second);
-    const dynamic::field_selector fs(o);
+    const annotations::field_selector fs(o);
     inclusion_directive_configuration r;
 
     const auto& ir(ffd.inclusion_required);
@@ -277,7 +277,7 @@ void inclusion_expander::compute_inclusion_directives(
      * override this, we default it to true because normally elements
      * require inclusion.
      */
-    const auto& o(e.extensions());
+    const auto& o(e.annotation());
     const bool required(make_top_level_inclusion_required(fds, o));
     if (!required) {
         BOOST_LOG_SEV(lg, debug) << "Inclusion not required for element.";
@@ -508,7 +508,7 @@ void inclusion_expander::populate_inclusion_dependencies(
                              << "for all formattables. ";
 }
 
-void inclusion_expander::expand(const dynamic::repository& drp,
+void inclusion_expander::expand(const annotations::repository& drp,
     const formatters::container& fc, const locator& l, model& fm) const {
 
     const auto fds(make_field_definitions(drp, fc));

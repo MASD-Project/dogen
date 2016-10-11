@@ -30,8 +30,8 @@
 #include <forward_list>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
-#include "dogen/dynamic/types/repository.hpp"
-#include "dogen/dynamic/types/field_definition.hpp"
+#include "dogen/annotations/types/repository.hpp"
+#include "dogen/annotations/types/field_definition.hpp"
 #include "dogen/quilt.cpp/types/formattables/inclusion_directive_configuration.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/formattables/locator.hpp"
@@ -71,14 +71,14 @@ namespace formattables {
 class inclusion_expander {
 private:
     struct formattater_field_definitions {
-        dynamic::field_definition inclusion_directive;
-        dynamic::field_definition inclusion_required;
+        annotations::field_definition inclusion_directive;
+        annotations::field_definition inclusion_required;
     };
     friend std::ostream& operator<<(std::ostream& s,
         const formattater_field_definitions& v);
 
     struct field_definitions {
-        dynamic::field_definition inclusion_required;
+        annotations::field_definition inclusion_required;
         std::unordered_map<std::string, formattater_field_definitions>
         formattaters_field_definitions;
     };
@@ -86,15 +86,15 @@ private:
         const field_definitions& v);
 
 
-    field_definitions make_field_definitions(const dynamic::repository& drp,
+    field_definitions make_field_definitions(const annotations::repository& drp,
         const formatters::container& fc) const;
 
     bool make_top_level_inclusion_required(const field_definitions& fds,
-        const dynamic::object& o) const;
+        const annotations::object& o) const;
 
     inclusion_directive_configuration make_inclusion_directive_configuration(
         const field_definitions& fds,const std::string& formatter_name,
-        const dynamic::object& o) const;
+        const annotations::object& o) const;
 
 private:
     typedef std::forward_list<
@@ -144,8 +144,8 @@ private:
         std::unordered_map<std::string, formattable>& formattables) const;
 
 public:
-    void expand(const dynamic::repository& drp, const formatters::container& fc,
-        const locator& l, model& fm) const;
+    void expand(const annotations::repository& drp,
+        const formatters::container& fc, const locator& l, model& fm) const;
 };
 
 } } } }

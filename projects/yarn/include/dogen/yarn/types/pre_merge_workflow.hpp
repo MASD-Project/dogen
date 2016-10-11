@@ -24,7 +24,7 @@
 #pragma once
 #endif
 
-#include "dogen/dynamic/types/repository.hpp"
+#include "dogen/annotations/types/repository.hpp"
 #include "dogen/options/types/input_options.hpp"
 #include "dogen/yarn/types/descriptor.hpp"
 #include "dogen/yarn/types/frontend_registrar.hpp"
@@ -57,35 +57,35 @@ private:
     void expand_modules(intermediate_model& im) const;
 
     /**
-     * @brief Performs an expansion of all dynamic objects on the
+     * @brief Performs an expansion of all annotations objects on the
      * model.
      */
-    void expand_dynamic_objects(const dynamic::repository& drp,
+    void expand_annotations(const annotations::repository& drp,
         intermediate_model& im) const;
 
     /**
      * @brief Performs the expansion of the origin type.
      */
-    void expand_origin(const dynamic::repository& drp,
+    void expand_origin(const annotations::repository& drp,
         intermediate_model& im) const;
 
     /**
      * @brief Performs a type parameters expansion on the model.
      */
-    void expand_type_parameters(const dynamic::repository& drp,
+    void expand_type_parameters(const annotations::repository& drp,
         intermediate_model& im) const;
 
     /**
      * @brief Expand all parts of the model which require parsing.
      */
-    void expand_parsing(const dynamic::repository& drp,
+    void expand_parsing(const annotations::repository& drp,
         intermediate_model& im) const;
 
 public:
     /**
      * @brief Executes the workflow.
      */
-    std::list<intermediate_model> execute(const dynamic::repository& drp,
+    std::list<intermediate_model> execute(const annotations::repository& drp,
         const std::list<boost::filesystem::path>& dirs,
         const options::input_options& io,
         frontend_registrar& rg) const;

@@ -29,9 +29,9 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/yarn/serialization/name_ser.hpp"
-#include "dogen/dynamic/serialization/object_ser.hpp"
 #include "dogen/yarn/serialization/attribute_ser.hpp"
 #include "dogen/yarn/serialization/name_tree_ser.hpp"
+#include "dogen/annotations/serialization/object_ser.hpp"
 
 namespace boost {
 namespace serialization {
@@ -41,7 +41,7 @@ void save(Archive& ar,
     const dogen::yarn::attribute& v,
     const unsigned int /*version*/) {
     ar << make_nvp("documentation", v.documentation_);
-    ar << make_nvp("extensions", v.extensions_);
+    ar << make_nvp("annotation", v.annotation_);
     ar << make_nvp("name", v.name_);
     ar << make_nvp("unparsed_type", v.unparsed_type_);
     ar << make_nvp("parsed_type", v.parsed_type_);
@@ -54,7 +54,7 @@ void load(Archive& ar,
     dogen::yarn::attribute& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("documentation", v.documentation_);
-    ar >> make_nvp("extensions", v.extensions_);
+    ar >> make_nvp("annotation", v.annotation_);
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("unparsed_type", v.unparsed_type_);
     ar >> make_nvp("parsed_type", v.parsed_type_);

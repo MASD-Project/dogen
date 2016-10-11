@@ -52,7 +52,7 @@ public:
 public:
     visitor(
         const std::string& documentation,
-        const dogen::dynamic::object& extensions,
+        const dogen::annotations::object& annotation,
         const dogen::yarn::name& name,
         const dogen::yarn::generation_types generation_type,
         const dogen::yarn::origin_types origin_type,

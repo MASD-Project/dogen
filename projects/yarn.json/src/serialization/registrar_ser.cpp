@@ -27,8 +27,8 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/yarn/serialization/registrar_ser.hpp"
-#include "dogen/dynamic/serialization/registrar_ser.hpp"
 #include "dogen/yarn.json/serialization/registrar_ser.hpp"
+#include "dogen/annotations/serialization/registrar_ser.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -36,7 +36,7 @@ namespace json {
 
 template<typename Archive>
 void register_types(Archive& ar) {
-    dogen::dynamic::register_types(ar);
+    dogen::annotations::register_types(ar);
     dogen::yarn::register_types(ar);
 }
 

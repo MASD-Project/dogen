@@ -31,9 +31,9 @@
 #include <unordered_set>
 #include <boost/optional.hpp>
 #include "dogen/yarn/types/name.hpp"
-#include "dogen/dynamic/types/object.hpp"
 #include "dogen/yarn/types/stereotypes.hpp"
 #include "dogen/yarn/types/origin_types.hpp"
+#include "dogen/annotations/types/object.hpp"
 #include "dogen/yarn/hash/stereotypes_hash.hpp"
 #include "dogen/yarn/types/generation_types.hpp"
 #include "dogen/yarn/types/element_visitor_fwd.hpp"
@@ -64,7 +64,7 @@ public:
 public:
     element(
         const std::string& documentation,
-        const dogen::dynamic::object& extensions,
+        const dogen::annotations::object& annotation,
         const dogen::yarn::name& name,
         const dogen::yarn::generation_types generation_type,
         const dogen::yarn::origin_types origin_type,
@@ -105,13 +105,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Dynamic extensions for this element.
+     * @brief Annotation for this element.
      */
     /**@{*/
-    const dogen::dynamic::object& extensions() const;
-    dogen::dynamic::object& extensions();
-    void extensions(const dogen::dynamic::object& v);
-    void extensions(const dogen::dynamic::object&& v);
+    const dogen::annotations::object& annotation() const;
+    dogen::annotations::object& annotation();
+    void annotation(const dogen::annotations::object& v);
+    void annotation(const dogen::annotations::object&& v);
     /**@}*/
 
     /**
@@ -181,7 +181,7 @@ protected:
 
 private:
     std::string documentation_;
-    dogen::dynamic::object extensions_;
+    dogen::annotations::object annotation_;
     dogen::yarn::name name_;
     dogen::yarn::generation_types generation_type_;
     dogen::yarn::origin_types origin_type_;

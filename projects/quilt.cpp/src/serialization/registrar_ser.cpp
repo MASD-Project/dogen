@@ -27,10 +27,10 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/yarn/serialization/registrar_ser.hpp"
-#include "dogen/dynamic/serialization/registrar_ser.hpp"
 #include "dogen/options/serialization/registrar_ser.hpp"
 #include "dogen/quilt.cpp/serialization/registrar_ser.hpp"
 #include "dogen/formatters/serialization/registrar_ser.hpp"
+#include "dogen/annotations/serialization/registrar_ser.hpp"
 #include "dogen/quilt.cpp/serialization/fabric/registrar_ser.hpp"
 #include "dogen/quilt.cpp/serialization/fabric/cmakelists_ser.hpp"
 #include "dogen/quilt.cpp/serialization/fabric/odb_options_ser.hpp"
@@ -45,7 +45,7 @@ template<typename Archive>
 void register_types(Archive& ar) {
     dogen::options::register_types(ar);
     dogen::formatters::register_types(ar);
-    dogen::dynamic::register_types(ar);
+    dogen::annotations::register_types(ar);
     dogen::yarn::register_types(ar);
 
     ar.template register_type<dogen::quilt::cpp::fabric::cmakelists>();

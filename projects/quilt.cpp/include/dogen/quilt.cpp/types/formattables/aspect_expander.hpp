@@ -28,9 +28,9 @@
 #include <list>
 #include <string>
 #include <unordered_map>
-#include "dogen/dynamic/types/object.hpp"
-#include "dogen/dynamic/types/repository.hpp"
-#include "dogen/dynamic/types/field_definition.hpp"
+#include "dogen/annotations/types/object.hpp"
+#include "dogen/annotations/types/repository.hpp"
+#include "dogen/annotations/types/field_definition.hpp"
 #include "dogen/yarn/types/name_tree.hpp"
 #include "dogen/yarn/types/attribute.hpp"
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
@@ -45,26 +45,26 @@ namespace formattables {
 class aspect_expander {
 private:
     struct field_definitions {
-        dynamic::field_definition requires_manual_default_constructor;
-        dynamic::field_definition requires_manual_move_constructor;
-        dynamic::field_definition requires_stream_manipulators;
+        annotations::field_definition requires_manual_default_constructor;
+        annotations::field_definition requires_manual_move_constructor;
+        annotations::field_definition requires_stream_manipulators;
     };
 
     friend std::ostream& operator<<(std::ostream& s,
         const field_definitions& v);
 
     field_definitions
-    make_field_definitions(const dynamic::repository& drp) const;
+    make_field_definitions(const annotations::repository& drp) const;
 
     boost::optional<aspect_properties> make_aspect_properties(
-        const field_definitions& fds, const dynamic::object& o) const;
+        const field_definitions& fds, const annotations::object& o) const;
 
 private:
     typedef std::unordered_map<std::string, aspect_properties>
     aspect_properties_type;
 
     aspect_properties_type
-    obtain_aspect_properties(const dynamic::repository& drp,
+    obtain_aspect_properties(const annotations::repository& drp,
         const std::unordered_map<std::string, formattable>& formattables) const;
 
 private:
@@ -80,7 +80,7 @@ private:
         std::unordered_map<std::string, formattable>& formattables) const;
 
 public:
-    void expand(const dynamic::repository& drp, model& fm) const;
+    void expand(const annotations::repository& drp, model& fm) const;
 };
 
 } } } }

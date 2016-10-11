@@ -58,9 +58,9 @@ std::string class_implementation_formatter::id() const {
     return r;
 }
 
-dynamic::ownership_hierarchy
+annotations::ownership_hierarchy
 class_implementation_formatter::ownership_hierarchy() const {
-    static dynamic::ownership_hierarchy
+    static annotations::ownership_hierarchy
         r(formatters::traits::model_name(), traits::facet_name(),
             class_implementation_formatter::static_formatter_name());
     return r;

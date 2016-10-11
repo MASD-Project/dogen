@@ -68,13 +68,13 @@
         <dia:point val="-36,14"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-36.05,13.95;-20.82,20.05"/>
+        <dia:rectangle val="-36.05,13.95;-20.435,20.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-36,14"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="15.130000000000001"/>
+        <dia:real val="15.515000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.0000000000000009"/>
@@ -83,7 +83,7 @@
         <dia:string>#attribute#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#Documentable, Extensible, Nameable#</dia:string>
+        <dia:string>#Documentable, Annotatable, Nameable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Represents an attribute in an object.#</dia:string>
@@ -698,17 +698,17 @@ supported languages.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-28.435,14"/>
+        <dia:point val="-28.2425,14"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-29.185,6.55;-17.36,14.8"/>
+        <dia:rectangle val="-28.9925,6.55;-17.36,14.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-28.435,14"/>
-        <dia:point val="-28.435,9"/>
+        <dia:point val="-28.2425,14"/>
+        <dia:point val="-28.2425,9"/>
         <dia:point val="-17.56,9"/>
         <dia:point val="-17.56,6.6"/>
       </dia:attribute>
@@ -3320,19 +3320,19 @@ for Java, etc.#</dia:string>
         <dia:point val="-112,-1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-112.05,-1.05;-100.67,2.65"/>
+        <dia:rectangle val="-112.05,-1.05;-99.13,2.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-112,-1"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="11.279999999999999"/>
+        <dia:real val="12.82"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#Extensible#</dia:string>
+        <dia:string>#Annotatable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#concept#</dia:string>
@@ -3421,16 +3421,16 @@ for Java, etc.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#extensions#</dia:string>
+            <dia:string>#annotation#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#dynamic::object#</dia:string>
+            <dia:string>#annotations::object#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Dynamic extensions for this element.#</dia:string>
+            <dia:string>#Annotation for this element.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -3626,17 +3626,17 @@ for Java, etc.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O31">
       <dia:attribute name="obj_pos">
-        <dia:point val="-106.36,2.6"/>
+        <dia:point val="-105.59,2.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-109.682,2.55;-105.51,14.05"/>
+        <dia:rectangle val="-109.682,2.55;-104.74,14.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-106.36,2.6"/>
-        <dia:point val="-106.36,9"/>
+        <dia:point val="-105.59,2.6"/>
+        <dia:point val="-105.59,9"/>
         <dia:point val="-109.632,9"/>
         <dia:point val="-109.632,14"/>
       </dia:attribute>
@@ -4757,7 +4757,7 @@ decided instead to use the word object.#</dia:string>
         <dia:point val="-55.66,30"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-56.41,19.95;-28.235,30.8"/>
+        <dia:rectangle val="-56.41,19.95;-28.0425,30.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4765,8 +4765,8 @@ decided instead to use the word object.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-55.66,30"/>
         <dia:point val="-55.66,24"/>
-        <dia:point val="-28.435,24"/>
-        <dia:point val="-28.435,20"/>
+        <dia:point val="-28.2425,24"/>
+        <dia:point val="-28.2425,20"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -10371,7 +10371,7 @@ Temporary data structure used to build trees of names.#</dia:string>
                 <dia:string>#drp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const dynamic::repository&amp;#</dia:string>
+                <dia:string>#const annotations::repository&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -12316,7 +12316,7 @@ are not modules, such as attributes, inner classes, etc.#</dia:string>
                 <dia:string>#drp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const dynamic::repository&amp;#</dia:string>
+                <dia:string>#const annotations::repository&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -13388,7 +13388,7 @@ meta-types (concepts) and non-types (modules and backend specific entities).#</d
                 <dia:string>#drp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const dynamic::repository&amp;#</dia:string>
+                <dia:string>#const annotations::repository&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -21128,13 +21128,13 @@ space.#</dia:string>
         <dia:point val="70,90"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="69.95,89.95;98.27,94.45"/>
+        <dia:rectangle val="69.95,89.95;99.81,94.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="70,90"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="28.219999999999999"/>
+        <dia:real val="29.760000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -21278,7 +21278,7 @@ space.#</dia:string>
             <dia:string>#raw_aggregates#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, dynamic::raw_aggregate&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, annotations::raw_aggregate&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -21344,7 +21344,7 @@ space.#</dia:string>
         <dia:point val="69.4575,79.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="68.7075,78.45;84.31,90.7499"/>
+        <dia:rectangle val="68.7075,78.45;84.9786,90.7499"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -21352,8 +21352,8 @@ space.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="69.4575,79.2"/>
         <dia:point val="69.4575,86"/>
-        <dia:point val="84.11,86"/>
-        <dia:point val="84.11,89.9499"/>
+        <dia:point val="84.6006,86"/>
+        <dia:point val="84.7786,89.9499"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -23328,7 +23328,7 @@ space.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#dynamic_expander#</dia:string>
+        <dia:string>#annotations_expander#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>

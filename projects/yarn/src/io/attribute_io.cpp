@@ -22,9 +22,9 @@
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen/yarn/io/name_io.hpp"
-#include "dogen/dynamic/io/object_io.hpp"
 #include "dogen/yarn/io/attribute_io.hpp"
 #include "dogen/yarn/io/name_tree_io.hpp"
+#include "dogen/annotations/io/object_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -46,7 +46,7 @@ std::ostream& operator<<(std::ostream& s, const attribute& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::attribute\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
-      << "\"extensions\": " << v.extensions() << ", "
+      << "\"annotation\": " << v.annotation() << ", "
       << "\"name\": " << v.name() << ", "
       << "\"unparsed_type\": " << "\"" << tidy_up_string(v.unparsed_type()) << "\"" << ", "
       << "\"parsed_type\": " << v.parsed_type() << ", "

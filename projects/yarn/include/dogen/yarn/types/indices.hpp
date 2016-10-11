@@ -29,7 +29,7 @@
 #include <algorithm>
 #include <unordered_map>
 #include <unordered_set>
-#include "dogen/dynamic/types/raw_aggregate.hpp"
+#include "dogen/annotations/types/raw_aggregate.hpp"
 #include "dogen/yarn/serialization/indices_fwd_ser.hpp"
 
 namespace dogen {
@@ -46,7 +46,7 @@ public:
     indices(
         const std::unordered_set<std::string>& objects_always_in_heap,
         const std::unordered_set<std::string>& elements_referable_by_attributes,
-        const std::unordered_map<std::string, dogen::dynamic::raw_aggregate>& raw_aggregates);
+        const std::unordered_map<std::string, dogen::annotations::raw_aggregate>& raw_aggregates);
 
 private:
     template<typename Archive>
@@ -66,10 +66,10 @@ public:
     void elements_referable_by_attributes(const std::unordered_set<std::string>& v);
     void elements_referable_by_attributes(const std::unordered_set<std::string>&& v);
 
-    const std::unordered_map<std::string, dogen::dynamic::raw_aggregate>& raw_aggregates() const;
-    std::unordered_map<std::string, dogen::dynamic::raw_aggregate>& raw_aggregates();
-    void raw_aggregates(const std::unordered_map<std::string, dogen::dynamic::raw_aggregate>& v);
-    void raw_aggregates(const std::unordered_map<std::string, dogen::dynamic::raw_aggregate>&& v);
+    const std::unordered_map<std::string, dogen::annotations::raw_aggregate>& raw_aggregates() const;
+    std::unordered_map<std::string, dogen::annotations::raw_aggregate>& raw_aggregates();
+    void raw_aggregates(const std::unordered_map<std::string, dogen::annotations::raw_aggregate>& v);
+    void raw_aggregates(const std::unordered_map<std::string, dogen::annotations::raw_aggregate>&& v);
 
 public:
     bool operator==(const indices& rhs) const;
@@ -84,7 +84,7 @@ public:
 private:
     std::unordered_set<std::string> objects_always_in_heap_;
     std::unordered_set<std::string> elements_referable_by_attributes_;
-    std::unordered_map<std::string, dogen::dynamic::raw_aggregate> raw_aggregates_;
+    std::unordered_map<std::string, dogen::annotations::raw_aggregate> raw_aggregates_;
 };
 
 } }

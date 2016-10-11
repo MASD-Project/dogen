@@ -26,7 +26,7 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/exception/utility_exception.hpp"
-#include "dogen/dynamic/types/value_factory.hpp"
+#include "dogen/annotations/types/value_factory.hpp"
 #include "dogen/yarn/types/name_builder.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/yarn/types/object.hpp"
@@ -315,8 +315,8 @@ void insert_object(dogen::yarn::intermediate_model& m,
     m.objects().insert(std::make_pair(o.name().id(), o));
 }
 
-void add_test_dynamic_extensions(dogen::dynamic::object& o) {
-    using namespace dogen::dynamic;
+void add_test_annotationss(dogen::annotations::object& o) {
+    using namespace dogen::annotations;
 
     value_factory f;
     o.fields().insert(std::make_pair(licence_name_key,
@@ -399,8 +399,8 @@ associations_indexed(const bool v) {
 
 mock_intermediate_model_factory::
 mock_intermediate_model_factory(const flags& f,
-    dynamic_extension_function_type fn) : flags_(f),
-      dynamic_extension_function_(fn ? fn : add_test_dynamic_extensions) { }
+    annotation_function_type fn) : flags_(f),
+      annotation_function_(fn ? fn : add_test_annotationss) { }
 
 std::string mock_intermediate_model_factory::
 simple_model_name(const unsigned int n) const {
@@ -492,7 +492,7 @@ object mock_intermediate_model_factory::make_value_object(const unsigned int i,
     r.object_type(dogen::yarn::object_types::user_defined_value_object);
 
     if (flags_.tagged())
-        dynamic_extension_function_(r.extensions());
+        annotation_function_(r.annotation());
 
     return r;
 }
@@ -514,7 +514,7 @@ concept mock_intermediate_model_factory::make_concept(const unsigned int i,
     r.origin_type(ot);
 
     if (flags_.tagged())
-        dynamic_extension_function_(r.extensions());
+        annotation_function_(r.annotation());
 
     return r;
 }
@@ -550,7 +550,7 @@ make_enumeration(const unsigned int i, const name& model_name,
     r.enumerators().push_back(lambda(1));
 
     if (flags_.tagged())
-        dynamic_extension_function_(r.extensions());
+        annotation_function_(r.annotation());
 
     return r;
 }
@@ -572,7 +572,7 @@ exception mock_intermediate_model_factory::make_exception(const unsigned int i,
     r.origin_type(ot);
 
     if (flags_.tagged())
-        dynamic_extension_function_(r.extensions());
+        annotation_function_(r.annotation());
 
     return r;
 }
@@ -585,7 +585,7 @@ module mock_intermediate_model_factory::make_module(const yarn::name& n,
     r.origin_type(ot);
 
     if (flags_.tagged())
-        dynamic_extension_function_(r.extensions());
+        annotation_function_(r.annotation());
 
     return r;
 }

@@ -28,7 +28,7 @@
 #include <string>
 #include <typeindex>
 #include <boost/filesystem/path.hpp>
-#include "dogen/dynamic/types/ownership_hierarchy.hpp"
+#include "dogen/annotations/types/ownership_hierarchy.hpp"
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/quilt.cpp/types/formattables/locator.hpp"
@@ -57,7 +57,7 @@ public:
     /**
      * @brief Ownership hierarchy for this formatter
      */
-    virtual dynamic::ownership_hierarchy ownership_hierarchy() const = 0;
+    virtual annotations::ownership_hierarchy ownership_hierarchy() const = 0;
 
     /**
      * @brief Returns the type index of the element supported by this

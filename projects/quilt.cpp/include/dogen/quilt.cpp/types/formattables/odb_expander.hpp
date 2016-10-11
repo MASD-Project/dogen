@@ -27,8 +27,8 @@
 
 #include <list>
 #include <boost/optional.hpp>
-#include "dogen/dynamic/types/repository.hpp"
-#include "dogen/dynamic/types/field_definition.hpp"
+#include "dogen/annotations/types/repository.hpp"
+#include "dogen/annotations/types/field_definition.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/quilt.cpp/types/formattables/odb_properties.hpp"
 #include "dogen/quilt.cpp/types/formattables/model.hpp"
@@ -41,24 +41,24 @@ namespace formattables {
 class odb_expander {
 private:
     struct field_definitions {
-        dynamic::field_definition odb_pragma;
+        annotations::field_definition odb_pragma;
     };
 
     friend std::ostream& operator<<(std::ostream& s,
         const field_definitions& v);
 
     field_definitions
-    make_field_definitions(const dynamic::repository& drp) const;
+    make_field_definitions(const annotations::repository& drp) const;
 
     std::list<std::string> make_odb_pragmas(
-        const field_definitions& fds, const dynamic::object& o) const;
+        const field_definitions& fds, const annotations::object& o) const;
 
 private:
     boost::optional<odb_properties> compute_odb_configuration(
         const field_definitions& fds, const yarn::object& o) const;
 
 public:
-    void expand(const dynamic::repository& drp, model& fm) const;
+    void expand(const annotations::repository& drp, model& fm) const;
 };
 
 } } } }

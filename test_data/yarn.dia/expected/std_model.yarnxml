@@ -52,13 +52,13 @@
 			<second class_id="7" tracking_level="1" version="0" object_id="_0">
 				<element class_id="21" tracking_level="0" version="0">
 					<documentation></documentation>
-					<extensions class_id="22" tracking_level="0" version="0">
+					<annotation class_id="22" tracking_level="0" version="0">
 						<fields class_id="23" tracking_level="0" version="0">
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;std_model&gt;&lt;pkg1&gt;</id>
 						<simple>pkg1</simple>
@@ -112,13 +112,13 @@
 			<second object_id="_1">
 				<element>
 					<documentation></documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;std_model&gt;</id>
 						<simple>std_model</simple>
@@ -192,13 +192,13 @@
 			<second class_id="8" tracking_level="1" version="0" object_id="_2">
 				<element>
 					<documentation></documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;std_model&gt;&lt;primitives&gt;</id>
 						<simple>primitives</simple>
@@ -250,13 +250,13 @@
 					<item_version>0</item_version>
 					<item class_id="33" tracking_level="0" version="0">
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;primitives&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
@@ -330,13 +330,13 @@
 					</item>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;primitives&gt;&lt;prop_1&gt;</id>
 							<simple>prop_1</simple>
@@ -410,13 +410,13 @@
 					</item>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;primitives&gt;&lt;prop_2&gt;</id>
 							<simple>prop_2</simple>
@@ -490,13 +490,13 @@
 					</item>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;primitives&gt;&lt;prop_3&gt;</id>
 							<simple>prop_3</simple>
@@ -570,13 +570,13 @@
 					</item>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;primitives&gt;&lt;prop_4&gt;</id>
 							<simple>prop_4</simple>
@@ -650,13 +650,13 @@
 					</item>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;primitives&gt;&lt;prop_5&gt;</id>
 							<simple>prop_5</simple>
@@ -730,13 +730,13 @@
 					</item>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;primitives&gt;&lt;prop_6&gt;</id>
 							<simple>prop_6</simple>
@@ -810,13 +810,13 @@
 					</item>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;primitives&gt;&lt;prop_7&gt;</id>
 							<simple>prop_7</simple>
@@ -949,13 +949,13 @@
 			<second object_id="_3">
 				<element>
 					<documentation></documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;std_model&gt;&lt;pkg1&gt;&lt;class_c&gt;</id>
 						<simple>class_c</simple>
@@ -1008,13 +1008,13 @@
 					<item_version>0</item_version>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;pkg1&gt;&lt;class_c&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
@@ -1089,13 +1089,13 @@
 					</item>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;pkg1&gt;&lt;class_c&gt;&lt;prop_1&gt;</id>
 							<simple>prop_1</simple>
@@ -1229,13 +1229,13 @@
 			<second object_id="_4">
 				<element>
 					<documentation></documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;std_model&gt;&lt;base&gt;</id>
 						<simple>base</simple>
@@ -1287,13 +1287,13 @@
 					<item_version>0</item_version>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;base&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
@@ -1426,13 +1426,13 @@
 			<second object_id="_5">
 				<element>
 					<documentation></documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;std_model&gt;&lt;class_j&gt;</id>
 						<simple>class_j</simple>
@@ -1484,13 +1484,13 @@
 					<item_version>0</item_version>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_j&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
@@ -1564,13 +1564,13 @@
 					</item>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_j&gt;&lt;prop_1&gt;</id>
 							<simple>prop_1</simple>
@@ -1644,13 +1644,13 @@
 					</item>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_j&gt;&lt;prop_2&gt;</id>
 							<simple>prop_2</simple>
@@ -1783,13 +1783,13 @@
 			<second object_id="_6">
 				<element>
 					<documentation></documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;std_model&gt;&lt;class_b&gt;</id>
 						<simple>class_b</simple>
@@ -1841,13 +1841,13 @@
 					<item_version>0</item_version>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_b&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
@@ -1921,13 +1921,13 @@
 					</item>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_b&gt;&lt;prop_1&gt;</id>
 							<simple>prop_1</simple>
@@ -2001,13 +2001,13 @@
 					</item>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_b&gt;&lt;prop_2&gt;</id>
 							<simple>prop_2</simple>
@@ -2081,13 +2081,13 @@
 					</item>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_b&gt;&lt;prop_3&gt;</id>
 							<simple>prop_3</simple>
@@ -2161,13 +2161,13 @@
 					</item>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_b&gt;&lt;prop_4&gt;</id>
 							<simple>prop_4</simple>
@@ -2241,13 +2241,13 @@
 					</item>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_b&gt;&lt;prop_5&gt;</id>
 							<simple>prop_5</simple>
@@ -2380,13 +2380,13 @@
 			<second object_id="_7">
 				<element>
 					<documentation></documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;std_model&gt;&lt;class_d&gt;</id>
 						<simple>class_d</simple>
@@ -2438,13 +2438,13 @@
 					<item_version>0</item_version>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_d&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
@@ -2518,13 +2518,13 @@
 					</item>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_d&gt;&lt;prop_1&gt;</id>
 							<simple>prop_1</simple>
@@ -2598,13 +2598,13 @@
 					</item>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_d&gt;&lt;prop_2&gt;</id>
 							<simple>prop_2</simple>
@@ -2678,13 +2678,13 @@
 					</item>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_d&gt;&lt;prop_3&gt;</id>
 							<simple>prop_3</simple>
@@ -2758,13 +2758,13 @@
 					</item>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_d&gt;&lt;prop_4&gt;</id>
 							<simple>prop_4</simple>
@@ -2838,13 +2838,13 @@
 					</item>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_d&gt;&lt;prop_5&gt;</id>
 							<simple>prop_5</simple>
@@ -2977,13 +2977,13 @@
 			<second object_id="_8">
 				<element>
 					<documentation></documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;std_model&gt;&lt;class_a&gt;</id>
 						<simple>class_a</simple>
@@ -3035,13 +3035,13 @@
 					<item_version>0</item_version>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_a&gt;&lt;prop0&gt;</id>
 							<simple>prop0</simple>
@@ -3116,13 +3116,13 @@
 					<item>
 						<documentation>test inclusion duplicates
 </documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_a&gt;&lt;prop1&gt;</id>
 							<simple>prop1</simple>
@@ -3255,13 +3255,13 @@
 			<second object_id="_9">
 				<element>
 					<documentation></documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;std_model&gt;&lt;class_e&gt;</id>
 						<simple>class_e</simple>
@@ -3313,13 +3313,13 @@
 					<item_version>0</item_version>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_e&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
@@ -3393,13 +3393,13 @@
 					</item>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_e&gt;&lt;prop_1&gt;</id>
 							<simple>prop_1</simple>
@@ -3473,13 +3473,13 @@
 					</item>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_e&gt;&lt;prop_2&gt;</id>
 							<simple>prop_2</simple>
@@ -3553,13 +3553,13 @@
 					</item>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_e&gt;&lt;prop_3&gt;</id>
 							<simple>prop_3</simple>
@@ -3633,13 +3633,13 @@
 					</item>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_e&gt;&lt;prop_4&gt;</id>
 							<simple>prop_4</simple>
@@ -3713,13 +3713,13 @@
 					</item>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_e&gt;&lt;prop_5&gt;</id>
 							<simple>prop_5</simple>
@@ -3852,13 +3852,13 @@
 			<second object_id="_10">
 				<element>
 					<documentation></documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;std_model&gt;&lt;class_h&gt;</id>
 						<simple>class_h</simple>
@@ -3910,13 +3910,13 @@
 					<item_version>0</item_version>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_h&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
@@ -3990,13 +3990,13 @@
 					</item>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_h&gt;&lt;prop_1&gt;</id>
 							<simple>prop_1</simple>
@@ -4129,13 +4129,13 @@
 			<second object_id="_11">
 				<element>
 					<documentation></documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;std_model&gt;&lt;class_f&gt;</id>
 						<simple>class_f</simple>
@@ -4187,13 +4187,13 @@
 					<item_version>0</item_version>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_f&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
@@ -4267,13 +4267,13 @@
 					</item>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_f&gt;&lt;prop_1&gt;</id>
 							<simple>prop_1</simple>
@@ -4347,13 +4347,13 @@
 					</item>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_f&gt;&lt;prop_2&gt;</id>
 							<simple>prop_2</simple>
@@ -4486,13 +4486,13 @@
 			<second object_id="_12">
 				<element>
 					<documentation></documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;std_model&gt;&lt;some_service&gt;</id>
 						<simple>some_service</simple>
@@ -4544,13 +4544,13 @@
 					<item_version>0</item_version>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;some_service&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
@@ -4624,13 +4624,13 @@
 					</item>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;some_service&gt;&lt;prop_1&gt;</id>
 							<simple>prop_1</simple>
@@ -4704,13 +4704,13 @@
 					</item>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;some_service&gt;&lt;prop_2&gt;</id>
 							<simple>prop_2</simple>
@@ -4784,13 +4784,13 @@
 					</item>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;some_service&gt;&lt;prop_3&gt;</id>
 							<simple>prop_3</simple>
@@ -4923,13 +4923,13 @@
 			<second object_id="_13">
 				<element>
 					<documentation></documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;std_model&gt;&lt;class_g&gt;</id>
 						<simple>class_g</simple>
@@ -4981,13 +4981,13 @@
 					<item_version>0</item_version>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_g&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
@@ -5061,13 +5061,13 @@
 					</item>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_g&gt;&lt;prop_1&gt;</id>
 							<simple>prop_1</simple>
@@ -5141,13 +5141,13 @@
 					</item>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_g&gt;&lt;prop_2&gt;</id>
 							<simple>prop_2</simple>
@@ -5280,13 +5280,13 @@
 			<second object_id="_14">
 				<element>
 					<documentation></documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;std_model&gt;&lt;derived&gt;</id>
 						<simple>derived</simple>
@@ -5338,13 +5338,13 @@
 					<item_version>0</item_version>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;derived&gt;&lt;prop_1&gt;</id>
 							<simple>prop_1</simple>
@@ -5569,13 +5569,13 @@
 	<root_module object_id="_15">
 		<element>
 			<documentation></documentation>
-			<extensions>
+			<annotation>
 				<fields>
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</fields>
-			</extensions>
+			</annotation>
 			<name>
 				<id></id>
 				<simple></simple>

@@ -32,7 +32,7 @@
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include <boost/iostreams/filtering_stream.hpp>
-#include "dogen/dynamic/types/ownership_hierarchy.hpp"
+#include "dogen/annotations/types/ownership_hierarchy.hpp"
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/object.hpp"
@@ -52,7 +52,7 @@ namespace formatters {
  */
 class assistant final {
 public:
-    assistant(const context& ctx, const dynamic::ownership_hierarchy& oh,
+    assistant(const context& ctx, const annotations::ownership_hierarchy& oh,
         const bool requires_header_guard, const std::string& id);
 
 private:
@@ -331,7 +331,7 @@ private:
     boost::iostreams::filtering_ostream filtering_stream_;
     const context& context_;
     formattables::formatter_properties formatter_properties_;
-    const dynamic::ownership_hierarchy ownership_hierarchy_;
+    const annotations::ownership_hierarchy ownership_hierarchy_;
     const bool requires_header_guard_;
 };
 

@@ -41,9 +41,9 @@ std::string registrar_header_formatter::id() const {
     return r;
 }
 
-dynamic::ownership_hierarchy
+annotations::ownership_hierarchy
 registrar_header_formatter::ownership_hierarchy() const {
-    static dynamic::ownership_hierarchy
+    static annotations::ownership_hierarchy
         r(formatters::traits::model_name(), traits::facet_name(),
             registrar_header_formatter::static_formatter_name());
     return r;

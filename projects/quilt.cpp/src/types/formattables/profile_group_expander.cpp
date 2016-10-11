@@ -21,9 +21,9 @@
 #include <unordered_set>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/dynamic/types/field_selector.hpp"
-#include "dogen/dynamic/types/repository_selector.hpp"
-#include "dogen/dynamic/io/field_definition_io.hpp"
+#include "dogen/annotations/types/field_selector.hpp"
+#include "dogen/annotations/types/repository_selector.hpp"
+#include "dogen/annotations/io/field_definition_io.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formattables/expansion_error.hpp"
@@ -72,11 +72,11 @@ inline std::ostream& operator<<(std::ostream& s,
 
 profile_group_expander::field_definitions
 profile_group_expander::make_field_definitions(
-    const dynamic::repository& drp) const {
+    const annotations::repository& drp) const {
     BOOST_LOG_SEV(lg, debug) << "Creating field definitions.";
 
     field_definitions r;
-    const dynamic::repository_selector s(drp);
+    const annotations::repository_selector s(drp);
     const auto& mn(formatters::traits::model_name());
     r.profile = s.select_field_by_name(mn, "profile");
 
@@ -85,9 +85,9 @@ profile_group_expander::make_field_definitions(
 }
 
 std::string profile_group_expander::obtain_profile_configuration(
-    const field_definitions& fd, const dynamic::object& root_object) const {
+    const field_definitions& fd, const annotations::object& root_object) const {
     BOOST_LOG_SEV(lg, debug) << "Reading profile configuration.";
-    const dynamic::field_selector fs(root_object);
+    const annotations::field_selector fs(root_object);
     const auto r(fs.get_text_content_or_default(fd.profile));
     BOOST_LOG_SEV(lg, debug) << "Profile configuration: " << r;
     return r;
@@ -185,8 +185,8 @@ profile_group_expander::merge(const profile_group_types& original) const {
     return mg.merge(original);
 }
 
-void profile_group_expander::populate_model(const dynamic::repository& drp,
-    const dynamic::object& root_object, const profile_group_types& pgs,
+void profile_group_expander::populate_model(const annotations::repository& drp,
+    const annotations::object& root_object, const profile_group_types& pgs,
     model& fm) const {
     BOOST_LOG_SEV(lg, debug) << "Populating model with profile groups.";
 
@@ -283,7 +283,7 @@ void profile_group_expander::populate_model(const dynamic::repository& drp,
          * from the global profile configuration; if they are the
          * same, there is no point in setting it up.
          */
-        const auto local_cfg(obtain_profile_configuration(fd,e.extensions()));
+        const auto local_cfg(obtain_profile_configuration(fd,e.annotation()));
         if (local_cfg == global_cfg) {
             BOOST_LOG_SEV(lg, debug) << "Local profile group configuration "
                                      << "is same as global: " << local_cfg;
@@ -322,7 +322,7 @@ void profile_group_expander::populate_model(const dynamic::repository& drp,
 
 void profile_group_expander::expand(
     const std::forward_list<boost::filesystem::path>& data_directories,
-    const dynamic::repository& drp, const dynamic::object& root_object,
+    const annotations::repository& drp, const annotations::object& root_object,
     const formatters::container& fc, model& fm) const {
 
     const auto original(hydrate(data_directories));

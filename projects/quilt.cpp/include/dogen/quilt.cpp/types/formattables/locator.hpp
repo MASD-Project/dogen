@@ -30,9 +30,9 @@
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
-#include "dogen/dynamic/types/repository.hpp"
-#include "dogen/dynamic/types/object.hpp"
-#include "dogen/dynamic/types/field_definition.hpp"
+#include "dogen/annotations/types/repository.hpp"
+#include "dogen/annotations/types/object.hpp"
+#include "dogen/annotations/types/field_definition.hpp"
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/formattables/locator_configuration.hpp"
@@ -49,20 +49,20 @@ class locator {
 public:
     locator(
         const boost::filesystem::path& project_directory_path,
-        const dynamic::repository& drp, const formatters::container& fc,
-        const dynamic::object& root_object, const yarn::name& model_name,
+        const annotations::repository& drp, const formatters::container& fc,
+        const annotations::object& root_object, const yarn::name& model_name,
         const std::unordered_set<std::string>& module_ids);
 
 private:
     struct facet_field_definitions {
-        dynamic::field_definition directory;
-        dynamic::field_definition postfix;
+        annotations::field_definition directory;
+        annotations::field_definition postfix;
     };
 
     struct formatter_field_definitions {
-        boost::optional<dynamic::field_definition> facet_directory;
-        boost::optional<dynamic::field_definition> facet_postfix;
-        dynamic::field_definition formatter_postfix;
+        boost::optional<annotations::field_definition> facet_directory;
+        boost::optional<annotations::field_definition> facet_postfix;
+        annotations::field_definition formatter_postfix;
     };
 
     struct field_definitions {
@@ -70,21 +70,21 @@ private:
         facets_field_definitions;
         std::unordered_map<std::string, formatter_field_definitions>
         formatters_field_definitions;
-        dynamic::field_definition header_file_extension;
-        dynamic::field_definition implementation_file_extension;
-        dynamic::field_definition include_directory_name;
-        dynamic::field_definition source_directory_name;
-        dynamic::field_definition disable_facet_directories;
+        annotations::field_definition header_file_extension;
+        annotations::field_definition implementation_file_extension;
+        annotations::field_definition include_directory_name;
+        annotations::field_definition source_directory_name;
+        annotations::field_definition disable_facet_directories;
     };
 
-    field_definitions make_field_definitions(const dynamic::repository& drp,
+    field_definitions make_field_definitions(const annotations::repository& drp,
         const formatters::container& fc) const;
 
     locator_configuration make_configuration(const field_definitions& fds,
-        const dynamic::object& o) const;
+        const annotations::object& o) const;
 
-    locator_configuration make_configuration(const dynamic::repository& drp,
-        const formatters::container& fc, const dynamic::object& o);
+    locator_configuration make_configuration(const annotations::repository& drp,
+        const formatters::container& fc, const annotations::object& o);
 
 private:
     /**

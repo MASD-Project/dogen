@@ -21,7 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/pair_io.hpp"
-#include "dogen/dynamic/io/raw_aggregate_io.hpp"
+#include "dogen/annotations/io/raw_aggregate_io.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/yarn.dia/types/building_error.hpp"
 #include "dogen/yarn.dia/types/repository_selector.hpp"
@@ -116,7 +116,7 @@ yarn::intermediate_model builder::setup_model(const std::string& model_name,
 
 void builder::
 update_raw_aggregate(const yarn::name& n, const profiled_object& po) {
-    dynamic::raw_aggregate ra;
+    annotations::raw_aggregate ra;
     auto& raw_aggregates(repository_.model().indices().raw_aggregates());
     ra.element(po.object().comment().key_value_pairs());
     for (const auto& attr : po.object().attributes()) {

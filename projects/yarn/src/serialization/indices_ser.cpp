@@ -31,7 +31,7 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/yarn/serialization/indices_ser.hpp"
-#include "dogen/dynamic/serialization/raw_aggregate_ser.hpp"
+#include "dogen/annotations/serialization/raw_aggregate_ser.hpp"
 
 namespace boost {
 namespace serialization {

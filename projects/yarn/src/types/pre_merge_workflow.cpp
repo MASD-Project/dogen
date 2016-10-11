@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/yarn/types/modules_expander.hpp"
-#include "dogen/yarn/types/dynamic_expander.hpp"
+#include "dogen/yarn/types/annotations_expander.hpp"
 #include "dogen/yarn/types/origin_expander.hpp"
 #include "dogen/yarn/types/parsing_expander.hpp"
 #include "dogen/yarn/types/type_parameters_expander.hpp"
@@ -49,32 +49,32 @@ void pre_merge_workflow::expand_modules(intermediate_model& im) const {
     ex.expand(im);
 }
 
-void pre_merge_workflow::expand_dynamic_objects(const dynamic::repository& drp,
+void pre_merge_workflow::expand_annotations(const annotations::repository& drp,
     intermediate_model& im) const {
-    dynamic_expander ex;
+    annotations_expander ex;
     ex.expand(drp, im);
 }
 
-void pre_merge_workflow::expand_origin(const dynamic::repository& drp,
+void pre_merge_workflow::expand_origin(const annotations::repository& drp,
     intermediate_model& im) const {
     origin_expander ex(drp);
     ex.expand(im);
 }
 
-void pre_merge_workflow::expand_type_parameters(const dynamic::repository& drp,
+void pre_merge_workflow::expand_type_parameters(const annotations::repository& drp,
     intermediate_model& im) const {
     type_parameters_expander ex;
     ex.expand(drp, im);
 }
 
 void pre_merge_workflow::
-expand_parsing(const dynamic::repository& drp, intermediate_model& im) const {
+expand_parsing(const annotations::repository& drp, intermediate_model& im) const {
     parsing_expander ex;
     ex.expand(drp, im);
 }
 
 std::list<intermediate_model>
-pre_merge_workflow::execute(const dynamic::repository& drp,
+pre_merge_workflow::execute(const annotations::repository& drp,
     const std::list<boost::filesystem::path>& dirs,
     const options::input_options& io,
     frontend_registrar& rg) const {
@@ -83,11 +83,11 @@ pre_merge_workflow::execute(const dynamic::repository& drp,
     auto r(obtain_intermediate_models(rg, d));
     for (auto& im: r) {
         /*
-         * We must expand dynamic objects first to ensure the root
-         * module is populated with dynamic properties before being
+         * We must expand annotations first to ensure the root module
+         * is populated with annotations properties before being
          * copied over.
          */
-        expand_dynamic_objects(drp, im);
+        expand_annotations(drp, im);
         expand_modules(im);
         expand_origin(drp, im);
         expand_type_parameters(drp, im);

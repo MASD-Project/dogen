@@ -36,12 +36,12 @@
 #include "dogen/yarn/serialization/concept_ser.hpp"
 #include "dogen/yarn/serialization/element_ser.hpp"
 #include "dogen/yarn/serialization/visitor_ser.hpp"
-#include "dogen/dynamic/serialization/object_ser.hpp"
 #include "dogen/yarn/serialization/exception_ser.hpp"
 #include "dogen/yarn/serialization/primitive_ser.hpp"
 #include "dogen/yarn/serialization/enumeration_ser.hpp"
 #include "dogen/yarn/serialization/stereotypes_ser.hpp"
 #include "dogen/yarn/serialization/origin_types_ser.hpp"
+#include "dogen/annotations/serialization/object_ser.hpp"
 #include "dogen/yarn/serialization/generation_types_ser.hpp"
 
 BOOST_CLASS_TRACKING(
@@ -56,7 +56,7 @@ void save(Archive& ar,
     const dogen::yarn::element& v,
     const unsigned int /*version*/) {
     ar << make_nvp("documentation", v.documentation_);
-    ar << make_nvp("extensions", v.extensions_);
+    ar << make_nvp("annotation", v.annotation_);
     ar << make_nvp("name", v.name_);
     ar << make_nvp("generation_type", v.generation_type_);
     ar << make_nvp("origin_type", v.origin_type_);
@@ -71,7 +71,7 @@ void load(Archive& ar,
     dogen::yarn::element& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("documentation", v.documentation_);
-    ar >> make_nvp("extensions", v.extensions_);
+    ar >> make_nvp("annotation", v.annotation_);
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("generation_type", v.generation_type_);
     ar >> make_nvp("origin_type", v.origin_type_);

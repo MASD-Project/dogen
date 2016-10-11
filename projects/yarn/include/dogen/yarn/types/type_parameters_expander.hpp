@@ -25,9 +25,9 @@
 #pragma once
 #endif
 
-#include "dogen/dynamic/types/object.hpp"
-#include "dogen/dynamic/types/repository.hpp"
-#include "dogen/dynamic/types/field_definition.hpp"
+#include "dogen/annotations/types/object.hpp"
+#include "dogen/annotations/types/repository.hpp"
+#include "dogen/annotations/types/field_definition.hpp"
 #include "dogen/yarn/types/type_parameters.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 
@@ -37,22 +37,23 @@ namespace yarn {
 class type_parameters_expander {
 private:
     struct field_definitions {
-        dynamic::field_definition variable_number_of_parameters;
-        dynamic::field_definition type_parameters_count;
-        dynamic::field_definition type_parameters_always_in_heap;
+        annotations::field_definition variable_number_of_parameters;
+        annotations::field_definition type_parameters_count;
+        annotations::field_definition type_parameters_always_in_heap;
     };
 
     field_definitions make_field_definitions(
-        const dynamic::repository& drp) const;
+        const annotations::repository& drp) const;
 
     type_parameters make_type_parameters(const field_definitions& fds,
-        const dynamic::object& o) const;
+        const annotations::object& o) const;
 
 private:
     void expand_type_parameters(const field_definitions& fds, object& o) const;
 
 public:
-    void expand(const dynamic::repository& drp, intermediate_model& m) const;
+    void expand(const annotations::repository& drp,
+        intermediate_model& m) const;
 };
 
 } }

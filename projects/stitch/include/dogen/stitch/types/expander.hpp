@@ -27,13 +27,13 @@
 
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
-#include "dogen/dynamic/types/object.hpp"
+#include "dogen/annotations/types/object.hpp"
 
 namespace dogen {
 namespace stitch {
 
 /**
- * @brief Expands the dynamic extensions of the supplied object.
+ * @brief Expands the annotations extensions of the supplied object.
  */
 class expander {
 public:
@@ -41,7 +41,7 @@ public:
      * @brief Execute the expansion.
      */
     void expand(const boost::optional<boost::filesystem::path>& template_path,
-        dynamic::object& o) const;
+        annotations::object& o) const;
 };
 
 } }

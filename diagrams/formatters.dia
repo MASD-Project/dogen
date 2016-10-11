@@ -4697,7 +4697,7 @@ then make use of it.
                 <dia:string>#root#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const dynamic::object&amp;#</dia:string>
+                <dia:string>#const annotations::object&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -4731,7 +4731,7 @@ then make use of it.
                 <dia:string>#o#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const dynamic::object&amp;#</dia:string>
+                <dia:string>#const annotations::object&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>

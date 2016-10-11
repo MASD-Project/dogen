@@ -20,9 +20,9 @@
  */
 #include "dogen/yarn/hash/name_hash.hpp"
 #include "dogen/yarn/hash/element_hash.hpp"
-#include "dogen/dynamic/hash/object_hash.hpp"
 #include "dogen/yarn/hash/stereotypes_hash.hpp"
 #include "dogen/yarn/hash/origin_types_hash.hpp"
+#include "dogen/annotations/hash/object_hash.hpp"
 #include "dogen/yarn/hash/generation_types_hash.hpp"
 
 namespace {
@@ -60,7 +60,7 @@ std::size_t element_hasher::hash(const element& v) {
     std::size_t seed(0);
 
     combine(seed, v.documentation());
-    combine(seed, v.extensions());
+    combine(seed, v.annotation());
     combine(seed, v.name());
     combine(seed, v.generation_type());
     combine(seed, v.origin_type());

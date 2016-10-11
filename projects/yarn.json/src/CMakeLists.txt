@@ -31,7 +31,7 @@ set_target_properties(${name}
 
 target_link_libraries(${name}
     utility
-    dynamic
+    annotations
     yarn
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES})

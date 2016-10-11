@@ -34,14 +34,14 @@
 #include "dogen/yarn/serialization/primitive_ser.hpp"
 #include "dogen/yarn/serialization/registrar_ser.hpp"
 #include "dogen/yarn/serialization/enumeration_ser.hpp"
-#include "dogen/dynamic/serialization/registrar_ser.hpp"
+#include "dogen/annotations/serialization/registrar_ser.hpp"
 
 namespace dogen {
 namespace yarn {
 
 template<typename Archive>
 void register_types(Archive& ar) {
-    dogen::dynamic::register_types(ar);
+    dogen::annotations::register_types(ar);
 
     ar.template register_type<dogen::yarn::concept>();
     ar.template register_type<dogen::yarn::enumeration>();

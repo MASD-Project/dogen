@@ -29,7 +29,7 @@
 #include <memory>
 #include <forward_list>
 #include <unordered_map>
-#include "dogen/dynamic/types/ownership_hierarchy.hpp"
+#include "dogen/annotations/types/ownership_hierarchy.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/formatters/helper_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
@@ -68,7 +68,7 @@ public:
     /**
      * @brief Returns the ownership hierarchy for all formatters.
      */
-    const std::forward_list<dynamic::ownership_hierarchy>&
+    const std::forward_list<annotations::ownership_hierarchy>&
     ownership_hierarchy() const;
 
     const std::unordered_map<
@@ -80,7 +80,7 @@ public:
 
 private:
     container formatter_container_;
-    std::forward_list<dynamic::ownership_hierarchy> ownership_hierarchy_;
+    std::forward_list<annotations::ownership_hierarchy> ownership_hierarchy_;
 };
 
 template<typename Formatter>

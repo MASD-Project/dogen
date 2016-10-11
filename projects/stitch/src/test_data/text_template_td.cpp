@@ -19,20 +19,20 @@
  *
  */
 #include "dogen/stitch/test_data/line_td.hpp"
-#include "dogen/dynamic/test_data/object_td.hpp"
-#include "dogen/stitch/test_data/configuration_td.hpp"
+#include "dogen/stitch/test_data/properties_td.hpp"
+#include "dogen/annotations/test_data/object_td.hpp"
 #include "dogen/stitch/test_data/text_template_td.hpp"
 
 namespace {
 
-dogen::stitch::configuration
-create_dogen_stitch_configuration(const unsigned int position) {
-    return dogen::stitch::configuration_generator::create(position);
+dogen::stitch::properties
+create_dogen_stitch_properties(const unsigned int position) {
+    return dogen::stitch::properties_generator::create(position);
 }
 
-dogen::dynamic::object
-create_dogen_dynamic_object(const unsigned int position) {
-    return dogen::dynamic::object_generator::create(position);
+dogen::annotations::object
+create_dogen_annotations_object(const unsigned int position) {
+    return dogen::annotations::object_generator::create(position);
 }
 
 dogen::stitch::line
@@ -57,8 +57,8 @@ text_template_generator::text_template_generator() : position_(0) { }
 
 void text_template_generator::
 populate(const unsigned int position, result_type& v) {
-    v.configuration(create_dogen_stitch_configuration(position + 0));
-    v.extensions(create_dogen_dynamic_object(position + 1));
+    v.properties(create_dogen_stitch_properties(position + 0));
+    v.annotation(create_dogen_annotations_object(position + 1));
     v.lines(create_std_list_dogen_stitch_line(position + 2));
 }
 

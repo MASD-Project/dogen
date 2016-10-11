@@ -20,9 +20,9 @@
  */
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
-#include "dogen/dynamic/types/field_selector.hpp"
-#include "dogen/dynamic/types/repository_selector.hpp"
-#include "dogen/dynamic/io/field_definition_io.hpp"
+#include "dogen/annotations/types/field_selector.hpp"
+#include "dogen/annotations/types/repository_selector.hpp"
+#include "dogen/annotations/io/field_definition_io.hpp"
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
@@ -57,11 +57,11 @@ operator<<(std::ostream& s, const aspect_expander::field_definitions& v) {
     return s;
 }
 
-aspect_expander::field_definitions
-aspect_expander::make_field_definitions(const dynamic::repository& drp) const {
+aspect_expander::field_definitions aspect_expander::
+make_field_definitions(const annotations::repository& drp) const {
     field_definitions r;
 
-    const dynamic::repository_selector rs(drp);
+    const annotations::repository_selector rs(drp);
     typedef traits::cpp::aspect aspect;
 
     const auto& rmdc(aspect::requires_manual_default_constructor());
@@ -78,10 +78,10 @@ aspect_expander::make_field_definitions(const dynamic::repository& drp) const {
 
 boost::optional<aspect_properties> aspect_expander::
 make_aspect_properties(const field_definitions& fds,
-    const dynamic::object& o) const {
+    const annotations::object& o) const {
     aspect_properties r;
 
-    const dynamic::field_selector fs(o);
+    const annotations::field_selector fs(o);
     bool found_any(false);
 
     if (fs.has_field(fds.requires_manual_default_constructor))
@@ -112,7 +112,7 @@ make_aspect_properties(const field_definitions& fds,
 }
 
 aspect_expander::aspect_properties_type
-aspect_expander::obtain_aspect_properties(const dynamic::repository& drp,
+aspect_expander::obtain_aspect_properties(const annotations::repository& drp,
     const std::unordered_map<std::string, formattable>& formattables) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started creating aspect configuration.";
@@ -125,7 +125,7 @@ aspect_expander::obtain_aspect_properties(const dynamic::repository& drp,
 
         auto& formattable(pair.second);
         const auto& segment(*formattable.master_segment());
-        const auto ac(make_aspect_properties(fds, segment.extensions()));
+        const auto ac(make_aspect_properties(fds, segment.annotation()));
         if (ac)
             r[id] = *ac;
     }
@@ -187,8 +187,8 @@ void aspect_expander::populate_aspect_properties(
         auto& eprops(formattable.element_properties());
 
         /*
-         * We only want to process the master segment; the
-         * extensions can be ignored.
+         * We only want to process the master segment; the extensions
+         * can be ignored.
          */
         auto segment(formattable.master_segment());
 
@@ -220,7 +220,7 @@ void aspect_expander::populate_aspect_properties(
 }
 
 void aspect_expander::
-expand(const dynamic::repository& drp, model& fm) const {
+expand(const annotations::repository& drp, model& fm) const {
     const auto element_aps(obtain_aspect_properties(drp, fm.formattables()));
     populate_aspect_properties(element_aps, fm.formattables());
 }

@@ -27,7 +27,7 @@
 
 #include <list>
 #include <boost/filesystem/path.hpp>
-#include "dogen/dynamic/types/repository.hpp"
+#include "dogen/annotations/types/repository.hpp"
 #include "dogen/options/types/input_options.hpp"
 #include "dogen/yarn/types/frontend_registrar.hpp"
 #include "dogen/yarn/types/injector_registrar.hpp"
@@ -61,7 +61,7 @@ private:
      * @brief Obtains all intermediate models.
      */
     std::list<intermediate_model> obtain_intermediate_models(
-        const dynamic::repository& drp,
+        const annotations::repository& drp,
         const std::list<boost::filesystem::path>& dirs,
         const options::input_options& io) const;
 
@@ -74,8 +74,8 @@ private:
     /**
      * @brief Executes the post-processing.
      */
-    void post_process_merged_intermediate_model(const dynamic::repository& drp,
-        intermediate_model& im) const;
+    void post_process_merged_intermediate_model(
+        const annotations::repository& drp, intermediate_model& im) const;
 
     /**
      * @brief Transforms the intermediate model to the final
@@ -84,7 +84,7 @@ private:
     model transform_intermediate_model(const intermediate_model& im) const;
 
 public:
-    model execute(const dynamic::repository& drp,
+    model execute(const annotations::repository& drp,
         const std::list<boost::filesystem::path>& dirs,
         const options::input_options& io) const;
 

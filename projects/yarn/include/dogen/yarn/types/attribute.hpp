@@ -28,8 +28,8 @@
 #include <string>
 #include <algorithm>
 #include "dogen/yarn/types/name.hpp"
-#include "dogen/dynamic/types/object.hpp"
 #include "dogen/yarn/types/name_tree.hpp"
+#include "dogen/annotations/types/object.hpp"
 #include "dogen/yarn/serialization/attribute_fwd_ser.hpp"
 
 namespace dogen {
@@ -50,7 +50,7 @@ public:
 public:
     attribute(
         const std::string& documentation,
-        const dogen::dynamic::object& extensions,
+        const dogen::annotations::object& annotation,
         const dogen::yarn::name& name,
         const std::string& unparsed_type,
         const dogen::yarn::name_tree& parsed_type,
@@ -80,13 +80,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Dynamic extensions for this element.
+     * @brief Annotation for this element.
      */
     /**@{*/
-    const dogen::dynamic::object& extensions() const;
-    dogen::dynamic::object& extensions();
-    void extensions(const dogen::dynamic::object& v);
-    void extensions(const dogen::dynamic::object&& v);
+    const dogen::annotations::object& annotation() const;
+    dogen::annotations::object& annotation();
+    void annotation(const dogen::annotations::object& v);
+    void annotation(const dogen::annotations::object&& v);
     /**@}*/
 
     /**
@@ -149,7 +149,7 @@ public:
 
 private:
     std::string documentation_;
-    dogen::dynamic::object extensions_;
+    dogen::annotations::object annotation_;
     dogen::yarn::name name_;
     std::string unparsed_type_;
     dogen::yarn::name_tree parsed_type_;

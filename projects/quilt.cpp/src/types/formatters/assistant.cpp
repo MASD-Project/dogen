@@ -94,7 +94,8 @@ get_identifiable_and_qualified(const IdentifiableAndQualified& iaq) {
     return std::make_pair(iaq.identifiable(), i->second);
 }
 
-assistant::assistant(const context& ctx, const dynamic::ownership_hierarchy& oh,
+assistant::
+assistant(const context& ctx, const annotations::ownership_hierarchy& oh,
     const bool requires_header_guard, const std::string& id) :
     context_(ctx),
     formatter_properties_(obtain_formatter_properties(

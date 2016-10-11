@@ -28,8 +28,8 @@
 #include <list>
 #include <string>
 #include <unordered_map>
-#include "dogen/dynamic/types/object.hpp"
-#include "dogen/dynamic/types/repository.hpp"
+#include "dogen/annotations/types/object.hpp"
+#include "dogen/annotations/types/repository.hpp"
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/formatters/types/decoration_properties_factory.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
@@ -43,31 +43,31 @@ namespace formattables {
 
 class model_expander {
 private:
-    void expand_streaming(const dynamic::repository& drp, model& fm) const;
+    void expand_streaming(const annotations::repository& drp, model& fm) const;
 
     void expand_profile_groups(
         const std::forward_list<boost::filesystem::path>& dirs,
-        const dynamic::repository& drp, const dynamic::object& root_object,
+        const annotations::repository& drp, const annotations::object& root_object,
         const formatters::container& fc, model& fm) const;
 
-    void expand_enablement(const dynamic::repository& drp,
-        const dynamic::object& root_object, const formatters::container& fc,
+    void expand_enablement(const annotations::repository& drp,
+        const annotations::object& root_object, const formatters::container& fc,
         model& fm) const;
 
     void expand_canonical_formatters(const formatters::container& fc,
         model& fm) const;
 
     void expand_inclusion(
-        const dynamic::repository& drp,
+        const annotations::repository& drp,
         const formatters::container& fc, const locator& l, model& fm) const;
 
     void expand_decoration(
         const dogen::formatters::decoration_properties_factory& dpf,
         model& fm) const;
 
-    void expand_aspects(const dynamic::repository& drp, model& fm) const;
+    void expand_aspects(const annotations::repository& drp, model& fm) const;
 
-    void expand_helpers(const dynamic::repository& drp,
+    void expand_helpers(const annotations::repository& drp,
         const formatters::container& fc, model& fm) const;
 
     void reduce(model& fm) const;
@@ -75,14 +75,14 @@ private:
     void expand_file_paths_and_guards(const formatters::container& fc,
         const locator& l, model& fm) const;
 
-    void expand_odb(const dynamic::repository& drp, model& fm) const;
+    void expand_odb(const annotations::repository& drp, model& fm) const;
 
     void expand_facet_directories(const locator& l, model& fm) const;
 
 public:
     void expand(const std::forward_list<boost::filesystem::path>& dirs,
-        const dynamic::repository& drp,
-        const dynamic::object& root_object,
+        const annotations::repository& drp,
+        const annotations::object& root_object,
         const dogen::formatters::decoration_properties_factory& dpf,
         const formatters::container& fc, const locator& l, model& fm) const;
 };

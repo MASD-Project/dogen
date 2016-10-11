@@ -490,7 +490,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#dynamic::ownership_hierarchy#</dia:string>
+            <dia:string>#annotations::ownership_hierarchy#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -982,7 +982,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::forward_list&lt;dynamic::ownership_hierarchy&gt;#</dia:string>
+            <dia:string>#std::forward_list&lt;annotations::ownership_hierarchy&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1103,7 +1103,7 @@
                 <dia:string>#rp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const dynamic::repository&amp;#</dia:string>
+                <dia:string>#const annotations::repository&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -6605,7 +6605,7 @@ for a given C++ entity.#</dia:string>
                 <dia:string>#drp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const dynamic::repository&amp;#</dia:string>
+                <dia:string>#const annotations::repository&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -6622,7 +6622,7 @@ for a given C++ entity.#</dia:string>
                 <dia:string>#root_object#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const dynamic::object&amp;#</dia:string>
+                <dia:string>#const annotations::object&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -9533,7 +9533,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#o#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const dynamic::object&amp;#</dia:string>
+                <dia:string>#const annotations::object&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -10764,7 +10764,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#oh#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const dynamic::ownership_hierarchy&amp;#</dia:string>
+                <dia:string>#const annotations::ownership_hierarchy&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -17346,7 +17346,7 @@ and element.#</dia:string>
                 <dia:string>#drp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const dynamic::repository&amp;#</dia:string>
+                <dia:string>#const annotations::repository&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -17557,7 +17557,7 @@ and element.#</dia:string>
                 <dia:string>#drp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const dynamic::repository&amp;#</dia:string>
+                <dia:string>#const annotations::repository&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -17574,7 +17574,7 @@ and element.#</dia:string>
                 <dia:string>#root_object#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const dynamic::object&amp;#</dia:string>
+                <dia:string>#const annotations::object&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -17928,7 +17928,7 @@ and element.#</dia:string>
                 <dia:string>#drp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const dynamic::repository&amp;#</dia:string>
+                <dia:string>#const annotations::repository&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -17945,7 +17945,7 @@ and element.#</dia:string>
                 <dia:string>#root_object#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const dynamic::object&amp;#</dia:string>
+                <dia:string>#const annotations::object&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -20885,7 +20885,7 @@ and element.#</dia:string>
                 <dia:string>#drp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const dynamic::repository&amp;#</dia:string>
+                <dia:string>#const annotations::repository&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -25810,7 +25810,7 @@ and element.#</dia:string>
                 <dia:string>#drp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const dynamic::repository&amp;#</dia:string>
+                <dia:string>#const annotations::repository&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>

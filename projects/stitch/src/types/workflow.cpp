@@ -26,14 +26,14 @@
 #include "dogen/utility/io/forward_list_io.hpp"
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/filesystem/file.hpp"
-#include "dogen/dynamic/types/workflow.hpp"
-#include "dogen/dynamic/types/repository_workflow.hpp"
+#include "dogen/annotations/types/workflow.hpp"
+#include "dogen/annotations/types/repository_workflow.hpp"
 #include "dogen/formatters/types/hydration_workflow.hpp"
 #include "dogen/formatters/io/file_io.hpp"
 #include "dogen/formatters/types/filesystem_writer.hpp"
 #include "dogen/stitch/types/parser.hpp"
 #include "dogen/stitch/types/expander.hpp"
-#include "dogen/stitch/types/configuration_factory.hpp"
+#include "dogen/stitch/types/properties_factory.hpp"
 #include "dogen/stitch/types/workflow_error.hpp"
 #include "dogen/stitch/types/workflow.hpp"
 
@@ -56,7 +56,7 @@ namespace stitch {
 workflow::workflow() : formatter_() {}
 
 void workflow::perform_expansion(const boost::filesystem::path& p,
-    dynamic::object& o) const {
+    annotations::object& o) const {
     expander e;
     e.expand(p, o);
 }
@@ -110,9 +110,9 @@ workflow::read_text_templates_activity(
     return r;
 }
 
-std::forward_list<dynamic::ownership_hierarchy>
+std::forward_list<annotations::ownership_hierarchy>
 workflow::obtain_ownership_hierarchy_activity() const {
-    std::forward_list<dynamic::ownership_hierarchy> r;
+    std::forward_list<annotations::ownership_hierarchy> r;
     r.push_front(formatter_.ownership_hierarchy());
     return r;
 }
@@ -125,27 +125,27 @@ create_formatters_repository_activity() const {
     return hw.hydrate(dirs);
 }
 
-dynamic::repository workflow::create_dynamic_repository_activity(
-    const std::forward_list<dynamic::ownership_hierarchy>& oh) const {
+annotations::repository workflow::create_annotations_repository_activity(
+    const std::forward_list<annotations::ownership_hierarchy>& oh) const {
     using namespace dogen::utility::filesystem;
     const auto dir(data_files_directory() / fields_dir);
-    dynamic::repository_workflow w;
+    annotations::repository_workflow w;
     return w.execute(oh, std::forward_list<boost::filesystem::path> { dir });
 }
 
 std::forward_list<text_template> workflow::parse_text_templates_activity(
-    const dynamic::repository& rp,
+    const annotations::repository& rp,
     const std::forward_list<std::pair<boost::filesystem::path, std::string> >&
     text_templates_as_string) const {
     std::forward_list<text_template> r;
-    const dynamic::workflow w(rp);
+    const annotations::workflow w(rp);
     const parser p(w);
     for (const auto& pair : text_templates_as_string) {
         BOOST_LOG_SEV(lg, debug) << "Parsing file: "
                                  << pair.first.generic_string();
         try {
             auto tt(p.parse(pair.second));
-            perform_expansion(pair.first, tt.extensions());
+            perform_expansion(pair.first, tt.annotation());
             r.push_front(tt);
         } catch(boost::exception& e) {
             e << error_in_file(pair.first.generic_string());
@@ -156,14 +156,14 @@ std::forward_list<text_template> workflow::parse_text_templates_activity(
     return r;
 }
 
-void workflow::populate_configuration_activity(
-    const dynamic::repository& dynamic_repository,
+void workflow::populate_properties_activity(
+    const annotations::repository& annotations_repository,
     const dogen::formatters::repository& formatters_repository,
     std::forward_list<text_template>& text_templates) const {
 
-    configuration_factory f(dynamic_repository, formatters_repository);
+    properties_factory f(annotations_repository, formatters_repository);
     for (auto& tt : text_templates)
-        tt.configuration(f.make(tt.extensions()));
+        tt.properties(f.make(tt.annotation()));
 }
 
 std::forward_list<formatters::file> workflow::format_text_templates_activity(
@@ -190,11 +190,11 @@ void workflow::execute(const boost::filesystem::path& p) const {
 
     const auto templates_as_strings(read_text_templates_activity(paths));
     const auto oh(obtain_ownership_hierarchy_activity());
-    const auto dynamic_rp(create_dynamic_repository_activity(oh));
+    const auto annotations_rp(create_annotations_repository_activity(oh));
 
-    auto tt(parse_text_templates_activity(dynamic_rp, templates_as_strings));
+    auto tt(parse_text_templates_activity(annotations_rp, templates_as_strings));
     const auto formatters_rp(create_formatters_repository_activity());
-    populate_configuration_activity(dynamic_rp, formatters_rp, tt);
+    populate_properties_activity(annotations_rp, formatters_rp, tt);
     const auto files(format_text_templates_activity(tt));
     write_files_activity(files);
 

@@ -27,9 +27,9 @@
 
 #include "dogen/stitch/hash/line_hash.hpp"
 #include "dogen/stitch/hash/block_hash.hpp"
-#include "dogen/stitch/hash/annotations_hash.hpp"
+#include "dogen/stitch/hash/properties_hash.hpp"
 #include "dogen/stitch/hash/block_types_hash.hpp"
-#include "dogen/stitch/hash/configuration_hash.hpp"
 #include "dogen/stitch/hash/text_template_hash.hpp"
+#include "dogen/stitch/hash/stitching_properties_hash.hpp"
 
 #endif

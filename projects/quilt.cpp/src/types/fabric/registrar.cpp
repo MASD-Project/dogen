@@ -45,7 +45,7 @@ namespace fabric {
 
 registrar::registrar(
     const std::string& documentation,
-    const dogen::dynamic::object& extensions,
+    const dogen::annotations::object& annotation,
     const dogen::yarn::name& name,
     const dogen::yarn::generation_types generation_type,
     const dogen::yarn::origin_types origin_type,
@@ -58,7 +58,7 @@ registrar::registrar(
     const std::list<dogen::yarn::name>& registrar_dependencies)
     : dogen::yarn::element(
       documentation,
-      extensions,
+      annotation,
       name,
       generation_type,
       origin_type,

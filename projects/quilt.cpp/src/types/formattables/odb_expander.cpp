@@ -20,9 +20,9 @@
  */
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
-#include "dogen/dynamic/types/field_selector.hpp"
-#include "dogen/dynamic/types/repository_selector.hpp"
-#include "dogen/dynamic/io/field_definition_io.hpp"
+#include "dogen/annotations/types/field_selector.hpp"
+#include "dogen/annotations/types/repository_selector.hpp"
+#include "dogen/annotations/io/field_definition_io.hpp"
 #include "dogen/quilt.cpp/types/formatters/odb/traits.hpp"
 #include "dogen/quilt.cpp/io/formattables/odb_properties_io.hpp"
 #include "dogen/quilt.cpp/types/formattables/odb_expander.hpp"
@@ -53,11 +53,11 @@ std::ostream& operator<<(std::ostream& s,
 }
 
 odb_expander::field_definitions odb_expander::
-make_field_definitions(const dynamic::repository& drp) const {
+make_field_definitions(const annotations::repository& drp) const {
     BOOST_LOG_SEV(lg, debug) << "Creating field definitions.";
 
     field_definitions r;
-    const dynamic::repository_selector s(drp);
+    const annotations::repository_selector s(drp);
     const auto& cc(formatters::odb::traits::odb_pragma());
     r.odb_pragma = s.select_field_by_name(cc);
 
@@ -66,9 +66,9 @@ make_field_definitions(const dynamic::repository& drp) const {
 }
 
 std::list<std::string> odb_expander::make_odb_pragmas(
-    const field_definitions& fds, const dynamic::object& o) const {
+    const field_definitions& fds, const annotations::object& o) const {
 
-    const dynamic::field_selector fs(o);
+    const annotations::field_selector fs(o);
     if (!fs.has_field(fds.odb_pragma))
         return std::list<std::string>();
 
@@ -80,10 +80,10 @@ odb_expander::compute_odb_configuration(
     const field_definitions& fds, const yarn::object& o) const {
 
     odb_properties r;
-    r.top_level_odb_pragmas(make_odb_pragmas(fds, o.extensions()));
+    r.top_level_odb_pragmas(make_odb_pragmas(fds, o.annotation()));
     for (const auto& attr : o.local_attributes()) {
         const auto id(attr.name().id());
-        const auto pragmas(make_odb_pragmas(fds, attr.extensions()));
+        const auto pragmas(make_odb_pragmas(fds, attr.annotation()));
         if (pragmas.empty())
             continue;
 
@@ -100,7 +100,7 @@ odb_expander::compute_odb_configuration(
 }
 
 void odb_expander::
-expand(const dynamic::repository& drp, model& fm) const {
+expand(const annotations::repository& drp, model& fm) const {
     BOOST_LOG_SEV(lg, debug) << "Started expanding odb configuration.";
     const auto fds(make_field_definitions(drp));
     for (auto& pair : fm.formattables()) {

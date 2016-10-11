@@ -52,13 +52,13 @@
 			<second class_id="7" tracking_level="1" version="0" object_id="_0">
 				<element class_id="21" tracking_level="0" version="0">
 					<documentation></documentation>
-					<extensions class_id="22" tracking_level="0" version="0">
+					<annotation class_id="22" tracking_level="0" version="0">
 						<fields class_id="23" tracking_level="0" version="0">
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;pkg4&gt;</id>
 						<simple>pkg4</simple>
@@ -117,13 +117,13 @@ It includes the visitable stereotype since it only makes sense
 in the context of inheritance.
 
 </documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;</id>
 						<simple>trivial_inheritance</simple>
@@ -177,13 +177,13 @@ in the context of inheritance.
 			<second object_id="_2">
 				<element>
 					<documentation></documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;pkg2&gt;</id>
 						<simple>pkg2</simple>
@@ -237,13 +237,13 @@ in the context of inheritance.
 			<second object_id="_3">
 				<element>
 					<documentation></documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;pkg1&gt;</id>
 						<simple>pkg1</simple>
@@ -297,13 +297,13 @@ in the context of inheritance.
 			<second object_id="_4">
 				<element>
 					<documentation></documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;pkg3&gt;</id>
 						<simple>pkg3</simple>
@@ -377,13 +377,13 @@ in the context of inheritance.
 			<second class_id="8" tracking_level="1" version="0" object_id="_5">
 				<element>
 					<documentation></documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;non_final_leaf&gt;</id>
 						<simple>non_final_leaf</simple>
@@ -435,13 +435,13 @@ in the context of inheritance.
 					<item_version>0</item_version>
 					<item class_id="33" tracking_level="0" version="0">
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;non_final_leaf&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
@@ -604,13 +604,13 @@ in the context of inheritance.
 			<second object_id="_6">
 				<element>
 					<documentation></documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;pkg4&gt;&lt;child_via_settings&gt;</id>
 						<simple>child_via_settings</simple>
@@ -663,13 +663,13 @@ in the context of inheritance.
 					<item_version>0</item_version>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;pkg4&gt;&lt;child_via_settings&gt;&lt;prop_1&gt;</id>
 							<simple>prop_1</simple>
@@ -803,13 +803,13 @@ in the context of inheritance.
 			<second object_id="_7">
 				<element>
 					<documentation></documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;pkg3&gt;&lt;child_via_settings&gt;</id>
 						<simple>child_via_settings</simple>
@@ -862,13 +862,13 @@ in the context of inheritance.
 					<item_version>0</item_version>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;pkg3&gt;&lt;child_via_settings&gt;&lt;prop_1&gt;</id>
 							<simple>prop_1</simple>
@@ -1002,13 +1002,13 @@ in the context of inheritance.
 			<second object_id="_8">
 				<element>
 					<documentation></documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;pkg1&gt;&lt;child_via_settings&gt;</id>
 						<simple>child_via_settings</simple>
@@ -1061,13 +1061,13 @@ in the context of inheritance.
 					<item_version>0</item_version>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;pkg1&gt;&lt;child_via_settings&gt;&lt;prop_1&gt;</id>
 							<simple>prop_1</simple>
@@ -1202,13 +1202,13 @@ in the context of inheritance.
 				<element>
 					<documentation>Descendant class for scenario that tests code generated move contructors.
 </documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;move_ctor_empty_descendant&gt;</id>
 						<simple>move_ctor_empty_descendant</simple>
@@ -1349,13 +1349,13 @@ in the context of inheritance.
 			<second object_id="_10">
 				<element>
 					<documentation></documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;pkg1&gt;&lt;child&gt;</id>
 						<simple>child</simple>
@@ -1408,13 +1408,13 @@ in the context of inheritance.
 					<item_version>0</item_version>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;pkg1&gt;&lt;child&gt;&lt;prop_1&gt;</id>
 							<simple>prop_1</simple>
@@ -1579,13 +1579,13 @@ in the context of inheritance.
 			<second object_id="_11">
 				<element>
 					<documentation></documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;base&gt;</id>
 						<simple>base</simple>
@@ -1697,13 +1697,13 @@ in the context of inheritance.
 			<second object_id="_12">
 				<element>
 					<documentation></documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;non_final_orphan&gt;</id>
 						<simple>non_final_orphan</simple>
@@ -1755,13 +1755,13 @@ in the context of inheritance.
 					<item_version>0</item_version>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;non_final_orphan&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
@@ -1894,13 +1894,13 @@ in the context of inheritance.
 			<second object_id="_13">
 				<element>
 					<documentation></documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;child_via_settings&gt;</id>
 						<simple>child_via_settings</simple>
@@ -1952,13 +1952,13 @@ in the context of inheritance.
 					<item_version>0</item_version>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;child_via_settings&gt;&lt;prop_1&gt;</id>
 							<simple>prop_1</simple>
@@ -2091,13 +2091,13 @@ in the context of inheritance.
 			<second object_id="_14">
 				<element>
 					<documentation></documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;pkg1&gt;&lt;parent&gt;</id>
 						<simple>parent</simple>
@@ -2150,13 +2150,13 @@ in the context of inheritance.
 					<item_version>0</item_version>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;pkg1&gt;&lt;parent&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
@@ -2291,13 +2291,13 @@ in the context of inheritance.
 				<element>
 					<documentation>Base class for scenario that tests code generated move contructors.
 </documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;move_ctor_base&gt;</id>
 						<simple>move_ctor_base</simple>
@@ -2350,13 +2350,13 @@ in the context of inheritance.
 					<item>
 						<documentation>Force manual move constructor.
 </documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;move_ctor_base&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
@@ -2489,13 +2489,13 @@ in the context of inheritance.
 			<second object_id="_16">
 				<element>
 					<documentation></documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;parent_without_members&gt;</id>
 						<simple>parent_without_members</simple>
@@ -2606,13 +2606,13 @@ in the context of inheritance.
 			<second object_id="_17">
 				<element>
 					<documentation></documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;pkg2&gt;&lt;parent&gt;</id>
 						<simple>parent</simple>
@@ -2665,13 +2665,13 @@ in the context of inheritance.
 					<item_version>0</item_version>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;pkg2&gt;&lt;parent&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
@@ -2805,13 +2805,13 @@ in the context of inheritance.
 			<second object_id="_18">
 				<element>
 					<documentation></documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;second_child_without_members&gt;</id>
 						<simple>second_child_without_members</simple>
@@ -2952,13 +2952,13 @@ in the context of inheritance.
 			<second object_id="_19">
 				<element>
 					<documentation></documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;third_child_with_members&gt;</id>
 						<simple>third_child_with_members</simple>
@@ -3010,13 +3010,13 @@ in the context of inheritance.
 					<item_version>0</item_version>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;third_child_with_members&gt;&lt;prop_1&gt;</id>
 							<simple>prop_1</simple>
@@ -3179,13 +3179,13 @@ in the context of inheritance.
 			<second object_id="_20">
 				<element>
 					<documentation></documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;parent_with_members&gt;</id>
 						<simple>parent_with_members</simple>
@@ -3237,13 +3237,13 @@ in the context of inheritance.
 					<item_version>0</item_version>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;parent_with_members&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
@@ -3376,13 +3376,13 @@ in the context of inheritance.
 			<second object_id="_21">
 				<element>
 					<documentation></documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;pkg3&gt;&lt;child&gt;</id>
 						<simple>child</simple>
@@ -3435,13 +3435,13 @@ in the context of inheritance.
 					<item_version>0</item_version>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;pkg3&gt;&lt;child&gt;&lt;prop_1&gt;</id>
 							<simple>prop_1</simple>
@@ -3606,13 +3606,13 @@ in the context of inheritance.
 			<second object_id="_22">
 				<element>
 					<documentation></documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;child_without_members&gt;</id>
 						<simple>child_without_members</simple>
@@ -3753,13 +3753,13 @@ in the context of inheritance.
 			<second object_id="_23">
 				<element>
 					<documentation></documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;parent_outside&gt;</id>
 						<simple>parent_outside</simple>
@@ -3811,13 +3811,13 @@ in the context of inheritance.
 					<item_version>0</item_version>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;parent_outside&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
@@ -3950,13 +3950,13 @@ in the context of inheritance.
 			<second object_id="_24">
 				<element>
 					<documentation></documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;child_with_members&gt;</id>
 						<simple>child_with_members</simple>
@@ -4008,13 +4008,13 @@ in the context of inheritance.
 					<item_version>0</item_version>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;child_with_members&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
@@ -4177,13 +4177,13 @@ in the context of inheritance.
 			<second object_id="_25">
 				<element>
 					<documentation></documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;service&gt;</id>
 						<simple>service</simple>
@@ -4294,13 +4294,13 @@ in the context of inheritance.
 			<second object_id="_26">
 				<element>
 					<documentation></documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;descendant2&gt;</id>
 						<simple>descendant2</simple>
@@ -4352,13 +4352,13 @@ in the context of inheritance.
 					<item_version>0</item_version>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;descendant2&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
@@ -4521,13 +4521,13 @@ in the context of inheritance.
 			<second object_id="_27">
 				<element>
 					<documentation></documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;pkg4&gt;&lt;child&gt;</id>
 						<simple>child</simple>
@@ -4580,13 +4580,13 @@ in the context of inheritance.
 					<item_version>0</item_version>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;pkg4&gt;&lt;child&gt;&lt;prop_1&gt;</id>
 							<simple>prop_1</simple>
@@ -4750,13 +4750,13 @@ in the context of inheritance.
 			<second object_id="_28">
 				<element>
 					<documentation></documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;service_interface&gt;</id>
 						<simple>service_interface</simple>
@@ -4867,13 +4867,13 @@ in the context of inheritance.
 			<second object_id="_29">
 				<element>
 					<documentation></documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;child_of_a_child2&gt;</id>
 						<simple>child_of_a_child2</simple>
@@ -4925,13 +4925,13 @@ in the context of inheritance.
 					<item_version>0</item_version>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;child_of_a_child2&gt;&lt;prop_2&gt;</id>
 							<simple>prop_2</simple>
@@ -5094,13 +5094,13 @@ in the context of inheritance.
 			<second object_id="_30">
 				<element>
 					<documentation></documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;descendant1&gt;</id>
 						<simple>descendant1</simple>
@@ -5241,13 +5241,13 @@ in the context of inheritance.
 			<second object_id="_31">
 				<element>
 					<documentation></documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;child_of_a_child1&gt;</id>
 						<simple>child_of_a_child1</simple>
@@ -5388,13 +5388,13 @@ in the context of inheritance.
 			<second object_id="_32">
 				<element>
 					<documentation></documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;descendant3&gt;</id>
 						<simple>descendant3</simple>
@@ -5446,13 +5446,13 @@ in the context of inheritance.
 					<item_version>0</item_version>
 					<item>
 						<documentation></documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;descendant3&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
@@ -5616,13 +5616,13 @@ in the context of inheritance.
 				<element>
 					<documentation>Descendant class for scenario that tests code generated move contructors.
 </documentation>
-					<extensions>
+					<annotation>
 						<fields>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
-					</extensions>
+					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;move_ctor_descendant&gt;</id>
 						<simple>move_ctor_descendant</simple>
@@ -5675,13 +5675,13 @@ in the context of inheritance.
 					<item>
 						<documentation>Force manual move constructor.
 </documentation>
-						<extensions>
+						<annotation>
 							<fields>
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
-						</extensions>
+						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;move_ctor_descendant&gt;&lt;prop_1&gt;</id>
 							<simple>prop_1</simple>
@@ -6014,13 +6014,13 @@ in the context of inheritance.
 	<root_module object_id="_34">
 		<element>
 			<documentation></documentation>
-			<extensions>
+			<annotation>
 				<fields>
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</fields>
-			</extensions>
+			</annotation>
 			<name>
 				<id></id>
 				<simple></simple>

@@ -22,7 +22,7 @@ add_custom_target(knit_${target}
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/dynamic.dia,dogen
+    --reference ${CMAKE_SOURCE_DIR}/diagrams/annotations.dia,dogen
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/test/.*
@@ -40,7 +40,7 @@ add_custom_target(knit_${target}
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/dynamic.dia,dogen
+    --reference ${CMAKE_SOURCE_DIR}/diagrams/annotations.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/yarn.dia,dogen
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
     --ignore-files-matching-regex .*/CMakeLists.txt
@@ -96,7 +96,7 @@ add_custom_target(knit_${target}
     --reference ${CMAKE_SOURCE_DIR}/diagrams/options.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/yarn.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/formatters.dia,dogen
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/dynamic.dia,dogen
+    --reference ${CMAKE_SOURCE_DIR}/diagrams/annotations.dia,dogen
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/tests/.*
@@ -137,7 +137,7 @@ add_custom_target(knit_${target}
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/dynamic.dia,dogen
+    --reference ${CMAKE_SOURCE_DIR}/diagrams/annotations.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/options.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/yarn.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/quilt.cpp.dia,dogen
@@ -159,7 +159,7 @@ add_custom_target(knit_${target}
     COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/dia.dia,dogen
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/dynamic.dia,dogen
+    --reference ${CMAKE_SOURCE_DIR}/diagrams/annotations.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/yarn.dia,dogen
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
     --ignore-files-matching-regex .*/CMakeLists.txt
@@ -197,7 +197,7 @@ add_custom_target(knit_${target}
     COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/options.dia,dogen
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/dynamic.dia,dogen
+    --reference ${CMAKE_SOURCE_DIR}/diagrams/annotations.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/yarn.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/formatters.dia,dogen
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
@@ -211,9 +211,9 @@ if(use_latest_knitter)
 endif()
 add_dependencies(knit_all knit_${target})
 
-set(target dynamic)
+set(target annotations)
 add_custom_target(knit_${target}
-    COMMENT "Knitting Dynamic model" VERBATIM
+    COMMENT "Knitting Annotations model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen
@@ -234,7 +234,7 @@ add_custom_target(knit_${target}
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/dynamic.dia,dogen
+    --reference ${CMAKE_SOURCE_DIR}/diagrams/annotations.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/formatters.dia,dogen
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
     --ignore-files-matching-regex .*/CMakeLists.txt

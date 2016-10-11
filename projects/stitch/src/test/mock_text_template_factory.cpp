@@ -43,12 +43,12 @@ namespace stitch {
 namespace test {
 
 text_template mock_text_template_factory::
-make_text_template_with_trivial_configuration() const {
-    annotations a;
-    a.stream_variable_name(stream_variable_name);
+make_text_template_with_trivial_properties() const {
+    stitching_properties sp;
+    sp.stream_variable_name(stream_variable_name);
 
     text_template r;
-    r.configuration().annotations(a);
+    r.properties().stitching_properties(sp);
     return r;
 }
 
@@ -143,54 +143,54 @@ make_expression_block_only_lines(const unsigned int how_many) const {
 }
 
 text_template mock_text_template_factory::make_empty_template() const {
-    text_template r(make_text_template_with_trivial_configuration());
+    text_template r(make_text_template_with_trivial_properties());
     return r;
 }
 
 text_template mock_text_template_factory::make_single_text_block_line() const {
-    text_template r(make_text_template_with_trivial_configuration());
+    text_template r(make_text_template_with_trivial_properties());
     r.lines(make_text_block_only_lines());
     return r;
 }
 
 text_template mock_text_template_factory::make_multiple_text_block_lines(
     const unsigned int how_many) const {
-    text_template r(make_text_template_with_trivial_configuration());
+    text_template r(make_text_template_with_trivial_properties());
     r.lines(make_text_block_only_lines(how_many));
     return r;
 }
 
 text_template mock_text_template_factory::
 make_single_expression_block_line() const {
-    text_template r(make_text_template_with_trivial_configuration());
+    text_template r(make_text_template_with_trivial_properties());
     r.lines(make_expression_block_only_lines());
     return r;
 }
 
 text_template mock_text_template_factory::
 make_multiple_expression_block_lines(const unsigned int how_many) const {
-    text_template r(make_text_template_with_trivial_configuration());
+    text_template r(make_text_template_with_trivial_properties());
     r.lines(make_expression_block_only_lines(how_many));
     return r;
 }
 
 text_template mock_text_template_factory::
 make_single_standard_control_block_line() const {
-    text_template r(make_text_template_with_trivial_configuration());
+    text_template r(make_text_template_with_trivial_properties());
     r.lines(make_standard_control_block_only_lines());
     return r;
 }
 
 text_template mock_text_template_factory::
 make_multiple_standard_control_block_lines(const unsigned int how_many) const {
-    text_template r(make_text_template_with_trivial_configuration());
+    text_template r(make_text_template_with_trivial_properties());
     r.lines(make_standard_control_block_only_lines(how_many));
     return r;
 }
 
 text_template mock_text_template_factory::
 make_text_expression_text_single_line() const {
-    text_template r(make_text_template_with_trivial_configuration());
+    text_template r(make_text_template_with_trivial_properties());
     r.lines(make_text_block_only_lines());
     r.lines().splice(r.lines().end(), make_expression_block_only_lines());
     r.lines().splice(r.lines().end(), make_text_block_only_lines());
@@ -199,7 +199,7 @@ make_text_expression_text_single_line() const {
 
 text_template mock_text_template_factory::
 make_expression_text_expression_single_line() const {
-    text_template r(make_text_template_with_trivial_configuration());
+    text_template r(make_text_template_with_trivial_properties());
     r.lines(make_expression_block_only_lines());
     r.lines().splice(r.lines().end(), make_text_block_only_lines());
     r.lines().splice(r.lines().end(), make_expression_block_only_lines());
@@ -208,7 +208,7 @@ make_expression_text_expression_single_line() const {
 
 text_template mock_text_template_factory::
 make_text_expression_text_multi_line(const unsigned int how_many) const {
-    text_template r(make_text_template_with_trivial_configuration());
+    text_template r(make_text_template_with_trivial_properties());
     r.lines(make_text_block_only_lines(how_many));
     r.lines().splice(r.lines().end(),
         make_expression_block_only_lines(how_many));
@@ -218,7 +218,7 @@ make_text_expression_text_multi_line(const unsigned int how_many) const {
 
 text_template mock_text_template_factory::
 make_expression_text_expression_multi_line(const unsigned int how_many) const {
-    text_template r(make_text_template_with_trivial_configuration());
+    text_template r(make_text_template_with_trivial_properties());
     r.lines(make_expression_block_only_lines(how_many));
     r.lines().splice(r.lines().end(), make_text_block_only_lines(how_many));
     r.lines().splice(r.lines().end(),
@@ -228,7 +228,7 @@ make_expression_text_expression_multi_line(const unsigned int how_many) const {
 
 text_template mock_text_template_factory::
 make_text_standard_control_text_single_line() const {
-    text_template r(make_text_template_with_trivial_configuration());
+    text_template r(make_text_template_with_trivial_properties());
     r.lines(make_text_block_only_lines());
     r.lines().splice(r.lines().end(), make_standard_control_block_only_lines());
     r.lines().splice(r.lines().end(), make_text_block_only_lines());
@@ -237,7 +237,7 @@ make_text_standard_control_text_single_line() const {
 
 text_template mock_text_template_factory::
 make_standard_control_text_standard_control_single_line() const {
-    text_template r(make_text_template_with_trivial_configuration());
+    text_template r(make_text_template_with_trivial_properties());
     r.lines(make_standard_control_block_only_lines());
     r.lines().splice(r.lines().end(), make_text_block_only_lines());
     r.lines().splice(r.lines().end(), make_standard_control_block_only_lines());
@@ -246,7 +246,7 @@ make_standard_control_text_standard_control_single_line() const {
 
 text_template mock_text_template_factory::
 make_text_standard_control_text_multi_line(const unsigned int how_many) const {
-    text_template r(make_text_template_with_trivial_configuration());
+    text_template r(make_text_template_with_trivial_properties());
     r.lines(make_text_block_only_lines(how_many));
     r.lines().splice(r.lines().end(),
         make_standard_control_block_only_lines(how_many));
@@ -257,7 +257,7 @@ make_text_standard_control_text_multi_line(const unsigned int how_many) const {
 text_template mock_text_template_factory::
 make_standard_control_text_standard_control_multi_line(
     const unsigned int how_many) const {
-    text_template r(make_text_template_with_trivial_configuration());
+    text_template r(make_text_template_with_trivial_properties());
     r.lines(make_standard_control_block_only_lines(how_many));
     r.lines().splice(r.lines().end(), make_text_block_only_lines(how_many));
     r.lines().splice(r.lines().end(),
@@ -267,20 +267,20 @@ make_standard_control_text_standard_control_multi_line(
 
 text_template mock_text_template_factory::
 make_mixed_content_single_line() const {
-    text_template r(make_text_template_with_trivial_configuration());
+    text_template r(make_text_template_with_trivial_properties());
     r.lines(make_mixed_content_lines());
     return r;
 }
 
 text_template mock_text_template_factory::
 make_mixed_content_multi_line(const unsigned int how_many) const {
-    text_template r(make_text_template_with_trivial_configuration());
+    text_template r(make_text_template_with_trivial_properties());
     r.lines(make_mixed_content_lines(how_many));
     return r;
 }
 
 text_template mock_text_template_factory::make_text_line_with_quotes() const {
-    text_template r(make_text_template_with_trivial_configuration());
+    text_template r(make_text_template_with_trivial_properties());
 
     block b;
     b.type(block_types::text_block);
@@ -294,7 +294,7 @@ text_template mock_text_template_factory::make_text_line_with_quotes() const {
 }
 
 text_template mock_text_template_factory::make_complex_structure() const {
-    text_template r(make_text_template_with_trivial_configuration());
+    text_template r(make_text_template_with_trivial_properties());
     r.lines(make_text_block_only_lines(3));
     r.lines().splice(r.lines().end(),
         make_standard_control_block_only_lines(4));
@@ -310,16 +310,16 @@ make_with_decoration_properties() const {
     dogen::formatters::test::mock_decoration_properties_factory factory_;
     const auto fp(factory_.make_decoration_properties());
 
-    text_template r(make_text_template_with_trivial_configuration());
-    r.configuration().decoration_properties(fp);
+    text_template r(make_text_template_with_trivial_properties());
+    r.properties().decoration_properties(fp);
     r.lines(make_text_block_only_lines());
     return r;
 }
 
 text_template
 mock_text_template_factory::make_with_containing_namespace() const {
-    text_template r(make_text_template_with_trivial_configuration());
-    auto& cn(r.configuration().annotations().containing_namespaces());
+    text_template r(make_text_template_with_trivial_properties());
+    auto& cn(r.properties().stitching_properties().containing_namespaces());
     cn.push_back("first");
     cn.push_back("second");
     r.lines(make_text_block_only_lines());
@@ -328,7 +328,7 @@ mock_text_template_factory::make_with_containing_namespace() const {
 
 text_template mock_text_template_factory::
 make_empty_text_lines(const unsigned int how_many) const {
-    text_template r(make_text_template_with_trivial_configuration());
+    text_template r(make_text_template_with_trivial_properties());
     r.lines(make_text_block_only_lines(how_many, true/*empty_content*/));
     return r;
 }

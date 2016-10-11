@@ -26,9 +26,9 @@
 #endif
 
 #include <boost/optional.hpp>
-#include "dogen/dynamic/types/object.hpp"
-#include "dogen/dynamic/types/repository.hpp"
-#include "dogen/dynamic/types/field_definition.hpp"
+#include "dogen/annotations/types/object.hpp"
+#include "dogen/annotations/types/repository.hpp"
+#include "dogen/annotations/types/field_definition.hpp"
 #include "dogen/quilt.cpp/types/formattables/streaming_properties.hpp"
 #include "dogen/quilt.cpp/types/formattables/model.hpp"
 
@@ -40,22 +40,22 @@ namespace formattables {
 class streaming_expander {
 private:
     struct field_definitions {
-        dynamic::field_definition requires_quoting;
-        dynamic::field_definition string_conversion_method;
-        dynamic::field_definition remove_unprintable_characters;
+        annotations::field_definition requires_quoting;
+        annotations::field_definition string_conversion_method;
+        annotations::field_definition remove_unprintable_characters;
     };
 
     friend std::ostream& operator<<(std::ostream& s,
         const field_definitions& v);
 
     field_definitions
-    make_field_definitions(const dynamic::repository& drp) const;
+    make_field_definitions(const annotations::repository& drp) const;
 
     boost::optional<streaming_properties> make_streaming_properties(
-        const field_definitions& fds, const dynamic::object& o) const;
+        const field_definitions& fds, const annotations::object& o) const;
 
 public:
-    void expand(const dynamic::repository& drp, model& fm) const;
+    void expand(const annotations::repository& drp, model& fm) const;
 };
 
 } } } }
