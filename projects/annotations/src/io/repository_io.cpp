@@ -83,7 +83,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 namespace dogen {
 namespace annotations {
 
-std::ostream& operator<<(std::ostream& s, const repository& v) {
+std::ostream& operator<<(std::ostream& s, const type_repository& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::annotations::repository\"" << ", "
       << "\"all_field_definitions\": " << v.all_field_definitions() << ", "

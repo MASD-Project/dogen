@@ -36,9 +36,9 @@ const std::string duplicate_qualified_name(
 namespace dogen {
 namespace annotations {
 
-repository
+type_repository
 repository_factory::make(const std::list<type>& fds) const {
-    repository r;
+    type_repository r;
     r.all_field_definitions(fds);
 
     for (const auto& fd : fds) {

@@ -40,7 +40,7 @@ const std::string no_fields_for_model("Could not find any fields for model: ");
 namespace dogen {
 namespace annotations {
 
-repository_selector::repository_selector(const repository& rp)
+repository_selector::repository_selector(const type_repository& rp)
     : repository_(rp) {}
 
 std::string repository_selector::

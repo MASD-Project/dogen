@@ -131,12 +131,12 @@ std::ostream& operator<<(std::ostream& s,
 }
 
 inclusion_expander::type_group inclusion_expander::
-make_type_group(const annotations::repository& arp,
+make_type_group(const annotations::type_repository& atrp,
     const formatters::container& fc) const {
     BOOST_LOG_SEV(lg, debug) << "Creating field definitions.";
 
     type_group r;
-    const annotations::repository_selector s(arp);
+    const annotations::repository_selector s(atrp);
     const auto ir(traits::cpp::inclusion_required());
     r.inclusion_required = s.select_field_by_name(ir);
 
@@ -508,10 +508,10 @@ void inclusion_expander::populate_inclusion_dependencies(
                              << "for all formattables. ";
 }
 
-void inclusion_expander::expand(const annotations::repository& arp,
+void inclusion_expander::expand(const annotations::type_repository& atrp,
     const formatters::container& fc, const locator& l, model& fm) const {
 
-    const auto tg(make_type_group(arp, fc));
+    const auto tg(make_type_group(atrp, fc));
     const auto idc(compute_inclusion_directives(tg, fc, l, fm.formattables()));
     populate_inclusion_dependencies(fc, idc, fm.formattables());
 }

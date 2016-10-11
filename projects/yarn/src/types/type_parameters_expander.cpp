@@ -27,10 +27,10 @@ namespace dogen {
 namespace yarn {
 
 type_parameters_expander::type_group type_parameters_expander::
-make_type_group(const annotations::repository& arp) const {
+make_type_group(const annotations::type_repository& atrp) const {
 
     type_group r;
-    const annotations::repository_selector s(arp);
+    const annotations::repository_selector s(atrp);
     const auto& vnp(traits::type_parameters::variable_number_of_parameters());
     r.variable_number_of_parameters = s.select_field_by_name(vnp);
 
@@ -68,8 +68,8 @@ expand_type_parameters(const type_group& tg, object& o) const {
 }
 
 void type_parameters_expander::
-expand(const annotations::repository& arp, intermediate_model& m) const {
-    const auto tg(make_type_group(arp));
+expand(const annotations::type_repository& atrp, intermediate_model& m) const {
+    const auto tg(make_type_group(atrp));
     for (auto& pair : m.objects()) {
         auto& o(pair.second);
         expand_type_parameters(tg, o);

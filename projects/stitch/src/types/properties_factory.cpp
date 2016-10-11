@@ -32,7 +32,7 @@ namespace dogen {
 namespace stitch {
 
 properties_factory::properties_factory(
-    const annotations::repository& annotations_repository,
+    const annotations::type_repository& annotations_repository,
     const dogen::formatters::repository& formatters_repository)
     : annotations_repository_(annotations_repository),
       formatters_repository_(formatters_repository) {}

@@ -58,10 +58,10 @@ operator<<(std::ostream& s, const aspect_expander::type_group& v) {
 }
 
 aspect_expander::type_group aspect_expander::
-make_type_group(const annotations::repository& arp) const {
+make_type_group(const annotations::type_repository& atrp) const {
     type_group r;
 
-    const annotations::repository_selector rs(arp);
+    const annotations::repository_selector rs(atrp);
     typedef traits::cpp::aspect aspect;
 
     const auto& rmdc(aspect::requires_manual_default_constructor());
@@ -112,12 +112,12 @@ make_aspect_properties(const type_group& tg,
 }
 
 aspect_expander::aspect_properties_type
-aspect_expander::obtain_aspect_properties(const annotations::repository& arp,
+aspect_expander::obtain_aspect_properties(const annotations::type_repository& atrp,
     const std::unordered_map<std::string, formattable>& formattables) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started creating aspect configuration.";
 
-    const auto tg(make_type_group(arp));
+    const auto tg(make_type_group(atrp));
     aspect_properties_type r;
     for (auto& pair : formattables) {
         const auto id(pair.first);
@@ -220,8 +220,8 @@ void aspect_expander::populate_aspect_properties(
 }
 
 void aspect_expander::
-expand(const annotations::repository& arp, model& fm) const {
-    const auto element_aps(obtain_aspect_properties(arp, fm.formattables()));
+expand(const annotations::type_repository& atrp, model& fm) const {
+    const auto element_aps(obtain_aspect_properties(atrp, fm.formattables()));
     populate_aspect_properties(element_aps, fm.formattables());
 }
 

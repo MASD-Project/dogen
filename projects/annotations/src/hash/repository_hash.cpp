@@ -60,7 +60,7 @@ inline std::size_t hash_std_unordered_map_std_string_std_list_dogen_annotations_
 namespace dogen {
 namespace annotations {
 
-std::size_t repository_hasher::hash(const repository& v) {
+std::size_t repository_hasher::hash(const type_repository& v) {
     std::size_t seed(0);
 
     combine(seed, hash_std_list_dogen_annotations_type(v.all_field_definitions()));

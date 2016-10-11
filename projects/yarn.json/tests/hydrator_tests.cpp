@@ -153,7 +153,7 @@ const std::string internal_modules_model(R"({
   }
 )");
 
-dogen::annotations::repository create_repository() {
+dogen::annotations::type_repository create_repository() {
     using namespace dogen::annotations;
     test::mock_type_factory f;
 

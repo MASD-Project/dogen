@@ -35,7 +35,7 @@ public:
     repository_generator();
 
 public:
-    typedef dogen::annotations::repository result_type;
+    typedef dogen::annotations::type_repository result_type;
 
 public:
     static void populate(const unsigned int position, result_type& v);

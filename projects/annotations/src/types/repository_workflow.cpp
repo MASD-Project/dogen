@@ -67,13 +67,13 @@ std::list<type> repository_workflow::instantiate_templates_activity(
     return r;
 }
 
-repository repository_workflow::create_repository_activity(
+type_repository repository_workflow::create_repository_activity(
     const std::list<type>& fds) const {
     repository_factory f;
     return f.make(fds);
 }
 
-repository repository_workflow::execute(
+type_repository repository_workflow::execute(
     const std::forward_list<ownership_hierarchy>& oh,
     const std::forward_list<boost::filesystem::path>& dirs) const {
     BOOST_LOG_SEV(lg, info) << "Generating repository.";

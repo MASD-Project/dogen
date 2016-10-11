@@ -41,7 +41,7 @@ private:
         annotations::type is_final;
     };
 
-    type_group make_type_group(const annotations::repository& arp) const;
+    type_group make_type_group(const annotations::type_repository& atrp) const;
 
     boost::optional<bool> make_is_final(const type_group& tg,
         const annotations::annotation& a) const;
@@ -62,7 +62,8 @@ private:
 
 public:
     void
-    expand(const annotations::repository& arp, intermediate_model& im) const;
+    expand(const annotations::type_repository& atrp,
+        intermediate_model& im) const;
 };
 
 } }

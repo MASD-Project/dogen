@@ -57,7 +57,7 @@ private:
     /**
      * @brief Index fields into the repository.
      */
-    repository create_repository_activity(
+    type_repository create_repository_activity(
         const std::list<type>& fds) const;
 
 public:
@@ -65,7 +65,7 @@ public:
      * @brief Generate the repository with the data available in the
      * supplied directories.
      */
-    repository execute(
+    type_repository execute(
         const std::forward_list<ownership_hierarchy>& oh,
         const std::forward_list<boost::filesystem::path>& dirs) const;
 };

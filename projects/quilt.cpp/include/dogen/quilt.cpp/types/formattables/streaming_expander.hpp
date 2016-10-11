@@ -49,13 +49,13 @@ private:
         const type_group& v);
 
     type_group
-    make_type_group(const annotations::repository& arp) const;
+    make_type_group(const annotations::type_repository& atrp) const;
 
     boost::optional<streaming_properties> make_streaming_properties(
         const type_group& tg, const annotations::annotation& a) const;
 
 public:
-    void expand(const annotations::repository& arp, model& fm) const;
+    void expand(const annotations::type_repository& atrp, model& fm) const;
 };
 
 } } } }

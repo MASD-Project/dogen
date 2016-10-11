@@ -61,7 +61,7 @@ private:
      * @brief Obtains all intermediate models.
      */
     std::list<intermediate_model> obtain_intermediate_models(
-        const annotations::repository& arp,
+        const annotations::type_repository& atrp,
         const std::list<boost::filesystem::path>& dirs,
         const options::input_options& io) const;
 
@@ -75,7 +75,7 @@ private:
      * @brief Executes the post-processing.
      */
     void post_process_merged_intermediate_model(
-        const annotations::repository& arp, intermediate_model& im) const;
+        const annotations::type_repository& atrp, intermediate_model& im) const;
 
     /**
      * @brief Transforms the intermediate model to the final
@@ -84,7 +84,7 @@ private:
     model transform_intermediate_model(const intermediate_model& im) const;
 
 public:
-    model execute(const annotations::repository& arp,
+    model execute(const annotations::type_repository& atrp,
         const std::list<boost::filesystem::path>& dirs,
         const options::input_options& io) const;
 

@@ -58,12 +58,12 @@ std::ostream& operator<<(std::ostream& s,
 
 streaming_expander::type_group
 streaming_expander::make_type_group(
-    const annotations::repository& arp) const {
+    const annotations::type_repository& atrp) const {
     BOOST_LOG_SEV(lg, debug) << "Creating field definitions.";
 
     type_group r;
 
-    const annotations::repository_selector s(arp);
+    const annotations::repository_selector s(atrp);
     const auto scm(traits::cpp::streaming::string_conversion_method());
     r.string_conversion_method = s.select_field_by_name(scm);
 
@@ -114,10 +114,10 @@ streaming_expander::make_streaming_properties(
 }
 
 void streaming_expander::
-expand(const annotations::repository& arp, model& fm) const {
+expand(const annotations::type_repository& atrp, model& fm) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started expanding streaming configuration.";
-    const auto tg(make_type_group(arp));
+    const auto tg(make_type_group(atrp));
     for (auto& pair : fm.formattables()) {
         const auto id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;

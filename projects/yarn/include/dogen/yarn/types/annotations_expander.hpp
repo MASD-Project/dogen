@@ -37,7 +37,7 @@ namespace yarn {
  */
 class annotations_expander {
 public:
-    void expand(const annotations::repository& arp,
+    void expand(const annotations::type_repository& atrp,
         intermediate_model& im) const;
 };
 

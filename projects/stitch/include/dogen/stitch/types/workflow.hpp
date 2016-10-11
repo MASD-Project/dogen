@@ -105,7 +105,7 @@ private:
     /**
      * @brief Sets up the annotations repository.
      */
-    annotations::repository create_annotations_repository_activity(
+    annotations::type_repository create_annotations_repository_activity(
         const std::forward_list<annotations::ownership_hierarchy>& oh)
         const;
 
@@ -113,7 +113,7 @@ private:
      * @brief Parses all of the strings that contain text templates.
      */
     std::forward_list<text_template> parse_text_templates_activity(
-        const annotations::repository& rp,
+        const annotations::type_repository& rp,
         const std::forward_list<
         std::pair<boost::filesystem::path, std::string>
         >& text_templates_as_string) const;
@@ -122,7 +122,7 @@ private:
      * @brief Creates the properties.
      */
     void populate_properties_activity(
-        const annotations::repository& annotations_repository,
+        const annotations::type_repository& annotations_repository,
         const dogen::formatters::repository& formatters_repository,
         std::forward_list<text_template>& text_templates) const;
 

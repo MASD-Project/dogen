@@ -50,7 +50,7 @@ public:
      *
      * @param rp where to look up reference data.
      */
-    decoration_properties_factory(const annotations::repository& drp,
+    decoration_properties_factory(const annotations::type_repository& drp,
         const repository& rp);
 
     /**
@@ -60,7 +60,7 @@ public:
      * @param rp where to look up reference data.
      * @param fallback object to use to construct defaults, if any.
      */
-    decoration_properties_factory(const annotations::repository& drp,
+    decoration_properties_factory(const annotations::type_repository& drp,
         const repository& rp, const annotations::annotation& fallback);
 
 private:
@@ -75,7 +75,7 @@ private:
     };
 
     field_definitions
-    make_field_definitions(const annotations::repository& rp) const;
+    make_field_definitions(const annotations::type_repository& rp) const;
 
     decoration_configuration
     make_decoration_configuration(const annotations::annotation& a) const;

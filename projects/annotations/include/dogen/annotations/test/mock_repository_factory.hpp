@@ -38,14 +38,14 @@ private:
      * @brief Adds the field definition to the repository, populating
      * all of the required containers.
      */
-    void add_type(const type& fd, repository& rp) const;
+    void add_type(const type& fd, type_repository& rp) const;
 
 public:
     /**
      * @brief Creates the repository with canned fields, adding any
      * additional fields the user may supply.
      */
-    repository make(const std::list<type>& additional_fields =
+    type_repository make(const std::list<type>& additional_fields =
         std::list<type> {});
 };
 

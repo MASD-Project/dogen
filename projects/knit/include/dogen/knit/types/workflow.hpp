@@ -99,14 +99,14 @@ private:
     /**
      * @brief Sets up the annotations repository.
      */
-    annotations::repository setup_annotations_repository_activity(
+    annotations::type_repository setup_annotations_repository_activity(
         const std::forward_list<annotations::ownership_hierarchy>& oh) const;
 
     /**
      * @brief Obtain the yarn model.
      */
     yarn::model obtain_yarn_model_activity(
-        const annotations::repository& rp) const;
+        const annotations::type_repository& rp) const;
 
     /**
      * @brief Performs a housekeeping run for the supplied directories.

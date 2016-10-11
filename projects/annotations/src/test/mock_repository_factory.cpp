@@ -39,7 +39,7 @@ namespace annotations {
 namespace test {
 
 void mock_repository_factory::add_type(
-    const type& fd, repository& rp) const {
+    const type& fd, type_repository& rp) const {
 
     const auto n(fd.name().qualified());
     const auto pair(std::make_pair(n, fd));
@@ -55,9 +55,9 @@ void mock_repository_factory::add_type(
         .push_back(fd);
 }
 
-repository mock_repository_factory::make(
+type_repository mock_repository_factory::make(
     const std::list<type>& additional_fields) {
-    repository r;
+    type_repository r;
 
     for (const auto& fd : additional_fields)
         add_type(fd, r);

@@ -49,7 +49,7 @@ private:
     };
     friend std::ostream& operator<<(std::ostream& s, const context& v);
 
-    context make_context(const annotations::repository& arp,
+    context make_context(const annotations::type_repository& atrp,
         const model& fm) const;
 
 private:
@@ -89,7 +89,7 @@ private:
         std::unordered_map<std::string, formattable>& formattables) const;
 
 public:
-    void expand(const annotations::repository& arp,
+    void expand(const annotations::type_repository& atrp,
         const formatters::container& fc, model& fm) const;
 };
 

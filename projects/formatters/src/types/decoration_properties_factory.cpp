@@ -44,13 +44,13 @@ namespace dogen {
 namespace formatters {
 
 decoration_properties_factory::
-decoration_properties_factory(const annotations::repository& drp,
+decoration_properties_factory(const annotations::type_repository& drp,
     const repository& rp) : repository_(rp),
                             field_definitions_(make_field_definitions(drp)),
                             default_configuration_() { }
 
 decoration_properties_factory::
-decoration_properties_factory(const annotations::repository& drp,
+decoration_properties_factory(const annotations::type_repository& drp,
     const repository& rp, const annotations::annotation& fallback)
     : repository_(rp),
       field_definitions_(make_field_definitions(drp)),
@@ -64,7 +64,7 @@ decoration_properties_factory(const annotations::repository& drp,
 
 decoration_properties_factory::field_definitions
 decoration_properties_factory::
-make_field_definitions(const annotations::repository& rp) const {
+make_field_definitions(const annotations::type_repository& rp) const {
     const annotations::repository_selector s(rp);
 
     field_definitions r;

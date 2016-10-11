@@ -87,13 +87,13 @@ inline std::ostream& operator<<(std::ostream& s,
 
 enablement_expander::global_type_group_type
 enablement_expander::make_global_type_group(
-    const annotations::repository& arp,
+    const annotations::type_repository& atrp,
     const formatters::container& fc) const {
 
     BOOST_LOG_SEV(lg, debug) << "Creating global field definitions.";
 
     global_type_group_type r;
-    const annotations::repository_selector s(arp);
+    const annotations::repository_selector s(atrp);
     for (const auto& f : fc.file_formatters()) {
         const auto oh(f->ownership_hierarchy());
 
@@ -278,12 +278,12 @@ void enablement_expander::update_facet_enablement(
 
 enablement_expander::local_type_group_type
 enablement_expander::make_local_type_group(
-    const annotations::repository& arp, const formatters::container& fc) const {
+    const annotations::type_repository& atrp, const formatters::container& fc) const {
 
     BOOST_LOG_SEV(lg, debug) << "Creating local field definitions.";
 
     local_type_group_type r;
-    const annotations::repository_selector s(arp);
+    const annotations::repository_selector s(atrp);
     for (const auto& f : fc.file_formatters()) {
         local_type_group fd;
         const auto oh(f->ownership_hierarchy());
@@ -564,7 +564,7 @@ void enablement_expander::compute_enablement(
     BOOST_LOG_SEV(lg, debug) << "Finished computed enablement.";
 }
 
-void enablement_expander::expand(const annotations::repository& arp,
+void enablement_expander::expand(const annotations::type_repository& atrp,
     const annotations::annotation& root, const formatters::container& fc,
     model& fm) const {
 
@@ -574,7 +574,7 @@ void enablement_expander::expand(const annotations::repository& arp,
      * field definitions that only apply to the root object, as some
      * of these fields do not exist anywhere else.
      */
-    const auto gtg(make_global_type_group(arp, fc));
+    const auto gtg(make_global_type_group(atrp, fc));
 
     /*
      * Read the values for the global field definitions, and update
@@ -588,7 +588,7 @@ void enablement_expander::expand(const annotations::repository& arp,
      * Create the fields for the local field definitions. These are
      * made across all registered formatters.
      */
-    const auto ltg(make_local_type_group(arp, fc));
+    const auto ltg(make_local_type_group(atrp, fc));
 
     /*
      * Bucket the local field definitions by element type - i.e., we

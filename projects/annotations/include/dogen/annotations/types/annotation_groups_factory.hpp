@@ -57,7 +57,7 @@ public:
      * ignored.
      */
     explicit annotation_groups_factory(
-        const repository& rp, const bool throw_on_missing_type = true);
+        const type_repository& rp, const bool throw_on_missing_type = true);
 
 private:
     /**
@@ -102,7 +102,7 @@ public:
         ) const;
 
 private:
-    const repository& repository_;
+    const type_repository& repository_;
     const bool throw_on_missing_type_;
 };
 

@@ -38,7 +38,7 @@ namespace annotations {
  */
 class repository_selector {
 public:
-    explicit repository_selector(const repository& rp);
+    explicit repository_selector(const type_repository& rp);
 
 private:
     /**
@@ -120,7 +120,7 @@ public:
     select_fields_by_model_name(const std::string& n) const;
 
 private:
-    const repository& repository_;
+    const type_repository& repository_;
 };
 
 } }

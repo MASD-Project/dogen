@@ -48,7 +48,7 @@ const std::string field_used_in_invalid_scope(
 namespace dogen {
 namespace annotations {
 
-annotation_groups_factory::annotation_groups_factory(const repository& rp,
+annotation_groups_factory::annotation_groups_factory(const type_repository& rp,
     const bool throw_on_missing_type)
     : repository_(rp),
       throw_on_missing_type_(throw_on_missing_type) { }

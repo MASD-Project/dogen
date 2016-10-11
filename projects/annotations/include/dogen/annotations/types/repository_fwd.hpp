@@ -28,7 +28,7 @@
 namespace dogen {
 namespace annotations {
 
-class repository;
+class type_repository;
 
 } }
 

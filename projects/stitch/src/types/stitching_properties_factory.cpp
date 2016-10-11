@@ -41,12 +41,12 @@ namespace dogen {
 namespace stitch {
 
 stitching_properties_factory::
-stitching_properties_factory(const annotations::repository& rp)
+stitching_properties_factory(const annotations::type_repository& rp)
     : field_definitions_(make_field_definitions(rp)) {}
 
 stitching_properties_factory::field_definitions
 stitching_properties_factory::make_field_definitions(
-    const annotations::repository& rp) const {
+    const annotations::type_repository& rp) const {
     field_definitions r;
     bool found_stream_variable_name(false), found_template_path(false),
         found_output_path(false), found_relative_output_directory(false),

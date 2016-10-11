@@ -49,8 +49,9 @@ class locator {
 public:
     locator(
         const boost::filesystem::path& project_directory_path,
-        const annotations::repository& arp, const formatters::container& fc,
-        const annotations::annotation& root, const yarn::name& model_name,
+        const annotations::type_repository& atrp,
+        const formatters::container& fc, const annotations::annotation& root,
+        const yarn::name& model_name,
         const std::unordered_set<std::string>& module_ids);
 
 private:
@@ -77,13 +78,13 @@ private:
         annotations::type disable_facet_directories;
     };
 
-    type_group make_type_group(const annotations::repository& arp,
+    type_group make_type_group(const annotations::type_repository& atrp,
         const formatters::container& fc) const;
 
     locator_configuration make_configuration(const type_group& tg,
         const annotations::annotation& o) const;
 
-    locator_configuration make_configuration(const annotations::repository& arp,
+    locator_configuration make_configuration(const annotations::type_repository& atrp,
         const formatters::container& fc, const annotations::annotation& o);
 
 private:

@@ -49,7 +49,7 @@ private:
         annotations::type parent;
     };
 
-    type_group make_type_group(const annotations::repository& arp) const;
+    type_group make_type_group(const annotations::type_repository& atrp) const;
 
     std::string make_parent(const type_group& tg,
         const annotations::annotation& a) const;
@@ -81,7 +81,8 @@ public:
     /**
      * Execute the property expansion against the model.
      */
-    void expand(const annotations::repository& arp, intermediate_model& m) const;
+    void expand(const annotations::type_repository& atrp,
+        intermediate_model& m) const;
 };
 
 } }

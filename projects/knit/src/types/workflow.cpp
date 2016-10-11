@@ -81,7 +81,7 @@ obtain_ownership_hierarchy_activity() const {
     return r;
 }
 
-annotations::repository workflow::setup_annotations_repository_activity(
+annotations::type_repository workflow::setup_annotations_repository_activity(
     const std::forward_list<annotations::ownership_hierarchy>& oh) const {
     using namespace dogen::utility::filesystem;
     const auto dir(data_files_directory() / annotations_dir);
@@ -90,7 +90,7 @@ annotations::repository workflow::setup_annotations_repository_activity(
 }
 
 yarn::model workflow::
-obtain_yarn_model_activity(const annotations::repository& rp) const {
+obtain_yarn_model_activity(const annotations::type_repository& rp) const {
 
     using namespace dogen::utility::filesystem;
     const auto dir(data_files_directory() / library_dir);

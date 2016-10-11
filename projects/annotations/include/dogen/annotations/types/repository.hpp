@@ -35,15 +35,15 @@
 namespace dogen {
 namespace annotations {
 
-class repository final {
+class type_repository final {
 public:
-    repository() = default;
-    repository(const repository&) = default;
-    repository(repository&&) = default;
-    ~repository() = default;
+    type_repository() = default;
+    type_repository(const type_repository&) = default;
+    type_repository(type_repository&&) = default;
+    ~type_repository() = default;
 
 public:
-    repository(
+    type_repository(
         const std::list<dogen::annotations::type>& all_field_definitions,
         const std::unordered_map<std::string, dogen::annotations::type>& field_definitions_by_name,
         const std::unordered_map<std::string, std::list<dogen::annotations::type> >& field_definitions_by_facet_name,
@@ -52,10 +52,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::annotations::repository& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::annotations::type_repository& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::annotations::repository& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::annotations::type_repository& v, unsigned int version);
 
 public:
     /**
@@ -104,14 +104,14 @@ public:
     void field_definitions_by_model_name(const std::unordered_map<std::string, std::list<dogen::annotations::type> >&& v);
 
 public:
-    bool operator==(const repository& rhs) const;
-    bool operator!=(const repository& rhs) const {
+    bool operator==(const type_repository& rhs) const;
+    bool operator!=(const type_repository& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(repository& other) noexcept;
-    repository& operator=(repository other);
+    void swap(type_repository& other) noexcept;
+    type_repository& operator=(type_repository other);
 
 private:
     std::list<dogen::annotations::type> all_field_definitions_;
@@ -127,8 +127,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::annotations::repository& lhs,
-    dogen::annotations::repository& rhs) {
+    dogen::annotations::type_repository& lhs,
+    dogen::annotations::type_repository& rhs) {
     lhs.swap(rhs);
 }
 

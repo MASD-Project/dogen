@@ -33,7 +33,7 @@ namespace annotations {
 
 std::ostream&
 operator<<(std::ostream& s,
-     const dogen::annotations::repository& v);
+     const dogen::annotations::type_repository& v);
 
 } }
 

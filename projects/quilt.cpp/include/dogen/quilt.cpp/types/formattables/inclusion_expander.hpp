@@ -86,7 +86,7 @@ private:
         const type_group& v);
 
 
-    type_group make_type_group(const annotations::repository& arp,
+    type_group make_type_group(const annotations::type_repository& atrp,
         const formatters::container& fc) const;
 
     bool make_top_level_inclusion_required(const type_group& tg,
@@ -144,7 +144,7 @@ private:
         std::unordered_map<std::string, formattable>& formattables) const;
 
 public:
-    void expand(const annotations::repository& arp,
+    void expand(const annotations::type_repository& atrp,
         const formatters::container& fc, const locator& l, model& fm) const;
 };
 

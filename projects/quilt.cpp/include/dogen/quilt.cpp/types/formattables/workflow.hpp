@@ -57,7 +57,8 @@ private:
 
     void expand_model(
         const std::forward_list<boost::filesystem::path>& data_directories,
-        const annotations::repository& arp, const annotations::annotation& root,
+        const annotations::type_repository& atrp,
+        const annotations::annotation& root,
         const dogen::formatters::decoration_properties_factory& dpf,
         const formatters::container& fc, const locator& l, model& fm) const;
 
@@ -65,7 +66,8 @@ public:
     model execute(
         const std::forward_list<boost::filesystem::path>& data_directories,
         const options::cpp_options& opts,
-        const annotations::repository& arp, const annotations::annotation& root,
+        const annotations::type_repository& atrp,
+        const annotations::annotation& root,
         const dogen::formatters::decoration_properties_factory& dpf,
         const formatters::container& fc, const yarn::model& m) const;
 };

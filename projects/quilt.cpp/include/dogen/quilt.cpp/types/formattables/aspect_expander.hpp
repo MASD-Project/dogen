@@ -52,7 +52,7 @@ private:
 
     friend std::ostream& operator<<(std::ostream& s, const type_group& v);
 
-    type_group make_type_group(const annotations::repository& arp) const;
+    type_group make_type_group(const annotations::type_repository& atrp) const;
 
     boost::optional<aspect_properties> make_aspect_properties(
         const type_group& tg, const annotations::annotation& a) const;
@@ -62,7 +62,7 @@ private:
     aspect_properties_type;
 
     aspect_properties_type
-    obtain_aspect_properties(const annotations::repository& arp,
+    obtain_aspect_properties(const annotations::type_repository& atrp,
         const std::unordered_map<std::string, formattable>& formattables) const;
 
 private:
@@ -78,7 +78,7 @@ private:
         std::unordered_map<std::string, formattable>& formattables) const;
 
 public:
-    void expand(const annotations::repository& arp, model& fm) const;
+    void expand(const annotations::type_repository& atrp, model& fm) const;
 };
 
 } } } }

@@ -44,9 +44,9 @@ namespace dogen {
 namespace yarn {
 
 parsing_expander::type_group parsing_expander::make_type_group(
-    const annotations::repository& arp) const {
+    const annotations::type_repository& atrp) const {
     type_group r;
-    const annotations::repository_selector rs(arp);
+    const annotations::repository_selector rs(atrp);
     r.parent = rs.select_field_by_name(traits::generalization::parent());
     return r;
 }
@@ -136,8 +136,8 @@ parse_parent(const type_group& tg, const location& model_location,
 }
 
 void parsing_expander::
-expand(const annotations::repository& arp, intermediate_model& m) const {
-    const auto tg(make_type_group(arp));
+expand(const annotations::type_repository& atrp, intermediate_model& m) const {
+    const auto tg(make_type_group(atrp));
     const auto tlmn(obtain_top_level_modules(m));
     const auto ml(m.name().location());
 

@@ -46,7 +46,7 @@ private:
 
     friend std::ostream& operator<<(std::ostream& s, const type_group& v);
 
-    type_group make_type_group(const annotations::repository& arp) const;
+    type_group make_type_group(const annotations::type_repository& atrp) const;
 
     std::list<std::string> make_odb_pragmas(
         const type_group& tg, const annotations::annotation& o) const;
@@ -56,7 +56,7 @@ private:
         const type_group& tg, const yarn::object& o) const;
 
 public:
-    void expand(const annotations::repository& arp, model& fm) const;
+    void expand(const annotations::type_repository& atrp, model& fm) const;
 };
 
 } } } }

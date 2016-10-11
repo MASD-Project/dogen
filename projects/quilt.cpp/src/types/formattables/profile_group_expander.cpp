@@ -72,11 +72,11 @@ inline std::ostream& operator<<(std::ostream& s,
 
 profile_group_expander::type_group
 profile_group_expander::make_type_group(
-    const annotations::repository& arp) const {
+    const annotations::type_repository& atrp) const {
     BOOST_LOG_SEV(lg, debug) << "Creating field definitions.";
 
     type_group r;
-    const annotations::repository_selector s(arp);
+    const annotations::repository_selector s(atrp);
     const auto& mn(formatters::traits::model_name());
     r.profile = s.select_field_by_name(mn, "profile");
 
@@ -185,7 +185,8 @@ profile_group_expander::merge(const profile_group_types& original) const {
     return mg.merge(original);
 }
 
-void profile_group_expander::populate_model(const annotations::repository& arp,
+void profile_group_expander::
+populate_model(const annotations::type_repository& atrp,
     const annotations::annotation& root, const profile_group_types& pgs,
     model& fm) const {
     BOOST_LOG_SEV(lg, debug) << "Populating model with profile groups.";
@@ -193,7 +194,7 @@ void profile_group_expander::populate_model(const annotations::repository& arp,
     /*
      * First setup the global profile.
      */
-    const auto fd(make_type_group(arp));
+    const auto fd(make_type_group(atrp));
     const auto global_cfg(obtain_profile_configuration(fd, root));
     const auto i(pgs.find(global_cfg));
     if (i == pgs.end()) {
@@ -322,13 +323,14 @@ void profile_group_expander::populate_model(const annotations::repository& arp,
 
 void profile_group_expander::expand(
     const std::forward_list<boost::filesystem::path>& data_directories,
-    const annotations::repository& arp, const annotations::annotation& root,
+    const annotations::type_repository& atrp,
+    const annotations::annotation& root,
     const formatters::container& fc, model& fm) const {
 
     const auto original(hydrate(data_directories));
     validate(fc, original);
     const auto merged(merge(original));
-    populate_model(arp, root, merged, fm);
+    populate_model(atrp, root, merged, fm);
 }
 
 } } } }

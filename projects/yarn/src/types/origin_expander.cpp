@@ -65,10 +65,10 @@ private:
 }
 
 origin_expander::type_group origin_expander::
-make_type_group(const annotations::repository& arp) const {
+make_type_group(const annotations::type_repository& atrp) const {
 
     type_group r;
-    const annotations::repository_selector rs(arp);
+    const annotations::repository_selector rs(atrp);
     r.is_proxy_model = rs.select_field_by_name(traits::is_proxy_model());
     return r;
 }
@@ -100,8 +100,8 @@ origin_types origin_expander::compute_origin_types(const intermediate_model& im,
 }
 
 void origin_expander::
-expand(const annotations::repository& arp, intermediate_model& im) const {
-    const auto tg(make_type_group(arp));
+expand(const annotations::type_repository& atrp, intermediate_model& im) const {
+    const auto tg(make_type_group(atrp));
     const auto ipm(is_proxy_model(tg, im));
     const auto ot(compute_origin_types(im, ipm));
     im.origin_type(ot);

@@ -47,7 +47,7 @@ private:
 
     friend std::ostream& operator<<(std::ostream& s, const type_group& v);
 
-    type_group make_type_group(const annotations::repository& arp) const;
+    type_group make_type_group(const annotations::type_repository& atrp) const;
 
     std::string obtain_profile_configuration(const type_group& tg,
         const annotations::annotation& root) const;
@@ -64,15 +64,16 @@ private:
 
     profile_group_types merge(const profile_group_types& original) const;
 
-    void populate_model(
-        const annotations::repository& arp, const annotations::annotation& root,
-        const profile_group_types& pgs, model& fm) const;
+    void populate_model(const annotations::type_repository& atrp,
+        const annotations::annotation& root, const profile_group_types& pgs,
+        model& fm) const;
 
 public:
     void expand(
         const std::forward_list<boost::filesystem::path>& data_directories,
-        const annotations::repository& arp, const annotations::annotation& root,
-        const formatters::container& fc, model& fm) const;
+        const annotations::type_repository& atrp,
+        const annotations::annotation& root, const formatters::container& fc,
+        model& fm) const;
 };
 
 } } } }

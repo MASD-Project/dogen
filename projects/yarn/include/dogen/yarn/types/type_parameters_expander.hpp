@@ -42,7 +42,7 @@ private:
         annotations::type type_parameters_always_in_heap;
     };
 
-    type_group make_type_group(const annotations::repository& arp) const;
+    type_group make_type_group(const annotations::type_repository& atrp) const;
 
     type_parameters make_type_parameters(const type_group& tg,
         const annotations::annotation& a) const;
@@ -51,7 +51,7 @@ private:
     void expand_type_parameters(const type_group& tg, object& o) const;
 
 public:
-    void expand(const annotations::repository& arp,
+    void expand(const annotations::type_repository& atrp,
         intermediate_model& m) const;
 };
 

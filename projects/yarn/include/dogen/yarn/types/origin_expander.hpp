@@ -39,7 +39,7 @@ private:
         annotations::type is_proxy_model;
     };
 
-    type_group make_type_group(const annotations::repository& arp) const;
+    type_group make_type_group(const annotations::type_repository& atrp) const;
 
     bool is_proxy_model(const type_group& tg,
         const intermediate_model& im) const;
@@ -48,7 +48,7 @@ private:
         const bool is_proxy_model) const;
 
 public:
-    void expand(const annotations::repository& arp,
+    void expand(const annotations::type_repository& atrp,
         intermediate_model& im) const;
 };
 

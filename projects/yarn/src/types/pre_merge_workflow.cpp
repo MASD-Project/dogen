@@ -49,32 +49,33 @@ void pre_merge_workflow::expand_modules(intermediate_model& im) const {
     ex.expand(im);
 }
 
-void pre_merge_workflow::expand_annotations(const annotations::repository& arp,
+void pre_merge_workflow::
+expand_annotations(const annotations::type_repository& atrp,
     intermediate_model& im) const {
     annotations_expander ex;
-    ex.expand(arp, im);
+    ex.expand(atrp, im);
 }
 
-void pre_merge_workflow::expand_origin(const annotations::repository& arp,
+void pre_merge_workflow::expand_origin(const annotations::type_repository& atrp,
     intermediate_model& im) const {
     origin_expander ex;
-    ex.expand(arp, im);
+    ex.expand(atrp, im);
 }
 
 void pre_merge_workflow::expand_type_parameters(
-    const annotations::repository& arp, intermediate_model& im) const {
+    const annotations::type_repository& atrp, intermediate_model& im) const {
     type_parameters_expander ex;
-    ex.expand(arp, im);
+    ex.expand(atrp, im);
 }
 
 void pre_merge_workflow::expand_parsing(
-    const annotations::repository& arp, intermediate_model& im) const {
+    const annotations::type_repository& atrp, intermediate_model& im) const {
     parsing_expander ex;
-    ex.expand(arp, im);
+    ex.expand(atrp, im);
 }
 
 std::list<intermediate_model>
-pre_merge_workflow::execute(const annotations::repository& arp,
+pre_merge_workflow::execute(const annotations::type_repository& atrp,
     const std::list<boost::filesystem::path>& dirs,
     const options::input_options& io,
     frontend_registrar& rg) const {
@@ -87,11 +88,11 @@ pre_merge_workflow::execute(const annotations::repository& arp,
          * is populated with annotations properties before being
          * copied over.
          */
-        expand_annotations(arp, im);
+        expand_annotations(atrp, im);
         expand_modules(im);
-        expand_origin(arp, im);
-        expand_type_parameters(arp, im);
-        expand_parsing(arp, im);
+        expand_origin(atrp, im);
+        expand_type_parameters(atrp, im);
+        expand_parsing(atrp, im);
     }
     return r;
 }

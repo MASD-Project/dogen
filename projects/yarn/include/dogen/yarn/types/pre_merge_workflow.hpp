@@ -60,32 +60,33 @@ private:
      * @brief Performs an expansion of all annotations objects on the
      * model.
      */
-    void expand_annotations(const annotations::repository& arp,
+    void expand_annotations(const annotations::type_repository& atrp,
         intermediate_model& im) const;
 
     /**
      * @brief Performs the expansion of the origin type.
      */
-    void expand_origin(const annotations::repository& arp,
+    void expand_origin(const annotations::type_repository& atrp,
         intermediate_model& im) const;
 
     /**
      * @brief Performs a type parameters expansion on the model.
      */
-    void expand_type_parameters(const annotations::repository& arp,
+    void expand_type_parameters(const annotations::type_repository& atrp,
         intermediate_model& im) const;
 
     /**
      * @brief Expand all parts of the model which require parsing.
      */
-    void expand_parsing(const annotations::repository& arp,
+    void expand_parsing(const annotations::type_repository& atrp,
         intermediate_model& im) const;
 
 public:
     /**
      * @brief Executes the workflow.
      */
-    std::list<intermediate_model> execute(const annotations::repository& arp,
+    std::list<intermediate_model>
+    execute(const annotations::type_repository& atrp,
         const std::list<boost::filesystem::path>& dirs,
         const options::input_options& io,
         frontend_registrar& rg) const;

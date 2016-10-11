@@ -76,13 +76,13 @@ std::ostream& operator<<(std::ostream& s, const helper_expander::context& v) {
 }
 
 helper_expander::context helper_expander::make_context(
-    const annotations::repository& arp, const model& fm) const {
+    const annotations::type_repository& atrp, const model& fm) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started making the context.";
     context r;
     r.streaming_propertiess = fm.streaming_properties();
 
-    const annotations::repository_selector s(arp);
+    const annotations::repository_selector s(atrp);
     const auto hf(traits::cpp::helper::family());
     const auto fd(s.select_field_by_name(hf));
 
@@ -354,9 +354,9 @@ void helper_expander::populate_helper_properties(const context& ctx,
     }
 }
 
-void helper_expander::expand(const annotations::repository& arp,
+void helper_expander::expand(const annotations::type_repository& atrp,
     const formatters::container& fc, model& fm) const {
-    const auto ctx(make_context(arp, fm));
+    const auto ctx(make_context(atrp, fm));
     populate_helper_properties(ctx, fc, fm.formattables());
 }
 

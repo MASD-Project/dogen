@@ -40,7 +40,7 @@ namespace stitch {
  */
 class stitching_properties_factory {
 public:
-    stitching_properties_factory(const annotations::repository& rp);
+    stitching_properties_factory(const annotations::type_repository& rp);
 
 private:
     struct field_definitions {
@@ -56,7 +56,7 @@ private:
      * @brief Creates the formatter properties.
      */
     field_definitions
-    make_field_definitions(const annotations::repository& rp) const;
+    make_field_definitions(const annotations::type_repository& rp) const;
 
 private:
     /**

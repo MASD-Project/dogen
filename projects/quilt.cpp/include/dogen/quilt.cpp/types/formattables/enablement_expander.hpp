@@ -58,7 +58,7 @@ private:
     global_type_group_type;
 
     global_type_group_type make_global_type_group(
-        const annotations::repository& arp,
+        const annotations::type_repository& atrp,
         const formatters::container& fc) const;
 
 private:
@@ -87,7 +87,7 @@ private:
     local_type_group_type;
 
     local_type_group_type
-    make_local_type_group(const annotations::repository& rp,
+    make_local_type_group(const annotations::type_repository& rp,
         const formatters::container& fc) const;
 
     std::unordered_map<std::type_index, local_type_group_type>
@@ -115,7 +115,7 @@ private:
         formattable& fbl) const;
 
 public:
-    void expand(const annotations::repository& arp,
+    void expand(const annotations::type_repository& atrp,
         const annotations::annotation& root, const formatters::container& fc,
         model& fm) const;
 };

@@ -77,14 +77,14 @@ populate(const unsigned int position, result_type& v) {
 
 repository_generator::result_type
 repository_generator::create(const unsigned int position) {
-    repository r;
+    type_repository r;
     repository_generator::populate(position, r);
     return r;
 }
 
 repository_generator::result_type*
 repository_generator::create_ptr(const unsigned int position) {
-    repository* p = new repository();
+    type_repository* p = new type_repository();
     repository_generator::populate(position, *p);
     return p;
 }

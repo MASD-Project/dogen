@@ -53,19 +53,20 @@ namespace cpp {
 namespace formattables {
 
 locator::locator(const boost::filesystem::path& project_directory_path,
-    const annotations::repository& arp, const formatters::container& fc,
+    const annotations::type_repository& atrp, const formatters::container& fc,
     const annotations::annotation& root, const yarn::name& model_name,
     const std::unordered_set<std::string>& module_ids)
     : model_name_(model_name),
-      configuration_(make_configuration(arp, fc, root)),
+      configuration_(make_configuration(atrp, fc, root)),
       module_ids_(module_ids),
       project_path_(make_project_path(project_directory_path, model_name)) {}
 
 locator::type_group locator::make_type_group(
-    const annotations::repository& arp, const formatters::container& fc) const {
+    const annotations::type_repository& atrp,
+    const formatters::container& fc) const {
 
     type_group r;
-    const annotations::repository_selector s(arp);
+    const annotations::repository_selector s(atrp);
 
     std::unordered_set<std::string> processed_facets;
     for (const auto ptr : fc.file_formatters()) {
@@ -172,10 +173,10 @@ locator_configuration locator::make_configuration(
 }
 
 locator_configuration locator::make_configuration(
-    const annotations::repository& arp, const formatters::container& fc,
+    const annotations::type_repository& atrp, const formatters::container& fc,
     const annotations::annotation& o) {
 
-    const auto tg(make_type_group (arp, fc));
+    const auto tg(make_type_group (atrp, fc));
     const auto r(make_configuration(tg, o));
     return r;
 }

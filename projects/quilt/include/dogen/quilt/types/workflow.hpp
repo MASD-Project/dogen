@@ -44,7 +44,7 @@ namespace quilt {
 class workflow {
 public:
     workflow(const options::knitting_options& o,
-        const annotations::repository& arp);
+        const annotations::type_repository& atrp);
 
 public:
     /**
@@ -69,7 +69,7 @@ public:
 private:
     static std::shared_ptr<backend_registrar> registrar_;
     const options::knitting_options knitting_options_;
-    const annotations::repository& repository_;
+    const annotations::type_repository& repository_;
 };
 
 } }

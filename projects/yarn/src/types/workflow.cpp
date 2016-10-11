@@ -69,11 +69,11 @@ void workflow::validate() const {
 
 
 std::list<intermediate_model> workflow::
-obtain_intermediate_models(const annotations::repository& arp,
+obtain_intermediate_models(const annotations::type_repository& atrp,
     const std::list<boost::filesystem::path>& dirs,
     const options::input_options& io) const {
     pre_merge_workflow w;
-    return w.execute(arp, dirs, io, frontend_registrar());
+    return w.execute(atrp, dirs, io, frontend_registrar());
 }
 
 intermediate_model workflow::
@@ -93,9 +93,9 @@ merge_intermediate_models(const std::list<intermediate_model>& im) const {
 }
 
 void workflow::post_process_merged_intermediate_model(
-    const annotations::repository& arp, intermediate_model& im) const {
+    const annotations::type_repository& atrp, intermediate_model& im) const {
     post_merge_workflow w;
-    return w.execute(arp, injector_registrar(), im);
+    return w.execute(atrp, injector_registrar(), im);
 }
 
 model workflow::transform_intermediate_model(
@@ -104,13 +104,13 @@ model workflow::transform_intermediate_model(
     return t.transform(im);
 }
 
-model workflow::execute(const annotations::repository& arp,
+model workflow::execute(const annotations::type_repository& atrp,
     const std::list<boost::filesystem::path>& dirs,
     const options::input_options& io) const {
 
-    const auto im(obtain_intermediate_models(arp, dirs, io));
+    const auto im(obtain_intermediate_models(atrp, dirs, io));
     auto mim(merge_intermediate_models(im));
-    post_process_merged_intermediate_model(arp, mim);
+    post_process_merged_intermediate_model(atrp, mim);
     auto r(transform_intermediate_model(mim));
 
     BOOST_LOG_SEV(lg, debug) << "Final model: " << r;

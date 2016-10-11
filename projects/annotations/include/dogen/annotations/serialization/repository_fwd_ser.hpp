@@ -31,10 +31,10 @@ namespace boost {
 namespace serialization {
 
 template<class Archive>
-void save(Archive& ar, const dogen::annotations::repository& v, unsigned int version);
+void save(Archive& ar, const dogen::annotations::type_repository& v, unsigned int version);
 
 template<class Archive>
-void load(Archive& ar, dogen::annotations::repository& v, unsigned int version);
+void load(Archive& ar, dogen::annotations::type_repository& v, unsigned int version);
 
 } }
 

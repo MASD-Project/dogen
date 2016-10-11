@@ -125,7 +125,7 @@ create_formatters_repository_activity() const {
     return hw.hydrate(dirs);
 }
 
-annotations::repository workflow::create_annotations_repository_activity(
+annotations::type_repository workflow::create_annotations_repository_activity(
     const std::forward_list<annotations::ownership_hierarchy>& oh) const {
     using namespace dogen::utility::filesystem;
     const auto dir(data_files_directory() / annotations_dir);
@@ -134,7 +134,7 @@ annotations::repository workflow::create_annotations_repository_activity(
 }
 
 std::forward_list<text_template> workflow::parse_text_templates_activity(
-    const annotations::repository& rp,
+    const annotations::type_repository& rp,
     const std::forward_list<std::pair<boost::filesystem::path, std::string> >&
     text_templates_as_string) const {
     std::forward_list<text_template> r;
@@ -157,7 +157,7 @@ std::forward_list<text_template> workflow::parse_text_templates_activity(
 }
 
 void workflow::populate_properties_activity(
-    const annotations::repository& annotations_repository,
+    const annotations::type_repository& annotations_repository,
     const dogen::formatters::repository& formatters_repository,
     std::forward_list<text_template>& text_templates) const {
 

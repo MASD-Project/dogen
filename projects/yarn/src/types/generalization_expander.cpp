@@ -48,10 +48,10 @@ inline bool operator<(const name& lhs, const name& rhs) {
 }
 
 generalization_expander::type_group generalization_expander::make_type_group(
-    const annotations::repository& arp) const {
+    const annotations::type_repository& atrp) const {
 
     type_group r;
-    const annotations::repository_selector rs(arp);
+    const annotations::repository_selector rs(atrp);
     r.is_final = rs.select_field_by_name(traits::generalization::is_final());
     return r;
 }
@@ -218,10 +218,10 @@ void generalization_expander::sort_leaves(intermediate_model& im) const {
 }
 
 void generalization_expander::
-expand(const annotations::repository& arp, intermediate_model& im) const {
+expand(const annotations::type_repository& atrp, intermediate_model& im) const {
     const auto parent_ids(update_and_collect_parent_ids(im));
 
-    const auto tg(make_type_group(arp));
+    const auto tg(make_type_group(atrp));
     populate_generalizable_properties(tg, parent_ids, im);
     sort_leaves(im);
 }

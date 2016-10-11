@@ -75,7 +75,7 @@ public:
      */
     virtual std::forward_list<formatters::file> generate(
         const options::knitting_options& ko,
-        const annotations::repository& arp,
+        const annotations::type_repository& atrp,
         const yarn::model& m) const = 0;
 };
 
