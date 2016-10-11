@@ -22,8 +22,8 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
 #include "dogen/annotations/types/field_selector.hpp"
+#include "dogen/annotations/types/annotation_groups_factory.hpp"
 #include "dogen/annotations/test/mock_repository_factory.hpp"
-#include "dogen/annotations/test/mock_workflow_factory.hpp"
 #include "dogen/stitch/io/text_template_io.hpp"
 #include "dogen/stitch/types/parsing_error.hpp"
 #include "dogen/stitch/types/parser.hpp"
@@ -142,12 +142,12 @@ const std::string invalid_characters("Invalid characters used");
 
 dogen::stitch::text_template
 parse(const std::string& s) {
-    using namespace dogen::annotations::test;
-    mock_repository_factory rf;
+    dogen::annotations::test::mock_repository_factory rf;
     const auto rp(rf.make());
-    const auto w(mock_workflow_factory::non_validating_workflow(rp));
-
-    const dogen::stitch::parser p(w);
+    const bool throw_on_missing_field_definition(false);
+    dogen::annotations::annotation_groups_factory
+        f(rp, throw_on_missing_field_definition);
+    const dogen::stitch::parser p(f);
     return p.parse(s);
 }
 

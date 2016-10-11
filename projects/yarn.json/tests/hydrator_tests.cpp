@@ -26,7 +26,6 @@
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/annotations/test/mock_field_definition_factory.hpp"
 #include "dogen/annotations/test/mock_repository_factory.hpp"
-#include "dogen/annotations/test/mock_workflow_factory.hpp"
 #include "dogen/annotations/types/field_definition.hpp"
 #include "dogen/annotations/types/field_selector.hpp"
 #include "dogen/yarn/types/object.hpp"
@@ -170,7 +169,6 @@ dogen::annotations::repository create_repository() {
 dogen::yarn::intermediate_model hydrate(std::istream& s) {
     const auto rp(create_repository());
 
-    using dogen::annotations::test::mock_workflow_factory;
     dogen::yarn::json::hydrator h;
     return h.hydrate(s, false/*is_target*/);
 }

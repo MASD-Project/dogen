@@ -76,7 +76,8 @@ const bool do_trim(true);
 namespace dogen {
 namespace stitch {
 
-parser::parser(const annotations::workflow& w) : annotations_workflow_(w) {}
+parser::parser(const annotations::annotation_groups_factory& f)
+    : annotation_factory_(f) {}
 
 block parser::create_block(const block_types bt, const std::string& c,
     const bool trim) const {
@@ -346,7 +347,7 @@ text_template parser::parse(const std::string& s) const {
         using annotations::scope_types;
         const auto scope(scope_types::root_module);
         const auto scribble = annotations::scribble(kvps);
-        r.annotation(annotations_workflow_.execute(scope, scribble));
+        r.annotation(annotation_factory_.build(scope, scribble));
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished parsing.";

@@ -31,7 +31,7 @@
 #include "dogen/stitch/types/block.hpp"
 #include "dogen/stitch/types/text_template.hpp"
 #include "dogen/annotations/types/object.hpp"
-#include "dogen/annotations/types/workflow.hpp"
+#include "dogen/annotations/types/annotation_groups_factory.hpp"
 
 namespace dogen {
 namespace stitch {
@@ -47,7 +47,7 @@ typedef boost::error_info<struct tag_line_number, std::string> error_at_line;
  */
 class parser {
 public:
-    explicit parser(const annotations::workflow& w);
+    explicit parser(const annotations::annotation_groups_factory& f);
 
 private:
     /**
@@ -100,7 +100,7 @@ public:
     text_template parse(const std::string& s) const;
 
 private:
-    const annotations::workflow& annotations_workflow_;
+    const annotations::annotation_groups_factory& annotation_factory_;
 };
 
 } }

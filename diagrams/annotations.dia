@@ -4837,10 +4837,10 @@ any.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#object_#</dia:string>
+            <dia:string>#annotation_#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#object#</dia:string>
+            <dia:string>#annotation#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

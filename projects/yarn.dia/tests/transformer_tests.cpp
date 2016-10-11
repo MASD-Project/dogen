@@ -26,7 +26,6 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/asserter.hpp"
-#include "dogen/annotations/test/mock_workflow_factory.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/yarn.dia/types/transformer.hpp"
 #include "dogen/yarn.dia/types/profiler.hpp"
@@ -34,8 +33,6 @@
 #include "dogen/yarn.dia/io/repository_io.hpp"
 #include "dogen/yarn.dia/types/processed_object.hpp"
 #include "dogen/yarn.dia/test/mock_processed_object_factory.hpp"
-#include "dogen/annotations/test/mock_repository_factory.hpp"
-#include "dogen/annotations/test/mock_workflow_factory.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
 
 using namespace dogen::yarn::dia;
@@ -115,8 +112,7 @@ void transform(dogen::yarn::dia::repository& c,
     using namespace dogen::annotations::test;
     mock_repository_factory rf;
     const auto rp(rf.make());
-    const auto w(mock_workflow_factory::non_validating_workflow(rp));
-    dogen::yarn::dia::transformer t(w, c);
+    dogen::yarn::dia::transformer t(c);
 
     for (const auto& po : lpo)
         t.transform(po, mock_profile(po));

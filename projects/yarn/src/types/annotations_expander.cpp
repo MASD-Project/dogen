@@ -23,8 +23,8 @@
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/annotations/io/scope_types_io.hpp"
 #include "dogen/annotations/types/object.hpp"
-#include "dogen/annotations/types/workflow.hpp"
 #include "dogen/annotations/io/scribble_group_io.hpp"
+#include "dogen/annotations/types/annotation_groups_factory.hpp"
 #include "dogen/yarn/types/expansion_error.hpp"
 #include "dogen/yarn/types/elements_traversal.hpp"
 #include "dogen/yarn/types/annotations_expander.hpp"
@@ -120,8 +120,8 @@ expand(const annotations::repository& drp, intermediate_model& im) const {
     BOOST_LOG_SEV(lg, debug) << "Scribble groups: "
                              << im.indices().scribble_groups();
 
-    const annotations::workflow w(drp);
-    const auto sgrps(w.execute(im.name().id(), im.indices().scribble_groups()));
+    const annotations::annotation_groups_factory f(drp);
+    const auto sgrps(f.build(im.name().id(), im.indices().scribble_groups()));
     updater u(im.name(), sgrps);
     yarn::elements_traversal(im, u);
 

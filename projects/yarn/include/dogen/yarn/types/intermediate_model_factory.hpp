@@ -29,7 +29,6 @@
 #include <boost/optional.hpp>
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/annotations/types/repository.hpp"
-#include "dogen/annotations/types/workflow.hpp"
 #include "dogen/yarn/types/frontend_registrar.hpp"
 #include "dogen/yarn/types/frontend_interface.hpp"
 #include "dogen/yarn/types/descriptor.hpp"

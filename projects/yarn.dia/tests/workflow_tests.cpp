@@ -34,7 +34,6 @@
 #include "dogen/dia/test/diagram_serialization_helper.hpp"
 #include "dogen/yarn/serialization/registrar_ser.hpp"
 #include "dogen/annotations/test/mock_repository_factory.hpp"
-#include "dogen/annotations/test/mock_workflow_factory.hpp"
 #include "dogen/yarn.dia/types/workflow.hpp"
 
 template<typename Archive> void register_types(Archive& ar) {

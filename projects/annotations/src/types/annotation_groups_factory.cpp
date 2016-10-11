@@ -26,13 +26,13 @@
 #include "dogen/annotations/io/field_definition_io.hpp"
 #include "dogen/annotations/io/scope_types_io.hpp"
 #include "dogen/annotations/types/field_instance_factory.hpp"
-#include "dogen/annotations/types/workflow_error.hpp"
-#include "dogen/annotations/types/workflow.hpp"
+#include "dogen/annotations/types/building_error.hpp"
+#include "dogen/annotations/types/annotation_groups_factory.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("annotations.workflow"));
+static logger lg(logger_factory("annotations.annotation_groups_factory"));
 
 const std::string expected_scope(" Expected scope: ");
 const std::string actual_scope(" Actual scope: ");
@@ -48,12 +48,12 @@ const std::string field_used_in_invalid_scope(
 namespace dogen {
 namespace annotations {
 
-workflow::workflow(const repository& rp,
+annotation_groups_factory::annotation_groups_factory(const repository& rp,
     const bool throw_on_missing_field_definition)
     : repository_(rp),
       throw_on_missing_field_definition_(throw_on_missing_field_definition) { }
 
-boost::optional<field_definition> workflow::
+boost::optional<field_definition> annotation_groups_factory::
 obtain_field_definition(const std::string& n) const {
     const auto i(repository_.field_definitions_by_name().find(n));
     if (i == repository_.field_definitions_by_name().end()) {
@@ -61,7 +61,7 @@ obtain_field_definition(const std::string& n) const {
             BOOST_LOG_SEV(lg, error) << field_definition_not_found << n;
 
             BOOST_THROW_EXCEPTION(
-                workflow_error(field_definition_not_found + n));
+                building_error(field_definition_not_found + n));
         }
 
         BOOST_LOG_SEV(lg, warn) << field_definition_not_found << n;
@@ -70,7 +70,7 @@ obtain_field_definition(const std::string& n) const {
     return i->second;
 }
 
-void workflow::validate_scope(const field_definition& fd,
+void annotation_groups_factory::validate_scope(const field_definition& fd,
     const scope_types current_scope) const {
     if (fd.scope() != scope_types::any &&
         fd.scope() != scope_types::not_applicable &&
@@ -81,12 +81,12 @@ void workflow::validate_scope(const field_definition& fd,
           << expected_scope << fd.scope()
           << actual_scope << current_scope;
         BOOST_LOG_SEV(lg, error) << s.str();
-        BOOST_THROW_EXCEPTION(workflow_error(s.str()));
+        BOOST_THROW_EXCEPTION(building_error(s.str()));
     }
 }
 
 std::unordered_map<std::string, field_instance>
-workflow::create_fields(const scope_types current_scope,
+annotation_groups_factory::create_fields(const scope_types current_scope,
     const std::unordered_map<std::string, std::list<std::string>>&
     aggregated_scribble_entries) const {
 
@@ -106,7 +106,7 @@ workflow::create_fields(const scope_types current_scope,
 }
 
 std::unordered_map<std::string, std::list<std::string>>
-workflow::aggregate_scribble_entries(const scribble& scribble) const {
+annotation_groups_factory::aggregate_scribble_entries(const scribble& scribble) const {
     std::unordered_map<std::string, std::list<std::string> > r;
 
     for (const auto& entry : scribble.entries())
@@ -115,22 +115,22 @@ workflow::aggregate_scribble_entries(const scribble& scribble) const {
     return r;
 }
 
-scope_types workflow::
+scope_types annotation_groups_factory::
 compute_scope_for_id(const std::string& root_annotation_id,
     const std::string& current_id) const {
     const auto is_root(current_id == root_annotation_id);
     return is_root ? scope_types::root_module : scope_types::entity;
 }
 
-annotation workflow::
-execute(const scope_types scope, const scribble& scribble) const {
+annotation annotation_groups_factory::
+build(const scope_types scope, const scribble& scribble) const {
     auto aggregated_entries(aggregate_scribble_entries(scribble));
     auto fields(create_fields(scope, aggregated_entries));
     return annotation(fields);
 }
 
 std::unordered_map<std::string, annotation_group>
-workflow::execute(const std::string& root_annotation_id,
+annotation_groups_factory::build(const std::string& root_annotation_id,
     const std::unordered_map<std::string, scribble_group>& scribble_groups
     ) const {
 
@@ -140,13 +140,13 @@ workflow::execute(const std::string& root_annotation_id,
         const auto& scribble(pair.second);
         annotation_group ag;
         const auto scope(compute_scope_for_id(root_annotation_id, id));
-        ag.parent(execute(scope, scribble.parent()));
+        ag.parent(build(scope, scribble.parent()));
 
         for (const auto& pair : scribble.children()) {
             const auto child_id(pair.first);
             const auto& child(pair.second);
             const auto scope(scope_types::property);
-            ag.children()[child_id] = execute(scope, child);
+            ag.children()[child_id] = build(scope, child);
         }
         r[id] = ag;
     }

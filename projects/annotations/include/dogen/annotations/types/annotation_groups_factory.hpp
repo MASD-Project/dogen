@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_WORKFLOW_HPP
-#define DOGEN_ANNOTATIONS_TYPES_WORKFLOW_HPP
+#ifndef DOGEN_ANNOTATIONS_TYPES_ANNOTATION_GROUPS_FACTORY_HPP
+#define DOGEN_ANNOTATIONS_TYPES_ANNOTATION_GROUPS_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -44,7 +44,7 @@ namespace annotations {
 /**
  * @brief Produces an annotation object from raw data.
  */
-class workflow {
+class annotation_groups_factory {
 public:
     /**
      * @brief Initialise the annotations object factory.
@@ -56,7 +56,7 @@ public:
      * exist will result in an exception. If false, they will be
      * ignored.
      */
-    explicit workflow(
+    explicit annotation_groups_factory(
         const repository& rp,
         const bool throw_on_missing_field_definition = true);
 
@@ -97,10 +97,10 @@ public:
     /**
      * @brief Produce the annotations object.
      */
-    annotation execute(const scope_types scope, const scribble& scribble) const;
+    annotation build(const scope_types scope, const scribble& scribble) const;
 
     std::unordered_map<std::string, annotation_group>
-    execute(const std::string& root_object_id,
+    build(const std::string& root_object_id,
         const std::unordered_map<std::string, scribble_group>& scribble_groups
         ) const;
 

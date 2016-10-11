@@ -26,8 +26,8 @@
 #include "dogen/utility/io/forward_list_io.hpp"
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/filesystem/file.hpp"
-#include "dogen/annotations/types/workflow.hpp"
 #include "dogen/annotations/types/repository_workflow.hpp"
+#include "dogen/annotations/types/annotation_groups_factory.hpp"
 #include "dogen/formatters/types/hydration_workflow.hpp"
 #include "dogen/formatters/io/file_io.hpp"
 #include "dogen/formatters/types/filesystem_writer.hpp"
@@ -138,8 +138,8 @@ std::forward_list<text_template> workflow::parse_text_templates_activity(
     const std::forward_list<std::pair<boost::filesystem::path, std::string> >&
     text_templates_as_string) const {
     std::forward_list<text_template> r;
-    const annotations::workflow w(rp);
-    const parser p(w);
+    const annotations::annotation_groups_factory f(rp);
+    const parser p(f);
     for (const auto& pair : text_templates_as_string) {
         BOOST_LOG_SEV(lg, debug) << "Parsing file: "
                                  << pair.first.generic_string();

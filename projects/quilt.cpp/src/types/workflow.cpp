@@ -25,7 +25,6 @@
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/formatters/io/decoration_properties_io.hpp"
 #include "dogen/formatters/types/hydration_workflow.hpp"
-#include "dogen/annotations/types/workflow.hpp"
 #include "dogen/quilt.cpp/types/formatters/workflow.hpp"
 #include "dogen/quilt.cpp/types/formattables/workflow.hpp"
 #include "dogen/quilt.cpp/types/workflow.hpp"
