@@ -81,19 +81,19 @@ private:
     /**
      * @brief Reads the entire stream as a property tree.
      */
-    std::list<field_definition> read_stream(std::istream& s) const;
+    std::list<type> read_stream(std::istream& s) const;
 
 public:
     /**
      * @brief Hydrates the field definitions from the JSON stream.
      */
-    std::list<field_definition> hydrate(std::istream& s) const;
+    std::list<type> hydrate(std::istream& s) const;
 
     /**
      * @brief Opens up the file at path and then hydrates the field
      * definitions from the JSON stream.
      */
-    std::list<field_definition> hydrate(const boost::filesystem::path& p) const;
+    std::list<type> hydrate(const boost::filesystem::path& p) const;
 };
 
 } }

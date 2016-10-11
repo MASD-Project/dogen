@@ -46,7 +46,7 @@ namespace yarn {
 class parsing_expander {
 private:
     struct field_definitions {
-        annotations::field_definition parent;
+        annotations::type parent;
     };
 
     field_definitions make_field_definitions(

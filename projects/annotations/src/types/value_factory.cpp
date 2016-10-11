@@ -133,7 +133,7 @@ boost::shared_ptr<value> value_factory::make_number(const int v) const {
     return boost::make_shared<number>(v);
 }
 
-boost::shared_ptr<value> value_factory::make(const field_definition& fd,
+boost::shared_ptr<value> value_factory::make(const type& fd,
     const std::list<std::string>& v) const {
 
     if (!is_collection(fd.value_type()))

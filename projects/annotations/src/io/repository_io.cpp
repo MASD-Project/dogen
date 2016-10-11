@@ -25,7 +25,7 @@
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::annotations::field_definition>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::annotations::type>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -46,7 +46,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::annotations::field_definition>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::annotations::type>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -64,7 +64,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::list<dogen::annotations::field_definition> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::list<dogen::annotations::type> >& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

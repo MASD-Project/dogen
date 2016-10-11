@@ -46,9 +46,9 @@ namespace formattables {
 class enablement_expander {
 private:
     struct global_field_definitions {
-        annotations::field_definition model_enabled;
-        annotations::field_definition facet_enabled;
-        annotations::field_definition formatter_enabled;
+        annotations::type model_enabled;
+        annotations::type facet_enabled;
+        annotations::type formatter_enabled;
     };
 
     friend std::ostream& operator<<(std::ostream& s,
@@ -75,9 +75,9 @@ private:
 
 private:
     struct local_field_definitions {
-        annotations::field_definition facet_enabled;
-        annotations::field_definition formatter_enabled;
-        annotations::field_definition facet_supported;
+        annotations::type facet_enabled;
+        annotations::type formatter_enabled;
+        annotations::type facet_supported;
     };
 
     friend std::ostream& operator<<(std::ostream& s,

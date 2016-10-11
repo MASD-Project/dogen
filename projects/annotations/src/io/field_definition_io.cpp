@@ -46,7 +46,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
 namespace dogen {
 namespace annotations {
 
-std::ostream& operator<<(std::ostream& s, const field_definition& v) {
+std::ostream& operator<<(std::ostream& s, const type& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::annotations::field_definition\"" << ", "
       << "\"name\": " << v.name() << ", "

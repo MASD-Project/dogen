@@ -42,7 +42,7 @@ namespace formattables {
 class profile_group_expander {
 private:
     struct field_definitions {
-        annotations::field_definition profile;
+        annotations::type profile;
     };
 
     friend std::ostream& operator<<(std::ostream& s,

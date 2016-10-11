@@ -24,8 +24,8 @@ namespace dogen {
 namespace annotations {
 namespace test {
 
-field_definition mock_field_definition_factory::containing_namespaces() const {
-    field_definition r;
+type mock_field_definition_factory::containing_namespaces() const {
+    type r;
     r.name().simple("containing_namespaces");
     r.name().qualified("containing_namespaces");
     r.ownership_hierarchy().model_name("stitch");
@@ -35,8 +35,8 @@ field_definition mock_field_definition_factory::containing_namespaces() const {
     return r;
 }
 
-field_definition mock_field_definition_factory::copyright_notice() const {
-    field_definition r;
+type mock_field_definition_factory::copyright_notice() const {
+    type r;
     r.name().simple("copyright_notice");
     r.name().qualified("copyright_notice");
     r.ownership_hierarchy().model_name("formatters");
@@ -46,8 +46,8 @@ field_definition mock_field_definition_factory::copyright_notice() const {
     return r;
 }
 
-field_definition mock_field_definition_factory::licence_name() const {
-    field_definition r;
+type mock_field_definition_factory::licence_name() const {
+    type r;
     r.name().simple("licence_name");
     r.name().qualified("licence_name");
     r.ownership_hierarchy().model_name("formatters");
@@ -57,8 +57,8 @@ field_definition mock_field_definition_factory::licence_name() const {
     return r;
 }
 
-field_definition mock_field_definition_factory::create_comment() const {
-    field_definition r;
+type mock_field_definition_factory::create_comment() const {
+    type r;
     r.name().simple("comment");
     r.name().qualified("yarn.dia.comment");
     r.ownership_hierarchy().model_name("yarn.dia");
@@ -68,9 +68,9 @@ field_definition mock_field_definition_factory::create_comment() const {
     return r;
 }
 
-std::list<field_definition> mock_field_definition_factory::
+std::list<type> mock_field_definition_factory::
 make_canned_field_definitions() const {
-    std::list<field_definition> r;
+    std::list<type> r;
     r.push_back(create_comment());
     r.push_back(licence_name());
     r.push_back(copyright_notice());
@@ -78,9 +78,9 @@ make_canned_field_definitions() const {
     return r;
 }
 
-field_definition mock_field_definition_factory::
+type mock_field_definition_factory::
 make_field_definition(const std::string n, value_types vt) const {
-    field_definition r;
+    type r;
     r.name().simple(n);
     r.name().qualified(n);
     r.value_type(vt);

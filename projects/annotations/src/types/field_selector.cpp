@@ -53,7 +53,7 @@ namespace annotations {
 
 field_selector::field_selector(const annotation& a) : annotation_(a) { }
 
-void field_selector::ensure_default_value(const field_definition& fd) const {
+void field_selector::ensure_default_value(const type& fd) const {
     if (!fd.default_value()) {
         const auto& n(fd.name().qualified());
         BOOST_LOG_SEV(lg, error) << no_default_value << "'" << n << "'";
@@ -66,7 +66,7 @@ bool field_selector::has_field(const std::string& qualified_field_name) const {
     return (i != annotation_.entries().end());
 }
 
-bool field_selector::has_field(const field_definition& fd) const {
+bool field_selector::has_field(const type& fd) const {
     return has_field(fd.name().qualified());
 }
 
@@ -83,7 +83,7 @@ get_field(const std::string& qualified_field_name) const {
     return *i->second;
 }
 
-const value& field_selector::get_field(const field_definition& fd) const {
+const value& field_selector::get_field(const type& fd) const {
     return get_field(fd.name().qualified());
 }
 
@@ -111,7 +111,7 @@ get_text_content(const std::string& qualified_field_name) const {
 }
 
 std::string field_selector::
-get_text_content_or_default(const field_definition& fd) const {
+get_text_content_or_default(const type& fd) const {
     if (has_field(fd))
         return get_text_content(fd);
 
@@ -139,7 +139,7 @@ field_selector::get_text_collection_content(const value& v) {
     }
 }
 
-std::string field_selector::get_text_content(const field_definition& fd) const {
+std::string field_selector::get_text_content(const type& fd) const {
     return get_text_content(fd.name().qualified());
 }
 
@@ -159,12 +159,12 @@ get_text_collection_content(const std::string& qualified_field_name) const {
 }
 
 std::list<std::string> field_selector::
-get_text_collection_content(const field_definition& fd) const {
+get_text_collection_content(const type& fd) const {
     return get_text_collection_content(fd.name().qualified());
 }
 
 std::list<std::string> field_selector::
-get_text_collection_content_or_default(const field_definition& fd) const {
+get_text_collection_content_or_default(const type& fd) const {
     if (has_field(fd))
         return get_text_collection_content(fd);
 
@@ -204,12 +204,12 @@ get_boolean_content(const std::string& qualified_field_name) const {
     }
 }
 
-bool field_selector::get_boolean_content(const field_definition& fd) const {
+bool field_selector::get_boolean_content(const type& fd) const {
     return get_boolean_content(fd.name().qualified());
 }
 
 bool field_selector::
-get_boolean_content_or_default(const field_definition& fd) const {
+get_boolean_content_or_default(const type& fd) const {
     if (has_field(fd))
         return get_boolean_content(fd);
 
@@ -249,12 +249,12 @@ get_number_content(const std::string& qualified_field_name) const {
     }
 }
 
-int field_selector::get_number_content(const field_definition& fd) const {
+int field_selector::get_number_content(const type& fd) const {
     return get_number_content(fd.name().qualified());
 }
 
 int field_selector::
-get_number_content_or_default(const field_definition& fd) const {
+get_number_content_or_default(const type& fd) const {
     if (has_field(fd))
         return get_number_content(fd);
 

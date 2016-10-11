@@ -53,33 +53,33 @@ private:
      * @brief Ensures the field definition is in a valid state for
      * instantiation.
      */
-    void validate(const field_definition& fd) const;
+    void validate(const type& fd) const;
 
 private:
     /**
      * @brief Instantiates the field definition as a global template.
      */
-    std::list<field_definition>
-    instantiate_global_template(const field_definition& fd) const;
+    std::list<type>
+    instantiate_global_template(const type& fd) const;
 
     /**
      * @brief Instantiates the field definition as a facet template.
      */
-    std::list<field_definition>
-    instantiate_facet_template(const field_definition& fd) const;
+    std::list<type>
+    instantiate_facet_template(const type& fd) const;
 
     /**
      * @brief Instantiates the field definition as a formatter template.
      */
-    std::list<field_definition>
-    instantiate_formatter_template(const field_definition& fd) const;
+    std::list<type>
+    instantiate_formatter_template(const type& fd) const;
 
 public:
     /**
      * @brief Returns true if the supplied field definition can be
      * instantiated.
      */
-    bool is_instantiable(const field_definition& fd) const;
+    bool is_instantiable(const type& fd) const;
 
     /**
      * @brief Instantiates the supplied field definition template into
@@ -87,8 +87,8 @@ public:
      *
      * @pre is_instantiable(fd)fd must be true.
      */
-    std::list<field_definition>
-    instantiate(const field_definition& fd) const;
+    std::list<type>
+    instantiate(const type& fd) const;
 
 private:
     const std::forward_list<ownership_hierarchy>& ownership_hierarchy_;

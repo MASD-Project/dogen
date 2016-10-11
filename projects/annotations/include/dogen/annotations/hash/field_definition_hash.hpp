@@ -33,7 +33,7 @@ namespace annotations {
 
 struct field_definition_hasher {
 public:
-    static std::size_t hash(const field_definition& v);
+    static std::size_t hash(const type& v);
 };
 
 } }
@@ -41,9 +41,9 @@ public:
 namespace std {
 
 template<>
-struct hash<dogen::annotations::field_definition> {
+struct hash<dogen::annotations::type> {
 public:
-    size_t operator()(const dogen::annotations::field_definition& v) const {
+    size_t operator()(const dogen::annotations::type& v) const {
         return dogen::annotations::field_definition_hasher::hash(v);
     }
 };

@@ -33,7 +33,7 @@ namespace annotations {
 
 std::ostream&
 operator<<(std::ostream& s,
-     const dogen::annotations::field_definition& v);
+     const dogen::annotations::type& v);
 
 } }
 

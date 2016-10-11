@@ -55,14 +55,14 @@ public:
 
 private:
     struct facet_field_definitions {
-        annotations::field_definition directory;
-        annotations::field_definition postfix;
+        annotations::type directory;
+        annotations::type postfix;
     };
 
     struct formatter_field_definitions {
-        boost::optional<annotations::field_definition> facet_directory;
-        boost::optional<annotations::field_definition> facet_postfix;
-        annotations::field_definition formatter_postfix;
+        boost::optional<annotations::type> facet_directory;
+        boost::optional<annotations::type> facet_postfix;
+        annotations::type formatter_postfix;
     };
 
     struct field_definitions {
@@ -70,11 +70,11 @@ private:
         facets_field_definitions;
         std::unordered_map<std::string, formatter_field_definitions>
         formatters_field_definitions;
-        annotations::field_definition header_file_extension;
-        annotations::field_definition implementation_file_extension;
-        annotations::field_definition include_directory_name;
-        annotations::field_definition source_directory_name;
-        annotations::field_definition disable_facet_directories;
+        annotations::type header_file_extension;
+        annotations::type implementation_file_extension;
+        annotations::type include_directory_name;
+        annotations::type source_directory_name;
+        annotations::type disable_facet_directories;
     };
 
     field_definitions make_field_definitions(const annotations::repository& drp,

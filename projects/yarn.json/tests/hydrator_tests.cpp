@@ -157,7 +157,7 @@ dogen::annotations::repository create_repository() {
     using namespace dogen::annotations;
     test::mock_field_definition_factory f;
 
-    std::list<field_definition> fds;
+    std::list<type> fds;
     fds.push_back(f.make_field_definition(model_key));
     fds.push_back(f.make_field_definition(some_key));
     fds.push_back(f.make_field_definition(type_key, value_types::boolean));

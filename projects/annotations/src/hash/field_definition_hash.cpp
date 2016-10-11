@@ -45,7 +45,7 @@ inline std::size_t hash_boost_shared_ptr_dogen_annotations_value(const boost::sh
 namespace dogen {
 namespace annotations {
 
-std::size_t field_definition_hasher::hash(const field_definition& v) {
+std::size_t field_definition_hasher::hash(const type& v) {
     std::size_t seed(0);
 
     combine(seed, v.name());

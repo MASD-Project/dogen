@@ -45,9 +45,9 @@ namespace formattables {
 class aspect_expander {
 private:
     struct field_definitions {
-        annotations::field_definition requires_manual_default_constructor;
-        annotations::field_definition requires_manual_move_constructor;
-        annotations::field_definition requires_stream_manipulators;
+        annotations::type requires_manual_default_constructor;
+        annotations::type requires_manual_move_constructor;
+        annotations::type requires_stream_manipulators;
     };
 
     friend std::ostream& operator<<(std::ostream& s,

@@ -32,7 +32,7 @@ namespace annotations {
 
 class repository_factory {
 public:
-    repository make(const std::list<field_definition>& fds) const;
+    repository make(const std::list<type>& fds) const;
 };
 
 } }

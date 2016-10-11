@@ -37,9 +37,9 @@ namespace yarn {
 class type_parameters_expander {
 private:
     struct field_definitions {
-        annotations::field_definition variable_number_of_parameters;
-        annotations::field_definition type_parameters_count;
-        annotations::field_definition type_parameters_always_in_heap;
+        annotations::type variable_number_of_parameters;
+        annotations::type type_parameters_count;
+        annotations::type type_parameters_always_in_heap;
     };
 
     field_definitions make_field_definitions(

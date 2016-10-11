@@ -53,7 +53,7 @@ annotation_groups_factory::annotation_groups_factory(const repository& rp,
     : repository_(rp),
       throw_on_missing_field_definition_(throw_on_missing_field_definition) { }
 
-boost::optional<field_definition> annotation_groups_factory::
+boost::optional<type> annotation_groups_factory::
 obtain_field_definition(const std::string& n) const {
     const auto i(repository_.field_definitions_by_name().find(n));
     if (i == repository_.field_definitions_by_name().end()) {
@@ -65,12 +65,12 @@ obtain_field_definition(const std::string& n) const {
         }
 
         BOOST_LOG_SEV(lg, warn) << field_definition_not_found << n;
-        return boost::optional<field_definition>();
+        return boost::optional<type>();
     }
     return i->second;
 }
 
-void annotation_groups_factory::validate_scope(const field_definition& fd,
+void annotation_groups_factory::validate_scope(const type& fd,
     const scope_types current_scope) const {
     if (fd.scope() != scope_types::any &&
         fd.scope() != scope_types::not_applicable &&

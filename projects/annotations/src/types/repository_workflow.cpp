@@ -40,16 +40,16 @@ static logger lg(logger_factory("annotations.repository_workflow"));
 namespace dogen {
 namespace annotations {
 
-std::list<field_definition> repository_workflow::hydrate_directories_activity(
+std::list<type> repository_workflow::hydrate_directories_activity(
     const std::forward_list<boost::filesystem::path>& dirs) const {
     hydration_workflow w;
     return w.hydrate(dirs);
 }
 
-std::list<field_definition> repository_workflow::instantiate_templates_activity(
+std::list<type> repository_workflow::instantiate_templates_activity(
     const std::forward_list<ownership_hierarchy>& oh,
-    const std::list<field_definition>& fds) const {
-    std::list<field_definition> r;
+    const std::list<type>& fds) const {
+    std::list<type> r;
 
     const instantiator ins(oh);
     unsigned int counter(0);
@@ -68,7 +68,7 @@ std::list<field_definition> repository_workflow::instantiate_templates_activity(
 }
 
 repository repository_workflow::create_repository_activity(
-    const std::list<field_definition>& fds) const {
+    const std::list<type>& fds) const {
     repository_factory f;
     return f.make(fds);
 }

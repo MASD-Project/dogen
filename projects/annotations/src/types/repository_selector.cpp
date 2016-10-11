@@ -48,23 +48,23 @@ qualify(const std::string& prefix, const std::string& field_name) const {
     return prefix + dot + field_name;
 }
 
-boost::optional<const field_definition&> repository_selector::
+boost::optional<const type&> repository_selector::
 try_select_field_by_name(const std::string& n) const {
     const auto& c(repository_.field_definitions_by_name());
     const auto i(c.find(n));
     if (i == c.end())
-        return boost::optional<const field_definition&>();
+        return boost::optional<const type&>();
 
     return i->second;
 }
 
-boost::optional<const field_definition&> repository_selector::
+boost::optional<const type&> repository_selector::
 try_select_field_by_name(const std::string& prefix,
     const std::string& simple_field_name) const {
     return try_select_field_by_name(qualify(prefix, simple_field_name));
 }
 
-const field_definition& repository_selector::
+const type& repository_selector::
 select_field_by_name(const std::string& n) const {
     const auto r(try_select_field_by_name(n));
     if (!r) {
@@ -74,13 +74,13 @@ select_field_by_name(const std::string& n) const {
     return *r;
 }
 
-const field_definition& repository_selector::select_field_by_name(
+const type& repository_selector::select_field_by_name(
     const std::string& prefix,
     const std::string& simple_field_name) const {
     return select_field_by_name(qualify(prefix, simple_field_name));
 }
 
-const std::list<field_definition>& repository_selector::
+const std::list<type>& repository_selector::
 select_fields_by_formatter_name(const std::string& n) const {
     const auto& c(repository_.field_definitions_by_formatter_name());
     const auto i(c.find(n));
@@ -91,7 +91,7 @@ select_fields_by_formatter_name(const std::string& n) const {
     return i->second;
 }
 
-const std::list<field_definition>& repository_selector::
+const std::list<type>& repository_selector::
 select_fields_by_facet_name(const std::string& n) const {
     const auto& c(repository_.field_definitions_by_facet_name());
     const auto i(c.find(n));
@@ -102,7 +102,7 @@ select_fields_by_facet_name(const std::string& n) const {
     return i->second;
 }
 
-const std::list<field_definition>& repository_selector::
+const std::list<type>& repository_selector::
 select_fields_by_model_name(const std::string& n) const {
     const auto& c(repository_.field_definitions_by_model_name());
     const auto i(c.find(n));

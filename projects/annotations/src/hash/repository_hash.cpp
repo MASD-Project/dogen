@@ -29,7 +29,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_list_dogen_annotations_field_definition(const std::list<dogen::annotations::field_definition>& v) {
+inline std::size_t hash_std_list_dogen_annotations_field_definition(const std::list<dogen::annotations::type>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -37,7 +37,7 @@ inline std::size_t hash_std_list_dogen_annotations_field_definition(const std::l
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_dogen_annotations_field_definition(const std::unordered_map<std::string, dogen::annotations::field_definition>& v) {
+inline std::size_t hash_std_unordered_map_std_string_dogen_annotations_field_definition(const std::unordered_map<std::string, dogen::annotations::type>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -46,7 +46,7 @@ inline std::size_t hash_std_unordered_map_std_string_dogen_annotations_field_def
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_std_list_dogen_annotations_field_definition(const std::unordered_map<std::string, std::list<dogen::annotations::field_definition> >& v) {
+inline std::size_t hash_std_unordered_map_std_string_std_list_dogen_annotations_field_definition(const std::unordered_map<std::string, std::list<dogen::annotations::type> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);

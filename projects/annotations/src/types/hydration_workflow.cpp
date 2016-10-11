@@ -35,14 +35,14 @@ auto lg(logger_factory("annotations.hydration_workflow"));
 namespace dogen {
 namespace annotations {
 
-std::list<field_definition> hydration_workflow::
+std::list<type> hydration_workflow::
 hydrate(const std::forward_list<boost::filesystem::path>& dirs) const {
     BOOST_LOG_SEV(lg, info) << "Finding all files in: " << dirs;
     const auto files(dogen::utility::filesystem::find_files(dirs));
     BOOST_LOG_SEV(lg, info) << "Files found: " << files;
 
     json_hydrator jh;
-    std::list<field_definition> r;
+    std::list<type> r;
     for (const auto& f : files) {
         auto fds(jh.hydrate(f));
         r.splice(r.end(), fds);

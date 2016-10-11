@@ -71,14 +71,14 @@ namespace formattables {
 class inclusion_expander {
 private:
     struct formattater_field_definitions {
-        annotations::field_definition inclusion_directive;
-        annotations::field_definition inclusion_required;
+        annotations::type inclusion_directive;
+        annotations::type inclusion_required;
     };
     friend std::ostream& operator<<(std::ostream& s,
         const formattater_field_definitions& v);
 
     struct field_definitions {
-        annotations::field_definition inclusion_required;
+        annotations::type inclusion_required;
         std::unordered_map<std::string, formattater_field_definitions>
         formattaters_field_definitions;
     };

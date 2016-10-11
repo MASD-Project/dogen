@@ -41,17 +41,17 @@ namespace annotations {
 /**
  * @brief Defines the properties of the field used for validation.
  */
-class field_definition final {
+class type final {
 public:
-    field_definition(const field_definition&) = default;
-    field_definition(field_definition&&) = default;
-    ~field_definition() = default;
+    type(const type&) = default;
+    type(type&&) = default;
+    ~type() = default;
 
 public:
-    field_definition();
+    type();
 
 public:
-    field_definition(
+    type(
         const dogen::annotations::name& name,
         const dogen::annotations::value_types value_type,
         const dogen::annotations::scope_types scope,
@@ -61,10 +61,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::annotations::field_definition& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::annotations::type& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::annotations::field_definition& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::annotations::type& v, unsigned int version);
 
 public:
     /**
@@ -122,14 +122,14 @@ public:
     /**@}*/
 
 public:
-    bool operator==(const field_definition& rhs) const;
-    bool operator!=(const field_definition& rhs) const {
+    bool operator==(const type& rhs) const;
+    bool operator!=(const type& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(field_definition& other) noexcept;
-    field_definition& operator=(field_definition other);
+    void swap(type& other) noexcept;
+    type& operator=(type other);
 
 private:
     dogen::annotations::name name_;
@@ -146,8 +146,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::annotations::field_definition& lhs,
-    dogen::annotations::field_definition& rhs) {
+    dogen::annotations::type& lhs,
+    dogen::annotations::type& rhs) {
     lhs.swap(rhs);
 }
 

@@ -33,12 +33,12 @@ const boost::shared_ptr<dogen::annotations::value>& rhs) {
 namespace dogen {
 namespace annotations {
 
-field_definition::field_definition()
+type::type()
     : value_type_(static_cast<dogen::annotations::value_types>(0)),
       scope_(static_cast<dogen::annotations::scope_types>(0)),
       definition_type_(static_cast<dogen::annotations::field_definition_types>(0)) { }
 
-field_definition::field_definition(
+type::type(
     const dogen::annotations::name& name,
     const dogen::annotations::value_types value_type,
     const dogen::annotations::scope_types scope,
@@ -52,7 +52,7 @@ field_definition::field_definition(
       default_value_(default_value),
       definition_type_(definition_type) { }
 
-void field_definition::swap(field_definition& other) noexcept {
+void type::swap(type& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
     swap(value_type_, other.value_type_);
@@ -62,7 +62,7 @@ void field_definition::swap(field_definition& other) noexcept {
     swap(definition_type_, other.definition_type_);
 }
 
-bool field_definition::operator==(const field_definition& rhs) const {
+bool type::operator==(const type& rhs) const {
     return name_ == rhs.name_ &&
         value_type_ == rhs.value_type_ &&
         scope_ == rhs.scope_ &&
@@ -71,81 +71,81 @@ bool field_definition::operator==(const field_definition& rhs) const {
         definition_type_ == rhs.definition_type_;
 }
 
-field_definition& field_definition::operator=(field_definition other) {
+type& type::operator=(type other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const dogen::annotations::name& field_definition::name() const {
+const dogen::annotations::name& type::name() const {
     return name_;
 }
 
-dogen::annotations::name& field_definition::name() {
+dogen::annotations::name& type::name() {
     return name_;
 }
 
-void field_definition::name(const dogen::annotations::name& v) {
+void type::name(const dogen::annotations::name& v) {
     name_ = v;
 }
 
-void field_definition::name(const dogen::annotations::name&& v) {
+void type::name(const dogen::annotations::name&& v) {
     name_ = std::move(v);
 }
 
-dogen::annotations::value_types field_definition::value_type() const {
+dogen::annotations::value_types type::value_type() const {
     return value_type_;
 }
 
-void field_definition::value_type(const dogen::annotations::value_types v) {
+void type::value_type(const dogen::annotations::value_types v) {
     value_type_ = v;
 }
 
-dogen::annotations::scope_types field_definition::scope() const {
+dogen::annotations::scope_types type::scope() const {
     return scope_;
 }
 
-void field_definition::scope(const dogen::annotations::scope_types v) {
+void type::scope(const dogen::annotations::scope_types v) {
     scope_ = v;
 }
 
-const dogen::annotations::ownership_hierarchy& field_definition::ownership_hierarchy() const {
+const dogen::annotations::ownership_hierarchy& type::ownership_hierarchy() const {
     return ownership_hierarchy_;
 }
 
-dogen::annotations::ownership_hierarchy& field_definition::ownership_hierarchy() {
+dogen::annotations::ownership_hierarchy& type::ownership_hierarchy() {
     return ownership_hierarchy_;
 }
 
-void field_definition::ownership_hierarchy(const dogen::annotations::ownership_hierarchy& v) {
+void type::ownership_hierarchy(const dogen::annotations::ownership_hierarchy& v) {
     ownership_hierarchy_ = v;
 }
 
-void field_definition::ownership_hierarchy(const dogen::annotations::ownership_hierarchy&& v) {
+void type::ownership_hierarchy(const dogen::annotations::ownership_hierarchy&& v) {
     ownership_hierarchy_ = std::move(v);
 }
 
-const boost::shared_ptr<dogen::annotations::value>& field_definition::default_value() const {
+const boost::shared_ptr<dogen::annotations::value>& type::default_value() const {
     return default_value_;
 }
 
-boost::shared_ptr<dogen::annotations::value>& field_definition::default_value() {
+boost::shared_ptr<dogen::annotations::value>& type::default_value() {
     return default_value_;
 }
 
-void field_definition::default_value(const boost::shared_ptr<dogen::annotations::value>& v) {
+void type::default_value(const boost::shared_ptr<dogen::annotations::value>& v) {
     default_value_ = v;
 }
 
-void field_definition::default_value(const boost::shared_ptr<dogen::annotations::value>&& v) {
+void type::default_value(const boost::shared_ptr<dogen::annotations::value>&& v) {
     default_value_ = std::move(v);
 }
 
-dogen::annotations::field_definition_types field_definition::definition_type() const {
+dogen::annotations::field_definition_types type::definition_type() const {
     return definition_type_;
 }
 
-void field_definition::definition_type(const dogen::annotations::field_definition_types v) {
+void type::definition_type(const dogen::annotations::field_definition_types v) {
     definition_type_ = v;
 }
 

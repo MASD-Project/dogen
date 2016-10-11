@@ -52,13 +52,13 @@ const std::string trivial_field_definition(R"([
     }
 ])");
 
-std::list<dogen::annotations::field_definition>
+std::list<dogen::annotations::type>
 hydrate(std::istream& s) {
     dogen::annotations::json_hydrator h;
     return h.hydrate(s);
 }
 
-std::list<dogen::annotations::field_definition>
+std::list<dogen::annotations::type>
 hydrate(const std::string& content) {
     std::istringstream s(content);
     return hydrate(s);

@@ -35,7 +35,7 @@ public:
     field_definition_generator();
 
 public:
-    typedef dogen::annotations::field_definition result_type;
+    typedef dogen::annotations::type result_type;
 
 public:
     static void populate(const unsigned int position, result_type& v);

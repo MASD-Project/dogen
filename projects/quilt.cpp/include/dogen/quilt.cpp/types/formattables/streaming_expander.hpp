@@ -40,9 +40,9 @@ namespace formattables {
 class streaming_expander {
 private:
     struct field_definitions {
-        annotations::field_definition requires_quoting;
-        annotations::field_definition string_conversion_method;
-        annotations::field_definition remove_unprintable_characters;
+        annotations::type requires_quoting;
+        annotations::type string_conversion_method;
+        annotations::type remove_unprintable_characters;
     };
 
     friend std::ostream& operator<<(std::ostream& s,

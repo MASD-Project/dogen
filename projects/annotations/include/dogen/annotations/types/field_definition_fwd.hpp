@@ -28,7 +28,7 @@
 namespace dogen {
 namespace annotations {
 
-class field_definition;
+class type;
 
 } }
 

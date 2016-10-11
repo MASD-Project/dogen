@@ -102,7 +102,7 @@ instantiator::obtain_facet_names_by_model_name(
     return r;
 }
 
-bool instantiator::is_instantiable(const field_definition& fd) const {
+bool instantiator::is_instantiable(const type& fd) const {
     return
         fd.definition_type() == field_definition_types::global_template ||
         fd.definition_type() == field_definition_types::model_template ||
@@ -110,7 +110,7 @@ bool instantiator::is_instantiable(const field_definition& fd) const {
         fd.definition_type() == field_definition_types::formatter_template;
 }
 
-void instantiator::validate(const field_definition& fd) const {
+void instantiator::validate(const type& fd) const {
     const auto sn(fd.name().simple());
     if (fd.name().simple().empty()) {
         BOOST_LOG_SEV(lg, error) << empty_simple_name;
@@ -165,9 +165,9 @@ void instantiator::validate(const field_definition& fd) const {
     }
 }
 
-std::list<field_definition>
-instantiator::instantiate_global_template(const field_definition& fd) const {
-    std::list<field_definition> r;
+std::list<type>
+instantiator::instantiate_global_template(const type& fd) const {
+    std::list<type> r;
 
     for (const auto pair : facet_names_by_model_name_) {
         const auto model_name(pair.first);
@@ -211,9 +211,9 @@ instantiator::instantiate_global_template(const field_definition& fd) const {
     return r;
 }
 
-std::list<field_definition>
-instantiator::instantiate_facet_template(const field_definition& fd) const {
-    std::list<field_definition> r;
+std::list<type>
+instantiator::instantiate_facet_template(const type& fd) const {
+    std::list<type> r;
     for (const auto pair : facet_names_by_model_name_) {
         const auto model_name(pair.first);
         if (!fd.ownership_hierarchy().model_name().empty() &&
@@ -234,9 +234,9 @@ instantiator::instantiate_facet_template(const field_definition& fd) const {
     return r;
 }
 
-std::list<field_definition>
-instantiator::instantiate_formatter_template(const field_definition& fd) const {
-    std::list<field_definition> r;
+std::list<type>
+instantiator::instantiate_formatter_template(const type& fd) const {
+    std::list<type> r;
     for (const auto oh : ownership_hierarchy_) {
         if (!fd.ownership_hierarchy().model_name().empty() &&
             fd.ownership_hierarchy().model_name() != oh.model_name())
@@ -257,13 +257,13 @@ instantiator::instantiate_formatter_template(const field_definition& fd) const {
     return r;
 }
 
-std::list<field_definition>
-instantiator::instantiate(const field_definition& fd) const {
+std::list<type>
+instantiator::instantiate(const type& fd) const {
     validate(fd);
 
     BOOST_LOG_SEV(lg, debug) << "Instantiating template: " << fd;
 
-    std::list<field_definition> r;
+    std::list<type> r;
     const auto dt(fd.definition_type());
     if (dt == field_definition_types::global_template)
         r = instantiate_global_template(fd);

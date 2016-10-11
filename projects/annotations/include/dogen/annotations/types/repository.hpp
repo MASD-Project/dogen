@@ -44,11 +44,11 @@ public:
 
 public:
     repository(
-        const std::list<dogen::annotations::field_definition>& all_field_definitions,
-        const std::unordered_map<std::string, dogen::annotations::field_definition>& field_definitions_by_name,
-        const std::unordered_map<std::string, std::list<dogen::annotations::field_definition> >& field_definitions_by_facet_name,
-        const std::unordered_map<std::string, std::list<dogen::annotations::field_definition> >& field_definitions_by_formatter_name,
-        const std::unordered_map<std::string, std::list<dogen::annotations::field_definition> >& field_definitions_by_model_name);
+        const std::list<dogen::annotations::type>& all_field_definitions,
+        const std::unordered_map<std::string, dogen::annotations::type>& field_definitions_by_name,
+        const std::unordered_map<std::string, std::list<dogen::annotations::type> >& field_definitions_by_facet_name,
+        const std::unordered_map<std::string, std::list<dogen::annotations::type> >& field_definitions_by_formatter_name,
+        const std::unordered_map<std::string, std::list<dogen::annotations::type> >& field_definitions_by_model_name);
 
 private:
     template<typename Archive>
@@ -62,46 +62,46 @@ public:
      * @brief All the field definitions available, without categorisation.
      */
     /**@{*/
-    const std::list<dogen::annotations::field_definition>& all_field_definitions() const;
-    std::list<dogen::annotations::field_definition>& all_field_definitions();
-    void all_field_definitions(const std::list<dogen::annotations::field_definition>& v);
-    void all_field_definitions(const std::list<dogen::annotations::field_definition>&& v);
+    const std::list<dogen::annotations::type>& all_field_definitions() const;
+    std::list<dogen::annotations::type>& all_field_definitions();
+    void all_field_definitions(const std::list<dogen::annotations::type>& v);
+    void all_field_definitions(const std::list<dogen::annotations::type>&& v);
     /**@}*/
 
     /**
      * @brief All field definitions by qualified field definition name.
      */
     /**@{*/
-    const std::unordered_map<std::string, dogen::annotations::field_definition>& field_definitions_by_name() const;
-    std::unordered_map<std::string, dogen::annotations::field_definition>& field_definitions_by_name();
-    void field_definitions_by_name(const std::unordered_map<std::string, dogen::annotations::field_definition>& v);
-    void field_definitions_by_name(const std::unordered_map<std::string, dogen::annotations::field_definition>&& v);
+    const std::unordered_map<std::string, dogen::annotations::type>& field_definitions_by_name() const;
+    std::unordered_map<std::string, dogen::annotations::type>& field_definitions_by_name();
+    void field_definitions_by_name(const std::unordered_map<std::string, dogen::annotations::type>& v);
+    void field_definitions_by_name(const std::unordered_map<std::string, dogen::annotations::type>&& v);
     /**@}*/
 
     /**
      * @brief All field definitions for all qualified facet names, for all models.
      */
     /**@{*/
-    const std::unordered_map<std::string, std::list<dogen::annotations::field_definition> >& field_definitions_by_facet_name() const;
-    std::unordered_map<std::string, std::list<dogen::annotations::field_definition> >& field_definitions_by_facet_name();
-    void field_definitions_by_facet_name(const std::unordered_map<std::string, std::list<dogen::annotations::field_definition> >& v);
-    void field_definitions_by_facet_name(const std::unordered_map<std::string, std::list<dogen::annotations::field_definition> >&& v);
+    const std::unordered_map<std::string, std::list<dogen::annotations::type> >& field_definitions_by_facet_name() const;
+    std::unordered_map<std::string, std::list<dogen::annotations::type> >& field_definitions_by_facet_name();
+    void field_definitions_by_facet_name(const std::unordered_map<std::string, std::list<dogen::annotations::type> >& v);
+    void field_definitions_by_facet_name(const std::unordered_map<std::string, std::list<dogen::annotations::type> >&& v);
     /**@}*/
 
     /**
      * @brief All field definitions for all qualified formatter names, for all models.
      */
     /**@{*/
-    const std::unordered_map<std::string, std::list<dogen::annotations::field_definition> >& field_definitions_by_formatter_name() const;
-    std::unordered_map<std::string, std::list<dogen::annotations::field_definition> >& field_definitions_by_formatter_name();
-    void field_definitions_by_formatter_name(const std::unordered_map<std::string, std::list<dogen::annotations::field_definition> >& v);
-    void field_definitions_by_formatter_name(const std::unordered_map<std::string, std::list<dogen::annotations::field_definition> >&& v);
+    const std::unordered_map<std::string, std::list<dogen::annotations::type> >& field_definitions_by_formatter_name() const;
+    std::unordered_map<std::string, std::list<dogen::annotations::type> >& field_definitions_by_formatter_name();
+    void field_definitions_by_formatter_name(const std::unordered_map<std::string, std::list<dogen::annotations::type> >& v);
+    void field_definitions_by_formatter_name(const std::unordered_map<std::string, std::list<dogen::annotations::type> >&& v);
     /**@}*/
 
-    const std::unordered_map<std::string, std::list<dogen::annotations::field_definition> >& field_definitions_by_model_name() const;
-    std::unordered_map<std::string, std::list<dogen::annotations::field_definition> >& field_definitions_by_model_name();
-    void field_definitions_by_model_name(const std::unordered_map<std::string, std::list<dogen::annotations::field_definition> >& v);
-    void field_definitions_by_model_name(const std::unordered_map<std::string, std::list<dogen::annotations::field_definition> >&& v);
+    const std::unordered_map<std::string, std::list<dogen::annotations::type> >& field_definitions_by_model_name() const;
+    std::unordered_map<std::string, std::list<dogen::annotations::type> >& field_definitions_by_model_name();
+    void field_definitions_by_model_name(const std::unordered_map<std::string, std::list<dogen::annotations::type> >& v);
+    void field_definitions_by_model_name(const std::unordered_map<std::string, std::list<dogen::annotations::type> >&& v);
 
 public:
     bool operator==(const repository& rhs) const;
@@ -114,11 +114,11 @@ public:
     repository& operator=(repository other);
 
 private:
-    std::list<dogen::annotations::field_definition> all_field_definitions_;
-    std::unordered_map<std::string, dogen::annotations::field_definition> field_definitions_by_name_;
-    std::unordered_map<std::string, std::list<dogen::annotations::field_definition> > field_definitions_by_facet_name_;
-    std::unordered_map<std::string, std::list<dogen::annotations::field_definition> > field_definitions_by_formatter_name_;
-    std::unordered_map<std::string, std::list<dogen::annotations::field_definition> > field_definitions_by_model_name_;
+    std::list<dogen::annotations::type> all_field_definitions_;
+    std::unordered_map<std::string, dogen::annotations::type> field_definitions_by_name_;
+    std::unordered_map<std::string, std::list<dogen::annotations::type> > field_definitions_by_facet_name_;
+    std::unordered_map<std::string, std::list<dogen::annotations::type> > field_definitions_by_formatter_name_;
+    std::unordered_map<std::string, std::list<dogen::annotations::type> > field_definitions_by_model_name_;
 };
 
 } }

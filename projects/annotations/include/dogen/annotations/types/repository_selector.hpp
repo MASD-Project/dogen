@@ -54,7 +54,7 @@ public:
      *
      * @return if one exists, returns it. Returns Null otherwise.
      */
-    boost::optional<const field_definition&>
+    boost::optional<const type&>
     try_select_field_by_name(const std::string& n) const;
 
     /**
@@ -66,7 +66,7 @@ public:
      *
      * @return if one exists, returns it. Returns Null otherwise.
      */
-    boost::optional<const field_definition&>
+    boost::optional<const type&>
     try_select_field_by_name(const std::string& prefix,
         const std::string& simple_field_name) const;
 
@@ -77,7 +77,7 @@ public:
      *
      * @pre name must exist.
      */
-    const field_definition& select_field_by_name(const std::string& n) const;
+    const type& select_field_by_name(const std::string& n) const;
 
     /**
      * @brief Returns the field definition corresponding to the
@@ -88,7 +88,7 @@ public:
      *
      * @pre qualified field name must exist.
      */
-    const field_definition& select_field_by_name(
+    const type& select_field_by_name(
         const std::string& prefix,
         const std::string& simple_field_name) const;
 
@@ -98,7 +98,7 @@ public:
      *
      * @pre formatter name must exist.
      */
-    const std::list<field_definition>&
+    const std::list<type>&
     select_fields_by_formatter_name(const std::string& n) const;
 
     /**
@@ -107,7 +107,7 @@ public:
      *
      * @pre facet name must exist.
      */
-    const std::list<field_definition>&
+    const std::list<type>&
     select_fields_by_facet_name(const std::string& n) const;
 
     /**
@@ -116,7 +116,7 @@ public:
      *
      * @pre facet name must exist.
      */
-    const std::list<field_definition>&
+    const std::list<type>&
     select_fields_by_model_name(const std::string& n) const;
 
 private:

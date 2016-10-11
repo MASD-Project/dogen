@@ -24,13 +24,13 @@
 
 namespace {
 
-dogen::annotations::field_definition
+dogen::annotations::type
 create_dogen_annotations_field_definition(const unsigned int position) {
     return dogen::annotations::field_definition_generator::create(position);
 }
 
-std::list<dogen::annotations::field_definition> create_std_list_dogen_annotations_field_definition(unsigned int position) {
-    std::list<dogen::annotations::field_definition> r;
+std::list<dogen::annotations::type> create_std_list_dogen_annotations_field_definition(unsigned int position) {
+    std::list<dogen::annotations::type> r;
     for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_dogen_annotations_field_definition(position + i));
     }
@@ -43,16 +43,16 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-std::unordered_map<std::string, dogen::annotations::field_definition> create_std_unordered_map_std_string_dogen_annotations_field_definition(unsigned int position) {
-    std::unordered_map<std::string, dogen::annotations::field_definition> r;
+std::unordered_map<std::string, dogen::annotations::type> create_std_unordered_map_std_string_dogen_annotations_field_definition(unsigned int position) {
+    std::unordered_map<std::string, dogen::annotations::type> r;
     for (unsigned int i(0); i < 4; ++i) {
         r.insert(std::make_pair(create_std_string(position + i), create_dogen_annotations_field_definition(position + i)));
     }
     return r;
 }
 
-std::unordered_map<std::string, std::list<dogen::annotations::field_definition> > create_std_unordered_map_std_string_std_list_dogen_annotations_field_definition(unsigned int position) {
-    std::unordered_map<std::string, std::list<dogen::annotations::field_definition> > r;
+std::unordered_map<std::string, std::list<dogen::annotations::type> > create_std_unordered_map_std_string_std_list_dogen_annotations_field_definition(unsigned int position) {
+    std::unordered_map<std::string, std::list<dogen::annotations::type> > r;
     for (unsigned int i(0); i < 4; ++i) {
         r.insert(std::make_pair(create_std_string(position + i), create_std_list_dogen_annotations_field_definition(position + i)));
     }

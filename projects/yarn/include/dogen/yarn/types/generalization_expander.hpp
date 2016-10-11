@@ -38,7 +38,7 @@ namespace yarn {
 class generalization_expander {
 private:
     struct field_definitions {
-        annotations::field_definition is_final;
+        annotations::type is_final;
     };
 
     field_definitions

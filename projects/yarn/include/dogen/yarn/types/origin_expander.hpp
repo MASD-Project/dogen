@@ -39,7 +39,7 @@ public:
 
 private:
     struct field_definitions {
-        annotations::field_definition is_proxy_model;
+        annotations::type is_proxy_model;
     };
 
     field_definitions make_field_definitions(

@@ -65,13 +65,13 @@ public:
 
 private:
     struct field_definitions {
-        annotations::field_definition generate_decoration;
-        annotations::field_definition copyright_notice;
-        annotations::field_definition licence_name;
-        annotations::field_definition modeline_group_name;
-        annotations::field_definition marker_add_date_time;
-        annotations::field_definition marker_add_warning;
-        annotations::field_definition marker_message;
+        annotations::type generate_decoration;
+        annotations::type copyright_notice;
+        annotations::type licence_name;
+        annotations::type modeline_group_name;
+        annotations::type marker_add_date_time;
+        annotations::type marker_add_warning;
+        annotations::type marker_message;
     };
 
     field_definitions

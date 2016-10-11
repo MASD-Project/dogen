@@ -43,22 +43,22 @@ private:
     /**
      * @brief Hydrate all files in all of the supplied directories.
      */
-    std::list<field_definition> hydrate_directories_activity(
+    std::list<type> hydrate_directories_activity(
         const std::forward_list<boost::filesystem::path>& dirs) const;
 
     /**
      * @brief Instantiates all templates into field definition
      * instances.
      */
-    std::list<field_definition> instantiate_templates_activity(
+    std::list<type> instantiate_templates_activity(
         const std::forward_list<ownership_hierarchy>& oh,
-        const std::list<field_definition>& fds) const;
+        const std::list<type>& fds) const;
 
     /**
      * @brief Index fields into the repository.
      */
     repository create_repository_activity(
-        const std::list<field_definition>& fds) const;
+        const std::list<type>& fds) const;
 
 public:
     /**

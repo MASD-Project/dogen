@@ -44,12 +44,12 @@ public:
 
 private:
     struct field_definitions {
-        annotations::field_definition stream_variable_name;
-        annotations::field_definition template_path;
-        annotations::field_definition output_path;
-        annotations::field_definition relative_output_directory;
-        annotations::field_definition inclusion_dependency;
-        annotations::field_definition containing_namespaces;
+        annotations::type stream_variable_name;
+        annotations::type template_path;
+        annotations::type output_path;
+        annotations::type relative_output_directory;
+        annotations::type inclusion_dependency;
+        annotations::type containing_namespaces;
     };
 
     /**

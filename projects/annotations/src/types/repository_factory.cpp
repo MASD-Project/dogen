@@ -37,7 +37,7 @@ namespace dogen {
 namespace annotations {
 
 repository
-repository_factory::make(const std::list<field_definition>& fds) const {
+repository_factory::make(const std::list<type>& fds) const {
     repository r;
     r.all_field_definitions(fds);
 

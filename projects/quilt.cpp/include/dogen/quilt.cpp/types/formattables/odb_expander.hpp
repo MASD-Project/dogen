@@ -41,7 +41,7 @@ namespace formattables {
 class odb_expander {
 private:
     struct field_definitions {
-        annotations::field_definition odb_pragma;
+        annotations::type odb_pragma;
     };
 
     friend std::ostream& operator<<(std::ostream& s,

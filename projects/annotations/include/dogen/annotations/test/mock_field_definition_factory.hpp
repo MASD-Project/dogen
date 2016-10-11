@@ -37,35 +37,35 @@ private:
     /**
      * @brief Creat the containing namespaces field.
      */
-    field_definition containing_namespaces() const;
+    type containing_namespaces() const;
 
     /**
      * @brief Creat the copyright notice field.
      */
-    field_definition copyright_notice() const;
+    type copyright_notice() const;
 
     /**
      * @brief Create the licence name field.
      */
-    field_definition licence_name() const;
+    type licence_name() const;
 
     /**
      * @brief Create the comment field.
      */
-    field_definition create_comment() const;
+    type create_comment() const;
 
 public:
     /**
      * @brief Creates a set of canned field definitions, needed for
      * testing.
      */
-    std::list<field_definition> make_canned_field_definitions() const;
+    std::list<type> make_canned_field_definitions() const;
 
     /**
      * @brief Creates a field definition with most values set to
      * sensible defaults.
      */
-    field_definition make_field_definition(const std::string n,
+    type make_field_definition(const std::string n,
         value_types vt = value_types::text) const;
 };
 

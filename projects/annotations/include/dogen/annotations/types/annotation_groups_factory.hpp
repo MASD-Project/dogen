@@ -65,14 +65,14 @@ private:
      * @brief Returns the field definition for the qualified name, if
      * one exists.
      */
-    boost::optional<field_definition>
+    boost::optional<type>
     obtain_field_definition(const std::string& n) const;
 
     /**
      * @brief Ensures the field definition is valid for the current
      * scope.
      */
-    void validate_scope(const field_definition& fd,
+    void validate_scope(const type& fd,
         const scope_types current_scope) const;
 
 private:

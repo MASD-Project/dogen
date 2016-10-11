@@ -176,14 +176,14 @@ read_ownership_hierarchy(const boost::property_tree::ptree& pt) const {
     return r;
 }
 
-std::list<field_definition> json_hydrator::read_stream(std::istream& s) const {
+std::list<type> json_hydrator::read_stream(std::istream& s) const {
     using namespace boost::property_tree;
     ptree pt;
     read_json(s, pt);
 
-    std::list<field_definition> r;
+    std::list<type> r;
     for (auto i(pt.begin()); i != pt.end(); ++i) {
-        field_definition fd;
+        type fd;
 
         auto j(i->second.find(name_key));
         if (j == i->second.not_found() || j->second.empty()) {
@@ -214,7 +214,7 @@ std::list<field_definition> json_hydrator::read_stream(std::istream& s) const {
     return r;
 }
 
-std::list<field_definition> json_hydrator::hydrate(std::istream& s) const {
+std::list<type> json_hydrator::hydrate(std::istream& s) const {
     BOOST_LOG_SEV(lg, trace) << "Parsing JSON stream.";
     using namespace boost::property_tree;
     try {
@@ -235,7 +235,7 @@ std::list<field_definition> json_hydrator::hydrate(std::istream& s) const {
     }
 }
 
-std::list<field_definition> json_hydrator::
+std::list<type> json_hydrator::
 hydrate(const boost::filesystem::path& p) const {
     BOOST_LOG_SEV(lg, debug) << "Parsing JSON file: " << p.generic_string();
     boost::filesystem::ifstream s(p);

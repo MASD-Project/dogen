@@ -41,7 +41,7 @@ public:
     /**
      * @brief Hydrates all files in the supplied directories.
      */
-    std::list<field_definition>
+    std::list<type>
     hydrate(const std::forward_list<boost::filesystem::path>& dirs) const;
 };
 
