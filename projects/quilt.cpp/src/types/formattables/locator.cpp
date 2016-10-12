@@ -66,7 +66,7 @@ locator::type_group locator::make_type_group(
     const formatters::container& fc) const {
 
     type_group r;
-    const annotations::repository_selector s(atrp);
+    const annotations::type_repository_selector s(atrp);
 
     std::unordered_set<std::string> processed_facets;
     for (const auto ptr : fc.file_formatters()) {
@@ -78,13 +78,13 @@ locator::type_group locator::make_type_group(
         const auto pf(traits::postfix());
         formatter_type_group fmt_tg;
         const auto pfix(traits::postfix());
-        fmt_tg.formatter_postfix = s.select_field_by_name(fmtn, pfix);
+        fmt_tg.formatter_postfix = s.select_type_by_name(fmtn, pfix);
 
-        auto dir(s.try_select_field_by_name(fctn, traits::directory()));
+        auto dir(s.try_type_field_by_name(fctn, traits::directory()));
         if (dir)
             fmt_tg.facet_directory = *dir;
 
-        auto postfix(s.try_select_field_by_name(fctn, traits::postfix()));
+        auto postfix(s.try_type_field_by_name(fctn, traits::postfix()));
         if (postfix)
             fmt_tg.facet_postfix = *postfix;
 
@@ -100,19 +100,19 @@ locator::type_group locator::make_type_group(
         }
 
         const auto& idn(traits::cpp::include_directory_name());
-        r.include_directory_name = s.select_field_by_name(idn);
+        r.include_directory_name = s.select_type_by_name(idn);
 
         const auto& sdn(traits::cpp::source_directory_name());
-        r.source_directory_name = s.select_field_by_name(sdn);
+        r.source_directory_name = s.select_type_by_name(sdn);
 
         const auto& hde(traits::cpp::header_file_extension());
-        r.header_file_extension = s.select_field_by_name(hde);
+        r.header_file_extension = s.select_type_by_name(hde);
 
         const auto& ife(traits::cpp::implementation_file_extension());
-        r.implementation_file_extension = s.select_field_by_name(ife);
+        r.implementation_file_extension = s.select_type_by_name(ife);
 
         const auto& dfd(traits::cpp::disable_facet_directories());
-        r.disable_facet_directories = s.select_field_by_name(dfd);
+        r.disable_facet_directories = s.select_type_by_name(dfd);
     }
 
     return r;

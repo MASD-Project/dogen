@@ -51,8 +51,8 @@ stitching_properties_factory::make_field_definitions(
     bool found_stream_variable_name(false), found_template_path(false),
         found_output_path(false), found_relative_output_directory(false),
         found_inclusion_dependency(false), found_containing_namespaces(false);
-    const annotations::repository_selector s(rp);
-    for (const auto fd : s.select_fields_by_model_name(traits::model_name())) {
+    const annotations::type_repository_selector s(rp);
+    for (const auto fd : s.select_type_by_model_name(traits::model_name())) {
         if (fd.name().simple() == traits::stream_variable_name()) {
             r.stream_variable_name = fd;
             found_stream_variable_name = true;

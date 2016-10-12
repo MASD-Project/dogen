@@ -63,15 +63,15 @@ streaming_expander::make_type_group(
 
     type_group r;
 
-    const annotations::repository_selector s(atrp);
+    const annotations::type_repository_selector s(atrp);
     const auto scm(traits::cpp::streaming::string_conversion_method());
-    r.string_conversion_method = s.select_field_by_name(scm);
+    r.string_conversion_method = s.select_type_by_name(scm);
 
     const auto rq(traits::cpp::streaming::requires_quoting());
-    r.requires_quoting = s.select_field_by_name(rq);
+    r.requires_quoting = s.select_type_by_name(rq);
 
     const auto ruc(traits::cpp::streaming::remove_unprintable_characters());
-    r.remove_unprintable_characters = s.select_field_by_name(ruc);
+    r.remove_unprintable_characters = s.select_type_by_name(ruc);
 
     BOOST_LOG_SEV(lg, debug) << "Created field definitions. Result: " << r;
 

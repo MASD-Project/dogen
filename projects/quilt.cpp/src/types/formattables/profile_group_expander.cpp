@@ -76,9 +76,9 @@ profile_group_expander::make_type_group(
     BOOST_LOG_SEV(lg, debug) << "Creating field definitions.";
 
     type_group r;
-    const annotations::repository_selector s(atrp);
+    const annotations::type_repository_selector s(atrp);
     const auto& mn(formatters::traits::model_name());
-    r.profile = s.select_field_by_name(mn, "profile");
+    r.profile = s.select_type_by_name(mn, "profile");
 
     BOOST_LOG_SEV(lg, debug) << "Created field definitions. Result: " << r;
     return r;

@@ -30,15 +30,15 @@ type_parameters_expander::type_group type_parameters_expander::
 make_type_group(const annotations::type_repository& atrp) const {
 
     type_group r;
-    const annotations::repository_selector s(atrp);
+    const annotations::type_repository_selector s(atrp);
     const auto& vnp(traits::type_parameters::variable_number_of_parameters());
-    r.variable_number_of_parameters = s.select_field_by_name(vnp);
+    r.variable_number_of_parameters = s.select_type_by_name(vnp);
 
     const auto& tpc(traits::type_parameters::type_parameters_count());
-    r.type_parameters_count = s.select_field_by_name(tpc);
+    r.type_parameters_count = s.select_type_by_name(tpc);
 
     const auto& aih(traits::type_parameters::type_parameters_always_in_heap());
-    r.type_parameters_always_in_heap = s.select_field_by_name(aih);
+    r.type_parameters_always_in_heap = s.select_type_by_name(aih);
 
     return r;
 }

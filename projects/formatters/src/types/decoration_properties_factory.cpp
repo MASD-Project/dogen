@@ -65,25 +65,25 @@ decoration_properties_factory(const annotations::type_repository& drp,
 decoration_properties_factory::field_definitions
 decoration_properties_factory::
 make_field_definitions(const annotations::type_repository& rp) const {
-    const annotations::repository_selector s(rp);
+    const annotations::type_repository_selector s(rp);
 
     field_definitions r;
     const auto gd(traits::decoration::generate_decoration());
-    r.generate_decoration = s.select_field_by_name(gd);
+    r.generate_decoration = s.select_type_by_name(gd);
 
     const auto cn(traits::decoration::copyright_notices());
-    r.copyright_notice = s.select_field_by_name(cn);
+    r.copyright_notice = s.select_type_by_name(cn);
 
     const auto ln(traits::decoration::licence_name());
-    r.licence_name = s.select_field_by_name(ln);
+    r.licence_name = s.select_type_by_name(ln);
 
     const auto& mlgn(traits::decoration::modeline_group_name());
-    r. modeline_group_name = s.select_field_by_name(mlgn);
+    r. modeline_group_name = s.select_type_by_name(mlgn);
 
     using cgm = traits::decoration::code_generation_marker;
-    r. marker_add_date_time = s.select_field_by_name(cgm::add_date_time());
-    r. marker_add_warning = s.select_field_by_name(cgm::add_warning());
-    r. marker_message = s.select_field_by_name(cgm::message());
+    r. marker_add_date_time = s.select_type_by_name(cgm::add_date_time());
+    r. marker_add_warning = s.select_type_by_name(cgm::add_warning());
+    r. marker_message = s.select_type_by_name(cgm::message());
 
     return r;
 }

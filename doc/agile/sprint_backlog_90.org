@@ -158,6 +158,7 @@ There were a couple of instances left out in the configuration
 refactor, in yarn.
 
 *** STARTED Clean up terminology in dynamic                           :story:
+    CLOCK: [2016-10-12 Wed 08:20]
     CLOCK: [2016-10-11 Tue 23:48]--[2016-10-12 Wed 00:30] =>  0:42
     CLOCK: [2016-10-11 Tue 22:38]--[2016-10-11 Tue 23:47] =>  1:09
     CLOCK: [2016-10-11 Tue 22:29]--[2016-10-11 Tue 22:37] =>  0:08

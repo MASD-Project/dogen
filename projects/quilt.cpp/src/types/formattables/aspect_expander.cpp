@@ -61,17 +61,17 @@ aspect_expander::type_group aspect_expander::
 make_type_group(const annotations::type_repository& atrp) const {
     type_group r;
 
-    const annotations::repository_selector rs(atrp);
+    const annotations::type_repository_selector rs(atrp);
     typedef traits::cpp::aspect aspect;
 
     const auto& rmdc(aspect::requires_manual_default_constructor());
-    r.requires_manual_default_constructor = rs.select_field_by_name(rmdc);
+    r.requires_manual_default_constructor = rs.select_type_by_name(rmdc);
 
     const auto& rmmc(aspect::requires_manual_move_constructor());
-    r.requires_manual_move_constructor = rs.select_field_by_name(rmmc);
+    r.requires_manual_move_constructor = rs.select_type_by_name(rmmc);
 
     const auto& rsm(aspect::requires_stream_manipulators());
-    r.requires_stream_manipulators = rs.select_field_by_name(rsm);
+    r.requires_stream_manipulators = rs.select_type_by_name(rsm);
 
     return r;
 }

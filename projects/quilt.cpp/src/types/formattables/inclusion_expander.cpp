@@ -136,9 +136,9 @@ make_type_group(const annotations::type_repository& atrp,
     BOOST_LOG_SEV(lg, debug) << "Creating field definitions.";
 
     type_group r;
-    const annotations::repository_selector s(atrp);
+    const annotations::type_repository_selector s(atrp);
     const auto ir(traits::cpp::inclusion_required());
-    r.inclusion_required = s.select_field_by_name(ir);
+    r.inclusion_required = s.select_type_by_name(ir);
 
     for (const auto f : fc.file_formatters()) {
         const auto& oh(f->ownership_hierarchy());
@@ -153,11 +153,11 @@ make_type_group(const annotations::type_repository& atrp,
 
         formattater_type_group ftg;
         const auto& id(traits::inclusion_directive());
-        ftg.inclusion_directive = s.select_field_by_name(fmtn, id);
+        ftg.inclusion_directive = s.select_type_by_name(fmtn, id);
 
         // note: redefinition by design as scopes are different.
         const auto& ir(traits::inclusion_required());
-        ftg.inclusion_required = s.select_field_by_name(fmtn, ir);
+        ftg.inclusion_required = s.select_type_by_name(fmtn, ir);
         r.formattaters_type_group[fmtn] = ftg;
     }
 

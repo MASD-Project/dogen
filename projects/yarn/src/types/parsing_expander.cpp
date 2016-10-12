@@ -46,8 +46,8 @@ namespace yarn {
 parsing_expander::type_group parsing_expander::make_type_group(
     const annotations::type_repository& atrp) const {
     type_group r;
-    const annotations::repository_selector rs(atrp);
-    r.parent = rs.select_field_by_name(traits::generalization::parent());
+    const annotations::type_repository_selector s(atrp);
+    r.parent = s.select_type_by_name(traits::generalization::parent());
     return r;
 }
 

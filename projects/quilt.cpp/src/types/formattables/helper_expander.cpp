@@ -82,9 +82,9 @@ helper_expander::context helper_expander::make_context(
     context r;
     r.streaming_propertiess = fm.streaming_properties();
 
-    const annotations::repository_selector s(atrp);
+    const annotations::type_repository_selector s(atrp);
     const auto hf(traits::cpp::helper::family());
-    const auto fd(s.select_field_by_name(hf));
+    const auto fd(s.select_type_by_name(hf));
 
     for (auto& pair : fm.formattables()) {
         const auto id(pair.first);

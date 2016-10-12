@@ -68,8 +68,8 @@ origin_expander::type_group origin_expander::
 make_type_group(const annotations::type_repository& atrp) const {
 
     type_group r;
-    const annotations::repository_selector rs(atrp);
-    r.is_proxy_model = rs.select_field_by_name(traits::is_proxy_model());
+    const annotations::type_repository_selector s(atrp);
+    r.is_proxy_model = s.select_type_by_name(traits::is_proxy_model());
     return r;
 }
 

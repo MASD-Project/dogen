@@ -51,8 +51,8 @@ generalization_expander::type_group generalization_expander::make_type_group(
     const annotations::type_repository& atrp) const {
 
     type_group r;
-    const annotations::repository_selector rs(atrp);
-    r.is_final = rs.select_field_by_name(traits::generalization::is_final());
+    const annotations::type_repository_selector s(atrp);
+    r.is_final = s.select_type_by_name(traits::generalization::is_final());
     return r;
 }
 

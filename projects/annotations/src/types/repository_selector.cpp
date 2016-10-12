@@ -40,16 +40,16 @@ const std::string no_fields_for_model("Could not find any fields for model: ");
 namespace dogen {
 namespace annotations {
 
-repository_selector::repository_selector(const type_repository& rp)
+type_repository_selector::type_repository_selector(const type_repository& rp)
     : repository_(rp) {}
 
-std::string repository_selector::
+std::string type_repository_selector::
 qualify(const std::string& prefix, const std::string& field_name) const {
     return prefix + dot + field_name;
 }
 
-boost::optional<const type&> repository_selector::
-try_select_field_by_name(const std::string& n) const {
+boost::optional<const type&> type_repository_selector::
+try_select_type_by_name(const std::string& n) const {
     const auto& c(repository_.types_by_name());
     const auto i(c.find(n));
     if (i == c.end())
@@ -58,15 +58,15 @@ try_select_field_by_name(const std::string& n) const {
     return i->second;
 }
 
-boost::optional<const type&> repository_selector::
-try_select_field_by_name(const std::string& prefix,
+boost::optional<const type&> type_repository_selector::
+try_type_field_by_name(const std::string& prefix,
     const std::string& simple_field_name) const {
-    return try_select_field_by_name(qualify(prefix, simple_field_name));
+    return try_select_type_by_name(qualify(prefix, simple_field_name));
 }
 
-const type& repository_selector::
-select_field_by_name(const std::string& n) const {
-    const auto r(try_select_field_by_name(n));
+const type& type_repository_selector::
+select_type_by_name(const std::string& n) const {
+    const auto r(try_select_type_by_name(n));
     if (!r) {
         BOOST_LOG_SEV(lg, error) << field_not_found << n;
         BOOST_THROW_EXCEPTION(selection_error(field_not_found + n));
@@ -74,14 +74,14 @@ select_field_by_name(const std::string& n) const {
     return *r;
 }
 
-const type& repository_selector::select_field_by_name(
+const type& type_repository_selector::select_type_by_name(
     const std::string& prefix,
     const std::string& simple_field_name) const {
-    return select_field_by_name(qualify(prefix, simple_field_name));
+    return select_type_by_name(qualify(prefix, simple_field_name));
 }
 
-const std::list<type>& repository_selector::
-select_fields_by_formatter_name(const std::string& n) const {
+const std::list<type>& type_repository_selector::
+select_type_by_formatter_name(const std::string& n) const {
     const auto& c(repository_.types_by_formatter_name());
     const auto i(c.find(n));
     if (i == c.end()) {
@@ -91,8 +91,8 @@ select_fields_by_formatter_name(const std::string& n) const {
     return i->second;
 }
 
-const std::list<type>& repository_selector::
-select_fields_by_facet_name(const std::string& n) const {
+const std::list<type>& type_repository_selector::
+select_type_by_facet_name(const std::string& n) const {
     const auto& c(repository_.types_by_facet_name());
     const auto i(c.find(n));
     if (i == c.end()) {
@@ -102,8 +102,8 @@ select_fields_by_facet_name(const std::string& n) const {
     return i->second;
 }
 
-const std::list<type>& repository_selector::
-select_fields_by_model_name(const std::string& n) const {
+const std::list<type>& type_repository_selector::
+select_type_by_model_name(const std::string& n) const {
     const auto& c(repository_.types_by_model_name());
     const auto i(c.find(n));
     if (i == c.end()) {

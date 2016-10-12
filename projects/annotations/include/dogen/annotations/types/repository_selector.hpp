@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_REPOSITORY_SELECTOR_HPP
-#define DOGEN_ANNOTATIONS_TYPES_REPOSITORY_SELECTOR_HPP
+#ifndef DOGEN_ANNOTATIONS_TYPES_TYPE_REPOSITORY_SELECTOR_HPP
+#define DOGEN_ANNOTATIONS_TYPES_TYPE_REPOSITORY_SELECTOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -36,9 +36,9 @@ namespace annotations {
 /**
  * @brief Performs a set of canned queries over a repository.
  */
-class repository_selector {
+class type_repository_selector {
 public:
-    explicit repository_selector(const type_repository& rp);
+    explicit type_repository_selector(const type_repository& rp);
 
 private:
     /**
@@ -55,7 +55,7 @@ public:
      * @return if one exists, returns it. Returns Null otherwise.
      */
     boost::optional<const type&>
-    try_select_field_by_name(const std::string& n) const;
+    try_select_type_by_name(const std::string& n) const;
 
     /**
      * @brief Tries to get the field definition corresponding to the
@@ -67,7 +67,7 @@ public:
      * @return if one exists, returns it. Returns Null otherwise.
      */
     boost::optional<const type&>
-    try_select_field_by_name(const std::string& prefix,
+    try_type_field_by_name(const std::string& prefix,
         const std::string& simple_field_name) const;
 
 public:
@@ -77,7 +77,7 @@ public:
      *
      * @pre name must exist.
      */
-    const type& select_field_by_name(const std::string& n) const;
+    const type& select_type_by_name(const std::string& n) const;
 
     /**
      * @brief Returns the field definition corresponding to the
@@ -88,7 +88,7 @@ public:
      *
      * @pre qualified field name must exist.
      */
-    const type& select_field_by_name(
+    const type& select_type_by_name(
         const std::string& prefix,
         const std::string& simple_field_name) const;
 
@@ -99,7 +99,7 @@ public:
      * @pre formatter name must exist.
      */
     const std::list<type>&
-    select_fields_by_formatter_name(const std::string& n) const;
+    select_type_by_formatter_name(const std::string& n) const;
 
     /**
      * @brief Returns the field definitions corresponding to the
@@ -108,7 +108,7 @@ public:
      * @pre facet name must exist.
      */
     const std::list<type>&
-    select_fields_by_facet_name(const std::string& n) const;
+    select_type_by_facet_name(const std::string& n) const;
 
     /**
      * @brief Returns the field definitions corresponding to the
@@ -117,7 +117,7 @@ public:
      * @pre facet name must exist.
      */
     const std::list<type>&
-    select_fields_by_model_name(const std::string& n) const;
+    select_type_by_model_name(const std::string& n) const;
 
 private:
     const type_repository& repository_;

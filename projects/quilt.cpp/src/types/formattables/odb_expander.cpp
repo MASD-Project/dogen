@@ -57,9 +57,9 @@ make_type_group(const annotations::type_repository& atrp) const {
     BOOST_LOG_SEV(lg, debug) << "Creating field definitions.";
 
     type_group r;
-    const annotations::repository_selector s(atrp);
+    const annotations::type_repository_selector s(atrp);
     const auto& cc(formatters::odb::traits::odb_pragma());
-    r.odb_pragma = s.select_field_by_name(cc);
+    r.odb_pragma = s.select_type_by_name(cc);
 
     BOOST_LOG_SEV(lg, debug) << "Created field definitions. Result: " << r;
     return r;

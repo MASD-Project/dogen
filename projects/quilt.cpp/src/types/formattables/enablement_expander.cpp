@@ -93,19 +93,19 @@ enablement_expander::make_global_type_group(
     BOOST_LOG_SEV(lg, debug) << "Creating global field definitions.";
 
     global_type_group_type r;
-    const annotations::repository_selector s(atrp);
+    const annotations::type_repository_selector s(atrp);
     for (const auto& f : fc.file_formatters()) {
         const auto oh(f->ownership_hierarchy());
 
         global_type_group fd;
         const auto& mn(oh.model_name());
-        fd.model_enabled = s.select_field_by_name(mn, traits::enabled());
+        fd.model_enabled = s.select_type_by_name(mn, traits::enabled());
 
         const auto& fctn(oh.facet_name());
-        fd.facet_enabled = s.select_field_by_name(fctn, traits::enabled());
+        fd.facet_enabled = s.select_type_by_name(fctn, traits::enabled());
 
         const auto& fmtn(oh.formatter_name());
-        fd.formatter_enabled = s.select_field_by_name(fmtn, traits::enabled());
+        fd.formatter_enabled = s.select_type_by_name(fmtn, traits::enabled());
 
         r[fmtn] = fd;
     }
@@ -283,18 +283,18 @@ enablement_expander::make_local_type_group(
     BOOST_LOG_SEV(lg, debug) << "Creating local field definitions.";
 
     local_type_group_type r;
-    const annotations::repository_selector s(atrp);
+    const annotations::type_repository_selector s(atrp);
     for (const auto& f : fc.file_formatters()) {
         local_type_group fd;
         const auto oh(f->ownership_hierarchy());
 
         const auto& fctn(oh.facet_name());
-        fd.facet_enabled = s.select_field_by_name(fctn, traits::enabled());
+        fd.facet_enabled = s.select_type_by_name(fctn, traits::enabled());
 
         const auto& fmtn(oh.formatter_name());
-        fd.formatter_enabled = s.select_field_by_name(fmtn, traits::enabled());
+        fd.formatter_enabled = s.select_type_by_name(fmtn, traits::enabled());
 
-        fd.facet_supported = s.select_field_by_name(fctn, traits::supported());
+        fd.facet_supported = s.select_type_by_name(fctn, traits::supported());
         r[fmtn] = fd;
     }
 
