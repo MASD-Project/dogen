@@ -94,31 +94,31 @@ make_decoration_configuration(const annotations::annotation& a) const {
 
     decoration_configuration r;
     const auto& gd(field_definitions_.generate_decoration);
-    if (s.has_field(gd))
+    if (s.has_entry(gd))
         r.generate_decoration(s.get_boolean_content(gd));
 
     const auto& cn(field_definitions_.copyright_notice);
-    if (s.has_field(cn))
+    if (s.has_entry(cn))
         r.copyright_notices(s.get_text_collection_content(cn));
 
     const auto& ln(field_definitions_.licence_name);
-    if (s.has_field(ln))
+    if (s.has_entry(ln))
         r.licence_name(s.get_text_content(ln));
 
     const auto& mlgn(field_definitions_.modeline_group_name);
-    if (s.has_field(mlgn))
+    if (s.has_entry(mlgn))
         r.modeline_group_name(s.get_text_content(mlgn));
 
     const auto madt(field_definitions_.marker_add_date_time);
-    if (s.has_field(madt))
+    if (s.has_entry(madt))
         r.marker_add_date_time(s.get_boolean_content(madt));
 
     const auto maw(field_definitions_.marker_add_warning);
-    if (s.has_field(maw))
+    if (s.has_entry(maw))
         r.marker_add_date_time(s.get_boolean_content(maw));
 
     const auto msg(field_definitions_.marker_message);
-    if (s.has_field(msg))
+    if (s.has_entry(msg))
         r.marker_message(s.get_text_content(msg));
 
     return r;

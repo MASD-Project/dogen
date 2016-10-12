@@ -142,7 +142,7 @@ enablement_expander::obtain_global_configurations(
          * facet enablement via the meta-data. If so, it takes
          * priority.
          */
-        if (s.has_field(t.facet_enabled))
+        if (s.has_entry(t.facet_enabled))
             gec.facet_enabled(s.get_boolean_content(t.facet_enabled));
         else {
             /*
@@ -193,7 +193,7 @@ enablement_expander::obtain_global_configurations(
          * formatter enablement via the meta-data. If so, it takes
          * priority.
          */
-        if (s.has_field(t.formatter_enabled))
+        if (s.has_entry(t.formatter_enabled))
             gec.formatter_enabled(s.get_boolean_content(t.formatter_enabled));
         else {
             /*
@@ -365,7 +365,7 @@ obtain_local_configurations(const local_type_group_type& ltg,
          * facet enablement via the meta-data. If so, it takes
          * priority.
          */
-        if (s.has_field(t.facet_enabled))
+        if (s.has_entry(t.facet_enabled))
             lec.facet_enabled(s.get_boolean_content(t.facet_enabled));
         else if (has_local_profile_group) {
             /*
@@ -416,7 +416,7 @@ obtain_local_configurations(const local_type_group_type& ltg,
          * formatter enablement via the meta-data. If so, it takes
          * priority.
          */
-        if (s.has_field(t.formatter_enabled))
+        if (s.has_entry(t.formatter_enabled))
             lec.formatter_enabled(s.get_boolean_content(t.formatter_enabled));
         else if (has_local_profile_group) {
             /*

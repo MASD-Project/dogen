@@ -44,150 +44,152 @@ public:
 
 private:
     /**
-     * @brief Throws if the field has no default value.
+     * @brief Throws if the type has no default value.
      */
     void ensure_default_value(const type& t) const;
 
 public:
     /**
-     * @brief Returns true if a field exists in an object.
+     * @brief Returns true if an entry exists in the annotation for
+     * the supplied entry type.
      */
     /**@{*/
-    bool has_field(const std::string& qualified_field_name) const;
-    bool has_field(const type& t) const;
+    bool has_entry(const std::string& qualified_name) const;
+    bool has_entry(const type& t) const;
     /**@}*/
 
 private:
     /**
-     * @brief Returns a field from an object.
+     * @brief Returns a value of an entry from an annotation.
      *
-     * @pre has_field must be true.
+     * @pre has_entry must be true.
      */
     /**@{*/
     const value&
-    get_field(const std::string& qualified_field_name) const;
-    const value& get_field(const type& t) const;
+    get_entry_value(const std::string& qualified_name) const;
+    const value& get_entry_value(const type& t) const;
     /**@}*/
 
 public:
     /**
-     * @brief Returns the content for the field, assuming it is a text field.
+     * @brief Returns the value of the entry, assuming it is a text
+     * value.
      *
-     * @pre Field value type must be text.
+     * @pre Entry value type must be text.
      */
     static std::string get_text_content(const value& v);
 
     /**
-     * @brief Returns the content for the field, assuming it is a text field.
+     * @brief Returns the value of the entry, assuming it is a text value.
      *
-     * @pre has_field must be true.
-     * @pre Field value type must be text.
+     * @pre has_entry must be true.
+     * @pre Entry value type must be text.
      */
     /**@{*/
-    std::string get_text_content(const std::string& qualified_field_name) const;
+    std::string get_text_content(const std::string& qualified_name) const;
     std::string get_text_content(const type& t) const;
     /**@}*/
 
     /**
-     * @brief Returns the content for the field, assuming it is a text
-     * field.
+     * @brief Returns the value of the entry, assuming it is a text
+     * value.
      *
-     * If the field does not exist, returns the default value.
+     * If the entry type does not exist, returns its default value.
      *
-     * @pre field definition must have a default value.
+     * @pre entry type must have a default value.
      */
     std::string get_text_content_or_default(const type& t) const;
 
     /**
-     * @brief Returns the content for the field, assuming it is a text
-     * collection field.
+     * @brief Returns the value of the entry, assuming it is a text
+     * collection value.
      *
-     * @pre Field value type must be text collection.
+     * @pre Entry type must be text collection.
      */
     static std::list<std::string> get_text_collection_content(const value& v);
 
     /**
-     * @brief Returns the content for the field, assuming it is a text
-     * collection field.
+     * @brief Returns the value of the entry, assuming it is a text
+     * collection value.
      *
-     * @pre has_field must be true.
-     * @pre Field value type must be text collection.
+     * @pre has_entry must be true.
+     * @pre Type's value must be text collection.
      */
     /**@{*/
     std::list<std::string>
-    get_text_collection_content(const std::string& qualified_field_name) const;
+    get_text_collection_content(const std::string& qualified_name) const;
     std::list<std::string>
     get_text_collection_content(const type& t) const;
     /**@}*/
 
     /**
-     * @brief Returns the content for the field, assuming it is a text
-     * collection field.
+     * @brief Returns the value of the entry, assuming it is a text
+     * collection value.
      *
-     * If the field does not exist, returns the default value.
+     * If the entry does not exist, returns the default value.
      *
-     * @pre field definition must have a default value.
+     * @pre type must have a default value.
      */
     std::list<std::string>
     get_text_collection_content_or_default(const type& t) const;
 
     /**
-     * @brief Returns the content for the field, assuming it is a boolean
-     * field.
+     * @brief Returns the content for the entry, assuming it is a
+     * boolean value.
      *
-     * @pre Field value type must be boolean.
+     * @pre Entry's  value must be boolean.
      */
     static bool get_boolean_content(const value& v);
 
     /**
-     * @brief Returns the content for the field, assuming it is a boolean
-     * field.
+     * @brief Returns the value of the entry, assuming it is a boolean
+     * value.
      *
-     * @pre has_field must be true.
-     * @pre Field value type must be boolean.
+     * @pre has_entry must be true.
+     * @pre Type's value must be boolean.
      */
     /**@{*/
-    bool get_boolean_content(const std::string& qualified_field_name) const;
+    bool get_boolean_content(const std::string& qualified_name) const;
     bool get_boolean_content(const type& t) const;
     /**@}*/
 
     /**
-     * @brief Returns the content for the field, assuming it is a boolean
-     * field.
+     * @brief Returns the value of the entry, assuming it is a boolean
+     * value.
      *
-     * If the field does not exist, returns the default value.
+     * If the entry does not exist, returns the default value.
      *
-     * @pre field definition must have a default value.
+     * @pre Type must have a default value.
      */
     bool get_boolean_content_or_default(const type& t) const;
 
     /**
-     * @brief Returns the content for the field, assuming it is a
-     * numeric field.
+     * @brief Returns the value of the entry, assuming it is a numeric
+     * value.
      *
-     * @pre Field value type must be numeric.
+     * @pre Type's value must be numeric.
      */
     static int get_number_content(const value& v);
 
     /**
-     * @brief Returns the content for the field, assuming it is a
-     * numeric field.
+     * @brief Returns the value of the entry, assuming it is a numeric
+     * value.
      *
-     * @pre has_field must be true.
-     * @pre Field value type must be numeric.
+     * @pre has_entry must be true.
+     * @pre Type must be numeric.
      */
     /**@{*/
-    int get_number_content(const std::string& qualified_field_name) const;
+    int get_number_content(const std::string& qualified_name) const;
     int get_number_content(const type& t) const;
     /**@}*/
 
     /**
-     * @brief Returns the content for the field, assuming it is a
-     * numeric field.
+     * @brief Returns the value of the entry, assuming it is a numeric
+     * value.
      *
-     * If the field does not exist, returns the default value.
+     * If the entry does not exist, returns the default value.
      *
-     * @pre field definition must have a default value.
+     * @pre Type must have a default value.
      */
     int get_number_content_or_default(const type& t) const;
 

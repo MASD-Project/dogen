@@ -88,19 +88,19 @@ streaming_expander::make_streaming_properties(
     const annotations::entry_selector s(a);
 
     const auto& rq(tg.requires_quoting);
-    if (s.has_field(rq)) {
+    if (s.has_entry(rq)) {
         r.requires_quoting(s.get_boolean_content_or_default(rq));
         found_any = true;
     }
 
     const auto& scm(tg.string_conversion_method);
-    if (s.has_field(scm)) {
+    if (s.has_entry(scm)) {
         r.string_conversion_method(s.get_text_content_or_default(scm));
         found_any = true;
     }
 
     const auto& ruc(tg.remove_unprintable_characters);
-    if (s.has_field(ruc)) {
+    if (s.has_entry(ruc)) {
         r.remove_unprintable_characters(s.get_boolean_content_or_default(ruc));
         found_any = true;
     }

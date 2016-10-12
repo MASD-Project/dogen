@@ -84,21 +84,21 @@ make_aspect_properties(const type_group& tg,
     const annotations::entry_selector s(a);
     bool found_any(false);
 
-    if (s.has_field(tg.requires_manual_default_constructor))
+    if (s.has_entry(tg.requires_manual_default_constructor))
         found_any = true;
 
     r.requires_manual_default_constructor(
         s.get_boolean_content_or_default(
             tg.requires_manual_default_constructor));
 
-    if (s.has_field(tg.requires_manual_move_constructor))
+    if (s.has_entry(tg.requires_manual_move_constructor))
         found_any = true;
 
     r.requires_manual_move_constructor(
         s.get_boolean_content_or_default(
             tg.requires_manual_move_constructor));
 
-    if (s.has_field(tg.requires_stream_manipulators))
+    if (s.has_entry(tg.requires_stream_manipulators))
         found_any = true;
 
     r.requires_stream_manipulators(

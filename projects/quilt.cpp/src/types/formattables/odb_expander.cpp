@@ -69,7 +69,7 @@ std::list<std::string> odb_expander::make_odb_pragmas(
     const type_group& tg, const annotations::annotation& o) const {
 
     const annotations::entry_selector s(o);
-    if (!s.has_field(tg.odb_pragma))
+    if (!s.has_entry(tg.odb_pragma))
         return std::list<std::string>();
 
     return s.get_text_collection_content(tg.odb_pragma);

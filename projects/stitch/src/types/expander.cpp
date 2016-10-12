@@ -58,7 +58,7 @@ void expander::expand(
 
     const annotations::entry_selector s(a);
     boost::filesystem::path absolute_output_directory;
-    if (s.has_field(traits::relative_output_directory())) {
+    if (s.has_entry(traits::relative_output_directory())) {
         const auto tc(s.get_text_content(traits::relative_output_directory()));
         using namespace boost::filesystem;
         path rel_dir(tc);

@@ -195,7 +195,7 @@ inclusion_expander::make_inclusion_directive_configuration(
     r.inclusion_required(s.get_boolean_content_or_default(ir));
 
     const auto id(ft.inclusion_directive);
-    if (s.has_field(id))
+    if (s.has_entry(id))
         r.inclusion_directive(s.get_text_content(id));
 
     return r;

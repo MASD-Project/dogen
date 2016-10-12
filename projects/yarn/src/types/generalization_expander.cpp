@@ -61,7 +61,7 @@ generalization_expander::make_is_final(const type_group& tg,
     const annotations::annotation& a) const {
     const annotations::entry_selector s(a);
 
-    if (s.has_field(tg.is_final))
+    if (s.has_entry(tg.is_final))
         return s.get_boolean_content(tg.is_final);
 
     return boost::optional<bool>();
