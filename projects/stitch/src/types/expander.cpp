@@ -69,7 +69,7 @@ void expander::expand(
 
     absolute_output_directory /= output_filename;
 
-    const annotations::value_factory f;
+    const auto f = annotations::value_factory();
     const auto v(f.make_text(absolute_output_directory.generic_string()));
     a.entries()[traits::output_path()] = v;
 
