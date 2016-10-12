@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/annotations/types/field_selector.hpp"
-#include "dogen/annotations/types/repository_selector.hpp"
+#include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/yarn/types/traits.hpp"
 #include "dogen/yarn/types/type_parameters_expander.hpp"
 

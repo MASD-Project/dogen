@@ -21,12 +21,12 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/annotations/types/selection_error.hpp"
-#include "dogen/annotations/types/repository_selector.hpp"
+#include "dogen/annotations/types/type_repository_selector.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("annotations.repository_selector"));
+static logger lg(logger_factory("annotations.type_repository_selector"));
 
 const std::string dot(".");
 const std::string field_not_found("Could not find expected field: ");

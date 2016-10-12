@@ -22,7 +22,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/string/splitter.hpp"
 #include "dogen/annotations/types/field_selector.hpp"
-#include "dogen/annotations/types/repository_selector.hpp"
+#include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/stitch/types/traits.hpp"
 #include "dogen/stitch/types/building_error.hpp"
 #include "dogen/stitch/types/stitching_properties_factory.hpp"

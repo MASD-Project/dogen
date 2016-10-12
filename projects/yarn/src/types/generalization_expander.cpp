@@ -26,7 +26,7 @@
 #include "dogen/yarn/types/traits.hpp"
 #include "dogen/yarn/types/resolver.hpp"
 #include "dogen/yarn/types/expansion_error.hpp"
-#include "dogen/annotations/types/repository_selector.hpp"
+#include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/yarn/types/generalization_expander.hpp"
 
 namespace {
