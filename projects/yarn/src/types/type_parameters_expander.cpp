@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/annotations/types/type_selector.hpp"
+#include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/yarn/types/traits.hpp"
 #include "dogen/yarn/types/type_parameters_expander.hpp"
@@ -47,7 +47,7 @@ type_parameters
 type_parameters_expander::make_type_parameters(const type_group& tg,
     const annotations::annotation& a) const {
     type_parameters r;
-    const annotations::type_selector s(a);
+    const annotations::entry_selector s(a);
 
     const auto& vnp(tg.variable_number_of_parameters);
     r.variable_number_of_parameters(s.get_boolean_content_or_default(vnp));

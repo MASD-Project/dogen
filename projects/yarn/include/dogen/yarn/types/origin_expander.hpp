@@ -26,7 +26,6 @@
 #endif
 
 #include "dogen/annotations/types/type_repository.hpp"
-#include "dogen/annotations/types/type_selector.hpp"
 #include "dogen/annotations/types/type.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 

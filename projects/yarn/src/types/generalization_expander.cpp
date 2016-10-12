@@ -21,7 +21,7 @@
 #include "dogen/utility/io/unordered_set_io.hpp"
 #include "dogen/utility/io/optional_io.hpp"
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/annotations/types/type_selector.hpp"
+#include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/types/traits.hpp"
 #include "dogen/yarn/types/resolver.hpp"
@@ -59,7 +59,7 @@ generalization_expander::type_group generalization_expander::make_type_group(
 boost::optional<bool>
 generalization_expander::make_is_final(const type_group& tg,
     const annotations::annotation& a) const {
-    const annotations::type_selector s(a);
+    const annotations::entry_selector s(a);
 
     if (s.has_field(tg.is_final))
         return s.get_boolean_content(tg.is_final);

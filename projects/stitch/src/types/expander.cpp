@@ -22,7 +22,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/annotations/io/annotation_io.hpp"
 #include "dogen/annotations/types/value_factory.hpp"
-#include "dogen/annotations/types/type_selector.hpp"
+#include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/stitch/types/traits.hpp"
 #include "dogen/stitch/types/expander.hpp"
 
@@ -56,7 +56,7 @@ void expander::expand(
     std::string output_filename(template_path->stem().generic_string());
     output_filename += stitch_postfix;
 
-    const annotations::type_selector s(a);
+    const annotations::entry_selector s(a);
     boost::filesystem::path absolute_output_directory;
     if (s.has_field(traits::relative_output_directory())) {
         const auto tc(s.get_text_content(traits::relative_output_directory()));

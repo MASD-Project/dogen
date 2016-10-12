@@ -23,7 +23,7 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/join.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/annotations/types/type_selector.hpp"
+#include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formattables/building_error.hpp"
@@ -122,7 +122,7 @@ locator_configuration locator::make_configuration(
     const type_group& tg, const annotations::annotation& o) const {
 
     locator_configuration r;
-    const annotations::type_selector s(o);
+    const annotations::entry_selector s(o);
 
     for (const auto& pair : tg.facets_type_group) {
         const auto fctn(pair.first);

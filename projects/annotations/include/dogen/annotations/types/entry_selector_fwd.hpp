@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_TYPE_SELECTOR_FWD_HPP
-#define DOGEN_ANNOTATIONS_TYPES_TYPE_SELECTOR_FWD_HPP
+#ifndef DOGEN_ANNOTATIONS_TYPES_ENTRY_SELECTOR_FWD_HPP
+#define DOGEN_ANNOTATIONS_TYPES_ENTRY_SELECTOR_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 namespace dogen {
 namespace annotations {
 
-class type_selector;
+class entry_selector;
 
 } }
 

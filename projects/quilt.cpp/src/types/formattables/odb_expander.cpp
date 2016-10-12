@@ -20,7 +20,7 @@
  */
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
-#include "dogen/annotations/types/type_selector.hpp"
+#include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/annotations/io/type_io.hpp"
 #include "dogen/quilt.cpp/types/formatters/odb/traits.hpp"
@@ -68,7 +68,7 @@ make_type_group(const annotations::type_repository& atrp) const {
 std::list<std::string> odb_expander::make_odb_pragmas(
     const type_group& tg, const annotations::annotation& o) const {
 
-    const annotations::type_selector s(o);
+    const annotations::entry_selector s(o);
     if (!s.has_field(tg.odb_pragma))
         return std::list<std::string>();
 

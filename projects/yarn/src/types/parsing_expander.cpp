@@ -22,7 +22,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_set_io.hpp"
-#include "dogen/annotations/types/type_selector.hpp"
+#include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/yarn/types/traits.hpp"
 #include "dogen/yarn/types/name_tree_parser.hpp"
@@ -53,7 +53,7 @@ parsing_expander::type_group parsing_expander::make_type_group(
 
 std::string parsing_expander::
 make_parent(const type_group& tg, const annotations::annotation& o) const {
-    const annotations::type_selector s(o);
+    const annotations::entry_selector s(o);
     if (s.has_field(tg.parent))
         return s.get_text_content(tg.parent);
 

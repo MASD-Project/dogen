@@ -21,7 +21,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
-#include "dogen/annotations/types/type_selector.hpp"
+#include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/annotations/io/type_io.hpp"
 #include "dogen/yarn/types/element.hpp"
@@ -85,7 +85,7 @@ streaming_expander::make_streaming_properties(
     BOOST_LOG_SEV(lg, debug) << "Creating streaming configuration.";
     bool found_any(false);
     streaming_properties r;
-    const annotations::type_selector s(a);
+    const annotations::entry_selector s(a);
 
     const auto& rq(tg.requires_quoting);
     if (s.has_field(rq)) {

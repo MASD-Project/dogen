@@ -27,7 +27,6 @@
 #include "dogen/annotations/test/mock_type_factory.hpp"
 #include "dogen/annotations/test/mock_type_repository_factory.hpp"
 #include "dogen/annotations/types/type.hpp"
-#include "dogen/annotations/types/type_selector.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/io/intermediate_model_io.hpp"

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_TYPE_SELECTOR_HPP
-#define DOGEN_ANNOTATIONS_TYPES_TYPE_SELECTOR_HPP
+#ifndef DOGEN_ANNOTATIONS_TYPES_ENTRY_SELECTOR_HPP
+#define DOGEN_ANNOTATIONS_TYPES_ENTRY_SELECTOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -38,9 +38,9 @@ namespace annotations {
  * @brief Performs a number of simple queries over the annotations
  * object.
  */
-class type_selector {
+class entry_selector {
 public:
-    explicit type_selector(const annotation& a);
+    explicit entry_selector(const annotation& a);
 
 private:
     /**

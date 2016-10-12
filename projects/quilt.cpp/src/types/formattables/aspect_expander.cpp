@@ -20,7 +20,7 @@
  */
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
-#include "dogen/annotations/types/type_selector.hpp"
+#include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/annotations/io/type_io.hpp"
 #include "dogen/yarn/types/element.hpp"
@@ -81,7 +81,7 @@ make_aspect_properties(const type_group& tg,
     const annotations::annotation& a) const {
     aspect_properties r;
 
-    const annotations::type_selector s(a);
+    const annotations::entry_selector s(a);
     bool found_any(false);
 
     if (s.has_field(tg.requires_manual_default_constructor))

@@ -26,7 +26,7 @@
 #include "dogen/utility/io/unordered_set_io.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
-#include "dogen/annotations/types/type_selector.hpp"
+#include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/annotations/io/type_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/facet_properties_io.hpp"
@@ -124,7 +124,7 @@ enablement_expander::obtain_global_configurations(
     BOOST_LOG_SEV(lg, debug) << "Creating global enablement configuration.";
 
     global_enablement_configurations_type r;
-    const annotations::type_selector s(root);
+    const annotations::entry_selector s(root);
     const auto& fffn(fc.file_formatters_by_formatter_name());
     for (const auto& pair : gtg) {
         const auto& fmtn(pair.first);
@@ -351,7 +351,7 @@ obtain_local_configurations(const local_type_group_type& ltg,
 
     BOOST_LOG_SEV(lg, debug) << "Obtaining local configurations.";
     local_enablement_configurations_type r;
-    const annotations::type_selector s(o);
+    const annotations::entry_selector s(o);
     for (const auto& pair : ltg) {
         const auto& fmtn(pair.first);
         const auto& t(pair.second);

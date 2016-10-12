@@ -24,7 +24,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
-#include "dogen/annotations/types/type_selector.hpp"
+#include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/annotations/io/type_io.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
@@ -167,7 +167,7 @@ make_type_group(const annotations::type_repository& atrp,
 
 bool inclusion_expander::make_top_level_inclusion_required(
     const type_group& tg, const annotations::annotation& o) const {
-    const annotations::type_selector s(o);
+    const annotations::entry_selector s(o);
     return s.get_boolean_content_or_default(tg.inclusion_required);
 }
 
@@ -188,7 +188,7 @@ inclusion_expander::make_inclusion_directive_configuration(
     }
 
     const auto& ft(i->second);
-    const annotations::type_selector s(o);
+    const annotations::entry_selector s(o);
     inclusion_directive_configuration r;
 
     const auto& ir(ft.inclusion_required);

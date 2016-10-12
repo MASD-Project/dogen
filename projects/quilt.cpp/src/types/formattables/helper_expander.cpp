@@ -21,7 +21,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_set_io.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
-#include "dogen/annotations/types/type_selector.hpp"
+#include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/yarn/io/languages_io.hpp"
@@ -92,7 +92,7 @@ helper_expander::context helper_expander::make_context(
 
         auto& formattable(pair.second);
         auto& segment(*formattable.master_segment());
-        const annotations::type_selector s(segment.annotation());
+        const annotations::entry_selector s(segment.annotation());
         const auto fam(s.get_text_content_or_default(fd));
         r.helper_families[id] = fam;
     }

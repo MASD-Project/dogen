@@ -21,7 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/string/splitter.hpp"
-#include "dogen/annotations/types/type_selector.hpp"
+#include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/stitch/types/traits.hpp"
 #include "dogen/stitch/types/building_error.hpp"
@@ -122,7 +122,7 @@ stitching_properties_factory::make_type_group(
 std::string stitching_properties_factory::
 extract_stream_variable_name(const annotations::annotation& a) const {
     using namespace annotations;
-    const type_selector s(a);
+    const entry_selector s(a);
     const auto& tg(type_group_);
     return s.get_text_content_or_default(tg.stream_variable_name);
 }
@@ -130,7 +130,7 @@ extract_stream_variable_name(const annotations::annotation& a) const {
 boost::optional<boost::filesystem::path> stitching_properties_factory::
 extract_template_path(const annotations::annotation& a) const {
     using namespace annotations;
-    const type_selector s(a);
+    const entry_selector s(a);
     if (!s.has_field(traits::template_path()))
         return boost::optional<boost::filesystem::path>();
 
@@ -141,7 +141,7 @@ extract_template_path(const annotations::annotation& a) const {
 boost::optional<boost::filesystem::path> stitching_properties_factory::
 extract_output_path(const annotations::annotation& a) const {
     using namespace annotations;
-    const type_selector s(a);
+    const entry_selector s(a);
     if (!s.has_field(traits::output_path()))
         return boost::optional<boost::filesystem::path>();
 
@@ -152,7 +152,7 @@ extract_output_path(const annotations::annotation& a) const {
 boost::optional<boost::filesystem::path> stitching_properties_factory::
 extract_relative_output_directory(const annotations::annotation& a) const {
     using namespace annotations;
-    const type_selector s(a);
+    const entry_selector s(a);
     if (!s.has_field(traits::relative_output_directory()))
         return boost::optional<boost::filesystem::path>();
 
@@ -164,7 +164,7 @@ std::list<std::string> stitching_properties_factory::
 extract_inclusion_dependencies(const annotations::annotation& a) const {
     std::list<std::string> r;
     using namespace annotations;
-    const type_selector s(a);
+    const entry_selector s(a);
     const auto& t(type_group_.inclusion_dependency);
     if (!s.has_field(t))
         return r;
@@ -176,7 +176,7 @@ std::list<std::string> stitching_properties_factory::
 extract_containing_namespaces(const annotations::annotation& a) const {
     std::list<std::string> r;
     using namespace annotations;
-    const type_selector s(a);
+    const entry_selector s(a);
     const auto& t(type_group_.containing_namespaces);
     if (!s.has_field(t))
         return r;

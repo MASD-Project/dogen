@@ -20,7 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/annotations/types/type_selector.hpp"
+#include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/formatters/types/traits.hpp"
 #include "dogen/formatters/types/hydration_workflow.hpp"
@@ -90,7 +90,7 @@ make_field_definitions(const annotations::type_repository& rp) const {
 
 decoration_configuration decoration_properties_factory::
 make_decoration_configuration(const annotations::annotation& a) const {
-    const annotations::type_selector s(a);
+    const annotations::entry_selector s(a);
 
     decoration_configuration r;
     const auto& gd(field_definitions_.generate_decoration);

@@ -20,6 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/yarn/types/traits.hpp"
 #include "dogen/yarn/types/expansion_error.hpp"
@@ -76,7 +77,7 @@ make_type_group(const annotations::type_repository& atrp) const {
 bool origin_expander::
 is_proxy_model(const type_group& tg, const intermediate_model& im) const {
     const auto& o(im.root_module().annotation());
-    const annotations::type_selector s(o);
+    const annotations::entry_selector s(o);
     const bool r(s.get_boolean_content_or_default(tg.is_proxy_model));
     BOOST_LOG_SEV(lg, debug) << "Read is proxy model: " << r
                              << " for model: " << im.name().id();
