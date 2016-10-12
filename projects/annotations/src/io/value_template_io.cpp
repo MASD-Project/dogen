@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/annotations/io/value_io.hpp"
+#include "dogen/annotations/io/name_io.hpp"
 #include "dogen/annotations/io/template_kinds_io.hpp"
 #include "dogen/annotations/io/value_template_io.hpp"
 #include "dogen/annotations/io/ownership_hierarchy_io.hpp"
@@ -32,17 +32,15 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace boost {
+namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::annotations::value>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
-      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<empty>\"";
-    s << " }";
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << tidy_up_string(*i) << "\"";
+    }
+    s << "] ";
     return s;
 }
 
@@ -54,9 +52,9 @@ namespace annotations {
 std::ostream& operator<<(std::ostream& s, const value_template& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::annotations::value_template\"" << ", "
-      << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
+      << "\"name\": " << v.name() << ", "
       << "\"ownership_hierarchy\": " << v.ownership_hierarchy() << ", "
-      << "\"value\": " << v.value() << ", "
+      << "\"untyped_value\": " << v.untyped_value() << ", "
       << "\"kind\": " << v.kind()
       << " }";
     return(s);

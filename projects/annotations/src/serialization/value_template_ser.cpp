@@ -19,6 +19,7 @@
  *
  */
 #include <boost/serialization/nvp.hpp>
+#include <boost/serialization/list.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/string.hpp>
@@ -26,10 +27,9 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
-#include <boost/serialization/shared_ptr.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/annotations/serialization/value_ser.hpp"
+#include "dogen/annotations/serialization/name_ser.hpp"
 #include "dogen/annotations/serialization/template_kinds_ser.hpp"
 #include "dogen/annotations/serialization/value_template_ser.hpp"
 #include "dogen/annotations/serialization/ownership_hierarchy_ser.hpp"
@@ -43,7 +43,7 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("name", v.name_);
     ar << make_nvp("ownership_hierarchy", v.ownership_hierarchy_);
-    ar << make_nvp("value", v.value_);
+    ar << make_nvp("untyped_value", v.untyped_value_);
     ar << make_nvp("kind", v.kind_);
 }
 
@@ -53,7 +53,7 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("ownership_hierarchy", v.ownership_hierarchy_);
-    ar >> make_nvp("value", v.value_);
+    ar >> make_nvp("untyped_value", v.untyped_value_);
     ar >> make_nvp("kind", v.kind_);
 }
 

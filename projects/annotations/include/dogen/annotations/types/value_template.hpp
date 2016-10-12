@@ -25,10 +25,10 @@
 #pragma once
 #endif
 
+#include <list>
 #include <string>
 #include <algorithm>
-#include <boost/shared_ptr.hpp>
-#include "dogen/annotations/types/value_fwd.hpp"
+#include "dogen/annotations/types/name.hpp"
 #include "dogen/annotations/types/template_kinds.hpp"
 #include "dogen/annotations/types/ownership_hierarchy.hpp"
 #include "dogen/annotations/serialization/value_template_fwd_ser.hpp"
@@ -47,9 +47,9 @@ public:
 
 public:
     value_template(
-        const std::string& name,
+        const dogen::annotations::name& name,
         const dogen::annotations::ownership_hierarchy& ownership_hierarchy,
-        const boost::shared_ptr<dogen::annotations::value>& value,
+        const std::list<std::string>& untyped_value,
         const dogen::annotations::template_kinds kind);
 
 private:
@@ -60,20 +60,20 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::annotations::value_template& v, unsigned int version);
 
 public:
-    const std::string& name() const;
-    std::string& name();
-    void name(const std::string& v);
-    void name(const std::string&& v);
+    const dogen::annotations::name& name() const;
+    dogen::annotations::name& name();
+    void name(const dogen::annotations::name& v);
+    void name(const dogen::annotations::name&& v);
 
     const dogen::annotations::ownership_hierarchy& ownership_hierarchy() const;
     dogen::annotations::ownership_hierarchy& ownership_hierarchy();
     void ownership_hierarchy(const dogen::annotations::ownership_hierarchy& v);
     void ownership_hierarchy(const dogen::annotations::ownership_hierarchy&& v);
 
-    const boost::shared_ptr<dogen::annotations::value>& value() const;
-    boost::shared_ptr<dogen::annotations::value>& value();
-    void value(const boost::shared_ptr<dogen::annotations::value>& v);
-    void value(const boost::shared_ptr<dogen::annotations::value>&& v);
+    const std::list<std::string>& untyped_value() const;
+    std::list<std::string>& untyped_value();
+    void untyped_value(const std::list<std::string>& v);
+    void untyped_value(const std::list<std::string>&& v);
 
     dogen::annotations::template_kinds kind() const;
     void kind(const dogen::annotations::template_kinds v);
@@ -89,9 +89,9 @@ public:
     value_template& operator=(value_template other);
 
 private:
-    std::string name_;
+    dogen::annotations::name name_;
     dogen::annotations::ownership_hierarchy ownership_hierarchy_;
-    boost::shared_ptr<dogen::annotations::value> value_;
+    std::list<std::string> untyped_value_;
     dogen::annotations::template_kinds kind_;
 };
 

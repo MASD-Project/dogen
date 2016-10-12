@@ -37,11 +37,18 @@ inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_dogen_annotations_value_template(const std::unordered_map<std::string, dogen::annotations::value_template>& v) {
+inline std::size_t hash_std_unordered_set_std_string(const std::unordered_set<std::string>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
-        combine(seed, i.first);
-        combine(seed, i.second);
+        combine(seed, i);
+    }
+    return seed;
+}
+
+inline std::size_t hash_std_list_dogen_annotations_value_template(const std::list<dogen::annotations::value_template>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
     }
     return seed;
 }
@@ -56,7 +63,8 @@ std::size_t profile_hasher::hash(const profile& v) {
 
     combine(seed, v.name());
     combine(seed, hash_std_list_std_string(v.parents()));
-    combine(seed, hash_std_unordered_map_std_string_dogen_annotations_value_template(v.value_templates()));
+    combine(seed, hash_std_unordered_set_std_string(v.labels()));
+    combine(seed, hash_std_list_dogen_annotations_value_template(v.templates()));
 
     return seed;
 }

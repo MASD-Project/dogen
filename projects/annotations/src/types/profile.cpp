@@ -26,22 +26,26 @@ namespace annotations {
 profile::profile(
     const std::string& name,
     const std::list<std::string>& parents,
-    const std::unordered_map<std::string, dogen::annotations::value_template>& value_templates)
+    const std::unordered_set<std::string>& labels,
+    const std::list<dogen::annotations::value_template>& templates)
     : name_(name),
       parents_(parents),
-      value_templates_(value_templates) { }
+      labels_(labels),
+      templates_(templates) { }
 
 void profile::swap(profile& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
     swap(parents_, other.parents_);
-    swap(value_templates_, other.value_templates_);
+    swap(labels_, other.labels_);
+    swap(templates_, other.templates_);
 }
 
 bool profile::operator==(const profile& rhs) const {
     return name_ == rhs.name_ &&
         parents_ == rhs.parents_ &&
-        value_templates_ == rhs.value_templates_;
+        labels_ == rhs.labels_ &&
+        templates_ == rhs.templates_;
 }
 
 profile& profile::operator=(profile other) {
@@ -82,20 +86,36 @@ void profile::parents(const std::list<std::string>&& v) {
     parents_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::annotations::value_template>& profile::value_templates() const {
-    return value_templates_;
+const std::unordered_set<std::string>& profile::labels() const {
+    return labels_;
 }
 
-std::unordered_map<std::string, dogen::annotations::value_template>& profile::value_templates() {
-    return value_templates_;
+std::unordered_set<std::string>& profile::labels() {
+    return labels_;
 }
 
-void profile::value_templates(const std::unordered_map<std::string, dogen::annotations::value_template>& v) {
-    value_templates_ = v;
+void profile::labels(const std::unordered_set<std::string>& v) {
+    labels_ = v;
 }
 
-void profile::value_templates(const std::unordered_map<std::string, dogen::annotations::value_template>&& v) {
-    value_templates_ = std::move(v);
+void profile::labels(const std::unordered_set<std::string>&& v) {
+    labels_ = std::move(v);
+}
+
+const std::list<dogen::annotations::value_template>& profile::templates() const {
+    return templates_;
+}
+
+std::list<dogen::annotations::value_template>& profile::templates() {
+    return templates_;
+}
+
+void profile::templates(const std::list<dogen::annotations::value_template>& v) {
+    templates_ = v;
+}
+
+void profile::templates(const std::list<dogen::annotations::value_template>&& v) {
+    templates_ = std::move(v);
 }
 
 } }

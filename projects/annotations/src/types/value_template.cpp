@@ -18,17 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/annotations/types/value.hpp"
 #include "dogen/annotations/types/value_template.hpp"
-
-namespace boost {
-
-inline bool operator==(const boost::shared_ptr<dogen::annotations::value>& lhs,
-const boost::shared_ptr<dogen::annotations::value>& rhs) {
-    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
-}
-
-}
 
 namespace dogen {
 namespace annotations {
@@ -37,27 +27,27 @@ value_template::value_template()
     : kind_(static_cast<dogen::annotations::template_kinds>(0)) { }
 
 value_template::value_template(
-    const std::string& name,
+    const dogen::annotations::name& name,
     const dogen::annotations::ownership_hierarchy& ownership_hierarchy,
-    const boost::shared_ptr<dogen::annotations::value>& value,
+    const std::list<std::string>& untyped_value,
     const dogen::annotations::template_kinds kind)
     : name_(name),
       ownership_hierarchy_(ownership_hierarchy),
-      value_(value),
+      untyped_value_(untyped_value),
       kind_(kind) { }
 
 void value_template::swap(value_template& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
     swap(ownership_hierarchy_, other.ownership_hierarchy_);
-    swap(value_, other.value_);
+    swap(untyped_value_, other.untyped_value_);
     swap(kind_, other.kind_);
 }
 
 bool value_template::operator==(const value_template& rhs) const {
     return name_ == rhs.name_ &&
         ownership_hierarchy_ == rhs.ownership_hierarchy_ &&
-        value_ == rhs.value_ &&
+        untyped_value_ == rhs.untyped_value_ &&
         kind_ == rhs.kind_;
 }
 
@@ -67,19 +57,19 @@ value_template& value_template::operator=(value_template other) {
     return *this;
 }
 
-const std::string& value_template::name() const {
+const dogen::annotations::name& value_template::name() const {
     return name_;
 }
 
-std::string& value_template::name() {
+dogen::annotations::name& value_template::name() {
     return name_;
 }
 
-void value_template::name(const std::string& v) {
+void value_template::name(const dogen::annotations::name& v) {
     name_ = v;
 }
 
-void value_template::name(const std::string&& v) {
+void value_template::name(const dogen::annotations::name&& v) {
     name_ = std::move(v);
 }
 
@@ -99,20 +89,20 @@ void value_template::ownership_hierarchy(const dogen::annotations::ownership_hie
     ownership_hierarchy_ = std::move(v);
 }
 
-const boost::shared_ptr<dogen::annotations::value>& value_template::value() const {
-    return value_;
+const std::list<std::string>& value_template::untyped_value() const {
+    return untyped_value_;
 }
 
-boost::shared_ptr<dogen::annotations::value>& value_template::value() {
-    return value_;
+std::list<std::string>& value_template::untyped_value() {
+    return untyped_value_;
 }
 
-void value_template::value(const boost::shared_ptr<dogen::annotations::value>& v) {
-    value_ = v;
+void value_template::untyped_value(const std::list<std::string>& v) {
+    untyped_value_ = v;
 }
 
-void value_template::value(const boost::shared_ptr<dogen::annotations::value>&& v) {
-    value_ = std::move(v);
+void value_template::untyped_value(const std::list<std::string>&& v) {
+    untyped_value_ = std::move(v);
 }
 
 dogen::annotations::template_kinds value_template::kind() const {

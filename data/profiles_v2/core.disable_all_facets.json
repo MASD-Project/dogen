@@ -9,7 +9,7 @@
                 "model_name" : "quilt.cpp"
             },
             "template_kind" : "facet_template",
-            "value" : false
+            "untyped_value" : [ "false" ]
         }
     ]
 }

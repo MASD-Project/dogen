@@ -46,17 +46,27 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::annotations::value_template>& v) {
-    s << "[";
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::string>& v) {
+    s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
+        s << "\"" << tidy_up_string(*i) << "\"";
     }
-    s << " ] ";
+    s << "] ";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::annotations::value_template>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
     return s;
 }
 
@@ -70,7 +80,8 @@ std::ostream& operator<<(std::ostream& s, const profile& v) {
       << "\"__type__\": " << "\"dogen::annotations::profile\"" << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"parents\": " << v.parents() << ", "
-      << "\"value_templates\": " << v.value_templates()
+      << "\"labels\": " << v.labels() << ", "
+      << "\"templates\": " << v.templates()
       << " }";
     return(s);
 }

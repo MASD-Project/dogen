@@ -1,5 +1,6 @@
 {
     "name" : "core.enable_all_facets",
+    "labels" : [ "default" ],
     "templates" : [
         {
             "name" : {
@@ -9,7 +10,7 @@
                 "model_name" : "quilt.cpp"
             },
             "template_kind" : "facet_template",
-            "value" : true
+            "untyped_value" : [ "true" ]
         },
         {
             "name" : {
@@ -19,7 +20,7 @@
                 "model_name" : "quilt.cpp"
             },
             "template_kind" : "facet_template",
-            "value" : true
+            "untyped_value" : [ "true" ]
         }
     ]
 }

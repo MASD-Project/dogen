@@ -27,7 +27,7 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
-#include <boost/serialization/unordered_map.hpp>
+#include <boost/serialization/unordered_set.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/annotations/serialization/profile_ser.hpp"
@@ -42,7 +42,8 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("name", v.name_);
     ar << make_nvp("parents", v.parents_);
-    ar << make_nvp("value_templates", v.value_templates_);
+    ar << make_nvp("labels", v.labels_);
+    ar << make_nvp("templates", v.templates_);
 }
 
 template<typename Archive>
@@ -51,7 +52,8 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("parents", v.parents_);
-    ar >> make_nvp("value_templates", v.value_templates_);
+    ar >> make_nvp("labels", v.labels_);
+    ar >> make_nvp("templates", v.templates_);
 }
 
 } }

@@ -38,15 +38,23 @@ std::list<std::string> create_std_list_std_string(unsigned int position) {
     return r;
 }
 
+std::unordered_set<std::string> create_std_unordered_set_std_string(unsigned int position) {
+    std::unordered_set<std::string> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(create_std_string(position + i));
+    }
+    return r;
+}
+
 dogen::annotations::value_template
 create_dogen_annotations_value_template(const unsigned int position) {
     return dogen::annotations::value_template_generator::create(position);
 }
 
-std::unordered_map<std::string, dogen::annotations::value_template> create_std_unordered_map_std_string_dogen_annotations_value_template(unsigned int position) {
-    std::unordered_map<std::string, dogen::annotations::value_template> r;
+std::list<dogen::annotations::value_template> create_std_list_dogen_annotations_value_template(unsigned int position) {
+    std::list<dogen::annotations::value_template> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_dogen_annotations_value_template(position + i)));
+        r.push_back(create_dogen_annotations_value_template(position + i));
     }
     return r;
 }
@@ -62,7 +70,8 @@ void profile_generator::
 populate(const unsigned int position, result_type& v) {
     v.name(create_std_string(position + 0));
     v.parents(create_std_list_std_string(position + 1));
-    v.value_templates(create_std_unordered_map_std_string_dogen_annotations_value_template(position + 2));
+    v.labels(create_std_unordered_set_std_string(position + 2));
+    v.templates(create_std_list_dogen_annotations_value_template(position + 3));
 }
 
 profile_generator::result_type

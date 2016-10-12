@@ -36,18 +36,6 @@ using namespace dogen::utility::log;
 auto lg(logger_factory("annotations.type_templates_hydrator"));
 
 const std::string empty;
-const std::string invalid_json_file("Failed to parse JSON file");
-const std::string invalid_option_in_json_file(
-    "Failed to read option in JSON file: ");
-const std::string invalid_path("Failed to find JSON path: ");
-const std::string template_has_no_name("Template has no 'name'.");
-const std::string template_has_no_hierarchy(
-    "Template has no ownership hierarchy.");
-const std::string invalid_scope("Invalid or unsupported scope type: ");
-const std::string invalid_value_type("Invalid or unsupported value type: ");
-const std::string invalid_template_kind(
-    "Invalid or unsupported template kind: ");
-
 const std::string name_key("name");
 const std::string name_simple_key("simple");
 const std::string name_qualified_key("qualified");
@@ -79,6 +67,18 @@ const std::string template_kind_model_template("model_template");
 const std::string template_kind_facet_template("facet_template");
 const std::string template_kind_formatter_template(
     "formatter_template");
+
+const std::string invalid_json_file("Failed to parse JSON file");
+const std::string invalid_option_in_json_file(
+    "Failed to read option in JSON file: ");
+const std::string invalid_path("Failed to find JSON path: ");
+const std::string template_has_no_name("Template has no 'name'.");
+const std::string template_has_no_hierarchy(
+    "Template has no ownership hierarchy.");
+const std::string invalid_scope("Invalid or unsupported scope type: ");
+const std::string invalid_value_type("Invalid or unsupported value type: ");
+const std::string invalid_template_kind(
+    "Invalid or unsupported template kind: ");
 
 }
 

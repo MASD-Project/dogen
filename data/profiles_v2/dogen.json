@@ -10,7 +10,7 @@
                 "model_name" : "formatters"
             },
             "template_kind" : "instance",
-            "value" : "gpl_v3"
+            "untyped_value" : [ "gpl_v3" ]
         },
         {
             "name" : {
@@ -21,7 +21,7 @@
                 "model_name" : "formatters"
             },
             "template_kind" : "instance",
-            "value" : [
+            "untyped_value" : [
                 "Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>"
             ]
         },
@@ -34,7 +34,7 @@
                 "model_name" : "formatters"
             },
             "template_kind" : "instance",
-            "value" : "emacs"
+            "untyped_value" : [ "emacs" ]
         }
     ]
 }

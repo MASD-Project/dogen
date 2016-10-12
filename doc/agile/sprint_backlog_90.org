@@ -252,6 +252,7 @@ Sound on compilations:
 : || ogg123 -q  /usr/share/sounds/gnome/default/alerts/drip.ogg
 
 *** STARTED Rewrite profile support                                   :story:
+    CLOCK: [2016-10-12 Wed 20:43]
     CLOCK: [2016-10-12 Wed 20:20]--[2016-10-12 Wed 20:42] =>  0:22
     CLOCK: [2016-10-12 Wed 12:35]--[2016-10-12 Wed 12:40] =>  0:05
     CLOCK: [2016-10-12 Wed 12:15]--[2016-10-12 Wed 12:30] =>  0:20

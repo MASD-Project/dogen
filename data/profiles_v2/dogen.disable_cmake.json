@@ -11,7 +11,7 @@
                 "model_name" : "quilt.cpp"
             },
             "template_kind" : "instance",
-            "value" : false
+            "untyped_value" : [ "false" ]
         }
     ]
 }

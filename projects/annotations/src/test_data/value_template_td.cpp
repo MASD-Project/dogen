@@ -19,17 +19,16 @@
  *
  */
 #include <sstream>
-#include "dogen/annotations/test_data/value_td.hpp"
+#include "dogen/annotations/test_data/name_td.hpp"
 #include "dogen/annotations/test_data/template_kinds_td.hpp"
 #include "dogen/annotations/test_data/value_template_td.hpp"
 #include "dogen/annotations/test_data/ownership_hierarchy_td.hpp"
 
 namespace {
 
-std::string create_std_string(const unsigned int position) {
-    std::ostringstream s;
-    s << "a_string_" << position;
-    return s.str();
+dogen::annotations::name
+create_dogen_annotations_name(const unsigned int position) {
+    return dogen::annotations::name_generator::create(position);
 }
 
 dogen::annotations::ownership_hierarchy
@@ -37,15 +36,17 @@ create_dogen_annotations_ownership_hierarchy(const unsigned int position) {
     return dogen::annotations::ownership_hierarchy_generator::create(position);
 }
 
-dogen::annotations::value*
-create_dogen_annotations_value_ptr(const unsigned int position) {
-    return dogen::annotations::value_generator::create_ptr(position);
+std::string create_std_string(const unsigned int position) {
+    std::ostringstream s;
+    s << "a_string_" << position;
+    return s.str();
 }
 
-boost::shared_ptr<dogen::annotations::value>
-create_boost_shared_ptr_dogen_annotations_value(unsigned int position) {
-    boost::shared_ptr<dogen::annotations::value> r(
-        create_dogen_annotations_value_ptr(position));
+std::list<std::string> create_std_list_std_string(unsigned int position) {
+    std::list<std::string> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.push_back(create_std_string(position + i));
+    }
     return r;
 }
 
@@ -63,9 +64,9 @@ value_template_generator::value_template_generator() : position_(0) { }
 
 void value_template_generator::
 populate(const unsigned int position, result_type& v) {
-    v.name(create_std_string(position + 0));
+    v.name(create_dogen_annotations_name(position + 0));
     v.ownership_hierarchy(create_dogen_annotations_ownership_hierarchy(position + 1));
-    v.value(create_boost_shared_ptr_dogen_annotations_value(position + 2));
+    v.untyped_value(create_std_list_std_string(position + 2));
     v.kind(create_dogen_annotations_template_kinds(position + 3));
 }
 
