@@ -1,6 +1,5 @@
 {
     "name" : "dogen",
-    "parents" : [ "default" ],
     "templates" : [
         {
             "name" : {

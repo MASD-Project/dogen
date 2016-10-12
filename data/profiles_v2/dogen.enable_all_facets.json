@@ -1,0 +1,4 @@
+{
+    "name" : "dogen.enable_all_facets",
+    "parents" : [ "dogen", "core.enable_all_facets" ]
+}

@@ -1,17 +1,17 @@
 {
-    "name" : "dogen.disable_cmake",
-    "parents" : [ "dogen.enable_all_facets" ],
+    "name" : "dogen.enable_types_io",
+    "parents" : [ "dogen.enable_types" ],
     "templates" : [
         {
             "name" : {
                 "simple" : "enabled",
-                "qualified" : "quilt.cpp.cmake"
+                "qualified" : "quilt.cpp.io"
             },
             "ownership_hierarchy" : {
                 "model_name" : "quilt.cpp"
             },
             "template_kind" : "instance",
-            "value" : false
+            "value" : true
         }
     ]
 }

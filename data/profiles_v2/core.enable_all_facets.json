@@ -1,5 +1,5 @@
 {
-    "name" : "dogen",
+    "name" : "core.enable_all_facets",
     "templates" : [
         {
             "name" : {
