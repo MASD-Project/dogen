@@ -20,7 +20,7 @@
  */
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
-#include "dogen/annotations/types/field_selector.hpp"
+#include "dogen/annotations/types/type_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/annotations/io/type_io.hpp"
 #include "dogen/quilt.cpp/types/formatters/odb/traits.hpp"

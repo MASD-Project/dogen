@@ -21,7 +21,7 @@
 #include <boost/test/unit_test.hpp>
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
-#include "dogen/annotations/types/field_selector.hpp"
+#include "dogen/annotations/types/type_selector.hpp"
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
 #include "dogen/annotations/test/mock_type_repository_factory.hpp"
 #include "dogen/stitch/io/text_template_io.hpp"

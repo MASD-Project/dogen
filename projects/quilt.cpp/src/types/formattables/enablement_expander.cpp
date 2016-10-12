@@ -26,7 +26,7 @@
 #include "dogen/utility/io/unordered_set_io.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
-#include "dogen/annotations/types/field_selector.hpp"
+#include "dogen/annotations/types/type_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/annotations/io/type_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/facet_properties_io.hpp"

@@ -21,7 +21,7 @@
 #include "dogen/utility/io/unordered_set_io.hpp"
 #include "dogen/utility/io/optional_io.hpp"
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/annotations/types/field_selector.hpp"
+#include "dogen/annotations/types/type_selector.hpp"
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/types/traits.hpp"
 #include "dogen/yarn/types/resolver.hpp"

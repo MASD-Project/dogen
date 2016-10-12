@@ -22,7 +22,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/annotations/io/annotation_io.hpp"
 #include "dogen/annotations/types/value_factory.hpp"
-#include "dogen/annotations/types/field_selector.hpp"
+#include "dogen/annotations/types/type_selector.hpp"
 #include "dogen/stitch/types/traits.hpp"
 #include "dogen/stitch/types/expander.hpp"
 

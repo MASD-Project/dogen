@@ -3937,7 +3937,7 @@ any.#</dia:string>
         <dia:real val="18.600000000000005"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#field_selector#</dia:string>
+        <dia:string>#type_selector#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>

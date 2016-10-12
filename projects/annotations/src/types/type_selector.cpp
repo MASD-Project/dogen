@@ -26,7 +26,7 @@
 #include "dogen/annotations/types/boolean.hpp"
 #include "dogen/annotations/types/text_collection.hpp"
 #include "dogen/annotations/types/selection_error.hpp"
-#include "dogen/annotations/types/field_selector.hpp"
+#include "dogen/annotations/types/type_selector.hpp"
 
 namespace {
 
