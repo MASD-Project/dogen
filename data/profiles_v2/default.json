@@ -1,6 +1,6 @@
 {
-    "name" : "default",
-    "fields" : [
+    "name" : "dogen",
+    "templates" : [
         {
             "name" : {
                 "simple" : "enabled"
@@ -8,7 +8,7 @@
             "ownership_hierarchy" : {
                 "model_name" : "quilt.cpp"
             },
-            "definition_type" : "facet_template",
+            "template_kind" : "facet_template",
             "value" : true
         },
         {
@@ -18,7 +18,7 @@
             "ownership_hierarchy" : {
                 "model_name" : "quilt.cpp"
             },
-            "definition_type" : "facet_template",
+            "template_kind" : "facet_template",
             "value" : true
         }
     ]

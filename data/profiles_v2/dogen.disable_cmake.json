@@ -1,0 +1,17 @@
+{
+    "name" : "dogen",
+    "parents" : [ "dogen" ],
+    "templates" : [
+        {
+            "name" : {
+                "simple" : "enabled",
+                "qualified" : "quilt.cpp.cmake"
+            },
+            "ownership_hierarchy" : {
+                "model_name" : "quilt.cpp"
+            },
+            "template_kind" : "instance",
+            "value" : false
+        }
+    ]
+}
