@@ -25,13 +25,13 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/annotations/io/type_io.hpp"
-#include "dogen/annotations/types/json_hydrator.hpp"
+#include "dogen/annotations/types/type_templates_hydrator.hpp"
 
 namespace {
 
 const std::string empty;
 const std::string test_module("annotations");
-const std::string test_suite("json_hydrator_tests");
+const std::string test_suite("type_templates_hydrator_tests");
 
 const std::string simple_name("a simple name");
 const std::string qualified_name("a qualified name");
@@ -54,7 +54,7 @@ const std::string trivial_field_definition(R"([
 
 std::list<dogen::annotations::type>
 hydrate(std::istream& s) {
-    dogen::annotations::json_hydrator h;
+    dogen::annotations::type_templates_hydrator h;
     return h.hydrate(s);
 }
 
@@ -66,7 +66,7 @@ hydrate(const std::string& content) {
 
 }
 
-BOOST_AUTO_TEST_SUITE(json_hydrator_tests)
+BOOST_AUTO_TEST_SUITE(type_templates_hydrator_tests)
 
 BOOST_AUTO_TEST_CASE(trivial_field_definition_hydrates_into_expected_collection) {
     SETUP_TEST_LOG_SOURCE("trivial_field_definition_hydrates_into_expected_collection");

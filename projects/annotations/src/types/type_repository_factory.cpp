@@ -28,7 +28,7 @@
 #include "dogen/annotations/io/ownership_hierarchy_io.hpp"
 #include "dogen/annotations/types/template_instantiator.hpp"
 #include "dogen/annotations/types/building_error.hpp"
-#include "dogen/annotations/types/json_hydrator.hpp"
+#include "dogen/annotations/types/type_templates_hydrator.hpp"
 #include "dogen/annotations/types/type_repository_factory.hpp"
 
 namespace {
@@ -50,10 +50,10 @@ std::list<type> type_repository_factory::hydrate_directories(
     const auto files(dogen::utility::filesystem::find_files(dirs));
     BOOST_LOG_SEV(lg, info) << "Files found: " << files;
 
-    json_hydrator jh;
+    type_templates_hydrator h;
     std::list<type> r;
     for (const auto& f : files) {
-        auto fds(jh.hydrate(f));
+        auto fds(h.hydrate(f));
         r.splice(r.end(), fds);
     }
     BOOST_LOG_SEV(lg, info) << "Finished hydrating all files.";

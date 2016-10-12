@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_JSON_HYDRATOR_HPP
-#define DOGEN_ANNOTATIONS_TYPES_JSON_HYDRATOR_HPP
+#ifndef DOGEN_ANNOTATIONS_TYPES_TYPE_TEMPLATES_HYDRATOR_HPP
+#define DOGEN_ANNOTATIONS_TYPES_TYPE_TEMPLATES_HYDRATOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -44,7 +44,7 @@ namespace annotations {
  * @brief Reads field definitions from a well-defined JSON
  * representation.
  */
-class json_hydrator {
+class type_templates_hydrator {
 private:
     /**
      * @brief Converts a string to a scope type.

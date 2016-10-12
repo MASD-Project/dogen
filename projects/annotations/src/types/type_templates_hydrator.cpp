@@ -28,12 +28,12 @@
 #include "dogen/annotations/io/field_definition_types_io.hpp"
 #include "dogen/annotations/types/value_factory.hpp"
 #include "dogen/annotations/types/hydration_error.hpp"
-#include "dogen/annotations/types/json_hydrator.hpp"
+#include "dogen/annotations/types/type_templates_hydrator.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("annotations.json_hydrator"));
+auto lg(logger_factory("annotations.type_templates_hydrator"));
 
 const std::string empty;
 const std::string invalid_json_file("Failed to parse JSON file");
@@ -85,7 +85,7 @@ const std::string field_definition_type_formatter_template(
 namespace dogen {
 namespace annotations {
 
-scope_types json_hydrator::to_scope_type(const std::string& s) const {
+scope_types type_templates_hydrator::to_scope_type(const std::string& s) const {
     if (s == scope_any)
         return scope_types::any;
     else if (s == scope_not_applicable)
@@ -105,7 +105,7 @@ scope_types json_hydrator::to_scope_type(const std::string& s) const {
     BOOST_THROW_EXCEPTION(hydration_error(invalid_scope + s));
 }
 
-value_types json_hydrator::to_value_type(const std::string& s) const {
+value_types type_templates_hydrator::to_value_type(const std::string& s) const {
     if (s == value_type_text)
         return value_types::text;
     else if (s == value_type_text_collection)
@@ -119,7 +119,7 @@ value_types json_hydrator::to_value_type(const std::string& s) const {
     BOOST_THROW_EXCEPTION(hydration_error(invalid_value_type + s));
 }
 
-field_definition_types json_hydrator::
+field_definition_types type_templates_hydrator::
 to_field_definition_type(const std::string& s) const {
     if (s == field_definition_type_instance)
         return field_definition_types::instance;
@@ -136,7 +136,8 @@ to_field_definition_type(const std::string& s) const {
     BOOST_THROW_EXCEPTION(hydration_error(invalid_definition_type + s));
 }
 
-boost::shared_ptr<value> json_hydrator::create_value(const value_types vt,
+boost::shared_ptr<value>
+type_templates_hydrator::create_value(const value_types vt,
     const std::string& v) const {
 
     value_factory f;
@@ -151,7 +152,8 @@ boost::shared_ptr<value> json_hydrator::create_value(const value_types vt,
     }
 }
 
-name json_hydrator::read_name(const boost::property_tree::ptree& pt) const {
+name type_templates_hydrator::
+read_name(const boost::property_tree::ptree& pt) const {
     name r;
     r.simple(pt.get<std::string>(name_simple_key));
 
@@ -162,7 +164,7 @@ name json_hydrator::read_name(const boost::property_tree::ptree& pt) const {
     return r;
 }
 
-ownership_hierarchy json_hydrator::
+ownership_hierarchy type_templates_hydrator::
 read_ownership_hierarchy(const boost::property_tree::ptree& pt) const {
     ownership_hierarchy r;
 
@@ -176,7 +178,7 @@ read_ownership_hierarchy(const boost::property_tree::ptree& pt) const {
     return r;
 }
 
-std::list<type> json_hydrator::read_stream(std::istream& s) const {
+std::list<type> type_templates_hydrator::read_stream(std::istream& s) const {
     using namespace boost::property_tree;
     ptree pt;
     read_json(s, pt);
@@ -214,7 +216,7 @@ std::list<type> json_hydrator::read_stream(std::istream& s) const {
     return r;
 }
 
-std::list<type> json_hydrator::hydrate(std::istream& s) const {
+std::list<type> type_templates_hydrator::hydrate(std::istream& s) const {
     BOOST_LOG_SEV(lg, trace) << "Parsing JSON stream.";
     using namespace boost::property_tree;
     try {
@@ -235,7 +237,7 @@ std::list<type> json_hydrator::hydrate(std::istream& s) const {
     }
 }
 
-std::list<type> json_hydrator::
+std::list<type> type_templates_hydrator::
 hydrate(const boost::filesystem::path& p) const {
     BOOST_LOG_SEV(lg, debug) << "Parsing JSON file: " << p.generic_string();
     boost::filesystem::ifstream s(p);

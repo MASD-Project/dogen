@@ -5346,7 +5346,7 @@ any.#</dia:string>
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#json_hydrator#</dia:string>
+        <dia:string>#type_templates_hydrator#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
