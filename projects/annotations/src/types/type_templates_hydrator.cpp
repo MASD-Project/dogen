@@ -56,7 +56,7 @@ const std::string ownership_hierarchy_model_name_key("model_name");
 const std::string ownership_hierarchy_facet_name_key("facet_name");
 const std::string ownership_hierarchy_formatter_name_key("formatter_name");
 const std::string value_type_key("value_type");
-const std::string template_kind_key("definition_type");
+const std::string template_kind_key("template_kind");
 const std::string scope_key("scope");
 const std::string default_value_key("default_value");
 

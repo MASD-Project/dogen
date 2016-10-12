@@ -8,7 +8,7 @@
             "model_name" : "yarn"
         },
         "value_type" : "boolean",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "entity",
         "default_value" : false
     },
@@ -21,7 +21,7 @@
             "model_name" : "yarn"
         },
         "value_type" : "number",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "entity",
         "default_value" : 0
     },
@@ -34,7 +34,7 @@
             "model_name" : "yarn"
         },
         "value_type" : "boolean",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "entity",
         "default_value" : false
     },
@@ -47,7 +47,7 @@
             "model_name" : "yarn"
         },
         "value_type" : "boolean",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "entity"
     },
     {
@@ -59,7 +59,7 @@
             "model_name" : "yarn"
         },
         "value_type" : "text",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "entity"
     },
     {
@@ -71,7 +71,7 @@
             "model_name" : "yarn"
         },
         "value_type" : "boolean",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "root_module",
         "default_value" : false
     }

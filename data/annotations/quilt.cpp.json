@@ -7,7 +7,7 @@
             "model_name" : "quilt.cpp"
         },
         "value_type" : "boolean",
-        "definition_type" : "global_template",
+        "template_kind" : "global_template",
         "scope" : "root_module",
         "default_value" : true
     },
@@ -19,7 +19,7 @@
             "model_name" : "quilt.cpp"
         },
         "value_type" : "boolean",
-        "definition_type" : "facet_template",
+        "template_kind" : "facet_template",
         "scope" : "entity",
         "default_value" : true
     },
@@ -32,7 +32,7 @@
             "model_name" : "quilt.cpp"
         },
         "value_type" : "text",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "entity",
         "default_value" : "default"
     },
@@ -44,7 +44,7 @@
             "model_name" : "quilt.cpp"
         },
         "value_type" : "text",
-        "definition_type" : "formatter_template",
+        "template_kind" : "formatter_template",
         "scope" : "entity"
     },
     {
@@ -56,7 +56,7 @@
             "formatter_group" : "quilt.cpp.header_files"
         },
         "value_type" : "text",
-        "definition_type" : "formatter_template",
+        "template_kind" : "formatter_template",
         "scope" : "entity"
     },
     {
@@ -69,7 +69,7 @@
             "model_name" : "quilt.cpp"
         },
         "value_type" : "boolean",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "entity",
         "default_value" : true
     },
@@ -82,7 +82,7 @@
             "model_name" : "quilt.cpp"
         },
         "value_type" : "text",
-        "definition_type" : "formatter_template",
+        "template_kind" : "formatter_template",
         "scope" : "entity"
     },
     {
@@ -93,7 +93,7 @@
             "model_name" : "quilt.cpp"
         },
         "value_type" : "text_collection",
-        "definition_type" : "formatter_template",
+        "template_kind" : "formatter_template",
         "scope" : "entity"
     },
     {
@@ -106,7 +106,7 @@
             "model_name" : "quilt.cpp"
         },
         "value_type" : "boolean",
-        "definition_type" : "formatter_template",
+        "template_kind" : "formatter_template",
         "scope" : "entity",
         "default_value" : true
     },
@@ -119,7 +119,7 @@
             "model_name" : "quilt.cpp"
         },
         "value_type" : "boolean",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "root_module",
         "default_value" : false
     },
@@ -132,7 +132,7 @@
             "model_name" : "quilt.cpp"
         },
         "value_type" : "text",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "root_module",
         "default_value" : "src"
     },
@@ -145,7 +145,7 @@
             "model_name" : "quilt.cpp"
         },
         "value_type" : "text",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "root_module",
         "default_value" : "include"
     },
@@ -158,7 +158,7 @@
             "model_name" : "quilt.cpp"
         },
         "value_type" : "text",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "root_module",
         "default_value" : "hpp"
     },
@@ -171,7 +171,7 @@
             "model_name" : "quilt.cpp"
         },
         "value_type" : "text",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "root_module",
         "default_value" : "cpp"
     },
@@ -184,7 +184,7 @@
             "model_name" : "quilt.cpp"
         },
         "value_type" : "boolean",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "root_module",
         "default_value" : true
     },
@@ -197,7 +197,7 @@
             "model_name" : "quilt.cpp"
         },
         "value_type" : "boolean",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "root_module",
         "default_value" : true
     },
@@ -210,7 +210,7 @@
             "model_name" : "quilt.cpp"
         },
         "value_type" : "boolean",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "entity",
         "default_value" : false
     },
@@ -223,7 +223,7 @@
             "model_name" : "quilt.cpp"
         },
         "value_type" : "boolean",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "entity",
         "default_value" : false
     },
@@ -236,7 +236,7 @@
             "model_name" : "quilt.cpp"
         },
         "value_type" : "boolean",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "entity",
         "default_value" : false
     },
@@ -249,7 +249,7 @@
             "model_name" : "quilt.cpp"
         },
         "value_type" : "boolean",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "root_module",
         "default_value" : false
     },
@@ -262,7 +262,7 @@
             "model_name" : "quilt.cpp"
         },
         "value_type" : "text",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "entity",
         "default_value" : "Default"
     },
@@ -275,7 +275,7 @@
             "model_name" : "quilt.cpp"
         },
         "value_type" : "text",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "entity",
         "default_value" : ""
     },
@@ -288,7 +288,7 @@
             "model_name" : "quilt.cpp"
         },
         "value_type" : "boolean",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "entity",
         "default_value" : false
     },
@@ -301,7 +301,7 @@
             "model_name" : "quilt.cpp"
         },
         "value_type" : "boolean",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "entity",
         "default_value" : false
     },
@@ -316,7 +316,7 @@
             "formatter_name" : "quilt.cpp.cmake.source_cmakelists.postfix"
         },
         "value_type" : "text",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "root_module",
         "default_value" : ""
     },
@@ -331,7 +331,7 @@
             "formatter_name" : "quilt.cpp.cmake.include_cmakelists.postfix"
         },
         "value_type" : "text",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "root_module",
         "default_value" : ""
     }

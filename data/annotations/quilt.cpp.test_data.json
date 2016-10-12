@@ -9,7 +9,7 @@
             "facet_name" : "quilt.cpp.test_data"
         },
         "value_type" : "text",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "root_module",
         "default_value" : "test_data"
     },
@@ -23,7 +23,7 @@
             "facet_name" : "quilt.cpp.test_data"
         },
         "value_type" : "text",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "root_module",
         "default_value" : "td"
     },
@@ -38,7 +38,7 @@
             "formatter_name" : "quilt.cpp.test_data.class_header_formatter"
         },
         "value_type" : "text",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "root_module",
         "default_value" : ""
     },
@@ -53,7 +53,7 @@
             "formatter_name" : "quilt.cpp.test_data.class_implementation_formatter"
         },
         "value_type" : "text",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "root_module",
         "default_value" : ""
     },
@@ -68,7 +68,7 @@
             "formatter_name" : "quilt.cpp.test_data.enum_header_formatter"
         },
         "value_type" : "text",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "root_module",
         "default_value" : ""
     },
@@ -83,7 +83,7 @@
             "formatter_name" : "quilt.cpp.test_data.enum_implementation_formatter"
         },
         "value_type" : "text",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "root_module",
         "default_value" : ""
     },
@@ -98,7 +98,7 @@
             "formatter_name" : "quilt.cpp.test_data.master_header_formatter"
         },
         "value_type" : "text",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "root_module",
         "default_value" : ""
     },
@@ -113,7 +113,7 @@
             "formatter_name" : "quilt.cpp.test_data.primitive_header_formatter"
         },
         "value_type" : "text",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "root_module",
         "default_value" : ""
     }

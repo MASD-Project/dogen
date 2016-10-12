@@ -8,7 +8,7 @@
             "model_name" : "yarn.dia"
         },
         "value_type" : "boolean",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "not_applicable"
     }
 ]

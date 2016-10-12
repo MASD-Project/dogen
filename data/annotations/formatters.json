@@ -8,7 +8,7 @@
             "model_name" : "formatters"
         },
         "value_type" : "boolean",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "any"
     },
     {
@@ -20,7 +20,7 @@
             "model_name" : "formatters"
         },
         "value_type" : "text_collection",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "any"
     },
     {
@@ -32,7 +32,7 @@
             "model_name" : "formatters"
         },
         "value_type" : "text",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "any"
     },
     {
@@ -44,7 +44,7 @@
             "model_name" : "formatters"
         },
         "value_type" : "text",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "any"
     },
     {
@@ -56,7 +56,7 @@
             "model_name" : "formatters"
         },
         "value_type" : "boolean",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "any"
     },
     {
@@ -68,7 +68,7 @@
             "model_name" : "formatters"
         },
         "value_type" : "boolean",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "any"
     },
     {
@@ -80,7 +80,7 @@
             "model_name" : "formatters"
         },
         "value_type" : "text",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "any"
     }
 ]

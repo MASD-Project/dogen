@@ -51,7 +51,7 @@ const std::string trivial_type_template(R"([
             "facet_name" : "a facet name"
         },
         "value_type" : "boolean",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "not_applicable"
     }
 ])");

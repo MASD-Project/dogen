@@ -9,7 +9,7 @@
             "facet_name" : "quilt.cpp.serialization"
         },
         "value_type" : "text",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "root_module",
         "default_value" : "serialization"
     },
@@ -23,7 +23,7 @@
             "facet_name" : "quilt.cpp.serialization"
         },
         "value_type" : "text",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "root_module",
         "default_value" : "ser"
     },
@@ -38,7 +38,7 @@
             "formatter_name" : "quilt.cpp.serialization.class_header_formatter"
         },
         "value_type" : "text",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "root_module",
         "default_value" : ""
     },
@@ -53,7 +53,7 @@
             "formatter_name" : "quilt.cpp.serialization.class_implementation_formatter"
         },
         "value_type" : "text",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "root_module",
         "default_value" : ""
     },
@@ -68,7 +68,7 @@
             "formatter_name" : "quilt.cpp.serialization.enum_header_formatter"
         },
         "value_type" : "text",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "root_module",
         "default_value" : ""
     },
@@ -83,7 +83,7 @@
             "formatter_name" : "quilt.cpp.serialization.registrar_header_formatter"
         },
         "value_type" : "text",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "root_module",
         "default_value" : ""
     },
@@ -98,7 +98,7 @@
             "formatter_name" : "quilt.cpp.serialization.registrar_implementation_formatter"
         },
         "value_type" : "text",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "root_module",
         "default_value" : ""
     },
@@ -113,7 +113,7 @@
             "formatter_name" : "quilt.cpp.serialization.forward_declarations_formatter"
         },
         "value_type" : "text",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "root_module",
         "default_value" : "fwd"
     },
@@ -128,7 +128,7 @@
             "formatter_name" : "quilt.cpp.serialization.master_header_formatter"
         },
         "value_type" : "text",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "root_module",
         "default_value" : ""
     },
@@ -143,7 +143,7 @@
             "formatter_name" : "quilt.cpp.serialization.primitive_header_formatter"
         },
         "value_type" : "text",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "root_module",
         "default_value" : ""
     }

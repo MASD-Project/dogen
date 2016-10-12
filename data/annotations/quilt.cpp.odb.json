@@ -9,7 +9,7 @@
             "facet_name" : "quilt.cpp.odb"
         },
         "value_type" : "text",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "root_module",
         "default_value" : "odb"
     },
@@ -23,7 +23,7 @@
             "facet_name" : "quilt.cpp.odb"
         },
         "value_type" : "text",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "root_module",
         "default_value" : "pragmas"
     },
@@ -38,7 +38,7 @@
             "formatter_name" : "quilt.cpp.odb.class_header_formatter"
         },
         "value_type" : "text",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "root_module",
         "default_value" : ""
     },
@@ -53,7 +53,7 @@
             "formatter_name" : "quilt.cpp.odb.enum_header_formatter"
         },
         "value_type" : "text",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "root_module",
         "default_value" : ""
     },
@@ -68,7 +68,7 @@
             "formatter_name" : "quilt.cpp.odb.odb_options_formatter"
         },
         "value_type" : "text",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "root_module",
         "default_value" : ""
     },
@@ -83,7 +83,7 @@
             "formatter_name" : "quilt.cpp.odb.master_header_formatter"
         },
         "value_type" : "text",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "root_module",
         "default_value" : ""
     },
@@ -97,7 +97,7 @@
             "facet_name" : "quilt.cpp.odb"
         },
         "value_type" : "text_collection",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "any"
     },
     {
@@ -111,7 +111,7 @@
             "formatter_name" : "quilt.cpp.odb.primitive_header_formatter"
         },
         "value_type" : "text",
-        "definition_type" : "instance",
+        "template_kind" : "instance",
         "scope" : "root_module",
         "default_value" : ""
     }
