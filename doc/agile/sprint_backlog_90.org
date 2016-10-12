@@ -14,24 +14,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-12 Wed 20:42]
+#+CAPTION: Clock summary at [2016-10-12 Wed 22:31]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *23:53* |       |       | 100.0 |
+| *Total time*                                                                | *25:41* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 23:53   |       |       | 100.0 |
-| Active                                                                      |         | 23:53 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  0:22 |   1.5 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  0:19 |   1.3 |
-| COMPLETED Improve bintray support                                           |         |       |  0:26 |   1.8 |
-| COMPLETED Refactor opaque infrastructure                                    |         |       |  1:17 |   5.4 |
+| Stories                                                                     | 25:41   |       |       | 100.0 |
+| Active                                                                      |         | 25:41 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  0:22 |   1.4 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  0:19 |   1.2 |
+| COMPLETED Improve bintray support                                           |         |       |  0:26 |   1.7 |
+| COMPLETED Refactor opaque infrastructure                                    |         |       |  1:17 |   5.0 |
 | COMPLETED Remove any remnants of annotations from quilt                     |         |       |  0:05 |   0.3 |
-| COMPLETED Solve the issue of too many "configurations"                      |         |       |  4:01 |  16.8 |
-| COMPLETED Merge decoration configuration and annotations factories          |         |       |  0:18 |   1.3 |
-| COMPLETED Move annotation factories into expander in yarn                   |         |       |  1:11 |   5.0 |
-| COMPLETED Clean up terminology in dynamic                                   |         |       | 15:12 |  63.6 |
-| STARTED Rewrite profile support                                             |         |       |  0:42 |   2.9 |
+| COMPLETED Solve the issue of too many "configurations"                      |         |       |  4:01 |  15.6 |
+| COMPLETED Merge decoration configuration and annotations factories          |         |       |  0:18 |   1.2 |
+| COMPLETED Move annotation factories into expander in yarn                   |         |       |  1:11 |   4.6 |
+| COMPLETED Clean up terminology in dynamic                                   |         |       | 15:12 |  59.2 |
+| STARTED Rewrite profile support                                             |         |       |  2:30 |   9.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -252,7 +252,8 @@ Sound on compilations:
 : || ogg123 -q  /usr/share/sounds/gnome/default/alerts/drip.ogg
 
 *** STARTED Rewrite profile support                                   :story:
-    CLOCK: [2016-10-12 Wed 20:43]
+    CLOCK: [2016-10-12 Wed 21:41]--[2016-10-12 Wed 22:31] =>  0:50
+    CLOCK: [2016-10-12 Wed 20:43]--[2016-10-12 Wed 21:41] =>  0:58
     CLOCK: [2016-10-12 Wed 20:20]--[2016-10-12 Wed 20:42] =>  0:22
     CLOCK: [2016-10-12 Wed 12:35]--[2016-10-12 Wed 12:40] =>  0:05
     CLOCK: [2016-10-12 Wed 12:15]--[2016-10-12 Wed 12:30] =>  0:20
@@ -276,6 +277,12 @@ Tasks:
 - we need to supply a list of stereotypes to dynamic workflow, against
   the id's that have them. If we can find a profile with the
   stereotype name, apply it.
+
+Notes:
+
+- clean up names in knit workflow (repository, method name)
+- supply ownership hierarchy to yarn workflow and to pre-merge workflow;
+- plug in profiler within annotation group factory.
 
 *** Registrar in quilt is not being generated                         :story:
 

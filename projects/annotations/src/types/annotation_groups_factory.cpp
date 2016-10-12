@@ -131,9 +131,9 @@ build(const scope_types scope, const scribble& scribble) const {
 }
 
 std::unordered_map<std::string, annotation_group>
-annotation_groups_factory::build(const std::string& root_annotation_id,
-    const std::unordered_map<std::string, scribble_group>& scribble_groups
-    ) const {
+annotation_groups_factory::
+build(const std::string& root_annotation_id, const std::unordered_map<
+    std::string, scribble_group>& scribble_groups) const {
 
     std::unordered_map<std::string, annotation_group> r;
     for (const auto& pair : scribble_groups) {
