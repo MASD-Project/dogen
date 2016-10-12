@@ -23,7 +23,7 @@
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/filesystem/file.hpp"
 #include "dogen/utility/exception/invalid_enum_value.hpp"
-#include "dogen/annotations/types/repository_workflow.hpp"
+#include "dogen/annotations/types/type_repository_factory.hpp"
 #include "dogen/options/types/knitting_options_validator.hpp"
 #include "dogen/options/io/knitting_options_io.hpp"
 #include "dogen/yarn/types/workflow.hpp"
@@ -72,7 +72,7 @@ bool workflow::housekeeping_required() const {
 }
 
 std::forward_list<annotations::ownership_hierarchy> workflow::
-obtain_ownership_hierarchy_activity() const {
+obtain_ownership_hierarchy() const {
     std::forward_list<annotations::ownership_hierarchy> r;
     const auto& rg(quilt::workflow::registrar());
     for (const auto b : rg.backends())
@@ -81,16 +81,16 @@ obtain_ownership_hierarchy_activity() const {
     return r;
 }
 
-annotations::type_repository workflow::setup_annotations_repository_activity(
-    const std::forward_list<annotations::ownership_hierarchy>& oh) const {
+annotations::type_repository workflow::setup_annotations_repository(
+    const std::forward_list<annotations::ownership_hierarchy>& ohs) const {
     using namespace dogen::utility::filesystem;
     const auto dir(data_files_directory() / annotations_dir);
-    annotations::repository_workflow w;
-    return w.execute(oh, std::forward_list<boost::filesystem::path> { dir });
+    annotations::type_repository_factory f;
+    return f.make(ohs, std::forward_list<boost::filesystem::path> { dir });
 }
 
 yarn::model workflow::
-obtain_yarn_model_activity(const annotations::type_repository& rp) const {
+obtain_yarn_model(const annotations::type_repository& rp) const {
 
     using namespace dogen::utility::filesystem;
     const auto dir(data_files_directory() / library_dir);
@@ -101,7 +101,7 @@ obtain_yarn_model_activity(const annotations::type_repository& rp) const {
     return w.execute(rp, dirs, io);
 }
 
-void workflow::perform_housekeeping_activity(
+void workflow::perform_housekeeping(
     const std::forward_list<formatters::file>& files,
     const std::forward_list<boost::filesystem::path>& dirs) const {
 
@@ -117,7 +117,7 @@ void workflow::perform_housekeeping_activity(
 
 
 std::shared_ptr<dogen::formatters::file_writer_interface>
-workflow::obtain_file_writer_activity() const {
+workflow::obtain_file_writer() const {
     const options::output_options& options(knitting_options_.output());
     const auto fw(options.force_write());
 
@@ -125,7 +125,7 @@ workflow::obtain_file_writer_activity() const {
     return std::make_shared<filesystem_writer>(fw);
 }
 
-void workflow::write_files_activity(
+void workflow::write_files(
     std::shared_ptr<dogen::formatters::file_writer_interface> writer,
     const std::forward_list<formatters::file>& files) const {
 
@@ -142,9 +142,9 @@ void workflow::execute() const {
     BOOST_LOG_SEV(lg, info) << "Knitting options: " << knitting_options_;
 
     try {
-        const auto oh(obtain_ownership_hierarchy_activity());
-        const auto rp(setup_annotations_repository_activity(oh));
-        const auto m(obtain_yarn_model_activity(rp));
+        const auto ohs(obtain_ownership_hierarchy());
+        const auto rp(setup_annotations_repository(ohs));
+        const auto m(obtain_yarn_model(rp));
 
         if (!m.has_generatable_types()) {
             BOOST_LOG_SEV(lg, warn) << "No generatable types found.";
@@ -154,12 +154,12 @@ void workflow::execute() const {
         quilt::workflow w(knitting_options_, rp);
         const auto files(w.execute(m));
 
-        const auto writer(obtain_file_writer_activity());
-        write_files_activity(writer, files);
+        const auto writer(obtain_file_writer());
+        write_files(writer, files);
 
         if (housekeeping_required()) {
             const auto md(w.managed_directories(m));
-            perform_housekeeping_activity(files, md);
+            perform_housekeeping(files, md);
         }
     } catch(const dogen::formatters::formatting_error& e) {
         BOOST_THROW_EXCEPTION(workflow_error(e.what()));

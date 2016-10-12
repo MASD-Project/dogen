@@ -106,7 +106,7 @@ private:
      * @brief Sets up the annotations repository.
      */
     annotations::type_repository create_annotations_repository_activity(
-        const std::forward_list<annotations::ownership_hierarchy>& oh)
+        const std::forward_list<annotations::ownership_hierarchy>& ohs)
         const;
 
     /**

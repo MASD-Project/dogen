@@ -94,24 +94,24 @@ private:
      * backends.
      */
     std::forward_list<annotations::ownership_hierarchy>
-    obtain_ownership_hierarchy_activity() const;
+    obtain_ownership_hierarchy() const;
 
     /**
      * @brief Sets up the annotations repository.
      */
-    annotations::type_repository setup_annotations_repository_activity(
-        const std::forward_list<annotations::ownership_hierarchy>& oh) const;
+    annotations::type_repository setup_annotations_repository(
+        const std::forward_list<annotations::ownership_hierarchy>& ohs) const;
 
     /**
      * @brief Obtain the yarn model.
      */
-    yarn::model obtain_yarn_model_activity(
+    yarn::model obtain_yarn_model(
         const annotations::type_repository& rp) const;
 
     /**
      * @brief Performs a housekeeping run for the supplied directories.
      */
-    void perform_housekeeping_activity(
+    void perform_housekeeping(
         const std::forward_list<formatters::file>& files,
         const std::forward_list<boost::filesystem::path>& dirs) const;
 
@@ -119,13 +119,13 @@ private:
      * @brief Obtains the file writer, according to configuration.
      */
     std::shared_ptr<dogen::formatters::file_writer_interface>
-    obtain_file_writer_activity() const;
+    obtain_file_writer() const;
 
     /**
      * @brief Outputs the pair file name and contents to its output
      * destination.
      */
-    void write_files_activity(
+    void write_files(
         std::shared_ptr<dogen::formatters::file_writer_interface> writer,
         const std::forward_list<formatters::file>& files) const;
 

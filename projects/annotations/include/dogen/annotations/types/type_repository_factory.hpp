@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_HYDRATION_WORKFLOW_HPP
-#define DOGEN_ANNOTATIONS_TYPES_HYDRATION_WORKFLOW_HPP
+#ifndef DOGEN_ANNOTATIONS_TYPES_TYPE_REPOSITORY_FACTORY_HPP
+#define DOGEN_ANNOTATIONS_TYPES_TYPE_REPOSITORY_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,21 +28,46 @@
 #include <list>
 #include <forward_list>
 #include <boost/filesystem/path.hpp>
+#include "dogen/annotations/types/type_repository.hpp"
+#include "dogen/annotations/types/ownership_hierarchy.hpp"
 #include "dogen/annotations/types/type.hpp"
 
 namespace dogen {
 namespace annotations {
 
 /**
- * @brief Hydrates all of the files available in a directory.
+ * @brief Produces a repository.
  */
-class hydration_workflow {
+class type_repository_factory {
+private:
+    /**
+     * @brief Hydrate all files in all of the supplied directories.
+     */
+    std::list<type> hydrate_directories(
+        const std::forward_list<boost::filesystem::path>& dirs) const;
+
+    /**
+     * @brief Instantiates all templates into field definition
+     * instances.
+     */
+    std::list<type> instantiate_templates(
+        const std::forward_list<ownership_hierarchy>& oh,
+        const std::list<type>& fds) const;
+
+    /**
+     * @brief Index fields into the repository.
+     */
+    type_repository create_repository(
+        const std::list<type>& fds) const;
+
 public:
     /**
-     * @brief Hydrates all files in the supplied directories.
+     * @brief Generate the repository with the data available in the
+     * supplied directories.
      */
-    std::list<type>
-    hydrate(const std::forward_list<boost::filesystem::path>& dirs) const;
+    type_repository make(
+        const std::forward_list<ownership_hierarchy>& ohs,
+        const std::forward_list<boost::filesystem::path>& dirs) const;
 };
 
 } }

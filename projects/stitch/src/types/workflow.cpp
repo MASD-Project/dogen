@@ -26,7 +26,7 @@
 #include "dogen/utility/io/forward_list_io.hpp"
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/filesystem/file.hpp"
-#include "dogen/annotations/types/repository_workflow.hpp"
+#include "dogen/annotations/types/type_repository_factory.hpp"
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
 #include "dogen/formatters/types/hydration_workflow.hpp"
 #include "dogen/formatters/io/file_io.hpp"
@@ -126,11 +126,11 @@ create_formatters_repository_activity() const {
 }
 
 annotations::type_repository workflow::create_annotations_repository_activity(
-    const std::forward_list<annotations::ownership_hierarchy>& oh) const {
+    const std::forward_list<annotations::ownership_hierarchy>& ohs) const {
     using namespace dogen::utility::filesystem;
     const auto dir(data_files_directory() / annotations_dir);
-    annotations::repository_workflow w;
-    return w.execute(oh, std::forward_list<boost::filesystem::path> { dir });
+    annotations::type_repository_factory f;
+    return f.make(ohs, std::forward_list<boost::filesystem::path> { dir });
 }
 
 std::forward_list<text_template> workflow::parse_text_templates_activity(
