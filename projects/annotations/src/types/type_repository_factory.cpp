@@ -26,7 +26,7 @@
 #include "dogen/utility/io/forward_list_io.hpp"
 #include "dogen/annotations/io/type_repository_io.hpp"
 #include "dogen/annotations/io/ownership_hierarchy_io.hpp"
-#include "dogen/annotations/types/instantiator.hpp"
+#include "dogen/annotations/types/template_instantiator.hpp"
 #include "dogen/annotations/types/building_error.hpp"
 #include "dogen/annotations/types/json_hydrator.hpp"
 #include "dogen/annotations/types/type_repository_factory.hpp"
@@ -61,19 +61,19 @@ std::list<type> type_repository_factory::hydrate_directories(
 }
 
 std::list<type> type_repository_factory::instantiate_templates(
-    const std::forward_list<ownership_hierarchy>& oh,
-    const std::list<type>& fds) const {
+    const std::forward_list<ownership_hierarchy>& ohs,
+    const std::list<type>& ts) const {
     std::list<type> r;
 
-    const instantiator ins(oh);
+    const template_instantiator ins(ohs);
     unsigned int counter(0);
-    for (const auto fd : fds) {
-        if (!ins.is_instantiable(fd)) {
-            r.push_back(fd);
+    for (const auto t : ts) {
+        if (!ins.is_instantiable(t)) {
+            r.push_back(t);
             continue;
         }
 
-        r.splice(r.end(), ins.instantiate(fd));
+        r.splice(r.end(), ins.instantiate(t));
         ++counter;
     }
 
@@ -82,31 +82,31 @@ std::list<type> type_repository_factory::instantiate_templates(
 }
 
 type_repository type_repository_factory::
-create_repository(const std::list<type>& fds) const {
+create_repository(const std::list<type>& ts) const {
 
     type_repository r;
-    r.all_types(fds);
+    r.all_types(ts);
 
-    for (const auto& fd : fds) {
-        const auto n(fd.name().qualified());
-        const auto pair(std::make_pair(n, fd));
+    for (const auto& t : ts) {
+        const auto n(t.name().qualified());
+        const auto pair(std::make_pair(n, t));
         const auto result(r.types_by_name().insert(pair));
         if (!result.second) {
             BOOST_LOG_SEV(lg, error) << duplicate_qualified_name << n;
             BOOST_THROW_EXCEPTION(building_error(duplicate_qualified_name + n));
         }
 
-        const auto& oh(fd.ownership_hierarchy());
+        const auto& oh(t.ownership_hierarchy());
         if (!oh.facet_name().empty())
-            r.types_by_facet_name()[oh.facet_name()].push_back(fd);
+            r.types_by_facet_name()[oh.facet_name()].push_back(t);
 
         if (!oh.formatter_name().empty())
             r.types_by_formatter_name()[oh.formatter_name()]
-                .push_back(fd);
+                .push_back(t);
 
         if (!oh.model_name().empty())
             r.types_by_model_name()[oh.model_name()]
-                .push_back(fd);
+                .push_back(t);
     }
 
     return r;

@@ -30,7 +30,7 @@
 #include "dogen/annotations/io/type_io.hpp"
 #include "dogen/annotations/types/field_definition_types.hpp"
 #include "dogen/annotations/types/instantiation_error.hpp"
-#include "dogen/annotations/types/instantiator.hpp"
+#include "dogen/annotations/types/template_instantiator.hpp"
 
 namespace {
 
@@ -64,18 +64,19 @@ const std::string unsupported_definition_type(
 namespace dogen {
 namespace annotations {
 
-instantiator::instantiator(const std::forward_list<ownership_hierarchy>& oh)
-    : ownership_hierarchy_(oh),
-      facet_names_by_model_name_(obtain_facet_names_by_model_name(oh)) {
+template_instantiator::
+template_instantiator(const std::forward_list<ownership_hierarchy>& ohs)
+    : ownership_hierarchies_(ohs),
+      facet_names_by_model_name_(obtain_facet_names_by_model_name(ohs)) {
 
     BOOST_LOG_SEV(lg, debug) << "Initialised.";
-    BOOST_LOG_SEV(lg, trace) << "Ownership hierarchy: " << oh;
+    BOOST_LOG_SEV(lg, trace) << "Ownership hierarchies: " << ohs;
     BOOST_LOG_SEV(lg, debug) << "Facet names by model: "
                              << facet_names_by_model_name_;
 }
 
 std::unordered_map<std::string, std::unordered_set<std::string> >
-instantiator::obtain_facet_names_by_model_name(
+template_instantiator::obtain_facet_names_by_model_name(
     const std::forward_list<ownership_hierarchy>& oh) const {
     std::unordered_map<std::string, std::unordered_set<std::string> > r;
 
@@ -102,62 +103,62 @@ instantiator::obtain_facet_names_by_model_name(
     return r;
 }
 
-bool instantiator::is_instantiable(const type& fd) const {
+bool template_instantiator::is_instantiable(const type& t) const {
     return
-        fd.definition_type() == field_definition_types::global_template ||
-        fd.definition_type() == field_definition_types::model_template ||
-        fd.definition_type() == field_definition_types::facet_template ||
-        fd.definition_type() == field_definition_types::formatter_template;
+        t.definition_type() == field_definition_types::global_template ||
+        t.definition_type() == field_definition_types::model_template ||
+        t.definition_type() == field_definition_types::facet_template ||
+        t.definition_type() == field_definition_types::formatter_template;
 }
 
-void instantiator::validate(const type& fd) const {
-    const auto sn(fd.name().simple());
-    if (fd.name().simple().empty()) {
+void template_instantiator::validate(const type& t) const {
+    const auto sn(t.name().simple());
+    if (t.name().simple().empty()) {
         BOOST_LOG_SEV(lg, error) << empty_simple_name;
         BOOST_THROW_EXCEPTION(instantiation_error(empty_simple_name));
     }
 
-    if (!is_instantiable(fd)) {
+    if (!is_instantiable(t)) {
         BOOST_LOG_SEV(lg, error) << field_not_instantiable << sn;
         BOOST_THROW_EXCEPTION(instantiation_error(field_not_instantiable + sn));
     }
 
-    if (!fd.name().qualified().empty()) {
+    if (!t.name().qualified().empty()) {
         BOOST_LOG_SEV(lg, error) << qualified_name_not_empty << sn;
         BOOST_THROW_EXCEPTION(
             instantiation_error(qualified_name_not_empty + sn));
     }
 
-    if (fd.definition_type() == field_definition_types::global_template) {
-        if (!fd.ownership_hierarchy().facet_name().empty()) {
+    if (t.definition_type() == field_definition_types::global_template) {
+        if (!t.ownership_hierarchy().facet_name().empty()) {
             BOOST_LOG_SEV(lg, error) << facet_name_not_empty << sn;
             BOOST_THROW_EXCEPTION(
                 instantiation_error(facet_name_not_empty + sn));
         }
 
-        if (!fd.ownership_hierarchy().formatter_name().empty()) {
+        if (!t.ownership_hierarchy().formatter_name().empty()) {
             BOOST_LOG_SEV(lg, error) << formatter_name_not_empty << sn;
             BOOST_THROW_EXCEPTION(
                 instantiation_error(formatter_name_not_empty + sn));
         }
     }
 
-    if (fd.definition_type() == field_definition_types::facet_template) {
-        if (!fd.ownership_hierarchy().facet_name().empty()) {
+    if (t.definition_type() == field_definition_types::facet_template) {
+        if (!t.ownership_hierarchy().facet_name().empty()) {
             BOOST_LOG_SEV(lg, error) << facet_name_not_empty << sn;
             BOOST_THROW_EXCEPTION(
                 instantiation_error(facet_name_not_empty + sn));
         }
 
-        if (!fd.ownership_hierarchy().formatter_name().empty()) {
+        if (!t.ownership_hierarchy().formatter_name().empty()) {
             BOOST_LOG_SEV(lg, error) << formatter_name_not_empty << sn;
             BOOST_THROW_EXCEPTION(
                 instantiation_error(formatter_name_not_empty + sn));
         }
     }
 
-    if (fd.definition_type() == field_definition_types::formatter_template) {
-        if (!fd.ownership_hierarchy().formatter_name().empty()) {
+    if (t.definition_type() == field_definition_types::formatter_template) {
+        if (!t.ownership_hierarchy().formatter_name().empty()) {
             BOOST_LOG_SEV(lg, error) << formatter_name_not_empty << sn;
             BOOST_THROW_EXCEPTION(
                 instantiation_error(formatter_name_not_empty + sn));
@@ -166,111 +167,112 @@ void instantiator::validate(const type& fd) const {
 }
 
 std::list<type>
-instantiator::instantiate_global_template(const type& fd) const {
+template_instantiator::instantiate_global_template(const type& t) const {
     std::list<type> r;
 
     for (const auto pair : facet_names_by_model_name_) {
         const auto model_name(pair.first);
-        if (!fd.ownership_hierarchy().model_name().empty() &&
-            fd.ownership_hierarchy().model_name() != model_name)
+        if (!t.ownership_hierarchy().model_name().empty() &&
+            t.ownership_hierarchy().model_name() != model_name)
             continue;
 
-        auto instance_fd(fd);
-        instance_fd.definition_type(field_definition_types::instance);
-        instance_fd.name().qualified(model_name + "." + fd.name().simple());
-        instance_fd.ownership_hierarchy().model_name(model_name);
-        instance_fd.ownership_hierarchy().facet_name(empty);
-        instance_fd.ownership_hierarchy().formatter_name(empty);
-        r.push_back(instance_fd);
+        auto instance_type(t);
+        instance_type.definition_type(field_definition_types::instance);
+        instance_type.name().qualified(model_name + "." + t.name().simple());
+        instance_type.ownership_hierarchy().model_name(model_name);
+        instance_type.ownership_hierarchy().facet_name(empty);
+        instance_type.ownership_hierarchy().formatter_name(empty);
+        r.push_back(instance_type);
 
         const auto& facet_names(pair.second);
         for (const auto facet_name : facet_names) {
-            auto instance_fd(fd);
-            instance_fd.definition_type(field_definition_types::instance);
-            instance_fd.name().qualified(facet_name + "." + fd.name().simple());
-            instance_fd.ownership_hierarchy().model_name(model_name);
-            instance_fd.ownership_hierarchy().facet_name(facet_name);
-            instance_fd.ownership_hierarchy().formatter_name(empty);
-            r.push_back(instance_fd);
+            auto instance_type(t);
+            const auto sn(t.name().simple());
+            instance_type.name().qualified(facet_name + "." + sn);
+            instance_type.definition_type(field_definition_types::instance);
+            instance_type.ownership_hierarchy().model_name(model_name);
+            instance_type.ownership_hierarchy().facet_name(facet_name);
+            instance_type.ownership_hierarchy().formatter_name(empty);
+            r.push_back(instance_type);
         }
     }
 
-    for (const auto oh : ownership_hierarchy_) {
-        if (!fd.ownership_hierarchy().model_name().empty() &&
-            fd.ownership_hierarchy().model_name() != oh.model_name())
+    for (const auto oh : ownership_hierarchies_) {
+        if (!t.ownership_hierarchy().model_name().empty() &&
+            t.ownership_hierarchy().model_name() != oh.model_name())
             continue;
 
-        auto instance_fd(fd);
-        instance_fd.definition_type(field_definition_types::instance);
+        auto instance_type(t);
+        instance_type.definition_type(field_definition_types::instance);
 
         const auto fn(oh.formatter_name());
-        instance_fd.name().qualified(fn + "." + fd.name().simple());
-        instance_fd.ownership_hierarchy(oh);
-        r.push_back(instance_fd);
+        instance_type.name().qualified(fn + "." + t.name().simple());
+        instance_type.ownership_hierarchy(oh);
+        r.push_back(instance_type);
     }
     return r;
 }
 
 std::list<type>
-instantiator::instantiate_facet_template(const type& fd) const {
+template_instantiator::instantiate_facet_template(const type& t) const {
     std::list<type> r;
     for (const auto pair : facet_names_by_model_name_) {
         const auto model_name(pair.first);
-        if (!fd.ownership_hierarchy().model_name().empty() &&
-            fd.ownership_hierarchy().model_name() != model_name)
+        if (!t.ownership_hierarchy().model_name().empty() &&
+            t.ownership_hierarchy().model_name() != model_name)
             continue;
 
         const auto& facet_names(pair.second);
         for (const auto facet_name : facet_names) {
-            auto instance_fd(fd);
-            instance_fd.definition_type(field_definition_types::instance);
-            instance_fd.name().qualified(facet_name + "." + fd.name().simple());
-            instance_fd.ownership_hierarchy().model_name(model_name);
-            instance_fd.ownership_hierarchy().facet_name(facet_name);
-            instance_fd.ownership_hierarchy().formatter_name(empty);
-            r.push_back(instance_fd);
+            auto instance_type(t);
+            instance_type.definition_type(field_definition_types::instance);
+            instance_type.name().qualified(facet_name + "." + t.name().simple());
+            instance_type.ownership_hierarchy().model_name(model_name);
+            instance_type.ownership_hierarchy().facet_name(facet_name);
+            instance_type.ownership_hierarchy().formatter_name(empty);
+            r.push_back(instance_type);
         }
     }
     return r;
 }
 
 std::list<type>
-instantiator::instantiate_formatter_template(const type& fd) const {
+template_instantiator::instantiate_formatter_template(const type& t) const {
     std::list<type> r;
-    for (const auto oh : ownership_hierarchy_) {
-        if (!fd.ownership_hierarchy().model_name().empty() &&
-            fd.ownership_hierarchy().model_name() != oh.model_name())
+    for (const auto oh : ownership_hierarchies_) {
+        if (!t.ownership_hierarchy().model_name().empty() &&
+            t.ownership_hierarchy().model_name() != oh.model_name())
             continue;
 
-        if (!fd.ownership_hierarchy().facet_name().empty() &&
-            fd.ownership_hierarchy().facet_name() != oh.facet_name())
+        if (!t.ownership_hierarchy().facet_name().empty() &&
+            t.ownership_hierarchy().facet_name() != oh.facet_name())
             continue;
 
-        auto instance_fd(fd);
-        instance_fd.definition_type(field_definition_types::instance);
+        auto instance_type(t);
+        instance_type.definition_type(field_definition_types::instance);
 
         const auto fn(oh.formatter_name());
-        instance_fd.name().qualified(fn + "." + fd.name().simple());
-        instance_fd.ownership_hierarchy(oh);
-        r.push_back(instance_fd);
+        instance_type.name().qualified(fn + "." + t.name().simple());
+        instance_type.ownership_hierarchy(oh);
+        r.push_back(instance_type);
     }
     return r;
 }
 
 std::list<type>
-instantiator::instantiate(const type& fd) const {
-    validate(fd);
+template_instantiator::instantiate(const type& t) const {
+    validate(t);
 
-    BOOST_LOG_SEV(lg, debug) << "Instantiating template: " << fd;
+    BOOST_LOG_SEV(lg, debug) << "Instantiating template: " << t;
 
     std::list<type> r;
-    const auto dt(fd.definition_type());
+    const auto dt(t.definition_type());
     if (dt == field_definition_types::global_template)
-        r = instantiate_global_template(fd);
+        r = instantiate_global_template(t);
     else if (dt == field_definition_types::facet_template)
-        r = instantiate_facet_template(fd);
+        r = instantiate_facet_template(t);
     else if (dt == field_definition_types::formatter_template)
-        r = instantiate_formatter_template(fd);
+        r = instantiate_formatter_template(t);
     else {
         BOOST_LOG_SEV(lg, error) << unsupported_definition_type << dt;
         BOOST_THROW_EXCEPTION(instantiation_error(unsupported_definition_type +

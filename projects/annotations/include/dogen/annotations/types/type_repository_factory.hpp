@@ -51,14 +51,14 @@ private:
      * instances.
      */
     std::list<type> instantiate_templates(
-        const std::forward_list<ownership_hierarchy>& oh,
-        const std::list<type>& fds) const;
+        const std::forward_list<ownership_hierarchy>& ohs,
+        const std::list<type>& ts) const;
 
     /**
      * @brief Index fields into the repository.
      */
     type_repository create_repository(
-        const std::list<type>& fds) const;
+        const std::list<type>& ts) const;
 
 public:
     /**

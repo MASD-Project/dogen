@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_INSTANTIATOR_HPP
-#define DOGEN_ANNOTATIONS_TYPES_INSTANTIATOR_HPP
+#ifndef DOGEN_ANNOTATIONS_TYPES_TEMPLATE_INSTANTIATOR_HPP
+#define DOGEN_ANNOTATIONS_TYPES_TEMPLATE_INSTANTIATOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -35,9 +35,9 @@
 namespace dogen {
 namespace annotations {
 
-class instantiator {
+class template_instantiator {
 public:
-    instantiator(const std::forward_list<ownership_hierarchy>& oh);
+    template_instantiator(const std::forward_list<ownership_hierarchy>& oh);
 
 private:
     /**
@@ -46,52 +46,52 @@ private:
      */
     std::unordered_map<std::string, std::unordered_set<std::string> >
     obtain_facet_names_by_model_name(
-        const std::forward_list<ownership_hierarchy>& oh) const;
+        const std::forward_list<ownership_hierarchy>& ohs) const;
 
 private:
     /**
      * @brief Ensures the field definition is in a valid state for
      * instantiation.
      */
-    void validate(const type& fd) const;
+    void validate(const type& t) const;
 
 private:
     /**
      * @brief Instantiates the field definition as a global template.
      */
     std::list<type>
-    instantiate_global_template(const type& fd) const;
+    instantiate_global_template(const type& t) const;
 
     /**
      * @brief Instantiates the field definition as a facet template.
      */
     std::list<type>
-    instantiate_facet_template(const type& fd) const;
+    instantiate_facet_template(const type& t) const;
 
     /**
      * @brief Instantiates the field definition as a formatter template.
      */
     std::list<type>
-    instantiate_formatter_template(const type& fd) const;
+    instantiate_formatter_template(const type& t) const;
 
 public:
     /**
      * @brief Returns true if the supplied field definition can be
      * instantiated.
      */
-    bool is_instantiable(const type& fd) const;
+    bool is_instantiable(const type& t) const;
 
     /**
      * @brief Instantiates the supplied field definition template into
      * a number of field definition instances.
      *
-     * @pre is_instantiable(fd)fd must be true.
+     * @pre is_instantiable(t) must be true.
      */
     std::list<type>
-    instantiate(const type& fd) const;
+    instantiate(const type& t) const;
 
 private:
-    const std::forward_list<ownership_hierarchy>& ownership_hierarchy_;
+    const std::forward_list<ownership_hierarchy>& ownership_hierarchies_;
     const std::unordered_map<std::string, std::unordered_set<std::string> >
     facet_names_by_model_name_;
 };

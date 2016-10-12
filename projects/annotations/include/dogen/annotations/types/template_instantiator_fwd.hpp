@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_INSTANTIATOR_FWD_HPP
-#define DOGEN_ANNOTATIONS_TYPES_INSTANTIATOR_FWD_HPP
+#ifndef DOGEN_ANNOTATIONS_TYPES_TEMPLATE_INSTANTIATOR_FWD_HPP
+#define DOGEN_ANNOTATIONS_TYPES_TEMPLATE_INSTANTIATOR_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 namespace dogen {
 namespace annotations {
 
-class instantiator;
+class template_instantiator;
 
 } }
 
