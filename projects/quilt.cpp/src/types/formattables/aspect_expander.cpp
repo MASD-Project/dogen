@@ -81,28 +81,28 @@ make_aspect_properties(const type_group& tg,
     const annotations::annotation& a) const {
     aspect_properties r;
 
-    const annotations::field_selector fs(a);
+    const annotations::type_selector s(a);
     bool found_any(false);
 
-    if (fs.has_field(tg.requires_manual_default_constructor))
+    if (s.has_field(tg.requires_manual_default_constructor))
         found_any = true;
 
     r.requires_manual_default_constructor(
-        fs.get_boolean_content_or_default(
+        s.get_boolean_content_or_default(
             tg.requires_manual_default_constructor));
 
-    if (fs.has_field(tg.requires_manual_move_constructor))
+    if (s.has_field(tg.requires_manual_move_constructor))
         found_any = true;
 
     r.requires_manual_move_constructor(
-        fs.get_boolean_content_or_default(
+        s.get_boolean_content_or_default(
             tg.requires_manual_move_constructor));
 
-    if (fs.has_field(tg.requires_stream_manipulators))
+    if (s.has_field(tg.requires_stream_manipulators))
         found_any = true;
 
     r.requires_stream_manipulators(
-        fs.get_boolean_content_or_default(
+        s.get_boolean_content_or_default(
             tg.requires_stream_manipulators));
 
     if (found_any)
@@ -111,8 +111,8 @@ make_aspect_properties(const type_group& tg,
     return boost::optional<aspect_properties>();
 }
 
-aspect_expander::aspect_properties_type
-aspect_expander::obtain_aspect_properties(const annotations::type_repository& atrp,
+aspect_expander::aspect_properties_type aspect_expander::
+obtain_aspect_properties(const annotations::type_repository& atrp,
     const std::unordered_map<std::string, formattable>& formattables) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started creating aspect configuration.";

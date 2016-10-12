@@ -59,10 +59,10 @@ generalization_expander::type_group generalization_expander::make_type_group(
 boost::optional<bool>
 generalization_expander::make_is_final(const type_group& tg,
     const annotations::annotation& a) const {
-    const annotations::field_selector fs(a);
+    const annotations::type_selector s(a);
 
-    if (fs.has_field(tg.is_final))
-        return fs.get_boolean_content(tg.is_final);
+    if (s.has_field(tg.is_final))
+        return s.get_boolean_content(tg.is_final);
 
     return boost::optional<bool>();
 }

@@ -85,23 +85,23 @@ streaming_expander::make_streaming_properties(
     BOOST_LOG_SEV(lg, debug) << "Creating streaming configuration.";
     bool found_any(false);
     streaming_properties r;
-    const annotations::field_selector fs(a);
+    const annotations::type_selector s(a);
 
     const auto& rq(tg.requires_quoting);
-    if (fs.has_field(rq)) {
-        r.requires_quoting(fs.get_boolean_content_or_default(rq));
+    if (s.has_field(rq)) {
+        r.requires_quoting(s.get_boolean_content_or_default(rq));
         found_any = true;
     }
 
     const auto& scm(tg.string_conversion_method);
-    if (fs.has_field(scm)) {
-        r.string_conversion_method(fs.get_text_content_or_default(scm));
+    if (s.has_field(scm)) {
+        r.string_conversion_method(s.get_text_content_or_default(scm));
         found_any = true;
     }
 
     const auto& ruc(tg.remove_unprintable_characters);
-    if (fs.has_field(ruc)) {
-        r.remove_unprintable_characters(fs.get_boolean_content_or_default(ruc));
+    if (s.has_field(ruc)) {
+        r.remove_unprintable_characters(s.get_boolean_content_or_default(ruc));
         found_any = true;
     }
 

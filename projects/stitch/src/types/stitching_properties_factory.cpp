@@ -41,35 +41,35 @@ namespace dogen {
 namespace stitch {
 
 stitching_properties_factory::
-stitching_properties_factory(const annotations::type_repository& rp)
-    : field_definitions_(make_field_definitions(rp)) {}
+stitching_properties_factory(const annotations::type_repository& arp)
+    : type_group_(make_type_group(arp)) {}
 
-stitching_properties_factory::field_definitions
-stitching_properties_factory::make_field_definitions(
-    const annotations::type_repository& rp) const {
-    field_definitions r;
+stitching_properties_factory::type_group
+stitching_properties_factory::make_type_group(
+    const annotations::type_repository& arp) const {
+    type_group r;
     bool found_stream_variable_name(false), found_template_path(false),
         found_output_path(false), found_relative_output_directory(false),
         found_inclusion_dependency(false), found_containing_namespaces(false);
-    const annotations::type_repository_selector s(rp);
-    for (const auto fd : s.select_type_by_model_name(traits::model_name())) {
-        if (fd.name().simple() == traits::stream_variable_name()) {
-            r.stream_variable_name = fd;
+    const annotations::type_repository_selector s(arp);
+    for (const auto t : s.select_type_by_model_name(traits::model_name())) {
+        if (t.name().simple() == traits::stream_variable_name()) {
+            r.stream_variable_name = t;
             found_stream_variable_name = true;
-        } else if (fd.name().simple() == traits::template_path()) {
-            r.template_path = fd;
+        } else if (t.name().simple() == traits::template_path()) {
+            r.template_path = t;
             found_template_path = true;
-        } else if (fd.name().simple() == traits::output_path()) {
-            r.output_path = fd;
+        } else if (t.name().simple() == traits::output_path()) {
+            r.output_path = t;
             found_output_path = true;
-        } else if (fd.name().simple() == traits::relative_output_directory()) {
-            r.relative_output_directory = fd;
+        } else if (t.name().simple() == traits::relative_output_directory()) {
+            r.relative_output_directory = t;
             found_relative_output_directory = true;
-        } else if (fd.name().simple() == traits::inclusion_dependency()) {
-            r.inclusion_dependency = fd;
+        } else if (t.name().simple() == traits::inclusion_dependency()) {
+            r.inclusion_dependency = t;
             found_inclusion_dependency = true;
-        } else if (fd.name().simple() == traits::containing_namespaces()) {
-            r.containing_namespaces = fd;
+        } else if (t.name().simple() == traits::containing_namespaces()) {
+            r.containing_namespaces = t;
             found_containing_namespaces = true;
         }
     }
@@ -122,41 +122,41 @@ stitching_properties_factory::make_field_definitions(
 std::string stitching_properties_factory::
 extract_stream_variable_name(const annotations::annotation& a) const {
     using namespace annotations;
-    const field_selector fs(a);
-    const auto& fds(field_definitions_);
-    return fs.get_text_content_or_default(fds.stream_variable_name);
+    const type_selector s(a);
+    const auto& tg(type_group_);
+    return s.get_text_content_or_default(tg.stream_variable_name);
 }
 
 boost::optional<boost::filesystem::path> stitching_properties_factory::
 extract_template_path(const annotations::annotation& a) const {
     using namespace annotations;
-    const field_selector fs(a);
-    if (!fs.has_field(traits::template_path()))
+    const type_selector s(a);
+    if (!s.has_field(traits::template_path()))
         return boost::optional<boost::filesystem::path>();
 
-    const auto text(fs.get_text_content(traits::template_path()));
+    const auto text(s.get_text_content(traits::template_path()));
     return boost::filesystem::path(text);
 }
 
 boost::optional<boost::filesystem::path> stitching_properties_factory::
 extract_output_path(const annotations::annotation& a) const {
     using namespace annotations;
-    const field_selector fs(a);
-    if (!fs.has_field(traits::output_path()))
+    const type_selector s(a);
+    if (!s.has_field(traits::output_path()))
         return boost::optional<boost::filesystem::path>();
 
-    const auto text(fs.get_text_content(traits::output_path()));
+    const auto text(s.get_text_content(traits::output_path()));
     return boost::filesystem::path(text);
 }
 
 boost::optional<boost::filesystem::path> stitching_properties_factory::
 extract_relative_output_directory(const annotations::annotation& a) const {
     using namespace annotations;
-    const field_selector fs(a);
-    if (!fs.has_field(traits::relative_output_directory()))
+    const type_selector s(a);
+    if (!s.has_field(traits::relative_output_directory()))
         return boost::optional<boost::filesystem::path>();
 
-    const auto text(fs.get_text_content(traits::relative_output_directory()));
+    const auto text(s.get_text_content(traits::relative_output_directory()));
     return boost::filesystem::path(text);
 }
 
@@ -164,29 +164,29 @@ std::list<std::string> stitching_properties_factory::
 extract_inclusion_dependencies(const annotations::annotation& a) const {
     std::list<std::string> r;
     using namespace annotations;
-    const field_selector fs(a);
-    const auto& fds(field_definitions_.inclusion_dependency);
-    if (!fs.has_field(fds))
+    const type_selector s(a);
+    const auto& t(type_group_.inclusion_dependency);
+    if (!s.has_field(t))
         return r;
 
-    return fs.get_text_collection_content(fds);
+    return s.get_text_collection_content(t);
 }
 
 std::list<std::string> stitching_properties_factory::
 extract_containing_namespaces(const annotations::annotation& a) const {
     std::list<std::string> r;
     using namespace annotations;
-    const field_selector fs(a);
-    const auto& fds(field_definitions_.containing_namespaces);
-    if (!fs.has_field(fds))
+    const type_selector s(a);
+    const auto& t(type_group_.containing_namespaces);
+    if (!s.has_field(t))
         return r;
 
-    const auto s(fs.get_text_content(fds));
-    if (s.empty())
+    const auto cns(s.get_text_content(t));
+    if (cns.empty())
         return r;
 
     using utility::string::splitter;
-    return splitter::split_scoped(s);
+    return splitter::split_scoped(cns);
 }
 
 stitching_properties stitching_properties_factory::

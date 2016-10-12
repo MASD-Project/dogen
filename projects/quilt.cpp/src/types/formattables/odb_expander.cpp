@@ -68,11 +68,11 @@ make_type_group(const annotations::type_repository& atrp) const {
 std::list<std::string> odb_expander::make_odb_pragmas(
     const type_group& tg, const annotations::annotation& o) const {
 
-    const annotations::field_selector fs(o);
-    if (!fs.has_field(tg.odb_pragma))
+    const annotations::type_selector s(o);
+    if (!s.has_field(tg.odb_pragma))
         return std::list<std::string>();
 
-    return fs.get_text_collection_content(tg.odb_pragma);
+    return s.get_text_collection_content(tg.odb_pragma);
 }
 
 boost::optional<odb_properties>

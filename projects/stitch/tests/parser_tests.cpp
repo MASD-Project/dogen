@@ -362,8 +362,8 @@ BOOST_AUTO_TEST_CASE(licence_directive_results_in_expected_template) {
 
     BOOST_CHECK(tt.lines().empty());
     BOOST_REQUIRE(tt.annotation().entries().size() == 1);
-    dogen::annotations::field_selector fs(tt.annotation());
-    BOOST_CHECK(fs.get_text_content(licence_name) == licence_value);
+    dogen::annotations::type_selector s(tt.annotation());
+    BOOST_CHECK(s.get_text_content(licence_name) == licence_value);
 }
 
 BOOST_AUTO_TEST_CASE(multiple_directives_results_in_expected_template) {
@@ -373,7 +373,7 @@ BOOST_AUTO_TEST_CASE(multiple_directives_results_in_expected_template) {
 
     BOOST_CHECK(tt.lines().empty());
     BOOST_REQUIRE(tt.annotation().entries().size() == 2);
-    dogen::annotations::field_selector fs(tt.annotation());
+    dogen::annotations::type_selector fs(tt.annotation());
     BOOST_CHECK(fs.get_text_content(licence_name) == licence_value);
     BOOST_CHECK(
         fs.get_text_content(copyright_notice_name) == copyright_notice_value);
@@ -533,7 +533,7 @@ BOOST_AUTO_TEST_CASE(namespaces_directive_results_in_expected_template) {
 
     BOOST_CHECK(tt.lines().empty());
     BOOST_REQUIRE(tt.annotation().entries().size() == 1);
-    dogen::annotations::field_selector fs(tt.annotation());
+    dogen::annotations::type_selector fs(tt.annotation());
     BOOST_CHECK(fs.get_text_content(namespaces_name) == namespaces_value);
 }
 

@@ -97,17 +97,17 @@ enablement_expander::make_global_type_group(
     for (const auto& f : fc.file_formatters()) {
         const auto oh(f->ownership_hierarchy());
 
-        global_type_group fd;
+        global_type_group gtg;
         const auto& mn(oh.model_name());
-        fd.model_enabled = s.select_type_by_name(mn, traits::enabled());
+        gtg.model_enabled = s.select_type_by_name(mn, traits::enabled());
 
         const auto& fctn(oh.facet_name());
-        fd.facet_enabled = s.select_type_by_name(fctn, traits::enabled());
+        gtg.facet_enabled = s.select_type_by_name(fctn, traits::enabled());
 
         const auto& fmtn(oh.formatter_name());
-        fd.formatter_enabled = s.select_type_by_name(fmtn, traits::enabled());
+        gtg.formatter_enabled = s.select_type_by_name(fmtn, traits::enabled());
 
-        r[fmtn] = fd;
+        r[fmtn] = gtg;
     }
 
     BOOST_LOG_SEV(lg, debug) << "Created global field definitions. Result: "
@@ -117,33 +117,33 @@ enablement_expander::make_global_type_group(
 
 enablement_expander::global_enablement_configurations_type
 enablement_expander::obtain_global_configurations(
-    const std::unordered_map<std::string, global_type_group>& gfd,
+    const std::unordered_map<std::string, global_type_group>& gtg,
     const annotations::annotation& root, const formatters::container& fc,
     const profile_group& gpg) const {
 
     BOOST_LOG_SEV(lg, debug) << "Creating global enablement configuration.";
 
     global_enablement_configurations_type r;
-    const annotations::field_selector fs(root);
+    const annotations::type_selector s(root);
     const auto& fffn(fc.file_formatters_by_formatter_name());
-    for (const auto& pair : gfd) {
+    for (const auto& pair : gtg) {
         const auto& fmtn(pair.first);
-        const auto& fd(pair.second);
+        const auto& t(pair.second);
 
         /*
          * Model configuration can only be set via meta-data, so we'll
          * take the value set or its default.
          */
         global_enablement_configuration gec;
-        gec.model_enabled(fs.get_boolean_content_or_default(fd.model_enabled));
+        gec.model_enabled(s.get_boolean_content_or_default(t.model_enabled));
 
         /*
          * First, we deal with facets. Lets see if the user has set
          * facet enablement via the meta-data. If so, it takes
          * priority.
          */
-        if (fs.has_field(fd.facet_enabled))
-            gec.facet_enabled(fs.get_boolean_content(fd.facet_enabled));
+        if (s.has_field(t.facet_enabled))
+            gec.facet_enabled(s.get_boolean_content(t.facet_enabled));
         else {
             /*
              * Now see if the profile sets the enablement for this
@@ -176,14 +176,14 @@ enablement_expander::obtain_global_configurations(
                      * use the default value of the meta-data. It must
                      * be set.
                      */
-                    const auto& dv(fd.facet_enabled.default_value());
+                    const auto& dv(t.facet_enabled.default_value());
                     if (!dv) {
-                        const auto qfn(fd.facet_enabled.name().qualified());
+                        const auto qfn(t.facet_enabled.name().qualified());
                         BOOST_LOG_SEV(lg, error) << default_value_unset << qfn;
                         BOOST_THROW_EXCEPTION(
                             expansion_error(default_value_unset + qfn));
                     }
-                    gec.facet_enabled(fs.get_boolean_content(*dv));
+                    gec.facet_enabled(s.get_boolean_content(*dv));
                 }
             }
         }
@@ -193,8 +193,8 @@ enablement_expander::obtain_global_configurations(
          * formatter enablement via the meta-data. If so, it takes
          * priority.
          */
-        if (fs.has_field(fd.formatter_enabled))
-            gec.formatter_enabled(fs.get_boolean_content(fd.formatter_enabled));
+        if (s.has_field(t.formatter_enabled))
+            gec.formatter_enabled(s.get_boolean_content(t.formatter_enabled));
         else {
             /*
              * Now see if the profile sets the enablement for this
@@ -217,14 +217,14 @@ enablement_expander::obtain_global_configurations(
                      * use the default value of the meta-data. It must
                      * be set.
                      */
-                    const auto& dv(fd.formatter_enabled.default_value());
+                    const auto& dv(t.formatter_enabled.default_value());
                     if (!dv) {
-                        const auto qfn(fd.formatter_enabled.name().qualified());
+                        const auto qfn(t.formatter_enabled.name().qualified());
                         BOOST_LOG_SEV(lg, error) << default_value_unset << qfn;
                         BOOST_THROW_EXCEPTION(
                             expansion_error(default_value_unset + qfn));
                     }
-                    gec.formatter_enabled(fs.get_boolean_content(*dv));
+                    gec.formatter_enabled(s.get_boolean_content(*dv));
                 }
             }
         }
@@ -276,26 +276,26 @@ void enablement_expander::update_facet_enablement(
                              << "Result: " << fm.facet_properties();
 }
 
-enablement_expander::local_type_group_type
-enablement_expander::make_local_type_group(
-    const annotations::type_repository& atrp, const formatters::container& fc) const {
+enablement_expander::local_type_group_type enablement_expander::
+make_local_type_group(const annotations::type_repository& atrp,
+    const formatters::container& fc) const {
 
     BOOST_LOG_SEV(lg, debug) << "Creating local field definitions.";
 
     local_type_group_type r;
     const annotations::type_repository_selector s(atrp);
     for (const auto& f : fc.file_formatters()) {
-        local_type_group fd;
+        local_type_group ltg;
         const auto oh(f->ownership_hierarchy());
 
         const auto& fctn(oh.facet_name());
-        fd.facet_enabled = s.select_type_by_name(fctn, traits::enabled());
+        ltg.facet_enabled = s.select_type_by_name(fctn, traits::enabled());
 
         const auto& fmtn(oh.formatter_name());
-        fd.formatter_enabled = s.select_type_by_name(fmtn, traits::enabled());
+        ltg.formatter_enabled = s.select_type_by_name(fmtn, traits::enabled());
 
-        fd.facet_supported = s.select_type_by_name(fctn, traits::supported());
-        r[fmtn] = fd;
+        ltg.facet_supported = s.select_type_by_name(fctn, traits::supported());
+        r[fmtn] = ltg;
     }
 
     BOOST_LOG_SEV(lg, debug) << "Created local field definitions. Result: "
@@ -306,7 +306,7 @@ enablement_expander::make_local_type_group(
 std::unordered_map<std::type_index,
                    enablement_expander::local_type_group_type>
 enablement_expander::bucket_local_type_group_by_type_index(
-    const local_type_group_type& ltg,
+    const local_type_group_type& unbucketed_ltgs,
     const formatters::container& fc) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started bucketing local field definitions "
@@ -319,18 +319,18 @@ enablement_expander::bucket_local_type_group_by_type_index(
         const auto& ti(pair.first);
         const auto& fmts(pair.second);
 
-        local_type_group_type& lfd(r[ti]);
+        local_type_group_type& ltg(r[ti]);
         for (const auto& fmt: fmts) {
             const auto fmtn(fmt->ownership_hierarchy().formatter_name());
-            const auto i(ltg.find(fmtn));
-            if (i == ltg.end()) {
+            const auto i(unbucketed_ltgs.find(fmtn));
+            if (i == unbucketed_ltgs.end()) {
                 BOOST_LOG_SEV(lg, error) << formatter_not_found << fmtn;
                 BOOST_THROW_EXCEPTION(
                     expansion_error(formatter_not_found + fmtn));
             }
 
             const auto pair(std::make_pair(fmtn, i->second));
-            const auto ret(lfd.insert(pair));
+            const auto ret(ltg.insert(pair));
             if (!ret.second) {
                 BOOST_LOG_SEV(lg, error) << duplicate_formatter_name << fmtn;
                 BOOST_THROW_EXCEPTION(
@@ -345,16 +345,16 @@ enablement_expander::bucket_local_type_group_by_type_index(
 }
 
 enablement_expander::local_enablement_configurations_type enablement_expander::
-obtain_local_configurations(const local_type_group_type& lfd,
+obtain_local_configurations(const local_type_group_type& ltg,
     const annotations::annotation& o,  const formatters::container& fc,
     const boost::optional<profile_group>& lpg) const {
 
     BOOST_LOG_SEV(lg, debug) << "Obtaining local configurations.";
     local_enablement_configurations_type r;
-    const annotations::field_selector fs(o);
-    for (const auto& pair : lfd) {
+    const annotations::type_selector s(o);
+    for (const auto& pair : ltg) {
         const auto& fmtn(pair.first);
-        const auto& fd(pair.second);
+        const auto& t(pair.second);
 
         local_enablement_configuration lec;
         const auto& fffn(fc.file_formatters_by_formatter_name());
@@ -365,8 +365,8 @@ obtain_local_configurations(const local_type_group_type& lfd,
          * facet enablement via the meta-data. If so, it takes
          * priority.
          */
-        if (fs.has_field(fd.facet_enabled))
-            lec.facet_enabled(fs.get_boolean_content(fd.facet_enabled));
+        if (s.has_field(t.facet_enabled))
+            lec.facet_enabled(s.get_boolean_content(t.facet_enabled));
         else if (has_local_profile_group) {
             /*
              * We have a local profile group, so lets see if the
@@ -401,14 +401,14 @@ obtain_local_configurations(const local_type_group_type& lfd,
              * use the default value of the meta-data. It must
              * be set.
              */
-            const auto& dv(fd.facet_enabled.default_value());
+            const auto& dv(t.facet_enabled.default_value());
             if (!dv) {
-                const auto qfn(fd.facet_enabled.name().qualified());
+                const auto qfn(t.facet_enabled.name().qualified());
                 BOOST_LOG_SEV(lg, error) << default_value_unset << qfn;
                 BOOST_THROW_EXCEPTION(
                     expansion_error(default_value_unset + qfn));
             }
-            lec.facet_enabled(fs.get_boolean_content(*dv));
+            lec.facet_enabled(s.get_boolean_content(*dv));
         }
 
         /*
@@ -416,8 +416,8 @@ obtain_local_configurations(const local_type_group_type& lfd,
          * formatter enablement via the meta-data. If so, it takes
          * priority.
          */
-        if (fs.has_field(fd.formatter_enabled))
-            lec.formatter_enabled(fs.get_boolean_content(fd.formatter_enabled));
+        if (s.has_field(t.formatter_enabled))
+            lec.formatter_enabled(s.get_boolean_content(t.formatter_enabled));
         else if (has_local_profile_group) {
             /*
              * We have a local profile group, so lets see if the
@@ -443,14 +443,14 @@ obtain_local_configurations(const local_type_group_type& lfd,
              * use the default value of the meta-data. It must
              * be set.
              */
-            const auto& dv(fd.formatter_enabled.default_value());
+            const auto& dv(t.formatter_enabled.default_value());
             if (!dv) {
-                const auto qfn(fd.formatter_enabled.name().qualified());
+                const auto qfn(t.formatter_enabled.name().qualified());
                 BOOST_LOG_SEV(lg, error) << default_value_unset << qfn;
                 BOOST_THROW_EXCEPTION(
                     expansion_error(default_value_unset + qfn));
             }
-            lec.formatter_enabled(fs.get_boolean_content(*dv));
+            lec.formatter_enabled(s.get_boolean_content(*dv));
         }
 
         r[fmtn] = lec;
@@ -626,8 +626,8 @@ void enablement_expander::expand(const annotations::type_repository& atrp,
                 continue;
             }
 
-            const auto& fd(i->second);
-            auto lcs(obtain_local_configurations(fd, e.annotation(), fc, lpg));
+            const auto& t(i->second);
+            auto lcs(obtain_local_configurations(t, e.annotation(), fc, lpg));
 
             /*
              * Once we got both the global and the local configuration, we

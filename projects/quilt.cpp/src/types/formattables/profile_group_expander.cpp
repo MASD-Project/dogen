@@ -87,8 +87,8 @@ profile_group_expander::make_type_group(
 std::string profile_group_expander::obtain_profile_configuration(
     const type_group& tg, const annotations::annotation& root) const {
     BOOST_LOG_SEV(lg, debug) << "Reading profile configuration.";
-    const annotations::field_selector fs(root);
-    const auto r(fs.get_text_content_or_default(tg.profile));
+    const annotations::type_selector s(root);
+    const auto r(s.get_text_content_or_default(tg.profile));
     BOOST_LOG_SEV(lg, debug) << "Profile configuration: " << r;
     return r;
 }

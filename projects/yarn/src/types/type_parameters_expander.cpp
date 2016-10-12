@@ -47,16 +47,16 @@ type_parameters
 type_parameters_expander::make_type_parameters(const type_group& tg,
     const annotations::annotation& a) const {
     type_parameters r;
-    const annotations::field_selector fs(a);
+    const annotations::type_selector s(a);
 
     const auto& vnp(tg.variable_number_of_parameters);
-    r.variable_number_of_parameters(fs.get_boolean_content_or_default(vnp));
+    r.variable_number_of_parameters(s.get_boolean_content_or_default(vnp));
 
     const auto& tpc(tg.type_parameters_count);
-    r.count(fs.get_number_content_or_default(tpc));
+    r.count(s.get_number_content_or_default(tpc));
 
     const auto& aih(tg.type_parameters_always_in_heap);
-    r.always_in_heap(fs.get_boolean_content_or_default(aih));
+    r.always_in_heap(s.get_boolean_content_or_default(aih));
 
     return r;
 }

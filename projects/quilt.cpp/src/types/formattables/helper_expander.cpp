@@ -92,8 +92,8 @@ helper_expander::context helper_expander::make_context(
 
         auto& formattable(pair.second);
         auto& segment(*formattable.master_segment());
-        const annotations::field_selector fs(segment.annotation());
-        const auto fam(fs.get_text_content_or_default(fd));
+        const annotations::type_selector s(segment.annotation());
+        const auto fam(s.get_text_content_or_default(fd));
         r.helper_families[id] = fam;
     }
 

@@ -53,9 +53,9 @@ parsing_expander::type_group parsing_expander::make_type_group(
 
 std::string parsing_expander::
 make_parent(const type_group& tg, const annotations::annotation& o) const {
-    const annotations::field_selector fs(o);
-    if (fs.has_field(tg.parent))
-        return fs.get_text_content(tg.parent);
+    const annotations::type_selector s(o);
+    if (s.has_field(tg.parent))
+        return s.get_text_content(tg.parent);
 
     return std::string();
 }

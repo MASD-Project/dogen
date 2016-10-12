@@ -167,8 +167,8 @@ make_type_group(const annotations::type_repository& atrp,
 
 bool inclusion_expander::make_top_level_inclusion_required(
     const type_group& tg, const annotations::annotation& o) const {
-    const annotations::field_selector fs(o);
-    return fs.get_boolean_content_or_default(tg.inclusion_required);
+    const annotations::type_selector s(o);
+    return s.get_boolean_content_or_default(tg.inclusion_required);
 }
 
 inclusion_directive_configuration
@@ -187,16 +187,16 @@ inclusion_expander::make_inclusion_directive_configuration(
         BOOST_THROW_EXCEPTION(expansion_error(missing_formatter_name));
     }
 
-    const auto& ffd(i->second);
-    const annotations::field_selector fs(o);
+    const auto& ft(i->second);
+    const annotations::type_selector s(o);
     inclusion_directive_configuration r;
 
-    const auto& ir(ffd.inclusion_required);
-    r.inclusion_required(fs.get_boolean_content_or_default(ir));
+    const auto& ir(ft.inclusion_required);
+    r.inclusion_required(s.get_boolean_content_or_default(ir));
 
-    const auto id(ffd.inclusion_directive);
-    if (fs.has_field(id))
-        r.inclusion_directive(fs.get_text_content(id));
+    const auto id(ft.inclusion_directive);
+    if (s.has_field(id))
+        r.inclusion_directive(s.get_text_content(id));
 
     return r;
 }

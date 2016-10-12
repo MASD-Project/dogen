@@ -90,36 +90,36 @@ make_field_definitions(const annotations::type_repository& rp) const {
 
 decoration_configuration decoration_properties_factory::
 make_decoration_configuration(const annotations::annotation& a) const {
-    const annotations::field_selector fs(a);
+    const annotations::type_selector s(a);
 
     decoration_configuration r;
     const auto& gd(field_definitions_.generate_decoration);
-    if (fs.has_field(gd))
-        r.generate_decoration(fs.get_boolean_content(gd));
+    if (s.has_field(gd))
+        r.generate_decoration(s.get_boolean_content(gd));
 
     const auto& cn(field_definitions_.copyright_notice);
-    if (fs.has_field(cn))
-        r.copyright_notices(fs.get_text_collection_content(cn));
+    if (s.has_field(cn))
+        r.copyright_notices(s.get_text_collection_content(cn));
 
     const auto& ln(field_definitions_.licence_name);
-    if (fs.has_field(ln))
-        r.licence_name(fs.get_text_content(ln));
+    if (s.has_field(ln))
+        r.licence_name(s.get_text_content(ln));
 
     const auto& mlgn(field_definitions_.modeline_group_name);
-    if (fs.has_field(mlgn))
-        r.modeline_group_name(fs.get_text_content(mlgn));
+    if (s.has_field(mlgn))
+        r.modeline_group_name(s.get_text_content(mlgn));
 
     const auto madt(field_definitions_.marker_add_date_time);
-    if (fs.has_field(madt))
-        r.marker_add_date_time(fs.get_boolean_content(madt));
+    if (s.has_field(madt))
+        r.marker_add_date_time(s.get_boolean_content(madt));
 
     const auto maw(field_definitions_.marker_add_warning);
-    if (fs.has_field(maw))
-        r.marker_add_date_time(fs.get_boolean_content(maw));
+    if (s.has_field(maw))
+        r.marker_add_date_time(s.get_boolean_content(maw));
 
     const auto msg(field_definitions_.marker_message);
-    if (fs.has_field(msg))
-        r.marker_message(fs.get_text_content(msg));
+    if (s.has_field(msg))
+        r.marker_message(s.get_text_content(msg));
 
     return r;
 }

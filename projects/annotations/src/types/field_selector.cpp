@@ -51,26 +51,26 @@ const std::string no_default_value(
 namespace dogen {
 namespace annotations {
 
-field_selector::field_selector(const annotation& a) : annotation_(a) { }
+type_selector::type_selector(const annotation& a) : annotation_(a) { }
 
-void field_selector::ensure_default_value(const type& fd) const {
-    if (!fd.default_value()) {
-        const auto& n(fd.name().qualified());
+void type_selector::ensure_default_value(const type& t) const {
+    if (!t.default_value()) {
+        const auto& n(t.name().qualified());
         BOOST_LOG_SEV(lg, error) << no_default_value << "'" << n << "'";
         BOOST_THROW_EXCEPTION(selection_error(no_default_value + n));
     }
 }
 
-bool field_selector::has_field(const std::string& qualified_field_name) const {
+bool type_selector::has_field(const std::string& qualified_field_name) const {
     const auto i(annotation_.entries().find(qualified_field_name));
     return (i != annotation_.entries().end());
 }
 
-bool field_selector::has_field(const type& fd) const {
-    return has_field(fd.name().qualified());
+bool type_selector::has_field(const type& t) const {
+    return has_field(t.name().qualified());
 }
 
-const value& field_selector::
+const value& type_selector::
 get_field(const std::string& qualified_field_name) const {
     const auto i(annotation_.entries().find(qualified_field_name));
 
@@ -83,11 +83,11 @@ get_field(const std::string& qualified_field_name) const {
     return *i->second;
 }
 
-const value& field_selector::get_field(const type& fd) const {
-    return get_field(fd.name().qualified());
+const value& type_selector::get_field(const type& t) const {
+    return get_field(t.name().qualified());
 }
 
-std::string field_selector::get_text_content(const value& v) {
+std::string type_selector::get_text_content(const value& v) {
     try {
         const auto& b(dynamic_cast<const text&>(v));
         return b.content();
@@ -97,7 +97,7 @@ std::string field_selector::get_text_content(const value& v) {
     }
 }
 
-std::string field_selector::
+std::string type_selector::
 get_text_content(const std::string& qualified_field_name) const {
     const auto& v(get_field(qualified_field_name));
 
@@ -110,17 +110,17 @@ get_text_content(const std::string& qualified_field_name) const {
     }
 }
 
-std::string field_selector::
-get_text_content_or_default(const type& fd) const {
-    if (has_field(fd))
-        return get_text_content(fd);
+std::string type_selector::
+get_text_content_or_default(const type& t) const {
+    if (has_field(t))
+        return get_text_content(t);
 
-    ensure_default_value(fd);
+    ensure_default_value(t);
 
     try {
-        return get_text_content(*fd.default_value());
+        return get_text_content(*t.default_value());
     } catch(boost::exception& e) {
-        const auto n(fd.name().qualified());
+        const auto n(t.name().qualified());
         BOOST_LOG_SEV(lg, error) << not_text_field << n
                                  << " (field's default value)";
         e << extension_error_info(field + n);
@@ -129,7 +129,7 @@ get_text_content_or_default(const type& fd) const {
 }
 
 std::list<std::string>
-field_selector::get_text_collection_content(const value& v) {
+type_selector::get_text_collection_content(const value& v) {
     try {
         const auto& b(dynamic_cast<const text_collection&>(v));
         return b.content();
@@ -139,11 +139,11 @@ field_selector::get_text_collection_content(const value& v) {
     }
 }
 
-std::string field_selector::get_text_content(const type& fd) const {
-    return get_text_content(fd.name().qualified());
+std::string type_selector::get_text_content(const type& t) const {
+    return get_text_content(t.name().qualified());
 }
 
-std::list<std::string> field_selector::
+std::list<std::string> type_selector::
 get_text_collection_content(const std::string& qualified_field_name) const {
     const auto& v(get_field(qualified_field_name));
 
@@ -158,22 +158,22 @@ get_text_collection_content(const std::string& qualified_field_name) const {
     }
 }
 
-std::list<std::string> field_selector::
-get_text_collection_content(const type& fd) const {
-    return get_text_collection_content(fd.name().qualified());
+std::list<std::string> type_selector::
+get_text_collection_content(const type& t) const {
+    return get_text_collection_content(t.name().qualified());
 }
 
-std::list<std::string> field_selector::
-get_text_collection_content_or_default(const type& fd) const {
-    if (has_field(fd))
-        return get_text_collection_content(fd);
+std::list<std::string> type_selector::
+get_text_collection_content_or_default(const type& t) const {
+    if (has_field(t))
+        return get_text_collection_content(t);
 
-    ensure_default_value(fd);
+    ensure_default_value(t);
 
     try {
-        return get_text_collection_content(*fd.default_value());
+        return get_text_collection_content(*t.default_value());
     } catch(boost::exception& e) {
-        const auto n(fd.name().qualified());
+        const auto n(t.name().qualified());
         BOOST_LOG_SEV(lg, error) << not_text_collection_field << n
                                  << " (field's default value)";
         e << extension_error_info(field + n);
@@ -181,7 +181,7 @@ get_text_collection_content_or_default(const type& fd) const {
     }
 }
 
-bool field_selector::get_boolean_content(const value& v) {
+bool type_selector::get_boolean_content(const value& v) {
     try {
         const auto& b(dynamic_cast<const boolean&>(v));
         return b.content();
@@ -191,7 +191,7 @@ bool field_selector::get_boolean_content(const value& v) {
     }
 }
 
-bool field_selector::
+bool type_selector::
 get_boolean_content(const std::string& qualified_field_name) const {
     const auto& v(get_field(qualified_field_name));
 
@@ -204,21 +204,21 @@ get_boolean_content(const std::string& qualified_field_name) const {
     }
 }
 
-bool field_selector::get_boolean_content(const type& fd) const {
-    return get_boolean_content(fd.name().qualified());
+bool type_selector::get_boolean_content(const type& t) const {
+    return get_boolean_content(t.name().qualified());
 }
 
-bool field_selector::
-get_boolean_content_or_default(const type& fd) const {
-    if (has_field(fd))
-        return get_boolean_content(fd);
+bool type_selector::
+get_boolean_content_or_default(const type& t) const {
+    if (has_field(t))
+        return get_boolean_content(t);
 
-    ensure_default_value(fd);
+    ensure_default_value(t);
 
     try {
-        return get_boolean_content(*fd.default_value());
+        return get_boolean_content(*t.default_value());
     } catch(boost::exception& e) {
-        const auto n(fd.name().qualified());
+        const auto n(t.name().qualified());
         BOOST_LOG_SEV(lg, error) << not_boolean_field << n
                                  << " (field's default value)";
         e << extension_error_info(field + n);
@@ -226,7 +226,7 @@ get_boolean_content_or_default(const type& fd) const {
     }
 }
 
-int field_selector::get_number_content(const value& v) {
+int type_selector::get_number_content(const value& v) {
     try {
         const auto& b(dynamic_cast<const number&>(v));
         return b.content();
@@ -236,7 +236,7 @@ int field_selector::get_number_content(const value& v) {
     }
 }
 
-int field_selector::
+int type_selector::
 get_number_content(const std::string& qualified_field_name) const {
     const auto& v(get_field(qualified_field_name));
 
@@ -249,21 +249,21 @@ get_number_content(const std::string& qualified_field_name) const {
     }
 }
 
-int field_selector::get_number_content(const type& fd) const {
-    return get_number_content(fd.name().qualified());
+int type_selector::get_number_content(const type& t) const {
+    return get_number_content(t.name().qualified());
 }
 
-int field_selector::
-get_number_content_or_default(const type& fd) const {
-    if (has_field(fd))
-        return get_number_content(fd);
+int type_selector::
+get_number_content_or_default(const type& t) const {
+    if (has_field(t))
+        return get_number_content(t);
 
-    ensure_default_value(fd);
+    ensure_default_value(t);
 
     try {
-        return get_number_content(*fd.default_value());
+        return get_number_content(*t.default_value());
     } catch(boost::exception& e) {
-        const auto n(fd.name().qualified());
+        const auto n(t.name().qualified());
         BOOST_LOG_SEV(lg, error) << not_number_field << n
                                  << " (field's default value)";
         e << extension_error_info(field + n);

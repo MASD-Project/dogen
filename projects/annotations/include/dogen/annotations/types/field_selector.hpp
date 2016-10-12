@@ -38,15 +38,15 @@ namespace annotations {
  * @brief Performs a number of simple queries over the annotations
  * object.
  */
-class field_selector {
+class type_selector {
 public:
-    explicit field_selector(const annotation& a);
+    explicit type_selector(const annotation& a);
 
 private:
     /**
      * @brief Throws if the field has no default value.
      */
-    void ensure_default_value(const type& fd) const;
+    void ensure_default_value(const type& t) const;
 
 public:
     /**
@@ -54,7 +54,7 @@ public:
      */
     /**@{*/
     bool has_field(const std::string& qualified_field_name) const;
-    bool has_field(const type& fd) const;
+    bool has_field(const type& t) const;
     /**@}*/
 
 private:
@@ -66,7 +66,7 @@ private:
     /**@{*/
     const value&
     get_field(const std::string& qualified_field_name) const;
-    const value& get_field(const type& fd) const;
+    const value& get_field(const type& t) const;
     /**@}*/
 
 public:
@@ -85,7 +85,7 @@ public:
      */
     /**@{*/
     std::string get_text_content(const std::string& qualified_field_name) const;
-    std::string get_text_content(const type& fd) const;
+    std::string get_text_content(const type& t) const;
     /**@}*/
 
     /**
@@ -96,7 +96,7 @@ public:
      *
      * @pre field definition must have a default value.
      */
-    std::string get_text_content_or_default(const type& fd) const;
+    std::string get_text_content_or_default(const type& t) const;
 
     /**
      * @brief Returns the content for the field, assuming it is a text
@@ -117,7 +117,7 @@ public:
     std::list<std::string>
     get_text_collection_content(const std::string& qualified_field_name) const;
     std::list<std::string>
-    get_text_collection_content(const type& fd) const;
+    get_text_collection_content(const type& t) const;
     /**@}*/
 
     /**
@@ -129,7 +129,7 @@ public:
      * @pre field definition must have a default value.
      */
     std::list<std::string>
-    get_text_collection_content_or_default(const type& fd) const;
+    get_text_collection_content_or_default(const type& t) const;
 
     /**
      * @brief Returns the content for the field, assuming it is a boolean
@@ -148,7 +148,7 @@ public:
      */
     /**@{*/
     bool get_boolean_content(const std::string& qualified_field_name) const;
-    bool get_boolean_content(const type& fd) const;
+    bool get_boolean_content(const type& t) const;
     /**@}*/
 
     /**
@@ -159,7 +159,7 @@ public:
      *
      * @pre field definition must have a default value.
      */
-    bool get_boolean_content_or_default(const type& fd) const;
+    bool get_boolean_content_or_default(const type& t) const;
 
     /**
      * @brief Returns the content for the field, assuming it is a
@@ -178,7 +178,7 @@ public:
      */
     /**@{*/
     int get_number_content(const std::string& qualified_field_name) const;
-    int get_number_content(const type& fd) const;
+    int get_number_content(const type& t) const;
     /**@}*/
 
     /**
@@ -189,7 +189,7 @@ public:
      *
      * @pre field definition must have a default value.
      */
-    int get_number_content_or_default(const type& fd) const;
+    int get_number_content_or_default(const type& t) const;
 
 private:
     const annotation& annotation_;

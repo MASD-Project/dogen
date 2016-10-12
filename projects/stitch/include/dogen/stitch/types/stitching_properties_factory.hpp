@@ -40,10 +40,10 @@ namespace stitch {
  */
 class stitching_properties_factory {
 public:
-    stitching_properties_factory(const annotations::type_repository& rp);
+    stitching_properties_factory(const annotations::type_repository& arp);
 
 private:
-    struct field_definitions {
+    struct type_group {
         annotations::type stream_variable_name;
         annotations::type template_path;
         annotations::type output_path;
@@ -55,8 +55,8 @@ private:
     /**
      * @brief Creates the formatter properties.
      */
-    field_definitions
-    make_field_definitions(const annotations::type_repository& rp) const;
+    type_group
+    make_type_group(const annotations::type_repository& arp) const;
 
 private:
     /**
@@ -102,7 +102,7 @@ public:
     stitching_properties make(const annotations::annotation& a) const;
 
 private:
-    const field_definitions field_definitions_;
+    const type_group type_group_;
 };
 
 } }

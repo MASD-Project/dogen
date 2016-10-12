@@ -111,8 +111,8 @@ locator::type_group locator::make_type_group(
         const auto& ife(traits::cpp::implementation_file_extension());
         r.implementation_file_extension = s.select_type_by_name(ife);
 
-        const auto& dfd(traits::cpp::disable_facet_directories());
-        r.disable_facet_directories = s.select_type_by_name(dfd);
+        const auto& dt(traits::cpp::disable_facet_directories());
+        r.disable_facet_directories = s.select_type_by_name(dt);
     }
 
     return r;
@@ -122,14 +122,14 @@ locator_configuration locator::make_configuration(
     const type_group& tg, const annotations::annotation& o) const {
 
     locator_configuration r;
-    const annotations::field_selector fs(o);
+    const annotations::type_selector s(o);
 
     for (const auto& pair : tg.facets_type_group) {
         const auto fctn(pair.first);
         const auto& fct_tg(pair.second);
         locator_facet_configuration fct_cfg;
-        fct_cfg.directory(fs.get_text_content_or_default(fct_tg.directory));
-        fct_cfg.postfix(fs.get_text_content_or_default(fct_tg.postfix));
+        fct_cfg.directory(s.get_text_content_or_default(fct_tg.directory));
+        fct_cfg.postfix(s.get_text_content_or_default(fct_tg.postfix));
         r.facet_configurations()[fctn] = fct_cfg;
     }
 
@@ -139,35 +139,35 @@ locator_configuration locator::make_configuration(
         locator_formatter_configuration fmt_cfg;
 
         if (fmt_tg.facet_directory) {
-            const auto fd(*fmt_tg.facet_directory);
-            fmt_cfg.facet_directory(fs.get_text_content_or_default(fd));
+            const auto t(*fmt_tg.facet_directory);
+            fmt_cfg.facet_directory(s.get_text_content_or_default(t));
         }
 
         if (fmt_tg.facet_postfix) {
-            const auto fd(*fmt_tg.facet_postfix);
-            fmt_cfg.facet_postfix(fs.get_text_content_or_default(fd));
+            const auto t(*fmt_tg.facet_postfix);
+            fmt_cfg.facet_postfix(s.get_text_content_or_default(t));
         }
 
         const auto pfix(fmt_tg.formatter_postfix);
-        fmt_cfg.formatter_postfix(fs.get_text_content_or_default(pfix));
+        fmt_cfg.formatter_postfix(s.get_text_content_or_default(pfix));
 
         r.formatter_configurations()[fmtn] = fmt_cfg;
     }
 
     const auto& hfe(tg.header_file_extension);
-    r.header_file_extension(fs.get_text_content_or_default(hfe));
+    r.header_file_extension(s.get_text_content_or_default(hfe));
 
     const auto& ife(tg.implementation_file_extension);
-    r.implementation_file_extension(fs.get_text_content_or_default(ife));
+    r.implementation_file_extension(s.get_text_content_or_default(ife));
 
     const auto& idn(tg.include_directory_name);
-    r.include_directory_name(fs.get_text_content_or_default(idn));
+    r.include_directory_name(s.get_text_content_or_default(idn));
 
     const auto& sdn(tg.source_directory_name);
-    r.source_directory_name(fs.get_text_content_or_default(sdn));
+    r.source_directory_name(s.get_text_content_or_default(sdn));
 
-    const auto& dfd(tg.disable_facet_directories);
-    r.disable_facet_directories(fs.get_boolean_content_or_default(dfd));
+    const auto& dt(tg.disable_facet_directories);
+    r.disable_facet_directories(s.get_boolean_content_or_default(dt));
 
     return r;
 }

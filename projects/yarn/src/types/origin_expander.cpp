@@ -76,8 +76,8 @@ make_type_group(const annotations::type_repository& atrp) const {
 bool origin_expander::
 is_proxy_model(const type_group& tg, const intermediate_model& im) const {
     const auto& o(im.root_module().annotation());
-    const annotations::field_selector fs(o);
-    const bool r(fs.get_boolean_content_or_default(tg.is_proxy_model));
+    const annotations::type_selector s(o);
+    const bool r(s.get_boolean_content_or_default(tg.is_proxy_model));
     BOOST_LOG_SEV(lg, debug) << "Read is proxy model: " << r
                              << " for model: " << im.name().id();
     return r;

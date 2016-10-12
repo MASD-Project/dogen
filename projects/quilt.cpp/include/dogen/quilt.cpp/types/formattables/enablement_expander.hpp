@@ -92,7 +92,7 @@ private:
 
     std::unordered_map<std::type_index, local_type_group_type>
     bucket_local_type_group_by_type_index(
-        const local_type_group_type& ltg,
+        const local_type_group_type& unbucketed_ltgs,
         const formatters::container& fc) const;
 
 private:
