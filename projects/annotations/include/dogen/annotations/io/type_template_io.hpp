@@ -18,24 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_FIELD_DEFINITION_TYPES_HPP
-#define DOGEN_ANNOTATIONS_TYPES_FIELD_DEFINITION_TYPES_HPP
+#ifndef DOGEN_ANNOTATIONS_IO_TYPE_TEMPLATE_IO_HPP
+#define DOGEN_ANNOTATIONS_IO_TYPE_TEMPLATE_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <iosfwd>
+#include "dogen/annotations/types/type_template.hpp"
+
 namespace dogen {
 namespace annotations {
 
-enum class field_definition_types : unsigned int {
-    invalid = 0, ///< Represents an uninitialised enum
-    instance = 1,
-    global_template = 2, ///< This field applies to all models, facets and formatters.
-    model_template = 3, ///< This field applies to all models.
-    facet_template = 4, ///< This field applies to all facets.
-    formatter_template = 5 ///< This field applies to all formatters.
-};
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::annotations::type_template& v);
 
 } }
 

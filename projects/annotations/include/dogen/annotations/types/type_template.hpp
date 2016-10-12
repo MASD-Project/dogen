@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_TYPE_HPP
-#define DOGEN_ANNOTATIONS_TYPES_TYPE_HPP
+#ifndef DOGEN_ANNOTATIONS_TYPES_TYPE_TEMPLATE_HPP
+#define DOGEN_ANNOTATIONS_TYPES_TYPE_TEMPLATE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,38 +31,40 @@
 #include "dogen/annotations/types/value_fwd.hpp"
 #include "dogen/annotations/types/scope_types.hpp"
 #include "dogen/annotations/types/value_types.hpp"
+#include "dogen/annotations/types/template_kinds.hpp"
 #include "dogen/annotations/types/ownership_hierarchy.hpp"
-#include "dogen/annotations/serialization/type_fwd_ser.hpp"
+#include "dogen/annotations/serialization/type_template_fwd_ser.hpp"
 
 namespace dogen {
 namespace annotations {
 
 /**
- * @brief Defines the domain of values.
+ * @brief Defines a template that can be used to instantiate types.
  */
-class type final {
+class type_template final {
 public:
-    type(const type&) = default;
-    type(type&&) = default;
-    ~type() = default;
+    type_template(const type_template&) = default;
+    type_template(type_template&&) = default;
+    ~type_template() = default;
 
 public:
-    type();
+    type_template();
 
 public:
-    type(
+    type_template(
         const dogen::annotations::name& name,
         const dogen::annotations::value_types value_type,
         const dogen::annotations::scope_types scope,
         const dogen::annotations::ownership_hierarchy& ownership_hierarchy,
-        const boost::shared_ptr<dogen::annotations::value>& default_value);
+        const boost::shared_ptr<dogen::annotations::value>& default_value,
+        const dogen::annotations::template_kinds kind);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::annotations::type& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::annotations::type_template& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::annotations::type& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::annotations::type_template& v, unsigned int version);
 
 public:
     /**
@@ -111,15 +113,23 @@ public:
     void default_value(const boost::shared_ptr<dogen::annotations::value>&& v);
     /**@}*/
 
+    /**
+     * @brief If the type is a template, defines the kind of template.
+     */
+    /**@{*/
+    dogen::annotations::template_kinds kind() const;
+    void kind(const dogen::annotations::template_kinds v);
+    /**@}*/
+
 public:
-    bool operator==(const type& rhs) const;
-    bool operator!=(const type& rhs) const {
+    bool operator==(const type_template& rhs) const;
+    bool operator!=(const type_template& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(type& other) noexcept;
-    type& operator=(type other);
+    void swap(type_template& other) noexcept;
+    type_template& operator=(type_template other);
 
 private:
     dogen::annotations::name name_;
@@ -127,6 +137,7 @@ private:
     dogen::annotations::scope_types scope_;
     dogen::annotations::ownership_hierarchy ownership_hierarchy_;
     boost::shared_ptr<dogen::annotations::value> default_value_;
+    dogen::annotations::template_kinds kind_;
 };
 
 } }
@@ -135,8 +146,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::annotations::type& lhs,
-    dogen::annotations::type& rhs) {
+    dogen::annotations::type_template& lhs,
+    dogen::annotations::type_template& rhs) {
     lhs.swap(rhs);
 }
 

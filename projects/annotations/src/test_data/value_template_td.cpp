@@ -19,9 +19,10 @@
  *
  */
 #include <sstream>
+#include "dogen/annotations/test_data/value_td.hpp"
+#include "dogen/annotations/test_data/template_kinds_td.hpp"
+#include "dogen/annotations/test_data/value_template_td.hpp"
 #include "dogen/annotations/test_data/ownership_hierarchy_td.hpp"
-#include "dogen/annotations/test_data/field_definition_types_td.hpp"
-#include "dogen/annotations/test_data/field_instance_definition_td.hpp"
 
 namespace {
 
@@ -36,17 +37,21 @@ create_dogen_annotations_ownership_hierarchy(const unsigned int position) {
     return dogen::annotations::ownership_hierarchy_generator::create(position);
 }
 
-std::list<std::string> create_std_list_std_string(unsigned int position) {
-    std::list<std::string> r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_std_string(position + i));
-    }
+dogen::annotations::value*
+create_dogen_annotations_value_ptr(const unsigned int position) {
+    return dogen::annotations::value_generator::create_ptr(position);
+}
+
+boost::shared_ptr<dogen::annotations::value>
+create_boost_shared_ptr_dogen_annotations_value(unsigned int position) {
+    boost::shared_ptr<dogen::annotations::value> r(
+        create_dogen_annotations_value_ptr(position));
     return r;
 }
 
-dogen::annotations::field_definition_types
-create_dogen_annotations_field_definition_types(const unsigned int position) {
-    return dogen::annotations::field_definition_types_generator::create(position);
+dogen::annotations::template_kinds
+create_dogen_annotations_template_kinds(const unsigned int position) {
+    return dogen::annotations::template_kinds_generator::create(position);
 }
 
 }
@@ -54,32 +59,32 @@ create_dogen_annotations_field_definition_types(const unsigned int position) {
 namespace dogen {
 namespace annotations {
 
-field_instance_definition_generator::field_instance_definition_generator() : position_(0) { }
+value_template_generator::value_template_generator() : position_(0) { }
 
-void field_instance_definition_generator::
+void value_template_generator::
 populate(const unsigned int position, result_type& v) {
     v.name(create_std_string(position + 0));
     v.ownership_hierarchy(create_dogen_annotations_ownership_hierarchy(position + 1));
-    v.value(create_std_list_std_string(position + 2));
-    v.definition_types(create_dogen_annotations_field_definition_types(position + 3));
+    v.value(create_boost_shared_ptr_dogen_annotations_value(position + 2));
+    v.kind(create_dogen_annotations_template_kinds(position + 3));
 }
 
-field_instance_definition_generator::result_type
-field_instance_definition_generator::create(const unsigned int position) {
-    field_instance_definition r;
-    field_instance_definition_generator::populate(position, r);
+value_template_generator::result_type
+value_template_generator::create(const unsigned int position) {
+    value_template r;
+    value_template_generator::populate(position, r);
     return r;
 }
 
-field_instance_definition_generator::result_type*
-field_instance_definition_generator::create_ptr(const unsigned int position) {
-    field_instance_definition* p = new field_instance_definition();
-    field_instance_definition_generator::populate(position, *p);
+value_template_generator::result_type*
+value_template_generator::create_ptr(const unsigned int position) {
+    value_template* p = new value_template();
+    value_template_generator::populate(position, *p);
     return p;
 }
 
-field_instance_definition_generator::result_type
-field_instance_definition_generator::operator()() {
+value_template_generator::result_type
+value_template_generator::operator()() {
     return create(position_++);
 }
 

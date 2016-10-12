@@ -20,8 +20,7 @@
  */
 #include <sstream>
 #include "dogen/annotations/test_data/profile_td.hpp"
-#include "dogen/annotations/test_data/annotation_td.hpp"
-#include "dogen/annotations/test_data/field_instance_definition_td.hpp"
+#include "dogen/annotations/test_data/value_template_td.hpp"
 
 namespace {
 
@@ -39,22 +38,17 @@ std::list<std::string> create_std_list_std_string(unsigned int position) {
     return r;
 }
 
-dogen::annotations::field_instance_definition
-create_dogen_annotations_field_instance_definition(const unsigned int position) {
-    return dogen::annotations::field_instance_definition_generator::create(position);
+dogen::annotations::value_template
+create_dogen_annotations_value_template(const unsigned int position) {
+    return dogen::annotations::value_template_generator::create(position);
 }
 
-std::unordered_map<std::string, dogen::annotations::field_instance_definition> create_std_unordered_map_std_string_dogen_annotations_field_instance_definition(unsigned int position) {
-    std::unordered_map<std::string, dogen::annotations::field_instance_definition> r;
+std::unordered_map<std::string, dogen::annotations::value_template> create_std_unordered_map_std_string_dogen_annotations_value_template(unsigned int position) {
+    std::unordered_map<std::string, dogen::annotations::value_template> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_dogen_annotations_field_instance_definition(position + i)));
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_annotations_value_template(position + i)));
     }
     return r;
-}
-
-dogen::annotations::annotation
-create_dogen_annotations_annotation(const unsigned int position) {
-    return dogen::annotations::annotation_generator::create(position);
 }
 
 }
@@ -68,8 +62,7 @@ void profile_generator::
 populate(const unsigned int position, result_type& v) {
     v.name(create_std_string(position + 0));
     v.parents(create_std_list_std_string(position + 1));
-    v.instance_definitions(create_std_unordered_map_std_string_dogen_annotations_field_instance_definition(position + 2));
-    v.content(create_dogen_annotations_annotation(position + 3));
+    v.value_templates(create_std_unordered_map_std_string_dogen_annotations_value_template(position + 2));
 }
 
 profile_generator::result_type

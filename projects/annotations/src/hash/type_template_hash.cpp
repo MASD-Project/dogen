@@ -18,8 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/annotations/hash/profile_hash.hpp"
-#include "dogen/annotations/hash/value_template_hash.hpp"
+#include "dogen/annotations/hash/name_hash.hpp"
+#include "dogen/annotations/hash/value_hash.hpp"
+#include "dogen/annotations/hash/scope_types_hash.hpp"
+#include "dogen/annotations/hash/value_types_hash.hpp"
+#include "dogen/annotations/hash/type_template_hash.hpp"
+#include "dogen/annotations/hash/template_kinds_hash.hpp"
+#include "dogen/annotations/hash/ownership_hierarchy_hash.hpp"
 
 namespace {
 
@@ -29,20 +34,9 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
+inline std::size_t hash_boost_shared_ptr_dogen_annotations_value(const boost::shared_ptr<dogen::annotations::value>& v) {
     std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
-inline std::size_t hash_std_unordered_map_std_string_dogen_annotations_value_template(const std::unordered_map<std::string, dogen::annotations::value_template>& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i.first);
-        combine(seed, i.second);
-    }
+    combine(seed, *v);
     return seed;
 }
 
@@ -51,12 +45,15 @@ inline std::size_t hash_std_unordered_map_std_string_dogen_annotations_value_tem
 namespace dogen {
 namespace annotations {
 
-std::size_t profile_hasher::hash(const profile& v) {
+std::size_t type_template_hasher::hash(const type_template& v) {
     std::size_t seed(0);
 
     combine(seed, v.name());
-    combine(seed, hash_std_list_std_string(v.parents()));
-    combine(seed, hash_std_unordered_map_std_string_dogen_annotations_value_template(v.value_templates()));
+    combine(seed, v.value_type());
+    combine(seed, v.scope());
+    combine(seed, v.ownership_hierarchy());
+    combine(seed, hash_boost_shared_ptr_dogen_annotations_value(v.default_value()));
+    combine(seed, v.kind());
 
     return seed;
 }

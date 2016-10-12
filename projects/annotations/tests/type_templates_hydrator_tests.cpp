@@ -24,7 +24,7 @@
 #include <boost/test/unit_test.hpp>
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/io/list_io.hpp"
-#include "dogen/annotations/io/type_io.hpp"
+#include "dogen/annotations/io/type_template_io.hpp"
 #include "dogen/annotations/types/type_templates_hydrator.hpp"
 
 namespace {
@@ -36,15 +36,19 @@ const std::string test_suite("type_templates_hydrator_tests");
 const std::string simple_name("a simple name");
 const std::string qualified_name("a qualified name");
 const std::string model_name("a model name");
+const std::string formatter_name("a formatter name");
+const std::string facet_name("a facet name");
 
-const std::string trivial_field_definition(R"([
+const std::string trivial_type_template(R"([
     {
         "name" : {
             "simple" : "a simple name",
             "qualified" : "a qualified name"
         },
         "ownership_hierarchy" : {
-            "model_name" : "a model name"
+            "model_name" : "a model name",
+            "formatter_name" : "a formatter name",
+            "facet_name" : "a facet name"
         },
         "value_type" : "boolean",
         "definition_type" : "instance",
@@ -52,13 +56,13 @@ const std::string trivial_field_definition(R"([
     }
 ])");
 
-std::list<dogen::annotations::type>
+std::list<dogen::annotations::type_template>
 hydrate(std::istream& s) {
     dogen::annotations::type_templates_hydrator h;
     return h.hydrate(s);
 }
 
-std::list<dogen::annotations::type>
+std::list<dogen::annotations::type_template>
 hydrate(const std::string& content) {
     std::istringstream s(content);
     return hydrate(s);
@@ -68,25 +72,30 @@ hydrate(const std::string& content) {
 
 BOOST_AUTO_TEST_SUITE(type_templates_hydrator_tests)
 
-BOOST_AUTO_TEST_CASE(trivial_field_definition_hydrates_into_expected_collection) {
-    SETUP_TEST_LOG_SOURCE("trivial_field_definition_hydrates_into_expected_collection");
+BOOST_AUTO_TEST_CASE(trivial_type_template_hydrates_into_expected_collection) {
+    SETUP_TEST_LOG_SOURCE("trivial_type_template_hydrates_into_expected_collection");
 
-    BOOST_LOG_SEV(lg, debug) << "input: " << trivial_field_definition;
-    const auto fds(hydrate(trivial_field_definition));
-    BOOST_LOG_SEV(lg, debug) << "field definitions: " << fds;
+    BOOST_LOG_SEV(lg, debug) << "input: " << trivial_type_template;
+    const auto tts(hydrate(trivial_type_template));
+    BOOST_LOG_SEV(lg, debug) << "template: " << tts;
 
-    BOOST_REQUIRE(std::distance(fds.begin(), fds.end()) == 1);
-    const auto& fd(*fds.begin());
+    BOOST_REQUIRE(std::distance(tts.begin(), tts.end()) == 1);
+    const auto& tt(*tts.begin());
 
-    BOOST_CHECK(fd.name().simple() == simple_name);
-    BOOST_CHECK(fd.name().qualified() == qualified_name);
-    BOOST_CHECK(fd.ownership_hierarchy().model_name() == model_name);
+    BOOST_CHECK(tt.name().simple() == simple_name);
+    BOOST_CHECK(tt.name().qualified() == qualified_name);
+    BOOST_CHECK(tt.ownership_hierarchy().model_name() == model_name);
+    BOOST_CHECK(tt.ownership_hierarchy().facet_name() == facet_name);
+    BOOST_CHECK(tt.ownership_hierarchy().formatter_name() == formatter_name);
 
     const auto st(dogen::annotations::scope_types::not_applicable);
-    BOOST_CHECK(fd.scope() == st);
+    BOOST_CHECK(tt.scope() == st);
 
     const auto vt(dogen::annotations::value_types::boolean);
-    BOOST_CHECK(fd.value_type() == vt);
+    BOOST_CHECK(tt.value_type() == vt);
+
+    const auto tk(dogen::annotations::template_kinds::instance);
+    BOOST_CHECK(tt.kind() == tk);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

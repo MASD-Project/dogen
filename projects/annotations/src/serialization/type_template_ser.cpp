@@ -19,41 +19,48 @@
  *
  */
 #include <boost/serialization/nvp.hpp>
-#include <boost/serialization/list.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
-#include <boost/serialization/string.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
+#include <boost/serialization/shared_ptr.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
+#include "dogen/annotations/serialization/name_ser.hpp"
+#include "dogen/annotations/serialization/value_ser.hpp"
+#include "dogen/annotations/serialization/scope_types_ser.hpp"
+#include "dogen/annotations/serialization/value_types_ser.hpp"
+#include "dogen/annotations/serialization/type_template_ser.hpp"
+#include "dogen/annotations/serialization/template_kinds_ser.hpp"
 #include "dogen/annotations/serialization/ownership_hierarchy_ser.hpp"
-#include "dogen/annotations/serialization/field_definition_types_ser.hpp"
-#include "dogen/annotations/serialization/field_instance_definition_ser.hpp"
 
 namespace boost {
 namespace serialization {
 
 template<typename Archive>
 void save(Archive& ar,
-    const dogen::annotations::field_instance_definition& v,
+    const dogen::annotations::type_template& v,
     const unsigned int /*version*/) {
     ar << make_nvp("name", v.name_);
+    ar << make_nvp("value_type", v.value_type_);
+    ar << make_nvp("scope", v.scope_);
     ar << make_nvp("ownership_hierarchy", v.ownership_hierarchy_);
-    ar << make_nvp("value", v.value_);
-    ar << make_nvp("definition_types", v.definition_types_);
+    ar << make_nvp("default_value", v.default_value_);
+    ar << make_nvp("kind", v.kind_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
-    dogen::annotations::field_instance_definition& v,
+    dogen::annotations::type_template& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("name", v.name_);
+    ar >> make_nvp("value_type", v.value_type_);
+    ar >> make_nvp("scope", v.scope_);
     ar >> make_nvp("ownership_hierarchy", v.ownership_hierarchy_);
-    ar >> make_nvp("value", v.value_);
-    ar >> make_nvp("definition_types", v.definition_types_);
+    ar >> make_nvp("default_value", v.default_value_);
+    ar >> make_nvp("kind", v.kind_);
 }
 
 } }
@@ -61,16 +68,16 @@ void load(Archive& ar,
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const dogen::annotations::field_instance_definition& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, dogen::annotations::field_instance_definition& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const dogen::annotations::type_template& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, dogen::annotations::type_template& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const dogen::annotations::field_instance_definition& v, unsigned int version);
-template void load(archive::text_iarchive& ar, dogen::annotations::field_instance_definition& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const dogen::annotations::type_template& v, unsigned int version);
+template void load(archive::text_iarchive& ar, dogen::annotations::type_template& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const dogen::annotations::field_instance_definition& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, dogen::annotations::field_instance_definition& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const dogen::annotations::type_template& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, dogen::annotations::type_template& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const dogen::annotations::field_instance_definition& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, dogen::annotations::field_instance_definition& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const dogen::annotations::type_template& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, dogen::annotations::type_template& v, unsigned int version);
 
 } }

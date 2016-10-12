@@ -36,13 +36,14 @@
 #include "dogen/annotations/serialization/annotation_ser.hpp"
 #include "dogen/annotations/serialization/scope_types_ser.hpp"
 #include "dogen/annotations/serialization/value_types_ser.hpp"
+#include "dogen/annotations/serialization/type_template_ser.hpp"
 #include "dogen/annotations/serialization/scribble_group_ser.hpp"
+#include "dogen/annotations/serialization/template_kinds_ser.hpp"
+#include "dogen/annotations/serialization/value_template_ser.hpp"
 #include "dogen/annotations/serialization/text_collection_ser.hpp"
 #include "dogen/annotations/serialization/type_repository_ser.hpp"
 #include "dogen/annotations/serialization/annotation_group_ser.hpp"
 #include "dogen/annotations/serialization/profile_repository_ser.hpp"
 #include "dogen/annotations/serialization/ownership_hierarchy_ser.hpp"
-#include "dogen/annotations/serialization/field_definition_types_ser.hpp"
-#include "dogen/annotations/serialization/field_instance_definition_ser.hpp"
 
 #endif

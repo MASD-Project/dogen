@@ -18,45 +18,46 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_FIELD_INSTANCE_DEFINITION_HPP
-#define DOGEN_ANNOTATIONS_TYPES_FIELD_INSTANCE_DEFINITION_HPP
+#ifndef DOGEN_ANNOTATIONS_TYPES_VALUE_TEMPLATE_HPP
+#define DOGEN_ANNOTATIONS_TYPES_VALUE_TEMPLATE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <list>
 #include <string>
 #include <algorithm>
+#include <boost/shared_ptr.hpp>
+#include "dogen/annotations/types/value_fwd.hpp"
+#include "dogen/annotations/types/template_kinds.hpp"
 #include "dogen/annotations/types/ownership_hierarchy.hpp"
-#include "dogen/annotations/types/field_definition_types.hpp"
-#include "dogen/annotations/serialization/field_instance_definition_fwd_ser.hpp"
+#include "dogen/annotations/serialization/value_template_fwd_ser.hpp"
 
 namespace dogen {
 namespace annotations {
 
-class field_instance_definition final {
+class value_template final {
 public:
-    field_instance_definition(const field_instance_definition&) = default;
-    field_instance_definition(field_instance_definition&&) = default;
-    ~field_instance_definition() = default;
+    value_template(const value_template&) = default;
+    value_template(value_template&&) = default;
+    ~value_template() = default;
 
 public:
-    field_instance_definition();
+    value_template();
 
 public:
-    field_instance_definition(
+    value_template(
         const std::string& name,
         const dogen::annotations::ownership_hierarchy& ownership_hierarchy,
-        const std::list<std::string>& value,
-        const dogen::annotations::field_definition_types definition_types);
+        const boost::shared_ptr<dogen::annotations::value>& value,
+        const dogen::annotations::template_kinds kind);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::annotations::field_instance_definition& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::annotations::value_template& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::annotations::field_instance_definition& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::annotations::value_template& v, unsigned int version);
 
 public:
     const std::string& name() const;
@@ -69,29 +70,29 @@ public:
     void ownership_hierarchy(const dogen::annotations::ownership_hierarchy& v);
     void ownership_hierarchy(const dogen::annotations::ownership_hierarchy&& v);
 
-    const std::list<std::string>& value() const;
-    std::list<std::string>& value();
-    void value(const std::list<std::string>& v);
-    void value(const std::list<std::string>&& v);
+    const boost::shared_ptr<dogen::annotations::value>& value() const;
+    boost::shared_ptr<dogen::annotations::value>& value();
+    void value(const boost::shared_ptr<dogen::annotations::value>& v);
+    void value(const boost::shared_ptr<dogen::annotations::value>&& v);
 
-    dogen::annotations::field_definition_types definition_types() const;
-    void definition_types(const dogen::annotations::field_definition_types v);
+    dogen::annotations::template_kinds kind() const;
+    void kind(const dogen::annotations::template_kinds v);
 
 public:
-    bool operator==(const field_instance_definition& rhs) const;
-    bool operator!=(const field_instance_definition& rhs) const {
+    bool operator==(const value_template& rhs) const;
+    bool operator!=(const value_template& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(field_instance_definition& other) noexcept;
-    field_instance_definition& operator=(field_instance_definition other);
+    void swap(value_template& other) noexcept;
+    value_template& operator=(value_template other);
 
 private:
     std::string name_;
     dogen::annotations::ownership_hierarchy ownership_hierarchy_;
-    std::list<std::string> value_;
-    dogen::annotations::field_definition_types definition_types_;
+    boost::shared_ptr<dogen::annotations::value> value_;
+    dogen::annotations::template_kinds kind_;
 };
 
 } }
@@ -100,8 +101,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::annotations::field_instance_definition& lhs,
-    dogen::annotations::field_instance_definition& rhs) {
+    dogen::annotations::value_template& lhs,
+    dogen::annotations::value_template& rhs) {
     lhs.swap(rhs);
 }
 

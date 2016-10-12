@@ -30,6 +30,7 @@
 #include <unordered_set>
 #include <unordered_map>
 #include "dogen/annotations/types/type.hpp"
+#include "dogen/annotations/types/type_template.hpp"
 #include "dogen/annotations/types/ownership_hierarchy.hpp"
 
 namespace dogen {
@@ -53,33 +54,34 @@ private:
      * @brief Ensures the field definition is in a valid state for
      * instantiation.
      */
-    void validate(const type& t) const;
+    void validate(const type_template& tt) const;
+
+public:
+    type to_type(const type_template& tt) const;
 
 private:
     /**
      * @brief Instantiates the field definition as a global template.
      */
-    std::list<type>
-    instantiate_global_template(const type& t) const;
+    std::list<type> instantiate_global_template(const type_template& tt) const;
 
     /**
      * @brief Instantiates the field definition as a facet template.
      */
-    std::list<type>
-    instantiate_facet_template(const type& t) const;
+    std::list<type> instantiate_facet_template(const type_template& tt) const;
 
     /**
      * @brief Instantiates the field definition as a formatter template.
      */
     std::list<type>
-    instantiate_formatter_template(const type& t) const;
+    instantiate_formatter_template(const type_template& tt) const;
 
 public:
     /**
      * @brief Returns true if the supplied field definition can be
      * instantiated.
      */
-    bool is_instantiable(const type& t) const;
+    bool is_instantiable(const type_template& tt) const;
 
     /**
      * @brief Instantiates the supplied field definition template into
@@ -87,8 +89,7 @@ public:
      *
      * @pre is_instantiable(t) must be true.
      */
-    std::list<type>
-    instantiate(const type& t) const;
+    std::list<type> instantiate(const type_template& tt) const;
 
 private:
     const std::forward_list<ownership_hierarchy>& ownership_hierarchies_;

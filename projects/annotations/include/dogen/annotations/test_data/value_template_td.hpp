@@ -18,27 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/annotations/test_data/field_definition_types_td.hpp"
+#ifndef DOGEN_ANNOTATIONS_TEST_DATA_VALUE_TEMPLATE_TD_HPP
+#define DOGEN_ANNOTATIONS_TEST_DATA_VALUE_TEMPLATE_TD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/annotations/types/value_template.hpp"
 
 namespace dogen {
 namespace annotations {
 
-field_definition_types_generator::field_definition_types_generator() : position_(0) { }
-void field_definition_types_generator::
-populate(const unsigned int position, result_type& v) {
-    v = static_cast<field_definition_types>(position % 6);
-}
+class value_template_generator {
+public:
+    value_template_generator();
 
-field_definition_types_generator::result_type
-field_definition_types_generator::create(const unsigned int  position) {
-    result_type r;
-    field_definition_types_generator::populate(position, r);
-    return r;
-}
+public:
+    typedef dogen::annotations::value_template result_type;
 
-field_definition_types_generator::result_type
-field_definition_types_generator::operator()() {
-    return create(position_++);
-}
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 } }
+
+#endif

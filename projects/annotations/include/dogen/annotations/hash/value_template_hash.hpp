@@ -18,40 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/annotations/hash/ownership_hierarchy_hash.hpp"
-#include "dogen/annotations/hash/field_definition_types_hash.hpp"
-#include "dogen/annotations/hash/field_instance_definition_hash.hpp"
+#ifndef DOGEN_ANNOTATIONS_HASH_VALUE_TEMPLATE_HASH_HPP
+#define DOGEN_ANNOTATIONS_HASH_VALUE_TEMPLATE_HASH_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value) {
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
-}
+#include <functional>
+#include "dogen/annotations/types/value_template.hpp"
 
 namespace dogen {
 namespace annotations {
 
-std::size_t field_instance_definition_hasher::hash(const field_instance_definition& v) {
-    std::size_t seed(0);
-
-    combine(seed, v.name());
-    combine(seed, v.ownership_hierarchy());
-    combine(seed, hash_std_list_std_string(v.value()));
-    combine(seed, v.definition_types());
-
-    return seed;
-}
+struct value_template_hasher {
+public:
+    static std::size_t hash(const value_template& v);
+};
 
 } }
+
+namespace std {
+
+template<>
+struct hash<dogen::annotations::value_template> {
+public:
+    size_t operator()(const dogen::annotations::value_template& v) const {
+        return dogen::annotations::value_template_hasher::hash(v);
+    }
+};
+
+}
+#endif

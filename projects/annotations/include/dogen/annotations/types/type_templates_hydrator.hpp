@@ -33,9 +33,9 @@
 #include "dogen/annotations/types/name.hpp"
 #include "dogen/annotations/types/value.hpp"
 #include "dogen/annotations/types/value_types.hpp"
-#include "dogen/annotations/types/field_definition_types.hpp"
+#include "dogen/annotations/types/template_kinds.hpp"
 #include "dogen/annotations/types/ownership_hierarchy.hpp"
-#include "dogen/annotations/types/type.hpp"
+#include "dogen/annotations/types/type_template.hpp"
 
 namespace dogen {
 namespace annotations {
@@ -59,7 +59,7 @@ private:
     /**
      * @brief Converts a string to a field definition type.
      */
-    field_definition_types to_field_definition_type(const std::string& s) const;
+    template_kinds to_template_kind(const std::string& s) const;
 
     /**
      * @brief Creates the field value.
@@ -81,19 +81,19 @@ private:
     /**
      * @brief Reads the entire stream as a property tree.
      */
-    std::list<type> read_stream(std::istream& s) const;
+    std::list<type_template> read_stream(std::istream& s) const;
 
 public:
     /**
      * @brief Hydrates the field definitions from the JSON stream.
      */
-    std::list<type> hydrate(std::istream& s) const;
+    std::list<type_template> hydrate(std::istream& s) const;
 
     /**
      * @brief Opens up the file at path and then hydrates the field
      * definitions from the JSON stream.
      */
-    std::list<type> hydrate(const boost::filesystem::path& p) const;
+    std::list<type_template> hydrate(const boost::filesystem::path& p) const;
 };
 
 } }

@@ -30,7 +30,6 @@ type mock_type_factory::containing_namespaces() const {
     r.name().qualified("containing_namespaces");
     r.ownership_hierarchy().model_name("stitch");
     r.value_type(value_types::text);
-    r.definition_type(field_definition_types::instance);
     r.scope(scope_types::not_applicable);
     return r;
 }
@@ -41,7 +40,6 @@ type mock_type_factory::copyright_notice() const {
     r.name().qualified("copyright_notice");
     r.ownership_hierarchy().model_name("formatters");
     r.value_type(value_types::text);
-    r.definition_type(field_definition_types::instance);
     r.scope(scope_types::not_applicable);
     return r;
 }
@@ -52,7 +50,6 @@ type mock_type_factory::licence_name() const {
     r.name().qualified("licence_name");
     r.ownership_hierarchy().model_name("formatters");
     r.value_type(value_types::text);
-    r.definition_type(field_definition_types::instance);
     r.scope(scope_types::not_applicable);
     return r;
 }
@@ -63,7 +60,6 @@ type mock_type_factory::create_comment() const {
     r.name().qualified("yarn.dia.comment");
     r.ownership_hierarchy().model_name("yarn.dia");
     r.value_type(value_types::text);
-    r.definition_type(field_definition_types::instance);
     r.scope(scope_types::not_applicable);
     return r;
 }
@@ -82,7 +78,6 @@ type mock_type_factory::make_type(const std::string n, value_types vt) const {
     r.name().simple(n);
     r.name().qualified(n);
     r.value_type(vt);
-    r.definition_type(field_definition_types::instance);
     r.scope(scope_types::any);
     return r;
 }

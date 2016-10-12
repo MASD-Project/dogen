@@ -36,13 +36,14 @@
 #include "dogen/annotations/hash/annotation_hash.hpp"
 #include "dogen/annotations/hash/scope_types_hash.hpp"
 #include "dogen/annotations/hash/value_types_hash.hpp"
+#include "dogen/annotations/hash/type_template_hash.hpp"
 #include "dogen/annotations/hash/scribble_group_hash.hpp"
+#include "dogen/annotations/hash/template_kinds_hash.hpp"
+#include "dogen/annotations/hash/value_template_hash.hpp"
 #include "dogen/annotations/hash/text_collection_hash.hpp"
 #include "dogen/annotations/hash/type_repository_hash.hpp"
 #include "dogen/annotations/hash/annotation_group_hash.hpp"
 #include "dogen/annotations/hash/profile_repository_hash.hpp"
 #include "dogen/annotations/hash/ownership_hierarchy_hash.hpp"
-#include "dogen/annotations/hash/field_definition_types_hash.hpp"
-#include "dogen/annotations/hash/field_instance_definition_hash.hpp"
 
 #endif

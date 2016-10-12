@@ -19,10 +19,11 @@
  *
  */
 #include "dogen/annotations/test_data/name_td.hpp"
-#include "dogen/annotations/test_data/type_td.hpp"
 #include "dogen/annotations/test_data/value_td.hpp"
 #include "dogen/annotations/test_data/scope_types_td.hpp"
 #include "dogen/annotations/test_data/value_types_td.hpp"
+#include "dogen/annotations/test_data/type_template_td.hpp"
+#include "dogen/annotations/test_data/template_kinds_td.hpp"
 #include "dogen/annotations/test_data/ownership_hierarchy_td.hpp"
 
 namespace {
@@ -59,38 +60,44 @@ create_boost_shared_ptr_dogen_annotations_value(unsigned int position) {
     return r;
 }
 
+dogen::annotations::template_kinds
+create_dogen_annotations_template_kinds(const unsigned int position) {
+    return dogen::annotations::template_kinds_generator::create(position);
+}
+
 }
 
 namespace dogen {
 namespace annotations {
 
-type_generator::type_generator() : position_(0) { }
+type_template_generator::type_template_generator() : position_(0) { }
 
-void type_generator::
+void type_template_generator::
 populate(const unsigned int position, result_type& v) {
     v.name(create_dogen_annotations_name(position + 0));
     v.value_type(create_dogen_annotations_value_types(position + 1));
     v.scope(create_dogen_annotations_scope_types(position + 2));
     v.ownership_hierarchy(create_dogen_annotations_ownership_hierarchy(position + 3));
     v.default_value(create_boost_shared_ptr_dogen_annotations_value(position + 4));
+    v.kind(create_dogen_annotations_template_kinds(position + 5));
 }
 
-type_generator::result_type
-type_generator::create(const unsigned int position) {
-    type r;
-    type_generator::populate(position, r);
+type_template_generator::result_type
+type_template_generator::create(const unsigned int position) {
+    type_template r;
+    type_template_generator::populate(position, r);
     return r;
 }
 
-type_generator::result_type*
-type_generator::create_ptr(const unsigned int position) {
-    type* p = new type();
-    type_generator::populate(position, *p);
+type_template_generator::result_type*
+type_template_generator::create_ptr(const unsigned int position) {
+    type_template* p = new type_template();
+    type_template_generator::populate(position, *p);
     return p;
 }
 
-type_generator::result_type
-type_generator::operator()() {
+type_template_generator::result_type
+type_template_generator::operator()() {
     return create(position_++);
 }
 

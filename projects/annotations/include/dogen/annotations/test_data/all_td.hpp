@@ -36,13 +36,14 @@
 #include "dogen/annotations/test_data/annotation_td.hpp"
 #include "dogen/annotations/test_data/scope_types_td.hpp"
 #include "dogen/annotations/test_data/value_types_td.hpp"
+#include "dogen/annotations/test_data/type_template_td.hpp"
 #include "dogen/annotations/test_data/scribble_group_td.hpp"
+#include "dogen/annotations/test_data/template_kinds_td.hpp"
+#include "dogen/annotations/test_data/value_template_td.hpp"
 #include "dogen/annotations/test_data/text_collection_td.hpp"
 #include "dogen/annotations/test_data/type_repository_td.hpp"
 #include "dogen/annotations/test_data/annotation_group_td.hpp"
 #include "dogen/annotations/test_data/profile_repository_td.hpp"
 #include "dogen/annotations/test_data/ownership_hierarchy_td.hpp"
-#include "dogen/annotations/test_data/field_definition_types_td.hpp"
-#include "dogen/annotations/test_data/field_instance_definition_td.hpp"
 
 #endif

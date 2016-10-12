@@ -44,17 +44,17 @@ const std::string duplicate_qualified_name(
 namespace dogen {
 namespace annotations {
 
-std::list<type> type_repository_factory::hydrate_directories(
+std::list<type_template> type_repository_factory::hydrate_templates(
     const std::forward_list<boost::filesystem::path>& dirs) const {
     BOOST_LOG_SEV(lg, info) << "Finding all files in: " << dirs;
     const auto files(dogen::utility::filesystem::find_files(dirs));
     BOOST_LOG_SEV(lg, info) << "Files found: " << files;
 
     type_templates_hydrator h;
-    std::list<type> r;
+    std::list<type_template> r;
     for (const auto& f : files) {
-        auto fds(h.hydrate(f));
-        r.splice(r.end(), fds);
+        auto tts(h.hydrate(f));
+        r.splice(r.end(), tts);
     }
     BOOST_LOG_SEV(lg, info) << "Finished hydrating all files.";
     return r;
@@ -62,18 +62,18 @@ std::list<type> type_repository_factory::hydrate_directories(
 
 std::list<type> type_repository_factory::instantiate_templates(
     const std::forward_list<ownership_hierarchy>& ohs,
-    const std::list<type>& ts) const {
+    const std::list<type_template>& tts) const {
     std::list<type> r;
 
     const template_instantiator ins(ohs);
     unsigned int counter(0);
-    for (const auto t : ts) {
-        if (!ins.is_instantiable(t)) {
-            r.push_back(t);
+    for (const auto tt : tts) {
+        if (!ins.is_instantiable(tt)) {
+            r.push_back(ins.to_type(tt));
             continue;
         }
 
-        r.splice(r.end(), ins.instantiate(t));
+        r.splice(r.end(), ins.instantiate(tt));
         ++counter;
     }
 
@@ -118,7 +118,7 @@ type_repository type_repository_factory::make(
     BOOST_LOG_SEV(lg, info) << "Generating repository.";
     BOOST_LOG_SEV(lg, info) << "Ownership hierarchy: " << ohs;
 
-    const auto original(hydrate_directories(dirs));
+    const auto original(hydrate_templates(dirs));
     const auto instantiated(instantiate_templates(ohs, original));
     const auto r(create_repository(instantiated));
 

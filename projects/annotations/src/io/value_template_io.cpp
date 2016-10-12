@@ -20,8 +20,10 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/annotations/io/profile_io.hpp"
+#include "dogen/annotations/io/value_io.hpp"
+#include "dogen/annotations/io/template_kinds_io.hpp"
 #include "dogen/annotations/io/value_template_io.hpp"
+#include "dogen/annotations/io/ownership_hierarchy_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -30,33 +32,17 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace std {
+namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "\"" << tidy_up_string(*i) << "\"";
-    }
-    s << "] ";
-    return s;
-}
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::annotations::value>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
+      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
 
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::annotations::value_template>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<empty>\"";
+    s << " }";
     return s;
 }
 
@@ -65,12 +51,13 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 namespace dogen {
 namespace annotations {
 
-std::ostream& operator<<(std::ostream& s, const profile& v) {
+std::ostream& operator<<(std::ostream& s, const value_template& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::annotations::profile\"" << ", "
+      << "\"__type__\": " << "\"dogen::annotations::value_template\"" << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
-      << "\"parents\": " << v.parents() << ", "
-      << "\"value_templates\": " << v.value_templates()
+      << "\"ownership_hierarchy\": " << v.ownership_hierarchy() << ", "
+      << "\"value\": " << v.value() << ", "
+      << "\"kind\": " << v.kind()
       << " }";
     return(s);
 }

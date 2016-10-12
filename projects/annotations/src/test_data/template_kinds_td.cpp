@@ -18,18 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_FIELD_INSTANCE_DEFINITION_FWD_HPP
-#define DOGEN_ANNOTATIONS_TYPES_FIELD_INSTANCE_DEFINITION_FWD_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+#include "dogen/annotations/test_data/template_kinds_td.hpp"
 
 namespace dogen {
 namespace annotations {
 
-class field_instance_definition;
+template_kinds_generator::template_kinds_generator() : position_(0) { }
+void template_kinds_generator::
+populate(const unsigned int position, result_type& v) {
+    v = static_cast<template_kinds>(position % 6);
+}
+
+template_kinds_generator::result_type
+template_kinds_generator::create(const unsigned int  position) {
+    result_type r;
+    template_kinds_generator::populate(position, r);
+    return r;
+}
+
+template_kinds_generator::result_type
+template_kinds_generator::operator()() {
+    return create(position_++);
+}
 
 } }
-
-#endif

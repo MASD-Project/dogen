@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_PROFILE_REPOSITORY_FACTORY_FWD_HPP
-#define DOGEN_ANNOTATIONS_TYPES_PROFILE_REPOSITORY_FACTORY_FWD_HPP
+#ifndef DOGEN_ANNOTATIONS_TYPES_PROFILER_FWD_HPP
+#define DOGEN_ANNOTATIONS_TYPES_PROFILER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 namespace dogen {
 namespace annotations {
 
-class profile_repository_factory;
+class profiler;
 
 } }
 

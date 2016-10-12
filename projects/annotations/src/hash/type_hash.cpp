@@ -24,7 +24,6 @@
 #include "dogen/annotations/hash/scope_types_hash.hpp"
 #include "dogen/annotations/hash/value_types_hash.hpp"
 #include "dogen/annotations/hash/ownership_hierarchy_hash.hpp"
-#include "dogen/annotations/hash/field_definition_types_hash.hpp"
 
 namespace {
 
@@ -53,7 +52,6 @@ std::size_t type_hasher::hash(const type& v) {
     combine(seed, v.scope());
     combine(seed, v.ownership_hierarchy());
     combine(seed, hash_boost_shared_ptr_dogen_annotations_value(v.default_value()));
-    combine(seed, v.definition_type());
 
     return seed;
 }

@@ -18,24 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_SERIALIZATION_FIELD_INSTANCE_DEFINITION_FWD_SER_HPP
-#define DOGEN_ANNOTATIONS_SERIALIZATION_FIELD_INSTANCE_DEFINITION_FWD_SER_HPP
+#ifndef DOGEN_ANNOTATIONS_SERIALIZATION_TEMPLATE_KINDS_SER_HPP
+#define DOGEN_ANNOTATIONS_SERIALIZATION_TEMPLATE_KINDS_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/annotations/types/field_instance_definition_fwd.hpp"
-
-namespace boost {
-namespace serialization {
+#include <boost/serialization/nvp.hpp>
+#include "dogen/annotations/types/template_kinds.hpp"
 
 template<class Archive>
-void save(Archive& ar, const dogen::annotations::field_instance_definition& v, unsigned int version);
-
-template<class Archive>
-void load(Archive& ar, dogen::annotations::field_instance_definition& v, unsigned int version);
-
-} }
+void serialize(Archive& ar, dogen::annotations::template_kinds& v, unsigned int /*version*/){
+    using boost::serialization::make_nvp;
+    ar & make_nvp("template_kinds", v);
+}
 
 #endif

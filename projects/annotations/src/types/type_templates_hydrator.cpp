@@ -25,7 +25,7 @@
 #include <boost/property_tree/json_parser.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/annotations/io/value_types_io.hpp"
-#include "dogen/annotations/io/field_definition_types_io.hpp"
+#include "dogen/annotations/io/template_kinds_io.hpp"
 #include "dogen/annotations/types/value_factory.hpp"
 #include "dogen/annotations/types/hydration_error.hpp"
 #include "dogen/annotations/types/type_templates_hydrator.hpp"
@@ -40,13 +40,13 @@ const std::string invalid_json_file("Failed to parse JSON file");
 const std::string invalid_option_in_json_file(
     "Failed to read option in JSON file: ");
 const std::string invalid_path("Failed to find JSON path: ");
-const std::string definition_has_no_name("Field definition has no 'name'.");
-const std::string definition_has_no_hierarchy(
-    "Field definition has no 'ownership_hierarchy'.");
+const std::string template_has_no_name("Template has no 'name'.");
+const std::string template_has_no_hierarchy(
+    "Template has no ownership hierarchy.");
 const std::string invalid_scope("Invalid or unsupported scope type: ");
 const std::string invalid_value_type("Invalid or unsupported value type: ");
-const std::string invalid_definition_type(
-    "Invalid or unsupported field definition type: ");
+const std::string invalid_template_kind(
+    "Invalid or unsupported template kind: ");
 
 const std::string name_key("name");
 const std::string name_simple_key("simple");
@@ -56,7 +56,7 @@ const std::string ownership_hierarchy_model_name_key("model_name");
 const std::string ownership_hierarchy_facet_name_key("facet_name");
 const std::string ownership_hierarchy_formatter_name_key("formatter_name");
 const std::string value_type_key("value_type");
-const std::string field_definition_type_key("definition_type");
+const std::string template_kind_key("definition_type");
 const std::string scope_key("scope");
 const std::string default_value_key("default_value");
 
@@ -73,11 +73,11 @@ const std::string value_type_text_collection("text_collection");
 const std::string value_type_number("number");
 const std::string value_type_boolean("boolean");
 
-const std::string field_definition_type_instance("instance");
-const std::string field_definition_type_global_template("global_template");
-const std::string field_definition_type_model_template("model_template");
-const std::string field_definition_type_facet_template("facet_template");
-const std::string field_definition_type_formatter_template(
+const std::string template_kind_instance("instance");
+const std::string template_kind_global_template("global_template");
+const std::string template_kind_model_template("model_template");
+const std::string template_kind_facet_template("facet_template");
+const std::string template_kind_formatter_template(
     "formatter_template");
 
 }
@@ -119,21 +119,21 @@ value_types type_templates_hydrator::to_value_type(const std::string& s) const {
     BOOST_THROW_EXCEPTION(hydration_error(invalid_value_type + s));
 }
 
-field_definition_types type_templates_hydrator::
-to_field_definition_type(const std::string& s) const {
-    if (s == field_definition_type_instance)
-        return field_definition_types::instance;
-    if (s == field_definition_type_global_template)
-        return field_definition_types::global_template;
-    if (s == field_definition_type_model_template)
-        return field_definition_types::model_template;
-    if (s == field_definition_type_facet_template)
-        return field_definition_types::facet_template;
-    if (s == field_definition_type_formatter_template)
-        return field_definition_types::formatter_template;
+template_kinds
+type_templates_hydrator::to_template_kind(const std::string& s) const {
+    if (s == template_kind_instance)
+        return template_kinds::instance;
+    if (s == template_kind_global_template)
+        return template_kinds::global_template;
+    if (s == template_kind_model_template)
+        return template_kinds::model_template;
+    if (s == template_kind_facet_template)
+        return template_kinds::facet_template;
+    if (s == template_kind_formatter_template)
+        return template_kinds::formatter_template;
 
-    BOOST_LOG_SEV(lg, error) << invalid_definition_type << "'" << s << "'";
-    BOOST_THROW_EXCEPTION(hydration_error(invalid_definition_type + s));
+    BOOST_LOG_SEV(lg, error) << invalid_template_kind << "'" << s << "'";
+    BOOST_THROW_EXCEPTION(hydration_error(invalid_template_kind + s));
 }
 
 boost::shared_ptr<value>
@@ -178,45 +178,45 @@ read_ownership_hierarchy(const boost::property_tree::ptree& pt) const {
     return r;
 }
 
-std::list<type> type_templates_hydrator::read_stream(std::istream& s) const {
+std::list<type_template>
+type_templates_hydrator::read_stream(std::istream& s) const {
     using namespace boost::property_tree;
     ptree pt;
     read_json(s, pt);
 
-    std::list<type> r;
+    std::list<type_template> r;
     for (auto i(pt.begin()); i != pt.end(); ++i) {
-        type fd;
+        type_template tt ;
+        const auto& tt_pt(i->second);
 
-        auto j(i->second.find(name_key));
-        if (j == i->second.not_found() || j->second.empty()) {
-            BOOST_LOG_SEV(lg, error) << definition_has_no_name;
-            BOOST_THROW_EXCEPTION(hydration_error(definition_has_no_name));
+        auto j(tt_pt.find(name_key));
+        if (j == tt_pt.not_found() || j->second.empty()) {
+            BOOST_LOG_SEV(lg, error) << template_has_no_name;
+            BOOST_THROW_EXCEPTION(hydration_error(template_has_no_name));
         }
-        fd.name(read_name(j->second));
+        tt.name(read_name(j->second));
 
-        j = i->second.find(ownership_hierarchy_key);
-        if (j == i->second.not_found() || j->second.empty()) {
-            BOOST_LOG_SEV(lg, error) << definition_has_no_hierarchy;
-            BOOST_THROW_EXCEPTION(hydration_error(definition_has_no_hierarchy));
+        j = tt_pt.find(ownership_hierarchy_key);
+        if (j == tt_pt.not_found() || j->second.empty()) {
+            BOOST_LOG_SEV(lg, error) << template_has_no_hierarchy;
+            BOOST_THROW_EXCEPTION(hydration_error(template_has_no_hierarchy));
         }
-        fd.ownership_hierarchy(read_ownership_hierarchy(j->second));
+        tt.ownership_hierarchy(read_ownership_hierarchy(j->second));
+        tt.value_type(to_value_type(tt_pt.get<std::string>(value_type_key)));
+        tt.kind(to_template_kind(tt_pt.get<std::string>(template_kind_key)));
+        tt.scope(to_scope_type(tt_pt.get<std::string>(scope_key)));
 
-        fd.value_type(to_value_type(
-                i->second.get<std::string>(value_type_key)));
-        fd.definition_type(to_field_definition_type(
-                i->second.get<std::string>(field_definition_type_key)));
-        fd.scope(to_scope_type(i->second.get<std::string>(scope_key)));
-
-        const auto dv(i->second.get_optional<std::string>(default_value_key));
+        const auto dv(tt_pt.get_optional<std::string>(default_value_key));
         if (dv)
-            fd.default_value(create_value(fd.value_type(), *dv));
+            tt.default_value(create_value(tt.value_type(), *dv));
 
-        r.push_front(fd);
+        r.push_front(tt);
     }
     return r;
 }
 
-std::list<type> type_templates_hydrator::hydrate(std::istream& s) const {
+std::list<type_template>
+type_templates_hydrator::hydrate(std::istream& s) const {
     BOOST_LOG_SEV(lg, trace) << "Parsing JSON stream.";
     using namespace boost::property_tree;
     try {
@@ -237,7 +237,7 @@ std::list<type> type_templates_hydrator::hydrate(std::istream& s) const {
     }
 }
 
-std::list<type> type_templates_hydrator::
+std::list<type_template> type_templates_hydrator::
 hydrate(const boost::filesystem::path& p) const {
     BOOST_LOG_SEV(lg, debug) << "Parsing JSON file: " << p.generic_string();
     boost::filesystem::ifstream s(p);

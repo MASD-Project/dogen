@@ -18,20 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_SERIALIZATION_FIELD_DEFINITION_TYPES_SER_HPP
-#define DOGEN_ANNOTATIONS_SERIALIZATION_FIELD_DEFINITION_TYPES_SER_HPP
+#ifndef DOGEN_ANNOTATIONS_TEST_DATA_TEMPLATE_KINDS_TD_HPP
+#define DOGEN_ANNOTATIONS_TEST_DATA_TEMPLATE_KINDS_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/nvp.hpp>
-#include "dogen/annotations/types/field_definition_types.hpp"
+#include "dogen/annotations/types/template_kinds.hpp"
 
-template<class Archive>
-void serialize(Archive& ar, dogen::annotations::field_definition_types& v, unsigned int /*version*/){
-    using boost::serialization::make_nvp;
-    ar & make_nvp("field_definition_types", v);
-}
+namespace dogen {
+namespace annotations {
+
+class template_kinds_generator {
+public:
+    template_kinds_generator();
+
+public:
+    typedef dogen::annotations::template_kinds result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+};
+
+} }
 
 #endif

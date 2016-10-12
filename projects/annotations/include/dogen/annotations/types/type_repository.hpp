@@ -59,7 +59,7 @@ private:
 
 public:
     /**
-     * @brief All the field definitions available, without categorisation.
+     * @brief All the types available, without categorisation.
      */
     /**@{*/
     const std::list<dogen::annotations::type>& all_types() const;
@@ -69,7 +69,7 @@ public:
     /**@}*/
 
     /**
-     * @brief All field definitions by qualified field definition name.
+     * @brief Types by qualified name.
      */
     /**@{*/
     const std::unordered_map<std::string, dogen::annotations::type>& types_by_name() const;
@@ -79,7 +79,7 @@ public:
     /**@}*/
 
     /**
-     * @brief All field definitions for all qualified facet names, for all models.
+     * @brief Types by facet names, for all models.
      */
     /**@{*/
     const std::unordered_map<std::string, std::list<dogen::annotations::type> >& types_by_facet_name() const;
@@ -89,7 +89,7 @@ public:
     /**@}*/
 
     /**
-     * @brief All field definitions for all qualified formatter names, for all models.
+     * @brief Types by formatter names, for all models.
      */
     /**@{*/
     const std::unordered_map<std::string, std::list<dogen::annotations::type> >& types_by_formatter_name() const;
@@ -98,10 +98,15 @@ public:
     void types_by_formatter_name(const std::unordered_map<std::string, std::list<dogen::annotations::type> >&& v);
     /**@}*/
 
+    /**
+     * @brief Types by model name.
+     */
+    /**@{*/
     const std::unordered_map<std::string, std::list<dogen::annotations::type> >& types_by_model_name() const;
     std::unordered_map<std::string, std::list<dogen::annotations::type> >& types_by_model_name();
     void types_by_model_name(const std::unordered_map<std::string, std::list<dogen::annotations::type> >& v);
     void types_by_model_name(const std::unordered_map<std::string, std::list<dogen::annotations::type> >&& v);
+    /**@}*/
 
 public:
     bool operator==(const type_repository& rhs) const;

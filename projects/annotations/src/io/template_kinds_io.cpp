@@ -21,36 +21,36 @@
 #include <string>
 #include <ostream>
 #include <stdexcept>
-#include "dogen/annotations/io/field_definition_types_io.hpp"
+#include "dogen/annotations/io/template_kinds_io.hpp"
 
 namespace dogen {
 namespace annotations {
 
-std::ostream& operator<<(std::ostream& s, const field_definition_types& v) {
-    s << "{ " << "\"__type__\": " << "\"field_definition_types\", " << "\"value\": ";
+std::ostream& operator<<(std::ostream& s, const template_kinds& v) {
+    s << "{ " << "\"__type__\": " << "\"template_kinds\", " << "\"value\": ";
 
     std::string attr;
     switch (v) {
-    case field_definition_types::invalid:
+    case template_kinds::invalid:
         attr = "\"invalid\"";
         break;
-    case field_definition_types::instance:
+    case template_kinds::instance:
         attr = "\"instance\"";
         break;
-    case field_definition_types::global_template:
+    case template_kinds::global_template:
         attr = "\"global_template\"";
         break;
-    case field_definition_types::model_template:
+    case template_kinds::model_template:
         attr = "\"model_template\"";
         break;
-    case field_definition_types::facet_template:
+    case template_kinds::facet_template:
         attr = "\"facet_template\"";
         break;
-    case field_definition_types::formatter_template:
+    case template_kinds::formatter_template:
         attr = "\"formatter_template\"";
         break;
     default:
-        throw std::invalid_argument("Invalid value for field_definition_types");
+        throw std::invalid_argument("Invalid value for template_kinds");
     }
     s << attr << " }";
     return s;

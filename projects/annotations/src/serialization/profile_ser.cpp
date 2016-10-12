@@ -31,8 +31,7 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/annotations/serialization/profile_ser.hpp"
-#include "dogen/annotations/serialization/annotation_ser.hpp"
-#include "dogen/annotations/serialization/field_instance_definition_ser.hpp"
+#include "dogen/annotations/serialization/value_template_ser.hpp"
 
 namespace boost {
 namespace serialization {
@@ -43,8 +42,7 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("name", v.name_);
     ar << make_nvp("parents", v.parents_);
-    ar << make_nvp("instance_definitions", v.instance_definitions_);
-    ar << make_nvp("content", v.content_);
+    ar << make_nvp("value_templates", v.value_templates_);
 }
 
 template<typename Archive>
@@ -53,8 +51,7 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("parents", v.parents_);
-    ar >> make_nvp("instance_definitions", v.instance_definitions_);
-    ar >> make_nvp("content", v.content_);
+    ar >> make_nvp("value_templates", v.value_templates_);
 }
 
 } }

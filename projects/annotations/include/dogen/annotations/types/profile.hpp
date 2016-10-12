@@ -29,9 +29,8 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen/annotations/types/annotation.hpp"
+#include "dogen/annotations/types/value_template.hpp"
 #include "dogen/annotations/serialization/profile_fwd_ser.hpp"
-#include "dogen/annotations/types/field_instance_definition.hpp"
 
 namespace dogen {
 namespace annotations {
@@ -47,8 +46,7 @@ public:
     profile(
         const std::string& name,
         const std::list<std::string>& parents,
-        const std::unordered_map<std::string, dogen::annotations::field_instance_definition>& instance_definitions,
-        const dogen::annotations::annotation& content);
+        const std::unordered_map<std::string, dogen::annotations::value_template>& value_templates);
 
 private:
     template<typename Archive>
@@ -68,15 +66,10 @@ public:
     void parents(const std::list<std::string>& v);
     void parents(const std::list<std::string>&& v);
 
-    const std::unordered_map<std::string, dogen::annotations::field_instance_definition>& instance_definitions() const;
-    std::unordered_map<std::string, dogen::annotations::field_instance_definition>& instance_definitions();
-    void instance_definitions(const std::unordered_map<std::string, dogen::annotations::field_instance_definition>& v);
-    void instance_definitions(const std::unordered_map<std::string, dogen::annotations::field_instance_definition>&& v);
-
-    const dogen::annotations::annotation& content() const;
-    dogen::annotations::annotation& content();
-    void content(const dogen::annotations::annotation& v);
-    void content(const dogen::annotations::annotation&& v);
+    const std::unordered_map<std::string, dogen::annotations::value_template>& value_templates() const;
+    std::unordered_map<std::string, dogen::annotations::value_template>& value_templates();
+    void value_templates(const std::unordered_map<std::string, dogen::annotations::value_template>& v);
+    void value_templates(const std::unordered_map<std::string, dogen::annotations::value_template>&& v);
 
 public:
     bool operator==(const profile& rhs) const;
@@ -91,8 +84,7 @@ public:
 private:
     std::string name_;
     std::list<std::string> parents_;
-    std::unordered_map<std::string, dogen::annotations::field_instance_definition> instance_definitions_;
-    dogen::annotations::annotation content_;
+    std::unordered_map<std::string, dogen::annotations::value_template> value_templates_;
 };
 
 } }

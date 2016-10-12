@@ -18,35 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_HASH_FIELD_INSTANCE_DEFINITION_HASH_HPP
-#define DOGEN_ANNOTATIONS_HASH_FIELD_INSTANCE_DEFINITION_HASH_HPP
+#ifndef DOGEN_ANNOTATIONS_TEST_DATA_TYPE_TEMPLATE_TD_HPP
+#define DOGEN_ANNOTATIONS_TEST_DATA_TYPE_TEMPLATE_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/annotations/types/field_instance_definition.hpp"
+#include "dogen/annotations/types/type_template.hpp"
 
 namespace dogen {
 namespace annotations {
 
-struct field_instance_definition_hasher {
+class type_template_generator {
 public:
-    static std::size_t hash(const field_instance_definition& v);
+    type_template_generator();
+
+public:
+    typedef dogen::annotations::type_template result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
 };
 
 } }
 
-namespace std {
-
-template<>
-struct hash<dogen::annotations::field_instance_definition> {
-public:
-    size_t operator()(const dogen::annotations::field_instance_definition& v) const {
-        return dogen::annotations::field_instance_definition_hasher::hash(v);
-    }
-};
-
-}
 #endif

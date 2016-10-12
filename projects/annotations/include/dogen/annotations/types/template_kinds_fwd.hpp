@@ -18,26 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_HASH_FIELD_DEFINITION_TYPES_HASH_HPP
-#define DOGEN_ANNOTATIONS_HASH_FIELD_DEFINITION_TYPES_HASH_HPP
+#ifndef DOGEN_ANNOTATIONS_TYPES_TEMPLATE_KINDS_FWD_HPP
+#define DOGEN_ANNOTATIONS_TYPES_TEMPLATE_KINDS_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/annotations/types/field_definition_types.hpp"
+namespace dogen {
+namespace annotations {
 
-namespace std {
+enum class template_kinds : unsigned int;
 
-template<>
-struct hash<dogen::annotations::field_definition_types> {
-public:
-    size_t operator()(const dogen::annotations::field_definition_types& v) const {
-        return std::hash<unsigned int>()(static_cast<unsigned int>(v));
-    }
-};
-
-}
+} }
 
 #endif

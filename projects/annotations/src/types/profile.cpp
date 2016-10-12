@@ -26,26 +26,22 @@ namespace annotations {
 profile::profile(
     const std::string& name,
     const std::list<std::string>& parents,
-    const std::unordered_map<std::string, dogen::annotations::field_instance_definition>& instance_definitions,
-    const dogen::annotations::annotation& content)
+    const std::unordered_map<std::string, dogen::annotations::value_template>& value_templates)
     : name_(name),
       parents_(parents),
-      instance_definitions_(instance_definitions),
-      content_(content) { }
+      value_templates_(value_templates) { }
 
 void profile::swap(profile& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
     swap(parents_, other.parents_);
-    swap(instance_definitions_, other.instance_definitions_);
-    swap(content_, other.content_);
+    swap(value_templates_, other.value_templates_);
 }
 
 bool profile::operator==(const profile& rhs) const {
     return name_ == rhs.name_ &&
         parents_ == rhs.parents_ &&
-        instance_definitions_ == rhs.instance_definitions_ &&
-        content_ == rhs.content_;
+        value_templates_ == rhs.value_templates_;
 }
 
 profile& profile::operator=(profile other) {
@@ -86,36 +82,20 @@ void profile::parents(const std::list<std::string>&& v) {
     parents_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::annotations::field_instance_definition>& profile::instance_definitions() const {
-    return instance_definitions_;
+const std::unordered_map<std::string, dogen::annotations::value_template>& profile::value_templates() const {
+    return value_templates_;
 }
 
-std::unordered_map<std::string, dogen::annotations::field_instance_definition>& profile::instance_definitions() {
-    return instance_definitions_;
+std::unordered_map<std::string, dogen::annotations::value_template>& profile::value_templates() {
+    return value_templates_;
 }
 
-void profile::instance_definitions(const std::unordered_map<std::string, dogen::annotations::field_instance_definition>& v) {
-    instance_definitions_ = v;
+void profile::value_templates(const std::unordered_map<std::string, dogen::annotations::value_template>& v) {
+    value_templates_ = v;
 }
 
-void profile::instance_definitions(const std::unordered_map<std::string, dogen::annotations::field_instance_definition>&& v) {
-    instance_definitions_ = std::move(v);
-}
-
-const dogen::annotations::annotation& profile::content() const {
-    return content_;
-}
-
-dogen::annotations::annotation& profile::content() {
-    return content_;
-}
-
-void profile::content(const dogen::annotations::annotation& v) {
-    content_ = v;
-}
-
-void profile::content(const dogen::annotations::annotation&& v) {
-    content_ = std::move(v);
+void profile::value_templates(const std::unordered_map<std::string, dogen::annotations::value_template>&& v) {
+    value_templates_ = std::move(v);
 }
 
 } }

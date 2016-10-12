@@ -18,33 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TEST_DATA_FIELD_DEFINITION_TYPES_TD_HPP
-#define DOGEN_ANNOTATIONS_TEST_DATA_FIELD_DEFINITION_TYPES_TD_HPP
+#ifndef DOGEN_ANNOTATIONS_IO_VALUE_TEMPLATE_IO_HPP
+#define DOGEN_ANNOTATIONS_IO_VALUE_TEMPLATE_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/annotations/types/field_definition_types.hpp"
+#include <iosfwd>
+#include "dogen/annotations/types/value_template.hpp"
 
 namespace dogen {
 namespace annotations {
 
-class field_definition_types_generator {
-public:
-    field_definition_types_generator();
-
-public:
-    typedef dogen::annotations::field_definition_types result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-};
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::annotations::value_template& v);
 
 } }
 

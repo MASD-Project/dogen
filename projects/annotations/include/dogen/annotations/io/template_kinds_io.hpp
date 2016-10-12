@@ -18,20 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_IO_FIELD_DEFINITION_TYPES_IO_HPP
-#define DOGEN_ANNOTATIONS_IO_FIELD_DEFINITION_TYPES_IO_HPP
+#ifndef DOGEN_ANNOTATIONS_IO_TEMPLATE_KINDS_IO_HPP
+#define DOGEN_ANNOTATIONS_IO_TEMPLATE_KINDS_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen/annotations/types/field_definition_types.hpp"
+#include "dogen/annotations/types/template_kinds.hpp"
 
 namespace dogen {
 namespace annotations {
 
-std::ostream& operator<<(std::ostream& s, const field_definition_types& v);
+std::ostream& operator<<(std::ostream& s, const template_kinds& v);
 
 } }
 

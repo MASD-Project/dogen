@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/annotations/types/type.hpp"
 #include "dogen/annotations/types/value.hpp"
+#include "dogen/annotations/types/type_template.hpp"
 
 namespace boost {
 
@@ -33,107 +33,120 @@ const boost::shared_ptr<dogen::annotations::value>& rhs) {
 namespace dogen {
 namespace annotations {
 
-type::type()
+type_template::type_template()
     : value_type_(static_cast<dogen::annotations::value_types>(0)),
-      scope_(static_cast<dogen::annotations::scope_types>(0)) { }
+      scope_(static_cast<dogen::annotations::scope_types>(0)),
+      kind_(static_cast<dogen::annotations::template_kinds>(0)) { }
 
-type::type(
+type_template::type_template(
     const dogen::annotations::name& name,
     const dogen::annotations::value_types value_type,
     const dogen::annotations::scope_types scope,
     const dogen::annotations::ownership_hierarchy& ownership_hierarchy,
-    const boost::shared_ptr<dogen::annotations::value>& default_value)
+    const boost::shared_ptr<dogen::annotations::value>& default_value,
+    const dogen::annotations::template_kinds kind)
     : name_(name),
       value_type_(value_type),
       scope_(scope),
       ownership_hierarchy_(ownership_hierarchy),
-      default_value_(default_value) { }
+      default_value_(default_value),
+      kind_(kind) { }
 
-void type::swap(type& other) noexcept {
+void type_template::swap(type_template& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
     swap(value_type_, other.value_type_);
     swap(scope_, other.scope_);
     swap(ownership_hierarchy_, other.ownership_hierarchy_);
     swap(default_value_, other.default_value_);
+    swap(kind_, other.kind_);
 }
 
-bool type::operator==(const type& rhs) const {
+bool type_template::operator==(const type_template& rhs) const {
     return name_ == rhs.name_ &&
         value_type_ == rhs.value_type_ &&
         scope_ == rhs.scope_ &&
         ownership_hierarchy_ == rhs.ownership_hierarchy_ &&
-        default_value_ == rhs.default_value_;
+        default_value_ == rhs.default_value_ &&
+        kind_ == rhs.kind_;
 }
 
-type& type::operator=(type other) {
+type_template& type_template::operator=(type_template other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const dogen::annotations::name& type::name() const {
+const dogen::annotations::name& type_template::name() const {
     return name_;
 }
 
-dogen::annotations::name& type::name() {
+dogen::annotations::name& type_template::name() {
     return name_;
 }
 
-void type::name(const dogen::annotations::name& v) {
+void type_template::name(const dogen::annotations::name& v) {
     name_ = v;
 }
 
-void type::name(const dogen::annotations::name&& v) {
+void type_template::name(const dogen::annotations::name&& v) {
     name_ = std::move(v);
 }
 
-dogen::annotations::value_types type::value_type() const {
+dogen::annotations::value_types type_template::value_type() const {
     return value_type_;
 }
 
-void type::value_type(const dogen::annotations::value_types v) {
+void type_template::value_type(const dogen::annotations::value_types v) {
     value_type_ = v;
 }
 
-dogen::annotations::scope_types type::scope() const {
+dogen::annotations::scope_types type_template::scope() const {
     return scope_;
 }
 
-void type::scope(const dogen::annotations::scope_types v) {
+void type_template::scope(const dogen::annotations::scope_types v) {
     scope_ = v;
 }
 
-const dogen::annotations::ownership_hierarchy& type::ownership_hierarchy() const {
+const dogen::annotations::ownership_hierarchy& type_template::ownership_hierarchy() const {
     return ownership_hierarchy_;
 }
 
-dogen::annotations::ownership_hierarchy& type::ownership_hierarchy() {
+dogen::annotations::ownership_hierarchy& type_template::ownership_hierarchy() {
     return ownership_hierarchy_;
 }
 
-void type::ownership_hierarchy(const dogen::annotations::ownership_hierarchy& v) {
+void type_template::ownership_hierarchy(const dogen::annotations::ownership_hierarchy& v) {
     ownership_hierarchy_ = v;
 }
 
-void type::ownership_hierarchy(const dogen::annotations::ownership_hierarchy&& v) {
+void type_template::ownership_hierarchy(const dogen::annotations::ownership_hierarchy&& v) {
     ownership_hierarchy_ = std::move(v);
 }
 
-const boost::shared_ptr<dogen::annotations::value>& type::default_value() const {
+const boost::shared_ptr<dogen::annotations::value>& type_template::default_value() const {
     return default_value_;
 }
 
-boost::shared_ptr<dogen::annotations::value>& type::default_value() {
+boost::shared_ptr<dogen::annotations::value>& type_template::default_value() {
     return default_value_;
 }
 
-void type::default_value(const boost::shared_ptr<dogen::annotations::value>& v) {
+void type_template::default_value(const boost::shared_ptr<dogen::annotations::value>& v) {
     default_value_ = v;
 }
 
-void type::default_value(const boost::shared_ptr<dogen::annotations::value>&& v) {
+void type_template::default_value(const boost::shared_ptr<dogen::annotations::value>&& v) {
     default_value_ = std::move(v);
+}
+
+dogen::annotations::template_kinds type_template::kind() const {
+    return kind_;
+}
+
+void type_template::kind(const dogen::annotations::template_kinds v) {
+    kind_ = v;
 }
 
 } }

@@ -19,27 +19,25 @@
  *
  */
 #include <ostream>
-#include <boost/algorithm/string.hpp>
+#include "dogen/annotations/io/name_io.hpp"
+#include "dogen/annotations/io/value_io.hpp"
+#include "dogen/annotations/io/scope_types_io.hpp"
+#include "dogen/annotations/io/value_types_io.hpp"
+#include "dogen/annotations/io/type_template_io.hpp"
+#include "dogen/annotations/io/template_kinds_io.hpp"
 #include "dogen/annotations/io/ownership_hierarchy_io.hpp"
-#include "dogen/annotations/io/field_definition_types_io.hpp"
-#include "dogen/annotations/io/field_instance_definition_io.hpp"
 
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    return s;
-}
+namespace boost {
 
-namespace std {
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::annotations::value>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
+      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "\"" << tidy_up_string(*i) << "\"";
-    }
-    s << "] ";
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<empty>\"";
+    s << " }";
     return s;
 }
 
@@ -48,13 +46,15 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 namespace dogen {
 namespace annotations {
 
-std::ostream& operator<<(std::ostream& s, const field_instance_definition& v) {
+std::ostream& operator<<(std::ostream& s, const type_template& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::annotations::field_instance_definition\"" << ", "
-      << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
+      << "\"__type__\": " << "\"dogen::annotations::type_template\"" << ", "
+      << "\"name\": " << v.name() << ", "
+      << "\"value_type\": " << v.value_type() << ", "
+      << "\"scope\": " << v.scope() << ", "
       << "\"ownership_hierarchy\": " << v.ownership_hierarchy() << ", "
-      << "\"value\": " << v.value() << ", "
-      << "\"definition_types\": " << v.definition_types()
+      << "\"default_value\": " << v.default_value() << ", "
+      << "\"kind\": " << v.kind()
       << " }";
     return(s);
 }

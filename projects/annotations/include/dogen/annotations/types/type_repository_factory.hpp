@@ -30,6 +30,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/annotations/types/ownership_hierarchy.hpp"
+#include "dogen/annotations/types/type_template.hpp"
 #include "dogen/annotations/types/type.hpp"
 
 namespace dogen {
@@ -41,9 +42,9 @@ namespace annotations {
 class type_repository_factory {
 private:
     /**
-     * @brief Hydrate all files in all of the supplied directories.
+     * @brief Hydrates all the type templates.
      */
-    std::list<type> hydrate_directories(
+    std::list<type_template> hydrate_templates(
         const std::forward_list<boost::filesystem::path>& dirs) const;
 
     /**
@@ -52,7 +53,7 @@ private:
      */
     std::list<type> instantiate_templates(
         const std::forward_list<ownership_hierarchy>& ohs,
-        const std::list<type>& ts) const;
+        const std::list<type_template>& tts) const;
 
     /**
      * @brief Index fields into the repository.

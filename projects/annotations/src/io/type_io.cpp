@@ -25,7 +25,6 @@
 #include "dogen/annotations/io/scope_types_io.hpp"
 #include "dogen/annotations/io/value_types_io.hpp"
 #include "dogen/annotations/io/ownership_hierarchy_io.hpp"
-#include "dogen/annotations/io/field_definition_types_io.hpp"
 
 namespace boost {
 
@@ -53,8 +52,7 @@ std::ostream& operator<<(std::ostream& s, const type& v) {
       << "\"value_type\": " << v.value_type() << ", "
       << "\"scope\": " << v.scope() << ", "
       << "\"ownership_hierarchy\": " << v.ownership_hierarchy() << ", "
-      << "\"default_value\": " << v.default_value() << ", "
-      << "\"definition_type\": " << v.definition_type()
+      << "\"default_value\": " << v.default_value()
       << " }";
     return(s);
 }
