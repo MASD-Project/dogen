@@ -25,19 +25,23 @@ namespace annotations {
 
 ownership_hierarchy_repository::ownership_hierarchy_repository(
     const std::vector<dogen::annotations::ownership_hierarchy>& ownership_hierarchies,
-    const std::unordered_map<std::string, std::unordered_set<std::string> >& facet_names_by_model_name)
+    const std::unordered_map<std::string, std::unordered_set<std::string> >& facet_names_by_model_name,
+    const std::unordered_map<std::string, std::unordered_set<std::string> >& formatter_names_by_model_name)
     : ownership_hierarchies_(ownership_hierarchies),
-      facet_names_by_model_name_(facet_names_by_model_name) { }
+      facet_names_by_model_name_(facet_names_by_model_name),
+      formatter_names_by_model_name_(formatter_names_by_model_name) { }
 
 void ownership_hierarchy_repository::swap(ownership_hierarchy_repository& other) noexcept {
     using std::swap;
     swap(ownership_hierarchies_, other.ownership_hierarchies_);
     swap(facet_names_by_model_name_, other.facet_names_by_model_name_);
+    swap(formatter_names_by_model_name_, other.formatter_names_by_model_name_);
 }
 
 bool ownership_hierarchy_repository::operator==(const ownership_hierarchy_repository& rhs) const {
     return ownership_hierarchies_ == rhs.ownership_hierarchies_ &&
-        facet_names_by_model_name_ == rhs.facet_names_by_model_name_;
+        facet_names_by_model_name_ == rhs.facet_names_by_model_name_ &&
+        formatter_names_by_model_name_ == rhs.formatter_names_by_model_name_;
 }
 
 ownership_hierarchy_repository& ownership_hierarchy_repository::operator=(ownership_hierarchy_repository other) {
@@ -76,6 +80,22 @@ void ownership_hierarchy_repository::facet_names_by_model_name(const std::unorde
 
 void ownership_hierarchy_repository::facet_names_by_model_name(const std::unordered_map<std::string, std::unordered_set<std::string> >&& v) {
     facet_names_by_model_name_ = std::move(v);
+}
+
+const std::unordered_map<std::string, std::unordered_set<std::string> >& ownership_hierarchy_repository::formatter_names_by_model_name() const {
+    return formatter_names_by_model_name_;
+}
+
+std::unordered_map<std::string, std::unordered_set<std::string> >& ownership_hierarchy_repository::formatter_names_by_model_name() {
+    return formatter_names_by_model_name_;
+}
+
+void ownership_hierarchy_repository::formatter_names_by_model_name(const std::unordered_map<std::string, std::unordered_set<std::string> >& v) {
+    formatter_names_by_model_name_ = v;
+}
+
+void ownership_hierarchy_repository::formatter_names_by_model_name(const std::unordered_map<std::string, std::unordered_set<std::string> >&& v) {
+    formatter_names_by_model_name_ = std::move(v);
 }
 
 } }

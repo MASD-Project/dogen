@@ -64,6 +64,7 @@ std::size_t ownership_hierarchy_repository_hasher::hash(const ownership_hierarch
 
     combine(seed, hash_std_vector_dogen_annotations_ownership_hierarchy(v.ownership_hierarchies()));
     combine(seed, hash_std_unordered_map_std_string_std_unordered_set_std_string(v.facet_names_by_model_name()));
+    combine(seed, hash_std_unordered_map_std_string_std_unordered_set_std_string(v.formatter_names_by_model_name()));
 
     return seed;
 }

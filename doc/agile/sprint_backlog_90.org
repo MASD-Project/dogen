@@ -14,27 +14,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-13 Thu 20:28]
+#+CAPTION: Clock summary at [2016-10-13 Thu 21:23]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *31:04* |       |       | 100.0 |
+| *Total time*                                                                | *31:58* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 31:04   |       |       | 100.0 |
-| Active                                                                      |         | 31:04 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  0:22 |   1.2 |
+| Stories                                                                     | 31:58   |       |       | 100.0 |
+| Active                                                                      |         | 31:58 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  0:22 |   1.1 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:19 |   1.0 |
 | COMPLETED Improve bintray support                                           |         |       |  0:26 |   1.4 |
-| COMPLETED Refactor opaque infrastructure                                    |         |       |  1:17 |   4.1 |
+| COMPLETED Refactor opaque infrastructure                                    |         |       |  1:17 |   4.0 |
 | COMPLETED Remove any remnants of annotations from quilt                     |         |       |  0:05 |   0.3 |
-| COMPLETED Solve the issue of too many "configurations"                      |         |       |  4:01 |  12.9 |
-| COMPLETED Merge decoration configuration and annotations factories          |         |       |  0:18 |   1.0 |
-| COMPLETED Move annotation factories into expander in yarn                   |         |       |  1:11 |   3.8 |
-| COMPLETED Clean up terminology in dynamic                                   |         |       | 15:12 |  48.9 |
-| COMPLETED Minor tidy-up of the quilt.cpp diagram                            |         |       |  0:29 |   1.6 |
-| COMPLETED Create a ownership hierarchy repository                           |         |       |  1:43 |   5.5 |
+| COMPLETED Solve the issue of too many "configurations"                      |         |       |  4:01 |  12.6 |
+| COMPLETED Merge decoration configuration and annotations factories          |         |       |  0:18 |   0.9 |
+| COMPLETED Move annotation factories into expander in yarn                   |         |       |  1:11 |   3.7 |
+| COMPLETED Clean up terminology in dynamic                                   |         |       | 15:12 |  47.5 |
+| COMPLETED Minor tidy-up of the quilt.cpp diagram                            |         |       |  0:29 |   1.5 |
+| COMPLETED Create a ownership hierarchy repository                           |         |       |  1:43 |   5.4 |
 | COMPLETED Use vector of elements in model                                   |         |       |  0:10 |   0.5 |
-| STARTED Rewrite profile support                                             |         |       |  5:31 |  17.8 |
+| STARTED Rewrite profile support                                             |         |       |  6:25 |  20.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -281,6 +281,7 @@ use a vector instead of a list.
 After the change, performance did not move very much.
 
 *** STARTED Rewrite profile support                                   :story:
+    CLOCK: [2016-10-13 Thu 20:29]--[2016-10-13 Thu 21:23] =>  0:54
     CLOCK: [2016-10-13 Thu 20:23]--[2016-10-13 Thu 20:28] =>  0:05
     CLOCK: [2016-10-13 Thu 20:08]--[2016-10-13 Thu 20:22] =>  0:14
     CLOCK: [2016-10-13 Thu 16:40]--[2016-10-13 Thu 17:16] =>  0:36

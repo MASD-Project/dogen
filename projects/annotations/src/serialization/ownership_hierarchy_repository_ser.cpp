@@ -43,6 +43,7 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("ownership_hierarchies", v.ownership_hierarchies_);
     ar << make_nvp("facet_names_by_model_name", v.facet_names_by_model_name_);
+    ar << make_nvp("formatter_names_by_model_name", v.formatter_names_by_model_name_);
 }
 
 template<typename Archive>
@@ -51,6 +52,7 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("ownership_hierarchies", v.ownership_hierarchies_);
     ar >> make_nvp("facet_names_by_model_name", v.facet_names_by_model_name_);
+    ar >> make_nvp("formatter_names_by_model_name", v.formatter_names_by_model_name_);
 }
 
 } }

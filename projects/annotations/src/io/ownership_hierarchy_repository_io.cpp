@@ -83,7 +83,8 @@ std::ostream& operator<<(std::ostream& s, const ownership_hierarchy_repository& 
     s << " { "
       << "\"__type__\": " << "\"dogen::annotations::ownership_hierarchy_repository\"" << ", "
       << "\"ownership_hierarchies\": " << v.ownership_hierarchies() << ", "
-      << "\"facet_names_by_model_name\": " << v.facet_names_by_model_name()
+      << "\"facet_names_by_model_name\": " << v.facet_names_by_model_name() << ", "
+      << "\"formatter_names_by_model_name\": " << v.formatter_names_by_model_name()
       << " }";
     return(s);
 }

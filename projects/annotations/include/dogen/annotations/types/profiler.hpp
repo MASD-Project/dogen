@@ -55,21 +55,20 @@ private:
     std::unordered_map<std::string, prof_ann>
     create_prof_ann_map(const std::list<profile>& profiles) const;
 
-    void validate_profiles(const ownership_hierarchy_repository& ohrp,
-        const std::unordered_map<std::string, prof_ann>& pa) const;
+    void validate(const std::unordered_map<std::string, prof_ann>& pas) const;
 
     void instantiate_value_templates(
-        std::unordered_map<std::string, prof_ann>& pa) const;
+        std::unordered_map<std::string, prof_ann>& pas) const;
 
     void walk_up_parent_tree_and_merge(
         const std::string& current,
-        std::unordered_map<std::string, prof_ann>& pa) const;
+        std::unordered_map<std::string, prof_ann>& pas) const;
 
-    void merge(std::unordered_map<std::string, prof_ann>& pa) const;
+    void merge(std::unordered_map<std::string, prof_ann>& pas) const;
 
     std::unordered_map<std::string, prof_ann>
     create_annotation_map(
-        const std::unordered_map<std::string, prof_ann>& pa) const;
+        const std::unordered_map<std::string, prof_ann>& pas) const;
 
 public:
     std::unordered_map<std::string, annotation>

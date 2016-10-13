@@ -70,6 +70,7 @@ void ownership_hierarchy_repository_generator::
 populate(const unsigned int position, result_type& v) {
     v.ownership_hierarchies(create_std_vector_dogen_annotations_ownership_hierarchy(position + 0));
     v.facet_names_by_model_name(create_std_unordered_map_std_string_std_unordered_set_std_string(position + 1));
+    v.formatter_names_by_model_name(create_std_unordered_map_std_string_std_unordered_set_std_string(position + 2));
 }
 
 ownership_hierarchy_repository_generator::result_type

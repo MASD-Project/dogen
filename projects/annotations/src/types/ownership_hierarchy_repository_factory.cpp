@@ -71,11 +71,20 @@ populate_ownership_hierarchies(const std::list<ownership_hierarchy>& ohs,
         rp.ownership_hierarchies().push_back(oh);
 }
 
-void ownership_hierarchy_repository_factory::populate_facet_names_by_model_name(
+void ownership_hierarchy_repository_factory::
+populate_facet_names_by_model_name(ownership_hierarchy_repository& rp) const {
+
+    for (const auto& oh : rp.ownership_hierarchies())
+        rp.facet_names_by_model_name()[oh.model_name()].insert(oh.facet_name());
+}
+
+void ownership_hierarchy_repository_factory::
+populate_formatter_names_by_model_name(
     ownership_hierarchy_repository& rp) const {
 
     for (const auto& oh : rp.ownership_hierarchies()) {
-        rp.facet_names_by_model_name()[oh.model_name()].insert(oh.facet_name());
+        const auto fmtn(oh.formatter_name());
+        rp.formatter_names_by_model_name()[oh.model_name()].insert(fmtn);
     }
 }
 
@@ -87,6 +96,7 @@ make(const std::list<ownership_hierarchy>& ohs) const {
     ownership_hierarchy_repository r;
     populate_ownership_hierarchies(ohs, r);
     populate_facet_names_by_model_name(r);
+    populate_formatter_names_by_model_name(r);
     BOOST_LOG_SEV(lg, debug) << "Created ownership hierachy repository. "
                              << "Result: " << r;
     return r;

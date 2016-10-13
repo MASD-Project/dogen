@@ -48,6 +48,7 @@
 #include "dogen/annotations/types/template_kinds.hpp"
 #include "dogen/annotations/types/value_template.hpp"
 #include "dogen/annotations/types/hydration_error.hpp"
+#include "dogen/annotations/types/profiling_error.hpp"
 #include "dogen/annotations/types/selection_error.hpp"
 #include "dogen/annotations/types/text_collection.hpp"
 #include "dogen/annotations/types/type_repository.hpp"

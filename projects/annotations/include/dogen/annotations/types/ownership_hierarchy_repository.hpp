@@ -46,7 +46,8 @@ public:
 public:
     ownership_hierarchy_repository(
         const std::vector<dogen::annotations::ownership_hierarchy>& ownership_hierarchies,
-        const std::unordered_map<std::string, std::unordered_set<std::string> >& facet_names_by_model_name);
+        const std::unordered_map<std::string, std::unordered_set<std::string> >& facet_names_by_model_name,
+        const std::unordered_map<std::string, std::unordered_set<std::string> >& formatter_names_by_model_name);
 
 private:
     template<typename Archive>
@@ -66,6 +67,11 @@ public:
     void facet_names_by_model_name(const std::unordered_map<std::string, std::unordered_set<std::string> >& v);
     void facet_names_by_model_name(const std::unordered_map<std::string, std::unordered_set<std::string> >&& v);
 
+    const std::unordered_map<std::string, std::unordered_set<std::string> >& formatter_names_by_model_name() const;
+    std::unordered_map<std::string, std::unordered_set<std::string> >& formatter_names_by_model_name();
+    void formatter_names_by_model_name(const std::unordered_map<std::string, std::unordered_set<std::string> >& v);
+    void formatter_names_by_model_name(const std::unordered_map<std::string, std::unordered_set<std::string> >&& v);
+
 public:
     bool operator==(const ownership_hierarchy_repository& rhs) const;
     bool operator!=(const ownership_hierarchy_repository& rhs) const {
@@ -79,6 +85,7 @@ public:
 private:
     std::vector<dogen::annotations::ownership_hierarchy> ownership_hierarchies_;
     std::unordered_map<std::string, std::unordered_set<std::string> > facet_names_by_model_name_;
+    std::unordered_map<std::string, std::unordered_set<std::string> > formatter_names_by_model_name_;
 };
 
 } }

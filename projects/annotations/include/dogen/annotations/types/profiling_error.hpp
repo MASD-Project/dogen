@@ -18,37 +18,32 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_OWNERSHIP_HIERARCHY_REPOSITORY_FACTORY_HPP
-#define DOGEN_ANNOTATIONS_TYPES_OWNERSHIP_HIERARCHY_REPOSITORY_FACTORY_HPP
+#ifndef DOGEN_ANNOTATIONS_TYPES_PROFILING_ERROR_HPP
+#define DOGEN_ANNOTATIONS_TYPES_PROFILING_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <list>
-#include "dogen/annotations/types/ownership_hierarchy.hpp"
-#include "dogen/annotations/types/ownership_hierarchy_repository.hpp"
+#include <string>
+#include <boost/exception/info.hpp>
 
 namespace dogen {
 namespace annotations {
 
-class ownership_hierarchy_repository_factory final {
-private:
-    void validate(const std::list<ownership_hierarchy>& ohs) const;
-
-    void populate_ownership_hierarchies(
-        const std::list<ownership_hierarchy>& ohs,
-        ownership_hierarchy_repository& rp) const;
-
-    void populate_facet_names_by_model_name(
-        ownership_hierarchy_repository& rp) const;
-
-    void populate_formatter_names_by_model_name(
-        ownership_hierarchy_repository& rp) const;
+class profiling_error : public virtual std::exception, public virtual boost::exception {
+public:
+    profiling_error() = default;
+    ~profiling_error() noexcept = default;
 
 public:
-    ownership_hierarchy_repository
-        make(const std::list<ownership_hierarchy>& ohs) const;
+    profiling_error(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
 };
 
 } }

@@ -99,8 +99,8 @@ create_repository(const std::list<type>& ts) const {
     for (const auto& t : ts) {
         const auto n(t.name().qualified());
         const auto pair(std::make_pair(n, t));
-        const auto result(r.types_by_name().insert(pair));
-        if (!result.second) {
+        const auto inserted(r.types_by_name().insert(pair).second);
+        if (!inserted) {
             BOOST_LOG_SEV(lg, error) << duplicate_qualified_name << n;
             BOOST_THROW_EXCEPTION(building_error(duplicate_qualified_name + n));
         }
