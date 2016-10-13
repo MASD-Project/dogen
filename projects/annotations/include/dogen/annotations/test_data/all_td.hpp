@@ -45,5 +45,6 @@
 #include "dogen/annotations/test_data/annotation_group_td.hpp"
 #include "dogen/annotations/test_data/profile_repository_td.hpp"
 #include "dogen/annotations/test_data/ownership_hierarchy_td.hpp"
+#include "dogen/annotations/test_data/ownership_hierarchy_repository_td.hpp"
 
 #endif

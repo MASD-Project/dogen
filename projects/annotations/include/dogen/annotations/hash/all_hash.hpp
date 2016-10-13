@@ -45,5 +45,6 @@
 #include "dogen/annotations/hash/annotation_group_hash.hpp"
 #include "dogen/annotations/hash/profile_repository_hash.hpp"
 #include "dogen/annotations/hash/ownership_hierarchy_hash.hpp"
+#include "dogen/annotations/hash/ownership_hierarchy_repository_hash.hpp"
 
 #endif
