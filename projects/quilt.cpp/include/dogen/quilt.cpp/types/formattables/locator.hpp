@@ -84,7 +84,8 @@ private:
     locator_configuration make_configuration(const type_group& tg,
         const annotations::annotation& o) const;
 
-    locator_configuration make_configuration(const annotations::type_repository& atrp,
+    locator_configuration
+    make_configuration(const annotations::type_repository& atrp,
         const formatters::container& fc, const annotations::annotation& o);
 
 private:

@@ -98,22 +98,22 @@ locator::type_group locator::make_type_group(
             fct_tg.postfix = *fmt_tg.facet_postfix;
             r.facets_type_group[fctn] = fct_tg;
         }
-
-        const auto& idn(traits::cpp::include_directory_name());
-        r.include_directory_name = s.select_type_by_name(idn);
-
-        const auto& sdn(traits::cpp::source_directory_name());
-        r.source_directory_name = s.select_type_by_name(sdn);
-
-        const auto& hde(traits::cpp::header_file_extension());
-        r.header_file_extension = s.select_type_by_name(hde);
-
-        const auto& ife(traits::cpp::implementation_file_extension());
-        r.implementation_file_extension = s.select_type_by_name(ife);
-
-        const auto& dt(traits::cpp::disable_facet_directories());
-        r.disable_facet_directories = s.select_type_by_name(dt);
     }
+
+    const auto& idn(traits::cpp::include_directory_name());
+    r.include_directory_name = s.select_type_by_name(idn);
+
+    const auto& sdn(traits::cpp::source_directory_name());
+    r.source_directory_name = s.select_type_by_name(sdn);
+
+    const auto& hde(traits::cpp::header_file_extension());
+    r.header_file_extension = s.select_type_by_name(hde);
+
+    const auto& ife(traits::cpp::implementation_file_extension());
+    r.implementation_file_extension = s.select_type_by_name(ife);
+
+    const auto& dt(traits::cpp::disable_facet_directories());
+    r.disable_facet_directories = s.select_type_by_name(dt);
 
     return r;
 }
