@@ -84,15 +84,15 @@ workflow::format(const formattables::model& fm, const yarn::element& e,
             BOOST_THROW_EXCEPTION(workflow_error(missing_formatter + fmtn));
         }
 
-        const auto& fmt_cfg(j->second);
-        const auto is_formatter_enabled(fmt_cfg.enabled());
+        const auto& fmt_props(j->second);
+        const auto is_formatter_enabled(fmt_props.enabled());
         if (!is_formatter_enabled) {
             BOOST_LOG_SEV(lg, debug) << "Formatter is disabled.";
             continue;
         }
 
         const auto& hlp_fmt(fc.helper_formatters());
-        const auto fct_cfgs(fm.facet_properties());
+        const auto fct_propss(fm.facet_properties());
         context ctx(ep, fm, hlp_fmt);
 
         auto file(fmt.format(ctx, e));

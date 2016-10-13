@@ -255,7 +255,7 @@ void enablement_expander::update_facet_enablement(
      * FIXME: read facet fields here instead of reusing configuration.
      */
     const auto& fffn(fc.file_formatters_by_formatter_name());
-    auto& fct_cfgs(fm.facet_properties());
+    auto& fct_props(fm.facet_properties());
     for (const auto& pair : gcs) {
         const auto fmtn(pair.first);
         const auto i(fffn.find(fmtn));
@@ -269,7 +269,7 @@ void enablement_expander::update_facet_enablement(
         const auto& oh(fmt.ownership_hierarchy());
         const auto fctn(oh.facet_name());
         const auto& gc(pair.second);
-        fct_cfgs[fctn].enabled(gc.facet_enabled());
+        fct_props[fctn].enabled(gc.facet_enabled());
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished updating facet enablement."

@@ -348,9 +348,8 @@ void helper_expander::populate_helper_properties(const context& ctx,
          */
         const auto& attrs(ptr->local_attributes());
         const auto iir(ptr->in_inheritance_relationship());
-        const auto hlp_cfgs(
-            compute_helper_properties(ctx, fff, iir, attrs));
-        eprops.helper_properties(hlp_cfgs);
+        const auto hlp_props(compute_helper_properties(ctx, fff, iir, attrs));
+        eprops.helper_properties(hlp_props);
     }
 }
 

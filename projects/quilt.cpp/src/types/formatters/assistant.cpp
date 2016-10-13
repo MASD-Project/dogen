@@ -203,9 +203,9 @@ obtain_formatter_properties(const std::string& element_id,
 
 formattables::facet_properties assistant::
 obtain_facet_properties(const std::string& facet_name) const {
-    const auto& fct_cfg(context_.model().facet_properties());
-    const auto i(fct_cfg.find(facet_name));
-    if (i == fct_cfg.end()) {
+    const auto& fct_props(context_.model().facet_properties());
+    const auto i(fct_props.find(facet_name));
+    if (i == fct_props.end()) {
         BOOST_LOG_SEV(lg, error) << facet_properties_missing
                                  << facet_name;
         BOOST_THROW_EXCEPTION(formatting_error(facet_properties_missing +
@@ -232,25 +232,25 @@ std::list<std::string> assistant::make_namespaces(const yarn::name& n) const {
 bool assistant::
 is_formatter_enabled(const std::string& formatter_name) const {
     const auto& eprops(context_.element_properties());
-    const auto& fmt_cfg(obtain_formatter_properties(eprops, formatter_name));
-    return fmt_cfg.enabled();
+    const auto& fmt_props(obtain_formatter_properties(eprops, formatter_name));
+    return fmt_props.enabled();
 }
 
 bool assistant::
 is_facet_enabled(const std::string& facet_name) const {
-    const auto& fct_cfg(obtain_facet_properties(facet_name));
-    return fct_cfg.enabled();
+    const auto& fct_props(obtain_facet_properties(facet_name));
+    return fct_props.enabled();
 }
 
 std::string assistant::
 get_facet_directory_for_facet(const std::string& facet_name) const {
-    const auto& fct_cfg(obtain_facet_properties(facet_name));
-    if (fct_cfg.directory().empty()) {
+    const auto& fct_props(obtain_facet_properties(facet_name));
+    if (fct_props.directory().empty()) {
         BOOST_LOG_SEV(lg, error) << facet_directory_missing << facet_name;
         BOOST_THROW_EXCEPTION(
             formatting_error(facet_directory_missing + facet_name));
     }
-    return fct_cfg.directory();
+    return fct_props.directory();
 }
 
 std::string assistant::get_odb_facet_directory() const {
@@ -467,22 +467,22 @@ void assistant::add_helper_methods(const std::string& element_id) {
     }
 
     const auto& eprops(context_.element_properties());
-    for (const auto& hlp_cfg : eprops.helper_properties()) {
-        BOOST_LOG_SEV(lg, debug) << "Helper configuration: " << hlp_cfg;
-        const auto helpers(get_helpers(hlp_cfg));
+    for (const auto& hlp_props : eprops.helper_properties()) {
+        BOOST_LOG_SEV(lg, debug) << "Helper configuration: " << hlp_props;
+        const auto helpers(get_helpers(hlp_props));
 
         /*
          * Check to see if the helper is enabled, given the system's
          * current configuration. If enabled, format it.
          */
         for (const auto& h : helpers) {
-            if (!h->is_enabled(*this, hlp_cfg)) {
+            if (!h->is_enabled(*this, hlp_props)) {
                 BOOST_LOG_SEV(lg, debug) << "Helper is not enabled." << h->id();
                 continue;
             }
 
             BOOST_LOG_SEV(lg, debug) << "Formatting with helper: " << h->id();
-            h->format(*this, hlp_cfg);
+            h->format(*this, hlp_props);
         }
     }
     BOOST_LOG_SEV(lg, debug) << "Finished generating helper methods.";
@@ -515,9 +515,9 @@ streaming_for_type(const formattables::streaming_properties& sc,
 std::string assistant::streaming_for_type(const yarn::name& n,
     const std::string& s) const {
 
-    const auto str_cfgs(context_.model().streaming_properties());
-    const auto i(str_cfgs.find(n.id()));
-    if (i == str_cfgs.end())
+    const auto str_propss(context_.model().streaming_properties());
+    const auto i(str_propss.find(n.id()));
+    if (i == str_propss.end())
         return s;
 
     return streaming_for_type(i->second, s);
@@ -537,9 +537,9 @@ streaming_for_type(const formattables::helper_descriptor& hd,
 bool assistant::
 requires_hashing_helper_method(const yarn::attribute& attr) const {
     const auto& eprops(context_.element_properties());
-    for (const auto& hlp_cfg : eprops.helper_properties()) {
+    for (const auto& hlp_props : eprops.helper_properties()) {
         const auto ident(attr.parsed_type().identifiable());
-        const auto& desc(hlp_cfg.current());
+        const auto& desc(hlp_props.current());
         if (ident != desc.name_tree_identifiable())
             continue;
 
@@ -580,8 +580,8 @@ names_with_enabled_formatter(const std::string& formatter_name,
     for (const auto& n : names) {
         const auto id(n.id());
         BOOST_LOG_SEV(lg, debug) << "Checking enablement for name: " << id;
-        const auto& fmt_cfg(obtain_formatter_properties(id, formatter_name));
-        if (!fmt_cfg.enabled())
+        const auto& fmt_props(obtain_formatter_properties(id, formatter_name));
+        if (!fmt_props.enabled())
             continue;
 
         r.push_back(n);
