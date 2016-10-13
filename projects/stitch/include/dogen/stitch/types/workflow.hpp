@@ -30,7 +30,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
-#include "dogen/annotations/types/ownership_hierarchy.hpp"
+#include "dogen/annotations/types/ownership_hierarchy_repository.hpp"
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/formatters/types/repository.hpp"
 #include "dogen/stitch/types/properties.hpp"
@@ -63,7 +63,7 @@ private:
     /**
      * @brief Returns the absolute path for the supplied path.
      */
-    boost::filesystem::path make_absolute_path_activity(
+    boost::filesystem::path make_absolute_path(
         const boost::filesystem::path& p) const;
 
     /**
@@ -73,7 +73,7 @@ private:
      * .stitch. If p is a directory, it and it sub-directories are
      * searched for files with the @code .stitch extension.
      */
-    std::forward_list<boost::filesystem::path> get_text_template_paths_activity(
+    std::forward_list<boost::filesystem::path> get_text_template_paths(
         const boost::filesystem::path& file_or_directory) const;
 
     /**
@@ -87,32 +87,32 @@ private:
      * @brief Reads all of the supplied stitch text templates into memory.
      */
     std::forward_list<std::pair<boost::filesystem::path, std::string> >
-    read_text_templates_activity(
+    read_text_templates(
         const std::forward_list<boost::filesystem::path>&
         text_template_paths) const;
 
     /**
-     * @brief Obtains the ownership hierarchy.
+     * @brief Obtains the ownership hierarchy repository.
      */
-    std::forward_list<annotations::ownership_hierarchy>
-    obtain_ownership_hierarchy_activity() const;
+    annotations::ownership_hierarchy_repository
+    obtain_ownership_hierarchy_repository() const;
 
     /**
      * @brief Creates the formatters' repository.
      */
-    dogen::formatters::repository create_formatters_repository_activity() const;
+    dogen::formatters::repository create_formatters_repository() const;
 
     /**
      * @brief Sets up the annotations repository.
      */
-    annotations::type_repository create_annotations_repository_activity(
-        const std::forward_list<annotations::ownership_hierarchy>& ohs)
+    annotations::type_repository create_annotations_type_repository(
+        const annotations::ownership_hierarchy_repository& ohrp)
         const;
 
     /**
      * @brief Parses all of the strings that contain text templates.
      */
-    std::forward_list<text_template> parse_text_templates_activity(
+    std::forward_list<text_template> parse_text_templates(
         const annotations::type_repository& rp,
         const std::forward_list<
         std::pair<boost::filesystem::path, std::string>
@@ -121,7 +121,7 @@ private:
     /**
      * @brief Creates the properties.
      */
-    void populate_properties_activity(
+    void populate_properties(
         const annotations::type_repository& annotations_repository,
         const dogen::formatters::repository& formatters_repository,
         std::forward_list<text_template>& text_templates) const;
@@ -129,14 +129,13 @@ private:
     /**
      * @brief Formats all of the supplied text templates.
      */
-    std::forward_list<formatters::file> format_text_templates_activity(
+    std::forward_list<formatters::file> format_text_templates(
         const std::forward_list<text_template>& text_templates) const;
 
     /**
      * @brief Writes all of the files into the filesystem.
      */
-    void write_files_activity(
-        const std::forward_list<formatters::file>& files) const;
+    void write_files(const std::forward_list<formatters::file>& files) const;
 
 public:
     /**

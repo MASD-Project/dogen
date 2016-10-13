@@ -29,7 +29,7 @@
 #include <forward_list>
 #include <boost/filesystem/path.hpp>
 #include "dogen/annotations/types/type_repository.hpp"
-#include "dogen/annotations/types/ownership_hierarchy.hpp"
+#include "dogen/annotations/types/ownership_hierarchy_repository.hpp"
 #include "dogen/annotations/types/type_template.hpp"
 #include "dogen/annotations/types/type.hpp"
 
@@ -45,14 +45,14 @@ private:
      * @brief Hydrates all the type templates.
      */
     std::list<type_template> hydrate_templates(
-        const std::forward_list<boost::filesystem::path>& dirs) const;
+        const std::forward_list<boost::filesystem::path>& data_dirs) const;
 
     /**
      * @brief Instantiates all templates into field definition
      * instances.
      */
     std::list<type> instantiate_templates(
-        const std::forward_list<ownership_hierarchy>& ohs,
+        const ownership_hierarchy_repository& ohrp,
         const std::list<type_template>& tts) const;
 
     /**
@@ -67,8 +67,8 @@ public:
      * supplied directories.
      */
     type_repository make(
-        const std::forward_list<ownership_hierarchy>& ohs,
-        const std::forward_list<boost::filesystem::path>& dirs) const;
+        const ownership_hierarchy_repository& ohrp,
+        const std::forward_list<boost::filesystem::path>& data_dirs) const;
 };
 
 } }

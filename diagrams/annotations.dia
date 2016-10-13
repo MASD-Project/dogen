@@ -10017,7 +10017,7 @@ any.#</dia:string>
             <dia:string>#ownership_hierarchies#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;ownership_hierarchy&gt;#</dia:string>
+            <dia:string>#std::vector&lt;ownership_hierarchy&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

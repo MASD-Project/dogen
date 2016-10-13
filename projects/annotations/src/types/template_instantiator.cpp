@@ -62,43 +62,8 @@ namespace dogen {
 namespace annotations {
 
 template_instantiator::
-template_instantiator(const std::forward_list<ownership_hierarchy>& ohs)
-    : ownership_hierarchies_(ohs),
-      facet_names_by_model_name_(obtain_facet_names_by_model_name(ohs)) {
-
-    BOOST_LOG_SEV(lg, debug) << "Initialised.";
-    BOOST_LOG_SEV(lg, trace) << "Ownership hierarchies: " << ohs;
-    BOOST_LOG_SEV(lg, debug) << "Facet names by model: "
-                             << facet_names_by_model_name_;
-}
-
-std::unordered_map<std::string, std::unordered_set<std::string>>
-template_instantiator::obtain_facet_names_by_model_name(
-    const std::forward_list<ownership_hierarchy>& ohs) const {
-    std::unordered_map<std::string, std::unordered_set<std::string> > r;
-
-    for (const auto& oh : ohs) {
-        if (oh.formatter_name().empty()) {
-            BOOST_LOG_SEV(lg, error) << empty_formatter_name;
-            BOOST_THROW_EXCEPTION(instantiation_error(empty_formatter_name));
-        }
-
-        if (oh.model_name().empty()) {
-            BOOST_LOG_SEV(lg, error) << empty_model_name << oh.formatter_name();
-            BOOST_THROW_EXCEPTION(
-                instantiation_error(empty_model_name + oh.formatter_name()));
-        }
-
-        if (oh.facet_name().empty()) {
-            BOOST_LOG_SEV(lg, error) << empty_facet_name << oh.formatter_name();
-            BOOST_THROW_EXCEPTION(
-                instantiation_error(empty_facet_name + oh.formatter_name()));
-        }
-
-        r[oh.model_name()].insert(oh.facet_name());
-    }
-    return r;
-}
+template_instantiator(const ownership_hierarchy_repository& ohrp)
+    : repository_(ohrp) { }
 
 bool template_instantiator::is_instantiable(const type_template& tt) const {
     return
@@ -178,7 +143,7 @@ std::list<type> template_instantiator::
 instantiate_global_template(const type_template& tt) const {
     std::list<type> r;
 
-    for (const auto pair : facet_names_by_model_name_) {
+    for (const auto pair : repository_.facet_names_by_model_name()) {
         const auto model_name(pair.first);
         if (!tt.ownership_hierarchy().model_name().empty() &&
             tt.ownership_hierarchy().model_name() != model_name)
@@ -203,7 +168,7 @@ instantiate_global_template(const type_template& tt) const {
         }
     }
 
-    for (const auto oh : ownership_hierarchies_) {
+    for (const auto oh : repository_.ownership_hierarchies()) {
         if (!tt.ownership_hierarchy().model_name().empty() &&
             tt.ownership_hierarchy().model_name() != oh.model_name())
             continue;
@@ -221,7 +186,7 @@ instantiate_global_template(const type_template& tt) const {
 std::list<type> template_instantiator::
 instantiate_facet_template(const type_template& tt) const {
     std::list<type> r;
-    for (const auto pair : facet_names_by_model_name_) {
+    for (const auto pair : repository_.facet_names_by_model_name()) {
         const auto model_name(pair.first);
         if (!tt.ownership_hierarchy().model_name().empty() &&
             tt.ownership_hierarchy().model_name() != model_name)
@@ -243,7 +208,7 @@ instantiate_facet_template(const type_template& tt) const {
 std::list<type> template_instantiator::
 instantiate_formatter_template(const type_template& tt) const {
     std::list<type> r;
-    for (const auto oh : ownership_hierarchies_) {
+    for (const auto oh : repository_.ownership_hierarchies()) {
         if (!tt.ownership_hierarchy().model_name().empty() &&
             tt.ownership_hierarchy().model_name() != oh.model_name())
             continue;

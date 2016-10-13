@@ -18,12 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
+#include <list>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/filesystem/file.hpp"
 #include "dogen/utility/exception/invalid_enum_value.hpp"
 #include "dogen/annotations/types/type_repository_factory.hpp"
+#include "dogen/annotations/types/ownership_hierarchy_repository_factory.hpp"
 #include "dogen/options/types/knitting_options_validator.hpp"
 #include "dogen/options/io/knitting_options_io.hpp"
 #include "dogen/yarn/types/workflow.hpp"
@@ -47,7 +49,6 @@ const std::string binary_extension(".bin");
 const std::string target_postfix("_target");
 const std::string library_dir("library");
 const std::string merged("merged_");
-const std::string annotations_dir("annotations");
 const std::string invalid_archive_type("Invalid or unexpected archive type");
 const std::string incorrect_stdout_options(
     "Configuration for output to stdout is incorrect");
@@ -71,22 +72,25 @@ bool workflow::housekeeping_required() const {
     return knitting_options_.output().delete_extra_files();
 }
 
-std::forward_list<annotations::ownership_hierarchy> workflow::
+annotations::ownership_hierarchy_repository workflow::
 obtain_ownership_hierarchy() const {
-    std::forward_list<annotations::ownership_hierarchy> r;
+    std::list<annotations::ownership_hierarchy> ohs;
     const auto& rg(quilt::workflow::registrar());
     for (const auto b : rg.backends())
-        r.splice_after(r.before_begin(), b->ownership_hierarchy());
+        for (const auto oh : b->ownership_hierarchy())
+            ohs.push_back(oh);
 
+    annotations::ownership_hierarchy_repository_factory f;
+    const auto r(f.make(ohs));
     return r;
 }
 
 annotations::type_repository workflow::setup_annotations_repository(
-    const std::forward_list<annotations::ownership_hierarchy>& ohs) const {
-    using namespace dogen::utility::filesystem;
-    const auto dir(data_files_directory() / annotations_dir);
+    const annotations::ownership_hierarchy_repository& ohrp) const {
+    const auto data_dir(dogen::utility::filesystem::data_files_directory());
+    const std::forward_list<boost::filesystem::path> data_dirs = { data_dir };
     annotations::type_repository_factory f;
-    return f.make(ohs, std::forward_list<boost::filesystem::path> { dir });
+    return f.make(ohrp, data_dirs);
 }
 
 yarn::model workflow::
@@ -143,15 +147,15 @@ void workflow::execute() const {
 
     try {
         const auto ohs(obtain_ownership_hierarchy());
-        const auto rp(setup_annotations_repository(ohs));
-        const auto m(obtain_yarn_model(rp));
+        const auto atrp(setup_annotations_repository(ohs));
+        const auto m(obtain_yarn_model(atrp));
 
         if (!m.has_generatable_types()) {
             BOOST_LOG_SEV(lg, warn) << "No generatable types found.";
             return;
         }
 
-        quilt::workflow w(knitting_options_, rp);
+        quilt::workflow w(knitting_options_, atrp);
         const auto files(w.execute(m));
 
         const auto writer(obtain_file_writer());

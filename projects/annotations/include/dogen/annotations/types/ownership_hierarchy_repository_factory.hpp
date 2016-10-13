@@ -25,12 +25,27 @@
 #pragma once
 #endif
 
+#include <list>
+#include "dogen/annotations/types/ownership_hierarchy.hpp"
 #include "dogen/annotations/types/ownership_hierarchy_repository.hpp"
 
 namespace dogen {
 namespace annotations {
 
 class ownership_hierarchy_repository_factory final {
+private:
+    void validate(const std::list<ownership_hierarchy>& ohs) const;
+
+    void populate_ownership_hierarchies(
+        const std::list<ownership_hierarchy>& ohs,
+        ownership_hierarchy_repository& rp) const;
+
+    void populate_facet_names_by_model_name(
+        ownership_hierarchy_repository& rp) const;
+
+public:
+    ownership_hierarchy_repository
+        make(const std::list<ownership_hierarchy>& ohs) const;
 };
 
 } }

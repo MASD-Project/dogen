@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include <list>
 #include <string>
+#include <vector>
 #include <algorithm>
 #include <unordered_map>
 #include <unordered_set>
@@ -45,7 +45,7 @@ public:
 
 public:
     ownership_hierarchy_repository(
-        const std::list<dogen::annotations::ownership_hierarchy>& ownership_hierarchies,
+        const std::vector<dogen::annotations::ownership_hierarchy>& ownership_hierarchies,
         const std::unordered_map<std::string, std::unordered_set<std::string> >& facet_names_by_model_name);
 
 private:
@@ -56,10 +56,10 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::annotations::ownership_hierarchy_repository& v, unsigned int version);
 
 public:
-    const std::list<dogen::annotations::ownership_hierarchy>& ownership_hierarchies() const;
-    std::list<dogen::annotations::ownership_hierarchy>& ownership_hierarchies();
-    void ownership_hierarchies(const std::list<dogen::annotations::ownership_hierarchy>& v);
-    void ownership_hierarchies(const std::list<dogen::annotations::ownership_hierarchy>&& v);
+    const std::vector<dogen::annotations::ownership_hierarchy>& ownership_hierarchies() const;
+    std::vector<dogen::annotations::ownership_hierarchy>& ownership_hierarchies();
+    void ownership_hierarchies(const std::vector<dogen::annotations::ownership_hierarchy>& v);
+    void ownership_hierarchies(const std::vector<dogen::annotations::ownership_hierarchy>&& v);
 
     const std::unordered_map<std::string, std::unordered_set<std::string> >& facet_names_by_model_name() const;
     std::unordered_map<std::string, std::unordered_set<std::string> >& facet_names_by_model_name();
@@ -77,7 +77,7 @@ public:
     ownership_hierarchy_repository& operator=(ownership_hierarchy_repository other);
 
 private:
-    std::list<dogen::annotations::ownership_hierarchy> ownership_hierarchies_;
+    std::vector<dogen::annotations::ownership_hierarchy> ownership_hierarchies_;
     std::unordered_map<std::string, std::unordered_set<std::string> > facet_names_by_model_name_;
 };
 

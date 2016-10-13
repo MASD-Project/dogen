@@ -31,23 +31,14 @@
 #include <unordered_map>
 #include "dogen/annotations/types/type.hpp"
 #include "dogen/annotations/types/type_template.hpp"
-#include "dogen/annotations/types/ownership_hierarchy.hpp"
+#include "dogen/annotations/types/ownership_hierarchy_repository.hpp"
 
 namespace dogen {
 namespace annotations {
 
 class template_instantiator {
 public:
-    template_instantiator(const std::forward_list<ownership_hierarchy>& oh);
-
-private:
-    /**
-     * @brief Given the ownership hierarchy, returns all the facets by
-     * the model the facet belongs to.
-     */
-    std::unordered_map<std::string, std::unordered_set<std::string> >
-    obtain_facet_names_by_model_name(
-        const std::forward_list<ownership_hierarchy>& ohs) const;
+    template_instantiator(const ownership_hierarchy_repository& ohrp);
 
 private:
     /**
@@ -92,9 +83,7 @@ public:
     std::list<type> instantiate(const type_template& tt) const;
 
 private:
-    const std::forward_list<ownership_hierarchy>& ownership_hierarchies_;
-    const std::unordered_map<std::string, std::unordered_set<std::string> >
-    facet_names_by_model_name_;
+    const ownership_hierarchy_repository& repository_;
 };
 
 } }

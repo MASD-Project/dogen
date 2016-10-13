@@ -36,6 +36,8 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("annotations.type_repository_factory"));
 
+const std::string annotations_dir("annotations");
+
 const std::string duplicate_qualified_name(
     "Qualified name defined more than once: ");
 
@@ -45,9 +47,14 @@ namespace dogen {
 namespace annotations {
 
 std::list<type_template> type_repository_factory::hydrate_templates(
-    const std::forward_list<boost::filesystem::path>& dirs) const {
-    BOOST_LOG_SEV(lg, info) << "Finding all files in: " << dirs;
-    const auto files(dogen::utility::filesystem::find_files(dirs));
+    const std::forward_list<boost::filesystem::path>& data_dirs) const {
+    BOOST_LOG_SEV(lg, info) << "Input data directories: " << data_dirs;
+    std::forward_list<boost::filesystem::path> annotation_dirs;
+    for (const auto& dir : data_dirs)
+        annotation_dirs.push_front(dir / annotations_dir);
+
+    BOOST_LOG_SEV(lg, info) << "Finding all files in: " << annotation_dirs;
+    const auto files(dogen::utility::filesystem::find_files(annotation_dirs));
     BOOST_LOG_SEV(lg, info) << "Files found: " << files;
 
     type_templates_hydrator h;
@@ -61,11 +68,11 @@ std::list<type_template> type_repository_factory::hydrate_templates(
 }
 
 std::list<type> type_repository_factory::instantiate_templates(
-    const std::forward_list<ownership_hierarchy>& ohs,
+    const ownership_hierarchy_repository& ohrp,
     const std::list<type_template>& tts) const {
     std::list<type> r;
 
-    const template_instantiator ins(ohs);
+    const template_instantiator ins(ohrp);
     unsigned int counter(0);
     for (const auto tt : tts) {
         if (!ins.is_instantiable(tt)) {
@@ -113,13 +120,12 @@ create_repository(const std::list<type>& ts) const {
 }
 
 type_repository type_repository_factory::make(
-    const std::forward_list<ownership_hierarchy>& ohs,
+    const ownership_hierarchy_repository& ohrp,
     const std::forward_list<boost::filesystem::path>& dirs) const {
     BOOST_LOG_SEV(lg, info) << "Generating repository.";
-    BOOST_LOG_SEV(lg, info) << "Ownership hierarchy: " << ohs;
 
     const auto original(hydrate_templates(dirs));
-    const auto instantiated(instantiate_templates(ohs, original));
+    const auto instantiated(instantiate_templates(ohrp, original));
     const auto r(create_repository(instantiated));
 
     BOOST_LOG_SEV(lg, info) << "Generated repository: " << r;

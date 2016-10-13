@@ -29,8 +29,8 @@ create_dogen_annotations_ownership_hierarchy(const unsigned int position) {
     return dogen::annotations::ownership_hierarchy_generator::create(position);
 }
 
-std::list<dogen::annotations::ownership_hierarchy> create_std_list_dogen_annotations_ownership_hierarchy(unsigned int position) {
-    std::list<dogen::annotations::ownership_hierarchy> r;
+std::vector<dogen::annotations::ownership_hierarchy> create_std_vector_dogen_annotations_ownership_hierarchy(unsigned int position) {
+    std::vector<dogen::annotations::ownership_hierarchy> r;
     for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_dogen_annotations_ownership_hierarchy(position + i));
     }
@@ -68,7 +68,7 @@ ownership_hierarchy_repository_generator::ownership_hierarchy_repository_generat
 
 void ownership_hierarchy_repository_generator::
 populate(const unsigned int position, result_type& v) {
-    v.ownership_hierarchies(create_std_list_dogen_annotations_ownership_hierarchy(position + 0));
+    v.ownership_hierarchies(create_std_vector_dogen_annotations_ownership_hierarchy(position + 0));
     v.facet_names_by_model_name(create_std_unordered_map_std_string_std_unordered_set_std_string(position + 1));
 }
 

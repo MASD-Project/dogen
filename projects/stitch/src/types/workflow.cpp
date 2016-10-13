@@ -28,6 +28,7 @@
 #include "dogen/utility/filesystem/file.hpp"
 #include "dogen/annotations/types/type_repository_factory.hpp"
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
+#include "dogen/annotations/types/ownership_hierarchy_repository_factory.hpp"
 #include "dogen/formatters/types/hydration_workflow.hpp"
 #include "dogen/formatters/io/file_io.hpp"
 #include "dogen/formatters/types/filesystem_writer.hpp"
@@ -62,7 +63,7 @@ void workflow::perform_expansion(const boost::filesystem::path& p,
 }
 
 std::forward_list<boost::filesystem::path> workflow::
-get_text_template_paths_activity(
+get_text_template_paths(
     const boost::filesystem::path& file_or_directory) const {
     std::forward_list<boost::filesystem::path> r;
     if (boost::filesystem::is_directory(file_or_directory)) {
@@ -93,7 +94,7 @@ validate_text_template_paths(const std::forward_list<boost::filesystem::path>&
 }
 
 std::forward_list<std::pair<boost::filesystem::path, std::string> >
-workflow::read_text_templates_activity(
+workflow::read_text_templates(
     const std::forward_list<boost::filesystem::path>&
     text_template_paths) const {
     std::forward_list<std::pair<boost::filesystem::path, std::string> > r;
@@ -110,30 +111,33 @@ workflow::read_text_templates_activity(
     return r;
 }
 
-std::forward_list<annotations::ownership_hierarchy>
-workflow::obtain_ownership_hierarchy_activity() const {
-    std::forward_list<annotations::ownership_hierarchy> r;
-    r.push_front(formatter_.ownership_hierarchy());
+annotations::ownership_hierarchy_repository
+workflow::obtain_ownership_hierarchy_repository() const {
+    std::list<annotations::ownership_hierarchy> ohs;
+    ohs.push_back(formatter_.ownership_hierarchy());
+
+    annotations::ownership_hierarchy_repository_factory f;
+    const auto r(f.make(ohs));
     return r;
 }
 
 dogen::formatters::repository workflow::
-create_formatters_repository_activity() const {
+create_formatters_repository() const {
     using dogen::utility::filesystem::data_files_directory;
     std::forward_list<boost::filesystem::path> dirs { data_files_directory() };
     dogen::formatters::hydration_workflow hw;
     return hw.hydrate(dirs);
 }
 
-annotations::type_repository workflow::create_annotations_repository_activity(
-    const std::forward_list<annotations::ownership_hierarchy>& ohs) const {
-    using namespace dogen::utility::filesystem;
-    const auto dir(data_files_directory() / annotations_dir);
+annotations::type_repository workflow::create_annotations_type_repository(
+    const annotations::ownership_hierarchy_repository& ohrp) const {
+    const auto data_dir(dogen::utility::filesystem::data_files_directory());
+    const std::forward_list<boost::filesystem::path> data_dirs = { data_dir };
     annotations::type_repository_factory f;
-    return f.make(ohs, std::forward_list<boost::filesystem::path> { dir });
+    return f.make(ohrp, data_dirs);
 }
 
-std::forward_list<text_template> workflow::parse_text_templates_activity(
+std::forward_list<text_template> workflow::parse_text_templates(
     const annotations::type_repository& rp,
     const std::forward_list<std::pair<boost::filesystem::path, std::string> >&
     text_templates_as_string) const {
@@ -156,7 +160,7 @@ std::forward_list<text_template> workflow::parse_text_templates_activity(
     return r;
 }
 
-void workflow::populate_properties_activity(
+void workflow::populate_properties(
     const annotations::type_repository& annotations_repository,
     const dogen::formatters::repository& formatters_repository,
     std::forward_list<text_template>& text_templates) const {
@@ -166,7 +170,7 @@ void workflow::populate_properties_activity(
         tt.properties(f.make(tt.annotation()));
 }
 
-std::forward_list<formatters::file> workflow::format_text_templates_activity(
+std::forward_list<formatters::file> workflow::format_text_templates(
     const std::forward_list<text_template>& text_templates) const {
     std::forward_list<formatters::file> r;
     for (const auto& tt : text_templates)
@@ -175,7 +179,7 @@ std::forward_list<formatters::file> workflow::format_text_templates_activity(
 }
 
 void workflow::
-write_files_activity(const std::forward_list<formatters::file>& files) const {
+write_files(const std::forward_list<formatters::file>& files) const {
     BOOST_LOG_SEV(lg, debug) << "Files: " << files;
     formatters::filesystem_writer w(false/*force_write*/);
     w.write(files);
@@ -185,18 +189,18 @@ void workflow::execute(const boost::filesystem::path& p) const {
     BOOST_LOG_SEV(lg, debug) << "Executing workflow against: "
                              << p.generic_string();
 
-    const auto paths(get_text_template_paths_activity(p));
+    const auto paths(get_text_template_paths(p));
     validate_text_template_paths(paths);
 
-    const auto templates_as_strings(read_text_templates_activity(paths));
-    const auto oh(obtain_ownership_hierarchy_activity());
-    const auto annotations_rp(create_annotations_repository_activity(oh));
+    const auto templates_as_strings(read_text_templates(paths));
+    const auto ohrp(obtain_ownership_hierarchy_repository());
+    const auto atrp(create_annotations_type_repository(ohrp));
 
-    auto tt(parse_text_templates_activity(annotations_rp, templates_as_strings));
-    const auto formatters_rp(create_formatters_repository_activity());
-    populate_properties_activity(annotations_rp, formatters_rp, tt);
-    const auto files(format_text_templates_activity(tt));
-    write_files_activity(files);
+    auto tt(parse_text_templates(atrp, templates_as_strings));
+    const auto frp(create_formatters_repository());
+    populate_properties(atrp, frp, tt);
+    const auto files(format_text_templates(tt));
+    write_files(files);
 
     BOOST_LOG_SEV(lg, debug) << "Finished executing workflow.";
 }
