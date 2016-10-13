@@ -45,13 +45,6 @@ One way this could be achieved is by adding a "usages" property,
 computed during resolution. Resolver could keep track of the
 non-target names that are in use and return those.
 
-*** Document the conceptual model                                     :story:
-
-We seem to be pretty close to the end of the conceptual model for
-dogen. We should write it up whilst its still fresh. We should try to
-use mathematical notation where possible to practice it. We should
-also get it reviewed.
-
 *** Add test model sanitizer to test models target                    :story:
 
 At present if we build test models we don't seem to build the

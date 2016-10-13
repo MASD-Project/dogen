@@ -251,7 +251,23 @@ Sound on compilations:
 : && ogg123 -q  /usr/share/sounds/gnome/default/alerts/glass.ogg
 : || ogg123 -q  /usr/share/sounds/gnome/default/alerts/drip.ogg
 
+*** COMPLETED Minor tidy-up of the quilt.cpp diagram                  :story:
+    CLOSED: [2016-10-13 Thu 11:20]
+    CLOCK: [2016-10-13 Thu 10:40]--[2016-10-13 Thu 11:09] =>  0:29
+
+We need to do a minor cosmetic tidy-up of diagram after all the
+shuffling around we did on the previous sprint.
+
+*** STARTED Create a ownership hierarchy repository                   :story:
+    CLOCK: [2016-10-13 Thu 11:10]--[2016-10-13 Thu 11:32] =>  0:22
+
+
+At present we are recomputing the available facets etc in a few
+places. In reality we could just have a repository with all of these
+queries pre-computed.
+
 *** STARTED Rewrite profile support                                   :story:
+    CLOCK: [2016-10-13 Thu 09:38]--[2016-10-13 Thu 10:39] =>  1:01
     CLOCK: [2016-10-12 Wed 21:41]--[2016-10-12 Wed 22:31] =>  0:50
     CLOCK: [2016-10-12 Wed 20:43]--[2016-10-12 Wed 21:41] =>  0:58
     CLOCK: [2016-10-12 Wed 20:20]--[2016-10-12 Wed 20:42] =>  0:22
@@ -568,19 +584,6 @@ In inclusion expander, we have hacked the sorting:
 
 This could be handled via meta-data, supplying some kind of flag (sort last?).
 
-*** Perform the archetype / artefact renames                          :story:
-
-As per analysis story, we need to tidy-up terminology.
-
-Renames:
-
-- file: artefact
-- file formatter: artefact formatter
-- ownership_hierarchy: archetype_location, model_name becomes kernel,
-  facet name becomes facet and formatter name archetype. Add
-  sub-kernel.
-- Element concept becomes Entity.
-
 *** Investigate helper generation in formattables                     :story:
 
 We seem to be generating an helper for every node of every name tree,
@@ -589,12 +592,40 @@ should check the family and the streaming settings; if both of these
 are empty then there should not be a need for a helper. But maybe
 there is more to it.
 
+*** Document the conceptual model                                     :story:
+
+We seem to be pretty close to the end of the conceptual model for
+dogen. We should write it up whilst its still fresh. We should try to
+use mathematical notation where possible to practice it. We should
+also get it reviewed.
+
+*** Perform the archetype / artefact renames                          :story:
+
+As per analysis story, we need to tidy-up terminology.
+
+Renames:
+
+- file: artefact
+- file formatter: artefact formatter, artefact generator? factory?
+- ownership_hierarchy: archetype_location, model_name becomes kernel,
+  facet name becomes facet and formatter name archetype. Add
+  sub-kernel.
+- Element concept becomes Entity.
+
 *** Refactor ownership hierarchy                                      :story:
 
-Start implementing the archetype logic. Basically there is a artefact
-unique identifier
+Start implementing the archetype logic. Basically the ownership
+hierarchy is an archetype address in archetype space. It should also
+contain the type index for the underlying modeling type, since all
+points in archetype space map to a point in modeling space. With this
+we can now bucket addresses by type index in annotations' ownership
+hierarchy repository, which means that the expanders using the
+formatter container just for bucketing purposes can now rely on
+annotations. However, a few actually need access to the formatters
+(inclusion, canoncial formatter expander, etc).
 
-- rename it to =artefact_descriptor=.
+- rename it to =artefact_descriptor=. Actually archetype address as it
+  is a point (or set of points) in archetype space.
 - remove all dia fields; these are now file importer specific and
   never reach dynamic.
 - add =kernel= field. This is set to =stitch= or =quilt=.
