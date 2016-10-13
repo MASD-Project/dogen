@@ -63,7 +63,7 @@ private:
         const type_repository& trp,
         std::unordered_map<std::string, prof_ann>& pas) const;
 
-    void walk_up_parent_tree_and_merge(
+    const prof_ann& walk_up_parent_tree_and_merge(
         const std::string& current,
         std::unordered_map<std::string, prof_ann>& pas) const;
 

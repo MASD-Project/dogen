@@ -21,7 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
-#include "dogen/utility/io/list_io.hpp"
+#include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/io/vector_io.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/filesystem/file.hpp"
@@ -30,6 +30,7 @@
 #include "dogen/annotations/types/profile_hydrator.hpp"
 #include "dogen/annotations/types/profiling_error.hpp"
 #include "dogen/annotations/types/template_instantiator.hpp"
+#include "dogen/annotations/types/merger.hpp"
 #include "dogen/annotations/types/profiler.hpp"
 
 using namespace dogen::utility::log;
@@ -44,6 +45,7 @@ const std::string duplicate_profile_name("Duplicate profile name: ");
 const std::string invalid_facet_name("Invalid facet name: ");
 const std::string invalid_formatter_name("Invalid formatter name: ");
 const std::string no_profiles("Expected at least one profile.");
+const std::string profile_not_found("Profile not found: ");
 const std::string parent_not_found(
     "Parent not found in profile container: ");
 const std::string duplicate_label("Label applied more than once to profile: ");
@@ -88,6 +90,7 @@ create_prof_ann_map(const std::list<profile>& profiles) const {
         const auto prfn(prf.name());
         profiler::prof_ann pa;
         pa.prof = prf;
+        pa.merged = false;
 
         const auto pair(std::make_pair(prfn, pa));
         const auto inserted(r.insert(pair).second);
@@ -173,18 +176,71 @@ void profiler::instantiate_entry_templates(
             for (const auto& entry : entries)
                 pa.ann.entries().insert(entry);
 
-            BOOST_LOG_SEV(lg, debug) << "Annotation: " << pa.ann;
+            BOOST_LOG_SEV(lg, debug) << "Instantiated template: "
+                                     << pair.first
+                                     << " Result: " << pa.ann;
         }
     }
     BOOST_LOG_SEV(lg, debug) << "Instanted value templates.";
 }
 
-void profiler::walk_up_parent_tree_and_merge(const std::string& /*current*/,
-    std::unordered_map<std::string, prof_ann>& /*pa*/) const {
+const profiler::prof_ann& profiler::
+walk_up_parent_tree_and_merge(const std::string& current,
+    std::unordered_map<std::string, prof_ann>& pas) const {
+
+    BOOST_LOG_SEV(lg, debug) << "Merging profile: " << current;
+
+    /*
+     * Locate the original state of the current. It must exist due to
+     * validation, but just in case we check.
+     */
+    const auto i(pas.find(current));
+    if (i == pas.end()) {
+        BOOST_LOG_SEV(lg, error) << profile_not_found << current;
+        BOOST_THROW_EXCEPTION(profiling_error(profile_not_found + current));
+    }
+
+    /*
+     *  If we're already merged then there is nothing to do.
+     */
+    if (i->second.merged) {
+        BOOST_LOG_SEV(lg, debug) << "Already merged.";
+        return i->second;
+    }
+
+    /*
+     * If we have no parents then we're done.
+     */
+    if (i->second.prof.parents().empty()) {
+        BOOST_LOG_SEV(lg, debug) << "No parents so nothing to merge.";
+        i->second.merged = true;
+        return i->second;
+    }
+
+    /*
+     * Merge current with each of its parents. If they haven't been
+     * merged yet, recursion will take care of it.
+     */
+    for (const auto parent_name : i->second.prof.parents()) {
+        BOOST_LOG_SEV(lg, debug) << "Parent: " << parent_name;
+        const auto parent(walk_up_parent_tree_and_merge(parent_name, pas));
+        merger mg;
+        i->second.ann = mg.merge(i->second.ann, parent.ann);
+        i->second.merged = true;
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Done merging profile.";
+    return i->second;
 }
 
-void profiler::merge(std::unordered_map<std::string, prof_ann>& /*pa*/) const {
+void profiler::merge(std::unordered_map<std::string, prof_ann>& pas) const {
+    BOOST_LOG_SEV(lg, debug) << "Merging profiles. Total: " << pas.size();
 
+    for (const auto& pair : pas) {
+        const auto current(pair.first);
+        walk_up_parent_tree_and_merge(current, pas);
+    }
+    BOOST_LOG_SEV(lg, debug) << "Merged profiles.";
 }
 
 std::unordered_map<std::string, annotation>
@@ -193,7 +249,7 @@ profiler::create_annotation_map(
 
     std::unordered_map<std::string, annotation> r;
     for (const auto& pair : pas)
-        r[pair.first ] = pair.second.ann;
+        r[pair.first] = pair.second.ann;
 
     return r;
 }
@@ -203,6 +259,7 @@ profiler::generate(const std::vector<boost::filesystem::path>& data_dirs,
     const ownership_hierarchy_repository& ohrp,
     const type_repository& trp) const {
 
+    BOOST_LOG_SEV(lg, debug) << "Generating profiles.";
     /*
      * First we obtain the set of directories that contain profile
      * data, by looking into the supplied data directories at a
@@ -237,6 +294,7 @@ profiler::generate(const std::vector<boost::filesystem::path>& data_dirs,
      */
     merge(pas);
     const auto r(create_annotation_map(pas));
+    BOOST_LOG_SEV(lg, debug) << "Generated profiles. Result: " << r;
     return r;
 }
 
