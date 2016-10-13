@@ -14,27 +14,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-13 Thu 23:24]
+#+CAPTION: Clock summary at [2016-10-13 Thu 23:50]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *33:57* |       |       | 100.0 |
+| *Total time*                                                                | *34:22* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 33:57   |       |       | 100.0 |
-| Active                                                                      |         | 33:57 |       | 100.0 |
+| Stories                                                                     | 34:22   |       |       | 100.0 |
+| Active                                                                      |         | 34:22 |       | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  0:22 |   1.1 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:19 |   0.9 |
 | COMPLETED Improve bintray support                                           |         |       |  0:26 |   1.3 |
-| COMPLETED Refactor opaque infrastructure                                    |         |       |  1:17 |   3.8 |
+| COMPLETED Refactor opaque infrastructure                                    |         |       |  1:17 |   3.7 |
 | COMPLETED Remove any remnants of annotations from quilt                     |         |       |  0:05 |   0.2 |
-| COMPLETED Solve the issue of too many "configurations"                      |         |       |  4:01 |  11.8 |
+| COMPLETED Solve the issue of too many "configurations"                      |         |       |  4:01 |  11.7 |
 | COMPLETED Merge decoration configuration and annotations factories          |         |       |  0:18 |   0.9 |
-| COMPLETED Move annotation factories into expander in yarn                   |         |       |  1:11 |   3.5 |
-| COMPLETED Clean up terminology in dynamic                                   |         |       | 15:12 |  44.8 |
+| COMPLETED Move annotation factories into expander in yarn                   |         |       |  1:11 |   3.4 |
+| COMPLETED Clean up terminology in dynamic                                   |         |       | 15:12 |  44.2 |
 | COMPLETED Minor tidy-up of the quilt.cpp diagram                            |         |       |  0:29 |   1.4 |
-| COMPLETED Create a ownership hierarchy repository                           |         |       |  1:43 |   5.1 |
+| COMPLETED Create a ownership hierarchy repository                           |         |       |  1:43 |   5.0 |
 | COMPLETED Use vector of elements in model                                   |         |       |  0:10 |   0.5 |
-| STARTED Rewrite profile support                                             |         |       |  8:24 |  24.7 |
+| STARTED Rewrite profile support                                             |         |       |  8:49 |  25.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -281,6 +281,7 @@ use a vector instead of a list.
 After the change, performance did not move very much.
 
 *** STARTED Rewrite profile support                                   :story:
+    CLOCK: [2016-10-13 Thu 23:25]--[2016-10-13 Thu 23:50] =>  0:25
     CLOCK: [2016-10-13 Thu 22:45]--[2016-10-13 Thu 23:24] =>  0:39
     CLOCK: [2016-10-13 Thu 21:24]--[2016-10-13 Thu 22:44] =>  1:20
     CLOCK: [2016-10-13 Thu 20:29]--[2016-10-13 Thu 21:23] =>  0:54
@@ -321,6 +322,8 @@ Notes:
 - clean up names in knit workflow (repository, method name)
   - supply ownership hierarchy to yarn workflow and to pre-merge workflow;
 - plug in profiler within annotation group factory.
+- we are not enabling cmake in types+io etc profiles. We
+  probably should. The names are becoming a bit large though.
 
 *** Registrar in quilt is not being generated                         :story:
 

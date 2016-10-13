@@ -28,26 +28,22 @@ namespace formattables {
 model::model(
     const std::unordered_map<std::string, dogen::quilt::cpp::formattables::streaming_properties>& streaming_properties,
     const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formattable>& formattables,
-    const std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_properties>& facet_properties,
-    const dogen::quilt::cpp::formattables::profile_group& global_profile_group)
+    const std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_properties>& facet_properties)
     : streaming_properties_(streaming_properties),
       formattables_(formattables),
-      facet_properties_(facet_properties),
-      global_profile_group_(global_profile_group) { }
+      facet_properties_(facet_properties) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
     swap(streaming_properties_, other.streaming_properties_);
     swap(formattables_, other.formattables_);
     swap(facet_properties_, other.facet_properties_);
-    swap(global_profile_group_, other.global_profile_group_);
 }
 
 bool model::operator==(const model& rhs) const {
     return streaming_properties_ == rhs.streaming_properties_ &&
         formattables_ == rhs.formattables_ &&
-        facet_properties_ == rhs.facet_properties_ &&
-        global_profile_group_ == rhs.global_profile_group_;
+        facet_properties_ == rhs.facet_properties_;
 }
 
 model& model::operator=(model other) {
@@ -102,22 +98,6 @@ void model::facet_properties(const std::unordered_map<std::string, dogen::quilt:
 
 void model::facet_properties(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_properties>&& v) {
     facet_properties_ = std::move(v);
-}
-
-const dogen::quilt::cpp::formattables::profile_group& model::global_profile_group() const {
-    return global_profile_group_;
-}
-
-dogen::quilt::cpp::formattables::profile_group& model::global_profile_group() {
-    return global_profile_group_;
-}
-
-void model::global_profile_group(const dogen::quilt::cpp::formattables::profile_group& v) {
-    global_profile_group_ = v;
-}
-
-void model::global_profile_group(const dogen::quilt::cpp::formattables::profile_group&& v) {
-    global_profile_group_ = std::move(v);
 }
 
 } } } }

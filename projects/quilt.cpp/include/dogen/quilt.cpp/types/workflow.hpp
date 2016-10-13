@@ -78,7 +78,6 @@ private:
      * @brief Create the formattables representation of the yarn model.
      */
     formattables::model create_formattables_model(
-        const std::vector<boost::filesystem::path>& data_directories,
         const options::cpp_options& opts,
         const annotations::type_repository& atrp,
         const annotations::annotation& root,

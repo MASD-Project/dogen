@@ -20,7 +20,6 @@
  */
 #include "dogen/quilt.cpp/hash/formattables/model_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/formattable_hash.hpp"
-#include "dogen/quilt.cpp/hash/formattables/profile_group_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/facet_properties_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/streaming_properties_hash.hpp"
 
@@ -72,7 +71,6 @@ std::size_t model_hasher::hash(const model& v) {
     combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_streaming_properties(v.streaming_properties()));
     combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formattable(v.formattables()));
     combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_facet_properties(v.facet_properties()));
-    combine(seed, v.global_profile_group());
 
     return seed;
 }

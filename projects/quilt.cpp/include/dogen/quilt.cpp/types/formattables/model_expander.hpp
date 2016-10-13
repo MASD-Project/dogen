@@ -47,12 +47,6 @@ private:
     void expand_streaming(
         const annotations::type_repository& atrp, model& fm) const;
 
-    void expand_profile_groups(
-        const std::vector<boost::filesystem::path>& data_dirs,
-        const annotations::type_repository& atrp,
-        const annotations::annotation& root, const formatters::container& fc,
-        model& fm) const;
-
     void expand_enablement(const annotations::type_repository& atrp,
         const annotations::annotation& root, const formatters::container& fc,
         model& fm) const;
@@ -84,8 +78,7 @@ private:
     void expand_facet_directories(const locator& l, model& fm) const;
 
 public:
-    void expand(const std::vector<boost::filesystem::path>& data_dirs,
-        const annotations::type_repository& atrp,
+    void expand(const annotations::type_repository& atrp,
         const annotations::annotation& root,
         const dogen::formatters::decoration_properties_factory& dpf,
         const formatters::container& fc, const locator& l, model& fm) const;

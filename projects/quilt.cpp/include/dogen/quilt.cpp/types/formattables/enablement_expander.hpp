@@ -34,7 +34,6 @@
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/formattables/local_enablement_configuration.hpp"
 #include "dogen/quilt.cpp/types/formattables/global_enablement_configuration.hpp"
-#include "dogen/quilt.cpp/types/formattables/profile_group.hpp"
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
 #include "dogen/quilt.cpp/types/formattables/model.hpp"
 
@@ -65,10 +64,9 @@ private:
     typedef std::unordered_map<std::string, global_enablement_configuration>
     global_enablement_configurations_type;
 
-    global_enablement_configurations_type obtain_global_configurations(
-        const global_type_group_type& gtg,
-        const annotations::annotation& root, const formatters::container& fc,
-        const profile_group& gpg) const;
+    global_enablement_configurations_type
+    obtain_global_configurations(const global_type_group_type& gtg,
+        const annotations::annotation& root) const;
 
     void update_facet_enablement(const formatters::container& fc,
         const global_enablement_configurations_type& gcs, model& fm) const;
@@ -99,10 +97,9 @@ private:
     typedef std::unordered_map<std::string, local_enablement_configuration>
     local_enablement_configurations_type;
 
-    local_enablement_configurations_type obtain_local_configurations(
-        const local_type_group_type& ltg,
-        const annotations::annotation& o, const formatters::container& fc,
-        const boost::optional<profile_group>& lpg) const;
+    local_enablement_configurations_type
+    obtain_local_configurations(const local_type_group_type& ltg,
+        const annotations::annotation& o) const;
 
 private:
     bool has_user_defined_service(

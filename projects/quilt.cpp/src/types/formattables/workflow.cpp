@@ -76,17 +76,15 @@ make_model(const formatters::container& fc, const yarn::model& m) const {
 }
 
 void workflow::expand_model(
-    const std::vector<boost::filesystem::path>& data_directories,
     const annotations::type_repository& atrp,
     const annotations::annotation& root,
     const dogen::formatters::decoration_properties_factory& dpf,
     const formatters::container& fc, const locator& l, model& fm) const {
     model_expander ex;
-    ex.expand(data_directories, atrp, root, dpf, fc, l, fm);
+    ex.expand(atrp, root, dpf, fc, l, fm);
 }
 
 model workflow::execute(
-    const std::vector<boost::filesystem::path>& data_directories,
     const options::cpp_options& opts, const annotations::type_repository& atrp,
     const annotations::annotation& root,
     const dogen::formatters::decoration_properties_factory& dpf,
@@ -97,7 +95,7 @@ model workflow::execute(
     const auto module_ids(obtain_module_ids(m));
     const auto pdp(opts.project_directory_path());
     const locator l(pdp, atrp, fc, root, m.name(), module_ids);
-    expand_model(data_directories, atrp, root, dpf, fc, l, r);
+    expand_model(atrp, root, dpf, fc, l, r);
 
     return r;
 }

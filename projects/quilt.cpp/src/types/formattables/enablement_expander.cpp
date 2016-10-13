@@ -118,14 +118,12 @@ enablement_expander::make_global_type_group(
 enablement_expander::global_enablement_configurations_type
 enablement_expander::obtain_global_configurations(
     const std::unordered_map<std::string, global_type_group>& gtg,
-    const annotations::annotation& root, const formatters::container& fc,
-    const profile_group& gpg) const {
+    const annotations::annotation& root) const {
 
     BOOST_LOG_SEV(lg, debug) << "Creating global enablement configuration.";
 
     global_enablement_configurations_type r;
     const annotations::entry_selector s(root);
-    const auto& fffn(fc.file_formatters_by_formatter_name());
     for (const auto& pair : gtg) {
         const auto& fmtn(pair.first);
         const auto& t(pair.second);
@@ -136,98 +134,9 @@ enablement_expander::obtain_global_configurations(
          */
         global_enablement_configuration gec;
         gec.model_enabled(s.get_boolean_content_or_default(t.model_enabled));
-
-        /*
-         * First, we deal with facets. Lets see if the user has set
-         * facet enablement via the meta-data. If so, it takes
-         * priority.
-         */
-        if (s.has_entry(t.facet_enabled))
-            gec.facet_enabled(s.get_boolean_content(t.facet_enabled));
-        else {
-            /*
-             * Now see if the profile sets the enablement for this
-             * facet explicitly.
-             */
-            const auto i(fffn.find(fmtn));
-            if (i == fffn.end()) {
-                BOOST_LOG_SEV(lg, error) << formatter_not_found << fmtn;
-                BOOST_THROW_EXCEPTION(
-                    expansion_error(formatter_not_found + fmtn));
-            }
-
-            const auto& fmt(*i->second);
-            const auto& oh(fmt.ownership_hierarchy());
-            const auto fctn(oh.facet_name());
-            const auto j(gpg.facet_profiles().find(fctn));
-            if (j != gpg.facet_profiles().end()) {
-                const auto& fct_prf(j->second);
-                gec.facet_enabled(fct_prf.enabled());
-            } else {
-                /*
-                 * Lets see if there is a default profile for all facets.
-                 */
-                if (gpg.default_facet_profile()) {
-                    const auto& fct_prf(*gpg.default_facet_profile());
-                    gec.facet_enabled(fct_prf.enabled());
-                } else {
-                    /*
-                     * We've now exhausted all alternatives, lets just
-                     * use the default value of the meta-data. It must
-                     * be set.
-                     */
-                    const auto& dv(t.facet_enabled.default_value());
-                    if (!dv) {
-                        const auto qfn(t.facet_enabled.name().qualified());
-                        BOOST_LOG_SEV(lg, error) << default_value_unset << qfn;
-                        BOOST_THROW_EXCEPTION(
-                            expansion_error(default_value_unset + qfn));
-                    }
-                    gec.facet_enabled(s.get_boolean_content(*dv));
-                }
-            }
-        }
-
-        /*
-         * Now for the formatters. First, see if the user has set
-         * formatter enablement via the meta-data. If so, it takes
-         * priority.
-         */
-        if (s.has_entry(t.formatter_enabled))
-            gec.formatter_enabled(s.get_boolean_content(t.formatter_enabled));
-        else {
-            /*
-             * Now see if the profile sets the enablement for this
-             * formatter explicitly.
-             */
-            const auto j(gpg.formatter_profiles().find(fmtn));
-            if (j != gpg.formatter_profiles().end()) {
-                const auto& fmt_prf(j->second);
-                gec.formatter_enabled(fmt_prf.enabled());
-            } else {
-                /*
-                 * Lets see if there is a default profile for all formatters.
-                 */
-                if (gpg.default_formatter_profile()) {
-                    const auto& fmt_prf(*gpg.default_formatter_profile());
-                    gec.formatter_enabled(fmt_prf.enabled());
-                } else {
-                    /*
-                     * We've now exhausted all alternatives, lets just
-                     * use the default value of the meta-data. It must
-                     * be set.
-                     */
-                    const auto& dv(t.formatter_enabled.default_value());
-                    if (!dv) {
-                        const auto qfn(t.formatter_enabled.name().qualified());
-                        BOOST_LOG_SEV(lg, error) << default_value_unset << qfn;
-                        BOOST_THROW_EXCEPTION(
-                            expansion_error(default_value_unset + qfn));
-                    }
-                    gec.formatter_enabled(s.get_boolean_content(*dv));
-                }
-            }
-        }
+        gec.facet_enabled(s.get_boolean_content_or_default(t.facet_enabled));
+        gec.formatter_enabled(
+            s.get_boolean_content_or_default(t.formatter_enabled));
 
         r[fmtn] = gec;
     }
@@ -346,8 +255,7 @@ enablement_expander::bucket_local_type_group_by_type_index(
 
 enablement_expander::local_enablement_configurations_type enablement_expander::
 obtain_local_configurations(const local_type_group_type& ltg,
-    const annotations::annotation& o,  const formatters::container& fc,
-    const boost::optional<profile_group>& lpg) const {
+    const annotations::annotation& o) const {
 
     BOOST_LOG_SEV(lg, debug) << "Obtaining local configurations.";
     local_enablement_configurations_type r;
@@ -357,101 +265,11 @@ obtain_local_configurations(const local_type_group_type& ltg,
         const auto& t(pair.second);
 
         local_enablement_configuration lec;
-        const auto& fffn(fc.file_formatters_by_formatter_name());
-        const bool has_local_profile_group(lpg);
-
-        /*
-         * First, we deal with facets. Lets see if the user has set
-         * facet enablement via the meta-data. If so, it takes
-         * priority.
-         */
         if (s.has_entry(t.facet_enabled))
             lec.facet_enabled(s.get_boolean_content(t.facet_enabled));
-        else if (has_local_profile_group) {
-            /*
-             * We have a local profile group, so lets see if the
-             * profile sets the enablement for this facet explicitly.
-             */
-            const auto i(fffn.find(fmtn));
-            if (i == fffn.end()) {
-                BOOST_LOG_SEV(lg, error) << formatter_not_found << fmtn;
-                BOOST_THROW_EXCEPTION(
-                    expansion_error(formatter_not_found + fmtn));
-            }
 
-            const auto& fmt(*i->second);
-            const auto& oh(fmt.ownership_hierarchy());
-            const auto fctn(oh.facet_name());
-            const auto j(lpg->facet_profiles().find(fctn));
-            if (j != lpg->facet_profiles().end()) {
-                const auto& fct_prf(j->second);
-                lec.facet_enabled(fct_prf.enabled());
-            } else {
-                /*
-                 * Lets see if there is a default profile for all facets.
-                 */
-                if (lpg->default_facet_profile()) {
-                    const auto& fct_prf(*(lpg->default_facet_profile()));
-                    lec.facet_enabled(fct_prf.enabled());
-                }
-            }
-        } else {
-            /*
-             * We've now exhausted all alternatives, lets just
-             * use the default value of the meta-data. It must
-             * be set.
-             */
-            const auto& dv(t.facet_enabled.default_value());
-            if (!dv) {
-                const auto qfn(t.facet_enabled.name().qualified());
-                BOOST_LOG_SEV(lg, error) << default_value_unset << qfn;
-                BOOST_THROW_EXCEPTION(
-                    expansion_error(default_value_unset + qfn));
-            }
-            lec.facet_enabled(s.get_boolean_content(*dv));
-        }
-
-        /*
-         * Now for the formatters. First, see if the user has set
-         * formatter enablement via the meta-data. If so, it takes
-         * priority.
-         */
         if (s.has_entry(t.formatter_enabled))
             lec.formatter_enabled(s.get_boolean_content(t.formatter_enabled));
-        else if (has_local_profile_group) {
-            /*
-             * We have a local profile group, so lets see if the
-             * profile sets the enablement for the formatter
-             * explicitly.
-             */
-            const auto j(lpg->formatter_profiles().find(fmtn));
-            if (j != lpg->formatter_profiles().end()) {
-                const auto& fmt_prf(j->second);
-                lec.formatter_enabled(fmt_prf.enabled());
-            } else {
-                /*
-                 * Lets see if there is a default profile for all formatters.
-                 */
-                if (lpg->default_formatter_profile()) {
-                    const auto& fmt_prf(*(lpg->default_formatter_profile()));
-                    lec.formatter_enabled(fmt_prf.enabled());
-                }
-            }
-        } else {
-            /*
-             * We've now exhausted all alternatives, lets just
-             * use the default value of the meta-data. It must
-             * be set.
-             */
-            const auto& dv(t.formatter_enabled.default_value());
-            if (!dv) {
-                const auto qfn(t.formatter_enabled.name().qualified());
-                BOOST_LOG_SEV(lg, error) << default_value_unset << qfn;
-                BOOST_THROW_EXCEPTION(
-                    expansion_error(default_value_unset + qfn));
-            }
-            lec.formatter_enabled(s.get_boolean_content(*dv));
-        }
 
         r[fmtn] = lec;
     }
@@ -580,8 +398,7 @@ void enablement_expander::expand(const annotations::type_repository& atrp,
      * Read the values for the global field definitions, and update
      * the facet configurations with it.
      */
-    const auto gpg(fm.global_profile_group());
-    const auto gcs(obtain_global_configurations(gtg, root, fc, gpg));
+    const auto gcs(obtain_global_configurations(gtg, root));
     update_facet_enablement(fc, gcs, fm);
 
     /*
@@ -602,8 +419,6 @@ void enablement_expander::expand(const annotations::type_repository& atrp,
         BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
 
         auto& formattable(pair.second);
-        const auto& eprops(formattable.element_properties());
-        const auto& lpg(eprops.local_profile_group());
         for (const auto& segment : formattable.all_segments()) {
             const auto& e(*segment);
 
@@ -627,7 +442,7 @@ void enablement_expander::expand(const annotations::type_repository& atrp,
             }
 
             const auto& t(i->second);
-            auto lcs(obtain_local_configurations(t, e.annotation(), fc, lpg));
+            auto lcs(obtain_local_configurations(t, e.annotation()));
 
             /*
              * Once we got both the global and the local configuration, we

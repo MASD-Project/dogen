@@ -52,10 +52,6 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
     test_equality<formattables::aspect_properties_generator>();
     test_equality<formattables::facet_properties_generator>();
     test_equality<formattables::helper_descriptor_generator>();
-    test_equality<formattables::decoration_profile_generator>();
-    test_equality<formattables::facet_profile_generator>();
-    test_equality<formattables::formatter_profile_generator>();
-    test_equality<formattables::profile_types_generator>();
     test_equality<formattables::streaming_properties_generator>();
     test_equality<formattables::inclusion_directive_configuration_generator>();
     test_equality<formattables::locator_configuration_generator>();

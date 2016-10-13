@@ -52,10 +52,6 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
     test_hashing<formattables::aspect_properties_generator>();
     test_hashing<formattables::facet_properties_generator>();
     test_hashing<formattables::helper_descriptor_generator>();
-    test_hashing<formattables::decoration_profile_generator>();
-    test_hashing<formattables::facet_profile_generator>();
-    test_hashing<formattables::formatter_profile_generator>();
-    test_hashing<formattables::profile_types_generator>();
     test_hashing<formattables::streaming_properties_generator>();
     test_hashing<formattables::locator_configuration_generator>();
     test_hashing<formattables::locator_facet_configuration_generator>();
