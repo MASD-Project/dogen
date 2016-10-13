@@ -14,27 +14,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-13 Thu 13:43]
+#+CAPTION: Clock summary at [2016-10-13 Thu 17:16]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *29:04* |       |       | 100.0 |
+| *Total time*                                                                | *30:45* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 29:04   |       |       | 100.0 |
-| Active                                                                      |         | 29:04 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  0:22 |   1.3 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  0:19 |   1.1 |
-| COMPLETED Improve bintray support                                           |         |       |  0:26 |   1.5 |
-| COMPLETED Refactor opaque infrastructure                                    |         |       |  1:17 |   4.4 |
+| Stories                                                                     | 30:45   |       |       | 100.0 |
+| Active                                                                      |         | 30:45 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  0:22 |   1.2 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  0:19 |   1.0 |
+| COMPLETED Improve bintray support                                           |         |       |  0:26 |   1.4 |
+| COMPLETED Refactor opaque infrastructure                                    |         |       |  1:17 |   4.2 |
 | COMPLETED Remove any remnants of annotations from quilt                     |         |       |  0:05 |   0.3 |
-| COMPLETED Solve the issue of too many "configurations"                      |         |       |  4:01 |  13.8 |
+| COMPLETED Solve the issue of too many "configurations"                      |         |       |  4:01 |  13.1 |
 | COMPLETED Merge decoration configuration and annotations factories          |         |       |  0:18 |   1.0 |
-| COMPLETED Move annotation factories into expander in yarn                   |         |       |  1:11 |   4.1 |
-| COMPLETED Clean up terminology in dynamic                                   |         |       | 15:12 |  52.3 |
-| COMPLETED Minor tidy-up of the quilt.cpp diagram                            |         |       |  0:29 |   1.7 |
-| COMPLETED Create a ownership hierarchy repository                           |         |       |  1:43 |   5.9 |
-| COMPLETED Use vector of elements in model                                   |         |       |  0:10 |   0.6 |
-| STARTED Rewrite profile support                                             |         |       |  3:31 |  12.1 |
+| COMPLETED Move annotation factories into expander in yarn                   |         |       |  1:11 |   3.8 |
+| COMPLETED Clean up terminology in dynamic                                   |         |       | 15:12 |  49.4 |
+| COMPLETED Minor tidy-up of the quilt.cpp diagram                            |         |       |  0:29 |   1.6 |
+| COMPLETED Create a ownership hierarchy repository                           |         |       |  1:43 |   5.6 |
+| COMPLETED Use vector of elements in model                                   |         |       |  0:10 |   0.5 |
+| STARTED Rewrite profile support                                             |         |       |  5:12 |  16.9 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -281,6 +281,9 @@ use a vector instead of a list.
 After the change, performance did not move very much.
 
 *** STARTED Rewrite profile support                                   :story:
+    CLOCK: [2016-10-13 Thu 16:40]--[2016-10-13 Thu 17:16] =>  0:36
+    CLOCK: [2016-10-13 Thu 14:43]--[2016-10-13 Thu 14:50] =>  0:07
+    CLOCK: [2016-10-13 Thu 13:44]--[2016-10-13 Thu 14:42] =>  0:58
     CLOCK: [2016-10-13 Thu 09:38]--[2016-10-13 Thu 10:39] =>  1:01
     CLOCK: [2016-10-12 Wed 21:41]--[2016-10-12 Wed 22:31] =>  0:50
     CLOCK: [2016-10-12 Wed 20:43]--[2016-10-12 Wed 21:41] =>  0:58
@@ -827,5 +830,11 @@ src level.
 
 In order to implement this story we need to have a working odb setup
 to test it and ensure we didn't break anything.
+
+*** Split annotation expansion from parsing in stitch                 :story:
+
+At present we are doing both the parsing and the annotation expansion
+within the parser. It makes more sense to keep the parser clean and do
+the expansion somewhere else.
 
 ** Deprecated

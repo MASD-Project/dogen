@@ -56,6 +56,12 @@ namespace stitch {
 
 workflow::workflow() : formatter_() {}
 
+std::vector<boost::filesystem::path>
+workflow::create_data_directories() const {
+    const auto data_dir(dogen::utility::filesystem::data_files_directory());
+    return std::vector<boost::filesystem::path> { data_dir };
+}
+
 void workflow::perform_expansion(const boost::filesystem::path& p,
     annotations::annotation& a) const {
     expander e;
@@ -121,28 +127,27 @@ workflow::obtain_ownership_hierarchy_repository() const {
     return r;
 }
 
-dogen::formatters::repository workflow::
-create_formatters_repository() const {
-    using dogen::utility::filesystem::data_files_directory;
-    std::forward_list<boost::filesystem::path> dirs { data_files_directory() };
+dogen::formatters::repository workflow::create_formatters_repository(
+    const std::vector<boost::filesystem::path>& data_dirs) const {
     dogen::formatters::hydration_workflow hw;
-    return hw.hydrate(dirs);
+    return hw.hydrate(data_dirs);
 }
 
 annotations::type_repository workflow::create_annotations_type_repository(
+    const std::vector<boost::filesystem::path>& data_dirs,
     const annotations::ownership_hierarchy_repository& ohrp) const {
-    const auto data_dir(dogen::utility::filesystem::data_files_directory());
-    const std::forward_list<boost::filesystem::path> data_dirs = { data_dir };
     annotations::type_repository_factory f;
     return f.make(ohrp, data_dirs);
 }
 
 std::forward_list<text_template> workflow::parse_text_templates(
-    const annotations::type_repository& rp,
+    const std::vector<boost::filesystem::path>& data_dirs,
+    const annotations::ownership_hierarchy_repository& ohrp,
+    const annotations::type_repository& atrp,
     const std::forward_list<std::pair<boost::filesystem::path, std::string> >&
     text_templates_as_string) const {
     std::forward_list<text_template> r;
-    const annotations::annotation_groups_factory f(rp);
+    const annotations::annotation_groups_factory f(data_dirs, ohrp, atrp);
     const parser p(f);
     for (const auto& pair : text_templates_as_string) {
         BOOST_LOG_SEV(lg, debug) << "Parsing file: "
@@ -194,10 +199,11 @@ void workflow::execute(const boost::filesystem::path& p) const {
 
     const auto templates_as_strings(read_text_templates(paths));
     const auto ohrp(obtain_ownership_hierarchy_repository());
-    const auto atrp(create_annotations_type_repository(ohrp));
+    const auto data_dirs(create_data_directories());
+    const auto atrp(create_annotations_type_repository(data_dirs, ohrp));
 
-    auto tt(parse_text_templates(atrp, templates_as_strings));
-    const auto frp(create_formatters_repository());
+    auto tt(parse_text_templates(data_dirs, ohrp, atrp, templates_as_strings));
+    const auto frp(create_formatters_repository(data_dirs));
     populate_properties(atrp, frp, tt);
     const auto files(format_text_templates(tt));
     write_files(files);

@@ -25,6 +25,9 @@
 #pragma once
 #endif
 
+#include <list>
+#include <boost/filesystem/path.hpp>
+#include "dogen/annotations/types/ownership_hierarchy_repository.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 
@@ -37,8 +40,9 @@ namespace yarn {
  */
 class annotations_expander {
 public:
-    void expand(const annotations::type_repository& atrp,
-        intermediate_model& im) const;
+    void expand(const std::vector<boost::filesystem::path>& data_dirs,
+        const annotations::ownership_hierarchy_repository& ohrp,
+        const annotations::type_repository& atrp, intermediate_model& im) const;
 };
 
 } }

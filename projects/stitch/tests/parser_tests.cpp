@@ -20,6 +20,8 @@
  */
 #include <boost/test/unit_test.hpp>
 #include "dogen/utility/test/logging.hpp"
+#include "dogen/utility/filesystem/path.hpp"
+#include "dogen/utility/filesystem/file.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
 #include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
@@ -143,10 +145,13 @@ const std::string invalid_characters("Invalid characters used");
 dogen::stitch::text_template
 parse(const std::string& s) {
     dogen::annotations::test::mock_type_repository_factory rf;
-    const auto rp(rf.make());
+    const auto atrp(rf.make());
     const bool throw_on_missing_field_definition(false);
+    dogen::annotations::ownership_hierarchy_repository ohrp;
+    using namespace dogen::utility::filesystem;
+    std::vector<boost::filesystem::path> data_dirs({ data_files_directory() });
     dogen::annotations::annotation_groups_factory
-        f(rp, throw_on_missing_field_definition);
+        f(data_dirs, ohrp, atrp, throw_on_missing_field_definition);
     const dogen::stitch::parser p(f);
     return p.parse(s);
 }

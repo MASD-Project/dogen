@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <vector>
 #include <string>
 #include <memory>
 #include <forward_list>
@@ -56,13 +57,13 @@ public:
     ~workflow() noexcept;
 
 private:
-    std::forward_list<boost::filesystem::path> make_data_directories() const;
+    std::vector<boost::filesystem::path> make_data_directories() const;
 
     /**
      * @brief Creates the formatters' repository.
      */
     dogen::formatters::repository create_formatters_repository(const
-        std::forward_list<boost::filesystem::path>& data_directories) const;
+        std::vector<boost::filesystem::path>& data_directories) const;
 
     /**
      * @brief Create the decoration configuration factory.
@@ -77,7 +78,7 @@ private:
      * @brief Create the formattables representation of the yarn model.
      */
     formattables::model create_formattables_model(
-        const std::forward_list<boost::filesystem::path>& data_directories,
+        const std::vector<boost::filesystem::path>& data_directories,
         const options::cpp_options& opts,
         const annotations::type_repository& atrp,
         const annotations::annotation& root,

@@ -24,6 +24,7 @@
 #pragma once
 #endif
 
+#include "dogen/annotations/types/ownership_hierarchy_repository.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/options/types/input_options.hpp"
 #include "dogen/yarn/types/descriptor.hpp"
@@ -42,7 +43,7 @@ private:
      * @brief Obtain the model descriptors.
      */
     std::list<descriptor> obtain_descriptors(
-        const std::list<boost::filesystem::path>& dirs,
+        const std::vector<boost::filesystem::path>& dirs,
         const options::input_options& io) const;
 
     /**
@@ -60,8 +61,9 @@ private:
      * @brief Performs an expansion of all annotations objects on the
      * model.
      */
-    void expand_annotations(const annotations::type_repository& atrp,
-        intermediate_model& im) const;
+    void expand_annotations(const std::vector<boost::filesystem::path>& data_dirs,
+        const annotations::ownership_hierarchy_repository& ohrp,
+        const annotations::type_repository& atrp, intermediate_model& im) const;
 
     /**
      * @brief Performs the expansion of the origin type.
@@ -86,8 +88,9 @@ public:
      * @brief Executes the workflow.
      */
     std::list<intermediate_model>
-    execute(const annotations::type_repository& atrp,
-        const std::list<boost::filesystem::path>& dirs,
+    execute(const std::vector<boost::filesystem::path>& data_dirs,
+        const annotations::ownership_hierarchy_repository& ohrp,
+        const annotations::type_repository& atrp,
         const options::input_options& io,
         frontend_registrar& rg) const;
 };

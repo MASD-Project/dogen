@@ -31,7 +31,7 @@ namespace dogen {
 namespace yarn {
 
 std::list<descriptor> pre_merge_workflow::
-obtain_descriptors(const std::list<boost::filesystem::path>& dirs,
+obtain_descriptors(const std::vector<boost::filesystem::path>& dirs,
     const options::input_options& io) const {
     descriptor_factory f;
     return f.make(dirs, io);
@@ -50,10 +50,11 @@ void pre_merge_workflow::expand_modules(intermediate_model& im) const {
 }
 
 void pre_merge_workflow::
-expand_annotations(const annotations::type_repository& atrp,
-    intermediate_model& im) const {
+expand_annotations(const std::vector<boost::filesystem::path>& data_dirs,
+    const annotations::ownership_hierarchy_repository& ohrp,
+    const annotations::type_repository& atrp, intermediate_model& im) const {
     annotations_expander ex;
-    ex.expand(atrp, im);
+    ex.expand(data_dirs, ohrp, atrp, im);
 }
 
 void pre_merge_workflow::expand_origin(const annotations::type_repository& atrp,
@@ -75,12 +76,13 @@ void pre_merge_workflow::expand_parsing(
 }
 
 std::list<intermediate_model>
-pre_merge_workflow::execute(const annotations::type_repository& atrp,
-    const std::list<boost::filesystem::path>& dirs,
-    const options::input_options& io,
-    frontend_registrar& rg) const {
+pre_merge_workflow::
+execute(const std::vector<boost::filesystem::path>& data_dirs,
+    const annotations::ownership_hierarchy_repository& ohrp,
+    const annotations::type_repository& atrp,
+    const options::input_options& io, frontend_registrar& rg) const {
 
-    const auto d(obtain_descriptors(dirs, io));
+    const auto d(obtain_descriptors(data_dirs, io));
     auto r(obtain_intermediate_models(rg, d));
     for (auto& im: r) {
         /*
@@ -88,7 +90,7 @@ pre_merge_workflow::execute(const annotations::type_repository& atrp,
          * is populated with annotations properties before being
          * copied over.
          */
-        expand_annotations(atrp, im);
+        expand_annotations(data_dirs, ohrp, atrp, im);
         expand_modules(im);
         expand_origin(atrp, im);
         expand_type_parameters(atrp, im);

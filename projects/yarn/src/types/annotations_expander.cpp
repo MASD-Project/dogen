@@ -113,13 +113,15 @@ updater::updater(const yarn::name& model_name,
                          annotation_groups_(annotation_groups) {}
 
 void annotations_expander::
-expand(const annotations::type_repository& atrp, intermediate_model& im) const {
+expand(const std::vector<boost::filesystem::path>& data_dirs,
+    const annotations::ownership_hierarchy_repository& ohrp,
+    const annotations::type_repository& atrp, intermediate_model& im) const {
     BOOST_LOG_SEV(lg, debug) << "Starting annotations expansion for model: "
                              << im.name().id();
     BOOST_LOG_SEV(lg, debug) << "Scribble groups: "
                              << im.indices().scribble_groups();
 
-    const annotations::annotation_groups_factory f(atrp);
+    const annotations::annotation_groups_factory f(data_dirs, ohrp, atrp);
     const auto sgrps(f.build(im.name().id(), im.indices().scribble_groups()));
     updater u(im.name(), sgrps);
     yarn::elements_traversal(im, u);

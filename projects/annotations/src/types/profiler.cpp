@@ -21,7 +21,8 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
-#include "dogen/utility/io/forward_list_io.hpp"
+#include "dogen/utility/io/list_io.hpp"
+#include "dogen/utility/io/vector_io.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/filesystem/file.hpp"
 #include "dogen/annotations/io/profile_io.hpp"
@@ -41,25 +42,23 @@ const std::string profile_dir("profiles_v2");
 namespace dogen {
 namespace annotations {
 
-std::forward_list<boost::filesystem::path> profiler::create_directory_list(
-    const std::forward_list<boost::filesystem::path>& data_directories) const {
-    std::forward_list<boost::filesystem::path> r;
-    for (const auto& d : data_directories)
-        r.push_front(d / profile_dir);
+std::vector<boost::filesystem::path> profiler::to_profile_directories(
+    const std::vector<boost::filesystem::path>& data_dirs) const {
+    std::vector<boost::filesystem::path> r;
+    r.reserve(data_dirs.size());
+    for (const auto& d : data_dirs)
+        r.push_back(d / profile_dir);
+
+    BOOST_LOG_SEV(lg, debug) << "Directory list: " << r;
     return r;
 }
 
-std::list<profile>
-profiler::hydrate_profiles(const std::forward_list<boost::filesystem::path>&
-    data_directories) const {
+std::list<profile> profiler::hydrate_profiles(
+    const std::vector<boost::filesystem::path>& profile_dirs) const {
     BOOST_LOG_SEV(lg, debug) << "Hydrating profile groups.";
-
-    const auto dl(create_directory_list(data_directories));
-    BOOST_LOG_SEV(lg, debug) << "Directory list: " << dl;
-
     std::list<profile> r;
     profile_hydrator h;
-    const auto files(dogen::utility::filesystem::find_files(dl));
+    const auto files(dogen::utility::filesystem::find_files(profile_dirs));
     for (const auto& f : files) {
         BOOST_LOG_SEV(lg, debug) << "Hydrating file: " << f.generic_string();
         r.push_back(h.hydrate(f));
@@ -77,7 +76,7 @@ create_prof_ann_map(const std::list<profile>& /*profiles*/) const {
 }
 
 void profiler::validate_profiles(
-    const std::forward_list<ownership_hierarchy>& /*ohs*/,
+    const ownership_hierarchy_repository& /*ohrp*/,
     const std::unordered_map<std::string, prof_ann>& /*pa*/) const {
 }
 
@@ -102,11 +101,11 @@ profiler::create_annotation_map(
 }
 
 std::unordered_map<std::string, annotation>
-profiler::generate(const std::forward_list<ownership_hierarchy>& /*ohs*/,
-    const std::forward_list<boost::filesystem::path>&
-    data_directories) const {
+profiler::generate(const std::vector<boost::filesystem::path>& data_dirs,
+    const ownership_hierarchy_repository& /*ohrp*/) const {
 
-    const auto profiles(hydrate_profiles(data_directories));
+    const auto prf_dirs(to_profile_directories(data_dirs));
+    const auto profiles(hydrate_profiles(prf_dirs));
     std::unordered_map<std::string, annotation> r;
     return r;
 }

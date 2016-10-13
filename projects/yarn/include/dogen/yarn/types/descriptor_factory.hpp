@@ -26,6 +26,7 @@
 #endif
 
 #include <list>
+#include <vector>
 #include <boost/filesystem/path.hpp>
 #include "dogen/options/types/input.hpp"
 #include "dogen/options/types/input_options.hpp"
@@ -37,7 +38,7 @@ namespace yarn {
 class descriptor_factory {
 private:
     std::list<descriptor> from_directories(
-        const std::list<boost::filesystem::path>& dirs) const;
+        const std::vector<boost::filesystem::path>& dirs) const;
 
     std::list<descriptor>
     from_references(const std::list<options::input>& refs) const;
@@ -45,7 +46,7 @@ private:
     descriptor from_target(const options::input& tg) const;
 
 public:
-    std::list<descriptor> make(const std::list<boost::filesystem::path>& dirs,
+    std::list<descriptor> make(const std::vector<boost::filesystem::path>& dirs,
         const options::input_options& io) const;
 };
 

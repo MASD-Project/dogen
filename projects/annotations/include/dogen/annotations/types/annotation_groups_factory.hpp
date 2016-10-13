@@ -26,17 +26,19 @@
 #endif
 
 #include <list>
+#include <vector>
 #include <string>
 #include <utility>
 #include <unordered_map>
 #include <boost/optional.hpp>
+#include <boost/filesystem/path.hpp>
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/annotations/types/scope_types.hpp"
 #include "dogen/annotations/types/annotation_group.hpp"
 #include "dogen/annotations/types/scribble_group.hpp"
 #include "dogen/annotations/types/type.hpp"
-
+#include "dogen/annotations/types/ownership_hierarchy_repository.hpp"
 
 namespace dogen {
 namespace annotations {
@@ -49,15 +51,17 @@ public:
     /**
      * @brief Initialise the annotations object factory.
      *
-     *
-     * @param repository All field definitions.
-     * @param throw_on_missing_type If true, any
-     * annotations extensions for which a field definition does not
-     * exist will result in an exception. If false, they will be
-     * ignored.
+     * @param data_dirs directories in which to look for data files.
+     * @param ohrp the ownership hierarchy repository.
+     * @param trp the type repository.
+     * @param throw_on_missing_type If true, any annotation entry for
+     * which a type does not exist will result on an exception. If
+     * false, they will be ignored.
      */
-    explicit annotation_groups_factory(
-        const type_repository& rp, const bool throw_on_missing_type = true);
+    annotation_groups_factory(
+        const std::vector<boost::filesystem::path>& data_dirs,
+        const ownership_hierarchy_repository& ohrp,
+        const type_repository& trp, const bool throw_on_missing_type = true);
 
 private:
     /**
@@ -90,6 +94,12 @@ private:
     scope_types compute_scope_for_id(const std::string& root_object_id,
         const std::string& current_id) const;
 
+    /**
+     * @brief Creates the annotation profiles.
+     */
+    std::unordered_map<std::string, annotation>
+    create_annotation_profiles() const;
+
 public:
     /**
      * @brief Produce the annotations object.
@@ -97,12 +107,13 @@ public:
     annotation build(const scope_types scope, const scribble& scribble) const;
 
     std::unordered_map<std::string, annotation_group>
-    build(const std::string& root_object_id,
-        const std::unordered_map<std::string, scribble_group>& scribble_groups
-        ) const;
+    build(const std::string& root_object_id, const std::unordered_map<
+        std::string, scribble_group>& scribble_groups) const;
 
 private:
-    const type_repository& repository_;
+    const std::vector<boost::filesystem::path> data_dirs_;
+    const ownership_hierarchy_repository& ownership_hierarchy_repository_;
+    const type_repository& type_repository_;
     const bool throw_on_missing_type_;
 };
 

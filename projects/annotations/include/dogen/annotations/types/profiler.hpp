@@ -26,13 +26,13 @@
 #endif
 
 #include <list>
+#include <vector>
 #include <string>
-#include <forward_list>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
 #include "dogen/annotations/types/profile.hpp"
 #include "dogen/annotations/types/annotation.hpp"
-#include "dogen/annotations/types/ownership_hierarchy.hpp"
+#include "dogen/annotations/types/ownership_hierarchy_repository.hpp"
 
 namespace dogen {
 namespace annotations {
@@ -46,18 +46,16 @@ private:
     };
 
 private:
-    std::forward_list<boost::filesystem::path>
-    create_directory_list(const std::forward_list<boost::filesystem::path>&
-        data_directories) const;
+    std::vector<boost::filesystem::path> to_profile_directories(
+        const std::vector<boost::filesystem::path>& data_dirs) const;
 
-    std::list<profile>
-    hydrate_profiles(const std::forward_list<boost::filesystem::path>&
-        data_directories) const;
+    std::list<profile> hydrate_profiles(
+        const std::vector<boost::filesystem::path>& profile_dirs) const;
 
     std::unordered_map<std::string, prof_ann>
     create_prof_ann_map(const std::list<profile>& profiles) const;
 
-    void validate_profiles(const std::forward_list<ownership_hierarchy>& ohs,
+    void validate_profiles(const ownership_hierarchy_repository& ohrp,
         const std::unordered_map<std::string, prof_ann>& pa) const;
 
     void instantiate_value_templates(
@@ -75,9 +73,8 @@ private:
 
 public:
     std::unordered_map<std::string, annotation>
-    generate(const std::forward_list<ownership_hierarchy>& ohs,
-        const std::forward_list<boost::filesystem::path>&
-        data_directories) const;
+    generate(const std::vector<boost::filesystem::path>& data_dirs,
+        const ownership_hierarchy_repository& ohrp) const;
 };
 
 } }

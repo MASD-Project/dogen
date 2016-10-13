@@ -163,7 +163,7 @@ BOOST_AUTO_TEST_CASE(find_files_returns_expected_files_when_not_recursing) {
 BOOST_AUTO_TEST_CASE(find_files_returns_expected_files_with_multiple_directories) {
     SETUP_TEST_LOG_SOURCE("find_files_returns_expected_files_with_multiple_directories");
     using dogen::utility::test_data::filesystem_tests;
-    const auto dirs = std::forward_list<boost::filesystem::path> {
+    const auto dirs = std::vector<boost::filesystem::path> {
         filesystem_tests::input(),
         filesystem_tests::expected(),
         filesystem_tests::actual(),

@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <vector>
 #include <string>
 #include <utility>
 #include <istream>
@@ -42,9 +43,9 @@ namespace formattables {
 
 class profile_group_hydrator {
 private:
-    std::forward_list<boost::filesystem::path>
-    create_directory_list(const std::forward_list<boost::filesystem::path>&
-        data_directories) const;
+    std::vector<boost::filesystem::path>
+    create_directory_list(
+        const std::vector<boost::filesystem::path>& data_dirs) const;
 
     profile_types to_profile_type(const std::string v) const;
 
@@ -71,8 +72,7 @@ public:
     profile_group hydrate(const boost::filesystem::path& p) const;
 
     std::unordered_map<std::string, profile_group>
-    hydrate(const std::forward_list<boost::filesystem::path>&
-        data_directories) const;
+    hydrate(const std::vector<boost::filesystem::path>& data_dirs) const;
 };
 
 } } } }

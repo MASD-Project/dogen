@@ -37,7 +37,7 @@ namespace dogen {
 namespace yarn {
 
 std::list<descriptor> descriptor_factory::from_directories(
-    const std::list<boost::filesystem::path>& dirs) const {
+    const std::vector<boost::filesystem::path>& dirs) const {
 
     BOOST_LOG_SEV(lg, debug) << "Creating descriptors for library models.";
     std::list<descriptor> r;
@@ -100,7 +100,7 @@ descriptor descriptor_factory::from_target(const options::input& tg) const {
 }
 
 std::list<descriptor> descriptor_factory::
-make(const std::list<boost::filesystem::path>& dirs,
+make(const std::vector<boost::filesystem::path>& dirs,
     const options::input_options& io) const {
 
     auto r(from_directories(dirs));

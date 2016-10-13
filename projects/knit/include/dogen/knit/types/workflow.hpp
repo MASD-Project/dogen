@@ -26,6 +26,7 @@
 #endif
 
 #include <map>
+#include <vector>
 #include <string>
 #include <ostream>
 #include <functional>
@@ -95,7 +96,7 @@ private:
      * backends.
      */
     annotations::ownership_hierarchy_repository
-    obtain_ownership_hierarchy() const;
+    obtain_ownership_hierarchy_repository() const;
 
     /**
      * @brief Sets up the annotations repository.
@@ -107,7 +108,8 @@ private:
      * @brief Obtain the yarn model.
      */
     yarn::model
-    obtain_yarn_model(const annotations::type_repository& atrp) const;
+    obtain_yarn_model(const annotations::ownership_hierarchy_repository& ohrp,
+        const annotations::type_repository& atrp) const;
 
     /**
      * @brief Performs a housekeeping run for the supplied directories.

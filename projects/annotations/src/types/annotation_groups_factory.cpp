@@ -27,6 +27,7 @@
 #include "dogen/annotations/io/type_io.hpp"
 #include "dogen/annotations/types/value_factory.hpp"
 #include "dogen/annotations/types/building_error.hpp"
+#include "dogen/annotations/types/profiler.hpp"
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
 
 namespace {
@@ -48,15 +49,18 @@ const std::string field_used_in_invalid_scope(
 namespace dogen {
 namespace annotations {
 
-annotation_groups_factory::annotation_groups_factory(const type_repository& rp,
-    const bool throw_on_missing_type)
-    : repository_(rp),
-      throw_on_missing_type_(throw_on_missing_type) { }
+annotation_groups_factory::
+annotation_groups_factory(
+    const std::vector<boost::filesystem::path>& data_dirs,
+    const ownership_hierarchy_repository& ohrp,
+    const type_repository& trp, const bool throw_on_missing_type)
+    : data_dirs_(data_dirs), ownership_hierarchy_repository_(ohrp),
+      type_repository_(trp), throw_on_missing_type_(throw_on_missing_type) { }
 
 boost::optional<type> annotation_groups_factory::
 obtain_type(const std::string& n) const {
-    const auto i(repository_.types_by_name().find(n));
-    if (i == repository_.types_by_name().end()) {
+    const auto i(type_repository_.types_by_name().find(n));
+    if (i == type_repository_.types_by_name().end()) {
         if (throw_on_missing_type_) {
             BOOST_LOG_SEV(lg, error) << type_not_found << n;
 
@@ -123,6 +127,12 @@ compute_scope_for_id(const std::string& root_annotation_id,
     return is_root ? scope_types::root_module : scope_types::entity;
 }
 
+std::unordered_map<std::string, annotation> annotation_groups_factory::
+create_annotation_profiles() const {
+    profiler prf;
+    return prf.generate(data_dirs_, ownership_hierarchy_repository_);
+}
+
 annotation annotation_groups_factory::
 build(const scope_types scope, const scribble& scribble) const {
     auto aggregated_entries(aggregate_scribble_entries(scribble));
@@ -135,6 +145,8 @@ annotation_groups_factory::
 build(const std::string& root_annotation_id, const std::unordered_map<
     std::string, scribble_group>& scribble_groups) const {
 
+    // FIXME: read profiles
+    // create_annotation_profiles();
     std::unordered_map<std::string, annotation_group> r;
     for (const auto& pair : scribble_groups) {
         const auto id(pair.first);

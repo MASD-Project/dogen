@@ -22,6 +22,7 @@
 #include <boost/filesystem/fstream.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/io/vector_io.hpp"
 #include "dogen/utility/io/forward_list_io.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/filesystem/file.hpp"
@@ -82,12 +83,13 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-std::forward_list<boost::filesystem::path>
+std::vector<boost::filesystem::path>
 profile_group_hydrator::create_directory_list(
-    const std::forward_list<boost::filesystem::path>& data_directories) const {
-    std::forward_list<boost::filesystem::path> r;
-    for (const auto& d : data_directories)
-        r.push_front(d / profile_dir);
+    const std::vector<boost::filesystem::path>& data_dirs) const {
+    std::vector<boost::filesystem::path> r;
+    r.reserve(data_dirs.size());
+    for (const auto& d : data_dirs)
+        r.push_back(d / profile_dir);
     return r;
 }
 
@@ -306,11 +308,11 @@ hydrate(const boost::filesystem::path& p) const {
     return r;
 }
 
-std::unordered_map<std::string, profile_group> profile_group_hydrator::hydrate(
-    const std::forward_list<boost::filesystem::path>& data_directories) const {
+std::unordered_map<std::string, profile_group> profile_group_hydrator::
+hydrate(const std::vector<boost::filesystem::path>& data_dirs) const {
     BOOST_LOG_SEV(lg, debug) << "Hydrating profile groups.";
 
-    const auto dl(create_directory_list(data_directories));
+    const auto dl(create_directory_list(data_dirs));
     BOOST_LOG_SEV(lg, debug) << "Directory list: " << dl;
 
     std::unordered_map<std::string, formattables::profile_group> r;

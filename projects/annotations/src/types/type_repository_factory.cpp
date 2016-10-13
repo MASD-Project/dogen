@@ -23,6 +23,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/set_io.hpp"
 #include "dogen/utility/filesystem/file.hpp"
+#include "dogen/utility/io/vector_io.hpp"
 #include "dogen/utility/io/forward_list_io.hpp"
 #include "dogen/annotations/io/type_repository_io.hpp"
 #include "dogen/annotations/io/ownership_hierarchy_io.hpp"
@@ -47,11 +48,12 @@ namespace dogen {
 namespace annotations {
 
 std::list<type_template> type_repository_factory::hydrate_templates(
-    const std::forward_list<boost::filesystem::path>& data_dirs) const {
+    const std::vector<boost::filesystem::path>& data_dirs) const {
     BOOST_LOG_SEV(lg, info) << "Input data directories: " << data_dirs;
-    std::forward_list<boost::filesystem::path> annotation_dirs;
+    std::vector<boost::filesystem::path> annotation_dirs;
+    annotation_dirs.reserve(data_dirs.size());
     for (const auto& dir : data_dirs)
-        annotation_dirs.push_front(dir / annotations_dir);
+        annotation_dirs.push_back(dir / annotations_dir);
 
     BOOST_LOG_SEV(lg, info) << "Finding all files in: " << annotation_dirs;
     const auto files(dogen::utility::filesystem::find_files(annotation_dirs));
@@ -121,7 +123,7 @@ create_repository(const std::list<type>& ts) const {
 
 type_repository type_repository_factory::make(
     const ownership_hierarchy_repository& ohrp,
-    const std::forward_list<boost::filesystem::path>& dirs) const {
+    const std::vector<boost::filesystem::path>& dirs) const {
     BOOST_LOG_SEV(lg, info) << "Generating repository.";
 
     const auto original(hydrate_templates(dirs));

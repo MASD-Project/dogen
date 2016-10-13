@@ -27,6 +27,7 @@
 
 #include <list>
 #include <boost/filesystem/path.hpp>
+#include "dogen/annotations/types/ownership_hierarchy_repository.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/options/types/input_options.hpp"
 #include "dogen/yarn/types/frontend_registrar.hpp"
@@ -61,8 +62,9 @@ private:
      * @brief Obtains all intermediate models.
      */
     std::list<intermediate_model> obtain_intermediate_models(
+        const std::vector<boost::filesystem::path>& data_dirs,
+        const annotations::ownership_hierarchy_repository& ohrp,
         const annotations::type_repository& atrp,
-        const std::list<boost::filesystem::path>& dirs,
         const options::input_options& io) const;
 
     /**
@@ -84,8 +86,9 @@ private:
     model transform_intermediate_model(const intermediate_model& im) const;
 
 public:
-    model execute(const annotations::type_repository& atrp,
-        const std::list<boost::filesystem::path>& dirs,
+    model execute(const std::vector<boost::filesystem::path>& data_dirs,
+        const annotations::ownership_hierarchy_repository& ohrp,
+        const annotations::type_repository& atrp,
         const options::input_options& io) const;
 
 private:

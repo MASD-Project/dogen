@@ -56,8 +56,7 @@ private:
     typedef std::unordered_map<std::string, profile_group> profile_group_types;
 
     profile_group_types hydrate(
-        const std::forward_list<boost::filesystem::path>&
-        data_directories) const;
+        const std::vector<boost::filesystem::path>& data_dirs) const;
 
     void validate(const formatters::container& fc,
         const profile_group_types& pgs) const;
@@ -70,7 +69,7 @@ private:
 
 public:
     void expand(
-        const std::forward_list<boost::filesystem::path>& data_directories,
+        const std::vector<boost::filesystem::path>& data_dirs,
         const annotations::type_repository& atrp,
         const annotations::annotation& root, const formatters::container& fc,
         model& fm) const;

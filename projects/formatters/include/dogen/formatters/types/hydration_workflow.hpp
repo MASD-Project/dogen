@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <vector>
 #include <string>
 #include <forward_list>
 #include <unordered_map>
@@ -43,21 +44,21 @@ class hydration_workflow {
     /**
      * @brief Creates the list of directories to load data from.
      */
-    std::forward_list<boost::filesystem::path> create_directory_list(
-        const std::forward_list<boost::filesystem::path>& dirs,
+    std::vector<boost::filesystem::path> create_directory_list(
+        const std::vector<boost::filesystem::path>& dirs,
         const std::string& for_whom) const;
 
     /**
      * @brief Hydrates all the modelines available in the library.
      */
     std::unordered_map<std::string, modeline_group> hydrate_modeline_groups(
-        const std::forward_list<boost::filesystem::path>& dirs) const;
+        const std::vector<boost::filesystem::path>& dirs) const;
 
     /**
      * @brief Hydrates all the licence texts available in the library.
      */
     std::unordered_map<std::string, std::string> hydrate_licence_texts(
-        const std::forward_list<boost::filesystem::path>& dirs) const;
+        const std::vector<boost::filesystem::path>& dirs) const;
 
 public:
     /**
@@ -65,7 +66,7 @@ public:
      * objects of the formatters' domain.
      */
     repository hydrate(
-        const std::forward_list<boost::filesystem::path>& dirs) const;
+        const std::vector<boost::filesystem::path>& data_dirs) const;
 };
 
 } }

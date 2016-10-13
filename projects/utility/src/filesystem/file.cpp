@@ -80,7 +80,7 @@ std::set<boost::filesystem::path> find_files(const boost::filesystem::path& d) {
 }
 
 std::set<boost::filesystem::path>
-find_files(const std::forward_list<boost::filesystem::path>& dirs) {
+find_files(const std::vector<boost::filesystem::path>& dirs) {
     std::set<boost::filesystem::path> r;
 
     for (const auto& d : dirs) {

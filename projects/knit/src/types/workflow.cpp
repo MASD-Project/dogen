@@ -73,7 +73,7 @@ bool workflow::housekeeping_required() const {
 }
 
 annotations::ownership_hierarchy_repository workflow::
-obtain_ownership_hierarchy() const {
+obtain_ownership_hierarchy_repository() const {
     std::list<annotations::ownership_hierarchy> ohs;
     const auto& rg(quilt::workflow::registrar());
     for (const auto b : rg.backends())
@@ -88,21 +88,21 @@ obtain_ownership_hierarchy() const {
 annotations::type_repository workflow::setup_annotations_repository(
     const annotations::ownership_hierarchy_repository& ohrp) const {
     const auto data_dir(dogen::utility::filesystem::data_files_directory());
-    const std::forward_list<boost::filesystem::path> data_dirs = { data_dir };
+    const std::vector<boost::filesystem::path> data_dirs = { data_dir };
     annotations::type_repository_factory f;
     return f.make(ohrp, data_dirs);
 }
 
 yarn::model workflow::
-obtain_yarn_model(const annotations::type_repository& rp) const {
-
+obtain_yarn_model(const annotations::ownership_hierarchy_repository& ohrp,
+    const annotations::type_repository& atrp) const {
     using namespace dogen::utility::filesystem;
-    const auto dir(data_files_directory() / library_dir);
-    std::list<boost::filesystem::path> dirs({dir});
+    const auto data_dir(data_files_directory() / library_dir);
+    std::vector<boost::filesystem::path> data_dirs({ data_dir });
 
     yarn::workflow w;
     const auto io(knitting_options_.input());
-    return w.execute(rp, dirs, io);
+    return w.execute(data_dirs, ohrp, atrp, io);
 }
 
 void workflow::perform_housekeeping(
@@ -146,9 +146,9 @@ void workflow::execute() const {
     BOOST_LOG_SEV(lg, info) << "Knitting options: " << knitting_options_;
 
     try {
-        const auto ohs(obtain_ownership_hierarchy());
-        const auto atrp(setup_annotations_repository(ohs));
-        const auto m(obtain_yarn_model(atrp));
+        const auto ohrp(obtain_ownership_hierarchy_repository());
+        const auto atrp(setup_annotations_repository(ohrp));
+        const auto m(obtain_yarn_model(ohrp, atrp));
 
         if (!m.has_generatable_types()) {
             BOOST_LOG_SEV(lg, warn) << "No generatable types found.";

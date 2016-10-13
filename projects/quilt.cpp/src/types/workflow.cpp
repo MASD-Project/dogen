@@ -46,16 +46,16 @@ namespace cpp {
 
 workflow::~workflow() noexcept { }
 
-std::forward_list<boost::filesystem::path> workflow::
+std::vector<boost::filesystem::path> workflow::
 make_data_directories() const {
     const auto dir(dogen::utility::filesystem::data_files_directory());
-    const auto r(std::forward_list<boost::filesystem::path> { dir });
+    const auto r(std::vector<boost::filesystem::path> { dir });
     return r;
 }
 
 dogen::formatters::repository workflow::
 create_formatters_repository(
-    const std::forward_list<boost::filesystem::path>& data_directories) const {
+    const std::vector<boost::filesystem::path>& data_directories) const {
     dogen::formatters::hydration_workflow hw;
     return hw.hydrate(data_directories);
 }
@@ -72,9 +72,9 @@ workflow::create_decoration_properties_factory(
 }
 
 formattables::model workflow::create_formattables_model(
-    const std::forward_list<boost::filesystem::path>& data_directories,
-    const options::cpp_options& opts,
-    const annotations::type_repository& atrp, const annotations::annotation& root,
+    const std::vector<boost::filesystem::path>& data_directories,
+    const options::cpp_options& opts, const annotations::type_repository& atrp,
+    const annotations::annotation& root,
     const dogen::formatters::decoration_properties_factory& dpf,
     const formatters::container& fc, const yarn::model& m) const {
 

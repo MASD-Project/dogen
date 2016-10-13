@@ -26,6 +26,7 @@
 #endif
 
 #include <set>
+#include <list>
 #include <string>
 #include <forward_list>
 #include <boost/filesystem/path.hpp>
@@ -65,7 +66,7 @@ std::set<boost::filesystem::path> find_files(const boost::filesystem::path& d);
  * on once in the set.
  */
 std::set<boost::filesystem::path>
-find_files(const std::forward_list<boost::filesystem::path>& dirs);
+find_files(const std::vector<boost::filesystem::path>& dirs);
 
 } } }
 

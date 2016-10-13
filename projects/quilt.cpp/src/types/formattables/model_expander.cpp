@@ -44,11 +44,12 @@ expand_streaming(const annotations::type_repository& atrp, model& fm) const {
 }
 
 void model_expander::expand_profile_groups(
-    const std::forward_list<boost::filesystem::path>& dirs,
-    const annotations::type_repository& atrp, const annotations::annotation& root,
-    const formatters::container& fc, model& fm) const {
+    const std::vector<boost::filesystem::path>& data_dirs,
+    const annotations::type_repository& atrp,
+    const annotations::annotation& root, const formatters::container& fc,
+    model& fm) const {
     profile_group_expander ex;
-    ex.expand(dirs, atrp, root, fc, fm);
+    ex.expand(data_dirs, atrp, root, fc, fm);
 }
 
 void model_expander::expand_enablement(const annotations::type_repository& atrp,
@@ -114,7 +115,7 @@ expand_facet_directories(const locator& l,model& fm) const {
 }
 
 void model_expander::expand(
-    const std::forward_list<boost::filesystem::path>& dirs,
+    const std::vector<boost::filesystem::path>& data_dirs,
     const annotations::type_repository& atrp,
     const annotations::annotation& root,
     const dogen::formatters::decoration_properties_factory& dpf,
@@ -125,7 +126,7 @@ void model_expander::expand(
      * helpers need the streaminging properties.
      */
     expand_streaming(atrp, fm);
-    expand_profile_groups(dirs, atrp, root, fc, fm);
+    expand_profile_groups(data_dirs, atrp, root, fc, fm);
 
     /*
      * Enablement expansion must be done before inclusion because

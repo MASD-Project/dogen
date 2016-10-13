@@ -95,10 +95,9 @@ std::string profile_group_expander::obtain_profile_configuration(
 
 profile_group_expander::profile_group_types
 profile_group_expander::
-hydrate(const std::forward_list<boost::filesystem::path>&
-    data_directories) const {
+hydrate(const std::vector<boost::filesystem::path>& data_dirs) const {
     profile_group_hydrator h;
-    return h.hydrate(data_directories);
+    return h.hydrate(data_dirs);
 }
 
 void profile_group_expander::validate(const formatters::container& fc,
@@ -322,12 +321,12 @@ populate_model(const annotations::type_repository& atrp,
 }
 
 void profile_group_expander::expand(
-    const std::forward_list<boost::filesystem::path>& data_directories,
+    const std::vector<boost::filesystem::path>& data_dirs,
     const annotations::type_repository& atrp,
     const annotations::annotation& root,
     const formatters::container& fc, model& fm) const {
 
-    const auto original(hydrate(data_directories));
+    const auto original(hydrate(data_dirs));
     validate(fc, original);
     const auto merged(merge(original));
     populate_model(atrp, root, merged, fm);

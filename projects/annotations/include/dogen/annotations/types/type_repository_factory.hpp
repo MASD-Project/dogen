@@ -26,6 +26,7 @@
 #endif
 
 #include <list>
+#include <vector>
 #include <forward_list>
 #include <boost/filesystem/path.hpp>
 #include "dogen/annotations/types/type_repository.hpp"
@@ -45,7 +46,7 @@ private:
      * @brief Hydrates all the type templates.
      */
     std::list<type_template> hydrate_templates(
-        const std::forward_list<boost::filesystem::path>& data_dirs) const;
+        const std::vector<boost::filesystem::path>& data_dirs) const;
 
     /**
      * @brief Instantiates all templates into field definition
@@ -68,7 +69,7 @@ public:
      */
     type_repository make(
         const ownership_hierarchy_repository& ohrp,
-        const std::forward_list<boost::filesystem::path>& data_dirs) const;
+        const std::vector<boost::filesystem::path>& data_dirs) const;
 };
 
 } }
