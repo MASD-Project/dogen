@@ -1,6 +1,0 @@
-{
-    "name" : "dogen.handcrafted",
-    "profile_type" : "global",
-    "parents" : [ "dogen.enable_types" ],
-    "bind_to_stereotype" : "handcrafted"
-}

@@ -1,10 +1,17 @@
 {
     "name" : "dogen.disable_odb",
-    "parents" : [ "dogen" ],
-    "facet_profiles" : [
+    "parents" : [ "dogen.enable_all_facets" ],
+    "templates" : [
         {
-            "facet_name" : "quilt.cpp.odb",
-            "enabled" : false
+            "name" : {
+                "simple" : "enabled",
+                "qualified" : "quilt.cpp.odb.enabled"
+            },
+            "ownership_hierarchy" : {
+                "model_name" : "quilt.cpp"
+            },
+            "template_kind" : "instance",
+            "untyped_value" : [ "false" ]
         }
     ]
 }

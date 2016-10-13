@@ -1,13 +1,17 @@
 {
     "name" : "dogen.enable_types",
-    "parents" : [ "dogen" ],
-    "default_facet_profile" : {
-        "enabled" : false
-    },
-    "facet_profiles" : [
+    "parents" : [ "dogen.disable_all_facets" ],
+    "templates" : [
         {
-            "facet_name" : "quilt.cpp.types",
-            "enabled" : true
+            "name" : {
+                "simple" : "enabled",
+                "qualified" : "quilt.cpp.types.enabled"
+            },
+            "ownership_hierarchy" : {
+                "model_name" : "quilt.cpp"
+            },
+            "template_kind" : "instance",
+            "untyped_value" : [ "true" ]
         }
     ]
 }

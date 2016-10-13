@@ -39,7 +39,7 @@ namespace {
 
 auto lg(logger_factory("annotations.profiler"));
 
-const std::string profile_dir("profiles_v2");
+const std::string profile_dir("profiles");
 
 const std::string duplicate_profile_name("Duplicate profile name: ");
 const std::string invalid_facet_name("Invalid facet name: ");
