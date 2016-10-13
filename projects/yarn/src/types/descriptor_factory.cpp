@@ -31,10 +31,22 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("yarn.descriptor_factory"));
 
+const std::string library_dir("library");
+
 }
 
 namespace dogen {
 namespace yarn {
+
+std::vector<boost::filesystem::path> descriptor_factory::to_library_dirs(
+    const std::vector<boost::filesystem::path>& data_dirs) const {
+
+    std::vector<boost::filesystem::path> r;
+    r.reserve(data_dirs.size());
+    for (const auto& dir : data_dirs)
+        r.push_back(dir / library_dir);
+    return r;
+}
 
 std::list<descriptor> descriptor_factory::from_directories(
     const std::vector<boost::filesystem::path>& dirs) const {
@@ -100,10 +112,11 @@ descriptor descriptor_factory::from_target(const options::input& tg) const {
 }
 
 std::list<descriptor> descriptor_factory::
-make(const std::vector<boost::filesystem::path>& dirs,
+make(const std::vector<boost::filesystem::path>& data_dirs,
     const options::input_options& io) const {
 
-    auto r(from_directories(dirs));
+    const auto library_dirs(to_library_dirs(data_dirs));
+    auto r(from_directories(library_dirs));
     r.splice(r.end(), from_references(io.references()));
     r.push_back(from_target(io.target()));
     return r;

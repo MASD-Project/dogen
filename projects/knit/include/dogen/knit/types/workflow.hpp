@@ -91,6 +91,8 @@ public: // public section for testing purposes only
     bool housekeeping_required() const;
 
 private:
+    std::vector<boost::filesystem::path> obtain_data_dirs() const;
+
     /**
      * @brief Obtains the complete ownership hierarchy across all
      * backends.
@@ -102,13 +104,15 @@ private:
      * @brief Sets up the annotations repository.
      */
     annotations::type_repository setup_annotations_repository(
+        const std::vector<boost::filesystem::path>& data_dirs,
         const annotations::ownership_hierarchy_repository& ohrp) const;
 
     /**
      * @brief Obtain the yarn model.
      */
     yarn::model
-    obtain_yarn_model(const annotations::ownership_hierarchy_repository& ohrp,
+    obtain_yarn_model(const std::vector<boost::filesystem::path>& data_dirs,
+        const annotations::ownership_hierarchy_repository& ohrp,
         const annotations::type_repository& atrp) const;
 
     /**

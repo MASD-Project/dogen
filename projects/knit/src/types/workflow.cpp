@@ -47,7 +47,6 @@ const std::string xml_extension(".xml");
 const std::string text_extension(".txt");
 const std::string binary_extension(".bin");
 const std::string target_postfix("_target");
-const std::string library_dir("library");
 const std::string merged("merged_");
 const std::string invalid_archive_type("Invalid or unexpected archive type");
 const std::string incorrect_stdout_options(
@@ -72,6 +71,12 @@ bool workflow::housekeeping_required() const {
     return knitting_options_.output().delete_extra_files();
 }
 
+std::vector<boost::filesystem::path> workflow::obtain_data_dirs() const {
+    using namespace dogen::utility::filesystem;
+    const auto data_dir(dogen::utility::filesystem::data_files_directory());
+    return std::vector<boost::filesystem::path>({ data_dir });
+}
+
 annotations::ownership_hierarchy_repository workflow::
 obtain_ownership_hierarchy_repository() const {
     std::list<annotations::ownership_hierarchy> ohs;
@@ -86,20 +91,16 @@ obtain_ownership_hierarchy_repository() const {
 }
 
 annotations::type_repository workflow::setup_annotations_repository(
+    const std::vector<boost::filesystem::path>& data_dirs,
     const annotations::ownership_hierarchy_repository& ohrp) const {
-    const auto data_dir(dogen::utility::filesystem::data_files_directory());
-    const std::vector<boost::filesystem::path> data_dirs = { data_dir };
     annotations::type_repository_factory f;
     return f.make(ohrp, data_dirs);
 }
 
 yarn::model workflow::
-obtain_yarn_model(const annotations::ownership_hierarchy_repository& ohrp,
+obtain_yarn_model(const std::vector<boost::filesystem::path>& data_dirs,
+    const annotations::ownership_hierarchy_repository& ohrp,
     const annotations::type_repository& atrp) const {
-    using namespace dogen::utility::filesystem;
-    const auto data_dir(data_files_directory() / library_dir);
-    std::vector<boost::filesystem::path> data_dirs({ data_dir });
-
     yarn::workflow w;
     const auto io(knitting_options_.input());
     return w.execute(data_dirs, ohrp, atrp, io);
@@ -146,9 +147,10 @@ void workflow::execute() const {
     BOOST_LOG_SEV(lg, info) << "Knitting options: " << knitting_options_;
 
     try {
+        const auto data_dirs(obtain_data_dirs());
         const auto ohrp(obtain_ownership_hierarchy_repository());
-        const auto atrp(setup_annotations_repository(ohrp));
-        const auto m(obtain_yarn_model(ohrp, atrp));
+        const auto atrp(setup_annotations_repository(data_dirs, ohrp));
+        const auto m(obtain_yarn_model(data_dirs, ohrp, atrp));
 
         if (!m.has_generatable_types()) {
             BOOST_LOG_SEV(lg, warn) << "No generatable types found.";

@@ -37,8 +37,12 @@ namespace yarn {
 
 class descriptor_factory {
 private:
+    std::vector<boost::filesystem::path> to_library_dirs(
+        const std::vector<boost::filesystem::path>& data_dirs) const;
+
+private:
     std::list<descriptor> from_directories(
-        const std::vector<boost::filesystem::path>& dirs) const;
+        const std::vector<boost::filesystem::path>& library_dirs) const;
 
     std::list<descriptor>
     from_references(const std::list<options::input>& refs) const;
@@ -46,7 +50,8 @@ private:
     descriptor from_target(const options::input& tg) const;
 
 public:
-    std::list<descriptor> make(const std::vector<boost::filesystem::path>& dirs,
+    std::list<descriptor>
+    make(const std::vector<boost::filesystem::path>& data_dirs,
         const options::input_options& io) const;
 };
 
