@@ -32,8 +32,11 @@ namespace dogen {
 namespace yarn {
 
 class transformer {
+private:
+    std::size_t compute_total_size(const intermediate_model& im) const;
+
 public:
-    model transform(const intermediate_model& m) const;
+    model transform(const intermediate_model& im) const;
 };
 
 } }

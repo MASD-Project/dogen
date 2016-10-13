@@ -37,7 +37,7 @@ inline std::size_t hash_boost_shared_ptr_dogen_yarn_element(const boost::shared_
     return seed;
 }
 
-inline std::size_t hash_std_list_boost_shared_ptr_dogen_yarn_element(const std::list<boost::shared_ptr<dogen::yarn::element> >& v) {
+inline std::size_t hash_std_vector_boost_shared_ptr_dogen_yarn_element(const std::vector<boost::shared_ptr<dogen::yarn::element> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, hash_boost_shared_ptr_dogen_yarn_element(i));
@@ -54,7 +54,7 @@ std::size_t model_hasher::hash(const model& v) {
     std::size_t seed(0);
 
     combine(seed, v.name());
-    combine(seed, hash_std_list_boost_shared_ptr_dogen_yarn_element(v.elements()));
+    combine(seed, hash_std_vector_boost_shared_ptr_dogen_yarn_element(v.elements()));
     combine(seed, v.root_module());
     combine(seed, v.has_generatable_types());
 

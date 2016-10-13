@@ -42,8 +42,8 @@ create_boost_shared_ptr_dogen_yarn_element(unsigned int position) {
     return r;
 }
 
-std::list<boost::shared_ptr<dogen::yarn::element> > create_std_list_boost_shared_ptr_dogen_yarn_element(unsigned int position) {
-    std::list<boost::shared_ptr<dogen::yarn::element> > r;
+std::vector<boost::shared_ptr<dogen::yarn::element> > create_std_vector_boost_shared_ptr_dogen_yarn_element(unsigned int position) {
+    std::vector<boost::shared_ptr<dogen::yarn::element> > r;
     for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_boost_shared_ptr_dogen_yarn_element(position + i));
     }
@@ -69,7 +69,7 @@ model_generator::model_generator() : position_(0) { }
 void model_generator::
 populate(const unsigned int position, result_type& v) {
     v.name(create_dogen_yarn_name(position + 0));
-    v.elements(create_std_list_boost_shared_ptr_dogen_yarn_element(position + 1));
+    v.elements(create_std_vector_boost_shared_ptr_dogen_yarn_element(position + 1));
     v.root_module(create_dogen_yarn_module(position + 2));
     v.has_generatable_types(create_bool(position + 3));
 }

@@ -13447,13 +13447,13 @@ meta-types (concepts) and non-types (modules and backend specific entities).#</d
         <dia:point val="-9,50"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-9.05,49.95;10.03,55.25"/>
+        <dia:rectangle val="-9.05,49.95;10.8,55.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-9,50"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="18.98"/>
+        <dia:real val="19.75"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
@@ -13551,7 +13551,7 @@ meta-types (concepts) and non-types (modules and backend specific entities).#</d
             <dia:string>#elements#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;boost::shared_ptr&lt;element&gt;&gt;#</dia:string>
+            <dia:string>#std::vector&lt;boost::shared_ptr&lt;element&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -13734,7 +13734,7 @@ meta-types (concepts) and non-types (modules and backend specific entities).#</d
         <dia:point val="29.8,38.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="0.44,37.65;30.55,50.8"/>
+        <dia:rectangle val="0.825,37.65;30.55,50.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -13742,8 +13742,8 @@ meta-types (concepts) and non-types (modules and backend specific entities).#</d
       <dia:attribute name="orth_points">
         <dia:point val="29.8,38.4"/>
         <dia:point val="29.8,44"/>
-        <dia:point val="0.49,44"/>
-        <dia:point val="0.49,50"/>
+        <dia:point val="0.875,44"/>
+        <dia:point val="0.875,50"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -14518,7 +14518,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:point val="25,53.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="9.93,52.85;25.75,61.05"/>
+        <dia:rectangle val="10.7,52.85;25.75,61.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -14526,8 +14526,8 @@ Leaves are types concrete types which have a parent.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="25,53.6"/>
         <dia:point val="25,61"/>
-        <dia:point val="9.98,61"/>
-        <dia:point val="9.98,55.2"/>
+        <dia:point val="10.75,61"/>
+        <dia:point val="10.75,55.2"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -14802,13 +14802,13 @@ Leaves are types concrete types which have a parent.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O118">
       <dia:attribute name="obj_pos">
-        <dia:point val="63,50"/>
+        <dia:point val="66,50"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="62.95,49.25;76.825,53.05"/>
+        <dia:rectangle val="65.95,49.25;79.825,53.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="63,50"/>
+        <dia:point val="66,50"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="9.129999999999999"/>
@@ -14957,17 +14957,17 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="63,53"/>
+        <dia:point val="66,53"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="62.95,52.95;70.2075,66.8"/>
+        <dia:rectangle val="65.95,52.95;70.2075,66.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="63,53"/>
-        <dia:point val="63,61"/>
+        <dia:point val="66,53"/>
+        <dia:point val="66,61"/>
         <dia:point val="69.4575,61"/>
         <dia:point val="69.4575,66"/>
       </dia:attribute>
@@ -15187,17 +15187,17 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="67.565,50"/>
+        <dia:point val="70.565,50"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="54.205,46.25;68.315,50.8"/>
+        <dia:rectangle val="54.205,46.25;71.315,50.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="67.565,50"/>
-        <dia:point val="67.565,47"/>
+        <dia:point val="70.565,50"/>
+        <dia:point val="70.565,47"/>
         <dia:point val="54.255,47"/>
         <dia:point val="54.255,50"/>
       </dia:attribute>

@@ -97,11 +97,28 @@ private:
 
 }
 
+std::size_t
+transformer::compute_total_size(const intermediate_model& im) const {
+    std::size_t r;
+    r = im.modules().size();
+    r += im.concepts().size();
+    r += im.primitives().size();
+    r += im.enumerations().size();
+    r += im.objects().size();
+    r += im.exceptions().size();
+    r += im.visitors().size();
+    r += im.injected_elements().size();
+    return r;
+}
+
 model transformer::transform(const intermediate_model& im) const {
     model r;
     r.name(im.name());
     r.root_module(im.root_module());
     r.has_generatable_types(im.has_generatable_types());
+
+    const auto size(compute_total_size(im));
+    r.elements().reserve(size);
 
     generator g(r);
     yarn::elements_traversal(im, g);

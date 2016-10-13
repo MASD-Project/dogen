@@ -38,7 +38,7 @@ model::model()
 
 model::model(
     const dogen::yarn::name& name,
-    const std::list<boost::shared_ptr<dogen::yarn::element> >& elements,
+    const std::vector<boost::shared_ptr<dogen::yarn::element> >& elements,
     const dogen::yarn::module& root_module,
     const bool has_generatable_types)
     : name_(name),
@@ -83,19 +83,19 @@ void model::name(const dogen::yarn::name&& v) {
     name_ = std::move(v);
 }
 
-const std::list<boost::shared_ptr<dogen::yarn::element> >& model::elements() const {
+const std::vector<boost::shared_ptr<dogen::yarn::element> >& model::elements() const {
     return elements_;
 }
 
-std::list<boost::shared_ptr<dogen::yarn::element> >& model::elements() {
+std::vector<boost::shared_ptr<dogen::yarn::element> >& model::elements() {
     return elements_;
 }
 
-void model::elements(const std::list<boost::shared_ptr<dogen::yarn::element> >& v) {
+void model::elements(const std::vector<boost::shared_ptr<dogen::yarn::element> >& v) {
     elements_ = v;
 }
 
-void model::elements(const std::list<boost::shared_ptr<dogen::yarn::element> >&& v) {
+void model::elements(const std::vector<boost::shared_ptr<dogen::yarn::element> >&& v) {
     elements_ = std::move(v);
 }
 

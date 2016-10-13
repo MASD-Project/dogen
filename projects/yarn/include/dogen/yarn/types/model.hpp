@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include <list>
+#include <vector>
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
 #include "dogen/yarn/types/name.hpp"
@@ -51,7 +51,7 @@ public:
 public:
     model(
         const dogen::yarn::name& name,
-        const std::list<boost::shared_ptr<dogen::yarn::element> >& elements,
+        const std::vector<boost::shared_ptr<dogen::yarn::element> >& elements,
         const dogen::yarn::module& root_module,
         const bool has_generatable_types);
 
@@ -73,10 +73,10 @@ public:
     void name(const dogen::yarn::name&& v);
     /**@}*/
 
-    const std::list<boost::shared_ptr<dogen::yarn::element> >& elements() const;
-    std::list<boost::shared_ptr<dogen::yarn::element> >& elements();
-    void elements(const std::list<boost::shared_ptr<dogen::yarn::element> >& v);
-    void elements(const std::list<boost::shared_ptr<dogen::yarn::element> >&& v);
+    const std::vector<boost::shared_ptr<dogen::yarn::element> >& elements() const;
+    std::vector<boost::shared_ptr<dogen::yarn::element> >& elements();
+    void elements(const std::vector<boost::shared_ptr<dogen::yarn::element> >& v);
+    void elements(const std::vector<boost::shared_ptr<dogen::yarn::element> >&& v);
 
     /**
      * @brief The module that represents the model.
@@ -108,7 +108,7 @@ public:
 
 private:
     dogen::yarn::name name_;
-    std::list<boost::shared_ptr<dogen::yarn::element> > elements_;
+    std::vector<boost::shared_ptr<dogen::yarn::element> > elements_;
     dogen::yarn::module root_module_;
     bool has_generatable_types_;
 };
