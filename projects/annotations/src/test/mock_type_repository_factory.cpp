@@ -20,7 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/annotations/types/workflow_error.hpp"
+#include "dogen/annotations/types/building_error.hpp"
 #include "dogen/annotations/test/mock_type_factory.hpp"
 #include "dogen/annotations/test/mock_type_repository_factory.hpp"
 
@@ -46,7 +46,7 @@ void mock_type_repository_factory::add_type(
     const auto result(trp.types_by_name().insert(pair));
     if (!result.second) {
         BOOST_LOG_SEV(lg, error) << duplicate_qualified_name << n;
-        BOOST_THROW_EXCEPTION(workflow_error(duplicate_qualified_name + n));
+        BOOST_THROW_EXCEPTION(building_error(duplicate_qualified_name + n));
     }
 
     const auto& oh(t.ownership_hierarchy());
