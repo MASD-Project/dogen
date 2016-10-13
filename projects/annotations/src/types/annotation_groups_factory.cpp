@@ -145,8 +145,7 @@ annotation_groups_factory::
 build(const std::string& root_annotation_id, const std::unordered_map<
     std::string, scribble_group>& scribble_groups) const {
 
-    // FIXME: read profiles
-    // create_annotation_profiles();
+    create_annotation_profiles();
     std::unordered_map<std::string, annotation_group> r;
     for (const auto& pair : scribble_groups) {
         const auto id(pair.first);
