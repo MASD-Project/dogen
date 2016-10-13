@@ -2927,9 +2927,13 @@ More thoughts on this:
 - the slight problem with this is that we need some tests to ensure
   the packages we create are actually exporting all public types; we
   could easily have a public type that depends on a private type
-  etc. We should also validate yarn to ensure this does not happen.
+  etc. We should also validate yarn to ensure this does not
+  happen. This can be done by ensuring that a type marked as external
+  only depends on types also marked as external and so forth.
 - this could also just be a packaging artefact - we would only package
   public headers. Layout of source code would remain the same.
+- when module support is available, we could use this to determine
+  what is exported on the module interfaces.
 
 *** Control the emission of pragma once with dynamic extensions       :story:
 
