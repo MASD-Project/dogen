@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/annotations/hash/profile_hash.hpp"
-#include "dogen/annotations/hash/value_template_hash.hpp"
+#include "dogen/annotations/hash/entry_template_hash.hpp"
 
 namespace {
 
@@ -45,7 +45,7 @@ inline std::size_t hash_std_unordered_set_std_string(const std::unordered_set<st
     return seed;
 }
 
-inline std::size_t hash_std_list_dogen_annotations_value_template(const std::list<dogen::annotations::value_template>& v) {
+inline std::size_t hash_std_list_dogen_annotations_entry_template(const std::list<dogen::annotations::entry_template>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -64,7 +64,7 @@ std::size_t profile_hasher::hash(const profile& v) {
     combine(seed, v.name());
     combine(seed, hash_std_list_std_string(v.parents()));
     combine(seed, hash_std_unordered_set_std_string(v.labels()));
-    combine(seed, hash_std_list_dogen_annotations_value_template(v.templates()));
+    combine(seed, hash_std_list_dogen_annotations_entry_template(v.templates()));
 
     return seed;
 }

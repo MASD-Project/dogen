@@ -112,11 +112,11 @@ read_ownership_hierarchy(const boost::property_tree::ptree& pt) const {
     return r;
 }
 
-std::list<value_template>
+std::list<entry_template>
 profile_hydrator::read_templates(const boost::property_tree::ptree& pt) const {
-    std::list<value_template> r;
+    std::list<entry_template> r;
     for (auto i(pt.begin()); i != pt.end(); ++i) {
-        value_template vt;
+        entry_template vt;
         const auto& vt_pt(i->second);
 
         auto j(vt_pt.find(name_key));

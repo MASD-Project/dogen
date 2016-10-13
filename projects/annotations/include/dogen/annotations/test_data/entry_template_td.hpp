@@ -18,22 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_IO_VALUE_TEMPLATE_IO_HPP
-#define DOGEN_ANNOTATIONS_IO_VALUE_TEMPLATE_IO_HPP
+#ifndef DOGEN_ANNOTATIONS_TEST_DATA_ENTRY_TEMPLATE_TD_HPP
+#define DOGEN_ANNOTATIONS_TEST_DATA_ENTRY_TEMPLATE_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/annotations/types/value_template.hpp"
+#include "dogen/annotations/types/entry_template.hpp"
 
 namespace dogen {
 namespace annotations {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::annotations::value_template& v);
+class entry_template_generator {
+public:
+    entry_template_generator();
+
+public:
+    typedef dogen::annotations::entry_template result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 } }
 

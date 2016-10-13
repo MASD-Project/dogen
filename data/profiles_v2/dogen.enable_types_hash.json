@@ -5,7 +5,7 @@
         {
             "name" : {
                 "simple" : "enabled",
-                "qualified" : "quilt.cpp.hash"
+                "qualified" : "quilt.cpp.hash.enabled"
             },
             "ownership_hierarchy" : {
                 "model_name" : "quilt.cpp"

@@ -18,15 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/annotations/types/value_template.hpp"
+#include "dogen/annotations/types/entry_template.hpp"
 
 namespace dogen {
 namespace annotations {
 
-value_template::value_template()
+entry_template::entry_template()
     : kind_(static_cast<dogen::annotations::template_kinds>(0)) { }
 
-value_template::value_template(
+entry_template::entry_template(
     const dogen::annotations::name& name,
     const dogen::annotations::ownership_hierarchy& ownership_hierarchy,
     const std::list<std::string>& untyped_value,
@@ -36,7 +36,7 @@ value_template::value_template(
       untyped_value_(untyped_value),
       kind_(kind) { }
 
-void value_template::swap(value_template& other) noexcept {
+void entry_template::swap(entry_template& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
     swap(ownership_hierarchy_, other.ownership_hierarchy_);
@@ -44,72 +44,72 @@ void value_template::swap(value_template& other) noexcept {
     swap(kind_, other.kind_);
 }
 
-bool value_template::operator==(const value_template& rhs) const {
+bool entry_template::operator==(const entry_template& rhs) const {
     return name_ == rhs.name_ &&
         ownership_hierarchy_ == rhs.ownership_hierarchy_ &&
         untyped_value_ == rhs.untyped_value_ &&
         kind_ == rhs.kind_;
 }
 
-value_template& value_template::operator=(value_template other) {
+entry_template& entry_template::operator=(entry_template other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const dogen::annotations::name& value_template::name() const {
+const dogen::annotations::name& entry_template::name() const {
     return name_;
 }
 
-dogen::annotations::name& value_template::name() {
+dogen::annotations::name& entry_template::name() {
     return name_;
 }
 
-void value_template::name(const dogen::annotations::name& v) {
+void entry_template::name(const dogen::annotations::name& v) {
     name_ = v;
 }
 
-void value_template::name(const dogen::annotations::name&& v) {
+void entry_template::name(const dogen::annotations::name&& v) {
     name_ = std::move(v);
 }
 
-const dogen::annotations::ownership_hierarchy& value_template::ownership_hierarchy() const {
+const dogen::annotations::ownership_hierarchy& entry_template::ownership_hierarchy() const {
     return ownership_hierarchy_;
 }
 
-dogen::annotations::ownership_hierarchy& value_template::ownership_hierarchy() {
+dogen::annotations::ownership_hierarchy& entry_template::ownership_hierarchy() {
     return ownership_hierarchy_;
 }
 
-void value_template::ownership_hierarchy(const dogen::annotations::ownership_hierarchy& v) {
+void entry_template::ownership_hierarchy(const dogen::annotations::ownership_hierarchy& v) {
     ownership_hierarchy_ = v;
 }
 
-void value_template::ownership_hierarchy(const dogen::annotations::ownership_hierarchy&& v) {
+void entry_template::ownership_hierarchy(const dogen::annotations::ownership_hierarchy&& v) {
     ownership_hierarchy_ = std::move(v);
 }
 
-const std::list<std::string>& value_template::untyped_value() const {
+const std::list<std::string>& entry_template::untyped_value() const {
     return untyped_value_;
 }
 
-std::list<std::string>& value_template::untyped_value() {
+std::list<std::string>& entry_template::untyped_value() {
     return untyped_value_;
 }
 
-void value_template::untyped_value(const std::list<std::string>& v) {
+void entry_template::untyped_value(const std::list<std::string>& v) {
     untyped_value_ = v;
 }
 
-void value_template::untyped_value(const std::list<std::string>&& v) {
+void entry_template::untyped_value(const std::list<std::string>&& v) {
     untyped_value_ = std::move(v);
 }
 
-dogen::annotations::template_kinds value_template::kind() const {
+dogen::annotations::template_kinds entry_template::kind() const {
     return kind_;
 }
 
-void value_template::kind(const dogen::annotations::template_kinds v) {
+void entry_template::kind(const dogen::annotations::template_kinds v) {
     kind_ = v;
 }
 

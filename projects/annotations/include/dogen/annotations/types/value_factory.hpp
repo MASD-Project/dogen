@@ -102,7 +102,7 @@ public:
      * @pre Values must be valid according to the type in the field
      * definition.
      */
-    boost::shared_ptr<value> make(const type& fd,
+    boost::shared_ptr<value> make(const type& t,
         const std::list<std::string>& v) const;
 };
 

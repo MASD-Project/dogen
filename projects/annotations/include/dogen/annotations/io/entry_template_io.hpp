@@ -18,35 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_HASH_VALUE_TEMPLATE_HASH_HPP
-#define DOGEN_ANNOTATIONS_HASH_VALUE_TEMPLATE_HASH_HPP
+#ifndef DOGEN_ANNOTATIONS_IO_ENTRY_TEMPLATE_IO_HPP
+#define DOGEN_ANNOTATIONS_IO_ENTRY_TEMPLATE_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/annotations/types/value_template.hpp"
+#include <iosfwd>
+#include "dogen/annotations/types/entry_template.hpp"
 
 namespace dogen {
 namespace annotations {
 
-struct value_template_hasher {
-public:
-    static std::size_t hash(const value_template& v);
-};
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::annotations::entry_template& v);
 
 } }
 
-namespace std {
-
-template<>
-struct hash<dogen::annotations::value_template> {
-public:
-    size_t operator()(const dogen::annotations::value_template& v) const {
-        return dogen::annotations::value_template_hasher::hash(v);
-    }
-};
-
-}
 #endif

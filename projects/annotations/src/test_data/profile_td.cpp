@@ -20,7 +20,7 @@
  */
 #include <sstream>
 #include "dogen/annotations/test_data/profile_td.hpp"
-#include "dogen/annotations/test_data/value_template_td.hpp"
+#include "dogen/annotations/test_data/entry_template_td.hpp"
 
 namespace {
 
@@ -46,15 +46,15 @@ std::unordered_set<std::string> create_std_unordered_set_std_string(unsigned int
     return r;
 }
 
-dogen::annotations::value_template
-create_dogen_annotations_value_template(const unsigned int position) {
-    return dogen::annotations::value_template_generator::create(position);
+dogen::annotations::entry_template
+create_dogen_annotations_entry_template(const unsigned int position) {
+    return dogen::annotations::entry_template_generator::create(position);
 }
 
-std::list<dogen::annotations::value_template> create_std_list_dogen_annotations_value_template(unsigned int position) {
-    std::list<dogen::annotations::value_template> r;
+std::list<dogen::annotations::entry_template> create_std_list_dogen_annotations_entry_template(unsigned int position) {
+    std::list<dogen::annotations::entry_template> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_dogen_annotations_value_template(position + i));
+        r.push_back(create_dogen_annotations_entry_template(position + i));
     }
     return r;
 }
@@ -71,7 +71,7 @@ populate(const unsigned int position, result_type& v) {
     v.name(create_std_string(position + 0));
     v.parents(create_std_list_std_string(position + 1));
     v.labels(create_std_unordered_set_std_string(position + 2));
-    v.templates(create_std_list_dogen_annotations_value_template(position + 3));
+    v.templates(create_std_list_dogen_annotations_entry_template(position + 3));
 }
 
 profile_generator::result_type

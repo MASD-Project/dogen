@@ -20,8 +20,8 @@
  */
 #include <sstream>
 #include "dogen/annotations/test_data/name_td.hpp"
+#include "dogen/annotations/test_data/entry_template_td.hpp"
 #include "dogen/annotations/test_data/template_kinds_td.hpp"
-#include "dogen/annotations/test_data/value_template_td.hpp"
 #include "dogen/annotations/test_data/ownership_hierarchy_td.hpp"
 
 namespace {
@@ -60,9 +60,9 @@ create_dogen_annotations_template_kinds(const unsigned int position) {
 namespace dogen {
 namespace annotations {
 
-value_template_generator::value_template_generator() : position_(0) { }
+entry_template_generator::entry_template_generator() : position_(0) { }
 
-void value_template_generator::
+void entry_template_generator::
 populate(const unsigned int position, result_type& v) {
     v.name(create_dogen_annotations_name(position + 0));
     v.ownership_hierarchy(create_dogen_annotations_ownership_hierarchy(position + 1));
@@ -70,22 +70,22 @@ populate(const unsigned int position, result_type& v) {
     v.kind(create_dogen_annotations_template_kinds(position + 3));
 }
 
-value_template_generator::result_type
-value_template_generator::create(const unsigned int position) {
-    value_template r;
-    value_template_generator::populate(position, r);
+entry_template_generator::result_type
+entry_template_generator::create(const unsigned int position) {
+    entry_template r;
+    entry_template_generator::populate(position, r);
     return r;
 }
 
-value_template_generator::result_type*
-value_template_generator::create_ptr(const unsigned int position) {
-    value_template* p = new value_template();
-    value_template_generator::populate(position, *p);
+entry_template_generator::result_type*
+entry_template_generator::create_ptr(const unsigned int position) {
+    entry_template* p = new entry_template();
+    entry_template_generator::populate(position, *p);
     return p;
 }
 
-value_template_generator::result_type
-value_template_generator::operator()() {
+entry_template_generator::result_type
+entry_template_generator::operator()() {
     return create(position_++);
 }
 

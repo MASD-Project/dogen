@@ -19,8 +19,8 @@
  *
  */
 #include "dogen/annotations/hash/name_hash.hpp"
+#include "dogen/annotations/hash/entry_template_hash.hpp"
 #include "dogen/annotations/hash/template_kinds_hash.hpp"
-#include "dogen/annotations/hash/value_template_hash.hpp"
 #include "dogen/annotations/hash/ownership_hierarchy_hash.hpp"
 
 namespace {
@@ -44,7 +44,7 @@ inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
 namespace dogen {
 namespace annotations {
 
-std::size_t value_template_hasher::hash(const value_template& v) {
+std::size_t entry_template_hasher::hash(const entry_template& v) {
     std::size_t seed(0);
 
     combine(seed, v.name());

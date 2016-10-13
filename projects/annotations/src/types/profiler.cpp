@@ -26,8 +26,10 @@
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/filesystem/file.hpp"
 #include "dogen/annotations/io/profile_io.hpp"
+#include "dogen/annotations/io/annotation_io.hpp"
 #include "dogen/annotations/types/profile_hydrator.hpp"
 #include "dogen/annotations/types/profiling_error.hpp"
+#include "dogen/annotations/types/template_instantiator.hpp"
 #include "dogen/annotations/types/profiler.hpp"
 
 using namespace dogen::utility::log;
@@ -157,9 +159,24 @@ validate(const std::unordered_map<std::string, prof_ann>& pas) const {
     BOOST_LOG_SEV(lg, debug) << "Validated all profiles.";
 }
 
-void profiler::instantiate_value_templates(
-    std::unordered_map<std::string, prof_ann>& /*pa*/) const {
+void profiler::instantiate_entry_templates(
+    const ownership_hierarchy_repository& ohrp,
+    const type_repository& trp,
+    std::unordered_map<std::string, prof_ann>& pas) const {
+    BOOST_LOG_SEV(lg, debug) << "Instantiating value templates.";
 
+    template_instantiator ti(ohrp);
+    for (auto& pair : pas) {
+        auto& pa(pair.second);
+        for (const auto& tpl : pa.prof.templates()) {
+            const auto entries(ti.instantiate(trp, tpl));
+            for (const auto& entry : entries)
+                pa.ann.entries().insert(entry);
+
+            BOOST_LOG_SEV(lg, debug) << "Annotation: " << pa.ann;
+        }
+    }
+    BOOST_LOG_SEV(lg, debug) << "Instanted value templates.";
 }
 
 void profiler::walk_up_parent_tree_and_merge(const std::string& /*current*/,
@@ -170,22 +187,56 @@ void profiler::merge(std::unordered_map<std::string, prof_ann>& /*pa*/) const {
 
 }
 
-std::unordered_map<std::string, profiler::prof_ann>
+std::unordered_map<std::string, annotation>
 profiler::create_annotation_map(
-    const std::unordered_map<std::string, prof_ann>& /*pa*/) const {
-    std::unordered_map<std::string, profiler::prof_ann> r;
+    const std::unordered_map<std::string, prof_ann>& pas) const {
+
+    std::unordered_map<std::string, annotation> r;
+    for (const auto& pair : pas)
+        r[pair.first ] = pair.second.ann;
+
     return r;
 }
 
 std::unordered_map<std::string, annotation>
 profiler::generate(const std::vector<boost::filesystem::path>& data_dirs,
-    const ownership_hierarchy_repository& /*ohrp*/) const {
+    const ownership_hierarchy_repository& ohrp,
+    const type_repository& trp) const {
 
+    /*
+     * First we obtain the set of directories that contain profile
+     * data, by looking into the supplied data directories at a
+     * well-known location.
+     */
     const auto prf_dirs(to_profile_directories(data_dirs));
+
+    /*
+     * We then read out all profiles contained within that set of
+     * directories.
+     */
     const auto profiles(hydrate_profiles(prf_dirs));
-    const auto pas(create_prof_ann_map(profiles));
+
+    /*
+     * We create a map by profile name of those profiles and ensure
+     * they look vaguely valid.
+     */
+    auto pas(create_prof_ann_map(profiles));
     validate(pas);
-    std::unordered_map<std::string, annotation> r;
+
+    /*
+     * We then instantiate all of the entry templates contained within
+     * each profile and slap the results in the profile's annotation
+     * result.
+     */
+    instantiate_entry_templates(ohrp, trp, pas);
+
+    /*
+     * We now merge the annotation objects according to the profile
+     * inheritance tree and format the results for the expected
+     * output.
+     */
+    merge(pas);
+    const auto r(create_annotation_map(pas));
     return r;
 }
 

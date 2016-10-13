@@ -5,7 +5,7 @@
         {
             "name" : {
                 "simple" : "enabled",
-                "qualified" : "quilt.cpp.cmake"
+                "qualified" : "quilt.cpp.cmake.enabled"
             },
             "ownership_hierarchy" : {
                 "model_name" : "quilt.cpp"

@@ -32,6 +32,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/annotations/types/profile.hpp"
 #include "dogen/annotations/types/annotation.hpp"
+#include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/annotations/types/ownership_hierarchy_repository.hpp"
 
 namespace dogen {
@@ -57,7 +58,9 @@ private:
 
     void validate(const std::unordered_map<std::string, prof_ann>& pas) const;
 
-    void instantiate_value_templates(
+    void instantiate_entry_templates(
+        const ownership_hierarchy_repository& ohrp,
+        const type_repository& trp,
         std::unordered_map<std::string, prof_ann>& pas) const;
 
     void walk_up_parent_tree_and_merge(
@@ -66,14 +69,15 @@ private:
 
     void merge(std::unordered_map<std::string, prof_ann>& pas) const;
 
-    std::unordered_map<std::string, prof_ann>
+    std::unordered_map<std::string, annotation>
     create_annotation_map(
         const std::unordered_map<std::string, prof_ann>& pas) const;
 
 public:
     std::unordered_map<std::string, annotation>
     generate(const std::vector<boost::filesystem::path>& data_dirs,
-        const ownership_hierarchy_repository& ohrp) const;
+        const ownership_hierarchy_repository& ohrp,
+        const type_repository& trp) const;
 };
 
 } }

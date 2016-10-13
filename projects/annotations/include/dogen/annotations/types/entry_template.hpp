@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_VALUE_TEMPLATE_HPP
-#define DOGEN_ANNOTATIONS_TYPES_VALUE_TEMPLATE_HPP
+#ifndef DOGEN_ANNOTATIONS_TYPES_ENTRY_TEMPLATE_HPP
+#define DOGEN_ANNOTATIONS_TYPES_ENTRY_TEMPLATE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,22 +31,22 @@
 #include "dogen/annotations/types/name.hpp"
 #include "dogen/annotations/types/template_kinds.hpp"
 #include "dogen/annotations/types/ownership_hierarchy.hpp"
-#include "dogen/annotations/serialization/value_template_fwd_ser.hpp"
+#include "dogen/annotations/serialization/entry_template_fwd_ser.hpp"
 
 namespace dogen {
 namespace annotations {
 
-class value_template final {
+class entry_template final {
 public:
-    value_template(const value_template&) = default;
-    value_template(value_template&&) = default;
-    ~value_template() = default;
+    entry_template(const entry_template&) = default;
+    entry_template(entry_template&&) = default;
+    ~entry_template() = default;
 
 public:
-    value_template();
+    entry_template();
 
 public:
-    value_template(
+    entry_template(
         const dogen::annotations::name& name,
         const dogen::annotations::ownership_hierarchy& ownership_hierarchy,
         const std::list<std::string>& untyped_value,
@@ -54,10 +54,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::annotations::value_template& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::annotations::entry_template& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::annotations::value_template& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::annotations::entry_template& v, unsigned int version);
 
 public:
     const dogen::annotations::name& name() const;
@@ -79,14 +79,14 @@ public:
     void kind(const dogen::annotations::template_kinds v);
 
 public:
-    bool operator==(const value_template& rhs) const;
-    bool operator!=(const value_template& rhs) const {
+    bool operator==(const entry_template& rhs) const;
+    bool operator!=(const entry_template& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(value_template& other) noexcept;
-    value_template& operator=(value_template other);
+    void swap(entry_template& other) noexcept;
+    entry_template& operator=(entry_template other);
 
 private:
     dogen::annotations::name name_;
@@ -101,8 +101,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::annotations::value_template& lhs,
-    dogen::annotations::value_template& rhs) {
+    dogen::annotations::entry_template& lhs,
+    dogen::annotations::entry_template& rhs) {
     lhs.swap(rhs);
 }
 

@@ -26,12 +26,16 @@
 #endif
 
 #include <list>
+#include <string>
 #include <forward_list>
 #include <unordered_set>
 #include <unordered_map>
+#include <boost/shared_ptr.hpp>
 #include "dogen/annotations/types/type.hpp"
 #include "dogen/annotations/types/type_template.hpp"
+#include "dogen/annotations/types/entry_template.hpp"
 #include "dogen/annotations/types/ownership_hierarchy_repository.hpp"
+#include "dogen/annotations/types/type_repository.hpp"
 
 namespace dogen {
 namespace annotations {
@@ -41,46 +45,41 @@ public:
     template_instantiator(const ownership_hierarchy_repository& ohrp);
 
 private:
-    /**
-     * @brief Ensures the field definition is in a valid state for
-     * instantiation.
-     */
-    void validate(const type_template& tt) const;
+    void validate(const ownership_hierarchy& oh, const name& n,
+        const template_kinds tk) const;
 
 public:
     type to_type(const type_template& tt) const;
+    boost::shared_ptr<value>
+    to_value(const type_repository& trp, const std::string& qn,
+        const entry_template& et) const;
 
 private:
-    /**
-     * @brief Instantiates the field definition as a global template.
-     */
     std::list<type> instantiate_global_template(const type_template& tt) const;
-
-    /**
-     * @brief Instantiates the field definition as a facet template.
-     */
     std::list<type> instantiate_facet_template(const type_template& tt) const;
-
-    /**
-     * @brief Instantiates the field definition as a formatter template.
-     */
     std::list<type>
     instantiate_formatter_template(const type_template& tt) const;
 
-public:
-    /**
-     * @brief Returns true if the supplied field definition can be
-     * instantiated.
-     */
-    bool is_instantiable(const type_template& tt) const;
+private:
+    std::list<std::pair<std::string, boost::shared_ptr<value>>>
+    instantiate_global_template(
+        const type_repository& trp, const entry_template& et) const;
 
-    /**
-     * @brief Instantiates the supplied field definition template into
-     * a number of field definition instances.
-     *
-     * @pre is_instantiable(t) must be true.
-     */
+    std::list<std::pair<std::string, boost::shared_ptr<value>>>
+    instantiate_facet_template(const type_repository& trp,
+        const entry_template& et) const;
+
+    std::list<std::pair<std::string, boost::shared_ptr<value>>>
+    instantiate_formatter_template(const type_repository& trp,
+        const entry_template& et) const;
+
+public:
+    bool is_instantiable(const template_kinds tk) const;
+
     std::list<type> instantiate(const type_template& tt) const;
+
+    std::list<std::pair<std::string, boost::shared_ptr<value>>>
+    instantiate(const type_repository& trp, const entry_template& et) const;
 
 private:
     const ownership_hierarchy_repository& repository_;

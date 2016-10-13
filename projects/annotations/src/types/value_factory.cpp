@@ -133,13 +133,13 @@ boost::shared_ptr<value> value_factory::make_number(const int v) const {
     return boost::make_shared<number>(v);
 }
 
-boost::shared_ptr<value> value_factory::make(const type& fd,
+boost::shared_ptr<value> value_factory::make(const type& t,
     const std::list<std::string>& v) const {
 
-    if (!is_collection(fd.value_type()))
+    if (!is_collection(t.value_type()))
         ensure_at_most_one_element(v);
 
-    switch (fd.value_type()) {
+    switch (t.value_type()) {
     case value_types::text:
         return make_text(v.front());
     case value_types::text_collection:
@@ -151,9 +151,10 @@ boost::shared_ptr<value> value_factory::make(const type& fd,
     default:
         break;
     }
-    BOOST_LOG_SEV(lg, error) << value_type_not_supported << fd.value_type();
+
+    BOOST_LOG_SEV(lg, error) << value_type_not_supported << t.value_type();
     BOOST_THROW_EXCEPTION(building_error(value_type_not_supported +
-            boost::lexical_cast<std::string>(fd.value_type())));
+            boost::lexical_cast<std::string>(t.value_type())));
 }
 
 } }

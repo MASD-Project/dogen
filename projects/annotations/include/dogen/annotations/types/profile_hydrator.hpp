@@ -31,7 +31,7 @@
 #include "dogen/annotations/types/name.hpp"
 #include "dogen/annotations/types/template_kinds.hpp"
 #include "dogen/annotations/types/ownership_hierarchy.hpp"
-#include "dogen/annotations/types/value_template.hpp"
+#include "dogen/annotations/types/entry_template.hpp"
 #include "dogen/annotations/types/profile.hpp"
 
 namespace dogen {
@@ -46,7 +46,7 @@ private:
     ownership_hierarchy
     read_ownership_hierarchy(const boost::property_tree::ptree& pt) const;
 
-    std::list<value_template>
+    std::list<entry_template>
     read_templates(const boost::property_tree::ptree& pt) const;
 
     profile read_stream(std::istream& s) const;

@@ -130,7 +130,9 @@ compute_scope_for_id(const std::string& root_annotation_id,
 std::unordered_map<std::string, annotation> annotation_groups_factory::
 create_annotation_profiles() const {
     profiler prf;
-    return prf.generate(data_dirs_, ownership_hierarchy_repository_);
+    const auto& ohrp(ownership_hierarchy_repository_);
+    const auto& trp(type_repository_);
+    return prf.generate(data_dirs_, ohrp, trp);
 }
 
 annotation annotation_groups_factory::

@@ -29,7 +29,7 @@
 #include <string>
 #include <algorithm>
 #include <unordered_set>
-#include "dogen/annotations/types/value_template.hpp"
+#include "dogen/annotations/types/entry_template.hpp"
 #include "dogen/annotations/serialization/profile_fwd_ser.hpp"
 
 namespace dogen {
@@ -47,7 +47,7 @@ public:
         const std::string& name,
         const std::list<std::string>& parents,
         const std::unordered_set<std::string>& labels,
-        const std::list<dogen::annotations::value_template>& templates);
+        const std::list<dogen::annotations::entry_template>& templates);
 
 private:
     template<typename Archive>
@@ -72,10 +72,10 @@ public:
     void labels(const std::unordered_set<std::string>& v);
     void labels(const std::unordered_set<std::string>&& v);
 
-    const std::list<dogen::annotations::value_template>& templates() const;
-    std::list<dogen::annotations::value_template>& templates();
-    void templates(const std::list<dogen::annotations::value_template>& v);
-    void templates(const std::list<dogen::annotations::value_template>&& v);
+    const std::list<dogen::annotations::entry_template>& templates() const;
+    std::list<dogen::annotations::entry_template>& templates();
+    void templates(const std::list<dogen::annotations::entry_template>& v);
+    void templates(const std::list<dogen::annotations::entry_template>&& v);
 
 public:
     bool operator==(const profile& rhs) const;
@@ -91,7 +91,7 @@ private:
     std::string name_;
     std::list<std::string> parents_;
     std::unordered_set<std::string> labels_;
-    std::list<dogen::annotations::value_template> templates_;
+    std::list<dogen::annotations::entry_template> templates_;
 };
 
 } }

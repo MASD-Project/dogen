@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "dogen/annotations/io/profile_io.hpp"
-#include "dogen/annotations/io/value_template_io.hpp"
+#include "dogen/annotations/io/entry_template_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -60,7 +60,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::s
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::annotations::value_template>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::annotations::entry_template>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

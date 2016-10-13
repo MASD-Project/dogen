@@ -21,8 +21,8 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "dogen/annotations/io/name_io.hpp"
+#include "dogen/annotations/io/entry_template_io.hpp"
 #include "dogen/annotations/io/template_kinds_io.hpp"
-#include "dogen/annotations/io/value_template_io.hpp"
 #include "dogen/annotations/io/ownership_hierarchy_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -49,9 +49,9 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 namespace dogen {
 namespace annotations {
 
-std::ostream& operator<<(std::ostream& s, const value_template& v) {
+std::ostream& operator<<(std::ostream& s, const entry_template& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::annotations::value_template\"" << ", "
+      << "\"__type__\": " << "\"dogen::annotations::entry_template\"" << ", "
       << "\"name\": " << v.name() << ", "
       << "\"ownership_hierarchy\": " << v.ownership_hierarchy() << ", "
       << "\"untyped_value\": " << v.untyped_value() << ", "

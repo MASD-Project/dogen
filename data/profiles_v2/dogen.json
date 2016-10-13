@@ -15,7 +15,7 @@
         {
             "name" : {
                 "simple" : "copyright_notices",
-                "qualified" : "decoration.copyright_notices"
+                "qualified" : "decoration.copyright_notice"
             },
             "ownership_hierarchy" : {
                 "model_name" : "formatters"

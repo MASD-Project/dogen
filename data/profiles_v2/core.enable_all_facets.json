@@ -11,16 +11,6 @@
             },
             "template_kind" : "facet_template",
             "untyped_value" : [ "true" ]
-        },
-        {
-            "name" : {
-                "simple" : "overwrite"
-            },
-            "ownership_hierarchy" : {
-                "model_name" : "quilt.cpp"
-            },
-            "template_kind" : "facet_template",
-            "untyped_value" : [ "true" ]
         }
     ]
 }

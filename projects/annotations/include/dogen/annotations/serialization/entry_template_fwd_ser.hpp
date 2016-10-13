@@ -18,23 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_SERIALIZATION_VALUE_TEMPLATE_FWD_SER_HPP
-#define DOGEN_ANNOTATIONS_SERIALIZATION_VALUE_TEMPLATE_FWD_SER_HPP
+#ifndef DOGEN_ANNOTATIONS_SERIALIZATION_ENTRY_TEMPLATE_FWD_SER_HPP
+#define DOGEN_ANNOTATIONS_SERIALIZATION_ENTRY_TEMPLATE_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/annotations/types/value_template_fwd.hpp"
+#include "dogen/annotations/types/entry_template_fwd.hpp"
 
 namespace boost {
 namespace serialization {
 
 template<class Archive>
-void save(Archive& ar, const dogen::annotations::value_template& v, unsigned int version);
+void save(Archive& ar, const dogen::annotations::entry_template& v, unsigned int version);
 
 template<class Archive>
-void load(Archive& ar, dogen::annotations::value_template& v, unsigned int version);
+void load(Archive& ar, dogen::annotations::entry_template& v, unsigned int version);
 
 } }
 

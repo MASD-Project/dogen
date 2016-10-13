@@ -77,7 +77,7 @@ std::list<type> type_repository_factory::instantiate_templates(
     const template_instantiator ins(ohrp);
     unsigned int counter(0);
     for (const auto tt : tts) {
-        if (!ins.is_instantiable(tt)) {
+        if (!ins.is_instantiable(tt.kind())) {
             r.push_back(ins.to_type(tt));
             continue;
         }
