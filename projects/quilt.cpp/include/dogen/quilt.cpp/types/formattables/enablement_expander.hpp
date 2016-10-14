@@ -48,6 +48,7 @@ private:
         annotations::type model_enabled;
         annotations::type facet_enabled;
         annotations::type formatter_enabled;
+        annotations::type overwrite;
     };
 
     friend std::ostream& operator<<(std::ostream& s,
@@ -76,6 +77,7 @@ private:
         annotations::type facet_enabled;
         annotations::type formatter_enabled;
         annotations::type facet_supported;
+        annotations::type overwrite;
     };
 
     friend std::ostream& operator<<(std::ostream& s,

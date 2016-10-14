@@ -106,6 +106,7 @@ enablement_expander::make_global_type_group(
 
         const auto& fmtn(oh.formatter_name());
         gtg.formatter_enabled = s.select_type_by_name(fmtn, traits::enabled());
+        gtg.overwrite = s.select_type_by_name(fmtn, traits::overwrite());
 
         r[fmtn] = gtg;
     }
@@ -137,6 +138,7 @@ enablement_expander::obtain_global_configurations(
         gec.facet_enabled(s.get_boolean_content_or_default(t.facet_enabled));
         gec.formatter_enabled(
             s.get_boolean_content_or_default(t.formatter_enabled));
+        gec.overwrite(s.get_boolean_content_or_default(t.overwrite));
 
         r[fmtn] = gec;
     }
@@ -202,6 +204,7 @@ make_local_type_group(const annotations::type_repository& atrp,
 
         const auto& fmtn(oh.formatter_name());
         ltg.formatter_enabled = s.select_type_by_name(fmtn, traits::enabled());
+        ltg.overwrite = s.select_type_by_name(fmtn, traits::overwrite());
 
         ltg.facet_supported = s.select_type_by_name(fctn, traits::supported());
         r[fmtn] = ltg;
@@ -270,6 +273,9 @@ obtain_local_configurations(const local_type_group_type& ltg,
 
         if (s.has_entry(t.formatter_enabled))
             lec.formatter_enabled(s.get_boolean_content(t.formatter_enabled));
+
+        if (s.has_entry(t.overwrite))
+            lec.overwrite(s.get_boolean_content(t.overwrite));
 
         r[fmtn] = lec;
     }
@@ -359,6 +365,15 @@ void enablement_expander::compute_enablement(
             fmt_props.enabled(*lc.formatter_enabled());
             continue;
         }
+
+        /*
+         * The overwrite flag is set to either a local value, if
+         * available, or if not to the global value.
+         */
+        if (lc.overwrite())
+            fmt_props.overwrite(*lc.overwrite());
+        else
+            fmt_props.overwrite(gc.overwrite());
 
         /*
          * Check to see if the facet enablement field has been set

@@ -38,7 +38,8 @@ std::ostream& operator<<(std::ostream& s, const global_enablement_configuration&
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::global_enablement_configuration\"" << ", "
       << "\"model_enabled\": " << v.model_enabled() << ", "
       << "\"facet_enabled\": " << v.facet_enabled() << ", "
-      << "\"formatter_enabled\": " << v.formatter_enabled()
+      << "\"formatter_enabled\": " << v.formatter_enabled() << ", "
+      << "\"overwrite\": " << v.overwrite()
       << " }";
     return(s);
 }

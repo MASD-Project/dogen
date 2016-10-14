@@ -28,27 +28,32 @@ namespace formattables {
 global_enablement_configuration::global_enablement_configuration()
     : model_enabled_(static_cast<bool>(0)),
       facet_enabled_(static_cast<bool>(0)),
-      formatter_enabled_(static_cast<bool>(0)) { }
+      formatter_enabled_(static_cast<bool>(0)),
+      overwrite_(static_cast<bool>(0)) { }
 
 global_enablement_configuration::global_enablement_configuration(
     const bool model_enabled,
     const bool facet_enabled,
-    const bool formatter_enabled)
+    const bool formatter_enabled,
+    const bool overwrite)
     : model_enabled_(model_enabled),
       facet_enabled_(facet_enabled),
-      formatter_enabled_(formatter_enabled) { }
+      formatter_enabled_(formatter_enabled),
+      overwrite_(overwrite) { }
 
 void global_enablement_configuration::swap(global_enablement_configuration& other) noexcept {
     using std::swap;
     swap(model_enabled_, other.model_enabled_);
     swap(facet_enabled_, other.facet_enabled_);
     swap(formatter_enabled_, other.formatter_enabled_);
+    swap(overwrite_, other.overwrite_);
 }
 
 bool global_enablement_configuration::operator==(const global_enablement_configuration& rhs) const {
     return model_enabled_ == rhs.model_enabled_ &&
         facet_enabled_ == rhs.facet_enabled_ &&
-        formatter_enabled_ == rhs.formatter_enabled_;
+        formatter_enabled_ == rhs.formatter_enabled_ &&
+        overwrite_ == rhs.overwrite_;
 }
 
 global_enablement_configuration& global_enablement_configuration::operator=(global_enablement_configuration other) {
@@ -79,6 +84,14 @@ bool global_enablement_configuration::formatter_enabled() const {
 
 void global_enablement_configuration::formatter_enabled(const bool v) {
     formatter_enabled_ = v;
+}
+
+bool global_enablement_configuration::overwrite() const {
+    return overwrite_;
+}
+
+void global_enablement_configuration::overwrite(const bool v) {
+    overwrite_ = v;
 }
 
 } } } }

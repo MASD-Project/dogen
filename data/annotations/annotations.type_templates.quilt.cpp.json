@@ -25,6 +25,18 @@
     },
     {
         "name" : {
+            "simple" : "overwrite"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "quilt.cpp"
+        },
+        "value_type" : "boolean",
+        "template_kind" : "formatter_template",
+        "scope" : "any",
+        "default_value" : true
+    },
+    {
+        "name" : {
             "simple" : "profile",
             "qualified" : "quilt.cpp.profile"
         },

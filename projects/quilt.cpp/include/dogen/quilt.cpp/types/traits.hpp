@@ -47,6 +47,11 @@ struct traits {
     static std::string supported();
 
     /**
+     * @brief If set to true, the file will be overwritten.
+     */
+    static std::string overwrite();
+
+    /**
      * @brief Directory in which to place files for this facet.
      */
     static std::string directory();

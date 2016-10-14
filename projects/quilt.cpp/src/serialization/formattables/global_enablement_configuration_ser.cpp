@@ -39,6 +39,7 @@ void save(Archive& ar,
     ar << make_nvp("model_enabled", v.model_enabled_);
     ar << make_nvp("facet_enabled", v.facet_enabled_);
     ar << make_nvp("formatter_enabled", v.formatter_enabled_);
+    ar << make_nvp("overwrite", v.overwrite_);
 }
 
 template<typename Archive>
@@ -48,6 +49,7 @@ void load(Archive& ar,
     ar >> make_nvp("model_enabled", v.model_enabled_);
     ar >> make_nvp("facet_enabled", v.facet_enabled_);
     ar >> make_nvp("formatter_enabled", v.formatter_enabled_);
+    ar >> make_nvp("overwrite", v.overwrite_);
 }
 
 } }

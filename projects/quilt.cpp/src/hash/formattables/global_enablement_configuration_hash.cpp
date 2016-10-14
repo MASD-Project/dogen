@@ -41,6 +41,7 @@ std::size_t global_enablement_configuration_hasher::hash(const global_enablement
     combine(seed, v.model_enabled());
     combine(seed, v.facet_enabled());
     combine(seed, v.formatter_enabled());
+    combine(seed, v.overwrite());
 
     return seed;
 }

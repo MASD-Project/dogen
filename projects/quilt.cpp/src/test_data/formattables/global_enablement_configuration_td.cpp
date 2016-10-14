@@ -40,6 +40,7 @@ populate(const unsigned int position, result_type& v) {
     v.model_enabled(create_bool(position + 0));
     v.facet_enabled(create_bool(position + 1));
     v.formatter_enabled(create_bool(position + 2));
+    v.overwrite(create_bool(position + 3));
 }
 
 global_enablement_configuration_generator::result_type

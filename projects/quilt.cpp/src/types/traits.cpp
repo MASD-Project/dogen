@@ -34,6 +34,11 @@ std::string traits::supported() {
     return r;
 }
 
+std::string traits::overwrite() {
+    static std::string r("overwrite");
+    return r;
+}
+
 std::string traits::directory() {
     static std::string r("directory");
     return r;

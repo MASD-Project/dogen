@@ -36,11 +36,9 @@ namespace formattables {
 
 class local_enablement_configuration final {
 public:
+    local_enablement_configuration() = default;
     local_enablement_configuration(const local_enablement_configuration&) = default;
     ~local_enablement_configuration() = default;
-
-public:
-    local_enablement_configuration();
 
 public:
     local_enablement_configuration(local_enablement_configuration&& rhs);
@@ -49,7 +47,8 @@ public:
     local_enablement_configuration(
         const boost::optional<bool>& facet_enabled,
         const boost::optional<bool>& formatter_enabled,
-        const bool facet_supported);
+        const boost::optional<bool>& facet_supported,
+        const boost::optional<bool>& overwrite);
 
 private:
     template<typename Archive>
@@ -69,8 +68,15 @@ public:
     void formatter_enabled(const boost::optional<bool>& v);
     void formatter_enabled(const boost::optional<bool>&& v);
 
-    bool facet_supported() const;
-    void facet_supported(const bool v);
+    const boost::optional<bool>& facet_supported() const;
+    boost::optional<bool>& facet_supported();
+    void facet_supported(const boost::optional<bool>& v);
+    void facet_supported(const boost::optional<bool>&& v);
+
+    const boost::optional<bool>& overwrite() const;
+    boost::optional<bool>& overwrite();
+    void overwrite(const boost::optional<bool>& v);
+    void overwrite(const boost::optional<bool>&& v);
 
 public:
     bool operator==(const local_enablement_configuration& rhs) const;
@@ -85,7 +91,8 @@ public:
 private:
     boost::optional<bool> facet_enabled_;
     boost::optional<bool> formatter_enabled_;
-    bool facet_supported_;
+    boost::optional<bool> facet_supported_;
+    boost::optional<bool> overwrite_;
 };
 
 } } } }

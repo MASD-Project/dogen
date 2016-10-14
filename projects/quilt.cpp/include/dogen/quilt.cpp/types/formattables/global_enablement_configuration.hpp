@@ -46,7 +46,8 @@ public:
     global_enablement_configuration(
         const bool model_enabled,
         const bool facet_enabled,
-        const bool formatter_enabled);
+        const bool formatter_enabled,
+        const bool overwrite);
 
 private:
     template<typename Archive>
@@ -65,6 +66,9 @@ public:
     bool formatter_enabled() const;
     void formatter_enabled(const bool v);
 
+    bool overwrite() const;
+    void overwrite(const bool v);
+
 public:
     bool operator==(const global_enablement_configuration& rhs) const;
     bool operator!=(const global_enablement_configuration& rhs) const {
@@ -79,6 +83,7 @@ private:
     bool model_enabled_;
     bool facet_enabled_;
     bool formatter_enabled_;
+    bool overwrite_;
 };
 
 } } } }
