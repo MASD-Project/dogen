@@ -49,6 +49,8 @@ std::size_t module_hasher::hash(const module& v) {
     combine(seed, dynamic_cast<const dogen::yarn::element&>(v));
 
     combine(seed, hash_std_list_dogen_yarn_name(v.members()));
+    combine(seed, v.is_root());
+
     return seed;
 }
 

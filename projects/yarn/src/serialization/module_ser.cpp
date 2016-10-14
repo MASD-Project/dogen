@@ -46,6 +46,7 @@ void save(Archive& ar,
     ar << make_nvp("element", base_object<dogen::yarn::element>(v));
 
     ar << make_nvp("members", v.members_);
+    ar << make_nvp("is_root", v.is_root_);
 }
 
 template<typename Archive>
@@ -55,6 +56,7 @@ void load(Archive& ar,
     ar >> make_nvp("element", base_object<dogen::yarn::element>(v));
 
     ar >> make_nvp("members", v.members_);
+    ar >> make_nvp("is_root", v.is_root_);
 }
 
 } }

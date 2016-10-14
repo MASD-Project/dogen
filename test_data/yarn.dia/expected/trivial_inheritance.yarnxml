@@ -105,6 +105,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</members>
+				<is_root>0</is_root>
 			</second>
 		</item>
 		<item>
@@ -170,6 +171,7 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</members>
+				<is_root>0</is_root>
 			</second>
 		</item>
 		<item>
@@ -230,6 +232,7 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</members>
+				<is_root>0</is_root>
 			</second>
 		</item>
 		<item>
@@ -290,6 +293,7 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</members>
+				<is_root>0</is_root>
 			</second>
 		</item>
 		<item>
@@ -350,6 +354,7 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</members>
+				<is_root>0</is_root>
 			</second>
 		</item>
 	</modules>
@@ -6095,6 +6100,7 @@ in the context of inheritance.
 			<count>0</count>
 			<item_version>0</item_version>
 		</members>
+		<is_root>0</is_root>
 	</root_module>
 </entity>
 </boost_serialization>

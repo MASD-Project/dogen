@@ -192,6 +192,8 @@ void modules_expander::populate_root_module(intermediate_model& im) const {
         BOOST_LOG_SEV(lg, error) << missing_root_module << id;
         BOOST_THROW_EXCEPTION(expansion_error(missing_root_module + id));
     }
+
+    i->second.is_root(true);
     im.root_module(i->second);
 }
 

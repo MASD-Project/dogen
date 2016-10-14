@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include <boost/io/ios_state.hpp>
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/types/module.hpp"
 #include "dogen/yarn/io/element_io.hpp"
@@ -41,6 +42,9 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::yarn::na
 namespace dogen {
 namespace yarn {
 
+module::module()
+    : is_root_(static_cast<bool>(0)) { }
+
 module::module(
     const std::string& documentation,
     const dogen::annotations::annotation& annotation,
@@ -51,7 +55,8 @@ module::module(
     const bool in_global_module,
     const std::vector<std::string>& stereotypes,
     const bool is_element_extension,
-    const std::list<dogen::yarn::name>& members)
+    const std::list<dogen::yarn::name>& members,
+    const bool is_root)
     : dogen::yarn::element(
       documentation,
       annotation,
@@ -62,7 +67,8 @@ module::module(
       in_global_module,
       stereotypes,
       is_element_extension),
-      members_(members) { }
+      members_(members),
+      is_root_(is_root) { }
 
 void module::accept(const element_visitor& v) const {
     v.visit(*this);
@@ -82,12 +88,19 @@ void module::accept(element_visitor& v) {
 
 
 void module::to_stream(std::ostream& s) const {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::module\"" << ", "
       << "\"__parent_0__\": ";
     element::to_stream(s);
     s << ", "
-      << "\"members\": " << members_
+      << "\"members\": " << members_ << ", "
+      << "\"is_root\": " << is_root_
       << " }";
 }
 
@@ -96,6 +109,7 @@ void module::swap(module& other) noexcept {
 
     using std::swap;
     swap(members_, other.members_);
+    swap(is_root_, other.is_root_);
 }
 
 bool module::equals(const dogen::yarn::element& other) const {
@@ -106,7 +120,8 @@ bool module::equals(const dogen::yarn::element& other) const {
 
 bool module::operator==(const module& rhs) const {
     return element::compare(rhs) &&
-        members_ == rhs.members_;
+        members_ == rhs.members_ &&
+        is_root_ == rhs.is_root_;
 }
 
 module& module::operator=(module other) {
@@ -129,6 +144,14 @@ void module::members(const std::list<dogen::yarn::name>& v) {
 
 void module::members(const std::list<dogen::yarn::name>&& v) {
     members_ = std::move(v);
+}
+
+bool module::is_root() const {
+    return is_root_;
+}
+
+void module::is_root(const bool v) {
+    is_root_ = v;
 }
 
 } }

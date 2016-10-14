@@ -37,6 +37,10 @@ std::list<dogen::yarn::name> create_std_list_dogen_yarn_name(unsigned int positi
     return r;
 }
 
+bool create_bool(const unsigned int position) {
+    return (position % 2) == 0;
+}
+
 }
 
 namespace dogen {
@@ -48,6 +52,7 @@ void module_generator::
 populate(const unsigned int position, result_type& v) {
     dogen::yarn::element_generator::populate(position, v);
     v.members(create_std_list_dogen_yarn_name(position + 0));
+    v.is_root(create_bool(position + 1));
 }
 
 module_generator::result_type

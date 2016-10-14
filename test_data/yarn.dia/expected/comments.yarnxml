@@ -107,6 +107,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</members>
+				<is_root>0</is_root>
 			</second>
 		</item>
 		<item>
@@ -168,6 +169,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</members>
+				<is_root>0</is_root>
 			</second>
 		</item>
 		<item>
@@ -231,6 +233,7 @@ This comment will be applied to the model namespace itself.
 					<count>0</count>
 					<item_version>0</item_version>
 				</members>
+				<is_root>0</is_root>
 			</second>
 		</item>
 	</modules>
@@ -891,6 +894,7 @@ a second line
 			<count>0</count>
 			<item_version>0</item_version>
 		</members>
+		<is_root>0</is_root>
 	</root_module>
 </entity>
 </boost_serialization>

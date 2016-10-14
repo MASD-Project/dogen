@@ -42,9 +42,11 @@ namespace yarn {
  */
 class module final : public dogen::yarn::element {
 public:
-    module() = default;
     module(const module&) = default;
     module(module&&) = default;
+
+public:
+    module();
 
     virtual ~module() noexcept { }
 
@@ -59,7 +61,8 @@ public:
         const bool in_global_module,
         const std::vector<std::string>& stereotypes,
         const bool is_element_extension,
-        const std::list<dogen::yarn::name>& members);
+        const std::list<dogen::yarn::name>& members,
+        const bool is_root);
 
 private:
     template<typename Archive>
@@ -89,6 +92,9 @@ public:
     void members(const std::list<dogen::yarn::name>&& v);
     /**@}*/
 
+    bool is_root() const;
+    void is_root(const bool v);
+
 public:
     bool operator==(const module& rhs) const;
     bool operator!=(const module& rhs) const {
@@ -104,6 +110,7 @@ public:
 
 private:
     std::list<dogen::yarn::name> members_;
+    bool is_root_;
 };
 
 } }
