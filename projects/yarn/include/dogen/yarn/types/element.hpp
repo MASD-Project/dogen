@@ -27,8 +27,8 @@
 
 #include <iosfwd>
 #include <string>
+#include <vector>
 #include <algorithm>
-#include <unordered_set>
 #include <boost/optional.hpp>
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/origin_types.hpp"
@@ -68,7 +68,7 @@ public:
         const dogen::yarn::origin_types origin_type,
         const boost::optional<dogen::yarn::name>& contained_by,
         const bool in_global_module,
-        const std::unordered_set<std::string>& stereotypes,
+        const std::vector<std::string>& stereotypes,
         const bool is_element_extension);
 
 private:
@@ -156,10 +156,10 @@ public:
     void in_global_module(const bool v);
     /**@}*/
 
-    const std::unordered_set<std::string>& stereotypes() const;
-    std::unordered_set<std::string>& stereotypes();
-    void stereotypes(const std::unordered_set<std::string>& v);
-    void stereotypes(const std::unordered_set<std::string>&& v);
+    const std::vector<std::string>& stereotypes() const;
+    std::vector<std::string>& stereotypes();
+    void stereotypes(const std::vector<std::string>& v);
+    void stereotypes(const std::vector<std::string>&& v);
 
     /**
      * @brief If true, this element extends another element with the same id.
@@ -185,7 +185,7 @@ private:
     dogen::yarn::origin_types origin_type_;
     boost::optional<dogen::yarn::name> contained_by_;
     bool in_global_module_;
-    std::unordered_set<std::string> stereotypes_;
+    std::vector<std::string> stereotypes_;
     bool is_element_extension_;
 };
 

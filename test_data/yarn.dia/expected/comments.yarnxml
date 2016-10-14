@@ -99,7 +99,6 @@
 					<in_global_module>0</in_global_module>
 					<stereotypes class_id="25" tracking_level="0" version="0">
 						<count>0</count>
-						<bucket_count>1</bucket_count>
 						<item_version>0</item_version>
 					</stereotypes>
 					<is_element_extension>0</is_element_extension>
@@ -161,7 +160,6 @@
 					<in_global_module>0</in_global_module>
 					<stereotypes>
 						<count>0</count>
-						<bucket_count>1</bucket_count>
 						<item_version>0</item_version>
 					</stereotypes>
 					<is_element_extension>0</is_element_extension>
@@ -225,7 +223,6 @@ This comment will be applied to the model namespace itself.
 					<in_global_module>0</in_global_module>
 					<stereotypes>
 						<count>0</count>
-						<bucket_count>1</bucket_count>
 						<item_version>0</item_version>
 					</stereotypes>
 					<is_element_extension>0</is_element_extension>
@@ -310,7 +307,6 @@ third line with &quot;quote&quot;
 					<in_global_module>0</in_global_module>
 					<stereotypes>
 						<count>0</count>
-						<bucket_count>1</bucket_count>
 						<item_version>0</item_version>
 					</stereotypes>
 					<is_element_extension>0</is_element_extension>
@@ -429,7 +425,6 @@ third line with &quot;quote&quot;
 					<in_global_module>0</in_global_module>
 					<stereotypes>
 						<count>0</count>
-						<bucket_count>1</bucket_count>
 						<item_version>0</item_version>
 					</stereotypes>
 					<is_element_extension>0</is_element_extension>
@@ -762,7 +757,7 @@ a second line
 	</injected_elements>
 	<has_generatable_types>0</has_generatable_types>
 	<indices class_id="41" tracking_level="0" version="0">
-		<objects_always_in_heap>
+		<objects_always_in_heap class_id="42" tracking_level="0" version="0">
 			<count>0</count>
 			<bucket_count>1</bucket_count>
 			<item_version>0</item_version>
@@ -772,25 +767,25 @@ a second line
 			<bucket_count>1</bucket_count>
 			<item_version>0</item_version>
 		</elements_referable_by_attributes>
-		<scribble_groups class_id="42" tracking_level="0" version="0">
+		<scribble_groups class_id="43" tracking_level="0" version="0">
 			<count>3</count>
 			<bucket_count>5</bucket_count>
 			<item_version>0</item_version>
-			<item class_id="43" tracking_level="0" version="0">
+			<item class_id="44" tracking_level="0" version="0">
 				<first>&lt;comments&gt;&lt;package&gt;&lt;package2&gt;</first>
-				<second class_id="44" tracking_level="0" version="0">
-					<parent class_id="45" tracking_level="0" version="0">
-						<entries class_id="46" tracking_level="0" version="0">
+				<second class_id="45" tracking_level="0" version="0">
+					<parent class_id="46" tracking_level="0" version="0">
+						<entries class_id="47" tracking_level="0" version="0">
 							<count>1</count>
 							<item_version>0</item_version>
-							<item class_id="47" tracking_level="0" version="0">
+							<item class_id="48" tracking_level="0" version="0">
 								<first>yarn.dia.comment</first>
 								<second>true</second>
 							</item>
 						</entries>
 						<scope>5</scope>
 					</parent>
-					<children class_id="48" tracking_level="0" version="0">
+					<children class_id="49" tracking_level="0" version="0">
 						<count>0</count>
 						<bucket_count>1</bucket_count>
 						<item_version>0</item_version>
@@ -888,7 +883,6 @@ a second line
 			<in_global_module>0</in_global_module>
 			<stereotypes>
 				<count>0</count>
-				<bucket_count>1</bucket_count>
 				<item_version>0</item_version>
 			</stereotypes>
 			<is_element_extension>0</is_element_extension>

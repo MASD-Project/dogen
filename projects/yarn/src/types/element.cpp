@@ -51,7 +51,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::ya
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::string>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::vector<std::string>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -91,7 +91,7 @@ element::element(
     const dogen::yarn::origin_types origin_type,
     const boost::optional<dogen::yarn::name>& contained_by,
     const bool in_global_module,
-    const std::unordered_set<std::string>& stereotypes,
+    const std::vector<std::string>& stereotypes,
     const bool is_element_extension)
     : documentation_(documentation),
       annotation_(annotation),
@@ -237,19 +237,19 @@ void element::in_global_module(const bool v) {
     in_global_module_ = v;
 }
 
-const std::unordered_set<std::string>& element::stereotypes() const {
+const std::vector<std::string>& element::stereotypes() const {
     return stereotypes_;
 }
 
-std::unordered_set<std::string>& element::stereotypes() {
+std::vector<std::string>& element::stereotypes() {
     return stereotypes_;
 }
 
-void element::stereotypes(const std::unordered_set<std::string>& v) {
+void element::stereotypes(const std::vector<std::string>& v) {
     stereotypes_ = v;
 }
 
-void element::stereotypes(const std::unordered_set<std::string>&& v) {
+void element::stereotypes(const std::vector<std::string>&& v) {
     stereotypes_ = std::move(v);
 }
 

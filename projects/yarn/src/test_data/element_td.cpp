@@ -71,10 +71,10 @@ bool create_bool(const unsigned int position) {
     return (position % 2) == 0;
 }
 
-std::unordered_set<std::string> create_std_unordered_set_std_string(unsigned int position) {
-    std::unordered_set<std::string> r;
+std::vector<std::string> create_std_vector_std_string(unsigned int position) {
+    std::vector<std::string> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(create_std_string(position + i));
+        r.push_back(create_std_string(position + i));
     }
     return r;
 }
@@ -93,7 +93,7 @@ populate(const unsigned int position, result_type& v) {
     v.origin_type(create_dogen_yarn_origin_types(position + 4));
     v.contained_by(create_boost_optional_dogen_yarn_name(position + 5));
     v.in_global_module(create_bool(position + 6));
-    v.stereotypes(create_std_unordered_set_std_string(position + 7));
+    v.stereotypes(create_std_vector_std_string(position + 7));
     v.is_element_extension(create_bool(position + 8));
 }
 

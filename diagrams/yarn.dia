@@ -22890,13 +22890,13 @@ space.#</dia:string>
         <dia:point val="-133,-1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-133.05,-1.05;-115.125,2.65"/>
+        <dia:rectangle val="-133.05,-1.05;-117.82,2.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-133,-1"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="17.824999999999999"/>
+        <dia:real val="15.130000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -22994,7 +22994,7 @@ space.#</dia:string>
             <dia:string>#stereotypes#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_set&lt;std::string&gt;#</dia:string>
+            <dia:string>#std::vector&lt;std::string&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -23021,17 +23021,17 @@ space.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O195">
       <dia:attribute name="obj_pos">
-        <dia:point val="-124.088,2.6"/>
+        <dia:point val="-125.435,2.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-124.938,2.55;-109.582,14.05"/>
+        <dia:rectangle val="-126.285,2.55;-109.582,14.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-124.088,2.6"/>
-        <dia:point val="-124.088,9"/>
+        <dia:point val="-125.435,2.6"/>
+        <dia:point val="-125.435,9"/>
         <dia:point val="-109.632,9"/>
         <dia:point val="-109.632,14"/>
       </dia:attribute>

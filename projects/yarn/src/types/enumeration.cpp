@@ -50,7 +50,7 @@ enumeration::enumeration(
     const dogen::yarn::origin_types origin_type,
     const boost::optional<dogen::yarn::name>& contained_by,
     const bool in_global_module,
-    const std::unordered_set<std::string>& stereotypes,
+    const std::vector<std::string>& stereotypes,
     const bool is_element_extension,
     const dogen::yarn::name& underlying_type,
     const std::vector<dogen::yarn::enumerator>& enumerators)

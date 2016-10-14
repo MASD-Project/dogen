@@ -152,7 +152,7 @@ yarn::object transformer::to_object(const profiled_object& po,
     r.object_type(ot);
 
     if (po.profile().is_visitable())
-        r.stereotypes().insert("visitable");
+        r.stereotypes().push_back("visitable");
 
     for (const auto us : po.profile().unknown_stereotypes()) {
         const auto n(to_name(us));
