@@ -41,7 +41,7 @@ namespace {
 
 auto lg(logger_factory("annotations.profiler"));
 
-const std::string profile_dir("profiles");
+const std::string profile_dir("annotations");
 const std::string profile_prefix("annotations.profiles.");
 
 const std::string duplicate_profile_name("Duplicate profile name: ");

@@ -14,20 +14,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-14 Fri 12:40]
+#+CAPTION: Clock summary at [2016-10-14 Fri 12:41]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *37:42* |       |       | 100.0 |
+| *Total time*                                                                | *37:43* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 37:42   |       |       | 100.0 |
-| Active                                                                      |         | 37:42 |       | 100.0 |
+| Stories                                                                     | 37:43   |       |       | 100.0 |
+| Active                                                                      |         | 37:43 |       | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  0:22 |   1.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:19 |   0.8 |
 | COMPLETED Improve bintray support                                           |         |       |  0:26 |   1.1 |
 | COMPLETED Refactor opaque infrastructure                                    |         |       |  1:17 |   3.4 |
 | COMPLETED Remove any remnants of annotations from quilt                     |         |       |  0:05 |   0.2 |
-| COMPLETED Solve the issue of too many "configurations"                      |         |       |  4:01 |  10.7 |
+| COMPLETED Solve the issue of too many "configurations"                      |         |       |  4:01 |  10.6 |
 | COMPLETED Merge decoration configuration and annotations factories          |         |       |  0:18 |   0.8 |
 | COMPLETED Move annotation factories into expander in yarn                   |         |       |  1:11 |   3.1 |
 | COMPLETED Clean up terminology in dynamic                                   |         |       | 15:12 |  40.3 |
@@ -35,7 +35,7 @@
 | COMPLETED Create a ownership hierarchy repository                           |         |       |  1:43 |   4.6 |
 | COMPLETED Use vector of elements in model                                   |         |       |  0:10 |   0.4 |
 | COMPLETED Rewrite profile support                                           |         |       | 11:50 |  31.4 |
-| STARTED Merge annotation type and profile folders                           |         |       |  0:19 |   0.8 |
+| COMPLETED Merge annotation type and profile folders                         |         |       |  0:20 |   0.9 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -331,7 +331,9 @@ Notes:
 - we are not enabling cmake in types+io etc profiles. We
   probably should. The names are becoming a bit large though.
 
-*** STARTED Merge annotation type and profile folders                 :story:
+*** COMPLETED Merge annotation type and profile folders               :story:
+    CLOSED: [2016-10-14 Fri 12:41]
+    CLOCK: [2016-10-14 Fri 12:40]--[2016-10-14 Fri 12:41] =>  0:01
     CLOCK: [2016-10-14 Fri 12:32]--[2016-10-14 Fri 12:40] =>  0:08
     CLOCK: [2016-10-14 Fri 12:20]--[2016-10-14 Fri 12:31] =>  0:11
 
