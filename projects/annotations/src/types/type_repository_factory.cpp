@@ -20,6 +20,7 @@
  */
 #include <unordered_set>
 #include <boost/throw_exception.hpp>
+#include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/set_io.hpp"
 #include "dogen/utility/filesystem/file.hpp"
@@ -38,6 +39,7 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("annotations.type_repository_factory"));
 
 const std::string annotations_dir("annotations");
+const std::string annotations_prefix("annotations.type_templates.");
 
 const std::string duplicate_qualified_name(
     "Qualified name defined more than once: ");
@@ -62,6 +64,12 @@ std::list<type_template> type_repository_factory::hydrate_templates(
     type_templates_hydrator h;
     std::list<type_template> r;
     for (const auto& f : files) {
+        const auto fn(f.filename().generic_string());
+        if (!boost::starts_with(fn, annotations_prefix)) {
+            BOOST_LOG_SEV(lg, info) << "Ignoring file: " << f.filename();
+            continue;
+        }
+
         auto tts(h.hydrate(f));
         r.splice(r.end(), tts);
     }
