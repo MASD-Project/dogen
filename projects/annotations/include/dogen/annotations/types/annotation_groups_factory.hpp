@@ -116,13 +116,18 @@ private:
     std::unordered_map<std::string, annotation>
     create_annotation_profiles() const;
 
+    std::list<std::string> get_bound_labels(const std::unordered_map<
+        std::string, annotation>& profiles, const std::vector<std::string>&
+        candidate_labels) const;
+
     /**
      * @brief Augment the original annotation with any profile
      * entries, if it has one.
      */
     annotation
     handle_profiles(const type_group& tg, const std::unordered_map<std::string,
-        annotation>& profiles, const annotation& original) const;
+        annotation>& profiles, const std::vector<std::string>& candidate_labels,
+        const annotation& original) const;
 
 public:
     /**

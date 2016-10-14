@@ -810,10 +810,6 @@ should be handled the same was as odb parameters, but because that is
 done with a massive hack, we are not going to extend the hack to
 copyright holders.
 
-*** Services and leaves are not properly handled                      :story:
-
-We are manually ignoring services when calculating leaves.
-
 *** Add tests to identifier parser with invalid names                 :story:
 
 We need to handle properly the following cases:
@@ -7023,22 +7019,6 @@ generation types for full/partial/no generation.
 [[http://ribosome.ch/][Ribosome]] seems like a templating tool with a simple syntax. May have
 some ideas useful for stitch.
 
-*** Generate skeleton for "non-generatable" files                      :epic:
-
-We are using non-generatable files quite a lot (at present called
-"services"). Every time we do this we end up copying manually the
-contents of the forward declarations to setup the skeleton of the
-file. Since we already have all of the boiler plate code such as
-licence, header guards, etc, we could just create a skeleton to stop
-us from having to copy and paste it.
-
-In addition to the class definition, it should also define all of the
-automatic constructors, and add a private section at the
-bottom. Ideally we should also generate stubs for all methods - adding
-a blank implementation with return types where required and commented
-out parameters, to make the code compilable out of the box. This will
-be possible once we start supporting operations.
-
 *** Add merging code generation support                                :epic:
 
 #+begin_quote
@@ -7920,21 +7900,6 @@ very hard to get right. We would have to have a lot of round-trip
 tests. In addition, DST's such as thrift provide a wealth of wire
 formats, so if there is no easy-access low-level wire format library,
 it would be very difficult to get this right.
-
-*** IOable services                                                    :epic:
-
-#+begin_quote
-*Story*: As a dogen user, I want to output all the state of my
-services without having to manually create code for it.
-#+end_quote
-
-Even though we do not code generate services, it would be nice if we
-could still setup their IO infrastructure - something basic just
-outputting the type and taking inheritance into account. We end up
-doing a lot of this manually anyway.
-
-Also, if a service has a bunch of attributes that are IOable, we
-should set them up too.
 
 *** Code generation as a service                                       :epic:
 

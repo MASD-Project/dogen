@@ -483,7 +483,9 @@ Tasks:
   scope default. If none is found do nothing.
 - allow users to supply labels. These are checked after profile field.
 
-*** STARTED Add binding of stereotypes with profiles                  :story:
+*** COMPLETED Add binding of stereotypes with profiles                :story:
+    CLOSED: [2016-10-14 Fri 23:19]
+    CLOCK: [2016-10-14 Fri 22:29]--[2016-10-14 Fri 23:17] =>  0:48
     CLOCK: [2016-10-14 Fri 21:37]--[2016-10-14 Fri 22:28] =>  0:51
 
 During annotation expansion, we need to supply a list of the remaining
@@ -493,7 +495,8 @@ profiles.
 Problems:
 
 - scope is incorrect. Need to know which module is root.
--
+- we need to somehow make the candidate labels available after
+  annotations were generated.
 
 *** STARTED Finish overwriting support                                :story:
     CLOCK: [2016-10-14 Fri 13:49]--[2016-10-14 Fri 13:55] =>  0:06
@@ -504,6 +507,49 @@ but there is some linkage missing:
 - global/local configuration needs to have an overwrite flag;
 - need to populate formatter configuration on the back of that;
 - need to read flag from formatter configuration and set it on file.
+
+*** Remove service stereotype                                         :story:
+
+Once we've implemented binding of stereotypes to profiles and
+overwriting, we should be able to rename all of the existing services
+to a new stereotype =handcrafted=, and remove the hacks for services.
+
+Merged stories:
+
+*Services and leaves are not properly handled*
+
+We are manually ignoring services when calculating leaves.
+
+*** Generate skeleton for "non-generatable" files                     :story:
+
+We are using non-generatable files quite a lot (at present called
+"services"). Every time we do this we end up copying manually the
+contents of the forward declarations to setup the skeleton of the
+file. Since we already have all of the boiler plate code such as
+licence, header guards, etc, we could just create a skeleton to stop
+us from having to copy and paste it.
+
+In addition to the class definition, it should also define all of the
+automatic constructors, and add a private section at the
+bottom. Ideally we should also generate stubs for all methods - adding
+a blank implementation with return types where required and commented
+out parameters, to make the code compilable out of the box. This will
+be possible once we start supporting operations.
+
+*** IOable services                                                   :story:
+
+#+begin_quote
+*Story*: As a dogen user, I want to output all the state of my
+services without having to manually create code for it.
+#+end_quote
+
+Even though we do not code generate services, it would be nice if we
+could still setup their IO infrastructure - something basic just
+outputting the type and taking inheritance into account. We end up
+doing a lot of this manually anyway.
+
+Also, if a service has a bunch of attributes that are IOable, we
+should set them up too.
 
 *** Generate formatter interfaces                                      :epic:
 

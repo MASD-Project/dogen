@@ -50,6 +50,8 @@ const std::string field_used_in_invalid_scope(
     "Field used in invalid scope: ");
 const std::string missing_profile(
     "Annotation uses a profile that could not be found: ");
+const std::string too_many_binds(
+    "Too many candidate labels bind to a profile: ");
 
 const std::string model_name("annotations");
 const std::string type_name("profile");
@@ -178,6 +180,18 @@ aggregate_scribble_entries(const scribble& scribble) const {
     return r;
 }
 
+std::list<std::string> annotation_groups_factory::
+get_bound_labels(const std::unordered_map<std::string, annotation>& profiles,
+    const std::vector<std::string>& candidate_labels) const {
+
+    std::list<std::string> r;
+    for (const auto& cl : candidate_labels) {
+        if (profiles.find(cl) != profiles.end())
+            r.push_back(cl);
+    }
+    return r;
+}
+
 std::unordered_map<std::string, annotation> annotation_groups_factory::
 create_annotation_profiles() const {
     profiler prf;
@@ -188,7 +202,8 @@ create_annotation_profiles() const {
 
 annotation annotation_groups_factory::
 handle_profiles(const type_group& tg, const std::unordered_map<std::string,
-    annotation>& profiles, const annotation& original) const {
+    annotation>& profiles, const std::vector<std::string>& candidate_labels,
+    const annotation& original) const {
 
     BOOST_LOG_SEV(lg, error) << "Started handling profiles. Original: "
                              << original;
@@ -216,10 +231,35 @@ handle_profiles(const type_group& tg, const std::unordered_map<std::string,
         BOOST_LOG_SEV(lg, debug) << "Profile not set in meta-data.";
 
     /*
-     * If no profile name was set, try looking for the well-known
-     * default profiles, based on the scope of the annotation. Not all
-     * scope types have a mapping, and the default profiles do not
-     * necessarily exist.
+     * Lets try each of the candidate labels instead and see if any of
+     * them bind to a profile.
+     */
+    const auto bound_labels(get_bound_labels(profiles, candidate_labels));
+    if (bound_labels.size() > 1) {
+        BOOST_LOG_SEV(lg, error) << too_many_binds << bound_labels;
+        BOOST_THROW_EXCEPTION(building_error(too_many_binds));
+    }
+
+    for (const auto& bl : bound_labels) {
+        BOOST_LOG_SEV(lg, debug) << "Bound label: " << bl;
+        const auto i(profiles.find(bl));
+        if (i == profiles.end()) {
+            BOOST_LOG_SEV(lg, error) << missing_profile << bl;
+            BOOST_THROW_EXCEPTION(building_error(missing_profile + bl));
+        }
+
+        merger mg;
+        const auto annotation_profile(i->second);
+        const annotation r(mg.merge(original, annotation_profile));
+        BOOST_LOG_SEV(lg, debug) << "Merged profile: " << r;
+        return r;
+    }
+
+    /*
+     * If no profile name was found by now, we need to try looking for
+     * the well-known default profiles, based on the scope of the
+     * annotation. Not all scope types have a mapping, and the default
+     * profiles do not necessarily exist.
      */
     const auto def_profn(get_default_profile_name_for_scope(original.scope()));
     if (!def_profn.empty()) {
@@ -266,21 +306,23 @@ make(const type_repository& trp, const std::unordered_map<std::string,
         const auto id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Processing scribble group: " << id;
 
-        const auto& scribble(pair.second);
-        const auto parent(make(scribble.parent()));
+        const auto& sgrp(pair.second);
+        const auto parent(make(sgrp.parent()));
 
         /*
          * Then we augment the annotation with a profile, if it is so
          * configured.
          */
+        const auto& cl(sgrp.parent().candidate_labels());
+
         annotation_group ag;
-        ag.parent(handle_profiles(tg, profiles, parent));
+        ag.parent(handle_profiles(tg, profiles, cl, parent));
 
         /*
          * Finally we obtain annotations for all the scribble's
          * children.
          */
-        for (const auto& pair : scribble.children()) {
+        for (const auto& pair : sgrp.children()) {
             const auto child_id(pair.first);
             const auto& child(pair.second);
             ag.children()[child_id] = make(child);
