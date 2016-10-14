@@ -19,6 +19,7 @@
  *
  */
 #include <boost/throw_exception.hpp>
+#include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
@@ -41,6 +42,7 @@ namespace {
 auto lg(logger_factory("annotations.profiler"));
 
 const std::string profile_dir("profiles");
+const std::string profile_prefix("annotations.profiles.");
 
 const std::string duplicate_profile_name("Duplicate profile name: ");
 const std::string invalid_facet_name("Invalid facet name: ");
@@ -75,6 +77,12 @@ std::list<profile> profiler::hydrate_profiles(
     profile_hydrator h;
     const auto files(dogen::utility::filesystem::find_files(profile_dirs));
     for (const auto& f : files) {
+        const auto fn(f.filename().generic_string());
+        if (!boost::starts_with(fn, profile_prefix)) {
+            BOOST_LOG_SEV(lg, info) << "Ignoring file: " << f.filename();
+            continue;
+        }
+
         BOOST_LOG_SEV(lg, debug) << "Hydrating file: " << f.generic_string();
         r.push_back(h.hydrate(f));
     }
