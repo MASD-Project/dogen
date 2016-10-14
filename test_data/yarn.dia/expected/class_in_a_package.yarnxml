@@ -509,23 +509,15 @@
 				<second class_id="45" tracking_level="0" version="0">
 					<parent class_id="46" tracking_level="0" version="0">
 						<entries class_id="47" tracking_level="0" version="0">
-							<count>4</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item class_id="48" tracking_level="0" version="0">
 								<first>yarn.dia.comment</first>
 								<second>true</second>
 							</item>
 							<item>
-								<first>decoration.licence_name</first>
-								<second>gpl_v3</second>
-							</item>
-							<item>
-								<first>decoration.copyright_notice</first>
-								<second>Copyright (C) 2012-2015 Marco Craveiro &lt;marco.craveiro@gmail.com&gt;</second>
-							</item>
-							<item>
-								<first>decoration.modeline_group_name</first>
-								<second>emacs</second>
+								<first>annotations.profile</first>
+								<second>dogen</second>
 							</item>
 						</entries>
 						<scope>3</scope>

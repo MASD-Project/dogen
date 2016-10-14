@@ -9,7 +9,7 @@
         },
         "value_type" : "text",
         "template_kind" : "instance",
-        "scope" : "entity",
+        "scope" : "any",
         "default_value" : "default"
     }
 ]

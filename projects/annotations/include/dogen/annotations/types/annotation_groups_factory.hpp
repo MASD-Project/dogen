@@ -109,6 +109,14 @@ private:
     std::unordered_map<std::string, annotation>
     create_annotation_profiles() const;
 
+    /**
+     * @brief Augment the original annotation with any profile
+     * entries, if it has one.
+     */
+    annotation
+    handle_profiles(const type_group& tg, const std::unordered_map<std::string,
+        annotation>& profiles, const annotation& original) const;
+
 public:
     /**
      * @brief Produce the annotations object.

@@ -4337,9 +4337,7 @@ this is a long comment#</value>
 															<which>6</which>
 															<value>
 																<value>##DOGEN yarn.dia.comment=true
-#DOGEN decoration.licence_name=gpl_v3
-#DOGEN decoration.copyright_notice=Copyright (C) 2012-2015 Marco Craveiro &lt;marco.craveiro@gmail.com&gt;
-#DOGEN decoration.modeline_group_name=emacs#</value>
+#DOGEN annotations.profile=dogen#</value>
 															</value>
 														</item>
 													</values>

@@ -24,6 +24,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/annotations/io/type_io.hpp"
+#include "dogen/annotations/io/annotation_io.hpp"
 #include "dogen/annotations/io/scope_types_io.hpp"
 #include "dogen/annotations/types/merger.hpp"
 #include "dogen/annotations/types/profiler.hpp"
@@ -46,6 +47,8 @@ const std::string type_not_found(
     "Field definition not found: ");
 const std::string field_used_in_invalid_scope(
     "Field used in invalid scope: ");
+const std::string missing_profile(
+    "Annotation uses a profile that could not be found: ");
 
 const std::string model_name("annotations");
 const std::string type_name("profile");
@@ -170,6 +173,45 @@ create_annotation_profiles() const {
 }
 
 annotation annotation_groups_factory::
+handle_profiles(const type_group& tg, const std::unordered_map<std::string,
+    annotation>& profiles, const annotation& original) const {
+
+    BOOST_LOG_SEV(lg, error) << "Started handling profiles. Orignal: "
+                             << original;
+
+    /*
+     * Locate the profile linked with that annotation and check if
+     * they are of the same scope. Note that there is always a
+     * profile linked with an annotation - we default to the
+     * default profile. However, the default profile is only
+     * applicable to the root scope. If the scopes are compatible,
+     * we merge the two annotations. If the scopes are not
+     * compatible, we just take the annotation as is.
+     */
+    const auto profn(obtain_profile_name(tg, original));
+    const auto i(profiles.find(profn));
+    if (i == profiles.end()) {
+        BOOST_LOG_SEV(lg, error) << missing_profile << profn;
+        BOOST_THROW_EXCEPTION(building_error(missing_profile + profn));
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Profile: " << profn;
+    const auto annotation_profile(i->second);
+    annotation r;
+    if (annotation_profile.scope() == original.scope()) {
+        merger mg;
+        r = mg.merge(original, annotation_profile);
+    } else {
+        BOOST_LOG_SEV(lg, debug) << "Profile scope does not match: " << r;
+        r = original;
+    }
+
+    BOOST_LOG_SEV(lg, error) << "Started handling profiles. Result: " << r;
+    return r;
+}
+
+
+annotation annotation_groups_factory::
 make(const scribble& scribble) const {
     auto aggregated_entries(aggregate_scribble_entries(scribble));
     auto r(create_annotation(scribble.scope(), aggregated_entries));
@@ -181,7 +223,7 @@ make(const type_repository& trp, const std::unordered_map<std::string,
     scribble_group>& scribble_groups) const {
 
     const auto profiles(create_annotation_profiles());
-    const auto t(make_type_group(trp));
+    const auto tg(make_type_group(trp));
 
     std::unordered_map<std::string, annotation_group> r;
     for (const auto& pair : scribble_groups) {
@@ -190,31 +232,17 @@ make(const type_repository& trp, const std::unordered_map<std::string,
          * parent.
          */
         const auto id(pair.first);
+        BOOST_LOG_SEV(lg, debug) << "Processing scribble group: " << id;
+
         const auto& scribble(pair.second);
         const auto parent(make(scribble.parent()));
 
         /*
-         * Then we locate the profile linked with that annotation, and
-         * check if they are of the same scope. If so, merge the
-         * two. If there isn't a profile, or if they have different
-         * scopes, just take the annotation as is.
+         * Then we augment the annotation with a profile, if it is so
+         * configured.
          */
         annotation_group ag;
-/*         const auto profn(obtain_profile_name(t, ag.parent()));
-        const auto i(profiles.find(profn));
-        if (i != profiles.end()) {
-            const auto expected_scope(id == root_annotation_id ?
-                scope_types::root_module : scope_types::entity);
-
-
-
-        }
-        if () {
-
-            merger mg;
-            ag.parent(mg.merge(parent, i->second));
-            } else*/
-            ag.parent(parent);
+        ag.parent(handle_profiles(tg, profiles, parent));
 
         /*
          * Finally we obtain annotations for all the scribble's

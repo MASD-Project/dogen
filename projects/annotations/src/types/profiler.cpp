@@ -164,8 +164,7 @@ void profiler::validate(const profile_map_type& pm) const {
     BOOST_LOG_SEV(lg, debug) << "Validated all profiles.";
 }
 
-void profiler::
-instantiate_entry_templates(const ownership_hierarchy_repository& ohrp,
+void profiler::setup_annotations(const ownership_hierarchy_repository& ohrp,
     const type_repository& trp, profile_map_type& pm) const {
     BOOST_LOG_SEV(lg, debug) << "Instantiating value templates.";
 
@@ -173,6 +172,7 @@ instantiate_entry_templates(const ownership_hierarchy_repository& ohrp,
     for (auto& pair : pm) {
         const auto prfn(pair.first);
         auto& pc(pair.second);
+        pc.annotation().scope(pc.profile().scope());
         for (const auto& tpl : pc.profile().templates()) {
             const auto entries(ti.instantiate(trp, tpl));
             for (const auto& entry : entries)
@@ -251,7 +251,31 @@ profiler::create_annotation_map(const profile_map_type& pm) const {
     for (const auto& pair : pm) {
         const auto prfn(pair.first);
         const auto& pc(pair.second);
-        r[prfn] = pc.annotation();
+
+        /*
+         * First we insert the annotation against the profile name.
+         */
+        const auto annotation_pair(std::make_pair(prfn, pc.annotation()));
+        const auto inserted(r.insert(annotation_pair).second);
+        if (!inserted) {
+            BOOST_LOG_SEV(lg, warn) << duplicate_profile_name << prfn;
+            BOOST_THROW_EXCEPTION(
+                profiling_error(duplicate_profile_name + prfn));
+        }
+
+        /*
+         * Then we insert it against all the labels. Labels must be
+         * unique across all profiles.
+         */
+        for (const auto l : pc.profile().labels()) {
+            const auto annotation_pair(std::make_pair(l, pc.annotation()));
+            const auto inserted(r.insert(annotation_pair).second);
+            if (!inserted) {
+                BOOST_LOG_SEV(lg, warn) << duplicate_profile_name << prfn;
+                BOOST_THROW_EXCEPTION(
+                    profiling_error(duplicate_profile_name + prfn));
+            }
+        }
     }
 
     return r;
@@ -284,11 +308,11 @@ profiler::generate(const std::vector<boost::filesystem::path>& data_dirs,
     validate(pas);
 
     /*
-     * We then instantiate all of the entry templates contained within
-     * each profile and slap the results in the profile's annotation
-     * result.
+     * We then setup all annotations. This includes instantiating all
+     * of the entry templates contained within each profile and
+     * copying the results in the profile's annotation result.
      */
-    instantiate_entry_templates(ohrp, trp, pas);
+    setup_annotations(ohrp, trp, pas);
 
     /*
      * We now merge the annotation objects according to the profile

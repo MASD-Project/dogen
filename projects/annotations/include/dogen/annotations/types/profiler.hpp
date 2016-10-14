@@ -57,10 +57,8 @@ private:
 
     void validate(const profile_map_type& pm) const;
 
-    void instantiate_entry_templates(
-        const ownership_hierarchy_repository& ohrp,
-        const type_repository& trp,
-        profile_map_type& pm) const;
+    void setup_annotations(const ownership_hierarchy_repository& ohrp,
+        const type_repository& trp, profile_map_type& pm) const;
 
     const profiler_configuration& walk_up_parent_tree_and_merge(
         const std::string& current, profile_map_type& pm) const;
