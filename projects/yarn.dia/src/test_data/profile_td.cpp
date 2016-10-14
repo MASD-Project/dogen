@@ -60,14 +60,11 @@ populate(const unsigned int position, result_type& v) {
     v.is_uml_realization(create_bool(position + 6));
     v.is_enumeration(create_bool(position + 7));
     v.is_exception(create_bool(position + 8));
-    v.is_value_object(create_bool(position + 9));
-    v.is_service(create_bool(position + 10));
-    v.is_non_generatable(create_bool(position + 11));
-    v.is_visitable(create_bool(position + 12));
-    v.is_immutable(create_bool(position + 13));
-    v.is_fluent(create_bool(position + 14));
-    v.is_concept(create_bool(position + 15));
-    v.unknown_stereotypes(create_std_list_std_string(position + 16));
+    v.is_concept(create_bool(position + 9));
+    v.is_value_object(create_bool(position + 10));
+    v.is_service(create_bool(position + 11));
+    v.is_non_generatable(create_bool(position + 12));
+    v.unknown_stereotypes(create_std_list_std_string(position + 13));
 }
 
 profile_generator::result_type

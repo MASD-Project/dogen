@@ -51,9 +51,6 @@ unsigned int stereotype_count(const profile& p) {
     if (p.is_value_object()) ++r;
     if (p.is_service()) ++r;
     if (p.is_non_generatable()) ++r;
-    if (p.is_visitable()) ++r;
-    if (p.is_immutable()) ++r;
-    if (p.is_fluent()) ++r;
 
     return r;
 }
@@ -199,11 +196,8 @@ BOOST_AUTO_TEST_CASE(stereotyped_class_transforms_into_expected_profile) {
 
     BOOST_LOG_SEV(lg, debug) << "actual 3:" << p;
     BOOST_CHECK(is_valid_uml_class(p));
-    BOOST_CHECK(stereotype_count(p) == 5);
+    BOOST_CHECK(stereotype_count(p) == 2);
     BOOST_CHECK(p.is_non_generatable());
-    BOOST_CHECK(p.is_visitable());
-    BOOST_CHECK(p.is_immutable());
-    BOOST_CHECK(p.is_fluent());
 }
 
 BOOST_AUTO_TEST_CASE(unknown_stereotypes_are_added_to_list) {

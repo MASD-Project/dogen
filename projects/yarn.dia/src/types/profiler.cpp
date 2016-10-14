@@ -36,9 +36,6 @@ const std::string exception("exception");
 const std::string value_object("value object");
 const std::string service("service");
 const std::string nongeneratable("nongeneratable");
-const std::string visitable("visitable");
-const std::string immutable("immutable");
-const std::string fluent("fluent");
 
 }
 
@@ -74,20 +71,14 @@ process_stereotype(profile& o, const std::string& s) const {
             o.is_enumeration(true);
         else if (stereotype == exception)
             o.is_exception(true);
+        else if (stereotype == concept)
+            o.is_concept(true);
         else if (stereotype == value_object)
             o.is_value_object(true);
         else if (stereotype == service)
             o.is_service(true);
         else if (stereotype == nongeneratable)
             o.is_non_generatable(true);
-        else if (stereotype == visitable)
-            o.is_visitable(true);
-        else if (stereotype == immutable)
-            o.is_immutable(true);
-        else if (stereotype == fluent)
-            o.is_fluent(true);
-        else if (stereotype == concept)
-            o.is_concept(true);
         else
             o.unknown_stereotypes().push_back(stereotype);
     }

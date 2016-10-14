@@ -14,29 +14,29 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-14 Fri 14:41]
+#+CAPTION: Clock summary at [2016-10-14 Fri 17:17]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *38:43* |       |       | 100.0 |
+| *Total time*                                                                | *39:54* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 38:43   |       |       | 100.0 |
-| Active                                                                      |         | 38:43 |       | 100.0 |
+| Stories                                                                     | 39:54   |       |       | 100.0 |
+| Active                                                                      |         | 39:54 |       | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  0:22 |   0.9 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:19 |   0.8 |
 | COMPLETED Improve bintray support                                           |         |       |  0:26 |   1.1 |
-| COMPLETED Refactor opaque infrastructure                                    |         |       |  1:17 |   3.3 |
+| COMPLETED Refactor opaque infrastructure                                    |         |       |  1:17 |   3.2 |
 | COMPLETED Remove any remnants of annotations from quilt                     |         |       |  0:05 |   0.2 |
-| COMPLETED Solve the issue of too many "configurations"                      |         |       |  4:01 |  10.4 |
+| COMPLETED Solve the issue of too many "configurations"                      |         |       |  4:01 |  10.1 |
 | COMPLETED Merge decoration configuration and annotations factories          |         |       |  0:18 |   0.8 |
-| COMPLETED Move annotation factories into expander in yarn                   |         |       |  1:11 |   3.1 |
-| COMPLETED Clean up terminology in dynamic                                   |         |       | 15:12 |  39.3 |
+| COMPLETED Move annotation factories into expander in yarn                   |         |       |  1:11 |   3.0 |
+| COMPLETED Clean up terminology in dynamic                                   |         |       | 15:12 |  38.1 |
 | COMPLETED Minor tidy-up of the quilt.cpp diagram                            |         |       |  0:29 |   1.2 |
-| COMPLETED Create a ownership hierarchy repository                           |         |       |  1:43 |   4.4 |
+| COMPLETED Create a ownership hierarchy repository                           |         |       |  1:43 |   4.3 |
 | COMPLETED Use vector of elements in model                                   |         |       |  0:10 |   0.4 |
-| COMPLETED Rewrite profile support                                           |         |       | 11:50 |  30.6 |
-| COMPLETED Merge annotation type and profile folders                         |         |       |  0:20 |   0.9 |
-| STARTED Push stereotypes processing into yarn                               |         |       |  0:40 |   1.7 |
+| COMPLETED Rewrite profile support                                           |         |       | 11:50 |  29.7 |
+| COMPLETED Merge annotation type and profile folders                         |         |       |  0:20 |   0.8 |
+| COMPLETED Push stereotypes processing into yarn                             |         |       |  1:51 |   4.6 |
 | STARTED Implement defaulting within the profiler                            |         |       |  0:14 |   0.6 |
 | STARTED Finish overwriting support                                          |         |       |  0:06 |   0.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
@@ -350,7 +350,11 @@ Tasks:
 - merge all files under annotations
 - change hydrators to look for files with the correct prefixes.
 
-*** STARTED Push stereotypes processing into yarn                     :story:
+*** COMPLETED Push stereotypes processing into yarn                   :story:
+    CLOSED: [2016-10-14 Fri 17:15]
+    CLOCK: [2016-10-14 Fri 17:01]--[2016-10-14 Fri 17:14] =>  0:13
+    CLOCK: [2016-10-14 Fri 15:26]--[2016-10-14 Fri 15:41] =>  0:15
+    CLOCK: [2016-10-14 Fri 14:42]--[2016-10-14 Fri 15:25] =>  0:43
     CLOCK: [2016-10-14 Fri 14:10]--[2016-10-14 Fri 14:41] =>  0:31
     CLOCK: [2016-10-14 Fri 13:40]--[2016-10-14 Fri 13:49] =>  0:09
 
@@ -366,14 +370,15 @@ responsible for resolving the stereotypes. This is not ideal:
 The right thing is:
 
 - make stereotypes a string container;
-- frontend simply populates the container and does not judgement;
-- *all* stereotypes are put in the container; rule of thumb is, if its
-  a UML stereotype then it must go in the container;
+- frontend simply populates the container and does no judgement;
+- all stereotypes are put in the container, except those which are
+  used to dispatch the yarn type;
 - stereotypes expander figures out if the stereotype is one that is
   actionable within yarn (immutable, visitor, modeled concepts) or one
   to pass-through (binding stereotypes).
-- during dynamic expansion, we supply a list of _all_ stereotypes
-  against ids. If there is a match, they are used as profiles.
+- during dynamic expansion, we supply a list of the remaining
+  stereotypes against ids. If there is a match, they are used as
+  profiles.
 
 Merged stories:
 
@@ -457,6 +462,12 @@ Note: we don't need to do leaf management:
 We just need to enable/disable serialisation and the code will work.
 
 - add a stereotype of handcrafted with a default profile.
+
+*** Add binding of stereotypes with profiles                          :story:
+
+During annotation expansion, we need to supply a list of the remaining
+stereotypes against ids. If there is a match, they are used as
+profiles.
 
 *** STARTED Implement defaulting within the profiler                  :story:
     CLOCK: [2016-10-14 Fri 13:56]--[2016-10-14 Fri 14:10] =>  0:14

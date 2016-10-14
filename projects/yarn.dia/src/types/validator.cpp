@@ -59,9 +59,6 @@ bool validator::is_object(const profile& p) const {
 unsigned int validator::count_yarn_object_flags(const profile& p) const {
     unsigned int r(0);
     if (p.is_non_generatable()) ++r;
-    if (p.is_visitable()) ++r;
-    if (p.is_immutable()) ++r;
-    if (p.is_fluent()) ++r;
     return r;
 }
 

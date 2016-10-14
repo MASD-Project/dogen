@@ -1441,7 +1441,7 @@ into its yarn representation.#</dia:string>
         <dia:point val="71.4575,55.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="54.9412,55.05;72.2075,68.8"/>
+        <dia:rectangle val="54.9413,55.05;72.2075,68.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2539,7 +2539,7 @@ that make up dogen instructions.#</dia:string>
         <dia:point val="14,80"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="13.95,79.95;31.49,95.65"/>
+        <dia:rectangle val="13.95,79.95;31.49,93.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="14,80"/>
@@ -2548,7 +2548,7 @@ that make up dogen instructions.#</dia:string>
         <dia:real val="17.440000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="15.600000000000005"/>
+        <dia:real val="13.200000000000003"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#profile#</dia:string>
@@ -2868,6 +2868,29 @@ to yarn concepts at a later stage.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
+            <dia:string>#is_concept#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#bool#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#If true, the underlying object represents a concept.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
             <dia:string>#is_value_object#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
@@ -2924,98 +2947,6 @@ to yarn concepts at a later stage.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#If true, the underlying object is non-generatable.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#is_visitable#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#bool#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#If true, the underlying object can be visited as per visitor pattern.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#is_immutable#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#bool#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#If true, the underlying object is immutable.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#is_fluent#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#bool#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#If true, the underlying object is fluent.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#is_concept#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#bool#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#If true, the underlying object represents a concept.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -6189,7 +6120,7 @@ manageable format.#</dia:string>
         <dia:point val="4.125,83.6"/>
         <dia:point val="4.125,100"/>
         <dia:point val="22.72,100"/>
-        <dia:point val="22.72,95.6"/>
+        <dia:point val="22.72,93.2"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -7475,7 +7406,7 @@ manageable format.#</dia:string>
         <dia:point val="35.755,34"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="35.005,29.95;45.2,35.6"/>
+        <dia:rectangle val="35.005,29.25;45.2,34.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7546,7 +7477,7 @@ manageable format.#</dia:string>
         <dia:point val="60.4575,38.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="59.7075,37.65;71.6575,50.6"/>
+        <dia:rectangle val="59.7075,37.65;71.6575,49.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7920,7 +7851,7 @@ manageable format.#</dia:string>
         <dia:point val="86.915,49"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="82.95,39.95;87.665,50.6"/>
+        <dia:rectangle val="82.95,39.95;87.665,49.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7991,7 +7922,7 @@ manageable format.#</dia:string>
         <dia:point val="83,34"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="75.865,29.95;83.75,35.6"/>
+        <dia:rectangle val="75.865,29.25;83.75,34.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8062,7 +7993,7 @@ manageable format.#</dia:string>
         <dia:point val="23.3775,33.9496"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="22.6275,27.95;109.11,35.6"/>
+        <dia:rectangle val="22.6275,27.25;109.11,34.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8133,7 +8064,7 @@ manageable format.#</dia:string>
         <dia:point val="-82,68"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-82.75,52.5918;-73.1225,69.6"/>
+        <dia:rectangle val="-82.75,52.5918;-73.1225,68.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8314,7 +8245,7 @@ manageable format.#</dia:string>
         <dia:point val="108.91,40"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="108.16,39.25;112.832,50.6"/>
+        <dia:rectangle val="108.16,39.25;112.832,49.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

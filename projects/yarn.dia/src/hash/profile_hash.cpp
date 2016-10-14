@@ -54,13 +54,10 @@ std::size_t profile_hasher::hash(const profile& v) {
     combine(seed, v.is_uml_realization());
     combine(seed, v.is_enumeration());
     combine(seed, v.is_exception());
+    combine(seed, v.is_concept());
     combine(seed, v.is_value_object());
     combine(seed, v.is_service());
     combine(seed, v.is_non_generatable());
-    combine(seed, v.is_visitable());
-    combine(seed, v.is_immutable());
-    combine(seed, v.is_fluent());
-    combine(seed, v.is_concept());
     combine(seed, hash_std_list_std_string(v.unknown_stereotypes()));
 
     return seed;

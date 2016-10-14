@@ -78,13 +78,10 @@ public:
         const bool is_uml_realization,
         const bool is_enumeration,
         const bool is_exception,
+        const bool is_concept,
         const bool is_value_object,
         const bool is_service,
         const bool is_non_generatable,
-        const bool is_visitable,
-        const bool is_immutable,
-        const bool is_fluent,
-        const bool is_concept,
         const std::list<std::string>& unknown_stereotypes);
 
 private:
@@ -168,6 +165,14 @@ public:
     /**@}*/
 
     /**
+     * @brief If true, the underlying object represents a concept.
+     */
+    /**@{*/
+    bool is_concept() const;
+    void is_concept(const bool v);
+    /**@}*/
+
+    /**
      * @brief If true, the underlying object is a value object.
      */
     /**@{*/
@@ -189,38 +194,6 @@ public:
     /**@{*/
     bool is_non_generatable() const;
     void is_non_generatable(const bool v);
-    /**@}*/
-
-    /**
-     * @brief If true, the underlying object can be visited as per visitor pattern.
-     */
-    /**@{*/
-    bool is_visitable() const;
-    void is_visitable(const bool v);
-    /**@}*/
-
-    /**
-     * @brief If true, the underlying object is immutable.
-     */
-    /**@{*/
-    bool is_immutable() const;
-    void is_immutable(const bool v);
-    /**@}*/
-
-    /**
-     * @brief If true, the underlying object is fluent.
-     */
-    /**@{*/
-    bool is_fluent() const;
-    void is_fluent(const bool v);
-    /**@}*/
-
-    /**
-     * @brief If true, the underlying object represents a concept.
-     */
-    /**@{*/
-    bool is_concept() const;
-    void is_concept(const bool v);
     /**@}*/
 
     /**
@@ -253,13 +226,10 @@ private:
     bool is_uml_realization_;
     bool is_enumeration_;
     bool is_exception_;
+    bool is_concept_;
     bool is_value_object_;
     bool is_service_;
     bool is_non_generatable_;
-    bool is_visitable_;
-    bool is_immutable_;
-    bool is_fluent_;
-    bool is_concept_;
     std::list<std::string> unknown_stereotypes_;
 };
 

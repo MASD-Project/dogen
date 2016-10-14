@@ -20,7 +20,10 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/io/vector_io.hpp"
 #include "dogen/yarn/types/object.hpp"
+#include "dogen/yarn/io/name_io.hpp"
+#include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/yarn/types/name_builder.hpp"
 #include "dogen/yarn/types/expansion_error.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
@@ -33,6 +36,8 @@ namespace {
 auto lg(logger_factory("yarn.stereotypes_expander"));
 
 const std::string stereotype_visitor("visitable");
+const std::string stereotype_fluent("fluent");
+const std::string stereotype_immutable("immutable");
 const std::string visitor_name("visitor");
 const std::string visitor_argument_name("v");
 const std::string visitor_doc("Visitor for ");
@@ -238,11 +243,74 @@ expand_visitable(object& o, intermediate_model& im) const {
     BOOST_LOG_SEV(lg, debug) << "Done injecting visitor.";
 }
 
+bool stereotypes_expander::try_expand_concept(
+    const std::string& s, object& o, intermediate_model& im) const {
+
+    /*
+     * Compute a tentative yarn name based on the model.
+     */
+    yarn::name_factory f;
+    const auto n(f.build_element_in_model(im.name(), s));
+    BOOST_LOG_SEV(lg, debug) << "Tentative concept name: " << n;
+
+    /*
+     * If we can locate a concept with that name, the stereotype is
+     * deemed to be referring to it.
+     */
+    const auto i(im.concepts().find(n.id()));
+    if (i != im.concepts().end()) {
+        BOOST_LOG_SEV(lg, debug) << "Found concept with tentative name.";
+        o.modeled_concepts().push_back(i->second.name());
+        return true;
+    }
+
+    /*
+     * Lets try using the references instead.
+     */
+    for (const auto& pair : im.references()) {
+        const auto& ref(pair.first);
+        const auto n(f.build_element_in_model(ref, s));
+        BOOST_LOG_SEV(lg, debug) << "Tentative concept name: " << n;
+
+        const auto i(im.concepts().find(n.id()));
+        if (i != im.concepts().end()) {
+            BOOST_LOG_SEV(lg, debug) << "Found concept with tentative name.";
+            o.modeled_concepts().push_back(i->second.name());
+            return true;
+        }
+    }
+
+    /*
+     * There are no concepts in this model which match the stereotype name.
+     */
+    BOOST_LOG_SEV(lg, debug) << "Could not find a concept with tentative name.";
+    return false;
+}
+
 void stereotypes_expander::expand(object& o, intermediate_model& im) const {
+    BOOST_LOG_SEV(lg, debug) << "Expanding stereotypes for: " << o.name().id();
+    if (o.stereotypes().empty()) {
+        BOOST_LOG_SEV(lg, debug) << "No stereotypes found.";
+        return;
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Original: " << o.stereotypes();
+    std::vector<std::string> unknown_stereotypes;
     for (const auto s : o.stereotypes()) {
         if (s == stereotype_visitor)
             expand_visitable(o, im);
+        else if (s == stereotype_fluent)
+            o.is_fluent(true);
+        else if (s == stereotype_immutable)
+            o.is_immutable(true);
+        else {
+            const bool processed(try_expand_concept(s, o, im));
+            if (!processed)
+                unknown_stereotypes.push_back(s);
+        }
     }
+    o.stereotypes(unknown_stereotypes);
+    BOOST_LOG_SEV(lg, debug) << "Unknown: " << o.stereotypes();
 }
 
 void stereotypes_expander::expand(intermediate_model& im) {
@@ -251,7 +319,7 @@ void stereotypes_expander::expand(intermediate_model& im) {
     for (auto& pair : im.objects())
         expand(pair.second, im);
 
-    BOOST_LOG_SEV(lg, debug) << "Finished expanding stereotypes";
+    BOOST_LOG_SEV(lg, debug) << "Finished expanding stereotypes.";
 }
 
 } }

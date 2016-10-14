@@ -34,13 +34,10 @@ profile::profile()
       is_uml_realization_(static_cast<bool>(0)),
       is_enumeration_(static_cast<bool>(0)),
       is_exception_(static_cast<bool>(0)),
+      is_concept_(static_cast<bool>(0)),
       is_value_object_(static_cast<bool>(0)),
       is_service_(static_cast<bool>(0)),
-      is_non_generatable_(static_cast<bool>(0)),
-      is_visitable_(static_cast<bool>(0)),
-      is_immutable_(static_cast<bool>(0)),
-      is_fluent_(static_cast<bool>(0)),
-      is_concept_(static_cast<bool>(0)) { }
+      is_non_generatable_(static_cast<bool>(0)) { }
 
 profile::profile(
     const bool is_uml_large_package,
@@ -52,13 +49,10 @@ profile::profile(
     const bool is_uml_realization,
     const bool is_enumeration,
     const bool is_exception,
+    const bool is_concept,
     const bool is_value_object,
     const bool is_service,
     const bool is_non_generatable,
-    const bool is_visitable,
-    const bool is_immutable,
-    const bool is_fluent,
-    const bool is_concept,
     const std::list<std::string>& unknown_stereotypes)
     : is_uml_large_package_(is_uml_large_package),
       is_uml_class_(is_uml_class),
@@ -69,13 +63,10 @@ profile::profile(
       is_uml_realization_(is_uml_realization),
       is_enumeration_(is_enumeration),
       is_exception_(is_exception),
+      is_concept_(is_concept),
       is_value_object_(is_value_object),
       is_service_(is_service),
       is_non_generatable_(is_non_generatable),
-      is_visitable_(is_visitable),
-      is_immutable_(is_immutable),
-      is_fluent_(is_fluent),
-      is_concept_(is_concept),
       unknown_stereotypes_(unknown_stereotypes) { }
 
 void profile::swap(profile& other) noexcept {
@@ -89,13 +80,10 @@ void profile::swap(profile& other) noexcept {
     swap(is_uml_realization_, other.is_uml_realization_);
     swap(is_enumeration_, other.is_enumeration_);
     swap(is_exception_, other.is_exception_);
+    swap(is_concept_, other.is_concept_);
     swap(is_value_object_, other.is_value_object_);
     swap(is_service_, other.is_service_);
     swap(is_non_generatable_, other.is_non_generatable_);
-    swap(is_visitable_, other.is_visitable_);
-    swap(is_immutable_, other.is_immutable_);
-    swap(is_fluent_, other.is_fluent_);
-    swap(is_concept_, other.is_concept_);
     swap(unknown_stereotypes_, other.unknown_stereotypes_);
 }
 
@@ -109,13 +97,10 @@ bool profile::operator==(const profile& rhs) const {
         is_uml_realization_ == rhs.is_uml_realization_ &&
         is_enumeration_ == rhs.is_enumeration_ &&
         is_exception_ == rhs.is_exception_ &&
+        is_concept_ == rhs.is_concept_ &&
         is_value_object_ == rhs.is_value_object_ &&
         is_service_ == rhs.is_service_ &&
         is_non_generatable_ == rhs.is_non_generatable_ &&
-        is_visitable_ == rhs.is_visitable_ &&
-        is_immutable_ == rhs.is_immutable_ &&
-        is_fluent_ == rhs.is_fluent_ &&
-        is_concept_ == rhs.is_concept_ &&
         unknown_stereotypes_ == rhs.unknown_stereotypes_;
 }
 
@@ -197,6 +182,14 @@ void profile::is_exception(const bool v) {
     is_exception_ = v;
 }
 
+bool profile::is_concept() const {
+    return is_concept_;
+}
+
+void profile::is_concept(const bool v) {
+    is_concept_ = v;
+}
+
 bool profile::is_value_object() const {
     return is_value_object_;
 }
@@ -219,38 +212,6 @@ bool profile::is_non_generatable() const {
 
 void profile::is_non_generatable(const bool v) {
     is_non_generatable_ = v;
-}
-
-bool profile::is_visitable() const {
-    return is_visitable_;
-}
-
-void profile::is_visitable(const bool v) {
-    is_visitable_ = v;
-}
-
-bool profile::is_immutable() const {
-    return is_immutable_;
-}
-
-void profile::is_immutable(const bool v) {
-    is_immutable_ = v;
-}
-
-bool profile::is_fluent() const {
-    return is_fluent_;
-}
-
-void profile::is_fluent(const bool v) {
-    is_fluent_ = v;
-}
-
-bool profile::is_concept() const {
-    return is_concept_;
-}
-
-void profile::is_concept(const bool v) {
-    is_concept_ = v;
 }
 
 const std::list<std::string>& profile::unknown_stereotypes() const {

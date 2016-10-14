@@ -146,18 +146,11 @@ yarn::object transformer::to_object(const profiled_object& po,
 
     yarn::object r;
     update_element(po, r);
-
-    r.is_fluent(po.profile().is_fluent());
-    r.is_immutable(po.profile().is_immutable());
     r.object_type(ot);
 
-    if (po.profile().is_visitable())
-        r.stereotypes().push_back("visitable");
-
-    for (const auto us : po.profile().unknown_stereotypes()) {
-        const auto n(to_name(us));
-        r.modeled_concepts().push_back(n);
-    }
+    r.stereotypes().reserve(po.profile().unknown_stereotypes().size());
+    for (const auto us : po.profile().unknown_stereotypes())
+        r.stereotypes().push_back(us);
 
     for (const auto& p : po.object().attributes())
         r.local_attributes().push_back(to_attribute(r.name(), p));

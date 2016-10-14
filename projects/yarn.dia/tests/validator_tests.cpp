@@ -202,41 +202,6 @@ BOOST_AUTO_TEST_CASE(setting_one_yarn_type_validates) {
     BOOST_TEST_CHECKPOINT("p2 is valid.");
 }
 
-BOOST_AUTO_TEST_CASE(setting_yarn_object_flags_on_non_objects_throws) {
-    SETUP_TEST_LOG_SOURCE("setting_yarn_entity_flags_on_non_entities_throws");
-
-    dogen::yarn::dia::validator v;
-    dogen::yarn::dia::profile p1;
-    p1.is_uml_class(true);
-    p1.is_enumeration(true);
-    p1.is_non_generatable(true);
-    BOOST_LOG_SEV(lg, debug) << "input p1: " << p1;
-
-    contains_checker<validation_error> cc1(object_options_on_non_object);
-    BOOST_CHECK_EXCEPTION(v.validate(p1), validation_error, cc1);
-
-    dogen::yarn::dia::profile p2;
-    p2.is_uml_class(true);
-    p2.is_enumeration(true);
-    p2.is_fluent(true);
-    BOOST_LOG_SEV(lg, debug) << "input p2: " << p2;
-    BOOST_CHECK_EXCEPTION(v.validate(p2), validation_error, cc1);
-
-    dogen::yarn::dia::profile p3;
-    p3.is_uml_class(true);
-    p3.is_enumeration(true);
-    p3.is_immutable(true);
-    BOOST_LOG_SEV(lg, debug) << "input p3: " << p3;
-    BOOST_CHECK_EXCEPTION(v.validate(p3), validation_error, cc1);
-
-    dogen::yarn::dia::profile p4;
-    p4.is_uml_class(true);
-    p4.is_enumeration(true);
-    p4.is_visitable(true);
-    BOOST_LOG_SEV(lg, debug) << "input p4: " << p4;
-    BOOST_CHECK_EXCEPTION(v.validate(p4), validation_error, cc1);
-}
-
 BOOST_AUTO_TEST_CASE(setting_yarn_object_flags_on_objects_validates) {
     SETUP_TEST_LOG_SOURCE("setting_yarn_object_flags_on_objects_validates");
 
