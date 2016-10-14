@@ -63,7 +63,6 @@ public:
     static boost::filesystem::path input_disable_cmakelists_dia();
     static boost::filesystem::path input_disable_full_ctor_dia();
     static boost::filesystem::path input_disable_facet_folders_dia();
-    static boost::filesystem::path input_disable_unique_file_names_dia();
     static boost::filesystem::path input_disable_xml_serialization_dia();
     static boost::filesystem::path input_enable_facet_domain_dia();
     static boost::filesystem::path input_enable_facet_hash_dia();

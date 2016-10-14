@@ -3825,6 +3825,19 @@ become very readable.
 These stories are good candidates for the subsequent release. This
 release will be all about adding new features.
 
+*** Add support for disabling unique filenames                        :story:
+
+At present dogen uses formatter and facet prefixes for each file it
+generates, ensuring the files are unique across all projects in a
+model. This was done originally due to some issue with code coverage,
+whereby the same filename was causing the gcov tool to get confused.
+
+Originally we had a feature that allowed switching off the unique
+filenames, but this bit-rotted and was eventually removed. It may make
+sense to add it again, but it is really a shorthand for setting facet
+and formatter prefix to empty string. We should at least have a model
+that tests that this works.
+
 *** Consider using indices rather than associative containers          :epic:
 
 Once we generate the final model the model becomes constant; this

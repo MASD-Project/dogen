@@ -55,9 +55,6 @@ path input_disable_full_ctor_dia(
     "yarn.dia/input/disable_full_ctor.dia"
     );
 path input_disable_facet_folders_dia("yarn.dia/input/disable_facet_folders.dia");
-path input_disable_unique_file_names_dia(
-    "yarn.dia/input/disable_unique_file_names.dia"
-    );
 path input_disable_xml_serialization_dia(
     "yarn.dia/input/disable_xml_serialization.dia"
     );
@@ -354,10 +351,6 @@ path yarn_dia::input_disable_full_ctor_dia() {
 
 path yarn_dia::input_disable_facet_folders_dia() {
     return validating_resolver::resolve(::input_disable_facet_folders_dia);
-}
-
-path yarn_dia::input_disable_unique_file_names_dia() {
-    return validating_resolver::resolve(::input_disable_unique_file_names_dia);
 }
 
 path yarn_dia::input_disable_xml_serialization_dia() {
