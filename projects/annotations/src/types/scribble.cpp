@@ -28,19 +28,23 @@ scribble::scribble()
 
 scribble::scribble(
     const std::list<std::pair<std::string, std::string> >& entries,
-    const dogen::annotations::scope_types scope)
+    const dogen::annotations::scope_types scope,
+    const std::vector<std::string>& candidate_labels)
     : entries_(entries),
-      scope_(scope) { }
+      scope_(scope),
+      candidate_labels_(candidate_labels) { }
 
 void scribble::swap(scribble& other) noexcept {
     using std::swap;
     swap(entries_, other.entries_);
     swap(scope_, other.scope_);
+    swap(candidate_labels_, other.candidate_labels_);
 }
 
 bool scribble::operator==(const scribble& rhs) const {
     return entries_ == rhs.entries_ &&
-        scope_ == rhs.scope_;
+        scope_ == rhs.scope_ &&
+        candidate_labels_ == rhs.candidate_labels_;
 }
 
 scribble& scribble::operator=(scribble other) {
@@ -71,6 +75,22 @@ dogen::annotations::scope_types scribble::scope() const {
 
 void scribble::scope(const dogen::annotations::scope_types v) {
     scope_ = v;
+}
+
+const std::vector<std::string>& scribble::candidate_labels() const {
+    return candidate_labels_;
+}
+
+std::vector<std::string>& scribble::candidate_labels() {
+    return candidate_labels_;
+}
+
+void scribble::candidate_labels(const std::vector<std::string>& v) {
+    candidate_labels_ = v;
+}
+
+void scribble::candidate_labels(const std::vector<std::string>&& v) {
+    candidate_labels_ = std::move(v);
 }
 
 } }

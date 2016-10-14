@@ -787,6 +787,10 @@ a second line
 							</item>
 						</entries>
 						<scope>5</scope>
+						<candidate_labels>
+							<count>0</count>
+							<item_version>0</item_version>
+						</candidate_labels>
 					</parent>
 					<children class_id="49" tracking_level="0" version="0">
 						<count>0</count>
@@ -812,6 +816,10 @@ a second line
 							</item>
 						</entries>
 						<scope>3</scope>
+						<candidate_labels>
+							<count>0</count>
+							<item_version>0</item_version>
+						</candidate_labels>
 					</parent>
 					<children>
 						<count>0</count>
@@ -833,6 +841,10 @@ a second line
 							</item>
 						</entries>
 						<scope>5</scope>
+						<candidate_labels>
+							<count>0</count>
+							<item_version>0</item_version>
+						</candidate_labels>
 					</parent>
 					<children>
 						<count>0</count>

@@ -45,6 +45,14 @@ inline std::size_t hash_std_list_std_pair_std_string_std_string(const std::list<
     return seed;
 }
 
+inline std::size_t hash_std_vector_std_string(const std::vector<std::string>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -55,6 +63,7 @@ std::size_t scribble_hasher::hash(const scribble& v) {
 
     combine(seed, hash_std_list_std_pair_std_string_std_string(v.entries()));
     combine(seed, v.scope());
+    combine(seed, hash_std_vector_std_string(v.candidate_labels()));
 
     return seed;
 }

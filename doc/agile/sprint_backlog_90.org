@@ -483,6 +483,18 @@ Tasks:
   scope default. If none is found do nothing.
 - allow users to supply labels. These are checked after profile field.
 
+*** STARTED Add binding of stereotypes with profiles                  :story:
+    CLOCK: [2016-10-14 Fri 21:37]--[2016-10-14 Fri 22:28] =>  0:51
+
+During annotation expansion, we need to supply a list of the remaining
+stereotypes against ids. If there is a match, they are used as
+profiles.
+
+Problems:
+
+- scope is incorrect. Need to know which module is root.
+-
+
 *** STARTED Finish overwriting support                                :story:
     CLOCK: [2016-10-14 Fri 13:49]--[2016-10-14 Fri 13:55] =>  0:06
 
@@ -492,12 +504,6 @@ but there is some linkage missing:
 - global/local configuration needs to have an overwrite flag;
 - need to populate formatter configuration on the back of that;
 - need to read flag from formatter configuration and set it on file.
-
-*** Add binding of stereotypes with profiles                          :story:
-
-During annotation expansion, we need to supply a list of the remaining
-stereotypes against ids. If there is a match, they are used as
-profiles.
 
 *** Generate formatter interfaces                                      :epic:
 

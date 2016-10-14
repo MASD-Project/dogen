@@ -110,10 +110,15 @@ void hydrator::insert_scribbles(const yarn::name& owner,
     if (kvps.empty())
         return;
 
-    annotations::scribble_group sgrp;
-    sgrp.parent(annotations::scribble(kvps, scope));
+    annotations::scribble s;
+    s.entries(kvps);
+    s.scope(scope);
+
+    annotations::scribble_group sg;
+    sg.parent(s);
+
     const auto id(owner.id());
-    const auto pair(std::make_pair(id, sgrp));
+    const auto pair(std::make_pair(id, sg));
     const bool inserted(im.indices().scribble_groups().insert(pair).second);
     if (!inserted) {
         BOOST_LOG_SEV(lg, error) << duplicate_element_id << id;

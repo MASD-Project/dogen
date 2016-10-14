@@ -57,6 +57,20 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::pair<std::
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::vector<std::string>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << tidy_up_string(*i) << "\"";
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace annotations {
 
@@ -64,7 +78,8 @@ std::ostream& operator<<(std::ostream& s, const scribble& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::annotations::scribble\"" << ", "
       << "\"entries\": " << v.entries() << ", "
-      << "\"scope\": " << v.scope()
+      << "\"scope\": " << v.scope() << ", "
+      << "\"candidate_labels\": " << v.candidate_labels()
       << " }";
     return(s);
 }

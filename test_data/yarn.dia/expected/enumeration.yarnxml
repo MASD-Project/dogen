@@ -930,6 +930,10 @@ this is a long comment
 							</item>
 						</entries>
 						<scope>3</scope>
+						<candidate_labels>
+							<count>0</count>
+							<item_version>0</item_version>
+						</candidate_labels>
 					</parent>
 					<children class_id="52" tracking_level="0" version="0">
 						<count>0</count>

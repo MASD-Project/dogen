@@ -27,6 +27,7 @@
 
 #include <list>
 #include <string>
+#include <vector>
 #include <utility>
 #include <algorithm>
 #include "dogen/annotations/types/scope_types.hpp"
@@ -47,7 +48,8 @@ public:
 public:
     scribble(
         const std::list<std::pair<std::string, std::string> >& entries,
-        const dogen::annotations::scope_types scope);
+        const dogen::annotations::scope_types scope,
+        const std::vector<std::string>& candidate_labels);
 
 private:
     template<typename Archive>
@@ -65,6 +67,11 @@ public:
     dogen::annotations::scope_types scope() const;
     void scope(const dogen::annotations::scope_types v);
 
+    const std::vector<std::string>& candidate_labels() const;
+    std::vector<std::string>& candidate_labels();
+    void candidate_labels(const std::vector<std::string>& v);
+    void candidate_labels(const std::vector<std::string>&& v);
+
 public:
     bool operator==(const scribble& rhs) const;
     bool operator!=(const scribble& rhs) const {
@@ -78,6 +85,7 @@ public:
 private:
     std::list<std::pair<std::string, std::string> > entries_;
     dogen::annotations::scope_types scope_;
+    std::vector<std::string> candidate_labels_;
 };
 
 } }

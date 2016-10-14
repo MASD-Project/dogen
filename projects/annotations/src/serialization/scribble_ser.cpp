@@ -23,6 +23,7 @@
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/string.hpp>
+#include <boost/serialization/vector.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/serialization/utility.hpp>
@@ -42,6 +43,7 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("entries", v.entries_);
     ar << make_nvp("scope", v.scope_);
+    ar << make_nvp("candidate_labels", v.candidate_labels_);
 }
 
 template<typename Archive>
@@ -50,6 +52,7 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("entries", v.entries_);
     ar >> make_nvp("scope", v.scope_);
+    ar >> make_nvp("candidate_labels", v.candidate_labels_);
 }
 
 } }

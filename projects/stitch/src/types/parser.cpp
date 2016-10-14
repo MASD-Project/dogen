@@ -344,10 +344,11 @@ text_template parser::parse(const std::string& s) const {
     r.lines(lines);
 
     if (!kvps.empty()) {
+        annotations::scribble s;
         using annotations::scope_types;
-        const auto scope(scope_types::root_module);
-        const auto scribble = annotations::scribble(kvps, scope);
-        r.annotation(annotation_factory_.make(scribble));
+        s.scope(scope_types::root_module);
+        s.entries(kvps);
+        r.annotation(annotation_factory_.make(s));
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished parsing.";
