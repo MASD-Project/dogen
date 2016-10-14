@@ -30,6 +30,7 @@
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
 #include "dogen/annotations/types/value_fwd.hpp"
+#include "dogen/annotations/types/scope_types.hpp"
 #include "dogen/annotations/serialization/annotation_fwd_ser.hpp"
 
 namespace dogen {
@@ -40,13 +41,17 @@ namespace annotations {
  */
 class annotation final {
 public:
-    annotation() = default;
     annotation(const annotation&) = default;
     annotation(annotation&&) = default;
     ~annotation() = default;
 
 public:
-    explicit annotation(const std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> >& entries);
+    annotation();
+
+public:
+    annotation(
+        const std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> >& entries,
+        const dogen::annotations::scope_types scope);
 
 private:
     template<typename Archive>
@@ -66,6 +71,9 @@ public:
     void entries(const std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> >&& v);
     /**@}*/
 
+    dogen::annotations::scope_types scope() const;
+    void scope(const dogen::annotations::scope_types v);
+
 public:
     bool operator==(const annotation& rhs) const;
     bool operator!=(const annotation& rhs) const {
@@ -78,6 +86,7 @@ public:
 
 private:
     std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> > entries_;
+    dogen::annotations::scope_types scope_;
 };
 
 } }

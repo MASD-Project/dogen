@@ -20,6 +20,7 @@
  */
 #include <sstream>
 #include "dogen/annotations/test_data/profile_td.hpp"
+#include "dogen/annotations/test_data/scope_types_td.hpp"
 #include "dogen/annotations/test_data/entry_template_td.hpp"
 
 namespace {
@@ -44,6 +45,11 @@ std::unordered_set<std::string> create_std_unordered_set_std_string(unsigned int
         r.insert(create_std_string(position + i));
     }
     return r;
+}
+
+dogen::annotations::scope_types
+create_dogen_annotations_scope_types(const unsigned int position) {
+    return dogen::annotations::scope_types_generator::create(position);
 }
 
 dogen::annotations::entry_template
@@ -71,7 +77,8 @@ populate(const unsigned int position, result_type& v) {
     v.name(create_std_string(position + 0));
     v.parents(create_std_list_std_string(position + 1));
     v.labels(create_std_unordered_set_std_string(position + 2));
-    v.templates(create_std_list_dogen_annotations_entry_template(position + 3));
+    v.scope(create_dogen_annotations_scope_types(position + 3));
+    v.templates(create_std_list_dogen_annotations_entry_template(position + 4));
 }
 
 profile_generator::result_type

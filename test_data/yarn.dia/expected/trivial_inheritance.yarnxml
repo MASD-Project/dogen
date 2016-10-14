@@ -58,6 +58,7 @@
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;pkg4&gt;</id>
@@ -123,6 +124,7 @@ in the context of inheritance.
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;</id>
@@ -183,6 +185,7 @@ in the context of inheritance.
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;pkg2&gt;</id>
@@ -243,6 +246,7 @@ in the context of inheritance.
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;pkg1&gt;</id>
@@ -303,6 +307,7 @@ in the context of inheritance.
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;pkg3&gt;</id>
@@ -383,6 +388,7 @@ in the context of inheritance.
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;non_final_leaf&gt;</id>
@@ -441,6 +447,7 @@ in the context of inheritance.
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;non_final_leaf&gt;&lt;prop_0&gt;</id>
@@ -610,6 +617,7 @@ in the context of inheritance.
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;pkg4&gt;&lt;child_via_settings&gt;</id>
@@ -669,6 +677,7 @@ in the context of inheritance.
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;pkg4&gt;&lt;child_via_settings&gt;&lt;prop_1&gt;</id>
@@ -809,6 +818,7 @@ in the context of inheritance.
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;pkg3&gt;&lt;child_via_settings&gt;</id>
@@ -868,6 +878,7 @@ in the context of inheritance.
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;pkg3&gt;&lt;child_via_settings&gt;&lt;prop_1&gt;</id>
@@ -1008,6 +1019,7 @@ in the context of inheritance.
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;pkg1&gt;&lt;child_via_settings&gt;</id>
@@ -1067,6 +1079,7 @@ in the context of inheritance.
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;pkg1&gt;&lt;child_via_settings&gt;&lt;prop_1&gt;</id>
@@ -1208,6 +1221,7 @@ in the context of inheritance.
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;move_ctor_empty_descendant&gt;</id>
@@ -1355,6 +1369,7 @@ in the context of inheritance.
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;pkg1&gt;&lt;child&gt;</id>
@@ -1414,6 +1429,7 @@ in the context of inheritance.
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;pkg1&gt;&lt;child&gt;&lt;prop_1&gt;</id>
@@ -1585,6 +1601,7 @@ in the context of inheritance.
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;base&gt;</id>
@@ -1703,6 +1720,7 @@ in the context of inheritance.
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;non_final_orphan&gt;</id>
@@ -1761,6 +1779,7 @@ in the context of inheritance.
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;non_final_orphan&gt;&lt;prop_0&gt;</id>
@@ -1900,6 +1919,7 @@ in the context of inheritance.
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;child_via_settings&gt;</id>
@@ -1958,6 +1978,7 @@ in the context of inheritance.
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;child_via_settings&gt;&lt;prop_1&gt;</id>
@@ -2097,6 +2118,7 @@ in the context of inheritance.
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;pkg1&gt;&lt;parent&gt;</id>
@@ -2156,6 +2178,7 @@ in the context of inheritance.
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;pkg1&gt;&lt;parent&gt;&lt;prop_0&gt;</id>
@@ -2297,6 +2320,7 @@ in the context of inheritance.
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;move_ctor_base&gt;</id>
@@ -2356,6 +2380,7 @@ in the context of inheritance.
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;move_ctor_base&gt;&lt;prop_0&gt;</id>
@@ -2495,6 +2520,7 @@ in the context of inheritance.
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;parent_without_members&gt;</id>
@@ -2612,6 +2638,7 @@ in the context of inheritance.
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;pkg2&gt;&lt;parent&gt;</id>
@@ -2671,6 +2698,7 @@ in the context of inheritance.
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;pkg2&gt;&lt;parent&gt;&lt;prop_0&gt;</id>
@@ -2811,6 +2839,7 @@ in the context of inheritance.
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;second_child_without_members&gt;</id>
@@ -2958,6 +2987,7 @@ in the context of inheritance.
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;third_child_with_members&gt;</id>
@@ -3016,6 +3046,7 @@ in the context of inheritance.
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;third_child_with_members&gt;&lt;prop_1&gt;</id>
@@ -3185,6 +3216,7 @@ in the context of inheritance.
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;parent_with_members&gt;</id>
@@ -3243,6 +3275,7 @@ in the context of inheritance.
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;parent_with_members&gt;&lt;prop_0&gt;</id>
@@ -3382,6 +3415,7 @@ in the context of inheritance.
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;pkg3&gt;&lt;child&gt;</id>
@@ -3441,6 +3475,7 @@ in the context of inheritance.
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;pkg3&gt;&lt;child&gt;&lt;prop_1&gt;</id>
@@ -3612,6 +3647,7 @@ in the context of inheritance.
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;child_without_members&gt;</id>
@@ -3759,6 +3795,7 @@ in the context of inheritance.
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;parent_outside&gt;</id>
@@ -3817,6 +3854,7 @@ in the context of inheritance.
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;parent_outside&gt;&lt;prop_0&gt;</id>
@@ -3956,6 +3994,7 @@ in the context of inheritance.
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;child_with_members&gt;</id>
@@ -4014,6 +4053,7 @@ in the context of inheritance.
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;child_with_members&gt;&lt;prop_0&gt;</id>
@@ -4183,6 +4223,7 @@ in the context of inheritance.
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;service&gt;</id>
@@ -4300,6 +4341,7 @@ in the context of inheritance.
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;descendant2&gt;</id>
@@ -4358,6 +4400,7 @@ in the context of inheritance.
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;descendant2&gt;&lt;prop_0&gt;</id>
@@ -4527,6 +4570,7 @@ in the context of inheritance.
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;pkg4&gt;&lt;child&gt;</id>
@@ -4586,6 +4630,7 @@ in the context of inheritance.
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;pkg4&gt;&lt;child&gt;&lt;prop_1&gt;</id>
@@ -4756,6 +4801,7 @@ in the context of inheritance.
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;service_interface&gt;</id>
@@ -4873,6 +4919,7 @@ in the context of inheritance.
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;child_of_a_child2&gt;</id>
@@ -4931,6 +4978,7 @@ in the context of inheritance.
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;child_of_a_child2&gt;&lt;prop_2&gt;</id>
@@ -5100,6 +5148,7 @@ in the context of inheritance.
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;descendant1&gt;</id>
@@ -5247,6 +5296,7 @@ in the context of inheritance.
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;child_of_a_child1&gt;</id>
@@ -5394,6 +5444,7 @@ in the context of inheritance.
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;descendant3&gt;</id>
@@ -5452,6 +5503,7 @@ in the context of inheritance.
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;descendant3&gt;&lt;prop_0&gt;</id>
@@ -5622,6 +5674,7 @@ in the context of inheritance.
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;trivial_inheritance&gt;&lt;move_ctor_descendant&gt;</id>
@@ -5681,6 +5734,7 @@ in the context of inheritance.
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;trivial_inheritance&gt;&lt;move_ctor_descendant&gt;&lt;prop_1&gt;</id>
@@ -5883,6 +5937,7 @@ in the context of inheritance.
 								<second>false</second>
 							</item>
 						</entries>
+						<scope>5</scope>
 					</parent>
 					<children class_id="49" tracking_level="0" version="0">
 						<count>0</count>
@@ -5903,6 +5958,7 @@ in the context of inheritance.
 								<second>false</second>
 							</item>
 						</entries>
+						<scope>5</scope>
 					</parent>
 					<children>
 						<count>0</count>
@@ -5923,6 +5979,7 @@ in the context of inheritance.
 								<second>parent_outside</second>
 							</item>
 						</entries>
+						<scope>5</scope>
 					</parent>
 					<children>
 						<count>0</count>
@@ -5955,6 +6012,7 @@ in the context of inheritance.
 								<second>emacs</second>
 							</item>
 						</entries>
+						<scope>3</scope>
 					</parent>
 					<children>
 						<count>0</count>
@@ -5975,6 +6033,7 @@ in the context of inheritance.
 								<second>pkg1::parent</second>
 							</item>
 						</entries>
+						<scope>5</scope>
 					</parent>
 					<children>
 						<count>0</count>
@@ -5995,6 +6054,7 @@ in the context of inheritance.
 								<second>pkg2::parent</second>
 							</item>
 						</entries>
+						<scope>5</scope>
 					</parent>
 					<children>
 						<count>0</count>
@@ -6015,6 +6075,7 @@ in the context of inheritance.
 								<second>parent_with_members</second>
 							</item>
 						</entries>
+						<scope>5</scope>
 					</parent>
 					<children>
 						<count>0</count>
@@ -6034,6 +6095,7 @@ in the context of inheritance.
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</entries>
+				<scope>0</scope>
 			</annotation>
 			<name>
 				<id></id>

@@ -18,8 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/annotations/hash/scribble_hash.hpp"
-#include "dogen/annotations/hash/scope_types_hash.hpp"
+#include "dogen/annotations/hash/profile_hash.hpp"
+#include "dogen/annotations/hash/annotation_hash.hpp"
+#include "dogen/annotations/hash/profiler_configuration_hash.hpp"
 
 namespace {
 
@@ -29,32 +30,17 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_pair_std_string_std_string(const std::pair<std::string, std::string>& v) {
-    std::size_t seed(0);
-
-    combine(seed, v.first);
-    combine(seed, v.second);
-    return seed;
-}
-
-inline std::size_t hash_std_list_std_pair_std_string_std_string(const std::list<std::pair<std::string, std::string> >& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, hash_std_pair_std_string_std_string(i));
-    }
-    return seed;
-}
-
 }
 
 namespace dogen {
 namespace annotations {
 
-std::size_t scribble_hasher::hash(const scribble& v) {
+std::size_t profiler_configuration_hasher::hash(const profiler_configuration& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_list_std_pair_std_string_std_string(v.entries()));
-    combine(seed, v.scope());
+    combine(seed, v.profile());
+    combine(seed, v.annotation());
+    combine(seed, v.merged());
 
     return seed;
 }

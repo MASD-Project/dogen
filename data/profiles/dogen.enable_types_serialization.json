@@ -1,6 +1,7 @@
 {
     "name" : "dogen.enable_types_serialization.json",
     "parents" : [ "dogen.enable_types" ],
+    "scope" : "root_module",
     "templates" : [
         {
             "name" : {

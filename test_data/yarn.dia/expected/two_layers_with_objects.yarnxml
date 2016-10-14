@@ -58,6 +58,7 @@
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;two_layers_with_objects&gt;&lt;Package_2&gt;</id>
@@ -118,6 +119,7 @@
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;two_layers_with_objects&gt;&lt;package_1&gt;</id>
@@ -178,6 +180,7 @@
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;two_layers_with_objects&gt;</id>
@@ -258,6 +261,7 @@
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;two_layers_with_objects&gt;&lt;Package_2&gt;&lt;class_2&gt;</id>
@@ -317,6 +321,7 @@
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;two_layers_with_objects&gt;&lt;Package_2&gt;&lt;class_2&gt;&lt;prop_0&gt;</id>
@@ -457,6 +462,7 @@
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;two_layers_with_objects&gt;&lt;package_1&gt;&lt;class_1&gt;</id>
@@ -516,6 +522,7 @@
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;two_layers_with_objects&gt;&lt;package_1&gt;&lt;class_1&gt;&lt;prop_0&gt;</id>
@@ -701,6 +708,7 @@
 								<second>emacs</second>
 							</item>
 						</entries>
+						<scope>3</scope>
 					</parent>
 					<children class_id="49" tracking_level="0" version="0">
 						<count>0</count>
@@ -720,6 +728,7 @@
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</entries>
+				<scope>0</scope>
 			</annotation>
 			<name>
 				<id></id>

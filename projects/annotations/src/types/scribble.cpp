@@ -23,16 +23,24 @@
 namespace dogen {
 namespace annotations {
 
-scribble::scribble(const std::list<std::pair<std::string, std::string> >& entries)
-    : entries_(entries) { }
+scribble::scribble()
+    : scope_(static_cast<dogen::annotations::scope_types>(0)) { }
+
+scribble::scribble(
+    const std::list<std::pair<std::string, std::string> >& entries,
+    const dogen::annotations::scope_types scope)
+    : entries_(entries),
+      scope_(scope) { }
 
 void scribble::swap(scribble& other) noexcept {
     using std::swap;
     swap(entries_, other.entries_);
+    swap(scope_, other.scope_);
 }
 
 bool scribble::operator==(const scribble& rhs) const {
-    return entries_ == rhs.entries_;
+    return entries_ == rhs.entries_ &&
+        scope_ == rhs.scope_;
 }
 
 scribble& scribble::operator=(scribble other) {
@@ -55,6 +63,14 @@ void scribble::entries(const std::list<std::pair<std::string, std::string> >& v)
 
 void scribble::entries(const std::list<std::pair<std::string, std::string> >&& v) {
     entries_ = std::move(v);
+}
+
+dogen::annotations::scope_types scribble::scope() const {
+    return scope_;
+}
+
+void scribble::scope(const dogen::annotations::scope_types v) {
+    scope_ = v;
 }
 
 } }

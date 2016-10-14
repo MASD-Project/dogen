@@ -58,6 +58,7 @@
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;std_model&gt;&lt;pkg1&gt;</id>
@@ -118,6 +119,7 @@
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;std_model&gt;</id>
@@ -198,6 +200,7 @@
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;std_model&gt;&lt;primitives&gt;</id>
@@ -256,6 +259,7 @@
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;primitives&gt;&lt;prop_0&gt;</id>
@@ -336,6 +340,7 @@
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;primitives&gt;&lt;prop_1&gt;</id>
@@ -416,6 +421,7 @@
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;primitives&gt;&lt;prop_2&gt;</id>
@@ -496,6 +502,7 @@
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;primitives&gt;&lt;prop_3&gt;</id>
@@ -576,6 +583,7 @@
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;primitives&gt;&lt;prop_4&gt;</id>
@@ -656,6 +664,7 @@
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;primitives&gt;&lt;prop_5&gt;</id>
@@ -736,6 +745,7 @@
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;primitives&gt;&lt;prop_6&gt;</id>
@@ -816,6 +826,7 @@
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;primitives&gt;&lt;prop_7&gt;</id>
@@ -955,6 +966,7 @@
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;std_model&gt;&lt;pkg1&gt;&lt;class_c&gt;</id>
@@ -1014,6 +1026,7 @@
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;pkg1&gt;&lt;class_c&gt;&lt;prop_0&gt;</id>
@@ -1095,6 +1108,7 @@
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;pkg1&gt;&lt;class_c&gt;&lt;prop_1&gt;</id>
@@ -1235,6 +1249,7 @@
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;std_model&gt;&lt;base&gt;</id>
@@ -1293,6 +1308,7 @@
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;base&gt;&lt;prop_0&gt;</id>
@@ -1432,6 +1448,7 @@
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;std_model&gt;&lt;class_j&gt;</id>
@@ -1490,6 +1507,7 @@
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_j&gt;&lt;prop_0&gt;</id>
@@ -1570,6 +1588,7 @@
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_j&gt;&lt;prop_1&gt;</id>
@@ -1650,6 +1669,7 @@
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_j&gt;&lt;prop_2&gt;</id>
@@ -1789,6 +1809,7 @@
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;std_model&gt;&lt;class_b&gt;</id>
@@ -1847,6 +1868,7 @@
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_b&gt;&lt;prop_0&gt;</id>
@@ -1927,6 +1949,7 @@
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_b&gt;&lt;prop_1&gt;</id>
@@ -2007,6 +2030,7 @@
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_b&gt;&lt;prop_2&gt;</id>
@@ -2087,6 +2111,7 @@
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_b&gt;&lt;prop_3&gt;</id>
@@ -2167,6 +2192,7 @@
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_b&gt;&lt;prop_4&gt;</id>
@@ -2247,6 +2273,7 @@
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_b&gt;&lt;prop_5&gt;</id>
@@ -2386,6 +2413,7 @@
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;std_model&gt;&lt;class_d&gt;</id>
@@ -2444,6 +2472,7 @@
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_d&gt;&lt;prop_0&gt;</id>
@@ -2524,6 +2553,7 @@
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_d&gt;&lt;prop_1&gt;</id>
@@ -2604,6 +2634,7 @@
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_d&gt;&lt;prop_2&gt;</id>
@@ -2684,6 +2715,7 @@
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_d&gt;&lt;prop_3&gt;</id>
@@ -2764,6 +2796,7 @@
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_d&gt;&lt;prop_4&gt;</id>
@@ -2844,6 +2877,7 @@
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_d&gt;&lt;prop_5&gt;</id>
@@ -2983,6 +3017,7 @@
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;std_model&gt;&lt;class_a&gt;</id>
@@ -3041,6 +3076,7 @@
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_a&gt;&lt;prop0&gt;</id>
@@ -3122,6 +3158,7 @@
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_a&gt;&lt;prop1&gt;</id>
@@ -3261,6 +3298,7 @@
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;std_model&gt;&lt;class_e&gt;</id>
@@ -3319,6 +3357,7 @@
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_e&gt;&lt;prop_0&gt;</id>
@@ -3399,6 +3438,7 @@
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_e&gt;&lt;prop_1&gt;</id>
@@ -3479,6 +3519,7 @@
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_e&gt;&lt;prop_2&gt;</id>
@@ -3559,6 +3600,7 @@
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_e&gt;&lt;prop_3&gt;</id>
@@ -3639,6 +3681,7 @@
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_e&gt;&lt;prop_4&gt;</id>
@@ -3719,6 +3762,7 @@
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_e&gt;&lt;prop_5&gt;</id>
@@ -3858,6 +3902,7 @@
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;std_model&gt;&lt;class_h&gt;</id>
@@ -3916,6 +3961,7 @@
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_h&gt;&lt;prop_0&gt;</id>
@@ -3996,6 +4042,7 @@
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_h&gt;&lt;prop_1&gt;</id>
@@ -4135,6 +4182,7 @@
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;std_model&gt;&lt;class_f&gt;</id>
@@ -4193,6 +4241,7 @@
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_f&gt;&lt;prop_0&gt;</id>
@@ -4273,6 +4322,7 @@
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_f&gt;&lt;prop_1&gt;</id>
@@ -4353,6 +4403,7 @@
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_f&gt;&lt;prop_2&gt;</id>
@@ -4492,6 +4543,7 @@
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;std_model&gt;&lt;some_service&gt;</id>
@@ -4550,6 +4602,7 @@
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;some_service&gt;&lt;prop_0&gt;</id>
@@ -4630,6 +4683,7 @@
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;some_service&gt;&lt;prop_1&gt;</id>
@@ -4710,6 +4764,7 @@
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;some_service&gt;&lt;prop_2&gt;</id>
@@ -4790,6 +4845,7 @@
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;some_service&gt;&lt;prop_3&gt;</id>
@@ -4929,6 +4985,7 @@
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;std_model&gt;&lt;class_g&gt;</id>
@@ -4987,6 +5044,7 @@
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_g&gt;&lt;prop_0&gt;</id>
@@ -5067,6 +5125,7 @@
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_g&gt;&lt;prop_1&gt;</id>
@@ -5147,6 +5206,7 @@
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;class_g&gt;&lt;prop_2&gt;</id>
@@ -5286,6 +5346,7 @@
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;std_model&gt;&lt;derived&gt;</id>
@@ -5344,6 +5405,7 @@
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;std_model&gt;&lt;derived&gt;&lt;prop_1&gt;</id>
@@ -5558,6 +5620,7 @@
 								<second>emacs</second>
 							</item>
 						</entries>
+						<scope>3</scope>
 					</parent>
 					<children class_id="49" tracking_level="0" version="0">
 						<count>0</count>
@@ -5577,6 +5640,7 @@
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</entries>
+				<scope>0</scope>
 			</annotation>
 			<name>
 				<id></id>

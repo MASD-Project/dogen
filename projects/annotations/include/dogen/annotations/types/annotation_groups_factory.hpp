@@ -64,6 +64,18 @@ public:
         const type_repository& trp, const bool throw_on_missing_type = true);
 
 private:
+    struct type_group {
+        annotations::type profile;
+    };
+
+    friend std::ostream& operator<<(std::ostream& s, const type_group& v);
+
+    type_group make_type_group(const type_repository& trp) const;
+
+    std::string
+    obtain_profile_name(const type_group& tg, const annotation& a) const;
+
+private:
     /**
      * @brief Returns the field definition for the qualified name, if
      * one exists.
@@ -81,7 +93,7 @@ private:
     /**
      * @brief Converts the raw data into an annotation.
      */
-    annotation create_annotation(const scope_types current_scope,
+    annotation create_annotation(const scope_types scope,
         const std::unordered_map<std::string, std::list<std::string>>&
         aggregated_scribble_entries) const;
 
@@ -90,9 +102,6 @@ private:
      */
     std::unordered_map<std::string, std::list<std::string>>
         aggregate_scribble_entries(const scribble& scribble) const;
-
-    scope_types compute_scope_for_id(const std::string& root_object_id,
-        const std::string& current_id) const;
 
     /**
      * @brief Creates the annotation profiles.
@@ -104,11 +113,11 @@ public:
     /**
      * @brief Produce the annotations object.
      */
-    annotation build(const scope_types scope, const scribble& scribble) const;
+    annotation make(const scribble& scribble) const;
 
     std::unordered_map<std::string, annotation_group>
-    build(const std::string& root_object_id, const std::unordered_map<
-        std::string, scribble_group>& scribble_groups) const;
+    make(const type_repository& trp, const std::unordered_map<std::string,
+        scribble_group>& scribble_groups) const;
 
 private:
     const std::vector<boost::filesystem::path> data_dirs_;

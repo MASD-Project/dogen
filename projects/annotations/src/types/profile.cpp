@@ -23,14 +23,19 @@
 namespace dogen {
 namespace annotations {
 
+profile::profile()
+    : scope_(static_cast<dogen::annotations::scope_types>(0)) { }
+
 profile::profile(
     const std::string& name,
     const std::list<std::string>& parents,
     const std::unordered_set<std::string>& labels,
+    const dogen::annotations::scope_types scope,
     const std::list<dogen::annotations::entry_template>& templates)
     : name_(name),
       parents_(parents),
       labels_(labels),
+      scope_(scope),
       templates_(templates) { }
 
 void profile::swap(profile& other) noexcept {
@@ -38,6 +43,7 @@ void profile::swap(profile& other) noexcept {
     swap(name_, other.name_);
     swap(parents_, other.parents_);
     swap(labels_, other.labels_);
+    swap(scope_, other.scope_);
     swap(templates_, other.templates_);
 }
 
@@ -45,6 +51,7 @@ bool profile::operator==(const profile& rhs) const {
     return name_ == rhs.name_ &&
         parents_ == rhs.parents_ &&
         labels_ == rhs.labels_ &&
+        scope_ == rhs.scope_ &&
         templates_ == rhs.templates_;
 }
 
@@ -100,6 +107,14 @@ void profile::labels(const std::unordered_set<std::string>& v) {
 
 void profile::labels(const std::unordered_set<std::string>&& v) {
     labels_ = std::move(v);
+}
+
+dogen::annotations::scope_types profile::scope() const {
+    return scope_;
+}
+
+void profile::scope(const dogen::annotations::scope_types v) {
+    scope_ = v;
 }
 
 const std::list<dogen::annotations::entry_template>& profile::templates() const {

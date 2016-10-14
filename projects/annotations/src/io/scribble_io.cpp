@@ -21,6 +21,7 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "dogen/annotations/io/scribble_io.hpp"
+#include "dogen/annotations/io/scope_types_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -62,7 +63,8 @@ namespace annotations {
 std::ostream& operator<<(std::ostream& s, const scribble& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::annotations::scribble\"" << ", "
-      << "\"entries\": " << v.entries()
+      << "\"entries\": " << v.entries() << ", "
+      << "\"scope\": " << v.scope()
       << " }";
     return(s);
 }

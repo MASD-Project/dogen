@@ -1,6 +1,7 @@
 {
     "name" : "core.enable_all_facets",
     "labels" : [ "default" ],
+    "scope" : "root_module",
     "templates" : [
         {
             "name" : {

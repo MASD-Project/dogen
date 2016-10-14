@@ -33,16 +33,24 @@ const boost::shared_ptr<dogen::annotations::value>& rhs) {
 namespace dogen {
 namespace annotations {
 
-annotation::annotation(const std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> >& entries)
-    : entries_(entries) { }
+annotation::annotation()
+    : scope_(static_cast<dogen::annotations::scope_types>(0)) { }
+
+annotation::annotation(
+    const std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> >& entries,
+    const dogen::annotations::scope_types scope)
+    : entries_(entries),
+      scope_(scope) { }
 
 void annotation::swap(annotation& other) noexcept {
     using std::swap;
     swap(entries_, other.entries_);
+    swap(scope_, other.scope_);
 }
 
 bool annotation::operator==(const annotation& rhs) const {
-    return entries_ == rhs.entries_;
+    return entries_ == rhs.entries_ &&
+        scope_ == rhs.scope_;
 }
 
 annotation& annotation::operator=(annotation other) {
@@ -65,6 +73,14 @@ void annotation::entries(const std::unordered_map<std::string, boost::shared_ptr
 
 void annotation::entries(const std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> >&& v) {
     entries_ = std::move(v);
+}
+
+dogen::annotations::scope_types annotation::scope() const {
+    return scope_;
+}
+
+void annotation::scope(const dogen::annotations::scope_types v) {
+    scope_ = v;
 }
 
 } }

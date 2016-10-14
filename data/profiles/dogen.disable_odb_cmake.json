@@ -1,4 +1,5 @@
 {
     "name" : "dogen.disable_odb_cmake",
-    "parents" : [ "dogen", "dogen.disable_odb", "dogen.disable_cmake" ]
+    "parents" : [ "dogen", "dogen.disable_odb", "dogen.disable_cmake" ],
+    "scope" : "root_module"
 }

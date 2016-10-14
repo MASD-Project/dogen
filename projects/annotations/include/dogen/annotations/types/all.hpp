@@ -58,6 +58,7 @@
 #include "dogen/annotations/types/instantiation_error.hpp"
 #include "dogen/annotations/types/ownership_hierarchy.hpp"
 #include "dogen/annotations/types/template_instantiator.hpp"
+#include "dogen/annotations/types/profiler_configuration.hpp"
 #include "dogen/annotations/types/type_repository_factory.hpp"
 #include "dogen/annotations/types/type_templates_hydrator.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"

@@ -59,6 +59,7 @@
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;comments&gt;&lt;package&gt;&lt;package2&gt;</id>
@@ -121,6 +122,7 @@
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;comments&gt;&lt;package&gt;</id>
@@ -184,6 +186,7 @@ This comment will be applied to the model namespace itself.
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;comments&gt;</id>
@@ -268,6 +271,7 @@ third line with &quot;quote&quot;
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;comments&gt;&lt;multi_line&gt;</id>
@@ -386,6 +390,7 @@ third line with &quot;quote&quot;
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;comments&gt;&lt;one_line&gt;</id>
@@ -445,6 +450,7 @@ third line with &quot;quote&quot;
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;comments&gt;&lt;one_line&gt;&lt;prop_0&gt;</id>
@@ -528,6 +534,7 @@ a second line
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;comments&gt;&lt;one_line&gt;&lt;prop_1&gt;</id>
@@ -608,6 +615,7 @@ a second line
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;comments&gt;&lt;one_line&gt;&lt;prop_2&gt;</id>
@@ -780,6 +788,7 @@ a second line
 								<second>true</second>
 							</item>
 						</entries>
+						<scope>5</scope>
 					</parent>
 					<children class_id="49" tracking_level="0" version="0">
 						<count>0</count>
@@ -812,6 +821,7 @@ a second line
 								<second>emacs</second>
 							</item>
 						</entries>
+						<scope>3</scope>
 					</parent>
 					<children>
 						<count>0</count>
@@ -832,6 +842,7 @@ a second line
 								<second>true</second>
 							</item>
 						</entries>
+						<scope>5</scope>
 					</parent>
 					<children>
 						<count>0</count>
@@ -851,6 +862,7 @@ a second line
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</entries>
+				<scope>0</scope>
 			</annotation>
 			<name>
 				<id></id>

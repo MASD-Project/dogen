@@ -23,11 +23,14 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
-#include "dogen/annotations/io/scope_types_io.hpp"
 #include "dogen/annotations/io/type_io.hpp"
+#include "dogen/annotations/io/scope_types_io.hpp"
+#include "dogen/annotations/types/merger.hpp"
+#include "dogen/annotations/types/profiler.hpp"
 #include "dogen/annotations/types/value_factory.hpp"
 #include "dogen/annotations/types/building_error.hpp"
-#include "dogen/annotations/types/profiler.hpp"
+#include "dogen/annotations/types/entry_selector.hpp"
+#include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
 
 namespace {
@@ -44,6 +47,9 @@ const std::string type_not_found(
 const std::string field_used_in_invalid_scope(
     "Field used in invalid scope: ");
 
+const std::string model_name("annotations");
+const std::string type_name("profile");
+
 }
 
 namespace dogen {
@@ -56,6 +62,39 @@ annotation_groups_factory(
     const type_repository& trp, const bool throw_on_missing_type)
     : data_dirs_(data_dirs), ownership_hierarchy_repository_(ohrp),
       type_repository_(trp), throw_on_missing_type_(throw_on_missing_type) { }
+
+inline std::ostream&
+operator<<(std::ostream& s, const annotation_groups_factory::type_group& v) {
+
+    s << " { "
+      << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::"
+      << "profile_group_expander::type_group\"" << ", "
+      << "\"profile\": " << v.profile
+      << " }";
+
+    return s;
+}
+
+annotation_groups_factory::type_group
+annotation_groups_factory::make_type_group(const type_repository& trp) const {
+    BOOST_LOG_SEV(lg, debug) << "Creating annotation types.";
+
+    type_group r;
+    const type_repository_selector s(trp);
+    r.profile = s.select_type_by_name(model_name, type_name);
+
+    BOOST_LOG_SEV(lg, debug) << "Created annotation types. Result: " << r;
+    return r;
+}
+
+std::string annotation_groups_factory::
+obtain_profile_name(const type_group& tg, const annotation& a) const {
+    BOOST_LOG_SEV(lg, debug) << "Reading profile name.";
+    const entry_selector s(a);
+    const auto r(s.get_text_content_or_default(tg.profile));
+    BOOST_LOG_SEV(lg, debug) << "Profile name: " << r;
+    return r;
+}
 
 boost::optional<type> annotation_groups_factory::
 obtain_type(const std::string& n) const {
@@ -89,10 +128,12 @@ void annotation_groups_factory::validate_scope(const type& fd,
     }
 }
 
-annotation annotation_groups_factory::create_annotation(
-    const scope_types current_scope,
+annotation annotation_groups_factory::create_annotation(const scope_types scope,
     const std::unordered_map<std::string, std::list<std::string>>&
     aggregated_scribble_entries) const {
+
+    annotation r;
+    r.scope(scope);
 
     value_factory f;
     std::unordered_map<std::string, boost::shared_ptr<value>> entries;
@@ -102,11 +143,11 @@ annotation annotation_groups_factory::create_annotation(
         if (!fd)
             continue;
 
-        validate_scope(*fd, current_scope);
+        validate_scope(*fd, r.scope());
         const auto& v(kvp.second);
-        entries[k] = f.make(*fd, v);
+        r.entries()[k] = f.make(*fd, v);
     }
-    return annotation(entries);
+    return r;
 }
 
 std::unordered_map<std::string, std::list<std::string >>
@@ -120,13 +161,6 @@ aggregate_scribble_entries(const scribble& scribble) const {
     return r;
 }
 
-scope_types annotation_groups_factory::
-compute_scope_for_id(const std::string& root_annotation_id,
-    const std::string& current_id) const {
-    const auto is_root(current_id == root_annotation_id);
-    return is_root ? scope_types::root_module : scope_types::entity;
-}
-
 std::unordered_map<std::string, annotation> annotation_groups_factory::
 create_annotation_profiles() const {
     profiler prf;
@@ -136,31 +170,60 @@ create_annotation_profiles() const {
 }
 
 annotation annotation_groups_factory::
-build(const scope_types scope, const scribble& scribble) const {
+make(const scribble& scribble) const {
     auto aggregated_entries(aggregate_scribble_entries(scribble));
-    auto r(create_annotation(scope, aggregated_entries));
+    auto r(create_annotation(scribble.scope(), aggregated_entries));
     return r;
 }
 
-std::unordered_map<std::string, annotation_group>
-annotation_groups_factory::
-build(const std::string& root_annotation_id, const std::unordered_map<
-    std::string, scribble_group>& scribble_groups) const {
+std::unordered_map<std::string, annotation_group> annotation_groups_factory::
+make(const type_repository& trp, const std::unordered_map<std::string,
+    scribble_group>& scribble_groups) const {
 
-    create_annotation_profiles();
+    const auto profiles(create_annotation_profiles());
+    const auto t(make_type_group(trp));
+
     std::unordered_map<std::string, annotation_group> r;
     for (const auto& pair : scribble_groups) {
+        /*
+         * First we generate the main annotation off of the scribble's
+         * parent.
+         */
         const auto id(pair.first);
         const auto& scribble(pair.second);
-        annotation_group ag;
-        const auto scope(compute_scope_for_id(root_annotation_id, id));
-        ag.parent(build(scope, scribble.parent()));
+        const auto parent(make(scribble.parent()));
 
+        /*
+         * Then we locate the profile linked with that annotation, and
+         * check if they are of the same scope. If so, merge the
+         * two. If there isn't a profile, or if they have different
+         * scopes, just take the annotation as is.
+         */
+        annotation_group ag;
+/*         const auto profn(obtain_profile_name(t, ag.parent()));
+        const auto i(profiles.find(profn));
+        if (i != profiles.end()) {
+            const auto expected_scope(id == root_annotation_id ?
+                scope_types::root_module : scope_types::entity);
+
+
+
+        }
+        if () {
+
+            merger mg;
+            ag.parent(mg.merge(parent, i->second));
+            } else*/
+            ag.parent(parent);
+
+        /*
+         * Finally we obtain annotations for all the scribble's
+         * children.
+         */
         for (const auto& pair : scribble.children()) {
             const auto child_id(pair.first);
             const auto& child(pair.second);
-            const auto scope(scope_types::property);
-            ag.children()[child_id] = build(scope, child);
+            ag.children()[child_id] = make(child);
         }
         r[id] = ag;
     }

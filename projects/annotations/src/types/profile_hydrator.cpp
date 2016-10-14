@@ -36,6 +36,7 @@ const std::string empty;
 const std::string name_key("name");
 const std::string parents_key("parents");
 const std::string labels_key("labels");
+const std::string scope_key("scope");
 const std::string templates_key("templates");
 const std::string template_kind_key("template_kind");
 const std::string name_simple_key("simple");
@@ -45,6 +46,14 @@ const std::string ownership_hierarchy_model_name_key("model_name");
 const std::string ownership_hierarchy_facet_name_key("facet_name");
 const std::string ownership_hierarchy_formatter_name_key("formatter_name");
 const std::string untyped_value_key("untyped_value");
+
+const std::string scope_any("any");
+const std::string scope_not_applicable("not_applicable");
+const std::string scope_root_module("root_module");
+const std::string scope_any_module("any_module");
+const std::string scope_entity("entity");
+const std::string scope_property("property");
+const std::string scope_operation("operation");
 
 const std::string template_kind_instance("instance");
 const std::string template_kind_global_template("global_template");
@@ -61,6 +70,7 @@ const std::string profile_has_no_name("Profile has no 'name'.");
 const std::string template_has_no_name("Template has no 'name'.");
 const std::string template_has_no_hierarchy(
     "Template has no ownership hierarchy.");
+const std::string invalid_scope("Invalid or unsupported scope type: ");
 const std::string invalid_template_kind(
     "Invalid or unsupported template kind: ");
 const std::string template_has_no_untyped_value(
@@ -70,6 +80,26 @@ const std::string template_has_no_untyped_value(
 
 namespace dogen {
 namespace annotations {
+
+scope_types profile_hydrator::to_scope_type(const std::string& s) const {
+    if (s == scope_any)
+        return scope_types::any;
+    else if (s == scope_not_applicable)
+        return scope_types::not_applicable;
+    else if (s == scope_root_module)
+        return scope_types::root_module;
+    else if (s == scope_any_module)
+        return scope_types::any_module;
+    else if (s == scope_entity)
+        return scope_types::entity;
+    else if (s == scope_property)
+        return scope_types::property;
+    else if (s == scope_operation)
+        return scope_types::operation;
+
+    BOOST_LOG_SEV(lg, error) << invalid_scope << "'" << s << "'";
+    BOOST_THROW_EXCEPTION(hydration_error(invalid_scope + s));
+}
 
 template_kinds profile_hydrator::to_template_kind(const std::string& s) const {
     if (s == template_kind_instance)
@@ -174,6 +204,8 @@ profile profile_hydrator::read_stream(std::istream& s) const {
         for (auto j(labels.begin()); j != labels.end(); ++j)
             r.labels().insert(j->second.get_value<std::string>());
     }
+
+    r.scope(to_scope_type(pt.get<std::string>(scope_key)));
 
     i = pt.find(templates_key);
     if (i != pt.not_found())

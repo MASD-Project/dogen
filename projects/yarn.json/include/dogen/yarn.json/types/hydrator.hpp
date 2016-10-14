@@ -62,6 +62,7 @@ private:
      * @brief Inserts the scribbles into the model's indicies.
      */
     void insert_scribbles(const yarn::name& owner,
+        const annotations::scope_types scope,
         const std::list<std::pair<std::string, std::string>>& kvps,
         intermediate_model& im) const;
 

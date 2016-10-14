@@ -21,6 +21,7 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "dogen/annotations/io/profile_io.hpp"
+#include "dogen/annotations/io/scope_types_io.hpp"
 #include "dogen/annotations/io/entry_template_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -81,6 +82,7 @@ std::ostream& operator<<(std::ostream& s, const profile& v) {
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"parents\": " << v.parents() << ", "
       << "\"labels\": " << v.labels() << ", "
+      << "\"scope\": " << v.scope() << ", "
       << "\"templates\": " << v.templates()
       << " }";
     return(s);

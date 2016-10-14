@@ -45,6 +45,7 @@
 #include "dogen/annotations/serialization/annotation_group_ser.hpp"
 #include "dogen/annotations/serialization/profile_repository_ser.hpp"
 #include "dogen/annotations/serialization/ownership_hierarchy_ser.hpp"
+#include "dogen/annotations/serialization/profiler_configuration_ser.hpp"
 #include "dogen/annotations/serialization/ownership_hierarchy_repository_ser.hpp"
 
 #endif

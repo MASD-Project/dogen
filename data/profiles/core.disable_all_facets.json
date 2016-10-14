@@ -1,5 +1,6 @@
 {
     "name" : "core.disable_all_facets",
+    "scope" : "root_module",
     "templates" : [
         {
             "name" : {

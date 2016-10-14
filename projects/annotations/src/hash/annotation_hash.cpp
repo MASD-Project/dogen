@@ -20,6 +20,7 @@
  */
 #include "dogen/annotations/hash/value_hash.hpp"
 #include "dogen/annotations/hash/annotation_hash.hpp"
+#include "dogen/annotations/hash/scope_types_hash.hpp"
 
 namespace {
 
@@ -53,6 +54,8 @@ std::size_t annotation_hasher::hash(const annotation& v) {
     std::size_t seed(0);
 
     combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_dogen_annotations_value(v.entries()));
+    combine(seed, v.scope());
+
     return seed;
 }
 

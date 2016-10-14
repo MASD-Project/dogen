@@ -58,6 +58,7 @@
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;enumeration&gt;&lt;pkg1&gt;</id>
@@ -118,6 +119,7 @@
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;enumeration&gt;</id>
@@ -193,6 +195,7 @@
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;enumeration&gt;&lt;pkg1&gt;&lt;shape_types&gt;</id>
@@ -306,6 +309,7 @@
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;enumeration&gt;&lt;colour_types&gt;</id>
@@ -421,6 +425,7 @@ this is a long comment
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;enumeration&gt;&lt;book_types&gt;</id>
@@ -530,6 +535,7 @@ this is a long comment
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</entries>
+						<scope>0</scope>
 					</annotation>
 					<name>
 						<id>&lt;enumeration&gt;&lt;a_class&gt;</id>
@@ -588,6 +594,7 @@ this is a long comment
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;enumeration&gt;&lt;a_class&gt;&lt;colour_type&gt;</id>
@@ -668,6 +675,7 @@ this is a long comment
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;enumeration&gt;&lt;a_class&gt;&lt;book_type&gt;</id>
@@ -748,6 +756,7 @@ this is a long comment
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</entries>
+							<scope>0</scope>
 						</annotation>
 						<name>
 							<id>&lt;enumeration&gt;&lt;a_class&gt;&lt;shape_type&gt;</id>
@@ -932,6 +941,7 @@ this is a long comment
 								<second>emacs</second>
 							</item>
 						</entries>
+						<scope>3</scope>
 					</parent>
 					<children class_id="52" tracking_level="0" version="0">
 						<count>0</count>
@@ -951,6 +961,7 @@ this is a long comment
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</entries>
+				<scope>0</scope>
 			</annotation>
 			<name>
 				<id></id>

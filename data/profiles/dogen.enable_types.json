@@ -1,6 +1,7 @@
 {
     "name" : "dogen.enable_types",
     "parents" : [ "dogen.disable_all_facets" ],
+    "scope" : "root_module",
     "templates" : [
         {
             "name" : {

@@ -25,6 +25,7 @@
 #include "dogen/utility/io/vector_io.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/filesystem/file.hpp"
+#include "dogen/annotations/io/profiler_configuration_io.hpp"
 #include "dogen/annotations/io/profile_io.hpp"
 #include "dogen/annotations/io/annotation_io.hpp"
 #include "dogen/annotations/types/profile_hydrator.hpp"
@@ -83,16 +84,16 @@ std::list<profile> profiler::hydrate_profiles(
     return r;
 }
 
-std::unordered_map<std::string, profiler::prof_ann> profiler::
-create_prof_ann_map(const std::list<profile>& profiles) const {
-    std::unordered_map<std::string, profiler::prof_ann> r;
+profiler::profile_map_type profiler::
+create_profile_map(const std::list<profile>& profiles) const {
+    profiler::profile_map_type r;
     for (const auto& prf : profiles) {
         const auto prfn(prf.name());
-        profiler::prof_ann pa;
-        pa.prof = prf;
-        pa.merged = false;
+        profiler_configuration pc;
+        pc.profile(prf);
+        pc.merged(false);
 
-        const auto pair(std::make_pair(prfn, pa));
+        const auto pair(std::make_pair(prfn, pc));
         const auto inserted(r.insert(pair).second);
         if (!inserted) {
             BOOST_LOG_SEV(lg, warn) << duplicate_profile_name << prfn;
@@ -104,29 +105,30 @@ create_prof_ann_map(const std::list<profile>& profiles) const {
     return r;
 }
 
-void profiler::
-validate(const std::unordered_map<std::string, prof_ann>& pas) const {
+void profiler::validate(const profile_map_type& pm) const {
     BOOST_LOG_SEV(lg, debug) << "Validating profiles.";
     /*
      * We expect at least one profile group. This is a simple sanity
      * check to avoid dodgy installations, etc.
      */
-    if (pas.empty()) {
+    if (pm.empty()) {
         BOOST_LOG_SEV(lg, error) << no_profiles;
         BOOST_THROW_EXCEPTION(profiling_error(no_profiles));
     }
 
-    for (const auto& pair : pas) {
+    for (const auto& pair : pm) {
         const auto& prfn(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Validating profile: " << prfn;
 
         /*
          * All parents must exist in the container.
          */
-        const auto& pa(pair.second);
-        for (const auto parent : pa.prof.parents()) {
-            const auto i(pas.find(parent));
-            if (i == pas.end()) {
+        const auto& pc(pair.second);
+        for (const auto parent : pc.profile().parents()) {
+
+
+            const auto i(pm.find(parent));
+            if (i == pm.end()) {
                 BOOST_LOG_SEV(lg, error) << parent_not_found << parent;
                 BOOST_THROW_EXCEPTION(
                     profiling_error(parent_not_found + parent));
@@ -144,7 +146,7 @@ validate(const std::unordered_map<std::string, prof_ann>& pas) const {
          * useful in picking up configuration errors.
          */
         std::unordered_set<std::string> done;
-        for (const auto label : pa.prof.labels()) {
+        for (const auto label : pc.profile().labels()) {
             if (label.empty()) {
                 BOOST_LOG_SEV(lg, error) << empty_label << prfn;
                 BOOST_THROW_EXCEPTION(profiling_error(empty_label + prfn));
@@ -162,31 +164,29 @@ validate(const std::unordered_map<std::string, prof_ann>& pas) const {
     BOOST_LOG_SEV(lg, debug) << "Validated all profiles.";
 }
 
-void profiler::instantiate_entry_templates(
-    const ownership_hierarchy_repository& ohrp,
-    const type_repository& trp,
-    std::unordered_map<std::string, prof_ann>& pas) const {
+void profiler::
+instantiate_entry_templates(const ownership_hierarchy_repository& ohrp,
+    const type_repository& trp, profile_map_type& pm) const {
     BOOST_LOG_SEV(lg, debug) << "Instantiating value templates.";
 
     template_instantiator ti(ohrp);
-    for (auto& pair : pas) {
-        auto& pa(pair.second);
-        for (const auto& tpl : pa.prof.templates()) {
+    for (auto& pair : pm) {
+        const auto prfn(pair.first);
+        auto& pc(pair.second);
+        for (const auto& tpl : pc.profile().templates()) {
             const auto entries(ti.instantiate(trp, tpl));
             for (const auto& entry : entries)
-                pa.ann.entries().insert(entry);
+                pc.annotation().entries().insert(entry);
 
             BOOST_LOG_SEV(lg, debug) << "Instantiated template: "
-                                     << pair.first
-                                     << " Result: " << pa.ann;
+                                     << prfn << " Result: " << pc.annotation();
         }
     }
     BOOST_LOG_SEV(lg, debug) << "Instanted value templates.";
 }
 
-const profiler::prof_ann& profiler::
-walk_up_parent_tree_and_merge(const std::string& current,
-    std::unordered_map<std::string, prof_ann>& pas) const {
+const profiler_configuration& profiler:: walk_up_parent_tree_and_merge(
+    const std::string& current, profile_map_type& pm) const {
 
     BOOST_LOG_SEV(lg, debug) << "Merging profile: " << current;
 
@@ -194,62 +194,65 @@ walk_up_parent_tree_and_merge(const std::string& current,
      * Locate the original state of the current. It must exist due to
      * validation, but just in case we check.
      */
-    const auto i(pas.find(current));
-    if (i == pas.end()) {
+    const auto i(pm.find(current));
+    if (i == pm.end()) {
         BOOST_LOG_SEV(lg, error) << profile_not_found << current;
         BOOST_THROW_EXCEPTION(profiling_error(profile_not_found + current));
     }
 
+    auto& pc(i->second);
     /*
      *  If we're already merged then there is nothing to do.
      */
-    if (i->second.merged) {
+    if (pc.merged()) {
         BOOST_LOG_SEV(lg, debug) << "Already merged.";
-        return i->second;
+        return pc;
     }
 
     /*
      * If we have no parents then we're done.
      */
-    if (i->second.prof.parents().empty()) {
+    if (pc.profile().parents().empty()) {
         BOOST_LOG_SEV(lg, debug) << "No parents so nothing to merge.";
-        i->second.merged = true;
-        return i->second;
+        pc.merged(true);
+        return pc;
     }
 
     /*
      * Merge current with each of its parents. If they haven't been
      * merged yet, recursion will take care of it.
      */
-    for (const auto parent_name : i->second.prof.parents()) {
+    for (const auto parent_name : pc.profile().parents()) {
         BOOST_LOG_SEV(lg, debug) << "Parent: " << parent_name;
-        const auto parent(walk_up_parent_tree_and_merge(parent_name, pas));
+        const auto parent(walk_up_parent_tree_and_merge(parent_name, pm));
         merger mg;
-        i->second.ann = mg.merge(i->second.ann, parent.ann);
-        i->second.merged = true;
+        pc.annotation(mg.merge(pc.annotation(), parent.annotation()));
+        pc.merged(true);
     }
 
     BOOST_LOG_SEV(lg, debug) << "Done merging profile.";
     return i->second;
 }
 
-void profiler::merge(std::unordered_map<std::string, prof_ann>& pas) const {
-    BOOST_LOG_SEV(lg, debug) << "Merging profiles. Total: " << pas.size();
+void profiler::merge(profile_map_type& pm) const {
+    BOOST_LOG_SEV(lg, debug) << "Merging profiles. Total: " << pm.size();
 
-    for (const auto& pair : pas) {
+    for (const auto& pair : pm) {
         const auto current(pair.first);
-        walk_up_parent_tree_and_merge(current, pas);
+        walk_up_parent_tree_and_merge(current, pm);
     }
     BOOST_LOG_SEV(lg, debug) << "Merged profiles.";
 }
 
 std::unordered_map<std::string, annotation>
-profiler::create_annotation_map(
-    const std::unordered_map<std::string, prof_ann>& pas) const {
+profiler::create_annotation_map(const profile_map_type& pm) const {
 
     std::unordered_map<std::string, annotation> r;
-    for (const auto& pair : pas)
-        r[pair.first] = pair.second.ann;
+    for (const auto& pair : pm) {
+        const auto prfn(pair.first);
+        const auto& pc(pair.second);
+        r[prfn] = pc.annotation();
+    }
 
     return r;
 }
@@ -277,7 +280,7 @@ profiler::generate(const std::vector<boost::filesystem::path>& data_dirs,
      * We create a map by profile name of those profiles and ensure
      * they look vaguely valid.
      */
-    auto pas(create_prof_ann_map(profiles));
+    auto pas(create_profile_map(profiles));
     validate(pas);
 
     /*

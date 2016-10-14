@@ -103,6 +103,7 @@ hydrator::read_kvps(const boost::property_tree::ptree& pt) const {
 }
 
 void hydrator::insert_scribbles(const yarn::name& owner,
+    const annotations::scope_types scope,
     const std::list<std::pair<std::string, std::string>>& kvps,
     intermediate_model& im) const {
 
@@ -110,7 +111,7 @@ void hydrator::insert_scribbles(const yarn::name& owner,
         return;
 
     annotations::scribble_group sgrp;
-    sgrp.parent(annotations::scribble(kvps));
+    sgrp.parent(annotations::scribble(kvps, scope));
     const auto id(owner.id());
     const auto pair(std::make_pair(id, sgrp));
     const bool inserted(im.indices().scribble_groups().insert(pair).second);
@@ -159,7 +160,8 @@ void hydrator::read_element(const boost::property_tree::ptree& pt,
                 e.documentation(*documentation);
 
             const auto kvps(read_kvps(pt));
-            insert_scribbles(e.name(), kvps, im);
+            const auto st(annotations::scope_types::entity);
+            insert_scribbles(e.name(), st, kvps, im);
         });
 
     const auto meta_type_value(pt.get<std::string>(meta_type_key));
@@ -216,7 +218,8 @@ read_stream(std::istream& s, const bool is_target) const {
 
     yarn::module m;
     const auto kvps(read_kvps(pt));
-    insert_scribbles(r.name(), kvps, r);
+    const auto st(annotations::scope_types::root_module);
+    insert_scribbles(r.name(), st, kvps, r);
 
     const auto documentation(pt.get_optional<std::string>(documentation_key));
     if (documentation)

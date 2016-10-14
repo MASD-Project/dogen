@@ -1,6 +1,7 @@
 {
     "name" : "dogen.disable_cmake",
     "parents" : [ "dogen.enable_all_facets" ],
+    "scope" : "root_module",
     "templates" : [
         {
             "name" : {

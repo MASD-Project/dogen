@@ -45,6 +45,7 @@
 #include "dogen/annotations/io/annotation_group_io.hpp"
 #include "dogen/annotations/io/profile_repository_io.hpp"
 #include "dogen/annotations/io/ownership_hierarchy_io.hpp"
+#include "dogen/annotations/io/profiler_configuration_io.hpp"
 #include "dogen/annotations/io/ownership_hierarchy_repository_io.hpp"
 
 #endif

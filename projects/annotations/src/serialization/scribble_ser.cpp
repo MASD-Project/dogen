@@ -31,6 +31,7 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/annotations/serialization/scribble_ser.hpp"
+#include "dogen/annotations/serialization/scope_types_ser.hpp"
 
 namespace boost {
 namespace serialization {
@@ -40,6 +41,7 @@ void save(Archive& ar,
     const dogen::annotations::scribble& v,
     const unsigned int /*version*/) {
     ar << make_nvp("entries", v.entries_);
+    ar << make_nvp("scope", v.scope_);
 }
 
 template<typename Archive>
@@ -47,6 +49,7 @@ void load(Archive& ar,
     dogen::annotations::scribble& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("entries", v.entries_);
+    ar >> make_nvp("scope", v.scope_);
 }
 
 } }

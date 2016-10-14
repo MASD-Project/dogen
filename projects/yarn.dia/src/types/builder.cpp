@@ -119,15 +119,19 @@ void builder::
 update_scribble_group(const yarn::name& n, const profiled_object& po) {
     annotations::scribble_group sg;
     const auto& kvps(po.object().comment().key_value_pairs());
-    sg.parent(annotations::scribble(kvps));
+    using annotations::scope_types;
+    const auto pst(n == repository_.model().name() ?
+        scope_types::root_module : scope_types::entity);
+
+    sg.parent(annotations::scribble(kvps, pst));
 
     for (const auto& attr : po.object().attributes()) {
         const auto& kvps(attr.comment().key_value_pairs());
         if (kvps.empty())
             continue;
 
-
-        const auto scribble = annotations::scribble(kvps);
+        const auto cst(scope_types::property);
+        const auto scribble = annotations::scribble(kvps, cst);
         const auto pair(std::make_pair(attr.name(), scribble));
         const auto&inserted(sg.children().insert(pair).second);
         if (!inserted) {

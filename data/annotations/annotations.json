@@ -1,0 +1,15 @@
+[
+    {
+        "name" : {
+            "simple" : "profile",
+            "qualified" : "annotations.profile"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "annotations"
+        },
+        "value_type" : "text",
+        "template_kind" : "instance",
+        "scope" : "entity",
+        "default_value" : "default"
+    }
+]

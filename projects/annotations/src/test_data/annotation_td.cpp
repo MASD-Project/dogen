@@ -21,6 +21,7 @@
 #include <sstream>
 #include "dogen/annotations/test_data/value_td.hpp"
 #include "dogen/annotations/test_data/annotation_td.hpp"
+#include "dogen/annotations/test_data/scope_types_td.hpp"
 
 namespace {
 
@@ -50,6 +51,11 @@ std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> > c
     return r;
 }
 
+dogen::annotations::scope_types
+create_dogen_annotations_scope_types(const unsigned int position) {
+    return dogen::annotations::scope_types_generator::create(position);
+}
+
 }
 
 namespace dogen {
@@ -60,6 +66,7 @@ annotation_generator::annotation_generator() : position_(0) { }
 void annotation_generator::
 populate(const unsigned int position, result_type& v) {
     v.entries(create_std_unordered_map_std_string_boost_shared_ptr_dogen_annotations_value(position + 0));
+    v.scope(create_dogen_annotations_scope_types(position + 1));
 }
 
 annotation_generator::result_type

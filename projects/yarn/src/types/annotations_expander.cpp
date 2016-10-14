@@ -122,7 +122,7 @@ expand(const std::vector<boost::filesystem::path>& data_dirs,
                              << im.indices().scribble_groups();
 
     const annotations::annotation_groups_factory f(data_dirs, ohrp, atrp);
-    const auto sgrps(f.build(im.name().id(), im.indices().scribble_groups()));
+    const auto sgrps(f.make(atrp, im.indices().scribble_groups()));
     updater u(im.name(), sgrps);
     yarn::elements_traversal(im, u);
 

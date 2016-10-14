@@ -30,7 +30,9 @@
 #include <string>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
+#include "dogen/annotations/types/scope_types.hpp"
 #include "dogen/annotations/types/profile.hpp"
+#include "dogen/annotations/types/profiler_configuration.hpp"
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/annotations/types/ownership_hierarchy_repository.hpp"
@@ -40,11 +42,8 @@ namespace annotations {
 
 class profiler {
 private:
-    struct prof_ann {
-        profile prof;
-        annotation ann;
-        bool merged;
-    };
+    typedef std::unordered_map<std::string, profiler_configuration>
+    profile_map_type;
 
 private:
     std::vector<boost::filesystem::path> to_profile_directories(
@@ -53,25 +52,23 @@ private:
     std::list<profile> hydrate_profiles(
         const std::vector<boost::filesystem::path>& profile_dirs) const;
 
-    std::unordered_map<std::string, prof_ann>
-    create_prof_ann_map(const std::list<profile>& profiles) const;
+    profile_map_type
+    create_profile_map(const std::list<profile>& profiles) const;
 
-    void validate(const std::unordered_map<std::string, prof_ann>& pas) const;
+    void validate(const profile_map_type& pm) const;
 
     void instantiate_entry_templates(
         const ownership_hierarchy_repository& ohrp,
         const type_repository& trp,
-        std::unordered_map<std::string, prof_ann>& pas) const;
+        profile_map_type& pm) const;
 
-    const prof_ann& walk_up_parent_tree_and_merge(
-        const std::string& current,
-        std::unordered_map<std::string, prof_ann>& pas) const;
+    const profiler_configuration& walk_up_parent_tree_and_merge(
+        const std::string& current, profile_map_type& pm) const;
 
-    void merge(std::unordered_map<std::string, prof_ann>& pas) const;
+    void merge(profile_map_type& pm) const;
 
     std::unordered_map<std::string, annotation>
-    create_annotation_map(
-        const std::unordered_map<std::string, prof_ann>& pas) const;
+    create_annotation_map(const profile_map_type& pm) const;
 
 public:
     std::unordered_map<std::string, annotation>

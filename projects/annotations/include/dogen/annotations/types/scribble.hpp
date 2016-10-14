@@ -29,6 +29,7 @@
 #include <string>
 #include <utility>
 #include <algorithm>
+#include "dogen/annotations/types/scope_types.hpp"
 #include "dogen/annotations/serialization/scribble_fwd_ser.hpp"
 
 namespace dogen {
@@ -36,13 +37,17 @@ namespace annotations {
 
 class scribble final {
 public:
-    scribble() = default;
     scribble(const scribble&) = default;
     scribble(scribble&&) = default;
     ~scribble() = default;
 
 public:
-    explicit scribble(const std::list<std::pair<std::string, std::string> >& entries);
+    scribble();
+
+public:
+    scribble(
+        const std::list<std::pair<std::string, std::string> >& entries,
+        const dogen::annotations::scope_types scope);
 
 private:
     template<typename Archive>
@@ -57,6 +62,9 @@ public:
     void entries(const std::list<std::pair<std::string, std::string> >& v);
     void entries(const std::list<std::pair<std::string, std::string> >&& v);
 
+    dogen::annotations::scope_types scope() const;
+    void scope(const dogen::annotations::scope_types v);
+
 public:
     bool operator==(const scribble& rhs) const;
     bool operator!=(const scribble& rhs) const {
@@ -69,6 +77,7 @@ public:
 
 private:
     std::list<std::pair<std::string, std::string> > entries_;
+    dogen::annotations::scope_types scope_;
 };
 
 } }
