@@ -1,12 +1,12 @@
 {
-    "name" : "dogen.enable_types_hash",
-    "parents" : [ "dogen.enable_types" ],
+    "name" : "dogen.enable_cmake_types_serialization",
+    "parents" : [ "dogen.enable_cmake_types" ],
     "scope" : "root_module",
     "templates" : [
         {
             "name" : {
                 "simple" : "enabled",
-                "qualified" : "quilt.cpp.hash.enabled"
+                "qualified" : "quilt.cpp.serialization.enabled"
             },
             "ownership_hierarchy" : {
                 "model_name" : "quilt.cpp"

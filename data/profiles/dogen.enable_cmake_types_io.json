@@ -1,6 +1,6 @@
 {
-    "name" : "dogen.enable_types_io",
-    "parents" : [ "dogen.enable_types" ],
+    "name" : "dogen.enable_cmake_types_io",
+    "parents" : [ "dogen.enable_cmake_types" ],
     "scope" : "root_module",
     "templates" : [
         {

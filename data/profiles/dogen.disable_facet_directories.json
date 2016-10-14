@@ -1,12 +1,12 @@
 {
-    "name" : "dogen.enable_types",
-    "parents" : [ "dogen.disable_all_facets" ],
+    "name" : "dogen.disable_facet_directories",
+    "parents" : [ "dogen.enable_all_facets" ],
     "scope" : "root_module",
     "templates" : [
         {
             "name" : {
-                "simple" : "enabled",
-                "qualified" : "quilt.cpp.types.enabled"
+                "simple" : "disable_facet_directories",
+                "qualified" : "quilt.cpp.disable_facet_directories"
             },
             "ownership_hierarchy" : {
                 "model_name" : "quilt.cpp"
