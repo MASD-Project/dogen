@@ -89,6 +89,13 @@ private:
     void validate_scope(const type& fd,
         const scope_types current_scope) const;
 
+    /**
+     * @brief Given a scope, returns the well-known name of its the
+     * default profile.
+     */
+    std::string
+    get_default_profile_name_for_scope(const scope_types scope) const;
+
 private:
     /**
      * @brief Converts the raw data into an annotation.

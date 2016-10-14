@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/annotations/hash/profile_hash.hpp"
-#include "dogen/annotations/hash/scope_types_hash.hpp"
 #include "dogen/annotations/hash/entry_template_hash.hpp"
 
 namespace {
@@ -65,7 +64,6 @@ std::size_t profile_hasher::hash(const profile& v) {
     combine(seed, v.name());
     combine(seed, hash_std_list_std_string(v.parents()));
     combine(seed, hash_std_unordered_set_std_string(v.labels()));
-    combine(seed, v.scope());
     combine(seed, hash_std_list_dogen_annotations_entry_template(v.templates()));
 
     return seed;

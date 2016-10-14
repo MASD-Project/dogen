@@ -39,7 +39,6 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::annotations::profile_repository& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("default_profile", v.default_profile_);
     ar << make_nvp("profiles_by_name", v.profiles_by_name_);
 }
 
@@ -47,7 +46,6 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::annotations::profile_repository& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("default_profile", v.default_profile_);
     ar >> make_nvp("profiles_by_name", v.profiles_by_name_);
 }
 

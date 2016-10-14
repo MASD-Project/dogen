@@ -24,15 +24,15 @@
 
 namespace {
 
-dogen::annotations::profile
-create_dogen_annotations_profile(const unsigned int position) {
-    return dogen::annotations::profile_generator::create(position);
-}
-
 std::string create_std_string(const unsigned int position) {
     std::ostringstream s;
     s << "a_string_" << position;
     return s.str();
+}
+
+dogen::annotations::profile
+create_dogen_annotations_profile(const unsigned int position) {
+    return dogen::annotations::profile_generator::create(position);
 }
 
 std::unordered_map<std::string, dogen::annotations::profile> create_std_unordered_map_std_string_dogen_annotations_profile(unsigned int position) {
@@ -52,8 +52,7 @@ profile_repository_generator::profile_repository_generator() : position_(0) { }
 
 void profile_repository_generator::
 populate(const unsigned int position, result_type& v) {
-    v.default_profile(create_dogen_annotations_profile(position + 0));
-    v.profiles_by_name(create_std_unordered_map_std_string_dogen_annotations_profile(position + 1));
+    v.profiles_by_name(create_std_unordered_map_std_string_dogen_annotations_profile(position + 0));
 }
 
 profile_repository_generator::result_type

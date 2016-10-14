@@ -9,7 +9,6 @@
         },
         "value_type" : "text",
         "template_kind" : "instance",
-        "scope" : "any",
-        "default_value" : "default"
+        "scope" : "any"
     }
 ]

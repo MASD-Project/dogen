@@ -148,9 +148,16 @@ void post_merge_workflow::execute(const annotations::type_repository& atrp,
     /*
      * We must expand generalisation relationships before we expand
      * stereotypes because we need to know about leaves before we can
-     * generate visitors.
+     * generate visitors. Note also that generalisations must be
+     * expanded after merging models because we may inherit across
+     * models.
      */
     expand_generalizations(atrp, im);
+
+    /*
+     * Stereotypes expansion must be done before concepts because we
+     * obtain concept information from the stereotypes.
+     */
     expand_stereotypes(im);
     expand_concepts(im);
     expand_containment(im);

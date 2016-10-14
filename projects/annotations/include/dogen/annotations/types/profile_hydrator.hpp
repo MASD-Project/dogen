@@ -29,7 +29,6 @@
 #include <string>
 #include <boost/property_tree/ptree.hpp>
 #include "dogen/annotations/types/name.hpp"
-#include "dogen/annotations/types/scope_types.hpp"
 #include "dogen/annotations/types/template_kinds.hpp"
 #include "dogen/annotations/types/ownership_hierarchy.hpp"
 #include "dogen/annotations/types/entry_template.hpp"
@@ -40,8 +39,6 @@ namespace annotations {
 
 class profile_hydrator {
 private:
-    scope_types to_scope_type(const std::string& s) const;
-
     template_kinds to_template_kind(const std::string& s) const;
 
     name read_name(const boost::property_tree::ptree& pt) const;

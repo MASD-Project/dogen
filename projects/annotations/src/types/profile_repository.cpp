@@ -23,43 +23,22 @@
 namespace dogen {
 namespace annotations {
 
-profile_repository::profile_repository(
-    const dogen::annotations::profile& default_profile,
-    const std::unordered_map<std::string, dogen::annotations::profile>& profiles_by_name)
-    : default_profile_(default_profile),
-      profiles_by_name_(profiles_by_name) { }
+profile_repository::profile_repository(const std::unordered_map<std::string, dogen::annotations::profile>& profiles_by_name)
+    : profiles_by_name_(profiles_by_name) { }
 
 void profile_repository::swap(profile_repository& other) noexcept {
     using std::swap;
-    swap(default_profile_, other.default_profile_);
     swap(profiles_by_name_, other.profiles_by_name_);
 }
 
 bool profile_repository::operator==(const profile_repository& rhs) const {
-    return default_profile_ == rhs.default_profile_ &&
-        profiles_by_name_ == rhs.profiles_by_name_;
+    return profiles_by_name_ == rhs.profiles_by_name_;
 }
 
 profile_repository& profile_repository::operator=(profile_repository other) {
     using std::swap;
     swap(*this, other);
     return *this;
-}
-
-const dogen::annotations::profile& profile_repository::default_profile() const {
-    return default_profile_;
-}
-
-dogen::annotations::profile& profile_repository::default_profile() {
-    return default_profile_;
-}
-
-void profile_repository::default_profile(const dogen::annotations::profile& v) {
-    default_profile_ = v;
-}
-
-void profile_repository::default_profile(const dogen::annotations::profile&& v) {
-    default_profile_ = std::move(v);
 }
 
 const std::unordered_map<std::string, dogen::annotations::profile>& profile_repository::profiles_by_name() const {

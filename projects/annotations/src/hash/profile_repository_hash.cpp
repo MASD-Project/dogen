@@ -46,9 +46,7 @@ namespace annotations {
 std::size_t profile_repository_hasher::hash(const profile_repository& v) {
     std::size_t seed(0);
 
-    combine(seed, v.default_profile());
     combine(seed, hash_std_unordered_map_std_string_dogen_annotations_profile(v.profiles_by_name()));
-
     return seed;
 }
 

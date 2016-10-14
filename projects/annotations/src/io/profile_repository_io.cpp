@@ -54,7 +54,6 @@ namespace annotations {
 std::ostream& operator<<(std::ostream& s, const profile_repository& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::annotations::profile_repository\"" << ", "
-      << "\"default_profile\": " << v.default_profile() << ", "
       << "\"profiles_by_name\": " << v.profiles_by_name()
       << " }";
     return(s);

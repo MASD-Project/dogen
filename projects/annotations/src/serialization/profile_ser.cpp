@@ -31,7 +31,6 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/annotations/serialization/profile_ser.hpp"
-#include "dogen/annotations/serialization/scope_types_ser.hpp"
 #include "dogen/annotations/serialization/entry_template_ser.hpp"
 
 namespace boost {
@@ -44,7 +43,6 @@ void save(Archive& ar,
     ar << make_nvp("name", v.name_);
     ar << make_nvp("parents", v.parents_);
     ar << make_nvp("labels", v.labels_);
-    ar << make_nvp("scope", v.scope_);
     ar << make_nvp("templates", v.templates_);
 }
 
@@ -55,7 +53,6 @@ void load(Archive& ar,
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("parents", v.parents_);
     ar >> make_nvp("labels", v.labels_);
-    ar >> make_nvp("scope", v.scope_);
     ar >> make_nvp("templates", v.templates_);
 }
 

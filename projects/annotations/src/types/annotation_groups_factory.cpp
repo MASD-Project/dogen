@@ -39,6 +39,7 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("annotations.annotation_groups_factory"));
 
+const std::string empty;
 const std::string expected_scope(" Expected scope: ");
 const std::string actual_scope(" Actual scope: ");
 const std::string duplicate_type(
@@ -52,6 +53,8 @@ const std::string missing_profile(
 
 const std::string model_name("annotations");
 const std::string type_name("profile");
+
+const std::string default_root("default.root_module");
 
 }
 
@@ -94,8 +97,11 @@ std::string annotation_groups_factory::
 obtain_profile_name(const type_group& tg, const annotation& a) const {
     BOOST_LOG_SEV(lg, debug) << "Reading profile name.";
     const entry_selector s(a);
-    const auto r(s.get_text_content_or_default(tg.profile));
-    BOOST_LOG_SEV(lg, debug) << "Profile name: " << r;
+    std::string r;
+    if (s.has_entry(tg.profile))
+        r = s.get_text_content(tg.profile);
+
+    BOOST_LOG_SEV(lg, debug) << "Profile name: '" << r << "'";
     return r;
 }
 
@@ -116,19 +122,27 @@ obtain_type(const std::string& n) const {
     return i->second;
 }
 
-void annotation_groups_factory::validate_scope(const type& fd,
+void annotation_groups_factory::validate_scope(const type& t,
     const scope_types current_scope) const {
-    if (fd.scope() != scope_types::any &&
-        fd.scope() != scope_types::not_applicable &&
-        fd.scope() != current_scope) {
+    if (t.scope() != scope_types::any &&
+        t.scope() != scope_types::not_applicable &&
+        t.scope() != current_scope) {
 
         std::stringstream s;
-        s << field_used_in_invalid_scope << fd.name().qualified()
-          << expected_scope << fd.scope()
+        s << field_used_in_invalid_scope << t.name().qualified()
+          << expected_scope << t.scope()
           << actual_scope << current_scope;
         BOOST_LOG_SEV(lg, error) << s.str();
         BOOST_THROW_EXCEPTION(building_error(s.str()));
     }
+}
+
+std::string annotation_groups_factory::
+get_default_profile_name_for_scope(const scope_types scope) const {
+    if (scope == scope_types::root_module)
+        return default_root;
+
+    return empty;
 }
 
 annotation annotation_groups_factory::create_annotation(const scope_types scope,
@@ -142,13 +156,13 @@ annotation annotation_groups_factory::create_annotation(const scope_types scope,
     std::unordered_map<std::string, boost::shared_ptr<value>> entries;
     for (auto kvp : aggregated_scribble_entries) {
         const auto& k(kvp.first);
-        const auto fd(obtain_type(k));
-        if (!fd)
+        const auto t(obtain_type(k));
+        if (!t)
             continue;
 
-        validate_scope(*fd, r.scope());
+        validate_scope(*t, r.scope());
         const auto& v(kvp.second);
-        r.entries()[k] = f.make(*fd, v);
+        r.entries()[k] = f.make(*t, v);
     }
     return r;
 }
@@ -176,40 +190,58 @@ annotation annotation_groups_factory::
 handle_profiles(const type_group& tg, const std::unordered_map<std::string,
     annotation>& profiles, const annotation& original) const {
 
-    BOOST_LOG_SEV(lg, error) << "Started handling profiles. Orignal: "
+    BOOST_LOG_SEV(lg, error) << "Started handling profiles. Original: "
                              << original;
 
     /*
-     * Locate the profile linked with that annotation and check if
-     * they are of the same scope. Note that there is always a
-     * profile linked with an annotation - we default to the
-     * default profile. However, the default profile is only
-     * applicable to the root scope. If the scopes are compatible,
-     * we merge the two annotations. If the scopes are not
-     * compatible, we just take the annotation as is.
+     * If a profile name was specified via the meta-data, it must
+     * exist on our profile collection. Locate it, merge it with the
+     * original annotation and return that.
      */
     const auto profn(obtain_profile_name(tg, original));
-    const auto i(profiles.find(profn));
-    if (i == profiles.end()) {
-        BOOST_LOG_SEV(lg, error) << missing_profile << profn;
-        BOOST_THROW_EXCEPTION(building_error(missing_profile + profn));
-    }
+    if (!profn.empty()) {
+        BOOST_LOG_SEV(lg, debug) << "Configured profile: " << profn;
+        const auto i(profiles.find(profn));
+        if (i == profiles.end()) {
+            BOOST_LOG_SEV(lg, error) << missing_profile << profn;
+            BOOST_THROW_EXCEPTION(building_error(missing_profile + profn));
+        }
 
-    BOOST_LOG_SEV(lg, debug) << "Profile: " << profn;
-    const auto annotation_profile(i->second);
-    annotation r;
-    if (annotation_profile.scope() == original.scope()) {
         merger mg;
-        r = mg.merge(original, annotation_profile);
-    } else {
-        BOOST_LOG_SEV(lg, debug) << "Profile scope does not match: " << r;
-        r = original;
-    }
+        const auto annotation_profile(i->second);
+        const annotation r(mg.merge(original, annotation_profile));
+        BOOST_LOG_SEV(lg, debug) << "Merged profile: " << r;
+        return r;
+    } else
+        BOOST_LOG_SEV(lg, debug) << "Profile not set in meta-data.";
 
-    BOOST_LOG_SEV(lg, error) << "Started handling profiles. Result: " << r;
-    return r;
+    /*
+     * If no profile name was set, try looking for the well-known
+     * default profiles, based on the scope of the annotation. Not all
+     * scope types have a mapping, and the default profiles do not
+     * necessarily exist.
+     */
+    const auto def_profn(get_default_profile_name_for_scope(original.scope()));
+    if (!def_profn.empty()) {
+        BOOST_LOG_SEV(lg, debug) << "Looking for default profile; " << def_profn;
+
+        const auto i(profiles.find(def_profn));
+        if (i != profiles.end()) {
+            merger mg;
+            const auto annotation_profile(i->second);
+            const annotation r(mg.merge(original, annotation_profile));
+            BOOST_LOG_SEV(lg, debug) << "Merged profile: " << r;
+            return r;
+        }
+    } else
+        BOOST_LOG_SEV(lg, debug) << "Scope does not have a default profile.";
+
+    /*
+     * If we could find nothing suitable, just return the original.
+     */
+    BOOST_LOG_SEV(lg, debug) << "No profiles found, using original.";
+    return original;
 }
-
 
 annotation annotation_groups_factory::
 make(const scribble& scribble) const {

@@ -86,9 +86,9 @@ execute(const std::vector<boost::filesystem::path>& data_dirs,
     auto r(obtain_intermediate_models(rg, d));
     for (auto& im: r) {
         /*
-         * We must expand annotations first to ensure the root module
-         * is populated with annotations properties before being
-         * copied over.
+         * We must expand annotations before we expand modules to
+         * ensure the root module is populated with entries
+         * before being copied over.
          */
         expand_annotations(data_dirs, ohrp, atrp, im);
         expand_modules(im);

@@ -180,7 +180,7 @@ void profiler::setup_annotations(const ownership_hierarchy_repository& ohrp,
     for (auto& pair : pm) {
         const auto prfn(pair.first);
         auto& pc(pair.second);
-        pc.annotation().scope(pc.profile().scope());
+        pc.annotation().scope(scope_types::not_applicable);
         for (const auto& tpl : pc.profile().templates()) {
             const auto entries(ti.instantiate(trp, tpl));
             for (const auto& entry : entries)

@@ -42,9 +42,7 @@ public:
     ~profile_repository() = default;
 
 public:
-    profile_repository(
-        const dogen::annotations::profile& default_profile,
-        const std::unordered_map<std::string, dogen::annotations::profile>& profiles_by_name);
+    explicit profile_repository(const std::unordered_map<std::string, dogen::annotations::profile>& profiles_by_name);
 
 private:
     template<typename Archive>
@@ -54,11 +52,6 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::annotations::profile_repository& v, unsigned int version);
 
 public:
-    const dogen::annotations::profile& default_profile() const;
-    dogen::annotations::profile& default_profile();
-    void default_profile(const dogen::annotations::profile& v);
-    void default_profile(const dogen::annotations::profile&& v);
-
     const std::unordered_map<std::string, dogen::annotations::profile>& profiles_by_name() const;
     std::unordered_map<std::string, dogen::annotations::profile>& profiles_by_name();
     void profiles_by_name(const std::unordered_map<std::string, dogen::annotations::profile>& v);
@@ -75,7 +68,6 @@ public:
     profile_repository& operator=(profile_repository other);
 
 private:
-    dogen::annotations::profile default_profile_;
     std::unordered_map<std::string, dogen::annotations::profile> profiles_by_name_;
 };
 

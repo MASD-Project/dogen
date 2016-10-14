@@ -29,7 +29,6 @@
 #include <string>
 #include <algorithm>
 #include <unordered_set>
-#include "dogen/annotations/types/scope_types.hpp"
 #include "dogen/annotations/types/entry_template.hpp"
 #include "dogen/annotations/serialization/profile_fwd_ser.hpp"
 
@@ -38,19 +37,16 @@ namespace annotations {
 
 class profile final {
 public:
+    profile() = default;
     profile(const profile&) = default;
     profile(profile&&) = default;
     ~profile() = default;
-
-public:
-    profile();
 
 public:
     profile(
         const std::string& name,
         const std::list<std::string>& parents,
         const std::unordered_set<std::string>& labels,
-        const dogen::annotations::scope_types scope,
         const std::list<dogen::annotations::entry_template>& templates);
 
 private:
@@ -76,9 +72,6 @@ public:
     void labels(const std::unordered_set<std::string>& v);
     void labels(const std::unordered_set<std::string>&& v);
 
-    dogen::annotations::scope_types scope() const;
-    void scope(const dogen::annotations::scope_types v);
-
     const std::list<dogen::annotations::entry_template>& templates() const;
     std::list<dogen::annotations::entry_template>& templates();
     void templates(const std::list<dogen::annotations::entry_template>& v);
@@ -98,7 +91,6 @@ private:
     std::string name_;
     std::list<std::string> parents_;
     std::unordered_set<std::string> labels_;
-    dogen::annotations::scope_types scope_;
     std::list<dogen::annotations::entry_template> templates_;
 };
 
