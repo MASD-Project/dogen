@@ -51,7 +51,6 @@
 #include "dogen/yarn/types/enumerator.hpp"
 #include "dogen/yarn/types/separators.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
-#include "dogen/yarn/types/stereotypes.hpp"
 #include "dogen/yarn/types/transformer.hpp"
 #include "dogen/yarn/types/name_builder.hpp"
 #include "dogen/yarn/types/name_factory.hpp"

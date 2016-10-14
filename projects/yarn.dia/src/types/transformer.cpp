@@ -151,22 +151,12 @@ yarn::object transformer::to_object(const profiled_object& po,
     r.is_immutable(po.profile().is_immutable());
     r.object_type(ot);
 
-    /*
-     * Handle the stereotypes.
-     * FIXME: hack to handle new stereotypes
-     */
     if (po.profile().is_visitable())
-        r.stereotypes().insert(yarn::stereotypes::visitable);
+        r.stereotypes().insert("visitable");
 
     for (const auto us : po.profile().unknown_stereotypes()) {
-        if (us == "formatter")
-            r.stereotypes().insert(yarn::stereotypes::formatter);
-        else if (us == "handcrafted")
-            r.stereotypes().insert(yarn::stereotypes::handcrafted);
-        else {
-            const auto n(to_name(us));
-            r.modeled_concepts().push_back(n);
-        }
+        const auto n(to_name(us));
+        r.modeled_concepts().push_back(n);
     }
 
     for (const auto& p : po.object().attributes())

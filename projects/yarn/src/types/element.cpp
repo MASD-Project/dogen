@@ -23,7 +23,6 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/types/element.hpp"
-#include "dogen/yarn/io/stereotypes_io.hpp"
 #include "dogen/yarn/io/origin_types_io.hpp"
 #include "dogen/yarn/io/generation_types_io.hpp"
 #include "dogen/annotations/io/annotation_io.hpp"
@@ -52,11 +51,11 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::ya
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen::yarn::stereotypes>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::string>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
-        s << *i;
+        s << "\"" << tidy_up_string(*i) << "\"";
     }
     s << "] ";
     return s;
@@ -92,7 +91,7 @@ element::element(
     const dogen::yarn::origin_types origin_type,
     const boost::optional<dogen::yarn::name>& contained_by,
     const bool in_global_module,
-    const std::unordered_set<dogen::yarn::stereotypes>& stereotypes,
+    const std::unordered_set<std::string>& stereotypes,
     const bool is_element_extension)
     : documentation_(documentation),
       annotation_(annotation),
@@ -238,19 +237,19 @@ void element::in_global_module(const bool v) {
     in_global_module_ = v;
 }
 
-const std::unordered_set<dogen::yarn::stereotypes>& element::stereotypes() const {
+const std::unordered_set<std::string>& element::stereotypes() const {
     return stereotypes_;
 }
 
-std::unordered_set<dogen::yarn::stereotypes>& element::stereotypes() {
+std::unordered_set<std::string>& element::stereotypes() {
     return stereotypes_;
 }
 
-void element::stereotypes(const std::unordered_set<dogen::yarn::stereotypes>& v) {
+void element::stereotypes(const std::unordered_set<std::string>& v) {
     stereotypes_ = v;
 }
 
-void element::stereotypes(const std::unordered_set<dogen::yarn::stereotypes>&& v) {
+void element::stereotypes(const std::unordered_set<std::string>&& v) {
     stereotypes_ = std::move(v);
 }
 

@@ -44,7 +44,6 @@
 #include "dogen/yarn/hash/enumerator_hash.hpp"
 #include "dogen/yarn/hash/separators_hash.hpp"
 #include "dogen/yarn/hash/enumeration_hash.hpp"
-#include "dogen/yarn/hash/stereotypes_hash.hpp"
 #include "dogen/yarn/hash/object_types_hash.hpp"
 #include "dogen/yarn/hash/origin_types_hash.hpp"
 #include "dogen/yarn/hash/type_parameters_hash.hpp"

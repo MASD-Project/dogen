@@ -20,7 +20,6 @@
  */
 #include "dogen/yarn/hash/name_hash.hpp"
 #include "dogen/yarn/hash/element_hash.hpp"
-#include "dogen/yarn/hash/stereotypes_hash.hpp"
 #include "dogen/yarn/hash/origin_types_hash.hpp"
 #include "dogen/yarn/hash/generation_types_hash.hpp"
 #include "dogen/annotations/hash/annotation_hash.hpp"
@@ -43,7 +42,7 @@ inline std::size_t hash_boost_optional_dogen_yarn_name(const boost::optional<dog
     return seed;
 }
 
-inline std::size_t hash_std_unordered_set_dogen_yarn_stereotypes(const std::unordered_set<dogen::yarn::stereotypes>& v) {
+inline std::size_t hash_std_unordered_set_std_string(const std::unordered_set<std::string>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -66,7 +65,7 @@ std::size_t element_hasher::hash(const element& v) {
     combine(seed, v.origin_type());
     combine(seed, hash_boost_optional_dogen_yarn_name(v.contained_by()));
     combine(seed, v.in_global_module());
-    combine(seed, hash_std_unordered_set_dogen_yarn_stereotypes(v.stereotypes()));
+    combine(seed, hash_std_unordered_set_std_string(v.stereotypes()));
     combine(seed, v.is_element_extension());
 
     return seed;

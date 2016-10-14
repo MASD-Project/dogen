@@ -32,6 +32,7 @@ namespace {
 
 auto lg(logger_factory("yarn.stereotypes_expander"));
 
+const std::string stereotype_visitor("visitable");
 const std::string visitor_name("visitor");
 const std::string visitor_argument_name("v");
 const std::string visitor_doc("Visitor for ");
@@ -120,137 +121,136 @@ add_visitor_to_model(const visitor& v, intermediate_model& im) const {
     BOOST_LOG_SEV(lg, debug) << "Added visitor: " << v.name().id();
 }
 
-void stereotypes_expander::expand_visitable(intermediate_model& im) {
-    BOOST_LOG_SEV(lg, debug) << "Expanding visitable for: " << im.name().id();
+void stereotypes_expander::
+expand_visitable(object& o, intermediate_model& im) const {
+    BOOST_LOG_SEV(lg, debug) << "Expanding visitable for: " << o.name().id();
 
-    for (auto& pair : im.objects()) {
-        auto& o(pair.second);
-
-        /*
-         * We only process types marked with the visitable
-         * stereotype. All other can be safely ignored.
-         */
-        const auto i(o.stereotypes().find(yarn::stereotypes::visitable));
-        const bool has_visitable_stereotype(i == o.stereotypes().end());
-        if (has_visitable_stereotype)
-            continue;
-
-        /*
-         * The visitable stereotype can only be applied to the root of
-         * an inheritance tree - it's an error otherwise.
-         */
-        const auto id(o.name().id());
-        if (o.is_child()) {
-            BOOST_LOG_SEV(lg, error) << visitable_child << id;
-            BOOST_THROW_EXCEPTION(expansion_error(visitable_child + id));
-        }
-
-        BOOST_LOG_SEV(lg, debug) << "Found visitation root: " << o.name().id();
-
-        /*
-         * Visitable types must have at least one leaf. We probably
-         * should relax this in light of cross model visitation
-         * support, but we'll leave it for now until there is a use
-         * case. This means its not possible to mark a type as
-         * visitable in one model and have all of its leaves on
-         * different models.
-         */
-        if (o.leaves().empty()) {
-            BOOST_LOG_SEV(lg, error) << zero_leaves << id;
-            BOOST_THROW_EXCEPTION(expansion_error(zero_leaves + id));
-        }
-
-        /*
-         * We need to organise the leaves by location. In truth, we
-         * are trying to organise the leaves by model really, as there
-         * is an assumption that we do not have multiple leaves in
-         * different modules for the same model. But it should still
-         * work if we do, we just end up generating multiple visitors
-         * - one per module.
-         *
-         * Additional (crazy) limitation: we must have leaves on the
-         * same location as the root parent.
-         */
-        auto bucketed_leaves(bucket_leaves_by_location(o.leaves()));
-        auto j(bucketed_leaves.find(o.name().location()));
-        if (j == bucketed_leaves.end()) {
-            const auto id(o.name().id());
-            BOOST_LOG_SEV(lg, error) << leaves_not_found << id;
-            BOOST_THROW_EXCEPTION(expansion_error(leaves_not_found + id));
-        }
-
-        BOOST_LOG_SEV(lg, debug) << "Found bucketed leaves. Total: "
-                                 << j->second.size();
-
-        /*
-         * Now we need to create the base visitor. This always maps
-         * to the root parent of the inheritance tree.
-         */
-        const auto& bvl(j->second);
-        const auto& loc(o.name().location());
-
-        /*
-         * Preserve the generation type from the root object and
-         * generate the visitor base.
-         */
-        auto gt(o.generation_type());
-        const auto bv(create_visitor(o, loc, gt, bvl));
-        const auto bvn(bv.name());
-        o.is_visitation_root(true);
-        o.base_visitor(bvn);
-        update_visited_leaves(bvl, visitor_details(bvn), im);
-        add_visitor_to_model(bv, im);
-
-        /*
-         * If there is only one bucket of leaves then that refers to
-         * the parent visitor, which we've already processed so there
-         * is nothing else to do.
-         */
-        if (bucketed_leaves.size() == 1)
-            continue;
-
-        /*
-         * There are other buckets, so first we need to remove the
-         * bucket we've already processed.
-         */
-        bucketed_leaves.erase(j->first);
-
-        /*
-         * Now we need to create the descendant visitors, one per
-         * bucket.
-         */
-        for (const auto& pair : bucketed_leaves) {
-            /*
-             * We are now (possibly) in different models other than
-             * the model of the root parent. So, if we are generating
-             * a visitor for the target model, we must ensure we set
-             * the generation type correctly or else it will not come
-             * out.
-             */
-            const auto& dv_location(pair.first);
-            gt = generation_types::no_generation;
-            const auto immm(im.name().location().model_modules());
-            const bool in_target_model(immm == dv_location.model_modules());
-            if (in_target_model)
-                gt = generation_types::full_generation;
-
-            /*
-             * Generate the visitor derived and update its leaves.
-             */
-            const auto& bl(pair.second);
-            auto dv(create_visitor(o, dv_location, gt, bl));
-            const auto dvn(dv.name());
-            dv.parent(bvn);
-            update_visited_leaves(bl, visitor_details(bvn, dvn), im);
-            add_visitor_to_model(dv, im);
-        }
+    /*
+     * The visitable stereotype can only be applied to the root of
+     * an inheritance tree - it's an error otherwise.
+     */
+    const auto id(o.name().id());
+    if (o.is_child()) {
+        BOOST_LOG_SEV(lg, error) << visitable_child << id;
+        BOOST_THROW_EXCEPTION(expansion_error(visitable_child + id));
     }
-    BOOST_LOG_SEV(lg, debug) << "Done injecting visitors.";
+
+    BOOST_LOG_SEV(lg, debug) << "Found visitation root: " << o.name().id();
+
+    /*
+     * Visitable types must have at least one leaf. We probably
+     * should relax this in light of cross model visitation
+     * support, but we'll leave it for now until there is a use
+     * case. This means its not possible to mark a type as
+     * visitable in one model and have all of its leaves on
+     * different models.
+     */
+    if (o.leaves().empty()) {
+        BOOST_LOG_SEV(lg, error) << zero_leaves << id;
+        BOOST_THROW_EXCEPTION(expansion_error(zero_leaves + id));
+    }
+
+    /*
+     * We need to organise the leaves by location. In truth, we
+     * are trying to organise the leaves by model really, as there
+     * is an assumption that we do not have multiple leaves in
+     * different modules for the same model. But it should still
+     * work if we do, we just end up generating multiple visitors
+     * - one per module.
+     *
+     * Additional (crazy) limitation: we must have leaves on the
+     * same location as the root parent.
+     */
+    auto bucketed_leaves(bucket_leaves_by_location(o.leaves()));
+    auto j(bucketed_leaves.find(o.name().location()));
+    if (j == bucketed_leaves.end()) {
+        const auto id(o.name().id());
+        BOOST_LOG_SEV(lg, error) << leaves_not_found << id;
+        BOOST_THROW_EXCEPTION(expansion_error(leaves_not_found + id));
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Found bucketed leaves. Total: "
+                             << j->second.size();
+
+    /*
+     * Now we need to create the base visitor. This always maps
+     * to the root parent of the inheritance tree.
+     */
+    const auto& bvl(j->second);
+    const auto& loc(o.name().location());
+
+    /*
+     * Preserve the generation type from the root object and
+     * generate the visitor base.
+     */
+    auto gt(o.generation_type());
+    const auto bv(create_visitor(o, loc, gt, bvl));
+    const auto bvn(bv.name());
+    o.is_visitation_root(true);
+    o.base_visitor(bvn);
+    update_visited_leaves(bvl, visitor_details(bvn), im);
+    add_visitor_to_model(bv, im);
+
+    /*
+     * If there is only one bucket of leaves then that refers to
+     * the parent visitor, which we've already processed so there
+     * is nothing else to do.
+     */
+    if (bucketed_leaves.size() == 1)
+        return;
+
+    /*
+     * There are other buckets, so first we need to remove the
+     * bucket we've already processed.
+     */
+    bucketed_leaves.erase(j->first);
+
+    /*
+     * Now we need to create the descendant visitors, one per
+     * bucket.
+     */
+    for (const auto& pair : bucketed_leaves) {
+        /*
+         * We are now (possibly) in different models other than
+         * the model of the root parent. So, if we are generating
+         * a visitor for the target model, we must ensure we set
+         * the generation type correctly or else it will not come
+         * out.
+         */
+        const auto& dv_location(pair.first);
+        gt = generation_types::no_generation;
+        const auto immm(im.name().location().model_modules());
+        const bool in_target_model(immm == dv_location.model_modules());
+        if (in_target_model)
+            gt = generation_types::full_generation;
+
+        /*
+         * Generate the visitor derived and update its leaves.
+         */
+        const auto& bl(pair.second);
+        auto dv(create_visitor(o, dv_location, gt, bl));
+        const auto dvn(dv.name());
+        dv.parent(bvn);
+        update_visited_leaves(bl, visitor_details(bvn, dvn), im);
+        add_visitor_to_model(dv, im);
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Done injecting visitor.";
+}
+
+void stereotypes_expander::expand(object& o, intermediate_model& im) const {
+    for (const auto s : o.stereotypes()) {
+        if (s == stereotype_visitor)
+            expand_visitable(o, im);
+    }
 }
 
 void stereotypes_expander::expand(intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Expanding stereotypes for: " << im.name().id();
-    expand_visitable(im);
+
+    for (auto& pair : im.objects())
+        expand(pair.second, im);
+
     BOOST_LOG_SEV(lg, debug) << "Finished expanding stereotypes";
 }
 

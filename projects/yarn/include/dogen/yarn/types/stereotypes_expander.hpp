@@ -73,7 +73,12 @@ private:
     /**
      * @brief Performs the expansion of the visitable stereotype.
      */
-    void expand_visitable(intermediate_model& im);
+    void expand_visitable(object& o, intermediate_model& im) const;
+
+    /**
+     * @brief Expands all stereotypes for the object.
+     */
+    void expand(object& o, intermediate_model& im) const;
 
 public:
     /**

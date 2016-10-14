@@ -44,7 +44,6 @@
 #include "dogen/yarn/serialization/enumerator_ser.hpp"
 #include "dogen/yarn/serialization/separators_ser.hpp"
 #include "dogen/yarn/serialization/enumeration_ser.hpp"
-#include "dogen/yarn/serialization/stereotypes_ser.hpp"
 #include "dogen/yarn/serialization/object_types_ser.hpp"
 #include "dogen/yarn/serialization/origin_types_ser.hpp"
 #include "dogen/yarn/serialization/type_parameters_ser.hpp"
