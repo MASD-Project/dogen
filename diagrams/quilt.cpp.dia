@@ -103,16 +103,16 @@
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O1">
       <dia:attribute name="obj_pos">
-        <dia:point val="-47,-30"/>
+        <dia:point val="-38,24"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-47.05,-30.05;-7.55,-22.65"/>
+        <dia:rectangle val="-38.05,23.95;1.45,31.35"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-47,-30"/>
+        <dia:point val="-38,24"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="39.399999999999999"/>
@@ -135,11 +135,7 @@
             <dia:string>#CPP is the C++ model in the quilt kernel.
 
 #DOGEN yarn.dia.comment=true
-#DOGEN decoration.licence_name=gpl_v3
-#DOGEN decoration.copyright_notice=Copyright (C) 2012-2015 Marco Craveiro &lt;marco.craveiro@gmail.com&gt;
-#DOGEN decoration.modeline_group_name=emacs
-#DOGEN quilt.cpp.odb.enabled=false
-#DOGEN quilt.cpp.cmake.enabled=false#</dia:string>
+#DOGEN annotations.profile=dogen.disable_odb_cmake#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -148,7 +144,7 @@
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="-46.65,-28.755"/>
+            <dia:point val="-37.65,25.245"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>

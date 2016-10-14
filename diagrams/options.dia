@@ -1632,11 +1632,7 @@ options for all the different Dogen applications, such as knitter,
 etc.
 
 #DOGEN yarn.dia.comment=true
-#DOGEN decoration.licence_name=gpl_v3
-#DOGEN decoration.copyright_notice=Copyright (C) 2012-2015 Marco Craveiro &lt;marco.craveiro@gmail.com&gt;
-#DOGEN decoration.modeline_group_name=emacs
-#DOGEN quilt.cpp.odb.enabled=false
-#DOGEN quilt.cpp.cmake.enabled=false#</dia:string>
+#DOGEN annotations.profile=dogen.disable_odb_cmake#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
