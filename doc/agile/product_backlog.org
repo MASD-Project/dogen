@@ -3580,6 +3580,12 @@ at top-level. In the future it may be useful to use scoping for
 concept names in the stereotype. We do not yet have a use case for
 this.
 
+This can be done trivially by:
+
+- allowing (or forcing?) the stereotype to have the package path;
+- using the package path in stereotype expansion when constructing the
+  concept name.
+
 *** Re-enable schema updates in database model                        :story:
 
 We are deleting the entire DB schema and re-applying it for every
