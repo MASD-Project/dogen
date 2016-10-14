@@ -152,6 +152,7 @@ void post_merge_workflow::execute(const annotations::type_repository& atrp,
      */
     expand_generalizations(atrp, im);
     expand_stereotypes(im);
+    expand_concepts(im);
     expand_containment(im);
 
     /*
@@ -160,7 +161,13 @@ void post_merge_workflow::execute(const annotations::type_repository& atrp,
      * elements.
      */
     resolve_element_references(im);
-    expand_concepts(im);
+
+    /*
+     * We can only expand attributes after we've expanded concepts as
+     * we rely on all attributes obtained from modeling a concept
+     * already being present. We must also be after resolution or else
+     * we will copy unresolved attributes.
+     */
     expand_attributes(im);
 
     /*
