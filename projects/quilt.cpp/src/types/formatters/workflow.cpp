@@ -112,6 +112,10 @@ workflow::format(const formattables::model& fm, const yarn::element& e,
         } else {
             BOOST_LOG_SEV(lg, debug) << "Setting overwrite to false.";
             file.overwrite(fmt_props.overwrite());
+
+            // FIXME: mainly to be compatible with legacy.
+            BOOST_LOG_SEV(lg, debug) << "Emptying out content.";
+            file.content().clear();
         }
 
         r.push_front(file);
