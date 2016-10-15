@@ -142,8 +142,7 @@ public:
      *
      * @pre profile must have the value object flag set.
      */
-    yarn::object to_object(const profiled_object& po,
-        const yarn::object_types ot) const;
+    yarn::object to_object(const profiled_object& po) const;
 
     /**
      * @brief Converts a Dia object containing a class into an

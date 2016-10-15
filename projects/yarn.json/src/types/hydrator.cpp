@@ -250,7 +250,7 @@ read_stream(std::istream& s, const bool is_target) const {
 yarn::object_types hydrator::
 to_object_type(const boost::optional<std::string>& s) const {
     if (!s)
-        return yarn::object_types::user_defined_value_object;
+        return yarn::object_types::invalid;
 
     const auto ot(*s);
     if (ot == object_type_smart_pointer_value)

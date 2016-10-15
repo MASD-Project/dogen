@@ -27,7 +27,6 @@
 #include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/dia/types/composite.hpp"
 #include "dogen/yarn.dia/types/transformation_error.hpp"
-#include "dogen/yarn.dia/io/object_types_io.hpp"
 #include "dogen/yarn.dia/types/processed_object.hpp"
 #include "dogen/yarn.dia/io/processed_object_io.hpp"
 #include "dogen/yarn.dia/io/repository_io.hpp"
@@ -135,14 +134,12 @@ update_element(const profiled_object& po, yarn::element& e) const {
     e.documentation(po.object().comment().documentation());
 }
 
-yarn::object transformer::to_object(const profiled_object& po,
-    const yarn::object_types ot) const {
+yarn::object transformer::to_object(const profiled_object& po) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming dia object to object: "
                              << po.object().id();
 
     yarn::object r;
     update_element(po, r);
-    r.object_type(ot);
 
     r.stereotypes().reserve(po.profile().unknown_stereotypes().size());
     for (const auto us : po.profile().unknown_stereotypes())

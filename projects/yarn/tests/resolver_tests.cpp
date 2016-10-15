@@ -115,8 +115,6 @@ BOOST_AUTO_TEST_CASE(object_with_attribute_type_in_the_same_model_resolves_succe
             BOOST_LOG_SEV(lg, debug) << "attribute: " << prop;
             BOOST_CHECK(factory.is_type_name_n(1, prop.parsed_type().current()));
             BOOST_CHECK(factory.is_model_n(0, prop.parsed_type().current()));
-            BOOST_CHECK(o.object_type() ==
-                dogen::yarn::object_types::user_defined_value_object);
         }
     }
     BOOST_CHECK(found);
@@ -156,8 +154,6 @@ BOOST_AUTO_TEST_CASE(object_with_attribute_type_in_different_model_results_in_su
             BOOST_CHECK(
                 factory.is_type_name_n(1, prop.parsed_type().current()));
             BOOST_CHECK(factory.is_model_n(1, prop.parsed_type().current()));
-            BOOST_CHECK(o.object_type() ==
-                dogen::yarn::object_types::user_defined_value_object);
         }
     }
     BOOST_CHECK(found);
@@ -197,8 +193,6 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_the_same_model_resolves_successfully)
             BOOST_LOG_SEV(lg, debug) << "parent: " << pn.id();
             BOOST_CHECK(factory.is_type_name_n(1, pn));
             BOOST_CHECK(factory.is_model_n(0, pn));
-            BOOST_CHECK(o.object_type() ==
-                dogen::yarn::object_types::user_defined_value_object);
         }
     }
     BOOST_CHECK(found);
@@ -231,8 +225,6 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_different_models_resolves_successfull
             BOOST_LOG_SEV(lg, debug) << "parent: " << pn.id();
             BOOST_CHECK(factory.is_type_name_n(1, pn));
             BOOST_CHECK(factory.is_model_n(1, pn));
-            BOOST_CHECK(o.object_type() ==
-                dogen::yarn::object_types::user_defined_value_object);
         }
     }
     BOOST_CHECK(found);
@@ -265,8 +257,6 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_same_model_resolves_succ
             BOOST_LOG_SEV(lg, debug) << "parent: " << pn.id();
             BOOST_CHECK(factory.is_type_name_n(1, pn));
             BOOST_CHECK(factory.is_model_n(0, pn));
-            BOOST_CHECK(o.object_type() ==
-                dogen::yarn::object_types::user_defined_value_object);
         } else if (factory.is_type_name_n(1, n)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << n.id();
             found_two = true;
@@ -277,8 +267,6 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_same_model_resolves_succ
             BOOST_LOG_SEV(lg, debug) << "parent: " << pn.id();
             BOOST_CHECK(factory.is_type_name_n(2, pn));
             BOOST_CHECK(factory.is_model_n(0, pn));
-            BOOST_CHECK(o.object_type() ==
-                dogen::yarn::object_types::user_defined_value_object);
         }
     }
     BOOST_CHECK(found_one);
@@ -328,8 +316,6 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_different_models_resolve
             BOOST_LOG_SEV(lg, debug) << "parent: " << pn.id();
             BOOST_CHECK(factory.is_type_name_n(1, pn));
             BOOST_CHECK(factory.is_model_n(1, pn));
-            BOOST_CHECK(o.object_type() ==
-                dogen::yarn::object_types::user_defined_value_object);
         }
     }
     BOOST_CHECK(found);

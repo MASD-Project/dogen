@@ -488,7 +488,6 @@ object mock_intermediate_model_factory::make_value_object(const unsigned int i,
 
     object r;
     populate_object(r, i, model_name, module_n, ot);
-    r.object_type(dogen::yarn::object_types::user_defined_value_object);
 
     if (flags_.tagged())
         annotation_function_(r.annotation());
@@ -1001,7 +1000,6 @@ object_with_both_transparent_and_opaque_associations(const origin_types ot,
 
     object o4;
     o4.name(nf.build_element_name("std", "string"));
-    o4.object_type(dogen::yarn::object_types::user_defined_value_object);
     insert_object(r, o4);
 
     attribute p3(mock_attribute(o0.name(), 3, vo, o4.name()));
@@ -1073,7 +1071,6 @@ object_with_attribute(const origin_types ot, const object_types objt,
 
         object o2;
         o2.name(nf.build_element_name("std", "pair"));
-        o2.object_type(dogen::yarn::object_types::user_defined_value_object);
 
         if (flags_.associations_indexed())
             o0.transparent_associations().push_back(o2.name());
@@ -1094,7 +1091,6 @@ object_with_attribute(const origin_types ot, const object_types objt,
 
         object o2;
         o2.name(nf.build_element_name("boost", "variant"));
-        o2.object_type(dogen::yarn::object_types::user_defined_value_object);
         insert_object(r, o2);
 
         if (flags_.associations_indexed())
@@ -1103,7 +1099,6 @@ object_with_attribute(const origin_types ot, const object_types objt,
     } else if (pt == attribute_types::std_string) {
         object o2;
         o2.name(nf.build_element_name("std", "string"));
-        o2.object_type(dogen::yarn::object_types::user_defined_value_object);
         insert_object(r, o2);
 
         if (flags_.associations_indexed())

@@ -593,7 +593,7 @@ in the context of inheritance.
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
 				</type_parameters>
-				<object_type>1</object_type>
+				<object_type>0</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -793,7 +793,7 @@ in the context of inheritance.
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
 				</type_parameters>
-				<object_type>1</object_type>
+				<object_type>0</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -993,7 +993,7 @@ in the context of inheritance.
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
 				</type_parameters>
-				<object_type>1</object_type>
+				<object_type>0</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -1193,7 +1193,7 @@ in the context of inheritance.
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
 				</type_parameters>
-				<object_type>1</object_type>
+				<object_type>0</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -1341,7 +1341,7 @@ in the context of inheritance.
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
 				</type_parameters>
-				<object_type>1</object_type>
+				<object_type>0</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -1572,7 +1572,7 @@ in the context of inheritance.
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
 				</type_parameters>
-				<object_type>1</object_type>
+				<object_type>0</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -1690,7 +1690,7 @@ in the context of inheritance.
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
 				</type_parameters>
-				<object_type>1</object_type>
+				<object_type>0</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -1888,7 +1888,7 @@ in the context of inheritance.
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
 				</type_parameters>
-				<object_type>1</object_type>
+				<object_type>0</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -2086,7 +2086,7 @@ in the context of inheritance.
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
 				</type_parameters>
-				<object_type>1</object_type>
+				<object_type>0</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -2286,7 +2286,7 @@ in the context of inheritance.
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
 				</type_parameters>
-				<object_type>1</object_type>
+				<object_type>0</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -2486,7 +2486,7 @@ in the context of inheritance.
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
 				</type_parameters>
-				<object_type>1</object_type>
+				<object_type>0</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -2603,7 +2603,7 @@ in the context of inheritance.
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
 				</type_parameters>
-				<object_type>1</object_type>
+				<object_type>0</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -2803,7 +2803,7 @@ in the context of inheritance.
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
 				</type_parameters>
-				<object_type>1</object_type>
+				<object_type>0</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -2950,7 +2950,7 @@ in the context of inheritance.
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
 				</type_parameters>
-				<object_type>1</object_type>
+				<object_type>0</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -3178,7 +3178,7 @@ in the context of inheritance.
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
 				</type_parameters>
-				<object_type>1</object_type>
+				<object_type>0</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -3376,7 +3376,7 @@ in the context of inheritance.
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
 				</type_parameters>
-				<object_type>1</object_type>
+				<object_type>0</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -3607,7 +3607,7 @@ in the context of inheritance.
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
 				</type_parameters>
-				<object_type>1</object_type>
+				<object_type>0</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -3754,7 +3754,7 @@ in the context of inheritance.
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
 				</type_parameters>
-				<object_type>1</object_type>
+				<object_type>0</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -3952,7 +3952,7 @@ in the context of inheritance.
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
 				</type_parameters>
-				<object_type>1</object_type>
+				<object_type>0</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -4180,7 +4180,7 @@ in the context of inheritance.
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
 				</type_parameters>
-				<object_type>1</object_type>
+				<object_type>0</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -4298,7 +4298,7 @@ in the context of inheritance.
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
 				</type_parameters>
-				<object_type>1</object_type>
+				<object_type>0</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -4526,7 +4526,7 @@ in the context of inheritance.
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
 				</type_parameters>
-				<object_type>1</object_type>
+				<object_type>0</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -4756,7 +4756,7 @@ in the context of inheritance.
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
 				</type_parameters>
-				<object_type>1</object_type>
+				<object_type>0</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -4874,7 +4874,7 @@ in the context of inheritance.
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
 				</type_parameters>
-				<object_type>1</object_type>
+				<object_type>0</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -5102,7 +5102,7 @@ in the context of inheritance.
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
 				</type_parameters>
-				<object_type>1</object_type>
+				<object_type>0</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -5249,7 +5249,7 @@ in the context of inheritance.
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
 				</type_parameters>
-				<object_type>1</object_type>
+				<object_type>0</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -5396,7 +5396,7 @@ in the context of inheritance.
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
 				</type_parameters>
-				<object_type>1</object_type>
+				<object_type>0</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -5624,7 +5624,7 @@ in the context of inheritance.
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
 				</type_parameters>
-				<object_type>1</object_type>
+				<object_type>0</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -5854,7 +5854,7 @@ in the context of inheritance.
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
 				</type_parameters>
-				<object_type>1</object_type>
+				<object_type>0</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
