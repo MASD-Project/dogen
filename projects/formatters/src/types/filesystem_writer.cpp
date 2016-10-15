@@ -108,7 +108,7 @@ void filesystem_writer::write_empty_file(const formatters::file& f) const {
 
 void filesystem_writer::write(const formatters::file& f) const {
     const auto gs(f.path().generic_string());
-    BOOST_LOG_SEV(lg, debug) << "Processing file: " << gs;
+    BOOST_LOG_SEV(lg, debug) << "Writing file: " << gs;
 
     if (gs.empty()) {
         // FIXME: throw
@@ -128,7 +128,7 @@ void filesystem_writer::write(const formatters::file& f) const {
         write_file_content(f.path(), f.content());
         BOOST_LOG_SEV(lg, trace) << "Wrote file: " << gs;
     } else {
-        BOOST_LOG_SEV(lg, trace) << "File contents have not changed, "
+        BOOST_LOG_SEV(lg, debug) << "File contents have not changed, "
                                  << "and force write is false so not writing.";
     }
     BOOST_LOG_SEV(lg, debug) << "Processed file: " << gs;

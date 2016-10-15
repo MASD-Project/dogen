@@ -14,33 +14,33 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-15 Sat 16:23]
+#+CAPTION: Clock summary at [2016-10-15 Sat 17:16]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *44:34* |       |       | 100.0 |
+| *Total time*                                                                | *45:26* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 44:34   |       |       | 100.0 |
-| Active                                                                      |         | 44:34 |       | 100.0 |
+| Stories                                                                     | 45:26   |       |       | 100.0 |
+| Active                                                                      |         | 45:26 |       | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  0:24 |   0.9 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:19 |   0.7 |
 | COMPLETED Improve bintray support                                           |         |       |  0:26 |   1.0 |
-| COMPLETED Refactor opaque infrastructure                                    |         |       |  1:17 |   2.9 |
+| COMPLETED Refactor opaque infrastructure                                    |         |       |  1:17 |   2.8 |
 | COMPLETED Remove any remnants of annotations from quilt                     |         |       |  0:05 |   0.2 |
-| COMPLETED Solve the issue of too many "configurations"                      |         |       |  4:01 |   9.0 |
+| COMPLETED Solve the issue of too many "configurations"                      |         |       |  4:01 |   8.8 |
 | COMPLETED Merge decoration configuration and annotations factories          |         |       |  0:18 |   0.7 |
-| COMPLETED Move annotation factories into expander in yarn                   |         |       |  1:11 |   2.7 |
-| COMPLETED Clean up terminology in dynamic                                   |         |       | 15:12 |  34.1 |
+| COMPLETED Move annotation factories into expander in yarn                   |         |       |  1:11 |   2.6 |
+| COMPLETED Clean up terminology in dynamic                                   |         |       | 15:12 |  33.5 |
 | COMPLETED Minor tidy-up of the quilt.cpp diagram                            |         |       |  0:29 |   1.1 |
-| COMPLETED Create a ownership hierarchy repository                           |         |       |  1:43 |   3.9 |
+| COMPLETED Create a ownership hierarchy repository                           |         |       |  1:43 |   3.8 |
 | COMPLETED Use vector of elements in model                                   |         |       |  0:10 |   0.4 |
-| COMPLETED Rewrite profile support                                           |         |       | 11:50 |  26.6 |
+| COMPLETED Rewrite profile support                                           |         |       | 11:50 |  26.0 |
 | COMPLETED Merge annotation type and profile folders                         |         |       |  0:20 |   0.7 |
-| COMPLETED Push stereotypes processing into yarn                             |         |       |  1:51 |   4.2 |
+| COMPLETED Push stereotypes processing into yarn                             |         |       |  1:51 |   4.1 |
 | COMPLETED Implement defaulting within the profiler                          |         |       |  1:13 |   2.7 |
 | COMPLETED Add binding of stereotypes with profiles                          |         |       |  1:40 |   3.7 |
 | COMPLETED Update dogen models to use profiles                               |         |       |  0:19 |   0.7 |
-| STARTED Finish overwriting support                                          |         |       |  1:46 |   4.0 |
+| COMPLETED Finish overwriting support                                        |         |       |  2:38 |   5.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -507,7 +507,9 @@ Problems:
 
 We've updated test models but did not update dogen models.
 
-*** STARTED Finish overwriting support                                :story:
+*** COMPLETED Finish overwriting support                              :story:
+    CLOSED: [2016-10-15 Sat 17:16]
+    CLOCK: [2016-10-15 Sat 16:23]--[2016-10-15 Sat 17:15] =>  0:52
     CLOCK: [2016-10-15 Sat 15:15]--[2016-10-15 Sat 16:22] =>  1:07
     CLOCK: [2016-10-14 Fri 23:19]--[2016-10-14 Fri 23:52] =>  0:33
     CLOCK: [2016-10-14 Fri 13:49]--[2016-10-14 Fri 13:55] =>  0:06
@@ -523,6 +525,11 @@ Tasks:
 
 - add handcrafted profile with overwrite set to false
 - use overwrite flag in formatter workflow
+
+*** Remove force write feature                                        :story:
+
+We never force write and now the logic is a bit at odds with the
+overwriting logic.
 
 *** Remove service stereotype                                         :story:
 

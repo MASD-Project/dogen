@@ -6514,8 +6514,8 @@ stories to remove them.
 We may have to split this story into several but we should at least
 trim down the obvious ones:
 
-- disable facet folders: no use case.
 - delete extra files: we always do so why make it optional.
+- disable facet folders: no use case.
 - force write: we never do.
 - etc.
 

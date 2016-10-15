@@ -94,15 +94,24 @@ workflow::format(const formattables::model& fm, const yarn::element& e,
         const auto& hlp_fmt(fc.helper_formatters());
         const auto fct_propss(fm.facet_properties());
         context ctx(ep, fm, hlp_fmt);
-
         auto file(fmt.format(ctx, e));
-        const auto pg(yarn::generation_types::partial_generation);
-        file.overwrite(e.generation_type() != pg);
 
-        // FIXME: hack to handle services
-        if (e.generation_type() == pg) {
-            BOOST_LOG_SEV(lg, debug) << "Emptying out content.";
-            file.content().clear();
+        // FIXME: hack whilst implementing overwrite properly: if set
+        // to true do the legacy checks. If set to false, honour the
+        // flag. This is done so we can test with both new world and
+        // legacy (new world will disable).
+        if (fmt_props.overwrite()) {
+            const auto pg(yarn::generation_types::partial_generation);
+            file.overwrite(e.generation_type() != pg);
+
+            // FIXME: hack to handle services
+            if (e.generation_type() == pg) {
+                BOOST_LOG_SEV(lg, debug) << "Emptying out content.";
+                file.content().clear();
+            }
+        } else {
+            BOOST_LOG_SEV(lg, debug) << "Setting overwrite to false.";
+            file.overwrite(fmt_props.overwrite());
         }
 
         r.push_front(file);
@@ -114,6 +123,7 @@ workflow::format(const formattables::model& fm, const yarn::element& e,
 
 std::forward_list<dogen::formatters::file>
 workflow::execute(const formattables::model& fm) const {
+    BOOST_LOG_SEV(lg, debug) << "Started formatting. Model " << fm.name().id();
     std::forward_list<dogen::formatters::file> r;
     for (const auto& pair : fm.formattables()) {
         const auto& formattable(pair.second);
@@ -123,6 +133,7 @@ workflow::execute(const formattables::model& fm) const {
             r.splice_after(r.before_begin(), format(fm, e, eprops));
         }
     }
+    BOOST_LOG_SEV(lg, debug) << "Finished formatting model.";
     return r;
 }
 

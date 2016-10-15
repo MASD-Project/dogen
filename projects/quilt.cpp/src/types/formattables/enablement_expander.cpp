@@ -349,13 +349,46 @@ void enablement_expander::compute_enablement(
             BOOST_THROW_EXCEPTION(
                 expansion_error(global_configuration_not_found + fmtn));
         }
+        const auto gc(i->second);
+
+        /*
+         * If the overwrite flag is set locally at the formatter or
+         * facet level, then that takes priority. If not, first check
+         * to see if its set globally at the formatter level; if so,
+         * it takes priority. Finally, if nothing else is set, use the
+         * global facet default.
+         *
+         * The rationale here is as follows: users can set facets to
+         * overwrite locally on a model element (either directly of
+         * via profiles); for example, for an handcrafted class, we
+         * want to set overwrite to false at the element level. This
+         * is normally done via a profile, but can be conceivable be
+         * done directly for less common configurations - for example
+         * adding manual support for IO for a handcrafted type. The
+         * global formatter overwrite flag is a bit less useful - we
+         * haven't got a use case for it just yet but it is added for
+         * (foolish) consistency. Finally, the global facet level
+         * overwrite flag is useful for the general case of code
+         * generated code. Having said that, it does not make a lot of
+         * sense to set overwrite globally to false.
+         *
+         * Note also that the overwrite flag is only relevant if
+         * enabled is true. It is not used otherwise.
+         */
+        auto& fmt_props(pair.second);
+        if (lc.formatter_overwrite())
+            fmt_props.overwrite(*lc.formatter_overwrite());
+        else if (lc.facet_overwrite())
+            fmt_props.overwrite(*lc.facet_overwrite());
+        else if (gc.formatter_overwrite())
+            fmt_props.overwrite(*gc.formatter_overwrite());
+        else
+            fmt_props.overwrite(gc.facet_overwrite());
 
         /*
          * If either the entire model model or facet have been
          * disabled globally, the formatter will be disabled too.
          */
-        auto& fmt_props(pair.second);
-        const auto gc(i->second);
         if (!gc.model_enabled() || !gc.facet_enabled()) {
             fmt_props.enabled(false);
             continue;
@@ -382,39 +415,6 @@ void enablement_expander::compute_enablement(
             fmt_props.enabled(*lc.formatter_enabled());
             continue;
         }
-
-        /*
-         * If the overwrite flag is set locally at the formatter or
-         * facet level, then that takes priority. If not, first check
-         * to see if its set globally at the formatter level; if so,
-         * it takes priority. Finally, if nothing else is set, use the
-         * global facet default.
-         *
-         * The rationale here is as follows: users can set facets to
-         * overwrite locally on a model element (either directly of
-         * via profiles); for example, for an handcrafted class, we
-         * want to set overwrite to false at the element level. This
-         * is normally done via a profile, but can be conceivable be
-         * done directly for less common configurations - for example
-         * adding manual support for IO for a handcrafted type. The
-         * global formatter overwrite flag is a bit less useful - we
-         * haven't got a use case for it just yet but it is added for
-         * (foolish) consistency. Finally, the global facet level
-         * overwrite flag is useful for the general case of code
-         * generated code. Having said that, it does not make a lot of
-         * sense to set overwrite globally to false.
-         *
-         * Note also that the overwrite flag is only relevant if
-         * enabled is true. It is not used otherwise.
-         */
-        if (lc.formatter_overwrite())
-            fmt_props.overwrite(*lc.formatter_overwrite());
-        else if (lc.facet_overwrite())
-            fmt_props.overwrite(*lc.facet_overwrite());
-        else if (gc.formatter_overwrite())
-            fmt_props.overwrite(*gc.formatter_overwrite());
-        else
-            fmt_props.overwrite(gc.facet_overwrite());
 
         /*
          * Check to see if the facet enablement field has been set

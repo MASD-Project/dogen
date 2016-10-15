@@ -1,0 +1,30 @@
+{
+    "name" : "dogen.handcrafted",
+    "labels" : [ "handcrafted" ],
+    "parents" : [ "dogen.disable_all_facets" ],
+    "scope" : "root_module",
+    "templates" : [
+        {
+            "name" : {
+                "simple" : "enabled",
+                "qualified" : "quilt.cpp.types.enabled"
+            },
+            "ownership_hierarchy" : {
+                "model_name" : "quilt.cpp"
+            },
+            "template_kind" : "instance",
+            "untyped_value" : [ "true" ]
+        },
+        {
+            "name" : {
+                "simple" : "overwrite",
+                "qualified" : "quilt.cpp.types.overwrite"
+            },
+            "ownership_hierarchy" : {
+                "model_name" : "quilt.cpp"
+            },
+            "template_kind" : "instance",
+            "untyped_value" : [ "false" ]
+        }
+    ]
+}
