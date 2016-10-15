@@ -39,20 +39,19 @@ namespace fabric {
 
 class generator final {
 private:
-    boost::shared_ptr<forward_declarations>
-    create(const yarn::name& n, const yarn::origin_types ot,
-        const yarn::generation_types gt) const {
-
+    template<typename Element>
+    boost::shared_ptr<forward_declarations> create(const Element& e) const {
         auto r(boost::make_shared<forward_declarations>());
-        r->name(n);
-        r->origin_type(ot);
+        r->name(e.name());
+        r->origin_type(e.origin_type());
+        r->annotation(e.annotation());
 
         /*
          * Services come in as partial generation, but this doesn't
          * make a lot of sense for forward declarations. Upgrade it to
          * full generation.
-         *
          */
+        const auto gt(e.generation_type());
         if (gt == yarn::generation_types::partial_generation)
             r->generation_type(yarn::generation_types::full_generation);
         else
@@ -70,30 +69,22 @@ public:
     void operator()(const yarn::module&) {}
 
     void operator()(const dogen::yarn::visitor& v) {
-        const auto ot(v.origin_type());
-        const auto gt(v.generation_type());
-        result_.push_back(create(v.name(), ot, gt));
+        result_.push_back(create(v));
     }
 
     void operator()(const yarn::enumeration& e) {
-        const auto ot(e.origin_type());
-        const auto gt(e.generation_type());
-        const auto fd(create(e.name(), ot, gt));
+        const auto fd(create(e));
         fd->is_enum(true);
         fd->underlying_type(e.underlying_type());
         result_.push_back(fd);
     }
 
     void operator()(const yarn::object& o) {
-        const auto ot(o.origin_type());
-        const auto gt(o.generation_type());
-        result_.push_back(create(o.name(), ot, gt));
+        result_.push_back(create(o));
     }
 
     void operator()(const yarn::exception& e) {
-        const auto ot(e.origin_type());
-        const auto gt(e.generation_type());
-        const auto fd(create(e.name(), ot, gt));
+        const auto fd(create(e));
         fd->is_exception(true);
         result_.push_back(fd);
     }
