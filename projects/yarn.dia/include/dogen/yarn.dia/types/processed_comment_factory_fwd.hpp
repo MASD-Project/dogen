@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_DIA_TYPES_PROCESSING_ERROR_FWD_HPP
-#define DOGEN_YARN_DIA_TYPES_PROCESSING_ERROR_FWD_HPP
+#ifndef DOGEN_YARN_DIA_TYPES_PROCESSED_COMMENT_FACTORY_FWD_HPP
+#define DOGEN_YARN_DIA_TYPES_PROCESSED_COMMENT_FACTORY_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,7 +29,7 @@ namespace dogen {
 namespace yarn {
 namespace dia {
 
-class processing_error;
+class processed_comment_factory;
 
 } } }
 

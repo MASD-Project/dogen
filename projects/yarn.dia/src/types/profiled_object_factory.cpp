@@ -21,7 +21,7 @@
 #include "dogen/dia/types/object.hpp"
 #include "dogen/dia/types/diagram.hpp"
 #include "dogen/yarn.dia/types/profiler.hpp"
-#include "dogen/yarn.dia/types/object_processor.hpp"
+#include "dogen/yarn.dia/types/processed_object_factory.hpp"
 #include "dogen/yarn.dia/types/profiled_object_factory.hpp"
 
 namespace dogen {
@@ -30,8 +30,8 @@ namespace dia {
 
 processed_object profiled_object_factory::
 make_processed_object(const dogen::dia::object& o) const {
-    object_processor op;
-    return op.process(o);
+    processed_object_factory op;
+    return op.make(o);
 }
 
 profile profiled_object_factory::

@@ -24,14 +24,14 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn.dia/types/traits.hpp"
-#include "dogen/yarn.dia/types/processing_error.hpp"
-#include "dogen/yarn.dia/types/comment_processor.hpp"
+#include "dogen/yarn.dia/types/building_error.hpp"
+#include "dogen/yarn.dia/types/processed_comment_factory.hpp"
 
 using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("yarn.dia.comment_processor"));
+auto lg(logger_factory("yarn.dia.processed_comment_factory"));
 
 const std::string empty;
 const std::string instruction_marker("#DOGEN ");
@@ -44,7 +44,8 @@ namespace dogen {
 namespace yarn {
 namespace dia {
 
-processed_comment comment_processor::process(const std::string& c) const {
+processed_comment
+processed_comment_factory::make(const std::string& c) const {
     processed_comment r;
 
     if (c.empty())
@@ -62,7 +63,7 @@ processed_comment comment_processor::process(const std::string& c) const {
             const auto pos(line.find_first_of(equals));
             if (pos == std::string::npos) {
                 BOOST_LOG_SEV(lg, error) << separator_not_found;
-                BOOST_THROW_EXCEPTION(processing_error(separator_not_found));
+                BOOST_THROW_EXCEPTION(building_error(separator_not_found));
             }
 
             const auto key(line.substr(0, pos));

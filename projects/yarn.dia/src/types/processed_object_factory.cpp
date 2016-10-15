@@ -26,14 +26,14 @@
 #include "dogen/dia/types/object.hpp"
 #include "dogen/dia/types/attribute.hpp"
 #include "dogen/dia/types/composite.hpp"
-#include "dogen/yarn.dia/types/processing_error.hpp"
+#include "dogen/yarn.dia/types/building_error.hpp"
 #include "dogen/yarn.dia/types/processed_object.hpp"
-#include "dogen/yarn.dia/types/object_processor.hpp"
+#include "dogen/yarn.dia/types/processed_object_factory.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("yarn.dia.object_processor"));
+static logger lg(logger_factory("yarn.dia.processed_object_factory"));
 
 const std::string dia_string("string");
 const std::string dia_name("name");
@@ -85,9 +85,9 @@ attribute_value(const Variant& v, const std::string& desc) {
     } catch (const boost::bad_get&) {
         BOOST_LOG_SEV(lg, error) << unexpected_attribute_value_type << desc;
 
-        using dogen::yarn::dia::processing_error;
+        using dogen::yarn::dia::building_error;
         BOOST_THROW_EXCEPTION(
-            processing_error(unexpected_attribute_value_type + desc));
+            building_error(unexpected_attribute_value_type + desc));
     }
     return r;
 }
@@ -98,16 +98,17 @@ namespace dogen {
 namespace yarn {
 namespace dia {
 
-object_processor::object_processor() : comment_processor_() { }
+processed_object_factory::
+processed_object_factory() : processed_comment_factory_() { }
 
-std::string object_processor::
+std::string processed_object_factory::
 parse_string_attribute(const dogen::dia::attribute& a) const {
     const auto values(a.values());
     if (values.size() != 1) {
         BOOST_LOG_SEV(lg, error) << "Expected attribute to have one"
                                  << " value but found " << values.size();
         BOOST_THROW_EXCEPTION(
-            processing_error(unexpected_attribute_value_size +
+            building_error(unexpected_attribute_value_size +
                 boost::lexical_cast<std::string>(values.size())));
     }
 
@@ -120,13 +121,14 @@ parse_string_attribute(const dogen::dia::attribute& a) const {
     return name;
 }
 
-processed_comment object_processor::
+processed_comment processed_object_factory::
 create_processed_comment(const dogen::dia::attribute& a) const {
     const auto s(parse_string_attribute(a));
-    return comment_processor_.process(s);
+    return processed_comment_factory_.make(s);
 }
 
-dia_object_types object_processor::parse_object_type(const std::string& ot) const {
+dia_object_types processed_object_factory::
+parse_object_type(const std::string& ot) const {
     if (ot == uml_large_package)
         return dia_object_types::uml_large_package;
 
@@ -149,10 +151,10 @@ dia_object_types object_processor::parse_object_type(const std::string& ot) cons
         return dia_object_types::uml_realization;
 
     BOOST_LOG_SEV(lg, error) << invalid_object_type << ot;
-    BOOST_THROW_EXCEPTION(processing_error(invalid_object_type + ot));
+    BOOST_THROW_EXCEPTION(building_error(invalid_object_type + ot));
 }
 
-processed_object object_processor::process(const dogen::dia::object& o) {
+processed_object processed_object_factory::make(const dogen::dia::object& o) {
     processed_object r;
     r.id(o.id());
     r.dia_object_type(parse_object_type(o.type()));
@@ -171,7 +173,7 @@ processed_object object_processor::process(const dogen::dia::object& o) {
             const auto size(boost::lexical_cast<std::string>(s));
             BOOST_LOG_SEV(lg, error) << unexpected_number_of_connections << s;
             BOOST_THROW_EXCEPTION(
-                processing_error(unexpected_number_of_connections + size));
+                building_error(unexpected_number_of_connections + size));
         }
 
         BOOST_LOG_SEV(lg, debug) << "Processing connections for object: '"
@@ -194,7 +196,7 @@ processed_object object_processor::process(const dogen::dia::object& o) {
                 BOOST_LOG_SEV(lg, error) << "Expected text attribute to "
                                          << "have a single value but found "
                                          << a.values().size();
-                BOOST_THROW_EXCEPTION(processing_error(one_value_expected));
+                BOOST_THROW_EXCEPTION(building_error(one_value_expected));
             }
 
             // FIXME: do not use exceptions for flow control.
@@ -203,7 +205,7 @@ processed_object object_processor::process(const dogen::dia::object& o) {
             try {
                 c = attribute_value<composite>(a.values().front(),
                     dia_composite);
-            } catch (const processing_error& e) {
+            } catch (const building_error& e) {
                 continue;
             }
 
@@ -211,7 +213,7 @@ processed_object object_processor::process(const dogen::dia::object& o) {
                 BOOST_LOG_SEV(lg, error) << "Expected composite type "
                                          << "to be " << dia_text
                                          << "but was " << c.type();
-                BOOST_THROW_EXCEPTION(processing_error(text_attribute_expected));
+                BOOST_THROW_EXCEPTION(building_error(text_attribute_expected));
             }
             BOOST_LOG_SEV(lg, debug) << "Found composite of type " << c.type();
 
@@ -238,7 +240,7 @@ processed_object object_processor::process(const dogen::dia::object& o) {
                                              << " to be " << dia_uml_attribute
                                              << "but was " << c.type();
                     BOOST_THROW_EXCEPTION(
-                        processing_error(uml_attribute_expected));
+                        building_error(uml_attribute_expected));
                 }
                 BOOST_LOG_SEV(lg, debug) << "Found composite of type "
                                          << c.type();

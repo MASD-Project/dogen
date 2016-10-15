@@ -25,8 +25,7 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/dia/io/object_io.hpp"
 #include "dogen/yarn.dia/types/processed_object.hpp"
-#include "dogen/yarn.dia/types/object_processor.hpp"
-#include "dogen/yarn.dia/types/processing_error.hpp"
+#include "dogen/yarn.dia/types/processed_object_factory.hpp"
 #include "dogen/yarn.dia/io/repository_io.hpp"
 #include "dogen/yarn.dia/io/processed_object_io.hpp"
 #include "dogen/dia/test/mock_object_factory.hpp"
@@ -38,7 +37,7 @@ using dogen::utility::test::asserter;
 namespace  {
 
 const std::string test_module("yarn.dia");
-const std::string test_suite("object_processor_tests");
+const std::string test_suite("processed_object_factory_tests");
 const std::string model_name("test");
 const std::string missing_name("Could not find name");
 const std::string empty_name("Dia object name is empty");
@@ -52,15 +51,15 @@ using dogen::utility::test::contains_checker;
 using dogen::dia::test::mock_object_factory;
 using dogen::yarn::dia::dia_object_types;
 
-BOOST_AUTO_TEST_SUITE(object_processor_tests)
+BOOST_AUTO_TEST_SUITE(processed_object_factory_tests)
 
 BOOST_AUTO_TEST_CASE(uml_class_with_no_stereotype_transforms_into_expected_processed_object) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_no_stereotype_transforms_into_expected_object");
     const auto o(mock_object_factory::make_class(0));
     BOOST_LOG_SEV(lg, debug) << "dia object:" << o;
 
-    dogen::yarn::dia::object_processor op;
-    const auto po(op.process(o));
+    dogen::yarn::dia::processed_object_factory op;
+    const auto po(op.make(o));
     BOOST_LOG_SEV(lg, debug) << "actual:" << po;
     BOOST_CHECK(po.id() == mock_object_factory::to_oject_id(0));
     BOOST_CHECK(!po.name().empty());
@@ -72,10 +71,10 @@ BOOST_AUTO_TEST_CASE(uml_class_with_no_stereotype_transforms_into_expected_proce
 
 BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_transforms_into_expected_processed_object) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_enumeration_stereotype_transforms_into_processed_object");
-    dogen::yarn::dia::object_processor op;
+    dogen::yarn::dia::processed_object_factory op;
     const std::string st(enumeration_stereotype);
     const auto o(mock_object_factory::make_stereotyped_class(st, 0));
-    const auto po(op.process(o));
+    const auto po(op.make(o));
     BOOST_LOG_SEV(lg, debug) << "actual:" << po;
     BOOST_CHECK(po.id() == mock_object_factory::to_oject_id(0));
     BOOST_CHECK(!po.name().empty());
@@ -87,10 +86,10 @@ BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_transforms_into_expec
 
 BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_transforms_into_expected_processed_object) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_exception_stereotype_transforms_into_processed_object");
-    dogen::yarn::dia::object_processor op;
+    dogen::yarn::dia::processed_object_factory op;
     const std::string st(exception_stereotype);
     const auto o(mock_object_factory::make_stereotyped_class(st, 0));
-    const auto po(op.process(o));
+    const auto po(op.make(o));
     BOOST_LOG_SEV(lg, debug) << "actual:" << po;
     BOOST_CHECK(po.id() == mock_object_factory::to_oject_id(0));
     BOOST_CHECK(!po.name().empty());
@@ -103,9 +102,9 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_transforms_into_expecte
 BOOST_AUTO_TEST_CASE(uml_large_package_transforms_into_expected_processed_object) {
     SETUP_TEST_LOG_SOURCE("uml_large_package_transforms_into_expected_processed_object");
 
-    dogen::yarn::dia::object_processor op;
+    dogen::yarn::dia::processed_object_factory op;
     const auto o(mock_object_factory::make_large_package(0));
-    const auto po(op.process(o));
+    const auto po(op.make(o));
     BOOST_LOG_SEV(lg, debug) << "actual:" << po;
     BOOST_CHECK(po.id() == mock_object_factory::to_oject_id(0));
     BOOST_CHECK(!po.name().empty());
@@ -118,9 +117,9 @@ BOOST_AUTO_TEST_CASE(uml_large_package_transforms_into_expected_processed_object
 BOOST_AUTO_TEST_CASE(uml_class_in_package_transforms_into_expected_processed_object) {
     SETUP_TEST_LOG_SOURCE("uml_class_in_package_transforms_into_expected_processed_object");
 
-    dogen::yarn::dia::object_processor op;
+    dogen::yarn::dia::processed_object_factory op;
     const auto o(mock_object_factory::make_class_inside_large_package(0));
-    const auto po(op.process(o[1]));
+    const auto po(op.make(o[1]));
     BOOST_LOG_SEV(lg, debug) << "actual:" << po;
     BOOST_CHECK(po.id() == mock_object_factory::to_oject_id(1));
     BOOST_CHECK(!po.name().empty());
@@ -133,9 +132,9 @@ BOOST_AUTO_TEST_CASE(uml_class_in_package_transforms_into_expected_processed_obj
 
 BOOST_AUTO_TEST_CASE(uml_generalization_transforms_into_expected_processed_object) {
     SETUP_TEST_LOG_SOURCE("uml_generalization_transforms_into_expected_processed_object");
-    dogen::yarn::dia::object_processor op;
+    dogen::yarn::dia::processed_object_factory op;
     const auto o(mock_object_factory::make_generalization(0));
-    const auto po(op.process(o[0]));
+    const auto po(op.make(o[0]));
     BOOST_LOG_SEV(lg, debug) << "actual:" << po;
     BOOST_CHECK(po.id() == mock_object_factory::to_oject_id(0));
     BOOST_CHECK(po.name().empty());
@@ -148,9 +147,9 @@ BOOST_AUTO_TEST_CASE(uml_generalization_transforms_into_expected_processed_objec
 
 BOOST_AUTO_TEST_CASE(uml_note_transforms_into_expected_processed_object) {
     SETUP_TEST_LOG_SOURCE("uml_note_transforms_into_expected_processed_object");
-    dogen::yarn::dia::object_processor op;
+    dogen::yarn::dia::processed_object_factory op;
     const auto o(mock_object_factory::make_uml_note(0));
-    const auto po(op.process(o));
+    const auto po(op.make(o));
     BOOST_LOG_SEV(lg, debug) << "actual:" << po;
     BOOST_CHECK(po.id() == mock_object_factory::to_oject_id(0));
     BOOST_CHECK(po.name().empty());

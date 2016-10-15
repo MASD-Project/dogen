@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_DIA_TYPES_OBJECT_PROCESSOR_HPP
-#define DOGEN_YARN_DIA_TYPES_OBJECT_PROCESSOR_HPP
+#ifndef DOGEN_YARN_DIA_TYPES_PROCESSED_OBJECT_FACTORY_HPP
+#define DOGEN_YARN_DIA_TYPES_PROCESSED_OBJECT_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -32,7 +32,7 @@
 #include "dogen/dia/types/composite_fwd.hpp"
 #include "dogen/yarn.dia/types/dia_object_types.hpp"
 #include "dogen/yarn.dia/types/processed_object_fwd.hpp"
-#include "dogen/yarn.dia/types/comment_processor.hpp"
+#include "dogen/yarn.dia/types/processed_comment_factory.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -41,13 +41,13 @@ namespace dia {
 /**
  * @brief Processes dia objects into an intermediate format.
  */
-class object_processor {
+class processed_object_factory {
 public:
-    object_processor(const object_processor&) = delete;
-    object_processor(object_processor&&) = default;
+    processed_object_factory(const processed_object_factory&) = delete;
+    processed_object_factory(processed_object_factory&&) = default;
 
 public:
-    object_processor();
+    processed_object_factory();
 
 private:
     /**
@@ -71,12 +71,12 @@ private:
 
 public:
     /**
-     * @brief Process the object.
+     * @brief Generates a processed object.
      */
-    processed_object process(const dogen::dia::object& o);
+    processed_object make(const dogen::dia::object& o);
 
 private:
-    const comment_processor comment_processor_;
+    const processed_comment_factory processed_comment_factory_;
 };
 
 } } }

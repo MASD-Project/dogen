@@ -44,16 +44,15 @@
 #include "dogen/yarn.dia/types/profiled_object.hpp"
 #include "dogen/yarn.dia/types/selection_error.hpp"
 #include "dogen/yarn.dia/types/dia_object_types.hpp"
-#include "dogen/yarn.dia/types/object_processor.hpp"
 #include "dogen/yarn.dia/types/processed_object.hpp"
-#include "dogen/yarn.dia/types/processing_error.hpp"
 #include "dogen/yarn.dia/types/validation_error.hpp"
-#include "dogen/yarn.dia/types/comment_processor.hpp"
 #include "dogen/yarn.dia/types/processed_comment.hpp"
 #include "dogen/yarn.dia/types/yarn_object_types.hpp"
 #include "dogen/yarn.dia/types/processed_attribute.hpp"
 #include "dogen/yarn.dia/types/repository_selector.hpp"
 #include "dogen/yarn.dia/types/transformation_error.hpp"
 #include "dogen/yarn.dia/types/profiled_object_factory.hpp"
+#include "dogen/yarn.dia/types/processed_object_factory.hpp"
+#include "dogen/yarn.dia/types/processed_comment_factory.hpp"
 
 #endif

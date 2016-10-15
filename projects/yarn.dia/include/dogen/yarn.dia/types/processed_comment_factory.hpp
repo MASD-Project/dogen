@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_DIA_TYPES_COMMENT_PROCESSOR_HPP
-#define DOGEN_YARN_DIA_TYPES_COMMENT_PROCESSOR_HPP
+#ifndef DOGEN_YARN_DIA_TYPES_PROCESSED_COMMENT_FACTORY_HPP
+#define DOGEN_YARN_DIA_TYPES_PROCESSED_COMMENT_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -45,13 +45,14 @@ namespace dia {
  * instruction in a key-value pair form, where the key and the
  * value are separated by the assignment operator @e =.
  */
-class comment_processor {
+class processed_comment_factory {
 public:
-    comment_processor() = default;
-    comment_processor(const comment_processor&) = default;
-    ~comment_processor() = default;
-    comment_processor(comment_processor&&) = default;
-    comment_processor& operator=(const comment_processor&) = default;
+    processed_comment_factory() = default;
+    processed_comment_factory(const processed_comment_factory&) = default;
+    ~processed_comment_factory() = default;
+    processed_comment_factory(processed_comment_factory&&) = default;
+    processed_comment_factory& operator=(
+        const processed_comment_factory&) = default;
 
 public:
     /**
@@ -63,7 +64,7 @@ public:
      * @pre lines starting with the instruction marker must follow the
      * defined syntax or else a parsing_error is thrown.
      */
-    processed_comment process(const std::string& c) const;
+    processed_comment make(const std::string& c) const;
 };
 
 } } }
