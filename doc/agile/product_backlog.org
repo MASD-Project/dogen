@@ -6529,7 +6529,9 @@ trim down the obvious ones:
 
 - delete extra files: we always do so why make it optional.
 - disable facet folders: no use case.
-- force write: we never do.
+- force write: we never force write and now the logic is a bit at odds
+  with the overwriting logic: should we force write even if overwrite
+  is set to false? This would break hand-crafted code.
 - etc.
 
 Basically any feature which we are not using at present and cannot
