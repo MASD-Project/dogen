@@ -3827,6 +3827,13 @@ become very readable.
 These stories are good candidates for the subsequent release. This
 release will be all about adding new features.
 
+*** Add boost variant visitors                                        :story:
+
+It would be nice if we could automatically generate boost variant
+visitors with lambda support. See:
+
+- [[http://stackoverflow.com/questions/7867555/best-way-to-do-variant-visitation-with-lambdas][Best way to do variant visitation with lambdas]]
+
 *** Consider adding a writing policy to files                         :story:
 
 At present we are using a single flag to describe several
