@@ -3827,6 +3827,19 @@ become very readable.
 These stories are good candidates for the subsequent release. This
 release will be all about adding new features.
 
+*** Consider adding a writing policy to files                         :story:
+
+At present we are using a single flag to describe several
+possibilities with regards to file writing:
+
+- write if its a new file;
+- write if the contents have changed;
+- write always. No use case yet.
+
+It may make more sense to have an enum for this. Having said that, we
+removed the "force write" feature so there is less of a need for this
+at present.
+
 *** Add support for disabling unique filenames                        :story:
 
 At present dogen uses formatter and facet prefixes for each file it
