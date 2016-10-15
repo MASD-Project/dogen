@@ -453,7 +453,7 @@ this is a long comment#</dia:string>
         <dia:point val="9,23"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="8.95,21.95;34.05,37.05"/>
+        <dia:rectangle val="8.95,21.95;44.05,37.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -462,7 +462,7 @@ this is a long comment#</dia:string>
         <dia:point val="9,23"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="25"/>
+        <dia:real val="35"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="14"/>
@@ -692,13 +692,13 @@ this is a long comment#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O4">
       <dia:attribute name="obj_pos">
-        <dia:point val="30,11"/>
+        <dia:point val="32,11"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="29.95,10.95;42.1,15.45"/>
+        <dia:rectangle val="31.95,10.95;44.1,15.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="30,11"/>
+        <dia:point val="32,11"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.050000000000001"/>
@@ -872,22 +872,22 @@ this is a long comment#</dia:string>
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O5">
       <dia:attribute name="obj_pos">
-        <dia:point val="9,1"/>
+        <dia:point val="9,6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="8.95,0.95;37.285,5.15"/>
+        <dia:rectangle val="8.95,5.95;22.27,8.55"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="9,1"/>
+        <dia:point val="9,6"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="28.235000000000003"/>
+        <dia:real val="13.220000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.0999999999999996"/>
+        <dia:real val="2.5"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -911,7 +911,7 @@ this is a long comment#</dia:string>
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="9.35,2.245"/>
+            <dia:point val="9.35,7.245"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>

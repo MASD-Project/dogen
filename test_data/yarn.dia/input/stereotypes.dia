@@ -68,13 +68,13 @@
         <dia:point val="60.9375,9.0625"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="60.8875,9.0125;66.1075,12.7125"/>
+        <dia:rectangle val="60.8875,9.0125;67.2625,12.7125"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="60.9375,9.0625"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="5.1200000000000001"/>
+        <dia:real val="6.2750000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -83,7 +83,7 @@
         <dia:string>#service#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Type is a service.#</dia:string>
@@ -336,13 +336,13 @@
         <dia:point val="61,16"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="60.95,15.95;68.48,19.65"/>
+        <dia:rectangle val="60.95,15.95;67.325,19.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="61,16"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.4299999999999997"/>
+        <dia:real val="6.2750000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -351,10 +351,23 @@
         <dia:string>#some_type#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#nongeneratable#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Type is non-generatable.#</dia:string>
+        <dia:string>#Type is non-generatable.
+
+#DOGEN quilt.cpp.hash.enabled=true
+#DOGEN quilt.cpp.hash.overwrite=false
+#DOGEN quilt.cpp.io.enabled=true
+#DOGEN quilt.cpp.io.overwrite=false
+#DOGEN quilt.cpp.odb.enabled=true
+#DOGEN quilt.cpp.odb.overwrite=false
+#DOGEN quilt.cpp.serialization.enabled=true
+#DOGEN quilt.cpp.serialization.overwrite=false
+#DOGEN quilt.cpp.test_data.enabled=true
+#DOGEN quilt.cpp.test_data.overwrite=false
+#DOGEN quilt.cpp.types.forward_declarations_formatter.overwrite=true
+#DOGEN quilt.cpp.serialization.forward_declarations_formatter.overwrite=true#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -1388,7 +1401,7 @@
         <dia:point val="61,-14"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="60.95,-14.05;96.215,-0.25"/>
+        <dia:rectangle val="60.95,-14.05;87.745,-1.85"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1397,10 +1410,10 @@
         <dia:point val="61,-14"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="35.164999999999999"/>
+        <dia:real val="26.695"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="13.700000000000001"/>
+        <dia:real val="12.100000000000001"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>

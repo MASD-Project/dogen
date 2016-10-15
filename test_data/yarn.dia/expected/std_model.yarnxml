@@ -4564,15 +4564,16 @@
 						</location>
 						<identifiable>std_model_some_service</identifiable>
 					</name>
-					<generation_type>2</generation_type>
+					<generation_type>1</generation_type>
 					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
 					<stereotypes>
-						<count>0</count>
+						<count>1</count>
 						<item_version>0</item_version>
+						<item>handcrafted</item>
 					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
@@ -4951,7 +4952,7 @@
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
 				</type_parameters>
-				<object_type>1</object_type>
+				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>

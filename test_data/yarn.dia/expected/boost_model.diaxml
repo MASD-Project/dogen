@@ -5712,7 +5712,7 @@
 								<item>
 									<which>6</which>
 									<value>
-										<value>#service#</value>
+										<value>#handcrafted#</value>
 									</value>
 								</item>
 							</values>
@@ -10055,7 +10055,7 @@
 								<item>
 									<which>8</which>
 									<value>
-										<value>9.95,-6.05;38.285,-1.85</value>
+										<value>9.95,-6.05;23.27,-3.45</value>
 									</value>
 								</item>
 							</values>
@@ -10101,7 +10101,7 @@
 								<item>
 									<which>1</which>
 									<value>
-										<value>28.235000000000003</value>
+										<value>13.220000000000001</value>
 									</value>
 								</item>
 							</values>
@@ -10114,7 +10114,7 @@
 								<item>
 									<which>1</which>
 									<value>
-										<value>4.0999999999999996</value>
+										<value>2.5</value>
 									</value>
 								</item>
 							</values>

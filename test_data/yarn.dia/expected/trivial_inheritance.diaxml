@@ -11133,7 +11133,7 @@
 								<item>
 									<which>6</which>
 									<value>
-										<value>#service#</value>
+										<value>#handcrafted#</value>
 									</value>
 								</item>
 							</values>
@@ -11572,7 +11572,7 @@
 								<item>
 									<which>8</which>
 									<value>
-										<value>18.95,5.95;23.785,9.05</value>
+										<value>18.95,5.95;25.325,9.05</value>
 									</value>
 								</item>
 							</values>
@@ -11598,7 +11598,7 @@
 								<item>
 									<which>1</which>
 									<value>
-										<value>4.7350000000000003</value>
+										<value>6.2750000000000004</value>
 									</value>
 								</item>
 							</values>
@@ -11637,7 +11637,7 @@
 								<item>
 									<which>6</which>
 									<value>
-										<value>#service#</value>
+										<value>#handcrafted#</value>
 									</value>
 								</item>
 							</values>
@@ -12086,7 +12086,7 @@
 								<item>
 									<which>8</which>
 									<value>
-										<value>21.3175,-2.05;28.9487,6.00038</value>
+										<value>22.0875,-2.05;28.9488,6.00038</value>
 									</value>
 								</item>
 							</values>
@@ -12131,13 +12131,13 @@
 								<item>
 									<which>5</which>
 									<value>
-										<value>21.3675,3</value>
+										<value>22.1375,3</value>
 									</value>
 								</item>
 								<item>
 									<which>5</which>
 									<value>
-										<value>21.3675,5.95038</value>
+										<value>22.1375,5.95038</value>
 									</value>
 								</item>
 							</values>
@@ -15100,7 +15100,7 @@
 								<item>
 									<which>8</which>
 									<value>
-										<value>-44.05,-19.05;-8.785,-10.85</value>
+										<value>-44.05,-19.05;-19.18,-12.45</value>
 									</value>
 								</item>
 							</values>
@@ -15146,7 +15146,7 @@
 								<item>
 									<which>1</which>
 									<value>
-										<value>35.164999999999999</value>
+										<value>24.77</value>
 									</value>
 								</item>
 							</values>
@@ -15159,7 +15159,7 @@
 								<item>
 									<which>1</which>
 									<value>
-										<value>8.0999999999999996</value>
+										<value>6.5</value>
 									</value>
 								</item>
 							</values>

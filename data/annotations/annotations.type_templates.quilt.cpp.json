@@ -8,7 +8,7 @@
         },
         "value_type" : "boolean",
         "template_kind" : "global_template",
-        "scope" : "root_module",
+        "scope" : "any",
         "default_value" : true
     },
     {

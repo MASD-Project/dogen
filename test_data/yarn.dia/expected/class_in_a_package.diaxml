@@ -1282,7 +1282,7 @@
 								<item>
 									<which>8</which>
 									<value>
-										<value>-34.05,-40.05;-5.715,-35.05</value>
+										<value>-34.05,-40.05;-20.73,-37.45</value>
 									</value>
 								</item>
 							</values>
@@ -1328,7 +1328,7 @@
 								<item>
 									<which>1</which>
 									<value>
-										<value>28.235000000000003</value>
+										<value>13.220000000000001</value>
 									</value>
 								</item>
 							</values>
@@ -1341,7 +1341,7 @@
 								<item>
 									<which>1</which>
 									<value>
-										<value>4.8999999999999995</value>
+										<value>2.5</value>
 									</value>
 								</item>
 							</values>

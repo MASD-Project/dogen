@@ -25,6 +25,17 @@
             },
             "template_kind" : "instance",
             "untyped_value" : [ "false" ]
+        },
+        {
+            "name" : {
+                "simple" : "overwrite",
+                "qualified" : "quilt.cpp.types.forward_declarations_formatter.overwrite"
+            },
+            "ownership_hierarchy" : {
+                "model_name" : "quilt.cpp"
+            },
+            "template_kind" : "instance",
+            "untyped_value" : [ "true" ]
         }
     ]
 }
