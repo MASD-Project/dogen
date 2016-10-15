@@ -103,8 +103,6 @@ add_custom_target(knit_${target}
     --ignore-files-matching-regex .*stitch
     --ignore-files-matching-regex .*_stitch.hpp
     --ignore-files-matching-regex .*_stitch.cpp
-    --ignore-files-matching-regex .*/container_io.hpp
-    --ignore-files-matching-regex .*/container_io.cpp
     --verbose
     --delete-extra-files)
 if(use_latest_knitter)

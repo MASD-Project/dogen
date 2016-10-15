@@ -30,6 +30,7 @@
 #include "dogen/quilt.cpp/io/fabric/odb_options_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/model_io.hpp"
 #include "dogen/quilt.cpp/io/fabric/master_header_io.hpp"
+#include "dogen/quilt.cpp/io/formatters/container_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/formattable_io.hpp"
 #include "dogen/quilt.cpp/io/fabric/forward_declarations_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/odb_properties_io.hpp"
