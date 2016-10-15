@@ -20,7 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/utility/io/list_io.hpp"
+#include "dogen/utility/io/vector_io.hpp"
 #include "dogen/yarn.dia/types/validation_error.hpp"
 #include "dogen/yarn.dia/types/validator.hpp"
 
@@ -36,14 +36,10 @@ static logger lg(logger_factory("yarn.dia.validator"));
  * stereotypes as flags.
  */
 const std::string no_uml_type("No UML type.");
-const std::string too_many_uml_types("Too many UML types.");
-const std::string too_many_yarn_types("Can only have one yarn type set.");
-const std::string stereotypes_require_uml_class(
-    "Only UML classes can have stereotypes.");
+const std::string stereotypes_require_yarn_object(
+    "Only yarn objects can have stereotypes.");
 const std::string object_options_on_non_object(
     "Only yarn objects can have object options");
-const std::string concepts_require_yarn_object(
-    "Only yarn objects can have concepts");
 
 }
 
@@ -51,94 +47,36 @@ namespace dogen {
 namespace yarn {
 namespace dia {
 
-bool validator::is_yarn_object(const profile& p) const {
-    return p.is_object() || p.is_exception();
-}
-
-unsigned int validator::count_yarn_types(const profile& p) const {
-    unsigned int r(0);
-
-    if (p.is_enumeration()) ++r;
-    if (p.is_exception()) ++r;
-    if (p.is_object()) ++r;
-    if (p.is_concept()) ++r;
-
-    return r;
-}
-
-unsigned int validator::count_uml_types(const profile& p) const {
-    unsigned int r(0);
-
-    if (p.is_uml_large_package()) ++r;
-    if (p.is_uml_class()) ++r;
-    if (p.is_uml_generalization()) ++r;
-    if (p.is_uml_association()) ++r;
-    if (p.is_uml_note()) ++r;
-    if (p.is_uml_message()) ++r;
-    if (p.is_uml_realization()) ++r;
-
-    return r;
-}
-
-void validator::validate_yarn(const profile& p) const {
-    const auto types(count_yarn_types(p));
-    const bool has_yarn_flags(types != 0 || !p.unknown_stereotypes().empty());
-
-    if (!has_yarn_flags)
-        return; // nothing to validate.
+void validator::validate_yarn(const processed_object& po) const {
+    if (po.yarn_object_type() == yarn_object_types::object)
+        return; // nothing to validate for yarn objects.
 
     /*
-     * Only UML classes are allowed to have yarn flags.
+     * Non-yarn objects are not allowed to have stereotypes.
      */
-    if (!p.is_uml_class()) {
-        BOOST_LOG_SEV(lg, error) << stereotypes_require_uml_class;
-        BOOST_THROW_EXCEPTION(validation_error(stereotypes_require_uml_class));
-    }
-
-    /*
-     * We can have at most one yarn type. Zero is fine as someone
-     * above us will provide defaulting.
-     */
-    if (types > 1) {
-        BOOST_LOG_SEV(lg, error) << too_many_yarn_types;
-        BOOST_THROW_EXCEPTION(validation_error(too_many_yarn_types));
-    }
-
-    if (is_yarn_object(p))
-        return; // nothing else to validate for yarn objects.
-
-    /*
-     * Non-yarn objects are not allowed to have concepts.
-     */
-    if (!p.unknown_stereotypes().empty()) {
-        BOOST_LOG_SEV(lg, error) << concepts_require_yarn_object << ": "
-                                 << p.unknown_stereotypes();
-        BOOST_THROW_EXCEPTION(validation_error(concepts_require_yarn_object));
+    if (!po.stereotypes().empty()) {
+        BOOST_LOG_SEV(lg, error) << stereotypes_require_yarn_object << ": "
+                                 << po.stereotypes();
+        BOOST_THROW_EXCEPTION(
+            validation_error(stereotypes_require_yarn_object));
     }
 }
 
-void validator::validate_uml(const profile& p) const {
-    const auto types(count_uml_types(p));
-
-    if (types == 0) {
+void validator::validate_uml(const processed_object& po) const {
+    if (po.dia_object_type() == dia_object_types::invalid) {
         BOOST_LOG_SEV(lg, error) << no_uml_type;
         BOOST_THROW_EXCEPTION(validation_error(no_uml_type));
     }
-
-    if (types > 1) {
-        BOOST_LOG_SEV(lg, error) << too_many_uml_types;
-        BOOST_THROW_EXCEPTION(validation_error(too_many_uml_types));
-    }
 }
 
-void validator::validate(const profile& p) const {
-    validate_uml(p);
-    validate_yarn(p);
+void validator::validate(const processed_object& po) const {
+    validate_uml(po);
+    validate_yarn(po);
 }
 
-void validator::validate(const std::list<profiled_object>& pos) const {
+void validator::validate(const std::list<processed_object>& pos) const {
     for (const auto& po : pos)
-        validate(po.profile());
+        validate(po);
 }
 
 } } }

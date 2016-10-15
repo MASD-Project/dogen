@@ -27,6 +27,7 @@
 
 #include <list>
 #include <string>
+#include <vector>
 #include <utility>
 #include <algorithm>
 #include <boost/optional.hpp>
@@ -60,7 +61,7 @@ public:
         const std::string& name,
         const dogen::yarn::dia::dia_object_types dia_object_type,
         const dogen::yarn::dia::yarn_object_types yarn_object_type,
-        const std::string& stereotype,
+        const std::vector<std::string>& stereotypes,
         const dogen::yarn::dia::processed_comment& comment,
         const std::string& child_node_id,
         const boost::optional<std::pair<std::string, std::string> >& connection,
@@ -106,13 +107,13 @@ public:
     void yarn_object_type(const dogen::yarn::dia::yarn_object_types v);
 
     /**
-     * @brief CSV list of stereotypes.
+     * @brief Stereotypes for this object that were not consumed by yarn.dia.
      */
     /**@{*/
-    const std::string& stereotype() const;
-    std::string& stereotype();
-    void stereotype(const std::string& v);
-    void stereotype(const std::string&& v);
+    const std::vector<std::string>& stereotypes() const;
+    std::vector<std::string>& stereotypes();
+    void stereotypes(const std::vector<std::string>& v);
+    void stereotypes(const std::vector<std::string>&& v);
     /**@}*/
 
     /**
@@ -172,7 +173,7 @@ private:
     std::string name_;
     dogen::yarn::dia::dia_object_types dia_object_type_;
     dogen::yarn::dia::yarn_object_types yarn_object_type_;
-    std::string stereotype_;
+    std::vector<std::string> stereotypes_;
     dogen::yarn::dia::processed_comment comment_;
     std::string child_node_id_;
     boost::optional<std::pair<std::string, std::string> > connection_;

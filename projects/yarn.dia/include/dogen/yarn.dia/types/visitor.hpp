@@ -30,7 +30,6 @@
 #include <boost/graph/depth_first_search.hpp>
 #include "dogen/yarn.dia/types/grapher.hpp"
 #include "dogen/yarn.dia/types/builder.hpp"
-#include "dogen/yarn.dia/types/profiled_object.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -50,7 +49,7 @@ public:
     template<typename Vertex, typename Graph>
     void finish_vertex(const Vertex& u, const Graph& g) {
         const auto& o(g[u]);
-        if (o.object().id() != grapher::root_id())
+        if (o.id() != grapher::root_id())
             builder_.add(o);
     }
 

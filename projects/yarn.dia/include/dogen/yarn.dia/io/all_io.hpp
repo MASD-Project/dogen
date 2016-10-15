@@ -25,9 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/yarn.dia/io/profile_io.hpp"
 #include "dogen/yarn.dia/io/repository_io.hpp"
-#include "dogen/yarn.dia/io/profiled_object_io.hpp"
 #include "dogen/yarn.dia/io/dia_object_types_io.hpp"
 #include "dogen/yarn.dia/io/processed_object_io.hpp"
 #include "dogen/yarn.dia/io/processed_comment_io.hpp"

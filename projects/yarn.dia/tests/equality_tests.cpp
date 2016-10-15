@@ -42,7 +42,7 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
     SETUP_TEST_LOG("validate_equality");
 
     test_equality<repository_generator>();
-    test_equality<profile_generator>();
+    test_equality<yarn_object_types_generator>();
     test_equality<dia_object_types_generator>();
     test_equality<processed_object_generator>();
     test_equality<processed_attribute_generator>();

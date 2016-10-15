@@ -113,10 +113,10 @@ yarn::intermediate_model builder::setup_model(const std::string& model_name,
 }
 
 void builder::
-update_scribble_group(const yarn::name& n, const profiled_object& po) {
+update_scribble_group(const yarn::name& n, const processed_object& po) {
 
     annotations::scribble ps;
-    const auto& kvps(po.object().comment().key_value_pairs());
+    const auto& kvps(po.comment().key_value_pairs());
     ps.entries(kvps);
 
     using annotations::scope_types;
@@ -126,7 +126,7 @@ update_scribble_group(const yarn::name& n, const profiled_object& po) {
     annotations::scribble_group sg;
     sg.parent(ps);
 
-    for (const auto& attr : po.object().attributes()) {
+    for (const auto& attr : po.attributes()) {
         const auto& kvps(attr.comment().key_value_pairs());
         if (kvps.empty())
             continue;
@@ -159,55 +159,55 @@ update_scribble_group(const yarn::name& n, const profiled_object& po) {
     }
 }
 
-void builder::update_documentation(const profiled_object& po) {
-    const auto& o(po.object());
+void builder::update_documentation(const processed_object& po) {
     BOOST_LOG_SEV(lg, debug) << "Object is a note: "
-                             << o.id()
+                             << po.id()
                              << ". Note text: '"
-                             << o.comment().original_content() << "'";
+                             << po.comment().original_content() << "'";
 
-    if (o.comment().original_content().empty() ||
-        !o.comment().applicable_to_parent_object())
+    if (po.comment().original_content().empty() ||
+        !po.comment().applicable_to_parent_object())
         return;
 
-    const auto& documentation(o.comment().documentation());
+    const auto& documentation(po.comment().documentation());
 
     repository_selector rs(repository_);
-    if (o.child_node_id().empty()) {
+    if (po.child_node_id().empty()) {
         auto& module(rs.module_for_name(repository_.model().name()));
         module.documentation(documentation);
         update_scribble_group(module.name(), po);
         return;
     }
 
-    yarn::module& module(rs.module_for_id(o.child_node_id()));
+    yarn::module& module(rs.module_for_id(po.child_node_id()));
     module.documentation(documentation);
     update_scribble_group(module.name(), po);
 }
 
-void builder::add(const profiled_object& po) {
+void builder::add(const processed_object& po) {
     auto& im(repository_.model());
     auto& itn(repository_.id_to_name());
     transformer t(repository_);
 
-    const auto id(po.object().id());
-    const auto& p(po.profile());
-    if (p.is_uml_note()) {
+    const auto id(po.id());
+    const auto dot(po.dia_object_type());
+    const auto yot(po.yarn_object_type());
+    if (dot == dia_object_types::uml_note) {
         update_documentation(po);
         return;
-    } else if (p.is_uml_large_package()) {
+    } else if (dot == dia_object_types::uml_large_package) {
         const auto m(t.to_module(po));
         add_element(itn, im.modules(), m, id);
         update_scribble_group(m.name(), po);
-    } else if (p.is_enumeration()) {
+    } else if (yot == yarn_object_types::enumeration) {
         const auto e(t.to_enumeration(po));
         add_element(itn, im.enumerations(), e, id);
         update_scribble_group(e.name(), po);
-    } else if (p.is_concept()) {
+    } else if (yot == yarn_object_types::concept) {
         const auto c(t.to_concept(po));
         add_element(itn, im.concepts(), c, id);
         update_scribble_group(c.name(), po);
-    } else if (p.is_exception()) {
+    } else if (yot == yarn_object_types::exception) {
         const auto e(t.to_exception(po));
         add_element(itn, im.exceptions(), e, id);
         update_scribble_group(e.name(), po);

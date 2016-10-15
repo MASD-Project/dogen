@@ -26,15 +26,14 @@
 #endif
 
 #include <string>
-#include "dogen/yarn.dia/types/profile.hpp"
-#include "dogen/yarn.dia/types/profiled_object.hpp"
+#include "dogen/yarn.dia/types/processed_object.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace dia {
 
 /**
- * @brief Validates the consistency of the profile.
+ * @brief Validates the consistency of the processed object.
  *
  * The following are the rules a profile is expected to follow:
  *
@@ -58,49 +57,27 @@ public:
 
 private:
     /**
-     * @brief Returns true if the yarn flags with type information
-     * describe a type which is modeled by a yarn object.
-     *
-     * @pre flags must have been validated for consistency.
+     * @brief Checks all data related to Yarn.
      */
-    bool is_yarn_object(const profile& p) const;
-
-private:
-    /**
-     * @brief Returns the number of flags that convey type information
-     * on Yarn modeling elements.
-     */
-    unsigned int count_yarn_types(const profile& p) const;
+    void validate_yarn(const processed_object& p) const;
 
     /**
-     * @brief Returns the number of flags set that convey UML type
-     * information.
+     * @brief Checks all data related to UML.
      */
-    unsigned int count_uml_types(const profile& p) const;
-
-private:
-    /**
-     * @brief Checks all flags that are related to Yarn.
-     */
-    void validate_yarn(const profile& p) const;
-
-    /**
-     * @brief Check the UML related flags.
-     */
-    void validate_uml(const profile& p) const;
+    void validate_uml(const processed_object& p) const;
 
 public:
     /**
-     * @brief Validates a profile.
+     * @brief Validates a processed object.
      *
      */
-    void validate(const profile& p) const;
+    void validate(const processed_object& p) const;
 
     /**
-     * @brief Throws an exception if any of the profiled objects are
+     * @brief Throws an exception if any of the processed objects are
      * not considered to be valid.
      */
-    void validate(const std::list<profiled_object>& pos) const;
+    void validate(const std::list<processed_object>& pos) const;
 };
 
 } } }

@@ -32,11 +32,11 @@ bool reducer::is_relevant(const dia_object_types ot) const {
         ot == dia_object_types::uml_note;
 }
 
-std::list<profiled_object>
-reducer::reduce(const std::list<profiled_object>& pos) const {
-    std::list<profiled_object> r;
+std::list<processed_object>
+reducer::reduce(const std::list<processed_object>& pos) const {
+    std::list<processed_object> r;
     for (const auto& po : pos)
-        if (is_relevant(po.object().dia_object_type()))
+        if (is_relevant(po.dia_object_type()))
             r.push_back(po);
 
     return r;

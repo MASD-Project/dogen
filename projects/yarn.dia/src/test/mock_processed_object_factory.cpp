@@ -21,7 +21,6 @@
 #include <string>
 #include <boost/lexical_cast.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn.dia/types/dia_object_types.hpp"
 #include "dogen/yarn.dia/test/mock_processed_object_factory.hpp"
 
 namespace {
@@ -167,7 +166,7 @@ make_uml_note_with_marker_inside_large_package(unsigned int n) {
 processed_object mock_processed_object_factory::
 make_class(const unsigned int n, const std::string& st) {
     auto r(create_named_object(dia_object_types::uml_class, n));
-    r.stereotype(st);
+    r.stereotypes().push_back(st);
     r.comment().documentation(doxygen_comment);
     r.comment().original_content(doxygen_comment);
     return r;

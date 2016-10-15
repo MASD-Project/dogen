@@ -32,6 +32,14 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
+inline std::size_t hash_std_vector_std_string(const std::vector<std::string>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
+}
+
 inline std::size_t hash_std_pair_std_string_std_string(const std::pair<std::string, std::string>& v) {
     std::size_t seed(0);
 
@@ -71,7 +79,7 @@ std::size_t processed_object_hasher::hash(const processed_object& v) {
     combine(seed, v.name());
     combine(seed, v.dia_object_type());
     combine(seed, v.yarn_object_type());
-    combine(seed, v.stereotype());
+    combine(seed, hash_std_vector_std_string(v.stereotypes()));
     combine(seed, v.comment());
     combine(seed, v.child_node_id());
     combine(seed, hash_boost_optional_std_pair_std_string_std_string(v.connection()));

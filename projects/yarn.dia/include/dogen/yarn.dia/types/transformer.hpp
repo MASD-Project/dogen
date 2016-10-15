@@ -36,10 +36,9 @@
 #include "dogen/yarn/types/module.hpp"
 #include "dogen/dia/types/attribute.hpp"
 #include "dogen/yarn.dia/types/processed_object.hpp"
-#include "dogen/yarn.dia/types/profiled_object.hpp"
+#include "dogen/yarn.dia/types/processed_object.hpp"
 #include "dogen/yarn.dia/types/processed_attribute.hpp"
 #include "dogen/yarn.dia/types/repository.hpp"
-#include "dogen/yarn.dia/types/profile.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -113,20 +112,20 @@ private:
 
 private:
     /**
-     * @brief Update the yarn element using the profiled object.
+     * @brief Update the yarn element using the processed object.
      */
-    void update_element(const profiled_object& po, yarn::element& e) const;
+    void update_element(const processed_object& po, yarn::element& e) const;
 
 public:
     /**
-     * @brief Converts a profiled object containing a UML class with a
+     * @brief Converts a processed object containing a UML class with a
      * stereotype of exception to a yarn exception.
      *
      * @param po the Dia UML class containing an enumeration.
      *
-     * @pre profile must have the exception flag set.
+     * @pre processed object must have the exception flag set.
      */
-    yarn::exception to_exception(const profiled_object& po) const;
+    yarn::exception to_exception(const processed_object& po) const;
 
     /**
      * @brief Converts Dia a object containing a UML class with a
@@ -135,9 +134,9 @@ public:
      * @param po the Dia UML class containing a value object or
      * service.
      *
-     * @pre profile must have the value object flag set.
+     * @pre processed object must have the value object flag set.
      */
-    yarn::object to_object(const profiled_object& po) const;
+    yarn::object to_object(const processed_object& po) const;
 
     /**
      * @brief Converts a Dia object containing a class into an
@@ -145,7 +144,7 @@ public:
      *
      * @param o the Dia UML class containing an enumeration.
      */
-    yarn::enumeration to_enumeration(const profiled_object& po) const;
+    yarn::enumeration to_enumeration(const processed_object& po) const;
 
     /**
      * @brief Converts a Dia object of type large UML package into a
@@ -153,7 +152,7 @@ public:
      *
      * @param po Dia object which contains a UML package.
      */
-    yarn::module to_module(const profiled_object& po) const;
+    yarn::module to_module(const processed_object& po) const;
 
     /**
      * @brief Converts a dia object with a stereotype of concept
@@ -161,7 +160,7 @@ public:
      *
      * @param po Dia object which contains a concept.
      */
-    yarn::concept to_concept(const profiled_object& o) const;
+    yarn::concept to_concept(const processed_object& o) const;
 
 private:
     const repository& repository_;

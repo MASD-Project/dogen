@@ -25,9 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/yarn.dia/test_data/profile_td.hpp"
 #include "dogen/yarn.dia/test_data/repository_td.hpp"
-#include "dogen/yarn.dia/test_data/profiled_object_td.hpp"
 #include "dogen/yarn.dia/test_data/dia_object_types_td.hpp"
 #include "dogen/yarn.dia/test_data/processed_object_td.hpp"
 #include "dogen/yarn.dia/test_data/processed_comment_td.hpp"

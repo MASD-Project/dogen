@@ -33,7 +33,7 @@
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn.dia/types/repository.hpp"
 #include "dogen/yarn.dia/types/transformer.hpp"
-#include "dogen/yarn.dia/types/profiled_object.hpp"
+#include "dogen/yarn.dia/types/processed_object.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -52,12 +52,12 @@ private:
     yarn::intermediate_model setup_model(const std::string& model_name,
         const std::string& external_modules, bool is_target) const;
 
-    void update_scribble_group(const yarn::name& n, const profiled_object& po);
+    void update_scribble_group(const yarn::name& n, const processed_object& po);
 
-    void update_documentation(const profiled_object& po);
+    void update_documentation(const processed_object& po);
 
 public:
-    void add(const profiled_object& po);
+    void add(const processed_object& po);
     yarn::intermediate_model build();
 
 private:

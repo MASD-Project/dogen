@@ -33,7 +33,7 @@ processed_object::processed_object(processed_object&& rhs)
       name_(std::move(rhs.name_)),
       dia_object_type_(std::move(rhs.dia_object_type_)),
       yarn_object_type_(std::move(rhs.yarn_object_type_)),
-      stereotype_(std::move(rhs.stereotype_)),
+      stereotypes_(std::move(rhs.stereotypes_)),
       comment_(std::move(rhs.comment_)),
       child_node_id_(std::move(rhs.child_node_id_)),
       connection_(std::move(rhs.connection_)),
@@ -44,7 +44,7 @@ processed_object::processed_object(
     const std::string& name,
     const dogen::yarn::dia::dia_object_types dia_object_type,
     const dogen::yarn::dia::yarn_object_types yarn_object_type,
-    const std::string& stereotype,
+    const std::vector<std::string>& stereotypes,
     const dogen::yarn::dia::processed_comment& comment,
     const std::string& child_node_id,
     const boost::optional<std::pair<std::string, std::string> >& connection,
@@ -53,7 +53,7 @@ processed_object::processed_object(
       name_(name),
       dia_object_type_(dia_object_type),
       yarn_object_type_(yarn_object_type),
-      stereotype_(stereotype),
+      stereotypes_(stereotypes),
       comment_(comment),
       child_node_id_(child_node_id),
       connection_(connection),
@@ -65,7 +65,7 @@ void processed_object::swap(processed_object& other) noexcept {
     swap(name_, other.name_);
     swap(dia_object_type_, other.dia_object_type_);
     swap(yarn_object_type_, other.yarn_object_type_);
-    swap(stereotype_, other.stereotype_);
+    swap(stereotypes_, other.stereotypes_);
     swap(comment_, other.comment_);
     swap(child_node_id_, other.child_node_id_);
     swap(connection_, other.connection_);
@@ -77,7 +77,7 @@ bool processed_object::operator==(const processed_object& rhs) const {
         name_ == rhs.name_ &&
         dia_object_type_ == rhs.dia_object_type_ &&
         yarn_object_type_ == rhs.yarn_object_type_ &&
-        stereotype_ == rhs.stereotype_ &&
+        stereotypes_ == rhs.stereotypes_ &&
         comment_ == rhs.comment_ &&
         child_node_id_ == rhs.child_node_id_ &&
         connection_ == rhs.connection_ &&
@@ -138,20 +138,20 @@ void processed_object::yarn_object_type(const dogen::yarn::dia::yarn_object_type
     yarn_object_type_ = v;
 }
 
-const std::string& processed_object::stereotype() const {
-    return stereotype_;
+const std::vector<std::string>& processed_object::stereotypes() const {
+    return stereotypes_;
 }
 
-std::string& processed_object::stereotype() {
-    return stereotype_;
+std::vector<std::string>& processed_object::stereotypes() {
+    return stereotypes_;
 }
 
-void processed_object::stereotype(const std::string& v) {
-    stereotype_ = v;
+void processed_object::stereotypes(const std::vector<std::string>& v) {
+    stereotypes_ = v;
 }
 
-void processed_object::stereotype(const std::string&& v) {
-    stereotype_ = std::move(v);
+void processed_object::stereotypes(const std::vector<std::string>&& v) {
+    stereotypes_ = std::move(v);
 }
 
 const dogen::yarn::dia::processed_comment& processed_object::comment() const {

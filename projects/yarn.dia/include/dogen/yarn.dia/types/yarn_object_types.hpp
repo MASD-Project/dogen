@@ -32,9 +32,10 @@ namespace dia {
 enum class yarn_object_types : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
     not_applicable = 1,
-    exception = 2,
-    object = 3,
-    concept = 4
+    enumeration = 2,
+    exception = 3,
+    object = 4,
+    concept = 5
 };
 
 } } }

@@ -65,11 +65,11 @@ public:
 
     template<typename Vertex, typename Graph>
     void discover_vertex(const Vertex& u, const Graph& g) {
-        state_->stream_ << "(" << g[u].object().id();
+        state_->stream_ << "(" << g[u].id();
     }
 
     void back_edge(graph_type::edge_descriptor e, const graph_type& g) {
-        const auto id(g[target(e, g)].object().id());
+        const auto id(g[target(e, g)].id());
         state_->stream_ << "(" << id;
         BOOST_LOG_SEV(lg, error) << found_cycle_in_graph
                                  << id << ". Graph as sexp: "
@@ -86,8 +86,8 @@ private:
 
 grapher::grapher()
     : generated_(false), root_vertex_(boost::add_vertex(graph_)) {
-    profiled_object root;
-    root.object().id(::root_id);
+    processed_object root;
+    root.id(::root_id);
     graph_[root_vertex_] = root;
     id_to_vertex_.insert(std::make_pair(::root_id, root_vertex_));
 }
@@ -191,18 +191,17 @@ void grapher::process_connections(const processed_object& o) {
     }
 }
 
-void grapher::add(const profiled_object& po) {
+void grapher::add(const processed_object& po) {
     require_not_generated();
 
-    const auto& o(po.object());
-    if (o.connection()) {
-        process_connections(o);
+    if (po.connection()) {
+        process_connections(po);
         return;
     }
 
-    const auto v(vertex_for_id(o.id()));
+    const auto v(vertex_for_id(po.id()));
     graph_[v] = po;
-    process_child_node(v, o);
+    process_child_node(v, po);
 }
 
 const graph_type& grapher::graph() const {

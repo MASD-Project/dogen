@@ -26,7 +26,7 @@
 #endif
 
 #include <list>
-#include "dogen/yarn.dia/types/profiled_object.hpp"
+#include "dogen/yarn.dia/types/processed_object.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -37,8 +37,8 @@ private:
     bool is_relevant(const dia_object_types ot) const;
 
 public:
-    std::list<profiled_object>
-    reduce(const std::list<profiled_object>& pos) const;
+    std::list<processed_object>
+    reduce(const std::list<processed_object>& pos) const;
 };
 
 } } }

@@ -27,7 +27,7 @@ namespace dia {
 yarn_object_types_generator::yarn_object_types_generator() : position_(0) { }
 void yarn_object_types_generator::
 populate(const unsigned int position, result_type& v) {
-    v = static_cast<yarn_object_types>(position % 5);
+    v = static_cast<yarn_object_types>(position % 6);
 }
 
 yarn_object_types_generator::result_type

@@ -18,12 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+/*
 #include <sstream>
 #include <boost/test/unit_test.hpp>
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/yarn.dia/types/validator.hpp"
-#include "dogen/yarn.dia/io/profile_io.hpp"
+#include "dogen/yarn.dia/io/processed_object_io.hpp"
 #include "dogen/yarn.dia/types/validation_error.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
 
@@ -203,3 +204,4 @@ BOOST_AUTO_TEST_CASE(setting_one_yarn_type_validates) {
 }
 
 BOOST_AUTO_TEST_SUITE_END()
+*/

@@ -24,9 +24,11 @@
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/algorithm/string/erase.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/string/splitter.hpp"
 #include "dogen/dia/types/object.hpp"
 #include "dogen/dia/types/attribute.hpp"
 #include "dogen/dia/types/composite.hpp"
+#include "dogen/dia/types/diagram.hpp"
 #include "dogen/yarn.dia/types/building_error.hpp"
 #include "dogen/yarn.dia/types/processed_object.hpp"
 #include "dogen/yarn.dia/types/processed_object_factory.hpp"
@@ -56,6 +58,10 @@ const std::string uml_message("UML - Message");
 const std::string uml_realization("UML - Realizes");
 const std::string invalid_object_type("Invalid value for object type: ");
 
+const std::string concept("concept");
+const std::string enumeration("enumeration");
+const std::string exception("exception");
+
 const std::string error_parsing_object_type("Fail to parse object type: ");
 const std::string empty_dia_object_name("Dia object name is empty");
 const std::string uml_attribute_expected("UML atttribute expected");
@@ -75,6 +81,8 @@ const std::string invalid_type_string(
 const std::string object_has_invalid_type("Invalid dia type: ");
 const std::string unexpected_number_of_connections(
     "Expected 2 connections but found: ");
+const std::string too_many_yarn_types(
+    "Attempting to set the yarn type more than once.");
 
 template<typename AttributeValue, typename Variant>
 AttributeValue
@@ -273,12 +281,43 @@ void  processed_object_factory::parse_as_class_attributes(
 }
 
 void processed_object_factory::
+require_yarn_type_not_set(const yarn_object_types yot) const {
+    if (yot == yarn_object_types::invalid)
+        return;
+
+    BOOST_LOG_SEV(lg, warn) << too_many_yarn_types;
+    BOOST_THROW_EXCEPTION(building_error(too_many_yarn_types));
+}
+
+void processed_object_factory::
+parse_as_stereotypes(dogen::dia::attribute a, processed_object& po) const {
+    const auto s(parse_string_attribute(a));
+
+    using utility::string::splitter;
+    const auto stereotypes(splitter::split_csv(s));
+
+    for (const auto& stereotype : stereotypes) {
+        if (stereotype == enumeration) {
+            require_yarn_type_not_set(po.yarn_object_type());
+            po.yarn_object_type(yarn_object_types::enumeration);
+        } else if (stereotype == exception) {
+            require_yarn_type_not_set(po.yarn_object_type());
+            po.yarn_object_type(yarn_object_types::exception);
+        } else if (stereotype == concept) {
+            require_yarn_type_not_set(po.yarn_object_type());
+            po.yarn_object_type(yarn_object_types::concept);
+        } else
+            po.stereotypes().push_back(stereotype);
+    }
+}
+
+void processed_object_factory::
 parse_attributes(const dogen::dia::object& o, processed_object& po) const {
     for (auto a : o.attributes()) {
         if (a.name() == dia_name)
             po.name(parse_string_attribute(a));
         else if (a.name() == dia_stereotype)
-            po.stereotype(parse_string_attribute(a));
+            parse_as_stereotypes(a, po);
         else if (a.name() == dia_comment)
             po.comment(create_processed_comment(a));
         else if (a.name() ==  dia_text)
@@ -288,7 +327,26 @@ parse_attributes(const dogen::dia::object& o, processed_object& po) const {
     }
 }
 
-processed_object processed_object_factory::make(const dogen::dia::object& o) {
+void processed_object_factory::
+setup_yarn_object_type(processed_object& po) const {
+    /*
+     * If its already setup there's nothing for us to do.
+     */
+    if (po.yarn_object_type() != yarn_object_types::invalid)
+        return;
+
+    /*
+     * If we're a UML class, map it to a yarn object. All other cases
+     * don't have a mapping.
+     */
+    if (po.dia_object_type() == dia_object_types::uml_class)
+        po.yarn_object_type(yarn_object_types::object);
+    else
+        po.yarn_object_type(yarn_object_types::not_applicable);
+}
+
+processed_object
+processed_object_factory::make(const dogen::dia::object& o) const {
     BOOST_LOG_SEV(lg, debug) << "Processing dia object " << o.id();
 
     processed_object r;
@@ -300,8 +358,19 @@ processed_object processed_object_factory::make(const dogen::dia::object& o) {
 
     parse_connections(o, r);
     parse_attributes(o, r);
+    setup_yarn_object_type(r);
 
     BOOST_LOG_SEV(lg, debug) << "Finished processing dia object";
+    return r;
+}
+
+std::list<processed_object>
+processed_object_factory::make(const dogen::dia::diagram& d) const {
+    std::list<processed_object> r;
+    for (const auto& l : d.layers()) {
+        for (const auto& o : l.objects())
+            r.push_back(make(o));
+    }
     return r;
 }
 

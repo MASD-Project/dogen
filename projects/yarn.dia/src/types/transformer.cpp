@@ -100,10 +100,10 @@ yarn::enumerator transformer::to_enumerator(const processed_attribute& a,
 }
 
 void transformer::
-update_element(const profiled_object& po, yarn::element& e) const {
+update_element(const processed_object& po, yarn::element& e) const {
     e.origin_type(origin_types::not_yet_determined);
 
-    const auto package_id(po.object().child_node_id());
+    const auto package_id(po.child_node_id());
     bool is_in_package(!package_id.empty());
     if (is_in_package) {
         /*
@@ -112,38 +112,38 @@ update_element(const profiled_object& po, yarn::element& e) const {
          */
         const_repository_selector crs(repository_);
         const auto& module(crs.module_for_id(package_id));
-        e.name(to_name(po.object().name(), module.name()));
+        e.name(to_name(po.name(), module.name()));
     } else {
         /*
          * Type is a top-level type - e.g. belongs to the
          * synthetic module for the model; do not add this
          * dependency to the name.
          */
-        e.name(to_name(po.object().name()));
+        e.name(to_name(po.name()));
     }
 
-    e.documentation(po.object().comment().documentation());
+    e.documentation(po.comment().documentation());
 }
 
-yarn::object transformer::to_object(const profiled_object& po) const {
+yarn::object transformer::to_object(const processed_object& po) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming dia object to object: "
-                             << po.object().id();
+                             << po.id();
 
     yarn::object r;
     update_element(po, r);
 
-    r.stereotypes().reserve(po.profile().unknown_stereotypes().size());
-    for (const auto us : po.profile().unknown_stereotypes())
+    r.stereotypes().reserve(po.stereotypes().size());
+    for (const auto us : po.stereotypes())
         r.stereotypes().push_back(us);
 
-    for (const auto& p : po.object().attributes())
+    for (const auto& p : po.attributes())
         r.local_attributes().push_back(to_attribute(r.name(), p));
 
     /*
      * If we have any parents, setup generalisation properties.
      */
     const_repository_selector crs(repository_);
-    const auto parent_names(crs.parent_names_for_id(po.object().id()));
+    const auto parent_names(crs.parent_names_for_id(po.id()));
     if (!parent_names.empty()) {
         /*
          * Ensure we have at most one parent as we do not support
@@ -151,9 +151,9 @@ yarn::object transformer::to_object(const profiled_object& po) const {
          */
         if (parent_names.size() > 1) {
             BOOST_LOG_SEV(lg, error) << multiple_inheritance
-                                     << po.object().id();
+                                     << po.id();
             BOOST_THROW_EXCEPTION(transformation_error(multiple_inheritance +
-                    po.object().id()));
+                    po.id()));
         }
 
         const auto parent_name(parent_names.front());
@@ -166,18 +166,18 @@ yarn::object transformer::to_object(const profiled_object& po) const {
     return r;
 }
 
-yarn::exception transformer::to_exception(const profiled_object& po) const {
+yarn::exception transformer::to_exception(const processed_object& po) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming dia object to exception: "
-                             << po.object().id();
+                             << po.id();
 
     yarn::exception e;
     update_element(po, e);
     return e;
 }
 
-yarn::enumeration transformer::to_enumeration(const profiled_object& po) const {
+yarn::enumeration transformer::to_enumeration(const processed_object& po) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming dia object to enumeration: "
-                             << po.object().id();
+                             << po.id();
 
     yarn::enumeration r;
     update_element(po, r);
@@ -201,7 +201,7 @@ yarn::enumeration transformer::to_enumeration(const profiled_object& po) const {
      * is already taken by invalid, so we skip it.
      */
     unsigned int pos(0);
-    for (const auto& attr : po.object().attributes()) {
+    for (const auto& attr : po.attributes()) {
         auto enumerator(to_enumerator(attr, ++pos));
         const auto i(enumerator_names.find(enumerator.name()));
         if (i != enumerator_names.end()) {
@@ -216,27 +216,27 @@ yarn::enumeration transformer::to_enumeration(const profiled_object& po) const {
     return r;
 }
 
-yarn::module transformer::to_module(const profiled_object& po) const {
+yarn::module transformer::to_module(const processed_object& po) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming dia object to module: "
-                             << po.object().id();
+                             << po.id();
 
     yarn::module r;
     update_element(po, r);
     return r;
 }
 
-yarn::concept transformer::to_concept(const profiled_object& po) const {
+yarn::concept transformer::to_concept(const processed_object& po) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming dia object to concept: "
-                             << po.object().id();
+                             << po.id();
 
     yarn::concept r;
     update_element(po, r);
 
-    for (const auto& attr : po.object().attributes())
+    for (const auto& attr : po.attributes())
         r.local_attributes().push_back(to_attribute(r.name(), attr));
 
     const_repository_selector crs(repository_);
-    const auto parent_names(crs.parent_names_for_id(po.object().id()));
+    const auto parent_names(crs.parent_names_for_id(po.id()));
     r.is_child(!parent_names.empty());
 
     if (parent_names.empty()) {

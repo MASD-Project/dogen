@@ -23,6 +23,7 @@
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/string.hpp>
+#include <boost/serialization/vector.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/serialization/utility.hpp>
@@ -48,7 +49,7 @@ void save(Archive& ar,
     ar << make_nvp("name", v.name_);
     ar << make_nvp("dia_object_type", v.dia_object_type_);
     ar << make_nvp("yarn_object_type", v.yarn_object_type_);
-    ar << make_nvp("stereotype", v.stereotype_);
+    ar << make_nvp("stereotypes", v.stereotypes_);
     ar << make_nvp("comment", v.comment_);
     ar << make_nvp("child_node_id", v.child_node_id_);
     ar << make_nvp("connection", v.connection_);
@@ -63,7 +64,7 @@ void load(Archive& ar,
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("dia_object_type", v.dia_object_type_);
     ar >> make_nvp("yarn_object_type", v.yarn_object_type_);
-    ar >> make_nvp("stereotype", v.stereotype_);
+    ar >> make_nvp("stereotypes", v.stereotypes_);
     ar >> make_nvp("comment", v.comment_);
     ar >> make_nvp("child_node_id", v.child_node_id_);
     ar >> make_nvp("connection", v.connection_);

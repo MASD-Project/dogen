@@ -30,6 +30,7 @@
 #include "dogen/dia/types/object_fwd.hpp"
 #include "dogen/dia/types/attribute_fwd.hpp"
 #include "dogen/dia/types/composite_fwd.hpp"
+#include "dogen/dia/types/diagram_fwd.hpp"
 #include "dogen/yarn.dia/types/dia_object_types.hpp"
 #include "dogen/yarn.dia/types/processed_object_fwd.hpp"
 #include "dogen/yarn.dia/types/processed_comment_factory.hpp"
@@ -81,6 +82,16 @@ private:
     void parse_as_dia_text(
         const dogen::dia::attribute a, processed_object& po) const;
 
+    /**
+     * @brief Throws if the yarn type has already been setup.
+     */
+    void require_yarn_type_not_set(const yarn_object_types yot) const;
+
+    /**
+     * @brief Processes the raw Dia stereotypes.
+     */
+    void parse_as_stereotypes(
+        dogen::dia::attribute a, processed_object& po) const;
 
     /**
      * @brief Parses the contents of the Dia attribute assuming it
@@ -95,11 +106,22 @@ private:
     void
     parse_attributes(const dogen::dia::object& o, processed_object& po) const;
 
+    /**
+     * @brief Defaults the yarn object type, if required.
+     */
+    void setup_yarn_object_type(processed_object& po) const;
+
 public:
     /**
      * @brief Generates a processed object.
      */
-    processed_object make(const dogen::dia::object& o);
+    processed_object make(const dogen::dia::object& o) const;
+
+    /**
+     * @brief Generates a processed object representation of the
+     * diagram.
+     */
+    std::list<processed_object> make(const dogen::dia::diagram& d) const;
 
 private:
     const processed_comment_factory processed_comment_factory_;

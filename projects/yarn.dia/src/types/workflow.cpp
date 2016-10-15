@@ -28,7 +28,7 @@
 #include "dogen/yarn.dia/types/visitor.hpp"
 #include "dogen/yarn.dia/types/reducer.hpp"
 #include "dogen/yarn.dia/types/validator.hpp"
-#include "dogen/yarn.dia/types/profiled_object_factory.hpp"
+#include "dogen/yarn.dia/types/processed_object_factory.hpp"
 #include "dogen/yarn.dia/types/workflow.hpp"
 
 namespace {
@@ -42,20 +42,20 @@ namespace dogen {
 namespace yarn {
 namespace dia {
 
-std::list<profiled_object> workflow::
-create_profiled_objects(const dogen::dia::diagram& d) const {
-    profiled_object_factory f;
+std::list<processed_object> workflow::
+create_processed_objects(const dogen::dia::diagram& d) const {
+    processed_object_factory f;
     return f.make(d);
 }
 
-std::list<profiled_object> workflow::
-reduce_profiled_objects(const std::list<profiled_object>& pos) const {
+std::list<processed_object> workflow::
+reduce_processed_objects(const std::list<processed_object>& pos) const {
     reducer rd;
     return rd.reduce(pos);
 }
 
 void workflow::
-validate_profiled_objects(const std::list<profiled_object>& pos) const {
+validate_processed_objects(const std::list<processed_object>& pos) const {
     validator vd;
     vd.validate(pos);
 }
@@ -63,7 +63,7 @@ validate_profiled_objects(const std::list<profiled_object>& pos) const {
 std::pair<graph_type,
           const std::unordered_map<std::string, std::list<std::string>>
           >
-workflow::generate_graph(const std::list<profiled_object>& pos) {
+workflow::generate_graph(const std::list<processed_object>& pos) {
     grapher g;
     g.add(pos);
     g.generate();
@@ -95,9 +95,9 @@ yarn::intermediate_model workflow::execute(const dogen::dia::diagram& d,
      * Convert the original dia diagram into a list of dia objects
      * reading for processing.
      */
-    const auto original(create_profiled_objects(d));
-    const auto reduced(reduce_profiled_objects(original));
-    validate_profiled_objects(reduced);
+    const auto original(create_processed_objects(d));
+    const auto reduced(reduce_processed_objects(original));
+    validate_processed_objects(reduced);
 
     /*
      * Create a dependency graph of the objects, and a map of children

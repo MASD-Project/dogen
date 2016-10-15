@@ -29,7 +29,7 @@
 #include <memory>
 #include "dogen/dia/types/diagram_fwd.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
-#include "dogen/yarn.dia/types/profiler.hpp"
+#include "dogen/yarn.dia/types/processed_object.hpp"
 #include "dogen/yarn.dia/types/builder.hpp"
 #include "dogen/yarn.dia/types/validator.hpp"
 #include "dogen/yarn.dia/types/grapher.hpp"
@@ -46,13 +46,14 @@ public:
     ~workflow() = default;
 
 private:
-    std::list<profiled_object>
-    create_profiled_objects(const dogen::dia::diagram& d) const;
+    std::list<processed_object>
+    create_processed_objects(const dogen::dia::diagram& d) const;
 
-    std::list<profiled_object>
-    reduce_profiled_objects(const std::list<profiled_object>& pos) const;
+    std::list<processed_object>
+    reduce_processed_objects(const std::list<processed_object>& pos) const;
 
-    void validate_profiled_objects(const std::list<profiled_object>& pos) const;
+    void validate_processed_objects(
+        const std::list<processed_object>& pos) const;
 
 private:
     /**
@@ -61,7 +62,7 @@ private:
     std::pair<graph_type,
               const std::unordered_map<std::string, std::list<std::string>>
               >
-     generate_graph(const std::list<profiled_object>& pos);
+    generate_graph(const std::list<processed_object>& pos);
 
     builder create_builder(const std::string& model_name,
         const std::string& external_modules, const bool is_target,

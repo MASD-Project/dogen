@@ -14,38 +14,38 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-15 Sat 23:48]
+#+CAPTION: Clock summary at [2016-10-16 Sun 00:51]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *51:12* |       |       | 100.0 |
+| *Total time*                                                                | *52:15* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 51:12   |       |       | 100.0 |
-| Active                                                                      |         | 51:12 |       | 100.0 |
+| Stories                                                                     | 52:15   |       |       | 100.0 |
+| Active                                                                      |         | 52:15 |       | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  0:29 |   0.9 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:19 |   0.6 |
 | COMPLETED Improve bintray support                                           |         |       |  0:26 |   0.8 |
 | COMPLETED Refactor opaque infrastructure                                    |         |       |  1:17 |   2.5 |
 | COMPLETED Remove any remnants of annotations from quilt                     |         |       |  0:05 |   0.2 |
-| COMPLETED Solve the issue of too many "configurations"                      |         |       |  4:01 |   7.8 |
+| COMPLETED Solve the issue of too many "configurations"                      |         |       |  4:01 |   7.7 |
 | COMPLETED Merge decoration configuration and annotations factories          |         |       |  0:18 |   0.6 |
 | COMPLETED Move annotation factories into expander in yarn                   |         |       |  1:11 |   2.3 |
-| COMPLETED Clean up terminology in dynamic                                   |         |       | 15:12 |  29.7 |
+| COMPLETED Clean up terminology in dynamic                                   |         |       | 15:12 |  29.1 |
 | COMPLETED Minor tidy-up of the quilt.cpp diagram                            |         |       |  0:29 |   0.9 |
-| COMPLETED Create a ownership hierarchy repository                           |         |       |  1:43 |   3.4 |
+| COMPLETED Create a ownership hierarchy repository                           |         |       |  1:43 |   3.3 |
 | COMPLETED Use vector of elements in model                                   |         |       |  0:10 |   0.3 |
-| COMPLETED Rewrite profile support                                           |         |       | 11:50 |  23.1 |
-| COMPLETED Merge annotation type and profile folders                         |         |       |  0:20 |   0.7 |
-| COMPLETED Push stereotypes processing into yarn                             |         |       |  1:51 |   3.6 |
-| COMPLETED Implement defaulting within the profiler                          |         |       |  1:13 |   2.4 |
-| COMPLETED Add binding of stereotypes with profiles                          |         |       |  1:40 |   3.3 |
+| COMPLETED Rewrite profile support                                           |         |       | 11:50 |  22.6 |
+| COMPLETED Merge annotation type and profile folders                         |         |       |  0:20 |   0.6 |
+| COMPLETED Push stereotypes processing into yarn                             |         |       |  1:51 |   3.5 |
+| COMPLETED Implement defaulting within the profiler                          |         |       |  1:13 |   2.3 |
+| COMPLETED Add binding of stereotypes with profiles                          |         |       |  1:40 |   3.2 |
 | COMPLETED Update dogen models to use profiles                               |         |       |  0:19 |   0.6 |
-| COMPLETED Finish overwriting support                                        |         |       |  2:38 |   5.1 |
-| COMPLETED Remove service stereotype                                         |         |       |  3:32 |   6.9 |
+| COMPLETED Finish overwriting support                                        |         |       |  2:38 |   5.0 |
+| COMPLETED Remove service stereotype                                         |         |       |  3:32 |   6.8 |
 | COMPLETED IOable services                                                   |         |       |  0:06 |   0.2 |
-| COMPLETED Generate skeleton for "non-generatable" files                     |         |       |  0:51 |   1.7 |
-| STARTED Fix transformer tests and hydrator tests                            |         |       |  0:11 |   0.4 |
-| STARTED Merge profiles with processed object in yarn.dia                    |         |       |  1:01 |   2.0 |
+| COMPLETED Generate skeleton for "non-generatable" files                     |         |       |  0:51 |   1.6 |
+| COMPLETED Merge profiles with processed object in yarn.dia                  |         |       |  2:04 |   4.0 |
+| STARTED Fix yarn.dia tests                                                  |         |       |  0:11 |   0.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -603,13 +603,9 @@ a blank implementation with return types where required and commented
 out parameters, to make the code compilable out of the box. This will
 be possible once we start supporting operations.
 
-*** STARTED Fix transformer tests and hydrator tests                  :story:
-    CLOCK: [2016-10-15 Sat 22:32]--[2016-10-15 Sat 22:43] =>  0:11
-
-A number of tests got disabled as part of the dynamic refactor. Fix
-them.
-
-*** STARTED Merge profiles with processed object in yarn.dia          :story:
+*** COMPLETED Merge profiles with processed object in yarn.dia        :story:
+    CLOSED: [2016-10-16 Sun 00:50]
+    CLOCK: [2016-10-15 Sat 23:47]--[2016-10-16 Sun 00:50] =>  1:03
     CLOCK: [2016-10-15 Sat 23:10]--[2016-10-15 Sat 23:47] =>  0:37
     CLOCK: [2016-10-15 Sat 22:57]--[2016-10-15 Sat 23:09] =>  0:12
     CLOCK: [2016-10-15 Sat 22:44]--[2016-10-15 Sat 22:56] =>  0:12
@@ -617,6 +613,12 @@ them.
 We have a lot of unnecessary fluff in yarn.dia with the separation
 between processed objects, profiled objects and profiles. In truth we
 just need the processed object, with all of the necessary information.
+
+*** STARTED Fix yarn.dia tests                                        :story:
+    CLOCK: [2016-10-15 Sat 22:32]--[2016-10-15 Sat 22:43] =>  0:11
+
+A number of tests got disabled as part of the dynamic refactor in
+yarn.dia. Fix them.
 
 *** Add description to profile and value templates                    :story:
 

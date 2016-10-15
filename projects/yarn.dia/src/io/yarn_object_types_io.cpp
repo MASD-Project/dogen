@@ -38,6 +38,9 @@ std::ostream& operator<<(std::ostream& s, const yarn_object_types& v) {
     case yarn_object_types::not_applicable:
         attr = "\"not_applicable\"";
         break;
+    case yarn_object_types::enumeration:
+        attr = "\"enumeration\"";
+        break;
     case yarn_object_types::exception:
         attr = "\"exception\"";
         break;

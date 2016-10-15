@@ -35,6 +35,20 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
+inline std::ostream& operator<<(std::ostream& s, const std::vector<std::string>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << tidy_up_string(*i) << "\"";
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
+namespace std {
+
 inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, std::string>& v) {
     s << "{ " << "\"__type__\": " << "\"std::pair\"" << ", ";
 
@@ -86,7 +100,7 @@ std::ostream& operator<<(std::ostream& s, const processed_object& v) {
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"dia_object_type\": " << v.dia_object_type() << ", "
       << "\"yarn_object_type\": " << v.yarn_object_type() << ", "
-      << "\"stereotype\": " << "\"" << tidy_up_string(v.stereotype()) << "\"" << ", "
+      << "\"stereotypes\": " << v.stereotypes() << ", "
       << "\"comment\": " << v.comment() << ", "
       << "\"child_node_id\": " << "\"" << tidy_up_string(v.child_node_id()) << "\"" << ", "
       << "\"connection\": " << v.connection() << ", "
