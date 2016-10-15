@@ -599,13 +599,6 @@ dogen::formatters::file assistant::make_file() const {
     r.path(formatter_properties_.file_path());
     r.overwrite(formatter_properties_.overwrite());
 
-    if (!formatter_properties_.overwrite()) {
-        BOOST_LOG_SEV(lg, debug) << "Setting overwrite to false.";
-
-        // FIXME: mainly to be compatible with legacy.
-        BOOST_LOG_SEV(lg, debug) << "Emptying out content.";
-        r.content().clear();
-    }
     return r;
 }
 

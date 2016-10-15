@@ -40,10 +40,10 @@ public:
 
 private:
     /**
-     * @brief Returns true if the file content has changed from what
-     * currently exists in the filesystem, false otherwise.
+     * @brief Returns true if the file needs to be written to the
+     * file system, false otherwise.
      */
-    bool content_changed(const file& f) const;
+    bool requires_writing(const file& f) const;
 
     /**
      * @brief Creates directories to house the file, if they do not

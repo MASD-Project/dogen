@@ -1182,16 +1182,16 @@
         <dia:point val="9,38"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="8.95,37.95;24.565,43.25"/>
+        <dia:rectangle val="8.95,37.95;23.025,41.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="9,38"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="15.515000000000001"/>
+        <dia:real val="13.975"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.2000000000000011"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#some_service#</dia:string>
@@ -1286,53 +1286,7 @@
             <dia:string>#prop_0#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::asio::io_service#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#prop_1#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#boost::asio::ip::tcp::socket#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#prop_2#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#boost::asio::ip::tcp::acceptor#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;class_a&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

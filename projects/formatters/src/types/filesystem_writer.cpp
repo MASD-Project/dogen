@@ -35,6 +35,7 @@ static logger lg(logger_factory("formatters.filesystem_writer"));
 
 const std::string using_dir_message("Using directory: ");
 const std::string created_dir_message("Created directory: ");
+const std::string empty_file_name("File name is empty.");
 
 std::string create_hacked_contents(const std::string file_name) {
     std::ostringstream ss;
@@ -54,16 +55,29 @@ namespace formatters {
 filesystem_writer::filesystem_writer(const bool force_write)
     : force_write_(force_write) {}
 
-bool filesystem_writer::content_changed(const file& f) const {
+bool filesystem_writer::requires_writing(const file& f) const {
     if (force_write_)
         return true;
 
+    /*
+     * If the file does not yet exist, we must always write it.
+     */
     if (!boost::filesystem::exists(f.path()))
         return true;
 
+    /*
+     * If the file exists and the overwrite flag is set to false then
+     * we should not write.
+     */
+    if (!f.overwrite())
+        return false;
+
+    /*
+     * Perform a binary diff of the file content; if it has changed,
+     * we need to write.
+     */
     using dogen::utility::filesystem::read_file_content;
     const std::string existing_content(read_file_content(f.path()));
-
     if (existing_content == f.content()) {
         BOOST_LOG_SEV(lg, trace) << "File contents have not changed, "
                                  << "and force write is false so not writing.";
@@ -123,14 +137,13 @@ void filesystem_writer::write(const formatters::file& f) const {
     }
 
     using dogen::utility::filesystem::write_file_content;
-    if (content_changed(f)) {
-        BOOST_LOG_SEV(lg, debug) << "File contents have changed.";
+    if (requires_writing(f)) {
+        BOOST_LOG_SEV(lg, debug) << "File requires writing. Content: ";
         write_file_content(f.path(), f.content());
         BOOST_LOG_SEV(lg, trace) << "Wrote file: " << gs;
-    } else {
-        BOOST_LOG_SEV(lg, debug) << "File contents have not changed, "
-                                 << "and force write is false so not writing.";
-    }
+    } else
+        BOOST_LOG_SEV(lg, debug) << "File does not require writing.";
+
     BOOST_LOG_SEV(lg, debug) << "Processed file: " << gs;
 }
 
