@@ -931,7 +931,7 @@ supported languages.#</dia:string>
         <dia:string>#merger#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -1371,7 +1371,7 @@ combines them into an intermediate merged model.#</dia:string>
         <dia:string>#injection_expander#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -1547,7 +1547,7 @@ combines them into an intermediate merged model.#</dia:string>
         <dia:string>#post_merge_workflow#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2742,7 +2742,7 @@ all types in the merged intermediate model.#</dia:string>
         <dia:string>#resolver#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -5586,7 +5586,7 @@ not have a need for it.#</dia:string>
         <dia:string>#association_expander#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -5903,7 +5903,7 @@ the object or concept is involved in.#</dia:string>
         <dia:string>#concept_expander#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -6220,7 +6220,7 @@ expansion.#</dia:string>
         <dia:string>#attributes_expander#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -7123,7 +7123,7 @@ etc.#</dia:string>
         <dia:string>#persister#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -7480,7 +7480,7 @@ etc.#</dia:string>
         <dia:string>#name_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -8521,7 +8521,7 @@ etc.#</dia:string>
         <dia:string>#name_tree_parser#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -8972,7 +8972,7 @@ into trees of names.#</dia:string>
         <dia:string>#name_tree_builder#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -10041,7 +10041,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:string>#generalization_expander#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -10271,7 +10271,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:string>#intermediate_model_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -10464,7 +10464,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:string>#frontend_registrar#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -10953,7 +10953,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:string>#frontend_interface#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -12216,7 +12216,7 @@ are not modules, such as attributes, inner classes, etc.#</dia:string>
         <dia:string>#pre_merge_workflow#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -12409,7 +12409,7 @@ are not modules, such as attributes, inner classes, etc.#</dia:string>
         <dia:string>#modules_expander#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -12568,7 +12568,7 @@ are not modules, such as attributes, inner classes, etc.#</dia:string>
         <dia:string>#parsing_expander#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -13199,7 +13199,7 @@ meta-types (concepts) and non-types (modules and backend specific entities).#</d
         <dia:string>#workflow#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -14286,7 +14286,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:string>#transformer#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -14839,7 +14839,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:string>#elements_traversal#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -15259,7 +15259,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:string>#name_builder#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -17474,7 +17474,7 @@ but the module does not yet exist.#</dia:string>
         <dia:string>#pretty_printer#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -18690,7 +18690,7 @@ space.#</dia:string>
         <dia:string>#string_processor#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -19305,7 +19305,7 @@ space.#</dia:string>
         <dia:string>#traits#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -19566,7 +19566,7 @@ space.#</dia:string>
         <dia:string>#type_parameters_expander#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -19796,7 +19796,7 @@ space.#</dia:string>
         <dia:string>#descriptor_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -20680,7 +20680,7 @@ space.#</dia:string>
         <dia:string>#indexer#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -21413,7 +21413,7 @@ space.#</dia:string>
         <dia:string>#stereotypes_expander#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -21643,7 +21643,7 @@ space.#</dia:string>
         <dia:string>#containment_expander#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -21873,7 +21873,7 @@ space.#</dia:string>
         <dia:string>#injector_interface#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -22133,7 +22133,7 @@ space.#</dia:string>
         <dia:string>#injector_registrar#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -22464,7 +22464,7 @@ space.#</dia:string>
         <dia:string>#name_flattener#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -22694,7 +22694,7 @@ space.#</dia:string>
         <dia:string>#origin_expander#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -23099,7 +23099,7 @@ space.#</dia:string>
         <dia:string>#annotations_expander#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>

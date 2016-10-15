@@ -452,7 +452,7 @@ separator is @e ;.#</dia:string>
         <dia:string>#licence_text_hydrator#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -659,7 +659,7 @@ separator is @e ;.#</dia:string>
         <dia:string>#code_generation_marker_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -852,7 +852,7 @@ separator is @e ;.#</dia:string>
         <dia:string>#modeline_group_hydrator#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2343,7 +2343,7 @@ For example, one may choose to have a set of modelines for @e emacs , or for
         <dia:string>#hydration_workflow#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2685,7 +2685,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:string>#modeline_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -3042,7 +3042,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:string>#comment_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -4177,7 +4177,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:string>#indent_filter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -4574,7 +4574,7 @@ then make use of it.
         <dia:string>#decoration_properties_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -4948,7 +4948,7 @@ then make use of it.
         <dia:string>#traits#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -5852,7 +5852,7 @@ then make use of it.
         <dia:string>#utility_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -6657,7 +6657,7 @@ then make use of it.
         <dia:string>#boilerplate_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -6967,7 +6967,7 @@ then make use of it.
         <dia:string>#include_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -7144,7 +7144,7 @@ then make use of it.
         <dia:string>#header_guard_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -7530,7 +7530,7 @@ then make use of it.
         <dia:string>#filesystem_writer#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -7809,7 +7809,7 @@ then make use of it.
         <dia:string>#stream_writer#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -7992,7 +7992,7 @@ then make use of it.
         <dia:string>#file_writer_interface#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -8586,7 +8586,7 @@ then make use of it.
         <dia:string>#scoped_boilerplate_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -8920,7 +8920,7 @@ then make use of it.
         <dia:string>#namespace_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -9162,7 +9162,7 @@ then make use of it.
         <dia:string>#scoped_namespace_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -9560,7 +9560,7 @@ then make use of it.
         <dia:string>#sequence_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -10317,7 +10317,7 @@ than one element.#</dia:string>
         <dia:string>#decoration_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>

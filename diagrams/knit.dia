@@ -83,7 +83,7 @@
         <dia:string>#housekeeper#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -433,7 +433,7 @@
         <dia:string>#workflow#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -862,7 +862,7 @@ languages.
         <dia:string>#initializer#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>

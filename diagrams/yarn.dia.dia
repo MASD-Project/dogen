@@ -194,7 +194,7 @@ into its yarn representation.#</dia:string>
         <dia:string>#grapher#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -781,7 +781,7 @@ into its yarn representation.#</dia:string>
         <dia:string>#visitor#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -981,7 +981,7 @@ into its yarn representation.#</dia:string>
         <dia:string>#transformer#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -1576,7 +1576,7 @@ into its yarn representation.#</dia:string>
         <dia:string>#comment_processor#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -1895,7 +1895,7 @@ that make up dogen instructions.#</dia:string>
         <dia:string>#workflow#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2215,7 +2215,7 @@ that make up dogen instructions.#</dia:string>
         <dia:string>#object_processor#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -3648,7 +3648,7 @@ On the case of a UML note, represents the text of the note.#</dia:string>
         <dia:string>#profiler#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -3807,7 +3807,7 @@ On the case of a UML note, represents the text of the note.#</dia:string>
         <dia:string>#validator#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -4386,7 +4386,7 @@ and child relationships between objects.#</dia:string>
         <dia:string>#traits#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -4817,7 +4817,7 @@ manageable format.#</dia:string>
         <dia:string>#frontend#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -4927,7 +4927,7 @@ manageable format.#</dia:string>
         <dia:string>#initializer#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -5068,7 +5068,7 @@ manageable format.#</dia:string>
         <dia:string>#builder#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -5557,7 +5557,7 @@ manageable format.#</dia:string>
         <dia:string>#profiled_object_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -6654,7 +6654,7 @@ manageable format.#</dia:string>
         <dia:string>#reducer#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -7523,7 +7523,7 @@ manageable format.#</dia:string>
         <dia:string>#repository_selector#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#service#</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
