@@ -301,20 +301,6 @@ obtain_local_configurations(const local_type_group_type& ltg,
     return r;
 }
 
-bool enablement_expander::has_user_defined_service(
-    const std::list<boost::shared_ptr<yarn::element>>& element_segments) const {
-
-    for (const auto& segment : element_segments) {
-        auto object_ptr(dynamic_cast<const yarn::object*>(segment.get()));
-        if (object_ptr == nullptr)
-            continue;
-
-        const auto uds(yarn::object_types::user_defined_service);
-        return object_ptr->object_type() == uds;
-    }
-    return false;
-}
-
 void enablement_expander::compute_enablement(
     const global_enablement_configurations_type& gcs,
     const local_enablement_configurations_type& lcs, formattable& fbl) const {
@@ -391,18 +377,6 @@ void enablement_expander::compute_enablement(
          */
         if (!gc.model_enabled() || !gc.facet_enabled()) {
             fmt_props.enabled(false);
-            continue;
-        }
-
-        /*:
-         * FIXME: We only want to generate the types facet for
-         * services at present. This is achieved with the below hack
-         * for now.
-         */
-        if (has_user_defined_service(fbl.all_segments())) {
-            const auto types_prefix("quilt.cpp.types.");
-            const auto is_types(boost::starts_with(fmtn, types_prefix));
-            fmt_props.enabled(is_types);
             continue;
         }
 

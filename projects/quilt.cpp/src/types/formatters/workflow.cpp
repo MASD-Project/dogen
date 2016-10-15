@@ -94,30 +94,7 @@ workflow::format(const formattables::model& fm, const yarn::element& e,
         const auto& hlp_fmt(fc.helper_formatters());
         const auto fct_propss(fm.facet_properties());
         context ctx(ep, fm, hlp_fmt);
-        auto file(fmt.format(ctx, e));
-
-        // FIXME: hack whilst implementing overwrite properly: if set
-        // to true do the legacy checks. If set to false, honour the
-        // flag. This is done so we can test with both new world and
-        // legacy (new world will disable).
-        if (fmt_props.overwrite()) {
-            const auto pg(yarn::generation_types::partial_generation);
-            file.overwrite(e.generation_type() != pg);
-
-            // FIXME: hack to handle services
-            if (e.generation_type() == pg) {
-                BOOST_LOG_SEV(lg, debug) << "Emptying out content.";
-                file.content().clear();
-            }
-        } else {
-            BOOST_LOG_SEV(lg, debug) << "Setting overwrite to false.";
-            file.overwrite(fmt_props.overwrite());
-
-            // FIXME: mainly to be compatible with legacy.
-            BOOST_LOG_SEV(lg, debug) << "Emptying out content.";
-            file.content().clear();
-        }
-
+        const auto file(fmt.format(ctx, e));
         r.push_front(file);
         BOOST_LOG_SEV(lg, debug) << "Finished formatting. id: " << id
                                  << " File path: " << file.path();

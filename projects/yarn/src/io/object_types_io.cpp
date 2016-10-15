@@ -34,9 +34,6 @@ std::ostream& operator<<(std::ostream& s, const object_types& v) {
     case object_types::invalid:
         attr = "\"invalid\"";
         break;
-    case object_types::user_defined_service:
-        attr = "\"user_defined_service\"";
-        break;
     case object_types::user_defined_value_object:
         attr = "\"user_defined_value_object\"";
         break;

@@ -55,13 +55,10 @@ transformer::transformer(const repository& rp) : repository_(rp) {
     BOOST_LOG_SEV(lg, debug) << "Initial repository: " << repository_;
 }
 
-yarn::generation_types transformer::generation_type(const profile& p) const {
+yarn::generation_types transformer::generation_type() const {
     using yarn::generation_types;
     if (repository_.model().origin_type() != yarn::origin_types::target)
         return generation_types::no_generation;
-
-    if (p.is_non_generatable() || p.is_service())
-        return generation_types::partial_generation;
 
     return generation_types::full_generation;
 }
@@ -113,8 +110,7 @@ yarn::enumerator transformer::to_enumerator(const processed_attribute& a,
 
 void transformer::
 update_element(const profiled_object& po, yarn::element& e) const {
-
-    e.generation_type(generation_type(po.profile()));
+    e.generation_type(generation_type());
     e.origin_type(origin_types::not_yet_determined);
 
     const auto package_id(po.object().child_node_id());

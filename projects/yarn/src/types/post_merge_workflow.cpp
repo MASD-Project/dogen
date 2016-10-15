@@ -45,9 +45,7 @@ namespace yarn {
 
 bool post_merge_workflow::is_generatable(const element& e) const {
     const auto gt(e.generation_type());
-    return
-        gt == generation_types::full_generation ||
-        gt == generation_types::partial_generation;
+    return gt == generation_types::full_generation;
 }
 
 bool post_merge_workflow::

@@ -34,8 +34,7 @@ namespace yarn {
 enum class generation_types : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
     full_generation = 1, ///< Type will be fully generated.
-    partial_generation = 2, ///< Empty files will be generated for the type, if they don't exist already.
-    no_generation = 3 ///< Type will be totally ignored by the code generator.
+    no_generation = 2 ///< Type will be totally ignored by the code generator.
 };
 
 } }

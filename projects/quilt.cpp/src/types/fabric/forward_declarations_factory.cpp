@@ -45,17 +45,7 @@ private:
         r->name(e.name());
         r->origin_type(e.origin_type());
         r->annotation(e.annotation());
-
-        /*
-         * Services come in as partial generation, but this doesn't
-         * make a lot of sense for forward declarations. Upgrade it to
-         * full generation.
-         */
-        const auto gt(e.generation_type());
-        if (gt == yarn::generation_types::partial_generation)
-            r->generation_type(yarn::generation_types::full_generation);
-        else
-            r->generation_type(gt);
+        r->generation_type(e.generation_type());
         r->is_element_extension(true);
         return r;
     }

@@ -37,9 +37,6 @@ std::ostream& operator<<(std::ostream& s, const generation_types& v) {
     case generation_types::full_generation:
         attr = "\"full_generation\"";
         break;
-    case generation_types::partial_generation:
-        attr = "\"partial_generation\"";
-        break;
     case generation_types::no_generation:
         attr = "\"no_generation\"";
         break;

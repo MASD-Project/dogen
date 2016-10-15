@@ -215,9 +215,7 @@ void builder::add(const profiled_object& po) {
         add_element(itn, im.exceptions(), e, id);
         update_scribble_group(e.name(), po);
     } else {
-        const auto ot(p.is_service() ?
-            yarn::object_types::user_defined_service :
-            yarn::object_types::user_defined_value_object);
+        const auto ot(yarn::object_types::user_defined_value_object);
         const auto o(t.to_object(po, ot));
         add_element(itn, im.objects(), o, id);
         update_scribble_group(o.name(), po);

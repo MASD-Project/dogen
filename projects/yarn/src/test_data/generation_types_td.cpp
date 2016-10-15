@@ -26,7 +26,7 @@ namespace yarn {
 generation_types_generator::generation_types_generator() : position_(0) { }
 void generation_types_generator::
 populate(const unsigned int position, result_type& v) {
-    v = static_cast<generation_types>(position % 4);
+    v = static_cast<generation_types>(position % 3);
 }
 
 generation_types_generator::result_type

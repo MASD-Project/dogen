@@ -736,7 +736,7 @@ supported languages.#</dia:string>
         <dia:point val="-155,-15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-155.05,-15.05;-146.615,-9.75"/>
+        <dia:rectangle val="-155.05,-15.05;-146.615,-10.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-155,-15"/>
@@ -745,7 +745,7 @@ supported languages.#</dia:string>
         <dia:real val="8.3349999999999991"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.2000000000000011"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#generation_types#</dia:string>
@@ -847,29 +847,6 @@ supported languages.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Type will be fully generated.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#partial_generation#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Empty files will be generated for the type, if they don't exist already.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1833,7 +1810,7 @@ combines them into an intermediate merged model.#</dia:string>
         <dia:point val="-219,-65"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-219.05,-65.05;-179.55,-35.25"/>
+        <dia:rectangle val="-219.05,-65.05;-191.1,-38.45"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1842,10 +1819,10 @@ combines them into an intermediate merged model.#</dia:string>
         <dia:point val="-219,-65"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="39.399999999999999"/>
+        <dia:real val="27.850000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="29.700000000000003"/>
+        <dia:real val="26.500000000000004"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000149011612"/>
@@ -2132,7 +2109,7 @@ and to build it.
         <dia:point val="-143.205,-1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-150.883,-9.85;-142.455,-0.2"/>
+        <dia:rectangle val="-150.883,-10.65;-142.455,-0.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2141,7 +2118,7 @@ and to build it.
         <dia:point val="-143.205,-1"/>
         <dia:point val="-143.205,-6"/>
         <dia:point val="-150.833,-6"/>
-        <dia:point val="-150.833,-9.8"/>
+        <dia:point val="-150.833,-10.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -6435,7 +6412,7 @@ expansion.#</dia:string>
         <dia:point val="-34,90"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-34.05,89.95;-23.44,96.85"/>
+        <dia:rectangle val="-34.05,89.95;-23.44,96.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-34,90"/>
@@ -6444,7 +6421,7 @@ expansion.#</dia:string>
         <dia:real val="10.51"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.8000000000000007"/>
+        <dia:real val="6.0000000000000009"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#object_types#</dia:string>
@@ -6537,29 +6514,6 @@ etc.#</dia:string>
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
       <dia:attribute name="attributes">
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#user_defined_service#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#The service has been defined by the user.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
             <dia:string>#user_defined_value_object#</dia:string>

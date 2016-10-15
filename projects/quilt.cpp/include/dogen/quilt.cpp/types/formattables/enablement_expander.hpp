@@ -106,10 +106,6 @@ private:
         const annotations::annotation& o) const;
 
 private:
-    bool has_user_defined_service(
-        const std::list<boost::shared_ptr<yarn::element>>&
-        element_segments) const;
-
     void compute_enablement(
         const global_enablement_configurations_type& gcs,
         const local_enablement_configurations_type& lcs,
