@@ -58,22 +58,14 @@ public:
 
 private:
     /**
-     * @brief Returns true if the Yarn flags with type information
-     * describe a type which is a descendant of @ref object.
+     * @brief Returns true if the yarn flags with type information
+     * describe a type which is modeled by a yarn object.
      *
      * @pre flags must have been validated for consistency.
      */
-    bool is_object(const profile& p) const;
+    bool is_yarn_object(const profile& p) const;
 
 private:
-    /**
-     * @brief Returns the number of flags that are options on Yarn
-     * objects.
-     *
-     * By @e object we mean any descendent of @ref object.
-     */
-    unsigned int count_yarn_object_flags(const profile& p) const;
-
     /**
      * @brief Returns the number of flags that convey type information
      * on Yarn modeling elements.

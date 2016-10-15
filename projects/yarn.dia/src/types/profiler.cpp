@@ -33,8 +33,6 @@ static logger lg(logger_factory("yarn.dia.profiler"));
 const std::string concept("concept");
 const std::string enumeration("enumeration");
 const std::string exception("exception");
-const std::string value_object("value object");
-const std::string service("service");
 const std::string nongeneratable("nongeneratable");
 
 }
@@ -73,12 +71,6 @@ process_stereotype(profile& o, const std::string& s) const {
             o.is_exception(true);
         else if (stereotype == concept)
             o.is_concept(true);
-        else if (stereotype == value_object)
-            o.is_value_object(true);
-        else if (stereotype == service)
-            o.is_service(true);
-        else if (stereotype == nongeneratable)
-            o.is_non_generatable(true);
         else
             o.unknown_stereotypes().push_back(stereotype);
     }
@@ -86,9 +78,10 @@ process_stereotype(profile& o, const std::string& s) const {
 
 void profiler::post_process(profile& p) const {
     bool nothing_set(!p.is_enumeration() && !p.is_exception() &&
-        !p.is_value_object() && !p.is_service() && !p.is_concept());
+        !p.is_concept());
+
     if (p.is_uml_class() && nothing_set)
-        p.is_value_object(true);
+        p.is_object(true);
 }
 
 profile profiler::generate(const processed_object& o) {

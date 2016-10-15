@@ -78,10 +78,8 @@ public:
         const bool is_uml_realization,
         const bool is_enumeration,
         const bool is_exception,
+        const bool is_object,
         const bool is_concept,
-        const bool is_value_object,
-        const bool is_service,
-        const bool is_non_generatable,
         const std::list<std::string>& unknown_stereotypes);
 
 private:
@@ -164,36 +162,15 @@ public:
     void is_exception(const bool v);
     /**@}*/
 
+    bool is_object() const;
+    void is_object(const bool v);
+
     /**
      * @brief If true, the underlying object represents a concept.
      */
     /**@{*/
     bool is_concept() const;
     void is_concept(const bool v);
-    /**@}*/
-
-    /**
-     * @brief If true, the underlying object is a value object.
-     */
-    /**@{*/
-    bool is_value_object() const;
-    void is_value_object(const bool v);
-    /**@}*/
-
-    /**
-     * @brief If true, the underlying object is a service.
-     */
-    /**@{*/
-    bool is_service() const;
-    void is_service(const bool v);
-    /**@}*/
-
-    /**
-     * @brief If true, the underlying object is non-generatable.
-     */
-    /**@{*/
-    bool is_non_generatable() const;
-    void is_non_generatable(const bool v);
     /**@}*/
 
     /**
@@ -226,10 +203,8 @@ private:
     bool is_uml_realization_;
     bool is_enumeration_;
     bool is_exception_;
+    bool is_object_;
     bool is_concept_;
-    bool is_value_object_;
-    bool is_service_;
-    bool is_non_generatable_;
     std::list<std::string> unknown_stereotypes_;
 };
 

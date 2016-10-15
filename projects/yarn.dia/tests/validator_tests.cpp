@@ -149,7 +149,7 @@ BOOST_AUTO_TEST_CASE(setting_stereotypes_for_non_uml_classes_throws) {
     dogen::yarn::dia::profile p2;
     p2.is_uml_generalization(true);
     p2.is_exception(true);
-    p2.is_service(true);
+    p2.is_object(true);
 
     BOOST_LOG_SEV(lg, debug) << "input p2: " << p2;
     BOOST_CHECK_EXCEPTION(v.validate(p2), validation_error, cc);
@@ -178,7 +178,7 @@ BOOST_AUTO_TEST_CASE(setting_more_than_one_yarn_type_throws) {
     dogen::yarn::dia::profile p2;
     p2.is_uml_class(true);
     p2.is_enumeration(true);
-    p2.is_service(true);
+    p2.is_object(true);
 
     BOOST_LOG_SEV(lg, debug) << "input p2: " << p2;
     BOOST_CHECK_EXCEPTION(v.validate(p2), validation_error, cc);
@@ -197,28 +197,7 @@ BOOST_AUTO_TEST_CASE(setting_one_yarn_type_validates) {
 
     dogen::yarn::dia::profile p2;
     p2.is_uml_class(true);
-    p2.is_service(true);
-    v.validate(p2);
-    BOOST_TEST_CHECKPOINT("p2 is valid.");
-}
-
-BOOST_AUTO_TEST_CASE(setting_yarn_object_flags_on_objects_validates) {
-    SETUP_TEST_LOG_SOURCE("setting_yarn_object_flags_on_objects_validates");
-
-    dogen::yarn::dia::validator v;
-    dogen::yarn::dia::profile p1;
-    p1.is_uml_class(true);
-    p1.is_service(true);
-    p1.is_non_generatable(true);
-    BOOST_LOG_SEV(lg, debug) << "input p1: " << p1;
-    v.validate(p1);
-    BOOST_TEST_CHECKPOINT("p1 is valid.");
-
-    dogen::yarn::dia::profile p2;
-    p2.is_uml_class(true);
-    p2.is_value_object(true);
-    p2.is_non_generatable(true);
-    BOOST_LOG_SEV(lg, debug) << "input p2: " << p2;
+    p2.is_object(true);
     v.validate(p2);
     BOOST_TEST_CHECKPOINT("p2 is valid.");
 }

@@ -34,10 +34,8 @@ profile::profile()
       is_uml_realization_(static_cast<bool>(0)),
       is_enumeration_(static_cast<bool>(0)),
       is_exception_(static_cast<bool>(0)),
-      is_concept_(static_cast<bool>(0)),
-      is_value_object_(static_cast<bool>(0)),
-      is_service_(static_cast<bool>(0)),
-      is_non_generatable_(static_cast<bool>(0)) { }
+      is_object_(static_cast<bool>(0)),
+      is_concept_(static_cast<bool>(0)) { }
 
 profile::profile(
     const bool is_uml_large_package,
@@ -49,10 +47,8 @@ profile::profile(
     const bool is_uml_realization,
     const bool is_enumeration,
     const bool is_exception,
+    const bool is_object,
     const bool is_concept,
-    const bool is_value_object,
-    const bool is_service,
-    const bool is_non_generatable,
     const std::list<std::string>& unknown_stereotypes)
     : is_uml_large_package_(is_uml_large_package),
       is_uml_class_(is_uml_class),
@@ -63,10 +59,8 @@ profile::profile(
       is_uml_realization_(is_uml_realization),
       is_enumeration_(is_enumeration),
       is_exception_(is_exception),
+      is_object_(is_object),
       is_concept_(is_concept),
-      is_value_object_(is_value_object),
-      is_service_(is_service),
-      is_non_generatable_(is_non_generatable),
       unknown_stereotypes_(unknown_stereotypes) { }
 
 void profile::swap(profile& other) noexcept {
@@ -80,10 +74,8 @@ void profile::swap(profile& other) noexcept {
     swap(is_uml_realization_, other.is_uml_realization_);
     swap(is_enumeration_, other.is_enumeration_);
     swap(is_exception_, other.is_exception_);
+    swap(is_object_, other.is_object_);
     swap(is_concept_, other.is_concept_);
-    swap(is_value_object_, other.is_value_object_);
-    swap(is_service_, other.is_service_);
-    swap(is_non_generatable_, other.is_non_generatable_);
     swap(unknown_stereotypes_, other.unknown_stereotypes_);
 }
 
@@ -97,10 +89,8 @@ bool profile::operator==(const profile& rhs) const {
         is_uml_realization_ == rhs.is_uml_realization_ &&
         is_enumeration_ == rhs.is_enumeration_ &&
         is_exception_ == rhs.is_exception_ &&
+        is_object_ == rhs.is_object_ &&
         is_concept_ == rhs.is_concept_ &&
-        is_value_object_ == rhs.is_value_object_ &&
-        is_service_ == rhs.is_service_ &&
-        is_non_generatable_ == rhs.is_non_generatable_ &&
         unknown_stereotypes_ == rhs.unknown_stereotypes_;
 }
 
@@ -182,36 +172,20 @@ void profile::is_exception(const bool v) {
     is_exception_ = v;
 }
 
+bool profile::is_object() const {
+    return is_object_;
+}
+
+void profile::is_object(const bool v) {
+    is_object_ = v;
+}
+
 bool profile::is_concept() const {
     return is_concept_;
 }
 
 void profile::is_concept(const bool v) {
     is_concept_ = v;
-}
-
-bool profile::is_value_object() const {
-    return is_value_object_;
-}
-
-void profile::is_value_object(const bool v) {
-    is_value_object_ = v;
-}
-
-bool profile::is_service() const {
-    return is_service_;
-}
-
-void profile::is_service(const bool v) {
-    is_service_ = v;
-}
-
-bool profile::is_non_generatable() const {
-    return is_non_generatable_;
-}
-
-void profile::is_non_generatable(const bool v) {
-    is_non_generatable_ = v;
 }
 
 const std::list<std::string>& profile::unknown_stereotypes() const {

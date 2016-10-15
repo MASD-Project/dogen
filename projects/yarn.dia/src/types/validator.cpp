@@ -51,15 +51,8 @@ namespace dogen {
 namespace yarn {
 namespace dia {
 
-bool validator::is_object(const profile& p) const {
-    return
-        p.is_value_object() || p.is_exception() || p.is_service();
-}
-
-unsigned int validator::count_yarn_object_flags(const profile& p) const {
-    unsigned int r(0);
-    if (p.is_non_generatable()) ++r;
-    return r;
+bool validator::is_yarn_object(const profile& p) const {
+    return p.is_object() || p.is_exception();
 }
 
 unsigned int validator::count_yarn_types(const profile& p) const {
@@ -67,8 +60,7 @@ unsigned int validator::count_yarn_types(const profile& p) const {
 
     if (p.is_enumeration()) ++r;
     if (p.is_exception()) ++r;
-    if (p.is_value_object()) ++r;
-    if (p.is_service()) ++r;
+    if (p.is_object()) ++r;
     if (p.is_concept()) ++r;
 
     return r;
@@ -90,9 +82,7 @@ unsigned int validator::count_uml_types(const profile& p) const {
 
 void validator::validate_yarn(const profile& p) const {
     const auto types(count_yarn_types(p));
-    const auto object_flags(count_yarn_object_flags(p));
-    const bool has_yarn_flags(types != 0 || object_flags != 0 ||
-        !p.unknown_stereotypes().empty());
+    const bool has_yarn_flags(types != 0 || !p.unknown_stereotypes().empty());
 
     if (!has_yarn_flags)
         return; // nothing to validate.
@@ -114,16 +104,8 @@ void validator::validate_yarn(const profile& p) const {
         BOOST_THROW_EXCEPTION(validation_error(too_many_yarn_types));
     }
 
-    if (is_object(p))
+    if (is_yarn_object(p))
         return; // nothing else to validate for yarn objects.
-
-    /*
-     * Non-yarn objects are not allowed to have object flags.
-     */
-    if (object_flags > 0) {
-        BOOST_LOG_SEV(lg, error) << object_options_on_non_object;
-        BOOST_THROW_EXCEPTION(validation_error(object_options_on_non_object));
-    }
 
     /*
      * Non-yarn objects are not allowed to have concepts.

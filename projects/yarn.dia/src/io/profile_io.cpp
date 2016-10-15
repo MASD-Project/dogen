@@ -66,10 +66,8 @@ std::ostream& operator<<(std::ostream& s, const profile& v) {
       << "\"is_uml_realization\": " << v.is_uml_realization() << ", "
       << "\"is_enumeration\": " << v.is_enumeration() << ", "
       << "\"is_exception\": " << v.is_exception() << ", "
+      << "\"is_object\": " << v.is_object() << ", "
       << "\"is_concept\": " << v.is_concept() << ", "
-      << "\"is_value_object\": " << v.is_value_object() << ", "
-      << "\"is_service\": " << v.is_service() << ", "
-      << "\"is_non_generatable\": " << v.is_non_generatable() << ", "
       << "\"unknown_stereotypes\": " << v.unknown_stereotypes()
       << " }";
     return(s);
