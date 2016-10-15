@@ -42,7 +42,7 @@ BOOST_AUTO_TEST_SUITE(hashing_tests)
 BOOST_AUTO_TEST_CASE(validate_hashing) {
     SETUP_TEST_LOG("validate_hashing");
 
-    test_hashing<generation_types_generator>();
+    test_hashing<origin_types_generator>();
     // FIXME: bug in composition?
     // test_hashing<name_tree_generator>();
     // test_hashing<node_generator>();

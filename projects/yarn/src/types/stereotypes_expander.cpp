@@ -65,7 +65,7 @@ bucket_leaves_by_location(const std::list<name>& leaves) const {
 }
 
 visitor stereotypes_expander::create_visitor(const object& o, const location& l,
-    const generation_types gt, const std::list<name>& leaves) const {
+    const origin_types ot, const std::list<name>& leaves) const {
     name_builder b;
     b.simple_name(o.name().simple() + "_" + visitor_name);
     b.location(l);
@@ -75,8 +75,7 @@ visitor stereotypes_expander::create_visitor(const object& o, const location& l,
 
     visitor r;
     r.name(n);
-    r.generation_type(gt);
-    r.origin_type(o.origin_type());
+    r.origin_type(ot);
     r.documentation(visitor_doc + o.name().simple());
 
     if (leaves.empty()) {
@@ -185,11 +184,10 @@ expand_visitable(object& o, intermediate_model& im) const {
     const auto& loc(o.name().location());
 
     /*
-     * Preserve the generation type from the root object and
-     * generate the visitor base.
+     * Preserve the origin type from the root object and generate the
+     * visitor base.
      */
-    auto gt(o.generation_type());
-    const auto bv(create_visitor(o, loc, gt, bvl));
+    const auto bv(create_visitor(o, loc, o.origin_type(), bvl));
     const auto bvn(bv.name());
     o.is_visitation_root(true);
     o.base_visitor(bvn);
@@ -216,24 +214,26 @@ expand_visitable(object& o, intermediate_model& im) const {
      */
     for (const auto& pair : bucketed_leaves) {
         /*
-         * We are now (possibly) in different models other than
-         * the model of the root parent. So, if we are generating
-         * a visitor for the target model, we must ensure we set
-         * the generation type correctly or else it will not come
-         * out.
+         * We are now, possibly, in models other than the model of the
+         * root parent. So, if we are generating a visitor for the
+         * target model, we must ensure we set the origin type
+         * correctly or else it will not come out. Note though that we
+         * are setting the origin type to the visitable object, unless
+         * the leaf belongs to the target model; whilst not strictly
+         * correct, this approximation works in practice because we
+         * can only be either a reference model or the target model as
+         * proxy models do not contribute visitable types.
          */
         const auto& dv_location(pair.first);
-        gt = generation_types::no_generation;
         const auto immm(im.name().location().model_modules());
         const bool in_target_model(immm == dv_location.model_modules());
-        if (in_target_model)
-            gt = generation_types::full_generation;
+        const auto ot(in_target_model ? origin_types::target : o.origin_type());
 
         /*
-         * Generate the visitor derived and update its leaves.
+         * Generate the derived visitor and update its leaves.
          */
         const auto& bl(pair.second);
-        auto dv(create_visitor(o, dv_location, gt, bl));
+        auto dv(create_visitor(o, dv_location, ot, bl));
         const auto dvn(dv.name());
         dv.parent(bvn);
         update_visited_leaves(bl, visitor_details(bvn, dvn), im);

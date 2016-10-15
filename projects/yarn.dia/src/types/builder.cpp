@@ -85,9 +85,6 @@ yarn::module builder::create_module_for_model(const yarn::name& n,
     yarn::module r;
     r.name(n);
     r.origin_type(ot);
-    r.generation_type(ot == yarn::origin_types::target ?
-        yarn::generation_types::full_generation :
-        yarn::generation_types::no_generation);
 
     return r;
 }

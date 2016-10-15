@@ -55,14 +55,14 @@ public:
         const std::string& documentation,
         const dogen::annotations::annotation& annotation,
         const dogen::yarn::name& name,
-        const dogen::yarn::generation_types generation_type,
         const dogen::yarn::origin_types origin_type,
         const boost::optional<dogen::yarn::name>& contained_by,
         const bool in_global_module,
         const std::vector<std::string>& stereotypes,
         const bool is_element_extension,
         const std::list<dogen::yarn::name>& members,
-        const bool is_root);
+        const bool is_root,
+        const bool is_global_module);
 
 private:
     template<typename Archive>
@@ -92,8 +92,21 @@ public:
     void members(const std::list<dogen::yarn::name>&& v);
     /**@}*/
 
+    /**
+     * @brief If true, this module is thee root module of the model.
+     */
+    /**@{*/
     bool is_root() const;
     void is_root(const bool v);
+    /**@}*/
+
+    /**
+     * @brief If true, this module is the pseudo module that models the global namespace.
+     */
+    /**@{*/
+    bool is_global_module() const;
+    void is_global_module(const bool v);
+    /**@}*/
 
 public:
     bool operator==(const module& rhs) const;
@@ -111,6 +124,7 @@ public:
 private:
     std::list<dogen::yarn::name> members_;
     bool is_root_;
+    bool is_global_module_;
 };
 
 } }

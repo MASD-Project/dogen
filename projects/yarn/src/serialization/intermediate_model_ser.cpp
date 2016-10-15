@@ -42,7 +42,6 @@
 #include "dogen/yarn/serialization/primitive_ser.hpp"
 #include "dogen/yarn/serialization/enumeration_ser.hpp"
 #include "dogen/yarn/serialization/origin_types_ser.hpp"
-#include "dogen/yarn/serialization/generation_types_ser.hpp"
 #include "dogen/yarn/serialization/intermediate_model_ser.hpp"
 
 namespace boost {
@@ -54,7 +53,6 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("name", v.name_);
     ar << make_nvp("origin_type", v.origin_type_);
-    ar << make_nvp("generation_type", v.generation_type_);
     ar << make_nvp("references", v.references_);
     ar << make_nvp("leaves", v.leaves_);
     ar << make_nvp("modules", v.modules_);
@@ -76,7 +74,6 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("origin_type", v.origin_type_);
-    ar >> make_nvp("generation_type", v.generation_type_);
     ar >> make_nvp("references", v.references_);
     ar >> make_nvp("leaves", v.leaves_);
     ar >> make_nvp("modules", v.modules_);

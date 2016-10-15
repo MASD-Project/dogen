@@ -27,6 +27,7 @@
 #include "dogen/yarn/types/concept.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/yarn/types/module.hpp"
+#include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/types/exception.hpp"
 #include "dogen/yarn/types/visitor.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
@@ -65,9 +66,9 @@ private:
     create_master_header(const yarn::name& model_name);
 
     std::forward_list<std::shared_ptr<formatters::file_formatter_interface>>
-        filter_formatters(const std::forward_list<
-            std::shared_ptr<formatters::file_formatter_interface>>&
-            formatters) const;
+    filter_formatters(const std::forward_list<
+        std::shared_ptr<formatters::file_formatter_interface>>&
+        formatters) const;
 
     std::unordered_map<
         std::type_index,
@@ -136,6 +137,7 @@ generator::filter_file_formatters_by_type_index(
         std::type_index,
         std::forward_list<
             std::shared_ptr<formatters::file_formatter_interface>>> r;
+
     for (const auto& pair : fc.file_formatters_by_type_index()) {
         const auto& ti(pair.first);
         const auto& fmts(pair.second);
@@ -145,7 +147,7 @@ generator::filter_file_formatters_by_type_index(
 }
 
 void generator::process_element(const yarn::element& e) {
-    if (e.generation_type() == yarn::generation_types::no_generation)
+    if (e.origin_type() != yarn::origin_types::target)
         return;
 
     const auto ti(std::type_index(typeid(e)));
@@ -161,6 +163,9 @@ void generator::process_element(const yarn::element& e) {
         const auto fctn(f->ownership_hierarchy().facet_name());
         const auto fmtn(f->ownership_hierarchy().formatter_name());
         result_->inclusion_by_facet()[fctn][fmtn].push_back(e.name());
+        BOOST_LOG_SEV(lg, debug) << "Added name. Id: " << e.name()
+                                 << " Facet: " << fctn << " Formatter: "
+                                 << fmtn;
     }
 }
 

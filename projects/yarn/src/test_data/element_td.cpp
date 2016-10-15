@@ -29,7 +29,6 @@
 #include "dogen/yarn/test_data/primitive_td.hpp"
 #include "dogen/yarn/test_data/enumeration_td.hpp"
 #include "dogen/yarn/test_data/origin_types_td.hpp"
-#include "dogen/yarn/test_data/generation_types_td.hpp"
 #include "dogen/annotations/test_data/annotation_td.hpp"
 
 namespace {
@@ -48,11 +47,6 @@ create_dogen_annotations_annotation(const unsigned int position) {
 dogen::yarn::name
 create_dogen_yarn_name(const unsigned int position) {
     return dogen::yarn::name_generator::create(position);
-}
-
-dogen::yarn::generation_types
-create_dogen_yarn_generation_types(const unsigned int position) {
-    return dogen::yarn::generation_types_generator::create(position);
 }
 
 dogen::yarn::origin_types
@@ -89,12 +83,11 @@ populate(const unsigned int position, result_type& v) {
     v.documentation(create_std_string(position + 0));
     v.annotation(create_dogen_annotations_annotation(position + 1));
     v.name(create_dogen_yarn_name(position + 2));
-    v.generation_type(create_dogen_yarn_generation_types(position + 3));
-    v.origin_type(create_dogen_yarn_origin_types(position + 4));
-    v.contained_by(create_boost_optional_dogen_yarn_name(position + 5));
-    v.in_global_module(create_bool(position + 6));
-    v.stereotypes(create_std_vector_std_string(position + 7));
-    v.is_element_extension(create_bool(position + 8));
+    v.origin_type(create_dogen_yarn_origin_types(position + 3));
+    v.contained_by(create_boost_optional_dogen_yarn_name(position + 4));
+    v.in_global_module(create_bool(position + 5));
+    v.stereotypes(create_std_vector_std_string(position + 6));
+    v.is_element_extension(create_bool(position + 7));
 }
 
 element_generator::result_type*

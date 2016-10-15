@@ -35,13 +35,11 @@ namespace yarn {
 
 intermediate_model::intermediate_model()
     : origin_type_(static_cast<dogen::yarn::origin_types>(0)),
-      generation_type_(static_cast<dogen::yarn::generation_types>(0)),
       has_generatable_types_(static_cast<bool>(0)) { }
 
 intermediate_model::intermediate_model(
     const dogen::yarn::name& name,
     const dogen::yarn::origin_types origin_type,
-    const dogen::yarn::generation_types generation_type,
     const std::unordered_map<dogen::yarn::name, dogen::yarn::origin_types>& references,
     const std::unordered_set<dogen::yarn::name>& leaves,
     const std::unordered_map<std::string, dogen::yarn::module>& modules,
@@ -57,7 +55,6 @@ intermediate_model::intermediate_model(
     const dogen::yarn::module& root_module)
     : name_(name),
       origin_type_(origin_type),
-      generation_type_(generation_type),
       references_(references),
       leaves_(leaves),
       modules_(modules),
@@ -76,7 +73,6 @@ void intermediate_model::swap(intermediate_model& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
     swap(origin_type_, other.origin_type_);
-    swap(generation_type_, other.generation_type_);
     swap(references_, other.references_);
     swap(leaves_, other.leaves_);
     swap(modules_, other.modules_);
@@ -95,7 +91,6 @@ void intermediate_model::swap(intermediate_model& other) noexcept {
 bool intermediate_model::operator==(const intermediate_model& rhs) const {
     return name_ == rhs.name_ &&
         origin_type_ == rhs.origin_type_ &&
-        generation_type_ == rhs.generation_type_ &&
         references_ == rhs.references_ &&
         leaves_ == rhs.leaves_ &&
         modules_ == rhs.modules_ &&
@@ -139,14 +134,6 @@ dogen::yarn::origin_types intermediate_model::origin_type() const {
 
 void intermediate_model::origin_type(const dogen::yarn::origin_types v) {
     origin_type_ = v;
-}
-
-dogen::yarn::generation_types intermediate_model::generation_type() const {
-    return generation_type_;
-}
-
-void intermediate_model::generation_type(const dogen::yarn::generation_types v) {
-    generation_type_ = v;
 }
 
 const std::unordered_map<dogen::yarn::name, dogen::yarn::origin_types>& intermediate_model::references() const {

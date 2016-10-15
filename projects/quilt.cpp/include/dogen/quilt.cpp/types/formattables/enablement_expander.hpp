@@ -106,6 +106,8 @@ private:
         const annotations::annotation& o) const;
 
 private:
+    bool is_element_disabled(const yarn::element& e) const;
+
     void compute_enablement(
         const global_enablement_configurations_type& gcs,
         const local_enablement_configurations_type& lcs,

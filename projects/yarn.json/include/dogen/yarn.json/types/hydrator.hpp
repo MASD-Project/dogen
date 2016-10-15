@@ -47,12 +47,6 @@ public:
 
 private:
     /**
-     * @brief Returns the generation type for the model, depending on
-     * whether it is a target model or not.
-     */
-    generation_types generation_type(const bool is_target) const;
-
-    /**
      * @brief Reads the key value pairs from the property tree.
      */
     std::list<std::pair<std::string, std::string>>

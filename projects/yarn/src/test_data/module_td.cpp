@@ -53,6 +53,7 @@ populate(const unsigned int position, result_type& v) {
     dogen::yarn::element_generator::populate(position, v);
     v.members(create_std_list_dogen_yarn_name(position + 0));
     v.is_root(create_bool(position + 1));
+    v.is_global_module(create_bool(position + 2));
 }
 
 module_generator::result_type

@@ -42,7 +42,7 @@ BOOST_AUTO_TEST_SUITE(move_assignment_copy_tests)
 BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
     SETUP_TEST_LOG("validate_move_assignment_copy");
 
-    test_move_assignment_copy<generation_types_generator>();
+    test_move_assignment_copy<origin_types_generator>();
     test_move_assignment_copy<name_tree_generator>();
     test_move_assignment_copy<attribute_generator>();
     test_move_assignment_copy<name_generator>();

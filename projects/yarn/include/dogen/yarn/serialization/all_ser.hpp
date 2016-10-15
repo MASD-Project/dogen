@@ -47,7 +47,6 @@
 #include "dogen/yarn/serialization/object_types_ser.hpp"
 #include "dogen/yarn/serialization/origin_types_ser.hpp"
 #include "dogen/yarn/serialization/type_parameters_ser.hpp"
-#include "dogen/yarn/serialization/generation_types_ser.hpp"
 #include "dogen/yarn/serialization/intermediate_model_ser.hpp"
 
 #endif

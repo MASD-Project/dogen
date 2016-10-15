@@ -130,7 +130,7 @@ expand(const annotations::type_repository& atrp, model& fm) const {
          * be build prior to reduction or else we will not get aspects
          * for referenced models.
          */
-        if (ptr->generation_type() == yarn::generation_types::no_generation)
+        if (segment->origin_type() != yarn::origin_types::target)
             continue;
 
         const auto& o(*ptr);

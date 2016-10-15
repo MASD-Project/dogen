@@ -29,7 +29,6 @@
 #include "dogen/yarn/hash/primitive_hash.hpp"
 #include "dogen/yarn/hash/enumeration_hash.hpp"
 #include "dogen/yarn/hash/origin_types_hash.hpp"
-#include "dogen/yarn/hash/generation_types_hash.hpp"
 #include "dogen/yarn/hash/intermediate_model_hash.hpp"
 
 namespace {
@@ -145,7 +144,6 @@ std::size_t intermediate_model_hasher::hash(const intermediate_model& v) {
 
     combine(seed, v.name());
     combine(seed, v.origin_type());
-    combine(seed, v.generation_type());
     combine(seed, hash_std_unordered_map_dogen_yarn_name_dogen_yarn_origin_types(v.references()));
     combine(seed, hash_std_unordered_set_dogen_yarn_name(v.leaves()));
     combine(seed, hash_std_unordered_map_std_string_dogen_yarn_module(v.modules()));

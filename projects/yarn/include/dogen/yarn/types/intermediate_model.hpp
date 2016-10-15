@@ -42,7 +42,6 @@
 #include "dogen/yarn/types/element_fwd.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/yarn/types/origin_types.hpp"
-#include "dogen/yarn/types/generation_types.hpp"
 #include "dogen/yarn/serialization/intermediate_model_fwd_ser.hpp"
 
 namespace dogen {
@@ -64,7 +63,6 @@ public:
     intermediate_model(
         const dogen::yarn::name& name,
         const dogen::yarn::origin_types origin_type,
-        const dogen::yarn::generation_types generation_type,
         const std::unordered_map<dogen::yarn::name, dogen::yarn::origin_types>& references,
         const std::unordered_set<dogen::yarn::name>& leaves,
         const std::unordered_map<std::string, dogen::yarn::module>& modules,
@@ -103,14 +101,6 @@ public:
     /**@{*/
     dogen::yarn::origin_types origin_type() const;
     void origin_type(const dogen::yarn::origin_types v);
-    /**@}*/
-
-    /**
-     * @brief What to do with this type in terms of code generation.
-     */
-    /**@{*/
-    dogen::yarn::generation_types generation_type() const;
-    void generation_type(const dogen::yarn::generation_types v);
     /**@}*/
 
     /**
@@ -241,7 +231,6 @@ public:
 private:
     dogen::yarn::name name_;
     dogen::yarn::origin_types origin_type_;
-    dogen::yarn::generation_types generation_type_;
     std::unordered_map<dogen::yarn::name, dogen::yarn::origin_types> references_;
     std::unordered_set<dogen::yarn::name> leaves_;
     std::unordered_map<std::string, dogen::yarn::module> modules_;

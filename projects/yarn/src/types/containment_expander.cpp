@@ -53,9 +53,9 @@ inline void add_containing_module_to_non_contained_entities(
 
 module containment_expander::create_global_module(const origin_types ot) const {
     module r;
-    r.generation_type(generation_types::no_generation);
     r.origin_type(ot);
     r.documentation(global_module_doc);
+    r.is_global_module(true);
     return r;
 }
 

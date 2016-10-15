@@ -200,7 +200,6 @@ void populate_object(dogen::yarn::object& o, const unsigned int i,
     dogen::yarn::name n(nf.build_element_in_model(model_name, sn, ipp));
 
     o.name(n);
-    o.generation_type(dogen::yarn::generation_types::full_generation);
     o.documentation(documentation);
     o.origin_type(ot);
 }
@@ -209,7 +208,6 @@ void populate_simple_model_attributes(dogen::yarn::intermediate_model& m,
     const unsigned int n, const dogen::yarn::origin_types ot) {
     m.name(mock_model_name(n));
     m.origin_type(ot);
-    m.generation_type(dogen::yarn::generation_types::full_generation);
 }
 
 dogen::yarn::attribute mock_attribute(const dogen::yarn::name& owning_element,
@@ -529,7 +527,6 @@ make_enumeration(const unsigned int i, const name& model_name,
 
     enumeration r;
     r.name(n);
-    r.generation_type(generation_types::full_generation);
     r.documentation(documentation);
     r.origin_type(ot);
 
@@ -565,7 +562,6 @@ exception mock_intermediate_model_factory::make_exception(const unsigned int i,
 
     exception r;
     r.name(n);
-    r.generation_type(generation_types::full_generation);
     r.documentation(documentation);
     r.origin_type(ot);
 

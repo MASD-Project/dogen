@@ -25,10 +25,11 @@
 #include "dogen/utility/io/typeindex_io.hpp"
 #include "dogen/utility/io/unordered_set_io.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
-#include "dogen/quilt.cpp/types/traits.hpp"
+#include "dogen/annotations/io/type_io.hpp"
 #include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
-#include "dogen/annotations/io/type_io.hpp"
+#include "dogen/yarn/types/module.hpp"
+#include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/quilt.cpp/io/formattables/facet_properties_io.hpp"
 #include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 #include "dogen/quilt.cpp/io/formattables/local_enablement_configuration_io.hpp"
@@ -301,6 +302,34 @@ obtain_local_configurations(const local_type_group_type& ltg,
     return r;
 }
 
+bool enablement_expander::is_element_disabled(const yarn::element& e) const {
+    const auto ptr(dynamic_cast<const yarn::module*>(&e));
+    if (!ptr)
+        return false;
+
+    const auto& m(*ptr);
+
+    /*
+     * Ignore the global module. This is just a pseudo module that is
+     * used as a top-level container and has no expression in code.
+     */
+    if (m.is_global_module())
+        return true;
+
+    /*
+     * Modules are only generatable for the purposes of
+     * documentation. Set them to disabled if there is no
+     * documentation.
+     */
+    if (m.documentation().empty()) {
+        BOOST_LOG_SEV(lg, debug) << "Module does not have documentation. "
+                                 << "Setting it to non-generatable. Id: "
+                                 << m.name().id();
+        return true;
+    }
+    return false;
+}
+
 void enablement_expander::compute_enablement(
     const global_enablement_configurations_type& gcs,
     const local_enablement_configurations_type& lcs, formattable& fbl) const {
@@ -451,6 +480,13 @@ void enablement_expander::expand(const annotations::type_repository& atrp,
         auto& formattable(pair.second);
         for (const auto& segment : formattable.all_segments()) {
             const auto& e(*segment);
+
+            /*
+             * On some very special cases we may disable an element
+             * based on its state. If so, there is nothing to do.
+             */
+            if (is_element_disabled(e))
+                continue;
 
             /*
              * Now, for each element segment, find the corresponding

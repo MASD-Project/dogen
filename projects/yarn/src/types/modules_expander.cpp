@@ -210,7 +210,6 @@ void modules_expander::create_missing_modules(intermediate_model& im) const {
             yarn::module mod;
             mod.name(n);
             mod.origin_type(im.origin_type());
-            mod.generation_type(im.generation_type());
             im.modules().insert(std::make_pair(n.id(), mod));
         }
     }
@@ -221,38 +220,10 @@ void modules_expander::expand_containing_module(intermediate_model& im) const {
     yarn::elements_traversal(im, u);
 }
 
-void modules_expander::
-update_module_generability(intermediate_model& im) const {
-    /*
-     * If the model is not generatable, we don't have any thing to
-     * do as all modules are already set to not generatable.
-     */
-    if (im.generation_type() == generation_types::no_generation)
-        return;
-
-    /*
-     * Modules are only generatable for the puporses of
-     * documentation. Set them to non-generatable if there is no
-     * documentation.
-     */
-    for (auto& pair : im.modules()) {
-        const auto id(pair.first);
-        auto& m(pair.second);
-
-        if (m.documentation().empty())
-            m.generation_type(generation_types::no_generation);
-
-        BOOST_LOG_SEV(lg, debug) << "Module does not have documentation. "
-                                 << "Setting it to non-generatable. Id: "
-                                 << id;
-    }
-}
-
 void modules_expander::expand(intermediate_model& im) const {
     populate_root_module(im);
     create_missing_modules(im);
     expand_containing_module(im);
-    update_module_generability(im);
 }
 
 } }

@@ -43,32 +43,33 @@ namespace dogen {
 namespace yarn {
 
 module::module()
-    : is_root_(static_cast<bool>(0)) { }
+    : is_root_(static_cast<bool>(0)),
+      is_global_module_(static_cast<bool>(0)) { }
 
 module::module(
     const std::string& documentation,
     const dogen::annotations::annotation& annotation,
     const dogen::yarn::name& name,
-    const dogen::yarn::generation_types generation_type,
     const dogen::yarn::origin_types origin_type,
     const boost::optional<dogen::yarn::name>& contained_by,
     const bool in_global_module,
     const std::vector<std::string>& stereotypes,
     const bool is_element_extension,
     const std::list<dogen::yarn::name>& members,
-    const bool is_root)
+    const bool is_root,
+    const bool is_global_module)
     : dogen::yarn::element(
       documentation,
       annotation,
       name,
-      generation_type,
       origin_type,
       contained_by,
       in_global_module,
       stereotypes,
       is_element_extension),
       members_(members),
-      is_root_(is_root) { }
+      is_root_(is_root),
+      is_global_module_(is_global_module) { }
 
 void module::accept(const element_visitor& v) const {
     v.visit(*this);
@@ -100,7 +101,8 @@ void module::to_stream(std::ostream& s) const {
     element::to_stream(s);
     s << ", "
       << "\"members\": " << members_ << ", "
-      << "\"is_root\": " << is_root_
+      << "\"is_root\": " << is_root_ << ", "
+      << "\"is_global_module\": " << is_global_module_
       << " }";
 }
 
@@ -110,6 +112,7 @@ void module::swap(module& other) noexcept {
     using std::swap;
     swap(members_, other.members_);
     swap(is_root_, other.is_root_);
+    swap(is_global_module_, other.is_global_module_);
 }
 
 bool module::equals(const dogen::yarn::element& other) const {
@@ -121,7 +124,8 @@ bool module::equals(const dogen::yarn::element& other) const {
 bool module::operator==(const module& rhs) const {
     return element::compare(rhs) &&
         members_ == rhs.members_ &&
-        is_root_ == rhs.is_root_;
+        is_root_ == rhs.is_root_ &&
+        is_global_module_ == rhs.is_global_module_;
 }
 
 module& module::operator=(module other) {
@@ -152,6 +156,14 @@ bool module::is_root() const {
 
 void module::is_root(const bool v) {
     is_root_ = v;
+}
+
+bool module::is_global_module() const {
+    return is_global_module_;
+}
+
+void module::is_global_module(const bool v) {
+    is_global_module_ = v;
 }
 
 } }

@@ -41,7 +41,7 @@ BOOST_AUTO_TEST_SUITE(io_tests)
 BOOST_AUTO_TEST_CASE(validate_io) {
     SETUP_TEST_LOG("validate_io");
 
-    test_io<generation_types_generator>();
+    test_io<origin_types_generator>();
     test_io<name_tree_generator>();
     test_io<node_generator>();
     test_io<attribute_generator>();

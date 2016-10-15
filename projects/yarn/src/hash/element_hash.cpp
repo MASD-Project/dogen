@@ -21,7 +21,6 @@
 #include "dogen/yarn/hash/name_hash.hpp"
 #include "dogen/yarn/hash/element_hash.hpp"
 #include "dogen/yarn/hash/origin_types_hash.hpp"
-#include "dogen/yarn/hash/generation_types_hash.hpp"
 #include "dogen/annotations/hash/annotation_hash.hpp"
 
 namespace {
@@ -61,7 +60,6 @@ std::size_t element_hasher::hash(const element& v) {
     combine(seed, v.documentation());
     combine(seed, v.annotation());
     combine(seed, v.name());
-    combine(seed, v.generation_type());
     combine(seed, v.origin_type());
     combine(seed, hash_boost_optional_dogen_yarn_name(v.contained_by()));
     combine(seed, v.in_global_module());

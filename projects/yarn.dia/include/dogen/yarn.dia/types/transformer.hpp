@@ -66,11 +66,6 @@ public:
 
 private:
     /**
-     * @brief Compute the appropriate generation type for the profile.
-     */
-    yarn::generation_types generation_type() const;
-
-    /**
      * @brief Ensure the dia object name is valid.
      */
     void validate_dia_object_name(const std::string& n) const;

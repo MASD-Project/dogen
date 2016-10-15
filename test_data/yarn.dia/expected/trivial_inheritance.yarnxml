@@ -32,7 +32,6 @@
 		<identifiable>trivial_inheritance</identifiable>
 	</name>
 	<origin_type>1</origin_type>
-	<generation_type>0</generation_type>
 	<references class_id="17" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
@@ -89,7 +88,6 @@
 						</location>
 						<identifiable>trivial_inheritance_pkg4</identifiable>
 					</name>
-					<generation_type>1</generation_type>
 					<origin_type>4</origin_type>
 					<contained_by class_id="24" tracking_level="0" version="0">
 						<initialized>0</initialized>
@@ -106,6 +104,7 @@
 					<item_version>0</item_version>
 				</members>
 				<is_root>0</is_root>
+				<is_global_module>0</is_global_module>
 			</second>
 		</item>
 		<item>
@@ -155,7 +154,6 @@ in the context of inheritance.
 						</location>
 						<identifiable>trivial_inheritance</identifiable>
 					</name>
-					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
@@ -172,6 +170,7 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</members>
 				<is_root>0</is_root>
+				<is_global_module>0</is_global_module>
 			</second>
 		</item>
 		<item>
@@ -216,7 +215,6 @@ in the context of inheritance.
 						</location>
 						<identifiable>trivial_inheritance_pkg2</identifiable>
 					</name>
-					<generation_type>1</generation_type>
 					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
@@ -233,6 +231,7 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</members>
 				<is_root>0</is_root>
+				<is_global_module>0</is_global_module>
 			</second>
 		</item>
 		<item>
@@ -277,7 +276,6 @@ in the context of inheritance.
 						</location>
 						<identifiable>trivial_inheritance_pkg1</identifiable>
 					</name>
-					<generation_type>1</generation_type>
 					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
@@ -294,6 +292,7 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</members>
 				<is_root>0</is_root>
+				<is_global_module>0</is_global_module>
 			</second>
 		</item>
 		<item>
@@ -338,7 +337,6 @@ in the context of inheritance.
 						</location>
 						<identifiable>trivial_inheritance_pkg3</identifiable>
 					</name>
-					<generation_type>1</generation_type>
 					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
@@ -355,6 +353,7 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</members>
 				<is_root>0</is_root>
+				<is_global_module>0</is_global_module>
 			</second>
 		</item>
 	</modules>
@@ -419,7 +418,6 @@ in the context of inheritance.
 						</location>
 						<identifiable>trivial_inheritance_non_final_leaf</identifiable>
 					</name>
-					<generation_type>1</generation_type>
 					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
@@ -648,7 +646,6 @@ in the context of inheritance.
 						</location>
 						<identifiable>trivial_inheritance_pkg4_child_via_settings</identifiable>
 					</name>
-					<generation_type>1</generation_type>
 					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
@@ -848,7 +845,6 @@ in the context of inheritance.
 						</location>
 						<identifiable>trivial_inheritance_pkg3_child_via_settings</identifiable>
 					</name>
-					<generation_type>1</generation_type>
 					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
@@ -1048,7 +1044,6 @@ in the context of inheritance.
 						</location>
 						<identifiable>trivial_inheritance_pkg1_child_via_settings</identifiable>
 					</name>
-					<generation_type>1</generation_type>
 					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
@@ -1248,7 +1243,6 @@ in the context of inheritance.
 						</location>
 						<identifiable>trivial_inheritance_move_ctor_empty_descendant</identifiable>
 					</name>
-					<generation_type>1</generation_type>
 					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
@@ -1396,7 +1390,6 @@ in the context of inheritance.
 						</location>
 						<identifiable>trivial_inheritance_pkg1_child</identifiable>
 					</name>
-					<generation_type>1</generation_type>
 					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
@@ -1626,7 +1619,6 @@ in the context of inheritance.
 						</location>
 						<identifiable>trivial_inheritance_base</identifiable>
 					</name>
-					<generation_type>1</generation_type>
 					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
@@ -1745,7 +1737,6 @@ in the context of inheritance.
 						</location>
 						<identifiable>trivial_inheritance_non_final_orphan</identifiable>
 					</name>
-					<generation_type>1</generation_type>
 					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
@@ -1943,7 +1934,6 @@ in the context of inheritance.
 						</location>
 						<identifiable>trivial_inheritance_child_via_settings</identifiable>
 					</name>
-					<generation_type>1</generation_type>
 					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
@@ -2142,7 +2132,6 @@ in the context of inheritance.
 						</location>
 						<identifiable>trivial_inheritance_pkg1_parent</identifiable>
 					</name>
-					<generation_type>1</generation_type>
 					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
@@ -2342,7 +2331,6 @@ in the context of inheritance.
 						</location>
 						<identifiable>trivial_inheritance_move_ctor_base</identifiable>
 					</name>
-					<generation_type>1</generation_type>
 					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
@@ -2541,7 +2529,6 @@ in the context of inheritance.
 						</location>
 						<identifiable>trivial_inheritance_parent_without_members</identifiable>
 					</name>
-					<generation_type>1</generation_type>
 					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
@@ -2659,7 +2646,6 @@ in the context of inheritance.
 						</location>
 						<identifiable>trivial_inheritance_pkg2_parent</identifiable>
 					</name>
-					<generation_type>1</generation_type>
 					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
@@ -2858,7 +2844,6 @@ in the context of inheritance.
 						</location>
 						<identifiable>trivial_inheritance_second_child_without_members</identifiable>
 					</name>
-					<generation_type>1</generation_type>
 					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
@@ -3005,7 +2990,6 @@ in the context of inheritance.
 						</location>
 						<identifiable>trivial_inheritance_third_child_with_members</identifiable>
 					</name>
-					<generation_type>1</generation_type>
 					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
@@ -3233,7 +3217,6 @@ in the context of inheritance.
 						</location>
 						<identifiable>trivial_inheritance_parent_with_members</identifiable>
 					</name>
-					<generation_type>1</generation_type>
 					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
@@ -3432,7 +3415,6 @@ in the context of inheritance.
 						</location>
 						<identifiable>trivial_inheritance_pkg3_child</identifiable>
 					</name>
-					<generation_type>1</generation_type>
 					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
@@ -3662,7 +3644,6 @@ in the context of inheritance.
 						</location>
 						<identifiable>trivial_inheritance_child_without_members</identifiable>
 					</name>
-					<generation_type>1</generation_type>
 					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
@@ -3809,7 +3790,6 @@ in the context of inheritance.
 						</location>
 						<identifiable>trivial_inheritance_parent_outside</identifiable>
 					</name>
-					<generation_type>1</generation_type>
 					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
@@ -4007,7 +3987,6 @@ in the context of inheritance.
 						</location>
 						<identifiable>trivial_inheritance_child_with_members</identifiable>
 					</name>
-					<generation_type>1</generation_type>
 					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
@@ -4235,7 +4214,6 @@ in the context of inheritance.
 						</location>
 						<identifiable>trivial_inheritance_service</identifiable>
 					</name>
-					<generation_type>1</generation_type>
 					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
@@ -4353,7 +4331,6 @@ in the context of inheritance.
 						</location>
 						<identifiable>trivial_inheritance_descendant2</identifiable>
 					</name>
-					<generation_type>1</generation_type>
 					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
@@ -4583,7 +4560,6 @@ in the context of inheritance.
 						</location>
 						<identifiable>trivial_inheritance_pkg4_child</identifiable>
 					</name>
-					<generation_type>1</generation_type>
 					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
@@ -4812,7 +4788,6 @@ in the context of inheritance.
 						</location>
 						<identifiable>trivial_inheritance_service_interface</identifiable>
 					</name>
-					<generation_type>1</generation_type>
 					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
@@ -4930,7 +4905,6 @@ in the context of inheritance.
 						</location>
 						<identifiable>trivial_inheritance_child_of_a_child2</identifiable>
 					</name>
-					<generation_type>1</generation_type>
 					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
@@ -5158,7 +5132,6 @@ in the context of inheritance.
 						</location>
 						<identifiable>trivial_inheritance_descendant1</identifiable>
 					</name>
-					<generation_type>1</generation_type>
 					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
@@ -5306,7 +5279,6 @@ in the context of inheritance.
 						</location>
 						<identifiable>trivial_inheritance_child_of_a_child1</identifiable>
 					</name>
-					<generation_type>1</generation_type>
 					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
@@ -5453,7 +5425,6 @@ in the context of inheritance.
 						</location>
 						<identifiable>trivial_inheritance_descendant3</identifiable>
 					</name>
-					<generation_type>1</generation_type>
 					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
@@ -5682,7 +5653,6 @@ in the context of inheritance.
 						</location>
 						<identifiable>trivial_inheritance_move_ctor_descendant</identifiable>
 					</name>
-					<generation_type>1</generation_type>
 					<origin_type>4</origin_type>
 					<contained_by>
 						<initialized>0</initialized>
@@ -6117,7 +6087,6 @@ in the context of inheritance.
 				</location>
 				<identifiable></identifiable>
 			</name>
-			<generation_type>0</generation_type>
 			<origin_type>0</origin_type>
 			<contained_by>
 				<initialized>0</initialized>
@@ -6134,6 +6103,7 @@ in the context of inheritance.
 			<item_version>0</item_version>
 		</members>
 		<is_root>0</is_root>
+		<is_global_module>0</is_global_module>
 	</root_module>
 </entity>
 </boost_serialization>

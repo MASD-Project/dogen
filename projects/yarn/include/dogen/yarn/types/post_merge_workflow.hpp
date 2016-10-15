@@ -42,8 +42,8 @@ namespace yarn {
 class post_merge_workflow {
 private:
     /**
-     * @brief Returns true if the element is generatable, false
-     * otherwise.
+     * @brief Returns true if the element belongs to the target model,
+     * false otherwise.
      */
     bool is_generatable(const element& e) const;
 

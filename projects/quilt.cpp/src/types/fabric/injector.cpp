@@ -86,6 +86,7 @@ void injector::inject_cmakelists(yarn::intermediate_model& im) const {
     const auto n(nf.build_element_in_model(im.name(), cmakelists_name));
     auto e(boost::make_shared<cmakelists>());
     e->name(n);
+    e->origin_type(im.origin_type());
     add_element(e, im);
 
     BOOST_LOG_SEV(lg, debug) << "Generated CMakeLists.";
@@ -98,6 +99,7 @@ void injector::inject_odb_options(yarn::intermediate_model& im) const {
     const auto n(nf.build_element_in_model(im.name(), odb_options_name));
     auto e(boost::make_shared<odb_options>());
     e->name(n);
+    e->origin_type(im.origin_type());
     add_element(e, im);
 
     BOOST_LOG_SEV(lg, debug) << "Generated ODB Options.";

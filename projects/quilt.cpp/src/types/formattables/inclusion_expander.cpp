@@ -468,7 +468,7 @@ void inclusion_expander::populate_inclusion_dependencies(
              * elements that are not part of the target model. However, we
              * do need them around for inclusion directives.
              */
-            if (e.generation_type() == yarn::generation_types::no_generation)
+            if (ptr->origin_type() != yarn::origin_types::target)
                 continue;
 
             /*

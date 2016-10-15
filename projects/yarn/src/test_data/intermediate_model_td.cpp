@@ -30,7 +30,6 @@
 #include "dogen/yarn/test_data/primitive_td.hpp"
 #include "dogen/yarn/test_data/enumeration_td.hpp"
 #include "dogen/yarn/test_data/origin_types_td.hpp"
-#include "dogen/yarn/test_data/generation_types_td.hpp"
 #include "dogen/yarn/test_data/intermediate_model_td.hpp"
 
 namespace {
@@ -43,11 +42,6 @@ create_dogen_yarn_name(const unsigned int position) {
 dogen::yarn::origin_types
 create_dogen_yarn_origin_types(const unsigned int position) {
     return dogen::yarn::origin_types_generator::create(position);
-}
-
-dogen::yarn::generation_types
-create_dogen_yarn_generation_types(const unsigned int position) {
-    return dogen::yarn::generation_types_generator::create(position);
 }
 
 std::unordered_map<dogen::yarn::name, dogen::yarn::origin_types> create_std_unordered_map_dogen_yarn_name_dogen_yarn_origin_types(unsigned int position) {
@@ -203,20 +197,19 @@ void intermediate_model_generator::
 populate(const unsigned int position, result_type& v) {
     v.name(create_dogen_yarn_name(position + 0));
     v.origin_type(create_dogen_yarn_origin_types(position + 1));
-    v.generation_type(create_dogen_yarn_generation_types(position + 2));
-    v.references(create_std_unordered_map_dogen_yarn_name_dogen_yarn_origin_types(position + 3));
-    v.leaves(create_std_unordered_set_dogen_yarn_name(position + 4));
-    v.modules(create_std_unordered_map_std_string_dogen_yarn_module(position + 5));
-    v.concepts(create_std_unordered_map_std_string_dogen_yarn_concept(position + 6));
-    v.primitives(create_std_unordered_map_std_string_dogen_yarn_primitive(position + 7));
-    v.enumerations(create_std_unordered_map_std_string_dogen_yarn_enumeration(position + 8));
-    v.objects(create_std_unordered_map_std_string_dogen_yarn_object(position + 9));
-    v.exceptions(create_std_unordered_map_std_string_dogen_yarn_exception(position + 10));
-    v.visitors(create_std_unordered_map_std_string_dogen_yarn_visitor(position + 11));
-    v.injected_elements(create_std_unordered_map_std_string_boost_shared_ptr_dogen_yarn_element(position + 12));
-    v.has_generatable_types(create_bool(position + 13));
-    v.indices(create_dogen_yarn_indices(position + 14));
-    v.root_module(create_dogen_yarn_module(position + 15));
+    v.references(create_std_unordered_map_dogen_yarn_name_dogen_yarn_origin_types(position + 2));
+    v.leaves(create_std_unordered_set_dogen_yarn_name(position + 3));
+    v.modules(create_std_unordered_map_std_string_dogen_yarn_module(position + 4));
+    v.concepts(create_std_unordered_map_std_string_dogen_yarn_concept(position + 5));
+    v.primitives(create_std_unordered_map_std_string_dogen_yarn_primitive(position + 6));
+    v.enumerations(create_std_unordered_map_std_string_dogen_yarn_enumeration(position + 7));
+    v.objects(create_std_unordered_map_std_string_dogen_yarn_object(position + 8));
+    v.exceptions(create_std_unordered_map_std_string_dogen_yarn_exception(position + 9));
+    v.visitors(create_std_unordered_map_std_string_dogen_yarn_visitor(position + 10));
+    v.injected_elements(create_std_unordered_map_std_string_boost_shared_ptr_dogen_yarn_element(position + 11));
+    v.has_generatable_types(create_bool(position + 12));
+    v.indices(create_dogen_yarn_indices(position + 13));
+    v.root_module(create_dogen_yarn_module(position + 14));
 }
 
 intermediate_model_generator::result_type

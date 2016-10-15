@@ -45,7 +45,7 @@ BOOST_AUTO_TEST_SUITE(equality_tests)
 BOOST_AUTO_TEST_CASE(validate_equality) {
     SETUP_TEST_LOG("validate_equality");
 
-    test_equality<generation_types_generator>();
+    test_equality<origin_types_generator>();
     test_equality<name_tree_generator>();
     test_equality<node_generator>();
     test_equality<attribute_generator>();

@@ -44,8 +44,8 @@ namespace dogen {
 namespace yarn {
 
 bool post_merge_workflow::is_generatable(const element& e) const {
-    const auto gt(e.generation_type());
-    return gt == generation_types::full_generation;
+    const auto ot(e.origin_type());
+    return ot == origin_types::target;
 }
 
 bool post_merge_workflow::

@@ -332,7 +332,7 @@ void helper_expander::populate_helper_properties(const context& ctx,
          * reduction or else we will not get helpers for referenced
          * models.
          */
-        if (segment->generation_type() == yarn::generation_types::no_generation)
+        if (segment->origin_type() != yarn::origin_types::target)
             continue;
 
         /*

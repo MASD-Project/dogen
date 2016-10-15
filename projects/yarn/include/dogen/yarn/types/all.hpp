@@ -71,7 +71,6 @@
 #include "dogen/yarn/types/registrar_error.hpp"
 #include "dogen/yarn/types/type_parameters.hpp"
 #include "dogen/yarn/types/concept_expander.hpp"
-#include "dogen/yarn/types/generation_types.hpp"
 #include "dogen/yarn/types/modules_expander.hpp"
 #include "dogen/yarn/types/name_tree_parser.hpp"
 #include "dogen/yarn/types/parsing_expander.hpp"

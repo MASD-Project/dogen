@@ -24,7 +24,6 @@
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/yarn/io/origin_types_io.hpp"
-#include "dogen/yarn/io/generation_types_io.hpp"
 #include "dogen/annotations/io/annotation_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -67,8 +66,7 @@ namespace dogen {
 namespace yarn {
 
 element::element()
-    : generation_type_(static_cast<dogen::yarn::generation_types>(0)),
-      origin_type_(static_cast<dogen::yarn::origin_types>(0)),
+    : origin_type_(static_cast<dogen::yarn::origin_types>(0)),
       in_global_module_(static_cast<bool>(0)),
       is_element_extension_(static_cast<bool>(0)) { }
 
@@ -76,7 +74,6 @@ element::element(element&& rhs)
     : documentation_(std::move(rhs.documentation_)),
       annotation_(std::move(rhs.annotation_)),
       name_(std::move(rhs.name_)),
-      generation_type_(std::move(rhs.generation_type_)),
       origin_type_(std::move(rhs.origin_type_)),
       contained_by_(std::move(rhs.contained_by_)),
       in_global_module_(std::move(rhs.in_global_module_)),
@@ -87,7 +84,6 @@ element::element(
     const std::string& documentation,
     const dogen::annotations::annotation& annotation,
     const dogen::yarn::name& name,
-    const dogen::yarn::generation_types generation_type,
     const dogen::yarn::origin_types origin_type,
     const boost::optional<dogen::yarn::name>& contained_by,
     const bool in_global_module,
@@ -96,7 +92,6 @@ element::element(
     : documentation_(documentation),
       annotation_(annotation),
       name_(name),
-      generation_type_(generation_type),
       origin_type_(origin_type),
       contained_by_(contained_by),
       in_global_module_(in_global_module),
@@ -115,7 +110,6 @@ void element::to_stream(std::ostream& s) const {
       << "\"documentation\": " << "\"" << tidy_up_string(documentation_) << "\"" << ", "
       << "\"annotation\": " << annotation_ << ", "
       << "\"name\": " << name_ << ", "
-      << "\"generation_type\": " << generation_type_ << ", "
       << "\"origin_type\": " << origin_type_ << ", "
       << "\"contained_by\": " << contained_by_ << ", "
       << "\"in_global_module\": " << in_global_module_ << ", "
@@ -129,7 +123,6 @@ void element::swap(element& other) noexcept {
     swap(documentation_, other.documentation_);
     swap(annotation_, other.annotation_);
     swap(name_, other.name_);
-    swap(generation_type_, other.generation_type_);
     swap(origin_type_, other.origin_type_);
     swap(contained_by_, other.contained_by_);
     swap(in_global_module_, other.in_global_module_);
@@ -141,7 +134,6 @@ bool element::compare(const element& rhs) const {
     return documentation_ == rhs.documentation_ &&
         annotation_ == rhs.annotation_ &&
         name_ == rhs.name_ &&
-        generation_type_ == rhs.generation_type_ &&
         origin_type_ == rhs.origin_type_ &&
         contained_by_ == rhs.contained_by_ &&
         in_global_module_ == rhs.in_global_module_ &&
@@ -195,14 +187,6 @@ void element::name(const dogen::yarn::name& v) {
 
 void element::name(const dogen::yarn::name&& v) {
     name_ = std::move(v);
-}
-
-dogen::yarn::generation_types element::generation_type() const {
-    return generation_type_;
-}
-
-void element::generation_type(const dogen::yarn::generation_types v) {
-    generation_type_ = v;
 }
 
 dogen::yarn::origin_types element::origin_type() const {

@@ -45,7 +45,6 @@ private:
         r->name(e.name());
         r->origin_type(e.origin_type());
         r->annotation(e.annotation());
-        r->generation_type(e.generation_type());
         r->is_element_extension(true);
         return r;
     }

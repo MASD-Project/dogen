@@ -42,7 +42,7 @@ void reducer::reduce(model& fm) const {
     for (const auto& pair : fm.formattables()) {
         const auto& formattable(pair.second);
         const auto& e(*formattable.master_segment());
-        if (e.generation_type() == yarn::generation_types::no_generation)
+        if (e.origin_type() != yarn::origin_types::target)
             continue;
 
         reduced.insert(pair);

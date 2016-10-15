@@ -61,7 +61,7 @@ private:
      * @pre leaves must not be empty.
      */
     visitor create_visitor(const object& o, const location& l,
-        const generation_types gt, const std::list<name>& leaves) const;
+        const origin_types ot, const std::list<name>& leaves) const;
 
     /**
      * @brief Injects an accept operation for the given visitor, to

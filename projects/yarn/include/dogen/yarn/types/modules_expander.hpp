@@ -35,7 +35,6 @@ private:
     void populate_root_module(intermediate_model& im) const;
     void create_missing_modules(intermediate_model& im) const;
     void expand_containing_module(intermediate_model& im) const;
-    void update_module_generability(intermediate_model& im) const;
 
 public:
     void expand(intermediate_model& im) const;

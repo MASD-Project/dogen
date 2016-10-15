@@ -207,7 +207,7 @@ void aspect_expander::populate_aspect_properties(
          * be build prior to reduction or else we will not get aspects
          * for referenced models.
          */
-        if (ptr->generation_type() == yarn::generation_types::no_generation)
+        if (ptr->origin_type() != yarn::origin_types::target)
             continue;
 
         /*

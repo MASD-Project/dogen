@@ -80,12 +80,6 @@ namespace dogen {
 namespace yarn {
 namespace json {
 
-yarn::generation_types hydrator::generation_type(const bool is_target) const {
-    return is_target ?
-        yarn::generation_types::full_generation :
-        yarn::generation_types::no_generation;
-}
-
 std::list<std::pair<std::string, std::string>>
 hydrator::read_kvps(const boost::property_tree::ptree& pt) const {
 
@@ -158,7 +152,6 @@ void hydrator::read_element(const boost::property_tree::ptree& pt,
             BOOST_LOG_SEV(lg, debug) << "Processing element: " << n.id();
             e.name(n);
             e.origin_type(origin_types::not_yet_determined);
-            e.generation_type(im.generation_type());
             e.in_global_module(in_global_module);
 
             if (documentation)
@@ -206,8 +199,6 @@ void hydrator::read_element(const boost::property_tree::ptree& pt,
 yarn::intermediate_model hydrator::
 read_stream(std::istream& s, const bool is_target) const {
     yarn::intermediate_model r;
-    r.generation_type(generation_type(is_target));
-
     boost::property_tree::ptree pt;
     read_json(s, pt);
 
@@ -232,7 +223,6 @@ read_stream(std::istream& s, const bool is_target) const {
 
     m.name(r.name());
     m.origin_type(origin_types::not_yet_determined);
-    m.generation_type(r.generation_type());
     r.modules().insert(std::make_pair(m.name().id(), m));
 
     const auto i(pt.find(elements_key));

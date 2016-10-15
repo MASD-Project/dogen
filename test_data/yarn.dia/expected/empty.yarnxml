@@ -32,7 +32,6 @@
 		<identifiable>empty</identifiable>
 	</name>
 	<origin_type>1</origin_type>
-	<generation_type>0</generation_type>
 	<references class_id="17" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
@@ -89,7 +88,6 @@
 						</location>
 						<identifiable>empty</identifiable>
 					</name>
-					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<contained_by class_id="24" tracking_level="0" version="0">
 						<initialized>0</initialized>
@@ -106,6 +104,7 @@
 					<item_version>0</item_version>
 				</members>
 				<is_root>0</is_root>
+				<is_global_module>0</is_global_module>
 			</second>
 		</item>
 	</modules>
@@ -197,7 +196,6 @@
 				</location>
 				<identifiable></identifiable>
 			</name>
-			<generation_type>0</generation_type>
 			<origin_type>0</origin_type>
 			<contained_by>
 				<initialized>0</initialized>
@@ -214,6 +212,7 @@
 			<item_version>0</item_version>
 		</members>
 		<is_root>0</is_root>
+		<is_global_module>0</is_global_module>
 	</root_module>
 </entity>
 </boost_serialization>

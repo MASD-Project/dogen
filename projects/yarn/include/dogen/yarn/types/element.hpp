@@ -32,7 +32,6 @@
 #include <boost/optional.hpp>
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/origin_types.hpp"
-#include "dogen/yarn/types/generation_types.hpp"
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/yarn/types/element_visitor_fwd.hpp"
 #include "dogen/yarn/serialization/element_fwd_ser.hpp"
@@ -64,7 +63,6 @@ public:
         const std::string& documentation,
         const dogen::annotations::annotation& annotation,
         const dogen::yarn::name& name,
-        const dogen::yarn::generation_types generation_type,
         const dogen::yarn::origin_types origin_type,
         const boost::optional<dogen::yarn::name>& contained_by,
         const bool in_global_module,
@@ -123,14 +121,6 @@ public:
     /**@}*/
 
     /**
-     * @brief What to do with this type in terms of code generation.
-     */
-    /**@{*/
-    dogen::yarn::generation_types generation_type() const;
-    void generation_type(const dogen::yarn::generation_types v);
-    /**@}*/
-
-    /**
      * @brief How was this model element originated.
      */
     /**@{*/
@@ -181,7 +171,6 @@ private:
     std::string documentation_;
     dogen::annotations::annotation annotation_;
     dogen::yarn::name name_;
-    dogen::yarn::generation_types generation_type_;
     dogen::yarn::origin_types origin_type_;
     boost::optional<dogen::yarn::name> contained_by_;
     bool in_global_module_;

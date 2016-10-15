@@ -40,7 +40,6 @@
 #include "dogen/yarn/serialization/primitive_ser.hpp"
 #include "dogen/yarn/serialization/enumeration_ser.hpp"
 #include "dogen/yarn/serialization/origin_types_ser.hpp"
-#include "dogen/yarn/serialization/generation_types_ser.hpp"
 #include "dogen/annotations/serialization/annotation_ser.hpp"
 
 BOOST_CLASS_TRACKING(
@@ -57,7 +56,6 @@ void save(Archive& ar,
     ar << make_nvp("documentation", v.documentation_);
     ar << make_nvp("annotation", v.annotation_);
     ar << make_nvp("name", v.name_);
-    ar << make_nvp("generation_type", v.generation_type_);
     ar << make_nvp("origin_type", v.origin_type_);
     ar << make_nvp("contained_by", v.contained_by_);
     ar << make_nvp("in_global_module", v.in_global_module_);
@@ -72,7 +70,6 @@ void load(Archive& ar,
     ar >> make_nvp("documentation", v.documentation_);
     ar >> make_nvp("annotation", v.annotation_);
     ar >> make_nvp("name", v.name_);
-    ar >> make_nvp("generation_type", v.generation_type_);
     ar >> make_nvp("origin_type", v.origin_type_);
     ar >> make_nvp("contained_by", v.contained_by_);
     ar >> make_nvp("in_global_module", v.in_global_module_);

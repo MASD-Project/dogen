@@ -47,6 +47,7 @@ void save(Archive& ar,
 
     ar << make_nvp("members", v.members_);
     ar << make_nvp("is_root", v.is_root_);
+    ar << make_nvp("is_global_module", v.is_global_module_);
 }
 
 template<typename Archive>
@@ -57,6 +58,7 @@ void load(Archive& ar,
 
     ar >> make_nvp("members", v.members_);
     ar >> make_nvp("is_root", v.is_root_);
+    ar >> make_nvp("is_global_module", v.is_global_module_);
 }
 
 } }

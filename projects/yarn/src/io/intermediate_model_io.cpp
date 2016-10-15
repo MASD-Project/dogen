@@ -32,7 +32,6 @@
 #include "dogen/yarn/io/primitive_io.hpp"
 #include "dogen/yarn/io/enumeration_io.hpp"
 #include "dogen/yarn/io/origin_types_io.hpp"
-#include "dogen/yarn/io/generation_types_io.hpp"
 #include "dogen/yarn/io/intermediate_model_io.hpp"
 
 namespace std {
@@ -248,7 +247,6 @@ std::ostream& operator<<(std::ostream& s, const intermediate_model& v) {
       << "\"__type__\": " << "\"dogen::yarn::intermediate_model\"" << ", "
       << "\"name\": " << v.name() << ", "
       << "\"origin_type\": " << v.origin_type() << ", "
-      << "\"generation_type\": " << v.generation_type() << ", "
       << "\"references\": " << v.references() << ", "
       << "\"leaves\": " << v.leaves() << ", "
       << "\"modules\": " << v.modules() << ", "

@@ -14,34 +14,34 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-15 Sat 19:30]
+#+CAPTION: Clock summary at [2016-10-15 Sat 21:24]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *47:19* |       |       | 100.0 |
+| *Total time*                                                                | *48:58* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 47:19   |       |       | 100.0 |
-| Active                                                                      |         | 47:19 |       | 100.0 |
+| Stories                                                                     | 48:58   |       |       | 100.0 |
+| Active                                                                      |         | 48:58 |       | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  0:24 |   0.8 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  0:19 |   0.7 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  0:19 |   0.6 |
 | COMPLETED Improve bintray support                                           |         |       |  0:26 |   0.9 |
-| COMPLETED Refactor opaque infrastructure                                    |         |       |  1:17 |   2.7 |
+| COMPLETED Refactor opaque infrastructure                                    |         |       |  1:17 |   2.6 |
 | COMPLETED Remove any remnants of annotations from quilt                     |         |       |  0:05 |   0.2 |
-| COMPLETED Solve the issue of too many "configurations"                      |         |       |  4:01 |   8.5 |
+| COMPLETED Solve the issue of too many "configurations"                      |         |       |  4:01 |   8.2 |
 | COMPLETED Merge decoration configuration and annotations factories          |         |       |  0:18 |   0.6 |
-| COMPLETED Move annotation factories into expander in yarn                   |         |       |  1:11 |   2.5 |
-| COMPLETED Clean up terminology in dynamic                                   |         |       | 15:12 |  32.1 |
+| COMPLETED Move annotation factories into expander in yarn                   |         |       |  1:11 |   2.4 |
+| COMPLETED Clean up terminology in dynamic                                   |         |       | 15:12 |  31.0 |
 | COMPLETED Minor tidy-up of the quilt.cpp diagram                            |         |       |  0:29 |   1.0 |
-| COMPLETED Create a ownership hierarchy repository                           |         |       |  1:43 |   3.6 |
-| COMPLETED Use vector of elements in model                                   |         |       |  0:10 |   0.4 |
-| COMPLETED Rewrite profile support                                           |         |       | 11:50 |  25.0 |
+| COMPLETED Create a ownership hierarchy repository                           |         |       |  1:43 |   3.5 |
+| COMPLETED Use vector of elements in model                                   |         |       |  0:10 |   0.3 |
+| COMPLETED Rewrite profile support                                           |         |       | 11:50 |  24.2 |
 | COMPLETED Merge annotation type and profile folders                         |         |       |  0:20 |   0.7 |
-| COMPLETED Push stereotypes processing into yarn                             |         |       |  1:51 |   3.9 |
-| COMPLETED Implement defaulting within the profiler                          |         |       |  1:13 |   2.6 |
-| COMPLETED Add binding of stereotypes with profiles                          |         |       |  1:40 |   3.5 |
-| COMPLETED Update dogen models to use profiles                               |         |       |  0:19 |   0.7 |
-| COMPLETED Finish overwriting support                                        |         |       |  2:38 |   5.6 |
-| STARTED Remove service stereotype                                           |         |       |  1:53 |   4.0 |
+| COMPLETED Push stereotypes processing into yarn                             |         |       |  1:51 |   3.8 |
+| COMPLETED Implement defaulting within the profiler                          |         |       |  1:13 |   2.5 |
+| COMPLETED Add binding of stereotypes with profiles                          |         |       |  1:40 |   3.4 |
+| COMPLETED Update dogen models to use profiles                               |         |       |  0:19 |   0.6 |
+| COMPLETED Finish overwriting support                                        |         |       |  2:38 |   5.4 |
+| COMPLETED Remove service stereotype                                         |         |       |  3:32 |   7.2 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -527,7 +527,12 @@ Tasks:
 - add handcrafted profile with overwrite set to false
 - use overwrite flag in formatter workflow
 
-*** STARTED Remove service stereotype                                 :story:
+*** COMPLETED Remove service stereotype                               :story:
+    CLOSED: [2016-10-15 Sat 21:24]
+    CLOCK: [2016-10-15 Sat 21:11]--[2016-10-15 Sat 21:24] =>  0:13
+    CLOCK: [2016-10-15 Sat 21:09]--[2016-10-15 Sat 21:10] =>  0:01
+    CLOCK: [2016-10-15 Sat 20:16]--[2016-10-15 Sat 20:57] =>  0:41
+    CLOCK: [2016-10-15 Sat 19:31]--[2016-10-15 Sat 20:15] =>  0:44
     CLOCK: [2016-10-15 Sat 19:16]--[2016-10-15 Sat 19:30] =>  0:14
     CLOCK: [2016-10-15 Sat 18:46]--[2016-10-15 Sat 19:15] =>  0:29
     CLOCK: [2016-10-15 Sat 18:42]--[2016-10-15 Sat 18:46] =>  0:04
@@ -537,6 +542,10 @@ Tasks:
 Once we've implemented binding of stereotypes to profiles and
 overwriting, we should be able to rename all of the existing services
 to a new stereotype =handcrafted=, and remove the hacks for services.
+
+Problems:
+
+- we're no longer generating cmakelists for test models.
 
 Merged stories:
 
@@ -568,6 +577,11 @@ we do not know that cmake was enabled via "enable all facets" and so
 this takes priority.
 
 *** Generate skeleton for "non-generatable" files                     :story:
+
+We probably just need to remove the hacks to be compatible with
+legacy: reset file contents when overwrite is false.
+
+*Previous Understanding*
 
 We are using non-generatable files quite a lot (at present called
 "services"). Every time we do this we end up copying manually the
