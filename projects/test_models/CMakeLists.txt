@@ -1,4 +1,4 @@
-# -*- mode: cmake; tab-width: 4; indent-tabs-mode: nil -*-
+# -*- mode: cmake; cmake-tab-width: 4; indent-tabs-mode: nil -*-
 #
 # Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
 #
@@ -146,9 +146,10 @@ foreach(dia_model ${all_dia_test_models})
 
     set(top_dir "${stage_test_data_dir}/${model_name}")
     set(actual_dir "${top_dir}/actual")
-    if(NOT IS_DIRECTORY "${actual_dir}")
-        file(MAKE_DIRECTORY "${actual_dir}")
+    if(IS_DIRECTORY "${actual_dir}")
+        file(REMOVE_RECURSE "${actual_dir}")
     endif()
+    file(MAKE_DIRECTORY "${actual_dir}")
 
     set(expected_dir "${top_dir}/expected")
     if(IS_DIRECTORY "${expected_dir}")
