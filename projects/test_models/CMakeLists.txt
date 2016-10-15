@@ -146,10 +146,20 @@ foreach(dia_model ${all_dia_test_models})
 
     set(top_dir "${stage_test_data_dir}/${model_name}")
     set(actual_dir "${top_dir}/actual")
-    if(IS_DIRECTORY "${actual_dir}")
-        file(REMOVE_RECURSE "${actual_dir}")
+    if(NOT IS_DIRECTORY "${actual_dir}")
+        file(MAKE_DIRECTORY "${actual_dir}")
     endif()
-    file(MAKE_DIRECTORY "${actual_dir}")
+
+    # Note: it would make more sense to always remove actual directory
+    # before every run. However the downside of that approach is that
+    # we can no longer diff results after a run, or else we will
+    # delete the results before diffing. Thus we decided to not delete
+    # actual directory.
+    #
+    # if(IS_DIRECTORY "${actual_dir}")
+    #     file(REMOVE_RECURSE "${actual_dir}")
+    # endif()
+    # file(MAKE_DIRECTORY "${actual_dir}")
 
     set(expected_dir "${top_dir}/expected")
     if(IS_DIRECTORY "${expected_dir}")
