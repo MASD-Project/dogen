@@ -30,7 +30,7 @@
 #include "dogen/dia/types/object_fwd.hpp"
 #include "dogen/dia/types/attribute_fwd.hpp"
 #include "dogen/dia/types/composite_fwd.hpp"
-#include "dogen/yarn.dia/types/object_types.hpp"
+#include "dogen/yarn.dia/types/dia_object_types.hpp"
 #include "dogen/yarn.dia/types/processed_object_fwd.hpp"
 #include "dogen/yarn.dia/types/comment_processor.hpp"
 
@@ -67,7 +67,7 @@ private:
      * @brief Given a string with a dia object type, returns the
      * appropriate enum.
      */
-    object_types parse_object_type(const std::string& ot) const;
+    dia_object_types parse_object_type(const std::string& ot) const;
 
 public:
     /**

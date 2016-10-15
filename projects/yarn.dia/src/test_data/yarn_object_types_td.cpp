@@ -18,22 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_DIA_IO_OBJECT_TYPES_IO_HPP
-#define DOGEN_YARN_DIA_IO_OBJECT_TYPES_IO_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <iosfwd>
-#include "dogen/yarn.dia/types/object_types.hpp"
+#include "dogen/yarn.dia/test_data/yarn_object_types_td.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace dia {
 
-std::ostream& operator<<(std::ostream& s, const object_types& v);
+yarn_object_types_generator::yarn_object_types_generator() : position_(0) { }
+void yarn_object_types_generator::
+populate(const unsigned int position, result_type& v) {
+    v = static_cast<yarn_object_types>(position % 5);
+}
+
+yarn_object_types_generator::result_type
+yarn_object_types_generator::create(const unsigned int  position) {
+    result_type r;
+    yarn_object_types_generator::populate(position, r);
+    return r;
+}
+
+yarn_object_types_generator::result_type
+yarn_object_types_generator::operator()() {
+    return create(position_++);
+}
 
 } } }
-
-#endif

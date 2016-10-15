@@ -24,19 +24,19 @@ namespace dogen {
 namespace yarn {
 namespace dia {
 
-bool reducer::is_relevant(const object_types ot) const {
+bool reducer::is_relevant(const dia_object_types ot) const {
     return
-        ot == object_types::uml_large_package ||
-        ot == object_types::uml_generalization ||
-        ot == object_types::uml_class ||
-        ot == object_types::uml_note;
+        ot == dia_object_types::uml_large_package ||
+        ot == dia_object_types::uml_generalization ||
+        ot == dia_object_types::uml_class ||
+        ot == dia_object_types::uml_note;
 }
 
 std::list<profiled_object>
 reducer::reduce(const std::list<profiled_object>& pos) const {
     std::list<profiled_object> r;
     for (const auto& po : pos)
-        if (is_relevant(po.object().object_type()))
+        if (is_relevant(po.object().dia_object_type()))
             r.push_back(po);
 
     return r;

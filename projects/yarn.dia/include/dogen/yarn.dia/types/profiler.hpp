@@ -26,7 +26,7 @@
 #endif
 
 #include <string>
-#include "dogen/yarn.dia/types/object_types.hpp"
+#include "dogen/yarn.dia/types/dia_object_types.hpp"
 #include "dogen/yarn.dia/types/profile.hpp"
 #include "dogen/yarn.dia/types/processed_object_fwd.hpp"
 
@@ -48,7 +48,7 @@ private:
      * @brief Given a string with a valid dia object type, updates the
      * processed object type flags.
      */
-    void process_object_type(profile& o, const object_types ot) const;
+    void process_object_type(profile& o, const dia_object_types ot) const;
 
     /**
      * @brief Given a string with a valid stereotype, updates the

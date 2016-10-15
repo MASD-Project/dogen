@@ -18,26 +18,31 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_DIA_HASH_OBJECT_TYPES_HASH_HPP
-#define DOGEN_YARN_DIA_HASH_OBJECT_TYPES_HASH_HPP
+#ifndef DOGEN_YARN_DIA_TYPES_DIA_OBJECT_TYPES_HPP
+#define DOGEN_YARN_DIA_TYPES_DIA_OBJECT_TYPES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/yarn.dia/types/object_types.hpp"
+namespace dogen {
+namespace yarn {
+namespace dia {
 
-namespace std {
-
-template<>
-struct hash<dogen::yarn::dia::object_types> {
-public:
-    size_t operator()(const dogen::yarn::dia::object_types& v) const {
-        return std::hash<unsigned int>()(static_cast<unsigned int>(v));
-    }
+/**
+ * @brief Identifier for the type of Dia object.
+ */
+enum class dia_object_types : unsigned int {
+    invalid = 0, ///< Represents an uninitialised enum
+    uml_large_package = 1, ///< A UML package
+    uml_class = 2, ///< A UML class
+    uml_generalization = 3, ///< UML Inheritance
+    uml_association = 4, ///< UML Association
+    uml_note = 5, ///< UML Note
+    uml_message = 6, ///< UML Message
+    uml_realization = 7 ///< UML Realization
 };
 
-}
+} } }
 
 #endif

@@ -19,9 +19,10 @@
  *
  */
 #include <sstream>
-#include "dogen/yarn.dia/test_data/object_types_td.hpp"
+#include "dogen/yarn.dia/test_data/dia_object_types_td.hpp"
 #include "dogen/yarn.dia/test_data/processed_object_td.hpp"
 #include "dogen/yarn.dia/test_data/processed_comment_td.hpp"
+#include "dogen/yarn.dia/test_data/yarn_object_types_td.hpp"
 #include "dogen/yarn.dia/test_data/processed_attribute_td.hpp"
 
 namespace {
@@ -32,9 +33,14 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-dogen::yarn::dia::object_types
-create_dogen_yarn_dia_object_types(const unsigned int position) {
-    return dogen::yarn::dia::object_types_generator::create(position);
+dogen::yarn::dia::dia_object_types
+create_dogen_yarn_dia_dia_object_types(const unsigned int position) {
+    return dogen::yarn::dia::dia_object_types_generator::create(position);
+}
+
+dogen::yarn::dia::yarn_object_types
+create_dogen_yarn_dia_yarn_object_types(const unsigned int position) {
+    return dogen::yarn::dia::yarn_object_types_generator::create(position);
 }
 
 dogen::yarn::dia::processed_comment
@@ -82,12 +88,13 @@ void processed_object_generator::
 populate(const unsigned int position, result_type& v) {
     v.id(create_std_string(position + 0));
     v.name(create_std_string(position + 1));
-    v.object_type(create_dogen_yarn_dia_object_types(position + 2));
-    v.stereotype(create_std_string(position + 3));
-    v.comment(create_dogen_yarn_dia_processed_comment(position + 4));
-    v.child_node_id(create_std_string(position + 5));
-    v.connection(create_boost_optional_std_pair_std_string_std_string(position + 6));
-    v.attributes(create_std_list_dogen_yarn_dia_processed_attribute(position + 7));
+    v.dia_object_type(create_dogen_yarn_dia_dia_object_types(position + 2));
+    v.yarn_object_type(create_dogen_yarn_dia_yarn_object_types(position + 3));
+    v.stereotype(create_std_string(position + 4));
+    v.comment(create_dogen_yarn_dia_processed_comment(position + 5));
+    v.child_node_id(create_std_string(position + 6));
+    v.connection(create_boost_optional_std_pair_std_string_std_string(position + 7));
+    v.attributes(create_std_list_dogen_yarn_dia_processed_attribute(position + 8));
 }
 
 processed_object_generator::result_type

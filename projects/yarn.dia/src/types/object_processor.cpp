@@ -126,27 +126,27 @@ create_processed_comment(const dogen::dia::attribute& a) const {
     return comment_processor_.process(s);
 }
 
-object_types object_processor::parse_object_type(const std::string& ot) const {
+dia_object_types object_processor::parse_object_type(const std::string& ot) const {
     if (ot == uml_large_package)
-        return object_types::uml_large_package;
+        return dia_object_types::uml_large_package;
 
     if (ot == uml_class)
-        return object_types::uml_class;
+        return dia_object_types::uml_class;
 
     if (ot == uml_generalization)
-        return object_types::uml_generalization;
+        return dia_object_types::uml_generalization;
 
     if (ot == uml_association)
-        return object_types::uml_association;
+        return dia_object_types::uml_association;
 
     if (ot == uml_note)
-        return object_types::uml_note;
+        return dia_object_types::uml_note;
 
     if (ot == uml_message)
-        return object_types::uml_message;
+        return dia_object_types::uml_message;
 
     if (ot == uml_realization)
-        return object_types::uml_realization;
+        return dia_object_types::uml_realization;
 
     BOOST_LOG_SEV(lg, error) << invalid_object_type << ot;
     BOOST_THROW_EXCEPTION(processing_error(invalid_object_type + ot));
@@ -155,16 +155,16 @@ object_types object_processor::parse_object_type(const std::string& ot) const {
 processed_object object_processor::process(const dogen::dia::object& o) {
     processed_object r;
     r.id(o.id());
-    r.object_type(parse_object_type(o.type()));
+    r.dia_object_type(parse_object_type(o.type()));
 
     if (o.child_node())
         r.child_node_id(o.child_node()->parent());
 
     // FIXME: we should issue warnings here
     if (!o.connections().empty() && (
-            r.object_type() == object_types::uml_generalization/* ||
-            r.object_type() == object_types::uml_association ||
-            r.object_type() == object_types::uml_realization*/)) {
+            r.dia_object_type() == dia_object_types::uml_generalization/* ||
+            r.dia_object_type() == dia_object_types::uml_association ||
+            r.dia_object_type() == dia_object_types::uml_realization*/)) {
 
         const auto s(o.connections().size());
         if (s != 2) {

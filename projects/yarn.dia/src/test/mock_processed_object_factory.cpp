@@ -21,6 +21,7 @@
 #include <string>
 #include <boost/lexical_cast.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn.dia/types/dia_object_types.hpp"
 #include "dogen/yarn.dia/test/mock_processed_object_factory.hpp"
 
 namespace {
@@ -47,11 +48,11 @@ using dogen::yarn::dia::processed_object;
 using dogen::yarn::dia::processed_attribute;
 using dogen::yarn::dia::test::mock_processed_object_factory;
 
-processed_object
-create_object(const dogen::yarn::dia::object_types ot, const unsigned int n) {
+processed_object create_object(const dogen::yarn::dia::dia_object_types ot,
+    const unsigned int n) {
     processed_object r;
     r.id(mock_processed_object_factory::to_oject_id(n));
-    r.object_type(ot);
+    r.dia_object_type(ot);
     return r;
 }
 
@@ -61,7 +62,8 @@ std::string name(const unsigned int n) {
     return s.str();
 }
 
-processed_object create_named_object(const dogen::yarn::dia::object_types ot,
+processed_object
+create_named_object(const dogen::yarn::dia::dia_object_types ot,
     const unsigned int n) {
     processed_object r(create_object(ot, n));
     r.name(name(n));
@@ -96,13 +98,13 @@ mock_processed_object_factory::to_object_name(const unsigned int n) {
 
 processed_object mock_processed_object_factory::
 make_uml_message(const unsigned int n) {
-    processed_object r(create_object(object_types::uml_message, n));
+    processed_object r(create_object(dia_object_types::uml_message, n));
     return r;
 }
 
 processed_object mock_processed_object_factory::
 make_uml_note(const unsigned int n) {
-    processed_object r(create_object(object_types::uml_note, n));
+    processed_object r(create_object(dia_object_types::uml_note, n));
 
     r.comment().documentation(note_text);
     r.comment().original_content(note_text);
@@ -111,7 +113,7 @@ make_uml_note(const unsigned int n) {
 
 processed_object mock_processed_object_factory::
 make_uml_note_with_marker(const unsigned int n) {
-    processed_object r(create_object(object_types::uml_note, n));
+    processed_object r(create_object(dia_object_types::uml_note, n));
     std::ostringstream s;
     s << "#DOGEN yarn.dia.comment=true" << std::endl << std::endl
       << doxygen_comment;
@@ -125,7 +127,7 @@ make_uml_note_with_marker(const unsigned int n) {
 
 processed_object mock_processed_object_factory::
 make_empty_uml_note(const unsigned int n) {
-    processed_object r(create_object(object_types::uml_note, n));
+    processed_object r(create_object(dia_object_types::uml_note, n));
     return r;
 }
 
@@ -164,7 +166,7 @@ make_uml_note_with_marker_inside_large_package(unsigned int n) {
 
 processed_object mock_processed_object_factory::
 make_class(const unsigned int n, const std::string& st) {
-    auto r(create_named_object(object_types::uml_class, n));
+    auto r(create_named_object(dia_object_types::uml_class, n));
     r.stereotype(st);
     r.comment().documentation(doxygen_comment);
     r.comment().original_content(doxygen_comment);
@@ -180,13 +182,13 @@ make_class_with_attribute(const unsigned int n, const std::string& st) {
 
 processed_object mock_processed_object_factory::
 make_empty_named_class(const unsigned int n) {
-    processed_object r(create_object(object_types::uml_class, n));
+    processed_object r(create_object(dia_object_types::uml_class, n));
     return r;
 }
 
 processed_object mock_processed_object_factory::
 make_large_package(const unsigned int n) {
-    return create_named_object(object_types::uml_large_package, n);
+    return create_named_object(dia_object_types::uml_large_package, n);
 }
 
 std::array<processed_object, 2> mock_processed_object_factory::
@@ -217,7 +219,7 @@ std::array<processed_object, 3>
 mock_processed_object_factory::
 make_realization(unsigned int n, const std::string& st) {
     std::array<processed_object, 3> r = {{
-            create_object(object_types::uml_realization, n),
+            create_object(dia_object_types::uml_realization, n),
             make_class(++n, st),
             make_class(++n, st),
         }};
@@ -229,7 +231,7 @@ std::array<processed_object, 3>
 mock_processed_object_factory::
 make_generalization(unsigned int n, const std::string& st) {
     std::array<processed_object, 3> r = {{
-            create_object(object_types::uml_generalization, n),
+            create_object(dia_object_types::uml_generalization, n),
             make_class(++n, st),
             make_class(++n, st),
         }};
@@ -243,7 +245,7 @@ make_association(unsigned int n, const std::string& st) {
     std::array<processed_object, 3> r = {{
             make_class(n),
             make_class(++n, st),
-            create_object(object_types::uml_association, ++n)
+            create_object(dia_object_types::uml_association, ++n)
         }};
 
     r[2].connection(std::make_pair(r[0].id(), r[1].id()));
@@ -257,7 +259,7 @@ make_generalization_inside_large_package(
             make_large_package(n),
             make_class(++n, st),
             make_class(++n, st),
-            create_object(object_types::uml_generalization, ++n)
+            create_object(dia_object_types::uml_generalization, ++n)
         }};
 
     r[3].connection(std::make_pair(r[1].id(), r[2].id()));
@@ -273,8 +275,8 @@ make_first_degree_cycle(unsigned int n) {
     std::array<processed_object, 4> r = {{
             make_class(n),
             make_class(++n),
-            create_object(object_types::uml_generalization, ++n),
-            create_object(object_types::uml_generalization, ++n)
+            create_object(dia_object_types::uml_generalization, ++n),
+            create_object(dia_object_types::uml_generalization, ++n)
         }};
 
     r[2].connection(std::make_pair(r[0].id(), r[1].id()));

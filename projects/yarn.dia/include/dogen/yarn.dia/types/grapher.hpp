@@ -29,7 +29,6 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <boost/graph/adjacency_list.hpp>
-#include "dogen/yarn.dia/types/object_types.hpp"
 #include "dogen/yarn.dia/types/profiled_object.hpp"
 #include "dogen/yarn.dia/types/processed_object.hpp"
 

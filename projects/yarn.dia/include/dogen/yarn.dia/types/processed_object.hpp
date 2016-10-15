@@ -30,8 +30,9 @@
 #include <utility>
 #include <algorithm>
 #include <boost/optional.hpp>
-#include "dogen/yarn.dia/types/object_types.hpp"
+#include "dogen/yarn.dia/types/dia_object_types.hpp"
 #include "dogen/yarn.dia/types/processed_comment.hpp"
+#include "dogen/yarn.dia/types/yarn_object_types.hpp"
 #include "dogen/yarn.dia/types/processed_attribute.hpp"
 #include "dogen/yarn.dia/serialization/processed_object_fwd_ser.hpp"
 
@@ -57,7 +58,8 @@ public:
     processed_object(
         const std::string& id,
         const std::string& name,
-        const dogen::yarn::dia::object_types object_type,
+        const dogen::yarn::dia::dia_object_types dia_object_type,
+        const dogen::yarn::dia::yarn_object_types yarn_object_type,
         const std::string& stereotype,
         const dogen::yarn::dia::processed_comment& comment,
         const std::string& child_node_id,
@@ -96,9 +98,12 @@ public:
      * @brief Type of the dia object.
      */
     /**@{*/
-    dogen::yarn::dia::object_types object_type() const;
-    void object_type(const dogen::yarn::dia::object_types v);
+    dogen::yarn::dia::dia_object_types dia_object_type() const;
+    void dia_object_type(const dogen::yarn::dia::dia_object_types v);
     /**@}*/
+
+    dogen::yarn::dia::yarn_object_types yarn_object_type() const;
+    void yarn_object_type(const dogen::yarn::dia::yarn_object_types v);
 
     /**
      * @brief CSV list of stereotypes.
@@ -165,7 +170,8 @@ public:
 private:
     std::string id_;
     std::string name_;
-    dogen::yarn::dia::object_types object_type_;
+    dogen::yarn::dia::dia_object_types dia_object_type_;
+    dogen::yarn::dia::yarn_object_types yarn_object_type_;
     std::string stereotype_;
     dogen::yarn::dia::processed_comment comment_;
     std::string child_node_id_;

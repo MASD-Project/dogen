@@ -18,19 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_DIA_TYPES_OBJECT_TYPES_FWD_HPP
-#define DOGEN_YARN_DIA_TYPES_OBJECT_TYPES_FWD_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+#include "dogen/yarn.dia/test_data/dia_object_types_td.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace dia {
 
-enum class object_types : unsigned int;
+dia_object_types_generator::dia_object_types_generator() : position_(0) { }
+void dia_object_types_generator::
+populate(const unsigned int position, result_type& v) {
+    v = static_cast<dia_object_types>(position % 8);
+}
+
+dia_object_types_generator::result_type
+dia_object_types_generator::create(const unsigned int  position) {
+    result_type r;
+    dia_object_types_generator::populate(position, r);
+    return r;
+}
+
+dia_object_types_generator::result_type
+dia_object_types_generator::operator()() {
+    return create(position_++);
+}
 
 } } }
-
-#endif

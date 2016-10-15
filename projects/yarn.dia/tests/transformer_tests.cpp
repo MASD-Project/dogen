@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-
 /*
 #include <sstream>
 #include <initializer_list>
@@ -104,18 +103,15 @@ dogen::yarn::dia::repository mock_repository() {
     return mock_repository(model_name);
 }
 
-dogen::annotations::repository empty_repository;
+dogen::yarn::dia::repository empty_repository;
 
 void transform(dogen::yarn::dia::repository& c,
-    std::initializer_list<dogen::yarn::dia::processed_object> lpo) {
-
-    using namespace dogen::annotations::test;
-    mock_repository_factory rf;
-    const auto rp(rf.make());
+    std::initializer_list<dogen::yarn::dia::processed_object> pos) {
     dogen::yarn::dia::transformer t(c);
 
-    for (const auto& po : lpo)
-        t.transform(po, mock_profile(po));
+    for (const auto& po : pos) {
+        t.transform(po);
+    }
 }
 
 }
@@ -127,10 +123,10 @@ BOOST_AUTO_TEST_SUITE(transformer_tests)
 BOOST_AUTO_TEST_CASE(empty_named_uml_class_throws) {
     SETUP_TEST_LOG_SOURCE("empty_named_uml_class_throws");
 
-    auto c(mock_repository());
+    auto rp(mock_repository());
     contains_checker<transformation_error> cc(empty_name);
     const auto po(mock_processed_object_factory::make_empty_named_class());
-    BOOST_CHECK_EXCEPTION(transform(c, {po}), transformation_error, cc);
+    BOOST_CHECK_EXCEPTION(transform(rp, {po}), transformation_error, cc);
 }
 
 BOOST_AUTO_TEST_CASE(uml_class_with_no_stereotype_transforms_into_expected_value_object) {

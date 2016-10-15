@@ -42,20 +42,20 @@ namespace yarn {
 namespace dia {
 
 void profiler::
-process_object_type(profile& o, const object_types ot) const {
-    if (ot == object_types::uml_large_package)
+process_object_type(profile& o, const dia_object_types ot) const {
+    if (ot == dia_object_types::uml_large_package)
         o.is_uml_large_package(true);
-    else if (ot == object_types::uml_class)
+    else if (ot == dia_object_types::uml_class)
         o.is_uml_class(true);
-    else if (ot == object_types::uml_generalization)
+    else if (ot == dia_object_types::uml_generalization)
         o.is_uml_generalization(true);
-    else if (ot == object_types::uml_association)
+    else if (ot == dia_object_types::uml_association)
         o.is_uml_association(true);
-    else if (ot == object_types::uml_note)
+    else if (ot == dia_object_types::uml_note)
         o.is_uml_note(true);
-    else if (ot == object_types::uml_message)
+    else if (ot == dia_object_types::uml_message)
         o.is_uml_message(true);
-    else if (ot == object_types::uml_realization)
+    else if (ot == dia_object_types::uml_realization)
         o.is_uml_realization(true);
 }
 
@@ -88,7 +88,7 @@ profile profiler::generate(const processed_object& o) {
     BOOST_LOG_SEV(lg, debug) << "Generating profile for: " << o.id();
 
     profile r;
-    process_object_type(r, o.object_type());
+    process_object_type(r, o.dia_object_type());
     process_stereotype(r, o.stereotype());
     post_process(r);
 

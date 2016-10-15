@@ -18,9 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn.dia/hash/object_types_hash.hpp"
+#include "dogen/yarn.dia/hash/dia_object_types_hash.hpp"
 #include "dogen/yarn.dia/hash/processed_object_hash.hpp"
 #include "dogen/yarn.dia/hash/processed_comment_hash.hpp"
+#include "dogen/yarn.dia/hash/yarn_object_types_hash.hpp"
 #include "dogen/yarn.dia/hash/processed_attribute_hash.hpp"
 
 namespace {
@@ -68,7 +69,8 @@ std::size_t processed_object_hasher::hash(const processed_object& v) {
 
     combine(seed, v.id());
     combine(seed, v.name());
-    combine(seed, v.object_type());
+    combine(seed, v.dia_object_type());
+    combine(seed, v.yarn_object_type());
     combine(seed, v.stereotype());
     combine(seed, v.comment());
     combine(seed, v.child_node_id());

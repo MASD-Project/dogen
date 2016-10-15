@@ -49,7 +49,7 @@ BOOST_AUTO_TEST_CASE(validate_serialization) {
 
     roundtrip_type<repository_generator>();
     roundtrip_type<profile_generator>();
-    roundtrip_type<object_types_generator>();
+    roundtrip_type<dia_object_types_generator>();
     roundtrip_type<processed_object_generator>();
     roundtrip_type<processed_attribute_generator>();
 }

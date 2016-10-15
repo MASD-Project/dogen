@@ -43,7 +43,7 @@ BOOST_AUTO_TEST_CASE(validate_swap) {
 
     test_swap<repository_generator>();
     test_swap<profile_generator>();
-    test_swap<object_types_generator>();
+    test_swap<dia_object_types_generator>();
     test_swap<processed_object_generator>();
     test_swap<processed_attribute_generator>();
 }

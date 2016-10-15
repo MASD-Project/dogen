@@ -26,7 +26,6 @@
 #endif
 
 #include <array>
-#include "dogen/yarn.dia/types/object_types.hpp"
 #include "dogen/yarn.dia/types/processed_object.hpp"
 
 namespace dogen {

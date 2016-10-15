@@ -44,7 +44,7 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
 
     test_hashing<repository_generator>();
     test_hashing<profile_generator>();
-    test_hashing<object_types_generator>();
+    test_hashing<dia_object_types_generator>();
     test_hashing<processed_object_generator>();
     test_hashing<processed_attribute_generator>();
 }

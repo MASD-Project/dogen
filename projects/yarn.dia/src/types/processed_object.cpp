@@ -25,12 +25,14 @@ namespace yarn {
 namespace dia {
 
 processed_object::processed_object()
-    : object_type_(static_cast<dogen::yarn::dia::object_types>(0)) { }
+    : dia_object_type_(static_cast<dogen::yarn::dia::dia_object_types>(0)),
+      yarn_object_type_(static_cast<dogen::yarn::dia::yarn_object_types>(0)) { }
 
 processed_object::processed_object(processed_object&& rhs)
     : id_(std::move(rhs.id_)),
       name_(std::move(rhs.name_)),
-      object_type_(std::move(rhs.object_type_)),
+      dia_object_type_(std::move(rhs.dia_object_type_)),
+      yarn_object_type_(std::move(rhs.yarn_object_type_)),
       stereotype_(std::move(rhs.stereotype_)),
       comment_(std::move(rhs.comment_)),
       child_node_id_(std::move(rhs.child_node_id_)),
@@ -40,7 +42,8 @@ processed_object::processed_object(processed_object&& rhs)
 processed_object::processed_object(
     const std::string& id,
     const std::string& name,
-    const dogen::yarn::dia::object_types object_type,
+    const dogen::yarn::dia::dia_object_types dia_object_type,
+    const dogen::yarn::dia::yarn_object_types yarn_object_type,
     const std::string& stereotype,
     const dogen::yarn::dia::processed_comment& comment,
     const std::string& child_node_id,
@@ -48,7 +51,8 @@ processed_object::processed_object(
     const std::list<dogen::yarn::dia::processed_attribute>& attributes)
     : id_(id),
       name_(name),
-      object_type_(object_type),
+      dia_object_type_(dia_object_type),
+      yarn_object_type_(yarn_object_type),
       stereotype_(stereotype),
       comment_(comment),
       child_node_id_(child_node_id),
@@ -59,7 +63,8 @@ void processed_object::swap(processed_object& other) noexcept {
     using std::swap;
     swap(id_, other.id_);
     swap(name_, other.name_);
-    swap(object_type_, other.object_type_);
+    swap(dia_object_type_, other.dia_object_type_);
+    swap(yarn_object_type_, other.yarn_object_type_);
     swap(stereotype_, other.stereotype_);
     swap(comment_, other.comment_);
     swap(child_node_id_, other.child_node_id_);
@@ -70,7 +75,8 @@ void processed_object::swap(processed_object& other) noexcept {
 bool processed_object::operator==(const processed_object& rhs) const {
     return id_ == rhs.id_ &&
         name_ == rhs.name_ &&
-        object_type_ == rhs.object_type_ &&
+        dia_object_type_ == rhs.dia_object_type_ &&
+        yarn_object_type_ == rhs.yarn_object_type_ &&
         stereotype_ == rhs.stereotype_ &&
         comment_ == rhs.comment_ &&
         child_node_id_ == rhs.child_node_id_ &&
@@ -116,12 +122,20 @@ void processed_object::name(const std::string&& v) {
     name_ = std::move(v);
 }
 
-dogen::yarn::dia::object_types processed_object::object_type() const {
-    return object_type_;
+dogen::yarn::dia::dia_object_types processed_object::dia_object_type() const {
+    return dia_object_type_;
 }
 
-void processed_object::object_type(const dogen::yarn::dia::object_types v) {
-    object_type_ = v;
+void processed_object::dia_object_type(const dogen::yarn::dia::dia_object_types v) {
+    dia_object_type_ = v;
+}
+
+dogen::yarn::dia::yarn_object_types processed_object::yarn_object_type() const {
+    return yarn_object_type_;
+}
+
+void processed_object::yarn_object_type(const dogen::yarn::dia::yarn_object_types v) {
+    yarn_object_type_ = v;
 }
 
 const std::string& processed_object::stereotype() const {

@@ -18,29 +18,40 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_DIA_TYPES_REDUCER_HPP
-#define DOGEN_YARN_DIA_TYPES_REDUCER_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <list>
-#include "dogen/yarn.dia/types/profiled_object.hpp"
+#include <string>
+#include <ostream>
+#include <stdexcept>
+#include "dogen/yarn.dia/io/yarn_object_types_io.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace dia {
 
-class reducer {
-private:
-    bool is_relevant(const dia_object_types ot) const;
+std::ostream& operator<<(std::ostream& s, const yarn_object_types& v) {
+    s << "{ " << "\"__type__\": " << "\"yarn_object_types\", " << "\"value\": ";
 
-public:
-    std::list<profiled_object>
-    reduce(const std::list<profiled_object>& pos) const;
-};
+    std::string attr;
+    switch (v) {
+    case yarn_object_types::invalid:
+        attr = "\"invalid\"";
+        break;
+    case yarn_object_types::not_applicable:
+        attr = "\"not_applicable\"";
+        break;
+    case yarn_object_types::exception:
+        attr = "\"exception\"";
+        break;
+    case yarn_object_types::object:
+        attr = "\"object\"";
+        break;
+    case yarn_object_types::concept:
+        attr = "\"concept\"";
+        break;
+    default:
+        throw std::invalid_argument("Invalid value for yarn_object_types");
+    }
+    s << attr << " }";
+    return s;
+}
 
 } } }
-
-#endif

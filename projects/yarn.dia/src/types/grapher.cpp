@@ -24,7 +24,7 @@
 #include <boost/algorithm/string/erase.hpp>
 #include <boost/graph/depth_first_search.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn.dia/io/object_types_io.hpp"
+#include "dogen/yarn.dia/io/dia_object_types_io.hpp"
 #include "dogen/yarn.dia/types/graphing_error.hpp"
 #include "dogen/yarn.dia/types/grapher.hpp"
 
@@ -153,7 +153,7 @@ process_child_node(const vertex_descriptor_type& v, const processed_object& o) {
 void grapher::process_connections(const processed_object& o) {
     BOOST_LOG_SEV(lg, debug) << "Processing connections for object: '"
                              << o.id() << "' of type: '"
-                             << o.object_type() << "'";
+                             << o.dia_object_type() << "'";
 
     const auto parent_id(o.connection()->first);
     const auto child_id(o.connection()->second);

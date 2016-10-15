@@ -21,43 +21,43 @@
 #include <string>
 #include <ostream>
 #include <stdexcept>
-#include "dogen/yarn.dia/io/object_types_io.hpp"
+#include "dogen/yarn.dia/io/dia_object_types_io.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace dia {
 
-std::ostream& operator<<(std::ostream& s, const object_types& v) {
-    s << "{ " << "\"__type__\": " << "\"object_types\", " << "\"value\": ";
+std::ostream& operator<<(std::ostream& s, const dia_object_types& v) {
+    s << "{ " << "\"__type__\": " << "\"dia_object_types\", " << "\"value\": ";
 
     std::string attr;
     switch (v) {
-    case object_types::invalid:
+    case dia_object_types::invalid:
         attr = "\"invalid\"";
         break;
-    case object_types::uml_large_package:
+    case dia_object_types::uml_large_package:
         attr = "\"uml_large_package\"";
         break;
-    case object_types::uml_class:
+    case dia_object_types::uml_class:
         attr = "\"uml_class\"";
         break;
-    case object_types::uml_generalization:
+    case dia_object_types::uml_generalization:
         attr = "\"uml_generalization\"";
         break;
-    case object_types::uml_association:
+    case dia_object_types::uml_association:
         attr = "\"uml_association\"";
         break;
-    case object_types::uml_note:
+    case dia_object_types::uml_note:
         attr = "\"uml_note\"";
         break;
-    case object_types::uml_message:
+    case dia_object_types::uml_message:
         attr = "\"uml_message\"";
         break;
-    case object_types::uml_realization:
+    case dia_object_types::uml_realization:
         attr = "\"uml_realization\"";
         break;
     default:
-        throw std::invalid_argument("Invalid value for object_types");
+        throw std::invalid_argument("Invalid value for dia_object_types");
     }
     s << attr << " }";
     return s;

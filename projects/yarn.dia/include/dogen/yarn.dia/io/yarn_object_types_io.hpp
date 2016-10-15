@@ -18,34 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/test/unit_test.hpp>
-#include "dogen/utility/test/logging.hpp"
-#include "dogen/utility/test/canned_tests.hpp"
-#include "dogen/yarn.dia/types/all.hpp"
-#include "dogen/yarn.dia/io/all_io.hpp"
-#include "dogen/yarn.dia/test_data/all_td.hpp"
+#ifndef DOGEN_YARN_DIA_IO_YARN_OBJECT_TYPES_IO_HPP
+#define DOGEN_YARN_DIA_IO_YARN_OBJECT_TYPES_IO_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-const std::string empty;
-const std::string test_module("yarn.dia");
-const std::string test_suite("io_tests");
+#include <iosfwd>
+#include "dogen/yarn.dia/types/yarn_object_types.hpp"
 
-}
+namespace dogen {
+namespace yarn {
+namespace dia {
 
-using namespace dogen::yarn::dia;
-using namespace dogen::utility::test;
+std::ostream& operator<<(std::ostream& s, const yarn_object_types& v);
 
-BOOST_AUTO_TEST_SUITE(io_tests)
+} } }
 
-BOOST_AUTO_TEST_CASE(validate_io) {
-    SETUP_TEST_LOG("validate_io");
-
-    test_io<repository_generator>();
-    test_io<profile_generator>();
-    test_io<dia_object_types_generator>();
-    test_io<processed_object_generator>();
-    test_io<processed_attribute_generator>();
-}
-
-BOOST_AUTO_TEST_SUITE_END()
+#endif

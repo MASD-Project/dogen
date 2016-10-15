@@ -20,9 +20,10 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/yarn.dia/io/object_types_io.hpp"
+#include "dogen/yarn.dia/io/dia_object_types_io.hpp"
 #include "dogen/yarn.dia/io/processed_object_io.hpp"
 #include "dogen/yarn.dia/io/processed_comment_io.hpp"
+#include "dogen/yarn.dia/io/yarn_object_types_io.hpp"
 #include "dogen/yarn.dia/io/processed_attribute_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -83,7 +84,8 @@ std::ostream& operator<<(std::ostream& s, const processed_object& v) {
       << "\"__type__\": " << "\"dogen::yarn::dia::processed_object\"" << ", "
       << "\"id\": " << "\"" << tidy_up_string(v.id()) << "\"" << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
-      << "\"object_type\": " << v.object_type() << ", "
+      << "\"dia_object_type\": " << v.dia_object_type() << ", "
+      << "\"yarn_object_type\": " << v.yarn_object_type() << ", "
       << "\"stereotype\": " << "\"" << tidy_up_string(v.stereotype()) << "\"" << ", "
       << "\"comment\": " << v.comment() << ", "
       << "\"child_node_id\": " << "\"" << tidy_up_string(v.child_node_id()) << "\"" << ", "

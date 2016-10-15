@@ -31,9 +31,10 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/yarn.dia/serialization/object_types_ser.hpp"
+#include "dogen/yarn.dia/serialization/dia_object_types_ser.hpp"
 #include "dogen/yarn.dia/serialization/processed_object_ser.hpp"
 #include "dogen/yarn.dia/serialization/processed_comment_ser.hpp"
+#include "dogen/yarn.dia/serialization/yarn_object_types_ser.hpp"
 #include "dogen/yarn.dia/serialization/processed_attribute_ser.hpp"
 
 namespace boost {
@@ -45,7 +46,8 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("id", v.id_);
     ar << make_nvp("name", v.name_);
-    ar << make_nvp("object_type", v.object_type_);
+    ar << make_nvp("dia_object_type", v.dia_object_type_);
+    ar << make_nvp("yarn_object_type", v.yarn_object_type_);
     ar << make_nvp("stereotype", v.stereotype_);
     ar << make_nvp("comment", v.comment_);
     ar << make_nvp("child_node_id", v.child_node_id_);
@@ -59,7 +61,8 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("id", v.id_);
     ar >> make_nvp("name", v.name_);
-    ar >> make_nvp("object_type", v.object_type_);
+    ar >> make_nvp("dia_object_type", v.dia_object_type_);
+    ar >> make_nvp("yarn_object_type", v.yarn_object_type_);
     ar >> make_nvp("stereotype", v.stereotype_);
     ar >> make_nvp("comment", v.comment_);
     ar >> make_nvp("child_node_id", v.child_node_id_);
