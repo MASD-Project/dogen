@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/yarn/hash/name_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/model_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/formattable_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/facet_properties_hash.hpp"
@@ -68,6 +69,7 @@ namespace formattables {
 std::size_t model_hasher::hash(const model& v) {
     std::size_t seed(0);
 
+    combine(seed, v.name());
     combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_streaming_properties(v.streaming_properties()));
     combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formattable(v.formattables()));
     combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_facet_properties(v.facet_properties()));

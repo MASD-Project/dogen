@@ -28,6 +28,7 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
+#include "dogen/yarn/types/name.hpp"
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
 #include "dogen/quilt.cpp/types/formattables/facet_properties.hpp"
 #include "dogen/quilt.cpp/types/formattables/streaming_properties.hpp"
@@ -47,6 +48,7 @@ public:
 
 public:
     model(
+        const dogen::yarn::name& name,
         const std::unordered_map<std::string, dogen::quilt::cpp::formattables::streaming_properties>& streaming_properties,
         const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formattable>& formattables,
         const std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_properties>& facet_properties);
@@ -59,6 +61,11 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::formattables::model& v, unsigned int version);
 
 public:
+    const dogen::yarn::name& name() const;
+    dogen::yarn::name& name();
+    void name(const dogen::yarn::name& v);
+    void name(const dogen::yarn::name&& v);
+
     const std::unordered_map<std::string, dogen::quilt::cpp::formattables::streaming_properties>& streaming_properties() const;
     std::unordered_map<std::string, dogen::quilt::cpp::formattables::streaming_properties>& streaming_properties();
     void streaming_properties(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::streaming_properties>& v);
@@ -85,6 +92,7 @@ public:
     model& operator=(model other);
 
 private:
+    dogen::yarn::name name_;
     std::unordered_map<std::string, dogen::quilt::cpp::formattables::streaming_properties> streaming_properties_;
     std::unordered_map<std::string, dogen::quilt::cpp::formattables::formattable> formattables_;
     std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_properties> facet_properties_;

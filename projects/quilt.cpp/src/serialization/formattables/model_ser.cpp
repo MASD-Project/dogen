@@ -29,6 +29,7 @@
 #include <boost/serialization/unordered_map.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
+#include "dogen/yarn/serialization/name_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/model_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/formattable_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/facet_properties_ser.hpp"
@@ -41,6 +42,7 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::quilt::cpp::formattables::model& v,
     const unsigned int /*version*/) {
+    ar << make_nvp("name", v.name_);
     ar << make_nvp("streaming_properties", v.streaming_properties_);
     ar << make_nvp("formattables", v.formattables_);
     ar << make_nvp("facet_properties", v.facet_properties_);
@@ -50,6 +52,7 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::quilt::cpp::formattables::model& v,
     const unsigned int /*version*/) {
+    ar >> make_nvp("name", v.name_);
     ar >> make_nvp("streaming_properties", v.streaming_properties_);
     ar >> make_nvp("formattables", v.formattables_);
     ar >> make_nvp("facet_properties", v.facet_properties_);

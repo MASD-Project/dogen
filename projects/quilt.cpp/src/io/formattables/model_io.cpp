@@ -20,6 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
+#include "dogen/yarn/io/name_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/model_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/formattable_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/facet_properties_io.hpp"
@@ -94,6 +95,7 @@ namespace formattables {
 std::ostream& operator<<(std::ostream& s, const model& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::model\"" << ", "
+      << "\"name\": " << v.name() << ", "
       << "\"streaming_properties\": " << v.streaming_properties() << ", "
       << "\"formattables\": " << v.formattables() << ", "
       << "\"facet_properties\": " << v.facet_properties()

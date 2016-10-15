@@ -19,12 +19,18 @@
  *
  */
 #include <sstream>
+#include "dogen/yarn/test_data/name_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/model_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/formattable_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/facet_properties_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/streaming_properties_td.hpp"
 
 namespace {
+
+dogen::yarn::name
+create_dogen_yarn_name(const unsigned int position) {
+    return dogen::yarn::name_generator::create(position);
+}
 
 std::string create_std_string(const unsigned int position) {
     std::ostringstream s;
@@ -82,9 +88,10 @@ model_generator::model_generator() : position_(0) { }
 
 void model_generator::
 populate(const unsigned int position, result_type& v) {
-    v.streaming_properties(create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_streaming_properties(position + 0));
-    v.formattables(create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formattable(position + 1));
-    v.facet_properties(create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_facet_properties(position + 2));
+    v.name(create_dogen_yarn_name(position + 0));
+    v.streaming_properties(create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_streaming_properties(position + 1));
+    v.formattables(create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formattable(position + 2));
+    v.facet_properties(create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_facet_properties(position + 3));
 }
 
 model_generator::result_type

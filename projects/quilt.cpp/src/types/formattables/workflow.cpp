@@ -70,8 +70,11 @@ workflow::obtain_module_ids(const yarn::model& m) const {
 model workflow::
 make_model(const formatters::container& fc, const yarn::model& m) const {
     model r;
+    r.name(m.name());
+
     transformer t;
     r.formattables(t.transform(fc, m));
+
     return r;
 }
 

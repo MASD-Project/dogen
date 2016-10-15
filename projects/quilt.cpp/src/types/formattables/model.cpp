@@ -26,22 +26,26 @@ namespace cpp {
 namespace formattables {
 
 model::model(
+    const dogen::yarn::name& name,
     const std::unordered_map<std::string, dogen::quilt::cpp::formattables::streaming_properties>& streaming_properties,
     const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formattable>& formattables,
     const std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_properties>& facet_properties)
-    : streaming_properties_(streaming_properties),
+    : name_(name),
+      streaming_properties_(streaming_properties),
       formattables_(formattables),
       facet_properties_(facet_properties) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
+    swap(name_, other.name_);
     swap(streaming_properties_, other.streaming_properties_);
     swap(formattables_, other.formattables_);
     swap(facet_properties_, other.facet_properties_);
 }
 
 bool model::operator==(const model& rhs) const {
-    return streaming_properties_ == rhs.streaming_properties_ &&
+    return name_ == rhs.name_ &&
+        streaming_properties_ == rhs.streaming_properties_ &&
         formattables_ == rhs.formattables_ &&
         facet_properties_ == rhs.facet_properties_;
 }
@@ -50,6 +54,22 @@ model& model::operator=(model other) {
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+const dogen::yarn::name& model::name() const {
+    return name_;
+}
+
+dogen::yarn::name& model::name() {
+    return name_;
+}
+
+void model::name(const dogen::yarn::name& v) {
+    name_ = v;
+}
+
+void model::name(const dogen::yarn::name&& v) {
+    name_ = std::move(v);
 }
 
 const std::unordered_map<std::string, dogen::quilt::cpp::formattables::streaming_properties>& model::streaming_properties() const {
