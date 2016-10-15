@@ -54,7 +54,8 @@ std::ostream& operator<<(std::ostream& s, const local_enablement_configuration& 
       << "\"facet_enabled\": " << v.facet_enabled() << ", "
       << "\"formatter_enabled\": " << v.formatter_enabled() << ", "
       << "\"facet_supported\": " << v.facet_supported() << ", "
-      << "\"overwrite\": " << v.overwrite()
+      << "\"facet_overwrite\": " << v.facet_overwrite() << ", "
+      << "\"formatter_overwrite\": " << v.formatter_overwrite()
       << " }";
     return(s);
 }

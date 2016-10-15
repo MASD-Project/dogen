@@ -26,6 +26,7 @@
 #endif
 
 #include <algorithm>
+#include <boost/optional.hpp>
 #include "dogen/quilt.cpp/serialization/formattables/global_enablement_configuration_fwd_ser.hpp"
 
 namespace dogen {
@@ -36,18 +37,21 @@ namespace formattables {
 class global_enablement_configuration final {
 public:
     global_enablement_configuration(const global_enablement_configuration&) = default;
-    global_enablement_configuration(global_enablement_configuration&&) = default;
     ~global_enablement_configuration() = default;
 
 public:
     global_enablement_configuration();
 
 public:
+    global_enablement_configuration(global_enablement_configuration&& rhs);
+
+public:
     global_enablement_configuration(
         const bool model_enabled,
         const bool facet_enabled,
         const bool formatter_enabled,
-        const bool overwrite);
+        const bool facet_overwrite,
+        const boost::optional<bool>& formatter_overwrite);
 
 private:
     template<typename Archive>
@@ -66,8 +70,13 @@ public:
     bool formatter_enabled() const;
     void formatter_enabled(const bool v);
 
-    bool overwrite() const;
-    void overwrite(const bool v);
+    bool facet_overwrite() const;
+    void facet_overwrite(const bool v);
+
+    const boost::optional<bool>& formatter_overwrite() const;
+    boost::optional<bool>& formatter_overwrite();
+    void formatter_overwrite(const boost::optional<bool>& v);
+    void formatter_overwrite(const boost::optional<bool>&& v);
 
 public:
     bool operator==(const global_enablement_configuration& rhs) const;
@@ -83,7 +92,8 @@ private:
     bool model_enabled_;
     bool facet_enabled_;
     bool formatter_enabled_;
-    bool overwrite_;
+    bool facet_overwrite_;
+    boost::optional<bool> formatter_overwrite_;
 };
 
 } } } }

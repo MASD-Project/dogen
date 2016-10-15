@@ -26,6 +26,13 @@ bool create_bool(const unsigned int position) {
     return (position % 2) == 0;
 }
 
+boost::optional<bool>
+create_boost_optional_bool(unsigned int position) {
+    boost::optional<bool> r(
+        create_bool(position));
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -40,7 +47,8 @@ populate(const unsigned int position, result_type& v) {
     v.model_enabled(create_bool(position + 0));
     v.facet_enabled(create_bool(position + 1));
     v.formatter_enabled(create_bool(position + 2));
-    v.overwrite(create_bool(position + 3));
+    v.facet_overwrite(create_bool(position + 3));
+    v.formatter_overwrite(create_boost_optional_bool(position + 4));
 }
 
 global_enablement_configuration_generator::result_type

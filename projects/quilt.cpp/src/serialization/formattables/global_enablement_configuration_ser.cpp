@@ -23,6 +23,7 @@
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
+#include <boost/serialization/optional.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
@@ -39,7 +40,8 @@ void save(Archive& ar,
     ar << make_nvp("model_enabled", v.model_enabled_);
     ar << make_nvp("facet_enabled", v.facet_enabled_);
     ar << make_nvp("formatter_enabled", v.formatter_enabled_);
-    ar << make_nvp("overwrite", v.overwrite_);
+    ar << make_nvp("facet_overwrite", v.facet_overwrite_);
+    ar << make_nvp("formatter_overwrite", v.formatter_overwrite_);
 }
 
 template<typename Archive>
@@ -49,7 +51,8 @@ void load(Archive& ar,
     ar >> make_nvp("model_enabled", v.model_enabled_);
     ar >> make_nvp("facet_enabled", v.facet_enabled_);
     ar >> make_nvp("formatter_enabled", v.formatter_enabled_);
-    ar >> make_nvp("overwrite", v.overwrite_);
+    ar >> make_nvp("facet_overwrite", v.facet_overwrite_);
+    ar >> make_nvp("formatter_overwrite", v.formatter_overwrite_);
 }
 
 } }

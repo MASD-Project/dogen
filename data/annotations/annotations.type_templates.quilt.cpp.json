@@ -31,9 +31,20 @@
             "model_name" : "quilt.cpp"
         },
         "value_type" : "boolean",
-        "template_kind" : "formatter_template",
+        "template_kind" : "facet_template",
         "scope" : "any",
         "default_value" : true
+    },
+    {
+        "name" : {
+            "simple" : "overwrite"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "quilt.cpp"
+        },
+        "value_type" : "boolean",
+        "template_kind" : "formatter_template",
+        "scope" : "any"
     },
     {
         "name" : {

@@ -22,6 +22,21 @@
 #include <boost/io/ios_state.hpp>
 #include "dogen/quilt.cpp/io/formattables/global_enablement_configuration_io.hpp"
 
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<bool>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<empty>\"";
+    s << " }";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace quilt {
 namespace cpp {
@@ -39,7 +54,8 @@ std::ostream& operator<<(std::ostream& s, const global_enablement_configuration&
       << "\"model_enabled\": " << v.model_enabled() << ", "
       << "\"facet_enabled\": " << v.facet_enabled() << ", "
       << "\"formatter_enabled\": " << v.formatter_enabled() << ", "
-      << "\"overwrite\": " << v.overwrite()
+      << "\"facet_overwrite\": " << v.facet_overwrite() << ", "
+      << "\"formatter_overwrite\": " << v.formatter_overwrite()
       << " }";
     return(s);
 }

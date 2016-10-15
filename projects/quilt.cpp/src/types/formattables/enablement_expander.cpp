@@ -99,14 +99,18 @@ enablement_expander::make_global_type_group(
 
         global_type_group gtg;
         const auto& mn(oh.model_name());
-        gtg.model_enabled = s.select_type_by_name(mn, traits::enabled());
+        const auto ebl(traits::enabled());
+        gtg.model_enabled = s.select_type_by_name(mn, ebl);
 
         const auto& fctn(oh.facet_name());
-        gtg.facet_enabled = s.select_type_by_name(fctn, traits::enabled());
+        gtg.facet_enabled = s.select_type_by_name(fctn, ebl);
 
         const auto& fmtn(oh.formatter_name());
-        gtg.formatter_enabled = s.select_type_by_name(fmtn, traits::enabled());
-        gtg.overwrite = s.select_type_by_name(fmtn, traits::overwrite());
+        gtg.formatter_enabled = s.select_type_by_name(fmtn, ebl);
+
+        const auto ow(traits::overwrite());
+        gtg.facet_overwrite = s.select_type_by_name(fctn, ow);
+        gtg.formatter_overwrite = s.select_type_by_name(fmtn, ow);
 
         r[fmtn] = gtg;
     }
@@ -138,7 +142,13 @@ enablement_expander::obtain_global_configurations(
         gec.facet_enabled(s.get_boolean_content_or_default(t.facet_enabled));
         gec.formatter_enabled(
             s.get_boolean_content_or_default(t.formatter_enabled));
-        gec.overwrite(s.get_boolean_content_or_default(t.overwrite));
+        gec.facet_overwrite(
+            s.get_boolean_content_or_default(t.facet_overwrite));
+
+        if (s.has_entry(t.formatter_overwrite)) {
+            gec.formatter_overwrite(
+                s.get_boolean_content(t.formatter_overwrite));
+        }
 
         r[fmtn] = gec;
     }
@@ -200,12 +210,15 @@ make_local_type_group(const annotations::type_repository& atrp,
         const auto oh(f->ownership_hierarchy());
 
         const auto& fctn(oh.facet_name());
-        ltg.facet_enabled = s.select_type_by_name(fctn, traits::enabled());
+        const auto ebl(traits::enabled());
+        ltg.facet_enabled = s.select_type_by_name(fctn, ebl);
 
         const auto& fmtn(oh.formatter_name());
-        ltg.formatter_enabled = s.select_type_by_name(fmtn, traits::enabled());
-        ltg.overwrite = s.select_type_by_name(fmtn, traits::overwrite());
+        ltg.formatter_enabled = s.select_type_by_name(fmtn, ebl);
 
+        const auto ow(traits::overwrite());
+        ltg.facet_overwrite = s.select_type_by_name(fctn, ow);
+        ltg.formatter_overwrite = s.select_type_by_name(fmtn, ow);
         ltg.facet_supported = s.select_type_by_name(fctn, traits::supported());
         r[fmtn] = ltg;
     }
@@ -274,8 +287,12 @@ obtain_local_configurations(const local_type_group_type& ltg,
         if (s.has_entry(t.formatter_enabled))
             lec.formatter_enabled(s.get_boolean_content(t.formatter_enabled));
 
-        if (s.has_entry(t.overwrite))
-            lec.overwrite(s.get_boolean_content(t.overwrite));
+        if (s.has_entry(t.facet_overwrite))
+            lec.facet_overwrite(s.get_boolean_content(t.facet_overwrite));
+
+        if (s.has_entry(t.formatter_overwrite))
+            lec.formatter_overwrite(
+                s.get_boolean_content(t.formatter_overwrite));
 
         r[fmtn] = lec;
     }
@@ -367,13 +384,37 @@ void enablement_expander::compute_enablement(
         }
 
         /*
-         * The overwrite flag is set to either a local value, if
-         * available, or if not to the global value.
+         * If the overwrite flag is set locally at the formatter or
+         * facet level, then that takes priority. If not, first check
+         * to see if its set globally at the formatter level; if so,
+         * it takes priority. Finally, if nothing else is set, use the
+         * global facet default.
+         *
+         * The rationale here is as follows: users can set facets to
+         * overwrite locally on a model element (either directly of
+         * via profiles); for example, for an handcrafted class, we
+         * want to set overwrite to false at the element level. This
+         * is normally done via a profile, but can be conceivable be
+         * done directly for less common configurations - for example
+         * adding manual support for IO for a handcrafted type. The
+         * global formatter overwrite flag is a bit less useful - we
+         * haven't got a use case for it just yet but it is added for
+         * (foolish) consistency. Finally, the global facet level
+         * overwrite flag is useful for the general case of code
+         * generated code. Having said that, it does not make a lot of
+         * sense to set overwrite globally to false.
+         *
+         * Note also that the overwrite flag is only relevant if
+         * enabled is true. It is not used otherwise.
          */
-        if (lc.overwrite())
-            fmt_props.overwrite(*lc.overwrite());
+        if (lc.formatter_overwrite())
+            fmt_props.overwrite(*lc.formatter_overwrite());
+        else if (lc.facet_overwrite())
+            fmt_props.overwrite(*lc.facet_overwrite());
+        else if (gc.formatter_overwrite())
+            fmt_props.overwrite(*gc.formatter_overwrite());
         else
-            fmt_props.overwrite(gc.overwrite());
+            fmt_props.overwrite(gc.facet_overwrite());
 
         /*
          * Check to see if the facet enablement field has been set

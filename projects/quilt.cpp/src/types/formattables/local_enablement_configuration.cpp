@@ -29,31 +29,36 @@ local_enablement_configuration::local_enablement_configuration(local_enablement_
     : facet_enabled_(std::move(rhs.facet_enabled_)),
       formatter_enabled_(std::move(rhs.formatter_enabled_)),
       facet_supported_(std::move(rhs.facet_supported_)),
-      overwrite_(std::move(rhs.overwrite_)) { }
+      facet_overwrite_(std::move(rhs.facet_overwrite_)),
+      formatter_overwrite_(std::move(rhs.formatter_overwrite_)) { }
 
 local_enablement_configuration::local_enablement_configuration(
     const boost::optional<bool>& facet_enabled,
     const boost::optional<bool>& formatter_enabled,
     const boost::optional<bool>& facet_supported,
-    const boost::optional<bool>& overwrite)
+    const boost::optional<bool>& facet_overwrite,
+    const boost::optional<bool>& formatter_overwrite)
     : facet_enabled_(facet_enabled),
       formatter_enabled_(formatter_enabled),
       facet_supported_(facet_supported),
-      overwrite_(overwrite) { }
+      facet_overwrite_(facet_overwrite),
+      formatter_overwrite_(formatter_overwrite) { }
 
 void local_enablement_configuration::swap(local_enablement_configuration& other) noexcept {
     using std::swap;
     swap(facet_enabled_, other.facet_enabled_);
     swap(formatter_enabled_, other.formatter_enabled_);
     swap(facet_supported_, other.facet_supported_);
-    swap(overwrite_, other.overwrite_);
+    swap(facet_overwrite_, other.facet_overwrite_);
+    swap(formatter_overwrite_, other.formatter_overwrite_);
 }
 
 bool local_enablement_configuration::operator==(const local_enablement_configuration& rhs) const {
     return facet_enabled_ == rhs.facet_enabled_ &&
         formatter_enabled_ == rhs.formatter_enabled_ &&
         facet_supported_ == rhs.facet_supported_ &&
-        overwrite_ == rhs.overwrite_;
+        facet_overwrite_ == rhs.facet_overwrite_ &&
+        formatter_overwrite_ == rhs.formatter_overwrite_;
 }
 
 local_enablement_configuration& local_enablement_configuration::operator=(local_enablement_configuration other) {
@@ -110,20 +115,36 @@ void local_enablement_configuration::facet_supported(const boost::optional<bool>
     facet_supported_ = std::move(v);
 }
 
-const boost::optional<bool>& local_enablement_configuration::overwrite() const {
-    return overwrite_;
+const boost::optional<bool>& local_enablement_configuration::facet_overwrite() const {
+    return facet_overwrite_;
 }
 
-boost::optional<bool>& local_enablement_configuration::overwrite() {
-    return overwrite_;
+boost::optional<bool>& local_enablement_configuration::facet_overwrite() {
+    return facet_overwrite_;
 }
 
-void local_enablement_configuration::overwrite(const boost::optional<bool>& v) {
-    overwrite_ = v;
+void local_enablement_configuration::facet_overwrite(const boost::optional<bool>& v) {
+    facet_overwrite_ = v;
 }
 
-void local_enablement_configuration::overwrite(const boost::optional<bool>&& v) {
-    overwrite_ = std::move(v);
+void local_enablement_configuration::facet_overwrite(const boost::optional<bool>&& v) {
+    facet_overwrite_ = std::move(v);
+}
+
+const boost::optional<bool>& local_enablement_configuration::formatter_overwrite() const {
+    return formatter_overwrite_;
+}
+
+boost::optional<bool>& local_enablement_configuration::formatter_overwrite() {
+    return formatter_overwrite_;
+}
+
+void local_enablement_configuration::formatter_overwrite(const boost::optional<bool>& v) {
+    formatter_overwrite_ = v;
+}
+
+void local_enablement_configuration::formatter_overwrite(const boost::optional<bool>&& v) {
+    formatter_overwrite_ = std::move(v);
 }
 
 } } } }

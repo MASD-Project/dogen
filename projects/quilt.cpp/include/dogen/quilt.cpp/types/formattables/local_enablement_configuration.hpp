@@ -48,7 +48,8 @@ public:
         const boost::optional<bool>& facet_enabled,
         const boost::optional<bool>& formatter_enabled,
         const boost::optional<bool>& facet_supported,
-        const boost::optional<bool>& overwrite);
+        const boost::optional<bool>& facet_overwrite,
+        const boost::optional<bool>& formatter_overwrite);
 
 private:
     template<typename Archive>
@@ -73,10 +74,15 @@ public:
     void facet_supported(const boost::optional<bool>& v);
     void facet_supported(const boost::optional<bool>&& v);
 
-    const boost::optional<bool>& overwrite() const;
-    boost::optional<bool>& overwrite();
-    void overwrite(const boost::optional<bool>& v);
-    void overwrite(const boost::optional<bool>&& v);
+    const boost::optional<bool>& facet_overwrite() const;
+    boost::optional<bool>& facet_overwrite();
+    void facet_overwrite(const boost::optional<bool>& v);
+    void facet_overwrite(const boost::optional<bool>&& v);
+
+    const boost::optional<bool>& formatter_overwrite() const;
+    boost::optional<bool>& formatter_overwrite();
+    void formatter_overwrite(const boost::optional<bool>& v);
+    void formatter_overwrite(const boost::optional<bool>&& v);
 
 public:
     bool operator==(const local_enablement_configuration& rhs) const;
@@ -92,7 +98,8 @@ private:
     boost::optional<bool> facet_enabled_;
     boost::optional<bool> formatter_enabled_;
     boost::optional<bool> facet_supported_;
-    boost::optional<bool> overwrite_;
+    boost::optional<bool> facet_overwrite_;
+    boost::optional<bool> formatter_overwrite_;
 };
 
 } } } }

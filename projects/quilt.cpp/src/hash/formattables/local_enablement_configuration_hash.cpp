@@ -51,7 +51,8 @@ std::size_t local_enablement_configuration_hasher::hash(const local_enablement_c
     combine(seed, hash_boost_optional_bool(v.facet_enabled()));
     combine(seed, hash_boost_optional_bool(v.formatter_enabled()));
     combine(seed, hash_boost_optional_bool(v.facet_supported()));
-    combine(seed, hash_boost_optional_bool(v.overwrite()));
+    combine(seed, hash_boost_optional_bool(v.facet_overwrite()));
+    combine(seed, hash_boost_optional_bool(v.formatter_overwrite()));
 
     return seed;
 }

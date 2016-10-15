@@ -40,7 +40,8 @@ void save(Archive& ar,
     ar << make_nvp("facet_enabled", v.facet_enabled_);
     ar << make_nvp("formatter_enabled", v.formatter_enabled_);
     ar << make_nvp("facet_supported", v.facet_supported_);
-    ar << make_nvp("overwrite", v.overwrite_);
+    ar << make_nvp("facet_overwrite", v.facet_overwrite_);
+    ar << make_nvp("formatter_overwrite", v.formatter_overwrite_);
 }
 
 template<typename Archive>
@@ -50,7 +51,8 @@ void load(Archive& ar,
     ar >> make_nvp("facet_enabled", v.facet_enabled_);
     ar >> make_nvp("formatter_enabled", v.formatter_enabled_);
     ar >> make_nvp("facet_supported", v.facet_supported_);
-    ar >> make_nvp("overwrite", v.overwrite_);
+    ar >> make_nvp("facet_overwrite", v.facet_overwrite_);
+    ar >> make_nvp("formatter_overwrite", v.formatter_overwrite_);
 }
 
 } }

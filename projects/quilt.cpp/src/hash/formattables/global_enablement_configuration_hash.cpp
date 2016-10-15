@@ -28,6 +28,16 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
+inline std::size_t hash_boost_optional_bool(const boost::optional<bool>& v) {
+    std::size_t seed(0);
+
+    if (!v)
+        return seed;
+
+    combine(seed, *v);
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -41,7 +51,8 @@ std::size_t global_enablement_configuration_hasher::hash(const global_enablement
     combine(seed, v.model_enabled());
     combine(seed, v.facet_enabled());
     combine(seed, v.formatter_enabled());
-    combine(seed, v.overwrite());
+    combine(seed, v.facet_overwrite());
+    combine(seed, hash_boost_optional_bool(v.formatter_overwrite()));
 
     return seed;
 }
