@@ -69,6 +69,32 @@ private:
      */
     dia_object_types parse_object_type(const std::string& ot) const;
 
+    /**
+     * @brief Parse connection information from Dia object.
+     */
+    void
+    parse_connections(const dogen::dia::object& o, processed_object& po) const;
+
+    /**
+     * @brief Parse the attribute as a Dia text.
+     */
+    void parse_as_dia_text(
+        const dogen::dia::attribute a, processed_object& po) const;
+
+
+    /**
+     * @brief Parses the contents of the Dia attribute assuming it
+     * contains UML attributes.
+     */
+    void parse_as_class_attributes(
+        const dogen::dia::attribute a, processed_object& po) const;
+
+    /**
+     * @brief Parses the Dia attributes from the Dia object.
+     */
+    void
+    parse_attributes(const dogen::dia::object& o, processed_object& po) const;
+
 public:
     /**
      * @brief Generates a processed object.

@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/optional.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string/trim.hpp>
@@ -77,7 +78,7 @@ const std::string unexpected_number_of_connections(
 
 template<typename AttributeValue, typename Variant>
 AttributeValue
-attribute_value(const Variant& v, const std::string& desc) {
+get_attribute_value(const Variant& v, const std::string& desc) {
 
     AttributeValue r;
     try {
@@ -88,6 +89,18 @@ attribute_value(const Variant& v, const std::string& desc) {
         using dogen::yarn::dia::building_error;
         BOOST_THROW_EXCEPTION(
             building_error(unexpected_attribute_value_type + desc));
+    }
+    return r;
+}
+
+template<typename AttributeValue, typename Variant>
+boost::optional<AttributeValue> try_get_attribute_value(const Variant& v) {
+    AttributeValue r;
+    // FIXME: we should probably replace this with a static visitor.
+    try {
+        r = boost::get<AttributeValue>(v);
+    } catch (const boost::bad_get&) {
+        return boost::optional<AttributeValue>();
     }
     return r;
 }
@@ -113,7 +126,7 @@ parse_string_attribute(const dogen::dia::attribute& a) const {
     }
 
     using dogen::dia::string;
-    const auto v(attribute_value<string>(values.front(), dia_string));
+    const auto v(get_attribute_value<string>(values.front(), dia_string));
     std::string name(v.value());
     boost::erase_first(name, hash_character);
     boost::erase_last(name, hash_character);
@@ -154,7 +167,130 @@ parse_object_type(const std::string& ot) const {
     BOOST_THROW_EXCEPTION(building_error(invalid_object_type + ot));
 }
 
+void processed_object_factory::
+parse_connections(const dogen::dia::object& o, processed_object& po) const {
+    /*
+     * If there are no connections we have no work to do.
+     */
+    if (o.connections().empty())
+        return;
+
+    /*
+     * At present we only care about UML generalisation. We are
+     * ignoring UML association and realisation.
+     */
+    if (po.dia_object_type() != dia_object_types::uml_generalization)
+        return;
+
+    /*
+     * Each connection can only connect two objects. This is a bit of
+     * a Dia invariant, but might as well check it in case we have a
+     * dodgy diagram file.
+     */
+    const auto s(o.connections().size());
+    if (s != 2) {
+        const auto size(boost::lexical_cast<std::string>(s));
+        BOOST_LOG_SEV(lg, error) << unexpected_number_of_connections << s;
+        BOOST_THROW_EXCEPTION(
+            building_error(unexpected_number_of_connections + size));
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Processing connections for object: '"
+                             << o.id() << "' of type: '" << o.type() << "'";
+
+    const auto parent(o.connections().front());
+    const auto child(o.connections().back());
+    po.connection(std::make_pair(parent.to(), child.to()));
+}
+
+void processed_object_factory::
+parse_as_dia_text(const dogen::dia::attribute a, processed_object& po) const {
+    if (a.values().size() != 1) {
+        BOOST_LOG_SEV(lg, error) << "Expected text attribute to "
+                                 << "have a single value but found "
+                                 << a.values().size();
+        BOOST_THROW_EXCEPTION(building_error(one_value_expected));
+    }
+
+
+    using dogen::dia::composite;
+    const auto c(try_get_attribute_value<composite>(a.values().front()));
+    if (!c)
+        return;
+
+    if (c->type() != dia_text) {
+        BOOST_LOG_SEV(lg, error) << "Expected composite type "
+                                 << "to be " << dia_text
+                                 << "but was " << c->type();
+
+        BOOST_THROW_EXCEPTION(building_error(text_attribute_expected));
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Found composite of type " << c->type();
+
+    for (const auto a : c->value()) {
+        if (a->name() == dia_string)
+            po.comment(create_processed_comment(*a));
+        else
+            BOOST_LOG_SEV(lg, warn) << "Ignoring attribute: " << a->name();
+    }
+}
+
+void  processed_object_factory::parse_as_class_attributes(
+    const dogen::dia::attribute a, processed_object& po) const {
+
+    const auto& values(a.values());
+    if (values.empty()) {
+        BOOST_LOG_SEV(lg, debug) << "Object has no UML attributes.";
+        return;
+    }
+
+    for (const auto& v : values) {
+        using dogen::dia::composite;
+        const auto& c(get_attribute_value<composite>(v, dia_composite));
+        if (c.type() != dia_uml_attribute) {
+            BOOST_LOG_SEV(lg, error) << "Expected composite type "
+                                     << " to be " << dia_uml_attribute
+                                     << "but was " << c.type();
+
+            BOOST_THROW_EXCEPTION(building_error(uml_attribute_expected));
+        }
+        BOOST_LOG_SEV(lg, debug) << "Found composite of type " << c.type();
+
+        processed_attribute pa;
+        for (const auto a : c.value()) {
+            if (a->name() == dia_name)
+                pa.name(parse_string_attribute(*a));
+            else if (a->name() == dia_type)
+                pa.type(parse_string_attribute(*a));
+            else if (a->name() == dia_comment)
+                pa.comment(create_processed_comment(*a));
+            else
+                BOOST_LOG_SEV(lg, warn) << "Ignoring attribute: " << a->name();
+        }
+        po.attributes().push_back(pa);
+    }
+}
+
+void processed_object_factory::
+parse_attributes(const dogen::dia::object& o, processed_object& po) const {
+    for (auto a : o.attributes()) {
+        if (a.name() == dia_name)
+            po.name(parse_string_attribute(a));
+        else if (a.name() == dia_stereotype)
+            po.stereotype(parse_string_attribute(a));
+        else if (a.name() == dia_comment)
+            po.comment(create_processed_comment(a));
+        else if (a.name() ==  dia_text)
+            parse_as_dia_text(a, po);
+        else if (a.name() == dia_attributes)
+            parse_as_class_attributes(a, po);
+    }
+}
+
 processed_object processed_object_factory::make(const dogen::dia::object& o) {
+    BOOST_LOG_SEV(lg, debug) << "Processing dia object " << o.id();
+
     processed_object r;
     r.id(o.id());
     r.dia_object_type(parse_object_type(o.type()));
@@ -162,105 +298,10 @@ processed_object processed_object_factory::make(const dogen::dia::object& o) {
     if (o.child_node())
         r.child_node_id(o.child_node()->parent());
 
-    // FIXME: we should issue warnings here
-    if (!o.connections().empty() && (
-            r.dia_object_type() == dia_object_types::uml_generalization/* ||
-            r.dia_object_type() == dia_object_types::uml_association ||
-            r.dia_object_type() == dia_object_types::uml_realization*/)) {
+    parse_connections(o, r);
+    parse_attributes(o, r);
 
-        const auto s(o.connections().size());
-        if (s != 2) {
-            const auto size(boost::lexical_cast<std::string>(s));
-            BOOST_LOG_SEV(lg, error) << unexpected_number_of_connections << s;
-            BOOST_THROW_EXCEPTION(
-                building_error(unexpected_number_of_connections + size));
-        }
-
-        BOOST_LOG_SEV(lg, debug) << "Processing connections for object: '"
-                                 << o.id() << "' of type: '" << o.type() << "'";
-
-        const auto parent(o.connections().front());
-        const auto child(o.connections().back());
-        r.connection(std::make_pair(parent.to(), child.to()));
-    }
-
-    for (auto a : o.attributes()) {
-        if (a.name() == dia_name)
-            r.name(parse_string_attribute(a));
-        else if (a.name() == dia_stereotype)
-            r.stereotype(parse_string_attribute(a));
-        else if (a.name() == dia_comment)
-            r.comment(create_processed_comment(a));
-        else if (a.name() ==  dia_text) {
-            if (a.values().size() != 1) {
-                BOOST_LOG_SEV(lg, error) << "Expected text attribute to "
-                                         << "have a single value but found "
-                                         << a.values().size();
-                BOOST_THROW_EXCEPTION(building_error(one_value_expected));
-            }
-
-            // FIXME: do not use exceptions for flow control.
-            using dogen::dia::composite;
-            composite c;
-            try {
-                c = attribute_value<composite>(a.values().front(),
-                    dia_composite);
-            } catch (const building_error& e) {
-                continue;
-            }
-
-            if (c.type() != dia_text) {
-                BOOST_LOG_SEV(lg, error) << "Expected composite type "
-                                         << "to be " << dia_text
-                                         << "but was " << c.type();
-                BOOST_THROW_EXCEPTION(building_error(text_attribute_expected));
-            }
-            BOOST_LOG_SEV(lg, debug) << "Found composite of type " << c.type();
-
-            for (const auto a : c.value()) {
-                if (a->name() == dia_string)
-                    r.comment(create_processed_comment(*a));
-                else
-                    BOOST_LOG_SEV(lg, warn) << "Ignoring attribute: "
-                                            << a->name();
-            }
-        } else if (a.name() == dia_attributes) {
-            const auto& values(a.values());
-            if (values.empty()) {
-                BOOST_LOG_SEV(lg, debug) << "Object " << o.id()
-                                         << " has no UML attributes.";
-                continue;
-            }
-
-            for (const auto& v : values) {
-                using dogen::dia::composite;
-                const auto& c(attribute_value<composite>(v, dia_composite));
-                if (c.type() != dia_uml_attribute) {
-                    BOOST_LOG_SEV(lg, error) << "Expected composite type "
-                                             << " to be " << dia_uml_attribute
-                                             << "but was " << c.type();
-                    BOOST_THROW_EXCEPTION(
-                        building_error(uml_attribute_expected));
-                }
-                BOOST_LOG_SEV(lg, debug) << "Found composite of type "
-                                         << c.type();
-
-                processed_attribute pa;
-                for (const auto a : c.value()) {
-                    if (a->name() == dia_name)
-                        pa.name(parse_string_attribute(*a));
-                    else if (a->name() == dia_type)
-                        pa.type(parse_string_attribute(*a));
-                    else if (a->name() == dia_comment)
-                        pa.comment(create_processed_comment(*a));
-                    else
-                        BOOST_LOG_SEV(lg, warn) << "Ignoring attribute: "
-                                                << a->name();
-                }
-                r.attributes().push_back(pa);
-            }
-        }
-    }
+    BOOST_LOG_SEV(lg, debug) << "Finished processing dia object";
     return r;
 }
 
