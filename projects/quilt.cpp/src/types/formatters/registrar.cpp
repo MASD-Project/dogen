@@ -27,7 +27,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/set_io.hpp"
 #include "dogen/utility/io/forward_list_io.hpp"
-#include "dogen/annotations/io/ownership_hierarchy_io.hpp"
+#include "dogen/annotations/io/archetype_location_io.hpp"
 #include "dogen/quilt.cpp/io/formatters/container_io.hpp"
 #include "dogen/quilt.cpp/types/formatters/registrar_error.hpp"
 #include "dogen/quilt.cpp/types/formatters/registrar.hpp"

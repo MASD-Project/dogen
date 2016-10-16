@@ -34,7 +34,7 @@
 #include "dogen/annotations/types/value.hpp"
 #include "dogen/annotations/types/value_types.hpp"
 #include "dogen/annotations/types/template_kinds.hpp"
-#include "dogen/annotations/types/ownership_hierarchy.hpp"
+#include "dogen/annotations/types/archetype_location.hpp"
 #include "dogen/annotations/types/type_template.hpp"
 
 namespace dogen {

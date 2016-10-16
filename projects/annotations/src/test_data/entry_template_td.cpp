@@ -22,7 +22,7 @@
 #include "dogen/annotations/test_data/name_td.hpp"
 #include "dogen/annotations/test_data/entry_template_td.hpp"
 #include "dogen/annotations/test_data/template_kinds_td.hpp"
-#include "dogen/annotations/test_data/ownership_hierarchy_td.hpp"
+#include "dogen/annotations/test_data/archetype_location_td.hpp"
 
 namespace {
 
@@ -32,8 +32,8 @@ create_dogen_annotations_name(const unsigned int position) {
 }
 
 dogen::annotations::archetype_location
-create_dogen_annotations_ownership_hierarchy(const unsigned int position) {
-    return dogen::annotations::ownership_hierarchy_generator::create(position);
+create_dogen_annotations_archetype_location(const unsigned int position) {
+    return dogen::annotations::archetype_location_generator::create(position);
 }
 
 std::string create_std_string(const unsigned int position) {
@@ -65,7 +65,7 @@ entry_template_generator::entry_template_generator() : position_(0) { }
 void entry_template_generator::
 populate(const unsigned int position, result_type& v) {
     v.name(create_dogen_annotations_name(position + 0));
-    v.ownership_hierarchy(create_dogen_annotations_ownership_hierarchy(position + 1));
+    v.ownership_hierarchy(create_dogen_annotations_archetype_location(position + 1));
     v.untyped_value(create_std_list_std_string(position + 2));
     v.kind(create_dogen_annotations_template_kinds(position + 3));
 }

@@ -33,7 +33,7 @@
 #include "dogen/annotations/serialization/value_ser.hpp"
 #include "dogen/annotations/serialization/scope_types_ser.hpp"
 #include "dogen/annotations/serialization/value_types_ser.hpp"
-#include "dogen/annotations/serialization/ownership_hierarchy_ser.hpp"
+#include "dogen/annotations/serialization/archetype_location_ser.hpp"
 
 namespace boost {
 namespace serialization {

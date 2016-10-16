@@ -24,7 +24,7 @@
 #include "dogen/annotations/io/value_io.hpp"
 #include "dogen/annotations/io/scope_types_io.hpp"
 #include "dogen/annotations/io/value_types_io.hpp"
-#include "dogen/annotations/io/ownership_hierarchy_io.hpp"
+#include "dogen/annotations/io/archetype_location_io.hpp"
 
 namespace boost {
 

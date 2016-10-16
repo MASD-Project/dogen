@@ -32,7 +32,7 @@
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include <boost/iostreams/filtering_stream.hpp>
-#include "dogen/annotations/types/ownership_hierarchy.hpp"
+#include "dogen/annotations/types/archetype_location.hpp"
 #include "dogen/formatters/types/artefact.hpp"
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/object.hpp"

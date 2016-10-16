@@ -29,7 +29,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/options/types/knitting_options.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
-#include "dogen/annotations/types/ownership_hierarchy.hpp"
+#include "dogen/annotations/types/archetype_location.hpp"
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/formatters/types/artefact.hpp"
 

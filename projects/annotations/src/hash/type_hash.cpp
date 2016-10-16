@@ -23,7 +23,7 @@
 #include "dogen/annotations/hash/value_hash.hpp"
 #include "dogen/annotations/hash/scope_types_hash.hpp"
 #include "dogen/annotations/hash/value_types_hash.hpp"
-#include "dogen/annotations/hash/ownership_hierarchy_hash.hpp"
+#include "dogen/annotations/hash/archetype_location_hash.hpp"
 
 namespace {
 

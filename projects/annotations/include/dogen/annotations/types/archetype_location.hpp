@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_OWNERSHIP_HIERARCHY_HPP
-#define DOGEN_ANNOTATIONS_TYPES_OWNERSHIP_HIERARCHY_HPP
+#ifndef DOGEN_ANNOTATIONS_TYPES_ARCHETYPE_LOCATION_HPP
+#define DOGEN_ANNOTATIONS_TYPES_ARCHETYPE_LOCATION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,16 +27,16 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen/annotations/serialization/ownership_hierarchy_fwd_ser.hpp"
+#include "dogen/annotations/serialization/archetype_location_fwd_ser.hpp"
 
 namespace dogen {
 namespace annotations {
 
 /**
- * @brief Hierarchical properties of this name.
+ * @brief Location of an archetype or set of archetypes in artchetype space.
  *
  * These must be populated in order, e.g. in order to have a facet we must have a
- * model and in order to have a formatter we must have a facet. We may not have
+ * kernel and in order to have a formatter we must have a facet. We may not have
  * any.
  */
 class archetype_location final {

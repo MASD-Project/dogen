@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/annotations/io/ownership_hierarchy_io.hpp"
+#include "dogen/annotations/io/archetype_location_io.hpp"
 #include "dogen/annotations/io/ownership_hierarchy_repository_io.hpp"
 
 namespace std {

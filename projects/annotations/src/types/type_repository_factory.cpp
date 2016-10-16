@@ -27,7 +27,7 @@
 #include "dogen/utility/io/vector_io.hpp"
 #include "dogen/utility/io/forward_list_io.hpp"
 #include "dogen/annotations/io/type_repository_io.hpp"
-#include "dogen/annotations/io/ownership_hierarchy_io.hpp"
+#include "dogen/annotations/io/archetype_location_io.hpp"
 #include "dogen/annotations/types/template_instantiator.hpp"
 #include "dogen/annotations/types/building_error.hpp"
 #include "dogen/annotations/types/type_templates_hydrator.hpp"

@@ -18,29 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/annotations/hash/ownership_hierarchy_hash.hpp"
+#ifndef DOGEN_ANNOTATIONS_IO_ARCHETYPE_LOCATION_IO_HPP
+#define DOGEN_ANNOTATIONS_IO_ARCHETYPE_LOCATION_IO_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value) {
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-}
+#include <iosfwd>
+#include "dogen/annotations/types/archetype_location.hpp"
 
 namespace dogen {
 namespace annotations {
 
-std::size_t ownership_hierarchy_hasher::hash(const archetype_location& v) {
-    std::size_t seed(0);
-
-    combine(seed, v.kernel());
-    combine(seed, v.facet());
-    combine(seed, v.archetype());
-
-    return seed;
-}
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::annotations::archetype_location& v);
 
 } }
+
+#endif

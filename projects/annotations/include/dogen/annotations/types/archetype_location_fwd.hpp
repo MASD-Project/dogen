@@ -18,22 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_IO_OWNERSHIP_HIERARCHY_IO_HPP
-#define DOGEN_ANNOTATIONS_IO_OWNERSHIP_HIERARCHY_IO_HPP
+#ifndef DOGEN_ANNOTATIONS_TYPES_ARCHETYPE_LOCATION_FWD_HPP
+#define DOGEN_ANNOTATIONS_TYPES_ARCHETYPE_LOCATION_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/annotations/types/ownership_hierarchy.hpp"
-
 namespace dogen {
 namespace annotations {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::annotations::archetype_location& v);
+class archetype_location;
 
 } }
 

@@ -26,7 +26,7 @@
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/io/unordered_set_io.hpp"
 #include "dogen/annotations/io/template_kinds_io.hpp"
-#include "dogen/annotations/io/ownership_hierarchy_io.hpp"
+#include "dogen/annotations/io/archetype_location_io.hpp"
 #include "dogen/annotations/io/type_io.hpp"
 #include "dogen/annotations/io/type_template_io.hpp"
 #include "dogen/annotations/io/entry_template_io.hpp"

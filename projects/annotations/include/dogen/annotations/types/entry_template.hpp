@@ -30,7 +30,7 @@
 #include <algorithm>
 #include "dogen/annotations/types/name.hpp"
 #include "dogen/annotations/types/template_kinds.hpp"
-#include "dogen/annotations/types/ownership_hierarchy.hpp"
+#include "dogen/annotations/types/archetype_location.hpp"
 #include "dogen/annotations/serialization/entry_template_fwd_ser.hpp"
 
 namespace dogen {

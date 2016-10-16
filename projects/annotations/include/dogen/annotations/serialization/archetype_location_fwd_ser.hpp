@@ -18,17 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_OWNERSHIP_HIERARCHY_FWD_HPP
-#define DOGEN_ANNOTATIONS_TYPES_OWNERSHIP_HIERARCHY_FWD_HPP
+#ifndef DOGEN_ANNOTATIONS_SERIALIZATION_ARCHETYPE_LOCATION_FWD_SER_HPP
+#define DOGEN_ANNOTATIONS_SERIALIZATION_ARCHETYPE_LOCATION_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen {
-namespace annotations {
+#include "dogen/annotations/types/archetype_location_fwd.hpp"
 
-class archetype_location;
+namespace boost {
+namespace serialization {
+
+template<class Archive>
+void save(Archive& ar, const dogen::annotations::archetype_location& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, dogen::annotations::archetype_location& v, unsigned int version);
 
 } }
 

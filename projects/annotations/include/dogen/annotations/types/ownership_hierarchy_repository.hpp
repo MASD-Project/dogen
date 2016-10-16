@@ -30,7 +30,7 @@
 #include <algorithm>
 #include <unordered_map>
 #include <unordered_set>
-#include "dogen/annotations/types/ownership_hierarchy.hpp"
+#include "dogen/annotations/types/archetype_location.hpp"
 #include "dogen/annotations/serialization/ownership_hierarchy_repository_fwd_ser.hpp"
 
 namespace dogen {

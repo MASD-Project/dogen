@@ -18,36 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TEST_DATA_OWNERSHIP_HIERARCHY_TD_HPP
-#define DOGEN_ANNOTATIONS_TEST_DATA_OWNERSHIP_HIERARCHY_TD_HPP
+#ifndef DOGEN_ANNOTATIONS_HASH_ARCHETYPE_LOCATION_HASH_HPP
+#define DOGEN_ANNOTATIONS_HASH_ARCHETYPE_LOCATION_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/annotations/types/ownership_hierarchy.hpp"
+#include <functional>
+#include "dogen/annotations/types/archetype_location.hpp"
 
 namespace dogen {
 namespace annotations {
 
-class ownership_hierarchy_generator {
+struct archetype_location_hasher {
 public:
-    ownership_hierarchy_generator();
-
-public:
-    typedef dogen::annotations::archetype_location result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
+    static std::size_t hash(const archetype_location& v);
 };
 
 } }
 
+namespace std {
+
+template<>
+struct hash<dogen::annotations::archetype_location> {
+public:
+    size_t operator()(const dogen::annotations::archetype_location& v) const {
+        return dogen::annotations::archetype_location_hasher::hash(v);
+    }
+};
+
+}
 #endif

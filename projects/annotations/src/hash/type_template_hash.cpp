@@ -24,7 +24,7 @@
 #include "dogen/annotations/hash/value_types_hash.hpp"
 #include "dogen/annotations/hash/type_template_hash.hpp"
 #include "dogen/annotations/hash/template_kinds_hash.hpp"
-#include "dogen/annotations/hash/ownership_hierarchy_hash.hpp"
+#include "dogen/annotations/hash/archetype_location_hash.hpp"
 
 namespace {
 

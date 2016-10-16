@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/annotations/hash/ownership_hierarchy_hash.hpp"
+#include "dogen/annotations/hash/archetype_location_hash.hpp"
 #include "dogen/annotations/hash/ownership_hierarchy_repository_hash.hpp"
 
 namespace {
@@ -29,7 +29,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_vector_dogen_annotations_ownership_hierarchy(const std::vector<dogen::annotations::archetype_location>& v) {
+inline std::size_t hash_std_vector_dogen_annotations_archetype_location(const std::vector<dogen::annotations::archetype_location>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -62,7 +62,7 @@ namespace annotations {
 std::size_t ownership_hierarchy_repository_hasher::hash(const ownership_hierarchy_repository& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_vector_dogen_annotations_ownership_hierarchy(v.ownership_hierarchies()));
+    combine(seed, hash_std_vector_dogen_annotations_archetype_location(v.ownership_hierarchies()));
     combine(seed, hash_std_unordered_map_std_string_std_unordered_set_std_string(v.facet_names_by_model_name()));
     combine(seed, hash_std_unordered_map_std_string_std_unordered_set_std_string(v.formatter_names_by_model_name()));
 

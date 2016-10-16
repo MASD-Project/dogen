@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/annotations/test_data/ownership_hierarchy_td.hpp"
+#include "dogen/annotations/test_data/archetype_location_td.hpp"
 
 namespace {
 
@@ -34,31 +34,31 @@ std::string create_std_string(const unsigned int position) {
 namespace dogen {
 namespace annotations {
 
-ownership_hierarchy_generator::ownership_hierarchy_generator() : position_(0) { }
+archetype_location_generator::archetype_location_generator() : position_(0) { }
 
-void ownership_hierarchy_generator::
+void archetype_location_generator::
 populate(const unsigned int position, result_type& v) {
     v.kernel(create_std_string(position + 0));
     v.facet(create_std_string(position + 1));
     v.archetype(create_std_string(position + 2));
 }
 
-ownership_hierarchy_generator::result_type
-ownership_hierarchy_generator::create(const unsigned int position) {
+archetype_location_generator::result_type
+archetype_location_generator::create(const unsigned int position) {
     archetype_location r;
-    ownership_hierarchy_generator::populate(position, r);
+    archetype_location_generator::populate(position, r);
     return r;
 }
 
-ownership_hierarchy_generator::result_type*
-ownership_hierarchy_generator::create_ptr(const unsigned int position) {
+archetype_location_generator::result_type*
+archetype_location_generator::create_ptr(const unsigned int position) {
     archetype_location* p = new archetype_location();
-    ownership_hierarchy_generator::populate(position, *p);
+    archetype_location_generator::populate(position, *p);
     return p;
 }
 
-ownership_hierarchy_generator::result_type
-ownership_hierarchy_generator::operator()() {
+archetype_location_generator::result_type
+archetype_location_generator::operator()() {
     return create(position_++);
 }
 

@@ -19,20 +19,20 @@
  *
  */
 #include <sstream>
-#include "dogen/annotations/test_data/ownership_hierarchy_td.hpp"
+#include "dogen/annotations/test_data/archetype_location_td.hpp"
 #include "dogen/annotations/test_data/ownership_hierarchy_repository_td.hpp"
 
 namespace {
 
 dogen::annotations::archetype_location
-create_dogen_annotations_ownership_hierarchy(const unsigned int position) {
-    return dogen::annotations::ownership_hierarchy_generator::create(position);
+create_dogen_annotations_archetype_location(const unsigned int position) {
+    return dogen::annotations::archetype_location_generator::create(position);
 }
 
-std::vector<dogen::annotations::archetype_location> create_std_vector_dogen_annotations_ownership_hierarchy(unsigned int position) {
+std::vector<dogen::annotations::archetype_location> create_std_vector_dogen_annotations_archetype_location(unsigned int position) {
     std::vector<dogen::annotations::archetype_location> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_dogen_annotations_ownership_hierarchy(position + i));
+        r.push_back(create_dogen_annotations_archetype_location(position + i));
     }
     return r;
 }
@@ -68,7 +68,7 @@ ownership_hierarchy_repository_generator::ownership_hierarchy_repository_generat
 
 void ownership_hierarchy_repository_generator::
 populate(const unsigned int position, result_type& v) {
-    v.ownership_hierarchies(create_std_vector_dogen_annotations_ownership_hierarchy(position + 0));
+    v.ownership_hierarchies(create_std_vector_dogen_annotations_archetype_location(position + 0));
     v.facet_names_by_model_name(create_std_unordered_map_std_string_std_unordered_set_std_string(position + 1));
     v.formatter_names_by_model_name(create_std_unordered_map_std_string_std_unordered_set_std_string(position + 2));
 }

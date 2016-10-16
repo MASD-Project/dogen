@@ -43,8 +43,8 @@
 #include "dogen/annotations/hash/text_collection_hash.hpp"
 #include "dogen/annotations/hash/type_repository_hash.hpp"
 #include "dogen/annotations/hash/annotation_group_hash.hpp"
+#include "dogen/annotations/hash/archetype_location_hash.hpp"
 #include "dogen/annotations/hash/profile_repository_hash.hpp"
-#include "dogen/annotations/hash/ownership_hierarchy_hash.hpp"
 #include "dogen/annotations/hash/profiler_configuration_hash.hpp"
 #include "dogen/annotations/hash/ownership_hierarchy_repository_hash.hpp"
 

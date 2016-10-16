@@ -18,25 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_SERIALIZATION_OWNERSHIP_HIERARCHY_SER_HPP
-#define DOGEN_ANNOTATIONS_SERIALIZATION_OWNERSHIP_HIERARCHY_SER_HPP
+#ifndef DOGEN_ANNOTATIONS_TEST_DATA_ARCHETYPE_LOCATION_TD_HPP
+#define DOGEN_ANNOTATIONS_TEST_DATA_ARCHETYPE_LOCATION_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/split_free.hpp>
-#include "dogen/annotations/types/ownership_hierarchy.hpp"
+#include "dogen/annotations/types/archetype_location.hpp"
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::annotations::archetype_location)
-namespace boost {
-namespace serialization {
+namespace dogen {
+namespace annotations {
 
-template<typename Archive>
-void save(Archive& ar, const dogen::annotations::archetype_location& v, unsigned int version);
+class archetype_location_generator {
+public:
+    archetype_location_generator();
 
-template<typename Archive>
-void load(Archive& ar, dogen::annotations::archetype_location& v, unsigned int version);
+public:
+    typedef dogen::annotations::archetype_location result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 } }
 

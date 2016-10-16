@@ -31,7 +31,7 @@
 #include "dogen/annotations/types/value_fwd.hpp"
 #include "dogen/annotations/types/scope_types.hpp"
 #include "dogen/annotations/types/value_types.hpp"
-#include "dogen/annotations/types/ownership_hierarchy.hpp"
+#include "dogen/annotations/types/archetype_location.hpp"
 #include "dogen/annotations/serialization/type_fwd_ser.hpp"
 
 namespace dogen {

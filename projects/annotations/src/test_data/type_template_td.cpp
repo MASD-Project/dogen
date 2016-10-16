@@ -24,7 +24,7 @@
 #include "dogen/annotations/test_data/value_types_td.hpp"
 #include "dogen/annotations/test_data/type_template_td.hpp"
 #include "dogen/annotations/test_data/template_kinds_td.hpp"
-#include "dogen/annotations/test_data/ownership_hierarchy_td.hpp"
+#include "dogen/annotations/test_data/archetype_location_td.hpp"
 
 namespace {
 
@@ -44,8 +44,8 @@ create_dogen_annotations_scope_types(const unsigned int position) {
 }
 
 dogen::annotations::archetype_location
-create_dogen_annotations_ownership_hierarchy(const unsigned int position) {
-    return dogen::annotations::ownership_hierarchy_generator::create(position);
+create_dogen_annotations_archetype_location(const unsigned int position) {
+    return dogen::annotations::archetype_location_generator::create(position);
 }
 
 dogen::annotations::value*
@@ -77,7 +77,7 @@ populate(const unsigned int position, result_type& v) {
     v.name(create_dogen_annotations_name(position + 0));
     v.value_type(create_dogen_annotations_value_types(position + 1));
     v.scope(create_dogen_annotations_scope_types(position + 2));
-    v.ownership_hierarchy(create_dogen_annotations_ownership_hierarchy(position + 3));
+    v.ownership_hierarchy(create_dogen_annotations_archetype_location(position + 3));
     v.default_value(create_boost_shared_ptr_dogen_annotations_value(position + 4));
     v.kind(create_dogen_annotations_template_kinds(position + 5));
 }

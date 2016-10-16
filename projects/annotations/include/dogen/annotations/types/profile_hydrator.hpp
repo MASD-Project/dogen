@@ -30,7 +30,7 @@
 #include <boost/property_tree/ptree.hpp>
 #include "dogen/annotations/types/name.hpp"
 #include "dogen/annotations/types/template_kinds.hpp"
-#include "dogen/annotations/types/ownership_hierarchy.hpp"
+#include "dogen/annotations/types/archetype_location.hpp"
 #include "dogen/annotations/types/entry_template.hpp"
 #include "dogen/annotations/types/profile.hpp"
 

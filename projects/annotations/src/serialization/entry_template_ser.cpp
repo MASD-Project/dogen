@@ -32,7 +32,7 @@
 #include "dogen/annotations/serialization/name_ser.hpp"
 #include "dogen/annotations/serialization/entry_template_ser.hpp"
 #include "dogen/annotations/serialization/template_kinds_ser.hpp"
-#include "dogen/annotations/serialization/ownership_hierarchy_ser.hpp"
+#include "dogen/annotations/serialization/archetype_location_ser.hpp"
 
 namespace boost {
 namespace serialization {
