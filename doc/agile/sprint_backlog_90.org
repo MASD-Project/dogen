@@ -14,38 +14,40 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-16 Sun 12:22]
+#+CAPTION: Clock summary at [2016-10-16 Sun 14:41]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *54:55* |       |       | 100.0 |
+| *Total time*                                                                | *55:51* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 54:55   |       |       | 100.0 |
-| Active                                                                      |         | 54:55 |       | 100.0 |
+| Stories                                                                     | 55:51   |       |       | 100.0 |
+| Active                                                                      |         | 55:51 |       | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  0:32 |   1.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:19 |   0.6 |
 | COMPLETED Improve bintray support                                           |         |       |  0:26 |   0.8 |
 | COMPLETED Refactor opaque infrastructure                                    |         |       |  1:17 |   2.3 |
-| COMPLETED Remove any remnants of annotations from quilt                     |         |       |  0:05 |   0.2 |
-| COMPLETED Solve the issue of too many "configurations"                      |         |       |  4:01 |   7.3 |
+| COMPLETED Remove any remnants of annotations from quilt                     |         |       |  0:05 |   0.1 |
+| COMPLETED Solve the issue of too many "configurations"                      |         |       |  4:01 |   7.2 |
 | COMPLETED Merge decoration configuration and annotations factories          |         |       |  0:18 |   0.5 |
-| COMPLETED Move annotation factories into expander in yarn                   |         |       |  1:11 |   2.2 |
-| COMPLETED Clean up terminology in dynamic                                   |         |       | 15:12 |  27.7 |
+| COMPLETED Move annotation factories into expander in yarn                   |         |       |  1:11 |   2.1 |
+| COMPLETED Clean up terminology in dynamic                                   |         |       | 15:12 |  27.2 |
 | COMPLETED Minor tidy-up of the quilt.cpp diagram                            |         |       |  0:29 |   0.9 |
 | COMPLETED Create a ownership hierarchy repository                           |         |       |  1:43 |   3.1 |
 | COMPLETED Use vector of elements in model                                   |         |       |  0:10 |   0.3 |
-| COMPLETED Rewrite profile support                                           |         |       | 11:50 |  21.5 |
+| COMPLETED Rewrite profile support                                           |         |       | 11:50 |  21.2 |
 | COMPLETED Merge annotation type and profile folders                         |         |       |  0:20 |   0.6 |
-| COMPLETED Push stereotypes processing into yarn                             |         |       |  1:51 |   3.4 |
+| COMPLETED Push stereotypes processing into yarn                             |         |       |  1:51 |   3.3 |
 | COMPLETED Implement defaulting within the profiler                          |         |       |  1:13 |   2.2 |
 | COMPLETED Add binding of stereotypes with profiles                          |         |       |  1:40 |   3.0 |
 | COMPLETED Update dogen models to use profiles                               |         |       |  0:19 |   0.6 |
-| COMPLETED Finish overwriting support                                        |         |       |  2:38 |   4.8 |
-| COMPLETED Remove service stereotype                                         |         |       |  3:32 |   6.4 |
+| COMPLETED Finish overwriting support                                        |         |       |  2:38 |   4.7 |
+| COMPLETED Remove service stereotype                                         |         |       |  3:32 |   6.3 |
 | COMPLETED IOable services                                                   |         |       |  0:06 |   0.2 |
 | COMPLETED Generate skeleton for "non-generatable" files                     |         |       |  0:51 |   1.5 |
-| COMPLETED Merge profiles with processed object in yarn.dia                  |         |       |  2:04 |   3.8 |
-| COMPLETED Fix yarn.dia tests                                                |         |       |  2:48 |   5.1 |
+| COMPLETED Merge profiles with processed object in yarn.dia                  |         |       |  2:04 |   3.7 |
+| COMPLETED Fix yarn.dia tests                                                |         |       |  2:48 |   5.0 |
+| STARTED Perform the archetype / artefact renames                            |         |       |  0:29 |   0.9 |
+| STARTED Integration of stitch and dogen                                     |         |       |  0:27 |   0.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -643,6 +645,87 @@ At present we are doing both the parsing and the annotation expansion
 within the parser. It makes more sense to keep the parser clean and do
 the expansion somewhere else.
 
+*** STARTED Perform the archetype / artefact renames                  :story:
+    CLOCK: [2016-10-16 Sun 14:12]--[2016-10-16 Sun 14:41] =>  0:29
+
+As per analysis story, we need to tidy-up terminology.
+
+Renames:
+
+- file: artefact
+- file formatter: artefact formatter, artefact generator? factory?
+- ownership_hierarchy: archetype_location, model_name becomes kernel,
+  facet name becomes facet and formatter name archetype. Add
+  sub-kernel.
+- Element concept becomes Entity.
+- introduce the concept of artefact source: stock formatter
+  (current), wale formatter, wale and stitch formatter,
+  handcrafted. Other possible types: null formatter, copy formatter.
+- rename formatters to stock formatters: container is repository (replace
+  formatter prefixes in attributes with stock formatter)
+
+*** STARTED Integration of stitch and dogen                           :story:
+    CLOCK: [2016-10-16 Sun 13:44]--[2016-10-16 Sun 14:11] =>  0:27
+
+Now that we have implemented stitch and proved it works (more or
+less), we need to think how we can make using stitch from dogen
+easier. At present there is not integration at all:
+
+- users need to create regexes to ensure dogen does not trample on
+  stitch files:
+
+:    --ignore-files-matching-regex .*stitch
+:    --ignore-files-matching-regex .*_stitch.hpp
+:    --ignore-files-matching-regex .*_stitch.cpp
+
+- users need to manually create a header file for each stitch
+  template.
+- users need to create stitch targets and run them to ensure the
+  templates have been expanded. This means its possible to get dogen
+  and stitch out of sync (but for now not a big problem).
+
+In the ideal world, when we knit a model it would be nice if it could
+also stitch as required. This could be achieved as follows:
+
+- Create a meta-data tag that tells dogen a type has an associated
+  stitch template with it.
+- Create =cpp= types that represent the stitch header and
+  implementation.
+- Transformer needs to look for the meta-data tag and instantiate the
+  =cpp= types.
+- Create a =cpp= formatter for the header, as per regular
+  formatters. The slight challenge here is that the formatter needs to
+  be instantiable across facets, which we do not support at the
+  moment.
+- Create a cpp formatter for the implementation which instantiates
+  stitch with the template and uses it to create a file. Same
+  challenge as with the header.
+
+*Previous Understanding*
+
+- stitch can still be integrated with dogen. We could use meta-data to
+  link a formatter (well, any class that needs stitch really, but at
+  present just a formatter) with a stitch template. For example, a
+  =class_header_formatter= could have a "is stitchable" flag set to
+  on. This would then mean that dogen would look for a
+  =class_header_formatter.stitch= file in the same directory as the
+  CPP file. It would then use that to create a
+  =class_header_formatter_stitch.cpp= file. It would also
+  ignore/generate a =class_header_formatter_stitch.hpp= file and
+  automatically add it to the inclusion dependencies of
+  =class_header_formatter.cpp=. These are injected into stitch as we
+  instantiate the template since stitch supports meta-data (we do need
+  a way to inject the meta-data from dogen into the meta-data in the
+  template; perhaps a kvp container passed in to the stitch workflow
+  which could then be handed over to the parser). All these files are
+  automatically added to the list of "exceptions" for housekeeping so
+  that they do not get deleted. However, stitch would not know
+  anything at all about any of this; this is all knitter's
+  functionality. The problem is at present we haven't got a good place
+  to perform the stitching as part of knitter's workflows. Perhaps as
+  part of the expansion, we could set a number of stitch fields which
+  would then be picked up by some knit-specific workflow classes.
+
 *** Generate formatter interfaces                                      :epic:
 
 We should create another template language, in addition to stitch:
@@ -778,86 +861,12 @@ Further thoughts:
   generates the file. Actually we probably can't have this in quilt
   because we still need formatter properties.
 
-*** Integration of stitch and dogen                                   :story:
-
-Now that we have implemented stitch and proved it works (more or
-less), we need to think how we can make using stitch from dogen
-easier. At present there is not integration at all:
-
-- users need to create regexes to ensure dogen does not trample on
-  stitch files:
-
-:    --ignore-files-matching-regex .*stitch
-:    --ignore-files-matching-regex .*_stitch.hpp
-:    --ignore-files-matching-regex .*_stitch.cpp
-
-- users need to manually create a header file for each stitch
-  template.
-- users need to create stitch targets and run them to ensure the
-  templates have been expanded. This means its possible to get dogen
-  and stitch out of sync (but for now not a big problem).
-
-In the ideal world, when we knit a model it would be nice if it could
-also stitch as required. This could be achieved as follows:
-
-- Create a meta-data tag that tells dogen a type has an associated
-  stitch template with it.
-- Create =cpp= types that represent the stitch header and
-  implementation.
-- Transformer needs to look for the meta-data tag and instantiate the
-  =cpp= types.
-- Create a =cpp= formatter for the header, as per regular
-  formatters. The slight challenge here is that the formatter needs to
-  be instantiable across facets, which we do not support at the
-  moment.
-- Create a cpp formatter for the implementation which instantiates
-  stitch with the template and uses it to create a file. Same
-  challenge as with the header.
-
-*Previous Understanding*
-
-- stitch can still be integrated with dogen. We could use meta-data to
-  link a formatter (well, any class that needs stitch really, but at
-  present just a formatter) with a stitch template. For example, a
-  =class_header_formatter= could have a "is stitchable" flag set to
-  on. This would then mean that dogen would look for a
-  =class_header_formatter.stitch= file in the same directory as the
-  CPP file. It would then use that to create a
-  =class_header_formatter_stitch.cpp= file. It would also
-  ignore/generate a =class_header_formatter_stitch.hpp= file and
-  automatically add it to the inclusion dependencies of
-  =class_header_formatter.cpp=. These are injected into stitch as we
-  instantiate the template since stitch supports meta-data (we do need
-  a way to inject the meta-data from dogen into the meta-data in the
-  template; perhaps a kvp container passed in to the stitch workflow
-  which could then be handed over to the parser). All these files are
-  automatically added to the list of "exceptions" for housekeeping so
-  that they do not get deleted. However, stitch would not know
-  anything at all about any of this; this is all knitter's
-  functionality. The problem is at present we haven't got a good place
-  to perform the stitching as part of knitter's workflows. Perhaps as
-  part of the expansion, we could set a number of stitch fields which
-  would then be picked up by some knit-specific workflow classes.
-
 *** Document the conceptual model                                     :story:
 
 We seem to be pretty close to the end of the conceptual model for
 dogen. We should write it up whilst its still fresh. We should try to
 use mathematical notation where possible to practice it. We should
 also get it reviewed.
-
-*** Perform the archetype / artefact renames                          :story:
-
-As per analysis story, we need to tidy-up terminology.
-
-Renames:
-
-- file: artefact
-- file formatter: artefact formatter, artefact generator? factory?
-- ownership_hierarchy: archetype_location, model_name becomes kernel,
-  facet name becomes facet and formatter name archetype. Add
-  sub-kernel.
-- Element concept becomes Entity.
 
 *** Refactor ownership hierarchy                                      :story:
 
