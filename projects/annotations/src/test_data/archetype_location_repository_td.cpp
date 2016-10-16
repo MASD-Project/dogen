@@ -20,7 +20,7 @@
  */
 #include <sstream>
 #include "dogen/annotations/test_data/archetype_location_td.hpp"
-#include "dogen/annotations/test_data/ownership_hierarchy_repository_td.hpp"
+#include "dogen/annotations/test_data/archetype_location_repository_td.hpp"
 
 namespace {
 
@@ -64,31 +64,31 @@ std::unordered_map<std::string, std::unordered_set<std::string> > create_std_uno
 namespace dogen {
 namespace annotations {
 
-ownership_hierarchy_repository_generator::ownership_hierarchy_repository_generator() : position_(0) { }
+archetype_location_repository_generator::archetype_location_repository_generator() : position_(0) { }
 
-void ownership_hierarchy_repository_generator::
+void archetype_location_repository_generator::
 populate(const unsigned int position, result_type& v) {
     v.ownership_hierarchies(create_std_vector_dogen_annotations_archetype_location(position + 0));
     v.facet_names_by_model_name(create_std_unordered_map_std_string_std_unordered_set_std_string(position + 1));
     v.formatter_names_by_model_name(create_std_unordered_map_std_string_std_unordered_set_std_string(position + 2));
 }
 
-ownership_hierarchy_repository_generator::result_type
-ownership_hierarchy_repository_generator::create(const unsigned int position) {
+archetype_location_repository_generator::result_type
+archetype_location_repository_generator::create(const unsigned int position) {
     archetype_location_repository r;
-    ownership_hierarchy_repository_generator::populate(position, r);
+    archetype_location_repository_generator::populate(position, r);
     return r;
 }
 
-ownership_hierarchy_repository_generator::result_type*
-ownership_hierarchy_repository_generator::create_ptr(const unsigned int position) {
+archetype_location_repository_generator::result_type*
+archetype_location_repository_generator::create_ptr(const unsigned int position) {
     archetype_location_repository* p = new archetype_location_repository();
-    ownership_hierarchy_repository_generator::populate(position, *p);
+    archetype_location_repository_generator::populate(position, *p);
     return p;
 }
 
-ownership_hierarchy_repository_generator::result_type
-ownership_hierarchy_repository_generator::operator()() {
+archetype_location_repository_generator::result_type
+archetype_location_repository_generator::operator()() {
     return create(position_++);
 }
 

@@ -35,7 +35,7 @@
 #include "dogen/annotations/types/profiler_configuration.hpp"
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
-#include "dogen/annotations/types/ownership_hierarchy_repository.hpp"
+#include "dogen/annotations/types/archetype_location_repository.hpp"
 
 namespace dogen {
 namespace annotations {

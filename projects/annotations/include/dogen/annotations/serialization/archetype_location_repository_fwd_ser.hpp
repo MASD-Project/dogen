@@ -18,35 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TEST_DATA_OWNERSHIP_HIERARCHY_REPOSITORY_TD_HPP
-#define DOGEN_ANNOTATIONS_TEST_DATA_OWNERSHIP_HIERARCHY_REPOSITORY_TD_HPP
+#ifndef DOGEN_ANNOTATIONS_SERIALIZATION_ARCHETYPE_LOCATION_REPOSITORY_FWD_SER_HPP
+#define DOGEN_ANNOTATIONS_SERIALIZATION_ARCHETYPE_LOCATION_REPOSITORY_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/annotations/types/ownership_hierarchy_repository.hpp"
+#include "dogen/annotations/types/archetype_location_repository_fwd.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace boost {
+namespace serialization {
 
-class ownership_hierarchy_repository_generator {
-public:
-    ownership_hierarchy_repository_generator();
+template<class Archive>
+void save(Archive& ar, const dogen::annotations::archetype_location_repository& v, unsigned int version);
 
-public:
-    typedef dogen::annotations::archetype_location_repository result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
-};
+template<class Archive>
+void load(Archive& ar, dogen::annotations::archetype_location_repository& v, unsigned int version);
 
 } }
 

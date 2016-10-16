@@ -27,7 +27,7 @@
 
 #include <list>
 #include "dogen/annotations/types/archetype_location.hpp"
-#include "dogen/annotations/types/ownership_hierarchy_repository.hpp"
+#include "dogen/annotations/types/archetype_location_repository.hpp"
 
 namespace dogen {
 namespace annotations {

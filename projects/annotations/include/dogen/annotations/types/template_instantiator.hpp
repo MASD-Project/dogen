@@ -34,7 +34,7 @@
 #include "dogen/annotations/types/type.hpp"
 #include "dogen/annotations/types/type_template.hpp"
 #include "dogen/annotations/types/entry_template.hpp"
-#include "dogen/annotations/types/ownership_hierarchy_repository.hpp"
+#include "dogen/annotations/types/archetype_location_repository.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
 
 namespace dogen {

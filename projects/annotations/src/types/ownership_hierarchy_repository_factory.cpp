@@ -20,7 +20,7 @@
  */
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/annotations/types/building_error.hpp"
-#include "dogen/annotations/io/ownership_hierarchy_repository_io.hpp"
+#include "dogen/annotations/io/archetype_location_repository_io.hpp"
 #include "dogen/annotations/types/ownership_hierarchy_repository_factory.hpp"
 
 namespace {

@@ -27,7 +27,7 @@
 
 #include <list>
 #include <boost/filesystem/path.hpp>
-#include "dogen/annotations/types/ownership_hierarchy_repository.hpp"
+#include "dogen/annotations/types/archetype_location_repository.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 

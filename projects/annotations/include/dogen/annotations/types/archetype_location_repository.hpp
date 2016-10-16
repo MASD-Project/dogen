@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_OWNERSHIP_HIERARCHY_REPOSITORY_HPP
-#define DOGEN_ANNOTATIONS_TYPES_OWNERSHIP_HIERARCHY_REPOSITORY_HPP
+#ifndef DOGEN_ANNOTATIONS_TYPES_ARCHETYPE_LOCATION_REPOSITORY_HPP
+#define DOGEN_ANNOTATIONS_TYPES_ARCHETYPE_LOCATION_REPOSITORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,7 +31,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include "dogen/annotations/types/archetype_location.hpp"
-#include "dogen/annotations/serialization/ownership_hierarchy_repository_fwd_ser.hpp"
+#include "dogen/annotations/serialization/archetype_location_repository_fwd_ser.hpp"
 
 namespace dogen {
 namespace annotations {
