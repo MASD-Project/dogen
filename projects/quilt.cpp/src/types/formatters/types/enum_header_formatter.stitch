@@ -38,7 +38,7 @@ enum class <#= e.name().simple() #> : <#= a.get_qualified_name(e.underlying_type
 
 <#+
     } // sbf
-    return a.make_file();
+    return a.make_artefact();
 }
 
 #>

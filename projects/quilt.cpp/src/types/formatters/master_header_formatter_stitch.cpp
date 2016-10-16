@@ -33,6 +33,6 @@ dogen::formatters::artefact master_header_formatter_stitch(
         auto sbf(a.make_scoped_boilerplate_formatter());
 a.stream() << std::endl;
     } // sbf
-    return a.make_file();
+    return a.make_artefact();
 }
 } } } }

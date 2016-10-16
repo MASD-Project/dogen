@@ -27,7 +27,7 @@ void register_types(Archive& ar);
 <#+
 
     } // sbf
-    return a.make_file();
+    return a.make_artefact();
 }
 
 #>

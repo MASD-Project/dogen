@@ -113,7 +113,7 @@ template void load(archive::xml_iarchive& ar, <#= qn #>& v, unsigned int version
 } }
 <#+
     } // sbf
-    return a.make_file();
+    return a.make_artefact();
 }
 
 #>

@@ -64,7 +64,7 @@ template void register_types(boost::archive::xml_iarchive&<#= arg_name #>);
 <#+
         } // snf
     } // sbf
-    return a.make_file();
+    return a.make_artefact();
 }
 
 #>

@@ -27,6 +27,6 @@ dogen::formatters::artefact enum_header_formatter_stitch(
 
 <#+
     } // sbf
-    return a.make_file();
+    return a.make_artefact();
 }
 #>

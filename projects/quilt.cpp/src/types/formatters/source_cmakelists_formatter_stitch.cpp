@@ -45,6 +45,6 @@ a.stream() << "    OUTPUT_NAME " << product_name << (product_name.empty() ? "" :
 a.stream() << std::endl;
 a.stream() << "install(TARGETS " << model_name << " ARCHIVE DESTINATION lib COMPONENT libraries)" << std::endl;
     } // sbf
-        return a.make_file();
+        return a.make_artefact();
 }
 } } } }

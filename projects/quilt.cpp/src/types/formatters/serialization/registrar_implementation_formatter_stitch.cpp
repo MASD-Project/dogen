@@ -74,7 +74,7 @@ a.stream() << "template void register_types(boost::archive::xml_iarchive&" << ar
 a.stream() << std::endl;
         } // snf
     } // sbf
-    return a.make_file();
+    return a.make_artefact();
 }
 
 } } } } }

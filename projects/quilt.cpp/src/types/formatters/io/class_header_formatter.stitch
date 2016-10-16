@@ -28,6 +28,6 @@ operator<<(std::ostream& s,
 
 <#+
     } // sbf
-    return a.make_file();
+    return a.make_artefact();
 }
 #>

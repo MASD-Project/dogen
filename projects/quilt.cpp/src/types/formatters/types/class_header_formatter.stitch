@@ -380,6 +380,6 @@ inline void swap(
 
 <#+
     } // sbf
-    return a.make_file();
+    return a.make_artefact();
 }
 #>

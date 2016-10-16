@@ -54,7 +54,7 @@ a.stream() << std::endl;
         } // snf
 a.stream() << std::endl;
     } // sbf
-    return a.make_file();
+    return a.make_artefact();
 }
 
 } } } } }

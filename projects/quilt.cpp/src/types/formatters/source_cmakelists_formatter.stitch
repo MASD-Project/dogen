@@ -28,6 +28,6 @@ set_target_properties(<#= model_name #> PROPERTIES
 install(TARGETS <#= model_name #> ARCHIVE DESTINATION lib COMPONENT libraries)
 <#+
     } // sbf
-        return a.make_file();
+        return a.make_artefact();
 }
 #>

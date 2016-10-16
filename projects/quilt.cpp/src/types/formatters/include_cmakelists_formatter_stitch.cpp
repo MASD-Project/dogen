@@ -91,6 +91,6 @@ a.stream() << "    set(ignore_file false)" << std::endl;
 a.stream() << "endforeach()" << std::endl;
         }
     } // sbf
-    return a.make_file();
+    return a.make_artefact();
 }
 } } } }

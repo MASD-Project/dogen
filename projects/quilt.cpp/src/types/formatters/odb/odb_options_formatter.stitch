@@ -51,6 +51,6 @@ dogen::formatters::artefact odb_options_formatter_stitch(
 --guard-prefix <#= boost::to_upper_copy(product_name) #>_<#= boost::to_upper_copy(model_name) #>_<#= boost::to_upper_copy(odb_folder) #>
 <#+
     } // sbf
-    return a.make_file();
+    return a.make_artefact();
 }
 #>

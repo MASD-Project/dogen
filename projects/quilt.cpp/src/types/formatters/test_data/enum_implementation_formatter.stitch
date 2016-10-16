@@ -38,7 +38,7 @@ populate(const unsigned int position, result_type& v) {
 <#+
          } // snf
     } // sbf
-    return a.make_file();
+    return a.make_artefact();
 }
 
 #>

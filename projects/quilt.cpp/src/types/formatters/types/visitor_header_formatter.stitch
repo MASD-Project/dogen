@@ -73,7 +73,7 @@ inline <#= v.name().simple() #>::~<#= v.name().simple() #>() noexcept { }
 
 <#+
     } // sbf
-    return a.make_file();
+    return a.make_artefact();
 }
 
 #>

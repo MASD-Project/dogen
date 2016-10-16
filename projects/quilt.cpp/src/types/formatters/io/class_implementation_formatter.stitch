@@ -39,6 +39,6 @@ std::ostream& operator<<(std::ostream& s, const <#= sn #>&<#= (no_arg ? "" : " v
 <#+
         } // snf
     } // sbf
-    return a.make_file();
+    return a.make_artefact();
 }
 #>

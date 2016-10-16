@@ -109,7 +109,7 @@ a.stream() << "template void load(archive::xml_iarchive& ar, " << qn << "& v, un
 a.stream() << std::endl;
 a.stream() << "} }" << std::endl;
     } // sbf
-    return a.make_file();
+    return a.make_artefact();
 }
 
 } } } } }

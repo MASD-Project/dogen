@@ -39,6 +39,6 @@ a.stream() << "    ar & make_nvp(\"" << e.name().simple() << "\", v);" << std::e
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;
     } // sbf
-    return a.make_file();
+    return a.make_artefact();
 }
 } } } } }

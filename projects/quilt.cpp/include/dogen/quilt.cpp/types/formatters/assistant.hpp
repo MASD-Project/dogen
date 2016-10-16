@@ -324,7 +324,7 @@ public:
      * @brief Generates a file with the current contents of the
      * stream.
      */
-    dogen::formatters::artefact make_file() const;
+    dogen::formatters::artefact make_artefact() const;
 
 private:
     std::ostringstream stream_;

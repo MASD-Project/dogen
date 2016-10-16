@@ -59,6 +59,6 @@ class_header_formatter_stitch(assistant& a, const yarn::object& o) {
 <#+
         }
     } // sbf
-    return a.make_file();
+    return a.make_artefact();
 }
 #>

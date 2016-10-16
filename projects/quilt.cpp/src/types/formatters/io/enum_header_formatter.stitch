@@ -25,7 +25,7 @@ std::ostream& operator<<(std::ostream& s, const <#= e.name().simple() #>& v);
 
 <#+
     } // sbf
-    return a.make_file();
+    return a.make_artefact();
 }
 
 #>

@@ -366,7 +366,7 @@ a.stream() << "}" << std::endl;
 a.stream() << std::endl;
         } // snf
     } // sbf
-    return a.make_file();
+    return a.make_artefact();
 }
 
 } } } } }

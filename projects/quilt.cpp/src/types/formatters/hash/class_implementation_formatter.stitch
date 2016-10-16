@@ -81,6 +81,6 @@ std::size_t <#= sn #>_hasher::hash(const <#= sn #>&<#= ((o.local_attributes().em
 <#+
         } // snf
     } // sbf
-    return a.make_file();
+    return a.make_artefact();
 }
 #>
