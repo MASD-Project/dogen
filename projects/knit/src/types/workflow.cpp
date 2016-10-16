@@ -121,7 +121,7 @@ void workflow::perform_housekeeping(
 }
 
 
-std::shared_ptr<dogen::formatters::file_writer_interface>
+std::shared_ptr<dogen::formatters::artefact_writer_interface>
 workflow::obtain_file_writer() const {
     const options::output_options& options(knitting_options_.output());
     const auto fw(options.force_write());
@@ -131,7 +131,7 @@ workflow::obtain_file_writer() const {
 }
 
 void workflow::write_files(
-    std::shared_ptr<dogen::formatters::file_writer_interface> writer,
+    std::shared_ptr<dogen::formatters::artefact_writer_interface> writer,
     const std::forward_list<formatters::artefact>& files) const {
 
     if (files.empty()) {

@@ -7989,7 +7989,7 @@ then make use of it.
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#file_writer_interface#</dia:string>
+        <dia:string>#artefact_writer_interface#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#handcrafted#</dia:string>

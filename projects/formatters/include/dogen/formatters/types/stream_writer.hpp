@@ -25,12 +25,12 @@
 #pragma once
 #endif
 
-#include "dogen/formatters/types/file_writer_interface.hpp"
+#include "dogen/formatters/types/artefact_writer_interface.hpp"
 
 namespace dogen {
 namespace formatters {
 
-class stream_writer : public file_writer_interface {
+class stream_writer : public artefact_writer_interface {
 public:
     explicit stream_writer(std::ostream& s);
 

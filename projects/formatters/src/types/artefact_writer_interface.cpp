@@ -18,18 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TYPES_FILE_WRITER_INTERFACE_FWD_HPP
-#define DOGEN_FORMATTERS_TYPES_FILE_WRITER_INTERFACE_FWD_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+#include "dogen/formatters/types/artefact_writer_interface.hpp"
 
 namespace dogen {
 namespace formatters {
 
-class file_writer_interface;
+artefact_writer_interface::~artefact_writer_interface() noexcept {}
 
 } }
-
-#endif

@@ -26,7 +26,7 @@
 #endif
 
 #include <boost/filesystem/path.hpp>
-#include "dogen/formatters/types/file_writer_interface.hpp"
+#include "dogen/formatters/types/artefact_writer_interface.hpp"
 
 namespace dogen {
 namespace formatters {
@@ -34,7 +34,7 @@ namespace formatters {
 /**
  * @brief Writes files to the filesystem.
  */
-class filesystem_writer : public file_writer_interface {
+class filesystem_writer : public artefact_writer_interface {
 public:
     explicit filesystem_writer(const bool force_write);
 

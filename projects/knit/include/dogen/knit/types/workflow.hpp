@@ -38,7 +38,7 @@
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/yarn/types/descriptor.hpp"
 #include "dogen/formatters/types/artefact.hpp"
-#include "dogen/formatters/types/file_writer_interface.hpp"
+#include "dogen/formatters/types/artefact_writer_interface.hpp"
 
 namespace dogen {
 namespace knit {
@@ -125,7 +125,7 @@ private:
     /**
      * @brief Obtains the file writer, according to configuration.
      */
-    std::shared_ptr<dogen::formatters::file_writer_interface>
+    std::shared_ptr<dogen::formatters::artefact_writer_interface>
     obtain_file_writer() const;
 
     /**
@@ -133,7 +133,7 @@ private:
      * destination.
      */
     void write_files(
-        std::shared_ptr<dogen::formatters::file_writer_interface> writer,
+        std::shared_ptr<dogen::formatters::artefact_writer_interface> writer,
         const std::forward_list<formatters::artefact>& files) const;
 
 public:

@@ -18,11 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/types/file_writer_interface.hpp"
+#ifndef DOGEN_FORMATTERS_TYPES_ARTEFACT_WRITER_INTERFACE_HPP
+#define DOGEN_FORMATTERS_TYPES_ARTEFACT_WRITER_INTERFACE_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <forward_list>
+#include "dogen/formatters/types/artefact.hpp"
 
 namespace dogen {
 namespace formatters {
 
-file_writer_interface::~file_writer_interface() noexcept {}
+/**
+ * @brief Class with the ability to write files.
+ */
+class artefact_writer_interface {
+public:
+    virtual ~artefact_writer_interface() noexcept = 0;
+
+public:
+    /**
+     * @brief Write the files.
+     */
+    virtual void write(const std::forward_list<artefact>& files) const = 0;
+};
 
 } }
+
+#endif
