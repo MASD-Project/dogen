@@ -73,7 +73,7 @@ public:
      * @param gs General settings for the Yarn types.
      * @param m Model to generate.
      */
-    virtual std::forward_list<formatters::file> generate(
+    virtual std::forward_list<formatters::artefact> generate(
         const options::knitting_options& ko,
         const annotations::type_repository& atrp,
         const yarn::model& m) const = 0;

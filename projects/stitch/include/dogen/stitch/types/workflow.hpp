@@ -135,13 +135,13 @@ private:
     /**
      * @brief Formats all of the supplied text templates.
      */
-    std::forward_list<formatters::file> format_text_templates(
+    std::forward_list<formatters::artefact> format_text_templates(
         const std::forward_list<text_template>& text_templates) const;
 
     /**
      * @brief Writes all of the files into the filesystem.
      */
-    void write_files(const std::forward_list<formatters::file>& files) const;
+    void write_files(const std::forward_list<formatters::artefact>& files) const;
 
 public:
     /**

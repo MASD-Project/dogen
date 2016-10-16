@@ -63,7 +63,7 @@ public:
         const formattables::locator& l, const yarn::name& n) const override;
 
 public:
-    dogen::formatters::file
+    dogen::formatters::artefact
         format(const context& ctx, const yarn::element& e) const override;
 };
 

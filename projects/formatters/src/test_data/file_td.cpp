@@ -56,14 +56,14 @@ populate(const unsigned int position, result_type& v) {
 
 file_generator::result_type
 file_generator::create(const unsigned int position) {
-    file r;
+    artefact r;
     file_generator::populate(position, r);
     return r;
 }
 
 file_generator::result_type*
 file_generator::create_ptr(const unsigned int position) {
-    file* p = new file();
+    artefact* p = new artefact();
     file_generator::populate(position, *p);
     return p;
 }

@@ -29,7 +29,7 @@ namespace cpp {
 namespace formatters {
 namespace serialization {
 
-dogen::formatters::file registrar_implementation_formatter_stitch(
+dogen::formatters::artefact registrar_implementation_formatter_stitch(
     assistant& a, const fabric::registrar& rg) {
 
     {

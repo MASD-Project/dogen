@@ -55,7 +55,7 @@ namespace formatters {
 filesystem_writer::filesystem_writer(const bool force_write)
     : force_write_(force_write) {}
 
-bool filesystem_writer::requires_writing(const file& f) const {
+bool filesystem_writer::requires_writing(const artefact& f) const {
     if (force_write_)
         return true;
 
@@ -100,7 +100,7 @@ void filesystem_writer::create_directories(
         using_dir_message) << dir.generic_string();
 }
 
-void filesystem_writer::write_empty_file(const formatters::file& f) const {
+void filesystem_writer::write_empty_file(const formatters::artefact& f) const {
     const auto gs(f.path().generic_string());
     if (boost::filesystem::exists(f.path())) {
         BOOST_LOG_SEV(lg, trace) << "File has no content so no writing: " << gs;
@@ -120,7 +120,7 @@ void filesystem_writer::write_empty_file(const formatters::file& f) const {
     return;
 }
 
-void filesystem_writer::write(const formatters::file& f) const {
+void filesystem_writer::write(const formatters::artefact& f) const {
     const auto gs(f.path().generic_string());
     BOOST_LOG_SEV(lg, debug) << "Writing file: " << gs;
 
@@ -147,7 +147,7 @@ void filesystem_writer::write(const formatters::file& f) const {
     BOOST_LOG_SEV(lg, debug) << "Processed file: " << gs;
 }
 
-void filesystem_writer::write(const std::forward_list<file>& files) const {
+void filesystem_writer::write(const std::forward_list<artefact>& files) const {
     BOOST_LOG_SEV(lg, info) << "Writing files: " << files;
     for (const auto& f : files)
         write(f);

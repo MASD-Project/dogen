@@ -593,8 +593,8 @@ std::ostream& assistant::stream() {
     return filtering_stream_;
 }
 
-dogen::formatters::file assistant::make_file() const {
-    dogen::formatters::file r;
+dogen::formatters::artefact assistant::make_file() const {
+    dogen::formatters::artefact r;
     r.content(stream_.str());
     r.path(formatter_properties_.file_path());
     r.overwrite(formatter_properties_.overwrite());

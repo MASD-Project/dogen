@@ -158,7 +158,7 @@ const std::string text_line_with_quotes_content(
     R"(stream_ << "\"double quote\" \\\"double quote quote\\\" 'single'" << std::endl;
 )");
 
-dogen::formatters::file format(const dogen::stitch::text_template& tt) {
+dogen::formatters::artefact format(const dogen::stitch::text_template& tt) {
     dogen::stitch::formatter f;
     return f.format(tt);
 }

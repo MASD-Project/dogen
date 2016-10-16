@@ -7,7 +7,7 @@
 <#@ containing_namespaces=dogen::quilt::cpp::formatters #>
 <#+
 
-dogen::formatters::file master_header_formatter_stitch(
+dogen::formatters::artefact master_header_formatter_stitch(
     assistant& a, const fabric::master_header& /*mh*/) {
 
     {

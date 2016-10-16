@@ -35,7 +35,7 @@ namespace cpp {
 namespace formatters {
 namespace io {
 
-dogen::formatters::file enum_implementation_formatter_stitch(
+dogen::formatters::artefact enum_implementation_formatter_stitch(
     assistant& a, const yarn::enumeration& e);
 
 } } } } }

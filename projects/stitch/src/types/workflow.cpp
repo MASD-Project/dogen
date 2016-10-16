@@ -175,16 +175,16 @@ void workflow::populate_properties(
         tt.properties(f.make(tt.annotation()));
 }
 
-std::forward_list<formatters::file> workflow::format_text_templates(
+std::forward_list<formatters::artefact> workflow::format_text_templates(
     const std::forward_list<text_template>& text_templates) const {
-    std::forward_list<formatters::file> r;
+    std::forward_list<formatters::artefact> r;
     for (const auto& tt : text_templates)
         r.push_front(formatter_.format(tt));
     return r;
 }
 
 void workflow::
-write_files(const std::forward_list<formatters::file>& files) const {
+write_files(const std::forward_list<formatters::artefact>& files) const {
     BOOST_LOG_SEV(lg, debug) << "Files: " << files;
     formatters::filesystem_writer w(false/*force_write*/);
     w.write(files);

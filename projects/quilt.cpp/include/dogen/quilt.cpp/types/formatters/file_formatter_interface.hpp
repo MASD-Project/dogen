@@ -98,7 +98,7 @@ public:
     /**
      * @brief Generate a file representation for the element.
      */
-    virtual dogen::formatters::file
+    virtual dogen::formatters::artefact
     format(const context& ctx, const yarn::element& e) const = 0;
 };
 

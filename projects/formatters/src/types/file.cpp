@@ -23,15 +23,15 @@
 namespace dogen {
 namespace formatters {
 
-file::file()
+artefact::artefact()
     : overwrite_(static_cast<bool>(0)) { }
 
-file::file(file&& rhs)
+artefact::artefact(artefact&& rhs)
     : path_(std::move(rhs.path_)),
       content_(std::move(rhs.content_)),
       overwrite_(std::move(rhs.overwrite_)) { }
 
-file::file(
+artefact::artefact(
     const boost::filesystem::path& path,
     const std::string& content,
     const bool overwrite)
@@ -39,62 +39,62 @@ file::file(
       content_(content),
       overwrite_(overwrite) { }
 
-void file::swap(file& other) noexcept {
+void artefact::swap(artefact& other) noexcept {
     using std::swap;
     swap(path_, other.path_);
     swap(content_, other.content_);
     swap(overwrite_, other.overwrite_);
 }
 
-bool file::operator==(const file& rhs) const {
+bool artefact::operator==(const artefact& rhs) const {
     return path_ == rhs.path_ &&
         content_ == rhs.content_ &&
         overwrite_ == rhs.overwrite_;
 }
 
-file& file::operator=(file other) {
+artefact& artefact::operator=(artefact other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const boost::filesystem::path& file::path() const {
+const boost::filesystem::path& artefact::path() const {
     return path_;
 }
 
-boost::filesystem::path& file::path() {
+boost::filesystem::path& artefact::path() {
     return path_;
 }
 
-void file::path(const boost::filesystem::path& v) {
+void artefact::path(const boost::filesystem::path& v) {
     path_ = v;
 }
 
-void file::path(const boost::filesystem::path&& v) {
+void artefact::path(const boost::filesystem::path&& v) {
     path_ = std::move(v);
 }
 
-const std::string& file::content() const {
+const std::string& artefact::content() const {
     return content_;
 }
 
-std::string& file::content() {
+std::string& artefact::content() {
     return content_;
 }
 
-void file::content(const std::string& v) {
+void artefact::content(const std::string& v) {
     content_ = v;
 }
 
-void file::content(const std::string&& v) {
+void artefact::content(const std::string&& v) {
     content_ = std::move(v);
 }
 
-bool file::overwrite() const {
+bool artefact::overwrite() const {
     return overwrite_;
 }
 
-void file::overwrite(const bool v) {
+void artefact::overwrite(const bool v) {
     overwrite_ = v;
 }
 

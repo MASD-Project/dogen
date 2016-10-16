@@ -36,29 +36,29 @@ namespace formatters {
 /**
  * @brief File produced by a formatter.
  */
-class file final {
+class artefact final {
 public:
-    file(const file&) = default;
-    ~file() = default;
+    artefact(const artefact&) = default;
+    ~artefact() = default;
 
 public:
-    file();
+    artefact();
 
 public:
-    file(file&& rhs);
+    artefact(artefact&& rhs);
 
 public:
-    file(
+    artefact(
         const boost::filesystem::path& path,
         const std::string& content,
         const bool overwrite);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::formatters::file& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::formatters::artefact& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::formatters::file& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::formatters::artefact& v, unsigned int version);
 
 public:
     /**
@@ -93,14 +93,14 @@ public:
     /**@}*/
 
 public:
-    bool operator==(const file& rhs) const;
-    bool operator!=(const file& rhs) const {
+    bool operator==(const artefact& rhs) const;
+    bool operator!=(const artefact& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(file& other) noexcept;
-    file& operator=(file other);
+    void swap(artefact& other) noexcept;
+    artefact& operator=(artefact other);
 
 private:
     boost::filesystem::path path_;
@@ -114,8 +114,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::formatters::file& lhs,
-    dogen::formatters::file& rhs) {
+    dogen::formatters::artefact& lhs,
+    dogen::formatters::artefact& rhs) {
     lhs.swap(rhs);
 }
 

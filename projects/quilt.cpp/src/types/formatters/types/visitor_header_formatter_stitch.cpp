@@ -26,7 +26,7 @@ namespace cpp {
 namespace formatters {
 namespace types {
 
-dogen::formatters::file visitor_header_formatter_stitch(
+dogen::formatters::artefact visitor_header_formatter_stitch(
     assistant& a, const yarn::visitor& v) {
 
     {
@@ -49,7 +49,7 @@ a.stream() << std::endl;
 a.stream() << "public:" << std::endl;
             if (v.parent()) {
                 const auto& pn(*v.parent());
-                const auto pqn(a.get_qualified_name(pn));            
+                const auto pqn(a.get_qualified_name(pn));
 a.stream() << "    using " << pqn << "::visit;" << std::endl;
 a.stream() << std::endl;
             }

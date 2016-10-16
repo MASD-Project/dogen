@@ -35,7 +35,7 @@ namespace cpp {
 namespace formatters {
 namespace types {
 
-dogen::formatters::file visitor_header_formatter_stitch(
+dogen::formatters::artefact visitor_header_formatter_stitch(
     assistant& a, const yarn::visitor& v);
 
 } } } } }

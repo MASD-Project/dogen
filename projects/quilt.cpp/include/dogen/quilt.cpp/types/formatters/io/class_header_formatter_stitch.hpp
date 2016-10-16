@@ -35,7 +35,7 @@ namespace cpp {
 namespace formatters {
 namespace io {
 
-dogen::formatters::file
+dogen::formatters::artefact
 class_header_formatter_stitch(assistant& a, const yarn::object& o);
 
 } } } } }

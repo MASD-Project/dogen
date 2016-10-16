@@ -34,7 +34,7 @@ namespace quilt {
 namespace cpp {
 namespace formatters {
 
-dogen::formatters::file
+dogen::formatters::artefact
 include_cmakelists_formatter_stitch(assistant& a, const fabric::cmakelists& c);
 
 } } } }

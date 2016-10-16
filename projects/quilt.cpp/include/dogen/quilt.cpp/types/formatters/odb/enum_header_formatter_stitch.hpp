@@ -35,7 +35,7 @@ namespace cpp {
 namespace formatters {
 namespace odb {
 
-dogen::formatters::file enum_header_formatter_stitch(
+dogen::formatters::artefact enum_header_formatter_stitch(
     assistant& a, const yarn::enumeration& e);
 
 } } } } }

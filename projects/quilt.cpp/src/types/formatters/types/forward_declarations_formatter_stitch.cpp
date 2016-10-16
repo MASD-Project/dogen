@@ -25,7 +25,7 @@ namespace quilt {
 namespace cpp {
 namespace formatters {
 namespace types {
-dogen::formatters::file forward_declarations_formatter_stitch(
+dogen::formatters::artefact forward_declarations_formatter_stitch(
     assistant& a, const fabric::forward_declarations& fd) {
 
     {

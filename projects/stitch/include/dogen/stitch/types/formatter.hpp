@@ -81,7 +81,7 @@ private:
     /**
      * @brief Formats the text template.
      */
-    dogen::formatters::file format(const text_template& tt) const;
+    dogen::formatters::artefact format(const text_template& tt) const;
 };
 
 } }

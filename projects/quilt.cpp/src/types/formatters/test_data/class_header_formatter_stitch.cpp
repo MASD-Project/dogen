@@ -27,7 +27,7 @@ namespace cpp {
 namespace formatters {
 namespace test_data {
 
-dogen::formatters::file
+dogen::formatters::artefact
 class_header_formatter_stitch(assistant& a, const yarn::object& o) {
 
     {

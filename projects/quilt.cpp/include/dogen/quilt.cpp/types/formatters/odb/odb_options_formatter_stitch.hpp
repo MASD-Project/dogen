@@ -35,7 +35,7 @@ namespace cpp {
 namespace formatters {
 namespace odb {
 
-dogen::formatters::file odb_options_formatter_stitch(
+dogen::formatters::artefact odb_options_formatter_stitch(
     assistant& a, const fabric::odb_options& o);
 
 } } } } }

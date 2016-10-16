@@ -34,7 +34,7 @@ namespace quilt {
 namespace cpp {
 namespace formatters {
 
-dogen::formatters::file
+dogen::formatters::artefact
 master_header_formatter_stitch(assistant& a, const fabric::master_header& mh);
 
 } } } }

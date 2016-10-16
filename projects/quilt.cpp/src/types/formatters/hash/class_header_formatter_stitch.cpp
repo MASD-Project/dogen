@@ -27,13 +27,13 @@ namespace cpp {
 namespace formatters {
 namespace hash {
 
-dogen::formatters::file class_header_formatter_stitch(
+dogen::formatters::artefact class_header_formatter_stitch(
     assistant& a, const yarn::object& o) {
 
     const auto sn(o.name().simple());
     const auto qn(a.get_qualified_name(o.name()));
     {
-   
+
         auto sbf(a.make_scoped_boilerplate_formatter());
         {
             const auto ns(a.make_namespaces(o.name()));

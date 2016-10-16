@@ -28,7 +28,7 @@
 namespace dogen {
 namespace formatters {
 
-class file;
+class artefact;
 
 } }
 

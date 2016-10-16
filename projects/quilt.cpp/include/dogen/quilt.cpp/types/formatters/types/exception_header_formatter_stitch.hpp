@@ -35,7 +35,7 @@ namespace cpp {
 namespace formatters {
 namespace types {
 
-dogen::formatters::file exception_header_formatter_stitch(
+dogen::formatters::artefact exception_header_formatter_stitch(
     assistant& a, const yarn::exception& e);
 
 } } } } }

@@ -27,7 +27,7 @@ namespace cpp {
 namespace formatters {
 namespace odb {
 
-dogen::formatters::file
+dogen::formatters::artefact
 class_header_formatter_stitch(assistant& a, const yarn::object& o) {
 
     {

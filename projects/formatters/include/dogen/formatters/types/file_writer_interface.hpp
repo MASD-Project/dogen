@@ -42,7 +42,7 @@ public:
     /**
      * @brief Write the files.
      */
-    virtual void write(const std::forward_list<file>& files) const = 0;
+    virtual void write(const std::forward_list<artefact>& files) const = 0;
 };
 
 } }

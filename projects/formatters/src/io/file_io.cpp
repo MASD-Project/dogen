@@ -33,7 +33,7 @@ inline std::string tidy_up_string(std::string s) {
 namespace dogen {
 namespace formatters {
 
-std::ostream& operator<<(std::ostream& s, const file& v) {
+std::ostream& operator<<(std::ostream& s, const artefact& v) {
     boost::io::ios_flags_saver ifs(s);
     s.setf(std::ios_base::boolalpha);
     s.setf(std::ios::fixed, std::ios::floatfield);

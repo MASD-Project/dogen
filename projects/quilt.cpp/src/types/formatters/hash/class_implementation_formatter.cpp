@@ -107,7 +107,7 @@ boost::filesystem::path class_implementation_formatter::full_path(
     return l.make_full_path_for_cpp_implementation(n, static_formatter_name());
 }
 
-dogen::formatters::file class_implementation_formatter::
+dogen::formatters::artefact class_implementation_formatter::
 format(const context& ctx, const yarn::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, ownership_hierarchy(), false/*requires_header_guard*/, id);

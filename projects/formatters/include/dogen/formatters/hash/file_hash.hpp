@@ -33,7 +33,7 @@ namespace formatters {
 
 struct file_hasher {
 public:
-    static std::size_t hash(const file& v);
+    static std::size_t hash(const artefact& v);
 };
 
 } }
@@ -41,9 +41,9 @@ public:
 namespace std {
 
 template<>
-struct hash<dogen::formatters::file> {
+struct hash<dogen::formatters::artefact> {
 public:
-    size_t operator()(const dogen::formatters::file& v) const {
+    size_t operator()(const dogen::formatters::artefact& v) const {
         return dogen::formatters::file_hasher::hash(v);
     }
 };

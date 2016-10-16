@@ -119,7 +119,7 @@ private:
      * @brief Performs a housekeeping run for the supplied directories.
      */
     void perform_housekeeping(
-        const std::forward_list<formatters::file>& files,
+        const std::forward_list<formatters::artefact>& files,
         const std::forward_list<boost::filesystem::path>& dirs) const;
 
     /**
@@ -134,7 +134,7 @@ private:
      */
     void write_files(
         std::shared_ptr<dogen::formatters::file_writer_interface> writer,
-        const std::forward_list<formatters::file>& files) const;
+        const std::forward_list<formatters::artefact>& files) const;
 
 public:
     /**

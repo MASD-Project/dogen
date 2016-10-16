@@ -43,7 +43,7 @@ private:
      * @brief Returns true if the file needs to be written to the
      * file system, false otherwise.
      */
-    bool requires_writing(const file& f) const;
+    bool requires_writing(const artefact& f) const;
 
     /**
      * @brief Creates directories to house the file, if they do not
@@ -56,15 +56,15 @@ private:
      *
      * FIXME: this is a hack for now.
      */
-    void write_empty_file(const formatters::file& f) const;
+    void write_empty_file(const formatters::artefact& f) const;
 
     /**
      * @brief Writes the file.
      */
-    void write(const formatters::file& f) const;
+    void write(const formatters::artefact& f) const;
 
 public:
-    void write(const std::forward_list<file>& files) const override;
+    void write(const std::forward_list<artefact>& files) const override;
 
 private:
     const bool force_write_;

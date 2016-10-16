@@ -107,7 +107,7 @@ obtain_yarn_model(const std::vector<boost::filesystem::path>& data_dirs,
 }
 
 void workflow::perform_housekeeping(
-    const std::forward_list<formatters::file>& files,
+    const std::forward_list<formatters::artefact>& files,
     const std::forward_list<boost::filesystem::path>& dirs) const {
 
     std::set<boost::filesystem::path> expected_files;
@@ -132,7 +132,7 @@ workflow::obtain_file_writer() const {
 
 void workflow::write_files(
     std::shared_ptr<dogen::formatters::file_writer_interface> writer,
-    const std::forward_list<formatters::file>& files) const {
+    const std::forward_list<formatters::artefact>& files) const {
 
     if (files.empty()) {
         BOOST_LOG_SEV(lg, warn) << "No files were generated, so no output.";

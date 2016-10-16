@@ -63,7 +63,7 @@ public:
      * @brief Generates files for the supplied model using all
      * registered backends.
      */
-    std::forward_list<formatters::file>
+    std::forward_list<formatters::artefact>
     execute(const yarn::model& m) const;
 
 private:

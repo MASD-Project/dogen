@@ -27,7 +27,7 @@ namespace cpp {
 namespace formatters {
 namespace serialization {
 
-dogen::formatters::file class_header_formatter_stitch(
+dogen::formatters::artefact class_header_formatter_stitch(
     assistant& a, const yarn::object& o) {
     {
         const auto qn(a.get_qualified_name(o.name()));

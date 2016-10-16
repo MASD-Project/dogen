@@ -39,7 +39,7 @@ inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) 
 namespace dogen {
 namespace formatters {
 
-std::size_t file_hasher::hash(const file& v) {
+std::size_t file_hasher::hash(const artefact& v) {
     std::size_t seed(0);
 
     combine(seed, hash_boost_filesystem_path(v.path()));

@@ -137,7 +137,7 @@ annotations::ownership_hierarchy formatter::ownership_hierarchy() const {
     return r;
 }
 
-dogen::formatters::file formatter::format(const text_template& tt) const {
+dogen::formatters::artefact formatter::format(const text_template& tt) const {
     BOOST_LOG_SEV(lg, debug) << "Formatting template.";
 
     const auto& ss(tt.properties().stitching_properties());
@@ -169,7 +169,7 @@ dogen::formatters::file formatter::format(const text_template& tt) const {
         }
     }
 
-    dogen::formatters::file r;
+    dogen::formatters::artefact r;
     r.content(s.str());
     if (tt.properties().stitching_properties().output_path())
         r.path(*tt.properties().stitching_properties().output_path());

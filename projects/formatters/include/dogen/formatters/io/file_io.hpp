@@ -33,7 +33,7 @@ namespace formatters {
 
 std::ostream&
 operator<<(std::ostream& s,
-     const dogen::formatters::file& v);
+     const dogen::formatters::artefact& v);
 
 } }
 

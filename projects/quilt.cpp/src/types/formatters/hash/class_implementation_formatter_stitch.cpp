@@ -27,7 +27,7 @@ namespace cpp {
 namespace formatters {
 namespace hash {
 
-dogen::formatters::file class_implementation_formatter_stitch(
+dogen::formatters::artefact class_implementation_formatter_stitch(
     assistant& a, const yarn::object& o) {
     {
         auto sbf(a.make_scoped_boilerplate_formatter());

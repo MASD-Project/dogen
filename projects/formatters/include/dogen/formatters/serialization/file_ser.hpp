@@ -28,15 +28,15 @@
 #include <boost/serialization/split_free.hpp>
 #include "dogen/formatters/types/file.hpp"
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::formatters::file)
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::formatters::artefact)
 namespace boost {
 namespace serialization {
 
 template<typename Archive>
-void save(Archive& ar, const dogen::formatters::file& v, unsigned int version);
+void save(Archive& ar, const dogen::formatters::artefact& v, unsigned int version);
 
 template<typename Archive>
-void load(Archive& ar, dogen::formatters::file& v, unsigned int version);
+void load(Archive& ar, dogen::formatters::artefact& v, unsigned int version);
 
 } }
 

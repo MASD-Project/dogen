@@ -5,7 +5,7 @@
 <#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/types/forward_declarations_formatter_stitch.hpp" #>
 <#@ containing_namespaces=dogen::quilt::cpp::formatters::types #>
 <#+
-dogen::formatters::file forward_declarations_formatter_stitch(
+dogen::formatters::artefact forward_declarations_formatter_stitch(
     assistant& a, const fabric::forward_declarations& fd) {
 
     {

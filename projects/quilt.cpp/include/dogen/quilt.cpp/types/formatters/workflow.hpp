@@ -52,12 +52,12 @@ public:
     static cpp::formatters::registrar& registrar();
 
 private:
-    std::forward_list<dogen::formatters::file>
+    std::forward_list<dogen::formatters::artefact>
     format(const formattables::model& fm, const yarn::element& e,
         const formattables::element_properties& ep) const;
 
 public:
-    std::forward_list<dogen::formatters::file>
+    std::forward_list<dogen::formatters::artefact>
     execute(const formattables::model& fm) const;
 
 private:

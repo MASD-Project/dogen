@@ -35,7 +35,7 @@ public:
     file_generator();
 
 public:
-    typedef dogen::formatters::file result_type;
+    typedef dogen::formatters::artefact result_type;
 
 public:
     static void populate(const unsigned int position, result_type& v);

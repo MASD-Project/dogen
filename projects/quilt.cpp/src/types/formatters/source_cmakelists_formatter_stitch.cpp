@@ -27,7 +27,7 @@ namespace quilt {
 namespace cpp {
 namespace formatters {
 
-dogen::formatters::file source_cmakelists_formatter_stitch(
+dogen::formatters::artefact source_cmakelists_formatter_stitch(
     assistant& a, const fabric::cmakelists& c) {
 
     {

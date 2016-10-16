@@ -52,7 +52,7 @@ cpp::formatters::registrar& workflow::registrar() {
     return *registrar_;
 }
 
-std::forward_list<dogen::formatters::file>
+std::forward_list<dogen::formatters::artefact>
 workflow::format(const formattables::model& fm, const yarn::element& e,
     const formattables::element_properties& ep) const {
 
@@ -62,7 +62,7 @@ workflow::format(const formattables::model& fm, const yarn::element& e,
     const auto ti(std::type_index(typeid(e)));
     BOOST_LOG_SEV(lg, debug) << "Type index: " << ti.name();
 
-    std::forward_list<dogen::formatters::file> r;
+    std::forward_list<dogen::formatters::artefact> r;
     const auto& fc(registrar().formatter_container());
     const auto i(fc.file_formatters_by_type_index().find(ti));
     if (i == fc.file_formatters_by_type_index().end()) {
@@ -102,10 +102,10 @@ workflow::format(const formattables::model& fm, const yarn::element& e,
     return r;
 }
 
-std::forward_list<dogen::formatters::file>
+std::forward_list<dogen::formatters::artefact>
 workflow::execute(const formattables::model& fm) const {
     BOOST_LOG_SEV(lg, debug) << "Started formatting. Model " << fm.name().id();
-    std::forward_list<dogen::formatters::file> r;
+    std::forward_list<dogen::formatters::artefact> r;
     for (const auto& pair : fm.formattables()) {
         const auto& formattable(pair.second);
         const auto& eprops(formattable.element_properties());

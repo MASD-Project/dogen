@@ -28,7 +28,7 @@ namespace cpp {
 namespace formatters {
 namespace serialization {
 
-dogen::formatters::file registrar_header_formatter_stitch(
+dogen::formatters::artefact registrar_header_formatter_stitch(
     assistant& a, const fabric::registrar& rg) {
     {
         auto sbf(a.make_scoped_boilerplate_formatter());

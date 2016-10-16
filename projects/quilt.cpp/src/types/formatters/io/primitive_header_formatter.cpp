@@ -78,9 +78,9 @@ boost::filesystem::path primitive_header_formatter::full_path(
     return l.make_full_path_for_cpp_header(n, static_formatter_name());
 }
 
-dogen::formatters::file primitive_header_formatter::
+dogen::formatters::artefact primitive_header_formatter::
 format(const context& /*ctx*/, const yarn::element& /*e*/) const {
-    dogen::formatters::file r;
+    dogen::formatters::artefact r;
     return r;
 }
 

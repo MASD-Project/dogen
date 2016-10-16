@@ -92,7 +92,7 @@ boost::filesystem::path forward_declarations_formatter::full_path(
     return l.make_full_path_for_cpp_header(n, static_formatter_name());
 }
 
-dogen::formatters::file forward_declarations_formatter::
+dogen::formatters::artefact forward_declarations_formatter::
 format(const context& ctx, const yarn::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, ownership_hierarchy(), true/*requires_header_guard*/, id);

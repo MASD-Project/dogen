@@ -79,7 +79,7 @@ boost::filesystem::path enum_header_formatter::full_path(
     return l.make_full_path_for_cpp_header(n, static_formatter_name());
 }
 
-dogen::formatters::file enum_header_formatter::
+dogen::formatters::artefact enum_header_formatter::
 format(const context& ctx, const yarn::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, ownership_hierarchy(), true/*requires_header_guard*/, id);

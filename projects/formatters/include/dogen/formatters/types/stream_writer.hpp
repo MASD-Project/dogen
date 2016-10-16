@@ -35,7 +35,7 @@ public:
     explicit stream_writer(std::ostream& s);
 
 public:
-    void write(const std::forward_list<file>& files) const override;
+    void write(const std::forward_list<artefact>& files) const override;
 
 private:
     std::ostream& stream_;

@@ -87,7 +87,7 @@ private:
     /**
      * @brief Create the files representation of the formattables model.
      */
-    std::forward_list<dogen::formatters::file>
+    std::forward_list<dogen::formatters::artefact>
     format(const formattables::model& fm) const;
 
 public:
@@ -100,7 +100,7 @@ public:
     std::forward_list<annotations::ownership_hierarchy>
         ownership_hierarchy() const override;
 
-    std::forward_list<dogen::formatters::file> generate(
+    std::forward_list<dogen::formatters::artefact> generate(
         const options::knitting_options& ko,
         const annotations::type_repository& atrp,
         const yarn::model& m) const override;

@@ -95,7 +95,7 @@ workflow::managed_directories(const options::knitting_options& ko,
     return r;
 }
 
-std::forward_list<dogen::formatters::file>
+std::forward_list<dogen::formatters::artefact>
 workflow::format(const formattables::model& fm) const {
     formatters::workflow wf;
     return wf.execute(fm);
@@ -107,7 +107,7 @@ workflow::ownership_hierarchy() const {
     return workflow::registrar().ownership_hierarchy();
 }
 
-std::forward_list<dogen::formatters::file>
+std::forward_list<dogen::formatters::artefact>
 workflow::generate(const options::knitting_options& ko,
     const annotations::type_repository& atrp,
     const yarn::model& m) const {

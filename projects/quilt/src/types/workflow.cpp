@@ -65,9 +65,9 @@ workflow::managed_directories(const yarn::model& m) const {
     return r;
 }
 
-std::forward_list<formatters::file>
+std::forward_list<formatters::artefact>
 workflow::execute(const yarn::model& m) const {
-    std::forward_list<formatters::file> r;
+    std::forward_list<formatters::artefact> r;
     for(const auto b : registrar().backends()) {
         const auto n(b->name());
         BOOST_LOG_SEV(lg, debug) << "Generating files for: '" << n << "'";

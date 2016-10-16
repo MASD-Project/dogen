@@ -89,7 +89,7 @@ boost::filesystem::path include_cmakelists_formatter::full_path(
     return l.make_full_path_for_include_cmakelists(n, static_formatter_name());
 }
 
-dogen::formatters::file include_cmakelists_formatter::
+dogen::formatters::artefact include_cmakelists_formatter::
 format(const context& ctx, const yarn::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, ownership_hierarchy(), false/*requires_header_guard*/, id);
