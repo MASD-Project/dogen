@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-/*
 #include <sstream>
 #include <initializer_list>
 #include <boost/test/unit_test.hpp>
@@ -26,8 +25,12 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
+#include "dogen/yarn/io/object_io.hpp"
+#include "dogen/yarn/io/enumeration_io.hpp"
+#include "dogen/yarn/io/module_io.hpp"
+#include "dogen/yarn/io/exception_io.hpp"
 #include "dogen/yarn.dia/types/transformer.hpp"
-#include "dogen/yarn.dia/types/profiler.hpp"
+#include "dogen/yarn.dia/types/selection_error.hpp"
 #include "dogen/yarn.dia/types/transformation_error.hpp"
 #include "dogen/yarn.dia/io/repository_io.hpp"
 #include "dogen/yarn.dia/types/processed_object.hpp"
@@ -36,7 +39,7 @@
 
 using namespace dogen::yarn::dia;
 using dogen::utility::test::asserter;
-using dogen::yarn::dia::test::mock_processed_object_factory;
+using mock_factory = dogen::yarn::dia::test::mock_processed_object_factory;
 
 namespace  {
 
@@ -61,28 +64,6 @@ const std::string repository_stereotype("repository");
 
 const std::string immutable_stereotype("immutable");
 
-dogen::yarn::dia::profile
-mock_profile(const dogen::yarn::dia::processed_object& o) {
-    // FIXME: we should really be mocking the profile
-    profiler profiler;
-    return profiler.generate(o);
-}
-
-bool is_type_zero(const std::string& s) {
-    return mock_processed_object_factory::to_object_name(0) == s;
-}
-
-bool is_type_zero(const dogen::yarn::name& n) {
-    return is_type_zero(n.simple());
-}
-
-bool is_type_one(const dogen::yarn::name& n) {
-    return mock_processed_object_factory::to_object_name(1) == n.simple();
-}
-
-bool is_type_two(const dogen::yarn::name& n) {
-    return mock_processed_object_factory::to_object_name(2) == n.simple();
-}
 
 dogen::yarn::name mock_model_name(const std::string& mn) {
     dogen::yarn::name_factory nf;
@@ -105,17 +86,10 @@ dogen::yarn::dia::repository mock_repository() {
 
 dogen::yarn::dia::repository empty_repository;
 
-void transform(dogen::yarn::dia::repository& c,
-    std::initializer_list<dogen::yarn::dia::processed_object> pos) {
-    dogen::yarn::dia::transformer t(c);
-
-    for (const auto& po : pos) {
-        t.transform(po);
-    }
 }
 
-}
-
+using dogen::yarn::dia::transformation_error;
+using dogen::yarn::dia::selection_error;
 using dogen::utility::test::contains_checker;
 
 BOOST_AUTO_TEST_SUITE(transformer_tests)
@@ -125,833 +99,401 @@ BOOST_AUTO_TEST_CASE(empty_named_uml_class_throws) {
 
     auto rp(mock_repository());
     contains_checker<transformation_error> cc(empty_name);
-    const auto po(mock_processed_object_factory::make_empty_named_class());
-    BOOST_CHECK_EXCEPTION(transform(rp, {po}), transformation_error, cc);
+    const auto po(mock_factory::make_empty_named_class());
+    transformer t(rp);
+    BOOST_CHECK_EXCEPTION(t.to_object(po), transformation_error, cc);
 }
 
 BOOST_AUTO_TEST_CASE(uml_class_with_no_stereotype_transforms_into_expected_value_object) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_no_stereotype_transforms_into_expected_value_object");
-    const auto po(mock_processed_object_factory::make_class());
-    auto c(mock_repository(model_name));
-    transform(c, {po});
+    auto rp(mock_repository(model_name));
+    transformer t(rp);
 
-    BOOST_LOG_SEV(lg, debug) << "repository: " << c;
-    BOOST_REQUIRE(c.model().objects().size() == 1);
+    const auto po(mock_factory::make_class());
+    const auto o(t.to_object(po));
+    BOOST_LOG_SEV(lg, debug) << "Object: " << o;
 
-    const auto& o(c.model().objects().begin()->second);
-    BOOST_CHECK(o.object_type() ==
-        dogen::yarn::object_types::user_defined_value_object);
+    BOOST_CHECK(o.name().simple() == po.name());
+    BOOST_CHECK(!o.parent());
     BOOST_REQUIRE(o.name().location().model_modules().size() == 1);
-    BOOST_CHECK(o.name().location().model_modules().front() ==
-        model_name);
-    BOOST_CHECK(!o.name().simple().empty());
+    BOOST_CHECK(o.name().location().model_modules().front() == model_name);
     BOOST_CHECK(o.local_attributes().empty());
     BOOST_CHECK(!o.documentation().empty());
-
-    BOOST_REQUIRE(c.model().modules().size() == 1);
-    const auto& m(c.model().modules().begin()->second);
-    BOOST_CHECK(m.name().simple() == model_name);
-    BOOST_REQUIRE(m.name().location().model_modules().size() == 1);
-    BOOST_CHECK(m.name().location().model_modules().front() ==
-        model_name);
-    BOOST_CHECK(m.name().location().internal_modules().empty());
-}
-
-BOOST_AUTO_TEST_CASE(uml_class_with_value_object_stereotype_transforms_into_expected_value_object) {
-    SETUP_TEST_LOG_SOURCE("uml_class_with_value_object_stereotype_transforms_into_expected_value_object");
-
-    auto c(mock_repository());
-    const auto st(value_object_stereotype);
-    const auto po(mock_processed_object_factory::make_class(0, st));
-    transform(c, {po});
-
-    BOOST_LOG_SEV(lg, debug) << "repository: " << c;
-    BOOST_CHECK(c.model().enumerations().empty());
-    BOOST_CHECK(c.model().primitives().empty());
-    BOOST_REQUIRE(c.model().objects().size() == 1);
-
-    const auto& o(c.model().objects().begin()->second);
-    BOOST_CHECK(o.object_type() ==
-        dogen::yarn::object_types::user_defined_value_object);
-    BOOST_REQUIRE(o.name().location().model_modules().size() == 1);
-    BOOST_CHECK(o.name().location().model_modules().front() ==
-        model_name);
-    BOOST_CHECK(is_type_zero(o.name()));
-    BOOST_CHECK(!o.documentation().empty());
-
-    BOOST_REQUIRE(c.model().modules().size() == 1);
-    const auto& m(c.model().modules().begin()->second);
-    BOOST_CHECK(m.name().simple() == model_name);
-    BOOST_REQUIRE(m.name().location().model_modules().size() == 1);
-    BOOST_CHECK(m.name().location().model_modules().front() ==
-        model_name);
-    BOOST_CHECK(m.name().location().internal_modules().empty());
 }
 
 BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_transforms_into_expected_enumeration) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_enumeration_stereotype_transforms_into_expected_enumeration");
 
-    auto c(mock_repository());
+    auto rp(mock_repository(model_name));
+    transformer t(rp);
+
     const auto st(enumeration_stereotype);
-    const auto po(mock_processed_object_factory::make_class(0, st));
-    transform(c, {po});
+    const auto po(mock_factory::make_class(0, st));
+    const auto e(t.to_enumeration(po));
+    BOOST_LOG_SEV(lg, debug) << "Enumeration: " << e;
 
-    BOOST_LOG_SEV(lg, debug) << "repository: " << c;
-    BOOST_CHECK(c.model().objects().empty());
-    BOOST_CHECK(c.model().primitives().empty());
-    BOOST_REQUIRE(c.model().enumerations().size() == 1);
-
-    const auto e(c.model().enumerations().begin()->second);
+    BOOST_CHECK(e.name().simple() == po.name());
     BOOST_REQUIRE(e.name().location().model_modules().size() == 1);
-    BOOST_CHECK(e.name().location().model_modules().front() ==
-        model_name);
-    BOOST_CHECK(is_type_zero(e.name()));
+    BOOST_CHECK(e.name().location().model_modules().front() == model_name);
     BOOST_CHECK(!e.documentation().empty());
-
-    BOOST_REQUIRE(c.model().modules().size() == 1);
-    const auto& m(c.model().modules().begin()->second);
-    BOOST_CHECK(m.name().simple() == model_name);
-    BOOST_REQUIRE(m.name().location().model_modules().size() == 1);
-    BOOST_CHECK(m.name().location().model_modules().front() ==
-        model_name);
-    BOOST_CHECK(m.name().location().internal_modules().empty());
 }
 
-BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_transforms_into_expected_value_object) {
-    SETUP_TEST_LOG_SOURCE("uml_class_with_exception_stereotype_transforms_into_expected_value_object");
+BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_transforms_into_expected_exception) {
+    SETUP_TEST_LOG_SOURCE("uml_class_with_exception_stereotype_transforms_into_expected_exception");
+
+    auto rp(mock_repository(model_name));
+    transformer t(rp);
 
     auto c(mock_repository());
     const auto st(exception_stereotype);
-    const auto po(mock_processed_object_factory::make_class(0, st));
-    transform(c, {po});
+    const auto po(mock_factory::make_class(0, st));
+    const auto e(t.to_enumeration(po));
+    BOOST_LOG_SEV(lg, debug) << "Exception: " << e;
 
-    BOOST_LOG_SEV(lg, debug) << "repository: " << c;
-    BOOST_CHECK(c.model().enumerations().empty());
-    BOOST_CHECK(c.model().primitives().empty());
-    BOOST_CHECK(c.model().objects().empty());
-    BOOST_REQUIRE(c.model().exceptions().size() == 1);
-
-    const auto& e(c.model().exceptions().begin()->second);
+    BOOST_CHECK(e.name().simple() == po.name());
     BOOST_REQUIRE(e.name().location().model_modules().size() == 1);
-    BOOST_CHECK(e.name().location().model_modules().front() ==
-        model_name);
-    BOOST_CHECK(is_type_zero(e.name()));
+    BOOST_CHECK(e.name().location().model_modules().front() == model_name);
     BOOST_CHECK(!e.documentation().empty());
-
-    BOOST_REQUIRE(c.model().modules().size() == 1);
-    const auto& m(c.model().modules().begin()->second);
-    BOOST_CHECK(m.name().simple() == model_name);
-    BOOST_REQUIRE(m.name().location().model_modules().size() == 1);
-    BOOST_CHECK(m.name().location().model_modules().front() ==
-        model_name);
-    BOOST_CHECK(m.name().location().internal_modules().empty());
-}
-
-BOOST_AUTO_TEST_CASE(uml_class_with_service_stereotype_transforms_into_expected_service) {
-    SETUP_TEST_LOG_SOURCE("uml_class_with_service_stereotype_transforms_into_expected_service");
-
-    auto c(mock_repository());
-    const auto st(service_stereotype);
-    const auto po(mock_processed_object_factory::make_class(0, st));
-    transform(c, {po});
-
-    BOOST_LOG_SEV(lg, debug) << "repository: " << c;
-    BOOST_CHECK(c.model().enumerations().empty());
-    BOOST_CHECK(c.model().primitives().empty());
-    BOOST_REQUIRE(c.model().objects().size() == 1);
-
-    const auto& o(c.model().objects().begin()->second);
-    BOOST_CHECK(o.object_type() ==
-        dogen::yarn::object_types::user_defined_service);
-    BOOST_REQUIRE(o.name().location().model_modules().size() == 1);
-    BOOST_CHECK(o.name().location().model_modules().front() ==
-        model_name);
-    BOOST_CHECK(is_type_zero(o.name()));
-    BOOST_CHECK(!o.documentation().empty());
-
-    BOOST_REQUIRE(c.model().modules().size() == 1);
-    const auto& m(c.model().modules().begin()->second);
-    BOOST_CHECK(m.name().simple() == model_name);
-    BOOST_REQUIRE(m.name().location().model_modules().size() == 1);
-    BOOST_CHECK(m.name().location().model_modules().front() ==
-        model_name);
-    BOOST_CHECK(m.name().location().internal_modules().empty());
 }
 
 BOOST_AUTO_TEST_CASE(uml_large_package_transforms_into_expected_module) {
     SETUP_TEST_LOG_SOURCE("uml_large_package_transforms_into_expected_module");
 
-    auto c(mock_repository(model_name));
-    const auto po(mock_processed_object_factory::make_large_package());
-    transform(c, {po});
+    auto rp(mock_repository(model_name));
+    transformer t(rp);
 
-    BOOST_LOG_SEV(lg, debug) << "repository: " << c;
-    BOOST_CHECK(c.model().objects().empty());
-    BOOST_REQUIRE(c.model().modules().size() == 2);
+    const auto po(mock_factory::make_large_package());
+    const auto m(t.to_module(po));
+    BOOST_LOG_SEV(lg, debug) << "Module: " << m;
 
-    for (const auto& pair : c.model().modules()) {
-        const auto& m(pair.second);
-        BOOST_REQUIRE(m.name().location().model_modules().size() == 1);
-        BOOST_CHECK(m.name().location().model_modules().front() ==
-            model_name);
-        BOOST_CHECK(m.name().location().internal_modules().empty());
-
-        if (m.name().simple() != model_name) {
-            BOOST_CHECK(!m.name().simple().empty());
-            BOOST_CHECK(m.documentation().empty());
-        }
-    }
+    BOOST_CHECK(m.name().simple() == po.name());
+    BOOST_REQUIRE(m.name().simple() == po.name());
+    BOOST_REQUIRE(m.name().location().model_modules().size() == 1);
+    BOOST_CHECK(m.name().location().model_modules().front() == model_name);
+    BOOST_CHECK(m.name().location().internal_modules().empty());
+    BOOST_CHECK(!m.documentation().empty());
 }
 
-BOOST_AUTO_TEST_CASE(uml_class_in_package_transforms_into_expected_object) {
-    SETUP_TEST_LOG_SOURCE("uml_class_in_package_transforms_into_expected_object");
+BOOST_AUTO_TEST_CASE(uml_class_in_package_transforms_into_expected_elements) {
+    SETUP_TEST_LOG_SOURCE("uml_class_in_package_transforms_into_expected_elements");
 
-    auto c(mock_repository(model_name));
-    const auto po(
-        mock_processed_object_factory::make_class_inside_large_package());
-    transform(c, {po[0], po[1]});
+    auto rp(mock_repository(model_name));
+    transformer t(rp);
 
-    BOOST_LOG_SEV(lg, debug) << "repository: " << c;
+    const auto pos(mock_factory::make_class_inside_large_package());
+    const auto m(t.to_module(pos[0]));
+    BOOST_LOG_SEV(lg, debug) << "Module: " << m;
 
-    BOOST_REQUIRE(c.model().modules().size() == 2);
-    std::string module_name;
-    for (const auto& pair : c.model().modules()) {
-        const auto& m(pair.second);
-        BOOST_REQUIRE(m.name().location().model_modules().size() == 1);
-        BOOST_CHECK(m.name().location().model_modules().front() ==
-            model_name);
-        BOOST_CHECK(m.name().location().internal_modules().empty());
+    BOOST_CHECK(m.name().simple() == pos[0].name());
+    BOOST_REQUIRE(m.name().location().model_modules().size() == 1);
+    BOOST_CHECK(m.name().location().model_modules().front() == model_name);
+    BOOST_CHECK(m.name().location().internal_modules().empty());
+    BOOST_CHECK(!m.documentation().empty());
+    std::string module_name(m.name().simple());
 
-        if (m.name().simple() != model_name) {
-            BOOST_CHECK(!m.name().simple().empty());
-            BOOST_CHECK(m.documentation().empty());
-            module_name = m.name().simple();
-        }
-    }
+    rp.id_to_name()[pos[0].id()] = m.name();
+    rp.model().modules()[m.name().id()] = m;
 
-    BOOST_REQUIRE(c.model().objects().size() == 1);
-    const auto& o(c.model().objects().begin()->second);
+    const auto o(t.to_object(pos[1]));
+    BOOST_LOG_SEV(lg, debug) << "Object: " << o;
+
+    BOOST_CHECK(o.name().simple() == pos[1].name());
+    BOOST_CHECK(!o.parent());
     BOOST_REQUIRE(o.name().location().model_modules().size() == 1);
-    BOOST_CHECK(o.name().location().model_modules().front() ==
-            model_name);
-    BOOST_CHECK(!o.name().simple().empty());
-
+    BOOST_CHECK(o.name().location().model_modules().front() == model_name);
     BOOST_CHECK(o.local_attributes().empty());
-
-    BOOST_CHECK(o.object_type() ==
-        dogen::yarn::object_types::user_defined_value_object);
     BOOST_REQUIRE(o.name().location().internal_modules().size() == 1);
-    BOOST_CHECK(o.name().location().internal_modules().front() ==
-        module_name);
+    BOOST_CHECK(o.name().location().internal_modules().front() == module_name);
     BOOST_CHECK(!o.documentation().empty());
 }
 
-BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_in_package_transforms_into_expected_enumeration) {
-    SETUP_TEST_LOG_SOURCE("uml_class_with_enumeration_stereotype_in_package_transforms_into_expected_enumeration");
+BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_in_package_transforms_into_expected_elements) {
+    SETUP_TEST_LOG_SOURCE("uml_class_with_enumeration_stereotype_in_package_transforms_into_expected_elements");
 
-    auto c(mock_repository(model_name));
+    auto rp(mock_repository(model_name));
+    transformer t(rp);
+
     const auto st(enumeration_stereotype);
-    const auto po(
-        mock_processed_object_factory::make_class_inside_large_package(0, st));
-    transform(c, {po[0], po[1]});
+    const auto pos(mock_factory::make_class_inside_large_package(0, st));
+    const auto m(t.to_module(pos[0]));
+    BOOST_LOG_SEV(lg, debug) << "Module: " << m;
 
-    BOOST_LOG_SEV(lg, debug) << "repository: " << c;
+    BOOST_CHECK(m.name().simple() == pos[0].name());
+    BOOST_REQUIRE(m.name().simple() == pos[0].name());
+    BOOST_REQUIRE(m.name().location().model_modules().size() == 1);
+    BOOST_CHECK(m.name().location().model_modules().front() == model_name);
+    BOOST_CHECK(m.name().location().internal_modules().empty());
+    BOOST_CHECK(!m.documentation().empty());
+    std::string module_name(m.name().simple());
 
-    BOOST_REQUIRE(c.model().modules().size() == 2);
-    std::string module_name;
-    for (const auto& pair : c.model().modules()) {
-        const auto& m(pair.second);
-        BOOST_REQUIRE(m.name().location().model_modules().size() == 1);
-        BOOST_CHECK(m.name().location().model_modules().front() ==
-            model_name);
-        BOOST_CHECK(m.name().location().internal_modules().empty());
+    rp.id_to_name()[pos[0].id()] = m.name();
+    rp.model().modules()[m.name().id()] = m;
 
-        if (m.name().simple() != model_name) {
-            BOOST_CHECK(!m.name().simple().empty());
-            BOOST_CHECK(m.documentation().empty());
-            module_name = m.name().simple();
-        }
-    }
+    const auto e(t.to_enumeration(pos[1]));
+    BOOST_LOG_SEV(lg, debug) << "Enumeration: " << e;
 
-    BOOST_REQUIRE(c.model().enumerations().size() == 1);
-    const auto e(c.model().enumerations().begin()->second);
+    BOOST_CHECK(e.name().simple() == pos[1].name());
     BOOST_REQUIRE(e.name().location().model_modules().size() == 1);
-    BOOST_CHECK(e.name().location().model_modules().front() ==
-        model_name);
+    BOOST_CHECK(e.name().location().model_modules().front() == model_name);
     BOOST_REQUIRE(e.name().location().model_modules().size() == 1);
-    BOOST_CHECK(e.name().location().model_modules().front() ==
-            model_name);
-
-    BOOST_CHECK(!e.name().simple().empty());
+    BOOST_CHECK(e.name().location().model_modules().front() == model_name);
     BOOST_REQUIRE(e.name().location().internal_modules().size() == 1);
-    BOOST_CHECK(e.name().location().internal_modules().front() ==
-        module_name);
+    BOOST_CHECK(e.name().location().internal_modules().front() == module_name);
     BOOST_CHECK(!e.documentation().empty());
 }
 
-BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_in_package_transforms_into_expected_exception) {
-    SETUP_TEST_LOG_SOURCE("uml_class_with_exception_stereotype_in_package_transforms_into_expected_exception");
+BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_in_package_transforms_into_expected_elements) {
+    SETUP_TEST_LOG_SOURCE("uml_class_with_exception_stereotype_in_package_transforms_into_expected_elements");
 
-    auto c(mock_repository(model_name));
+    auto rp(mock_repository(model_name));
+    transformer t(rp);
+
     const auto st(exception_stereotype);
-    const auto po(
-        mock_processed_object_factory::make_class_inside_large_package(0, st));
-    transform(c, {po[0], po[1]});
+    const auto pos(mock_factory::make_class_inside_large_package(0, st));
+    const auto m(t.to_module(pos[0]));
+    BOOST_LOG_SEV(lg, debug) << "Module: " << m;
 
-    BOOST_LOG_SEV(lg, debug) << "repository: " << c;
+    BOOST_CHECK(m.name().simple() == pos[0].name());
+    BOOST_CHECK(m.name().simple() == pos[0].name());
+    BOOST_REQUIRE(m.name().location().model_modules().size() == 1);
+    BOOST_CHECK(m.name().location().model_modules().front() == model_name);
+    BOOST_CHECK(m.name().location().internal_modules().empty());
+    BOOST_CHECK(!m.documentation().empty());
+    std::string module_name(m.name().simple());
 
-    BOOST_REQUIRE(c.model().modules().size() == 2);
-    std::string module_name;
-    for (const auto& pair : c.model().modules()) {
-        const auto& m(pair.second);
-        BOOST_REQUIRE(m.name().location().model_modules().size() == 1);
-        BOOST_CHECK(m.name().location().model_modules().front() ==
-            model_name);
-        BOOST_CHECK(m.name().location().internal_modules().empty());
+    rp.id_to_name()[pos[0].id()] = m.name();
+    rp.model().modules()[m.name().id()] = m;
 
-        if (m.name().simple() != model_name) {
-            BOOST_CHECK(!m.name().simple().empty());
-            BOOST_CHECK(m.documentation().empty());
-            module_name = m.name().simple();
-        }
-    }
+    const auto e(t.to_exception(pos[1]));
+    BOOST_LOG_SEV(lg, debug) << "Exception: " << e;
 
-    BOOST_REQUIRE(c.model().exceptions().size() == 1);
-    const auto& o(c.model().exceptions().begin()->second);
-    BOOST_REQUIRE(o.name().location().model_modules().size() == 1);
-    BOOST_CHECK(o.name().location().model_modules().front() ==
-        model_name);
-    BOOST_CHECK(!o.name().simple().empty());
-    BOOST_REQUIRE(o.name().location().internal_modules().size() == 1);
-    BOOST_CHECK(o.name().location().internal_modules().front() ==
-        module_name);
-    BOOST_CHECK(!o.documentation().empty());
-}
-
-BOOST_AUTO_TEST_CASE(uml_class_with_service_stereotype_in_package_transforms_into_expected_service) {
-    SETUP_TEST_LOG_SOURCE("uml_class_with_service_stereotype_in_package_transforms_into_expected_service");
-
-    auto c(mock_repository(model_name));
-    const auto st(service_stereotype);
-    const auto po(
-        mock_processed_object_factory::make_class_inside_large_package(0, st));
-    transform(c, {po[0], po[1]});
-
-    BOOST_LOG_SEV(lg, debug) << "repository: " << c;
-
-    BOOST_REQUIRE(c.model().modules().size() == 2);
-    std::string module_name;
-    for (const auto& pair : c.model().modules()) {
-        const auto& m(pair.second);
-        BOOST_REQUIRE(m.name().location().model_modules().size() == 1);
-        BOOST_CHECK(m.name().location().model_modules().front() ==
-            model_name);
-        BOOST_CHECK(m.name().location().internal_modules().empty());
-
-        if (m.name().simple() != model_name) {
-            BOOST_CHECK(!m.name().simple().empty());
-            BOOST_CHECK(m.documentation().empty());
-            module_name = m.name().simple();
-        }
-    }
-
-    BOOST_REQUIRE(c.model().objects().size() == 1);
-    const auto& o(c.model().objects().begin()->second);
-    BOOST_CHECK(o.object_type() ==
-        dogen::yarn::object_types::user_defined_service);
-    BOOST_REQUIRE(o.name().location().model_modules().size() == 1);
-    BOOST_CHECK(o.name().location().model_modules().front() ==
-        model_name);
-    BOOST_CHECK(!o.name().simple().empty());
-    BOOST_REQUIRE(o.name().location().internal_modules().size() == 1);
-    BOOST_CHECK(o.name().location().internal_modules().front() ==
-        module_name);
-    BOOST_CHECK(!o.documentation().empty());
+    BOOST_CHECK(e.name().simple() == pos[1].name());
+    BOOST_REQUIRE(e.name().location().model_modules().size() == 1);
+    BOOST_CHECK(e.name().location().model_modules().front() == model_name);
+    BOOST_REQUIRE(e.name().location().internal_modules().size() == 1);
+    BOOST_CHECK(e.name().location().internal_modules().front() == module_name);
+    BOOST_CHECK(!e.documentation().empty());
 }
 
 BOOST_AUTO_TEST_CASE(uml_class_in_non_existing_package_throws) {
     SETUP_TEST_LOG_SOURCE("uml_class_in_non_existing_package_throws");
-    auto c(mock_repository(model_name));
-    auto po(mock_processed_object_factory::make_class_inside_large_package());
-    contains_checker<transformation_error> cc(missing_name);
-    BOOST_CHECK_EXCEPTION(transform(c, {po[1]}), transformation_error, cc);
+
+    auto rp(mock_repository(model_name));
+    transformer t(rp);
+
+    auto pos(mock_factory::make_class_inside_large_package());
+    contains_checker<selection_error> cc(missing_name);
+    BOOST_CHECK_EXCEPTION(t.to_object(pos[1]), selection_error, cc);
 
     auto st(enumeration_stereotype);
-    po = mock_processed_object_factory::make_class_inside_large_package(0 , st);
-    BOOST_CHECK_EXCEPTION(transform(c, {po[1]}), transformation_error, cc);
+    pos = mock_factory::make_class_inside_large_package(0 , st);
+    BOOST_CHECK_EXCEPTION(t.to_object(pos[1]), selection_error, cc);
 
     st = exception_stereotype;
-    po = mock_processed_object_factory::make_class_inside_large_package(0 , st);
-    BOOST_CHECK_EXCEPTION(transform(c, {po[1]}), transformation_error, cc);
+    pos = mock_factory::make_class_inside_large_package(0 , st);
+    BOOST_CHECK_EXCEPTION(t.to_object(pos[1]), selection_error, cc);
 
     st = service_stereotype;
-    po = mock_processed_object_factory::make_class_inside_large_package(0 , st);
-    BOOST_CHECK_EXCEPTION(transform(c, {po[1]}), transformation_error, cc);
+    pos = mock_factory::make_class_inside_large_package(0 , st);
+    BOOST_CHECK_EXCEPTION(t.to_object(pos[1]), selection_error, cc);
 }
 
-BOOST_AUTO_TEST_CASE(uml_class_in_two_packages_transforms_into_expected_object) {
-    SETUP_TEST_LOG_SOURCE("uml_class_in_two_packages_transforms_into_expected_object");
+BOOST_AUTO_TEST_CASE(uml_class_in_two_packages_transforms_into_expected_elements) {
+    SETUP_TEST_LOG_SOURCE("uml_class_in_two_packages_transforms_into_expected_elements");
 
-    auto c(mock_repository(model_name));
-    const auto po(
-        mock_processed_object_factory::make_class_inside_two_large_packages());
-    transform(c, {po[0], po[1], po[2]});
+    auto rp(mock_repository(model_name));
+    transformer t(rp);
 
-    BOOST_LOG_SEV(lg, debug) << "repository: " << c;
+    const auto st(exception_stereotype);
+    const auto pos(mock_factory::make_class_inside_two_large_packages());
+    const auto m0(t.to_module(pos[0]));
+    BOOST_LOG_SEV(lg, debug) << "Module 0: " << m0;
 
-    BOOST_REQUIRE(c.model().modules().size() == 3);
-    std::list<dogen::yarn::module> module_list;
-    for (const auto& pair : c.model().modules()) {
-        const auto& m(pair.second);
-        if (m.name().simple() != model_name)
-            module_list.push_back(m);
-    }
-    BOOST_REQUIRE(module_list.size() == 2);
+    BOOST_CHECK(m0.name().simple() == pos[0].name());
+    BOOST_REQUIRE(m0.name().location().model_modules().size() == 1);
+    BOOST_CHECK(m0.name().location().model_modules().front() == model_name);
+    BOOST_CHECK(m0.name().location().internal_modules().empty());
+    BOOST_CHECK(!m0.documentation().empty());
+    std::string m0_name(m0.name().simple());
 
-    const auto m1(module_list.front());
+    rp.id_to_name()[pos[0].id()] = m0.name();
+    rp.model().modules()[m0.name().id()] = m0;
+
+    const auto m1(t.to_module(pos[1]));
+    BOOST_LOG_SEV(lg, debug) << "Module 1: " << m1;
+
+    BOOST_CHECK(m1.name().simple() == pos[1].name());
     BOOST_REQUIRE(m1.name().location().model_modules().size() == 1);
-    BOOST_CHECK(m1.name().location().model_modules().front() ==
-        model_name);
-    BOOST_CHECK(!m1.name().simple().empty());
+    BOOST_CHECK(m1.name().location().model_modules().front() == model_name);
+    BOOST_REQUIRE(m1.name().location().internal_modules().size() == 1);
+    BOOST_CHECK(m1.name().location().internal_modules().front() == m0_name);
+    std::string m1_name(m1.name().simple());
 
-    const auto m2(module_list.back());
-    BOOST_REQUIRE(m2.name().location().model_modules().size() == 1);
-    BOOST_CHECK(m2.name().location().model_modules().front() ==
-        model_name);
+    rp.id_to_name()[pos[1].id()] = m1.name();
+    rp.model().modules()[m1.name().id()] = m1;
 
-    BOOST_CHECK(!m2.name().simple().empty());
+    const auto o(t.to_object(pos[2]));
+    BOOST_LOG_SEV(lg, debug) << "Object: " << o;
 
-    BOOST_CHECK(
-        m1.name().location().internal_modules().empty() ||
-        m2.name().location().internal_modules().empty());
-
-    BOOST_CHECK(
-        !m1.name().location().internal_modules().empty() ||
-        !m2.name().location().internal_modules().empty());
-
-    std::string first, second;
-    if (m1.name().location().internal_modules().empty()) {
-        first = m1.name().simple();
-        second = m2.name().simple();
-        BOOST_CHECK(m2.name().location().internal_modules().front() ==
-            first);
-    } else {
-        first = m2.name().simple();
-        second = m1.name().simple();
-        BOOST_CHECK(m1.name().location().internal_modules().front() == first);
-    }
-
-    BOOST_REQUIRE(c.model().objects().size() == 1);
-    const auto& o(c.model().objects().begin()->second);
+    BOOST_CHECK(o.name().simple() == pos[2].name());
     BOOST_REQUIRE(o.name().location().model_modules().size() == 1);
-    BOOST_CHECK(o.name().location().model_modules().front() ==
-        model_name);
-    BOOST_CHECK(!o.name().simple().empty());
+    BOOST_CHECK(o.name().location().model_modules().front() == model_name);
     BOOST_CHECK(o.local_attributes().empty());
-    BOOST_CHECK(o.object_type() ==
-        dogen::yarn::object_types::user_defined_value_object);
     BOOST_REQUIRE(o.name().location().internal_modules().size() == 2);
-    BOOST_CHECK(o.name().location().internal_modules().front() == first);
-    BOOST_CHECK(o.name().location().internal_modules().back() == second);
+    BOOST_CHECK(o.name().location().internal_modules().front() == m0_name);
+    BOOST_CHECK(o.name().location().internal_modules().back() == m1_name);
     BOOST_CHECK(!o.documentation().empty());
 }
 
-BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_in_two_packages_transforms_into_expected_enumeration) {
-    SETUP_TEST_LOG_SOURCE("uml_class_with_enumeration_stereotype_in_two_packages_transforms_into_expected_enumeration");
+BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_in_two_packages_transforms_into_expected_elements) {
+    SETUP_TEST_LOG_SOURCE("uml_class_with_enumeration_stereotype_in_two_packages_transforms_into_expected_elements");
 
-    auto c(mock_repository(model_name));
-    const auto st(enumeration_stereotype);
-    const auto po(mock_processed_object_factory::
-        make_class_inside_two_large_packages(0, st));
-    transform(c, {po[0], po[1], po[2]});
+    auto rp(mock_repository(model_name));
+    transformer t(rp);
 
-    BOOST_LOG_SEV(lg, debug) << "repository: " << c;
+    const auto st(exception_stereotype);
+    const auto pos(mock_factory::make_class_inside_two_large_packages());
+    const auto m0(t.to_module(pos[0]));
+    BOOST_LOG_SEV(lg, debug) << "Module 0: " << m0;
 
-    BOOST_REQUIRE(c.model().modules().size() == 3);
-    std::list<dogen::yarn::module> module_list;
-    for (const auto& pair : c.model().modules()) {
-        const auto& m(pair.second);
-        if (m.name().simple() != model_name)
-            module_list.push_back(m);
-    }
-    BOOST_REQUIRE(module_list.size() == 2);
+    BOOST_CHECK(m0.name().simple() == pos[0].name());
+    BOOST_REQUIRE(m0.name().location().model_modules().size() == 1);
+    BOOST_CHECK(m0.name().location().model_modules().front() == model_name);
+    BOOST_CHECK(m0.name().location().internal_modules().empty());
+    BOOST_CHECK(!m0.documentation().empty());
+    std::string m0_name(m0.name().simple());
 
-    const auto m1(module_list.front());
+    rp.id_to_name()[pos[0].id()] = m0.name();
+    rp.model().modules()[m0.name().id()] = m0;
+
+    const auto m1(t.to_module(pos[1]));
+    BOOST_LOG_SEV(lg, debug) << "Module 1: " << m1;
+
+    BOOST_CHECK(m1.name().simple() == pos[1].name());
     BOOST_REQUIRE(m1.name().location().model_modules().size() == 1);
-    BOOST_CHECK(m1.name().location().model_modules().front() ==
-        model_name);
-    BOOST_CHECK(!m1.name().simple().empty());
+    BOOST_CHECK(m1.name().location().model_modules().front() == model_name);
+    BOOST_REQUIRE(m1.name().location().internal_modules().size() == 1);
+    BOOST_CHECK(m1.name().location().internal_modules().front() == m0_name);
+    std::string m1_name(m1.name().simple());
 
-    const auto m2(module_list.back());
-    BOOST_REQUIRE(m2.name().location().model_modules().size() == 1);
-    BOOST_CHECK(m2.name().location().model_modules().front() ==
-        model_name);
-    BOOST_CHECK(!m2.name().simple().empty());
+    rp.id_to_name()[pos[1].id()] = m1.name();
+    rp.model().modules()[m1.name().id()] = m1;
 
-    BOOST_CHECK(
-        m1.name().location().internal_modules().empty() ||
-        m2.name().location().internal_modules().empty());
+    const auto e(t.to_enumeration(pos[2]));
+    BOOST_LOG_SEV(lg, debug) << "Enumeration: " << e;
 
-    BOOST_CHECK(
-        !m1.name().location().internal_modules().empty() ||
-        !m2.name().location().internal_modules().empty());
-
-    std::string first, second;
-    if (m1.name().location().internal_modules().empty()) {
-        first = m1.name().simple();
-        second = m2.name().simple();
-        BOOST_CHECK(m2.name().location().internal_modules().front() ==
-            first);
-    } else {
-        first = m2.name().simple();
-        second = m1.name().simple();
-        BOOST_CHECK(m1.name().location().internal_modules().front() ==
-            first);
-    }
-
-    BOOST_REQUIRE(c.model().enumerations().size() == 1);
-    const auto e(c.model().enumerations().begin()->second);
+    BOOST_CHECK(e.name().simple() == pos[2].name());
     BOOST_REQUIRE(e.name().location().model_modules().size() == 1);
-    BOOST_CHECK(e.name().location().model_modules().front() ==
-        model_name);
-    BOOST_CHECK(!e.name().simple().empty());
+    BOOST_CHECK(e.name().location().model_modules().front() == model_name);
     BOOST_REQUIRE(e.name().location().internal_modules().size() == 2);
-    BOOST_CHECK(e.name().location().internal_modules().front() == first);
-    BOOST_CHECK(e.name().location().internal_modules().back() == second);
+    BOOST_CHECK(e.name().location().internal_modules().front() == m0_name);
+    BOOST_CHECK(e.name().location().internal_modules().back() == m1_name);
     BOOST_CHECK(!e.documentation().empty());
 }
 
-BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_in_two_packages_transforms_into_expected_exception) {
-    SETUP_TEST_LOG_SOURCE("uml_class_with_exception_stereotype_in_two_packages_transforms_into_expected_exception");
+BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_in_two_packages_transforms_into_expected_elements) {
+    SETUP_TEST_LOG_SOURCE("uml_class_with_exception_stereotype_in_two_packages_transforms_into_expected_elements");
 
-    auto c(mock_repository(model_name));
+    auto rp(mock_repository(model_name));
+    transformer t(rp);
+
     const auto st(exception_stereotype);
-    const auto po(mock_processed_object_factory::
-        make_class_inside_two_large_packages(0, st));
-    transform(c, {po[0], po[1], po[2]});
+    const auto pos(mock_factory::make_class_inside_two_large_packages());
+    const auto m0(t.to_module(pos[0]));
+    BOOST_LOG_SEV(lg, debug) << "Module 0: " << m0;
 
-    BOOST_LOG_SEV(lg, debug) << "repository: " << c;
+    BOOST_CHECK(m0.name().simple() == pos[0].name());
+    BOOST_REQUIRE(m0.name().location().model_modules().size() == 1);
+    BOOST_CHECK(m0.name().location().model_modules().front() == model_name);
+    BOOST_CHECK(m0.name().location().internal_modules().empty());
+    BOOST_CHECK(!m0.documentation().empty());
+    std::string m0_name(m0.name().simple());
 
-    BOOST_REQUIRE(c.model().modules().size() == 3);
-    std::list<dogen::yarn::module> module_list;
-    for (const auto& pair : c.model().modules()) {
-        const auto& m(pair.second);
-        if (m.name().simple() != model_name)
-            module_list.push_back(m);
-    }
-    BOOST_REQUIRE(module_list.size() == 2);
+    rp.id_to_name()[pos[0].id()] = m0.name();
+    rp.model().modules()[m0.name().id()] = m0;
 
-    const auto m1(module_list.front());
+    const auto m1(t.to_module(pos[1]));
+    BOOST_LOG_SEV(lg, debug) << "Module 1: " << m1;
+
+    BOOST_CHECK(m1.name().simple() == pos[1].name());
     BOOST_REQUIRE(m1.name().location().model_modules().size() == 1);
-    BOOST_CHECK(m1.name().location().model_modules().front() ==
-        model_name);
-    BOOST_CHECK(!m1.name().simple().empty());
+    BOOST_CHECK(m1.name().location().model_modules().front() == model_name);
+    BOOST_REQUIRE(m1.name().location().internal_modules().size() == 1);
+    BOOST_CHECK(m1.name().location().internal_modules().front() == m0_name);
+    std::string m1_name(m1.name().simple());
 
-    const auto m2(module_list.back());
-    BOOST_REQUIRE(m2.name().location().model_modules().size() == 1);
-    BOOST_CHECK(m2.name().location().model_modules().front() ==
-        model_name);
-    BOOST_CHECK(!m2.name().simple().empty());
+    rp.id_to_name()[pos[1].id()] = m1.name();
+    rp.model().modules()[m1.name().id()] = m1;
 
-    BOOST_CHECK(
-        m1.name().location().internal_modules().empty() ||
-        m2.name().location().internal_modules().empty());
+    const auto e(t.to_exception(pos[2]));
+    BOOST_LOG_SEV(lg, debug) << "Exception: " << e;
 
-    BOOST_CHECK(
-        !m1.name().location().internal_modules().empty() ||
-        !m2.name().location().internal_modules().empty());
-
-    std::string first, second;
-    if (m1.name().location().internal_modules().empty()) {
-        first = m1.name().simple();
-        second = m2.name().simple();
-        BOOST_CHECK(m2.name().location().internal_modules().front() == first);
-    } else {
-        first = m2.name().simple();
-        second = m1.name().simple();
-        BOOST_CHECK(m1.name().location().internal_modules().front()
-            == first);
-    }
-
-    BOOST_REQUIRE(c.model().exceptions().size() == 1);
-    const auto& o(c.model().exceptions().begin()->second);
-    BOOST_REQUIRE(o.name().location().model_modules().size() == 1);
-    BOOST_CHECK(o.name().location().model_modules().front() ==
-        model_name);
-    BOOST_CHECK(!o.name().simple().empty());
-    BOOST_REQUIRE(o.name().location().internal_modules().size() == 2);
-    BOOST_CHECK(o.name().location().internal_modules().front() == first);
-    BOOST_CHECK(o.name().location().internal_modules().back() == second);
-    BOOST_CHECK(!o.documentation().empty());
-}
-
-BOOST_AUTO_TEST_CASE(uml_class_with_service_stereotype_in_two_packages_transforms_into_expected_service) {
-    SETUP_TEST_LOG_SOURCE("uml_class_with_service_stereotype_in_two_packages_transforms_into_expected_service");
-
-    auto c(mock_repository(model_name));
-    const auto st(service_stereotype);
-    const auto po(mock_processed_object_factory::
-        make_class_inside_two_large_packages(0, st));
-    transform(c, {po[0], po[1], po[2]});
-
-    BOOST_LOG_SEV(lg, debug) << "repository: " << c;
-
-    BOOST_REQUIRE(c.model().modules().size() == 3);
-    std::list<dogen::yarn::module> module_list;
-    for (const auto& pair : c.model().modules()) {
-        const auto& m(pair.second);
-        if (m.name().simple() != model_name)
-            module_list.push_back(m);
-    }
-    BOOST_REQUIRE(module_list.size() == 2);
-
-    const auto m1(module_list.front());
-    BOOST_REQUIRE(m1.name().location().model_modules().size() == 1);
-    BOOST_CHECK(m1.name().location().model_modules().front() ==
-        model_name);
-    BOOST_CHECK(!m1.name().simple().empty());
-
-    const auto m2(module_list.back());
-    BOOST_REQUIRE(m2.name().location().model_modules().size() == 1);
-    BOOST_CHECK(m2.name().location().model_modules().front() ==
-        model_name);
-    BOOST_CHECK(!m2.name().simple().empty());
-
-    BOOST_CHECK(
-        m1.name().location().internal_modules().empty() ||
-        m2.name().location().internal_modules().empty());
-
-    BOOST_CHECK(
-        !m1.name().location().internal_modules().empty() ||
-        !m2.name().location().internal_modules().empty());
-
-    std::string first, second;
-    if (m1.name().location().internal_modules().empty()) {
-        first = m1.name().simple();
-        second = m2.name().simple();
-        BOOST_CHECK(m2.name().location().internal_modules().front() ==
-            first);
-    } else {
-        first = m2.name().simple();
-        second = m1.name().simple();
-        BOOST_CHECK(m1.name().location().internal_modules().front() ==
-            first);
-    }
-
-    BOOST_REQUIRE(c.model().objects().size() == 1);
-    const auto& o(c.model().objects().begin()->second);
-    BOOST_CHECK(o.object_type() ==
-        dogen::yarn::object_types::user_defined_service);
-    BOOST_REQUIRE(o.name().location().model_modules().size() == 1);
-    BOOST_CHECK(o.name().location().model_modules().front() ==
-        model_name);
-    BOOST_CHECK(!o.name().simple().empty());
-    BOOST_REQUIRE(o.name().location().internal_modules().size() == 2);
-    BOOST_CHECK(o.name().location().internal_modules().front() == first);
-    BOOST_CHECK(o.name().location().internal_modules().back() == second);
-    BOOST_CHECK(!o.documentation().empty());
-}
-
-BOOST_AUTO_TEST_CASE(uml_note_with_marker_transforms_into_model_comments) {
-    SETUP_TEST_LOG_SOURCE("uml_note_with_marker_transforms_into_model_comments");
-
-    auto c(mock_repository(model_name));
-    const auto po(mock_processed_object_factory::make_uml_note_with_marker());
-    transform(c, {po});
-
-    BOOST_LOG_SEV(lg, debug) << "repository: " << c;
-
-    BOOST_REQUIRE(c.model().modules().size() == 1);
-    const auto m(c.model().modules().begin()->second);
-    BOOST_REQUIRE(m.name().location().model_modules().size() == 1);
-    BOOST_CHECK(m.name().location().model_modules().front() ==
-        model_name);
-    BOOST_CHECK(m.name().simple() == model_name);
-    BOOST_CHECK(!m.documentation().empty());
-    BOOST_CHECK(m.annotations().fields().size() == 1);
-}
-
-BOOST_AUTO_TEST_CASE(uml_note_with_text_but_no_marker_does_nothing) {
-    SETUP_TEST_LOG_SOURCE("uml_note_with_text_but_no_marker_does_nothing");
-
-    auto c(mock_repository(model_name));
-    const auto po(mock_processed_object_factory::make_uml_note());
-    transform(c, {po});
-
-    BOOST_LOG_SEV(lg, debug) << "repository: " << c;
-    BOOST_REQUIRE(c.model().modules().size() == 1);
-    const auto m(c.model().modules().begin()->second);
-    BOOST_REQUIRE(m.name().location().model_modules().size() == 1);
-    BOOST_CHECK(m.name().location().model_modules().front() ==
-        model_name);
-    BOOST_CHECK(m.name().simple() == model_name);
-    BOOST_CHECK(m.documentation().empty());
-    BOOST_CHECK(m.annotations().fields().empty());
-}
-
-BOOST_AUTO_TEST_CASE(empty_uml_note_does_nothing) {
-    SETUP_TEST_LOG_SOURCE("empty_uml_note_does_nothing");
-
-    auto c(mock_repository(model_name));
-    const auto po(mock_processed_object_factory::make_empty_uml_note());
-    transform(c, {po});
-
-    BOOST_LOG_SEV(lg, debug) << "repository: " << c;
-    const auto m(c.model().modules().begin()->second);
-    BOOST_REQUIRE(m.name().location().model_modules().size() == 1);
-    BOOST_CHECK(m.name().location().model_modules().front() ==
-        model_name);
-    BOOST_CHECK(m.name().simple() == model_name);
-    BOOST_CHECK(m.documentation().empty());
-    BOOST_CHECK(m.annotations().fields().empty());
-}
-
-BOOST_AUTO_TEST_CASE(uml_note_with_marker_inside_package_transforms_into_package_comments) {
-    SETUP_TEST_LOG_SOURCE("uml_note_with_marker_inside_package_transforms_into_package_comments");
-
-    auto c(mock_repository(model_name));
-    const auto po(mock_processed_object_factory::
-        make_uml_note_with_marker_inside_large_package());
-    transform(c, {po[0], po[1]});
-
-    BOOST_LOG_SEV(lg, debug) << "repository: " << c;
-
-    BOOST_REQUIRE(c.model().modules().size() == 2);
-    for (const auto& pair : c.model().modules()) {
-        const auto& m(pair.second);
-
-        if (m.name().simple() == model_name) {
-            const auto& l(m.name().location());
-            BOOST_REQUIRE(l.model_modules().size() == 1);
-            BOOST_CHECK(l.model_modules().front() == model_name);
-            BOOST_CHECK(m.name().simple() == model_name);
-            BOOST_CHECK(m.documentation().empty());
-            BOOST_CHECK(m.annotations().fields().empty());
-        } else {
-            BOOST_CHECK(!m.name().simple().empty());
-            BOOST_CHECK(!m.documentation().empty());
-            BOOST_CHECK(!m.annotations().fields().empty());
-        }
-    }
-}
-
-BOOST_AUTO_TEST_CASE(uml_note_with_text_but_no_marker_inside_package_does_nothing) {
-    SETUP_TEST_LOG_SOURCE("uml_note_with_text_but_no_marker_inside_package_does_nothing");
-    auto c(mock_repository(model_name));
-    const auto po(mock_processed_object_factory::
-        make_uml_note_inside_large_package());
-    transform(c, {po[0], po[1]});
-
-    BOOST_LOG_SEV(lg, debug) << "repository: " << c;
-    BOOST_REQUIRE(c.model().modules().size() == 2);
-
-    for (const auto& pair : c.model().modules()) {
-        const auto& m(pair.second);
-        if (m.name().simple() == model_name) {
-            const auto& l(m.name().location());
-            BOOST_REQUIRE(l.model_modules().size() == 1);
-            BOOST_CHECK(l.model_modules().front() == model_name);
-            BOOST_CHECK(m.name().simple() == model_name);
-            BOOST_CHECK(m.documentation().empty());
-            BOOST_CHECK(m.annotations().fields().empty());
-        } else {
-            BOOST_CHECK(!m.name().simple().empty());
-            BOOST_CHECK(m.documentation().empty());
-            BOOST_CHECK(m.annotations().fields().empty());
-        }
-    }
-}
-
-BOOST_AUTO_TEST_CASE(empty_uml_note_inside_package_does_nothing) {
-    SETUP_TEST_LOG_SOURCE("empty_uml_note_inside_package_does_nothing");
-
-    auto c(mock_repository(model_name));
-    const auto po(mock_processed_object_factory::
-        make_empty_uml_note_inside_large_package());
-    transform(c, {po[0], po[1]});
-
-    BOOST_LOG_SEV(lg, debug) << "repository: " << c;
-    BOOST_REQUIRE(c.model().modules().size() == 2);
-    for (const auto& pair : c.model().modules()) {
-        const auto& m(pair.second);
-        if (m.name().simple() == model_name) {
-            const auto& l(m.name().location());
-            BOOST_REQUIRE(l.model_modules().size() == 1);
-            BOOST_CHECK(l.model_modules().front() == model_name);
-            BOOST_CHECK(m.name().simple() == model_name);
-            BOOST_CHECK(m.documentation().empty());
-            BOOST_CHECK(m.annotations().fields().empty());
-        } else {
-            BOOST_CHECK(!m.name().simple().empty());
-            BOOST_CHECK(m.documentation().empty());
-            BOOST_CHECK(m.annotations().fields().empty());
-        }
-    }
+    BOOST_CHECK(e.name().simple() == pos[2].name());
+    BOOST_REQUIRE(e.name().location().model_modules().size() == 1);
+    BOOST_CHECK(e.name().location().model_modules().front() == model_name);
+    BOOST_REQUIRE(e.name().location().internal_modules().size() == 2);
+    BOOST_CHECK(e.name().location().internal_modules().front() == m0_name);
+    BOOST_CHECK(e.name().location().internal_modules().back() == m1_name);
+    BOOST_CHECK(!e.documentation().empty());
 }
 
 BOOST_AUTO_TEST_CASE(uml_class_with_inheritance_results_in_expected_object) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_inheritance_results_in_expected_object");
 
-    auto c(mock_repository(model_name));
-    const auto po(mock_processed_object_factory::make_generalization());
-    const auto con(po[0].connection());
+    auto rp(mock_repository(model_name));
+    transformer t(rp);
+
+    const auto pos(mock_factory::make_generalization());
+    const auto con(pos[0].connection());
     BOOST_REQUIRE(con);
-    const auto parents = std::list<std::string> { con->first };
-    c.child_id_to_parent_ids().insert(std::make_pair(con->second, parents));
+    const auto parents(std::list<std::string> { con->first });
+    rp.child_id_to_parent_ids().insert(std::make_pair(con->second, parents));
 
-    transform(c, {po[1], po[2]});
-    BOOST_LOG_SEV(lg, debug) << "repository: " << c;
+    const auto p(t.to_object(pos[1]));
+    BOOST_LOG_SEV(lg, debug) << "Parent: " << p;
 
-    BOOST_CHECK(c.model().modules().size() == 1);
-    const auto m(c.model().modules().begin()->second);
-    BOOST_CHECK(m.name().simple() == model_name);
+    BOOST_CHECK(!p.parent());
+    BOOST_CHECK(p.name().simple() == pos[1].name());
+    BOOST_REQUIRE(p.name().location().model_modules().size() == 1);
+    BOOST_CHECK(p.name().location().model_modules().front() == model_name);
+    BOOST_CHECK(p.local_attributes().empty());
+    BOOST_REQUIRE(p.name().location().internal_modules().empty());
+    BOOST_CHECK(!p.documentation().empty());
 
-    BOOST_REQUIRE(c.model().objects().size() == 2);
-    for (const auto& pair : c.model().objects()) {
-        const auto& o(pair.second);
-        const auto& n(o.name());
+    rp.id_to_name()[pos[1].id()] = p.name();
+    rp.model().objects()[p.name().id()] = p;
 
-        if (is_type_one(n)) {
-            BOOST_CHECK(!o.parent());
-            BOOST_CHECK(!o.root_parent());
-        } else if (is_type_two(n)) {
-            BOOST_REQUIRE(o.parent());
-            BOOST_CHECK(is_type_one(*o.parent()));
-        } else {
-            BOOST_LOG_SEV(lg, error) << "Unexpected type name: " << n.id();
-            BOOST_FAIL("Unexpected type name");
-        }
-    }
+    const auto c(t.to_object(pos[2]));
+    BOOST_LOG_SEV(lg, debug) << "Child: " << c;
+    BOOST_REQUIRE(c.parent());
+    BOOST_CHECK(c.parent() == p.name());
+    BOOST_CHECK(c.name().simple() == pos[2].name());
+    BOOST_REQUIRE(c.name().location().model_modules().size() == 1);
+    BOOST_CHECK(c.name().location().model_modules().front() == model_name);
+    BOOST_CHECK(c.local_attributes().empty());
+    BOOST_REQUIRE(c.name().location().internal_modules().empty());
+    BOOST_CHECK(!c.documentation().empty());
 }
 
-BOOST_AUTO_TEST_CASE(uml_class_with_one_attribute_transforms_into_value_object_with_one_attribute) {
-    SETUP_TEST_LOG_SOURCE("uml_class_with_one_attribute_transforms_into_value_object_with_one_attribute");
+BOOST_AUTO_TEST_CASE(uml_class_with_one_attribute_transforms_into_object_with_one_attribute) {
+    SETUP_TEST_LOG_SOURCE("uml_class_with_one_attribute_transforms_into_object_with_one_attribute");
 
-    auto c(mock_repository());
-    const auto po(mock_processed_object_factory::make_class_with_attribute());
-    transform(c, {po});
+    auto rp(mock_repository(model_name));
+    transformer t(rp);
 
-    BOOST_LOG_SEV(lg, debug) << "repository: " << c;
-    BOOST_CHECK(c.model().enumerations().empty());
-    BOOST_CHECK(c.model().primitives().empty());
-    BOOST_REQUIRE(c.model().objects().size() == 1);
+    const auto po(mock_factory::make_class_with_attribute());
+    const auto o(t.to_object(po));
+    BOOST_LOG_SEV(lg, debug) << "Object: " << o;
 
-    BOOST_CHECK(c.model().modules().size() == 1);
-    const auto m(c.model().modules().begin()->second);
-    BOOST_CHECK(m.name().simple() == model_name);
-
-    const auto& o(c.model().objects().begin()->second);
-    BOOST_CHECK(o.object_type() ==
-        dogen::yarn::object_types::user_defined_value_object);
+    BOOST_CHECK(!o.parent());
+    BOOST_CHECK(o.name().simple() == po.name());
     BOOST_REQUIRE(o.name().location().model_modules().size() == 1);
-    BOOST_CHECK(o.name().location().model_modules().front() ==
-        model_name);
-    BOOST_CHECK(is_type_zero(o.name()));
-    BOOST_CHECK(!o.documentation().empty());
+    BOOST_CHECK(o.name().location().model_modules().front() == model_name);
+    BOOST_REQUIRE(o.name().location().internal_modules().empty());
     BOOST_REQUIRE(o.local_attributes().size() == 1);
-    BOOST_CHECK(is_type_zero(o.local_attributes().front().name()));
+    BOOST_CHECK(!o.documentation().empty());
+    BOOST_CHECK(o.local_attributes().front().name().simple() == po.name());
     BOOST_CHECK(!o.local_attributes().front().documentation().empty());
 }
 
 BOOST_AUTO_TEST_SUITE_END()
-*/

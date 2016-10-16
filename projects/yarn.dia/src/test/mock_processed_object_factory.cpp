@@ -187,7 +187,9 @@ make_empty_named_class(const unsigned int n) {
 
 processed_object mock_processed_object_factory::
 make_large_package(const unsigned int n) {
-    return create_named_object(dia_object_types::uml_large_package, n);
+    auto r(create_named_object(dia_object_types::uml_large_package, n));
+    r.comment().documentation(doxygen_comment);
+    return r;
 }
 
 std::array<processed_object, 2> mock_processed_object_factory::

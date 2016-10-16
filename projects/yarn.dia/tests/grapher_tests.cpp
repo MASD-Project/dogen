@@ -19,6 +19,7 @@
  *
  */
 #include <list>
+#include <memory>
 #include <boost/test/unit_test.hpp>
 #include <boost/graph/depth_first_search.hpp>
 #include "dogen/utility/test/asserter.hpp"
@@ -49,17 +50,20 @@ bool is_root_id(const std::string id) {
 
 class visitor : public boost::default_dfs_visitor {
 public:
-    explicit visitor(std::list<dogen::yarn::dia::processed_object>& po)
-        : objects_(po) {}
+    visitor() : objects_(new std::list<dogen::yarn::dia::processed_object>()) {}
 
 public:
     template<typename Vertex, typename Graph>
     void finish_vertex(const Vertex& u, const Graph& g) {
-        objects_.push_back(g[u]);
+        objects_->push_back(g[u]);
+    }
+
+    const std::list<dogen::yarn::dia::processed_object>& result() {
+        return *objects_;
     }
 
 private:
-    std::list<dogen::yarn::dia::processed_object>& objects_;
+    std::shared_ptr<std::list<dogen::yarn::dia::processed_object>> objects_;
 };
 
 }
@@ -72,16 +76,14 @@ BOOST_AUTO_TEST_SUITE(grapher_tests)
 BOOST_AUTO_TEST_CASE(not_adding_objects_to_graph_produces_only_root_object) {
     SETUP_TEST_LOG_SOURCE("not_adding_objects_to_graph_produces_only_root_object");
 
-    std::list<dogen::yarn::dia::processed_object> pos;
-    visitor v(pos);
-
+    visitor v;
     dogen::yarn::dia::grapher g;
     g.generate();
     boost::depth_first_search(g.graph(), boost::visitor(v));
-    BOOST_LOG_SEV(lg, debug) << pos;
+    BOOST_LOG_SEV(lg, debug) << v.result();
 
-    BOOST_REQUIRE(pos.size() == 1);
-    BOOST_CHECK(is_root_id(pos.back().id()));
+    BOOST_REQUIRE(v.result().size() == 1);
+    BOOST_CHECK(is_root_id(v.result().back().id()));
 }
 
 BOOST_AUTO_TEST_CASE(adding_unrelated_objects_produces_expected_order) {
@@ -91,15 +93,14 @@ BOOST_AUTO_TEST_CASE(adding_unrelated_objects_produces_expected_order) {
     g.add(factory::make_class(1));
     g.add(factory::make_class(2));
 
-    std::list<dogen::yarn::dia::processed_object> pos;
-    visitor v(pos);
+    visitor v;
     g.generate();
     boost::depth_first_search(g.graph(), boost::visitor(v));
-    BOOST_LOG_SEV(lg, debug) << pos;
+    BOOST_LOG_SEV(lg, debug) << v.result();
 
-    BOOST_REQUIRE(pos.size() == 4);
+    BOOST_REQUIRE(v.result().size() == 4);
 
-    auto i(pos.begin());
+    auto i(v.result().begin());
     BOOST_CHECK(i->id() == factory::to_oject_id(0));
     BOOST_CHECK((++i)->id() == factory::to_oject_id(1));
     BOOST_CHECK((++i)->id() == factory::to_oject_id(2));
@@ -112,15 +113,14 @@ BOOST_AUTO_TEST_CASE(adding_generalization_produces_expected_order) {
     dogen::yarn::dia::grapher g;
     g.add(factory::make_generalization(0));
 
-    std::list<dogen::yarn::dia::processed_object> pos;
-    visitor v(pos);
+    visitor v;
     g.generate();
     boost::depth_first_search(g.graph(), boost::visitor(v));
-    BOOST_LOG_SEV(lg, debug) << pos;
+    BOOST_LOG_SEV(lg, debug) << v.result();
 
-    BOOST_REQUIRE(pos.size() == 3);
+    BOOST_REQUIRE(v.result().size() == 3);
 
-    auto i(pos.begin());
+    auto i(v.result().begin());
     BOOST_CHECK(i->id() == factory::to_oject_id(1));
     BOOST_CHECK((++i)->id() == factory::to_oject_id(2));
     BOOST_CHECK(is_root_id((++i)->id()));
@@ -132,15 +132,14 @@ BOOST_AUTO_TEST_CASE(adding_generalization_inside_package_produces_expected_orde
     dogen::yarn::dia::grapher g;
     g.add(factory::make_generalization_inside_large_package(0));
 
-    std::list<dogen::yarn::dia::processed_object> pos;
-    visitor v(pos);
+    visitor v;
     g.generate();
     boost::depth_first_search(g.graph(), boost::visitor(v));
-    BOOST_LOG_SEV(lg, debug) << pos;
+    BOOST_LOG_SEV(lg, debug) << v.result();
 
-    BOOST_REQUIRE(pos.size() == 4);
+    BOOST_REQUIRE(v.result().size() == 4);
 
-    auto i(pos.begin());
+    auto i(v.result().begin());
     BOOST_CHECK(i->id() == factory::to_oject_id(0));
     BOOST_CHECK((++i)->id() == factory::to_oject_id(1));
     BOOST_CHECK((++i)->id() == factory::to_oject_id(2));
