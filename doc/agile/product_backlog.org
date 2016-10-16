@@ -11,6 +11,111 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Move odb options file into odb folder                             :story:
+
+There is not particularly good reason for this file to exist at the
+src level.
+
+In order to implement this story we need to have a working odb setup
+to test it and ensure we didn't break anything.
+
+*** Tidy-up of inclusion terminology                                  :story:
+
+Random notes:
+
+- imports and exports
+- some types support both (headers)
+- some support imports only (cpp)
+- some support neither (cmakelists, etc).
+
+*** Implement qualified name efficiently                              :story:
+
+We should move qualified names to quilt. We can create a simple map of
+id to qualified name and add that to the formattables model.
+
+*Previous Understanding*
+
+We used a =std::map= to store qualified names. In practice, we don't
+need something this expensive.
+
+- instead of mapping names to languages, we could map them to
+  "styles". There are only a few "styles" across all programming
+  languages (e.g. =.= separated, =::= separated and so on).
+- we can also create an array of these styles. We know up front how
+  many styles there are.
+- finally we can create a enumeration to access the array. At present
+  this is not possible because we cannot disable invalid, nor is it
+  possible to move it to a different position (e.g. last). Also we
+  will have to static cast the enum to access the int, which is not
+  very pretty.
+
+Once all of this is done we can simply do, at O(1):
+
+: name.qualified[static_cast<unsigned int>(styles::double_colon_separated_style)]
+
+We can prettify it a bit: [[http://stackoverflow.com/questions/8357240/how-to-automatically-convert-strongly-typed-enum-into-int][How to automatically convert strongly typed
+enum into int?]]
+
+: template <typename E>
+: constexpr typename std::underlying_type<E>::type to_underlying(E e) {
+:     return static_cast<typename std::underlying_type<E>::type>(e);
+: }
+:
+: std::cout << foo(to_underlying(b::B2)) << std::endl;
+
+Giving us:
+
+: name.qualified[to_underlying(styles::double_colon_separated_style)]
+
+*** Add description to profile and value templates                    :story:
+
+It would be nice to put some kind of comments as to what the profile
+is doing and where required, the rationale behind some defaulting on
+the value templates. We probably should look into supporting
+descriptions in data as a whole.
+
+*** Multiple inheritance and profiles do not work                     :story:
+
+The current inheritance logic is fine for single inheritance or even
+multiple inheritance when two parts of the inheritance tree do not
+define the same types; but it fails when there is overlap. For an
+example, see the previous attempt to define "disable odb cmake" in terms
+of "disable odb" and "disable cmake". This fails because disable odb
+inherits from enable all facets; when we merge against "disable cmake"
+we do not know that cmake was enabled via "enable all facets" and so
+this takes priority.
+
+*** Remove object types in yarn                                       :story:
+
+We need to figure out if this enumeration is still in use and if not
+what needs to be done to remove it.
+
+*** Order of headers is hard-coded                                    :story:
+
+In inclusion expander, we have hacked the sorting:
+
+:        // FIXME: hacks for headers that must be last
+:        const bool lhs_is_gregorian(
+:            lhs.find_first_of(boost_serialization_gregorian) != npos);
+:        const bool rhs_is_gregorian(
+:            rhs.find_first_of(boost_serialization_gregorian) != npos);
+:        if (lhs_is_gregorian && !rhs_is_gregorian)
+:            return true;
+
+This could be handled via meta-data, supplying some kind of flag (sort last?).
+
+*** Registrar in quilt is not being generated                         :story:
+
+We don't seem to change the contents of this file when regenerating.
+
+*** Investigate helper generation in formattables                     :story:
+
+We seem to be generating an helper for every node of every name tree,
+regardless of whether the name needs a helper or not. Intuitively, we
+should check the family and the streaming settings; if both of these
+are empty then there should not be a need for a helper. But maybe
+there is more to it.
+
 *** Clean up odb implementation                                       :story:
 
 When we start using odb in anger we need to tidy-up how it is

@@ -14,15 +14,15 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-16 Sun 12:18]
+#+CAPTION: Clock summary at [2016-10-16 Sun 12:22]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *54:52* |       |       | 100.0 |
+| *Total time*                                                                | *54:55* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 54:52   |       |       | 100.0 |
-| Active                                                                      |         | 54:52 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  0:29 |   0.9 |
+| Stories                                                                     | 54:55   |       |       | 100.0 |
+| Active                                                                      |         | 54:55 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  0:32 |   1.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:19 |   0.6 |
 | COMPLETED Improve bintray support                                           |         |       |  0:26 |   0.8 |
 | COMPLETED Refactor opaque infrastructure                                    |         |       |  1:17 |   2.3 |
@@ -34,7 +34,7 @@
 | COMPLETED Minor tidy-up of the quilt.cpp diagram                            |         |       |  0:29 |   0.9 |
 | COMPLETED Create a ownership hierarchy repository                           |         |       |  1:43 |   3.1 |
 | COMPLETED Use vector of elements in model                                   |         |       |  0:10 |   0.3 |
-| COMPLETED Rewrite profile support                                           |         |       | 11:50 |  21.6 |
+| COMPLETED Rewrite profile support                                           |         |       | 11:50 |  21.5 |
 | COMPLETED Merge annotation type and profile folders                         |         |       |  0:20 |   0.6 |
 | COMPLETED Push stereotypes processing into yarn                             |         |       |  1:51 |   3.4 |
 | COMPLETED Implement defaulting within the profiler                          |         |       |  1:13 |   2.2 |
@@ -50,6 +50,7 @@
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-10-16 Sun 12:19]--[2016-10-16 Sun 12:22] =>  0:03
     CLOCK: [2016-10-15 Sat 22:26]--[2016-10-15 Sat 22:31] =>  0:05
     CLOCK: [2016-10-15 Sat 00:13]--[2016-10-15 Sat 00:15] =>  0:02
     CLOCK: [2016-10-10 Mon 08:40]--[2016-10-10 Mon 09:02] =>  0:22
@@ -623,23 +624,24 @@ just need the processed object, with all of the necessary information.
 A number of tests got disabled as part of the dynamic refactor in
 yarn.dia. Fix them.
 
-*** Add description to profile and value templates                    :story:
+*** COMPLETED Clean up annotations and configuration in stitch        :story:
+    CLOSED: [2016-10-16 Sun 12:19]
 
-It would be nice to put some kind of comments as to what the profile
-is doing and where required, the rationale behind some defaulting on
-the value templates. We probably should look into supporting
-descriptions in data as a whole.
+*Rationale*: this was done as part of some stitch clean up in the end.
 
-*** Multiple inheritance and profiles do not work                     :story:
+We deliberately skipped stitch on the clean up exercise for
+configuration/annotations, so we could look at it when doing wale
+templates.
 
-The current inheritance logic is fine for single inheritance or even
-multiple inheritance when two parts of the inheritance tree do not
-define the same types; but it fails when there is overlap. For an
-example, see the previous attempt to define "disable odb cmake" in terms
-of "disable odb" and "disable cmake". This fails because disable odb
-inherits from enable all facets; when we merge against "disable cmake"
-we do not know that cmake was enabled via "enable all facets" and so
-this takes priority.
+*** CANCELLED Split annotation expansion from parsing in stitch       :story:
+    CLOSED: [2016-10-16 Sun 12:21]
+
+*Rationale*: this doesn't make a lot of sense after all the
+refactorings.
+
+At present we are doing both the parsing and the annotation expansion
+within the parser. It makes more sense to keep the parser clean and do
+the expansion somewhere else.
 
 *** Generate formatter interfaces                                      :epic:
 
@@ -776,42 +778,66 @@ Further thoughts:
   generates the file. Actually we probably can't have this in quilt
   because we still need formatter properties.
 
-*** Clean up annotations and configuration in stitch                  :story:
+*** Integration of stitch and dogen                                   :story:
 
-We deliberately skipped stitch on the clean up exercise for
-configuration/annotations, so we could look at it when doing wale
-templates.
+Now that we have implemented stitch and proved it works (more or
+less), we need to think how we can make using stitch from dogen
+easier. At present there is not integration at all:
 
-*** Remove object types in yarn                                       :story:
+- users need to create regexes to ensure dogen does not trample on
+  stitch files:
 
-We need to figure out if this enumeration is still in use and if not
-what needs to be done to remove it.
+:    --ignore-files-matching-regex .*stitch
+:    --ignore-files-matching-regex .*_stitch.hpp
+:    --ignore-files-matching-regex .*_stitch.cpp
 
-*** Order of headers is hard-coded                                    :story:
+- users need to manually create a header file for each stitch
+  template.
+- users need to create stitch targets and run them to ensure the
+  templates have been expanded. This means its possible to get dogen
+  and stitch out of sync (but for now not a big problem).
 
-In inclusion expander, we have hacked the sorting:
+In the ideal world, when we knit a model it would be nice if it could
+also stitch as required. This could be achieved as follows:
 
-:        // FIXME: hacks for headers that must be last
-:        const bool lhs_is_gregorian(
-:            lhs.find_first_of(boost_serialization_gregorian) != npos);
-:        const bool rhs_is_gregorian(
-:            rhs.find_first_of(boost_serialization_gregorian) != npos);
-:        if (lhs_is_gregorian && !rhs_is_gregorian)
-:            return true;
+- Create a meta-data tag that tells dogen a type has an associated
+  stitch template with it.
+- Create =cpp= types that represent the stitch header and
+  implementation.
+- Transformer needs to look for the meta-data tag and instantiate the
+  =cpp= types.
+- Create a =cpp= formatter for the header, as per regular
+  formatters. The slight challenge here is that the formatter needs to
+  be instantiable across facets, which we do not support at the
+  moment.
+- Create a cpp formatter for the implementation which instantiates
+  stitch with the template and uses it to create a file. Same
+  challenge as with the header.
 
-This could be handled via meta-data, supplying some kind of flag (sort last?).
+*Previous Understanding*
 
-*** Registrar in quilt is not being generated                         :story:
-
-We don't seem to change the contents of this file when regenerating.
-
-*** Investigate helper generation in formattables                     :story:
-
-We seem to be generating an helper for every node of every name tree,
-regardless of whether the name needs a helper or not. Intuitively, we
-should check the family and the streaming settings; if both of these
-are empty then there should not be a need for a helper. But maybe
-there is more to it.
+- stitch can still be integrated with dogen. We could use meta-data to
+  link a formatter (well, any class that needs stitch really, but at
+  present just a formatter) with a stitch template. For example, a
+  =class_header_formatter= could have a "is stitchable" flag set to
+  on. This would then mean that dogen would look for a
+  =class_header_formatter.stitch= file in the same directory as the
+  CPP file. It would then use that to create a
+  =class_header_formatter_stitch.cpp= file. It would also
+  ignore/generate a =class_header_formatter_stitch.hpp= file and
+  automatically add it to the inclusion dependencies of
+  =class_header_formatter.cpp=. These are injected into stitch as we
+  instantiate the template since stitch supports meta-data (we do need
+  a way to inject the meta-data from dogen into the meta-data in the
+  template; perhaps a kvp container passed in to the stitch workflow
+  which could then be handed over to the parser). All these files are
+  automatically added to the list of "exceptions" for housekeeping so
+  that they do not get deleted. However, stitch would not know
+  anything at all about any of this; this is all knitter's
+  functionality. The problem is at present we haven't got a good place
+  to perform the stitching as part of knitter's workflows. Perhaps as
+  part of the expansion, we could set a number of stitch fields which
+  would then be picked up by some knit-specific workflow classes.
 
 *** Document the conceptual model                                     :story:
 
@@ -886,106 +912,6 @@ is to use an approach similar to the formatter groups in the ownership
 hierarchy. For now we simply have fields that have no meaning in
 stitching but can be supplied by users.
 
-*** Implement qualified name efficiently                              :story:
-
-We should move qualified names to quilt. We can create a simple map of
-id to qualified name and add that to the formattables model.
-
-*Previous Understanding*
-
-We used a =std::map= to store qualified names. In practice, we don't
-need something this expensive.
-
-- instead of mapping names to languages, we could map them to
-  "styles". There are only a few "styles" across all programming
-  languages (e.g. =.= separated, =::= separated and so on).
-- we can also create an array of these styles. We know up front how
-  many styles there are.
-- finally we can create a enumeration to access the array. At present
-  this is not possible because we cannot disable invalid, nor is it
-  possible to move it to a different position (e.g. last). Also we
-  will have to static cast the enum to access the int, which is not
-  very pretty.
-
-Once all of this is done we can simply do, at O(1):
-
-: name.qualified[static_cast<unsigned int>(styles::double_colon_separated_style)]
-
-We can prettify it a bit: [[http://stackoverflow.com/questions/8357240/how-to-automatically-convert-strongly-typed-enum-into-int][How to automatically convert strongly typed
-enum into int?]]
-
-: template <typename E>
-: constexpr typename std::underlying_type<E>::type to_underlying(E e) {
-:     return static_cast<typename std::underlying_type<E>::type>(e);
-: }
-:
-: std::cout << foo(to_underlying(b::B2)) << std::endl;
-
-Giving us:
-
-: name.qualified[to_underlying(styles::double_colon_separated_style)]
-
-*** Integration of stitch and dogen                                   :story:
-
-Now that we have implemented stitch and proved it works (more or
-less), we need to think how we can make using stitch from dogen
-easier. At present there is not integration at all:
-
-- users need to create regexes to ensure dogen does not trample on
-  stitch files:
-
-:    --ignore-files-matching-regex .*stitch
-:    --ignore-files-matching-regex .*_stitch.hpp
-:    --ignore-files-matching-regex .*_stitch.cpp
-
-- users need to manually create a header file for each stitch
-  template.
-- users need to create stitch targets and run them to ensure the
-  templates have been expanded. This means its possible to get dogen
-  and stitch out of sync (but for now not a big problem).
-
-In the ideal world, when we knit a model it would be nice if it could
-also stitch as required. This could be achieved as follows:
-
-- Create a meta-data tag that tells dogen a type has an associated
-  stitch template with it.
-- Create =cpp= types that represent the stitch header and
-  implementation.
-- Transformer needs to look for the meta-data tag and instantiate the
-  =cpp= types.
-- Create a =cpp= formatter for the header, as per regular
-  formatters. The slight challenge here is that the formatter needs to
-  be instantiable across facets, which we do not support at the
-  moment.
-- Create a cpp formatter for the implementation which instantiates
-  stitch with the template and uses it to create a file. Same
-  challenge as with the header.
-
-*Previous Understanding*
-
-- stitch can still be integrated with dogen. We could use meta-data to
-  link a formatter (well, any class that needs stitch really, but at
-  present just a formatter) with a stitch template. For example, a
-  =class_header_formatter= could have a "is stitchable" flag set to
-  on. This would then mean that dogen would look for a
-  =class_header_formatter.stitch= file in the same directory as the
-  CPP file. It would then use that to create a
-  =class_header_formatter_stitch.cpp= file. It would also
-  ignore/generate a =class_header_formatter_stitch.hpp= file and
-  automatically add it to the inclusion dependencies of
-  =class_header_formatter.cpp=. These are injected into stitch as we
-  instantiate the template since stitch supports meta-data (we do need
-  a way to inject the meta-data from dogen into the meta-data in the
-  template; perhaps a kvp container passed in to the stitch workflow
-  which could then be handed over to the parser). All these files are
-  automatically added to the list of "exceptions" for housekeeping so
-  that they do not get deleted. However, stitch would not know
-  anything at all about any of this; this is all knitter's
-  functionality. The problem is at present we haven't got a good place
-  to perform the stitching as part of knitter's workflows. Perhaps as
-  part of the expansion, we could set a number of stitch fields which
-  would then be picked up by some knit-specific workflow classes.
-
 *** Consider adding =fileset= to formatters' model                    :story:
 
 We are using collections of files quite a bit, and it makes sense to
@@ -1010,15 +936,6 @@ At present we are creating the formatter repository in
 =quilt.cpp=. However it will be shared by all backends in the
 kernel. Move it up to =quilt= level and supply it as a paramter to the backends.
 
-*** Tidy-up of inclusion terminology                                  :story:
-
-Random notes:
-
-- imports and exports
-- some types support both (headers)
-- some support imports only (cpp)
-- some support neither (cmakelists, etc).
-
 *** Initialise formatters in the formatter's translation unit         :story:
 
 At present we are initialising the formatters in each of the facet
@@ -1027,18 +944,5 @@ translation unit for each formatter. This will also make life easier
 when we move to a mustache world where there may not be a formatter
 header file at all.
 
-*** Move odb options file into odb folder                             :story:
-
-There is not particularly good reason for this file to exist at the
-src level.
-
-In order to implement this story we need to have a working odb setup
-to test it and ensure we didn't break anything.
-
-*** Split annotation expansion from parsing in stitch                 :story:
-
-At present we are doing both the parsing and the annotation expansion
-within the parser. It makes more sense to keep the parser clean and do
-the expansion somewhere else.
 
 ** Deprecated
