@@ -55,7 +55,7 @@ public:
         const dogen::annotations::name& name,
         const dogen::annotations::value_types value_type,
         const dogen::annotations::scope_types scope,
-        const dogen::annotations::ownership_hierarchy& ownership_hierarchy,
+        const dogen::annotations::archetype_location& ownership_hierarchy,
         const boost::shared_ptr<dogen::annotations::value>& default_value,
         const dogen::annotations::template_kinds kind);
 
@@ -97,10 +97,10 @@ public:
      * @brief The ownership hierarchy information for this field.
      */
     /**@{*/
-    const dogen::annotations::ownership_hierarchy& ownership_hierarchy() const;
-    dogen::annotations::ownership_hierarchy& ownership_hierarchy();
-    void ownership_hierarchy(const dogen::annotations::ownership_hierarchy& v);
-    void ownership_hierarchy(const dogen::annotations::ownership_hierarchy&& v);
+    const dogen::annotations::archetype_location& ownership_hierarchy() const;
+    dogen::annotations::archetype_location& ownership_hierarchy();
+    void ownership_hierarchy(const dogen::annotations::archetype_location& v);
+    void ownership_hierarchy(const dogen::annotations::archetype_location&& v);
     /**@}*/
 
     /**
@@ -135,7 +135,7 @@ private:
     dogen::annotations::name name_;
     dogen::annotations::value_types value_type_;
     dogen::annotations::scope_types scope_;
-    dogen::annotations::ownership_hierarchy ownership_hierarchy_;
+    dogen::annotations::archetype_location ownership_hierarchy_;
     boost::shared_ptr<dogen::annotations::value> default_value_;
     dogen::annotations::template_kinds kind_;
 };

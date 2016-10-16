@@ -68,7 +68,7 @@ public:
     /**
      * @brief Returns the ownership hierarchy for all formatters.
      */
-    const std::forward_list<annotations::ownership_hierarchy>&
+    const std::forward_list<annotations::archetype_location>&
     ownership_hierarchy() const;
 
     const std::unordered_map<
@@ -80,7 +80,7 @@ public:
 
 private:
     container formatter_container_;
-    std::forward_list<annotations::ownership_hierarchy> ownership_hierarchy_;
+    std::forward_list<annotations::archetype_location> ownership_hierarchy_;
 };
 
 template<typename Formatter>

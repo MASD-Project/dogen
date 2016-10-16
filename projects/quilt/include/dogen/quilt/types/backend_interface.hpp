@@ -64,7 +64,7 @@ public:
      * @brief Complete ownership hierarchy for this backend, listing
      * all available models, facet and formatters.
      */
-    virtual std::forward_list<annotations::ownership_hierarchy>
+    virtual std::forward_list<annotations::archetype_location>
     ownership_hierarchy() const = 0;
 
     /**

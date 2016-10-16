@@ -33,7 +33,7 @@ namespace annotations {
 
 struct ownership_hierarchy_hasher {
 public:
-    static std::size_t hash(const ownership_hierarchy& v);
+    static std::size_t hash(const archetype_location& v);
 };
 
 } }
@@ -41,9 +41,9 @@ public:
 namespace std {
 
 template<>
-struct hash<dogen::annotations::ownership_hierarchy> {
+struct hash<dogen::annotations::archetype_location> {
 public:
-    size_t operator()(const dogen::annotations::ownership_hierarchy& v) const {
+    size_t operator()(const dogen::annotations::archetype_location& v) const {
         return dogen::annotations::ownership_hierarchy_hasher::hash(v);
     }
 };

@@ -58,9 +58,9 @@ std::string class_implementation_formatter::id() const {
     return r;
 }
 
-annotations::ownership_hierarchy
+annotations::archetype_location
 class_implementation_formatter::ownership_hierarchy() const {
-    static annotations::ownership_hierarchy
+    static annotations::archetype_location
         r(formatters::traits::model_name(), traits::facet_name(),
             class_implementation_formatter::static_formatter_name());
     return r;

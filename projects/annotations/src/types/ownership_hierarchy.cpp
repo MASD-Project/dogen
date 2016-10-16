@@ -23,7 +23,7 @@
 namespace dogen {
 namespace annotations {
 
-ownership_hierarchy::ownership_hierarchy(
+archetype_location::archetype_location(
     const std::string& kernel,
     const std::string& facet,
     const std::string& archetype)
@@ -31,70 +31,70 @@ ownership_hierarchy::ownership_hierarchy(
       facet_(facet),
       archetype_(archetype) { }
 
-void ownership_hierarchy::swap(ownership_hierarchy& other) noexcept {
+void archetype_location::swap(archetype_location& other) noexcept {
     using std::swap;
     swap(kernel_, other.kernel_);
     swap(facet_, other.facet_);
     swap(archetype_, other.archetype_);
 }
 
-bool ownership_hierarchy::operator==(const ownership_hierarchy& rhs) const {
+bool archetype_location::operator==(const archetype_location& rhs) const {
     return kernel_ == rhs.kernel_ &&
         facet_ == rhs.facet_ &&
         archetype_ == rhs.archetype_;
 }
 
-ownership_hierarchy& ownership_hierarchy::operator=(ownership_hierarchy other) {
+archetype_location& archetype_location::operator=(archetype_location other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const std::string& ownership_hierarchy::kernel() const {
+const std::string& archetype_location::kernel() const {
     return kernel_;
 }
 
-std::string& ownership_hierarchy::kernel() {
+std::string& archetype_location::kernel() {
     return kernel_;
 }
 
-void ownership_hierarchy::kernel(const std::string& v) {
+void archetype_location::kernel(const std::string& v) {
     kernel_ = v;
 }
 
-void ownership_hierarchy::kernel(const std::string&& v) {
+void archetype_location::kernel(const std::string&& v) {
     kernel_ = std::move(v);
 }
 
-const std::string& ownership_hierarchy::facet() const {
+const std::string& archetype_location::facet() const {
     return facet_;
 }
 
-std::string& ownership_hierarchy::facet() {
+std::string& archetype_location::facet() {
     return facet_;
 }
 
-void ownership_hierarchy::facet(const std::string& v) {
+void archetype_location::facet(const std::string& v) {
     facet_ = v;
 }
 
-void ownership_hierarchy::facet(const std::string&& v) {
+void archetype_location::facet(const std::string&& v) {
     facet_ = std::move(v);
 }
 
-const std::string& ownership_hierarchy::archetype() const {
+const std::string& archetype_location::archetype() const {
     return archetype_;
 }
 
-std::string& ownership_hierarchy::archetype() {
+std::string& archetype_location::archetype() {
     return archetype_;
 }
 
-void ownership_hierarchy::archetype(const std::string& v) {
+void archetype_location::archetype(const std::string& v) {
     archetype_ = v;
 }
 
-void ownership_hierarchy::archetype(const std::string&& v) {
+void archetype_location::archetype(const std::string&& v) {
     archetype_ = std::move(v);
 }
 

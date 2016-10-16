@@ -52,7 +52,7 @@ namespace formatters {
  */
 class assistant final {
 public:
-    assistant(const context& ctx, const annotations::ownership_hierarchy& oh,
+    assistant(const context& ctx, const annotations::archetype_location& oh,
         const bool requires_header_guard, const std::string& id);
 
 private:
@@ -331,7 +331,7 @@ private:
     boost::iostreams::filtering_ostream filtering_stream_;
     const context& context_;
     formattables::formatter_properties formatter_properties_;
-    const annotations::ownership_hierarchy ownership_hierarchy_;
+    const annotations::archetype_location ownership_hierarchy_;
     const bool requires_header_guard_;
 };
 

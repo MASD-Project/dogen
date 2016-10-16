@@ -75,7 +75,7 @@ private:
     /**
      * @brief Reads the ownership hierarchy from the property tree.
      */
-    ownership_hierarchy
+    archetype_location
     read_ownership_hierarchy(const boost::property_tree::ptree& pt) const;
 
     /**

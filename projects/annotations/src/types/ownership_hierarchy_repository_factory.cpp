@@ -39,7 +39,7 @@ namespace dogen {
 namespace annotations {
 
 void ownership_hierarchy_repository_factory::
-validate(const std::list<ownership_hierarchy>& ohs) const {
+validate(const std::list<archetype_location>& ohs) const {
     BOOST_LOG_SEV(lg, debug) << "Validating input ownership hierachies.";
 
     for (const auto& oh : ohs) {
@@ -64,7 +64,7 @@ validate(const std::list<ownership_hierarchy>& ohs) const {
 }
 
 void ownership_hierarchy_repository_factory::
-populate_ownership_hierarchies(const std::list<ownership_hierarchy>& ohs,
+populate_ownership_hierarchies(const std::list<archetype_location>& ohs,
     ownership_hierarchy_repository& rp) const {
     rp.ownership_hierarchies().reserve(ohs.size());
     for (const auto& oh : ohs)
@@ -89,7 +89,7 @@ populate_formatter_names_by_model_name(
 }
 
 ownership_hierarchy_repository ownership_hierarchy_repository_factory::
-make(const std::list<ownership_hierarchy>& ohs) const {
+make(const std::list<archetype_location>& ohs) const {
     BOOST_LOG_SEV(lg, debug) << "Creating ownership hierachy repository.";
     validate(ohs);
 

@@ -48,7 +48,7 @@ public:
 public:
     entry_template(
         const dogen::annotations::name& name,
-        const dogen::annotations::ownership_hierarchy& ownership_hierarchy,
+        const dogen::annotations::archetype_location& ownership_hierarchy,
         const std::list<std::string>& untyped_value,
         const dogen::annotations::template_kinds kind);
 
@@ -65,10 +65,10 @@ public:
     void name(const dogen::annotations::name& v);
     void name(const dogen::annotations::name&& v);
 
-    const dogen::annotations::ownership_hierarchy& ownership_hierarchy() const;
-    dogen::annotations::ownership_hierarchy& ownership_hierarchy();
-    void ownership_hierarchy(const dogen::annotations::ownership_hierarchy& v);
-    void ownership_hierarchy(const dogen::annotations::ownership_hierarchy&& v);
+    const dogen::annotations::archetype_location& ownership_hierarchy() const;
+    dogen::annotations::archetype_location& ownership_hierarchy();
+    void ownership_hierarchy(const dogen::annotations::archetype_location& v);
+    void ownership_hierarchy(const dogen::annotations::archetype_location&& v);
 
     const std::list<std::string>& untyped_value() const;
     std::list<std::string>& untyped_value();
@@ -90,7 +90,7 @@ public:
 
 private:
     dogen::annotations::name name_;
-    dogen::annotations::ownership_hierarchy ownership_hierarchy_;
+    dogen::annotations::archetype_location ownership_hierarchy_;
     std::list<std::string> untyped_value_;
     dogen::annotations::template_kinds kind_;
 };

@@ -76,7 +76,7 @@ private:
     /**
      * @brief Ownership hierarchy for this formatter
      */
-    annotations::ownership_hierarchy ownership_hierarchy() const;
+    annotations::archetype_location ownership_hierarchy() const;
 
     /**
      * @brief Formats the text template.

@@ -35,7 +35,7 @@ namespace serialization {
 
 template<typename Archive>
 void save(Archive& ar,
-    const dogen::annotations::ownership_hierarchy& v,
+    const dogen::annotations::archetype_location& v,
     const unsigned int /*version*/) {
     ar << make_nvp("kernel", v.kernel_);
     ar << make_nvp("facet", v.facet_);
@@ -44,7 +44,7 @@ void save(Archive& ar,
 
 template<typename Archive>
 void load(Archive& ar,
-    dogen::annotations::ownership_hierarchy& v,
+    dogen::annotations::archetype_location& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("kernel", v.kernel_);
     ar >> make_nvp("facet", v.facet_);
@@ -56,16 +56,16 @@ void load(Archive& ar,
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const dogen::annotations::ownership_hierarchy& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, dogen::annotations::ownership_hierarchy& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const dogen::annotations::archetype_location& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, dogen::annotations::archetype_location& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const dogen::annotations::ownership_hierarchy& v, unsigned int version);
-template void load(archive::text_iarchive& ar, dogen::annotations::ownership_hierarchy& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const dogen::annotations::archetype_location& v, unsigned int version);
+template void load(archive::text_iarchive& ar, dogen::annotations::archetype_location& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const dogen::annotations::ownership_hierarchy& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, dogen::annotations::ownership_hierarchy& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const dogen::annotations::archetype_location& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, dogen::annotations::archetype_location& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const dogen::annotations::ownership_hierarchy& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, dogen::annotations::ownership_hierarchy& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const dogen::annotations::archetype_location& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, dogen::annotations::archetype_location& v, unsigned int version);
 
 } }

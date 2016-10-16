@@ -131,8 +131,8 @@ void formatter::format_line_with_single_block(const std::string& stream_name,
     }
 }
 
-annotations::ownership_hierarchy formatter::ownership_hierarchy() const {
-    static annotations::ownership_hierarchy
+annotations::archetype_location formatter::ownership_hierarchy() const {
+    static annotations::archetype_location
         r(model_name, facet_name, formatter_name);
     return r;
 }

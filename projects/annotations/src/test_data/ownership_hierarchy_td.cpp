@@ -45,14 +45,14 @@ populate(const unsigned int position, result_type& v) {
 
 ownership_hierarchy_generator::result_type
 ownership_hierarchy_generator::create(const unsigned int position) {
-    ownership_hierarchy r;
+    archetype_location r;
     ownership_hierarchy_generator::populate(position, r);
     return r;
 }
 
 ownership_hierarchy_generator::result_type*
 ownership_hierarchy_generator::create_ptr(const unsigned int position) {
-    ownership_hierarchy* p = new ownership_hierarchy();
+    archetype_location* p = new archetype_location();
     ownership_hierarchy_generator::populate(position, *p);
     return p;
 }

@@ -79,7 +79,7 @@ std::vector<boost::filesystem::path> workflow::obtain_data_dirs() const {
 
 annotations::ownership_hierarchy_repository workflow::
 obtain_ownership_hierarchy_repository() const {
-    std::list<annotations::ownership_hierarchy> ohs;
+    std::list<annotations::archetype_location> ohs;
     const auto& rg(quilt::workflow::registrar());
     for (const auto b : rg.backends())
         for (const auto oh : b->ownership_hierarchy())

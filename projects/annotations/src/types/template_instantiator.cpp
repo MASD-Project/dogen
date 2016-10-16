@@ -68,7 +68,7 @@ template_instantiator::
 template_instantiator(const ownership_hierarchy_repository& ohrp)
     : repository_(ohrp) { }
 
-void template_instantiator::validate(const ownership_hierarchy& oh,
+void template_instantiator::validate(const archetype_location& oh,
     const name& n, const template_kinds tk) const {
     const auto sn(n.simple());
     if (sn.empty()) {

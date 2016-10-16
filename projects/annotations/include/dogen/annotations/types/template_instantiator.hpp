@@ -45,7 +45,7 @@ public:
     template_instantiator(const ownership_hierarchy_repository& ohrp);
 
 private:
-    void validate(const ownership_hierarchy& oh, const name& n,
+    void validate(const archetype_location& oh, const name& n,
         const template_kinds tk) const;
 
 public:

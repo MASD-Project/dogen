@@ -24,13 +24,13 @@
 
 namespace {
 
-dogen::annotations::ownership_hierarchy
+dogen::annotations::archetype_location
 create_dogen_annotations_ownership_hierarchy(const unsigned int position) {
     return dogen::annotations::ownership_hierarchy_generator::create(position);
 }
 
-std::vector<dogen::annotations::ownership_hierarchy> create_std_vector_dogen_annotations_ownership_hierarchy(unsigned int position) {
-    std::vector<dogen::annotations::ownership_hierarchy> r;
+std::vector<dogen::annotations::archetype_location> create_std_vector_dogen_annotations_ownership_hierarchy(unsigned int position) {
+    std::vector<dogen::annotations::archetype_location> r;
     for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_dogen_annotations_ownership_hierarchy(position + i));
     }

@@ -31,7 +31,7 @@ create_dogen_annotations_name(const unsigned int position) {
     return dogen::annotations::name_generator::create(position);
 }
 
-dogen::annotations::ownership_hierarchy
+dogen::annotations::archetype_location
 create_dogen_annotations_ownership_hierarchy(const unsigned int position) {
     return dogen::annotations::ownership_hierarchy_generator::create(position);
 }

@@ -53,9 +53,9 @@ std::string source_cmakelists_formatter::id() const {
     return r;
 }
 
-annotations::ownership_hierarchy source_cmakelists_formatter::
+annotations::archetype_location source_cmakelists_formatter::
 ownership_hierarchy() const {
-    static annotations::ownership_hierarchy
+    static annotations::archetype_location
         r(formatters::traits::model_name(), traits::cmake_facet_name(),
             source_cmakelists_formatter::static_formatter_name());
     return r;

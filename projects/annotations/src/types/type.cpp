@@ -41,7 +41,7 @@ type::type(
     const dogen::annotations::name& name,
     const dogen::annotations::value_types value_type,
     const dogen::annotations::scope_types scope,
-    const dogen::annotations::ownership_hierarchy& ownership_hierarchy,
+    const dogen::annotations::archetype_location& ownership_hierarchy,
     const boost::shared_ptr<dogen::annotations::value>& default_value)
     : name_(name),
       value_type_(value_type),
@@ -104,19 +104,19 @@ void type::scope(const dogen::annotations::scope_types v) {
     scope_ = v;
 }
 
-const dogen::annotations::ownership_hierarchy& type::ownership_hierarchy() const {
+const dogen::annotations::archetype_location& type::ownership_hierarchy() const {
     return ownership_hierarchy_;
 }
 
-dogen::annotations::ownership_hierarchy& type::ownership_hierarchy() {
+dogen::annotations::archetype_location& type::ownership_hierarchy() {
     return ownership_hierarchy_;
 }
 
-void type::ownership_hierarchy(const dogen::annotations::ownership_hierarchy& v) {
+void type::ownership_hierarchy(const dogen::annotations::archetype_location& v) {
     ownership_hierarchy_ = v;
 }
 
-void type::ownership_hierarchy(const dogen::annotations::ownership_hierarchy&& v) {
+void type::ownership_hierarchy(const dogen::annotations::archetype_location&& v) {
     ownership_hierarchy_ = std::move(v);
 }
 

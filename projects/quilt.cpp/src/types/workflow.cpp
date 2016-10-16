@@ -101,7 +101,7 @@ workflow::format(const formattables::model& fm) const {
     return wf.execute(fm);
 }
 
-std::forward_list<annotations::ownership_hierarchy>
+std::forward_list<annotations::archetype_location>
 workflow::ownership_hierarchy() const {
     using formatters::workflow;
     return workflow::registrar().ownership_hierarchy();

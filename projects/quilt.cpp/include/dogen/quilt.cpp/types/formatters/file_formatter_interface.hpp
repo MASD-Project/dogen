@@ -57,7 +57,7 @@ public:
     /**
      * @brief Ownership hierarchy for this formatter
      */
-    virtual annotations::ownership_hierarchy ownership_hierarchy() const = 0;
+    virtual annotations::archetype_location ownership_hierarchy() const = 0;
 
     /**
      * @brief Returns the type index of the element supported by this

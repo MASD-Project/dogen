@@ -46,9 +46,9 @@ std::string forward_declarations_formatter::id() const {
     return r;
 }
 
-annotations::ownership_hierarchy
+annotations::archetype_location
 forward_declarations_formatter::ownership_hierarchy() const {
-    static annotations::ownership_hierarchy
+    static annotations::archetype_location
         r(formatters::traits::model_name(), traits::facet_name(),
             forward_declarations_formatter::static_formatter_name());
     return r;

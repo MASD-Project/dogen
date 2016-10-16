@@ -97,7 +97,7 @@ public:
     managed_directories(const options::knitting_options& ko,
         const yarn::name& model_name) const override;
 
-    std::forward_list<annotations::ownership_hierarchy>
+    std::forward_list<annotations::archetype_location>
         ownership_hierarchy() const override;
 
     std::forward_list<dogen::formatters::artefact> generate(

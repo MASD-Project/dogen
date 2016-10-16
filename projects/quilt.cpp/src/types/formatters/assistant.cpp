@@ -95,7 +95,7 @@ get_identifiable_and_qualified(const IdentifiableAndQualified& iaq) {
 }
 
 assistant::
-assistant(const context& ctx, const annotations::ownership_hierarchy& oh,
+assistant(const context& ctx, const annotations::archetype_location& oh,
     const bool requires_header_guard, const std::string& id) :
     context_(ctx),
     formatter_properties_(obtain_formatter_properties(

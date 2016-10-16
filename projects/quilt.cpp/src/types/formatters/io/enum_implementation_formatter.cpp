@@ -58,9 +58,9 @@ std::string enum_implementation_formatter::id() const {
     return r;
 }
 
-annotations::ownership_hierarchy enum_implementation_formatter::
+annotations::archetype_location enum_implementation_formatter::
 ownership_hierarchy() const {
-    static annotations::ownership_hierarchy
+    static annotations::archetype_location
         r(formatters::traits::model_name(), traits::facet_name(),
             enum_implementation_formatter::static_formatter_name());
     return r;

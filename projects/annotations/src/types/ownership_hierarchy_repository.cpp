@@ -24,7 +24,7 @@ namespace dogen {
 namespace annotations {
 
 ownership_hierarchy_repository::ownership_hierarchy_repository(
-    const std::vector<dogen::annotations::ownership_hierarchy>& ownership_hierarchies,
+    const std::vector<dogen::annotations::archetype_location>& ownership_hierarchies,
     const std::unordered_map<std::string, std::unordered_set<std::string> >& facet_names_by_model_name,
     const std::unordered_map<std::string, std::unordered_set<std::string> >& formatter_names_by_model_name)
     : ownership_hierarchies_(ownership_hierarchies),
@@ -50,19 +50,19 @@ ownership_hierarchy_repository& ownership_hierarchy_repository::operator=(owners
     return *this;
 }
 
-const std::vector<dogen::annotations::ownership_hierarchy>& ownership_hierarchy_repository::ownership_hierarchies() const {
+const std::vector<dogen::annotations::archetype_location>& ownership_hierarchy_repository::ownership_hierarchies() const {
     return ownership_hierarchies_;
 }
 
-std::vector<dogen::annotations::ownership_hierarchy>& ownership_hierarchy_repository::ownership_hierarchies() {
+std::vector<dogen::annotations::archetype_location>& ownership_hierarchy_repository::ownership_hierarchies() {
     return ownership_hierarchies_;
 }
 
-void ownership_hierarchy_repository::ownership_hierarchies(const std::vector<dogen::annotations::ownership_hierarchy>& v) {
+void ownership_hierarchy_repository::ownership_hierarchies(const std::vector<dogen::annotations::archetype_location>& v) {
     ownership_hierarchies_ = v;
 }
 
-void ownership_hierarchy_repository::ownership_hierarchies(const std::vector<dogen::annotations::ownership_hierarchy>&& v) {
+void ownership_hierarchy_repository::ownership_hierarchies(const std::vector<dogen::annotations::archetype_location>&& v) {
     ownership_hierarchies_ = std::move(v);
 }
 

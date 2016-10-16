@@ -34,10 +34,10 @@ namespace annotations {
 
 class ownership_hierarchy_repository_factory final {
 private:
-    void validate(const std::list<ownership_hierarchy>& ohs) const;
+    void validate(const std::list<archetype_location>& ohs) const;
 
     void populate_ownership_hierarchies(
-        const std::list<ownership_hierarchy>& ohs,
+        const std::list<archetype_location>& ohs,
         ownership_hierarchy_repository& rp) const;
 
     void populate_facet_names_by_model_name(
@@ -48,7 +48,7 @@ private:
 
 public:
     ownership_hierarchy_repository
-        make(const std::list<ownership_hierarchy>& ohs) const;
+        make(const std::list<archetype_location>& ohs) const;
 };
 
 } }

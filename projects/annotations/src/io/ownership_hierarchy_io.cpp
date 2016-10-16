@@ -32,7 +32,7 @@ inline std::string tidy_up_string(std::string s) {
 namespace dogen {
 namespace annotations {
 
-std::ostream& operator<<(std::ostream& s, const ownership_hierarchy& v) {
+std::ostream& operator<<(std::ostream& s, const archetype_location& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::annotations::ownership_hierarchy\"" << ", "
       << "\"kernel\": " << "\"" << tidy_up_string(v.kernel()) << "\"" << ", "

@@ -42,7 +42,7 @@ type_template::type_template(
     const dogen::annotations::name& name,
     const dogen::annotations::value_types value_type,
     const dogen::annotations::scope_types scope,
-    const dogen::annotations::ownership_hierarchy& ownership_hierarchy,
+    const dogen::annotations::archetype_location& ownership_hierarchy,
     const boost::shared_ptr<dogen::annotations::value>& default_value,
     const dogen::annotations::template_kinds kind)
     : name_(name),
@@ -109,19 +109,19 @@ void type_template::scope(const dogen::annotations::scope_types v) {
     scope_ = v;
 }
 
-const dogen::annotations::ownership_hierarchy& type_template::ownership_hierarchy() const {
+const dogen::annotations::archetype_location& type_template::ownership_hierarchy() const {
     return ownership_hierarchy_;
 }
 
-dogen::annotations::ownership_hierarchy& type_template::ownership_hierarchy() {
+dogen::annotations::archetype_location& type_template::ownership_hierarchy() {
     return ownership_hierarchy_;
 }
 
-void type_template::ownership_hierarchy(const dogen::annotations::ownership_hierarchy& v) {
+void type_template::ownership_hierarchy(const dogen::annotations::archetype_location& v) {
     ownership_hierarchy_ = v;
 }
 
-void type_template::ownership_hierarchy(const dogen::annotations::ownership_hierarchy&& v) {
+void type_template::ownership_hierarchy(const dogen::annotations::archetype_location&& v) {
     ownership_hierarchy_ = std::move(v);
 }
 

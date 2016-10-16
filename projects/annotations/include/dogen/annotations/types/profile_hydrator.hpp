@@ -43,7 +43,7 @@ private:
 
     name read_name(const boost::property_tree::ptree& pt) const;
 
-    ownership_hierarchy
+    archetype_location
     read_ownership_hierarchy(const boost::property_tree::ptree& pt) const;
 
     std::list<entry_template>

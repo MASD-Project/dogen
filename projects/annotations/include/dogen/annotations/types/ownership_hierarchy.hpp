@@ -39,25 +39,25 @@ namespace annotations {
  * model and in order to have a formatter we must have a facet. We may not have
  * any.
  */
-class ownership_hierarchy final {
+class archetype_location final {
 public:
-    ownership_hierarchy() = default;
-    ownership_hierarchy(const ownership_hierarchy&) = default;
-    ownership_hierarchy(ownership_hierarchy&&) = default;
-    ~ownership_hierarchy() = default;
+    archetype_location() = default;
+    archetype_location(const archetype_location&) = default;
+    archetype_location(archetype_location&&) = default;
+    ~archetype_location() = default;
 
 public:
-    ownership_hierarchy(
+    archetype_location(
         const std::string& kernel,
         const std::string& facet,
         const std::string& archetype);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::annotations::ownership_hierarchy& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::annotations::archetype_location& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::annotations::ownership_hierarchy& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::annotations::archetype_location& v, unsigned int version);
 
 public:
     /**
@@ -91,14 +91,14 @@ public:
     /**@}*/
 
 public:
-    bool operator==(const ownership_hierarchy& rhs) const;
-    bool operator!=(const ownership_hierarchy& rhs) const {
+    bool operator==(const archetype_location& rhs) const;
+    bool operator!=(const archetype_location& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(ownership_hierarchy& other) noexcept;
-    ownership_hierarchy& operator=(ownership_hierarchy other);
+    void swap(archetype_location& other) noexcept;
+    archetype_location& operator=(archetype_location other);
 
 private:
     std::string kernel_;
@@ -112,8 +112,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::annotations::ownership_hierarchy& lhs,
-    dogen::annotations::ownership_hierarchy& rhs) {
+    dogen::annotations::archetype_location& lhs,
+    dogen::annotations::archetype_location& rhs) {
     lhs.swap(rhs);
 }
 

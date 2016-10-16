@@ -33,7 +33,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
 namespace dogen {
 namespace annotations {
 
-std::size_t ownership_hierarchy_hasher::hash(const ownership_hierarchy& v) {
+std::size_t ownership_hierarchy_hasher::hash(const archetype_location& v) {
     std::size_t seed(0);
 
     combine(seed, v.kernel());

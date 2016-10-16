@@ -191,7 +191,7 @@ const container& registrar::formatter_container() const {
     return formatter_container_;
 }
 
-const std::forward_list<annotations::ownership_hierarchy>&
+const std::forward_list<annotations::archetype_location>&
 registrar::ownership_hierarchy() const {
     return ownership_hierarchy_;
 }

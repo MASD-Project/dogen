@@ -119,7 +119,7 @@ workflow::read_text_templates(
 
 annotations::ownership_hierarchy_repository
 workflow::obtain_ownership_hierarchy_repository() const {
-    std::list<annotations::ownership_hierarchy> ohs;
+    std::list<annotations::archetype_location> ohs;
     ohs.push_back(formatter_.ownership_hierarchy());
 
     annotations::ownership_hierarchy_repository_factory f;

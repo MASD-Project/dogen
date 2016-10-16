@@ -164,9 +164,9 @@ read_name(const boost::property_tree::ptree& pt) const {
     return r;
 }
 
-ownership_hierarchy type_templates_hydrator::
+archetype_location type_templates_hydrator::
 read_ownership_hierarchy(const boost::property_tree::ptree& pt) const {
-    ownership_hierarchy r;
+    archetype_location r;
 
     r.kernel(
         pt.get<std::string>(ownership_hierarchy_model_name_key, empty));

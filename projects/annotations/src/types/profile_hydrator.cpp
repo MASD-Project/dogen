@@ -98,9 +98,9 @@ name profile_hydrator::read_name(const boost::property_tree::ptree& pt) const {
     return r;
 }
 
-ownership_hierarchy profile_hydrator::
+archetype_location profile_hydrator::
 read_ownership_hierarchy(const boost::property_tree::ptree& pt) const {
-    ownership_hierarchy r;
+    archetype_location r;
 
     r.kernel(
         pt.get<std::string>(ownership_hierarchy_model_name_key, empty));
