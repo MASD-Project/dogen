@@ -74,7 +74,7 @@ workflow::format(const formattables::model& fm, const yarn::element& e,
     const auto& fmts(i->second);
     for (const auto& fmt_ptr : fmts) {
         const auto& fmt(*fmt_ptr);
-        const auto fmtn(fmt.ownership_hierarchy().formatter_name());
+        const auto fmtn(fmt.ownership_hierarchy().archetype());
         BOOST_LOG_SEV(lg, debug) << "Formatting: '" << id << "' with '"
                                  << fmtn << "'";
 

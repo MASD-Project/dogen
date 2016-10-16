@@ -50,8 +50,8 @@ void mock_type_repository_factory::add_type(
     }
 
     const auto& oh(t.ownership_hierarchy());
-    trp.types_by_facet_name()[oh.facet_name()].push_back(t);
-    trp.types_by_formatter_name()[oh.formatter_name()].push_back(t);
+    trp.types_by_facet_name()[oh.facet()].push_back(t);
+    trp.types_by_formatter_name()[oh.archetype()].push_back(t);
 }
 
 type_repository mock_type_repository_factory::

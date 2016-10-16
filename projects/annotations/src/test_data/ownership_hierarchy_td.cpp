@@ -38,9 +38,9 @@ ownership_hierarchy_generator::ownership_hierarchy_generator() : position_(0) { 
 
 void ownership_hierarchy_generator::
 populate(const unsigned int position, result_type& v) {
-    v.model_name(create_std_string(position + 0));
-    v.facet_name(create_std_string(position + 1));
-    v.formatter_name(create_std_string(position + 2));
+    v.kernel(create_std_string(position + 0));
+    v.facet(create_std_string(position + 1));
+    v.archetype(create_std_string(position + 2));
 }
 
 ownership_hierarchy_generator::result_type

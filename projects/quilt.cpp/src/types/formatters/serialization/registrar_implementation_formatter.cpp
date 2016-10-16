@@ -54,7 +54,7 @@ std::string registrar_implementation_formatter::static_formatter_name() {
 }
 
 std::string registrar_implementation_formatter::id() const {
-    static auto r(ownership_hierarchy().formatter_name());
+    static auto r(ownership_hierarchy().archetype());
     return r;
 }
 

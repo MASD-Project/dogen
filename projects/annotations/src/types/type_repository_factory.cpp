@@ -114,15 +114,15 @@ create_repository(const std::list<type>& ts) const {
         }
 
         const auto& oh(t.ownership_hierarchy());
-        if (!oh.facet_name().empty())
-            r.types_by_facet_name()[oh.facet_name()].push_back(t);
+        if (!oh.facet().empty())
+            r.types_by_facet_name()[oh.facet()].push_back(t);
 
-        if (!oh.formatter_name().empty())
-            r.types_by_formatter_name()[oh.formatter_name()]
+        if (!oh.archetype().empty())
+            r.types_by_formatter_name()[oh.archetype()]
                 .push_back(t);
 
-        if (!oh.model_name().empty())
-            r.types_by_model_name()[oh.model_name()]
+        if (!oh.kernel().empty())
+            r.types_by_model_name()[oh.kernel()]
                 .push_back(t);
     }
 

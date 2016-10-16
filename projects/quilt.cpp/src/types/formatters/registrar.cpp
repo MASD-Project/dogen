@@ -85,7 +85,7 @@ void registrar::validate() const {
         for (const auto& ptr : formatters) {
             const auto& formatter(*ptr);
             const auto& oh(formatter.ownership_hierarchy());
-            const auto fctn(oh.facet_name());
+            const auto fctn(oh.facet());
             all_facets.insert(fctn);
             if (formatter.inclusion_support_type() != cs)
                 continue;
@@ -95,7 +95,7 @@ void registrar::validate() const {
              */
             const auto i(facets_found.find(fctn));
             if (i != facets_found.end()) {
-                const auto fmtn(oh.formatter_name());
+                const auto fmtn(oh.archetype());
                 BOOST_LOG_SEV(lg, error) << more_than_one_canonical_formatter
                                          << fctn << " formatter: " << fmtn
                                          << " type: " << ti.name();
@@ -153,13 +153,13 @@ register_formatter(std::shared_ptr<file_formatter_interface> f) {
         BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
 
     const auto& oh(f->ownership_hierarchy());
-    if (oh.formatter_name().empty())
+    if (oh.archetype().empty())
         BOOST_THROW_EXCEPTION(registrar_error(empty_formatter_name));
 
-    if (oh.facet_name().empty())
+    if (oh.facet().empty())
         BOOST_THROW_EXCEPTION(registrar_error(empty_facet_name));
 
-    if (oh.model_name().empty())
+    if (oh.kernel().empty())
         BOOST_THROW_EXCEPTION(registrar_error(empty_model_name));
 
     ownership_hierarchy_.push_front(oh);
@@ -177,7 +177,7 @@ register_formatter(std::shared_ptr<file_formatter_interface> f) {
      * formatter into this container has the helpful side-effect of
      * ensuring the formatter id is unique in formatter space.
      */
-    const auto fmtn(oh.formatter_name());
+    const auto fmtn(oh.archetype());
     auto& fffn(formatter_container_.file_formatters_by_formatter_name());
     const auto pair(std::make_pair(fmtn, f));
     const auto inserted(fffn.insert(pair).second);

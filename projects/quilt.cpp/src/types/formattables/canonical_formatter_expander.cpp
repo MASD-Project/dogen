@@ -83,8 +83,8 @@ expand(const formatters::container& fc, model& fm) const {
                     continue;
 
                 const auto& oh(formatter.ownership_hierarchy());
-                const auto fmtn(oh.formatter_name());
-                const auto fctn(oh.facet_name());
+                const auto fmtn(oh.archetype());
+                const auto fctn(oh.facet());
 
                 using formatters::traits;
                 const auto cfmtn(traits::canonical_formatter_name(fctn));

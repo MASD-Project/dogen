@@ -24,24 +24,24 @@ namespace dogen {
 namespace annotations {
 
 ownership_hierarchy::ownership_hierarchy(
-    const std::string& model_name,
-    const std::string& facet_name,
-    const std::string& formatter_name)
-    : model_name_(model_name),
-      facet_name_(facet_name),
-      formatter_name_(formatter_name) { }
+    const std::string& kernel,
+    const std::string& facet,
+    const std::string& archetype)
+    : kernel_(kernel),
+      facet_(facet),
+      archetype_(archetype) { }
 
 void ownership_hierarchy::swap(ownership_hierarchy& other) noexcept {
     using std::swap;
-    swap(model_name_, other.model_name_);
-    swap(facet_name_, other.facet_name_);
-    swap(formatter_name_, other.formatter_name_);
+    swap(kernel_, other.kernel_);
+    swap(facet_, other.facet_);
+    swap(archetype_, other.archetype_);
 }
 
 bool ownership_hierarchy::operator==(const ownership_hierarchy& rhs) const {
-    return model_name_ == rhs.model_name_ &&
-        facet_name_ == rhs.facet_name_ &&
-        formatter_name_ == rhs.formatter_name_;
+    return kernel_ == rhs.kernel_ &&
+        facet_ == rhs.facet_ &&
+        archetype_ == rhs.archetype_;
 }
 
 ownership_hierarchy& ownership_hierarchy::operator=(ownership_hierarchy other) {
@@ -50,52 +50,52 @@ ownership_hierarchy& ownership_hierarchy::operator=(ownership_hierarchy other) {
     return *this;
 }
 
-const std::string& ownership_hierarchy::model_name() const {
-    return model_name_;
+const std::string& ownership_hierarchy::kernel() const {
+    return kernel_;
 }
 
-std::string& ownership_hierarchy::model_name() {
-    return model_name_;
+std::string& ownership_hierarchy::kernel() {
+    return kernel_;
 }
 
-void ownership_hierarchy::model_name(const std::string& v) {
-    model_name_ = v;
+void ownership_hierarchy::kernel(const std::string& v) {
+    kernel_ = v;
 }
 
-void ownership_hierarchy::model_name(const std::string&& v) {
-    model_name_ = std::move(v);
+void ownership_hierarchy::kernel(const std::string&& v) {
+    kernel_ = std::move(v);
 }
 
-const std::string& ownership_hierarchy::facet_name() const {
-    return facet_name_;
+const std::string& ownership_hierarchy::facet() const {
+    return facet_;
 }
 
-std::string& ownership_hierarchy::facet_name() {
-    return facet_name_;
+std::string& ownership_hierarchy::facet() {
+    return facet_;
 }
 
-void ownership_hierarchy::facet_name(const std::string& v) {
-    facet_name_ = v;
+void ownership_hierarchy::facet(const std::string& v) {
+    facet_ = v;
 }
 
-void ownership_hierarchy::facet_name(const std::string&& v) {
-    facet_name_ = std::move(v);
+void ownership_hierarchy::facet(const std::string&& v) {
+    facet_ = std::move(v);
 }
 
-const std::string& ownership_hierarchy::formatter_name() const {
-    return formatter_name_;
+const std::string& ownership_hierarchy::archetype() const {
+    return archetype_;
 }
 
-std::string& ownership_hierarchy::formatter_name() {
-    return formatter_name_;
+std::string& ownership_hierarchy::archetype() {
+    return archetype_;
 }
 
-void ownership_hierarchy::formatter_name(const std::string& v) {
-    formatter_name_ = v;
+void ownership_hierarchy::archetype(const std::string& v) {
+    archetype_ = v;
 }
 
-void ownership_hierarchy::formatter_name(const std::string&& v) {
-    formatter_name_ = std::move(v);
+void ownership_hierarchy::archetype(const std::string&& v) {
+    archetype_ = std::move(v);
 }
 
 } }

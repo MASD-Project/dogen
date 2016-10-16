@@ -99,14 +99,14 @@ enablement_expander::make_global_type_group(
         const auto oh(f->ownership_hierarchy());
 
         global_type_group gtg;
-        const auto& mn(oh.model_name());
+        const auto& mn(oh.kernel());
         const auto ebl(traits::enabled());
         gtg.model_enabled = s.select_type_by_name(mn, ebl);
 
-        const auto& fctn(oh.facet_name());
+        const auto& fctn(oh.facet());
         gtg.facet_enabled = s.select_type_by_name(fctn, ebl);
 
-        const auto& fmtn(oh.formatter_name());
+        const auto& fmtn(oh.archetype());
         gtg.formatter_enabled = s.select_type_by_name(fmtn, ebl);
 
         const auto ow(traits::overwrite());
@@ -189,7 +189,7 @@ void enablement_expander::update_facet_enablement(
 
         const auto& fmt(*i->second);
         const auto& oh(fmt.ownership_hierarchy());
-        const auto fctn(oh.facet_name());
+        const auto fctn(oh.facet());
         const auto& gc(pair.second);
         fct_props[fctn].enabled(gc.facet_enabled());
     }
@@ -210,11 +210,11 @@ make_local_type_group(const annotations::type_repository& atrp,
         local_type_group ltg;
         const auto oh(f->ownership_hierarchy());
 
-        const auto& fctn(oh.facet_name());
+        const auto& fctn(oh.facet());
         const auto ebl(traits::enabled());
         ltg.facet_enabled = s.select_type_by_name(fctn, ebl);
 
-        const auto& fmtn(oh.formatter_name());
+        const auto& fmtn(oh.archetype());
         ltg.formatter_enabled = s.select_type_by_name(fmtn, ebl);
 
         const auto ow(traits::overwrite());
@@ -247,7 +247,7 @@ enablement_expander::bucket_local_type_group_by_type_index(
 
         local_type_group_type& ltg(r[ti]);
         for (const auto& fmt: fmts) {
-            const auto fmtn(fmt->ownership_hierarchy().formatter_name());
+            const auto fmtn(fmt->ownership_hierarchy().archetype());
             const auto i(unbucketed_ltgs.find(fmtn));
             if (i == unbucketed_ltgs.end()) {
                 BOOST_LOG_SEV(lg, error) << formatter_not_found << fmtn;

@@ -73,8 +73,8 @@ locator::type_group locator::make_type_group(
         const auto& fmt(*ptr);
         const auto& oh(fmt.ownership_hierarchy());
 
-        const auto fmtn(oh.formatter_name());
-        const auto fctn(oh.facet_name());
+        const auto fmtn(oh.archetype());
+        const auto fctn(oh.facet());
         const auto pf(traits::postfix());
         formatter_type_group fmt_tg;
         const auto pfix(traits::postfix());

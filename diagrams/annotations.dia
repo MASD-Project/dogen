@@ -2427,13 +2427,13 @@ content of entries.#</dia:string>
         <dia:point val="36,-80"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="35.95,-80.05;47.33,-75.55"/>
+        <dia:rectangle val="35.95,-80.05;45.925,-75.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="36,-80"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="11.279999999999999"/>
+        <dia:real val="9.875"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -2532,7 +2532,7 @@ any.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#model_name#</dia:string>
+            <dia:string>#kernel#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::string#</dia:string>
@@ -2541,7 +2541,7 @@ any.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Name of the model that owns this field, if any.#</dia:string>
+            <dia:string>#Name of the kernel that owns this field, if any.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -2555,7 +2555,7 @@ any.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#facet_name#</dia:string>
+            <dia:string>#facet#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::string#</dia:string>
@@ -2578,7 +2578,7 @@ any.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#formatter_name#</dia:string>
+            <dia:string>#archetype#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::string#</dia:string>
@@ -2587,7 +2587,7 @@ any.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Name of the formatter that owns this field, if any.#</dia:string>
+            <dia:string>#Name of the archetype that owns this field, if any.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -10310,17 +10310,17 @@ any.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="41.64,-75.6"/>
+        <dia:point val="40.9375,-75.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="34.235,-76.35;42.39,-62.2"/>
+        <dia:rectangle val="34.235,-76.35;41.6875,-62.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="41.64,-75.6"/>
-        <dia:point val="41.64,-67"/>
+        <dia:point val="40.9375,-75.6"/>
+        <dia:point val="40.9375,-67"/>
         <dia:point val="34.285,-67"/>
         <dia:point val="34.285,-63"/>
       </dia:attribute>
@@ -10543,7 +10543,7 @@ any.#</dia:string>
         <dia:point val="49.46,-91.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="41.59,-92.35;50.21,-79.2"/>
+        <dia:rectangle val="40.8875,-92.35;50.21,-79.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -10551,8 +10551,8 @@ any.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="49.46,-91.6"/>
         <dia:point val="49.46,-85"/>
-        <dia:point val="41.64,-85"/>
-        <dia:point val="41.64,-80"/>
+        <dia:point val="40.9375,-85"/>
+        <dia:point val="40.9375,-80"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

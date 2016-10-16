@@ -36,7 +36,7 @@ namespace formatters {
 namespace test_data {
 
 std::string class_header_formatter::id() const {
-    static auto r(ownership_hierarchy().formatter_name());
+    static auto r(ownership_hierarchy().archetype());
     return r;
 }
 

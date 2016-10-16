@@ -35,9 +35,9 @@ namespace annotations {
 std::ostream& operator<<(std::ostream& s, const ownership_hierarchy& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::annotations::ownership_hierarchy\"" << ", "
-      << "\"model_name\": " << "\"" << tidy_up_string(v.model_name()) << "\"" << ", "
-      << "\"facet_name\": " << "\"" << tidy_up_string(v.facet_name()) << "\"" << ", "
-      << "\"formatter_name\": " << "\"" << tidy_up_string(v.formatter_name()) << "\""
+      << "\"kernel\": " << "\"" << tidy_up_string(v.kernel()) << "\"" << ", "
+      << "\"facet\": " << "\"" << tidy_up_string(v.facet()) << "\"" << ", "
+      << "\"archetype\": " << "\"" << tidy_up_string(v.archetype()) << "\""
       << " }";
     return(s);
 }

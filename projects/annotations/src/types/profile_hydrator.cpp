@@ -102,11 +102,11 @@ ownership_hierarchy profile_hydrator::
 read_ownership_hierarchy(const boost::property_tree::ptree& pt) const {
     ownership_hierarchy r;
 
-    r.model_name(
+    r.kernel(
         pt.get<std::string>(ownership_hierarchy_model_name_key, empty));
-    r.facet_name(
+    r.facet(
         pt.get<std::string>(ownership_hierarchy_facet_name_key, empty));
-    r.formatter_name(
+    r.archetype(
         pt.get<std::string>(ownership_hierarchy_formatter_name_key, empty));
 
     return r;

@@ -43,21 +43,21 @@ validate(const std::list<ownership_hierarchy>& ohs) const {
     BOOST_LOG_SEV(lg, debug) << "Validating input ownership hierachies.";
 
     for (const auto& oh : ohs) {
-        if (oh.formatter_name().empty()) {
+        if (oh.archetype().empty()) {
             BOOST_LOG_SEV(lg, error) << empty_formatter_name;
             BOOST_THROW_EXCEPTION(building_error(empty_formatter_name));
         }
 
-        if (oh.model_name().empty()) {
-            BOOST_LOG_SEV(lg, error) << empty_model_name << oh.formatter_name();
+        if (oh.kernel().empty()) {
+            BOOST_LOG_SEV(lg, error) << empty_model_name << oh.archetype();
             BOOST_THROW_EXCEPTION(
-                building_error(empty_model_name + oh.formatter_name()));
+                building_error(empty_model_name + oh.archetype()));
         }
 
-        if (oh.facet_name().empty()) {
-            BOOST_LOG_SEV(lg, error) << empty_facet_name << oh.formatter_name();
+        if (oh.facet().empty()) {
+            BOOST_LOG_SEV(lg, error) << empty_facet_name << oh.archetype();
             BOOST_THROW_EXCEPTION(
-                building_error(empty_facet_name + oh.formatter_name()));
+                building_error(empty_facet_name + oh.archetype()));
         }
     }
     BOOST_LOG_SEV(lg, debug) << "Input ownership hierachies are valid.";
@@ -75,7 +75,7 @@ void ownership_hierarchy_repository_factory::
 populate_facet_names_by_model_name(ownership_hierarchy_repository& rp) const {
 
     for (const auto& oh : rp.ownership_hierarchies())
-        rp.facet_names_by_model_name()[oh.model_name()].insert(oh.facet_name());
+        rp.facet_names_by_model_name()[oh.kernel()].insert(oh.facet());
 }
 
 void ownership_hierarchy_repository_factory::
@@ -83,8 +83,8 @@ populate_formatter_names_by_model_name(
     ownership_hierarchy_repository& rp) const {
 
     for (const auto& oh : rp.ownership_hierarchies()) {
-        const auto fmtn(oh.formatter_name());
-        rp.formatter_names_by_model_name()[oh.model_name()].insert(fmtn);
+        const auto fmtn(oh.archetype());
+        rp.formatter_names_by_model_name()[oh.kernel()].insert(fmtn);
     }
 }
 

@@ -99,11 +99,11 @@ assistant(const context& ctx, const annotations::ownership_hierarchy& oh,
     const bool requires_header_guard, const std::string& id) :
     context_(ctx),
     formatter_properties_(obtain_formatter_properties(
-            context_.element_properties(), oh.formatter_name())),
+            context_.element_properties(), oh.archetype())),
     ownership_hierarchy_(oh), requires_header_guard_(requires_header_guard) {
 
     BOOST_LOG_SEV(lg, debug) << "Processing element: " << id
-                             << " using: " << oh.formatter_name();
+                             << " using: " << oh.archetype();
 
     dogen::formatters::indent_filter::push(filtering_stream_, 4);
     filtering_stream_.push(stream_);
@@ -111,7 +111,7 @@ assistant(const context& ctx, const annotations::ownership_hierarchy& oh,
 }
 
 void assistant::validate() const {
-    const auto& fn(ownership_hierarchy_.formatter_name());
+    const auto& fn(ownership_hierarchy_.archetype());
     const auto& fp(formatter_properties_);
     if (fp.file_path().empty()) {
         BOOST_LOG_SEV(lg, error) << file_path_not_set << fn;
@@ -416,20 +416,20 @@ assistant::get_helpers(const formattables::helper_properties& hp) const {
      * Not all formatters need help, so its fine not to have a
      * helper registered against a particular formatter.
      */
-    const auto j(i->second.find(ownership_hierarchy_.formatter_name()));
+    const auto j(i->second.find(ownership_hierarchy_.archetype()));
     if (j != i->second.end()) {
         BOOST_LOG_SEV(lg, debug) << "Found helpers for formatter: "
-                                 << ownership_hierarchy_.formatter_name();
+                                 << ownership_hierarchy_.archetype();
         return j->second;
     }
 
     BOOST_LOG_SEV(lg, debug) << "Could not find helpers for formatter:"
-                             << ownership_hierarchy_.formatter_name();
+                             << ownership_hierarchy_.archetype();
     return std::list<std::shared_ptr<formatters::helper_formatter_interface>>();
 }
 
 bool assistant::is_io() const {
-    const auto fn(ownership_hierarchy_.facet_name());
+    const auto fn(ownership_hierarchy_.facet());
     return formatters::io::traits::facet_name()  == fn;
 }
 
@@ -454,7 +454,7 @@ is_streaming_enabled(const formattables::helper_properties& hp) const {
      */
     using tt = formatters::types::traits;
     const auto cifn(tt::class_implementation_formatter_name());
-    const auto fn(ownership_hierarchy_.formatter_name());
+    const auto fn(ownership_hierarchy_.archetype());
     bool in_types_class_implementation(fn == cifn);
     return in_types_class_implementation && hp.in_inheritance_relationship();
 }

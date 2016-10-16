@@ -36,9 +36,9 @@ namespace annotations {
 std::size_t ownership_hierarchy_hasher::hash(const ownership_hierarchy& v) {
     std::size_t seed(0);
 
-    combine(seed, v.model_name());
-    combine(seed, v.facet_name());
-    combine(seed, v.formatter_name());
+    combine(seed, v.kernel());
+    combine(seed, v.facet());
+    combine(seed, v.archetype());
 
     return seed;
 }

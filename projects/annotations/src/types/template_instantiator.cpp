@@ -89,13 +89,13 @@ void template_instantiator::validate(const ownership_hierarchy& oh,
     }
 
     if (tk == template_kinds::global_template) {
-        if (!oh.facet_name().empty()) {
+        if (!oh.facet().empty()) {
             BOOST_LOG_SEV(lg, error) << facet_name_not_empty << sn;
             BOOST_THROW_EXCEPTION(
                 instantiation_error(facet_name_not_empty + sn));
         }
 
-        if (!oh.formatter_name().empty()) {
+        if (!oh.archetype().empty()) {
             BOOST_LOG_SEV(lg, error) << formatter_name_not_empty << sn;
             BOOST_THROW_EXCEPTION(
                 instantiation_error(formatter_name_not_empty + sn));
@@ -103,13 +103,13 @@ void template_instantiator::validate(const ownership_hierarchy& oh,
     }
 
     if (tk == template_kinds::facet_template) {
-        if (!oh.facet_name().empty()) {
+        if (!oh.facet().empty()) {
             BOOST_LOG_SEV(lg, error) << facet_name_not_empty << sn;
             BOOST_THROW_EXCEPTION(
                 instantiation_error(facet_name_not_empty + sn));
         }
 
-        if (!oh.formatter_name().empty()) {
+        if (!oh.archetype().empty()) {
             BOOST_LOG_SEV(lg, error) << formatter_name_not_empty << sn;
             BOOST_THROW_EXCEPTION(
                 instantiation_error(formatter_name_not_empty + sn));
@@ -117,7 +117,7 @@ void template_instantiator::validate(const ownership_hierarchy& oh,
     }
 
     if (tk == template_kinds::formatter_template) {
-        if (!oh.formatter_name().empty()) {
+        if (!oh.archetype().empty()) {
             BOOST_LOG_SEV(lg, error) << formatter_name_not_empty << sn;
             BOOST_THROW_EXCEPTION(
                 instantiation_error(formatter_name_not_empty + sn));
@@ -155,15 +155,15 @@ instantiate_global_template(const type_template& tt) const {
 
     for (const auto pair : repository_.facet_names_by_model_name()) {
         const auto model_name(pair.first);
-        if (!tt.ownership_hierarchy().model_name().empty() &&
-            tt.ownership_hierarchy().model_name() != model_name)
+        if (!tt.ownership_hierarchy().kernel().empty() &&
+            tt.ownership_hierarchy().kernel() != model_name)
             continue;
 
         auto t(to_type(tt));
         t.name().qualified(model_name + "." + tt.name().simple());
-        t.ownership_hierarchy().model_name(model_name);
-        t.ownership_hierarchy().facet_name(empty);
-        t.ownership_hierarchy().formatter_name(empty);
+        t.ownership_hierarchy().kernel(model_name);
+        t.ownership_hierarchy().facet(empty);
+        t.ownership_hierarchy().archetype(empty);
         r.push_back(t);
 
         const auto& facet_names(pair.second);
@@ -171,21 +171,21 @@ instantiate_global_template(const type_template& tt) const {
             auto t(to_type(tt));
             const auto sn(tt.name().simple());
             t.name().qualified(facet_name + "." + sn);
-            t.ownership_hierarchy().model_name(model_name);
-            t.ownership_hierarchy().facet_name(facet_name);
-            t.ownership_hierarchy().formatter_name(empty);
+            t.ownership_hierarchy().kernel(model_name);
+            t.ownership_hierarchy().facet(facet_name);
+            t.ownership_hierarchy().archetype(empty);
             r.push_back(t);
         }
     }
 
     for (const auto oh : repository_.ownership_hierarchies()) {
-        if (!tt.ownership_hierarchy().model_name().empty() &&
-            tt.ownership_hierarchy().model_name() != oh.model_name())
+        if (!tt.ownership_hierarchy().kernel().empty() &&
+            tt.ownership_hierarchy().kernel() != oh.kernel())
             continue;
 
         auto t(to_type(tt));
 
-        const auto fn(oh.formatter_name());
+        const auto fn(oh.archetype());
         t.name().qualified(fn + "." + tt.name().simple());
         t.ownership_hierarchy(oh);
         r.push_back(t);
@@ -198,17 +198,17 @@ instantiate_facet_template(const type_template& tt) const {
     std::list<type> r;
     for (const auto pair : repository_.facet_names_by_model_name()) {
         const auto model_name(pair.first);
-        if (!tt.ownership_hierarchy().model_name().empty() &&
-            tt.ownership_hierarchy().model_name() != model_name)
+        if (!tt.ownership_hierarchy().kernel().empty() &&
+            tt.ownership_hierarchy().kernel() != model_name)
             continue;
 
         const auto& facet_names(pair.second);
         for (const auto facet_name : facet_names) {
             auto t(to_type(tt));
             t.name().qualified(facet_name + "." + tt.name().simple());
-            t.ownership_hierarchy().model_name(model_name);
-            t.ownership_hierarchy().facet_name(facet_name);
-            t.ownership_hierarchy().formatter_name(empty);
+            t.ownership_hierarchy().kernel(model_name);
+            t.ownership_hierarchy().facet(facet_name);
+            t.ownership_hierarchy().archetype(empty);
             r.push_back(t);
         }
     }
@@ -219,16 +219,16 @@ std::list<type> template_instantiator::
 instantiate_formatter_template(const type_template& tt) const {
     std::list<type> r;
     for (const auto oh : repository_.ownership_hierarchies()) {
-        if (!tt.ownership_hierarchy().model_name().empty() &&
-            tt.ownership_hierarchy().model_name() != oh.model_name())
+        if (!tt.ownership_hierarchy().kernel().empty() &&
+            tt.ownership_hierarchy().kernel() != oh.kernel())
             continue;
 
-        if (!tt.ownership_hierarchy().facet_name().empty() &&
-            tt.ownership_hierarchy().facet_name() != oh.facet_name())
+        if (!tt.ownership_hierarchy().facet().empty() &&
+            tt.ownership_hierarchy().facet() != oh.facet())
             continue;
 
         auto t(to_type(tt));
-        const auto fn(oh.formatter_name());
+        const auto fn(oh.archetype());
         t.name().qualified(fn + "." + t.name().simple());
         t.ownership_hierarchy(oh);
         r.push_back(t);
@@ -242,8 +242,8 @@ template_instantiator::instantiate_global_template(
     std::list<std::pair<std::string, boost::shared_ptr<value>>> r;
     for (const auto pair : repository_.facet_names_by_model_name()) {
         const auto model_name(pair.first);
-        if (!et.ownership_hierarchy().model_name().empty() &&
-            et.ownership_hierarchy().model_name() != model_name)
+        if (!et.ownership_hierarchy().kernel().empty() &&
+            et.ownership_hierarchy().kernel() != model_name)
             continue;
 
         std::pair<std::string, boost::shared_ptr<value>> entry;
@@ -261,12 +261,12 @@ template_instantiator::instantiate_global_template(
     }
 
     for (const auto oh : repository_.ownership_hierarchies()) {
-        if (!et.ownership_hierarchy().model_name().empty() &&
-            et.ownership_hierarchy().model_name() != oh.model_name())
+        if (!et.ownership_hierarchy().kernel().empty() &&
+            et.ownership_hierarchy().kernel() != oh.kernel())
             continue;
 
         std::pair<std::string, boost::shared_ptr<value>> entry;
-        const auto fn(oh.formatter_name());
+        const auto fn(oh.archetype());
         entry.first = fn + "." + et.name().simple();
         entry.second = to_value(trp, entry.first, et);
         r.push_back(entry);
@@ -282,8 +282,8 @@ template_instantiator::instantiate_facet_template(
 
     for (const auto pair : repository_.facet_names_by_model_name()) {
         const auto model_name(pair.first);
-        if (!et.ownership_hierarchy().model_name().empty() &&
-            et.ownership_hierarchy().model_name() != model_name)
+        if (!et.ownership_hierarchy().kernel().empty() &&
+            et.ownership_hierarchy().kernel() != model_name)
             continue;
 
         const auto& facet_names(pair.second);
@@ -304,16 +304,16 @@ template_instantiator::instantiate_formatter_template(
     std::list<std::pair<std::string, boost::shared_ptr<value>>> r;
 
     for (const auto oh : repository_.ownership_hierarchies()) {
-        if (!et.ownership_hierarchy().model_name().empty() &&
-            et.ownership_hierarchy().model_name() != oh.model_name())
+        if (!et.ownership_hierarchy().kernel().empty() &&
+            et.ownership_hierarchy().kernel() != oh.kernel())
             continue;
 
-        if (!et.ownership_hierarchy().facet_name().empty() &&
-            et.ownership_hierarchy().facet_name() != oh.facet_name())
+        if (!et.ownership_hierarchy().facet().empty() &&
+            et.ownership_hierarchy().facet() != oh.facet())
             continue;
 
         std::pair<std::string, boost::shared_ptr<value>> entry;
-        const auto fn(oh.formatter_name());
+        const auto fn(oh.archetype());
         entry.first = fn + "." + et.name().simple();
         entry.second = to_value(trp, entry.first, et);
         r.push_back(entry);

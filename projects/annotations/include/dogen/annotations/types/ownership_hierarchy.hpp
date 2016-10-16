@@ -48,9 +48,9 @@ public:
 
 public:
     ownership_hierarchy(
-        const std::string& model_name,
-        const std::string& facet_name,
-        const std::string& formatter_name);
+        const std::string& kernel,
+        const std::string& facet,
+        const std::string& archetype);
 
 private:
     template<typename Archive>
@@ -61,33 +61,33 @@ private:
 
 public:
     /**
-     * @brief Name of the model that owns this field, if any.
+     * @brief Name of the kernel that owns this field, if any.
      */
     /**@{*/
-    const std::string& model_name() const;
-    std::string& model_name();
-    void model_name(const std::string& v);
-    void model_name(const std::string&& v);
+    const std::string& kernel() const;
+    std::string& kernel();
+    void kernel(const std::string& v);
+    void kernel(const std::string&& v);
     /**@}*/
 
     /**
      * @brief Name of the facet that owns this field, if any.
      */
     /**@{*/
-    const std::string& facet_name() const;
-    std::string& facet_name();
-    void facet_name(const std::string& v);
-    void facet_name(const std::string&& v);
+    const std::string& facet() const;
+    std::string& facet();
+    void facet(const std::string& v);
+    void facet(const std::string&& v);
     /**@}*/
 
     /**
-     * @brief Name of the formatter that owns this field, if any.
+     * @brief Name of the archetype that owns this field, if any.
      */
     /**@{*/
-    const std::string& formatter_name() const;
-    std::string& formatter_name();
-    void formatter_name(const std::string& v);
-    void formatter_name(const std::string&& v);
+    const std::string& archetype() const;
+    std::string& archetype();
+    void archetype(const std::string& v);
+    void archetype(const std::string&& v);
     /**@}*/
 
 public:
@@ -101,9 +101,9 @@ public:
     ownership_hierarchy& operator=(ownership_hierarchy other);
 
 private:
-    std::string model_name_;
-    std::string facet_name_;
-    std::string formatter_name_;
+    std::string kernel_;
+    std::string facet_;
+    std::string archetype_;
 };
 
 } }
