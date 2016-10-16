@@ -25,10 +25,10 @@
 #pragma once
 #endif
 
-#include "dogen/formatters/types/file.hpp"
 #include "dogen/formatters/types/traits.hpp"
 #include "dogen/formatters/types/editors.hpp"
 #include "dogen/formatters/types/licence.hpp"
+#include "dogen/formatters/types/artefact.hpp"
 #include "dogen/formatters/types/modeline.hpp"
 #include "dogen/formatters/types/formatters.hpp"
 #include "dogen/formatters/types/repository.hpp"

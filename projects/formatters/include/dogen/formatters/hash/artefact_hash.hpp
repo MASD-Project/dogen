@@ -18,26 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_SERIALIZATION_FILE_SER_HPP
-#define DOGEN_FORMATTERS_SERIALIZATION_FILE_SER_HPP
+#ifndef DOGEN_FORMATTERS_HASH_ARTEFACT_HASH_HPP
+#define DOGEN_FORMATTERS_HASH_ARTEFACT_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/split_free.hpp>
-#include "dogen/formatters/types/file.hpp"
+#include <functional>
+#include "dogen/formatters/types/artefact.hpp"
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::formatters::artefact)
-namespace boost {
-namespace serialization {
+namespace dogen {
+namespace formatters {
 
-template<typename Archive>
-void save(Archive& ar, const dogen::formatters::artefact& v, unsigned int version);
-
-template<typename Archive>
-void load(Archive& ar, dogen::formatters::artefact& v, unsigned int version);
+struct artefact_hasher {
+public:
+    static std::size_t hash(const artefact& v);
+};
 
 } }
 
+namespace std {
+
+template<>
+struct hash<dogen::formatters::artefact> {
+public:
+    size_t operator()(const dogen::formatters::artefact& v) const {
+        return dogen::formatters::artefact_hasher::hash(v);
+    }
+};
+
+}
 #endif

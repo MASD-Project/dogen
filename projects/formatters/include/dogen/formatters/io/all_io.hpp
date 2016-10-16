@@ -25,9 +25,9 @@
 #pragma once
 #endif
 
-#include "dogen/formatters/io/file_io.hpp"
 #include "dogen/formatters/io/editors_io.hpp"
 #include "dogen/formatters/io/licence_io.hpp"
+#include "dogen/formatters/io/artefact_io.hpp"
 #include "dogen/formatters/io/modeline_io.hpp"
 #include "dogen/formatters/io/repository_io.hpp"
 #include "dogen/formatters/io/quote_types_io.hpp"

@@ -29,7 +29,7 @@
 #include <typeindex>
 #include <boost/filesystem/path.hpp>
 #include "dogen/annotations/types/ownership_hierarchy.hpp"
-#include "dogen/formatters/types/file.hpp"
+#include "dogen/formatters/types/artefact.hpp"
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/quilt.cpp/types/formattables/locator.hpp"
 #include "dogen/quilt.cpp/types/formattables/inclusion_dependencies_builder_factory.hpp"

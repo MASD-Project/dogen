@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TYPES_FILE_HPP
-#define DOGEN_FORMATTERS_TYPES_FILE_HPP
+#ifndef DOGEN_FORMATTERS_TYPES_ARTEFACT_HPP
+#define DOGEN_FORMATTERS_TYPES_ARTEFACT_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,13 +28,13 @@
 #include <string>
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
-#include "dogen/formatters/serialization/file_fwd_ser.hpp"
+#include "dogen/formatters/serialization/artefact_fwd_ser.hpp"
 
 namespace dogen {
 namespace formatters {
 
 /**
- * @brief File produced by a formatter.
+ * @brief Artefact produced by a formatter.
  */
 class artefact final {
 public:

@@ -32,7 +32,7 @@
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/annotations/types/ownership_hierarchy_repository.hpp"
-#include "dogen/formatters/types/file.hpp"
+#include "dogen/formatters/types/artefact.hpp"
 #include "dogen/formatters/types/repository.hpp"
 #include "dogen/stitch/types/properties.hpp"
 #include "dogen/stitch/types/text_template.hpp"

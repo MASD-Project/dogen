@@ -30,7 +30,7 @@
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
 #include "dogen/annotations/types/ownership_hierarchy_repository_factory.hpp"
 #include "dogen/formatters/types/hydration_workflow.hpp"
-#include "dogen/formatters/io/file_io.hpp"
+#include "dogen/formatters/io/artefact_io.hpp"
 #include "dogen/formatters/types/filesystem_writer.hpp"
 #include "dogen/stitch/types/parser.hpp"
 #include "dogen/stitch/types/expander.hpp"

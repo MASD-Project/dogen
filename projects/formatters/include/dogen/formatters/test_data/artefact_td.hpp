@@ -18,35 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/io/ios_state.hpp>
-#include <boost/algorithm/string.hpp>
-#include "dogen/formatters/io/file_io.hpp"
+#ifndef DOGEN_FORMATTERS_TEST_DATA_ARTEFACT_TD_HPP
+#define DOGEN_FORMATTERS_TEST_DATA_ARTEFACT_TD_HPP
 
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    return s;
-}
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/formatters/types/artefact.hpp"
 
 namespace dogen {
 namespace formatters {
 
-std::ostream& operator<<(std::ostream& s, const artefact& v) {
-    boost::io::ios_flags_saver ifs(s);
-    s.setf(std::ios_base::boolalpha);
-    s.setf(std::ios::fixed, std::ios::floatfield);
-    s.precision(6);
-    s.setf(std::ios::showpoint);
+class artefact_generator {
+public:
+    artefact_generator();
 
-    s << " { "
-      << "\"__type__\": " << "\"dogen::formatters::file\"" << ", "
-      << "\"path\": " << "\"" << v.path().generic_string() << "\"" << ", "
-      << "\"content\": " << "\"" << tidy_up_string(v.content()) << "\"" << ", "
-      << "\"overwrite\": " << v.overwrite()
-      << " }";
-    return(s);
-}
+public:
+    typedef dogen::formatters::artefact result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 } }
+
+#endif

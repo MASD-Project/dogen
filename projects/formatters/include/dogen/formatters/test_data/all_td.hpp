@@ -25,9 +25,9 @@
 #pragma once
 #endif
 
-#include "dogen/formatters/test_data/file_td.hpp"
 #include "dogen/formatters/test_data/editors_td.hpp"
 #include "dogen/formatters/test_data/licence_td.hpp"
+#include "dogen/formatters/test_data/artefact_td.hpp"
 #include "dogen/formatters/test_data/modeline_td.hpp"
 #include "dogen/formatters/test_data/repository_td.hpp"
 #include "dogen/formatters/test_data/quote_types_td.hpp"

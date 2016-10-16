@@ -25,9 +25,9 @@
 #pragma once
 #endif
 
-#include "dogen/formatters/hash/file_hash.hpp"
 #include "dogen/formatters/hash/editors_hash.hpp"
 #include "dogen/formatters/hash/licence_hash.hpp"
+#include "dogen/formatters/hash/artefact_hash.hpp"
 #include "dogen/formatters/hash/modeline_hash.hpp"
 #include "dogen/formatters/hash/repository_hash.hpp"
 #include "dogen/formatters/hash/quote_types_hash.hpp"

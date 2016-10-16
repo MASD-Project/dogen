@@ -18,23 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_SERIALIZATION_FILE_FWD_SER_HPP
-#define DOGEN_FORMATTERS_SERIALIZATION_FILE_FWD_SER_HPP
+#ifndef DOGEN_FORMATTERS_IO_ARTEFACT_IO_HPP
+#define DOGEN_FORMATTERS_IO_ARTEFACT_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/formatters/types/file_fwd.hpp"
+#include <iosfwd>
+#include "dogen/formatters/types/artefact.hpp"
 
-namespace boost {
-namespace serialization {
+namespace dogen {
+namespace formatters {
 
-template<class Archive>
-void save(Archive& ar, const dogen::formatters::artefact& v, unsigned int version);
-
-template<class Archive>
-void load(Archive& ar, dogen::formatters::artefact& v, unsigned int version);
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::formatters::artefact& v);
 
 } }
 

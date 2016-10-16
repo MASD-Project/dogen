@@ -18,35 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_HASH_FILE_HASH_HPP
-#define DOGEN_FORMATTERS_HASH_FILE_HASH_HPP
+#ifndef DOGEN_FORMATTERS_TYPES_ARTEFACT_FWD_HPP
+#define DOGEN_FORMATTERS_TYPES_ARTEFACT_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/formatters/types/file.hpp"
-
 namespace dogen {
 namespace formatters {
 
-struct file_hasher {
-public:
-    static std::size_t hash(const artefact& v);
-};
+class artefact;
 
 } }
 
-namespace std {
-
-template<>
-struct hash<dogen::formatters::artefact> {
-public:
-    size_t operator()(const dogen::formatters::artefact& v) const {
-        return dogen::formatters::file_hasher::hash(v);
-    }
-};
-
-}
 #endif

@@ -26,7 +26,7 @@
 #endif
 
 #include <iosfwd>
-#include "dogen/formatters/types/file.hpp"
+#include "dogen/formatters/types/artefact.hpp"
 #include "dogen/annotations/types/ownership_hierarchy.hpp"
 #include "dogen/stitch/types/line.hpp"
 #include "dogen/stitch/types/text_template.hpp"

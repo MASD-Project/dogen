@@ -25,7 +25,7 @@
 #include "dogen/utility/io/forward_list_io.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/filesystem/file.hpp"
-#include "dogen/formatters/io/file_io.hpp"
+#include "dogen/formatters/io/artefact_io.hpp"
 #include "dogen/formatters/types/filesystem_writer.hpp"
 
 namespace {

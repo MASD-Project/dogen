@@ -30,7 +30,7 @@
 #include <forward_list>
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
-#include "dogen/formatters/types/file.hpp"
+#include "dogen/formatters/types/artefact.hpp"
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/quilt.cpp/types/formattables/model.hpp"
 #include "dogen/quilt.cpp/types/formatters/registrar.hpp"

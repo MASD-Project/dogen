@@ -56,12 +56,12 @@ private:
      *
      * FIXME: this is a hack for now.
      */
-    void write_empty_file(const formatters::artefact& f) const;
+    void write_empty_file(const artefact& f) const;
 
     /**
      * @brief Writes the file.
      */
-    void write(const formatters::artefact& f) const;
+    void write(const artefact& f) const;
 
 public:
     void write(const std::forward_list<artefact>& files) const override;

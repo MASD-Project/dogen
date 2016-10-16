@@ -18,36 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TEST_DATA_FILE_TD_HPP
-#define DOGEN_FORMATTERS_TEST_DATA_FILE_TD_HPP
+#include <ostream>
+#include <boost/io/ios_state.hpp>
+#include <boost/algorithm/string.hpp>
+#include "dogen/formatters/io/artefact_io.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include "dogen/formatters/types/file.hpp"
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
 
 namespace dogen {
 namespace formatters {
 
-class file_generator {
-public:
-    file_generator();
+std::ostream& operator<<(std::ostream& s, const artefact& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
 
-public:
-    typedef dogen::formatters::artefact result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
-};
+    s << " { "
+      << "\"__type__\": " << "\"dogen::formatters::artefact\"" << ", "
+      << "\"path\": " << "\"" << v.path().generic_string() << "\"" << ", "
+      << "\"content\": " << "\"" << tidy_up_string(v.content()) << "\"" << ", "
+      << "\"overwrite\": " << v.overwrite()
+      << " }";
+    return(s);
+}
 
 } }
-
-#endif

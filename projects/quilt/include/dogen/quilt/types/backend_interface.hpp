@@ -31,7 +31,7 @@
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/annotations/types/ownership_hierarchy.hpp"
 #include "dogen/yarn/types/model.hpp"
-#include "dogen/formatters/types/file.hpp"
+#include "dogen/formatters/types/artefact.hpp"
 
 namespace dogen {
 namespace quilt {

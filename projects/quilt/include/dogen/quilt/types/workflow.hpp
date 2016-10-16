@@ -31,7 +31,7 @@
 #include "dogen/options/types/knitting_options.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/yarn/types/model.hpp"
-#include "dogen/formatters/types/file.hpp"
+#include "dogen/formatters/types/artefact.hpp"
 #include "dogen/quilt/types/backend_registrar.hpp"
 #include "dogen/quilt/types/backend_interface.hpp"
 

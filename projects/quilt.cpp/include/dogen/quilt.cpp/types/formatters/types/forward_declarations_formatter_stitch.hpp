@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/formatters/types/file.hpp"
+#include "dogen/formatters/types/artefact.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/fabric/forward_declarations.hpp"
 

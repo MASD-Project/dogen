@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/formatters/test_data/file_td.hpp"
+#include "dogen/formatters/test_data/artefact_td.hpp"
 
 namespace {
 
@@ -45,31 +45,31 @@ bool create_bool(const unsigned int position) {
 namespace dogen {
 namespace formatters {
 
-file_generator::file_generator() : position_(0) { }
+artefact_generator::artefact_generator() : position_(0) { }
 
-void file_generator::
+void artefact_generator::
 populate(const unsigned int position, result_type& v) {
     v.path(create_boost_filesystem_path(position + 0));
     v.content(create_std_string(position + 1));
     v.overwrite(create_bool(position + 2));
 }
 
-file_generator::result_type
-file_generator::create(const unsigned int position) {
+artefact_generator::result_type
+artefact_generator::create(const unsigned int position) {
     artefact r;
-    file_generator::populate(position, r);
+    artefact_generator::populate(position, r);
     return r;
 }
 
-file_generator::result_type*
-file_generator::create_ptr(const unsigned int position) {
+artefact_generator::result_type*
+artefact_generator::create_ptr(const unsigned int position) {
     artefact* p = new artefact();
-    file_generator::populate(position, *p);
+    artefact_generator::populate(position, *p);
     return p;
 }
 
-file_generator::result_type
-file_generator::operator()() {
+artefact_generator::result_type
+artefact_generator::operator()() {
     return create(position_++);
 }
 

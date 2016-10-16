@@ -18,35 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/hash/file_hash.hpp"
+#ifndef DOGEN_FORMATTERS_SERIALIZATION_ARTEFACT_FWD_SER_HPP
+#define DOGEN_FORMATTERS_SERIALIZATION_ARTEFACT_FWD_SER_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value) {
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
+#include "dogen/formatters/types/artefact_fwd.hpp"
 
-inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) {
-    std::size_t seed(0);
-    combine(seed, v.generic_string());
-    return seed;
-}
+namespace boost {
+namespace serialization {
 
-}
+template<class Archive>
+void save(Archive& ar, const dogen::formatters::artefact& v, unsigned int version);
 
-namespace dogen {
-namespace formatters {
-
-std::size_t file_hasher::hash(const artefact& v) {
-    std::size_t seed(0);
-
-    combine(seed, hash_boost_filesystem_path(v.path()));
-    combine(seed, v.content());
-    combine(seed, v.overwrite());
-
-    return seed;
-}
+template<class Archive>
+void load(Archive& ar, dogen::formatters::artefact& v, unsigned int version);
 
 } }
+
+#endif
