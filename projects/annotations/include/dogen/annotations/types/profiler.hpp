@@ -57,7 +57,7 @@ private:
 
     void validate(const profile_map_type& pm) const;
 
-    void setup_annotations(const ownership_hierarchy_repository& ohrp,
+    void setup_annotations(const archetype_location_repository& ohrp,
         const type_repository& trp, profile_map_type& pm) const;
 
     const profiler_configuration& walk_up_parent_tree_and_merge(
@@ -71,7 +71,7 @@ private:
 public:
     std::unordered_map<std::string, annotation>
     generate(const std::vector<boost::filesystem::path>& data_dirs,
-        const ownership_hierarchy_repository& ohrp,
+        const archetype_location_repository& ohrp,
         const type_repository& trp) const;
 };
 

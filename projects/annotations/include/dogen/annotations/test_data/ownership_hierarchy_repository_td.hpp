@@ -35,7 +35,7 @@ public:
     ownership_hierarchy_repository_generator();
 
 public:
-    typedef dogen::annotations::ownership_hierarchy_repository result_type;
+    typedef dogen::annotations::archetype_location_repository result_type;
 
 public:
     static void populate(const unsigned int position, result_type& v);

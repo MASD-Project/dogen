@@ -65,7 +65,7 @@ namespace dogen {
 namespace annotations {
 
 template_instantiator::
-template_instantiator(const ownership_hierarchy_repository& ohrp)
+template_instantiator(const archetype_location_repository& ohrp)
     : repository_(ohrp) { }
 
 void template_instantiator::validate(const archetype_location& oh,

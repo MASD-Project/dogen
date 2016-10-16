@@ -65,14 +65,14 @@ validate(const std::list<archetype_location>& ohs) const {
 
 void ownership_hierarchy_repository_factory::
 populate_ownership_hierarchies(const std::list<archetype_location>& ohs,
-    ownership_hierarchy_repository& rp) const {
+    archetype_location_repository& rp) const {
     rp.ownership_hierarchies().reserve(ohs.size());
     for (const auto& oh : ohs)
         rp.ownership_hierarchies().push_back(oh);
 }
 
 void ownership_hierarchy_repository_factory::
-populate_facet_names_by_model_name(ownership_hierarchy_repository& rp) const {
+populate_facet_names_by_model_name(archetype_location_repository& rp) const {
 
     for (const auto& oh : rp.ownership_hierarchies())
         rp.facet_names_by_model_name()[oh.kernel()].insert(oh.facet());
@@ -80,7 +80,7 @@ populate_facet_names_by_model_name(ownership_hierarchy_repository& rp) const {
 
 void ownership_hierarchy_repository_factory::
 populate_formatter_names_by_model_name(
-    ownership_hierarchy_repository& rp) const {
+    archetype_location_repository& rp) const {
 
     for (const auto& oh : rp.ownership_hierarchies()) {
         const auto fmtn(oh.archetype());
@@ -88,12 +88,12 @@ populate_formatter_names_by_model_name(
     }
 }
 
-ownership_hierarchy_repository ownership_hierarchy_repository_factory::
+archetype_location_repository ownership_hierarchy_repository_factory::
 make(const std::list<archetype_location>& ohs) const {
     BOOST_LOG_SEV(lg, debug) << "Creating ownership hierachy repository.";
     validate(ohs);
 
-    ownership_hierarchy_repository r;
+    archetype_location_repository r;
     populate_ownership_hierarchies(ohs, r);
     populate_facet_names_by_model_name(r);
     populate_formatter_names_by_model_name(r);

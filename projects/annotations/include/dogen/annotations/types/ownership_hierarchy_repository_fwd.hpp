@@ -28,7 +28,7 @@
 namespace dogen {
 namespace annotations {
 
-class ownership_hierarchy_repository;
+class archetype_location_repository;
 
 } }
 

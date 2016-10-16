@@ -33,7 +33,7 @@ namespace annotations {
 
 std::ostream&
 operator<<(std::ostream& s,
-     const dogen::annotations::ownership_hierarchy_repository& v);
+     const dogen::annotations::archetype_location_repository& v);
 
 } }
 

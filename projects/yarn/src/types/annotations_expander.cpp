@@ -177,7 +177,7 @@ update_scribble_groups(intermediate_model& im) const {
 
 void annotations_expander::
 update_annotations(const std::vector<boost::filesystem::path>& data_dirs,
-    const annotations::ownership_hierarchy_repository& ohrp,
+    const annotations::archetype_location_repository& ohrp,
     const annotations::type_repository& atrp, intermediate_model& im) const {
 
     /*
@@ -197,7 +197,7 @@ update_annotations(const std::vector<boost::filesystem::path>& data_dirs,
 
 void annotations_expander::
 expand(const std::vector<boost::filesystem::path>& data_dirs,
-    const annotations::ownership_hierarchy_repository& ohrp,
+    const annotations::archetype_location_repository& ohrp,
     const annotations::type_repository& atrp, intermediate_model& im) const {
     BOOST_LOG_SEV(lg, debug) << "Starting annotations expansion for model: "
                              << im.name().id();

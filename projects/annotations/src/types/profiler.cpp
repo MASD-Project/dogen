@@ -172,7 +172,7 @@ void profiler::validate(const profile_map_type& pm) const {
     BOOST_LOG_SEV(lg, debug) << "Validated all profiles.";
 }
 
-void profiler::setup_annotations(const ownership_hierarchy_repository& ohrp,
+void profiler::setup_annotations(const archetype_location_repository& ohrp,
     const type_repository& trp, profile_map_type& pm) const {
     BOOST_LOG_SEV(lg, debug) << "Instantiating value templates.";
 
@@ -291,7 +291,7 @@ profiler::create_annotation_map(const profile_map_type& pm) const {
 
 std::unordered_map<std::string, annotation>
 profiler::generate(const std::vector<boost::filesystem::path>& data_dirs,
-    const ownership_hierarchy_repository& ohrp,
+    const archetype_location_repository& ohrp,
     const type_repository& trp) const {
 
     BOOST_LOG_SEV(lg, debug) << "Generating profiles.";

@@ -59,7 +59,7 @@ inline std::size_t hash_std_unordered_map_std_string_std_unordered_set_std_strin
 namespace dogen {
 namespace annotations {
 
-std::size_t ownership_hierarchy_repository_hasher::hash(const ownership_hierarchy_repository& v) {
+std::size_t ownership_hierarchy_repository_hasher::hash(const archetype_location_repository& v) {
     std::size_t seed(0);
 
     combine(seed, hash_std_vector_dogen_annotations_archetype_location(v.ownership_hierarchies()));

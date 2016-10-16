@@ -60,7 +60,7 @@ public:
      */
     annotation_groups_factory(
         const std::vector<boost::filesystem::path>& data_dirs,
-        const ownership_hierarchy_repository& ohrp,
+        const archetype_location_repository& ohrp,
         const type_repository& trp, const bool throw_on_missing_type = true);
 
 private:
@@ -141,7 +141,7 @@ public:
 
 private:
     const std::vector<boost::filesystem::path> data_dirs_;
-    const ownership_hierarchy_repository& ownership_hierarchy_repository_;
+    const archetype_location_repository& ownership_hierarchy_repository_;
     const type_repository& type_repository_;
     const bool throw_on_missing_type_;
 };

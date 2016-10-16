@@ -75,14 +75,14 @@ populate(const unsigned int position, result_type& v) {
 
 ownership_hierarchy_repository_generator::result_type
 ownership_hierarchy_repository_generator::create(const unsigned int position) {
-    ownership_hierarchy_repository r;
+    archetype_location_repository r;
     ownership_hierarchy_repository_generator::populate(position, r);
     return r;
 }
 
 ownership_hierarchy_repository_generator::result_type*
 ownership_hierarchy_repository_generator::create_ptr(const unsigned int position) {
-    ownership_hierarchy_repository* p = new ownership_hierarchy_repository();
+    archetype_location_repository* p = new archetype_location_repository();
     ownership_hierarchy_repository_generator::populate(position, *p);
     return p;
 }

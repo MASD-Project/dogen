@@ -43,12 +43,12 @@ private:
     void update_scribble_groups(intermediate_model& im) const;
     void update_annotations(
         const std::vector<boost::filesystem::path>& data_dirs,
-        const annotations::ownership_hierarchy_repository& ohrp,
+        const annotations::archetype_location_repository& ohrp,
         const annotations::type_repository& atrp, intermediate_model& im) const;
 
 public:
     void expand(const std::vector<boost::filesystem::path>& data_dirs,
-        const annotations::ownership_hierarchy_repository& ohrp,
+        const annotations::archetype_location_repository& ohrp,
         const annotations::type_repository& atrp, intermediate_model& im) const;
 };
 

@@ -147,7 +147,7 @@ parse(const std::string& s) {
     dogen::annotations::test::mock_type_repository_factory rf;
     const auto atrp(rf.make());
     const bool throw_on_missing_field_definition(false);
-    dogen::annotations::ownership_hierarchy_repository ohrp;
+    dogen::annotations::archetype_location_repository ohrp;
     using namespace dogen::utility::filesystem;
     std::vector<boost::filesystem::path> data_dirs({ data_files_directory() });
     dogen::annotations::annotation_groups_factory

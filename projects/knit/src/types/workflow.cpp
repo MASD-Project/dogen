@@ -77,7 +77,7 @@ std::vector<boost::filesystem::path> workflow::obtain_data_dirs() const {
     return std::vector<boost::filesystem::path>({ data_dir });
 }
 
-annotations::ownership_hierarchy_repository workflow::
+annotations::archetype_location_repository workflow::
 obtain_ownership_hierarchy_repository() const {
     std::list<annotations::archetype_location> ohs;
     const auto& rg(quilt::workflow::registrar());
@@ -92,14 +92,14 @@ obtain_ownership_hierarchy_repository() const {
 
 annotations::type_repository workflow::setup_annotations_repository(
     const std::vector<boost::filesystem::path>& data_dirs,
-    const annotations::ownership_hierarchy_repository& ohrp) const {
+    const annotations::archetype_location_repository& ohrp) const {
     annotations::type_repository_factory f;
     return f.make(ohrp, data_dirs);
 }
 
 yarn::model workflow::
 obtain_yarn_model(const std::vector<boost::filesystem::path>& data_dirs,
-    const annotations::ownership_hierarchy_repository& ohrp,
+    const annotations::archetype_location_repository& ohrp,
     const annotations::type_repository& atrp) const {
     yarn::workflow w;
     const auto io(knitting_options_.input());

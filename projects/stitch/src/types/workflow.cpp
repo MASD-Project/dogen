@@ -117,7 +117,7 @@ workflow::read_text_templates(
     return r;
 }
 
-annotations::ownership_hierarchy_repository
+annotations::archetype_location_repository
 workflow::obtain_ownership_hierarchy_repository() const {
     std::list<annotations::archetype_location> ohs;
     ohs.push_back(formatter_.ownership_hierarchy());
@@ -135,14 +135,14 @@ dogen::formatters::repository workflow::create_formatters_repository(
 
 annotations::type_repository workflow::create_annotations_type_repository(
     const std::vector<boost::filesystem::path>& data_dirs,
-    const annotations::ownership_hierarchy_repository& ohrp) const {
+    const annotations::archetype_location_repository& ohrp) const {
     annotations::type_repository_factory f;
     return f.make(ohrp, data_dirs);
 }
 
 std::forward_list<text_template> workflow::parse_text_templates(
     const std::vector<boost::filesystem::path>& data_dirs,
-    const annotations::ownership_hierarchy_repository& ohrp,
+    const annotations::archetype_location_repository& ohrp,
     const annotations::type_repository& atrp,
     const std::forward_list<std::pair<boost::filesystem::path, std::string> >&
     text_templates_as_string) const {

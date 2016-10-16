@@ -97,7 +97,7 @@ private:
      * @brief Obtains the complete ownership hierarchy across all
      * backends.
      */
-    annotations::ownership_hierarchy_repository
+    annotations::archetype_location_repository
     obtain_ownership_hierarchy_repository() const;
 
     /**
@@ -105,14 +105,14 @@ private:
      */
     annotations::type_repository setup_annotations_repository(
         const std::vector<boost::filesystem::path>& data_dirs,
-        const annotations::ownership_hierarchy_repository& ohrp) const;
+        const annotations::archetype_location_repository& ohrp) const;
 
     /**
      * @brief Obtain the yarn model.
      */
     yarn::model
     obtain_yarn_model(const std::vector<boost::filesystem::path>& data_dirs,
-        const annotations::ownership_hierarchy_repository& ohrp,
+        const annotations::archetype_location_repository& ohrp,
         const annotations::type_repository& atrp) const;
 
     /**

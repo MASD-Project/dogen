@@ -78,7 +78,7 @@ std::list<type_template> type_repository_factory::hydrate_templates(
 }
 
 std::list<type> type_repository_factory::instantiate_templates(
-    const ownership_hierarchy_repository& ohrp,
+    const archetype_location_repository& ohrp,
     const std::list<type_template>& tts) const {
     std::list<type> r;
 
@@ -130,7 +130,7 @@ create_repository(const std::list<type>& ts) const {
 }
 
 type_repository type_repository_factory::make(
-    const ownership_hierarchy_repository& ohrp,
+    const archetype_location_repository& ohrp,
     const std::vector<boost::filesystem::path>& dirs) const {
     BOOST_LOG_SEV(lg, info) << "Generating repository.";
 

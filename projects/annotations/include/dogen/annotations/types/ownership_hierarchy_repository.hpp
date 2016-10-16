@@ -36,25 +36,25 @@
 namespace dogen {
 namespace annotations {
 
-class ownership_hierarchy_repository final {
+class archetype_location_repository final {
 public:
-    ownership_hierarchy_repository() = default;
-    ownership_hierarchy_repository(const ownership_hierarchy_repository&) = default;
-    ownership_hierarchy_repository(ownership_hierarchy_repository&&) = default;
-    ~ownership_hierarchy_repository() = default;
+    archetype_location_repository() = default;
+    archetype_location_repository(const archetype_location_repository&) = default;
+    archetype_location_repository(archetype_location_repository&&) = default;
+    ~archetype_location_repository() = default;
 
 public:
-    ownership_hierarchy_repository(
+    archetype_location_repository(
         const std::vector<dogen::annotations::archetype_location>& ownership_hierarchies,
         const std::unordered_map<std::string, std::unordered_set<std::string> >& facet_names_by_model_name,
         const std::unordered_map<std::string, std::unordered_set<std::string> >& formatter_names_by_model_name);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::annotations::ownership_hierarchy_repository& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::annotations::archetype_location_repository& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::annotations::ownership_hierarchy_repository& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::annotations::archetype_location_repository& v, unsigned int version);
 
 public:
     const std::vector<dogen::annotations::archetype_location>& ownership_hierarchies() const;
@@ -73,14 +73,14 @@ public:
     void formatter_names_by_model_name(const std::unordered_map<std::string, std::unordered_set<std::string> >&& v);
 
 public:
-    bool operator==(const ownership_hierarchy_repository& rhs) const;
-    bool operator!=(const ownership_hierarchy_repository& rhs) const {
+    bool operator==(const archetype_location_repository& rhs) const;
+    bool operator!=(const archetype_location_repository& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(ownership_hierarchy_repository& other) noexcept;
-    ownership_hierarchy_repository& operator=(ownership_hierarchy_repository other);
+    void swap(archetype_location_repository& other) noexcept;
+    archetype_location_repository& operator=(archetype_location_repository other);
 
 private:
     std::vector<dogen::annotations::archetype_location> ownership_hierarchies_;
@@ -94,8 +94,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::annotations::ownership_hierarchy_repository& lhs,
-    dogen::annotations::ownership_hierarchy_repository& rhs) {
+    dogen::annotations::archetype_location_repository& lhs,
+    dogen::annotations::archetype_location_repository& rhs) {
     lhs.swap(rhs);
 }
 

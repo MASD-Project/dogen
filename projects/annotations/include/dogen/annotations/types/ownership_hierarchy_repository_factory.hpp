@@ -38,16 +38,16 @@ private:
 
     void populate_ownership_hierarchies(
         const std::list<archetype_location>& ohs,
-        ownership_hierarchy_repository& rp) const;
+        archetype_location_repository& rp) const;
 
     void populate_facet_names_by_model_name(
-        ownership_hierarchy_repository& rp) const;
+        archetype_location_repository& rp) const;
 
     void populate_formatter_names_by_model_name(
-        ownership_hierarchy_repository& rp) const;
+        archetype_location_repository& rp) const;
 
 public:
-    ownership_hierarchy_repository
+    archetype_location_repository
         make(const std::list<archetype_location>& ohs) const;
 };
 

@@ -28,15 +28,15 @@
 #include <boost/serialization/split_free.hpp>
 #include "dogen/annotations/types/ownership_hierarchy_repository.hpp"
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::annotations::ownership_hierarchy_repository)
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::annotations::archetype_location_repository)
 namespace boost {
 namespace serialization {
 
 template<typename Archive>
-void save(Archive& ar, const dogen::annotations::ownership_hierarchy_repository& v, unsigned int version);
+void save(Archive& ar, const dogen::annotations::archetype_location_repository& v, unsigned int version);
 
 template<typename Archive>
-void load(Archive& ar, dogen::annotations::ownership_hierarchy_repository& v, unsigned int version);
+void load(Archive& ar, dogen::annotations::archetype_location_repository& v, unsigned int version);
 
 } }
 

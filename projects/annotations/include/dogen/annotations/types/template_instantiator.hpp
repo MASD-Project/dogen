@@ -42,7 +42,7 @@ namespace annotations {
 
 class template_instantiator {
 public:
-    template_instantiator(const ownership_hierarchy_repository& ohrp);
+    template_instantiator(const archetype_location_repository& ohrp);
 
 private:
     void validate(const archetype_location& oh, const name& n,
@@ -82,7 +82,7 @@ public:
     instantiate(const type_repository& trp, const entry_template& et) const;
 
 private:
-    const ownership_hierarchy_repository& repository_;
+    const archetype_location_repository& repository_;
 };
 
 } }
