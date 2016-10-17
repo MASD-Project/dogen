@@ -83,7 +83,7 @@ private:
 };
 
 std::list<boost::shared_ptr<yarn::element>> forward_declarations_factory::
-build(const yarn::intermediate_model& im) const {
+make(const yarn::intermediate_model& im) const {
     BOOST_LOG_SEV(lg, debug) << "Generating forward declarations.";
 
     generator g;

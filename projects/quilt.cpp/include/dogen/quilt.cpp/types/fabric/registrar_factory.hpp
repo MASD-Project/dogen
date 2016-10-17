@@ -39,11 +39,11 @@ namespace fabric {
 class registrar_factory {
 private:
     boost::shared_ptr<fabric::registrar>
-    build(const yarn::name& model_name) const;
+    make(const yarn::name& model_name) const;
 
 public:
     std::list<boost::shared_ptr<yarn::element>>
-    build(const yarn::intermediate_model& im) const;
+    make(const yarn::intermediate_model& im) const;
 };
 
 } } } }

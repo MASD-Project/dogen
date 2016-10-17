@@ -125,11 +125,12 @@ obtain_aspect_properties(const annotations::type_repository& atrp,
 
         auto& formattable(pair.second);
         const auto& segment(*formattable.master_segment());
-        const auto ac(make_aspect_properties(tg, segment.annotation()));
-        if (ac)
-            r[id] = *ac;
+        const auto ap(make_aspect_properties(tg, segment.annotation()));
+        if (ap)
+            r[id] = *ap;
     }
-    BOOST_LOG_SEV(lg, debug) << "Finished creating aspect configurations. "
+
+    BOOST_LOG_SEV(lg, debug) << "Finished creating aspect properties. "
                              << "Result: " << r;
     return r;
 }
@@ -162,67 +163,76 @@ void aspect_expander::walk_name_tree(const yarn::name_tree& nt,
         ap.requires_manual_move_constructor(true);
 }
 
-aspect_properties
-aspect_expander::compute_aspect_properties(
+aspect_properties aspect_expander::compute_aspect_properties(
     const aspect_properties_type& element_aps,
-    const std::list<yarn::attribute>& attr) const {
+    const std::list<yarn::attribute>& attrs) const {
 
     aspect_properties r;
-    for (const auto a : attr) {
-        const auto& nt(a.parsed_type());
+    for (const auto attr : attrs) {
+        const auto& nt(attr.parsed_type());
         walk_name_tree(nt, true/*is_top_level*/, element_aps, r);
     }
     return r;
 }
 
-void aspect_expander::populate_aspect_properties(
+void aspect_expander::populate_aspect_properties(const std::string& element_id,
     const aspect_properties_type& element_aps,
+    formattable& formattable) const {
+
+    BOOST_LOG_SEV(lg, debug) << "Procesing element: " << element_id;
+    auto& eprops(formattable.element_properties());
+
+    /*
+     * We only want to process the master segment; extensions can
+     * be ignored.
+     */
+    const auto& ms(formattable.master_segment());
+
+    /*
+     * We only need to generate the aspect configuration for
+     * elements of the target model. However, we can't perform
+     * this after reduction because the aspect configurations must
+     * be build prior to reduction or else we will not get aspects
+     * for referenced models.
+     */
+    if (ms->origin_type() != yarn::origin_types::target)
+        return;
+
+    /*
+     * We are only interested in yarn objects; all other element
+     * types do not need helpers.
+     */
+    const auto ptr(dynamic_cast<const yarn::object*>(ms.get()));
+    if (ptr == nullptr)
+        return;
+
+    const auto& o(*ptr) ;
+
+    /*
+     * Update the aspect properties.
+     */
+    const auto& attrs(o.local_attributes());
+    const auto element_ap(compute_aspect_properties(element_aps, attrs));
+    eprops.aspect_properties(element_ap);
+}
+
+void aspect_expander::
+populate_aspect_properties(const aspect_properties_type& element_aps,
     std::unordered_map<std::string, formattable>& formattables) const {
 
     for (auto& pair : formattables) {
         const auto id(pair.first);
-        BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
-
         auto& formattable(pair.second);
-        auto& eprops(formattable.element_properties());
-
-        /*
-         * We only want to process the master segment; the extensions
-         * can be ignored.
-         */
-        auto segment(formattable.master_segment());
-
-        /*
-         * We are only interested in yarn objects; all other
-         * element types do not need helpers.
-         */
-        const auto ptr(dynamic_cast<const yarn::object*>(segment.get()));
-        if (ptr == nullptr)
-            continue;
-
-        /*
-         * We only need to generate the aspect configuration for
-         * elements of the target model. However, we can't perform
-         * this after reduction because the aspect configurations must
-         * be build prior to reduction or else we will not get aspects
-         * for referenced models.
-         */
-        if (ptr->origin_type() != yarn::origin_types::target)
-            continue;
-
-        /*
-         * Update the aspect configuration.
-         */
-        const auto& attr(ptr->local_attributes());
-        const auto element_ap(compute_aspect_properties(element_aps, attr));
-        eprops.aspect_properties(element_ap);
+        populate_aspect_properties(id, element_aps, formattable);
     }
 }
 
 void aspect_expander::
 expand(const annotations::type_repository& atrp, model& fm) const {
+    BOOST_LOG_SEV(lg, debug) << "Started expansion.";
     const auto element_aps(obtain_aspect_properties(atrp, fm.formattables()));
     populate_aspect_properties(element_aps, fm.formattables());
+    BOOST_LOG_SEV(lg, debug) << "Finished expansion.";
 }
 
 } } } }

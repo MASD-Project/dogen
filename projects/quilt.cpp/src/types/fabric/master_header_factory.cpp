@@ -23,13 +23,13 @@
 #include <boost/make_shared.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/building_error.hpp"
-#include "dogen/yarn/types/object.hpp"
-#include "dogen/yarn/types/concept.hpp"
-#include "dogen/yarn/types/enumeration.hpp"
-#include "dogen/yarn/types/module.hpp"
 #include "dogen/yarn/io/name_io.hpp"
-#include "dogen/yarn/types/exception.hpp"
+#include "dogen/yarn/types/object.hpp"
+#include "dogen/yarn/types/module.hpp"
 #include "dogen/yarn/types/visitor.hpp"
+#include "dogen/yarn/types/concept.hpp"
+#include "dogen/yarn/types/exception.hpp"
+#include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/yarn/types/elements_traversal.hpp"
 #include "dogen/quilt.cpp/types/fabric/master_header.hpp"
@@ -120,9 +120,9 @@ generator::filter_formatters(const std::forward_list<std::shared_ptr<
      */
     using formatters::inclusion_support_types;
     static const auto ns(inclusion_support_types::not_supported);
-    for (const auto& f : formatters) {
-        if (f->inclusion_support_type() != ns)
-            r.push_front(f);
+    for (const auto& fmt : formatters) {
+        if (fmt->inclusion_support_type() != ns)
+            r.push_front(fmt);
     }
     return r;
 }
@@ -159,13 +159,12 @@ void generator::process_element(const yarn::element& e) {
             yarn::building_error(formatter_not_found_for_type + id));
     }
 
-    for (const auto& f : i->second) {
-        const auto fct(f->archetype_location().facet());
-        const auto arch(f->archetype_location().archetype());
+    for (const auto& fmt : i->second) {
+        const auto fct(fmt->archetype_location().facet());
+        const auto arch(fmt->archetype_location().archetype());
         result_->inclusion_by_facet()[fct][arch].push_back(e.name());
         BOOST_LOG_SEV(lg, debug) << "Added name. Id: " << e.name()
-                                 << " Facet: " << fct << " Archetype: "
-                                 << arch;
+                                 << " Facet: " << fct << " Archetype: " << arch;
     }
 }
 

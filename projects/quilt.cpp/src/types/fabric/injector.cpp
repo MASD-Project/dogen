@@ -75,7 +75,7 @@ add_elements(const std::list<boost::shared_ptr<yarn::element>>& elements,
 
 void injector::inject_registrar(yarn::intermediate_model& im) const {
     registrar_factory f;
-    const auto elements(f.build(im));
+    const auto elements(f.make(im));
     add_elements(elements, im);
 }
 
@@ -115,7 +115,7 @@ void injector::inject_master_headers(yarn::intermediate_model& im) const {
 
 void injector::inject_forward_declarations(yarn::intermediate_model& im) const {
     forward_declarations_factory f;
-    const auto e(f.build(im));
+    const auto e(f.make(im));
     add_elements(e, im);
 }
 

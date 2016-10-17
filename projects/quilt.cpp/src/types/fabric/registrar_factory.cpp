@@ -40,7 +40,7 @@ namespace cpp {
 namespace fabric {
 
 boost::shared_ptr<fabric::registrar> registrar_factory::
-build(const yarn::name& model_name) const {
+make(const yarn::name& model_name) const {
     yarn::name_factory nf;
     const auto n(nf.build_element_in_model(model_name, simple_name));
     auto r(boost::make_shared<fabric::registrar>());
@@ -49,12 +49,12 @@ build(const yarn::name& model_name) const {
 }
 
 std::list<boost::shared_ptr<yarn::element>>
-registrar_factory::build(const yarn::intermediate_model& im) const {
+registrar_factory::make(const yarn::intermediate_model& im) const {
     BOOST_LOG_SEV(lg, debug) << "Generating registrars.";
 
     std::list<boost::shared_ptr<yarn::element>> r;
 
-    auto rg(build(im.name()));
+    auto rg(make(im.name()));
     rg->origin_type(im.origin_type());
     for (const auto& l : im.leaves())
         rg->leaves().push_back(l);
@@ -72,7 +72,7 @@ registrar_factory::build(const yarn::intermediate_model& im) const {
         const auto ref(pair.first);
         rg->model_dependencies().push_back(ref);
 
-        auto ref_rg(build(ref));
+        auto ref_rg(make(ref));
         ref_rg->origin_type(origin_type);
         r.push_back(ref_rg);
         rg->registrar_dependencies().push_back(ref_rg->name());

@@ -67,11 +67,15 @@ private:
 
 private:
     void walk_name_tree(const yarn::name_tree& nt, const bool is_top_level,
-        const aspect_properties_type& element_aps, aspect_properties& ac) const;
+        const aspect_properties_type& element_aps, aspect_properties& ap) const;
 
     aspect_properties compute_aspect_properties(
         const aspect_properties_type& element_aps,
-        const std::list<yarn::attribute>& attr) const;
+        const std::list<yarn::attribute>& attrs) const;
+
+    void populate_aspect_properties(const std::string& element_id,
+        const aspect_properties_type& element_aps,
+        formattable& formattable) const;
 
     void populate_aspect_properties(
         const aspect_properties_type& element_aps,

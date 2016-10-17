@@ -38,7 +38,7 @@ namespace fabric {
 class forward_declarations_factory {
 public:
     std::list<boost::shared_ptr<yarn::element>>
-    build(const yarn::intermediate_model& im) const;
+    make(const yarn::intermediate_model& im) const;
 };
 
 } } } }
