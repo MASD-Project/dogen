@@ -32,7 +32,7 @@ namespace formatters {
 namespace io {
 
 std::string associative_container_helper::id() const {
-    static auto r(std::string("<") + traits::facet_name() + std::string(">") +
+    static auto r(std::string("<") + traits::facet() + std::string(">") +
         std::string("<") + helper_name() + std::string(">"));
     return r;
 }
@@ -54,8 +54,8 @@ associative_container_helper::owning_formatters() const {
 std::list<std::string>
 associative_container_helper::owning_facets() const {
     static auto r(std::list<std::string> {
-        io::traits::facet_name(),
-        types::traits::facet_name()
+        io::traits::facet(),
+        types::traits::facet()
     });
     return r;
 }

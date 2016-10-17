@@ -60,7 +60,7 @@ std::string forward_declarations_formatter::id() const {
 annotations::archetype_location
 forward_declarations_formatter::archetype_location() const {
     static annotations::archetype_location
-        r(formatters::traits::model_name(), traits::facet_name(),
+        r(formatters::traits::kernel(), traits::facet(),
             forward_declarations_formatter::static_artefact());
     return r;
 }

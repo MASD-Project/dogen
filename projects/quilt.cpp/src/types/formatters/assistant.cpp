@@ -255,7 +255,7 @@ get_facet_directory_for_facet(const std::string& facet_name) const {
 
 std::string assistant::get_odb_facet_directory() const {
     using formatters::odb::traits;
-    return get_facet_directory_for_facet(traits::facet_name());
+    return get_facet_directory_for_facet(traits::facet());
 }
 
 bool assistant::requires_manual_default_constructor() const {
@@ -285,7 +285,7 @@ bool assistant::is_io_enabled() const {
 
 bool assistant::is_odb_facet_enabled() const {
     using formatters::odb::traits;
-    return is_facet_enabled(traits::facet_name());
+    return is_facet_enabled(traits::facet());
 }
 
 dogen::formatters::cpp::scoped_boilerplate_formatter
@@ -430,7 +430,7 @@ assistant::get_helpers(const formattables::helper_properties& hp) const {
 
 bool assistant::is_io() const {
     const auto fn(ownership_hierarchy_.facet());
-    return formatters::io::traits::facet_name()  == fn;
+    return formatters::io::traits::facet()  == fn;
 }
 
 bool assistant::

@@ -37,7 +37,7 @@ struct traits {
     /**
      * @brief Name of this facet.
      */
-    static std::string facet_name();
+    static std::string facet();
 
     /**
      * @brief Name of the canonical archetype.

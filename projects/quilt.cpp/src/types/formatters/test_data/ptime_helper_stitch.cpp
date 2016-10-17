@@ -30,7 +30,7 @@ namespace formatters {
 namespace test_data {
 
 std::string ptime_helper::id() const {
-    static auto r(std::string("<") + traits::facet_name() + std::string(">") +
+    static auto r(std::string("<") + traits::facet() + std::string(">") +
         std::string("<") + helper_name() + std::string(">"));
     return r;
 }
@@ -51,7 +51,7 @@ ptime_helper::owning_formatters() const {
 std::list<std::string>
 ptime_helper::owning_facets() const {
     static auto r(std::list<std::string> {
-        test_data::traits::facet_name()
+        test_data::traits::facet()
     });
     return r;
 }

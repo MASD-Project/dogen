@@ -37,7 +37,7 @@ namespace formatters {
 namespace serialization {
 
 void initializer::initialize(registrar& rg) {
-    register_formatter<master_header_formatter>(rg, traits::facet_name());
+    register_formatter<master_header_formatter>(rg, traits::facet());
     register_formatter<primitive_header_formatter>(rg);
     register_formatter<class_header_formatter>(rg);
     register_formatter<class_implementation_formatter>(rg);

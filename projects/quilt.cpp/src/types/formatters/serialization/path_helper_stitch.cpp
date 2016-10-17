@@ -30,7 +30,7 @@ namespace formatters {
 namespace serialization {
 
 std::string path_helper::id() const {
-    static auto r(std::string("<") + traits::facet_name() + std::string(">") +
+    static auto r(std::string("<") + traits::facet() + std::string(">") +
         std::string("<") + helper_name() + std::string(">"));
     return r;
 }
@@ -51,7 +51,7 @@ path_helper::owning_formatters() const {
 std::list<std::string>
 path_helper::owning_facets() const {
     static auto r(std::list<std::string> {
-        serialization::traits::facet_name()
+        serialization::traits::facet()
     });
     return r;
 }

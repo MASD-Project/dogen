@@ -138,7 +138,7 @@ bool helper_expander::requires_hashing_helper(const facets_for_family_type& fff,
      * If the hash facet is not present in the helpers for this family
      * then the family does not require hashing support.
      */
-    const auto j(i->second.find(formatters::hash::traits::facet_name()));
+    const auto j(i->second.find(formatters::hash::traits::facet()));
     return j != i->second.end();
 }
 

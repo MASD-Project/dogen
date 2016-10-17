@@ -49,7 +49,7 @@ std::string exception_header_formatter::id() const {
 annotations::archetype_location
 exception_header_formatter::archetype_location() const {
     static annotations::archetype_location
-        r(formatters::traits::model_name(), traits::facet_name(),
+        r(formatters::traits::kernel(), traits::facet(),
             exception_header_formatter::static_artefact());
     return r;
 }

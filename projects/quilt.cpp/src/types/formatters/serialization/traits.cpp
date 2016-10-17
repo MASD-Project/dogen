@@ -27,51 +27,51 @@ namespace cpp {
 namespace formatters {
 namespace serialization {
 
-std::string traits::facet_name() {
-    static std::string r(formatters::traits::model_name() + ".serialization");
+std::string traits::facet() {
+    static std::string r(formatters::traits::kernel() + ".serialization");
     return r;
 }
 
 std::string traits::canonical_archetype() {
-    static std::string r(traits::facet_name() + ".canonical_archetype");
+    static std::string r(traits::facet() + ".canonical_archetype");
     return r;
 }
 
 std::string traits::class_header_archetype() {
-    static std::string r(traits::facet_name() + ".class_header_formatter");
+    static std::string r(traits::facet() + ".class_header_formatter");
     return r;
 }
 
 std::string traits::class_implementation_archetype() {
-    static std::string r(traits::facet_name() +
+    static std::string r(traits::facet() +
         ".class_implementation_formatter");
     return r;
 }
 
 std::string traits::enum_header_archetype() {
-    static std::string r(traits::facet_name() + ".enum_header_formatter");
+    static std::string r(traits::facet() + ".enum_header_formatter");
     return r;
 }
 
 std::string traits::forward_declarations_archetype() {
-    static std::string r(traits::facet_name() +
+    static std::string r(traits::facet() +
         ".forward_declarations_formatter");
     return r;
 }
 
 std::string traits::registrar_header_archetype() {
-    static std::string r(traits::facet_name() + ".registrar_header_formatter");
+    static std::string r(traits::facet() + ".registrar_header_formatter");
     return r;
 }
 
 std::string traits::registrar_implementation_archetype() {
-    static std::string r(traits::facet_name() +
+    static std::string r(traits::facet() +
         ".registrar_implementation_formatter");
     return r;
 }
 
 std::string traits::primitive_header_archetype() {
-    static std::string r(traits::facet_name() + ".primitive_header_formatter");
+    static std::string r(traits::facet() + ".primitive_header_formatter");
     return r;
 }
 

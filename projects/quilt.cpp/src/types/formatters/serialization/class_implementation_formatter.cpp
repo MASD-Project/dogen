@@ -60,7 +60,7 @@ std::string class_implementation_formatter::id() const {
 annotations::archetype_location
 class_implementation_formatter::archetype_location() const {
     static annotations::archetype_location
-        r(formatters::traits::model_name(), traits::facet_name(),
+        r(formatters::traits::kernel(), traits::facet(),
             class_implementation_formatter::static_artefact());
     return r;
 }

@@ -31,7 +31,7 @@ namespace hash {
 
 
 std::string time_duration_helper::id() const {
-    static auto r(std::string("<") + traits::facet_name() + std::string(">") +
+    static auto r(std::string("<") + traits::facet() + std::string(">") +
         std::string("<") + helper_name() + std::string(">"));
     return r;
 }
@@ -52,7 +52,7 @@ time_duration_helper::owning_formatters() const {
 std::list<std::string>
 time_duration_helper::owning_facets() const {
     static auto r(std::list<std::string> {
-        hash::traits::facet_name()
+        hash::traits::facet()
     });
     return r;
 }

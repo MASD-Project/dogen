@@ -25,17 +25,17 @@ namespace quilt {
 namespace cpp {
 namespace formatters {
 
-std::string traits::model_name() {
+std::string traits::kernel() {
     static std::string r("quilt.cpp");
     return r;
 }
 
 std::string traits::
-master_header_archetype(const std::string& facet_name) {
-    return facet_name + ".master_header_formatter";
+master_header_archetype(const std::string& facet) {
+    return facet + ".master_header_formatter";
 }
 
-std::string traits::cmake_facet_name() {
+std::string traits::cmake_facet() {
     static std::string r("quilt.cpp.cmake");
     return r;
 }
@@ -50,8 +50,8 @@ std::string traits::source_cmakelists_archetype() {
     return r;
 }
 
-std::string traits::canonical_archetype(const std::string& facet_name) {
-    return facet_name + ".canonical_archetype";
+std::string traits::canonical_archetype(const std::string& facet) {
+    return facet + ".canonical_archetype";
 }
 
 } } } }

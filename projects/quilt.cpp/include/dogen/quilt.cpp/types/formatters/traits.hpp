@@ -34,20 +34,20 @@ namespace formatters {
 
 struct traits {
     /**
-     * @brief Name of this model.
+     * @brief Name of this kernel
      */
-    static std::string model_name();
+    static std::string kernel();
 
     /**
      * @brief Name of the master header archetype for a given facet.
      */
-    static std::string master_header_archetype(const std::string& facet_name);
+    static std::string master_header_archetype(const std::string& facet);
 
-    static std::string cmake_facet_name();
+    static std::string cmake_facet();
     static std::string include_cmakelists_archetype();
     static std::string source_cmakelists_archetype();
 
-    static std::string canonical_archetype(const std::string& facet_name);
+    static std::string canonical_archetype(const std::string& facet);
 };
 
 } } } }
