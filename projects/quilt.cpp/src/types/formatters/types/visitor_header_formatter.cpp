@@ -41,7 +41,7 @@ std::string visitor_header_formatter::static_artefact() {
     return traits::visitor_header_archetype();
 }
 
-std::string visitor_header_formatter::id() const {
+std::string visitor_header_formatter::formatter_name() const {
     static auto r(archetype_location().archetype());
     return r;
 }

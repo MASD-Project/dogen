@@ -41,7 +41,7 @@ std::string forward_declarations_formatter::static_artefact() {
     return traits::forward_declarations_archetype();
 }
 
-std::string forward_declarations_formatter::id() const {
+std::string forward_declarations_formatter::formatter_name() const {
     static auto r(archetype_location().archetype());
     return r;
 }

@@ -35,7 +35,7 @@ namespace cpp {
 namespace formatters {
 namespace test_data {
 
-std::string class_header_formatter::id() const {
+std::string class_header_formatter::formatter_name() const {
     static auto r(archetype_location().archetype());
     return r;
 }

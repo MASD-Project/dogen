@@ -48,7 +48,7 @@ std::string include_cmakelists_formatter::static_artefact() {
     return traits::include_cmakelists_archetype();
 }
 
-std::string include_cmakelists_formatter::id() const {
+std::string include_cmakelists_formatter::formatter_name() const {
     static auto r(archetype_location().archetype());
     return r;
 }

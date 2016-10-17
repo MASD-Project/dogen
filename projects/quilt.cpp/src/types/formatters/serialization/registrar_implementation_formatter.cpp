@@ -53,7 +53,7 @@ std::string registrar_implementation_formatter::static_artefact() {
     return traits::registrar_implementation_archetype();
 }
 
-std::string registrar_implementation_formatter::id() const {
+std::string registrar_implementation_formatter::formatter_name() const {
     static auto r(archetype_location().archetype());
     return r;
 }

@@ -52,7 +52,7 @@ std::string odb_options_formatter::static_artefact() {
     return traits::odb_options_archetype();
 }
 
-std::string odb_options_formatter::id() const {
+std::string odb_options_formatter::formatter_name() const {
     static auto r(archetype_location().archetype());
     return r;
 }

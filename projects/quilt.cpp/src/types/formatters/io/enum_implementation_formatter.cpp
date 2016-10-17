@@ -53,7 +53,7 @@ std::string enum_implementation_formatter::static_artefact() {
     return traits::enum_implementation_archetype();
 }
 
-std::string enum_implementation_formatter::id() const {
+std::string enum_implementation_formatter::formatter_name() const {
     static auto r(archetype_location().archetype());
     return r;
 }

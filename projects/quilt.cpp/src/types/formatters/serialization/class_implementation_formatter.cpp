@@ -52,7 +52,7 @@ std::string class_implementation_formatter::static_artefact() {
     return traits::class_implementation_archetype();
 }
 
-std::string class_implementation_formatter::id() const {
+std::string class_implementation_formatter::formatter_name() const {
     static auto r(archetype_location().archetype());
     return r;
 }
