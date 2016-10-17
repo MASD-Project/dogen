@@ -61,7 +61,7 @@ to_header_guard(const boost::filesystem::path& p) const {
 void file_path_and_guard_expander::
 expand(const formatters::container& fc, const locator& l, model& fm) const {
 
-    const auto fffn(fc.file_formatters_by_formatter_name());
+    const auto ffba(fc.file_formatters_by_archetype());
     for (auto& pair : fm.formattables()) {
         const auto id(pair.first);
         auto& formattable(pair.second);
@@ -83,8 +83,8 @@ expand(const formatters::container& fc, const locator& l, model& fm) const {
             const auto arch(art_props_pair.first);
             auto& art_props(art_props_pair.second);
 
-            const auto i(fffn.find(arch));
-            if (i == fffn.end()) {
+            const auto i(ffba.find(arch));
+            if (i == ffba.end()) {
                 BOOST_LOG_SEV(lg, error) << missing_archetype << arch;
                 BOOST_THROW_EXCEPTION(
                     expansion_error(missing_archetype + arch));

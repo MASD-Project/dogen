@@ -64,13 +64,11 @@ std::list<std::string> visitor_header_formatter::inclusion_dependencies(
     const yarn::element& e) const {
     const auto& v(assistant::as<yarn::visitor>(static_artefact(), e));
     auto builder(f.make());
-    const auto fwd_fn(traits::forward_declarations_archetype());
-    builder.add(v.visits(), fwd_fn);
+    builder.add(v.visits(), traits::forward_declarations_archetype());
 
-    if (v.parent()) {
-        const auto v_fn(traits::visitor_header_archetype());
-        builder.add(*v.parent(), v_fn);
-    }
+    if (v.parent())
+        builder.add(*v.parent(), traits::visitor_header_archetype());
+
     return builder.build();
 }
 

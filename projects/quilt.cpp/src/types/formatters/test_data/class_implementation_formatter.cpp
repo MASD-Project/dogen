@@ -77,8 +77,7 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
 
     const auto& o(assistant::as<yarn::object>(static_artefact(), e));
     auto builder(f.make());
-    const auto ch_fn(traits::class_header_archetype());
-    builder.add(o.name(), ch_fn);
+    builder.add(o.name(), traits::class_header_archetype());
 
     const auto si(builder.make_special_includes(o));
     if (si.has_path || si.has_std_string)

@@ -58,17 +58,16 @@ private:
     file_formatters_by_type_index();
 
     /**
-     * @brief Returns all available file formatters by formatter name.
+     * @brief Returns all available file formatters by archetype name.
      */
     std::unordered_map<std::string, std::shared_ptr<file_formatter_interface>>&
-    file_formatters_by_formatter_name();
+    file_formatters_by_archetype();
 
     /**
      * @brief Returns all available file formatters.
      */
     std::forward_list<std::shared_ptr<file_formatter_interface>>&
     file_formatters();
-
 
     /**
      * @brief Returns all available helpers.
@@ -94,7 +93,7 @@ public:
      */
     const std::unordered_map<std::string,
                              std::shared_ptr<file_formatter_interface>>&
-    file_formatters_by_formatter_name() const;
+    file_formatters_by_archetype() const;
 
     /**
      * @brief Returns all available file formatters.

@@ -77,13 +77,13 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
     const auto& o(assistant::as<yarn::object>(static_artefact(), e));
     auto builder(f.make());
 
-    const auto ch_fn(traits::class_header_archetype());
-    builder.add(o.name(), ch_fn);
-    builder.add(o.opaque_associations(), ch_fn);
+    const auto ch_arch(traits::class_header_archetype());
+    builder.add(o.name(), ch_arch);
+    builder.add(o.opaque_associations(), ch_arch);
 
-    const auto io_fn(formatters::io::traits::class_header_archetype());
+    const auto io_arch(formatters::io::traits::class_header_archetype());
     const bool in_inheritance(o.is_parent() || o.is_child());
-    const bool io_enabled(builder.is_enabled(o.name(), io_fn));
+    const bool io_enabled(builder.is_enabled(o.name(), io_arch));
     const bool requires_io(io_enabled && in_inheritance);
 
     if (!requires_io)
@@ -110,15 +110,14 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
          * don't bother including the base if we are already including
          * the derived visitor.
          */
-        const auto v_fn(traits::visitor_header_archetype());
+        const auto v_arch(traits::visitor_header_archetype());
         if (o.derived_visitor())
-            builder.add(*o.derived_visitor(), v_fn);
+            builder.add(*o.derived_visitor(), v_arch);
         else
-            builder.add(*o.base_visitor(), v_fn);
+            builder.add(*o.base_visitor(), v_arch);
     }
 
     return builder.build();
-
 }
 
 inclusion_support_types class_implementation_formatter::

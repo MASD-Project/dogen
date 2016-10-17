@@ -62,8 +62,7 @@ std::list<std::string> enum_header_formatter::inclusion_dependencies(
     const yarn::element& e) const {
     auto builder(f.make());
 
-    const auto eh_fn(types::traits::enum_header_archetype());
-    builder.add(e.name(), eh_fn);
+    builder.add(e.name(), types::traits::enum_header_archetype());
     return builder.build();
 }
 

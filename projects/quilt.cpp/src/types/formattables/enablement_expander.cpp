@@ -47,7 +47,7 @@ const std::string global_configuration_not_found(
 const std::string local_configuration_not_found(
     "Could not find local enablement configuration for formatter: ");
 const std::string duplicate_archetype_name("Duplicate archetype name: ");
-const std::string formatter_not_found("Formatter not found: ");
+const std::string archetype_not_found("Formatter not found: ");
 const std::string element_not_found("Element not found: ");
 const std::string default_value_unset("Default value not set for field: ");
 
@@ -176,15 +176,15 @@ void enablement_expander::update_facet_enablement(
      *
      * FIXME: read facet fields here instead of reusing configuration.
      */
-    const auto& fffn(fc.file_formatters_by_formatter_name());
+    const auto& ffba(fc.file_formatters_by_archetype());
     auto& fct_props(fm.facet_properties());
     for (const auto& pair : gcs) {
         const auto arch(pair.first);
-        const auto i(fffn.find(arch));
-        if (i == fffn.end()) {
-            BOOST_LOG_SEV(lg, error) << formatter_not_found << arch;
+        const auto i(ffba.find(arch));
+        if (i == ffba.end()) {
+            BOOST_LOG_SEV(lg, error) << archetype_not_found << arch;
             BOOST_THROW_EXCEPTION(
-                expansion_error(formatter_not_found + arch));
+                expansion_error(archetype_not_found + arch));
         }
 
         const auto& fmt(*i->second);
@@ -247,13 +247,12 @@ enablement_expander::bucket_local_type_group_by_type_index(
 
         local_type_group_type& ltg(r[ti]);
         for (const auto& fmt: fmts) {
-            const auto fmtn(fmt->formatter_name());
             const auto arch(fmt->archetype_location().archetype());
             const auto i(unbucketed_ltgs.find(arch));
             if (i == unbucketed_ltgs.end()) {
-                BOOST_LOG_SEV(lg, error) << formatter_not_found << fmtn;
+                BOOST_LOG_SEV(lg, error) << archetype_not_found << arch;
                 BOOST_THROW_EXCEPTION(
-                    expansion_error(formatter_not_found + fmtn));
+                    expansion_error(archetype_not_found + arch));
             }
 
             const auto pair(std::make_pair(arch, i->second));

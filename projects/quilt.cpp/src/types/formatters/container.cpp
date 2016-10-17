@@ -35,7 +35,7 @@ container::file_formatters_by_type_index() {
 }
 
 std::unordered_map<std::string, std::shared_ptr<file_formatter_interface>>&
-container::file_formatters_by_formatter_name() {
+container::file_formatters_by_archetype() {
     return file_formatters_by_formatter_name_;
 }
 
@@ -62,7 +62,7 @@ container::file_formatters_by_type_index() const {
 
 const std::unordered_map<std::string,
                          std::shared_ptr<file_formatter_interface>>&
-container::file_formatters_by_formatter_name() const {
+container::file_formatters_by_archetype() const {
     return file_formatters_by_formatter_name_;
 }
 

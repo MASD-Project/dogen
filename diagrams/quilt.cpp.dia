@@ -5656,7 +5656,7 @@ facet of the C++ language.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#file_formatters_by_formatter_name#</dia:string>
+            <dia:string>#file_formatters_by_archetype#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::unordered_map&lt;std::string, formatters::file_formatter_interface&gt;#</dia:string>

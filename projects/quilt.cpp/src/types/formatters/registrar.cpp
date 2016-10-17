@@ -173,12 +173,12 @@ register_formatter(std::shared_ptr<file_formatter_interface> f) {
     ti.push_front(f);
 
     /*
-     * Add formatter to the index by formatter name.  Inserting the
+     * Add formatter to the index by archetype name. Inserting the
      * formatter into this container has the helpful side-effect of
      * ensuring the formatter id is unique in formatter space.
      */
     const auto arch(al.archetype());
-    auto& fffn(formatter_container_.file_formatters_by_formatter_name());
+    auto& fffn(formatter_container_.file_formatters_by_archetype());
     const auto pair(std::make_pair(arch, f));
     const auto inserted(fffn.insert(pair).second);
     if (!inserted) {
