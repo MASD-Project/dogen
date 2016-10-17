@@ -45,7 +45,7 @@ public:
 
 public:
     archetype_location_repository(
-        const std::vector<dogen::annotations::archetype_location>& ownership_hierarchies,
+        const std::vector<dogen::annotations::archetype_location>& archetype_locations,
         const std::unordered_map<std::string, std::unordered_set<std::string> >& facet_names_by_model_name,
         const std::unordered_map<std::string, std::unordered_set<std::string> >& formatter_names_by_model_name);
 
@@ -57,10 +57,10 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::annotations::archetype_location_repository& v, unsigned int version);
 
 public:
-    const std::vector<dogen::annotations::archetype_location>& ownership_hierarchies() const;
-    std::vector<dogen::annotations::archetype_location>& ownership_hierarchies();
-    void ownership_hierarchies(const std::vector<dogen::annotations::archetype_location>& v);
-    void ownership_hierarchies(const std::vector<dogen::annotations::archetype_location>&& v);
+    const std::vector<dogen::annotations::archetype_location>& archetype_locations() const;
+    std::vector<dogen::annotations::archetype_location>& archetype_locations();
+    void archetype_locations(const std::vector<dogen::annotations::archetype_location>& v);
+    void archetype_locations(const std::vector<dogen::annotations::archetype_location>&& v);
 
     const std::unordered_map<std::string, std::unordered_set<std::string> >& facet_names_by_model_name() const;
     std::unordered_map<std::string, std::unordered_set<std::string> >& facet_names_by_model_name();
@@ -83,7 +83,7 @@ public:
     archetype_location_repository& operator=(archetype_location_repository other);
 
 private:
-    std::vector<dogen::annotations::archetype_location> ownership_hierarchies_;
+    std::vector<dogen::annotations::archetype_location> archetype_locations_;
     std::unordered_map<std::string, std::unordered_set<std::string> > facet_names_by_model_name_;
     std::unordered_map<std::string, std::unordered_set<std::string> > formatter_names_by_model_name_;
 };

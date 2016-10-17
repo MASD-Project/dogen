@@ -178,16 +178,16 @@ instantiate_global_template(const type_template& tt) const {
         }
     }
 
-    for (const auto oh : repository_.ownership_hierarchies()) {
+    for (const auto al : repository_.archetype_locations()) {
         if (!tt.ownership_hierarchy().kernel().empty() &&
-            tt.ownership_hierarchy().kernel() != oh.kernel())
+            tt.ownership_hierarchy().kernel() != al.kernel())
             continue;
 
         auto t(to_type(tt));
 
-        const auto fn(oh.archetype());
-        t.name().qualified(fn + "." + tt.name().simple());
-        t.ownership_hierarchy(oh);
+        const auto arch(al.archetype());
+        t.name().qualified(arch + "." + tt.name().simple());
+        t.ownership_hierarchy(al);
         r.push_back(t);
     }
     return r;
@@ -218,19 +218,19 @@ instantiate_facet_template(const type_template& tt) const {
 std::list<type> template_instantiator::
 instantiate_formatter_template(const type_template& tt) const {
     std::list<type> r;
-    for (const auto oh : repository_.ownership_hierarchies()) {
+    for (const auto al : repository_.archetype_locations()) {
         if (!tt.ownership_hierarchy().kernel().empty() &&
-            tt.ownership_hierarchy().kernel() != oh.kernel())
+            tt.ownership_hierarchy().kernel() != al.kernel())
             continue;
 
         if (!tt.ownership_hierarchy().facet().empty() &&
-            tt.ownership_hierarchy().facet() != oh.facet())
+            tt.ownership_hierarchy().facet() != al.facet())
             continue;
 
         auto t(to_type(tt));
-        const auto fn(oh.archetype());
-        t.name().qualified(fn + "." + t.name().simple());
-        t.ownership_hierarchy(oh);
+        const auto arch(al.archetype());
+        t.name().qualified(arch + "." + t.name().simple());
+        t.ownership_hierarchy(al);
         r.push_back(t);
     }
     return r;
@@ -260,14 +260,14 @@ template_instantiator::instantiate_global_template(
         }
     }
 
-    for (const auto oh : repository_.ownership_hierarchies()) {
+    for (const auto al : repository_.archetype_locations()) {
         if (!et.ownership_hierarchy().kernel().empty() &&
-            et.ownership_hierarchy().kernel() != oh.kernel())
+            et.ownership_hierarchy().kernel() != al.kernel())
             continue;
 
         std::pair<std::string, boost::shared_ptr<value>> entry;
-        const auto fn(oh.archetype());
-        entry.first = fn + "." + et.name().simple();
+        const auto arch(al.archetype());
+        entry.first = arch + "." + et.name().simple();
         entry.second = to_value(trp, entry.first, et);
         r.push_back(entry);
     }
@@ -303,18 +303,18 @@ template_instantiator::instantiate_formatter_template(
     const type_repository& trp, const entry_template& et) const {
     std::list<std::pair<std::string, boost::shared_ptr<value>>> r;
 
-    for (const auto oh : repository_.ownership_hierarchies()) {
+    for (const auto al : repository_.archetype_locations()) {
         if (!et.ownership_hierarchy().kernel().empty() &&
-            et.ownership_hierarchy().kernel() != oh.kernel())
+            et.ownership_hierarchy().kernel() != al.kernel())
             continue;
 
         if (!et.ownership_hierarchy().facet().empty() &&
-            et.ownership_hierarchy().facet() != oh.facet())
+            et.ownership_hierarchy().facet() != al.facet())
             continue;
 
         std::pair<std::string, boost::shared_ptr<value>> entry;
-        const auto fn(oh.archetype());
-        entry.first = fn + "." + et.name().simple();
+        const auto arch(al.archetype());
+        entry.first = arch + "." + et.name().simple();
         entry.second = to_value(trp, entry.first, et);
         r.push_back(entry);
     }

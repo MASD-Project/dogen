@@ -65,14 +65,14 @@ validate(const std::list<archetype_location>& als) const {
 void archetype_location_repository_factory::
 populate_archetype_locations(const std::list<archetype_location>& als,
     archetype_location_repository& rp) const {
-    rp.ownership_hierarchies().reserve(als.size());
+    rp.archetype_locations().reserve(als.size());
     for (const auto& al : als)
-        rp.ownership_hierarchies().push_back(al);
+        rp.archetype_locations().push_back(al);
 }
 
 void archetype_location_repository_factory::
 populate_facet_names_by_model_name(archetype_location_repository& rp) const {
-    for (const auto& al : rp.ownership_hierarchies())
+    for (const auto& al : rp.archetype_locations())
         rp.facet_names_by_model_name()[al.kernel()].insert(al.facet());
 }
 
@@ -80,7 +80,7 @@ void archetype_location_repository_factory::
 populate_formatter_names_by_model_name(
     archetype_location_repository& rp) const {
 
-    for (const auto& al : rp.ownership_hierarchies()) {
+    for (const auto& al : rp.archetype_locations()) {
         const auto arch(al.archetype());
         rp.formatter_names_by_model_name()[al.kernel()].insert(arch);
     }

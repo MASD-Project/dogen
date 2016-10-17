@@ -68,7 +68,7 @@ archetype_location_repository_generator::archetype_location_repository_generator
 
 void archetype_location_repository_generator::
 populate(const unsigned int position, result_type& v) {
-    v.ownership_hierarchies(create_std_vector_dogen_annotations_archetype_location(position + 0));
+    v.archetype_locations(create_std_vector_dogen_annotations_archetype_location(position + 0));
     v.facet_names_by_model_name(create_std_unordered_map_std_string_std_unordered_set_std_string(position + 1));
     v.formatter_names_by_model_name(create_std_unordered_map_std_string_std_unordered_set_std_string(position + 2));
 }
