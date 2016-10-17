@@ -37,7 +37,7 @@ namespace {
 using namespace dogen::utility::log;
 using namespace dogen::quilt::cpp::formatters::serialization;
 static logger lg(logger_factory(
-        registrar_implementation_formatter::static_formatter_name()));
+        registrar_implementation_formatter::static_artefact()));
 
 const std::string not_supported("Inclusion path is not supported: ");
 
@@ -49,7 +49,7 @@ namespace cpp {
 namespace formatters {
 namespace serialization {
 
-std::string registrar_implementation_formatter::static_formatter_name() {
+std::string registrar_implementation_formatter::static_artefact() {
     return traits::registrar_implementation_archetype();
 }
 
@@ -62,7 +62,7 @@ annotations::archetype_location
 registrar_implementation_formatter::archetype_location() const {
     static annotations::archetype_location
         r(formatters::traits::model_name(), traits::facet_name(),
-            registrar_implementation_formatter::static_formatter_name());
+            registrar_implementation_formatter::static_artefact());
     return r;
 }
 
@@ -75,7 +75,7 @@ std::list<std::string> registrar_implementation_formatter::
 inclusion_dependencies(
     const formattables::inclusion_dependencies_builder_factory& f,
     const yarn::element& e) const {
-    const auto fmtn(static_formatter_name());
+    const auto fmtn(static_artefact());
     const auto& rg(assistant::as<fabric::registrar>(fmtn, e));
     auto builder(f.make());
 
@@ -115,14 +115,14 @@ boost::filesystem::path registrar_implementation_formatter::inclusion_path(
 
 boost::filesystem::path registrar_implementation_formatter::full_path(
     const formattables::locator& l, const yarn::name& n) const {
-    return l.make_full_path_for_cpp_implementation(n, static_formatter_name());
+    return l.make_full_path_for_cpp_implementation(n, static_artefact());
 }
 
 dogen::formatters::artefact registrar_implementation_formatter::
 format(const context& ctx, const yarn::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), false/*requires_header_guard*/, id);
-    const auto& rg(a.as<fabric::registrar>(static_formatter_name(), e));
+    const auto& rg(a.as<fabric::registrar>(static_artefact(), e));
     const auto r(registrar_implementation_formatter_stitch(a, rg));
     return r;
 }

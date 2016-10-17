@@ -35,7 +35,7 @@ namespace cpp {
 namespace formatters {
 namespace io {
 
-std::string class_header_formatter::static_formatter_name() {
+std::string class_header_formatter::static_artefact() {
     return traits::class_header_archetype();
 }
 
@@ -75,19 +75,19 @@ inclusion_support_types class_header_formatter::inclusion_support_type() const {
 
 boost::filesystem::path class_header_formatter::inclusion_path(
     const formattables::locator& l, const yarn::name& n) const {
-    return l.make_inclusion_path_for_cpp_header(n, static_formatter_name());
+    return l.make_inclusion_path_for_cpp_header(n, static_artefact());
 }
 
 boost::filesystem::path class_header_formatter::full_path(
     const formattables::locator& l, const yarn::name& n) const {
-    return l.make_full_path_for_cpp_header(n, static_formatter_name());
+    return l.make_full_path_for_cpp_header(n, static_artefact());
 }
 
 dogen::formatters::artefact class_header_formatter::
 format(const context& ctx, const yarn::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), false/*requires_header_guard*/, id);
-    const auto& yo(a.as<yarn::object>(static_formatter_name(), e));
+    const auto& yo(a.as<yarn::object>(static_artefact(), e));
     const auto r(class_header_formatter_stitch(a, yo));
     return r;
 }

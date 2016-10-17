@@ -33,7 +33,7 @@ namespace {
 using namespace dogen::utility::log;
 using namespace dogen::quilt::cpp::formatters;
 static logger lg(
-    logger_factory(source_cmakelists_formatter::static_formatter_name()));
+    logger_factory(source_cmakelists_formatter::static_artefact()));
 
 const std::string not_supported("Inclusion path is not supported: ");
 
@@ -44,7 +44,7 @@ namespace quilt {
 namespace cpp {
 namespace formatters {
 
-std::string source_cmakelists_formatter::static_formatter_name() {
+std::string source_cmakelists_formatter::static_artefact() {
     return traits::source_cmakelists_archetype();
 }
 
@@ -57,7 +57,7 @@ annotations::archetype_location source_cmakelists_formatter::
 archetype_location() const {
     static annotations::archetype_location
         r(formatters::traits::model_name(), traits::cmake_facet_name(),
-            source_cmakelists_formatter::static_formatter_name());
+            source_cmakelists_formatter::static_artefact());
     return r;
 }
 
@@ -86,14 +86,14 @@ boost::filesystem::path source_cmakelists_formatter::inclusion_path(
 
 boost::filesystem::path source_cmakelists_formatter::full_path(
     const formattables::locator& l, const yarn::name& n) const {
-    return l.make_full_path_for_source_cmakelists(n, static_formatter_name());
+    return l.make_full_path_for_source_cmakelists(n, static_artefact());
 }
 
 dogen::formatters::artefact source_cmakelists_formatter::
 format(const context& ctx, const yarn::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), false/*requires_header_guard*/, id);
-    const auto& cm(a.as<fabric::cmakelists>(static_formatter_name(), e));
+    const auto& cm(a.as<fabric::cmakelists>(static_artefact(), e));
     const auto r(source_cmakelists_formatter_stitch(a, cm));
     return r;
 }

@@ -37,7 +37,7 @@ namespace cpp {
 namespace formatters {
 namespace types {
 
-std::string visitor_header_formatter::static_formatter_name() {
+std::string visitor_header_formatter::static_artefact() {
     return traits::visitor_header_archetype();
 }
 
@@ -50,7 +50,7 @@ annotations::archetype_location
 visitor_header_formatter::archetype_location() const {
     static annotations::archetype_location
         r(formatters::traits::model_name(), traits::facet_name(),
-            visitor_header_formatter::static_formatter_name());
+            visitor_header_formatter::static_artefact());
     return r;
 }
 
@@ -62,7 +62,7 @@ std::type_index visitor_header_formatter::element_type_index() const {
 std::list<std::string> visitor_header_formatter::inclusion_dependencies(
     const formattables::inclusion_dependencies_builder_factory& f,
     const yarn::element& e) const {
-    const auto& v(assistant::as<yarn::visitor>(static_formatter_name(), e));
+    const auto& v(assistant::as<yarn::visitor>(static_artefact(), e));
     auto builder(f.make());
     const auto fwd_fn(traits::forward_declarations_archetype());
     builder.add(v.visits(), fwd_fn);
@@ -82,19 +82,19 @@ inclusion_support_type() const {
 
 boost::filesystem::path visitor_header_formatter::inclusion_path(
     const formattables::locator& l, const yarn::name& n) const {
-    return l.make_inclusion_path_for_cpp_header(n, static_formatter_name());
+    return l.make_inclusion_path_for_cpp_header(n, static_artefact());
 }
 
 boost::filesystem::path visitor_header_formatter::full_path(
     const formattables::locator& l, const yarn::name& n) const {
-    return l.make_full_path_for_cpp_header(n, static_formatter_name());
+    return l.make_full_path_for_cpp_header(n, static_artefact());
 }
 
 dogen::formatters::artefact visitor_header_formatter::
 format(const context& ctx, const yarn::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), true/*requires_header_guard*/, id);
-    const auto& v(a.as<yarn::visitor>(static_formatter_name(), e));
+    const auto& v(a.as<yarn::visitor>(static_artefact(), e));
     const auto r(visitor_header_formatter_stitch(a, v));
     return r;
 }

@@ -37,7 +37,7 @@ namespace cpp {
 namespace formatters {
 namespace serialization {
 
-std::string forward_declarations_formatter::static_formatter_name() {
+std::string forward_declarations_formatter::static_artefact() {
     return traits::forward_declarations_archetype();
 }
 
@@ -50,7 +50,7 @@ annotations::archetype_location
 forward_declarations_formatter::archetype_location() const {
     static annotations::archetype_location
         r(formatters::traits::model_name(), traits::facet_name(),
-            forward_declarations_formatter::static_formatter_name());
+            forward_declarations_formatter::static_artefact());
     return r;
 }
 
@@ -78,12 +78,12 @@ inclusion_support_type() const {
 
 boost::filesystem::path forward_declarations_formatter::inclusion_path(
     const formattables::locator& l, const yarn::name& n) const {
-    return l.make_inclusion_path_for_cpp_header(n, static_formatter_name());
+    return l.make_inclusion_path_for_cpp_header(n, static_artefact());
 }
 
 boost::filesystem::path forward_declarations_formatter::full_path(
     const formattables::locator& l, const yarn::name& n) const {
-    return l.make_full_path_for_cpp_header(n, static_formatter_name());
+    return l.make_full_path_for_cpp_header(n, static_artefact());
 }
 
 dogen::formatters::artefact forward_declarations_formatter::
@@ -91,7 +91,7 @@ format(const context& ctx, const yarn::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), true/*requires_header_guard*/, id);
 
-    const auto fmtn(static_formatter_name());
+    const auto fmtn(static_artefact());
     const auto& fd(a.as<fabric::forward_declarations>(fmtn, e));
 
     // FIXME: hack: legacy formatters do not support serialisation

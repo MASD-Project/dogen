@@ -48,7 +48,7 @@ namespace cpp {
 namespace formatters {
 namespace odb {
 
-std::string odb_options_formatter::static_formatter_name() {
+std::string odb_options_formatter::static_artefact() {
     return traits::odb_options_archetype();
 }
 
@@ -61,7 +61,7 @@ annotations::archetype_location
 odb_options_formatter::archetype_location() const {
     static annotations::archetype_location
         r(formatters::traits::model_name(), traits::facet_name(),
-            odb_options_formatter::static_formatter_name());
+            odb_options_formatter::static_artefact());
     return r;
 }
 
@@ -89,14 +89,14 @@ boost::filesystem::path odb_options_formatter::inclusion_path(
 
 boost::filesystem::path odb_options_formatter::full_path(
     const formattables::locator& l, const yarn::name& n) const {
-    return l.make_full_path_for_odb_options(n, static_formatter_name());
+    return l.make_full_path_for_odb_options(n, static_artefact());
 }
 
 dogen::formatters::artefact odb_options_formatter::
 format(const context& ctx, const yarn::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), false/*requires_header_guard*/, id);
-    const auto& oo(a.as<fabric::odb_options>(static_formatter_name(), e));
+    const auto& oo(a.as<fabric::odb_options>(static_artefact(), e));
     const auto r(odb_options_formatter_stitch(a, oo));
     return r;
 }

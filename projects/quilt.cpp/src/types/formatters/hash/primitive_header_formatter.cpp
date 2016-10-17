@@ -34,7 +34,7 @@ namespace cpp {
 namespace formatters {
 namespace hash {
 
-std::string primitive_header_formatter::static_formatter_name() {
+std::string primitive_header_formatter::static_artefact() {
     return traits::primitive_header_archetype();
 }
 
@@ -47,7 +47,7 @@ annotations::archetype_location
 primitive_header_formatter::archetype_location() const {
     static annotations::archetype_location
         r(formatters::traits::model_name(), traits::facet_name(),
-            primitive_header_formatter::static_formatter_name());
+            primitive_header_formatter::static_artefact());
     return r;
 }
 
@@ -70,12 +70,12 @@ primitive_header_formatter::inclusion_support_type() const {
 
 boost::filesystem::path primitive_header_formatter::inclusion_path(
     const formattables::locator& l, const yarn::name& n) const {
-    return l.make_inclusion_path_for_cpp_header(n, static_formatter_name());
+    return l.make_inclusion_path_for_cpp_header(n, static_artefact());
 }
 
 boost::filesystem::path primitive_header_formatter::full_path(
     const formattables::locator& l, const yarn::name& n) const {
-    return l.make_full_path_for_cpp_header(n, static_formatter_name());
+    return l.make_full_path_for_cpp_header(n, static_artefact());
 }
 
 dogen::formatters::artefact primitive_header_formatter::

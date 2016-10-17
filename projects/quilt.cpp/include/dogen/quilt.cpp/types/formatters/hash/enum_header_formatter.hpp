@@ -41,7 +41,7 @@ public:
     /**
      * @brief Returns the formatter name.
      */
-    static std::string static_formatter_name();
+    static std::string static_artefact();
 
 public:
     std::string id() const override;

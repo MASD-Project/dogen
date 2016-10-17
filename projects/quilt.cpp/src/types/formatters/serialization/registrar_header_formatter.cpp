@@ -32,7 +32,7 @@ namespace cpp {
 namespace formatters {
 namespace serialization {
 
-std::string registrar_header_formatter::static_formatter_name() {
+std::string registrar_header_formatter::static_artefact() {
     return traits::registrar_header_archetype();
 }
 
@@ -45,7 +45,7 @@ annotations::archetype_location
 registrar_header_formatter::archetype_location() const {
     static annotations::archetype_location
         r(formatters::traits::model_name(), traits::facet_name(),
-            registrar_header_formatter::static_formatter_name());
+            registrar_header_formatter::static_artefact());
     return r;
 }
 
@@ -68,19 +68,19 @@ inclusion_support_type() const {
 
 boost::filesystem::path registrar_header_formatter::inclusion_path(
     const formattables::locator& l, const yarn::name& n) const {
-    return l.make_inclusion_path_for_cpp_header(n, static_formatter_name());
+    return l.make_inclusion_path_for_cpp_header(n, static_artefact());
 }
 
 boost::filesystem::path registrar_header_formatter::full_path(
     const formattables::locator& l, const yarn::name& n) const {
-    return l.make_full_path_for_cpp_header(n, static_formatter_name());
+    return l.make_full_path_for_cpp_header(n, static_artefact());
 }
 
 dogen::formatters::artefact registrar_header_formatter::
 format(const context& ctx, const yarn::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), false/*requires_header_guard*/, id);
-    const auto& rg(a.as<fabric::registrar>(static_formatter_name(), e));
+    const auto& rg(a.as<fabric::registrar>(static_artefact(), e));
     const auto r(registrar_header_formatter_stitch(a, rg));
     return r;
 }

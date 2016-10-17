@@ -37,7 +37,7 @@ namespace cpp {
 namespace formatters {
 namespace types {
 
-std::string class_header_formatter::static_formatter_name() {
+std::string class_header_formatter::static_artefact() {
     return traits::class_header_archetype();
 }
 
@@ -50,7 +50,7 @@ annotations::archetype_location
 class_header_formatter::archetype_location() const {
     static annotations::archetype_location
         r(formatters::traits::model_name(), traits::facet_name(),
-            class_header_formatter::static_formatter_name());
+            class_header_formatter::static_artefact());
     return r;
 }
 
@@ -63,7 +63,7 @@ std::list<std::string> class_header_formatter::inclusion_dependencies(
     const formattables::inclusion_dependencies_builder_factory& f,
     const yarn::element& e) const {
 
-    const auto& o(assistant::as<yarn::object>(static_formatter_name(), e));
+    const auto& o(assistant::as<yarn::object>(static_artefact(), e));
     auto builder(f.make());
 
     // algorithm: domain headers need it for the swap function.
@@ -88,7 +88,7 @@ std::list<std::string> class_header_formatter::inclusion_dependencies(
     const auto fwd_fn(traits::forward_declarations_archetype());
     builder.add(o.opaque_associations(), fwd_fn);
 
-    const auto self_fn(class_header_formatter::static_formatter_name());
+    const auto self_fn(class_header_formatter::static_artefact());
     builder.add(o.parent(), self_fn);
 
     using hash = formatters::hash::traits;
@@ -115,19 +115,19 @@ inclusion_support_type() const {
 
 boost::filesystem::path class_header_formatter::inclusion_path(
     const formattables::locator& l, const yarn::name& n) const {
-    return l.make_inclusion_path_for_cpp_header(n, static_formatter_name());
+    return l.make_inclusion_path_for_cpp_header(n, static_artefact());
 }
 
 boost::filesystem::path class_header_formatter::full_path(
     const formattables::locator& l, const yarn::name& n) const {
-    return l.make_full_path_for_cpp_header(n, static_formatter_name());
+    return l.make_full_path_for_cpp_header(n, static_artefact());
 }
 
 dogen::formatters::artefact class_header_formatter::
 format(const context& ctx, const yarn::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), true/*requires_header_guard*/, id);
-    const auto& o(a.as<yarn::object>(static_formatter_name(), e));
+    const auto& o(a.as<yarn::object>(static_artefact(), e));
     const auto r(class_header_formatter_stitch(a, o));
     return r;
 }
