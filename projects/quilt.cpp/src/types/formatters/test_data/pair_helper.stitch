@@ -9,7 +9,7 @@
 <#@ containing_namespaces=dogen::quilt::cpp::formatters::test_data #>
 <#+
 
-std::string pair_helper::id() const {
+std::string pair_helper::formatter_name() const {
     static auto r(std::string("<") + traits::facet_name() + std::string(">") +
         std::string("<") + helper_name() + std::string(">"));
     return r;

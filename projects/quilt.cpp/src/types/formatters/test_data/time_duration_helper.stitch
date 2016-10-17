@@ -10,7 +10,7 @@
 <#+
 
 
-std::string time_duration_helper::id() const {
+std::string time_duration_helper::formatter_name() const {
     static auto r(std::string("<") + traits::facet_name() + std::string(">") +
         std::string("<") + helper_name() + std::string(">"));
     return r;

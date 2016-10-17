@@ -9,7 +9,7 @@
 <#@ containing_namespaces=dogen::quilt::cpp::formatters::hash #>
 <#+
 
-std::string ptime_helper::id() const {
+std::string ptime_helper::formatter_name() const {
     static auto r(std::string("<") + traits::facet_name() + std::string(">") +
         std::string("<") + helper_name() + std::string(">"));
     return r;

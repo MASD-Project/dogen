@@ -56,7 +56,7 @@ inline std::ostream& to_stream(std::ostream& s,
             s <<  "{ \"" << j->first << "\":" << "[ ";
             for(auto k(j->second.begin()); k != j->second.end(); ++k) {
                 if (k != j->second.begin()) s << ", ";
-                s <<  "\"" << (*k)->id() << "\"";
+                s <<  "\"" << (*k)->formatter_name() << "\"";
             }
             s << "] }";
         }

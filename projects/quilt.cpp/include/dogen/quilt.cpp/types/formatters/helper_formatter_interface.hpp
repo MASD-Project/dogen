@@ -44,7 +44,7 @@ public:
     virtual ~helper_formatter_interface() noexcept = 0;
 
 public:
-    virtual std::string id() const = 0;
+    virtual std::string formatter_name() const = 0;
     virtual std::string family() const = 0;
     virtual std::list<std::string> owning_formatters() const = 0;
     virtual std::list<std::string> owning_facets() const = 0;

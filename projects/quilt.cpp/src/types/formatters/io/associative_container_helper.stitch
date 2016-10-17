@@ -11,7 +11,7 @@
 <#@ containing_namespaces=dogen::quilt::cpp::formatters::io #>
 <#+
 
-std::string associative_container_helper::id() const {
+std::string associative_container_helper::formatter_name() const {
     static auto r(std::string("<") + traits::facet_name() + std::string(">") +
         std::string("<") + helper_name() + std::string(">"));
     return r;
