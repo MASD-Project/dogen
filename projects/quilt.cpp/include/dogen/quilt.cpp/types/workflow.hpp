@@ -37,7 +37,7 @@
 #include "dogen/formatters/types/decoration_properties_factory.hpp"
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/quilt/types/backend_interface.hpp"
-#include "dogen/quilt.cpp/types/formatters/container.hpp"
+#include "dogen/quilt.cpp/types/formatters/repository.hpp"
 #include "dogen/quilt.cpp/types/formattables/model.hpp"
 
 namespace dogen {

@@ -28,7 +28,7 @@
 #include <string>
 #include <unordered_map>
 #include "dogen/yarn/types/model.hpp"
-#include "dogen/quilt.cpp/types/formatters/container.hpp"
+#include "dogen/quilt.cpp/types/formatters/repository.hpp"
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
 
 namespace dogen {

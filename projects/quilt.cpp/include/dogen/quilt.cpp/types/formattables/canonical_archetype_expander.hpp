@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/quilt.cpp/types/formatters/container.hpp"
+#include "dogen/quilt.cpp/types/formatters/repository.hpp"
 #include "dogen/quilt.cpp/types/formattables/model.hpp"
 
 namespace dogen {

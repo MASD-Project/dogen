@@ -33,7 +33,7 @@
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/annotations/types/type.hpp"
 #include "dogen/quilt.cpp/types/formattables/inclusion_directive_configuration.hpp"
-#include "dogen/quilt.cpp/types/formatters/container.hpp"
+#include "dogen/quilt.cpp/types/formatters/repository.hpp"
 #include "dogen/quilt.cpp/types/formattables/locator.hpp"
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
 #include "dogen/quilt.cpp/types/formattables/inclusion_dependencies_builder_factory.hpp"

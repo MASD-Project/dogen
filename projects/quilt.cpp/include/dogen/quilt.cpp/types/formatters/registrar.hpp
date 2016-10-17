@@ -30,7 +30,7 @@
 #include <forward_list>
 #include <unordered_map>
 #include "dogen/annotations/types/archetype_location.hpp"
-#include "dogen/quilt.cpp/types/formatters/container.hpp"
+#include "dogen/quilt.cpp/types/formatters/repository.hpp"
 #include "dogen/quilt.cpp/types/formatters/helper_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 

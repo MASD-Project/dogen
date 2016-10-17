@@ -31,7 +31,7 @@
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/annotations/types/type.hpp"
-#include "dogen/quilt.cpp/types/formatters/container.hpp"
+#include "dogen/quilt.cpp/types/formatters/repository.hpp"
 #include "dogen/quilt.cpp/types/formattables/local_enablement_configuration.hpp"
 #include "dogen/quilt.cpp/types/formattables/global_enablement_configuration.hpp"
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"

@@ -28,7 +28,7 @@
 #include <boost/shared_ptr.hpp>
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/element.hpp"
-#include "dogen/quilt.cpp/types/formatters/container.hpp"
+#include "dogen/quilt.cpp/types/formatters/repository.hpp"
 
 namespace dogen {
 namespace quilt {

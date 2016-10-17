@@ -28,7 +28,7 @@
 #include "dogen/utility/io/set_io.hpp"
 #include "dogen/utility/io/forward_list_io.hpp"
 #include "dogen/annotations/io/archetype_location_io.hpp"
-#include "dogen/quilt.cpp/io/formatters/container_io.hpp"
+#include "dogen/quilt.cpp/io/formatters/repository_io.hpp"
 #include "dogen/quilt.cpp/types/formatters/registrar_error.hpp"
 #include "dogen/quilt.cpp/types/formatters/registrar.hpp"
 
@@ -37,7 +37,7 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("quilt.cpp.formatters.registrar"));
 
-const std::string no_file_formatters("File formatters container is empty.");
+const std::string no_file_formatters("File formatters repository is empty.");
 const std::string no_file_formatters_by_type_index(
     "No file formatters by type index provided.");
 const std::string no_forward_declarations_formatters(
@@ -174,7 +174,7 @@ register_formatter(std::shared_ptr<file_formatter_interface> f) {
 
     /*
      * Add formatter to the index by archetype name. Inserting the
-     * formatter into this container has the helpful side-effect of
+     * formatter into this repository has the helpful side-effect of
      * ensuring the formatter id is unique in formatter space.
      */
     const auto arch(al.archetype());

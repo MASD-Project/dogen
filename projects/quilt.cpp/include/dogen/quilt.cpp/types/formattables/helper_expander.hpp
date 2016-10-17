@@ -30,7 +30,7 @@
 #include "dogen/yarn/types/name_tree.hpp"
 #include "dogen/yarn/types/attribute.hpp"
 #include "dogen/quilt.cpp/types/formattables/streaming_properties.hpp"
-#include "dogen/quilt.cpp/types/formatters/container.hpp"
+#include "dogen/quilt.cpp/types/formatters/repository.hpp"
 #include "dogen/quilt.cpp/types/formattables/helper_properties.hpp"
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
 #include "dogen/quilt.cpp/types/formattables/model.hpp"

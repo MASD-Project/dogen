@@ -30,7 +30,6 @@
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/quilt.cpp/types/fabric/registrar_fwd.hpp"
-#include "dogen/quilt.cpp/types/formatters/container.hpp"
 
 namespace dogen {
 namespace quilt {

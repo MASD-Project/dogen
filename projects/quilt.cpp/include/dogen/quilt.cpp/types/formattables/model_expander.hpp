@@ -33,7 +33,7 @@
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/formatters/types/decoration_properties_factory.hpp"
-#include "dogen/quilt.cpp/types/formatters/container.hpp"
+#include "dogen/quilt.cpp/types/formatters/repository.hpp"
 #include "dogen/quilt.cpp/types/formattables/locator.hpp"
 #include "dogen/quilt.cpp/types/formattables/model.hpp"
 

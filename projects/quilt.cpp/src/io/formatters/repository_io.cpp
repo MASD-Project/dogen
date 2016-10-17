@@ -23,7 +23,7 @@
 #include <forward_list>
 #include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/helper_formatter_interface.hpp"
-#include "dogen/quilt.cpp/io/formatters/container_io.hpp"
+#include "dogen/quilt.cpp/io/formatters/repository_io.hpp"
 
 namespace dogen {
 namespace quilt {
