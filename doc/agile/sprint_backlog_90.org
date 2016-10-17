@@ -797,6 +797,12 @@ Random notes:
   part of the expansion, we could set a number of stitch fields which
   would then be picked up by some knit-specific workflow classes.
 
+*** Stitch not writing when template has changed                      :story:
+
+It seems we can change a text template but not get stitch to update
+the cpp file. We must have made a mistake on the binary diffing of the
+files.
+
 *** Generate formatter interfaces                                      :epic:
 
 We should create another template language, in addition to stitch:
