@@ -50,8 +50,8 @@ std::string traits::source_cmakelists_formatter_name() {
     return r;
 }
 
-std::string traits::canonical_formatter_name(const std::string& facet_name) {
-    return facet_name + ".canonical_formatter";
+std::string traits::canonical_archetype(const std::string& facet_name) {
+    return facet_name + ".canonical_archetype";
 }
 
 } } } }

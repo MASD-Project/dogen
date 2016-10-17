@@ -32,8 +32,8 @@ std::string traits::facet_name() {
     return r;
 }
 
-std::string traits::canonical_formatter_name() {
-    static std::string r(traits::facet_name() + ".canonical_formatter");
+std::string traits::canonical_archetype() {
+    static std::string r(traits::facet_name() + ".canonical_archetype");
     return r;
 }
 

@@ -188,7 +188,7 @@ obtain_formatter_properties(const std::string& element_id,
     const std::string& formatter_name) const {
 
     const auto& formattables(context_.model().formattables());
-    formattables::canonical_formatter_resolver res(formattables);
+    formattables::canonical_archetype_resolver res(formattables);
 
     const auto resolved_fmtn(res.resolve(element_id, formatter_name));
     const auto i(formattables.find(element_id));

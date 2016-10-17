@@ -42,7 +42,7 @@ struct traits {
     /**
      * @brief Name of the canonical formatter
      */
-    static std::string canonical_formatter_name();
+    static std::string canonical_archetype();
 
     /**
      * @brief Name of the class header formatter.

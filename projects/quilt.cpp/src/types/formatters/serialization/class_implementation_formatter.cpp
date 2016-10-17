@@ -92,7 +92,7 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
     builder.add(ic::boost::archive::xml_iarchive());
     builder.add(ic::boost::archive::xml_oarchive());
 
-    const auto cfmtn(traits::canonical_formatter_name());
+    const auto cfmtn(traits::canonical_archetype());
     builder.add(o.transparent_associations(), cfmtn);
     builder.add(o.opaque_associations(), cfmtn);
     builder.add(o.parent(), cfmtn);

@@ -38,7 +38,7 @@ dogen::formatters::artefact registrar_implementation_formatter_stitch(
             const auto ns(a.make_namespaces(rg.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
             const auto deps(rg.model_dependencies());
-            const auto cfmtn(traits::canonical_formatter_name());
+            const auto cfmtn(traits::canonical_archetype());
             const auto leaves(a.names_with_enabled_formatter(cfmtn, rg.leaves()));
             const bool has_types(!deps.empty() || !leaves.empty());
             const std::string arg_name(has_types ? " ar" : "");

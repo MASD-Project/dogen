@@ -30,9 +30,11 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory(
         "quilt.cpp.formattables.canonical_formatter_resolver"));
 
+const auto archetype_postfix(".canonical_archetype");
+
 const std::string missing_element("Element id not found: ");
-const std::string missing_canonical_formatter(
-    "Canonical formatter name not found: ");
+const std::string missing_canonical_archetype(
+    "Canonical archetype not found: ");
 
 }
 
@@ -41,22 +43,22 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-canonical_formatter_resolver::canonical_formatter_resolver(
+canonical_archetype_resolver::canonical_archetype_resolver(
     const std::unordered_map<std::string, formattable>& formattables)
     : formattables_(formattables) { }
 
-bool canonical_formatter_resolver::
-is_canonical_formatter(const std::string& formatter_name) const {
-    return boost::ends_with(formatter_name, ".canonical_formatter");
+bool canonical_archetype_resolver::
+is_canonical_archetype(const std::string& archetype) const {
+    return boost::ends_with(archetype, archetype_postfix);
 }
 
-std::string canonical_formatter_resolver::resolve(const std::string& element_id,
-    const std::string& formatter_name) const {
+std::string canonical_archetype_resolver::resolve(const std::string& element_id,
+    const std::string& archetype) const {
 
-    if (!is_canonical_formatter(formatter_name)) {
-        BOOST_LOG_SEV(lg, debug) << "Formatter name is not canonical: "
-                                 << formatter_name;
-        return formatter_name;
+    if (!is_canonical_archetype(archetype)) {
+        BOOST_LOG_SEV(lg, debug) << "Archetype name is not canonical: "
+                                 << archetype;
+        return archetype;
     }
 
     const auto i(formattables_.find(element_id));
@@ -68,17 +70,17 @@ std::string canonical_formatter_resolver::resolve(const std::string& element_id,
     const auto& formattable(i->second);
     const auto& eprops(formattable.element_properties());
     const auto& cftf(eprops.canonical_formatter_to_formatter());
-    const auto j(cftf.find(formatter_name));
+    const auto j(cftf.find(archetype));
     if (j == cftf.end()) {
-        BOOST_LOG_SEV(lg, error) << missing_canonical_formatter
-                                 << formatter_name << " for element: "
+        BOOST_LOG_SEV(lg, error) << missing_canonical_archetype
+                                 << archetype << " for element: "
                                  <<  element_id;
-        BOOST_THROW_EXCEPTION(resolution_error(missing_canonical_formatter +
-                formatter_name));
+        BOOST_THROW_EXCEPTION(
+            resolution_error(missing_canonical_archetype + archetype));
     }
 
     const auto r(j->second);
-    BOOST_LOG_SEV(lg, debug) << "Resolved: " << formatter_name << " to: " << r;
+    BOOST_LOG_SEV(lg, debug) << "Resolved: " << archetype << " to: " << r;
     return r;
 }
 

@@ -84,7 +84,7 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
     if (si.has_path || si.has_std_string)
         builder.add(inclusion_constants::std::sstream());
 
-    const auto cfmtn(traits::canonical_formatter_name());
+    const auto cfmtn(traits::canonical_archetype());
     builder.add(o.transparent_associations(), cfmtn);
     builder.add(o.opaque_associations(), cfmtn);
     builder.add(o.parent(), cfmtn);

@@ -76,7 +76,7 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
     const yarn::element& e) const {
 
     const auto& o(assistant::as<yarn::object>(static_formatter_name(), e));
-    const auto cfmtn(traits::canonical_formatter_name());
+    const auto cfmtn(traits::canonical_archetype());
     auto builder(f.make());
     builder.add(o.name(), cfmtn);
 

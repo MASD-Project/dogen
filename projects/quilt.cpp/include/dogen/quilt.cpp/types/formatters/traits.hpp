@@ -48,7 +48,7 @@ struct traits {
     static std::string include_cmakelists_formatter_name();
     static std::string source_cmakelists_formatter_name();
 
-    static std::string canonical_formatter_name(const std::string& facet_name);
+    static std::string canonical_archetype(const std::string& facet_name);
 };
 
 } } } }

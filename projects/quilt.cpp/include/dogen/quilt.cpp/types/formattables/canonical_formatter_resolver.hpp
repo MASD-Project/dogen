@@ -34,17 +34,17 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-class canonical_formatter_resolver {
+class canonical_archetype_resolver {
 public:
-    canonical_formatter_resolver(
+    canonical_archetype_resolver(
         const std::unordered_map<std::string, formattable>& formattables);
 
 private:
-    bool is_canonical_formatter(const std::string& formatter_name) const;
+    bool is_canonical_archetype(const std::string& archetype) const;
 
 public:
     std::string resolve(const std::string& element_id,
-        const std::string& formatter_name) const;
+        const std::string& archetype) const;
 
 private:
     const std::unordered_map<std::string, formattable>& formattables_;

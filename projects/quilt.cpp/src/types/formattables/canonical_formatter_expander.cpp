@@ -39,7 +39,7 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-void canonical_formatter_expander::
+void canonical_archetype_expander::
 expand(const formatters::container& fc, model& fm) const {
 
     const auto cs(formatters::inclusion_support_types::canonical_support);
@@ -87,7 +87,7 @@ expand(const formatters::container& fc, model& fm) const {
                 const auto fctn(al.facet());
 
                 using formatters::traits;
-                const auto cfmtn(traits::canonical_formatter_name(fctn));
+                const auto cfmtn(traits::canonical_archetype(fctn));
                 eprops.canonical_formatter_to_formatter()[cfmtn] = fmtn;
                 BOOST_LOG_SEV(lg, debug) << "Mapping " << cfmtn
                                          << " to " << fmtn;

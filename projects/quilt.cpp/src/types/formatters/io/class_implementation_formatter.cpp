@@ -81,7 +81,7 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
 
     builder.add(o.opaque_associations(), ch_fn);
 
-    const auto io_cfmtn(formatters::io::traits::canonical_formatter_name());
+    const auto io_cfmtn(formatters::io::traits::canonical_archetype());
     const auto self_fn(class_implementation_formatter::static_formatter_name());
     const bool io_enabled(builder.is_enabled(o.name(), self_fn));
 

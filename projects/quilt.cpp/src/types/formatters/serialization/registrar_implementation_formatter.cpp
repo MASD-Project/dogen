@@ -97,7 +97,7 @@ inclusion_dependencies(
     const auto ch_fn(traits::class_header_formatter_name());
     builder.add(rg.leaves(), ch_fn);
 
-    const auto cfmtn(traits::canonical_formatter_name());
+    const auto cfmtn(traits::canonical_archetype());
     builder.add(rg.registrar_dependencies(), cfmtn);
     return builder.build();
 }

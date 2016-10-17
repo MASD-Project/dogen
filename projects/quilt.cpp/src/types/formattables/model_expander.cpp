@@ -51,7 +51,7 @@ void model_expander::expand_enablement(const annotations::type_repository& atrp,
 
 void model_expander::
 expand_canonical_formatters(const formatters::container& fc, model& fm) const {
-    canonical_formatter_expander ex;
+    canonical_archetype_expander ex;
     ex.expand(fc, fm);
 }
 

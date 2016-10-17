@@ -63,7 +63,7 @@ std::list<std::string> class_header_formatter::inclusion_dependencies(
 
     auto builder(f.make());
     builder.add(inclusion_constants::std::functional());
-    builder.add(e.name(), types::traits::canonical_formatter_name());
+    builder.add(e.name(), types::traits::canonical_archetype());
     return builder.build();
 }
 

@@ -82,7 +82,7 @@ std::list<std::string> class_header_formatter::inclusion_dependencies(
     const auto ser_fwd_fn(ser::forward_declarations_formatter_name());
     builder.add(o.name(), ser_fwd_fn);
 
-    const auto cfmtn(traits::canonical_formatter_name());
+    const auto cfmtn(traits::canonical_archetype());
     builder.add(o.transparent_associations(), cfmtn);
 
     const auto fwd_fn(traits::forward_declarations_formatter_name());
@@ -92,7 +92,7 @@ std::list<std::string> class_header_formatter::inclusion_dependencies(
     builder.add(o.parent(), self_fn);
 
     using hash = formatters::hash::traits;
-    const auto hash_cfmtn(hash::traits::canonical_formatter_name());
+    const auto hash_cfmtn(hash::traits::canonical_archetype());
     builder.add(o.associative_container_keys(), hash_cfmtn);
 
     if (o.is_visitation_root()) {

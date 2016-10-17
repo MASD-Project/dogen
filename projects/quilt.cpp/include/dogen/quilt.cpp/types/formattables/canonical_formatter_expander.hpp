@@ -33,7 +33,7 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-class canonical_formatter_expander {
+class canonical_archetype_expander {
 public:
     void expand(const formatters::container& fc, model& fm) const;
 };
