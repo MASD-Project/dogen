@@ -646,6 +646,8 @@ within the parser. It makes more sense to keep the parser clean and do
 the expansion somewhere else.
 
 *** STARTED Perform the archetype / artefact renames                  :story:
+    CLOCK: [2016-10-17 Mon 16:40]
+    CLOCK: [2016-10-17 Mon 16:25]--[2016-10-17 Mon 16:39] =>  0:14
     CLOCK: [2016-10-17 Mon 16:10]--[2016-10-17 Mon 16:24] =>  0:14
     CLOCK: [2016-10-17 Mon 12:47]--[2016-10-17 Mon 12:58] =>  0:11
     CLOCK: [2016-10-17 Mon 12:41]--[2016-10-17 Mon 12:46] =>  0:05

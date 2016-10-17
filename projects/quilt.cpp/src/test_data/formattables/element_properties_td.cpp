@@ -51,13 +51,13 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-dogen::quilt::cpp::formattables::formatter_properties
+dogen::quilt::cpp::formattables::artefact_properties
 create_dogen_quilt_cpp_formattables_formatter_properties(const unsigned int position) {
     return dogen::quilt::cpp::formattables::formatter_properties_generator::create(position);
 }
 
-std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties> create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formatter_properties(unsigned int position) {
-    std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties> r;
+std::unordered_map<std::string, dogen::quilt::cpp::formattables::artefact_properties> create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formatter_properties(unsigned int position) {
+    std::unordered_map<std::string, dogen::quilt::cpp::formattables::artefact_properties> r;
     for (unsigned int i(0); i < 4; ++i) {
         r.insert(std::make_pair(create_std_string(position + i), create_dogen_quilt_cpp_formattables_formatter_properties(position + i)));
     }

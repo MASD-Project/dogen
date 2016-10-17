@@ -114,11 +114,11 @@ private:
      * @pre Formatter configuration must exist for the formatter.
      */
     /**@{*/
-    const formattables::formatter_properties&
+    const formattables::artefact_properties&
     obtain_formatter_properties(
         const formattables::element_properties& eprops,
         const std::string& formatter_name) const;
-    const formattables::formatter_properties&
+    const formattables::artefact_properties&
     obtain_formatter_properties(const std::string& element_id,
         const std::string& formatter_name) const;
     /**@}*/
@@ -330,7 +330,7 @@ private:
     std::ostringstream stream_;
     boost::iostreams::filtering_ostream filtering_stream_;
     const context& context_;
-    formattables::formatter_properties formatter_properties_;
+    formattables::artefact_properties formatter_properties_;
     const annotations::archetype_location ownership_hierarchy_;
     const bool requires_header_guard_;
 };

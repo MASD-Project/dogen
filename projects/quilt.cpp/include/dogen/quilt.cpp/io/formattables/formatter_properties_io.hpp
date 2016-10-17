@@ -35,7 +35,7 @@ namespace formattables {
 
 std::ostream&
 operator<<(std::ostream& s,
-     const dogen::quilt::cpp::formattables::formatter_properties& v);
+     const dogen::quilt::cpp::formattables::artefact_properties& v);
 
 } } } }
 

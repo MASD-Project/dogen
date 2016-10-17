@@ -37,7 +37,7 @@ public:
     formatter_properties_generator();
 
 public:
-    typedef dogen::quilt::cpp::formattables::formatter_properties result_type;
+    typedef dogen::quilt::cpp::formattables::artefact_properties result_type;
 
 public:
     static void populate(const unsigned int position, result_type& v);

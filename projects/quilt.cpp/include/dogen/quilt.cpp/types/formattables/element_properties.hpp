@@ -58,7 +58,7 @@ public:
     element_properties(
         const boost::optional<dogen::formatters::decoration_properties>& decoration_properties,
         const dogen::quilt::cpp::formattables::aspect_properties& aspect_properties,
-        const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties>& formatter_properties,
+        const std::unordered_map<std::string, dogen::quilt::cpp::formattables::artefact_properties>& formatter_properties,
         const std::list<dogen::quilt::cpp::formattables::helper_properties>& helper_properties,
         const std::unordered_map<std::string, std::string>& canonical_archetype_to_archetype,
         const boost::optional<dogen::quilt::cpp::formattables::odb_properties>& odb_properties);
@@ -81,10 +81,10 @@ public:
     void aspect_properties(const dogen::quilt::cpp::formattables::aspect_properties& v);
     void aspect_properties(const dogen::quilt::cpp::formattables::aspect_properties&& v);
 
-    const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties>& formatter_properties() const;
-    std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties>& formatter_properties();
-    void formatter_properties(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties>& v);
-    void formatter_properties(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties>&& v);
+    const std::unordered_map<std::string, dogen::quilt::cpp::formattables::artefact_properties>& formatter_properties() const;
+    std::unordered_map<std::string, dogen::quilt::cpp::formattables::artefact_properties>& formatter_properties();
+    void formatter_properties(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::artefact_properties>& v);
+    void formatter_properties(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::artefact_properties>&& v);
 
     const std::list<dogen::quilt::cpp::formattables::helper_properties>& helper_properties() const;
     std::list<dogen::quilt::cpp::formattables::helper_properties>& helper_properties();
@@ -114,7 +114,7 @@ public:
 private:
     boost::optional<dogen::formatters::decoration_properties> decoration_properties_;
     dogen::quilt::cpp::formattables::aspect_properties aspect_properties_;
-    std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties> formatter_properties_;
+    std::unordered_map<std::string, dogen::quilt::cpp::formattables::artefact_properties> formatter_properties_;
     std::list<dogen::quilt::cpp::formattables::helper_properties> helper_properties_;
     std::unordered_map<std::string, std::string> canonical_archetype_to_archetype_;
     boost::optional<dogen::quilt::cpp::formattables::odb_properties> odb_properties_;

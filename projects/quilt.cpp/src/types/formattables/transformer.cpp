@@ -78,7 +78,7 @@ transform(const formatters::container& fc, const yarn::model& m) const {
         auto& fmt_props(fbl.element_properties().formatter_properties());
         for (const auto& fmt : j->second) {
             const auto arch(fmt->archetype_location().archetype());
-            const auto pair(std::make_pair(arch, formatter_properties()));
+            const auto pair(std::make_pair(arch, artefact_properties()));
             const auto ret(fmt_props.insert(pair));
             if (!ret.second) {
                 BOOST_LOG_SEV(lg, error) << duplicate_archetype << arch;

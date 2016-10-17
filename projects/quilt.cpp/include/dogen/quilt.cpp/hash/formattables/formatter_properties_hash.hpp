@@ -35,7 +35,7 @@ namespace formattables {
 
 struct formatter_properties_hasher {
 public:
-    static std::size_t hash(const formatter_properties& v);
+    static std::size_t hash(const artefact_properties& v);
 };
 
 } } } }
@@ -43,9 +43,9 @@ public:
 namespace std {
 
 template<>
-struct hash<dogen::quilt::cpp::formattables::formatter_properties> {
+struct hash<dogen::quilt::cpp::formattables::artefact_properties> {
 public:
-    size_t operator()(const dogen::quilt::cpp::formattables::formatter_properties& v) const {
+    size_t operator()(const dogen::quilt::cpp::formattables::artefact_properties& v) const {
         return dogen::quilt::cpp::formattables::formatter_properties_hasher::hash(v);
     }
 };

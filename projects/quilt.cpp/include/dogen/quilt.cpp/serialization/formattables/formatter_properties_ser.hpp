@@ -28,15 +28,15 @@
 #include <boost/serialization/split_free.hpp>
 #include "dogen/quilt.cpp/types/formattables/formatter_properties.hpp"
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::quilt::cpp::formattables::formatter_properties)
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::quilt::cpp::formattables::artefact_properties)
 namespace boost {
 namespace serialization {
 
 template<typename Archive>
-void save(Archive& ar, const dogen::quilt::cpp::formattables::formatter_properties& v, unsigned int version);
+void save(Archive& ar, const dogen::quilt::cpp::formattables::artefact_properties& v, unsigned int version);
 
 template<typename Archive>
-void load(Archive& ar, dogen::quilt::cpp::formattables::formatter_properties& v, unsigned int version);
+void load(Archive& ar, dogen::quilt::cpp::formattables::artefact_properties& v, unsigned int version);
 
 } }
 

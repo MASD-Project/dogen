@@ -49,7 +49,7 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-std::size_t formatter_properties_hasher::hash(const formatter_properties& v) {
+std::size_t formatter_properties_hasher::hash(const artefact_properties& v) {
     std::size_t seed(0);
 
     combine(seed, v.enabled());

@@ -49,7 +49,7 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-std::ostream& operator<<(std::ostream& s, const formatter_properties& v) {
+std::ostream& operator<<(std::ostream& s, const artefact_properties& v) {
     boost::io::ios_flags_saver ifs(s);
     s.setf(std::ios_base::boolalpha);
     s.setf(std::ios::fixed, std::ios::floatfield);

@@ -170,7 +170,7 @@ std::string assistant::get_product_name(const yarn::name& n) const {
     return n.location().external_modules().front();
 }
 
-const formattables::formatter_properties& assistant::
+const formattables::artefact_properties& assistant::
 obtain_formatter_properties(const formattables::element_properties& eprops,
     const std::string& formatter_name) const {
     const auto i(eprops.formatter_properties().find(formatter_name));
@@ -183,7 +183,7 @@ obtain_formatter_properties(const formattables::element_properties& eprops,
     return i->second;
 }
 
-const formattables::formatter_properties& assistant::
+const formattables::artefact_properties& assistant::
 obtain_formatter_properties(const std::string& element_id,
     const std::string& formatter_name) const {
 

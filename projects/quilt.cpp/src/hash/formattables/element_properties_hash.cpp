@@ -43,7 +43,7 @@ inline std::size_t hash_boost_optional_dogen_formatters_decoration_properties(co
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formatter_properties(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties>& v) {
+inline std::size_t hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formatter_properties(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::artefact_properties>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);

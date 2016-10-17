@@ -36,19 +36,19 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-class formatter_properties final {
+class artefact_properties final {
 public:
-    formatter_properties(const formatter_properties&) = default;
-    ~formatter_properties() = default;
+    artefact_properties(const artefact_properties&) = default;
+    ~artefact_properties() = default;
 
 public:
-    formatter_properties();
+    artefact_properties();
 
 public:
-    formatter_properties(formatter_properties&& rhs);
+    artefact_properties(artefact_properties&& rhs);
 
 public:
-    formatter_properties(
+    artefact_properties(
         const bool enabled,
         const bool overwrite,
         const boost::filesystem::path& file_path,
@@ -57,10 +57,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::quilt::cpp::formattables::formatter_properties& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::quilt::cpp::formattables::artefact_properties& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::formattables::formatter_properties& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::formattables::artefact_properties& v, unsigned int version);
 
 public:
     bool enabled() const;
@@ -85,14 +85,14 @@ public:
     void inclusion_dependencies(const std::list<std::string>&& v);
 
 public:
-    bool operator==(const formatter_properties& rhs) const;
-    bool operator!=(const formatter_properties& rhs) const {
+    bool operator==(const artefact_properties& rhs) const;
+    bool operator!=(const artefact_properties& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(formatter_properties& other) noexcept;
-    formatter_properties& operator=(formatter_properties other);
+    void swap(artefact_properties& other) noexcept;
+    artefact_properties& operator=(artefact_properties other);
 
 private:
     bool enabled_;
@@ -108,8 +108,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::quilt::cpp::formattables::formatter_properties& lhs,
-    dogen::quilt::cpp::formattables::formatter_properties& rhs) {
+    dogen::quilt::cpp::formattables::artefact_properties& lhs,
+    dogen::quilt::cpp::formattables::artefact_properties& rhs) {
     lhs.swap(rhs);
 }
 

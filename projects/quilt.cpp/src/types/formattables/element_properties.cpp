@@ -36,7 +36,7 @@ element_properties::element_properties(element_properties&& rhs)
 element_properties::element_properties(
     const boost::optional<dogen::formatters::decoration_properties>& decoration_properties,
     const dogen::quilt::cpp::formattables::aspect_properties& aspect_properties,
-    const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties>& formatter_properties,
+    const std::unordered_map<std::string, dogen::quilt::cpp::formattables::artefact_properties>& formatter_properties,
     const std::list<dogen::quilt::cpp::formattables::helper_properties>& helper_properties,
     const std::unordered_map<std::string, std::string>& canonical_archetype_to_archetype,
     const boost::optional<dogen::quilt::cpp::formattables::odb_properties>& odb_properties)
@@ -104,19 +104,19 @@ void element_properties::aspect_properties(const dogen::quilt::cpp::formattables
     aspect_properties_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties>& element_properties::formatter_properties() const {
+const std::unordered_map<std::string, dogen::quilt::cpp::formattables::artefact_properties>& element_properties::formatter_properties() const {
     return formatter_properties_;
 }
 
-std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties>& element_properties::formatter_properties() {
+std::unordered_map<std::string, dogen::quilt::cpp::formattables::artefact_properties>& element_properties::formatter_properties() {
     return formatter_properties_;
 }
 
-void element_properties::formatter_properties(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties>& v) {
+void element_properties::formatter_properties(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::artefact_properties>& v) {
     formatter_properties_ = v;
 }
 
-void element_properties::formatter_properties(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties>&& v) {
+void element_properties::formatter_properties(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::artefact_properties>&& v) {
     formatter_properties_ = std::move(v);
 }
 

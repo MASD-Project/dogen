@@ -31,10 +31,10 @@ namespace boost {
 namespace serialization {
 
 template<class Archive>
-void save(Archive& ar, const dogen::quilt::cpp::formattables::formatter_properties& v, unsigned int version);
+void save(Archive& ar, const dogen::quilt::cpp::formattables::artefact_properties& v, unsigned int version);
 
 template<class Archive>
-void load(Archive& ar, dogen::quilt::cpp::formattables::formatter_properties& v, unsigned int version);
+void load(Archive& ar, dogen::quilt::cpp::formattables::artefact_properties& v, unsigned int version);
 
 } }
 

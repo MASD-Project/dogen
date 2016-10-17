@@ -30,7 +30,7 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-class formatter_properties;
+class artefact_properties;
 
 } } } }
 

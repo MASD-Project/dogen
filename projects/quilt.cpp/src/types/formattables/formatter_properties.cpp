@@ -25,18 +25,18 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-formatter_properties::formatter_properties()
+artefact_properties::artefact_properties()
     : enabled_(static_cast<bool>(0)),
       overwrite_(static_cast<bool>(0)) { }
 
-formatter_properties::formatter_properties(formatter_properties&& rhs)
+artefact_properties::artefact_properties(artefact_properties&& rhs)
     : enabled_(std::move(rhs.enabled_)),
       overwrite_(std::move(rhs.overwrite_)),
       file_path_(std::move(rhs.file_path_)),
       header_guard_(std::move(rhs.header_guard_)),
       inclusion_dependencies_(std::move(rhs.inclusion_dependencies_)) { }
 
-formatter_properties::formatter_properties(
+artefact_properties::artefact_properties(
     const bool enabled,
     const bool overwrite,
     const boost::filesystem::path& file_path,
@@ -48,7 +48,7 @@ formatter_properties::formatter_properties(
       header_guard_(header_guard),
       inclusion_dependencies_(inclusion_dependencies) { }
 
-void formatter_properties::swap(formatter_properties& other) noexcept {
+void artefact_properties::swap(artefact_properties& other) noexcept {
     using std::swap;
     swap(enabled_, other.enabled_);
     swap(overwrite_, other.overwrite_);
@@ -57,7 +57,7 @@ void formatter_properties::swap(formatter_properties& other) noexcept {
     swap(inclusion_dependencies_, other.inclusion_dependencies_);
 }
 
-bool formatter_properties::operator==(const formatter_properties& rhs) const {
+bool artefact_properties::operator==(const artefact_properties& rhs) const {
     return enabled_ == rhs.enabled_ &&
         overwrite_ == rhs.overwrite_ &&
         file_path_ == rhs.file_path_ &&
@@ -65,73 +65,73 @@ bool formatter_properties::operator==(const formatter_properties& rhs) const {
         inclusion_dependencies_ == rhs.inclusion_dependencies_;
 }
 
-formatter_properties& formatter_properties::operator=(formatter_properties other) {
+artefact_properties& artefact_properties::operator=(artefact_properties other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-bool formatter_properties::enabled() const {
+bool artefact_properties::enabled() const {
     return enabled_;
 }
 
-void formatter_properties::enabled(const bool v) {
+void artefact_properties::enabled(const bool v) {
     enabled_ = v;
 }
 
-bool formatter_properties::overwrite() const {
+bool artefact_properties::overwrite() const {
     return overwrite_;
 }
 
-void formatter_properties::overwrite(const bool v) {
+void artefact_properties::overwrite(const bool v) {
     overwrite_ = v;
 }
 
-const boost::filesystem::path& formatter_properties::file_path() const {
+const boost::filesystem::path& artefact_properties::file_path() const {
     return file_path_;
 }
 
-boost::filesystem::path& formatter_properties::file_path() {
+boost::filesystem::path& artefact_properties::file_path() {
     return file_path_;
 }
 
-void formatter_properties::file_path(const boost::filesystem::path& v) {
+void artefact_properties::file_path(const boost::filesystem::path& v) {
     file_path_ = v;
 }
 
-void formatter_properties::file_path(const boost::filesystem::path&& v) {
+void artefact_properties::file_path(const boost::filesystem::path&& v) {
     file_path_ = std::move(v);
 }
 
-const std::string& formatter_properties::header_guard() const {
+const std::string& artefact_properties::header_guard() const {
     return header_guard_;
 }
 
-std::string& formatter_properties::header_guard() {
+std::string& artefact_properties::header_guard() {
     return header_guard_;
 }
 
-void formatter_properties::header_guard(const std::string& v) {
+void artefact_properties::header_guard(const std::string& v) {
     header_guard_ = v;
 }
 
-void formatter_properties::header_guard(const std::string&& v) {
+void artefact_properties::header_guard(const std::string&& v) {
     header_guard_ = std::move(v);
 }
 
-const std::list<std::string>& formatter_properties::inclusion_dependencies() const {
+const std::list<std::string>& artefact_properties::inclusion_dependencies() const {
     return inclusion_dependencies_;
 }
 
-std::list<std::string>& formatter_properties::inclusion_dependencies() {
+std::list<std::string>& artefact_properties::inclusion_dependencies() {
     return inclusion_dependencies_;
 }
 
-void formatter_properties::inclusion_dependencies(const std::list<std::string>& v) {
+void artefact_properties::inclusion_dependencies(const std::list<std::string>& v) {
     inclusion_dependencies_ = v;
 }
 
-void formatter_properties::inclusion_dependencies(const std::list<std::string>&& v) {
+void artefact_properties::inclusion_dependencies(const std::list<std::string>&& v) {
     inclusion_dependencies_ = std::move(v);
 }
 

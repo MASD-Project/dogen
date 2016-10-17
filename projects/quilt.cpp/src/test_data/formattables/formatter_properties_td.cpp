@@ -68,14 +68,14 @@ populate(const unsigned int position, result_type& v) {
 
 formatter_properties_generator::result_type
 formatter_properties_generator::create(const unsigned int position) {
-    formatter_properties r;
+    artefact_properties r;
     formatter_properties_generator::populate(position, r);
     return r;
 }
 
 formatter_properties_generator::result_type*
 formatter_properties_generator::create_ptr(const unsigned int position) {
-    formatter_properties* p = new formatter_properties();
+    artefact_properties* p = new artefact_properties();
     formatter_properties_generator::populate(position, *p);
     return p;
 }
