@@ -58,7 +58,7 @@ private:
 
     void expand_model(
         const annotations::type_repository& atrp,
-        const annotations::annotation& root,
+        const annotations::annotation& ra,
         const dogen::formatters::decoration_properties_factory& dpf,
         const formatters::repository& frp, const locator& l, model& fm) const;
 
@@ -66,7 +66,7 @@ public:
     model execute(
         const options::cpp_options& opts,
         const annotations::type_repository& atrp,
-        const annotations::annotation& root,
+        const annotations::annotation& ra,
         const dogen::formatters::decoration_properties_factory& dpf,
         const formatters::repository& frp, const yarn::model& m) const;
 };

@@ -75,8 +75,7 @@ std::list<std::string> odb_expander::make_odb_pragmas(
     return s.get_text_collection_content(tg.odb_pragma);
 }
 
-boost::optional<odb_properties>
-odb_expander::compute_odb_configuration(
+boost::optional<odb_properties> odb_expander::compute_odb_configuration(
     const type_group& tg, const yarn::object& o) const {
 
     odb_properties r;
@@ -93,6 +92,7 @@ odb_expander::compute_odb_configuration(
     const bool has_top_level_pragmas(!r.top_level_odb_pragmas().empty());
     const bool has_attribute_pragmas(!r.attribute_level_odb_pragmas().empty());
     const bool has_pragmas(has_top_level_pragmas || has_attribute_pragmas);
+
     if (has_pragmas)
         return r;
 
@@ -102,6 +102,7 @@ odb_expander::compute_odb_configuration(
 void odb_expander::
 expand(const annotations::type_repository& atrp, model& fm) const {
     BOOST_LOG_SEV(lg, debug) << "Started expanding odb configuration.";
+
     const auto tg(make_type_group(atrp));
     for (auto& pair : fm.formattables()) {
         const auto id(pair.first);
@@ -116,14 +117,6 @@ expand(const annotations::type_repository& atrp, model& fm) const {
         auto segment(formattable.master_segment());
 
         /*
-         * We are only interested in yarn objects; all other
-         * element types do not need helpers.
-         */
-        const auto ptr(dynamic_cast<const yarn::object*>(segment.get()));
-        if (ptr == nullptr)
-            continue;
-
-        /*
          * We only need to generate the aspect configuration for
          * elements of the target model. However, we can't perform
          * this after reduction because the aspect configurations must
@@ -131,6 +124,14 @@ expand(const annotations::type_repository& atrp, model& fm) const {
          * for referenced models.
          */
         if (segment->origin_type() != yarn::origin_types::target)
+            continue;
+
+        /*
+         * We are only interested in yarn objects; all other element
+         * types do not need helpers.
+         */
+        const auto ptr(dynamic_cast<const yarn::object*>(segment.get()));
+        if (ptr == nullptr)
             continue;
 
         const auto& o(*ptr);

@@ -68,7 +68,7 @@ private:
 
     global_enablement_configurations_type
     obtain_global_configurations(const global_type_group_type& gtg,
-        const annotations::annotation& root) const;
+        const annotations::annotation& ra) const;
 
     void update_facet_enablement(const formatters::repository& frp,
         const global_enablement_configurations_type& gcs, model& fm) const;
@@ -115,7 +115,7 @@ private:
 
 public:
     void expand(const annotations::type_repository& atrp,
-        const annotations::annotation& root, const formatters::repository& frp,
+        const annotations::annotation& ra, const formatters::repository& frp,
         model& fm) const;
 };
 

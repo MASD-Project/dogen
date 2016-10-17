@@ -33,8 +33,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory(
-        "quilt.cpp.formattables.locator"));
+static logger lg(logger_factory("quilt.cpp.formattables.locator"));
 
 const std::string empty;
 const std::string underscore("_");
@@ -43,7 +42,7 @@ const std::string dot(".");
 const std::string separator("_");
 
 const std::string missing_archetype_configuration(
-    "Could not find configuration for formatter: ");
+    "Could not find configuration for archetype: ");
 
 }
 
@@ -76,6 +75,7 @@ locator::type_group locator::make_type_group(
         const auto arch(al.archetype());
         const auto fct(al.facet());
         const auto pf(traits::postfix());
+
         formatter_type_group fmt_tg;
         const auto pfix(traits::postfix());
         fmt_tg.archetype_postfix = s.select_type_by_name(arch, pfix);
@@ -127,6 +127,7 @@ locator_configuration locator::make_configuration(
     for (const auto& pair : tg.facets_type_group) {
         const auto fct(pair.first);
         const auto& fct_tg(pair.second);
+
         locator_facet_configuration fct_cfg;
         fct_cfg.directory(s.get_text_content_or_default(fct_tg.directory));
         fct_cfg.postfix(s.get_text_content_or_default(fct_tg.postfix));
@@ -182,9 +183,9 @@ locator_configuration locator::make_configuration(
 }
 
 const locator_archetype_configuration& locator::
-configuration_for_archetype(const std::string& formatter_name) const {
+configuration_for_archetype(const std::string& archetype) const {
     const auto& arch_cfg(configuration_.archetype_configurations());
-    const auto i(arch_cfg.find(formatter_name));
+    const auto i(arch_cfg.find(archetype));
     if (i == arch_cfg.end()) {
         BOOST_LOG_SEV(lg, error) << missing_archetype_configuration;
         BOOST_THROW_EXCEPTION(building_error(missing_archetype_configuration));
@@ -205,11 +206,11 @@ boost::filesystem::path locator::make_project_path(
 }
 
 boost::filesystem::path locator::make_facet_path(
-    const std::string& formatter_name, const std::string& extension,
+    const std::string& archetype, const std::string& extension,
     const yarn::name& n) const {
     BOOST_LOG_SEV(lg, debug) << "Making facet path for: " << n.id();
 
-    const auto& arch_cfg(configuration_for_archetype(formatter_name));
+    const auto& arch_cfg(configuration_for_archetype(archetype));
 
     boost::filesystem::path r;
 
@@ -257,7 +258,7 @@ boost::filesystem::path locator::make_facet_path(
 }
 
 boost::filesystem::path locator::make_inclusion_path(
-    const std::string& formatter_name, const std::string& extension,
+    const std::string& archetype, const std::string& extension,
     const yarn::name& n) const {
 
     boost::filesystem::path r;
@@ -271,50 +272,50 @@ boost::filesystem::path locator::make_inclusion_path(
 
     const auto& mmp(n.location().model_modules());
     r /= boost::algorithm::join(mmp, dot);
-    r /= make_facet_path(formatter_name, extension, n);
+    r /= make_facet_path(archetype, extension, n);
     return r;
 }
 
 boost::filesystem::path locator::make_inclusion_path_for_cpp_header(
-    const yarn::name& n, const std::string& formatter_name) const {
+    const yarn::name& n, const std::string& archetype) const {
     const auto extension(configuration_.header_file_extension());
-    return make_inclusion_path(formatter_name, extension, n);
+    return make_inclusion_path(archetype, extension, n);
 }
 
 boost::filesystem::path locator::make_full_path_for_cpp_header(
-    const yarn::name& n, const std::string& formatter_name) const {
+    const yarn::name& n, const std::string& archetype) const {
 
     auto r(project_path_);
     r /= configuration_.include_directory_name();
 
     const auto extension(configuration_.header_file_extension());
-    r /= make_inclusion_path_for_cpp_header(n, formatter_name);
+    r /= make_inclusion_path_for_cpp_header(n, archetype);
 
     return r;
 }
 
 boost::filesystem::path locator::make_full_path_for_cpp_implementation(
-    const yarn::name& n, const std::string& formatter_name) const {
+    const yarn::name& n, const std::string& archetype) const {
 
     auto r(project_path_);
     r /= configuration_.source_directory_name();
 
     const auto extension(configuration_.implementation_file_extension());
-    const auto facet_path(make_facet_path(formatter_name, extension, n));
+    const auto facet_path(make_facet_path(archetype, extension, n));
     r /= facet_path;
 
     return r;
 }
 
 boost::filesystem::path locator::make_full_path_for_include_cmakelists(
-    const yarn::name& n, const std::string& /*formatter_name*/) const {
+    const yarn::name& n, const std::string& /*archetype*/) const {
     auto r(project_path_);
     r /= n.simple() + ".txt"; // FIXME: hack for extension
     return r;
 }
 
 boost::filesystem::path locator::make_full_path_for_source_cmakelists(
-    const yarn::name& n, const std::string& /*formatter_name*/) const {
+    const yarn::name& n, const std::string& /*archetype*/) const {
     auto r(project_path_);
     r /= configuration_.source_directory_name();
     r /= n.simple() + ".txt"; // FIXME: hack for extension
@@ -322,7 +323,7 @@ boost::filesystem::path locator::make_full_path_for_source_cmakelists(
 }
 
 boost::filesystem::path locator::make_full_path_for_odb_options(
-    const yarn::name& /*n*/, const std::string& /*formatter_name*/) const {
+    const yarn::name& /*n*/, const std::string& /*archetype*/) const {
     auto r(project_path_);
     r /= configuration_.source_directory_name();
     r /= "options.odb"; // FIXME: hack for filename

@@ -35,8 +35,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory(
-        "quilt.cpp.formattables.inclusion_directives_repository_factory"));
+static logger lg(logger_factory("quilt.cpp.formattables.inclusion_expander"));
 
 const char angle_bracket('<');
 const std::string double_quote("\"");
@@ -48,7 +47,7 @@ const std::string missing_archetype("Archetype not found: ");
 const std::string empty_include_directive("Include directive is empty.");
 const std::string formatter_not_found_for_type(
     "Formatter not found for type: ");
-const std::string empty_formatter_name("Formatter name is empty.");
+const std::string empty_archetype("Formatter name is empty.");
 
 bool include_directive_comparer(
     const std::string& lhs, const std::string& rhs) {
@@ -133,7 +132,7 @@ std::ostream& operator<<(std::ostream& s,
 inclusion_expander::type_group inclusion_expander::
 make_type_group(const annotations::type_repository& atrp,
     const formatters::repository& frp) const {
-    BOOST_LOG_SEV(lg, debug) << "Creating field definitions.";
+    BOOST_LOG_SEV(lg, debug) << "Creating type group.";
 
     type_group r;
     const annotations::type_repository_selector s(atrp);
@@ -155,13 +154,13 @@ make_type_group(const annotations::type_repository& atrp,
         const auto& id(traits::inclusion_directive());
         ftg.inclusion_directive = s.select_type_by_name(arch, id);
 
-        // note: redefinition by design as scopes are different.
+        // note: redefinition of "ir" by design as scopes are different.
         const auto& ir(traits::inclusion_required());
         ftg.inclusion_required = s.select_type_by_name(arch, ir);
         r.formattaters_type_group[arch] = ftg;
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Created field definitions. Result: " << r;
+    BOOST_LOG_SEV(lg, debug) << "Created type group. Result: " << r;
     return r;
 }
 
@@ -173,15 +172,15 @@ bool inclusion_expander::make_top_level_inclusion_required(
 
 inclusion_directive_configuration
 inclusion_expander::make_inclusion_directive_configuration(
-    const type_group& tg,const std::string& formatter_name,
+    const type_group& tg,const std::string& archetype,
     const annotations::annotation& o) const {
 
-    if (formatter_name.empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_formatter_name;
-        BOOST_THROW_EXCEPTION(expansion_error(empty_formatter_name));
+    if (archetype.empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_archetype;
+        BOOST_THROW_EXCEPTION(expansion_error(empty_archetype));
     }
 
-    const auto i(tg.formattaters_type_group.find(formatter_name));
+    const auto i(tg.formattaters_type_group.find(archetype));
     if (i == tg.formattaters_type_group.end()) {
         BOOST_LOG_SEV(lg, error) << missing_archetype;
         BOOST_THROW_EXCEPTION(expansion_error(missing_archetype));
@@ -201,15 +200,14 @@ inclusion_expander::make_inclusion_directive_configuration(
     return r;
 }
 
-inclusion_expander::formatter_list_type
-inclusion_expander::
+inclusion_expander::formatter_list_type inclusion_expander::
 remove_non_includible_formatters(const formatter_list_type& formatters) const {
     formatter_list_type r;
     using formatters::inclusion_support_types;
     static const auto ns(inclusion_support_types::not_supported);
-    for (const auto& f : formatters) {
-        if (f->inclusion_support_type() != ns)
-            r.push_front(f);
+    for (const auto& fmt : formatters) {
+        if (fmt->inclusion_support_type() != ns)
+            r.push_front(fmt);
     }
     return r;
 }
@@ -235,20 +233,20 @@ to_inclusion_directive(const boost::filesystem::path& p) const {
 }
 
 void inclusion_expander::insert_inclusion_directive(const std::string& id,
-    const std::string& formatter_name, const std::string& directive,
+    const std::string& archetype, const std::string& directive,
     inclusion_directives_container_type& idc) const {
 
     if (directive.empty()) {
         std::ostringstream s;
-        s << empty_include_directive << formatter_name << " for type: " << id;
+        s << empty_include_directive << archetype << " for type: " << id;
 
         const auto msg(s.str());
         BOOST_LOG_SEV(lg, error) << msg;
         BOOST_THROW_EXCEPTION(expansion_error(msg));
     }
 
-    const auto fn_dir(std::make_pair(formatter_name, directive));
-    const auto inserted(idc[id].insert(fn_dir).second);
+    const auto pair(std::make_pair(archetype, directive));
+    const auto inserted(idc[id].insert(pair).second);
     if (inserted)
         return;
 
@@ -256,10 +254,9 @@ void inclusion_expander::insert_inclusion_directive(const std::string& id,
     BOOST_THROW_EXCEPTION(expansion_error(duplicate_element_name + id));
 }
 
-void inclusion_expander::compute_inclusion_directives(
-    const type_group& tg, const yarn::element& e,
-    const formatter_list_type& formatters, const locator& l,
-    inclusion_directives_container_type& idc) const {
+void inclusion_expander::compute_inclusion_directives(const type_group& tg,
+    const yarn::element& e, const formatter_list_type& formatters,
+    const locator& l, inclusion_directives_container_type& idc) const {
 
     const auto& n(e.name());
     const auto id(n.id());
@@ -277,8 +274,8 @@ void inclusion_expander::compute_inclusion_directives(
      * override this, we default it to true because normally elements
      * require inclusion.
      */
-    const auto& o(e.annotation());
-    const bool required(make_top_level_inclusion_required(tg, o));
+    const auto& a(e.annotation());
+    const bool required(make_top_level_inclusion_required(tg, a));
     if (!required) {
         BOOST_LOG_SEV(lg, debug) << "Inclusion not required for element.";
         return;
@@ -292,16 +289,16 @@ void inclusion_expander::compute_inclusion_directives(
         BOOST_LOG_SEV(lg, debug) << "Archetype: " << arch;
 
         /*
-         * Does the type require an inclusion directive for this
-         * specific formatter? Some types require inclusion directives
-         * for some formatters, but not for others. For example, we
-         * may need an include for serialising a std::list, but in
-         * test data we make use of helpers and thus do not require an
-         * include.
+         * Does the archetype require an inclusion directive for this
+         * specific formatter? Some elements require inclusion
+         * directives for some archetypes, but not for others. For
+         * example, we may need an include for serialising a
+         * std::list, but in test data we make use of helpers and thus
+         * not require an include.
          *
-         * Again, we default this to true.
+         * Again, we default this flag to true.
          */
-        const auto id_cfg(make_inclusion_directive_configuration(tg, arch, o));
+        const auto id_cfg(make_inclusion_directive_configuration(tg, arch, a));
         if (!id_cfg.inclusion_required()) {
             BOOST_LOG_SEV(lg, debug) << "Inclusion directive not required "
                                      << " for archetype: " << arch;
@@ -310,10 +307,10 @@ void inclusion_expander::compute_inclusion_directives(
 
         /*
          * Does the configuration provide a "hard-coded" inclusion
-         * directive?  That is, the type had an hard-coded incantation
-         * for its include. This is the case for system models such as
-         * boost, std etc where we can't compute the inclusion
-         * directive.
+         * directive?  That is, the archetype has an hard-coded
+         * incantation for its include. This is the case for proxy
+         * models such as boost, std etc where we can't compute the
+         * inclusion directive.
          */
         std::string directive;
         if (!id_cfg.inclusion_directive().empty())
@@ -321,7 +318,8 @@ void inclusion_expander::compute_inclusion_directives(
         else {
             /*
              * Finally, we have no alternative but to compute the
-             * inclusion directive.
+             * inclusion directive according to a well-defined
+             * heuristic.
              */
             const auto path(fmt->inclusion_path(l, n));
             directive = to_inclusion_directive(path);
@@ -380,8 +378,6 @@ inclusion_expander::compute_inclusion_dependencies(
     const auto id(e.name().id());
     BOOST_LOG_SEV(lg, debug) << "Creating inclusion dependencies for: " << id;
 
-    element_inclusion_dependencies_type r;
-
     /*
      * First we must obtain all formatters for the type of element we
      * are building includes for. They may or may not exist in the
@@ -389,12 +385,13 @@ inclusion_expander::compute_inclusion_dependencies(
      * formatters for concepts at present. If so, we're done.
      *
      * Note also that we must query the formatters by type index
-     * rather than use the formatter configuration container
+     * rather than use the archetype configuration container
      * directly. This is due to element segmentation, as we may have
      * more than one element associated with an id. To generate the
      * inclusion dependencies we must make sure we pick the pair of
      * element and the formatters that support it.
      */
+    element_inclusion_dependencies_type r;
     const auto ti(std::type_index(typeid(e)));
     const auto i(frp.file_formatters_by_type_index().find(ti));
     if (i == frp.file_formatters_by_type_index().end()) {
@@ -404,7 +401,9 @@ inclusion_expander::compute_inclusion_dependencies(
 
     for (const auto fmt : i->second) {
         const auto arch(fmt->archetype_location().archetype());
-        BOOST_LOG_SEV(lg, debug) << "Providing for: " << arch;
+        const auto fmtn(fmt->formatter_name());
+        BOOST_LOG_SEV(lg, debug) << "Providing for: " << arch
+                                 << " using formatter: " << fmtn;
 
         /*
          * Obtain the formatter's list of inclusion dependencies. If
@@ -418,18 +417,16 @@ inclusion_expander::compute_inclusion_dependencies(
          * Ensure the dependencies are sorted according to a well
          * defined order and all duplicates are removed. Duplicates
          * arise because an element may refer to another element more
-         * than once (e.g. list of T as well as vector of T).
+         * than once - e.g. std::list<T> as well as std::vector<T>.
          */
         deps.sort(include_directive_comparer);
         deps.unique();
 
         /*
          * Now slot in the results, ensuring our formatter name is
-         * unique.
-         * Now slot in the results. We have guaranteed in the
-         * registrar that the formatter name is unique, so no need to
-         * check.
-         * remove this check.
+         * unique. We have guaranteed in the registrar that the
+         * formatter name is unique, so no need to perform any
+         * insertion checks here.
          */
         r[arch] = deps;
     }
@@ -447,6 +444,7 @@ void inclusion_expander::populate_inclusion_dependencies(
 
     BOOST_LOG_SEV(lg, debug) << "Creating inclusion dependencies "
                              << "for all formattables. ";
+
     inclusion_dependencies_builder_factory idf(idc, formattables);
     for (auto& pair : formattables) {
         const auto id(pair.first);
@@ -465,10 +463,11 @@ void inclusion_expander::populate_inclusion_dependencies(
 
             /*
              * We do not need to compute inclusion dependencies for
-             * elements that are not part of the target model. However, we
-             * do need them around for inclusion directives.
+             * elements that are not part of the target
+             * model. However, we do need them around for inclusion
+             * directives, so we can't rely on reduction.
              */
-            if (ptr->origin_type() != yarn::origin_types::target)
+            if (e.origin_type() != yarn::origin_types::target)
                 continue;
 
             /*
@@ -481,26 +480,24 @@ void inclusion_expander::populate_inclusion_dependencies(
                 continue;
 
             /*
-             * Copy across all of the dependencies for the element,
-             * across all supported formatters (that have inclusion
-             * dependencies). Note that this caters of the
-             * multi-segment elements, merging them all into a single
-             * set of dependencies.
+             * Copy across all of the dependencies for the element.
+             * Note that this caters for multi-segment elements,
+             * merging them all into a single set of dependencies.
              */
-            for (const auto& dep_pair : deps) {
+            for (const auto& pair : deps) {
                 /*
                  * First we need to obtain the configuration for this
                  * formatter. It must have been initialised by the
                  * transformer.
                  */
-                const auto arch(dep_pair.first);
+                const auto arch(pair.first);
                 const auto i(art_props.find(arch));
                 if (i == art_props.end()) {
                     BOOST_LOG_SEV(lg, error) << missing_archetype << arch;
                     BOOST_THROW_EXCEPTION(
                         expansion_error(missing_archetype + arch));
                 }
-                i->second.inclusion_dependencies(dep_pair.second);
+                i->second.inclusion_dependencies(pair.second);
             }
         }
     }

@@ -22,8 +22,8 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
-#include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/inclusion_support_types.hpp"
+#include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formattables/canonical_archetype_expander.hpp"
 
 namespace {
@@ -39,61 +39,61 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-void canonical_archetype_expander::
-expand(const formatters::repository& frp, model& fm) const {
-
+void canonical_archetype_expander::expand(const formatters::repository& frp,
+    formattables::element_properties& eprops, const yarn::element& e) const {
+    BOOST_LOG_SEV(lg, debug) << "Procesing element: " << e.name().id();
     const auto cs(formatters::inclusion_support_types::canonical_support);
     const auto& ffti(frp.file_formatters_by_type_index());
 
-    for (auto& pair : fm.formattables()) {
-        const auto id(pair.first);
-        BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
+    /*
+     * For each element segment, find the corresponding formatters.
+     */
+    const auto ti(std::type_index(typeid(e)));
+    BOOST_LOG_SEV(lg, debug) << "Type index: " << ti.name();
 
+    /*
+     * Not all elements have formatters; for example, concepts don't
+     * have any at present. If so, skip the element.
+     */
+    const auto i(ffti.find(ti));
+    if (i == ffti.end()) {
+        BOOST_LOG_SEV(lg, debug) << "Element has no formatters.";
+        return;
+    }
+
+    /*
+     * Find the canonical formatter for the element and slot it in,
+     * pairing the canonical name against the formatter name.
+     */
+    const auto& fmts(i->second);
+    for (const auto& ptr : fmts) {
+        const auto& fmt(*ptr);
+        if (fmt.inclusion_support_type() != cs)
+            continue;
+
+        const auto& al(fmt.archetype_location());
+        const auto arch(al.archetype());
+        const auto fct(al.facet());
+
+        const auto carch(formatters::traits::canonical_archetype(fct));
+        eprops.canonical_archetype_to_archetype()[carch] = arch;
+        BOOST_LOG_SEV(lg, debug) << "Mapped " << carch << " to " << arch;
+    }
+    BOOST_LOG_SEV(lg, debug) << "Processed element.";
+}
+
+void canonical_archetype_expander::
+expand(const formatters::repository& frp, model& fm) const {
+    BOOST_LOG_SEV(lg, debug) << "Started expansion.";
+    for (auto& pair : fm.formattables()) {
         auto& formattable(pair.second);
         auto& eprops(pair.second.element_properties());
         for (const auto& segment : formattable.all_segments()) {
             const auto& e(*segment);
-
-            /*
-             * For each element segment, find the corresponding
-             * formatters.
-             */
-            const auto ti(std::type_index(typeid(e)));
-            BOOST_LOG_SEV(lg, debug) << "Type index: " << ti.name();
-
-            /*
-             * Not all elements have formatters; for example, concepts
-             * don't have any at present. If so, skip the element.
-             */
-            const auto i(ffti.find(ti));
-            if (i == ffti.end()) {
-                BOOST_LOG_SEV(lg, debug) << "Element has no formatters.";
-                continue;
-            }
-
-            /*
-             * Find the canonical formatter for the element and slot
-             * it in, pairing the canonical name against the formatter
-             * name.
-             */
-            const auto& formatters(i->second);
-            for (const auto& ptr : formatters) {
-                const auto& formatter(*ptr);
-                if (formatter.inclusion_support_type() != cs)
-                    continue;
-
-                const auto& al(formatter.archetype_location());
-                const auto arch(al.archetype());
-                const auto fct(al.facet());
-
-                using formatters::traits;
-                const auto carch(traits::canonical_archetype(fct));
-                eprops.canonical_archetype_to_archetype()[carch] = arch;
-                BOOST_LOG_SEV(lg, debug) << "Mapping " << carch
-                                         << " to " << arch;
-            }
+            expand(frp, eprops, e);
         }
     }
+    BOOST_LOG_SEV(lg, debug) << "Finished expansion.";
 }
 
 } } } }

@@ -31,8 +31,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-static logger
-lg(logger_factory("quilt.cpp.formattables.streaming_expander"));
+static logger lg(logger_factory("quilt.cpp.formattables.streaming_expander"));
 
 }
 
@@ -59,7 +58,7 @@ std::ostream& operator<<(std::ostream& s,
 streaming_expander::type_group
 streaming_expander::make_type_group(
     const annotations::type_repository& atrp) const {
-    BOOST_LOG_SEV(lg, debug) << "Creating field definitions.";
+    BOOST_LOG_SEV(lg, debug) << "Creating type group.";
 
     type_group r;
 
@@ -73,7 +72,7 @@ streaming_expander::make_type_group(
     const auto ruc(traits::cpp::streaming::remove_unprintable_characters());
     r.remove_unprintable_characters = s.select_type_by_name(ruc);
 
-    BOOST_LOG_SEV(lg, debug) << "Created field definitions. Result: " << r;
+    BOOST_LOG_SEV(lg, debug) << "Created type group. Result: " << r;
 
     return r;
 }
@@ -82,7 +81,7 @@ boost::optional<streaming_properties>
 streaming_expander::make_streaming_properties(
     const type_group& tg, const annotations::annotation& a) const {
 
-    BOOST_LOG_SEV(lg, debug) << "Creating streaming configuration.";
+    BOOST_LOG_SEV(lg, debug) << "Creating streaming properties.";
     bool found_any(false);
     streaming_properties r;
     const annotations::entry_selector s(a);
@@ -108,7 +107,7 @@ streaming_expander::make_streaming_properties(
     if (!found_any)
         return boost::optional<streaming_properties>();
 
-    BOOST_LOG_SEV(lg, debug) << "Created streaming configuration. "
+    BOOST_LOG_SEV(lg, debug) << "Created streaming properties. "
                              << "Result: " << r;
     return r;
 }
@@ -116,7 +115,7 @@ streaming_expander::make_streaming_properties(
 void streaming_expander::
 expand(const annotations::type_repository& atrp, model& fm) const {
 
-    BOOST_LOG_SEV(lg, debug) << "Started expanding streaming configuration.";
+    BOOST_LOG_SEV(lg, debug) << "Started expanding streaming properties.";
     const auto tg(make_type_group(atrp));
     for (auto& pair : fm.formattables()) {
         const auto id(pair.first);
@@ -130,14 +129,14 @@ expand(const annotations::type_repository& atrp, model& fm) const {
          */
         auto segment(formattable.master_segment());
         const auto& e(*segment);
-        const auto sc(make_streaming_properties(tg, e.annotation()));
-        if (!sc)
+        const auto sp(make_streaming_properties(tg, e.annotation()));
+        if (!sp)
             continue;
 
-        fm.streaming_properties()[id] = *sc;
+        fm.streaming_properties()[id] = *sp;
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Finished expanding streaming configuration. "
+    BOOST_LOG_SEV(lg, debug) << "Finished expanding streaming properties. "
                              << "Result: "<< fm.streaming_properties();
 }
 

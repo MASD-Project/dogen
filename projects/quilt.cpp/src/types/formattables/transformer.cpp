@@ -52,6 +52,11 @@ transform(const formatters::repository& frp, const yarn::model& m) const {
         const auto id(e.name().id());
         BOOST_LOG_SEV(lg, debug) << "Processing element: " << id;
 
+        /*
+         * We need to check to see if we've already inserted an
+         * element due to the segmentation of elements - we may need
+         * to process the master element and one or more extensions.
+         */
         auto i(r.find(id));
         if (i == r.end()) {
             formattable fbl;
@@ -62,11 +67,19 @@ transform(const formatters::repository& frp, const yarn::model& m) const {
         } else
             BOOST_LOG_SEV(lg, debug) << "Element already inserted. ";
 
+        /*
+         * Setup the master segment depending on the extension flag.
+         */
         auto& fbl(i->second);
         fbl.all_segments().push_back(ptr);
         if (!e.is_element_extension())
             fbl.master_segment(ptr);
 
+        /*
+         * Check to see if the element has any formatters. Some
+         * elements such as concepts do not have formatters at
+         * present.
+         */
         const auto ti(std::type_index(typeid(e)));
         const auto j(frp.file_formatters_by_type_index().find(ti));
         if (j == frp.file_formatters_by_type_index().end()) {
@@ -75,16 +88,24 @@ transform(const formatters::repository& frp, const yarn::model& m) const {
         }
         BOOST_LOG_SEV(lg, debug) << "Element has formatters " << id;
 
+        /*
+         * Perform the artefact expansion by looking at all the
+         * archetypes available via the formatters. Note that we check
+         * for duplicates on insertion because of the element
+         * segmentation scenario. Its there just to ensure we don't
+         * have a formatter processing both a master and an extension.
+         */
         auto& art_props(fbl.element_properties().artefact_properties());
         for (const auto& fmt : j->second) {
             const auto arch(fmt->archetype_location().archetype());
             const auto pair(std::make_pair(arch, artefact_properties()));
-            const auto ret(art_props.insert(pair));
-            if (!ret.second) {
+            const auto inserted(art_props.insert(pair).second);
+            if (!inserted) {
                 BOOST_LOG_SEV(lg, error) << duplicate_archetype << arch;
                 BOOST_THROW_EXCEPTION(
                     transformation_error(duplicate_archetype + arch));
             }
+
             BOOST_LOG_SEV(lg, trace) << "Added formatter: " << arch
                                      << " to element: " << id;
         }

@@ -32,7 +32,7 @@ static logger lg(logger_factory(
 
 const auto archetype_postfix(".canonical_archetype");
 
-const std::string missing_element("Element id not found: ");
+const std::string missing_element("Cannot find formattables for element id: ");
 const std::string missing_canonical_archetype(
     "Canonical archetype not found: ");
 
@@ -55,6 +55,7 @@ is_canonical_archetype(const std::string& archetype) const {
 std::string canonical_archetype_resolver::resolve(const std::string& element_id,
     const std::string& archetype) const {
 
+    BOOST_LOG_SEV(lg, debug) << "Resolving archetype: " << archetype;
     if (!is_canonical_archetype(archetype)) {
         BOOST_LOG_SEV(lg, debug) << "Archetype name is not canonical: "
                                  << archetype;
@@ -73,8 +74,7 @@ std::string canonical_archetype_resolver::resolve(const std::string& element_id,
     const auto j(cata.find(archetype));
     if (j == cata.end()) {
         BOOST_LOG_SEV(lg, error) << missing_canonical_archetype
-                                 << archetype << " for element: "
-                                 <<  element_id;
+                                 << archetype << " for element: " << element_id;
         BOOST_THROW_EXCEPTION(
             resolution_error(missing_canonical_archetype + archetype));
     }

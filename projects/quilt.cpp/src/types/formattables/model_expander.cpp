@@ -43,10 +43,10 @@ expand_streaming(const annotations::type_repository& atrp, model& fm) const {
 }
 
 void model_expander::expand_enablement(const annotations::type_repository& atrp,
-    const annotations::annotation& root_object,
+    const annotations::annotation& ra,
     const formatters::repository& frp, model& fm) const {
     enablement_expander ex;
-    ex.expand(atrp, root_object, frp, fm);
+    ex.expand(atrp, ra, frp, fm);
 }
 
 void model_expander::expand_canonical_archetypes(
@@ -105,8 +105,7 @@ expand_facet_directories(const locator& l,model& fm) const {
 }
 
 void model_expander::expand(
-    const annotations::type_repository& atrp,
-    const annotations::annotation& root,
+    const annotations::type_repository& atrp, const annotations::annotation& ra,
     const dogen::formatters::decoration_properties_factory& dpf,
     const formatters::repository& frp, const locator& l, model& fm) const {
 
@@ -120,7 +119,7 @@ void model_expander::expand(
      * Enablement expansion must be done before inclusion because
      * inclusion relies on it to know which formatters are enabled.
      */
-    expand_enablement(atrp, root, frp, fm);
+    expand_enablement(atrp, ra, frp, fm);
 
     /*
      * Canonical formatter expansion must be done before inclusion
@@ -128,6 +127,7 @@ void model_expander::expand(
      * inclusion directives.
      */
     expand_canonical_archetypes(frp, fm);
+
     expand_inclusion(atrp, frp, l, fm);
     expand_decoration(dpf, fm);
     expand_aspects(atrp, fm);

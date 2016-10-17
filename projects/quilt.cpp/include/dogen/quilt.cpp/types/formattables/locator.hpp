@@ -90,12 +90,12 @@ private:
 
 private:
     /**
-     * @brief Given a formatter name, returns its configuration.
+     * @brief Given an archetype, returns its configuration.
      *
-     * @pre Formatter must have a configuration.
+     * @pre Archetype must have a configuration.
      */
     const locator_archetype_configuration& configuration_for_archetype(
-        const std::string& formatter_name) const;
+        const std::string& archetype) const;
 
 private:
     /**
@@ -111,7 +111,7 @@ private:
      * The facet path segment is the same for both include and source
      * folders; it starts at the facet and includes the file name.
      */
-    boost::filesystem::path make_facet_path(const std::string& formatter_name,
+    boost::filesystem::path make_facet_path(const std::string& archetype,
         const std::string& extension, const yarn::name& n) const;
 
     /**
@@ -119,7 +119,7 @@ private:
      * directory for the supplied qualified name.
      */
     boost::filesystem::path make_inclusion_path(
-        const std::string& formatter_name, const std::string& extension,
+        const std::string& archetype, const std::string& extension,
         const yarn::name& n) const;
 
 public:
@@ -127,37 +127,37 @@ public:
      * @brief Generate the inclusion path for C++ headers.
      */
     boost::filesystem::path make_inclusion_path_for_cpp_header(
-        const yarn::name& n, const std::string& formatter_name) const;
+        const yarn::name& n, const std::string& archetype) const;
 
     /**
      * @brief Generate the full path for C++ headers.
      */
     boost::filesystem::path make_full_path_for_cpp_header(
-        const yarn::name& n, const std::string& formatter_name) const;
+        const yarn::name& n, const std::string& archetype) const;
 
     /**
      * @brief Generate the full path for C++ implementation.
      */
     boost::filesystem::path make_full_path_for_cpp_implementation(
-        const yarn::name& n, const std::string& formatter_name) const;
+        const yarn::name& n, const std::string& archetype) const;
 
     /**
      * @brief Generate the full path for cmakelists in include.
      */
     boost::filesystem::path make_full_path_for_include_cmakelists(
-        const yarn::name& n, const std::string& formatter_name) const;
+        const yarn::name& n, const std::string& archetype) const;
 
     /**
      * @brief Generate the full path for cmakelists in source.
      */
     boost::filesystem::path make_full_path_for_source_cmakelists(
-        const yarn::name& n, const std::string& formatter_name) const;
+        const yarn::name& n, const std::string& archetype) const;
 
     /**
      * @brief Generate the full path for odb options.
      */
     boost::filesystem::path make_full_path_for_odb_options(
-        const yarn::name& n, const std::string& formatter_name) const;
+        const yarn::name& n, const std::string& archetype) const;
 
 public:
     std::unordered_map<std::string, std::string> facet_directories() const;

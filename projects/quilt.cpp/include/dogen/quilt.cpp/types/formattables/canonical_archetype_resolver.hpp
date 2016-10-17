@@ -34,6 +34,13 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
+/**
+ * @brief If given an archetype in canonical form and an element id,
+ * resolves it to the concrete archetype for that element.
+ *
+ * If supplied a non-canonical archetype, simply returns it back to
+ * the caller.
+ */
 class canonical_archetype_resolver {
 public:
     canonical_archetype_resolver(

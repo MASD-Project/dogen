@@ -106,13 +106,12 @@ helper_expander::facets_for_family_type
 helper_expander::facets_for_family(const formatters::repository& frp) const {
     BOOST_LOG_SEV(lg, debug) << "Started making facets for family.";
 
-    facets_for_family_type r;
-
     /*
      * Unpack the helper formatter container to generate a mapping of
      * helper family to facet. The container has helpers by family, by
      * owning file formatter.
      */
+    facets_for_family_type r;
     for (const auto& families_pair : frp.helper_formatters())
         for (const auto& file_formatter_pair : families_pair.second)
             for (const auto& hf : file_formatter_pair.second)
@@ -126,9 +125,10 @@ helper_expander::facets_for_family(const formatters::repository& frp) const {
 
 bool helper_expander::requires_hashing_helper(const facets_for_family_type& fff,
     const std::string& family) const {
+
     /*
-     * If there is no entry on the container for this family, we
-     * don't need a helper for hashing.
+     * If there is no entry on the container for this family, we don't
+     * need a helper for hashing.
      */
     const auto i(fff.find(family));
     if (i == fff.end())
@@ -189,9 +189,9 @@ boost::optional<helper_descriptor> helper_expander::walk_name_tree(
     r.namespaces(namespace_list(nt.current()));
     r.is_simple_type(nt.is_current_simple_type());
 
-    const auto sc(streaming_properties_for_id(ctx, id));
-    if (sc)
-        r.streaming_properties(sc);
+    const auto sp(streaming_properties_for_id(ctx, id));
+    if (sp)
+        r.streaming_properties(sp);
 
     const auto fam(helper_family_for_id(ctx, id));
     r.family(fam);
@@ -211,24 +211,24 @@ boost::optional<helper_descriptor> helper_expander::walk_name_tree(
     if (r.is_pointer())
         r.name_tree_identifiable().append("_ptr");
 
-    helper_properties hc;
-    hc.current(r);
+    helper_properties hp;
+    hp.current(r);
 
     const auto iir(in_inheritance_relationship);
-    hc.in_inheritance_relationship(iir);
+    hp.in_inheritance_relationship(iir);
 
     /*
      * Note that we are processing the children even though the parent
-     * may not require a helper. This is over-caution and may even be
-     * wrong. We are basically saying that in a name tree, there may
-     * be nodes which do not require helpers followed by nodes that
-     * do.
+     * may not require a helper. This is slight over-caution and may
+     * even be wrong. We are basically saying that in a name tree,
+     * there may be nodes which do not require helpers followed by
+     * nodes that do.
      */
     for (const auto c : nt.children()) {
         /*
          * We need to remember the descriptors of the direct
-         * descendants (and just the direct descendants, not its
-         * children). If we have a child, we must have a descriptor.
+         * descendants - and just the direct descendants, not its
+         * children. If we have a child, we must have a descriptor.
          */
         const auto aco(nt.are_children_opaque());
         const auto dd(walk_name_tree(ctx, fff, iir, aco, c, done, hps));
@@ -242,9 +242,9 @@ boost::optional<helper_descriptor> helper_expander::walk_name_tree(
             BOOST_LOG_SEV(lg, error) << empty_identifiable;
             BOOST_THROW_EXCEPTION(expansion_error(empty_identifiable));
         }
-        hc.direct_descendants().push_back(*dd);
+        hp.direct_descendants().push_back(*dd);
     }
-    BOOST_LOG_SEV(lg, debug) << "Helper properties: " << hc;
+    BOOST_LOG_SEV(lg, debug) << "Helper properties: " << hp;
 
     /*
      * Ensure we have not yet created a helper for this name
@@ -256,10 +256,9 @@ boost::optional<helper_descriptor> helper_expander::walk_name_tree(
      * (one per string), but we do not want to generate two helper
      * methods for the strings.
      *
-     * Note also we are using the return type's identifiable
-     * rather than the input name tree's identifiable. This is
-     * because we may have augmented it (e.g. the is pointer use
-     * case).
+     * Note also we are using the return type's identifiable name
+     * rather than the input name tree's identifiable. This is because
+     * we may have augmented it - e.g. the "is pointer" use case.
      */
     const auto ident(r.name_tree_identifiable());
     if (ident.empty()) {
@@ -268,12 +267,11 @@ boost::optional<helper_descriptor> helper_expander::walk_name_tree(
     }
 
     if (done.find(ident) == done.end()) {
-        hps.push_back(hc);
+        hps.push_back(hp);
         done.insert(ident);
-    } else {
-        BOOST_LOG_SEV(lg, debug) << "Name tree already processed: "
-                                 << ident;
-    }
+    } else
+        BOOST_LOG_SEV(lg, debug) << "Name tree already processed: " << ident;
+
     return r;
 }
 
@@ -320,8 +318,8 @@ void helper_expander::populate_helper_properties(const context& ctx,
         auto& eprops(formattable.element_properties());
 
         /*
-         * We only want to process the master segment; the
-         * extensions can be ignored.
+         * We only want to process the master segment; the extensions
+         * can be ignored.
          */
         auto& segment(formattable.master_segment());
 
@@ -336,8 +334,8 @@ void helper_expander::populate_helper_properties(const context& ctx,
             continue;
 
         /*
-         * We are only interested in yarn objects; all other
-         * element types do not need helpers.
+         * We are only interested in yarn objects; all other element
+         * types do not need helpers.
          */
         const auto ptr(dynamic_cast<const yarn::object*>(segment.get()));
         if (ptr == nullptr)

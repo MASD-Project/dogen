@@ -35,10 +35,10 @@ namespace cpp {
 namespace formattables {
 
 void reducer::reduce(model& fm) const {
-    std::unordered_map<std::string, formattable> reduced;
-
     BOOST_LOG_SEV(lg, debug) << "Starting reduction.";
     BOOST_LOG_SEV(lg, debug) << "Original size: " << fm.formattables().size();
+
+    std::unordered_map<std::string, formattable> reduced;
     for (const auto& pair : fm.formattables()) {
         const auto& formattable(pair.second);
         const auto& e(*formattable.master_segment());

@@ -57,7 +57,6 @@ to_header_guard(const boost::filesystem::path& p) const {
     return ss.str();
 }
 
-
 void file_path_and_guard_expander::
 expand(const formatters::repository& frp, const locator& l, model& fm) const {
 
@@ -75,13 +74,12 @@ expand(const formatters::repository& frp, const locator& l, model& fm) const {
         auto& eprops(formattable.element_properties());
 
         /*
-         * Go thorough all the formatter configurations. For each,
-         * find the associated formatter and ask it to generate the
-         * full path for the file.
+         * Go thorough all the artefact properties and, for each, find
+         * the associated formatter.
          */
-        for (auto& art_props_pair : eprops.artefact_properties()) {
-            const auto arch(art_props_pair.first);
-            auto& art_props(art_props_pair.second);
+        for (auto& pair : eprops.artefact_properties()) {
+            const auto arch(pair.first);
+            auto& art_props(pair.second);
 
             const auto i(ffba.find(arch));
             if (i == ffba.end()) {
@@ -90,6 +88,10 @@ expand(const formatters::repository& frp, const locator& l, model& fm) const {
                     expansion_error(missing_archetype + arch));
             }
 
+            /*
+             * Ask the formatter to generate the full path for the
+             * artefact.
+             */
             const auto& fmt(i->second);
             art_props.file_path(fmt->full_path(l, n));
 

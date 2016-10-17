@@ -54,18 +54,19 @@ namespace formattables {
  * #include pragma. For example "a/b/c.hpp" and <a/b/c.hpp> are
  * inclusion directives; note that the quotes and angle brackets are
  * part of the directive. There should be an inclusion directive
- * associated with every pair (name, formatter name). The inclusion
+ * associated with every ordered pair (name, archetype). The inclusion
  * directive repository contains the complete set of inclusion
- * directives - the inclusion directives universe if you'd like.
+ * directives - the inclusion directives domain if you'd like.
  *
  * Inclusion dependencies are a set of inclusion directives. They are
- * also associated with a pair (name, formatter). The inclusion
+ * also associated with a pair (name, archetype). The inclusion
  * dependencies for each formatter are created by the formatter
- * themselves since they are relative to the formatter (i.e. for the
- * same element different formatters will generate different
- * dependencies). It uses the inclusion directives precomputed from
- * the model to assemble the inclusion dependencies that the formatter
- * needs in order to generate a compilable C++ file.
+ * themselves since they are relative to the formatter - i.e. for the
+ * same element (and even archetype) different formatters will
+ * generate different dependencies. It uses the inclusion directives
+ * precomputed from the model to assemble the inclusion dependencies
+ * that the formatter needs in order to generate a compilable C++
+ * file.
  *
  */
 class inclusion_expander {
@@ -93,7 +94,7 @@ private:
         const annotations::annotation& o) const;
 
     inclusion_directive_configuration make_inclusion_directive_configuration(
-        const type_group& tg,const std::string& formatter_name,
+        const type_group& tg,const std::string& archetype,
         const annotations::annotation& o) const;
 
 private:
@@ -116,9 +117,8 @@ private:
                                >
     inclusion_directives_container_type;
 
-    void insert_inclusion_directive(
-        const std::string& id, const std::string& formatter_name,
-        const std::string& directive,
+    void insert_inclusion_directive(const std::string& id,
+        const std::string& archetype, const std::string& directive,
         inclusion_directives_container_type& idc) const;
 
     void compute_inclusion_directives(const type_group& tg,

@@ -78,7 +78,7 @@ private:
      * @pre name must exist in path derivatives collection.
      */
     boost::optional<std::string> get_inclusion_directive(
-        const yarn::name& n, const std::string& formatter_name) const;
+        const yarn::name& n, const std::string& archetype) const;
 
 public:
     /**
@@ -90,7 +90,7 @@ public:
      * @brief Returns true if the formatter is enabled.
      */
     bool is_enabled(const yarn::name& n,
-        const std::string& formatter_name) const;
+        const std::string& archetype) const;
 
 public:
     /**
@@ -99,21 +99,21 @@ public:
     void add(const std::string& inclusion_directive);
 
     /**
-     * @brief Adds the inclusion directive for the supplied formatter
-     * name and name.
+     * @brief Adds the inclusion directive for the supplied archetype
+     * and name.
      */
     /**@{*/
-    void add(const yarn::name& n, const std::string& formatter_name);
+    void add(const yarn::name& n, const std::string& archetype);
     void add(const boost::optional<yarn::name>& n,
-        const std::string& formatter_name);
+        const std::string& archetype);
     /**@}*/
 
     /**
      * @brief Adds the inclusion directives for the supplied
-     * formatter name, for each of the supplied names.
+     * archetype, for each of the supplied names.
      */
     void add(const std::list<yarn::name>& names,
-        const std::string& formatter_name);
+        const std::string& archetype);
 
 public:
     /**

@@ -48,7 +48,7 @@ private:
         const annotations::type_repository& atrp, model& fm) const;
 
     void expand_enablement(const annotations::type_repository& atrp,
-        const annotations::annotation& root, const formatters::repository& frp,
+        const annotations::annotation& ra, const formatters::repository& frp,
         model& fm) const;
 
     void expand_canonical_archetypes(const formatters::repository& frp,
@@ -79,7 +79,7 @@ private:
 
 public:
     void expand(const annotations::type_repository& atrp,
-        const annotations::annotation& root,
+        const annotations::annotation& rat,
         const dogen::formatters::decoration_properties_factory& dpf,
         const formatters::repository& frp, const locator& l, model& fm) const;
 };

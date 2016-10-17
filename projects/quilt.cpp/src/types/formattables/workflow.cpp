@@ -80,16 +80,16 @@ make_model(const formatters::repository& frp, const yarn::model& m) const {
 
 void workflow::expand_model(
     const annotations::type_repository& atrp,
-    const annotations::annotation& root,
+    const annotations::annotation& ra,
     const dogen::formatters::decoration_properties_factory& dpf,
     const formatters::repository& frp, const locator& l, model& fm) const {
     model_expander ex;
-    ex.expand(atrp, root, dpf, frp, l, fm);
+    ex.expand(atrp, ra, dpf, frp, l, fm);
 }
 
 model workflow::execute(
     const options::cpp_options& opts, const annotations::type_repository& atrp,
-    const annotations::annotation& root,
+    const annotations::annotation& ra,
     const dogen::formatters::decoration_properties_factory& dpf,
     const formatters::repository& frp, const yarn::model& m) const {
 
@@ -97,8 +97,8 @@ model workflow::execute(
 
     const auto module_ids(obtain_module_ids(m));
     const auto pdp(opts.project_directory_path());
-    const locator l(pdp, atrp, frp, root, m.name(), module_ids);
-    expand_model(atrp, root, dpf, frp, l, r);
+    const locator l(pdp, atrp, frp, ra, m.name(), module_ids);
+    expand_model(atrp, ra, dpf, frp, l, r);
 
     return r;
 }

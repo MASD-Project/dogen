@@ -18,8 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/algorithm/string/predicate.hpp>
+#include <typeindex>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/types/element.hpp"
+#include "dogen/quilt.cpp/types/fabric/cmakelists.hpp"
+#include "dogen/quilt.cpp/types/fabric/odb_options.hpp"
 #include "dogen/quilt.cpp/types/formattables/decoration_expander.hpp"
 
 namespace {
@@ -49,10 +52,16 @@ expand(const dogen::formatters::decoration_properties_factory& dpf,
         auto& formattable(pair.second);
         auto& eprops(formattable.element_properties());
 
-        // FIXME: obtain the modeline name from the formatter
-        if (boost::contains(id, "CMakeLists"))
+        const auto& e(*formattable.master_segment());
+        const auto ti(std::type_index(typeid(e)));
+
+        /*
+         * Not brilliant but at present we determine the type of
+         * decoration to apply based on the element meta-type.
+         */
+        if (ti == std::type_index(typeid(fabric::cmakelists)))
             eprops.decoration_properties(dpf.make(cmake_modeline_name));
-        else if (boost::contains(id, "options.odb"))
+        else if (ti == std::type_index(typeid(fabric::odb_options)))
             eprops.decoration_properties(dpf.make(odb_modeline_name));
         else
             eprops.decoration_properties(dc);

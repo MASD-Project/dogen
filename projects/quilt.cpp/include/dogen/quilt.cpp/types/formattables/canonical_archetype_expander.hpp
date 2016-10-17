@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include "dogen/quilt.cpp/types/formatters/repository.hpp"
 #include "dogen/quilt.cpp/types/formattables/model.hpp"
+#include "dogen/quilt.cpp/types/formatters/repository.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -34,8 +34,12 @@ namespace cpp {
 namespace formattables {
 
 class canonical_archetype_expander {
+private:
+    void expand(const formatters::repository& frp,
+        formattables::element_properties& eprops, const yarn::element& e) const;
+
 public:
-    void expand(const formatters::repository& rp, model& fm) const;
+    void expand(const formatters::repository& frp, model& fm) const;
 };
 
 } } } }

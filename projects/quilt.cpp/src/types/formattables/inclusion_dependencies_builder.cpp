@@ -58,20 +58,19 @@ namespace formattables {
 
 inclusion_dependencies_builder::inclusion_dependencies_builder(
     const std::unordered_map<std::string,
-    std::unordered_map<std::string, std::string>
-    >& inclusion_directives,
+    std::unordered_map<std::string, std::string>>& inclusion_directives,
     const std::unordered_map<std::string, formattable>& formattables)
     : inclusion_directives_(inclusion_directives),
       formattables_(formattables) {}
 
 boost::optional<std::string>
 inclusion_dependencies_builder::get_inclusion_directive(
-    const yarn::name& n, const std::string& formatter_name) const {
+    const yarn::name& n, const std::string& archetype) const {
     const auto i(inclusion_directives_.find(n.id()));
     if (i == inclusion_directives_.end())
         return boost::optional<std::string>();
 
-    const auto j(i->second.find(formatter_name));
+    const auto j(i->second.find(archetype));
     if (j == i->second.end())
         return boost::optional<std::string>();
 
@@ -114,7 +113,7 @@ inclusion_dependencies_builder::make_special_includes(
 }
 
 bool inclusion_dependencies_builder::is_enabled(const yarn::name& n,
-    const std::string& formatter_name) const {
+    const std::string& archetype) const {
     const auto i(formattables_.find(n.id()));
     if (i == formattables_.end()) {
         BOOST_LOG_SEV(lg, error) << name_not_found << n.id();
@@ -124,19 +123,18 @@ bool inclusion_dependencies_builder::is_enabled(const yarn::name& n,
     const auto& formattable(i->second);
     const auto& eprops(formattable.element_properties());
     const auto& art_props(eprops.artefact_properties());
-    const auto j(art_props.find(formatter_name));
+    const auto j(art_props.find(archetype));
     if (j == art_props.end()) {
-        BOOST_LOG_SEV(lg, debug) << archetype_not_found << formatter_name
+        BOOST_LOG_SEV(lg, debug) << archetype_not_found << archetype
                                  << " element id: " << n.id();
         BOOST_THROW_EXCEPTION(
-            building_error(archetype_not_found + formatter_name));
+            building_error(archetype_not_found + archetype));
     }
 
     const bool r(j->second.enabled());
     if (!r) {
-        BOOST_LOG_SEV(lg, debug) << "Formatter disabled. Formatter: "
-                                 << formatter_name << " on type: "
-                                 << n.id() << "'";
+        BOOST_LOG_SEV(lg, debug) << "Archetype disabled. Archetype: "
+                                 << archetype << " on type: " << n.id() << "'";
     }
     return r;
 }
@@ -151,9 +149,9 @@ add(const std::string& inclusion_directive) {
 }
 
 void inclusion_dependencies_builder::
-add(const yarn::name& n, const std::string& formatter_name) {
+add(const yarn::name& n, const std::string& archetype) {
     canonical_archetype_resolver res(formattables_);
-    const auto resolved_arch(res.resolve(n.id(), formatter_name));
+    const auto resolved_arch(res.resolve(n.id(), archetype));
 
     if (!is_enabled(n, resolved_arch))
         return;
@@ -164,22 +162,22 @@ add(const yarn::name& n, const std::string& formatter_name) {
 }
 
 void inclusion_dependencies_builder::add(const boost::optional<yarn::name>& n,
-    const std::string& formatter_name) {
+    const std::string& archetype) {
 
     if (!n)
         return;
 
-    add(*n, formatter_name);
+    add(*n, archetype);
 }
 
 void inclusion_dependencies_builder::
-add(const std::list<yarn::name>& names, const std::string& formatter_name) {
+add(const std::list<yarn::name>& names, const std::string& archetype) {
     for (const auto& n : names)
-        add(n, formatter_name);
+        add(n, archetype);
 }
 
 std::list<std::string> inclusion_dependencies_builder::build() {
-    BOOST_LOG_SEV(lg, debug) << "Built inclusion dependencies for formatter.";
+    BOOST_LOG_SEV(lg, debug) << "Built inclusion dependencies for archetype.";
     BOOST_LOG_SEV(lg, debug) << "Result: " << inclusion_dependencies_;
 
     return inclusion_dependencies_;

@@ -18,9 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/io/ios_state.hpp>
 #include <boost/throw_exception.hpp>
-#include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/typeindex_io.hpp"
 #include "dogen/utility/io/unordered_set_io.hpp"
@@ -44,10 +42,8 @@ static logger lg(logger_factory("quilt.cpp.formattables.enablement_expander"));
 
 const std::string global_configuration_not_found(
     "Could not find global enablement configuration for formatter: ");
-const std::string local_configuration_not_found(
-    "Could not find local enablement configuration for formatter: ");
 const std::string duplicate_archetype_name("Duplicate archetype name: ");
-const std::string archetype_not_found("Formatter not found: ");
+const std::string archetype_not_found("Archetype not found: ");
 const std::string element_not_found("Element not found: ");
 const std::string default_value_unset("Default value not set for field: ");
 
@@ -86,58 +82,47 @@ inline std::ostream& operator<<(std::ostream& s,
     return s;
 }
 
-enablement_expander::global_type_group_type
-enablement_expander::make_global_type_group(
-    const annotations::type_repository& atrp,
+enablement_expander::global_type_group_type enablement_expander::
+make_global_type_group(const annotations::type_repository& atrp,
     const formatters::repository& frp) const {
 
-    BOOST_LOG_SEV(lg, debug) << "Creating global field definitions.";
+    BOOST_LOG_SEV(lg, debug) << "Creating global type group.";
 
     global_type_group_type r;
     const annotations::type_repository_selector s(atrp);
-    for (const auto& f : frp.file_formatters()) {
-        const auto al(f->archetype_location());
+    for (const auto& fmt : frp.file_formatters()) {
+        const auto& al(fmt->archetype_location());
 
         global_type_group gtg;
-        const auto& mn(al.kernel());
         const auto ebl(traits::enabled());
-        gtg.kernel_enabled = s.select_type_by_name(mn, ebl);
-
-        const auto& fct(al.facet());
-        gtg.facet_enabled = s.select_type_by_name(fct, ebl);
-
-        const auto& arch(al.archetype());
-        gtg.archetype_enabled = s.select_type_by_name(arch, ebl);
+        gtg.kernel_enabled = s.select_type_by_name(al.kernel(), ebl);
+        gtg.facet_enabled = s.select_type_by_name(al.facet(), ebl);
+        gtg.archetype_enabled = s.select_type_by_name(al.archetype(), ebl);
 
         const auto ow(traits::overwrite());
-        gtg.facet_overwrite = s.select_type_by_name(fct, ow);
-        gtg.archetype_overwrite = s.select_type_by_name(arch, ow);
+        gtg.facet_overwrite = s.select_type_by_name(al.facet(), ow);
+        gtg.archetype_overwrite = s.select_type_by_name(al.archetype(), ow);
 
-        r[arch] = gtg;
+        r[al.archetype()] = gtg;
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Created global field definitions. Result: "
-                             << r;
+    BOOST_LOG_SEV(lg, debug) << "Created global type group. Result: " << r;
     return r;
 }
 
 enablement_expander::global_enablement_configurations_type
 enablement_expander::obtain_global_configurations(
     const std::unordered_map<std::string, global_type_group>& gtg,
-    const annotations::annotation& root) const {
+    const annotations::annotation& ra) const {
 
     BOOST_LOG_SEV(lg, debug) << "Creating global enablement configuration.";
 
     global_enablement_configurations_type r;
-    const annotations::entry_selector s(root);
+    const annotations::entry_selector s(ra);
     for (const auto& pair : gtg) {
         const auto& arch(pair.first);
         const auto& t(pair.second);
 
-        /*
-         * Model configuration can only be set via meta-data, so we'll
-         * take the value set or its default.
-         */
         global_enablement_configuration gec;
         gec.kernel_enabled(s.get_boolean_content_or_default(t.kernel_enabled));
         gec.facet_enabled(s.get_boolean_content_or_default(t.facet_enabled));
@@ -165,13 +150,13 @@ void enablement_expander::update_facet_enablement(
     BOOST_LOG_SEV(lg, debug) << "Updating facet enablement.";
 
     /*
-     * For each formatter on our global configurations: find the facet
-     * to which the formatter belongs to, and update the enabled value
-     * of that facet in the main facet container.
+     * For each formatter in our global configurations: find the facet
+     * to which the formatter belongs to, and update the enablement
+     * value of that facet in the main facet container.
      *
      * Note that this is all a bit silly - we're doing this N times
-     * for one facet (where N is the number of formatters for that
-     * facet) rather than just read the facet field and update it
+     * for one facet - where N is the number of formatters for that
+     * facet - rather than just read the facet field and update it
      * once.
      *
      * FIXME: read facet fields here instead of reusing configuration.
@@ -183,15 +168,13 @@ void enablement_expander::update_facet_enablement(
         const auto i(ffba.find(arch));
         if (i == ffba.end()) {
             BOOST_LOG_SEV(lg, error) << archetype_not_found << arch;
-            BOOST_THROW_EXCEPTION(
-                expansion_error(archetype_not_found + arch));
+            BOOST_THROW_EXCEPTION(expansion_error(archetype_not_found + arch));
         }
 
         const auto& fmt(*i->second);
         const auto& al(fmt.archetype_location());
-        const auto fct(al.facet());
         const auto& gc(pair.second);
-        fct_props[fct].enabled(gc.facet_enabled());
+        fct_props[al.facet()].enabled(gc.facet_enabled());
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished updating facet enablement."
@@ -202,14 +185,13 @@ enablement_expander::local_type_group_type enablement_expander::
 make_local_type_group(const annotations::type_repository& atrp,
     const formatters::repository& frp) const {
 
-    BOOST_LOG_SEV(lg, debug) << "Creating local field definitions.";
+    BOOST_LOG_SEV(lg, debug) << "Creating local type grup.";
 
     local_type_group_type r;
     const annotations::type_repository_selector s(atrp);
-    for (const auto& f : frp.file_formatters()) {
+    for (const auto& fmt : frp.file_formatters()) {
         local_type_group ltg;
-        const auto al(f->archetype_location());
-
+        const auto al(fmt->archetype_location());
         const auto& fct(al.facet());
         const auto ebl(traits::enabled());
         ltg.facet_enabled = s.select_type_by_name(fct, ebl);
@@ -224,13 +206,11 @@ make_local_type_group(const annotations::type_repository& atrp,
         r[arch] = ltg;
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Created local field definitions. Result: "
-                             << r;
+    BOOST_LOG_SEV(lg, debug) << "Created local type group. Result: " << r;
     return r;
 }
 
-std::unordered_map<std::type_index,
-                   enablement_expander::local_type_group_type>
+std::unordered_map<std::type_index, enablement_expander::local_type_group_type>
 enablement_expander::bucket_local_type_group_by_type_index(
     const local_type_group_type& unbucketed_ltgs,
     const formatters::repository& frp) const {
@@ -255,9 +235,10 @@ enablement_expander::bucket_local_type_group_by_type_index(
                     expansion_error(archetype_not_found + arch));
             }
 
-            const auto pair(std::make_pair(arch, i->second));
-            const auto ret(ltg.insert(pair));
-            if (!ret.second) {
+            const auto& unbucketed_ltg(i->second);
+            const auto pair(std::make_pair(arch, unbucketed_ltg));
+            const auto inserted(ltg.insert(pair).second);
+            if (!inserted) {
                 BOOST_LOG_SEV(lg, error) << duplicate_archetype_name << arch;
                 BOOST_THROW_EXCEPTION(
                     expansion_error(duplicate_archetype_name + arch));
@@ -303,6 +284,10 @@ obtain_local_configurations(const local_type_group_type& ltg,
 }
 
 bool enablement_expander::is_element_disabled(const yarn::element& e) const {
+    /*
+     * We're only interested in modules as these are the only elements
+     * that can be enabled/disabled based on their state.
+     */
     const auto ptr(dynamic_cast<const yarn::module*>(&e));
     if (!ptr)
         return false;
@@ -323,8 +308,7 @@ bool enablement_expander::is_element_disabled(const yarn::element& e) const {
      */
     if (m.documentation().empty()) {
         BOOST_LOG_SEV(lg, debug) << "Module does not have documentation. "
-                                 << "Setting it to non-generatable. Id: "
-                                 << m.name().id();
+                                 << "Disabling it. Id: " << m.name().id();
         return true;
     }
     return false;
@@ -358,6 +342,10 @@ void enablement_expander::compute_enablement(
         }
         const auto& lc(j->second);
 
+        /*
+         * Global configuration must always be present for all
+         * archetypes.
+         */
         const auto i(gcs.find(arch));
         if (i == gcs.end()) {
             BOOST_LOG_SEV(lg, error) << global_configuration_not_found << arch;
@@ -369,7 +357,7 @@ void enablement_expander::compute_enablement(
         /*
          * If the overwrite flag is set locally at the archetype or
          * facet level, then that takes priority. If not, first check
-         * to see if its set globally at the formatter level; if so,
+         * to see if its set globally at the archetype level; if so,
          * it takes priority. Finally, if nothing else is set, use the
          * global facet default.
          *
@@ -387,8 +375,10 @@ void enablement_expander::compute_enablement(
          * generated code. Having said that, it does not make a lot of
          * sense to set overwrite globally to false.
          *
-         * Note also that the overwrite flag is only relevant if
-         * enabled is true. It is not used otherwise.
+         * Note that the overwrite flag is only relevant if enabled is
+         * true. It is not used otherwise. We set it up before
+         * enablement just so we don't have to worry about handling
+         * the ""continue"" statements.
          */
         auto& art_props(pair.second);
         if (lc.archetype_overwrite())
@@ -442,34 +432,34 @@ void enablement_expander::compute_enablement(
 }
 
 void enablement_expander::expand(const annotations::type_repository& atrp,
-    const annotations::annotation& root, const formatters::repository& frp,
+    const annotations::annotation& ra, const formatters::repository& frp,
     model& fm) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started expanding enablement.";
+
     /*
-     * Obtain the field definitions at the global level. These are the
-     * field definitions that only apply to the root object, as some
-     * of these fields do not exist anywhere else.
+     * Obtain the types at the global level. These are types that only
+     * apply to the root object, as some of these should not exist
+     * anywhere else.
      */
     const auto gtg(make_global_type_group(atrp, frp));
 
     /*
-     * Read the values for the global field definitions, and update
-     * the facet configurations with it.
+     * Read the values for the global type from the root annotations,
+     * and update the facet configurations with it.
      */
-    const auto gcs(obtain_global_configurations(gtg, root));
+    const auto gcs(obtain_global_configurations(gtg, ra));
     update_facet_enablement(frp, gcs, fm);
 
     /*
-     * Create the fields for the local field definitions. These are
-     * made across all registered formatters.
+     * Create the fields for the local types. These are generated
+     * against all registered formatters.
      */
     const auto ltg(make_local_type_group(atrp, frp));
 
     /*
-     * Bucket the local field definitions by element type - i.e., we
-     * only care about those formatters which are valid for a
-     * particular element.
+     * Bucket the local types by element - i.e., we only care about
+     * those formatters which are valid for a particular element.
      */
     const auto ltgti(bucket_local_type_group_by_type_index(ltg, frp));
 
@@ -488,11 +478,6 @@ void enablement_expander::expand(const annotations::type_repository& atrp,
             if (is_element_disabled(e))
                 continue;
 
-            /*
-             * Now, for each element segment, find the corresponding
-             * local field definitions and use those to obtain the
-             * values of the local configuration.
-             */
             const auto ti(std::type_index(typeid(e)));
             BOOST_LOG_SEV(lg, debug) << "Type index: " << ti.name();
 
@@ -507,6 +492,11 @@ void enablement_expander::expand(const annotations::type_repository& atrp,
                 continue;
             }
 
+            /*
+             * Now, for each element segment, find the corresponding
+             * local types and use those to obtain the local
+             * configuration.
+             */
             const auto& t(i->second);
             auto lcs(obtain_local_configurations(t, e.annotation()));
 
