@@ -38,7 +38,7 @@
 #include "dogen/quilt.cpp/hash/formattables/helper_descriptor_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/helper_properties_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/element_properties_hash.hpp"
-#include "dogen/quilt.cpp/hash/formattables/formatter_properties_hash.hpp"
+#include "dogen/quilt.cpp/hash/formattables/artefact_properties_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/streaming_properties_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/locator_configuration_hash.hpp"
 #include "dogen/quilt.cpp/hash/formatters/inclusion_support_types_hash.hpp"

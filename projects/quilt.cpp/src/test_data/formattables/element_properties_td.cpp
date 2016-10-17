@@ -24,7 +24,7 @@
 #include "dogen/quilt.cpp/test_data/formattables/aspect_properties_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/helper_properties_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/element_properties_td.hpp"
-#include "dogen/quilt.cpp/test_data/formattables/formatter_properties_td.hpp"
+#include "dogen/quilt.cpp/test_data/formattables/artefact_properties_td.hpp"
 
 namespace {
 
@@ -52,14 +52,14 @@ std::string create_std_string(const unsigned int position) {
 }
 
 dogen::quilt::cpp::formattables::artefact_properties
-create_dogen_quilt_cpp_formattables_formatter_properties(const unsigned int position) {
-    return dogen::quilt::cpp::formattables::formatter_properties_generator::create(position);
+create_dogen_quilt_cpp_formattables_artefact_properties(const unsigned int position) {
+    return dogen::quilt::cpp::formattables::artefact_properties_generator::create(position);
 }
 
-std::unordered_map<std::string, dogen::quilt::cpp::formattables::artefact_properties> create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formatter_properties(unsigned int position) {
+std::unordered_map<std::string, dogen::quilt::cpp::formattables::artefact_properties> create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_artefact_properties(unsigned int position) {
     std::unordered_map<std::string, dogen::quilt::cpp::formattables::artefact_properties> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_dogen_quilt_cpp_formattables_formatter_properties(position + i)));
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_quilt_cpp_formattables_artefact_properties(position + i)));
     }
     return r;
 }
@@ -110,7 +110,7 @@ void element_properties_generator::
 populate(const unsigned int position, result_type& v) {
     v.decoration_properties(create_boost_optional_dogen_formatters_decoration_properties(position + 0));
     v.aspect_properties(create_dogen_quilt_cpp_formattables_aspect_properties(position + 1));
-    v.formatter_properties(create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formatter_properties(position + 2));
+    v.artefact_properties(create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_artefact_properties(position + 2));
     v.helper_properties(create_std_list_dogen_quilt_cpp_formattables_helper_properties(position + 3));
     v.canonical_archetype_to_archetype(create_std_unordered_map_std_string_std_string(position + 4));
     v.odb_properties(create_boost_optional_dogen_quilt_cpp_formattables_odb_properties(position + 5));

@@ -28,7 +28,7 @@ namespace formattables {
 element_properties::element_properties(element_properties&& rhs)
     : decoration_properties_(std::move(rhs.decoration_properties_)),
       aspect_properties_(std::move(rhs.aspect_properties_)),
-      formatter_properties_(std::move(rhs.formatter_properties_)),
+      artefact_properties_(std::move(rhs.artefact_properties_)),
       helper_properties_(std::move(rhs.helper_properties_)),
       canonical_archetype_to_archetype_(std::move(rhs.canonical_archetype_to_archetype_)),
       odb_properties_(std::move(rhs.odb_properties_)) { }
@@ -36,13 +36,13 @@ element_properties::element_properties(element_properties&& rhs)
 element_properties::element_properties(
     const boost::optional<dogen::formatters::decoration_properties>& decoration_properties,
     const dogen::quilt::cpp::formattables::aspect_properties& aspect_properties,
-    const std::unordered_map<std::string, dogen::quilt::cpp::formattables::artefact_properties>& formatter_properties,
+    const std::unordered_map<std::string, dogen::quilt::cpp::formattables::artefact_properties>& artefact_properties,
     const std::list<dogen::quilt::cpp::formattables::helper_properties>& helper_properties,
     const std::unordered_map<std::string, std::string>& canonical_archetype_to_archetype,
     const boost::optional<dogen::quilt::cpp::formattables::odb_properties>& odb_properties)
     : decoration_properties_(decoration_properties),
       aspect_properties_(aspect_properties),
-      formatter_properties_(formatter_properties),
+      artefact_properties_(artefact_properties),
       helper_properties_(helper_properties),
       canonical_archetype_to_archetype_(canonical_archetype_to_archetype),
       odb_properties_(odb_properties) { }
@@ -51,7 +51,7 @@ void element_properties::swap(element_properties& other) noexcept {
     using std::swap;
     swap(decoration_properties_, other.decoration_properties_);
     swap(aspect_properties_, other.aspect_properties_);
-    swap(formatter_properties_, other.formatter_properties_);
+    swap(artefact_properties_, other.artefact_properties_);
     swap(helper_properties_, other.helper_properties_);
     swap(canonical_archetype_to_archetype_, other.canonical_archetype_to_archetype_);
     swap(odb_properties_, other.odb_properties_);
@@ -60,7 +60,7 @@ void element_properties::swap(element_properties& other) noexcept {
 bool element_properties::operator==(const element_properties& rhs) const {
     return decoration_properties_ == rhs.decoration_properties_ &&
         aspect_properties_ == rhs.aspect_properties_ &&
-        formatter_properties_ == rhs.formatter_properties_ &&
+        artefact_properties_ == rhs.artefact_properties_ &&
         helper_properties_ == rhs.helper_properties_ &&
         canonical_archetype_to_archetype_ == rhs.canonical_archetype_to_archetype_ &&
         odb_properties_ == rhs.odb_properties_;
@@ -104,20 +104,20 @@ void element_properties::aspect_properties(const dogen::quilt::cpp::formattables
     aspect_properties_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::quilt::cpp::formattables::artefact_properties>& element_properties::formatter_properties() const {
-    return formatter_properties_;
+const std::unordered_map<std::string, dogen::quilt::cpp::formattables::artefact_properties>& element_properties::artefact_properties() const {
+    return artefact_properties_;
 }
 
-std::unordered_map<std::string, dogen::quilt::cpp::formattables::artefact_properties>& element_properties::formatter_properties() {
-    return formatter_properties_;
+std::unordered_map<std::string, dogen::quilt::cpp::formattables::artefact_properties>& element_properties::artefact_properties() {
+    return artefact_properties_;
 }
 
-void element_properties::formatter_properties(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::artefact_properties>& v) {
-    formatter_properties_ = v;
+void element_properties::artefact_properties(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::artefact_properties>& v) {
+    artefact_properties_ = v;
 }
 
-void element_properties::formatter_properties(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::artefact_properties>&& v) {
-    formatter_properties_ = std::move(v);
+void element_properties::artefact_properties(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::artefact_properties>&& v) {
+    artefact_properties_ = std::move(v);
 }
 
 const std::list<dogen::quilt::cpp::formattables::helper_properties>& element_properties::helper_properties() const {

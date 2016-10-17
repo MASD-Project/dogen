@@ -459,7 +459,7 @@ void inclusion_expander::populate_inclusion_dependencies(
          * our container up front and populate it for each segment.
          */
         auto& eprops(formattable.element_properties());
-        auto& fmt_props(eprops.formatter_properties());
+        auto& art_props(eprops.artefact_properties());
         for (const auto& ptr : formattable.all_segments()) {
             const auto& e(*ptr);
 
@@ -494,8 +494,8 @@ void inclusion_expander::populate_inclusion_dependencies(
                  * transformer.
                  */
                 const auto arch(dep_pair.first);
-                const auto i(fmt_props.find(arch));
-                if (i == fmt_props.end()) {
+                const auto i(art_props.find(arch));
+                if (i == art_props.end()) {
                     BOOST_LOG_SEV(lg, error) << missing_archetype << arch;
                     BOOST_THROW_EXCEPTION(
                         expansion_error(missing_archetype + arch));

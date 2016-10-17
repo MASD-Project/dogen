@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_FORMATTER_PROPERTIES_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_FORMATTER_PROPERTIES_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_ARTEFACT_PROPERTIES_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_ARTEFACT_PROPERTIES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,7 +29,7 @@
 #include <string>
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
-#include "dogen/quilt.cpp/serialization/formattables/formatter_properties_fwd_ser.hpp"
+#include "dogen/quilt.cpp/serialization/formattables/artefact_properties_fwd_ser.hpp"
 
 namespace dogen {
 namespace quilt {

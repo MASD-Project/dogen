@@ -63,7 +63,7 @@ const std::string file_path_not_set(
     "File path for formatter is not set. Formatter: ");
 const std::string header_guard_not_set(
     "Header guard for formatter is not set. Formatter: ");
-const std::string formatter_properties_missing(
+const std::string artefact_properties_missing(
     "Could not find formatter configuration for formatter: ");
 const std::string facet_properties_missing(
     "Could not find facet configuration for formatter: ");
@@ -98,7 +98,7 @@ assistant::
 assistant(const context& ctx, const annotations::archetype_location& al,
     const bool requires_header_guard, const std::string& id) :
     context_(ctx),
-    formatter_properties_(obtain_formatter_properties(
+    artefact_properties_(obtain_artefact_properties(
             context_.element_properties(), al.archetype())),
     ownership_hierarchy_(al), requires_header_guard_(requires_header_guard) {
 
@@ -112,7 +112,7 @@ assistant(const context& ctx, const annotations::archetype_location& al,
 
 void assistant::validate() const {
     const auto& fn(ownership_hierarchy_.archetype());
-    const auto& fp(formatter_properties_);
+    const auto& fp(artefact_properties_);
     if (fp.file_path().empty()) {
         BOOST_LOG_SEV(lg, error) << file_path_not_set << fn;
         BOOST_THROW_EXCEPTION(formatting_error(file_path_not_set + fn));
@@ -171,20 +171,20 @@ std::string assistant::get_product_name(const yarn::name& n) const {
 }
 
 const formattables::artefact_properties& assistant::
-obtain_formatter_properties(const formattables::element_properties& eprops,
+obtain_artefact_properties(const formattables::element_properties& eprops,
     const std::string& formatter_name) const {
-    const auto i(eprops.formatter_properties().find(formatter_name));
-    if (i == eprops.formatter_properties().end()) {
-        BOOST_LOG_SEV(lg, error) << formatter_properties_missing
+    const auto i(eprops.artefact_properties().find(formatter_name));
+    if (i == eprops.artefact_properties().end()) {
+        BOOST_LOG_SEV(lg, error) << artefact_properties_missing
                                  << formatter_name;
-        BOOST_THROW_EXCEPTION(formatting_error(formatter_properties_missing +
+        BOOST_THROW_EXCEPTION(formatting_error(artefact_properties_missing +
                 formatter_name));
     }
     return i->second;
 }
 
 const formattables::artefact_properties& assistant::
-obtain_formatter_properties(const std::string& element_id,
+obtain_artefact_properties(const std::string& element_id,
     const std::string& formatter_name) const {
 
     const auto& formattables(context_.model().formattables());
@@ -198,7 +198,7 @@ obtain_formatter_properties(const std::string& element_id,
     }
 
     const auto& eprops(i->second.element_properties());
-    return obtain_formatter_properties(eprops, resolved_arch);
+    return obtain_artefact_properties(eprops, resolved_arch);
 }
 
 formattables::facet_properties assistant::
@@ -232,8 +232,8 @@ std::list<std::string> assistant::make_namespaces(const yarn::name& n) const {
 bool assistant::
 is_formatter_enabled(const std::string& formatter_name) const {
     const auto& eprops(context_.element_properties());
-    const auto& fmt_props(obtain_formatter_properties(eprops, formatter_name));
-    return fmt_props.enabled();
+    const auto& art_props(obtain_artefact_properties(eprops, formatter_name));
+    return art_props.enabled();
 }
 
 bool assistant::
@@ -293,9 +293,9 @@ assistant::make_scoped_boilerplate_formatter() {
     const auto& ep(context_.element_properties());
     const auto& dp(ep.decoration_properties());
 
-    const auto& fmt_props(formatter_properties_);
-    const auto& deps(fmt_props.inclusion_dependencies());
-    const auto& hg(fmt_props.header_guard());
+    const auto& art_props(artefact_properties_);
+    const auto& deps(art_props.inclusion_dependencies());
+    const auto& hg(art_props.header_guard());
 
     using dogen::formatters::cpp::scoped_boilerplate_formatter;
     return scoped_boilerplate_formatter(stream(), dp, deps, hg);
@@ -580,8 +580,8 @@ names_with_enabled_formatter(const std::string& formatter_name,
     for (const auto& n : names) {
         const auto id(n.id());
         BOOST_LOG_SEV(lg, debug) << "Checking enablement for name: " << id;
-        const auto& fmt_props(obtain_formatter_properties(id, formatter_name));
-        if (!fmt_props.enabled())
+        const auto& art_props(obtain_artefact_properties(id, formatter_name));
+        if (!art_props.enabled())
             continue;
 
         r.push_back(n);
@@ -596,8 +596,8 @@ std::ostream& assistant::stream() {
 dogen::formatters::artefact assistant::make_artefact() const {
     dogen::formatters::artefact r;
     r.content(stream_.str());
-    r.path(formatter_properties_.file_path());
-    r.overwrite(formatter_properties_.overwrite());
+    r.path(artefact_properties_.file_path());
+    r.overwrite(artefact_properties_.overwrite());
 
     return r;
 }

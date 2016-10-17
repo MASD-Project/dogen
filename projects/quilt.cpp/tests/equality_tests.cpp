@@ -47,7 +47,7 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
     test_equality<formattables::odb_properties_generator>();
     test_equality<formattables::element_properties_generator>();
     test_equality<formattables::global_enablement_configuration_generator>();
-    test_equality<formattables::formatter_properties_generator>();
+    test_equality<formattables::artefact_properties_generator>();
     test_equality<formattables::helper_properties_generator>();
     test_equality<formattables::aspect_properties_generator>();
     test_equality<formattables::facet_properties_generator>();

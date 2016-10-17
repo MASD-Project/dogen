@@ -18,38 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TEST_DATA_FORMATTABLES_FORMATTER_PROPERTIES_TD_HPP
-#define DOGEN_QUILT_CPP_TEST_DATA_FORMATTABLES_FORMATTER_PROPERTIES_TD_HPP
+#ifndef DOGEN_QUILT_CPP_HASH_FORMATTABLES_ARTEFACT_PROPERTIES_HASH_HPP
+#define DOGEN_QUILT_CPP_HASH_FORMATTABLES_ARTEFACT_PROPERTIES_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/quilt.cpp/types/formattables/formatter_properties.hpp"
+#include <functional>
+#include "dogen/quilt.cpp/types/formattables/artefact_properties.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
 
-class formatter_properties_generator {
+struct artefact_properties_hasher {
 public:
-    formatter_properties_generator();
-
-public:
-    typedef dogen::quilt::cpp::formattables::artefact_properties result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
+    static std::size_t hash(const artefact_properties& v);
 };
 
 } } } }
 
+namespace std {
+
+template<>
+struct hash<dogen::quilt::cpp::formattables::artefact_properties> {
+public:
+    size_t operator()(const dogen::quilt::cpp::formattables::artefact_properties& v) const {
+        return dogen::quilt::cpp::formattables::artefact_properties_hasher::hash(v);
+    }
+};
+
+}
 #endif

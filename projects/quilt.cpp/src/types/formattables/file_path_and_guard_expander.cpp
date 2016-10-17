@@ -79,9 +79,9 @@ expand(const formatters::container& fc, const locator& l, model& fm) const {
          * find the associated formatter and ask it to generate the
          * full path for the file.
          */
-        for (auto& fmt_props_pair : eprops.formatter_properties()) {
-            const auto arch(fmt_props_pair.first);
-            auto& fmt_props(fmt_props_pair.second);
+        for (auto& art_props_pair : eprops.artefact_properties()) {
+            const auto arch(art_props_pair.first);
+            auto& art_props(art_props_pair.second);
 
             const auto i(fffn.find(arch));
             if (i == fffn.end()) {
@@ -91,7 +91,7 @@ expand(const formatters::container& fc, const locator& l, model& fm) const {
             }
 
             const auto& fmt(i->second);
-            fmt_props.file_path(fmt->full_path(l, n));
+            art_props.file_path(fmt->full_path(l, n));
 
             /*
              * If the formatter supports inclusion, we need to compute
@@ -100,7 +100,7 @@ expand(const formatters::container& fc, const locator& l, model& fm) const {
             const auto ns(formatters::inclusion_support_types::not_supported);
             if (fmt->inclusion_support_type() != ns) {
                 const auto ip(fmt->inclusion_path(l, n));
-                fmt_props.header_guard(to_header_guard(ip));
+                art_props.header_guard(to_header_guard(ip));
             }
         }
     }

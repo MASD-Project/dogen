@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen/quilt.cpp/io/formattables/formatter_properties_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/artefact_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -57,7 +57,7 @@ std::ostream& operator<<(std::ostream& s, const artefact_properties& v) {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::formatter_properties\"" << ", "
+      << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::artefact_properties\"" << ", "
       << "\"enabled\": " << v.enabled() << ", "
       << "\"overwrite\": " << v.overwrite() << ", "
       << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\"" << ", "

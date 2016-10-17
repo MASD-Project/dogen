@@ -21,7 +21,7 @@
 #include <typeindex>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/quilt.cpp/types/formattables/formatter_properties.hpp"
+#include "dogen/quilt.cpp/types/formattables/artefact_properties.hpp"
 #include "dogen/quilt.cpp/types/formattables/transformation_error.hpp"
 #include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formattables/transformer.hpp"
@@ -75,11 +75,11 @@ transform(const formatters::container& fc, const yarn::model& m) const {
         }
         BOOST_LOG_SEV(lg, debug) << "Element has formatters " << id;
 
-        auto& fmt_props(fbl.element_properties().formatter_properties());
+        auto& art_props(fbl.element_properties().artefact_properties());
         for (const auto& fmt : j->second) {
             const auto arch(fmt->archetype_location().archetype());
             const auto pair(std::make_pair(arch, artefact_properties()));
-            const auto ret(fmt_props.insert(pair));
+            const auto ret(art_props.insert(pair));
             if (!ret.second) {
                 BOOST_LOG_SEV(lg, error) << duplicate_archetype << arch;
                 BOOST_THROW_EXCEPTION(

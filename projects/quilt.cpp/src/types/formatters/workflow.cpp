@@ -23,7 +23,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/quilt.cpp/types/workflow_error.hpp"
-#include "dogen/quilt.cpp/io/formattables/formatter_properties_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/artefact_properties_io.hpp"
 #include "dogen/quilt.cpp/types/formatters/context.hpp"
 #include "dogen/quilt.cpp/types/formatters/workflow.hpp"
 
@@ -32,9 +32,7 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("quit.cpp.formatters.workflow"));
 
-const std::string missing_formatter("Formatter not found: ");
-const std::string formatter_properties_not_found(
-    "Could not find properties for formatter: ");
+const std::string archetype_not_found("Archetype not found: ");
 
 }
 
@@ -70,7 +68,7 @@ workflow::format(const formattables::model& fm, const yarn::element& e,
         return r;
     }
 
-    auto& fmt_props(ep.formatter_properties());
+    auto& art_props(ep.artefact_properties());
     const auto& fmts(i->second);
     for (const auto& fmt_ptr : fmts) {
         const auto& fmt(*fmt_ptr);
@@ -79,16 +77,16 @@ workflow::format(const formattables::model& fm, const yarn::element& e,
                                  << fmtn << "'";
 
         const auto arch(fmt.archetype_location().archetype());
-        const auto j(fmt_props.find(arch));
-        if (j == fmt_props.end()) {
-            BOOST_LOG_SEV(lg, error) << missing_formatter << arch;
-            BOOST_THROW_EXCEPTION(workflow_error(missing_formatter + arch));
+        const auto j(art_props.find(arch));
+        if (j == art_props.end()) {
+            BOOST_LOG_SEV(lg, error) << archetype_not_found << arch;
+            BOOST_THROW_EXCEPTION(workflow_error(archetype_not_found + arch));
         }
 
-        const auto& fmt_props(j->second);
-        const auto is_formatter_enabled(fmt_props.enabled());
-        if (!is_formatter_enabled) {
-            BOOST_LOG_SEV(lg, debug) << "Formatter is disabled.";
+        const auto& art_props(j->second);
+        const auto is_archetype_enabled(art_props.enabled());
+        if (!is_archetype_enabled) {
+            BOOST_LOG_SEV(lg, debug) << "Archetype is disabled.";
             continue;
         }
 

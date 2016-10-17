@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/quilt.cpp/test_data/formattables/formatter_properties_td.hpp"
+#include "dogen/quilt.cpp/test_data/formattables/artefact_properties_td.hpp"
 
 namespace {
 
@@ -55,9 +55,9 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-formatter_properties_generator::formatter_properties_generator() : position_(0) { }
+artefact_properties_generator::artefact_properties_generator() : position_(0) { }
 
-void formatter_properties_generator::
+void artefact_properties_generator::
 populate(const unsigned int position, result_type& v) {
     v.enabled(create_bool(position + 0));
     v.overwrite(create_bool(position + 1));
@@ -66,22 +66,22 @@ populate(const unsigned int position, result_type& v) {
     v.inclusion_dependencies(create_std_list_std_string(position + 4));
 }
 
-formatter_properties_generator::result_type
-formatter_properties_generator::create(const unsigned int position) {
+artefact_properties_generator::result_type
+artefact_properties_generator::create(const unsigned int position) {
     artefact_properties r;
-    formatter_properties_generator::populate(position, r);
+    artefact_properties_generator::populate(position, r);
     return r;
 }
 
-formatter_properties_generator::result_type*
-formatter_properties_generator::create_ptr(const unsigned int position) {
+artefact_properties_generator::result_type*
+artefact_properties_generator::create_ptr(const unsigned int position) {
     artefact_properties* p = new artefact_properties();
-    formatter_properties_generator::populate(position, *p);
+    artefact_properties_generator::populate(position, *p);
     return p;
 }
 
-formatter_properties_generator::result_type
-formatter_properties_generator::operator()() {
+artefact_properties_generator::result_type
+artefact_properties_generator::operator()() {
     return create(position_++);
 }
 

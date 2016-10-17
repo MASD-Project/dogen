@@ -18,22 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_SERIALIZATION_FORMATTABLES_FORMATTER_PROPERTIES_FWD_SER_HPP
-#define DOGEN_QUILT_CPP_SERIALIZATION_FORMATTABLES_FORMATTER_PROPERTIES_FWD_SER_HPP
+#ifndef DOGEN_QUILT_CPP_SERIALIZATION_FORMATTABLES_ARTEFACT_PROPERTIES_SER_HPP
+#define DOGEN_QUILT_CPP_SERIALIZATION_FORMATTABLES_ARTEFACT_PROPERTIES_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/quilt.cpp/types/formattables/formatter_properties_fwd.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen/quilt.cpp/types/formattables/artefact_properties.hpp"
 
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::quilt::cpp::formattables::artefact_properties)
 namespace boost {
 namespace serialization {
 
-template<class Archive>
+template<typename Archive>
 void save(Archive& ar, const dogen::quilt::cpp::formattables::artefact_properties& v, unsigned int version);
 
-template<class Archive>
+template<typename Archive>
 void load(Archive& ar, dogen::quilt::cpp::formattables::artefact_properties& v, unsigned int version);
 
 } }

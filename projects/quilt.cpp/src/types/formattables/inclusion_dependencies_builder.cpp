@@ -47,7 +47,7 @@ const std::string ptime_type("ptime");
 
 const std::string empty_directive("Cannot add empty include directive.");
 const std::string name_not_found("Cannot find name: ");
-const std::string formatter_name_not_found("Cannot find formatter name: ");
+const std::string archetype_not_found("Cannot find archetype name: ");
 
 }
 
@@ -123,13 +123,13 @@ bool inclusion_dependencies_builder::is_enabled(const yarn::name& n,
 
     const auto& formattable(i->second);
     const auto& eprops(formattable.element_properties());
-    const auto& fmt_props(eprops.formatter_properties());
-    const auto j(fmt_props.find(formatter_name));
-    if (j == fmt_props.end()) {
-        BOOST_LOG_SEV(lg, debug) << formatter_name_not_found << formatter_name
+    const auto& art_props(eprops.artefact_properties());
+    const auto j(art_props.find(formatter_name));
+    if (j == art_props.end()) {
+        BOOST_LOG_SEV(lg, debug) << archetype_not_found << formatter_name
                                  << " element id: " << n.id();
         BOOST_THROW_EXCEPTION(
-            building_error(formatter_name_not_found + formatter_name));
+            building_error(archetype_not_found + formatter_name));
     }
 
     const bool r(j->second.enabled());

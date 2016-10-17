@@ -36,7 +36,7 @@
 #include "dogen/quilt.cpp/serialization/formattables/aspect_properties_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/helper_properties_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/element_properties_ser.hpp"
-#include "dogen/quilt.cpp/serialization/formattables/formatter_properties_ser.hpp"
+#include "dogen/quilt.cpp/serialization/formattables/artefact_properties_ser.hpp"
 
 namespace boost {
 namespace serialization {
@@ -47,7 +47,7 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("decoration_properties", v.decoration_properties_);
     ar << make_nvp("aspect_properties", v.aspect_properties_);
-    ar << make_nvp("formatter_properties", v.formatter_properties_);
+    ar << make_nvp("artefact_properties", v.artefact_properties_);
     ar << make_nvp("helper_properties", v.helper_properties_);
     ar << make_nvp("canonical_archetype_to_archetype", v.canonical_archetype_to_archetype_);
     ar << make_nvp("odb_properties", v.odb_properties_);
@@ -59,7 +59,7 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("decoration_properties", v.decoration_properties_);
     ar >> make_nvp("aspect_properties", v.aspect_properties_);
-    ar >> make_nvp("formatter_properties", v.formatter_properties_);
+    ar >> make_nvp("artefact_properties", v.artefact_properties_);
     ar >> make_nvp("helper_properties", v.helper_properties_);
     ar >> make_nvp("canonical_archetype_to_archetype", v.canonical_archetype_to_archetype_);
     ar >> make_nvp("odb_properties", v.odb_properties_);

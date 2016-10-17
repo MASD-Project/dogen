@@ -25,7 +25,7 @@
 #include "dogen/quilt.cpp/io/formattables/aspect_properties_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/helper_properties_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/element_properties_io.hpp"
-#include "dogen/quilt.cpp/io/formattables/formatter_properties_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/artefact_properties_io.hpp"
 
 namespace boost {
 
@@ -124,7 +124,7 @@ std::ostream& operator<<(std::ostream& s, const element_properties& v) {
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::element_properties\"" << ", "
       << "\"decoration_properties\": " << v.decoration_properties() << ", "
       << "\"aspect_properties\": " << v.aspect_properties() << ", "
-      << "\"formatter_properties\": " << v.formatter_properties() << ", "
+      << "\"artefact_properties\": " << v.artefact_properties() << ", "
       << "\"helper_properties\": " << v.helper_properties() << ", "
       << "\"canonical_archetype_to_archetype\": " << v.canonical_archetype_to_archetype() << ", "
       << "\"odb_properties\": " << v.odb_properties()

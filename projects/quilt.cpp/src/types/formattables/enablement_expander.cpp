@@ -335,7 +335,7 @@ void enablement_expander::compute_enablement(
     const local_enablement_configurations_type& lcs, formattable& fbl) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started computing enablement.";
-    for (auto& pair : fbl.element_properties().formatter_properties()) {
+    for (auto& pair : fbl.element_properties().artefact_properties()) {
         const auto arch(pair.first);
 
         /*

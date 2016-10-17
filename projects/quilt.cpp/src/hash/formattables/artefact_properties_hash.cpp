@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/hash/formattables/formatter_properties_hash.hpp"
+#include "dogen/quilt.cpp/hash/formattables/artefact_properties_hash.hpp"
 
 namespace {
 
@@ -49,7 +49,7 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-std::size_t formatter_properties_hasher::hash(const artefact_properties& v) {
+std::size_t artefact_properties_hasher::hash(const artefact_properties& v) {
     std::size_t seed(0);
 
     combine(seed, v.enabled());

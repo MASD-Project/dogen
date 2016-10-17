@@ -23,7 +23,7 @@
 #include "dogen/quilt.cpp/hash/formattables/aspect_properties_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/helper_properties_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/element_properties_hash.hpp"
-#include "dogen/quilt.cpp/hash/formattables/formatter_properties_hash.hpp"
+#include "dogen/quilt.cpp/hash/formattables/artefact_properties_hash.hpp"
 
 namespace {
 
@@ -43,7 +43,7 @@ inline std::size_t hash_boost_optional_dogen_formatters_decoration_properties(co
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formatter_properties(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::artefact_properties>& v) {
+inline std::size_t hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_artefact_properties(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::artefact_properties>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -91,7 +91,7 @@ std::size_t element_properties_hasher::hash(const element_properties& v) {
 
     combine(seed, hash_boost_optional_dogen_formatters_decoration_properties(v.decoration_properties()));
     combine(seed, v.aspect_properties());
-    combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formatter_properties(v.formatter_properties()));
+    combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_artefact_properties(v.artefact_properties()));
     combine(seed, hash_std_list_dogen_quilt_cpp_formattables_helper_properties(v.helper_properties()));
     combine(seed, hash_std_unordered_map_std_string_std_string(v.canonical_archetype_to_archetype()));
     combine(seed, hash_boost_optional_dogen_quilt_cpp_formattables_odb_properties(v.odb_properties()));
