@@ -30,7 +30,7 @@ element_properties::element_properties(element_properties&& rhs)
       aspect_properties_(std::move(rhs.aspect_properties_)),
       formatter_properties_(std::move(rhs.formatter_properties_)),
       helper_properties_(std::move(rhs.helper_properties_)),
-      canonical_formatter_to_formatter_(std::move(rhs.canonical_formatter_to_formatter_)),
+      canonical_archetype_to_archetype_(std::move(rhs.canonical_archetype_to_archetype_)),
       odb_properties_(std::move(rhs.odb_properties_)) { }
 
 element_properties::element_properties(
@@ -38,13 +38,13 @@ element_properties::element_properties(
     const dogen::quilt::cpp::formattables::aspect_properties& aspect_properties,
     const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties>& formatter_properties,
     const std::list<dogen::quilt::cpp::formattables::helper_properties>& helper_properties,
-    const std::unordered_map<std::string, std::string>& canonical_formatter_to_formatter,
+    const std::unordered_map<std::string, std::string>& canonical_archetype_to_archetype,
     const boost::optional<dogen::quilt::cpp::formattables::odb_properties>& odb_properties)
     : decoration_properties_(decoration_properties),
       aspect_properties_(aspect_properties),
       formatter_properties_(formatter_properties),
       helper_properties_(helper_properties),
-      canonical_formatter_to_formatter_(canonical_formatter_to_formatter),
+      canonical_archetype_to_archetype_(canonical_archetype_to_archetype),
       odb_properties_(odb_properties) { }
 
 void element_properties::swap(element_properties& other) noexcept {
@@ -53,7 +53,7 @@ void element_properties::swap(element_properties& other) noexcept {
     swap(aspect_properties_, other.aspect_properties_);
     swap(formatter_properties_, other.formatter_properties_);
     swap(helper_properties_, other.helper_properties_);
-    swap(canonical_formatter_to_formatter_, other.canonical_formatter_to_formatter_);
+    swap(canonical_archetype_to_archetype_, other.canonical_archetype_to_archetype_);
     swap(odb_properties_, other.odb_properties_);
 }
 
@@ -62,7 +62,7 @@ bool element_properties::operator==(const element_properties& rhs) const {
         aspect_properties_ == rhs.aspect_properties_ &&
         formatter_properties_ == rhs.formatter_properties_ &&
         helper_properties_ == rhs.helper_properties_ &&
-        canonical_formatter_to_formatter_ == rhs.canonical_formatter_to_formatter_ &&
+        canonical_archetype_to_archetype_ == rhs.canonical_archetype_to_archetype_ &&
         odb_properties_ == rhs.odb_properties_;
 }
 
@@ -136,20 +136,20 @@ void element_properties::helper_properties(const std::list<dogen::quilt::cpp::fo
     helper_properties_ = std::move(v);
 }
 
-const std::unordered_map<std::string, std::string>& element_properties::canonical_formatter_to_formatter() const {
-    return canonical_formatter_to_formatter_;
+const std::unordered_map<std::string, std::string>& element_properties::canonical_archetype_to_archetype() const {
+    return canonical_archetype_to_archetype_;
 }
 
-std::unordered_map<std::string, std::string>& element_properties::canonical_formatter_to_formatter() {
-    return canonical_formatter_to_formatter_;
+std::unordered_map<std::string, std::string>& element_properties::canonical_archetype_to_archetype() {
+    return canonical_archetype_to_archetype_;
 }
 
-void element_properties::canonical_formatter_to_formatter(const std::unordered_map<std::string, std::string>& v) {
-    canonical_formatter_to_formatter_ = v;
+void element_properties::canonical_archetype_to_archetype(const std::unordered_map<std::string, std::string>& v) {
+    canonical_archetype_to_archetype_ = v;
 }
 
-void element_properties::canonical_formatter_to_formatter(const std::unordered_map<std::string, std::string>&& v) {
-    canonical_formatter_to_formatter_ = std::move(v);
+void element_properties::canonical_archetype_to_archetype(const std::unordered_map<std::string, std::string>&& v) {
+    canonical_archetype_to_archetype_ = std::move(v);
 }
 
 const boost::optional<dogen::quilt::cpp::formattables::odb_properties>& element_properties::odb_properties() const {

@@ -88,7 +88,7 @@ expand(const formatters::container& fc, model& fm) const {
 
                 using formatters::traits;
                 const auto cfmtn(traits::canonical_archetype(fctn));
-                eprops.canonical_formatter_to_formatter()[cfmtn] = fmtn;
+                eprops.canonical_archetype_to_archetype()[cfmtn] = fmtn;
                 BOOST_LOG_SEV(lg, debug) << "Mapping " << cfmtn
                                          << " to " << fmtn;
             }

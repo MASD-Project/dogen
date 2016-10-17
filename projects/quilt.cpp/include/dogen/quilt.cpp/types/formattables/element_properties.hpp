@@ -60,7 +60,7 @@ public:
         const dogen::quilt::cpp::formattables::aspect_properties& aspect_properties,
         const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties>& formatter_properties,
         const std::list<dogen::quilt::cpp::formattables::helper_properties>& helper_properties,
-        const std::unordered_map<std::string, std::string>& canonical_formatter_to_formatter,
+        const std::unordered_map<std::string, std::string>& canonical_archetype_to_archetype,
         const boost::optional<dogen::quilt::cpp::formattables::odb_properties>& odb_properties);
 
 private:
@@ -91,10 +91,10 @@ public:
     void helper_properties(const std::list<dogen::quilt::cpp::formattables::helper_properties>& v);
     void helper_properties(const std::list<dogen::quilt::cpp::formattables::helper_properties>&& v);
 
-    const std::unordered_map<std::string, std::string>& canonical_formatter_to_formatter() const;
-    std::unordered_map<std::string, std::string>& canonical_formatter_to_formatter();
-    void canonical_formatter_to_formatter(const std::unordered_map<std::string, std::string>& v);
-    void canonical_formatter_to_formatter(const std::unordered_map<std::string, std::string>&& v);
+    const std::unordered_map<std::string, std::string>& canonical_archetype_to_archetype() const;
+    std::unordered_map<std::string, std::string>& canonical_archetype_to_archetype();
+    void canonical_archetype_to_archetype(const std::unordered_map<std::string, std::string>& v);
+    void canonical_archetype_to_archetype(const std::unordered_map<std::string, std::string>&& v);
 
     const boost::optional<dogen::quilt::cpp::formattables::odb_properties>& odb_properties() const;
     boost::optional<dogen::quilt::cpp::formattables::odb_properties>& odb_properties();
@@ -116,7 +116,7 @@ private:
     dogen::quilt::cpp::formattables::aspect_properties aspect_properties_;
     std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties> formatter_properties_;
     std::list<dogen::quilt::cpp::formattables::helper_properties> helper_properties_;
-    std::unordered_map<std::string, std::string> canonical_formatter_to_formatter_;
+    std::unordered_map<std::string, std::string> canonical_archetype_to_archetype_;
     boost::optional<dogen::quilt::cpp::formattables::odb_properties> odb_properties_;
 };
 

@@ -112,7 +112,7 @@ populate(const unsigned int position, result_type& v) {
     v.aspect_properties(create_dogen_quilt_cpp_formattables_aspect_properties(position + 1));
     v.formatter_properties(create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formatter_properties(position + 2));
     v.helper_properties(create_std_list_dogen_quilt_cpp_formattables_helper_properties(position + 3));
-    v.canonical_formatter_to_formatter(create_std_unordered_map_std_string_std_string(position + 4));
+    v.canonical_archetype_to_archetype(create_std_unordered_map_std_string_std_string(position + 4));
     v.odb_properties(create_boost_optional_dogen_quilt_cpp_formattables_odb_properties(position + 5));
 }
 

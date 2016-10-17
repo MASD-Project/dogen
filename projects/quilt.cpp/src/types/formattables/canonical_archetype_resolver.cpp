@@ -69,9 +69,9 @@ std::string canonical_archetype_resolver::resolve(const std::string& element_id,
 
     const auto& formattable(i->second);
     const auto& eprops(formattable.element_properties());
-    const auto& cftf(eprops.canonical_formatter_to_formatter());
-    const auto j(cftf.find(archetype));
-    if (j == cftf.end()) {
+    const auto& cata(eprops.canonical_archetype_to_archetype());
+    const auto j(cata.find(archetype));
+    if (j == cata.end()) {
         BOOST_LOG_SEV(lg, error) << missing_canonical_archetype
                                  << archetype << " for element: "
                                  <<  element_id;

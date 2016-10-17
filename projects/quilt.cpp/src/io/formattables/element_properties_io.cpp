@@ -126,7 +126,7 @@ std::ostream& operator<<(std::ostream& s, const element_properties& v) {
       << "\"aspect_properties\": " << v.aspect_properties() << ", "
       << "\"formatter_properties\": " << v.formatter_properties() << ", "
       << "\"helper_properties\": " << v.helper_properties() << ", "
-      << "\"canonical_formatter_to_formatter\": " << v.canonical_formatter_to_formatter() << ", "
+      << "\"canonical_archetype_to_archetype\": " << v.canonical_archetype_to_archetype() << ", "
       << "\"odb_properties\": " << v.odb_properties()
       << " }";
     return(s);

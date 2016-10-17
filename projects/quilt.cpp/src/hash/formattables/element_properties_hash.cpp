@@ -93,7 +93,7 @@ std::size_t element_properties_hasher::hash(const element_properties& v) {
     combine(seed, v.aspect_properties());
     combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formatter_properties(v.formatter_properties()));
     combine(seed, hash_std_list_dogen_quilt_cpp_formattables_helper_properties(v.helper_properties()));
-    combine(seed, hash_std_unordered_map_std_string_std_string(v.canonical_formatter_to_formatter()));
+    combine(seed, hash_std_unordered_map_std_string_std_string(v.canonical_archetype_to_archetype()));
     combine(seed, hash_boost_optional_dogen_quilt_cpp_formattables_odb_properties(v.odb_properties()));
 
     return seed;

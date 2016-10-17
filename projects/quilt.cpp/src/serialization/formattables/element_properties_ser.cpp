@@ -49,7 +49,7 @@ void save(Archive& ar,
     ar << make_nvp("aspect_properties", v.aspect_properties_);
     ar << make_nvp("formatter_properties", v.formatter_properties_);
     ar << make_nvp("helper_properties", v.helper_properties_);
-    ar << make_nvp("canonical_formatter_to_formatter", v.canonical_formatter_to_formatter_);
+    ar << make_nvp("canonical_archetype_to_archetype", v.canonical_archetype_to_archetype_);
     ar << make_nvp("odb_properties", v.odb_properties_);
 }
 
@@ -61,7 +61,7 @@ void load(Archive& ar,
     ar >> make_nvp("aspect_properties", v.aspect_properties_);
     ar >> make_nvp("formatter_properties", v.formatter_properties_);
     ar >> make_nvp("helper_properties", v.helper_properties_);
-    ar >> make_nvp("canonical_formatter_to_formatter", v.canonical_formatter_to_formatter_);
+    ar >> make_nvp("canonical_archetype_to_archetype", v.canonical_archetype_to_archetype_);
     ar >> make_nvp("odb_properties", v.odb_properties_);
 }
 

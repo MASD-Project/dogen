@@ -13092,7 +13092,7 @@ main, or from another initialiser.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#canonical_formatter_to_formatter#</dia:string>
+            <dia:string>#canonical_archetype_to_archetype#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::unordered_map&lt;std::string, std::string&gt;#</dia:string>
