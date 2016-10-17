@@ -84,10 +84,10 @@ expand(const formatters::container& fc, model& fm) const {
 
                 const auto& al(formatter.archetype_location());
                 const auto arch(al.archetype());
-                const auto fctn(al.facet());
+                const auto fct(al.facet());
 
                 using formatters::traits;
-                const auto carch(traits::canonical_archetype(fctn));
+                const auto carch(traits::canonical_archetype(fct));
                 eprops.canonical_archetype_to_archetype()[carch] = arch;
                 BOOST_LOG_SEV(lg, debug) << "Mapping " << carch
                                          << " to " << arch;

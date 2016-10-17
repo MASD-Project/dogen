@@ -160,11 +160,11 @@ void generator::process_element(const yarn::element& e) {
     }
 
     for (const auto& f : i->second) {
-        const auto fctn(f->archetype_location().facet());
+        const auto fct(f->archetype_location().facet());
         const auto arch(f->archetype_location().archetype());
-        result_->inclusion_by_facet()[fctn][arch].push_back(e.name());
+        result_->inclusion_by_facet()[fct][arch].push_back(e.name());
         BOOST_LOG_SEV(lg, debug) << "Added name. Id: " << e.name()
-                                 << " Facet: " << fctn << " Archetype: "
+                                 << " Facet: " << fct << " Archetype: "
                                  << arch;
     }
 }

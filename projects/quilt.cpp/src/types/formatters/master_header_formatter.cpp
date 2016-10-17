@@ -52,11 +52,11 @@ std::type_index master_header_formatter::element_type_index() const {
 std::list<std::string> master_header_formatter::inclusion_dependencies(
     const formattables::inclusion_dependencies_builder_factory& f,
     const yarn::element& e) const {
-    const auto fctn(ownership_hierarchy_.facet());
+    const auto fct(ownership_hierarchy_.facet());
     const auto arch(ownership_hierarchy_.archetype());
     const auto& mh(assistant::as<fabric::master_header>(arch, e));
 
-    const auto i(mh.inclusion_by_facet().find(fctn));
+    const auto i(mh.inclusion_by_facet().find(fct));
     if (i == mh.inclusion_by_facet().end())
         return std::list<std::string>();
 

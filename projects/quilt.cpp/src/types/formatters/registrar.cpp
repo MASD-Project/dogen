@@ -85,24 +85,24 @@ void registrar::validate() const {
         for (const auto& ptr : formatters) {
             const auto& formatter(*ptr);
             const auto& al(formatter.archetype_location());
-            const auto fctn(al.facet());
-            all_facets.insert(fctn);
+            const auto fct(al.facet());
+            all_facets.insert(fct);
             if (formatter.inclusion_support_type() != cs)
                 continue;
 
             /*
              * We can only have one canonical formatter per type per facet.
              */
-            const auto i(facets_found.find(fctn));
+            const auto i(facets_found.find(fct));
             if (i != facets_found.end()) {
                 const auto arch(al.archetype());
                 BOOST_LOG_SEV(lg, error) << more_than_one_canonical_archetype
-                                         << fctn << " archetype: " << arch
+                                         << fct << " archetype: " << arch
                                          << " type: " << ti.name();
                 BOOST_THROW_EXCEPTION(registrar_error(
-                        more_than_one_canonical_archetype + fctn));
+                        more_than_one_canonical_archetype + fct));
             }
-            facets_found.insert(fctn);
+            facets_found.insert(fct);
         }
 
         /*

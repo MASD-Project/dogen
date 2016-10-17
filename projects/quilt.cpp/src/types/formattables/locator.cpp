@@ -74,29 +74,29 @@ locator::type_group locator::make_type_group(
         const auto& al(fmt.archetype_location());
 
         const auto arch(al.archetype());
-        const auto fctn(al.facet());
+        const auto fct(al.facet());
         const auto pf(traits::postfix());
         formatter_type_group fmt_tg;
         const auto pfix(traits::postfix());
         fmt_tg.formatter_postfix = s.select_type_by_name(arch, pfix);
 
-        auto dir(s.try_type_field_by_name(fctn, traits::directory()));
+        auto dir(s.try_type_field_by_name(fct, traits::directory()));
         if (dir)
             fmt_tg.facet_directory = *dir;
 
-        auto postfix(s.try_type_field_by_name(fctn, traits::postfix()));
+        auto postfix(s.try_type_field_by_name(fct, traits::postfix()));
         if (postfix)
             fmt_tg.facet_postfix = *postfix;
 
         r.formatters_type_group[arch] = fmt_tg;
 
-        const bool done(processed_facets.find(fctn) != processed_facets.end());
+        const bool done(processed_facets.find(fct) != processed_facets.end());
         if (fmt_tg.facet_directory && !done) {
-            processed_facets.insert(fctn);
+            processed_facets.insert(fct);
             facet_type_group fct_tg;
             fct_tg.directory = *fmt_tg.facet_directory;
             fct_tg.postfix = *fmt_tg.facet_postfix;
-            r.facets_type_group[fctn] = fct_tg;
+            r.facets_type_group[fct] = fct_tg;
         }
     }
 
@@ -125,12 +125,12 @@ locator_configuration locator::make_configuration(
     const annotations::entry_selector s(o);
 
     for (const auto& pair : tg.facets_type_group) {
-        const auto fctn(pair.first);
+        const auto fct(pair.first);
         const auto& fct_tg(pair.second);
         locator_facet_configuration fct_cfg;
         fct_cfg.directory(s.get_text_content_or_default(fct_tg.directory));
         fct_cfg.postfix(s.get_text_content_or_default(fct_tg.postfix));
-        r.facet_configurations()[fctn] = fct_cfg;
+        r.facet_configurations()[fct] = fct_cfg;
     }
 
     for (const auto& pair : tg.formatters_type_group) {
@@ -334,9 +334,9 @@ locator::facet_directories() const {
     std::unordered_map<std::string, std::string> r;
 
     for (const auto& pair : configuration_.facet_configurations()) {
-        const auto fctn(pair.first);
+        const auto fct(pair.first);
         const auto fct_cfg(pair.second);
-        r[fctn] = fct_cfg.directory();
+        r[fct] = fct_cfg.directory();
     }
 
     return r;

@@ -103,14 +103,14 @@ enablement_expander::make_global_type_group(
         const auto ebl(traits::enabled());
         gtg.model_enabled = s.select_type_by_name(mn, ebl);
 
-        const auto& fctn(al.facet());
-        gtg.facet_enabled = s.select_type_by_name(fctn, ebl);
+        const auto& fct(al.facet());
+        gtg.facet_enabled = s.select_type_by_name(fct, ebl);
 
         const auto& arch(al.archetype());
         gtg.formatter_enabled = s.select_type_by_name(arch, ebl);
 
         const auto ow(traits::overwrite());
-        gtg.facet_overwrite = s.select_type_by_name(fctn, ow);
+        gtg.facet_overwrite = s.select_type_by_name(fct, ow);
         gtg.formatter_overwrite = s.select_type_by_name(arch, ow);
 
         r[arch] = gtg;
@@ -189,9 +189,9 @@ void enablement_expander::update_facet_enablement(
 
         const auto& fmt(*i->second);
         const auto& al(fmt.archetype_location());
-        const auto fctn(al.facet());
+        const auto fct(al.facet());
         const auto& gc(pair.second);
-        fct_props[fctn].enabled(gc.facet_enabled());
+        fct_props[fct].enabled(gc.facet_enabled());
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished updating facet enablement."
@@ -210,17 +210,17 @@ make_local_type_group(const annotations::type_repository& atrp,
         local_type_group ltg;
         const auto al(f->archetype_location());
 
-        const auto& fctn(al.facet());
+        const auto& fct(al.facet());
         const auto ebl(traits::enabled());
-        ltg.facet_enabled = s.select_type_by_name(fctn, ebl);
+        ltg.facet_enabled = s.select_type_by_name(fct, ebl);
 
         const auto& arch(al.archetype());
         ltg.formatter_enabled = s.select_type_by_name(arch, ebl);
 
         const auto ow(traits::overwrite());
-        ltg.facet_overwrite = s.select_type_by_name(fctn, ow);
+        ltg.facet_overwrite = s.select_type_by_name(fct, ow);
         ltg.formatter_overwrite = s.select_type_by_name(arch, ow);
-        ltg.facet_supported = s.select_type_by_name(fctn, traits::supported());
+        ltg.facet_supported = s.select_type_by_name(fct, traits::supported());
         r[arch] = ltg;
     }
 
