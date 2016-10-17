@@ -103,7 +103,7 @@ helper_expander::context helper_expander::make_context(
 }
 
 helper_expander::facets_for_family_type
-helper_expander::facets_for_family(const formatters::container& fc) const {
+helper_expander::facets_for_family(const formatters::repository& frp) const {
     BOOST_LOG_SEV(lg, debug) << "Started making facets for family.";
 
     facets_for_family_type r;
@@ -113,7 +113,7 @@ helper_expander::facets_for_family(const formatters::container& fc) const {
      * helper family to facet. The container has helpers by family, by
      * owning file formatter.
      */
-    for (const auto& families_pair : fc.helper_formatters())
+    for (const auto& families_pair : frp.helper_formatters())
         for (const auto& file_formatter_pair : families_pair.second)
             for (const auto& hf : file_formatter_pair.second)
                 for (const auto& f : hf->owning_facets())
@@ -308,10 +308,10 @@ std::list<helper_properties> helper_expander::compute_helper_properties(
 }
 
 void helper_expander::populate_helper_properties(const context& ctx,
-    const formatters::container& fc,
+    const formatters::repository& frp,
     std::unordered_map<std::string, formattable>& formattables) const {
 
-    const auto fff(facets_for_family(fc));
+    const auto fff(facets_for_family(frp));
     for (auto& pair : formattables) {
         const auto id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
@@ -354,9 +354,9 @@ void helper_expander::populate_helper_properties(const context& ctx,
 }
 
 void helper_expander::expand(const annotations::type_repository& atrp,
-    const formatters::container& fc, model& fm) const {
+    const formatters::repository& frp, model& fm) const {
     const auto ctx(make_context(atrp, fm));
-    populate_helper_properties(ctx, fc, fm.formattables());
+    populate_helper_properties(ctx, frp, fm.formattables());
 }
 
 } } } }

@@ -63,7 +63,7 @@ public:
     /**
      * @brief Returns all available formatters.
      */
-    const container& formatter_container() const;
+    const repository& formatter_repository() const;
 
     /**
      * @brief Returns the ownership hierarchy for all formatters.
@@ -79,7 +79,7 @@ public:
     formatter_helpers() const;
 
 private:
-    container formatter_container_;
+    repository formatter_repository_;
     std::forward_list<annotations::archetype_location> ownership_hierarchy_;
 };
 

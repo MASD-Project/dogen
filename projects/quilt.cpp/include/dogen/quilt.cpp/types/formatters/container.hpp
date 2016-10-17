@@ -41,9 +41,9 @@ namespace formatters {
 class registrar;
 
 /**
- * @brief Simple container for all formatter types.
+ * @brief Repository for all formatters.
  */
-class container final {
+class repository final {
 private:
     friend class registrar;
 

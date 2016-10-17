@@ -48,15 +48,15 @@ private:
         const annotations::type_repository& atrp, model& fm) const;
 
     void expand_enablement(const annotations::type_repository& atrp,
-        const annotations::annotation& root, const formatters::container& fc,
+        const annotations::annotation& root, const formatters::repository& frp,
         model& fm) const;
 
-    void expand_canonical_archetypes(const formatters::container& fc,
+    void expand_canonical_archetypes(const formatters::repository& frp,
         model& fm) const;
 
     void expand_inclusion(
         const annotations::type_repository& atrp,
-        const formatters::container& fc, const locator& l, model& fm) const;
+        const formatters::repository& frp, const locator& l, model& fm) const;
 
     void expand_decoration(
         const dogen::formatters::decoration_properties_factory& dpf,
@@ -66,11 +66,11 @@ private:
         model& fm) const;
 
     void expand_helpers(const annotations::type_repository& atrp,
-        const formatters::container& fc, model& fm) const;
+        const formatters::repository& frp, model& fm) const;
 
     void reduce(model& fm) const;
 
-    void expand_file_paths_and_guards(const formatters::container& fc,
+    void expand_file_paths_and_guards(const formatters::repository& frp,
         const locator& l, model& fm) const;
 
     void expand_odb(const annotations::type_repository& atrp, model& fm) const;
@@ -81,7 +81,7 @@ public:
     void expand(const annotations::type_repository& atrp,
         const annotations::annotation& root,
         const dogen::formatters::decoration_properties_factory& dpf,
-        const formatters::container& fc, const locator& l, model& fm) const;
+        const formatters::repository& frp, const locator& l, model& fm) const;
 };
 
 } } } }

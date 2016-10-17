@@ -60,7 +60,7 @@ private:
 
     global_type_group_type make_global_type_group(
         const annotations::type_repository& atrp,
-        const formatters::container& fc) const;
+        const formatters::repository& frp) const;
 
 private:
     typedef std::unordered_map<std::string, global_enablement_configuration>
@@ -70,7 +70,7 @@ private:
     obtain_global_configurations(const global_type_group_type& gtg,
         const annotations::annotation& root) const;
 
-    void update_facet_enablement(const formatters::container& fc,
+    void update_facet_enablement(const formatters::repository& frp,
         const global_enablement_configurations_type& gcs, model& fm) const;
 
 private:
@@ -89,13 +89,13 @@ private:
     local_type_group_type;
 
     local_type_group_type
-    make_local_type_group(const annotations::type_repository& rp,
-        const formatters::container& fc) const;
+    make_local_type_group(const annotations::type_repository& atrp,
+        const formatters::repository& frp) const;
 
     std::unordered_map<std::type_index, local_type_group_type>
     bucket_local_type_group_by_type_index(
         const local_type_group_type& unbucketed_ltgs,
-        const formatters::container& fc) const;
+        const formatters::repository& frp) const;
 
 private:
     typedef std::unordered_map<std::string, local_enablement_configuration>
@@ -115,7 +115,7 @@ private:
 
 public:
     void expand(const annotations::type_repository& atrp,
-        const annotations::annotation& root, const formatters::container& fc,
+        const annotations::annotation& root, const formatters::repository& frp,
         model& fm) const;
 };
 

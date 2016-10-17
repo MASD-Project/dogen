@@ -43,7 +43,7 @@ private:
     std::string to_header_guard(const boost::filesystem::path& p) const;
 
 public:
-    void expand(const formatters::container& fc, const locator& l,
+    void expand(const formatters::repository& frp, const locator& l,
         model& fm) const;
 };
 

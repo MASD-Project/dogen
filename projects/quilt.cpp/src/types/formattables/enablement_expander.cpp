@@ -89,13 +89,13 @@ inline std::ostream& operator<<(std::ostream& s,
 enablement_expander::global_type_group_type
 enablement_expander::make_global_type_group(
     const annotations::type_repository& atrp,
-    const formatters::container& fc) const {
+    const formatters::repository& frp) const {
 
     BOOST_LOG_SEV(lg, debug) << "Creating global field definitions.";
 
     global_type_group_type r;
     const annotations::type_repository_selector s(atrp);
-    for (const auto& f : fc.file_formatters()) {
+    for (const auto& f : frp.file_formatters()) {
         const auto al(f->archetype_location());
 
         global_type_group gtg;
@@ -160,7 +160,7 @@ enablement_expander::obtain_global_configurations(
 }
 
 void enablement_expander::update_facet_enablement(
-    const formatters::container& fc,
+    const formatters::repository& frp,
     const global_enablement_configurations_type& gcs, model& fm) const {
     BOOST_LOG_SEV(lg, debug) << "Updating facet enablement.";
 
@@ -176,7 +176,7 @@ void enablement_expander::update_facet_enablement(
      *
      * FIXME: read facet fields here instead of reusing configuration.
      */
-    const auto& ffba(fc.file_formatters_by_archetype());
+    const auto& ffba(frp.file_formatters_by_archetype());
     auto& fct_props(fm.facet_properties());
     for (const auto& pair : gcs) {
         const auto arch(pair.first);
@@ -200,13 +200,13 @@ void enablement_expander::update_facet_enablement(
 
 enablement_expander::local_type_group_type enablement_expander::
 make_local_type_group(const annotations::type_repository& atrp,
-    const formatters::container& fc) const {
+    const formatters::repository& frp) const {
 
     BOOST_LOG_SEV(lg, debug) << "Creating local field definitions.";
 
     local_type_group_type r;
     const annotations::type_repository_selector s(atrp);
-    for (const auto& f : fc.file_formatters()) {
+    for (const auto& f : frp.file_formatters()) {
         local_type_group ltg;
         const auto al(f->archetype_location());
 
@@ -233,14 +233,14 @@ std::unordered_map<std::type_index,
                    enablement_expander::local_type_group_type>
 enablement_expander::bucket_local_type_group_by_type_index(
     const local_type_group_type& unbucketed_ltgs,
-    const formatters::container& fc) const {
+    const formatters::repository& frp) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started bucketing local field definitions "
                              << "by type index.";
     std::unordered_map<std::type_index,
                        enablement_expander::local_type_group_type> r;
 
-    const auto& ffti(fc.file_formatters_by_type_index());
+    const auto& ffti(frp.file_formatters_by_type_index());
     for (const auto& pair: ffti) {
         const auto& ti(pair.first);
         const auto& fmts(pair.second);
@@ -442,7 +442,7 @@ void enablement_expander::compute_enablement(
 }
 
 void enablement_expander::expand(const annotations::type_repository& atrp,
-    const annotations::annotation& root, const formatters::container& fc,
+    const annotations::annotation& root, const formatters::repository& frp,
     model& fm) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started expanding enablement.";
@@ -451,27 +451,27 @@ void enablement_expander::expand(const annotations::type_repository& atrp,
      * field definitions that only apply to the root object, as some
      * of these fields do not exist anywhere else.
      */
-    const auto gtg(make_global_type_group(atrp, fc));
+    const auto gtg(make_global_type_group(atrp, frp));
 
     /*
      * Read the values for the global field definitions, and update
      * the facet configurations with it.
      */
     const auto gcs(obtain_global_configurations(gtg, root));
-    update_facet_enablement(fc, gcs, fm);
+    update_facet_enablement(frp, gcs, fm);
 
     /*
      * Create the fields for the local field definitions. These are
      * made across all registered formatters.
      */
-    const auto ltg(make_local_type_group(atrp, fc));
+    const auto ltg(make_local_type_group(atrp, frp));
 
     /*
      * Bucket the local field definitions by element type - i.e., we
      * only care about those formatters which are valid for a
      * particular element.
      */
-    const auto ltgti(bucket_local_type_group_by_type_index(ltg, fc));
+    const auto ltgti(bucket_local_type_group_by_type_index(ltg, frp));
 
     for (auto& pair : fm.formattables()) {
         const auto id(pair.first);

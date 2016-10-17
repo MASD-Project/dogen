@@ -56,10 +56,10 @@ namespace {
 
 class generator final {
 public:
-    generator(const yarn::name& model_name, const formatters::container& fc)
+    generator(const yarn::name& model_name, const formatters::repository& rp)
         : result_(create_master_header(model_name)),
           file_formatters_by_type_index_(
-              filter_file_formatters_by_type_index(fc)) {}
+              filter_file_formatters_by_type_index(rp)) {}
 
 private:
     boost::shared_ptr<master_header>
@@ -74,7 +74,7 @@ private:
         std::type_index,
         std::forward_list<
             std::shared_ptr<formatters::file_formatter_interface>>>
-    filter_file_formatters_by_type_index(const formatters::container& fc) const;
+    filter_file_formatters_by_type_index(const formatters::repository& rp) const;
 
     void process_element(const yarn::element& e);
 
@@ -132,13 +132,13 @@ std::unordered_map<
     std::forward_list<
         std::shared_ptr<formatters::file_formatter_interface>>>
 generator::filter_file_formatters_by_type_index(
-    const formatters::container& fc) const {
+    const formatters::repository& rp) const {
     std::unordered_map<
         std::type_index,
         std::forward_list<
             std::shared_ptr<formatters::file_formatter_interface>>> r;
 
-    for (const auto& pair : fc.file_formatters_by_type_index()) {
+    for (const auto& pair : rp.file_formatters_by_type_index()) {
         const auto& ti(pair.first);
         const auto& fmts(pair.second);
         r[ti] = filter_formatters(fmts);
@@ -172,11 +172,11 @@ void generator::process_element(const yarn::element& e) {
 }
 
 boost::shared_ptr<yarn::element>
-master_header_factory::build(const formatters::container& fc,
+master_header_factory::build(const formatters::repository& frp,
     const yarn::intermediate_model& im) const {
     BOOST_LOG_SEV(lg, debug) << "Generating the master header.";
 
-    generator g(im.name(), fc);
+    generator g(im.name(), frp);
     yarn::elements_traversal(im, g);
     const auto r(g.result());
 

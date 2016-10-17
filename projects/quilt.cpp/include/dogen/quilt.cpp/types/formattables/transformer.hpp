@@ -46,7 +46,7 @@ public:
      * @brief Given a yarn model, produces the corresponding formattables.
      */
     std::unordered_map<std::string, formattable>
-    transform(const formatters::container& fc, const yarn::model& m) const;
+    transform(const formatters::repository& frp, const yarn::model& m) const;
 };
 
 } } } }

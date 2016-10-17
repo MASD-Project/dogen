@@ -132,7 +132,7 @@ std::ostream& operator<<(std::ostream& s,
 
 inclusion_expander::type_group inclusion_expander::
 make_type_group(const annotations::type_repository& atrp,
-    const formatters::container& fc) const {
+    const formatters::repository& frp) const {
     BOOST_LOG_SEV(lg, debug) << "Creating field definitions.";
 
     type_group r;
@@ -140,7 +140,7 @@ make_type_group(const annotations::type_repository& atrp,
     const auto ir(traits::cpp::inclusion_required());
     r.inclusion_required = s.select_type_by_name(ir);
 
-    for (const auto f : fc.file_formatters()) {
+    for (const auto f : frp.file_formatters()) {
         const auto& al(f->archetype_location());
         const auto arch(al.archetype());
 
@@ -216,10 +216,10 @@ remove_non_includible_formatters(const formatter_list_type& formatters) const {
 
 std::unordered_map<std::type_index, inclusion_expander::formatter_list_type>
 inclusion_expander::includible_formatters_by_type_index(
-    const formatters::container& fc) const {
+    const formatters::repository& frp) const {
 
     std::unordered_map<std::type_index, formatter_list_type> r;
-    for (const auto& pair : fc.file_formatters_by_type_index()) {
+    for (const auto& pair : frp.file_formatters_by_type_index()) {
         const auto& ti(pair.first);
         const auto& fmts(pair.second);
         r[ti] = remove_non_includible_formatters(fmts);
@@ -334,7 +334,7 @@ void inclusion_expander::compute_inclusion_directives(
 
 inclusion_expander::inclusion_directives_container_type inclusion_expander::
 compute_inclusion_directives(const type_group& tg,
-    const formatters::container& fc, const locator& l,
+    const formatters::repository& frp, const locator& l,
     const std::unordered_map<std::string, formattable>& formattables) const {
 
     inclusion_directives_container_type r;
@@ -344,7 +344,7 @@ compute_inclusion_directives(const type_group& tg,
      * files that can be included via an include directive. Filter out
      * all of those that do not, and bucket them all by type index.
      */
-    const auto ffti(includible_formatters_by_type_index(fc));
+    const auto ffti(includible_formatters_by_type_index(frp));
 
     /*
      * Now, for all formattables and their associated element
@@ -373,7 +373,7 @@ compute_inclusion_directives(const type_group& tg,
 
 inclusion_expander::element_inclusion_dependencies_type
 inclusion_expander::compute_inclusion_dependencies(
-    const formatters::container& fc,
+    const formatters::repository& frp,
     const inclusion_dependencies_builder_factory& idf,
     const yarn::element& e) const {
 
@@ -396,8 +396,8 @@ inclusion_expander::compute_inclusion_dependencies(
      * element and the formatters that support it.
      */
     const auto ti(std::type_index(typeid(e)));
-    const auto i(fc.file_formatters_by_type_index().find(ti));
-    if (i == fc.file_formatters_by_type_index().end()) {
+    const auto i(frp.file_formatters_by_type_index().find(ti));
+    if (i == frp.file_formatters_by_type_index().end()) {
         BOOST_LOG_SEV(lg, debug) << "No formatters for type: " << ti.name();
         return r;
     }
@@ -441,7 +441,7 @@ inclusion_expander::compute_inclusion_dependencies(
 }
 
 void inclusion_expander::populate_inclusion_dependencies(
-    const formatters::container& fc,
+    const formatters::repository& frp,
     const inclusion_directives_container_type& idc,
     std::unordered_map<std::string, formattable>& formattables) const {
 
@@ -476,7 +476,7 @@ void inclusion_expander::populate_inclusion_dependencies(
              * element. If it does not have any dependencies, we
              * haven't got any work to do.
              */
-            const auto deps(compute_inclusion_dependencies(fc, idf, e));
+            const auto deps(compute_inclusion_dependencies(frp, idf, e));
             if (deps.empty())
                 continue;
 
@@ -509,11 +509,11 @@ void inclusion_expander::populate_inclusion_dependencies(
 }
 
 void inclusion_expander::expand(const annotations::type_repository& atrp,
-    const formatters::container& fc, const locator& l, model& fm) const {
+    const formatters::repository& frp, const locator& l, model& fm) const {
 
-    const auto tg(make_type_group(atrp, fc));
-    const auto idc(compute_inclusion_directives(tg, fc, l, fm.formattables()));
-    populate_inclusion_dependencies(fc, idc, fm.formattables());
+    const auto tg(make_type_group(atrp, frp));
+    const auto idc(compute_inclusion_directives(tg, frp, l, fm.formattables()));
+    populate_inclusion_dependencies(frp, idc, fm.formattables());
 }
 
 } } } }

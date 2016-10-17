@@ -50,7 +50,7 @@ public:
     locator(
         const boost::filesystem::path& project_directory_path,
         const annotations::type_repository& atrp,
-        const formatters::container& fc, const annotations::annotation& root,
+        const formatters::repository& frp, const annotations::annotation& root,
         const yarn::name& model_name,
         const std::unordered_set<std::string>& module_ids);
 
@@ -79,14 +79,14 @@ private:
     };
 
     type_group make_type_group(const annotations::type_repository& atrp,
-        const formatters::container& fc) const;
+        const formatters::repository& frp) const;
 
     locator_configuration make_configuration(const type_group& tg,
         const annotations::annotation& o) const;
 
     locator_configuration
     make_configuration(const annotations::type_repository& atrp,
-        const formatters::container& fc, const annotations::annotation& o);
+        const formatters::repository& frp, const annotations::annotation& o);
 
 private:
     /**

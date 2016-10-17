@@ -57,7 +57,7 @@ private:
     facets_for_family_type;
 
     facets_for_family_type
-    facets_for_family(const formatters::container& fc) const;
+    facets_for_family(const formatters::repository& frp) const;
 
     bool requires_hashing_helper(const facets_for_family_type& fff,
         const std::string& family) const;
@@ -85,12 +85,12 @@ private:
         const std::list<yarn::attribute>& attrs) const;
 
     void populate_helper_properties(const context& ctx,
-        const formatters::container& fc,
+        const formatters::repository& frp,
         std::unordered_map<std::string, formattable>& formattables) const;
 
 public:
     void expand(const annotations::type_repository& atrp,
-        const formatters::container& fc, model& fm) const;
+        const formatters::repository& frp, model& fm) const;
 };
 
 } } } }

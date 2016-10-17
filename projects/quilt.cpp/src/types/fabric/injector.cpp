@@ -107,9 +107,9 @@ void injector::inject_odb_options(yarn::intermediate_model& im) const {
 
 void injector::inject_master_headers(yarn::intermediate_model& im) const {
     const auto& rg(formatters::workflow::registrar());
-    const auto& fc(rg.formatter_container());
+    const auto& frp(rg.formatter_repository());
     master_header_factory f;
-    const auto e(f.build(fc, im));
+    const auto e(f.build(frp, im));
     add_element(e, im);
 }
 

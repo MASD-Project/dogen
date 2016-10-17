@@ -33,7 +33,7 @@ namespace quilt {
 namespace cpp {
 namespace formatters {
 
-std::ostream& operator<<(std::ostream& s, const container& c);
+std::ostream& operator<<(std::ostream& s, const repository& rp);
 
 } } } }
 

@@ -59,9 +59,9 @@ to_header_guard(const boost::filesystem::path& p) const {
 
 
 void file_path_and_guard_expander::
-expand(const formatters::container& fc, const locator& l, model& fm) const {
+expand(const formatters::repository& frp, const locator& l, model& fm) const {
 
-    const auto ffba(fc.file_formatters_by_archetype());
+    const auto ffba(frp.file_formatters_by_archetype());
     for (auto& pair : fm.formattables()) {
         const auto id(pair.first);
         auto& formattable(pair.second);

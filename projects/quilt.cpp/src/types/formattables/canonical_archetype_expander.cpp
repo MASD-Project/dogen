@@ -40,10 +40,10 @@ namespace cpp {
 namespace formattables {
 
 void canonical_archetype_expander::
-expand(const formatters::container& fc, model& fm) const {
+expand(const formatters::repository& frp, model& fm) const {
 
     const auto cs(formatters::inclusion_support_types::canonical_support);
-    const auto& ffti(fc.file_formatters_by_type_index());
+    const auto& ffti(frp.file_formatters_by_type_index());
 
     for (auto& pair : fm.formattables()) {
         const auto id(pair.first);

@@ -42,7 +42,7 @@ namespace cpp {
 namespace formattables {
 
 std::unordered_map<std::string, formattable> transformer::
-transform(const formatters::container& fc, const yarn::model& m) const {
+transform(const formatters::repository& frp, const yarn::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming yarn to formattables."
                              << " Elements in model: " << m.elements().size();
 
@@ -68,8 +68,8 @@ transform(const formatters::container& fc, const yarn::model& m) const {
             fbl.master_segment(ptr);
 
         const auto ti(std::type_index(typeid(e)));
-        const auto j(fc.file_formatters_by_type_index().find(ti));
-        if (j == fc.file_formatters_by_type_index().end()) {
+        const auto j(frp.file_formatters_by_type_index().find(ti));
+        if (j == frp.file_formatters_by_type_index().end()) {
             BOOST_LOG_SEV(lg, debug) << "Element has no formatters: " << id;
             continue;
         }

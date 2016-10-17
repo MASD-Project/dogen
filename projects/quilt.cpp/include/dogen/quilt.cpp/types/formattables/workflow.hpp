@@ -54,13 +54,13 @@ private:
     obtain_module_ids(const yarn::model& m) const;
 
     model
-    make_model(const formatters::container& fc, const yarn::model& m) const;
+    make_model(const formatters::repository& frp, const yarn::model& m) const;
 
     void expand_model(
         const annotations::type_repository& atrp,
         const annotations::annotation& root,
         const dogen::formatters::decoration_properties_factory& dpf,
-        const formatters::container& fc, const locator& l, model& fm) const;
+        const formatters::repository& frp, const locator& l, model& fm) const;
 
 public:
     model execute(
@@ -68,7 +68,7 @@ public:
         const annotations::type_repository& atrp,
         const annotations::annotation& root,
         const dogen::formatters::decoration_properties_factory& dpf,
-        const formatters::container& fc, const yarn::model& m) const;
+        const formatters::repository& frp, const yarn::model& m) const;
 };
 
 } } } }

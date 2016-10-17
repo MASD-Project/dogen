@@ -43,23 +43,23 @@ expand_streaming(const annotations::type_repository& atrp, model& fm) const {
 }
 
 void model_expander::expand_enablement(const annotations::type_repository& atrp,
-    const annotations::annotation& root_object, const formatters::container& fc,
-    model& fm) const {
+    const annotations::annotation& root_object,
+    const formatters::repository& frp, model& fm) const {
     enablement_expander ex;
-    ex.expand(atrp, root_object, fc, fm);
+    ex.expand(atrp, root_object, frp, fm);
 }
 
-void model_expander::
-expand_canonical_archetypes(const formatters::container& fc, model& fm) const {
+void model_expander::expand_canonical_archetypes(
+    const formatters::repository& frp, model& fm) const {
     canonical_archetype_expander ex;
-    ex.expand(fc, fm);
+    ex.expand(frp, fm);
 }
 
 void model_expander::expand_inclusion(
-    const annotations::type_repository& atrp, const formatters::container& fc,
+    const annotations::type_repository& atrp, const formatters::repository& frp,
     const locator& l, model& fm) const {
     inclusion_expander ex;
-    ex.expand(atrp, fc, l, fm);
+    ex.expand(atrp, frp, l, fm);
 }
 
 void model_expander::expand_decoration(
@@ -76,9 +76,9 @@ void model_expander::expand_aspects(const annotations::type_repository& atrp,
 }
 
 void model_expander::expand_helpers(const annotations::type_repository& atrp,
-    const formatters::container& fc, model& fm) const {
+    const formatters::repository& frp, model& fm) const {
     helper_expander ex;
-    ex.expand(atrp, fc, fm);
+    ex.expand(atrp, frp, fm);
 }
 
 void model_expander::reduce(model& fm) const {
@@ -87,9 +87,9 @@ void model_expander::reduce(model& fm) const {
 }
 
 void model_expander::expand_file_paths_and_guards(
-    const formatters::container& fc, const locator& l, model& fm) const {
+    const formatters::repository& frp, const locator& l, model& fm) const {
     file_path_and_guard_expander ex;
-    ex.expand(fc, l, fm);
+    ex.expand(frp, l, fm);
 }
 
 void model_expander::
@@ -108,7 +108,7 @@ void model_expander::expand(
     const annotations::type_repository& atrp,
     const annotations::annotation& root,
     const dogen::formatters::decoration_properties_factory& dpf,
-    const formatters::container& fc, const locator& l, model& fm) const {
+    const formatters::repository& frp, const locator& l, model& fm) const {
 
     /*
      * Streaming expansion must be done before helper expansion as the
@@ -120,18 +120,18 @@ void model_expander::expand(
      * Enablement expansion must be done before inclusion because
      * inclusion relies on it to know which formatters are enabled.
      */
-    expand_enablement(atrp, root, fc, fm);
+    expand_enablement(atrp, root, frp, fm);
 
     /*
      * Canonical formatter expansion must be done before inclusion
      * because we use the canonical formatter notation to find
      * inclusion directives.
      */
-    expand_canonical_archetypes(fc, fm);
-    expand_inclusion(atrp, fc, l, fm);
+    expand_canonical_archetypes(frp, fm);
+    expand_inclusion(atrp, frp, l, fm);
     expand_decoration(dpf, fm);
     expand_aspects(atrp, fm);
-    expand_helpers(atrp, fc, fm);
+    expand_helpers(atrp, frp, fm);
 
     /*
      * All of the above expansions must be performed prior to
@@ -139,7 +139,7 @@ void model_expander::expand(
      */
     reduce(fm);
 
-    expand_file_paths_and_guards(fc, l, fm);
+    expand_file_paths_and_guards(frp, l, fm);
     expand_odb(atrp, fm);
     expand_facet_directories(l, fm);
 }

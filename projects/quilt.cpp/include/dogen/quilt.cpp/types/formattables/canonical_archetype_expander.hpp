@@ -35,7 +35,7 @@ namespace formattables {
 
 class canonical_archetype_expander {
 public:
-    void expand(const formatters::container& fc, model& fm) const;
+    void expand(const formatters::repository& rp, model& fm) const;
 };
 
 } } } }

@@ -60,9 +60,9 @@ private:
     std::vector<boost::filesystem::path> make_data_directories() const;
 
     /**
-     * @brief Creates the formatters' repository.
+     * @brief Creates the formatters' repository with decoration data.
      */
-    dogen::formatters::repository create_formatters_repository(const
+    dogen::formatters::repository create_formatters_decoration_repository(const
         std::vector<boost::filesystem::path>& data_directories) const;
 
     /**
@@ -82,7 +82,7 @@ private:
         const annotations::type_repository& atrp,
         const annotations::annotation& root,
         const dogen::formatters::decoration_properties_factory& dpf,
-        const formatters::container& fc, const yarn::model& m) const;
+        const formatters::repository& frp, const yarn::model& m) const;
 
     /**
      * @brief Create the files representation of the formattables model.

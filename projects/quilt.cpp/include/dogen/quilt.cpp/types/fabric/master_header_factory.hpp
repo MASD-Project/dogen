@@ -37,7 +37,7 @@ namespace fabric {
 
 class master_header_factory {
 public:
-    boost::shared_ptr<yarn::element> build(const formatters::container& fc,
+    boost::shared_ptr<yarn::element> build(const formatters::repository& rp,
         const yarn::intermediate_model& im) const;
 };
 

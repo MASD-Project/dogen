@@ -61,9 +61,9 @@ workflow::format(const formattables::model& fm, const yarn::element& e,
     BOOST_LOG_SEV(lg, debug) << "Type index: " << ti.name();
 
     std::forward_list<dogen::formatters::artefact> r;
-    const auto& fc(registrar().formatter_container());
-    const auto i(fc.file_formatters_by_type_index().find(ti));
-    if (i == fc.file_formatters_by_type_index().end()) {
+    const auto& frp(registrar().formatter_repository());
+    const auto i(frp.file_formatters_by_type_index().find(ti));
+    if (i == frp.file_formatters_by_type_index().end()) {
         BOOST_LOG_SEV(lg, debug) << "No formatters for type: " << ti.name();
         return r;
     }
@@ -90,7 +90,7 @@ workflow::format(const formattables::model& fm, const yarn::element& e,
             continue;
         }
 
-        const auto& hlp_fmt(fc.helper_formatters());
+        const auto& hlp_fmt(frp.helper_formatters());
         const auto fct_propss(fm.facet_properties());
         context ctx(ep, fm, hlp_fmt);
         const auto file(fmt.format(ctx, e));

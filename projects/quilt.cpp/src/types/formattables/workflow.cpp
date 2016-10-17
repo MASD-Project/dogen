@@ -68,12 +68,12 @@ workflow::obtain_module_ids(const yarn::model& m) const {
 }
 
 model workflow::
-make_model(const formatters::container& fc, const yarn::model& m) const {
+make_model(const formatters::repository& frp, const yarn::model& m) const {
     model r;
     r.name(m.name());
 
     transformer t;
-    r.formattables(t.transform(fc, m));
+    r.formattables(t.transform(frp, m));
 
     return r;
 }
@@ -82,23 +82,23 @@ void workflow::expand_model(
     const annotations::type_repository& atrp,
     const annotations::annotation& root,
     const dogen::formatters::decoration_properties_factory& dpf,
-    const formatters::container& fc, const locator& l, model& fm) const {
+    const formatters::repository& frp, const locator& l, model& fm) const {
     model_expander ex;
-    ex.expand(atrp, root, dpf, fc, l, fm);
+    ex.expand(atrp, root, dpf, frp, l, fm);
 }
 
 model workflow::execute(
     const options::cpp_options& opts, const annotations::type_repository& atrp,
     const annotations::annotation& root,
     const dogen::formatters::decoration_properties_factory& dpf,
-    const formatters::container& fc, const yarn::model& m) const {
+    const formatters::repository& frp, const yarn::model& m) const {
 
-    auto r(make_model(fc, m));
+    auto r(make_model(frp, m));
 
     const auto module_ids(obtain_module_ids(m));
     const auto pdp(opts.project_directory_path());
-    const locator l(pdp, atrp, fc, root, m.name(), module_ids);
-    expand_model(atrp, root, dpf, fc, l, r);
+    const locator l(pdp, atrp, frp, root, m.name(), module_ids);
+    expand_model(atrp, root, dpf, frp, l, r);
 
     return r;
 }

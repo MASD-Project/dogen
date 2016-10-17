@@ -87,7 +87,7 @@ private:
 
 
     type_group make_type_group(const annotations::type_repository& atrp,
-        const formatters::container& fc) const;
+        const formatters::repository& frp) const;
 
     bool make_top_level_inclusion_required(const type_group& tg,
         const annotations::annotation& o) const;
@@ -105,7 +105,7 @@ private:
         const formatter_list_type& formatters) const;
 
     std::unordered_map<std::type_index, formatter_list_type>
-    includible_formatters_by_type_index(const formatters::container& fc) const;
+    includible_formatters_by_type_index(const formatters::repository& frp) const;
 
 private:
     std::string to_inclusion_directive(const boost::filesystem::path& p) const;
@@ -126,7 +126,7 @@ private:
         const locator& l, inclusion_directives_container_type& idc) const;
 
     inclusion_directives_container_type compute_inclusion_directives(
-        const type_group& tg, const formatters::container& fc,
+        const type_group& tg, const formatters::repository& frp,
         const locator& l,
         const std::unordered_map<std::string, formattable>& formattables) const;
 
@@ -135,17 +135,17 @@ private:
         element_inclusion_dependencies_type;
 
     element_inclusion_dependencies_type compute_inclusion_dependencies(
-        const formatters::container& fc,
+        const formatters::repository& frp,
         const inclusion_dependencies_builder_factory& f,
         const yarn::element& e) const;
 
-    void populate_inclusion_dependencies(const formatters::container& fc,
+    void populate_inclusion_dependencies(const formatters::repository& frp,
         const inclusion_directives_container_type& idc,
         std::unordered_map<std::string, formattable>& formattables) const;
 
 public:
     void expand(const annotations::type_repository& atrp,
-        const formatters::container& fc, const locator& l, model& fm) const;
+        const formatters::repository& frp, const locator& l, model& fm) const;
 };
 
 } } } }

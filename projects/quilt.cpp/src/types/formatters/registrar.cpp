@@ -66,8 +66,8 @@ void registrar::validate() const {
      * We must have at least one registered formatter. This is a quick
      * way of troubleshooting validation errors.
      */
-    const auto& fc(formatter_container_);
-    if (fc.file_formatters_by_type_index().empty()) {
+    const auto& frp(formatter_repository_);
+    if (frp.file_formatters_by_type_index().empty()) {
         BOOST_LOG_SEV(lg, error) << no_file_formatters_by_type_index;
         BOOST_THROW_EXCEPTION(
             registrar_error(no_file_formatters_by_type_index));
@@ -77,7 +77,7 @@ void registrar::validate() const {
      * Validate the registered canonical formatters.
      */
     const auto cs(inclusion_support_types::canonical_support);
-    for (const auto& pair : fc.file_formatters_by_type_index()) {
+    for (const auto& pair : frp.file_formatters_by_type_index()) {
         const auto& ti(pair.first);
         const auto& formatters(pair.second);
         std::set<std::string> facets_found;
@@ -120,14 +120,14 @@ void registrar::validate() const {
         }
     }
 
-    if (fc.file_formatters().empty()) {
+    if (frp.file_formatters().empty()) {
         BOOST_LOG_SEV(lg, error) << no_file_formatters;
         BOOST_THROW_EXCEPTION(
             registrar_error(no_file_formatters));
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Registrar is in a valid state. Container: "
-                             << fc;
+    BOOST_LOG_SEV(lg, debug) << "Registrar is in a valid state. Repository: "
+                             << frp;
     BOOST_LOG_SEV(lg, debug) << "Ownership hierarchy: " << ownership_hierarchy_;
 }
 
@@ -141,7 +141,7 @@ void registrar::register_formatter_helper(
     if(fh->family().empty())
         BOOST_THROW_EXCEPTION(registrar_error(empty_family));
 
-    auto& f(formatter_container_.helper_formatters_[fh->family()]);
+    auto& f(formatter_repository_.helper_formatters_[fh->family()]);
     for (const auto& of : fh->owning_formatters())
         f[of].push_back(fh);
 }
@@ -163,12 +163,12 @@ register_formatter(std::shared_ptr<file_formatter_interface> f) {
         BOOST_THROW_EXCEPTION(registrar_error(empty_model_name));
 
     ownership_hierarchy_.push_front(al);
-    formatter_container_.file_formatters_.push_front(f);
+    formatter_repository_.file_formatters_.push_front(f);
 
     /*
      * Add the formatter to the index by element type index.
      */
-    auto& ffti(formatter_container_.file_formatters_by_type_index());
+    auto& ffti(formatter_repository_.file_formatters_by_type_index());
     auto& ti(ffti[f->element_type_index()]);
     ti.push_front(f);
 
@@ -178,7 +178,7 @@ register_formatter(std::shared_ptr<file_formatter_interface> f) {
      * ensuring the formatter id is unique in formatter space.
      */
     const auto arch(al.archetype());
-    auto& fffn(formatter_container_.file_formatters_by_archetype());
+    auto& fffn(formatter_repository_.file_formatters_by_archetype());
     const auto pair(std::make_pair(arch, f));
     const auto inserted(fffn.insert(pair).second);
     if (!inserted) {
@@ -187,8 +187,8 @@ register_formatter(std::shared_ptr<file_formatter_interface> f) {
     }
 }
 
-const container& registrar::formatter_container() const {
-    return formatter_container_;
+const repository& registrar::formatter_repository() const {
+    return formatter_repository_;
 }
 
 const std::forward_list<annotations::archetype_location>&
@@ -202,7 +202,7 @@ const std::unordered_map<
                      std::list<
                          std::shared_ptr<helper_formatter_interface>>>>&
 registrar::formatter_helpers() const {
-    return formatter_container_.helper_formatters();
+    return formatter_repository_.helper_formatters();
 }
 
 } } } }

@@ -86,12 +86,12 @@ inline std::ostream& to_stream(std::ostream& s,
 }
 
 
-std::ostream& operator<<(std::ostream& s, const container& c) {
+std::ostream& operator<<(std::ostream& s, const repository& rp) {
     s << "{ " << "\"__type__\": "
       << "\"dogen::quilt::cpp::formatters::container\", ";
-    to_stream(s, c.file_formatters_by_type_index());
-    to_stream(s, "all_file_formatters", c.file_formatters());
-    to_stream(s, c.helper_formatters());
+    to_stream(s, rp.file_formatters_by_type_index());
+    to_stream(s, "all_file_formatters", rp.file_formatters());
+    to_stream(s, rp.helper_formatters());
     s << " }";
     return s;
 }
