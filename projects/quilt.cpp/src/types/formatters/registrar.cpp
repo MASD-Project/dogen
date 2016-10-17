@@ -43,9 +43,9 @@ const std::string no_file_formatters_by_type_index(
 const std::string no_forward_declarations_formatters(
     "No forward declarations formatters provided.");
 const std::string null_formatter("Formatter supplied is null.");
-const std::string facets_missing_canonical_formatter(
-    "One or more facets have been declared without a canonical formatter");
-const std::string more_than_one_canonical_formatter(
+const std::string facets_missing_canonical_archetype(
+    "One or more facets have been declared without a canonical archetype");
+const std::string more_than_one_canonical_archetype(
     "Found more than one canonical formatter for a facet: ");
 const std::string empty_formatter_name("Formatter name is empty.");
 const std::string empty_facet_name("Facet name is empty.");
@@ -96,11 +96,11 @@ void registrar::validate() const {
             const auto i(facets_found.find(fctn));
             if (i != facets_found.end()) {
                 const auto fmtn(al.archetype());
-                BOOST_LOG_SEV(lg, error) << more_than_one_canonical_formatter
+                BOOST_LOG_SEV(lg, error) << more_than_one_canonical_archetype
                                          << fctn << " formatter: " << fmtn
                                          << " type: " << ti.name();
                 BOOST_THROW_EXCEPTION(registrar_error(
-                        more_than_one_canonical_formatter + fctn));
+                        more_than_one_canonical_archetype + fctn));
             }
             facets_found.insert(fctn);
         }
@@ -113,10 +113,10 @@ void registrar::validate() const {
             facets_found.begin(), facets_found.end(),
             std::inserter(result, result.end()));
         if (!result.empty()) {
-            BOOST_LOG_SEV(lg, error) << facets_missing_canonical_formatter
+            BOOST_LOG_SEV(lg, error) << facets_missing_canonical_archetype
                                      << " : " << result;
             BOOST_THROW_EXCEPTION(
-                registrar_error(facets_missing_canonical_formatter));
+                registrar_error(facets_missing_canonical_archetype));
         }
     }
 
