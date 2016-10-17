@@ -51,11 +51,11 @@ std::ostream& operator<<(std::ostream& s, const global_enablement_configuration&
 
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::global_enablement_configuration\"" << ", "
-      << "\"model_enabled\": " << v.model_enabled() << ", "
+      << "\"kernel_enabled\": " << v.kernel_enabled() << ", "
       << "\"facet_enabled\": " << v.facet_enabled() << ", "
-      << "\"formatter_enabled\": " << v.formatter_enabled() << ", "
+      << "\"archetype_enabled\": " << v.archetype_enabled() << ", "
       << "\"facet_overwrite\": " << v.facet_overwrite() << ", "
-      << "\"formatter_overwrite\": " << v.formatter_overwrite()
+      << "\"archetype_overwrite\": " << v.archetype_overwrite()
       << " }";
     return(s);
 }

@@ -45,7 +45,7 @@
 #include "dogen/quilt.cpp/serialization/formattables/locator_facet_configuration_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/local_enablement_configuration_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/global_enablement_configuration_ser.hpp"
-#include "dogen/quilt.cpp/serialization/formattables/locator_formatter_configuration_ser.hpp"
+#include "dogen/quilt.cpp/serialization/formattables/locator_archetype_configuration_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/inclusion_directive_configuration_ser.hpp"
 
 #endif

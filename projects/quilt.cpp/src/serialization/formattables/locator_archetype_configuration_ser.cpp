@@ -28,27 +28,27 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/quilt.cpp/serialization/formattables/locator_formatter_configuration_ser.hpp"
+#include "dogen/quilt.cpp/serialization/formattables/locator_archetype_configuration_ser.hpp"
 
 namespace boost {
 namespace serialization {
 
 template<typename Archive>
 void save(Archive& ar,
-    const dogen::quilt::cpp::formattables::locator_formatter_configuration& v,
+    const dogen::quilt::cpp::formattables::locator_archetype_configuration& v,
     const unsigned int /*version*/) {
     ar << make_nvp("facet_directory", v.facet_directory_);
     ar << make_nvp("facet_postfix", v.facet_postfix_);
-    ar << make_nvp("formatter_postfix", v.formatter_postfix_);
+    ar << make_nvp("archetype_postfix", v.archetype_postfix_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
-    dogen::quilt::cpp::formattables::locator_formatter_configuration& v,
+    dogen::quilt::cpp::formattables::locator_archetype_configuration& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("facet_directory", v.facet_directory_);
     ar >> make_nvp("facet_postfix", v.facet_postfix_);
-    ar >> make_nvp("formatter_postfix", v.formatter_postfix_);
+    ar >> make_nvp("archetype_postfix", v.archetype_postfix_);
 }
 
 } }
@@ -56,16 +56,16 @@ void load(Archive& ar,
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const dogen::quilt::cpp::formattables::locator_formatter_configuration& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, dogen::quilt::cpp::formattables::locator_formatter_configuration& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const dogen::quilt::cpp::formattables::locator_archetype_configuration& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, dogen::quilt::cpp::formattables::locator_archetype_configuration& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const dogen::quilt::cpp::formattables::locator_formatter_configuration& v, unsigned int version);
-template void load(archive::text_iarchive& ar, dogen::quilt::cpp::formattables::locator_formatter_configuration& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const dogen::quilt::cpp::formattables::locator_archetype_configuration& v, unsigned int version);
+template void load(archive::text_iarchive& ar, dogen::quilt::cpp::formattables::locator_archetype_configuration& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const dogen::quilt::cpp::formattables::locator_formatter_configuration& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, dogen::quilt::cpp::formattables::locator_formatter_configuration& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const dogen::quilt::cpp::formattables::locator_archetype_configuration& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, dogen::quilt::cpp::formattables::locator_archetype_configuration& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const dogen::quilt::cpp::formattables::locator_formatter_configuration& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, dogen::quilt::cpp::formattables::locator_formatter_configuration& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const dogen::quilt::cpp::formattables::locator_archetype_configuration& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, dogen::quilt::cpp::formattables::locator_archetype_configuration& v, unsigned int version);
 
 } }

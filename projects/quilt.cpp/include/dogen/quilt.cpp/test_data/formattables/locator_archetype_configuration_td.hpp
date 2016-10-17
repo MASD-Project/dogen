@@ -18,31 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/hash/formattables/locator_formatter_configuration_hash.hpp"
+#ifndef DOGEN_QUILT_CPP_TEST_DATA_FORMATTABLES_LOCATOR_ARCHETYPE_CONFIGURATION_TD_HPP
+#define DOGEN_QUILT_CPP_TEST_DATA_FORMATTABLES_LOCATOR_ARCHETYPE_CONFIGURATION_TD_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value) {
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-}
+#include "dogen/quilt.cpp/types/formattables/locator_archetype_configuration.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
 
-std::size_t locator_formatter_configuration_hasher::hash(const locator_formatter_configuration& v) {
-    std::size_t seed(0);
+class locator_archetype_configuration_generator {
+public:
+    locator_archetype_configuration_generator();
 
-    combine(seed, v.facet_directory());
-    combine(seed, v.facet_postfix());
-    combine(seed, v.formatter_postfix());
+public:
+    typedef dogen::quilt::cpp::formattables::locator_archetype_configuration result_type;
 
-    return seed;
-}
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 } } } }
+
+#endif

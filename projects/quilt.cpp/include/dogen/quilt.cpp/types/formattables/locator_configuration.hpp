@@ -29,7 +29,7 @@
 #include <algorithm>
 #include <unordered_map>
 #include "dogen/quilt.cpp/types/formattables/locator_facet_configuration.hpp"
-#include "dogen/quilt.cpp/types/formattables/locator_formatter_configuration.hpp"
+#include "dogen/quilt.cpp/types/formattables/locator_archetype_configuration.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/locator_configuration_fwd_ser.hpp"
 
 namespace dogen {
@@ -49,7 +49,7 @@ public:
 public:
     locator_configuration(
         const std::unordered_map<std::string, dogen::quilt::cpp::formattables::locator_facet_configuration>& facet_configurations,
-        const std::unordered_map<std::string, dogen::quilt::cpp::formattables::locator_formatter_configuration>& formatter_configurations,
+        const std::unordered_map<std::string, dogen::quilt::cpp::formattables::locator_archetype_configuration>& archetype_configurations,
         const std::string& include_directory_name,
         const std::string& source_directory_name,
         const bool disable_facet_directories,
@@ -69,10 +69,10 @@ public:
     void facet_configurations(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::locator_facet_configuration>& v);
     void facet_configurations(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::locator_facet_configuration>&& v);
 
-    const std::unordered_map<std::string, dogen::quilt::cpp::formattables::locator_formatter_configuration>& formatter_configurations() const;
-    std::unordered_map<std::string, dogen::quilt::cpp::formattables::locator_formatter_configuration>& formatter_configurations();
-    void formatter_configurations(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::locator_formatter_configuration>& v);
-    void formatter_configurations(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::locator_formatter_configuration>&& v);
+    const std::unordered_map<std::string, dogen::quilt::cpp::formattables::locator_archetype_configuration>& archetype_configurations() const;
+    std::unordered_map<std::string, dogen::quilt::cpp::formattables::locator_archetype_configuration>& archetype_configurations();
+    void archetype_configurations(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::locator_archetype_configuration>& v);
+    void archetype_configurations(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::locator_archetype_configuration>&& v);
 
     const std::string& include_directory_name() const;
     std::string& include_directory_name();
@@ -109,7 +109,7 @@ public:
 
 private:
     std::unordered_map<std::string, dogen::quilt::cpp::formattables::locator_facet_configuration> facet_configurations_;
-    std::unordered_map<std::string, dogen::quilt::cpp::formattables::locator_formatter_configuration> formatter_configurations_;
+    std::unordered_map<std::string, dogen::quilt::cpp::formattables::locator_archetype_configuration> archetype_configurations_;
     std::string include_directory_name_;
     std::string source_directory_name_;
     bool disable_facet_directories_;

@@ -37,22 +37,22 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::quilt::cpp::formattables::global_enablement_configuration& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("model_enabled", v.model_enabled_);
+    ar << make_nvp("kernel_enabled", v.kernel_enabled_);
     ar << make_nvp("facet_enabled", v.facet_enabled_);
-    ar << make_nvp("formatter_enabled", v.formatter_enabled_);
+    ar << make_nvp("archetype_enabled", v.archetype_enabled_);
     ar << make_nvp("facet_overwrite", v.facet_overwrite_);
-    ar << make_nvp("formatter_overwrite", v.formatter_overwrite_);
+    ar << make_nvp("archetype_overwrite", v.archetype_overwrite_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
     dogen::quilt::cpp::formattables::global_enablement_configuration& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("model_enabled", v.model_enabled_);
+    ar >> make_nvp("kernel_enabled", v.kernel_enabled_);
     ar >> make_nvp("facet_enabled", v.facet_enabled_);
-    ar >> make_nvp("formatter_enabled", v.formatter_enabled_);
+    ar >> make_nvp("archetype_enabled", v.archetype_enabled_);
     ar >> make_nvp("facet_overwrite", v.facet_overwrite_);
-    ar >> make_nvp("formatter_overwrite", v.formatter_overwrite_);
+    ar >> make_nvp("archetype_overwrite", v.archetype_overwrite_);
 }
 
 } }

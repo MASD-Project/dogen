@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_LOCATOR_FORMATTER_CONFIGURATION_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_LOCATOR_FORMATTER_CONFIGURATION_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_LOCATOR_ARCHETYPE_CONFIGURATION_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_LOCATOR_ARCHETYPE_CONFIGURATION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,32 +27,32 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen/quilt.cpp/serialization/formattables/locator_formatter_configuration_fwd_ser.hpp"
+#include "dogen/quilt.cpp/serialization/formattables/locator_archetype_configuration_fwd_ser.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
 
-class locator_formatter_configuration final {
+class locator_archetype_configuration final {
 public:
-    locator_formatter_configuration() = default;
-    locator_formatter_configuration(const locator_formatter_configuration&) = default;
-    locator_formatter_configuration(locator_formatter_configuration&&) = default;
-    ~locator_formatter_configuration() = default;
+    locator_archetype_configuration() = default;
+    locator_archetype_configuration(const locator_archetype_configuration&) = default;
+    locator_archetype_configuration(locator_archetype_configuration&&) = default;
+    ~locator_archetype_configuration() = default;
 
 public:
-    locator_formatter_configuration(
+    locator_archetype_configuration(
         const std::string& facet_directory,
         const std::string& facet_postfix,
-        const std::string& formatter_postfix);
+        const std::string& archetype_postfix);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::quilt::cpp::formattables::locator_formatter_configuration& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::quilt::cpp::formattables::locator_archetype_configuration& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::formattables::locator_formatter_configuration& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::formattables::locator_archetype_configuration& v, unsigned int version);
 
 public:
     const std::string& facet_directory() const;
@@ -65,25 +65,25 @@ public:
     void facet_postfix(const std::string& v);
     void facet_postfix(const std::string&& v);
 
-    const std::string& formatter_postfix() const;
-    std::string& formatter_postfix();
-    void formatter_postfix(const std::string& v);
-    void formatter_postfix(const std::string&& v);
+    const std::string& archetype_postfix() const;
+    std::string& archetype_postfix();
+    void archetype_postfix(const std::string& v);
+    void archetype_postfix(const std::string&& v);
 
 public:
-    bool operator==(const locator_formatter_configuration& rhs) const;
-    bool operator!=(const locator_formatter_configuration& rhs) const {
+    bool operator==(const locator_archetype_configuration& rhs) const;
+    bool operator!=(const locator_archetype_configuration& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(locator_formatter_configuration& other) noexcept;
-    locator_formatter_configuration& operator=(locator_formatter_configuration other);
+    void swap(locator_archetype_configuration& other) noexcept;
+    locator_archetype_configuration& operator=(locator_archetype_configuration other);
 
 private:
     std::string facet_directory_;
     std::string facet_postfix_;
-    std::string formatter_postfix_;
+    std::string archetype_postfix_;
 };
 
 } } } }
@@ -92,8 +92,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::quilt::cpp::formattables::locator_formatter_configuration& lhs,
-    dogen::quilt::cpp::formattables::locator_formatter_configuration& rhs) {
+    dogen::quilt::cpp::formattables::locator_archetype_configuration& lhs,
+    dogen::quilt::cpp::formattables::locator_archetype_configuration& rhs) {
     lhs.swap(rhs);
 }
 

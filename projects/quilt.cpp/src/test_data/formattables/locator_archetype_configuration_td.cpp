@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/quilt.cpp/test_data/formattables/locator_formatter_configuration_td.hpp"
+#include "dogen/quilt.cpp/test_data/formattables/locator_archetype_configuration_td.hpp"
 
 namespace {
 
@@ -36,31 +36,31 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-locator_formatter_configuration_generator::locator_formatter_configuration_generator() : position_(0) { }
+locator_archetype_configuration_generator::locator_archetype_configuration_generator() : position_(0) { }
 
-void locator_formatter_configuration_generator::
+void locator_archetype_configuration_generator::
 populate(const unsigned int position, result_type& v) {
     v.facet_directory(create_std_string(position + 0));
     v.facet_postfix(create_std_string(position + 1));
-    v.formatter_postfix(create_std_string(position + 2));
+    v.archetype_postfix(create_std_string(position + 2));
 }
 
-locator_formatter_configuration_generator::result_type
-locator_formatter_configuration_generator::create(const unsigned int position) {
-    locator_formatter_configuration r;
-    locator_formatter_configuration_generator::populate(position, r);
+locator_archetype_configuration_generator::result_type
+locator_archetype_configuration_generator::create(const unsigned int position) {
+    locator_archetype_configuration r;
+    locator_archetype_configuration_generator::populate(position, r);
     return r;
 }
 
-locator_formatter_configuration_generator::result_type*
-locator_formatter_configuration_generator::create_ptr(const unsigned int position) {
-    locator_formatter_configuration* p = new locator_formatter_configuration();
-    locator_formatter_configuration_generator::populate(position, *p);
+locator_archetype_configuration_generator::result_type*
+locator_archetype_configuration_generator::create_ptr(const unsigned int position) {
+    locator_archetype_configuration* p = new locator_archetype_configuration();
+    locator_archetype_configuration_generator::populate(position, *p);
     return p;
 }
 
-locator_formatter_configuration_generator::result_type
-locator_formatter_configuration_generator::operator()() {
+locator_archetype_configuration_generator::result_type
+locator_archetype_configuration_generator::operator()() {
     return create(position_++);
 }
 

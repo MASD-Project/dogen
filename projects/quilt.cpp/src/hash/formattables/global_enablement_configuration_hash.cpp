@@ -48,11 +48,11 @@ namespace formattables {
 std::size_t global_enablement_configuration_hasher::hash(const global_enablement_configuration& v) {
     std::size_t seed(0);
 
-    combine(seed, v.model_enabled());
+    combine(seed, v.kernel_enabled());
     combine(seed, v.facet_enabled());
-    combine(seed, v.formatter_enabled());
+    combine(seed, v.archetype_enabled());
     combine(seed, v.facet_overwrite());
-    combine(seed, hash_boost_optional_bool(v.formatter_overwrite()));
+    combine(seed, hash_boost_optional_bool(v.archetype_overwrite()));
 
     return seed;
 }

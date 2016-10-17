@@ -63,7 +63,7 @@ private:
     struct formatter_type_group {
         boost::optional<annotations::type> facet_directory;
         boost::optional<annotations::type> facet_postfix;
-        annotations::type formatter_postfix;
+        annotations::type archetype_postfix;
     };
 
     struct type_group {
@@ -94,7 +94,7 @@ private:
      *
      * @pre Formatter must have a configuration.
      */
-    const locator_formatter_configuration& configuration_for_formatter(
+    const locator_archetype_configuration& configuration_for_archetype(
         const std::string& formatter_name) const;
 
 private:

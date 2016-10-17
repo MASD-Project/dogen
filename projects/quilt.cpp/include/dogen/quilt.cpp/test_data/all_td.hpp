@@ -45,7 +45,7 @@
 #include "dogen/quilt.cpp/test_data/formattables/locator_facet_configuration_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/local_enablement_configuration_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/global_enablement_configuration_td.hpp"
-#include "dogen/quilt.cpp/test_data/formattables/locator_formatter_configuration_td.hpp"
+#include "dogen/quilt.cpp/test_data/formattables/locator_archetype_configuration_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/inclusion_directive_configuration_td.hpp"
 
 #endif

@@ -18,37 +18,31 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_HASH_FORMATTABLES_LOCATOR_FORMATTER_CONFIGURATION_HASH_HPP
-#define DOGEN_QUILT_CPP_HASH_FORMATTABLES_LOCATOR_FORMATTER_CONFIGURATION_HASH_HPP
+#include "dogen/quilt.cpp/hash/formattables/locator_archetype_configuration_hash.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace {
 
-#include <functional>
-#include "dogen/quilt.cpp/types/formattables/locator_formatter_configuration.hpp"
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value) {
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+}
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
 
-struct locator_formatter_configuration_hasher {
-public:
-    static std::size_t hash(const locator_formatter_configuration& v);
-};
+std::size_t locator_archetype_configuration_hasher::hash(const locator_archetype_configuration& v) {
+    std::size_t seed(0);
+
+    combine(seed, v.facet_directory());
+    combine(seed, v.facet_postfix());
+    combine(seed, v.archetype_postfix());
+
+    return seed;
+}
 
 } } } }
-
-namespace std {
-
-template<>
-struct hash<dogen::quilt::cpp::formattables::locator_formatter_configuration> {
-public:
-    size_t operator()(const dogen::quilt::cpp::formattables::locator_formatter_configuration& v) const {
-        return dogen::quilt::cpp::formattables::locator_formatter_configuration_hasher::hash(v);
-    }
-};
-
-}
-#endif

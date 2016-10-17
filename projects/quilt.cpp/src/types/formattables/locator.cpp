@@ -42,7 +42,7 @@ const std::string double_quote("\"");
 const std::string dot(".");
 const std::string separator("_");
 
-const std::string missing_formatter_configuration(
+const std::string missing_archetype_configuration(
     "Could not find configuration for formatter: ");
 
 }
@@ -78,7 +78,7 @@ locator::type_group locator::make_type_group(
         const auto pf(traits::postfix());
         formatter_type_group fmt_tg;
         const auto pfix(traits::postfix());
-        fmt_tg.formatter_postfix = s.select_type_by_name(arch, pfix);
+        fmt_tg.archetype_postfix = s.select_type_by_name(arch, pfix);
 
         auto dir(s.try_type_field_by_name(fct, traits::directory()));
         if (dir)
@@ -136,22 +136,22 @@ locator_configuration locator::make_configuration(
     for (const auto& pair : tg.formatters_type_group) {
         const auto arch(pair.first);
         const auto fmt_tg(pair.second);
-        locator_formatter_configuration fmt_cfg;
+        locator_archetype_configuration arch_cfg;
 
         if (fmt_tg.facet_directory) {
             const auto t(*fmt_tg.facet_directory);
-            fmt_cfg.facet_directory(s.get_text_content_or_default(t));
+            arch_cfg.facet_directory(s.get_text_content_or_default(t));
         }
 
         if (fmt_tg.facet_postfix) {
             const auto t(*fmt_tg.facet_postfix);
-            fmt_cfg.facet_postfix(s.get_text_content_or_default(t));
+            arch_cfg.facet_postfix(s.get_text_content_or_default(t));
         }
 
-        const auto pfix(fmt_tg.formatter_postfix);
-        fmt_cfg.formatter_postfix(s.get_text_content_or_default(pfix));
+        const auto pfix(fmt_tg.archetype_postfix);
+        arch_cfg.archetype_postfix(s.get_text_content_or_default(pfix));
 
-        r.formatter_configurations()[arch] = fmt_cfg;
+        r.archetype_configurations()[arch] = arch_cfg;
     }
 
     const auto& hfe(tg.header_file_extension);
@@ -181,13 +181,13 @@ locator_configuration locator::make_configuration(
     return r;
 }
 
-const locator_formatter_configuration& locator::
-configuration_for_formatter(const std::string& formatter_name) const {
-    const auto& fmt_cfg(configuration_.formatter_configurations());
-    const auto i(fmt_cfg.find(formatter_name));
-    if (i == fmt_cfg.end()) {
-        BOOST_LOG_SEV(lg, error) << missing_formatter_configuration;
-        BOOST_THROW_EXCEPTION(building_error(missing_formatter_configuration));
+const locator_archetype_configuration& locator::
+configuration_for_archetype(const std::string& formatter_name) const {
+    const auto& arch_cfg(configuration_.archetype_configurations());
+    const auto i(arch_cfg.find(formatter_name));
+    if (i == arch_cfg.end()) {
+        BOOST_LOG_SEV(lg, error) << missing_archetype_configuration;
+        BOOST_THROW_EXCEPTION(building_error(missing_archetype_configuration));
     }
 
     return i->second;
@@ -209,7 +209,7 @@ boost::filesystem::path locator::make_facet_path(
     const yarn::name& n) const {
     BOOST_LOG_SEV(lg, debug) << "Making facet path for: " << n.id();
 
-    const auto& fmt_cfg(configuration_for_formatter(formatter_name));
+    const auto& arch_cfg(configuration_for_archetype(formatter_name));
 
     boost::filesystem::path r;
 
@@ -218,8 +218,8 @@ boost::filesystem::path locator::make_facet_path(
      * contribute to the file name path, add it.
      */
     const auto& cfg(configuration_);
-    if (!fmt_cfg.facet_directory().empty() && !cfg.disable_facet_directories())
-        r /= fmt_cfg.facet_directory();
+    if (!arch_cfg.facet_directory().empty() && !cfg.disable_facet_directories())
+        r /= arch_cfg.facet_directory();
 
     /*
      * Add the module path of the modules internal to this model.
@@ -243,11 +243,11 @@ boost::filesystem::path locator::make_facet_path(
     std::ostringstream stream;
     stream << n.simple();
 
-    if (!fmt_cfg.formatter_postfix().empty())
-        stream << underscore << fmt_cfg.formatter_postfix();
+    if (!arch_cfg.archetype_postfix().empty())
+        stream << underscore << arch_cfg.archetype_postfix();
 
-    if (!fmt_cfg.facet_postfix().empty())
-        stream << underscore << fmt_cfg.facet_postfix();
+    if (!arch_cfg.facet_postfix().empty())
+        stream << underscore << arch_cfg.facet_postfix();
 
     stream << dot << extension;
     r /= stream.str();

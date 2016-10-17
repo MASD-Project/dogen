@@ -124,7 +124,7 @@
 #include "dogen/quilt.cpp/types/formatters/types/namespace_header_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/primitive_header_formatter.hpp"
 #include "dogen/quilt.cpp/types/formattables/global_enablement_configuration.hpp"
-#include "dogen/quilt.cpp/types/formattables/locator_formatter_configuration.hpp"
+#include "dogen/quilt.cpp/types/formattables/locator_archetype_configuration.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/class_implementation_formatter.hpp"
 #include "dogen/quilt.cpp/types/formattables/inclusion_directive_configuration.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/class_implementation_formatter.hpp"

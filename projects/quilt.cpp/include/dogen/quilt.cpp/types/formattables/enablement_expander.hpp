@@ -45,11 +45,11 @@ namespace formattables {
 class enablement_expander {
 private:
     struct global_type_group {
-        annotations::type model_enabled;
+        annotations::type kernel_enabled;
         annotations::type facet_enabled;
-        annotations::type formatter_enabled;
+        annotations::type archetype_enabled;
         annotations::type facet_overwrite;
-        annotations::type formatter_overwrite;
+        annotations::type archetype_overwrite;
     };
 
     friend std::ostream& operator<<(std::ostream& s,
@@ -76,10 +76,10 @@ private:
 private:
     struct local_type_group {
         annotations::type facet_enabled;
-        annotations::type formatter_enabled;
+        annotations::type archetype_enabled;
         annotations::type facet_supported;
         annotations::type facet_overwrite;
-        annotations::type formatter_overwrite;
+        annotations::type archetype_overwrite;
     };
 
     friend std::ostream& operator<<(std::ostream& s,

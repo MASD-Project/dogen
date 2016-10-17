@@ -52,10 +52,10 @@ std::ostream& operator<<(std::ostream& s, const local_enablement_configuration& 
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::local_enablement_configuration\"" << ", "
       << "\"facet_enabled\": " << v.facet_enabled() << ", "
-      << "\"formatter_enabled\": " << v.formatter_enabled() << ", "
+      << "\"archetype_enabled\": " << v.archetype_enabled() << ", "
       << "\"facet_supported\": " << v.facet_supported() << ", "
       << "\"facet_overwrite\": " << v.facet_overwrite() << ", "
-      << "\"formatter_overwrite\": " << v.formatter_overwrite()
+      << "\"archetype_overwrite\": " << v.archetype_overwrite()
       << " }";
     return(s);
 }

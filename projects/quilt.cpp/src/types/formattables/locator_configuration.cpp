@@ -30,14 +30,14 @@ locator_configuration::locator_configuration()
 
 locator_configuration::locator_configuration(
     const std::unordered_map<std::string, dogen::quilt::cpp::formattables::locator_facet_configuration>& facet_configurations,
-    const std::unordered_map<std::string, dogen::quilt::cpp::formattables::locator_formatter_configuration>& formatter_configurations,
+    const std::unordered_map<std::string, dogen::quilt::cpp::formattables::locator_archetype_configuration>& archetype_configurations,
     const std::string& include_directory_name,
     const std::string& source_directory_name,
     const bool disable_facet_directories,
     const std::string& header_file_extension,
     const std::string& implementation_file_extension)
     : facet_configurations_(facet_configurations),
-      formatter_configurations_(formatter_configurations),
+      archetype_configurations_(archetype_configurations),
       include_directory_name_(include_directory_name),
       source_directory_name_(source_directory_name),
       disable_facet_directories_(disable_facet_directories),
@@ -47,7 +47,7 @@ locator_configuration::locator_configuration(
 void locator_configuration::swap(locator_configuration& other) noexcept {
     using std::swap;
     swap(facet_configurations_, other.facet_configurations_);
-    swap(formatter_configurations_, other.formatter_configurations_);
+    swap(archetype_configurations_, other.archetype_configurations_);
     swap(include_directory_name_, other.include_directory_name_);
     swap(source_directory_name_, other.source_directory_name_);
     swap(disable_facet_directories_, other.disable_facet_directories_);
@@ -57,7 +57,7 @@ void locator_configuration::swap(locator_configuration& other) noexcept {
 
 bool locator_configuration::operator==(const locator_configuration& rhs) const {
     return facet_configurations_ == rhs.facet_configurations_ &&
-        formatter_configurations_ == rhs.formatter_configurations_ &&
+        archetype_configurations_ == rhs.archetype_configurations_ &&
         include_directory_name_ == rhs.include_directory_name_ &&
         source_directory_name_ == rhs.source_directory_name_ &&
         disable_facet_directories_ == rhs.disable_facet_directories_ &&
@@ -87,20 +87,20 @@ void locator_configuration::facet_configurations(const std::unordered_map<std::s
     facet_configurations_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::quilt::cpp::formattables::locator_formatter_configuration>& locator_configuration::formatter_configurations() const {
-    return formatter_configurations_;
+const std::unordered_map<std::string, dogen::quilt::cpp::formattables::locator_archetype_configuration>& locator_configuration::archetype_configurations() const {
+    return archetype_configurations_;
 }
 
-std::unordered_map<std::string, dogen::quilt::cpp::formattables::locator_formatter_configuration>& locator_configuration::formatter_configurations() {
-    return formatter_configurations_;
+std::unordered_map<std::string, dogen::quilt::cpp::formattables::locator_archetype_configuration>& locator_configuration::archetype_configurations() {
+    return archetype_configurations_;
 }
 
-void locator_configuration::formatter_configurations(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::locator_formatter_configuration>& v) {
-    formatter_configurations_ = v;
+void locator_configuration::archetype_configurations(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::locator_archetype_configuration>& v) {
+    archetype_configurations_ = v;
 }
 
-void locator_configuration::formatter_configurations(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::locator_formatter_configuration>&& v) {
-    formatter_configurations_ = std::move(v);
+void locator_configuration::archetype_configurations(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::locator_archetype_configuration>&& v) {
+    archetype_configurations_ = std::move(v);
 }
 
 const std::string& locator_configuration::include_directory_name() const {

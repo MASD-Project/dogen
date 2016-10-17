@@ -21,7 +21,7 @@
 #include <sstream>
 #include "dogen/quilt.cpp/test_data/formattables/locator_configuration_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/locator_facet_configuration_td.hpp"
-#include "dogen/quilt.cpp/test_data/formattables/locator_formatter_configuration_td.hpp"
+#include "dogen/quilt.cpp/test_data/formattables/locator_archetype_configuration_td.hpp"
 
 namespace {
 
@@ -44,15 +44,15 @@ std::unordered_map<std::string, dogen::quilt::cpp::formattables::locator_facet_c
     return r;
 }
 
-dogen::quilt::cpp::formattables::locator_formatter_configuration
-create_dogen_quilt_cpp_formattables_locator_formatter_configuration(const unsigned int position) {
-    return dogen::quilt::cpp::formattables::locator_formatter_configuration_generator::create(position);
+dogen::quilt::cpp::formattables::locator_archetype_configuration
+create_dogen_quilt_cpp_formattables_locator_archetype_configuration(const unsigned int position) {
+    return dogen::quilt::cpp::formattables::locator_archetype_configuration_generator::create(position);
 }
 
-std::unordered_map<std::string, dogen::quilt::cpp::formattables::locator_formatter_configuration> create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_locator_formatter_configuration(unsigned int position) {
-    std::unordered_map<std::string, dogen::quilt::cpp::formattables::locator_formatter_configuration> r;
+std::unordered_map<std::string, dogen::quilt::cpp::formattables::locator_archetype_configuration> create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_locator_archetype_configuration(unsigned int position) {
+    std::unordered_map<std::string, dogen::quilt::cpp::formattables::locator_archetype_configuration> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_dogen_quilt_cpp_formattables_locator_formatter_configuration(position + i)));
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_quilt_cpp_formattables_locator_archetype_configuration(position + i)));
     }
     return r;
 }
@@ -73,7 +73,7 @@ locator_configuration_generator::locator_configuration_generator() : position_(0
 void locator_configuration_generator::
 populate(const unsigned int position, result_type& v) {
     v.facet_configurations(create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_locator_facet_configuration(position + 0));
-    v.formatter_configurations(create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_locator_formatter_configuration(position + 1));
+    v.archetype_configurations(create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_locator_archetype_configuration(position + 1));
     v.include_directory_name(create_std_string(position + 2));
     v.source_directory_name(create_std_string(position + 3));
     v.disable_facet_directories(create_bool(position + 4));

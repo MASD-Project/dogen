@@ -18,26 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_SERIALIZATION_FORMATTABLES_LOCATOR_FORMATTER_CONFIGURATION_SER_HPP
-#define DOGEN_QUILT_CPP_SERIALIZATION_FORMATTABLES_LOCATOR_FORMATTER_CONFIGURATION_SER_HPP
+#ifndef DOGEN_QUILT_CPP_HASH_FORMATTABLES_LOCATOR_ARCHETYPE_CONFIGURATION_HASH_HPP
+#define DOGEN_QUILT_CPP_HASH_FORMATTABLES_LOCATOR_ARCHETYPE_CONFIGURATION_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/split_free.hpp>
-#include "dogen/quilt.cpp/types/formattables/locator_formatter_configuration.hpp"
+#include <functional>
+#include "dogen/quilt.cpp/types/formattables/locator_archetype_configuration.hpp"
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::quilt::cpp::formattables::locator_formatter_configuration)
-namespace boost {
-namespace serialization {
+namespace dogen {
+namespace quilt {
+namespace cpp {
+namespace formattables {
 
-template<typename Archive>
-void save(Archive& ar, const dogen::quilt::cpp::formattables::locator_formatter_configuration& v, unsigned int version);
+struct locator_archetype_configuration_hasher {
+public:
+    static std::size_t hash(const locator_archetype_configuration& v);
+};
 
-template<typename Archive>
-void load(Archive& ar, dogen::quilt::cpp::formattables::locator_formatter_configuration& v, unsigned int version);
+} } } }
 
-} }
+namespace std {
 
+template<>
+struct hash<dogen::quilt::cpp::formattables::locator_archetype_configuration> {
+public:
+    size_t operator()(const dogen::quilt::cpp::formattables::locator_archetype_configuration& v) const {
+        return dogen::quilt::cpp::formattables::locator_archetype_configuration_hasher::hash(v);
+    }
+};
+
+}
 #endif

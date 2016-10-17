@@ -47,11 +47,11 @@ public:
 
 public:
     global_enablement_configuration(
-        const bool model_enabled,
+        const bool kernel_enabled,
         const bool facet_enabled,
-        const bool formatter_enabled,
+        const bool archetype_enabled,
         const bool facet_overwrite,
-        const boost::optional<bool>& formatter_overwrite);
+        const boost::optional<bool>& archetype_overwrite);
 
 private:
     template<typename Archive>
@@ -61,22 +61,22 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::formattables::global_enablement_configuration& v, unsigned int version);
 
 public:
-    bool model_enabled() const;
-    void model_enabled(const bool v);
+    bool kernel_enabled() const;
+    void kernel_enabled(const bool v);
 
     bool facet_enabled() const;
     void facet_enabled(const bool v);
 
-    bool formatter_enabled() const;
-    void formatter_enabled(const bool v);
+    bool archetype_enabled() const;
+    void archetype_enabled(const bool v);
 
     bool facet_overwrite() const;
     void facet_overwrite(const bool v);
 
-    const boost::optional<bool>& formatter_overwrite() const;
-    boost::optional<bool>& formatter_overwrite();
-    void formatter_overwrite(const boost::optional<bool>& v);
-    void formatter_overwrite(const boost::optional<bool>&& v);
+    const boost::optional<bool>& archetype_overwrite() const;
+    boost::optional<bool>& archetype_overwrite();
+    void archetype_overwrite(const boost::optional<bool>& v);
+    void archetype_overwrite(const boost::optional<bool>&& v);
 
 public:
     bool operator==(const global_enablement_configuration& rhs) const;
@@ -89,11 +89,11 @@ public:
     global_enablement_configuration& operator=(global_enablement_configuration other);
 
 private:
-    bool model_enabled_;
+    bool kernel_enabled_;
     bool facet_enabled_;
-    bool formatter_enabled_;
+    bool archetype_enabled_;
     bool facet_overwrite_;
-    boost::optional<bool> formatter_overwrite_;
+    boost::optional<bool> archetype_overwrite_;
 };
 
 } } } }

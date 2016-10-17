@@ -18,30 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/algorithm/string.hpp>
-#include "dogen/quilt.cpp/io/formattables/locator_formatter_configuration_io.hpp"
+#ifndef DOGEN_QUILT_CPP_IO_FORMATTABLES_LOCATOR_ARCHETYPE_CONFIGURATION_IO_HPP
+#define DOGEN_QUILT_CPP_IO_FORMATTABLES_LOCATOR_ARCHETYPE_CONFIGURATION_IO_HPP
 
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    return s;
-}
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <iosfwd>
+#include "dogen/quilt.cpp/types/formattables/locator_archetype_configuration.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
 
-std::ostream& operator<<(std::ostream& s, const locator_formatter_configuration& v) {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::locator_formatter_configuration\"" << ", "
-      << "\"facet_directory\": " << "\"" << tidy_up_string(v.facet_directory()) << "\"" << ", "
-      << "\"facet_postfix\": " << "\"" << tidy_up_string(v.facet_postfix()) << "\"" << ", "
-      << "\"formatter_postfix\": " << "\"" << tidy_up_string(v.formatter_postfix()) << "\""
-      << " }";
-    return(s);
-}
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::quilt::cpp::formattables::locator_archetype_configuration& v);
 
 } } } }
+
+#endif

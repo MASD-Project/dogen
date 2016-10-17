@@ -46,7 +46,7 @@ const std::string global_configuration_not_found(
     "Could not find global enablement configuration for formatter: ");
 const std::string local_configuration_not_found(
     "Could not find local enablement configuration for formatter: ");
-const std::string duplicate_formatter_name("Duplicate formatter name: ");
+const std::string duplicate_archetype_name("Duplicate archetype name: ");
 const std::string formatter_not_found("Formatter not found: ");
 const std::string element_not_found("Element not found: ");
 const std::string default_value_unset("Default value not set for field: ");
@@ -64,9 +64,9 @@ inline std::ostream& operator<<(std::ostream& s,
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::"
       << "enablement_expander::global_type_group\"" << ", "
-      << "\"model_enabled\": " << v.model_enabled << ", "
+      << "\"kernel_enabled\": " << v.kernel_enabled << ", "
       << "\"facet_enabled\": " << v.facet_enabled << ", "
-      << "\"formatter_enabled\": " << v.formatter_enabled
+      << "\"archetype_enabled\": " << v.archetype_enabled
       << " }";
 
     return s;
@@ -79,7 +79,7 @@ inline std::ostream& operator<<(std::ostream& s,
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::"
       << "enablement_expander::local_type_group\"" << ", "
       << "\"facet_enabled\": " << v.facet_enabled << ", "
-      << "\"formatter_enabled\": " << v.formatter_enabled << ", "
+      << "\"archetype_enabled\": " << v.archetype_enabled << ", "
       << "\"supported\": " << v.facet_supported
       << " }";
 
@@ -101,17 +101,17 @@ enablement_expander::make_global_type_group(
         global_type_group gtg;
         const auto& mn(al.kernel());
         const auto ebl(traits::enabled());
-        gtg.model_enabled = s.select_type_by_name(mn, ebl);
+        gtg.kernel_enabled = s.select_type_by_name(mn, ebl);
 
         const auto& fct(al.facet());
         gtg.facet_enabled = s.select_type_by_name(fct, ebl);
 
         const auto& arch(al.archetype());
-        gtg.formatter_enabled = s.select_type_by_name(arch, ebl);
+        gtg.archetype_enabled = s.select_type_by_name(arch, ebl);
 
         const auto ow(traits::overwrite());
         gtg.facet_overwrite = s.select_type_by_name(fct, ow);
-        gtg.formatter_overwrite = s.select_type_by_name(arch, ow);
+        gtg.archetype_overwrite = s.select_type_by_name(arch, ow);
 
         r[arch] = gtg;
     }
@@ -139,16 +139,16 @@ enablement_expander::obtain_global_configurations(
          * take the value set or its default.
          */
         global_enablement_configuration gec;
-        gec.model_enabled(s.get_boolean_content_or_default(t.model_enabled));
+        gec.kernel_enabled(s.get_boolean_content_or_default(t.kernel_enabled));
         gec.facet_enabled(s.get_boolean_content_or_default(t.facet_enabled));
-        gec.formatter_enabled(
-            s.get_boolean_content_or_default(t.formatter_enabled));
+        gec.archetype_enabled(
+            s.get_boolean_content_or_default(t.archetype_enabled));
         gec.facet_overwrite(
             s.get_boolean_content_or_default(t.facet_overwrite));
 
-        if (s.has_entry(t.formatter_overwrite)) {
-            gec.formatter_overwrite(
-                s.get_boolean_content(t.formatter_overwrite));
+        if (s.has_entry(t.archetype_overwrite)) {
+            gec.archetype_overwrite(
+                s.get_boolean_content(t.archetype_overwrite));
         }
 
         r[arch] = gec;
@@ -215,11 +215,11 @@ make_local_type_group(const annotations::type_repository& atrp,
         ltg.facet_enabled = s.select_type_by_name(fct, ebl);
 
         const auto& arch(al.archetype());
-        ltg.formatter_enabled = s.select_type_by_name(arch, ebl);
+        ltg.archetype_enabled = s.select_type_by_name(arch, ebl);
 
         const auto ow(traits::overwrite());
         ltg.facet_overwrite = s.select_type_by_name(fct, ow);
-        ltg.formatter_overwrite = s.select_type_by_name(arch, ow);
+        ltg.archetype_overwrite = s.select_type_by_name(arch, ow);
         ltg.facet_supported = s.select_type_by_name(fct, traits::supported());
         r[arch] = ltg;
     }
@@ -247,20 +247,21 @@ enablement_expander::bucket_local_type_group_by_type_index(
 
         local_type_group_type& ltg(r[ti]);
         for (const auto& fmt: fmts) {
+            const auto fmtn(fmt->formatter_name());
             const auto arch(fmt->archetype_location().archetype());
             const auto i(unbucketed_ltgs.find(arch));
             if (i == unbucketed_ltgs.end()) {
-                BOOST_LOG_SEV(lg, error) << formatter_not_found << arch;
+                BOOST_LOG_SEV(lg, error) << formatter_not_found << fmtn;
                 BOOST_THROW_EXCEPTION(
-                    expansion_error(formatter_not_found + arch));
+                    expansion_error(formatter_not_found + fmtn));
             }
 
             const auto pair(std::make_pair(arch, i->second));
             const auto ret(ltg.insert(pair));
             if (!ret.second) {
-                BOOST_LOG_SEV(lg, error) << duplicate_formatter_name << arch;
+                BOOST_LOG_SEV(lg, error) << duplicate_archetype_name << arch;
                 BOOST_THROW_EXCEPTION(
-                    expansion_error(duplicate_formatter_name + arch));
+                    expansion_error(duplicate_archetype_name + arch));
             }
         }
     }
@@ -285,15 +286,15 @@ obtain_local_configurations(const local_type_group_type& ltg,
         if (s.has_entry(t.facet_enabled))
             lec.facet_enabled(s.get_boolean_content(t.facet_enabled));
 
-        if (s.has_entry(t.formatter_enabled))
-            lec.formatter_enabled(s.get_boolean_content(t.formatter_enabled));
+        if (s.has_entry(t.archetype_enabled))
+            lec.archetype_enabled(s.get_boolean_content(t.archetype_enabled));
 
         if (s.has_entry(t.facet_overwrite))
             lec.facet_overwrite(s.get_boolean_content(t.facet_overwrite));
 
-        if (s.has_entry(t.formatter_overwrite))
-            lec.formatter_overwrite(
-                s.get_boolean_content(t.formatter_overwrite));
+        if (s.has_entry(t.archetype_overwrite))
+            lec.archetype_overwrite(
+                s.get_boolean_content(t.archetype_overwrite));
 
         r[arch] = lec;
     }
@@ -367,7 +368,7 @@ void enablement_expander::compute_enablement(
         const auto gc(i->second);
 
         /*
-         * If the overwrite flag is set locally at the formatter or
+         * If the overwrite flag is set locally at the archetype or
          * facet level, then that takes priority. If not, first check
          * to see if its set globally at the formatter level; if so,
          * it takes priority. Finally, if nothing else is set, use the
@@ -380,7 +381,7 @@ void enablement_expander::compute_enablement(
          * is normally done via a profile, but can be conceivable be
          * done directly for less common configurations - for example
          * adding manual support for IO for a handcrafted type. The
-         * global formatter overwrite flag is a bit less useful - we
+         * global archetype overwrite flag is a bit less useful - we
          * haven't got a use case for it just yet but it is added for
          * (foolish) consistency. Finally, the global facet level
          * overwrite flag is useful for the general case of code
@@ -390,22 +391,22 @@ void enablement_expander::compute_enablement(
          * Note also that the overwrite flag is only relevant if
          * enabled is true. It is not used otherwise.
          */
-        auto& fmt_props(pair.second);
-        if (lc.formatter_overwrite())
-            fmt_props.overwrite(*lc.formatter_overwrite());
+        auto& art_props(pair.second);
+        if (lc.archetype_overwrite())
+            art_props.overwrite(*lc.archetype_overwrite());
         else if (lc.facet_overwrite())
-            fmt_props.overwrite(*lc.facet_overwrite());
-        else if (gc.formatter_overwrite())
-            fmt_props.overwrite(*gc.formatter_overwrite());
+            art_props.overwrite(*lc.facet_overwrite());
+        else if (gc.archetype_overwrite())
+            art_props.overwrite(*gc.archetype_overwrite());
         else
-            fmt_props.overwrite(gc.facet_overwrite());
+            art_props.overwrite(gc.facet_overwrite());
 
         /*
-         * If either the entire model model or facet have been
-         * disabled globally, the formatter will be disabled too.
+         * If either the entire kernel or facet have been disabled
+         * globally, the formatter will be disabled too.
          */
-        if (!gc.model_enabled() || !gc.facet_enabled()) {
-            fmt_props.enabled(false);
+        if (!gc.kernel_enabled() || !gc.facet_enabled()) {
+            art_props.enabled(false);
             continue;
         }
 
@@ -414,8 +415,8 @@ void enablement_expander::compute_enablement(
          * locally. If so, it takes precedence over the facet
          * configuration.
          */
-        if (lc.formatter_enabled()) {
-            fmt_props.enabled(*lc.formatter_enabled());
+        if (lc.archetype_enabled()) {
+            art_props.enabled(*lc.archetype_enabled());
             continue;
         }
 
@@ -425,7 +426,7 @@ void enablement_expander::compute_enablement(
          * configuration.
          */
         if (lc.facet_enabled()) {
-            fmt_props.enabled(*lc.facet_enabled());
+            art_props.enabled(*lc.facet_enabled());
             continue;
         }
 
@@ -433,9 +434,9 @@ void enablement_expander::compute_enablement(
          * If nothing else has been set, use the global enablement
          * flag for the formatter.
          */
-        fmt_props.enabled(gc.formatter_enabled());
+        art_props.enabled(gc.archetype_enabled());
         BOOST_LOG_SEV(lg, debug) << "Enablement for: " << arch
-                                 << " value: " << fmt_props.enabled();
+                                 << " value: " << art_props.enabled();
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished computed enablement.";

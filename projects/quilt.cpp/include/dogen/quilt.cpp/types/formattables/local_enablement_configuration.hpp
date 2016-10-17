@@ -46,10 +46,10 @@ public:
 public:
     local_enablement_configuration(
         const boost::optional<bool>& facet_enabled,
-        const boost::optional<bool>& formatter_enabled,
+        const boost::optional<bool>& archetype_enabled,
         const boost::optional<bool>& facet_supported,
         const boost::optional<bool>& facet_overwrite,
-        const boost::optional<bool>& formatter_overwrite);
+        const boost::optional<bool>& archetype_overwrite);
 
 private:
     template<typename Archive>
@@ -64,10 +64,10 @@ public:
     void facet_enabled(const boost::optional<bool>& v);
     void facet_enabled(const boost::optional<bool>&& v);
 
-    const boost::optional<bool>& formatter_enabled() const;
-    boost::optional<bool>& formatter_enabled();
-    void formatter_enabled(const boost::optional<bool>& v);
-    void formatter_enabled(const boost::optional<bool>&& v);
+    const boost::optional<bool>& archetype_enabled() const;
+    boost::optional<bool>& archetype_enabled();
+    void archetype_enabled(const boost::optional<bool>& v);
+    void archetype_enabled(const boost::optional<bool>&& v);
 
     const boost::optional<bool>& facet_supported() const;
     boost::optional<bool>& facet_supported();
@@ -79,10 +79,10 @@ public:
     void facet_overwrite(const boost::optional<bool>& v);
     void facet_overwrite(const boost::optional<bool>&& v);
 
-    const boost::optional<bool>& formatter_overwrite() const;
-    boost::optional<bool>& formatter_overwrite();
-    void formatter_overwrite(const boost::optional<bool>& v);
-    void formatter_overwrite(const boost::optional<bool>&& v);
+    const boost::optional<bool>& archetype_overwrite() const;
+    boost::optional<bool>& archetype_overwrite();
+    void archetype_overwrite(const boost::optional<bool>& v);
+    void archetype_overwrite(const boost::optional<bool>&& v);
 
 public:
     bool operator==(const local_enablement_configuration& rhs) const;
@@ -96,10 +96,10 @@ public:
 
 private:
     boost::optional<bool> facet_enabled_;
-    boost::optional<bool> formatter_enabled_;
+    boost::optional<bool> archetype_enabled_;
     boost::optional<bool> facet_supported_;
     boost::optional<bool> facet_overwrite_;
-    boost::optional<bool> formatter_overwrite_;
+    boost::optional<bool> archetype_overwrite_;
 };
 
 } } } }

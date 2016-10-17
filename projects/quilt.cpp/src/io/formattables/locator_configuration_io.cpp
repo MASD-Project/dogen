@@ -23,7 +23,7 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen/quilt.cpp/io/formattables/locator_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/locator_facet_configuration_io.hpp"
-#include "dogen/quilt.cpp/io/formattables/locator_formatter_configuration_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/locator_archetype_configuration_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -52,7 +52,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::quilt::cpp::formattables::locator_formatter_configuration>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::quilt::cpp::formattables::locator_archetype_configuration>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -83,7 +83,7 @@ std::ostream& operator<<(std::ostream& s, const locator_configuration& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::locator_configuration\"" << ", "
       << "\"facet_configurations\": " << v.facet_configurations() << ", "
-      << "\"formatter_configurations\": " << v.formatter_configurations() << ", "
+      << "\"archetype_configurations\": " << v.archetype_configurations() << ", "
       << "\"include_directory_name\": " << "\"" << tidy_up_string(v.include_directory_name()) << "\"" << ", "
       << "\"source_directory_name\": " << "\"" << tidy_up_string(v.source_directory_name()) << "\"" << ", "
       << "\"disable_facet_directories\": " << v.disable_facet_directories() << ", "

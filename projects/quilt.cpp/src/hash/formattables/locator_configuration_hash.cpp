@@ -20,7 +20,7 @@
  */
 #include "dogen/quilt.cpp/hash/formattables/locator_configuration_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/locator_facet_configuration_hash.hpp"
-#include "dogen/quilt.cpp/hash/formattables/locator_formatter_configuration_hash.hpp"
+#include "dogen/quilt.cpp/hash/formattables/locator_archetype_configuration_hash.hpp"
 
 namespace {
 
@@ -39,7 +39,7 @@ inline std::size_t hash_std_unordered_map_std_string_dogen_quilt_cpp_formattable
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_locator_formatter_configuration(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::locator_formatter_configuration>& v) {
+inline std::size_t hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_locator_archetype_configuration(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::locator_archetype_configuration>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -59,7 +59,7 @@ std::size_t locator_configuration_hasher::hash(const locator_configuration& v) {
     std::size_t seed(0);
 
     combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_locator_facet_configuration(v.facet_configurations()));
-    combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_locator_formatter_configuration(v.formatter_configurations()));
+    combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_locator_archetype_configuration(v.archetype_configurations()));
     combine(seed, v.include_directory_name());
     combine(seed, v.source_directory_name());
     combine(seed, v.disable_facet_directories());

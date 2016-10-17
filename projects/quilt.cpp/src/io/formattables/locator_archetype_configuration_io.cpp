@@ -18,38 +18,30 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TEST_DATA_FORMATTABLES_LOCATOR_FORMATTER_CONFIGURATION_TD_HPP
-#define DOGEN_QUILT_CPP_TEST_DATA_FORMATTABLES_LOCATOR_FORMATTER_CONFIGURATION_TD_HPP
+#include <ostream>
+#include <boost/algorithm/string.hpp>
+#include "dogen/quilt.cpp/io/formattables/locator_archetype_configuration_io.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include "dogen/quilt.cpp/types/formattables/locator_formatter_configuration.hpp"
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
 
-class locator_formatter_configuration_generator {
-public:
-    locator_formatter_configuration_generator();
-
-public:
-    typedef dogen::quilt::cpp::formattables::locator_formatter_configuration result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
-};
+std::ostream& operator<<(std::ostream& s, const locator_archetype_configuration& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::locator_archetype_configuration\"" << ", "
+      << "\"facet_directory\": " << "\"" << tidy_up_string(v.facet_directory()) << "\"" << ", "
+      << "\"facet_postfix\": " << "\"" << tidy_up_string(v.facet_postfix()) << "\"" << ", "
+      << "\"archetype_postfix\": " << "\"" << tidy_up_string(v.archetype_postfix()) << "\""
+      << " }";
+    return(s);
+}
 
 } } } }
-
-#endif
