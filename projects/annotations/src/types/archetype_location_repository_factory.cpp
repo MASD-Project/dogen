@@ -29,9 +29,9 @@ using namespace dogen::utility::log;
 static logger
 lg(logger_factory("annotations.archetype_location_repository_factory"));
 
-const std::string empty_model_name("Model name cannot be empty. Formatter: ");
-const std::string empty_facet_name("Facet name cannot be empty. Formatter: ");
-const std::string empty_formatter_name("Formatter name cannot be empty");
+const std::string empty_kernel("Model name cannot be empty. Formatter: ");
+const std::string empty_facet("Facet name cannot be empty. Formatter: ");
+const std::string empty_archetype("Formatter name cannot be empty");
 
 }
 
@@ -39,65 +39,63 @@ namespace dogen {
 namespace annotations {
 
 void archetype_location_repository_factory::
-validate(const std::list<archetype_location>& ohs) const {
-    BOOST_LOG_SEV(lg, debug) << "Validating input ownership hierachies.";
+validate(const std::list<archetype_location>& als) const {
+    BOOST_LOG_SEV(lg, debug) << "Validating archetype locations.";
 
-    for (const auto& oh : ohs) {
-        if (oh.archetype().empty()) {
-            BOOST_LOG_SEV(lg, error) << empty_formatter_name;
-            BOOST_THROW_EXCEPTION(building_error(empty_formatter_name));
+    for (const auto& al : als) {
+        if (al.archetype().empty()) {
+            BOOST_LOG_SEV(lg, error) << empty_archetype;
+            BOOST_THROW_EXCEPTION(building_error(empty_archetype));
         }
 
-        if (oh.kernel().empty()) {
-            BOOST_LOG_SEV(lg, error) << empty_model_name << oh.archetype();
+        if (al.kernel().empty()) {
+            BOOST_LOG_SEV(lg, error) << empty_kernel << al.archetype();
             BOOST_THROW_EXCEPTION(
-                building_error(empty_model_name + oh.archetype()));
+                building_error(empty_kernel + al.archetype()));
         }
 
-        if (oh.facet().empty()) {
-            BOOST_LOG_SEV(lg, error) << empty_facet_name << oh.archetype();
-            BOOST_THROW_EXCEPTION(
-                building_error(empty_facet_name + oh.archetype()));
+        if (al.facet().empty()) {
+            BOOST_LOG_SEV(lg, error) << empty_facet << al.archetype();
+            BOOST_THROW_EXCEPTION(building_error(empty_facet + al.archetype()));
         }
     }
-    BOOST_LOG_SEV(lg, debug) << "Input ownership hierachies are valid.";
+    BOOST_LOG_SEV(lg, debug) << "Archetype locations are valid.";
 }
 
 void archetype_location_repository_factory::
-populate_ownership_hierarchies(const std::list<archetype_location>& ohs,
+populate_archetype_locations(const std::list<archetype_location>& als,
     archetype_location_repository& rp) const {
-    rp.ownership_hierarchies().reserve(ohs.size());
-    for (const auto& oh : ohs)
-        rp.ownership_hierarchies().push_back(oh);
+    rp.ownership_hierarchies().reserve(als.size());
+    for (const auto& al : als)
+        rp.ownership_hierarchies().push_back(al);
 }
 
 void archetype_location_repository_factory::
 populate_facet_names_by_model_name(archetype_location_repository& rp) const {
-
-    for (const auto& oh : rp.ownership_hierarchies())
-        rp.facet_names_by_model_name()[oh.kernel()].insert(oh.facet());
+    for (const auto& al : rp.ownership_hierarchies())
+        rp.facet_names_by_model_name()[al.kernel()].insert(al.facet());
 }
 
 void archetype_location_repository_factory::
 populate_formatter_names_by_model_name(
     archetype_location_repository& rp) const {
 
-    for (const auto& oh : rp.ownership_hierarchies()) {
-        const auto fmtn(oh.archetype());
-        rp.formatter_names_by_model_name()[oh.kernel()].insert(fmtn);
+    for (const auto& al : rp.ownership_hierarchies()) {
+        const auto arch(al.archetype());
+        rp.formatter_names_by_model_name()[al.kernel()].insert(arch);
     }
 }
 
 archetype_location_repository archetype_location_repository_factory::
-make(const std::list<archetype_location>& ohs) const {
-    BOOST_LOG_SEV(lg, debug) << "Creating ownership hierachy repository.";
-    validate(ohs);
+make(const std::list<archetype_location>& als) const {
+    BOOST_LOG_SEV(lg, debug) << "Creating archetype location repository.";
+    validate(als);
 
     archetype_location_repository r;
-    populate_ownership_hierarchies(ohs, r);
+    populate_archetype_locations(als, r);
     populate_facet_names_by_model_name(r);
     populate_formatter_names_by_model_name(r);
-    BOOST_LOG_SEV(lg, debug) << "Created ownership hierachy repository. "
+    BOOST_LOG_SEV(lg, debug) << "Created archetype location repository. "
                              << "Result: " << r;
     return r;
 }

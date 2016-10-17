@@ -14,14 +14,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-17 Mon 09:20]
+#+CAPTION: Clock summary at [2016-10-17 Mon 09:33]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *58:46* |       |       | 100.0 |
+| *Total time*                                                                | *58:59* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 58:46   |       |       | 100.0 |
-| Active                                                                      |         | 58:46 |       | 100.0 |
+| Stories                                                                     | 58:59   |       |       | 100.0 |
+| Active                                                                      |         | 58:59 |       | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  0:32 |   0.9 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:19 |   0.5 |
 | COMPLETED Improve bintray support                                           |         |       |  0:26 |   0.7 |
@@ -30,7 +30,7 @@
 | COMPLETED Solve the issue of too many "configurations"                      |         |       |  4:01 |   6.8 |
 | COMPLETED Merge decoration configuration and annotations factories          |         |       |  0:18 |   0.5 |
 | COMPLETED Move annotation factories into expander in yarn                   |         |       |  1:11 |   2.0 |
-| COMPLETED Clean up terminology in dynamic                                   |         |       | 15:12 |  25.9 |
+| COMPLETED Clean up terminology in dynamic                                   |         |       | 15:12 |  25.8 |
 | COMPLETED Minor tidy-up of the quilt.cpp diagram                            |         |       |  0:29 |   0.8 |
 | COMPLETED Create a ownership hierarchy repository                           |         |       |  1:43 |   2.9 |
 | COMPLETED Use vector of elements in model                                   |         |       |  0:10 |   0.3 |
@@ -45,8 +45,8 @@
 | COMPLETED IOable services                                                   |         |       |  0:06 |   0.2 |
 | COMPLETED Generate skeleton for "non-generatable" files                     |         |       |  0:51 |   1.4 |
 | COMPLETED Merge profiles with processed object in yarn.dia                  |         |       |  2:04 |   3.5 |
-| COMPLETED Fix yarn.dia tests                                                |         |       |  2:48 |   4.8 |
-| STARTED Perform the archetype / artefact renames                            |         |       |  3:24 |   5.8 |
+| COMPLETED Fix yarn.dia tests                                                |         |       |  2:48 |   4.7 |
+| STARTED Perform the archetype / artefact renames                            |         |       |  3:37 |   6.1 |
 | STARTED Integration of stitch and dogen                                     |         |       |  0:27 |   0.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -646,6 +646,7 @@ within the parser. It makes more sense to keep the parser clean and do
 the expansion somewhere else.
 
 *** STARTED Perform the archetype / artefact renames                  :story:
+    CLOCK: [2016-10-17 Mon 09:20]--[2016-10-17 Mon 09:33] =>  0:13
     CLOCK: [2016-10-17 Mon 09:01]--[2016-10-17 Mon 09:19] =>  0:18
     CLOCK: [2016-10-17 Mon 00:27]--[2016-10-17 Mon 00:32] =>  0:05
     CLOCK: [2016-10-17 Mon 00:22]--[2016-10-17 Mon 00:26] =>  0:04

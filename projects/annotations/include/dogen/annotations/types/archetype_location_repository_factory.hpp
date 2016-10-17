@@ -34,10 +34,10 @@ namespace annotations {
 
 class archetype_location_repository_factory final {
 private:
-    void validate(const std::list<archetype_location>& ohs) const;
+    void validate(const std::list<archetype_location>& als) const;
 
-    void populate_ownership_hierarchies(
-        const std::list<archetype_location>& ohs,
+    void populate_archetype_locations(
+        const std::list<archetype_location>& als,
         archetype_location_repository& rp) const;
 
     void populate_facet_names_by_model_name(
