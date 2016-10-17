@@ -131,7 +131,7 @@ profile_hydrator::read_templates(const boost::property_tree::ptree& pt) const {
             BOOST_LOG_SEV(lg, error) << template_has_no_hierarchy;
             BOOST_THROW_EXCEPTION(hydration_error(template_has_no_hierarchy));
         }
-        vt.ownership_hierarchy(read_ownership_hierarchy(j->second));
+        vt.archetype_location(read_ownership_hierarchy(j->second));
 
         vt.kind(to_template_kind(vt_pt.get<std::string>(template_kind_key)));
 

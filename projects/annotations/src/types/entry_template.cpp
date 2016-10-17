@@ -28,25 +28,25 @@ entry_template::entry_template()
 
 entry_template::entry_template(
     const dogen::annotations::name& name,
-    const dogen::annotations::archetype_location& ownership_hierarchy,
+    const dogen::annotations::archetype_location& archetype_location,
     const std::list<std::string>& untyped_value,
     const dogen::annotations::template_kinds kind)
     : name_(name),
-      ownership_hierarchy_(ownership_hierarchy),
+      archetype_location_(archetype_location),
       untyped_value_(untyped_value),
       kind_(kind) { }
 
 void entry_template::swap(entry_template& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
-    swap(ownership_hierarchy_, other.ownership_hierarchy_);
+    swap(archetype_location_, other.archetype_location_);
     swap(untyped_value_, other.untyped_value_);
     swap(kind_, other.kind_);
 }
 
 bool entry_template::operator==(const entry_template& rhs) const {
     return name_ == rhs.name_ &&
-        ownership_hierarchy_ == rhs.ownership_hierarchy_ &&
+        archetype_location_ == rhs.archetype_location_ &&
         untyped_value_ == rhs.untyped_value_ &&
         kind_ == rhs.kind_;
 }
@@ -73,20 +73,20 @@ void entry_template::name(const dogen::annotations::name&& v) {
     name_ = std::move(v);
 }
 
-const dogen::annotations::archetype_location& entry_template::ownership_hierarchy() const {
-    return ownership_hierarchy_;
+const dogen::annotations::archetype_location& entry_template::archetype_location() const {
+    return archetype_location_;
 }
 
-dogen::annotations::archetype_location& entry_template::ownership_hierarchy() {
-    return ownership_hierarchy_;
+dogen::annotations::archetype_location& entry_template::archetype_location() {
+    return archetype_location_;
 }
 
-void entry_template::ownership_hierarchy(const dogen::annotations::archetype_location& v) {
-    ownership_hierarchy_ = v;
+void entry_template::archetype_location(const dogen::annotations::archetype_location& v) {
+    archetype_location_ = v;
 }
 
-void entry_template::ownership_hierarchy(const dogen::annotations::archetype_location&& v) {
-    ownership_hierarchy_ = std::move(v);
+void entry_template::archetype_location(const dogen::annotations::archetype_location&& v) {
+    archetype_location_ = std::move(v);
 }
 
 const std::list<std::string>& entry_template::untyped_value() const {

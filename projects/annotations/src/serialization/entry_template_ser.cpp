@@ -42,7 +42,7 @@ void save(Archive& ar,
     const dogen::annotations::entry_template& v,
     const unsigned int /*version*/) {
     ar << make_nvp("name", v.name_);
-    ar << make_nvp("ownership_hierarchy", v.ownership_hierarchy_);
+    ar << make_nvp("archetype_location", v.archetype_location_);
     ar << make_nvp("untyped_value", v.untyped_value_);
     ar << make_nvp("kind", v.kind_);
 }
@@ -52,7 +52,7 @@ void load(Archive& ar,
     dogen::annotations::entry_template& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("name", v.name_);
-    ar >> make_nvp("ownership_hierarchy", v.ownership_hierarchy_);
+    ar >> make_nvp("archetype_location", v.archetype_location_);
     ar >> make_nvp("untyped_value", v.untyped_value_);
     ar >> make_nvp("kind", v.kind_);
 }

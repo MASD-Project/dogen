@@ -48,7 +48,7 @@ std::size_t entry_template_hasher::hash(const entry_template& v) {
     std::size_t seed(0);
 
     combine(seed, v.name());
-    combine(seed, v.ownership_hierarchy());
+    combine(seed, v.archetype_location());
     combine(seed, hash_std_list_std_string(v.untyped_value()));
     combine(seed, v.kind());
 

@@ -53,7 +53,7 @@ std::ostream& operator<<(std::ostream& s, const entry_template& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::annotations::entry_template\"" << ", "
       << "\"name\": " << v.name() << ", "
-      << "\"ownership_hierarchy\": " << v.ownership_hierarchy() << ", "
+      << "\"archetype_location\": " << v.archetype_location() << ", "
       << "\"untyped_value\": " << v.untyped_value() << ", "
       << "\"kind\": " << v.kind()
       << " }";

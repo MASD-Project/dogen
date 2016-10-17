@@ -65,7 +65,7 @@ entry_template_generator::entry_template_generator() : position_(0) { }
 void entry_template_generator::
 populate(const unsigned int position, result_type& v) {
     v.name(create_dogen_annotations_name(position + 0));
-    v.ownership_hierarchy(create_dogen_annotations_archetype_location(position + 1));
+    v.archetype_location(create_dogen_annotations_archetype_location(position + 1));
     v.untyped_value(create_std_list_std_string(position + 2));
     v.kind(create_dogen_annotations_template_kinds(position + 3));
 }

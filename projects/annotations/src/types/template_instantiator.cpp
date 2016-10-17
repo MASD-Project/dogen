@@ -242,8 +242,8 @@ template_instantiator::instantiate_global_template(
     std::list<std::pair<std::string, boost::shared_ptr<value>>> r;
     for (const auto pair : repository_.facet_names_by_model_name()) {
         const auto model_name(pair.first);
-        if (!et.ownership_hierarchy().kernel().empty() &&
-            et.ownership_hierarchy().kernel() != model_name)
+        if (!et.archetype_location().kernel().empty() &&
+            et.archetype_location().kernel() != model_name)
             continue;
 
         std::pair<std::string, boost::shared_ptr<value>> entry;
@@ -261,8 +261,8 @@ template_instantiator::instantiate_global_template(
     }
 
     for (const auto al : repository_.archetype_locations()) {
-        if (!et.ownership_hierarchy().kernel().empty() &&
-            et.ownership_hierarchy().kernel() != al.kernel())
+        if (!et.archetype_location().kernel().empty() &&
+            et.archetype_location().kernel() != al.kernel())
             continue;
 
         std::pair<std::string, boost::shared_ptr<value>> entry;
@@ -282,8 +282,8 @@ template_instantiator::instantiate_facet_template(
 
     for (const auto pair : repository_.facet_names_by_model_name()) {
         const auto model_name(pair.first);
-        if (!et.ownership_hierarchy().kernel().empty() &&
-            et.ownership_hierarchy().kernel() != model_name)
+        if (!et.archetype_location().kernel().empty() &&
+            et.archetype_location().kernel() != model_name)
             continue;
 
         const auto& facet_names(pair.second);
@@ -304,12 +304,12 @@ template_instantiator::instantiate_formatter_template(
     std::list<std::pair<std::string, boost::shared_ptr<value>>> r;
 
     for (const auto al : repository_.archetype_locations()) {
-        if (!et.ownership_hierarchy().kernel().empty() &&
-            et.ownership_hierarchy().kernel() != al.kernel())
+        if (!et.archetype_location().kernel().empty() &&
+            et.archetype_location().kernel() != al.kernel())
             continue;
 
-        if (!et.ownership_hierarchy().facet().empty() &&
-            et.ownership_hierarchy().facet() != al.facet())
+        if (!et.archetype_location().facet().empty() &&
+            et.archetype_location().facet() != al.facet())
             continue;
 
         std::pair<std::string, boost::shared_ptr<value>> entry;
@@ -366,7 +366,7 @@ instantiate(const type_repository& trp, const entry_template& et) const {
         return r;
     }
 
-    validate(et.ownership_hierarchy(), et.name(), et.kind());
+    validate(et.archetype_location(), et.name(), et.kind());
 
     BOOST_LOG_SEV(lg, debug) << "Instantiating template: " << et;
 
