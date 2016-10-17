@@ -24,13 +24,13 @@
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/inclusion_support_types.hpp"
-#include "dogen/quilt.cpp/types/formattables/canonical_formatter_expander.hpp"
+#include "dogen/quilt.cpp/types/formattables/canonical_archetype_expander.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory(
-        "quilt.cpp.formattables.canonical_formatter_expander"));
+static logger
+lg(logger_factory("quilt.cpp.formattables.canonical_archetype_expander"));
 
 }
 

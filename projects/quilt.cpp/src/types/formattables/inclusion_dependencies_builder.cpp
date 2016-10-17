@@ -24,7 +24,7 @@
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/quilt.cpp/types/formattables/building_error.hpp"
-#include "dogen/quilt.cpp/types/formattables/canonical_formatter_resolver.hpp"
+#include "dogen/quilt.cpp/types/formattables/canonical_archetype_resolver.hpp"
 #include "dogen/quilt.cpp/types/formattables/inclusion_dependencies_builder.hpp"
 
 namespace {

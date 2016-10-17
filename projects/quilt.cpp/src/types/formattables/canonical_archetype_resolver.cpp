@@ -22,13 +22,13 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/quilt.cpp/types/formattables/resolution_error.hpp"
-#include "dogen/quilt.cpp/types/formattables/canonical_formatter_resolver.hpp"
+#include "dogen/quilt.cpp/types/formattables/canonical_archetype_resolver.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(
-        "quilt.cpp.formattables.canonical_formatter_resolver"));
+        "quilt.cpp.formattables.canonical_archetype_resolver"));
 
 const auto archetype_postfix(".canonical_archetype");
 

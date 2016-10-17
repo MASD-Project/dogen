@@ -31,7 +31,7 @@
 #include "dogen/yarn/types/name_flattener.hpp"
 #include "dogen/quilt.cpp/io/formattables/streaming_properties_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/helper_properties_io.hpp"
-#include "dogen/quilt.cpp/types/formattables/canonical_formatter_resolver.hpp"
+#include "dogen/quilt.cpp/types/formattables/canonical_archetype_resolver.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/odb/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/traits.hpp"

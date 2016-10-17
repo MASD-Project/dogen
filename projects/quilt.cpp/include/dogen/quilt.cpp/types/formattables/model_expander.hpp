@@ -51,7 +51,7 @@ private:
         const annotations::annotation& root, const formatters::container& fc,
         model& fm) const;
 
-    void expand_canonical_formatters(const formatters::container& fc,
+    void expand_canonical_archetypes(const formatters::container& fc,
         model& fm) const;
 
     void expand_inclusion(

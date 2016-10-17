@@ -20,7 +20,7 @@
  */
 #include "dogen/quilt.cpp/types/formattables/streaming_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/enablement_expander.hpp"
-#include "dogen/quilt.cpp/types/formattables/canonical_formatter_expander.hpp"
+#include "dogen/quilt.cpp/types/formattables/canonical_archetype_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/inclusion_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/decoration_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/aspect_expander.hpp"
@@ -50,7 +50,7 @@ void model_expander::expand_enablement(const annotations::type_repository& atrp,
 }
 
 void model_expander::
-expand_canonical_formatters(const formatters::container& fc, model& fm) const {
+expand_canonical_archetypes(const formatters::container& fc, model& fm) const {
     canonical_archetype_expander ex;
     ex.expand(fc, fm);
 }
@@ -127,7 +127,7 @@ void model_expander::expand(
      * because we use the canonical formatter notation to find
      * inclusion directives.
      */
-    expand_canonical_formatters(fc, fm);
+    expand_canonical_archetypes(fc, fm);
     expand_inclusion(atrp, fc, l, fm);
     expand_decoration(dpf, fm);
     expand_aspects(atrp, fm);
