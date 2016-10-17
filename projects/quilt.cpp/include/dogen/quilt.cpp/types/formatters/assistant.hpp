@@ -108,19 +108,17 @@ public:
 
 private:
     /**
-     * @brief Obtains the formatter configuration for the formatter
-     * identified by formatter name.
+     * @brief Obtains the artefact properties for the archetype.
      *
-     * @pre Formatter configuration must exist for the formatter.
+     * @pre Artefact properties must exist for the archetype.
      */
     /**@{*/
     const formattables::artefact_properties&
-    obtain_artefact_properties(
-        const formattables::element_properties& eprops,
-        const std::string& formatter_name) const;
+    obtain_artefact_properties(const formattables::element_properties& eprops,
+        const std::string& archetype) const;
     const formattables::artefact_properties&
     obtain_artefact_properties(const std::string& element_id,
-        const std::string& formatter_name) const;
+        const std::string& archetype) const;
     /**@}*/
 
     /**
@@ -130,24 +128,17 @@ private:
      * @pre Facet configuration must exist for the facet.
      */
     formattables::facet_properties
-    obtain_facet_properties(const std::string& facet_name) const;
-
-    /**
-     * @brief Returns true if the formatter is enabled, false
-     * otherwise.
-     */
-    bool is_formatter_enabled(const std::string& formatter_name) const;
+    obtain_facet_properties(const std::string& facet) const;
 
     /**
      * @brief Returns true if the facet is enabled, false otherwise.
      */
-    bool is_facet_enabled(const std::string& facet_name) const;
+    bool is_facet_enabled(const std::string& facet) const;
 
     /**
-     * @brief Returns the folder for the current facet.
+     * @brief Returns the folder for the supplied facet.
      */
-    std::string get_facet_directory_for_facet(
-        const std::string& facet_name) const;
+    std::string get_facet_directory_for_facet(const std::string& facet) const;
 
 public:
     std::string get_odb_facet_directory() const;
@@ -266,8 +257,7 @@ private:
     std::list<std::shared_ptr<formatters::helper_formatter_interface>>
     get_helpers(const formattables::helper_properties& hp) const;
 
-    std::string
-    streaming_for_type(const formattables::streaming_properties& sc,
+    std::string streaming_for_type(const formattables::streaming_properties& sp,
         const std::string& s) const;
 
 public:
@@ -308,10 +298,10 @@ public:
 public:
     /**
      * @brief Returns the subset of names for which the supplied
-     * formatter is enabled.
+     * archetype is enabled.
      */
     std::list<yarn::name>
-    names_with_enabled_formatter(const std::string& formatter_name,
+    names_with_enabled_archetype(const std::string& archetype,
         const std::list<yarn::name> names) const;
 
 public:

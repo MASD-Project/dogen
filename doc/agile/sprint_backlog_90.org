@@ -14,14 +14,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-17 Mon 22:32]
+#+CAPTION: Clock summary at [2016-10-17 Mon 22:53]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *66:46* |       |       | 100.0 |
+| *Total time*                                                                | *67:06* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 66:46   |       |       | 100.0 |
-| Active                                                                      |         | 66:46 |       | 100.0 |
+| Stories                                                                     | 67:06   |       |       | 100.0 |
+| Active                                                                      |         | 67:06 |       | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  0:32 |   0.8 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:19 |   0.5 |
 | COMPLETED Improve bintray support                                           |         |       |  0:26 |   0.6 |
@@ -30,11 +30,11 @@
 | COMPLETED Solve the issue of too many "configurations"                      |         |       |  4:01 |   6.0 |
 | COMPLETED Merge decoration configuration and annotations factories          |         |       |  0:18 |   0.4 |
 | COMPLETED Move annotation factories into expander in yarn                   |         |       |  1:11 |   1.8 |
-| COMPLETED Clean up terminology in dynamic                                   |         |       | 15:12 |  22.8 |
+| COMPLETED Clean up terminology in dynamic                                   |         |       | 15:12 |  22.7 |
 | COMPLETED Minor tidy-up of the quilt.cpp diagram                            |         |       |  0:29 |   0.7 |
 | COMPLETED Create a ownership hierarchy repository                           |         |       |  1:43 |   2.6 |
 | COMPLETED Use vector of elements in model                                   |         |       |  0:10 |   0.2 |
-| COMPLETED Rewrite profile support                                           |         |       | 11:50 |  17.7 |
+| COMPLETED Rewrite profile support                                           |         |       | 11:50 |  17.6 |
 | COMPLETED Merge annotation type and profile folders                         |         |       |  0:20 |   0.5 |
 | COMPLETED Push stereotypes processing into yarn                             |         |       |  1:51 |   2.8 |
 | COMPLETED Implement defaulting within the profiler                          |         |       |  1:13 |   1.8 |
@@ -46,7 +46,7 @@
 | COMPLETED Generate skeleton for "non-generatable" files                     |         |       |  0:51 |   1.3 |
 | COMPLETED Merge profiles with processed object in yarn.dia                  |         |       |  2:04 |   3.1 |
 | COMPLETED Fix yarn.dia tests                                                |         |       |  2:48 |   4.2 |
-| COMPLETED Perform the archetype / artefact renames                          |         |       | 11:24 |  17.1 |
+| COMPLETED Perform the archetype / artefact renames                          |         |       | 11:44 |  17.5 |
 | STARTED Integration of stitch and dogen                                     |         |       |  0:27 |   0.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -647,6 +647,7 @@ the expansion somewhere else.
 
 *** COMPLETED Perform the archetype / artefact renames                :story:
     CLOSED: [2016-10-17 Mon 18:11]
+    CLOCK: [2016-10-17 Mon 22:33]--[2016-10-17 Mon 22:53] =>  0:20
     CLOCK: [2016-10-17 Mon 21:12]--[2016-10-17 Mon 22:32] =>  1:20
     CLOCK: [2016-10-17 Mon 20:18]--[2016-10-17 Mon 21:11] =>  0:53
     CLOCK: [2016-10-17 Mon 19:57]--[2016-10-17 Mon 20:17] =>  0:20

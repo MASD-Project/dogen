@@ -103,10 +103,11 @@ assistant(const context& ctx, const annotations::archetype_location& al,
     ownership_hierarchy_(al), requires_header_guard_(requires_header_guard) {
 
     BOOST_LOG_SEV(lg, debug) << "Processing element: " << id
-                             << " using: " << al.archetype();
+                             << " for archetype: " << al.archetype();
 
     dogen::formatters::indent_filter::push(filtering_stream_, 4);
     filtering_stream_.push(stream_);
+
     validate();
 }
 
@@ -131,8 +132,7 @@ std::string assistant::make_final_keyword_text(const yarn::object& o) {
     return o.is_final() ? final_keyword_text : empty;
 }
 
-std::string assistant::
-make_by_ref_text(const yarn::attribute& attr) {
+std::string assistant::make_by_ref_text(const yarn::attribute& attr) {
     return attr.parsed_type().is_current_simple_type() ? empty : by_ref_text;
 }
 
@@ -172,25 +172,25 @@ std::string assistant::get_product_name(const yarn::name& n) const {
 
 const formattables::artefact_properties& assistant::
 obtain_artefact_properties(const formattables::element_properties& eprops,
-    const std::string& formatter_name) const {
-    const auto i(eprops.artefact_properties().find(formatter_name));
+    const std::string& archetype) const {
+    const auto i(eprops.artefact_properties().find(archetype));
     if (i == eprops.artefact_properties().end()) {
         BOOST_LOG_SEV(lg, error) << artefact_properties_missing
-                                 << formatter_name;
-        BOOST_THROW_EXCEPTION(formatting_error(artefact_properties_missing +
-                formatter_name));
+                                 << archetype;
+        BOOST_THROW_EXCEPTION(
+            formatting_error(artefact_properties_missing + archetype));
     }
     return i->second;
 }
 
 const formattables::artefact_properties& assistant::
 obtain_artefact_properties(const std::string& element_id,
-    const std::string& formatter_name) const {
+    const std::string& archetype) const {
 
     const auto& formattables(context_.model().formattables());
     formattables::canonical_archetype_resolver res(formattables);
 
-    const auto resolved_arch(res.resolve(element_id, formatter_name));
+    const auto resolved_arch(res.resolve(element_id, archetype));
     const auto i(formattables.find(element_id));
     if (i == formattables.end()) {
         BOOST_LOG_SEV(lg, error) << element_not_found << element_id;
@@ -202,14 +202,13 @@ obtain_artefact_properties(const std::string& element_id,
 }
 
 formattables::facet_properties assistant::
-obtain_facet_properties(const std::string& facet_name) const {
+obtain_facet_properties(const std::string& facet) const {
     const auto& fct_props(context_.model().facet_properties());
-    const auto i(fct_props.find(facet_name));
+    const auto i(fct_props.find(facet));
     if (i == fct_props.end()) {
-        BOOST_LOG_SEV(lg, error) << facet_properties_missing
-                                 << facet_name;
-        BOOST_THROW_EXCEPTION(formatting_error(facet_properties_missing +
-                facet_name));
+        BOOST_LOG_SEV(lg, error) << facet_properties_missing << facet;
+        BOOST_THROW_EXCEPTION(
+            formatting_error(facet_properties_missing + facet));
     }
     return i->second;
 }
@@ -229,26 +228,18 @@ std::list<std::string> assistant::make_namespaces(const yarn::name& n) const {
     return nf.flatten(n);
 }
 
-bool assistant::
-is_formatter_enabled(const std::string& formatter_name) const {
-    const auto& eprops(context_.element_properties());
-    const auto& art_props(obtain_artefact_properties(eprops, formatter_name));
-    return art_props.enabled();
-}
-
-bool assistant::
-is_facet_enabled(const std::string& facet_name) const {
-    const auto& fct_props(obtain_facet_properties(facet_name));
+bool assistant::is_facet_enabled(const std::string& facet) const {
+    const auto& fct_props(obtain_facet_properties(facet));
     return fct_props.enabled();
 }
 
 std::string assistant::
-get_facet_directory_for_facet(const std::string& facet_name) const {
-    const auto& fct_props(obtain_facet_properties(facet_name));
+get_facet_directory_for_facet(const std::string& facet) const {
+    const auto& fct_props(obtain_facet_properties(facet));
     if (fct_props.directory().empty()) {
-        BOOST_LOG_SEV(lg, error) << facet_directory_missing << facet_name;
+        BOOST_LOG_SEV(lg, error) << facet_directory_missing << facet;
         BOOST_THROW_EXCEPTION(
-            formatting_error(facet_directory_missing + facet_name));
+            formatting_error(facet_directory_missing + facet));
     }
     return fct_props.directory();
 }
@@ -275,12 +266,12 @@ bool assistant::requires_stream_manipulators() const {
 
 bool assistant::is_serialization_enabled() const {
     using formatters::serialization::traits;
-    return is_formatter_enabled(traits::class_header_archetype());
+    return is_facet_enabled(traits::facet());
 }
 
 bool assistant::is_io_enabled() const {
     using formatters::io::traits;
-    return is_formatter_enabled(traits::class_header_archetype());
+    return is_facet_enabled(traits::facet());
 }
 
 bool assistant::is_odb_facet_enabled() const {
@@ -319,9 +310,9 @@ void assistant::make_decoration_preamble(
         return;
 
     // FIXME: we should not hard code the comment styles.
-    dogen::formatters::decoration_formatter af;
+    dogen::formatters::decoration_formatter fmt;
     const auto comment_style(dogen::formatters::comment_styles::shell_style);
-    af.format_preamble(stream(), comment_style, *dc);
+    fmt.format_preamble(stream(), comment_style, *dc);
 }
 
 void assistant::comment(const std::string& c) {
@@ -429,8 +420,8 @@ assistant::get_helpers(const formattables::helper_properties& hp) const {
 }
 
 bool assistant::is_io() const {
-    const auto fn(ownership_hierarchy_.facet());
-    return formatters::io::traits::facet()  == fn;
+    const auto fct(ownership_hierarchy_.facet());
+    return formatters::io::traits::facet()  == fct;
 }
 
 bool assistant::
@@ -454,17 +445,17 @@ is_streaming_enabled(const formattables::helper_properties& hp) const {
      */
     using tt = formatters::types::traits;
     const auto cifn(tt::class_implementation_archetype());
-    const auto fn(ownership_hierarchy_.archetype());
-    bool in_types_class_implementation(fn == cifn);
+    const auto arch(ownership_hierarchy_.archetype());
+    bool in_types_class_implementation(arch == cifn);
     return in_types_class_implementation && hp.in_inheritance_relationship();
 }
 
 void assistant::add_helper_methods(const std::string& element_id) {
     BOOST_LOG_SEV(lg, debug) << "Generating helper methods. Element: "
                              << element_id;
-    if (context_.element_properties().helper_properties().empty()) {
+
+    if (context_.element_properties().helper_properties().empty())
         BOOST_LOG_SEV(lg, debug) << "No helper methods found.";
-    }
 
     const auto& eprops(context_.element_properties());
     for (const auto& hlp_props : eprops.helper_properties()) {
@@ -475,36 +466,37 @@ void assistant::add_helper_methods(const std::string& element_id) {
          * Check to see if the helper is enabled, given the system's
          * current configuration. If enabled, format it.
          */
-        for (const auto& h : helpers) {
-            if (!h->is_enabled(*this, hlp_props)) {
-                BOOST_LOG_SEV(lg, debug) << "Helper is not enabled." << h->formatter_name();
+        for (const auto& hlp : helpers) {
+            const auto fmtn(hlp->formatter_name());
+            if (!hlp->is_enabled(*this, hlp_props)) {
+                BOOST_LOG_SEV(lg, debug) << "Helper is not enabled." << fmtn;
                 continue;
             }
 
-            BOOST_LOG_SEV(lg, debug) << "Formatting with helper: " << h->formatter_name();
-            h->format(*this, hlp_props);
+            BOOST_LOG_SEV(lg, debug) << "Formatting with helper: " << fmtn;
+            hlp->format(*this, hlp_props);
         }
     }
     BOOST_LOG_SEV(lg, debug) << "Finished generating helper methods.";
 }
 
 std::string assistant::
-streaming_for_type(const formattables::streaming_properties& sc,
+streaming_for_type(const formattables::streaming_properties& sp,
     const std::string& s) const {
 
     std::ostringstream stream;
     dogen::formatters::utility_formatter uf(stream);
-    BOOST_LOG_SEV(lg, debug) << "Streaming configuration for type: " << sc;
-    if (sc.remove_unprintable_characters())
+    BOOST_LOG_SEV(lg, debug) << "Streaming properties for type: " << sp;
+    if (sp.remove_unprintable_characters())
         uf.insert_streamed("tidy_up_string(" + s + ")");
-    else if (!sc.string_conversion_method().empty()) {
+    else if (!sp.string_conversion_method().empty()) {
         // FIXME: hack to determine if we are being dereferenced.
         std::string s1(s);
         const auto i(s1.find('*'));
         if (i != std::string::npos)
             s1 = "(" + s + ")";
-        uf.insert_streamed(s1 + "." + sc.string_conversion_method());
-    } else if (sc.requires_quoting())
+        uf.insert_streamed(s1 + "." + sp.string_conversion_method());
+    } else if (sp.requires_quoting())
         uf.insert_streamed(s);
     else
         uf.insert(s);
@@ -512,8 +504,8 @@ streaming_for_type(const formattables::streaming_properties& sc,
     return stream.str();
 }
 
-std::string assistant::streaming_for_type(const yarn::name& n,
-    const std::string& s) const {
+std::string assistant::
+streaming_for_type(const yarn::name& n, const std::string& s) const {
 
     const auto str_propss(context_.model().streaming_properties());
     const auto i(str_propss.find(n.id()));
@@ -527,11 +519,11 @@ std::string assistant::
 streaming_for_type(const formattables::helper_descriptor& hd,
     const std::string& s) const {
 
-    const auto sc(hd.streaming_properties());
-    if (!sc)
+    const auto sp(hd.streaming_properties());
+    if (!sp)
         return s;
 
-    return streaming_for_type(*sc, s);
+    return streaming_for_type(*sp, s);
 }
 
 bool assistant::
@@ -574,13 +566,13 @@ assistant::get_odb_pragmas(const std::string& attr_id) const {
 }
 
 std::list<yarn::name> assistant::
-names_with_enabled_formatter(const std::string& formatter_name,
+names_with_enabled_archetype(const std::string& archetype,
     const std::list<yarn::name> names) const {
     std::list<yarn::name> r;
     for (const auto& n : names) {
         const auto id(n.id());
         BOOST_LOG_SEV(lg, debug) << "Checking enablement for name: " << id;
-        const auto& art_props(obtain_artefact_properties(id, formatter_name));
+        const auto& art_props(obtain_artefact_properties(id, archetype));
         if (!art_props.enabled())
             continue;
 
