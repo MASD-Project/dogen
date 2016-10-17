@@ -25,7 +25,7 @@
 #include "dogen/utility/filesystem/file.hpp"
 #include "dogen/utility/exception/invalid_enum_value.hpp"
 #include "dogen/annotations/types/type_repository_factory.hpp"
-#include "dogen/annotations/types/ownership_hierarchy_repository_factory.hpp"
+#include "dogen/annotations/types/archetype_location_repository_factory.hpp"
 #include "dogen/options/types/knitting_options_validator.hpp"
 #include "dogen/options/io/knitting_options_io.hpp"
 #include "dogen/yarn/types/workflow.hpp"
@@ -85,7 +85,7 @@ obtain_ownership_hierarchy_repository() const {
         for (const auto oh : b->ownership_hierarchy())
             ohs.push_back(oh);
 
-    annotations::ownership_hierarchy_repository_factory f;
+    annotations::archetype_location_repository_factory f;
     const auto r(f.make(ohs));
     return r;
 }

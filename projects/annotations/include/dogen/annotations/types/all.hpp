@@ -64,6 +64,6 @@
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
 #include "dogen/annotations/types/archetype_location_repository.hpp"
-#include "dogen/annotations/types/ownership_hierarchy_repository_factory.hpp"
+#include "dogen/annotations/types/archetype_location_repository_factory.hpp"
 
 #endif

@@ -10360,7 +10360,7 @@ any.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#ownership_hierarchy_repository_factory#</dia:string>
+        <dia:string>#archetype_location_repository_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#handcrafted#</dia:string>
@@ -10479,7 +10479,7 @@ any.#</dia:string>
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#ohs#</dia:string>
+                <dia:string>#als#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
                 <dia:string>#std::list&lt;archetype_location&gt;#</dia:string>

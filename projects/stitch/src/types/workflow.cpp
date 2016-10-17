@@ -28,7 +28,7 @@
 #include "dogen/utility/filesystem/file.hpp"
 #include "dogen/annotations/types/type_repository_factory.hpp"
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
-#include "dogen/annotations/types/ownership_hierarchy_repository_factory.hpp"
+#include "dogen/annotations/types/archetype_location_repository_factory.hpp"
 #include "dogen/formatters/types/hydration_workflow.hpp"
 #include "dogen/formatters/io/artefact_io.hpp"
 #include "dogen/formatters/types/filesystem_writer.hpp"
@@ -122,7 +122,7 @@ workflow::obtain_ownership_hierarchy_repository() const {
     std::list<annotations::archetype_location> ohs;
     ohs.push_back(formatter_.ownership_hierarchy());
 
-    annotations::ownership_hierarchy_repository_factory f;
+    annotations::archetype_location_repository_factory f;
     const auto r(f.make(ohs));
     return r;
 }

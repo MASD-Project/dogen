@@ -21,13 +21,13 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/annotations/types/building_error.hpp"
 #include "dogen/annotations/io/archetype_location_repository_io.hpp"
-#include "dogen/annotations/types/ownership_hierarchy_repository_factory.hpp"
+#include "dogen/annotations/types/archetype_location_repository_factory.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
 static logger
-lg(logger_factory("annotations.ownership_hierarchy_repository_factory"));
+lg(logger_factory("annotations.archetype_location_repository_factory"));
 
 const std::string empty_model_name("Model name cannot be empty. Formatter: ");
 const std::string empty_facet_name("Facet name cannot be empty. Formatter: ");
@@ -38,7 +38,7 @@ const std::string empty_formatter_name("Formatter name cannot be empty");
 namespace dogen {
 namespace annotations {
 
-void ownership_hierarchy_repository_factory::
+void archetype_location_repository_factory::
 validate(const std::list<archetype_location>& ohs) const {
     BOOST_LOG_SEV(lg, debug) << "Validating input ownership hierachies.";
 
@@ -63,7 +63,7 @@ validate(const std::list<archetype_location>& ohs) const {
     BOOST_LOG_SEV(lg, debug) << "Input ownership hierachies are valid.";
 }
 
-void ownership_hierarchy_repository_factory::
+void archetype_location_repository_factory::
 populate_ownership_hierarchies(const std::list<archetype_location>& ohs,
     archetype_location_repository& rp) const {
     rp.ownership_hierarchies().reserve(ohs.size());
@@ -71,14 +71,14 @@ populate_ownership_hierarchies(const std::list<archetype_location>& ohs,
         rp.ownership_hierarchies().push_back(oh);
 }
 
-void ownership_hierarchy_repository_factory::
+void archetype_location_repository_factory::
 populate_facet_names_by_model_name(archetype_location_repository& rp) const {
 
     for (const auto& oh : rp.ownership_hierarchies())
         rp.facet_names_by_model_name()[oh.kernel()].insert(oh.facet());
 }
 
-void ownership_hierarchy_repository_factory::
+void archetype_location_repository_factory::
 populate_formatter_names_by_model_name(
     archetype_location_repository& rp) const {
 
@@ -88,7 +88,7 @@ populate_formatter_names_by_model_name(
     }
 }
 
-archetype_location_repository ownership_hierarchy_repository_factory::
+archetype_location_repository archetype_location_repository_factory::
 make(const std::list<archetype_location>& ohs) const {
     BOOST_LOG_SEV(lg, debug) << "Creating ownership hierachy repository.";
     validate(ohs);
