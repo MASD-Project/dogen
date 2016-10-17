@@ -766,13 +766,13 @@
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#ownership_hierarchy#</dia:string>
+            <dia:string>#archetype_location#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;annotations::ownership_hierarchy&gt;#</dia:string>
+            <dia:string>#std::list&lt;annotations::archetype_location&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

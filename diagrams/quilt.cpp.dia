@@ -480,13 +480,13 @@
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#ownership_hierarchy#</dia:string>
+            <dia:string>#archetype_location#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#annotations::ownership_hierarchy#</dia:string>
+            <dia:string>#annotations::archetype_location#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -972,13 +972,13 @@
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#ownership_hierarchy#</dia:string>
+            <dia:string>#archetype_location#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::forward_list&lt;annotations::ownership_hierarchy&gt;#</dia:string>
+            <dia:string>#std::forward_list&lt;annotations::archetype_location&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -10762,7 +10762,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#oh#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const annotations::ownership_hierarchy&amp;#</dia:string>
+                <dia:string>#const annotations::archetype_location&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
