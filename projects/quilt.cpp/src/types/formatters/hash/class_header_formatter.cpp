@@ -36,7 +36,7 @@ namespace formatters {
 namespace hash {
 
 std::string class_header_formatter::static_formatter_name() {
-    return traits::class_header_formatter_name();
+    return traits::class_header_archetype();
 }
 
 std::string class_header_formatter::id() const {

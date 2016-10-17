@@ -275,12 +275,12 @@ bool assistant::requires_stream_manipulators() const {
 
 bool assistant::is_serialization_enabled() const {
     using formatters::serialization::traits;
-    return is_formatter_enabled(traits::class_header_formatter_name());
+    return is_formatter_enabled(traits::class_header_archetype());
 }
 
 bool assistant::is_io_enabled() const {
     using formatters::io::traits;
-    return is_formatter_enabled(traits::class_header_formatter_name());
+    return is_formatter_enabled(traits::class_header_archetype());
 }
 
 bool assistant::is_odb_facet_enabled() const {
@@ -453,7 +453,7 @@ is_streaming_enabled(const formattables::helper_properties& hp) const {
      * inheritance relationship, we'll need streaming.
      */
     using tt = formatters::types::traits;
-    const auto cifn(tt::class_implementation_formatter_name());
+    const auto cifn(tt::class_implementation_archetype());
     const auto fn(ownership_hierarchy_.archetype());
     bool in_types_class_implementation(fn == cifn);
     return in_types_class_implementation && hp.in_inheritance_relationship();

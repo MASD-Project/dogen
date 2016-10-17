@@ -33,7 +33,7 @@ namespace formatters {
 namespace serialization {
 
 std::string registrar_header_formatter::static_formatter_name() {
-    return traits::registrar_header_formatter_name();
+    return traits::registrar_header_archetype();
 }
 
 std::string registrar_header_formatter::id() const {

@@ -43,7 +43,7 @@ std::string path_helper::family() const {
 std::list<std::string>
 path_helper::owning_formatters() const {
     static auto r(std::list<std::string> {
-        serialization::traits::class_implementation_formatter_name()
+        serialization::traits::class_implementation_archetype()
     });
     return r;
 }

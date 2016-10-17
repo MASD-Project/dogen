@@ -50,7 +50,7 @@ namespace formatters {
 namespace io {
 
 std::string enum_implementation_formatter::static_formatter_name() {
-    return traits::enum_implementation_formatter_name();
+    return traits::enum_implementation_archetype();
 }
 
 std::string enum_implementation_formatter::id() const {
@@ -80,7 +80,7 @@ std::list<std::string> enum_implementation_formatter::inclusion_dependencies(
     builder.add(inclusion_constants::std::stdexcept());
     builder.add(inclusion_constants::std::string());
 
-    const auto eh_fn(traits::enum_header_formatter_name());
+    const auto eh_fn(traits::enum_header_archetype());
     builder.add(e.name(), eh_fn);
     return builder.build();
 }

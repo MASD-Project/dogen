@@ -40,24 +40,24 @@ struct traits {
     static std::string facet_name();
 
     /**
-     * @brief Name of the canonical formatter.
+     * @brief Name of the canonical archetype.
      */
     static std::string canonical_archetype();
 
     /**
-     * @brief Name of the class header formatter.
+     * @brief Name of the class header archetype.
      */
-    static std::string class_header_formatter_name();
+    static std::string class_header_archetype();
 
     /**
-     * @brief Name of the enum header formatter.
+     * @brief Name of the enum header archetype.
      */
-    static std::string enum_header_formatter_name();
+    static std::string enum_header_archetype();
 
     /**
-     * @brief Name of the odb options formatter.
+     * @brief Name of the odb options archetype.
      */
-    static std::string odb_options_formatter_name();
+    static std::string odb_options_archetype();
 
     /**
      * @brief The pragma used by the ODB compiler.
@@ -65,9 +65,9 @@ struct traits {
     static std::string odb_pragma();
 
     /**
-     * @brief Name of the primitive implementation formatter.
+     * @brief Name of the primitive implementation archetype.
      */
-    static std::string primitive_header_formatter_name();
+    static std::string primitive_header_archetype();
 };
 
 } } } } }

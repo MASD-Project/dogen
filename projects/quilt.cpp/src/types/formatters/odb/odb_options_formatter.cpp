@@ -49,7 +49,7 @@ namespace formatters {
 namespace odb {
 
 std::string odb_options_formatter::static_formatter_name() {
-    return traits::odb_options_formatter_name();
+    return traits::odb_options_archetype();
 }
 
 std::string odb_options_formatter::id() const {

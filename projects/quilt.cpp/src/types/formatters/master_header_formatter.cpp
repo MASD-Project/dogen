@@ -33,7 +33,7 @@ namespace formatters {
 
 master_header_formatter::master_header_formatter(const std::string& facet_name)
     : ownership_hierarchy_(formatters::traits::model_name(), facet_name,
-        traits::master_header_formatter_name(facet_name)) { }
+        traits::master_header_archetype(facet_name)) { }
 
 std::string master_header_formatter::id() const {
     return archetype_location().archetype();

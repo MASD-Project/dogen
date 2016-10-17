@@ -31,7 +31,7 @@ std::string traits::model_name() {
 }
 
 std::string traits::
-master_header_formatter_name(const std::string& facet_name) {
+master_header_archetype(const std::string& facet_name) {
     return facet_name + ".master_header_formatter";
 }
 
@@ -40,12 +40,12 @@ std::string traits::cmake_facet_name() {
     return r;
 }
 
-std::string traits::include_cmakelists_formatter_name() {
+std::string traits::include_cmakelists_archetype() {
     static std::string r("quilt.cpp.cmake.include_cmakelists");
     return r;
 }
 
-std::string traits::source_cmakelists_formatter_name() {
+std::string traits::source_cmakelists_archetype() {
     static std::string r("quilt.cpp.cmake.source_cmakelists");
     return r;
 }

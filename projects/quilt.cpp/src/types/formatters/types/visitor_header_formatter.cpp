@@ -38,7 +38,7 @@ namespace formatters {
 namespace types {
 
 std::string visitor_header_formatter::static_formatter_name() {
-    return traits::visitor_header_formatter_name();
+    return traits::visitor_header_archetype();
 }
 
 std::string visitor_header_formatter::id() const {
@@ -64,11 +64,11 @@ std::list<std::string> visitor_header_formatter::inclusion_dependencies(
     const yarn::element& e) const {
     const auto& v(assistant::as<yarn::visitor>(static_formatter_name(), e));
     auto builder(f.make());
-    const auto fwd_fn(traits::forward_declarations_formatter_name());
+    const auto fwd_fn(traits::forward_declarations_archetype());
     builder.add(v.visits(), fwd_fn);
 
     if (v.parent()) {
-        const auto v_fn(traits::visitor_header_formatter_name());
+        const auto v_fn(traits::visitor_header_archetype());
         builder.add(*v.parent(), v_fn);
     }
     return builder.build();

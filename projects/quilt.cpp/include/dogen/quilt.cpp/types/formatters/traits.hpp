@@ -39,14 +39,13 @@ struct traits {
     static std::string model_name();
 
     /**
-     * @brief Name of the master header formatter for a given facet.
+     * @brief Name of the master header archetype for a given facet.
      */
-    static std::string master_header_formatter_name(
-        const std::string& facet_name);
+    static std::string master_header_archetype(const std::string& facet_name);
 
     static std::string cmake_facet_name();
-    static std::string include_cmakelists_formatter_name();
-    static std::string source_cmakelists_formatter_name();
+    static std::string include_cmakelists_archetype();
+    static std::string source_cmakelists_archetype();
 
     static std::string canonical_archetype(const std::string& facet_name);
 };

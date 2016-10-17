@@ -49,7 +49,7 @@ namespace formatters {
 namespace types {
 
 std::string forward_declarations_formatter::static_formatter_name() {
-    return traits::forward_declarations_formatter_name();
+    return traits::forward_declarations_archetype();
 }
 
 std::string forward_declarations_formatter::id() const {

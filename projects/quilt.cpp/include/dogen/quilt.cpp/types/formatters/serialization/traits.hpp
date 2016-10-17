@@ -40,44 +40,44 @@ struct traits {
     static std::string facet_name();
 
     /**
-     * @brief Name of the canonical formatter.
+     * @brief Name of the canonical archetype.
      */
     static std::string canonical_archetype();
 
     /**
-     * @brief Name of the class header formatter.
+     * @brief Name of the class header archetype.
      */
-    static std::string class_header_formatter_name();
+    static std::string class_header_archetype();
 
     /**
-     * @brief Name of the class implementation formatter.
+     * @brief Name of the class implementation archetype.
      */
-    static std::string class_implementation_formatter_name();
+    static std::string class_implementation_archetype();
 
     /**
-     * @brief Name of the enumeration header formatter.
+     * @brief Name of the enumeration header archetype.
      */
-    static std::string enum_header_formatter_name();
+    static std::string enum_header_archetype();
 
     /**
-     * @brief Name of the forward declaration's formatter.
+     * @brief Name of the forward declaration's archetype.
      */
-    static std::string forward_declarations_formatter_name();
+    static std::string forward_declarations_archetype();
 
     /**
-     * @brief Name of the registrar header formatter.
+     * @brief Name of the registrar header archetype.
      */
-    static std::string registrar_header_formatter_name();
+    static std::string registrar_header_archetype();
 
     /**
-     * @brief Name of the registrar implementation formatter.
+     * @brief Name of the registrar implementation archetype.
      */
-    static std::string registrar_implementation_formatter_name();
+    static std::string registrar_implementation_archetype();
 
     /**
-     * @brief Name of the primitive implementation formatter.
+     * @brief Name of the primitive implementation archetype.
      */
-    static std::string primitive_header_formatter_name();
+    static std::string primitive_header_archetype();
 };
 
 } } } } }

@@ -50,7 +50,7 @@ namespace formatters {
 namespace test_data {
 
 std::string enum_implementation_formatter::static_formatter_name() {
-    return traits::enum_implementation_formatter_name();
+    return traits::enum_implementation_archetype();
 }
 
 std::string enum_implementation_formatter::id() const {
@@ -76,7 +76,7 @@ std::list<std::string> enum_implementation_formatter::inclusion_dependencies(
     const yarn::element& e) const {
     auto builder(f.make());
 
-    const auto eh_fn(traits::enum_header_formatter_name());
+    const auto eh_fn(traits::enum_header_archetype());
     builder.add(e.name(), eh_fn);
     return builder.build();
 }

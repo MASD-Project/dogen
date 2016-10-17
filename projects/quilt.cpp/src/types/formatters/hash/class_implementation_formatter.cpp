@@ -50,7 +50,7 @@ namespace formatters {
 namespace hash {
 
 std::string class_implementation_formatter::static_formatter_name() {
-    return traits::class_implementation_formatter_name();
+    return traits::class_implementation_archetype();
 }
 
 std::string class_implementation_formatter::id() const {

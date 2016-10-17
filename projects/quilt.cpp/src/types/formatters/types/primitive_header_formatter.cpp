@@ -35,7 +35,7 @@ namespace formatters {
 namespace types {
 
 std::string primitive_header_formatter::static_formatter_name() {
-    return traits::primitive_header_formatter_name();
+    return traits::primitive_header_archetype();
 }
 
 std::string primitive_header_formatter::id() const {

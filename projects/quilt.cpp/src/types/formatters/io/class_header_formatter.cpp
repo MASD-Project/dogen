@@ -36,7 +36,7 @@ namespace formatters {
 namespace io {
 
 std::string class_header_formatter::static_formatter_name() {
-    return traits::class_header_formatter_name();
+    return traits::class_header_archetype();
 }
 
 std::string class_header_formatter::id() const {
@@ -48,7 +48,7 @@ annotations::archetype_location
 class_header_formatter::archetype_location() const {
     static annotations::archetype_location
         r(formatters::traits::model_name(), traits::facet_name(),
-            traits::class_header_formatter_name());
+            traits::class_header_archetype());
     return r;
 }
 

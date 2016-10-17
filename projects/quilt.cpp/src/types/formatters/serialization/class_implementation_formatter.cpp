@@ -49,7 +49,7 @@ namespace formatters {
 namespace serialization {
 
 std::string class_implementation_formatter::static_formatter_name() {
-    return traits::class_implementation_formatter_name();
+    return traits::class_implementation_archetype();
 }
 
 std::string class_implementation_formatter::id() const {
@@ -76,7 +76,7 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
     const auto& o(assistant::as<yarn::object>(static_formatter_name(), e));
     auto builder(f.make());
 
-    const auto ch_fn(traits::class_header_formatter_name());
+    const auto ch_fn(traits::class_header_archetype());
     builder.add(o.name(), ch_fn);
 
     using ic = inclusion_constants;

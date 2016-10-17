@@ -44,7 +44,7 @@ std::string optional_helper::family() const {
 std::list<std::string>
 optional_helper::owning_formatters() const {
     static auto r(std::list<std::string> {
-        hash::traits::class_implementation_formatter_name()
+        hash::traits::class_implementation_archetype()
     });
     return r;
 }

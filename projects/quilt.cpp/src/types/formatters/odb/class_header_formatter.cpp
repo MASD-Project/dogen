@@ -36,7 +36,7 @@ namespace formatters {
 namespace odb {
 
 std::string class_header_formatter::static_formatter_name() {
-    return traits::class_header_formatter_name();
+    return traits::class_header_archetype();
 }
 
 std::string class_header_formatter::id() const {
@@ -62,7 +62,7 @@ std::list<std::string> class_header_formatter::inclusion_dependencies(
     const yarn::element& e) const {
     const auto& o(assistant::as<yarn::object>(static_formatter_name(), e));
     auto builder(f.make());
-    builder.add(o.name(), types::traits::class_header_formatter_name());
+    builder.add(o.name(), types::traits::class_header_archetype());
 
     const auto cfmtn(traits::canonical_archetype());
     builder.add(o.transparent_associations(), cfmtn);

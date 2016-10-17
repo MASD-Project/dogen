@@ -41,7 +41,7 @@ std::string class_header_formatter::id() const {
 }
 
 std::string class_header_formatter::static_formatter_name() {
-    return traits::class_header_formatter_name();
+    return traits::class_header_archetype();
 }
 
 annotations::archetype_location
@@ -61,7 +61,7 @@ std::list<std::string> class_header_formatter::inclusion_dependencies(
     const formattables::inclusion_dependencies_builder_factory& f,
     const yarn::element& e) const {
     auto builder(f.make());
-    builder.add(e.name(), types::traits::class_header_formatter_name());
+    builder.add(e.name(), types::traits::class_header_archetype());
     return builder.build();
 }
 

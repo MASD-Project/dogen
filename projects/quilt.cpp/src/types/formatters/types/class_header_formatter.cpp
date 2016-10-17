@@ -38,7 +38,7 @@ namespace formatters {
 namespace types {
 
 std::string class_header_formatter::static_formatter_name() {
-    return traits::class_header_formatter_name();
+    return traits::class_header_archetype();
 }
 
 std::string class_header_formatter::id() const {
@@ -69,7 +69,7 @@ std::list<std::string> class_header_formatter::inclusion_dependencies(
     // algorithm: domain headers need it for the swap function.
     builder.add(inclusion_constants::std::algorithm());
 
-    const auto io_fn(formatters::io::traits::class_header_formatter_name());
+    const auto io_fn(formatters::io::traits::class_header_archetype());
     const bool in_inheritance(o.is_parent() || o.is_child());
     const bool io_enabled(builder.is_enabled(o.name(), io_fn));
     const bool requires_io(io_enabled && in_inheritance);
@@ -79,13 +79,13 @@ std::list<std::string> class_header_formatter::inclusion_dependencies(
         builder.add(ios);
 
     using ser = formatters::serialization::traits;
-    const auto ser_fwd_fn(ser::forward_declarations_formatter_name());
+    const auto ser_fwd_fn(ser::forward_declarations_archetype());
     builder.add(o.name(), ser_fwd_fn);
 
     const auto cfmtn(traits::canonical_archetype());
     builder.add(o.transparent_associations(), cfmtn);
 
-    const auto fwd_fn(traits::forward_declarations_formatter_name());
+    const auto fwd_fn(traits::forward_declarations_archetype());
     builder.add(o.opaque_associations(), fwd_fn);
 
     const auto self_fn(class_header_formatter::static_formatter_name());

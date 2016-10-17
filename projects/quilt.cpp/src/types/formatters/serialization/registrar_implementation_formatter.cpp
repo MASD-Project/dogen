@@ -50,7 +50,7 @@ namespace formatters {
 namespace serialization {
 
 std::string registrar_implementation_formatter::static_formatter_name() {
-    return traits::registrar_implementation_formatter_name();
+    return traits::registrar_implementation_archetype();
 }
 
 std::string registrar_implementation_formatter::id() const {
@@ -79,7 +79,7 @@ inclusion_dependencies(
     const auto& rg(assistant::as<fabric::registrar>(fmtn, e));
     auto builder(f.make());
 
-    const auto rh_fn(traits::registrar_header_formatter_name());
+    const auto rh_fn(traits::registrar_header_archetype());
     builder.add(rg.name(), rh_fn);
 
     using ic = inclusion_constants;
@@ -94,7 +94,7 @@ inclusion_dependencies(
     builder.add(ic::boost::archive::xml_iarchive());
     builder.add(ic::boost::archive::xml_oarchive());
 
-    const auto ch_fn(traits::class_header_formatter_name());
+    const auto ch_fn(traits::class_header_archetype());
     builder.add(rg.leaves(), ch_fn);
 
     const auto cfmtn(traits::canonical_archetype());

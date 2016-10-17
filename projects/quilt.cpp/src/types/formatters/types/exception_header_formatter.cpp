@@ -38,7 +38,7 @@ namespace formatters {
 namespace types {
 
 std::string exception_header_formatter::static_formatter_name() {
-    return traits::exception_header_formatter_name();
+    return traits::exception_header_archetype();
 }
 
 std::string exception_header_formatter::id() const {

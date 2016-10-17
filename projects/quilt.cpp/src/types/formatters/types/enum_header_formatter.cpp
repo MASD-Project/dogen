@@ -35,7 +35,7 @@ namespace formatters {
 namespace types {
 
 std::string enum_header_formatter::static_formatter_name() {
-    return traits::enum_header_formatter_name();
+    return traits::enum_header_archetype();
 }
 
 std::string enum_header_formatter::id() const {

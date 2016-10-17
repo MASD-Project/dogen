@@ -50,7 +50,7 @@ namespace formatters {
 namespace types {
 
 std::string class_implementation_formatter::static_formatter_name() {
-    return traits::class_implementation_formatter_name();
+    return traits::class_implementation_archetype();
 }
 
 std::string class_implementation_formatter::id() const {
@@ -77,11 +77,11 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
     const auto& o(assistant::as<yarn::object>(static_formatter_name(), e));
     auto builder(f.make());
 
-    const auto ch_fn(traits::class_header_formatter_name());
+    const auto ch_fn(traits::class_header_archetype());
     builder.add(o.name(), ch_fn);
     builder.add(o.opaque_associations(), ch_fn);
 
-    const auto io_fn(formatters::io::traits::class_header_formatter_name());
+    const auto io_fn(formatters::io::traits::class_header_archetype());
     const bool in_inheritance(o.is_parent() || o.is_child());
     const bool io_enabled(builder.is_enabled(o.name(), io_fn));
     const bool requires_io(io_enabled && in_inheritance);
@@ -110,7 +110,7 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
          * don't bother including the base if we are already including
          * the derived visitor.
          */
-        const auto v_fn(traits::visitor_header_formatter_name());
+        const auto v_fn(traits::visitor_header_archetype());
         if (o.derived_visitor())
             builder.add(*o.derived_visitor(), v_fn);
         else

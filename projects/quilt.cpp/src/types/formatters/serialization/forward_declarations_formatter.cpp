@@ -38,7 +38,7 @@ namespace formatters {
 namespace serialization {
 
 std::string forward_declarations_formatter::static_formatter_name() {
-    return traits::forward_declarations_formatter_name();
+    return traits::forward_declarations_archetype();
 }
 
 std::string forward_declarations_formatter::id() const {
@@ -65,7 +65,7 @@ std::list<std::string> forward_declarations_formatter::inclusion_dependencies(
     auto builder(f.make());
 
     using tp = formatters::types::traits;
-    const auto tp_fn(tp::forward_declarations_formatter_name());
+    const auto tp_fn(tp::forward_declarations_archetype());
     builder.add(e.name(), tp_fn);
 
     return builder.build();

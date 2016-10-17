@@ -40,49 +40,49 @@ struct traits {
     static std::string facet_name();
 
     /**
-     * @brief Name of the canonical formatter for this facet.
+     * @brief Name of the canonical archetype for this facet.
      */
     static std::string canonical_archetype();
 
     /**
-     * @brief Name of the class header formatter.
+     * @brief Name of the class header archetype.
      */
-    static std::string class_header_formatter_name();
+    static std::string class_header_archetype();
 
     /**
-     * @brief Name of the forward declaration's formatter.
+     * @brief Name of the forward declaration's archetype.
      */
-    static std::string forward_declarations_formatter_name();
+    static std::string forward_declarations_archetype();
 
     /**
-     * @brief Name of the class implementation formatter.
+     * @brief Name of the class implementation archetype.
      */
-    static std::string class_implementation_formatter_name();
+    static std::string class_implementation_archetype();
 
     /**
-     * @brief Name of the enumeration header formatter.
+     * @brief Name of the enumeration header archetype.
      */
-    static std::string enum_header_formatter_name();
+    static std::string enum_header_archetype();
 
     /**
-     * @brief Name of the exception header formatter.
+     * @brief Name of the exception header archetype.
      */
-    static std::string exception_header_formatter_name();
+    static std::string exception_header_archetype();
 
     /**
-     * @brief Name of the namespace header formatter.
+     * @brief Name of the namespace header archetype.
      */
-    static std::string namespace_header_formatter_name();
+    static std::string namespace_header_archetype();
 
     /**
-     * @brief Name of the visitor header formatter.
+     * @brief Name of the visitor header archetype.
      */
-    static std::string visitor_header_formatter_name();
+    static std::string visitor_header_archetype();
 
     /**
-     * @brief Name of the primitive implementation formatter.
+     * @brief Name of the primitive implementation archetype.
      */
-    static std::string primitive_header_formatter_name();
+    static std::string primitive_header_archetype();
 };
 
 } } } } }

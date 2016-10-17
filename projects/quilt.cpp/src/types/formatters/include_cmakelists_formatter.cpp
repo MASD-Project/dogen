@@ -45,7 +45,7 @@ namespace cpp {
 namespace formatters {
 
 std::string include_cmakelists_formatter::static_formatter_name() {
-    return traits::include_cmakelists_formatter_name();
+    return traits::include_cmakelists_archetype();
 }
 
 std::string include_cmakelists_formatter::id() const {
