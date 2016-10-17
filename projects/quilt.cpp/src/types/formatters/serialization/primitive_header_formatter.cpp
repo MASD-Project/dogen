@@ -39,12 +39,12 @@ std::string primitive_header_formatter::static_formatter_name() {
 }
 
 std::string primitive_header_formatter::id() const {
-    static auto r(ownership_hierarchy().archetype());
+    static auto r(archetype_location().archetype());
     return r;
 }
 
 annotations::archetype_location
-primitive_header_formatter::ownership_hierarchy() const {
+primitive_header_formatter::archetype_location() const {
     static annotations::archetype_location
         r(formatters::traits::model_name(), traits::facet_name(),
             primitive_header_formatter::static_formatter_name());

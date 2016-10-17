@@ -54,12 +54,12 @@ std::string class_implementation_formatter::static_formatter_name() {
 }
 
 std::string class_implementation_formatter::id() const {
-    static auto r(ownership_hierarchy().archetype());
+    static auto r(archetype_location().archetype());
     return r;
 }
 
 annotations::archetype_location
-class_implementation_formatter::ownership_hierarchy() const {
+class_implementation_formatter::archetype_location() const {
     static annotations::archetype_location
         r(formatters::traits::model_name(), traits::facet_name(),
             class_implementation_formatter::static_formatter_name());
@@ -110,7 +110,7 @@ boost::filesystem::path class_implementation_formatter::full_path(
 dogen::formatters::artefact class_implementation_formatter::
 format(const context& ctx, const yarn::element& e) const {
     const auto id(e.name().id());
-    assistant a(ctx, ownership_hierarchy(), false/*requires_header_guard*/, id);
+    assistant a(ctx, archetype_location(), false/*requires_header_guard*/, id);
     const auto& o(a.as<yarn::object>(static_formatter_name(), e));
     const auto r(class_implementation_formatter_stitch(a, o));
     return r;

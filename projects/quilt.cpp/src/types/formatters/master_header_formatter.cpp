@@ -36,11 +36,11 @@ master_header_formatter::master_header_formatter(const std::string& facet_name)
         traits::master_header_formatter_name(facet_name)) { }
 
 std::string master_header_formatter::id() const {
-    return ownership_hierarchy().archetype();
+    return archetype_location().archetype();
 }
 
 annotations::archetype_location
-master_header_formatter::ownership_hierarchy() const {
+master_header_formatter::archetype_location() const {
     return ownership_hierarchy_;
 }
 
@@ -89,7 +89,7 @@ boost::filesystem::path master_header_formatter::full_path(
 dogen::formatters::artefact master_header_formatter::
 format(const context& ctx, const yarn::element& e) const {
     const auto id(e.name().id());
-    assistant a(ctx, ownership_hierarchy(), false/*requires_header_guard*/, id);
+    assistant a(ctx, archetype_location(), false/*requires_header_guard*/, id);
     const auto fmtn(ownership_hierarchy_.archetype());
     const auto& mh(a.as<fabric::master_header>(fmtn, e));
     const auto r(master_header_formatter_stitch(a, mh));

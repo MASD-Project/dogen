@@ -47,7 +47,7 @@ public:
 
 public:
     std::string id() const override;
-    annotations::archetype_location ownership_hierarchy() const override;
+    annotations::archetype_location archetype_location() const override;
     std::type_index element_type_index() const override;
 
 public:

@@ -61,11 +61,11 @@ public:
         const yarn::name& model_name) const = 0;
 
     /**
-     * @brief Complete ownership hierarchy for this backend, listing
-     * all available models, facet and formatters.
+     * @brief All artefact locations for this backend, listing all
+     * available kernels, facets and artchetypes.
      */
     virtual std::forward_list<annotations::archetype_location>
-    ownership_hierarchy() const = 0;
+    archetype_location() const = 0;
 
     /**
      * @brief Generates the source code for the backend.

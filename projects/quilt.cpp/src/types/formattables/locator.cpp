@@ -71,7 +71,7 @@ locator::type_group locator::make_type_group(
     std::unordered_set<std::string> processed_facets;
     for (const auto ptr : fc.file_formatters()) {
         const auto& fmt(*ptr);
-        const auto& oh(fmt.ownership_hierarchy());
+        const auto& oh(fmt.archetype_location());
 
         const auto fmtn(oh.archetype());
         const auto fctn(oh.facet());

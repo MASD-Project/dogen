@@ -78,15 +78,15 @@ std::vector<boost::filesystem::path> workflow::obtain_data_dirs() const {
 }
 
 annotations::archetype_location_repository workflow::
-obtain_ownership_hierarchy_repository() const {
-    std::list<annotations::archetype_location> ohs;
+obtain_archetype_location_repository() const {
+    std::list<annotations::archetype_location> als;
     const auto& rg(quilt::workflow::registrar());
     for (const auto b : rg.backends())
-        for (const auto oh : b->ownership_hierarchy())
-            ohs.push_back(oh);
+        for (const auto al : b->archetype_location())
+            als.push_back(al);
 
     annotations::archetype_location_repository_factory f;
-    const auto r(f.make(ohs));
+    const auto r(f.make(als));
     return r;
 }
 
@@ -148,7 +148,7 @@ void workflow::execute() const {
 
     try {
         const auto data_dirs(obtain_data_dirs());
-        const auto ohrp(obtain_ownership_hierarchy_repository());
+        const auto ohrp(obtain_archetype_location_repository());
         const auto atrp(setup_annotations_repository(data_dirs, ohrp));
         const auto m(obtain_yarn_model(data_dirs, ohrp, atrp));
 

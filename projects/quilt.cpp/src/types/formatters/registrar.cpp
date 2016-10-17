@@ -84,7 +84,7 @@ void registrar::validate() const {
         std::set<std::string> all_facets;
         for (const auto& ptr : formatters) {
             const auto& formatter(*ptr);
-            const auto& oh(formatter.ownership_hierarchy());
+            const auto& oh(formatter.archetype_location());
             const auto fctn(oh.facet());
             all_facets.insert(fctn);
             if (formatter.inclusion_support_type() != cs)
@@ -152,7 +152,7 @@ register_formatter(std::shared_ptr<file_formatter_interface> f) {
     if (!f)
         BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
 
-    const auto& oh(f->ownership_hierarchy());
+    const auto& oh(f->archetype_location());
     if (oh.archetype().empty())
         BOOST_THROW_EXCEPTION(registrar_error(empty_formatter_name));
 

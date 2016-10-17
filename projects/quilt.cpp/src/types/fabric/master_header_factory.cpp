@@ -160,8 +160,8 @@ void generator::process_element(const yarn::element& e) {
     }
 
     for (const auto& f : i->second) {
-        const auto fctn(f->ownership_hierarchy().facet());
-        const auto fmtn(f->ownership_hierarchy().archetype());
+        const auto fctn(f->archetype_location().facet());
+        const auto fmtn(f->archetype_location().archetype());
         result_->inclusion_by_facet()[fctn][fmtn].push_back(e.name());
         BOOST_LOG_SEV(lg, debug) << "Added name. Id: " << e.name()
                                  << " Facet: " << fctn << " Formatter: "

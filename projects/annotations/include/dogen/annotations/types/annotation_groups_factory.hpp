@@ -141,7 +141,7 @@ public:
 
 private:
     const std::vector<boost::filesystem::path> data_dirs_;
-    const archetype_location_repository& ownership_hierarchy_repository_;
+    const archetype_location_repository& archetype_location_repository_;
     const type_repository& type_repository_;
     const bool throw_on_missing_type_;
 };

@@ -53,12 +53,12 @@ std::string odb_options_formatter::static_formatter_name() {
 }
 
 std::string odb_options_formatter::id() const {
-    static auto r(ownership_hierarchy().archetype());
+    static auto r(archetype_location().archetype());
     return r;
 }
 
 annotations::archetype_location
-odb_options_formatter::ownership_hierarchy() const {
+odb_options_formatter::archetype_location() const {
     static annotations::archetype_location
         r(formatters::traits::model_name(), traits::facet_name(),
             odb_options_formatter::static_formatter_name());
@@ -95,7 +95,7 @@ boost::filesystem::path odb_options_formatter::full_path(
 dogen::formatters::artefact odb_options_formatter::
 format(const context& ctx, const yarn::element& e) const {
     const auto id(e.name().id());
-    assistant a(ctx, ownership_hierarchy(), false/*requires_header_guard*/, id);
+    assistant a(ctx, archetype_location(), false/*requires_header_guard*/, id);
     const auto& oo(a.as<fabric::odb_options>(static_formatter_name(), e));
     const auto r(odb_options_formatter_stitch(a, oo));
     return r;

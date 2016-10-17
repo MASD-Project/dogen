@@ -14,14 +14,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-17 Mon 10:36]
+#+CAPTION: Clock summary at [2016-10-17 Mon 10:47]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *59:58* |       |       | 100.0 |
+| *Total time*                                                                | *60:08* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 59:58   |       |       | 100.0 |
-| Active                                                                      |         | 59:58 |       | 100.0 |
+| Stories                                                                     | 60:08   |       |       | 100.0 |
+| Active                                                                      |         | 60:08 |       | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  0:32 |   0.9 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:19 |   0.5 |
 | COMPLETED Improve bintray support                                           |         |       |  0:26 |   0.7 |
@@ -46,8 +46,8 @@
 | COMPLETED Generate skeleton for "non-generatable" files                     |         |       |  0:51 |   1.4 |
 | COMPLETED Merge profiles with processed object in yarn.dia                  |         |       |  2:04 |   3.4 |
 | COMPLETED Fix yarn.dia tests                                                |         |       |  2:48 |   4.7 |
-| STARTED Perform the archetype / artefact renames                            |         |       |  4:36 |   7.7 |
-| STARTED Integration of stitch and dogen                                     |         |       |  0:27 |   0.8 |
+| STARTED Perform the archetype / artefact renames                            |         |       |  4:46 |   7.9 |
+| STARTED Integration of stitch and dogen                                     |         |       |  0:27 |   0.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -646,6 +646,7 @@ within the parser. It makes more sense to keep the parser clean and do
 the expansion somewhere else.
 
 *** STARTED Perform the archetype / artefact renames                  :story:
+    CLOCK: [2016-10-17 Mon 10:37]--[2016-10-17 Mon 10:47] =>  0:10
     CLOCK: [2016-10-17 Mon 10:32]--[2016-10-17 Mon 10:36] =>  0:04
     CLOCK: [2016-10-17 Mon 10:16]--[2016-10-17 Mon 10:31] =>  0:15
     CLOCK: [2016-10-17 Mon 09:58]--[2016-10-17 Mon 10:16] =>  0:18

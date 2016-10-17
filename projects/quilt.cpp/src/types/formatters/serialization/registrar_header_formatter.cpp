@@ -37,12 +37,12 @@ std::string registrar_header_formatter::static_formatter_name() {
 }
 
 std::string registrar_header_formatter::id() const {
-    static auto r(ownership_hierarchy().archetype());
+    static auto r(archetype_location().archetype());
     return r;
 }
 
 annotations::archetype_location
-registrar_header_formatter::ownership_hierarchy() const {
+registrar_header_formatter::archetype_location() const {
     static annotations::archetype_location
         r(formatters::traits::model_name(), traits::facet_name(),
             registrar_header_formatter::static_formatter_name());
@@ -79,7 +79,7 @@ boost::filesystem::path registrar_header_formatter::full_path(
 dogen::formatters::artefact registrar_header_formatter::
 format(const context& ctx, const yarn::element& e) const {
     const auto id(e.name().id());
-    assistant a(ctx, ownership_hierarchy(), false/*requires_header_guard*/, id);
+    assistant a(ctx, archetype_location(), false/*requires_header_guard*/, id);
     const auto& rg(a.as<fabric::registrar>(static_formatter_name(), e));
     const auto r(registrar_header_formatter_stitch(a, rg));
     return r;

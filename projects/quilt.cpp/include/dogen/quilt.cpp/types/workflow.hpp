@@ -98,7 +98,7 @@ public:
         const yarn::name& model_name) const override;
 
     std::forward_list<annotations::archetype_location>
-        ownership_hierarchy() const override;
+        archetype_location() const override;
 
     std::forward_list<dogen::formatters::artefact> generate(
         const options::knitting_options& ko,

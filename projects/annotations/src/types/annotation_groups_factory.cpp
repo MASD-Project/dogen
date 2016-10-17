@@ -66,9 +66,9 @@ namespace annotations {
 annotation_groups_factory::
 annotation_groups_factory(
     const std::vector<boost::filesystem::path>& data_dirs,
-    const archetype_location_repository& ohrp,
+    const archetype_location_repository& alrp,
     const type_repository& trp, const bool throw_on_missing_type)
-    : data_dirs_(data_dirs), ownership_hierarchy_repository_(ohrp),
+    : data_dirs_(data_dirs), archetype_location_repository_(alrp),
       type_repository_(trp), throw_on_missing_type_(throw_on_missing_type) { }
 
 inline std::ostream&
@@ -195,9 +195,9 @@ get_bound_labels(const std::unordered_map<std::string, annotation>& profiles,
 std::unordered_map<std::string, annotation> annotation_groups_factory::
 create_annotation_profiles() const {
     profiler prf;
-    const auto& ohrp(ownership_hierarchy_repository_);
+    const auto& alrp(archetype_location_repository_);
     const auto& trp(type_repository_);
-    return prf.generate(data_dirs_, ohrp, trp);
+    return prf.generate(data_dirs_, alrp, trp);
 }
 
 annotation annotation_groups_factory::

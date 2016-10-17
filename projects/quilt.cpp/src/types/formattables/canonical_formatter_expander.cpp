@@ -82,7 +82,7 @@ expand(const formatters::container& fc, model& fm) const {
                 if (formatter.inclusion_support_type() != cs)
                     continue;
 
-                const auto& oh(formatter.ownership_hierarchy());
+                const auto& oh(formatter.archetype_location());
                 const auto fmtn(oh.archetype());
                 const auto fctn(oh.facet());
 

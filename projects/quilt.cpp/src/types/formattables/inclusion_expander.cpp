@@ -141,7 +141,7 @@ make_type_group(const annotations::type_repository& atrp,
     r.inclusion_required = s.select_type_by_name(ir);
 
     for (const auto f : fc.file_formatters()) {
-        const auto& oh(f->ownership_hierarchy());
+        const auto& oh(f->archetype_location());
         const auto fmtn(oh.archetype());
 
         using formatters::inclusion_support_types;
@@ -288,7 +288,7 @@ void inclusion_expander::compute_inclusion_directives(
      * Now we start working at the formatter level.
      */
     for (const auto& fmt : formatters) {
-        const auto fmtn(fmt->ownership_hierarchy().archetype());
+        const auto fmtn(fmt->archetype_location().archetype());
         BOOST_LOG_SEV(lg, debug) << "Formatter: " << fmtn;
 
         /*
@@ -403,7 +403,7 @@ inclusion_expander::compute_inclusion_dependencies(
     }
 
     for (const auto fmt : i->second) {
-        const auto fmtn(fmt->ownership_hierarchy().archetype());
+        const auto fmtn(fmt->archetype_location().archetype());
         BOOST_LOG_SEV(lg, debug) << "Providing for: " << fmtn;
 
         /*

@@ -42,12 +42,12 @@ std::string visitor_header_formatter::static_formatter_name() {
 }
 
 std::string visitor_header_formatter::id() const {
-    static auto r(ownership_hierarchy().archetype());
+    static auto r(archetype_location().archetype());
     return r;
 }
 
 annotations::archetype_location
-visitor_header_formatter::ownership_hierarchy() const {
+visitor_header_formatter::archetype_location() const {
     static annotations::archetype_location
         r(formatters::traits::model_name(), traits::facet_name(),
             visitor_header_formatter::static_formatter_name());
@@ -93,7 +93,7 @@ boost::filesystem::path visitor_header_formatter::full_path(
 dogen::formatters::artefact visitor_header_formatter::
 format(const context& ctx, const yarn::element& e) const {
     const auto id(e.name().id());
-    assistant a(ctx, ownership_hierarchy(), true/*requires_header_guard*/, id);
+    assistant a(ctx, archetype_location(), true/*requires_header_guard*/, id);
     const auto& v(a.as<yarn::visitor>(static_formatter_name(), e));
     const auto r(visitor_header_formatter_stitch(a, v));
     return r;

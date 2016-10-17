@@ -40,12 +40,12 @@ std::string enum_header_formatter::static_formatter_name() {
 }
 
 std::string enum_header_formatter::id() const {
-    static auto r(ownership_hierarchy().archetype());
+    static auto r(archetype_location().archetype());
     return r;
 }
 
 annotations::archetype_location enum_header_formatter::
-ownership_hierarchy() const {
+archetype_location() const {
     static annotations::archetype_location
         r(formatters::traits::model_name(), traits::facet_name(),
             enum_header_formatter::static_formatter_name());
@@ -85,7 +85,7 @@ boost::filesystem::path enum_header_formatter::full_path(
 dogen::formatters::artefact enum_header_formatter::
 format(const context& ctx, const yarn::element& e) const {
     const auto id(e.name().id());
-    assistant a(ctx, ownership_hierarchy(), true/*requires_header_guard*/, id);
+    assistant a(ctx, archetype_location(), true/*requires_header_guard*/, id);
     const auto& ye(a.as<yarn::enumeration>(static_formatter_name(), e));
     const auto r(enum_header_formatter_stitch(a, ye));
     return r;

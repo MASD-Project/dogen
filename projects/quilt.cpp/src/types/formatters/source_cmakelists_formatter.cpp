@@ -49,12 +49,12 @@ std::string source_cmakelists_formatter::static_formatter_name() {
 }
 
 std::string source_cmakelists_formatter::id() const {
-    static auto r(ownership_hierarchy().archetype());
+    static auto r(archetype_location().archetype());
     return r;
 }
 
 annotations::archetype_location source_cmakelists_formatter::
-ownership_hierarchy() const {
+archetype_location() const {
     static annotations::archetype_location
         r(formatters::traits::model_name(), traits::cmake_facet_name(),
             source_cmakelists_formatter::static_formatter_name());
@@ -92,7 +92,7 @@ boost::filesystem::path source_cmakelists_formatter::full_path(
 dogen::formatters::artefact source_cmakelists_formatter::
 format(const context& ctx, const yarn::element& e) const {
     const auto id(e.name().id());
-    assistant a(ctx, ownership_hierarchy(), false/*requires_header_guard*/, id);
+    assistant a(ctx, archetype_location(), false/*requires_header_guard*/, id);
     const auto& cm(a.as<fabric::cmakelists>(static_formatter_name(), e));
     const auto r(source_cmakelists_formatter_stitch(a, cm));
     return r;

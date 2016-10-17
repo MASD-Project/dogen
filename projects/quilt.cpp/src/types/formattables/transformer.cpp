@@ -77,7 +77,7 @@ transform(const formatters::container& fc, const yarn::model& m) const {
 
         auto& fmt_props(fbl.element_properties().formatter_properties());
         for (const auto& fmt : j->second) {
-            const auto fmtn(fmt->ownership_hierarchy().archetype());
+            const auto fmtn(fmt->archetype_location().archetype());
             const auto pair(std::make_pair(fmtn, formatter_properties()));
             const auto ret(fmt_props.insert(pair));
             if (!ret.second) {

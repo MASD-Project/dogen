@@ -42,12 +42,12 @@ std::string forward_declarations_formatter::static_formatter_name() {
 }
 
 std::string forward_declarations_formatter::id() const {
-    static auto r(ownership_hierarchy().archetype());
+    static auto r(archetype_location().archetype());
     return r;
 }
 
 annotations::archetype_location
-forward_declarations_formatter::ownership_hierarchy() const {
+forward_declarations_formatter::archetype_location() const {
     static annotations::archetype_location
         r(formatters::traits::model_name(), traits::facet_name(),
             forward_declarations_formatter::static_formatter_name());
@@ -89,7 +89,7 @@ boost::filesystem::path forward_declarations_formatter::full_path(
 dogen::formatters::artefact forward_declarations_formatter::
 format(const context& ctx, const yarn::element& e) const {
     const auto id(e.name().id());
-    assistant a(ctx, ownership_hierarchy(), true/*requires_header_guard*/, id);
+    assistant a(ctx, archetype_location(), true/*requires_header_guard*/, id);
 
     const auto fmtn(static_formatter_name());
     const auto& fd(a.as<fabric::forward_declarations>(fmtn, e));
