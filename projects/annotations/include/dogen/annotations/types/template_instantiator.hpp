@@ -42,10 +42,10 @@ namespace annotations {
 
 class template_instantiator {
 public:
-    template_instantiator(const archetype_location_repository& ohrp);
+    template_instantiator(const archetype_location_repository& alrp);
 
 private:
-    void validate(const archetype_location& oh, const name& n,
+    void validate(const archetype_location& al, const name& n,
         const template_kinds tk) const;
 
 public:

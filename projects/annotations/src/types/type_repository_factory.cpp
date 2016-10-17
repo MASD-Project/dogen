@@ -78,11 +78,11 @@ std::list<type_template> type_repository_factory::hydrate_templates(
 }
 
 std::list<type> type_repository_factory::instantiate_templates(
-    const archetype_location_repository& ohrp,
+    const archetype_location_repository& alrp,
     const std::list<type_template>& tts) const {
     std::list<type> r;
 
-    const template_instantiator ins(ohrp);
+    const template_instantiator ins(alrp);
     unsigned int counter(0);
     for (const auto tt : tts) {
         if (!ins.is_instantiable(tt.kind())) {
@@ -130,12 +130,12 @@ create_repository(const std::list<type>& ts) const {
 }
 
 type_repository type_repository_factory::make(
-    const archetype_location_repository& ohrp,
+    const archetype_location_repository& alrp,
     const std::vector<boost::filesystem::path>& dirs) const {
     BOOST_LOG_SEV(lg, info) << "Generating repository.";
 
     const auto original(hydrate_templates(dirs));
-    const auto instantiated(instantiate_templates(ohrp, original));
+    const auto instantiated(instantiate_templates(alrp, original));
     const auto r(create_repository(instantiated));
 
     BOOST_LOG_SEV(lg, info) << "Generated repository: " << r;

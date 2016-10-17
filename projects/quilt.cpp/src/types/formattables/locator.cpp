@@ -71,10 +71,10 @@ locator::type_group locator::make_type_group(
     std::unordered_set<std::string> processed_facets;
     for (const auto ptr : fc.file_formatters()) {
         const auto& fmt(*ptr);
-        const auto& oh(fmt.archetype_location());
+        const auto& al(fmt.archetype_location());
 
-        const auto fmtn(oh.archetype());
-        const auto fctn(oh.facet());
+        const auto fmtn(al.archetype());
+        const auto fctn(al.facet());
         const auto pf(traits::postfix());
         formatter_type_group fmt_tg;
         const auto pfix(traits::postfix());

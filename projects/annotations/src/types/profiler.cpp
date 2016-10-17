@@ -172,11 +172,11 @@ void profiler::validate(const profile_map_type& pm) const {
     BOOST_LOG_SEV(lg, debug) << "Validated all profiles.";
 }
 
-void profiler::setup_annotations(const archetype_location_repository& ohrp,
+void profiler::setup_annotations(const archetype_location_repository& alrp,
     const type_repository& trp, profile_map_type& pm) const {
     BOOST_LOG_SEV(lg, debug) << "Instantiating value templates.";
 
-    template_instantiator ti(ohrp);
+    template_instantiator ti(alrp);
     for (auto& pair : pm) {
         const auto prfn(pair.first);
         auto& pc(pair.second);
@@ -291,7 +291,7 @@ profiler::create_annotation_map(const profile_map_type& pm) const {
 
 std::unordered_map<std::string, annotation>
 profiler::generate(const std::vector<boost::filesystem::path>& data_dirs,
-    const archetype_location_repository& ohrp,
+    const archetype_location_repository& alrp,
     const type_repository& trp) const {
 
     BOOST_LOG_SEV(lg, debug) << "Generating profiles.";
@@ -320,7 +320,7 @@ profiler::generate(const std::vector<boost::filesystem::path>& data_dirs,
      * of the entry templates contained within each profile and
      * copying the results in the profile's annotation result.
      */
-    setup_annotations(ohrp, trp, pas);
+    setup_annotations(alrp, trp, pas);
 
     /*
      * We now merge the annotation objects according to the profile

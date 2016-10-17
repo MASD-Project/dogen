@@ -63,7 +63,7 @@ private:
      */
     std::list<intermediate_model> obtain_intermediate_models(
         const std::vector<boost::filesystem::path>& data_dirs,
-        const annotations::archetype_location_repository& ohrp,
+        const annotations::archetype_location_repository& alrp,
         const annotations::type_repository& atrp,
         const options::input_options& io) const;
 
@@ -87,7 +87,7 @@ private:
 
 public:
     model execute(const std::vector<boost::filesystem::path>& data_dirs,
-        const annotations::archetype_location_repository& ohrp,
+        const annotations::archetype_location_repository& alrp,
         const annotations::type_repository& atrp,
         const options::input_options& io) const;
 

@@ -82,9 +82,9 @@ expand(const formatters::container& fc, model& fm) const {
                 if (formatter.inclusion_support_type() != cs)
                     continue;
 
-                const auto& oh(formatter.archetype_location());
-                const auto fmtn(oh.archetype());
-                const auto fctn(oh.facet());
+                const auto& al(formatter.archetype_location());
+                const auto fmtn(al.archetype());
+                const auto fctn(al.facet());
 
                 using formatters::traits;
                 const auto cfmtn(traits::canonical_formatter_name(fctn));

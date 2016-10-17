@@ -52,7 +52,7 @@ public:
      * @brief Initialise the annotations object factory.
      *
      * @param data_dirs directories in which to look for data files.
-     * @param ohrp the ownership hierarchy repository.
+     * @param alrp the archetype location repository.
      * @param trp the type repository.
      * @param throw_on_missing_type If true, any annotation entry for
      * which a type does not exist will result on an exception. If
@@ -60,7 +60,7 @@ public:
      */
     annotation_groups_factory(
         const std::vector<boost::filesystem::path>& data_dirs,
-        const archetype_location_repository& ohrp,
+        const archetype_location_repository& alrp,
         const type_repository& trp, const bool throw_on_missing_type = true);
 
 private:

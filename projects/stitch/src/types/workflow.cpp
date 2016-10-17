@@ -119,11 +119,11 @@ workflow::read_text_templates(
 
 annotations::archetype_location_repository
 workflow::obtain_ownership_hierarchy_repository() const {
-    std::list<annotations::archetype_location> ohs;
-    ohs.push_back(formatter_.ownership_hierarchy());
+    std::list<annotations::archetype_location> als;
+    als.push_back(formatter_.ownership_hierarchy());
 
     annotations::archetype_location_repository_factory f;
-    const auto r(f.make(ohs));
+    const auto r(f.make(als));
     return r;
 }
 
@@ -135,19 +135,19 @@ dogen::formatters::repository workflow::create_formatters_repository(
 
 annotations::type_repository workflow::create_annotations_type_repository(
     const std::vector<boost::filesystem::path>& data_dirs,
-    const annotations::archetype_location_repository& ohrp) const {
+    const annotations::archetype_location_repository& alrp) const {
     annotations::type_repository_factory f;
-    return f.make(ohrp, data_dirs);
+    return f.make(alrp, data_dirs);
 }
 
 std::forward_list<text_template> workflow::parse_text_templates(
     const std::vector<boost::filesystem::path>& data_dirs,
-    const annotations::archetype_location_repository& ohrp,
+    const annotations::archetype_location_repository& alrp,
     const annotations::type_repository& atrp,
     const std::forward_list<std::pair<boost::filesystem::path, std::string> >&
     text_templates_as_string) const {
     std::forward_list<text_template> r;
-    const annotations::annotation_groups_factory f(data_dirs, ohrp, atrp);
+    const annotations::annotation_groups_factory f(data_dirs, alrp, atrp);
     const parser p(f);
     for (const auto& pair : text_templates_as_string) {
         BOOST_LOG_SEV(lg, debug) << "Parsing file: "
@@ -198,11 +198,11 @@ void workflow::execute(const boost::filesystem::path& p) const {
     validate_text_template_paths(paths);
 
     const auto templates_as_strings(read_text_templates(paths));
-    const auto ohrp(obtain_ownership_hierarchy_repository());
+    const auto alrp(obtain_ownership_hierarchy_repository());
     const auto data_dirs(create_data_directories());
-    const auto atrp(create_annotations_type_repository(data_dirs, ohrp));
+    const auto atrp(create_annotations_type_repository(data_dirs, alrp));
 
-    auto tt(parse_text_templates(data_dirs, ohrp, atrp, templates_as_strings));
+    auto tt(parse_text_templates(data_dirs, alrp, atrp, templates_as_strings));
     const auto frp(create_formatters_repository(data_dirs));
     populate_properties(atrp, frp, tt);
     const auto files(format_text_templates(tt));

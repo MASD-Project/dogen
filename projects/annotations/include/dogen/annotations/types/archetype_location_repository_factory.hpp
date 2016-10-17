@@ -48,7 +48,7 @@ private:
 
 public:
     archetype_location_repository
-        make(const std::list<archetype_location>& ohs) const;
+        make(const std::list<archetype_location>& als) const;
 };
 
 } }

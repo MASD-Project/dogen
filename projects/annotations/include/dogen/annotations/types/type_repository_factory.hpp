@@ -53,7 +53,7 @@ private:
      * instances.
      */
     std::list<type> instantiate_templates(
-        const archetype_location_repository& ohrp,
+        const archetype_location_repository& alrp,
         const std::list<type_template>& tts) const;
 
     /**
@@ -68,7 +68,7 @@ public:
      * supplied directories.
      */
     type_repository make(
-        const archetype_location_repository& ohrp,
+        const archetype_location_repository& alrp,
         const std::vector<boost::filesystem::path>& data_dirs) const;
 };
 

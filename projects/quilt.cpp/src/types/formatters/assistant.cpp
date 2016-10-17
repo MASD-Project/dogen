@@ -95,15 +95,15 @@ get_identifiable_and_qualified(const IdentifiableAndQualified& iaq) {
 }
 
 assistant::
-assistant(const context& ctx, const annotations::archetype_location& oh,
+assistant(const context& ctx, const annotations::archetype_location& al,
     const bool requires_header_guard, const std::string& id) :
     context_(ctx),
     formatter_properties_(obtain_formatter_properties(
-            context_.element_properties(), oh.archetype())),
-    ownership_hierarchy_(oh), requires_header_guard_(requires_header_guard) {
+            context_.element_properties(), al.archetype())),
+    ownership_hierarchy_(al), requires_header_guard_(requires_header_guard) {
 
     BOOST_LOG_SEV(lg, debug) << "Processing element: " << id
-                             << " using: " << oh.archetype();
+                             << " using: " << al.archetype();
 
     dogen::formatters::indent_filter::push(filtering_stream_, 4);
     filtering_stream_.push(stream_);

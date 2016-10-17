@@ -52,7 +52,7 @@ namespace formatters {
  */
 class assistant final {
 public:
-    assistant(const context& ctx, const annotations::archetype_location& oh,
+    assistant(const context& ctx, const annotations::archetype_location& al,
         const bool requires_header_guard, const std::string& id);
 
 private:

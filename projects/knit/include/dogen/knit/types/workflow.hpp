@@ -105,14 +105,14 @@ private:
      */
     annotations::type_repository setup_annotations_repository(
         const std::vector<boost::filesystem::path>& data_dirs,
-        const annotations::archetype_location_repository& ohrp) const;
+        const annotations::archetype_location_repository& alrp) const;
 
     /**
      * @brief Obtain the yarn model.
      */
     yarn::model
     obtain_yarn_model(const std::vector<boost::filesystem::path>& data_dirs,
-        const annotations::archetype_location_repository& ohrp,
+        const annotations::archetype_location_repository& alrp,
         const annotations::type_repository& atrp) const;
 
     /**

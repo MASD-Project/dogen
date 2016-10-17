@@ -84,8 +84,8 @@ void registrar::validate() const {
         std::set<std::string> all_facets;
         for (const auto& ptr : formatters) {
             const auto& formatter(*ptr);
-            const auto& oh(formatter.archetype_location());
-            const auto fctn(oh.facet());
+            const auto& al(formatter.archetype_location());
+            const auto fctn(al.facet());
             all_facets.insert(fctn);
             if (formatter.inclusion_support_type() != cs)
                 continue;
@@ -95,7 +95,7 @@ void registrar::validate() const {
              */
             const auto i(facets_found.find(fctn));
             if (i != facets_found.end()) {
-                const auto fmtn(oh.archetype());
+                const auto fmtn(al.archetype());
                 BOOST_LOG_SEV(lg, error) << more_than_one_canonical_formatter
                                          << fctn << " formatter: " << fmtn
                                          << " type: " << ti.name();
@@ -152,17 +152,17 @@ register_formatter(std::shared_ptr<file_formatter_interface> f) {
     if (!f)
         BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
 
-    const auto& oh(f->archetype_location());
-    if (oh.archetype().empty())
+    const auto& al(f->archetype_location());
+    if (al.archetype().empty())
         BOOST_THROW_EXCEPTION(registrar_error(empty_formatter_name));
 
-    if (oh.facet().empty())
+    if (al.facet().empty())
         BOOST_THROW_EXCEPTION(registrar_error(empty_facet_name));
 
-    if (oh.kernel().empty())
+    if (al.kernel().empty())
         BOOST_THROW_EXCEPTION(registrar_error(empty_model_name));
 
-    ownership_hierarchy_.push_front(oh);
+    ownership_hierarchy_.push_front(al);
     formatter_container_.file_formatters_.push_front(f);
 
     /*
@@ -177,7 +177,7 @@ register_formatter(std::shared_ptr<file_formatter_interface> f) {
      * formatter into this container has the helpful side-effect of
      * ensuring the formatter id is unique in formatter space.
      */
-    const auto fmtn(oh.archetype());
+    const auto fmtn(al.archetype());
     auto& fffn(formatter_container_.file_formatters_by_formatter_name());
     const auto pair(std::make_pair(fmtn, f));
     const auto inserted(fffn.insert(pair).second);

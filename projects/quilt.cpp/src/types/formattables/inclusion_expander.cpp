@@ -141,8 +141,8 @@ make_type_group(const annotations::type_repository& atrp,
     r.inclusion_required = s.select_type_by_name(ir);
 
     for (const auto f : fc.file_formatters()) {
-        const auto& oh(f->archetype_location());
-        const auto fmtn(oh.archetype());
+        const auto& al(f->archetype_location());
+        const auto fmtn(al.archetype());
 
         using formatters::inclusion_support_types;
         static const auto ns(inclusion_support_types::not_supported);

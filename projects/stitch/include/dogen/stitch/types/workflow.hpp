@@ -110,7 +110,7 @@ private:
      */
     annotations::type_repository create_annotations_type_repository(
         const std::vector<boost::filesystem::path>& data_dirs,
-        const annotations::archetype_location_repository& ohrp)
+        const annotations::archetype_location_repository& alrp)
         const;
 
     /**
@@ -118,7 +118,7 @@ private:
      */
     std::forward_list<text_template> parse_text_templates(
         const std::vector<boost::filesystem::path>& data_dirs,
-        const annotations::archetype_location_repository& ohrp,
+        const annotations::archetype_location_repository& alrp,
         const annotations::type_repository& rp,
         const std::forward_list<
         std::pair<boost::filesystem::path, std::string>

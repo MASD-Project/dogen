@@ -61,8 +61,9 @@ private:
      * @brief Performs an expansion of all annotations objects on the
      * model.
      */
-    void expand_annotations(const std::vector<boost::filesystem::path>& data_dirs,
-        const annotations::archetype_location_repository& ohrp,
+    void expand_annotations(
+        const std::vector<boost::filesystem::path>& data_dirs,
+        const annotations::archetype_location_repository& alrp,
         const annotations::type_repository& atrp, intermediate_model& im) const;
 
     /**
@@ -89,7 +90,7 @@ public:
      */
     std::list<intermediate_model>
     execute(const std::vector<boost::filesystem::path>& data_dirs,
-        const annotations::archetype_location_repository& ohrp,
+        const annotations::archetype_location_repository& alrp,
         const annotations::type_repository& atrp,
         const options::input_options& io,
         frontend_registrar& rg) const;
