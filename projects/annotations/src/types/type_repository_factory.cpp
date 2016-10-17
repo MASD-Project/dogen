@@ -113,16 +113,16 @@ create_repository(const std::list<type>& ts) const {
             BOOST_THROW_EXCEPTION(building_error(duplicate_qualified_name + n));
         }
 
-        const auto& oh(t.ownership_hierarchy());
-        if (!oh.facet().empty())
-            r.types_by_facet_name()[oh.facet()].push_back(t);
+        const auto& al(t.archetype_location());
+        if (!al.facet().empty())
+            r.types_by_facet_name()[al.facet()].push_back(t);
 
-        if (!oh.archetype().empty())
-            r.types_by_formatter_name()[oh.archetype()]
+        if (!al.archetype().empty())
+            r.types_by_formatter_name()[al.archetype()]
                 .push_back(t);
 
-        if (!oh.kernel().empty())
-            r.types_by_model_name()[oh.kernel()]
+        if (!al.kernel().empty())
+            r.types_by_model_name()[al.kernel()]
                 .push_back(t);
     }
 

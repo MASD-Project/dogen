@@ -28,7 +28,7 @@ type mock_type_factory::containing_namespaces() const {
     type r;
     r.name().simple("containing_namespaces");
     r.name().qualified("containing_namespaces");
-    r.ownership_hierarchy().kernel("stitch");
+    r.archetype_location().kernel("stitch");
     r.value_type(value_types::text);
     r.scope(scope_types::not_applicable);
     return r;
@@ -38,7 +38,7 @@ type mock_type_factory::copyright_notice() const {
     type r;
     r.name().simple("copyright_notice");
     r.name().qualified("copyright_notice");
-    r.ownership_hierarchy().kernel("formatters");
+    r.archetype_location().kernel("formatters");
     r.value_type(value_types::text);
     r.scope(scope_types::not_applicable);
     return r;
@@ -48,7 +48,7 @@ type mock_type_factory::licence_name() const {
     type r;
     r.name().simple("licence_name");
     r.name().qualified("licence_name");
-    r.ownership_hierarchy().kernel("formatters");
+    r.archetype_location().kernel("formatters");
     r.value_type(value_types::text);
     r.scope(scope_types::not_applicable);
     return r;
@@ -58,7 +58,7 @@ type mock_type_factory::create_comment() const {
     type r;
     r.name().simple("comment");
     r.name().qualified("yarn.dia.comment");
-    r.ownership_hierarchy().kernel("yarn.dia");
+    r.archetype_location().kernel("yarn.dia");
     r.value_type(value_types::text);
     r.scope(scope_types::not_applicable);
     return r;

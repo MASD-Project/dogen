@@ -49,9 +49,9 @@ void mock_type_repository_factory::add_type(
         BOOST_THROW_EXCEPTION(building_error(duplicate_qualified_name + n));
     }
 
-    const auto& oh(t.ownership_hierarchy());
-    trp.types_by_facet_name()[oh.facet()].push_back(t);
-    trp.types_by_formatter_name()[oh.archetype()].push_back(t);
+    const auto& al(t.archetype_location());
+    trp.types_by_facet_name()[al.facet()].push_back(t);
+    trp.types_by_formatter_name()[al.archetype()].push_back(t);
 }
 
 type_repository mock_type_repository_factory::

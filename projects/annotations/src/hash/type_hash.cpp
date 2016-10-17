@@ -50,7 +50,7 @@ std::size_t type_hasher::hash(const type& v) {
     combine(seed, v.name());
     combine(seed, v.value_type());
     combine(seed, v.scope());
-    combine(seed, v.ownership_hierarchy());
+    combine(seed, v.archetype_location());
     combine(seed, hash_boost_shared_ptr_dogen_annotations_value(v.default_value()));
 
     return seed;

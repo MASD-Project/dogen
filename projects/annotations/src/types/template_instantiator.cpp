@@ -130,7 +130,7 @@ type template_instantiator::to_type(const type_template& tt) const {
     r.name(tt.name());
     r.value_type(tt.value_type());
     r.scope(tt.scope());
-    r.ownership_hierarchy(tt.ownership_hierarchy());
+    r.archetype_location(tt.ownership_hierarchy());
     r.default_value(tt.default_value());
     return r;
 }
@@ -161,9 +161,9 @@ instantiate_global_template(const type_template& tt) const {
 
         auto t(to_type(tt));
         t.name().qualified(model_name + "." + tt.name().simple());
-        t.ownership_hierarchy().kernel(model_name);
-        t.ownership_hierarchy().facet(empty);
-        t.ownership_hierarchy().archetype(empty);
+        t.archetype_location().kernel(model_name);
+        t.archetype_location().facet(empty);
+        t.archetype_location().archetype(empty);
         r.push_back(t);
 
         const auto& facet_names(pair.second);
@@ -171,9 +171,9 @@ instantiate_global_template(const type_template& tt) const {
             auto t(to_type(tt));
             const auto sn(tt.name().simple());
             t.name().qualified(facet_name + "." + sn);
-            t.ownership_hierarchy().kernel(model_name);
-            t.ownership_hierarchy().facet(facet_name);
-            t.ownership_hierarchy().archetype(empty);
+            t.archetype_location().kernel(model_name);
+            t.archetype_location().facet(facet_name);
+            t.archetype_location().archetype(empty);
             r.push_back(t);
         }
     }
@@ -187,7 +187,7 @@ instantiate_global_template(const type_template& tt) const {
 
         const auto arch(al.archetype());
         t.name().qualified(arch + "." + tt.name().simple());
-        t.ownership_hierarchy(al);
+        t.archetype_location(al);
         r.push_back(t);
     }
     return r;
@@ -206,9 +206,9 @@ instantiate_facet_template(const type_template& tt) const {
         for (const auto facet_name : facet_names) {
             auto t(to_type(tt));
             t.name().qualified(facet_name + "." + tt.name().simple());
-            t.ownership_hierarchy().kernel(model_name);
-            t.ownership_hierarchy().facet(facet_name);
-            t.ownership_hierarchy().archetype(empty);
+            t.archetype_location().kernel(model_name);
+            t.archetype_location().facet(facet_name);
+            t.archetype_location().archetype(empty);
             r.push_back(t);
         }
     }
@@ -230,7 +230,7 @@ instantiate_formatter_template(const type_template& tt) const {
         auto t(to_type(tt));
         const auto arch(al.archetype());
         t.name().qualified(arch + "." + t.name().simple());
-        t.ownership_hierarchy(al);
+        t.archetype_location(al);
         r.push_back(t);
     }
     return r;

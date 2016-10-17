@@ -71,7 +71,7 @@ populate(const unsigned int position, result_type& v) {
     v.name(create_dogen_annotations_name(position + 0));
     v.value_type(create_dogen_annotations_value_types(position + 1));
     v.scope(create_dogen_annotations_scope_types(position + 2));
-    v.ownership_hierarchy(create_dogen_annotations_archetype_location(position + 3));
+    v.archetype_location(create_dogen_annotations_archetype_location(position + 3));
     v.default_value(create_boost_shared_ptr_dogen_annotations_value(position + 4));
 }
 

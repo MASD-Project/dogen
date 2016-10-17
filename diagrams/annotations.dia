@@ -1291,7 +1291,7 @@ yet imposing some constraints on the shape of the data.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#ownership_hierarchy#</dia:string>
+            <dia:string>#archetype_location#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#archetype_location#</dia:string>
