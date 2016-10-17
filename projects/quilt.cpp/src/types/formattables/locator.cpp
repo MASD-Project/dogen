@@ -73,12 +73,12 @@ locator::type_group locator::make_type_group(
         const auto& fmt(*ptr);
         const auto& al(fmt.archetype_location());
 
-        const auto fmtn(al.archetype());
+        const auto arch(al.archetype());
         const auto fctn(al.facet());
         const auto pf(traits::postfix());
         formatter_type_group fmt_tg;
         const auto pfix(traits::postfix());
-        fmt_tg.formatter_postfix = s.select_type_by_name(fmtn, pfix);
+        fmt_tg.formatter_postfix = s.select_type_by_name(arch, pfix);
 
         auto dir(s.try_type_field_by_name(fctn, traits::directory()));
         if (dir)
@@ -88,7 +88,7 @@ locator::type_group locator::make_type_group(
         if (postfix)
             fmt_tg.facet_postfix = *postfix;
 
-        r.formatters_type_group[fmtn] = fmt_tg;
+        r.formatters_type_group[arch] = fmt_tg;
 
         const bool done(processed_facets.find(fctn) != processed_facets.end());
         if (fmt_tg.facet_directory && !done) {
@@ -134,7 +134,7 @@ locator_configuration locator::make_configuration(
     }
 
     for (const auto& pair : tg.formatters_type_group) {
-        const auto fmtn(pair.first);
+        const auto arch(pair.first);
         const auto fmt_tg(pair.second);
         locator_formatter_configuration fmt_cfg;
 
@@ -151,7 +151,7 @@ locator_configuration locator::make_configuration(
         const auto pfix(fmt_tg.formatter_postfix);
         fmt_cfg.formatter_postfix(s.get_text_content_or_default(pfix));
 
-        r.formatter_configurations()[fmtn] = fmt_cfg;
+        r.formatter_configurations()[arch] = fmt_cfg;
     }
 
     const auto& hfe(tg.header_file_extension);

@@ -99,10 +99,10 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
     if (si.has_std_string)
         builder.add(inclusion_constants::boost::algorithm::string());
 
-    const auto io_cfmtn(io::traits::canonical_archetype());
-    builder.add(o.transparent_associations(), io_cfmtn);
-    builder.add(o.opaque_associations(), io_cfmtn);
-    builder.add(o.parent(), io_cfmtn);
+    const auto io_carch(io::traits::canonical_archetype());
+    builder.add(o.transparent_associations(), io_carch);
+    builder.add(o.opaque_associations(), io_carch);
+    builder.add(o.parent(), io_carch);
 
     if (o.is_visitation_leaf()) {
         /*

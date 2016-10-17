@@ -53,8 +53,8 @@ std::list<std::string> master_header_formatter::inclusion_dependencies(
     const formattables::inclusion_dependencies_builder_factory& f,
     const yarn::element& e) const {
     const auto fctn(ownership_hierarchy_.facet());
-    const auto fmtn(ownership_hierarchy_.archetype());
-    const auto& mh(assistant::as<fabric::master_header>(fmtn, e));
+    const auto arch(ownership_hierarchy_.archetype());
+    const auto& mh(assistant::as<fabric::master_header>(arch, e));
 
     const auto i(mh.inclusion_by_facet().find(fctn));
     if (i == mh.inclusion_by_facet().end())
@@ -62,9 +62,9 @@ std::list<std::string> master_header_formatter::inclusion_dependencies(
 
     auto builder(f.make());
     for (const auto& pair : i->second) {
-        const auto& fmtn(pair.first);
+        const auto& arch(pair.first);
         const auto& names(pair.second);
-        builder.add(names, fmtn);
+        builder.add(names, arch);
     }
     return builder.build();
 }
@@ -76,22 +76,22 @@ master_header_formatter::inclusion_support_type() const {
 
 boost::filesystem::path master_header_formatter::inclusion_path(
     const formattables::locator& l, const yarn::name& n) const {
-    const auto fmtn(ownership_hierarchy_.archetype());
-    return l.make_inclusion_path_for_cpp_header(n, fmtn);
+    const auto arch(ownership_hierarchy_.archetype());
+    return l.make_inclusion_path_for_cpp_header(n, arch);
 }
 
 boost::filesystem::path master_header_formatter::full_path(
     const formattables::locator& l, const yarn::name& n) const {
-    const auto fmtn(ownership_hierarchy_.archetype());
-    return l.make_full_path_for_cpp_header(n, fmtn);
+    const auto arch(ownership_hierarchy_.archetype());
+    return l.make_full_path_for_cpp_header(n, arch);
 }
 
 dogen::formatters::artefact master_header_formatter::
 format(const context& ctx, const yarn::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), false/*requires_header_guard*/, id);
-    const auto fmtn(ownership_hierarchy_.archetype());
-    const auto& mh(a.as<fabric::master_header>(fmtn, e));
+    const auto arch(ownership_hierarchy_.archetype());
+    const auto& mh(a.as<fabric::master_header>(arch, e));
     const auto r(master_header_formatter_stitch(a, mh));
     return r;
 }

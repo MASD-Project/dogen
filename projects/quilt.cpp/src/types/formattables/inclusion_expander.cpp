@@ -44,7 +44,7 @@ const std::string boost_name("boost");
 const std::string boost_serialization_gregorian("greg_serialize.hpp");
 
 const std::string duplicate_element_name("Duplicate delement name: ");
-const std::string missing_formatter_name("Formatter name not found: ");
+const std::string missing_archetype("Archetype not found: ");
 const std::string empty_include_directive("Include directive is empty.");
 const std::string formatter_not_found_for_type(
     "Formatter not found for type: ");
@@ -142,23 +142,23 @@ make_type_group(const annotations::type_repository& atrp,
 
     for (const auto f : fc.file_formatters()) {
         const auto& al(f->archetype_location());
-        const auto fmtn(al.archetype());
+        const auto arch(al.archetype());
 
         using formatters::inclusion_support_types;
         static const auto ns(inclusion_support_types::not_supported);
         if (f->inclusion_support_type() == ns) {
-            BOOST_LOG_SEV(lg, debug) << "Skipping formatter: " << fmtn;
+            BOOST_LOG_SEV(lg, debug) << "Skipping archetype: " << arch;
             continue;
         }
 
         formattater_type_group ftg;
         const auto& id(traits::inclusion_directive());
-        ftg.inclusion_directive = s.select_type_by_name(fmtn, id);
+        ftg.inclusion_directive = s.select_type_by_name(arch, id);
 
         // note: redefinition by design as scopes are different.
         const auto& ir(traits::inclusion_required());
-        ftg.inclusion_required = s.select_type_by_name(fmtn, ir);
-        r.formattaters_type_group[fmtn] = ftg;
+        ftg.inclusion_required = s.select_type_by_name(arch, ir);
+        r.formattaters_type_group[arch] = ftg;
     }
 
     BOOST_LOG_SEV(lg, debug) << "Created field definitions. Result: " << r;
@@ -183,8 +183,8 @@ inclusion_expander::make_inclusion_directive_configuration(
 
     const auto i(tg.formattaters_type_group.find(formatter_name));
     if (i == tg.formattaters_type_group.end()) {
-        BOOST_LOG_SEV(lg, error) << missing_formatter_name;
-        BOOST_THROW_EXCEPTION(expansion_error(missing_formatter_name));
+        BOOST_LOG_SEV(lg, error) << missing_archetype;
+        BOOST_THROW_EXCEPTION(expansion_error(missing_archetype));
     }
 
     const auto& ft(i->second);
@@ -288,8 +288,8 @@ void inclusion_expander::compute_inclusion_directives(
      * Now we start working at the formatter level.
      */
     for (const auto& fmt : formatters) {
-        const auto fmtn(fmt->archetype_location().archetype());
-        BOOST_LOG_SEV(lg, debug) << "Formatter: " << fmtn;
+        const auto arch(fmt->archetype_location().archetype());
+        BOOST_LOG_SEV(lg, debug) << "Archetype: " << arch;
 
         /*
          * Does the type require an inclusion directive for this
@@ -301,10 +301,10 @@ void inclusion_expander::compute_inclusion_directives(
          *
          * Again, we default this to true.
          */
-        const auto id_cfg(make_inclusion_directive_configuration(tg, fmtn, o));
+        const auto id_cfg(make_inclusion_directive_configuration(tg, arch, o));
         if (!id_cfg.inclusion_required()) {
             BOOST_LOG_SEV(lg, debug) << "Inclusion directive not required "
-                                     << " for formatter: " << fmtn;
+                                     << " for archetype: " << arch;
             continue;
         }
 
@@ -328,7 +328,7 @@ void inclusion_expander::compute_inclusion_directives(
         }
 
         BOOST_LOG_SEV(lg, debug) << "Inclusion directive: " << directive;
-        insert_inclusion_directive(id, fmtn, directive, idc);
+        insert_inclusion_directive(id, arch, directive, idc);
     }
 }
 
@@ -403,8 +403,8 @@ inclusion_expander::compute_inclusion_dependencies(
     }
 
     for (const auto fmt : i->second) {
-        const auto fmtn(fmt->archetype_location().archetype());
-        BOOST_LOG_SEV(lg, debug) << "Providing for: " << fmtn;
+        const auto arch(fmt->archetype_location().archetype());
+        BOOST_LOG_SEV(lg, debug) << "Providing for: " << arch;
 
         /*
          * Obtain the formatter's list of inclusion dependencies. If
@@ -431,7 +431,7 @@ inclusion_expander::compute_inclusion_dependencies(
          * check.
          * remove this check.
          */
-        r[fmtn] = deps;
+        r[arch] = deps;
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished creating inclusion dependencies for: "
@@ -493,12 +493,12 @@ void inclusion_expander::populate_inclusion_dependencies(
                  * formatter. It must have been initialised by the
                  * transformer.
                  */
-                const auto fmtn(dep_pair.first);
-                const auto i(fmt_props.find(fmtn));
+                const auto arch(dep_pair.first);
+                const auto i(fmt_props.find(arch));
                 if (i == fmt_props.end()) {
-                    BOOST_LOG_SEV(lg, error) << missing_formatter_name << fmtn;
+                    BOOST_LOG_SEV(lg, error) << missing_archetype << arch;
                     BOOST_THROW_EXCEPTION(
-                        expansion_error(missing_formatter_name + fmtn));
+                        expansion_error(missing_archetype + arch));
                 }
                 i->second.inclusion_dependencies(dep_pair.second);
             }

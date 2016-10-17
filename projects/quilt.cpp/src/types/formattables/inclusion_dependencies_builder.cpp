@@ -153,12 +153,12 @@ add(const std::string& inclusion_directive) {
 void inclusion_dependencies_builder::
 add(const yarn::name& n, const std::string& formatter_name) {
     canonical_archetype_resolver res(formattables_);
-    const auto resolved_fmtn(res.resolve(n.id(), formatter_name));
+    const auto resolved_arch(res.resolve(n.id(), formatter_name));
 
-    if (!is_enabled(n, resolved_fmtn))
+    if (!is_enabled(n, resolved_arch))
         return;
 
-    const auto id(get_inclusion_directive(n, resolved_fmtn));
+    const auto id(get_inclusion_directive(n, resolved_arch));
     if (id)
         add(*id);
 }

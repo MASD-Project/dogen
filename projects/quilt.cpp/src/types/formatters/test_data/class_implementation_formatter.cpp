@@ -84,11 +84,11 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
     if (si.has_path || si.has_std_string)
         builder.add(inclusion_constants::std::sstream());
 
-    const auto cfmtn(traits::canonical_archetype());
-    builder.add(o.transparent_associations(), cfmtn);
-    builder.add(o.opaque_associations(), cfmtn);
-    builder.add(o.parent(), cfmtn);
-    builder.add(o.leaves(), cfmtn);
+    const auto carch(traits::canonical_archetype());
+    builder.add(o.transparent_associations(), carch);
+    builder.add(o.opaque_associations(), carch);
+    builder.add(o.parent(), carch);
+    builder.add(o.leaves(), carch);
 
     return builder.build();
 }

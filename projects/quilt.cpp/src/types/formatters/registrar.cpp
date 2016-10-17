@@ -95,9 +95,9 @@ void registrar::validate() const {
              */
             const auto i(facets_found.find(fctn));
             if (i != facets_found.end()) {
-                const auto fmtn(al.archetype());
+                const auto arch(al.archetype());
                 BOOST_LOG_SEV(lg, error) << more_than_one_canonical_archetype
-                                         << fctn << " formatter: " << fmtn
+                                         << fctn << " archetype: " << arch
                                          << " type: " << ti.name();
                 BOOST_THROW_EXCEPTION(registrar_error(
                         more_than_one_canonical_archetype + fctn));
@@ -177,13 +177,13 @@ register_formatter(std::shared_ptr<file_formatter_interface> f) {
      * formatter into this container has the helpful side-effect of
      * ensuring the formatter id is unique in formatter space.
      */
-    const auto fmtn(al.archetype());
+    const auto arch(al.archetype());
     auto& fffn(formatter_container_.file_formatters_by_formatter_name());
-    const auto pair(std::make_pair(fmtn, f));
+    const auto pair(std::make_pair(arch, f));
     const auto inserted(fffn.insert(pair).second);
     if (!inserted) {
-        BOOST_LOG_SEV(lg, error) << duplicate_formatter_name << fmtn;
-        BOOST_THROW_EXCEPTION(registrar_error(duplicate_formatter_name + fmtn));
+        BOOST_LOG_SEV(lg, error) << duplicate_formatter_name << arch;
+        BOOST_THROW_EXCEPTION(registrar_error(duplicate_formatter_name + arch));
     }
 }
 

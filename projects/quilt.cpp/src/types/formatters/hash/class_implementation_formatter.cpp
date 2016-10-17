@@ -76,17 +76,17 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
     const yarn::element& e) const {
 
     const auto& o(assistant::as<yarn::object>(static_artefact(), e));
-    const auto cfmtn(traits::canonical_archetype());
+    const auto carch(traits::canonical_archetype());
     auto builder(f.make());
-    builder.add(o.name(), cfmtn);
+    builder.add(o.name(), carch);
 
     const auto si(builder.make_special_includes(o));
     if (si.has_variant)
         builder.add(inclusion_constants::boost::visitor::apply_visitor());
 
-    builder.add(o.transparent_associations(), cfmtn);
-    builder.add(o.opaque_associations(), cfmtn);
-    builder.add(o.parent(), cfmtn);
+    builder.add(o.transparent_associations(), carch);
+    builder.add(o.opaque_associations(), carch);
+    builder.add(o.parent(), carch);
 
     return builder.build();
 }

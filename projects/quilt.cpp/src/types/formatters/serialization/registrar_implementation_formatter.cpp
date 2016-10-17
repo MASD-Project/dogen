@@ -75,8 +75,8 @@ std::list<std::string> registrar_implementation_formatter::
 inclusion_dependencies(
     const formattables::inclusion_dependencies_builder_factory& f,
     const yarn::element& e) const {
-    const auto fmtn(static_artefact());
-    const auto& rg(assistant::as<fabric::registrar>(fmtn, e));
+    const auto arch(static_artefact());
+    const auto& rg(assistant::as<fabric::registrar>(arch, e));
     auto builder(f.make());
 
     const auto rh_fn(traits::registrar_header_archetype());
@@ -97,8 +97,8 @@ inclusion_dependencies(
     const auto ch_fn(traits::class_header_archetype());
     builder.add(rg.leaves(), ch_fn);
 
-    const auto cfmtn(traits::canonical_archetype());
-    builder.add(rg.registrar_dependencies(), cfmtn);
+    const auto carch(traits::canonical_archetype());
+    builder.add(rg.registrar_dependencies(), carch);
     return builder.build();
 }
 

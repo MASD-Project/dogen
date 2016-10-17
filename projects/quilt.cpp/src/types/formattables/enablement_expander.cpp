@@ -106,14 +106,14 @@ enablement_expander::make_global_type_group(
         const auto& fctn(al.facet());
         gtg.facet_enabled = s.select_type_by_name(fctn, ebl);
 
-        const auto& fmtn(al.archetype());
-        gtg.formatter_enabled = s.select_type_by_name(fmtn, ebl);
+        const auto& arch(al.archetype());
+        gtg.formatter_enabled = s.select_type_by_name(arch, ebl);
 
         const auto ow(traits::overwrite());
         gtg.facet_overwrite = s.select_type_by_name(fctn, ow);
-        gtg.formatter_overwrite = s.select_type_by_name(fmtn, ow);
+        gtg.formatter_overwrite = s.select_type_by_name(arch, ow);
 
-        r[fmtn] = gtg;
+        r[arch] = gtg;
     }
 
     BOOST_LOG_SEV(lg, debug) << "Created global field definitions. Result: "
@@ -131,7 +131,7 @@ enablement_expander::obtain_global_configurations(
     global_enablement_configurations_type r;
     const annotations::entry_selector s(root);
     for (const auto& pair : gtg) {
-        const auto& fmtn(pair.first);
+        const auto& arch(pair.first);
         const auto& t(pair.second);
 
         /*
@@ -151,7 +151,7 @@ enablement_expander::obtain_global_configurations(
                 s.get_boolean_content(t.formatter_overwrite));
         }
 
-        r[fmtn] = gec;
+        r[arch] = gec;
     }
 
     BOOST_LOG_SEV(lg, debug) << "Created global enablement configuration. "
@@ -179,12 +179,12 @@ void enablement_expander::update_facet_enablement(
     const auto& fffn(fc.file_formatters_by_formatter_name());
     auto& fct_props(fm.facet_properties());
     for (const auto& pair : gcs) {
-        const auto fmtn(pair.first);
-        const auto i(fffn.find(fmtn));
+        const auto arch(pair.first);
+        const auto i(fffn.find(arch));
         if (i == fffn.end()) {
-            BOOST_LOG_SEV(lg, error) << formatter_not_found << fmtn;
+            BOOST_LOG_SEV(lg, error) << formatter_not_found << arch;
             BOOST_THROW_EXCEPTION(
-                expansion_error(formatter_not_found + fmtn));
+                expansion_error(formatter_not_found + arch));
         }
 
         const auto& fmt(*i->second);
@@ -214,14 +214,14 @@ make_local_type_group(const annotations::type_repository& atrp,
         const auto ebl(traits::enabled());
         ltg.facet_enabled = s.select_type_by_name(fctn, ebl);
 
-        const auto& fmtn(al.archetype());
-        ltg.formatter_enabled = s.select_type_by_name(fmtn, ebl);
+        const auto& arch(al.archetype());
+        ltg.formatter_enabled = s.select_type_by_name(arch, ebl);
 
         const auto ow(traits::overwrite());
         ltg.facet_overwrite = s.select_type_by_name(fctn, ow);
-        ltg.formatter_overwrite = s.select_type_by_name(fmtn, ow);
+        ltg.formatter_overwrite = s.select_type_by_name(arch, ow);
         ltg.facet_supported = s.select_type_by_name(fctn, traits::supported());
-        r[fmtn] = ltg;
+        r[arch] = ltg;
     }
 
     BOOST_LOG_SEV(lg, debug) << "Created local field definitions. Result: "
@@ -247,20 +247,20 @@ enablement_expander::bucket_local_type_group_by_type_index(
 
         local_type_group_type& ltg(r[ti]);
         for (const auto& fmt: fmts) {
-            const auto fmtn(fmt->archetype_location().archetype());
-            const auto i(unbucketed_ltgs.find(fmtn));
+            const auto arch(fmt->archetype_location().archetype());
+            const auto i(unbucketed_ltgs.find(arch));
             if (i == unbucketed_ltgs.end()) {
-                BOOST_LOG_SEV(lg, error) << formatter_not_found << fmtn;
+                BOOST_LOG_SEV(lg, error) << formatter_not_found << arch;
                 BOOST_THROW_EXCEPTION(
-                    expansion_error(formatter_not_found + fmtn));
+                    expansion_error(formatter_not_found + arch));
             }
 
-            const auto pair(std::make_pair(fmtn, i->second));
+            const auto pair(std::make_pair(arch, i->second));
             const auto ret(ltg.insert(pair));
             if (!ret.second) {
-                BOOST_LOG_SEV(lg, error) << duplicate_formatter_name << fmtn;
+                BOOST_LOG_SEV(lg, error) << duplicate_formatter_name << arch;
                 BOOST_THROW_EXCEPTION(
-                    expansion_error(duplicate_formatter_name + fmtn));
+                    expansion_error(duplicate_formatter_name + arch));
             }
         }
     }
@@ -278,7 +278,7 @@ obtain_local_configurations(const local_type_group_type& ltg,
     local_enablement_configurations_type r;
     const annotations::entry_selector s(o);
     for (const auto& pair : ltg) {
-        const auto& fmtn(pair.first);
+        const auto& arch(pair.first);
         const auto& t(pair.second);
 
         local_enablement_configuration lec;
@@ -295,7 +295,7 @@ obtain_local_configurations(const local_type_group_type& ltg,
             lec.formatter_overwrite(
                 s.get_boolean_content(t.formatter_overwrite));
 
-        r[fmtn] = lec;
+        r[arch] = lec;
     }
 
     BOOST_LOG_SEV(lg, debug) << "Obtained local configurations. Result: " << r;
@@ -336,7 +336,7 @@ void enablement_expander::compute_enablement(
 
     BOOST_LOG_SEV(lg, debug) << "Started computing enablement.";
     for (auto& pair : fbl.element_properties().formatter_properties()) {
-        const auto fmtn(pair.first);
+        const auto arch(pair.first);
 
         /*
          * As we may be processing a segmented entity, not all
@@ -351,18 +351,18 @@ void enablement_expander::compute_enablement(
          * segment at a time. So, we need to ignore the formatters for
          * the segments we are not processing.
          */
-        const auto j(lcs.find(fmtn));
+        const auto j(lcs.find(arch));
         if (j == lcs.end()) {
-            BOOST_LOG_SEV(lg, debug) << "Ignoring formatter: " << fmtn;
+            BOOST_LOG_SEV(lg, debug) << "Ignoring formatter: " << arch;
             continue;
         }
         const auto& lc(j->second);
 
-        const auto i(gcs.find(fmtn));
+        const auto i(gcs.find(arch));
         if (i == gcs.end()) {
-            BOOST_LOG_SEV(lg, error) << global_configuration_not_found << fmtn;
+            BOOST_LOG_SEV(lg, error) << global_configuration_not_found << arch;
             BOOST_THROW_EXCEPTION(
-                expansion_error(global_configuration_not_found + fmtn));
+                expansion_error(global_configuration_not_found + arch));
         }
         const auto gc(i->second);
 
@@ -434,7 +434,7 @@ void enablement_expander::compute_enablement(
          * flag for the formatter.
          */
         fmt_props.enabled(gc.formatter_enabled());
-        BOOST_LOG_SEV(lg, debug) << "Enablement for: " << fmtn
+        BOOST_LOG_SEV(lg, debug) << "Enablement for: " << arch
                                  << " value: " << fmt_props.enabled();
     }
 

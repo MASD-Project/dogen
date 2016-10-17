@@ -92,11 +92,11 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
     builder.add(ic::boost::archive::xml_iarchive());
     builder.add(ic::boost::archive::xml_oarchive());
 
-    const auto cfmtn(traits::canonical_archetype());
-    builder.add(o.transparent_associations(), cfmtn);
-    builder.add(o.opaque_associations(), cfmtn);
-    builder.add(o.parent(), cfmtn);
-    builder.add(o.leaves(), cfmtn);
+    const auto carch(traits::canonical_archetype());
+    builder.add(o.transparent_associations(), carch);
+    builder.add(o.opaque_associations(), carch);
+    builder.add(o.parent(), carch);
+    builder.add(o.leaves(), carch);
 
     const auto si(builder.make_special_includes(o));
     if (si.has_date)

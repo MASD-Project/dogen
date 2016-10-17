@@ -64,9 +64,9 @@ std::list<std::string> class_header_formatter::inclusion_dependencies(
     auto builder(f.make());
     builder.add(o.name(), types::traits::class_header_archetype());
 
-    const auto cfmtn(traits::canonical_archetype());
-    builder.add(o.transparent_associations(), cfmtn);
-    builder.add(o.opaque_associations(), cfmtn);
+    const auto carch(traits::canonical_archetype());
+    builder.add(o.transparent_associations(), carch);
+    builder.add(o.opaque_associations(), carch);
 
     const auto self_fn(class_header_formatter::static_artefact());
     builder.add(o.parent(), self_fn);

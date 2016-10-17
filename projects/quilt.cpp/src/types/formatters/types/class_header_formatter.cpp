@@ -82,8 +82,8 @@ std::list<std::string> class_header_formatter::inclusion_dependencies(
     const auto ser_fwd_fn(ser::forward_declarations_archetype());
     builder.add(o.name(), ser_fwd_fn);
 
-    const auto cfmtn(traits::canonical_archetype());
-    builder.add(o.transparent_associations(), cfmtn);
+    const auto carch(traits::canonical_archetype());
+    builder.add(o.transparent_associations(), carch);
 
     const auto fwd_fn(traits::forward_declarations_archetype());
     builder.add(o.opaque_associations(), fwd_fn);
@@ -92,8 +92,8 @@ std::list<std::string> class_header_formatter::inclusion_dependencies(
     builder.add(o.parent(), self_fn);
 
     using hash = formatters::hash::traits;
-    const auto hash_cfmtn(hash::traits::canonical_archetype());
-    builder.add(o.associative_container_keys(), hash_cfmtn);
+    const auto hash_carch(hash::traits::canonical_archetype());
+    builder.add(o.associative_container_keys(), hash_carch);
 
     if (o.is_visitation_root()) {
         /*

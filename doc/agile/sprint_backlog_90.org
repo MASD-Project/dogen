@@ -14,14 +14,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-17 Mon 12:46]
+#+CAPTION: Clock summary at [2016-10-17 Mon 13:01]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *61:55* |       |       | 100.0 |
+| *Total time*                                                                | *62:06* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 61:55   |       |       | 100.0 |
-| Active                                                                      |         | 61:55 |       | 100.0 |
+| Stories                                                                     | 62:06   |       |       | 100.0 |
+| Active                                                                      |         | 62:06 |       | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  0:32 |   0.9 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:19 |   0.5 |
 | COMPLETED Improve bintray support                                           |         |       |  0:26 |   0.7 |
@@ -40,13 +40,13 @@
 | COMPLETED Implement defaulting within the profiler                          |         |       |  1:13 |   2.0 |
 | COMPLETED Add binding of stereotypes with profiles                          |         |       |  1:40 |   2.7 |
 | COMPLETED Update dogen models to use profiles                               |         |       |  0:19 |   0.5 |
-| COMPLETED Finish overwriting support                                        |         |       |  2:38 |   4.3 |
+| COMPLETED Finish overwriting support                                        |         |       |  2:38 |   4.2 |
 | COMPLETED Remove service stereotype                                         |         |       |  3:32 |   5.7 |
 | COMPLETED IOable services                                                   |         |       |  0:06 |   0.2 |
 | COMPLETED Generate skeleton for "non-generatable" files                     |         |       |  0:51 |   1.4 |
 | COMPLETED Merge profiles with processed object in yarn.dia                  |         |       |  2:04 |   3.3 |
 | COMPLETED Fix yarn.dia tests                                                |         |       |  2:48 |   4.5 |
-| STARTED Perform the archetype / artefact renames                            |         |       |  6:33 |  10.6 |
+| STARTED Perform the archetype / artefact renames                            |         |       |  6:44 |  10.8 |
 | STARTED Integration of stitch and dogen                                     |         |       |  0:27 |   0.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -646,6 +646,7 @@ within the parser. It makes more sense to keep the parser clean and do
 the expansion somewhere else.
 
 *** STARTED Perform the archetype / artefact renames                  :story:
+    CLOCK: [2016-10-17 Mon 12:47]--[2016-10-17 Mon 12:58] =>  0:11
     CLOCK: [2016-10-17 Mon 12:41]--[2016-10-17 Mon 12:46] =>  0:05
     CLOCK: [2016-10-17 Mon 12:34]--[2016-10-17 Mon 12:40] =>  0:06
     CLOCK: [2016-10-17 Mon 12:30]--[2016-10-17 Mon 12:33] =>  0:03
@@ -687,6 +688,22 @@ Renames:
   facet name becomes facet and formatter name archetype. Add
   sub-kernel.
 - Element concept becomes Entity.
+
+Notes:
+
+- are formatter properties really formatter properties or archetype
+  properties? that is, could we conceivably have a different kind of
+  formatter that works off of the same archetype to generate a
+  different artefact, or are they specific to the formatter. At first
+  blush they appear to be properties of the archetype. If so rename
+  them.
+- we still need to drop the postfix of formatter on the archetype and
+  add it to the formatter. This will cause a lot of breakage.
+- we need to go through the expanders and figure out if we are
+  referring to formatters when we mean archetypes and vice-versa.
+
+*** Introduce artefact sources                                        :story:
+
 - introduce the concept of artefact source: stock formatter
   (current), wale formatter, wale and stitch formatter,
   handcrafted. Other possible types: null formatter, copy formatter.

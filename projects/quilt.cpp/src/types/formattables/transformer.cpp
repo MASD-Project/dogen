@@ -31,7 +31,7 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("quilt.cpp.formattables.transformer"));
 
-const std::string duplicate_formatter("Duplicate formatter name: ");
+const std::string duplicate_archetype("Duplicate archetype: ");
 const std::string duplicate_element("Duplicate element id: ");
 
 }
@@ -77,15 +77,15 @@ transform(const formatters::container& fc, const yarn::model& m) const {
 
         auto& fmt_props(fbl.element_properties().formatter_properties());
         for (const auto& fmt : j->second) {
-            const auto fmtn(fmt->archetype_location().archetype());
-            const auto pair(std::make_pair(fmtn, formatter_properties()));
+            const auto arch(fmt->archetype_location().archetype());
+            const auto pair(std::make_pair(arch, formatter_properties()));
             const auto ret(fmt_props.insert(pair));
             if (!ret.second) {
-                BOOST_LOG_SEV(lg, error) << duplicate_formatter << fmtn;
+                BOOST_LOG_SEV(lg, error) << duplicate_archetype << arch;
                 BOOST_THROW_EXCEPTION(
-                    transformation_error(duplicate_formatter + fmtn));
+                    transformation_error(duplicate_archetype + arch));
             }
-            BOOST_LOG_SEV(lg, trace) << "Added formatter: " << fmtn
+            BOOST_LOG_SEV(lg, trace) << "Added formatter: " << arch
                                      << " to element: " << id;
         }
     }

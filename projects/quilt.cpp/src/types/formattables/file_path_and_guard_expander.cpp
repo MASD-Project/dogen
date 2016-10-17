@@ -34,7 +34,7 @@ static logger lg(logger_factory(
 const std::string empty;
 const std::string dot(".");
 const std::string separator("_");
-const std::string missing_formatter_name("Formatter name not found: ");
+const std::string missing_archetype("Archetype not found: ");
 
 }
 
@@ -80,14 +80,14 @@ expand(const formatters::container& fc, const locator& l, model& fm) const {
          * full path for the file.
          */
         for (auto& fmt_props_pair : eprops.formatter_properties()) {
-            const auto fmtn(fmt_props_pair.first);
+            const auto arch(fmt_props_pair.first);
             auto& fmt_props(fmt_props_pair.second);
 
-            const auto i(fffn.find(fmtn));
+            const auto i(fffn.find(arch));
             if (i == fffn.end()) {
-                BOOST_LOG_SEV(lg, error) << missing_formatter_name << fmtn;
+                BOOST_LOG_SEV(lg, error) << missing_archetype << arch;
                 BOOST_THROW_EXCEPTION(
-                    expansion_error(missing_formatter_name + fmtn));
+                    expansion_error(missing_archetype + arch));
             }
 
             const auto& fmt(i->second);

@@ -96,8 +96,8 @@ dogen::formatters::artefact forward_declarations_formatter::
 format(const context& ctx, const yarn::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), true/*requires_header_guard*/, id);
-    const auto fmtn(static_artefact());
-    const auto& fd(a.as<fabric::forward_declarations>(fmtn, e));
+    const auto arch(static_artefact());
+    const auto& fd(a.as<fabric::forward_declarations>(arch, e));
     const auto r(forward_declarations_formatter_stitch(a, fd));
     return r;
 }

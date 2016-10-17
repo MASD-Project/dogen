@@ -190,7 +190,7 @@ obtain_formatter_properties(const std::string& element_id,
     const auto& formattables(context_.model().formattables());
     formattables::canonical_archetype_resolver res(formattables);
 
-    const auto resolved_fmtn(res.resolve(element_id, formatter_name));
+    const auto resolved_arch(res.resolve(element_id, formatter_name));
     const auto i(formattables.find(element_id));
     if (i == formattables.end()) {
         BOOST_LOG_SEV(lg, error) << element_not_found << element_id;
@@ -198,7 +198,7 @@ obtain_formatter_properties(const std::string& element_id,
     }
 
     const auto& eprops(i->second.element_properties());
-    return obtain_formatter_properties(eprops, resolved_fmtn);
+    return obtain_formatter_properties(eprops, resolved_arch);
 }
 
 formattables::facet_properties assistant::

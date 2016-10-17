@@ -74,14 +74,15 @@ workflow::format(const formattables::model& fm, const yarn::element& e,
     const auto& fmts(i->second);
     for (const auto& fmt_ptr : fmts) {
         const auto& fmt(*fmt_ptr);
-        const auto fmtn(fmt.archetype_location().archetype());
+        const auto fmtn(fmt.formatter_name());
         BOOST_LOG_SEV(lg, debug) << "Formatting: '" << id << "' with '"
                                  << fmtn << "'";
 
-        const auto j(fmt_props.find(fmtn));
+        const auto arch(fmt.archetype_location().archetype());
+        const auto j(fmt_props.find(arch));
         if (j == fmt_props.end()) {
-            BOOST_LOG_SEV(lg, error) << missing_formatter << fmtn;
-            BOOST_THROW_EXCEPTION(workflow_error(missing_formatter + fmtn));
+            BOOST_LOG_SEV(lg, error) << missing_formatter << arch;
+            BOOST_THROW_EXCEPTION(workflow_error(missing_formatter + arch));
         }
 
         const auto& fmt_props(j->second);
