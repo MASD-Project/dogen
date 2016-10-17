@@ -46,7 +46,7 @@ void save(Archive& ar,
     ar << make_nvp("name", v.name_);
     ar << make_nvp("value_type", v.value_type_);
     ar << make_nvp("scope", v.scope_);
-    ar << make_nvp("ownership_hierarchy", v.ownership_hierarchy_);
+    ar << make_nvp("archetype_location", v.archetype_location_);
     ar << make_nvp("default_value", v.default_value_);
     ar << make_nvp("kind", v.kind_);
 }
@@ -58,7 +58,7 @@ void load(Archive& ar,
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("value_type", v.value_type_);
     ar >> make_nvp("scope", v.scope_);
-    ar >> make_nvp("ownership_hierarchy", v.ownership_hierarchy_);
+    ar >> make_nvp("archetype_location", v.archetype_location_);
     ar >> make_nvp("default_value", v.default_value_);
     ar >> make_nvp("kind", v.kind_);
 }

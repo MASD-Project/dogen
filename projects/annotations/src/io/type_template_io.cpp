@@ -52,7 +52,7 @@ std::ostream& operator<<(std::ostream& s, const type_template& v) {
       << "\"name\": " << v.name() << ", "
       << "\"value_type\": " << v.value_type() << ", "
       << "\"scope\": " << v.scope() << ", "
-      << "\"ownership_hierarchy\": " << v.ownership_hierarchy() << ", "
+      << "\"archetype_location\": " << v.archetype_location() << ", "
       << "\"default_value\": " << v.default_value() << ", "
       << "\"kind\": " << v.kind()
       << " }";

@@ -14,39 +14,39 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-17 Mon 09:57]
+#+CAPTION: Clock summary at [2016-10-17 Mon 10:16]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *59:21* |       |       | 100.0 |
+| *Total time*                                                                | *59:39* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 59:21   |       |       | 100.0 |
-| Active                                                                      |         | 59:21 |       | 100.0 |
+| Stories                                                                     | 59:39   |       |       | 100.0 |
+| Active                                                                      |         | 59:39 |       | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  0:32 |   0.9 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:19 |   0.5 |
 | COMPLETED Improve bintray support                                           |         |       |  0:26 |   0.7 |
 | COMPLETED Refactor opaque infrastructure                                    |         |       |  1:17 |   2.2 |
 | COMPLETED Remove any remnants of annotations from quilt                     |         |       |  0:05 |   0.1 |
-| COMPLETED Solve the issue of too many "configurations"                      |         |       |  4:01 |   6.8 |
+| COMPLETED Solve the issue of too many "configurations"                      |         |       |  4:01 |   6.7 |
 | COMPLETED Merge decoration configuration and annotations factories          |         |       |  0:18 |   0.5 |
 | COMPLETED Move annotation factories into expander in yarn                   |         |       |  1:11 |   2.0 |
-| COMPLETED Clean up terminology in dynamic                                   |         |       | 15:12 |  25.6 |
+| COMPLETED Clean up terminology in dynamic                                   |         |       | 15:12 |  25.5 |
 | COMPLETED Minor tidy-up of the quilt.cpp diagram                            |         |       |  0:29 |   0.8 |
 | COMPLETED Create a ownership hierarchy repository                           |         |       |  1:43 |   2.9 |
 | COMPLETED Use vector of elements in model                                   |         |       |  0:10 |   0.3 |
-| COMPLETED Rewrite profile support                                           |         |       | 11:50 |  19.9 |
+| COMPLETED Rewrite profile support                                           |         |       | 11:50 |  19.8 |
 | COMPLETED Merge annotation type and profile folders                         |         |       |  0:20 |   0.6 |
 | COMPLETED Push stereotypes processing into yarn                             |         |       |  1:51 |   3.1 |
 | COMPLETED Implement defaulting within the profiler                          |         |       |  1:13 |   2.0 |
 | COMPLETED Add binding of stereotypes with profiles                          |         |       |  1:40 |   2.8 |
 | COMPLETED Update dogen models to use profiles                               |         |       |  0:19 |   0.5 |
 | COMPLETED Finish overwriting support                                        |         |       |  2:38 |   4.4 |
-| COMPLETED Remove service stereotype                                         |         |       |  3:32 |   6.0 |
+| COMPLETED Remove service stereotype                                         |         |       |  3:32 |   5.9 |
 | COMPLETED IOable services                                                   |         |       |  0:06 |   0.2 |
 | COMPLETED Generate skeleton for "non-generatable" files                     |         |       |  0:51 |   1.4 |
 | COMPLETED Merge profiles with processed object in yarn.dia                  |         |       |  2:04 |   3.5 |
 | COMPLETED Fix yarn.dia tests                                                |         |       |  2:48 |   4.7 |
-| STARTED Perform the archetype / artefact renames                            |         |       |  3:59 |   6.7 |
+| STARTED Perform the archetype / artefact renames                            |         |       |  4:17 |   7.2 |
 | STARTED Integration of stitch and dogen                                     |         |       |  0:27 |   0.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -646,6 +646,7 @@ within the parser. It makes more sense to keep the parser clean and do
 the expansion somewhere else.
 
 *** STARTED Perform the archetype / artefact renames                  :story:
+    CLOCK: [2016-10-17 Mon 09:58]--[2016-10-17 Mon 10:16] =>  0:18
     CLOCK: [2016-10-17 Mon 09:47]--[2016-10-17 Mon 09:57] =>  0:10
     CLOCK: [2016-10-17 Mon 09:34]--[2016-10-17 Mon 09:46] =>  0:12
     CLOCK: [2016-10-17 Mon 09:20]--[2016-10-17 Mon 09:33] =>  0:13

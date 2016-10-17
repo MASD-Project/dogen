@@ -201,7 +201,7 @@ type_templates_hydrator::read_stream(std::istream& s) const {
             BOOST_LOG_SEV(lg, error) << template_has_no_hierarchy;
             BOOST_THROW_EXCEPTION(hydration_error(template_has_no_hierarchy));
         }
-        tt.ownership_hierarchy(read_ownership_hierarchy(j->second));
+        tt.archetype_location(read_ownership_hierarchy(j->second));
         tt.value_type(to_value_type(tt_pt.get<std::string>(value_type_key)));
         tt.kind(to_template_kind(tt_pt.get<std::string>(template_kind_key)));
         tt.scope(to_scope_type(tt_pt.get<std::string>(scope_key)));

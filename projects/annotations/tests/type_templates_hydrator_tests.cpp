@@ -84,9 +84,9 @@ BOOST_AUTO_TEST_CASE(trivial_type_template_hydrates_into_expected_collection) {
 
     BOOST_CHECK(tt.name().simple() == simple_name);
     BOOST_CHECK(tt.name().qualified() == qualified_name);
-    BOOST_CHECK(tt.ownership_hierarchy().kernel() == model_name);
-    BOOST_CHECK(tt.ownership_hierarchy().facet() == facet_name);
-    BOOST_CHECK(tt.ownership_hierarchy().archetype() == formatter_name);
+    BOOST_CHECK(tt.archetype_location().kernel() == model_name);
+    BOOST_CHECK(tt.archetype_location().facet() == facet_name);
+    BOOST_CHECK(tt.archetype_location().archetype() == formatter_name);
 
     const auto st(dogen::annotations::scope_types::not_applicable);
     BOOST_CHECK(tt.scope() == st);

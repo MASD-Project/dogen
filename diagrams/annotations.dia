@@ -1277,7 +1277,7 @@ yet imposing some constraints on the shape of the data.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Valid scopes where the field may be present.#</dia:string>
+            <dia:string>#Valid scopes where the type may be present.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1300,7 +1300,7 @@ yet imposing some constraints on the shape of the data.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#The ownership hierarchy information for this field.#</dia:string>
+            <dia:string>#The archetype location for this type.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -4958,10 +4958,10 @@ any.#</dia:string>
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#ownership_hierarchy#</dia:string>
+                <dia:string>#archetype_location#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const std::forward_list&lt;ownership_hierarchy&gt;&amp;#</dia:string>
+                <dia:string>#const std::forward_list&lt;archetype_location&gt;&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -5387,7 +5387,7 @@ any.#</dia:string>
                 <dia:string>#ohrp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const ownership_hierarchy_repository&amp;#</dia:string>
+                <dia:string>#const archetype_location_repository&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -8442,7 +8442,7 @@ any.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Valid scopes where the field may be present.#</dia:string>
+            <dia:string>#Valid scopes where the type may be present.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -8456,7 +8456,7 @@ any.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#ownership_hierarchy#</dia:string>
+            <dia:string>#archetype_location#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#archetype_location#</dia:string>
@@ -8465,7 +8465,7 @@ any.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#The ownership hierarchy information for this field.#</dia:string>
+            <dia:string>#The archetype location for this type.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

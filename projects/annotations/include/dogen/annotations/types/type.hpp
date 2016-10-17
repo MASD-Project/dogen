@@ -84,7 +84,7 @@ public:
     /**@}*/
 
     /**
-     * @brief Valid scopes where the field may be present.
+     * @brief Valid scopes where the type may be present.
      */
     /**@{*/
     dogen::annotations::scope_types scope() const;
@@ -92,7 +92,7 @@ public:
     /**@}*/
 
     /**
-     * @brief The ownership hierarchy information for this field.
+     * @brief The archetype location for this type.
      */
     /**@{*/
     const dogen::annotations::archetype_location& archetype_location() const;
