@@ -4,9 +4,9 @@
             "simple" : "directory",
             "qualified" : "quilt.cpp.io.directory"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "quilt.cpp",
-            "facet_name" : "quilt.cpp.io"
+        "archetype_location" : {
+            "kernel" : "quilt.cpp",
+            "facet" : "quilt.cpp.io"
         },
         "value_type" : "text",
         "template_kind" : "instance",
@@ -18,9 +18,9 @@
             "simple" : "postfix",
             "qualified" : "quilt.cpp.io.postfix"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "quilt.cpp",
-            "facet_name" : "quilt.cpp.io"
+        "archetype_location" : {
+            "kernel" : "quilt.cpp",
+            "facet" : "quilt.cpp.io"
         },
         "value_type" : "text",
         "template_kind" : "instance",
@@ -32,10 +32,10 @@
             "simple" : "postfix",
             "qualified" : "quilt.cpp.io.class_header_formatter.postfix"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "quilt.cpp",
-            "facet_name" : "quilt.cpp.io",
-            "formatter_name" : "quilt.cpp.io.class_header_formatter"
+        "archetype_location" : {
+            "kernel" : "quilt.cpp",
+            "facet" : "quilt.cpp.io",
+            "archetype" : "quilt.cpp.io.class_header_formatter"
         },
         "value_type" : "text",
         "template_kind" : "instance",
@@ -47,10 +47,10 @@
             "simple" : "postfix",
             "qualified" : "quilt.cpp.io.class_implementation_formatter.postfix"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "quilt.cpp",
-            "facet_name" : "quilt.cpp.io",
-            "formatter_name" : "quilt.cpp.io.class_implementation_formatter"
+        "archetype_location" : {
+            "kernel" : "quilt.cpp",
+            "facet" : "quilt.cpp.io",
+            "archetype" : "quilt.cpp.io.class_implementation_formatter"
         },
         "value_type" : "text",
         "template_kind" : "instance",
@@ -62,10 +62,10 @@
             "simple" : "postfix",
             "qualified" : "quilt.cpp.io.enum_header_formatter.postfix"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "quilt.cpp",
-            "facet_name" : "quilt.cpp.io",
-            "formatter_name" : "quilt.cpp.io.enum_header_formatter"
+        "archetype_location" : {
+            "kernel" : "quilt.cpp",
+            "facet" : "quilt.cpp.io",
+            "archetype" : "quilt.cpp.io.enum_header_formatter"
         },
         "value_type" : "text",
         "template_kind" : "instance",
@@ -77,10 +77,10 @@
             "simple" : "postfix",
             "qualified" : "quilt.cpp.io.enum_implementation_formatter.postfix"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "quilt.cpp",
-            "facet_name" : "quilt.cpp.io",
-            "formatter_name" : "quilt.cpp.io.enum_implementation_formatter"
+        "archetype_location" : {
+            "kernel" : "quilt.cpp",
+            "facet" : "quilt.cpp.io",
+            "archetype" : "quilt.cpp.io.enum_implementation_formatter"
         },
         "value_type" : "text",
         "template_kind" : "instance",
@@ -92,10 +92,10 @@
             "simple" : "postfix",
             "qualified" : "quilt.cpp.io.master_header_formatter.postfix"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "quilt.cpp",
-            "facet_name" : "quilt.cpp.io",
-            "formatter_name" : "quilt.cpp.io.master_header_formatter"
+        "archetype_location" : {
+            "kernel" : "quilt.cpp",
+            "facet" : "quilt.cpp.io",
+            "archetype" : "quilt.cpp.io.master_header_formatter"
         },
         "value_type" : "text",
         "template_kind" : "instance",
@@ -107,10 +107,10 @@
             "simple" : "postfix",
             "qualified" : "quilt.cpp.io.primitive_header_formatter.postfix"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "quilt.cpp",
-            "facet_name" : "quilt.cpp.io",
-            "formatter_name" : "quilt.cpp.io.primitive_header_formatter"
+        "archetype_location" : {
+            "kernel" : "quilt.cpp",
+            "facet" : "quilt.cpp.io",
+            "archetype" : "quilt.cpp.io.primitive_header_formatter"
         },
         "value_type" : "text",
         "template_kind" : "instance",

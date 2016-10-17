@@ -40,10 +40,10 @@ const std::string templates_key("templates");
 const std::string template_kind_key("template_kind");
 const std::string name_simple_key("simple");
 const std::string name_qualified_key("qualified");
-const std::string ownership_hierarchy_key("ownership_hierarchy");
-const std::string ownership_hierarchy_model_name_key("model_name");
-const std::string ownership_hierarchy_facet_name_key("facet_name");
-const std::string ownership_hierarchy_formatter_name_key("formatter_name");
+const std::string archetype_location_key("archetype_location");
+const std::string archetype_location_kernel_key("kernel");
+const std::string archetype_location_facet_key("facet");
+const std::string archetype_location_archetype_key("archetype");
 const std::string untyped_value_key("untyped_value");
 
 const std::string template_kind_instance("instance");
@@ -99,15 +99,12 @@ name profile_hydrator::read_name(const boost::property_tree::ptree& pt) const {
 }
 
 archetype_location profile_hydrator::
-read_ownership_hierarchy(const boost::property_tree::ptree& pt) const {
+read_archetype_location(const boost::property_tree::ptree& pt) const {
     archetype_location r;
 
-    r.kernel(
-        pt.get<std::string>(ownership_hierarchy_model_name_key, empty));
-    r.facet(
-        pt.get<std::string>(ownership_hierarchy_facet_name_key, empty));
-    r.archetype(
-        pt.get<std::string>(ownership_hierarchy_formatter_name_key, empty));
+    r.kernel(pt.get<std::string>(archetype_location_kernel_key, empty));
+    r.facet(pt.get<std::string>(archetype_location_facet_key, empty));
+    r.archetype(pt.get<std::string>(archetype_location_archetype_key, empty));
 
     return r;
 }
@@ -126,12 +123,12 @@ profile_hydrator::read_templates(const boost::property_tree::ptree& pt) const {
         }
         vt.name(read_name(j->second));
 
-        j = vt_pt.find(ownership_hierarchy_key);
+        j = vt_pt.find(archetype_location_key);
         if (j == vt_pt.not_found() || j->second.empty()) {
             BOOST_LOG_SEV(lg, error) << template_has_no_hierarchy;
             BOOST_THROW_EXCEPTION(hydration_error(template_has_no_hierarchy));
         }
-        vt.archetype_location(read_ownership_hierarchy(j->second));
+        vt.archetype_location(read_archetype_location(j->second));
 
         vt.kind(to_template_kind(vt_pt.get<std::string>(template_kind_key)));
 

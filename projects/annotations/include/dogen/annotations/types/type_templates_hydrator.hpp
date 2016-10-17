@@ -76,7 +76,7 @@ private:
      * @brief Reads the ownership hierarchy from the property tree.
      */
     archetype_location
-    read_ownership_hierarchy(const boost::property_tree::ptree& pt) const;
+    read_archetype_location(const boost::property_tree::ptree& pt) const;
 
     /**
      * @brief Reads the entire stream as a property tree.

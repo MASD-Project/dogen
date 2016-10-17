@@ -4,8 +4,8 @@
             "simple" : "variable_number_of_parameters",
             "qualified" : "yarn.type_parameters.variable_number_of_parameters"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "yarn"
+        "archetype_location" : {
+            "kernel" : "yarn"
         },
         "value_type" : "boolean",
         "template_kind" : "instance",
@@ -17,8 +17,8 @@
             "simple" : "count",
             "qualified" : "yarn.type_parameters.count"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "yarn"
+        "archetype_location" : {
+            "kernel" : "yarn"
         },
         "value_type" : "number",
         "template_kind" : "instance",
@@ -30,8 +30,8 @@
             "simple" : "always_in_heap",
             "qualified" : "yarn.type_parameters.always_in_heap"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "yarn"
+        "archetype_location" : {
+            "kernel" : "yarn"
         },
         "value_type" : "boolean",
         "template_kind" : "instance",
@@ -43,8 +43,8 @@
             "simple" : "is_final",
             "qualified" : "yarn.generalization.is_final"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "yarn"
+        "archetype_location" : {
+            "kernel" : "yarn"
         },
         "value_type" : "boolean",
         "template_kind" : "instance",
@@ -55,8 +55,8 @@
             "simple" : "parent",
             "qualified" : "yarn.generalization.parent"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "yarn"
+        "archetype_location" : {
+            "kernel" : "yarn"
         },
         "value_type" : "text",
         "template_kind" : "instance",
@@ -67,8 +67,8 @@
             "simple" : "is_proxy_model",
             "qualified" : "yarn.is_proxy_model"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "yarn"
+        "archetype_location" : {
+            "kernel" : "yarn"
         },
         "value_type" : "boolean",
         "template_kind" : "instance",

@@ -4,8 +4,8 @@
             "simple" : "comment",
             "qualified" : "yarn.dia.comment"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "yarn.dia"
+        "archetype_location" : {
+            "kernel" : "yarn.dia"
         },
         "value_type" : "boolean",
         "template_kind" : "instance",

@@ -3,8 +3,8 @@
         "name" : {
             "simple" : "enabled"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "quilt.cpp"
+        "archetype_location" : {
+            "kernel" : "quilt.cpp"
         },
         "value_type" : "boolean",
         "template_kind" : "global_template",
@@ -15,8 +15,8 @@
         "name" : {
             "simple" : "supported"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "quilt.cpp"
+        "archetype_location" : {
+            "kernel" : "quilt.cpp"
         },
         "value_type" : "boolean",
         "template_kind" : "facet_template",
@@ -27,8 +27,8 @@
         "name" : {
             "simple" : "overwrite"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "quilt.cpp"
+        "archetype_location" : {
+            "kernel" : "quilt.cpp"
         },
         "value_type" : "boolean",
         "template_kind" : "facet_template",
@@ -39,8 +39,8 @@
         "name" : {
             "simple" : "overwrite"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "quilt.cpp"
+        "archetype_location" : {
+            "kernel" : "quilt.cpp"
         },
         "value_type" : "boolean",
         "template_kind" : "formatter_template",
@@ -51,8 +51,8 @@
             "simple" : "profile",
             "qualified" : "quilt.cpp.profile"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "quilt.cpp"
+        "archetype_location" : {
+            "kernel" : "quilt.cpp"
         },
         "value_type" : "text",
         "template_kind" : "instance",
@@ -63,8 +63,8 @@
         "name" : {
             "simple" : "file_path"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "quilt.cpp"
+        "archetype_location" : {
+            "kernel" : "quilt.cpp"
         },
         "value_type" : "text",
         "template_kind" : "formatter_template",
@@ -74,8 +74,8 @@
         "name" : {
             "simple" : "header_guard"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "quilt.cpp",
+        "archetype_location" : {
+            "kernel" : "quilt.cpp",
             "formatter_group" : "quilt.cpp.header_files"
         },
         "value_type" : "text",
@@ -88,8 +88,8 @@
             "qualified" : "quilt.cpp.inclusion_required"
 
         },
-        "ownership_hierarchy" : {
-            "model_name" : "quilt.cpp"
+        "archetype_location" : {
+            "kernel" : "quilt.cpp"
         },
         "value_type" : "boolean",
         "template_kind" : "instance",
@@ -101,8 +101,8 @@
             "simple" : "inclusion_directive",
             "formatter_group" : "quilt.cpp.header_files"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "quilt.cpp"
+        "archetype_location" : {
+            "kernel" : "quilt.cpp"
         },
         "value_type" : "text",
         "template_kind" : "formatter_template",
@@ -112,8 +112,8 @@
         "name" : {
             "simple" : "inclusion_dependency"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "quilt.cpp"
+        "archetype_location" : {
+            "kernel" : "quilt.cpp"
         },
         "value_type" : "text_collection",
         "template_kind" : "formatter_template",
@@ -125,8 +125,8 @@
             "formatter_group" : "quilt.cpp.header_files"
 
         },
-        "ownership_hierarchy" : {
-            "model_name" : "quilt.cpp"
+        "archetype_location" : {
+            "kernel" : "quilt.cpp"
         },
         "value_type" : "boolean",
         "template_kind" : "formatter_template",
@@ -138,8 +138,8 @@
             "simple" : "split_project",
             "qualified" : "quilt.cpp.split_project"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "quilt.cpp"
+        "archetype_location" : {
+            "kernel" : "quilt.cpp"
         },
         "value_type" : "boolean",
         "template_kind" : "instance",
@@ -151,8 +151,8 @@
             "simple" : "source_directory_name",
             "qualified" : "quilt.cpp.source_directory_name"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "quilt.cpp"
+        "archetype_location" : {
+            "kernel" : "quilt.cpp"
         },
         "value_type" : "text",
         "template_kind" : "instance",
@@ -164,8 +164,8 @@
             "simple" : "include_directory_name",
             "qualified" : "quilt.cpp.include_directory_name"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "quilt.cpp"
+        "archetype_location" : {
+            "kernel" : "quilt.cpp"
         },
         "value_type" : "text",
         "template_kind" : "instance",
@@ -177,8 +177,8 @@
             "simple" : "header_file_extension",
             "qualified" : "quilt.cpp.header_file_extension"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "quilt.cpp"
+        "archetype_location" : {
+            "kernel" : "quilt.cpp"
         },
         "value_type" : "text",
         "template_kind" : "instance",
@@ -190,8 +190,8 @@
             "simple" : "implementation_file_extension",
             "qualified" : "quilt.cpp.implementation_file_extension"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "quilt.cpp"
+        "archetype_location" : {
+            "kernel" : "quilt.cpp"
         },
         "value_type" : "text",
         "template_kind" : "instance",
@@ -203,8 +203,8 @@
             "simple" : "enable_facet_folders",
             "qualified" : "quilt.cpp.enable_facet_folders"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "quilt.cpp"
+        "archetype_location" : {
+            "kernel" : "quilt.cpp"
         },
         "value_type" : "boolean",
         "template_kind" : "instance",
@@ -216,8 +216,8 @@
             "simple" : "enable_unique_file_names",
             "qualified" : "quilt.cpp.enable_unique_file_names"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "quilt.cpp"
+        "archetype_location" : {
+            "kernel" : "quilt.cpp"
         },
         "value_type" : "boolean",
         "template_kind" : "instance",
@@ -229,8 +229,8 @@
             "simple" : "requires_manual_default_constructor",
             "qualified" : "quilt.cpp.aspect.requires_manual_default_constructor"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "quilt.cpp"
+        "archetype_location" : {
+            "kernel" : "quilt.cpp"
         },
         "value_type" : "boolean",
         "template_kind" : "instance",
@@ -242,8 +242,8 @@
             "simple" : "requires_manual_move_constructor",
             "qualified" : "quilt.cpp.aspect.requires_manual_move_constructor"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "quilt.cpp"
+        "archetype_location" : {
+            "kernel" : "quilt.cpp"
         },
         "value_type" : "boolean",
         "template_kind" : "instance",
@@ -255,8 +255,8 @@
             "simple" : "requires_stream_manipulators",
             "qualified" : "quilt.cpp.aspect.requires_stream_manipulators"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "quilt.cpp"
+        "archetype_location" : {
+            "kernel" : "quilt.cpp"
         },
         "value_type" : "boolean",
         "template_kind" : "instance",
@@ -268,8 +268,8 @@
             "simple" : "disable_facet_directories",
             "qualified" : "quilt.cpp.disable_facet_directories"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "quilt.cpp"
+        "archetype_location" : {
+            "kernel" : "quilt.cpp"
         },
         "value_type" : "boolean",
         "template_kind" : "instance",
@@ -281,8 +281,8 @@
             "simple" : "family",
             "qualified" : "quilt.cpp.helper.family"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "quilt.cpp"
+        "archetype_location" : {
+            "kernel" : "quilt.cpp"
         },
         "value_type" : "text",
         "template_kind" : "instance",
@@ -294,8 +294,8 @@
             "simple" : "string_conversion_method",
             "qualified" : "quilt.cpp.streaming.string_conversion_method"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "quilt.cpp"
+        "archetype_location" : {
+            "kernel" : "quilt.cpp"
         },
         "value_type" : "text",
         "template_kind" : "instance",
@@ -307,8 +307,8 @@
             "simple" : "requires_quoting",
             "qualified" : "quilt.cpp.streaming.requires_quoting"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "quilt.cpp"
+        "archetype_location" : {
+            "kernel" : "quilt.cpp"
         },
         "value_type" : "boolean",
         "template_kind" : "instance",
@@ -320,8 +320,8 @@
             "simple" : "remove_unprintable_characters",
             "qualified" : "quilt.cpp.streaming.remove_unprintable_characters"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "quilt.cpp"
+        "archetype_location" : {
+            "kernel" : "quilt.cpp"
         },
         "value_type" : "boolean",
         "template_kind" : "instance",
@@ -333,10 +333,10 @@
             "simple" : "postfix",
             "qualified" : "quilt.cpp.cmake.source_cmakelists.postfix"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "quilt.cpp",
-            "facet_name" : "cmake",
-            "formatter_name" : "quilt.cpp.cmake.source_cmakelists.postfix"
+        "archetype_location" : {
+            "kernel" : "quilt.cpp",
+            "facet" : "cmake",
+            "archetype" : "quilt.cpp.cmake.source_cmakelists.postfix"
         },
         "value_type" : "text",
         "template_kind" : "instance",
@@ -348,10 +348,10 @@
             "simple" : "postfix",
             "qualified" : "quilt.cpp.cmake.include_cmakelists.postfix"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "quilt.cpp",
-            "facet_name" : "cmake",
-            "formatter_name" : "quilt.cpp.cmake.include_cmakelists.postfix"
+        "archetype_location" : {
+            "kernel" : "quilt.cpp",
+            "facet" : "cmake",
+            "archetype" : "quilt.cpp.cmake.include_cmakelists.postfix"
         },
         "value_type" : "text",
         "template_kind" : "instance",

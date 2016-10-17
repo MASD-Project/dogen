@@ -4,9 +4,9 @@
             "simple" : "directory",
             "qualified" : "quilt.cpp.hash.directory"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "quilt.cpp",
-            "facet_name" : "quilt.cpp.hash"
+        "archetype_location" : {
+            "kernel" : "quilt.cpp",
+            "facet" : "quilt.cpp.hash"
         },
         "value_type" : "text",
         "template_kind" : "instance",
@@ -18,9 +18,9 @@
             "simple" : "postfix",
             "qualified" : "quilt.cpp.hash.postfix"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "quilt.cpp",
-            "facet_name" : "quilt.cpp.hash"
+        "archetype_location" : {
+            "kernel" : "quilt.cpp",
+            "facet" : "quilt.cpp.hash"
         },
         "value_type" : "text",
         "template_kind" : "instance",
@@ -32,10 +32,10 @@
             "simple" : "postfix",
             "qualified" : "quilt.cpp.hash.class_header_formatter.postfix"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "quilt.cpp",
-            "facet_name" : "quilt.cpp.hash",
-            "formatter_name" : "quilt.cpp.hash.class_header_formatter"
+        "archetype_location" : {
+            "kernel" : "quilt.cpp",
+            "facet" : "quilt.cpp.hash",
+            "archetype" : "quilt.cpp.hash.class_header_formatter"
         },
         "value_type" : "text",
         "template_kind" : "instance",
@@ -47,10 +47,10 @@
             "simple" : "postfix",
             "qualified" : "quilt.cpp.hash.class_implementation_formatter.postfix"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "quilt.cpp",
-            "facet_name" : "quilt.cpp.hash",
-            "formatter_name" : "quilt.cpp.hash.class_implementation_formatter"
+        "archetype_location" : {
+            "kernel" : "quilt.cpp",
+            "facet" : "quilt.cpp.hash",
+            "archetype" : "quilt.cpp.hash.class_implementation_formatter"
         },
         "value_type" : "text",
         "template_kind" : "instance",
@@ -62,10 +62,10 @@
             "simple" : "postfix",
             "qualified" : "quilt.cpp.hash.enum_header_formatter.postfix"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "quilt.cpp",
-            "facet_name" : "quilt.cpp.hash",
-            "formatter_name" : "quilt.cpp.hash.enum_header_formatter"
+        "archetype_location" : {
+            "kernel" : "quilt.cpp",
+            "facet" : "quilt.cpp.hash",
+            "archetype" : "quilt.cpp.hash.enum_header_formatter"
         },
         "value_type" : "text",
         "template_kind" : "instance",
@@ -77,10 +77,10 @@
             "simple" : "postfix",
             "qualified" : "quilt.cpp.hash.enum_implementation_formatter.postfix"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "quilt.cpp",
-            "facet_name" : "quilt.cpp.hash",
-            "formatter_name" : "quilt.cpp.hash.enum_implementation_formatter"
+        "archetype_location" : {
+            "kernel" : "quilt.cpp",
+            "facet" : "quilt.cpp.hash",
+            "archetype" : "quilt.cpp.hash.enum_implementation_formatter"
         },
         "value_type" : "text",
         "template_kind" : "instance",
@@ -92,10 +92,10 @@
             "simple" : "postfix",
             "qualified" : "quilt.cpp.hash.master_header_formatter.postfix"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "quilt.cpp",
-            "facet_name" : "quilt.cpp.hash",
-            "formatter_name" : "quilt.cpp.hash.master_header_formatter"
+        "archetype_location" : {
+            "kernel" : "quilt.cpp",
+            "facet" : "quilt.cpp.hash",
+            "archetype" : "quilt.cpp.hash.master_header_formatter"
         },
         "value_type" : "text",
         "template_kind" : "instance",
@@ -107,10 +107,10 @@
             "simple" : "postfix",
             "qualified" : "quilt.cpp.hash.primitive_header_formatter.postfix"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "quilt.cpp",
-            "facet_name" : "quilt.cpp.hash",
-            "formatter_name" : "quilt.cpp.hash.primitive_header_formatter"
+        "archetype_location" : {
+            "kernel" : "quilt.cpp",
+            "facet" : "quilt.cpp.hash",
+            "archetype" : "quilt.cpp.hash.primitive_header_formatter"
         },
         "value_type" : "text",
         "template_kind" : "instance",

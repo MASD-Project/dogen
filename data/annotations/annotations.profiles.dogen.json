@@ -7,8 +7,8 @@
                 "simple" : "licence_name",
                 "qualified" : "decoration.licence_name"
             },
-            "ownership_hierarchy" : {
-                "model_name" : "formatters"
+            "archetype_location" : {
+                "kernel" : "formatters"
             },
             "template_kind" : "instance",
             "untyped_value" : [ "gpl_v3" ]
@@ -18,8 +18,8 @@
                 "simple" : "copyright_notices",
                 "qualified" : "decoration.copyright_notice"
             },
-            "ownership_hierarchy" : {
-                "model_name" : "formatters"
+            "archetype_location" : {
+                "kernel" : "formatters"
             },
             "template_kind" : "instance",
             "untyped_value" : [
@@ -31,8 +31,8 @@
                 "simple" : "modeline_group_name",
                 "qualified" : "decoration.modeline_group_name"
             },
-            "ownership_hierarchy" : {
-                "model_name" : "formatters"
+            "archetype_location" : {
+                "kernel" : "formatters"
             },
             "template_kind" : "instance",
             "untyped_value" : [ "emacs" ]

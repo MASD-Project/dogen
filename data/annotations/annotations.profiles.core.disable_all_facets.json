@@ -6,8 +6,8 @@
             "name" : {
                 "simple" : "enabled"
             },
-            "ownership_hierarchy" : {
-                "model_name" : "quilt.cpp"
+            "archetype_location" : {
+                "kernel" : "quilt.cpp"
             },
             "template_kind" : "facet_template",
             "untyped_value" : [ "false" ]

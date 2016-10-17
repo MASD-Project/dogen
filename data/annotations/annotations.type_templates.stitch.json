@@ -4,8 +4,8 @@
             "simple" : "stream_variable_name",
             "qualified" : "stream_variable_name"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "stitch"
+        "archetype_location" : {
+            "kernel" : "stitch"
         },
         "value_type" : "text",
         "template_kind" : "instance",
@@ -17,8 +17,8 @@
             "simple" : "template_path",
             "qualified" : "template_path"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "stitch"
+        "archetype_location" : {
+            "kernel" : "stitch"
         },
         "value_type" : "text",
         "template_kind" : "instance",
@@ -29,8 +29,8 @@
             "simple" : "output_path",
             "qualified" : "output_path"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "stitch"
+        "archetype_location" : {
+            "kernel" : "stitch"
         },
         "value_type" : "text",
         "template_kind" : "instance",
@@ -41,8 +41,8 @@
             "simple" : "relative_output_directory",
             "qualified" : "relative_output_directory"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "stitch"
+        "archetype_location" : {
+            "kernel" : "stitch"
         },
         "value_type" : "text",
         "template_kind" : "instance",
@@ -53,8 +53,8 @@
             "simple" : "inclusion_dependency",
             "qualified" : "inclusion_dependency"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "stitch"
+        "archetype_location" : {
+            "kernel" : "stitch"
         },
         "value_type" : "text_collection",
         "template_kind" : "instance",
@@ -65,8 +65,8 @@
             "simple" : "containing_namespaces",
             "qualified" : "containing_namespaces"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "stitch"
+        "archetype_location" : {
+            "kernel" : "stitch"
         },
         "value_type" : "text",
         "template_kind" : "instance",

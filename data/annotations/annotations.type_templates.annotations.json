@@ -4,8 +4,8 @@
             "simple" : "profile",
             "qualified" : "annotations.profile"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "annotations"
+        "archetype_location" : {
+            "kernel" : "annotations"
         },
         "value_type" : "text",
         "template_kind" : "instance",

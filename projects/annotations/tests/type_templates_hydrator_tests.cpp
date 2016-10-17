@@ -35,9 +35,9 @@ const std::string test_suite("type_templates_hydrator_tests");
 
 const std::string simple_name("a simple name");
 const std::string qualified_name("a qualified name");
-const std::string model_name("a model name");
-const std::string formatter_name("a formatter name");
-const std::string facet_name("a facet name");
+const std::string kernel("a kernel");
+const std::string archetype("an archetype");
+const std::string facet("a facet");
 
 const std::string trivial_type_template(R"([
     {
@@ -45,10 +45,10 @@ const std::string trivial_type_template(R"([
             "simple" : "a simple name",
             "qualified" : "a qualified name"
         },
-        "ownership_hierarchy" : {
-            "model_name" : "a model name",
-            "formatter_name" : "a formatter name",
-            "facet_name" : "a facet name"
+        "archetype_location" : {
+            "kernel" : "a kernel",
+            "archetype" : "an archetype",
+            "facet" : "a facet"
         },
         "value_type" : "boolean",
         "template_kind" : "instance",
@@ -84,9 +84,9 @@ BOOST_AUTO_TEST_CASE(trivial_type_template_hydrates_into_expected_collection) {
 
     BOOST_CHECK(tt.name().simple() == simple_name);
     BOOST_CHECK(tt.name().qualified() == qualified_name);
-    BOOST_CHECK(tt.archetype_location().kernel() == model_name);
-    BOOST_CHECK(tt.archetype_location().facet() == facet_name);
-    BOOST_CHECK(tt.archetype_location().archetype() == formatter_name);
+    BOOST_CHECK(tt.archetype_location().kernel() == kernel);
+    BOOST_CHECK(tt.archetype_location().facet() == facet);
+    BOOST_CHECK(tt.archetype_location().archetype() == archetype);
 
     const auto st(dogen::annotations::scope_types::not_applicable);
     BOOST_CHECK(tt.scope() == st);

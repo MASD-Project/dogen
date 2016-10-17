@@ -8,8 +8,8 @@
                 "simple" : "disable_facet_directories",
                 "qualified" : "quilt.cpp.disable_facet_directories"
             },
-            "ownership_hierarchy" : {
-                "model_name" : "quilt.cpp"
+            "archetype_location" : {
+                "kernel" : "quilt.cpp"
             },
             "template_kind" : "instance",
             "untyped_value" : [ "true" ]
