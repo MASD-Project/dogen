@@ -57,7 +57,7 @@ public:
     ~workflow() noexcept;
 
 private:
-    std::vector<boost::filesystem::path> make_data_directories() const;
+    std::vector<boost::filesystem::path> obtain_data_directories() const;
 
     /**
      * @brief Creates the formatters' repository with decoration data.
@@ -72,7 +72,7 @@ private:
     create_decoration_properties_factory(
             const annotations::type_repository& atrp,
             const dogen::formatters::repository& frp,
-            const annotations::annotation& root) const;
+            const annotations::annotation& ra) const;
 
     /**
      * @brief Create the formattables representation of the yarn model.
@@ -80,7 +80,7 @@ private:
     formattables::model create_formattables_model(
         const options::cpp_options& opts,
         const annotations::type_repository& atrp,
-        const annotations::annotation& root,
+        const annotations::annotation& ra,
         const dogen::formatters::decoration_properties_factory& dpf,
         const formatters::repository& frp, const yarn::model& m) const;
 

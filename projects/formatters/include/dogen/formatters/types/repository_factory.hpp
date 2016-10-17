@@ -37,36 +37,36 @@ namespace dogen {
 namespace formatters {
 
 /**
- * @brief Hydrates all reference data used by the formatters model
- * into a repository.
+ * @brief Generates the formatter's repositotry by hydrating all
+ * files found in the supplied directories into objects of the
+ * formatters' domain.
  */
-class hydration_workflow {
+class repository_factory {
     /**
      * @brief Creates the list of directories to load data from.
      */
     std::vector<boost::filesystem::path> create_directory_list(
-        const std::vector<boost::filesystem::path>& dirs,
+        const std::vector<boost::filesystem::path>& data_dirs,
         const std::string& for_whom) const;
 
     /**
      * @brief Hydrates all the modelines available in the library.
      */
     std::unordered_map<std::string, modeline_group> hydrate_modeline_groups(
-        const std::vector<boost::filesystem::path>& dirs) const;
+        const std::vector<boost::filesystem::path>& data_dirs) const;
 
     /**
      * @brief Hydrates all the licence texts available in the library.
      */
     std::unordered_map<std::string, std::string> hydrate_licence_texts(
-        const std::vector<boost::filesystem::path>& dirs) const;
+        const std::vector<boost::filesystem::path>& data_dirs) const;
 
 public:
     /**
-     * @brief Hydrate all files found in the supplied directories into
-     * objects of the formatters' domain.
+     * @brief Generates the formatter's repositotry.
      */
-    repository hydrate(
-        const std::vector<boost::filesystem::path>& data_dirs) const;
+    repository
+    make(const std::vector<boost::filesystem::path>& data_dirs) const;
 };
 
 } }

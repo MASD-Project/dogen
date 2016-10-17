@@ -23,18 +23,17 @@
 #include "dogen/utility/io/vector_io.hpp"
 #include "dogen/utility/io/forward_list_io.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
-#include "dogen/formatters/io/modeline_group_io.hpp"
 #include "dogen/formatters/io/repository_io.hpp"
-#include "dogen/formatters/types/hydration_workflow.hpp"
+#include "dogen/formatters/io/modeline_group_io.hpp"
 #include "dogen/formatters/types/modeline_group_hydrator.hpp"
 #include "dogen/formatters/types/licence_text_hydrator.hpp"
-#include "dogen/formatters/types/hydration_workflow.hpp"
+#include "dogen/formatters/types/repository_factory.hpp"
 
 using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("formatters.hydration_workflow"));
+auto lg(logger_factory("formatters.repository_factory"));
 
 const std::string modeline_groups_dir("modeline_groups");
 const std::string licence_dir("licences");
@@ -45,7 +44,7 @@ namespace dogen {
 namespace formatters {
 
 std::vector<boost::filesystem::path>
-hydration_workflow::create_directory_list(
+repository_factory::create_directory_list(
     const std::vector<boost::filesystem::path>& data_dirs,
     const std::string& for_whom) const {
     std::vector<boost::filesystem::path> r;
@@ -56,7 +55,7 @@ hydration_workflow::create_directory_list(
 }
 
 std::unordered_map<std::string, modeline_group>
-hydration_workflow::hydrate_modeline_groups(
+repository_factory::hydrate_modeline_groups(
     const std::vector<boost::filesystem::path>& data_dirs) const {
     BOOST_LOG_SEV(lg, debug) << "Hydrating modeline groups.";
 
@@ -82,7 +81,7 @@ hydration_workflow::hydrate_modeline_groups(
     return r;
 }
 
-std::unordered_map<std::string, std::string> hydration_workflow::
+std::unordered_map<std::string, std::string> repository_factory::
 hydrate_licence_texts(
     const std::vector<boost::filesystem::path>& data_dirs) const {
     BOOST_LOG_SEV(lg, debug) << "Hydrating licence texts.";
@@ -109,7 +108,7 @@ hydrate_licence_texts(
     return r;
 }
 
-repository hydration_workflow::hydrate(
+repository repository_factory::make(
     const std::vector<boost::filesystem::path>& data_dirs) const {
     BOOST_LOG_SEV(lg, debug) << "Hydrating repository.";
 

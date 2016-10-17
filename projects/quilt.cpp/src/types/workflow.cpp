@@ -20,11 +20,8 @@
  */
 #include <boost/algorithm/string/join.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/utility/io/list_io.hpp"
-#include "dogen/utility/io/optional_io.hpp"
 #include "dogen/utility/filesystem/path.hpp"
-#include "dogen/formatters/io/decoration_properties_io.hpp"
-#include "dogen/formatters/types/hydration_workflow.hpp"
+#include "dogen/formatters/types/repository_factory.hpp"
 #include "dogen/quilt.cpp/types/formatters/workflow.hpp"
 #include "dogen/quilt.cpp/types/formattables/workflow.hpp"
 #include "dogen/quilt.cpp/types/workflow.hpp"
@@ -47,7 +44,7 @@ namespace cpp {
 workflow::~workflow() noexcept { }
 
 std::vector<boost::filesystem::path> workflow::
-make_data_directories() const {
+obtain_data_directories() const {
     const auto dir(dogen::utility::filesystem::data_files_directory());
     const auto r(std::vector<boost::filesystem::path> { dir });
     return r;
@@ -56,29 +53,27 @@ make_data_directories() const {
 dogen::formatters::repository workflow::
 create_formatters_decoration_repository(
     const std::vector<boost::filesystem::path>& data_directories) const {
-    dogen::formatters::hydration_workflow hw;
-    return hw.hydrate(data_directories);
+    dogen::formatters::repository_factory hw;
+    return hw.make(data_directories);
 }
 
 dogen::formatters::decoration_properties_factory
 workflow::create_decoration_properties_factory(
     const annotations::type_repository& atrp,
     const dogen::formatters::repository& frp,
-    const annotations::annotation& root) const {
-
+    const annotations::annotation& ra) const {
     using dogen::formatters::decoration_properties_factory;
-    decoration_properties_factory r(atrp, frp, root);
+    decoration_properties_factory r(atrp, frp, ra);
     return r;
 }
 
 formattables::model workflow::create_formattables_model(
     const options::cpp_options& opts, const annotations::type_repository& atrp,
-    const annotations::annotation& root,
+    const annotations::annotation& ra,
     const dogen::formatters::decoration_properties_factory& dpf,
-    const formatters::repository& qfrp, const yarn::model& m) const {
-
+    const formatters::repository& frp, const yarn::model& m) const {
     formattables::workflow fw;
-    return fw.execute(opts, atrp, root, dpf, qfrp, m);
+    return fw.execute(opts, atrp, ra, dpf, frp, m);
 }
 
 std::string workflow::name() const {
@@ -103,22 +98,20 @@ workflow::format(const formattables::model& fm) const {
 
 std::forward_list<annotations::archetype_location>
 workflow::archetype_location() const {
-    using formatters::workflow;
-    return workflow::registrar().ownership_hierarchy();
+    return formatters::workflow::registrar().ownership_hierarchy();
 }
 
 std::forward_list<dogen::formatters::artefact>
 workflow::generate(const options::knitting_options& ko,
-    const annotations::type_repository& atrp,
-    const yarn::model& m) const {
+    const annotations::type_repository& atrp, const yarn::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started backend.";
 
-    const auto dd(make_data_directories());
+    const auto dd(obtain_data_directories());
     const auto drp(create_formatters_decoration_repository(dd));
-    const auto ro(m.root_module().annotation());
-    const auto dpf(create_decoration_properties_factory(atrp, drp, ro));
+    const auto ra(m.root_module().annotation());
+    const auto dpf(create_decoration_properties_factory(atrp, drp, ra));
     const auto& frp(formatters::workflow::registrar().formatter_repository());
-    const auto fm(create_formattables_model(ko.cpp(), atrp, ro, dpf, frp, m));
+    const auto fm(create_formattables_model(ko.cpp(), atrp, ra, dpf, frp, m));
     const auto r(format(fm));
 
     BOOST_LOG_SEV(lg, debug) << "Finished backend.";

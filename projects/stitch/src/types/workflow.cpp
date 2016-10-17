@@ -29,7 +29,7 @@
 #include "dogen/annotations/types/type_repository_factory.hpp"
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
 #include "dogen/annotations/types/archetype_location_repository_factory.hpp"
-#include "dogen/formatters/types/hydration_workflow.hpp"
+#include "dogen/formatters/types/repository_factory.hpp"
 #include "dogen/formatters/io/artefact_io.hpp"
 #include "dogen/formatters/types/filesystem_writer.hpp"
 #include "dogen/stitch/types/parser.hpp"
@@ -129,8 +129,8 @@ workflow::obtain_ownership_hierarchy_repository() const {
 
 dogen::formatters::repository workflow::create_formatters_repository(
     const std::vector<boost::filesystem::path>& data_dirs) const {
-    dogen::formatters::hydration_workflow hw;
-    return hw.hydrate(data_dirs);
+    dogen::formatters::repository_factory f;
+    return f.make(data_dirs);
 }
 
 annotations::type_repository workflow::create_annotations_type_repository(
