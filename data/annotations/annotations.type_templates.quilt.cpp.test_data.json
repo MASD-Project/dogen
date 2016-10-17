@@ -30,7 +30,7 @@
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "quilt.cpp.test_data.class_header_formatter.postfix"
+            "qualified" : "quilt.cpp.test_data.class_header.postfix"
         },
         "archetype_location" : {
             "kernel" : "quilt.cpp",
@@ -45,7 +45,7 @@
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "quilt.cpp.test_data.class_implementation_formatter.postfix"
+            "qualified" : "quilt.cpp.test_data.class_implementation.postfix"
         },
         "archetype_location" : {
             "kernel" : "quilt.cpp",
@@ -60,7 +60,7 @@
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "quilt.cpp.test_data.enum_header_formatter.postfix"
+            "qualified" : "quilt.cpp.test_data.enum_header.postfix"
         },
         "archetype_location" : {
             "kernel" : "quilt.cpp",
@@ -75,7 +75,7 @@
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "quilt.cpp.test_data.enum_implementation_formatter.postfix"
+            "qualified" : "quilt.cpp.test_data.enum_implementation.postfix"
         },
         "archetype_location" : {
             "kernel" : "quilt.cpp",
@@ -90,7 +90,7 @@
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "quilt.cpp.test_data.master_header_formatter.postfix"
+            "qualified" : "quilt.cpp.test_data.master_header.postfix"
         },
         "archetype_location" : {
             "kernel" : "quilt.cpp",
@@ -105,7 +105,7 @@
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "quilt.cpp.test_data.primitive_header_formatter.postfix"
+            "qualified" : "quilt.cpp.test_data.primitive_header.postfix"
         },
         "archetype_location" : {
             "kernel" : "quilt.cpp",

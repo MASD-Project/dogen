@@ -32,7 +32,7 @@ std::string traits::kernel() {
 
 std::string traits::
 master_header_archetype(const std::string& facet) {
-    return facet + ".master_header_formatter";
+    return facet + ".master_header";
 }
 
 std::string traits::cmake_facet() {

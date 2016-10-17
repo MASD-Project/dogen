@@ -30,7 +30,7 @@
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "quilt.cpp.odb.class_header_formatter.postfix"
+            "qualified" : "quilt.cpp.odb.class_header.postfix"
         },
         "archetype_location" : {
             "kernel" : "quilt.cpp",
@@ -45,7 +45,7 @@
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "quilt.cpp.odb.enum_header_formatter.postfix"
+            "qualified" : "quilt.cpp.odb.enum_header.postfix"
         },
         "archetype_location" : {
             "kernel" : "quilt.cpp",
@@ -60,7 +60,7 @@
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "quilt.cpp.odb.odb_options_formatter.postfix"
+            "qualified" : "quilt.cpp.odb.odb_options.postfix"
         },
         "archetype_location" : {
             "kernel" : "quilt.cpp",
@@ -75,7 +75,7 @@
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "quilt.cpp.odb.master_header_formatter.postfix"
+            "qualified" : "quilt.cpp.odb.master_header.postfix"
         },
         "archetype_location" : {
             "kernel" : "quilt.cpp",
@@ -103,7 +103,7 @@
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "quilt.cpp.odb.primitive_header_formatter.postfix"
+            "qualified" : "quilt.cpp.odb.primitive_header.postfix"
         },
         "archetype_location" : {
             "kernel" : "quilt.cpp",

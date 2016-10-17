@@ -29,7 +29,7 @@
         {
             "name" : {
                 "simple" : "overwrite",
-                "qualified" : "quilt.cpp.types.forward_declarations_formatter.overwrite"
+                "qualified" : "quilt.cpp.types.forward_declarations.overwrite"
             },
             "archetype_location" : {
                 "kernel" : "quilt.cpp"

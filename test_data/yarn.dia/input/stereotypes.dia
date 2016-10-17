@@ -366,8 +366,8 @@
 #DOGEN quilt.cpp.serialization.overwrite=false
 #DOGEN quilt.cpp.test_data.enabled=true
 #DOGEN quilt.cpp.test_data.overwrite=false
-#DOGEN quilt.cpp.types.forward_declarations_formatter.overwrite=true
-#DOGEN quilt.cpp.serialization.forward_declarations_formatter.overwrite=true#</dia:string>
+#DOGEN quilt.cpp.types.forward_declarations.overwrite=true
+#DOGEN quilt.cpp.serialization.forward_declarations.overwrite=true#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

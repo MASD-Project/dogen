@@ -38,44 +38,42 @@ std::string traits::canonical_archetype() {
 }
 
 std::string traits::class_header_archetype() {
-    static std::string r(traits::facet() + ".class_header_formatter");
+    static std::string r(traits::facet() + ".class_header");
     return r;
 }
 
 std::string traits::forward_declarations_archetype() {
-    static std::string r(traits::facet() +
-        ".forward_declarations_formatter");
+    static std::string r(traits::facet() + ".forward_declarations");
     return r;
 }
 
 std::string traits::class_implementation_archetype() {
-    static std::string r(traits::facet() +
-        ".class_implementation_formatter");
+    static std::string r(traits::facet() + ".class_implementation");
     return r;
 }
 
 std::string traits::enum_header_archetype() {
-    static std::string r(traits::facet() + ".enum_header_formatter");
+    static std::string r(traits::facet() + ".enum_header");
     return r;
 }
 
 std::string traits::exception_header_archetype() {
-    static std::string r(traits::facet() + ".exception_header_formatter");
+    static std::string r(traits::facet() + ".exception_header");
     return r;
 }
 
 std::string traits::namespace_header_archetype() {
-    static std::string r(traits::facet() + ".namespace_header_formatter");
+    static std::string r(traits::facet() + ".namespace_header");
     return r;
 }
 
 std::string traits::visitor_header_archetype() {
-    static std::string r(traits::facet() + ".visitor_header_formatter");
+    static std::string r(traits::facet() + ".visitor_header");
     return r;
 }
 
 std::string traits::primitive_header_archetype() {
-    static std::string r(traits::facet() + ".primitive_header_formatter");
+    static std::string r(traits::facet() + ".primitive_header");
     return r;
 }
 

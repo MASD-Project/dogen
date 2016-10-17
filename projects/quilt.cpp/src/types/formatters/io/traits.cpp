@@ -38,29 +38,27 @@ std::string traits::canonical_archetype() {
 }
 
 std::string traits::class_header_archetype() {
-    static std::string r(traits::facet() + ".class_header_formatter");
+    static std::string r(traits::facet() + ".class_header");
     return r;
 }
 
 std::string traits::class_implementation_archetype() {
-    static std::string r(traits::facet() +
-        ".class_implementation_formatter");
+    static std::string r(traits::facet() + ".class_implementation");
     return r;
 }
 
 std::string traits::enum_header_archetype() {
-    static std::string r(traits::facet() + ".enum_header_formatter");
+    static std::string r(traits::facet() + ".enum_header");
     return r;
 }
 
 std::string traits::enum_implementation_archetype() {
-    static std::string r(traits::facet() +
-        ".enum_implementation_formatter");
+    static std::string r(traits::facet() + ".enum_implementation");
     return r;
 }
 
 std::string traits::primitive_header_archetype() {
-    static std::string r(traits::facet() + ".primitive_header_formatter");
+    static std::string r(traits::facet() + ".primitive_header");
     return r;
 }
 
