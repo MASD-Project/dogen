@@ -172,25 +172,25 @@ std::string assistant::get_product_name(const yarn::name& n) const {
 
 const formattables::artefact_properties& assistant::
 obtain_artefact_properties(const formattables::element_properties& eprops,
-    const std::string& archetype) const {
-    const auto i(eprops.artefact_properties().find(archetype));
+    const std::string& formatter_name) const {
+    const auto i(eprops.artefact_properties().find(formatter_name));
     if (i == eprops.artefact_properties().end()) {
         BOOST_LOG_SEV(lg, error) << artefact_properties_missing
-                                 << archetype;
-        BOOST_THROW_EXCEPTION(
-            formatting_error(artefact_properties_missing + archetype));
+                                 << formatter_name;
+        BOOST_THROW_EXCEPTION(formatting_error(artefact_properties_missing +
+                formatter_name));
     }
     return i->second;
 }
 
 const formattables::artefact_properties& assistant::
 obtain_artefact_properties(const std::string& element_id,
-    const std::string& archetype) const {
+    const std::string& formatter_name) const {
 
     const auto& formattables(context_.model().formattables());
     formattables::canonical_archetype_resolver res(formattables);
 
-    const auto resolved_arch(res.resolve(element_id, archetype));
+    const auto resolved_arch(res.resolve(element_id, formatter_name));
     const auto i(formattables.find(element_id));
     if (i == formattables.end()) {
         BOOST_LOG_SEV(lg, error) << element_not_found << element_id;
@@ -202,13 +202,14 @@ obtain_artefact_properties(const std::string& element_id,
 }
 
 formattables::facet_properties assistant::
-obtain_facet_properties(const std::string& facet) const {
+obtain_facet_properties(const std::string& facet_name) const {
     const auto& fct_props(context_.model().facet_properties());
-    const auto i(fct_props.find(facet));
+    const auto i(fct_props.find(facet_name));
     if (i == fct_props.end()) {
-        BOOST_LOG_SEV(lg, error) << facet_properties_missing << facet;
-        BOOST_THROW_EXCEPTION(
-            formatting_error(facet_properties_missing + facet));
+        BOOST_LOG_SEV(lg, error) << facet_properties_missing
+                                 << facet_name;
+        BOOST_THROW_EXCEPTION(formatting_error(facet_properties_missing +
+                facet_name));
     }
     return i->second;
 }
@@ -228,18 +229,26 @@ std::list<std::string> assistant::make_namespaces(const yarn::name& n) const {
     return nf.flatten(n);
 }
 
-bool assistant::is_facet_enabled(const std::string& facet) const {
-    const auto& fct_props(obtain_facet_properties(facet));
+bool assistant::
+is_formatter_enabled(const std::string& formatter_name) const {
+    const auto& eprops(context_.element_properties());
+    const auto& art_props(obtain_artefact_properties(eprops, formatter_name));
+    return art_props.enabled();
+}
+
+bool assistant::
+is_facet_enabled(const std::string& facet_name) const {
+    const auto& fct_props(obtain_facet_properties(facet_name));
     return fct_props.enabled();
 }
 
 std::string assistant::
-get_facet_directory_for_facet(const std::string& facet) const {
-    const auto& fct_props(obtain_facet_properties(facet));
+get_facet_directory_for_facet(const std::string& facet_name) const {
+    const auto& fct_props(obtain_facet_properties(facet_name));
     if (fct_props.directory().empty()) {
-        BOOST_LOG_SEV(lg, error) << facet_directory_missing << facet;
+        BOOST_LOG_SEV(lg, error) << facet_directory_missing << facet_name;
         BOOST_THROW_EXCEPTION(
-            formatting_error(facet_directory_missing + facet));
+            formatting_error(facet_directory_missing + facet_name));
     }
     return fct_props.directory();
 }
@@ -266,12 +275,12 @@ bool assistant::requires_stream_manipulators() const {
 
 bool assistant::is_serialization_enabled() const {
     using formatters::serialization::traits;
-    return is_facet_enabled(traits::facet());
+    return is_formatter_enabled(traits::class_header_archetype());
 }
 
 bool assistant::is_io_enabled() const {
     using formatters::io::traits;
-    return is_facet_enabled(traits::facet());
+    return is_formatter_enabled(traits::class_header_archetype());
 }
 
 bool assistant::is_odb_facet_enabled() const {
@@ -420,8 +429,8 @@ assistant::get_helpers(const formattables::helper_properties& hp) const {
 }
 
 bool assistant::is_io() const {
-    const auto fct(ownership_hierarchy_.facet());
-    return formatters::io::traits::facet()  == fct;
+    const auto fn(ownership_hierarchy_.facet());
+    return formatters::io::traits::facet()  == fn;
 }
 
 bool assistant::

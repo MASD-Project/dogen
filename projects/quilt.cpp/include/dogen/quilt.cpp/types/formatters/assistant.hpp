@@ -108,17 +108,19 @@ public:
 
 private:
     /**
-     * @brief Obtains the artefact properties for the archetype.
+     * @brief Obtains the formatter configuration for the formatter
+     * identified by formatter name.
      *
-     * @pre Artefact properties must exist for the archetype.
+     * @pre Formatter configuration must exist for the formatter.
      */
     /**@{*/
     const formattables::artefact_properties&
-    obtain_artefact_properties(const formattables::element_properties& eprops,
-        const std::string& archetype) const;
+    obtain_artefact_properties(
+        const formattables::element_properties& eprops,
+        const std::string& formatter_name) const;
     const formattables::artefact_properties&
     obtain_artefact_properties(const std::string& element_id,
-        const std::string& archetype) const;
+        const std::string& formatter_name) const;
     /**@}*/
 
     /**
@@ -128,17 +130,24 @@ private:
      * @pre Facet configuration must exist for the facet.
      */
     formattables::facet_properties
-    obtain_facet_properties(const std::string& facet) const;
+    obtain_facet_properties(const std::string& facet_name) const;
+
+    /**
+     * @brief Returns true if the formatter is enabled, false
+     * otherwise.
+     */
+    bool is_formatter_enabled(const std::string& formatter_name) const;
 
     /**
      * @brief Returns true if the facet is enabled, false otherwise.
      */
-    bool is_facet_enabled(const std::string& facet) const;
+    bool is_facet_enabled(const std::string& facet_name) const;
 
     /**
-     * @brief Returns the folder for the supplied facet.
+     * @brief Returns the folder for the current facet.
      */
-    std::string get_facet_directory_for_facet(const std::string& facet) const;
+    std::string get_facet_directory_for_facet(
+        const std::string& facet_name) const;
 
 public:
     std::string get_odb_facet_directory() const;
