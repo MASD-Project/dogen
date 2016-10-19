@@ -260,6 +260,79 @@ The part is organised as follows:
 underpinnings behind Dogen, its internal architecture and assorted
 aspects around its development.
 
+\chapter{Conceptual Model}
+
+\lettrine{A}{t the core} of Dogen lies the \texttt{conceptual model}:
+the set of fundamental domain concepts and the ubiquitous language
+that defines them. It's important to understand that the
+\texttt{conceptual model} is not merely a union of the documentation
+of key classes. Instead, \emph{it is a narrative that ties them all
+  together into a single, coherent and unified whole}, with the
+objective of providing the conceptual framework required to implement
+the Dogen vision. Ideally we want the smallest possible impedance
+mismatch between code and the \texttt{conceptual model}, but this is
+not always possible.
+
+At the highest level of the \texttt{conceptual model} sits the
+\texttt{product}, composed of a set of \texttt{models}. It is up to
+Dogen users to add any semantic meaning to these two concepts; they
+are just containers. For each \texttt{model} there are two important
+representations: the \texttt{input model} and the \texttt{output
+  model}. The \texttt{output model} is made up of a set of files and
+it is what the end user is interested in. The \texttt{input model} is
+a representation of the \texttt{model} that contains the minimal
+information required to produce the \texttt{output model}. An
+\texttt{input model} must be obey one of the well-defined defined
+\texttt{input model specifications}.
+
+The \texttt{output model} is made up of a set of files, where each
+file is a distinct element in the set regardless of its content; each
+file maps to an \texttt{artefact} in \texttt{artefact space}. However,
+the \texttt{artefact} is a generalisation of the notion of file, since
+it may exist in memory as an object, in a database as a record and so
+forth whereas a file is understood here as the traditional Operative
+System concept. Both files and \texttt{artefacts} have a
+\texttt{content}, defined as a set of bytes.
+
+Each \texttt{artefact} can have a meta-type associated with it: its
+\texttt{archetype}. The objective of the \texttt{archetype} is to
+store the smallest set of information needed to express a set of
+\texttt{artefacts}.
+
+required as inputs to describe a set of files.
+
+There are three \texttt{spaces} in the \texttt{conceptual model},
+which can be arranged into a hierarchy:
+
+\begin{itemize}
+  \item the \texttt{modeling space};
+  \item the \texttt{archetype space};
+  \item the \texttt{artefact space}.
+\end{itemize}
+
+
+
+The role of the \texttt{archetype} is to extract
+all the commonalities between a set of files
+
+\texttt{artefacts} may display patterns:
+
+The \texttt{generated model} is defined as a set of files which the user
+wishes to generate. An \texttt{input model} is a set of definitions
+
+\texttt{generation} is defined as the
+transformation of some input
+
+
+
+An
+\texttt{artefact}
+
+
+
+The starting point of the \texttt{conceptual model} is the
+\texttt{entity}.
+
 \chapter{Model Driven Software Development}
 \label{mdsd}
 

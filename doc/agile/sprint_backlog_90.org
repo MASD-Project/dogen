@@ -798,6 +798,14 @@ Random notes:
   part of the expansion, we could set a number of stitch fields which
   would then be picked up by some knit-specific workflow classes.
 
+*** STARTED Document the conceptual model                             :story:
+    CLOCK: [2016-10-19 Wed 19:10]--[2016-10-19 Wed 21:08] =>  1:58
+
+We seem to be pretty close to the end of the conceptual model for
+dogen. We should write it up whilst its still fresh. We should try to
+use mathematical notation where possible to practice it. We should
+also get it reviewed.
+
 *** Stitch not writing when template has changed                      :story:
 
 It seems we can change a text template but not get stitch to update
@@ -938,13 +946,6 @@ Further thoughts:
   instantiates stitch (probably within quilt) with the parameters and
   generates the file. Actually we probably can't have this in quilt
   because we still need formatter properties.
-
-*** Document the conceptual model                                     :story:
-
-We seem to be pretty close to the end of the conceptual model for
-dogen. We should write it up whilst its still fresh. We should try to
-use mathematical notation where possible to practice it. We should
-also get it reviewed.
 
 *** Refactor ownership hierarchy                                      :story:
 
