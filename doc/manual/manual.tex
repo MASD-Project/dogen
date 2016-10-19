@@ -265,73 +265,88 @@ aspects around its development.
 \lettrine{A}{t the core} of Dogen lies the \texttt{conceptual model}:
 the set of fundamental domain concepts and the ubiquitous language
 that defines them. It's important to understand that the
-\texttt{conceptual model} is not merely a union of the documentation
-of key classes. Instead, \emph{it is a narrative that ties them all
-  together into a single, coherent and unified whole}, with the
-objective of providing the conceptual framework required to implement
-the Dogen vision. Ideally we want the smallest possible impedance
-mismatch between code and the \texttt{conceptual model}, but this is
-not always possible.
+\texttt{conceptual model} is not the union of the documentation of
+Dogen's key classes; instead, it lives at a higher level. Its
+objective is to provide a narrative that ties all of Dogen into a
+single, coherent and unified whole, creating the conceptual framework
+needed to implement the Vision. Not all of the elements of the
+\texttt{conceptual model} map directly to code, and those that do
+don't always map with low impedance mismatches. However, we do strive
+to reduce these mismatches as much as possible.
 
 At the highest level of the \texttt{conceptual model} sits the
 \texttt{product}, composed of a set of \texttt{models}. It is up to
-Dogen users to add any semantic meaning to these two concepts; they
-are just containers. For each \texttt{model} there are two important
-representations: the \texttt{input model} and the \texttt{output
-  model}. The \texttt{output model} is made up of a set of files and
-it is what the end user is interested in. The \texttt{input model} is
-a representation of the \texttt{model} that contains the minimal
-information required to produce the \texttt{output model}. An
-\texttt{input model} must be obey one of the well-defined defined
-\texttt{input model specifications}.
+users to add any semantic meaning to these two concepts; from the
+\texttt{conceptual model's} perspective they are just containers. For
+each \texttt{model} there are two important representations: the
+\texttt{input model} and the \texttt{output model}. The \texttt{output
+  model} is made up of a set of files and it is these that the end
+user is interested in. The \texttt{input model} is a representation of
+the \texttt{model} that contains the minimal information required to
+produce the \texttt{output model}. An \texttt{input model} is
+considered well-formed if it follows the rules of one of the
+well-defined \texttt{input model specifications}.
 
-The \texttt{output model} is made up of a set of files, where each
-file is a distinct element in the set regardless of its content; each
-file maps to an \texttt{artefact} in \texttt{artefact space}. However,
-the \texttt{artefact} is a generalisation of the notion of file, since
-it may exist in memory as an object, in a database as a record and so
-forth whereas a file is understood here as the traditional Operative
-System concept. Both files and \texttt{artefacts} have a
-\texttt{content}, defined as a set of bytes.
+The \texttt{output model} is the set of all files located below a
+directory called the \texttt{output model directory}, where each file
+is a distinct element in the set. Each file has a one-to-one mapping
+to an \texttt{artefact}. An \texttt{artefact} can be thought of as a
+generalisation of \emph{file}, since the \texttt{artefact} may exist
+in memory as an object, in a database as a record and so forth whereas
+\emph{file} here is understood as the traditional Operative System
+concept. Both files and \texttt{artefacts} have an associated
+\texttt{content}, defined as a set of bytes. Note that two files are
+entities with distinct identities even if they have the same content,
+and the same applies to \texttt{artefacts}.
 
-Each \texttt{artefact} can have a meta-type associated with it: its
-\texttt{archetype}. The objective of the \texttt{archetype} is to
-store the smallest set of information needed to express a set of
-\texttt{artefacts}.
+An \texttt{artefact} can have a meta-type associated with it: it's
+\texttt{archetype}.  An \texttt{archetype} is an entity with
+identity. The objective of the \texttt{archetype} is to store the
+smallest subset of information needed to recreate the \texttt{content}
+of a set of \texttt{artefacts}. Whilst \texttt{artefacts} are relative
+to an \texttt{output model}, \texttt{archetypes} are common to all
+models because, by definition, their objective is to extract
+commonalities between models. An example of an \texttt{archetype} is:
+``header file providing the definition of a domain type in a
+programming language P''.
 
-required as inputs to describe a set of files.
+The \texttt{identity archetype} is defined as an \texttt{archetype}
+which stores the entirety of the content of one or more
+\texttt{artefacts}~--- rather than a subset
+
+A \texttt{formatter} is defined as a function that takes in an
+\texttt{archetype} plus possibly some additional,
+\texttt{formatter}-dependent parameters, and produces a set of
+\texttt{artefacts}. Each \texttt{formatter} maps to one and only one
+\texttt{archetype}. An \texttt{archetype} can map to more than one
+\texttt{formatter}.
+
+\texttt{artefacts}~--- and, by implication, \texttt{archetypes} and
+\texttt{formatters}~--- can be grouped into \texttt{facets}. A
+\texttt{facet} is a set of \texttt{artefacts} with a common,
+well-defined purpose such as for example ``artefacts that provide all
+definitions of domain types in a programming language
+P''. \texttt{facets} can be grouped into \texttt{kernels}: these are
+sets of \texttt{facets} that provide related functionality such as for
+example ``generating domain models for a programming language P''.
+
+An \texttt{archetype} can have a meta-type associated with it: its
+\texttt{modeling element}, often abbreviated to just
+\texttt{element}. A \texttt{modeling element} is an entity with
+identity. The objective of the \texttt{element} is to store the
+smallest subset of information needed to recreate its set of
+associated \texttt{archetypes}.
 
 There are three \texttt{spaces} in the \texttt{conceptual model},
-which can be arranged into a hierarchy:
+arranged in a hierarchy:
 
 \begin{itemize}
-  \item the \texttt{modeling space};
-  \item the \texttt{archetype space};
-  \item the \texttt{artefact space}.
+  \item the \texttt{modeling space}, where \texttt{modeling elements}
+    live.
+  \item the \texttt{archetype space}, where \texttt{archetypes} and
+    \texttt{formatters} live.
+  \item the \texttt{artefact space}, where \texttt{artefacts}.
 \end{itemize}
-
-
-
-The role of the \texttt{archetype} is to extract
-all the commonalities between a set of files
-
-\texttt{artefacts} may display patterns:
-
-The \texttt{generated model} is defined as a set of files which the user
-wishes to generate. An \texttt{input model} is a set of definitions
-
-\texttt{generation} is defined as the
-transformation of some input
-
-
-
-An
-\texttt{artefact}
-
-
-
-The starting point of the \texttt{conceptual model} is the
-\texttt{entity}.
 
 \chapter{Model Driven Software Development}
 \label{mdsd}

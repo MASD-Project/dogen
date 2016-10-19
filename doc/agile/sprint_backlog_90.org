@@ -14,40 +14,41 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-18 Tue 16:08]
+#+CAPTION: Clock summary at [2016-10-19 Wed 22:49]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *67:34* |       |       | 100.0 |
+| *Total time*                                                                | *71:12* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 67:34   |       |       | 100.0 |
-| Active                                                                      |         | 67:34 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  0:32 |   0.8 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  0:19 |   0.5 |
+| Stories                                                                     | 71:12   |       |       | 100.0 |
+| Active                                                                      |         | 71:12 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  0:32 |   0.7 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  0:19 |   0.4 |
 | COMPLETED Improve bintray support                                           |         |       |  0:26 |   0.6 |
-| COMPLETED Refactor opaque infrastructure                                    |         |       |  1:17 |   1.9 |
+| COMPLETED Refactor opaque infrastructure                                    |         |       |  1:17 |   1.8 |
 | COMPLETED Remove any remnants of annotations from quilt                     |         |       |  0:05 |   0.1 |
-| COMPLETED Solve the issue of too many "configurations"                      |         |       |  4:01 |   5.9 |
+| COMPLETED Solve the issue of too many "configurations"                      |         |       |  4:01 |   5.6 |
 | COMPLETED Merge decoration configuration and annotations factories          |         |       |  0:18 |   0.4 |
-| COMPLETED Move annotation factories into expander in yarn                   |         |       |  1:11 |   1.8 |
-| COMPLETED Clean up terminology in dynamic                                   |         |       | 15:12 |  22.5 |
+| COMPLETED Move annotation factories into expander in yarn                   |         |       |  1:11 |   1.7 |
+| COMPLETED Clean up terminology in dynamic                                   |         |       | 15:12 |  21.3 |
 | COMPLETED Minor tidy-up of the quilt.cpp diagram                            |         |       |  0:29 |   0.7 |
-| COMPLETED Create a ownership hierarchy repository                           |         |       |  1:43 |   2.5 |
+| COMPLETED Create a ownership hierarchy repository                           |         |       |  1:43 |   2.4 |
 | COMPLETED Use vector of elements in model                                   |         |       |  0:10 |   0.2 |
-| COMPLETED Rewrite profile support                                           |         |       | 11:50 |  17.5 |
+| COMPLETED Rewrite profile support                                           |         |       | 11:50 |  16.6 |
 | COMPLETED Merge annotation type and profile folders                         |         |       |  0:20 |   0.5 |
-| COMPLETED Push stereotypes processing into yarn                             |         |       |  1:51 |   2.7 |
-| COMPLETED Implement defaulting within the profiler                          |         |       |  1:13 |   1.8 |
-| COMPLETED Add binding of stereotypes with profiles                          |         |       |  1:40 |   2.5 |
-| COMPLETED Update dogen models to use profiles                               |         |       |  0:19 |   0.5 |
-| COMPLETED Finish overwriting support                                        |         |       |  2:38 |   3.9 |
-| COMPLETED Remove service stereotype                                         |         |       |  3:32 |   5.2 |
+| COMPLETED Push stereotypes processing into yarn                             |         |       |  1:51 |   2.6 |
+| COMPLETED Implement defaulting within the profiler                          |         |       |  1:13 |   1.7 |
+| COMPLETED Add binding of stereotypes with profiles                          |         |       |  1:40 |   2.3 |
+| COMPLETED Update dogen models to use profiles                               |         |       |  0:19 |   0.4 |
+| COMPLETED Finish overwriting support                                        |         |       |  2:38 |   3.7 |
+| COMPLETED Remove service stereotype                                         |         |       |  3:32 |   5.0 |
 | COMPLETED IOable services                                                   |         |       |  0:06 |   0.1 |
-| COMPLETED Generate skeleton for "non-generatable" files                     |         |       |  0:51 |   1.3 |
-| COMPLETED Merge profiles with processed object in yarn.dia                  |         |       |  2:04 |   3.1 |
-| COMPLETED Fix yarn.dia tests                                                |         |       |  2:48 |   4.1 |
-| COMPLETED Perform the archetype / artefact renames                          |         |       | 12:12 |  18.1 |
-| STARTED Integration of stitch and dogen                                     |         |       |  0:27 |   0.7 |
+| COMPLETED Generate skeleton for "non-generatable" files                     |         |       |  0:51 |   1.2 |
+| COMPLETED Merge profiles with processed object in yarn.dia                  |         |       |  2:04 |   2.9 |
+| COMPLETED Fix yarn.dia tests                                                |         |       |  2:48 |   3.9 |
+| COMPLETED Perform the archetype / artefact renames                          |         |       | 12:12 |  17.1 |
+| STARTED Integration of stitch and dogen                                     |         |       |  0:27 |   0.6 |
+| STARTED Document the conceptual model                                       |         |       |  3:38 |   5.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -799,6 +800,7 @@ Random notes:
   would then be picked up by some knit-specific workflow classes.
 
 *** STARTED Document the conceptual model                             :story:
+    CLOCK: [2016-10-19 Wed 21:09]--[2016-10-19 Wed 22:49] =>  1:40
     CLOCK: [2016-10-19 Wed 19:10]--[2016-10-19 Wed 21:08] =>  1:58
 
 We seem to be pretty close to the end of the conceptual model for
