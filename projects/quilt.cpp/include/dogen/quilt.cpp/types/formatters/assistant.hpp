@@ -65,7 +65,7 @@ private:
 public:
     template<typename T>
     static const T&
-    as(const std::string& /*formatter_name*/, const yarn::element& e) {
+    as(const std::string& /*archetype*/, const yarn::element& e) {
         return dynamic_cast<const T&>(e);
     }
 
@@ -108,20 +108,19 @@ public:
 
 private:
     /**
-     * @brief Obtains the formatter configuration for the formatter
-     * identified by formatter name.
-     *
-     * @pre Formatter configuration must exist for the formatter.
+     * @brief
      */
-    /**@{*/
-    const formattables::artefact_properties&
-    obtain_artefact_properties(
-        const formattables::element_properties& eprops,
-        const std::string& formatter_name) const;
-    const formattables::artefact_properties&
-    obtain_artefact_properties(const std::string& element_id,
-        const std::string& formatter_name) const;
-    /**@}*/
+    const formattables::element_properties& obtain_element_properties(
+        const std::string& element_id) const;
+
+    /**
+     * @brief Obtains the artefact properties for the supplied
+     * archetype.
+     *
+     * @pre Artefact properties must exist for the archetype.
+     */
+    const formattables::artefact_properties& obtain_artefact_properties(
+        const std::string& element_id, const std::string& archetype) const;
 
     /**
      * @brief Obtains the facet configuration for the facet
@@ -189,17 +188,17 @@ public:
 
  public:
     /**
-     * @brief Returns true if serialization is enabled.
+     * @brief Returns true if serialization is enabled locally.
      */
     bool is_serialization_enabled() const;
 
     /**
-     * @brief Returns true if io is enabled globally.
+     * @brief Returns true if io is enabled locally.
      */
     bool is_io_enabled() const;
 
     /**
-     * @brief Returns true if odb is enabled.
+     * @brief Returns true if odb is enabled globally.
      */
     bool is_odb_facet_enabled() const;
 
@@ -328,6 +327,7 @@ public:
 private:
     std::ostringstream stream_;
     boost::iostreams::filtering_ostream filtering_stream_;
+    const std::string element_id_;
     const context& context_;
     formattables::artefact_properties artefact_properties_;
     const annotations::archetype_location ownership_hierarchy_;

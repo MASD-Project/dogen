@@ -97,12 +97,13 @@ get_identifiable_and_qualified(const IdentifiableAndQualified& iaq) {
 assistant::
 assistant(const context& ctx, const annotations::archetype_location& al,
     const bool requires_header_guard, const std::string& id) :
+    element_id_(id),
     context_(ctx),
-    artefact_properties_(obtain_artefact_properties(
-            context_.element_properties(), al.archetype())),
+    artefact_properties_(
+        obtain_artefact_properties(element_id_, al.archetype())),
     ownership_hierarchy_(al), requires_header_guard_(requires_header_guard) {
 
-    BOOST_LOG_SEV(lg, debug) << "Processing element: " << id
+    BOOST_LOG_SEV(lg, debug) << "Processing element: " << element_id_
                              << " for archetype: " << al.archetype();
 
     dogen::formatters::indent_filter::push(filtering_stream_, 4);
@@ -170,35 +171,37 @@ std::string assistant::get_product_name(const yarn::name& n) const {
     return n.location().external_modules().front();
 }
 
-const formattables::artefact_properties& assistant::
-obtain_artefact_properties(const formattables::element_properties& eprops,
-    const std::string& formatter_name) const {
-    const auto i(eprops.artefact_properties().find(formatter_name));
-    if (i == eprops.artefact_properties().end()) {
-        BOOST_LOG_SEV(lg, error) << artefact_properties_missing
-                                 << formatter_name;
-        BOOST_THROW_EXCEPTION(formatting_error(artefact_properties_missing +
-                formatter_name));
-    }
-    return i->second;
-}
+const formattables::element_properties& assistant::obtain_element_properties(
+    const std::string& element_id) const {
 
-const formattables::artefact_properties& assistant::
-obtain_artefact_properties(const std::string& element_id,
-    const std::string& formatter_name) const {
+    if (element_id == element_id_)
+        return context_.element_properties();
 
     const auto& formattables(context_.model().formattables());
-    formattables::canonical_archetype_resolver res(formattables);
-
-    const auto resolved_arch(res.resolve(element_id, formatter_name));
     const auto i(formattables.find(element_id));
     if (i == formattables.end()) {
         BOOST_LOG_SEV(lg, error) << element_not_found << element_id;
         BOOST_THROW_EXCEPTION(formatting_error(element_not_found + element_id));
     }
+    return i->second.element_properties();
+}
 
-    const auto& eprops(i->second.element_properties());
-    return obtain_artefact_properties(eprops, resolved_arch);
+const formattables::artefact_properties& assistant::obtain_artefact_properties(
+    const std::string& element_id, const std::string& archetype) const {
+
+    const auto& formattables(context_.model().formattables());
+    formattables::canonical_archetype_resolver res(formattables);
+    const auto resolved_arch(res.resolve(element_id, archetype));
+
+    const auto& eprops(obtain_element_properties(element_id));
+    const auto i(eprops.artefact_properties().find(resolved_arch));
+    if (i == eprops.artefact_properties().end()) {
+        BOOST_LOG_SEV(lg, error) << artefact_properties_missing
+                                 << resolved_arch;
+        BOOST_THROW_EXCEPTION(
+            formatting_error(artefact_properties_missing + resolved_arch));
+    }
+    return i->second;
 }
 
 formattables::facet_properties assistant::
@@ -230,8 +233,7 @@ std::list<std::string> assistant::make_namespaces(const yarn::name& n) const {
 }
 
 bool assistant::is_archetype_enabled(const std::string& archetype) const {
-    const auto& eprops(context_.element_properties());
-    const auto& art_props(obtain_artefact_properties(eprops, archetype));
+    const auto& art_props(obtain_artefact_properties(element_id_, archetype));
     return art_props.enabled();
 }
 
@@ -273,12 +275,12 @@ bool assistant::requires_stream_manipulators() const {
 
 bool assistant::is_serialization_enabled() const {
     using formatters::serialization::traits;
-    return is_archetype_enabled(traits::class_header_archetype());
+    return is_archetype_enabled(traits::canonical_archetype());
 }
 
 bool assistant::is_io_enabled() const {
     using formatters::io::traits;
-    return is_archetype_enabled(traits::class_header_archetype());
+    return is_archetype_enabled(traits::canonical_archetype());
 }
 
 bool assistant::is_odb_facet_enabled() const {

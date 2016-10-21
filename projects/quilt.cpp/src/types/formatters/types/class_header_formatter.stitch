@@ -135,7 +135,7 @@ public:
             }
 
             /*
-             * Friends
+             * Serialisaton Friends
              */
             if (a.is_serialization_enabled()) {
 #>
