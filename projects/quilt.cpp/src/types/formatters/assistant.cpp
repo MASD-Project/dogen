@@ -229,16 +229,14 @@ std::list<std::string> assistant::make_namespaces(const yarn::name& n) const {
     return nf.flatten(n);
 }
 
-bool assistant::
-is_formatter_enabled(const std::string& formatter_name) const {
+bool assistant::is_archetype_enabled(const std::string& archetype) const {
     const auto& eprops(context_.element_properties());
-    const auto& art_props(obtain_artefact_properties(eprops, formatter_name));
+    const auto& art_props(obtain_artefact_properties(eprops, archetype));
     return art_props.enabled();
 }
 
-bool assistant::
-is_facet_enabled(const std::string& facet_name) const {
-    const auto& fct_props(obtain_facet_properties(facet_name));
+bool assistant::is_facet_enabled(const std::string& facet) const {
+    const auto& fct_props(obtain_facet_properties(facet));
     return fct_props.enabled();
 }
 
@@ -275,12 +273,12 @@ bool assistant::requires_stream_manipulators() const {
 
 bool assistant::is_serialization_enabled() const {
     using formatters::serialization::traits;
-    return is_formatter_enabled(traits::class_header_archetype());
+    return is_archetype_enabled(traits::class_header_archetype());
 }
 
 bool assistant::is_io_enabled() const {
     using formatters::io::traits;
-    return is_formatter_enabled(traits::class_header_archetype());
+    return is_archetype_enabled(traits::class_header_archetype());
 }
 
 bool assistant::is_odb_facet_enabled() const {

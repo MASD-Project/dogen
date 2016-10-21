@@ -133,15 +133,15 @@ private:
     obtain_facet_properties(const std::string& facet_name) const;
 
     /**
-     * @brief Returns true if the formatter is enabled, false
+     * @brief Returns true if the archetype is enabled, false
      * otherwise.
      */
-    bool is_formatter_enabled(const std::string& formatter_name) const;
+    bool is_archetype_enabled(const std::string& archetype) const;
 
     /**
      * @brief Returns true if the facet is enabled, false otherwise.
      */
-    bool is_facet_enabled(const std::string& facet_name) const;
+    bool is_facet_enabled(const std::string& facet) const;
 
     /**
      * @brief Returns the folder for the current facet.
