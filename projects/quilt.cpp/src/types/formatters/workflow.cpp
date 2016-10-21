@@ -62,8 +62,8 @@ workflow::format(const formattables::model& fm, const yarn::element& e,
 
     std::forward_list<dogen::formatters::artefact> r;
     const auto& frp(registrar().formatter_repository());
-    const auto i(frp.file_formatters_by_type_index().find(ti));
-    if (i == frp.file_formatters_by_type_index().end()) {
+    const auto i(frp.stock_artefact_formatters_by_type_index().find(ti));
+    if (i == frp.stock_artefact_formatters_by_type_index().end()) {
         BOOST_LOG_SEV(lg, debug) << "No formatters for type: " << ti.name();
         return r;
     }

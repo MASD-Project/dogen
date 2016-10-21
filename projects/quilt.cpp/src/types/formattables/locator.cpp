@@ -68,7 +68,7 @@ locator::type_group locator::make_type_group(
     const annotations::type_repository_selector s(atrp);
 
     std::unordered_set<std::string> processed_facets;
-    for (const auto ptr : frp.file_formatters()) {
+    for (const auto ptr : frp.stock_artefact_formatters()) {
         const auto& fmt(*ptr);
         const auto& al(fmt.archetype_location());
 

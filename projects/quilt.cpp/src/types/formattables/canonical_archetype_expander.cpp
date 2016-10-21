@@ -43,7 +43,7 @@ void canonical_archetype_expander::expand(const formatters::repository& frp,
     formattables::element_properties& eprops, const yarn::element& e) const {
     BOOST_LOG_SEV(lg, debug) << "Procesing element: " << e.name().id();
     const auto cs(formatters::inclusion_support_types::canonical_support);
-    const auto& ffti(frp.file_formatters_by_type_index());
+    const auto& safti(frp.stock_artefact_formatters_by_type_index());
 
     /*
      * For each element segment, find the corresponding formatters.
@@ -55,8 +55,8 @@ void canonical_archetype_expander::expand(const formatters::repository& frp,
      * Not all elements have formatters; for example, concepts don't
      * have any at present. If so, skip the element.
      */
-    const auto i(ffti.find(ti));
-    if (i == ffti.end()) {
+    const auto i(safti.find(ti));
+    if (i == safti.end()) {
         BOOST_LOG_SEV(lg, debug) << "Element has no formatters.";
         return;
     }

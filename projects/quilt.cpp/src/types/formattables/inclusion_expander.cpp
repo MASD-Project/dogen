@@ -139,7 +139,7 @@ make_type_group(const annotations::type_repository& atrp,
     const auto ir(traits::cpp::inclusion_required());
     r.inclusion_required = s.select_type_by_name(ir);
 
-    for (const auto f : frp.file_formatters()) {
+    for (const auto f : frp.stock_artefact_formatters()) {
         const auto& al(f->archetype_location());
         const auto arch(al.archetype());
 
@@ -217,7 +217,7 @@ inclusion_expander::includible_formatters_by_type_index(
     const formatters::repository& frp) const {
 
     std::unordered_map<std::type_index, formatter_list_type> r;
-    for (const auto& pair : frp.file_formatters_by_type_index()) {
+    for (const auto& pair : frp.stock_artefact_formatters_by_type_index()) {
         const auto& ti(pair.first);
         const auto& fmts(pair.second);
         r[ti] = remove_non_includible_formatters(fmts);
@@ -393,8 +393,8 @@ inclusion_expander::compute_inclusion_dependencies(
      */
     element_inclusion_dependencies_type r;
     const auto ti(std::type_index(typeid(e)));
-    const auto i(frp.file_formatters_by_type_index().find(ti));
-    if (i == frp.file_formatters_by_type_index().end()) {
+    const auto i(frp.stock_artefact_formatters_by_type_index().find(ti));
+    if (i == frp.stock_artefact_formatters_by_type_index().end()) {
         BOOST_LOG_SEV(lg, debug) << "No formatters for type: " << ti.name();
         return r;
     }

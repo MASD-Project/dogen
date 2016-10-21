@@ -138,7 +138,7 @@ generator::filter_file_formatters_by_type_index(
         std::forward_list<
             std::shared_ptr<formatters::artefact_formatter_interface>>> r;
 
-    for (const auto& pair : rp.file_formatters_by_type_index()) {
+    for (const auto& pair : rp.stock_artefact_formatters_by_type_index()) {
         const auto& ti(pair.first);
         const auto& fmts(pair.second);
         r[ti] = filter_formatters(fmts);

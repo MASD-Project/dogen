@@ -90,7 +90,7 @@ make_global_type_group(const annotations::type_repository& atrp,
 
     global_type_group_type r;
     const annotations::type_repository_selector s(atrp);
-    for (const auto& fmt : frp.file_formatters()) {
+    for (const auto& fmt : frp.stock_artefact_formatters()) {
         const auto& al(fmt->archetype_location());
 
         global_type_group gtg;
@@ -161,12 +161,12 @@ void enablement_expander::update_facet_enablement(
      *
      * FIXME: read facet fields here instead of reusing configuration.
      */
-    const auto& ffba(frp.file_formatters_by_archetype());
+    const auto& safba(frp.stock_artefact_formatters_by_archetype());
     auto& fct_props(fm.facet_properties());
     for (const auto& pair : gcs) {
         const auto arch(pair.first);
-        const auto i(ffba.find(arch));
-        if (i == ffba.end()) {
+        const auto i(safba.find(arch));
+        if (i == safba.end()) {
             BOOST_LOG_SEV(lg, error) << archetype_not_found << arch;
             BOOST_THROW_EXCEPTION(expansion_error(archetype_not_found + arch));
         }
@@ -189,11 +189,13 @@ make_local_type_group(const annotations::type_repository& atrp,
 
     local_type_group_type r;
     const annotations::type_repository_selector s(atrp);
-    for (const auto& fmt : frp.file_formatters()) {
-        local_type_group ltg;
-        const auto al(fmt->archetype_location());
+    for (const auto& ptr : frp.stock_artefact_formatters()) {
+        const auto& fmt(*ptr);
+        const auto al(fmt.archetype_location());
         const auto& fct(al.facet());
         const auto ebl(traits::enabled());
+
+        local_type_group ltg;
         ltg.facet_enabled = s.select_type_by_name(fct, ebl);
 
         const auto& arch(al.archetype());
@@ -220,8 +222,7 @@ enablement_expander::bucket_local_type_group_by_type_index(
     std::unordered_map<std::type_index,
                        enablement_expander::local_type_group_type> r;
 
-    const auto& ffti(frp.file_formatters_by_type_index());
-    for (const auto& pair: ffti) {
+    for (const auto& pair: frp.stock_artefact_formatters_by_type_index()) {
         const auto& ti(pair.first);
         const auto& fmts(pair.second);
 

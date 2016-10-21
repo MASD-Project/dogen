@@ -67,7 +67,7 @@ void registrar::validate() const {
      * way of troubleshooting validation errors.
      */
     const auto& frp(formatter_repository_);
-    if (frp.file_formatters_by_type_index().empty()) {
+    if (frp.stock_artefact_formatters_by_type_index().empty()) {
         BOOST_LOG_SEV(lg, error) << no_file_formatters_by_type_index;
         BOOST_THROW_EXCEPTION(
             registrar_error(no_file_formatters_by_type_index));
@@ -77,7 +77,7 @@ void registrar::validate() const {
      * Validate the registered canonical formatters.
      */
     const auto cs(inclusion_support_types::canonical_support);
-    for (const auto& pair : frp.file_formatters_by_type_index()) {
+    for (const auto& pair : frp.stock_artefact_formatters_by_type_index()) {
         const auto& ti(pair.first);
         const auto& formatters(pair.second);
         std::set<std::string> facets_found;
@@ -120,7 +120,7 @@ void registrar::validate() const {
         }
     }
 
-    if (frp.file_formatters().empty()) {
+    if (frp.stock_artefact_formatters().empty()) {
         BOOST_LOG_SEV(lg, error) << no_file_formatters;
         BOOST_THROW_EXCEPTION(
             registrar_error(no_file_formatters));
@@ -163,12 +163,12 @@ register_formatter(std::shared_ptr<artefact_formatter_interface> f) {
         BOOST_THROW_EXCEPTION(registrar_error(empty_model_name));
 
     ownership_hierarchy_.push_front(al);
-    formatter_repository_.file_formatters_.push_front(f);
+    formatter_repository_.stock_artefact_formatters_.push_front(f);
 
     /*
      * Add the formatter to the index by element type index.
      */
-    auto& ffti(formatter_repository_.file_formatters_by_type_index());
+    auto& ffti(formatter_repository_.stock_artefact_formatters_by_type_index());
     auto& ti(ffti[f->element_type_index()]);
     ti.push_front(f);
 
@@ -178,7 +178,7 @@ register_formatter(std::shared_ptr<artefact_formatter_interface> f) {
      * ensuring the formatter id is unique in formatter space.
      */
     const auto arch(al.archetype());
-    auto& fffn(formatter_repository_.file_formatters_by_archetype());
+    auto& fffn(formatter_repository_.stock_artefact_formatters_by_archetype());
     const auto pair(std::make_pair(arch, f));
     const auto inserted(fffn.insert(pair).second);
     if (!inserted) {

@@ -81,8 +81,8 @@ transform(const formatters::repository& frp, const yarn::model& m) const {
          * present.
          */
         const auto ti(std::type_index(typeid(e)));
-        const auto j(frp.file_formatters_by_type_index().find(ti));
-        if (j == frp.file_formatters_by_type_index().end()) {
+        const auto j(frp.stock_artefact_formatters_by_type_index().find(ti));
+        if (j == frp.stock_artefact_formatters_by_type_index().end()) {
             BOOST_LOG_SEV(lg, debug) << "Element has no formatters: " << id;
             continue;
         }
