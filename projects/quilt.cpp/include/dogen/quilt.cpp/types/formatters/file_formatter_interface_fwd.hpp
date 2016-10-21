@@ -30,7 +30,7 @@ namespace quilt {
 namespace cpp {
 namespace formatters {
 
-class file_formatter_interface;
+class artefact_formatter_interface;
 
 } } } }
 

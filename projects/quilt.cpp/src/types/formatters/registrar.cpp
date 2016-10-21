@@ -147,7 +147,7 @@ void registrar::register_formatter_helper(
 }
 
 void registrar::
-register_formatter(std::shared_ptr<file_formatter_interface> f) {
+register_formatter(std::shared_ptr<artefact_formatter_interface> f) {
     // note: not logging by design
     if (!f)
         BOOST_THROW_EXCEPTION(registrar_error(null_formatter));

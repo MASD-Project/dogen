@@ -57,7 +57,7 @@ public:
     /**
      * @brief Registers a file formatter.
      */
-    void register_formatter(std::shared_ptr<file_formatter_interface> f);
+    void register_formatter(std::shared_ptr<artefact_formatter_interface> f);
 
 public:
     /**

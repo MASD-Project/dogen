@@ -29,17 +29,17 @@ namespace formatters {
 
 std::unordered_map<
     std::type_index,
-    std::forward_list<std::shared_ptr<file_formatter_interface>>>&
+    std::forward_list<std::shared_ptr<artefact_formatter_interface>>>&
 repository::file_formatters_by_type_index() {
     return file_formatters_by_type_index_;
 }
 
-std::unordered_map<std::string, std::shared_ptr<file_formatter_interface>>&
+std::unordered_map<std::string, std::shared_ptr<artefact_formatter_interface>>&
 repository::file_formatters_by_archetype() {
     return file_formatters_by_formatter_name_;
 }
 
-std::forward_list<std::shared_ptr<file_formatter_interface>>&
+std::forward_list<std::shared_ptr<artefact_formatter_interface>>&
 repository::file_formatters() {
     return file_formatters_;
 }
@@ -55,18 +55,18 @@ repository::helper_formatters() {
 
 const std::unordered_map<
     std::type_index,
-    std::forward_list<std::shared_ptr<file_formatter_interface>>>&
+    std::forward_list<std::shared_ptr<artefact_formatter_interface>>>&
 repository::file_formatters_by_type_index() const {
     return file_formatters_by_type_index_;
 }
 
 const std::unordered_map<std::string,
-                         std::shared_ptr<file_formatter_interface>>&
+                         std::shared_ptr<artefact_formatter_interface>>&
 repository::file_formatters_by_archetype() const {
     return file_formatters_by_formatter_name_;
 }
 
-const std::forward_list<std::shared_ptr<file_formatter_interface>>&
+const std::forward_list<std::shared_ptr<artefact_formatter_interface>>&
 repository::file_formatters() const {
     return file_formatters_;
 }

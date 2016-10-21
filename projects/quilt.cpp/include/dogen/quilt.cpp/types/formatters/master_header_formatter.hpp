@@ -32,7 +32,7 @@ namespace quilt {
 namespace cpp {
 namespace formatters {
 
-class master_header_formatter final : public file_formatter_interface {
+class master_header_formatter final : public artefact_formatter_interface {
 public:
     explicit master_header_formatter(const std::string& facet_name);
 

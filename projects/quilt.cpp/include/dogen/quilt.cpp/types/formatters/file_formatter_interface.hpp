@@ -41,12 +41,12 @@ namespace quilt {
 namespace cpp {
 namespace formatters {
 
-class file_formatter_interface {
+class artefact_formatter_interface {
 public:
-    file_formatter_interface() = default;
-    file_formatter_interface(file_formatter_interface&&) = default;
-    file_formatter_interface(const file_formatter_interface&) = delete;
-    virtual ~file_formatter_interface() noexcept = 0;
+    artefact_formatter_interface() = default;
+    artefact_formatter_interface(artefact_formatter_interface&&) = default;
+    artefact_formatter_interface(const artefact_formatter_interface&) = delete;
+    virtual ~artefact_formatter_interface() noexcept = 0;
 
 public:
     /**

@@ -33,7 +33,7 @@ namespace quilt {
 namespace cpp {
 namespace formatters {
 
-class include_cmakelists_formatter final : public file_formatter_interface {
+class include_cmakelists_formatter final : public artefact_formatter_interface {
 public:
     /**
      * @brief Returns the formatter name.

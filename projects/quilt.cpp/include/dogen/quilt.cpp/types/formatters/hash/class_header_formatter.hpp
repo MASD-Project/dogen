@@ -33,7 +33,7 @@ namespace cpp {
 namespace formatters {
 namespace hash {
 
-class class_header_formatter final : public file_formatter_interface {
+class class_header_formatter final : public artefact_formatter_interface {
 public:
     /**
      * @brief Returns the formatter name.

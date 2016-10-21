@@ -36,7 +36,7 @@ namespace hash {
 /**
  * @brief Creates the hash header representation for an enumeration.
  */
-class enum_header_formatter : public file_formatter_interface {
+class enum_header_formatter : public artefact_formatter_interface {
 public:
     /**
      * @brief Returns the formatter name.

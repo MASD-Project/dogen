@@ -65,15 +65,15 @@ private:
     boost::shared_ptr<master_header>
     create_master_header(const yarn::name& model_name);
 
-    std::forward_list<std::shared_ptr<formatters::file_formatter_interface>>
+    std::forward_list<std::shared_ptr<formatters::artefact_formatter_interface>>
     filter_formatters(const std::forward_list<
-        std::shared_ptr<formatters::file_formatter_interface>>&
+        std::shared_ptr<formatters::artefact_formatter_interface>>&
         formatters) const;
 
     std::unordered_map<
         std::type_index,
         std::forward_list<
-            std::shared_ptr<formatters::file_formatter_interface>>>
+            std::shared_ptr<formatters::artefact_formatter_interface>>>
     filter_file_formatters_by_type_index(const formatters::repository& rp) const;
 
     void process_element(const yarn::element& e);
@@ -95,7 +95,7 @@ private:
     const std::unordered_map<
         std::type_index,
         std::forward_list<
-            std::shared_ptr<formatters::file_formatter_interface>>>
+            std::shared_ptr<formatters::artefact_formatter_interface>>>
     file_formatters_by_type_index_;
 
 };
@@ -109,10 +109,10 @@ generator::create_master_header(const yarn::name& model_name) {
     return r;
 }
 
-std::forward_list<std::shared_ptr<formatters::file_formatter_interface>>
+std::forward_list<std::shared_ptr<formatters::artefact_formatter_interface>>
 generator::filter_formatters(const std::forward_list<std::shared_ptr<
-    formatters::file_formatter_interface>>& formatters) const {
-    std::forward_list<std::shared_ptr<formatters::file_formatter_interface>> r;
+    formatters::artefact_formatter_interface>>& formatters) const {
+    std::forward_list<std::shared_ptr<formatters::artefact_formatter_interface>> r;
 
     /*
      * We are only interested in formatters that generate
@@ -130,13 +130,13 @@ generator::filter_formatters(const std::forward_list<std::shared_ptr<
 std::unordered_map<
     std::type_index,
     std::forward_list<
-        std::shared_ptr<formatters::file_formatter_interface>>>
+        std::shared_ptr<formatters::artefact_formatter_interface>>>
 generator::filter_file_formatters_by_type_index(
     const formatters::repository& rp) const {
     std::unordered_map<
         std::type_index,
         std::forward_list<
-            std::shared_ptr<formatters::file_formatter_interface>>> r;
+            std::shared_ptr<formatters::artefact_formatter_interface>>> r;
 
     for (const auto& pair : rp.file_formatters_by_type_index()) {
         const auto& ti(pair.first);

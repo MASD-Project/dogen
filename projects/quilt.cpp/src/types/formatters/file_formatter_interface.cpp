@@ -25,6 +25,6 @@ namespace quilt {
 namespace cpp {
 namespace formatters {
 
-file_formatter_interface::~file_formatter_interface() noexcept { }
+artefact_formatter_interface::~artefact_formatter_interface() noexcept { }
 
 } } } }

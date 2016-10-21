@@ -37,7 +37,7 @@ namespace types {
 /**
  * @brief Creates the C++ domain representation for a visitor.
  */
-class visitor_header_formatter : public file_formatter_interface {
+class visitor_header_formatter : public artefact_formatter_interface {
 public:
     /**
      * @brief Returns the formatter name.

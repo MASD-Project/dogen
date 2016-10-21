@@ -69,7 +69,7 @@ inline std::ostream& to_stream(std::ostream& s,
 
 inline std::ostream& to_stream(std::ostream& s,
     const std::unordered_map<std::type_index,
-    std::forward_list<std::shared_ptr<file_formatter_interface>>>& ffti) {
+    std::forward_list<std::shared_ptr<artefact_formatter_interface>>>& ffti) {
     s << "\"file_formatters_by_type_index\": " << "[ ";
 
     for(auto i(ffti.begin()); i != ffti.end(); ++i) {

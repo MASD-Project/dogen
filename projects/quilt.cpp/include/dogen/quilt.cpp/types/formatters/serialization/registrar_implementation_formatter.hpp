@@ -34,7 +34,7 @@ namespace formatters {
 namespace serialization {
 
 class registrar_implementation_formatter final
-    : public file_formatter_interface {
+    : public artefact_formatter_interface {
 public:
     /**
      * @brief Returns the formatter name.

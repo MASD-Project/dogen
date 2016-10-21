@@ -99,7 +99,7 @@ private:
 
 private:
     typedef std::forward_list<
-    std::shared_ptr<formatters::file_formatter_interface>
+    std::shared_ptr<formatters::artefact_formatter_interface>
     > formatter_list_type;
 
     formatter_list_type remove_non_includible_formatters(

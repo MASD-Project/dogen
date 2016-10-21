@@ -33,7 +33,7 @@ namespace cpp {
 namespace formatters {
 namespace serialization {
 
-class primitive_header_formatter final : public file_formatter_interface {
+class primitive_header_formatter final : public artefact_formatter_interface {
 public:
     /**
      * @brief Returns the formatter name.

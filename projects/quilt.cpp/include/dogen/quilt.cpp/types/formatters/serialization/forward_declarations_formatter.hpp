@@ -33,7 +33,7 @@ namespace cpp {
 namespace formatters {
 namespace serialization {
 
-class forward_declarations_formatter : public file_formatter_interface {
+class forward_declarations_formatter : public artefact_formatter_interface {
 public:
     /**
      * @brief Returns the formatter name.

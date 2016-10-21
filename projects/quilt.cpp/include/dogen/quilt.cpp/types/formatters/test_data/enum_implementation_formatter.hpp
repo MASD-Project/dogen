@@ -38,7 +38,7 @@ namespace test_data {
  * @brief Creates the test data implementation representation for an
  * enumeration.
  */
-class enum_implementation_formatter : public file_formatter_interface {
+class enum_implementation_formatter : public artefact_formatter_interface {
 public:
     /**
      * @brief Returns the formatter name.

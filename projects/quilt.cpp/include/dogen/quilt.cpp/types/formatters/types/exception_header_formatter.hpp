@@ -34,7 +34,7 @@ namespace cpp {
 namespace formatters {
 namespace types {
 
-class exception_header_formatter final : public file_formatter_interface {
+class exception_header_formatter final : public artefact_formatter_interface {
 public:
     /**
      * @brief Returns the formatter name.

@@ -34,7 +34,7 @@ namespace cpp {
 namespace formatters {
 namespace odb {
 
-class odb_options_formatter final : public file_formatter_interface {
+class odb_options_formatter final : public artefact_formatter_interface {
 public:
     /**
      * @brief Returns the formatter name.

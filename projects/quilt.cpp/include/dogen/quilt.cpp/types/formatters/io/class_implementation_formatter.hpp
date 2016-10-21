@@ -37,7 +37,7 @@ namespace io {
 /**
  * @brief Creates the C++ io representation for a class.
  */
-class class_implementation_formatter final : public file_formatter_interface {
+class class_implementation_formatter final : public artefact_formatter_interface {
 public:
     /**
      * @brief Returns the formatter name.

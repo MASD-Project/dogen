@@ -53,20 +53,20 @@ private:
      */
     std::unordered_map<
         std::type_index,
-        std::forward_list<std::shared_ptr<file_formatter_interface>>
+        std::forward_list<std::shared_ptr<artefact_formatter_interface>>
     >&
     file_formatters_by_type_index();
 
     /**
      * @brief Returns all available file formatters by archetype name.
      */
-    std::unordered_map<std::string, std::shared_ptr<file_formatter_interface>>&
+    std::unordered_map<std::string, std::shared_ptr<artefact_formatter_interface>>&
     file_formatters_by_archetype();
 
     /**
      * @brief Returns all available file formatters.
      */
-    std::forward_list<std::shared_ptr<file_formatter_interface>>&
+    std::forward_list<std::shared_ptr<artefact_formatter_interface>>&
     file_formatters();
 
     /**
@@ -85,20 +85,20 @@ public:
      */
     const std::unordered_map<
     std::type_index,
-    std::forward_list<std::shared_ptr<file_formatter_interface>>>&
+    std::forward_list<std::shared_ptr<artefact_formatter_interface>>>&
     file_formatters_by_type_index() const;
 
     /**
      * @brief Returns all available file formatters by formatter name.
      */
     const std::unordered_map<std::string,
-                             std::shared_ptr<file_formatter_interface>>&
+                             std::shared_ptr<artefact_formatter_interface>>&
     file_formatters_by_archetype() const;
 
     /**
      * @brief Returns all available file formatters.
      */
-    const std::forward_list<std::shared_ptr<file_formatter_interface>>&
+    const std::forward_list<std::shared_ptr<artefact_formatter_interface>>&
     file_formatters() const;
 
     /**
@@ -114,11 +114,11 @@ public:
 private:
     std::unordered_map<
         std::type_index,
-        std::forward_list<std::shared_ptr<file_formatter_interface>>>
+        std::forward_list<std::shared_ptr<artefact_formatter_interface>>>
     file_formatters_by_type_index_;
-    std::unordered_map<std::string, std::shared_ptr<file_formatter_interface>>
+    std::unordered_map<std::string, std::shared_ptr<artefact_formatter_interface>>
     file_formatters_by_formatter_name_;
-    std::forward_list<std::shared_ptr<file_formatter_interface>>
+    std::forward_list<std::shared_ptr<artefact_formatter_interface>>
     file_formatters_;
     std::unordered_map<
         std::string,
