@@ -28,7 +28,7 @@
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/annotations/io/type_io.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
-#include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
+#include "dogen/quilt.cpp/types/formatters/artefact_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formattables/expansion_error.hpp"
 #include "dogen/quilt.cpp/types/formattables/inclusion_expander.hpp"
 

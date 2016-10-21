@@ -23,7 +23,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/quilt.cpp/types/formattables/artefact_properties.hpp"
 #include "dogen/quilt.cpp/types/formattables/transformation_error.hpp"
-#include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
+#include "dogen/quilt.cpp/types/formatters/artefact_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formattables/transformer.hpp"
 
 namespace {

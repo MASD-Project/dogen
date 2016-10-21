@@ -23,7 +23,7 @@
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/inclusion_support_types.hpp"
-#include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
+#include "dogen/quilt.cpp/types/formatters/artefact_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formattables/canonical_archetype_expander.hpp"
 
 namespace {

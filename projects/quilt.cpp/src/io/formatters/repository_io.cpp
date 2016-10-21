@@ -21,7 +21,7 @@
 #include <string>
 #include <ostream>
 #include <forward_list>
-#include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
+#include "dogen/quilt.cpp/types/formatters/artefact_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/helper_formatter_interface.hpp"
 #include "dogen/quilt.cpp/io/formatters/repository_io.hpp"
 

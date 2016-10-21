@@ -30,7 +30,7 @@
 #include <typeindex>
 #include <forward_list>
 #include <unordered_map>
-#include "dogen/quilt.cpp/types/formatters/file_formatter_interface_fwd.hpp"
+#include "dogen/quilt.cpp/types/formatters/artefact_formatter_interface_fwd.hpp"
 #include "dogen/quilt.cpp/types/formatters/helper_formatter_interface_fwd.hpp"
 
 namespace dogen {
@@ -60,7 +60,8 @@ private:
     /**
      * @brief Returns all available file formatters by archetype name.
      */
-    std::unordered_map<std::string, std::shared_ptr<artefact_formatter_interface>>&
+    std::unordered_map<std::string,
+                       std::shared_ptr<artefact_formatter_interface>>&
     file_formatters_by_archetype();
 
     /**
@@ -116,7 +117,8 @@ private:
         std::type_index,
         std::forward_list<std::shared_ptr<artefact_formatter_interface>>>
     file_formatters_by_type_index_;
-    std::unordered_map<std::string, std::shared_ptr<artefact_formatter_interface>>
+    std::unordered_map<std::string,
+                       std::shared_ptr<artefact_formatter_interface>>
     file_formatters_by_formatter_name_;
     std::forward_list<std::shared_ptr<artefact_formatter_interface>>
     file_formatters_;

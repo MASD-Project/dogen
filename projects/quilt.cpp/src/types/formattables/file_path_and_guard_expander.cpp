@@ -22,7 +22,7 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/quilt.cpp/types/formattables/expansion_error.hpp"
-#include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
+#include "dogen/quilt.cpp/types/formatters/artefact_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formattables/file_path_and_guard_expander.hpp"
 
 namespace {

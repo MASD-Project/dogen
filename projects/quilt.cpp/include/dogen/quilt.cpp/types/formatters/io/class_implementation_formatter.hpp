@@ -26,7 +26,7 @@
 #endif
 
 #include <string>
-#include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
+#include "dogen/quilt.cpp/types/formatters/artefact_formatter_interface.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -37,7 +37,8 @@ namespace io {
 /**
  * @brief Creates the C++ io representation for a class.
  */
-class class_implementation_formatter final : public artefact_formatter_interface {
+class class_implementation_formatter final :
+        public artefact_formatter_interface {
 public:
     /**
      * @brief Returns the formatter name.

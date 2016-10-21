@@ -14,14 +14,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-21 Fri 11:25]
+#+CAPTION: Clock summary at [2016-10-21 Fri 12:07]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *73:52* |       |       | 100.0 |
+| *Total time*                                                                | *74:32* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 73:52   |       |       | 100.0 |
-| Active                                                                      |         | 73:52 |       | 100.0 |
+| Stories                                                                     | 74:32   |       |       | 100.0 |
+| Active                                                                      |         | 74:32 |       | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  0:32 |   0.7 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:19 |   0.4 |
 | COMPLETED Improve bintray support                                           |         |       |  0:26 |   0.6 |
@@ -30,26 +30,26 @@
 | COMPLETED Solve the issue of too many "configurations"                      |         |       |  4:01 |   5.4 |
 | COMPLETED Merge decoration configuration and annotations factories          |         |       |  0:18 |   0.4 |
 | COMPLETED Move annotation factories into expander in yarn                   |         |       |  1:11 |   1.6 |
-| COMPLETED Clean up terminology in dynamic                                   |         |       | 15:12 |  20.6 |
-| COMPLETED Minor tidy-up of the quilt.cpp diagram                            |         |       |  0:29 |   0.7 |
+| COMPLETED Clean up terminology in dynamic                                   |         |       | 15:12 |  20.4 |
+| COMPLETED Minor tidy-up of the quilt.cpp diagram                            |         |       |  0:29 |   0.6 |
 | COMPLETED Create a ownership hierarchy repository                           |         |       |  1:43 |   2.3 |
 | COMPLETED Use vector of elements in model                                   |         |       |  0:10 |   0.2 |
-| COMPLETED Rewrite profile support                                           |         |       | 11:50 |  16.0 |
-| COMPLETED Merge annotation type and profile folders                         |         |       |  0:20 |   0.5 |
+| COMPLETED Rewrite profile support                                           |         |       | 11:50 |  15.9 |
+| COMPLETED Merge annotation type and profile folders                         |         |       |  0:20 |   0.4 |
 | COMPLETED Push stereotypes processing into yarn                             |         |       |  1:51 |   2.5 |
 | COMPLETED Implement defaulting within the profiler                          |         |       |  1:13 |   1.6 |
-| COMPLETED Add binding of stereotypes with profiles                          |         |       |  1:40 |   2.3 |
+| COMPLETED Add binding of stereotypes with profiles                          |         |       |  1:40 |   2.2 |
 | COMPLETED Update dogen models to use profiles                               |         |       |  0:19 |   0.4 |
-| COMPLETED Finish overwriting support                                        |         |       |  2:38 |   3.6 |
-| COMPLETED Remove service stereotype                                         |         |       |  3:32 |   4.8 |
+| COMPLETED Finish overwriting support                                        |         |       |  2:38 |   3.5 |
+| COMPLETED Remove service stereotype                                         |         |       |  3:32 |   4.7 |
 | COMPLETED IOable services                                                   |         |       |  0:06 |   0.1 |
-| COMPLETED Generate skeleton for "non-generatable" files                     |         |       |  0:51 |   1.2 |
+| COMPLETED Generate skeleton for "non-generatable" files                     |         |       |  0:51 |   1.1 |
 | COMPLETED Merge profiles with processed object in yarn.dia                  |         |       |  2:04 |   2.8 |
 | COMPLETED Fix yarn.dia tests                                                |         |       |  2:48 |   3.8 |
-| COMPLETED Perform the archetype / artefact renames                          |         |       | 12:12 |  16.5 |
-| STARTED Rename file formatter to artefact formatter                         |         |       |  0:30 |   0.7 |
+| COMPLETED Perform the archetype / artefact renames                          |         |       | 12:12 |  16.4 |
+| COMPLETED Rename file formatter to artefact formatter                       |         |       |  1:10 |   1.6 |
 | STARTED Integration of stitch and dogen                                     |         |       |  0:27 |   0.6 |
-| STARTED Document the conceptual model                                       |         |       |  5:48 |   7.9 |
+| STARTED Document the conceptual model                                       |         |       |  5:48 |   7.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -718,7 +718,9 @@ Notes:
   referring to formatters when we mean archetypes and vice-versa.
 - rename formatter container to repository.
 
-*** STARTED Rename file formatter to artefact formatter               :story:
+*** COMPLETED Rename file formatter to artefact formatter             :story:
+    CLOSED: [2016-10-21 Fri 12:06]
+    CLOCK: [2016-10-21 Fri 11:26]--[2016-10-21 Fri 12:06] =>  0:40
     CLOCK: [2016-10-21 Fri 10:55]--[2016-10-21 Fri 11:25] =>  0:30
 
 It seems this was missed in the great rename.
