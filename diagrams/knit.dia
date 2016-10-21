@@ -418,13 +418,13 @@
         <dia:point val="-56,47"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-56.05,46.95;-38.125,52.05"/>
+        <dia:rectangle val="-56.05,46.95;-37.74,52.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-56,47"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="17.824999999999999"/>
+        <dia:real val="18.210000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5"/>
@@ -788,7 +788,7 @@ required by code generation.#</dia:string>
         <dia:point val="-94,-1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-94.05,-1.05;-58.785,9.55"/>
+        <dia:rectangle val="-94.05,-1.05;-66.87,7.15"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -797,10 +797,10 @@ required by code generation.#</dia:string>
         <dia:point val="-94,-1"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="35.164999999999999"/>
+        <dia:real val="27.080000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="10.500000000000002"/>
+        <dia:real val="8.0999999999999996"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -847,13 +847,13 @@ languages.
         <dia:point val="-89,34"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-89.05,33.95;-83.445,37.65"/>
+        <dia:rectangle val="-89.05,33.95;-82.675,37.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-89,34"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="5.5049999999999999"/>
+        <dia:real val="6.2750000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
