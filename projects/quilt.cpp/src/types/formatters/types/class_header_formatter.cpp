@@ -108,8 +108,7 @@ std::list<std::string> class_header_formatter::inclusion_dependencies(
     return builder.build();
 }
 
-inclusion_support_types class_header_formatter::
-inclusion_support_type() const {
+inclusion_support_types class_header_formatter::inclusion_support_type() const {
     return inclusion_support_types::canonical_support;
 }
 
