@@ -7,51 +7,50 @@
 
 - refactor dyamic and implement profiles
 - fix services
-- implement wale templates
 
 * Stories
 
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-21 Fri 20:31]
+#+CAPTION: Clock summary at [2016-10-22 Sat 23:01]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *76:11* |       |       | 100.0 |
+| *Total time*                                                                | *78:02* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 76:11   |       |       | 100.0 |
-| Active                                                                      |         | 76:11 |       | 100.0 |
+| Stories                                                                     | 78:02   |       |       | 100.0 |
+| Active                                                                      |         | 78:02 |       | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  0:32 |   0.7 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:19 |   0.4 |
 | COMPLETED Improve bintray support                                           |         |       |  0:26 |   0.6 |
-| COMPLETED Refactor opaque infrastructure                                    |         |       |  1:17 |   1.7 |
+| COMPLETED Refactor opaque infrastructure                                    |         |       |  1:17 |   1.6 |
 | COMPLETED Remove any remnants of annotations from quilt                     |         |       |  0:05 |   0.1 |
-| COMPLETED Solve the issue of too many "configurations"                      |         |       |  4:01 |   5.3 |
+| COMPLETED Solve the issue of too many "configurations"                      |         |       |  4:01 |   5.1 |
 | COMPLETED Merge decoration configuration and annotations factories          |         |       |  0:18 |   0.4 |
-| COMPLETED Move annotation factories into expander in yarn                   |         |       |  1:11 |   1.6 |
-| COMPLETED Clean up terminology in dynamic                                   |         |       | 15:12 |  20.0 |
+| COMPLETED Move annotation factories into expander in yarn                   |         |       |  1:11 |   1.5 |
+| COMPLETED Clean up terminology in dynamic                                   |         |       | 15:12 |  19.5 |
 | COMPLETED Minor tidy-up of the quilt.cpp diagram                            |         |       |  0:29 |   0.6 |
-| COMPLETED Create a ownership hierarchy repository                           |         |       |  1:43 |   2.3 |
+| COMPLETED Create a ownership hierarchy repository                           |         |       |  1:43 |   2.2 |
 | COMPLETED Use vector of elements in model                                   |         |       |  0:10 |   0.2 |
-| COMPLETED Rewrite profile support                                           |         |       | 11:50 |  15.5 |
+| COMPLETED Rewrite profile support                                           |         |       | 11:50 |  15.2 |
 | COMPLETED Merge annotation type and profile folders                         |         |       |  0:20 |   0.4 |
 | COMPLETED Push stereotypes processing into yarn                             |         |       |  1:51 |   2.4 |
 | COMPLETED Implement defaulting within the profiler                          |         |       |  1:13 |   1.6 |
-| COMPLETED Add binding of stereotypes with profiles                          |         |       |  1:40 |   2.2 |
+| COMPLETED Add binding of stereotypes with profiles                          |         |       |  1:40 |   2.1 |
 | COMPLETED Update dogen models to use profiles                               |         |       |  0:19 |   0.4 |
-| COMPLETED Finish overwriting support                                        |         |       |  2:38 |   3.5 |
-| COMPLETED Remove service stereotype                                         |         |       |  3:32 |   4.6 |
+| COMPLETED Finish overwriting support                                        |         |       |  2:38 |   3.4 |
+| COMPLETED Remove service stereotype                                         |         |       |  3:32 |   4.5 |
 | COMPLETED IOable services                                                   |         |       |  0:06 |   0.1 |
 | COMPLETED Generate skeleton for "non-generatable" files                     |         |       |  0:51 |   1.1 |
-| COMPLETED Merge profiles with processed object in yarn.dia                  |         |       |  2:04 |   2.7 |
-| COMPLETED Fix yarn.dia tests                                                |         |       |  2:48 |   3.7 |
-| COMPLETED Perform the archetype / artefact renames                          |         |       | 12:12 |  16.0 |
-| COMPLETED Rename file formatter to artefact formatter                       |         |       |  1:20 |   1.8 |
-| COMPLETED Fix remaining issues with assistant API                           |         |       |  1:07 |   1.5 |
-| STARTED Introduce artefact sources                                          |         |       |  0:22 |   0.5 |
+| COMPLETED Merge profiles with processed object in yarn.dia                  |         |       |  2:04 |   2.6 |
+| COMPLETED Fix yarn.dia tests                                                |         |       |  2:48 |   3.6 |
+| COMPLETED Perform the archetype / artefact renames                          |         |       | 12:12 |  15.6 |
+| COMPLETED Rename file formatter to artefact formatter                       |         |       |  1:20 |   1.7 |
+| COMPLETED Fix remaining issues with assistant API                           |         |       |  1:07 |   1.4 |
+| STARTED Introduce artefact sources                                          |         |       |  2:13 |   2.8 |
 | STARTED Integration of stitch and dogen                                     |         |       |  0:27 |   0.6 |
-| STARTED Document the conceptual model                                       |         |       |  5:48 |   7.6 |
+| STARTED Document the conceptual model                                       |         |       |  5:48 |   7.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -738,14 +737,120 @@ It seems this was missed in the great rename.
 We left a few cases of formatter calls because they were resulting in
 test breaks. Get to the bottom of those.
 
+*** COMPLETED Refactor ownership hierarchy                            :story:
+    CLOSED: [2016-10-22 Sat 22:58]
+
+*Rationale*: implemented as part of the great archetype rename.
+
+Start implementing the archetype logic. Basically the ownership
+hierarchy is an archetype address in archetype space. It should also
+contain the type index for the underlying modeling type, since all
+points in archetype space map to a point in modeling space. With this
+we can now bucket addresses by type index in annotations' ownership
+hierarchy repository, which means that the expanders using the
+formatter container just for bucketing purposes can now rely on
+annotations. However, a few actually need access to the formatters
+(inclusion, canoncial formatter expander, etc).
+
+- rename it to =artefact_descriptor=. Actually archetype address as it
+  is a point (or set of points) in archetype space.
+- remove all dia fields; these are now file importer specific and
+  never reach dynamic.
+- add =kernel= field. This is set to =stitch= or =quilt=.
+- rename formatter field to =kind=
+
+Merged stories:
+
+*Consider adding "application" to ownership hierarchy*
+
+Not all fields make sense to all tools in the dogen suite; some are
+knit specific, some are stitch specific and some are shared. At
+present this is not a problem because stitch loads up all of knit's
+fields and assumes users won't make use of them. If they do, nothing
+bad "should" happen. But a better way to solve this may be to only
+load fields that belong to an application. We could add "application"
+to ownership hierarchy, and filter on that. Note though that we would
+need some way of saying "all applications" (e.g. at present, leave the
+field blank).
+
+*Consider renaming =ownership_hierarchy=*
+
+We came up with the name =ownership_hierarchy= because we could not
+think of anything else. However, it is not a particularly good name,
+and it is increasingly so now that we need to use it across models. We
+need a better name for this value type.
+
+This work must be integrated with the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_69.org#thoughts-on-cpp-refactoring][archetype work]].
+
+*Split knitting from stitching settings*
+
+*Rationale*: with "kernel" we will have quilt and stitch.
+
+At present we only have a single common directory with all of the
+available fields. Not all fields apply to both stitching and
+knitting - but some do. We need a way to filter these. One possibility
+is to use an approach similar to the formatter groups in the ownership
+hierarchy. For now we simply have fields that have no meaning in
+stitching but can be supplied by users.
+
 *** STARTED Introduce artefact sources                                :story:
+    CLOCK: [2016-10-22 Sat 21:10]--[2016-10-22 Sat 23:01] =>  1:51
     CLOCK: [2016-10-21 Fri 20:09]--[2016-10-21 Fri 20:31] =>  0:22
 
-- introduce the concept of artefact source: stock formatter
-  (current), wale formatter, wale and stitch formatter,
-  handcrafted. Other possible types: null formatter, copy formatter.
+Notes:
+
+- introduce the concept of artefact source: stock formatter (current),
+  wale formatter, wale and stitch formatter. Other possible types:
+  null formatter, copy formatter.
 - rename formatters to stock formatters: in repository replace
   formatter prefixes in attributes with stock formatter.
+
+Actually what we are really talking about is the configuration of the
+formatting rather than the source of archetypes/artefacts. Thus we
+should call it "formatting style" (for want of a better name). The
+properties become "formatting properties" - not formatter properties
+because these are not the properties of the formatter but of the
+formatting "process" for the archetype in question. Example field:
+
+: quilt.cpp.serialization.class_header.formatting_style=stock
+
+We can then have a generic "formatting input" container which is used
+to supply relative paths to inputs:
+
+: quilt.cpp.serialization.class_header.formatting_input=a/b/c.wale
+
+Paths are relative to the project directory. For wale and stitch, by
+default we will look for a file on the same directory as the file path
+of the artefact, unless already found in the formatting input
+container.
+
+However, one slight wrinkle is that we are asking the stock formatter
+for:
+
+- inclusion dependencies
+- inclusion directive
+- file path
+
+And yet we may not use the stock formatter to generate the file. As a
+first step we could suppress the generation of these things - other
+than file path since we need the same file path for all formatting
+styles. Or we could generate them and use only those that are relevant
+and look for a proper solution in the future when the implementation
+becomes clearer.
+
+Another thing is we do not want the stitch template to have decoration
+information; this must be obtained from the profile. Thus stitch (when
+used from a formatting style at least) will not generate a decoration
+region. We will have to use the boilerplate ourselves and generate the
+decoration preamble and postamble and then populate the wale kvp
+container with them. The inclusion region will be generated by stitch
+though. The inclusion region is merged with the hard-coded includes in
+the wale template (literally appended at the end or start via the kvp
+replacement).
+
+Tasks:
+
+-
 
 *** STARTED Integration of stitch and dogen                           :story:
     CLOCK: [2016-10-16 Sun 13:44]--[2016-10-16 Sun 14:11] =>  0:27
@@ -972,82 +1077,31 @@ Further thoughts:
   generates the file. Actually we probably can't have this in quilt
   because we still need formatter properties.
 
-*** Refactor ownership hierarchy                                      :story:
+*** Consider adding =artefact_set= to formatters' model               :story:
 
-Start implementing the archetype logic. Basically the ownership
-hierarchy is an archetype address in archetype space. It should also
-contain the type index for the underlying modeling type, since all
-points in archetype space map to a point in modeling space. With this
-we can now bucket addresses by type index in annotations' ownership
-hierarchy repository, which means that the expanders using the
-formatter container just for bucketing purposes can now rely on
-annotations. However, a few actually need access to the formatters
-(inclusion, canoncial formatter expander, etc).
+We are using collections of artefacts quite a bit, and it makes sense
+to create an abstraction for it such as a =artefact_set=. However, for
+this to work properly we need to add at least one basic behaviour: the
+ability to merge two artefact sets. Or else we will end up having to
+unpack the artefacts, then merging them, then creating a new artefact
+set.
 
-- rename it to =artefact_descriptor=. Actually archetype address as it
-  is a point (or set of points) in archetype space.
-- remove all dia fields; these are now file importer specific and
-  never reach dynamic.
-- add =kernel= field. This is set to =stitch= or =quilt=.
-- rename formatter field to =kind=
-
-Merged stories:
-
-*Consider adding "application" to ownership hierarchy*
-
-Not all fields make sense to all tools in the dogen suite; some are
-knit specific, some are stitch specific and some are shared. At
-present this is not a problem because stitch loads up all of knit's
-fields and assumes users won't make use of them. If they do, nothing
-bad "should" happen. But a better way to solve this may be to only
-load fields that belong to an application. We could add "application"
-to ownership hierarchy, and filter on that. Note though that we would
-need some way of saying "all applications" (e.g. at present, leave the
-field blank).
-
-*Consider renaming =ownership_hierarchy=*
-
-We came up with the name =ownership_hierarchy= because we could not
-think of anything else. However, it is not a particularly good name,
-and it is increasingly so now that we need to use it across models. We
-need a better name for this value type.
-
-This work must be integrated with the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_69.org#thoughts-on-cpp-refactoring][archetype work]].
-
-*Split knitting from stitching settings*
-
-*Rationale*: with "kernel" we will have quilt and stitch.
-
-At present we only have a single common directory with all of the
-available fields. Not all fields apply to both stitching and
-knitting - but some do. We need a way to filter these. One possibility
-is to use an approach similar to the formatter groups in the ownership
-hierarchy. For now we simply have fields that have no meaning in
-stitching but can be supplied by users.
-
-*** Consider adding =fileset= to formatters' model                    :story:
-
-We are using collections of files quite a bit, and it makes sense to
-create an abstraction for it such as a =fileset=. However, for this to
-work properly we need to add at least one basic behaviours: the
-ability to merge two file sets. Or else we will end up having to
-unpack the files, then merging them, then creating a new fileset.
-
-Problem is, we either create the fileset as a non-generatable type -
-not ideal - or we create it as generatable and need to add this as a
-free function. We need to wait until dogen has support for merging
-code generation.
+Problem is, we either create the artefact set as a non-generatable
+type - not ideal - or we create it as generatable and need to add this
+as a free function. We need to wait until dogen has support for
+merging code generation.
 
 *** Consider supplying element configuration as a parameter           :story:
 
 Figure out if element configuration is context or if it is better
 expressed as a stand alone formatting parameter.
 
-*** Formatter repository should be created in quilt                   :story:
+*** Formatters' repository should be created in quilt                 :story:
 
-At present we are creating the formatter repository in
+At present we are creating the formatters' repository in
 =quilt.cpp=. However it will be shared by all backends in the
-kernel. Move it up to =quilt= level and supply it as a paramter to the backends.
+kernel. Move it up to =quilt= level and supply it as a paramter to the
+backends.
 
 *** Initialise formatters in the formatter's translation unit         :story:
 
