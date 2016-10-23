@@ -13,43 +13,44 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-23 Sun 20:27]
+#+CAPTION: Clock summary at [2016-10-23 Sun 21:01]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *78:17* |       |       | 100.0 |
+| *Total time*                                                                | *78:51* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 78:17   |       |       | 100.0 |
-| Active                                                                      |         | 78:17 |       | 100.0 |
+| Stories                                                                     | 78:51   |       |       | 100.0 |
+| Active                                                                      |         | 78:51 |       | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  0:32 |   0.7 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:19 |   0.4 |
-| COMPLETED Improve bintray support                                           |         |       |  0:26 |   0.6 |
+| COMPLETED Improve bintray support                                           |         |       |  0:26 |   0.5 |
 | COMPLETED Refactor opaque infrastructure                                    |         |       |  1:17 |   1.6 |
 | COMPLETED Remove any remnants of annotations from quilt                     |         |       |  0:05 |   0.1 |
 | COMPLETED Solve the issue of too many "configurations"                      |         |       |  4:01 |   5.1 |
 | COMPLETED Merge decoration configuration and annotations factories          |         |       |  0:18 |   0.4 |
 | COMPLETED Move annotation factories into expander in yarn                   |         |       |  1:11 |   1.5 |
-| COMPLETED Clean up terminology in dynamic                                   |         |       | 15:12 |  19.4 |
+| COMPLETED Clean up terminology in dynamic                                   |         |       | 15:12 |  19.3 |
 | COMPLETED Minor tidy-up of the quilt.cpp diagram                            |         |       |  0:29 |   0.6 |
 | COMPLETED Create a ownership hierarchy repository                           |         |       |  1:43 |   2.2 |
 | COMPLETED Use vector of elements in model                                   |         |       |  0:10 |   0.2 |
-| COMPLETED Rewrite profile support                                           |         |       | 11:50 |  15.1 |
+| COMPLETED Rewrite profile support                                           |         |       | 11:50 |  15.0 |
 | COMPLETED Merge annotation type and profile folders                         |         |       |  0:20 |   0.4 |
-| COMPLETED Push stereotypes processing into yarn                             |         |       |  1:51 |   2.4 |
-| COMPLETED Implement defaulting within the profiler                          |         |       |  1:13 |   1.6 |
+| COMPLETED Push stereotypes processing into yarn                             |         |       |  1:51 |   2.3 |
+| COMPLETED Implement defaulting within the profiler                          |         |       |  1:13 |   1.5 |
 | COMPLETED Add binding of stereotypes with profiles                          |         |       |  1:40 |   2.1 |
 | COMPLETED Update dogen models to use profiles                               |         |       |  0:19 |   0.4 |
-| COMPLETED Finish overwriting support                                        |         |       |  2:38 |   3.4 |
+| COMPLETED Finish overwriting support                                        |         |       |  2:38 |   3.3 |
 | COMPLETED Remove service stereotype                                         |         |       |  3:32 |   4.5 |
 | COMPLETED IOable services                                                   |         |       |  0:06 |   0.1 |
 | COMPLETED Generate skeleton for "non-generatable" files                     |         |       |  0:51 |   1.1 |
 | COMPLETED Merge profiles with processed object in yarn.dia                  |         |       |  2:04 |   2.6 |
 | COMPLETED Fix yarn.dia tests                                                |         |       |  2:48 |   3.6 |
-| COMPLETED Perform the archetype / artefact renames                          |         |       | 12:12 |  15.6 |
+| COMPLETED Perform the archetype / artefact renames                          |         |       | 12:12 |  15.5 |
 | COMPLETED Rename file formatter to artefact formatter                       |         |       |  1:20 |   1.7 |
 | COMPLETED Fix remaining issues with assistant API                           |         |       |  1:07 |   1.4 |
 | COMPLETED Document the conceptual model                                     |         |       |  5:48 |   7.4 |
-| COMPLETED Analysis work on adding artefact sources                          |         |       |  2:28 |   3.2 |
+| COMPLETED Analysis work on adding artefact sources                          |         |       |  2:28 |   3.1 |
+| COMPLETED Minor refactor of quilt.cpp formatter workflow                    |         |       |  0:34 |   0.7 |
 | STARTED Integration of stitch and dogen                                     |         |       |  0:27 |   0.6 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -878,6 +879,13 @@ Stories that need to be raised:
 - implement the new formatters by calling stitch and wale as required.
 - change one formatter at a time to use wale and wale & stitch
   templates.
+
+*** COMPLETED Minor refactor of quilt.cpp formatter workflow          :story:
+    CLOSED: [2016-10-23 Sun 21:01]
+    CLOCK: [2016-10-23 Sun 20:26]--[2016-10-23 Sun 21:00] =>  0:34
+
+Perform a quick tidy-up of this class in preparation for the artefact
+sources work next sprint.
 
 *** STARTED Integration of stitch and dogen                           :story:
     CLOCK: [2016-10-16 Sun 13:44]--[2016-10-16 Sun 14:11] =>  0:27

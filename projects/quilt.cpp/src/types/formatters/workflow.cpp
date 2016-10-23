@@ -50,6 +50,36 @@ cpp::formatters::registrar& workflow::registrar() {
     return *registrar_;
 }
 
+bool workflow::is_archetype_enabled(const std::unordered_map<std::string,
+    formattables::artefact_properties>& artefact_properties,
+    const std::string& archetype) const {
+
+    const auto i(artefact_properties.find(archetype));
+    if (i == artefact_properties.end()) {
+        BOOST_LOG_SEV(lg, error) << archetype_not_found << archetype;
+        BOOST_THROW_EXCEPTION(workflow_error(archetype_not_found + archetype));
+    }
+    return i->second.enabled();
+}
+
+dogen::formatters::artefact workflow::format(
+    const formattables::model& fm, const yarn::element& e,
+    const formattables::element_properties& ep,
+    const artefact_formatter_interface& formatter) const {
+
+    const auto id(e.name().id());
+    const auto fmtn(formatter.formatter_name());
+    BOOST_LOG_SEV(lg, debug) << "Formatting with " << fmtn;
+
+    const auto& frp(registrar().formatter_repository());
+    context ctx(ep, fm, frp.helper_formatters());
+    const auto r(formatter.format(ctx, e));
+
+    BOOST_LOG_SEV(lg, debug) << "Finished formatting. Path: " << r.path();
+
+    return r;
+}
+
 std::forward_list<dogen::formatters::artefact>
 workflow::format(const formattables::model& fm, const yarn::element& e,
     const formattables::element_properties& ep) const {
@@ -68,35 +98,17 @@ workflow::format(const formattables::model& fm, const yarn::element& e,
         return r;
     }
 
-    auto& art_props(ep.artefact_properties());
     const auto& fmts(i->second);
-    for (const auto& fmt_ptr : fmts) {
-        const auto& fmt(*fmt_ptr);
-        const auto fmtn(fmt.formatter_name());
-        BOOST_LOG_SEV(lg, debug) << "Formatting: '" << id << "' with '"
-                                 << fmtn << "'";
-
+    for (const auto& ptr : fmts) {
+        const auto& fmt(*ptr);
         const auto arch(fmt.archetype_location().archetype());
-        const auto j(art_props.find(arch));
-        if (j == art_props.end()) {
-            BOOST_LOG_SEV(lg, error) << archetype_not_found << arch;
-            BOOST_THROW_EXCEPTION(workflow_error(archetype_not_found + arch));
-        }
-
-        const auto& art_props(j->second);
-        const auto is_archetype_enabled(art_props.enabled());
-        if (!is_archetype_enabled) {
-            BOOST_LOG_SEV(lg, debug) << "Archetype is disabled.";
+        if (!is_archetype_enabled(ep.artefact_properties(), arch)) {
+            BOOST_LOG_SEV(lg, debug) << "Archetype is disabled: " << arch;
             continue;
         }
 
-        const auto& hlp_fmt(frp.helper_formatters());
-        const auto fct_propss(fm.facet_properties());
-        context ctx(ep, fm, hlp_fmt);
-        const auto file(fmt.format(ctx, e));
-        r.push_front(file);
-        BOOST_LOG_SEV(lg, debug) << "Finished formatting. id: " << id
-                                 << " File path: " << file.path();
+        const auto artefact(format(fm, e, ep, fmt));
+        r.push_front(artefact);
     }
     return r;
 }
@@ -113,7 +125,7 @@ workflow::execute(const formattables::model& fm) const {
             r.splice_after(r.before_begin(), format(fm, e, eprops));
         }
     }
-    BOOST_LOG_SEV(lg, debug) << "Finished formatting model.";
+    BOOST_LOG_SEV(lg, debug) << "Finished formatting.";
     return r;
 }
 
