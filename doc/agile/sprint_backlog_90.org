@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-22 Sat 23:01]
+#+CAPTION: Clock summary at [2016-10-23 Sun 20:27]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *78:02* |       |       | 100.0 |
+| *Total time*                                                                | *78:17* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 78:02   |       |       | 100.0 |
-| Active                                                                      |         | 78:02 |       | 100.0 |
+| Stories                                                                     | 78:17   |       |       | 100.0 |
+| Active                                                                      |         | 78:17 |       | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  0:32 |   0.7 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:19 |   0.4 |
 | COMPLETED Improve bintray support                                           |         |       |  0:26 |   0.6 |
@@ -29,11 +29,11 @@
 | COMPLETED Solve the issue of too many "configurations"                      |         |       |  4:01 |   5.1 |
 | COMPLETED Merge decoration configuration and annotations factories          |         |       |  0:18 |   0.4 |
 | COMPLETED Move annotation factories into expander in yarn                   |         |       |  1:11 |   1.5 |
-| COMPLETED Clean up terminology in dynamic                                   |         |       | 15:12 |  19.5 |
+| COMPLETED Clean up terminology in dynamic                                   |         |       | 15:12 |  19.4 |
 | COMPLETED Minor tidy-up of the quilt.cpp diagram                            |         |       |  0:29 |   0.6 |
 | COMPLETED Create a ownership hierarchy repository                           |         |       |  1:43 |   2.2 |
 | COMPLETED Use vector of elements in model                                   |         |       |  0:10 |   0.2 |
-| COMPLETED Rewrite profile support                                           |         |       | 11:50 |  15.2 |
+| COMPLETED Rewrite profile support                                           |         |       | 11:50 |  15.1 |
 | COMPLETED Merge annotation type and profile folders                         |         |       |  0:20 |   0.4 |
 | COMPLETED Push stereotypes processing into yarn                             |         |       |  1:51 |   2.4 |
 | COMPLETED Implement defaulting within the profiler                          |         |       |  1:13 |   1.6 |
@@ -48,9 +48,9 @@
 | COMPLETED Perform the archetype / artefact renames                          |         |       | 12:12 |  15.6 |
 | COMPLETED Rename file formatter to artefact formatter                       |         |       |  1:20 |   1.7 |
 | COMPLETED Fix remaining issues with assistant API                           |         |       |  1:07 |   1.4 |
-| STARTED Introduce artefact sources                                          |         |       |  2:13 |   2.8 |
+| COMPLETED Document the conceptual model                                     |         |       |  5:48 |   7.4 |
+| COMPLETED Analysis work on adding artefact sources                          |         |       |  2:28 |   3.2 |
 | STARTED Integration of stitch and dogen                                     |         |       |  0:27 |   0.6 |
-| STARTED Document the conceptual model                                       |         |       |  5:48 |   7.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -793,7 +793,20 @@ is to use an approach similar to the formatter groups in the ownership
 hierarchy. For now we simply have fields that have no meaning in
 stitching but can be supplied by users.
 
-*** STARTED Introduce artefact sources                                :story:
+*** COMPLETED Document the conceptual model                           :story:
+    CLOSED: [2016-10-23 Sun 20:23]
+    CLOCK: [2016-10-20 Thu 09:32]--[2016-10-20 Thu 11:42] =>  2:10
+    CLOCK: [2016-10-19 Wed 21:09]--[2016-10-19 Wed 22:49] =>  1:40
+    CLOCK: [2016-10-19 Wed 19:10]--[2016-10-19 Wed 21:08] =>  1:58
+
+We seem to be pretty close to the end of the conceptual model for
+dogen. We should write it up whilst its still fresh. We should try to
+use mathematical notation where possible to practice it. We should
+also get it reviewed.
+
+*** COMPLETED Analysis work on adding artefact sources                :story:
+    CLOSED: [2016-10-23 Sun 20:27]
+    CLOCK: [2016-10-23 Sun 20:10]--[2016-10-23 Sun 20:25] =>  0:15
     CLOCK: [2016-10-22 Sat 21:10]--[2016-10-22 Sat 23:01] =>  1:51
     CLOCK: [2016-10-21 Fri 20:09]--[2016-10-21 Fri 20:31] =>  0:22
 
@@ -848,9 +861,23 @@ though. The inclusion region is merged with the hard-coded includes in
 the wale template (literally appended at the end or start via the kvp
 replacement).
 
-Tasks:
+Stories that need to be raised:
 
--
+- add properties to artefact properties, add new expander and hook it
+  in with formattables workflow.
+- add new kinds of formatters to process wale templates, etc. Each
+  formatter should check for its required data. They can be mainly
+  stubs for now.
+- change the formatters workflow to dispatch to the correct formatter
+  type.
+- extend stitch to allow adding external kvps such as decoration. This
+  can probably be done manually but needs to be investigated.
+- extend stitch to support named regions; the text template will
+  preserve the names after template instantiation.
+- implement wale.
+- implement the new formatters by calling stitch and wale as required.
+- change one formatter at a time to use wale and wale & stitch
+  templates.
 
 *** STARTED Integration of stitch and dogen                           :story:
     CLOCK: [2016-10-16 Sun 13:44]--[2016-10-16 Sun 14:11] =>  0:27
@@ -925,16 +952,6 @@ Random notes:
   to perform the stitching as part of knitter's workflows. Perhaps as
   part of the expansion, we could set a number of stitch fields which
   would then be picked up by some knit-specific workflow classes.
-
-*** STARTED Document the conceptual model                             :story:
-    CLOCK: [2016-10-20 Thu 09:32]--[2016-10-20 Thu 11:42] =>  2:10
-    CLOCK: [2016-10-19 Wed 21:09]--[2016-10-19 Wed 22:49] =>  1:40
-    CLOCK: [2016-10-19 Wed 19:10]--[2016-10-19 Wed 21:08] =>  1:58
-
-We seem to be pretty close to the end of the conceptual model for
-dogen. We should write it up whilst its still fresh. We should try to
-use mathematical notation where possible to practice it. We should
-also get it reviewed.
 
 *** Stitch not writing when template has changed                      :story:
 
