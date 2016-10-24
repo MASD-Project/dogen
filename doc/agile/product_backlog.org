@@ -6352,6 +6352,21 @@ Links:
 
 These stories are far in the future or just plain crazy.
 
+
+*** Add support for XText                                             :story:
+
+XText is a java technology that allows defining simple EBNF grammars
+and then code-generates both the parser and classes to store the
+AST. We could have a spirit equivalent. This is probably not
+horrendously difficult, but we do not have any use cases.
+
+Links:
+
+- [[http://www.eclipse.org/Xtext/][XText site]] and [[https://eclipse.org/Xtext/documentation/][documentation]]
+- [[%5B%5Bhttp://eclipsecon.org/summiteurope2006/presentations/ESE2006-EclipseModelingSymposium12_xTextFramework.pdf%5D%5D][oAW xText: A framework for textual DSLs]]
+- Franca: some IDL language for which there is an XText
+  definition. C++ (spirit) implementation [[https://github.com/martinhaefner/franca][here]].
+
 *** Model anonymizer and slicer                                       :story:
 
 A user may create a model which triggers a problem in dogen. For
