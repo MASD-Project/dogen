@@ -14,19 +14,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-24 Mon 18:33]
+#+CAPTION: Clock summary at [2016-10-24 Mon 21:22]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *2:52* |      |      | 100.0 |
+| *Total time*                                                                | *3:42* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 2:52   |      |      | 100.0 |
-| Active                                                                      |        | 2:52 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 1:03 |  36.6 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:22 |  12.8 |
-| COMPLETED Improve bintray support                                           |        |      | 0:35 |  20.3 |
-| COMPLETED Add logo with white background                                    |        |      | 0:14 |   8.1 |
-| COMPLETED Consider renaming =diagrams= to =input_models=                    |        |      | 0:38 |  22.1 |
+| Stories                                                                     | 3:42   |      |      | 100.0 |
+| Active                                                                      |        | 3:42 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 1:03 |  28.4 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:22 |   9.9 |
+| COMPLETED Improve bintray support                                           |        |      | 1:25 |  38.3 |
+| COMPLETED Add logo with white background                                    |        |      | 0:14 |   6.3 |
+| COMPLETED Consider renaming =diagrams= to =input_models=                    |        |      | 0:38 |  17.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -66,6 +66,7 @@ For more details see the [sprint log](https://github.com/DomainDrivenConsulting/
 
 *** COMPLETED Improve bintray support                                 :story:
     CLOSED: [2016-10-24 Mon 10:31]
+    CLOCK: [2016-10-24 Mon 20:31]--[2016-10-24 Mon 21:21] =>  0:50
     CLOCK: [2016-10-24 Mon 17:30]--[2016-10-24 Mon 17:59] =>  0:29
     CLOCK: [2016-10-24 Mon 10:25]--[2016-10-24 Mon 10:31] =>  0:06
 
@@ -427,6 +428,9 @@ introduced because it means references are now transitive (we need to
 know of the references of any model we reference). Once we add them to
 the model, we should also load referenced models' references so that
 the process is automatic.
+
+In addition to references, we must also be able to supply the external
+module path for the target model via the meta-data.
 
 Merged stories
 
