@@ -14,19 +14,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-24 Mon 18:13]
+#+CAPTION: Clock summary at [2016-10-24 Mon 18:27]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *2:33* |      |      | 100.0 |
+| *Total time*                                                                | *2:47* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 2:33   |      |      | 100.0 |
-| Active                                                                      |        | 2:33 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:58 |  37.9 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:22 |  14.4 |
-| COMPLETED Improve bintray support                                           |        |      | 0:35 |  22.9 |
-| COMPLETED Add logo with white background                                    |        |      | 0:14 |   9.2 |
-| COMPLETED Consider renaming =diagrams= to =models=                          |        |      | 0:24 |  15.7 |
+| Stories                                                                     | 2:47   |      |      | 100.0 |
+| Active                                                                      |        | 2:47 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:58 |  34.7 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:22 |  13.2 |
+| COMPLETED Improve bintray support                                           |        |      | 0:35 |  21.0 |
+| COMPLETED Add logo with white background                                    |        |      | 0:14 |   8.4 |
+| COMPLETED Consider renaming =diagrams= to =input_models=                    |        |      | 0:38 |  22.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -80,8 +80,9 @@ if we can fix some of the errors of the previous sprint.
 Now we started tweeting releases we need a version of the logo that
 has a background.
 
-*** COMPLETED Consider renaming =diagrams= to =models=                :story:
+*** COMPLETED Consider renaming =diagrams= to =input_models=          :story:
     CLOSED: [2016-10-24 Mon 18:12]
+    CLOCK: [2016-10-24 Mon 18:13]--[2016-10-24 Mon 18:27] =>  0:14
     CLOCK: [2016-10-24 Mon 18:02]--[2016-10-24 Mon 18:12] =>  0:10
     CLOCK: [2016-10-24 Mon 16:43]--[2016-10-24 Mon 16:57] =>  0:14
 
@@ -92,6 +93,26 @@ render the directory name meaningless. We should call the directory
 =models=.
 
 In addition, models are really part of projects.
+
+One slight problem: we now have =models= and =test_models= at the same
+level, with very different meanings. We need a way to distinguish code
+generation inputs from generated code. We could call it
+=codegen.models= or =input_models=, in keeping with the conceptual
+model.
+
+Merged stories:
+
+*Consider moving dia diagrams to their own project*
+
+We originally create a diagrams top-level directory for all of the
+diagrams that generate dogen models. However it may make more sense to
+have the diagrams closer to the project they generate; for example a
+folder within the project. The downside of this approach is that we
+now have to make references across projects; we could use relative
+paths for this but the targets will still look verbose.
+
+We decided against this in the end as it's handy having all diagrams
+in one place.
 
 *** Implement wale templates                                          :story:
 
@@ -504,14 +525,3 @@ when we move to a mustache world where there may not be a formatter
 header file at all.
 
 ** Deprecated
-*** CANCELLED Consider moving dia diagrams to their own project       :story:
-    CLOSED: [2016-10-24 Mon 11:30]
-
-*Rationale*: its handy having all diagrams in one place.
-
-We originally create a diagrams top-level directory for all of the
-diagrams that generate dogen models. However it may make more sense to
-have the diagrams closer to the project they generate; for example a
-folder within the project. The downside of this approach is that we
-now have to make references across projects; we could use relative
-paths for this but the targets will still look verbose.

@@ -17,7 +17,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 set(projects_dir "${CMAKE_SOURCE_DIR}/projects")
-set(models_dir "${projects_dir}/models")
+set(models_dir "${projects_dir}/input_models")
 
 set(target yarn)
 add_custom_target(knit_${target}
