@@ -23,8 +23,8 @@
 
     "files":
         [
-            { "includePattern": "${DOGEN_PACKAGE_DIR}/*.deb" },
-            { "includePattern": "${DOGEN_PACKAGE_DIR}/*.dmg" }
+            { "includePattern": "${DOGEN_PACKAGE_DIR}/(.*).deb$" },
+            { "includePattern": "${DOGEN_PACKAGE_DIR}/(.*).dmg$" }
         ],
     "publish": true
 }
