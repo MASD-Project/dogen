@@ -104,9 +104,11 @@ if ($LastExitCode -ne 0) {
     exit 1
 }
 
-$command = "cmake --build . --config $build_type --target ${target}";
-Invoke-Expression -Command $command
-if ($LastExitCode -ne 0) {
-    write-host "Error whilst running target ${target}."
-    exit 1
+foreach ($element in $target) {
+    $command = "cmake --build . --config $build_type --target ${element}";
+    Invoke-Expression -Command $command
+    if ($LastExitCode -ne 0) {
+        write-host "Error whilst running target ${target}."
+        exit 1
+    }
 }
