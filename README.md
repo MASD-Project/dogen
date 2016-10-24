@@ -1,4 +1,4 @@
-![Dogen Logo](https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/images/logo_with_message.png)
+![Dogen Logo](https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/doc/images/logo_with_message.png)
 
 [![Licence](https://img.shields.io/badge/license-GPL_3-green.svg?dummy)](https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/LICENCE)
 [![Build Status](https://img.shields.io/travis/DomainDrivenConsulting/dogen.svg?label=linux/osx)](https://travis-ci.org/DomainDrivenConsulting/dogen)

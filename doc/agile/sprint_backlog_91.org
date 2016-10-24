@@ -81,6 +81,7 @@ Now we started tweeting releases we need a version of the logo that
 has a background.
 
 *** STARTED Consider renaming =diagrams= to =models=                  :story:
+    CLOCK: [2016-10-24 Mon 18:02]
     CLOCK: [2016-10-24 Mon 16:43]--[2016-10-24 Mon 16:57] =>  0:14
 
 The name "diagrams" is a bit misleading. These are not just diagrams,
