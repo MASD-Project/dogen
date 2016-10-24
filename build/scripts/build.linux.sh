@@ -34,7 +34,7 @@ fi
 # Root directory for the product.
 #
 dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-product_dir=$(realpath ${dir}/../..)
+product_dir=$(readlink -f ${dir}/../..)
 echo "* Product directory: ${product_dir}"
 
 #
