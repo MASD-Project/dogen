@@ -14,18 +14,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-24 Mon 11:46]
+#+CAPTION: Clock summary at [2016-10-24 Mon 17:59]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *1:40* |      |      | 100.0 |
+| *Total time*                                                                | *2:23* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 1:40   |      |      | 100.0 |
-| Active                                                                      |        | 1:40 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:58 |  58.0 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:22 |  22.0 |
-| COMPLETED Improve bintray support                                           |        |      | 0:06 |   6.0 |
-| COMPLETED Add logo with white background                                    |        |      | 0:14 |  14.0 |
+| Stories                                                                     | 2:23   |      |      | 100.0 |
+| Active                                                                      |        | 2:23 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:58 |  40.6 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:22 |  15.4 |
+| COMPLETED Improve bintray support                                           |        |      | 0:35 |  24.5 |
+| COMPLETED Add logo with white background                                    |        |      | 0:14 |   9.8 |
+| STARTED Consider renaming =diagrams= to =models=                            |        |      | 0:14 |   9.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -64,6 +65,7 @@ For more details see the [sprint log](https://github.com/DomainDrivenConsulting/
 
 *** COMPLETED Improve bintray support                                 :story:
     CLOSED: [2016-10-24 Mon 10:31]
+    CLOCK: [2016-10-24 Mon 17:30]--[2016-10-24 Mon 17:59] =>  0:29
     CLOCK: [2016-10-24 Mon 10:25]--[2016-10-24 Mon 10:31] =>  0:06
 
 As with every end of sprint, try to massage bintray a bit more and see
@@ -78,13 +80,16 @@ if we can fix some of the errors of the previous sprint.
 Now we started tweeting releases we need a version of the logo that
 has a background.
 
-*** Consider renaming =diagrams= to =models=                          :story:
+*** STARTED Consider renaming =diagrams= to =models=                  :story:
+    CLOCK: [2016-10-24 Mon 16:43]--[2016-10-24 Mon 16:57] =>  0:14
 
 The name "diagrams" is a bit misleading. These are not just diagrams,
 they are specifically Dogen inputs. We need a name that is a bit more
 meaningful. For example, if we start creating models in JSON, it would
 render the directory name meaningless. We should call the directory
 =models=.
+
+In addition, models are really part of projects.
 
 *** Implement wale templates                                          :story:
 

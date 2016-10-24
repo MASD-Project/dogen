@@ -1,4 +1,4 @@
-# -*- mode: cmake; tab-width: 4; indent-tabs-mode: nil -*-
+# -*- mode: cmake; cmake-tab-width: 4; indent-tabs-mode: nil -*-
 #
 # Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
 #
@@ -17,6 +17,29 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
+if (WITH_JSON_VALIDATION)
+    set(files "")
+
+    #
+    # bintray
+    #
+    set(folder "bintray")
+    file(GLOB_RECURSE files RELATIVE
+        "${CMAKE_CURRENT_SOURCE_DIR}/${folder}"
+        "${CMAKE_CURRENT_SOURCE_DIR}/${folder}/*.json.in")
+
+    add_custom_target(validate_json_${folder})
+    add_dependencies(validate_all_json validate_json_${folder})
+    foreach(file ${files})
+        add_custom_target(validate_json_${folder}_${file}
+            COMMENT "Validating JSON for ${folder}/${file}."
+            WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+            COMMAND ${JQ_COMMAND} . ${folder}/${file} > /dev/null)
+        add_dependencies(validate_json_${folder}
+            validate_json_${folder}_${file})
+    endforeach()
+endif()
+
 set(version_template "${CMAKE_CURRENT_SOURCE_DIR}/cpp/version.hpp.in")
 configure_file(${version_template} ${stage_inc_dir}/dogen/version.hpp)
 message(STATUS "Transformed version.hpp.")

@@ -1,4 +1,4 @@
-# -*- mode: cmake; tab-width: 4; indent-tabs-mode: nil -*-
+# -*- mode: cmake; cmake-tab-width: 4; indent-tabs-mode: nil -*-
 #
 # Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
 #
@@ -37,55 +37,58 @@ if (WITH_JSON_VALIDATION)
     set(files "")
 
     #
-    # Fields
+    # annotations
     #
+    set(folder "annotations")
     file(GLOB_RECURSE files RELATIVE
-        "${CMAKE_CURRENT_SOURCE_DIR}/fields"
-        "${CMAKE_CURRENT_SOURCE_DIR}/fields/*.json")
+        "${CMAKE_CURRENT_SOURCE_DIR}/${folder}"
+        "${CMAKE_CURRENT_SOURCE_DIR}/${folder}/*.json")
 
-    add_custom_target(validate_json_fields)
-    add_dependencies(validate_all_json validate_json_fields)
+    add_custom_target(validate_json_${folder})
+    add_dependencies(validate_all_json validate_json_${folder})
     foreach(file ${files})
-        add_custom_target(validate_json_fields_${file}
-             COMMENT "Validating JSON for fields/${file}."
+        add_custom_target(validate_json_${folder}_${file}
+            COMMENT "Validating JSON for ${folder}/${file}."
             WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-            COMMAND ${JQ_COMMAND} . fields/${file} > /dev/null)
-        add_dependencies(validate_json_fields validate_json_fields_${file})
+            COMMAND ${JQ_COMMAND} . ${folder}/${file} > /dev/null)
+        add_dependencies(validate_json_${folder}
+            validate_json_${folder}_${file})
     endforeach()
 
     #
     # library
     #
+    set(folder "library")
     file(GLOB_RECURSE files RELATIVE
-        "${CMAKE_CURRENT_SOURCE_DIR}/library"
-        "${CMAKE_CURRENT_SOURCE_DIR}/library/*.json")
+        "${CMAKE_CURRENT_SOURCE_DIR}/${folder}"
+        "${CMAKE_CURRENT_SOURCE_DIR}/${folder}/*.json")
 
-    add_custom_target(validate_json_library)
-    add_dependencies(validate_all_json validate_json_library)
+    add_custom_target(validate_json_${folder})
+    add_dependencies(validate_all_json validate_json_${folder})
     foreach(file ${files})
-        add_custom_target(validate_json_library_${file}
-             COMMENT "Validating JSON for library/${file}."
+        add_custom_target(validate_json_${folder}_${file}
+             COMMENT "Validating JSON for ${folder}/${file}."
             WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-            COMMAND ${JQ_COMMAND} . library/${file} > /dev/null)
-        add_dependencies(validate_json_library validate_json_library_${file})
+            COMMAND ${JQ_COMMAND} . ${folder}/${file} > /dev/null)
+        add_dependencies(validate_json_${folder} validate_json_${folder}_${file})
     endforeach()
 
     #
     # modeline_groups
     #
+    set(folder "modeline_groups")
     file(GLOB_RECURSE files RELATIVE
-        "${CMAKE_CURRENT_SOURCE_DIR}/modeline_groups"
-        "${CMAKE_CURRENT_SOURCE_DIR}/modeline_groups/*.json")
+        "${CMAKE_CURRENT_SOURCE_DIR}/${folder}"
+        "${CMAKE_CURRENT_SOURCE_DIR}/${folder}/*.json")
 
-    add_custom_target(validate_json_modeline_groups)
-    add_dependencies(validate_all_json validate_json_modeline_groups)
+    add_custom_target(validate_json_${folder})
+    add_dependencies(validate_all_json validate_json_${folder})
     foreach(file ${files})
-        add_custom_target(validate_json_modeline_groups_${file}
-             COMMENT "Validating JSON for modeline_groups/${file}."
+        add_custom_target(validate_json_${folder}_${file}
+             COMMENT "Validating JSON for ${folder}/${file}."
             WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-            COMMAND ${JQ_COMMAND} . modeline_groups/${file} > /dev/null)
-        add_dependencies(validate_json_modeline_groups
-            validate_json_modeline_groups_${file})
+            COMMAND ${JQ_COMMAND} . ${folder}/${file} > /dev/null)
+        add_dependencies(validate_json_${folder}
+            validate_json_${folder}_${file})
     endforeach()
-
 endif()
