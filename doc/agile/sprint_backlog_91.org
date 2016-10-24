@@ -67,6 +67,13 @@ if we can fix some of the errors of the previous sprint.
 
 - fixed the path to bintray descriptor.
 
+*** COMPLETED Add logo with white background                          :story:
+    CLOSED: [2016-10-24 Mon 10:54]
+    CLOCK: [2016-10-24 Mon 10:40]--[2016-10-24 Mon 10:54] =>  0:14
+
+Now we started tweeting releases we need a version of the logo that
+has a background.
+
 *** Integration of stitch and dogen                                   :story:
 
 Now that we have implemented stitch and proved it works (more or
