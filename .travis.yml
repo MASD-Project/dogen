@@ -55,8 +55,9 @@ addons:
       - ubuntu-toolchain-r-test
 
 install:
-  - export BUILD_DIR=build/scripts
-  - source ${BUILD_DIR}/travis.install.${TRAVIS_OS_NAME}.sh
+  - export
+  - export SCRIPTS_DIR=${TRAVIS_BUILD_DIR}/build/scripts
+  - source ${SCRIPTS_DIR}/travis.install.${TRAVIS_OS_NAME}.sh
 
 script:
   - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then
@@ -67,8 +68,8 @@ script:
         export THIRD_PARTY="/tmp/dogen_deps/dogen_deps_clang_7_3_0_osx_amd64";
         export TARGET="package";
     fi
-  - ${BUILD_DIR}/build.${TRAVIS_OS_NAME}.sh ${BUILD_TYPE} ${COMPILER} ${THIRD_PARTY} ${TARGET}
-  - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then ${BUILD_DIR}/test_package.linux.sh; fi
+  - ${SCRIPTS_DIR}/build.${TRAVIS_OS_NAME}.sh ${BUILD_TYPE} ${COMPILER} ${THIRD_PARTY} ${TARGET}
+  - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then ${SCRIPTS_DIR}/test_package.linux.sh; fi
 
 notifications:
   email:
@@ -98,7 +99,7 @@ deploy:
 
 deploy:
   provider: bintray
-  file: "build/output/${COMPILER}/${BUILD_TYPE}/stage/pkg/bintray.json"
+  file: "${TRAVIS_BUILD_DIR}/build/output/${COMPILER}/${BUILD_TYPE}/stage/pkg/bintray.json"
   user: mcraveiro
   key:
     secure: IrFRrzzMnnFzj2s2hYctnvMjTf7HRe5uQVPcioAjbuNrxXX5XYmRH6ce8osxoRhcpQYS9ppCmrt8VbRBB57piWS3yKfM6WftDrmNQil7XwqowKAKm/VuX6K5psjJHRCYoNUAovwvfLmaLIWvVd+I+NkU48EXvflClXx13Qp8GtU=
