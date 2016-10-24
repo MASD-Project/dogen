@@ -1,0 +1,317 @@
+#+title: Sprint Backlog 91
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: STARTED | COMPLETED CANCELLED POSTPONED
+#+tags: { story(s) epic(e) }
+
+* Mission Statement
+
+- implement wale;
+- integrate wale and stitch with knit;
+- improve exception support.
+
+* Stories
+
+** Active
+
+#+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
+#+CAPTION: Clock summary at [2016-10-24 Mon 10:31]
+| <75>                                                                        |        |      |      |       |
+| Headline                                                                    | Time   |      |      |     % |
+|-----------------------------------------------------------------------------+--------+------+------+-------|
+| *Total time*                                                                | *0:29* |      |      | 100.0 |
+|-----------------------------------------------------------------------------+--------+------+------+-------|
+| Stories                                                                     | 0:29   |      |      | 100.0 |
+| Active                                                                      |        | 0:29 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:09 |  31.0 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:14 |  48.3 |
+| COMPLETED Improve bintray support                                           |        |      | 0:06 |  20.7 |
+#+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
+#+end:
+
+*** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-10-24 Mon 10:01]--[2016-10-24 Mon 10:10] =>  0:09
+
+Updates to sprint and product backlog.
+
+*** COMPLETED Edit release notes for previous sprint                  :story:
+    CLOSED: [2016-10-24 Mon 10:24]
+    CLOCK: [2016-10-24 Mon 10:10]--[2016-10-24 Mon 10:24] =>  0:14
+
+Add github release notes for previous sprint.
+
+Title: Dogen v0.90.0, "Aida"
+
+#+begin_src markdown
+Overview
+========
+One more sprint of internal refactorings, leading us close to the end result. The focus continued on the ```quilt.cpp``` model.
+
+There were still a number of user visible changes:
+
+- introduction of profiles: meaning its no longer necessary to setup each facet's configuration on each diagram; users can create or reuse profiles.
+- integration of stereotypes with profiles: its now possible to annotate a type with a stereotype and, if a profile with the same name exists, dogen will apply the profile to the type.
+- deprecation of the ```service``` stereotype: it has been replaced by ```handcrafted```. With this change we now generate class skeletons for hand-crafted code.
+- mixing of hand-crafted and generated code code is now possible at the element level: if a hand-crafted type declares a number of attributes and marks the IO facet as overwrittable, dogen will generate IO support (and serialisation and so forth) for this element.
+- rename of a lot of the meta-data tags, removing the postfix ```_formatter```.
+
+For more details see the [sprint log](https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_90.org).
+#+end_src
+
+*** COMPLETED Improve bintray support                                 :story:
+    CLOSED: [2016-10-24 Mon 10:31]
+    CLOCK: [2016-10-24 Mon 10:25]--[2016-10-24 Mon 10:31] =>  0:06
+
+As with every end of sprint, try to massage bintray a bit more and see
+if we can fix some of the errors of the previous sprint.
+
+- fixed the path to bintray descriptor.
+
+*** Integration of stitch and dogen                                   :story:
+
+Now that we have implemented stitch and proved it works (more or
+less), we need to think how we can make using stitch from dogen
+easier. At present there is not integration at all:
+
+- users need to create regexes to ensure dogen does not trample on
+  stitch files:
+
+:    --ignore-files-matching-regex .*stitch
+:    --ignore-files-matching-regex .*_stitch.hpp
+:    --ignore-files-matching-regex .*_stitch.cpp
+
+- users need to manually create a header file for each stitch
+  template.
+- users need to create stitch targets and run them to ensure the
+  templates have been expanded. This means its possible to get dogen
+  and stitch out of sync (but for now not a big problem).
+
+In the ideal world, when we knit a model it would be nice if it could
+also stitch as required. This could be achieved as follows:
+
+- Create a meta-data tag that tells dogen a type has an associated
+  stitch template with it.
+- Create =cpp= types that represent the stitch header and
+  implementation.
+- Transformer needs to look for the meta-data tag and instantiate the
+  =cpp= types.
+- Create a =cpp= formatter for the header, as per regular
+  formatters. The slight challenge here is that the formatter needs to
+  be instantiable across facets, which we do not support at the
+  moment.
+- Create a cpp formatter for the implementation which instantiates
+  stitch with the template and uses it to create a file. Same
+  challenge as with the header.
+
+Random notes:
+
+- change artefact to have named regions; by default there is only one
+  region, with a name like "global". This is the output of a stock
+  formatter. Regions are stored in a vector and have name and
+  content.
+- in default stitch, the named regions are: 1) boilerplate preamble 2)
+  body. We will then introduce other named regions: inclusion function,
+  formatting function.
+- the wale and stitch artefact formatter will use the named regions as
+  inputs to the wale kvps.
+
+*Previous Understanding*
+
+- stitch can still be integrated with dogen. We could use meta-data to
+  link a formatter (well, any class that needs stitch really, but at
+  present just a formatter) with a stitch template. For example, a
+  =class_header_formatter= could have a "is stitchable" flag set to
+  on. This would then mean that dogen would look for a
+  =class_header_formatter.stitch= file in the same directory as the
+  CPP file. It would then use that to create a
+  =class_header_formatter_stitch.cpp= file. It would also
+  ignore/generate a =class_header_formatter_stitch.hpp= file and
+  automatically add it to the inclusion dependencies of
+  =class_header_formatter.cpp=. These are injected into stitch as we
+  instantiate the template since stitch supports meta-data (we do need
+  a way to inject the meta-data from dogen into the meta-data in the
+  template; perhaps a kvp container passed in to the stitch workflow
+  which could then be handed over to the parser). All these files are
+  automatically added to the list of "exceptions" for housekeeping so
+  that they do not get deleted. However, stitch would not know
+  anything at all about any of this; this is all knitter's
+  functionality. The problem is at present we haven't got a good place
+  to perform the stitching as part of knitter's workflows. Perhaps as
+  part of the expansion, we could set a number of stitch fields which
+  would then be picked up by some knit-specific workflow classes.
+
+*** Stitch not writing when template has changed                      :story:
+
+It seems we can change a text template but not get stitch to update
+the cpp file. We must have made a mistake on the binary diffing of the
+files.
+
+*** Generate formatter interfaces                                      :epic:
+
+We should create another template language, in addition to stitch:
+"wale". Wale is a very simple language that has templates that just do
+token replacement. The tokens must have a special format:
+={{{TOKEN}}}=. We receive a map of keys to values and do a blind
+replacement to the keys on the wale document.
+
+This links to stitch as follows:
+
+- create a single file implementation of a formatter. It will
+  implement both the provider interface and the appropriate formatter
+  interface. It will call the stitch method to start off with. There
+  are no headers, just cpp. It does the formatter registration.
+- add support in stitch for "named sections": its possible to start a
+  section and assign it a name. A stitch template will have two
+  sections: inclusion provision and formatting.
+- add support in stitch for "wale variables". These are just kvp's
+  defined at the top:
+
+: <#@ wale.variable="formatter_name=abcd" #>
+
+  wale variables and sections are converted into a kvp container for
+  wale input. Examples: facet, formatter name, etc.
+- convert the formatter code into a wale template, adding wale
+  variables as required.
+- update stitch to detect wale usage and to call wale in those
+  cases. This could be done by supplying a wale template:
+
+: <#@ wale.template="abcd.wale" #>
+
+- note that wale could be useful outside of stitch, for example for
+  dart: we could wale-lise utility and then instantiate it for a given
+  project.
+
+*Previous Understanding*
+
+It should be possible to generate some trivial types such as formatter
+interfaces, formatter container, registrar and so on. For this we
+need:
+
+- a mustache type template;
+- a set of fields from yarn types to be exposed to mustache;
+- a list of types to iterate through.
+
+Once we got this we could instantiate the templates. To integrate this
+with knit we would need some way of specifying which types the
+iteration would be over. We could mark a specific type with a given
+stereotype, and then supply say the base class ("all leaf descendants
+of xyz"). Dogen would then locate the descendants and for each call
+the template.
+
+For registrar and container its a bit trickier because we want a
+collection of types in one go.
+
+We also need a way to keep these templates away from the main (user
+visible) code, since they are useful only for dogen.
+
+See also [[https://github.com/cierelabs/boostache/tree/develop][boostache]].
+
+Notes:
+
+- we will need some "special" tags for copyright, includes
+  etc. Includes will be particularly special because we need to
+  augment the include list with additional includes. However, we may
+  not even need to be aware of this.
+
+*Stitch meta-templates*
+
+*Note*: re-read story [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_64.org#code-generating-formatters-as-text-templates][Code-generating formatters as text templates]] as
+some of these ideas were already there. Also: see [[https://github.com/no1msd/mstch][mstch]].
+
+In the quest for defining a single stitch template which then becomes
+a formatter - without any additional infrastructure required at all -
+we hit on an idea: stitch meta-templates. Basically we would have two
+different kinds of inputs to stitch: the template itself and the
+meta-template. Meta-template is a provisional name. The meta-template
+would define the formatter layout:
+
+- class definition, using a stitch variable for the yarn element type
+- registration of the formatter
+- definition of a method for the includes
+- definition of a method for the stitching
+
+These last two would result in the creation of "regions". These
+regions must then be "instantiated" in the template. This could easily
+be achieved with some kind of new element:
+
+: <#% region "includes">
+
+Or some such stitch construct. All lines after this line are part of
+the region "includes" until a new region is defined. The region is
+stitched and then transposed to the place in the meta-template where
+it was defined, for example:
+
+: int f(int a, int b) {
+: <#% region "includes">
+: }
+
+Would result in copying across the region into these brackets. This
+will make defining multiple functions very easy, without having to
+supply command line arguments, etc.
+
+Notes:
+
+- meta-templates are supplied as command line arguments.
+- potential extension: =meta.stitch=
+- stitch should still work on non-meta-template mode.
+- some of these ideas had already been covered on another story but
+  can't find it in backlog. It could be part of the original stitch
+  epic. We need to revisit it to see if it contains additional
+  insights.
+- when an error occurs, it would be great if we could pin point the
+  error to the template or to the meta-template. This is more of a
+  concern when we add clang compilation support.
+
+Further thoughts:
+
+- there are two approaches for this: we could integrate stitch tighter
+  with knit and have it return "chunks" of processed code instead of
+  files. As per story "Integration of stitch and dogen", dogen would
+  then be responsible for writing the header file as per methods
+  defined in the class diagram. Each method would be marked as a
+  region. Meta-data in the class associates a template with the
+  class. Knitter uses stitch to convert the template into regions, and
+  then takes these regions and inserts them into a generated
+  file. This approach is very clever and requires a lot of machinery.
+- the easier approach uses meta-templates. Class diagram associates
+  both meta-template and template with class via meta-data. We could
+  possibly also have a stitch stereotype to make it clearer. Yarn has
+  a stitch class with attributes of these parameters. Dogen
+  instantiates stitch (probably within quilt) with the parameters and
+  generates the file. Actually we probably can't have this in quilt
+  because we still need formatter properties.
+
+*** Consider adding =artefact_set= to formatters' model               :story:
+
+We are using collections of artefacts quite a bit, and it makes sense
+to create an abstraction for it such as a =artefact_set=. However, for
+this to work properly we need to add at least one basic behaviour: the
+ability to merge two artefact sets. Or else we will end up having to
+unpack the artefacts, then merging them, then creating a new artefact
+set.
+
+Problem is, we either create the artefact set as a non-generatable
+type - not ideal - or we create it as generatable and need to add this
+as a free function. We need to wait until dogen has support for
+merging code generation.
+
+*** Consider supplying element configuration as a parameter           :story:
+
+Figure out if element configuration is context or if it is better
+expressed as a stand alone formatting parameter.
+
+*** Formatters' repository should be created in quilt                 :story:
+
+At present we are creating the formatters' repository in
+=quilt.cpp=. However it will be shared by all backends in the
+kernel. Move it up to =quilt= level and supply it as a paramter to the
+backends.
+
+*** Initialise formatters in the formatter's translation unit         :story:
+
+At present we are initialising the formatters in each of the facet
+initialisers. However, it makes more sense to initialise them on the
+translation unit for each formatter. This will also make life easier
+when we move to a mustache world where there may not be a formatter
+header file at all.
+
+** Deprecated
