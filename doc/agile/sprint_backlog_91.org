@@ -14,23 +14,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-24 Mon 18:27]
+#+CAPTION: Clock summary at [2016-10-24 Mon 18:33]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *2:47* |      |      | 100.0 |
+| *Total time*                                                                | *2:52* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 2:47   |      |      | 100.0 |
-| Active                                                                      |        | 2:47 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:58 |  34.7 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:22 |  13.2 |
-| COMPLETED Improve bintray support                                           |        |      | 0:35 |  21.0 |
-| COMPLETED Add logo with white background                                    |        |      | 0:14 |   8.4 |
-| COMPLETED Consider renaming =diagrams= to =input_models=                    |        |      | 0:38 |  22.8 |
+| Stories                                                                     | 2:52   |      |      | 100.0 |
+| Active                                                                      |        | 2:52 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 1:03 |  36.6 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:22 |  12.8 |
+| COMPLETED Improve bintray support                                           |        |      | 0:35 |  20.3 |
+| COMPLETED Add logo with white background                                    |        |      | 0:14 |   8.1 |
+| COMPLETED Consider renaming =diagrams= to =input_models=                    |        |      | 0:38 |  22.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-10-24 Mon 18:28]--[2016-10-24 Mon 18:33] =>  0:05
     CLOCK: [2016-10-24 Mon 11:32]--[2016-10-24 Mon 11:46] =>  0:14
     CLOCK: [2016-10-24 Mon 11:12]--[2016-10-24 Mon 11:31] =>  0:19
     CLOCK: [2016-10-24 Mon 10:55]--[2016-10-24 Mon 11:11] =>  0:16
@@ -247,6 +248,22 @@ Random notes:
 It seems we can change a text template but not get stitch to update
 the cpp file. We must have made a mistake on the binary diffing of the
 files.
+
+*** Rename project directory path                                     :story:
+
+The C++ options have an attribute called
+=project_directory_path=. This is a bit misleading; it is actually the
+top-level directory that will contain the project directory. In
+addition, this is not really C++ specific at all; it would apply to
+any kernel and sub-kernel. We should rename it and move it to output
+options.
+
+*** Add log-level to command line                                     :story:
+
+We are now increasingly logging at trace levels. We need to allow
+users to supply a more fine-grained log configuration. This could be
+done by simply allowing users to set the log level via a command-line
+flag: =log_level=. It would replace verbose.
 
 *** Generate formatter interfaces                                      :epic:
 
