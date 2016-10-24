@@ -14,17 +14,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-24 Mon 10:31]
+#+CAPTION: Clock summary at [2016-10-24 Mon 10:39]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *0:29* |      |      | 100.0 |
+| *Total time*                                                                | *0:37* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 0:29   |      |      | 100.0 |
-| Active                                                                      |        | 0:29 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:09 |  31.0 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:14 |  48.3 |
-| COMPLETED Improve bintray support                                           |        |      | 0:06 |  20.7 |
+| Stories                                                                     | 0:37   |      |      | 100.0 |
+| Active                                                                      |        | 0:37 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:09 |  24.3 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:22 |  59.5 |
+| COMPLETED Improve bintray support                                           |        |      | 0:06 |  16.2 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -35,6 +35,7 @@ Updates to sprint and product backlog.
 
 *** COMPLETED Edit release notes for previous sprint                  :story:
     CLOSED: [2016-10-24 Mon 10:24]
+    CLOCK: [2016-10-24 Mon 10:31]--[2016-10-24 Mon 10:39] =>  0:08
     CLOCK: [2016-10-24 Mon 10:10]--[2016-10-24 Mon 10:24] =>  0:14
 
 Add github release notes for previous sprint.
@@ -48,11 +49,11 @@ One more sprint of internal refactorings, leading us close to the end result. Th
 
 There were still a number of user visible changes:
 
-- introduction of profiles: meaning its no longer necessary to setup each facet's configuration on each diagram; users can create or reuse profiles.
-- integration of stereotypes with profiles: its now possible to annotate a type with a stereotype and, if a profile with the same name exists, dogen will apply the profile to the type.
-- deprecation of the ```service``` stereotype: it has been replaced by ```handcrafted```. With this change we now generate class skeletons for hand-crafted code.
-- mixing of hand-crafted and generated code code is now possible at the element level: if a hand-crafted type declares a number of attributes and marks the IO facet as overwrittable, dogen will generate IO support (and serialisation and so forth) for this element.
-- rename of a lot of the meta-data tags, removing the postfix ```_formatter```.
+- **introduction of profiles**: meaning its no longer necessary to setup each facet's configuration on each diagram; users can create or reuse profiles.
+- **integration of stereotypes with profiles**: it's now possible to annotate a type with a stereotype and, if a profile with the same name exists, dogen will apply the profile to the type.
+- **deprecation of the ```service``` stereotype**: it has been replaced by ```handcrafted```. With this change we now generate class skeletons for hand-crafted code.
+- **mixing of hand-crafted and generated code code is now possible at the element level**: if a hand-crafted type declares a number of attributes and marks the IO facet as overwrittable, dogen will generate IO support (and serialisation and so forth) for this element.
+- **rename of a lot of the meta-data tags**: removed the postfix ```_formatter```.
 
 For more details see the [sprint log](https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_90.org).
 #+end_src
