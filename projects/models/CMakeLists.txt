@@ -16,14 +16,17 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
+set(projects_dir "${CMAKE_SOURCE_DIR}/projects")
+set(models_dir "${projects_dir}/models")
+
 set(target yarn)
 add_custom_target(knit_${target}
     COMMENT "Knitting Yarn model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
-    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/annotations.dia,dogen
-    --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
+    --target ${models_dir}/${target}.dia,dogen
+    --reference ${models_dir}/annotations.dia,dogen
+    --cpp-project-dir ${projects_dir}/
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/test/.*
     --ignore-files-matching-regex .*/tests/.*
@@ -39,10 +42,10 @@ add_custom_target(knit_${target}
     COMMENT "Knitting Yarn JSON model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
-    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/annotations.dia,dogen
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/yarn.dia,dogen
-    --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
+    --target ${models_dir}/${target}.dia,dogen
+    --reference ${models_dir}/annotations.dia,dogen
+    --reference ${models_dir}/yarn.dia,dogen
+    --cpp-project-dir ${projects_dir}/
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/tests/.*
     --ignore-files-matching-regex .*/test/.*
@@ -58,8 +61,8 @@ add_custom_target(knit_${target}
     COMMENT "Knitting Dia model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
-    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen
-    --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
+    --target ${models_dir}/${target}.dia,dogen
+    --cpp-project-dir ${projects_dir}/
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/test/.*
     --ignore-files-matching-regex .*/tests/.*
@@ -75,8 +78,8 @@ add_custom_target(knit_${target}
     COMMENT "Knitting Options model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
-    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen
-    --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
+    --target ${models_dir}/${target}.dia,dogen
+    --cpp-project-dir ${projects_dir}/
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/test/.*
     --ignore-files-matching-regex .*/tests/.*
@@ -92,12 +95,12 @@ add_custom_target(knit_${target}
     COMMENT "Knitting Quilt C++ model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
-    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/options.dia,dogen
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/yarn.dia,dogen
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/formatters.dia,dogen
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/annotations.dia,dogen
-    --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
+    --target ${models_dir}/${target}.dia,dogen
+    --reference ${models_dir}/options.dia,dogen
+    --reference ${models_dir}/yarn.dia,dogen
+    --reference ${models_dir}/formatters.dia,dogen
+    --reference ${models_dir}/annotations.dia,dogen
+    --cpp-project-dir ${projects_dir}/
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/tests/.*
     --ignore-files-matching-regex .*stitch
@@ -115,8 +118,8 @@ add_custom_target(knit_${target}
     COMMENT "Knitting database model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
-    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen::test_models
-    --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/test_models
+    --target ${models_dir}/${target}.dia,dogen::test_models
+    --cpp-project-dir ${projects_dir}/test_models
     --ignore-files-matching-regex .*CMakeLists.txt
     --ignore-files-matching-regex .*/test/.*
     --ignore-files-matching-regex .*/tests/.*
@@ -134,13 +137,13 @@ add_custom_target(knit_${target}
     COMMENT "Knitting knit model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
-    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/annotations.dia,dogen
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/options.dia,dogen
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/yarn.dia,dogen
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/quilt.cpp.dia,dogen
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/formatters.dia,dogen
-    --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
+    --target ${models_dir}/${target}.dia,dogen
+    --reference ${models_dir}/annotations.dia,dogen
+    --reference ${models_dir}/options.dia,dogen
+    --reference ${models_dir}/yarn.dia,dogen
+    --reference ${models_dir}/quilt.cpp.dia,dogen
+    --reference ${models_dir}/formatters.dia,dogen
+    --cpp-project-dir ${projects_dir}/
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/tests/.*
     --verbose
@@ -155,11 +158,11 @@ add_custom_target(knit_${target}
     COMMENT "Knitting Yarn Dia model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
-    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/dia.dia,dogen
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/annotations.dia,dogen
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/yarn.dia,dogen
-    --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
+    --target ${models_dir}/${target}.dia,dogen
+    --reference ${models_dir}/dia.dia,dogen
+    --reference ${models_dir}/annotations.dia,dogen
+    --reference ${models_dir}/yarn.dia,dogen
+    --cpp-project-dir ${projects_dir}/
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/tests/.*
     --ignore-files-matching-regex .*/test/.*
@@ -175,8 +178,8 @@ add_custom_target(knit_${target}
     COMMENT "Knitting the Formatters Model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
-    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen
-    --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
+    --target ${models_dir}/${target}.dia,dogen
+    --cpp-project-dir ${projects_dir}/
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/tests/.*
     --ignore-files-matching-regex .*/test/.*
@@ -193,12 +196,12 @@ add_custom_target(knit_${target}
     COMMENT "Knitting Quilt model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
-    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/options.dia,dogen
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/annotations.dia,dogen
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/yarn.dia,dogen
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/formatters.dia,dogen
-    --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
+    --target ${models_dir}/${target}.dia,dogen
+    --reference ${models_dir}/options.dia,dogen
+    --reference ${models_dir}/annotations.dia,dogen
+    --reference ${models_dir}/yarn.dia,dogen
+    --reference ${models_dir}/formatters.dia,dogen
+    --cpp-project-dir ${projects_dir}/
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/tests/.*
     --ignore-files-matching-regex .*/test/.*
@@ -214,8 +217,8 @@ add_custom_target(knit_${target}
     COMMENT "Knitting Annotations model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
-    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen
-    --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
+    --target ${models_dir}/${target}.dia,dogen
+    --cpp-project-dir ${projects_dir}/
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/tests/.*
     --ignore-files-matching-regex .*/test/.*
@@ -231,10 +234,10 @@ add_custom_target(knit_${target}
     COMMENT "Knitting Stitch model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
-    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/annotations.dia,dogen
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/formatters.dia,dogen
-    --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
+    --target ${models_dir}/${target}.dia,dogen
+    --reference ${models_dir}/annotations.dia,dogen
+    --reference ${models_dir}/formatters.dia,dogen
+    --cpp-project-dir ${projects_dir}/
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/tests/.*
     --ignore-files-matching-regex .*/test/.*

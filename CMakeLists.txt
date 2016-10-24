@@ -361,7 +361,6 @@ add_subdirectory(${CMAKE_SOURCE_DIR}/data)
 add_subdirectory(${CMAKE_SOURCE_DIR}/doc)
 add_subdirectory(${CMAKE_SOURCE_DIR}/test_data)
 add_subdirectory(${CMAKE_SOURCE_DIR}/projects)
-add_subdirectory(${CMAKE_SOURCE_DIR}/diagrams)
 
 #
 # dependencies for aggregate targets

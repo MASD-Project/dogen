@@ -14,19 +14,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-24 Mon 17:59]
+#+CAPTION: Clock summary at [2016-10-24 Mon 18:13]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *2:23* |      |      | 100.0 |
+| *Total time*                                                                | *2:33* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 2:23   |      |      | 100.0 |
-| Active                                                                      |        | 2:23 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:58 |  40.6 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:22 |  15.4 |
-| COMPLETED Improve bintray support                                           |        |      | 0:35 |  24.5 |
-| COMPLETED Add logo with white background                                    |        |      | 0:14 |   9.8 |
-| STARTED Consider renaming =diagrams= to =models=                            |        |      | 0:14 |   9.8 |
+| Stories                                                                     | 2:33   |      |      | 100.0 |
+| Active                                                                      |        | 2:33 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:58 |  37.9 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:22 |  14.4 |
+| COMPLETED Improve bintray support                                           |        |      | 0:35 |  22.9 |
+| COMPLETED Add logo with white background                                    |        |      | 0:14 |   9.2 |
+| COMPLETED Consider renaming =diagrams= to =models=                          |        |      | 0:24 |  15.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -80,8 +80,9 @@ if we can fix some of the errors of the previous sprint.
 Now we started tweeting releases we need a version of the logo that
 has a background.
 
-*** STARTED Consider renaming =diagrams= to =models=                  :story:
-    CLOCK: [2016-10-24 Mon 18:02]
+*** COMPLETED Consider renaming =diagrams= to =models=                :story:
+    CLOSED: [2016-10-24 Mon 18:12]
+    CLOCK: [2016-10-24 Mon 18:02]--[2016-10-24 Mon 18:12] =>  0:10
     CLOCK: [2016-10-24 Mon 16:43]--[2016-10-24 Mon 16:57] =>  0:14
 
 The name "diagrams" is a bit misleading. These are not just diagrams,

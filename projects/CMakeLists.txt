@@ -187,6 +187,7 @@ set(COVERALLS_SRC "")
 #
 # add all other projects
 #
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/models)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dia/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dia/tests)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/quilt/src)
