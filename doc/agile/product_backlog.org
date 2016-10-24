@@ -192,46 +192,6 @@ the formatter. We could supply the qualified name and the properties
 to inject. This problem can be solved later on - create a separate
 story for this.
 
-*** Supply model references via meta-data rather than command line    :story:
-
-It doesn't make any sense to have model dependencies in the command
-line. After all, the model cannot be interpreted without them. A
-better way to do this would be to split this functionality into two:
-
-- command line supplies "import directories", that is, directories
-  to search when looking for models. By default the system directory
-  is already in the path.
-- model supplies "import statements". The problem here is that we need
-  to also supply the file name of the model. We could perhaps omit the
-  extension and then load all files that match (e.g. =.dia=, =.json=,
-  etc). If more than one matches we should error. Actually we should
-  just supply the full filename, as well as keep the current notation
-  for the external project path.
-
-This is also a nice way to avoid loading system models unnecessary;
-users still need to declare the models they depend on, regardless if
-system or user.
-
-Each model should also supply the external module path as meta-data.
-
-This is particularly painful since cross-model inheritance was
-introduced because it means references are now transitive (we need to
-know of the references of any model we reference).
-
-Merged stories
-
-*External module path and references as meta-data*
-
-It actually does not make a lot of sense to allow users to supply
-external module paths and references as command line options. This is
-because the model will fail to build unless we provide the correct
-ones; these are not configurable items in this sense. The project
-path, etc are - and so should remain command line options.
-
-We need to move these two into the meta-data. This would also mean we
-no longer need to pass in external module paths for references, which
-is much cleaner.
-
 *** Allow logging during initialisation                               :story:
 
 At present we assume the log has not been initialised during
@@ -3712,7 +3672,9 @@ directory. This is not an easy undertaking because:
 - the CMake scripts rely on the location of the diagrams to copy them
   across
 
-We should create =production= and =test= sub-directories for diagrams.
+We should create =production= and =test= sub-directories for
+diagrams. Or we could just create a sub-directory of test models like
+we did in projects.
 
 *** Make test data generator more configurable                        :story:
 
@@ -6174,23 +6136,6 @@ Google Drive (GDrive) location or to DropBox
 We are uploading the tag packages to GitHub already, but ideally we
 should test all packages for all commits.
 
-*** Consider moving dia diagrams to their own project                 :story:
-
-We originally create a diagrams top-level directory for all of the
-diagrams that generate dogen models. However it may make more sense to
-have the diagrams closer to the project they generate; for example a
-folder within the project. The downside of this approach is that we
-now have to make references across projects; we could use relative
-paths for this but the targets will still look verbose.
-
-*** Consider renaming =diagrams= to =models=                          :story:
-
-The name "diagrams" is a bit misleading. These are not just diagrams,
-they are specifically Dogen inputs. We need a name that is a bit more
-meaningful. For example, if we start creating models in JSON, it would
-render the directory name meaningless. We should call the directory
-=models=.
-
 *** Add Travis support for 32-bits                                    :story:
 
 It seems its fairly straightforward to add 32-bit support to Travis,
@@ -6533,70 +6478,6 @@ would be great if we could do it using just JSON.
 Actually even better would be if we could have a text file in docopt
 format and parse it and then use it to generate the code described
 above.
-
-*** Create a tool to generate product skeletons                       :story:
-
-Now that dogen is evolving to a MDSD tool, it would be great to be
-able to create a complete product skeleton from a tool. This would
-entail:
-
-- directory structure. We should document our standard product
-  directory structure as part of this exercise.
-- licence: user can choose one.
-- copyright: input by user, used in CMakeFiles, etc. added to the
-  licence.
-- CI support: travis, appveyor
-- EDE support:
-- CMake support: top-level CMakefiles, CPack. versioning
-  templates, valgrind, doxygen. For CTest we should also generate a
-  "setup cron" and "setup windows scheduler" scripts. User can just
-  run these from the build machine and it will start running CTest.
-- conan support: perhaps with just boost for now
-- agile with first sprint
-- README with emblems.
-
-Name for the tool: dart.
-
-Tool should have different "template sets" so that we could have a
-"standard dogen product" but users can come up with other project
-structures.
-
-Tool should add FindODB if user wants ODB support. Similar for EOS
-when we support it again. We should probably have HTTP links to the
-sources of these packages and download them on the fly.
-
-Tool should also create git repo and do first commit (optional).
-
-For extra bonus points, we should create a project in GitHub, Travis
-and AppVeyor from dart.
-
-We should also generate a RPM/Deb installation script for at least
-boost, doxygen, build essentials, clang.
-
-We should also consider a "refresh" or "force" statement, perhaps on a
-file-by-file basis, which would allow one to regenerate all of these
-files. This would be useful to pick-up changes in travis files, etc.
-
-One problem with travis files is that each project has its own
-dependencies. We should move these over to a shell script and call
-these. The script is not generated or perhaps we just generate a
-skeleton. This also highlights the issue that we have different kinds
-of files:
-
-- files that we generate and expect the user to modify;
-- files that we generate but don't expect user modifications;
-- files that the user generates.
-
-We need a way to classify these.
-
-Dart should use stitch templates to generate files.
-
-We may need some options such as "generate boost test ctest
-integration", etc.
-
-Notes:
-
-- [[https://github.com/elbeno/skeleton][Skeleton]]: project to generate c++ project skeletons.
 
 *** Easy addition of facets and formatters                             :epic:
 

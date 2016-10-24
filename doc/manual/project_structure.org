@@ -1,0 +1,157 @@
+#+title: Project structure
+#+options: date:nil toc:nil author:nil num:nil
+#+link_up: ../index.html
+#+link_home: ../index.html
+#+style: <link rel="stylesheet" type="text/css" href="../site.css" />
+
+* About
+
+This article lays out the /general/ policy for naming files and
+folders in kitanda, and explains the rationale for the directory
+structure chosen. For language specific policies see:
+
+- [[file:cpp_coding_standards.org][C++ coding standards]]
+- [[file:sql_coding_standards.org][SQL coding standards]]
+
+* RFC 2119
+
+The definitions in RFC 2119 apply to this document:
+
+#+begin_quote
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+"SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+document are to be interpreted as described in RFC 2119.
+#+end_quote
+
+* 1. File and directory names
+
+1. All files and folders in kitanda must have lower-case
+   names. /Rationale/: avoid as much as possible case-sensitive issues
+   in platforms where casing is not that well designed, such as
+   Windows. /Exceptions:/ Files or folders that follow well-known
+   naming conventions take precedence, such as the GNU files
+   (e.g. =README=, =INSTALL=, etc.) and cmake files
+   (=CMakeLists.txt=).
+
+2. The dot character =.= shall only be used to separate the file name
+   from its extension (e.g. =file.txt=). /Rationale/: For some reason,
+   dots in the middle of the name seems to confuse cmake and force
+   rebuilding targets that are up-to-date.
+
+3. Multi-word file and directory names must make use of the underscore
+   character =_= to separate words (e.g.: =folder_name=).
+
+4. In cases where there is a need to distinguish between several
+   multi-word components in a file name, the dash character =-= must
+   be used (e.g. =some_word-some_other_word.extension=).
+
+5. Names must contain only lowercase ASCII letters (=a-z=), numbers
+   (=0-9=), underscores (=_=), hyphens (=-=), and periods
+   (=.=). Spaces are not allowed.
+
+6. The first and last character of a file name must not be a period
+   (=.=). /Rationale/: POSIX has special rules for names beginning
+   with a period. Windows prohibits names ending in a period (source:
+   boost).
+
+7. The first character of names must not be a hyphen =-=. /Rationale/:
+   Would be too confusing or ambiguous in certain contexts (source:
+   boost).
+
+8. The maximum length of directory and file names is 31
+   characters. /Rationale/: Long file names cause obscure issues.
+
+9. The total path length must not exceed 207 characters. /Rationale/:
+   Dictated by ISO 9660:1999 (source: boost). In addition, many
+   file systems don't really like paths longer than 255 characters, so
+   its best to keep well below this limit.
+
+10. Files have additional naming conventions that are dependent on the
+    file type. See language specific policies for details.
+
+* 2. Root folder
+
+1. The top-level folder in kitanda is known as the /root folder/; this
+   is the directory you create when you clone the project from git -
+   i.e. it contains the =.git= folder.
+
+2. The root folder should be named =kitanda=. /Rationale/: [[file:infrastructure/emacs.org][magit]] uses
+   the root folder as a buffer name in emacs.
+
+The remaining paragraphs detail all the sub-folders of the root folder.
+
+3. The =build= folder contains extensions to cmake (both third party
+   and our own), code templates and configuration file templates
+   (logging, etc.). /Rationale/: In general, build should contain
+   either files used directly by the makefiles or files that get
+   copied over to the build's [[Output%20directory][output directory]] for further processing.
+
+4. The =code= folder contains core source code for the project, in any
+   of the supported programming languages. The code directory is split
+   by language: =cpp=, =sql=, etc.
+
+5. The =doc= folder contains manually-generated documentation such as
+   org articles, diagrams, project plans, screen-shots, etc. All
+   documents should be saved as plain text.
+
+6. The =tools= folder houses scripts and other utilities related to
+   kitanda.
+
+7. The =ui= folder contains all user interface configuration files;
+   these are glade XML files used to instantiate the GUI applications.
+
+* 3. Output folder
+
+1. The folder under which the build is performed is called the
+   /output/ folder. This is the location where all artefacts generated
+   by the build are placed, such as binaries, shared objects,
+   automatically generated documentation, instantiated templates, etc.
+
+2. We have a policy of not permitting in-source builds, so the output
+   folder cannot be the same folder as the root folder. This is
+   enforced by the [[file:infrastructure/cmake.org::*Building][cmake files]].
+
+3. The output folder is normally located at the same level as the root
+   folder. This is a convention; the directory can be located anywhere
+   else outside the root folder.
+
+4. The /output/ folder is named =output=. /Rationale/: it can be named
+   anything you like as no one relies on the name, but we give it a
+   name for standardisation purposes.
+
+5. Users can partition the output folder further, creating directories
+   for each supported platform, compiler, etc. This is known as a
+   /multi-target/ setup. /Rationale/ Keeping all the targets within a
+   single folder means its easy to start from scratch by deleting the
+   top-level folder.
+
+6. When using multi-target, the output folder's sub-folders should be
+   named after the [[http://wiki.debian.org/Multiarch/Tuples][GNU triplet]] - including the compiler
+   version. /Rationale/ These directories are setup manually because
+   target folders contain a full-blown cmake environment, independent
+   from the others. Its not possible to generate this multi-targeted
+   setup directly from the makefiles. Example multi-target folder
+   structure:
+
+#+begin_example
+output/linux-amd64-gcc-4_6_1-debug
+output/win32-x86-clang-3_0-release
+#+end_example
+
+7. Within a target folder - whether on single or multi-target setups -
+   the key folder is =stage=; it contains all the binaries and
+   documentation ready for packaging.
+
+* 4. Third party content
+
+1. The project's git repository is expected to only contain code owned
+   by kitanda; all the external dependencies must be installed by the
+   user as a build prerequisite (see doc/BUILD for details).
+
+2. In exceptional cases where the third party dependency is both small
+   and not readily available in packaged form, it is acceptable to add
+   it to the repository. This is the case with CMake extensions and
+   with the boost portable serialisation library. Once these projects
+   are packaged they shall be removed from the repository.
+
+* References
