@@ -14,23 +14,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-25 Tue 08:38]
+#+CAPTION: Clock summary at [2016-10-25 Tue 12:25]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *4:07* |      |      | 100.0 |
+| *Total time*                                                                | *7:46* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 4:07   |      |      | 100.0 |
-| Active                                                                      |        | 4:07 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 1:03 |  25.5 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:22 |   8.9 |
-| COMPLETED Improve bintray support                                           |        |      | 1:50 |  44.5 |
-| COMPLETED Add logo with white background                                    |        |      | 0:14 |   5.7 |
-| COMPLETED Consider renaming =diagrams= to =input_models=                    |        |      | 0:38 |  15.4 |
+| Stories                                                                     | 7:46   |      |      | 100.0 |
+| Active                                                                      |        | 7:46 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 1:14 |  15.9 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:22 |   4.7 |
+| COMPLETED Improve bintray support                                           |        |      | 2:26 |  31.3 |
+| COMPLETED Add logo with white background                                    |        |      | 0:14 |   3.0 |
+| COMPLETED Consider renaming =diagrams= to =input_models=                    |        |      | 0:38 |   8.2 |
+| STARTED Implement wale                                                      |        |      | 2:20 |  30.0 |
+| STARTED Changes to stitch to accommodate wale                               |        |      | 0:32 |   6.9 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-10-25 Tue 11:02]--[2016-10-25 Tue 11:13] =>  0:11
     CLOCK: [2016-10-24 Mon 18:28]--[2016-10-24 Mon 18:33] =>  0:05
     CLOCK: [2016-10-24 Mon 11:32]--[2016-10-24 Mon 11:46] =>  0:14
     CLOCK: [2016-10-24 Mon 11:12]--[2016-10-24 Mon 11:31] =>  0:19
@@ -66,6 +69,7 @@ For more details see the [sprint log](https://github.com/DomainDrivenConsulting/
 
 *** COMPLETED Improve bintray support                                 :story:
     CLOSED: [2016-10-24 Mon 10:31]
+    CLOCK: [2016-10-25 Tue 08:39]--[2016-10-25 Tue 09:15] =>  0:36
     CLOCK: [2016-10-25 Tue 08:13]--[2016-10-25 Tue 08:38] =>  0:25
     CLOCK: [2016-10-24 Mon 20:31]--[2016-10-24 Mon 21:21] =>  0:50
     CLOCK: [2016-10-24 Mon 17:30]--[2016-10-24 Mon 17:59] =>  0:29
@@ -117,32 +121,106 @@ paths for this but the targets will still look verbose.
 We decided against this in the end as it's handy having all diagrams
 in one place.
 
-*** Implement wale templates                                          :story:
+*** STARTED Implement wale                                            :story:
+    CLOCK: [2016-10-25 Tue 11:47]--[2016-10-25 Tue 12:24] =>  0:37
+    CLOCK: [2016-10-25 Tue 10:39]--[2016-10-25 Tue 11:01] =>  0:22
+    CLOCK: [2016-10-25 Tue 10:21]--[2016-10-25 Tue 10:38] =>  0:17
+    CLOCK: [2016-10-25 Tue 10:04]--[2016-10-25 Tue 10:21] =>  0:17
+    CLOCK: [2016-10-25 Tue 09:16]--[2016-10-25 Tue 10:03] =>  0:47
 
 - manually create wale templates for header and implementation and do
   a mental dry-run to ensure it will work. Do also a stitch template
   manually for this exercise.
-- create projects, library and binary.
-- implement library with a simple transformer that takes in a path to
+- create project and library. We don't need a binary as there is no
+  use case for it.
+- implement library with a simple formatter that takes in a path to
   template and a set of kvps. Add the ability to obtain all the keys
   for a given template.
 
-*** Add region support to stitch                                      :story:
+After manually creating wale templates, it became obvious that the
+integration of stitch with wale is too complicated and adds little
+value. We have two alternatives:
 
-- extend stitch to allow injecting external kvps such as
-  decoration. This can probably be done manually but needs to be
-  investigated.
-- extend stitch to support named regions; the text template will
-  preserve the names after template instantiation.
-- note: regions are a property of the artefact. knit will also have to
-  support regions. Perhaps we should start having well-defined regions
-  such as =decoration.preamble=, =decoration.postamble=, etc.
+- copy and paste common'ish code into each stitch template. Does not
+  require any engineering effort, but the downside is any API change
+  will scale linearly with the number of formatters.
+- integrate stitch directly with wale. That is, instead of having a
+  high-level integration of the two tools, where stitch is not even
+  aware of wale, we can embed wale directly into stitch
+  templates. This approach requires a lot less engineering effort: a)
+  add kvps for wale into stitch b) instantiate the wale template as
+  part of the stitch template expansion. This provides us with all the
+  benefits of the previous approach with a much lower engineering
+  bill.
+
+A second point is the use of [[https://github.com/DomainDrivenConsulting/bustache][bustache]] vs rolling our own trivial
+mustache-like implementation:
+
+- if we use bustache we can, in the future, start to make use of
+  complex mustache templates. We don't have a use case for this now,
+  but there is no reason to preclude it either.
+- however, with bustache as a third-party dependency we now have to
+  worry about generating OSX and windows binaries for the
+  library. Until we do, the builds will break.
+
+For now, to make life easier we will roll our own. As soon as we have
+a stable windows environment we will move to bustache.
+
+Example changes to stitch template:
+
+: <#@ wale.template="abc" #>
+: <#@ wale.kvp.class_name="a class" #>
+: <#% $(stitch.wale.template_instantiation_result) #>
+
+- add a trivial validator to ensure templates are syntactically
+  correct.
+- add a check to make sure all keys required by the template have been
+  supplied and all keys supplied by the user have been used.
+
+*** STARTED Merge properties factory with stitching factory           :story:
+
+In stitch we still have a few classes that are light on
+responsibilities. One case is the stitching properties factory, traits
+etc. We should merge all of this into a single class, properties
+factory.
+
+*** STARTED Changes to stitch to accommodate wale                     :story:
+    CLOCK: [2016-10-25 Tue 11:14]--[2016-10-25 Tue 11:46] =>  0:32
+Tasks:
+
+- add a prefix of =stitch= to stitch's fields.
+- add a method to the workflow that takes in an annotation; we then
+  merge this annotation with the template's annotation. Remaining
+  workflow is the same.
+- add a new block type of variable expansion or internal variable
+  expansion (tbd). Content is the the variable name. Variable must be
+  defined internally or we error. On template formatting we do a
+  look-up for the variable name and replace it.
+
+: <#% stitch.wale.template_instantiation_result #>
+
+- we need to create a map of string to string at the template level
+  called =variables=. When formatting we simply look-up the variable
+  name in the container. With wale, we just need an additional
+  processing step that takes in the annotation and runs it through the
+  wale workflow. If we return a non-empty string, we add it to the
+  variables map.
+- stitch at present assumes the generated file will have a postfix of
+  =_stitch.cpp= or =_stitch.hpp=. Its not clear where the extension is
+  sourced from. In the new world we need the file names to be just
+  =.cpp= or =.hpp=. In practice we do not generate header files so we
+  can keep the current logic in determining the extension.
+- we need to split the "directory use case" from the "file use
+  case". At present there is only one way of using stitch: you point
+  it to a directory and it processes all templates found. In the new
+  integrated world, we want to process a single template at a
+  time. Names: directory workflow and file workflow?
 
 *** Add artefact source properties support                            :story:
 
 - add properties to artefact properties, with enumeration for source:
-  stock formatter (current), wale formatter, wale and stitch
-  formatter. Other possible types: null formatter, copy formatter.
+  stock formatter (current), wale formatter, stitch formatter. Other
+  possible types: null formatter, copy formatter.
 - add new expander.
 - hook it in with formattables workflow.
 
@@ -547,3 +625,17 @@ when we move to a mustache world where there may not be a formatter
 header file at all.
 
 ** Deprecated
+*** CANCELLED Add region support to stitch                            :story:
+    CLOSED: [2016-10-25 Tue 11:05]
+
+*Rationale*: This requires too much engineering effort. Decided on a
+simpler approach.
+
+- extend stitch to allow injecting external kvps such as
+  decoration. This can probably be done manually but needs to be
+  investigated.
+- extend stitch to support named regions; the text template will
+  preserve the names after template instantiation.
+- note: regions are a property of the artefact. knit will also have to
+  support regions. Perhaps we should start having well-defined regions
+  such as =decoration.preamble=, =decoration.postamble=, etc.
