@@ -18,21 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/test/unit_test.hpp>
-#include "dogen/utility/test/logging.hpp"
+#ifndef DOGEN_WALE_TYPES_EXTRACTION_ERROR_FWD_HPP
+#define DOGEN_WALE_TYPES_EXTRACTION_ERROR_FWD_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-const std::string empty;
-const std::string test_module("backend");
-const std::string test_suite("fake_tests");
+namespace dogen {
+namespace wale {
 
-}
+class extraction_error;
 
-BOOST_AUTO_TEST_SUITE(fake_tests)
+} }
 
-BOOST_AUTO_TEST_CASE(test) {
-    SETUP_TEST_LOG("test");
-}
-
-BOOST_AUTO_TEST_SUITE_END()
+#endif

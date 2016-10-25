@@ -23,8 +23,4 @@
 namespace dogen {
 namespace wale {
 
-bool workflow::operator==(const workflow& /*rhs*/) const {
-    return true;
-}
-
 } }

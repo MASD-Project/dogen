@@ -25,7 +25,9 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include <locale>
+#include <unordered_set>
 
 namespace dogen {
 namespace wale {
@@ -33,17 +35,16 @@ namespace wale {
 class key_extractor final {
 public:
     key_extractor() = default;
-    key_extractor(const key_extractor&) = default;
-    key_extractor(key_extractor&&) = default;
-    ~key_extractor() = default;
-    key_extractor& operator=(const key_extractor&) = default;
+
+private:
+    void check_first_char(const char c) const;
+    void check_char(const char c) const;
 
 public:
-    bool operator==(const key_extractor& rhs) const;
-    bool operator!=(const key_extractor& rhs) const {
-        return !this->operator==(rhs);
-    }
+    std::unordered_set<std::string> extract(const std::string& s) const;
 
+private:
+    std::locale locale_;
 };
 
 } }

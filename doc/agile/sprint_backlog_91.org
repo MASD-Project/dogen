@@ -14,21 +14,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-25 Tue 15:05]
-| <75>                                                                        |        |      |      |       |
-| Headline                                                                    | Time   |      |      |     % |
-|-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *8:25* |      |      | 100.0 |
-|-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 8:25   |      |      | 100.0 |
-| Active                                                                      |        | 8:25 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 1:14 |  14.7 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:22 |   4.4 |
-| COMPLETED Improve bintray support                                           |        |      | 2:26 |  28.9 |
-| COMPLETED Add logo with white background                                    |        |      | 0:14 |   2.8 |
-| COMPLETED Consider renaming =diagrams= to =input_models=                    |        |      | 0:38 |   7.5 |
-| STARTED Implement wale                                                      |        |      | 2:59 |  35.4 |
-| STARTED Changes to stitch to accommodate wale                               |        |      | 0:32 |   6.3 |
+#+CAPTION: Clock summary at [2016-10-25 Tue 17:06]
+| <75>                                                                        |         |       |      |       |
+| Headline                                                                    | Time    |       |      |     % |
+|-----------------------------------------------------------------------------+---------+-------+------+-------|
+| *Total time*                                                                | *10:25* |       |      | 100.0 |
+|-----------------------------------------------------------------------------+---------+-------+------+-------|
+| Stories                                                                     | 10:25   |       |      | 100.0 |
+| Active                                                                      |         | 10:25 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:14 |  11.8 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:22 |   3.5 |
+| COMPLETED Improve bintray support                                           |         |       | 2:26 |  23.4 |
+| COMPLETED Add logo with white background                                    |         |       | 0:14 |   2.2 |
+| COMPLETED Consider renaming =diagrams= to =input_models=                    |         |       | 0:38 |   6.1 |
+| STARTED Implement wale                                                      |         |       | 4:59 |  47.8 |
+| STARTED Changes to stitch to accommodate wale                               |         |       | 0:32 |   5.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -122,6 +122,7 @@ We decided against this in the end as it's handy having all diagrams
 in one place.
 
 *** STARTED Implement wale                                            :story:
+    CLOCK: [2016-10-25 Tue 15:06]--[2016-10-25 Tue 17:06] =>  2:00
     CLOCK: [2016-10-25 Tue 14:56]--[2016-10-25 Tue 15:05] =>  0:09
     CLOCK: [2016-10-25 Tue 14:25]--[2016-10-25 Tue 14:55] =>  0:30
     CLOCK: [2016-10-25 Tue 11:47]--[2016-10-25 Tue 12:24] =>  0:37
