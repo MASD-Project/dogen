@@ -25,7 +25,7 @@ build_script:
   - ps: $build_type="$env:configuration";
   - ps: $third_party="$env:temp\dogen_deps\dogen_deps_vc14_windows_amd64";
   - ps: if ($build_type -eq "Release") {
-            $target = "package run_windows_green_tests";
+            $target = "run_windows_green_tests";
         } elseif ($build_type -eq "Debug") {
             $target = "knit";
         }
