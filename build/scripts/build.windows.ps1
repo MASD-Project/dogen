@@ -104,7 +104,8 @@ if ($LastExitCode -ne 0) {
     exit 1
 }
 
-foreach ($element in $target) {
+$targets = $target -split " ";
+foreach ($element in $targets) {
     $command = "cmake --build . --config $build_type --target ${element}";
     Invoke-Expression -Command $command
     if ($LastExitCode -ne 0) {
