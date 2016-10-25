@@ -5657,6 +5657,31 @@ Actually now we can't even find the bintray file:
 :   from /home/travis/.rvm/gems/ruby-2.2.5/bin/dpl:23:in `<main>'
 : failed to deploy
 
+Ok so now we can find the bintray file but the upload fails with a
+strange error:
+
+: [Bintray Upload] Reading descriptor file: /home/travis/build/DomainDrivenConsulting/dogen/build/output/gcc/Release/stage/pkg/bintray.json
+: [Bintray Upload] Warning: Path: /home/travis/build/DomainDrivenConsulting/dogen/build/output/gcc/Release/stage/pkg/dogen-0.91.0-Darwin-x86_64.dmg does not exist.
+: [Bintray Upload] Uploading file '/home/travis/build/DomainDrivenConsulting/dogen/build/output/gcc/Release/stage/pkg/dogen_0.91.0_amd64-applications.deb' to
+: [Bintray Upload] Bintray response: 400 Bad Request. Invalid file path and name
+: [Bintray Upload] Uploading file '/home/travis/build/DomainDrivenConsulting/dogen/build/output/gcc/Release/stage/pkg/dogen_0.91.0_amd64-headers.deb' to
+: [Bintray Upload] Bintray response: 400 Bad Request. Invalid file path and name
+: [Bintray Upload] Uploading file '/home/travis/build/DomainDrivenConsulting/dogen/build/output/gcc/Release/stage/pkg/dogen_0.91.0_amd64-libraries.deb' to
+: [Bintray Upload] Bintray response: 400 Bad Request. Invalid file path and name
+: [Bintray Upload] Uploading file '/home/travis/build/DomainDrivenConsulting/dogen/build/output/gcc/Release/stage/pkg/dogen_0.91.0_amd64-tests.deb' to
+: [Bintray Upload] Bintray response: 400 Bad Request. Invalid file path and name
+: [Bintray Upload] Publishing version '0.91.0' of package 'dogen'...
+: [Bintray Upload] Bintray response: 200 OK.
+
+Same on OSX:
+
+: [Bintray Upload] Uploading file '/Users/travis/build/DomainDrivenConsulting/dogen/build/output/clang/Release/stage/pkg/dogen-0.91.0-Darwin-x86_64.dmg' to
+: [Bintray Upload] Bintray response: 400 Bad Request. Invalid file path and name
+: [Bintray Upload] Publishing version '0.91.0' of package 'dogen'...
+: [Bintray Upload] Bintray response: 200 OK.
+
+Emailed bintray for help.
+
 *** Add appveyor support for bintray                                  :story:
 
 It seems appveyor also supports bintray:
