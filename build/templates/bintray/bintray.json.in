@@ -23,8 +23,11 @@
 
     "files":
         [
-            { "includePattern": "${DOGEN_PACKAGE_DIR}/(.*).deb$" },
-            { "includePattern": "${DOGEN_PACKAGE_DIR}/(.*).dmg$" }
+            { "includePattern": "${DOGEN_PACKAGE_DIR}/dogen_${DOGEN_VERSION}_amd64-applications.deb" },
+            { "includePattern": "${DOGEN_PACKAGE_DIR}/dogen_${DOGEN_VERSION}_amd64-headers.deb" },
+            { "includePattern": "${DOGEN_PACKAGE_DIR}/dogen_${DOGEN_VERSION}_amd64-libraries.deb" },
+            { "includePattern": "${DOGEN_PACKAGE_DIR}/dogen_${DOGEN_VERSION}_amd64-tests.deb" },
+            { "includePattern": "${DOGEN_PACKAGE_DIR}/dogen-${DOGEN_VERSION}-Darwin-x86_64.dmg" }
         ],
     "publish": true
 }
