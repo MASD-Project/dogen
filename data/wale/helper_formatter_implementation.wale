@@ -1,0 +1,31 @@
+std::string {{class.simple_name}}::formatter_name() const {
+    static auto r(std::string("<") + traits::facet_name() + std::string(">") +
+        std::string("<") + helper_name() + std::string(">"));
+    return r;
+}
+
+std::string {{class.simple_name}}::family() const {
+    static std::string r("{{helper.family}}");
+    return r;
+}
+
+std::list<std::string>
+{{class.simple_name}}::owning_formatters() const {
+    static auto r(std::list<std::string> {
+        traits::class_implementation_archetype()
+    });
+    return r;
+}
+
+std::list<std::string>
+{{class.simple_name}}::owning_facets() const {
+    static auto r(std::list<std::string> {
+        traits::facet_name()
+    });
+    return r;
+}
+
+std::string {{class.simple_name}}::helper_name() const {
+    static std::string r("{{helper.name}}");
+    return r;
+}
