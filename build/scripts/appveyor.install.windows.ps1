@@ -45,3 +45,9 @@ conan --version
 #
 cinst cmake --version 3.4.3
 cmake --version
+
+#
+# NSIS
+#
+wget "https://unsis.googlecode.com/files/nsis-2.46.5-Unicode-setup.exe" -OutFile nsis.exe
+nsis.exe /S
