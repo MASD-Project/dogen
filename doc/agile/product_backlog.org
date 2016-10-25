@@ -5443,6 +5443,17 @@ error at model building time if an user tries to do this.
 Stuff that is not directly related to the problem domain but its
 needed by Dogen.
 
+*** Generate windows packages with CPack                              :story:
+
+We tried to generate windows packages by using the NSIS tool, but
+there are no binaries available for it at present. However, it seems
+CPack can now generate MSIs directly:
+
+- [[http://stackoverflow.com/questions/18437356/how-to-generate-msi-installer-with-cmake][How to generate .msi installer with cmake?]]
+- [[https://cmake.org/cmake/help/v3.0/module/CPackWIX.html][CPackWIX]]
+
+We need to investigate how to get the build to produce MSIs using WIX.
+
 *** Use official boost with windows                                   :story:
 
 We tried replacing the conan boost with the official boost but it
