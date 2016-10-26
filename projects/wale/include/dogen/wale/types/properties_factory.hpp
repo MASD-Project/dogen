@@ -25,25 +25,30 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen/annotations/types/type.hpp"
+#include "dogen/annotations/types/annotation.hpp"
+#include "dogen/annotations/types/type_repository.hpp"
+#include "dogen/wale/types/properties.hpp"
 
 namespace dogen {
 namespace wale {
 
 class properties_factory final {
-public:
-    properties_factory() = default;
-    properties_factory(const properties_factory&) = default;
-    properties_factory(properties_factory&&) = default;
-    ~properties_factory() = default;
-    properties_factory& operator=(const properties_factory&) = default;
+private:
+    struct type_group {
+        annotations::type template_path;
+        annotations::type kvps;
+    };
+    friend std::ostream& operator<<(std::ostream& s, const type_group& v);
+
+    type_group make_type_group(const annotations::type_repository& atrp) const;
+
+    properties read_properties(const type_group& tg,
+        const annotations::annotation& a) const;
 
 public:
-    bool operator==(const properties_factory& rhs) const;
-    bool operator!=(const properties_factory& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    properties make(const annotations::type_repository& atrp,
+        const annotations::annotation& a) const;
 };
 
 } }
