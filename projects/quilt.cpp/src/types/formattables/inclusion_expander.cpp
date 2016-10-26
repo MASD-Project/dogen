@@ -165,15 +165,15 @@ make_type_group(const annotations::type_repository& atrp,
 }
 
 bool inclusion_expander::make_top_level_inclusion_required(
-    const type_group& tg, const annotations::annotation& o) const {
-    const annotations::entry_selector s(o);
+    const type_group& tg, const annotations::annotation& a) const {
+    const annotations::entry_selector s(a);
     return s.get_boolean_content_or_default(tg.inclusion_required);
 }
 
 inclusion_directive_configuration
 inclusion_expander::make_inclusion_directive_configuration(
     const type_group& tg,const std::string& archetype,
-    const annotations::annotation& o) const {
+    const annotations::annotation& a) const {
 
     if (archetype.empty()) {
         BOOST_LOG_SEV(lg, error) << empty_archetype;
@@ -187,7 +187,7 @@ inclusion_expander::make_inclusion_directive_configuration(
     }
 
     const auto& ft(i->second);
-    const annotations::entry_selector s(o);
+    const annotations::entry_selector s(a);
     inclusion_directive_configuration r;
 
     const auto& ir(ft.inclusion_required);

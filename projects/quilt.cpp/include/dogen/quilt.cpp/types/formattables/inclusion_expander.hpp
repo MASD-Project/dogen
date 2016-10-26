@@ -30,8 +30,8 @@
 #include <forward_list>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
-#include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/annotations/types/type.hpp"
+#include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/quilt.cpp/types/formattables/inclusion_directive_configuration.hpp"
 #include "dogen/quilt.cpp/types/formatters/repository.hpp"
 #include "dogen/quilt.cpp/types/formattables/locator.hpp"
@@ -91,11 +91,11 @@ private:
         const formatters::repository& frp) const;
 
     bool make_top_level_inclusion_required(const type_group& tg,
-        const annotations::annotation& o) const;
+        const annotations::annotation& a) const;
 
     inclusion_directive_configuration make_inclusion_directive_configuration(
         const type_group& tg,const std::string& archetype,
-        const annotations::annotation& o) const;
+        const annotations::annotation& a) const;
 
 private:
     typedef std::forward_list<
