@@ -23,29 +23,20 @@
 namespace dogen {
 namespace wale {
 
-text_template::text_template(text_template&& rhs)
-    : annotation_(std::move(rhs.annotation_)),
-      properties_(std::move(rhs.properties_)),
-      content_(std::move(rhs.content_)) { }
-
 text_template::text_template(
-    const boost::optional<dogen::annotations::annotation>& annotation,
     const dogen::wale::properties& properties,
     const std::string& content)
-    : annotation_(annotation),
-      properties_(properties),
+    : properties_(properties),
       content_(content) { }
 
 void text_template::swap(text_template& other) noexcept {
     using std::swap;
-    swap(annotation_, other.annotation_);
     swap(properties_, other.properties_);
     swap(content_, other.content_);
 }
 
 bool text_template::operator==(const text_template& rhs) const {
-    return annotation_ == rhs.annotation_ &&
-        properties_ == rhs.properties_ &&
+    return properties_ == rhs.properties_ &&
         content_ == rhs.content_;
 }
 
@@ -53,22 +44,6 @@ text_template& text_template::operator=(text_template other) {
     using std::swap;
     swap(*this, other);
     return *this;
-}
-
-const boost::optional<dogen::annotations::annotation>& text_template::annotation() const {
-    return annotation_;
-}
-
-boost::optional<dogen::annotations::annotation>& text_template::annotation() {
-    return annotation_;
-}
-
-void text_template::annotation(const boost::optional<dogen::annotations::annotation>& v) {
-    annotation_ = v;
-}
-
-void text_template::annotation(const boost::optional<dogen::annotations::annotation>&& v) {
-    annotation_ = std::move(v);
 }
 
 const dogen::wale::properties& text_template::properties() const {

@@ -24,14 +24,12 @@
 #include <boost/serialization/string.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
-#include <boost/serialization/optional.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/wale/serialization/properties_ser.hpp"
 #include "dogen/wale/serialization/text_template_ser.hpp"
-#include "dogen/annotations/serialization/annotation_ser.hpp"
 
 namespace boost {
 namespace serialization {
@@ -40,7 +38,6 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::wale::text_template& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("annotation", v.annotation_);
     ar << make_nvp("properties", v.properties_);
     ar << make_nvp("content", v.content_);
 }
@@ -49,7 +46,6 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::wale::text_template& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("annotation", v.annotation_);
     ar >> make_nvp("properties", v.properties_);
     ar >> make_nvp("content", v.content_);
 }

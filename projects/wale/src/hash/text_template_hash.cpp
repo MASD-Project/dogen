@@ -20,7 +20,6 @@
  */
 #include "dogen/wale/hash/properties_hash.hpp"
 #include "dogen/wale/hash/text_template_hash.hpp"
-#include "dogen/annotations/hash/annotation_hash.hpp"
 
 namespace {
 
@@ -28,16 +27,6 @@ template <typename HashableType>
 inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-inline std::size_t hash_boost_optional_dogen_annotations_annotation(const boost::optional<dogen::annotations::annotation>& v) {
-    std::size_t seed(0);
-
-    if (!v)
-        return seed;
-
-    combine(seed, *v);
-    return seed;
 }
 
 }
@@ -48,7 +37,6 @@ namespace wale {
 std::size_t text_template_hasher::hash(const text_template& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_boost_optional_dogen_annotations_annotation(v.annotation()));
     combine(seed, v.properties());
     combine(seed, v.content());
 

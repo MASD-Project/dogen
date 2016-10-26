@@ -14,22 +14,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-26 Wed 10:46]
+#+CAPTION: Clock summary at [2016-10-26 Wed 12:04]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *11:47* |       |      | 100.0 |
+| *Total time*                                                                | *13:03* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 11:47   |       |      | 100.0 |
-| Active                                                                      |         | 11:47 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:14 |  10.5 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:22 |   3.1 |
-| COMPLETED Improve bintray support                                           |         |       | 2:26 |  20.7 |
-| COMPLETED Add logo with white background                                    |         |       | 0:14 |   2.0 |
-| COMPLETED Consider renaming =diagrams= to =input_models=                    |         |       | 0:38 |   5.4 |
-| COMPLETED Add kvp support to annotations                                    |         |       | 0:37 |   5.2 |
-| STARTED Implement wale                                                      |         |       | 5:44 |  48.7 |
-| STARTED Changes to stitch to accommodate wale                               |         |       | 0:32 |   4.5 |
+| Stories                                                                     | 13:03   |       |      | 100.0 |
+| Active                                                                      |         | 13:03 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:14 |   9.5 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:22 |   2.8 |
+| COMPLETED Improve bintray support                                           |         |       | 2:26 |  18.6 |
+| COMPLETED Add logo with white background                                    |         |       | 0:14 |   1.8 |
+| COMPLETED Consider renaming =diagrams= to =input_models=                    |         |       | 0:38 |   4.9 |
+| COMPLETED Add kvp support to annotations                                    |         |       | 0:37 |   4.7 |
+| COMPLETED Implement wale                                                    |         |       | 7:00 |  53.6 |
+| STARTED Changes to stitch to accommodate wale                               |         |       | 0:32 |   4.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -131,7 +131,9 @@ could declare a field as "kvp" and then just read all kvps in one
 go. At present we only have wale as a use case but this may be useful
 for dogen in general.
 
-*** STARTED Implement wale                                            :story:
+*** COMPLETED Implement wale                                          :story:
+    CLOSED: [2016-10-26 Wed 12:03]
+    CLOCK: [2016-10-26 Wed 10:47]--[2016-10-26 Wed 12:03] =>  1:16
     CLOCK: [2016-10-26 Wed 10:24]--[2016-10-26 Wed 10:46] =>  0:22
     CLOCK: [2016-10-26 Wed 09:20]--[2016-10-26 Wed 09:43] =>  0:23
     CLOCK: [2016-10-25 Tue 15:06]--[2016-10-25 Tue 17:06] =>  2:00
@@ -192,13 +194,6 @@ Example changes to stitch template:
 - add a check to make sure all keys required by the template have been
   supplied and all keys supplied by the user have been used.
 
-*** STARTED Merge properties factory with stitching factory           :story:
-
-In stitch we still have a few classes that are light on
-responsibilities. One case is the stitching properties factory, traits
-etc. We should merge all of this into a single class, properties
-factory.
-
 *** STARTED Changes to stitch to accommodate wale                     :story:
     CLOCK: [2016-10-25 Tue 11:14]--[2016-10-25 Tue 11:46] =>  0:32
 Tasks:
@@ -230,6 +225,13 @@ Tasks:
   it to a directory and it processes all templates found. In the new
   integrated world, we want to process a single template at a
   time. Names: directory workflow and file workflow?
+
+*** STARTED Merge properties factory with stitching factory           :story:
+
+In stitch we still have a few classes that are light on
+responsibilities. One case is the stitching properties factory, traits
+etc. We should merge all of this into a single class, properties
+factory.
 
 *** Add artefact source properties support                            :story:
 

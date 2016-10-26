@@ -18,13 +18,32 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/algorithm/string/replace.hpp>
 #include "dogen/wale/types/formatter.hpp"
+
+namespace {
+
+const std::string prefix("{{");
+const std::string postfix("}}");
+
+}
 
 namespace dogen {
 namespace wale {
 
-bool formatter::operator==(const formatter& /*rhs*/) const {
-    return true;
+
+std::string formatter::wrap_key(const std::string& key) const {
+    return prefix + key + postfix;
+}
+
+std::string formatter::format(const text_template& tt) const {
+    std::string r(tt.content());
+    for (const auto& pair : tt.properties().supplied_kvps()) {
+        const auto key(wrap_key(pair.first));
+        const auto& value(pair.second);
+        boost::replace_all(r, key, value);
+    }
+    return r;
 }
 
 } }

@@ -25,10 +25,43 @@
 #pragma once
 #endif
 
+#include <string>
+#include <unordered_map>
+#include <boost/filesystem/path.hpp>
+#include "dogen/annotations/types/type_repository.hpp"
+#include "dogen/annotations/types/annotation.hpp"
+#include "dogen/wale/types/properties.hpp"
+#include "dogen/wale/types/text_template.hpp"
+
 namespace dogen {
 namespace wale {
 
 class workflow final {
+private:
+    properties make_properties(const annotations::type_repository& atrp,
+        const annotations::annotation& a) const;
+    properties make_properties(const boost::filesystem::path& template_path,
+        const std::unordered_map<std::string, std::string>& kvps) const;
+
+    boost::filesystem::path
+    resolve_path(const boost::filesystem::path& p) const;
+
+    std::string
+    read_content(const boost::filesystem::path& template_path) const;
+
+    void update_actual_kvps(text_template& tt) const;
+
+    std::string format(const text_template& tt) const;
+
+    void validate(const text_template& tt) const;
+
+    std::string execute(const properties& props) const;
+
+public:
+    std::string execute(const annotations::type_repository& atrp,
+        const annotations::annotation& a) const;
+    std::string execute(const boost::filesystem::path& template_path,
+        const std::unordered_map<std::string, std::string>& kvps) const;
 };
 
 } }

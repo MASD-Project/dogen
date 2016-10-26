@@ -25,25 +25,14 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen/wale/types/text_template.hpp"
 
 namespace dogen {
 namespace wale {
 
 class validator final {
 public:
-    validator() = default;
-    validator(const validator&) = default;
-    validator(validator&&) = default;
-    ~validator() = default;
-    validator& operator=(const validator&) = default;
-
-public:
-    bool operator==(const validator& rhs) const;
-    bool operator!=(const validator& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    void validate(const text_template& tt) const;
 };
 
 } }

@@ -18,13 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
+#include <unordered_set>
+#include <boost/throw_exception.hpp>
+#include "dogen/utility/io/unordered_set_io.hpp"
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/wale/types/validation_error.hpp"
 #include "dogen/wale/types/validator.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+auto lg(logger_factory("wale.validator"));
+
+const std::string key_error("Expected and supplied keys do not match.");
+
+}
 
 namespace dogen {
 namespace wale {
 
-bool validator::operator==(const validator& /*rhs*/) const {
-    return true;
+void validator::validate(const text_template& tt) const {
+    std::unordered_set<std::string> s;
+    for (const auto& kvp : tt.properties().supplied_kvps())
+        s.insert(kvp.first);
+
+    const auto& e(tt.properties().expected_keys());
+    if (s != e) {
+        BOOST_LOG_SEV(lg, error) << key_error << " Expected: "  << e
+                                 << " Supplied: " << s;
+        BOOST_THROW_EXCEPTION(validation_error(key_error));
+    }
 }
 
 } }

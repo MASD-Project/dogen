@@ -18,27 +18,30 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_WALE_TYPES_FORMATTER_HPP
-#define DOGEN_WALE_TYPES_FORMATTER_HPP
+#include <boost/test/unit_test.hpp>
+#include "dogen/utility/test/logging.hpp"
+#include "dogen/utility/io/unordered_set_io.hpp"
+#include "dogen/wale/types/workflow.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace {
 
-#include <string>
-#include "dogen/wale/types/text_template.hpp"
+const std::string test_module("wale");
+const std::string test_suite("workflow_tests");
 
-namespace dogen {
-namespace wale {
+}
 
-class formatter final {
-private:
-    std::string wrap_key(const std::string& key) const;
+BOOST_AUTO_TEST_SUITE(workflow_tests)
 
-public:
-    std::string format(const text_template& tt) const;
-};
+BOOST_AUTO_TEST_CASE(wale_templates_in_data_produce_expected_instantiation) {
+    SETUP_TEST_LOG_SOURCE("wale_templates_in_data_produce_expected_instantiation");
 
-} }
+    const auto kvps = std::unordered_map<std::string, std::string> {
+        {"class.simple_name", "some_class"}
+    };
 
-#endif
+    dogen::wale::workflow w;
+    w.execute("artefact_formatter_header.wale", kvps);
+    BOOST_TEST_CHECKPOINT("Instantiated template.");
+}
+
+BOOST_AUTO_TEST_SUITE_END()

@@ -27,9 +27,7 @@
 
 #include <string>
 #include <algorithm>
-#include <boost/optional.hpp>
 #include "dogen/wale/types/properties.hpp"
-#include "dogen/annotations/types/annotation.hpp"
 #include "dogen/wale/serialization/text_template_fwd_ser.hpp"
 
 namespace dogen {
@@ -39,14 +37,11 @@ class text_template final {
 public:
     text_template() = default;
     text_template(const text_template&) = default;
+    text_template(text_template&&) = default;
     ~text_template() = default;
 
 public:
-    text_template(text_template&& rhs);
-
-public:
     text_template(
-        const boost::optional<dogen::annotations::annotation>& annotation,
         const dogen::wale::properties& properties,
         const std::string& content);
 
@@ -58,11 +53,6 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::wale::text_template& v, unsigned int version);
 
 public:
-    const boost::optional<dogen::annotations::annotation>& annotation() const;
-    boost::optional<dogen::annotations::annotation>& annotation();
-    void annotation(const boost::optional<dogen::annotations::annotation>& v);
-    void annotation(const boost::optional<dogen::annotations::annotation>&& v);
-
     const dogen::wale::properties& properties() const;
     dogen::wale::properties& properties();
     void properties(const dogen::wale::properties& v);
@@ -84,7 +74,6 @@ public:
     text_template& operator=(text_template other);
 
 private:
-    boost::optional<dogen::annotations::annotation> annotation_;
     dogen::wale::properties properties_;
     std::string content_;
 };

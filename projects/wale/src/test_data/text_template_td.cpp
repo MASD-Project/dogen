@@ -21,21 +21,8 @@
 #include <sstream>
 #include "dogen/wale/test_data/properties_td.hpp"
 #include "dogen/wale/test_data/text_template_td.hpp"
-#include "dogen/annotations/test_data/annotation_td.hpp"
 
 namespace {
-
-dogen::annotations::annotation
-create_dogen_annotations_annotation(const unsigned int position) {
-    return dogen::annotations::annotation_generator::create(position);
-}
-
-boost::optional<dogen::annotations::annotation>
-create_boost_optional_dogen_annotations_annotation(unsigned int position) {
-    boost::optional<dogen::annotations::annotation> r(
-        create_dogen_annotations_annotation(position));
-    return r;
-}
 
 dogen::wale::properties
 create_dogen_wale_properties(const unsigned int position) {
@@ -57,9 +44,8 @@ text_template_generator::text_template_generator() : position_(0) { }
 
 void text_template_generator::
 populate(const unsigned int position, result_type& v) {
-    v.annotation(create_boost_optional_dogen_annotations_annotation(position + 0));
-    v.properties(create_dogen_wale_properties(position + 1));
-    v.content(create_std_string(position + 2));
+    v.properties(create_dogen_wale_properties(position + 0));
+    v.content(create_std_string(position + 1));
 }
 
 text_template_generator::result_type

@@ -250,7 +250,7 @@ add_dependencies(knit_all knit_${target})
 
 set(target wale)
 add_custom_target(knit_${target}
-    COMMENT "Knitting Stitch model" VERBATIM
+    COMMENT "Knitting Wale model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
     --target ${models_dir}/${target}.dia,dogen
