@@ -60,6 +60,7 @@ const std::string value_type_text("text");
 const std::string value_type_text_collection("text_collection");
 const std::string value_type_number("number");
 const std::string value_type_boolean("boolean");
+const std::string value_type_kvp("key_value_pair");
 
 const std::string template_kind_instance("instance");
 const std::string template_kind_global_template("global_template");
@@ -114,6 +115,8 @@ value_types type_templates_hydrator::to_value_type(const std::string& s) const {
         return value_types::number;
     else if (s == value_type_boolean)
         return value_types::boolean;
+    else if (s == value_type_kvp)
+        return value_types::key_value_pair;
 
     BOOST_LOG_SEV(lg, error) << invalid_value_type << "'" << s << "'";
     BOOST_THROW_EXCEPTION(hydration_error(invalid_value_type + s));

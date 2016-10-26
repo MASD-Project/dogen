@@ -20,6 +20,8 @@
  */
 #include <string>
 #include <boost/throw_exception.hpp>
+#include <boost/algorithm/string/erase.hpp>
+#include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/annotations/types/text.hpp"
 #include "dogen/annotations/types/number.hpp"
@@ -45,6 +47,7 @@ const std::string unexpected_entry_type("Entry has an unexpected type: ");
 typedef boost::error_info<struct tag_errmsg, std::string> extension_error_info;
 const std::string no_default_value(
     "Entry does not have a default value: ");
+const std::string duplicate_key("Duplicate key in kvp: ");
 
 }
 
@@ -269,6 +272,34 @@ get_number_content_or_default(const type& t) const {
         e << extension_error_info(entry + n);
         throw;
     }
+}
+
+std::unordered_map<std::string, std::string>
+entry_selector::get_kvp_content(const std::string& qualified_name) const {
+    const auto key_prefix(qualified_name + ".");
+    std::unordered_map<std::string, std::string> r;
+
+    for (const auto& entry : annotation_.entries()) {
+        const auto& key(entry.first);
+        if (!boost::starts_with(key, key_prefix))
+            continue;
+
+        const auto stripped_key(boost::erase_first_copy(key, key_prefix));
+        const auto value(get_text_content(*entry.second));
+        const auto pair(std::make_pair(stripped_key, value));
+        const auto inserted(r.insert(pair).second);
+        if (!inserted) {
+            BOOST_LOG_SEV(lg, error) << duplicate_key << key;
+            BOOST_THROW_EXCEPTION(selection_error(duplicate_key + key));
+        }
+    }
+
+    return r;
+}
+
+std::unordered_map<std::string, std::string> entry_selector::
+get_kvp_content(const type& t) const {
+    return get_kvp_content(t.name().qualified());
 }
 
 } }

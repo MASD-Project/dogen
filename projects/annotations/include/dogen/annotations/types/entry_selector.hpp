@@ -27,6 +27,7 @@
 
 #include <list>
 #include <string>
+#include <unordered_map>
 #include "dogen/annotations/types/type.hpp"
 #include "dogen/annotations/types/value.hpp"
 #include "dogen/annotations/types/annotation.hpp"
@@ -100,6 +101,7 @@ public:
      */
     std::string get_text_content_or_default(const type& t) const;
 
+public:
     /**
      * @brief Returns the value of the entry, assuming it is a text
      * collection value.
@@ -133,6 +135,7 @@ public:
     std::list<std::string>
     get_text_collection_content_or_default(const type& t) const;
 
+public:
     /**
      * @brief Returns the content for the entry, assuming it is a
      * boolean value.
@@ -163,6 +166,7 @@ public:
      */
     bool get_boolean_content_or_default(const type& t) const;
 
+public:
     /**
      * @brief Returns the value of the entry, assuming it is a numeric
      * value.
@@ -192,6 +196,21 @@ public:
      * @pre Type must have a default value.
      */
     int get_number_content_or_default(const type& t) const;
+
+public:
+    /**
+     * @brief Returns the value of the entry, assuming it is a
+     * key-value-pair value.
+     *
+     * @pre has_entry must be true.
+     * @pre Type's value must be key-value-pair.
+     */
+    /**@{*/
+    std::unordered_map<std::string, std::string>
+    get_kvp_content(const std::string& qualified_name) const;
+    std::unordered_map<std::string, std::string>
+    get_kvp_content(const type& t) const;
+    /**@}*/
 
 private:
     const annotation& annotation_;
