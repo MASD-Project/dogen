@@ -35,6 +35,7 @@
 #include "dogen/quilt.cpp/serialization/formattables/odb_properties_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/facet_properties_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/aspect_properties_ser.hpp"
+#include "dogen/quilt.cpp/serialization/formattables/formatting_styles_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/helper_descriptor_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/helper_properties_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/element_properties_ser.hpp"

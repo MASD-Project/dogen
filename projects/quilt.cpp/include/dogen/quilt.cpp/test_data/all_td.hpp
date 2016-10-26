@@ -35,6 +35,7 @@
 #include "dogen/quilt.cpp/test_data/formattables/odb_properties_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/facet_properties_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/aspect_properties_td.hpp"
+#include "dogen/quilt.cpp/test_data/formattables/formatting_styles_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/helper_descriptor_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/helper_properties_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/element_properties_td.hpp"

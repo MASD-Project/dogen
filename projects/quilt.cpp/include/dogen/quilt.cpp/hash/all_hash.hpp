@@ -35,6 +35,7 @@
 #include "dogen/quilt.cpp/hash/formattables/odb_properties_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/facet_properties_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/aspect_properties_hash.hpp"
+#include "dogen/quilt.cpp/hash/formattables/formatting_styles_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/helper_descriptor_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/helper_properties_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/element_properties_hash.hpp"

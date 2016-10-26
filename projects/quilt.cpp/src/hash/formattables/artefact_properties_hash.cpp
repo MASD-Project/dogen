@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/quilt.cpp/hash/formattables/formatting_styles_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/artefact_properties_hash.hpp"
 
 namespace {
@@ -57,6 +58,8 @@ std::size_t artefact_properties_hasher::hash(const artefact_properties& v) {
     combine(seed, hash_boost_filesystem_path(v.file_path()));
     combine(seed, v.header_guard());
     combine(seed, hash_std_list_std_string(v.inclusion_dependencies()));
+    combine(seed, v.formatting_style());
+    combine(seed, v.formatting_input());
 
     return seed;
 }

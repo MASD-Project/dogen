@@ -29,6 +29,7 @@
 #include <string>
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
+#include "dogen/quilt.cpp/types/formattables/formatting_styles.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/artefact_properties_fwd_ser.hpp"
 
 namespace dogen {
@@ -53,7 +54,9 @@ public:
         const bool overwrite,
         const boost::filesystem::path& file_path,
         const std::string& header_guard,
-        const std::list<std::string>& inclusion_dependencies);
+        const std::list<std::string>& inclusion_dependencies,
+        const dogen::quilt::cpp::formattables::formatting_styles formatting_style,
+        const std::string& formatting_input);
 
 private:
     template<typename Archive>
@@ -84,6 +87,14 @@ public:
     void inclusion_dependencies(const std::list<std::string>& v);
     void inclusion_dependencies(const std::list<std::string>&& v);
 
+    dogen::quilt::cpp::formattables::formatting_styles formatting_style() const;
+    void formatting_style(const dogen::quilt::cpp::formattables::formatting_styles v);
+
+    const std::string& formatting_input() const;
+    std::string& formatting_input();
+    void formatting_input(const std::string& v);
+    void formatting_input(const std::string&& v);
+
 public:
     bool operator==(const artefact_properties& rhs) const;
     bool operator!=(const artefact_properties& rhs) const {
@@ -100,6 +111,8 @@ private:
     boost::filesystem::path file_path_;
     std::string header_guard_;
     std::list<std::string> inclusion_dependencies_;
+    dogen::quilt::cpp::formattables::formatting_styles formatting_style_;
+    std::string formatting_input_;
 };
 
 } } } }

@@ -19,6 +19,7 @@
  *
  */
 #include <sstream>
+#include "dogen/quilt.cpp/test_data/formattables/formatting_styles_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/artefact_properties_td.hpp"
 
 namespace {
@@ -48,6 +49,11 @@ std::list<std::string> create_std_list_std_string(unsigned int position) {
     return r;
 }
 
+dogen::quilt::cpp::formattables::formatting_styles
+create_dogen_quilt_cpp_formattables_formatting_styles(const unsigned int position) {
+    return dogen::quilt::cpp::formattables::formatting_styles_generator::create(position);
+}
+
 }
 
 namespace dogen {
@@ -64,6 +70,8 @@ populate(const unsigned int position, result_type& v) {
     v.file_path(create_boost_filesystem_path(position + 2));
     v.header_guard(create_std_string(position + 3));
     v.inclusion_dependencies(create_std_list_std_string(position + 4));
+    v.formatting_style(create_dogen_quilt_cpp_formattables_formatting_styles(position + 5));
+    v.formatting_input(create_std_string(position + 6));
 }
 
 artefact_properties_generator::result_type
