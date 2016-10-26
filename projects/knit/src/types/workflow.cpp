@@ -120,7 +120,6 @@ void workflow::perform_housekeeping(
     hk.tidy_up();
 }
 
-
 std::shared_ptr<dogen::formatters::artefact_writer_interface>
 workflow::obtain_file_writer() const {
     const options::output_options& options(knitting_options_.output());
