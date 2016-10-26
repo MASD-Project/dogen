@@ -46,6 +46,9 @@ std::ostream& operator<<(std::ostream& s, const value_types& v) {
     case value_types::boolean:
         attr = "\"boolean\"";
         break;
+    case value_types::key_value_pair:
+        attr = "\"key_value_pair\"";
+        break;
     default:
         throw std::invalid_argument("Invalid value for value_types");
     }
