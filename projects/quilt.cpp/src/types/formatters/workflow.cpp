@@ -27,6 +27,7 @@
 #include "dogen/quilt.cpp/io/formattables/artefact_properties_io.hpp"
 #include "dogen/quilt.cpp/types/formatters/context.hpp"
 #include "dogen/quilt.cpp/types/formatters/wale_formatter.hpp"
+#include "dogen/quilt.cpp/types/formatters/stitch_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/formatting_error.hpp"
 #include "dogen/quilt.cpp/types/formatters/workflow.hpp"
 
@@ -112,6 +113,15 @@ workflow::format(const formattables::model& fm, const yarn::element& e,
             BOOST_LOG_SEV(lg, debug) << "Using the wale formatter.";
 
             wale_formatter f;
+            const auto artefact(f.format(fmt, ctx, e));
+            const auto& p(artefact.path());
+
+            BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;
+            r.push_front(artefact);
+        } else if (fs == formatting_styles::stitch) {
+            BOOST_LOG_SEV(lg, debug) << "Using the stitch formatter.";
+
+            stitch_formatter f;
             const auto artefact(f.format(fmt, ctx, e));
             const auto& p(artefact.path());
 
