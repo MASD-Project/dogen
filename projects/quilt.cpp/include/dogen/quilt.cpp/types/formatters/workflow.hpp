@@ -58,11 +58,6 @@ private:
         artefact_properties, const std::string& archetype) const;
 
 private:
-    dogen::formatters::artefact
-        format(const formattables::model& fm, const yarn::element& e,
-            const formattables::element_properties& ep,
-            const artefact_formatter_interface& formatter) const;
-
     std::forward_list<dogen::formatters::artefact>
     format(const formattables::model& fm, const yarn::element& e,
         const formattables::element_properties& ep) const;

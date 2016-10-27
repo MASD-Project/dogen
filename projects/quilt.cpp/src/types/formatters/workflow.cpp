@@ -23,8 +23,11 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/quilt.cpp/types/workflow_error.hpp"
+#include "dogen/quilt.cpp/io/formattables/formatting_styles_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/artefact_properties_io.hpp"
 #include "dogen/quilt.cpp/types/formatters/context.hpp"
+#include "dogen/quilt.cpp/types/formatters/wale_formatter.hpp"
+#include "dogen/quilt.cpp/types/formatters/formatting_error.hpp"
 #include "dogen/quilt.cpp/types/formatters/workflow.hpp"
 
 namespace {
@@ -33,6 +36,7 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("quit.cpp.formatters.workflow"));
 
 const std::string archetype_not_found("Archetype not found: ");
+const std::string invalid_formatting_style("Invalid formatting style");
 
 }
 
@@ -60,24 +64,6 @@ formattables::artefact_properties workflow::get_artefact_properties(
         BOOST_THROW_EXCEPTION(workflow_error(archetype_not_found + archetype));
     }
     return i->second;
-}
-
-dogen::formatters::artefact workflow::format(
-    const formattables::model& fm, const yarn::element& e,
-    const formattables::element_properties& ep,
-    const artefact_formatter_interface& formatter) const {
-
-    const auto id(e.name().id());
-    const auto fmtn(formatter.formatter_name());
-    BOOST_LOG_SEV(lg, debug) << "Formatting with " << fmtn;
-
-    const auto& frp(registrar().formatter_repository());
-    context ctx(ep, fm, frp.helper_formatters());
-    const auto r(formatter.format(ctx, e));
-
-    BOOST_LOG_SEV(lg, debug) << "Finished formatting. Path: " << r.path();
-
-    return r;
 }
 
 std::forward_list<dogen::formatters::artefact>
@@ -110,10 +96,30 @@ workflow::format(const formattables::model& fm, const yarn::element& e,
         }
 
         using formattables::formatting_styles;
-        if (art_props.formatting_style() == formatting_styles::stock) {
-            BOOST_LOG_SEV(lg, debug) << "Using the stock formatter.";
-            const auto artefact(format(fm, e, ep, fmt));
+        const auto& frp(registrar().formatter_repository());
+        context ctx(ep, fm, frp.helper_formatters());
+        const auto fs(art_props.formatting_style());
+        if (fs == formatting_styles::stock) {
+            const auto fmtn(fmt.formatter_name());
+            BOOST_LOG_SEV(lg, debug) << "Using the stock formatter: " << fmtn;
+
+            const auto artefact(fmt.format(ctx, e));
+            const auto& p(artefact.path());
+
+            BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;
             r.push_front(artefact);
+        } else if (fs == formatting_styles::wale) {
+            BOOST_LOG_SEV(lg, debug) << "Using the wale formatter.";
+
+            wale_formatter f;
+            const auto artefact(f.format(fmt, ctx, e));
+            const auto& p(artefact.path());
+
+            BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;
+            r.push_front(artefact);
+        } else {
+            BOOST_LOG_SEV(lg, error) << invalid_formatting_style << fs;
+            BOOST_THROW_EXCEPTION(formatting_error(invalid_formatting_style));
         }
     }
     return r;

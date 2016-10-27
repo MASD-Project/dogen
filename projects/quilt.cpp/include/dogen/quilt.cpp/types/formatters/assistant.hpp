@@ -313,6 +313,9 @@ public:
         const std::list<yarn::name> names) const;
 
 public:
+    const formattables::artefact_properties& artefact_properties() const;
+
+public:
     /**
      * @brief Returns the stream that is currently being populated.
      */

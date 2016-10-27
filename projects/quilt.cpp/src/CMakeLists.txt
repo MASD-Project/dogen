@@ -25,7 +25,13 @@ file(GLOB_RECURSE files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
 add_library(${name} STATIC ${files})
-target_link_libraries(${name} formatters quilt ${Boost_LIBRARIES})
+target_link_libraries(${name}
+    annotations
+    formatters
+    yarn
+    quilt
+    wale
+    ${Boost_LIBRARIES})
 
 set_target_properties(${name} PROPERTIES OUTPUT_NAME ${binary_name})
 set_target_properties(${name}

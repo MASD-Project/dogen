@@ -25,7 +25,9 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen/formatters/types/artefact.hpp"
+#include "dogen/yarn/types/element_fwd.hpp"
+#include "dogen/quilt.cpp/types/formattables/artefact_properties.hpp"
 #include "dogen/quilt.cpp/types/formatters/artefact_formatter_interface.hpp"
 
 namespace dogen {
@@ -33,7 +35,13 @@ namespace quilt {
 namespace cpp {
 namespace formatters {
 
-class wale_formatter final /*: public artefact_formatter_interface */ {
+class wale_formatter final {
+    bool is_header(const inclusion_support_types ist) const;
+
+public:
+    dogen::formatters::artefact
+    format(const artefact_formatter_interface& stock_formatter,
+        const context& ctx, const yarn::element& e) const;
 };
 
 } } } }

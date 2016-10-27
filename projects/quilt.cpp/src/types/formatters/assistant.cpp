@@ -590,6 +590,11 @@ names_with_enabled_archetype(const std::string& archetype,
     return r;
 }
 
+const formattables::artefact_properties&
+assistant::artefact_properties() const {
+    return artefact_properties_;
+}
+
 std::ostream& assistant::stream() {
     return filtering_stream_;
 }
