@@ -38,32 +38,28 @@ namespace formattables {
 
 class formatting_expander final {
 private:
-/*    struct formattater_type_group {
+    formatting_styles to_formatting_style(const std::string& s) const;
+
+private:
+    struct type_group {
         annotations::type formatting_style;
         annotations::type formatting_input;
     };
-    friend std::ostream& operator<<(std::ostream& s,
-        const formattater_type_group& v);
+    friend std::ostream& operator<<(std::ostream& s, const type_group& v);
 
-    struct type_group {
-        std::unordered_map<std::string, formattater_type_group>
-        formattaters_type_groups;
-    };
-    friend std::ostream& operator<<(std::ostream& s,
-        const type_group& v);
-
-    type_group make_type_group(const annotations::type_repository& atrp,
+    std::unordered_map<std::string, type_group>
+    make_type_groups(const annotations::type_repository& atrp,
         const formatters::repository& frp) const;
 
     std::unordered_map<std::string, formatting_configuration>
-    make_formatting_configuration(const type_group& tg,
+    make_formatting_configuration(
+        const std::unordered_map<std::string, type_group>& tgs,
         const annotations::annotation& a) const;
-*/
 
 public:
-/*    void expand(const annotations::type_repository& atrp,
+    void expand(const annotations::type_repository& atrp,
         const formatters::repository& frp, model& fm) const;
-*/
+
 };
 
 } } } }

@@ -59,16 +59,6 @@ std::string traits::header_guard() {
     return r;
 }
 
-std::string formatting_style() {
-    static std::string r("formatting_style");
-    return r;
-}
-
-std::string formatting_input() {
-    static std::string r("formatting_input");
-    return r;
-}
-
 std::string traits::inclusion_required() {
     static std::string r("inclusion_required");
     return r;
@@ -81,6 +71,16 @@ std::string traits::inclusion_directive() {
 
 std::string traits::inclusion_dependency() {
     static std::string r("inclusion_dependency");
+    return r;
+}
+
+std::string traits::cpp::formatting_style() {
+    static std::string r("formatting_style");
+    return r;
+}
+
+std::string traits::cpp::formatting_input() {
+    static std::string r("formatting_input");
     return r;
 }
 

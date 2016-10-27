@@ -14,23 +14,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-26 Wed 22:55]
+#+CAPTION: Clock summary at [2016-10-27 Thu 15:45]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *13:56* |       |      | 100.0 |
+| *Total time*                                                                | *16:00* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 13:56   |       |      | 100.0 |
-| Active                                                                      |         | 13:56 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:14 |   8.9 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:22 |   2.6 |
-| COMPLETED Improve bintray support                                           |         |       | 2:26 |  17.5 |
-| COMPLETED Add logo with white background                                    |         |       | 0:14 |   1.7 |
-| COMPLETED Consider renaming =diagrams= to =input_models=                    |         |       | 0:38 |   4.5 |
-| COMPLETED Add kvp support to annotations                                    |         |       | 0:37 |   4.4 |
-| COMPLETED Implement wale                                                    |         |       | 7:00 |  50.2 |
-| STARTED Add artefact source properties support                              |         |       | 0:53 |   6.3 |
-| STARTED Changes to stitch to accommodate wale                               |         |       | 0:32 |   3.8 |
+| Stories                                                                     | 16:00   |       |      | 100.0 |
+| Active                                                                      |         | 16:00 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:14 |   7.7 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:22 |   2.3 |
+| COMPLETED Improve bintray support                                           |         |       | 2:26 |  15.2 |
+| COMPLETED Add logo with white background                                    |         |       | 0:14 |   1.5 |
+| COMPLETED Consider renaming =diagrams= to =input_models=                    |         |       | 0:38 |   4.0 |
+| COMPLETED Add kvp support to annotations                                    |         |       | 0:37 |   3.9 |
+| COMPLETED Implement wale                                                    |         |       | 7:00 |  43.8 |
+| STARTED Add artefact source properties support                              |         |       | 2:57 |  18.4 |
+| STARTED Changes to stitch to accommodate wale                               |         |       | 0:32 |   3.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -196,6 +196,8 @@ Example changes to stitch template:
   supplied and all keys supplied by the user have been used.
 
 *** STARTED Add artefact source properties support                    :story:
+    CLOCK: [2016-10-27 Thu 14:40]--[2016-10-27 Thu 15:45] =>  1:05
+    CLOCK: [2016-10-27 Thu 11:31]--[2016-10-27 Thu 12:14] =>  0:43
     CLOCK: [2016-10-27 Thu 08:56]--[2016-10-27 Thu 08:58] =>  0:02
     CLOCK: [2016-10-27 Thu 07:40]--[2016-10-27 Thu 07:54] =>  0:14
     CLOCK: [2016-10-26 Wed 22:45]--[2016-10-26 Wed 22:55] =>  0:10
