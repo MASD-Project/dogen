@@ -50,16 +50,16 @@ cpp::formatters::registrar& workflow::registrar() {
     return *registrar_;
 }
 
-bool workflow::is_archetype_enabled(const std::unordered_map<std::string,
-    formattables::artefact_properties>& artefact_properties,
-    const std::string& archetype) const {
+formattables::artefact_properties workflow::get_artefact_properties(
+    const std::unordered_map<std::string, formattables::artefact_properties>&
+    artefact_properties, const std::string& archetype) const {
 
     const auto i(artefact_properties.find(archetype));
     if (i == artefact_properties.end()) {
         BOOST_LOG_SEV(lg, error) << archetype_not_found << archetype;
         BOOST_THROW_EXCEPTION(workflow_error(archetype_not_found + archetype));
     }
-    return i->second.enabled();
+    return i->second;
 }
 
 dogen::formatters::artefact workflow::format(
@@ -102,13 +102,19 @@ workflow::format(const formattables::model& fm, const yarn::element& e,
     for (const auto& ptr : fmts) {
         const auto& fmt(*ptr);
         const auto arch(fmt.archetype_location().archetype());
-        if (!is_archetype_enabled(ep.artefact_properties(), arch)) {
+        const auto& aps(ep.artefact_properties());
+        const auto& art_props(get_artefact_properties(aps, arch));
+        if (!art_props.enabled()) {
             BOOST_LOG_SEV(lg, debug) << "Archetype is disabled: " << arch;
             continue;
         }
 
-        const auto artefact(format(fm, e, ep, fmt));
-        r.push_front(artefact);
+        using formattables::formatting_styles;
+        if (art_props.formatting_style() == formatting_styles::stock) {
+            BOOST_LOG_SEV(lg, debug) << "Using the stock formatter.";
+            const auto artefact(format(fm, e, ep, fmt));
+            r.push_front(artefact);
+        }
     }
     return r;
 }

@@ -53,9 +53,9 @@ public:
     static cpp::formatters::registrar& registrar();
 
 private:
-    bool is_archetype_enabled(const std::unordered_map<std::string,
-        formattables::artefact_properties>& artefact_properties,
-        const std::string& archetype) const;
+    formattables::artefact_properties get_artefact_properties(const
+        std::unordered_map<std::string, formattables::artefact_properties>&
+        artefact_properties, const std::string& archetype) const;
 
 private:
     dogen::formatters::artefact
