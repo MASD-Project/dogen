@@ -59,6 +59,16 @@ std::string traits::header_guard() {
     return r;
 }
 
+std::string formatting_style() {
+    static std::string r("formatting_style");
+    return r;
+}
+
+std::string formatting_input() {
+    static std::string r("formatting_input");
+    return r;
+}
+
 std::string traits::inclusion_required() {
     static std::string r("inclusion_required");
     return r;

@@ -25,7 +25,11 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen/annotations/types/type.hpp"
+#include "dogen/annotations/types/type_repository.hpp"
+#include "dogen/quilt.cpp/types/formatters/repository.hpp"
+#include "dogen/quilt.cpp/types/formattables/formatting_configuration.hpp"
+#include "dogen/quilt.cpp/types/formattables/model.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -33,19 +37,33 @@ namespace cpp {
 namespace formattables {
 
 class formatting_expander final {
-public:
-    formatting_expander() = default;
-    formatting_expander(const formatting_expander&) = default;
-    formatting_expander(formatting_expander&&) = default;
-    ~formatting_expander() = default;
-    formatting_expander& operator=(const formatting_expander&) = default;
+private:
+/*    struct formattater_type_group {
+        annotations::type formatting_style;
+        annotations::type formatting_input;
+    };
+    friend std::ostream& operator<<(std::ostream& s,
+        const formattater_type_group& v);
+
+    struct type_group {
+        std::unordered_map<std::string, formattater_type_group>
+        formattaters_type_groups;
+    };
+    friend std::ostream& operator<<(std::ostream& s,
+        const type_group& v);
+
+    type_group make_type_group(const annotations::type_repository& atrp,
+        const formatters::repository& frp) const;
+
+    std::unordered_map<std::string, formatting_configuration>
+    make_formatting_configuration(const type_group& tg,
+        const annotations::annotation& a) const;
+*/
 
 public:
-    bool operator==(const formatting_expander& rhs) const;
-    bool operator!=(const formatting_expander& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+/*    void expand(const annotations::type_repository& atrp,
+        const formatters::repository& frp, model& fm) const;
+*/
 };
 
 } } } }

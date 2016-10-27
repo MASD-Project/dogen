@@ -44,6 +44,7 @@
 #include "dogen/quilt.cpp/io/formattables/streaming_properties_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/locator_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formatters/inclusion_support_types_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/formatting_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/locator_facet_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/local_enablement_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/global_enablement_configuration_io.hpp"

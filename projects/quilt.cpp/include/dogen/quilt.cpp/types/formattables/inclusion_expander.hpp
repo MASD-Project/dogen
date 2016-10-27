@@ -81,11 +81,10 @@ private:
     struct type_group {
         annotations::type inclusion_required;
         std::unordered_map<std::string, formattater_type_group>
-        formattaters_type_group;
+        formattaters_type_groups;
     };
     friend std::ostream& operator<<(std::ostream& s,
         const type_group& v);
-
 
     type_group make_type_group(const annotations::type_repository& atrp,
         const formatters::repository& frp) const;
@@ -106,7 +105,8 @@ private:
         const formatter_list_type& formatters) const;
 
     std::unordered_map<std::type_index, formatter_list_type>
-    includible_formatters_by_type_index(const formatters::repository& frp) const;
+    includible_formatters_by_type_index(
+        const formatters::repository& frp) const;
 
 private:
     std::string to_inclusion_directive(const boost::filesystem::path& p) const;

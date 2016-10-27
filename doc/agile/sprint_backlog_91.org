@@ -196,6 +196,8 @@ Example changes to stitch template:
   supplied and all keys supplied by the user have been used.
 
 *** STARTED Add artefact source properties support                    :story:
+    CLOCK: [2016-10-27 Thu 08:56]--[2016-10-27 Thu 08:58] =>  0:02
+    CLOCK: [2016-10-27 Thu 07:40]--[2016-10-27 Thu 07:54] =>  0:14
     CLOCK: [2016-10-26 Wed 22:45]--[2016-10-26 Wed 22:55] =>  0:10
     CLOCK: [2016-10-26 Wed 22:01]--[2016-10-26 Wed 22:44] =>  0:43
 
@@ -656,6 +658,14 @@ initialisers. However, it makes more sense to initialise them on the
 translation unit for each formatter. This will also make life easier
 when we move to a mustache world where there may not be a formatter
 header file at all.
+
+*** Add knobs to control output of constructors and operators         :story:
+
+At present we are outputting all of the default constructors and the
+operators in the handcrafted templates. Ideally it should just be the
+class name. We need a way of controlling all of the default
+constructors and all of the operators in one go so we can set it on
+the handcrafted profile.
 
 ** Deprecated
 *** CANCELLED Add region support to stitch                            :story:

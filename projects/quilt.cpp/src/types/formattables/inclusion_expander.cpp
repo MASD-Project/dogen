@@ -109,7 +109,7 @@ std::ostream& operator<<(std::ostream& s,
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::"
       << "inclusion_expander::formatters_type_group\"" << ", "
       << "\"inclusion_directive\": " << v.inclusion_directive << ", "
-      << "\"inclusion_directive\": " << v.inclusion_directive
+      << "\"inclusion_required\": " << v.inclusion_required
       << " }";
 
     return s;
@@ -122,8 +122,8 @@ std::ostream& operator<<(std::ostream& s,
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::"
       << "inclusion_expander::type_group\"" << ", "
       << "\"inclusion_required\": " << v.inclusion_required << ", "
-      << "\"formattaters_type_group\": "
-      << v.formattaters_type_group
+      << "\"formattaters_type_groups\": "
+      << v.formattaters_type_groups
       << " }";
 
     return s;
@@ -157,7 +157,7 @@ make_type_group(const annotations::type_repository& atrp,
         // note: redefinition of "ir" by design as scopes are different.
         const auto& ir(traits::inclusion_required());
         ftg.inclusion_required = s.select_type_by_name(arch, ir);
-        r.formattaters_type_group[arch] = ftg;
+        r.formattaters_type_groups[arch] = ftg;
     }
 
     BOOST_LOG_SEV(lg, debug) << "Created type group. Result: " << r;
@@ -180,8 +180,8 @@ inclusion_expander::make_inclusion_directive_configuration(
         BOOST_THROW_EXCEPTION(expansion_error(empty_archetype));
     }
 
-    const auto i(tg.formattaters_type_group.find(archetype));
-    if (i == tg.formattaters_type_group.end()) {
+    const auto i(tg.formattaters_type_groups.find(archetype));
+    if (i == tg.formattaters_type_groups.end()) {
         BOOST_LOG_SEV(lg, error) << missing_archetype;
         BOOST_THROW_EXCEPTION(expansion_error(missing_archetype));
     }

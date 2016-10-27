@@ -88,6 +88,16 @@ struct traits {
 
     struct cpp {
         /**
+         * @brief Style of formatting.
+         */
+        static std::string formatting_style();
+
+        /**
+         * @brief External inputs for formatting.
+         */
+        static std::string formatting_input();
+
+        /**
          * @brief Is inclusion required for all formatters.
          */
         static std::string inclusion_required();
