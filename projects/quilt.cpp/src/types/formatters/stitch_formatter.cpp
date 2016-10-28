@@ -25,15 +25,17 @@ namespace quilt {
 namespace cpp {
 namespace formatters {
 
-bool wale_formatter::is_header(const inclusion_support_types ist) const {
+bool stitch_formatter::is_header(const inclusion_support_types ist) const {
     return
         ist == inclusion_support_types::regular_support ||
         ist == inclusion_support_types::canonical_support;
 }
 
-dogen::formatters::artefact wale_formatter::
+dogen::formatters::artefact stitch_formatter::
 format(const artefact_formatter_interface& /*stock_formatter*/,
     const context& /*ctx*/, const yarn::element& /*e*/) const {
+    dogen::formatters::artefact r;
+    return r;
 }
 
 } } } }
