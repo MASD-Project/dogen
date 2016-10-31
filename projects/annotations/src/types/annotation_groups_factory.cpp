@@ -84,11 +84,11 @@ operator<<(std::ostream& s, const annotation_groups_factory::type_group& v) {
 }
 
 annotation_groups_factory::type_group
-annotation_groups_factory::make_type_group(const type_repository& trp) const {
+annotation_groups_factory::make_type_group() const {
     BOOST_LOG_SEV(lg, debug) << "Creating annotation types.";
 
     type_group r;
-    const type_repository_selector s(trp);
+    const type_repository_selector s(type_repository_);
     r.profile = s.select_type_by_name(model_name, type_name);
 
     BOOST_LOG_SEV(lg, debug) << "Created annotation types. Result: " << r;
@@ -291,11 +291,11 @@ make(const scribble& scribble) const {
 }
 
 std::unordered_map<std::string, annotation_group> annotation_groups_factory::
-make(const type_repository& trp, const std::unordered_map<std::string,
-    scribble_group>& scribble_groups) const {
+make(const std::unordered_map<std::string, scribble_group>&
+    scribble_groups) const {
 
     const auto profiles(create_annotation_profiles());
-    const auto tg(make_type_group(trp));
+    const auto tg(make_type_group());
 
     std::unordered_map<std::string, annotation_group> r;
     for (const auto& pair : scribble_groups) {

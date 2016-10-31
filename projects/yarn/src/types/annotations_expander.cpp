@@ -185,7 +185,7 @@ update_annotations(const std::vector<boost::filesystem::path>& data_dirs,
      * scribble groups into annotation groups.
      */
     const annotations::annotation_groups_factory f(data_dirs, alrp, atrp);
-    const auto annotation_groups(f.make(atrp, im.indices().scribble_groups()));
+    const auto annotation_groups(f.make(im.indices().scribble_groups()));
 
     /*
      * Now we have to unpack all of the annotation groups and populate

@@ -70,7 +70,7 @@ private:
 
     friend std::ostream& operator<<(std::ostream& s, const type_group& v);
 
-    type_group make_type_group(const type_repository& trp) const;
+    type_group make_type_group() const;
 
     std::string
     obtain_profile_name(const type_group& tg, const annotation& a) const;
@@ -136,8 +136,8 @@ public:
     annotation make(const scribble& scribble) const;
 
     std::unordered_map<std::string, annotation_group>
-    make(const type_repository& trp, const std::unordered_map<std::string,
-        scribble_group>& scribble_groups) const;
+    make(const std::unordered_map<std::string, scribble_group>&
+        scribble_groups) const;
 
 private:
     const std::vector<boost::filesystem::path> data_dirs_;
