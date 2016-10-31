@@ -18,17 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/formattables/helper_properties.hpp"
-#include "dogen/quilt.cpp/types/formatters/hash/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/time_duration_helper.hpp"
+#include "dogen/quilt.cpp/types/formattables/helper_properties.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
+#include "dogen/quilt.cpp/types/formatters/hash/traits.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formatters {
 namespace hash {
-
 
 std::string time_duration_helper::formatter_name() const {
     static auto r(std::string("<") + traits::facet() + std::string(">") +

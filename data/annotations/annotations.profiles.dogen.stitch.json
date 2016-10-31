@@ -1,0 +1,63 @@
+{
+    "name" : "dogen.stitch",
+    "scope" : "root_module",
+    "templates" : [
+        {
+            "name" : {
+                "simple" : "licence_name",
+                "qualified" : "decoration.licence_name"
+            },
+            "archetype_location" : {
+                "kernel" : "formatters"
+            },
+            "template_kind" : "instance",
+            "untyped_value" : [ "gpl_v3" ]
+        },
+        {
+            "name" : {
+                "simple" : "copyright_notices",
+                "qualified" : "decoration.copyright_notice"
+            },
+            "archetype_location" : {
+                "kernel" : "formatters"
+            },
+            "template_kind" : "instance",
+            "untyped_value" : [
+                "Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>"
+            ]
+        },
+        {
+            "name" : {
+                "simple" : "modeline_group_name",
+                "qualified" : "decoration.modeline_group_name"
+            },
+            "archetype_location" : {
+                "kernel" : "formatters"
+            },
+            "template_kind" : "instance",
+            "untyped_value" : [ "emacs" ]
+        },
+        {
+            "name" : {
+                "simple" : "stream_variable_name",
+                "qualified" : "stream_variable_name"
+            },
+            "archetype_location" : {
+                "kernel" : "stitch"
+            },
+            "template_kind" : "instance",
+            "untyped_value" : [ "a.stream()" ]
+        },
+        {
+            "name" : {
+                "simple" : "containing_namespaces",
+                "qualified" : "containing_namespaces"
+            },
+            "archetype_location" : {
+                "kernel" : "stitch"
+            },
+            "template_kind" : "instance",
+            "untyped_value" : [ "dogen::quilt::cpp::formatters" ]
+        }
+    ]
+}

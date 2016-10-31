@@ -18,8 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/types/sequence_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/class_header_formatter_stitch.hpp"
+#include "dogen/quilt.cpp/types/formattables/helper_properties.hpp"
+#include "dogen/quilt.cpp/types/formatters/assistant.hpp"
+#include "dogen/formatters/types/sequence_formatter.hpp"
 
 namespace dogen {
 namespace quilt {
