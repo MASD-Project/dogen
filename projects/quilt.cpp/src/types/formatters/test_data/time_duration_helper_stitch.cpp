@@ -29,7 +29,6 @@ namespace cpp {
 namespace formatters {
 namespace test_data {
 
-
 std::string time_duration_helper::formatter_name() const {
     static auto r(std::string("<") + traits::facet() + std::string(">") +
         std::string("<") + helper_name() + std::string(">"));

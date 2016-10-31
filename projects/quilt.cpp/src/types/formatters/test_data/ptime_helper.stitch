@@ -1,12 +1,9 @@
-<#@ decoration.licence_name=gpl_v3 #>
-<#@ decoration.copyright_notice=Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com> #>
-<#@ decoration.modeline_group_name=emacs #>
-<#@ stream_variable_name=a.stream() #>
+<#@ annotations.profile=dogen.stitch #>
+<#@ containing_namespaces=dogen::quilt::cpp::formatters::test_data #>
 <#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/test_data/ptime_helper.hpp" #>
 <#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/assistant.hpp" #>
 <#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/test_data/traits.hpp" #>
 <#@ inclusion_dependency="dogen/quilt.cpp/types/formattables/helper_properties.hpp" #>
-<#@ containing_namespaces=dogen::quilt::cpp::formatters::test_data #>
 <#+
 
 std::string ptime_helper::formatter_name() const {

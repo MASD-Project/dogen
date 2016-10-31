@@ -1,9 +1,6 @@
-<#@ decoration.licence_name=gpl_v3 #>
-<#@ decoration.copyright_notice=Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com> #>
-<#@ decoration.modeline_group_name=emacs #>
-<#@ stream_variable_name=a.stream() #>
-<#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/types/namespace_header_formatter_stitch.hpp" #>
+<#@ annotations.profile=dogen.stitch #>
 <#@ containing_namespaces=dogen::quilt::cpp::formatters::types #>
+<#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/types/namespace_header_formatter_stitch.hpp" #>
 <#+
 
 dogen::formatters::artefact namespace_header_formatter_stitch(
