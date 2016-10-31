@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <algorithm>
 #include "dogen/quilt.cpp/types/formatters/artefact_formatter_interface.hpp"
 
 namespace dogen {
@@ -33,11 +34,8 @@ namespace cpp {
 namespace formatters {
 namespace types {
 
-class forward_declarations_formatter : public artefact_formatter_interface {
+class forward_declarations_formatter final : public artefact_formatter_interface {
 public:
-    /**
-     * @brief Returns the formatter name.
-     */
     static std::string static_artefact();
 
 public:

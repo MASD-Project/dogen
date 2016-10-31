@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include <boost/filesystem/path.hpp>
+#include <algorithm>
 #include "dogen/quilt.cpp/types/formatters/artefact_formatter_interface.hpp"
 
 namespace dogen {
@@ -36,9 +36,6 @@ namespace test_data {
 
 class class_header_formatter final : public artefact_formatter_interface {
 public:
-    /**
-     * @brief Returns the formatter name.
-     */
     static std::string static_artefact();
 
 public:
@@ -61,7 +58,7 @@ public:
 
 public:
     dogen::formatters::artefact
-        format(const context& ctx, const yarn::element& e) const override;
+    format(const context& ctx, const yarn::element& e) const override;
 };
 
 } } } } }

@@ -251,7 +251,9 @@ Tasks:
 - add profile for formatter helpers.
 - add classes for all helpers.
 
-*** Implement formatter headers using wale                            :story:
+*** COMPLETED Implement formatter headers using wale                  :story:
+    CLOSED: [2016-10-31 Mon 14:06]
+    CLOCK: [2016-10-31 Mon 13:38]--[2016-10-31 Mon 14:06] =>  0:28
 
 Tasks:
 

@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include <string>
+#include <algorithm>
 #include "dogen/quilt.cpp/types/formatters/artefact_formatter_interface.hpp"
 
 namespace dogen {
@@ -34,14 +34,8 @@ namespace cpp {
 namespace formatters {
 namespace types {
 
-/**
- * @brief Creates the C++ domain representation for a visitor.
- */
-class visitor_header_formatter : public artefact_formatter_interface {
+class visitor_header_formatter final : public artefact_formatter_interface {
 public:
-    /**
-     * @brief Returns the formatter name.
-     */
     static std::string static_artefact();
 
 public:

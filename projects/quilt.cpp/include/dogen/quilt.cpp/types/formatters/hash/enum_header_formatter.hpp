@@ -18,13 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_HASH_ENUM_IMPLEMENTATION_FORMATTER_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_HASH_ENUM_IMPLEMENTATION_FORMATTER_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_HASH_ENUM_HEADER_FORMATTER_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_HASH_ENUM_HEADER_FORMATTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <algorithm>
 #include "dogen/quilt.cpp/types/formatters/artefact_formatter_interface.hpp"
 
 namespace dogen {
@@ -33,14 +34,8 @@ namespace cpp {
 namespace formatters {
 namespace hash {
 
-/**
- * @brief Creates the hash header representation for an enumeration.
- */
-class enum_header_formatter : public artefact_formatter_interface {
+class enum_header_formatter final : public artefact_formatter_interface {
 public:
-    /**
-     * @brief Returns the formatter name.
-     */
     static std::string static_artefact();
 
 public:

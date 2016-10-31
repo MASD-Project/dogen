@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include <string>
+#include <algorithm>
 #include "dogen/quilt.cpp/types/formatters/artefact_formatter_interface.hpp"
 
 namespace dogen {
@@ -34,14 +34,8 @@ namespace cpp {
 namespace formatters {
 namespace io {
 
-/**
- * @brief Creates the io implementation representation for an enumeration.
- */
-class enum_implementation_formatter : public artefact_formatter_interface {
+class enum_implementation_formatter final : public artefact_formatter_interface {
 public:
-    /**
-     * @brief Returns the formatter name.
-     */
     static std::string static_artefact();
 
 public:
