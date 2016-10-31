@@ -170,6 +170,7 @@ dogen::formatters::artefact formatter::format(const text_template& tt) const {
     }
 
     dogen::formatters::artefact r;
+    r.overwrite(true);
     r.content(s.str());
     if (tt.properties().stitching_properties().output_path())
         r.path(*tt.properties().stitching_properties().output_path());
