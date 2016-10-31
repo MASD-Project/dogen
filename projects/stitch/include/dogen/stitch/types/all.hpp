@@ -29,7 +29,6 @@
 #include "dogen/stitch/types/block.hpp"
 #include "dogen/stitch/types/parser.hpp"
 #include "dogen/stitch/types/traits.hpp"
-#include "dogen/stitch/types/expander.hpp"
 #include "dogen/stitch/types/workflow.hpp"
 #include "dogen/stitch/types/formatter.hpp"
 #include "dogen/stitch/types/properties.hpp"

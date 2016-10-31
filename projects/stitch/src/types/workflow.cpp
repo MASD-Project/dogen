@@ -33,7 +33,6 @@
 #include "dogen/formatters/io/artefact_io.hpp"
 #include "dogen/formatters/types/filesystem_writer.hpp"
 #include "dogen/stitch/types/parser.hpp"
-#include "dogen/stitch/types/expander.hpp"
 #include "dogen/stitch/types/properties_factory.hpp"
 #include "dogen/stitch/types/workflow_error.hpp"
 #include "dogen/stitch/types/workflow.hpp"
