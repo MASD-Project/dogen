@@ -54,14 +54,11 @@ public:
      * @param data_dirs directories in which to look for data files.
      * @param alrp the archetype location repository.
      * @param trp the type repository.
-     * @param throw_on_missing_type If true, any annotation entry for
-     * which a type does not exist will result on an exception. If
-     * false, they will be ignored.
      */
     annotation_groups_factory(
         const std::vector<boost::filesystem::path>& data_dirs,
         const archetype_location_repository& alrp,
-        const type_repository& trp, const bool throw_on_missing_type = true);
+        const type_repository& trp);
 
 private:
     struct type_group {
@@ -151,7 +148,6 @@ private:
     const std::vector<boost::filesystem::path> data_dirs_;
     const archetype_location_repository& archetype_location_repository_;
     const type_repository& type_repository_;
-    const bool throw_on_missing_type_;
     const std::unordered_map<std::string, annotation> profiles_;
     const type_group type_group_;
 };

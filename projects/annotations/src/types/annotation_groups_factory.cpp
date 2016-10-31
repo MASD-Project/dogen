@@ -67,10 +67,9 @@ annotation_groups_factory::
 annotation_groups_factory(
     const std::vector<boost::filesystem::path>& data_dirs,
     const archetype_location_repository& alrp,
-    const type_repository& trp, const bool throw_on_missing_type)
+    const type_repository& trp)
     : data_dirs_(data_dirs), archetype_location_repository_(alrp),
-      type_repository_(trp), throw_on_missing_type_(throw_on_missing_type),
-      profiles_(create_annotation_profiles()),
+      type_repository_(trp), profiles_(create_annotation_profiles()),
       type_group_(make_type_group()) { }
 
 inline std::ostream&
@@ -113,15 +112,8 @@ boost::optional<type> annotation_groups_factory::
 obtain_type(const std::string& n) const {
     const auto i(type_repository_.types_by_name().find(n));
     if (i == type_repository_.types_by_name().end()) {
-        if (throw_on_missing_type_) {
-            BOOST_LOG_SEV(lg, error) << type_not_found << n;
-
-            BOOST_THROW_EXCEPTION(
-                building_error(type_not_found + n));
-        }
-
-        BOOST_LOG_SEV(lg, warn) << type_not_found << n;
-        return boost::optional<type>();
+        BOOST_LOG_SEV(lg, error) << type_not_found << n;
+        BOOST_THROW_EXCEPTION(building_error(type_not_found + n));
     }
     return i->second;
 }
