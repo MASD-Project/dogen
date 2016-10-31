@@ -18,14 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_TYPES_SMART_POINTER_HELPER_STITCH_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_TYPES_SMART_POINTER_HELPER_STITCH_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_TYPES_SMART_POINTER_HELPER_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_TYPES_SMART_POINTER_HELPER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <ostream>
+#include <algorithm>
 #include "dogen/quilt.cpp/types/formatters/helper_formatter_interface.hpp"
 
 namespace dogen {

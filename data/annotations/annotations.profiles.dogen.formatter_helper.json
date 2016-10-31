@@ -1,0 +1,74 @@
+{
+    "name" : "dogen.formatter_helper",
+    "labels" : [ "formatter helper" ],
+    "parents" : [ "dogen.disable_all_facets" ],
+    "scope" : "root_module",
+    "templates" : [
+        {
+            "name" : {
+                "simple" : "enabled",
+                "qualified" : "quilt.cpp.types.enabled"
+            },
+            "archetype_location" : {
+                "kernel" : "quilt.cpp"
+            },
+            "template_kind" : "instance",
+            "untyped_value" : [ "true" ]
+        },
+        {
+            "name" : {
+                "simple" : "overwrite",
+                "qualified" : "quilt.cpp.types.overwrite"
+            },
+            "archetype_location" : {
+                "kernel" : "quilt.cpp"
+            },
+            "template_kind" : "instance",
+            "untyped_value" : [ "false" ]
+        },
+        {
+            "name" : {
+                "simple" : "overwrite",
+                "qualified" : "quilt.cpp.types.forward_declarations.overwrite"
+            },
+            "archetype_location" : {
+                "kernel" : "quilt.cpp"
+            },
+            "template_kind" : "instance",
+            "untyped_value" : [ "true" ]
+        },
+        {
+            "name" : {
+                "simple" : "enabled",
+                "qualified" : "quilt.cpp.types.class_implementation.enabled"
+            },
+            "archetype_location" : {
+                "kernel" : "quilt.cpp"
+            },
+            "template_kind" : "instance",
+            "untyped_value" : [ "false" ]
+        },
+        {
+            "name" : {
+                "simple" : "formatting_style",
+                "qualified" : "quilt.cpp.types.class_header.formatting_style"
+            },
+            "archetype_location" : {
+                "kernel" : "quilt.cpp"
+            },
+            "template_kind" : "instance",
+            "untyped_value" : [ "wale" ]
+        },
+        {
+            "name" : {
+                "simple" : "formatting_style",
+                "qualified" : "quilt.cpp.types.class_header.formatting_input"
+            },
+            "archetype_location" : {
+                "kernel" : "quilt.cpp"
+            },
+            "template_kind" : "instance",
+            "untyped_value" : [ "helper_formatter_header.wale" ]
+        }
+    ]
+}

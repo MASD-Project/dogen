@@ -106,6 +106,7 @@
 #include "dogen/quilt.cpp/types/formatters/hash/enum_header_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/helper_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/odb/class_header_formatter.hpp"
+#include "dogen/quilt.cpp/types/formatters/types/smart_pointer_helper.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/class_header_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/source_cmakelists_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/enum_header_formatter.hpp"

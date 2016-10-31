@@ -28,7 +28,7 @@
 #include "dogen/quilt.cpp/types/formatters/types/namespace_header_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/visitor_header_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/forward_declarations_formatter.hpp"
-#include "dogen/quilt.cpp/types/formatters/types/smart_pointer_helper_stitch.hpp"
+#include "dogen/quilt.cpp/types/formatters/types/smart_pointer_helper.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/initializer.hpp"
 
 namespace dogen {

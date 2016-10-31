@@ -19,6 +19,7 @@
  *
  */
 #include <boost/throw_exception.hpp>
+#include "dogen/formatters/types/utility_formatter.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/wale/types/workflow.hpp"
 #include "dogen/quilt.cpp/types/formatters/formatting_error.hpp"
@@ -57,21 +58,27 @@ format(const artefact_formatter_interface& stock_formatter, const context& ctx,
         { "class.simple_name", e.name().simple() }
     };
 
-    const auto& n(e.name());
-    const auto qn(a.get_qualified_name(n));
-    auto sbf(a.make_scoped_boilerplate_formatter());
+    dogen::formatters::utility_formatter uf(a.stream());
     {
-        const auto ns(a.make_namespaces(n));
-        auto snf(a.make_scoped_namespace_formatter(ns));
+        const auto& n(e.name());
+        const auto qn(a.get_qualified_name(n));
+        auto sbf(a.make_scoped_boilerplate_formatter());
+        {
+            const auto ns(a.make_namespaces(n));
+            auto snf(a.make_scoped_namespace_formatter(ns));
 
-        const auto fi(a.artefact_properties().formatting_input());
-        if (fi.empty()) {
-            BOOST_LOG_SEV(lg, error) << missing_input;
-            BOOST_THROW_EXCEPTION(formatting_error(missing_input));
+            const auto fi(a.artefact_properties().formatting_input());
+            if (fi.empty()) {
+                BOOST_LOG_SEV(lg, error) << missing_input;
+                BOOST_THROW_EXCEPTION(formatting_error(missing_input));
+            }
+
+            uf.insert_end_line();
+            dogen::wale::workflow w;
+            a.stream() << w.execute(fi, kvps);
+            uf.insert_end_line();
         }
-
-        dogen::wale::workflow w;
-        a.stream() << w.execute(fi, kvps);
+        uf.insert_end_line();
     }
     return a.make_artefact();
 }
