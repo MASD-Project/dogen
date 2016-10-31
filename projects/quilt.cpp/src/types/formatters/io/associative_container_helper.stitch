@@ -3,7 +3,7 @@
 <#@ decoration.modeline_group_name=emacs #>
 <#@ stream_variable_name=a.stream() #>
 <#@ inclusion_dependency="dogen/formatters/types/cpp/scoped_namespace_formatter.hpp" #>
-<#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/io/associative_container_helper_stitch.hpp" #>
+<#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/io/associative_container_helper.hpp" #>
 <#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/assistant.hpp" #>
 <#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/io/traits.hpp" #>
 <#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/types/traits.hpp" #>

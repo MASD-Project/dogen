@@ -22,7 +22,7 @@
 #include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
-#include "dogen/quilt.cpp/types/formatters/io/string_helper_stitch.hpp"
+#include "dogen/quilt.cpp/types/formatters/io/string_helper.hpp"
 
 namespace dogen {
 namespace quilt {

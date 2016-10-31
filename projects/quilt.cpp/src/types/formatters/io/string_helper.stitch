@@ -2,7 +2,7 @@
 <#@ decoration.copyright_notice=Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com> #>
 <#@ decoration.modeline_group_name=emacs #>
 <#@ stream_variable_name=a.stream() #>
-<#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/io/string_helper_stitch.hpp" #>
+<#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/io/string_helper.hpp" #>
 <#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/assistant.hpp" #>
 <#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/io/traits.hpp" #>
 <#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/types/traits.hpp" #>
