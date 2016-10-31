@@ -23,6 +23,7 @@
 #include "dogen/stitch/io/properties_io.hpp"
 #include "dogen/stitch/io/text_template_io.hpp"
 #include "dogen/annotations/io/annotation_io.hpp"
+#include "dogen/annotations/io/scribble_group_io.hpp"
 
 namespace std {
 
@@ -45,6 +46,7 @@ std::ostream& operator<<(std::ostream& s, const text_template& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::stitch::text_template\"" << ", "
       << "\"properties\": " << v.properties() << ", "
+      << "\"scribble_group\": " << v.scribble_group() << ", "
       << "\"annotation\": " << v.annotation() << ", "
       << "\"lines\": " << v.lines()
       << " }";

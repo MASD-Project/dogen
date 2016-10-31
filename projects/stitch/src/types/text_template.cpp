@@ -25,21 +25,25 @@ namespace stitch {
 
 text_template::text_template(
     const dogen::stitch::properties& properties,
+    const dogen::annotations::scribble_group& scribble_group,
     const dogen::annotations::annotation& annotation,
     const std::list<dogen::stitch::line>& lines)
     : properties_(properties),
+      scribble_group_(scribble_group),
       annotation_(annotation),
       lines_(lines) { }
 
 void text_template::swap(text_template& other) noexcept {
     using std::swap;
     swap(properties_, other.properties_);
+    swap(scribble_group_, other.scribble_group_);
     swap(annotation_, other.annotation_);
     swap(lines_, other.lines_);
 }
 
 bool text_template::operator==(const text_template& rhs) const {
     return properties_ == rhs.properties_ &&
+        scribble_group_ == rhs.scribble_group_ &&
         annotation_ == rhs.annotation_ &&
         lines_ == rhs.lines_;
 }
@@ -64,6 +68,22 @@ void text_template::properties(const dogen::stitch::properties& v) {
 
 void text_template::properties(const dogen::stitch::properties&& v) {
     properties_ = std::move(v);
+}
+
+const dogen::annotations::scribble_group& text_template::scribble_group() const {
+    return scribble_group_;
+}
+
+dogen::annotations::scribble_group& text_template::scribble_group() {
+    return scribble_group_;
+}
+
+void text_template::scribble_group(const dogen::annotations::scribble_group& v) {
+    scribble_group_ = v;
+}
+
+void text_template::scribble_group(const dogen::annotations::scribble_group&& v) {
+    scribble_group_ = std::move(v);
 }
 
 const dogen::annotations::annotation& text_template::annotation() const {

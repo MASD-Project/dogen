@@ -32,6 +32,7 @@
 #include "dogen/stitch/serialization/properties_ser.hpp"
 #include "dogen/stitch/serialization/text_template_ser.hpp"
 #include "dogen/annotations/serialization/annotation_ser.hpp"
+#include "dogen/annotations/serialization/scribble_group_ser.hpp"
 
 namespace boost {
 namespace serialization {
@@ -41,6 +42,7 @@ void save(Archive& ar,
     const dogen::stitch::text_template& v,
     const unsigned int /*version*/) {
     ar << make_nvp("properties", v.properties_);
+    ar << make_nvp("scribble_group", v.scribble_group_);
     ar << make_nvp("annotation", v.annotation_);
     ar << make_nvp("lines", v.lines_);
 }
@@ -50,6 +52,7 @@ void load(Archive& ar,
     dogen::stitch::text_template& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("properties", v.properties_);
+    ar >> make_nvp("scribble_group", v.scribble_group_);
     ar >> make_nvp("annotation", v.annotation_);
     ar >> make_nvp("lines", v.lines_);
 }

@@ -22,6 +22,7 @@
 #include "dogen/stitch/hash/properties_hash.hpp"
 #include "dogen/stitch/hash/text_template_hash.hpp"
 #include "dogen/annotations/hash/annotation_hash.hpp"
+#include "dogen/annotations/hash/scribble_group_hash.hpp"
 
 namespace {
 
@@ -48,6 +49,7 @@ std::size_t text_template_hasher::hash(const text_template& v) {
     std::size_t seed(0);
 
     combine(seed, v.properties());
+    combine(seed, v.scribble_group());
     combine(seed, v.annotation());
     combine(seed, hash_std_list_dogen_stitch_line(v.lines()));
 

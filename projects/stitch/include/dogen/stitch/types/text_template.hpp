@@ -30,6 +30,7 @@
 #include "dogen/stitch/types/line.hpp"
 #include "dogen/stitch/types/properties.hpp"
 #include "dogen/annotations/types/annotation.hpp"
+#include "dogen/annotations/types/scribble_group.hpp"
 #include "dogen/stitch/serialization/text_template_fwd_ser.hpp"
 
 namespace dogen {
@@ -45,6 +46,7 @@ public:
 public:
     text_template(
         const dogen::stitch::properties& properties,
+        const dogen::annotations::scribble_group& scribble_group,
         const dogen::annotations::annotation& annotation,
         const std::list<dogen::stitch::line>& lines);
 
@@ -60,6 +62,11 @@ public:
     dogen::stitch::properties& properties();
     void properties(const dogen::stitch::properties& v);
     void properties(const dogen::stitch::properties&& v);
+
+    const dogen::annotations::scribble_group& scribble_group() const;
+    dogen::annotations::scribble_group& scribble_group();
+    void scribble_group(const dogen::annotations::scribble_group& v);
+    void scribble_group(const dogen::annotations::scribble_group&& v);
 
     const dogen::annotations::annotation& annotation() const;
     dogen::annotations::annotation& annotation();
@@ -83,6 +90,7 @@ public:
 
 private:
     dogen::stitch::properties properties_;
+    dogen::annotations::scribble_group scribble_group_;
     dogen::annotations::annotation annotation_;
     std::list<dogen::stitch::line> lines_;
 };
