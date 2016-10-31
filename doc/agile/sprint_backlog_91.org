@@ -14,26 +14,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-31 Mon 22:21]
+#+CAPTION: Clock summary at [2016-10-31 Mon 22:25]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *23:28* |       |      | 100.0 |
+| *Total time*                                                                | *23:30* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 23:28   |       |      | 100.0 |
-| Active                                                                      |         | 23:28 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:14 |   5.3 |
+| Stories                                                                     | 23:30   |       |      | 100.0 |
+| Active                                                                      |         | 23:30 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:14 |   5.2 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:22 |   1.6 |
 | COMPLETED Improve bintray support                                           |         |       | 2:26 |  10.4 |
 | COMPLETED Add logo with white background                                    |         |       | 0:14 |   1.0 |
 | COMPLETED Consider renaming =diagrams= to =input_models=                    |         |       | 0:38 |   2.7 |
 | COMPLETED Add kvp support to annotations                                    |         |       | 0:37 |   2.6 |
 | COMPLETED Implement wale                                                    |         |       | 7:00 |  29.8 |
-| COMPLETED Add artefact source properties support                            |         |       | 3:11 |  13.6 |
+| COMPLETED Add artefact source properties support                            |         |       | 3:11 |  13.5 |
 | COMPLETED Stitch not writing when template has changed                      |         |       | 0:33 |   2.3 |
-| COMPLETED Implement helper headers using wale                               |         |       | 2:40 |  11.4 |
+| COMPLETED Implement helper headers using wale                               |         |       | 2:40 |  11.3 |
 | COMPLETED Implement formatter headers using wale                            |         |       | 0:28 |   2.0 |
-| STARTED Add profile support to stitch                                       |         |       | 3:33 |  15.1 |
+| STARTED Add profile support to stitch                                       |         |       | 3:35 |  15.2 |
 | STARTED Changes to stitch to accommodate wale                               |         |       | 0:32 |   2.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -263,6 +263,8 @@ Tasks:
 - add profile for formatters and update diagram to use it.
 
 *** STARTED Add profile support to stitch                             :story:
+    CLOCK: [2016-10-31 Mon 22:24]--[2016-10-31 Mon 22:25] =>  0:01
+    CLOCK: [2016-10-31 Mon 22:22]--[2016-10-31 Mon 22:23] =>  0:01
     CLOCK: [2016-10-31 Mon 22:16]--[2016-10-31 Mon 22:21] =>  0:05
     CLOCK: [2016-10-31 Mon 21:54]--[2016-10-31 Mon 22:15] =>  0:21
     CLOCK: [2016-10-31 Mon 19:30]--[2016-10-31 Mon 21:53] =>  2:23
