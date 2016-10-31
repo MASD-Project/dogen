@@ -37,7 +37,7 @@ public:
 <#+
             if (v.parent()) {
                 const auto& pn(*v.parent());
-                const auto pqn(a.get_qualified_name(pn));            
+                const auto pqn(a.get_qualified_name(pn));
 #>
     using <#= pqn #>::visit;
 

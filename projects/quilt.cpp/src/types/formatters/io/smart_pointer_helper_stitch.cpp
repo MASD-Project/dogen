@@ -51,8 +51,7 @@ std::list<std::string> smart_pointer_helper::owning_formatters() const {
 
 std::list<std::string> smart_pointer_helper::owning_facets() const {
     static auto r(std::list<std::string> {
-        io::traits::facet(),
-        types::traits::facet()
+        io::traits::facet(), types::traits::facet()
     });
     return r;
 }

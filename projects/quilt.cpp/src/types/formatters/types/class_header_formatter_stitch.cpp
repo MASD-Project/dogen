@@ -119,7 +119,7 @@ a.stream() << std::endl;
             }
 
             /*
-             * Friends
+             * Serialisaton Friends
              */
             if (a.is_serialization_enabled()) {
 a.stream() << "private:" << std::endl;
