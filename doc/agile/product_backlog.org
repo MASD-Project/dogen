@@ -11,6 +11,22 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Do not include algorithm if swap is disabled                      :story:
+
+At present we always include =algorithm= in types' class header - both
+in new and old world. However, it is there for swap, so we should only
+include it if we are going to generate swap. This could be achieved
+with:
+
+: if ((!c.all_properties().empty() || c.is_parent()) && !c.is_immutable()) {
+
+As per stitch template. We should probably add a "is swappable" flag
+at the yarn level for this.
+
+This is a bit more relevant now we are generating wale templates
+because we are including algorithm all over the place on the generated
+templates.
+
 *** Move odb options file into odb folder                             :story:
 
 There is not particularly good reason for this file to exist at the
@@ -984,18 +1000,6 @@ and value types:
 
 And so forth. The only problem with this approach is with simple
 types. If we have a key
-
-*** Do not include algorithm if swap is disabled                      :story:
-
-At present we always include =algorithm= in types' class header - both
-in new and old world. However, it is there for swap, so we should only
-include it if we are going to generate swap. This could be achieved
-with:
-
-: if ((!c.all_properties().empty() || c.is_parent()) && !c.is_immutable()) {
-
-As per stitch template. We should probably add a "is swappable" flag
-at the yarn level for this.
 
 *** Consider changing fields where "qualified name" is not qualified  :story:
 
