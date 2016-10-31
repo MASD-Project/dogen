@@ -2830,7 +2830,7 @@
         <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN yarn.generalization.parent=formatters::artefact_formatter_interface#</dia:string>
+        <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -3682,10 +3682,10 @@
         <dia:string>#include_cmakelists_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#artefact formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN yarn.generalization.parent=formatters::artefact_formatter_interface#</dia:string>
+        <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -3793,10 +3793,10 @@
         <dia:string>#source_cmakelists_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#artefact formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN yarn.generalization.parent=formatters::artefact_formatter_interface#</dia:string>
+        <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -4829,13 +4829,13 @@ facet of the C++ language.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O47">
       <dia:attribute name="obj_pos">
-        <dia:point val="231,243.146"/>
+        <dia:point val="229,243"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="230.95,243.096;237.325,246.196"/>
+        <dia:rectangle val="228.95,242.95;235.325,246.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="231,243.146"/>
+        <dia:point val="229,243"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="6.2750000000000004"/>
@@ -8116,13 +8116,13 @@ main, or from another initialiser.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O79">
       <dia:attribute name="obj_pos">
-        <dia:point val="217,243.146"/>
+        <dia:point val="217,243"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="216.95,243.096;223.325,246.796"/>
+        <dia:rectangle val="216.95,242.95;223.325,246.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="217,243.146"/>
+        <dia:point val="217,243"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="6.2750000000000004"/>
