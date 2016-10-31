@@ -31,10 +31,12 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
+#include "dogen/annotations/types/annotation_groups_factory.hpp"
 #include "dogen/annotations/types/archetype_location_repository.hpp"
 #include "dogen/formatters/types/artefact.hpp"
 #include "dogen/formatters/types/repository.hpp"
 #include "dogen/stitch/types/properties.hpp"
+#include "dogen/stitch/types/properties_factory.hpp"
 #include "dogen/stitch/types/text_template.hpp"
 #include "dogen/stitch/types/formatter.hpp"
 
@@ -52,13 +54,6 @@ typedef boost::error_info<struct tag_file_name, std::string> error_in_file;
 class workflow {
 public:
     workflow();
-
-private:
-    /**
-     * @brief Expands the annotations object.
-     */
-    void perform_expansion(const boost::filesystem::path& p,
-        annotations::annotation& a) const;
 
 private:
     std::vector<boost::filesystem::path> create_data_directories() const;
@@ -87,6 +82,14 @@ private:
         text_template_paths) const;
 
     /**
+     * @brief Computes the output path, given the template path.
+     */
+    boost::filesystem::path
+    compute_output_path(const boost::filesystem::path& template_path,
+        const properties& props) const;
+
+private:
+    /**
      * @brief Reads all of the supplied stitch text templates into memory.
      */
     std::forward_list<std::pair<boost::filesystem::path, std::string> >
@@ -114,23 +117,14 @@ private:
         const;
 
     /**
-     * @brief Parses all of the strings that contain text templates.
+     * @brief Creates the text templates
      */
-    std::forward_list<text_template> parse_text_templates(
-        const std::vector<boost::filesystem::path>& data_dirs,
-        const annotations::archetype_location_repository& alrp,
-        const annotations::type_repository& rp,
-        const std::forward_list<
-        std::pair<boost::filesystem::path, std::string>
-        >& text_templates_as_string) const;
-
-    /**
-     * @brief Creates the properties.
-     */
-    void populate_properties(
-        const annotations::type_repository& annotations_repository,
-        const dogen::formatters::repository& formatters_repository,
-        std::forward_list<text_template>& text_templates) const;
+    std::forward_list<text_template>
+    create_text_templates(
+        const annotations::annotation_groups_factory& af,
+        const properties_factory& pf,
+        const std::forward_list<std::pair<
+        boost::filesystem::path, std::string>>& text_templates_as_string) const;
 
     /**
      * @brief Formats all of the supplied text templates.
@@ -139,9 +133,10 @@ private:
         const std::forward_list<text_template>& text_templates) const;
 
     /**
-     * @brief Writes all of the files into the filesystem.
+     * @brief Writes all of the artefacts to the filesystem.
      */
-    void write_files(const std::forward_list<formatters::artefact>& files) const;
+    void write_artefacts(
+        const std::forward_list<formatters::artefact>& artefacts) const;
 
 public:
     /**

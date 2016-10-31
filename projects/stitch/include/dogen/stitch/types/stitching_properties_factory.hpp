@@ -40,13 +40,12 @@ namespace stitch {
  */
 class stitching_properties_factory {
 public:
+    explicit
     stitching_properties_factory(const annotations::type_repository& arp);
 
 private:
     struct type_group {
         annotations::type stream_variable_name;
-        annotations::type template_path;
-        annotations::type output_path;
         annotations::type relative_output_directory;
         annotations::type inclusion_dependency;
         annotations::type containing_namespaces;
@@ -66,21 +65,9 @@ private:
     extract_stream_variable_name(const annotations::annotation& a) const;
 
     /**
-     * @brief Extracts the template path.
-     */
-    boost::optional<boost::filesystem::path>
-    extract_template_path(const annotations::annotation& a) const;
-
-    /**
-     * @brief Extracts the file path.
-     */
-    boost::optional<boost::filesystem::path>
-    extract_output_path(const annotations::annotation& a) const;
-
-    /**
      * @brief Extracts the relative output directory.
      */
-    boost::optional<boost::filesystem::path>
+    boost::filesystem::path
     extract_relative_output_directory(const annotations::annotation& a) const;
 
     /**

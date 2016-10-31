@@ -23,28 +23,39 @@
 namespace dogen {
 namespace stitch {
 
+text_template::text_template(text_template&& rhs)
+    : template_path_(std::move(rhs.template_path_)),
+      output_path_(std::move(rhs.output_path_)),
+      scribble_group_(std::move(rhs.scribble_group_)),
+      properties_(std::move(rhs.properties_)),
+      lines_(std::move(rhs.lines_)) { }
+
 text_template::text_template(
-    const dogen::stitch::properties& properties,
+    const boost::filesystem::path& template_path,
+    const boost::filesystem::path& output_path,
     const dogen::annotations::scribble_group& scribble_group,
-    const dogen::annotations::annotation& annotation,
+    const dogen::stitch::properties& properties,
     const std::list<dogen::stitch::line>& lines)
-    : properties_(properties),
+    : template_path_(template_path),
+      output_path_(output_path),
       scribble_group_(scribble_group),
-      annotation_(annotation),
+      properties_(properties),
       lines_(lines) { }
 
 void text_template::swap(text_template& other) noexcept {
     using std::swap;
-    swap(properties_, other.properties_);
+    swap(template_path_, other.template_path_);
+    swap(output_path_, other.output_path_);
     swap(scribble_group_, other.scribble_group_);
-    swap(annotation_, other.annotation_);
+    swap(properties_, other.properties_);
     swap(lines_, other.lines_);
 }
 
 bool text_template::operator==(const text_template& rhs) const {
-    return properties_ == rhs.properties_ &&
+    return template_path_ == rhs.template_path_ &&
+        output_path_ == rhs.output_path_ &&
         scribble_group_ == rhs.scribble_group_ &&
-        annotation_ == rhs.annotation_ &&
+        properties_ == rhs.properties_ &&
         lines_ == rhs.lines_;
 }
 
@@ -54,20 +65,36 @@ text_template& text_template::operator=(text_template other) {
     return *this;
 }
 
-const dogen::stitch::properties& text_template::properties() const {
-    return properties_;
+const boost::filesystem::path& text_template::template_path() const {
+    return template_path_;
 }
 
-dogen::stitch::properties& text_template::properties() {
-    return properties_;
+boost::filesystem::path& text_template::template_path() {
+    return template_path_;
 }
 
-void text_template::properties(const dogen::stitch::properties& v) {
-    properties_ = v;
+void text_template::template_path(const boost::filesystem::path& v) {
+    template_path_ = v;
 }
 
-void text_template::properties(const dogen::stitch::properties&& v) {
-    properties_ = std::move(v);
+void text_template::template_path(const boost::filesystem::path&& v) {
+    template_path_ = std::move(v);
+}
+
+const boost::filesystem::path& text_template::output_path() const {
+    return output_path_;
+}
+
+boost::filesystem::path& text_template::output_path() {
+    return output_path_;
+}
+
+void text_template::output_path(const boost::filesystem::path& v) {
+    output_path_ = v;
+}
+
+void text_template::output_path(const boost::filesystem::path&& v) {
+    output_path_ = std::move(v);
 }
 
 const dogen::annotations::scribble_group& text_template::scribble_group() const {
@@ -86,20 +113,20 @@ void text_template::scribble_group(const dogen::annotations::scribble_group&& v)
     scribble_group_ = std::move(v);
 }
 
-const dogen::annotations::annotation& text_template::annotation() const {
-    return annotation_;
+const dogen::stitch::properties& text_template::properties() const {
+    return properties_;
 }
 
-dogen::annotations::annotation& text_template::annotation() {
-    return annotation_;
+dogen::stitch::properties& text_template::properties() {
+    return properties_;
 }
 
-void text_template::annotation(const dogen::annotations::annotation& v) {
-    annotation_ = v;
+void text_template::properties(const dogen::stitch::properties& v) {
+    properties_ = v;
 }
 
-void text_template::annotation(const dogen::annotations::annotation&& v) {
-    annotation_ = std::move(v);
+void text_template::properties(const dogen::stitch::properties&& v) {
+    properties_ = std::move(v);
 }
 
 const std::list<dogen::stitch::line>& text_template::lines() const {

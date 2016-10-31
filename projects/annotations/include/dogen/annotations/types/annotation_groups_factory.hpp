@@ -129,12 +129,20 @@ private:
         annotation>& profiles, const std::vector<std::string>& candidate_labels,
         const annotation& original) const;
 
-public:
     /**
      * @brief Produce the annotations object.
      */
     annotation make(const scribble& scribble) const;
 
+public:
+    /**
+     * @brief Produce an annotations group for a given scribble group.
+     */
+    annotation_group make(const scribble_group& sgrp) const;
+
+    /**
+     * @brief Produce the annotations group for all scribble groups.
+     */
     std::unordered_map<std::string, annotation_group>
     make(const std::unordered_map<std::string, scribble_group>&
         scribble_groups) const;
@@ -144,6 +152,8 @@ private:
     const archetype_location_repository& archetype_location_repository_;
     const type_repository& type_repository_;
     const bool throw_on_missing_type_;
+    const std::unordered_map<std::string, annotation> profiles_;
+    const type_group type_group_;
 };
 
 } }

@@ -28,11 +28,34 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
+#include "dogen/utility/serialization/path.hpp"
 #include "dogen/stitch/serialization/line_ser.hpp"
 #include "dogen/stitch/serialization/properties_ser.hpp"
 #include "dogen/stitch/serialization/text_template_ser.hpp"
-#include "dogen/annotations/serialization/annotation_ser.hpp"
 #include "dogen/annotations/serialization/scribble_group_ser.hpp"
+
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+inline void save(Archive& ar,
+    const boost::filesystem::path& p,
+    const unsigned int /*version*/) {
+    std::string s;
+    s = p.generic_string();
+    ar & boost::serialization::make_nvp("path", s);
+}
+
+template<typename Archive>
+inline void load(Archive& ar,
+    boost::filesystem::path& p,
+    const unsigned int /*version*/) {
+    std::string s;
+    ar & boost::serialization::make_nvp("path", s);
+    p = s;
+}
+
+} }
 
 namespace boost {
 namespace serialization {
@@ -41,9 +64,10 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::stitch::text_template& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("properties", v.properties_);
+    ar << make_nvp("template_path", v.template_path_);
+    ar << make_nvp("output_path", v.output_path_);
     ar << make_nvp("scribble_group", v.scribble_group_);
-    ar << make_nvp("annotation", v.annotation_);
+    ar << make_nvp("properties", v.properties_);
     ar << make_nvp("lines", v.lines_);
 }
 
@@ -51,9 +75,10 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::stitch::text_template& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("properties", v.properties_);
+    ar >> make_nvp("template_path", v.template_path_);
+    ar >> make_nvp("output_path", v.output_path_);
     ar >> make_nvp("scribble_group", v.scribble_group_);
-    ar >> make_nvp("annotation", v.annotation_);
+    ar >> make_nvp("properties", v.properties_);
     ar >> make_nvp("lines", v.lines_);
 }
 

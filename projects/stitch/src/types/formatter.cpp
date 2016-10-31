@@ -172,8 +172,8 @@ dogen::formatters::artefact formatter::format(const text_template& tt) const {
     dogen::formatters::artefact r;
     r.overwrite(true);
     r.content(s.str());
-    if (tt.properties().stitching_properties().output_path())
-        r.path(*tt.properties().stitching_properties().output_path());
+    if (!tt.output_path().empty())
+        r.path(tt.output_path());
 
     BOOST_LOG_SEV(lg, debug) << "Formatted template.";
 

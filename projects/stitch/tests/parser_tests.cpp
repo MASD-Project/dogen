@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <algorithm>
 #include <boost/test/unit_test.hpp>
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/filesystem/path.hpp"
@@ -25,7 +26,6 @@
 #include "dogen/utility/test/exception_checkers.hpp"
 #include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
-#include "dogen/annotations/test/mock_type_repository_factory.hpp"
 #include "dogen/stitch/io/text_template_io.hpp"
 #include "dogen/stitch/types/parsing_error.hpp"
 #include "dogen/stitch/types/parser.hpp"
@@ -144,16 +144,15 @@ const std::string invalid_characters("Invalid characters used");
 
 dogen::stitch::text_template
 parse(const std::string& s) {
-    dogen::annotations::test::mock_type_repository_factory rf;
-    const auto atrp(rf.make());
-    const bool throw_on_missing_field_definition(false);
-    dogen::annotations::archetype_location_repository alrp;
-    using namespace dogen::utility::filesystem;
-    std::vector<boost::filesystem::path> data_dirs({ data_files_directory() });
-    dogen::annotations::annotation_groups_factory
-        f(data_dirs, alrp, atrp, throw_on_missing_field_definition);
-    const dogen::stitch::parser p(f);
+    dogen::stitch::parser p;
     return p.parse(s);
+}
+
+bool find_kvp(const std::list<std::pair<std::string, std::string>>& kvps,
+    const std::string& key, const std::string& value) {
+    const auto pair(std::make_pair(key, value));
+    const auto i(std::find(kvps.begin(), kvps.end(), pair));
+    return i != kvps.end();
 }
 
 }
@@ -366,9 +365,9 @@ BOOST_AUTO_TEST_CASE(licence_directive_results_in_expected_template) {
     BOOST_LOG_SEV(lg, debug) << "Result: " << tt;
 
     BOOST_CHECK(tt.lines().empty());
-    BOOST_REQUIRE(tt.annotation().entries().size() == 1);
-    dogen::annotations::entry_selector s(tt.annotation());
-    BOOST_CHECK(s.get_text_content(licence_name) == licence_value);
+    const auto& entries(tt.scribble_group().parent().entries());
+    BOOST_REQUIRE(entries.size() == 1);
+    BOOST_CHECK(find_kvp(entries, licence_name, licence_value));
 }
 
 BOOST_AUTO_TEST_CASE(multiple_directives_results_in_expected_template) {
@@ -377,11 +376,11 @@ BOOST_AUTO_TEST_CASE(multiple_directives_results_in_expected_template) {
     BOOST_LOG_SEV(lg, debug) << "Result: " << tt;
 
     BOOST_CHECK(tt.lines().empty());
-    BOOST_REQUIRE(tt.annotation().entries().size() == 2);
-    dogen::annotations::entry_selector fs(tt.annotation());
-    BOOST_CHECK(fs.get_text_content(licence_name) == licence_value);
-    BOOST_CHECK(
-        fs.get_text_content(copyright_notice_name) == copyright_notice_value);
+    const auto& entries(tt.scribble_group().parent().entries());
+    BOOST_REQUIRE(entries.size() == 2);
+    BOOST_CHECK(find_kvp(entries, licence_name, licence_value));
+    BOOST_CHECK(find_kvp(entries, copyright_notice_name,
+            copyright_notice_value));
 }
 
 BOOST_AUTO_TEST_CASE(invalid_directive_throws) {
@@ -537,9 +536,9 @@ BOOST_AUTO_TEST_CASE(namespaces_directive_results_in_expected_template) {
     BOOST_LOG_SEV(lg, debug) << "Result: " << tt;
 
     BOOST_CHECK(tt.lines().empty());
-    BOOST_REQUIRE(tt.annotation().entries().size() == 1);
-    dogen::annotations::entry_selector fs(tt.annotation());
-    BOOST_CHECK(fs.get_text_content(namespaces_name) == namespaces_value);
+    const auto& entries(tt.scribble_group().parent().entries());
+    BOOST_REQUIRE(entries.size() == 1);
+    BOOST_CHECK(find_kvp(entries, namespaces_name, namespaces_value));
 }
 
 BOOST_AUTO_TEST_SUITE_END()

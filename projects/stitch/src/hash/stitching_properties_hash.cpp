@@ -34,16 +34,6 @@ inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) 
     return seed;
 }
 
-inline std::size_t hash_boost_optional_boost_filesystem_path(const boost::optional<boost::filesystem::path>& v) {
-    std::size_t seed(0);
-
-    if (!v)
-        return seed;
-
-    combine(seed, hash_boost_filesystem_path(*v));
-    return seed;
-}
-
 inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
@@ -61,9 +51,7 @@ std::size_t stitching_properties_hasher::hash(const stitching_properties& v) {
     std::size_t seed(0);
 
     combine(seed, v.stream_variable_name());
-    combine(seed, hash_boost_optional_boost_filesystem_path(v.template_path()));
-    combine(seed, hash_boost_optional_boost_filesystem_path(v.output_path()));
-    combine(seed, hash_boost_optional_boost_filesystem_path(v.relative_output_directory()));
+    combine(seed, hash_boost_filesystem_path(v.relative_output_directory()));
     combine(seed, hash_std_list_std_string(v.inclusion_dependencies()));
     combine(seed, hash_std_list_std_string(v.containing_namespaces()));
 

@@ -44,16 +44,6 @@ struct traits {
     static std::string stream_variable_name();
 
     /**
-     * @brief Path to the stitch template.
-     */
-    static std::string template_path();
-
-    /**
-     * @brief Path to the output of stitch.
-     */
-    static std::string output_path();
-
-    /**
      * @brief Relative path to the directory in which to place the
      * output, if any.
      */

@@ -21,7 +21,6 @@
 #include "dogen/stitch/hash/line_hash.hpp"
 #include "dogen/stitch/hash/properties_hash.hpp"
 #include "dogen/stitch/hash/text_template_hash.hpp"
-#include "dogen/annotations/hash/annotation_hash.hpp"
 #include "dogen/annotations/hash/scribble_group_hash.hpp"
 
 namespace {
@@ -30,6 +29,12 @@ template <typename HashableType>
 inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) {
+    std::size_t seed(0);
+    combine(seed, v.generic_string());
+    return seed;
 }
 
 inline std::size_t hash_std_list_dogen_stitch_line(const std::list<dogen::stitch::line>& v) {
@@ -48,9 +53,10 @@ namespace stitch {
 std::size_t text_template_hasher::hash(const text_template& v) {
     std::size_t seed(0);
 
-    combine(seed, v.properties());
+    combine(seed, hash_boost_filesystem_path(v.template_path()));
+    combine(seed, hash_boost_filesystem_path(v.output_path()));
     combine(seed, v.scribble_group());
-    combine(seed, v.annotation());
+    combine(seed, v.properties());
     combine(seed, hash_std_list_dogen_stitch_line(v.lines()));
 
     return seed;

@@ -21,10 +21,10 @@
 #include <boost/filesystem/operations.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/annotations/io/annotation_io.hpp"
-#include "dogen/annotations/types/value_factory.hpp"
 #include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/stitch/types/traits.hpp"
 #include "dogen/stitch/types/expander.hpp"
+#include "dogen/annotations/types/annotation_groups_factory.hpp"
 
 namespace {
 
@@ -38,42 +38,60 @@ const std::string stitch_postfix("_stitch.cpp");
 namespace dogen {
 namespace stitch {
 
-void expander::expand(
+annotations::annotation_group expander::create_annotation_group(
+    const annotations::annotation_groups_factory& factory,
+    const text_template& tt) const {
+    const auto& sgrp(tt.scribble_group());
+    return factory.make(sgrp);
+}
+
+properties expander::create_properties(
+    const annotations::type_repository& annotations_repository,
+    const dogen::formatters::repository& formatters_repository,
+    const annotations::annotation& a) const {
+    properties_factory f(annotations_repository, formatters_repository);
+    return f.make(a);
+}
+
+boost::filesystem::path expander::compute_output_path(
     const boost::optional<boost::filesystem::path>& template_path,
-    annotations::annotation& a) const {
+    const annotations::annotation& a) const {
 
-    BOOST_LOG_SEV(lg, debug) << "Before expansion: " << a;
-
-    if (!template_path) {
-        BOOST_LOG_SEV(lg, debug)
-            << "No template path supplied so not performing expansion";
-        return;
-    }
-
-    BOOST_LOG_SEV(lg, debug) << "Template path: "
-                             << template_path->generic_string();
-
-    std::string output_filename(template_path->stem().generic_string());
-    output_filename += stitch_postfix;
-
+    boost::filesystem::path r;
     const annotations::entry_selector s(a);
-    boost::filesystem::path absolute_output_directory;
     if (s.has_entry(traits::relative_output_directory())) {
         const auto tc(s.get_text_content(traits::relative_output_directory()));
         using namespace boost::filesystem;
         path rel_dir(tc);
-        absolute_output_directory = absolute(rel_dir,
-            template_path->parent_path());
+        r = absolute(rel_dir, template_path->parent_path());
     } else
-        absolute_output_directory = template_path->parent_path();
+        r = template_path->parent_path();
 
-    absolute_output_directory /= output_filename;
+    std::string output_filename(template_path->stem().generic_string());
+    output_filename += stitch_postfix;
+    r /= output_filename;
 
-    const auto f = annotations::value_factory();
-    const auto v(f.make_text(absolute_output_directory.generic_string()));
-    a.entries()[traits::output_path()] = v;
+    return r;
+}
 
-    BOOST_LOG_SEV(lg, debug) << "After expansion: " << a;
+void expander::
+expand(const boost::optional<boost::filesystem::path>& template_path,
+        const annotations::type_repository& atrp,
+        const dogen::formatters::repository& frp,
+        const annotations::annotation_groups_factory& factory,
+        text_template& tt) const {
+
+    const auto ag(create_annotation_group(factory, tt));
+    const auto& a(ag.parent());
+
+    tt.properties(create_properties(atrp, frp, a));
+
+    if (template_path) {
+        tt.output_path(compute_output_path(template_path, a));
+        BOOST_LOG_SEV(lg, debug) << "Output path: "
+                                 << tt.output_path().generic_string();
+    } else
+        BOOST_LOG_SEV(lg, debug) << "No template path, not setting output path";
 }
 
 } }

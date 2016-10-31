@@ -25,7 +25,6 @@
 #include <boost/serialization/string.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
-#include <boost/serialization/optional.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
@@ -64,8 +63,6 @@ void save(Archive& ar,
     const dogen::stitch::stitching_properties& v,
     const unsigned int /*version*/) {
     ar << make_nvp("stream_variable_name", v.stream_variable_name_);
-    ar << make_nvp("template_path", v.template_path_);
-    ar << make_nvp("output_path", v.output_path_);
     ar << make_nvp("relative_output_directory", v.relative_output_directory_);
     ar << make_nvp("inclusion_dependencies", v.inclusion_dependencies_);
     ar << make_nvp("containing_namespaces", v.containing_namespaces_);
@@ -76,8 +73,6 @@ void load(Archive& ar,
     dogen::stitch::stitching_properties& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("stream_variable_name", v.stream_variable_name_);
-    ar >> make_nvp("template_path", v.template_path_);
-    ar >> make_nvp("output_path", v.output_path_);
     ar >> make_nvp("relative_output_directory", v.relative_output_directory_);
     ar >> make_nvp("inclusion_dependencies", v.inclusion_dependencies_);
     ar >> make_nvp("containing_namespaces", v.containing_namespaces_);

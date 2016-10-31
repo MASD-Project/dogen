@@ -25,22 +25,16 @@ namespace stitch {
 
 stitching_properties::stitching_properties(stitching_properties&& rhs)
     : stream_variable_name_(std::move(rhs.stream_variable_name_)),
-      template_path_(std::move(rhs.template_path_)),
-      output_path_(std::move(rhs.output_path_)),
       relative_output_directory_(std::move(rhs.relative_output_directory_)),
       inclusion_dependencies_(std::move(rhs.inclusion_dependencies_)),
       containing_namespaces_(std::move(rhs.containing_namespaces_)) { }
 
 stitching_properties::stitching_properties(
     const std::string& stream_variable_name,
-    const boost::optional<boost::filesystem::path>& template_path,
-    const boost::optional<boost::filesystem::path>& output_path,
-    const boost::optional<boost::filesystem::path>& relative_output_directory,
+    const boost::filesystem::path& relative_output_directory,
     const std::list<std::string>& inclusion_dependencies,
     const std::list<std::string>& containing_namespaces)
     : stream_variable_name_(stream_variable_name),
-      template_path_(template_path),
-      output_path_(output_path),
       relative_output_directory_(relative_output_directory),
       inclusion_dependencies_(inclusion_dependencies),
       containing_namespaces_(containing_namespaces) { }
@@ -48,8 +42,6 @@ stitching_properties::stitching_properties(
 void stitching_properties::swap(stitching_properties& other) noexcept {
     using std::swap;
     swap(stream_variable_name_, other.stream_variable_name_);
-    swap(template_path_, other.template_path_);
-    swap(output_path_, other.output_path_);
     swap(relative_output_directory_, other.relative_output_directory_);
     swap(inclusion_dependencies_, other.inclusion_dependencies_);
     swap(containing_namespaces_, other.containing_namespaces_);
@@ -57,8 +49,6 @@ void stitching_properties::swap(stitching_properties& other) noexcept {
 
 bool stitching_properties::operator==(const stitching_properties& rhs) const {
     return stream_variable_name_ == rhs.stream_variable_name_ &&
-        template_path_ == rhs.template_path_ &&
-        output_path_ == rhs.output_path_ &&
         relative_output_directory_ == rhs.relative_output_directory_ &&
         inclusion_dependencies_ == rhs.inclusion_dependencies_ &&
         containing_namespaces_ == rhs.containing_namespaces_;
@@ -86,51 +76,19 @@ void stitching_properties::stream_variable_name(const std::string&& v) {
     stream_variable_name_ = std::move(v);
 }
 
-const boost::optional<boost::filesystem::path>& stitching_properties::template_path() const {
-    return template_path_;
-}
-
-boost::optional<boost::filesystem::path>& stitching_properties::template_path() {
-    return template_path_;
-}
-
-void stitching_properties::template_path(const boost::optional<boost::filesystem::path>& v) {
-    template_path_ = v;
-}
-
-void stitching_properties::template_path(const boost::optional<boost::filesystem::path>&& v) {
-    template_path_ = std::move(v);
-}
-
-const boost::optional<boost::filesystem::path>& stitching_properties::output_path() const {
-    return output_path_;
-}
-
-boost::optional<boost::filesystem::path>& stitching_properties::output_path() {
-    return output_path_;
-}
-
-void stitching_properties::output_path(const boost::optional<boost::filesystem::path>& v) {
-    output_path_ = v;
-}
-
-void stitching_properties::output_path(const boost::optional<boost::filesystem::path>&& v) {
-    output_path_ = std::move(v);
-}
-
-const boost::optional<boost::filesystem::path>& stitching_properties::relative_output_directory() const {
+const boost::filesystem::path& stitching_properties::relative_output_directory() const {
     return relative_output_directory_;
 }
 
-boost::optional<boost::filesystem::path>& stitching_properties::relative_output_directory() {
+boost::filesystem::path& stitching_properties::relative_output_directory() {
     return relative_output_directory_;
 }
 
-void stitching_properties::relative_output_directory(const boost::optional<boost::filesystem::path>& v) {
+void stitching_properties::relative_output_directory(const boost::filesystem::path& v) {
     relative_output_directory_ = v;
 }
 
-void stitching_properties::relative_output_directory(const boost::optional<boost::filesystem::path>&& v) {
+void stitching_properties::relative_output_directory(const boost::filesystem::path&& v) {
     relative_output_directory_ = std::move(v);
 }
 

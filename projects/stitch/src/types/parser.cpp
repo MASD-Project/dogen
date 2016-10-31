@@ -30,6 +30,7 @@
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/annotations/types/scribble_group.hpp"
 #include "dogen/stitch/io/line_io.hpp"
 #include "dogen/stitch/types/parsing_error.hpp"
 #include "dogen/stitch/io/text_template_io.hpp"
@@ -75,9 +76,6 @@ const bool do_trim(true);
 
 namespace dogen {
 namespace stitch {
-
-parser::parser(const annotations::annotation_groups_factory& f)
-    : annotation_factory_(f) {}
 
 block parser::create_block(const block_types bt, const std::string& c,
     const bool trim) const {
@@ -344,11 +342,11 @@ text_template parser::parse(const std::string& s) const {
     r.lines(lines);
 
     if (!kvps.empty()) {
-        annotations::scribble s;
+        annotations::scribble_group sgrp;
         using annotations::scope_types;
-        s.scope(scope_types::root_module);
-        s.entries(kvps);
-        r.annotation(annotation_factory_.make(s));
+        sgrp.parent().scope(scope_types::root_module);
+        sgrp.parent().entries(kvps);
+        r.scribble_group(sgrp);
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished parsing.";

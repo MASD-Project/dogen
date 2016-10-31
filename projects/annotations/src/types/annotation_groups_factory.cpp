@@ -69,7 +69,9 @@ annotation_groups_factory(
     const archetype_location_repository& alrp,
     const type_repository& trp, const bool throw_on_missing_type)
     : data_dirs_(data_dirs), archetype_location_repository_(alrp),
-      type_repository_(trp), throw_on_missing_type_(throw_on_missing_type) { }
+      type_repository_(trp), throw_on_missing_type_(throw_on_missing_type),
+      profiles_(create_annotation_profiles()),
+      type_group_(make_type_group()) { }
 
 inline std::ostream&
 operator<<(std::ostream& s, const annotation_groups_factory::type_group& v) {
@@ -205,7 +207,7 @@ handle_profiles(const type_group& tg, const std::unordered_map<std::string,
     annotation>& profiles, const std::vector<std::string>& candidate_labels,
     const annotation& original) const {
 
-    BOOST_LOG_SEV(lg, error) << "Started handling profiles. Original: "
+    BOOST_LOG_SEV(lg, debug) << "Started handling profiles. Original: "
                              << original;
 
     /*
@@ -290,43 +292,45 @@ make(const scribble& scribble) const {
     return r;
 }
 
+annotation_group
+annotation_groups_factory::make(const scribble_group& sgrp) const {
+    /*
+     * First we generate the main annotation off of the scribble's
+     * parent.
+     */
+    const auto parent(make(sgrp.parent()));
+
+    /*
+     * Then we augment the annotation with a profile, if it is so
+     * configured.
+     */
+    const auto& cl(sgrp.parent().candidate_labels());
+
+    annotation_group r;
+    r.parent(handle_profiles(type_group_, profiles_, cl, parent));
+
+    /*
+     * Finally we obtain annotations for all the scribble's
+     * children.
+     */
+    for (const auto& pair : sgrp.children()) {
+        const auto child_id(pair.first);
+        const auto& child(pair.second);
+        r.children()[child_id] = make(child);
+    }
+    return r;
+}
+
 std::unordered_map<std::string, annotation_group> annotation_groups_factory::
 make(const std::unordered_map<std::string, scribble_group>&
     scribble_groups) const {
 
-    const auto profiles(create_annotation_profiles());
-    const auto tg(make_type_group());
-
     std::unordered_map<std::string, annotation_group> r;
     for (const auto& pair : scribble_groups) {
-        /*
-         * First we generate the main annotation off of the scribble's
-         * parent.
-         */
         const auto id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Processing scribble group: " << id;
-
         const auto& sgrp(pair.second);
-        const auto parent(make(sgrp.parent()));
-
-        /*
-         * Then we augment the annotation with a profile, if it is so
-         * configured.
-         */
-        const auto& cl(sgrp.parent().candidate_labels());
-
-        annotation_group ag;
-        ag.parent(handle_profiles(tg, profiles, cl, parent));
-
-        /*
-         * Finally we obtain annotations for all the scribble's
-         * children.
-         */
-        for (const auto& pair : sgrp.children()) {
-            const auto child_id(pair.first);
-            const auto& child(pair.second);
-            ag.children()[child_id] = make(child);
-        }
+        const auto ag(make(sgrp));
         r[id] = ag;
     }
     return r;

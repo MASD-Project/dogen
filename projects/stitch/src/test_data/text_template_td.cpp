@@ -18,17 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
 #include "dogen/stitch/test_data/line_td.hpp"
 #include "dogen/stitch/test_data/properties_td.hpp"
 #include "dogen/stitch/test_data/text_template_td.hpp"
-#include "dogen/annotations/test_data/annotation_td.hpp"
 #include "dogen/annotations/test_data/scribble_group_td.hpp"
 
 namespace {
 
-dogen::stitch::properties
-create_dogen_stitch_properties(const unsigned int position) {
-    return dogen::stitch::properties_generator::create(position);
+boost::filesystem::path
+create_boost_filesystem_path(const unsigned int position) {
+    std::ostringstream s;
+    s << "/a/path/number_" << position;
+    return boost::filesystem::path(s.str());
 }
 
 dogen::annotations::scribble_group
@@ -36,9 +38,9 @@ create_dogen_annotations_scribble_group(const unsigned int position) {
     return dogen::annotations::scribble_group_generator::create(position);
 }
 
-dogen::annotations::annotation
-create_dogen_annotations_annotation(const unsigned int position) {
-    return dogen::annotations::annotation_generator::create(position);
+dogen::stitch::properties
+create_dogen_stitch_properties(const unsigned int position) {
+    return dogen::stitch::properties_generator::create(position);
 }
 
 dogen::stitch::line
@@ -63,10 +65,11 @@ text_template_generator::text_template_generator() : position_(0) { }
 
 void text_template_generator::
 populate(const unsigned int position, result_type& v) {
-    v.properties(create_dogen_stitch_properties(position + 0));
-    v.scribble_group(create_dogen_annotations_scribble_group(position + 1));
-    v.annotation(create_dogen_annotations_annotation(position + 2));
-    v.lines(create_std_list_dogen_stitch_line(position + 3));
+    v.template_path(create_boost_filesystem_path(position + 0));
+    v.output_path(create_boost_filesystem_path(position + 1));
+    v.scribble_group(create_dogen_annotations_scribble_group(position + 2));
+    v.properties(create_dogen_stitch_properties(position + 3));
+    v.lines(create_std_list_dogen_stitch_line(position + 4));
 }
 
 text_template_generator::result_type

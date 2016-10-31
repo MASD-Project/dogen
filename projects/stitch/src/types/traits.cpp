@@ -33,16 +33,6 @@ std::string traits::stream_variable_name() {
     return r;
 }
 
-std::string traits::template_path() {
-    static std::string r("template_path");
-    return r;
-}
-
-std::string traits::output_path() {
-    static std::string r("output_path");
-    return r;
-}
-
 std::string traits::relative_output_directory() {
     static std::string r("relative_output_directory");
     return r;

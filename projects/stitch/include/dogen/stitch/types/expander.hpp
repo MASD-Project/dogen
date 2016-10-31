@@ -27,7 +27,10 @@
 
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
-#include "dogen/annotations/types/annotation.hpp"
+#include "dogen/stitch/types/text_template.hpp"
+#include "dogen/annotations/types/annotation_group.hpp"
+#include "dogen/annotations/types/annotation_groups_factory.hpp"
+#include "dogen/stitch/types/properties_factory.hpp"
 
 namespace dogen {
 namespace stitch {
@@ -36,12 +39,28 @@ namespace stitch {
  * @brief Expands the annotations extensions of the supplied object.
  */
 class expander {
+    annotations::annotation_group create_annotation_group(
+        const annotations::annotation_groups_factory& factory,
+        const text_template& tt) const;
+
+    properties create_properties(
+        const annotations::type_repository& annotations_repository,
+        const dogen::formatters::repository& formatters_repository,
+        const annotations::annotation& a) const;
+
+    boost::filesystem::path compute_output_path(
+        const boost::optional<boost::filesystem::path>& template_path,
+        const annotations::annotation& a) const;
+
 public:
     /**
      * @brief Execute the expansion.
      */
     void expand(const boost::optional<boost::filesystem::path>& template_path,
-        annotations::annotation& a) const;
+        const annotations::type_repository& atrp,
+        const dogen::formatters::repository& frp,
+        const annotations::annotation_groups_factory& factory,
+        text_template& tt) const;
 };
 
 } }

@@ -14,30 +14,6 @@
     },
     {
         "name" : {
-            "simple" : "template_path",
-            "qualified" : "template_path"
-        },
-        "archetype_location" : {
-            "kernel" : "stitch"
-        },
-        "value_type" : "text",
-        "template_kind" : "instance",
-        "scope" : "root_module"
-    },
-    {
-        "name" : {
-            "simple" : "output_path",
-            "qualified" : "output_path"
-        },
-        "archetype_location" : {
-            "kernel" : "stitch"
-        },
-        "value_type" : "text",
-        "template_kind" : "instance",
-        "scope" : "root_module"
-    },
-    {
-        "name" : {
             "simple" : "relative_output_directory",
             "qualified" : "relative_output_directory"
         },

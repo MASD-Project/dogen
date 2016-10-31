@@ -31,6 +31,7 @@
 #include "dogen/annotations/io/annotation_io.hpp"
 #include "dogen/annotations/types/profile_hydrator.hpp"
 #include "dogen/annotations/types/profiling_error.hpp"
+#include "dogen/annotations/types/instantiation_error.hpp"
 #include "dogen/annotations/types/template_instantiator.hpp"
 #include "dogen/annotations/types/merger.hpp"
 #include "dogen/annotations/types/profiler.hpp"
@@ -179,15 +180,34 @@ void profiler::setup_annotations(const archetype_location_repository& alrp,
     template_instantiator ti(alrp);
     for (auto& pair : pm) {
         const auto prfn(pair.first);
+        BOOST_LOG_SEV(lg, debug) << "Instantiating templates for profile: "
+                                 << prfn;
+
         auto& pc(pair.second);
         pc.annotation().scope(scope_types::not_applicable);
         for (const auto& tpl : pc.profile().templates()) {
-            const auto entries(ti.instantiate(trp, tpl));
-            for (const auto& entry : entries)
-                pc.annotation().entries().insert(entry);
+            try {
+                const auto entries(ti.instantiate(trp, tpl));
+                for (const auto& entry : entries)
+                    pc.annotation().entries().insert(entry);
 
-            BOOST_LOG_SEV(lg, debug) << "Instantiated template: "
-                                     << prfn << " Result: " << pc.annotation();
+                BOOST_LOG_SEV(lg, debug) << "Instantiated template: "
+                                         << tpl.name().qualified()
+                                         << " Result: " << pc.annotation();
+            } catch (const instantiation_error& e) {
+                /*
+                 * Note: we are skipping profiles that fail with
+                 * instantiation errors. This is because its not
+                 * always the case that all profiles are instantiable;
+                 * for example, a profile for knitter may not work for
+                 * stitch, because its missing all of the
+                 * formatters. This is not a very elegant solution,
+                 * but it will do until we think of something better.
+                 */
+                BOOST_LOG_SEV(lg, error) << "Error instantiating profile: "
+                                         << prfn << ". Message: " << e.what()
+                                         << ". Skipping profile.";
+            }
         }
     }
     BOOST_LOG_SEV(lg, debug) << "Instanted value templates.";

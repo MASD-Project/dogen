@@ -29,21 +29,6 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace boost {
-
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<boost::filesystem::path>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << "\"" << (*v).generic_string() << "\"";
-    else
-        s << "\"data\": ""\"<empty>\"";
-    s << " }";
-    return s;
-}
-
-}
-
 namespace std {
 
 inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
@@ -65,9 +50,7 @@ std::ostream& operator<<(std::ostream& s, const stitching_properties& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::stitch::stitching_properties\"" << ", "
       << "\"stream_variable_name\": " << "\"" << tidy_up_string(v.stream_variable_name()) << "\"" << ", "
-      << "\"template_path\": " << v.template_path() << ", "
-      << "\"output_path\": " << v.output_path() << ", "
-      << "\"relative_output_directory\": " << v.relative_output_directory() << ", "
+      << "\"relative_output_directory\": " << "\"" << v.relative_output_directory().generic_string() << "\"" << ", "
       << "\"inclusion_dependencies\": " << v.inclusion_dependencies() << ", "
       << "\"containing_namespaces\": " << v.containing_namespaces()
       << " }";

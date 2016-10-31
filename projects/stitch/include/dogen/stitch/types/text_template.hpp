@@ -27,9 +27,9 @@
 
 #include <list>
 #include <algorithm>
+#include <boost/filesystem/path.hpp>
 #include "dogen/stitch/types/line.hpp"
 #include "dogen/stitch/types/properties.hpp"
-#include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/scribble_group.hpp"
 #include "dogen/stitch/serialization/text_template_fwd_ser.hpp"
 
@@ -40,14 +40,17 @@ class text_template final {
 public:
     text_template() = default;
     text_template(const text_template&) = default;
-    text_template(text_template&&) = default;
     ~text_template() = default;
 
 public:
+    text_template(text_template&& rhs);
+
+public:
     text_template(
-        const dogen::stitch::properties& properties,
+        const boost::filesystem::path& template_path,
+        const boost::filesystem::path& output_path,
         const dogen::annotations::scribble_group& scribble_group,
-        const dogen::annotations::annotation& annotation,
+        const dogen::stitch::properties& properties,
         const std::list<dogen::stitch::line>& lines);
 
 private:
@@ -58,20 +61,25 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::stitch::text_template& v, unsigned int version);
 
 public:
-    const dogen::stitch::properties& properties() const;
-    dogen::stitch::properties& properties();
-    void properties(const dogen::stitch::properties& v);
-    void properties(const dogen::stitch::properties&& v);
+    const boost::filesystem::path& template_path() const;
+    boost::filesystem::path& template_path();
+    void template_path(const boost::filesystem::path& v);
+    void template_path(const boost::filesystem::path&& v);
+
+    const boost::filesystem::path& output_path() const;
+    boost::filesystem::path& output_path();
+    void output_path(const boost::filesystem::path& v);
+    void output_path(const boost::filesystem::path&& v);
 
     const dogen::annotations::scribble_group& scribble_group() const;
     dogen::annotations::scribble_group& scribble_group();
     void scribble_group(const dogen::annotations::scribble_group& v);
     void scribble_group(const dogen::annotations::scribble_group&& v);
 
-    const dogen::annotations::annotation& annotation() const;
-    dogen::annotations::annotation& annotation();
-    void annotation(const dogen::annotations::annotation& v);
-    void annotation(const dogen::annotations::annotation&& v);
+    const dogen::stitch::properties& properties() const;
+    dogen::stitch::properties& properties();
+    void properties(const dogen::stitch::properties& v);
+    void properties(const dogen::stitch::properties&& v);
 
     const std::list<dogen::stitch::line>& lines() const;
     std::list<dogen::stitch::line>& lines();
@@ -89,9 +97,10 @@ public:
     text_template& operator=(text_template other);
 
 private:
-    dogen::stitch::properties properties_;
+    boost::filesystem::path template_path_;
+    boost::filesystem::path output_path_;
     dogen::annotations::scribble_group scribble_group_;
-    dogen::annotations::annotation annotation_;
+    dogen::stitch::properties properties_;
     std::list<dogen::stitch::line> lines_;
 };
 

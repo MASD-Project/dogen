@@ -28,7 +28,6 @@
 #include <list>
 #include <string>
 #include <algorithm>
-#include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
 #include "dogen/stitch/serialization/stitching_properties_fwd_ser.hpp"
 
@@ -47,9 +46,7 @@ public:
 public:
     stitching_properties(
         const std::string& stream_variable_name,
-        const boost::optional<boost::filesystem::path>& template_path,
-        const boost::optional<boost::filesystem::path>& output_path,
-        const boost::optional<boost::filesystem::path>& relative_output_directory,
+        const boost::filesystem::path& relative_output_directory,
         const std::list<std::string>& inclusion_dependencies,
         const std::list<std::string>& containing_namespaces);
 
@@ -66,20 +63,10 @@ public:
     void stream_variable_name(const std::string& v);
     void stream_variable_name(const std::string&& v);
 
-    const boost::optional<boost::filesystem::path>& template_path() const;
-    boost::optional<boost::filesystem::path>& template_path();
-    void template_path(const boost::optional<boost::filesystem::path>& v);
-    void template_path(const boost::optional<boost::filesystem::path>&& v);
-
-    const boost::optional<boost::filesystem::path>& output_path() const;
-    boost::optional<boost::filesystem::path>& output_path();
-    void output_path(const boost::optional<boost::filesystem::path>& v);
-    void output_path(const boost::optional<boost::filesystem::path>&& v);
-
-    const boost::optional<boost::filesystem::path>& relative_output_directory() const;
-    boost::optional<boost::filesystem::path>& relative_output_directory();
-    void relative_output_directory(const boost::optional<boost::filesystem::path>& v);
-    void relative_output_directory(const boost::optional<boost::filesystem::path>&& v);
+    const boost::filesystem::path& relative_output_directory() const;
+    boost::filesystem::path& relative_output_directory();
+    void relative_output_directory(const boost::filesystem::path& v);
+    void relative_output_directory(const boost::filesystem::path&& v);
 
     const std::list<std::string>& inclusion_dependencies() const;
     std::list<std::string>& inclusion_dependencies();
@@ -103,9 +90,7 @@ public:
 
 private:
     std::string stream_variable_name_;
-    boost::optional<boost::filesystem::path> template_path_;
-    boost::optional<boost::filesystem::path> output_path_;
-    boost::optional<boost::filesystem::path> relative_output_directory_;
+    boost::filesystem::path relative_output_directory_;
     std::list<std::string> inclusion_dependencies_;
     std::list<std::string> containing_namespaces_;
 };

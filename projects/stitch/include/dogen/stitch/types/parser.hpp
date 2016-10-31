@@ -30,7 +30,6 @@
 #include "dogen/stitch/types/line.hpp"
 #include "dogen/stitch/types/block.hpp"
 #include "dogen/stitch/types/text_template.hpp"
-#include "dogen/annotations/types/annotation_groups_factory.hpp"
 
 namespace dogen {
 namespace stitch {
@@ -45,9 +44,6 @@ typedef boost::error_info<struct tag_line_number, std::string> error_at_line;
  * template into a object representation of the text template.
  */
 class parser {
-public:
-    explicit parser(const annotations::annotation_groups_factory& f);
-
 private:
     /**
      * @brief Creates a block with the supplied properties.
@@ -97,9 +93,6 @@ public:
      * @brief Parse the string.
      */
     text_template parse(const std::string& s) const;
-
-private:
-    const annotations::annotation_groups_factory& annotation_factory_;
 };
 
 } }
