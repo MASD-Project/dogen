@@ -26,6 +26,7 @@
 #endif
 
 #include <algorithm>
+#include "dogen/quilt.cpp/types/formatters/helper_formatter_interface.hpp"
 
 namespace dogen {
 namespace quilt {

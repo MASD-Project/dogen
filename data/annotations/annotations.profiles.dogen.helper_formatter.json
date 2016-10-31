@@ -1,35 +1,24 @@
 {
-    "name" : "dogen.formatter_helper",
-    "labels" : [ "formatter helper" ],
-    "parents" : [ "dogen.disable_all_facets" ],
+    "name" : "dogen.helper_formatter",
+    "labels" : [ "helper formatter" ],
+    "parents" : [ "dogen.handcrafted" ],
     "scope" : "root_module",
     "templates" : [
         {
             "name" : {
-                "simple" : "enabled",
-                "qualified" : "quilt.cpp.types.enabled"
+                "simple" : "parent",
+                "qualified" : "yarn.generalization.parent"
             },
             "archetype_location" : {
-                "kernel" : "quilt.cpp"
+                "kernel" : "yarn"
             },
             "template_kind" : "instance",
-            "untyped_value" : [ "true" ]
+            "untyped_value" : [ "formatters::helper_formatter_interface" ]
         },
         {
             "name" : {
                 "simple" : "overwrite",
-                "qualified" : "quilt.cpp.types.overwrite"
-            },
-            "archetype_location" : {
-                "kernel" : "quilt.cpp"
-            },
-            "template_kind" : "instance",
-            "untyped_value" : [ "false" ]
-        },
-        {
-            "name" : {
-                "simple" : "overwrite",
-                "qualified" : "quilt.cpp.types.forward_declarations.overwrite"
+                "qualified" : "quilt.cpp.types.class_header.overwrite"
             },
             "archetype_location" : {
                 "kernel" : "quilt.cpp"
