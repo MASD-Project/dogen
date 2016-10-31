@@ -91,6 +91,11 @@ public:
      */
     void insert_streamed(const std::string& s) const;
 
+    /**
+     * @brief Inserts end lines into the stream.
+     */
+    void insert_end_line(const unsigned int n = 1) const;
+
 public:
     std::ostream& stream_;
 };

@@ -144,4 +144,9 @@ void utility_formatter::insert_streamed(const std::string& s) const {
             << double_quote << double_quote_escaped << double_quote;
 }
 
+void utility_formatter::insert_end_line(const unsigned int n) const {
+    for (unsigned int i(0); i < n; ++i)
+        stream_ << std::endl;
+}
+
 } }
