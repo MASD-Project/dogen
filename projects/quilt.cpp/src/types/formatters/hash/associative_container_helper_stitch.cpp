@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/quilt.cpp/types/formattables/helper_properties.hpp"
-#include "dogen/quilt.cpp/types/formatters/hash/associative_container_helper_stitch.hpp"
+#include "dogen/quilt.cpp/types/formatters/hash/associative_container_helper.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/traits.hpp"
 #include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"

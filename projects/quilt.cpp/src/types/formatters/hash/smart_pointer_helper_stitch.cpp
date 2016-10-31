@@ -20,7 +20,7 @@
  */
 #include "dogen/quilt.cpp/types/formattables/helper_properties.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/traits.hpp"
-#include "dogen/quilt.cpp/types/formatters/hash/smart_pointer_helper_stitch.hpp"
+#include "dogen/quilt.cpp/types/formatters/hash/smart_pointer_helper.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 
 namespace dogen {

@@ -18,13 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_HASH_OPTIONAL_HELPER_STITCH_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_HASH_OPTIONAL_HELPER_STITCH_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_HASH_TIME_DURATION_HELPER_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_HASH_TIME_DURATION_HELPER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <algorithm>
 #include "dogen/quilt.cpp/types/formatters/helper_formatter_interface.hpp"
 
 namespace dogen {
@@ -33,7 +34,7 @@ namespace cpp {
 namespace formatters {
 namespace hash {
 
-class optional_helper : public helper_formatter_interface {
+class time_duration_helper : public helper_formatter_interface {
 public:
     std::string formatter_name() const override;
     std::string family() const override;
