@@ -40,7 +40,7 @@
         {
             "name" : {
                 "simple" : "stream_variable_name",
-                "qualified" : "stream_variable_name"
+                "qualified" : "stitch.stream_variable_name"
             },
             "archetype_location" : {
                 "kernel" : "stitch"
@@ -51,7 +51,7 @@
         {
             "name" : {
                 "simple" : "containing_namespaces",
-                "qualified" : "containing_namespaces"
+                "qualified" : "stitch.containing_namespaces"
             },
             "archetype_location" : {
                 "kernel" : "stitch"

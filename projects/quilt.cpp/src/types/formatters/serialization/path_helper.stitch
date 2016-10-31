@@ -1,9 +1,9 @@
 <#@ annotations.profile=dogen.stitch #>
-<#@ containing_namespaces=dogen::quilt::cpp::formatters::serialization #>
-<#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/serialization/path_helper.hpp" #>
-<#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/assistant.hpp" #>
-<#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/serialization/traits.hpp" #>
-<#@ inclusion_dependency="dogen/quilt.cpp/types/formattables/helper_properties.hpp" #>
+<#@ stitch.containing_namespaces=dogen::quilt::cpp::formatters::serialization #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/serialization/path_helper.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/assistant.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/serialization/traits.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formattables/helper_properties.hpp" #>
 <#+
 
 std::string path_helper::formatter_name() const {

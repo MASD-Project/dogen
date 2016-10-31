@@ -1,9 +1,9 @@
 <#@ annotations.profile=dogen.stitch #>
-<#@ containing_namespaces=dogen::quilt::cpp::formatters::hash #>
-<#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/hash/traits.hpp" #>
-<#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/assistant.hpp" #>
-<#@ inclusion_dependency="dogen/quilt.cpp/types/formattables/helper_properties.hpp" #>
-<#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/hash/sequence_container_helper.hpp" #>
+<#@ stitch.containing_namespaces=dogen::quilt::cpp::formatters::hash #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/hash/traits.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/assistant.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formattables/helper_properties.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/hash/sequence_container_helper.hpp" #>
 <#+
 
 std::string sequence_container_helper::formatter_name() const {

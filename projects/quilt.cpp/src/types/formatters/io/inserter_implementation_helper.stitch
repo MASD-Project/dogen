@@ -1,7 +1,7 @@
 <#@ annotations.profile=dogen.stitch #>
-<#@ containing_namespaces=dogen::quilt::cpp::formatters::io #>
-<#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/io/inserter_implementation_helper_stitch.hpp" #>
-<#@ inclusion_dependency="dogen/formatters/types/sequence_formatter.hpp" #>
+<#@ stitch.containing_namespaces=dogen::quilt::cpp::formatters::io #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/io/inserter_implementation_helper_stitch.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/formatters/types/sequence_formatter.hpp" #>
 <#+
 
 void inserter_implementation_helper_stitch(

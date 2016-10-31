@@ -1,6 +1,6 @@
 <#@ annotations.profile=dogen.stitch #>
-<#@ containing_namespaces=dogen::quilt::cpp::formatters::types #>
-<#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/types/namespace_header_formatter_stitch.hpp" #>
+<#@ stitch.containing_namespaces=dogen::quilt::cpp::formatters::types #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/types/namespace_header_formatter_stitch.hpp" #>
 <#+
 
 dogen::formatters::artefact namespace_header_formatter_stitch(

@@ -1,8 +1,8 @@
 <#@ annotations.profile=dogen.stitch #>
-<#@ containing_namespaces=dogen::quilt::cpp::formatters::hash #>
-<#@ inclusion_dependency="dogen/formatters/types/sequence_formatter.hpp" #>
-<#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/assistant.hpp" #>
-<#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/hash/class_implementation_formatter_stitch.hpp" #>
+<#@ stitch.containing_namespaces=dogen::quilt::cpp::formatters::hash #>
+<#@ stitch.inclusion_dependency="dogen/formatters/types/sequence_formatter.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/assistant.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/hash/class_implementation_formatter_stitch.hpp" #>
 <#+
 
 dogen::formatters::artefact class_implementation_formatter_stitch(

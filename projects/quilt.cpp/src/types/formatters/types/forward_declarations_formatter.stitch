@@ -1,6 +1,6 @@
 <#@ annotations.profile=dogen.stitch #>
-<#@ containing_namespaces=dogen::quilt::cpp::formatters::types #>
-<#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/types/forward_declarations_formatter_stitch.hpp" #>
+<#@ stitch.containing_namespaces=dogen::quilt::cpp::formatters::types #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/types/forward_declarations_formatter_stitch.hpp" #>
 <#+
 dogen::formatters::artefact forward_declarations_formatter_stitch(
     assistant& a, const fabric::forward_declarations& fd) {

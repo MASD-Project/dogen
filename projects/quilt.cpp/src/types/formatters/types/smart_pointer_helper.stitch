@@ -1,9 +1,9 @@
 <#@ annotations.profile=dogen.stitch #>
-<#@ containing_namespaces=dogen::quilt::cpp::formatters::types #>
-<#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/types/smart_pointer_helper.hpp" #>
-<#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/assistant.hpp" #>
-<#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/types/traits.hpp" #>
-<#@ inclusion_dependency="dogen/quilt.cpp/types/formattables/helper_properties.hpp" #>
+<#@ stitch.containing_namespaces=dogen::quilt::cpp::formatters::types #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/types/smart_pointer_helper.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/assistant.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/types/traits.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formattables/helper_properties.hpp" #>
 <#+
 
 std::string smart_pointer_helper::formatter_name() const {

@@ -1,10 +1,10 @@
 <#@ annotations.profile=dogen.stitch #>
-<#@ containing_namespaces=dogen::quilt::cpp::formatters::io #>
-<#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/io/optional_helper.hpp" #>
-<#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/assistant.hpp" #>
-<#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/io/traits.hpp" #>
-<#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/types/traits.hpp" #>
-<#@ inclusion_dependency="dogen/quilt.cpp/types/formattables/helper_properties.hpp" #>
+<#@ stitch.containing_namespaces=dogen::quilt::cpp::formatters::io #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/io/optional_helper.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/assistant.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/io/traits.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/types/traits.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formattables/helper_properties.hpp" #>
 <#+
 
 std::string optional_helper::formatter_name() const {

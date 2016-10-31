@@ -1,8 +1,8 @@
 <#@ annotations.profile=dogen.stitch #>
-<#@ inclusion_dependency=<boost/algorithm/string/case_conv.hpp> #>
-<#@ inclusion_dependency="dogen/formatters/types/sequence_formatter.hpp" #>
-<#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/assistant.hpp" #>
-<#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/include_cmakelists_formatter_stitch.hpp" #>
+<#@ stitch.inclusion_dependency=<boost/algorithm/string/case_conv.hpp> #>
+<#@ stitch.inclusion_dependency="dogen/formatters/types/sequence_formatter.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/assistant.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/include_cmakelists_formatter_stitch.hpp" #>
 <#+
 
 dogen::formatters::artefact include_cmakelists_formatter_stitch(

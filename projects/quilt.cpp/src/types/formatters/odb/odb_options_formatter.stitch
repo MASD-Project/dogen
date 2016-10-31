@@ -1,8 +1,8 @@
 <#@ annotations.profile=dogen.stitch #>
-<#@ containing_namespaces=dogen::quilt::cpp::formatters::odb #>
-<#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/odb/odb_options_formatter_stitch.hpp" #>
-<#@ inclusion_dependency="dogen/formatters/types/sequence_formatter.hpp" #>
-<#@ inclusion_dependency=<boost/algorithm/string/case_conv.hpp> #>
+<#@ stitch.containing_namespaces=dogen::quilt::cpp::formatters::odb #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/odb/odb_options_formatter_stitch.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/formatters/types/sequence_formatter.hpp" #>
+<#@ stitch.inclusion_dependency=<boost/algorithm/string/case_conv.hpp> #>
 <#+
 
 dogen::formatters::artefact odb_options_formatter_stitch(
