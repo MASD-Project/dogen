@@ -21,7 +21,7 @@
 #include "dogen/quilt.cpp/types/formattables/helper_properties.hpp"
 #include "dogen/quilt.cpp/types/formatters/serialization/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
-#include "dogen/quilt.cpp/types/formatters/serialization/path_helper_stitch.hpp"
+#include "dogen/quilt.cpp/types/formatters/serialization/path_helper.hpp"
 
 namespace dogen {
 namespace quilt {

@@ -116,6 +116,7 @@
 #include "dogen/quilt.cpp/types/formatters/odb/enum_header_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/odb/odb_options_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/serialization/initializer.hpp"
+#include "dogen/quilt.cpp/types/formatters/serialization/path_helper.hpp"
 #include "dogen/quilt.cpp/types/formattables/facet_directory_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/formatting_configuration.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/enum_header_formatter.hpp"

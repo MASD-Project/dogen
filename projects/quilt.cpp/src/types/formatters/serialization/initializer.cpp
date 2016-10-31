@@ -27,7 +27,7 @@
 #include "dogen/quilt.cpp/types/formatters/serialization/registrar_header_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/serialization/registrar_implementation_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/serialization/forward_declarations_formatter.hpp"
-#include "dogen/quilt.cpp/types/formatters/serialization/path_helper_stitch.hpp"
+#include "dogen/quilt.cpp/types/formatters/serialization/path_helper.hpp"
 #include "dogen/quilt.cpp/types/formatters/serialization/initializer.hpp"
 
 namespace dogen {
