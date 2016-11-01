@@ -41,6 +41,7 @@
 #include "dogen/stitch/types/formatting_error.hpp"
 #include "dogen/stitch/types/properties_factory.hpp"
 #include "dogen/stitch/types/text_template_body.hpp"
+#include "dogen/stitch/types/instantiation_error.hpp"
 #include "dogen/stitch/types/stitching_properties.hpp"
 #include "dogen/stitch/types/stitching_properties_factory.hpp"
 

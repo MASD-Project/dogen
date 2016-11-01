@@ -25,25 +25,60 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include <boost/filesystem/path.hpp>
+#include "dogen/annotations/types/annotation.hpp"
+#include "dogen/annotations/types/annotation_groups_factory.hpp"
+#include "dogen/formatters/types/artefact.hpp"
+#include "dogen/stitch/types/properties_factory.hpp"
+#include "dogen/stitch/types/text_template.hpp"
 
 namespace dogen {
 namespace stitch {
 
+/**
+ * @brief Provides file name information on errors.
+ */
+typedef boost::error_info<struct tag_file_name, std::string> error_in_file;
+
 class instantiator final {
 public:
-    instantiator() = default;
-    instantiator(const instantiator&) = default;
-    instantiator(instantiator&&) = default;
-    ~instantiator() = default;
-    instantiator& operator=(const instantiator&) = default;
+    instantiator(const annotations::annotation_groups_factory& af,
+        const properties_factory& pf);
+
+private:
+    /**
+     * @brief Computes the output path, given the template input path.
+     */
+    boost::filesystem::path
+    compute_output_path(const boost::filesystem::path& input_path,
+        const properties& props) const;
+
+    /**
+     * @brief Reads the supplied stitch text template into memory as a
+     * raw string.
+     */
+    std::string read_text_template(const boost::filesystem::path& p) const;
+
+    /**
+     * @brief Creates the text template.
+     */
+    text_template create_text_template(
+        const boost::filesystem::path& input_path,
+        const std::string& text_template_as_string) const;
+
+    /**
+     * @brief Formats the supplied text template.
+     */
+    formatters::artefact format_text_template(const text_template& tt) const;
 
 public:
-    bool operator==(const instantiator& rhs) const;
-    bool operator!=(const instantiator& rhs) const {
-        return !this->operator==(rhs);
-    }
+    formatters::artefact
+    instantiate(const boost::filesystem::path& input_path) const;
 
+private:
+    const annotations::annotation_groups_factory& annotation_factory_;
+    const properties_factory& properties_factory_;
 };
 
 } }

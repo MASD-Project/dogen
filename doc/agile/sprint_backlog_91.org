@@ -14,27 +14,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-10-31 Mon 22:59]
+#+CAPTION: Clock summary at [2016-11-01 Tue 12:10]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *24:04* |       |      | 100.0 |
+| *Total time*                                                                | *26:20* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 24:04   |       |      | 100.0 |
-| Active                                                                      |         | 24:04 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:14 |   5.1 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:22 |   1.5 |
-| COMPLETED Improve bintray support                                           |         |       | 2:26 |  10.1 |
-| COMPLETED Add logo with white background                                    |         |       | 0:14 |   1.0 |
-| COMPLETED Consider renaming =diagrams= to =input_models=                    |         |       | 0:38 |   2.6 |
-| COMPLETED Add kvp support to annotations                                    |         |       | 0:37 |   2.6 |
-| COMPLETED Implement wale                                                    |         |       | 7:00 |  29.1 |
-| COMPLETED Add artefact source properties support                            |         |       | 3:11 |  13.2 |
-| COMPLETED Stitch not writing when template has changed                      |         |       | 0:33 |   2.3 |
-| COMPLETED Implement helper headers using wale                               |         |       | 2:40 |  11.1 |
-| COMPLETED Implement formatter headers using wale                            |         |       | 0:30 |   2.1 |
-| COMPLETED Add profile support to stitch                                     |         |       | 3:48 |  15.8 |
-| STARTED Changes to stitch to accommodate wale                               |         |       | 0:51 |   3.5 |
+| Stories                                                                     | 26:20   |       |      | 100.0 |
+| Active                                                                      |         | 26:20 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:14 |   4.7 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:22 |   1.4 |
+| COMPLETED Improve bintray support                                           |         |       | 2:26 |   9.2 |
+| COMPLETED Add logo with white background                                    |         |       | 0:14 |   0.9 |
+| COMPLETED Consider renaming =diagrams= to =input_models=                    |         |       | 0:38 |   2.4 |
+| COMPLETED Add kvp support to annotations                                    |         |       | 0:37 |   2.3 |
+| COMPLETED Implement wale                                                    |         |       | 7:00 |  26.6 |
+| COMPLETED Add artefact source properties support                            |         |       | 3:11 |  12.1 |
+| COMPLETED Stitch not writing when template has changed                      |         |       | 0:33 |   2.1 |
+| COMPLETED Implement helper headers using wale                               |         |       | 2:40 |  10.1 |
+| COMPLETED Implement formatter headers using wale                            |         |       | 0:30 |   1.9 |
+| COMPLETED Add profile support to stitch                                     |         |       | 3:48 |  14.4 |
+| STARTED Changes to stitch to accommodate wale                               |         |       | 3:07 |  11.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -279,6 +279,7 @@ When we implemented profiles we didn't add them to stitch. Add them
 and remove all duplication from stitch templates.
 
 *** STARTED Changes to stitch to accommodate wale                     :story:
+    CLOCK: [2016-11-01 Tue 11:42]--[2016-11-01 Tue 12:10] =>  0:28
     CLOCK: [2016-11-01 Tue 09:40]--[2016-11-01 Tue 11:28] =>  1:48
     CLOCK: [2016-10-31 Mon 22:40]--[2016-10-31 Mon 22:59] =>  0:19
     CLOCK: [2016-10-25 Tue 11:14]--[2016-10-25 Tue 11:46] =>  0:32

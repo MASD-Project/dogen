@@ -114,7 +114,6 @@ workflow::compute_output_path(const boost::filesystem::path& input_path,
     return r;
 }
 
-
 std::forward_list<std::pair<boost::filesystem::path, std::string> >
 workflow::read_text_templates(
     const std::forward_list<boost::filesystem::path>&
