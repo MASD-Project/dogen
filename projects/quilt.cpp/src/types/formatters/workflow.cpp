@@ -125,7 +125,6 @@ workflow::format(const formattables::model& fm, const yarn::element& e,
         } else if (fs == formatting_styles::stitch) {
             BOOST_LOG_SEV(lg, debug) << "Using the stitch formatter.";
 
-
             const auto artefact(stitch_formatter_.format(fmt, ctx, e));
             const auto& p(artefact.path());
 

@@ -37,6 +37,7 @@ static logger lg(logger_factory("quilt.cpp.formattables.formatting_expander"));
 const std::string stock_style("stock");
 const std::string wale_style("wale");
 const std::string stitch_style("stitch");
+const std::string stitch_wale_style("stitch_wale");
 
 const std::string invalid_style("Formatting style is not valid:");
 
@@ -93,6 +94,8 @@ formatting_expander::to_formatting_style(const std::string& s) const {
         return formatting_styles::wale;
     else if (s == stitch_style)
         return formatting_styles::stitch;
+    else if (s == stitch_wale_style)
+        return formatting_styles::stitch_wale;
 
     BOOST_LOG_SEV(lg, error) << invalid_style << s;
     BOOST_THROW_EXCEPTION(expansion_error(invalid_style + s));
