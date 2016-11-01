@@ -26,6 +26,7 @@
 #endif
 
 #include <string>
+#include <unordered_map>
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
 #include "dogen/annotations/types/annotation.hpp"
@@ -49,6 +50,8 @@ private:
         annotations::type relative_output_directory;
         annotations::type inclusion_dependency;
         annotations::type containing_namespaces;
+        annotations::type wale_template;
+        annotations::type wale_kvps;
     };
 
     /**
@@ -81,6 +84,17 @@ private:
      */
     std::list<std::string>
     extract_containing_namespaces(const annotations::annotation& a) const;
+
+    /**
+     * @brief Extract wale template
+     */
+    std::string extract_wale_template(const annotations::annotation& a) const;
+
+    /**
+     * @brief Extract wale kvps
+     */
+    std::unordered_map<std::string, std::string>
+    extract_wale_kvps(const annotations::annotation& a) const;
 
 public:
     /**

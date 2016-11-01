@@ -24606,7 +24606,7 @@ and element.#</dia:string>
         <dia:point val="87,69"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="86.95,68.95;95.47,74.25"/>
+        <dia:rectangle val="86.95,68.95;95.47,75.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="87,69"/>
@@ -24615,7 +24615,7 @@ and element.#</dia:string>
         <dia:real val="8.4199999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.2000000000000011"/>
+        <dia:real val="6.0000000000000009"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#formatting_styles#</dia:string>
@@ -24774,6 +24774,29 @@ and element.#</dia:string>
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#stitch_wale#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -24823,7 +24846,7 @@ and element.#</dia:string>
         <dia:point val="85.875,86"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="85.125,74.15;91.41,86.8"/>
+        <dia:rectangle val="85.125,74.95;91.41,86.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -24832,7 +24855,7 @@ and element.#</dia:string>
         <dia:point val="85.875,86"/>
         <dia:point val="85.875,81"/>
         <dia:point val="91.21,81"/>
-        <dia:point val="91.21,74.2"/>
+        <dia:point val="91.21,75"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

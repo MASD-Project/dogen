@@ -97,13 +97,22 @@ annotations::type_repository workflow::setup_annotations_repository(
     return f.make(alrp, data_dirs);
 }
 
+annotations::annotation_groups_factory
+workflow::create_annotation_groups_factory(
+    const std::vector<boost::filesystem::path>& data_dirs,
+    const annotations::archetype_location_repository& alrp,
+    const annotations::type_repository& atrp) const {
+    annotations::annotation_groups_factory r(data_dirs, alrp, atrp);
+    return r;
+}
+
 yarn::model workflow::
 obtain_yarn_model(const std::vector<boost::filesystem::path>& data_dirs,
-    const annotations::archetype_location_repository& alrp,
+    const annotations::annotation_groups_factory& agf,
     const annotations::type_repository& atrp) const {
     yarn::workflow w;
     const auto io(knitting_options_.input());
-    return w.execute(data_dirs, alrp, atrp, io);
+    return w.execute(data_dirs, agf, atrp, io);
 }
 
 void workflow::perform_housekeeping(
@@ -149,14 +158,15 @@ void workflow::execute() const {
         const auto data_dirs(obtain_data_dirs());
         const auto alrp(obtain_archetype_location_repository());
         const auto atrp(setup_annotations_repository(data_dirs, alrp));
-        const auto m(obtain_yarn_model(data_dirs, alrp, atrp));
+        const auto agf(create_annotation_groups_factory(data_dirs, alrp, atrp));
+        const auto m(obtain_yarn_model(data_dirs, agf, atrp));
 
         if (!m.has_generatable_types()) {
             BOOST_LOG_SEV(lg, warn) << "No generatable types found.";
             return;
         }
 
-        quilt::workflow w(knitting_options_, atrp);
+        quilt::workflow w(knitting_options_, atrp, agf);
         const auto files(w.execute(m));
 
         const auto writer(obtain_file_writer());

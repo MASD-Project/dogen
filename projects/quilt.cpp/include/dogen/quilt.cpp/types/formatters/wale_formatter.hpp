@@ -36,6 +36,7 @@ namespace cpp {
 namespace formatters {
 
 class wale_formatter final {
+private:
     bool is_header(const inclusion_support_types ist) const;
 
 public:

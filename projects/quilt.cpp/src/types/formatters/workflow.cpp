@@ -27,7 +27,6 @@
 #include "dogen/quilt.cpp/io/formattables/artefact_properties_io.hpp"
 #include "dogen/quilt.cpp/types/formatters/context.hpp"
 #include "dogen/quilt.cpp/types/formatters/wale_formatter.hpp"
-#include "dogen/quilt.cpp/types/formatters/stitch_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/formatting_error.hpp"
 #include "dogen/quilt.cpp/types/formatters/workflow.hpp"
 
@@ -45,6 +44,11 @@ namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formatters {
+
+workflow::workflow(const annotations::type_repository& atrp,
+    const annotations::annotation_groups_factory& af,
+    const dogen::formatters::repository& frp)
+    : stitch_formatter_(atrp, af, frp) {}
 
 std::shared_ptr<cpp::formatters::registrar> workflow::registrar_;
 
@@ -121,13 +125,22 @@ workflow::format(const formattables::model& fm, const yarn::element& e,
         } else if (fs == formatting_styles::stitch) {
             BOOST_LOG_SEV(lg, debug) << "Using the stitch formatter.";
 
-            stitch_formatter f;
-            const auto artefact(f.format(fmt, ctx, e));
+
+            const auto artefact(stitch_formatter_.format(fmt, ctx, e));
             const auto& p(artefact.path());
 
             BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;
             r.push_front(artefact);
-        } else {
+        } else if (fs == formatting_styles::stitch_wale) {
+        BOOST_LOG_SEV(lg, debug) << "Using the stitch formatter with wale.";
+
+        const auto gwk(true); // generate_wale_kvps
+        const auto artefact(stitch_formatter_.format(fmt, ctx, e, gwk));
+        const auto& p(artefact.path());
+
+        BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;
+        r.push_front(artefact);
+    } else {
             BOOST_LOG_SEV(lg, error) << invalid_formatting_style << fs;
             BOOST_THROW_EXCEPTION(formatting_error(invalid_formatting_style));
         }

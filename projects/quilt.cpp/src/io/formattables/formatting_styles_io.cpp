@@ -45,6 +45,9 @@ std::ostream& operator<<(std::ostream& s, const formatting_styles& v) {
     case formatting_styles::stitch:
         attr = "\"stitch\"";
         break;
+    case formatting_styles::stitch_wale:
+        attr = "\"stitch_wale\"";
+        break;
     default:
         throw std::invalid_argument("Invalid value for formatting_styles");
     }

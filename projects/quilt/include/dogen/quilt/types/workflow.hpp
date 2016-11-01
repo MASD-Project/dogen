@@ -30,6 +30,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/options/types/knitting_options.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
+#include "dogen/annotations/types/annotation_groups_factory.hpp"
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/formatters/types/artefact.hpp"
 #include "dogen/quilt/types/backend_registrar.hpp"
@@ -44,7 +45,8 @@ namespace quilt {
 class workflow {
 public:
     workflow(const options::knitting_options& o,
-        const annotations::type_repository& atrp);
+        const annotations::type_repository& atrp,
+        const annotations::annotation_groups_factory& agf);
 
 public:
     /**
@@ -70,6 +72,7 @@ private:
     static std::shared_ptr<backend_registrar> registrar_;
     const options::knitting_options knitting_options_;
     const annotations::type_repository& repository_;
+    const annotations::annotation_groups_factory& annotation_factory_;
 };
 
 } }

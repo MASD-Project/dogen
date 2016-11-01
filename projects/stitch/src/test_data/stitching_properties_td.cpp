@@ -44,6 +44,14 @@ std::list<std::string> create_std_list_std_string(unsigned int position) {
     return r;
 }
 
+std::unordered_map<std::string, std::string> create_std_unordered_map_std_string_std_string(unsigned int position) {
+    std::unordered_map<std::string, std::string> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(std::make_pair(create_std_string(position + i), create_std_string(position + i)));
+    }
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -57,6 +65,8 @@ populate(const unsigned int position, result_type& v) {
     v.relative_output_directory(create_boost_filesystem_path(position + 1));
     v.inclusion_dependencies(create_std_list_std_string(position + 2));
     v.containing_namespaces(create_std_list_std_string(position + 3));
+    v.wale_template(create_std_string(position + 4));
+    v.wale_kvps(create_std_unordered_map_std_string_std_string(position + 5));
 }
 
 stitching_properties_generator::result_type

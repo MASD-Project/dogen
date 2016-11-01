@@ -27,7 +27,7 @@
 
 #include <list>
 #include <boost/filesystem/path.hpp>
-#include "dogen/annotations/types/archetype_location_repository.hpp"
+#include "dogen/annotations/types/annotation_groups_factory.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/options/types/input_options.hpp"
 #include "dogen/yarn/types/frontend_registrar.hpp"
@@ -63,7 +63,7 @@ private:
      */
     std::list<intermediate_model> obtain_intermediate_models(
         const std::vector<boost::filesystem::path>& data_dirs,
-        const annotations::archetype_location_repository& alrp,
+        const annotations::annotation_groups_factory& agf,
         const annotations::type_repository& atrp,
         const options::input_options& io) const;
 
@@ -87,7 +87,7 @@ private:
 
 public:
     model execute(const std::vector<boost::filesystem::path>& data_dirs,
-        const annotations::archetype_location_repository& alrp,
+        const annotations::annotation_groups_factory& agf,
         const annotations::type_repository& atrp,
         const options::input_options& io) const;
 

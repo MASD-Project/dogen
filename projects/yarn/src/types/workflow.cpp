@@ -70,11 +70,11 @@ void workflow::validate() const {
 
 std::list<intermediate_model> workflow::obtain_intermediate_models(
     const std::vector<boost::filesystem::path>& data_dirs,
-    const annotations::archetype_location_repository& alrp,
+    const annotations::annotation_groups_factory& agf,
     const annotations::type_repository& atrp,
     const options::input_options& io) const {
     pre_merge_workflow w;
-    return w.execute(data_dirs, alrp, atrp, io, frontend_registrar());
+    return w.execute(data_dirs, agf, atrp, io, frontend_registrar());
 }
 
 intermediate_model workflow::
@@ -106,11 +106,11 @@ model workflow::transform_intermediate_model(
 }
 
 model workflow::execute(const std::vector<boost::filesystem::path>& data_dirs,
-    const annotations::archetype_location_repository& alrp,
+    const annotations::annotation_groups_factory& agf,
     const annotations::type_repository& atrp,
     const options::input_options& io) const {
 
-    const auto im(obtain_intermediate_models(data_dirs, alrp, atrp, io));
+    const auto im(obtain_intermediate_models(data_dirs, agf, atrp, io));
     auto mim(merge_intermediate_models(im));
     post_process_merged_intermediate_model(atrp, mim);
     auto r(transform_intermediate_model(mim));

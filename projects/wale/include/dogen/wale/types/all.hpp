@@ -31,10 +31,8 @@
 #include "dogen/wale/types/properties.hpp"
 #include "dogen/wale/types/key_extractor.hpp"
 #include "dogen/wale/types/text_template.hpp"
-#include "dogen/wale/types/building_error.hpp"
 #include "dogen/wale/types/extraction_error.hpp"
 #include "dogen/wale/types/formatting_error.hpp"
 #include "dogen/wale/types/validation_error.hpp"
-#include "dogen/wale/types/properties_factory.hpp"
 
 #endif

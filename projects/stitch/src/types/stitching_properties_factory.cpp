@@ -113,6 +113,30 @@ extract_containing_namespaces(const annotations::annotation& a) const {
     return splitter::split_scoped(cns);
 }
 
+std::string stitching_properties_factory::
+extract_wale_template(const annotations::annotation& a) const {
+    std::string r;
+    using namespace annotations;
+    const entry_selector s(a);
+    const auto& t(type_group_.wale_template);
+    if (!s.has_entry(t))
+        return r;
+
+    return s.get_text_content(t);
+}
+
+std::unordered_map<std::string, std::string> stitching_properties_factory::
+extract_wale_kvps(const annotations::annotation& a) const {
+    std::unordered_map<std::string, std::string>  r;
+    using namespace annotations;
+    const entry_selector s(a);
+    const auto& t(type_group_.wale_template);
+    if (!s.has_entry(t))
+        return r;
+
+    return s.get_kvp_content(t);
+}
+
 stitching_properties stitching_properties_factory::
 make(const annotations::annotation& a) const {
     stitching_properties r;
@@ -120,6 +144,8 @@ make(const annotations::annotation& a) const {
     r.relative_output_directory(extract_relative_output_directory(a));
     r.inclusion_dependencies(extract_inclusion_dependencies(a));
     r.containing_namespaces(extract_containing_namespaces(a));
+    r.wale_template(extract_wale_template(a));
+    r.wale_kvps(extract_wale_kvps(a));
     return r;
 }
 

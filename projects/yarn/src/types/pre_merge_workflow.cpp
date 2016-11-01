@@ -50,11 +50,10 @@ void pre_merge_workflow::expand_modules(intermediate_model& im) const {
 }
 
 void pre_merge_workflow::
-expand_annotations(const std::vector<boost::filesystem::path>& data_dirs,
-    const annotations::archetype_location_repository& alrp,
-    const annotations::type_repository& atrp, intermediate_model& im) const {
+expand_annotations(const annotations::annotation_groups_factory& agf,
+    intermediate_model& im) const {
     annotations_expander ex;
-    ex.expand(data_dirs, alrp, atrp, im);
+    ex.expand(agf, im);
 }
 
 void pre_merge_workflow::expand_origin(const annotations::type_repository& atrp,
@@ -78,7 +77,7 @@ void pre_merge_workflow::expand_parsing(
 std::list<intermediate_model>
 pre_merge_workflow::
 execute(const std::vector<boost::filesystem::path>& data_dirs,
-    const annotations::archetype_location_repository& alrp,
+    const annotations::annotation_groups_factory& agf,
     const annotations::type_repository& atrp,
     const options::input_options& io, frontend_registrar& rg) const {
 
@@ -90,7 +89,7 @@ execute(const std::vector<boost::filesystem::path>& data_dirs,
          * ensure the root module is populated with entries
          * before being copied over.
          */
-        expand_annotations(data_dirs, alrp, atrp, im);
+        expand_annotations(agf, im);
         expand_modules(im);
         expand_origin(atrp, im);
         expand_type_parameters(atrp, im);

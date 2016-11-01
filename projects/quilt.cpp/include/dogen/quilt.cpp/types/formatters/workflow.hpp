@@ -31,10 +31,14 @@
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
+#include "dogen/annotations/types/type_repository.hpp"
+#include "dogen/annotations/types/annotation_groups_factory.hpp"
 #include "dogen/formatters/types/artefact.hpp"
+#include "dogen/formatters/types/repository.hpp"
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/quilt.cpp/types/formattables/model.hpp"
 #include "dogen/quilt.cpp/types/formatters/registrar.hpp"
+#include "dogen/quilt.cpp/types/formatters/stitch_formatter.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -45,6 +49,11 @@ namespace formatters {
  * @brief Generates all files for the supplied entity.
  */
 class workflow final {
+public:
+    workflow(const annotations::type_repository& atrp,
+        const annotations::annotation_groups_factory& af,
+        const dogen::formatters::repository& frp);
+
 public:
     /**
      * @brief Returns the registrar. If it has not yet been
@@ -68,6 +77,7 @@ public:
 
 private:
     static std::shared_ptr<cpp::formatters::registrar> registrar_;
+    const stitch_formatter stitch_formatter_;
 };
 
 } } } }

@@ -22,9 +22,8 @@
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/filesystem/file.hpp"
-#include "dogen/annotations/io/annotation_io.hpp"
+#include "dogen/wale/io/properties_io.hpp"
 #include "dogen/wale/types/key_extractor.hpp"
-#include "dogen/wale/types/properties_factory.hpp"
 #include "dogen/wale/types/formatter.hpp"
 #include "dogen/wale/types/validator.hpp"
 #include "dogen/wale/types/workflow.hpp"
@@ -41,18 +40,14 @@ const std::string wale_dir("wale");
 namespace dogen {
 namespace wale {
 
-properties workflow::make_properties(const annotations::type_repository& atrp,
-    const annotations::annotation& a) const {
-    properties_factory f;
-    return f.make(atrp, a);
-}
-
-properties workflow::make_properties(
+properties workflow::create_properties(
     const boost::filesystem::path& template_path,
     const std::unordered_map<std::string, std::string>& kvps) const {
     properties r;
     r.template_path(template_path);
     r.supplied_kvps(kvps);
+
+    BOOST_LOG_SEV(lg, debug) << "Properties: " << r;
     return r;
 }
 
@@ -76,10 +71,11 @@ read_content(const boost::filesystem::path& template_path) const {
     return read_file_content(template_path);
 }
 
-void workflow::update_actual_kvps(text_template& tt) const {
+std::unordered_set<std::string>
+workflow::get_expected_keys(const std::string& s) const {
     key_extractor ke;
-    const auto keys(ke.extract(tt.content()));
-    tt.properties().expected_keys(keys);
+    const auto r(ke.extract(s));
+    return r;
 }
 
 std::string workflow::format(const text_template& tt) const {
@@ -92,41 +88,23 @@ void workflow::validate(const text_template& tt) const {
     v.validate(tt);
 }
 
-std::string workflow::execute(const properties& props) const {
-    text_template tt;
-    tt.properties(props);
-    tt.properties().template_path(resolve_path(props.template_path()));
-    tt.content(read_content(tt.properties().template_path()));
-    update_actual_kvps(tt);
-    validate(tt);
-    return format(tt);
-}
-
-bool workflow::can_execute(const annotations::annotation& a) const {
-    properties_factory f;
-    return f.has_properties(a);
-}
-
-std::string workflow::execute(const annotations::type_repository& atrp,
-    const annotations::annotation& a) const {
-    BOOST_LOG_SEV(lg, debug) << "Executing workflow. Annotation: " << a;
-
-    const auto props(make_properties(atrp, a));
-    const auto r(execute(props));
-
-    BOOST_LOG_SEV(lg, debug) << "Finished executing workflow. Result: " << r;
+text_template workflow::create_text_template(const properties& props) const {
+    text_template r;
+    r.properties(props);
+    r.properties().template_path(resolve_path(props.template_path()));
+    r.content(read_content(r.properties().template_path()));
+    r.properties().expected_keys(get_expected_keys(r.content()));
     return r;
 }
 
 std::string workflow::execute(const boost::filesystem::path& template_path,
     const std::unordered_map<std::string, std::string>& kvps) const {
-    BOOST_LOG_SEV(lg, debug) << "Executing workflow. Template path: "
-                             << template_path << " supplied kvps: " << kvps;
+    BOOST_LOG_SEV(lg, debug) << "Executing workflow.";
 
-    properties props;
-    props.template_path(template_path);
-    props.supplied_kvps(kvps);
-    const auto r(execute(props));
+    const auto props(create_properties(template_path, kvps));
+    const auto tt(create_text_template(props));
+    validate(tt);
+    const auto r(format(tt));
 
     BOOST_LOG_SEV(lg, debug) << "Finished executing workflow. Result: " << r;
     return r;

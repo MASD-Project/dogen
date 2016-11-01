@@ -91,8 +91,11 @@ workflow::managed_directories(const options::knitting_options& ko,
 }
 
 std::forward_list<dogen::formatters::artefact>
-workflow::format(const formattables::model& fm) const {
-    formatters::workflow wf;
+workflow::format(const annotations::type_repository& atrp,
+    const annotations::annotation_groups_factory& agf,
+    const dogen::formatters::repository& drp,
+    const formattables::model& fm) const {
+    formatters::workflow wf(atrp, agf, drp);
     return wf.execute(fm);
 }
 
@@ -103,7 +106,9 @@ workflow::archetype_location() const {
 
 std::forward_list<dogen::formatters::artefact>
 workflow::generate(const options::knitting_options& ko,
-    const annotations::type_repository& atrp, const yarn::model& m) const {
+    const annotations::type_repository& atrp,
+    const annotations::annotation_groups_factory& agf,
+    const yarn::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started backend.";
 
     const auto dd(obtain_data_directories());
@@ -112,7 +117,7 @@ workflow::generate(const options::knitting_options& ko,
     const auto dpf(create_decoration_properties_factory(atrp, drp, ra));
     const auto& frp(formatters::workflow::registrar().formatter_repository());
     const auto fm(create_formattables_model(ko.cpp(), atrp, ra, dpf, frp, m));
-    const auto r(format(fm));
+    const auto r(format(atrp, agf, drp, fm));
 
     BOOST_LOG_SEV(lg, debug) << "Finished backend.";
     return r;

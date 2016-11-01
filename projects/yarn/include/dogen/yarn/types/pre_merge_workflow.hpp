@@ -24,7 +24,7 @@
 #pragma once
 #endif
 
-#include "dogen/annotations/types/archetype_location_repository.hpp"
+#include "dogen/annotations/types/annotation_groups_factory.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/options/types/input_options.hpp"
 #include "dogen/yarn/types/descriptor.hpp"
@@ -61,10 +61,8 @@ private:
      * @brief Performs an expansion of all annotations objects on the
      * model.
      */
-    void expand_annotations(
-        const std::vector<boost::filesystem::path>& data_dirs,
-        const annotations::archetype_location_repository& alrp,
-        const annotations::type_repository& atrp, intermediate_model& im) const;
+    void expand_annotations(const annotations::annotation_groups_factory& agf,
+        intermediate_model& im) const;
 
     /**
      * @brief Performs the expansion of the origin type.
@@ -90,7 +88,7 @@ public:
      */
     std::list<intermediate_model>
     execute(const std::vector<boost::filesystem::path>& data_dirs,
-        const annotations::archetype_location_repository& alrp,
+        const annotations::annotation_groups_factory& agf,
         const annotations::type_repository& atrp,
         const options::input_options& io,
         frontend_registrar& rg) const;

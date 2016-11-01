@@ -32,7 +32,7 @@
 #include <functional>
 #include <forward_list>
 #include <boost/filesystem/path.hpp>
-#include "dogen/annotations/types/archetype_location_repository.hpp"
+#include "dogen/annotations/types/annotation_groups_factory.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/options/types/knitting_options.hpp"
 #include "dogen/yarn/types/model.hpp"
@@ -107,12 +107,21 @@ private:
         const std::vector<boost::filesystem::path>& data_dirs,
         const annotations::archetype_location_repository& alrp) const;
 
+
+    /**
+     * @brief Create the annotations group factory.
+     */
+    annotations::annotation_groups_factory create_annotation_groups_factory(
+        const std::vector<boost::filesystem::path>& data_dirs,
+        const annotations::archetype_location_repository& alrp,
+        const annotations::type_repository& atrp) const;
+
     /**
      * @brief Obtain the yarn model.
      */
     yarn::model
     obtain_yarn_model(const std::vector<boost::filesystem::path>& data_dirs,
-        const annotations::archetype_location_repository& alrp,
+        const annotations::annotation_groups_factory& agf,
         const annotations::type_repository& atrp) const;
 
     /**

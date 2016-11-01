@@ -43,6 +43,24 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::string>& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->second) << "\"";
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace stitch {
 
@@ -52,7 +70,9 @@ std::ostream& operator<<(std::ostream& s, const stitching_properties& v) {
       << "\"stream_variable_name\": " << "\"" << tidy_up_string(v.stream_variable_name()) << "\"" << ", "
       << "\"relative_output_directory\": " << "\"" << v.relative_output_directory().generic_string() << "\"" << ", "
       << "\"inclusion_dependencies\": " << v.inclusion_dependencies() << ", "
-      << "\"containing_namespaces\": " << v.containing_namespaces()
+      << "\"containing_namespaces\": " << v.containing_namespaces() << ", "
+      << "\"wale_template\": " << "\"" << tidy_up_string(v.wale_template()) << "\"" << ", "
+      << "\"wale_kvps\": " << v.wale_kvps()
       << " }";
     return(s);
 }

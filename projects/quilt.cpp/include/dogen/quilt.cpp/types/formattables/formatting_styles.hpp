@@ -34,7 +34,8 @@ enum class formatting_styles : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
     stock = 1,
     wale = 2,
-    stitch = 3
+    stitch = 3,
+    stitch_wale = 4
 };
 
 } } } }

@@ -47,10 +47,9 @@ namespace dogen {
 namespace stitch {
 
 instantiator::instantiator(const annotations::type_repository& atrp,
-    const annotations::annotation_groups_factory& af,
-    const properties_factory& pf)
-    : type_repository_(atrp), annotation_factory_(af),
-      properties_factory_(pf) {}
+    const annotations::annotation_groups_factory& agf,
+    const dogen::formatters::repository& frp)
+    : annotation_factory_(agf), properties_factory_(atrp, frp) {}
 
 boost::filesystem::path
 instantiator::compute_output_path(const boost::filesystem::path& input_path,
@@ -86,7 +85,8 @@ read_text_template(const boost::filesystem::path& input_path) const {
 
 text_template
 instantiator::create_text_template(const boost::filesystem::path& input_path,
-    const std::string& text_template_as_string) const {
+    const std::string& text_template_as_string,
+    const std::unordered_map<std::string, std::string>& wale_kvps) const {
 
     BOOST_LOG_SEV(lg, debug) << "Processing: " << input_path.generic_string();
 
@@ -118,12 +118,16 @@ instantiator::create_text_template(const boost::filesystem::path& input_path,
         r.properties(properties_factory_.make(a));
 
         /*
-         * If we can execute the wale workflow, execute it and store
-         * the result as a variable.
+         * Check if we have an associated wale template. If we do, we
+         * need to execute the wale workflow and store the result as a
+         * stitch variable.
          */
-        wale::workflow wkf;
-        if (wkf.can_execute(a)) {
-            const auto wale_value(wkf.execute(type_repository_, a));
+        const auto wt(r.properties().stitching_properties().wale_template());
+        if (!wt.empty()) {
+            // FIXME: create a get kvps method which looks at input
+            // kvps and properties and obtains one of the two.
+            wale::workflow wkf;
+            const auto wale_value(wkf.execute(wt, wale_kvps));
             const auto pair(std::make_pair(wale_key, wale_value));
             const auto inserted(r.variables().insert(pair).second);
             if (!inserted) {
@@ -155,12 +159,13 @@ instantiator::format_text_template(const text_template& tt) const {
 }
 
 formatters::artefact
-instantiator::instantiate(const boost::filesystem::path& input_path) const {
+instantiator::instantiate(const boost::filesystem::path& input_path,
+    const std::unordered_map<std::string, std::string>& wale_kvps) const {
     BOOST_LOG_SEV(lg, debug) << "Instantiating: "
                              << input_path.generic_string();
 
     const auto s(read_text_template(input_path));
-    const auto tt(create_text_template(input_path, s));
+    const auto tt(create_text_template(input_path, s, wale_kvps));
     const auto r(format_text_template(tt));
 
     BOOST_LOG_SEV(lg, debug) << "Instantiated.";

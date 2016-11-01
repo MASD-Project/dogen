@@ -47,5 +47,30 @@
         "value_type" : "text",
         "template_kind" : "instance",
         "scope" : "root_module"
+    },
+    {
+        "name" : {
+            "simple" : "template",
+            "qualified" : "stitch.wale.template"
+        },
+        "archetype_location" : {
+            "kernel" : "stitch"
+        },
+        "value_type" : "text",
+        "template_kind" : "instance",
+        "scope" : "root_module"
+    },
+    {
+        "name" : {
+            "simple" : "kvp",
+            "qualified" : "stitch.wale.kvp"
+        },
+        "archetype_location" : {
+            "kernel" : "stitch"
+        },
+        "value_type" : "key_value_pair",
+        "template_kind" : "instance",
+        "scope" : "root_module"
     }
+
 ]

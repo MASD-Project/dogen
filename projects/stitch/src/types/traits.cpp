@@ -48,4 +48,9 @@ std::string traits::containing_namespaces() {
     return r;
 }
 
+std::string traits::wale_template() {
+    static std::string r("stitch.wale_template");
+    return r;
+}
+
 } }

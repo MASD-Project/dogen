@@ -30,6 +30,7 @@
 #include "dogen/options/types/knitting_options.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/annotations/types/archetype_location.hpp"
+#include "dogen/annotations/types/annotation_groups_factory.hpp"
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/formatters/types/artefact.hpp"
 
@@ -76,6 +77,7 @@ public:
     virtual std::forward_list<formatters::artefact> generate(
         const options::knitting_options& ko,
         const annotations::type_repository& atrp,
+        const annotations::annotation_groups_factory& agf,
         const yarn::model& m) const = 0;
 };
 

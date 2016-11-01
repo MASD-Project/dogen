@@ -26,9 +26,7 @@
 #endif
 
 #include <list>
-#include <boost/filesystem/path.hpp>
-#include "dogen/annotations/types/archetype_location_repository.hpp"
-#include "dogen/annotations/types/type_repository.hpp"
+#include "dogen/annotations/types/annotation_groups_factory.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
@@ -41,15 +39,12 @@ namespace yarn {
 class annotations_expander {
 private:
     void update_scribble_groups(intermediate_model& im) const;
-    void update_annotations(
-        const std::vector<boost::filesystem::path>& data_dirs,
-        const annotations::archetype_location_repository& alrp,
-        const annotations::type_repository& atrp, intermediate_model& im) const;
+    void update_annotations(const annotations::annotation_groups_factory& agf,
+        intermediate_model& im) const;
 
 public:
-    void expand(const std::vector<boost::filesystem::path>& data_dirs,
-        const annotations::archetype_location_repository& alrp,
-        const annotations::type_repository& atrp, intermediate_model& im) const;
+    void expand(const annotations::annotation_groups_factory& agf,
+        intermediate_model& im) const;
 };
 
 } }

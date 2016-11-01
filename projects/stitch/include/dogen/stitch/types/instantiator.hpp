@@ -31,6 +31,7 @@
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
 #include "dogen/formatters/types/artefact.hpp"
+#include "dogen/formatters/types/repository.hpp"
 #include "dogen/stitch/types/properties_factory.hpp"
 #include "dogen/stitch/types/text_template.hpp"
 
@@ -45,8 +46,8 @@ typedef boost::error_info<struct tag_file_name, std::string> error_in_file;
 class instantiator final {
 public:
     instantiator(const annotations::type_repository& atrp,
-        const annotations::annotation_groups_factory& af,
-        const properties_factory& pf);
+        const annotations::annotation_groups_factory& agf,
+        const dogen::formatters::repository& formatters_repository);
 
 private:
     /**
@@ -67,7 +68,8 @@ private:
      */
     text_template create_text_template(
         const boost::filesystem::path& input_path,
-        const std::string& text_template_as_string) const;
+        const std::string& text_template_as_string,
+        const std::unordered_map<std::string, std::string>& wale_kvps) const;
 
     /**
      * @brief Formats the supplied text template.
@@ -76,12 +78,13 @@ private:
 
 public:
     formatters::artefact
-    instantiate(const boost::filesystem::path& input_path) const;
+    instantiate(const boost::filesystem::path& input_path,
+        const std::unordered_map<std::string, std::string>& wale_kvps =
+        std::unordered_map<std::string, std::string>()) const;
 
 private:
-    const annotations::type_repository& type_repository_;
     const annotations::annotation_groups_factory& annotation_factory_;
-    const properties_factory& properties_factory_;
+    const properties_factory properties_factory_;
 };
 
 } }

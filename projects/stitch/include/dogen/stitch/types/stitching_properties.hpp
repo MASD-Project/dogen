@@ -28,6 +28,7 @@
 #include <list>
 #include <string>
 #include <algorithm>
+#include <unordered_map>
 #include <boost/filesystem/path.hpp>
 #include "dogen/stitch/serialization/stitching_properties_fwd_ser.hpp"
 
@@ -48,7 +49,9 @@ public:
         const std::string& stream_variable_name,
         const boost::filesystem::path& relative_output_directory,
         const std::list<std::string>& inclusion_dependencies,
-        const std::list<std::string>& containing_namespaces);
+        const std::list<std::string>& containing_namespaces,
+        const std::string& wale_template,
+        const std::unordered_map<std::string, std::string>& wale_kvps);
 
 private:
     template<typename Archive>
@@ -78,6 +81,16 @@ public:
     void containing_namespaces(const std::list<std::string>& v);
     void containing_namespaces(const std::list<std::string>&& v);
 
+    const std::string& wale_template() const;
+    std::string& wale_template();
+    void wale_template(const std::string& v);
+    void wale_template(const std::string&& v);
+
+    const std::unordered_map<std::string, std::string>& wale_kvps() const;
+    std::unordered_map<std::string, std::string>& wale_kvps();
+    void wale_kvps(const std::unordered_map<std::string, std::string>& v);
+    void wale_kvps(const std::unordered_map<std::string, std::string>&& v);
+
 public:
     bool operator==(const stitching_properties& rhs) const;
     bool operator!=(const stitching_properties& rhs) const {
@@ -93,6 +106,8 @@ private:
     boost::filesystem::path relative_output_directory_;
     std::list<std::string> inclusion_dependencies_;
     std::list<std::string> containing_namespaces_;
+    std::string wale_template_;
+    std::unordered_map<std::string, std::string> wale_kvps_;
 };
 
 } }

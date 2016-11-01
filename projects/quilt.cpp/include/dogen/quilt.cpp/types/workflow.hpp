@@ -33,6 +33,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
+#include "dogen/annotations/types/annotation_groups_factory.hpp"
 #include "dogen/formatters/types/repository.hpp"
 #include "dogen/formatters/types/decoration_properties_factory.hpp"
 #include "dogen/yarn/types/model.hpp"
@@ -88,7 +89,10 @@ private:
      * @brief Create the files representation of the formattables model.
      */
     std::forward_list<dogen::formatters::artefact>
-    format(const formattables::model& fm) const;
+    format(const annotations::type_repository& atrp,
+        const annotations::annotation_groups_factory& agf,
+        const dogen::formatters::repository& drp,
+        const formattables::model& fm) const;
 
 public:
     std::string name() const override;
@@ -103,6 +107,7 @@ public:
     std::forward_list<dogen::formatters::artefact> generate(
         const options::knitting_options& ko,
         const annotations::type_repository& atrp,
+        const annotations::annotation_groups_factory& agf,
         const yarn::model& m) const override;
 };
 

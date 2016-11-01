@@ -25,8 +25,11 @@
 #pragma once
 #endif
 
+#include "dogen/annotations/types/annotation_groups_factory.hpp"
 #include "dogen/formatters/types/artefact.hpp"
+#include "dogen/formatters/types/repository.hpp"
 #include "dogen/yarn/types/element_fwd.hpp"
+#include "dogen/stitch/types/instantiator.hpp"
 #include "dogen/quilt.cpp/types/formattables/artefact_properties.hpp"
 #include "dogen/quilt.cpp/types/formatters/artefact_formatter_interface.hpp"
 
@@ -36,12 +39,22 @@ namespace cpp {
 namespace formatters {
 
 class stitch_formatter final {
+public:
+    stitch_formatter(const annotations::type_repository& atrp,
+        const annotations::annotation_groups_factory& af,
+        const dogen::formatters::repository& frp);
+
+private:
     bool is_header(const inclusion_support_types ist) const;
 
 public:
     dogen::formatters::artefact
     format(const artefact_formatter_interface& stock_formatter,
-        const context& ctx, const yarn::element& e) const;
+        const context& ctx, const yarn::element& e,
+        const bool generate_wale_kvps = false) const;
+
+private:
+    const stitch::instantiator instantiator_;
 };
 
 } } } }

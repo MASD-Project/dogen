@@ -43,8 +43,9 @@ namespace quilt {
 std::shared_ptr<backend_registrar> workflow::registrar_;
 
 workflow::workflow(const options::knitting_options& o,
-    const annotations::type_repository& atrp)
-    : knitting_options_(o), repository_(atrp) { }
+    const annotations::type_repository& atrp,
+    const annotations::annotation_groups_factory& agf)
+    : knitting_options_(o), repository_(atrp), annotation_factory_(agf) {}
 
 backend_registrar& workflow::registrar() {
     if (!registrar_)
@@ -71,7 +72,8 @@ workflow::execute(const yarn::model& m) const {
     for(const auto b : registrar().backends()) {
         const auto n(b->name());
         BOOST_LOG_SEV(lg, debug) << "Generating files for: '" << n << "'";
-        auto files(b->generate(knitting_options_, repository_, m));
+        const auto& ko(knitting_options_);
+        auto files(b->generate(ko, repository_, annotation_factory_, m));
         BOOST_LOG_SEV(lg, debug) << "Generated files for : '" << n
                                  << "'. Total files: "
                                  << std::distance(files.begin(), files.end());

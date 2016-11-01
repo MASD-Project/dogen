@@ -176,16 +176,14 @@ update_scribble_groups(intermediate_model& im) const {
 }
 
 void annotations_expander::
-update_annotations(const std::vector<boost::filesystem::path>& data_dirs,
-    const annotations::archetype_location_repository& alrp,
-    const annotations::type_repository& atrp, intermediate_model& im) const {
+update_annotations(const annotations::annotation_groups_factory& agf,
+    intermediate_model& im) const {
 
     /*
      * We first call the annotations group factory to convert our
      * scribble groups into annotation groups.
      */
-    const annotations::annotation_groups_factory f(data_dirs, alrp, atrp);
-    const auto annotation_groups(f.make(im.indices().scribble_groups()));
+    const auto annotation_groups(agf.make(im.indices().scribble_groups()));
 
     /*
      * Now we have to unpack all of the annotation groups and populate
@@ -196,14 +194,14 @@ update_annotations(const std::vector<boost::filesystem::path>& data_dirs,
 }
 
 void annotations_expander::
-expand(const std::vector<boost::filesystem::path>& data_dirs,
-    const annotations::archetype_location_repository& alrp,
-    const annotations::type_repository& atrp, intermediate_model& im) const {
+expand(const annotations::annotation_groups_factory& agf,
+    intermediate_model& im) const {
+
     BOOST_LOG_SEV(lg, debug) << "Starting annotations expansion for model: "
                              << im.name().id();
 
     update_scribble_groups(im);
-    update_annotations(data_dirs, alrp, atrp, im);
+    update_annotations(agf, im);
 
     BOOST_LOG_SEV(lg, debug) << "Finished annotations expansion.";
 }

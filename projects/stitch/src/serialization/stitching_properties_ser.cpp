@@ -27,6 +27,7 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
+#include <boost/serialization/unordered_map.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/utility/serialization/path.hpp"
@@ -66,6 +67,8 @@ void save(Archive& ar,
     ar << make_nvp("relative_output_directory", v.relative_output_directory_);
     ar << make_nvp("inclusion_dependencies", v.inclusion_dependencies_);
     ar << make_nvp("containing_namespaces", v.containing_namespaces_);
+    ar << make_nvp("wale_template", v.wale_template_);
+    ar << make_nvp("wale_kvps", v.wale_kvps_);
 }
 
 template<typename Archive>
@@ -76,6 +79,8 @@ void load(Archive& ar,
     ar >> make_nvp("relative_output_directory", v.relative_output_directory_);
     ar >> make_nvp("inclusion_dependencies", v.inclusion_dependencies_);
     ar >> make_nvp("containing_namespaces", v.containing_namespaces_);
+    ar >> make_nvp("wale_template", v.wale_template_);
+    ar >> make_nvp("wale_kvps", v.wale_kvps_);
 }
 
 } }

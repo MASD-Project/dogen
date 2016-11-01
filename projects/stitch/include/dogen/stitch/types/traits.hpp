@@ -58,6 +58,12 @@ struct traits {
      * @brief Namespaces that contain the content in the template.
      */
     static std::string containing_namespaces();
+
+    /**
+     * @brief Name of the associated wale template, if any.
+     */
+    static std::string wale_template();
+
 };
 
 } }

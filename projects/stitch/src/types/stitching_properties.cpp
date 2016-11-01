@@ -27,17 +27,23 @@ stitching_properties::stitching_properties(stitching_properties&& rhs)
     : stream_variable_name_(std::move(rhs.stream_variable_name_)),
       relative_output_directory_(std::move(rhs.relative_output_directory_)),
       inclusion_dependencies_(std::move(rhs.inclusion_dependencies_)),
-      containing_namespaces_(std::move(rhs.containing_namespaces_)) { }
+      containing_namespaces_(std::move(rhs.containing_namespaces_)),
+      wale_template_(std::move(rhs.wale_template_)),
+      wale_kvps_(std::move(rhs.wale_kvps_)) { }
 
 stitching_properties::stitching_properties(
     const std::string& stream_variable_name,
     const boost::filesystem::path& relative_output_directory,
     const std::list<std::string>& inclusion_dependencies,
-    const std::list<std::string>& containing_namespaces)
+    const std::list<std::string>& containing_namespaces,
+    const std::string& wale_template,
+    const std::unordered_map<std::string, std::string>& wale_kvps)
     : stream_variable_name_(stream_variable_name),
       relative_output_directory_(relative_output_directory),
       inclusion_dependencies_(inclusion_dependencies),
-      containing_namespaces_(containing_namespaces) { }
+      containing_namespaces_(containing_namespaces),
+      wale_template_(wale_template),
+      wale_kvps_(wale_kvps) { }
 
 void stitching_properties::swap(stitching_properties& other) noexcept {
     using std::swap;
@@ -45,13 +51,17 @@ void stitching_properties::swap(stitching_properties& other) noexcept {
     swap(relative_output_directory_, other.relative_output_directory_);
     swap(inclusion_dependencies_, other.inclusion_dependencies_);
     swap(containing_namespaces_, other.containing_namespaces_);
+    swap(wale_template_, other.wale_template_);
+    swap(wale_kvps_, other.wale_kvps_);
 }
 
 bool stitching_properties::operator==(const stitching_properties& rhs) const {
     return stream_variable_name_ == rhs.stream_variable_name_ &&
         relative_output_directory_ == rhs.relative_output_directory_ &&
         inclusion_dependencies_ == rhs.inclusion_dependencies_ &&
-        containing_namespaces_ == rhs.containing_namespaces_;
+        containing_namespaces_ == rhs.containing_namespaces_ &&
+        wale_template_ == rhs.wale_template_ &&
+        wale_kvps_ == rhs.wale_kvps_;
 }
 
 stitching_properties& stitching_properties::operator=(stitching_properties other) {
@@ -122,6 +132,38 @@ void stitching_properties::containing_namespaces(const std::list<std::string>& v
 
 void stitching_properties::containing_namespaces(const std::list<std::string>&& v) {
     containing_namespaces_ = std::move(v);
+}
+
+const std::string& stitching_properties::wale_template() const {
+    return wale_template_;
+}
+
+std::string& stitching_properties::wale_template() {
+    return wale_template_;
+}
+
+void stitching_properties::wale_template(const std::string& v) {
+    wale_template_ = v;
+}
+
+void stitching_properties::wale_template(const std::string&& v) {
+    wale_template_ = std::move(v);
+}
+
+const std::unordered_map<std::string, std::string>& stitching_properties::wale_kvps() const {
+    return wale_kvps_;
+}
+
+std::unordered_map<std::string, std::string>& stitching_properties::wale_kvps() {
+    return wale_kvps_;
+}
+
+void stitching_properties::wale_kvps(const std::unordered_map<std::string, std::string>& v) {
+    wale_kvps_ = v;
+}
+
+void stitching_properties::wale_kvps(const std::unordered_map<std::string, std::string>&& v) {
+    wale_kvps_ = std::move(v);
 }
 
 } }

@@ -41,9 +41,8 @@ namespace stitch {
  */
 class properties_factory {
 public:
-    properties_factory(
-        const annotations::type_repository& annotations_repository,
-        const dogen::formatters::repository& formatters_repository);
+    properties_factory(const annotations::type_repository& atrp,
+        const dogen::formatters::repository& frp);
 
 private:
     /**

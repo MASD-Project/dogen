@@ -36,7 +36,6 @@
 #include "dogen/formatters/types/artefact.hpp"
 #include "dogen/formatters/types/repository.hpp"
 #include "dogen/stitch/types/properties.hpp"
-#include "dogen/stitch/types/properties_factory.hpp"
 #include "dogen/stitch/types/text_template.hpp"
 
 namespace dogen {
@@ -98,8 +97,8 @@ private:
      */
     std::forward_list<formatters::artefact>
     create_artefacts(const annotations::type_repository& atrp,
-        const annotations::annotation_groups_factory& af,
-        const properties_factory& pf,
+        const annotations::annotation_groups_factory& agf,
+        const dogen::formatters::repository& drp,
         const std::forward_list<boost::filesystem::path>&
         text_template_paths) const;
 

@@ -18,12 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/formatters/stitch_formatter.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory("quilt.cpp.formatters.stitch_formatter"));
+
+const std::string stitch_extension(".stitch");
+
+}
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formatters {
+
+stitch_formatter::stitch_formatter(const annotations::type_repository& atrp,
+    const annotations::annotation_groups_factory& af,
+    const dogen::formatters::repository& frp)
+    : instantiator_(atrp, af, frp) {}
 
 bool stitch_formatter::is_header(const inclusion_support_types ist) const {
     return
@@ -32,9 +49,25 @@ bool stitch_formatter::is_header(const inclusion_support_types ist) const {
 }
 
 dogen::formatters::artefact stitch_formatter::
-format(const artefact_formatter_interface& /*stock_formatter*/,
-    const context& /*ctx*/, const yarn::element& /*e*/) const {
-    dogen::formatters::artefact r;
+format(const artefact_formatter_interface& stock_formatter, const context& ctx,
+    const yarn::element& e, const bool generate_wale_kvps) const {
+    const auto al(stock_formatter.archetype_location());
+    const auto needs_guard(is_header(stock_formatter.inclusion_support_type()));
+    const auto id(e.name().id());
+
+    assistant a(ctx, al, needs_guard, id);
+    std::unordered_map<std::string, std::string> wale_kvps;
+    if (generate_wale_kvps) {
+        wale_kvps = std::unordered_map<std::string, std::string> {
+            { "class.simple_name", e.name().simple() }
+        };
+    }
+
+    const auto& fp(a.artefact_properties().file_path());
+    boost::filesystem::path stitch_template(fp);
+    stitch_template.replace_extension(stitch_extension);
+
+    const auto r(instantiator_.instantiate(stitch_template, wale_kvps));
     return r;
 }
 

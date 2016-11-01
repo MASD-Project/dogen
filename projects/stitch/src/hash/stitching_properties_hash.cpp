@@ -42,6 +42,15 @@ inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
     return seed;
 }
 
+inline std::size_t hash_std_unordered_map_std_string_std_string(const std::unordered_map<std::string, std::string>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, i.second);
+    }
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -54,6 +63,8 @@ std::size_t stitching_properties_hasher::hash(const stitching_properties& v) {
     combine(seed, hash_boost_filesystem_path(v.relative_output_directory()));
     combine(seed, hash_std_list_std_string(v.inclusion_dependencies()));
     combine(seed, hash_std_list_std_string(v.containing_namespaces()));
+    combine(seed, v.wale_template());
+    combine(seed, hash_std_unordered_map_std_string_std_string(v.wale_kvps()));
 
     return seed;
 }

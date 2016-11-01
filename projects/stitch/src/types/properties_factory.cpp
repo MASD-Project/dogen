@@ -31,11 +31,9 @@ const std::string cpp_modeline_name("cpp");
 namespace dogen {
 namespace stitch {
 
-properties_factory::properties_factory(
-    const annotations::type_repository& annotations_repository,
-    const dogen::formatters::repository& formatters_repository)
-    : annotations_repository_(annotations_repository),
-      formatters_repository_(formatters_repository) {}
+properties_factory::properties_factory(const annotations::type_repository& atrp,
+    const dogen::formatters::repository& frp)
+    : annotations_repository_(atrp),   formatters_repository_(frp) {}
 
 boost::optional<formatters::decoration_properties> properties_factory::
 make_decoration_properties(const annotations::annotation& a) const {
