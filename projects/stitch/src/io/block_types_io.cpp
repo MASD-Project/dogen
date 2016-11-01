@@ -43,6 +43,9 @@ std::ostream& operator<<(std::ostream& s, const block_types& v) {
     case block_types::expression_block:
         attr = "\"expression_block\"";
         break;
+    case block_types::variable_instance_block:
+        attr = "\"variable_instance_block\"";
+        break;
     default:
         throw std::invalid_argument("Invalid value for block_types");
     }

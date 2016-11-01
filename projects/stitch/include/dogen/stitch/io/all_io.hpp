@@ -30,6 +30,7 @@
 #include "dogen/stitch/io/properties_io.hpp"
 #include "dogen/stitch/io/block_types_io.hpp"
 #include "dogen/stitch/io/text_template_io.hpp"
+#include "dogen/stitch/io/text_template_body_io.hpp"
 #include "dogen/stitch/io/stitching_properties_io.hpp"
 
 #endif

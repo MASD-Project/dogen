@@ -29,7 +29,7 @@
 #include <utility>
 #include "dogen/stitch/types/line.hpp"
 #include "dogen/stitch/types/block.hpp"
-#include "dogen/stitch/types/text_template.hpp"
+#include "dogen/stitch/types/text_template_body.hpp"
 
 namespace dogen {
 namespace stitch {
@@ -92,7 +92,7 @@ public:
     /**
      * @brief Parse the string.
      */
-    text_template parse(const std::string& s) const;
+    text_template_body parse(const std::string& s) const;
 };
 
 } }

@@ -18,27 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/stitch/test_data/block_types_td.hpp"
+#ifndef DOGEN_STITCH_SERIALIZATION_TEXT_TEMPLATE_BODY_FWD_SER_HPP
+#define DOGEN_STITCH_SERIALIZATION_TEXT_TEMPLATE_BODY_FWD_SER_HPP
 
-namespace dogen {
-namespace stitch {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-block_types_generator::block_types_generator() : position_(0) { }
-void block_types_generator::
-populate(const unsigned int position, result_type& v) {
-    v = static_cast<block_types>(position % 5);
-}
+#include "dogen/stitch/types/text_template_body_fwd.hpp"
 
-block_types_generator::result_type
-block_types_generator::create(const unsigned int  position) {
-    result_type r;
-    block_types_generator::populate(position, r);
-    return r;
-}
+namespace boost {
+namespace serialization {
 
-block_types_generator::result_type
-block_types_generator::operator()() {
-    return create(position_++);
-}
+template<class Archive>
+void save(Archive& ar, const dogen::stitch::text_template_body& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, dogen::stitch::text_template_body& v, unsigned int version);
 
 } }
+
+#endif

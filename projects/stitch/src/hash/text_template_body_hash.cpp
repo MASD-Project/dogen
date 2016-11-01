@@ -18,27 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/stitch/test_data/block_types_td.hpp"
+#include "dogen/stitch/hash/line_hash.hpp"
+#include "dogen/stitch/hash/text_template_body_hash.hpp"
+#include "dogen/annotations/hash/scribble_group_hash.hpp"
+
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value) {
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+inline std::size_t hash_std_list_dogen_stitch_line(const std::list<dogen::stitch::line>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
+}
+
+}
 
 namespace dogen {
 namespace stitch {
 
-block_types_generator::block_types_generator() : position_(0) { }
-void block_types_generator::
-populate(const unsigned int position, result_type& v) {
-    v = static_cast<block_types>(position % 5);
-}
+std::size_t text_template_body_hasher::hash(const text_template_body& v) {
+    std::size_t seed(0);
 
-block_types_generator::result_type
-block_types_generator::create(const unsigned int  position) {
-    result_type r;
-    block_types_generator::populate(position, r);
-    return r;
-}
+    combine(seed, v.scribble_group());
+    combine(seed, hash_std_list_dogen_stitch_line(v.lines()));
 
-block_types_generator::result_type
-block_types_generator::operator()() {
-    return create(position_++);
+    return seed;
 }
 
 } }

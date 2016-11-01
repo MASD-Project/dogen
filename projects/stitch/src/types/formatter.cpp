@@ -131,14 +131,14 @@ void formatter::format_line_with_single_block(const std::string& stream_name,
     }
 }
 
-annotations::archetype_location formatter::ownership_hierarchy() const {
-    static annotations::archetype_location
-        r(model_name, facet_name, formatter_name);
+annotations::archetype_location formatter::archetype_location() const {
+    using annotations::archetype_location;
+    static archetype_location r(model_name, facet_name, formatter_name);
     return r;
 }
 
 dogen::formatters::artefact formatter::format(const text_template& tt) const {
-    BOOST_LOG_SEV(lg, debug) << "Formatting template.";
+    BOOST_LOG_SEV(lg, debug) << "Formatting text template.";
 
     const auto& ss(tt.properties().stitching_properties());
     const auto stream_variable_name(ss.stream_variable_name());
@@ -158,7 +158,7 @@ dogen::formatters::artefact formatter::format(const text_template& tt) const {
             s, ss.containing_namespaces(), false/*create_anonymous_namespace*/,
             true/*add_new_line_*/);
 
-        for (const auto& l : tt.lines()) {
+        for (const auto& l : tt.body().lines()) {
             if (l.blocks().empty()) {
                 BOOST_LOG_SEV(lg, error) << empty_line;
                 BOOST_THROW_EXCEPTION(formatting_error(empty_line));

@@ -18,10 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/stitch/hash/line_hash.hpp"
 #include "dogen/stitch/hash/properties_hash.hpp"
 #include "dogen/stitch/hash/text_template_hash.hpp"
-#include "dogen/annotations/hash/scribble_group_hash.hpp"
+#include "dogen/stitch/hash/text_template_body_hash.hpp"
 
 namespace {
 
@@ -37,10 +36,11 @@ inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) 
     return seed;
 }
 
-inline std::size_t hash_std_list_dogen_stitch_line(const std::list<dogen::stitch::line>& v) {
+inline std::size_t hash_std_unordered_map_std_string_std_string(const std::unordered_map<std::string, std::string>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
-        combine(seed, i);
+        combine(seed, i.first);
+        combine(seed, i.second);
     }
     return seed;
 }
@@ -53,11 +53,11 @@ namespace stitch {
 std::size_t text_template_hasher::hash(const text_template& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_boost_filesystem_path(v.template_path()));
+    combine(seed, hash_boost_filesystem_path(v.input_path()));
     combine(seed, hash_boost_filesystem_path(v.output_path()));
-    combine(seed, v.scribble_group());
     combine(seed, v.properties());
-    combine(seed, hash_std_list_dogen_stitch_line(v.lines()));
+    combine(seed, hash_std_unordered_map_std_string_std_string(v.variables()));
+    combine(seed, v.body());
 
     return seed;
 }

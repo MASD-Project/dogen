@@ -32,7 +32,8 @@ enum class block_types : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
     text_block = 1,
     standard_control_block = 2,
-    expression_block = 3
+    expression_block = 3,
+    variable_instance_block = 4
 };
 
 } }

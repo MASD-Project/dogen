@@ -25,17 +25,20 @@
 #pragma once
 #endif
 
-#include <list>
+#include <string>
 #include <algorithm>
+#include <unordered_map>
 #include <boost/filesystem/path.hpp>
-#include "dogen/stitch/types/line.hpp"
 #include "dogen/stitch/types/properties.hpp"
-#include "dogen/annotations/types/scribble_group.hpp"
+#include "dogen/stitch/types/text_template_body.hpp"
 #include "dogen/stitch/serialization/text_template_fwd_ser.hpp"
 
 namespace dogen {
 namespace stitch {
 
+/**
+ * @brief Domain representation of a stitch template.
+ */
 class text_template final {
 public:
     text_template() = default;
@@ -47,11 +50,11 @@ public:
 
 public:
     text_template(
-        const boost::filesystem::path& template_path,
+        const boost::filesystem::path& input_path,
         const boost::filesystem::path& output_path,
-        const dogen::annotations::scribble_group& scribble_group,
         const dogen::stitch::properties& properties,
-        const std::list<dogen::stitch::line>& lines);
+        const std::unordered_map<std::string, std::string>& variables,
+        const dogen::stitch::text_template_body& body);
 
 private:
     template<typename Archive>
@@ -61,30 +64,55 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::stitch::text_template& v, unsigned int version);
 
 public:
-    const boost::filesystem::path& template_path() const;
-    boost::filesystem::path& template_path();
-    void template_path(const boost::filesystem::path& v);
-    void template_path(const boost::filesystem::path&& v);
+    /**
+     * @brief Path where the template was read out from, if any.
+     */
+    /**@{*/
+    const boost::filesystem::path& input_path() const;
+    boost::filesystem::path& input_path();
+    void input_path(const boost::filesystem::path& v);
+    void input_path(const boost::filesystem::path&& v);
+    /**@}*/
 
+    /**
+     * @brief Path where the template should be outputted to, if any.
+     */
+    /**@{*/
     const boost::filesystem::path& output_path() const;
     boost::filesystem::path& output_path();
     void output_path(const boost::filesystem::path& v);
     void output_path(const boost::filesystem::path&& v);
+    /**@}*/
 
-    const dogen::annotations::scribble_group& scribble_group() const;
-    dogen::annotations::scribble_group& scribble_group();
-    void scribble_group(const dogen::annotations::scribble_group& v);
-    void scribble_group(const dogen::annotations::scribble_group&& v);
-
+    /**
+     * @brief Properties of the template.
+     */
+    /**@{*/
     const dogen::stitch::properties& properties() const;
     dogen::stitch::properties& properties();
     void properties(const dogen::stitch::properties& v);
     void properties(const dogen::stitch::properties&& v);
+    /**@}*/
 
-    const std::list<dogen::stitch::line>& lines() const;
-    std::list<dogen::stitch::line>& lines();
-    void lines(const std::list<dogen::stitch::line>& v);
-    void lines(const std::list<dogen::stitch::line>&& v);
+    /**
+     * @brief Any variables which may have been defined with the template.
+     */
+    /**@{*/
+    const std::unordered_map<std::string, std::string>& variables() const;
+    std::unordered_map<std::string, std::string>& variables();
+    void variables(const std::unordered_map<std::string, std::string>& v);
+    void variables(const std::unordered_map<std::string, std::string>&& v);
+    /**@}*/
+
+    /**
+     * @brief Body of the text template.
+     */
+    /**@{*/
+    const dogen::stitch::text_template_body& body() const;
+    dogen::stitch::text_template_body& body();
+    void body(const dogen::stitch::text_template_body& v);
+    void body(const dogen::stitch::text_template_body&& v);
+    /**@}*/
 
 public:
     bool operator==(const text_template& rhs) const;
@@ -97,11 +125,11 @@ public:
     text_template& operator=(text_template other);
 
 private:
-    boost::filesystem::path template_path_;
+    boost::filesystem::path input_path_;
     boost::filesystem::path output_path_;
-    dogen::annotations::scribble_group scribble_group_;
     dogen::stitch::properties properties_;
-    std::list<dogen::stitch::line> lines_;
+    std::unordered_map<std::string, std::string> variables_;
+    dogen::stitch::text_template_body body_;
 };
 
 } }

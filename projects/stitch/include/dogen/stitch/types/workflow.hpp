@@ -82,10 +82,10 @@ private:
         text_template_paths) const;
 
     /**
-     * @brief Computes the output path, given the template path.
+     * @brief Computes the output path, given the template input path.
      */
     boost::filesystem::path
-    compute_output_path(const boost::filesystem::path& template_path,
+    compute_output_path(const boost::filesystem::path& input_path,
         const properties& props) const;
 
 private:

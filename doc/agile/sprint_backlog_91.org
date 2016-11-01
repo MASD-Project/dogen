@@ -279,6 +279,7 @@ When we implemented profiles we didn't add them to stitch. Add them
 and remove all duplication from stitch templates.
 
 *** STARTED Changes to stitch to accommodate wale                     :story:
+    CLOCK: [2016-11-01 Tue 09:40]--[2016-11-01 Tue 11:28] =>  1:48
     CLOCK: [2016-10-31 Mon 22:40]--[2016-10-31 Mon 22:59] =>  0:19
     CLOCK: [2016-10-25 Tue 11:14]--[2016-10-25 Tue 11:46] =>  0:32
 Tasks:
@@ -310,6 +311,22 @@ Tasks:
   it to a directory and it processes all templates found. In the new
   integrated world, we want to process a single template at a
   time. Names: directory workflow and file workflow?
+
+Tasks:
+
+- split out the processing of a single template into its own class,
+  returning an artefact. Add merging of annotations. Implement main
+  stitch workflow in terms of this new class.
+- change quilt.cpp's stitch formatter to receive all of the parameters
+  required by this new class. Move its instantiation to where all the
+  parameters are (probably main workflow). Supply formatter to
+  formatter's workflow.
+- add a method in wale to check if annotations provide wale
+  fields. Add a method in stitch new class to check if wale fields are
+  present, and if so, execute it. Add a map of string to string in
+  text template. Add an entry for wale's output:
+  =stitch.wale.template_instantiation_result=.
+
 
 *** Merge properties factory with stitching factory                   :story:
 

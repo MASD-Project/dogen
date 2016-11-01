@@ -19,20 +19,31 @@
  *
  */
 #include <ostream>
-#include "dogen/stitch/io/line_io.hpp"
+#include <boost/algorithm/string.hpp>
 #include "dogen/stitch/io/properties_io.hpp"
 #include "dogen/stitch/io/text_template_io.hpp"
-#include "dogen/annotations/io/scribble_group_io.hpp"
+#include "dogen/stitch/io/text_template_body_io.hpp"
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::stitch::line>& v) {
-    s << "[ ";
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::string>& v) {
+    s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
-        s << *i;
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->second) << "\"";
+        s << " } ]";
     }
-    s << "] ";
+    s << " ] ";
     return s;
 }
 
@@ -44,11 +55,11 @@ namespace stitch {
 std::ostream& operator<<(std::ostream& s, const text_template& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::stitch::text_template\"" << ", "
-      << "\"template_path\": " << "\"" << v.template_path().generic_string() << "\"" << ", "
+      << "\"input_path\": " << "\"" << v.input_path().generic_string() << "\"" << ", "
       << "\"output_path\": " << "\"" << v.output_path().generic_string() << "\"" << ", "
-      << "\"scribble_group\": " << v.scribble_group() << ", "
       << "\"properties\": " << v.properties() << ", "
-      << "\"lines\": " << v.lines()
+      << "\"variables\": " << v.variables() << ", "
+      << "\"body\": " << v.body()
       << " }";
     return(s);
 }

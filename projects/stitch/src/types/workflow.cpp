@@ -95,7 +95,7 @@ validate_text_template_paths(const std::forward_list<boost::filesystem::path>&
 }
 
 boost::filesystem::path
-workflow::compute_output_path(const boost::filesystem::path& template_path,
+workflow::compute_output_path(const boost::filesystem::path& input_path,
     const properties& props) const {
 
     boost::filesystem::path r;
@@ -103,11 +103,11 @@ workflow::compute_output_path(const boost::filesystem::path& template_path,
     if (!sp.relative_output_directory().empty()) {
         using namespace boost::filesystem;
         path rel_dir(sp.relative_output_directory());
-        r = absolute(rel_dir, template_path.parent_path());
+        r = absolute(rel_dir, input_path.parent_path());
     } else
-        r = template_path.parent_path();
+        r = input_path.parent_path();
 
-    std::string output_filename(template_path.stem().generic_string());
+    std::string output_filename(input_path.stem().generic_string());
     output_filename += stitch_postfix;
     r /= output_filename;
 
@@ -136,7 +136,7 @@ workflow::read_text_templates(
 annotations::archetype_location_repository
 workflow::obtain_archetype_location_repository() const {
     std::list<annotations::archetype_location> als;
-    als.push_back(formatter_.ownership_hierarchy());
+    als.push_back(formatter_.archetype_location());
 
     annotations::archetype_location_repository_factory f;
     const auto r(f.make(als));
@@ -175,14 +175,15 @@ std::forward_list<text_template> workflow::create_text_templates(
              * lines and scribble group portions of the text
              * template.
              */
+            text_template tt;
             const auto& text_template_as_string(pair.second);
-            auto tt(p.parse(text_template_as_string));
+            tt.body(p.parse(text_template_as_string));
 
             /*
-             * The template path is simply the location from where we
-             * read it.
+             * The input path is the location from where we read the
+             * template.
              */
-            tt.template_path(path);
+            tt.input_path(path);
 
             /*
              * We then convert the scribble group into annotations,
@@ -190,7 +191,7 @@ std::forward_list<text_template> workflow::create_text_templates(
              * take that annotation object and use it to generate the
              * properties.
              */
-            const auto& sgrp(tt.scribble_group());
+            const auto& sgrp(tt.body().scribble_group());
             const auto ag(af.make(sgrp));
             const auto& a(ag.parent());
             tt.properties(pf.make(a));

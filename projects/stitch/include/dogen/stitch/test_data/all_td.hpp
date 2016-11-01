@@ -30,6 +30,7 @@
 #include "dogen/stitch/test_data/properties_td.hpp"
 #include "dogen/stitch/test_data/block_types_td.hpp"
 #include "dogen/stitch/test_data/text_template_td.hpp"
+#include "dogen/stitch/test_data/text_template_body_td.hpp"
 #include "dogen/stitch/test_data/stitching_properties_td.hpp"
 
 #endif

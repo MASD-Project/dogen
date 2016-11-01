@@ -24,39 +24,39 @@ namespace dogen {
 namespace stitch {
 
 text_template::text_template(text_template&& rhs)
-    : template_path_(std::move(rhs.template_path_)),
+    : input_path_(std::move(rhs.input_path_)),
       output_path_(std::move(rhs.output_path_)),
-      scribble_group_(std::move(rhs.scribble_group_)),
       properties_(std::move(rhs.properties_)),
-      lines_(std::move(rhs.lines_)) { }
+      variables_(std::move(rhs.variables_)),
+      body_(std::move(rhs.body_)) { }
 
 text_template::text_template(
-    const boost::filesystem::path& template_path,
+    const boost::filesystem::path& input_path,
     const boost::filesystem::path& output_path,
-    const dogen::annotations::scribble_group& scribble_group,
     const dogen::stitch::properties& properties,
-    const std::list<dogen::stitch::line>& lines)
-    : template_path_(template_path),
+    const std::unordered_map<std::string, std::string>& variables,
+    const dogen::stitch::text_template_body& body)
+    : input_path_(input_path),
       output_path_(output_path),
-      scribble_group_(scribble_group),
       properties_(properties),
-      lines_(lines) { }
+      variables_(variables),
+      body_(body) { }
 
 void text_template::swap(text_template& other) noexcept {
     using std::swap;
-    swap(template_path_, other.template_path_);
+    swap(input_path_, other.input_path_);
     swap(output_path_, other.output_path_);
-    swap(scribble_group_, other.scribble_group_);
     swap(properties_, other.properties_);
-    swap(lines_, other.lines_);
+    swap(variables_, other.variables_);
+    swap(body_, other.body_);
 }
 
 bool text_template::operator==(const text_template& rhs) const {
-    return template_path_ == rhs.template_path_ &&
+    return input_path_ == rhs.input_path_ &&
         output_path_ == rhs.output_path_ &&
-        scribble_group_ == rhs.scribble_group_ &&
         properties_ == rhs.properties_ &&
-        lines_ == rhs.lines_;
+        variables_ == rhs.variables_ &&
+        body_ == rhs.body_;
 }
 
 text_template& text_template::operator=(text_template other) {
@@ -65,20 +65,20 @@ text_template& text_template::operator=(text_template other) {
     return *this;
 }
 
-const boost::filesystem::path& text_template::template_path() const {
-    return template_path_;
+const boost::filesystem::path& text_template::input_path() const {
+    return input_path_;
 }
 
-boost::filesystem::path& text_template::template_path() {
-    return template_path_;
+boost::filesystem::path& text_template::input_path() {
+    return input_path_;
 }
 
-void text_template::template_path(const boost::filesystem::path& v) {
-    template_path_ = v;
+void text_template::input_path(const boost::filesystem::path& v) {
+    input_path_ = v;
 }
 
-void text_template::template_path(const boost::filesystem::path&& v) {
-    template_path_ = std::move(v);
+void text_template::input_path(const boost::filesystem::path&& v) {
+    input_path_ = std::move(v);
 }
 
 const boost::filesystem::path& text_template::output_path() const {
@@ -97,22 +97,6 @@ void text_template::output_path(const boost::filesystem::path&& v) {
     output_path_ = std::move(v);
 }
 
-const dogen::annotations::scribble_group& text_template::scribble_group() const {
-    return scribble_group_;
-}
-
-dogen::annotations::scribble_group& text_template::scribble_group() {
-    return scribble_group_;
-}
-
-void text_template::scribble_group(const dogen::annotations::scribble_group& v) {
-    scribble_group_ = v;
-}
-
-void text_template::scribble_group(const dogen::annotations::scribble_group&& v) {
-    scribble_group_ = std::move(v);
-}
-
 const dogen::stitch::properties& text_template::properties() const {
     return properties_;
 }
@@ -129,20 +113,36 @@ void text_template::properties(const dogen::stitch::properties&& v) {
     properties_ = std::move(v);
 }
 
-const std::list<dogen::stitch::line>& text_template::lines() const {
-    return lines_;
+const std::unordered_map<std::string, std::string>& text_template::variables() const {
+    return variables_;
 }
 
-std::list<dogen::stitch::line>& text_template::lines() {
-    return lines_;
+std::unordered_map<std::string, std::string>& text_template::variables() {
+    return variables_;
 }
 
-void text_template::lines(const std::list<dogen::stitch::line>& v) {
-    lines_ = v;
+void text_template::variables(const std::unordered_map<std::string, std::string>& v) {
+    variables_ = v;
 }
 
-void text_template::lines(const std::list<dogen::stitch::line>&& v) {
-    lines_ = std::move(v);
+void text_template::variables(const std::unordered_map<std::string, std::string>&& v) {
+    variables_ = std::move(v);
+}
+
+const dogen::stitch::text_template_body& text_template::body() const {
+    return body_;
+}
+
+dogen::stitch::text_template_body& text_template::body() {
+    return body_;
+}
+
+void text_template::body(const dogen::stitch::text_template_body& v) {
+    body_ = v;
+}
+
+void text_template::body(const dogen::stitch::text_template_body&& v) {
+    body_ = std::move(v);
 }
 
 } }

@@ -18,27 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/stitch/test_data/block_types_td.hpp"
+#ifndef DOGEN_STITCH_TYPES_TEXT_TEMPLATE_BODY_FWD_HPP
+#define DOGEN_STITCH_TYPES_TEXT_TEMPLATE_BODY_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace stitch {
 
-block_types_generator::block_types_generator() : position_(0) { }
-void block_types_generator::
-populate(const unsigned int position, result_type& v) {
-    v = static_cast<block_types>(position % 5);
-}
-
-block_types_generator::result_type
-block_types_generator::create(const unsigned int  position) {
-    result_type r;
-    block_types_generator::populate(position, r);
-    return r;
-}
-
-block_types_generator::result_type
-block_types_generator::operator()() {
-    return create(position_++);
-}
+class text_template_body;
 
 } }
+
+#endif

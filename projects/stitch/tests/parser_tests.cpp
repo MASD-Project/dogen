@@ -26,7 +26,7 @@
 #include "dogen/utility/test/exception_checkers.hpp"
 #include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
-#include "dogen/stitch/io/text_template_io.hpp"
+#include "dogen/stitch/io/text_template_body_io.hpp"
 #include "dogen/stitch/types/parsing_error.hpp"
 #include "dogen/stitch/types/parser.hpp"
 
@@ -142,8 +142,7 @@ const std::string start_and_end("start and end in the same line");
 const std::string middle_of_line("the middle of a line");
 const std::string invalid_characters("Invalid characters used");
 
-dogen::stitch::text_template
-parse(const std::string& s) {
+dogen::stitch::text_template_body parse(const std::string& s) {
     dogen::stitch::parser p;
     return p.parse(s);
 }
@@ -164,16 +163,16 @@ BOOST_AUTO_TEST_SUITE(parser_tests)
 
 BOOST_AUTO_TEST_CASE(empty_string_results_in_empty_template) {
     SETUP_TEST_LOG_SOURCE("empty_string_results_in_empty_template");
-    const auto tt(parse(empty));
-    BOOST_CHECK(tt.lines().empty());
+    const auto body(parse(empty));
+    BOOST_CHECK(body.lines().empty());
 }
 
 BOOST_AUTO_TEST_CASE(string_with_only_text_content_in_single_line_results_in_expected_template) {
     SETUP_TEST_LOG_SOURCE("string_with_only_text_content_in_single_line_results_in_expected_template");
-    const auto tt(parse(only_text_content_in_single_line));
+    const auto body(parse(only_text_content_in_single_line));
 
-    BOOST_REQUIRE(tt.lines().size() == 1);
-    const auto& line(tt.lines().front());
+    BOOST_REQUIRE(body.lines().size() == 1);
+    const auto& line(body.lines().front());
 
     BOOST_REQUIRE(line.blocks().size() == 1);
     const auto& b(line.blocks().front());
@@ -183,17 +182,17 @@ BOOST_AUTO_TEST_CASE(string_with_only_text_content_in_single_line_results_in_exp
 
 BOOST_AUTO_TEST_CASE(string_with_only_text_content_multi_line_results_in_expected_template) {
     SETUP_TEST_LOG_SOURCE("string_with_only_text_content_multi_line_results_in_expected_template");
-    const auto tt(parse(only_text_content_muti_line));
+    const auto body(parse(only_text_content_muti_line));
 
-    BOOST_REQUIRE(tt.lines().size() == 2);
+    BOOST_REQUIRE(body.lines().size() == 2);
 
-    const auto& l1(tt.lines().front());
+    const auto& l1(body.lines().front());
     BOOST_REQUIRE(l1.blocks().size() == 1);
     const auto& b1(l1.blocks().front());
     BOOST_CHECK(b1.type() == dogen::stitch::block_types::text_block);
     BOOST_CHECK(b1.content() == only_text_content_in_single_line);
 
-    const auto& l2(tt.lines().back());
+    const auto& l2(body.lines().back());
     BOOST_REQUIRE(l2.blocks().size() == 1);
     const auto& b2(l2.blocks().front());
     BOOST_CHECK(b2.type() == dogen::stitch::block_types::text_block);
@@ -202,10 +201,10 @@ BOOST_AUTO_TEST_CASE(string_with_only_text_content_multi_line_results_in_expecte
 
 BOOST_AUTO_TEST_CASE(inline_standard_control_block_results_in_expected_template) {
     SETUP_TEST_LOG_SOURCE("inline_standard_control_block_results_in_expected_template");
-    const auto tt(parse(inline_standard_control_block));
+    const auto body(parse(inline_standard_control_block));
 
-    BOOST_REQUIRE(tt.lines().size() == 1);
-    const auto& line(tt.lines().front());
+    BOOST_REQUIRE(body.lines().size() == 1);
+    const auto& line(body.lines().front());
 
     BOOST_REQUIRE(line.blocks().size() == 1);
     const auto& b(line.blocks().front());
@@ -234,16 +233,16 @@ BOOST_AUTO_TEST_CASE(invalid_inline_control_blocks_throw) {
 
 BOOST_AUTO_TEST_CASE(empty_standard_control_block_results_in_empty_template) {
     SETUP_TEST_LOG_SOURCE("empty_standard_control_block_results_in_empty_template");
-    const auto tt(parse(empty_standard_control_block));
-    BOOST_CHECK(tt.lines().empty());
+    const auto body(parse(empty_standard_control_block));
+    BOOST_CHECK(body.lines().empty());
 }
 
 BOOST_AUTO_TEST_CASE(single_line_standard_control_block_results_in_expected_template) {
     SETUP_TEST_LOG_SOURCE("single_line_standard_control_block_results_in_expected_template");
-    const auto tt(parse(single_line_standard_control_block));
+    const auto body(parse(single_line_standard_control_block));
 
-    BOOST_REQUIRE(tt.lines().size() == 1);
-    const auto& line(tt.lines().front());
+    BOOST_REQUIRE(body.lines().size() == 1);
+    const auto& line(body.lines().front());
 
     BOOST_REQUIRE(line.blocks().size() == 1);
     const auto& b(line.blocks().front());
@@ -253,10 +252,10 @@ BOOST_AUTO_TEST_CASE(single_line_standard_control_block_results_in_expected_temp
 
 BOOST_AUTO_TEST_CASE(text_standard_standard_control_text_single_line_results_in_expected_template) {
     SETUP_TEST_LOG_SOURCE("text_standard_control_text_single_line_results_in_expected_template");
-    const auto tt(parse(text_standard_control_text_single_line));
-    BOOST_REQUIRE(tt.lines().size() == 3);
+    const auto body(parse(text_standard_control_text_single_line));
+    BOOST_REQUIRE(body.lines().size() == 3);
 
-    auto i(tt.lines().begin());
+    auto i(body.lines().begin());
     const auto l1(*i);
     BOOST_REQUIRE(l1.blocks().size() == 1);
     const auto& b1(l1.blocks().front());
@@ -281,10 +280,10 @@ BOOST_AUTO_TEST_CASE(text_standard_standard_control_text_single_line_results_in_
 
 BOOST_AUTO_TEST_CASE(standard_control_text_standard_control_single_line_results_in_expected_template) {
     SETUP_TEST_LOG_SOURCE("standard_control_text_standard_control_single_line_results_in_expected_template");
-    const auto tt(parse(standard_control_text_standard_control_single_line));
-    BOOST_REQUIRE(tt.lines().size() == 3);
+    const auto body(parse(standard_control_text_standard_control_single_line));
+    BOOST_REQUIRE(body.lines().size() == 3);
 
-    auto i(tt.lines().begin());
+    auto i(body.lines().begin());
     const auto l1(*i);
     BOOST_REQUIRE(l1.blocks().size() == 1);
     const auto& b1(l1.blocks().front());
@@ -361,22 +360,22 @@ BOOST_AUTO_TEST_CASE(standard_control_block_with_text_block_in_the_same_line_thr
 
 BOOST_AUTO_TEST_CASE(licence_directive_results_in_expected_template) {
     SETUP_TEST_LOG_SOURCE("licence_directive_results_in_expected_template");
-    const auto tt(parse(licence_directive));
-    BOOST_LOG_SEV(lg, debug) << "Result: " << tt;
+    const auto body(parse(licence_directive));
+    BOOST_LOG_SEV(lg, debug) << "Result: " << body;
 
-    BOOST_CHECK(tt.lines().empty());
-    const auto& entries(tt.scribble_group().parent().entries());
+    BOOST_CHECK(body.lines().empty());
+    const auto& entries(body.scribble_group().parent().entries());
     BOOST_REQUIRE(entries.size() == 1);
     BOOST_CHECK(find_kvp(entries, licence_name, licence_value));
 }
 
 BOOST_AUTO_TEST_CASE(multiple_directives_results_in_expected_template) {
     SETUP_TEST_LOG_SOURCE("multiple_directives_results_in_expected_template");
-    const auto tt(parse(multiple_directives));
-    BOOST_LOG_SEV(lg, debug) << "Result: " << tt;
+    const auto body(parse(multiple_directives));
+    BOOST_LOG_SEV(lg, debug) << "Result: " << body;
 
-    BOOST_CHECK(tt.lines().empty());
-    const auto& entries(tt.scribble_group().parent().entries());
+    BOOST_CHECK(body.lines().empty());
+    const auto& entries(body.scribble_group().parent().entries());
     BOOST_REQUIRE(entries.size() == 2);
     BOOST_CHECK(find_kvp(entries, licence_name, licence_value));
     BOOST_CHECK(find_kvp(entries, copyright_notice_name,
@@ -393,9 +392,9 @@ BOOST_AUTO_TEST_CASE(invalid_directive_throws) {
 
 BOOST_AUTO_TEST_CASE(line_with_stand_alone_expression_block_results_in_expected_template) {
     SETUP_TEST_LOG_SOURCE("line_with_stand_alone_expression_block_results_in_expected_template");
-    const auto tt(parse(stand_alone_expression_block));
-    BOOST_REQUIRE(tt.lines().size() == 1);
-    const auto& line(tt.lines().front());
+    const auto body(parse(stand_alone_expression_block));
+    BOOST_REQUIRE(body.lines().size() == 1);
+    const auto& line(body.lines().front());
 
     BOOST_REQUIRE(line.blocks().size() == 1);
     const auto& b(line.blocks().front());
@@ -405,9 +404,9 @@ BOOST_AUTO_TEST_CASE(line_with_stand_alone_expression_block_results_in_expected_
 
 BOOST_AUTO_TEST_CASE(line_with_text_expression_block_results_in_expected_template) {
     SETUP_TEST_LOG_SOURCE("line_with_text_expression_block_results_in_expected_template");
-    const auto tt(parse(text_expression_block));
-    BOOST_REQUIRE(tt.lines().size() == 1);
-    const auto& line(tt.lines().front());
+    const auto body(parse(text_expression_block));
+    BOOST_REQUIRE(body.lines().size() == 1);
+    const auto& line(body.lines().front());
 
     BOOST_REQUIRE(line.blocks().size() == 2);
     const auto& b1(line.blocks().front());
@@ -421,9 +420,9 @@ BOOST_AUTO_TEST_CASE(line_with_text_expression_block_results_in_expected_templat
 
 BOOST_AUTO_TEST_CASE(line_with_text_expression_block_text_results_in_expected_template) {
     SETUP_TEST_LOG_SOURCE("line_with_text_expression_block_text_results_in_expected_template");
-    const auto tt(parse(text_expression_block_text));
-    BOOST_REQUIRE(tt.lines().size() == 1);
-    auto line(tt.lines().front());
+    const auto body(parse(text_expression_block_text));
+    BOOST_REQUIRE(body.lines().size() == 1);
+    auto line(body.lines().front());
 
     BOOST_REQUIRE(line.blocks().size() == 3);
     auto i(line.blocks().begin());
@@ -445,9 +444,9 @@ BOOST_AUTO_TEST_CASE(line_with_text_expression_block_text_results_in_expected_te
 
 BOOST_AUTO_TEST_CASE(line_with_expression_block_text_expression_block_results_in_expected_template) {
     SETUP_TEST_LOG_SOURCE("line_with_expression_block_text_expression_block_results_in_expected_template");
-    const auto tt(parse(expression_block_text_expression_block));
-    BOOST_REQUIRE(tt.lines().size() == 1);
-    auto line(tt.lines().front());
+    const auto body(parse(expression_block_text_expression_block));
+    BOOST_REQUIRE(body.lines().size() == 1);
+    auto line(body.lines().front());
 
     BOOST_REQUIRE(line.blocks().size() == 3);
     auto i(line.blocks().begin());
@@ -469,9 +468,9 @@ BOOST_AUTO_TEST_CASE(line_with_expression_block_text_expression_block_results_in
 
 BOOST_AUTO_TEST_CASE(line_with_text_expression_block_text_expression_block_text_results_in_expected_template) {
     SETUP_TEST_LOG_SOURCE("line_with_text_expression_block_text_expression_block_text_results_in_expected_template");
-    const auto tt(parse(text_expression_block_text_expression_block_text));
-    BOOST_REQUIRE(tt.lines().size() == 1);
-    auto line(tt.lines().front());
+    const auto body(parse(text_expression_block_text_expression_block_text));
+    BOOST_REQUIRE(body.lines().size() == 1);
+    auto line(body.lines().front());
 
     BOOST_REQUIRE(line.blocks().size() == 5);
     auto i(line.blocks().begin());
@@ -532,11 +531,11 @@ BOOST_AUTO_TEST_CASE(expression_in_expression_throws) {
 
 BOOST_AUTO_TEST_CASE(namespaces_directive_results_in_expected_template) {
     SETUP_TEST_LOG_SOURCE("namespaces_directive_results_in_expected_template");
-    const auto tt(parse(namespaces_directive));
-    BOOST_LOG_SEV(lg, debug) << "Result: " << tt;
+    const auto body(parse(namespaces_directive));
+    BOOST_LOG_SEV(lg, debug) << "Result: " << body;
 
-    BOOST_CHECK(tt.lines().empty());
-    const auto& entries(tt.scribble_group().parent().entries());
+    BOOST_CHECK(body.lines().empty());
+    const auto& entries(body.scribble_group().parent().entries());
     BOOST_REQUIRE(entries.size() == 1);
     BOOST_CHECK(find_kvp(entries, namespaces_name, namespaces_value));
 }

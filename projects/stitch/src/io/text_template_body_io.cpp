@@ -18,27 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/stitch/test_data/block_types_td.hpp"
+#include <ostream>
+#include "dogen/stitch/io/line_io.hpp"
+#include "dogen/stitch/io/text_template_body_io.hpp"
+#include "dogen/annotations/io/scribble_group_io.hpp"
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::stitch::line>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
 
 namespace dogen {
 namespace stitch {
 
-block_types_generator::block_types_generator() : position_(0) { }
-void block_types_generator::
-populate(const unsigned int position, result_type& v) {
-    v = static_cast<block_types>(position % 5);
-}
-
-block_types_generator::result_type
-block_types_generator::create(const unsigned int  position) {
-    result_type r;
-    block_types_generator::populate(position, r);
-    return r;
-}
-
-block_types_generator::result_type
-block_types_generator::operator()() {
-    return create(position_++);
+std::ostream& operator<<(std::ostream& s, const text_template_body& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::stitch::text_template_body\"" << ", "
+      << "\"scribble_group\": " << v.scribble_group() << ", "
+      << "\"lines\": " << v.lines()
+      << " }";
+    return(s);
 }
 
 } }

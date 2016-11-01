@@ -19,20 +19,20 @@
  *
  */
 #include <boost/serialization/nvp.hpp>
-#include <boost/serialization/list.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
+#include <boost/serialization/string.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
+#include <boost/serialization/unordered_map.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/utility/serialization/path.hpp"
-#include "dogen/stitch/serialization/line_ser.hpp"
 #include "dogen/stitch/serialization/properties_ser.hpp"
 #include "dogen/stitch/serialization/text_template_ser.hpp"
-#include "dogen/annotations/serialization/scribble_group_ser.hpp"
+#include "dogen/stitch/serialization/text_template_body_ser.hpp"
 
 namespace boost {
 namespace serialization {
@@ -64,22 +64,22 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::stitch::text_template& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("template_path", v.template_path_);
+    ar << make_nvp("input_path", v.input_path_);
     ar << make_nvp("output_path", v.output_path_);
-    ar << make_nvp("scribble_group", v.scribble_group_);
     ar << make_nvp("properties", v.properties_);
-    ar << make_nvp("lines", v.lines_);
+    ar << make_nvp("variables", v.variables_);
+    ar << make_nvp("body", v.body_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
     dogen::stitch::text_template& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("template_path", v.template_path_);
+    ar >> make_nvp("input_path", v.input_path_);
     ar >> make_nvp("output_path", v.output_path_);
-    ar >> make_nvp("scribble_group", v.scribble_group_);
     ar >> make_nvp("properties", v.properties_);
-    ar >> make_nvp("lines", v.lines_);
+    ar >> make_nvp("variables", v.variables_);
+    ar >> make_nvp("body", v.body_);
 }
 
 } }

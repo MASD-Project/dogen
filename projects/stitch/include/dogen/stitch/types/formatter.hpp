@@ -74,12 +74,12 @@ private:
 
  public:
     /**
-     * @brief Ownership hierarchy for this formatter
+     * @brief Archetype location for this formatter.
      */
-    annotations::archetype_location ownership_hierarchy() const;
+    annotations::archetype_location archetype_location() const;
 
     /**
-     * @brief Formats the text template.
+     * @brief Formats the template into an artefact.
      */
     dogen::formatters::artefact format(const text_template& tt) const;
 };

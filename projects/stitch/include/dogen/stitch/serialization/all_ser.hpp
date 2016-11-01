@@ -30,6 +30,7 @@
 #include "dogen/stitch/serialization/properties_ser.hpp"
 #include "dogen/stitch/serialization/block_types_ser.hpp"
 #include "dogen/stitch/serialization/text_template_ser.hpp"
+#include "dogen/stitch/serialization/text_template_body_ser.hpp"
 #include "dogen/stitch/serialization/stitching_properties_ser.hpp"
 
 #endif

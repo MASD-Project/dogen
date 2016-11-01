@@ -33,7 +33,7 @@
 #include "dogen/annotations/types/scribble_group.hpp"
 #include "dogen/stitch/io/line_io.hpp"
 #include "dogen/stitch/types/parsing_error.hpp"
-#include "dogen/stitch/io/text_template_io.hpp"
+#include "dogen/stitch/io/text_template_body_io.hpp"
 #include "dogen/stitch/types/parser.hpp"
 
 namespace {
@@ -218,10 +218,10 @@ parse_directive(const std::string& input_line) const {
     return std::make_pair(key, value);
 }
 
-text_template parser::parse(const std::string& s) const {
+text_template_body parser::parse(const std::string& s) const {
     BOOST_LOG_SEV(lg, debug) << "Parsing: " << s;
     if (s.empty())
-        return text_template();
+        return text_template_body();
 
     std::list<line> lines;
     unsigned int line_number(0);
@@ -338,7 +338,7 @@ text_template parser::parse(const std::string& s) const {
         throw;
     }
 
-    text_template r;
+    text_template_body r;
     r.lines(lines);
 
     if (!kvps.empty()) {
