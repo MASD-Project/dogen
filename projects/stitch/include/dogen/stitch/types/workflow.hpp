@@ -97,10 +97,10 @@ private:
         text_template_paths) const;
 
     /**
-     * @brief Obtains the ownership hierarchy repository.
+     * @brief Obtains the archetype location repository.
      */
     annotations::archetype_location_repository
-    obtain_ownership_hierarchy_repository() const;
+    obtain_archetype_location_repository() const;
 
     /**
      * @brief Creates the formatters' repository.

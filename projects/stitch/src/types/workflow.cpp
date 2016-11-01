@@ -134,7 +134,7 @@ workflow::read_text_templates(
 }
 
 annotations::archetype_location_repository
-workflow::obtain_ownership_hierarchy_repository() const {
+workflow::obtain_archetype_location_repository() const {
     std::list<annotations::archetype_location> als;
     als.push_back(formatter_.ownership_hierarchy());
 
@@ -235,7 +235,7 @@ void workflow::execute(const boost::filesystem::path& p) const {
     validate_text_template_paths(paths);
     const auto templates_as_strings(read_text_templates(paths));
 
-    const auto alrp(obtain_ownership_hierarchy_repository());
+    const auto alrp(obtain_archetype_location_repository());
     const auto data_dirs(create_data_directories());
     const auto atrp(create_annotations_type_repository(data_dirs, alrp));
 
