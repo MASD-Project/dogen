@@ -47,6 +47,8 @@ private:
         const annotations::annotation& a) const;
 
 public:
+    bool has_properties(const annotations::annotation& a) const;
+
     properties make(const annotations::type_repository& atrp,
         const annotations::annotation& a) const;
 };

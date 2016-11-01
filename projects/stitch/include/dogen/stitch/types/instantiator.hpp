@@ -28,6 +28,7 @@
 #include <string>
 #include <boost/filesystem/path.hpp>
 #include "dogen/annotations/types/annotation.hpp"
+#include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
 #include "dogen/formatters/types/artefact.hpp"
 #include "dogen/stitch/types/properties_factory.hpp"
@@ -43,7 +44,8 @@ typedef boost::error_info<struct tag_file_name, std::string> error_in_file;
 
 class instantiator final {
 public:
-    instantiator(const annotations::annotation_groups_factory& af,
+    instantiator(const annotations::type_repository& atrp,
+        const annotations::annotation_groups_factory& af,
         const properties_factory& pf);
 
 private:
@@ -77,6 +79,7 @@ public:
     instantiate(const boost::filesystem::path& input_path) const;
 
 private:
+    const annotations::type_repository& type_repository_;
     const annotations::annotation_groups_factory& annotation_factory_;
     const properties_factory& properties_factory_;
 };

@@ -2307,17 +2307,17 @@ content of entries.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="114.153,-88.3502"/>
+        <dia:point val="112.998,-88.3502"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="107.097,-89.1002;114.903,-62.2"/>
+        <dia:rectangle val="107.097,-89.1002;113.748,-62.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="114.153,-88.3502"/>
-        <dia:point val="114.153,-70"/>
+        <dia:point val="112.998,-88.3502"/>
+        <dia:point val="112.998,-70"/>
         <dia:point val="107.147,-70"/>
         <dia:point val="107.147,-63"/>
       </dia:attribute>
@@ -2345,14 +2345,14 @@ content of entries.#</dia:string>
         <dia:point val="117.305,-109.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="113.865,-109.57;117.375,-106.656"/>
+        <dia:rectangle val="112.753,-109.568;117.373,-106.629"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="117.305,-109.5"/>
-        <dia:point val="114.153,-107"/>
+        <dia:point val="112.998,-107"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
@@ -2367,7 +2367,7 @@ content of entries.#</dia:string>
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="115.729,-107.75"/>
+        <dia:point val="115.151,-107.75"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O15" connection="6"/>
@@ -2412,17 +2412,17 @@ content of entries.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="132.305,-107"/>
+        <dia:point val="129.995,-107"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="131.555,-110.75;143.832,-106.2"/>
+        <dia:rectangle val="129.245,-110.75;143.832,-106.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="132.305,-107"/>
-        <dia:point val="132.305,-110"/>
+        <dia:point val="129.995,-107"/>
+        <dia:point val="129.995,-110"/>
         <dia:point val="143.632,-110"/>
         <dia:point val="143.632,-107"/>
       </dia:attribute>
@@ -3234,13 +3234,13 @@ any.#</dia:string>
         <dia:point val="96,-107"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="95.95,-107.05;132.355,-88.35"/>
+        <dia:rectangle val="95.95,-107.05;130.045,-88.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="96,-107"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="36.305"/>
+        <dia:real val="33.994999999999997"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="18.600000000000005"/>
@@ -3360,7 +3360,7 @@ any.#</dia:string>
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#has_field#</dia:string>
+            <dia:string>#has_entry#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -3389,7 +3389,7 @@ any.#</dia:string>
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#field_name#</dia:string>
+                <dia:string>#qualified_name#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
                 <dia:string>#const std::string&amp;#</dia:string>
@@ -3408,7 +3408,7 @@ any.#</dia:string>
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#has_field#</dia:string>
+            <dia:string>#has_entry#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -3437,10 +3437,10 @@ any.#</dia:string>
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#fd#</dia:string>
+                <dia:string>#t#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const field_definition&amp; fd#</dia:string>
+                <dia:string>#const type&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -3456,7 +3456,7 @@ any.#</dia:string>
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#get_field#</dia:string>
+            <dia:string>#get_entry#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -3485,7 +3485,7 @@ any.#</dia:string>
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#field_name#</dia:string>
+                <dia:string>#qualified_name#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
                 <dia:string>#const std::string&amp;#</dia:string>
@@ -3504,7 +3504,7 @@ any.#</dia:string>
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#get_field#</dia:string>
+            <dia:string>#get_entry#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -3533,10 +3533,10 @@ any.#</dia:string>
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#fd#</dia:string>
+                <dia:string>#t#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const field_definition&amp;#</dia:string>
+                <dia:string>#const type&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -3629,7 +3629,7 @@ any.#</dia:string>
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#field_name#</dia:string>
+                <dia:string>#qualified_name#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
                 <dia:string>#const std::string&amp;#</dia:string>
@@ -3677,10 +3677,10 @@ any.#</dia:string>
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#fd#</dia:string>
+                <dia:string>#t#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const field_definition&amp;#</dia:string>
+                <dia:string>#const type&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -3725,10 +3725,10 @@ any.#</dia:string>
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#fd#</dia:string>
+                <dia:string>#t#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const field_definition&amp;#</dia:string>
+                <dia:string>#const type&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -3773,7 +3773,7 @@ any.#</dia:string>
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#field_name#</dia:string>
+                <dia:string>#qualified_name#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
                 <dia:string>#const std::string&amp;#</dia:string>
@@ -3821,10 +3821,10 @@ any.#</dia:string>
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#fd#</dia:string>
+                <dia:string>#t#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const field_definition&amp;#</dia:string>
+                <dia:string>#const type&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -3869,10 +3869,10 @@ any.#</dia:string>
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#fd#</dia:string>
+                <dia:string>#t#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const field_definition&amp;#</dia:string>
+                <dia:string>#const type&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -3965,7 +3965,7 @@ any.#</dia:string>
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#field_name#</dia:string>
+                <dia:string>#qualified_name#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
                 <dia:string>#const std::string&amp;#</dia:string>
@@ -4013,10 +4013,10 @@ any.#</dia:string>
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#fd#</dia:string>
+                <dia:string>#t#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const field_definition&amp;#</dia:string>
+                <dia:string>#const type&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -4061,10 +4061,10 @@ any.#</dia:string>
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#fd#</dia:string>
+                <dia:string>#t#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const field_definition&amp;#</dia:string>
+                <dia:string>#const type&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -4157,7 +4157,7 @@ any.#</dia:string>
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#field_name#</dia:string>
+                <dia:string>#qualified_name#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
                 <dia:string>#const std::string&amp;#</dia:string>
@@ -4205,10 +4205,10 @@ any.#</dia:string>
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#fd#</dia:string>
+                <dia:string>#t#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const field_definition&amp;#</dia:string>
+                <dia:string>#const type&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -4253,10 +4253,10 @@ any.#</dia:string>
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#fd#</dia:string>
+                <dia:string>#t#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const field_definition&amp;#</dia:string>
+                <dia:string>#const type&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>

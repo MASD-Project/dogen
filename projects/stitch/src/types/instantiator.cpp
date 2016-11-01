@@ -23,6 +23,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/filesystem/file.hpp"
+#include "dogen/wale/types/workflow.hpp"
 #include "dogen/stitch/types/instantiation_error.hpp"
 #include "dogen/stitch/types/parser.hpp"
 #include "dogen/stitch/types/properties.hpp"
@@ -35,17 +36,21 @@ using namespace dogen::utility::log;
 auto lg(logger_factory("stitch.instantiator"));
 
 const std::string stitch_postfix("_stitch.cpp");
+const std::string wale_key("stitch.wale.template_instantiation_result");
 
 const std::string empty_template("Template has no content: ");
+const std::string duplicate_variable("Attempt to insert duplicate variable: ");
 
 }
 
 namespace dogen {
 namespace stitch {
 
-instantiator::instantiator(const annotations::annotation_groups_factory& af,
+instantiator::instantiator(const annotations::type_repository& atrp,
+    const annotations::annotation_groups_factory& af,
     const properties_factory& pf)
-    : annotation_factory_(af), properties_factory_(pf) {}
+    : type_repository_(atrp), annotation_factory_(af),
+      properties_factory_(pf) {}
 
 boost::filesystem::path
 instantiator::compute_output_path(const boost::filesystem::path& input_path,
@@ -83,9 +88,9 @@ text_template
 instantiator::create_text_template(const boost::filesystem::path& input_path,
     const std::string& text_template_as_string) const {
 
-    parser p;
     BOOST_LOG_SEV(lg, debug) << "Processing: " << input_path.generic_string();
 
+    text_template r;
     try {
         /*
          * We first start by parsing the raw text templates into
@@ -93,7 +98,7 @@ instantiator::create_text_template(const boost::filesystem::path& input_path,
          * lines and scribble group portions of the text
          * template.
          */
-        text_template r;
+        parser p;
         r.body(p.parse(text_template_as_string));
 
         /*
@@ -103,15 +108,30 @@ instantiator::create_text_template(const boost::filesystem::path& input_path,
         r.input_path(input_path);
 
         /*
-         * We then convert the scribble group into annotations,
-         * which performs a profile expansion as required. We then
-         * take that annotation object and use it to generate the
-         * properties.
+         * Convert the scribble group into annotations, which performs
+         * a profile expansion as required. We then take that
+         * annotation object and use it to generate the properties.
          */
         const auto& sgrp(r.body().scribble_group());
         const auto ag(annotation_factory_.make(sgrp));
         const auto& a(ag.parent());
         r.properties(properties_factory_.make(a));
+
+        /*
+         * If we can execute the wale workflow, execute it and store
+         * the result as a variable.
+         */
+        wale::workflow wkf;
+        if (wkf.can_execute(a)) {
+            const auto wale_value(wkf.execute(type_repository_, a));
+            const auto pair(std::make_pair(wale_key, wale_value));
+            const auto inserted(r.variables().insert(pair).second);
+            if (!inserted) {
+                BOOST_LOG_SEV(lg, error) << duplicate_variable << wale_key;
+                BOOST_THROW_EXCEPTION(
+                    instantiation_error(duplicate_variable + wale_key));
+            }
+        }
 
         /*
          * Finally, we compute an output path for our template,

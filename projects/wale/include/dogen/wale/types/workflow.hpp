@@ -58,6 +58,7 @@ private:
     std::string execute(const properties& props) const;
 
 public:
+    bool can_execute(const annotations::annotation& a) const;
     std::string execute(const annotations::type_repository& atrp,
         const annotations::annotation& a) const;
     std::string execute(const boost::filesystem::path& template_path,

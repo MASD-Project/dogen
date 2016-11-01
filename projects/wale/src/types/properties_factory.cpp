@@ -43,8 +43,8 @@ std::ostream&
 operator<<(std::ostream& s, const properties_factory::type_group& v) {
     s << " { "
       << "\"__type__\": " << "\"wale::properties_factory::type_group\"" << ", "
-      << "\"inclusion_directive\": " << v.template_path << ", "
-      << "\"inclusion_directive\": " << v.kvps
+      << "\"template_path_directive\": " << v.template_path << ", "
+      << "\"kvps\": " << v.kvps
       << " }";
     return s;
 }
@@ -73,6 +73,12 @@ read_properties(const type_group& tg, const annotations::annotation& a) const {
 
     BOOST_LOG_SEV(lg, debug) << "Read properties. Result: " << r;
     return r;
+}
+
+bool properties_factory::
+has_properties(const annotations::annotation& a) const {
+    const annotations::entry_selector s(a);
+    return s.has_entry(wale_template_path);
 }
 
 properties properties_factory::make(const annotations::type_repository& atrp,

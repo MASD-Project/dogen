@@ -102,6 +102,11 @@ std::string workflow::execute(const properties& props) const {
     return format(tt);
 }
 
+bool workflow::can_execute(const annotations::annotation& a) const {
+    properties_factory f;
+    return f.has_properties(a);
+}
+
 std::string workflow::execute(const annotations::type_repository& atrp,
     const annotations::annotation& a) const {
     BOOST_LOG_SEV(lg, debug) << "Executing workflow. Annotation: " << a;

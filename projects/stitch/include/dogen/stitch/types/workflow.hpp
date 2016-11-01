@@ -96,7 +96,8 @@ private:
     /**
      * @brief Creates the artefacts
      */
-    std::forward_list<formatters::artefact> create_artefacts(
+    std::forward_list<formatters::artefact>
+    create_artefacts(const annotations::type_repository& atrp,
         const annotations::annotation_groups_factory& af,
         const properties_factory& pf,
         const std::forward_list<boost::filesystem::path>&

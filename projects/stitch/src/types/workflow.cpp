@@ -118,13 +118,14 @@ annotations::type_repository workflow::create_annotations_type_repository(
     return f.make(alrp, data_dirs);
 }
 
-std::forward_list<formatters::artefact> workflow::create_artefacts(
+std::forward_list<formatters::artefact>
+workflow::create_artefacts(const annotations::type_repository& atrp,
     const annotations::annotation_groups_factory& af,
     const properties_factory& pf, const std::forward_list<
     boost::filesystem::path>& text_template_paths) const {
 
     std::forward_list<formatters::artefact> r;
-    const instantiator inst(af, pf);
+    const instantiator inst(atrp, af, pf);
     for (const auto& p : text_template_paths)
         r.push_front(inst.instantiate(p));
 
@@ -155,7 +156,7 @@ void workflow::execute(const boost::filesystem::path& p) const {
     const auto frp(create_formatters_repository(data_dirs));
     annotations::annotation_groups_factory af(data_dirs, alrp, atrp);
     properties_factory pf(atrp, frp);
-    const auto artefacts(create_artefacts(af, pf, paths));
+    const auto artefacts(create_artefacts(atrp, af, pf, paths));
     write_artefacts(artefacts);
 
     BOOST_LOG_SEV(lg, debug) << "Finished executing workflow.";
