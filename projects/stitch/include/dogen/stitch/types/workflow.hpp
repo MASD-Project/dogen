@@ -38,23 +38,14 @@
 #include "dogen/stitch/types/properties.hpp"
 #include "dogen/stitch/types/properties_factory.hpp"
 #include "dogen/stitch/types/text_template.hpp"
-#include "dogen/stitch/types/formatter.hpp"
 
 namespace dogen {
 namespace stitch {
 
 /**
- * @brief Provides file name information on errors.
- */
-typedef boost::error_info<struct tag_file_name, std::string> error_in_file;
-
-/**
  * @brief Performs the stitch workflow.
  */
 class workflow {
-public:
-    workflow();
-
 private:
     std::vector<boost::filesystem::path> create_data_directories() const;
 
@@ -81,21 +72,7 @@ private:
         const std::forward_list<boost::filesystem::path>&
         text_template_paths) const;
 
-    /**
-     * @brief Computes the output path, given the template input path.
-     */
-    boost::filesystem::path
-    compute_output_path(const boost::filesystem::path& input_path,
-        const properties& props) const;
-
 private:
-    /**
-     * @brief Reads all of the supplied stitch text templates into memory.
-     */
-    std::forward_list<std::pair<boost::filesystem::path, std::string> >
-    read_text_templates(const std::forward_list<boost::filesystem::path>&
-        text_template_paths) const;
-
     /**
      * @brief Obtains the archetype location repository.
      */
@@ -117,20 +94,13 @@ private:
         const;
 
     /**
-     * @brief Creates the text templates
+     * @brief Creates the artefacts
      */
-    std::forward_list<text_template>
-    create_text_templates(
+    std::forward_list<formatters::artefact> create_artefacts(
         const annotations::annotation_groups_factory& af,
         const properties_factory& pf,
-        const std::forward_list<std::pair<
-        boost::filesystem::path, std::string>>& text_templates_as_string) const;
-
-    /**
-     * @brief Formats all of the supplied text templates.
-     */
-    std::forward_list<formatters::artefact> format_text_templates(
-        const std::forward_list<text_template>& text_templates) const;
+        const std::forward_list<boost::filesystem::path>&
+        text_template_paths) const;
 
     /**
      * @brief Writes all of the artefacts to the filesystem.
@@ -151,9 +121,6 @@ public:
      * @li if @code p is a file, code-generates the stitch template.
      */
     void execute(const boost::filesystem::path& p) const;
-
-private:
-    const formatter formatter_;
 };
 
 } }

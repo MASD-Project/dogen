@@ -34,6 +34,8 @@
 #include "dogen/formatters/types/filesystem_writer.hpp"
 #include "dogen/stitch/types/parser.hpp"
 #include "dogen/stitch/types/properties_factory.hpp"
+#include "dogen/stitch/types/instantiator.hpp"
+#include "dogen/stitch/types/formatter.hpp"
 #include "dogen/stitch/types/workflow_error.hpp"
 #include "dogen/stitch/types/workflow.hpp"
 
@@ -54,8 +56,6 @@ const std::string error_in_file("Failed to parse file: ");
 
 namespace dogen {
 namespace stitch {
-
-workflow::workflow() : formatter_() {}
 
 std::vector<boost::filesystem::path>
 workflow::create_data_directories() const {
@@ -94,48 +94,11 @@ validate_text_template_paths(const std::forward_list<boost::filesystem::path>&
     }
 }
 
-boost::filesystem::path
-workflow::compute_output_path(const boost::filesystem::path& input_path,
-    const properties& props) const {
-
-    boost::filesystem::path r;
-    const auto& sp(props.stitching_properties());
-    if (!sp.relative_output_directory().empty()) {
-        using namespace boost::filesystem;
-        path rel_dir(sp.relative_output_directory());
-        r = absolute(rel_dir, input_path.parent_path());
-    } else
-        r = input_path.parent_path();
-
-    std::string output_filename(input_path.stem().generic_string());
-    output_filename += stitch_postfix;
-    r /= output_filename;
-
-    return r;
-}
-
-std::forward_list<std::pair<boost::filesystem::path, std::string> >
-workflow::read_text_templates(
-    const std::forward_list<boost::filesystem::path>&
-    text_template_paths) const {
-    std::forward_list<std::pair<boost::filesystem::path, std::string> > r;
-    for (const auto& path : text_template_paths) {
-        using utility::filesystem::read_file_content;
-        const auto content(read_file_content(path));
-        if (content.empty()) {
-            BOOST_LOG_SEV(lg, error) << empty_template << path.generic_string();
-            BOOST_THROW_EXCEPTION(
-                workflow_error(empty_template + path.generic_string()));
-        }
-        r.push_front(std::make_pair(path, content));
-    }
-    return r;
-}
-
 annotations::archetype_location_repository
 workflow::obtain_archetype_location_repository() const {
     std::list<annotations::archetype_location> als;
-    als.push_back(formatter_.archetype_location());
+    formatter fmt;
+    als.push_back(fmt.archetype_location());
 
     annotations::archetype_location_repository_factory f;
     const auto r(f.make(als));
@@ -155,76 +118,27 @@ annotations::type_repository workflow::create_annotations_type_repository(
     return f.make(alrp, data_dirs);
 }
 
-std::forward_list<text_template> workflow::create_text_templates(
+std::forward_list<formatters::artefact> workflow::create_artefacts(
     const annotations::annotation_groups_factory& af,
-    const properties_factory& pf,
-    const std::forward_list<std::pair<boost::filesystem::path, std::string> >&
-    text_templates_as_string) const {
-    std::forward_list<text_template> r;
-    parser p;
+    const properties_factory& pf, const std::forward_list<
+    boost::filesystem::path>& text_template_paths) const {
 
-    for (const auto& pair : text_templates_as_string) {
-        const auto& path(pair.first);
-        BOOST_LOG_SEV(lg, debug) << "Processing: " << path.generic_string();
-
-        try {
-            /*
-             * We first start by parsing the raw text templates into
-             * their domain representation. This only populates the
-             * lines and scribble group portions of the text
-             * template.
-             */
-            text_template tt;
-            const auto& text_template_as_string(pair.second);
-            tt.body(p.parse(text_template_as_string));
-
-            /*
-             * The input path is the location from where we read the
-             * template.
-             */
-            tt.input_path(path);
-
-            /*
-             * We then convert the scribble group into annotations,
-             * which performs a profile expansion as required. We then
-             * take that annotation object and use it to generate the
-             * properties.
-             */
-            const auto& sgrp(tt.body().scribble_group());
-            const auto ag(af.make(sgrp));
-            const auto& a(ag.parent());
-            tt.properties(pf.make(a));
-
-            /*
-             * Finally, we compute an output path for our template,
-             * taking into account its input path and any relevant
-             * options set by the user.
-             */
-            tt.output_path(compute_output_path(path, tt.properties()));
-
-            r.push_front(tt);
-        } catch(boost::exception& e) {
-            e << error_in_file(pair.first.generic_string());
-            throw;
-        }
-    }
-
-    return r;
-}
-
-std::forward_list<formatters::artefact> workflow::format_text_templates(
-    const std::forward_list<text_template>& text_templates) const {
     std::forward_list<formatters::artefact> r;
-    for (const auto& tt : text_templates)
-        r.push_front(formatter_.format(tt));
+    const instantiator inst(af, pf);
+    for (const auto& p : text_template_paths)
+        r.push_front(inst.instantiate(p));
+
     return r;
 }
 
 void workflow::write_artefacts(
     const std::forward_list<formatters::artefact>& artefacts) const {
-    BOOST_LOG_SEV(lg, debug) << "Artefacts: " << artefacts;
+    BOOST_LOG_SEV(lg, debug) << "About to write. Artefacts: " << artefacts;
+
     formatters::filesystem_writer w(false/*force_write*/);
     w.write(artefacts);
+
+    BOOST_LOG_SEV(lg, debug) << "Finished writing.";
 }
 
 void workflow::execute(const boost::filesystem::path& p) const {
@@ -233,7 +147,6 @@ void workflow::execute(const boost::filesystem::path& p) const {
 
     const auto paths(get_text_template_paths(p));
     validate_text_template_paths(paths);
-    const auto templates_as_strings(read_text_templates(paths));
 
     const auto alrp(obtain_archetype_location_repository());
     const auto data_dirs(create_data_directories());
@@ -242,9 +155,7 @@ void workflow::execute(const boost::filesystem::path& p) const {
     const auto frp(create_formatters_repository(data_dirs));
     annotations::annotation_groups_factory af(data_dirs, alrp, atrp);
     properties_factory pf(atrp, frp);
-    const auto tts(create_text_templates(af, pf, templates_as_strings));
-
-    const auto artefacts(format_text_templates(tts));
+    const auto artefacts(create_artefacts(af, pf, paths));
     write_artefacts(artefacts);
 
     BOOST_LOG_SEV(lg, debug) << "Finished executing workflow.";

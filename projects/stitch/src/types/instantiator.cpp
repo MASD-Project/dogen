@@ -136,9 +136,15 @@ instantiator::format_text_template(const text_template& tt) const {
 
 formatters::artefact
 instantiator::instantiate(const boost::filesystem::path& input_path) const {
+    BOOST_LOG_SEV(lg, debug) << "Instantiating: "
+                             << input_path.generic_string();
+
     const auto s(read_text_template(input_path));
     const auto tt(create_text_template(input_path, s));
     const auto r(format_text_template(tt));
+
+    BOOST_LOG_SEV(lg, debug) << "Instantiated.";
+
     return r;
 }
 

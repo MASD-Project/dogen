@@ -25,7 +25,7 @@
 #include "dogen/utility/test_data/stitch.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
 #include "dogen/stitch/io/text_template_io.hpp"
-#include "dogen/stitch/types/workflow_error.hpp"
+#include "dogen/stitch/types/instantiation_error.hpp"
 #include "dogen/stitch/types/workflow.hpp"
 
 namespace {
@@ -40,7 +40,7 @@ const std::string empty_template("Template has no content");
 
 using dogen::utility::test::contains_checker;
 using dogen::utility::test::asserter;
-using dogen::stitch::workflow_error;
+using dogen::stitch::instantiation_error;
 
 BOOST_AUTO_TEST_SUITE(workflow_tests)
 
@@ -73,9 +73,9 @@ BOOST_AUTO_TEST_CASE(empty_template_throws) {
 
     dogen::stitch::workflow w;
     using namespace dogen::utility::test_data;
-    contains_checker<dogen::stitch::workflow_error> c(empty_template);
+    contains_checker<dogen::stitch::instantiation_error> c(empty_template);
     BOOST_CHECK_EXCEPTION(w.execute(stitch::input_empty_template_stitch());,
-        workflow_error, c);
+        instantiation_error, c);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
