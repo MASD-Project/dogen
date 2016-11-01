@@ -279,6 +279,7 @@ When we implemented profiles we didn't add them to stitch. Add them
 and remove all duplication from stitch templates.
 
 *** STARTED Changes to stitch to accommodate wale                     :story:
+    CLOCK: [2016-11-01 Tue 19:43]--[2016-11-01 Tue 20:25] =>  0:42
     CLOCK: [2016-11-01 Tue 19:09]--[2016-11-01 Tue 19:42] =>  0:33
     CLOCK: [2016-11-01 Tue 16:00]--[2016-11-01 Tue 18:04] =>  2:04
     CLOCK: [2016-11-01 Tue 15:41]--[2016-11-01 Tue 15:59] =>  0:18
@@ -299,7 +300,7 @@ Tasks:
   defined internally or we error. On template formatting we do a
   look-up for the variable name and replace it.
 
-: <#% stitch.wale.template_instantiation_result #>
+: <#= $(stitch.wale.template_instantiation_result) #>
 
 - we need to create a map of string to string at the template level
   called =variables=. When formatting we simply look-up the variable
@@ -332,6 +333,29 @@ Tasks:
   present, and if so, execute it. Add a map of string to string in
   text template. Add an entry for wale's output:
   =stitch.wale.template_instantiation_result=.
+
+Notes:
+
+- Tried to piggy-back variable expansion on expression blocks but this
+  won't work: expression blocks are always "streamed" whereas this is
+  not what we want for wale templates - these should behave more like
+  standard control blocks. It would be nice to support variables in
+  expression blocks, but we don't have a use case for that. This means
+  we have no option but to introduce another type of block. We do not
+  need to support mixed content.
+
+: <#$ stitch.wale.template_instantiation_result #>
+
+- we should create a resolver which latches onto a text template and
+  is then able to resolve variable blocks by content. This is then
+  used internally by the formatter. We did consider replacing the
+  blocks with the expanded values but that would break the conceptual
+  model because we would end up with "lines" that had more than one
+  line worth of content.
+
+- stitch wale formatter seems to work as expected. Added:
+
+: #DOGEN quilt.cpp.types.class_implementation.formatting_style=stitch_wale
 
 *** Merge properties factory with stitching factory                   :story:
 
