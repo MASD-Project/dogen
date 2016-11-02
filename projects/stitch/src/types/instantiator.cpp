@@ -83,6 +83,41 @@ read_text_template(const boost::filesystem::path& input_path) const {
     return r;
 }
 
+void instantiator::handle_wale_template(const std::unordered_map<std::string,
+    std::string>& external_kvps, text_template& tt) const {
+
+    /*
+     * Check if we have an associated wale template. If we don't,
+     * there is nothing to do here.
+     */
+    const auto st(tt.properties().stitching_properties());
+    const auto wt(st.wale_template());
+    if (wt.empty()) {
+        BOOST_LOG_SEV(lg, debug) << "No wale template supplied.";
+        return;
+    }
+
+    BOOST_LOG_SEV(lg, error) << "Instantiating wale template: "
+                             << st.wale_template();
+
+    /*
+     * Execute the wale workflow and store the result as a stitch
+     * variable. Note that the internal kvps take precedence over the
+     * external kvps. We probably should throw if both are present as
+     * this seems like a mistake.
+     */
+    wale::workflow wkf;
+    const auto& kvps(st.wale_kvps().empty() ? external_kvps : st.wale_kvps());
+    const auto wale_value(wkf.execute(wt, kvps));
+    const auto pair(std::make_pair(wale_key, wale_value));
+    const auto inserted(tt.variables().insert(pair).second);
+    if (!inserted) {
+        BOOST_LOG_SEV(lg, error) << duplicate_variable << wale_key;
+        BOOST_THROW_EXCEPTION(
+            instantiation_error(duplicate_variable + wale_key));
+    }
+}
+
 text_template
 instantiator::create_text_template(const boost::filesystem::path& input_path,
     const std::string& text_template_as_string,
@@ -118,27 +153,9 @@ instantiator::create_text_template(const boost::filesystem::path& input_path,
         r.properties(properties_factory_.make(a));
 
         /*
-         * Check if we have an associated wale template. If we do, we
-         * need to execute the wale workflow and store the result as a
-         * stitch variable.
+         * Perform the required processing for wale templates.
          */
-        const auto wt(r.properties().stitching_properties().wale_template());
-        if (!wt.empty()) {
-            BOOST_LOG_SEV(lg, error) << "Instantiating wale template.";
-
-            // FIXME: create a get kvps method which looks at input
-            // kvps and properties and obtains one of the two.
-            wale::workflow wkf;
-            const auto wale_value(wkf.execute(wt, wale_kvps));
-            const auto pair(std::make_pair(wale_key, wale_value));
-            const auto inserted(r.variables().insert(pair).second);
-            if (!inserted) {
-                BOOST_LOG_SEV(lg, error) << duplicate_variable << wale_key;
-                BOOST_THROW_EXCEPTION(
-                    instantiation_error(duplicate_variable + wale_key));
-            }
-        } else
-            BOOST_LOG_SEV(lg, error) << "No wale template supplied.";
+        handle_wale_template(wale_kvps, r);
 
         /*
          * Finally, we compute an output path for our template,

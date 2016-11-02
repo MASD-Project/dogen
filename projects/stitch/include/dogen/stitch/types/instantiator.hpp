@@ -64,6 +64,12 @@ private:
     std::string read_text_template(const boost::filesystem::path& p) const;
 
     /**
+     * @brief Instantiates the wale template, if configured.
+     */
+    void handle_wale_template(const std::unordered_map<std::string,
+        std::string>& external_kvps, text_template& tt) const;
+
+    /**
      * @brief Creates the text template.
      */
     text_template create_text_template(
