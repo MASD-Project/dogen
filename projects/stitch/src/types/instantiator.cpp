@@ -124,6 +124,8 @@ instantiator::create_text_template(const boost::filesystem::path& input_path,
          */
         const auto wt(r.properties().stitching_properties().wale_template());
         if (!wt.empty()) {
+            BOOST_LOG_SEV(lg, error) << "Instantiating wale template.";
+
             // FIXME: create a get kvps method which looks at input
             // kvps and properties and obtains one of the two.
             wale::workflow wkf;
@@ -135,7 +137,8 @@ instantiator::create_text_template(const boost::filesystem::path& input_path,
                 BOOST_THROW_EXCEPTION(
                     instantiation_error(duplicate_variable + wale_key));
             }
-        }
+        } else
+            BOOST_LOG_SEV(lg, error) << "No wale template supplied.";
 
         /*
          * Finally, we compute an output path for our template,

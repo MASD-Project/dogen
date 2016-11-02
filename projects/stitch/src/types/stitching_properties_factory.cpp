@@ -62,6 +62,12 @@ stitching_properties_factory::make_type_group(
     const auto cn(traits::containing_namespaces());
     r.containing_namespaces = s.select_type_by_name(cn);
 
+    const auto wt(traits::wale_template());
+    r.wale_template = s.select_type_by_name(wt);
+
+    const auto wkvp(traits::wale_kvp());
+    r.wale_kvp = s.select_type_by_name(wkvp);
+
     return r;
 }
 
@@ -130,7 +136,7 @@ extract_wale_kvps(const annotations::annotation& a) const {
     std::unordered_map<std::string, std::string>  r;
     using namespace annotations;
     const entry_selector s(a);
-    const auto& t(type_group_.wale_template);
+    const auto& t(type_group_.wale_kvp);
     if (!s.has_entry(t))
         return r;
 

@@ -64,6 +64,10 @@ struct traits {
      */
     static std::string wale_template();
 
+    /**
+     * @brief Name of the associated wale kvps, if any.
+     */
+    static std::string wale_kvp();
 };
 
 } }

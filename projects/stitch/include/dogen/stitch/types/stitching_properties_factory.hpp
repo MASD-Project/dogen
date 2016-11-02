@@ -51,7 +51,7 @@ private:
         annotations::type inclusion_dependency;
         annotations::type containing_namespaces;
         annotations::type wale_template;
-        annotations::type wale_kvps;
+        annotations::type wale_kvp;
     };
 
     /**

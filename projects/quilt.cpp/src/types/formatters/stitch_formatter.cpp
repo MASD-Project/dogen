@@ -59,7 +59,11 @@ format(const artefact_formatter_interface& stock_formatter, const context& ctx,
     std::unordered_map<std::string, std::string> wale_kvps;
     if (generate_wale_kvps) {
         wale_kvps = std::unordered_map<std::string, std::string> {
-            { "class.simple_name", e.name().simple() }
+            { "class.simple_name", e.name().simple() },
+            { "class.inclusion_support_type", "test1" },
+            { "yarn_element", "test2" },
+            { "archetype.simple_name", "test3" },
+            { "class.simple_name", "test4" }
         };
     }
 

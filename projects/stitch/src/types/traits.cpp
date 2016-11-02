@@ -49,7 +49,12 @@ std::string traits::containing_namespaces() {
 }
 
 std::string traits::wale_template() {
-    static std::string r("stitch.wale_template");
+    static std::string r("stitch.wale.template");
+    return r;
+}
+
+std::string traits::wale_kvp() {
+    static std::string r("stitch.wale.kvp");
     return r;
 }
 
