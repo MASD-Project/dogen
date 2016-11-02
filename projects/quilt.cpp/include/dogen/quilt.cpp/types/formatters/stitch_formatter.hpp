@@ -45,6 +45,7 @@ public:
         const dogen::formatters::repository& frp);
 
 private:
+    std::string to_string(const inclusion_support_types ist) const;
     bool is_header(const inclusion_support_types ist) const;
 
 public:
