@@ -60,6 +60,7 @@ install:
   - source ${SCRIPTS_DIR}/travis.install.${TRAVIS_OS_NAME}.sh
 
 script:
+  - echo "${TRAVIS_BUILD_DIR}/build/output/${COMPILER}/${BUILD_TYPE}/stage/pkg"
   - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then
         export TARGET="package run_all_tests";
         export THIRD_PARTY="/tmp/dogen_deps/dogen_deps_gcc_5.3_linux_amd64";
