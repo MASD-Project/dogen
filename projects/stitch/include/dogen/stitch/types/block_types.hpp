@@ -33,7 +33,7 @@ enum class block_types : unsigned int {
     text_block = 1,
     standard_control_block = 2,
     expression_block = 3,
-    variable_instance_block = 4
+    variable_block = 4
 };
 
 } }

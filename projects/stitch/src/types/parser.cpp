@@ -46,6 +46,7 @@ const std::string equals("=");
 const std::string start_expression_block_marker("<#=");
 const std::string start_standard_control_block_marker("<#+");
 const std::string start_directive_marker("<#@");
+const std::string start_variable_marker("<#$");
 const std::string end_block_marker("#>");
 
 const std::string error_msg("Failed to parse string: ");
@@ -218,6 +219,30 @@ parse_directive(const std::string& input_line) const {
     return std::make_pair(key, value);
 }
 
+line parser::parse_variable(const std::string& input_line) const {
+    auto cooked_line(input_line);
+    boost::replace_first(cooked_line, start_variable_marker, empty);
+    boost::replace_last(cooked_line, end_block_marker, empty);
+    boost::trim(cooked_line);
+
+    const std::string reserved("<#");
+    if (boost::contains(cooked_line, reserved)) {
+        BOOST_LOG_SEV(lg, error) << invalid_directive << cooked_line;
+        BOOST_THROW_EXCEPTION(parsing_error(invalid_directive + cooked_line));
+    }
+
+    if (boost::contains(cooked_line, end_block_marker)) {
+        BOOST_LOG_SEV(lg, error) << invalid_directive << cooked_line;
+        BOOST_THROW_EXCEPTION(parsing_error(invalid_directive + cooked_line));
+    }
+
+    block b;
+    b.type(block_types::variable_block);
+    b.content(cooked_line);
+    const line r(std::list<block> { b });
+    return r;
+}
+
 text_template_body parser::parse(const std::string& s) const {
     BOOST_LOG_SEV(lg, debug) << "Parsing: " << s;
     if (s.empty())
@@ -251,6 +276,12 @@ text_template_body parser::parse(const std::string& s) const {
 
                 const auto kvp(parse_directive(input_line));
                 kvps.push_back(kvp);
+                continue;
+            }
+
+            if (boost::starts_with(input_line, start_variable_marker)) {
+                BOOST_LOG_SEV(lg, debug) << "Line is a variable";
+                lines.push_back(parse_variable(input_line));
                 continue;
             }
 

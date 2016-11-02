@@ -88,6 +88,11 @@ private:
     std::pair<std::string, std::string>
     parse_directive(const std::string& input_line) const;
 
+    /**
+     * @brief Parse a line with a variable.
+     */
+    line parse_variable(const std::string& input_line) const;
+
 public:
     /**
      * @brief Parse the string.

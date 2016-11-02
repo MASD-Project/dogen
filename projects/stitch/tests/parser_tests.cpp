@@ -113,7 +113,9 @@ single line
 #>)");
 const std::string expression_block_in_expression_block(
     "<#= <#= single line #> #>");
+const std::string simple_variable_block("<#$ my variable #>");
 
+const std::string simple_variable("my variable");
 const std::string licence_directive("<#@ licence_name=gpl_v3 #>");
 const std::string multiple_directives(R"(<#@ licence_name=gpl_v3 #>
 <#@ copyright_notice=Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com> #>)");
@@ -538,6 +540,20 @@ BOOST_AUTO_TEST_CASE(namespaces_directive_results_in_expected_template) {
     const auto& entries(body.scribble_group().parent().entries());
     BOOST_REQUIRE(entries.size() == 1);
     BOOST_CHECK(find_kvp(entries, namespaces_name, namespaces_value));
+}
+
+BOOST_AUTO_TEST_CASE(line_with_variable_block_results_in_expected_template) {
+    SETUP_TEST_LOG_SOURCE("line_with_variable_block_results_in_expected_template");
+    const auto body(parse(simple_variable_block));
+    BOOST_REQUIRE(body.lines().size() == 1);
+    auto line(body.lines().front());
+
+    BOOST_REQUIRE(line.blocks().size() == 1);
+    auto i(line.blocks().begin());
+    const auto& b1(*i);
+    using dogen::stitch::block_types;
+    BOOST_CHECK(b1.type() == block_types::variable_block);
+    BOOST_CHECK(b1.content() == simple_variable);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
