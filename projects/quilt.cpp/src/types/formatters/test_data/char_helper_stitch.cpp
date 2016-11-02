@@ -44,7 +44,7 @@ std::string char_helper::family() const {
 std::list<std::string>
 char_helper::owning_formatters() const {
     static auto r(std::list<std::string> {
-        test_data::traits::class_implementation_archetype()
+        traits::class_implementation_archetype()
     });
     return r;
 }
@@ -52,19 +52,19 @@ char_helper::owning_formatters() const {
 std::list<std::string>
 char_helper::owning_facets() const {
     static auto r(std::list<std::string> {
-        test_data::traits::facet()
+        traits::facet()
     });
+    return r;
+}
+
+std::string char_helper::helper_name() const {
+    static std::string r("char_helper");
     return r;
 }
 
 bool char_helper::is_enabled(const assistant& /*a*/,
     const formattables::helper_properties& /*hp*/) const {
     return true;
-}
-
-std::string char_helper::helper_name() const {
-    static std::string r("char_helper");
-    return r;
 }
 
 void char_helper::

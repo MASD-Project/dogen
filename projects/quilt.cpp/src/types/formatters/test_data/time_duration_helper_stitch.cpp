@@ -43,7 +43,7 @@ std::string time_duration_helper::family() const {
 std::list<std::string>
 time_duration_helper::owning_formatters() const {
     static auto r(std::list<std::string> {
-        test_data::traits::class_implementation_archetype()
+        traits::class_implementation_archetype()
     });
     return r;
 }
@@ -51,19 +51,19 @@ time_duration_helper::owning_formatters() const {
 std::list<std::string>
 time_duration_helper::owning_facets() const {
     static auto r(std::list<std::string> {
-        test_data::traits::facet()
+        traits::facet()
     });
+    return r;
+}
+
+std::string time_duration_helper::helper_name() const {
+    static std::string r("time_duration_helper");
     return r;
 }
 
 bool time_duration_helper::is_enabled(const assistant& /*a*/,
     const formattables::helper_properties& /*hp*/) const {
     return true;
-}
-
-std::string time_duration_helper::helper_name() const {
-    static std::string r("time_duration_helper");
-    return r;
 }
 
 void time_duration_helper::

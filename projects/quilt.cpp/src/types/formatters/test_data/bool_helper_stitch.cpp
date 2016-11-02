@@ -44,7 +44,7 @@ std::string bool_helper::family() const {
 std::list<std::string>
 bool_helper::owning_formatters() const {
     static auto r(std::list<std::string> {
-        test_data::traits::class_implementation_archetype()
+        traits::class_implementation_archetype()
     });
     return r;
 }
@@ -52,19 +52,19 @@ bool_helper::owning_formatters() const {
 std::list<std::string>
 bool_helper::owning_facets() const {
     static auto r(std::list<std::string> {
-        test_data::traits::facet()
+        traits::facet()
     });
+    return r;
+}
+
+std::string bool_helper::helper_name() const {
+    static std::string r("bool_helper");
     return r;
 }
 
 bool bool_helper::is_enabled(const assistant& /*a*/,
     const formattables::helper_properties& /*hp*/) const {
     return true;
-}
-
-std::string bool_helper::helper_name() const {
-    static std::string r("bool_helper");
-    return r;
 }
 
 void bool_helper::

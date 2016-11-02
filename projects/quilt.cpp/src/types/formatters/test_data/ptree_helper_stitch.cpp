@@ -43,7 +43,7 @@ std::string ptree_helper::family() const {
 std::list<std::string>
 ptree_helper::owning_formatters() const {
     static auto r(std::list<std::string> {
-        test_data::traits::class_implementation_archetype()
+        traits::class_implementation_archetype()
     });
     return r;
 }
@@ -51,19 +51,19 @@ ptree_helper::owning_formatters() const {
 std::list<std::string>
 ptree_helper::owning_facets() const {
     static auto r(std::list<std::string> {
-        test_data::traits::facet()
+        traits::facet()
     });
+    return r;
+}
+
+std::string ptree_helper::helper_name() const {
+    static std::string r("ptree_helper");
     return r;
 }
 
 bool ptree_helper::is_enabled(const assistant& /*a*/,
     const formattables::helper_properties& /*hp*/) const {
     return true;
-}
-
-std::string ptree_helper::helper_name() const {
-    static std::string r("ptree_helper");
-    return r;
 }
 
 void ptree_helper::

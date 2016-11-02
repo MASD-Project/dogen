@@ -43,7 +43,7 @@ std::string date_helper::family() const {
 std::list<std::string>
 date_helper::owning_formatters() const {
     static auto r(std::list<std::string> {
-        test_data::traits::class_implementation_archetype()
+        traits::class_implementation_archetype()
     });
     return r;
 }
@@ -51,19 +51,19 @@ date_helper::owning_formatters() const {
 std::list<std::string>
 date_helper::owning_facets() const {
     static auto r(std::list<std::string> {
-        test_data::traits::facet()
+        traits::facet()
     });
+    return r;
+}
+
+std::string date_helper::helper_name() const {
+    static std::string r("date_helper");
     return r;
 }
 
 bool date_helper::is_enabled(const assistant& /*a*/,
     const formattables::helper_properties& /*hp*/) const {
     return true;
-}
-
-std::string date_helper::helper_name() const {
-    static std::string r("date_helper");
-    return r;
 }
 
 void date_helper::
