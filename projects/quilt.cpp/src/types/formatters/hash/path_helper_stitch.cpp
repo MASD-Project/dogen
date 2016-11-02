@@ -29,7 +29,6 @@ namespace cpp {
 namespace formatters {
 namespace hash {
 
-
 std::string path_helper::formatter_name() const {
     static auto r(std::string("<") + traits::facet() + std::string(">") +
         std::string("<") + helper_name() + std::string(">"));
@@ -44,7 +43,7 @@ std::string path_helper::family() const {
 std::list<std::string>
 path_helper::owning_formatters() const {
     static auto r(std::list<std::string> {
-        hash::traits::class_implementation_archetype()
+        traits::class_implementation_archetype()
     });
     return r;
 }
@@ -52,7 +51,7 @@ path_helper::owning_formatters() const {
 std::list<std::string>
 path_helper::owning_facets() const {
     static auto r(std::list<std::string> {
-        hash::traits::facet()
+        traits::facet()
     });
     return r;
 }

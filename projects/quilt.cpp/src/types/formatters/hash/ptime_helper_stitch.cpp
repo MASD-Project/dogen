@@ -43,7 +43,7 @@ std::string ptime_helper::family() const {
 std::list<std::string>
 ptime_helper::owning_formatters() const {
     static auto r(std::list<std::string> {
-        hash::traits::class_implementation_archetype()
+        traits::class_implementation_archetype()
     });
     return r;
 }
@@ -51,7 +51,7 @@ ptime_helper::owning_formatters() const {
 std::list<std::string>
 ptime_helper::owning_facets() const {
     static auto r(std::list<std::string> {
-        hash::traits::facet()
+        traits::facet()
     });
     return r;
 }

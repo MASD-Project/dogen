@@ -4,44 +4,11 @@
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/assistant.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formattables/helper_properties.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/hash/sequence_container_helper.hpp" #>
+<#@ stitch.wale.template=helper_formatter_implementation_enabled.wale #>
+<#@ stitch.wale.kvp.helper.family=SequenceContainer #>
+<#@ stitch.wale.kvp.class.simple_name=sequence_container_helper #>
+<#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::string sequence_container_helper::formatter_name() const {
-    static auto r(std::string("<") + traits::facet() + std::string(">") +
-        std::string("<") + helper_name() + std::string(">"));
-    return r;
-}
-
-std::string sequence_container_helper::family() const {
-    static std::string r("SequenceContainer");
-    return r;
-}
-
-std::list<std::string>
-sequence_container_helper::owning_formatters() const {
-    static auto r(std::list<std::string> {
-        hash::traits::class_implementation_archetype()
-    });
-    return r;
-}
-
-std::list<std::string>
-sequence_container_helper::owning_facets() const {
-    static auto r(std::list<std::string> {
-        hash::traits::facet()
-    });
-    return r;
-}
-
-std::string sequence_container_helper::helper_name() const {
-    static std::string r("sequence_container_helper");
-    return r;
-}
-
-bool sequence_container_helper::is_enabled(const assistant& /*a*/,
-    const formattables::helper_properties& /*hp*/) const {
-    return true;
-}
 
 void sequence_container_helper::
 format(assistant& a, const formattables::helper_properties& hp) const {
