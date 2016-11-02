@@ -22,6 +22,7 @@
 #include "dogen/annotations/test_data/value_td.hpp"
 #include "dogen/annotations/test_data/number_td.hpp"
 #include "dogen/annotations/test_data/boolean_td.hpp"
+#include "dogen/annotations/test_data/key_value_pair_td.hpp"
 #include "dogen/annotations/test_data/text_collection_td.hpp"
 
 namespace dogen {
@@ -33,11 +34,13 @@ populate(const unsigned int /*position*/, result_type& /*v*/) {
 
 value_generator::result_type*
 value_generator::create_ptr(const unsigned int position) {
-    if ((position % 3) == 0)
+    if ((position % 4) == 0)
+        return dogen::annotations::key_value_pair_generator::create_ptr(position);
+    if ((position % 4) == 1)
         return dogen::annotations::number_generator::create_ptr(position);
-    if ((position % 3) == 1)
+    if ((position % 4) == 2)
         return dogen::annotations::text_generator::create_ptr(position);
-    if ((position % 3) == 2)
+    if ((position % 4) == 3)
         return dogen::annotations::text_collection_generator::create_ptr(position);
     return dogen::annotations::boolean_generator::create_ptr(position);
 }

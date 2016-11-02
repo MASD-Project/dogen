@@ -35,19 +35,22 @@ namespace annotations {
 
 type::type()
     : value_type_(static_cast<dogen::annotations::value_types>(0)),
-      scope_(static_cast<dogen::annotations::scope_types>(0)) { }
+      scope_(static_cast<dogen::annotations::scope_types>(0)),
+      is_partially_matchable_(static_cast<bool>(0)) { }
 
 type::type(
     const dogen::annotations::name& name,
     const dogen::annotations::value_types value_type,
     const dogen::annotations::scope_types scope,
     const dogen::annotations::archetype_location& archetype_location,
-    const boost::shared_ptr<dogen::annotations::value>& default_value)
+    const boost::shared_ptr<dogen::annotations::value>& default_value,
+    const bool is_partially_matchable)
     : name_(name),
       value_type_(value_type),
       scope_(scope),
       archetype_location_(archetype_location),
-      default_value_(default_value) { }
+      default_value_(default_value),
+      is_partially_matchable_(is_partially_matchable) { }
 
 void type::swap(type& other) noexcept {
     using std::swap;
@@ -56,6 +59,7 @@ void type::swap(type& other) noexcept {
     swap(scope_, other.scope_);
     swap(archetype_location_, other.archetype_location_);
     swap(default_value_, other.default_value_);
+    swap(is_partially_matchable_, other.is_partially_matchable_);
 }
 
 bool type::operator==(const type& rhs) const {
@@ -63,7 +67,8 @@ bool type::operator==(const type& rhs) const {
         value_type_ == rhs.value_type_ &&
         scope_ == rhs.scope_ &&
         archetype_location_ == rhs.archetype_location_ &&
-        default_value_ == rhs.default_value_;
+        default_value_ == rhs.default_value_ &&
+        is_partially_matchable_ == rhs.is_partially_matchable_;
 }
 
 type& type::operator=(type other) {
@@ -134,6 +139,14 @@ void type::default_value(const boost::shared_ptr<dogen::annotations::value>& v) 
 
 void type::default_value(const boost::shared_ptr<dogen::annotations::value>&& v) {
     default_value_ = std::move(v);
+}
+
+bool type::is_partially_matchable() const {
+    return is_partially_matchable_;
+}
+
+void type::is_partially_matchable(const bool v) {
+    is_partially_matchable_ = v;
 }
 
 } }

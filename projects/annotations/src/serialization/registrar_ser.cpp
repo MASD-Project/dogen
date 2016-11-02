@@ -30,6 +30,7 @@
 #include "dogen/annotations/serialization/number_ser.hpp"
 #include "dogen/annotations/serialization/boolean_ser.hpp"
 #include "dogen/annotations/serialization/registrar_ser.hpp"
+#include "dogen/annotations/serialization/key_value_pair_ser.hpp"
 #include "dogen/annotations/serialization/text_collection_ser.hpp"
 
 namespace dogen {
@@ -38,6 +39,7 @@ namespace annotations {
 template<typename Archive>
 void register_types(Archive& ar) {
     ar.template register_type<dogen::annotations::boolean>();
+    ar.template register_type<dogen::annotations::key_value_pair>();
     ar.template register_type<dogen::annotations::number>();
     ar.template register_type<dogen::annotations::text>();
     ar.template register_type<dogen::annotations::text_collection>();

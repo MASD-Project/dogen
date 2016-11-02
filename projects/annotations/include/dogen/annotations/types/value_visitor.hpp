@@ -28,6 +28,7 @@
 #include "dogen/annotations/types/text_fwd.hpp"
 #include "dogen/annotations/types/number_fwd.hpp"
 #include "dogen/annotations/types/boolean_fwd.hpp"
+#include "dogen/annotations/types/key_value_pair_fwd.hpp"
 #include "dogen/annotations/types/text_collection_fwd.hpp"
 
 namespace dogen {
@@ -49,6 +50,16 @@ public:
     virtual void visit(const dogen::annotations::boolean&) { }
     virtual void visit(dogen::annotations::boolean&) const { }
     virtual void visit(dogen::annotations::boolean&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type dogen::annotations::key_value_pair
+     */
+    /**@{*/
+    virtual void visit(const dogen::annotations::key_value_pair&) const { }
+    virtual void visit(const dogen::annotations::key_value_pair&) { }
+    virtual void visit(dogen::annotations::key_value_pair&) const { }
+    virtual void visit(dogen::annotations::key_value_pair&) { }
     /**@}*/
 
     /**

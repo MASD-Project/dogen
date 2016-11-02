@@ -38,6 +38,7 @@
 #include "dogen/annotations/io/value_types_io.hpp"
 #include "dogen/annotations/io/type_template_io.hpp"
 #include "dogen/annotations/io/entry_template_io.hpp"
+#include "dogen/annotations/io/key_value_pair_io.hpp"
 #include "dogen/annotations/io/scribble_group_io.hpp"
 #include "dogen/annotations/io/template_kinds_io.hpp"
 #include "dogen/annotations/io/text_collection_io.hpp"

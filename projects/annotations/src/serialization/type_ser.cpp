@@ -47,6 +47,7 @@ void save(Archive& ar,
     ar << make_nvp("scope", v.scope_);
     ar << make_nvp("archetype_location", v.archetype_location_);
     ar << make_nvp("default_value", v.default_value_);
+    ar << make_nvp("is_partially_matchable", v.is_partially_matchable_);
 }
 
 template<typename Archive>
@@ -58,6 +59,7 @@ void load(Archive& ar,
     ar >> make_nvp("scope", v.scope_);
     ar >> make_nvp("archetype_location", v.archetype_location_);
     ar >> make_nvp("default_value", v.default_value_);
+    ar >> make_nvp("is_partially_matchable", v.is_partially_matchable_);
 }
 
 } }

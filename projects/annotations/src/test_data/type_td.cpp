@@ -59,6 +59,10 @@ create_boost_shared_ptr_dogen_annotations_value(unsigned int position) {
     return r;
 }
 
+bool create_bool(const unsigned int position) {
+    return (position % 2) == 0;
+}
+
 }
 
 namespace dogen {
@@ -73,6 +77,7 @@ populate(const unsigned int position, result_type& v) {
     v.scope(create_dogen_annotations_scope_types(position + 2));
     v.archetype_location(create_dogen_annotations_archetype_location(position + 3));
     v.default_value(create_boost_shared_ptr_dogen_annotations_value(position + 4));
+    v.is_partially_matchable(create_bool(position + 5));
 }
 
 type_generator::result_type

@@ -45,6 +45,7 @@
 #include "dogen/annotations/types/building_error.hpp"
 #include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/entry_template.hpp"
+#include "dogen/annotations/types/key_value_pair.hpp"
 #include "dogen/annotations/types/scribble_group.hpp"
 #include "dogen/annotations/types/template_kinds.hpp"
 #include "dogen/annotations/types/hydration_error.hpp"

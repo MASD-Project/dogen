@@ -38,6 +38,7 @@
 #include "dogen/annotations/hash/value_types_hash.hpp"
 #include "dogen/annotations/hash/type_template_hash.hpp"
 #include "dogen/annotations/hash/entry_template_hash.hpp"
+#include "dogen/annotations/hash/key_value_pair_hash.hpp"
 #include "dogen/annotations/hash/scribble_group_hash.hpp"
 #include "dogen/annotations/hash/template_kinds_hash.hpp"
 #include "dogen/annotations/hash/text_collection_hash.hpp"

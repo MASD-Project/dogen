@@ -18,12 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/annotations/hash/name_hash.hpp"
-#include "dogen/annotations/hash/type_hash.hpp"
 #include "dogen/annotations/hash/value_hash.hpp"
-#include "dogen/annotations/hash/scope_types_hash.hpp"
-#include "dogen/annotations/hash/value_types_hash.hpp"
-#include "dogen/annotations/hash/archetype_location_hash.hpp"
+#include "dogen/annotations/hash/key_value_pair_hash.hpp"
 
 namespace {
 
@@ -33,9 +29,12 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_boost_shared_ptr_dogen_annotations_value(const boost::shared_ptr<dogen::annotations::value>& v) {
+inline std::size_t hash_std_unordered_map_std_string_std_string(const std::unordered_map<std::string, std::string>& v) {
     std::size_t seed(0);
-    combine(seed, *v);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, i.second);
+    }
     return seed;
 }
 
@@ -44,16 +43,12 @@ inline std::size_t hash_boost_shared_ptr_dogen_annotations_value(const boost::sh
 namespace dogen {
 namespace annotations {
 
-std::size_t type_hasher::hash(const type& v) {
+std::size_t key_value_pair_hasher::hash(const key_value_pair& v) {
     std::size_t seed(0);
 
-    combine(seed, v.name());
-    combine(seed, v.value_type());
-    combine(seed, v.scope());
-    combine(seed, v.archetype_location());
-    combine(seed, hash_boost_shared_ptr_dogen_annotations_value(v.default_value()));
-    combine(seed, v.is_partially_matchable());
+    combine(seed, dynamic_cast<const dogen::annotations::value&>(v));
 
+    combine(seed, hash_std_unordered_map_std_string_std_string(v.content()));
     return seed;
 }
 

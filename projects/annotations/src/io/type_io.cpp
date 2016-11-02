@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include <boost/io/ios_state.hpp>
 #include "dogen/annotations/io/name_io.hpp"
 #include "dogen/annotations/io/type_io.hpp"
 #include "dogen/annotations/io/value_io.hpp"
@@ -46,13 +47,20 @@ namespace dogen {
 namespace annotations {
 
 std::ostream& operator<<(std::ostream& s, const type& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
     s << " { "
       << "\"__type__\": " << "\"dogen::annotations::type\"" << ", "
       << "\"name\": " << v.name() << ", "
       << "\"value_type\": " << v.value_type() << ", "
       << "\"scope\": " << v.scope() << ", "
       << "\"archetype_location\": " << v.archetype_location() << ", "
-      << "\"default_value\": " << v.default_value()
+      << "\"default_value\": " << v.default_value() << ", "
+      << "\"is_partially_matchable\": " << v.is_partially_matchable()
       << " }";
     return(s);
 }

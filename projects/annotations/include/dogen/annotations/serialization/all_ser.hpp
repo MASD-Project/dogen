@@ -38,6 +38,7 @@
 #include "dogen/annotations/serialization/value_types_ser.hpp"
 #include "dogen/annotations/serialization/type_template_ser.hpp"
 #include "dogen/annotations/serialization/entry_template_ser.hpp"
+#include "dogen/annotations/serialization/key_value_pair_ser.hpp"
 #include "dogen/annotations/serialization/scribble_group_ser.hpp"
 #include "dogen/annotations/serialization/template_kinds_ser.hpp"
 #include "dogen/annotations/serialization/text_collection_ser.hpp"

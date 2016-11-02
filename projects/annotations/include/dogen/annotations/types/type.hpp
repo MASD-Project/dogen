@@ -55,7 +55,8 @@ public:
         const dogen::annotations::value_types value_type,
         const dogen::annotations::scope_types scope,
         const dogen::annotations::archetype_location& archetype_location,
-        const boost::shared_ptr<dogen::annotations::value>& default_value);
+        const boost::shared_ptr<dogen::annotations::value>& default_value,
+        const bool is_partially_matchable);
 
 private:
     template<typename Archive>
@@ -111,6 +112,9 @@ public:
     void default_value(const boost::shared_ptr<dogen::annotations::value>&& v);
     /**@}*/
 
+    bool is_partially_matchable() const;
+    void is_partially_matchable(const bool v);
+
 public:
     bool operator==(const type& rhs) const;
     bool operator!=(const type& rhs) const {
@@ -127,6 +131,7 @@ private:
     dogen::annotations::scope_types scope_;
     dogen::annotations::archetype_location archetype_location_;
     boost::shared_ptr<dogen::annotations::value> default_value_;
+    bool is_partially_matchable_;
 };
 
 } }
