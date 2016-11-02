@@ -70,6 +70,8 @@ script:
     fi
   - ${SCRIPTS_DIR}/build.${TRAVIS_OS_NAME}.sh ${BUILD_TYPE} ${COMPILER} ${THIRD_PARTY} ${TARGET}
   - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then ${SCRIPTS_DIR}/test_package.linux.sh ${BUILD_TYPE} ${COMPILER} ; fi
+  - ls -l "${TRAVIS_BUILD_DIR}/build/output/${COMPILER}/${BUILD_TYPE}/stage/pkg"
+  - cat "${TRAVIS_BUILD_DIR}/build/output/${COMPILER}/${BUILD_TYPE}/stage/pkg/bintray.json"
 
 notifications:
   email:
