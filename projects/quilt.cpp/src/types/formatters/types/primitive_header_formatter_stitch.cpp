@@ -18,11 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/formatters/types/namespace_header_formatter.hpp"
+#include "dogen/quilt.cpp/types/formatters/types/primitive_header_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
+#include "dogen/quilt.cpp/types/formatters/inclusion_constants.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
-#include "dogen/yarn/types/module.hpp"
+#include "dogen/quilt.cpp/types/traits.hpp"
+#include "dogen/yarn/types/primitive.hpp"
 #include <boost/make_shared.hpp>
 #include <typeinfo>
 
@@ -32,71 +34,54 @@ namespace cpp {
 namespace formatters {
 namespace types {
 
-std::string namespace_header_formatter::static_artefact() {
-    return traits::namespace_header_archetype();
+std::string primitive_header_formatter::static_artefact() {
+    return traits::primitive_header_archetype();
 }
 
-std::string namespace_header_formatter::formatter_name() const {
+std::string primitive_header_formatter::formatter_name() const {
     static auto r(archetype_location().archetype());
     return r;
 }
 
-annotations::archetype_location namespace_header_formatter::
-archetype_location() const {
+annotations::archetype_location
+primitive_header_formatter::archetype_location() const {
     static annotations::archetype_location
         r(formatters::traits::kernel(), traits::facet(),
-            namespace_header_formatter::static_artefact());
+            primitive_header_formatter::static_artefact());
     return r;
 }
 
-std::type_index namespace_header_formatter::element_type_index() const {
-    static auto r(std::type_index(typeid(yarn::module)));
+std::type_index primitive_header_formatter::element_type_index() const {
+    static auto r(std::type_index(typeid(yarn::primitive)));
     return r;
 }
 
-inclusion_support_types namespace_header_formatter::
-inclusion_support_type() const {
+inclusion_support_types
+primitive_header_formatter::inclusion_support_type() const {
     return inclusion_support_types::canonical_support;
 }
 
-boost::filesystem::path namespace_header_formatter::inclusion_path(
+boost::filesystem::path primitive_header_formatter::inclusion_path(
     const formattables::locator& l, const yarn::name& n) const {
     return l.make_inclusion_path_for_cpp_header(n, static_artefact());
-
 }
 
-boost::filesystem::path namespace_header_formatter::full_path(
+boost::filesystem::path primitive_header_formatter::full_path(
     const formattables::locator& l, const yarn::name& n) const {
     return l.make_full_path_for_cpp_header(n, static_artefact());
 }
 
-std::list<std::string> namespace_header_formatter::inclusion_dependencies(
+std::list<std::string> primitive_header_formatter::inclusion_dependencies(
     const formattables::inclusion_dependencies_builder_factory& /*f*/,
     const yarn::element& /*e*/) const {
-    static std::list<std::string> r;
+    static const std::list<std::string> r;
     return r;
 }
 
-dogen::formatters::artefact namespace_header_formatter::
-format(const context& ctx, const yarn::element& e) const {
-    const auto id(e.name().id());
-    assistant a(ctx, archetype_location(), true/*requires_header_guard*/, id);
-    const auto& m(a.as<yarn::module>(static_artefact(), e));
-
-    {
-        auto sbf(a.make_scoped_boilerplate_formatter());
-        {
-            const auto ns(a.make_namespaces(m.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
-a.stream() << std::endl;
-            a.comment(m.documentation());
-a.stream() << "namespace " << m.name().simple() << " {" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
-        } // snf
-a.stream() << std::endl;
-    } // sbf
-    return a.make_artefact();
+dogen::formatters::artefact primitive_header_formatter::
+format(const context& /*ctx*/, const yarn::element& /*e*/) const {
+    dogen::formatters::artefact r;
+    return r;
 }
 
 } } } } }

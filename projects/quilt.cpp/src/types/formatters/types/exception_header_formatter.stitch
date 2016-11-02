@@ -1,28 +1,87 @@
 <#@ annotations.profile=dogen.stitch #>
 <#@ stitch.containing_namespaces=dogen::quilt::cpp::formatters::types #>
-<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/types/exception_header_formatter_stitch.hpp" #>
+<#@ stitch.inclusion_dependency=<typeinfo> #>
+<#@ stitch.inclusion_dependency=<boost/make_shared.hpp> #>
+<#@ stitch.inclusion_dependency="dogen/yarn/types/exception.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/assistant.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/traits.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/inclusion_constants.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/io/traits.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/serialization/traits.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/types/traits.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/hash/traits.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/types/exception_header_formatter.hpp" #>
 <#+
 
-dogen::formatters::artefact exception_header_formatter_stitch(
-    assistant& a, const yarn::exception& e) {
+std::string exception_header_formatter::static_artefact() {
+    return traits::exception_header_archetype();
+}
+
+std::string exception_header_formatter::formatter_name() const {
+    static auto r(archetype_location().archetype());
+    return r;
+}
+
+annotations::archetype_location
+exception_header_formatter::archetype_location() const {
+    static annotations::archetype_location
+        r(formatters::traits::kernel(), traits::facet(),
+            exception_header_formatter::static_artefact());
+    return r;
+}
+
+std::type_index exception_header_formatter::element_type_index() const {
+    static auto r(std::type_index(typeid(yarn::exception)));
+    return r;
+}
+
+inclusion_support_types exception_header_formatter::
+inclusion_support_type() const {
+    return inclusion_support_types::canonical_support;
+}
+
+boost::filesystem::path exception_header_formatter::inclusion_path(
+    const formattables::locator& l, const yarn::name& n) const {
+    return l.make_inclusion_path_for_cpp_header(n, static_artefact());
+}
+
+boost::filesystem::path exception_header_formatter::full_path(
+    const formattables::locator& l, const yarn::name& n) const {
+    return l.make_full_path_for_cpp_header(n, static_artefact());
+}
+
+std::list<std::string> exception_header_formatter::inclusion_dependencies(
+    const formattables::inclusion_dependencies_builder_factory& f,
+    const yarn::element& /*e*/) const {
+    auto builder(f.make());
+    builder.add(inclusion_constants::std::string());
+    builder.add(inclusion_constants::boost::exception::info());
+    return builder.build();
+}
+
+dogen::formatters::artefact exception_header_formatter::
+format(const context& ctx, const yarn::element& e) const {
+    const auto id(e.name().id());
+    assistant a(ctx, archetype_location(), true/*requires_header_guard*/, id);
+    const auto& ye(a.as<yarn::exception>(static_artefact(), e));
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter());
         {
-            const auto ns(a.make_namespaces(e.name()));
+            const auto ns(a.make_namespaces(ye.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
 #>
 
 <#+
-            a.comment(e.documentation());
+            a.comment(ye.documentation());
 #>
-class <#= e.name().simple() #> : public virtual std::exception, public virtual boost::exception {
+class <#= ye.name().simple() #> : public virtual std::exception, public virtual boost::exception {
 public:
-    <#= e.name().simple() #>() = default;
-    ~<#= e.name().simple() #>() noexcept = default;
+    <#= ye.name().simple() #>() = default;
+    ~<#= ye.name().simple() #>() noexcept = default;
 
 public:
-    <#= e.name().simple() #>(const std::string& message) : message_(message) { }
+    <#= ye.name().simple() #>(const std::string& message) : message_(message) { }
 
 public:
     const char* what() const noexcept { return(message_.c_str()); }

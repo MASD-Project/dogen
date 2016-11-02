@@ -20,7 +20,7 @@
  */
 #include "dogen/formatters/types/cpp/scoped_boilerplate_formatter.hpp"
 #include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
-#include "dogen/quilt.cpp/types/formatters/types/forward_declarations_formatter_stitch.hpp"
+#include "dogen/quilt.cpp/types/formatters/serialization/forward_declarations_formatter_stitch.hpp"
 
 namespace dogen {
 namespace quilt {

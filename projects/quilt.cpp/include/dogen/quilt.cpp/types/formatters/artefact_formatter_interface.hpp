@@ -67,14 +67,6 @@ public:
 
 public:
     /**
-     * @brief Creates the inclusion dependencies for this formatter
-     * against the supplied element.
-     */
-    virtual std::list<std::string> inclusion_dependencies(
-        const formattables::inclusion_dependencies_builder_factory& f,
-        const yarn::element& e) const = 0;
-
-    /**
      * @brief Returns the level of support of inclusions by this
      * formatter.
      */
@@ -93,6 +85,14 @@ public:
      */
     virtual boost::filesystem::path full_path(
         const formattables::locator& l, const yarn::name& n) const = 0;
+
+    /**
+     * @brief Creates the inclusion dependencies for this formatter
+     * against the supplied element.
+     */
+    virtual std::list<std::string> inclusion_dependencies(
+        const formattables::inclusion_dependencies_builder_factory& f,
+        const yarn::element& e) const = 0;
 
 public:
     /**
