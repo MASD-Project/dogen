@@ -26,6 +26,7 @@
 #include "dogen/annotations/types/text.hpp"
 #include "dogen/annotations/types/number.hpp"
 #include "dogen/annotations/types/boolean.hpp"
+#include "dogen/annotations/types/key_value_pair.hpp"
 #include "dogen/annotations/types/text_collection.hpp"
 #include "dogen/annotations/types/selection_error.hpp"
 #include "dogen/annotations/types/entry_selector.hpp"
@@ -43,6 +44,7 @@ const std::string not_boolean_entry("Entry does not have boolean content: ");
 const std::string not_text_entry("Entry does not have text content: ");
 const std::string not_text_collection_entry(
     "Entry does not have text collection content: ");
+const std::string not_kvp_entry("Entry does not have kvp content: ");
 const std::string unexpected_entry_type("Entry has an unexpected type: ");
 typedef boost::error_info<struct tag_errmsg, std::string> extension_error_info;
 const std::string no_default_value(
@@ -275,26 +277,27 @@ get_number_content_or_default(const type& t) const {
 }
 
 std::unordered_map<std::string, std::string>
-entry_selector::get_kvp_content(const std::string& qualified_name) const {
-    const auto key_prefix(qualified_name + ".");
-    std::unordered_map<std::string, std::string> r;
-
-    for (const auto& entry : annotation_.entries()) {
-        const auto& key(entry.first);
-        if (!boost::starts_with(key, key_prefix))
-            continue;
-
-        const auto stripped_key(boost::erase_first_copy(key, key_prefix));
-        const auto value(get_text_content(*entry.second));
-        const auto pair(std::make_pair(stripped_key, value));
-        const auto inserted(r.insert(pair).second);
-        if (!inserted) {
-            BOOST_LOG_SEV(lg, error) << duplicate_key << key;
-            BOOST_THROW_EXCEPTION(selection_error(duplicate_key + key));
-        }
+entry_selector::get_kvp_content(const value& v) {
+    try {
+        const auto& b(dynamic_cast<const key_value_pair&>(v));
+        return b.content();
+    } catch(const std::bad_cast& e) {
+        BOOST_LOG_SEV(lg, error) << unexpected_value_type;
+        BOOST_THROW_EXCEPTION(selection_error(unexpected_value_type));
     }
+}
 
-    return r;
+std::unordered_map<std::string, std::string>
+entry_selector::get_kvp_content(const std::string& qualified_name) const {
+    const auto& v(get_entry_value(qualified_name));
+
+    try {
+        return get_kvp_content(v);
+    } catch(boost::exception& e) {
+        BOOST_LOG_SEV(lg, error) << not_kvp_entry << qualified_name;
+        e << extension_error_info(entry + qualified_name);
+        throw;
+    }
 }
 
 std::unordered_map<std::string, std::string> entry_selector::

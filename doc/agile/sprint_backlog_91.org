@@ -14,28 +14,28 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-11-02 Wed 14:53]
+#+CAPTION: Clock summary at [2016-11-02 Wed 17:59]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *35:25* |       |      | 100.0 |
+| *Total time*                                                                | *37:02* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 35:25   |       |      | 100.0 |
-| Active                                                                      |         | 35:25 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:14 |   3.5 |
+| Stories                                                                     | 37:02   |       |      | 100.0 |
+| Active                                                                      |         | 37:02 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:14 |   3.3 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:22 |   1.0 |
-| COMPLETED Improve bintray support                                           |         |       | 2:26 |   6.9 |
-| COMPLETED Add logo with white background                                    |         |       | 0:14 |   0.7 |
-| COMPLETED Consider renaming =diagrams= to =input_models=                    |         |       | 0:38 |   1.8 |
+| COMPLETED Improve bintray support                                           |         |       | 2:26 |   6.6 |
+| COMPLETED Add logo with white background                                    |         |       | 0:14 |   0.6 |
+| COMPLETED Consider renaming =diagrams= to =input_models=                    |         |       | 0:38 |   1.7 |
 | COMPLETED Add kvp support to annotations                                    |         |       | 0:37 |   1.7 |
-| COMPLETED Implement wale                                                    |         |       | 7:00 |  19.8 |
-| COMPLETED Add artefact source properties support                            |         |       | 3:11 |   9.0 |
-| COMPLETED Stitch not writing when template has changed                      |         |       | 0:33 |   1.6 |
-| COMPLETED Implement helper headers using wale                               |         |       | 2:40 |   7.5 |
+| COMPLETED Implement wale                                                    |         |       | 7:00 |  18.9 |
+| COMPLETED Add artefact source properties support                            |         |       | 3:11 |   8.6 |
+| COMPLETED Stitch not writing when template has changed                      |         |       | 0:33 |   1.5 |
+| COMPLETED Implement helper headers using wale                               |         |       | 2:40 |   7.2 |
 | COMPLETED Implement formatter headers using wale                            |         |       | 0:30 |   1.4 |
-| COMPLETED Add profile support to stitch                                     |         |       | 3:48 |  10.7 |
-| COMPLETED Changes to stitch to accommodate wale                             |         |       | 9:34 |  27.0 |
-| STARTED Implement formatter helpers implementation using stitch and wale    |         |       | 2:38 |   7.4 |
+| COMPLETED Add profile support to stitch                                     |         |       | 3:48 |  10.3 |
+| COMPLETED Changes to stitch to accommodate wale                             |         |       | 9:34 |  25.8 |
+| STARTED Implement formatter helpers implementation using stitch and wale    |         |       | 4:15 |  11.5 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -364,13 +364,17 @@ Notes:
 : #DOGEN quilt.cpp.types.class_implementation.formatting_style=stitch_wale
 
 *** STARTED Implement formatter helpers implementation using stitch and wale :story:
+    CLOCK: [2016-11-02 Wed 17:23]--[2016-11-02 Wed 17:59] =>  0:36
+    CLOCK: [2016-11-02 Wed 16:21]--[2016-11-02 Wed 17:22] =>  1:01
     CLOCK: [2016-11-02 Wed 14:07]--[2016-11-02 Wed 14:55] =>  0:48
     CLOCK: [2016-11-02 Wed 13:45]--[2016-11-02 Wed 14:07] =>  0:22
     CLOCK: [2016-11-02 Wed 12:45]--[2016-11-02 Wed 13:44] =>  0:59
     CLOCK: [2016-11-02 Wed 11:32]--[2016-11-02 Wed 12:01] =>  0:29
 
 Now we have all the pieces in place, we need to start updating the
-templates one by one to use stitch and wale.
+templates one by one to use stitch and wale
+
+: #DOGEN quilt.cpp.types.class_implementation.formatting_style=stitch_wale
 
 *** Merge properties factory with stitching factory                   :story:
 

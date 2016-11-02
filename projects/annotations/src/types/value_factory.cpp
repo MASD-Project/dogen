@@ -28,6 +28,7 @@
 #include "dogen/annotations/types/text_collection.hpp"
 #include "dogen/annotations/types/boolean.hpp"
 #include "dogen/annotations/types/number.hpp"
+#include "dogen/annotations/types/key_value_pair.hpp"
 #include "dogen/annotations/types/value_factory.hpp"
 
 namespace {
@@ -133,6 +134,11 @@ boost::shared_ptr<value> value_factory::make_number(const int v) const {
     return boost::make_shared<number>(v);
 }
 
+boost::shared_ptr<value> value_factory::
+make_kvp(const std::unordered_map<std::string, std::string>& v) const {
+    return boost::make_shared<key_value_pair>(v);
+}
+
 boost::shared_ptr<value> value_factory::make(const type& t,
     const std::list<std::string>& v) const {
 
@@ -155,6 +161,17 @@ boost::shared_ptr<value> value_factory::make(const type& t,
     BOOST_LOG_SEV(lg, error) << value_type_not_supported << t.value_type();
     BOOST_THROW_EXCEPTION(building_error(value_type_not_supported +
             boost::lexical_cast<std::string>(t.value_type())));
+}
+
+boost::shared_ptr<value> value_factory::make(const type& t,
+    const std::unordered_map<std::string, std::string>& v) const {
+
+    if (t.value_type() != value_types::key_value_pair) {
+        BOOST_LOG_SEV(lg, error) << value_type_not_supported << t.value_type();
+        BOOST_THROW_EXCEPTION(building_error(value_type_not_supported +
+                boost::lexical_cast<std::string>(t.value_type())));
+    }
+    return make_kvp(v);
 }
 
 } }

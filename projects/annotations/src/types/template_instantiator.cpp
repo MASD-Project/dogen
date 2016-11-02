@@ -68,6 +68,10 @@ template_instantiator::
 template_instantiator(const archetype_location_repository& alrp)
     : repository_(alrp) { }
 
+bool template_instantiator::is_partially_mathcable(const value_types vt) const {
+    return vt == value_types::key_value_pair;
+}
+
 void template_instantiator::validate(const archetype_location& al,
     const name& n, const template_kinds tk) const {
     const auto sn(n.simple());
@@ -127,11 +131,14 @@ void template_instantiator::validate(const archetype_location& al,
 
 type template_instantiator::to_type(const type_template& tt) const {
     type r;
+
     r.name(tt.name());
     r.value_type(tt.value_type());
     r.scope(tt.scope());
     r.archetype_location(tt.archetype_location());
     r.default_value(tt.default_value());
+    r.is_partially_matchable(is_partially_mathcable(r.value_type()));
+
     return r;
 }
 

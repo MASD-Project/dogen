@@ -43,13 +43,6 @@ namespace annotations {
 class type_repository_factory {
 private:
     /**
-     * @brief Returns true if the type can be matched partially, false
-     * otherwise.
-     */
-    bool is_partially_mathable(const type& t) const;
-
-private:
-    /**
      * @brief Hydrates all the type templates.
      */
     std::list<type_template> hydrate_templates(

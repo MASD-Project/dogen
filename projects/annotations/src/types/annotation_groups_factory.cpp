@@ -21,9 +21,12 @@
 #include <sstream>
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
-#include <boost/algorithm/string/predicate.hpp>
+#include <boost/algorithm/string.hpp>
+#include <boost/algorithm/string/erase.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
+#include "dogen/utility/io/pair_io.hpp"
+#include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/annotations/io/type_io.hpp"
 #include "dogen/annotations/io/annotation_io.hpp"
 #include "dogen/annotations/io/scope_types_io.hpp"
@@ -43,12 +46,11 @@ static logger lg(logger_factory("annotations.annotation_groups_factory"));
 const std::string empty;
 const std::string expected_scope(" Expected scope: ");
 const std::string actual_scope(" Actual scope: ");
-const std::string duplicate_type(
-    "Field definition already inserted: ");
-const std::string type_not_found(
-    "Field definition not found: ");
-const std::string field_used_in_invalid_scope(
-    "Field used in invalid scope: ");
+const std::string duplicate_type("Type already inserted: ");
+const std::string duplicate_key("Key already inserted: ");
+const std::string too_many_values("More than one value supplied against key: ");
+const std::string type_not_found("Type not found: ");
+const std::string field_used_in_invalid_scope("Field used in invalid scope: ");
 const std::string missing_profile(
     "Annotation uses a profile that could not be found: ");
 const std::string too_many_binds(
@@ -168,14 +170,44 @@ annotation annotation_groups_factory::create_annotation(const scope_types scope,
 
     value_factory f;
     std::unordered_map<std::string, boost::shared_ptr<value>> entries;
+    std::unordered_map<std::string, std::unordered_map<std::string, std::string>>
+        all_kvps;
     for (auto kvp : aggregated_scribble_entries) {
         const auto& k(kvp.first);
         const auto t(obtain_type(k));
 
         validate_scope(t, r.scope());
+
         const auto& v(kvp.second);
-        r.entries()[k] = f.make(t, v);
+        if (t.value_type() == value_types::key_value_pair) {
+            BOOST_LOG_SEV(lg, debug) << "Adding kvp for key: " << k;
+            if (v.size() != 1) {
+                BOOST_LOG_SEV(lg, debug) << too_many_values << k;
+                BOOST_THROW_EXCEPTION(building_error(too_many_values + k));
+            }
+
+            const auto qn(t.name().qualified());
+            const auto new_key(boost::erase_first_copy(k, qn + "."));
+            BOOST_LOG_SEV(lg, debug) << "Actual key: " << new_key;
+
+            const auto pair(std::make_pair(new_key, v.front()));
+            const auto inserted(all_kvps[qn].insert(pair).second);
+            if (!inserted) {
+                BOOST_LOG_SEV(lg, debug) << duplicate_key << new_key;
+                BOOST_THROW_EXCEPTION(building_error(duplicate_key + new_key));
+            }
+        } else
+            r.entries()[k] = f.make(t, v);
     }
+
+    for (const auto& pair : all_kvps) {
+        BOOST_LOG_SEV(lg, debug) << "Processing kvp:: " << pair;
+
+        const auto k(pair.first);
+        const auto kvps(pair.second);
+        r.entries()[k] = f.make_kvp(kvps);
+    }
+
     return r;
 }
 

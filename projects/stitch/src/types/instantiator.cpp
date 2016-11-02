@@ -21,8 +21,10 @@
 #include <boost/throw_exception.hpp>
 #include <boost/filesystem/operations.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/filesystem/file.hpp"
+#include "dogen/annotations/io/annotation_io.hpp"
 #include "dogen/wale/types/workflow.hpp"
 #include "dogen/stitch/types/instantiation_error.hpp"
 #include "dogen/stitch/types/parser.hpp"
@@ -97,8 +99,10 @@ void instantiator::handle_wale_template(const std::unordered_map<std::string,
         return;
     }
 
-    BOOST_LOG_SEV(lg, error) << "Instantiating wale template: "
+    BOOST_LOG_SEV(lg, debug) << "Instantiating wale template: "
                              << st.wale_template();
+    BOOST_LOG_SEV(lg, debug) << "Stitching properties kvps: "
+                             << st.wale_kvps();
 
     /*
      * Execute the wale workflow and store the result as a stitch
@@ -150,6 +154,7 @@ instantiator::create_text_template(const boost::filesystem::path& input_path,
         const auto& sgrp(r.body().scribble_group());
         const auto ag(annotation_factory_.make(sgrp));
         const auto& a(ag.parent());
+        BOOST_LOG_SEV(lg, debug) << "Annotation: " << a;
         r.properties(properties_factory_.make(a));
 
         /*

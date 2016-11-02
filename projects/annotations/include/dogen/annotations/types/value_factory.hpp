@@ -27,6 +27,7 @@
 
 #include <list>
 #include <string>
+#include <unordered_map>
 #include <boost/shared_ptr.hpp>
 #include "dogen/annotations/types/value.hpp"
 #include "dogen/annotations/types/type.hpp"
@@ -91,19 +92,31 @@ public:
     boost::shared_ptr<value> make_number(const int v) const;
     /**@}*/
 
+    /**
+     * @brief Creates a stand alone kvp value.
+     */
+    boost::shared_ptr<value>
+    make_kvp(const std::unordered_map<std::string, std::string>& v) const;
+
 public:
     /**
-     * @brief Creates a field instance given a definition, the
-     * original key and zero or more values.
+     * @brief Creates a value given a type, the original key and zero
+     * or more raw values.
      *
-     * @pre If values has more than one element, the field's value
-     * type must be a collection.
+     * @pre If the raw values has more than one element, the field's
+     * value type must be a collection.
      *
-     * @pre Values must be valid according to the type in the field
-     * definition.
+     * @pre the raw values must be valid according to the value type.
      */
     boost::shared_ptr<value> make(const type& t,
         const std::list<std::string>& v) const;
+
+    /**
+     * @brief Creates a value given a type, with the expectation that
+     * it is of kvp type.
+     */
+    boost::shared_ptr<value> make(const type& t,
+        const std::unordered_map<std::string, std::string>& v) const;
 };
 
 } }

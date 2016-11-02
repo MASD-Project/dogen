@@ -199,8 +199,15 @@ public:
 
 public:
     /**
-     * @brief Returns the value of the entry, assuming it is a
-     * key-value-pair value.
+     * @brief Returns the value of the entry, assuming it is a kvp.
+     *
+     * @pre Type's value must be kvp.
+     */
+    static std::unordered_map<std::string, std::string>
+    get_kvp_content(const value& v);
+
+    /**
+     * @brief Returns the value of the entry, assuming it is a kvp.
      *
      * @pre has_entry must be true.
      * @pre Type's value must be key-value-pair.

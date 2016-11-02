@@ -45,6 +45,8 @@ public:
     template_instantiator(const archetype_location_repository& alrp);
 
 private:
+    bool is_partially_mathcable(const value_types vt) const;
+
     void validate(const archetype_location& al, const name& n,
         const template_kinds tk) const;
 
