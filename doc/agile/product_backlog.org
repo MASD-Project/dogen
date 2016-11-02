@@ -2541,6 +2541,13 @@ story in backlog.
 The =sequence_formatter= is actually not a formatter, but a helper or
 assistant.
 
+*** Improve validation in stitch                                      :story:
+
+A few things we should check but are not at present:
+
+- directives cannot be used in lines with mixed content;
+- variables cannot be used in lines with mixed content;
+
 *** Improve streaming of empty expressions in stitch                  :story:
 
 We have a problem with empty expressions:
