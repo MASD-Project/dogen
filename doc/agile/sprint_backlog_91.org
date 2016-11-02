@@ -384,6 +384,7 @@ templates one by one to use stitch and wale
 : #DOGEN quilt.cpp.types.class_implementation.formatting_style=stitch_wale
 
 *** STARTED Merge stitch templates with formatters                    :story:
+    CLOCK: [2016-11-02 Wed 22:50]--[2016-11-02 Wed 23:08] =>  0:18
     CLOCK: [2016-11-02 Wed 22:34]--[2016-11-02 Wed 22:49] =>  0:15
     CLOCK: [2016-11-02 Wed 21:26]--[2016-11-02 Wed 22:33] =>  1:07
 
