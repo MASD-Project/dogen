@@ -68,6 +68,7 @@ std::size_t type_repository_hasher::hash(const type_repository& v) {
     combine(seed, hash_std_unordered_map_std_string_std_list_dogen_annotations_type(v.types_by_facet_name()));
     combine(seed, hash_std_unordered_map_std_string_std_list_dogen_annotations_type(v.types_by_formatter_name()));
     combine(seed, hash_std_unordered_map_std_string_std_list_dogen_annotations_type(v.types_by_model_name()));
+    combine(seed, hash_std_unordered_map_std_string_dogen_annotations_type(v.partially_matchable_types()));
 
     return seed;
 }

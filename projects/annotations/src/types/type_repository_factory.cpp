@@ -49,6 +49,10 @@ const std::string duplicate_qualified_name(
 namespace dogen {
 namespace annotations {
 
+bool type_repository_factory::is_partially_mathable(const type& t) const {
+    return t.value_type() == value_types::key_value_pair;
+}
+
 std::list<type_template> type_repository_factory::hydrate_templates(
     const std::vector<boost::filesystem::path>& data_dirs) const {
     BOOST_LOG_SEV(lg, info) << "Input data directories: " << data_dirs;
@@ -124,6 +128,9 @@ create_repository(const std::list<type>& ts) const {
         if (!al.kernel().empty())
             r.types_by_model_name()[al.kernel()]
                 .push_back(t);
+
+        if (is_partially_mathable(t))
+            r.partially_matchable_types()[n] = t;
     }
 
     return r;

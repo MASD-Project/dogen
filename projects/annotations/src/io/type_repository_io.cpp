@@ -90,7 +90,8 @@ std::ostream& operator<<(std::ostream& s, const type_repository& v) {
       << "\"types_by_name\": " << v.types_by_name() << ", "
       << "\"types_by_facet_name\": " << v.types_by_facet_name() << ", "
       << "\"types_by_formatter_name\": " << v.types_by_formatter_name() << ", "
-      << "\"types_by_model_name\": " << v.types_by_model_name()
+      << "\"types_by_model_name\": " << v.types_by_model_name() << ", "
+      << "\"partially_matchable_types\": " << v.partially_matchable_types()
       << " }";
     return(s);
 }

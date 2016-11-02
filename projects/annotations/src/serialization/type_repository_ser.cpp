@@ -45,6 +45,7 @@ void save(Archive& ar,
     ar << make_nvp("types_by_facet_name", v.types_by_facet_name_);
     ar << make_nvp("types_by_formatter_name", v.types_by_formatter_name_);
     ar << make_nvp("types_by_model_name", v.types_by_model_name_);
+    ar << make_nvp("partially_matchable_types", v.partially_matchable_types_);
 }
 
 template<typename Archive>
@@ -56,6 +57,7 @@ void load(Archive& ar,
     ar >> make_nvp("types_by_facet_name", v.types_by_facet_name_);
     ar >> make_nvp("types_by_formatter_name", v.types_by_formatter_name_);
     ar >> make_nvp("types_by_model_name", v.types_by_model_name_);
+    ar >> make_nvp("partially_matchable_types", v.partially_matchable_types_);
 }
 
 } }

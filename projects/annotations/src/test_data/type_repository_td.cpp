@@ -73,6 +73,7 @@ populate(const unsigned int position, result_type& v) {
     v.types_by_facet_name(create_std_unordered_map_std_string_std_list_dogen_annotations_type(position + 2));
     v.types_by_formatter_name(create_std_unordered_map_std_string_std_list_dogen_annotations_type(position + 3));
     v.types_by_model_name(create_std_unordered_map_std_string_std_list_dogen_annotations_type(position + 4));
+    v.partially_matchable_types(create_std_unordered_map_std_string_dogen_annotations_type(position + 5));
 }
 
 type_repository_generator::result_type

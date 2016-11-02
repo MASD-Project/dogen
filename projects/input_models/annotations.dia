@@ -2937,7 +2937,7 @@ any.#</dia:string>
         <dia:point val="-18,-45"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-18.05,-45.05;10.655,-38.95"/>
+        <dia:rectangle val="-18.05,-45.05;10.655,-38.15"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-18,-45"/>
@@ -2946,7 +2946,7 @@ any.#</dia:string>
         <dia:real val="28.605"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6"/>
+        <dia:real val="6.8000000000000007"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#type_repository#</dia:string>
@@ -3140,6 +3140,29 @@ any.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Types by model name.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#partially_matchable_types#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::unordered_map&lt;std::string, type&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Types which can be partially matched.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -6270,7 +6293,7 @@ any.#</dia:string>
         <dia:point val="-22.885,-28"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-23.635,-39.05;-3.4975,-27.2"/>
+        <dia:rectangle val="-23.635,-38.25;-3.4975,-27.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6279,7 +6302,7 @@ any.#</dia:string>
         <dia:point val="-22.885,-28"/>
         <dia:point val="-22.885,-32"/>
         <dia:point val="-3.6975,-32"/>
-        <dia:point val="-3.6975,-39"/>
+        <dia:point val="-3.6975,-38.2"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

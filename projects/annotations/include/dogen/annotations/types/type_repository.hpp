@@ -48,7 +48,8 @@ public:
         const std::unordered_map<std::string, dogen::annotations::type>& types_by_name,
         const std::unordered_map<std::string, std::list<dogen::annotations::type> >& types_by_facet_name,
         const std::unordered_map<std::string, std::list<dogen::annotations::type> >& types_by_formatter_name,
-        const std::unordered_map<std::string, std::list<dogen::annotations::type> >& types_by_model_name);
+        const std::unordered_map<std::string, std::list<dogen::annotations::type> >& types_by_model_name,
+        const std::unordered_map<std::string, dogen::annotations::type>& partially_matchable_types);
 
 private:
     template<typename Archive>
@@ -108,6 +109,16 @@ public:
     void types_by_model_name(const std::unordered_map<std::string, std::list<dogen::annotations::type> >&& v);
     /**@}*/
 
+    /**
+     * @brief Types which can be partially matched.
+     */
+    /**@{*/
+    const std::unordered_map<std::string, dogen::annotations::type>& partially_matchable_types() const;
+    std::unordered_map<std::string, dogen::annotations::type>& partially_matchable_types();
+    void partially_matchable_types(const std::unordered_map<std::string, dogen::annotations::type>& v);
+    void partially_matchable_types(const std::unordered_map<std::string, dogen::annotations::type>&& v);
+    /**@}*/
+
 public:
     bool operator==(const type_repository& rhs) const;
     bool operator!=(const type_repository& rhs) const {
@@ -124,6 +135,7 @@ private:
     std::unordered_map<std::string, std::list<dogen::annotations::type> > types_by_facet_name_;
     std::unordered_map<std::string, std::list<dogen::annotations::type> > types_by_formatter_name_;
     std::unordered_map<std::string, std::list<dogen::annotations::type> > types_by_model_name_;
+    std::unordered_map<std::string, dogen::annotations::type> partially_matchable_types_;
 };
 
 } }

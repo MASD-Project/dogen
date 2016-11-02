@@ -28,12 +28,14 @@ type_repository::type_repository(
     const std::unordered_map<std::string, dogen::annotations::type>& types_by_name,
     const std::unordered_map<std::string, std::list<dogen::annotations::type> >& types_by_facet_name,
     const std::unordered_map<std::string, std::list<dogen::annotations::type> >& types_by_formatter_name,
-    const std::unordered_map<std::string, std::list<dogen::annotations::type> >& types_by_model_name)
+    const std::unordered_map<std::string, std::list<dogen::annotations::type> >& types_by_model_name,
+    const std::unordered_map<std::string, dogen::annotations::type>& partially_matchable_types)
     : all_types_(all_types),
       types_by_name_(types_by_name),
       types_by_facet_name_(types_by_facet_name),
       types_by_formatter_name_(types_by_formatter_name),
-      types_by_model_name_(types_by_model_name) { }
+      types_by_model_name_(types_by_model_name),
+      partially_matchable_types_(partially_matchable_types) { }
 
 void type_repository::swap(type_repository& other) noexcept {
     using std::swap;
@@ -42,6 +44,7 @@ void type_repository::swap(type_repository& other) noexcept {
     swap(types_by_facet_name_, other.types_by_facet_name_);
     swap(types_by_formatter_name_, other.types_by_formatter_name_);
     swap(types_by_model_name_, other.types_by_model_name_);
+    swap(partially_matchable_types_, other.partially_matchable_types_);
 }
 
 bool type_repository::operator==(const type_repository& rhs) const {
@@ -49,7 +52,8 @@ bool type_repository::operator==(const type_repository& rhs) const {
         types_by_name_ == rhs.types_by_name_ &&
         types_by_facet_name_ == rhs.types_by_facet_name_ &&
         types_by_formatter_name_ == rhs.types_by_formatter_name_ &&
-        types_by_model_name_ == rhs.types_by_model_name_;
+        types_by_model_name_ == rhs.types_by_model_name_ &&
+        partially_matchable_types_ == rhs.partially_matchable_types_;
 }
 
 type_repository& type_repository::operator=(type_repository other) {
@@ -136,6 +140,22 @@ void type_repository::types_by_model_name(const std::unordered_map<std::string, 
 
 void type_repository::types_by_model_name(const std::unordered_map<std::string, std::list<dogen::annotations::type> >&& v) {
     types_by_model_name_ = std::move(v);
+}
+
+const std::unordered_map<std::string, dogen::annotations::type>& type_repository::partially_matchable_types() const {
+    return partially_matchable_types_;
+}
+
+std::unordered_map<std::string, dogen::annotations::type>& type_repository::partially_matchable_types() {
+    return partially_matchable_types_;
+}
+
+void type_repository::partially_matchable_types(const std::unordered_map<std::string, dogen::annotations::type>& v) {
+    partially_matchable_types_ = v;
+}
+
+void type_repository::partially_matchable_types(const std::unordered_map<std::string, dogen::annotations::type>&& v) {
+    partially_matchable_types_ = std::move(v);
 }
 
 } }
