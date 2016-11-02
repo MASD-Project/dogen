@@ -18,10 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/quilt.cpp/types/formatters/serialization/registrar_implementation_formatter.hpp"
+#include "dogen/quilt.cpp/types/formatters/inclusion_constants.hpp"
+#include "dogen/quilt.cpp/types/formatters/serialization/traits.hpp"
+#include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
+#include "dogen/quilt.cpp/types/formatters/formatting_error.hpp"
+#include "dogen/quilt.cpp/types/formatters/serialization/traits.hpp"
+#include "dogen/quilt.cpp/types/formatters/assistant.hpp"
+#include "dogen/quilt.cpp/types/formatters/traits.hpp"
+#include "dogen/quilt.cpp/types/fabric/registrar.hpp"
+#include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/formatters/types/cpp/scoped_boilerplate_formatter.hpp"
 #include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
-#include "dogen/quilt.cpp/types/formatters/serialization/traits.hpp"
-#include "dogen/quilt.cpp/types/formatters/serialization/registrar_implementation_formatter_stitch.hpp"
+#include "dogen/utility/log/logger.hpp"
+#include <boost/throw_exception.hpp>
+#include <boost/make_shared.hpp>
+#include <typeinfo>
 
 namespace dogen {
 namespace quilt {
@@ -29,8 +41,88 @@ namespace cpp {
 namespace formatters {
 namespace serialization {
 
-dogen::formatters::artefact registrar_implementation_formatter_stitch(
-    assistant& a, const fabric::registrar& rg) {
+std::string registrar_implementation_formatter::static_artefact() {
+    return traits::registrar_implementation_archetype();
+}
+
+std::string registrar_implementation_formatter::formatter_name() const {
+    static auto r(archetype_location().archetype());
+    return r;
+}
+
+annotations::archetype_location
+registrar_implementation_formatter::archetype_location() const {
+    static annotations::archetype_location
+        r(formatters::traits::kernel(), traits::facet(),
+            registrar_implementation_formatter::static_artefact());
+    return r;
+}
+
+std::type_index registrar_implementation_formatter::element_type_index() const {
+    static auto r(std::type_index(typeid(fabric::registrar)));
+    return r;
+}
+
+inclusion_support_types registrar_implementation_formatter::
+inclusion_support_type() const {
+    return inclusion_support_types::not_supported;
+}
+
+boost::filesystem::path registrar_implementation_formatter::inclusion_path(
+    const formattables::locator& /*l*/, const yarn::name& n) const {
+    using namespace dogen::utility::log;
+    using namespace dogen::quilt::cpp::formatters::serialization;
+    static logger lg(logger_factory(
+        registrar_implementation_formatter::static_artefact()));
+
+    static const std::string not_supported("Inclusion path is not supported: ");
+
+    BOOST_LOG_SEV(lg, error) << not_supported << n.id();
+    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.id()));
+}
+
+boost::filesystem::path registrar_implementation_formatter::full_path(
+    const formattables::locator& l, const yarn::name& n) const {
+    return l.make_full_path_for_cpp_implementation(n, static_artefact());
+}
+
+
+std::list<std::string> registrar_implementation_formatter::
+inclusion_dependencies(
+    const formattables::inclusion_dependencies_builder_factory& f,
+    const yarn::element& e) const {
+    const auto arch(static_artefact());
+    const auto& rg(assistant::as<fabric::registrar>(arch, e));
+    auto builder(f.make());
+
+    const auto rh_fn(traits::registrar_header_archetype());
+    builder.add(rg.name(), rh_fn);
+
+    using ic = inclusion_constants;
+    builder.add(ic::boost::archive::text_iarchive());
+    builder.add(ic::boost::archive::text_oarchive());
+    builder.add(ic::boost::archive::binary_iarchive());
+    builder.add(ic::boost::archive::binary_oarchive());
+    builder.add(ic::boost::archive::polymorphic_iarchive());
+    builder.add(ic::boost::archive::polymorphic_oarchive());
+
+    // XML serialisation
+    builder.add(ic::boost::archive::xml_iarchive());
+    builder.add(ic::boost::archive::xml_oarchive());
+
+    const auto ch_fn(traits::class_header_archetype());
+    builder.add(rg.leaves(), ch_fn);
+
+    const auto carch(traits::canonical_archetype());
+    builder.add(rg.registrar_dependencies(), carch);
+    return builder.build();
+}
+
+dogen::formatters::artefact registrar_implementation_formatter::
+format(const context& ctx, const yarn::element& e) const {
+    const auto id(e.name().id());
+    assistant a(ctx, archetype_location(), false/*requires_header_guard*/, id);
+    const auto& rg(a.as<fabric::registrar>(static_artefact(), e));
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter());
