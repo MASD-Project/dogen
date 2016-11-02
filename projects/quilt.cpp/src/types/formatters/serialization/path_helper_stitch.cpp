@@ -43,7 +43,7 @@ std::string path_helper::family() const {
 std::list<std::string>
 path_helper::owning_formatters() const {
     static auto r(std::list<std::string> {
-        serialization::traits::class_implementation_archetype()
+        traits::class_implementation_archetype()
     });
     return r;
 }
@@ -51,19 +51,19 @@ path_helper::owning_formatters() const {
 std::list<std::string>
 path_helper::owning_facets() const {
     static auto r(std::list<std::string> {
-        serialization::traits::facet()
+        traits::facet()
     });
+    return r;
+}
+
+std::string path_helper::helper_name() const {
+    static std::string r("path_helper");
     return r;
 }
 
 bool path_helper::is_enabled(const assistant& /*a*/,
     const formattables::helper_properties& /*hp*/) const {
     return true;
-}
-
-std::string path_helper::helper_name() const {
-    static std::string r("path_helper");
-    return r;
 }
 
 void path_helper::
