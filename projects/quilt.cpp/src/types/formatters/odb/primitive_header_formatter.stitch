@@ -1,0 +1,64 @@
+<#@ annotations.profile=dogen.stitch #>
+<#@ stitch.containing_namespaces=dogen::quilt::cpp::formatters::odb #>
+<#@ stitch.inclusion_dependency=<typeinfo> #>
+<#@ stitch.inclusion_dependency=<boost/make_shared.hpp> #>
+<#@ stitch.inclusion_dependency="dogen/yarn/types/primitive.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/traits.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/traits.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/odb/traits.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/inclusion_constants.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/assistant.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/odb/primitive_header_formatter.hpp" #>
+<#+
+
+std::string primitive_header_formatter::static_artefact() {
+    return traits::primitive_header_archetype();
+}
+
+std::string primitive_header_formatter::formatter_name() const {
+    static auto r(archetype_location().archetype());
+    return r;
+}
+
+annotations::archetype_location
+primitive_header_formatter::archetype_location() const {
+    static annotations::archetype_location
+        r(formatters::traits::kernel(), traits::facet(),
+            primitive_header_formatter::static_artefact());
+    return r;
+}
+
+std::type_index primitive_header_formatter::element_type_index() const {
+    static auto r(std::type_index(typeid(yarn::primitive)));
+    return r;
+}
+
+inclusion_support_types
+primitive_header_formatter::inclusion_support_type() const {
+    return inclusion_support_types::canonical_support;
+}
+
+boost::filesystem::path primitive_header_formatter::inclusion_path(
+    const formattables::locator& l, const yarn::name& n) const {
+    return l.make_inclusion_path_for_cpp_header(n, static_artefact());
+}
+
+boost::filesystem::path primitive_header_formatter::full_path(
+    const formattables::locator& l, const yarn::name& n) const {
+    return l.make_full_path_for_cpp_header(n, static_artefact());
+}
+
+std::list<std::string> primitive_header_formatter::inclusion_dependencies(
+    const formattables::inclusion_dependencies_builder_factory& /*f*/,
+    const yarn::element& /*e*/) const {
+    static const std::list<std::string> r;
+    return r;
+}
+
+dogen::formatters::artefact primitive_header_formatter::
+format(const context& /*ctx*/, const yarn::element& /*e*/) const {
+    dogen::formatters::artefact r;
+    return r;
+}
+
+#>

@@ -18,9 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/algorithm/string/case_conv.hpp>
+#include "dogen/quilt.cpp/types/formatters/odb/odb_options_formatter.hpp"
+#include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
+#include "dogen/quilt.cpp/types/formatters/odb/traits.hpp"
+#include "dogen/quilt.cpp/types/formatters/formatting_error.hpp"
+#include "dogen/quilt.cpp/types/formatters/inclusion_constants.hpp"
+#include "dogen/quilt.cpp/types/formatters/assistant.hpp"
+#include "dogen/quilt.cpp/types/formatters/traits.hpp"
+#include "dogen/quilt.cpp/types/fabric/odb_options.hpp"
 #include "dogen/formatters/types/sequence_formatter.hpp"
-#include "dogen/quilt.cpp/types/formatters/odb/odb_options_formatter_stitch.hpp"
+#include "dogen/yarn/types/object.hpp"
+#include "dogen/utility/log/logger.hpp"
+#include <boost/algorithm/string/case_conv.hpp>
+#include <boost/throw_exception.hpp>
+#include <boost/make_shared.hpp>
+#include <typeinfo>
 
 namespace dogen {
 namespace quilt {
@@ -28,8 +40,61 @@ namespace cpp {
 namespace formatters {
 namespace odb {
 
-dogen::formatters::artefact odb_options_formatter_stitch(
-    assistant& a, const fabric::odb_options& o) {
+std::string odb_options_formatter::static_artefact() {
+    return traits::odb_options_archetype();
+}
+
+std::string odb_options_formatter::formatter_name() const {
+    static auto r(archetype_location().archetype());
+    return r;
+}
+
+annotations::archetype_location
+odb_options_formatter::archetype_location() const {
+    static annotations::archetype_location
+        r(formatters::traits::kernel(), traits::facet(),
+            odb_options_formatter::static_artefact());
+    return r;
+}
+
+std::type_index odb_options_formatter::element_type_index() const {
+    static auto r(std::type_index(typeid(fabric::odb_options)));
+    return r;
+}
+
+inclusion_support_types odb_options_formatter::inclusion_support_type() const {
+    return inclusion_support_types::not_supported;
+}
+
+boost::filesystem::path odb_options_formatter::inclusion_path(
+    const formattables::locator& /*l*/, const yarn::name& n) const {
+    using namespace dogen::utility::log;
+    static logger
+        lg(logger_factory("quilt.cpp.formatters.odb.odb_options_formatter"));
+
+        const std::string not_supported("Inclusion path is not supported: ");
+
+    BOOST_LOG_SEV(lg, error) << not_supported << n.id();
+    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.id()));
+}
+
+boost::filesystem::path odb_options_formatter::full_path(
+    const formattables::locator& l, const yarn::name& n) const {
+    return l.make_full_path_for_odb_options(n, static_artefact());
+}
+
+std::list<std::string> odb_options_formatter::inclusion_dependencies(
+    const formattables::inclusion_dependencies_builder_factory& /*f*/,
+    const yarn::element& /*e*/) const {
+    static std::list<std::string> r;
+    return r;
+}
+
+dogen::formatters::artefact odb_options_formatter::
+format(const context& ctx, const yarn::element& e) const {
+    const auto id(e.name().id());
+    assistant a(ctx, archetype_location(), false/*requires_header_guard*/, id);
+    const auto& o(a.as<fabric::odb_options>(static_artefact(), e));
 
     {
         a.make_decoration_preamble();

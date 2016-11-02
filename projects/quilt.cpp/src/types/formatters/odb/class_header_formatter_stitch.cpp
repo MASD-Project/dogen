@@ -18,8 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/quilt.cpp/types/formatters/odb/class_header_formatter.hpp"
+#include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
+#include "dogen/quilt.cpp/types/formatters/odb/traits.hpp"
+#include "dogen/quilt.cpp/types/formatters/inclusion_constants.hpp"
+#include "dogen/quilt.cpp/types/formatters/traits.hpp"
+#include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/formatters/types/sequence_formatter.hpp"
-#include "dogen/quilt.cpp/types/formatters/odb/class_header_formatter_stitch.hpp"
+#include "dogen/yarn/types/object.hpp"
+#include <boost/make_shared.hpp>
+#include <typeinfo>
 
 namespace dogen {
 namespace quilt {
@@ -27,8 +35,65 @@ namespace cpp {
 namespace formatters {
 namespace odb {
 
+std::string class_header_formatter::static_artefact() {
+    return traits::class_header_archetype();
+}
+
+std::string class_header_formatter::formatter_name() const {
+    static auto r(archetype_location().archetype());
+    return r;
+}
+
+annotations::archetype_location
+class_header_formatter::archetype_location() const {
+    static annotations::archetype_location
+        r(formatters::traits::kernel(), traits::facet(),
+            class_header_formatter::static_artefact());
+    return r;
+}
+
+std::type_index class_header_formatter::element_type_index() const {
+    static auto r(std::type_index(typeid(yarn::object)));
+    return r;
+}
+
+inclusion_support_types class_header_formatter::inclusion_support_type() const {
+    return inclusion_support_types::canonical_support;
+}
+
+boost::filesystem::path class_header_formatter::inclusion_path(
+    const formattables::locator& l, const yarn::name& n) const {
+    return l.make_inclusion_path_for_cpp_header(n, static_artefact());
+}
+
+boost::filesystem::path class_header_formatter::full_path(
+    const formattables::locator& l, const yarn::name& n) const {
+    return l.make_full_path_for_cpp_header(n, static_artefact());
+}
+
+std::list<std::string> class_header_formatter::inclusion_dependencies(
+    const formattables::inclusion_dependencies_builder_factory& f,
+    const yarn::element& e) const {
+    const auto& o(assistant::as<yarn::object>(static_artefact(), e));
+    auto builder(f.make());
+    builder.add(o.name(), types::traits::class_header_archetype());
+
+    const auto carch(traits::canonical_archetype());
+    builder.add(o.transparent_associations(), carch);
+    builder.add(o.opaque_associations(), carch);
+
+    const auto self_fn(class_header_formatter::static_artefact());
+    builder.add(o.parent(), self_fn);
+
+    return builder.build();
+}
+
 dogen::formatters::artefact
-class_header_formatter_stitch(assistant& a, const yarn::object& o) {
+class_header_formatter::
+format(const context& ctx, const yarn::element& e) const {
+    const auto id(e.name().id());
+    assistant a(ctx, archetype_location(), true/*requires_header_guard*/, id);
+    const auto& o(a.as<yarn::object>(static_artefact(), e));
 
     {
         const auto sn(o.name().simple());
