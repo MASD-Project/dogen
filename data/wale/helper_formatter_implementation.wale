@@ -1,5 +1,6 @@
+
 std::string {{class.simple_name}}::formatter_name() const {
-    static auto r(std::string("<") + traits::facet_name() + std::string(">") +
+    static auto r(std::string("<") + traits::facet() + std::string(">") +
         std::string("<") + helper_name() + std::string(">"));
     return r;
 }
@@ -12,7 +13,8 @@ std::string {{class.simple_name}}::family() const {
 std::list<std::string>
 {{class.simple_name}}::owning_formatters() const {
     static auto r(std::list<std::string> {
-        traits::class_implementation_archetype()
+        io::traits::class_implementation_archetype(),
+        types::traits::class_implementation_archetype()
     });
     return r;
 }
@@ -20,12 +22,17 @@ std::list<std::string>
 std::list<std::string>
 {{class.simple_name}}::owning_facets() const {
     static auto r(std::list<std::string> {
-        traits::facet_name()
+        io::traits::facet(), types::traits::facet()
     });
     return r;
 }
 
 std::string {{class.simple_name}}::helper_name() const {
-    static std::string r("{{helper.name}}");
+    static std::string r("{{class.simple_name}}");
     return r;
+}
+
+bool {{class.simple_name}}::is_enabled(const assistant& a,
+    const formattables::helper_properties& hp) const {
+    return a.is_streaming_enabled(hp);
 }

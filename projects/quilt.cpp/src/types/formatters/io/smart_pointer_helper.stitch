@@ -5,43 +5,11 @@
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/io/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/types/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formattables/helper_properties.hpp" #>
+<#@ stitch.wale.template=helper_formatter_implementation.wale #>
+<#@ stitch.wale.kvp.helper.family=SmartPointer #>
+<#@ stitch.wale.kvp.class.simple_name=smart_pointer_helper #>
+<#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::string smart_pointer_helper::formatter_name() const {
-    static auto r(std::string("<") + traits::facet() + std::string(">") +
-        std::string("<") + helper_name() + std::string(">"));
-    return r;
-}
-
-std::string smart_pointer_helper::family() const {
-    static std::string r("SmartPointer");
-    return r;
-}
-
-std::list<std::string> smart_pointer_helper::owning_formatters() const {
-    static auto r(std::list<std::string> {
-        io::traits::class_implementation_archetype(),
-        types::traits::class_implementation_archetype()
-    });
-    return r;
-}
-
-std::list<std::string> smart_pointer_helper::owning_facets() const {
-    static auto r(std::list<std::string> {
-        io::traits::facet(), types::traits::facet()
-    });
-    return r;
-}
-
-std::string smart_pointer_helper::helper_name() const {
-    static std::string r("smart_pointer_helper");
-    return r;
-}
-
-bool smart_pointer_helper::is_enabled(const assistant& a,
-const formattables::helper_properties& hp) const {
-    return a.is_streaming_enabled(hp);
-}
 
 void smart_pointer_helper::
 format(assistant& a, const formattables::helper_properties& hp) const {

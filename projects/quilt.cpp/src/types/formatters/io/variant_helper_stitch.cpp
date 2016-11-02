@@ -41,7 +41,8 @@ std::string variant_helper::family() const {
     return r;
 }
 
-std::list<std::string> variant_helper::owning_formatters() const {
+std::list<std::string>
+variant_helper::owning_formatters() const {
     static auto r(std::list<std::string> {
         io::traits::class_implementation_archetype(),
         types::traits::class_implementation_archetype()
@@ -49,7 +50,8 @@ std::list<std::string> variant_helper::owning_formatters() const {
     return r;
 }
 
-std::list<std::string> variant_helper::owning_facets() const {
+std::list<std::string>
+variant_helper::owning_facets() const {
     static auto r(std::list<std::string> {
         io::traits::facet(), types::traits::facet()
     });
@@ -62,7 +64,7 @@ std::string variant_helper::helper_name() const {
 }
 
 bool variant_helper::is_enabled(const assistant& a,
-const formattables::helper_properties& hp) const {
+    const formattables::helper_properties& hp) const {
     return a.is_streaming_enabled(hp);
 }
 
