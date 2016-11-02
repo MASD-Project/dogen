@@ -69,6 +69,11 @@ private:
     std::list<line>
     make_expression_block_only_lines(const unsigned int how_many = 1) const;
 
+    /**
+     * @brief Makes a line with a variable block for the supplied variable.
+     */
+    std::list<line> make_variable_block(const std::string& v) const;
+
 public:
     /**
      * @brief Creates a template with no content.
@@ -228,6 +233,17 @@ public:
      * @brief Text template with lines that have empty text blocks.
      */
     text_template make_empty_text_lines(const unsigned int how_many = 2) const;
+
+    /**
+     * @brief Add line with variable. No mapping is added for the variable.
+     */
+    text_template make_with_variable(const std::string& v) const;
+
+    /**
+     * @brief Add line with variable, and the corresponding mapping.
+     */
+    text_template
+    make_with_variable(const std::string& k, const std::string& v) const;
 
 private:
 };

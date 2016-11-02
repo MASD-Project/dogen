@@ -30,6 +30,7 @@
 #include "dogen/annotations/types/archetype_location.hpp"
 #include "dogen/stitch/types/line.hpp"
 #include "dogen/stitch/types/text_template.hpp"
+#include "dogen/stitch/types/resolver.hpp"
 
 namespace dogen {
 namespace stitch {
@@ -53,6 +54,12 @@ private:
         const std::string& l, std::ostream& s) const;
 
     /**
+     * @brief Formats a line with just a variable block.
+     */
+    void format_variable_block_line(const std::string& l,
+        const resolver& rs, std::ostream& s) const;
+
+    /**
      * @brief Formats a line with just a standard control block.
      */
     void format_standard_control_block_line(
@@ -70,9 +77,9 @@ private:
      * @brief Formats a line with a single block.
      */
     void format_line_with_single_block(const std::string& stream_name,
-        const line& l, std::ostream& s) const;
+        const line& l, const resolver& rs, std::ostream& s) const;
 
- public:
+public:
     /**
      * @brief Archetype location for this formatter.
      */

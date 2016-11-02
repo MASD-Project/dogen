@@ -142,6 +142,16 @@ make_expression_block_only_lines(const unsigned int how_many) const {
     return r;
 }
 
+std::list<line>
+mock_text_template_factory::make_variable_block(const std::string& v) const {
+    block b;
+    b.type(block_types::variable_block);
+    b.content(v);
+    const line l(std::list<block> { b });
+    const std::list<line> r({ l });
+    return r;
+}
+
 text_template mock_text_template_factory::make_empty_template() const {
     text_template r(make_text_template_with_trivial_properties());
     return r;
@@ -330,6 +340,21 @@ text_template mock_text_template_factory::
 make_empty_text_lines(const unsigned int how_many) const {
     text_template r(make_text_template_with_trivial_properties());
     r.body().lines(make_text_block_only_lines(how_many, true/*empty_content*/));
+    return r;
+}
+
+text_template
+mock_text_template_factory::make_with_variable(const std::string& n) const {
+    text_template r(make_text_template_with_trivial_properties());
+    r.body().lines(make_variable_block(n));
+    return r;
+}
+
+text_template mock_text_template_factory::
+make_with_variable(const std::string& k, const std::string& v) const {
+    text_template r(make_text_template_with_trivial_properties());
+    r.body().lines(make_variable_block(k));
+    r.variables()[k] = v;
     return r;
 }
 

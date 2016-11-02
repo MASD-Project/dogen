@@ -25,6 +25,7 @@
 #include "dogen/formatters/io/artefact_io.hpp"
 #include "dogen/stitch/test/mock_text_template_factory.hpp"
 #include "dogen/stitch/io/text_template_io.hpp"
+#include "dogen/stitch/types/resolution_error.hpp"
 #include "dogen/stitch/types/formatting_error.hpp"
 #include "dogen/stitch/types/formatter.hpp"
 
@@ -158,6 +159,15 @@ const std::string text_line_with_quotes_content(
     R"(stream_ << "\"double quote\" \\\"double quote quote\\\" 'single'" << std::endl;
 )");
 
+
+const std::string variable_name("some variable");
+const std::string single_line_variable_value("some value");
+const std::string multi_line_varialbe_value(R"(line 1
+line 2
+)");
+
+const std::string unmapped_variable("Key not found:");
+
 dogen::formatters::artefact format(const dogen::stitch::text_template& tt) {
     dogen::stitch::formatter f;
     return f.format(tt);
@@ -170,6 +180,7 @@ dogen::stitch::test::mock_text_template_factory factory;
 
 using dogen::utility::test::contains_checker;
 using dogen::stitch::formatting_error;
+using dogen::stitch::resolution_error;
 
 BOOST_AUTO_TEST_SUITE(formatter_tests)
 
@@ -477,6 +488,42 @@ BOOST_AUTO_TEST_CASE(line_with_quotes_result_in_expected_template) {
     const auto actual(r.content());
     const auto expected(text_line_with_quotes_content);
     BOOST_CHECK(asserter::assert_equals(expected, actual));
+}
+
+BOOST_AUTO_TEST_CASE(line_with_mapped_variable_result_in_expected_template) {
+    SETUP_TEST_LOG_SOURCE("line_with_mapped_variable_result_in_expected_template");
+
+    const auto tt0(factory.make_with_variable(variable_name,
+            single_line_variable_value));
+    BOOST_LOG_SEV(lg, debug) << "input: " << tt0;
+
+    const auto r0(format(tt0));
+    BOOST_LOG_SEV(lg, debug) << "Result: " << r0;
+
+    auto actual(r0.content());
+    auto expected(single_line_variable_value);
+    BOOST_CHECK(asserter::assert_equals(expected, actual));
+
+    const auto tt1(factory.make_with_variable(variable_name,
+            multi_line_varialbe_value));
+    BOOST_LOG_SEV(lg, debug) << "input: " << tt1;
+
+    const auto r1(format(tt1));
+    BOOST_LOG_SEV(lg, debug) << "Result: " << r1;
+
+    actual = r1.content();
+    expected = multi_line_varialbe_value;
+    BOOST_CHECK(asserter::assert_equals(expected, actual));
+}
+
+BOOST_AUTO_TEST_CASE(line_with_unmapped_variable_throws) {
+    SETUP_TEST_LOG_SOURCE("line_with_unmapped_variable_throws");
+
+    const auto tt(factory.make_with_variable(variable_name));
+    BOOST_LOG_SEV(lg, debug) << "input: " << tt;
+
+    contains_checker<resolution_error> c(unmapped_variable);
+    BOOST_CHECK_EXCEPTION(format(tt), resolution_error, c);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -81,6 +81,12 @@ format_expression_block_line(const std::string& stream_name,
     s << std::endl;
 }
 
+void formatter::format_variable_block_line(const std::string& l,
+    const resolver& rs, std::ostream& s) const {
+    const auto v(rs.resolve(l));
+    s << v;
+}
+
 void formatter::
 format_standard_control_block_line(
     const std::string& l, std::ostream& s) const {
@@ -110,7 +116,7 @@ void formatter::format_mixed_content_line(const std::string& stream_name,
 }
 
 void formatter::format_line_with_single_block(const std::string& stream_name,
-    const line& l, std::ostream& s) const {
+    const line& l, const resolver& rs, std::ostream& s) const {
     const auto& b(l.blocks().front());
     const auto& c(b.content());
     switch(b.type()) {
@@ -119,6 +125,9 @@ void formatter::format_line_with_single_block(const std::string& stream_name,
         break;
     case block_types::expression_block:
         format_expression_block_line(stream_name, c, s);
+        break;
+    case block_types::variable_block:
+        format_variable_block_line(c, rs, s);
         break;
     case block_types::standard_control_block:
         format_standard_control_block_line(c, s);
@@ -147,6 +156,7 @@ dogen::formatters::artefact formatter::format(const text_template& tt) const {
         BOOST_THROW_EXCEPTION(formatting_error(empty_stream_name));
     }
 
+    resolver rs(tt.variables());
     std::ostringstream s;
     {
         const auto& id(ss.inclusion_dependencies());
@@ -163,7 +173,7 @@ dogen::formatters::artefact formatter::format(const text_template& tt) const {
                 BOOST_LOG_SEV(lg, error) << empty_line;
                 BOOST_THROW_EXCEPTION(formatting_error(empty_line));
             } else if (l.blocks().size() == 1)
-                format_line_with_single_block(stream_variable_name, l, s);
+                format_line_with_single_block(stream_variable_name, l, rs, s);
             else
                 format_mixed_content_line(stream_variable_name, l, s);
         }
