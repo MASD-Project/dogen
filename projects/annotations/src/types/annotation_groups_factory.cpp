@@ -21,6 +21,7 @@
 #include <sstream>
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
+#include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/annotations/io/type_io.hpp"
@@ -108,14 +109,31 @@ obtain_profile_name(const type_group& tg, const annotation& a) const {
     return r;
 }
 
-boost::optional<type> annotation_groups_factory::
-obtain_type(const std::string& n) const {
+type annotation_groups_factory::obtain_type(const std::string& n) const {
+    /*
+     * First try a full match; if it exists, return the type.
+     */
     const auto i(type_repository_.types_by_name().find(n));
-    if (i == type_repository_.types_by_name().end()) {
-        BOOST_LOG_SEV(lg, error) << type_not_found << n;
-        BOOST_THROW_EXCEPTION(building_error(type_not_found + n));
+    if (i != type_repository_.types_by_name().end())
+        return i->second;
+
+    /*
+     * Now try the partial matches. Note that we can be sure there
+     * will only be one match due to the logic of partial matching, as
+     * two types cannot have the same name.
+     */
+    for (const auto& pair : type_repository_.partially_matchable_types()) {
+        const auto& qn(pair.first);
+        const auto& t(pair.second);
+        if (boost::starts_with(n, qn))
+            return t;
     }
-    return i->second;
+
+    /*
+     * If nothing matches we need to throw.
+     */
+    BOOST_LOG_SEV(lg, error) << type_not_found << n;
+    BOOST_THROW_EXCEPTION(building_error(type_not_found + n));
 }
 
 void annotation_groups_factory::validate_scope(const type& t,
@@ -153,12 +171,10 @@ annotation annotation_groups_factory::create_annotation(const scope_types scope,
     for (auto kvp : aggregated_scribble_entries) {
         const auto& k(kvp.first);
         const auto t(obtain_type(k));
-        if (!t)
-            continue;
 
-        validate_scope(*t, r.scope());
+        validate_scope(t, r.scope());
         const auto& v(kvp.second);
-        r.entries()[k] = f.make(*t, v);
+        r.entries()[k] = f.make(t, v);
     }
     return r;
 }

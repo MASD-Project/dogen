@@ -74,10 +74,9 @@ private:
 
 private:
     /**
-     * @brief Returns the field definition for the qualified name, if
-     * one exists.
+     * @brief Returns the field definition for the qualified name.
      */
-    boost::optional<type> obtain_type(const std::string& n) const;
+    type obtain_type(const std::string& n) const;
 
     /**
      * @brief Ensures the field definition is valid for the current
