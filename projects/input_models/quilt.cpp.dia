@@ -25820,7 +25820,7 @@ and element.#</dia:string>
         <dia:string>#helper formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN quilt.cpp.types.class_implementation.formatting_style=stitch_wale#</dia:string>
+        <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -30073,7 +30073,7 @@ not a regular" helper.#</dia:string>
         <dia:point val="88.765,283.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="88.0559,283.446;88.8616,287.085"/>
+        <dia:rectangle val="88.0559,283.446;88.8615,287.085"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
