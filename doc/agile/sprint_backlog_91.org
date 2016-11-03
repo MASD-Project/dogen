@@ -14,38 +14,39 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-11-03 Thu 17:21]
+#+CAPTION: Clock summary at [2016-11-03 Thu 17:32]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *45:18* |       |      | 100.0 |
+| *Total time*                                                                | *45:27* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 45:18   |       |      | 100.0 |
-| Active                                                                      |         | 45:18 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:14 |   2.7 |
+| Stories                                                                     | 45:27   |       |      | 100.0 |
+| Active                                                                      |         | 45:27 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:23 |   3.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:22 |   0.8 |
 | COMPLETED Improve bintray support                                           |         |       | 2:26 |   5.4 |
 | COMPLETED Add logo with white background                                    |         |       | 0:14 |   0.5 |
 | COMPLETED Consider renaming =diagrams= to =input_models=                    |         |       | 0:38 |   1.4 |
 | COMPLETED Add kvp support to annotations                                    |         |       | 0:37 |   1.4 |
-| COMPLETED Implement wale                                                    |         |       | 7:00 |  15.5 |
+| COMPLETED Implement wale                                                    |         |       | 7:00 |  15.4 |
 | COMPLETED Add artefact source properties support                            |         |       | 3:11 |   7.0 |
 | COMPLETED Stitch not writing when template has changed                      |         |       | 0:33 |   1.2 |
 | COMPLETED Implement helper headers using wale                               |         |       | 2:40 |   5.9 |
 | COMPLETED Implement formatter headers using wale                            |         |       | 0:30 |   1.1 |
 | COMPLETED Add profile support to stitch                                     |         |       | 3:48 |   8.4 |
-| COMPLETED Changes to stitch to accommodate wale                             |         |       | 9:34 |  21.1 |
+| COMPLETED Changes to stitch to accommodate wale                             |         |       | 9:34 |  21.0 |
 | COMPLETED Implement formatter helpers implementation using stitch and wale  |         |       | 5:00 |  11.0 |
 | COMPLETED Merge stitch templates with formatters                            |         |       | 3:14 |   7.1 |
 | COMPLETED Fix borked build due to seam errors                               |         |       | 0:12 |   0.4 |
 | COMPLETED Various fixes due to stitch changes                               |         |       | 0:22 |   0.8 |
-| COMPLETED Implement formatter implementation using stitch and wale          |         |       | 1:04 |   2.4 |
+| COMPLETED Implement formatter implementation using stitch and wale          |         |       | 1:04 |   2.3 |
 | COMPLETED Move stitching into knit                                          |         |       | 2:13 |   4.9 |
 | COMPLETED Integration of stitch and dogen                                   |         |       | 0:26 |   1.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-11-03 Thu 17:22]--[2016-11-03 Thu 17:31] =>  0:09
     CLOCK: [2016-10-25 Tue 11:02]--[2016-10-25 Tue 11:13] =>  0:11
     CLOCK: [2016-10-24 Mon 18:28]--[2016-10-24 Mon 18:33] =>  0:05
     CLOCK: [2016-10-24 Mon 11:32]--[2016-10-24 Mon 11:46] =>  0:14
@@ -599,30 +600,10 @@ Random notes:
   part of the expansion, we could set a number of stitch fields which
   would then be picked up by some knit-specific workflow classes.
 
-*** Merge properties factory with stitching factory                   :story:
+*** COMPLETED Generate formatter interfaces                            :epic:
+    CLOSED: [2016-11-03 Thu 17:24]
 
-In stitch we still have a few classes that are light on
-responsibilities. One case is the stitching properties factory, traits
-etc. We should merge all of this into a single class, properties
-factory.
-
-*** Rename project directory path                                     :story:
-
-The C++ options have an attribute called
-=project_directory_path=. This is a bit misleading; it is actually the
-top-level directory that will contain the project directory. In
-addition, this is not really C++ specific at all; it would apply to
-any kernel and sub-kernel. We should rename it and move it to output
-options.
-
-*** Add log-level to command line                                     :story:
-
-We are now increasingly logging at trace levels. We need to allow
-users to supply a more fine-grained log configuration. This could be
-done by simply allowing users to set the log level via a command-line
-flag: =log_level=. It would replace verbose.
-
-*** Generate formatter interfaces                                      :epic:
+*Rationale*: completed as part of other stories.
 
 We should create another template language, in addition to stitch:
 "wale". Wale is a very simple language that has templates that just do
@@ -763,9 +744,9 @@ It doesn't make any sense to have model dependencies in the command
 line. After all, the model cannot be interpreted without them. A
 better way to do this would be to split this functionality into two:
 
-- command line supplies "import directories", that is, directories
-  to search when looking for models. By default the system directory
-  is already in the path.
+- command line supplies "import directories" or "reference
+  directories", that is, directories to search when looking for
+  models. By default the system directory is already in the path.
 - model supplies "import statements". The problem here is that we need
   to also supply the file name of the model. We could perhaps omit the
   extension and then load all files that match (e.g. =.dia=, =.json=,
@@ -801,6 +782,29 @@ path, etc are - and so should remain command line options.
 We need to move these two into the meta-data. This would also mean we
 no longer need to pass in external module paths for references, which
 is much cleaner.
+
+*** Merge properties factory with stitching factory                   :story:
+
+In stitch we still have a few classes that are light on
+responsibilities. One case is the stitching properties factory, traits
+etc. We should merge all of this into a single class, properties
+factory.
+
+*** Rename project directory path                                     :story:
+
+The C++ options have an attribute called
+=project_directory_path=. This is a bit misleading; it is actually the
+top-level directory that will contain the project directory. In
+addition, this is not really C++ specific at all; it would apply to
+any kernel and sub-kernel. We should rename it and move it to output
+options.
+
+*** Add log-level to command line                                     :story:
+
+We are now increasingly logging at trace levels. We need to allow
+users to supply a more fine-grained log configuration. This could be
+done by simply allowing users to set the log level via a command-line
+flag: =log_level=. It would replace verbose.
 
 *** Create a tool to generate product skeletons                       :story:
 

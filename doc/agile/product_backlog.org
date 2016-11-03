@@ -6416,6 +6416,31 @@ Links:
 
 These stories are far in the future or just plain crazy.
 
+*** Implement wale in terms of mustache templates                     :story:
+
+Originally we implemented wale as a quick hack, but we stated:
+
+#+begin_quote
+A second point is the use of [[https://github.com/DomainDrivenConsulting/bustache][bustache]] vs rolling our own trivial
+mustache-like implementation:
+
+- if we use bustache we can, in the future, start to make use of
+  complex mustache templates. We don't have a use case for this now,
+  but there is no reason to preclude it either.
+- however, with bustache as a third-party dependency we now have to
+  worry about generating OSX and windows binaries for the
+  library. Until we do, the builds will break.
+
+For now, to make life easier we will roll our own. As soon as we have
+a stable windows environment we will move to bustache.
+#+end_quote
+
+We should really move to one of these mustache implementations.
+
+See also:
+
+- [[https://github.com/cierelabs/boostache/tree/develop][boostache]]
+- [[https://github.com/no1msd/mstch][mstch]]
 
 *** Add support for XText                                             :story:
 
