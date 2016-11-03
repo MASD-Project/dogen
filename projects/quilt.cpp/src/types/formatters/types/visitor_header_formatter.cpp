@@ -58,10 +58,8 @@ std::type_index visitor_header_formatter::element_type_index() const {
     return r;
 }
 
-inclusion_support_types visitor_header_formatter::
-inclusion_support_type() const {
+inclusion_support_types visitor_header_formatter::inclusion_support_type() const {
     return inclusion_support_types::canonical_support;
-
 }
 
 boost::filesystem::path visitor_header_formatter::inclusion_path(

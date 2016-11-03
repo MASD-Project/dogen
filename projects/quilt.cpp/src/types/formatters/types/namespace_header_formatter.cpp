@@ -41,8 +41,8 @@ std::string namespace_header_formatter::formatter_name() const {
     return r;
 }
 
-annotations::archetype_location namespace_header_formatter::
-archetype_location() const {
+annotations::archetype_location
+namespace_header_formatter::archetype_location() const {
     static annotations::archetype_location
         r(formatters::traits::kernel(), traits::facet(),
             namespace_header_formatter::static_artefact());
@@ -54,15 +54,13 @@ std::type_index namespace_header_formatter::element_type_index() const {
     return r;
 }
 
-inclusion_support_types namespace_header_formatter::
-inclusion_support_type() const {
+inclusion_support_types namespace_header_formatter::inclusion_support_type() const {
     return inclusion_support_types::canonical_support;
 }
 
 boost::filesystem::path namespace_header_formatter::inclusion_path(
     const formattables::locator& l, const yarn::name& n) const {
     return l.make_inclusion_path_for_cpp_header(n, static_artefact());
-
 }
 
 boost::filesystem::path namespace_header_formatter::full_path(

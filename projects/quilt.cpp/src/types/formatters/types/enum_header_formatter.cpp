@@ -43,8 +43,8 @@ std::string enum_header_formatter::formatter_name() const {
     return r;
 }
 
-annotations::archetype_location enum_header_formatter::
-archetype_location() const {
+annotations::archetype_location
+enum_header_formatter::archetype_location() const {
     static annotations::archetype_location
         r(formatters::traits::kernel(), traits::facet(),
             enum_header_formatter::static_artefact());

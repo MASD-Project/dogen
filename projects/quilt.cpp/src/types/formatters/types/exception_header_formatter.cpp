@@ -58,8 +58,7 @@ std::type_index exception_header_formatter::element_type_index() const {
     return r;
 }
 
-inclusion_support_types exception_header_formatter::
-inclusion_support_type() const {
+inclusion_support_types exception_header_formatter::inclusion_support_type() const {
     return inclusion_support_types::canonical_support;
 }
 

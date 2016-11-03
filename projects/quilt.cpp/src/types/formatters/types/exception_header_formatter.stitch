@@ -11,44 +11,13 @@
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/types/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/hash/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/types/exception_header_formatter.hpp" #>
+<#@ stitch.wale.template=artefact_formatter_implementation_header.wale #>
+<#@ stitch.wale.kvp.class.simple_name=exception_header_formatter #>
+<#@ stitch.wale.kvp.archetype.simple_name=exception_header #>
+<#@ stitch.wale.kvp.class.inclusion_support_type=canonical_support #>
+<#@ stitch.wale.kvp.yarn_element=yarn::exception #>
+<#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::string exception_header_formatter::static_artefact() {
-    return traits::exception_header_archetype();
-}
-
-std::string exception_header_formatter::formatter_name() const {
-    static auto r(archetype_location().archetype());
-    return r;
-}
-
-annotations::archetype_location
-exception_header_formatter::archetype_location() const {
-    static annotations::archetype_location
-        r(formatters::traits::kernel(), traits::facet(),
-            exception_header_formatter::static_artefact());
-    return r;
-}
-
-std::type_index exception_header_formatter::element_type_index() const {
-    static auto r(std::type_index(typeid(yarn::exception)));
-    return r;
-}
-
-inclusion_support_types exception_header_formatter::
-inclusion_support_type() const {
-    return inclusion_support_types::canonical_support;
-}
-
-boost::filesystem::path exception_header_formatter::inclusion_path(
-    const formattables::locator& l, const yarn::name& n) const {
-    return l.make_inclusion_path_for_cpp_header(n, static_artefact());
-}
-
-boost::filesystem::path exception_header_formatter::full_path(
-    const formattables::locator& l, const yarn::name& n) const {
-    return l.make_full_path_for_cpp_header(n, static_artefact());
-}
 
 std::list<std::string> exception_header_formatter::inclusion_dependencies(
     const formattables::inclusion_dependencies_builder_factory& f,

@@ -22,22 +22,15 @@ std::type_index {{class.simple_name}}::element_type_index() const {
 }
 
 inclusion_support_types {{class.simple_name}}::inclusion_support_type() const {
-    return inclusion_support_types::not_supported;
+    return inclusion_support_types::{{class.inclusion_support_type}};
 }
 
 boost::filesystem::path {{class.simple_name}}::inclusion_path(
-    const formattables::locator& /*l*/, const yarn::name& n) const {
-
-    using namespace dogen::utility::log;
-    static logger lg(
-        logger_factory({{class.simple_name}}::static_artefact()));
-    static const std::string not_supported("Inclusion path is not supported: ");
-
-    BOOST_LOG_SEV(lg, error) << not_supported << n.id();
-    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.id()));
+    const formattables::locator& l, const yarn::name& n) const {
+    return l.make_inclusion_path_for_cpp_header(n, static_artefact());
 }
 
 boost::filesystem::path {{class.simple_name}}::full_path(
     const formattables::locator& l, const yarn::name& n) const {
-    return l.make_full_path_for_cpp_implementation(n, static_artefact());
+    return l.make_full_path_for_cpp_header(n, static_artefact());
 }
