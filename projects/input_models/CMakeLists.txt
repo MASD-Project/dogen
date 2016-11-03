@@ -103,7 +103,6 @@ add_custom_target(knit_${target}
     --cpp-project-dir ${projects_dir}/
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/tests/.*
-    --ignore-files-matching-regex .*stitch
     --verbose
     --delete-extra-files)
 if(use_latest_knitter)

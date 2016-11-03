@@ -29,27 +29,32 @@ artefact::artefact()
 artefact::artefact(artefact&& rhs)
     : path_(std::move(rhs.path_)),
       content_(std::move(rhs.content_)),
-      overwrite_(std::move(rhs.overwrite_)) { }
+      overwrite_(std::move(rhs.overwrite_)),
+      dependencies_(std::move(rhs.dependencies_)) { }
 
 artefact::artefact(
     const boost::filesystem::path& path,
     const std::string& content,
-    const bool overwrite)
+    const bool overwrite,
+    const std::vector<boost::filesystem::path>& dependencies)
     : path_(path),
       content_(content),
-      overwrite_(overwrite) { }
+      overwrite_(overwrite),
+      dependencies_(dependencies) { }
 
 void artefact::swap(artefact& other) noexcept {
     using std::swap;
     swap(path_, other.path_);
     swap(content_, other.content_);
     swap(overwrite_, other.overwrite_);
+    swap(dependencies_, other.dependencies_);
 }
 
 bool artefact::operator==(const artefact& rhs) const {
     return path_ == rhs.path_ &&
         content_ == rhs.content_ &&
-        overwrite_ == rhs.overwrite_;
+        overwrite_ == rhs.overwrite_ &&
+        dependencies_ == rhs.dependencies_;
 }
 
 artefact& artefact::operator=(artefact other) {
@@ -96,6 +101,22 @@ bool artefact::overwrite() const {
 
 void artefact::overwrite(const bool v) {
     overwrite_ = v;
+}
+
+const std::vector<boost::filesystem::path>& artefact::dependencies() const {
+    return dependencies_;
+}
+
+std::vector<boost::filesystem::path>& artefact::dependencies() {
+    return dependencies_;
+}
+
+void artefact::dependencies(const std::vector<boost::filesystem::path>& v) {
+    dependencies_ = v;
+}
+
+void artefact::dependencies(const std::vector<boost::filesystem::path>&& v) {
+    dependencies_ = std::move(v);
 }
 
 } }

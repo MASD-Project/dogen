@@ -30,6 +30,20 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::vector<boost::filesystem::path>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << (*i).generic_string() << "\"";
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace formatters {
 
@@ -44,7 +58,8 @@ std::ostream& operator<<(std::ostream& s, const artefact& v) {
       << "\"__type__\": " << "\"dogen::formatters::artefact\"" << ", "
       << "\"path\": " << "\"" << v.path().generic_string() << "\"" << ", "
       << "\"content\": " << "\"" << tidy_up_string(v.content()) << "\"" << ", "
-      << "\"overwrite\": " << v.overwrite()
+      << "\"overwrite\": " << v.overwrite() << ", "
+      << "\"dependencies\": " << v.dependencies()
       << " }";
     return(s);
 }

@@ -116,12 +116,15 @@ obtain_yarn_model(const std::vector<boost::filesystem::path>& data_dirs,
 }
 
 void workflow::perform_housekeeping(
-    const std::forward_list<formatters::artefact>& files,
+    const std::forward_list<formatters::artefact>& artefacts,
     const std::forward_list<boost::filesystem::path>& dirs) const {
 
     std::set<boost::filesystem::path> expected_files;
-    for (const auto file : files)
-        expected_files.insert(file.path().generic_string());
+    for (const auto a : artefacts) {
+        expected_files.insert(a.path().generic_string());
+        for (const auto& d : a.dependencies())
+            expected_files.insert(d.generic_string());
+    }
 
     const auto& ip(knitting_options_.output().ignore_patterns());
     std::forward_list<std::string> ignore_patterns(ip.begin(), ip.end());
@@ -140,14 +143,14 @@ workflow::obtain_file_writer() const {
 
 void workflow::write_files(
     std::shared_ptr<dogen::formatters::artefact_writer_interface> writer,
-    const std::forward_list<formatters::artefact>& files) const {
+    const std::forward_list<formatters::artefact>& artefacts) const {
 
-    if (files.empty()) {
+    if (artefacts.empty()) {
         BOOST_LOG_SEV(lg, warn) << "No files were generated, so no output.";
         return;
     }
 
-    writer->write(files);
+    writer->write(artefacts);
 }
 
 void workflow::execute() const {
@@ -167,14 +170,14 @@ void workflow::execute() const {
         }
 
         quilt::workflow w(knitting_options_, atrp, agf);
-        const auto files(w.execute(m));
+        const auto artefacts(w.execute(m));
 
         const auto writer(obtain_file_writer());
-        write_files(writer, files);
+        write_files(writer, artefacts);
 
         if (housekeeping_required()) {
             const auto md(w.managed_directories(m));
-            perform_housekeeping(files, md);
+            perform_housekeeping(artefacts, md);
         }
     } catch(const dogen::formatters::formatting_error& e) {
         BOOST_THROW_EXCEPTION(workflow_error(e.what()));

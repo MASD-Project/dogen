@@ -40,6 +40,14 @@ bool create_bool(const unsigned int position) {
     return (position % 2) == 0;
 }
 
+std::vector<boost::filesystem::path> create_std_vector_boost_filesystem_path(unsigned int position) {
+    std::vector<boost::filesystem::path> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.push_back(create_boost_filesystem_path(position + i));
+    }
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -52,6 +60,7 @@ populate(const unsigned int position, result_type& v) {
     v.path(create_boost_filesystem_path(position + 0));
     v.content(create_std_string(position + 1));
     v.overwrite(create_bool(position + 2));
+    v.dependencies(create_std_vector_boost_filesystem_path(position + 3));
 }
 
 artefact_generator::result_type

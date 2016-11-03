@@ -14,33 +14,34 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-11-03 Thu 16:49]
+#+CAPTION: Clock summary at [2016-11-03 Thu 17:21]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *44:52* |       |      | 100.0 |
+| *Total time*                                                                | *45:18* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 44:52   |       |      | 100.0 |
-| Active                                                                      |         | 44:52 |      | 100.0 |
+| Stories                                                                     | 45:18   |       |      | 100.0 |
+| Active                                                                      |         | 45:18 |      | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       | 1:14 |   2.7 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:22 |   0.8 |
 | COMPLETED Improve bintray support                                           |         |       | 2:26 |   5.4 |
 | COMPLETED Add logo with white background                                    |         |       | 0:14 |   0.5 |
 | COMPLETED Consider renaming =diagrams= to =input_models=                    |         |       | 0:38 |   1.4 |
 | COMPLETED Add kvp support to annotations                                    |         |       | 0:37 |   1.4 |
-| COMPLETED Implement wale                                                    |         |       | 7:00 |  15.6 |
-| COMPLETED Add artefact source properties support                            |         |       | 3:11 |   7.1 |
+| COMPLETED Implement wale                                                    |         |       | 7:00 |  15.5 |
+| COMPLETED Add artefact source properties support                            |         |       | 3:11 |   7.0 |
 | COMPLETED Stitch not writing when template has changed                      |         |       | 0:33 |   1.2 |
 | COMPLETED Implement helper headers using wale                               |         |       | 2:40 |   5.9 |
 | COMPLETED Implement formatter headers using wale                            |         |       | 0:30 |   1.1 |
-| COMPLETED Add profile support to stitch                                     |         |       | 3:48 |   8.5 |
-| COMPLETED Changes to stitch to accommodate wale                             |         |       | 9:34 |  21.3 |
-| COMPLETED Implement formatter helpers implementation using stitch and wale  |         |       | 5:00 |  11.1 |
-| COMPLETED Merge stitch templates with formatters                            |         |       | 3:14 |   7.2 |
+| COMPLETED Add profile support to stitch                                     |         |       | 3:48 |   8.4 |
+| COMPLETED Changes to stitch to accommodate wale                             |         |       | 9:34 |  21.1 |
+| COMPLETED Implement formatter helpers implementation using stitch and wale  |         |       | 5:00 |  11.0 |
+| COMPLETED Merge stitch templates with formatters                            |         |       | 3:14 |   7.1 |
 | COMPLETED Fix borked build due to seam errors                               |         |       | 0:12 |   0.4 |
 | COMPLETED Various fixes due to stitch changes                               |         |       | 0:22 |   0.8 |
 | COMPLETED Implement formatter implementation using stitch and wale          |         |       | 1:04 |   2.4 |
 | COMPLETED Move stitching into knit                                          |         |       | 2:13 |   4.9 |
+| COMPLETED Integration of stitch and dogen                                   |         |       | 0:26 |   1.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -500,14 +501,8 @@ Once all templates have been updated with wale, we need to:
   priorities, we can then do this one template at a time.
 - remove stitch target.
 
-*** Merge properties factory with stitching factory                   :story:
-
-In stitch we still have a few classes that are light on
-responsibilities. One case is the stitching properties factory, traits
-etc. We should merge all of this into a single class, properties
-factory.
-
-*** Add new formatter types                                           :story:
+*** COMPLETED Add new formatter types                                 :story:
+    CLOSED: [2016-11-03 Thu 16:54]
 
 - add new kinds of formatters to process wale templates, etc.
 - Each formatter should check for its required data. They can be
@@ -518,7 +513,10 @@ factory.
 - for stitch formatter, inject the stitch template into the
   housekeeping files so we don't delete it.
 
-*** Integration of stitch and dogen                                   :story:
+*** COMPLETED Integration of stitch and dogen                         :story:
+    CLOSED: [2016-11-03 Thu 17:12]
+    CLOCK: [2016-11-03 Thu 17:13]--[2016-11-03 Thu 17:21] =>  0:08
+    CLOCK: [2016-11-03 Thu 16:54]--[2016-11-03 Thu 17:12] =>  0:18
 
 Tasks:
 
@@ -600,6 +598,13 @@ Random notes:
   to perform the stitching as part of knitter's workflows. Perhaps as
   part of the expansion, we could set a number of stitch fields which
   would then be picked up by some knit-specific workflow classes.
+
+*** Merge properties factory with stitching factory                   :story:
+
+In stitch we still have a few classes that are light on
+responsibilities. One case is the stitching properties factory, traits
+etc. We should merge all of this into a single class, properties
+factory.
 
 *** Rename project directory path                                     :story:
 

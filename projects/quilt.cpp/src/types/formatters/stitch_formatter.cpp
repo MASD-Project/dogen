@@ -63,6 +63,7 @@ format(const artefact_formatter_interface& stock_formatter, const context& ctx,
 
     auto r(instantiator_.instantiate(stitch_template));
     r.overwrite(a.artefact_properties().overwrite());
+    r.dependencies().push_back(stitch_template);
     return r;
 }
 

@@ -128,7 +128,7 @@ private:
      * @brief Performs a housekeeping run for the supplied directories.
      */
     void perform_housekeeping(
-        const std::forward_list<formatters::artefact>& files,
+        const std::forward_list<formatters::artefact>& artefacts,
         const std::forward_list<boost::filesystem::path>& dirs) const;
 
     /**
@@ -138,12 +138,11 @@ private:
     obtain_file_writer() const;
 
     /**
-     * @brief Outputs the pair file name and contents to its output
-     * destination.
+     * @brief Outputs the artefacts to its output destination.
      */
     void write_files(
         std::shared_ptr<dogen::formatters::artefact_writer_interface> writer,
-        const std::forward_list<formatters::artefact>& files) const;
+        const std::forward_list<formatters::artefact>& artefacts) const;
 
 public:
     /**

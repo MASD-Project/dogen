@@ -26,6 +26,7 @@
 #endif
 
 #include <string>
+#include <vector>
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
 #include "dogen/formatters/serialization/artefact_fwd_ser.hpp"
@@ -51,7 +52,8 @@ public:
     artefact(
         const boost::filesystem::path& path,
         const std::string& content,
-        const bool overwrite);
+        const bool overwrite,
+        const std::vector<boost::filesystem::path>& dependencies);
 
 private:
     template<typename Archive>
@@ -92,6 +94,16 @@ public:
     void overwrite(const bool v);
     /**@}*/
 
+    /**
+     * @brief Files in the project directory that this file depends on, but which are not generated.
+     */
+    /**@{*/
+    const std::vector<boost::filesystem::path>& dependencies() const;
+    std::vector<boost::filesystem::path>& dependencies();
+    void dependencies(const std::vector<boost::filesystem::path>& v);
+    void dependencies(const std::vector<boost::filesystem::path>&& v);
+    /**@}*/
+
 public:
     bool operator==(const artefact& rhs) const;
     bool operator!=(const artefact& rhs) const {
@@ -106,6 +118,7 @@ private:
     boost::filesystem::path path_;
     std::string content_;
     bool overwrite_;
+    std::vector<boost::filesystem::path> dependencies_;
 };
 
 } }

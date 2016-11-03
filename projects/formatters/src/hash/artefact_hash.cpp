@@ -34,6 +34,14 @@ inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) 
     return seed;
 }
 
+inline std::size_t hash_std_vector_boost_filesystem_path(const std::vector<boost::filesystem::path>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, hash_boost_filesystem_path(i));
+    }
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -45,6 +53,7 @@ std::size_t artefact_hasher::hash(const artefact& v) {
     combine(seed, hash_boost_filesystem_path(v.path()));
     combine(seed, v.content());
     combine(seed, v.overwrite());
+    combine(seed, hash_std_vector_boost_filesystem_path(v.dependencies()));
 
     return seed;
 }
