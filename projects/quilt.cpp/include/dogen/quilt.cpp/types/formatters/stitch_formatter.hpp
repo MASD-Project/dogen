@@ -45,14 +45,12 @@ public:
         const dogen::formatters::repository& frp);
 
 private:
-    std::string to_string(const inclusion_support_types ist) const;
     bool is_header(const inclusion_support_types ist) const;
 
 public:
     dogen::formatters::artefact
     format(const artefact_formatter_interface& stock_formatter,
-        const context& ctx, const yarn::element& e,
-        const bool generate_wale_kvps = false) const;
+        const context& ctx, const yarn::element& e) const;
 
 private:
     const stitch::instantiator instantiator_;

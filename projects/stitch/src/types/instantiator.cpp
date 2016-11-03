@@ -86,9 +86,7 @@ read_text_template(const boost::filesystem::path& input_path) const {
     return r;
 }
 
-void instantiator::handle_wale_template(const std::unordered_map<std::string,
-    std::string>& external_kvps, text_template& tt) const {
-
+void instantiator::handle_wale_template(text_template& tt) const {
     /*
      * Check if we have an associated wale template. If we don't,
      * there is nothing to do here.
@@ -107,16 +105,10 @@ void instantiator::handle_wale_template(const std::unordered_map<std::string,
 
     /*
      * Execute the wale workflow and store the result as a stitch
-     * variable. Note that the external kvps take precedence over the
-     * internal kvps. This is somewhat arbitrary, and was chosen so
-     * that we could move the templates from "internal" to "external"
-     * kvps, one template at a time. Once this work is completed, we
-     * probably should throw if both are present as this seems like a
-     * mistake.
+     * variable.
      */
     wale::workflow wkf;
-    const auto& kvps(external_kvps.empty() ? st.wale_kvps() : external_kvps);
-    const auto wale_value(wkf.execute(wt, kvps));
+    const auto wale_value(wkf.execute(wt, st.wale_kvps()));
     const auto pair(std::make_pair(wale_key, wale_value));
     const auto inserted(tt.variables().insert(pair).second);
     if (!inserted) {
@@ -128,8 +120,7 @@ void instantiator::handle_wale_template(const std::unordered_map<std::string,
 
 text_template
 instantiator::create_text_template(const boost::filesystem::path& input_path,
-    const std::string& text_template_as_string,
-    const std::unordered_map<std::string, std::string>& wale_kvps) const {
+    const std::string& text_template_as_string) const {
 
     BOOST_LOG_SEV(lg, debug) << "Processing: " << input_path.generic_string();
 
@@ -164,7 +155,7 @@ instantiator::create_text_template(const boost::filesystem::path& input_path,
         /*
          * Perform the required processing for wale templates.
          */
-        handle_wale_template(wale_kvps, r);
+        handle_wale_template(r);
 
         /*
          * Finally, we compute an output path for our template,
@@ -188,13 +179,12 @@ instantiator::format_text_template(const text_template& tt) const {
 }
 
 formatters::artefact
-instantiator::instantiate(const boost::filesystem::path& input_path,
-    const std::unordered_map<std::string, std::string>& wale_kvps) const {
+instantiator::instantiate(const boost::filesystem::path& input_path) const {
     BOOST_LOG_SEV(lg, debug) << "Instantiating: "
                              << input_path.generic_string();
 
     const auto s(read_text_template(input_path));
-    const auto tt(create_text_template(input_path, s, wale_kvps));
+    const auto tt(create_text_template(input_path, s));
     const auto r(format_text_template(tt));
 
     BOOST_LOG_SEV(lg, debug) << "Instantiated.";

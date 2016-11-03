@@ -66,16 +66,14 @@ private:
     /**
      * @brief Instantiates the wale template, if configured.
      */
-    void handle_wale_template(const std::unordered_map<std::string,
-        std::string>& external_kvps, text_template& tt) const;
+    void handle_wale_template(text_template& tt) const;
 
     /**
      * @brief Creates the text template.
      */
     text_template create_text_template(
         const boost::filesystem::path& input_path,
-        const std::string& text_template_as_string,
-        const std::unordered_map<std::string, std::string>& wale_kvps) const;
+        const std::string& text_template_as_string) const;
 
     /**
      * @brief Formats the supplied text template.
@@ -84,9 +82,7 @@ private:
 
 public:
     formatters::artefact
-    instantiate(const boost::filesystem::path& input_path,
-        const std::unordered_map<std::string, std::string>& wale_kvps =
-        std::unordered_map<std::string, std::string>()) const;
+    instantiate(const boost::filesystem::path& input_path) const;
 
 private:
     const annotations::annotation_groups_factory& annotation_factory_;

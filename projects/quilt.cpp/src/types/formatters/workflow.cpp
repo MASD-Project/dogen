@@ -133,8 +133,7 @@ workflow::format(const formattables::model& fm, const yarn::element& e,
         } else if (fs == formatting_styles::stitch_wale) {
         BOOST_LOG_SEV(lg, debug) << "Using the stitch formatter with wale.";
 
-        const auto gwk(true); // generate_wale_kvps
-        const auto artefact(stitch_formatter_.format(fmt, ctx, e, gwk));
+        const auto artefact(stitch_formatter_.format(fmt, ctx, e));
         const auto& p(artefact.path());
 
         BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;
