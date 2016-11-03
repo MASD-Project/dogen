@@ -3059,7 +3059,9 @@ There is no need for looping etc.
 Missing validation:
 
 - check that directive an has end marker.
-- start control block marker inside of an inline control block
+- start control block marker inside of an inline control block.
+- profile cannot have the same type instantiated more than once.
+- type definition cannot define the same type more than once.
 
 *** Clean up stitch terminology using markup fundamentals             :story:
 
