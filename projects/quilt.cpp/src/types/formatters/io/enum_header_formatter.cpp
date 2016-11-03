@@ -44,8 +44,8 @@ std::string enum_header_formatter::formatter_name() const {
     return r;
 }
 
-annotations::archetype_location enum_header_formatter::
-archetype_location() const {
+annotations::archetype_location
+enum_header_formatter::archetype_location() const {
     static annotations::archetype_location
         r(formatters::traits::kernel(), traits::facet(),
             enum_header_formatter::static_artefact());
@@ -70,7 +70,6 @@ boost::filesystem::path enum_header_formatter::full_path(
     const formattables::locator& l, const yarn::name& n) const {
     return l.make_full_path_for_cpp_header(n, static_artefact());
 }
-
 
 std::list<std::string> enum_header_formatter::inclusion_dependencies(
     const formattables::inclusion_dependencies_builder_factory& f,
