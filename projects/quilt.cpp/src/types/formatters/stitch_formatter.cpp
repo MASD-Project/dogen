@@ -124,7 +124,8 @@ format(const artefact_formatter_interface& stock_formatter, const context& ctx,
     boost::filesystem::path stitch_template(fp);
     stitch_template.replace_extension(stitch_extension);
 
-    const auto r(instantiator_.instantiate(stitch_template, wale_kvps));
+    auto r(instantiator_.instantiate(stitch_template, wale_kvps));
+    r.overwrite(a.artefact_properties().overwrite());
     return r;
 }
 
