@@ -35,13 +35,13 @@ namespace cpp {
 namespace formatters {
 namespace test_data {
 
+std::string class_header_formatter::static_artefact() {
+    return traits::class_header_archetype();
+}
+
 std::string class_header_formatter::formatter_name() const {
     static auto r(archetype_location().archetype());
     return r;
-}
-
-std::string class_header_formatter::static_artefact() {
-    return traits::class_header_archetype();
 }
 
 annotations::archetype_location

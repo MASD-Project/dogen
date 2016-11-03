@@ -14,14 +14,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-11-03 Thu 11:06]
+#+CAPTION: Clock summary at [2016-11-03 Thu 11:11]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *42:35* |       |      | 100.0 |
+| *Total time*                                                                | *42:39* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 42:35   |       |      | 100.0 |
-| Active                                                                      |         | 42:35 |      | 100.0 |
+| Stories                                                                     | 42:39   |       |      | 100.0 |
+| Active                                                                      |         | 42:39 |      | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       | 1:14 |   2.9 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:22 |   0.9 |
 | COMPLETED Improve bintray support                                           |         |       | 2:26 |   5.7 |
@@ -34,12 +34,12 @@
 | COMPLETED Implement helper headers using wale                               |         |       | 2:40 |   6.3 |
 | COMPLETED Implement formatter headers using wale                            |         |       | 0:30 |   1.2 |
 | COMPLETED Add profile support to stitch                                     |         |       | 3:48 |   8.9 |
-| COMPLETED Changes to stitch to accommodate wale                             |         |       | 9:34 |  22.5 |
+| COMPLETED Changes to stitch to accommodate wale                             |         |       | 9:34 |  22.4 |
 | COMPLETED Implement formatter helpers implementation using stitch and wale  |         |       | 5:00 |  11.7 |
 | COMPLETED Merge stitch templates with formatters                            |         |       | 3:14 |   7.6 |
 | COMPLETED Fix borked build due to seam errors                               |         |       | 0:12 |   0.5 |
 | COMPLETED Various fixes due to stitch changes                               |         |       | 0:22 |   0.9 |
-| STARTED Implement formatter implementation using stitch and wale            |         |       | 1:00 |   2.3 |
+| COMPLETED Implement formatter implementation using stitch and wale          |         |       | 1:04 |   2.5 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -416,7 +416,9 @@ notice it locally due to the usual caching of test data.
 - fix issues with inserter helper: we skipped the inserter helper as
   part of the clean up on stitch. However, it is borked now.
 
-*** STARTED Implement formatter implementation using stitch and wale  :story:
+*** COMPLETED Implement formatter implementation using stitch and wale :story:
+    CLOSED: [2016-11-03 Thu 11:11]
+    CLOCK: [2016-11-03 Thu 11:07]--[2016-11-03 Thu 11:11] =>  0:04
     CLOCK: [2016-11-03 Thu 11:01]--[2016-11-03 Thu 11:06] =>  0:05
     CLOCK: [2016-11-03 Thu 10:53]--[2016-11-03 Thu 11:00] =>  0:07
     CLOCK: [2016-11-03 Thu 10:48]--[2016-11-03 Thu 10:52] =>  0:04
