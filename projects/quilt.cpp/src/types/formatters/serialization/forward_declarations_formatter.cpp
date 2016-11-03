@@ -61,8 +61,7 @@ std::type_index forward_declarations_formatter::element_type_index() const {
     return r;
 }
 
-inclusion_support_types forward_declarations_formatter::
-inclusion_support_type() const {
+inclusion_support_types forward_declarations_formatter::inclusion_support_type() const {
     return inclusion_support_types::regular_support;
 }
 

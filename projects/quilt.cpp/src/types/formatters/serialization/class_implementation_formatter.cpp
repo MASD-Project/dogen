@@ -59,8 +59,7 @@ std::type_index class_implementation_formatter::element_type_index() const {
     return r;
 }
 
-inclusion_support_types class_implementation_formatter::
-inclusion_support_type() const {
+inclusion_support_types class_implementation_formatter::inclusion_support_type() const {
     return inclusion_support_types::not_supported;
 }
 
@@ -68,10 +67,8 @@ boost::filesystem::path class_implementation_formatter::inclusion_path(
     const formattables::locator& /*l*/, const yarn::name& n) const {
 
     using namespace dogen::utility::log;
-    using namespace dogen::quilt::cpp::formatters::serialization;
     static logger lg(
         logger_factory(class_implementation_formatter::static_artefact()));
-
     static const std::string not_supported("Inclusion path is not supported: ");
 
     BOOST_LOG_SEV(lg, error) << not_supported << n.id();
