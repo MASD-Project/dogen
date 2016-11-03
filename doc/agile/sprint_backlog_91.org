@@ -14,34 +14,35 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-11-03 Thu 17:32]
+#+CAPTION: Clock summary at [2016-11-03 Thu 17:55]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *45:27* |       |      | 100.0 |
+| *Total time*                                                                | *45:50* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 45:27   |       |      | 100.0 |
-| Active                                                                      |         | 45:27 |      | 100.0 |
+| Stories                                                                     | 45:50   |       |      | 100.0 |
+| Active                                                                      |         | 45:50 |      | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       | 1:23 |   3.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:22 |   0.8 |
-| COMPLETED Improve bintray support                                           |         |       | 2:26 |   5.4 |
+| COMPLETED Improve bintray support                                           |         |       | 2:26 |   5.3 |
 | COMPLETED Add logo with white background                                    |         |       | 0:14 |   0.5 |
 | COMPLETED Consider renaming =diagrams= to =input_models=                    |         |       | 0:38 |   1.4 |
-| COMPLETED Add kvp support to annotations                                    |         |       | 0:37 |   1.4 |
-| COMPLETED Implement wale                                                    |         |       | 7:00 |  15.4 |
-| COMPLETED Add artefact source properties support                            |         |       | 3:11 |   7.0 |
+| COMPLETED Add kvp support to annotations                                    |         |       | 0:37 |   1.3 |
+| COMPLETED Implement wale                                                    |         |       | 7:00 |  15.3 |
+| COMPLETED Add artefact source properties support                            |         |       | 3:11 |   6.9 |
 | COMPLETED Stitch not writing when template has changed                      |         |       | 0:33 |   1.2 |
-| COMPLETED Implement helper headers using wale                               |         |       | 2:40 |   5.9 |
+| COMPLETED Implement helper headers using wale                               |         |       | 2:40 |   5.8 |
 | COMPLETED Implement formatter headers using wale                            |         |       | 0:30 |   1.1 |
-| COMPLETED Add profile support to stitch                                     |         |       | 3:48 |   8.4 |
-| COMPLETED Changes to stitch to accommodate wale                             |         |       | 9:34 |  21.0 |
-| COMPLETED Implement formatter helpers implementation using stitch and wale  |         |       | 5:00 |  11.0 |
+| COMPLETED Add profile support to stitch                                     |         |       | 3:48 |   8.3 |
+| COMPLETED Changes to stitch to accommodate wale                             |         |       | 9:34 |  20.9 |
+| COMPLETED Implement formatter helpers implementation using stitch and wale  |         |       | 5:00 |  10.9 |
 | COMPLETED Merge stitch templates with formatters                            |         |       | 3:14 |   7.1 |
 | COMPLETED Fix borked build due to seam errors                               |         |       | 0:12 |   0.4 |
 | COMPLETED Various fixes due to stitch changes                               |         |       | 0:22 |   0.8 |
 | COMPLETED Implement formatter implementation using stitch and wale          |         |       | 1:04 |   2.3 |
-| COMPLETED Move stitching into knit                                          |         |       | 2:13 |   4.9 |
-| COMPLETED Integration of stitch and dogen                                   |         |       | 0:26 |   1.0 |
+| COMPLETED Move stitching into knit                                          |         |       | 2:13 |   4.8 |
+| COMPLETED Integration of stitch and dogen                                   |         |       | 0:26 |   0.9 |
+| STARTED Supply model references via meta-data rather than command line      |         |       | 0:23 |   0.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -738,7 +739,9 @@ Further thoughts:
   generates the file. Actually we probably can't have this in quilt
   because we still need formatter properties.
 
-*** Supply model references via meta-data rather than command line    :story:
+*** STARTED Supply model references via meta-data rather than command line :story:
+    CLOCK: [2016-11-03 Thu 17:51]--[2016-11-03 Thu 17:55] =>  0:04
+    CLOCK: [2016-11-03 Thu 17:32]--[2016-11-03 Thu 17:51] =>  0:19
 
 It doesn't make any sense to have model dependencies in the command
 line. After all, the model cannot be interpreted without them. A
@@ -746,7 +749,9 @@ better way to do this would be to split this functionality into two:
 
 - command line supplies "import directories" or "reference
   directories", that is, directories to search when looking for
-  models. By default the system directory is already in the path.
+  models. By default the system directory is already in the
+  path. Actually by default we should look into the current directory;
+  this is sufficient for all our current use cases.
 - model supplies "import statements". The problem here is that we need
   to also supply the file name of the model. We could perhaps omit the
   extension and then load all files that match (e.g. =.dia=, =.json=,
@@ -768,6 +773,22 @@ the process is automatic.
 
 In addition to references, we must also be able to supply the external
 module path for the target model via the meta-data.
+
+Notes:
+
+- in order for this to work we need to refactor the pre-merge workflow
+  quite considerably. We need to split out the target model, process
+  that first, then use the annotations to build the descriptors. This
+  probably means we need to merge the descriptor factory with the
+  pre-merge workflow. We should do this refactoring first.
+
+Tasks:
+
+- refactor descriptor factory, merge it with pre-merge workflow.
+- add new references field to workflow
+- add parsing of field as per options
+- add references to all models
+- remove command line option
 
 Merged stories
 

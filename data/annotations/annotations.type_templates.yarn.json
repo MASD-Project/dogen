@@ -74,5 +74,17 @@
         "template_kind" : "instance",
         "scope" : "root_module",
         "default_value" : false
+    },
+    {
+        "name" : {
+            "simple" : "reference",
+            "qualified" : "yarn.reference"
+        },
+        "archetype_location" : {
+            "kernel" : "yarn"
+        },
+        "value_type" : "text_collection",
+        "template_kind" : "instance",
+        "scope" : "root_module"
     }
 ]
