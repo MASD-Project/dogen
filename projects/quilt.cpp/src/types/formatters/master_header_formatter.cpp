@@ -18,13 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#include <typeinfo>
-#include <boost/make_shared.hpp>
-#include "dogen/quilt.cpp/types/fabric/master_header.hpp"
+#include "dogen/quilt.cpp/types/formatters/master_header_formatter.hpp"
+#include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
-#include "dogen/quilt.cpp/types/formatters/master_header_formatter_stitch.hpp"
-#include "dogen/quilt.cpp/types/formatters/master_header_formatter.hpp"
+#include "dogen/quilt.cpp/types/fabric/master_header.hpp"
+#include "dogen/formatters/types/sequence_formatter.hpp"
+#include <boost/make_shared.hpp>
+#include <typeinfo>
 
 namespace dogen {
 namespace quilt {
@@ -49,6 +50,23 @@ std::type_index master_header_formatter::element_type_index() const {
     return r;
 }
 
+inclusion_support_types
+master_header_formatter::inclusion_support_type() const {
+    return inclusion_support_types::regular_support;
+}
+
+boost::filesystem::path master_header_formatter::inclusion_path(
+    const formattables::locator& l, const yarn::name& n) const {
+    const auto arch(ownership_hierarchy_.archetype());
+    return l.make_inclusion_path_for_cpp_header(n, arch);
+}
+
+boost::filesystem::path master_header_formatter::full_path(
+    const formattables::locator& l, const yarn::name& n) const {
+    const auto arch(ownership_hierarchy_.archetype());
+    return l.make_full_path_for_cpp_header(n, arch);
+}
+
 std::list<std::string> master_header_formatter::inclusion_dependencies(
     const formattables::inclusion_dependencies_builder_factory& f,
     const yarn::element& e) const {
@@ -69,31 +87,15 @@ std::list<std::string> master_header_formatter::inclusion_dependencies(
     return builder.build();
 }
 
-inclusion_support_types
-master_header_formatter::inclusion_support_type() const {
-    return inclusion_support_types::regular_support;
-}
-
-boost::filesystem::path master_header_formatter::inclusion_path(
-    const formattables::locator& l, const yarn::name& n) const {
-    const auto arch(ownership_hierarchy_.archetype());
-    return l.make_inclusion_path_for_cpp_header(n, arch);
-}
-
-boost::filesystem::path master_header_formatter::full_path(
-    const formattables::locator& l, const yarn::name& n) const {
-    const auto arch(ownership_hierarchy_.archetype());
-    return l.make_full_path_for_cpp_header(n, arch);
-}
-
 dogen::formatters::artefact master_header_formatter::
 format(const context& ctx, const yarn::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), false/*requires_header_guard*/, id);
-    const auto arch(ownership_hierarchy_.archetype());
-    const auto& mh(a.as<fabric::master_header>(arch, e));
-    const auto r(master_header_formatter_stitch(a, mh));
-    return r;
-}
 
+    {
+        auto sbf(a.make_scoped_boilerplate_formatter());
+a.stream() << std::endl;
+    } // sbf
+    return a.make_artefact();
+}
 } } } }
