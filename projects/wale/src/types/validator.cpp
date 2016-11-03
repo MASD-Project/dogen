@@ -30,7 +30,7 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("wale.validator"));
 
-const std::string key_error("Expected and supplied keys do not match.");
+const std::string key_error("Expected key not supplied: ");
 
 }
 
@@ -42,11 +42,21 @@ void validator::validate(const text_template& tt) const {
     for (const auto& kvp : tt.properties().supplied_kvps())
         s.insert(kvp.first);
 
+    BOOST_LOG_SEV(lg, debug) << " Supplied keys: " << s;
+
     const auto& e(tt.properties().expected_keys());
-    if (s != e) {
-        BOOST_LOG_SEV(lg, error) << key_error << " Expected: "  << e
-                                 << " Supplied: " << s;
-        BOOST_THROW_EXCEPTION(validation_error(key_error));
+    BOOST_LOG_SEV(lg, debug) << " Expected keys: " << e;
+
+    /*
+     * Ensure that all expected keys have been supplied. We may have
+     * received additional keys, but we don't care about those.
+     */
+    for (const auto ek : e) {
+        const auto i(s.find(ek));
+        if (i == s.end()) {
+            BOOST_LOG_SEV(lg, error) << key_error + ek;
+            BOOST_THROW_EXCEPTION(validation_error(key_error + ek));
+        }
     }
 }
 
