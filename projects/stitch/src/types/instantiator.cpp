@@ -107,12 +107,15 @@ void instantiator::handle_wale_template(const std::unordered_map<std::string,
 
     /*
      * Execute the wale workflow and store the result as a stitch
-     * variable. Note that the internal kvps take precedence over the
-     * external kvps. We probably should throw if both are present as
-     * this seems like a mistake.
+     * variable. Note that the external kvps take precedence over the
+     * internal kvps. This is somewhat arbitrary, and was chosen so
+     * that we could move the templates from "internal" to "external"
+     * kvps, one template at a time. Once this work is completed, we
+     * probably should throw if both are present as this seems like a
+     * mistake.
      */
     wale::workflow wkf;
-    const auto& kvps(st.wale_kvps().empty() ? external_kvps : st.wale_kvps());
+    const auto& kvps(external_kvps.empty() ? st.wale_kvps() : external_kvps);
     const auto wale_value(wkf.execute(wt, kvps));
     const auto pair(std::make_pair(wale_key, wale_value));
     const auto inserted(tt.variables().insert(pair).second);
