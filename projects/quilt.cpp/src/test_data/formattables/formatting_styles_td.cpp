@@ -28,7 +28,7 @@ namespace formattables {
 formatting_styles_generator::formatting_styles_generator() : position_(0) { }
 void formatting_styles_generator::
 populate(const unsigned int position, result_type& v) {
-    v = static_cast<formatting_styles>(position % 5);
+    v = static_cast<formatting_styles>(position % 4);
 }
 
 formatting_styles_generator::result_type

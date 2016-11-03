@@ -17,39 +17,6 @@
         },
         {
             "name" : {
-                "simple" : "overwrite",
-                "qualified" : "quilt.cpp.types.class_header.overwrite"
-            },
-            "archetype_location" : {
-                "kernel" : "quilt.cpp"
-            },
-            "template_kind" : "instance",
-            "untyped_value" : [ "true" ]
-        },
-        {
-            "name" : {
-                "simple" : "enabled",
-                "qualified" : "quilt.cpp.types.class_implementation.enabled"
-            },
-            "archetype_location" : {
-                "kernel" : "quilt.cpp"
-            },
-            "template_kind" : "instance",
-            "untyped_value" : [ "true" ]
-        },
-        {
-            "name" : {
-                "simple" : "overwrite",
-                "qualified" : "quilt.cpp.types.class_implementation.overwrite"
-            },
-            "archetype_location" : {
-                "kernel" : "quilt.cpp"
-            },
-            "template_kind" : "instance",
-            "untyped_value" : [ "false" ]
-        },
-        {
-            "name" : {
                 "simple" : "formatting_style",
                 "qualified" : "quilt.cpp.types.class_header.formatting_style"
             },
@@ -69,6 +36,39 @@
             },
             "template_kind" : "instance",
             "untyped_value" : [ "helper_formatter_header.wale" ]
+        },
+        {
+            "name" : {
+                "simple" : "overwrite",
+                "qualified" : "quilt.cpp.types.class_header.overwrite"
+            },
+            "archetype_location" : {
+                "kernel" : "quilt.cpp"
+            },
+            "template_kind" : "instance",
+            "untyped_value" : [ "true" ]
+        },
+        {
+            "name" : {
+                "simple" : "formatting_style",
+                "qualified" : "quilt.cpp.types.class_implementation.formatting_style"
+            },
+            "archetype_location" : {
+                "kernel" : "quilt.cpp"
+            },
+            "template_kind" : "instance",
+            "untyped_value" : [ "stitch" ]
+        },
+        {
+            "name" : {
+                "simple" : "overwrite",
+                "qualified" : "quilt.cpp.types.class_implementation.overwrite"
+            },
+            "archetype_location" : {
+                "kernel" : "quilt.cpp"
+            },
+            "template_kind" : "instance",
+            "untyped_value" : [ "true" ]
         }
     ]
 }

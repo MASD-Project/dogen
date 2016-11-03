@@ -14,33 +14,33 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-11-03 Thu 14:49]
+#+CAPTION: Clock summary at [2016-11-03 Thu 16:49]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *44:10* |       |      | 100.0 |
+| *Total time*                                                                | *44:52* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 44:10   |       |      | 100.0 |
-| Active                                                                      |         | 44:10 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:14 |   2.8 |
+| Stories                                                                     | 44:52   |       |      | 100.0 |
+| Active                                                                      |         | 44:52 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:14 |   2.7 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:22 |   0.8 |
-| COMPLETED Improve bintray support                                           |         |       | 2:26 |   5.5 |
+| COMPLETED Improve bintray support                                           |         |       | 2:26 |   5.4 |
 | COMPLETED Add logo with white background                                    |         |       | 0:14 |   0.5 |
 | COMPLETED Consider renaming =diagrams= to =input_models=                    |         |       | 0:38 |   1.4 |
 | COMPLETED Add kvp support to annotations                                    |         |       | 0:37 |   1.4 |
-| COMPLETED Implement wale                                                    |         |       | 7:00 |  15.8 |
-| COMPLETED Add artefact source properties support                            |         |       | 3:11 |   7.2 |
+| COMPLETED Implement wale                                                    |         |       | 7:00 |  15.6 |
+| COMPLETED Add artefact source properties support                            |         |       | 3:11 |   7.1 |
 | COMPLETED Stitch not writing when template has changed                      |         |       | 0:33 |   1.2 |
-| COMPLETED Implement helper headers using wale                               |         |       | 2:40 |   6.0 |
+| COMPLETED Implement helper headers using wale                               |         |       | 2:40 |   5.9 |
 | COMPLETED Implement formatter headers using wale                            |         |       | 0:30 |   1.1 |
-| COMPLETED Add profile support to stitch                                     |         |       | 3:48 |   8.6 |
-| COMPLETED Changes to stitch to accommodate wale                             |         |       | 9:34 |  21.7 |
-| COMPLETED Implement formatter helpers implementation using stitch and wale  |         |       | 5:00 |  11.3 |
-| COMPLETED Merge stitch templates with formatters                            |         |       | 3:14 |   7.3 |
-| COMPLETED Fix borked build due to seam errors                               |         |       | 0:12 |   0.5 |
+| COMPLETED Add profile support to stitch                                     |         |       | 3:48 |   8.5 |
+| COMPLETED Changes to stitch to accommodate wale                             |         |       | 9:34 |  21.3 |
+| COMPLETED Implement formatter helpers implementation using stitch and wale  |         |       | 5:00 |  11.1 |
+| COMPLETED Merge stitch templates with formatters                            |         |       | 3:14 |   7.2 |
+| COMPLETED Fix borked build due to seam errors                               |         |       | 0:12 |   0.4 |
 | COMPLETED Various fixes due to stitch changes                               |         |       | 0:22 |   0.8 |
 | COMPLETED Implement formatter implementation using stitch and wale          |         |       | 1:04 |   2.4 |
-| STARTED Move stitching into knit                                            |         |       | 1:31 |   3.4 |
+| COMPLETED Move stitching into knit                                          |         |       | 2:13 |   4.9 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -430,7 +430,10 @@ notice it locally due to the usual caching of test data.
 Now the templates have been merged we can start to look into using
 wale.
 
-*** STARTED Move stitching into knit                                  :story:
+*** COMPLETED Move stitching into knit                                :story:
+    CLOSED: [2016-11-03 Thu 16:49]
+    CLOCK: [2016-11-03 Thu 16:10]--[2016-11-03 Thu 16:44] =>  0:34
+    CLOCK: [2016-11-03 Thu 14:50]--[2016-11-03 Thu 14:58] =>  0:08
     CLOCK: [2016-11-03 Thu 14:01]--[2016-11-03 Thu 14:49] =>  0:48
     CLOCK: [2016-11-03 Thu 11:12]--[2016-11-03 Thu 11:55] =>  0:43
 
@@ -485,7 +488,7 @@ Tasks:
   overwrite. Diagram should "just work".
 
 : #DOGEN quilt.cpp.types.class_implementation.formatting_style=stitch_wale
-: #DOGEN quilt.cpp.types.class_implementation.overwrite=true#</dia:string>
+: #DOGEN quilt.cpp.types.class_implementation.overwrite=true
 
 *Previous Understanding*
 
