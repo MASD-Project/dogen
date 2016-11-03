@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/formatters/types/sequence_formatter.hpp"
-#include "dogen/quilt.cpp/types/formatters/io/inserter_implementation_helper_stitch.hpp"
+#include "dogen/quilt.cpp/types/formatters/io/inserter_implementation_helper.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -27,7 +27,7 @@ namespace cpp {
 namespace formatters {
 namespace io {
 
-void inserter_implementation_helper_stitch(
+void inserter_implementation_helper(
     assistant& a, const yarn::object& o, const bool inside_class) {
 
     const auto qn(a.get_qualified_name(o.name()));

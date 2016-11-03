@@ -11,7 +11,7 @@
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/inclusion_constants.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/formatting_error.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/io/traits.hpp" #>
-<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/io/inserter_implementation_helper_stitch.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/io/inserter_implementation_helper.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/types/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/types/class_implementation_formatter.hpp" #>
 <#+
@@ -359,7 +359,7 @@ void <#= sn #>::accept(<#= bvn #>& v) {
 
 void <#= sn #>::to_stream(std::ostream& s) const {
 <#+
-                io::inserter_implementation_helper_stitch(a, o, true/*inside_class*/);
+                io::inserter_implementation_helper(a, o, true/*inside_class*/);
 #>
 }
 <#+

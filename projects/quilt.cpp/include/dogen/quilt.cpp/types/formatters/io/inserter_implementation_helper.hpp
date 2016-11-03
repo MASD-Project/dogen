@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_IO_INSERTER_IMPLEMENTATION_HELPER_STITCH_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_IO_INSERTER_IMPLEMENTATION_HELPER_STITCH_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_IO_INSERTER_IMPLEMENTATION_HELPER_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_IO_INSERTER_IMPLEMENTATION_HELPER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -34,7 +34,7 @@ namespace cpp {
 namespace formatters {
 namespace io {
 
-void inserter_implementation_helper_stitch(
+void inserter_implementation_helper(
     assistant& a, const yarn::object& o, const bool inside_class);
 
 } } } } }

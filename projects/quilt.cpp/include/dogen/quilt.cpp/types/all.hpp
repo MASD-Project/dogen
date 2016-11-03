@@ -166,6 +166,7 @@
 #include "dogen/quilt.cpp/types/formattables/locator_archetype_configuration.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/associative_container_helper.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/class_implementation_formatter.hpp"
+#include "dogen/quilt.cpp/types/formatters/io/inserter_implementation_helper.hpp"
 #include "dogen/quilt.cpp/types/formattables/inclusion_directive_configuration.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/class_implementation_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/serialization/enum_header_formatter.hpp"

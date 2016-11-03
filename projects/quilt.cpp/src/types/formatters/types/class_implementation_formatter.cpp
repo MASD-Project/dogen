@@ -20,7 +20,7 @@
  */
 #include "dogen/quilt.cpp/types/formatters/types/class_implementation_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
-#include "dogen/quilt.cpp/types/formatters/io/inserter_implementation_helper_stitch.hpp"
+#include "dogen/quilt.cpp/types/formatters/io/inserter_implementation_helper.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/formatting_error.hpp"
 #include "dogen/quilt.cpp/types/formatters/inclusion_constants.hpp"
@@ -330,7 +330,7 @@ a.stream() << std::endl;
                 if (o.in_inheritance_relationship()) {
 a.stream() << std::endl;
 a.stream() << "void " << sn << "::to_stream(std::ostream& s) const {" << std::endl;
-                io::inserter_implementation_helper_stitch(a, o, true/*inside_class*/);
+                io::inserter_implementation_helper(a, o, true/*inside_class*/);
 a.stream() << "}" << std::endl;
                 }
             }

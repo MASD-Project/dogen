@@ -12,7 +12,7 @@
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/hash/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/types/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/io/traits.hpp" #>
-<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/io/inserter_implementation_helper_stitch.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/io/inserter_implementation_helper.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/io/class_implementation_formatter.hpp" #>
 <#+
 
@@ -130,7 +130,7 @@ std::ostream& operator<<(std::ostream& s, const <#= sn #>&<#= (no_arg ? "" : " v
     return(s);
 <#+
             } else
-                io::inserter_implementation_helper_stitch(a, o, false/*inside_class*/);
+                io::inserter_implementation_helper(a, o, false/*inside_class*/);
 #>
 }
 

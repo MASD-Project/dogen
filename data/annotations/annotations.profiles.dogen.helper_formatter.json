@@ -35,6 +35,17 @@
                 "kernel" : "quilt.cpp"
             },
             "template_kind" : "instance",
+            "untyped_value" : [ "true" ]
+        },
+        {
+            "name" : {
+                "simple" : "overwrite",
+                "qualified" : "quilt.cpp.types.class_implementation.overwrite"
+            },
+            "archetype_location" : {
+                "kernel" : "quilt.cpp"
+            },
+            "template_kind" : "instance",
             "untyped_value" : [ "false" ]
         },
         {

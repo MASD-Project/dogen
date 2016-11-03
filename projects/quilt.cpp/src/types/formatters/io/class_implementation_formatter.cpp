@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/quilt.cpp/types/formatters/io/class_implementation_formatter.hpp"
-#include "dogen/quilt.cpp/types/formatters/io/inserter_implementation_helper_stitch.hpp"
+#include "dogen/quilt.cpp/types/formatters/io/inserter_implementation_helper.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/traits.hpp"
@@ -149,7 +149,7 @@ a.stream() << "std::ostream& operator<<(std::ostream& s, const " << sn << "&" <<
 a.stream() << "    v.to_stream(s);" << std::endl;
 a.stream() << "    return(s);" << std::endl;
             } else
-                io::inserter_implementation_helper_stitch(a, o, false/*inside_class*/);
+                io::inserter_implementation_helper(a, o, false/*inside_class*/);
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;
         } // snf
