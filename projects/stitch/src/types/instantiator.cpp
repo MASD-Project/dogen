@@ -37,7 +37,7 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("stitch.instantiator"));
 
-const std::string stitch_postfix("_stitch.cpp");
+const std::string stitch_postfix(".cpp");
 const std::string wale_key("stitch.wale.template_instantiation_result");
 
 const std::string empty_template("Template has no content: ");
@@ -67,6 +67,7 @@ instantiator::compute_output_path(const boost::filesystem::path& input_path,
         r = input_path.parent_path();
 
     std::string output_filename(input_path.stem().generic_string());
+    // FIXME: compute extension based on properties
     output_filename += stitch_postfix;
     r /= output_filename;
 
