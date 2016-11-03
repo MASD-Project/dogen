@@ -14,17 +14,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-11-03 Thu 10:47]
+#+CAPTION: Clock summary at [2016-11-03 Thu 10:52]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *42:19* |       |      | 100.0 |
+| *Total time*                                                                | *42:23* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 42:19   |       |      | 100.0 |
-| Active                                                                      |         | 42:19 |      | 100.0 |
+| Stories                                                                     | 42:23   |       |      | 100.0 |
+| Active                                                                      |         | 42:23 |      | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       | 1:14 |   2.9 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:22 |   0.9 |
-| COMPLETED Improve bintray support                                           |         |       | 2:26 |   5.8 |
+| COMPLETED Improve bintray support                                           |         |       | 2:26 |   5.7 |
 | COMPLETED Add logo with white background                                    |         |       | 0:14 |   0.6 |
 | COMPLETED Consider renaming =diagrams= to =input_models=                    |         |       | 0:38 |   1.5 |
 | COMPLETED Add kvp support to annotations                                    |         |       | 0:37 |   1.5 |
@@ -39,7 +39,7 @@
 | COMPLETED Merge stitch templates with formatters                            |         |       | 3:14 |   7.6 |
 | COMPLETED Fix borked build due to seam errors                               |         |       | 0:12 |   0.5 |
 | COMPLETED Various fixes due to stitch changes                               |         |       | 0:22 |   0.9 |
-| STARTED Implement formatter implementation using stitch and wale            |         |       | 0:44 |   1.7 |
+| STARTED Implement formatter implementation using stitch and wale            |         |       | 0:48 |   1.9 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -417,6 +417,7 @@ notice it locally due to the usual caching of test data.
   part of the clean up on stitch. However, it is borked now.
 
 *** STARTED Implement formatter implementation using stitch and wale  :story:
+    CLOCK: [2016-11-03 Thu 10:48]--[2016-11-03 Thu 10:52] =>  0:04
     CLOCK: [2016-11-03 Thu 10:43]--[2016-11-03 Thu 10:47] =>  0:04
     CLOCK: [2016-11-03 Thu 10:38]--[2016-11-03 Thu 10:42] =>  0:04
     CLOCK: [2016-11-03 Thu 10:01]--[2016-11-03 Thu 10:37] =>  0:36
