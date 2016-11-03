@@ -1,4 +1,4 @@
-#include "simple_template_stitch.hpp"
+#include "simple_template.hpp"
 
 void simple_template(std::ostream& s) {
 s << "this is a simple template" << std::endl;

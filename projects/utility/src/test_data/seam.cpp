@@ -30,19 +30,19 @@ path data_set("seam");
 
 path expected("seam/expected");
 path expected_simple_template_stitch_cpp(
-    "seam/expected/src/simple_template_stitch.cpp");
+    "seam/expected/src/simple_template.cpp");
 path expected_empty_template_stitch_cpp(
-    "seam/expected/src/empty_template_stitch.cpp");
+    "seam/expected/src/empty_template.cpp");
 path expected_complex_template_stitch_cpp(
-    "seam/expected/src/complex_template_stitch.cpp");
+    "seam/expected/src/complex_template.cpp");
 
 path actual("seam/actual");
 path actual_simple_template_stitch_cpp(
-    "seam/actual/src/simple_template_stitch.cpp");
+    "seam/actual/src/simple_template.cpp");
 path actual_empty_template_stitch_cpp(
-    "seam/actual/src/empty_template_stitch.cpp");
+    "seam/actual/src/empty_template.cpp");
 path actual_complex_template_stitch_cpp(
-    "seam/actual/src/complex_template_stitch.cpp");
+    "seam/actual/src/complex_template.cpp");
 
 }
 

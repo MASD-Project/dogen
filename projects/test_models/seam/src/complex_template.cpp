@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "simple_template_stitch.hpp"
+#include "simple_template.hpp"
 
 void complex_template(std::ostream& s) {
 s << "this is a relatively more" << std::endl;

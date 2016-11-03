@@ -3,7 +3,7 @@
 <#@ decoration.modeline_group_name=emacs #>
 <#@ stitch.relative_output_directory=../../seam/actual/src #>
 <#@ stitch.stream_variable_name=s #>
-<#@ stitch.inclusion_dependency="simple_template_stitch.hpp" #>
+<#@ stitch.inclusion_dependency="simple_template.hpp" #>
 <#+
 void complex_template(std::ostream& s) {
 #>

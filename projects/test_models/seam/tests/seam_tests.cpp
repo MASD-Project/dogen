@@ -22,8 +22,8 @@
 #include <boost/test/unit_test.hpp>
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/utility/test/logging.hpp"
-#include "simple_template_stitch.hpp"
-#include "complex_template_stitch.hpp"
+#include "simple_template.hpp"
+#include "complex_template.hpp"
 
 namespace  {
 
