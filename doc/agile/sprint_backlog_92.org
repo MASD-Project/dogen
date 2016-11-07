@@ -128,7 +128,8 @@ Try to update descriptor and see if it fixes it. Using =$1= actually
 resulted in a =$1= package, presumably because we are not using
 regexes. We need to hard-code the name.
 
-*** STARTED Supply model references via meta-data rather than command line :story:
+*** COMPLETED Supply model references via meta-data rather than command line :story:
+    CLOSED: [2016-11-07 Mon 18:28]
     CLOCK: [2016-11-07 Mon 18:14]--[2016-11-07 Mon 18:25] =>  0:11
     CLOCK: [2016-11-07 Mon 17:06]--[2016-11-07 Mon 18:13] =>  1:07
     CLOCK: [2016-11-07 Mon 16:56]--[2016-11-07 Mon 17:05] =>  0:09
@@ -197,6 +198,14 @@ path, etc are - and so should remain command line options.
 We need to move these two into the meta-data. This would also mean we
 no longer need to pass in external module paths for references, which
 is much cleaner.
+
+*** External module path for target should be in diagram              :story:
+
+We should have a way to provide external module path from within the
+diagram, like we do with references. It really does not make sense to
+provide different values for this since the code will not work (and
+since the external module path for the references is already in the
+diagram).
 
 *** Merge properties factory with stitching factory                   :story:
 
