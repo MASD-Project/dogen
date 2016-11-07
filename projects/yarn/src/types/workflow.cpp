@@ -21,10 +21,8 @@
 #include <memory>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/io/model_io.hpp"
-#include "dogen/yarn/types/merger.hpp"
 #include "dogen/yarn/types/intermediate_model_factory.hpp"
 #include "dogen/yarn/types/model_factory.hpp"
-#include "dogen/yarn/types/transformer.hpp"
 #include "dogen/yarn/types/descriptor_factory.hpp"
 #include "dogen/yarn/types/workflow.hpp"
 
@@ -66,7 +64,6 @@ void workflow::validate() const {
     BOOST_LOG_SEV(lg, debug) << "Finished validating registrars. ";
 }
 
-
 std::vector<intermediate_model> workflow::obtain_intermediate_models(
     const std::vector<boost::filesystem::path>& data_dirs,
     const annotations::annotation_groups_factory& agf,
@@ -76,32 +73,10 @@ std::vector<intermediate_model> workflow::obtain_intermediate_models(
     return f.make(data_dirs, agf, atrp, io, frontend_registrar());
 }
 
-intermediate_model workflow::
-merge_intermediate_models(const std::vector<intermediate_model>& im) const {
-    merger mg;
-    for (const auto& m : im)
-        mg.add(m);
-
-    const auto r(mg.merge());
-
-    BOOST_LOG_SEV(lg, debug) << "Totals: objects: " << r.objects().size()
-                             << " modules: " << r.modules().size()
-                             << " concepts: " << r.concepts().size()
-                             << " enumerations: " << r.enumerations().size()
-                             << " primitives: " << r.primitives().size();
-    return r;
-}
-
-void workflow::post_process_merged_intermediate_model(
-    const annotations::type_repository& atrp, intermediate_model& im) const {
-    model_factory w;
-    return w.execute(atrp, injector_registrar(), im);
-}
-
-model workflow::transform_intermediate_model(
-    const intermediate_model& im) const {
-    transformer t;
-    return t.transform(im);
+model workflow::obtain_final_model(const annotations::type_repository& atrp,
+    const std::vector<intermediate_model>& ims) const {
+    model_factory f;
+    return f.make(atrp, injector_registrar(), ims);
 }
 
 model workflow::execute(const std::vector<boost::filesystem::path>& data_dirs,
@@ -110,9 +85,7 @@ model workflow::execute(const std::vector<boost::filesystem::path>& data_dirs,
     const options::input_options& io) const {
 
     const auto im(obtain_intermediate_models(data_dirs, agf, atrp, io));
-    auto mim(merge_intermediate_models(im));
-    post_process_merged_intermediate_model(atrp, mim);
-    auto r(transform_intermediate_model(mim));
+    const auto r(obtain_final_model(atrp, im));
 
     BOOST_LOG_SEV(lg, debug) << "Final model: " << r;
     return r;

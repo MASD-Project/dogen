@@ -21,8 +21,10 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/object.hpp"
+#include "dogen/yarn/types/merger.hpp"
 #include "dogen/yarn/types/indexer.hpp"
 #include "dogen/yarn/types/resolver.hpp"
+#include "dogen/yarn/types/transformer.hpp"
 #include "dogen/yarn/types/concept_expander.hpp"
 #include "dogen/yarn/types/stereotypes_expander.hpp"
 #include "dogen/yarn/types/containment_expander.hpp"
@@ -76,6 +78,22 @@ has_generatable_types(const intermediate_model& im) const {
     }
 
     return false;
+}
+
+intermediate_model model_factory::
+merge_intermediate_models(const std::vector<intermediate_model>& im) const {
+    merger mg;
+    for (const auto& m : im)
+        mg.add(m);
+
+    const auto r(mg.merge());
+
+    BOOST_LOG_SEV(lg, debug) << "Totals: objects: " << r.objects().size()
+                             << " modules: " << r.modules().size()
+                             << " concepts: " << r.concepts().size()
+                             << " enumerations: " << r.enumerations().size()
+                             << " primitives: " << r.primitives().size();
+    return r;
 }
 
 void model_factory::create_indices(intermediate_model& im) const {
@@ -132,9 +150,22 @@ void model_factory::inject_model(const injector_registrar& rg,
     ex.expand(rg, im);
 }
 
-void model_factory::execute(const annotations::type_repository& atrp,
-    const injector_registrar& rg, intermediate_model& im) const {
-    BOOST_LOG_SEV(lg, debug) << "Starting workflow.";
+model model_factory::transform_intermediate_model(
+    const intermediate_model& im) const {
+    transformer t;
+    return t.transform(im);
+}
+
+model model_factory::make(const annotations::type_repository& atrp,
+    const injector_registrar& rg,
+    const std::vector<intermediate_model>& ims) const {
+    BOOST_LOG_SEV(lg, debug) << "Starting creating final model.";
+
+    /*
+     * First we must merge all of the intermediate models into the
+     * merged model.
+     */
+    auto im(merge_intermediate_models(ims));
 
     /*
      * Create all indices first as its needed by generalisation. Note
@@ -175,7 +206,6 @@ void model_factory::execute(const annotations::type_repository& atrp,
      * - stereotypes, as we need settings such as immutability and
      *   fluency to be populated.
      *  - resolution, else we will copy unresolved attributes.
-     *
      */
     expand_attributes(im);
 
@@ -188,7 +218,13 @@ void model_factory::execute(const annotations::type_repository& atrp,
     update_model_generability(im);
     inject_model(rg, im);
 
-    BOOST_LOG_SEV(lg, debug) << "Finished workflow.";
+    /*
+     * Perform the final transformation.
+     */
+    const auto r(transform_intermediate_model(im));
+
+    BOOST_LOG_SEV(lg, debug) << "Finished creating final model.";
+    return r;
 }
 
 } }

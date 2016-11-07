@@ -31,6 +31,7 @@
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/injector_registrar.hpp"
 #include "dogen/yarn/types/element.hpp"
+#include "dogen/yarn/types/model.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -54,6 +55,12 @@ private:
     bool has_generatable_types(const intermediate_model& m) const;
 
 private:
+    /**
+     * @brief Creates the merged intermediate model.
+     */
+    intermediate_model
+    merge_intermediate_models(const std::vector<intermediate_model>& ims) const;
+
     /**
      * @brief Create indices.
      */
@@ -107,12 +114,19 @@ private:
     void inject_model(const injector_registrar& rg,
         intermediate_model& im) const;
 
+    /**
+     * @brief Transforms the intermediate model to the final
+     * representation.
+     */
+    model transform_intermediate_model(const intermediate_model& im) const;
+
 public:
     /**
-     * @brief Executes the post-merge workflow.
+     * @brief Make the final model.
      */
-    void execute(const annotations::type_repository& atrp,
-        const injector_registrar& rg, intermediate_model& im) const;
+    model make(const annotations::type_repository& atrp,
+        const injector_registrar& rg,
+        const std::vector<intermediate_model>& ims) const;
 };
 
 } }

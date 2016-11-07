@@ -68,22 +68,10 @@ private:
         const options::input_options& io) const;
 
     /**
-     * @brief Creates the merged intermediate model.
+     * @brief Obtains the final model.
      */
-    intermediate_model
-    merge_intermediate_models(const std::vector<intermediate_model>& im) const;
-
-    /**
-     * @brief Executes the post-processing.
-     */
-    void post_process_merged_intermediate_model(
-        const annotations::type_repository& atrp, intermediate_model& im) const;
-
-    /**
-     * @brief Transforms the intermediate model to the final
-     * representation.
-     */
-    model transform_intermediate_model(const intermediate_model& im) const;
+    model obtain_final_model(const annotations::type_repository& atrp,
+        const std::vector<intermediate_model>& ims) const;
 
 public:
     model execute(const std::vector<boost::filesystem::path>& data_dirs,

@@ -13504,13 +13504,13 @@ Leaves are types concrete types which have a parent.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O104">
       <dia:attribute name="obj_pos">
-        <dia:point val="-24,52"/>
+        <dia:point val="-15,49"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-24.05,51.95;-13.9675,55.05"/>
+        <dia:rectangle val="-15.05,48.95;-4.9675,52.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-24,52"/>
+        <dia:point val="-15,49"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="9.9824999999999999"/>
@@ -13724,7 +13724,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:point val="1.2975,34.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-19.0587,33.85;2.0475,52.8"/>
+        <dia:rectangle val="-10.0587,33.85;2.0475,49.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -13732,8 +13732,8 @@ Leaves are types concrete types which have a parent.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="1.2975,34.6"/>
         <dia:point val="1.2975,39"/>
-        <dia:point val="-19.0087,39"/>
-        <dia:point val="-19.0087,52"/>
+        <dia:point val="-10.0087,39"/>
+        <dia:point val="-10.0087,49"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
