@@ -12,17 +12,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-11-07 Mon 10:34]
+#+CAPTION: Clock summary at [2016-11-07 Mon 11:32]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *2:32* |      |      | 100.0 |
+| *Total time*                                                                | *3:28* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 2:32   |      |      | 100.0 |
-| Active                                                                      |        | 2:32 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:10 |   6.6 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:27 |  17.8 |
-| STARTED Sort out PIC/PIE linking problems                                   |        |      | 1:55 |  75.7 |
+| Stories                                                                     | 3:28   |      |      | 100.0 |
+| Active                                                                      |        | 3:28 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:10 |   4.8 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:27 |  13.0 |
+| COMPLETED Tidy-up README file                                               |        |      | 0:56 |  26.9 |
+| STARTED Sort out PIC/PIE linking problems                                   |        |      | 1:55 |  55.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -50,6 +51,15 @@ With this sprint we have concluded the bulk of the work on internal refactoring.
 
 For more details see the [sprint log](https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_91.org).
 #+end_src
+
+*** COMPLETED Tidy-up README file                                     :story:
+    CLOSED: [2016-11-07 Mon 11:32]
+    CLOCK: [2016-11-07 Mon 10:34]--[2016-11-07 Mon 11:30] =>  0:56
+
+Our README is quite old and stale. We need to:
+
+- mention MDSD
+- add build instructions
 
 *** STARTED Sort out PIC/PIE linking problems                         :story:
     CLOCK: [2016-11-07 Mon 10:23]--[2016-11-07 Mon 10:34] =>  0:11
@@ -92,13 +102,6 @@ Links:
 
 - [[https://cmake.org/pipermail/cmake/2010-September/039468.html][PIE and PIC in mixed projects]]
 - [[http://stackoverflow.com/questions/38296756/what-is-the-idiomatic-way-in-cmake-to-add-the-fpic-compiler-option][What is the idiomatic way in CMAKE to add the -fPIC compiler option?]]
-
-*** Tidy-up README file                                               :story:
-
-Our README is quite old and stale. We need to:
-
-- mention MDSD
-- add build instructions
 
 *** Supply model references via meta-data rather than command line    :story:
 
