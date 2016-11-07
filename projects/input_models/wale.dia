@@ -68,7 +68,7 @@
         <dia:point val="-7,-17"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-7.05,-17.05;13.2,-14.45"/>
+        <dia:rectangle val="-7.05,-17.05;13.2,-13.65"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -80,7 +80,7 @@
         <dia:real val="20.150000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="2.5"/>
+        <dia:real val="3.3000000000000003"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -95,6 +95,7 @@
         <dia:composite type="text">
           <dia:attribute name="string">
             <dia:string>##DOGEN yarn.dia.comment=true
+#DOGEN yarn.reference=annotations.dia,dogen
 #DOGEN annotations.profile=dogen.disable_odb_cmake#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
