@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include <list>
+#include <vector>
 #include <boost/filesystem/path.hpp>
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
@@ -61,7 +61,7 @@ private:
     /**
      * @brief Obtains all intermediate models.
      */
-    std::list<intermediate_model> obtain_intermediate_models(
+    std::vector<intermediate_model> obtain_intermediate_models(
         const std::vector<boost::filesystem::path>& data_dirs,
         const annotations::annotation_groups_factory& agf,
         const annotations::type_repository& atrp,
@@ -70,8 +70,8 @@ private:
     /**
      * @brief Creates the merged intermediate model.
      */
-    intermediate_model merge_intermediate_models(
-        const std::list<intermediate_model>& im) const;
+    intermediate_model
+    merge_intermediate_models(const std::vector<intermediate_model>& im) const;
 
     /**
      * @brief Executes the post-processing.

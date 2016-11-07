@@ -24,6 +24,9 @@
 #pragma once
 #endif
 
+#include <list>
+#include <vector>
+#include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/options/types/input_options.hpp"
@@ -39,25 +42,6 @@ namespace yarn {
  */
 class intermediate_model_factory {
 private:
-    /**
-     * @brief Obtain the model descriptors.
-     */
-    std::list<descriptor> obtain_descriptors(
-        const std::vector<boost::filesystem::path>& dirs,
-        const options::input_options& io) const;
-
-    /**
-     * @brief Obtains an intermediate model.
-     */
-    intermediate_model obtain_intermediate_model(
-        frontend_registrar& rg, const descriptor& d) const;
-
-    /**
-     * @brief Obtains all intermediate models.
-     */
-    std::list<intermediate_model> obtain_intermediate_models(
-        frontend_registrar& rg, const std::list<descriptor>& d) const;
-
     /**
      * @brief Performs a module expansion on the model.
      */
@@ -88,12 +72,23 @@ private:
     void expand_parsing(const annotations::type_repository& atrp,
         intermediate_model& im) const;
 
+    void post_process(const annotations::annotation_groups_factory& agf,
+        const annotations::type_repository& atrp, intermediate_model& im) const;
+
+    /**
+     * @brief Obtains an intermediate model.
+     */
+    intermediate_model intermediate_model_for_descriptor(
+        const annotations::annotation_groups_factory& agf,
+        const annotations::type_repository& atrp,
+        frontend_registrar& rg, const descriptor& descriptors) const;
+
 public:
     /**
      * @brief Executes the workflow.
      */
-    std::list<intermediate_model>
-    make(const std::vector<boost::filesystem::path>& data_dirs,
+    std::vector<intermediate_model>
+    make(const std::vector<boost::filesystem::path>& dirs,
         const annotations::annotation_groups_factory& agf,
         const annotations::type_repository& atrp,
         const options::input_options& io,

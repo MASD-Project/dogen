@@ -30,6 +30,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/options/types/input.hpp"
 #include "dogen/options/types/input_options.hpp"
+#include "dogen/annotations/types/annotation.hpp"
 #include "dogen/yarn/types/descriptor.hpp"
 
 namespace dogen {
@@ -40,19 +41,20 @@ private:
     std::vector<boost::filesystem::path> to_library_dirs(
         const std::vector<boost::filesystem::path>& data_dirs) const;
 
-private:
-    std::list<descriptor> from_directories(
-        const std::vector<boost::filesystem::path>& library_dirs) const;
-
+public:
     std::list<descriptor>
-    from_references(const std::list<options::input>& refs) const;
+    make(const std::vector<boost::filesystem::path>& library_dirs) const;
 
-    descriptor from_target(const options::input& tg) const;
+    descriptor make(const options::input& tg) const;
+
+public:
+    std::list<descriptor> make(const std::list<options::input>& refs) const;
 
 public:
     std::list<descriptor>
     make(const std::vector<boost::filesystem::path>& data_dirs,
-        const options::input_options& io) const;
+        const options::input_options& io,
+        const annotations::annotation& a) const;
 };
 
 } }

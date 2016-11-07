@@ -39,41 +39,6 @@ static logger lg(logger_factory("yarn.intermediate_model_factory"));
 namespace dogen {
 namespace yarn {
 
-std::list<descriptor> intermediate_model_factory::
-obtain_descriptors(const std::vector<boost::filesystem::path>& dirs,
-    const options::input_options& io) const {
-    descriptor_factory f;
-    return f.make(dirs, io);
-}
-
-intermediate_model intermediate_model_factory::obtain_intermediate_model(
-    frontend_registrar& rg, const descriptor& d) const {
-    BOOST_LOG_SEV(lg, debug) << "Creating intermediate model. "
-                             << "Descriptor: " << d;
-
-    auto& f(rg.frontend_for_extension(d.extension()));
-    const auto r(f.execute(d));
-
-    BOOST_LOG_SEV(lg, debug) << "Created intermediate model.";
-    return r;
-}
-
-std::list<intermediate_model> intermediate_model_factory::
-obtain_intermediate_models(frontend_registrar& rg,
-    const std::list<descriptor>& d) const {
-
-    BOOST_LOG_SEV(lg, debug) << "Creating intermediate models. "
-                             << "Descriptors: " << d;
-
-    std::list<intermediate_model> r;
-    for (const auto& d : d)
-        r.push_back(obtain_intermediate_model(rg, d));
-
-    BOOST_LOG_SEV(lg, debug) << "Created intermediate models. Total: "
-                             << r.size();
-    return r;
-}
-
 void intermediate_model_factory::expand_modules(intermediate_model& im) const {
     modules_expander ex;
     ex.expand(im);
@@ -86,7 +51,8 @@ expand_annotations(const annotations::annotation_groups_factory& agf,
     ex.expand(agf, im);
 }
 
-void intermediate_model_factory::expand_origin(const annotations::type_repository& atrp,
+void intermediate_model_factory::
+expand_origin(const annotations::type_repository& atrp,
     intermediate_model& im) const {
     origin_expander ex;
     ex.expand(atrp, im);
@@ -104,27 +70,69 @@ void intermediate_model_factory::expand_parsing(
     ex.expand(atrp, im);
 }
 
-std::list<intermediate_model>
+void intermediate_model_factory::
+post_process(const annotations::annotation_groups_factory& agf,
+    const annotations::type_repository& atrp, intermediate_model& im) const {
+    /*
+     * We must expand annotations before we expand modules to
+     * ensure the root module is populated with entries
+     * before being copied over.
+     */
+    expand_annotations(agf, im);
+    expand_modules(im);
+    expand_origin(atrp, im);
+    expand_type_parameters(atrp, im);
+    expand_parsing(atrp, im);
+}
+
+intermediate_model
+intermediate_model_factory::intermediate_model_for_descriptor(
+    const annotations::annotation_groups_factory& agf,
+    const annotations::type_repository& atrp,
+    frontend_registrar& rg, const descriptor& d) const {
+    BOOST_LOG_SEV(lg, debug) << "Creating intermediate model. "
+                             << "Descriptor: " << d;
+
+    auto& f(rg.frontend_for_extension(d.extension()));
+    auto r(f.execute(d));
+    post_process(agf, atrp, r);
+
+    BOOST_LOG_SEV(lg, debug) << "Created intermediate model.";
+    return r;
+}
+
+std::vector<intermediate_model>
 intermediate_model_factory::
-make(const std::vector<boost::filesystem::path>& data_dirs,
+make(const std::vector<boost::filesystem::path>& dirs,
     const annotations::annotation_groups_factory& agf,
     const annotations::type_repository& atrp,
     const options::input_options& io, frontend_registrar& rg) const {
 
-    const auto d(obtain_descriptors(data_dirs, io));
-    auto r(obtain_intermediate_models(rg, d));
-    for (auto& im: r) {
-        /*
-         * We must expand annotations before we expand modules to
-         * ensure the root module is populated with entries
-         * before being copied over.
-         */
-        expand_annotations(agf, im);
-        expand_modules(im);
-        expand_origin(atrp, im);
-        expand_type_parameters(atrp, im);
-        expand_parsing(atrp, im);
-    }
+    descriptor_factory f;
+
+    /*
+     * We need to first obtain the target intermediate model and
+     * post-process it. This is done because we need to access the
+     * annotations inside this model in order to figure out what the
+     * user reference intermediate models are.
+     */
+    const auto timd(f.make(io.target()));
+    const auto tim(intermediate_model_for_descriptor(agf, atrp, rg, timd));
+    const auto& a(tim.root_module().annotation());
+
+    /*
+     * Now obtain all of the descriptors for the reference models,
+     * using the annotations object and the data directories; then
+     * load all reference intermediate models and post-process them.
+     */
+    const auto rimd(f.make(dirs, io, a));
+    std::vector<intermediate_model> r;
+    r.reserve(rimd.size() + 1/*target model*/);
+    r.push_back(tim);
+
+    for (const auto& d : rimd)
+        r.push_back(intermediate_model_for_descriptor(agf, atrp, rg, d));
+
     return r;
 }
 

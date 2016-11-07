@@ -67,7 +67,7 @@ void workflow::validate() const {
 }
 
 
-std::list<intermediate_model> workflow::obtain_intermediate_models(
+std::vector<intermediate_model> workflow::obtain_intermediate_models(
     const std::vector<boost::filesystem::path>& data_dirs,
     const annotations::annotation_groups_factory& agf,
     const annotations::type_repository& atrp,
@@ -77,7 +77,7 @@ std::list<intermediate_model> workflow::obtain_intermediate_models(
 }
 
 intermediate_model workflow::
-merge_intermediate_models(const std::list<intermediate_model>& im) const {
+merge_intermediate_models(const std::vector<intermediate_model>& im) const {
     merger mg;
     for (const auto& m : im)
         mg.add(m);

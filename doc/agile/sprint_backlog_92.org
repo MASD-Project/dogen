@@ -12,20 +12,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-11-07 Mon 14:12]
+#+CAPTION: Clock summary at [2016-11-07 Mon 15:19]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *5:23* |      |      | 100.0 |
+| *Total time*                                                                | *6:29* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 5:23   |      |      | 100.0 |
-| Active                                                                      |        | 5:23 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:10 |   3.1 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:27 |   8.4 |
-| COMPLETED Tidy-up README file                                               |        |      | 1:07 |  20.7 |
-| COMPLETED Sort out PIC/PIE linking problems                                 |        |      | 1:55 |  35.6 |
-| STARTED Try to fix BinTray problems                                         |        |      | 1:09 |  21.4 |
-| STARTED Supply model references via meta-data rather than command line      |        |      | 0:35 |  10.8 |
+| Stories                                                                     | 6:29   |      |      | 100.0 |
+| Active                                                                      |        | 6:29 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:10 |   2.6 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:27 |   6.9 |
+| COMPLETED Tidy-up README file                                               |        |      | 1:07 |  17.2 |
+| COMPLETED Sort out PIC/PIE linking problems                                 |        |      | 1:55 |  29.6 |
+| STARTED Try to fix BinTray problems                                         |        |      | 1:09 |  17.7 |
+| STARTED Supply model references via meta-data rather than command line      |        |      | 1:41 |  26.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -128,6 +128,7 @@ resulted in a =$1= package, presumably because we are not using
 regexes. We need to hard-code the name.
 
 *** STARTED Supply model references via meta-data rather than command line :story:
+    CLOCK: [2016-11-07 Mon 14:13]--[2016-11-07 Mon 15:19] =>  1:06
     CLOCK: [2016-11-07 Mon 14:07]--[2016-11-07 Mon 14:12] =>  0:05
     CLOCK: [2016-11-07 Mon 13:36]--[2016-11-07 Mon 14:06] =>  0:30
 
