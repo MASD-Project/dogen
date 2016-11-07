@@ -85,7 +85,6 @@
 #include "dogen/yarn/types/injector_interface.hpp"
 #include "dogen/yarn/types/injector_registrar.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
-#include "dogen/yarn/types/pre_merge_workflow.hpp"
 #include "dogen/yarn/types/attributes_expander.hpp"
 #include "dogen/yarn/types/post_merge_workflow.hpp"
 #include "dogen/yarn/types/annotations_expander.hpp"
@@ -95,5 +94,6 @@
 #include "dogen/yarn/types/transformation_error.hpp"
 #include "dogen/yarn/types/generalization_expander.hpp"
 #include "dogen/yarn/types/type_parameters_expander.hpp"
+#include "dogen/yarn/types/intermediate_model_factory.hpp"
 
 #endif

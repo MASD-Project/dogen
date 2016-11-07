@@ -27,26 +27,26 @@
 #include "dogen/yarn/types/parsing_expander.hpp"
 #include "dogen/yarn/types/type_parameters_expander.hpp"
 #include "dogen/yarn/types/descriptor_factory.hpp"
-#include "dogen/yarn/types/pre_merge_workflow.hpp"
+#include "dogen/yarn/types/intermediate_model_factory.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("yarn.pre_merge_workflow"));
+static logger lg(logger_factory("yarn.intermediate_model_factory"));
 
 }
 
 namespace dogen {
 namespace yarn {
 
-std::list<descriptor> pre_merge_workflow::
+std::list<descriptor> intermediate_model_factory::
 obtain_descriptors(const std::vector<boost::filesystem::path>& dirs,
     const options::input_options& io) const {
     descriptor_factory f;
     return f.make(dirs, io);
 }
 
-intermediate_model pre_merge_workflow::obtain_intermediate_model(
+intermediate_model intermediate_model_factory::obtain_intermediate_model(
     frontend_registrar& rg, const descriptor& d) const {
     BOOST_LOG_SEV(lg, debug) << "Creating intermediate model. "
                              << "Descriptor: " << d;
@@ -58,7 +58,7 @@ intermediate_model pre_merge_workflow::obtain_intermediate_model(
     return r;
 }
 
-std::list<intermediate_model> pre_merge_workflow::
+std::list<intermediate_model> intermediate_model_factory::
 obtain_intermediate_models(frontend_registrar& rg,
     const std::list<descriptor>& d) const {
 
@@ -74,39 +74,39 @@ obtain_intermediate_models(frontend_registrar& rg,
     return r;
 }
 
-void pre_merge_workflow::expand_modules(intermediate_model& im) const {
+void intermediate_model_factory::expand_modules(intermediate_model& im) const {
     modules_expander ex;
     ex.expand(im);
 }
 
-void pre_merge_workflow::
+void intermediate_model_factory::
 expand_annotations(const annotations::annotation_groups_factory& agf,
     intermediate_model& im) const {
     annotations_expander ex;
     ex.expand(agf, im);
 }
 
-void pre_merge_workflow::expand_origin(const annotations::type_repository& atrp,
+void intermediate_model_factory::expand_origin(const annotations::type_repository& atrp,
     intermediate_model& im) const {
     origin_expander ex;
     ex.expand(atrp, im);
 }
 
-void pre_merge_workflow::expand_type_parameters(
+void intermediate_model_factory::expand_type_parameters(
     const annotations::type_repository& atrp, intermediate_model& im) const {
     type_parameters_expander ex;
     ex.expand(atrp, im);
 }
 
-void pre_merge_workflow::expand_parsing(
+void intermediate_model_factory::expand_parsing(
     const annotations::type_repository& atrp, intermediate_model& im) const {
     parsing_expander ex;
     ex.expand(atrp, im);
 }
 
 std::list<intermediate_model>
-pre_merge_workflow::
-execute(const std::vector<boost::filesystem::path>& data_dirs,
+intermediate_model_factory::
+make(const std::vector<boost::filesystem::path>& data_dirs,
     const annotations::annotation_groups_factory& agf,
     const annotations::type_repository& atrp,
     const options::input_options& io, frontend_registrar& rg) const {

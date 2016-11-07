@@ -17,8 +17,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_PRE_MERGE_WORKFLOW_HPP
-#define DOGEN_YARN_TYPES_PRE_MERGE_WORKFLOW_HPP
+#ifndef DOGEN_YARN_TYPES_INTERMEDIATE_MODEL_FACTORY_HPP
+#define DOGEN_YARN_TYPES_INTERMEDIATE_MODEL_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -37,7 +37,7 @@ namespace yarn {
 /**
  *  @brief Performs the pre-merge sub-workflow.
  */
-class pre_merge_workflow {
+class intermediate_model_factory {
 private:
     /**
      * @brief Obtain the model descriptors.
@@ -93,7 +93,7 @@ public:
      * @brief Executes the workflow.
      */
     std::list<intermediate_model>
-    execute(const std::vector<boost::filesystem::path>& data_dirs,
+    make(const std::vector<boost::filesystem::path>& data_dirs,
         const annotations::annotation_groups_factory& agf,
         const annotations::type_repository& atrp,
         const options::input_options& io,

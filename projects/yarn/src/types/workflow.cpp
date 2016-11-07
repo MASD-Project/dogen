@@ -22,11 +22,10 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/io/model_io.hpp"
 #include "dogen/yarn/types/merger.hpp"
-#include "dogen/yarn/types/pre_merge_workflow.hpp"
+#include "dogen/yarn/types/intermediate_model_factory.hpp"
 #include "dogen/yarn/types/post_merge_workflow.hpp"
 #include "dogen/yarn/types/transformer.hpp"
 #include "dogen/yarn/types/descriptor_factory.hpp"
-#include "dogen/yarn/types/pre_merge_workflow.hpp"
 #include "dogen/yarn/types/workflow.hpp"
 
 namespace {
@@ -73,8 +72,8 @@ std::list<intermediate_model> workflow::obtain_intermediate_models(
     const annotations::annotation_groups_factory& agf,
     const annotations::type_repository& atrp,
     const options::input_options& io) const {
-    pre_merge_workflow w;
-    return w.execute(data_dirs, agf, atrp, io, frontend_registrar());
+    intermediate_model_factory f;
+    return f.make(data_dirs, agf, atrp, io, frontend_registrar());
 }
 
 intermediate_model workflow::

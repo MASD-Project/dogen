@@ -12,19 +12,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-11-07 Mon 13:34]
+#+CAPTION: Clock summary at [2016-11-07 Mon 14:12]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *4:48* |      |      | 100.0 |
+| *Total time*                                                                | *5:23* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 4:48   |      |      | 100.0 |
-| Active                                                                      |        | 4:48 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:10 |   3.5 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:27 |   9.4 |
-| COMPLETED Tidy-up README file                                               |        |      | 1:07 |  23.3 |
-| STARTED Try to fix BinTray problems                                         |        |      | 1:09 |  24.0 |
-| COMPLETED Sort out PIC/PIE linking problems                                 |        |      | 1:55 |  39.9 |
+| Stories                                                                     | 5:23   |      |      | 100.0 |
+| Active                                                                      |        | 5:23 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:10 |   3.1 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:27 |   8.4 |
+| COMPLETED Tidy-up README file                                               |        |      | 1:07 |  20.7 |
+| COMPLETED Sort out PIC/PIE linking problems                                 |        |      | 1:55 |  35.6 |
+| STARTED Try to fix BinTray problems                                         |        |      | 1:09 |  21.4 |
+| STARTED Supply model references via meta-data rather than command line      |        |      | 0:35 |  10.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -127,6 +128,7 @@ resulted in a =$1= package, presumably because we are not using
 regexes. We need to hard-code the name.
 
 *** STARTED Supply model references via meta-data rather than command line :story:
+    CLOCK: [2016-11-07 Mon 14:07]--[2016-11-07 Mon 14:12] =>  0:05
     CLOCK: [2016-11-07 Mon 13:36]--[2016-11-07 Mon 14:06] =>  0:30
 
 It doesn't make any sense to have model dependencies in the command
