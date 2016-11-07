@@ -12,18 +12,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-11-07 Mon 11:32]
+#+CAPTION: Clock summary at [2016-11-07 Mon 11:42]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *3:28* |      |      | 100.0 |
+| *Total time*                                                                | *3:39* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 3:28   |      |      | 100.0 |
-| Active                                                                      |        | 3:28 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:10 |   4.8 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:27 |  13.0 |
-| COMPLETED Tidy-up README file                                               |        |      | 0:56 |  26.9 |
-| STARTED Sort out PIC/PIE linking problems                                   |        |      | 1:55 |  55.3 |
+| Stories                                                                     | 3:39   |      |      | 100.0 |
+| Active                                                                      |        | 3:39 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:10 |   4.6 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:27 |  12.3 |
+| COMPLETED Tidy-up README file                                               |        |      | 1:07 |  30.6 |
+| STARTED Sort out PIC/PIE linking problems                                   |        |      | 1:55 |  52.5 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -54,6 +54,7 @@ For more details see the [sprint log](https://github.com/DomainDrivenConsulting/
 
 *** COMPLETED Tidy-up README file                                     :story:
     CLOSED: [2016-11-07 Mon 11:32]
+    CLOCK: [2016-11-07 Mon 11:31]--[2016-11-07 Mon 11:42] =>  0:11
     CLOCK: [2016-11-07 Mon 10:34]--[2016-11-07 Mon 11:30] =>  0:56
 
 Our README is quite old and stale. We need to:
