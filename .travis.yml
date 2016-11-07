@@ -55,12 +55,10 @@ addons:
       - ubuntu-toolchain-r-test
 
 install:
-  - export
   - export SCRIPTS_DIR=${TRAVIS_BUILD_DIR}/build/scripts
   - source ${SCRIPTS_DIR}/travis.install.${TRAVIS_OS_NAME}.sh
 
 script:
-  - echo "${TRAVIS_BUILD_DIR}/build/output/${COMPILER}/${BUILD_TYPE}/stage/pkg"
   - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then
         export TARGET="package run_all_tests";
         export THIRD_PARTY="/tmp/dogen_deps/dogen_deps_gcc_5.3_linux_amd64";
@@ -71,8 +69,6 @@ script:
     fi
   - ${SCRIPTS_DIR}/build.${TRAVIS_OS_NAME}.sh ${BUILD_TYPE} ${COMPILER} ${THIRD_PARTY} ${TARGET}
   - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then ${SCRIPTS_DIR}/test_package.linux.sh ${BUILD_TYPE} ${COMPILER} ; fi
-  - ls -l "${TRAVIS_BUILD_DIR}/build/output/${COMPILER}/${BUILD_TYPE}/stage/pkg"
-  - cat "${TRAVIS_BUILD_DIR}/build/output/${COMPILER}/${BUILD_TYPE}/stage/pkg/bintray.json"
 
 notifications:
   email:
