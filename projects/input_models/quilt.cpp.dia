@@ -103,22 +103,22 @@
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O1">
       <dia:attribute name="obj_pos">
-        <dia:point val="-39,28"/>
+        <dia:point val="-39,25"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-39.05,27.95;-18.8,32.15"/>
+        <dia:rectangle val="-39.05,24.95;-18.8,32.35"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-39,28"/>
+        <dia:point val="-39,25"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="20.150000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.0999999999999996"/>
+        <dia:real val="7.2999999999999998"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -135,6 +135,10 @@
             <dia:string>#CPP is the C++ model in the quilt kernel.
 
 #DOGEN yarn.dia.comment=true
+#DOGEN yarn.reference=options.dia,dogen
+#DOGEN yarn.reference=yarn.dia,dogen
+#DOGEN yarn.reference=formatters.dia,dogen
+#DOGEN yarn.reference=annotations.dia,dogen
 #DOGEN annotations.profile=dogen.disable_odb_cmake#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
@@ -144,7 +148,7 @@
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="-38.65,29.245"/>
+            <dia:point val="-38.65,26.245"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -16950,7 +16954,7 @@ and element.#</dia:string>
         <dia:point val="136.19,75.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="127.328,75.05;136.94,86.8"/>
+        <dia:rectangle val="127.327,75.05;136.94,86.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -20614,7 +20618,7 @@ and element.#</dia:string>
         <dia:point val="136.19,69"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="129.562,57.55;136.94,69.8"/>
+        <dia:rectangle val="129.563,57.55;136.94,69.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -20863,7 +20867,7 @@ and element.#</dia:string>
         <dia:point val="100.528,54"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="99.7775,49.25;129.812,54.8"/>
+        <dia:rectangle val="99.778,49.25;129.813,54.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -22911,7 +22915,7 @@ and element.#</dia:string>
         <dia:point val="185.49,92.0293"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="184.74,90.35;205.877,100.05"/>
+        <dia:rectangle val="184.74,90.35;205.878,100.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -24572,7 +24576,7 @@ and element.#</dia:string>
         <dia:point val="208.15,74.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="205.627,73.45;208.9,86.8"/>
+        <dia:rectangle val="205.628,73.45;208.9,86.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -30054,7 +30058,7 @@ not a regular" helper.#</dia:string>
         <dia:point val="88.765,283.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="88.0559,283.446;88.8616,287.085"/>
+        <dia:rectangle val="88.0559,283.446;88.8615,287.085"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

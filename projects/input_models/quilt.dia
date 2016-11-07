@@ -1311,7 +1311,7 @@
         <dia:point val="27.3775,13"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="21.5889,12.25;28.1275,24.7504"/>
+        <dia:rectangle val="21.5888,12.25;28.1275,24.7504"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1319,8 +1319,8 @@
       <dia:attribute name="orth_points">
         <dia:point val="27.3775,13"/>
         <dia:point val="27.3775,19"/>
-        <dia:point val="21.6394,19"/>
-        <dia:point val="21.6389,23.9504"/>
+        <dia:point val="21.6389,19"/>
+        <dia:point val="21.6388,23.9504"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -1343,22 +1343,22 @@
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O9">
       <dia:attribute name="obj_pos">
-        <dia:point val="12,-22"/>
+        <dia:point val="10,-21"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="11.95,-22.05;32.2,-19.45"/>
+        <dia:rectangle val="9.95,-21.05;30.2,-15.25"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="12,-22"/>
+        <dia:point val="10,-21"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="20.150000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="2.5"/>
+        <dia:real val="5.7000000000000002"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -1373,7 +1373,11 @@
         <dia:composite type="text">
           <dia:attribute name="string">
             <dia:string>##DOGEN yarn.dia.comment=true
-#DOGEN annotations.profile=dogen.disable_odb_cmake#</dia:string>
+#DOGEN annotations.profile=dogen.disable_odb_cmake
+#DOGEN yarn.reference=options.dia,dogen
+#DOGEN yarn.reference=annotations.dia,dogen
+#DOGEN yarn.reference=yarn.dia,dogen
+#DOGEN yarn.reference=formatters.dia,dogen#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -1382,7 +1386,7 @@
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="12.35,-20.755"/>
+            <dia:point val="10.35,-19.755"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>

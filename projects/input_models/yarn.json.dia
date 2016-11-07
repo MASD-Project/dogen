@@ -68,7 +68,7 @@
         <dia:point val="18,-2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="17.95,-2.05;53.215,4.55"/>
+        <dia:rectangle val="17.95,-2.05;38.2,3.75"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -77,10 +77,10 @@
         <dia:point val="18,-2"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="35.164999999999999"/>
+        <dia:real val="20.150000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.5"/>
+        <dia:real val="5.7000000000000002"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -97,6 +97,8 @@
             <dia:string>#Provides yarn file importing support for JSON.
 
 #DOGEN yarn.dia.comment=true
+#DOGEN yarn.reference=annotations.dia,dogen
+#DOGEN yarn.reference=yarn.dia,dogen
 #DOGEN annotations.profile=dogen.disable_odb_cmake#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
@@ -462,13 +464,13 @@
         <dia:point val="38,28"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="37.95,27.95;42.785,31.05"/>
+        <dia:rectangle val="37.95,27.95;44.325,31.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="38,28"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="4.7350000000000003"/>
+        <dia:real val="6.2750000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -643,13 +645,13 @@
         <dia:point val="31,13"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="30.95,12.95;36.555,16.65"/>
+        <dia:rectangle val="30.95,12.95;37.325,16.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="31,13"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="5.5049999999999999"/>
+        <dia:real val="6.2750000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>

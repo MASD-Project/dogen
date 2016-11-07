@@ -3432,7 +3432,7 @@ On the case of a UML note, represents the text of the note.#</dia:string>
         <dia:point val="-117,19"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-117.05,18.95;-86.79,101.55"/>
+        <dia:rectangle val="-117.05,18.95;-86.79,103.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3444,7 +3444,7 @@ On the case of a UML note, represents the text of the note.#</dia:string>
         <dia:real val="30.160000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="82.5"/>
+        <dia:real val="84.899999999999991"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -3559,6 +3559,9 @@ the root of an inheritance tree.
 @li @b comparable: unused as of yet.
 
 #DOGEN yarn.dia.comment=true
+#DOGEN yarn.reference=dia.dia,dogen
+#DOGEN yarn.reference=annotations.dia,dogen
+#DOGEN yarn.reference=yarn.dia,dogen
 #DOGEN annotations.profile=dogen.disable_odb_cmake#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
@@ -7113,7 +7116,7 @@ selector.#</dia:string>
         <dia:point val="4.14,80"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="3.39,75.95;16.51,81.6"/>
+        <dia:rectangle val="3.39,75.25;16.51,80.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
