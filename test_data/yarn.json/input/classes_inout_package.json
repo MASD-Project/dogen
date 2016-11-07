@@ -1,0 +1,29 @@
+{
+    "model_name" : "classes_inout_package",
+    "annotation" : {
+        "annotations.profile" : "dogen"
+    },
+    "elements" : [
+        {
+            "meta_type" : "object",
+            "simple_name" : "class_1",
+            "internal_modules" : [ "package_1" ],
+            "attributes" : [
+                {
+                    "simple_name" : "prop_0",
+                    "type" : "int"
+                }
+            ]
+        },
+        {
+            "meta_type" : "object",
+            "simple_name" : "class_2",
+            "attributes" : [
+                {
+                    "simple_name" : "prop_0",
+                    "type" : "int"
+                }
+            ]
+        }
+    ]
+}
