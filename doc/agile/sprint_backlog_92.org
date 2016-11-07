@@ -63,26 +63,6 @@ Our README is quite old and stale. We need to:
 - mention MDSD
 - add build instructions
 
-*** STARTED Try to fix BinTray problems                               :story:
-    CLOCK: [2016-11-07 Mon 13:15]--[2016-11-07 Mon 13:34] =>  0:19
-    CLOCK: [2016-11-07 Mon 12:20]--[2016-11-07 Mon 12:34] =>  0:14
-    CLOCK: [2016-11-07 Mon 11:43]--[2016-11-07 Mon 12:19] =>  0:36
-
-According to BinTray support:
-
-#+begin_src
-As we can see at the provided descriptor output, you didn’t entered "uploadPattern" for the files, and this seems to be the reason for the issue.
-The file pattern format should be like this (excludePattern is optimal):
-
-{"includePattern": "target/(.*)", "excludePattern": "target/.*.zip$", "uploadPattern": "/$1"}
-
-You can find project example in our GitHub "Bintray Examples" page : travis-ci-example.
-#+end_src
-
-Try to update descriptor and see if it fixes it. Using =$1= actually
-resulted in a =$1= package, presumably because we are not using
-regexes. We need to hard-code the name.
-
 *** COMPLETED Sort out PIC/PIE linking problems                       :story:
     CLOSED: [2016-11-07 Mon 13:22]
     CLOCK: [2016-11-07 Mon 10:23]--[2016-11-07 Mon 10:34] =>  0:11
@@ -126,7 +106,28 @@ Links:
 - [[https://cmake.org/pipermail/cmake/2010-September/039468.html][PIE and PIC in mixed projects]]
 - [[http://stackoverflow.com/questions/38296756/what-is-the-idiomatic-way-in-cmake-to-add-the-fpic-compiler-option][What is the idiomatic way in CMAKE to add the -fPIC compiler option?]]
 
-*** Supply model references via meta-data rather than command line    :story:
+*** STARTED Try to fix BinTray problems                               :story:
+    CLOCK: [2016-11-07 Mon 13:15]--[2016-11-07 Mon 13:34] =>  0:19
+    CLOCK: [2016-11-07 Mon 12:20]--[2016-11-07 Mon 12:34] =>  0:14
+    CLOCK: [2016-11-07 Mon 11:43]--[2016-11-07 Mon 12:19] =>  0:36
+
+According to BinTray support:
+
+#+begin_src
+As we can see at the provided descriptor output, you didn’t entered "uploadPattern" for the files, and this seems to be the reason for the issue.
+The file pattern format should be like this (excludePattern is optimal):
+
+{"includePattern": "target/(.*)", "excludePattern": "target/.*.zip$", "uploadPattern": "/$1"}
+
+You can find project example in our GitHub "Bintray Examples" page : travis-ci-example.
+#+end_src
+
+Try to update descriptor and see if it fixes it. Using =$1= actually
+resulted in a =$1= package, presumably because we are not using
+regexes. We need to hard-code the name.
+
+*** STARTED Supply model references via meta-data rather than command line :story:
+    CLOCK: [2016-11-07 Mon 13:36]--[2016-11-07 Mon 14:06] =>  0:30
 
 It doesn't make any sense to have model dependencies in the command
 line. After all, the model cannot be interpreted without them. A

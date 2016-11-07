@@ -47,6 +47,12 @@ private:
         const options::input_options& io) const;
 
     /**
+     * @brief Obtains an intermediate model.
+     */
+    intermediate_model obtain_intermediate_model(
+        frontend_registrar& rg, const descriptor& d) const;
+
+    /**
      * @brief Obtains all intermediate models.
      */
     std::list<intermediate_model> obtain_intermediate_models(

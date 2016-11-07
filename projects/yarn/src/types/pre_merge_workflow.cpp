@@ -18,14 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/io/list_io.hpp"
+#include "dogen/yarn/io/descriptor_io.hpp"
 #include "dogen/yarn/types/modules_expander.hpp"
 #include "dogen/yarn/types/annotations_expander.hpp"
 #include "dogen/yarn/types/origin_expander.hpp"
 #include "dogen/yarn/types/parsing_expander.hpp"
 #include "dogen/yarn/types/type_parameters_expander.hpp"
 #include "dogen/yarn/types/descriptor_factory.hpp"
-#include "dogen/yarn/types/intermediate_model_factory.hpp"
 #include "dogen/yarn/types/pre_merge_workflow.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory("yarn.pre_merge_workflow"));
+
+}
 
 namespace dogen {
 namespace yarn {
@@ -37,11 +46,32 @@ obtain_descriptors(const std::vector<boost::filesystem::path>& dirs,
     return f.make(dirs, io);
 }
 
+intermediate_model pre_merge_workflow::obtain_intermediate_model(
+    frontend_registrar& rg, const descriptor& d) const {
+    BOOST_LOG_SEV(lg, debug) << "Creating intermediate model. "
+                             << "Descriptor: " << d;
+
+    auto& f(rg.frontend_for_extension(d.extension()));
+    const auto r(f.execute(d));
+
+    BOOST_LOG_SEV(lg, debug) << "Created intermediate model.";
+    return r;
+}
+
 std::list<intermediate_model> pre_merge_workflow::
 obtain_intermediate_models(frontend_registrar& rg,
     const std::list<descriptor>& d) const {
-    intermediate_model_factory f;
-    return f.execute(rg, d);
+
+    BOOST_LOG_SEV(lg, debug) << "Creating intermediate models. "
+                             << "Descriptors: " << d;
+
+    std::list<intermediate_model> r;
+    for (const auto& d : d)
+        r.push_back(obtain_intermediate_model(rg, d));
+
+    BOOST_LOG_SEV(lg, debug) << "Created intermediate models. Total: "
+                             << r.size();
+    return r;
 }
 
 void pre_merge_workflow::expand_modules(intermediate_model& im) const {
