@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_POST_MERGE_WORKFLOW_FWD_HPP
-#define DOGEN_YARN_TYPES_POST_MERGE_WORKFLOW_FWD_HPP
+#ifndef DOGEN_YARN_TYPES_MODEL_FACTORY_FWD_HPP
+#define DOGEN_YARN_TYPES_MODEL_FACTORY_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 namespace dogen {
 namespace yarn {
 
-class post_merge_workflow;
+class model_factory;
 
 } }
 

@@ -23,7 +23,7 @@
 #include "dogen/yarn/io/model_io.hpp"
 #include "dogen/yarn/types/merger.hpp"
 #include "dogen/yarn/types/intermediate_model_factory.hpp"
-#include "dogen/yarn/types/post_merge_workflow.hpp"
+#include "dogen/yarn/types/model_factory.hpp"
 #include "dogen/yarn/types/transformer.hpp"
 #include "dogen/yarn/types/descriptor_factory.hpp"
 #include "dogen/yarn/types/workflow.hpp"
@@ -94,7 +94,7 @@ merge_intermediate_models(const std::vector<intermediate_model>& im) const {
 
 void workflow::post_process_merged_intermediate_model(
     const annotations::type_repository& atrp, intermediate_model& im) const {
-    post_merge_workflow w;
+    model_factory w;
     return w.execute(atrp, injector_registrar(), im);
 }
 

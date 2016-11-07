@@ -30,25 +30,25 @@
 #include "dogen/yarn/types/association_expander.hpp"
 #include "dogen/yarn/types/generalization_expander.hpp"
 #include "dogen/yarn/types/injection_expander.hpp"
-#include "dogen/yarn/types/post_merge_workflow.hpp"
+#include "dogen/yarn/types/model_factory.hpp"
 
 using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("yarn.post_merge_workflow"));
+auto lg(logger_factory("yarn.model_factory"));
 
 }
 
 namespace dogen {
 namespace yarn {
 
-bool post_merge_workflow::is_generatable(const element& e) const {
+bool model_factory::is_generatable(const element& e) const {
     const auto ot(e.origin_type());
     return ot == origin_types::target;
 }
 
-bool post_merge_workflow::
+bool model_factory::
 has_generatable_types(const intermediate_model& im) const {
     for (const auto pair : im.objects()) {
         if (is_generatable(pair.second))
@@ -78,61 +78,61 @@ has_generatable_types(const intermediate_model& im) const {
     return false;
 }
 
-void post_merge_workflow::create_indices(intermediate_model& im) const {
+void model_factory::create_indices(intermediate_model& im) const {
     indexer idx;
     idx.index(im);
 }
 
-void post_merge_workflow::expand_stereotypes(intermediate_model& im) const {
+void model_factory::expand_stereotypes(intermediate_model& im) const {
     stereotypes_expander ex;
     ex.expand(im);
 }
 
-void post_merge_workflow::expand_containment(intermediate_model& im) const {
+void model_factory::expand_containment(intermediate_model& im) const {
     containment_expander ex;
     ex.expand(im);
 }
 
-void post_merge_workflow::
+void model_factory::
 resolve_element_references(intermediate_model& im) const {
     resolver rs;
     rs.resolve(im);
 }
 
-void post_merge_workflow::
+void model_factory::
 expand_generalizations(const annotations::type_repository& atrp,
     intermediate_model& im) const {
     generalization_expander ex;
     ex.expand(atrp, im);
 }
 
-void post_merge_workflow::expand_concepts(intermediate_model& im) const {
+void model_factory::expand_concepts(intermediate_model& im) const {
     concept_expander ex;
     ex.expand(im);
 }
 
-void post_merge_workflow::expand_attributes(intermediate_model& im) const {
+void model_factory::expand_attributes(intermediate_model& im) const {
     attributes_expander ex;
     ex.expand(im);
 }
 
-void post_merge_workflow::expand_associations(intermediate_model& im) const {
+void model_factory::expand_associations(intermediate_model& im) const {
     association_expander ex;
     ex.expand(im);
 }
 
-void post_merge_workflow::
+void model_factory::
 update_model_generability(intermediate_model& im) const {
     im.has_generatable_types(has_generatable_types(im));
 }
 
-void post_merge_workflow::inject_model(const injector_registrar& rg,
+void model_factory::inject_model(const injector_registrar& rg,
     intermediate_model& im) const {
     injection_expander ex;
     ex.expand(rg, im);
 }
 
-void post_merge_workflow::execute(const annotations::type_repository& atrp,
+void model_factory::execute(const annotations::type_repository& atrp,
     const injector_registrar& rg, intermediate_model& im) const {
     BOOST_LOG_SEV(lg, debug) << "Starting workflow.";
 
