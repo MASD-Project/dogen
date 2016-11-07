@@ -1,0 +1,23 @@
+{
+    "model_name" : "class_in_a_package",
+    "annotation" : {
+        "annotations.profile" : "dogen"
+    },
+    "elements" : [
+        {
+            "meta_type" : "object",
+            "simple_name" : "first_class",
+            "internal_modules" : [ "package1" ],
+            "attributes" : [
+                {
+                    "simple_name" : "public_attribute",
+                    "type" : "int"
+                },
+                {
+                    "simple_name" : "private_attribute",
+                    "type" : "int"
+                }
+            ]
+        }
+    ]
+}
