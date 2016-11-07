@@ -12,18 +12,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-11-07 Mon 11:42]
+#+CAPTION: Clock summary at [2016-11-07 Mon 12:19]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *3:39* |      |      | 100.0 |
+| *Total time*                                                                | *4:15* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 3:39   |      |      | 100.0 |
-| Active                                                                      |        | 3:39 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:10 |   4.6 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:27 |  12.3 |
-| COMPLETED Tidy-up README file                                               |        |      | 1:07 |  30.6 |
-| STARTED Sort out PIC/PIE linking problems                                   |        |      | 1:55 |  52.5 |
+| Stories                                                                     | 4:15   |      |      | 100.0 |
+| Active                                                                      |        | 4:15 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:10 |   3.9 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:27 |  10.6 |
+| COMPLETED Tidy-up README file                                               |        |      | 1:07 |  26.3 |
+| STARTED Try to fix BinTray problems                                         |        |      | 0:36 |  14.1 |
+| STARTED Sort out PIC/PIE linking problems                                   |        |      | 1:55 |  45.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -61,6 +62,24 @@ Our README is quite old and stale. We need to:
 
 - mention MDSD
 - add build instructions
+
+*** STARTED Try to fix BinTray problems                               :story:
+    CLOCK: [2016-11-07 Mon 11:43]--[2016-11-07 Mon 12:19] =>  0:36
+
+According to BinTray support:
+
+#+begin_src
+As we can see at the provided descriptor output, you didn’t entered "uploadPattern" for the files, and this seems to be the reason for the issue.
+The file pattern format should be like this (excludePattern is optimal):
+
+{"includePattern": "target/(.*)", "excludePattern": "target/.*.zip$", "uploadPattern": "/$1"}
+
+You can find project example in our GitHub "Bintray Examples" page : travis-ci-example.
+#+end_src
+
+Try to update descriptor and see if it fixes it. Using =$1= actually
+resulted in a =$1= package, presumably because we are not using
+regexes. We need to hard-code the name.
 
 *** STARTED Sort out PIC/PIE linking problems                         :story:
     CLOCK: [2016-11-07 Mon 10:23]--[2016-11-07 Mon 10:34] =>  0:11

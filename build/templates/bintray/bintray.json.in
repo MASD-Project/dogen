@@ -23,11 +23,11 @@
 
     "files":
         [
-            { "includePattern": "${DOGEN_PACKAGE_DIR}/dogen_${DOGEN_VERSION}_amd64-applications.deb", "uploadPattern": "/$1" },
-            { "includePattern": "${DOGEN_PACKAGE_DIR}/dogen_${DOGEN_VERSION}_amd64-headers.deb", "uploadPattern": "/$1" },
-            { "includePattern": "${DOGEN_PACKAGE_DIR}/dogen_${DOGEN_VERSION}_amd64-libraries.deb", "uploadPattern": "/$1" },
-            { "includePattern": "${DOGEN_PACKAGE_DIR}/dogen_${DOGEN_VERSION}_amd64-tests.deb", "uploadPattern": "/$1" },
-            { "includePattern": "${DOGEN_PACKAGE_DIR}/dogen-${DOGEN_VERSION}-Darwin-x86_64.dmg", "uploadPattern": "/$1" }
+            { "includePattern": "${DOGEN_PACKAGE_DIR}/dogen_${DOGEN_VERSION}_amd64-applications.deb", "uploadPattern": "/dogen_${DOGEN_VERSION}_amd64-applications.deb" },
+            { "includePattern": "${DOGEN_PACKAGE_DIR}/dogen_${DOGEN_VERSION}_amd64-headers.deb", "uploadPattern": "/dogen_${DOGEN_VERSION}_amd64-headers.deb" },
+            { "includePattern": "${DOGEN_PACKAGE_DIR}/dogen_${DOGEN_VERSION}_amd64-libraries.deb", "uploadPattern": "/dogen_${DOGEN_VERSION}_amd64-libraries.deb" },
+            { "includePattern": "${DOGEN_PACKAGE_DIR}/dogen_${DOGEN_VERSION}_amd64-tests.deb", "uploadPattern": "/dogen_${DOGEN_VERSION}_amd64-tests.deb" },
+            { "includePattern": "${DOGEN_PACKAGE_DIR}/dogen-${DOGEN_VERSION}-Darwin-x86_64.dmg", "uploadPattern": "/dogen-${DOGEN_VERSION}-Darwin-x86_64.dmg" }
         ],
     "publish": true
 }
