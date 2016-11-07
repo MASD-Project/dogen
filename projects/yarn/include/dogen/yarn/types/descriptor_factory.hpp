@@ -30,6 +30,8 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/options/types/input.hpp"
 #include "dogen/options/types/input_options.hpp"
+#include "dogen/annotations/types/type.hpp"
+#include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/yarn/types/descriptor.hpp"
 
@@ -38,22 +40,39 @@ namespace yarn {
 
 class descriptor_factory {
 private:
+    struct type_group {
+        annotations::type reference;
+    };
+    friend std::ostream& operator<<(std::ostream& s,
+        const type_group& v);
+
+    type_group make_type_group(const annotations::type_repository& atrp) const;
+
+    std::list<std::string> make_references(const type_group& tg,
+        const annotations::annotation& a) const;
+
+private:
     std::vector<boost::filesystem::path> to_library_dirs(
         const std::vector<boost::filesystem::path>& data_dirs) const;
 
-public:
+private:
     std::list<descriptor>
     make(const std::vector<boost::filesystem::path>& library_dirs) const;
 
-    descriptor make(const options::input& tg) const;
+    std::list<descriptor> make(const annotations::type_repository& atrp,
+        const boost::filesystem::path& references_dir,
+        const annotations::annotation& a) const;
 
-public:
     std::list<descriptor> make(const std::list<options::input>& refs) const;
 
 public:
+    descriptor make(const options::input& tg) const;
+
     std::list<descriptor>
     make(const std::vector<boost::filesystem::path>& data_dirs,
+        const boost::filesystem::path& references_dir,
         const options::input_options& io,
+        const annotations::type_repository& atrp,
         const annotations::annotation& a) const;
 };
 

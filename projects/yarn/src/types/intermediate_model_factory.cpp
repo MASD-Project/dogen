@@ -125,7 +125,8 @@ make(const std::vector<boost::filesystem::path>& dirs,
      * using the annotations object and the data directories; then
      * load all reference intermediate models and post-process them.
      */
-    const auto rimd(f.make(dirs, io, a));
+    const auto target_dir(timd.path().parent_path());
+    const auto rimd(f.make(dirs, target_dir, io, atrp, a));
     std::vector<intermediate_model> r;
     r.reserve(rimd.size() + 1/*target model*/);
     r.push_back(tim);

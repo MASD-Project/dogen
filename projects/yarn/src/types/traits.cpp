@@ -28,6 +28,11 @@ std::string traits::is_proxy_model() {
     return r;
 }
 
+std::string traits::reference() {
+    static std::string r("yarn.reference");
+    return r;
+}
+
 std::string traits::type_parameters::variable_number_of_parameters() {
     static std::string r("yarn.type_parameters.variable_number_of_parameters");
     return r;

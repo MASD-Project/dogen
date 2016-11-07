@@ -93,7 +93,7 @@ private:
         const annotations::annotation& a) const;
 
     inclusion_directive_configuration make_inclusion_directive_configuration(
-        const type_group& tg,const std::string& archetype,
+        const type_group& tg, const std::string& archetype,
         const annotations::annotation& a) const;
 
 private:

@@ -19,9 +19,14 @@
  *
  */
 #include <boost/throw_exception.hpp>
+#include <boost/algorithm/string.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/filesystem/file.hpp"
+#include "dogen/annotations/io/type_io.hpp"
+#include "dogen/annotations/types/entry_selector.hpp"
+#include "dogen/annotations/types/type_repository_selector.hpp"
+#include "dogen/yarn/types/traits.hpp"
 #include "dogen/yarn/io/descriptor_io.hpp"
 #include "dogen/yarn/types/building_error.hpp"
 #include "dogen/yarn/types/descriptor_factory.hpp"
@@ -32,11 +37,49 @@ using namespace dogen::utility::log;
 auto lg(logger_factory("yarn.descriptor_factory"));
 
 const std::string library_dir("library");
+const std::string comma(",");
+const std::string at_least_one_argument(
+    "Expected at least one argument for reference");
+const std::string at_most_two_arguments(
+    "Expected only at most two arguments for reference");
 
 }
 
 namespace dogen {
 namespace yarn {
+
+std::ostream&
+operator<<(std::ostream& s, const descriptor_factory::type_group& v) {
+
+    s << " { "
+      << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::"
+      << "descriptor_factory::type_group\"" << ", "
+      << "\"references\": " << v.reference
+      << " }";
+
+    return s;
+}
+
+descriptor_factory::type_group descriptor_factory::
+make_type_group(const annotations::type_repository& atrp) const {
+    BOOST_LOG_SEV(lg, debug) << "Creating type group.";
+
+    type_group r;
+    const annotations::type_repository_selector s(atrp);
+    r.reference = s.select_type_by_name(traits::reference());
+    return r;
+}
+
+std::list<std::string> descriptor_factory::make_references(const type_group& tg,
+    const annotations::annotation& a) const {
+
+    const annotations::entry_selector s(a);
+    const auto& ref(tg.reference);
+    if (s.has_entry(ref))
+        return s.get_text_collection_content(ref);
+
+    return std::list<std::string>{};
+}
 
 std::vector<boost::filesystem::path> descriptor_factory::to_library_dirs(
     const std::vector<boost::filesystem::path>& data_dirs) const {
@@ -97,6 +140,42 @@ descriptor_factory::make(const std::list<options::input>& refs) const {
     return r;
 }
 
+std::list<descriptor>
+descriptor_factory::make(const annotations::type_repository& atrp,
+    const boost::filesystem::path& references_dir,
+    const annotations::annotation& a) const {
+    const auto tg(make_type_group(atrp));
+    const auto refs(make_references(tg, a));
+    std::list<descriptor> r;
+    for (const auto& s : refs) {
+        std::vector<std::string> tokens;
+        boost::split(tokens, s, boost::is_any_of(comma));
+
+        if (tokens.empty()) {
+            BOOST_LOG_SEV(lg, error) << at_least_one_argument;
+            BOOST_THROW_EXCEPTION(building_error(at_least_one_argument));
+        }
+
+        if (tokens.size() > 2) {
+            BOOST_LOG_SEV(lg, error) << at_most_two_arguments;
+            BOOST_THROW_EXCEPTION(building_error(at_most_two_arguments));
+        }
+
+        auto p(references_dir);
+        p /= tokens[0];
+
+        descriptor d;
+        d.path(p);
+
+        if (tokens.size() > 1)
+            d.external_modules(tokens[1]);
+
+        d.extension(p.extension().string());
+        r.push_back(d);
+    }
+    return r;
+}
+
 descriptor descriptor_factory::make(const options::input& tg) const {
     BOOST_LOG_SEV(lg, debug) << "Creating descriptor for target model.";
 
@@ -113,12 +192,16 @@ descriptor descriptor_factory::make(const options::input& tg) const {
 
 std::list<descriptor> descriptor_factory::
 make(const std::vector<boost::filesystem::path>& data_dirs,
+    const boost::filesystem::path& references_dir,
     const options::input_options& io,
-    const annotations::annotation& /*a*/) const {
+    const annotations::type_repository& atrp,
+    const annotations::annotation& a) const {
 
     const auto library_dirs(to_library_dirs(data_dirs));
     auto r(make(library_dirs));
     r.splice(r.end(), make(io.references()));
+    r.splice(r.end(), make(atrp, references_dir, a));
+
     return r;
 }
 

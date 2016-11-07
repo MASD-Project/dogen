@@ -32,6 +32,7 @@ namespace yarn {
 
 struct traits {
     static std::string is_proxy_model();
+    static std::string reference();
 
     struct type_parameters {
         static std::string variable_number_of_parameters();
