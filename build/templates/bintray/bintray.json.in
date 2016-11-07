@@ -1,7 +1,7 @@
 {
     "package": {
-        "name": "dogen",
-        "repo": "dogen",
+        "name": "Dogen",
+        "repo": "Dogen",
         "subject": "domaindrivenconsulting",
         "desc": "Generates C++-11 source code for Model Driven Software Development.",
         "website_url": "https://github.com/DomainDrivenConsulting/dogen",
@@ -23,11 +23,11 @@
 
     "files":
         [
-            { "includePattern": "${DOGEN_PACKAGE_DIR}/dogen_${DOGEN_VERSION}_amd64-applications.deb", "uploadPattern": "/dogen_${DOGEN_VERSION}_amd64-applications.deb" },
-            { "includePattern": "${DOGEN_PACKAGE_DIR}/dogen_${DOGEN_VERSION}_amd64-headers.deb", "uploadPattern": "/dogen_${DOGEN_VERSION}_amd64-headers.deb" },
-            { "includePattern": "${DOGEN_PACKAGE_DIR}/dogen_${DOGEN_VERSION}_amd64-libraries.deb", "uploadPattern": "/dogen_${DOGEN_VERSION}_amd64-libraries.deb" },
-            { "includePattern": "${DOGEN_PACKAGE_DIR}/dogen_${DOGEN_VERSION}_amd64-tests.deb", "uploadPattern": "/dogen_${DOGEN_VERSION}_amd64-tests.deb" },
-            { "includePattern": "${DOGEN_PACKAGE_DIR}/dogen-${DOGEN_VERSION}-Darwin-x86_64.dmg", "uploadPattern": "/dogen-${DOGEN_VERSION}-Darwin-x86_64.dmg" }
+            { "includePattern": "${DOGEN_PACKAGE_DIR}/dogen_${DOGEN_VERSION}_amd64-applications.deb", "uploadPattern": "/${DOGEN_VERSION}/dogen_${DOGEN_VERSION}_amd64-applications.deb" },
+            { "includePattern": "${DOGEN_PACKAGE_DIR}/dogen_${DOGEN_VERSION}_amd64-headers.deb", "uploadPattern": "/${DOGEN_VERSION}/dogen_${DOGEN_VERSION}_amd64-headers.deb" },
+            { "includePattern": "${DOGEN_PACKAGE_DIR}/dogen_${DOGEN_VERSION}_amd64-libraries.deb", "uploadPattern": "/${DOGEN_VERSION}/dogen_${DOGEN_VERSION}_amd64-libraries.deb" },
+            { "includePattern": "${DOGEN_PACKAGE_DIR}/dogen_${DOGEN_VERSION}_amd64-tests.deb", "uploadPattern": "/${DOGEN_VERSION}/dogen_${DOGEN_VERSION}_amd64-tests.deb" },
+            { "includePattern": "${DOGEN_PACKAGE_DIR}/dogen-${DOGEN_VERSION}-Darwin-x86_64.dmg", "uploadPattern": "/${DOGEN_VERSION}/dogen-${DOGEN_VERSION}-Darwin-x86_64.dmg" }
         ],
     "publish": true
 }
