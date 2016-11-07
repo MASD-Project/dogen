@@ -1,0 +1,12 @@
+{
+    "model_name" : "all_primitives",
+    "annotation" : {
+        "annotations.profile" : "dogen"
+    },
+    "elements" : [
+        {
+            "meta_type" : "object",
+            "simple_name" : "a_class"
+        }
+    ]
+}

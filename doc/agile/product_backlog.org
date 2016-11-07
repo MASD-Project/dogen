@@ -2675,37 +2675,6 @@ get performance numbers out.
 In fact do we even need to have a two step process? Can we not add and
 merge as we go along.
 
-*** Make JSON yarn a fully supported frontend                         :story:
-
-#+begin_quote
-*Story*: As a dogen user, I want to be able to write my domain models
-in JSON since I don't have any need for UML visualisation.
-#+end_quote
-
-At present we are using an yarn JSON format to supply Dogen the system
-libraries. However, there is nothing stopping us from having a
-full-blown JSON frontend useful for code generation. For this we need:
-
-- flag to state if its a target model or not;
-- ability to supply external module path;
-- ability to supply all of the missing information for yarn types
-  (properties for object, stereotypes, enumerations, etc).
-
-In order to test this we could generate a model from both Dia and JSON
-and make sure we arrive at the same yarn.
-
-As part of this work we probably need to create a new stage in the yarn
-pipeline where we populate:
-
-- inheritance related properties (is_parent, leaves, is_final)
-
-We need to look at the dia to sml transformer and see what it is doing
-that is also required by JSON and move it to yarn.
-
-We should have a look at the Boost Fusion approach:
-
-- [[http://jrruethe.github.io/blog/2015/05/21/boost-fusion-json-serializer/][Boost Fusion JSON Serialiser]]
-
 *** Add support for inlining                                          :story:
 
 We should be able to set a model-wide property that tells dogen to
