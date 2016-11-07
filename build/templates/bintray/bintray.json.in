@@ -2,8 +2,8 @@
     "package": {
         "name": "dogen",
         "repo": "dogen",
-        "subject": "mcraveiro",
-        "desc": "The Domain Generator - Generates C++-11 source code for domain driven development.",
+        "subject": "domaindrivenconsulting",
+        "desc": "Generates C++-11 source code for Model Driven Software Development.",
         "website_url": "https://github.com/DomainDrivenConsulting/dogen",
         "issue_tracker_url": "https://github.com/DomainDrivenConsulting/dogen/issues",
         "vcs_url": "https://github.com/DomainDrivenConsulting/dogen",

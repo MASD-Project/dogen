@@ -64,6 +64,7 @@ Our README is quite old and stale. We need to:
 - add build instructions
 
 *** STARTED Try to fix BinTray problems                               :story:
+    CLOCK: [2016-11-07 Mon 12:20]--[2016-11-07 Mon 12:34] =>  0:14
     CLOCK: [2016-11-07 Mon 11:43]--[2016-11-07 Mon 12:19] =>  0:36
 
 According to BinTray support:
