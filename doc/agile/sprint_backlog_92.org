@@ -12,16 +12,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-11-07 Mon 09:46]
+#+CAPTION: Clock summary at [2016-11-07 Mon 10:34]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *0:37* |      |      | 100.0 |
+| *Total time*                                                                | *2:32* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 0:37   |      |      | 100.0 |
-| Active                                                                      |        | 0:37 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:10 |  27.0 |
-| STARTED Edit release notes for previous sprint                              |        |      | 0:27 |  73.0 |
+| Stories                                                                     | 2:32   |      |      | 100.0 |
+| Active                                                                      |        | 2:32 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:10 |   6.6 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:27 |  17.8 |
+| STARTED Sort out PIC/PIE linking problems                                   |        |      | 1:55 |  75.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -30,7 +31,8 @@
 
 Updates to sprint and product backlog.
 
-*** STARTED Edit release notes for previous sprint                    :story:
+*** COMPLETED Edit release notes for previous sprint                  :story:
+    CLOSED: [2016-11-07 Mon 10:10]
     CLOCK: [2016-11-07 Mon 09:19]--[2016-11-07 Mon 09:46] =>  0:27
 
 Add github release notes for previous sprint.
@@ -48,6 +50,55 @@ With this sprint we have concluded the bulk of the work on internal refactoring.
 
 For more details see the [sprint log](https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_91.org).
 #+end_src
+
+*** STARTED Sort out PIC/PIE linking problems                         :story:
+    CLOCK: [2016-11-07 Mon 10:23]--[2016-11-07 Mon 10:34] =>  0:11
+    CLOCK: [2016-11-07 Mon 09:46]--[2016-11-07 Mon 10:22] =>  0:36
+    CLOCK: [2016-11-07 Mon 08:00]--[2016-11-07 Mon 09:08] =>  1:08
+
+
+Ever since we last dist-upgraded we stop being able to build Dogen. We
+are getting linking errors to do with PIC. The problem seems to be
+related to [[https://wiki.debian.org/Hardening#DEB_BUILD_HARDENING_PIE_.28gcc.2Fg.2B-.2B-_-fPIE_-pie.29][DEB_BUILD_HARDENING_PIE]], which forces all binaries to be
+built with PIE. However, our libraries are not built with PIC, so
+there seems to be some kind of incompatibility.
+
+We rebuilt latest boost with the testing compiler but that didn't
+quite solve all the issues, so the problem is also within the dogen
+code.
+
+[[https://github.com/ldc-developers/ldc/pull/1664][This ticket]] provides some insight:
+
+#+begin_quote
+Modern Linux distributions have their toolchain generate PIC code for
+additional security features (like ASLR).
+Since there is no (sane) way to detect whether the toolchain defaults to
+PIC code, we simply default to PIC code on all Linux
+distributions to avoid linking issues on these OSes.
+
+The relocation model can be switched back to non-PIC code manually at
+any time.
+#+end_quote
+
+Seems like the solution is just to add:
+
+#+begin_src
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+#+end_src
+
+To the top-level CMake file. It at least solves the problem locally.
+
+Links:
+
+- [[https://cmake.org/pipermail/cmake/2010-September/039468.html][PIE and PIC in mixed projects]]
+- [[http://stackoverflow.com/questions/38296756/what-is-the-idiomatic-way-in-cmake-to-add-the-fpic-compiler-option][What is the idiomatic way in CMAKE to add the -fPIC compiler option?]]
+
+*** Tidy-up README file                                               :story:
+
+Our README is quite old and stale. We need to:
+
+- mention MDSD
+- add build instructions
 
 *** Supply model references via meta-data rather than command line    :story:
 

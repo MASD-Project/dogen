@@ -47,6 +47,9 @@ endmacro()
 
 #
 # compiler and linker flags
+#
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+
 if (CMAKE_CXX_COMPILER MATCHES ".*clang")
     set(CMAKE_COMPILER_IS_CLANGXX 1)
 endif()
