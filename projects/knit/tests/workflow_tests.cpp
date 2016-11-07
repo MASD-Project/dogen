@@ -92,8 +92,12 @@ BOOST_AUTO_TEST_CASE(disable_facet_folders_generates_expected_code) {
 
 BOOST_AUTO_TEST_CASE(disable_cmakelists_generates_expected_code) {
     SETUP_TEST_LOG("disable_cmakelists_generates_expected_code");
-    const auto target(yarn_dia::input_disable_cmakelists_dia());
-    BOOST_CHECK(generate_and_diff(target));
+    const auto dia(yarn_dia::input_disable_cmakelists_dia());
+    BOOST_REQUIRE(generate_and_diff(dia));
+
+    // FIXME: quick hack to test json, but really not ideal.
+    const auto json(yarn_json::input_disable_cmakelists_json());
+    BOOST_CHECK(generate_and_diff(json));
 }
 
 BOOST_AUTO_TEST_CASE(enable_facet_domain_generates_expected_code) {
@@ -158,7 +162,7 @@ BOOST_AUTO_TEST_CASE(empty_package_model_does_not_generate_code) {
 BOOST_AUTO_TEST_CASE(classes_inout_package_model_generates_expected_code) {
     SETUP_TEST_LOG("classes_inout_package_model_generates_expected_code");
     const auto dia(yarn_dia::input_classes_inout_package_dia());
-    BOOST_CHECK(generate_and_diff(dia));
+    BOOST_REQUIRE(generate_and_diff(dia));
 
     // FIXME: quick hack to test json, but really not ideal.
     const auto json(yarn_json::input_classes_inout_package_json());
@@ -167,14 +171,22 @@ BOOST_AUTO_TEST_CASE(classes_inout_package_model_generates_expected_code) {
 
 BOOST_AUTO_TEST_CASE(class_without_attributes_model_generates_expected_code) {
     SETUP_TEST_LOG("class_without_attributes_model_generates_expected_code");
-    const auto target(yarn_dia::input_class_without_attributes_dia());
-    BOOST_CHECK(generate_and_diff(target));
+    const auto dia(yarn_dia::input_class_without_attributes_dia());
+    BOOST_REQUIRE(generate_and_diff(dia));
+
+    // FIXME: quick hack to test json, but really not ideal.
+    const auto json(yarn_json::input_class_without_attributes_json());
+    BOOST_CHECK(generate_and_diff(json));
 }
 
 BOOST_AUTO_TEST_CASE(class_without_package_model_generates_expected_code) {
     SETUP_TEST_LOG("class_without_package_model_generates_expected_code");
-    const auto target(yarn_dia::input_class_without_package_dia());
-    BOOST_CHECK(generate_and_diff(target));
+    const auto dia(yarn_dia::input_class_without_package_dia());
+    BOOST_REQUIRE(generate_and_diff(dia));
+
+    // FIXME: quick hack to test json, but really not ideal.
+    const auto json(yarn_json::input_class_without_package_json());
+    BOOST_CHECK(generate_and_diff(json));
 }
 
 BOOST_AUTO_TEST_CASE(stand_alone_class_model_generates_expected_code) {

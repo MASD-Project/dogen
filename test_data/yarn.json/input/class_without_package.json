@@ -1,0 +1,18 @@
+{
+    "model_name" : "class_without_package",
+    "annotation" : {
+        "annotations.profile" : "dogen"
+    },
+    "elements" : [
+        {
+            "meta_type" : "object",
+            "simple_name" : "class_1",
+            "attributes" : [
+                {
+                    "simple_name" : "an_attribute",
+                    "type" : "int"
+                }
+            ]
+        }
+    ]
+}
