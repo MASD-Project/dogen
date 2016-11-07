@@ -64,12 +64,14 @@ private:
      * @brief Reads an element from the property tree.
      */
     void read_element(const boost::property_tree::ptree& pt,
-        yarn::intermediate_model& im) const;
+        yarn::intermediate_model& im,
+        const std::string& external_modules) const;
 
     /**
      * @brief Reads the entire stream as a property tree.
      */
-    intermediate_model read_stream(std::istream& s, const bool is_target) const;
+    intermediate_model read_stream(std::istream& s, const bool is_target,
+        const std::string& external_modules) const;
 
     /**
      * @brief Converts a string to a value in the object types
@@ -82,14 +84,16 @@ public:
     /**
      * @brief Hydrates the model from the JSON stream.
      */
-    intermediate_model hydrate(std::istream& s, const bool is_target) const;
+    intermediate_model hydrate(std::istream& s, const bool is_target,
+        const std::string& external_modules) const;
 
     /**
      * @brief Opens up the file at path and then hydrates the model
      * from the JSON stream.
      */
     intermediate_model
-    hydrate(const boost::filesystem::path& p, const bool is_target) const;
+    hydrate(const boost::filesystem::path& p, const bool is_target,
+        const std::string& external_modules) const;
 };
 
 } } }

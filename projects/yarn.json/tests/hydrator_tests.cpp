@@ -39,6 +39,7 @@ namespace {
 const std::string test_module("yarn.json");
 const std::string test_suite("hydrator_tests");
 
+const std::string empty_external_modules;
 const std::string model_name("a_model");
 const std::string documentation("a_doc");
 const std::string type_name("a_type");
@@ -168,7 +169,7 @@ dogen::yarn::intermediate_model hydrate(std::istream& s) {
     const auto rp(create_repository());
 
     dogen::yarn::json::hydrator h;
-    return h.hydrate(s, false/*is_target*/);
+    return h.hydrate(s, false/*is_target*/, empty_external_modules);
 }
 
 dogen::yarn::intermediate_model hydrate(const boost::filesystem::path& p) {

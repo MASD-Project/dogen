@@ -41,7 +41,6 @@ const std::string scope("::");
 const std::string empty_type_name("Type name is empty.");
 const std::string empty_model_name("Model name is empty.");
 const std::string empty_internal_modules("Internal modules are empty.");
-const std::string empty_external_modules("External modules are empty.");
 const std::string unexpected_simple_name("Simple name is not expected.");
 
 }
@@ -146,10 +145,8 @@ name_builder& name_builder::internal_modules(
 }
 
 name_builder& name_builder::external_modules(const std::string& emp) {
-    if (emp.empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_external_modules;
-        BOOST_THROW_EXCEPTION(building_error(empty_external_modules));
-    }
+    if (emp.empty())
+        return *this;
 
     using utility::string::splitter;
     name_.location().external_modules(splitter::split_scoped(emp));

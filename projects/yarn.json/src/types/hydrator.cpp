@@ -121,7 +121,7 @@ void hydrator::insert_scribbles(const yarn::name& owner,
 }
 
 void hydrator::read_element(const boost::property_tree::ptree& pt,
-    yarn::intermediate_model& im) const {
+    yarn::intermediate_model& im, const std::string& external_modules) const {
 
     yarn::name_builder b;
     const auto in_global_module(pt.get(in_global_module_key, false));
@@ -130,6 +130,7 @@ void hydrator::read_element(const boost::property_tree::ptree& pt,
 
     const auto simple_name_value(pt.get<std::string>(simple_name_key));
     b.simple_name(simple_name_value);
+    b.external_modules(external_modules);
 
     const auto i(pt.find(internal_modules_key));
     if (i != pt.not_found()) {
@@ -196,15 +197,15 @@ void hydrator::read_element(const boost::property_tree::ptree& pt,
     }
 }
 
-yarn::intermediate_model hydrator::
-read_stream(std::istream& s, const bool is_target) const {
+yarn::intermediate_model hydrator::read_stream(std::istream& s,
+    const bool is_target, const std::string& external_modules) const {
     yarn::intermediate_model r;
     boost::property_tree::ptree pt;
     read_json(s, pt);
 
     yarn::name_factory nf;
     const auto model_name_value(pt.get<std::string>(model_name_key));
-    r.name(nf.build_model_name(model_name_value));
+    r.name(nf.build_model_name(model_name_value, external_modules));
     BOOST_LOG_SEV(lg, debug) << "Processing model: " << r.name().id();
 
     const auto tg(origin_types::target);
@@ -232,7 +233,7 @@ read_stream(std::istream& s, const bool is_target) const {
     }
 
     for (auto j(i->second.begin()); j != i->second.end(); ++j)
-        read_element(j->second, r);
+        read_element(j->second, r, external_modules);
 
     return r;
 }
@@ -254,12 +255,12 @@ to_object_type(const boost::optional<std::string>& s) const {
     BOOST_THROW_EXCEPTION(hydration_error(invalid_object_type + ot));
 }
 
-intermediate_model hydrator::
-hydrate(std::istream& s, const bool is_target) const {
+intermediate_model hydrator::hydrate(std::istream& s, const bool is_target,
+    const std::string& external_modules) const {
     BOOST_LOG_SEV(lg, debug) << "Parsing JSON stream.";
     using namespace boost::property_tree;
     try {
-        auto r(read_stream(s, is_target));
+        auto r(read_stream(s, is_target, external_modules));
         BOOST_LOG_SEV(lg, debug) << "Parsed JSON stream successfully.";
         return r;
     } catch (const json_parser_error& e) {
@@ -277,7 +278,8 @@ hydrate(std::istream& s, const bool is_target) const {
 }
 
 intermediate_model hydrator::
-hydrate(const boost::filesystem::path& p, const bool is_target) const {
+hydrate(const boost::filesystem::path& p, const bool is_target,
+    const std::string& external_modules) const {
     const auto gs(p.generic_string());
     BOOST_LOG_SEV(lg, debug) << "Parsing JSON file: " << gs;
     boost::filesystem::ifstream s(p);
@@ -287,7 +289,7 @@ hydrate(const boost::filesystem::path& p, const bool is_target) const {
         BOOST_THROW_EXCEPTION(hydration_error(failed_to_open_file + gs));
     }
 
-    const auto r(hydrate(s, is_target));
+    const auto r(hydrate(s, is_target, external_modules));
     BOOST_LOG_SEV(lg, debug) << "Parsed JSON file successfully.";
     return r;
 }

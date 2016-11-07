@@ -42,10 +42,7 @@ name name_factory::build_model_name(const std::string& model_name,
     const std::string& external_modules) const {
     name_builder b(true/*model_name_mode*/);
     b.model_name(model_name);
-
-    if (!external_modules.empty())
-        b.external_modules(external_modules);
-
+    b.external_modules(external_modules);
     return b.build();
 }
 
@@ -172,12 +169,10 @@ name name_factory::build_promoted_module_name(const name& model_name,
     n.simple(element_name.simple());
 
     const auto& l(element_name.location());
-    if (!l.internal_modules().empty()) {
-        n.location().model_modules().push_back(
-            l.internal_modules().front());
-    }
-    n.location().external_modules(
-        model_name.location().external_modules());
+    if (!l.internal_modules().empty())
+        n.location().model_modules().push_back(l.internal_modules().front());
+
+    n.location().external_modules(model_name.location().external_modules());
 
     name_builder b(n);
     return b.build();
