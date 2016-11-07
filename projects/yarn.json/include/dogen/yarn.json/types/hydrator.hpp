@@ -61,6 +61,12 @@ private:
         intermediate_model& im) const;
 
     /**
+     * @brief Reads all attributes from the node.
+     */
+    std::list<attribute>
+    read_attributes(const boost::property_tree::ptree& pt) const;
+
+    /**
      * @brief Reads an element from the property tree.
      */
     void read_element(const boost::property_tree::ptree& pt,

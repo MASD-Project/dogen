@@ -6,7 +6,61 @@
     "elements" : [
         {
             "meta_type" : "object",
-            "simple_name" : "a_class"
+            "simple_name" : "a_class",
+            "attributes" : [
+                {
+                    "simple_name" : "bool_property",
+                    "type" : "bool"
+                },
+                {
+                    "simple_name" : "char_property",
+                    "type" : "char"
+                },
+                {
+                    "simple_name" : "uchar_property",
+                    "type" : "unsigned char"
+                },
+                {
+                    "simple_name" : "int_property",
+                    "type" : "int"
+                },
+                {
+                    "simple_name" : "uint_property",
+                    "type" : "unsigned int"
+                },
+                {
+                    "simple_name" : "long_property",
+                    "type" : "long"
+                },
+                {
+                    "simple_name" : "ulong_property",
+                    "type" : "unsigned long"
+                },
+                {
+                    "simple_name" : "long_long_property",
+                    "type" : "long long"
+                },
+                {
+                    "simple_name" : "ulong_long_property",
+                    "type" : "unsigned long long"
+                },
+                {
+                    "simple_name" : "short_property",
+                    "type" : "short"
+                },
+                {
+                    "simple_name" : "ushort_property",
+                    "type" : "unsigned short"
+                },
+                {
+                    "simple_name" : "double_property",
+                    "type" : "double"
+                },
+                {
+                    "simple_name" : "float_property",
+                    "type" : "float"
+                }
+            ]
         }
     ]
 }

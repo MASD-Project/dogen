@@ -48,11 +48,13 @@ const std::string bool_false("false");
 
 const std::string documentation_key("documentation");
 const std::string elements_key("elements");
+const std::string attributes_key("attributes");
 
 const std::string meta_type_key("meta_type");
 const std::string meta_type_object_value("object");
 const std::string meta_type_primitive_value("primitive");
 
+const std::string type_key("type");
 const std::string simple_name_key("simple_name");
 const std::string internal_modules_key("internal_modules");
 const std::string annotations_key("annotation");
@@ -120,6 +122,23 @@ void hydrator::insert_scribbles(const yarn::name& owner,
     }
 }
 
+std::list<attribute> hydrator::
+read_attributes(const boost::property_tree::ptree& pt) const {
+    std::list<attribute> r;
+    for (auto i(pt.begin()); i != pt.end(); ++i) {
+        const auto& apt(i->second);
+        attribute a;
+        const auto simple_name_value(apt.get<std::string>(simple_name_key));
+        a.name().simple(simple_name_value);
+
+        const auto type(apt.get<std::string>(type_key));
+        a.unparsed_type(type);
+
+        r.push_back(a);
+    }
+    return r;
+}
+
 void hydrator::read_element(const boost::property_tree::ptree& pt,
     yarn::intermediate_model& im, const std::string& external_modules) const {
 
@@ -170,6 +189,11 @@ void hydrator::read_element(const boost::property_tree::ptree& pt,
 
         const auto ot(pt.get_optional<std::string>(object_type_key));
         o.object_type(to_object_type(ot));
+
+        const auto i(pt.find(attributes_key));
+        if (i != pt.not_found())
+            o.local_attributes(read_attributes(i->second));
+
         const auto pair(std::make_pair(n.id(), o));
         const bool inserted(im.objects().insert(pair).second);
         if (!inserted) {
