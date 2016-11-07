@@ -22,28 +22,13 @@
 #include "dogen/options/io/input_io.hpp"
 #include "dogen/options/io/input_options_io.hpp"
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::options::input>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
 namespace dogen {
 namespace options {
 
 std::ostream& operator<<(std::ostream& s, const input_options& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::options::input_options\"" << ", "
-      << "\"target\": " << v.target() << ", "
-      << "\"references\": " << v.references()
+      << "\"target\": " << v.target()
       << " }";
     return(s);
 }

@@ -63,15 +63,12 @@ private:
         const boost::filesystem::path& references_dir,
         const annotations::annotation& a) const;
 
-    std::list<descriptor> make(const std::list<options::input>& refs) const;
-
 public:
     descriptor make(const options::input& tg) const;
 
     std::list<descriptor>
     make(const std::vector<boost::filesystem::path>& data_dirs,
         const boost::filesystem::path& references_dir,
-        const options::input_options& io,
         const annotations::type_repository& atrp,
         const annotations::annotation& a) const;
 };

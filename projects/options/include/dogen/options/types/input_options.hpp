@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include <list>
 #include <algorithm>
 #include "dogen/options/types/input.hpp"
 #include "dogen/options/serialization/input_options_fwd_ser.hpp"
@@ -44,9 +43,7 @@ public:
     ~input_options() = default;
 
 public:
-    input_options(
-        const dogen::options::input& target,
-        const std::list<dogen::options::input>& references);
+    explicit input_options(const dogen::options::input& target);
 
 private:
     template<typename Archive>
@@ -66,16 +63,6 @@ public:
     void target(const dogen::options::input&& v);
     /**@}*/
 
-    /**
-     * @brief All external models in which this model depends.
-     */
-    /**@{*/
-    const std::list<dogen::options::input>& references() const;
-    std::list<dogen::options::input>& references();
-    void references(const std::list<dogen::options::input>& v);
-    void references(const std::list<dogen::options::input>&& v);
-    /**@}*/
-
 public:
     bool operator==(const input_options& rhs) const;
     bool operator!=(const input_options& rhs) const {
@@ -88,7 +75,6 @@ public:
 
 private:
     dogen::options::input target_;
-    std::list<dogen::options::input> references_;
 };
 
 } }

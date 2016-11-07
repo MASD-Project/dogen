@@ -23,21 +23,16 @@
 namespace dogen {
 namespace options {
 
-input_options::input_options(
-    const dogen::options::input& target,
-    const std::list<dogen::options::input>& references)
-    : target_(target),
-      references_(references) { }
+input_options::input_options(const dogen::options::input& target)
+    : target_(target) { }
 
 void input_options::swap(input_options& other) noexcept {
     using std::swap;
     swap(target_, other.target_);
-    swap(references_, other.references_);
 }
 
 bool input_options::operator==(const input_options& rhs) const {
-    return target_ == rhs.target_ &&
-        references_ == rhs.references_;
+    return target_ == rhs.target_;
 }
 
 input_options& input_options::operator=(input_options other) {
@@ -60,22 +55,6 @@ void input_options::target(const dogen::options::input& v) {
 
 void input_options::target(const dogen::options::input&& v) {
     target_ = std::move(v);
-}
-
-const std::list<dogen::options::input>& input_options::references() const {
-    return references_;
-}
-
-std::list<dogen::options::input>& input_options::references() {
-    return references_;
-}
-
-void input_options::references(const std::list<dogen::options::input>& v) {
-    references_ = v;
-}
-
-void input_options::references(const std::list<dogen::options::input>&& v) {
-    references_ = std::move(v);
 }
 
 } }

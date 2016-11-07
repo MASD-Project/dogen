@@ -19,7 +19,6 @@
  *
  */
 #include <boost/serialization/nvp.hpp>
-#include <boost/serialization/list.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
@@ -39,7 +38,6 @@ void save(Archive& ar,
     const dogen::options::input_options& v,
     const unsigned int /*version*/) {
     ar << make_nvp("target", v.target_);
-    ar << make_nvp("references", v.references_);
 }
 
 template<typename Archive>
@@ -47,7 +45,6 @@ void load(Archive& ar,
     dogen::options::input_options& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("target", v.target_);
-    ar >> make_nvp("references", v.references_);
 }
 
 } }

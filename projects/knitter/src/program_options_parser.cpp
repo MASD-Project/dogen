@@ -57,7 +57,6 @@ const std::string version_arg("version");
 const std::string verbose_arg("verbose");
 
 const std::string target_arg("target");
-const std::string reference_arg("reference");
 const std::string cpp_project_dir_arg("cpp-project-dir");
 const std::string delete_extra_files_arg("delete-extra-files");
 const std::string ignore_files_matching_regex_arg(
@@ -119,10 +118,6 @@ program_options_parser::modeling_options_factory() const {
         ("target,t",
             value<std::string>(),
             "Model to generate code for, in any of the supported formats."
-            "If required, you can add the module path: FILE,MODULES.")
-        ("reference,r",
-            value<std::vector<std::string> >(),
-            "Models that our target model depends on."
             "If required, you can add the module path: FILE,MODULES.");
 
     return r;
@@ -228,13 +223,6 @@ options::input_options program_options_parser::transform_input_options(
 
     const auto s(vm[target_arg].as<std::string>());
     r.target(make_input(s));
-
-    if (!vm.count(reference_arg))
-        return r;
-
-    typedef std::vector<std::string> argument_type;
-    for (const auto ref : vm[reference_arg].as<argument_type>())
-        r.references().push_back(make_input(ref));
 
     return r;
 }

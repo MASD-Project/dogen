@@ -314,16 +314,16 @@ Implies project splitting is off.#</dia:string>
         <dia:point val="-37,-16"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-37.05,-16.05;-25.285,-12.35"/>
+        <dia:rectangle val="-37.05,-16.05;-30.305,-13.15"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-37,-16"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="11.665000000000001"/>
+        <dia:real val="6.6450000000000005"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3.6000000000000001"/>
+        <dia:real val="2.7999999999999998"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#input_options#</dia:string>
@@ -425,29 +425,6 @@ Implies project splitting is off.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Path to the Dia diagram that contains the model to generate.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#references#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::list&lt;input&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#All external models in which this model depends.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1050,7 +1027,7 @@ with existing file.#</dia:string>
         <dia:point val="-25.1558,-26.8833"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-31.2175,-27.6333;-24.4058,-15.2"/>
+        <dia:rectangle val="-33.7275,-27.6333;-24.4058,-15.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1058,8 +1035,8 @@ with existing file.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-25.1558,-26.8833"/>
         <dia:point val="-25.1558,-21"/>
-        <dia:point val="-31.1675,-21"/>
-        <dia:point val="-31.1675,-16"/>
+        <dia:point val="-33.6775,-21"/>
+        <dia:point val="-33.6775,-16"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -1260,17 +1237,17 @@ with existing file.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-31.1675,-12.4"/>
+        <dia:point val="-33.6775,-13.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-31.9175,-13.15;-18.775,-1.2"/>
+        <dia:rectangle val="-34.4275,-13.95;-18.775,-1.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-31.1675,-12.4"/>
-        <dia:point val="-31.1675,-6"/>
+        <dia:point val="-33.6775,-13.2"/>
+        <dia:point val="-33.6775,-6"/>
         <dia:point val="-18.975,-6"/>
         <dia:point val="-18.975,-2"/>
       </dia:attribute>

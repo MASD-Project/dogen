@@ -119,28 +119,6 @@ make(const std::vector<boost::filesystem::path>& dirs) const {
 }
 
 std::list<descriptor>
-descriptor_factory::make(const std::list<options::input>& refs) const {
-    BOOST_LOG_SEV(lg, debug) << "Creating descriptors for reference models.";
-    BOOST_LOG_SEV(lg, debug) << "Found " << refs.size() << " reference models.";
-
-    std::list<descriptor> r;
-    for (const auto ref: refs) {
-        BOOST_LOG_SEV(lg, trace) << "Reference model: "
-                                 << ref.path().generic_string();
-
-        descriptor d;
-        d.path(ref.path());
-        d.external_modules(ref.external_modules());
-        d.is_target(false);
-        d.extension(ref.path().extension().string());
-        r.push_back(d);
-    }
-    BOOST_LOG_SEV(lg, debug) << "Created descriptors for reference models: "
-                             << r;
-    return r;
-}
-
-std::list<descriptor>
 descriptor_factory::make(const annotations::type_repository& atrp,
     const boost::filesystem::path& references_dir,
     const annotations::annotation& a) const {
@@ -193,13 +171,11 @@ descriptor descriptor_factory::make(const options::input& tg) const {
 std::list<descriptor> descriptor_factory::
 make(const std::vector<boost::filesystem::path>& data_dirs,
     const boost::filesystem::path& references_dir,
-    const options::input_options& io,
     const annotations::type_repository& atrp,
     const annotations::annotation& a) const {
 
     const auto library_dirs(to_library_dirs(data_dirs));
     auto r(make(library_dirs));
-    r.splice(r.end(), make(io.references()));
     r.splice(r.end(), make(atrp, references_dir, a));
 
     return r;

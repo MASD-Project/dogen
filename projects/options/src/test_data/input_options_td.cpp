@@ -28,14 +28,6 @@ create_dogen_options_input(const unsigned int position) {
     return dogen::options::input_generator::create(position);
 }
 
-std::list<dogen::options::input> create_std_list_dogen_options_input(unsigned int position) {
-    std::list<dogen::options::input> r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_dogen_options_input(position + i));
-    }
-    return r;
-}
-
 }
 
 namespace dogen {
@@ -46,7 +38,6 @@ input_options_generator::input_options_generator() : position_(0) { }
 void input_options_generator::
 populate(const unsigned int position, result_type& v) {
     v.target(create_dogen_options_input(position + 0));
-    v.references(create_std_list_dogen_options_input(position + 1));
 }
 
 input_options_generator::result_type
