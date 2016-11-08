@@ -58,7 +58,7 @@ path input_disable_facet_folders_dia("yarn.dia/input/disable_facet_folders.dia")
 path input_disable_xml_serialization_dia(
     "yarn.dia/input/disable_xml_serialization.dia"
     );
-path input_enable_facet_domain_dia("yarn.dia/input/enable_facet_domain.dia");
+path input_enable_facet_types_dia("yarn.dia/input/enable_facet_types.dia");
 path input_enable_facet_hash_dia("yarn.dia/input/enable_facet_hash.dia");
 path input_enable_facet_io_dia("yarn.dia/input/enable_facet_io.dia");
 path input_enable_facet_serialization_dia(
@@ -357,8 +357,8 @@ path yarn_dia::input_disable_xml_serialization_dia() {
     return validating_resolver::resolve(::input_disable_xml_serialization_dia);
 }
 
-path yarn_dia::input_enable_facet_domain_dia() {
-    return validating_resolver::resolve(::input_enable_facet_domain_dia);
+path yarn_dia::input_enable_facet_types_dia() {
+    return validating_resolver::resolve(::input_enable_facet_types_dia);
 }
 
 path yarn_dia::input_enable_facet_hash_dia() {

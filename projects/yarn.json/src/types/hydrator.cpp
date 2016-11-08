@@ -26,6 +26,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/annotations/types/scribble_group.hpp"
 #include "dogen/yarn/io/name_io.hpp"
+#include "dogen/yarn/types/module.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/primitive.hpp"
 #include "dogen/yarn/types/name_builder.hpp"
@@ -53,6 +54,7 @@ const std::string attributes_key("attributes");
 const std::string meta_type_key("meta_type");
 const std::string meta_type_object_value("object");
 const std::string meta_type_primitive_value("primitive");
+const std::string meta_type_module_value("module");
 
 const std::string type_key("type");
 const std::string simple_name_key("simple_name");
@@ -70,7 +72,6 @@ const std::string invalid_option_in_json_file(
     "Failed to read option in JSON file: ");
 const std::string invalid_path("Failed to find JSON path: ");
 const std::string invalid_meta_type("Invalid value for meta type: ");
-const std::string model_has_no_types("Did not find any elements in model");
 const std::string missing_module("Could not find module: ");
 const std::string failed_to_open_file("Failed to open file: ");
 const std::string invalid_object_type("Invalid or unsupported object type: ");
@@ -166,6 +167,7 @@ void hydrator::read_element(const boost::property_tree::ptree& pt,
     }
 
     yarn::name n(b.build());
+    const auto id(n.id());
     const auto documentation(pt.get_optional<std::string>(documentation_key));
 
     const auto lambda([&](yarn::element& e) {
@@ -197,9 +199,8 @@ void hydrator::read_element(const boost::property_tree::ptree& pt,
         const auto pair(std::make_pair(n.id(), o));
         const bool inserted(im.objects().insert(pair).second);
         if (!inserted) {
-            BOOST_LOG_SEV(lg, error) << duplicate_element_id << n.id();
-            BOOST_THROW_EXCEPTION(
-                hydration_error(duplicate_element_id + n.id()));
+            BOOST_LOG_SEV(lg, error) << duplicate_element_id << id;
+            BOOST_THROW_EXCEPTION(hydration_error(duplicate_element_id + id));
         }
     } else if (meta_type_value == meta_type_primitive_value) {
         yarn::primitive p;
@@ -209,12 +210,19 @@ void hydrator::read_element(const boost::property_tree::ptree& pt,
         const auto pair(std::make_pair(n.id(), p));
         const bool inserted(im.primitives().insert(pair).second);
         if (!inserted) {
-            BOOST_LOG_SEV(lg, error) << duplicate_element_id << n.id();
-            BOOST_THROW_EXCEPTION(
-                hydration_error(duplicate_element_id + n.id()));
+            BOOST_LOG_SEV(lg, error) << duplicate_element_id << id;
+            BOOST_THROW_EXCEPTION(hydration_error(duplicate_element_id + id));
         }
-    }
-    else {
+    } else if (meta_type_value == meta_type_module_value) {
+        yarn::module m;
+        lambda(m);
+        const auto pair(std::make_pair(n.id(), m));
+        const bool inserted(im.modules().insert(pair).second);
+        if (!inserted) {
+            BOOST_LOG_SEV(lg, error) << duplicate_element_id << id;
+            BOOST_THROW_EXCEPTION(hydration_error(duplicate_element_id + id));
+        }
+    } else {
         BOOST_LOG_SEV(lg, error) << invalid_meta_type << meta_type_value;
         BOOST_THROW_EXCEPTION(
             hydration_error(invalid_meta_type + meta_type_value));
@@ -252,12 +260,11 @@ yarn::intermediate_model hydrator::read_stream(std::istream& s,
 
     const auto i(pt.find(elements_key));
     if (i == pt.not_found() || i->second.empty()) {
-        BOOST_LOG_SEV(lg, error) << model_has_no_types;
-        BOOST_THROW_EXCEPTION(hydration_error(model_has_no_types));
+        BOOST_LOG_SEV(lg, warn) << "Did not find any elements in model";
+    } else {
+        for (auto j(i->second.begin()); j != i->second.end(); ++j)
+            read_element(j->second, r, external_modules);
     }
-
-    for (auto j(i->second.begin()); j != i->second.end(); ++j)
-        read_element(j->second, r, external_modules);
 
     return r;
 }

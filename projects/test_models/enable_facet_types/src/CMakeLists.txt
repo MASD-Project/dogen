@@ -22,8 +22,8 @@ file(GLOB_RECURSE files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
-add_library(enable_facet_domain STATIC ${files})
-set_target_properties(enable_facet_domain PROPERTIES
-    OUTPUT_NAME dogen.enable_facet_domain)
+add_library(enable_facet_types STATIC ${files})
+set_target_properties(enable_facet_types PROPERTIES
+    OUTPUT_NAME dogen.enable_facet_types)
 
-install(TARGETS enable_facet_domain ARCHIVE DESTINATION lib COMPONENT libraries)
+install(TARGETS enable_facet_types ARCHIVE DESTINATION lib COMPONENT libraries)

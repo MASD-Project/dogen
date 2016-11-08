@@ -64,7 +64,7 @@ public:
     static boost::filesystem::path input_disable_full_ctor_dia();
     static boost::filesystem::path input_disable_facet_folders_dia();
     static boost::filesystem::path input_disable_xml_serialization_dia();
-    static boost::filesystem::path input_enable_facet_domain_dia();
+    static boost::filesystem::path input_enable_facet_types_dia();
     static boost::filesystem::path input_enable_facet_hash_dia();
     static boost::filesystem::path input_enable_facet_io_dia();
     static boost::filesystem::path input_enable_facet_serialization_dia();

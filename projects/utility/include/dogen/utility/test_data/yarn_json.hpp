@@ -63,7 +63,7 @@ public:
     static boost::filesystem::path input_disable_full_ctor_json();
     static boost::filesystem::path input_disable_facet_folders_json();
     static boost::filesystem::path input_disable_xml_serialization_json();
-    static boost::filesystem::path input_enable_facet_domain_json();
+    static boost::filesystem::path input_enable_facet_types_json();
     static boost::filesystem::path input_enable_facet_hash_json();
     static boost::filesystem::path input_enable_facet_io_json();
     static boost::filesystem::path input_enable_facet_serialization_json();

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEST_MODELS_ENABLE_FACET_DOMAIN_TYPES_PACKAGE1_FIRST_CLASS_HPP
-#define DOGEN_TEST_MODELS_ENABLE_FACET_DOMAIN_TYPES_PACKAGE1_FIRST_CLASS_HPP
+#ifndef DOGEN_TEST_MODELS_ENABLE_FACET_TYPES_TYPES_PACKAGE1_FIRST_CLASS_HPP
+#define DOGEN_TEST_MODELS_ENABLE_FACET_TYPES_TYPES_PACKAGE1_FIRST_CLASS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,7 +29,7 @@
 
 namespace dogen {
 namespace test_models {
-namespace enable_facet_domain {
+namespace enable_facet_types {
 namespace package1 {
 
 class first_class final {
@@ -74,8 +74,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::test_models::enable_facet_domain::package1::first_class& lhs,
-    dogen::test_models::enable_facet_domain::package1::first_class& rhs) {
+    dogen::test_models::enable_facet_types::package1::first_class& lhs,
+    dogen::test_models::enable_facet_types::package1::first_class& rhs) {
     lhs.swap(rhs);
 }
 

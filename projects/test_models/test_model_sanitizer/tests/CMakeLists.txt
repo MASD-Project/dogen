@@ -57,7 +57,7 @@ target_link_libraries(${tests_name}
     class_without_package
     compressed
     disable_facet_folders
-    enable_facet_domain
+    enable_facet_types
     enable_facet_hash
     enable_facet_io
     enable_facet_serialization

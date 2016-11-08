@@ -1,0 +1,9 @@
+{
+    "model_name" : "empty_package",
+    "elements" : [
+        {
+            "meta_type" : "module",
+            "simple_name" : "package_1"
+        }
+    ]
+}

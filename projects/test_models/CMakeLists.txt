@@ -31,7 +31,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/test_models/compressed/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/disable_facet_folders/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/disable_cmakelists/include
-    ${CMAKE_SOURCE_DIR}/projects/test_models/enable_facet_domain/include
+    ${CMAKE_SOURCE_DIR}/projects/test_models/enable_facet_types/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/enable_facet_hash/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/enable_facet_io/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/enable_facet_serialization/include
@@ -77,7 +77,7 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/class_without_package)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/stand_alone_class)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/compressed)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/disable_facet_folders)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enable_facet_domain)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enable_facet_types)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enable_facet_hash)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enable_facet_io)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enable_facet_serialization)

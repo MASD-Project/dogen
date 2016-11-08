@@ -100,9 +100,9 @@ BOOST_AUTO_TEST_CASE(disable_cmakelists_generates_expected_code) {
     BOOST_CHECK(generate_and_diff(json));
 }
 
-BOOST_AUTO_TEST_CASE(enable_facet_domain_generates_expected_code) {
-    SETUP_TEST_LOG("enable_facet_domain_generates_expected_code");
-    const auto target(yarn_dia::input_enable_facet_domain_dia());
+BOOST_AUTO_TEST_CASE(enable_facet_types_generates_expected_code) {
+    SETUP_TEST_LOG("enable_facet_types_generates_expected_code");
+    const auto target(yarn_dia::input_enable_facet_types_dia());
     BOOST_CHECK(generate_and_diff(target));
 }
 
@@ -149,14 +149,22 @@ BOOST_AUTO_TEST_CASE(class_without_name_model_throws) {
 
 BOOST_AUTO_TEST_CASE(empty_model_generates_expected_code) {
     SETUP_TEST_LOG("empty_model_generates_expected_code");
-    const auto target(yarn_dia::input_empty_dia());
-    BOOST_CHECK(generate_and_diff(target));
+    const auto dia(yarn_dia::input_empty_dia());
+    BOOST_CHECK(generate_and_diff(dia));
+
+    // FIXME: quick hack to test json, but really not ideal.
+    const auto json(yarn_json::input_empty_json());
+    BOOST_CHECK(generate_and_diff(json));
 }
 
 BOOST_AUTO_TEST_CASE(empty_package_model_does_not_generate_code) {
     SETUP_TEST_LOG("empty_package_model_does_not_generate_code");
-    const auto target(yarn_dia::input_empty_package_dia());
-    BOOST_CHECK(generate_and_diff(target));
+    const auto dia(yarn_dia::input_empty_package_dia());
+    BOOST_CHECK(generate_and_diff(dia));
+
+    // FIXME: quick hack to test json, but really not ideal.
+    const auto json(yarn_json::input_empty_package_json());
+    BOOST_CHECK(generate_and_diff(json));
 }
 
 BOOST_AUTO_TEST_CASE(classes_inout_package_model_generates_expected_code) {

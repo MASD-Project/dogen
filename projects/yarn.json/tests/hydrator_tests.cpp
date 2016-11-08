@@ -24,6 +24,7 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/io/list_io.hpp"
+#include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/test/mock_type_factory.hpp"
 #include "dogen/annotations/test/mock_type_repository_factory.hpp"
 #include "dogen/annotations/types/type.hpp"
@@ -48,6 +49,7 @@ const std::string model_value("model_value");
 const std::string some_key("some_key");
 const std::string some_value("some_value");
 const std::string type_key("type_key");
+const std::string type_value("model_value");
 const std::string internal_modules_key("modules");
 const std::string internal_modules_value_1("module_1");
 const std::string internal_modules_value_2("module_2");
@@ -75,27 +77,6 @@ const std::string trivial_model(R"({
         }
      ]
   }
-)");
-
-const std::string tagged_model(R"({
-    "model_name" : "a_model",
-    "documentation" : "a_doc",
-    "extensions" : {
-            "model_key" : "model_value",
-            "some_key" : "some_value"
-    },
-    "elements" : [
-        {
-            "meta_type" : "object",
-            "simple_name" : "a_type",
-            "documentation" : "a_doc",
-            "extensions" : {
-                    "type_key" : true,
-                    "some_key" : "some_value"
-            }
-       }
-   ]
-}
 )");
 
 const std::string no_documentation_model(R"({
@@ -222,64 +203,6 @@ BOOST_AUTO_TEST_CASE(trivial_model_hydrates_into_expected_model) {
         BOOST_CHECK(pair.second.documentation() == documentation);
     }
 }
-/*
-BOOST_AUTO_TEST_CASE(tagged_model_hydrates_into_expected_model) {
-    SETUP_TEST_LOG_SOURCE("tagged_model_hydrates_into_expected_model");
-
-    const auto m(hydrate(tagged_model));
-    BOOST_LOG_SEV(lg, debug) << "model: " << m;
-
-    const auto& ml(m.name().location());
-    BOOST_REQUIRE(ml.model_modules().size() == 1);
-    BOOST_CHECK(*(ml.model_modules().begin()) == model_name);
-    BOOST_CHECK(ml.internal_modules().empty());
-    BOOST_CHECK(ml.external_modules().empty());
-
-    using namespace dogen::annotations;
-    BOOST_REQUIRE(m.modules().size() == 1);
-    {
-        const auto& pair(*m.modules().begin());
-        BOOST_CHECK(pair.second.documentation() == documentation);
-
-        const auto& dyn(pair.second.extensions());
-        BOOST_CHECK(dyn.fields().size() == 2);
-
-        const field_selector fs(dyn);
-        {
-            BOOST_REQUIRE(fs.has_field(some_key));
-            BOOST_REQUIRE(fs.get_text_content(some_key) == some_value);
-
-            BOOST_REQUIRE(fs.has_field(model_key));
-            BOOST_REQUIRE(fs.get_text_content(model_key) == model_value);
-        }
-    }
-
-    BOOST_REQUIRE(m.objects().size() == 1);
-    {
-        const auto& pair(*m.objects().begin());
-        const auto& n(pair.second.name());
-        const auto& nl(m.name().location());
-
-        BOOST_CHECK(pair.first == n.id());
-        BOOST_CHECK(n.simple() == type_name);
-        BOOST_CHECK(nl.model_modules() == ml.model_modules());
-        BOOST_CHECK(nl.internal_modules().empty());
-        BOOST_CHECK(nl.external_modules().empty());
-        BOOST_CHECK(pair.second.documentation() == documentation);
-
-        {
-            const auto& o(pair.second);
-            const auto& dyn(o.extensions());
-            const field_selector fs(dyn);
-            BOOST_REQUIRE(fs.has_field(some_key));
-            BOOST_REQUIRE(fs.get_text_content(some_key) == some_value);
-
-            BOOST_REQUIRE(fs.has_field(type_key));
-            BOOST_REQUIRE(fs.get_boolean_content(type_key) == type_value);
-        }
-    }
-}
-*/
 
 BOOST_AUTO_TEST_CASE(no_documentation_model_hydrates_into_expected_model) {
     SETUP_TEST_LOG_SOURCE("no_documentation_model_hydrates_into_expected_model");
@@ -312,16 +235,29 @@ BOOST_AUTO_TEST_CASE(no_type_name_model_throws) {
     BOOST_CHECK_EXCEPTION(hydrate(no_type_name_model), hydration_error, c);
 }
 
-BOOST_AUTO_TEST_CASE(no_elements_model_throws) {
+BOOST_AUTO_TEST_CASE(no_elements_model_results_in_empty_model) {
     SETUP_TEST_LOG_SOURCE("no_elements_model_throws");
-    contains_checker<hydration_error> c(missing_elements);
-    BOOST_CHECK_EXCEPTION(hydrate(no_elements_model), hydration_error, c);
+    const auto m(hydrate(no_elements_model));
+
+    BOOST_CHECK(m.objects().empty());
+    BOOST_CHECK(m.primitives().empty());
+    BOOST_CHECK(m.enumerations().empty());
+    BOOST_CHECK(!m.modules().empty());
+    BOOST_CHECK(m.references().empty());
+    BOOST_CHECK(m.leaves().empty());
 }
 
 BOOST_AUTO_TEST_CASE(empty_elements_model_throws) {
     SETUP_TEST_LOG_SOURCE("empty_elements_model_throws");
-    contains_checker<hydration_error> c(missing_elements);
-    BOOST_CHECK_EXCEPTION(hydrate(empty_elements_model), hydration_error, c);
+
+    const auto m(hydrate(empty_elements_model));
+
+    BOOST_CHECK(m.objects().empty());
+    BOOST_CHECK(m.primitives().empty());
+    BOOST_CHECK(m.enumerations().empty());
+    BOOST_CHECK(!m.modules().empty());
+    BOOST_CHECK(m.references().empty());
+    BOOST_CHECK(m.leaves().empty());
 }
 
 BOOST_AUTO_TEST_CASE(internal_modules_model_hydrates_into_expected_model) {

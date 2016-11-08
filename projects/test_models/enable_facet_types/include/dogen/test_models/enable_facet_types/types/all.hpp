@@ -18,13 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEST_MODELS_ENABLE_FACET_DOMAIN_TYPES_ALL_HPP
-#define DOGEN_TEST_MODELS_ENABLE_FACET_DOMAIN_TYPES_ALL_HPP
+#ifndef DOGEN_TEST_MODELS_ENABLE_FACET_TYPES_TYPES_ALL_HPP
+#define DOGEN_TEST_MODELS_ENABLE_FACET_TYPES_TYPES_ALL_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/test_models/enable_facet_domain/types/package1/first_class.hpp"
+#include "dogen/test_models/enable_facet_types/types/package1/first_class.hpp"
 
 #endif

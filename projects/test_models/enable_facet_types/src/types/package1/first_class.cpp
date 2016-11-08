@@ -18,11 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/test_models/enable_facet_domain/types/package1/first_class.hpp"
+#include "dogen/test_models/enable_facet_types/types/package1/first_class.hpp"
 
 namespace dogen {
 namespace test_models {
-namespace enable_facet_domain {
+namespace enable_facet_types {
 namespace package1 {
 
 first_class::first_class()

@@ -57,7 +57,7 @@ path input_disable_facet_folders_json("yarn.json/input/disable_facet_folders.jso
 path input_disable_xml_serialization_json(
     "yarn.json/input/disable_xml_serialization.json"
     );
-path input_enable_facet_domain_json("yarn.json/input/enable_facet_domain.json");
+path input_enable_facet_types_json("yarn.json/input/enable_facet_types.json");
 path input_enable_facet_hash_json("yarn.json/input/enable_facet_hash.json");
 path input_enable_facet_io_json("yarn.json/input/enable_facet_io.json");
 path input_enable_facet_serialization_json(
@@ -171,8 +171,8 @@ path yarn_json::input_disable_xml_serialization_json() {
     return validating_resolver::resolve(::input_disable_xml_serialization_json);
 }
 
-path yarn_json::input_enable_facet_domain_json() {
-    return validating_resolver::resolve(::input_enable_facet_domain_json);
+path yarn_json::input_enable_facet_types_json() {
+    return validating_resolver::resolve(::input_enable_facet_types_json);
 }
 
 path yarn_json::input_enable_facet_hash_json() {
