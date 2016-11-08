@@ -22,6 +22,7 @@
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/filesystem/fstream.hpp>
+#include <boost/algorithm/string/trim.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/annotations/types/scribble_group.hpp"
@@ -123,18 +124,26 @@ void hydrator::insert_scribbles(const yarn::name& owner,
     }
 }
 
+std::string
+hydrator::read_documentation(const boost::property_tree::ptree& pt) const {
+    const auto opt(pt.get_optional<std::string>(documentation_key));
+    if (!opt)
+        return empty;
+
+    auto r(*opt);
+    boost::trim(r);
+    return r;
+}
+
 std::list<attribute> hydrator::
 read_attributes(const boost::property_tree::ptree& pt) const {
     std::list<attribute> r;
     for (auto i(pt.begin()); i != pt.end(); ++i) {
         const auto& apt(i->second);
         attribute a;
-        const auto simple_name_value(apt.get<std::string>(simple_name_key));
-        a.name().simple(simple_name_value);
-
-        const auto type(apt.get<std::string>(type_key));
-        a.unparsed_type(type);
-
+        a.name().simple(apt.get<std::string>(simple_name_key));
+        a.unparsed_type(apt.get<std::string>(type_key));
+        a.documentation(read_documentation(apt));
         r.push_back(a);
     }
     return r;
@@ -168,16 +177,13 @@ void hydrator::read_element(const boost::property_tree::ptree& pt,
 
     yarn::name n(b.build());
     const auto id(n.id());
-    const auto documentation(pt.get_optional<std::string>(documentation_key));
 
     const auto lambda([&](yarn::element& e) {
             BOOST_LOG_SEV(lg, debug) << "Processing element: " << n.id();
             e.name(n);
             e.origin_type(origin_types::not_yet_determined);
             e.in_global_module(in_global_module);
-
-            if (documentation)
-                e.documentation(*documentation);
+            e.documentation(read_documentation(pt));
 
             const auto kvps(read_kvps(pt));
             const auto st(annotations::scope_types::entity);
@@ -250,10 +256,7 @@ yarn::intermediate_model hydrator::read_stream(std::istream& s,
     const auto st(annotations::scope_types::root_module);
     insert_scribbles(r.name(), st, kvps, r);
 
-    const auto documentation(pt.get_optional<std::string>(documentation_key));
-    if (documentation)
-        m.documentation(*documentation);
-
+    m.documentation(read_documentation(pt));
     m.name(r.name());
     m.origin_type(origin_types::not_yet_determined);
     r.modules().insert(std::make_pair(m.name().id(), m));

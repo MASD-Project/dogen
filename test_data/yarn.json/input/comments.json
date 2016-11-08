@@ -1,0 +1,47 @@
+{
+    "model_name" : "comments",
+    "documentation" : "This model demonstrates the use of comments in dogen.\n\nThis comment will be applied to the model namespace itself.",
+    "annotation" : {
+        "annotations.profile" : "dogen"
+    },
+    "elements" : [
+        {
+            "meta_type" : "object",
+            "simple_name" : "one_line",
+            "documentation" : "this is the brief comment",
+            "attributes" : [
+                {
+                    "simple_name" : "prop_0",
+                    "type" : "int",
+                    "documentation" : "another brief comment"
+                },
+                {
+                    "simple_name" : "prop_1",
+                    "type" : "int",
+                    "documentation" : "the brief comment\n\na second line"
+                },
+                {
+                    "simple_name" : "prop_2",
+                    "type" : "int",
+                    "documentation" : "\n\n\n"
+                }
+            ]
+        },
+        {
+            "meta_type" : "object",
+            "simple_name" : "multi_line",
+            "documentation" : "first line\n\nsecond line\nthird line with \"quote\""
+        },
+        {
+            "meta_type" : "module",
+            "simple_name" : "package",
+            "documentation" : "package"
+        },
+        {
+            "meta_type" : "module",
+            "simple_name" : "package2",
+            "internal_modules" : [ "package" ],
+            "documentation" : "package2"
+        }
+    ]
+}
