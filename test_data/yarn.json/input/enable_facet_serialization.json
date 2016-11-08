@@ -1,0 +1,23 @@
+{
+    "model_name" : "enable_facet_serialization",
+    "annotation" : {
+        "annotations.profile" : "dogen.enable_cmake_types_serialization"
+    },
+    "elements" : [
+        {
+            "meta_type" : "object",
+            "simple_name" : "first_class",
+            "internal_modules" : [ "package1" ],
+            "attributes" : [
+                {
+                    "simple_name" : "public_attribute",
+                    "type" : "int"
+                },
+                {
+                    "simple_name" : "private_attribute",
+                    "type" : "int"
+                }
+            ]
+        }
+    ]
+}
