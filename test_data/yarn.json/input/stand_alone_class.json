@@ -1,0 +1,18 @@
+{
+    "model_name" : "stand_alone_class",
+    "annotation" : {
+        "annotations.profile" : "dogen"
+    },
+    "elements" : [
+        {
+            "meta_type" : "object",
+            "simple_name" : "class_1",
+            "attributes" : [
+                {
+                    "simple_name" : "prop_0",
+                    "type" : "int"
+                }
+            ]
+        }
+    ]
+}

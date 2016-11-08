@@ -20,6 +20,7 @@
  */
 #include <istream>
 #include <boost/make_shared.hpp>
+#include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/filesystem/fstream.hpp>
 #include <boost/algorithm/string/trim.hpp>
@@ -51,11 +52,13 @@ const std::string bool_false("false");
 const std::string documentation_key("documentation");
 const std::string elements_key("elements");
 const std::string attributes_key("attributes");
+const std::string enumerators_key("enumerators");
 
 const std::string meta_type_key("meta_type");
 const std::string meta_type_object_value("object");
 const std::string meta_type_primitive_value("primitive");
 const std::string meta_type_module_value("module");
+const std::string meta_type_enumeration_value("enumeration");
 
 const std::string type_key("type");
 const std::string simple_name_key("simple_name");
@@ -135,9 +138,33 @@ hydrator::read_documentation(const boost::property_tree::ptree& pt) const {
     return r;
 }
 
+std::vector<enumerator> hydrator::
+read_enumerators(const boost::property_tree::ptree& pt) const {
+    std::vector<enumerator> r;
+
+    dogen::yarn::enumerator invalid;
+    invalid.name("invalid");
+    invalid.documentation("Represents an uninitialised enum");
+    invalid.value("0");
+    r.push_back(invalid);
+
+    unsigned int pos(1);
+    for (auto i(pt.begin()); i != pt.end(); ++i) {
+        const auto& apt(i->second);
+        enumerator e;
+        e.name(apt.get<std::string>(simple_name_key));
+        e.documentation(read_documentation(apt));
+        e.value(boost::lexical_cast<std::string>(pos));
+        r.push_back(e);
+        ++pos;
+    }
+    return r;
+}
+
 std::list<attribute> hydrator::
 read_attributes(const boost::property_tree::ptree& pt) const {
     std::list<attribute> r;
+
     for (auto i(pt.begin()); i != pt.end(); ++i) {
         const auto& apt(i->second);
         attribute a;
@@ -224,6 +251,19 @@ void hydrator::read_element(const boost::property_tree::ptree& pt,
         lambda(m);
         const auto pair(std::make_pair(n.id(), m));
         const bool inserted(im.modules().insert(pair).second);
+        if (!inserted) {
+            BOOST_LOG_SEV(lg, error) << duplicate_element_id << id;
+            BOOST_THROW_EXCEPTION(hydration_error(duplicate_element_id + id));
+        }
+    } else if (meta_type_value == meta_type_enumeration_value) {
+        yarn::enumeration e;
+        lambda(e);
+        const auto i(pt.find(enumerators_key));
+        if (i != pt.not_found())
+            e.enumerators(read_enumerators(i->second));
+
+        const auto pair(std::make_pair(n.id(), e));
+        const bool inserted(im.enumerations().insert(pair).second);
         if (!inserted) {
             BOOST_LOG_SEV(lg, error) << duplicate_element_id << id;
             BOOST_THROW_EXCEPTION(hydration_error(duplicate_element_id + id));

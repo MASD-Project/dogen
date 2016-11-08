@@ -86,8 +86,12 @@ BOOST_AUTO_TEST_SUITE(workflow_tests)
 
 BOOST_AUTO_TEST_CASE(disable_facet_folders_generates_expected_code) {
     SETUP_TEST_LOG("disable_facet_folders_generates_expected_code");
-    const auto target(yarn_dia::input_disable_facet_folders_dia());
-    BOOST_CHECK(generate_and_diff(target));
+    const auto dia(yarn_dia::input_disable_facet_folders_dia());
+    BOOST_CHECK(generate_and_diff(dia));
+
+    // FIXME: quick hack to test json, but really not ideal.
+    const auto json(yarn_json::input_disable_facet_folders_json());
+    BOOST_CHECK(generate_and_diff(json));
 }
 
 BOOST_AUTO_TEST_CASE(disable_cmakelists_generates_expected_code) {
@@ -215,8 +219,12 @@ BOOST_AUTO_TEST_CASE(class_without_package_model_generates_expected_code) {
 
 BOOST_AUTO_TEST_CASE(stand_alone_class_model_generates_expected_code) {
     SETUP_TEST_LOG("stand_alone_class_model_generates_expected_code");
-    const auto target(yarn_dia::input_stand_alone_class_dia());
-    BOOST_CHECK(generate_and_diff(target));
+    const auto dia(yarn_dia::input_stand_alone_class_dia());
+    BOOST_CHECK(generate_and_diff(dia));
+
+    // FIXME: quick hack to test json, but really not ideal.
+    const auto json(yarn_json::input_stand_alone_class_json());
+    BOOST_CHECK(generate_and_diff(json));
 }
 
 BOOST_AUTO_TEST_CASE(classes_in_a_package_model_generates_expected_code) {
@@ -275,8 +283,12 @@ BOOST_AUTO_TEST_CASE(comments_model_generates_expected_code) {
 
 BOOST_AUTO_TEST_CASE(enumeration_model_generates_expected_code) {
     SETUP_TEST_LOG("enumeration_model_generates_expected_code");
-    const auto target(yarn_dia::input_enumeration_dia());
-    BOOST_CHECK(generate_and_diff(target));
+    const auto dia(yarn_dia::input_enumeration_dia());
+    BOOST_CHECK(generate_and_diff(dia));
+
+    // FIXME: quick hack to test json, but really not ideal.
+    const auto json(yarn_json::input_enumeration_json());
+    BOOST_CHECK(generate_and_diff(json));
 }
 
 BOOST_AUTO_TEST_CASE(exception_model_generates_expected_code) {

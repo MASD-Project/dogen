@@ -66,6 +66,12 @@ private:
     std::string read_documentation(const boost::property_tree::ptree& pt) const;
 
     /**
+     * @brief Reads all enumerators from the node.
+     */
+    std::vector<enumerator>
+    read_enumerators(const boost::property_tree::ptree& pt) const;
+
+    /**
      * @brief Reads all attributes from the node.
      */
     std::list<attribute>
