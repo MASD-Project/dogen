@@ -67,6 +67,11 @@ has_generatable_types(const intermediate_model& im) const {
             return true;
     }
 
+    for (const auto pair : im.exceptions()) {
+        if (is_generatable(pair.second))
+            return true;
+    }
+
     for (const auto pair : im.primitives()) {
         if (is_generatable(pair.second))
             return true;
