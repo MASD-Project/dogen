@@ -2479,6 +2479,14 @@ depend only on the forward declarations.
 If we have enough time and disposition, we may sneak some of these
 in. This release is all about getting the architecture right.
 
+
+*** Clean up enumerator implementation                                :story:
+
+- make enumerator nameable, and compute name correctly (qualified,
+  etc). This makes it conceptually consistent
+- move value computations to yarn so that in the future we can add
+  meta-data to override it.
+
 *** Assignment operator seems to pass types by value                  :story:
 
 The code for the operator is as follows:
