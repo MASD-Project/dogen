@@ -1,0 +1,18 @@
+{
+    "model_name" : "exception",
+    "annotation" : {
+        "annotations.profile" : "dogen"
+    },
+    "elements" : [
+        {
+            "meta_type" : "exception",
+            "simple_name" : "my_error",
+            "documentation" : "this is an exception"
+        },
+        {
+            "meta_type" : "exception",
+            "simple_name" : "catastrophic_error",
+            "internal_modules" : [ "pkg" ]
+        }
+    ]
+}
