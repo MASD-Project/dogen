@@ -53,6 +53,7 @@ const std::string documentation_key("documentation");
 const std::string elements_key("elements");
 const std::string attributes_key("attributes");
 const std::string enumerators_key("enumerators");
+const std::string stereotypes_key("stereotypes");
 
 const std::string meta_type_key("meta_type");
 const std::string meta_type_object_value("object");
@@ -60,6 +61,7 @@ const std::string meta_type_primitive_value("primitive");
 const std::string meta_type_module_value("module");
 const std::string meta_type_enumeration_value("enumeration");
 const std::string meta_type_exception_value("exception");
+const std::string meta_type_concept_value("concept");
 
 const std::string type_key("type");
 const std::string simple_name_key("simple_name");
@@ -126,6 +128,19 @@ void hydrator::insert_scribbles(const yarn::name& owner,
         BOOST_LOG_SEV(lg, error) << duplicate_element_id << id;
         BOOST_THROW_EXCEPTION(hydration_error(duplicate_element_id + id));
     }
+}
+
+std::vector<std::string> hydrator::
+read_stereotypes(const boost::property_tree::ptree& pt) const {
+    std::vector<std::string> r;
+    const auto i(pt.find(stereotypes_key));
+    if (i == pt.not_found() || i->second.empty())
+        return r;
+
+    for (auto j(i->second.begin()); j != i->second.end(); ++j)
+        r.push_back(j->second.get_value<std::string>());
+
+    return r;
 }
 
 std::string
@@ -212,6 +227,7 @@ void hydrator::read_element(const boost::property_tree::ptree& pt,
             e.origin_type(origin_types::not_yet_determined);
             e.in_global_module(in_global_module);
             e.documentation(read_documentation(pt));
+            e.stereotypes(read_stereotypes(pt));
 
             const auto kvps(read_kvps(pt));
             const auto st(annotations::scope_types::entity);
@@ -274,6 +290,20 @@ void hydrator::read_element(const boost::property_tree::ptree& pt,
         lambda(e);
         const auto pair(std::make_pair(n.id(), e));
         const bool inserted(im.exceptions().insert(pair).second);
+        if (!inserted) {
+            BOOST_LOG_SEV(lg, error) << duplicate_element_id << id;
+            BOOST_THROW_EXCEPTION(hydration_error(duplicate_element_id + id));
+        }
+    } else if (meta_type_value == meta_type_concept_value) {
+        yarn::concept c;
+        lambda(c);
+
+        const auto i(pt.find(attributes_key));
+        if (i != pt.not_found())
+            c.local_attributes(read_attributes(i->second));
+
+        const auto pair(std::make_pair(n.id(), c));
+        const bool inserted(im.concepts().insert(pair).second);
         if (!inserted) {
             BOOST_LOG_SEV(lg, error) << duplicate_element_id << id;
             BOOST_THROW_EXCEPTION(hydration_error(duplicate_element_id + id));

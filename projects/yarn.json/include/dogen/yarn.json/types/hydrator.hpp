@@ -61,6 +61,12 @@ private:
         intermediate_model& im) const;
 
     /**
+     * @brief Reads the stereotypes.
+     */
+    std::vector<std::string>
+    read_stereotypes(const boost::property_tree::ptree& pt) const;
+
+    /**
      * @brief Reads the documentation.
      */
     std::string read_documentation(const boost::property_tree::ptree& pt) const;

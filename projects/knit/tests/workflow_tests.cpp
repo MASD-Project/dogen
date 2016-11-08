@@ -315,8 +315,12 @@ BOOST_AUTO_TEST_CASE(boost_model_generates_expected_code) {
 
 BOOST_AUTO_TEST_CASE(stereotypes_model_generates_expected_code) {
     SETUP_TEST_LOG("stereotypes_model_generates_expected_code");
-    const auto target(yarn_dia::input_stereotypes_dia());
-    BOOST_CHECK(generate_and_diff(target));
+    const auto dia(yarn_dia::input_stereotypes_dia());
+    BOOST_CHECK(generate_and_diff(dia));
+
+    // FIXME: quick hack to test json, but really not ideal.
+    // const auto json(yarn_json::input_stereotypes_json());
+    // BOOST_CHECK(generate_and_diff(json));
 }
 
 BOOST_AUTO_TEST_CASE(package_without_name_model_throws) {

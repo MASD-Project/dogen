@@ -1,0 +1,297 @@
+{
+    "model_name" : "stereotypes",
+    "annotation" : {
+        "annotations.profile" : "dogen"
+    },
+    "elements" : [
+        {
+            "meta_type" : "object",
+            "simple_name" : "value",
+            "attributes" : [
+                {
+                    "simple_name" : "prop_0",
+                    "type" : "int"
+                }
+            ]
+        },
+        {
+            "meta_type" : "object",
+            "simple_name" : "service",
+            "stereotypes" : [ "handcrafted" ],
+            "attributes" : [
+                {
+                    "simple_name" : "prop_0",
+                    "type" : "int"
+                }
+            ]
+        },
+        {
+            "meta_type" : "object",
+            "simple_name" : "some_type",
+            "stereotypes" : [ "handcrafted" ],
+            "annotation" : {
+                "annotations.profile" : "dogen",
+                "quilt.cpp.hash.enabled" : true,
+                "quilt.cpp.hash.overwrite" : false,
+                "quilt.cpp.io.enabled" : true,
+                "quilt.cpp.io.overwrite" : false,
+                "quilt.cpp.odb.enabled" : true,
+                "quilt.cpp.odb.overwrite" : false,
+                "quilt.cpp.serialization.enabled" : true,
+                "quilt.cpp.serialization.overwrite" : false,
+                "quilt.cpp.test_data.enabled" : true,
+                "quilt.cpp.test_data.overwrite" : false,
+                "quilt.cpp.types.forward_declarations.overwrite" : true,
+                "quilt.cpp.serialization.forward_declarations.overwrite" : true
+            },
+            "attributes" : [
+                {
+                    "simple_name" : "prop_0",
+                    "type" : "int"
+                }
+            ]
+        },
+        {
+            "meta_type" : "object",
+            "simple_name" : "fluent",
+            "documentation" : "Tests the fluent scenario across the different types of properties.",
+            "stereotypes" : [ "fluent" ],
+            "attributes" : [
+                {
+                    "simple_name" : "prop_0",
+                    "type" : "unsigned int"
+                },
+                {
+                    "simple_name" : "prop_1",
+                    "type" : "std::string"
+                },
+                {
+                    "simple_name" : "prop_2",
+                    "type" : "value"
+                }
+            ]
+        },
+        {
+            "meta_type" : "object",
+            "simple_name" : "immutable_zero",
+            "documentation" : "Immutable class with no properties.",
+            "stereotypes" : [ "immutable" ]
+        },
+        {
+            "meta_type" : "object",
+            "simple_name" : "immutable_one_primitive",
+            "documentation" : "Immutable class with a primitive property.",
+            "stereotypes" : [ "immutable" ],
+            "attributes" : [
+                {
+                    "simple_name" : "prop_0",
+                    "type" : "bool"
+                }
+            ]
+        },
+        {
+            "meta_type" : "object",
+            "simple_name" : "immutable_one_non_primitive",
+            "documentation" : "Immutable class with one pod property.",
+            "stereotypes" : [ "immutable" ],
+            "attributes" : [
+                {
+                    "simple_name" : "prop_0",
+                    "type" : "std::string"
+                }
+            ]
+        },
+        {
+            "meta_type" : "object",
+            "simple_name" : "immutable_two",
+            "stereotypes" : [ "immutable" ],
+            "attributes" : [
+                {
+                    "simple_name" : "prop_0",
+                    "type" : "bool"
+                },
+                {
+                    "simple_name" : "prop_1",
+                    "type" : "std::string"
+                }
+            ]
+        },
+        {
+            "meta_type" : "object",
+            "simple_name" : "immutable_four",
+            "documentation" : "Immutable class with non-immutable and immutable pods as properties.",
+            "stereotypes" : [ "immutable" ],
+            "attributes" : [
+                {
+                    "simple_name" : "prop_0",
+                    "type" : "bool"
+                },
+                {
+                    "simple_name" : "prop_1",
+                    "type" : "std::string"
+                },
+                {
+                    "simple_name" : "prop_3",
+                    "type" : "value"
+                },
+                {
+                    "simple_name" : "prop_3",
+                    "type" : "immutable_one_primitive"
+                }
+            ]
+        },
+        {
+            "meta_type" : "concept",
+            "simple_name" : "SimpleConcept",
+            "documentation" : "This is an example of a concept.",
+            "attributes" : [
+                {
+                    "simple_name" : "prop_0",
+                    "type" : "int",
+                    "documentation" : "This is a sample property in a concept."
+                },
+                {
+                    "simple_name" : "prop_1",
+                    "type" : "value",
+                    "documentation" : "Prove that includes of types get picked up."
+                }
+            ]
+        },
+        {
+            "meta_type" : "concept",
+            "simple_name" : "BaseConcept",
+            "documentation" : "This is the base concept.",
+            "attributes" : [
+                {
+                    "simple_name" : "prop_0",
+                    "type" : "int",
+                    "documentation" : "First refinement property"
+                }
+            ]
+        },
+        {
+            "meta_type" : "concept",
+            "simple_name" : "BaseConcept2",
+            "documentation" : "Base concept.",
+            "attributes" : [
+                {
+                    "simple_name" : "prop_0",
+                    "type" : "std::string",
+                    "documentation" : "Ensure we're testing header files inclusion."
+                }
+            ]
+        },
+        {
+            "meta_type" : "concept",
+            "simple_name" : "FirstRefinement",
+            "documentation" : "First refinement",
+            "attributes" : [
+                {
+                    "simple_name" : "prop_1",
+                    "type" : "int",
+                    "documentation" : "First refinement property"
+                }
+            ]
+        },
+        {
+            "meta_type" : "concept",
+            "simple_name" : "SecondRefinement",
+            "documentation" : "Second refinement",
+            "attributes" : [
+                {
+                    "simple_name" : "prop_2",
+                    "type" : "int",
+                    "documentation" : "Second refinement property"
+                }
+            ]
+        },
+        {
+            "meta_type" : "concept",
+            "simple_name" : "MultipleRefinements",
+            "documentation" : "Multiple refinements concept",
+            "attributes" : [
+                {
+                    "simple_name" : "prop_3",
+                    "type" : "int",
+                    "documentation" : "Multiple refinements property."
+                }
+            ]
+        },
+        {
+            "meta_type" : "object",
+            "simple_name" : "simple_concept_model",
+            "stereotypes" : [ "SimpleConcept" ],
+            "documentation" : "This class models simple concept.",
+            "attributes" : [
+                {
+                    "simple_name" : "prop_10",
+                    "type" : "int",
+                    "documentation" : "Property that belongs to class."
+                }
+            ]
+        },
+        {
+            "meta_type" : "object",
+            "simple_name" : "base_concept_model",
+            "stereotypes" : [ "BaseConcept" ],
+            "documentation" : "This class models the BaseConcept."
+        },
+        {
+            "meta_type" : "object",
+            "simple_name" : "refinement_concept_model",
+            "stereotypes" : [ "Refinement" ],
+            "documentation" : "This class models the Refinement concept."
+        },
+        {
+            "meta_type" : "object",
+            "simple_name" : "multi_concept_model",
+            "stereotypes" : [ "FirstRefinement", "SecondRefinement" ],
+            "documentation" : "Type that refines more than one concept.",
+            "attributes" : [
+                {
+                    "simple_name" : "prop_10",
+                    "type" : "int",
+                    "documentation" : "Property of class."
+                }
+            ]
+        },
+        {
+            "meta_type" : "object",
+            "simple_name" : "second_refinement_concept_model",
+            "stereotypes" : [ "SecondRefinement" ],
+            "documentation" : "Second refinement model",
+            "attributes" : [
+                {
+                    "simple_name" : "prop_10",
+                    "type" : "int",
+                    "documentation" : "Property of the class itself."
+                }
+            ]
+        },
+        {
+            "meta_type" : "object",
+            "simple_name" : "multiple_refinement_concept_model",
+            "stereotypes" : [ "MultipleRefinements" ],
+            "documentation" : "Model of MultipleRefinements concept.",
+            "attributes" : [
+                {
+                    "simple_name" : "prop_10",
+                    "type" : "int",
+                    "documentation" : "Property of the class itself."
+                }
+            ]
+        },
+        {
+            "meta_type" : "object",
+            "simple_name" : "base_with_concept",
+            "stereotypes" : [ "SecondRefinement" ],
+            "documentation" : "Base class that models a refined concept."
+        },
+        {
+            "meta_type" : "object",
+            "simple_name" : "further_refined",
+            "stereotypes" : [ "MultipleRefinements" ],
+            "documentation" : "Descendant class that models a concept which is a refinement of the concept\nmodeled by the base."
+        }
+    ]
+}
