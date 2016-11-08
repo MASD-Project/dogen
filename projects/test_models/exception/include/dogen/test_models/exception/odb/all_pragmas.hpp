@@ -25,6 +25,4 @@
 #pragma once
 #endif
 
-#include "dogen/test_models/exception/odb/a_class_pragmas.hpp"
-
 #endif

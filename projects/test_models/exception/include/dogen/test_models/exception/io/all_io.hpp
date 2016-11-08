@@ -25,6 +25,4 @@
 #pragma once
 #endif
 
-#include "dogen/test_models/exception/io/a_class_io.hpp"
-
 #endif

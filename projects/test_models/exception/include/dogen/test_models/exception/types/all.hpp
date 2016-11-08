@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen/test_models/exception/types/a_class.hpp"
 #include "dogen/test_models/exception/types/my_error.hpp"
 #include "dogen/test_models/exception/types/pkg/catastrophic_error.hpp"
 

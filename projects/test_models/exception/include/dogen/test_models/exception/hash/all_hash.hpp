@@ -25,6 +25,4 @@
 #pragma once
 #endif
 
-#include "dogen/test_models/exception/hash/a_class_hash.hpp"
-
 #endif

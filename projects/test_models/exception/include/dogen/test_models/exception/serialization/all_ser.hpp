@@ -25,6 +25,4 @@
 #pragma once
 #endif
 
-#include "dogen/test_models/exception/serialization/a_class_ser.hpp"
-
 #endif

@@ -12,21 +12,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-11-08 Tue 12:50]
+#+CAPTION: Clock summary at [2016-11-08 Tue 14:07]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *13:13* |       |      | 100.0 |
+| *Total time*                                                                | *13:39* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 13:13   |       |      | 100.0 |
-| Active                                                                      |         | 13:13 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:10 |   1.3 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:27 |   3.4 |
-| COMPLETED Tidy-up README file                                               |         |       | 1:07 |   8.4 |
-| COMPLETED Sort out PIC/PIE linking problems                                 |         |       | 1:55 |  14.5 |
-| COMPLETED Try to fix BinTray problems                                       |         |       | 1:09 |   8.7 |
-| COMPLETED Supply model references via meta-data rather than command line    |         |       | 3:43 |  28.1 |
-| STARTED Make JSON yarn a fully supported frontend                           |         |       | 4:42 |  35.6 |
+| Stories                                                                     | 13:39   |       |      | 100.0 |
+| Active                                                                      |         | 13:39 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:10 |   1.2 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:27 |   3.3 |
+| COMPLETED Tidy-up README file                                               |         |       | 1:07 |   8.2 |
+| COMPLETED Sort out PIC/PIE linking problems                                 |         |       | 1:55 |  14.0 |
+| COMPLETED Try to fix BinTray problems                                       |         |       | 1:09 |   8.4 |
+| COMPLETED Supply model references via meta-data rather than command line    |         |       | 3:43 |  27.2 |
+| STARTED Make JSON yarn a fully supported frontend                           |         |       | 5:08 |  37.6 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -201,6 +201,8 @@ no longer need to pass in external module paths for references, which
 is much cleaner.
 
 *** STARTED Make JSON yarn a fully supported frontend                 :story:
+    CLOCK: [2016-11-08 Tue 14:03]--[2016-11-08 Tue 14:07] =>  0:04
+    CLOCK: [2016-11-08 Tue 13:40]--[2016-11-08 Tue 14:02] =>  0:22
     CLOCK: [2016-11-08 Tue 12:40]--[2016-11-08 Tue 12:50] =>  0:10
     CLOCK: [2016-11-08 Tue 11:46]--[2016-11-08 Tue 12:05] =>  0:19
     CLOCK: [2016-11-08 Tue 11:07]--[2016-11-08 Tue 11:45] =>  0:38
