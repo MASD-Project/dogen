@@ -1,12 +1,15 @@
 {
     "model_name" : "classes_without_package",
+    "external_modules" : "dogen::test_models",
     "annotation" : {
         "annotations.profile" : "dogen"
     },
     "elements" : [
         {
+            "name" : {
+                "simple_name" : "class_1"
+            },
             "meta_type" : "object",
-            "simple_name" : "class_1",
             "attributes" : [
                 {
                     "simple_name" : "prop_0",
@@ -15,8 +18,10 @@
             ]
         },
         {
+            "name" : {
+                "simple_name" : "class_2"
+            },
             "meta_type" : "object",
-            "simple_name" : "class_2",
             "attributes" : [
                 {
                     "simple_name" : "prop_0",
@@ -25,8 +30,10 @@
             ]
         },
         {
+            "name" : {
+                "simple_name" : "class_3"
+            },
             "meta_type" : "object",
-            "simple_name" : "class_3",
             "attributes" : [
                 {
                     "simple_name" : "prop_0",
@@ -35,8 +42,10 @@
             ]
         },
         {
+            "name" : {
+                "simple_name" : "class_4"
+            },
             "meta_type" : "object",
-            "simple_name" : "class_4",
             "attributes" : [
                 {
                     "simple_name" : "prop_0",
@@ -45,8 +54,10 @@
             ]
         },
         {
+            "name" : {
+                "simple_name" : "class_5"
+            },
             "meta_type" : "object",
-            "simple_name" : "class_5",
             "attributes" : [
                 {
                     "simple_name" : "prop_0",

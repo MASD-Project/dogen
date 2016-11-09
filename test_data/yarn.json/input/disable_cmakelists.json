@@ -1,13 +1,16 @@
 {
     "model_name" : "disable_cmakelists",
+    "external_modules" : "dogen::test_models",
     "annotation" : {
         "annotations.profile" : "dogen.disable_cmake"
     },
     "elements" : [
         {
+            "name" : {
+                "simple_name" : "first_class",
+                "internal_modules" : "package1"
+            },
             "meta_type" : "object",
-            "simple_name" : "first_class",
-            "internal_modules" : [ "package1" ],
             "attributes" : [
                 {
                     "simple_name" : "public_attribute",

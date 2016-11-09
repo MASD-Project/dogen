@@ -1,13 +1,16 @@
 {
     "model_name" : "class_without_attributes",
+    "external_modules" : "dogen::test_models",
     "annotation" : {
         "annotations.profile" : "dogen"
     },
     "elements" : [
         {
-            "meta_type" : "object",
-            "simple_name" : "class_1",
-            "internal_modules" : [ "package_1" ]
+            "name" : {
+                "simple_name" : "class_1",
+                "internal_modules" : "package_1"
+            },
+            "meta_type" : "object"
         }
     ]
 }

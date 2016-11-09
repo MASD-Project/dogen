@@ -1,13 +1,16 @@
 {
     "model_name" : "enable_facet_hash",
+    "external_modules" : "dogen::test_models",
     "annotation" : {
         "annotations.profile" : "dogen.enable_cmake_types_hash"
     },
     "elements" : [
         {
+            "name" : {
+                "simple_name" : "first_class",
+                "internal_modules" : "package1"
+            },
             "meta_type" : "object",
-            "simple_name" : "first_class",
-            "internal_modules" : [ "package1" ],
             "attributes" : [
                 {
                     "simple_name" : "public_attribute",

@@ -1,12 +1,15 @@
 {
     "model_name" : "enumeration",
+    "external_modules" : "dogen::test_models",
     "annotation" : {
         "annotations.profile" : "dogen"
     },
     "elements" : [
         {
+            "name" : {
+                "simple_name" : "book_types"
+            },
             "meta_type" : "enumeration",
-            "simple_name" : "book_types",
             "documentation" : "this is a brief comment\n\nthis is a long comment",
             "enumerators" : [
                 { "simple_name" : "great" },
@@ -15,8 +18,10 @@
             ]
         },
         {
+            "name" : {
+                "simple_name" : "colour_types"
+            },
             "meta_type" : "enumeration",
-            "simple_name" : "colour_types",
             "enumerators" : [
                 {
                     "simple_name" : "red",
@@ -36,8 +41,10 @@
             ]
         },
         {
+            "name" : {
+                "simple_name" : "a_class"
+            },
             "meta_type" : "object",
-            "simple_name" : "a_class",
             "attributes" : [
                 {
                     "simple_name" : "colour_type",
@@ -54,9 +61,11 @@
             ]
         },
         {
+            "name" : {
+                "simple_name" : "shape_types",
+                "internal_modules" : "pkg1"
+            },
             "meta_type" : "enumeration",
-            "simple_name" : "shape_types",
-            "internal_modules" : [ "pkg1" ],
             "enumerators" : [
                 {
                     "simple_name" : "triangle",

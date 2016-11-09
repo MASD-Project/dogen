@@ -1,13 +1,16 @@
 {
     "model_name" : "comments",
+    "external_modules" : "dogen::test_models",
     "documentation" : "This model demonstrates the use of comments in dogen.\n\nThis comment will be applied to the model namespace itself.",
     "annotation" : {
         "annotations.profile" : "dogen"
     },
     "elements" : [
         {
+            "name" : {
+                "simple_name" : "one_line"
+            },
             "meta_type" : "object",
-            "simple_name" : "one_line",
             "documentation" : "this is the brief comment",
             "attributes" : [
                 {
@@ -28,19 +31,25 @@
             ]
         },
         {
+            "name" : {
+                "simple_name" : "multi_line"
+            },
             "meta_type" : "object",
-            "simple_name" : "multi_line",
             "documentation" : "first line\n\nsecond line\nthird line with \"quote\""
         },
         {
+            "name" : {
+                "simple_name" : "package"
+            },
             "meta_type" : "module",
-            "simple_name" : "package",
             "documentation" : "package"
         },
         {
+            "name" : {
+                "simple_name" : "package2",
+                "internal_modules" : "package"
+            },
             "meta_type" : "module",
-            "simple_name" : "package2",
-            "internal_modules" : [ "package" ],
             "documentation" : "package2"
         }
     ]

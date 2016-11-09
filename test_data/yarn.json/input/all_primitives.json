@@ -1,12 +1,15 @@
 {
     "model_name" : "all_primitives",
+    "external_modules" : "dogen::test_models",
     "annotation" : {
         "annotations.profile" : "dogen"
     },
     "elements" : [
         {
+            "name" : {
+                "simple_name" : "a_class"
+            },
             "meta_type" : "object",
-            "simple_name" : "a_class",
             "attributes" : [
                 {
                     "simple_name" : "bool_property",

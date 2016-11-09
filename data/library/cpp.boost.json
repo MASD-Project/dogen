@@ -6,8 +6,10 @@
     },
     "elements" : [
         {
+            "name" : {
+                "simple_name" : "shared_ptr"
+            },
             "meta_type" : "object",
-            "simple_name" : "shared_ptr",
             "object_type" : "smart_pointer",
             "annotation" : {
                 "quilt.cpp.helper.family" : "SmartPointer",
@@ -22,8 +24,10 @@
             }
         },
         {
+            "name" : {
+                "simple_name" : "weak_ptr"
+            },
             "meta_type" : "object",
-            "simple_name" : "weak_ptr",
             "object_type" : "smart_pointer",
             "annotation" : {
                 "quilt.cpp.helper.family" : "SmartPointer",
@@ -38,8 +42,10 @@
             }
         },
         {
+            "name" : {
+                "simple_name" : "scoped_ptr"
+            },
             "meta_type" : "object",
-            "simple_name" : "scoped_ptr",
             "object_type" : "smart_pointer",
             "annotation" : {
                 "quilt.cpp.helper.family" : "SmartPointer",
@@ -54,8 +60,10 @@
             }
         },
         {
+            "name" : {
+                "simple_name" : "optional"
+            },
             "meta_type" : "object",
-            "simple_name" : "optional",
             "annotation" : {
                 "quilt.cpp.helper.family" : "Optional",
                 "yarn.type_parameters.count" : 1,
@@ -70,8 +78,10 @@
             }
         },
         {
+            "name" : {
+                "simple_name" : "variant"
+            },
             "meta_type" : "object",
-            "simple_name" : "variant",
             "annotation" : {
                 "quilt.cpp.helper.family" : "BoostVariant",
                 "yarn.type_parameters.variable_number_of_parameters" : true,
@@ -85,41 +95,41 @@
             }
         },
         {
+            "name" : {
+                "simple_name" : "io_service",
+                "internal_modules" : "asio"
+            },
             "meta_type" : "object",
-            "simple_name" : "io_service",
-            "internal_modules" : [
-                "asio"
-            ],
             "annotation" : {
                 "quilt.cpp.types.class_header.inclusion_directive" : "<boost/asio/io_service.hpp>"
             }
         },
         {
+            "name" : {
+                "simple_name" : "socket",
+                "internal_modules" : "asio::ip::tcp"
+            },
             "meta_type" : "object",
-            "simple_name" : "socket",
-            "internal_modules" : [
-                "asio", "ip", "tcp"
-            ],
             "annotation" : {
                 "quilt.cpp.types.class_header.inclusion_directive" : "<boost/asio/ip/tcp.hpp>"
             }
         },
         {
+            "name" : {
+                "simple_name" : "acceptor",
+                "internal_modules" : "asio::ip::tcp"
+            },
             "meta_type" : "object",
-            "simple_name" : "acceptor",
-            "internal_modules" : [
-                "asio", "ip", "tcp"
-            ],
             "annotation" : {
                 "quilt.cpp.types.class_header.inclusion_directive" : "<boost/asio/ip/tcp.hpp>"
             }
         },
         {
+            "name" : {
+                "simple_name" : "path",
+                "internal_modules" : "filesystem"
+            },
             "meta_type" : "object",
-            "simple_name" : "path",
-            "internal_modules" : [
-                "filesystem"
-            ],
             "annotation" : {
                 "quilt.cpp.helper.family" : "BoostPath",
                 "quilt.cpp.streaming.string_conversion_method" : "generic_string()",
@@ -133,11 +143,11 @@
             }
         },
         {
+            "name" : {
+                "simple_name" : "date",
+                "internal_modules" : "gregorian"
+            },
             "meta_type" : "object",
-            "simple_name" : "date",
-            "internal_modules" : [
-                "gregorian"
-            ],
             "annotation" : {
                 "quilt.cpp.helper.family" : "BoostDate",
                 "quilt.cpp.streaming.requires_quoting" : true,
@@ -151,11 +161,11 @@
             }
         },
         {
+            "name" : {
+                "simple_name" : "ptime",
+                "internal_modules" : "posix_time"
+            },
             "meta_type" : "object",
-            "simple_name" : "ptime",
-            "internal_modules" : [
-                "posix_time"
-            ],
             "annotation" : {
                 "quilt.cpp.helper.family" : "BoostPTime",
                 "quilt.cpp.streaming.requires_quoting" : true,
@@ -169,11 +179,11 @@
             }
         },
         {
+            "name" : {
+                "simple_name" : "time_duration",
+                "internal_modules" : "posix_time"
+            },
             "meta_type" : "object",
-            "simple_name" : "time_duration",
-            "internal_modules" : [
-                "posix_time"
-            ],
             "annotation" : {
                 "quilt.cpp.helper.family" : "BoostTimeDuration",
                 "quilt.cpp.streaming.requires_quoting" : true,
@@ -188,11 +198,11 @@
             }
         },
         {
+            "name" : {
+                "simple_name" : "ptree",
+                "internal_modules" : "property_tree"
+            },
             "meta_type" : "object",
-            "simple_name" : "ptree",
-            "internal_modules" : [
-                "property_tree"
-            ],
             "annotation" : {
                 "quilt.cpp.helper.family" : "BoostPTree",
                 "quilt.cpp.aspect.requires_manual_move_constructor" : true,

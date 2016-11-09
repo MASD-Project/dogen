@@ -1,12 +1,15 @@
 {
     "model_name" : "stereotypes",
+    "external_modules" : "dogen::test_models",
     "annotation" : {
         "annotations.profile" : "dogen"
     },
     "elements" : [
         {
+            "name" : {
+                "simple_name" : "value"
+            },
             "meta_type" : "object",
-            "simple_name" : "value",
             "attributes" : [
                 {
                     "simple_name" : "prop_0",
@@ -15,8 +18,10 @@
             ]
         },
         {
+            "name" : {
+                "simple_name" : "service"
+            },
             "meta_type" : "object",
-            "simple_name" : "service",
             "stereotypes" : [ "handcrafted" ],
             "attributes" : [
                 {
@@ -26,8 +31,10 @@
             ]
         },
         {
+            "name" : {
+                "simple_name" : "some_type"
+            },
             "meta_type" : "object",
-            "simple_name" : "some_type",
             "stereotypes" : [ "handcrafted" ],
             "annotation" : {
                 "annotations.profile" : "dogen",
@@ -52,8 +59,10 @@
             ]
         },
         {
+            "name" : {
+                "simple_name" : "fluent"
+            },
             "meta_type" : "object",
-            "simple_name" : "fluent",
             "documentation" : "Tests the fluent scenario across the different types of properties.",
             "stereotypes" : [ "fluent" ],
             "attributes" : [
@@ -72,14 +81,18 @@
             ]
         },
         {
+            "name" : {
+                "simple_name" : "immutable_zero"
+            },
             "meta_type" : "object",
-            "simple_name" : "immutable_zero",
             "documentation" : "Immutable class with no properties.",
             "stereotypes" : [ "immutable" ]
         },
         {
+            "name" : {
+                "simple_name" : "immutable_one_primitive"
+            },
             "meta_type" : "object",
-            "simple_name" : "immutable_one_primitive",
             "documentation" : "Immutable class with a primitive property.",
             "stereotypes" : [ "immutable" ],
             "attributes" : [
@@ -90,8 +103,10 @@
             ]
         },
         {
+            "name" : {
+                "simple_name" : "immutable_one_non_primitive"
+            },
             "meta_type" : "object",
-            "simple_name" : "immutable_one_non_primitive",
             "documentation" : "Immutable class with one pod property.",
             "stereotypes" : [ "immutable" ],
             "attributes" : [
@@ -102,8 +117,10 @@
             ]
         },
         {
+            "name" : {
+                "simple_name" : "immutable_two"
+            },
             "meta_type" : "object",
-            "simple_name" : "immutable_two",
             "stereotypes" : [ "immutable" ],
             "attributes" : [
                 {
@@ -117,8 +134,10 @@
             ]
         },
         {
+            "name" : {
+                "simple_name" : "immutable_four"
+            },
             "meta_type" : "object",
-            "simple_name" : "immutable_four",
             "documentation" : "Immutable class with non-immutable and immutable pods as properties.",
             "stereotypes" : [ "immutable" ],
             "attributes" : [
@@ -141,8 +160,10 @@
             ]
         },
         {
+            "name" : {
+                "simple_name" : "SimpleConcept"
+            },
             "meta_type" : "concept",
-            "simple_name" : "SimpleConcept",
             "documentation" : "This is an example of a concept.",
             "attributes" : [
                 {
@@ -158,8 +179,10 @@
             ]
         },
         {
+            "name" : {
+                "simple_name" : "BaseConcept"
+            },
             "meta_type" : "concept",
-            "simple_name" : "BaseConcept",
             "documentation" : "This is the base concept.",
             "attributes" : [
                 {
@@ -170,8 +193,10 @@
             ]
         },
         {
+            "name" : {
+                "simple_name" : "BaseConcept2"
+            },
             "meta_type" : "concept",
-            "simple_name" : "BaseConcept2",
             "documentation" : "Base concept.",
             "attributes" : [
                 {
@@ -182,8 +207,10 @@
             ]
         },
         {
+            "name" : {
+                "simple_name" : "FirstRefinement"
+            },
             "meta_type" : "concept",
-            "simple_name" : "FirstRefinement",
             "documentation" : "First refinement",
             "attributes" : [
                 {
@@ -194,8 +221,10 @@
             ]
         },
         {
+            "name" : {
+                "simple_name" : "SecondRefinement"
+            },
             "meta_type" : "concept",
-            "simple_name" : "SecondRefinement",
             "documentation" : "Second refinement",
             "attributes" : [
                 {
@@ -206,8 +235,10 @@
             ]
         },
         {
+            "name" : {
+                "simple_name" : "MultipleRefinements"
+            },
             "meta_type" : "concept",
-            "simple_name" : "MultipleRefinements",
             "documentation" : "Multiple refinements concept",
             "attributes" : [
                 {
@@ -218,8 +249,10 @@
             ]
         },
         {
+            "name" : {
+                "simple_name" : "simple_concept_model"
+            },
             "meta_type" : "object",
-            "simple_name" : "simple_concept_model",
             "stereotypes" : [ "SimpleConcept" ],
             "documentation" : "This class models simple concept.",
             "attributes" : [
@@ -231,20 +264,26 @@
             ]
         },
         {
+            "name" : {
+                "simple_name" : "base_concept_model"
+            },
             "meta_type" : "object",
-            "simple_name" : "base_concept_model",
             "stereotypes" : [ "BaseConcept" ],
             "documentation" : "This class models the BaseConcept."
         },
         {
+            "name" : {
+                "simple_name" : "refinement_concept_model"
+            },
             "meta_type" : "object",
-            "simple_name" : "refinement_concept_model",
             "stereotypes" : [ "Refinement" ],
             "documentation" : "This class models the Refinement concept."
         },
         {
+            "name" : {
+                "simple_name" : "multi_concept_model"
+            },
             "meta_type" : "object",
-            "simple_name" : "multi_concept_model",
             "stereotypes" : [ "FirstRefinement", "SecondRefinement" ],
             "documentation" : "Type that refines more than one concept.",
             "attributes" : [
@@ -256,8 +295,10 @@
             ]
         },
         {
+            "name" : {
+                "simple_name" : "second_refinement_concept_model"
+            },
             "meta_type" : "object",
-            "simple_name" : "second_refinement_concept_model",
             "stereotypes" : [ "SecondRefinement" ],
             "documentation" : "Second refinement model",
             "attributes" : [
@@ -269,8 +310,10 @@
             ]
         },
         {
+            "name" : {
+                "simple_name" : "multiple_refinement_concept_model"
+            },
             "meta_type" : "object",
-            "simple_name" : "multiple_refinement_concept_model",
             "stereotypes" : [ "MultipleRefinements" ],
             "documentation" : "Model of MultipleRefinements concept.",
             "attributes" : [
@@ -282,14 +325,18 @@
             ]
         },
         {
+            "name" : {
+                "simple_name" : "base_with_concept"
+            },
             "meta_type" : "object",
-            "simple_name" : "base_with_concept",
             "stereotypes" : [ "SecondRefinement" ],
             "documentation" : "Base class that models a refined concept."
         },
         {
+            "name" : {
+                "simple_name" : "further_refined"
+            },
             "meta_type" : "object",
-            "simple_name" : "further_refined",
             "stereotypes" : [ "MultipleRefinements" ],
             "documentation" : "Descendant class that models a concept which is a refinement of the concept\nmodeled by the base."
         }

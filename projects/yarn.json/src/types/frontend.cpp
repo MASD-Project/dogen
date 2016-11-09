@@ -50,7 +50,7 @@ std::list<std::string> frontend::supported_extensions() const {
 
 yarn::intermediate_model frontend::execute(const yarn::descriptor& d) {
     yarn::json::hydrator h;
-    return h.hydrate(d.path(), d.is_target(), d.external_modules());
+    return h.hydrate(d.path(), d.is_target());
 }
 
 } } }

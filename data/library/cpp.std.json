@@ -6,8 +6,10 @@
     },
     "elements" : [
         {
+            "name" : {
+                "simple_name" : "int8_t"
+            },
             "meta_type" : "primitive",
-            "simple_name" : "int8_t",
             "annotation" : {
                 "quilt.cpp.helper.family" : "Character",
                 "quilt.cpp.streaming.requires_quoting" : true,
@@ -21,8 +23,10 @@
             }
         },
         {
+            "name" : {
+                "simple_name" : "int16_t"
+            },
             "meta_type" : "primitive",
-            "simple_name" : "int16_t",
             "annotation" : {
                 "quilt.cpp.helper.family" : "Number",
                 "quilt.cpp.aspect.requires_manual_default_constructor" : true,
@@ -35,8 +39,10 @@
             }
         },
         {
+            "name" : {
+                "simple_name" : "int32_t"
+            },
             "meta_type" : "primitive",
-            "simple_name" : "int32_t",
             "annotation" : {
                 "quilt.cpp.helper.family" : "Number",
                 "quilt.cpp.aspect.requires_manual_default_constructor" : true,
@@ -49,8 +55,10 @@
             }
         },
         {
+            "name" : {
+                "simple_name" : "int64_t"
+            },
             "meta_type" : "primitive",
-            "simple_name" : "int64_t",
             "annotation" : {
                 "quilt.cpp.helper.family" : "Number",
                 "quilt.cpp.aspect.requires_manual_default_constructor" : true,
@@ -63,8 +71,10 @@
             }
         },
         {
+            "name" : {
+                "simple_name" : "uint8_t"
+            },
             "meta_type" : "primitive",
-            "simple_name" : "uint8_t",
             "annotation" : {
                 "quilt.cpp.helper.family" : "Character",
                 "quilt.cpp.streaming.requires_quoting" : true,
@@ -78,8 +88,10 @@
             }
         },
         {
+            "name" : {
+                "simple_name" : "uint16_t"
+            },
             "meta_type" : "primitive",
-            "simple_name" : "uint16_t",
             "annotation" : {
                 "quilt.cpp.helper.family" : "Number",
                 "quilt.cpp.aspect.requires_manual_default_constructor" : true,
@@ -92,8 +104,10 @@
             }
         },
         {
+            "name" : {
+                "simple_name" : "uint32_t"
+            },
             "meta_type" : "primitive",
-            "simple_name" : "uint32_t",
             "annotation" : {
                 "quilt.cpp.helper.family" : "Number",
                 "quilt.cpp.aspect.requires_manual_default_constructor" : true,
@@ -106,8 +120,10 @@
             }
         },
         {
+            "name" : {
+                "simple_name" : "uint64_t"
+            },
             "meta_type" : "primitive",
-            "simple_name" : "uint64_t",
             "annotation" : {
                 "quilt.cpp.helper.family" : "Number",
                 "quilt.cpp.aspect.requires_manual_default_constructor" : true,
@@ -120,8 +136,10 @@
             }
         },
         {
+            "name" : {
+                "simple_name" : "string"
+            },
             "meta_type" : "object",
-            "simple_name" : "string",
             "annotation" : {
                 "quilt.cpp.helper.family" : "String",
                 "quilt.cpp.streaming.remove_unprintable_characters" : true,
@@ -134,8 +152,10 @@
             }
         },
         {
+            "name" : {
+                "simple_name" : "vector"
+            },
             "meta_type" : "object",
-            "simple_name" : "vector",
             "object_type" : "sequence_container",
             "annotation" : {
                 "quilt.cpp.helper.family" : "SequenceContainer",
@@ -149,8 +169,10 @@
             }
         },
         {
+            "name" : {
+                "simple_name" : "deque"
+            },
             "meta_type" : "object",
-            "simple_name" : "deque",
             "object_type" : "sequence_container",
             "annotation" : {
                 "quilt.cpp.helper.family" : "SequenceContainer",
@@ -164,8 +186,10 @@
             }
         },
         {
+            "name" : {
+                "simple_name" : "array"
+            },
             "meta_type" : "object",
-            "simple_name" : "array",
             "object_type" : "sequence_container",
             "annotation" : {
                 "quilt.cpp.helper.family" : "SequenceContainer",
@@ -178,8 +202,10 @@
             }
         },
         {
+            "name" : {
+                "simple_name" : "list"
+            },
             "meta_type" : "object",
-            "simple_name" : "list",
             "object_type" : "sequence_container",
             "annotation" : {
                 "quilt.cpp.helper.family" : "SequenceContainer",
@@ -193,8 +219,10 @@
             }
         },
         {
+            "name" : {
+                "simple_name" : "forward_list"
+            },
             "meta_type" : "object",
-            "simple_name" : "forward_list",
             "object_type" : "sequence_container",
             "annotation" : {
                 "quilt.cpp.helper.family" : "SequenceContainer",
@@ -207,8 +235,10 @@
             }
         },
         {
+            "name" : {
+                "simple_name" : "set"
+            },
             "meta_type" : "object",
-            "simple_name" : "set",
             "object_type" : "associative_container",
             "annotation" : {
                 "quilt.cpp.helper.family" : "AssociativeContainer",
@@ -222,8 +252,10 @@
             }
         },
         {
+            "name" : {
+                "simple_name" : "multiset"
+            },
             "meta_type" : "object",
-            "simple_name" : "multiset",
             "object_type" : "associative_container",
             "annotation" : {
                 "quilt.cpp.helper.family" : "SequenceContainer",
@@ -237,8 +269,10 @@
             }
         },
         {
+            "name" : {
+                "simple_name" : "unordered_set"
+            },
             "meta_type" : "object",
-            "simple_name" : "unordered_set",
             "object_type" : "associative_container",
             "annotation" : {
                 "quilt.cpp.helper.family" : "AssociativeContainer",
@@ -252,8 +286,10 @@
             }
         },
         {
+            "name" : {
+                "simple_name" : "map"
+            },
             "meta_type" : "object",
-            "simple_name" : "map",
             "object_type" : "associative_container",
             "annotation" : {
                 "quilt.cpp.helper.family" : "AssociativeContainer",
@@ -267,8 +303,10 @@
             }
         },
         {
+            "name" : {
+                "simple_name" : "multimap"
+            },
             "meta_type" : "object",
-            "simple_name" : "multimap",
             "object_type" : "associative_container",
             "annotation" : {
                 "quilt.cpp.helper.family" : "AssociativeContainer",
@@ -282,8 +320,10 @@
             }
         },
         {
+            "name" : {
+                "simple_name" : "unordered_map"
+            },
             "meta_type" : "object",
-            "simple_name" : "unordered_map",
             "object_type" : "associative_container",
             "annotation" : {
                 "quilt.cpp.helper.family" : "AssociativeContainer",
@@ -297,8 +337,10 @@
             }
         },
         {
+            "name" : {
+                "simple_name" : "pair"
+            },
             "meta_type" : "object",
-            "simple_name" : "pair",
             "annotation" : {
                 "quilt.cpp.helper.family" : "Pair",
                 "yarn.type_parameters.count" : 2,
@@ -311,8 +353,10 @@
             }
         },
         {
+            "name" : {
+                "simple_name" : "shared_ptr"
+            },
             "meta_type" : "object",
-            "simple_name" : "shared_ptr",
             "object_type" : "smart_pointer",
             "annotation" : {
                 "quilt.cpp.helper.family" : "SmartPointer",
@@ -326,8 +370,10 @@
             }
         },
         {
+            "name" : {
+                "simple_name" : "weak_ptr"
+            },
             "meta_type" : "object",
-            "simple_name" : "weak_ptr",
             "object_type" : "smart_pointer",
             "annotation" : {
                 "quilt.cpp.helper.family" : "SmartPointer",
@@ -341,8 +387,10 @@
             }
         },
         {
+            "name" : {
+                "simple_name" : "unique_ptr"
+            },
             "meta_type" : "object",
-            "simple_name" : "unique_ptr",
             "object_type" : "smart_pointer",
             "annotation" : {
                 "quilt.cpp.helper.family" : "SmartPointer",
@@ -356,8 +404,10 @@
             }
         },
         {
+            "name" : {
+                "simple_name" : "function"
+            },
             "meta_type" : "object",
-            "simple_name" : "function",
             "annotation" : {
                 "quilt.cpp.types.class_header.inclusion_directive" : "<functional>",
                 "quilt.cpp.hash.class_header.inclusion_required" : false,
@@ -367,8 +417,10 @@
             }
         },
         {
+            "name" : {
+                "simple_name" : "optional"
+            },
             "meta_type" : "object",
-            "simple_name" : "optional",
             "annotation" : {
                 "quilt.cpp.helper.family" : "Optional",
                 "yarn.type_parameters.count" : 1,
@@ -380,8 +432,10 @@
             }
         },
         {
+            "name" : {
+                "simple_name" : "ostream"
+            },
             "meta_type" : "object",
-            "simple_name" : "ostream",
             "annotation" : {
                 "quilt.cpp.types.class_header.inclusion_directive" : "<ostream>",
                 "quilt.cpp.hash.class_header.inclusion_required" : false,
@@ -391,8 +445,10 @@
             }
         },
         {
+            "name" : {
+                "simple_name" : "ostringstream"
+            },
             "meta_type" : "object",
-            "simple_name" : "ostringstream",
             "annotation" : {
                 "quilt.cpp.types.class_header.inclusion_directive" : "<sstream>",
                 "quilt.cpp.hash.class_header.inclusion_required" : false,
@@ -400,8 +456,10 @@
             }
         },
         {
+            "name" : {
+                "simple_name" : "type_index"
+            },
             "meta_type" : "object",
-            "simple_name" : "type_index",
             "annotation" : {
                 "quilt.cpp.types.class_header.inclusion_directive" : "<type_index>",
                 "quilt.cpp.hash.class_header.inclusion_required" : false,

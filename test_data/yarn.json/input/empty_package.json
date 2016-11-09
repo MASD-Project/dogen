@@ -1,9 +1,12 @@
 {
     "model_name" : "empty_package",
+    "external_modules" : "dogen::test_models",
     "elements" : [
         {
-            "meta_type" : "module",
-            "simple_name" : "package_1"
+            "name" : {
+                "simple_name" : "package_1"
+            },
+            "meta_type" : "module"
         }
     ]
 }

@@ -45,6 +45,7 @@ const std::string empty;
 const std::string is_default_enumeration_type_key(
     "is_default_enumeration_type");
 const std::string in_global_module_key("in_global_module");
+const std::string name_key("name");
 const std::string model_name_key("model_name");
 const std::string bool_true("true");
 const std::string bool_false("false");
@@ -65,6 +66,7 @@ const std::string meta_type_concept_value("concept");
 
 const std::string type_key("type");
 const std::string simple_name_key("simple_name");
+const std::string external_modules_key("external_modules");
 const std::string internal_modules_key("internal_modules");
 const std::string annotations_key("annotation");
 
@@ -83,6 +85,7 @@ const std::string missing_module("Could not find module: ");
 const std::string failed_to_open_file("Failed to open file: ");
 const std::string invalid_object_type("Invalid or unsupported object type: ");
 const std::string duplicate_element_id("Duplicate element id: ");
+const std::string missing_name("JSON element name is mandatory.");
 
 }
 
@@ -143,6 +146,31 @@ read_stereotypes(const boost::property_tree::ptree& pt) const {
     return r;
 }
 
+name hydrator::read_name(const boost::property_tree::ptree& pt,
+    const name& model_name, const bool in_global_module) const {
+
+    /*
+     * If we're not in the global module, we must be be in the
+     * model. Note that we only handle element name's here, not the
+     * model name itself.
+     */
+    yarn::name_builder b;
+    if (!in_global_module) {
+        b.model_name(model_name.location());
+        b.external_modules(model_name.location().external_modules());
+    }
+
+    const auto sn(pt.get<std::string>(simple_name_key));
+    b.simple_name(sn);
+
+    const auto im(pt.get<std::string>(internal_modules_key, empty));
+    if (!im.empty())
+        b.internal_modules(im);
+
+    const auto r(b.build());
+    return r;
+}
+
 std::string
 hydrator::read_documentation(const boost::property_tree::ptree& pt) const {
     const auto opt(pt.get_optional<std::string>(documentation_key));
@@ -193,32 +221,16 @@ read_attributes(const boost::property_tree::ptree& pt) const {
 }
 
 void hydrator::read_element(const boost::property_tree::ptree& pt,
-    yarn::intermediate_model& im, const std::string& external_modules) const {
+    yarn::intermediate_model& im) const {
 
-    yarn::name_builder b;
     const auto in_global_module(pt.get(in_global_module_key, false));
-    if (!in_global_module)
-        b.model_name(im.name().location());
-
-    const auto simple_name_value(pt.get<std::string>(simple_name_key));
-    b.simple_name(simple_name_value);
-    b.external_modules(external_modules);
-
-    const auto i(pt.find(internal_modules_key));
-    if (i != pt.not_found()) {
-        std::list<std::string> ipp;
-        for (auto& item : pt.get_child(internal_modules_key))
-            ipp.push_back(item.second.get_value<std::string>());
-
-        if (!ipp.empty())
-            b.internal_modules(ipp);
-        else {
-            BOOST_LOG_SEV(lg, debug) << "Ignoring empty internal module path. "
-                                     << "Type: " << simple_name_value;
-        }
+    const auto i(pt.find(name_key));
+    if (i == pt.not_found()) {
+        BOOST_LOG_SEV(lg, error) << missing_name;
+        BOOST_THROW_EXCEPTION(hydration_error(missing_name));
     }
 
-    yarn::name n(b.build());
+    yarn::name n(read_name(i->second, im.name(), in_global_module));
     const auto id(n.id());
 
     const auto lambda([&](yarn::element& e) {
@@ -315,15 +327,16 @@ void hydrator::read_element(const boost::property_tree::ptree& pt,
     }
 }
 
-yarn::intermediate_model hydrator::read_stream(std::istream& s,
-    const bool is_target, const std::string& external_modules) const {
+yarn::intermediate_model
+hydrator::read_stream(std::istream& s, const bool is_target) const {
     yarn::intermediate_model r;
     boost::property_tree::ptree pt;
     read_json(s, pt);
 
     yarn::name_factory nf;
-    const auto model_name_value(pt.get<std::string>(model_name_key));
-    r.name(nf.build_model_name(model_name_value, external_modules));
+    const auto mn(pt.get<std::string>(model_name_key));
+    const auto em(pt.get<std::string>(external_modules_key, empty));
+    r.name(nf.build_model_name(mn, em));
     BOOST_LOG_SEV(lg, debug) << "Processing model: " << r.name().id();
 
     const auto tg(origin_types::target);
@@ -346,7 +359,7 @@ yarn::intermediate_model hydrator::read_stream(std::istream& s,
         BOOST_LOG_SEV(lg, warn) << "Did not find any elements in model";
     } else {
         for (auto j(i->second.begin()); j != i->second.end(); ++j)
-            read_element(j->second, r, external_modules);
+            read_element(j->second, r);
     }
 
     return r;
@@ -369,12 +382,12 @@ to_object_type(const boost::optional<std::string>& s) const {
     BOOST_THROW_EXCEPTION(hydration_error(invalid_object_type + ot));
 }
 
-intermediate_model hydrator::hydrate(std::istream& s, const bool is_target,
-    const std::string& external_modules) const {
+intermediate_model
+hydrator::hydrate(std::istream& s, const bool is_target) const {
     BOOST_LOG_SEV(lg, debug) << "Parsing JSON stream.";
     using namespace boost::property_tree;
     try {
-        auto r(read_stream(s, is_target, external_modules));
+        auto r(read_stream(s, is_target));
         BOOST_LOG_SEV(lg, debug) << "Parsed JSON stream successfully.";
         return r;
     } catch (const json_parser_error& e) {
@@ -392,8 +405,7 @@ intermediate_model hydrator::hydrate(std::istream& s, const bool is_target,
 }
 
 intermediate_model hydrator::
-hydrate(const boost::filesystem::path& p, const bool is_target,
-    const std::string& external_modules) const {
+hydrate(const boost::filesystem::path& p, const bool is_target) const {
     const auto gs(p.generic_string());
     BOOST_LOG_SEV(lg, debug) << "Parsing JSON file: " << gs;
     boost::filesystem::ifstream s(p);
@@ -403,7 +415,7 @@ hydrate(const boost::filesystem::path& p, const bool is_target,
         BOOST_THROW_EXCEPTION(hydration_error(failed_to_open_file + gs));
     }
 
-    const auto r(hydrate(s, is_target, external_modules));
+    const auto r(hydrate(s, is_target));
     BOOST_LOG_SEV(lg, debug) << "Parsed JSON file successfully.";
     return r;
 }

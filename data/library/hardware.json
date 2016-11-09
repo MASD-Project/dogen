@@ -6,8 +6,10 @@
     },
     "elements" : [
         {
+            "name" : {
+                "simple_name" : "bool"
+            },
             "meta_type" : "primitive",
-            "simple_name" : "bool",
             "in_global_module" : true,
             "annotation" : {
                 "quilt.cpp.helper.family" : "Boolean",
@@ -17,8 +19,10 @@
             }
         },
         {
+            "name" : {
+                "simple_name" : "char"
+            },
             "meta_type" : "primitive",
-            "simple_name" : "char",
             "in_global_module" : true,
             "annotation" : {
                 "quilt.cpp.helper.family" : "Character",
@@ -29,8 +33,10 @@
             }
         },
         {
+            "name" : {
+                "simple_name" : "unsigned char"
+            },
             "meta_type" : "primitive",
-            "simple_name" : "unsigned char",
             "in_global_module" : true,
             "annotation" : {
                 "quilt.cpp.helper.family" : "Character",
@@ -41,8 +47,10 @@
             }
         },
         {
+            "name" : {
+                "simple_name" : "int"
+            },
             "meta_type" : "primitive",
-            "simple_name" : "int",
             "in_global_module" : true,
             "annotation" : {
                 "quilt.cpp.helper.family" : "Number",
@@ -51,8 +59,10 @@
             }
         },
         {
+            "name" : {
+                "simple_name" : "unsigned int"
+            },
             "meta_type" : "primitive",
-            "simple_name" : "unsigned int",
             "is_default_enumeration_type" : true,
             "in_global_module" : true,
             "annotation" : {
@@ -62,8 +72,10 @@
             }
         },
         {
+            "name" : {
+               "simple_name" : "short"
+            },
             "meta_type" : "primitive",
-            "simple_name" : "short",
             "in_global_module" : true,
             "annotation" : {
                 "quilt.cpp.helper.family" : "Number",
@@ -72,8 +84,10 @@
             }
         },
         {
+            "name" : {
+                "simple_name" : "unsigned short"
+            },
             "meta_type" : "primitive",
-            "simple_name" : "unsigned short",
             "in_global_module" : true,
             "annotation" : {
                 "quilt.cpp.helper.family" : "Number",
@@ -82,8 +96,10 @@
             }
         },
         {
+            "name" : {
+                "simple_name" : "long"
+            },
             "meta_type" : "primitive",
-            "simple_name" : "long",
             "in_global_module" : true,
             "annotation" : {
                 "quilt.cpp.helper.family" : "Number",
@@ -92,8 +108,10 @@
             }
         },
         {
+            "name" : {
+                "simple_name" : "unsigned long"
+            },
             "meta_type" : "primitive",
-            "simple_name" : "unsigned long",
             "in_global_module" : true,
             "annotation" : {
                 "quilt.cpp.helper.family" : "Number",
@@ -102,8 +120,10 @@
             }
         },
         {
+            "name" : {
+                "simple_name" : "long long"
+            },
             "meta_type" : "primitive",
-            "simple_name" : "long long",
             "in_global_module" : true,
             "annotation" : {
                 "quilt.cpp.helper.family" : "Number",
@@ -112,8 +132,10 @@
             }
         },
         {
+            "name" : {
+                "simple_name" : "unsigned long long"
+            },
             "meta_type" : "primitive",
-            "simple_name" : "unsigned long long",
             "in_global_module" : true,
             "annotation" : {
                 "quilt.cpp.helper.family" : "Number",
@@ -122,8 +144,10 @@
             }
         },
         {
+            "name" : {
+                "simple_name" : "float"
+            },
             "meta_type" : "primitive",
-            "simple_name" : "float",
             "in_global_module" : true,
             "annotation" : {
                 "quilt.cpp.helper.family" : "Number",
@@ -132,8 +156,10 @@
             }
         },
         {
+            "name" : {
+                "simple_name" : "double"
+            },
             "meta_type" : "primitive",
-            "simple_name" : "double",
             "in_global_module" : true,
             "annotation" : {
                 "quilt.cpp.helper.family" : "Number",
@@ -143,8 +169,10 @@
             }
         },
         {
+            "name" : {
+                "simple_name" : "long double"
+            },
             "meta_type" : "primitive",
-            "simple_name" : "long double",
             "in_global_module" : true,
             "annotation" : {
                 "quilt.cpp.helper.family" : "Number",

@@ -40,7 +40,6 @@ namespace {
 const std::string test_module("yarn.json");
 const std::string test_suite("hydrator_tests");
 
-const std::string empty_external_modules;
 const std::string model_name("a_model");
 const std::string documentation("a_doc");
 const std::string type_name("a_type");
@@ -63,7 +62,7 @@ const std::string hardware_model_path("library/hardware.json");
 const std::string hardware_model_name("hardware");
 
 const std::string missing_model_name("model_name");
-const std::string missing_type_name("simple_name");
+const std::string missing_type_name("name is mandatory.");
 const std::string missing_elements("elements");
 
 const std::string trivial_model(R"({
@@ -71,8 +70,10 @@ const std::string trivial_model(R"({
     "documentation" : "a_doc",
     "elements" : [
         {
+            "name" : {
+                "simple_name" : "a_type"
+            },
             "meta_type" : "object",
-            "simple_name" : "a_type",
             "documentation" : "a_doc"
         }
      ]
@@ -83,8 +84,10 @@ const std::string no_documentation_model(R"({
     "model_name" : "a_model",
     "elements" : [
         {
-            "meta_type" : "object",
-            "simple_name" : "a_type"
+            "name" : {
+                "simple_name" : "a_type"
+            },
+            "meta_type" : "object"
         }
      ]
   }
@@ -93,8 +96,10 @@ const std::string no_documentation_model(R"({
 const std::string no_name_model(R"({
     "elements" : [
         {
-            "meta_type" : "object",
-            "simple_name" : "a_type"
+            "name" : {
+                "simple_name" : "a_type"
+            },
+            "meta_type" : "object"
         }
      ]
   }
@@ -125,9 +130,11 @@ const std::string internal_modules_model(R"({
     "model_name" : "a_model",
     "elements" : [
         {
-            "meta_type" : "object",
-            "simple_name" : "a_type",
-            "internal_modules" : [ "module_1", "module_2", "module_3" ]
+            "name" : {
+                "simple_name" : "a_type",
+                "internal_modules" : "module_1::module_2::module_3"
+            },
+            "meta_type" : "object"
         }
      ]
   }
@@ -150,7 +157,7 @@ dogen::yarn::intermediate_model hydrate(std::istream& s) {
     const auto rp(create_repository());
 
     dogen::yarn::json::hydrator h;
-    return h.hydrate(s, false/*is_target*/, empty_external_modules);
+    return h.hydrate(s, false/*is_target*/);
 }
 
 dogen::yarn::intermediate_model hydrate(const boost::filesystem::path& p) {
@@ -173,6 +180,7 @@ BOOST_AUTO_TEST_SUITE(hydrator_tests)
 BOOST_AUTO_TEST_CASE(trivial_model_hydrates_into_expected_model) {
     SETUP_TEST_LOG_SOURCE("trivial_model_hydrates_into_expected_model");
 
+    BOOST_LOG_SEV(lg, debug) << "input: " << trivial_model;
     const auto m(hydrate(trivial_model));
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
