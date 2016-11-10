@@ -3620,6 +3620,17 @@ Tasks:
 
 *** Concepts cannot be placed inside of packages                      :story:
 
+At present it is not possible to create a concept inside a
+package or reuse concepts across models. This is because we do not
+resolve the refines container of a concept, or the models container of
+an object. We could trivially add resolution to concept expansion but
+we do not have a use case for this yet. The approach should be similar
+to what we did for generalisation expansion: call the
+resolver. However, we need to refactor the resolver because we need to
+use the same algorithm but this time on the concepts container.
+
+*Previous Understanding*
+
 #+begin_quote
 *Story*: As a dogen user, I want to place concepts in packages so that
 I can scope them when required.
