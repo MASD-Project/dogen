@@ -87,9 +87,30 @@ if (WITH_JSON_VALIDATION)
             COMMAND mv ${folder}/${file}_tmp ${folder}/${file})
         add_dependencies(indent_json_${target}
             indent_json_${target}_${file})
+
     endforeach()
 endif()
 
+#
 # sample files for installation
-file(GLOB samples "${CMAKE_CURRENT_SOURCE_DIR}/yarn.dia/input/*.dia")
+#
+set(input_dir "${CMAKE_CURRENT_SOURCE_DIR}/yarn.dia/input")
+set(output_dir "${CMAKE_CURRENT_SOURCE_DIR}/yarn.json/input")
+
+#
+# Tailor targets
+#
+file(GLOB samples "${input_dir}/*.dia")
 install(FILES ${samples} DESTINATION share/samples/dia)
+
+foreach(sample ${samples})
+    set(model_name "")
+    get_filename_component(model_name ${sample} NAME_WE)
+
+    add_custom_target(tailor_${model_name}
+        COMMENT "Tailoring ${model_name}."
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+        COMMAND ${tailor_binary} -v --target ${sample} --output ${output_dir}/${model_name}.json)
+
+    add_dependencies(tailor_all tailor_${model_name})
+endforeach()

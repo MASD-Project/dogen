@@ -332,6 +332,27 @@ execute_process(
 message(STATUS "Using: ${stitcher_version}")
 
 #
+# Top-level tailor target.
+#
+add_custom_target(tailor_all)
+set(use_latest_tailor FALSE)
+if(use_latest_tailor)
+    add_dependencies(tailor_all tailor)
+endif()
+
+set(tailor_binary "${stage_bin_dir}/dogen.tailor")
+set(tailor_version "")
+execute_process(
+    COMMAND ${tailor_binary} --version
+    COMMAND head -n1
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+    OUTPUT_VARIABLE tailor_version
+    RESULT_VARIABLE ret_var
+    OUTPUT_STRIP_TRAILING_WHITESPACE)
+
+message(STATUS "Using: ${tailor_version}")
+
+#
 # aggregate targets
 #
 add_custom_target(run_all_tests)
