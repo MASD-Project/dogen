@@ -43,6 +43,7 @@ void save(Archive& ar,
     ar << make_nvp("key_value_pairs", v.key_value_pairs_);
     ar << make_nvp("applicable_to_parent_object", v.applicable_to_parent_object_);
     ar << make_nvp("original_content", v.original_content_);
+    ar << make_nvp("external_modules", v.external_modules_);
 }
 
 template<typename Archive>
@@ -53,6 +54,7 @@ void load(Archive& ar,
     ar >> make_nvp("key_value_pairs", v.key_value_pairs_);
     ar >> make_nvp("applicable_to_parent_object", v.applicable_to_parent_object_);
     ar >> make_nvp("original_content", v.original_content_);
+    ar >> make_nvp("external_modules", v.external_modules_);
 }
 
 } }

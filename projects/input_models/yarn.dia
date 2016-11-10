@@ -1654,7 +1654,7 @@ intermediate merged model.#</dia:string>
         <dia:point val="-202,-59"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-202.05,-59.05;-174.1,-31.65"/>
+        <dia:rectangle val="-202.05,-59.05;-174.1,-30.85"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1666,7 +1666,7 @@ intermediate merged model.#</dia:string>
         <dia:real val="27.850000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="27.300000000000004"/>
+        <dia:real val="28.100000000000005"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000149011612"/>
@@ -1711,7 +1711,8 @@ etc.).
 and to build it.
 
 #DOGEN yarn.dia.comment=true
-#DOGEN yarn.reference=annotations.dia,dogen
+#DOGEN yarn.dia.external_modules=dogen
+#DOGEN yarn.reference=annotations.dia
 #DOGEN annotations.profile=dogen.disable_odb_cmake#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">

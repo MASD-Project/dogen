@@ -97,8 +97,9 @@
             <dia:string>#Provides yarn file importing support for JSON.
 
 #DOGEN yarn.dia.comment=true
-#DOGEN yarn.reference=annotations.dia,dogen
-#DOGEN yarn.reference=yarn.dia,dogen
+#DOGEN yarn.dia.external_modules=dogen
+#DOGEN yarn.reference=annotations.dia
+#DOGEN yarn.reference=yarn.dia
 #DOGEN annotations.profile=dogen.disable_odb_cmake#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">

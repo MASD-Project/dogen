@@ -1576,7 +1576,7 @@ with existing file.#</dia:string>
         <dia:point val="-62,-37"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-62.05,-37.05;-35.64,-29.65"/>
+        <dia:rectangle val="-62.05,-37.05;-35.64,-28.85"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1588,7 +1588,7 @@ with existing file.#</dia:string>
         <dia:real val="26.310000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="7.2999999999999998"/>
+        <dia:real val="8.0999999999999996"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -1609,6 +1609,7 @@ options for all the different Dogen applications, such as knitter,
 etc.
 
 #DOGEN yarn.dia.comment=true
+#DOGEN yarn.dia.external_modules=dogen
 #DOGEN annotations.profile=dogen.disable_odb_cmake#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">

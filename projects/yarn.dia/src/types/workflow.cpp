@@ -60,6 +60,19 @@ validate_processed_objects(const std::list<processed_object>& pos) const {
     vd.validate(pos);
 }
 
+std::string workflow::
+obtain_external_modules(const std::list<processed_object>& pos) const {
+    std::string r;
+    for (const auto& po : pos) {
+        if (po.child_node_id().empty() &&
+            po.dia_object_type() == dia_object_types::uml_note &&
+            po.comment().applicable_to_parent_object()) {
+            return po.comment().external_modules();
+        }
+    }
+    return r;
+}
+
 std::pair<graph_type,
           const std::unordered_map<std::string, std::list<std::string>>
           >
@@ -88,7 +101,7 @@ workflow::generate_model(builder& b, const graph_type& g) {
 }
 
 yarn::intermediate_model workflow::execute(const dogen::dia::diagram& d,
-    const std::string& model_name, const std::string& external_modules,
+    const std::string& model_name, const std::string& /*external_modules*/,
     bool is_target) {
 
     /*
@@ -98,6 +111,7 @@ yarn::intermediate_model workflow::execute(const dogen::dia::diagram& d,
     const auto original(create_processed_objects(d));
     const auto reduced(reduce_processed_objects(original));
     validate_processed_objects(reduced);
+    const auto external_modules(obtain_external_modules(reduced));
 
     /*
      * Create a dependency graph of the objects, and a map of children

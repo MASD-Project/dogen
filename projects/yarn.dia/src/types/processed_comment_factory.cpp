@@ -70,6 +70,9 @@ processed_comment_factory::make(const std::string& c) const {
             const auto key(line.substr(0, pos));
             const auto value(line.substr(pos + 1));
             applicable_to_parent_object |= (key == traits::comment());
+            if (key == traits::external_modules())
+                r.external_modules(value);
+
             r.key_value_pairs().push_back(std::make_pair(key, value));
             continue;
         }

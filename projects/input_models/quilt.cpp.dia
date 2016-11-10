@@ -106,7 +106,7 @@
         <dia:point val="-39,25"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-39.05,24.95;-18.8,32.35"/>
+        <dia:rectangle val="-39.05,24.95;-18.8,33.15"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -118,7 +118,7 @@
         <dia:real val="20.150000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="7.2999999999999998"/>
+        <dia:real val="8.0999999999999996"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -135,10 +135,11 @@
             <dia:string>#CPP is the C++ model in the quilt kernel.
 
 #DOGEN yarn.dia.comment=true
-#DOGEN yarn.reference=options.dia,dogen
-#DOGEN yarn.reference=yarn.dia,dogen
-#DOGEN yarn.reference=formatters.dia,dogen
-#DOGEN yarn.reference=annotations.dia,dogen
+#DOGEN yarn.dia.external_modules=dogen
+#DOGEN yarn.reference=options.dia
+#DOGEN yarn.reference=yarn.dia
+#DOGEN yarn.reference=formatters.dia
+#DOGEN yarn.reference=annotations.dia
 #DOGEN annotations.profile=dogen.disable_odb_cmake#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
@@ -15292,7 +15293,7 @@ an enumeration, false otherwise.#</dia:string>
         <dia:point val="240,43"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="239.95,42.95;256.35,46.35"/>
+        <dia:rectangle val="239.95,42.95;256.35,47.15"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -15304,7 +15305,7 @@ an enumeration, false otherwise.#</dia:string>
         <dia:real val="16.300000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3.3000000000000003"/>
+        <dia:real val="4.0999999999999996"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -15320,7 +15321,8 @@ an enumeration, false otherwise.#</dia:string>
           <dia:attribute name="string">
             <dia:string>#Houses the quilt.cpp extensions to yarn.
 
-#DOGEN dia.comment=true#</dia:string>
+#DOGEN dia.comment=true
+#DOGEN yarn.dia.external_modules=dogen#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>

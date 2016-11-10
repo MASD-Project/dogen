@@ -3,20 +3,22 @@
 <boost_serialization signature="serialization::archive" version="14">
 <entity class_id="12" tracking_level="0" version="0">
 	<name class_id="13" tracking_level="0" version="0">
-		<id>&lt;comments&gt;</id>
+		<id>&lt;dogen&gt;&lt;test_models&gt;&lt;comments&gt;</id>
 		<simple>comments</simple>
 		<qualified class_id="14" tracking_level="0" version="0">
 			<count>1</count>
 			<item_version>0</item_version>
 			<item class_id="15" tracking_level="0" version="0">
 				<first>1</first>
-				<second>comments</second>
+				<second>dogen::test_models::comments</second>
 			</item>
 		</qualified>
 		<location class_id="16" tracking_level="0" version="0">
 			<external_modules class_id="17" tracking_level="0" version="0">
-				<count>0</count>
+				<count>2</count>
 				<item_version>0</item_version>
+				<item>dogen</item>
+				<item>test_models</item>
 			</external_modules>
 			<model_modules>
 				<count>1</count>
@@ -29,7 +31,7 @@
 			</internal_modules>
 			<element></element>
 		</location>
-		<identifiable>comments</identifiable>
+		<identifiable>dogen_test_models_comments</identifiable>
 	</name>
 	<origin_type>1</origin_type>
 	<references class_id="18" tracking_level="0" version="0">
@@ -47,7 +49,7 @@
 		<bucket_count>5</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="21" tracking_level="0" version="0">
-			<first>&lt;comments&gt;&lt;package&gt;&lt;package2&gt;</first>
+			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;comments&gt;&lt;package&gt;&lt;package2&gt;</first>
 			<second class_id="8" tracking_level="1" version="0" object_id="_0">
 				<element class_id="22" tracking_level="0" version="0">
 					<documentation>package2
@@ -61,20 +63,22 @@
 						<scope>0</scope>
 					</annotation>
 					<name>
-						<id>&lt;comments&gt;&lt;package&gt;&lt;package2&gt;</id>
+						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;comments&gt;&lt;package&gt;&lt;package2&gt;</id>
 						<simple>package2</simple>
 						<qualified>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
-								<second>comments::package::package2</second>
+								<second>dogen::test_models::comments::package::package2</second>
 							</item>
 						</qualified>
 						<location>
 							<external_modules>
-								<count>0</count>
+								<count>2</count>
 								<item_version>0</item_version>
+								<item>dogen</item>
+								<item>test_models</item>
 							</external_modules>
 							<model_modules>
 								<count>1</count>
@@ -88,7 +92,7 @@
 							</internal_modules>
 							<element></element>
 						</location>
-						<identifiable>comments_package_package2</identifiable>
+						<identifiable>dogen_test_models_comments_package_package2</identifiable>
 					</name>
 					<origin_type>4</origin_type>
 					<contained_by class_id="25" tracking_level="0" version="0">
@@ -110,7 +114,7 @@
 			</second>
 		</item>
 		<item>
-			<first>&lt;comments&gt;&lt;package&gt;</first>
+			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;comments&gt;&lt;package&gt;</first>
 			<second object_id="_1">
 				<element>
 					<documentation>package
@@ -124,20 +128,22 @@
 						<scope>0</scope>
 					</annotation>
 					<name>
-						<id>&lt;comments&gt;&lt;package&gt;</id>
+						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;comments&gt;&lt;package&gt;</id>
 						<simple>package</simple>
 						<qualified>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
-								<second>comments::package</second>
+								<second>dogen::test_models::comments::package</second>
 							</item>
 						</qualified>
 						<location>
 							<external_modules>
-								<count>0</count>
+								<count>2</count>
 								<item_version>0</item_version>
+								<item>dogen</item>
+								<item>test_models</item>
 							</external_modules>
 							<model_modules>
 								<count>1</count>
@@ -150,7 +156,7 @@
 							</internal_modules>
 							<element></element>
 						</location>
-						<identifiable>comments_package</identifiable>
+						<identifiable>dogen_test_models_comments_package</identifiable>
 					</name>
 					<origin_type>4</origin_type>
 					<contained_by>
@@ -172,7 +178,7 @@
 			</second>
 		</item>
 		<item>
-			<first>&lt;comments&gt;</first>
+			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;comments&gt;</first>
 			<second object_id="_2">
 				<element>
 					<documentation>This model demonstrates the use of comments in dogen.
@@ -188,20 +194,22 @@ This comment will be applied to the model namespace itself.
 						<scope>0</scope>
 					</annotation>
 					<name>
-						<id>&lt;comments&gt;</id>
+						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;comments&gt;</id>
 						<simple>comments</simple>
 						<qualified>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
-								<second>comments</second>
+								<second>dogen::test_models::comments</second>
 							</item>
 						</qualified>
 						<location>
 							<external_modules>
-								<count>0</count>
+								<count>2</count>
 								<item_version>0</item_version>
+								<item>dogen</item>
+								<item>test_models</item>
 							</external_modules>
 							<model_modules>
 								<count>1</count>
@@ -214,7 +222,7 @@ This comment will be applied to the model namespace itself.
 							</internal_modules>
 							<element></element>
 						</location>
-						<identifiable>comments</identifiable>
+						<identifiable>dogen_test_models_comments</identifiable>
 					</name>
 					<origin_type>1</origin_type>
 					<contained_by>
@@ -256,7 +264,7 @@ This comment will be applied to the model namespace itself.
 		<bucket_count>5</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="32" tracking_level="0" version="0">
-			<first>&lt;comments&gt;&lt;multi_line&gt;</first>
+			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;comments&gt;&lt;multi_line&gt;</first>
 			<second class_id="9" tracking_level="1" version="0" object_id="_3">
 				<element>
 					<documentation>first line
@@ -273,20 +281,22 @@ third line with &quot;quote&quot;
 						<scope>0</scope>
 					</annotation>
 					<name>
-						<id>&lt;comments&gt;&lt;multi_line&gt;</id>
+						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;comments&gt;&lt;multi_line&gt;</id>
 						<simple>multi_line</simple>
 						<qualified>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
-								<second>comments::multi_line</second>
+								<second>dogen::test_models::comments::multi_line</second>
 							</item>
 						</qualified>
 						<location>
 							<external_modules>
-								<count>0</count>
+								<count>2</count>
 								<item_version>0</item_version>
+								<item>dogen</item>
+								<item>test_models</item>
 							</external_modules>
 							<model_modules>
 								<count>1</count>
@@ -299,7 +309,7 @@ third line with &quot;quote&quot;
 							</internal_modules>
 							<element></element>
 						</location>
-						<identifiable>comments_multi_line</identifiable>
+						<identifiable>dogen_test_models_comments_multi_line</identifiable>
 					</name>
 					<origin_type>4</origin_type>
 					<contained_by>
@@ -376,7 +386,7 @@ third line with &quot;quote&quot;
 			</second>
 		</item>
 		<item>
-			<first>&lt;comments&gt;&lt;one_line&gt;</first>
+			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;comments&gt;&lt;one_line&gt;</first>
 			<second object_id="_4">
 				<element>
 					<documentation>this is the brief comment
@@ -390,20 +400,22 @@ third line with &quot;quote&quot;
 						<scope>0</scope>
 					</annotation>
 					<name>
-						<id>&lt;comments&gt;&lt;one_line&gt;</id>
+						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;comments&gt;&lt;one_line&gt;</id>
 						<simple>one_line</simple>
 						<qualified>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
-								<second>comments::one_line</second>
+								<second>dogen::test_models::comments::one_line</second>
 							</item>
 						</qualified>
 						<location>
 							<external_modules>
-								<count>0</count>
+								<count>2</count>
 								<item_version>0</item_version>
+								<item>dogen</item>
+								<item>test_models</item>
 							</external_modules>
 							<model_modules>
 								<count>1</count>
@@ -416,7 +428,7 @@ third line with &quot;quote&quot;
 							</internal_modules>
 							<element></element>
 						</location>
-						<identifiable>comments_one_line</identifiable>
+						<identifiable>dogen_test_models_comments_one_line</identifiable>
 					</name>
 					<origin_type>4</origin_type>
 					<contained_by>
@@ -448,20 +460,22 @@ third line with &quot;quote&quot;
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;comments&gt;&lt;one_line&gt;&lt;prop_0&gt;</id>
+							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;comments&gt;&lt;one_line&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
 							<qualified>
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
-									<second>comments::one_line::prop_0</second>
+									<second>dogen::test_models::comments::one_line::prop_0</second>
 								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>0</count>
+									<count>2</count>
 									<item_version>0</item_version>
+									<item>dogen</item>
+									<item>test_models</item>
 								</external_modules>
 								<model_modules>
 									<count>1</count>
@@ -474,7 +488,7 @@ third line with &quot;quote&quot;
 								</internal_modules>
 								<element>one_line</element>
 							</location>
-							<identifiable>comments_one_line_prop_0</identifiable>
+							<identifiable>dogen_test_models_comments_one_line_prop_0</identifiable>
 						</name>
 						<unparsed_type>int</unparsed_type>
 						<parsed_type class_id="37" tracking_level="0" version="0">
@@ -532,20 +546,22 @@ a second line
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;comments&gt;&lt;one_line&gt;&lt;prop_1&gt;</id>
+							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;comments&gt;&lt;one_line&gt;&lt;prop_1&gt;</id>
 							<simple>prop_1</simple>
 							<qualified>
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
-									<second>comments::one_line::prop_1</second>
+									<second>dogen::test_models::comments::one_line::prop_1</second>
 								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>0</count>
+									<count>2</count>
 									<item_version>0</item_version>
+									<item>dogen</item>
+									<item>test_models</item>
 								</external_modules>
 								<model_modules>
 									<count>1</count>
@@ -558,7 +574,7 @@ a second line
 								</internal_modules>
 								<element>one_line</element>
 							</location>
-							<identifiable>comments_one_line_prop_1</identifiable>
+							<identifiable>dogen_test_models_comments_one_line_prop_1</identifiable>
 						</name>
 						<unparsed_type>int</unparsed_type>
 						<parsed_type>
@@ -613,20 +629,22 @@ a second line
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;comments&gt;&lt;one_line&gt;&lt;prop_2&gt;</id>
+							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;comments&gt;&lt;one_line&gt;&lt;prop_2&gt;</id>
 							<simple>prop_2</simple>
 							<qualified>
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
-									<second>comments::one_line::prop_2</second>
+									<second>dogen::test_models::comments::one_line::prop_2</second>
 								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>0</count>
+									<count>2</count>
 									<item_version>0</item_version>
+									<item>dogen</item>
+									<item>test_models</item>
 								</external_modules>
 								<model_modules>
 									<count>1</count>
@@ -639,7 +657,7 @@ a second line
 								</internal_modules>
 								<element>one_line</element>
 							</location>
-							<identifiable>comments_one_line_prop_2</identifiable>
+							<identifiable>dogen_test_models_comments_one_line_prop_2</identifiable>
 						</name>
 						<unparsed_type>int</unparsed_type>
 						<parsed_type>
@@ -772,18 +790,26 @@ a second line
 			<bucket_count>5</bucket_count>
 			<item_version>0</item_version>
 			<item class_id="45" tracking_level="0" version="0">
-				<first>&lt;comments&gt;&lt;package&gt;&lt;package2&gt;</first>
+				<first>&lt;dogen&gt;&lt;test_models&gt;&lt;comments&gt;</first>
 				<second class_id="46" tracking_level="0" version="0">
 					<parent class_id="47" tracking_level="0" version="0">
 						<entries class_id="48" tracking_level="0" version="0">
-							<count>1</count>
+							<count>3</count>
 							<item_version>0</item_version>
 							<item class_id="49" tracking_level="0" version="0">
 								<first>yarn.dia.comment</first>
 								<second>true</second>
 							</item>
+							<item>
+								<first>yarn.dia.external_modules</first>
+								<second>dogen::test_models</second>
+							</item>
+							<item>
+								<first>annotations.profile</first>
+								<second>dogen</second>
+							</item>
 						</entries>
-						<scope>5</scope>
+						<scope>3</scope>
 						<candidate_labels>
 							<count>0</count>
 							<item_version>0</item_version>
@@ -797,22 +823,18 @@ a second line
 				</second>
 			</item>
 			<item>
-				<first>&lt;comments&gt;</first>
+				<first>&lt;dogen&gt;&lt;test_models&gt;&lt;comments&gt;&lt;package&gt;&lt;package2&gt;</first>
 				<second>
 					<parent>
 						<entries>
-							<count>2</count>
+							<count>1</count>
 							<item_version>0</item_version>
 							<item>
 								<first>yarn.dia.comment</first>
 								<second>true</second>
 							</item>
-							<item>
-								<first>annotations.profile</first>
-								<second>dogen</second>
-							</item>
 						</entries>
-						<scope>3</scope>
+						<scope>5</scope>
 						<candidate_labels>
 							<count>0</count>
 							<item_version>0</item_version>
@@ -826,7 +848,7 @@ a second line
 				</second>
 			</item>
 			<item>
-				<first>&lt;comments&gt;&lt;package&gt;</first>
+				<first>&lt;dogen&gt;&lt;test_models&gt;&lt;comments&gt;&lt;package&gt;</first>
 				<second>
 					<parent>
 						<entries>

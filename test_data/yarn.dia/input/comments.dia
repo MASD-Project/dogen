@@ -665,6 +665,7 @@ it will be ignored.#</dia:string>
 
 This comment will be applied to the model namespace itself.
 #DOGEN yarn.dia.comment=true
+#DOGEN yarn.dia.external_modules=dogen::test_models
 #DOGEN annotations.profile=dogen#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">

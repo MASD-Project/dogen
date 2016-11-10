@@ -1373,11 +1373,12 @@
         <dia:composite type="text">
           <dia:attribute name="string">
             <dia:string>##DOGEN yarn.dia.comment=true
+#DOGEN yarn.dia.external_modules=dogen
 #DOGEN annotations.profile=dogen.disable_odb_cmake
-#DOGEN yarn.reference=options.dia,dogen
-#DOGEN yarn.reference=annotations.dia,dogen
-#DOGEN yarn.reference=yarn.dia,dogen
-#DOGEN yarn.reference=formatters.dia,dogen#</dia:string>
+#DOGEN yarn.reference=options.dia
+#DOGEN yarn.reference=annotations.dia
+#DOGEN yarn.reference=yarn.dia
+#DOGEN yarn.reference=formatters.dia#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>

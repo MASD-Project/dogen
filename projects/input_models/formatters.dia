@@ -4557,6 +4557,7 @@ which is not language specific. Language-specific models can
 then make use of it.
 
 #DOGEN yarn.dia.comment=true
+#DOGEN yarn.dia.external_modules=dogen
 #DOGEN annotations.profile=dogen.disable_odb_cmake#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">

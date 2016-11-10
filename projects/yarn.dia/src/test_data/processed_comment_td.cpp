@@ -63,6 +63,7 @@ populate(const unsigned int position, result_type& v) {
     v.key_value_pairs(create_std_list_std_pair_std_string_std_string(position + 1));
     v.applicable_to_parent_object(create_bool(position + 2));
     v.original_content(create_std_string(position + 3));
+    v.external_modules(create_std_string(position + 4));
 }
 
 processed_comment_generator::result_type

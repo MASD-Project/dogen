@@ -3,20 +3,22 @@
 <boost_serialization signature="serialization::archive" version="14">
 <entity class_id="12" tracking_level="0" version="0">
 	<name class_id="13" tracking_level="0" version="0">
-		<id>&lt;exception&gt;</id>
+		<id>&lt;dogen&gt;&lt;test_models&gt;&lt;exception&gt;</id>
 		<simple>exception</simple>
 		<qualified class_id="14" tracking_level="0" version="0">
 			<count>1</count>
 			<item_version>0</item_version>
 			<item class_id="15" tracking_level="0" version="0">
 				<first>1</first>
-				<second>exception</second>
+				<second>dogen::test_models::exception</second>
 			</item>
 		</qualified>
 		<location class_id="16" tracking_level="0" version="0">
 			<external_modules class_id="17" tracking_level="0" version="0">
-				<count>0</count>
+				<count>2</count>
 				<item_version>0</item_version>
+				<item>dogen</item>
+				<item>test_models</item>
 			</external_modules>
 			<model_modules>
 				<count>1</count>
@@ -29,7 +31,7 @@
 			</internal_modules>
 			<element></element>
 		</location>
-		<identifiable>exception</identifiable>
+		<identifiable>dogen_test_models_exception</identifiable>
 	</name>
 	<origin_type>1</origin_type>
 	<references class_id="18" tracking_level="0" version="0">
@@ -47,7 +49,7 @@
 		<bucket_count>5</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="21" tracking_level="0" version="0">
-			<first>&lt;exception&gt;&lt;pkg&gt;</first>
+			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;exception&gt;&lt;pkg&gt;</first>
 			<second class_id="8" tracking_level="1" version="0" object_id="_0">
 				<element class_id="22" tracking_level="0" version="0">
 					<documentation></documentation>
@@ -60,20 +62,22 @@
 						<scope>0</scope>
 					</annotation>
 					<name>
-						<id>&lt;exception&gt;&lt;pkg&gt;</id>
+						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;exception&gt;&lt;pkg&gt;</id>
 						<simple>pkg</simple>
 						<qualified>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
-								<second>exception::pkg</second>
+								<second>dogen::test_models::exception::pkg</second>
 							</item>
 						</qualified>
 						<location>
 							<external_modules>
-								<count>0</count>
+								<count>2</count>
 								<item_version>0</item_version>
+								<item>dogen</item>
+								<item>test_models</item>
 							</external_modules>
 							<model_modules>
 								<count>1</count>
@@ -86,7 +90,7 @@
 							</internal_modules>
 							<element></element>
 						</location>
-						<identifiable>exception_pkg</identifiable>
+						<identifiable>dogen_test_models_exception_pkg</identifiable>
 					</name>
 					<origin_type>4</origin_type>
 					<contained_by class_id="25" tracking_level="0" version="0">
@@ -108,7 +112,7 @@
 			</second>
 		</item>
 		<item>
-			<first>&lt;exception&gt;</first>
+			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;exception&gt;</first>
 			<second object_id="_1">
 				<element>
 					<documentation></documentation>
@@ -121,20 +125,22 @@
 						<scope>0</scope>
 					</annotation>
 					<name>
-						<id>&lt;exception&gt;</id>
+						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;exception&gt;</id>
 						<simple>exception</simple>
 						<qualified>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
-								<second>exception</second>
+								<second>dogen::test_models::exception</second>
 							</item>
 						</qualified>
 						<location>
 							<external_modules>
-								<count>0</count>
+								<count>2</count>
 								<item_version>0</item_version>
+								<item>dogen</item>
+								<item>test_models</item>
 							</external_modules>
 							<model_modules>
 								<count>1</count>
@@ -147,7 +153,7 @@
 							</internal_modules>
 							<element></element>
 						</location>
-						<identifiable>exception</identifiable>
+						<identifiable>dogen_test_models_exception</identifiable>
 					</name>
 					<origin_type>1</origin_type>
 					<contained_by>
@@ -194,7 +200,7 @@
 		<bucket_count>5</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="33" tracking_level="0" version="0">
-			<first>&lt;exception&gt;&lt;pkg&gt;&lt;catastrophic_error&gt;</first>
+			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;exception&gt;&lt;pkg&gt;&lt;catastrophic_error&gt;</first>
 			<second class_id="7" tracking_level="1" version="0" object_id="_2">
 				<element>
 					<documentation></documentation>
@@ -207,20 +213,22 @@
 						<scope>0</scope>
 					</annotation>
 					<name>
-						<id>&lt;exception&gt;&lt;pkg&gt;&lt;catastrophic_error&gt;</id>
+						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;exception&gt;&lt;pkg&gt;&lt;catastrophic_error&gt;</id>
 						<simple>catastrophic_error</simple>
 						<qualified>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
-								<second>exception::pkg::catastrophic_error</second>
+								<second>dogen::test_models::exception::pkg::catastrophic_error</second>
 							</item>
 						</qualified>
 						<location>
 							<external_modules>
-								<count>0</count>
+								<count>2</count>
 								<item_version>0</item_version>
+								<item>dogen</item>
+								<item>test_models</item>
 							</external_modules>
 							<model_modules>
 								<count>1</count>
@@ -234,7 +242,7 @@
 							</internal_modules>
 							<element></element>
 						</location>
-						<identifiable>exception_pkg_catastrophic_error</identifiable>
+						<identifiable>dogen_test_models_exception_pkg_catastrophic_error</identifiable>
 					</name>
 					<origin_type>4</origin_type>
 					<contained_by>
@@ -250,7 +258,7 @@
 			</second>
 		</item>
 		<item>
-			<first>&lt;exception&gt;&lt;my_error&gt;</first>
+			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;exception&gt;&lt;my_error&gt;</first>
 			<second object_id="_3">
 				<element>
 					<documentation>this is an exception
@@ -264,20 +272,22 @@
 						<scope>0</scope>
 					</annotation>
 					<name>
-						<id>&lt;exception&gt;&lt;my_error&gt;</id>
+						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;exception&gt;&lt;my_error&gt;</id>
 						<simple>my_error</simple>
 						<qualified>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
-								<second>exception::my_error</second>
+								<second>dogen::test_models::exception::my_error</second>
 							</item>
 						</qualified>
 						<location>
 							<external_modules>
-								<count>0</count>
+								<count>2</count>
 								<item_version>0</item_version>
+								<item>dogen</item>
+								<item>test_models</item>
 							</external_modules>
 							<model_modules>
 								<count>1</count>
@@ -290,7 +300,7 @@
 							</internal_modules>
 							<element></element>
 						</location>
-						<identifiable>exception_my_error</identifiable>
+						<identifiable>dogen_test_models_exception_my_error</identifiable>
 					</name>
 					<origin_type>4</origin_type>
 					<contained_by>
@@ -333,15 +343,19 @@
 			<bucket_count>2</bucket_count>
 			<item_version>0</item_version>
 			<item class_id="39" tracking_level="0" version="0">
-				<first>&lt;exception&gt;</first>
+				<first>&lt;dogen&gt;&lt;test_models&gt;&lt;exception&gt;</first>
 				<second class_id="40" tracking_level="0" version="0">
 					<parent class_id="41" tracking_level="0" version="0">
 						<entries class_id="42" tracking_level="0" version="0">
-							<count>2</count>
+							<count>3</count>
 							<item_version>0</item_version>
 							<item class_id="43" tracking_level="0" version="0">
 								<first>yarn.dia.comment</first>
 								<second>true</second>
+							</item>
+							<item>
+								<first>yarn.dia.external_modules</first>
+								<second>dogen::test_models</second>
 							</item>
 							<item>
 								<first>annotations.profile</first>

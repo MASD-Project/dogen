@@ -3539,6 +3539,7 @@ modeled by the base.#</dia:string>
             <dia:string>#Test model for all of the stereotype related scenarios.
 
 #DOGEN yarn.dia.comment=true
+#DOGEN yarn.dia.external_modules=dogen::test_models
 #DOGEN annotations.profile=dogen#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">

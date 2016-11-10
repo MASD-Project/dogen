@@ -29,4 +29,9 @@ std::string traits::comment() {
     return r;
 }
 
+std::string traits::external_modules() {
+    static std::string r("yarn.dia.external_modules");
+    return r;
+}
+
 } } }

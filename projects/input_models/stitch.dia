@@ -3835,8 +3835,9 @@
         <dia:composite type="text">
           <dia:attribute name="string">
             <dia:string>##DOGEN yarn.dia.comment=true
-#DOGEN yarn.reference=annotations.dia,dogen
-#DOGEN yarn.reference=formatters.dia,dogen
+#DOGEN yarn.dia.external_modules=dogen
+#DOGEN yarn.reference=annotations.dia
+#DOGEN yarn.reference=formatters.dia
 #DOGEN annotations.profile=dogen.disable_odb_cmake#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">

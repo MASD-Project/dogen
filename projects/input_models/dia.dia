@@ -4825,6 +4825,7 @@ between the class and the slot concepts, we renamed it.#</dia:string>
         <dia:composite type="text">
           <dia:attribute name="string">
             <dia:string>##DOGEN yarn.dia.comment=true
+#DOGEN yarn.dia.external_modules=dogen
 #DOGEN annotations.profile=dogen.disable_odb_cmake#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">

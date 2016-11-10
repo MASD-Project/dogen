@@ -3278,6 +3278,7 @@ It includes the visitable stereotype since it only makes sense
 in the context of inheritance.
 
 #DOGEN yarn.dia.comment=true
+#DOGEN yarn.dia.external_modules=dogen::test_models
 #DOGEN annotations.profile=dogen#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">

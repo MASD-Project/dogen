@@ -55,6 +55,9 @@ private:
     void validate_processed_objects(
         const std::list<processed_object>& pos) const;
 
+    std::string obtain_external_modules(
+        const std::list<processed_object>& pos) const;
+
 private:
     /**
      * @brief Setup the DAG of processed objects.

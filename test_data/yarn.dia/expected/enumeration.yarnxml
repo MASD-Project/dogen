@@ -3,20 +3,22 @@
 <boost_serialization signature="serialization::archive" version="14">
 <entity class_id="12" tracking_level="0" version="0">
 	<name class_id="13" tracking_level="0" version="0">
-		<id>&lt;enumeration&gt;</id>
+		<id>&lt;dogen&gt;&lt;test_models&gt;&lt;enumeration&gt;</id>
 		<simple>enumeration</simple>
 		<qualified class_id="14" tracking_level="0" version="0">
 			<count>1</count>
 			<item_version>0</item_version>
 			<item class_id="15" tracking_level="0" version="0">
 				<first>1</first>
-				<second>enumeration</second>
+				<second>dogen::test_models::enumeration</second>
 			</item>
 		</qualified>
 		<location class_id="16" tracking_level="0" version="0">
 			<external_modules class_id="17" tracking_level="0" version="0">
-				<count>0</count>
+				<count>2</count>
 				<item_version>0</item_version>
+				<item>dogen</item>
+				<item>test_models</item>
 			</external_modules>
 			<model_modules>
 				<count>1</count>
@@ -29,7 +31,7 @@
 			</internal_modules>
 			<element></element>
 		</location>
-		<identifiable>enumeration</identifiable>
+		<identifiable>dogen_test_models_enumeration</identifiable>
 	</name>
 	<origin_type>1</origin_type>
 	<references class_id="18" tracking_level="0" version="0">
@@ -47,7 +49,7 @@
 		<bucket_count>5</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="21" tracking_level="0" version="0">
-			<first>&lt;enumeration&gt;&lt;pkg1&gt;</first>
+			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;enumeration&gt;&lt;pkg1&gt;</first>
 			<second class_id="8" tracking_level="1" version="0" object_id="_0">
 				<element class_id="22" tracking_level="0" version="0">
 					<documentation></documentation>
@@ -60,20 +62,22 @@
 						<scope>0</scope>
 					</annotation>
 					<name>
-						<id>&lt;enumeration&gt;&lt;pkg1&gt;</id>
+						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;enumeration&gt;&lt;pkg1&gt;</id>
 						<simple>pkg1</simple>
 						<qualified>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
-								<second>enumeration::pkg1</second>
+								<second>dogen::test_models::enumeration::pkg1</second>
 							</item>
 						</qualified>
 						<location>
 							<external_modules>
-								<count>0</count>
+								<count>2</count>
 								<item_version>0</item_version>
+								<item>dogen</item>
+								<item>test_models</item>
 							</external_modules>
 							<model_modules>
 								<count>1</count>
@@ -86,7 +90,7 @@
 							</internal_modules>
 							<element></element>
 						</location>
-						<identifiable>enumeration_pkg1</identifiable>
+						<identifiable>dogen_test_models_enumeration_pkg1</identifiable>
 					</name>
 					<origin_type>4</origin_type>
 					<contained_by class_id="25" tracking_level="0" version="0">
@@ -108,7 +112,7 @@
 			</second>
 		</item>
 		<item>
-			<first>&lt;enumeration&gt;</first>
+			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;enumeration&gt;</first>
 			<second object_id="_1">
 				<element>
 					<documentation></documentation>
@@ -121,20 +125,22 @@
 						<scope>0</scope>
 					</annotation>
 					<name>
-						<id>&lt;enumeration&gt;</id>
+						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;enumeration&gt;</id>
 						<simple>enumeration</simple>
 						<qualified>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
-								<second>enumeration</second>
+								<second>dogen::test_models::enumeration</second>
 							</item>
 						</qualified>
 						<location>
 							<external_modules>
-								<count>0</count>
+								<count>2</count>
 								<item_version>0</item_version>
+								<item>dogen</item>
+								<item>test_models</item>
 							</external_modules>
 							<model_modules>
 								<count>1</count>
@@ -147,7 +153,7 @@
 							</internal_modules>
 							<element></element>
 						</location>
-						<identifiable>enumeration</identifiable>
+						<identifiable>dogen_test_models_enumeration</identifiable>
 					</name>
 					<origin_type>1</origin_type>
 					<contained_by>
@@ -184,7 +190,7 @@
 		<bucket_count>5</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="31" tracking_level="0" version="0">
-			<first>&lt;enumeration&gt;&lt;pkg1&gt;&lt;shape_types&gt;</first>
+			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;enumeration&gt;&lt;pkg1&gt;&lt;shape_types&gt;</first>
 			<second class_id="6" tracking_level="1" version="0" object_id="_2">
 				<element>
 					<documentation></documentation>
@@ -197,20 +203,22 @@
 						<scope>0</scope>
 					</annotation>
 					<name>
-						<id>&lt;enumeration&gt;&lt;pkg1&gt;&lt;shape_types&gt;</id>
+						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;enumeration&gt;&lt;pkg1&gt;&lt;shape_types&gt;</id>
 						<simple>shape_types</simple>
 						<qualified>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
-								<second>enumeration::pkg1::shape_types</second>
+								<second>dogen::test_models::enumeration::pkg1::shape_types</second>
 							</item>
 						</qualified>
 						<location>
 							<external_modules>
-								<count>0</count>
+								<count>2</count>
 								<item_version>0</item_version>
+								<item>dogen</item>
+								<item>test_models</item>
 							</external_modules>
 							<model_modules>
 								<count>1</count>
@@ -224,7 +232,7 @@
 							</internal_modules>
 							<element></element>
 						</location>
-						<identifiable>enumeration_pkg1_shape_types</identifiable>
+						<identifiable>dogen_test_models_enumeration_pkg1_shape_types</identifiable>
 					</name>
 					<origin_type>4</origin_type>
 					<contained_by>
@@ -296,7 +304,7 @@
 			</second>
 		</item>
 		<item>
-			<first>&lt;enumeration&gt;&lt;colour_types&gt;</first>
+			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;enumeration&gt;&lt;colour_types&gt;</first>
 			<second object_id="_3">
 				<element>
 					<documentation></documentation>
@@ -309,20 +317,22 @@
 						<scope>0</scope>
 					</annotation>
 					<name>
-						<id>&lt;enumeration&gt;&lt;colour_types&gt;</id>
+						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;enumeration&gt;&lt;colour_types&gt;</id>
 						<simple>colour_types</simple>
 						<qualified>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
-								<second>enumeration::colour_types</second>
+								<second>dogen::test_models::enumeration::colour_types</second>
 							</item>
 						</qualified>
 						<location>
 							<external_modules>
-								<count>0</count>
+								<count>2</count>
 								<item_version>0</item_version>
+								<item>dogen</item>
+								<item>test_models</item>
 							</external_modules>
 							<model_modules>
 								<count>1</count>
@@ -335,7 +345,7 @@
 							</internal_modules>
 							<element></element>
 						</location>
-						<identifiable>enumeration_colour_types</identifiable>
+						<identifiable>dogen_test_models_enumeration_colour_types</identifiable>
 					</name>
 					<origin_type>4</origin_type>
 					<contained_by>
@@ -407,7 +417,7 @@
 			</second>
 		</item>
 		<item>
-			<first>&lt;enumeration&gt;&lt;book_types&gt;</first>
+			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;enumeration&gt;&lt;book_types&gt;</first>
 			<second object_id="_4">
 				<element>
 					<documentation>this is a brief comment
@@ -423,20 +433,22 @@ this is a long comment
 						<scope>0</scope>
 					</annotation>
 					<name>
-						<id>&lt;enumeration&gt;&lt;book_types&gt;</id>
+						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;enumeration&gt;&lt;book_types&gt;</id>
 						<simple>book_types</simple>
 						<qualified>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
-								<second>enumeration::book_types</second>
+								<second>dogen::test_models::enumeration::book_types</second>
 							</item>
 						</qualified>
 						<location>
 							<external_modules>
-								<count>0</count>
+								<count>2</count>
 								<item_version>0</item_version>
+								<item>dogen</item>
+								<item>test_models</item>
 							</external_modules>
 							<model_modules>
 								<count>1</count>
@@ -449,7 +461,7 @@ this is a long comment
 							</internal_modules>
 							<element></element>
 						</location>
-						<identifiable>enumeration_book_types</identifiable>
+						<identifiable>dogen_test_models_enumeration_book_types</identifiable>
 					</name>
 					<origin_type>4</origin_type>
 					<contained_by>
@@ -518,7 +530,7 @@ this is a long comment
 		<bucket_count>2</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="35" tracking_level="0" version="0">
-			<first>&lt;enumeration&gt;&lt;a_class&gt;</first>
+			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;enumeration&gt;&lt;a_class&gt;</first>
 			<second class_id="9" tracking_level="1" version="0" object_id="_5">
 				<element>
 					<documentation></documentation>
@@ -531,20 +543,22 @@ this is a long comment
 						<scope>0</scope>
 					</annotation>
 					<name>
-						<id>&lt;enumeration&gt;&lt;a_class&gt;</id>
+						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;enumeration&gt;&lt;a_class&gt;</id>
 						<simple>a_class</simple>
 						<qualified>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
-								<second>enumeration::a_class</second>
+								<second>dogen::test_models::enumeration::a_class</second>
 							</item>
 						</qualified>
 						<location>
 							<external_modules>
-								<count>0</count>
+								<count>2</count>
 								<item_version>0</item_version>
+								<item>dogen</item>
+								<item>test_models</item>
 							</external_modules>
 							<model_modules>
 								<count>1</count>
@@ -557,7 +571,7 @@ this is a long comment
 							</internal_modules>
 							<element></element>
 						</location>
-						<identifiable>enumeration_a_class</identifiable>
+						<identifiable>dogen_test_models_enumeration_a_class</identifiable>
 					</name>
 					<origin_type>4</origin_type>
 					<contained_by>
@@ -588,20 +602,22 @@ this is a long comment
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;enumeration&gt;&lt;a_class&gt;&lt;colour_type&gt;</id>
+							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;enumeration&gt;&lt;a_class&gt;&lt;colour_type&gt;</id>
 							<simple>colour_type</simple>
 							<qualified>
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
-									<second>enumeration::a_class::colour_type</second>
+									<second>dogen::test_models::enumeration::a_class::colour_type</second>
 								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>0</count>
+									<count>2</count>
 									<item_version>0</item_version>
+									<item>dogen</item>
+									<item>test_models</item>
 								</external_modules>
 								<model_modules>
 									<count>1</count>
@@ -614,7 +630,7 @@ this is a long comment
 								</internal_modules>
 								<element>a_class</element>
 							</location>
-							<identifiable>enumeration_a_class_colour_type</identifiable>
+							<identifiable>dogen_test_models_enumeration_a_class_colour_type</identifiable>
 						</name>
 						<unparsed_type>colour_types</unparsed_type>
 						<parsed_type class_id="38" tracking_level="0" version="0">
@@ -669,20 +685,22 @@ this is a long comment
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;enumeration&gt;&lt;a_class&gt;&lt;book_type&gt;</id>
+							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;enumeration&gt;&lt;a_class&gt;&lt;book_type&gt;</id>
 							<simple>book_type</simple>
 							<qualified>
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
-									<second>enumeration::a_class::book_type</second>
+									<second>dogen::test_models::enumeration::a_class::book_type</second>
 								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>0</count>
+									<count>2</count>
 									<item_version>0</item_version>
+									<item>dogen</item>
+									<item>test_models</item>
 								</external_modules>
 								<model_modules>
 									<count>1</count>
@@ -695,7 +713,7 @@ this is a long comment
 								</internal_modules>
 								<element>a_class</element>
 							</location>
-							<identifiable>enumeration_a_class_book_type</identifiable>
+							<identifiable>dogen_test_models_enumeration_a_class_book_type</identifiable>
 						</name>
 						<unparsed_type>book_types</unparsed_type>
 						<parsed_type>
@@ -750,20 +768,22 @@ this is a long comment
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;enumeration&gt;&lt;a_class&gt;&lt;shape_type&gt;</id>
+							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;enumeration&gt;&lt;a_class&gt;&lt;shape_type&gt;</id>
 							<simple>shape_type</simple>
 							<qualified>
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
-									<second>enumeration::a_class::shape_type</second>
+									<second>dogen::test_models::enumeration::a_class::shape_type</second>
 								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>0</count>
+									<count>2</count>
 									<item_version>0</item_version>
+									<item>dogen</item>
+									<item>test_models</item>
 								</external_modules>
 								<model_modules>
 									<count>1</count>
@@ -776,7 +796,7 @@ this is a long comment
 								</internal_modules>
 								<element>a_class</element>
 							</location>
-							<identifiable>enumeration_a_class_shape_type</identifiable>
+							<identifiable>dogen_test_models_enumeration_a_class_shape_type</identifiable>
 						</name>
 						<unparsed_type>pkg1::shape_types</unparsed_type>
 						<parsed_type>
@@ -909,15 +929,19 @@ this is a long comment
 			<bucket_count>2</bucket_count>
 			<item_version>0</item_version>
 			<item class_id="48" tracking_level="0" version="0">
-				<first>&lt;enumeration&gt;</first>
+				<first>&lt;dogen&gt;&lt;test_models&gt;&lt;enumeration&gt;</first>
 				<second class_id="49" tracking_level="0" version="0">
 					<parent class_id="50" tracking_level="0" version="0">
 						<entries class_id="51" tracking_level="0" version="0">
-							<count>2</count>
+							<count>3</count>
 							<item_version>0</item_version>
 							<item class_id="52" tracking_level="0" version="0">
 								<first>yarn.dia.comment</first>
 								<second>true</second>
+							</item>
+							<item>
+								<first>yarn.dia.external_modules</first>
+								<second>dogen::test_models</second>
 							</item>
 							<item>
 								<first>annotations.profile</first>

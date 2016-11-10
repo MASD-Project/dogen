@@ -3,20 +3,22 @@
 <boost_serialization signature="serialization::archive" version="14">
 <entity class_id="12" tracking_level="0" version="0">
 	<name class_id="13" tracking_level="0" version="0">
-		<id>&lt;class_in_a_package&gt;</id>
+		<id>&lt;dogen&gt;&lt;test_models&gt;&lt;class_in_a_package&gt;</id>
 		<simple>class_in_a_package</simple>
 		<qualified class_id="14" tracking_level="0" version="0">
 			<count>1</count>
 			<item_version>0</item_version>
 			<item class_id="15" tracking_level="0" version="0">
 				<first>1</first>
-				<second>class_in_a_package</second>
+				<second>dogen::test_models::class_in_a_package</second>
 			</item>
 		</qualified>
 		<location class_id="16" tracking_level="0" version="0">
 			<external_modules class_id="17" tracking_level="0" version="0">
-				<count>0</count>
+				<count>2</count>
 				<item_version>0</item_version>
+				<item>dogen</item>
+				<item>test_models</item>
 			</external_modules>
 			<model_modules>
 				<count>1</count>
@@ -29,7 +31,7 @@
 			</internal_modules>
 			<element></element>
 		</location>
-		<identifiable>class_in_a_package</identifiable>
+		<identifiable>dogen_test_models_class_in_a_package</identifiable>
 	</name>
 	<origin_type>1</origin_type>
 	<references class_id="18" tracking_level="0" version="0">
@@ -47,7 +49,7 @@
 		<bucket_count>5</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="21" tracking_level="0" version="0">
-			<first>&lt;class_in_a_package&gt;&lt;package1&gt;</first>
+			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;class_in_a_package&gt;&lt;package1&gt;</first>
 			<second class_id="8" tracking_level="1" version="0" object_id="_0">
 				<element class_id="22" tracking_level="0" version="0">
 					<documentation></documentation>
@@ -60,20 +62,22 @@
 						<scope>0</scope>
 					</annotation>
 					<name>
-						<id>&lt;class_in_a_package&gt;&lt;package1&gt;</id>
+						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;class_in_a_package&gt;&lt;package1&gt;</id>
 						<simple>package1</simple>
 						<qualified>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
-								<second>class_in_a_package::package1</second>
+								<second>dogen::test_models::class_in_a_package::package1</second>
 							</item>
 						</qualified>
 						<location>
 							<external_modules>
-								<count>0</count>
+								<count>2</count>
 								<item_version>0</item_version>
+								<item>dogen</item>
+								<item>test_models</item>
 							</external_modules>
 							<model_modules>
 								<count>1</count>
@@ -86,7 +90,7 @@
 							</internal_modules>
 							<element></element>
 						</location>
-						<identifiable>class_in_a_package_package1</identifiable>
+						<identifiable>dogen_test_models_class_in_a_package_package1</identifiable>
 					</name>
 					<origin_type>4</origin_type>
 					<contained_by class_id="25" tracking_level="0" version="0">
@@ -108,7 +112,7 @@
 			</second>
 		</item>
 		<item>
-			<first>&lt;class_in_a_package&gt;</first>
+			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;class_in_a_package&gt;</first>
 			<second object_id="_1">
 				<element>
 					<documentation></documentation>
@@ -121,20 +125,22 @@
 						<scope>0</scope>
 					</annotation>
 					<name>
-						<id>&lt;class_in_a_package&gt;</id>
+						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;class_in_a_package&gt;</id>
 						<simple>class_in_a_package</simple>
 						<qualified>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
-								<second>class_in_a_package</second>
+								<second>dogen::test_models::class_in_a_package</second>
 							</item>
 						</qualified>
 						<location>
 							<external_modules>
-								<count>0</count>
+								<count>2</count>
 								<item_version>0</item_version>
+								<item>dogen</item>
+								<item>test_models</item>
 							</external_modules>
 							<model_modules>
 								<count>1</count>
@@ -147,7 +153,7 @@
 							</internal_modules>
 							<element></element>
 						</location>
-						<identifiable>class_in_a_package</identifiable>
+						<identifiable>dogen_test_models_class_in_a_package</identifiable>
 					</name>
 					<origin_type>1</origin_type>
 					<contained_by>
@@ -189,7 +195,7 @@
 		<bucket_count>2</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="32" tracking_level="0" version="0">
-			<first>&lt;class_in_a_package&gt;&lt;package1&gt;&lt;first_class&gt;</first>
+			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;class_in_a_package&gt;&lt;package1&gt;&lt;first_class&gt;</first>
 			<second class_id="9" tracking_level="1" version="0" object_id="_2">
 				<element>
 					<documentation></documentation>
@@ -202,20 +208,22 @@
 						<scope>0</scope>
 					</annotation>
 					<name>
-						<id>&lt;class_in_a_package&gt;&lt;package1&gt;&lt;first_class&gt;</id>
+						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;class_in_a_package&gt;&lt;package1&gt;&lt;first_class&gt;</id>
 						<simple>first_class</simple>
 						<qualified>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
-								<second>class_in_a_package::package1::first_class</second>
+								<second>dogen::test_models::class_in_a_package::package1::first_class</second>
 							</item>
 						</qualified>
 						<location>
 							<external_modules>
-								<count>0</count>
+								<count>2</count>
 								<item_version>0</item_version>
+								<item>dogen</item>
+								<item>test_models</item>
 							</external_modules>
 							<model_modules>
 								<count>1</count>
@@ -229,7 +237,7 @@
 							</internal_modules>
 							<element></element>
 						</location>
-						<identifiable>class_in_a_package_package1_first_class</identifiable>
+						<identifiable>dogen_test_models_class_in_a_package_package1_first_class</identifiable>
 					</name>
 					<origin_type>4</origin_type>
 					<contained_by>
@@ -260,20 +268,22 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;class_in_a_package&gt;&lt;package1&gt;&lt;first_class&gt;&lt;public_attribute&gt;</id>
+							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;class_in_a_package&gt;&lt;package1&gt;&lt;first_class&gt;&lt;public_attribute&gt;</id>
 							<simple>public_attribute</simple>
 							<qualified>
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
-									<second>class_in_a_package::package1::first_class::public_attribute</second>
+									<second>dogen::test_models::class_in_a_package::package1::first_class::public_attribute</second>
 								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>0</count>
+									<count>2</count>
 									<item_version>0</item_version>
+									<item>dogen</item>
+									<item>test_models</item>
 								</external_modules>
 								<model_modules>
 									<count>1</count>
@@ -287,7 +297,7 @@
 								</internal_modules>
 								<element>first_class</element>
 							</location>
-							<identifiable>class_in_a_package_package1_first_class_public_attribute</identifiable>
+							<identifiable>dogen_test_models_class_in_a_package_package1_first_class_public_attribute</identifiable>
 						</name>
 						<unparsed_type>int</unparsed_type>
 						<parsed_type class_id="35" tracking_level="0" version="0">
@@ -342,20 +352,22 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;class_in_a_package&gt;&lt;package1&gt;&lt;first_class&gt;&lt;private_attribute&gt;</id>
+							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;class_in_a_package&gt;&lt;package1&gt;&lt;first_class&gt;&lt;private_attribute&gt;</id>
 							<simple>private_attribute</simple>
 							<qualified>
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
-									<second>class_in_a_package::package1::first_class::private_attribute</second>
+									<second>dogen::test_models::class_in_a_package::package1::first_class::private_attribute</second>
 								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>0</count>
+									<count>2</count>
 									<item_version>0</item_version>
+									<item>dogen</item>
+									<item>test_models</item>
 								</external_modules>
 								<model_modules>
 									<count>1</count>
@@ -369,7 +381,7 @@
 								</internal_modules>
 								<element>first_class</element>
 							</location>
-							<identifiable>class_in_a_package_package1_first_class_private_attribute</identifiable>
+							<identifiable>dogen_test_models_class_in_a_package_package1_first_class_private_attribute</identifiable>
 						</name>
 						<unparsed_type>int</unparsed_type>
 						<parsed_type>
@@ -502,15 +514,19 @@
 			<bucket_count>2</bucket_count>
 			<item_version>0</item_version>
 			<item class_id="45" tracking_level="0" version="0">
-				<first>&lt;class_in_a_package&gt;</first>
+				<first>&lt;dogen&gt;&lt;test_models&gt;&lt;class_in_a_package&gt;</first>
 				<second class_id="46" tracking_level="0" version="0">
 					<parent class_id="47" tracking_level="0" version="0">
 						<entries class_id="48" tracking_level="0" version="0">
-							<count>2</count>
+							<count>3</count>
 							<item_version>0</item_version>
 							<item class_id="49" tracking_level="0" version="0">
 								<first>yarn.dia.comment</first>
 								<second>true</second>
+							</item>
+							<item>
+								<first>yarn.dia.external_modules</first>
+								<second>dogen::test_models</second>
 							</item>
 							<item>
 								<first>annotations.profile</first>

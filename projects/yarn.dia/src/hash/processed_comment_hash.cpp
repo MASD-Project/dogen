@@ -57,6 +57,7 @@ std::size_t processed_comment_hasher::hash(const processed_comment& v) {
     combine(seed, hash_std_list_std_pair_std_string_std_string(v.key_value_pairs()));
     combine(seed, v.applicable_to_parent_object());
     combine(seed, v.original_content());
+    combine(seed, v.external_modules());
 
     return seed;
 }

@@ -10,5 +10,17 @@
     "value_type": "boolean",
     "template_kind": "instance",
     "scope": "not_applicable"
+  },
+  {
+    "name": {
+      "simple": "external_modules",
+      "qualified": "yarn.dia.external_modules"
+    },
+    "archetype_location": {
+      "kernel": "yarn.dia"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "not_applicable"
   }
 ]
