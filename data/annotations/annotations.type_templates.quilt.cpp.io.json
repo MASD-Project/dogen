@@ -1,120 +1,120 @@
 [
-    {
-        "name" : {
-            "simple" : "directory",
-            "qualified" : "quilt.cpp.io.directory"
-        },
-        "archetype_location" : {
-            "kernel" : "quilt.cpp",
-            "facet" : "quilt.cpp.io"
-        },
-        "value_type" : "text",
-        "template_kind" : "instance",
-        "scope" : "root_module",
-        "default_value" : "io"
+  {
+    "name": {
+      "simple": "directory",
+      "qualified": "quilt.cpp.io.directory"
     },
-    {
-        "name" : {
-            "simple" : "postfix",
-            "qualified" : "quilt.cpp.io.postfix"
-        },
-        "archetype_location" : {
-            "kernel" : "quilt.cpp",
-            "facet" : "quilt.cpp.io"
-        },
-        "value_type" : "text",
-        "template_kind" : "instance",
-        "scope" : "root_module",
-        "default_value" : "io"
+    "archetype_location": {
+      "kernel": "quilt.cpp",
+      "facet": "quilt.cpp.io"
     },
-    {
-        "name" : {
-            "simple" : "postfix",
-            "qualified" : "quilt.cpp.io.class_header.postfix"
-        },
-        "archetype_location" : {
-            "kernel" : "quilt.cpp",
-            "facet" : "quilt.cpp.io",
-            "archetype" : "quilt.cpp.io.class_header_formatter"
-        },
-        "value_type" : "text",
-        "template_kind" : "instance",
-        "scope" : "root_module",
-        "default_value" : ""
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": "io"
+  },
+  {
+    "name": {
+      "simple": "postfix",
+      "qualified": "quilt.cpp.io.postfix"
     },
-    {
-        "name" : {
-            "simple" : "postfix",
-            "qualified" : "quilt.cpp.io.class_implementation.postfix"
-        },
-        "archetype_location" : {
-            "kernel" : "quilt.cpp",
-            "facet" : "quilt.cpp.io",
-            "archetype" : "quilt.cpp.io.class_implementation_formatter"
-        },
-        "value_type" : "text",
-        "template_kind" : "instance",
-        "scope" : "root_module",
-        "default_value" : ""
+    "archetype_location": {
+      "kernel": "quilt.cpp",
+      "facet": "quilt.cpp.io"
     },
-    {
-        "name" : {
-            "simple" : "postfix",
-            "qualified" : "quilt.cpp.io.enum_header.postfix"
-        },
-        "archetype_location" : {
-            "kernel" : "quilt.cpp",
-            "facet" : "quilt.cpp.io",
-            "archetype" : "quilt.cpp.io.enum_header_formatter"
-        },
-        "value_type" : "text",
-        "template_kind" : "instance",
-        "scope" : "root_module",
-        "default_value" : ""
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": "io"
+  },
+  {
+    "name": {
+      "simple": "postfix",
+      "qualified": "quilt.cpp.io.class_header.postfix"
     },
-    {
-        "name" : {
-            "simple" : "postfix",
-            "qualified" : "quilt.cpp.io.enum_implementation.postfix"
-        },
-        "archetype_location" : {
-            "kernel" : "quilt.cpp",
-            "facet" : "quilt.cpp.io",
-            "archetype" : "quilt.cpp.io.enum_implementation_formatter"
-        },
-        "value_type" : "text",
-        "template_kind" : "instance",
-        "scope" : "root_module",
-        "default_value" : ""
+    "archetype_location": {
+      "kernel": "quilt.cpp",
+      "facet": "quilt.cpp.io",
+      "archetype": "quilt.cpp.io.class_header_formatter"
     },
-    {
-        "name" : {
-            "simple" : "postfix",
-            "qualified" : "quilt.cpp.io.master_header.postfix"
-        },
-        "archetype_location" : {
-            "kernel" : "quilt.cpp",
-            "facet" : "quilt.cpp.io",
-            "archetype" : "quilt.cpp.io.master_header_formatter"
-        },
-        "value_type" : "text",
-        "template_kind" : "instance",
-        "scope" : "root_module",
-        "default_value" : ""
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": ""
+  },
+  {
+    "name": {
+      "simple": "postfix",
+      "qualified": "quilt.cpp.io.class_implementation.postfix"
     },
-    {
-        "name" : {
-            "simple" : "postfix",
-            "qualified" : "quilt.cpp.io.primitive_header.postfix"
-        },
-        "archetype_location" : {
-            "kernel" : "quilt.cpp",
-            "facet" : "quilt.cpp.io",
-            "archetype" : "quilt.cpp.io.primitive_header_formatter"
-        },
-        "value_type" : "text",
-        "template_kind" : "instance",
-        "scope" : "root_module",
-        "default_value" : ""
-    }
+    "archetype_location": {
+      "kernel": "quilt.cpp",
+      "facet": "quilt.cpp.io",
+      "archetype": "quilt.cpp.io.class_implementation_formatter"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": ""
+  },
+  {
+    "name": {
+      "simple": "postfix",
+      "qualified": "quilt.cpp.io.enum_header.postfix"
+    },
+    "archetype_location": {
+      "kernel": "quilt.cpp",
+      "facet": "quilt.cpp.io",
+      "archetype": "quilt.cpp.io.enum_header_formatter"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": ""
+  },
+  {
+    "name": {
+      "simple": "postfix",
+      "qualified": "quilt.cpp.io.enum_implementation.postfix"
+    },
+    "archetype_location": {
+      "kernel": "quilt.cpp",
+      "facet": "quilt.cpp.io",
+      "archetype": "quilt.cpp.io.enum_implementation_formatter"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": ""
+  },
+  {
+    "name": {
+      "simple": "postfix",
+      "qualified": "quilt.cpp.io.master_header.postfix"
+    },
+    "archetype_location": {
+      "kernel": "quilt.cpp",
+      "facet": "quilt.cpp.io",
+      "archetype": "quilt.cpp.io.master_header_formatter"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": ""
+  },
+  {
+    "name": {
+      "simple": "postfix",
+      "qualified": "quilt.cpp.io.primitive_header.postfix"
+    },
+    "archetype_location": {
+      "kernel": "quilt.cpp",
+      "facet": "quilt.cpp.io",
+      "archetype": "quilt.cpp.io.primitive_header_formatter"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": ""
+  }
 ]

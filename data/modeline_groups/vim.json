@@ -1,86 +1,86 @@
 {
-    "group_name" : "vim",
-    "modelines" : [
+  "group_name": "vim",
+  "modelines": [
+    {
+      "modeline_name": "cpp",
+      "editor": "vim",
+      "location": "top",
+      "fields": [
         {
-            "modeline_name" : "cpp",
-            "editor" : "vim",
-            "location" : "top",
-            "fields" : [
-                {
-                    "name" : "ft",
-                    "value" : "cpp"
-                },
-                {
-                    "name" : "tabstop",
-                    "value" : "8"
-                },
-                {
-                    "name" : "expandtab",
-                    "value" : ""
-                },
-                {
-                    "name" : "shiftwidth",
-                    "value" : "4"
-                },
-                {
-                    "name" : "softtabstop",
-                    "value" : "4"
-                }
-            ]
+          "name": "ft",
+          "value": "cpp"
         },
         {
-            "modeline_name" : "cmake",
-            "editor" : "vim",
-            "location" : "top",
-            "fields" : [
-                {
-                    "name" : "ft",
-                    "value" : "cmake"
-                },
-                {
-                    "name" : "tabstop",
-                    "value" : "8"
-                },
-                {
-                    "name" : "expandtab",
-                    "value" : ""
-                },
-                {
-                    "name" : "shiftwidth",
-                    "value" : "4"
-                },
-                {
-                    "name" : "softtabstop",
-                    "value" : "4"
-                }
-            ]
+          "name": "tabstop",
+          "value": "8"
         },
         {
-            "modeline_name" : "odb",
-            "editor" : "vim",
-            "location" : "top",
-            "fields" : [
-                {
-                    "name" : "ft",
-                    "value" : "sh"
-                },
-                {
-                    "name" : "tabstop",
-                    "value" : "8"
-                },
-                {
-                    "name" : "expandtab",
-                    "value" : ""
-                },
-                {
-                    "name" : "shiftwidth",
-                    "value" : "4"
-                },
-                {
-                    "name" : "softtabstop",
-                    "value" : "4"
-                }
-            ]
+          "name": "expandtab",
+          "value": ""
+        },
+        {
+          "name": "shiftwidth",
+          "value": "4"
+        },
+        {
+          "name": "softtabstop",
+          "value": "4"
         }
-    ]
+      ]
+    },
+    {
+      "modeline_name": "cmake",
+      "editor": "vim",
+      "location": "top",
+      "fields": [
+        {
+          "name": "ft",
+          "value": "cmake"
+        },
+        {
+          "name": "tabstop",
+          "value": "8"
+        },
+        {
+          "name": "expandtab",
+          "value": ""
+        },
+        {
+          "name": "shiftwidth",
+          "value": "4"
+        },
+        {
+          "name": "softtabstop",
+          "value": "4"
+        }
+      ]
+    },
+    {
+      "modeline_name": "odb",
+      "editor": "vim",
+      "location": "top",
+      "fields": [
+        {
+          "name": "ft",
+          "value": "sh"
+        },
+        {
+          "name": "tabstop",
+          "value": "8"
+        },
+        {
+          "name": "expandtab",
+          "value": ""
+        },
+        {
+          "name": "shiftwidth",
+          "value": "4"
+        },
+        {
+          "name": "softtabstop",
+          "value": "4"
+        }
+      ]
+    }
+  ]
 }

@@ -1,90 +1,90 @@
 [
-    {
-        "name" : {
-            "simple" : "variable_number_of_parameters",
-            "qualified" : "yarn.type_parameters.variable_number_of_parameters"
-        },
-        "archetype_location" : {
-            "kernel" : "yarn"
-        },
-        "value_type" : "boolean",
-        "template_kind" : "instance",
-        "scope" : "entity",
-        "default_value" : false
+  {
+    "name": {
+      "simple": "variable_number_of_parameters",
+      "qualified": "yarn.type_parameters.variable_number_of_parameters"
     },
-    {
-        "name" : {
-            "simple" : "count",
-            "qualified" : "yarn.type_parameters.count"
-        },
-        "archetype_location" : {
-            "kernel" : "yarn"
-        },
-        "value_type" : "number",
-        "template_kind" : "instance",
-        "scope" : "entity",
-        "default_value" : 0
+    "archetype_location": {
+      "kernel": "yarn"
     },
-    {
-        "name" : {
-            "simple" : "always_in_heap",
-            "qualified" : "yarn.type_parameters.always_in_heap"
-        },
-        "archetype_location" : {
-            "kernel" : "yarn"
-        },
-        "value_type" : "boolean",
-        "template_kind" : "instance",
-        "scope" : "entity",
-        "default_value" : false
+    "value_type": "boolean",
+    "template_kind": "instance",
+    "scope": "entity",
+    "default_value": false
+  },
+  {
+    "name": {
+      "simple": "count",
+      "qualified": "yarn.type_parameters.count"
     },
-    {
-        "name" : {
-            "simple" : "is_final",
-            "qualified" : "yarn.generalization.is_final"
-        },
-        "archetype_location" : {
-            "kernel" : "yarn"
-        },
-        "value_type" : "boolean",
-        "template_kind" : "instance",
-        "scope" : "entity"
+    "archetype_location": {
+      "kernel": "yarn"
     },
-    {
-        "name" : {
-            "simple" : "parent",
-            "qualified" : "yarn.generalization.parent"
-        },
-        "archetype_location" : {
-            "kernel" : "yarn"
-        },
-        "value_type" : "text",
-        "template_kind" : "instance",
-        "scope" : "entity"
+    "value_type": "number",
+    "template_kind": "instance",
+    "scope": "entity",
+    "default_value": 0
+  },
+  {
+    "name": {
+      "simple": "always_in_heap",
+      "qualified": "yarn.type_parameters.always_in_heap"
     },
-    {
-        "name" : {
-            "simple" : "is_proxy_model",
-            "qualified" : "yarn.is_proxy_model"
-        },
-        "archetype_location" : {
-            "kernel" : "yarn"
-        },
-        "value_type" : "boolean",
-        "template_kind" : "instance",
-        "scope" : "root_module",
-        "default_value" : false
+    "archetype_location": {
+      "kernel": "yarn"
     },
-    {
-        "name" : {
-            "simple" : "reference",
-            "qualified" : "yarn.reference"
-        },
-        "archetype_location" : {
-            "kernel" : "yarn"
-        },
-        "value_type" : "text_collection",
-        "template_kind" : "instance",
-        "scope" : "root_module"
-    }
+    "value_type": "boolean",
+    "template_kind": "instance",
+    "scope": "entity",
+    "default_value": false
+  },
+  {
+    "name": {
+      "simple": "is_final",
+      "qualified": "yarn.generalization.is_final"
+    },
+    "archetype_location": {
+      "kernel": "yarn"
+    },
+    "value_type": "boolean",
+    "template_kind": "instance",
+    "scope": "entity"
+  },
+  {
+    "name": {
+      "simple": "parent",
+      "qualified": "yarn.generalization.parent"
+    },
+    "archetype_location": {
+      "kernel": "yarn"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "entity"
+  },
+  {
+    "name": {
+      "simple": "is_proxy_model",
+      "qualified": "yarn.is_proxy_model"
+    },
+    "archetype_location": {
+      "kernel": "yarn"
+    },
+    "value_type": "boolean",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": false
+  },
+  {
+    "name": {
+      "simple": "reference",
+      "qualified": "yarn.reference"
+    },
+    "archetype_location": {
+      "kernel": "yarn"
+    },
+    "value_type": "text_collection",
+    "template_kind": "instance",
+    "scope": "root_module"
+  }
 ]

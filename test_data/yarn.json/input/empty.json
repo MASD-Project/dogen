@@ -1,4 +1,4 @@
 {
-    "model_name" : "empty",
-    "external_modules" : "dogen::test_models"
+  "model_name": "empty",
+  "external_modules": "dogen::test_models"
 }

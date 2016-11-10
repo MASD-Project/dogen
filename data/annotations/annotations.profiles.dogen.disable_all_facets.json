@@ -1,5 +1,8 @@
 {
-    "name" : "dogen.disable_all_facets",
-    "parents" : [ "dogen", "core.disable_all_facets" ],
-    "scope" : "root_module"
+  "name": "dogen.disable_all_facets",
+  "parents": [
+    "dogen",
+    "core.disable_all_facets"
+  ],
+  "scope": "root_module"
 }

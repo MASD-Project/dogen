@@ -1,18 +1,22 @@
 {
-    "name" : "dogen.disable_facet_directories",
-    "parents" : [ "dogen.enable_all_facets" ],
-    "scope" : "root_module",
-    "templates" : [
-        {
-            "name" : {
-                "simple" : "disable_facet_directories",
-                "qualified" : "quilt.cpp.disable_facet_directories"
-            },
-            "archetype_location" : {
-                "kernel" : "quilt.cpp"
-            },
-            "template_kind" : "instance",
-            "untyped_value" : [ "true" ]
-        }
-    ]
+  "name": "dogen.disable_facet_directories",
+  "parents": [
+    "dogen.enable_all_facets"
+  ],
+  "scope": "root_module",
+  "templates": [
+    {
+      "name": {
+        "simple": "disable_facet_directories",
+        "qualified": "quilt.cpp.disable_facet_directories"
+      },
+      "archetype_location": {
+        "kernel": "quilt.cpp"
+      },
+      "template_kind": "instance",
+      "untyped_value": [
+        "true"
+      ]
+    }
+  ]
 }

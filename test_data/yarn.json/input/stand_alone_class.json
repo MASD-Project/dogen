@@ -1,21 +1,21 @@
 {
-    "model_name" : "stand_alone_class",
-    "external_modules" : "dogen::test_models",
-    "annotation" : {
-        "annotations.profile" : "dogen"
-    },
-    "elements" : [
+  "model_name": "stand_alone_class",
+  "external_modules": "dogen::test_models",
+  "annotation": {
+    "annotations.profile": "dogen"
+  },
+  "elements": [
+    {
+      "name": {
+        "simple_name": "class_1"
+      },
+      "meta_type": "object",
+      "attributes": [
         {
-            "name" : {
-                "simple_name" : "class_1"
-            },
-            "meta_type" : "object",
-            "attributes" : [
-                {
-                    "simple_name" : "prop_0",
-                    "type" : "int"
-                }
-            ]
+          "simple_name": "prop_0",
+          "type": "int"
         }
-    ]
+      ]
+    }
+  ]
 }

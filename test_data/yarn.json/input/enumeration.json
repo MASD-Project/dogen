@@ -1,88 +1,94 @@
 {
-    "model_name" : "enumeration",
-    "external_modules" : "dogen::test_models",
-    "annotation" : {
-        "annotations.profile" : "dogen"
-    },
-    "elements" : [
+  "model_name": "enumeration",
+  "external_modules": "dogen::test_models",
+  "annotation": {
+    "annotations.profile": "dogen"
+  },
+  "elements": [
+    {
+      "name": {
+        "simple_name": "book_types"
+      },
+      "meta_type": "enumeration",
+      "documentation": "this is a brief comment\n\nthis is a long comment",
+      "enumerators": [
         {
-            "name" : {
-                "simple_name" : "book_types"
-            },
-            "meta_type" : "enumeration",
-            "documentation" : "this is a brief comment\n\nthis is a long comment",
-            "enumerators" : [
-                { "simple_name" : "great" },
-                { "simple_name" : "not_so_great" },
-                { "simple_name" : "bad" }
-            ]
+          "simple_name": "great"
         },
         {
-            "name" : {
-                "simple_name" : "colour_types"
-            },
-            "meta_type" : "enumeration",
-            "enumerators" : [
-                {
-                    "simple_name" : "red",
-                    "documentation" : "this is colour red"
-                },
-                {
-                    "simple_name" : "blue",
-                    "documentation" : "this is blue"
-                },
-                {
-                    "simple_name" : "green"
-                },
-                {
-                    "simple_name" : "gray",
-                    "documentation" : "another comment"
-                }
-            ]
+          "simple_name": "not_so_great"
         },
         {
-            "name" : {
-                "simple_name" : "a_class"
-            },
-            "meta_type" : "object",
-            "attributes" : [
-                {
-                    "simple_name" : "colour_type",
-                    "type" : "colour_types"
-                },
-                {
-                    "simple_name" : "book_type",
-                    "type" : "book_types"
-                },
-                {
-                    "simple_name" : "shape_type",
-                    "type" : "pkg1::shape_types"
-                }
-            ]
-        },
-        {
-            "name" : {
-                "simple_name" : "shape_types",
-                "internal_modules" : "pkg1"
-            },
-            "meta_type" : "enumeration",
-            "enumerators" : [
-                {
-                    "simple_name" : "triangle",
-                    "documentation" : "some comment"
-                },
-                {
-                    "simple_name" : "square",
-                    "documentation" : "other comment"
-                },
-                {
-                    "simple_name" : "rectangle"
-                },
-                {
-                    "simple_name" : "cube",
-                    "documentation" : "some comment"
-                }
-            ]
+          "simple_name": "bad"
         }
-    ]
+      ]
+    },
+    {
+      "name": {
+        "simple_name": "colour_types"
+      },
+      "meta_type": "enumeration",
+      "enumerators": [
+        {
+          "simple_name": "red",
+          "documentation": "this is colour red"
+        },
+        {
+          "simple_name": "blue",
+          "documentation": "this is blue"
+        },
+        {
+          "simple_name": "green"
+        },
+        {
+          "simple_name": "gray",
+          "documentation": "another comment"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple_name": "a_class"
+      },
+      "meta_type": "object",
+      "attributes": [
+        {
+          "simple_name": "colour_type",
+          "type": "colour_types"
+        },
+        {
+          "simple_name": "book_type",
+          "type": "book_types"
+        },
+        {
+          "simple_name": "shape_type",
+          "type": "pkg1::shape_types"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple_name": "shape_types",
+        "internal_modules": "pkg1"
+      },
+      "meta_type": "enumeration",
+      "enumerators": [
+        {
+          "simple_name": "triangle",
+          "documentation": "some comment"
+        },
+        {
+          "simple_name": "square",
+          "documentation": "other comment"
+        },
+        {
+          "simple_name": "rectangle"
+        },
+        {
+          "simple_name": "cube",
+          "documentation": "some comment"
+        }
+      ]
+    }
+  ]
 }

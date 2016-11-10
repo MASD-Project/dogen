@@ -68,6 +68,10 @@ if (WITH_JSON_VALIDATION)
     set(target "yarn.json")
     add_custom_target(validate_json_${target})
     add_dependencies(validate_all_json validate_json_${target})
+
+    add_custom_target(indent_json_${target})
+    add_dependencies(indent_all_json indent_json_${target})
+
     foreach(file ${files})
         add_custom_target(validate_json_${target}_${file}
             COMMENT "Validating JSON for ${target}/${file}."
@@ -75,6 +79,14 @@ if (WITH_JSON_VALIDATION)
             COMMAND ${JQ_COMMAND} . ${folder}/${file} > /dev/null)
         add_dependencies(validate_json_${target}
             validate_json_${target}_${file})
+
+        add_custom_target(indent_json_${target}_${file}
+            COMMENT "Indenting JSON for ${target}/${file}."
+            WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+            COMMAND ${JQ_COMMAND} . ${folder}/${file} > ${folder}/${file}_tmp
+            COMMAND mv ${folder}/${file}_tmp ${folder}/${file})
+        add_dependencies(indent_json_${target}
+            indent_json_${target}_${file})
     endforeach()
 endif()
 

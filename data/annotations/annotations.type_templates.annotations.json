@@ -1,14 +1,14 @@
 [
-    {
-        "name" : {
-            "simple" : "profile",
-            "qualified" : "annotations.profile"
-        },
-        "archetype_location" : {
-            "kernel" : "annotations"
-        },
-        "value_type" : "text",
-        "template_kind" : "instance",
-        "scope" : "any"
-    }
+  {
+    "name": {
+      "simple": "profile",
+      "qualified": "annotations.profile"
+    },
+    "archetype_location": {
+      "kernel": "annotations"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "any"
+  }
 ]

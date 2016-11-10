@@ -1,66 +1,66 @@
 {
-    "group_name" : "emacs",
-    "modelines" : [
+  "group_name": "emacs",
+  "modelines": [
+    {
+      "modeline_name": "cpp",
+      "editor": "emacs",
+      "location": "top",
+      "fields": [
         {
-            "modeline_name" : "cpp",
-            "editor" : "emacs",
-            "location" : "top",
-            "fields" : [
-                {
-                    "name" : "mode",
-                    "value" : "c++"
-                },
-                {
-                    "name" : "tab-width",
-                    "value" : "4"
-                },
-                {
-                    "name" : "indent-tabs-mode",
-                    "value" : "nil"
-                },
-                {
-                    "name" : "c-basic-offset",
-                    "value" : "4"
-                }
-            ]
+          "name": "mode",
+          "value": "c++"
         },
         {
-            "modeline_name" : "cmake",
-            "editor" : "emacs",
-            "location" : "top",
-            "fields" : [
-                {
-                    "name" : "mode",
-                    "value" : "cmake"
-                },
-                {
-                    "name" : "tab-width",
-                    "value" : "4"
-                },
-                {
-                    "name" : "indent-tabs-mode",
-                    "value" : "nil"
-                }
-            ]
+          "name": "tab-width",
+          "value": "4"
         },
         {
-            "modeline_name" : "odb",
-            "editor" : "emacs",
-            "location" : "top",
-            "fields" : [
-                {
-                    "name" : "mode",
-                    "value" : "sh"
-                },
-                {
-                    "name" : "tab-width",
-                    "value" : "4"
-                },
-                {
-                    "name" : "indent-tabs-mode",
-                    "value" : "nil"
-                }
-            ]
+          "name": "indent-tabs-mode",
+          "value": "nil"
+        },
+        {
+          "name": "c-basic-offset",
+          "value": "4"
         }
-    ]
+      ]
+    },
+    {
+      "modeline_name": "cmake",
+      "editor": "emacs",
+      "location": "top",
+      "fields": [
+        {
+          "name": "mode",
+          "value": "cmake"
+        },
+        {
+          "name": "tab-width",
+          "value": "4"
+        },
+        {
+          "name": "indent-tabs-mode",
+          "value": "nil"
+        }
+      ]
+    },
+    {
+      "modeline_name": "odb",
+      "editor": "emacs",
+      "location": "top",
+      "fields": [
+        {
+          "name": "mode",
+          "value": "sh"
+        },
+        {
+          "name": "tab-width",
+          "value": "4"
+        },
+        {
+          "name": "indent-tabs-mode",
+          "value": "nil"
+        }
+      ]
+    }
+  ]
 }

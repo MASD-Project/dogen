@@ -1,383 +1,381 @@
 [
-    {
-        "name" : {
-            "simple" : "enabled"
-        },
-        "archetype_location" : {
-            "kernel" : "quilt.cpp"
-        },
-        "value_type" : "boolean",
-        "template_kind" : "global_template",
-        "scope" : "any",
-        "default_value" : true
+  {
+    "name": {
+      "simple": "enabled"
     },
-    {
-        "name" : {
-            "simple" : "supported"
-        },
-        "archetype_location" : {
-            "kernel" : "quilt.cpp"
-        },
-        "value_type" : "boolean",
-        "template_kind" : "facet_template",
-        "scope" : "entity",
-        "default_value" : true
+    "archetype_location": {
+      "kernel": "quilt.cpp"
     },
-    {
-        "name" : {
-            "simple" : "overwrite"
-        },
-        "archetype_location" : {
-            "kernel" : "quilt.cpp"
-        },
-        "value_type" : "boolean",
-        "template_kind" : "facet_template",
-        "scope" : "any",
-        "default_value" : true
+    "value_type": "boolean",
+    "template_kind": "global_template",
+    "scope": "any",
+    "default_value": true
+  },
+  {
+    "name": {
+      "simple": "supported"
     },
-    {
-        "name" : {
-            "simple" : "overwrite"
-        },
-        "archetype_location" : {
-            "kernel" : "quilt.cpp"
-        },
-        "value_type" : "boolean",
-        "template_kind" : "formatter_template",
-        "scope" : "any"
+    "archetype_location": {
+      "kernel": "quilt.cpp"
     },
-    {
-        "name" : {
-            "simple" : "formatting_style"
-        },
-        "archetype_location" : {
-            "kernel" : "quilt.cpp"
-        },
-        "value_type" : "text",
-        "template_kind" : "formatter_template",
-        "scope" : "any"
+    "value_type": "boolean",
+    "template_kind": "facet_template",
+    "scope": "entity",
+    "default_value": true
+  },
+  {
+    "name": {
+      "simple": "overwrite"
     },
-    {
-        "name" : {
-            "simple" : "formatting_input"
-        },
-        "archetype_location" : {
-            "kernel" : "quilt.cpp"
-        },
-        "value_type" : "text",
-        "template_kind" : "formatter_template",
-        "scope" : "any"
+    "archetype_location": {
+      "kernel": "quilt.cpp"
     },
-    {
-        "name" : {
-            "simple" : "profile",
-            "qualified" : "quilt.cpp.profile"
-        },
-        "archetype_location" : {
-            "kernel" : "quilt.cpp"
-        },
-        "value_type" : "text",
-        "template_kind" : "instance",
-        "scope" : "entity",
-        "default_value" : "default"
+    "value_type": "boolean",
+    "template_kind": "facet_template",
+    "scope": "any",
+    "default_value": true
+  },
+  {
+    "name": {
+      "simple": "overwrite"
     },
-    {
-        "name" : {
-            "simple" : "file_path"
-        },
-        "archetype_location" : {
-            "kernel" : "quilt.cpp"
-        },
-        "value_type" : "text",
-        "template_kind" : "formatter_template",
-        "scope" : "entity"
+    "archetype_location": {
+      "kernel": "quilt.cpp"
     },
-    {
-        "name" : {
-            "simple" : "header_guard"
-        },
-        "archetype_location" : {
-            "kernel" : "quilt.cpp",
-            "formatter_group" : "quilt.cpp.header_files"
-        },
-        "value_type" : "text",
-        "template_kind" : "formatter_template",
-        "scope" : "entity"
+    "value_type": "boolean",
+    "template_kind": "formatter_template",
+    "scope": "any"
+  },
+  {
+    "name": {
+      "simple": "formatting_style"
     },
-    {
-        "name" : {
-            "simple" : "inclusion_required",
-            "qualified" : "quilt.cpp.inclusion_required"
-
-        },
-        "archetype_location" : {
-            "kernel" : "quilt.cpp"
-        },
-        "value_type" : "boolean",
-        "template_kind" : "instance",
-        "scope" : "entity",
-        "default_value" : true
+    "archetype_location": {
+      "kernel": "quilt.cpp"
     },
-    {
-        "name" : {
-            "simple" : "inclusion_directive",
-            "formatter_group" : "quilt.cpp.header_files"
-        },
-        "archetype_location" : {
-            "kernel" : "quilt.cpp"
-        },
-        "value_type" : "text",
-        "template_kind" : "formatter_template",
-        "scope" : "entity"
+    "value_type": "text",
+    "template_kind": "formatter_template",
+    "scope": "any"
+  },
+  {
+    "name": {
+      "simple": "formatting_input"
     },
-    {
-        "name" : {
-            "simple" : "inclusion_dependency"
-        },
-        "archetype_location" : {
-            "kernel" : "quilt.cpp"
-        },
-        "value_type" : "text_collection",
-        "template_kind" : "formatter_template",
-        "scope" : "entity"
+    "archetype_location": {
+      "kernel": "quilt.cpp"
     },
-    {
-        "name" : {
-            "simple" : "inclusion_required",
-            "formatter_group" : "quilt.cpp.header_files"
-
-        },
-        "archetype_location" : {
-            "kernel" : "quilt.cpp"
-        },
-        "value_type" : "boolean",
-        "template_kind" : "formatter_template",
-        "scope" : "entity",
-        "default_value" : true
+    "value_type": "text",
+    "template_kind": "formatter_template",
+    "scope": "any"
+  },
+  {
+    "name": {
+      "simple": "profile",
+      "qualified": "quilt.cpp.profile"
     },
-    {
-        "name" : {
-            "simple" : "split_project",
-            "qualified" : "quilt.cpp.split_project"
-        },
-        "archetype_location" : {
-            "kernel" : "quilt.cpp"
-        },
-        "value_type" : "boolean",
-        "template_kind" : "instance",
-        "scope" : "root_module",
-        "default_value" : false
+    "archetype_location": {
+      "kernel": "quilt.cpp"
     },
-    {
-        "name" : {
-            "simple" : "source_directory_name",
-            "qualified" : "quilt.cpp.source_directory_name"
-        },
-        "archetype_location" : {
-            "kernel" : "quilt.cpp"
-        },
-        "value_type" : "text",
-        "template_kind" : "instance",
-        "scope" : "root_module",
-        "default_value" : "src"
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "entity",
+    "default_value": "default"
+  },
+  {
+    "name": {
+      "simple": "file_path"
     },
-    {
-        "name" : {
-            "simple" : "include_directory_name",
-            "qualified" : "quilt.cpp.include_directory_name"
-        },
-        "archetype_location" : {
-            "kernel" : "quilt.cpp"
-        },
-        "value_type" : "text",
-        "template_kind" : "instance",
-        "scope" : "root_module",
-        "default_value" : "include"
+    "archetype_location": {
+      "kernel": "quilt.cpp"
     },
-    {
-        "name" : {
-            "simple" : "header_file_extension",
-            "qualified" : "quilt.cpp.header_file_extension"
-        },
-        "archetype_location" : {
-            "kernel" : "quilt.cpp"
-        },
-        "value_type" : "text",
-        "template_kind" : "instance",
-        "scope" : "root_module",
-        "default_value" : "hpp"
+    "value_type": "text",
+    "template_kind": "formatter_template",
+    "scope": "entity"
+  },
+  {
+    "name": {
+      "simple": "header_guard"
     },
-    {
-        "name" : {
-            "simple" : "implementation_file_extension",
-            "qualified" : "quilt.cpp.implementation_file_extension"
-        },
-        "archetype_location" : {
-            "kernel" : "quilt.cpp"
-        },
-        "value_type" : "text",
-        "template_kind" : "instance",
-        "scope" : "root_module",
-        "default_value" : "cpp"
+    "archetype_location": {
+      "kernel": "quilt.cpp",
+      "formatter_group": "quilt.cpp.header_files"
     },
-    {
-        "name" : {
-            "simple" : "enable_facet_folders",
-            "qualified" : "quilt.cpp.enable_facet_folders"
-        },
-        "archetype_location" : {
-            "kernel" : "quilt.cpp"
-        },
-        "value_type" : "boolean",
-        "template_kind" : "instance",
-        "scope" : "root_module",
-        "default_value" : true
+    "value_type": "text",
+    "template_kind": "formatter_template",
+    "scope": "entity"
+  },
+  {
+    "name": {
+      "simple": "inclusion_required",
+      "qualified": "quilt.cpp.inclusion_required"
     },
-    {
-        "name" : {
-            "simple" : "enable_unique_file_names",
-            "qualified" : "quilt.cpp.enable_unique_file_names"
-        },
-        "archetype_location" : {
-            "kernel" : "quilt.cpp"
-        },
-        "value_type" : "boolean",
-        "template_kind" : "instance",
-        "scope" : "root_module",
-        "default_value" : true
+    "archetype_location": {
+      "kernel": "quilt.cpp"
     },
-    {
-        "name" : {
-            "simple" : "requires_manual_default_constructor",
-            "qualified" : "quilt.cpp.aspect.requires_manual_default_constructor"
-        },
-        "archetype_location" : {
-            "kernel" : "quilt.cpp"
-        },
-        "value_type" : "boolean",
-        "template_kind" : "instance",
-        "scope" : "entity",
-        "default_value" : false
+    "value_type": "boolean",
+    "template_kind": "instance",
+    "scope": "entity",
+    "default_value": true
+  },
+  {
+    "name": {
+      "simple": "inclusion_directive",
+      "formatter_group": "quilt.cpp.header_files"
     },
-    {
-        "name" : {
-            "simple" : "requires_manual_move_constructor",
-            "qualified" : "quilt.cpp.aspect.requires_manual_move_constructor"
-        },
-        "archetype_location" : {
-            "kernel" : "quilt.cpp"
-        },
-        "value_type" : "boolean",
-        "template_kind" : "instance",
-        "scope" : "entity",
-        "default_value" : false
+    "archetype_location": {
+      "kernel": "quilt.cpp"
     },
-    {
-        "name" : {
-            "simple" : "requires_stream_manipulators",
-            "qualified" : "quilt.cpp.aspect.requires_stream_manipulators"
-        },
-        "archetype_location" : {
-            "kernel" : "quilt.cpp"
-        },
-        "value_type" : "boolean",
-        "template_kind" : "instance",
-        "scope" : "entity",
-        "default_value" : false
+    "value_type": "text",
+    "template_kind": "formatter_template",
+    "scope": "entity"
+  },
+  {
+    "name": {
+      "simple": "inclusion_dependency"
     },
-    {
-        "name" : {
-            "simple" : "disable_facet_directories",
-            "qualified" : "quilt.cpp.disable_facet_directories"
-        },
-        "archetype_location" : {
-            "kernel" : "quilt.cpp"
-        },
-        "value_type" : "boolean",
-        "template_kind" : "instance",
-        "scope" : "root_module",
-        "default_value" : false
+    "archetype_location": {
+      "kernel": "quilt.cpp"
     },
-    {
-        "name" : {
-            "simple" : "family",
-            "qualified" : "quilt.cpp.helper.family"
-        },
-        "archetype_location" : {
-            "kernel" : "quilt.cpp"
-        },
-        "value_type" : "text",
-        "template_kind" : "instance",
-        "scope" : "entity",
-        "default_value" : "Default"
+    "value_type": "text_collection",
+    "template_kind": "formatter_template",
+    "scope": "entity"
+  },
+  {
+    "name": {
+      "simple": "inclusion_required",
+      "formatter_group": "quilt.cpp.header_files"
     },
-    {
-        "name" : {
-            "simple" : "string_conversion_method",
-            "qualified" : "quilt.cpp.streaming.string_conversion_method"
-        },
-        "archetype_location" : {
-            "kernel" : "quilt.cpp"
-        },
-        "value_type" : "text",
-        "template_kind" : "instance",
-        "scope" : "entity",
-        "default_value" : ""
+    "archetype_location": {
+      "kernel": "quilt.cpp"
     },
-    {
-        "name" : {
-            "simple" : "requires_quoting",
-            "qualified" : "quilt.cpp.streaming.requires_quoting"
-        },
-        "archetype_location" : {
-            "kernel" : "quilt.cpp"
-        },
-        "value_type" : "boolean",
-        "template_kind" : "instance",
-        "scope" : "entity",
-        "default_value" : false
+    "value_type": "boolean",
+    "template_kind": "formatter_template",
+    "scope": "entity",
+    "default_value": true
+  },
+  {
+    "name": {
+      "simple": "split_project",
+      "qualified": "quilt.cpp.split_project"
     },
-    {
-        "name" : {
-            "simple" : "remove_unprintable_characters",
-            "qualified" : "quilt.cpp.streaming.remove_unprintable_characters"
-        },
-        "archetype_location" : {
-            "kernel" : "quilt.cpp"
-        },
-        "value_type" : "boolean",
-        "template_kind" : "instance",
-        "scope" : "entity",
-        "default_value" : false
+    "archetype_location": {
+      "kernel": "quilt.cpp"
     },
-    {
-        "name" : {
-            "simple" : "postfix",
-            "qualified" : "quilt.cpp.cmake.source_cmakelists.postfix"
-        },
-        "archetype_location" : {
-            "kernel" : "quilt.cpp",
-            "facet" : "cmake",
-            "archetype" : "quilt.cpp.cmake.source_cmakelists.postfix"
-        },
-        "value_type" : "text",
-        "template_kind" : "instance",
-        "scope" : "root_module",
-        "default_value" : ""
+    "value_type": "boolean",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": false
+  },
+  {
+    "name": {
+      "simple": "source_directory_name",
+      "qualified": "quilt.cpp.source_directory_name"
     },
-    {
-        "name" : {
-            "simple" : "postfix",
-            "qualified" : "quilt.cpp.cmake.include_cmakelists.postfix"
-        },
-        "archetype_location" : {
-            "kernel" : "quilt.cpp",
-            "facet" : "cmake",
-            "archetype" : "quilt.cpp.cmake.include_cmakelists.postfix"
-        },
-        "value_type" : "text",
-        "template_kind" : "instance",
-        "scope" : "root_module",
-        "default_value" : ""
-    }
+    "archetype_location": {
+      "kernel": "quilt.cpp"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": "src"
+  },
+  {
+    "name": {
+      "simple": "include_directory_name",
+      "qualified": "quilt.cpp.include_directory_name"
+    },
+    "archetype_location": {
+      "kernel": "quilt.cpp"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": "include"
+  },
+  {
+    "name": {
+      "simple": "header_file_extension",
+      "qualified": "quilt.cpp.header_file_extension"
+    },
+    "archetype_location": {
+      "kernel": "quilt.cpp"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": "hpp"
+  },
+  {
+    "name": {
+      "simple": "implementation_file_extension",
+      "qualified": "quilt.cpp.implementation_file_extension"
+    },
+    "archetype_location": {
+      "kernel": "quilt.cpp"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": "cpp"
+  },
+  {
+    "name": {
+      "simple": "enable_facet_folders",
+      "qualified": "quilt.cpp.enable_facet_folders"
+    },
+    "archetype_location": {
+      "kernel": "quilt.cpp"
+    },
+    "value_type": "boolean",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": true
+  },
+  {
+    "name": {
+      "simple": "enable_unique_file_names",
+      "qualified": "quilt.cpp.enable_unique_file_names"
+    },
+    "archetype_location": {
+      "kernel": "quilt.cpp"
+    },
+    "value_type": "boolean",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": true
+  },
+  {
+    "name": {
+      "simple": "requires_manual_default_constructor",
+      "qualified": "quilt.cpp.aspect.requires_manual_default_constructor"
+    },
+    "archetype_location": {
+      "kernel": "quilt.cpp"
+    },
+    "value_type": "boolean",
+    "template_kind": "instance",
+    "scope": "entity",
+    "default_value": false
+  },
+  {
+    "name": {
+      "simple": "requires_manual_move_constructor",
+      "qualified": "quilt.cpp.aspect.requires_manual_move_constructor"
+    },
+    "archetype_location": {
+      "kernel": "quilt.cpp"
+    },
+    "value_type": "boolean",
+    "template_kind": "instance",
+    "scope": "entity",
+    "default_value": false
+  },
+  {
+    "name": {
+      "simple": "requires_stream_manipulators",
+      "qualified": "quilt.cpp.aspect.requires_stream_manipulators"
+    },
+    "archetype_location": {
+      "kernel": "quilt.cpp"
+    },
+    "value_type": "boolean",
+    "template_kind": "instance",
+    "scope": "entity",
+    "default_value": false
+  },
+  {
+    "name": {
+      "simple": "disable_facet_directories",
+      "qualified": "quilt.cpp.disable_facet_directories"
+    },
+    "archetype_location": {
+      "kernel": "quilt.cpp"
+    },
+    "value_type": "boolean",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": false
+  },
+  {
+    "name": {
+      "simple": "family",
+      "qualified": "quilt.cpp.helper.family"
+    },
+    "archetype_location": {
+      "kernel": "quilt.cpp"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "entity",
+    "default_value": "Default"
+  },
+  {
+    "name": {
+      "simple": "string_conversion_method",
+      "qualified": "quilt.cpp.streaming.string_conversion_method"
+    },
+    "archetype_location": {
+      "kernel": "quilt.cpp"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "entity",
+    "default_value": ""
+  },
+  {
+    "name": {
+      "simple": "requires_quoting",
+      "qualified": "quilt.cpp.streaming.requires_quoting"
+    },
+    "archetype_location": {
+      "kernel": "quilt.cpp"
+    },
+    "value_type": "boolean",
+    "template_kind": "instance",
+    "scope": "entity",
+    "default_value": false
+  },
+  {
+    "name": {
+      "simple": "remove_unprintable_characters",
+      "qualified": "quilt.cpp.streaming.remove_unprintable_characters"
+    },
+    "archetype_location": {
+      "kernel": "quilt.cpp"
+    },
+    "value_type": "boolean",
+    "template_kind": "instance",
+    "scope": "entity",
+    "default_value": false
+  },
+  {
+    "name": {
+      "simple": "postfix",
+      "qualified": "quilt.cpp.cmake.source_cmakelists.postfix"
+    },
+    "archetype_location": {
+      "kernel": "quilt.cpp",
+      "facet": "cmake",
+      "archetype": "quilt.cpp.cmake.source_cmakelists.postfix"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": ""
+  },
+  {
+    "name": {
+      "simple": "postfix",
+      "qualified": "quilt.cpp.cmake.include_cmakelists.postfix"
+    },
+    "archetype_location": {
+      "kernel": "quilt.cpp",
+      "facet": "cmake",
+      "archetype": "quilt.cpp.cmake.include_cmakelists.postfix"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": ""
+  }
 ]

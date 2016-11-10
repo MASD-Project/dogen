@@ -1,16 +1,18 @@
 {
-    "name" : "core.disable_all_facets",
-    "scope" : "root_module",
-    "templates" : [
-        {
-            "name" : {
-                "simple" : "enabled"
-            },
-            "archetype_location" : {
-                "kernel" : "quilt.cpp"
-            },
-            "template_kind" : "facet_template",
-            "untyped_value" : [ "false" ]
-        }
-    ]
+  "name": "core.disable_all_facets",
+  "scope": "root_module",
+  "templates": [
+    {
+      "name": {
+        "simple": "enabled"
+      },
+      "archetype_location": {
+        "kernel": "quilt.cpp"
+      },
+      "template_kind": "facet_template",
+      "untyped_value": [
+        "false"
+      ]
+    }
+  ]
 }

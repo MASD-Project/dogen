@@ -1,35 +1,35 @@
 {
-    "model_name" : "classes_inout_package",
-    "external_modules" : "dogen::test_models",
-    "annotation" : {
-        "annotations.profile" : "dogen"
-    },
-    "elements" : [
+  "model_name": "classes_inout_package",
+  "external_modules": "dogen::test_models",
+  "annotation": {
+    "annotations.profile": "dogen"
+  },
+  "elements": [
+    {
+      "name": {
+        "simple_name": "class_1",
+        "internal_modules": "package_1"
+      },
+      "meta_type": "object",
+      "attributes": [
         {
-            "name" : {
-                "simple_name" : "class_1",
-                "internal_modules" : "package_1"
-            },
-            "meta_type" : "object",
-            "attributes" : [
-                {
-                    "simple_name" : "prop_0",
-                    "type" : "int"
-                }
-            ]
-        },
-        {
-            "name" : {
-                "simple_name" : "class_2"
-            },
-            "meta_type" : "object",
-            "simple_name" : "class_2",
-            "attributes" : [
-                {
-                    "simple_name" : "prop_0",
-                    "type" : "int"
-                }
-            ]
+          "simple_name": "prop_0",
+          "type": "int"
         }
-    ]
+      ]
+    },
+    {
+      "name": {
+        "simple_name": "class_2"
+      },
+      "meta_type": "object",
+      "simple_name": "class_2",
+      "attributes": [
+        {
+          "simple_name": "prop_0",
+          "type": "int"
+        }
+      ]
+    }
+  ]
 }

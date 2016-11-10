@@ -1,86 +1,86 @@
 [
-    {
-        "name" : {
-            "simple" : "generate_decoration",
-            "qualified" : "decoration.generate_decoration"
-        },
-        "archetype_location" : {
-            "kernel" : "formatters"
-        },
-        "value_type" : "boolean",
-        "template_kind" : "instance",
-        "scope" : "any"
+  {
+    "name": {
+      "simple": "generate_decoration",
+      "qualified": "decoration.generate_decoration"
     },
-    {
-        "name" : {
-            "simple" : "copyright_notice",
-            "qualified" : "decoration.copyright_notice"
-        },
-        "archetype_location" : {
-            "kernel" : "formatters"
-        },
-        "value_type" : "text_collection",
-        "template_kind" : "instance",
-        "scope" : "any"
+    "archetype_location": {
+      "kernel": "formatters"
     },
-    {
-        "name" : {
-            "simple" : "licence_name",
-            "qualified" : "decoration.licence_name"
-        },
-        "archetype_location" : {
-            "kernel" : "formatters"
-        },
-        "value_type" : "text",
-        "template_kind" : "instance",
-        "scope" : "any"
+    "value_type": "boolean",
+    "template_kind": "instance",
+    "scope": "any"
+  },
+  {
+    "name": {
+      "simple": "copyright_notice",
+      "qualified": "decoration.copyright_notice"
     },
-    {
-        "name" : {
-            "simple" : "modeline_group_name",
-            "qualified" : "decoration.modeline_group_name"
-        },
-        "archetype_location" : {
-            "kernel" : "formatters"
-        },
-        "value_type" : "text",
-        "template_kind" : "instance",
-        "scope" : "any"
+    "archetype_location": {
+      "kernel": "formatters"
     },
-    {
-        "name" : {
-            "simple" : "add_date_time",
-            "qualified" : "decoration.code_generation_marker.add_date_time"
-        },
-        "archetype_location" : {
-            "kernel" : "formatters"
-        },
-        "value_type" : "boolean",
-        "template_kind" : "instance",
-        "scope" : "any"
+    "value_type": "text_collection",
+    "template_kind": "instance",
+    "scope": "any"
+  },
+  {
+    "name": {
+      "simple": "licence_name",
+      "qualified": "decoration.licence_name"
     },
-    {
-        "name" : {
-            "simple" : "add_warning",
-            "qualified" : "decoration.code_generation_marker.add_warning"
-        },
-        "archetype_location" : {
-            "kernel" : "formatters"
-        },
-        "value_type" : "boolean",
-        "template_kind" : "instance",
-        "scope" : "any"
+    "archetype_location": {
+      "kernel": "formatters"
     },
-    {
-        "name" : {
-            "simple" : "message",
-            "qualified" : "decoration.code_generation_marker.message"
-        },
-        "archetype_location" : {
-            "kernel" : "formatters"
-        },
-        "value_type" : "text",
-        "template_kind" : "instance",
-        "scope" : "any"
-    }
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "any"
+  },
+  {
+    "name": {
+      "simple": "modeline_group_name",
+      "qualified": "decoration.modeline_group_name"
+    },
+    "archetype_location": {
+      "kernel": "formatters"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "any"
+  },
+  {
+    "name": {
+      "simple": "add_date_time",
+      "qualified": "decoration.code_generation_marker.add_date_time"
+    },
+    "archetype_location": {
+      "kernel": "formatters"
+    },
+    "value_type": "boolean",
+    "template_kind": "instance",
+    "scope": "any"
+  },
+  {
+    "name": {
+      "simple": "add_warning",
+      "qualified": "decoration.code_generation_marker.add_warning"
+    },
+    "archetype_location": {
+      "kernel": "formatters"
+    },
+    "value_type": "boolean",
+    "template_kind": "instance",
+    "scope": "any"
+  },
+  {
+    "name": {
+      "simple": "message",
+      "qualified": "decoration.code_generation_marker.message"
+    },
+    "archetype_location": {
+      "kernel": "formatters"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "any"
+  }
 ]

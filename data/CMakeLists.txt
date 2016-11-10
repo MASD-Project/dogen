@@ -46,6 +46,10 @@ if (WITH_JSON_VALIDATION)
 
     add_custom_target(validate_json_${folder})
     add_dependencies(validate_all_json validate_json_${folder})
+
+    add_custom_target(indent_json_${folder})
+    add_dependencies(indent_all_json indent_json_${folder})
+
     foreach(file ${files})
         add_custom_target(validate_json_${folder}_${file}
             COMMENT "Validating JSON for ${folder}/${file}."
@@ -53,6 +57,14 @@ if (WITH_JSON_VALIDATION)
             COMMAND ${JQ_COMMAND} . ${folder}/${file} > /dev/null)
         add_dependencies(validate_json_${folder}
             validate_json_${folder}_${file})
+
+        add_custom_target(indent_json_${folder}_${file}
+            COMMENT "Indenting JSON for ${folder}/${file}."
+            WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+            COMMAND ${JQ_COMMAND} . ${folder}/${file} > ${folder}/${file}_tmp
+            COMMAND mv ${folder}/${file}_tmp ${folder}/${file})
+        add_dependencies(indent_json_${folder}
+            indent_json_${folder}_${file})
     endforeach()
 
     #
@@ -65,12 +77,24 @@ if (WITH_JSON_VALIDATION)
 
     add_custom_target(validate_json_${folder})
     add_dependencies(validate_all_json validate_json_${folder})
+
+    add_custom_target(indent_json_${folder})
+    add_dependencies(indent_all_json indent_json_${folder})
     foreach(file ${files})
         add_custom_target(validate_json_${folder}_${file}
              COMMENT "Validating JSON for ${folder}/${file}."
             WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
             COMMAND ${JQ_COMMAND} . ${folder}/${file} > /dev/null)
-        add_dependencies(validate_json_${folder} validate_json_${folder}_${file})
+        add_dependencies(validate_json_${folder}
+            validate_json_${folder}_${file})
+
+        add_custom_target(indent_json_${folder}_${file}
+             COMMENT "Indenting JSON for ${folder}/${file}."
+             WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+             COMMAND ${JQ_COMMAND} . ${folder}/${file} > ${folder}/${file}_tmp
+             COMMAND mv ${folder}/${file}_tmp ${folder}/${file})
+        add_dependencies(indent_json_${folder} indent_json_${folder}_${file})
+
     endforeach()
 
     #
@@ -83,6 +107,9 @@ if (WITH_JSON_VALIDATION)
 
     add_custom_target(validate_json_${folder})
     add_dependencies(validate_all_json validate_json_${folder})
+
+    add_custom_target(indent_json_${folder})
+    add_dependencies(indent_all_json indent_json_${folder})
     foreach(file ${files})
         add_custom_target(validate_json_${folder}_${file}
              COMMENT "Validating JSON for ${folder}/${file}."
@@ -90,5 +117,13 @@ if (WITH_JSON_VALIDATION)
             COMMAND ${JQ_COMMAND} . ${folder}/${file} > /dev/null)
         add_dependencies(validate_json_${folder}
             validate_json_${folder}_${file})
+
+        add_custom_target(indent_json_${folder}_${file}
+             COMMENT "Indenting JSON for ${folder}/${file}."
+             WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+             COMMAND ${JQ_COMMAND} . ${folder}/${file} > ${folder}/${file}_tmp
+             COMMAND mv ${folder}/${file}_tmp ${folder}/${file})
+        add_dependencies(indent_json_${folder}
+            indent_json_${folder}_${file})
     endforeach()
 endif()

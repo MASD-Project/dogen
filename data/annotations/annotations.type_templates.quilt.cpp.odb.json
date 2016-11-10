@@ -1,118 +1,118 @@
 [
-    {
-        "name" : {
-            "simple" : "directory",
-            "qualified" : "quilt.cpp.odb.directory"
-        },
-        "archetype_location" : {
-            "kernel" : "quilt.cpp",
-            "facet" : "quilt.cpp.odb"
-        },
-        "value_type" : "text",
-        "template_kind" : "instance",
-        "scope" : "root_module",
-        "default_value" : "odb"
+  {
+    "name": {
+      "simple": "directory",
+      "qualified": "quilt.cpp.odb.directory"
     },
-    {
-        "name" : {
-            "simple" : "postfix",
-            "qualified" : "quilt.cpp.odb.postfix"
-        },
-        "archetype_location" : {
-            "kernel" : "quilt.cpp",
-            "facet" : "quilt.cpp.odb"
-        },
-        "value_type" : "text",
-        "template_kind" : "instance",
-        "scope" : "root_module",
-        "default_value" : "pragmas"
+    "archetype_location": {
+      "kernel": "quilt.cpp",
+      "facet": "quilt.cpp.odb"
     },
-    {
-        "name" : {
-            "simple" : "postfix",
-            "qualified" : "quilt.cpp.odb.class_header.postfix"
-        },
-        "archetype_location" : {
-            "kernel" : "quilt.cpp",
-            "facet" : "quilt.cpp.odb",
-            "archetype" : "quilt.cpp.odb.class_header_formatter"
-        },
-        "value_type" : "text",
-        "template_kind" : "instance",
-        "scope" : "root_module",
-        "default_value" : ""
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": "odb"
+  },
+  {
+    "name": {
+      "simple": "postfix",
+      "qualified": "quilt.cpp.odb.postfix"
     },
-    {
-        "name" : {
-            "simple" : "postfix",
-            "qualified" : "quilt.cpp.odb.enum_header.postfix"
-        },
-        "archetype_location" : {
-            "kernel" : "quilt.cpp",
-            "facet" : "quilt.cpp.odb",
-            "archetype" : "quilt.cpp.odb.enum_header_formatter"
-        },
-        "value_type" : "text",
-        "template_kind" : "instance",
-        "scope" : "root_module",
-        "default_value" : ""
+    "archetype_location": {
+      "kernel": "quilt.cpp",
+      "facet": "quilt.cpp.odb"
     },
-    {
-        "name" : {
-            "simple" : "postfix",
-            "qualified" : "quilt.cpp.odb.odb_options.postfix"
-        },
-        "archetype_location" : {
-            "kernel" : "quilt.cpp",
-            "facet" : "quilt.cpp.odb",
-            "archetype" : "quilt.cpp.odb.odb_options_formatter"
-        },
-        "value_type" : "text",
-        "template_kind" : "instance",
-        "scope" : "root_module",
-        "default_value" : ""
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": "pragmas"
+  },
+  {
+    "name": {
+      "simple": "postfix",
+      "qualified": "quilt.cpp.odb.class_header.postfix"
     },
-    {
-        "name" : {
-            "simple" : "postfix",
-            "qualified" : "quilt.cpp.odb.master_header.postfix"
-        },
-        "archetype_location" : {
-            "kernel" : "quilt.cpp",
-            "facet" : "quilt.cpp.odb",
-            "archetype" : "quilt.cpp.odb.master_header_formatter"
-        },
-        "value_type" : "text",
-        "template_kind" : "instance",
-        "scope" : "root_module",
-        "default_value" : ""
+    "archetype_location": {
+      "kernel": "quilt.cpp",
+      "facet": "quilt.cpp.odb",
+      "archetype": "quilt.cpp.odb.class_header_formatter"
     },
-    {
-        "name" : {
-            "simple" : "odb_pragma",
-            "qualified" : "odb_pragma"
-        },
-        "archetype_location" : {
-            "kernel" : "quilt.cpp",
-            "facet" : "quilt.cpp.odb"
-        },
-        "value_type" : "text_collection",
-        "template_kind" : "instance",
-        "scope" : "any"
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": ""
+  },
+  {
+    "name": {
+      "simple": "postfix",
+      "qualified": "quilt.cpp.odb.enum_header.postfix"
     },
-    {
-        "name" : {
-            "simple" : "postfix",
-            "qualified" : "quilt.cpp.odb.primitive_header.postfix"
-        },
-        "archetype_location" : {
-            "kernel" : "quilt.cpp",
-            "facet" : "quilt.cpp.odb",
-            "archetype" : "quilt.cpp.odb.primitive_header_formatter"
-        },
-        "value_type" : "text",
-        "template_kind" : "instance",
-        "scope" : "root_module",
-        "default_value" : ""
-    }
+    "archetype_location": {
+      "kernel": "quilt.cpp",
+      "facet": "quilt.cpp.odb",
+      "archetype": "quilt.cpp.odb.enum_header_formatter"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": ""
+  },
+  {
+    "name": {
+      "simple": "postfix",
+      "qualified": "quilt.cpp.odb.odb_options.postfix"
+    },
+    "archetype_location": {
+      "kernel": "quilt.cpp",
+      "facet": "quilt.cpp.odb",
+      "archetype": "quilt.cpp.odb.odb_options_formatter"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": ""
+  },
+  {
+    "name": {
+      "simple": "postfix",
+      "qualified": "quilt.cpp.odb.master_header.postfix"
+    },
+    "archetype_location": {
+      "kernel": "quilt.cpp",
+      "facet": "quilt.cpp.odb",
+      "archetype": "quilt.cpp.odb.master_header_formatter"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": ""
+  },
+  {
+    "name": {
+      "simple": "odb_pragma",
+      "qualified": "odb_pragma"
+    },
+    "archetype_location": {
+      "kernel": "quilt.cpp",
+      "facet": "quilt.cpp.odb"
+    },
+    "value_type": "text_collection",
+    "template_kind": "instance",
+    "scope": "any"
+  },
+  {
+    "name": {
+      "simple": "postfix",
+      "qualified": "quilt.cpp.odb.primitive_header.postfix"
+    },
+    "archetype_location": {
+      "kernel": "quilt.cpp",
+      "facet": "quilt.cpp.odb",
+      "archetype": "quilt.cpp.odb.primitive_header_formatter"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": ""
+  }
 ]

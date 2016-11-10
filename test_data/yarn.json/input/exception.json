@@ -1,23 +1,23 @@
 {
-    "model_name" : "exception",
-    "external_modules" : "dogen::test_models",
-    "annotation" : {
-        "annotations.profile" : "dogen"
+  "model_name": "exception",
+  "external_modules": "dogen::test_models",
+  "annotation": {
+    "annotations.profile": "dogen"
+  },
+  "elements": [
+    {
+      "name": {
+        "simple_name": "my_error"
+      },
+      "meta_type": "exception",
+      "documentation": "this is an exception"
     },
-    "elements" : [
-        {
-            "name" : {
-                "simple_name" : "my_error"
-            },
-            "meta_type" : "exception",
-            "documentation" : "this is an exception"
-        },
-        {
-            "name" : {
-                "simple_name" : "catastrophic_error",
-                "internal_modules" : "pkg"
-            },
-            "meta_type" : "exception"
-        }
-    ]
+    {
+      "name": {
+        "simple_name": "catastrophic_error",
+        "internal_modules": "pkg"
+      },
+      "meta_type": "exception"
+    }
+  ]
 }

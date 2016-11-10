@@ -1,185 +1,185 @@
 {
-    "model_name" : "hardware",
-    "documentation" : "Hardware-provided primitive types.",
-    "annotation" : {
-        "yarn.is_proxy_model" : true
+  "model_name": "hardware",
+  "documentation": "Hardware-provided primitive types.",
+  "annotation": {
+    "yarn.is_proxy_model": true
+  },
+  "elements": [
+    {
+      "name": {
+        "simple_name": "bool"
+      },
+      "meta_type": "primitive",
+      "in_global_module": true,
+      "annotation": {
+        "quilt.cpp.helper.family": "Boolean",
+        "quilt.cpp.inclusion_required": false,
+        "quilt.cpp.aspect.requires_stream_manipulators": true,
+        "quilt.cpp.aspect.requires_manual_default_constructor": true
+      }
     },
-    "elements" : [
-        {
-            "name" : {
-                "simple_name" : "bool"
-            },
-            "meta_type" : "primitive",
-            "in_global_module" : true,
-            "annotation" : {
-                "quilt.cpp.helper.family" : "Boolean",
-                "quilt.cpp.inclusion_required" : false,
-                "quilt.cpp.aspect.requires_stream_manipulators" : true,
-                "quilt.cpp.aspect.requires_manual_default_constructor" : true
-            }
-        },
-        {
-            "name" : {
-                "simple_name" : "char"
-            },
-            "meta_type" : "primitive",
-            "in_global_module" : true,
-            "annotation" : {
-                "quilt.cpp.helper.family" : "Character",
-                "quilt.cpp.streaming.remove_unprintable_characters" : false,
-                "quilt.cpp.streaming.requires_quoting" : true,
-                "quilt.cpp.inclusion_required" : false,
-                "quilt.cpp.aspect.requires_manual_default_constructor" : true
-            }
-        },
-        {
-            "name" : {
-                "simple_name" : "unsigned char"
-            },
-            "meta_type" : "primitive",
-            "in_global_module" : true,
-            "annotation" : {
-                "quilt.cpp.helper.family" : "Character",
-                "quilt.cpp.streaming.remove_unprintable_characters" : false,
-                "quilt.cpp.streaming.requires_quoting" : true,
-                "quilt.cpp.inclusion_required" : false,
-                "quilt.cpp.aspect.requires_manual_default_constructor" : true
-            }
-        },
-        {
-            "name" : {
-                "simple_name" : "int"
-            },
-            "meta_type" : "primitive",
-            "in_global_module" : true,
-            "annotation" : {
-                "quilt.cpp.helper.family" : "Number",
-                "quilt.cpp.inclusion_required" : false,
-                "quilt.cpp.aspect.requires_manual_default_constructor" : true
-            }
-        },
-        {
-            "name" : {
-                "simple_name" : "unsigned int"
-            },
-            "meta_type" : "primitive",
-            "is_default_enumeration_type" : true,
-            "in_global_module" : true,
-            "annotation" : {
-                "quilt.cpp.helper.family" : "Number",
-                "quilt.cpp.inclusion_required" : false,
-                "quilt.cpp.aspect.requires_manual_default_constructor" : true
-            }
-        },
-        {
-            "name" : {
-               "simple_name" : "short"
-            },
-            "meta_type" : "primitive",
-            "in_global_module" : true,
-            "annotation" : {
-                "quilt.cpp.helper.family" : "Number",
-                "quilt.cpp.inclusion_required" : false,
-                "quilt.cpp.aspect.requires_manual_default_constructor" : true
-            }
-        },
-        {
-            "name" : {
-                "simple_name" : "unsigned short"
-            },
-            "meta_type" : "primitive",
-            "in_global_module" : true,
-            "annotation" : {
-                "quilt.cpp.helper.family" : "Number",
-                "quilt.cpp.inclusion_required" : false,
-                "quilt.cpp.aspect.requires_manual_default_constructor" : true
-            }
-        },
-        {
-            "name" : {
-                "simple_name" : "long"
-            },
-            "meta_type" : "primitive",
-            "in_global_module" : true,
-            "annotation" : {
-                "quilt.cpp.helper.family" : "Number",
-                "quilt.cpp.inclusion_required" : false,
-                "quilt.cpp.aspect.requires_manual_default_constructor" : true
-            }
-        },
-        {
-            "name" : {
-                "simple_name" : "unsigned long"
-            },
-            "meta_type" : "primitive",
-            "in_global_module" : true,
-            "annotation" : {
-                "quilt.cpp.helper.family" : "Number",
-                "quilt.cpp.inclusion_required" : false,
-                "quilt.cpp.aspect.requires_manual_default_constructor" : true
-            }
-        },
-        {
-            "name" : {
-                "simple_name" : "long long"
-            },
-            "meta_type" : "primitive",
-            "in_global_module" : true,
-            "annotation" : {
-                "quilt.cpp.helper.family" : "Number",
-                "quilt.cpp.inclusion_required" : false,
-                "quilt.cpp.aspect.requires_manual_default_constructor" : true
-            }
-        },
-        {
-            "name" : {
-                "simple_name" : "unsigned long long"
-            },
-            "meta_type" : "primitive",
-            "in_global_module" : true,
-            "annotation" : {
-                "quilt.cpp.helper.family" : "Number",
-                "quilt.cpp.inclusion_required" : false,
-                "quilt.cpp.aspect.requires_manual_default_constructor" : true
-            }
-        },
-        {
-            "name" : {
-                "simple_name" : "float"
-            },
-            "meta_type" : "primitive",
-            "in_global_module" : true,
-            "annotation" : {
-                "quilt.cpp.helper.family" : "Number",
-                "quilt.cpp.inclusion_required" : false,
-                "quilt.cpp.aspect.requires_manual_default_constructor" : true
-            }
-        },
-        {
-            "name" : {
-                "simple_name" : "double"
-            },
-            "meta_type" : "primitive",
-            "in_global_module" : true,
-            "annotation" : {
-                "quilt.cpp.helper.family" : "Number",
-                "quilt.cpp.inclusion_required" : false,
-                "quilt.cpp.aspect.requires_stream_manipulators" : true,
-                "quilt.cpp.aspect.requires_manual_default_constructor" : true
-            }
-        },
-        {
-            "name" : {
-                "simple_name" : "long double"
-            },
-            "meta_type" : "primitive",
-            "in_global_module" : true,
-            "annotation" : {
-                "quilt.cpp.helper.family" : "Number",
-                "quilt.cpp.inclusion_required" : false,
-                "quilt.cpp.aspect.requires_stream_manipulators" : true,
-                "quilt.cpp.aspect.requires_manual_default_constructor" : true
-            }
-        }
-    ]
+    {
+      "name": {
+        "simple_name": "char"
+      },
+      "meta_type": "primitive",
+      "in_global_module": true,
+      "annotation": {
+        "quilt.cpp.helper.family": "Character",
+        "quilt.cpp.streaming.remove_unprintable_characters": false,
+        "quilt.cpp.streaming.requires_quoting": true,
+        "quilt.cpp.inclusion_required": false,
+        "quilt.cpp.aspect.requires_manual_default_constructor": true
+      }
+    },
+    {
+      "name": {
+        "simple_name": "unsigned char"
+      },
+      "meta_type": "primitive",
+      "in_global_module": true,
+      "annotation": {
+        "quilt.cpp.helper.family": "Character",
+        "quilt.cpp.streaming.remove_unprintable_characters": false,
+        "quilt.cpp.streaming.requires_quoting": true,
+        "quilt.cpp.inclusion_required": false,
+        "quilt.cpp.aspect.requires_manual_default_constructor": true
+      }
+    },
+    {
+      "name": {
+        "simple_name": "int"
+      },
+      "meta_type": "primitive",
+      "in_global_module": true,
+      "annotation": {
+        "quilt.cpp.helper.family": "Number",
+        "quilt.cpp.inclusion_required": false,
+        "quilt.cpp.aspect.requires_manual_default_constructor": true
+      }
+    },
+    {
+      "name": {
+        "simple_name": "unsigned int"
+      },
+      "meta_type": "primitive",
+      "is_default_enumeration_type": true,
+      "in_global_module": true,
+      "annotation": {
+        "quilt.cpp.helper.family": "Number",
+        "quilt.cpp.inclusion_required": false,
+        "quilt.cpp.aspect.requires_manual_default_constructor": true
+      }
+    },
+    {
+      "name": {
+        "simple_name": "short"
+      },
+      "meta_type": "primitive",
+      "in_global_module": true,
+      "annotation": {
+        "quilt.cpp.helper.family": "Number",
+        "quilt.cpp.inclusion_required": false,
+        "quilt.cpp.aspect.requires_manual_default_constructor": true
+      }
+    },
+    {
+      "name": {
+        "simple_name": "unsigned short"
+      },
+      "meta_type": "primitive",
+      "in_global_module": true,
+      "annotation": {
+        "quilt.cpp.helper.family": "Number",
+        "quilt.cpp.inclusion_required": false,
+        "quilt.cpp.aspect.requires_manual_default_constructor": true
+      }
+    },
+    {
+      "name": {
+        "simple_name": "long"
+      },
+      "meta_type": "primitive",
+      "in_global_module": true,
+      "annotation": {
+        "quilt.cpp.helper.family": "Number",
+        "quilt.cpp.inclusion_required": false,
+        "quilt.cpp.aspect.requires_manual_default_constructor": true
+      }
+    },
+    {
+      "name": {
+        "simple_name": "unsigned long"
+      },
+      "meta_type": "primitive",
+      "in_global_module": true,
+      "annotation": {
+        "quilt.cpp.helper.family": "Number",
+        "quilt.cpp.inclusion_required": false,
+        "quilt.cpp.aspect.requires_manual_default_constructor": true
+      }
+    },
+    {
+      "name": {
+        "simple_name": "long long"
+      },
+      "meta_type": "primitive",
+      "in_global_module": true,
+      "annotation": {
+        "quilt.cpp.helper.family": "Number",
+        "quilt.cpp.inclusion_required": false,
+        "quilt.cpp.aspect.requires_manual_default_constructor": true
+      }
+    },
+    {
+      "name": {
+        "simple_name": "unsigned long long"
+      },
+      "meta_type": "primitive",
+      "in_global_module": true,
+      "annotation": {
+        "quilt.cpp.helper.family": "Number",
+        "quilt.cpp.inclusion_required": false,
+        "quilt.cpp.aspect.requires_manual_default_constructor": true
+      }
+    },
+    {
+      "name": {
+        "simple_name": "float"
+      },
+      "meta_type": "primitive",
+      "in_global_module": true,
+      "annotation": {
+        "quilt.cpp.helper.family": "Number",
+        "quilt.cpp.inclusion_required": false,
+        "quilt.cpp.aspect.requires_manual_default_constructor": true
+      }
+    },
+    {
+      "name": {
+        "simple_name": "double"
+      },
+      "meta_type": "primitive",
+      "in_global_module": true,
+      "annotation": {
+        "quilt.cpp.helper.family": "Number",
+        "quilt.cpp.inclusion_required": false,
+        "quilt.cpp.aspect.requires_stream_manipulators": true,
+        "quilt.cpp.aspect.requires_manual_default_constructor": true
+      }
+    },
+    {
+      "name": {
+        "simple_name": "long double"
+      },
+      "meta_type": "primitive",
+      "in_global_module": true,
+      "annotation": {
+        "quilt.cpp.helper.family": "Number",
+        "quilt.cpp.inclusion_required": false,
+        "quilt.cpp.aspect.requires_stream_manipulators": true,
+        "quilt.cpp.aspect.requires_manual_default_constructor": true
+      }
+    }
+  ]
 }

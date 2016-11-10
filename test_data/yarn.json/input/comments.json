@@ -1,56 +1,56 @@
 {
-    "model_name" : "comments",
-    "external_modules" : "dogen::test_models",
-    "documentation" : "This model demonstrates the use of comments in dogen.\n\nThis comment will be applied to the model namespace itself.",
-    "annotation" : {
-        "annotations.profile" : "dogen"
-    },
-    "elements" : [
+  "model_name": "comments",
+  "external_modules": "dogen::test_models",
+  "documentation": "This model demonstrates the use of comments in dogen.\n\nThis comment will be applied to the model namespace itself.",
+  "annotation": {
+    "annotations.profile": "dogen"
+  },
+  "elements": [
+    {
+      "name": {
+        "simple_name": "one_line"
+      },
+      "meta_type": "object",
+      "documentation": "this is the brief comment",
+      "attributes": [
         {
-            "name" : {
-                "simple_name" : "one_line"
-            },
-            "meta_type" : "object",
-            "documentation" : "this is the brief comment",
-            "attributes" : [
-                {
-                    "simple_name" : "prop_0",
-                    "type" : "int",
-                    "documentation" : "another brief comment"
-                },
-                {
-                    "simple_name" : "prop_1",
-                    "type" : "int",
-                    "documentation" : "the brief comment\n\na second line"
-                },
-                {
-                    "simple_name" : "prop_2",
-                    "type" : "int",
-                    "documentation" : "\n\n\n"
-                }
-            ]
+          "simple_name": "prop_0",
+          "type": "int",
+          "documentation": "another brief comment"
         },
         {
-            "name" : {
-                "simple_name" : "multi_line"
-            },
-            "meta_type" : "object",
-            "documentation" : "first line\n\nsecond line\nthird line with \"quote\""
+          "simple_name": "prop_1",
+          "type": "int",
+          "documentation": "the brief comment\n\na second line"
         },
         {
-            "name" : {
-                "simple_name" : "package"
-            },
-            "meta_type" : "module",
-            "documentation" : "package"
-        },
-        {
-            "name" : {
-                "simple_name" : "package2",
-                "internal_modules" : "package"
-            },
-            "meta_type" : "module",
-            "documentation" : "package2"
+          "simple_name": "prop_2",
+          "type": "int",
+          "documentation": "\n\n\n"
         }
-    ]
+      ]
+    },
+    {
+      "name": {
+        "simple_name": "multi_line"
+      },
+      "meta_type": "object",
+      "documentation": "first line\n\nsecond line\nthird line with \"quote\""
+    },
+    {
+      "name": {
+        "simple_name": "package"
+      },
+      "meta_type": "module",
+      "documentation": "package"
+    },
+    {
+      "name": {
+        "simple_name": "package2",
+        "internal_modules": "package"
+      },
+      "meta_type": "module",
+      "documentation": "package2"
+    }
+  ]
 }
