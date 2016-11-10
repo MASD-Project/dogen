@@ -30,31 +30,31 @@ tailoring_options::tailoring_options()
 tailoring_options::tailoring_options(tailoring_options&& rhs)
     : verbose_(std::move(rhs.verbose_)),
       target_(std::move(rhs.target_)),
-      output_extension_(std::move(rhs.output_extension_)),
+      output_(std::move(rhs.output_)),
       force_write_(std::move(rhs.force_write_)) { }
 
 tailoring_options::tailoring_options(
     const bool verbose,
     const boost::filesystem::path& target,
-    const std::string& output_extension,
+    const boost::filesystem::path& output,
     const bool force_write)
     : verbose_(verbose),
       target_(target),
-      output_extension_(output_extension),
+      output_(output),
       force_write_(force_write) { }
 
 void tailoring_options::swap(tailoring_options& other) noexcept {
     using std::swap;
     swap(verbose_, other.verbose_);
     swap(target_, other.target_);
-    swap(output_extension_, other.output_extension_);
+    swap(output_, other.output_);
     swap(force_write_, other.force_write_);
 }
 
 bool tailoring_options::operator==(const tailoring_options& rhs) const {
     return verbose_ == rhs.verbose_ &&
         target_ == rhs.target_ &&
-        output_extension_ == rhs.output_extension_ &&
+        output_ == rhs.output_ &&
         force_write_ == rhs.force_write_;
 }
 
@@ -88,20 +88,20 @@ void tailoring_options::target(const boost::filesystem::path&& v) {
     target_ = std::move(v);
 }
 
-const std::string& tailoring_options::output_extension() const {
-    return output_extension_;
+const boost::filesystem::path& tailoring_options::output() const {
+    return output_;
 }
 
-std::string& tailoring_options::output_extension() {
-    return output_extension_;
+boost::filesystem::path& tailoring_options::output() {
+    return output_;
 }
 
-void tailoring_options::output_extension(const std::string& v) {
-    output_extension_ = v;
+void tailoring_options::output(const boost::filesystem::path& v) {
+    output_ = v;
 }
 
-void tailoring_options::output_extension(const std::string&& v) {
-    output_extension_ = std::move(v);
+void tailoring_options::output(const boost::filesystem::path&& v) {
+    output_ = std::move(v);
 }
 
 bool tailoring_options::force_write() const {

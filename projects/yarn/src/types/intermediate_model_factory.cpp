@@ -94,7 +94,7 @@ intermediate_model_factory::intermediate_model_for_descriptor(
                              << "Descriptor: " << d;
 
     auto& f(rg.frontend_for_extension(d.extension()));
-    auto r(f.execute(d));
+    auto r(f.load(d));
     post_process(agf, atrp, r);
 
     BOOST_LOG_SEV(lg, debug) << "Created intermediate model.";

@@ -21,7 +21,6 @@
 #include <boost/serialization/nvp.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
-#include <boost/serialization/string.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
@@ -63,7 +62,7 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("verbose", v.verbose_);
     ar << make_nvp("target", v.target_);
-    ar << make_nvp("output_extension", v.output_extension_);
+    ar << make_nvp("output", v.output_);
     ar << make_nvp("force_write", v.force_write_);
 }
 
@@ -73,7 +72,7 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("verbose", v.verbose_);
     ar >> make_nvp("target", v.target_);
-    ar >> make_nvp("output_extension", v.output_extension_);
+    ar >> make_nvp("output", v.output_);
     ar >> make_nvp("force_write", v.force_write_);
 }
 

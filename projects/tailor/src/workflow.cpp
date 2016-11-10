@@ -96,8 +96,19 @@ void workflow::initialise_logging(const options::tailoring_options& o) {
     can_log_ = true;
 }
 
-void workflow::tailor(const options::tailoring_options& /*o*/) const {
+void workflow::tailor(const options::tailoring_options& o) const {
     BOOST_LOG_SEV(lg, info) << tailor_product << " started.";
+
+
+    yarn::descriptor d;
+    d.extension(o.target().extension().string());
+    d.is_target(true);
+    d.path(o.target());
+
+    auto& rg(yarn::workflow::frontend_registrar());
+    auto& tg_fe(rg.frontend_for_extension(d.extension()));
+    const auto im(tg_fe.load(d));
+
     BOOST_LOG_SEV(lg, info) << tailor_product << " finished.";
 }
 

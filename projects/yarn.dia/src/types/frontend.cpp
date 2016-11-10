@@ -50,8 +50,8 @@ std::list<std::string> frontend::supported_extensions() const {
     return extensions;
 }
 
-yarn::intermediate_model frontend::execute(const yarn::descriptor& d) {
-    BOOST_LOG_SEV(lg, debug) << "Processing Dia diagram. ";
+yarn::intermediate_model frontend::load(const yarn::descriptor& d) {
+    BOOST_LOG_SEV(lg, debug) << "Loading Dia diagram. ";
 
     dogen::dia::hydrator h(d.path());
     dogen::dia::diagram diagram(h.hydrate());
@@ -60,7 +60,7 @@ yarn::intermediate_model frontend::execute(const yarn::descriptor& d) {
     const std::string name(d.path().stem().string());
     const auto em(d.external_modules());
     const auto r(wf.execute(diagram, name, em, d.is_target()));
-    BOOST_LOG_SEV(lg, debug) << "Finished processing diagram.";
+    BOOST_LOG_SEV(lg, debug) << "Finished loading diagram.";
     return r;
 }
 

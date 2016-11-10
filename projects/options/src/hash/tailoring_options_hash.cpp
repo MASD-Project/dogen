@@ -44,7 +44,7 @@ std::size_t tailoring_options_hasher::hash(const tailoring_options& v) {
 
     combine(seed, v.verbose());
     combine(seed, hash_boost_filesystem_path(v.target()));
-    combine(seed, v.output_extension());
+    combine(seed, hash_boost_filesystem_path(v.output()));
     combine(seed, v.force_write());
 
     return seed;

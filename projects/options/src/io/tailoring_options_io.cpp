@@ -20,15 +20,7 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include <boost/algorithm/string.hpp>
 #include "dogen/options/io/tailoring_options_io.hpp"
-
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    return s;
-}
 
 namespace dogen {
 namespace options {
@@ -44,7 +36,7 @@ std::ostream& operator<<(std::ostream& s, const tailoring_options& v) {
       << "\"__type__\": " << "\"dogen::options::tailoring_options\"" << ", "
       << "\"verbose\": " << v.verbose() << ", "
       << "\"target\": " << "\"" << v.target().generic_string() << "\"" << ", "
-      << "\"output_extension\": " << "\"" << tidy_up_string(v.output_extension()) << "\"" << ", "
+      << "\"output\": " << "\"" << v.output().generic_string() << "\"" << ", "
       << "\"force_write\": " << v.force_write()
       << " }";
     return(s);

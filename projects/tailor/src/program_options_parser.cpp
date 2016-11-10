@@ -39,7 +39,7 @@ const std::string help_arg("help");
 const std::string version_arg("version");
 const std::string verbose_arg("verbose");
 const std::string target_arg("target");
-const std::string output_extension_arg("output-extension");
+const std::string output_arg("output");
 const std::string force_write_arg("force-write");
 
 }
@@ -93,7 +93,7 @@ program_options_parser::output_options_factory() const {
     using boost::program_options::value;
     boost::program_options::options_description r("Output options");
     r.add_options()
-        ("output-type,o", value<std::string>(), "Type of output to generate.")
+        ("output,o", value<std::string>(), "Output file to generate.")
         ("force-write,f", "Always write to file even when it already exists.");
 
     return r;
@@ -164,14 +164,13 @@ transform_options(const variables_map& vm) const {
         throw_missing_target();
 
     r.target(vm[target_arg].as<std::string>());
-    if (vm.count(output_extension_arg) == 0) {
+    if (vm.count(output_arg) == 0) {
         std::ostringstream stream;
-        stream << "Mandatory parameter output type is missing. "
-               << more_information;
+        stream << "Mandatory parameter output is missing. " << more_information;
         BOOST_THROW_EXCEPTION(parser_validation_error(stream.str()));
     }
 
-    r.output_extension(vm[output_extension_arg].as<std::string>());
+    r.output(vm[output_arg].as<std::string>());
     r.force_write(vm.count(force_write_arg));
     return r;
 }

@@ -18,31 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_DIA_TYPES_FRONTEND_HPP
-#define DOGEN_YARN_DIA_TYPES_FRONTEND_HPP
+#ifndef DOGEN_YARN_JSON_TYPES_DEHYDRATOR_FWD_HPP
+#define DOGEN_YARN_JSON_TYPES_DEHYDRATOR_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/yarn/types/frontend_interface.hpp"
-
 namespace dogen {
 namespace yarn {
-namespace dia {
+namespace json {
 
-/**
- * @brief Frontend wrapper for the dia to yarn workflow.
- */
-class frontend final : public yarn::frontend_interface {
-public:
-    virtual ~frontend() noexcept;
-
-public:
-    std::string id() const override;
-    std::list<std::string> supported_extensions() const override;
-    yarn::intermediate_model load(const yarn::descriptor& d) override;
-};
+class dehydrator;
 
 } } }
 

@@ -18,32 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_DIA_TYPES_FRONTEND_HPP
-#define DOGEN_YARN_DIA_TYPES_FRONTEND_HPP
+#ifndef DOGEN_YARN_TYPES_FRONTEND_ERROR_HPP
+#define DOGEN_YARN_TYPES_FRONTEND_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/yarn/types/frontend_interface.hpp"
+#include <string>
+#include <boost/exception/info.hpp>
 
 namespace dogen {
 namespace yarn {
-namespace dia {
 
 /**
- * @brief Frontend wrapper for the dia to yarn workflow.
+ * @brief There was an error in the frontend.
  */
-class frontend final : public yarn::frontend_interface {
+class frontend_error : public virtual std::exception, public virtual boost::exception {
 public:
-    virtual ~frontend() noexcept;
+    frontend_error() = default;
+    ~frontend_error() noexcept = default;
 
 public:
-    std::string id() const override;
-    std::list<std::string> supported_extensions() const override;
-    yarn::intermediate_model load(const yarn::descriptor& d) override;
+    frontend_error(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
 };
 
-} } }
+} }
 
 #endif

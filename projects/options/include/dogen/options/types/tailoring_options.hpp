@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include <string>
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
 #include "dogen/options/serialization/tailoring_options_fwd_ser.hpp"
@@ -48,7 +47,7 @@ public:
     tailoring_options(
         const bool verbose,
         const boost::filesystem::path& target,
-        const std::string& output_extension,
+        const boost::filesystem::path& output,
         const bool force_write);
 
 private:
@@ -67,10 +66,10 @@ public:
     void target(const boost::filesystem::path& v);
     void target(const boost::filesystem::path&& v);
 
-    const std::string& output_extension() const;
-    std::string& output_extension();
-    void output_extension(const std::string& v);
-    void output_extension(const std::string&& v);
+    const boost::filesystem::path& output() const;
+    boost::filesystem::path& output();
+    void output(const boost::filesystem::path& v);
+    void output(const boost::filesystem::path&& v);
 
     bool force_write() const;
     void force_write(const bool v);
@@ -88,7 +87,7 @@ public:
 private:
     bool verbose_;
     boost::filesystem::path target_;
-    std::string output_extension_;
+    boost::filesystem::path output_;
     bool force_write_;
 };
 
