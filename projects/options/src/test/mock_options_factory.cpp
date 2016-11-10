@@ -45,27 +45,20 @@ cpp_options mock_options_factory::make_cpp_options(
     return r;
 }
 
-input_options mock_options_factory::make_input_options(
-    const boost::filesystem::path& target,
-    const std::string& modules) {
-
-    input in;
-    in.external_modules(modules);
-    in.path(target);
-
+input_options mock_options_factory::
+make_input_options(const boost::filesystem::path& target) {
     input_options r;
-    r.target(in);
+    r.target(target);
     return r;
 }
 
 knitting_options mock_options_factory::make_knitting_options(
     const boost::filesystem::path& target,
     const boost::filesystem::path project_dir,
-    const std::string modules,
     const bool verbose) {
     knitting_options r;
     r.verbose(verbose);
-    r.input(make_input_options(target, modules));
+    r.input(make_input_options(target));
     r.cpp(make_cpp_options(project_dir));
     r.output(make_output_options());
     return r;

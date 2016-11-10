@@ -51,8 +51,7 @@ void descriptor_generator::
 populate(const unsigned int position, result_type& v) {
     v.path(create_boost_filesystem_path(position + 0));
     v.extension(create_std_string(position + 1));
-    v.external_modules(create_std_string(position + 2));
-    v.is_target(create_bool(position + 3));
+    v.is_target(create_bool(position + 2));
 }
 
 descriptor_generator::result_type

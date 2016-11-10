@@ -24,7 +24,7 @@ add_custom_target(knit_${target}
     COMMENT "Knitting Yarn model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
-    --target ${models_dir}/${target}.dia,dogen
+    --target ${models_dir}/${target}.dia
     --cpp-project-dir ${projects_dir}/
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/test/.*
@@ -41,7 +41,7 @@ add_custom_target(knit_${target}
     COMMENT "Knitting Yarn JSON model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
-    --target ${models_dir}/${target}.dia,dogen
+    --target ${models_dir}/${target}.dia
     --cpp-project-dir ${projects_dir}/
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/tests/.*
@@ -58,7 +58,7 @@ add_custom_target(knit_${target}
     COMMENT "Knitting Dia model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
-    --target ${models_dir}/${target}.dia,dogen
+    --target ${models_dir}/${target}.dia
     --cpp-project-dir ${projects_dir}/
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/test/.*
@@ -75,7 +75,7 @@ add_custom_target(knit_${target}
     COMMENT "Knitting Options model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
-    --target ${models_dir}/${target}.dia,dogen
+    --target ${models_dir}/${target}.dia
     --cpp-project-dir ${projects_dir}/
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/test/.*
@@ -92,7 +92,7 @@ add_custom_target(knit_${target}
     COMMENT "Knitting Quilt C++ model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
-    --target ${models_dir}/${target}.dia,dogen
+    --target ${models_dir}/${target}.dia
     --cpp-project-dir ${projects_dir}/
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/tests/.*
@@ -108,7 +108,7 @@ add_custom_target(knit_${target}
     COMMENT "Knitting database model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
-    --target ${models_dir}/${target}.dia,dogen::test_models
+    --target ${models_dir}/${target}.dia
     --cpp-project-dir ${projects_dir}/test_models
     --ignore-files-matching-regex .*CMakeLists.txt
     --ignore-files-matching-regex .*/test/.*
@@ -127,7 +127,7 @@ add_custom_target(knit_${target}
     COMMENT "Knitting knit model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
-    --target ${models_dir}/${target}.dia,dogen
+    --target ${models_dir}/${target}.dia
     --cpp-project-dir ${projects_dir}/
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/tests/.*
@@ -143,7 +143,7 @@ add_custom_target(knit_${target}
     COMMENT "Knitting Yarn Dia model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
-    --target ${models_dir}/${target}.dia,dogen
+    --target ${models_dir}/${target}.dia
     --cpp-project-dir ${projects_dir}/
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/tests/.*
@@ -160,7 +160,7 @@ add_custom_target(knit_${target}
     COMMENT "Knitting the Formatters Model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
-    --target ${models_dir}/${target}.dia,dogen
+    --target ${models_dir}/${target}.dia
     --cpp-project-dir ${projects_dir}/
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/tests/.*
@@ -178,7 +178,7 @@ add_custom_target(knit_${target}
     COMMENT "Knitting Quilt model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
-    --target ${models_dir}/${target}.dia,dogen
+    --target ${models_dir}/${target}.dia
     --cpp-project-dir ${projects_dir}/
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/tests/.*
@@ -195,7 +195,7 @@ add_custom_target(knit_${target}
     COMMENT "Knitting Annotations model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
-    --target ${models_dir}/${target}.dia,dogen
+    --target ${models_dir}/${target}.dia
     --cpp-project-dir ${projects_dir}/
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/tests/.*
@@ -212,7 +212,7 @@ add_custom_target(knit_${target}
     COMMENT "Knitting Stitch model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
-    --target ${models_dir}/${target}.dia,dogen
+    --target ${models_dir}/${target}.dia
     --cpp-project-dir ${projects_dir}/
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/tests/.*
@@ -229,7 +229,7 @@ add_custom_target(knit_${target}
     COMMENT "Knitting Wale model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
-    --target ${models_dir}/${target}.dia,dogen
+    --target ${models_dir}/${target}.dia
     --cpp-project-dir ${projects_dir}/
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/tests/.*

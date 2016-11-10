@@ -45,8 +45,9 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
     test_hashing<cpp_options_generator>();
     test_hashing<input_options_generator>();
     test_hashing<output_options_generator>();
-    test_hashing<input_generator>();
     test_hashing<knitting_options_generator>();
+    test_hashing<stitching_options_generator>();
+    test_hashing<tailoring_options_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

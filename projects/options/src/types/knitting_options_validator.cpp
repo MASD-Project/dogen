@@ -39,7 +39,7 @@ namespace dogen {
 namespace options {
 
 void knitting_options_validator::validate(const knitting_options& o) {
-    if (o.input().target().path().empty()) {
+    if (o.input().target().empty()) {
         BOOST_LOG_SEV(lg, error) << missing_target;
         BOOST_THROW_EXCEPTION(validation_error(missing_target));
     }

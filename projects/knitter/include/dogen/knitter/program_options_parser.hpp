@@ -51,9 +51,6 @@ public:
     program_options_parser(program_options_parser&& rhs);
 
 private:
-    options::input make_input(const std::string& s) const;
-
-private:
     typedef boost::program_options::options_description options_description;
 
     options_description general_options_factory() const;

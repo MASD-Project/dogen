@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen/options/serialization/input_ser.hpp"
 #include "dogen/options/serialization/cpp_options_ser.hpp"
 #include "dogen/options/serialization/input_options_ser.hpp"
 #include "dogen/options/serialization/output_options_ser.hpp"

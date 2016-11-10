@@ -101,8 +101,7 @@ workflow::generate_model(builder& b, const graph_type& g) {
 }
 
 yarn::intermediate_model workflow::execute(const dogen::dia::diagram& d,
-    const std::string& model_name, const std::string& /*external_modules*/,
-    bool is_target) {
+    const std::string& model_name, bool is_target) {
 
     /*
      * Convert the original dia diagram into a list of dia objects

@@ -19,7 +19,6 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include <boost/algorithm/string.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/filesystem/file.hpp"
@@ -37,11 +36,6 @@ using namespace dogen::utility::log;
 auto lg(logger_factory("yarn.descriptor_factory"));
 
 const std::string library_dir("library");
-const std::string comma(",");
-const std::string at_least_one_argument(
-    "Expected at least one argument for reference");
-const std::string at_most_two_arguments(
-    "Expected only at most two arguments for reference");
 
 }
 
@@ -125,43 +119,24 @@ descriptor_factory::make(const annotations::type_repository& atrp,
     const auto tg(make_type_group(atrp));
     const auto refs(make_references(tg, a));
     std::list<descriptor> r;
-    for (const auto& s : refs) {
-        std::vector<std::string> tokens;
-        boost::split(tokens, s, boost::is_any_of(comma));
-
-        if (tokens.empty()) {
-            BOOST_LOG_SEV(lg, error) << at_least_one_argument;
-            BOOST_THROW_EXCEPTION(building_error(at_least_one_argument));
-        }
-
-        if (tokens.size() > 2) {
-            BOOST_LOG_SEV(lg, error) << at_most_two_arguments;
-            BOOST_THROW_EXCEPTION(building_error(at_most_two_arguments));
-        }
-
-        auto p(references_dir);
-        p /= tokens[0];
-
+    for (const auto& ref : refs) {
+        const auto p(references_dir / ref);
         descriptor d;
         d.path(p);
-
-        if (tokens.size() > 1)
-            d.external_modules(tokens[1]);
-
         d.extension(p.extension().string());
         r.push_back(d);
     }
     return r;
 }
 
-descriptor descriptor_factory::make(const options::input& tg) const {
+descriptor
+descriptor_factory::make(const boost::filesystem::path& target) const {
     BOOST_LOG_SEV(lg, debug) << "Creating descriptor for target model.";
 
     descriptor r;
-    r.path(tg.path());
+    r.path(target);
     r.is_target(true);
-    r.external_modules(tg.external_modules());
-    r.extension(tg.path().extension().string());
+    r.extension(target.extension().string());
 
     BOOST_LOG_SEV(lg, trace) << "Added target model: " << r.path();
     BOOST_LOG_SEV(lg, debug) << "Created descriptor for target model: " << r;

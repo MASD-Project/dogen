@@ -23,7 +23,10 @@
 namespace dogen {
 namespace options {
 
-input_options::input_options(const dogen::options::input& target)
+input_options::input_options(input_options&& rhs)
+    : target_(std::move(rhs.target_)) { }
+
+input_options::input_options(const boost::filesystem::path& target)
     : target_(target) { }
 
 void input_options::swap(input_options& other) noexcept {
@@ -41,19 +44,19 @@ input_options& input_options::operator=(input_options other) {
     return *this;
 }
 
-const dogen::options::input& input_options::target() const {
+const boost::filesystem::path& input_options::target() const {
     return target_;
 }
 
-dogen::options::input& input_options::target() {
+boost::filesystem::path& input_options::target() {
     return target_;
 }
 
-void input_options::target(const dogen::options::input& v) {
+void input_options::target(const boost::filesystem::path& v) {
     target_ = v;
 }
 
-void input_options::target(const dogen::options::input&& v) {
+void input_options::target(const boost::filesystem::path&& v) {
     target_ = std::move(v);
 }
 

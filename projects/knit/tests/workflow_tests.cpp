@@ -52,7 +52,6 @@ const std::string empty;
 const std::string empty_module_path;
 const std::string test_module("knit");
 const std::string test_suite("workflow_tests");
-const std::string module_path("dogen::test_models");
 
 const std::string expected("/expected");
 const std::string actual("/actual");
@@ -67,8 +66,7 @@ bool generate_and_diff(const boost::filesystem::path& target) {
     const auto actual(validating_resolver::resolve(name + ::actual));
 
     using dogen::options::test::mock_options_factory;
-    const auto ko(mock_options_factory::
-        make_knitting_options(target, actual, module_path));
+    const auto ko(mock_options_factory::make_knitting_options(target, actual));
 
     dogen::knit::workflow w(ko);
     w.execute();

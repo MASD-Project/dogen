@@ -62,8 +62,7 @@ yarn::intermediate_model frontend::read(const yarn::descriptor& d) {
 
     dogen::yarn::dia::workflow wf;
     const std::string name(d.path().stem().string());
-    const auto em(d.external_modules());
-    const auto r(wf.execute(diagram, name, em, d.is_target()));
+    const auto r(wf.execute(diagram, name, d.is_target()));
     BOOST_LOG_SEV(lg, debug) << "Finished loading diagram.";
     return r;
 }

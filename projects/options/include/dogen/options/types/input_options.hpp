@@ -26,7 +26,7 @@
 #endif
 
 #include <algorithm>
-#include "dogen/options/types/input.hpp"
+#include <boost/filesystem/path.hpp>
 #include "dogen/options/serialization/input_options_fwd_ser.hpp"
 
 namespace dogen {
@@ -39,11 +39,13 @@ class input_options final {
 public:
     input_options() = default;
     input_options(const input_options&) = default;
-    input_options(input_options&&) = default;
     ~input_options() = default;
 
 public:
-    explicit input_options(const dogen::options::input& target);
+    input_options(input_options&& rhs);
+
+public:
+    explicit input_options(const boost::filesystem::path& target);
 
 private:
     template<typename Archive>
@@ -57,10 +59,10 @@ public:
      * @brief Path to the Dia diagram that contains the model to generate.
      */
     /**@{*/
-    const dogen::options::input& target() const;
-    dogen::options::input& target();
-    void target(const dogen::options::input& v);
-    void target(const dogen::options::input&& v);
+    const boost::filesystem::path& target() const;
+    boost::filesystem::path& target();
+    void target(const boost::filesystem::path& v);
+    void target(const boost::filesystem::path&& v);
     /**@}*/
 
 public:
@@ -74,7 +76,7 @@ public:
     input_options& operator=(input_options other);
 
 private:
-    dogen::options::input target_;
+    boost::filesystem::path target_;
 };
 
 } }

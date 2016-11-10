@@ -57,7 +57,6 @@ bool test_workflow(
     using dogen::dia::test::diagram_serialization_helper;
     const auto i(diagram_serialization_helper::from_xml(s));
 
-    const std::string epp;
     const bool is_target(true);
     const std::string model_name(input_path.stem().string());
 
@@ -65,8 +64,7 @@ bool test_workflow(
     mock_type_repository_factory rf;
     const auto rp(rf.make());
     workflow w;
-    dogen::yarn::intermediate_model
-        actual(w.execute(i, model_name, epp, is_target));
+    dogen::yarn::intermediate_model actual(w.execute(i, model_name, is_target));
     return asserter::assert_object(expected_path, actual_path, actual);
 }
 

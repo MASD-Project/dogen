@@ -80,9 +80,7 @@ private:
 
 public:
     yarn::intermediate_model execute(const dogen::dia::diagram& diagram,
-        const std::string& model_name,
-        const std::string& external_modules,
-        bool is_target);
+        const std::string& model_name, bool is_target);
 };
 
 } } }

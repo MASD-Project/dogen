@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen/options/types/input.hpp"
 #include "dogen/options/types/options.hpp"
 #include "dogen/options/types/cpp_options.hpp"
 #include "dogen/options/types/input_options.hpp"

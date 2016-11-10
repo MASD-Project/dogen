@@ -44,7 +44,6 @@ std::ostream& operator<<(std::ostream& s, const descriptor& v) {
       << "\"__type__\": " << "\"dogen::yarn::descriptor\"" << ", "
       << "\"path\": " << "\"" << v.path().generic_string() << "\"" << ", "
       << "\"extension\": " << "\"" << tidy_up_string(v.extension()) << "\"" << ", "
-      << "\"external_modules\": " << "\"" << tidy_up_string(v.external_modules()) << "\"" << ", "
       << "\"is_target\": " << v.is_target()
       << " }";
     return(s);

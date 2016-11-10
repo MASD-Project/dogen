@@ -18,14 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/options/test_data/input_td.hpp"
+#include <sstream>
 #include "dogen/options/test_data/input_options_td.hpp"
 
 namespace {
 
-dogen::options::input
-create_dogen_options_input(const unsigned int position) {
-    return dogen::options::input_generator::create(position);
+boost::filesystem::path
+create_boost_filesystem_path(const unsigned int position) {
+    std::ostringstream s;
+    s << "/a/path/number_" << position;
+    return boost::filesystem::path(s.str());
 }
 
 }
@@ -37,7 +39,7 @@ input_options_generator::input_options_generator() : position_(0) { }
 
 void input_options_generator::
 populate(const unsigned int position, result_type& v) {
-    v.target(create_dogen_options_input(position + 0));
+    v.target(create_boost_filesystem_path(position + 0));
 }
 
 input_options_generator::result_type

@@ -19,7 +19,6 @@
  *
  */
 #include <ostream>
-#include "dogen/options/io/input_io.hpp"
 #include "dogen/options/io/input_options_io.hpp"
 
 namespace dogen {
@@ -28,7 +27,7 @@ namespace options {
 std::ostream& operator<<(std::ostream& s, const input_options& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::options::input_options\"" << ", "
-      << "\"target\": " << v.target()
+      << "\"target\": " << "\"" << v.target().generic_string() << "\""
       << " }";
     return(s);
 }

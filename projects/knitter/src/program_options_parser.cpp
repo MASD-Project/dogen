@@ -45,11 +45,6 @@
 namespace {
 
 const std::string empty;
-const std::string comma(",");
-const std::string at_least_one_argument(
-    "Expected at least one argument for reference");
-const std::string at_most_two_arguments(
-    "Expected only at most two arguments for reference");
 const std::string missing_target("Mandatory parameter target is missing. ");
 
 const std::string help_arg("help");
@@ -80,25 +75,6 @@ program_options_parser::program_options_parser(program_options_parser&& rhs)
     : arguments_(std::move(rhs.arguments_)),
       help_function_(std::move(rhs.help_function_)),
       version_function_(std::move(rhs.version_function_)) { }
-
-options::input program_options_parser::make_input(const std::string& s) const {
-
-    std::vector<std::string> tokens;
-    boost::split(tokens, s, boost::is_any_of(comma));
-
-    if (tokens.empty())
-        BOOST_THROW_EXCEPTION(parser_validation_error(at_least_one_argument));
-
-    if (tokens.size() > 2)
-        BOOST_THROW_EXCEPTION(parser_validation_error(at_most_two_arguments));
-
-    options::input r;
-    r.path(tokens[0]);
-    if (tokens.size() > 1)
-        r.external_modules(tokens[1]);
-
-    return r;
-}
 
 boost::program_options::options_description
 program_options_parser::general_options_factory() const {
@@ -221,8 +197,7 @@ options::input_options program_options_parser::transform_input_options(
     if (!vm.count(target_arg))
         BOOST_THROW_EXCEPTION(parser_validation_error(missing_target));
 
-    const auto s(vm[target_arg].as<std::string>());
-    r.target(make_input(s));
+    r.target(vm[target_arg].as<std::string>());
 
     return r;
 }

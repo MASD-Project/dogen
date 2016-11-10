@@ -63,7 +63,6 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("path", v.path_);
     ar << make_nvp("extension", v.extension_);
-    ar << make_nvp("external_modules", v.external_modules_);
     ar << make_nvp("is_target", v.is_target_);
 }
 
@@ -73,7 +72,6 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("path", v.path_);
     ar >> make_nvp("extension", v.extension_);
-    ar >> make_nvp("external_modules", v.external_modules_);
     ar >> make_nvp("is_target", v.is_target_);
 }
 

@@ -28,7 +28,6 @@
 #include <list>
 #include <vector>
 #include <boost/filesystem/path.hpp>
-#include "dogen/options/types/input.hpp"
 #include "dogen/options/types/input_options.hpp"
 #include "dogen/annotations/types/type.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
@@ -64,7 +63,7 @@ private:
         const annotations::annotation& a) const;
 
 public:
-    descriptor make(const options::input& tg) const;
+    descriptor make(const boost::filesystem::path& target) const;
 
     std::list<descriptor>
     make(const std::vector<boost::filesystem::path>& data_dirs,

@@ -29,31 +29,26 @@ descriptor::descriptor()
 descriptor::descriptor(descriptor&& rhs)
     : path_(std::move(rhs.path_)),
       extension_(std::move(rhs.extension_)),
-      external_modules_(std::move(rhs.external_modules_)),
       is_target_(std::move(rhs.is_target_)) { }
 
 descriptor::descriptor(
     const boost::filesystem::path& path,
     const std::string& extension,
-    const std::string& external_modules,
     const bool is_target)
     : path_(path),
       extension_(extension),
-      external_modules_(external_modules),
       is_target_(is_target) { }
 
 void descriptor::swap(descriptor& other) noexcept {
     using std::swap;
     swap(path_, other.path_);
     swap(extension_, other.extension_);
-    swap(external_modules_, other.external_modules_);
     swap(is_target_, other.is_target_);
 }
 
 bool descriptor::operator==(const descriptor& rhs) const {
     return path_ == rhs.path_ &&
         extension_ == rhs.extension_ &&
-        external_modules_ == rhs.external_modules_ &&
         is_target_ == rhs.is_target_;
 }
 
@@ -93,22 +88,6 @@ void descriptor::extension(const std::string& v) {
 
 void descriptor::extension(const std::string&& v) {
     extension_ = std::move(v);
-}
-
-const std::string& descriptor::external_modules() const {
-    return external_modules_;
-}
-
-std::string& descriptor::external_modules() {
-    return external_modules_;
-}
-
-void descriptor::external_modules(const std::string& v) {
-    external_modules_ = v;
-}
-
-void descriptor::external_modules(const std::string&& v) {
-    external_modules_ = std::move(v);
 }
 
 bool descriptor::is_target() const {

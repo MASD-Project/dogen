@@ -72,7 +72,7 @@ workflow::workflow() : can_log_(false) { }
 
 void workflow::
 initialise_model_name(const dogen::options::knitting_options& o) {
-    const boost::filesystem::path p(o.input().target().path());
+    const boost::filesystem::path p(o.input().target());
     model_name_ = p.stem().filename().string();
 }
 

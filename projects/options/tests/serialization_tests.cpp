@@ -50,8 +50,9 @@ BOOST_AUTO_TEST_CASE(validate_serialization) {
     roundtrip_type<cpp_options_generator>();
     roundtrip_type<input_options_generator>();
     roundtrip_type<output_options_generator>();
-    roundtrip_type<input_generator>();
     roundtrip_type<knitting_options_generator>();
+    roundtrip_type<stitching_options_generator>();
+    roundtrip_type<tailoring_options_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

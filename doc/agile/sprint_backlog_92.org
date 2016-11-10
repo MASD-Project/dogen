@@ -13,24 +13,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-11-10 Thu 22:14]
+#+CAPTION: Clock summary at [2016-11-10 Thu 22:41]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *24:35* |       |      | 100.0 |
+| *Total time*                                                                | *25:00* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 24:35   |       |      | 100.0 |
-| Active                                                                      |         | 24:35 |      | 100.0 |
+| Stories                                                                     | 25:00   |       |      | 100.0 |
+| Active                                                                      |         | 25:00 |      | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:10 |   0.7 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:27 |   1.8 |
 | COMPLETED Tidy-up README file                                               |         |       | 1:07 |   4.5 |
-| COMPLETED Sort out PIC/PIE linking problems                                 |         |       | 1:55 |   7.8 |
-| COMPLETED Try to fix BinTray problems                                       |         |       | 1:09 |   4.7 |
-| COMPLETED Supply model references via meta-data rather than command line    |         |       | 3:43 |  15.1 |
+| COMPLETED Sort out PIC/PIE linking problems                                 |         |       | 1:55 |   7.7 |
+| COMPLETED Try to fix BinTray problems                                       |         |       | 1:09 |   4.6 |
+| COMPLETED Supply model references via meta-data rather than command line    |         |       | 3:43 |  14.9 |
 | COMPLETED Remove trailing blank lines in comments                           |         |       | 0:39 |   2.6 |
-| STARTED Make JSON yarn a fully supported frontend                           |         |       | 9:57 |  40.5 |
-| STARTED Add a utility that converts a dia model into JSON                   |         |       | 4:25 |  18.0 |
-| STARTED External module path for target should be in diagram                |         |       | 1:03 |   4.3 |
+| COMPLETED External module path for target should be in diagram              |         |       | 1:28 |   5.9 |
+| STARTED Make JSON yarn a fully supported frontend                           |         |       | 9:57 |  39.8 |
+| STARTED Add a utility that converts a dia model into JSON                   |         |       | 4:25 |  17.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -211,6 +211,54 @@ is much cleaner.
 We should remove the annoying trailing lines in comments as it is
 causing spurious diffs with JSON.
 
+*** COMPLETED External module path for target should be in diagram    :story:
+    CLOSED: [2016-11-10 Thu 22:38]
+    CLOCK: [2016-11-10 Thu 22:39]--[2016-11-10 Thu 22:41] =>  0:02
+    CLOCK: [2016-11-10 Thu 22:15]--[2016-11-10 Thu 22:38] =>  0:23
+    CLOCK: [2016-11-10 Thu 21:29]--[2016-11-10 Thu 22:14] =>  0:45
+    CLOCK: [2016-11-08 Tue 15:46]--[2016-11-08 Tue 16:04] =>  0:18
+
+We should have a way to provide external module path from within the
+diagram, like we do with references. It really does not make sense to
+provide different values for this since the code will not work (and
+since the external module path for the references is already in the
+diagram).
+
+This has a few interesting implications:
+
+- we won't need to provide the pseudo kvps for references like we do
+  now, since the models themselves will already have the external
+  module path.
+- the annotation can be a yarn.dia field like =yarn.dia.comment= is;
+  this would allow us to process it early on in the front-end rather
+  than in the guts of yarn. The downside is that we need to figure out
+  how to update all elements once the external module path is
+  known. However, since references are computing during merging, this
+  means we do not have to worry about them.
+- actually this is not quite so simple. The keys for the maps use the
+  external module path, so they all need to be recomputed; all objects
+  need to be reinserted. We need to somehow figure this information
+  out before we do any processing to the diagram. We could go directly
+  to the processed objects and look for this kvp before we generate
+  the graph. We need to locate a UML note that has no parent, with a
+  comment which applies to parent object; the comment processor can
+  extract the external module directly. We can supply it to the
+  builder and the rest of the processing remains the same.
+- in JSON we can supply external module path as part of JSON itself
+  rather than an annotation. In addition, we can do this up front
+  before we process any elements so there is no need to
+  update/post-process the entire model.
+
+*Previous Understanding*
+
+- this is not an issue as the name builder does the splitting.
+
+A related problem is that we do not support nested external module
+paths at present; the code seems to assume it is only one module
+deep. This can be fixed by adding some processing code in name factory
+for the cases where external module path is a string (i.e. look for
+=::= and split accordingly).
+
 *** STARTED Make JSON yarn a fully supported frontend                 :story:
     CLOCK: [2016-11-10 Thu 18:13]--[2016-11-10 Thu 18:16] =>  0:03
     CLOCK: [2016-11-10 Thu 12:07]--[2016-11-10 Thu 12:12] =>  0:05
@@ -283,51 +331,6 @@ JSON representation. This would allow users to take models that are
 not particularly useful in UML and convert them into JSON.
 
 Name according to convention: tailor. General coversion tool.
-
-*** STARTED External module path for target should be in diagram      :story:
-    CLOCK: [2016-11-10 Thu 21:29]--[2016-11-10 Thu 22:14] =>  0:45
-    CLOCK: [2016-11-08 Tue 15:46]--[2016-11-08 Tue 16:04] =>  0:18
-
-We should have a way to provide external module path from within the
-diagram, like we do with references. It really does not make sense to
-provide different values for this since the code will not work (and
-since the external module path for the references is already in the
-diagram).
-
-This has a few interesting implications:
-
-- we won't need to provide the pseudo kvps for references like we do
-  now, since the models themselves will already have the external
-  module path.
-- the annotation can be a yarn.dia field like =yarn.dia.comment= is;
-  this would allow us to process it early on in the front-end rather
-  than in the guts of yarn. The downside is that we need to figure out
-  how to update all elements once the external module path is
-  known. However, since references are computing during merging, this
-  means we do not have to worry about them.
-- actually this is not quite so simple. The keys for the maps use the
-  external module path, so they all need to be recomputed; all objects
-  need to be reinserted. We need to somehow figure this information
-  out before we do any processing to the diagram. We could go directly
-  to the processed objects and look for this kvp before we generate
-  the graph. We need to locate a UML note that has no parent, with a
-  comment which applies to parent object; the comment processor can
-  extract the external module directly. We can supply it to the
-  builder and the rest of the processing remains the same.
-- in JSON we can supply external module path as part of JSON itself
-  rather than an annotation. In addition, we can do this up front
-  before we process any elements so there is no need to
-  update/post-process the entire model.
-
-*Previous Understanding*
-
-- this is not an issue as the name builder does the splitting.
-
-A related problem is that we do not support nested external module
-paths at present; the code seems to assume it is only one module
-deep. This can be fixed by adding some processing code in name factory
-for the cases where external module path is a string (i.e. look for
-=::= and split accordingly).
 
 *** Merge properties factory with stitching factory                   :story:
 

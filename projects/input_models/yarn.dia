@@ -10656,7 +10656,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:point val="162,31"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="161.95,30.95;174.1,36.25"/>
+        <dia:rectangle val="161.95,30.95;174.1,35.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="162,31"/>
@@ -10665,7 +10665,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:real val="12.050000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.2000000000000011"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#descriptor#</dia:string>
@@ -10790,29 +10790,6 @@ Temporary data structure used to build trees of names.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#external_modules#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::string#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#External modules which contain the model, delimited by "::".#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -22531,7 +22508,7 @@ space.#</dia:string>
         <dia:point val="114.06,37"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="113.31,36.25;123.754,50.6"/>
+        <dia:rectangle val="113.31,36.25;123.754,49.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
