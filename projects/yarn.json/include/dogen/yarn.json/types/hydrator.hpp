@@ -63,8 +63,11 @@ private:
     /**
      * @brief Read a name.
      */
+    /**@{*/
+    name read_name(const boost::property_tree::ptree& pt) const;
     name read_name(const boost::property_tree::ptree& pt,
         const name& model_name, const bool in_global_module = false) const;
+    /**@}*/
 
     /**
      * @brief Reads the stereotypes.

@@ -46,6 +46,8 @@ const std::string is_default_enumeration_type_key(
     "is_default_enumeration_type");
 const std::string in_global_module_key("in_global_module");
 const std::string name_key("name");
+const std::string parent_key("parent");
+const std::string refines_key("refines");
 const std::string model_name_key("model_name");
 const std::string bool_true("true");
 const std::string bool_false("false");
@@ -143,6 +145,19 @@ read_stereotypes(const boost::property_tree::ptree& pt) const {
     for (auto j(i->second.begin()); j != i->second.end(); ++j)
         r.push_back(j->second.get_value<std::string>());
 
+    return r;
+}
+
+name hydrator::read_name(const boost::property_tree::ptree& pt) const {
+    yarn::name_builder b;
+    const auto sn(pt.get<std::string>(simple_name_key));
+    b.simple_name(sn);
+
+    const auto im(pt.get<std::string>(internal_modules_key, empty));
+    if (!im.empty())
+        b.internal_modules(im);
+
+    const auto r(b.build());
     return r;
 }
 
@@ -254,9 +269,13 @@ void hydrator::read_element(const boost::property_tree::ptree& pt,
         const auto ot(pt.get_optional<std::string>(object_type_key));
         o.object_type(to_object_type(ot));
 
-        const auto i(pt.find(attributes_key));
+        auto i(pt.find(attributes_key));
         if (i != pt.not_found())
             o.local_attributes(read_attributes(i->second));
+
+        i = pt.find(parent_key);
+        if (i != pt.not_found())
+            o.parent(read_name(i->second));
 
         const auto pair(std::make_pair(n.id(), o));
         const bool inserted(im.objects().insert(pair).second);
@@ -310,9 +329,15 @@ void hydrator::read_element(const boost::property_tree::ptree& pt,
         yarn::concept c;
         lambda(c);
 
-        const auto i(pt.find(attributes_key));
+        auto i(pt.find(attributes_key));
         if (i != pt.not_found())
             c.local_attributes(read_attributes(i->second));
+
+        i = pt.find(refines_key);
+        if (i != pt.not_found()) {
+            for (auto j(i->second.begin()); j != i->second.end(); ++j)
+                c.refines().push_back(read_name(j->second, im.name()));
+        }
 
         const auto pair(std::make_pair(n.id(), c));
         const bool inserted(im.concepts().insert(pair).second);

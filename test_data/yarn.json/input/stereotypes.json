@@ -1,6 +1,7 @@
 {
     "model_name" : "stereotypes",
     "external_modules" : "dogen::test_models",
+    "documentation" : "Test model for all of the stereotype related scenarios.\n\n",
     "annotation" : {
         "annotations.profile" : "dogen"
     },
@@ -10,6 +11,7 @@
                 "simple_name" : "value"
             },
             "meta_type" : "object",
+            "documentation" : "Type is a value.",
             "attributes" : [
                 {
                     "simple_name" : "prop_0",
@@ -35,6 +37,7 @@
                 "simple_name" : "some_type"
             },
             "meta_type" : "object",
+            "documentation" : "Type is non-generatable.\n\n",
             "stereotypes" : [ "handcrafted" ],
             "annotation" : {
                 "annotations.profile" : "dogen",
@@ -107,7 +110,7 @@
                 "simple_name" : "immutable_one_non_primitive"
             },
             "meta_type" : "object",
-            "documentation" : "Immutable class with one pod property.",
+            "documentation" : "Immutable class with one pod property",
             "stereotypes" : [ "immutable" ],
             "attributes" : [
                 {
@@ -150,7 +153,7 @@
                     "type" : "std::string"
                 },
                 {
-                    "simple_name" : "prop_3",
+                    "simple_name" : "prop_2",
                     "type" : "value"
                 },
                 {
@@ -188,7 +191,26 @@
                 {
                     "simple_name" : "prop_0",
                     "type" : "int",
-                    "documentation" : "First refinement property"
+                    "documentation" : "Property in the base concept."
+                }
+            ]
+        },
+        {
+            "name" : {
+                "simple_name" : "Refinement"
+            },
+            "meta_type" : "concept",
+            "documentation" : "This is the base concept.",
+            "refines" : [
+                {
+                    "simple_name" : "BaseConcept"
+                }
+            ],
+            "attributes" : [
+                {
+                    "simple_name" : "prop_1",
+                    "type" : "int",
+                    "documentation" : "Refinement concept property."
                 }
             ]
         },
@@ -212,6 +234,11 @@
             },
             "meta_type" : "concept",
             "documentation" : "First refinement",
+            "refines" : [
+                {
+                    "simple_name" : "BaseConcept2"
+                }
+            ],
             "attributes" : [
                 {
                     "simple_name" : "prop_1",
@@ -226,6 +253,11 @@
             },
             "meta_type" : "concept",
             "documentation" : "Second refinement",
+            "refines" : [
+                {
+                    "simple_name" : "BaseConcept2"
+                }
+            ],
             "attributes" : [
                 {
                     "simple_name" : "prop_2",
@@ -240,6 +272,14 @@
             },
             "meta_type" : "concept",
             "documentation" : "Multiple refinements concept",
+            "refines" : [
+                {
+                    "simple_name" : "FirstRefinement"
+                },
+                {
+                    "simple_name" : "SecondRefinement"
+                }
+            ],
             "attributes" : [
                 {
                     "simple_name" : "prop_3",
@@ -336,6 +376,10 @@
             "name" : {
                 "simple_name" : "further_refined"
             },
+            "parent" : {
+                "simple_name" : "base_with_concept"
+            },
+
             "meta_type" : "object",
             "stereotypes" : [ "MultipleRefinements" ],
             "documentation" : "Descendant class that models a concept which is a refinement of the concept\nmodeled by the base."
