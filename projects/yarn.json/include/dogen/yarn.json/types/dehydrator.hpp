@@ -26,6 +26,7 @@
 #endif
 
 #include <string>
+#include <ostream>
 #include <boost/filesystem/path.hpp>
 #include "dogen/yarn/types/intermediate_model.hpp"
 
@@ -34,6 +35,10 @@ namespace yarn {
 namespace json {
 
 class dehydrator final {
+private:
+    bool has_elements(const intermediate_model& im) const;
+    void insert_objects(const intermediate_model& im, std::ostream& s) const;
+
 public:
     std::string dehydrate(const intermediate_model& im) const;
     void dehydrate(const intermediate_model& im,

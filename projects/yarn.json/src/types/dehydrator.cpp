@@ -21,6 +21,7 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/filesystem/file.hpp"
+#include "dogen/formatters/types/utility_formatter.hpp"
 #include "dogen/yarn.json/types/dehydrator.hpp"
 
 namespace {
@@ -28,7 +29,8 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("yarn.json.dehydrator"));
 
-const std::string underscore("_");
+const std::string scope("::");
+const std::string comma_space(", ");
 
 }
 
@@ -36,14 +38,112 @@ namespace dogen {
 namespace yarn {
 namespace json {
 
+bool dehydrator::has_elements(const intermediate_model& im) const {
+    return
+        !im.objects().empty() ||
+        !im.primitives().empty() ||
+        !im.enumerations().empty() ||
+        !im.modules().empty();
+}
+void dehydrator::
+insert_objects(const intermediate_model& im, std::ostream& s) const {
+    formatters::utility_formatter uf(s);
+    for (const auto& pair : im.objects()) {
+        const auto& o(pair.second);
+        s << " { ";
+        uf.insert_quoted("name");
+        s << " : { ";
+        uf.insert_quoted("simple_name");
+        s << " : ";
+        uf.insert_quoted(o.name().simple());
+        s << " }, ";
+
+        uf.insert_quoted("meta_type");
+        s << ": ";
+        uf.insert_quoted("object");
+
+        if (!o.local_attributes().empty()) {
+            s << comma_space;
+            uf.insert_quoted("attributes");
+            s << ": [";
+
+            bool is_first(true);
+            for(const auto& a : o.local_attributes()) {
+                if (!is_first)
+                    s << ",";
+
+                s << " { ";
+                uf.insert_quoted("simple_name");
+                s << " : ";
+                uf.insert_quoted(a.name().simple());
+
+                s << comma_space;
+
+                uf.insert_quoted("type");
+                s << " : ";
+                uf.insert_quoted(a.unparsed_type());
+
+                s << " }";
+                is_first = false;
+            }
+            s << " ]";
+        }
+        s << " }";
+    }
+}
+
+
 std::string dehydrator::dehydrate(const intermediate_model& im) const {
     std::ostringstream s;
+    formatters::utility_formatter uf(s);
     using boost::algorithm::join;
 
     const auto& l(im.name().location());
-    s << "{ "
-      << "\"model_name\" : \"" << join(l.model_modules(), underscore) << "\""
-      << "}";
+    s << "{ ";
+    uf.insert_quoted("model_name");
+    s << " : ";
+    uf.insert_quoted(join(l.model_modules(), scope));
+    s << comma_space;
+
+    uf.insert_quoted("external_modules");
+    s << " : ";
+    uf.insert_quoted(join(l.external_modules(), scope));
+    s << comma_space;
+
+    bool has_annotations(false);
+    const auto& scribble_groups(im.indices().scribble_groups());
+    const auto i(scribble_groups.find(im.name().id()));
+    if (i != scribble_groups.end()) {
+        bool is_first(true);
+        const auto scribble(i->second.parent());
+        has_annotations = !scribble.entries().empty();
+        if (has_annotations) {
+            uf.insert_quoted("annotation");
+            s << " : {";
+
+            for (const auto& entry : scribble.entries()) {
+                if (!is_first)
+                    s << ", ";
+                uf.insert_quoted(entry.first);
+                s << " : ";
+                uf.insert_quoted(entry.second);
+                is_first = false;
+            }
+            s << " }";
+        }
+    }
+
+    if (has_elements(im)) {
+        if (has_annotations)
+            s << comma_space;
+
+        uf.insert_quoted("elements");
+        s << ": [";
+        insert_objects(im, s);
+        s << " ]";
+    }
+
+    s << " }";
 
     return s.str();
 }
