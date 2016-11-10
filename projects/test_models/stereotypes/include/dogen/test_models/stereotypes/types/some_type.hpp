@@ -34,7 +34,6 @@ namespace stereotypes {
 
 /**
  * @brief Type is non-generatable.
- *
  */
 class some_type final {
 public:

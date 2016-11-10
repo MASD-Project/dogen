@@ -30,7 +30,6 @@ namespace test_models {
 
 /**
  * @brief Test model for all of the stereotype related scenarios.
- *
  */
 namespace stereotypes {
 }

@@ -56,6 +56,7 @@ processed_comment_factory::make(const std::string& c) const {
     std::ostringstream documentation_stream;
     std::string line;
     bool applicable_to_parent_object(false);
+    bool previous_line_blank(false);
     while (std::getline(comments_stream, line)) {
         if (boost::starts_with(line, instruction_marker)) {
             boost::replace_all(line, instruction_marker, empty);
@@ -70,8 +71,23 @@ processed_comment_factory::make(const std::string& c) const {
             const auto value(line.substr(pos + 1));
             applicable_to_parent_object |= (key == traits::comment());
             r.key_value_pairs().push_back(std::make_pair(key, value));
-        } else
+            continue;
+        }
+
+        /*
+         * Rather clumsy attempt to remove a trailing line from
+         * comments. We tried using the indent filter but that doesn't
+         * seem to work for some reason.
+         */
+        if (line.empty() && !previous_line_blank)
+            previous_line_blank = true;
+        else {
+            if (previous_line_blank)
+                documentation_stream << std::endl;
+
+            previous_line_blank = false;
             documentation_stream << line << std::endl;
+        }
     }
 
     r.documentation(documentation_stream.str());

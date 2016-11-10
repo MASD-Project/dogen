@@ -33,7 +33,6 @@ namespace test_models {
  *
  * It includes the visitable stereotype since it only makes sense
  * in the context of inheritance.
- *
  */
 namespace trivial_inheritance {
 }
