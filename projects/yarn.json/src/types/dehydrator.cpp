@@ -41,7 +41,7 @@ std::string dehydrator::dehydrate(const intermediate_model& im) const {
     using boost::algorithm::join;
 
     const auto& l(im.name().location());
-    s << "{ " << std::endl
+    s << "{ "
       << "\"model_name\" : \"" << join(l.model_modules(), underscore) << "\""
       << "}";
 
