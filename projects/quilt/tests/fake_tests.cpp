@@ -24,7 +24,7 @@
 namespace {
 
 const std::string empty;
-const std::string test_module("backend");
+const std::string test_module("quilt");
 const std::string test_suite("fake_tests");
 
 }

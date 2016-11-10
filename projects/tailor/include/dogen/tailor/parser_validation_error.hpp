@@ -18,19 +18,30 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_OPTIONS_SERIALIZATION_ALL_SER_HPP
-#define DOGEN_OPTIONS_SERIALIZATION_ALL_SER_HPP
+#ifndef DOGEN_TAILOR_PARSER_VALIDATION_ERROR_HPP
+#define DOGEN_TAILOR_PARSER_VALIDATION_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/options/serialization/input_ser.hpp"
-#include "dogen/options/serialization/cpp_options_ser.hpp"
-#include "dogen/options/serialization/input_options_ser.hpp"
-#include "dogen/options/serialization/output_options_ser.hpp"
-#include "dogen/options/serialization/knitting_options_ser.hpp"
-#include "dogen/options/serialization/stitching_options_ser.hpp"
-#include "dogen/options/serialization/tailoring_options_ser.hpp"
+#include "dogen/utility/exception/utility_exception.hpp"
+
+namespace dogen {
+namespace tailor {
+
+/**
+ * @brief A fatal error has occurred during option parsing.
+ */
+class parser_validation_error : public utility::exception::exception {
+public:
+    parser_validation_error(std::string message)
+        : utility::exception::exception(message) { }
+    parser_validation_error() { }
+
+    virtual ~parser_validation_error() throw() {}
+};
+
+} }
 
 #endif

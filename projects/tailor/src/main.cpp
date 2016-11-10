@@ -18,19 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_OPTIONS_SERIALIZATION_ALL_SER_HPP
-#define DOGEN_OPTIONS_SERIALIZATION_ALL_SER_HPP
+#include "dogen/yarn.json/types/initializer.hpp"
+#include "dogen/yarn.dia/types/initializer.hpp"
+#include "dogen/tailor/workflow.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+int main(const int argc, const char* argv[]) {
+    dogen::yarn::json::initializer::initialize();
+    dogen::yarn::dia::initializer::initialize();
 
-#include "dogen/options/serialization/input_ser.hpp"
-#include "dogen/options/serialization/cpp_options_ser.hpp"
-#include "dogen/options/serialization/input_options_ser.hpp"
-#include "dogen/options/serialization/output_options_ser.hpp"
-#include "dogen/options/serialization/knitting_options_ser.hpp"
-#include "dogen/options/serialization/stitching_options_ser.hpp"
-#include "dogen/options/serialization/tailoring_options_ser.hpp"
-
-#endif
+    dogen::tailor::workflow w;
+    return w.execute(argc, argv);
+}

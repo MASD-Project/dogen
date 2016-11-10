@@ -31,5 +31,6 @@
 #include "dogen/options/io/output_options_io.hpp"
 #include "dogen/options/io/knitting_options_io.hpp"
 #include "dogen/options/io/stitching_options_io.hpp"
+#include "dogen/options/io/tailoring_options_io.hpp"
 
 #endif

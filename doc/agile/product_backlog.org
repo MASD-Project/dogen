@@ -8130,20 +8130,6 @@ can create code to interface with legacy systems.
 
 We should investigate how hard it is to add support for these IDLs.
 
-*** Add a utility that converts a dia model into JSON                  :epic:
-
-#+begin_quote
-*Story*: As a dogen user, I want to convert some Dia models into JSON
-documents whenever I don't require UML and diagram formatting, so that
-I don't have to generate the documents manually.
-#+end_quote
-
-It would be great if one could take a dia model and convert it into a
-JSON representation. This would allow users to take models that are
-not particularly useful in UML and convert them into JSON.
-
-Name according to convention: tailor. General coversion tool.
-
 *** Investigate support for automatic diagram updates                  :epic:
 
 For classes that are manually generated, it would be really nice if we

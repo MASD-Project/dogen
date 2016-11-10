@@ -33,6 +33,7 @@
 #include "dogen/options/types/knitting_options.hpp"
 #include "dogen/options/types/validation_error.hpp"
 #include "dogen/options/types/stitching_options.hpp"
+#include "dogen/options/types/tailoring_options.hpp"
 #include "dogen/options/types/knitting_options_validator.hpp"
 
 #endif

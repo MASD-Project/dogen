@@ -19,8 +19,8 @@
  *
  */
 #include <boost/filesystem/operations.hpp>
-#include "dogen/stitcher/parser_validation_error.hpp"
-#include "dogen/stitcher/program_options_parser.hpp"
+#include "dogen/tailor/parser_validation_error.hpp"
+#include "dogen/tailor/program_options_parser.hpp"
 
 // Note on logging: we are NOT logging any of the exceptions to the
 // log in this file. This is by design. The logger is only initialised
@@ -31,7 +31,7 @@
 namespace {
 
 const std::string more_information(
-    "Try `dogen_stitcher --help' for more information.");
+    "Try `dogen_tailor --help' for more information.");
 const std::string at_least_one_argument("Expected at least one argument");
 
 const std::string empty;
@@ -39,12 +39,13 @@ const std::string help_arg("help");
 const std::string version_arg("version");
 const std::string verbose_arg("verbose");
 const std::string target_arg("target");
+const std::string output_extension_arg("output-extension");
 const std::string force_write_arg("force-write");
 
 }
 
 namespace dogen {
-namespace stitcher {
+namespace tailor {
 
 program_options_parser::
 program_options_parser(std::vector<std::string> arguments)
@@ -92,8 +93,8 @@ program_options_parser::output_options_factory() const {
     using boost::program_options::value;
     boost::program_options::options_description r("Output options");
     r.add_options()
-        ("force-write,f", "Always write to file even when there are"
-            " no differences");
+        ("output-type,o", value<std::string>(), "Type of output to generate.")
+        ("force-write,f", "Always write to file even when it already exists.");
 
     return r;
 }
@@ -154,28 +155,36 @@ void program_options_parser::version_function(std::function<void()> value) {
     version_function_ = value;
 }
 
-options::stitching_options program_options_parser::
+options::tailoring_options program_options_parser::
 transform_options(const variables_map& vm) const {
-    options::stitching_options r;
+    options::tailoring_options r;
 
     r.verbose(vm.count(verbose_arg));
     if (!vm.count(target_arg))
         throw_missing_target();
 
     r.target(vm[target_arg].as<std::string>());
+    if (vm.count(output_extension_arg) == 0) {
+        std::ostringstream stream;
+        stream << "Mandatory parameter output type is missing. "
+               << more_information;
+        BOOST_THROW_EXCEPTION(parser_validation_error(stream.str()));
+    }
+
+    r.output_extension(vm[output_extension_arg].as<std::string>());
     r.force_write(vm.count(force_write_arg));
     return r;
 }
 
-boost::optional<options::stitching_options> program_options_parser::parse() {
+boost::optional<options::tailoring_options> program_options_parser::parse() {
     auto optional_vm(variables_map_factory());
 
     if (!optional_vm)
-        return boost::optional<options::stitching_options>();
+        return boost::optional<options::tailoring_options>();
 
     const boost::program_options::variables_map vm(*optional_vm);
     const auto r(transform_options(vm));
-    return boost::optional<options::stitching_options>(r);
+    return boost::optional<options::tailoring_options>(r);
 }
 
 } }

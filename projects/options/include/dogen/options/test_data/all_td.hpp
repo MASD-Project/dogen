@@ -31,5 +31,6 @@
 #include "dogen/options/test_data/output_options_td.hpp"
 #include "dogen/options/test_data/knitting_options_td.hpp"
 #include "dogen/options/test_data/stitching_options_td.hpp"
+#include "dogen/options/test_data/tailoring_options_td.hpp"
 
 #endif

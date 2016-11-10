@@ -18,19 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_OPTIONS_SERIALIZATION_ALL_SER_HPP
-#define DOGEN_OPTIONS_SERIALIZATION_ALL_SER_HPP
+#ifndef DOGEN_OPTIONS_HASH_TAILORING_OPTIONS_HASH_HPP
+#define DOGEN_OPTIONS_HASH_TAILORING_OPTIONS_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/options/serialization/input_ser.hpp"
-#include "dogen/options/serialization/cpp_options_ser.hpp"
-#include "dogen/options/serialization/input_options_ser.hpp"
-#include "dogen/options/serialization/output_options_ser.hpp"
-#include "dogen/options/serialization/knitting_options_ser.hpp"
-#include "dogen/options/serialization/stitching_options_ser.hpp"
-#include "dogen/options/serialization/tailoring_options_ser.hpp"
+#include <functional>
+#include "dogen/options/types/tailoring_options.hpp"
 
+namespace dogen {
+namespace options {
+
+struct tailoring_options_hasher {
+public:
+    static std::size_t hash(const tailoring_options& v);
+};
+
+} }
+
+namespace std {
+
+template<>
+struct hash<dogen::options::tailoring_options> {
+public:
+    size_t operator()(const dogen::options::tailoring_options& v) const {
+        return dogen::options::tailoring_options_hasher::hash(v);
+    }
+};
+
+}
 #endif
