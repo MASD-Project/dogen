@@ -47,8 +47,13 @@ bool dehydrator::has_elements(const intermediate_model& im) const {
 }
 void dehydrator::
 insert_objects(const intermediate_model& im, std::ostream& s) const {
+    using boost::algorithm::join;
     formatters::utility_formatter uf(s);
+    bool is_first_object(true);
     for (const auto& pair : im.objects()) {
+        if (!is_first_object)
+            s << comma_space;
+
         const auto& o(pair.second);
         s << " { ";
         uf.insert_quoted("name");
@@ -56,6 +61,14 @@ insert_objects(const intermediate_model& im, std::ostream& s) const {
         uf.insert_quoted("simple_name");
         s << " : ";
         uf.insert_quoted(o.name().simple());
+
+        const auto& l(o.name().location());
+        if (!l.internal_modules().empty()) {
+            s << comma_space;
+            uf.insert_quoted("internal_modules");
+            s << " : ";
+            uf.insert_quoted(join(l.internal_modules(), scope));
+        }
         s << " }, ";
 
         uf.insert_quoted("meta_type");
@@ -67,9 +80,9 @@ insert_objects(const intermediate_model& im, std::ostream& s) const {
             uf.insert_quoted("attributes");
             s << ": [";
 
-            bool is_first(true);
+            bool is_first_attribute(true);
             for(const auto& a : o.local_attributes()) {
-                if (!is_first)
+                if (!is_first_attribute)
                     s << ",";
 
                 s << " { ";
@@ -84,11 +97,12 @@ insert_objects(const intermediate_model& im, std::ostream& s) const {
                 uf.insert_quoted(a.unparsed_type());
 
                 s << " }";
-                is_first = false;
+                is_first_attribute = false;
             }
             s << " ]";
         }
         s << " }";
+        is_first_object = false;
     }
 }
 
