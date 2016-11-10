@@ -22,6 +22,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/dia/types/hydrator.hpp"
 #include "dogen/dia/types/persister.hpp"
+#include "dogen/yarn/types/frontend_error.hpp"
 #include "dogen/yarn.dia/types/workflow.hpp"
 #include "dogen/yarn.dia/types/frontend.hpp"
 
@@ -31,7 +32,10 @@ namespace {
 
 const std::string id("yarn.dia.frontend");
 auto lg(logger_factory(id));
+
 const std::string empty;
+const std::string no_saving_support(
+    "Saving not supported for yarn.dia frontend");
 
 }
 
@@ -50,7 +54,7 @@ std::list<std::string> frontend::supported_extensions() const {
     return extensions;
 }
 
-yarn::intermediate_model frontend::load(const yarn::descriptor& d) {
+yarn::intermediate_model frontend::read(const yarn::descriptor& d) {
     BOOST_LOG_SEV(lg, debug) << "Loading Dia diagram. ";
 
     dogen::dia::hydrator h(d.path());
@@ -62,6 +66,12 @@ yarn::intermediate_model frontend::load(const yarn::descriptor& d) {
     const auto r(wf.execute(diagram, name, em, d.is_target()));
     BOOST_LOG_SEV(lg, debug) << "Finished loading diagram.";
     return r;
+}
+
+void
+frontend::write(const intermediate_model& /*im*/, const descriptor& /*d*/) {
+    BOOST_LOG_SEV(lg, error) << no_saving_support;
+    BOOST_THROW_EXCEPTION(frontend_error(no_saving_support));
 }
 
 } } }

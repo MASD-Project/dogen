@@ -25,7 +25,9 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include <boost/filesystem/path.hpp>
+#include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -33,18 +35,9 @@ namespace json {
 
 class dehydrator final {
 public:
-    dehydrator() = default;
-    dehydrator(const dehydrator&) = default;
-    dehydrator(dehydrator&&) = default;
-    ~dehydrator() = default;
-    dehydrator& operator=(const dehydrator&) = default;
-
-public:
-    bool operator==(const dehydrator& rhs) const;
-    bool operator!=(const dehydrator& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    std::string dehydrate(const intermediate_model& im) const;
+    void dehydrate(const intermediate_model& im,
+        const boost::filesystem::path& p) const;
 };
 
 } } }

@@ -99,15 +99,23 @@ void workflow::initialise_logging(const options::tailoring_options& o) {
 void workflow::tailor(const options::tailoring_options& o) const {
     BOOST_LOG_SEV(lg, info) << tailor_product << " started.";
 
-
-    yarn::descriptor d;
-    d.extension(o.target().extension().string());
-    d.is_target(true);
-    d.path(o.target());
+    yarn::descriptor tgd;
+    tgd.extension(o.target().extension().string());
+    tgd.is_target(true);
+    tgd.path(o.target());
 
     auto& rg(yarn::workflow::frontend_registrar());
-    auto& tg_fe(rg.frontend_for_extension(d.extension()));
-    const auto im(tg_fe.load(d));
+    auto& tgfe(rg.frontend_for_extension(tgd.extension()));
+
+    BOOST_LOG_SEV(lg, info) << "Reading: " << tgd.path().generic_string();
+    const auto im(tgfe.read(tgd));
+
+    yarn::descriptor od;
+    od.extension(o.output().extension().string());
+    od.path(o.output());
+    auto& ofe(rg.frontend_for_extension(od.extension()));
+    ofe.write(im, od);
+    BOOST_LOG_SEV(lg, info) << "Writing: " << od.path().generic_string();
 
     BOOST_LOG_SEV(lg, info) << tailor_product << " finished.";
 }

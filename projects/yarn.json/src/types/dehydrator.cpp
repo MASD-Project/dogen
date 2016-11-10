@@ -18,14 +18,41 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/algorithm/string.hpp>
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/filesystem/file.hpp"
 #include "dogen/yarn.json/types/dehydrator.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory("yarn.json.dehydrator"));
+
+const std::string underscore("_");
+
+}
 
 namespace dogen {
 namespace yarn {
 namespace json {
 
-bool dehydrator::operator==(const dehydrator& /*rhs*/) const {
-    return true;
+std::string dehydrator::dehydrate(const intermediate_model& im) const {
+    std::ostringstream s;
+    using boost::algorithm::join;
+
+    const auto& l(im.name().location());
+    s << "{ " << std::endl
+      << "\"model_name\" : \"" << join(l.model_modules(), underscore) << "\""
+      << "}";
+
+    return s.str();
+}
+
+void dehydrator::dehydrate(const intermediate_model& im,
+    const boost::filesystem::path& p) const {
+
+    const auto s(dehydrate(im));
+    utility::filesystem::write_file_content(p, s);
 }
 
 } } }

@@ -21,6 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn.json/types/hydrator.hpp"
+#include "dogen/yarn.json/types/dehydrator.hpp"
 #include "dogen/yarn.json/types/frontend.hpp"
 
 using namespace dogen::utility::log;
@@ -48,9 +49,14 @@ std::list<std::string> frontend::supported_extensions() const {
     return extensions;
 }
 
-yarn::intermediate_model frontend::load(const yarn::descriptor& d) {
-    yarn::json::hydrator h;
+yarn::intermediate_model frontend::read(const yarn::descriptor& d) {
+    hydrator h;
     return h.hydrate(d.path(), d.is_target());
+}
+
+void frontend::write(const intermediate_model& im, const descriptor& d) {
+    dehydrator dh;
+    dh.dehydrate(im, d.path());
 }
 
 } } }

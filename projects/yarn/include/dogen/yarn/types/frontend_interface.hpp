@@ -62,13 +62,13 @@ public:
      * @note Method is non-const by design at the moment as some
      * frontends have state.
      */
-    virtual intermediate_model load(const descriptor& d) = 0;
+    virtual intermediate_model read(const descriptor& d) = 0;
 
     /**
      * @brief Converts the intermediate model to the native format
-     * supported by the front end and saves it as a file.
+     * supported by the front end and writes it to a file.
      */
-    // virtual void save(const intermediate_model& im, const descriptor& d) = 0;
+    virtual void write(const intermediate_model& im, const descriptor& d) = 0;
 };
 
 } }
