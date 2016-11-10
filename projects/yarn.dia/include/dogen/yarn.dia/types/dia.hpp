@@ -128,7 +128,6 @@ namespace yarn {
  * @li @b immutable: only getters will be generated for each property.
  *
  * @li @b comparable: unused as of yet.
- *
  */
 namespace dia {
 }

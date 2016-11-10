@@ -33,7 +33,6 @@ namespace dogen {
  * This model is the repository of all formatting related code
  * which is not language specific. Language-specific models can
  * then make use of it.
- *
  */
 namespace formatters {
 }

@@ -34,7 +34,6 @@ namespace dogen {
  * pipeline, that is able to take a model in any of the supported input
  * formats and transform it to code in any of the supported programming
  * languages.
- *
  */
 namespace knit {
 }

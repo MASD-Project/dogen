@@ -30,7 +30,6 @@ namespace yarn {
 
 /**
  * @brief Provides yarn file importing support for JSON.
- *
  */
 namespace json {
 }

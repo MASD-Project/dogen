@@ -33,7 +33,6 @@ namespace dogen {
  * The idea is to allow the meta-models to carry data over to the
  * formatting process without necessarily knowing about this data, but
  * yet imposing some constraints on the shape of the data.
- *
  */
 namespace annotations {
 }

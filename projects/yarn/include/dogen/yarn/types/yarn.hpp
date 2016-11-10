@@ -57,7 +57,6 @@ namespace dogen {
  *
  * @li to provide all the information required to build the final model
  * and to build it.
- *
  */
 namespace yarn {
 }

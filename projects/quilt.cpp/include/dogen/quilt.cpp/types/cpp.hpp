@@ -30,7 +30,6 @@ namespace quilt {
 
 /**
  * @brief CPP is the C++ model in the quilt kernel.
- *
  */
 namespace cpp {
 }

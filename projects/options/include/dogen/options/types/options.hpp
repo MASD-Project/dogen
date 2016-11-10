@@ -33,7 +33,6 @@ namespace dogen {
  * The options model provides types to store general configuration
  * options for all the different Dogen applications, such as knitter,
  * etc.
- *
  */
 namespace options {
 }
