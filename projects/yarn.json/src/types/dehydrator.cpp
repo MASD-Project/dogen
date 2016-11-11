@@ -40,6 +40,13 @@ namespace dogen {
 namespace yarn {
 namespace json {
 
+std::string dehydrator::tidy_up_string(std::string s) const {
+    boost::replace_all(s, "\r", "\\r");
+    boost::replace_all(s, "\n", "\\n");
+    boost::replace_all(s, "\"", "\\\"");
+    return s;
+}
+
 bool dehydrator::has_elements(const intermediate_model& im) const {
     return
         !im.objects().empty() ||
@@ -48,8 +55,39 @@ bool dehydrator::has_elements(const intermediate_model& im) const {
         !im.modules().empty();
 }
 
-void dehydrator::dehydrate_element(const element& e,
-    const std::string& meta_type, std::ostream& s) const {
+void dehydrator::dehydrate_annotations(const intermediate_model& im,
+    const std::string& id, std::ostream& s) const {
+
+    formatters::utility_formatter uf(s);
+    bool has_annotations(false);
+    const auto& scribble_groups(im.indices().scribble_groups());
+    const auto i(scribble_groups.find(id));
+    if (i == scribble_groups.end())
+        return;
+
+    bool is_first(true);
+    const auto scribble(i->second.parent());
+    has_annotations = !scribble.entries().empty();
+    if (!has_annotations)
+        return;
+
+    s << comma_space;
+    uf.insert_quoted("annotation");
+    s << " : {";
+
+    for (const auto& entry : scribble.entries()) {
+        if (!is_first)
+            s << ", ";
+        uf.insert_quoted(entry.first);
+        s << " : ";
+        uf.insert_quoted(entry.second);
+        is_first = false;
+    }
+    s << " }";
+}
+
+void dehydrator::dehydrate_element(const intermediate_model& im,
+    const element& e, const std::string& meta_type, std::ostream& s) const {
 
     formatters::utility_formatter uf(s);
     uf.insert_quoted("name");
@@ -70,6 +108,31 @@ void dehydrator::dehydrate_element(const element& e,
     uf.insert_quoted("meta_type");
     s << ": ";
     uf.insert_quoted(meta_type);
+
+    if (!e.documentation().empty()) {
+        s << comma_space;
+        uf.insert_quoted("documentation");
+        s << " : ";
+        uf.insert_quoted(tidy_up_string(e.documentation()));
+    }
+
+    if (!e.stereotypes().empty()) {
+        s << comma_space;
+        uf.insert_quoted("stereotypes");
+        s << " : [ ";
+        bool is_first(true);
+        for (const auto& stereotype : e.stereotypes()) {
+            if (!is_first)
+                s << comma_space;
+
+            uf.insert_quoted(stereotype);
+
+            is_first = false;
+        }
+        s << " ] ";
+    }
+
+    dehydrate_annotations(im, e.name().id(), s);
 }
 
 void dehydrator::dehydrate_attributes(const std::list<attribute>& attrs,
@@ -78,10 +141,10 @@ void dehydrator::dehydrate_attributes(const std::list<attribute>& attrs,
     uf.insert_quoted("attributes");
     s << ": [";
 
-    bool is_attribute(true);
+    bool is_first(true);
     for(const auto& a : attrs) {
-        if (!is_attribute)
-            s << ",";
+        if (!is_first)
+            s << comma_space;
 
         s << " { ";
         uf.insert_quoted("simple_name");
@@ -94,30 +157,92 @@ void dehydrator::dehydrate_attributes(const std::list<attribute>& attrs,
         s << " : ";
         uf.insert_quoted(a.unparsed_type());
 
+        if (!a.documentation().empty()) {
+            s << comma_space;
+            uf.insert_quoted("documentation");
+            s << " : ";
+            uf.insert_quoted(tidy_up_string(a.documentation()));
+        }
+
         s << " }";
-        is_attribute = false;
+        is_first = false;
     }
     s << " ]";
 }
 
-void dehydrator::dehydrate_objects(const std::map<std::string, object>& objects,
-    std::ostream& s) const {
+void dehydrator::
+dehydrate_objects(const intermediate_model& im, std::ostream& s) const {
 
     using boost::algorithm::join;
     formatters::utility_formatter uf(s);
     bool is_first(true);
+
+    const auto objects(to_map(im.objects()));
     for (const auto& pair : objects) {
         if (!is_first)
             s << comma_space;
 
         const auto& o(pair.second);
         s << " { ";
-        dehydrate_element(o, "object", s);
+        dehydrate_element(im, o, "object", s);
 
         if (!o.local_attributes().empty()) {
             s << comma_space;
             dehydrate_attributes(o.local_attributes(), s);
         }
+        s << " }";
+        is_first = false;
+    }
+}
+
+void dehydrator::
+dehydrate_concepts(const intermediate_model& im, std::ostream& s) const {
+
+    using boost::algorithm::join;
+    formatters::utility_formatter uf(s);
+    bool is_first(true);
+
+    const auto concepts(to_map(im.concepts()));
+    for (const auto& pair : concepts) {
+        if (!is_first || !im.objects().empty())
+            s << comma_space;
+
+        const auto& o(pair.second);
+        s << " { ";
+        dehydrate_element(im, o, "concept", s);
+
+        if (!o.local_attributes().empty()) {
+            s << comma_space;
+            dehydrate_attributes(o.local_attributes(), s);
+        }
+        s << " }";
+        is_first = false;
+    }
+}
+
+void dehydrator::
+dehydrate_modules(const intermediate_model& im, std::ostream& s) const {
+
+    using boost::algorithm::join;
+    formatters::utility_formatter uf(s);
+    bool is_first(true);
+
+    auto modules(to_map(im.modules()));
+
+    /*
+     * remove the root module.
+     */
+    const auto i(modules.find(im.name().id()));
+    if (i != modules.end())
+        modules.erase(i);
+
+    for (const auto& pair : modules) {
+        if (!is_first || (!im.objects().empty() || !im.concepts().empty()))
+            s << comma_space;
+
+        const auto& o(pair.second);
+        s << " { ";
+        dehydrate_element(im, o, "module", s);
         s << " }";
         is_first = false;
     }
@@ -138,39 +263,27 @@ std::string dehydrator::dehydrate(const intermediate_model& im) const {
     uf.insert_quoted("external_modules");
     s << " : ";
     uf.insert_quoted(join(l.external_modules(), scope));
-    s << comma_space;
 
-    bool has_annotations(false);
-    const auto& scribble_groups(im.indices().scribble_groups());
-    const auto i(scribble_groups.find(im.name().id()));
-    if (i != scribble_groups.end()) {
-        bool is_first(true);
-        const auto scribble(i->second.parent());
-        has_annotations = !scribble.entries().empty();
-        if (has_annotations) {
-            uf.insert_quoted("annotation");
-            s << " : {";
-
-            for (const auto& entry : scribble.entries()) {
-                if (!is_first)
-                    s << ", ";
-                uf.insert_quoted(entry.first);
-                s << " : ";
-                uf.insert_quoted(entry.second);
-                is_first = false;
-            }
-            s << " }";
+    const auto i(im.modules().find(im.name().id()));
+    if (i != im.modules().end()) {
+        const auto& root_module(i->second);
+        if (!root_module.documentation().empty()) {
+            s << comma_space;
+            uf.insert_quoted("documentation");
+            s << " : ";
+            uf.insert_quoted(tidy_up_string(root_module.documentation()));
         }
     }
 
-    if (has_elements(im)) {
-        if (has_annotations)
-            s << comma_space;
+    dehydrate_annotations(im, im.name().id(), s);
 
+    if (has_elements(im)) {
+        s << comma_space;
         uf.insert_quoted("elements");
         s << ": [";
-        const auto objects(to_map(im.objects()));
-        dehydrate_objects(objects, s);
+        dehydrate_objects(im,  s);
+        dehydrate_concepts(im,  s);
+        dehydrate_modules(im,  s);
         s << " ]";
     }
 

@@ -38,6 +38,7 @@ namespace json {
 
 class dehydrator final {
 private:
+    std::string tidy_up_string(std::string s) const;
     bool has_elements(const intermediate_model& im) const;
 
     template<typename Element>
@@ -50,12 +51,16 @@ private:
     }
 
 private:
-    void dehydrate_element(const element& e, const std::string& meta_type,
-        std::ostream& s) const;
+    void dehydrate_annotations(const intermediate_model& im,
+        const std::string& id, std::ostream& s) const;
+    void dehydrate_element(const intermediate_model& im, const element& e,
+        const std::string& meta_type, std::ostream& s) const;
     void dehydrate_attributes(const std::list<attribute>& attrs,
         std::ostream& s) const;
-    void dehydrate_objects(const std::map<std::string, object>& objects,
+    void dehydrate_objects(const intermediate_model& im, std::ostream& s) const;
+    void dehydrate_concepts(const intermediate_model& im,
         std::ostream& s) const;
+    void dehydrate_modules(const intermediate_model& im, std::ostream& s) const;
 
 public:
     std::string dehydrate(const intermediate_model& im) const;
