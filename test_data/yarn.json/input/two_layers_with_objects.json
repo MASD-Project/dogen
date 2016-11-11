@@ -32,6 +32,18 @@
           "type": "int"
         }
       ]
+    },
+    {
+      "name": {
+        "simple_name": "Package_2"
+      },
+      "meta_type": "module"
+    },
+    {
+      "name": {
+        "simple_name": "package_1"
+      },
+      "meta_type": "module"
     }
   ]
 }

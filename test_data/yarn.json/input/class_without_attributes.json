@@ -13,6 +13,12 @@
         "internal_modules": "package_1"
       },
       "meta_type": "object"
+    },
+    {
+      "name": {
+        "simple_name": "package_1"
+      },
+      "meta_type": "module"
     }
   ]
 }
