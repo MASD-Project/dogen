@@ -93,6 +93,46 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/stereotypes)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/test_model_sanitizer/tests)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/seam)
 
+# copy all generated files into the expected directory of test data
+foreach(dia_model ${all_dia_test_models})
+    set(model_name "")
+    get_filename_component(model_name "${dia_model}" NAME_WE)
+
+    set(top_dir "${stage_test_data_dir}/${model_name}")
+    set(actual_dir "${top_dir}/actual")
+    if(NOT IS_DIRECTORY "${actual_dir}")
+        file(MAKE_DIRECTORY "${actual_dir}")
+    endif()
+
+    # Note: it would make more sense to always remove actual directory
+    # before every run. However the downside of that approach is that
+    # we can no longer diff results after a run, or else we will
+    # delete the results before diffing. Thus we decided to not delete
+    # actual directory.
+    #
+    # if(IS_DIRECTORY "${actual_dir}")
+    #     file(REMOVE_RECURSE "${actual_dir}")
+    # endif()
+    # file(MAKE_DIRECTORY "${actual_dir}")
+
+    set(expected_dir "${top_dir}/expected")
+    if(IS_DIRECTORY "${expected_dir}")
+        file(REMOVE_RECURSE "${expected_dir}")
+    endif()
+
+    set(model_folder_name "${model_name}")
+    set(git_dir "${CMAKE_CURRENT_SOURCE_DIR}/${model_folder_name}")
+    if(IS_DIRECTORY "${git_dir}")
+        file(COPY "${git_dir}" DESTINATION "${expected_dir}")
+    else()
+        if(NOT EXISTS "${expected_dir}")
+            file(MAKE_DIRECTORY "${expected_dir}")
+        endif()
+    endif()
+
+    message(STATUS "Created data set for model: ${model_name}")
+endforeach()
+
 # targets for each test model
 foreach(dia_model ${all_dia_test_models})
     set(ignore_dependencies false)
@@ -137,44 +177,4 @@ foreach(dia_model ${all_dia_test_models})
         add_dependencies(clean_test_models ${target_name})
         message(STATUS "Processed model: ${model_name}")
     endif()
-endforeach()
-
-# copy all generated files into the expected directory of test data
-foreach(dia_model ${all_dia_test_models})
-    set(model_name "")
-    get_filename_component(model_name "${dia_model}" NAME_WE)
-
-    set(top_dir "${stage_test_data_dir}/${model_name}")
-    set(actual_dir "${top_dir}/actual")
-    if(NOT IS_DIRECTORY "${actual_dir}")
-        file(MAKE_DIRECTORY "${actual_dir}")
-    endif()
-
-    # Note: it would make more sense to always remove actual directory
-    # before every run. However the downside of that approach is that
-    # we can no longer diff results after a run, or else we will
-    # delete the results before diffing. Thus we decided to not delete
-    # actual directory.
-    #
-    # if(IS_DIRECTORY "${actual_dir}")
-    #     file(REMOVE_RECURSE "${actual_dir}")
-    # endif()
-    # file(MAKE_DIRECTORY "${actual_dir}")
-
-    set(expected_dir "${top_dir}/expected")
-    if(IS_DIRECTORY "${expected_dir}")
-        file(REMOVE_RECURSE "${expected_dir}")
-    endif()
-
-    set(model_folder_name "${model_name}")
-    set(git_dir "${CMAKE_CURRENT_SOURCE_DIR}/${model_folder_name}")
-    if(IS_DIRECTORY "${git_dir}")
-        file(COPY "${git_dir}" DESTINATION "${expected_dir}")
-    else()
-        if(NOT EXISTS "${expected_dir}")
-            file(MAKE_DIRECTORY "${expected_dir}")
-        endif()
-    endif()
-
-    message(STATUS "Created data set for model: ${model_name}")
 endforeach()
