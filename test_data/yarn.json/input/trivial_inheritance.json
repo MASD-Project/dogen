@@ -1,0 +1,424 @@
+{
+  "model_name": "trivial_inheritance",
+  "external_modules": "dogen::test_models",
+  "documentation": "This model tests all aspects related to inheritance.\n\nIt includes the visitable stereotype since it only makes sense\nin the context of inheritance.\n",
+  "annotation": {
+    "yarn.dia.comment": "true",
+    "yarn.dia.external_modules": "dogen::test_models",
+    "annotations.profile": "dogen"
+  },
+  "elements": [
+    {
+      "name": {
+        "simple_name": "base"
+      },
+      "meta_type": "object",
+      "stereotypes": [
+        "value object",
+        "visitable"
+      ]
+    },
+    {
+      "name": {
+        "simple_name": "child_of_a_child1"
+      },
+      "meta_type": "object",
+      "parent": {
+        "simple_name": "third_child_with_members"
+      }
+    },
+    {
+      "name": {
+        "simple_name": "child_of_a_child2"
+      },
+      "meta_type": "object",
+      "parent": {
+        "simple_name": "third_child_with_members"
+      },
+      "attributes": [
+        {
+          "simple_name": "prop_2",
+          "type": "unsigned int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple_name": "child_via_settings"
+      },
+      "meta_type": "object",
+      "annotation": {
+        "yarn.generalization.parent": "parent_with_members"
+      },
+      "attributes": [
+        {
+          "simple_name": "prop_1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple_name": "child_with_members"
+      },
+      "meta_type": "object",
+      "parent": {
+        "simple_name": "parent_without_members"
+      },
+      "attributes": [
+        {
+          "simple_name": "prop_0",
+          "type": "unsigned int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple_name": "child_without_members"
+      },
+      "meta_type": "object",
+      "parent": {
+        "simple_name": "parent_without_members"
+      }
+    },
+    {
+      "name": {
+        "simple_name": "descendant1"
+      },
+      "meta_type": "object",
+      "stereotypes": [
+        "value object"
+      ],
+      "parent": {
+        "simple_name": "base"
+      }
+    },
+    {
+      "name": {
+        "simple_name": "descendant2"
+      },
+      "meta_type": "object",
+      "stereotypes": [
+        "value object"
+      ],
+      "parent": {
+        "simple_name": "base"
+      },
+      "attributes": [
+        {
+          "simple_name": "prop_0",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple_name": "descendant3"
+      },
+      "meta_type": "object",
+      "parent": {
+        "simple_name": "descendant1"
+      },
+      "attributes": [
+        {
+          "simple_name": "prop_0",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple_name": "move_ctor_base"
+      },
+      "meta_type": "object",
+      "documentation": "Base class for scenario that tests code generated move contructors.\n",
+      "attributes": [
+        {
+          "simple_name": "prop_0",
+          "type": "boost::filesystem::path",
+          "documentation": "Force manual move constructor.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple_name": "move_ctor_descendant"
+      },
+      "meta_type": "object",
+      "documentation": "Descendant class for scenario that tests code generated move contructors.\n",
+      "parent": {
+        "simple_name": "move_ctor_base"
+      },
+      "attributes": [
+        {
+          "simple_name": "prop_1",
+          "type": "boost::filesystem::path",
+          "documentation": "Force manual move constructor.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple_name": "move_ctor_empty_descendant"
+      },
+      "meta_type": "object",
+      "documentation": "Descendant class for scenario that tests code generated move contructors.\n",
+      "parent": {
+        "simple_name": "move_ctor_base"
+      }
+    },
+    {
+      "name": {
+        "simple_name": "non_final_leaf"
+      },
+      "meta_type": "object",
+      "annotation": {
+        "yarn.generalization.is_final": "false"
+      },
+      "parent": {
+        "simple_name": "descendant1"
+      },
+      "attributes": [
+        {
+          "simple_name": "prop_0",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple_name": "non_final_orphan"
+      },
+      "meta_type": "object",
+      "annotation": {
+        "yarn.generalization.is_final": "false"
+      },
+      "attributes": [
+        {
+          "simple_name": "prop_0",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple_name": "parent_outside"
+      },
+      "meta_type": "object",
+      "attributes": [
+        {
+          "simple_name": "prop_0",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple_name": "parent_with_members"
+      },
+      "meta_type": "object",
+      "attributes": [
+        {
+          "simple_name": "prop_0",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple_name": "parent_without_members"
+      },
+      "meta_type": "object"
+    },
+    {
+      "name": {
+        "simple_name": "child",
+        "internal_modules": "pkg1"
+      },
+      "meta_type": "object",
+      "parent": {
+        "simple_name": "parent",
+        "internal_modules": "pkg1"
+      },
+      "attributes": [
+        {
+          "simple_name": "prop_1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple_name": "child_via_settings",
+        "internal_modules": "pkg1"
+      },
+      "meta_type": "object",
+      "annotation": {
+        "yarn.generalization.parent": "pkg1::parent"
+      },
+      "attributes": [
+        {
+          "simple_name": "prop_1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple_name": "parent",
+        "internal_modules": "pkg1"
+      },
+      "meta_type": "object",
+      "attributes": [
+        {
+          "simple_name": "prop_0",
+          "type": "unsigned int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple_name": "parent",
+        "internal_modules": "pkg2"
+      },
+      "meta_type": "object",
+      "attributes": [
+        {
+          "simple_name": "prop_0",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple_name": "child",
+        "internal_modules": "pkg3"
+      },
+      "meta_type": "object",
+      "parent": {
+        "simple_name": "parent",
+        "internal_modules": "pkg2"
+      },
+      "attributes": [
+        {
+          "simple_name": "prop_1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple_name": "child_via_settings",
+        "internal_modules": "pkg3"
+      },
+      "meta_type": "object",
+      "annotation": {
+        "yarn.generalization.parent": "pkg2::parent"
+      },
+      "attributes": [
+        {
+          "simple_name": "prop_1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple_name": "child",
+        "internal_modules": "pkg4"
+      },
+      "meta_type": "object",
+      "parent": {
+        "simple_name": "parent_outside"
+      },
+      "attributes": [
+        {
+          "simple_name": "prop_1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple_name": "child_via_settings",
+        "internal_modules": "pkg4"
+      },
+      "meta_type": "object",
+      "annotation": {
+        "yarn.generalization.parent": "parent_outside"
+      },
+      "attributes": [
+        {
+          "simple_name": "prop_1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple_name": "second_child_without_members"
+      },
+      "meta_type": "object",
+      "parent": {
+        "simple_name": "parent_with_members"
+      }
+    },
+    {
+      "name": {
+        "simple_name": "service"
+      },
+      "meta_type": "object",
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple_name": "service_interface"
+      },
+      "meta_type": "object",
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple_name": "third_child_with_members"
+      },
+      "meta_type": "object",
+      "parent": {
+        "simple_name": "parent_with_members"
+      },
+      "attributes": [
+        {
+          "simple_name": "prop_1",
+          "type": "unsigned int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple_name": "pkg1"
+      },
+      "meta_type": "module"
+    },
+    {
+      "name": {
+        "simple_name": "pkg2"
+      },
+      "meta_type": "module"
+    },
+    {
+      "name": {
+        "simple_name": "pkg3"
+      },
+      "meta_type": "module"
+    },
+    {
+      "name": {
+        "simple_name": "pkg4"
+      },
+      "meta_type": "module"
+    }
+  ]
+}

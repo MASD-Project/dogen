@@ -13,24 +13,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-11-11 Fri 13:16]
-| <75>                                                                        |         |       |      |       |
-| Headline                                                                    | Time    |       |      |     % |
-|-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *27:23* |       |      | 100.0 |
-|-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 27:23   |       |      | 100.0 |
-| Active                                                                      |         | 27:23 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:10 |   0.6 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:27 |   1.6 |
-| COMPLETED Tidy-up README file                                               |         |       | 1:07 |   4.1 |
-| COMPLETED Sort out PIC/PIE linking problems                                 |         |       | 1:55 |   7.0 |
-| COMPLETED Try to fix BinTray problems                                       |         |       | 1:09 |   4.2 |
-| COMPLETED Supply model references via meta-data rather than command line    |         |       | 3:43 |  13.6 |
-| COMPLETED Remove trailing blank lines in comments                           |         |       | 0:39 |   2.4 |
-| COMPLETED External module path for target should be in diagram              |         |       | 1:28 |   5.4 |
-| STARTED Make JSON yarn a fully supported frontend                           |         |       | 9:57 |  36.3 |
-| STARTED Add a utility that converts a dia model into JSON                   |         |       | 6:48 |  24.8 |
+#+CAPTION: Clock summary at [2016-11-11 Fri 15:10]
+| <75>                                                                        |         |       |       |       |
+| Headline                                                                    | Time    |       |       |     % |
+|-----------------------------------------------------------------------------+---------+-------+-------+-------|
+| *Total time*                                                                | *27:52* |       |       | 100.0 |
+|-----------------------------------------------------------------------------+---------+-------+-------+-------|
+| Stories                                                                     | 27:52   |       |       | 100.0 |
+| Active                                                                      |         | 27:52 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  0:10 |   0.6 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  0:27 |   1.6 |
+| COMPLETED Tidy-up README file                                               |         |       |  1:07 |   4.0 |
+| COMPLETED Sort out PIC/PIE linking problems                                 |         |       |  1:55 |   6.9 |
+| COMPLETED Try to fix BinTray problems                                       |         |       |  1:09 |   4.1 |
+| COMPLETED Supply model references via meta-data rather than command line    |         |       |  3:43 |  13.3 |
+| COMPLETED Remove trailing blank lines in comments                           |         |       |  0:39 |   2.3 |
+| COMPLETED External module path for target should be in diagram              |         |       |  1:28 |   5.3 |
+| COMPLETED Make JSON yarn a fully supported frontend                         |         |       | 10:26 |  37.4 |
+| COMPLETED Add a utility that converts a dia model into JSON                 |         |       |  6:48 |  24.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -259,7 +259,9 @@ deep. This can be fixed by adding some processing code in name factory
 for the cases where external module path is a string (i.e. look for
 =::= and split accordingly).
 
-*** STARTED Make JSON yarn a fully supported frontend                 :story:
+*** COMPLETED Make JSON yarn a fully supported frontend               :story:
+    CLOSED: [2016-11-11 Fri 15:09]
+    CLOCK: [2016-11-11 Fri 14:40]--[2016-11-11 Fri 15:09] =>  0:29
     CLOCK: [2016-11-10 Thu 18:13]--[2016-11-10 Thu 18:16] =>  0:03
     CLOCK: [2016-11-10 Thu 12:07]--[2016-11-10 Thu 12:12] =>  0:05
     CLOCK: [2016-11-10 Thu 10:00]--[2016-11-10 Thu 11:27] =>  1:27
@@ -312,7 +314,8 @@ We should have a look at the Boost Fusion approach:
 
 - [[http://jrruethe.github.io/blog/2015/05/21/boost-fusion-json-serializer/][Boost Fusion JSON Serialiser]]
 
-*** STARTED Add a utility that converts a dia model into JSON          :epic:
+*** COMPLETED Add a utility that converts a dia model into JSON        :epic:
+    CLOSED: [2016-11-11 Fri 15:09]
     CLOCK: [2016-11-11 Fri 12:52]--[2016-11-11 Fri 13:16] =>  0:24
     CLOCK: [2016-11-11 Fri 10:08]--[2016-11-11 Fri 11:04] =>  0:56
     CLOCK: [2016-11-11 Fri 09:15]--[2016-11-11 Fri 10:07] =>  0:52

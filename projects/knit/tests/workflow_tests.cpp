@@ -154,8 +154,8 @@ BOOST_AUTO_TEST_CASE(class_in_a_package_model_generates_expected_code) {
 
 BOOST_AUTO_TEST_CASE(two_empty_layers_model_does_not_generate_code) {
     SETUP_TEST_LOG("two_empty_layers_model_does_not_generate_code");
-    const auto target(yarn_dia::input_two_empty_layers_dia());
-    BOOST_CHECK(generate_and_diff(target));
+    const auto dia(yarn_dia::input_two_empty_layers_dia());
+    BOOST_CHECK(generate_and_diff(dia));
 }
 
 BOOST_AUTO_TEST_CASE(class_without_name_model_throws) {
@@ -247,26 +247,42 @@ BOOST_AUTO_TEST_CASE(classes_without_package_model_generates_expected_code) {
 
 BOOST_AUTO_TEST_CASE(compressed_model_generates_expected_code) {
     SETUP_TEST_LOG("compressed_model_generates_expected_code");
-    const auto target(yarn_dia::input_compressed_dia());
-    BOOST_CHECK(generate_and_diff(target));
+    const auto dia(yarn_dia::input_compressed_dia());
+    BOOST_CHECK(generate_and_diff(dia));
+
+    // FIXME: quick hack to test json, but really not ideal.
+    const auto json(yarn_json::input_compressed_json());
+    BOOST_CHECK(generate_and_diff(json));
 }
 
 BOOST_AUTO_TEST_CASE(two_layers_with_objects_model_generates_expected_code) {
     SETUP_TEST_LOG("two_layers_with_objects_model_generates_expected_code");
-    const auto target(yarn_dia::input_two_layers_with_objects_dia());
-    BOOST_CHECK(generate_and_diff(target));
+    const auto dia(yarn_dia::input_two_layers_with_objects_dia());
+    BOOST_CHECK(generate_and_diff(dia));
+
+    // FIXME: quick hack to test json, but really not ideal.
+    const auto json(yarn_json::input_two_layers_with_objects_json());
+    BOOST_CHECK(generate_and_diff(json));
 }
 
 BOOST_AUTO_TEST_CASE(trivial_inheritance_model_generates_expected_code) {
     SETUP_TEST_LOG("trivial_inheritance_model_generates_expected_code");
-    const auto target(yarn_dia::input_trivial_inheritance_dia());
-    BOOST_CHECK(generate_and_diff(target));
+    const auto dia(yarn_dia::input_trivial_inheritance_dia());
+    BOOST_CHECK(generate_and_diff(dia));
+
+    // FIXME: quick hack to test json, but really not ideal.
+    const auto json(yarn_json::input_trivial_inheritance_json());
+    BOOST_CHECK(generate_and_diff(json));
 }
 
 BOOST_AUTO_TEST_CASE(trivial_association_model_generates_expected_code) {
     SETUP_TEST_LOG("trivial_association_model_generates_expected_code");
-    const auto target(yarn_dia::input_trivial_association_dia());
-    BOOST_CHECK(generate_and_diff(target));
+    const auto dia(yarn_dia::input_trivial_association_dia());
+    BOOST_CHECK(generate_and_diff(dia));
+
+    // FIXME: quick hack to test json, but really not ideal.
+    const auto json(yarn_json::input_trivial_association_json());
+    BOOST_CHECK(generate_and_diff(json));
 }
 
 BOOST_AUTO_TEST_CASE(comments_model_generates_expected_code) {
@@ -301,14 +317,22 @@ BOOST_AUTO_TEST_CASE(exception_model_generates_expected_code) {
 
 BOOST_AUTO_TEST_CASE(std_model_generates_expected_code) {
     SETUP_TEST_LOG("std_model_generates_expected_code");
-    const auto target(yarn_dia::input_std_model_dia());
-    BOOST_CHECK(generate_and_diff(target));
+    const auto dia(yarn_dia::input_std_model_dia());
+    BOOST_CHECK(generate_and_diff(dia));
+
+    // FIXME: quick hack to test json, but really not ideal.
+    const auto json(yarn_json::input_std_model_json());
+    BOOST_CHECK(generate_and_diff(json));
 }
 
 BOOST_AUTO_TEST_CASE(boost_model_generates_expected_code) {
     SETUP_TEST_LOG("boost_model_generates_expected_code");
-    const auto target(yarn_dia::input_boost_model_dia());
-    BOOST_CHECK(generate_and_diff(target));
+    const auto dia(yarn_dia::input_boost_model_dia());
+    BOOST_CHECK(generate_and_diff(dia));
+
+    // FIXME: quick hack to test json, but really not ideal.
+    const auto json(yarn_json::input_boost_model_json());
+    BOOST_CHECK(generate_and_diff(json));
 }
 
 BOOST_AUTO_TEST_CASE(stereotypes_model_generates_expected_code) {
@@ -330,8 +354,8 @@ BOOST_AUTO_TEST_CASE(package_without_name_model_throws) {
 
 BOOST_AUTO_TEST_CASE(all_primitives_model_generates_expected_code) {
     SETUP_TEST_LOG("all_primitives_model_generates_expected_code");
-    // const auto dia(yarn_dia::input_all_primitives_dia());
-    // BOOST_REQUIRE(generate_and_diff(dia));
+    const auto dia(yarn_dia::input_all_primitives_dia());
+    BOOST_REQUIRE(generate_and_diff(dia));
 
     // FIXME: quick hack to test json, but really not ideal.
     const auto json(yarn_json::input_all_primitives_json());

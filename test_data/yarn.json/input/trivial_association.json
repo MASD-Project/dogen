@@ -1,0 +1,47 @@
+{
+  "model_name": "trivial_association",
+  "external_modules": "dogen::test_models",
+  "annotation": {
+    "yarn.dia.comment": "true",
+    "yarn.dia.external_modules": "dogen::test_models",
+    "annotations.profile": "dogen"
+  },
+  "elements": [
+    {
+      "name": {
+        "simple_name": "class_a"
+      },
+      "meta_type": "object",
+      "attributes": [
+        {
+          "simple_name": "prop_0",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple_name": "class_b"
+      },
+      "meta_type": "object",
+      "attributes": [
+        {
+          "simple_name": "prop_0",
+          "type": "class_a"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple_name": "class_c"
+      },
+      "meta_type": "object"
+    },
+    {
+      "name": {
+        "simple_name": "class_d"
+      },
+      "meta_type": "object"
+    }
+  ]
+}
