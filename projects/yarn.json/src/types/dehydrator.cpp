@@ -55,6 +55,23 @@ bool dehydrator::has_elements(const intermediate_model& im) const {
         !im.modules().empty();
 }
 
+void dehydrator::dehydrate_name(const name& n, std::ostream& s) const {
+    formatters::utility_formatter uf(s);
+    s << " { ";
+    uf.insert_quoted("simple_name");
+    s << " : ";
+    uf.insert_quoted(n.simple());
+
+    const auto& l(n.location());
+    if (!l.internal_modules().empty()) {
+        s << comma_space;
+        uf.insert_quoted("internal_modules");
+        s << " : ";
+        uf.insert_quoted(join(l.internal_modules(), scope));
+    }
+    s << " } ";
+}
+
 void dehydrator::dehydrate_annotations(const intermediate_model& im,
     const std::string& id, std::ostream& s) const {
 
@@ -91,19 +108,9 @@ void dehydrator::dehydrate_element(const intermediate_model& im,
 
     formatters::utility_formatter uf(s);
     uf.insert_quoted("name");
-    s << " : { ";
-    uf.insert_quoted("simple_name");
     s << " : ";
-    uf.insert_quoted(e.name().simple());
-
-    const auto& l(e.name().location());
-    if (!l.internal_modules().empty()) {
-        s << comma_space;
-        uf.insert_quoted("internal_modules");
-        s << " : ";
-        uf.insert_quoted(join(l.internal_modules(), scope));
-    }
-    s << " }, ";
+    dehydrate_name(e.name(), s);
+    s << comma_space;
 
     uf.insert_quoted("meta_type");
     s << ": ";
@@ -186,6 +193,13 @@ dehydrate_objects(const intermediate_model& im, std::ostream& s) const {
         s << " { ";
         dehydrate_element(im, o, "object", s);
 
+        if (o.parent()) {
+            s << comma_space;
+            uf.insert_quoted("parent");
+            s << " : ";
+            dehydrate_name(*o.parent(), s);
+        }
+
         if (!o.local_attributes().empty()) {
             s << comma_space;
             dehydrate_attributes(o.local_attributes(), s);
@@ -200,51 +214,140 @@ dehydrate_concepts(const intermediate_model& im, std::ostream& s) const {
 
     using boost::algorithm::join;
     formatters::utility_formatter uf(s);
-    bool is_first(true);
+    bool output_comma(!im.objects().empty());
 
     const auto concepts(to_map(im.concepts()));
     for (const auto& pair : concepts) {
-        if (!is_first || !im.objects().empty())
+        if (output_comma)
             s << comma_space;
 
-        const auto& o(pair.second);
+        const auto& c(pair.second);
         s << " { ";
-        dehydrate_element(im, o, "concept", s);
+        dehydrate_element(im, c, "concept", s);
 
-        if (!o.local_attributes().empty()) {
+        if (!c.refines().empty()) {
             s << comma_space;
-            dehydrate_attributes(o.local_attributes(), s);
+            uf.insert_quoted("refines");
+            s << " : [ ";
+            bool is_first(true);
+            for (const auto& n : c.refines()) {
+                if (!is_first)
+                    s << comma_space;
+
+                dehydrate_name(n, s);
+                is_first = false;
+            }
+            s << " ] ";
+        }
+
+        if (!c.local_attributes().empty()) {
+            s << comma_space;
+            dehydrate_attributes(c.local_attributes(), s);
         }
         s << " }";
-        is_first = false;
+        output_comma = true;
     }
 }
 
 void dehydrator::
 dehydrate_modules(const intermediate_model& im, std::ostream& s) const {
-
-    using boost::algorithm::join;
-    formatters::utility_formatter uf(s);
-    bool is_first(true);
-
-    auto modules(to_map(im.modules()));
-
     /*
-     * remove the root module.
+     * Remove the root module.
      */
+    auto modules(to_map(im.modules()));
     const auto i(modules.find(im.name().id()));
     if (i != modules.end())
         modules.erase(i);
 
+    using boost::algorithm::join;
+    formatters::utility_formatter uf(s);
+    bool output_comma(!im.objects().empty() || !im.concepts().empty());
     for (const auto& pair : modules) {
-        if (!is_first || (!im.objects().empty() || !im.concepts().empty()))
+        if (output_comma)
             s << comma_space;
 
         const auto& o(pair.second);
         s << " { ";
         dehydrate_element(im, o, "module", s);
         s << " }";
-        is_first = false;
+        output_comma = true;
+    }
+}
+
+void dehydrator::
+dehydrate_enumerations(const intermediate_model& im, std::ostream& s) const {
+    using boost::algorithm::join;
+    formatters::utility_formatter uf(s);
+    bool output_comma(!im.objects().empty() || !im.concepts().empty() ||
+        im.modules().empty());
+    const auto enumerations(to_map(im.enumerations()));
+    for (const auto& pair : enumerations) {
+        if (output_comma)
+            s << comma_space;
+
+        const auto& o(pair.second);
+        s << " { ";
+        dehydrate_element(im, o, "enumeration", s);
+        s << comma_space;
+
+        /*
+         * Remove invalid from enumerators.
+         */
+        std::vector<enumerator> enumerators;
+        enumerators.reserve(o.enumerators().size());
+        for (const auto& en : o.enumerators()) {
+            if (en.name() != "invalid")
+                enumerators.push_back(en);
+        }
+
+        uf.insert_quoted("enumerators");
+        s << ": [";
+
+        bool is_first(true);
+        for(const auto& en : enumerators) {
+            if (!is_first)
+                s << comma_space;
+
+            s << " { ";
+            uf.insert_quoted("simple_name");
+            s << " : ";
+            uf.insert_quoted(en.name());
+
+            if (!en.documentation().empty()) {
+                s << comma_space;
+                uf.insert_quoted("documentation");
+                s << " : ";
+                uf.insert_quoted(tidy_up_string(en.documentation()));
+            }
+
+            s << " }";
+            is_first = false;
+        }
+        s << " ]";
+
+        s << " }";
+        output_comma = true;
+    }
+}
+
+void dehydrator::
+dehydrate_exceptions(const intermediate_model& im, std::ostream& s) const {
+    using boost::algorithm::join;
+    formatters::utility_formatter uf(s);
+
+    bool output_comma(!im.objects().empty() || !im.concepts().empty() ||
+        im.modules().empty() || im.modules().empty() ||
+        im.enumerations().empty());
+    const auto exceptions(to_map(im.exceptions()));
+    for (const auto& pair : exceptions) {
+        if (output_comma)
+            s << comma_space;
+
+        const auto& o(pair.second);
+        s << " { ";
+        dehydrate_element(im, o, "exception", s);
+        s << " }";
+        output_comma = true;
     }
 }
 
@@ -281,9 +384,11 @@ std::string dehydrator::dehydrate(const intermediate_model& im) const {
         s << comma_space;
         uf.insert_quoted("elements");
         s << ": [";
-        dehydrate_objects(im,  s);
-        dehydrate_concepts(im,  s);
-        dehydrate_modules(im,  s);
+        dehydrate_objects(im, s);
+        dehydrate_concepts(im, s);
+        dehydrate_modules(im, s);
+        dehydrate_enumerations(im, s);
+        dehydrate_exceptions(im, s);
         s << " ]";
     }
 

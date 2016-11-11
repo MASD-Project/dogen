@@ -51,6 +51,7 @@ private:
     }
 
 private:
+    void dehydrate_name(const name& n, std::ostream& s) const;
     void dehydrate_annotations(const intermediate_model& im,
         const std::string& id, std::ostream& s) const;
     void dehydrate_element(const intermediate_model& im, const element& e,
@@ -61,6 +62,10 @@ private:
     void dehydrate_concepts(const intermediate_model& im,
         std::ostream& s) const;
     void dehydrate_modules(const intermediate_model& im, std::ostream& s) const;
+    void dehydrate_enumerations(
+        const intermediate_model& im, std::ostream& s) const;
+    void dehydrate_exceptions(
+        const intermediate_model& im, std::ostream& s) const;
 
 public:
     std::string dehydrate(const intermediate_model& im) const;
