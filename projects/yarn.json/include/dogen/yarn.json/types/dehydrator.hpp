@@ -25,6 +25,8 @@
 #pragma once
 #endif
 
+#include <map>
+#include <unordered_map>
 #include <string>
 #include <ostream>
 #include <boost/filesystem/path.hpp>
@@ -37,7 +39,23 @@ namespace json {
 class dehydrator final {
 private:
     bool has_elements(const intermediate_model& im) const;
-    void insert_objects(const intermediate_model& im, std::ostream& s) const;
+
+    template<typename Element>
+    std::map<std::string, Element>
+    to_map(const std::unordered_map<std::string, Element>& original) const {
+        std::map<std::string, Element> r;
+        for (const auto& pair : original)
+            r.insert(pair);
+        return r;
+    }
+
+private:
+    void dehydrate_element(const element& e, const std::string& meta_type,
+        std::ostream& s) const;
+    void dehydrate_attributes(const std::list<attribute>& attrs,
+        std::ostream& s) const;
+    void dehydrate_objects(const std::map<std::string, object>& objects,
+        std::ostream& s) const;
 
 public:
     std::string dehydrate(const intermediate_model& im) const;

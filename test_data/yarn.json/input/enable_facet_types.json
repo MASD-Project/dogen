@@ -2,6 +2,8 @@
   "model_name": "enable_facet_types",
   "external_modules": "dogen::test_models",
   "annotation": {
+    "yarn.dia.comment": "true",
+    "yarn.dia.external_modules": "dogen::test_models",
     "annotations.profile": "dogen.enable_cmake_types"
   },
   "elements": [

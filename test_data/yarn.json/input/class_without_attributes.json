@@ -2,6 +2,8 @@
   "model_name": "class_without_attributes",
   "external_modules": "dogen::test_models",
   "annotation": {
+    "yarn.dia.comment": "true",
+    "yarn.dia.external_modules": "dogen::test_models",
     "annotations.profile": "dogen"
   },
   "elements": [

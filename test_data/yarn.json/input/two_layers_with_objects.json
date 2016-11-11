@@ -1,5 +1,5 @@
 {
-  "model_name": "classes_inout_package",
+  "model_name": "two_layers_with_objects",
   "external_modules": "dogen::test_models",
   "annotation": {
     "yarn.dia.comment": "true",
@@ -9,7 +9,8 @@
   "elements": [
     {
       "name": {
-        "simple_name": "class_2"
+        "simple_name": "class_2",
+        "internal_modules": "Package_2"
       },
       "meta_type": "object",
       "attributes": [

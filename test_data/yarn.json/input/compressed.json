@@ -1,10 +1,10 @@
 {
-  "model_name": "enable_facet_hash",
+  "model_name": "compressed",
   "external_modules": "dogen::test_models",
   "annotation": {
     "yarn.dia.comment": "true",
     "yarn.dia.external_modules": "dogen::test_models",
-    "annotations.profile": "dogen.enable_cmake_types_hash"
+    "annotations.profile": "dogen"
   },
   "elements": [
     {

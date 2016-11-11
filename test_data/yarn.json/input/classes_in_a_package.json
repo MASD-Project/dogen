@@ -9,19 +9,6 @@
   "elements": [
     {
       "name": {
-        "simple_name": "class_5",
-        "internal_modules": "package_1"
-      },
-      "meta_type": "object",
-      "attributes": [
-        {
-          "simple_name": "prop_0",
-          "type": "int"
-        }
-      ]
-    },
-    {
-      "name": {
         "simple_name": "class_1",
         "internal_modules": "package_1"
       },
@@ -62,6 +49,19 @@
     {
       "name": {
         "simple_name": "class_4",
+        "internal_modules": "package_1"
+      },
+      "meta_type": "object",
+      "attributes": [
+        {
+          "simple_name": "prop_0",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple_name": "class_5",
         "internal_modules": "package_1"
       },
       "meta_type": "object",

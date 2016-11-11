@@ -34,6 +34,8 @@ const std::string comma_space(", ");
 
 }
 
+using boost::algorithm::join;
+
 namespace dogen {
 namespace yarn {
 namespace json {
@@ -45,67 +47,81 @@ bool dehydrator::has_elements(const intermediate_model& im) const {
         !im.enumerations().empty() ||
         !im.modules().empty();
 }
-void dehydrator::
-insert_objects(const intermediate_model& im, std::ostream& s) const {
+
+void dehydrator::dehydrate_element(const element& e,
+    const std::string& meta_type, std::ostream& s) const {
+
+    formatters::utility_formatter uf(s);
+    uf.insert_quoted("name");
+    s << " : { ";
+    uf.insert_quoted("simple_name");
+    s << " : ";
+    uf.insert_quoted(e.name().simple());
+
+    const auto& l(e.name().location());
+    if (!l.internal_modules().empty()) {
+        s << comma_space;
+        uf.insert_quoted("internal_modules");
+        s << " : ";
+        uf.insert_quoted(join(l.internal_modules(), scope));
+    }
+    s << " }, ";
+
+    uf.insert_quoted("meta_type");
+    s << ": ";
+    uf.insert_quoted(meta_type);
+}
+
+void dehydrator::dehydrate_attributes(const std::list<attribute>& attrs,
+    std::ostream& s) const {
+    formatters::utility_formatter uf(s);
+    uf.insert_quoted("attributes");
+    s << ": [";
+
+    bool is_attribute(true);
+    for(const auto& a : attrs) {
+        if (!is_attribute)
+            s << ",";
+
+        s << " { ";
+        uf.insert_quoted("simple_name");
+        s << " : ";
+        uf.insert_quoted(a.name().simple());
+
+        s << comma_space;
+
+        uf.insert_quoted("type");
+        s << " : ";
+        uf.insert_quoted(a.unparsed_type());
+
+        s << " }";
+        is_attribute = false;
+    }
+    s << " ]";
+}
+
+void dehydrator::dehydrate_objects(const std::map<std::string, object>& objects,
+    std::ostream& s) const {
+
     using boost::algorithm::join;
     formatters::utility_formatter uf(s);
-    bool is_first_object(true);
-    for (const auto& pair : im.objects()) {
-        if (!is_first_object)
+    bool is_first(true);
+    for (const auto& pair : objects) {
+        if (!is_first)
             s << comma_space;
 
         const auto& o(pair.second);
         s << " { ";
-        uf.insert_quoted("name");
-        s << " : { ";
-        uf.insert_quoted("simple_name");
-        s << " : ";
-        uf.insert_quoted(o.name().simple());
-
-        const auto& l(o.name().location());
-        if (!l.internal_modules().empty()) {
-            s << comma_space;
-            uf.insert_quoted("internal_modules");
-            s << " : ";
-            uf.insert_quoted(join(l.internal_modules(), scope));
-        }
-        s << " }, ";
-
-        uf.insert_quoted("meta_type");
-        s << ": ";
-        uf.insert_quoted("object");
+        dehydrate_element(o, "object", s);
 
         if (!o.local_attributes().empty()) {
             s << comma_space;
-            uf.insert_quoted("attributes");
-            s << ": [";
-
-            bool is_first_attribute(true);
-            for(const auto& a : o.local_attributes()) {
-                if (!is_first_attribute)
-                    s << ",";
-
-                s << " { ";
-                uf.insert_quoted("simple_name");
-                s << " : ";
-                uf.insert_quoted(a.name().simple());
-
-                s << comma_space;
-
-                uf.insert_quoted("type");
-                s << " : ";
-                uf.insert_quoted(a.unparsed_type());
-
-                s << " }";
-                is_first_attribute = false;
-            }
-            s << " ]";
+            dehydrate_attributes(o.local_attributes(), s);
         }
         s << " }";
-        is_first_object = false;
+        is_first = false;
     }
 }
-
 
 std::string dehydrator::dehydrate(const intermediate_model& im) const {
     std::ostringstream s;
@@ -153,7 +169,8 @@ std::string dehydrator::dehydrate(const intermediate_model& im) const {
 
         uf.insert_quoted("elements");
         s << ": [";
-        insert_objects(im, s);
+        const auto objects(to_map(im.objects()));
+        dehydrate_objects(objects, s);
         s << " ]";
     }
 

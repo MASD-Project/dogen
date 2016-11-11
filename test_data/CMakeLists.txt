@@ -103,14 +103,18 @@ set(output_dir "${CMAKE_CURRENT_SOURCE_DIR}/yarn.json/input")
 file(GLOB samples "${input_dir}/*.dia")
 install(FILES ${samples} DESTINATION share/samples/dia)
 
+set(ignore false)
+set(ignore_models package_without_name class_without_name two_empty_layers)
 foreach(sample ${samples})
     set(model_name "")
     get_filename_component(model_name ${sample} NAME_WE)
 
-    add_custom_target(tailor_${model_name}
-        COMMENT "Tailoring ${model_name}."
-        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${tailor_binary} -v --target ${sample} --output ${output_dir}/${model_name}.json)
+    if(NOT ${model_name} IN_LIST ignore_models)
+        add_custom_target(tailor_${model_name}
+            COMMENT "Tailoring ${model_name}."
+            WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+            COMMAND ${tailor_binary} -v --target ${sample} --output ${output_dir}/${model_name}.json)
 
-    add_dependencies(tailor_all tailor_${model_name})
+        add_dependencies(tailor_all tailor_${model_name})
+    endif()
 endforeach()
