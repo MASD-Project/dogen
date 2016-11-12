@@ -99,7 +99,12 @@ foreach(dia_model ${all_dia_test_models})
     get_filename_component(model_name "${dia_model}" NAME_WE)
 
     set(top_dir "${stage_test_data_dir}/${model_name}")
-    set(actual_dir "${top_dir}/actual")
+    set(actual_dir "${top_dir}/actual.dia")
+    if(NOT IS_DIRECTORY "${actual_dir}")
+        file(MAKE_DIRECTORY "${actual_dir}")
+    endif()
+
+    set(actual_dir "${top_dir}/actual.json")
     if(NOT IS_DIRECTORY "${actual_dir}")
         file(MAKE_DIRECTORY "${actual_dir}")
     endif()
@@ -146,7 +151,7 @@ foreach(dia_model ${all_dia_test_models})
     set(top_dir "${stage_test_data_dir}/${model_name}")
 
     set(model_folder_name "${model_name}")
-    set(actual_dir "${top_dir}/actual/${model_folder_name}")
+    set(actual_dir "${top_dir}/actual.dia/${model_folder_name}")
     set(expected_dir "${top_dir}/expected/${model_folder_name}")
     set(git_dir "${CMAKE_CURRENT_SOURCE_DIR}/${model_folder_name}")
 
@@ -156,25 +161,45 @@ foreach(dia_model ${all_dia_test_models})
             add_dependencies(build_test_models ${main_target_name})
         endif()
 
-        set(target_name "diff_${model_name}")
+        set(target_name "diff_${model_name}_dia")
         add_custom_target(${target_name}
             COMMAND diff -r -u ${expected_dir} ${actual_dir}
             WORKING_DIRECTORY ${stage_bin_dir})
         add_dependencies(diff_test_models ${target_name})
 
-        set(target_name "rebase_${model_name}")
+        set(target_name "rebase_${model_name}_dia")
         add_custom_target(${target_name}
             COMMAND rm -rf ${git_dir}
             COMMAND cp -r ${actual_dir} ${git_dir}
             WORKING_DIRECTORY ${stage_bin_dir})
         add_dependencies(rebase_test_models ${target_name})
 
-        set(target_name "clean_${model_name}")
+        set(target_name "clean_${model_name}_dia")
         add_custom_target(${target_name}
             COMMAND rm -rf ${actual_dir}
             COMMAND mkdir ${actual_dir}
             WORKING_DIRECTORY ${stage_bin_dir})
         add_dependencies(clean_test_models ${target_name})
-        message(STATUS "Processed model: ${model_name}")
+        message(STATUS "Processed model: ${model_name} (dia)")
     endif()
+
+    set(actual_dir "${top_dir}/actual.json/${model_folder_name}")
+    if(EXISTS "${actual_dir}")
+        set(main_target_name "${model_name}")
+
+        set(target_name "diff_${model_name}_json")
+        add_custom_target(${target_name}
+            COMMAND diff -r -u ${expected_dir} ${actual_dir}
+            WORKING_DIRECTORY ${stage_bin_dir})
+        add_dependencies(diff_test_models ${target_name})
+
+        set(target_name "clean_${model_name}_json")
+        add_custom_target(${target_name}
+            COMMAND rm -rf ${actual_dir}
+            COMMAND mkdir ${actual_dir}
+            WORKING_DIRECTORY ${stage_bin_dir})
+        add_dependencies(clean_test_models ${target_name})
+        message(STATUS "Processed model: ${model_name} (json)")
+    endif()
+
 endforeach()
