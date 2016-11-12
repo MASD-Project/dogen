@@ -13,25 +13,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-11-12 Sat 16:13]
+#+CAPTION: Clock summary at [2016-11-12 Sat 16:27]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *28:50* |       |       | 100.0 |
+| *Total time*                                                                | *29:03* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 28:50   |       |       | 100.0 |
-| Active                                                                      |         | 28:50 |       | 100.0 |
+| Stories                                                                     | 29:03   |       |       | 100.0 |
+| Active                                                                      |         | 29:03 |       | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  0:10 |   0.6 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  0:27 |   1.6 |
-| COMPLETED Tidy-up README file                                               |         |       |  1:07 |   3.9 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  0:27 |   1.5 |
+| COMPLETED Tidy-up README file                                               |         |       |  1:07 |   3.8 |
 | COMPLETED Sort out PIC/PIE linking problems                                 |         |       |  1:55 |   6.6 |
 | COMPLETED Try to fix BinTray problems                                       |         |       |  1:09 |   4.0 |
-| COMPLETED Supply model references via meta-data rather than command line    |         |       |  3:43 |  12.9 |
-| COMPLETED Remove trailing blank lines in comments                           |         |       |  0:39 |   2.3 |
-| COMPLETED External module path for target should be in diagram              |         |       |  1:28 |   5.1 |
-| COMPLETED Make JSON yarn a fully supported frontend                         |         |       | 10:26 |  36.2 |
-| COMPLETED Add a utility that converts a dia model into JSON                 |         |       |  6:48 |  23.6 |
-| COMPLETED Split yarn.json output from yarn.dia                              |         |       |  0:58 |   3.4 |
+| COMPLETED Supply model references via meta-data rather than command line    |         |       |  3:43 |  12.8 |
+| COMPLETED Remove trailing blank lines in comments                           |         |       |  0:39 |   2.2 |
+| COMPLETED External module path for target should be in diagram              |         |       |  1:28 |   5.0 |
+| COMPLETED Make JSON yarn a fully supported frontend                         |         |       | 10:26 |  35.9 |
+| COMPLETED Add a utility that converts a dia model into JSON                 |         |       |  6:48 |  23.4 |
+| COMPLETED Split yarn.json output from yarn.dia                              |         |       |  0:58 |   3.3 |
+| STARTED Performance regression at =2ac04ea=                                 |         |       |  0:13 |   0.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -362,6 +363,28 @@ Tasks:
 - split the actual directories;
 - add diff targets for both json and dia;
 - ensure we delete the actual directories before running the test.
+
+*** STARTED Performance regression at =2ac04ea=                       :story:
+    CLOCK: [2016-11-12 Sat 16:14]--[2016-11-12 Sat 16:27] =>  0:13
+
+At this commit, for some unknown reason, the time of generating all
+models doubled:
+
+- 16:16:30 - 16:16:43: 13s
+- 16:18:13 - 16:18:26: 13s
+- 16:18:47 - 16:18:59: 12s
+
+Seems pretty stable. Prior to this it was around 5-6s.
+
+RAT:
+
+- 16:22:20 - 16:22:44: 24s
+- 16:22:53 - 16:23:18: 25s
+- 16:24:01 - 16:24:24: 23s
+
+Also pretty stable. Prior to this it was around 6s.
+
+See measurements in [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_87.org#track-down-quiltcpp-generation-bug][this story]].
 
 *** Merge properties factory with stitching factory                   :story:
 
