@@ -18,19 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_OPTIONS_SERIALIZATION_ALL_SER_HPP
-#define DOGEN_OPTIONS_SERIALIZATION_ALL_SER_HPP
+#include <boost/test/unit_test.hpp>
+#include "dogen/utility/test/logging.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace {
 
-#include "dogen/options/serialization/cpp_options_ser.hpp"
-#include "dogen/options/serialization/input_options_ser.hpp"
-#include "dogen/options/serialization/output_options_ser.hpp"
-#include "dogen/options/serialization/darting_options_ser.hpp"
-#include "dogen/options/serialization/knitting_options_ser.hpp"
-#include "dogen/options/serialization/stitching_options_ser.hpp"
-#include "dogen/options/serialization/tailoring_options_ser.hpp"
+const std::string empty;
+const std::string test_module("dart");
+const std::string test_suite("fake_tests");
 
-#endif
+}
+
+BOOST_AUTO_TEST_SUITE(fake_tests)
+
+BOOST_AUTO_TEST_CASE(test) {
+    SETUP_TEST_LOG("test");
+}
+
+BOOST_AUTO_TEST_SUITE_END()

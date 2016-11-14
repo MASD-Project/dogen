@@ -18,19 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_OPTIONS_SERIALIZATION_ALL_SER_HPP
-#define DOGEN_OPTIONS_SERIALIZATION_ALL_SER_HPP
+#include "dogen/options/hash/darting_options_hash.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace {
 
-#include "dogen/options/serialization/cpp_options_ser.hpp"
-#include "dogen/options/serialization/input_options_ser.hpp"
-#include "dogen/options/serialization/output_options_ser.hpp"
-#include "dogen/options/serialization/darting_options_ser.hpp"
-#include "dogen/options/serialization/knitting_options_ser.hpp"
-#include "dogen/options/serialization/stitching_options_ser.hpp"
-#include "dogen/options/serialization/tailoring_options_ser.hpp"
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value) {
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
 
-#endif
+}
+
+namespace dogen {
+namespace options {
+
+std::size_t darting_options_hasher::hash(const darting_options& v) {
+    std::size_t seed(0);
+
+    combine(seed, v.verbose());
+    combine(seed, v.force_write());
+    combine(seed, v.product_name());
+
+    return seed;
+}
+
+} }

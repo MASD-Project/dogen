@@ -29,6 +29,7 @@
 #include "dogen/options/types/cpp_options.hpp"
 #include "dogen/options/types/input_options.hpp"
 #include "dogen/options/types/output_options.hpp"
+#include "dogen/options/types/darting_options.hpp"
 #include "dogen/options/types/knitting_options.hpp"
 #include "dogen/options/types/validation_error.hpp"
 #include "dogen/options/types/stitching_options.hpp"

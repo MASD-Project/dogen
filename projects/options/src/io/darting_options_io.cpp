@@ -18,19 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_OPTIONS_IO_ALL_IO_HPP
-#define DOGEN_OPTIONS_IO_ALL_IO_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include "dogen/options/io/cpp_options_io.hpp"
-#include "dogen/options/io/input_options_io.hpp"
-#include "dogen/options/io/output_options_io.hpp"
+#include <ostream>
+#include <boost/io/ios_state.hpp>
+#include <boost/algorithm/string.hpp>
 #include "dogen/options/io/darting_options_io.hpp"
-#include "dogen/options/io/knitting_options_io.hpp"
-#include "dogen/options/io/stitching_options_io.hpp"
-#include "dogen/options/io/tailoring_options_io.hpp"
 
-#endif
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
+
+namespace dogen {
+namespace options {
+
+std::ostream& operator<<(std::ostream& s, const darting_options& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
+    s << " { "
+      << "\"__type__\": " << "\"dogen::options::darting_options\"" << ", "
+      << "\"verbose\": " << v.verbose() << ", "
+      << "\"force_write\": " << v.force_write() << ", "
+      << "\"product_name\": " << "\"" << tidy_up_string(v.product_name()) << "\""
+      << " }";
+    return(s);
+}
+
+} }

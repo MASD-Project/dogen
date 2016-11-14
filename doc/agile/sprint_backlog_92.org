@@ -13,27 +13,28 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-11-12 Sat 17:14]
+#+CAPTION: Clock summary at [2016-11-14 Mon 13:52]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *29:48* |       |       | 100.0 |
+| *Total time*                                                                | *31:03* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 29:48   |       |       | 100.0 |
-| Active                                                                      |         | 29:48 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  0:10 |   0.6 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  0:27 |   1.5 |
-| COMPLETED Tidy-up README file                                               |         |       |  1:07 |   3.7 |
-| COMPLETED Sort out PIC/PIE linking problems                                 |         |       |  1:55 |   6.4 |
-| COMPLETED Try to fix BinTray problems                                       |         |       |  1:09 |   3.9 |
-| COMPLETED Supply model references via meta-data rather than command line    |         |       |  3:43 |  12.5 |
-| COMPLETED Remove trailing blank lines in comments                           |         |       |  0:39 |   2.2 |
-| COMPLETED External module path for target should be in diagram              |         |       |  1:28 |   4.9 |
-| COMPLETED Make JSON yarn a fully supported frontend                         |         |       | 10:26 |  35.0 |
-| COMPLETED Add a utility that converts a dia model into JSON                 |         |       |  6:48 |  22.8 |
-| COMPLETED Split yarn.json output from yarn.dia                              |         |       |  0:58 |   3.2 |
+| Stories                                                                     | 31:03   |       |       | 100.0 |
+| Active                                                                      |         | 31:03 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  0:10 |   0.5 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  0:27 |   1.4 |
+| COMPLETED Tidy-up README file                                               |         |       |  1:07 |   3.6 |
+| COMPLETED Sort out PIC/PIE linking problems                                 |         |       |  1:55 |   6.2 |
+| COMPLETED Try to fix BinTray problems                                       |         |       |  1:09 |   3.7 |
+| COMPLETED Supply model references via meta-data rather than command line    |         |       |  3:43 |  12.0 |
+| COMPLETED Remove trailing blank lines in comments                           |         |       |  0:39 |   2.1 |
+| COMPLETED External module path for target should be in diagram              |         |       |  1:28 |   4.7 |
+| COMPLETED Make JSON yarn a fully supported frontend                         |         |       | 10:26 |  33.6 |
+| COMPLETED Add a utility that converts a dia model into JSON                 |         |       |  6:48 |  21.9 |
+| COMPLETED Split yarn.json output from yarn.dia                              |         |       |  0:58 |   3.1 |
 | COMPLETED Possible performance regression at =2ac04ea=                      |         |       |  0:31 |   1.7 |
-| COMPLETED Check that all dogen models convert to JSON                       |         |       |  0:27 |   1.5 |
+| COMPLETED Check that all dogen models convert to JSON                       |         |       |  0:27 |   1.4 |
+| STARTED Create a tool to generate product skeletons                         |         |       |  1:15 |   4.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -487,30 +488,8 @@ Notes:
 In general JSON is good enough as a frontend for now; add stories to
 backlog to fix these issues.
 
-*** Merge properties factory with stitching factory                   :story:
-
-In stitch we still have a few classes that are light on
-responsibilities. One case is the stitching properties factory, traits
-etc. We should merge all of this into a single class, properties
-factory.
-
-*** Rename project directory path                                     :story:
-
-The C++ options have an attribute called
-=project_directory_path=. This is a bit misleading; it is actually the
-top-level directory that will contain the project directory. In
-addition, this is not really C++ specific at all; it would apply to
-any kernel and sub-kernel. We should rename it and move it to output
-options.
-
-*** Add log-level to command line                                     :story:
-
-We are now increasingly logging at trace levels. We need to allow
-users to supply a more fine-grained log configuration. This could be
-done by simply allowing users to set the log level via a command-line
-flag: =log_level=. It would replace verbose.
-
-*** Create a tool to generate product skeletons                       :story:
+*** STARTED Create a tool to generate product skeletons               :story:
+    CLOCK: [2016-11-14 Mon 12:05]--[2016-11-14 Mon 13:20] =>  1:15
 
 Now that dogen is evolving to a MDSD tool, it would be great to be
 able to create a complete product skeleton from a tool. This would
@@ -574,6 +553,29 @@ integration", etc.
 Notes:
 
 - [[https://github.com/elbeno/skeleton][Skeleton]]: project to generate c++ project skeletons.
+
+*** Merge properties factory with stitching factory                   :story:
+
+In stitch we still have a few classes that are light on
+responsibilities. One case is the stitching properties factory, traits
+etc. We should merge all of this into a single class, properties
+factory.
+
+*** Rename project directory path                                     :story:
+
+The C++ options have an attribute called
+=project_directory_path=. This is a bit misleading; it is actually the
+top-level directory that will contain the project directory. In
+addition, this is not really C++ specific at all; it would apply to
+any kernel and sub-kernel. We should rename it and move it to output
+options.
+
+*** Add log-level to command line                                     :story:
+
+We are now increasingly logging at trace levels. We need to allow
+users to supply a more fine-grained log configuration. This could be
+done by simply allowing users to set the log level via a command-line
+flag: =log_level=. It would replace verbose.
 
 *** Consider adding =artefact_set= to formatters' model               :story:
 

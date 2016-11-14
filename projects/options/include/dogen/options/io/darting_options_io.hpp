@@ -18,19 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_OPTIONS_SERIALIZATION_ALL_SER_HPP
-#define DOGEN_OPTIONS_SERIALIZATION_ALL_SER_HPP
+#ifndef DOGEN_OPTIONS_IO_DARTING_OPTIONS_IO_HPP
+#define DOGEN_OPTIONS_IO_DARTING_OPTIONS_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/options/serialization/cpp_options_ser.hpp"
-#include "dogen/options/serialization/input_options_ser.hpp"
-#include "dogen/options/serialization/output_options_ser.hpp"
-#include "dogen/options/serialization/darting_options_ser.hpp"
-#include "dogen/options/serialization/knitting_options_ser.hpp"
-#include "dogen/options/serialization/stitching_options_ser.hpp"
-#include "dogen/options/serialization/tailoring_options_ser.hpp"
+#include <iosfwd>
+#include "dogen/options/types/darting_options.hpp"
+
+namespace dogen {
+namespace options {
+
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::options::darting_options& v);
+
+} }
 
 #endif

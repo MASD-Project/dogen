@@ -18,19 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_OPTIONS_SERIALIZATION_ALL_SER_HPP
-#define DOGEN_OPTIONS_SERIALIZATION_ALL_SER_HPP
+#define BOOST_TEST_MODULE dart_tests
+#include <iostream>
+#include <boost/test/included/unit_test.hpp>
+#include <boost/test/unit_test_monitor.hpp>
+#include <boost/exception/diagnostic_information.hpp>
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace  {
 
-#include "dogen/options/serialization/cpp_options_ser.hpp"
-#include "dogen/options/serialization/input_options_ser.hpp"
-#include "dogen/options/serialization/output_options_ser.hpp"
-#include "dogen/options/serialization/darting_options_ser.hpp"
-#include "dogen/options/serialization/knitting_options_ser.hpp"
-#include "dogen/options/serialization/stitching_options_ser.hpp"
-#include "dogen/options/serialization/tailoring_options_ser.hpp"
+const std::string error_msg("Error during test");
 
-#endif
+inline void translate(const boost::exception& e) {
+    std::cerr << std::endl << boost::diagnostic_information(e);
+    throw std::runtime_error(error_msg);
+}
+
+struct exception_fixture {
+    exception_fixture() {
+        ::boost::unit_test::unit_test_monitor.register_exception_translator<
+            boost::exception>(&translate);
+    }
+};
+
+}
+
+BOOST_GLOBAL_FIXTURE(exception_fixture);
