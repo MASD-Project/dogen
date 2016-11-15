@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DART_WORKFLOW_HPP
-#define DOGEN_DART_WORKFLOW_HPP
+#ifndef DOGEN_DARTER_WORKFLOW_HPP
+#define DOGEN_DARTER_WORKFLOW_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,10 +30,10 @@
 #include "dogen/options/types/darting_options.hpp"
 
 namespace dogen {
-namespace dart {
+namespace darter {
 
 /**
- * @brief Encapsulates the entire dart tool workflow.
+ * @brief Encapsulates the entire darter tool workflow.
  */
 class workflow {
 public:
@@ -81,7 +81,7 @@ private:
 
 public:
     /**
-     * @brief Executes the entire dart workflow.
+     * @brief Executes the entire darter workflow.
      *
      * @return false if the workflow failed for whatever reason, true
      * otherwise.

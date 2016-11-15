@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DART_PROGRAM_OPTIONS_PARSER_HPP
-#define DOGEN_DART_PROGRAM_OPTIONS_PARSER_HPP
+#ifndef DOGEN_DARTER_PROGRAM_OPTIONS_PARSER_HPP
+#define DOGEN_DARTER_PROGRAM_OPTIONS_PARSER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -34,7 +34,7 @@
 #include "dogen/options/types/darting_options.hpp"
 
 namespace dogen {
-namespace dart {
+namespace darter {
 
 /**
  * @brief Creates a optionsuration from a set of command line arguments

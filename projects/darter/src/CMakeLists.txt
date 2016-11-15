@@ -17,7 +17,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-set(name "dart")
+set(name "darter")
 set(binary_name "dogen.${name}")
 set(files "")
 file(GLOB_RECURSE files RELATIVE

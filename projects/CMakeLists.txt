@@ -181,7 +181,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/knit/include
     ${CMAKE_SOURCE_DIR}/projects/knitter/include
     ${CMAKE_SOURCE_DIR}/projects/tailor/include
-    ${CMAKE_SOURCE_DIR}/projects/dart/include
+    ${CMAKE_SOURCE_DIR}/projects/darter/include
     ${CMAKE_SOURCE_DIR}/projects/annotations/include
     ${CMAKE_SOURCE_DIR}/projects/stitch/include
     ${CMAKE_SOURCE_DIR}/projects/stitcher/include
@@ -206,7 +206,7 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/utility)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/knit)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/knitter)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/tailor)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dart)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/darter)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/annotations)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/stitch)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/stitcher)

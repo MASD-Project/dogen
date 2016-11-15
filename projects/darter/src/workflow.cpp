@@ -23,20 +23,20 @@
 #include "dogen/utility/log/life_cycle_manager.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/version.hpp"
-#include "dogen/dart/program_options_parser.hpp"
-#include "dogen/dart/parser_validation_error.hpp"
+#include "dogen/darter/program_options_parser.hpp"
+#include "dogen/darter/parser_validation_error.hpp"
 #include "dogen/options/types/darting_options.hpp"
 #include "dogen/yarn/types/workflow.hpp"
-#include "dogen/dart/workflow.hpp"
+#include "dogen/darter/workflow.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("dart"));
-const std::string log_file_prefix("log/dogen.dart.");
+auto lg(logger_factory("darter"));
+const std::string log_file_prefix("log/dogen.darter.");
 const std::string more_information(
-    "Try `dogen.dart --help' for more information.");
-const std::string dart_product("Dogen Dart v" DOGEN_VERSION);
+    "Try `dogen.darter --help' for more information.");
+const std::string darter_product("Dogen Darter v" DOGEN_VERSION);
 const std::string usage_error_msg("Usage error: ");
 const std::string fatal_error_msg("Fatal Error: " );
 const std::string log_file_msg("See the log file for details: ");
@@ -46,7 +46,7 @@ const std::string errors_msg(" finished with errors.");
  * @brief Print the program's help text.
  */
 void help(const std::string& d) {
-    std::cout << "Dogen Dart." << std::endl
+    std::cout << "Dogen Darter." << std::endl
               << "Transforms yarn models to different representations."
               << std::endl << std::endl << d << std::endl;
 }
@@ -55,7 +55,7 @@ void help(const std::string& d) {
  * @brief Print the program's version details.
  */
 void version() {
-    std::cout << dart_product << std::endl
+    std::cout << darter_product << std::endl
               << "Copyright (C) 2012-2016 Marco Craveiro." << std::endl
               << "License: GPLv3 - GNU GPL version 3 or later "
               << "<http://gnu.org/licenses/gpl.html>."
@@ -65,7 +65,7 @@ void version() {
 }
 
 namespace dogen {
-namespace dart {
+namespace darter {
 
 workflow::workflow() : can_log_(false) { }
 
@@ -97,14 +97,14 @@ void workflow::initialise_logging(const options::darting_options& o) {
 }
 
 void workflow::dart(const options::darting_options& /*o*/) const {
-    BOOST_LOG_SEV(lg, info) << dart_product << " started.";
+    BOOST_LOG_SEV(lg, info) << darter_product << " started.";
 
-    BOOST_LOG_SEV(lg, info) << dart_product << " finished.";
+    BOOST_LOG_SEV(lg, info) << darter_product << " finished.";
 }
 
 void workflow::report_exception_common() const {
     if (can_log_) {
-        BOOST_LOG_SEV(lg, warn) << dart_product << errors_msg;
+        BOOST_LOG_SEV(lg, warn) << darter_product << errors_msg;
         std::cerr << log_file_msg << "'" << log_file_name_.string()
                   << "' " << std::endl;
     }
@@ -134,7 +134,7 @@ void workflow::report_exception(const std::exception& e) const {
 }
 
 void workflow::report_exception() const {
-    std::cerr << "Dart was forced to terminate." << std::endl;
+    std::cerr << "Darter was forced to terminate." << std::endl;
     report_exception_common();
 }
 
@@ -153,7 +153,7 @@ int workflow::execute(const int argc, const char* argv[]) {
         initialise_model_name(s);
         initialise_logging(s);
         dart(s);
-    } catch (const dart::parser_validation_error& e) {
+    } catch (const darter::parser_validation_error& e) {
         /*
          * Log known not to be initialised as we are still parsing
          * command line options.

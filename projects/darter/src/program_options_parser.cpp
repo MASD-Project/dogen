@@ -19,8 +19,8 @@
  *
  */
 #include <boost/filesystem/operations.hpp>
-#include "dogen/dart/parser_validation_error.hpp"
-#include "dogen/dart/program_options_parser.hpp"
+#include "dogen/darter/parser_validation_error.hpp"
+#include "dogen/darter/program_options_parser.hpp"
 
 // Note on logging: we are NOT logging any of the exceptions to the
 // log in this file. This is by design. The logger is only initialised
@@ -31,7 +31,7 @@
 namespace {
 
 const std::string more_information(
-    "Try `dogen_dart --help' for more information.");
+    "Try `dogen_darter --help' for more information.");
 const std::string at_least_one_argument("Expected at least one argument");
 
 const std::string empty;
@@ -45,7 +45,7 @@ const std::string force_write_arg("force-write");
 }
 
 namespace dogen {
-namespace dart {
+namespace darter {
 
 program_options_parser::
 program_options_parser(std::vector<std::string> arguments)
