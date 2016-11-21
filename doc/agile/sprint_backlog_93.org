@@ -1,0 +1,198 @@
+#+title: Sprint Backlog 93
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: STARTED | COMPLETED CANCELLED POSTPONED
+#+tags: { story(s) epic(e) }
+
+* Mission Statement
+
+- implement dart.
+
+* Stories
+
+** Active
+
+#+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
+#+CAPTION: Clock summary at [2016-11-21 Mon 10:29]
+| <75>                                                                        |        |      |      |       |
+| Headline                                                                    | Time   |      |      |     % |
+|-----------------------------------------------------------------------------+--------+------+------+-------|
+| *Total time*                                                                | *0:18* |      |      | 100.0 |
+|-----------------------------------------------------------------------------+--------+------+------+-------|
+| Stories                                                                     | 0:18   |      |      | 100.0 |
+| Active                                                                      |        | 0:18 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:10 |  55.6 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:08 |  44.4 |
+#+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
+#+end:
+
+*** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-11-21 Mon 10:11]--[2016-11-21 Mon 10:21] =>  0:10
+
+Updates to sprint and product backlog.
+
+*** COMPLETED Edit release notes for previous sprint                  :story:
+    CLOSED: [2016-11-21 Mon 10:29]
+    CLOCK: [2016-11-21 Mon 10:21]--[2016-11-21 Mon 10:29] =>  0:08
+
+Add github release notes for previous sprint.
+
+Title: Dogen v0.92.0, "Praia Amélia"
+
+#+begin_src markdown
+Overview
+========
+The main feature added in this sprint in full support for the JSON frontend. In the past JSON was used just to proivde proxy models; it should now provide the same level of support as the Dia frontend.
+
+For examples of JSON models, see [the JSON test data pack](https://github.com/DomainDrivenConsulting/dogen/tree/master/test_data/yarn.json/input).
+
+Other user visible changes:
+
+- the External path is now supplied as part of the diagram rather than via the command line. This also means that references no longer require the External Path.
+- the Tailor command line utility was added to convert Dia models into JSON models. This was mainly added to simplify the work on JSON support.
+- Dogen no longer adds a trailing line in comments.
+
+For more details see the [sprint log](https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_92.org).
+#+end_src
+
+*** Create a tool to generate product skeletons                       :story:
+
+Now that dogen is evolving to a MDSD tool, it would be great to be
+able to create a complete product skeleton from a tool. This would
+entail:
+
+- directory structure. We should document our standard product
+  directory structure as part of this exercise. Initial document added
+  to manual as "project_structure.org".
+- licence: user can choose one.
+- copyright: input by user, used in CMakeFiles, etc. added to the
+  licence.
+- CI support: travis, appveyor
+- EDE support:
+- CMake support: top-level CMakefiles, CPack. versioning
+  templates, valgrind, doxygen. For CTest we should also generate a
+  "setup cron" and "setup windows scheduler" scripts. User can just
+  run these from the build machine and it will start running CTest.
+- conan support: perhaps with just boost for now
+- agile with first sprint
+- README with emblems.
+
+Name for the tool: dart.
+
+Tool should have different "template sets" so that we could have a
+"standard dogen product" but users can come up with other project
+structures.
+
+Tool should add FindODB if user wants ODB support. Similar for EOS
+when we support it again. We should probably have HTTP links to the
+sources of these packages and download them on the fly.
+
+Tool should also create git repo and do first commit (optional).
+
+For extra bonus points, we should create a project in GitHub, Travis
+and AppVeyor from dart.
+
+We should also generate a RPM/Deb installation script for at least
+boost, doxygen, build essentials, clang.
+
+We should also consider a "refresh" or "force" statement, perhaps on a
+file-by-file basis, which would allow one to regenerate all of these
+files. This would be useful to pick-up changes in travis files, etc.
+
+One problem with travis files is that each project has its own
+dependencies. We should move these over to a shell script and call
+these. The script is not generated or perhaps we just generate a
+skeleton. This also highlights the issue that we have different kinds
+of files:
+
+- files that we generate and expect the user to modify;
+- files that we generate but don't expect user modifications;
+- files that the user generates.
+
+We need a way to classify these.
+
+Dart should use stitch templates to generate files.
+
+We may need some options such as "generate boost test ctest
+integration", etc.
+
+Notes:
+
+- [[https://github.com/elbeno/skeleton][Skeleton]]: project to generate c++ project skeletons.
+- split all of the configuration of CMake dependencies from main CMake
+  file. Possible name: ConfigureX? ConfigureODB, etc. See how find_X
+  is implemented.
+- detect all projects by looping through directories.
+- fix CMake generation so that most projects are generated by Dogen.
+- add option to Dogen to generate test skeleton.
+- detect all input models and generate targets by looping through
+  them.
+- add CMake file to find knitter etc and include those files in
+  package. We probably should install dogen now and have dogen rely on
+  installed dogen first, with an option to switch to "built" dogen.
+
+*** Merge properties factory with stitching factory                   :story:
+
+In stitch we still have a few classes that are light on
+responsibilities. One case is the stitching properties factory, traits
+etc. We should merge all of this into a single class, properties
+factory.
+
+*** Rename project directory path                                     :story:
+
+The C++ options have an attribute called
+=project_directory_path=. This is a bit misleading; it is actually the
+top-level directory that will contain the project directory. In
+addition, this is not really C++ specific at all; it would apply to
+any kernel and sub-kernel. We should rename it and move it to output
+options.
+
+*** Add log-level to command line                                     :story:
+
+We are now increasingly logging at trace levels. We need to allow
+users to supply a more fine-grained log configuration. This could be
+done by simply allowing users to set the log level via a command-line
+flag: =log_level=. It would replace verbose.
+
+*** Consider adding =artefact_set= to formatters' model               :story:
+
+We are using collections of artefacts quite a bit, and it makes sense
+to create an abstraction for it such as a =artefact_set=. However, for
+this to work properly we need to add at least one basic behaviour: the
+ability to merge two artefact sets. Or else we will end up having to
+unpack the artefacts, then merging them, then creating a new artefact
+set.
+
+Problem is, we either create the artefact set as a non-generatable
+type - not ideal - or we create it as generatable and need to add this
+as a free function. We need to wait until dogen has support for
+merging code generation.
+
+*** Consider supplying element configuration as a parameter           :story:
+
+Figure out if element configuration is context or if it is better
+expressed as a stand alone formatting parameter.
+
+*** Formatters' repository should be created in quilt                 :story:
+
+At present we are creating the formatters' repository in
+=quilt.cpp=. However it will be shared by all backends in the
+kernel. Move it up to =quilt= level and supply it as a paramter to the
+backends.
+
+*** Initialise formatters in the formatter's translation unit         :story:
+
+At present we are initialising the formatters in each of the facet
+initialisers. However, it makes more sense to initialise them on the
+translation unit for each formatter. This will also make life easier
+when we move to a mustache world where there may not be a formatter
+header file at all.
+
+*** Add knobs to control output of constructors and operators         :story:
+
+At present we are outputting all of the default constructors and the
+operators in the handcrafted templates. Ideally it should just be the
+class name. We need a way of controlling all of the default
+constructors and all of the operators in one go so we can set it on
+the handcrafted profile.
+
+** Deprecated
