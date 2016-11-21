@@ -5,7 +5,7 @@
 
 * Mission Statement
 
-- implement dart.
+- start implementing dart.
 - add full support for JSON.
 
 * Stories
@@ -13,7 +13,7 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-11-15 Tue 15:13]
+#+CAPTION: Clock summary at [2016-11-21 Mon 10:19]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
@@ -21,7 +21,7 @@
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
 | Stories                                                                     | 33:53   |       |       | 100.0 |
 | Active                                                                      |         | 33:53 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  0:10 |   0.5 |
+| COMPLETED Sprint and product backlog grooming                               |         |       |  0:10 |   0.5 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:27 |   1.3 |
 | COMPLETED Tidy-up README file                                               |         |       |  1:07 |   3.3 |
 | COMPLETED Sort out PIC/PIE linking problems                                 |         |       |  1:55 |   5.7 |
@@ -34,11 +34,12 @@
 | COMPLETED Split yarn.json output from yarn.dia                              |         |       |  0:58 |   2.9 |
 | COMPLETED Possible performance regression at =2ac04ea=                      |         |       |  0:31 |   1.5 |
 | COMPLETED Check that all dogen models convert to JSON                       |         |       |  0:27 |   1.3 |
-| STARTED Create a tool to generate product skeletons                         |         |       |  4:05 |  12.1 |
+| POSTPONED Create a tool to generate product skeletons                       |         |       |  4:05 |  12.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
-*** STARTED Sprint and product backlog grooming                       :story:
+*** COMPLETED Sprint and product backlog grooming                     :story:
+    CLOSED: [2016-11-21 Mon 10:19]
     CLOCK: [2016-11-07 Mon 09:08]--[2016-11-07 Mon 09:18] =>  0:10
 
 Updates to sprint and product backlog.
@@ -488,7 +489,8 @@ Notes:
 In general JSON is good enough as a frontend for now; add stories to
 backlog to fix these issues.
 
-*** STARTED Create a tool to generate product skeletons               :story:
+*** POSTPONED Create a tool to generate product skeletons             :story:
+    CLOSED: [2016-11-21 Mon 10:19]
     CLOCK: [2016-11-15 Tue 09:30]--[2016-11-15 Tue 11:13] =>  1:43
     CLOCK: [2016-11-14 Mon 14:43]--[2016-11-14 Mon 15:50] =>  1:07
     CLOCK: [2016-11-14 Mon 12:05]--[2016-11-14 Mon 13:20] =>  1:15
@@ -566,71 +568,6 @@ Notes:
 - add CMake file to find knitter etc and include those files in
   package. We probably should install dogen now and have dogen rely on
   installed dogen first, with an option to switch to "built" dogen.
-
-*** Merge properties factory with stitching factory                   :story:
-
-In stitch we still have a few classes that are light on
-responsibilities. One case is the stitching properties factory, traits
-etc. We should merge all of this into a single class, properties
-factory.
-
-*** Rename project directory path                                     :story:
-
-The C++ options have an attribute called
-=project_directory_path=. This is a bit misleading; it is actually the
-top-level directory that will contain the project directory. In
-addition, this is not really C++ specific at all; it would apply to
-any kernel and sub-kernel. We should rename it and move it to output
-options.
-
-*** Add log-level to command line                                     :story:
-
-We are now increasingly logging at trace levels. We need to allow
-users to supply a more fine-grained log configuration. This could be
-done by simply allowing users to set the log level via a command-line
-flag: =log_level=. It would replace verbose.
-
-*** Consider adding =artefact_set= to formatters' model               :story:
-
-We are using collections of artefacts quite a bit, and it makes sense
-to create an abstraction for it such as a =artefact_set=. However, for
-this to work properly we need to add at least one basic behaviour: the
-ability to merge two artefact sets. Or else we will end up having to
-unpack the artefacts, then merging them, then creating a new artefact
-set.
-
-Problem is, we either create the artefact set as a non-generatable
-type - not ideal - or we create it as generatable and need to add this
-as a free function. We need to wait until dogen has support for
-merging code generation.
-
-*** Consider supplying element configuration as a parameter           :story:
-
-Figure out if element configuration is context or if it is better
-expressed as a stand alone formatting parameter.
-
-*** Formatters' repository should be created in quilt                 :story:
-
-At present we are creating the formatters' repository in
-=quilt.cpp=. However it will be shared by all backends in the
-kernel. Move it up to =quilt= level and supply it as a paramter to the
-backends.
-
-*** Initialise formatters in the formatter's translation unit         :story:
-
-At present we are initialising the formatters in each of the facet
-initialisers. However, it makes more sense to initialise them on the
-translation unit for each formatter. This will also make life easier
-when we move to a mustache world where there may not be a formatter
-header file at all.
-
-*** Add knobs to control output of constructors and operators         :story:
-
-At present we are outputting all of the default constructors and the
-operators in the handcrafted templates. Ideally it should just be the
-class name. We need a way of controlling all of the default
-constructors and all of the operators in one go so we can set it on
-the handcrafted profile.
 
 ** Deprecated
 *** CANCELLED Add region support to stitch                            :story:
