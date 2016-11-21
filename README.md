@@ -71,9 +71,11 @@ CMAKE_INCLUDE_PATH=/my/boost/include/path CMAKE_LIBRARY_PATH=/my/boost/lib/path 
 ```
 
 Please note that **we don't officially support Windows at present**,
-but we are keen to do so in the future. Dogen builds under Visual
-Studio 2015 and a recent version of Boost (as per above). You also
-need to install [git](https://git-for-windows.github.io/)
+but we are keen to do so in the
+future. Dogen
+[builds under Visual Studio 2015](https://ci.appveyor.com/project/mcraveiro/dogen/history) and
+a recent version of Boost (as per above). You also need to
+install [git](https://git-for-windows.github.io/)
 and [cmake](https://cmake.org/download/). Once all the dependencies
 have been installed, the build is similar to Linux (assuming a msysgit
 shell, but CMD/Powershell should work fine too):
