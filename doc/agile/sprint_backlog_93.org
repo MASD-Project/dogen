@@ -12,16 +12,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-11-21 Mon 10:29]
+#+CAPTION: Clock summary at [2016-11-21 Mon 11:24]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *0:18* |      |      | 100.0 |
+| *Total time*                                                                | *1:12* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 0:18   |      |      | 100.0 |
-| Active                                                                      |        | 0:18 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:10 |  55.6 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:08 |  44.4 |
+| Stories                                                                     | 1:12   |      |      | 100.0 |
+| Active                                                                      |        | 1:12 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:10 |  13.9 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 1:02 |  86.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -32,6 +32,7 @@ Updates to sprint and product backlog.
 
 *** COMPLETED Edit release notes for previous sprint                  :story:
     CLOSED: [2016-11-21 Mon 10:29]
+    CLOCK: [2016-11-21 Mon 10:30]--[2016-11-21 Mon 11:24] =>  0:54
     CLOCK: [2016-11-21 Mon 10:21]--[2016-11-21 Mon 10:29] =>  0:08
 
 Add github release notes for previous sprint.
@@ -41,17 +42,28 @@ Title: Dogen v0.92.0, "Praia Amélia"
 #+begin_src markdown
 Overview
 ========
-The main feature added in this sprint in full support for the JSON frontend. In the past JSON was used just to proivde proxy models; it should now provide the same level of support as the Dia frontend.
+The sprint's headline feature is the completion of the JSON frontend. In the past, the JSON frontend was used solely to supply "proxy models" to Dogen - i.e. top-level type definitions for external libraries such as ```std``` and ```boost```, required so that user models could consume external types.
 
-For examples of JSON models, see [the JSON test data pack](https://github.com/DomainDrivenConsulting/dogen/tree/master/test_data/yarn.json/input).
+With this release, we finally got the JSON frontend to provide the same level of support as the Dia frontend (modulus any undetected bugs). Note that Dia will remain the preferred frontend for Dogen's own development but - significantly - users are now free to choose their preferred frontend and are no longer required to install/use Dia in order to code-generate models.
 
-Other user visible changes:
+As with everything else in Dogen, regrettably, the documentation is scarce. However, there are examples of JSON models in [the JSON test data pack](https://github.com/DomainDrivenConsulting/dogen/tree/master/test_data/yarn.json/input), which largely mirror [the Dia test data pack](https://github.com/DomainDrivenConsulting/dogen/tree/master/test_data/yarn.dia/input).
 
-- the External path is now supplied as part of the diagram rather than via the command line. This also means that references no longer require the External Path.
-- the Tailor command line utility was added to convert Dia models into JSON models. This was mainly added to simplify the work on JSON support.
+Other user visible changes
+===================
+
+- References are now supplied as part of the diagram rather than via the command line. This means you do not need to manually keep track of transitive references - you are only required to supply the models you directly depend on, and their references are automatically picked up. Use ```yarn.references``` to supply References via meta-data.
+- External Modules are now supplied as part of the diagram rather than via the command line. This also means that references no longer require you to provide External Modules for each model that consumes them. Use ```yarn.dia.external_modules``` to supply External Modules in the Dia frontend, via meta-data. In the JSON frontend,  use ```"external_modules": "X"``` directly. As always, [Dogen's own Dia frontend models](https://github.com/DomainDrivenConsulting/dogen/tree/master/projects/input_models) provide modeling examples as well as examples for the the corresponding ```dogen.knitter``` [invocation](https://github.com/DomainDrivenConsulting/dogen/blob/master/projects/input_models/CMakeLists.txt).
+- A new command line utility was added to convert Dia models into JSON models called ```tailor```. It was added primarily to simplify the work on JSON support, but it may also be useful for users wishing to migrate frontends.
+- We are now uploading binary packages to [Bintray](https://bintray.com/domaindrivenconsulting/Dogen). At present we only upload Deb for Linux and DMGs for OSX. These packages are experimental. Any feedback is highly appreciated.
 - Dogen no longer adds a trailing line in comments.
 
 For more details see the [sprint log](https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_92.org).
+
+Project Status
+==========
+With this release, we have more or less implemented all the major architectural features for this product we needed internally at Domain Driven Consulting, so we will focus more on using the product and fixing problems as we find them.
+
+On the other hand, we have also successfully engaged a customer who requires C# support. It is likely that the next few iterations will focus on adding support for other languages.
 #+end_src
 
 *** Create a tool to generate product skeletons                       :story:
