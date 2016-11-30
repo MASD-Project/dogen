@@ -74,7 +74,7 @@ format(assistant& a, const formattables::helper_properties& hp) const {
 a.stream() << std::endl;
 a.stream() << qn << std::endl;
 a.stream() << "create_" << ident << "(const unsigned int position) {" << std::endl;
-a.stream() << "    unsigned int day((position + 1) % 27);" << std::endl;
+a.stream() << "    unsigned int day(1 + (position % 27));" << std::endl;
 a.stream() << "    boost::gregorian::date r(2002, 2, day);" << std::endl;
 a.stream() << "    return r;" << std::endl;
 a.stream() << "}" << std::endl;

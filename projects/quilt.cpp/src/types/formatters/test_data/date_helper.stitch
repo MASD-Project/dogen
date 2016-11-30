@@ -19,7 +19,7 @@ format(assistant& a, const formattables::helper_properties& hp) const {
 
 <#= qn #>
 create_<#= ident #>(const unsigned int position) {
-    unsigned int day((position + 1) % 27);
+    unsigned int day(1 + (position % 27));
     boost::gregorian::date r(2002, 2, day);
     return r;
 }

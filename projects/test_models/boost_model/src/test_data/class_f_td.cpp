@@ -24,14 +24,14 @@ namespace {
 
 boost::gregorian::date
 create_boost_gregorian_date(const unsigned int position) {
-    unsigned int day((position + 1) % 27);
+    unsigned int day(1 + (position % 27));
     boost::gregorian::date r(2002, 2, day);
     return r;
 }
 
 boost::posix_time::ptime
 create_boost_posix_time_ptime(const unsigned int position) {
-    unsigned int day((position + 1) % 27);
+    unsigned int day(1 + (position % 27));
     using boost::gregorian::date;
     using boost::posix_time::ptime;
     using boost::posix_time::time_duration;

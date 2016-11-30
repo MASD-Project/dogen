@@ -12,17 +12,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-11-21 Mon 11:36]
+#+CAPTION: Clock summary at [2016-11-30 Wed 12:06]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *1:23* |      |      | 100.0 |
+| *Total time*                                                                | *1:56* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 1:23   |      |      | 100.0 |
-| Active                                                                      |        | 1:23 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:10 |  12.0 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 1:02 |  74.7 |
-| COMPLETED Update readme                                                     |        |      | 0:11 |  13.3 |
+| Stories                                                                     | 1:56   |      |      | 100.0 |
+| Active                                                                      |        | 1:56 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:10 |   8.6 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 1:02 |  53.4 |
+| COMPLETED Update readme                                                     |        |      | 0:11 |   9.5 |
+| COMPLETED Test data generation for dates generates invalid dates            |        |      | 0:33 |  28.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -72,6 +73,19 @@ On the other hand, we have also successfully engaged a customer who requires C# 
     CLOCK: [2016-11-21 Mon 11:25]--[2016-11-21 Mon 11:36] =>  0:11
 
 Add some blurb about binary packages, JSON support and windows support.
+
+*** COMPLETED Test data generation for dates generates invalid dates  :story:
+    CLOSED: [2016-11-30 Wed 12:06]
+    CLOCK: [2016-11-30 Wed 11:33]--[2016-11-30 Wed 12:06] =>  0:33
+
+When we create dates greater than 27, we generate invalid dates. This
+is because of this code:
+
+#+begin_src
+    unsigned int day((position + 1) % 27);
+#+end_src
+
+We are probably generating a zero when we get to 27.
 
 *** Create a tool to generate product skeletons                       :story:
 
