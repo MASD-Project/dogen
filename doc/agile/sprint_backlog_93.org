@@ -12,23 +12,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-11-30 Wed 13:37]
+#+CAPTION: Clock summary at [2016-11-30 Wed 16:30]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *2:28* |      |      | 100.0 |
+| *Total time*                                                                | *4:20* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 2:28   |      |      | 100.0 |
-| Active                                                                      |        | 2:28 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:10 |   6.8 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 1:02 |  41.9 |
-| COMPLETED Update readme                                                     |        |      | 0:11 |   7.4 |
-| COMPLETED Test data generation for dates generates invalid dates            |        |      | 0:33 |  22.3 |
-| STARTED Add support for Decimal numbers                                     |        |      | 0:32 |  21.6 |
+| Stories                                                                     | 4:20   |      |      | 100.0 |
+| Active                                                                      |        | 4:20 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 1:43 |  39.6 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 1:02 |  23.8 |
+| COMPLETED Update readme                                                     |        |      | 0:11 |   4.2 |
+| COMPLETED Test data generation for dates generates invalid dates            |        |      | 0:33 |  12.7 |
+| STARTED Add support for Decimal numbers                                     |        |      | 0:32 |  12.3 |
+| STARTED Add support for C#                                                  |        |      | 0:19 |   7.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-11-30 Wed 16:20]--[2016-11-30 Wed 16:30] =>  0:10
+    CLOCK: [2016-11-30 Wed 13:37]--[2016-11-30 Wed 15:00] =>  1:23
     CLOCK: [2016-11-21 Mon 10:11]--[2016-11-21 Mon 10:21] =>  0:10
 
 Updates to sprint and product backlog.
@@ -88,11 +91,236 @@ is because of this code:
 
 We are probably generating a zero when we get to 27.
 
+*** COMPLETED Improve support for modules in JSON                     :story:
+    CLOSED: [2016-11-30 Wed 13:41]
+
+*Rationale*: addressed when we added JSON support.
+
+At present we are implying the existence of modules in JSON by looking
+at the types qname. This is not ideal because it means one cannot
+supply meta-data for modules. We should probably revisit the layout to
+have a nested structure with namespaces containing types.
+
+We should still support "implied" modules because it makes the file
+format less verbose for the common use case though.
+
 *** STARTED Add support for Decimal numbers                           :story:
     CLOCK: [2016-11-30 Wed 13:04]--[2016-11-30 Wed 13:36] =>  0:32
 
 - try using ICU DecNumber library.
 - check compiler support (MSVC may have decimals; if so, use that instead)
+
+*** STARTED Add support for C#                                        :story:
+    CLOCK: [2016-11-30 Wed 16:01]--[2016-11-30 Wed 16:20] =>  0:19
+
+Create a quilt model for C#.
+
+*** Models should have an associated language                          :epic:
+
+#+begin_quote
+*Story*: As a dogen user, I want to make sure I only use valid system
+models so that I don't generate models that code generate but do not
+compile.
+#+end_quote
+
+Certain models (e.g. system / library models) can only be used in a
+give language; for example =boost= and =std= only make sense in C++. A
+.Net library model would only make sense in .Net, etc. These are
+Language Specific Models (LSM). Once a model depends on a LSM it
+itself becomes an LSM and it should not be able to then make use of
+models of other languages nor should one be able to request a code
+generation for other languages.
+
+However, one day we will have a system model which is a Language
+Agnostic Model (LAM). The system model will provide a base set of
+functionality across languages such as containers, and for each type
+it will have mappings to language specific types. The mapping is
+declared as dynamic extensions in the appropriate section
+(i.e. =tags::cpp::mapped_type= or something of that ilk). If a model
+depends only on LAMs, it is itself a LAM and can be used to generate
+code on any supported language (presumably a supported language is
+defined to be that for which we have both mappings and a code
+generation backend).
+
+A first step for this would be to have a language enumeration in yarn
+which is a property of the model, and one entry of which is "language
+agnostic".
+
+*** Add support for Language Agnostic Models (LAM)                    :story:
+
+When we start supporting more than one language, one interesting
+feature would be to be able to define a model once and have it
+generated for all supported languages. This would be achieved by
+having a system model (or set of system models) that define all the
+key types in a language agnostic manner. For example:
+
+: lam::string
+: lam::int
+: lam::int16
+
+Each of these types then has a set of meta-data fields that map them
+to a type in a supported language:
+
+: lam:string: cpp.concrete_type_mapping = std::string
+: lam:string: csharp.concrete_type_mapping = string
+
+And so on. We load the user model that makes use of LAM, we generate
+the merged model still with LAM types and then we perform a
+translation for each of the supported and enabled languages: for every
+LAM type, we replace all its references with the corresponding
+concrete type. We need to split the supplied mapping into a QName, use
+the QName to load the system models for that language, look up the
+type and replace it. After the translation no LAM types are left. We
+end up with N yarn merged models where N is the number of supported and
+enabled languages.
+
+Each of these models is then sent down to code generation. This should
+be equivalent to manually generating models per language - we could
+use this as a test.
+
+Once we have LAM, it would be great to be able to exchange data
+between languages. This could be done as follows:
+
+- XML: create a "LAM" XML schema, and a set of formatters that read
+  and write from it. This is kind of like reverse mapping the types
+  back to LAM types when writing the XML.
+- JSON: similar approach to XML, minus the schema.
+- POF: use the coherence libraries to dump the models into POF.
+
+Tasks:
+
+- create the LAM model with a set of basic types.
+- add a set of mapping fields into yarn: =yarn.mapping.csharp=, etc
+  and populate the types with entries for each supported language.
+- create a notion of mapping of intermediate models into
+  languages. The input is the merged intermediate model and the output
+  is N models one per language. We also need a way to associate
+  backends with languages. Each model is sent down to its backend.
+- note that reverse mapping is possible: we should be able to
+  associate a type on a given language with it's lam type. This means
+  that, given a model in say C#, we could reconstruct a yarn lam model
+  (or tell the user about the list of failures to map). This should be
+  logged as a separate story.
+
+*** Add C++-03 mode                                                    :epic:
+
+#+begin_quote
+*Story*: As a dogen user, I want to create models in C++ 03 so that I
+can interface with legacy code.
+#+end_quote
+
+It shouldn't be too hard to generate C++-03 code in addition to
+C++-14. We could follow the gcc/odb convention and have a =-std=
+option for this in meta-data. The only problem would be testing - at
+present the language settings comes from cmake, and we'd have to make
+sure the compiler is not in C++-14 mode when compiling test models
+in 03. Also, the mixing and matching of 03 with 14 may not be
+trivial. We should wait for a use case.
+
+It may be possible to add different flags to different projects in CMake.
+
+*** Add support for thrift and protocol buffers                        :epic:
+
+#+begin_quote
+*Story*: As a dogen user, I want to expose dogen models to other
+languages so that I can make use of them on these languages.
+#+end_quote
+
+Amongst other things, these technologies provide cross-language
+support, allowing one to create c++ services and consume them from say
+ruby, python, etc. At their heart they are simplified versions of
+CORBA/DCOM, with IDL equivalents, IDL compilers, specification for
+wire formats, etc. As they all share a number of commonalities, we
+shall refer to these technologies in general as Distributed Services
+Technologies (DST). We could integrate DST's with Dogen in two
+ways. First approach A:
+
+- generate the IDL for a model; we have enough information to produce
+  something that is very close to it's Dogen representation,
+  translated to the type system of the IDL; e.g. map =std::string=,
+  =std::vector=, etc to their types. This IDL is then compiled by the
+  DST's IDL to C++ compiler. Note: we could use LAM for this, but the
+  problem is if one starts with a C++ model, one would have to convert
+  it into LAM just to be able to do the mappings. A solution for this
+  problem would be to "reverse map" LAM from C++ and get to the
+  generic type this way.
+- possibly generate the transformation code that takes a C++ object
+  generated by Dogen and converts it into the C++ object generated by
+  the DST's C++ compiler and vice-versa. We probably have enough
+  information to generate these transformers automatically, after some
+  analysis of the code generated by the DST's C++ compiler.
+
+In order for this to work we need to have the ability to understand
+function signatures for services so that we can generate the correct
+service IDL for the DST. In fact, we should be able to mark certain
+services as DST-only so that we do not generate a Dogen representation
+for them. The DST service then internally uses the transformer to take
+the DST's domain types and convert them into Dogen domain types, and
+then uses the Dogen object model to implement the guts of the
+service. When shipping data out, the reverse process takes place.
+
+Approach A works really well when a service has a very narrow
+interface, and performs most of it's work internally without exposing
+it via the interface. Once the service requires the input (and/or
+output) of a large number of domain types, we hit a cost limitation;
+we may end up defining as many types in Dogen as there are in the IDL,
+thus resulting in a large amount of transformations between the two
+object models.
+
+In these cases one may be tempted to ignore Dogen and implement the
+service directly in terms of the DST's object model. This is not very
+convenient as the type system is not as expressive as regular C++ -
+there are a number of conventions that must be adopted, and
+limitations imposed too due to the expressiveness of the IDL. We'd
+also loose all the services provided by Dogen, which was the main
+reason why we created it in the first place.
+
+Approach B is more difficult. We could look into the wire format of
+each DST and implement it as serialisation mechanism. For this to
+work, the DST must:
+
+- provide some kind of raw interface that allows one to plug in types
+  serialisation manually. Ideally we wouldn't have to do this for
+  services, just for domain types, but it depends on the low-level
+  facilities available. A cursory look at both thrift and protocol
+  buffers does not reveal easy access to such an interface.
+- provide either a low-level wire format library (e.g. =std::string=
+  to =string=, etc) or a well specified wire format that we could
+  easily implement from scratch.
+
+This approach is the cleaner technically, but its a lot of work, and
+very hard to get right. We would have to have a lot of round-trip
+tests. In addition, DST's such as thrift provide a wealth of wire
+formats, so if there is no easy-access low-level wire format library,
+it would be very difficult to get this right.
+
+*** Add support for BSON serialisation                                :story:
+
+It would be useful to support Mongo DB's BSON. There is a C++ stand
+alone library for this:
+
+https://github.com/jbenet/bson-cpp
+
+For examples on how to use the C++ API see the tutorial:
+
+https://github.com/mongodb/mongo-cxx-driver/wiki/Tutorial
+
+*** Add support for deprecation                                       :story:
+
+#+begin_quote
+*Story*: As a dogen user, I want to mark certain properties, classes
+or methods as deprecated so that I can tell my users to stop using
+them.
+#+end_quote
+
+We should be able to mark classes and properties as deprecated and
+have that reflected in both doxygen and C++-11 deprecated attributes.
+
+Note that at present nothing stops the users from adding the marker
+themselves.
+
+Perhaps we should add general support for attributes. This would be
+useful for languages like C# and Java, to control serialisation, etc.
 
 *** Add a frontend for visual studio models                           :story:
 
