@@ -87,6 +87,16 @@ is because of this code:
 
 We are probably generating a zero when we get to 27.
 
+*** Add a frontend for visual studio models                           :story:
+
+It should be "fairly straightforward" to add a frontend for visual
+studio. A sample project has been added to test data:
+
+: test_data/visual_studio_modeling
+
+We should also extend tailor to output these projects so we can test
+it with existing models.
+
 *** Create a tool to generate product skeletons                       :story:
 
 Now that dogen is evolving to a MDSD tool, it would be great to be
