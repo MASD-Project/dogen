@@ -8217,18 +8217,6 @@ requires that basic reflection support gets injected too.
 
 With this approach we can satisfy all use cases.
 
-*** Add support for object caches                                      :epic:
-
-It would be good to have meta-model knowledge of "cacheability". This
-is done by marking objects with a stereotype of =Cacheable=. It then
-could translate to:
-
-- adding a serialisation like interface with gets, puts, etc. We need
-  to bind this to a specific cache such as memcache, coherence, etc.
-- create a type to string which converts a key made up of primitives
-  into a underscore delimited string, used as a key in the cache.
-- we should also consider external libraries like [[https://github.com/cripplet/cachepp][cachepp]].
-
 *** Add SQL support to Dogen                                           :epic:
 
 It would be nice to generate all of the tables required to store a
