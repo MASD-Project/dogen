@@ -20,6 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
+#include <boost/filesystem/operations.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/formatters/stitch_formatter.hpp"
@@ -29,7 +30,9 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("quilt.cpp.formatters.stitch_formatter"));
 
+const std::string empty;
 const std::string stitch_extension(".stitch");
+
 
 }
 
@@ -58,9 +61,28 @@ format(const artefact_formatter_interface& stock_formatter, const context& ctx,
 
     assistant a(ctx, al, needs_guard, id);
     const auto& fp(a.artefact_properties().file_path());
-    boost::filesystem::path stitch_template(fp);
+    auto stitch_template(fp);
     stitch_template.replace_extension(stitch_extension);
 
+    /*
+     * If the template does not yet exist, we should just create an
+     * empty artefact.
+     *
+     * This scenario happens when creating a new model or when adding
+     * a new artefact formatter for the first time.
+     */
+    if (!boost::filesystem::exists(stitch_template)) {
+        BOOST_LOG_SEV(lg, debug) << "Stitch template not found: "
+                                 << fp.generic_string();
+
+        dogen::formatters::artefact r;
+        r.overwrite(a.artefact_properties().overwrite());
+        return r;
+    }
+
+    /*
+     * Since the template exists, we can instantiate it.
+     */
     auto r(instantiator_.instantiate(stitch_template));
     r.overwrite(a.artefact_properties().overwrite());
     r.dependencies().push_back(stitch_template);
