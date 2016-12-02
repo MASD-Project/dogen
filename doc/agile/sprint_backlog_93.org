@@ -12,21 +12,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-12-02 Fri 10:14]
-| <75>                                                                        |        |      |      |       |
-| Headline                                                                    | Time   |      |      |     % |
-|-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *9:34* |      |      | 100.0 |
-|-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 9:34   |      |      | 100.0 |
-| Active                                                                      |        | 9:34 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 1:51 |  19.3 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 1:02 |  10.8 |
-| COMPLETED Update readme                                                     |        |      | 0:11 |   1.9 |
-| COMPLETED Test data generation for dates generates invalid dates            |        |      | 0:33 |   5.7 |
-| COMPLETED Handle missing stitch templates scenario                          |        |      | 1:04 |  11.1 |
-| STARTED Add support for Decimal numbers                                     |        |      | 0:32 |   5.6 |
-| STARTED Add support for C#                                                  |        |      | 4:21 |  45.5 |
+#+CAPTION: Clock summary at [2016-12-02 Fri 11:05]
+| <75>                                                                        |         |       |      |       |
+| Headline                                                                    | Time    |       |      |     % |
+|-----------------------------------------------------------------------------+---------+-------+------+-------|
+| *Total time*                                                                | *10:24* |       |      | 100.0 |
+|-----------------------------------------------------------------------------+---------+-------+------+-------|
+| Stories                                                                     | 10:24   |       |      | 100.0 |
+| Active                                                                      |         | 10:24 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:51 |  17.8 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 1:02 |   9.9 |
+| COMPLETED Update readme                                                     |         |       | 0:11 |   1.8 |
+| COMPLETED Test data generation for dates generates invalid dates            |         |       | 0:33 |   5.3 |
+| COMPLETED Handle missing stitch templates scenario                          |         |       | 1:04 |  10.3 |
+| STARTED Add support for Decimal numbers                                     |         |       | 0:32 |   5.1 |
+| STARTED Add support for C#                                                  |         |       | 5:11 |  49.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -131,6 +131,8 @@ for the expanded content.
 - check compiler support (MSVC may have decimals; if so, use that instead)
 
 *** STARTED Add support for C#                                        :story:
+    CLOCK: [2016-12-02 Fri 10:35]--[2016-12-02 Fri 11:05] =>  0:30
+    CLOCK: [2016-12-02 Fri 10:15]--[2016-12-02 Fri 10:35] =>  0:20
     CLOCK: [2016-12-01 Thu 11:01]--[2016-12-01 Thu 12:16] =>  1:15
     CLOCK: [2016-11-30 Wed 16:21]--[2016-11-30 Wed 17:45] =>  1:24
     CLOCK: [2016-11-30 Wed 16:19]--[2016-11-30 Wed 16:20] =>  0:01
@@ -138,6 +140,20 @@ for the expanded content.
     CLOCK: [2016-11-30 Wed 13:37]--[2016-11-30 Wed 15:00] =>  1:23
 
 Create a quilt model for C#.
+
+*** Add an example of redis and dogen                                 :story:
+
+Building external project:
+
+: cd /home/marco/Development/DomainDrivenConsulting/redis/build/output/gcc-6/Release &&
+: CMAKE_PROGRAM_PATH=/home/marco/Development/DomainDrivenConsulting/dogen/build/output/gcc/Release/stage/bin
+: CMAKE_INCLUDE_PATH=/usr/local/personal/include CMAKE_LIB_PATH=/usr/local/personal/lib
+: cmake ../../../.. -G Ninja && Ninja -j5
+
+Redis client:
+
+https://github.com/nekipelov/redisclient
+git@github.com:nekipelov/redisclient.git
 
 *** Add support for object caches                                      :epic:
 

@@ -176,6 +176,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/yarn.dia/include
     ${CMAKE_SOURCE_DIR}/projects/options/include
     ${CMAKE_SOURCE_DIR}/projects/quilt.cpp/include
+    ${CMAKE_SOURCE_DIR}/projects/quilt.csharp/include
     ${CMAKE_SOURCE_DIR}/projects/formatters/include
     ${CMAKE_SOURCE_DIR}/projects/utility/include
     ${CMAKE_SOURCE_DIR}/projects/knit/include
@@ -201,6 +202,7 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/yarn.json)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/yarn.dia)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/options)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/quilt.cpp)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/quilt.csharp)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/formatters)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/utility)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/knit)

@@ -461,7 +461,7 @@
       },
       "meta_type": "object",
       "annotation": {
-        "quilt.cpp.types.class_header.inclusion_directive": "<type_index>",
+        "quilt.cpp.types.class_header.inclusion_directive": "<typeindex>",
         "quilt.cpp.hash.class_header.inclusion_required": false,
         "quilt.cpp.io.class_header.inclusion_required": false,
         "quilt.cpp.test_data.class_header.inclusion_required": false,
