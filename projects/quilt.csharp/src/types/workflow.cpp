@@ -18,14 +18,52 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/algorithm/string/join.hpp>
+#include "dogen/utility/log/logger.hpp"
 #include "dogen/quilt.csharp/types/workflow.hpp"
+
+namespace {
+
+const std::string name("quilt.csharp.workflow");
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory(name));
+
+const std::string dot(".");
+
+}
 
 namespace dogen {
 namespace quilt {
 namespace csharp {
 
-bool workflow::operator==(const workflow& /*rhs*/) const {
-    return true;
+std::string workflow::name() const {
+    return ::name;
+}
+
+std::forward_list<boost::filesystem::path> workflow::
+managed_directories(const options::knitting_options& ko,
+    const yarn::name& model_name) const {
+    const auto& mm(model_name.location().model_modules());
+    const auto mn(boost::algorithm::join(mm, dot));
+    std::forward_list<boost::filesystem::path> r;
+    r.push_front(ko.project_directory_path() / mn);
+    return r;
+}
+
+std::forward_list<annotations::archetype_location>
+workflow::archetype_location() const {
+    std::forward_list<annotations::archetype_location> r;
+    return r;
+}
+
+std::forward_list<dogen::formatters::artefact> workflow::generate(
+    const options::knitting_options& /*ko*/,
+    const annotations::type_repository& /*atrp*/,
+    const annotations::annotation_groups_factory& /*agf*/,
+    const yarn::model& /*m*/) const {
+    std::forward_list<dogen::formatters::artefact> r;
+    return r;
 }
 
 } } }

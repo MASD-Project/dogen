@@ -32,7 +32,7 @@ namespace cpp {
 /**
  * @brief Initialises all of the static state in this model.
  */
-class initializer {
+class initializer final {
 public:
     static void initialize();
 };

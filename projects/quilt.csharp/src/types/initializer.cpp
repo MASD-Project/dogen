@@ -18,14 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/quilt/types/workflow.hpp"
+#include "dogen/quilt.csharp/types/workflow.hpp"
 #include "dogen/quilt.csharp/types/initializer.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace csharp {
 
-bool initializer::operator==(const initializer& /*rhs*/) const {
-    return true;
+void initializer::initialize() {
+    quilt::register_backend<workflow>(quilt::workflow::registrar());
 }
 
 } } }
