@@ -39,7 +39,7 @@ std::string create_std_string(const unsigned int position) {
 
 boost::posix_time::ptime
 create_boost_posix_time_ptime(const unsigned int position) {
-    unsigned int day((position + 1) % 27);
+    unsigned int day(1 + (position % 27));
     using boost::gregorian::date;
     using boost::posix_time::ptime;
     using boost::posix_time::time_duration;
