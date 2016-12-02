@@ -103,6 +103,23 @@ if(use_latest_knitter)
 endif()
 add_dependencies(knit_all knit_${target})
 
+set(target quilt.csharp)
+add_custom_target(knit_${target}
+    COMMENT "Knitting Quilt C# model" VERBATIM
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+    COMMAND ${knitter_binary}
+    --target ${models_dir}/${target}.dia
+    --project-dir ${projects_dir}/
+    --ignore-files-matching-regex .*/CMakeLists.txt
+    --ignore-files-matching-regex .*/tests/.*
+    --ignore-files-matching-regex .*/test/.*
+    --verbose
+    --delete-extra-files)
+if(use_latest_knitter)
+    add_dependencies(knit_${target} knitter)
+endif()
+add_dependencies(knit_all knit_${target})
+
 set(target database)
 add_custom_target(knit_${target}
     COMMENT "Knitting database model" VERBATIM
@@ -227,23 +244,6 @@ add_dependencies(knit_all knit_${target})
 set(target wale)
 add_custom_target(knit_${target}
     COMMENT "Knitting Wale model" VERBATIM
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    COMMAND ${knitter_binary}
-    --target ${models_dir}/${target}.dia
-    --project-dir ${projects_dir}/
-    --ignore-files-matching-regex .*/CMakeLists.txt
-    --ignore-files-matching-regex .*/tests/.*
-    --ignore-files-matching-regex .*/test/.*
-    --verbose
-    --delete-extra-files)
-if(use_latest_knitter)
-    add_dependencies(knit_${target} knitter)
-endif()
-add_dependencies(knit_all knit_${target})
-
-set(target quilt.csharp)
-add_custom_target(knit_${target}
-    COMMENT "Knitting Quilt C# model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
     --target ${models_dir}/${target}.dia
