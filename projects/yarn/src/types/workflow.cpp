@@ -68,9 +68,9 @@ std::vector<intermediate_model> workflow::obtain_intermediate_models(
     const std::vector<boost::filesystem::path>& data_dirs,
     const annotations::annotation_groups_factory& agf,
     const annotations::type_repository& atrp,
-    const options::input_options& io) const {
+    const options::knitting_options& ko) const {
     intermediate_model_factory f;
-    return f.make(data_dirs, agf, atrp, io, frontend_registrar());
+    return f.make(data_dirs, agf, atrp, ko, frontend_registrar());
 }
 
 model workflow::obtain_final_model(const annotations::type_repository& atrp,
@@ -82,9 +82,9 @@ model workflow::obtain_final_model(const annotations::type_repository& atrp,
 model workflow::execute(const std::vector<boost::filesystem::path>& data_dirs,
     const annotations::annotation_groups_factory& agf,
     const annotations::type_repository& atrp,
-    const options::input_options& io) const {
+    const options::knitting_options& ko) const {
 
-    const auto im(obtain_intermediate_models(data_dirs, agf, atrp, io));
+    const auto im(obtain_intermediate_models(data_dirs, agf, atrp, ko));
     const auto r(obtain_final_model(atrp, im));
 
     BOOST_LOG_SEV(lg, debug) << "Final model: " << r;

@@ -68,7 +68,7 @@ workflow(const options::knitting_options& o) : knitting_options_(o) {
 }
 
 bool workflow::housekeeping_required() const {
-    return knitting_options_.output().delete_extra_files();
+    return knitting_options_.delete_extra_files();
 }
 
 std::vector<boost::filesystem::path> workflow::obtain_data_dirs() const {
@@ -111,8 +111,7 @@ obtain_yarn_model(const std::vector<boost::filesystem::path>& data_dirs,
     const annotations::annotation_groups_factory& agf,
     const annotations::type_repository& atrp) const {
     yarn::workflow w;
-    const auto io(knitting_options_.input());
-    return w.execute(data_dirs, agf, atrp, io);
+    return w.execute(data_dirs, agf, atrp, knitting_options_);
 }
 
 void workflow::perform_housekeeping(
@@ -126,7 +125,7 @@ void workflow::perform_housekeeping(
             expected_files.insert(d.generic_string());
     }
 
-    const auto& ip(knitting_options_.output().ignore_patterns());
+    const auto& ip(knitting_options_.ignore_patterns());
     std::forward_list<std::string> ignore_patterns(ip.begin(), ip.end());
     housekeeper hk(ignore_patterns, dirs, expected_files);
     hk.tidy_up();
@@ -134,8 +133,7 @@ void workflow::perform_housekeeping(
 
 std::shared_ptr<dogen::formatters::artefact_writer_interface>
 workflow::obtain_file_writer() const {
-    const options::output_options& options(knitting_options_.output());
-    const auto fw(options.force_write());
+    const auto fw(knitting_options_.force_write());
 
     using dogen::formatters::filesystem_writer;
     return std::make_shared<filesystem_writer>(fw);

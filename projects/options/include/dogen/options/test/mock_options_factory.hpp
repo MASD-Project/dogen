@@ -46,27 +46,6 @@ public:
 
 public:
     /**
-     * @brief Returns the output options with sensible defaults.
-     */
-    static output_options make_output_options();
-
-    /**
-     * @brief Returns the C++ options with a project directory
-     * populated.
-     *
-     * All facets are enabled.
-     */
-    static cpp_options make_cpp_options(
-        const boost::filesystem::path& project_dir);
-
-    /**
-     * @brief Returns the input options with the target and module
-     * path set.
-     */
-    static input_options
-    make_input_options(const boost::filesystem::path& target);
-
-    /**
      * @brief Returns the knitting options with target set and
      * optionally project directory and module path.
      */

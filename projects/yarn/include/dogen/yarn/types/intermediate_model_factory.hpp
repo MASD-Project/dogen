@@ -29,7 +29,7 @@
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
-#include "dogen/options/types/input_options.hpp"
+#include "dogen/options/types/knitting_options.hpp"
 #include "dogen/yarn/types/descriptor.hpp"
 #include "dogen/yarn/types/frontend_registrar.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
@@ -91,7 +91,7 @@ public:
     make(const std::vector<boost::filesystem::path>& dirs,
         const annotations::annotation_groups_factory& agf,
         const annotations::type_repository& atrp,
-        const options::input_options& io,
+        const options::knitting_options& ko,
         frontend_registrar& rg) const;
 };
 

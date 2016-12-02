@@ -88,7 +88,8 @@ void workflow::expand_model(
 }
 
 model workflow::execute(
-    const options::cpp_options& opts, const annotations::type_repository& atrp,
+    const options::knitting_options& ko,
+    const annotations::type_repository& atrp,
     const annotations::annotation& ra,
     const dogen::formatters::decoration_properties_factory& dpf,
     const formatters::repository& frp, const yarn::model& m) const {
@@ -96,7 +97,7 @@ model workflow::execute(
     auto r(make_model(frp, m));
 
     const auto module_ids(obtain_module_ids(m));
-    const auto pdp(opts.project_directory_path());
+    const auto pdp(ko.project_directory_path());
     const locator l(pdp, atrp, frp, ra, m.name(), module_ids);
     expand_model(atrp, ra, dpf, frp, l, r);
 

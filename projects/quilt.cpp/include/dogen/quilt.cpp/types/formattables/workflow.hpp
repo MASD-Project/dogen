@@ -31,7 +31,7 @@
 #include <unordered_map>
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
-#include "dogen/options/types/cpp_options.hpp"
+#include "dogen/options/types/knitting_options.hpp"
 #include "dogen/formatters/types/decoration_properties_factory.hpp"
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/quilt.cpp/types/formatters/repository.hpp"
@@ -64,7 +64,7 @@ private:
 
 public:
     model execute(
-        const options::cpp_options& opts,
+        const options::knitting_options& ko,
         const annotations::type_repository& atrp,
         const annotations::annotation& ra,
         const dogen::formatters::decoration_properties_factory& dpf,

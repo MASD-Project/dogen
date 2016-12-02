@@ -25,10 +25,10 @@
 #pragma once
 #endif
 
+#include <string>
+#include <vector>
 #include <algorithm>
-#include "dogen/options/types/cpp_options.hpp"
-#include "dogen/options/types/input_options.hpp"
-#include "dogen/options/types/output_options.hpp"
+#include <boost/filesystem/path.hpp>
 #include "dogen/options/serialization/knitting_options_fwd_ser.hpp"
 
 namespace dogen {
@@ -40,18 +40,22 @@ namespace options {
 class knitting_options final {
 public:
     knitting_options(const knitting_options&) = default;
-    knitting_options(knitting_options&&) = default;
     ~knitting_options() = default;
 
 public:
     knitting_options();
 
 public:
+    knitting_options(knitting_options&& rhs);
+
+public:
     knitting_options(
         const bool verbose,
-        const dogen::options::input_options& input,
-        const dogen::options::output_options& output,
-        const dogen::options::cpp_options& cpp);
+        const boost::filesystem::path& target,
+        const bool delete_extra_files,
+        const bool force_write,
+        const std::vector<std::string>& ignore_patterns,
+        const boost::filesystem::path& project_directory_path);
 
 private:
     template<typename Archive>
@@ -70,33 +74,49 @@ public:
     /**@}*/
 
     /**
-     * @brief All options related to inputs.
+     * @brief Path to the Dia diagram that contains the model to generate.
      */
     /**@{*/
-    const dogen::options::input_options& input() const;
-    dogen::options::input_options& input();
-    void input(const dogen::options::input_options& v);
-    void input(const dogen::options::input_options&& v);
+    const boost::filesystem::path& target() const;
+    boost::filesystem::path& target();
+    void target(const boost::filesystem::path& v);
+    void target(const boost::filesystem::path&& v);
     /**@}*/
 
     /**
-     * @brief All options related to outputting.
+     * @brief Delete any extra files found in managed directories.
      */
     /**@{*/
-    const dogen::options::output_options& output() const;
-    dogen::options::output_options& output();
-    void output(const dogen::options::output_options& v);
-    void output(const dogen::options::output_options&& v);
+    bool delete_extra_files() const;
+    void delete_extra_files(const bool v);
     /**@}*/
 
     /**
-     * @brief All options related to the C++ backend.
+     * @brief Always generate files even if there are no differences with existing file.
      */
     /**@{*/
-    const dogen::options::cpp_options& cpp() const;
-    dogen::options::cpp_options& cpp();
-    void cpp(const dogen::options::cpp_options& v);
-    void cpp(const dogen::options::cpp_options&& v);
+    bool force_write() const;
+    void force_write(const bool v);
+    /**@}*/
+
+    /**
+     * @brief List of regular expressions to filter out files to ignore.
+     */
+    /**@{*/
+    const std::vector<std::string>& ignore_patterns() const;
+    std::vector<std::string>& ignore_patterns();
+    void ignore_patterns(const std::vector<std::string>& v);
+    void ignore_patterns(const std::vector<std::string>&& v);
+    /**@}*/
+
+    /**
+     * @brief Path to the directory in which to place the generated code.
+     */
+    /**@{*/
+    const boost::filesystem::path& project_directory_path() const;
+    boost::filesystem::path& project_directory_path();
+    void project_directory_path(const boost::filesystem::path& v);
+    void project_directory_path(const boost::filesystem::path&& v);
     /**@}*/
 
 public:
@@ -111,9 +131,11 @@ public:
 
 private:
     bool verbose_;
-    dogen::options::input_options input_;
-    dogen::options::output_options output_;
-    dogen::options::cpp_options cpp_;
+    boost::filesystem::path target_;
+    bool delete_extra_files_;
+    bool force_write_;
+    std::vector<std::string> ignore_patterns_;
+    boost::filesystem::path project_directory_path_;
 };
 
 } }

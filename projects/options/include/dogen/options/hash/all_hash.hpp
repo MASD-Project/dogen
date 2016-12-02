@@ -25,9 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen/options/hash/cpp_options_hash.hpp"
-#include "dogen/options/hash/input_options_hash.hpp"
-#include "dogen/options/hash/output_options_hash.hpp"
 #include "dogen/options/hash/darting_options_hash.hpp"
 #include "dogen/options/hash/knitting_options_hash.hpp"
 #include "dogen/options/hash/stitching_options_hash.hpp"

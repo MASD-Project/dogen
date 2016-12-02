@@ -41,12 +41,10 @@ BOOST_AUTO_TEST_SUITE(swap_tests)
 BOOST_AUTO_TEST_CASE(validate_swap) {
     SETUP_TEST_LOG("validate_swap");
 
-    test_swap<cpp_options_generator>();
-    test_swap<input_options_generator>();
-    test_swap<output_options_generator>();
     test_swap<knitting_options_generator>();
     test_swap<stitching_options_generator>();
     test_swap<tailoring_options_generator>();
+    test_swap<darting_options_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

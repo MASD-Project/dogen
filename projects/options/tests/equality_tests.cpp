@@ -41,12 +41,10 @@ BOOST_AUTO_TEST_SUITE(equality_tests)
 BOOST_AUTO_TEST_CASE(validate_equality) {
     SETUP_TEST_LOG("validate_equality");
 
-    test_equality<cpp_options_generator>();
-    test_equality<input_options_generator>();
-    test_equality<output_options_generator>();
     test_equality<knitting_options_generator>();
     test_equality<stitching_options_generator>();
     test_equality<tailoring_options_generator>();
+    test_equality<darting_options_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

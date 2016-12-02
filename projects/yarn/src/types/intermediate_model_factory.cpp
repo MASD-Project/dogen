@@ -106,7 +106,7 @@ intermediate_model_factory::
 make(const std::vector<boost::filesystem::path>& dirs,
     const annotations::annotation_groups_factory& agf,
     const annotations::type_repository& atrp,
-    const options::input_options& io, frontend_registrar& rg) const {
+    const options::knitting_options& ko, frontend_registrar& rg) const {
 
     descriptor_factory f;
 
@@ -116,7 +116,7 @@ make(const std::vector<boost::filesystem::path>& dirs,
      * annotations inside this model in order to figure out what the
      * user reference intermediate models are.
      */
-    const auto timd(f.make(io.target()));
+    const auto timd(f.make(ko.target()));
     const auto tim(intermediate_model_for_descriptor(agf, atrp, rg, timd));
     const auto& a(tim.root_module().annotation());
 

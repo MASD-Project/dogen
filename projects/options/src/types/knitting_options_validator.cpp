@@ -39,12 +39,12 @@ namespace dogen {
 namespace options {
 
 void knitting_options_validator::validate(const knitting_options& o) {
-    if (o.input().target().empty()) {
+    if (o.target().empty()) {
         BOOST_LOG_SEV(lg, error) << missing_target;
         BOOST_THROW_EXCEPTION(validation_error(missing_target));
     }
 
-    if (o.cpp().project_directory_path().empty()) {
+    if (o.project_directory_path().empty()) {
         BOOST_LOG_SEV(lg, error) << missing_project_dir;
         BOOST_THROW_EXCEPTION(validation_error(missing_project_dir));
     }

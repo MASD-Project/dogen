@@ -18,9 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/options/test_data/cpp_options_td.hpp"
-#include "dogen/options/test_data/input_options_td.hpp"
-#include "dogen/options/test_data/output_options_td.hpp"
+#include <sstream>
 #include "dogen/options/test_data/knitting_options_td.hpp"
 
 namespace {
@@ -29,19 +27,25 @@ bool create_bool(const unsigned int position) {
     return (position % 2) == 0;
 }
 
-dogen::options::input_options
-create_dogen_options_input_options(const unsigned int position) {
-    return dogen::options::input_options_generator::create(position);
+boost::filesystem::path
+create_boost_filesystem_path(const unsigned int position) {
+    std::ostringstream s;
+    s << "/a/path/number_" << position;
+    return boost::filesystem::path(s.str());
 }
 
-dogen::options::output_options
-create_dogen_options_output_options(const unsigned int position) {
-    return dogen::options::output_options_generator::create(position);
+std::string create_std_string(const unsigned int position) {
+    std::ostringstream s;
+    s << "a_string_" << position;
+    return s.str();
 }
 
-dogen::options::cpp_options
-create_dogen_options_cpp_options(const unsigned int position) {
-    return dogen::options::cpp_options_generator::create(position);
+std::vector<std::string> create_std_vector_std_string(unsigned int position) {
+    std::vector<std::string> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.push_back(create_std_string(position + i));
+    }
+    return r;
 }
 
 }
@@ -54,9 +58,11 @@ knitting_options_generator::knitting_options_generator() : position_(0) { }
 void knitting_options_generator::
 populate(const unsigned int position, result_type& v) {
     v.verbose(create_bool(position + 0));
-    v.input(create_dogen_options_input_options(position + 1));
-    v.output(create_dogen_options_output_options(position + 2));
-    v.cpp(create_dogen_options_cpp_options(position + 3));
+    v.target(create_boost_filesystem_path(position + 1));
+    v.delete_extra_files(create_bool(position + 2));
+    v.force_write(create_bool(position + 3));
+    v.ignore_patterns(create_std_vector_std_string(position + 4));
+    v.project_directory_path(create_boost_filesystem_path(position + 5));
 }
 
 knitting_options_generator::result_type

@@ -52,7 +52,7 @@ const std::string version_arg("version");
 const std::string verbose_arg("verbose");
 
 const std::string target_arg("target");
-const std::string cpp_project_dir_arg("cpp-project-dir");
+const std::string project_dir_arg("project-dir");
 const std::string delete_extra_files_arg("delete-extra-files");
 const std::string ignore_files_matching_regex_arg(
     "ignore-files-matching-regex");
@@ -77,7 +77,7 @@ program_options_parser::program_options_parser(program_options_parser&& rhs)
       version_function_(std::move(rhs.version_function_)) { }
 
 boost::program_options::options_description
-program_options_parser::general_options_factory() const {
+program_options_parser::make_general_options_description() const {
     boost::program_options::options_description r("General options");
     r.add_options()
         ("help,h", "Display this help and exit.")
@@ -87,9 +87,9 @@ program_options_parser::general_options_factory() const {
 }
 
 boost::program_options::options_description
-program_options_parser::modeling_options_factory() const {
+program_options_parser::make_input_options_description() const {
     using boost::program_options::value;
-    boost::program_options::options_description r("Modeling options");
+    boost::program_options::options_description r("Input options");
     r.add_options()
         ("target,t",
             value<std::string>(),
@@ -100,7 +100,7 @@ program_options_parser::modeling_options_factory() const {
 }
 
 boost::program_options::options_description
-program_options_parser::output_options_factory() const {
+program_options_parser::make_output_options_description() const {
     using boost::program_options::value;
     boost::program_options::options_description r("Output options");
     r.add_options()
@@ -110,61 +110,51 @@ program_options_parser::output_options_factory() const {
             value<std::vector<std::string> >(),
             "Ignore files matching regex, if they are on the deletion list")
         ("force-write", "Always write files, even when there are "
-            "no differences");
-
-    return r;
-}
-
-boost::program_options::options_description
-program_options_parser::cpp_options_factory() const {
-    using boost::program_options::value;
-    boost::program_options::options_description r("C++ backend options");
-    r.add_options()
-        ("cpp-project-dir,x",
+            "no differences")
+        ("project-dir,x",
             value<std::string>(),
-            "Output directory for all project files. "
+            "Output directory for generated code. "
             "Defaults to the current working directory.");
 
     return r;
 }
 
 boost::program_options::options_description
-program_options_parser::options_factory() const {
+program_options_parser::make_options_description() const {
     boost::program_options::options_description r;
-    r.add(general_options_factory());
-    r.add(modeling_options_factory());
-    r.add(output_options_factory());
-    r.add(cpp_options_factory());
+    r.add(make_general_options_description());
+    r.add(make_input_options_description());
+    r.add(make_output_options_description());
     return r;
 }
 
-boost::optional<boost::program_options::variables_map>
-program_options_parser::variables_map_factory() const {
-    const auto options(options_factory());
+void program_options_parser::
+generate_help(const options_description& od) const {
+    if (!help_function_)
+        return;
 
+    std::ostringstream stream;
+    stream << od;
+    help_function_(stream.str());
+}
+
+void program_options_parser::generate_version() const {
+    if (!version_function_)
+        return;
+
+    version_function_();
+}
+
+boost::optional<boost::program_options::variables_map> program_options_parser::
+make_variables_map(const options_description& od) const {
     using namespace boost::program_options;
     variables_map r;
     try {
         basic_command_line_parser<char> parser(arguments_);
-        store(parser.options(options).run(), r);
+        store(parser.options(od).run(), r);
         notify(r);
     } catch (const boost::program_options::error& e) {
         BOOST_THROW_EXCEPTION(parser_validation_error(e.what()));
-    }
-
-    if (r.count(help_arg)) {
-        if (help_function_) {
-            std::ostringstream stream;
-            stream << options;
-            help_function_(stream.str());
-        }
-        return boost::optional<boost::program_options::variables_map>();
-    }
-
-    if (r.count(version_arg)) {
-        if (version_function_)
-            version_function_();
-        return boost::optional<boost::program_options::variables_map>();
     }
 
     return r;
@@ -179,59 +169,56 @@ void program_options_parser::version_function(std::function<void()> value) {
     version_function_ = value;
 }
 
-options::cpp_options program_options_parser::
-transform_cpp_options(const boost::program_options::variables_map& vm) const {
-    options::cpp_options r;
-    if (!vm.count(cpp_project_dir_arg))
-        r.project_directory_path(boost::filesystem::current_path());
-    else
-        r.project_directory_path(vm[cpp_project_dir_arg].as<std::string>());
-
-    return r;
-}
-
-options::input_options program_options_parser::transform_input_options(
-    const boost::program_options::variables_map& vm) const {
-    options::input_options r;
+options::knitting_options program_options_parser::
+make_knitting_options(const variables_map& vm) const {
+    options::knitting_options r;
 
     if (!vm.count(target_arg))
         BOOST_THROW_EXCEPTION(parser_validation_error(missing_target));
 
+    r.verbose(vm.count(verbose_arg));
     r.target(vm[target_arg].as<std::string>());
-
-    return r;
-}
-
-options::output_options program_options_parser::
-transform_output_options(const variables_map& vm) const {
-    options::output_options r;
     r.delete_extra_files(vm.count(delete_extra_files_arg));
     r.force_write(vm.count(force_write_arg));
 
-    if (!vm.count(ignore_files_matching_regex_arg))
-        return r;
+    if (vm.count(ignore_files_matching_regex_arg)) {
+        typedef std::vector<std::string> argument_type;
+        const auto p(vm[ignore_files_matching_regex_arg].as<argument_type>());
+        r.ignore_patterns(p);
+    }
 
-    typedef std::vector<std::string> argument_type;
-    const auto p(vm[ignore_files_matching_regex_arg].as<argument_type>());
-    r.ignore_patterns(p);
+    if (!vm.count(project_dir_arg))
+        r.project_directory_path(boost::filesystem::current_path());
+    else
+        r.project_directory_path(vm[project_dir_arg].as<std::string>());
 
     return r;
 }
 
 boost::optional<options::knitting_options> program_options_parser::parse() {
-    auto optional_vm(variables_map_factory());
+    const boost::optional<options::knitting_options> r;
+    const auto od(make_options_description());
+    const auto ovm(make_variables_map(od));
 
-    if (!optional_vm)
-        return boost::optional<options::knitting_options>();
+    /*
+     * This shouldn't really happen as we should throw if the user did
+     * not supply mandatory options.
+     */
+    if (!ovm)
+        return r;
 
-    options::knitting_options r;
-    const auto& vm(*optional_vm);
-    r.verbose(vm.count(verbose_arg));
-    r.input(transform_input_options(vm));
-    r.cpp(transform_cpp_options(vm));
-    r.output(transform_output_options(vm));
+    const auto& vm(*ovm);
+    if (vm.count(help_arg)) {
+        generate_help(od);
+        return r;
+    }
 
-    return r;
+    if (vm.count(version_arg)) {
+        generate_version();
+        return r;
+    }
+
+    return make_knitting_options(vm);
 }
 
 } }

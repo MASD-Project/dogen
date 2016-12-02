@@ -24,31 +24,49 @@ namespace dogen {
 namespace options {
 
 knitting_options::knitting_options()
-    : verbose_(static_cast<bool>(0)) { }
+    : verbose_(static_cast<bool>(0)),
+      delete_extra_files_(static_cast<bool>(0)),
+      force_write_(static_cast<bool>(0)) { }
+
+knitting_options::knitting_options(knitting_options&& rhs)
+    : verbose_(std::move(rhs.verbose_)),
+      target_(std::move(rhs.target_)),
+      delete_extra_files_(std::move(rhs.delete_extra_files_)),
+      force_write_(std::move(rhs.force_write_)),
+      ignore_patterns_(std::move(rhs.ignore_patterns_)),
+      project_directory_path_(std::move(rhs.project_directory_path_)) { }
 
 knitting_options::knitting_options(
     const bool verbose,
-    const dogen::options::input_options& input,
-    const dogen::options::output_options& output,
-    const dogen::options::cpp_options& cpp)
+    const boost::filesystem::path& target,
+    const bool delete_extra_files,
+    const bool force_write,
+    const std::vector<std::string>& ignore_patterns,
+    const boost::filesystem::path& project_directory_path)
     : verbose_(verbose),
-      input_(input),
-      output_(output),
-      cpp_(cpp) { }
+      target_(target),
+      delete_extra_files_(delete_extra_files),
+      force_write_(force_write),
+      ignore_patterns_(ignore_patterns),
+      project_directory_path_(project_directory_path) { }
 
 void knitting_options::swap(knitting_options& other) noexcept {
     using std::swap;
     swap(verbose_, other.verbose_);
-    swap(input_, other.input_);
-    swap(output_, other.output_);
-    swap(cpp_, other.cpp_);
+    swap(target_, other.target_);
+    swap(delete_extra_files_, other.delete_extra_files_);
+    swap(force_write_, other.force_write_);
+    swap(ignore_patterns_, other.ignore_patterns_);
+    swap(project_directory_path_, other.project_directory_path_);
 }
 
 bool knitting_options::operator==(const knitting_options& rhs) const {
     return verbose_ == rhs.verbose_ &&
-        input_ == rhs.input_ &&
-        output_ == rhs.output_ &&
-        cpp_ == rhs.cpp_;
+        target_ == rhs.target_ &&
+        delete_extra_files_ == rhs.delete_extra_files_ &&
+        force_write_ == rhs.force_write_ &&
+        ignore_patterns_ == rhs.ignore_patterns_ &&
+        project_directory_path_ == rhs.project_directory_path_;
 }
 
 knitting_options& knitting_options::operator=(knitting_options other) {
@@ -65,52 +83,68 @@ void knitting_options::verbose(const bool v) {
     verbose_ = v;
 }
 
-const dogen::options::input_options& knitting_options::input() const {
-    return input_;
+const boost::filesystem::path& knitting_options::target() const {
+    return target_;
 }
 
-dogen::options::input_options& knitting_options::input() {
-    return input_;
+boost::filesystem::path& knitting_options::target() {
+    return target_;
 }
 
-void knitting_options::input(const dogen::options::input_options& v) {
-    input_ = v;
+void knitting_options::target(const boost::filesystem::path& v) {
+    target_ = v;
 }
 
-void knitting_options::input(const dogen::options::input_options&& v) {
-    input_ = std::move(v);
+void knitting_options::target(const boost::filesystem::path&& v) {
+    target_ = std::move(v);
 }
 
-const dogen::options::output_options& knitting_options::output() const {
-    return output_;
+bool knitting_options::delete_extra_files() const {
+    return delete_extra_files_;
 }
 
-dogen::options::output_options& knitting_options::output() {
-    return output_;
+void knitting_options::delete_extra_files(const bool v) {
+    delete_extra_files_ = v;
 }
 
-void knitting_options::output(const dogen::options::output_options& v) {
-    output_ = v;
+bool knitting_options::force_write() const {
+    return force_write_;
 }
 
-void knitting_options::output(const dogen::options::output_options&& v) {
-    output_ = std::move(v);
+void knitting_options::force_write(const bool v) {
+    force_write_ = v;
 }
 
-const dogen::options::cpp_options& knitting_options::cpp() const {
-    return cpp_;
+const std::vector<std::string>& knitting_options::ignore_patterns() const {
+    return ignore_patterns_;
 }
 
-dogen::options::cpp_options& knitting_options::cpp() {
-    return cpp_;
+std::vector<std::string>& knitting_options::ignore_patterns() {
+    return ignore_patterns_;
 }
 
-void knitting_options::cpp(const dogen::options::cpp_options& v) {
-    cpp_ = v;
+void knitting_options::ignore_patterns(const std::vector<std::string>& v) {
+    ignore_patterns_ = v;
 }
 
-void knitting_options::cpp(const dogen::options::cpp_options&& v) {
-    cpp_ = std::move(v);
+void knitting_options::ignore_patterns(const std::vector<std::string>&& v) {
+    ignore_patterns_ = std::move(v);
+}
+
+const boost::filesystem::path& knitting_options::project_directory_path() const {
+    return project_directory_path_;
+}
+
+boost::filesystem::path& knitting_options::project_directory_path() {
+    return project_directory_path_;
+}
+
+void knitting_options::project_directory_path(const boost::filesystem::path& v) {
+    project_directory_path_ = v;
+}
+
+void knitting_options::project_directory_path(const boost::filesystem::path&& v) {
+    project_directory_path_ = std::move(v);
 }
 
 } }

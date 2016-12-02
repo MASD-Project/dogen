@@ -20,47 +20,21 @@
  */
 #include "dogen/options/test/mock_options_factory.hpp"
 
-namespace {
-
-const std::string empty;
-
-}
-
 namespace dogen {
 namespace options {
 namespace test {
-
-output_options mock_options_factory::make_output_options() {
-    output_options r;
-    r.delete_extra_files(true);
-    r.force_write(false);
-    return r;
-}
-
-cpp_options mock_options_factory::make_cpp_options(
-    const boost::filesystem::path& project_dir) {
-
-    cpp_options r;
-    r.project_directory_path(project_dir);
-    return r;
-}
-
-input_options mock_options_factory::
-make_input_options(const boost::filesystem::path& target) {
-    input_options r;
-    r.target(target);
-    return r;
-}
 
 knitting_options mock_options_factory::make_knitting_options(
     const boost::filesystem::path& target,
     const boost::filesystem::path project_dir,
     const bool verbose) {
+
     knitting_options r;
     r.verbose(verbose);
-    r.input(make_input_options(target));
-    r.cpp(make_cpp_options(project_dir));
-    r.output(make_output_options());
+    r.target(target);
+    r.delete_extra_files(true);
+    r.force_write(false);
+    r.project_directory_path(project_dir);
     return r;
 }
 

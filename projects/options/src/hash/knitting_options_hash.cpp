@@ -18,9 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/options/hash/cpp_options_hash.hpp"
-#include "dogen/options/hash/input_options_hash.hpp"
-#include "dogen/options/hash/output_options_hash.hpp"
 #include "dogen/options/hash/knitting_options_hash.hpp"
 
 namespace {
@@ -29,6 +26,20 @@ template <typename HashableType>
 inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) {
+    std::size_t seed(0);
+    combine(seed, v.generic_string());
+    return seed;
+}
+
+inline std::size_t hash_std_vector_std_string(const std::vector<std::string>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
 }
 
 }
@@ -40,9 +51,11 @@ std::size_t knitting_options_hasher::hash(const knitting_options& v) {
     std::size_t seed(0);
 
     combine(seed, v.verbose());
-    combine(seed, v.input());
-    combine(seed, v.output());
-    combine(seed, v.cpp());
+    combine(seed, hash_boost_filesystem_path(v.target()));
+    combine(seed, v.delete_extra_files());
+    combine(seed, v.force_write());
+    combine(seed, hash_std_vector_std_string(v.ignore_patterns()));
+    combine(seed, hash_boost_filesystem_path(v.project_directory_path()));
 
     return seed;
 }

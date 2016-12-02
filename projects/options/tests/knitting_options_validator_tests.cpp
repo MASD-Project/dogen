@@ -63,7 +63,7 @@ BOOST_AUTO_TEST_CASE(options_without_a_target_throws) {
     SETUP_TEST_LOG_SOURCE("options_without_a_target_throws");
 
     dogen::options::knitting_options o;
-    BOOST_CHECK(o.input().target().empty());
+    BOOST_CHECK(o.target().empty());
     contains_checker<validation_error> c(missing_target);
 
     dogen::options::knitting_options_validator v;

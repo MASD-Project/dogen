@@ -52,23 +52,23 @@ public:
 
 private:
     typedef boost::program_options::options_description options_description;
+    options_description make_general_options_description() const;
+    options_description make_input_options_description() const;
+    options_description make_output_options_description() const;
+    options_description make_options_description() const;
 
-    options_description general_options_factory() const;
-    options_description modeling_options_factory() const;
-    options_description output_options_factory() const;
-    options_description cpp_options_factory() const;
-    options_description options_factory() const;
+private:
+    void generate_help(const options_description& od) const;
+    void generate_version() const;
 
 private:
     typedef boost::program_options::variables_map variables_map;
-    boost::optional<variables_map> variables_map_factory() const;
+    boost::optional<variables_map>
+    make_variables_map(const options_description& od) const;
 
 private:
-    options::input_options
-    transform_input_options(const variables_map& vm) const;
-    options::cpp_options transform_cpp_options(const variables_map& vm) const;
-    options::output_options
-    transform_output_options(const variables_map& vm) const;
+    options::knitting_options
+    make_knitting_options(const variables_map& vm) const;
 
 public:
     void help_function(std::function<void(std::string)> value);

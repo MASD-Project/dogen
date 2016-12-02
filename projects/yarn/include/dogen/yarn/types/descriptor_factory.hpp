@@ -28,7 +28,6 @@
 #include <list>
 #include <vector>
 #include <boost/filesystem/path.hpp>
-#include "dogen/options/types/input_options.hpp"
 #include "dogen/annotations/types/type.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/annotations/types/annotation.hpp"

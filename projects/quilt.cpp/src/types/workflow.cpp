@@ -68,12 +68,13 @@ workflow::create_decoration_properties_factory(
 }
 
 formattables::model workflow::create_formattables_model(
-    const options::cpp_options& opts, const annotations::type_repository& atrp,
+    const options::knitting_options& ko,
+    const annotations::type_repository& atrp,
     const annotations::annotation& ra,
     const dogen::formatters::decoration_properties_factory& dpf,
     const formatters::repository& frp, const yarn::model& m) const {
     formattables::workflow fw;
-    return fw.execute(opts, atrp, ra, dpf, frp, m);
+    return fw.execute(ko, atrp, ra, dpf, frp, m);
 }
 
 std::string workflow::name() const {
@@ -86,7 +87,7 @@ workflow::managed_directories(const options::knitting_options& ko,
     const auto& mm(model_name.location().model_modules());
     const auto mn(boost::algorithm::join(mm, dot));
     std::forward_list<boost::filesystem::path> r;
-    r.push_front(ko.cpp().project_directory_path() / mn);
+    r.push_front(ko.project_directory_path() / mn);
     return r;
 }
 
@@ -116,7 +117,7 @@ workflow::generate(const options::knitting_options& ko,
     const auto ra(m.root_module().annotation());
     const auto dpf(create_decoration_properties_factory(atrp, drp, ra));
     const auto& frp(formatters::workflow::registrar().formatter_repository());
-    const auto fm(create_formattables_model(ko.cpp(), atrp, ra, dpf, frp, m));
+    const auto fm(create_formattables_model(ko, atrp, ra, dpf, frp, m));
     const auto r(format(atrp, agf, drp, fm));
 
     BOOST_LOG_SEV(lg, debug) << "Finished backend.";

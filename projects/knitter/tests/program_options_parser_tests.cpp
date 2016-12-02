@@ -48,8 +48,8 @@ const std::string verbose_arg("--verbose");
 const std::string target_arg("--target");
 const std::string target_value_arg("some_target");
 
-const std::string cpp_project_dir_arg("--cpp-project-dir");
-const std::string cpp_project_dir_value_arg("a project dir");
+const std::string project_dir_arg("--project-dir");
+const std::string project_dir_value_arg("a project dir");
 
 const std::string delete_extra_files_arg("--delete-extra-files");
 const std::string force_write_arg("--force-write");
@@ -216,9 +216,7 @@ BOOST_AUTO_TEST_CASE(supplying_modeling_options_results_in_expected_options) {
 
     const auto ko(check_valid_arguments(o));
     BOOST_LOG_SEV(lg, debug) << "options: " << ko;
-
-    const auto io(ko.input());
-    BOOST_CHECK(io.target().string() == target_value_arg);
+    BOOST_CHECK(ko.target().string() == target_value_arg);
 }
 
 BOOST_AUTO_TEST_CASE(not_supplying_modeling_options_other_than_target_results_in_expected_options) {
@@ -230,42 +228,36 @@ BOOST_AUTO_TEST_CASE(not_supplying_modeling_options_other_than_target_results_in
 
     const auto ko(check_valid_arguments(o));
     BOOST_LOG_SEV(lg, debug) << "options: " << ko;
-
-    const auto is(ko.input());
-    BOOST_CHECK(is.target().string() == target_value_arg);
+    BOOST_CHECK(ko.target().string() == target_value_arg);
 }
 
 BOOST_AUTO_TEST_CASE(supplying_arguments_without_target_throws) {
     SETUP_TEST_LOG("supplying_arguments_without_target_throws");
     const std::vector<std::string> o = {
-        cpp_project_dir_arg, cpp_project_dir_value_arg
+        project_dir_arg, project_dir_value_arg
     };
     check_exception(o, missing_target);
 }
 
-BOOST_AUTO_TEST_CASE(supplying_cpp_arguments_results_in_expected_options) {
-    SETUP_TEST_LOG_SOURCE("supplying_cpp_arguments_results_in_expected_options");
+BOOST_AUTO_TEST_CASE(supplying_project_dir_results_in_expected_options) {
+    SETUP_TEST_LOG_SOURCE("supplying_project_dir_results_in_expected_options");
     const std::vector<std::string> o = {
         target_arg, target_value_arg,
-        cpp_project_dir_arg, cpp_project_dir_value_arg
+        project_dir_arg, project_dir_value_arg
     };
 
     const auto ko(check_valid_arguments(o));
     BOOST_LOG_SEV(lg, debug) << "options: " << ko;
-
-    const auto co(ko.cpp());
-    BOOST_CHECK(co.project_directory_path() == cpp_project_dir_value_arg);
+    BOOST_CHECK(ko.project_directory_path() == project_dir_value_arg);
 }
 
-BOOST_AUTO_TEST_CASE(not_supplying_cpp_arguments_results_in_expected_options) {
-    SETUP_TEST_LOG_SOURCE("not_supplying_cpp_arguments_results_in_expected_options");
+BOOST_AUTO_TEST_CASE(not_supplying_project_dir_results_in_expected_options) {
+    SETUP_TEST_LOG_SOURCE("not_supplying_project_dir_results_in_expected_options");
     const std::vector<std::string> o = { target_arg, target_value_arg };
 
     const auto ko(check_valid_arguments(o));
     BOOST_LOG_SEV(lg, debug) << "options: " << ko;
-
-    const auto co(ko.cpp());
-    BOOST_CHECK(!co.project_directory_path().empty());
+    BOOST_CHECK(!ko.project_directory_path().empty());
 }
 
 BOOST_AUTO_TEST_CASE(supplying_an_invalid_argument_throws) {
@@ -282,7 +274,7 @@ BOOST_AUTO_TEST_CASE(supplying_valid_arguments_with_help_results_in_help) {
     SETUP_TEST_LOG("supplying_valid_arguments_with_help_results_in_help");
     const std::vector<std::string> o = {
         target_arg, target_value_arg,
-        cpp_project_dir_arg, cpp_project_dir_value_arg,
+        project_dir_arg, project_dir_value_arg,
         help_arg
     };
     check_help(o);
@@ -292,7 +284,7 @@ BOOST_AUTO_TEST_CASE(supplying_valid_arguments_with_version_results_in_version) 
     SETUP_TEST_LOG("supplying_valid_arguments_with_version_results_in_version");
     const std::vector<std::string> o = {
         target_arg, target_value_arg,
-        cpp_project_dir_arg, cpp_project_dir_value_arg,
+        project_dir_arg, project_dir_value_arg,
         version_arg
     };
     check_version(o);
@@ -302,14 +294,12 @@ BOOST_AUTO_TEST_CASE(supplying_project_directory_results_in_expected_options) {
     SETUP_TEST_LOG_SOURCE("supplying_project_directory_results_in_expected_options");
     const std::vector<std::string> o = {
         target_arg, target_value_arg,
-        cpp_project_dir_arg, cpp_project_dir_value_arg
+        project_dir_arg, project_dir_value_arg
     };
 
     const auto ko(check_valid_arguments(o));
     BOOST_LOG_SEV(lg, debug) << "options: " << ko;
-
-    const auto co(ko.cpp());
-    BOOST_CHECK(co.project_directory_path() == cpp_project_dir_value_arg);
+    BOOST_CHECK(ko.project_directory_path() == project_dir_value_arg);
 }
 
 BOOST_AUTO_TEST_CASE(not_supplying_output_options_results_in_expected_options) {
@@ -317,10 +307,8 @@ BOOST_AUTO_TEST_CASE(not_supplying_output_options_results_in_expected_options) {
     const std::vector<std::string> o = { target_arg, target_value_arg };
     const auto ko(check_valid_arguments(o));
     BOOST_LOG_SEV(lg, debug) << "options: " << ko;
-
-    const auto oo(ko.output());
-    BOOST_CHECK(!oo.delete_extra_files());
-    BOOST_CHECK(!oo.force_write());
+    BOOST_CHECK(!ko.delete_extra_files());
+    BOOST_CHECK(!ko.force_write());
 }
 
 BOOST_AUTO_TEST_CASE(supplying_output_options_results_in_expected_options) {
@@ -332,10 +320,8 @@ BOOST_AUTO_TEST_CASE(supplying_output_options_results_in_expected_options) {
     };
     const auto ko(check_valid_arguments(o));
     BOOST_LOG_SEV(lg, debug) << "options: " << ko;
-
-    const auto oo(ko.output());
-    BOOST_CHECK(oo.delete_extra_files());
-    BOOST_CHECK(oo.force_write());
+    BOOST_CHECK(ko.delete_extra_files());
+    BOOST_CHECK(ko.force_write());
 }
 
 BOOST_AUTO_TEST_CASE(supplying_verobose_flag_results_in_options_with_verbose_on) {

@@ -20,10 +20,29 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include "dogen/options/io/cpp_options_io.hpp"
-#include "dogen/options/io/input_options_io.hpp"
-#include "dogen/options/io/output_options_io.hpp"
+#include <boost/algorithm/string.hpp>
 #include "dogen/options/io/knitting_options_io.hpp"
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::vector<std::string>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << tidy_up_string(*i) << "\"";
+    }
+    s << "] ";
+    return s;
+}
+
+}
 
 namespace dogen {
 namespace options {
@@ -38,9 +57,11 @@ std::ostream& operator<<(std::ostream& s, const knitting_options& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::options::knitting_options\"" << ", "
       << "\"verbose\": " << v.verbose() << ", "
-      << "\"input\": " << v.input() << ", "
-      << "\"output\": " << v.output() << ", "
-      << "\"cpp\": " << v.cpp()
+      << "\"target\": " << "\"" << v.target().generic_string() << "\"" << ", "
+      << "\"delete_extra_files\": " << v.delete_extra_files() << ", "
+      << "\"force_write\": " << v.force_write() << ", "
+      << "\"ignore_patterns\": " << v.ignore_patterns() << ", "
+      << "\"project_directory_path\": " << "\"" << v.project_directory_path().generic_string() << "\""
       << " }";
     return(s);
 }
