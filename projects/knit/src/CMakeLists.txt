@@ -39,6 +39,7 @@ target_link_libraries(${name}
     yarn.json
     quilt
     quilt.cpp
+    quilt.csharp
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES})
 
