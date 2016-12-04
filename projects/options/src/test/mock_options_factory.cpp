@@ -34,7 +34,7 @@ knitting_options mock_options_factory::make_knitting_options(
     r.target(target);
     r.delete_extra_files(true);
     r.force_write(false);
-    r.project_directory_path(project_dir);
+    r.output_directory_path(project_dir);
     return r;
 }
 

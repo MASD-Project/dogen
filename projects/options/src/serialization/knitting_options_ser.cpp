@@ -67,7 +67,7 @@ void save(Archive& ar,
     ar << make_nvp("delete_extra_files", v.delete_extra_files_);
     ar << make_nvp("force_write", v.force_write_);
     ar << make_nvp("ignore_patterns", v.ignore_patterns_);
-    ar << make_nvp("project_directory_path", v.project_directory_path_);
+    ar << make_nvp("output_directory_path", v.output_directory_path_);
 }
 
 template<typename Archive>
@@ -79,7 +79,7 @@ void load(Archive& ar,
     ar >> make_nvp("delete_extra_files", v.delete_extra_files_);
     ar >> make_nvp("force_write", v.force_write_);
     ar >> make_nvp("ignore_patterns", v.ignore_patterns_);
-    ar >> make_nvp("project_directory_path", v.project_directory_path_);
+    ar >> make_nvp("output_directory_path", v.output_directory_path_);
 }
 
 } }

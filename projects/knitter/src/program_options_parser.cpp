@@ -52,7 +52,7 @@ const std::string version_arg("version");
 const std::string verbose_arg("verbose");
 
 const std::string target_arg("target");
-const std::string project_dir_arg("project-dir");
+const std::string output_dir_arg("output-dir");
 const std::string delete_extra_files_arg("delete-extra-files");
 const std::string ignore_files_matching_regex_arg(
     "ignore-files-matching-regex");
@@ -110,10 +110,10 @@ program_options_parser::make_output_options_description() const {
             value<std::vector<std::string> >(),
             "Ignore files matching regex, if they are on the deletion list")
         ("force-write", "Always write files, even when there are "
-            "no differences")
-        ("project-dir,x",
+            "no differences.")
+        ("output-dir,o",
             value<std::string>(),
-            "Output directory for generated code. "
+            "Output directory for the generated code. "
             "Defaults to the current working directory.");
 
     return r;
@@ -187,10 +187,10 @@ make_knitting_options(const variables_map& vm) const {
         r.ignore_patterns(p);
     }
 
-    if (!vm.count(project_dir_arg))
-        r.project_directory_path(boost::filesystem::current_path());
+    if (!vm.count(output_dir_arg))
+        r.output_directory_path(boost::filesystem::current_path());
     else
-        r.project_directory_path(vm[project_dir_arg].as<std::string>());
+        r.output_directory_path(vm[output_dir_arg].as<std::string>());
 
     return r;
 }

@@ -62,7 +62,7 @@ populate(const unsigned int position, result_type& v) {
     v.delete_extra_files(create_bool(position + 2));
     v.force_write(create_bool(position + 3));
     v.ignore_patterns(create_std_vector_std_string(position + 4));
-    v.project_directory_path(create_boost_filesystem_path(position + 5));
+    v.output_directory_path(create_boost_filesystem_path(position + 5));
 }
 
 knitting_options_generator::result_type

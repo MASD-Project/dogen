@@ -47,7 +47,7 @@ managed_directories(const options::knitting_options& ko,
     const auto& mm(model_name.location().model_modules());
     const auto mn(boost::algorithm::join(mm, dot));
     std::forward_list<boost::filesystem::path> r;
-    r.push_front(ko.project_directory_path() / mn);
+    r.push_front(ko.output_directory_path() / mn);
     return r;
 }
 

@@ -34,7 +34,7 @@ knitting_options::knitting_options(knitting_options&& rhs)
       delete_extra_files_(std::move(rhs.delete_extra_files_)),
       force_write_(std::move(rhs.force_write_)),
       ignore_patterns_(std::move(rhs.ignore_patterns_)),
-      project_directory_path_(std::move(rhs.project_directory_path_)) { }
+      output_directory_path_(std::move(rhs.output_directory_path_)) { }
 
 knitting_options::knitting_options(
     const bool verbose,
@@ -42,13 +42,13 @@ knitting_options::knitting_options(
     const bool delete_extra_files,
     const bool force_write,
     const std::vector<std::string>& ignore_patterns,
-    const boost::filesystem::path& project_directory_path)
+    const boost::filesystem::path& output_directory_path)
     : verbose_(verbose),
       target_(target),
       delete_extra_files_(delete_extra_files),
       force_write_(force_write),
       ignore_patterns_(ignore_patterns),
-      project_directory_path_(project_directory_path) { }
+      output_directory_path_(output_directory_path) { }
 
 void knitting_options::swap(knitting_options& other) noexcept {
     using std::swap;
@@ -57,7 +57,7 @@ void knitting_options::swap(knitting_options& other) noexcept {
     swap(delete_extra_files_, other.delete_extra_files_);
     swap(force_write_, other.force_write_);
     swap(ignore_patterns_, other.ignore_patterns_);
-    swap(project_directory_path_, other.project_directory_path_);
+    swap(output_directory_path_, other.output_directory_path_);
 }
 
 bool knitting_options::operator==(const knitting_options& rhs) const {
@@ -66,7 +66,7 @@ bool knitting_options::operator==(const knitting_options& rhs) const {
         delete_extra_files_ == rhs.delete_extra_files_ &&
         force_write_ == rhs.force_write_ &&
         ignore_patterns_ == rhs.ignore_patterns_ &&
-        project_directory_path_ == rhs.project_directory_path_;
+        output_directory_path_ == rhs.output_directory_path_;
 }
 
 knitting_options& knitting_options::operator=(knitting_options other) {
@@ -131,20 +131,20 @@ void knitting_options::ignore_patterns(const std::vector<std::string>&& v) {
     ignore_patterns_ = std::move(v);
 }
 
-const boost::filesystem::path& knitting_options::project_directory_path() const {
-    return project_directory_path_;
+const boost::filesystem::path& knitting_options::output_directory_path() const {
+    return output_directory_path_;
 }
 
-boost::filesystem::path& knitting_options::project_directory_path() {
-    return project_directory_path_;
+boost::filesystem::path& knitting_options::output_directory_path() {
+    return output_directory_path_;
 }
 
-void knitting_options::project_directory_path(const boost::filesystem::path& v) {
-    project_directory_path_ = v;
+void knitting_options::output_directory_path(const boost::filesystem::path& v) {
+    output_directory_path_ = v;
 }
 
-void knitting_options::project_directory_path(const boost::filesystem::path&& v) {
-    project_directory_path_ = std::move(v);
+void knitting_options::output_directory_path(const boost::filesystem::path&& v) {
+    output_directory_path_ = std::move(v);
 }
 
 } }

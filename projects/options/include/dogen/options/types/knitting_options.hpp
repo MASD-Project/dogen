@@ -55,7 +55,7 @@ public:
         const bool delete_extra_files,
         const bool force_write,
         const std::vector<std::string>& ignore_patterns,
-        const boost::filesystem::path& project_directory_path);
+        const boost::filesystem::path& output_directory_path);
 
 private:
     template<typename Archive>
@@ -110,13 +110,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Path to the directory in which to place the generated code.
+     * @brief Full path to the directory in which to place the generated code.
      */
     /**@{*/
-    const boost::filesystem::path& project_directory_path() const;
-    boost::filesystem::path& project_directory_path();
-    void project_directory_path(const boost::filesystem::path& v);
-    void project_directory_path(const boost::filesystem::path&& v);
+    const boost::filesystem::path& output_directory_path() const;
+    boost::filesystem::path& output_directory_path();
+    void output_directory_path(const boost::filesystem::path& v);
+    void output_directory_path(const boost::filesystem::path&& v);
     /**@}*/
 
 public:
@@ -135,7 +135,7 @@ private:
     bool delete_extra_files_;
     bool force_write_;
     std::vector<std::string> ignore_patterns_;
-    boost::filesystem::path project_directory_path_;
+    boost::filesystem::path output_directory_path_;
 };
 
 } }

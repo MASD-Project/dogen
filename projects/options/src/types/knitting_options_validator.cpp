@@ -30,7 +30,7 @@ namespace {
 auto lg(logger_factory("options.knitting_options_validator"));
 
 const std::string missing_target("Mandatory parameter target is missing");
-const std::string missing_project_dir(
+const std::string missing_output_dir(
     "You must supply the project directory path for split projects");
 
 }
@@ -44,9 +44,9 @@ void knitting_options_validator::validate(const knitting_options& o) {
         BOOST_THROW_EXCEPTION(validation_error(missing_target));
     }
 
-    if (o.project_directory_path().empty()) {
-        BOOST_LOG_SEV(lg, error) << missing_project_dir;
-        BOOST_THROW_EXCEPTION(validation_error(missing_project_dir));
+    if (o.output_directory_path().empty()) {
+        BOOST_LOG_SEV(lg, error) << missing_output_dir;
+        BOOST_THROW_EXCEPTION(validation_error(missing_output_dir));
     }
 }
 

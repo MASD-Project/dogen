@@ -97,8 +97,8 @@ model workflow::execute(
     auto r(make_model(frp, m));
 
     const auto module_ids(obtain_module_ids(m));
-    const auto pdp(ko.project_directory_path());
-    const locator l(pdp, atrp, frp, ra, m.name(), module_ids);
+    const auto odp(ko.output_directory_path());
+    const locator l(odp, atrp, frp, ra, m.name(), module_ids);
     expand_model(atrp, ra, dpf, frp, l, r);
 
     return r;

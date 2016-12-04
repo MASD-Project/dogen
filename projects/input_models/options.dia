@@ -178,13 +178,13 @@
         <dia:point val="-59,-32"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-59.05,-32.05;-39.97,-25.15"/>
+        <dia:rectangle val="-59.05,-32.05;-40.355,-25.15"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-59,-32"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="18.98"/>
+        <dia:real val="18.594999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.8000000000000007"/>
@@ -394,7 +394,7 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#project_directory_path#</dia:string>
+            <dia:string>#output_directory_path#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#boost::filesystem::path#</dia:string>
@@ -403,7 +403,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Path to the directory in which to place the generated code.#</dia:string>
+            <dia:string>#Full path to the directory in which to place the generated code.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -622,7 +622,7 @@
         <dia:point val="-33,-32"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-49.56,-37.75;-32.25,-31.2"/>
+        <dia:rectangle val="-49.7525,-37.75;-32.25,-31.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -630,8 +630,8 @@
       <dia:attribute name="orth_points">
         <dia:point val="-33,-32"/>
         <dia:point val="-33,-37"/>
-        <dia:point val="-49.51,-37"/>
-        <dia:point val="-49.51,-32"/>
+        <dia:point val="-49.7025,-37"/>
+        <dia:point val="-49.7025,-32"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

@@ -48,7 +48,7 @@ namespace formattables {
 class locator {
 public:
     locator(
-        const boost::filesystem::path& project_directory_path,
+        const boost::filesystem::path& output_directory_path,
         const annotations::type_repository& atrp,
         const formatters::repository& frp, const annotations::annotation& root,
         const yarn::name& model_name,
@@ -102,7 +102,7 @@ private:
      * @brief Returns the absolute path to the project folder.
      */
     boost::filesystem::path make_project_path(
-        const boost::filesystem::path& project_directory_path,
+        const boost::filesystem::path& output_directory_path,
         const yarn::name& model_name) const;
 
     /**

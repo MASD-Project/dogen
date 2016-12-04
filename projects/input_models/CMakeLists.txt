@@ -25,7 +25,7 @@ add_custom_target(knit_${target}
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
     --target ${models_dir}/${target}.dia
-    --project-dir ${projects_dir}/
+    --output-dir ${projects_dir}/
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/test/.*
     --ignore-files-matching-regex .*/tests/.*
@@ -42,7 +42,7 @@ add_custom_target(knit_${target}
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
     --target ${models_dir}/${target}.dia
-    --project-dir ${projects_dir}/
+    --output-dir ${projects_dir}/
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/tests/.*
     --ignore-files-matching-regex .*/test/.*
@@ -59,7 +59,7 @@ add_custom_target(knit_${target}
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
     --target ${models_dir}/${target}.dia
-    --project-dir ${projects_dir}/
+    --output-dir ${projects_dir}/
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/test/.*
     --ignore-files-matching-regex .*/tests/.*
@@ -76,7 +76,7 @@ add_custom_target(knit_${target}
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
     --target ${models_dir}/${target}.dia
-    --project-dir ${projects_dir}/
+    --output-dir ${projects_dir}/
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/test/.*
     --ignore-files-matching-regex .*/tests/.*
@@ -93,7 +93,7 @@ add_custom_target(knit_${target}
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
     --target ${models_dir}/${target}.dia
-    --project-dir ${projects_dir}/
+    --output-dir ${projects_dir}/
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/tests/.*
     --verbose
@@ -109,7 +109,7 @@ add_custom_target(knit_${target}
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
     --target ${models_dir}/${target}.dia
-    --project-dir ${projects_dir}/
+    --output-dir ${projects_dir}/
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/tests/.*
     --ignore-files-matching-regex .*/test/.*
@@ -126,7 +126,7 @@ add_custom_target(knit_${target}
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
     --target ${models_dir}/${target}.dia
-    --project-dir ${projects_dir}/test_models
+    --output-dir ${projects_dir}/test_models
     --ignore-files-matching-regex .*CMakeLists.txt
     --ignore-files-matching-regex .*/test/.*
     --ignore-files-matching-regex .*/tests/.*
@@ -145,7 +145,7 @@ add_custom_target(knit_${target}
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
     --target ${models_dir}/${target}.dia
-    --project-dir ${projects_dir}/
+    --output-dir ${projects_dir}/
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/tests/.*
     --verbose
@@ -161,7 +161,7 @@ add_custom_target(knit_${target}
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
     --target ${models_dir}/${target}.dia
-    --project-dir ${projects_dir}/
+    --output-dir ${projects_dir}/
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/tests/.*
     --ignore-files-matching-regex .*/test/.*
@@ -178,7 +178,7 @@ add_custom_target(knit_${target}
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
     --target ${models_dir}/${target}.dia
-    --project-dir ${projects_dir}/
+    --output-dir ${projects_dir}/
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/tests/.*
     --ignore-files-matching-regex .*/test/.*
@@ -196,7 +196,7 @@ add_custom_target(knit_${target}
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
     --target ${models_dir}/${target}.dia
-    --project-dir ${projects_dir}/
+    --output-dir ${projects_dir}/
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/tests/.*
     --ignore-files-matching-regex .*/test/.*
@@ -213,7 +213,7 @@ add_custom_target(knit_${target}
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
     --target ${models_dir}/${target}.dia
-    --project-dir ${projects_dir}/
+    --output-dir ${projects_dir}/
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/tests/.*
     --ignore-files-matching-regex .*/test/.*
@@ -230,7 +230,7 @@ add_custom_target(knit_${target}
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
     --target ${models_dir}/${target}.dia
-    --project-dir ${projects_dir}/
+    --output-dir ${projects_dir}/
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/tests/.*
     --ignore-files-matching-regex .*/test/.*
@@ -247,7 +247,7 @@ add_custom_target(knit_${target}
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
     --target ${models_dir}/${target}.dia
-    --project-dir ${projects_dir}/
+    --output-dir ${projects_dir}/
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/tests/.*
     --ignore-files-matching-regex .*/test/.*

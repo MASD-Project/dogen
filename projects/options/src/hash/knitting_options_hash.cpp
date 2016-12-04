@@ -55,7 +55,7 @@ std::size_t knitting_options_hasher::hash(const knitting_options& v) {
     combine(seed, v.delete_extra_files());
     combine(seed, v.force_write());
     combine(seed, hash_std_vector_std_string(v.ignore_patterns()));
-    combine(seed, hash_boost_filesystem_path(v.project_directory_path()));
+    combine(seed, hash_boost_filesystem_path(v.output_directory_path()));
 
     return seed;
 }
