@@ -23,6 +23,10 @@ can continue to test end to end one of the frontends (dia).
 We had command line options available in the past that generated only
 a merged model. We need to look into the backlog for these.
 
+This is a problem specially in light of adding new backends because
+now we are code-generating the cross product of frontends and
+backends.
+
 *** Problems in tailor generation                                     :story:
 
 Address these issues:
