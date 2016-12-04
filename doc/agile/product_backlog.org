@@ -11,6 +11,18 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Consider simplifying frontend testing                             :story:
+
+At present we are outputting code for every supported frontend, and
+then checking they are binary identical. This is fine given that we
+only have two frontends. Once we had a visual studio frontend, it may
+make more sense to stop generating code for all frontends and simply
+diff the middle-end to ensure we generate an identical yarn model. We
+can continue to test end to end one of the frontends (dia).
+
+We had command line options available in the past that generated only
+a merged model. We need to look into the backlog for these.
+
 *** Problems in tailor generation                                     :story:
 
 Address these issues:
