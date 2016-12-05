@@ -20,15 +20,15 @@
  */
 #include <boost/algorithm/string/join.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/quilt.csharp/types/traits.hpp"
 #include "dogen/quilt.csharp/types/workflow.hpp"
 
 namespace {
 
-const std::string name("quilt.csharp.workflow");
-
 using namespace dogen::utility::log;
-static logger lg(logger_factory(name));
+static logger lg(logger_factory("quilt.csharp.workflow"));
 
+const std::string empty;
 const std::string dot(".");
 
 }
@@ -38,10 +38,6 @@ namespace quilt {
 namespace csharp {
 
 workflow::~workflow() noexcept { }
-
-std::string workflow::name() const {
-    return ::name;
-}
 
 std::forward_list<boost::filesystem::path> workflow::
 managed_directories(const options::knitting_options& ko,
@@ -54,13 +50,19 @@ managed_directories(const options::knitting_options& ko,
 }
 
 annotations::archetype_location workflow::archetype_location() const {
-    annotations::archetype_location r;
+    static annotations::archetype_location r(traits::family(), traits::kernel(),
+        empty/*facet*/, empty/*archetype*/);
     return r;
 }
 
 std::forward_list<annotations::archetype_location>
 workflow::archetype_locations() const {
     std::forward_list<annotations::archetype_location> r;
+    r.push_front(
+        annotations::archetype_location(traits::family(), traits::kernel(),
+            traits::kernel() + dot + "types",
+            traits::kernel() + dot + "types.class")
+        );
     return r;
 }
 

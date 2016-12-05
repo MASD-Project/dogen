@@ -50,11 +50,6 @@ public:
 
 public:
     /**
-     * @brief Name of the backend. It must be unique.
-     */
-    virtual std::string name() const = 0;
-
-    /**
      * @brief Returns all directories managed by this backend.
      */
     virtual std::forward_list<boost::filesystem::path>
@@ -63,6 +58,9 @@ public:
 
     /**
      * @brief The artefact location for the backend itself.
+     *
+     * Note that this is not a "true" archetype location, but a
+     * location of a container of archetypes (the kernel).
      */
     virtual annotations::archetype_location archetype_location() const = 0;
 

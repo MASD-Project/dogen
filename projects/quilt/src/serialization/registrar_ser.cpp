@@ -27,19 +27,20 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/yarn/serialization/registrar_ser.hpp"
+#include "dogen/quilt/serialization/registrar_ser.hpp"
 #include "dogen/options/serialization/registrar_ser.hpp"
-#include "dogen/annotations/serialization/registrar_ser.hpp"
 #include "dogen/formatters/serialization/registrar_ser.hpp"
+#include "dogen/annotations/serialization/registrar_ser.hpp"
 
 namespace dogen {
 namespace quilt {
 
 template<typename Archive>
 void register_types(Archive& ar) {
-    dogen::options::register_types(ar);
     dogen::formatters::register_types(ar);
-    dogen::yarn::register_types(ar);
+    dogen::options::register_types(ar);
     dogen::annotations::register_types(ar);
+    dogen::yarn::register_types(ar);
 }
 
 template void register_types(boost::archive::polymorphic_oarchive& ar);

@@ -18,11 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_SERIALIZATION_ALL_SER_HPP
-#define DOGEN_QUILT_SERIALIZATION_ALL_SER_HPP
+#ifndef DOGEN_QUILT_TYPES_TRAITS_HPP
+#define DOGEN_QUILT_TYPES_TRAITS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
+
+#include <string>
+
+namespace dogen {
+namespace quilt {
+
+struct traits final {
+    static std::string enabled();
+};
+
+} }
 
 #endif

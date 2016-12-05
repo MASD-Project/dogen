@@ -12,26 +12,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-12-05 Mon 20:38]
+#+CAPTION: Clock summary at [2016-12-05 Mon 21:29]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *25:16* |       |      | 100.0 |
+| *Total time*                                                                | *26:06* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 25:16   |       |      | 100.0 |
-| Active                                                                      |         | 25:16 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:51 |   7.3 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 1:02 |   4.1 |
+| Stories                                                                     | 26:06   |       |      | 100.0 |
+| Active                                                                      |         | 26:06 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:51 |   7.1 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 1:02 |   4.0 |
 | COMPLETED Update readme                                                     |         |       | 0:11 |   0.7 |
-| COMPLETED Test data generation for dates generates invalid dates            |         |       | 0:33 |   2.2 |
-| COMPLETED Handle missing stitch templates scenario                          |         |       | 1:04 |   4.2 |
-| COMPLETED Move project directory to output options                          |         |       | 1:10 |   4.6 |
-| COMPLETED Update the conceptual model to clarify backends and kernels       |         |       | 4:20 |  17.2 |
-| COMPLETED Detect knitter and disable code generation accordingly            |         |       | 1:15 |   4.9 |
-| COMPLETED Clean up kernel and backend confusion                             |         |       | 5:17 |  20.9 |
-| STARTED Add a "language" directory for each backend                         |         |       | 2:15 |   8.9 |
-| STARTED Add support for C#                                                  |         |       | 5:46 |  22.8 |
-| STARTED Add support for Decimal numbers                                     |         |       | 0:32 |   2.1 |
+| COMPLETED Test data generation for dates generates invalid dates            |         |       | 0:33 |   2.1 |
+| COMPLETED Handle missing stitch templates scenario                          |         |       | 1:04 |   4.1 |
+| COMPLETED Move project directory to output options                          |         |       | 1:10 |   4.5 |
+| COMPLETED Update the conceptual model to clarify backends and kernels       |         |       | 4:20 |  16.6 |
+| COMPLETED Detect knitter and disable code generation accordingly            |         |       | 1:15 |   4.8 |
+| COMPLETED Clean up kernel and backend confusion                             |         |       | 5:17 |  20.2 |
+| STARTED Add a "language" directory for each backend                         |         |       | 3:05 |  11.8 |
+| STARTED Add support for C#                                                  |         |       | 5:46 |  22.1 |
+| STARTED Add support for Decimal numbers                                     |         |       | 0:32 |   2.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -211,6 +211,7 @@ interrelated. However, we've moved out any work which is not strictly
 required and done all the required work in one go.
 
 *** STARTED Add a "language" directory for each backend               :story:
+    CLOCK: [2016-12-05 Mon 20:39]--[2016-12-05 Mon 21:29] =>  0:50
     CLOCK: [2016-12-05 Mon 20:17]--[2016-12-05 Mon 20:38] =>  0:21
     CLOCK: [2016-12-05 Mon 20:01]--[2016-12-05 Mon 20:16] =>  0:15
     CLOCK: [2016-12-05 Mon 17:27]--[2016-12-05 Mon 18:08] =>  0:41
@@ -296,6 +297,16 @@ Create a quilt model for C#.
 
 - try using ICU DecNumber library.
 - check compiler support (MSVC may have decimals; if so, use that instead)
+
+*** Knitting =quilt= does not work                                    :story:
+
+When we invoke =knit_quilt= for some reason we seem to knit
+=quilt.cpp=:
+
+: $ ninja knit_quilt
+: [1/1] Knitting Quilt C++ model
+
+This seems to be some kind of ninja "feature".
 
 *** Use templates for directory and prefix fields                     :story:
 

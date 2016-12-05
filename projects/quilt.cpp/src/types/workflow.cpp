@@ -22,17 +22,17 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/formatters/types/repository_factory.hpp"
+#include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/workflow.hpp"
 #include "dogen/quilt.cpp/types/formattables/workflow.hpp"
 #include "dogen/quilt.cpp/types/workflow.hpp"
 
 namespace {
 
-const std::string name("quilt.cpp.workflow");
-
 using namespace dogen::utility::log;
-static logger lg(logger_factory(name));
+static logger lg(logger_factory("quilt.cpp.workflow"));
 
+const std::string empty;
 const std::string dot(".");
 
 }
@@ -77,10 +77,6 @@ formattables::model workflow::create_formattables_model(
     return fw.execute(ko, atrp, ra, dpf, frp, m);
 }
 
-std::string workflow::name() const {
-    return ::name;
-}
-
 std::forward_list<boost::filesystem::path>
 workflow::managed_directories(const options::knitting_options& ko,
     const yarn::name& model_name) const {
@@ -101,7 +97,8 @@ workflow::format(const annotations::type_repository& atrp,
 }
 
 annotations::archetype_location workflow::archetype_location() const {
-    static annotations::archetype_location r;
+    static annotations::archetype_location r(traits::family(), traits::kernel(),
+        empty/*facet*/, empty/*archetype*/);
     return r;
 }
 

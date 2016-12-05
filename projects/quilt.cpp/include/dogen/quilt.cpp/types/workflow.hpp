@@ -95,8 +95,6 @@ private:
         const formattables::model& fm) const;
 
 public:
-    std::string name() const override;
-
     std::forward_list<boost::filesystem::path>
     managed_directories(const options::knitting_options& ko,
         const yarn::name& model_name) const override;

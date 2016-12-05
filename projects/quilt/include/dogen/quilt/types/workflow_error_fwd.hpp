@@ -25,9 +25,6 @@
 #pragma once
 #endif
 
-#include <string>
-#include <boost/exception/info.hpp>
-
 namespace dogen {
 namespace quilt {
 

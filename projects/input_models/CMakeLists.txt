@@ -76,6 +76,20 @@ if (DOGEN_KNITTER_COMMAND)
         --delete-extra-files)
     add_dependencies(knit_all knit_${target})
 
+    set(target quilt)
+    add_custom_target(knit_${target}
+        COMMENT "Knitting Quilt model" VERBATIM
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+        COMMAND ${DOGEN_KNITTER_COMMAND}
+        --target ${models_dir}/${target}.dia
+        --output-dir ${projects_dir}/
+        --ignore-files-matching-regex .*/CMakeLists.txt
+        --ignore-files-matching-regex .*/tests/.*
+        --ignore-files-matching-regex .*/test/.*
+        --verbose
+        --delete-extra-files)
+    add_dependencies(knit_all knit_${target})
+
     set(target quilt.cpp)
     add_custom_target(knit_${target}
         COMMENT "Knitting Quilt C++ model" VERBATIM
@@ -149,20 +163,6 @@ if (DOGEN_KNITTER_COMMAND)
     set(target formatters)
     add_custom_target(knit_${target}
         COMMENT "Knitting the Formatters Model" VERBATIM
-        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${DOGEN_KNITTER_COMMAND}
-        --target ${models_dir}/${target}.dia
-        --output-dir ${projects_dir}/
-        --ignore-files-matching-regex .*/CMakeLists.txt
-        --ignore-files-matching-regex .*/tests/.*
-        --ignore-files-matching-regex .*/test/.*
-        --verbose
-        --delete-extra-files)
-    add_dependencies(knit_all knit_${target})
-
-    set(target quilt)
-    add_custom_target(knit_${target}
-        COMMENT "Knitting Quilt model" VERBATIM
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
         COMMAND ${DOGEN_KNITTER_COMMAND}
         --target ${models_dir}/${target}.dia

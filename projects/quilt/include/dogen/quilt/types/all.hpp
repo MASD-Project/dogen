@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include "dogen/quilt/types/traits.hpp"
 #include "dogen/quilt/types/workflow.hpp"
 #include "dogen/quilt/types/workflow_error.hpp"
 #include "dogen/quilt/types/registrar_error.hpp"
