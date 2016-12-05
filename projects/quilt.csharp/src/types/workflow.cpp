@@ -37,7 +37,7 @@ namespace dogen {
 namespace quilt {
 namespace csharp {
 
-workflow::~workflow() { }
+workflow::~workflow() noexcept { }
 
 std::string workflow::name() const {
     return ::name;
