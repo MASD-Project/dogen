@@ -88,7 +88,8 @@ std::ostream& operator<<(std::ostream& s, const locator_configuration& v) {
       << "\"source_directory_name\": " << "\"" << tidy_up_string(v.source_directory_name()) << "\"" << ", "
       << "\"disable_facet_directories\": " << v.disable_facet_directories() << ", "
       << "\"header_file_extension\": " << "\"" << tidy_up_string(v.header_file_extension()) << "\"" << ", "
-      << "\"implementation_file_extension\": " << "\"" << tidy_up_string(v.implementation_file_extension()) << "\""
+      << "\"implementation_file_extension\": " << "\"" << tidy_up_string(v.implementation_file_extension()) << "\"" << ", "
+      << "\"kernel_directory_name\": " << "\"" << tidy_up_string(v.kernel_directory_name()) << "\""
       << " }";
     return(s);
 }

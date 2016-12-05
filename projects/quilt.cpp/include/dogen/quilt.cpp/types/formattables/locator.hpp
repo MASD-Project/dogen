@@ -52,7 +52,8 @@ public:
         const annotations::type_repository& atrp,
         const formatters::repository& frp, const annotations::annotation& root,
         const yarn::name& model_name,
-        const std::unordered_set<std::string>& module_ids);
+        const std::unordered_set<std::string>& module_ids,
+        const bool requires_kernel_directory);
 
 private:
     struct facet_type_group {
@@ -103,7 +104,8 @@ private:
      */
     boost::filesystem::path make_project_path(
         const boost::filesystem::path& output_directory_path,
-        const yarn::name& model_name) const;
+        const yarn::name& model_name, const locator_configuration& lc,
+        const bool requires_kernel_directory) const;
 
     /**
      * @brief Generates the facet path segment of a file path.

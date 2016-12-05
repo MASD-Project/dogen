@@ -65,6 +65,7 @@ std::size_t locator_configuration_hasher::hash(const locator_configuration& v) {
     combine(seed, v.disable_facet_directories());
     combine(seed, v.header_file_extension());
     combine(seed, v.implementation_file_extension());
+    combine(seed, v.kernel_directory_name());
 
     return seed;
 }

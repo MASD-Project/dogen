@@ -54,7 +54,8 @@ public:
         const std::string& source_directory_name,
         const bool disable_facet_directories,
         const std::string& header_file_extension,
-        const std::string& implementation_file_extension);
+        const std::string& implementation_file_extension,
+        const std::string& kernel_directory_name);
 
 private:
     template<typename Archive>
@@ -97,6 +98,11 @@ public:
     void implementation_file_extension(const std::string& v);
     void implementation_file_extension(const std::string&& v);
 
+    const std::string& kernel_directory_name() const;
+    std::string& kernel_directory_name();
+    void kernel_directory_name(const std::string& v);
+    void kernel_directory_name(const std::string&& v);
+
 public:
     bool operator==(const locator_configuration& rhs) const;
     bool operator!=(const locator_configuration& rhs) const {
@@ -115,6 +121,7 @@ private:
     bool disable_facet_directories_;
     std::string header_file_extension_;
     std::string implementation_file_extension_;
+    std::string kernel_directory_name_;
 };
 
 } } } }

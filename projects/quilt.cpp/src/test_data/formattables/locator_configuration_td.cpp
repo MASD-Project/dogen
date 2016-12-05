@@ -79,6 +79,7 @@ populate(const unsigned int position, result_type& v) {
     v.disable_facet_directories(create_bool(position + 4));
     v.header_file_extension(create_std_string(position + 5));
     v.implementation_file_extension(create_std_string(position + 6));
+    v.kernel_directory_name(create_std_string(position + 7));
 }
 
 locator_configuration_generator::result_type

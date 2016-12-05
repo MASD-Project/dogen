@@ -132,7 +132,7 @@ workflow::execute(const yarn::model& m) const {
     const auto tgs(make_type_groups(repository_));
     const auto ra(m.root_module().annotation());
     const auto eb(obtain_enabled_backends(tgs, ra));
-
+    const bool requires_kernel_directory(eb.size() > 1);
 
     std::forward_list<formatters::artefact> r;
     for(const auto b : registrar().backends()) {
@@ -142,11 +142,12 @@ workflow::execute(const yarn::model& m) const {
         const auto is_enabled(eb.find(kernel) != eb.end());
         if (!is_enabled) {
             BOOST_LOG_SEV(lg, warn) << "Backend is not enabled: " << kernel;
-            return r;
+            continue;
         }
 
         const auto& ko(knitting_options_);
-        auto files(b->generate(ko, repository_, annotation_factory_, m));
+        const bool rkd(requires_kernel_directory);
+        auto files(b->generate(ko, repository_, annotation_factory_, rkd, m));
         BOOST_LOG_SEV(lg, debug) << "Generated files for : " << kernel
                                  << ". Total files: "
                                  << std::distance(files.begin(), files.end());

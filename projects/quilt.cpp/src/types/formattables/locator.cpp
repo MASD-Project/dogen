@@ -54,11 +54,13 @@ namespace formattables {
 locator::locator(const boost::filesystem::path& output_directory_path,
     const annotations::type_repository& atrp, const formatters::repository& frp,
     const annotations::annotation& root, const yarn::name& model_name,
-    const std::unordered_set<std::string>& module_ids)
+    const std::unordered_set<std::string>& module_ids,
+    const bool requires_kernel_directory)
     : model_name_(model_name),
       configuration_(make_configuration(atrp, frp, root)),
       module_ids_(module_ids),
-      project_path_(make_project_path(output_directory_path, model_name)) {}
+      project_path_(make_project_path(output_directory_path, model_name,
+              configuration_, requires_kernel_directory)) {}
 
 locator::type_group locator::make_type_group(
     const annotations::type_repository& atrp,
@@ -196,12 +198,18 @@ configuration_for_archetype(const std::string& archetype) const {
 
 boost::filesystem::path locator::make_project_path(
     const boost::filesystem::path& output_directory_path,
-    const yarn::name& model_name) const {
+    const yarn::name& model_name, const locator_configuration& lc,
+    const bool requires_kernel_directory) const {
 
     boost::filesystem::path r;
     const auto& mmp(model_name.location().model_modules());
     r = output_directory_path;
     r /= boost::algorithm::join(mmp, dot);
+    if (requires_kernel_directory) {
+        // FIXME: check directory name is not empty
+        r /= lc.kernel_directory_name();
+    }
+
     return r;
 }
 
