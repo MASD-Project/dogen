@@ -12,22 +12,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-12-04 Sun 18:52]
+#+CAPTION: Clock summary at [2016-12-05 Mon 00:34]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *12:09* |       |      | 100.0 |
+| *Total time*                                                                | *16:56* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 12:09   |       |      | 100.0 |
-| Active                                                                      |         | 12:09 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:51 |  15.2 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 1:02 |   8.5 |
-| COMPLETED Update readme                                                     |         |       | 0:11 |   1.5 |
-| COMPLETED Test data generation for dates generates invalid dates            |         |       | 0:33 |   4.5 |
-| COMPLETED Handle missing stitch templates scenario                          |         |       | 1:04 |   8.8 |
-| COMPLETED Move project directory to output options                          |         |       | 1:10 |   9.6 |
-| STARTED Add support for Decimal numbers                                     |         |       | 0:32 |   4.4 |
-| STARTED Add support for C#                                                  |         |       | 5:46 |  47.5 |
+| Stories                                                                     | 16:56   |       |      | 100.0 |
+| Active                                                                      |         | 16:56 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:51 |  10.9 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 1:02 |   6.1 |
+| COMPLETED Update readme                                                     |         |       | 0:11 |   1.1 |
+| COMPLETED Test data generation for dates generates invalid dates            |         |       | 0:33 |   3.2 |
+| COMPLETED Handle missing stitch templates scenario                          |         |       | 1:04 |   6.3 |
+| COMPLETED Move project directory to output options                          |         |       | 1:10 |   6.9 |
+| STARTED Update the conceptual model to clarify backends and kernels         |         |       | 3:16 |  19.3 |
+| STARTED Clean up kernel and backend confusion                               |         |       | 0:54 |   5.3 |
+| STARTED Add support for Decimal numbers                                     |         |       | 0:32 |   3.1 |
+| STARTED Add support for C#                                                  |         |       | 5:46 |  34.1 |
+| STARTED Add a "language" directory for each backend                         |         |       | 0:37 |   3.6 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -140,6 +143,36 @@ output options and delete the class.
 Actually we have so few options now that it makes more sense to just
 merge them into a single class.
 
+*** STARTED Update the conceptual model to clarify backends and kernels :story:
+    CLOCK: [2016-12-04 Sun 23:13]--[2016-12-05 Mon 00:33] =>  1:20
+    CLOCK: [2016-12-04 Sun 20:36]--[2016-12-04 Sun 22:32] =>  1:56
+
+It seems we did not do a great job at our first stab of the conceptual
+model. Add the required clarifications for kernel and backends and do
+a small tidy-up to ensure what's there makes sense.
+
+
+*** STARTED Clean up kernel and backend confusion                     :story:
+    CLOCK: [2016-12-04 Sun 19:41]--[2016-12-04 Sun 20:35] =>  0:54
+
+We made it clear in the conceptual model that a kernel is made up of
+one or more backends, but this was not carried out in the code
+base. Now we need to instantiate multiple backends, we need to clean
+up these terms.
+
+Actually, the conceptual model is not quite as finished as we
+expected. It doesn't really clarify backends or kernels, but seems to
+imply that a kernel is what we've been calling a sub-kernel.
+
+Tasks:
+
+- clean up these definitions in the conceptual model.
+- rename model in annotations to backend (templates).
+- add backend to archetype location, and update existing kernel to be
+  just the kernel rather than the backend.
+- rename all data files that refer to it, update JSON processing
+  etc.
+
 *** STARTED Add support for Decimal numbers                           :story:
     CLOCK: [2016-11-30 Wed 13:04]--[2016-11-30 Wed 13:36] =>  0:32
 
@@ -160,6 +193,51 @@ merge them into a single class.
     CLOCK: [2016-11-30 Wed 13:37]--[2016-11-30 Wed 15:00] =>  1:23
 
 Create a quilt model for C#.
+
+*** STARTED Add a "language" directory for each backend               :story:
+    CLOCK: [2016-12-04 Sun 19:37]--[2016-12-04 Sun 19:40] =>  0:03
+    CLOCK: [2016-12-04 Sun 18:53]--[2016-12-04 Sun 19:27] =>  0:34
+
+In order to support multiple backends, we need to split the project
+directory by backend - which maps to a programming language (at least
+at present). For example:
+
+: cpp
+: csharp
+: ...
+
+Note that we do not support multiple kernels at present, but this
+could easily be achieved by adding the kernel to the directory name:
+
+: quilt.cpp
+: quilt.csharp
+: ...
+
+The splitting of the output directory should only kick in when there
+are two or more enabled backends. We also need to ensure there is
+at least one enabled backend.
+
+For this to work we need:
+
+- =enabled= as a backend template, expanded for all available
+  backends. The field needs to move up to the =quilt= configuration.
+- =quilt= to check the conditions set above and inform the backends
+  that they need to use the backend directory or not. We could
+  optionally have a switch that forces always using backend
+  directory. This is useful in cases where users have some models only
+  for one language, but others models which use more than one language
+  and want to use a consistent directory layout.
+- add a backend field for the kernel directory name; this can also be
+  a backend template. This allows users to configure the directory
+  name.
+
+Tasks:
+
+- add quilt level fields. Ensure we have at least one formatter in
+  =quilt.csharp=, with a archetype location so that we generate its
+  fields.
+- set =quilt.csharp.enabled= to false on all test models to start off
+  with, and update them as we start adding C# support.
 
 *** Add an example of redis and dogen                                 :story:
 

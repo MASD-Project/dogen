@@ -30,6 +30,8 @@
 \usepackage{etoolbox}
 \usepackage{titlesec}
 
+\newtheorem{concept}{Definition}
+
 \makeatletter
 
 % First, modify the \@endpart macro.
@@ -271,62 +273,238 @@ objective is to provide a narrative that ties all of Dogen into a
 single, coherent and unified whole, creating the conceptual framework
 needed to implement its vision. Not all of the elements of the
 \texttt{conceptual model} map directly to code, and those that do
-don't always map with a low impedance mismatch. However, we do strive
-to reduce these mismatches as much as possible.
+don't always map with a low impedance mismatch.
 
-All the entities that live in the \texttt{conceptual model} are called
+Entities that live in the \texttt{conceptual model} are called
 \texttt{conceptual elements}. We shall now define all of the
-\texttt{conceptual elements}, starting from the \texttt{output model}.
+\texttt{conceptual elements}, adding some commentary where applicable
+to try to clarify the ideas behind them.
 
-The \texttt{output model} is made up of the set of files the end user
-is interested in generating. These are located below a directory
-called the \texttt{output model directory}, where each file is a
-distinct element in the set. Each file has a one-to-one mapping to an
-\texttt{artefact}. An \texttt{artefact} is a generalisation of the
-notion of \emph{file}, since the \texttt{artefact} may exist in memory
-as an object, in a database as a record and so forth, whereas
-\emph{file} here is understood as the traditional Operative System
-concept. Both files and \texttt{artefacts} have an associated
-\texttt{content}, defined as a set of bytes. Note that two files are
-entities with distinct identities even if they have the same content,
-and the same applies to \texttt{artefacts}.
+\begin{concept}
+  The \texttt{physical model} is defined as the set of files deemed of
+  interest by the end user.
+\end{concept}
 
+\begin{concept}
+  The \texttt{physical model} has a physical location called the
+  \texttt{physical model directory}~--- also known as the
+  \texttt{physical directory}.
+\end{concept}
+
+\begin{concept}
+  Each file in the \texttt{physical model} is uniquely identifiable by
+  its path, relative to the \texttt{physical directory}.
+\end{concept}
+
+The \texttt{physical model} is called ``physical'' because it has a
+physical representation as a set of files on a file system
+somewhere. A ``file'' here is understood as the operative system
+concept, as are ``directories'' and related notions. It is important
+to notice that there is no direct relationship between the
+\texttt{physical model} and the end user's view of a ``project'' in a
+``programming language'', or any other such constructs; the
+\texttt{physical model} generalises these notions. Mappings can of
+course be made between these two worlds~--- and we will do so via
+examples to clarify intent~--- but there is no requirement for such
+mapping to exist at the conceptual level.
+
+Note also that each file under the \texttt{physical directory} is
+considered a distinct element in the set of the \texttt{physical
+  model}, even if it has the same content as other files in the
+\texttt{physical directory}.
+
+\begin{concept}
+  An \texttt{artefact} is defined as a logical representation of a
+  file. A \texttt{logical model} is defined as a set of
+  \texttt{artefacts}, where each \texttt{artefact} maps to a file in a
+  \texttt{physical model}.
+\end{concept}
+
+The \texttt{logical model} is a generalisation of the notion of the
+\texttt{physical model}. By ``logical'' we mean to say that an
+\texttt{artefact} may exist in memory as an object, in a database as a
+record and so forth, whereas a \emph{file} here is understood as
+living just on a file system. It is always trivially possible to
+obtain an \texttt{artefact} from a file and vice-versa. Both files and
+\texttt{artefacts} have an associated \texttt{content}, defined as a
+set of bytes; as with files, two \texttt{artefacts} are distinct
+entities with identity even if they happen to have the same content.
+
+The main objective of this definition is to move from a physical world
+to a logical world, on which we will focus from now on.
+
+\begin{concept}
+  The \texttt{generatable artefact set} is the subset of artefacts in
+  the \texttt{logical model} which can be created by automated means.
+\end{concept}
+
+\begin{concept}
+  The \texttt{handcrafted artefact set} is the subset of artefacts in
+  the \texttt{logical model} which cannot be created by automated
+  means.
+\end{concept}
+
+\begin{concept}
+  The union of the \texttt{handcrafted artefact set} and the
+  \texttt{generatable artefact set} is equal to the \texttt{logical
+    model}.
+\end{concept}
+
+\begin{concept}
+  A \texttt{generatable artefact} is an \texttt{artefact} which is a
+  member of the \texttt{generatable artefact set}.
+\end{concept}
+
+The definitions so far are probably best clarified by means of a
+device: let's imagine that you have a hard-drive full of text files,
+organised in multiple directories. Let's say you choose a directory at
+random, take all the files located on it and below it and convert them
+all to \texttt{artefacts}~--- whatever that conversion entails. Now
+say you perform a classification which simply splits the
+\texttt{artefacts} into two buckets: those which you can produce using
+a ``trivial function''~--- a notion which we shall not bother to
+further qualify~--- and those which you cannot. For the purpose of
+this example, let's imagine some files are merely permutations of
+letters like ``AABBCC'' whilst others contain complex content like
+Shakespeare's Hamlet. We can now map these to the definitions above:
+the \texttt{physical directory} is the directory you have chosen as
+the starting point for the categorisation exercise; the
+\texttt{artefacts} with patterns like ``AABBCC'' make up the
+\texttt{generatable artefact set} whilst the remaining files are part
+of the \texttt{handcrafted artefact set}.
+
+\begin{concept}
 An \texttt{artefact} is composed of a set of instances of
-\texttt{structural elements}; these vary depending on the
-artefact. \texttt{structural elements} may contain other
-\texttt{structural elements}. Examples of \texttt{structural elements}
-are: ``C++ header file'', ``class definition'', ``constructor
-definition''. Some of these \texttt{structural elements} may be common
-across artefacts; these are called \texttt{aspects}.
+\texttt{structural features}.
+\end{concept}
 
-An \texttt{artefact} may have a meta-type associated with it: its
-\texttt{archetype}.  An \texttt{archetype} is an entity with
-identity. An \texttt{archetype} is associated with a set of
-\texttt{structural elements}. Not all \texttt{structural elements}
-that belong to an \texttt{archetype} need be present on all of its
-associated \texttt{artefacts}; however, all \texttt{structural
-  elements} of an \texttt{artefact} must be contained in its
-\texttt{archetype}. In addition, whilst \texttt{artefacts} are
-specific to an \texttt{output model}, \texttt{archetypes} span a set
-of \texttt{output models} because, by definition, their objective is
-to extract structural commonalities between them. An example of an
-\texttt{archetype} is: ``header file providing the definition of a
-domain type in a programming language P''.
+Continuing with our previous example, lets further suppose that we
+choose a different directory and the files we find can be grouped
+according to their structure; some of these files define C++ class
+headers, whilst others contain their implementations. The
+\texttt{structural features} you may be interested in would be
+something like ``C++ header file'', ``class definition'',
+``constructor'' and so forth. In some cases, you find that
+\texttt{structural features} contain other \texttt{structural
+  features}, whilst others do not.
 
+It is important to keep in mind that \texttt{structural features} are
+not directly related to programming language constructs. It just so
+happens that it is possible to map some \texttt{structural features}
+to programming language constructs~--- but it's not always possible on
+all cases. Note also that at the \texttt{conceptual model} level we
+are not particularly interested in defining an exhaustive list of
+\texttt{structural features}; it will later became clearer why that is
+the case.
+
+\begin{concept}
+An \texttt{artefact} may have a meta-type associated with it, called
+its \texttt{archetype}. An \texttt{archetype} is an entity with
+identity. An \texttt{artefact} is an instance of one and only one
+\texttt{archetype}.
+\end{concept}
+
+We first moved ``side-ways'' from physical space to logical space; we
+now have moved ``upwards'' inside logical space. Let's take a C++
+header file as an example. A given header file~--- say one declaring
+``class X''~--- is an \texttt{artefact} in our \texttt{logical
+  model}. One can conceive of many such header files in the
+\texttt{logical model}, all of them are instances of the same
+\texttt{archetype} representing declarations of C++
+classes. Similarly, the class implementation would be another
+\texttt{archetype}.
+
+Just as with \texttt{artefacts}, \texttt{archetypes} are associated
+with a set of \texttt{structural features}. Not all \texttt{structural
+  features} that belong to an \texttt{archetype} need be expressed on
+all of its \texttt{artefacts}; however, all \texttt{structural
+  features} of an \texttt{artefact} must be part of its
+\texttt{archetype}. \texttt{Structural elements} which are common
+across artefacts are called \texttt{aspects}.
+
+Finally, whilst \texttt{artefacts} are specific to a \texttt{logical
+  model}, \texttt{archetypes} span a set of \texttt{logical model}
+because, by definition, their objective is to extract structural
+commonalities between them.
+
+\begin{concept}
 A \texttt{formatting function} or just \texttt{formatter} is defined
 as a function that takes in a set of inputs and produces a set of
-\texttt{artefacts}. A \texttt{formatting function} is associated with
-one and only one \texttt{archetype}. However, an \texttt{archetype}
-can map to zero, one or many \texttt{formatting functions}.
+\texttt{artefacts}.
+\end{concept}
 
-\texttt{artefacts}~--- and, by implication, \texttt{archetypes} and
+\begin{concept}
+A \texttt{formatting function} is associated with one and only one
+\texttt{archetype}. However, an \texttt{archetype} can map to zero,
+one or many \texttt{formatting functions}.
+\end{concept}
+
+Whereas the \texttt{archetype} represents the general concept of
+``structural commonality'' between a set of \texttt{artefacts}, a
+\texttt{formatter} can be thought of as a generating function
+which~--- given a minimal set of inputs~--- can reproduce an
+\texttt{artefact}.
+
+\begin{concept}
+The \texttt{archetype space} is the set of all possible
+\texttt{archetypes}.
+\end{concept}
+
+\begin{concept}
+  The \texttt{archetype space} is a taxonomic hierarchy made up of the
+  following grouping levels: \texttt{family}, \texttt{kernel},
+  \texttt{facet} and the \texttt{archetype} simple name.
+\end{concept}
+
+\begin{concept}
+The \texttt{archetype location} is a location within the
+\texttt{archetype space}, which maps one-to-one to the
+\texttt{archetype}'s identity. It is made up of all the hierarchical
+levels.
+\end{concept}
+
+\texttt{Archetype space} is just the general notion of a ``space'' in
+which to place all of the possible \texttt{archetypes} one might
+conceive. Within this space, each \texttt{archetype} has an identity
+and that identity can be expressed as an \texttt{archetype location}.
+
+\texttt{Artefacts}~--- and, by implication, \texttt{archetypes} and
 \texttt{formatting functions}~--- can be grouped into
 \texttt{facets}. A \texttt{facet} is a set of elements with a common,
-well-defined purpose such as for example ``all artefacts that provide
-definitions of domain types in a programming language
-P''. \texttt{facets} can be grouped into \texttt{kernels}: these are
-sets of \texttt{facets} that provide related functionality such as for
-example ``generating domain models for a programming language P''.
+well-defined purpose such as for example ``providing a definition of a
+domain type in a programming language P''. \texttt{Facets} can be
+grouped into \texttt{kernels}: these are sets of \texttt{facets} that
+provide related functionality such as for example ``providing domain
+models for a programming language P''. \texttt{Kernels} themselves can
+be grouped into \texttt{families}: ``providing domain models''.
+
+
+
+
+
+ Thus, an
+\texttt{output model} can map to one or more ``projects'' from a user
+perspective, across several programming languages; as far as Dogen is
+concerned, these can all be part of the same \texttt{output model}.
+
+
+
+
+  The \texttt{archetype model} is defined as a set of elements called
+  \texttt{archetypes}.
+
+
+
+
+
+
+\begin{quote}
+  \textbf{\texttt{Output Model} and Programming Languages}
+\end{quote}
+
+
+
+
 
 An \texttt{archetype} has a meta-type: its \texttt{modeling
   element}. A \texttt{modeling element} is an entity with
@@ -343,7 +521,7 @@ depending on their structure. Other modeling elements may specialise
 in different kinds of content such as build system information and so
 on.
 
-A \textt{model} is then a container of \texttt{modeling elements}.  A
+A \texttt{model} is then a container of \texttt{modeling elements}.  A
 \texttt{product} is composed of a set of \texttt{models}. It is up to
 users to add any semantic meaning to these two concepts; from the
 \texttt{conceptual model's} perspective these are just containers. For
@@ -405,7 +583,7 @@ effect, it is a ready-made literature review for the
 practitioner. Secondly~---- and more importantly for our purposes~---
 it provides us with a well-defined ubiquitous language that allows us
 to discuss the domain. Clearly, it would be a futile exercise to try
-to summarise a \emph{tour de force} such as \cite{2004Model} book in a
+to summarise a \emph{tour de force} such as \cite{2004model} book in a
 few pages. We shall instead use it to tease out a minimum set of
 concepts required in order to describe Dogen.
 
