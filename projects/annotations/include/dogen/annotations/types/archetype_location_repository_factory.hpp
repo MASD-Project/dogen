@@ -40,10 +40,10 @@ private:
         const std::list<archetype_location>& als,
         archetype_location_repository& rp) const;
 
-    void populate_facet_names_by_model_name(
+    void populate_facet_names_by_kernel_name(
         archetype_location_repository& rp) const;
 
-    void populate_formatter_names_by_model_name(
+    void populate_formatter_names_by_kernel_name(
         archetype_location_repository& rp) const;
 
 public:

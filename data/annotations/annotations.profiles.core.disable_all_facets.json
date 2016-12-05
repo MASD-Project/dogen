@@ -6,7 +6,8 @@
       "name": {
         "simple": "enabled"
       },
-      "archetype_location": {
+        "archetype_location": {
+        "family": "quilt",
         "kernel": "quilt.cpp"
       },
       "template_kind": "facet_template",

@@ -63,8 +63,8 @@ std::size_t archetype_location_repository_hasher::hash(const archetype_location_
     std::size_t seed(0);
 
     combine(seed, hash_std_vector_dogen_annotations_archetype_location(v.archetype_locations()));
-    combine(seed, hash_std_unordered_map_std_string_std_unordered_set_std_string(v.facet_names_by_model_name()));
-    combine(seed, hash_std_unordered_map_std_string_std_unordered_set_std_string(v.formatter_names_by_model_name()));
+    combine(seed, hash_std_unordered_map_std_string_std_unordered_set_std_string(v.facet_names_by_kernel_name()));
+    combine(seed, hash_std_unordered_map_std_string_std_unordered_set_std_string(v.formatter_names_by_kernel_name()));
 
     return seed;
 }

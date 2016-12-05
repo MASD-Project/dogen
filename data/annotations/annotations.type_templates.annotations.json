@@ -5,7 +5,7 @@
       "qualified": "annotations.profile"
     },
     "archetype_location": {
-      "kernel": "annotations"
+      "family": "annotations"
     },
     "value_type": "text",
     "template_kind": "instance",

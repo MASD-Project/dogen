@@ -12,6 +12,7 @@
         "qualified": "quilt.cpp.cmake.enabled"
       },
       "archetype_location": {
+        "family": "quilt",
         "kernel": "quilt.cpp"
       },
       "template_kind": "instance",

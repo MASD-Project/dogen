@@ -44,6 +44,9 @@ class template_instantiator {
 public:
     template_instantiator(const archetype_location_repository& alrp);
 
+public:
+    bool is_instantiable(const template_kinds tk) const;
+
 private:
     bool is_partially_mathcable(const value_types vt) const;
 
@@ -55,16 +58,22 @@ public:
     boost::shared_ptr<value>
     to_value(const type_repository& trp, const std::string& qn,
         const entry_template& et) const;
+    bool is_match(const std::string& lhs, const std::string& rhs) const;
 
 private:
-    std::list<type> instantiate_global_template(const type_template& tt) const;
+    void instantiate_facet_template(const type_template& tt,
+        const std::string& kernel_name,
+        const std::unordered_set<std::string>& facet_names,
+        std::list<type>& types) const;
+    std::list<type>
+    instantiate_recursive_template(const type_template& tt) const;
     std::list<type> instantiate_facet_template(const type_template& tt) const;
     std::list<type>
-    instantiate_formatter_template(const type_template& tt) const;
+    instantiate_archetype_template(const type_template& tt) const;
 
 private:
     std::list<std::pair<std::string, boost::shared_ptr<value>>>
-    instantiate_global_template(
+    instantiate_recursive_template(
         const type_repository& trp, const entry_template& et) const;
 
     std::list<std::pair<std::string, boost::shared_ptr<value>>>
@@ -72,12 +81,10 @@ private:
         const entry_template& et) const;
 
     std::list<std::pair<std::string, boost::shared_ptr<value>>>
-    instantiate_formatter_template(const type_repository& trp,
+    instantiate_archetype_template(const type_repository& trp,
         const entry_template& et) const;
 
 public:
-    bool is_instantiable(const template_kinds tk) const;
-
     std::list<type> instantiate(const type_template& tt) const;
 
     std::list<std::pair<std::string, boost::shared_ptr<value>>>

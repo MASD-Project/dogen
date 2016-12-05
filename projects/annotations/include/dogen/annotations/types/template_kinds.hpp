@@ -31,10 +31,10 @@ namespace annotations {
 enum class template_kinds : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
     instance = 1,
-    global_template = 2, ///< This field applies to all models, facets and formatters.
-    kernel_template = 3, ///< This field applies to all models.
+    recursive_template = 2, ///< This field applies recursively, from the current level to all below.///<///< The starting point of the recursion is the level supplied by an archetype location.
+    kernel_template = 3, ///< This field applies to all kernels.
     facet_template = 4, ///< This field applies to all facets.
-    formatter_template = 5 ///< This field applies to all formatters.
+    archetype_template = 5 ///< This field applies to all archetypes.
 };
 
 } }

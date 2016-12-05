@@ -40,6 +40,7 @@ const std::string name_key("name");
 const std::string name_simple_key("simple");
 const std::string name_qualified_key("qualified");
 const std::string archetype_location_key("archetype_location");
+const std::string archetype_location_family_key("family");
 const std::string archetype_location_kernel_key("kernel");
 const std::string archetype_location_facet_key("facet");
 const std::string archetype_location_archetype_key("archetype");
@@ -63,11 +64,10 @@ const std::string value_type_boolean("boolean");
 const std::string value_type_kvp("key_value_pair");
 
 const std::string template_kind_instance("instance");
-const std::string template_kind_global_template("global_template");
+const std::string template_kind_recursive_template("recursive_template");
 const std::string template_kind_kernel_template("kernel_template");
 const std::string template_kind_facet_template("facet_template");
-const std::string template_kind_formatter_template(
-    "formatter_template");
+const std::string template_kind_archetype_template("archetype_template");
 
 const std::string invalid_json_file("Failed to parse JSON file");
 const std::string invalid_option_in_json_file(
@@ -126,14 +126,14 @@ template_kinds
 type_templates_hydrator::to_template_kind(const std::string& s) const {
     if (s == template_kind_instance)
         return template_kinds::instance;
-    if (s == template_kind_global_template)
-        return template_kinds::global_template;
+    if (s == template_kind_recursive_template)
+        return template_kinds::recursive_template;
     if (s == template_kind_kernel_template)
         return template_kinds::kernel_template;
     if (s == template_kind_facet_template)
         return template_kinds::facet_template;
-    if (s == template_kind_formatter_template)
-        return template_kinds::formatter_template;
+    if (s == template_kind_archetype_template)
+        return template_kinds::archetype_template;
 
     BOOST_LOG_SEV(lg, error) << invalid_template_kind << "'" << s << "'";
     BOOST_THROW_EXCEPTION(hydration_error(invalid_template_kind + s));
@@ -170,7 +170,7 @@ read_name(const boost::property_tree::ptree& pt) const {
 archetype_location type_templates_hydrator::
 read_archetype_location(const boost::property_tree::ptree& pt) const {
     archetype_location r;
-
+    r.family(pt.get<std::string>(archetype_location_family_key, empty));
     r.kernel(pt.get<std::string>(archetype_location_kernel_key, empty));
     r.facet(pt.get<std::string>(archetype_location_facet_key, empty));
     r.archetype(pt.get<std::string>(archetype_location_archetype_key, empty));

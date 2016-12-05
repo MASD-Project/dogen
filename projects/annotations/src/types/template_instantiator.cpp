@@ -41,23 +41,19 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("annotations.template_instantiator"));
 
 const std::string empty;
-const std::string empty_model_name("Model name cannot be empty. Formatter: ");
-const std::string empty_facet_name("Facet name cannot be empty. Formatter: ");
-const std::string empty_formatter_name("Formatter name cannot be empty");
 const std::string template_not_instantiable(
     "Template cannot be instantiated: ");
 const std::string empty_simple_name("Simple name cannot be empty.");
 const std::string qualified_name_not_empty(
     "Qualified name must be empty. Template: ");
-const std::string model_name_not_empty(
-    "Template is global template but model name is not empty. Template: ");
 const std::string facet_name_not_empty(
-    "Template is facet template but facet name is not empty. Template: ");
-const std::string formatter_name_not_empty(
-    "Template is formatter template but facet name is not empty. Template: ");
+    "Template is 'facet template' but facet name is not empty. Template: ");
+const std::string archetype_name_not_empty(
+    "Template is 'archetype template' but facet name is not empty. Template: ");
 const std::string unsupported_template_kind(
     "Template is not supported: ");
 const std::string missing_type("Type not found: ");
+const std::string missing_family("Recursive templates must supply the family.");
 
 }
 
@@ -68,31 +64,58 @@ template_instantiator::
 template_instantiator(const archetype_location_repository& alrp)
     : repository_(alrp) { }
 
+bool template_instantiator::is_instantiable(const template_kinds tk) const {
+    return
+        tk == template_kinds::recursive_template ||
+        tk == template_kinds::kernel_template ||
+        tk == template_kinds::facet_template ||
+        tk == template_kinds::archetype_template;
+}
+
 bool template_instantiator::is_partially_mathcable(const value_types vt) const {
     return vt == value_types::key_value_pair;
 }
 
 void template_instantiator::validate(const archetype_location& al,
     const name& n, const template_kinds tk) const {
+    /*
+     * All templates must supply a simple name. This cannot be
+     * inferred.
+     */
     const auto sn(n.simple());
     if (sn.empty()) {
         BOOST_LOG_SEV(lg, error) << empty_simple_name;
         BOOST_THROW_EXCEPTION(instantiation_error(empty_simple_name));
     }
 
+    /*
+     * Since we allow "instance" templates, which are basically
+     * templates which do not require instantiation, we need to filter
+     * them out. Ensure we are only attempting to process "real"
+     * templates here.
+     */
     if (!is_instantiable(tk)) {
         BOOST_LOG_SEV(lg, error) << template_not_instantiable << sn;
         BOOST_THROW_EXCEPTION(
             instantiation_error(template_not_instantiable + sn));
     }
 
+    /*
+     * The qualified name must not be supplied by the template,
+     * because it will be derived for each template instantiation.
+     */
     if (!n.qualified().empty()) {
         BOOST_LOG_SEV(lg, error) << qualified_name_not_empty << sn;
         BOOST_THROW_EXCEPTION(
             instantiation_error(qualified_name_not_empty + sn));
     }
 
-    if (tk == template_kinds::global_template) {
+    if (tk == template_kinds::recursive_template) {
+        /*
+         * At present our recursive templates are limited to starting
+         * at the family or kernel kernel level. Ensure the user is
+         * not trying to start at the facet or archetype level.
+         */
         if (!al.facet().empty()) {
             BOOST_LOG_SEV(lg, error) << facet_name_not_empty << sn;
             BOOST_THROW_EXCEPTION(
@@ -100,13 +123,17 @@ void template_instantiator::validate(const archetype_location& al,
         }
 
         if (!al.archetype().empty()) {
-            BOOST_LOG_SEV(lg, error) << formatter_name_not_empty << sn;
+            BOOST_LOG_SEV(lg, error) << archetype_name_not_empty << sn;
             BOOST_THROW_EXCEPTION(
-                instantiation_error(formatter_name_not_empty + sn));
+                instantiation_error(archetype_name_not_empty + sn));
         }
     }
 
     if (tk == template_kinds::facet_template) {
+        /*
+         * Facet templates must not have a facet or archetype, as
+         * these will be derived for each instantiation.
+         */
         if (!al.facet().empty()) {
             BOOST_LOG_SEV(lg, error) << facet_name_not_empty << sn;
             BOOST_THROW_EXCEPTION(
@@ -114,17 +141,21 @@ void template_instantiator::validate(const archetype_location& al,
         }
 
         if (!al.archetype().empty()) {
-            BOOST_LOG_SEV(lg, error) << formatter_name_not_empty << sn;
+            BOOST_LOG_SEV(lg, error) << archetype_name_not_empty << sn;
             BOOST_THROW_EXCEPTION(
-                instantiation_error(formatter_name_not_empty + sn));
+                instantiation_error(archetype_name_not_empty + sn));
         }
     }
 
-    if (tk == template_kinds::formatter_template) {
+    if (tk == template_kinds::archetype_template) {
+        /*
+         * Archetype templates must not have an archetype, as these
+         * will be derived for each instantiation.
+         */
         if (!al.archetype().empty()) {
-            BOOST_LOG_SEV(lg, error) << formatter_name_not_empty << sn;
+            BOOST_LOG_SEV(lg, error) << archetype_name_not_empty << sn;
             BOOST_THROW_EXCEPTION(
-                instantiation_error(formatter_name_not_empty + sn));
+                instantiation_error(archetype_name_not_empty + sn));
         }
     }
 }
@@ -156,44 +187,104 @@ template_instantiator::to_value(const type_repository& trp,
     return f.make(t, et.untyped_value());
 }
 
+bool template_instantiator::
+is_match(const std::string& lhs, const std::string& rhs) const {
+    /*
+     * We match at the kernel or facet level for one of two possible
+     * cases: either the template has specifically requested a
+     * kernel/facet - in which case we just want the items for that
+     * kernel/facet, and all others can be ignored - or the template
+     * requested an expansion across all kernels/facets.
+     */
+    if (lhs.empty())
+        return true;
+
+    return lhs == rhs;
+}
+
+void template_instantiator::instantiate_facet_template(
+    const type_template& tt, const std::string& kernel_name,
+    const std::unordered_set<std::string>& facet_names,
+    std::list<type>& types) const {
+
+    for (const auto facet_name : facet_names) {
+        auto t(to_type(tt));
+        const auto sn(tt.name().simple());
+
+        /*
+         * The facet name is qualified, so we can use it to
+         * reconstruct the type's qualified name.
+         */
+        t.name().qualified(facet_name + "." + sn);
+        t.archetype_location().kernel(kernel_name);
+        t.archetype_location().facet(facet_name);
+        t.archetype_location().archetype(empty);
+        types.push_back(t);
+    }
+}
+
 std::list<type> template_instantiator::
-instantiate_global_template(const type_template& tt) const {
+instantiate_recursive_template(const type_template& tt) const {
     std::list<type> r;
 
-    for (const auto pair : repository_.facet_names_by_model_name()) {
-        const auto model_name(pair.first);
-        if (!tt.archetype_location().kernel().empty() &&
-            tt.archetype_location().kernel() != model_name)
+    /*
+     * Global templates are expected to always supply a family. This
+     * is because at present we do not support instantiating templates
+     * across families as there is no use case for this.
+     */
+    const auto ttal(tt.archetype_location());
+    if (ttal.family().empty()) {
+        BOOST_LOG_SEV(lg, error) << missing_family;
+        BOOST_THROW_EXCEPTION(instantiation_error(missing_family));
+    }
+
+    /*
+     * Handle kernels and facets first. We obtain a list of facets by
+     * kernel name and use it for two purposes: a) to validate if the
+     * requested kernel is supported or not, filtering out kernels
+     * without facets; b) to figure out what all the available facets
+     * are, so we can instantiate them.
+     *
+     * If the template did not request a specific kernel, this will
+     * result in expanding the template for all kernels and all facets
+     * across all families.
+     */
+    for (const auto pair : repository_.facet_names_by_kernel_name()) {
+        const auto kernel_name(pair.first);
+        if (!is_match(ttal.kernel(), kernel_name))
             continue;
 
+        /*
+         * Expand the type for the kernel first.
+         */
         auto t(to_type(tt));
-        t.name().qualified(model_name + "." + tt.name().simple());
-        t.archetype_location().kernel(model_name);
+
+        /*
+         * The kernel name is qualified, so we can use it to
+         * reconstruct the type's qualified name.
+         */
+        t.name().qualified(kernel_name + "." + tt.name().simple());
+        t.archetype_location().kernel(kernel_name);
         t.archetype_location().facet(empty);
         t.archetype_location().archetype(empty);
         r.push_back(t);
 
+        /*
+         * Now, perform a template expansion for each supported facet.
+         */
         const auto& facet_names(pair.second);
-        for (const auto facet_name : facet_names) {
-            auto t(to_type(tt));
-            const auto sn(tt.name().simple());
-            t.name().qualified(facet_name + "." + sn);
-            t.archetype_location().kernel(model_name);
-            t.archetype_location().facet(facet_name);
-            t.archetype_location().archetype(empty);
-            r.push_back(t);
-        }
+        instantiate_facet_template(tt, kernel_name, facet_names, r);
     }
 
+    /*
+     * Finally, handle expansion at the archetype level.
+     */
     for (const auto al : repository_.archetype_locations()) {
-        if (!tt.archetype_location().kernel().empty() &&
-            tt.archetype_location().kernel() != al.kernel())
+        if (!is_match(ttal.kernel(), al.kernel()))
             continue;
 
         auto t(to_type(tt));
-
-        const auto arch(al.archetype());
-        t.name().qualified(arch + "." + tt.name().simple());
+        t.name().qualified(al.archetype() + "." + tt.name().simple());
         t.archetype_location(al);
         r.push_back(t);
     }
@@ -203,40 +294,28 @@ instantiate_global_template(const type_template& tt) const {
 std::list<type> template_instantiator::
 instantiate_facet_template(const type_template& tt) const {
     std::list<type> r;
-    for (const auto pair : repository_.facet_names_by_model_name()) {
-        const auto model_name(pair.first);
-        if (!tt.archetype_location().kernel().empty() &&
-            tt.archetype_location().kernel() != model_name)
+    for (const auto pair : repository_.facet_names_by_kernel_name()) {
+        const auto kernel_name(pair.first);
+        if (!is_match(tt.archetype_location().kernel(), kernel_name))
             continue;
 
         const auto& facet_names(pair.second);
-        for (const auto facet_name : facet_names) {
-            auto t(to_type(tt));
-            t.name().qualified(facet_name + "." + tt.name().simple());
-            t.archetype_location().kernel(model_name);
-            t.archetype_location().facet(facet_name);
-            t.archetype_location().archetype(empty);
-            r.push_back(t);
-        }
+        instantiate_facet_template(tt, kernel_name, facet_names, r);
     }
     return r;
 }
 
 std::list<type> template_instantiator::
-instantiate_formatter_template(const type_template& tt) const {
+instantiate_archetype_template(const type_template& tt) const {
     std::list<type> r;
+    const auto ttal(tt.archetype_location());
     for (const auto al : repository_.archetype_locations()) {
-        if (!tt.archetype_location().kernel().empty() &&
-            tt.archetype_location().kernel() != al.kernel())
-            continue;
-
-        if (!tt.archetype_location().facet().empty() &&
-            tt.archetype_location().facet() != al.facet())
+        if (!is_match(ttal.kernel(), al.kernel()) &&
+            !is_match(ttal.facet(), al.facet()))
             continue;
 
         auto t(to_type(tt));
-        const auto arch(al.archetype());
-        t.name().qualified(arch + "." + t.name().simple());
+        t.name().qualified(al.archetype() + "." + t.name().simple());
         t.archetype_location(al);
         r.push_back(t);
     }
@@ -244,17 +323,18 @@ instantiate_formatter_template(const type_template& tt) const {
 }
 
 std::list<std::pair<std::string, boost::shared_ptr<value>>>
-template_instantiator::instantiate_global_template(
+template_instantiator::instantiate_recursive_template(
     const type_repository& trp, const entry_template& et) const {
+
+    const auto etal(et.archetype_location());
     std::list<std::pair<std::string, boost::shared_ptr<value>>> r;
-    for (const auto pair : repository_.facet_names_by_model_name()) {
-        const auto model_name(pair.first);
-        if (!et.archetype_location().kernel().empty() &&
-            et.archetype_location().kernel() != model_name)
+    for (const auto pair : repository_.facet_names_by_kernel_name()) {
+        const auto kernel_name(pair.first);
+        if (!is_match(etal.kernel(), kernel_name))
             continue;
 
         std::pair<std::string, boost::shared_ptr<value>> entry;
-        entry.first = model_name + "." + et.name().simple();
+        entry.first = kernel_name + "." + et.name().simple();
         entry.second = to_value(trp, entry.first, et);
         r.push_back(entry);
 
@@ -268,13 +348,11 @@ template_instantiator::instantiate_global_template(
     }
 
     for (const auto al : repository_.archetype_locations()) {
-        if (!et.archetype_location().kernel().empty() &&
-            et.archetype_location().kernel() != al.kernel())
+        if (!is_match(etal.kernel(), al.kernel()))
             continue;
 
         std::pair<std::string, boost::shared_ptr<value>> entry;
-        const auto arch(al.archetype());
-        entry.first = arch + "." + et.name().simple();
+        entry.first = al.archetype() + "." + et.name().simple();
         entry.second = to_value(trp, entry.first, et);
         r.push_back(entry);
     }
@@ -285,12 +363,12 @@ template_instantiator::instantiate_global_template(
 std::list<std::pair<std::string, boost::shared_ptr<value>>>
 template_instantiator::instantiate_facet_template(
     const type_repository& trp, const entry_template& et) const {
-    std::list<std::pair<std::string, boost::shared_ptr<value>>> r;
 
-    for (const auto pair : repository_.facet_names_by_model_name()) {
-        const auto model_name(pair.first);
-        if (!et.archetype_location().kernel().empty() &&
-            et.archetype_location().kernel() != model_name)
+    const auto etal(et.archetype_location());
+    std::list<std::pair<std::string, boost::shared_ptr<value>>> r;
+    for (const auto pair : repository_.facet_names_by_kernel_name()) {
+        const auto kernel_name(pair.first);
+        if (!is_match(etal.kernel(), kernel_name))
             continue;
 
         const auto& facet_names(pair.second);
@@ -306,35 +384,23 @@ template_instantiator::instantiate_facet_template(
 }
 
 std::list<std::pair<std::string, boost::shared_ptr<value>>>
-template_instantiator::instantiate_formatter_template(
+template_instantiator::instantiate_archetype_template(
     const type_repository& trp, const entry_template& et) const {
     std::list<std::pair<std::string, boost::shared_ptr<value>>> r;
 
+    const auto etal(et.archetype_location());
     for (const auto al : repository_.archetype_locations()) {
-        if (!et.archetype_location().kernel().empty() &&
-            et.archetype_location().kernel() != al.kernel())
-            continue;
-
-        if (!et.archetype_location().facet().empty() &&
-            et.archetype_location().facet() != al.facet())
+        if (!is_match(etal.kernel(), al.kernel()) &&
+            !is_match(etal.facet(), al.facet()))
             continue;
 
         std::pair<std::string, boost::shared_ptr<value>> entry;
-        const auto arch(al.archetype());
-        entry.first = arch + "." + et.name().simple();
+        entry.first = al.archetype() + "." + et.name().simple();
         entry.second = to_value(trp, entry.first, et);
         r.push_back(entry);
     }
 
     return r;
-}
-
-bool template_instantiator::is_instantiable(const template_kinds tk) const {
-    return
-        tk == template_kinds::global_template ||
-        tk == template_kinds::kernel_template ||
-        tk == template_kinds::facet_template ||
-        tk == template_kinds::formatter_template;
 }
 
 std::list<type>
@@ -345,12 +411,12 @@ template_instantiator::instantiate(const type_template& tt) const {
 
     std::list<type> r;
     const auto tk(tt.kind());
-    if (tk == template_kinds::global_template)
-        r = instantiate_global_template(tt);
+    if (tk == template_kinds::recursive_template)
+        r = instantiate_recursive_template(tt);
     else if (tk == template_kinds::facet_template)
         r = instantiate_facet_template(tt);
-    else if (tk == template_kinds::formatter_template)
-        r = instantiate_formatter_template(tt);
+    else if (tk == template_kinds::archetype_template)
+        r = instantiate_archetype_template(tt);
     else {
         BOOST_LOG_SEV(lg, error) << unsupported_template_kind << tk;
         BOOST_THROW_EXCEPTION(instantiation_error(unsupported_template_kind +
@@ -379,12 +445,12 @@ instantiate(const type_repository& trp, const entry_template& et) const {
 
     std::list<std::pair<std::string, boost::shared_ptr<value>>> r;
     const auto tk(et.kind());
-    if (tk == template_kinds::global_template)
-        r = instantiate_global_template(trp, et);
+    if (tk == template_kinds::recursive_template)
+        r = instantiate_recursive_template(trp, et);
     else if (tk == template_kinds::facet_template)
         r = instantiate_facet_template(trp, et);
-    else if (tk == template_kinds::formatter_template)
-        r = instantiate_formatter_template(trp, et);
+    else if (tk == template_kinds::archetype_template)
+        r = instantiate_archetype_template(trp, et);
     else {
         BOOST_LOG_SEV(lg, error) << unsupported_template_kind << tk;
         BOOST_THROW_EXCEPTION(instantiation_error(unsupported_template_kind +

@@ -5,6 +5,7 @@
       "qualified": "quilt.cpp.test_data.directory"
     },
     "archetype_location": {
+      "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.test_data"
     },
@@ -19,6 +20,7 @@
       "qualified": "quilt.cpp.test_data.postfix"
     },
     "archetype_location": {
+      "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.test_data"
     },
@@ -33,6 +35,7 @@
       "qualified": "quilt.cpp.test_data.class_header.postfix"
     },
     "archetype_location": {
+      "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.test_data",
       "archetype": "quilt.cpp.test_data.class_header_formatter"
@@ -48,6 +51,7 @@
       "qualified": "quilt.cpp.test_data.class_implementation.postfix"
     },
     "archetype_location": {
+      "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.test_data",
       "archetype": "quilt.cpp.test_data.class_implementation_formatter"
@@ -63,6 +67,7 @@
       "qualified": "quilt.cpp.test_data.enum_header.postfix"
     },
     "archetype_location": {
+      "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.test_data",
       "archetype": "quilt.cpp.test_data.enum_header_formatter"
@@ -78,6 +83,7 @@
       "qualified": "quilt.cpp.test_data.enum_implementation.postfix"
     },
     "archetype_location": {
+      "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.test_data",
       "archetype": "quilt.cpp.test_data.enum_implementation_formatter"
@@ -93,6 +99,7 @@
       "qualified": "quilt.cpp.test_data.master_header.postfix"
     },
     "archetype_location": {
+      "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.test_data",
       "archetype": "quilt.cpp.test_data.master_header_formatter"
@@ -108,6 +115,7 @@
       "qualified": "quilt.cpp.test_data.primitive_header.postfix"
     },
     "archetype_location": {
+      "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.test_data",
       "archetype": "quilt.cpp.test_data.primitive_header_formatter"

@@ -5,7 +5,7 @@
       "qualified": "yarn.type_parameters.variable_number_of_parameters"
     },
     "archetype_location": {
-      "kernel": "yarn"
+      "family": "yarn"
     },
     "value_type": "boolean",
     "template_kind": "instance",
@@ -18,7 +18,7 @@
       "qualified": "yarn.type_parameters.count"
     },
     "archetype_location": {
-      "kernel": "yarn"
+      "family": "yarn"
     },
     "value_type": "number",
     "template_kind": "instance",
@@ -31,7 +31,7 @@
       "qualified": "yarn.type_parameters.always_in_heap"
     },
     "archetype_location": {
-      "kernel": "yarn"
+      "family": "yarn"
     },
     "value_type": "boolean",
     "template_kind": "instance",
@@ -44,7 +44,7 @@
       "qualified": "yarn.generalization.is_final"
     },
     "archetype_location": {
-      "kernel": "yarn"
+      "family": "yarn"
     },
     "value_type": "boolean",
     "template_kind": "instance",
@@ -56,7 +56,7 @@
       "qualified": "yarn.generalization.parent"
     },
     "archetype_location": {
-      "kernel": "yarn"
+      "family": "yarn"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -68,7 +68,7 @@
       "qualified": "yarn.is_proxy_model"
     },
     "archetype_location": {
-      "kernel": "yarn"
+      "family": "yarn"
     },
     "value_type": "boolean",
     "template_kind": "instance",
@@ -81,7 +81,7 @@
       "qualified": "yarn.reference"
     },
     "archetype_location": {
-      "kernel": "yarn"
+      "family": "yarn"
     },
     "value_type": "text_collection",
     "template_kind": "instance",

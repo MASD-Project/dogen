@@ -11,6 +11,7 @@
         "qualified": "quilt.cpp.disable_facet_directories"
       },
       "archetype_location": {
+        "family": "quilt",
         "kernel": "quilt.cpp"
       },
       "template_kind": "instance",

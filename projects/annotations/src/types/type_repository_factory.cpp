@@ -122,7 +122,7 @@ create_repository(const std::list<type>& ts) const {
                 .push_back(t);
 
         if (!al.kernel().empty())
-            r.types_by_model_name()[al.kernel()]
+            r.types_by_kernel_name()[al.kernel()]
                 .push_back(t);
 
         if (t.is_partially_matchable())

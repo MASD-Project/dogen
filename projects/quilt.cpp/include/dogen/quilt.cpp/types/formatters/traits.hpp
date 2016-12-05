@@ -34,7 +34,12 @@ namespace formatters {
 
 struct traits {
     /**
-     * @brief Name of this kernel
+     * @brief Name of this family.
+     */
+    static std::string family();
+
+    /**
+     * @brief Name of this kernel.
      */
     static std::string kernel();
 

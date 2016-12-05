@@ -202,8 +202,9 @@ text_template mock_text_template_factory::
 make_text_expression_text_single_line() const {
     text_template r(make_text_template_with_trivial_properties());
     r.body().lines(make_text_block_only_lines());
-    r.body().lines().splice(r.body().lines().end(), make_expression_block_only_lines());
-    r.body().lines().splice(r.body().lines().end(), make_text_block_only_lines());
+    auto& l(r.body().lines());
+    l.splice(l.end(), make_expression_block_only_lines());
+    l.splice(l.end(), make_text_block_only_lines());
     return r;
 }
 
@@ -211,8 +212,9 @@ text_template mock_text_template_factory::
 make_expression_text_expression_single_line() const {
     text_template r(make_text_template_with_trivial_properties());
     r.body().lines(make_expression_block_only_lines());
-    r.body().lines().splice(r.body().lines().end(), make_text_block_only_lines());
-    r.body().lines().splice(r.body().lines().end(), make_expression_block_only_lines());
+    auto& l(r.body().lines());
+    l.splice(l.end(), make_text_block_only_lines());
+    l.splice(l.end(), make_expression_block_only_lines());
     return r;
 }
 
@@ -220,9 +222,9 @@ text_template mock_text_template_factory::
 make_text_expression_text_multi_line(const unsigned int how_many) const {
     text_template r(make_text_template_with_trivial_properties());
     r.body().lines(make_text_block_only_lines(how_many));
-    r.body().lines().splice(r.body().lines().end(),
-        make_expression_block_only_lines(how_many));
-    r.body().lines().splice(r.body().lines().end(), make_text_block_only_lines(how_many));
+    auto& l(r.body().lines());
+    l.splice(l.end(), make_expression_block_only_lines(how_many));
+    l.splice(l.end(), make_text_block_only_lines(how_many));
     return r;
 }
 
@@ -230,9 +232,9 @@ text_template mock_text_template_factory::
 make_expression_text_expression_multi_line(const unsigned int how_many) const {
     text_template r(make_text_template_with_trivial_properties());
     r.body().lines(make_expression_block_only_lines(how_many));
-    r.body().lines().splice(r.body().lines().end(), make_text_block_only_lines(how_many));
-    r.body().lines().splice(r.body().lines().end(),
-        make_expression_block_only_lines(how_many));
+    auto& l(r.body().lines());
+    l.splice(l.end(), make_text_block_only_lines(how_many));
+    l.splice(l.end(), make_expression_block_only_lines(how_many));
     return r;
 }
 
@@ -240,8 +242,9 @@ text_template mock_text_template_factory::
 make_text_standard_control_text_single_line() const {
     text_template r(make_text_template_with_trivial_properties());
     r.body().lines(make_text_block_only_lines());
-    r.body().lines().splice(r.body().lines().end(), make_standard_control_block_only_lines());
-    r.body().lines().splice(r.body().lines().end(), make_text_block_only_lines());
+    auto& l(r.body().lines());
+    l.splice(l.end(), make_standard_control_block_only_lines());
+    l.splice(l.end(), make_text_block_only_lines());
     return r;
 }
 
@@ -249,8 +252,9 @@ text_template mock_text_template_factory::
 make_standard_control_text_standard_control_single_line() const {
     text_template r(make_text_template_with_trivial_properties());
     r.body().lines(make_standard_control_block_only_lines());
-    r.body().lines().splice(r.body().lines().end(), make_text_block_only_lines());
-    r.body().lines().splice(r.body().lines().end(), make_standard_control_block_only_lines());
+    auto& l(r.body().lines());
+    l.splice(l.end(), make_text_block_only_lines());
+    l.splice(l.end(), make_standard_control_block_only_lines());
     return r;
 }
 
@@ -258,9 +262,9 @@ text_template mock_text_template_factory::
 make_text_standard_control_text_multi_line(const unsigned int how_many) const {
     text_template r(make_text_template_with_trivial_properties());
     r.body().lines(make_text_block_only_lines(how_many));
-    r.body().lines().splice(r.body().lines().end(),
-        make_standard_control_block_only_lines(how_many));
-    r.body().lines().splice(r.body().lines().end(), make_text_block_only_lines(how_many));
+    auto& l(r.body().lines());
+    l.splice(l.end(), make_standard_control_block_only_lines(how_many));
+    l.splice(l.end(), make_text_block_only_lines(how_many));
     return r;
 }
 
@@ -269,9 +273,9 @@ make_standard_control_text_standard_control_multi_line(
     const unsigned int how_many) const {
     text_template r(make_text_template_with_trivial_properties());
     r.body().lines(make_standard_control_block_only_lines(how_many));
-    r.body().lines().splice(r.body().lines().end(), make_text_block_only_lines(how_many));
-    r.body().lines().splice(r.body().lines().end(),
-        make_standard_control_block_only_lines(how_many));
+    auto& l(r.body().lines());
+    l.splice(l.end(), make_text_block_only_lines(how_many));
+    l.splice(l.end(), make_standard_control_block_only_lines(how_many));
     return r;
 }
 
@@ -306,12 +310,11 @@ text_template mock_text_template_factory::make_text_line_with_quotes() const {
 text_template mock_text_template_factory::make_complex_structure() const {
     text_template r(make_text_template_with_trivial_properties());
     r.body().lines(make_text_block_only_lines(3));
-    r.body().lines().splice(r.body().lines().end(),
-        make_standard_control_block_only_lines(4));
-    r.body().lines().splice(r.body().lines().end(), make_mixed_content_lines(2));
-    r.body().lines().splice(r.body().lines().end(),
-        make_standard_control_block_only_lines());
-    r.body().lines().splice(r.body().lines().end(), make_text_block_only_lines());
+    auto& l(r.body().lines());
+    l.splice(l.end(), make_standard_control_block_only_lines(4));
+    l.splice(l.end(), make_mixed_content_lines(2));
+    l.splice(l.end(), make_standard_control_block_only_lines());
+    l.splice(l.end(), make_text_block_only_lines());
     return r;
 }
 

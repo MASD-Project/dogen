@@ -5,6 +5,7 @@
       "qualified": "quilt.cpp.serialization.directory"
     },
     "archetype_location": {
+      "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.serialization"
     },
@@ -19,6 +20,7 @@
       "qualified": "quilt.cpp.serialization.postfix"
     },
     "archetype_location": {
+      "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.serialization"
     },
@@ -33,6 +35,7 @@
       "qualified": "quilt.cpp.serialization.class_header.postfix"
     },
     "archetype_location": {
+      "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.serialization",
       "archetype": "quilt.cpp.serialization.class_header_formatter"
@@ -48,6 +51,7 @@
       "qualified": "quilt.cpp.serialization.class_implementation.postfix"
     },
     "archetype_location": {
+      "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.serialization",
       "archetype": "quilt.cpp.serialization.class_implementation_formatter"
@@ -63,6 +67,7 @@
       "qualified": "quilt.cpp.serialization.enum_header.postfix"
     },
     "archetype_location": {
+      "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.serialization",
       "archetype": "quilt.cpp.serialization.enum_header_formatter"
@@ -78,6 +83,7 @@
       "qualified": "quilt.cpp.serialization.registrar_header.postfix"
     },
     "archetype_location": {
+      "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.serialization",
       "archetype": "quilt.cpp.serialization.registrar_header_formatter"
@@ -93,6 +99,7 @@
       "qualified": "quilt.cpp.serialization.registrar_implementation.postfix"
     },
     "archetype_location": {
+      "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.serialization",
       "archetype": "quilt.cpp.serialization.registrar_implementation_formatter"
@@ -108,6 +115,7 @@
       "qualified": "quilt.cpp.serialization.forward_declarations.postfix"
     },
     "archetype_location": {
+      "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.serialization",
       "archetype": "quilt.cpp.serialization.forward_declarations_formatter"
@@ -123,6 +131,7 @@
       "qualified": "quilt.cpp.serialization.master_header.postfix"
     },
     "archetype_location": {
+      "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.serialization",
       "archetype": "quilt.cpp.serialization.master_header_formatter"
@@ -138,6 +147,7 @@
       "qualified": "quilt.cpp.serialization.primitive_header.postfix"
     },
     "archetype_location": {
+      "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.serialization",
       "archetype": "quilt.cpp.serialization.primitive_header_formatter"

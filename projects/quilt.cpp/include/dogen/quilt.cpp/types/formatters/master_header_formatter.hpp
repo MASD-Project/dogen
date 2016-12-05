@@ -59,7 +59,7 @@ public:
         format(const context& ctx, const yarn::element& e) const override;
 
 private:
-    const annotations::archetype_location ownership_hierarchy_;
+    const annotations::archetype_location archetype_location_;
 
 };
 

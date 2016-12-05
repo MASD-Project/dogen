@@ -5,6 +5,7 @@
       "qualified": "quilt.cpp.types.directory"
     },
     "archetype_location": {
+      "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.types"
     },
@@ -19,6 +20,7 @@
       "qualified": "quilt.cpp.types.postfix"
     },
     "archetype_location": {
+      "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.types"
     },
@@ -33,6 +35,7 @@
       "qualified": "quilt.cpp.types.class_header.postfix"
     },
     "archetype_location": {
+      "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.types",
       "archetype": "quilt.cpp.types.class_header_formatter"
@@ -48,6 +51,7 @@
       "qualified": "quilt.cpp.types.class_implementation.postfix"
     },
     "archetype_location": {
+      "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.types",
       "archetype": "quilt.cpp.types.class_implementation_formatter"
@@ -63,6 +67,7 @@
       "qualified": "quilt.cpp.types.enum_header.postfix"
     },
     "archetype_location": {
+      "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.types",
       "archetype": "quilt.cpp.types.enum_header_formatter"
@@ -78,6 +83,7 @@
       "qualified": "quilt.cpp.types.enum_implementation.postfix"
     },
     "archetype_location": {
+      "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.types",
       "archetype": "quilt.cpp.types.enum_implementation_formatter"
@@ -93,6 +99,7 @@
       "qualified": "quilt.cpp.types.exception_header.postfix"
     },
     "archetype_location": {
+      "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.types",
       "archetype": "quilt.cpp.types.exception_header_formatter"
@@ -108,6 +115,7 @@
       "qualified": "quilt.cpp.types.namespace_header.postfix"
     },
     "archetype_location": {
+      "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.types",
       "archetype": "quilt.cpp.types.namespace_header_formatter"
@@ -123,6 +131,7 @@
       "qualified": "quilt.cpp.types.visitor_header.postfix"
     },
     "archetype_location": {
+      "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.types",
       "archetype": "quilt.cpp.types.visitor_header_formatter"
@@ -138,6 +147,7 @@
       "qualified": "quilt.cpp.types.forward_declarations.postfix"
     },
     "archetype_location": {
+      "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.types",
       "archetype": "quilt.cpp.types.forward_declarations_formatter"
@@ -153,6 +163,7 @@
       "qualified": "quilt.cpp.types.master_header.postfix"
     },
     "archetype_location": {
+      "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.types",
       "archetype": "quilt.cpp.types.master_header_formatter"
@@ -168,6 +179,7 @@
       "qualified": "quilt.cpp.types.primitive_header.postfix"
     },
     "archetype_location": {
+      "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.types",
       "archetype": "quilt.cpp.types.primitive_header_formatter"

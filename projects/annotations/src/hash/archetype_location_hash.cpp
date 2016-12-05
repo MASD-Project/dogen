@@ -36,6 +36,7 @@ namespace annotations {
 std::size_t archetype_location_hasher::hash(const archetype_location& v) {
     std::size_t seed(0);
 
+    combine(seed, v.family());
     combine(seed, v.kernel());
     combine(seed, v.facet());
     combine(seed, v.archetype());

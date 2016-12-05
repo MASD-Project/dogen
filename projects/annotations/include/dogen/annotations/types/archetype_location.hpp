@@ -48,6 +48,7 @@ public:
 
 public:
     archetype_location(
+        const std::string& family,
         const std::string& kernel,
         const std::string& facet,
         const std::string& archetype);
@@ -60,6 +61,16 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::annotations::archetype_location& v, unsigned int version);
 
 public:
+    /**
+     * @brief Name of the family that owns this field, if any.
+     */
+    /**@{*/
+    const std::string& family() const;
+    std::string& family();
+    void family(const std::string& v);
+    void family(const std::string&& v);
+    /**@}*/
+
     /**
      * @brief Name of the kernel that owns this field, if any.
      */
@@ -101,6 +112,7 @@ public:
     archetype_location& operator=(archetype_location other);
 
 private:
+    std::string family_;
     std::string kernel_;
     std::string facet_;
     std::string archetype_;

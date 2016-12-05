@@ -29,9 +29,9 @@ using namespace dogen::utility::log;
 static logger
 lg(logger_factory("annotations.archetype_location_repository_factory"));
 
-const std::string empty_kernel("Model name cannot be empty. Formatter: ");
-const std::string empty_facet("Facet name cannot be empty. Formatter: ");
-const std::string empty_archetype("Formatter name cannot be empty");
+const std::string empty_kernel("Kernel name cannot be empty. Archetype: ");
+const std::string empty_facet("Facet name cannot be empty. Archetype: ");
+const std::string empty_archetype("Archetype name cannot be empty.");
 
 }
 
@@ -71,18 +71,18 @@ populate_archetype_locations(const std::list<archetype_location>& als,
 }
 
 void archetype_location_repository_factory::
-populate_facet_names_by_model_name(archetype_location_repository& rp) const {
+populate_facet_names_by_kernel_name(archetype_location_repository& rp) const {
     for (const auto& al : rp.archetype_locations())
-        rp.facet_names_by_model_name()[al.kernel()].insert(al.facet());
+        rp.facet_names_by_kernel_name()[al.kernel()].insert(al.facet());
 }
 
 void archetype_location_repository_factory::
-populate_formatter_names_by_model_name(
+populate_formatter_names_by_kernel_name(
     archetype_location_repository& rp) const {
 
     for (const auto& al : rp.archetype_locations()) {
         const auto arch(al.archetype());
-        rp.formatter_names_by_model_name()[al.kernel()].insert(arch);
+        rp.formatter_names_by_kernel_name()[al.kernel()].insert(arch);
     }
 }
 
@@ -93,9 +93,9 @@ make(const std::list<archetype_location>& als) const {
 
     archetype_location_repository r;
     populate_archetype_locations(als, r);
-    populate_facet_names_by_model_name(r);
-    populate_formatter_names_by_model_name(r);
-    BOOST_LOG_SEV(lg, debug) << "Created archetype location repository. "
+    populate_facet_names_by_kernel_name(r);
+    populate_formatter_names_by_kernel_name(r);
+     BOOST_LOG_SEV(lg, debug) << "Created archetype location repository. "
                              << "Result: " << r;
     return r;
 }

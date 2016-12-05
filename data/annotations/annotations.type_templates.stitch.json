@@ -5,7 +5,7 @@
       "qualified": "stitch.stream_variable_name"
     },
     "archetype_location": {
-      "kernel": "stitch"
+      "family": "stitch"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -18,7 +18,7 @@
       "qualified": "stitch.relative_output_directory"
     },
     "archetype_location": {
-      "kernel": "stitch"
+      "family": "stitch"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -30,7 +30,7 @@
       "qualified": "stitch.inclusion_dependency"
     },
     "archetype_location": {
-      "kernel": "stitch"
+      "family": "stitch"
     },
     "value_type": "text_collection",
     "template_kind": "instance",
@@ -42,7 +42,7 @@
       "qualified": "stitch.containing_namespaces"
     },
     "archetype_location": {
-      "kernel": "stitch"
+      "family": "stitch"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -54,7 +54,7 @@
       "qualified": "stitch.wale.template"
     },
     "archetype_location": {
-      "kernel": "stitch"
+      "family": "stitch"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -66,7 +66,7 @@
       "qualified": "stitch.wale.kvp"
     },
     "archetype_location": {
-      "kernel": "stitch"
+      "family": "stitch"
     },
     "value_type": "key_value_pair",
     "template_kind": "instance",

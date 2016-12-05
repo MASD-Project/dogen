@@ -46,8 +46,8 @@ public:
 public:
     archetype_location_repository(
         const std::vector<dogen::annotations::archetype_location>& archetype_locations,
-        const std::unordered_map<std::string, std::unordered_set<std::string> >& facet_names_by_model_name,
-        const std::unordered_map<std::string, std::unordered_set<std::string> >& formatter_names_by_model_name);
+        const std::unordered_map<std::string, std::unordered_set<std::string> >& facet_names_by_kernel_name,
+        const std::unordered_map<std::string, std::unordered_set<std::string> >& formatter_names_by_kernel_name);
 
 private:
     template<typename Archive>
@@ -62,15 +62,15 @@ public:
     void archetype_locations(const std::vector<dogen::annotations::archetype_location>& v);
     void archetype_locations(const std::vector<dogen::annotations::archetype_location>&& v);
 
-    const std::unordered_map<std::string, std::unordered_set<std::string> >& facet_names_by_model_name() const;
-    std::unordered_map<std::string, std::unordered_set<std::string> >& facet_names_by_model_name();
-    void facet_names_by_model_name(const std::unordered_map<std::string, std::unordered_set<std::string> >& v);
-    void facet_names_by_model_name(const std::unordered_map<std::string, std::unordered_set<std::string> >&& v);
+    const std::unordered_map<std::string, std::unordered_set<std::string> >& facet_names_by_kernel_name() const;
+    std::unordered_map<std::string, std::unordered_set<std::string> >& facet_names_by_kernel_name();
+    void facet_names_by_kernel_name(const std::unordered_map<std::string, std::unordered_set<std::string> >& v);
+    void facet_names_by_kernel_name(const std::unordered_map<std::string, std::unordered_set<std::string> >&& v);
 
-    const std::unordered_map<std::string, std::unordered_set<std::string> >& formatter_names_by_model_name() const;
-    std::unordered_map<std::string, std::unordered_set<std::string> >& formatter_names_by_model_name();
-    void formatter_names_by_model_name(const std::unordered_map<std::string, std::unordered_set<std::string> >& v);
-    void formatter_names_by_model_name(const std::unordered_map<std::string, std::unordered_set<std::string> >&& v);
+    const std::unordered_map<std::string, std::unordered_set<std::string> >& formatter_names_by_kernel_name() const;
+    std::unordered_map<std::string, std::unordered_set<std::string> >& formatter_names_by_kernel_name();
+    void formatter_names_by_kernel_name(const std::unordered_map<std::string, std::unordered_set<std::string> >& v);
+    void formatter_names_by_kernel_name(const std::unordered_map<std::string, std::unordered_set<std::string> >&& v);
 
 public:
     bool operator==(const archetype_location_repository& rhs) const;
@@ -84,8 +84,8 @@ public:
 
 private:
     std::vector<dogen::annotations::archetype_location> archetype_locations_;
-    std::unordered_map<std::string, std::unordered_set<std::string> > facet_names_by_model_name_;
-    std::unordered_map<std::string, std::unordered_set<std::string> > formatter_names_by_model_name_;
+    std::unordered_map<std::string, std::unordered_set<std::string> > facet_names_by_kernel_name_;
+    std::unordered_map<std::string, std::unordered_set<std::string> > formatter_names_by_kernel_name_;
 };
 
 } }

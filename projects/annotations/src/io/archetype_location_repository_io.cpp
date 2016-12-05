@@ -83,8 +83,8 @@ std::ostream& operator<<(std::ostream& s, const archetype_location_repository& v
     s << " { "
       << "\"__type__\": " << "\"dogen::annotations::archetype_location_repository\"" << ", "
       << "\"archetype_locations\": " << v.archetype_locations() << ", "
-      << "\"facet_names_by_model_name\": " << v.facet_names_by_model_name() << ", "
-      << "\"formatter_names_by_model_name\": " << v.formatter_names_by_model_name()
+      << "\"facet_names_by_kernel_name\": " << v.facet_names_by_kernel_name() << ", "
+      << "\"formatter_names_by_kernel_name\": " << v.formatter_names_by_kernel_name()
       << " }";
     return(s);
 }

@@ -5,6 +5,7 @@
       "qualified": "quilt.cpp.odb.directory"
     },
     "archetype_location": {
+      "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.odb"
     },
@@ -19,6 +20,7 @@
       "qualified": "quilt.cpp.odb.postfix"
     },
     "archetype_location": {
+      "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.odb"
     },
@@ -33,6 +35,7 @@
       "qualified": "quilt.cpp.odb.class_header.postfix"
     },
     "archetype_location": {
+      "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.odb",
       "archetype": "quilt.cpp.odb.class_header_formatter"
@@ -48,6 +51,7 @@
       "qualified": "quilt.cpp.odb.enum_header.postfix"
     },
     "archetype_location": {
+      "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.odb",
       "archetype": "quilt.cpp.odb.enum_header_formatter"
@@ -63,6 +67,7 @@
       "qualified": "quilt.cpp.odb.odb_options.postfix"
     },
     "archetype_location": {
+      "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.odb",
       "archetype": "quilt.cpp.odb.odb_options_formatter"
@@ -78,6 +83,7 @@
       "qualified": "quilt.cpp.odb.master_header.postfix"
     },
     "archetype_location": {
+      "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.odb",
       "archetype": "quilt.cpp.odb.master_header_formatter"
@@ -93,6 +99,7 @@
       "qualified": "odb_pragma"
     },
     "archetype_location": {
+      "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.odb"
     },
@@ -106,6 +113,7 @@
       "qualified": "quilt.cpp.odb.primitive_header.postfix"
     },
     "archetype_location": {
+      "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.odb",
       "archetype": "quilt.cpp.odb.primitive_header_formatter"

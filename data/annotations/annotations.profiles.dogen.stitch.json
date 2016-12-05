@@ -8,7 +8,7 @@
         "qualified": "decoration.licence_name"
       },
       "archetype_location": {
-        "kernel": "formatters"
+        "family": "formatters"
       },
       "template_kind": "instance",
       "untyped_value": [
@@ -21,7 +21,7 @@
         "qualified": "decoration.copyright_notice"
       },
       "archetype_location": {
-        "kernel": "formatters"
+        "family": "formatters"
       },
       "template_kind": "instance",
       "untyped_value": [
@@ -34,7 +34,7 @@
         "qualified": "decoration.modeline_group_name"
       },
       "archetype_location": {
-        "kernel": "formatters"
+        "family": "formatters"
       },
       "template_kind": "instance",
       "untyped_value": [
@@ -47,7 +47,7 @@
         "qualified": "stitch.stream_variable_name"
       },
       "archetype_location": {
-        "kernel": "stitch"
+        "family": "stitch"
       },
       "template_kind": "instance",
       "untyped_value": [
@@ -60,7 +60,7 @@
         "qualified": "stitch.containing_namespaces"
       },
       "archetype_location": {
-        "kernel": "stitch"
+        "family": "stitch"
       },
       "template_kind": "instance",
       "untyped_value": [

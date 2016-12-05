@@ -34,9 +34,15 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("stitch.formatters"));
 
 const std::string empty_header_guard;
-const std::string model_name("stitch");
+/*
+ * FIXME: humongous hackery just to get annotations to let us
+ * through. It reality, we should just have a family and no facet or
+ * kernel.
+ */
+const std::string family_name("stitch");
+const std::string kernel_name("stitch");
 const std::string facet_name("types");
-const std::string formatter_name("stitch.formatter");
+const std::string archetype_name("stitch.formatter");
 
 const std::string inserter("<<");
 const std::string endl("std::endl;");
@@ -142,7 +148,8 @@ void formatter::format_line_with_single_block(const std::string& stream_name,
 
 annotations::archetype_location formatter::archetype_location() const {
     using annotations::archetype_location;
-    static archetype_location r(model_name, facet_name, formatter_name);
+    static archetype_location
+        r(family_name, kernel_name, facet_name, archetype_name);
     return r;
 }
 

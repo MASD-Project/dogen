@@ -33,6 +33,11 @@ namespace quilt {
 namespace cpp {
 namespace formatters {
 
+std::string traits::family() {
+    static std::string r("quilt");
+    return r;
+}
+
 std::string traits::kernel() {
     static std::string r("quilt.cpp");
     return r;

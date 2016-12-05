@@ -49,8 +49,8 @@ std::string class_implementation_formatter::formatter_name() const {
 annotations::archetype_location
 class_implementation_formatter::archetype_location() const {
     static annotations::archetype_location
-        r(formatters::traits::kernel(), traits::facet(),
-            class_implementation_formatter::static_artefact());
+        r(formatters::traits::family(),  formatters::traits::kernel(),
+          traits::facet(), class_implementation_formatter::static_artefact());
     return r;
 }
 

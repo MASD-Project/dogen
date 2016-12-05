@@ -47,11 +47,10 @@ const std::string archetype_location_archetype_key("archetype");
 const std::string untyped_value_key("untyped_value");
 
 const std::string template_kind_instance("instance");
-const std::string template_kind_global_template("global_template");
+const std::string template_kind_recursive_template("recursive_template");
 const std::string template_kind_kernel_template("kernel_template");
 const std::string template_kind_facet_template("facet_template");
-const std::string template_kind_formatter_template(
-    "formatter_template");
+const std::string template_kind_archetype_template("archetype_template");
 
 const std::string invalid_json_file("Failed to parse JSON file");
 const std::string invalid_option_in_json_file(
@@ -74,14 +73,14 @@ namespace annotations {
 template_kinds profile_hydrator::to_template_kind(const std::string& s) const {
     if (s == template_kind_instance)
         return template_kinds::instance;
-    if (s == template_kind_global_template)
-        return template_kinds::global_template;
+    if (s == template_kind_recursive_template)
+        return template_kinds::recursive_template;
     if (s == template_kind_kernel_template)
         return template_kinds::kernel_template;
     if (s == template_kind_facet_template)
         return template_kinds::facet_template;
-    if (s == template_kind_formatter_template)
-        return template_kinds::formatter_template;
+    if (s == template_kind_archetype_template)
+        return template_kinds::archetype_template;
 
     BOOST_LOG_SEV(lg, error) << invalid_template_kind << "'" << s << "'";
     BOOST_THROW_EXCEPTION(hydration_error(invalid_template_kind + s));

@@ -10,8 +10,8 @@
 <#+
 
 master_header_formatter::master_header_formatter(const std::string& facet_name)
-    : ownership_hierarchy_(formatters::traits::kernel(), facet_name,
-        traits::master_header_archetype(facet_name)) { }
+    : archetype_location_(formatters::traits::family(), formatters::traits::kernel(),
+          facet_name, traits::master_header_archetype(facet_name)) { }
 
 std::string master_header_formatter::formatter_name() const {
     return archetype_location().archetype();
@@ -19,7 +19,7 @@ std::string master_header_formatter::formatter_name() const {
 
 annotations::archetype_location
 master_header_formatter::archetype_location() const {
-    return ownership_hierarchy_;
+    return archetype_location_;
 }
 
 std::type_index master_header_formatter::element_type_index() const {
@@ -34,21 +34,21 @@ master_header_formatter::inclusion_support_type() const {
 
 boost::filesystem::path master_header_formatter::inclusion_path(
     const formattables::locator& l, const yarn::name& n) const {
-    const auto arch(ownership_hierarchy_.archetype());
+    const auto arch(archetype_location_.archetype());
     return l.make_inclusion_path_for_cpp_header(n, arch);
 }
 
 boost::filesystem::path master_header_formatter::full_path(
     const formattables::locator& l, const yarn::name& n) const {
-    const auto arch(ownership_hierarchy_.archetype());
+    const auto arch(archetype_location_.archetype());
     return l.make_full_path_for_cpp_header(n, arch);
 }
 
 std::list<std::string> master_header_formatter::inclusion_dependencies(
     const formattables::inclusion_dependencies_builder_factory& f,
     const yarn::element& e) const {
-    const auto fct(ownership_hierarchy_.facet());
-    const auto arch(ownership_hierarchy_.archetype());
+    const auto fct(archetype_location_.facet());
+    const auto arch(archetype_location_.archetype());
     const auto& mh(assistant::as<fabric::master_header>(arch, e));
 
     const auto i(mh.inclusion_by_facet().find(fct));

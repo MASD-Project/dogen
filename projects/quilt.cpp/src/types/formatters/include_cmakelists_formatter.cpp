@@ -48,8 +48,8 @@ std::string include_cmakelists_formatter::formatter_name() const {
 annotations::archetype_location include_cmakelists_formatter::
 archetype_location() const {
     static annotations::archetype_location
-        r(formatters::traits::kernel(), traits::cmake_facet(),
-            include_cmakelists_formatter::static_artefact());
+        r(formatters::traits::family(), formatters::traits::kernel(),
+          traits::cmake_facet(), include_cmakelists_formatter::static_artefact());
     return r;
 }
 

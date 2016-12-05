@@ -2474,7 +2474,7 @@ content of entries.#</dia:string>
         <dia:point val="36,-80"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="35.95,-80.05;45.405,-75.55"/>
+        <dia:rectangle val="35.95,-80.05;45.405,-74.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="36,-80"/>
@@ -2483,7 +2483,7 @@ content of entries.#</dia:string>
         <dia:real val="9.3550000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#archetype_location#</dia:string>
@@ -2494,7 +2494,7 @@ content of entries.#</dia:string>
       <dia:attribute name="comment">
         <dia:string>#Location of an archetype or set of archetypes in the hierarchical artchetype space.
 
-These must be populated in order, e.g. in order to have a kernel we must have a 
+These must be populated in order, e.g. in order to have a kernel we must have a
 family; in order to have a facet we must have a kernel and in order to have a
 formatter we must have a facet. We may not have any.#</dia:string>
       </dia:attribute>
@@ -2577,6 +2577,29 @@ formatter we must have a facet. We may not have any.#</dia:string>
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
       <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#family#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::string#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Name of the family that owns this field, if any.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
             <dia:string>#kernel#</dia:string>
@@ -3154,7 +3177,7 @@ formatter we must have a facet. We may not have any.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#types_by_model_name#</dia:string>
+            <dia:string>#types_by_kernel_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::unordered_map&lt;std::string, std::list&lt;type&gt;&gt;#</dia:string>
@@ -3163,7 +3186,7 @@ formatter we must have a facet. We may not have any.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Types by model name.#</dia:string>
+            <dia:string>#Types by kernel name.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -5070,13 +5093,13 @@ formatter we must have a facet. We may not have any.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O30">
       <dia:attribute name="obj_pos">
-        <dia:point val="-28,-96"/>
+        <dia:point val="-29,-96"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-28.05,-96.05;-20.135,-89.15"/>
+        <dia:rectangle val="-29.05,-96.05;-21.135,-89.15"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-28,-96"/>
+        <dia:point val="-29,-96"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="7.8150000000000004"/>
@@ -5197,7 +5220,7 @@ formatter we must have a facet. We may not have any.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#global_template#</dia:string>
+            <dia:string>#recursive_template#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>
@@ -5206,7 +5229,9 @@ formatter we must have a facet. We may not have any.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#This field applies to all models, facets and formatters.#</dia:string>
+            <dia:string>#This field applies recursively, from the current level to all below.
+
+The starting point of the recursion is the level supplied by an archetype location.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -5229,7 +5254,7 @@ formatter we must have a facet. We may not have any.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#This field applies to all models.#</dia:string>
+            <dia:string>#This field applies to all kernels.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -5266,7 +5291,7 @@ formatter we must have a facet. We may not have any.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#formatter_template#</dia:string>
+            <dia:string>#archetype_template#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>
@@ -5275,7 +5300,7 @@ formatter we must have a facet. We may not have any.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#This field applies to all formatters.#</dia:string>
+            <dia:string>#This field applies to all archetypes.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -5631,7 +5656,7 @@ formatter we must have a facet. We may not have any.#</dia:string>
         <dia:point val="-38.05,-80"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-38.8,-89.25;-23.8925,-79.2"/>
+        <dia:rectangle val="-38.8,-89.25;-24.8925,-79.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5639,8 +5664,8 @@ formatter we must have a facet. We may not have any.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-38.05,-80"/>
         <dia:point val="-38.05,-85"/>
-        <dia:point val="-24.0925,-85"/>
-        <dia:point val="-24.0925,-89.2"/>
+        <dia:point val="-25.0925,-85"/>
+        <dia:point val="-25.0925,-89.2"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -5776,7 +5801,7 @@ formatter we must have a facet. We may not have any.#</dia:string>
         <dia:point val="-42,-28"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-42.05,-28.05;-3.72,-17.35"/>
+        <dia:rectangle val="-42.05,-28.05;-3.72,-16.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-42,-28"/>
@@ -5785,7 +5810,7 @@ formatter we must have a facet. We may not have any.#</dia:string>
         <dia:real val="38.230000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="10.6"/>
+        <dia:real val="11.399999999999999"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#type_repository_selector#</dia:string>
@@ -6224,7 +6249,7 @@ formatter we must have a facet. We may not have any.#</dia:string>
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#select_type_by_model_name#</dia:string>
+            <dia:string>#select_type_by_kernel_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -6246,6 +6271,54 @@ formatter we must have a facet. We may not have any.#</dia:string>
           </dia:attribute>
           <dia:attribute name="query">
             <dia:boolean val="true"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="parameters">
+            <dia:composite type="umlparameter">
+              <dia:attribute name="name">
+                <dia:string>#n#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="type">
+                <dia:string>#const std::string&amp;#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="value">
+                <dia:string>##</dia:string>
+              </dia:attribute>
+              <dia:attribute name="comment">
+                <dia:string>##</dia:string>
+              </dia:attribute>
+              <dia:attribute name="kind">
+                <dia:enum val="0"/>
+              </dia:attribute>
+            </dia:composite>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umloperation">
+          <dia:attribute name="name">
+            <dia:string>#select_type_by_family_name#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="stereotype">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#const std::list&lt;type&gt;&amp;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="inheritance_type">
+            <dia:enum val="2"/>
+          </dia:attribute>
+          <dia:attribute name="query">
+            <dia:boolean val="false"/>
           </dia:attribute>
           <dia:attribute name="class_scope">
             <dia:boolean val="false"/>
@@ -9280,7 +9353,7 @@ formatter we must have a facet. We may not have any.#</dia:string>
         <dia:point val="-10,-96"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-24.1425,-100.75;-9.25,-95.2"/>
+        <dia:rectangle val="-25.1425,-100.75;-9.25,-95.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -9288,8 +9361,8 @@ formatter we must have a facet. We may not have any.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-10,-96"/>
         <dia:point val="-10,-100"/>
-        <dia:point val="-24.0925,-100"/>
-        <dia:point val="-24.0925,-96"/>
+        <dia:point val="-25.0925,-100"/>
+        <dia:point val="-25.0925,-96"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -10025,13 +10098,13 @@ formatter we must have a facet. We may not have any.#</dia:string>
         <dia:point val="10,-95"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="9.95,-95.05;47.51,-90.55"/>
+        <dia:rectangle val="9.95,-95.05;47.895,-90.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="10,-95"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="37.460000000000001"/>
+        <dia:real val="37.844999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -10149,7 +10222,7 @@ formatter we must have a facet. We may not have any.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#facet_names_by_model_name#</dia:string>
+            <dia:string>#facet_names_by_kernel_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::unordered_map&lt;std::string, std::unordered_set&lt;std::string&gt;&gt;#</dia:string>
@@ -10172,7 +10245,7 @@ formatter we must have a facet. We may not have any.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#formatter_names_by_model_name#</dia:string>
+            <dia:string>#formatter_names_by_kernel_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::unordered_map&lt;std::string, std::unordered_set&lt;std::string&gt;&gt;#</dia:string>
@@ -10380,16 +10453,16 @@ formatter we must have a facet. We may not have any.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="40.6775,-75.6"/>
+        <dia:point val="40.6775,-74.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="33.85,-76.35;41.4275,-62.2"/>
+        <dia:rectangle val="33.85,-75.55;41.4275,-62.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="40.6775,-75.6"/>
+        <dia:point val="40.6775,-74.8"/>
         <dia:point val="40.6775,-67"/>
         <dia:point val="33.9,-67"/>
         <dia:point val="33.9,-63"/>
@@ -10610,17 +10683,17 @@ formatter we must have a facet. We may not have any.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="47.46,-90.6"/>
+        <dia:point val="47.845,-90.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="40.6275,-91.35;48.21,-79.2"/>
+        <dia:rectangle val="40.6275,-91.35;48.595,-79.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="47.46,-90.6"/>
-        <dia:point val="47.46,-85"/>
+        <dia:point val="47.845,-90.6"/>
+        <dia:point val="47.845,-85"/>
         <dia:point val="40.6775,-85"/>
         <dia:point val="40.6775,-80"/>
       </dia:attribute>
@@ -10755,7 +10828,7 @@ formatter we must have a facet. We may not have any.#</dia:string>
         <dia:point val="42.9175,-103.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="28.68,-104.15;43.6675,-94.2"/>
+        <dia:rectangle val="28.8725,-104.15;43.6675,-94.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -10763,8 +10836,8 @@ formatter we must have a facet. We may not have any.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="42.9175,-103.4"/>
         <dia:point val="42.9175,-100"/>
-        <dia:point val="28.73,-100"/>
-        <dia:point val="28.73,-95"/>
+        <dia:point val="28.9225,-100"/>
+        <dia:point val="28.9225,-95"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

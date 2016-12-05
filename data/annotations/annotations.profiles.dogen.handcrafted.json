@@ -14,6 +14,7 @@
         "qualified": "quilt.cpp.types.enabled"
       },
       "archetype_location": {
+        "family": "quilt",
         "kernel": "quilt.cpp"
       },
       "template_kind": "instance",
@@ -27,6 +28,7 @@
         "qualified": "quilt.cpp.types.overwrite"
       },
       "archetype_location": {
+        "family": "quilt",
         "kernel": "quilt.cpp"
       },
       "template_kind": "instance",
@@ -40,6 +42,7 @@
         "qualified": "quilt.cpp.types.forward_declarations.overwrite"
       },
       "archetype_location": {
+        "family": "quilt",
         "kernel": "quilt.cpp"
       },
       "template_kind": "instance",

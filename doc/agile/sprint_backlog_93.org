@@ -12,26 +12,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-12-05 Mon 15:29]
+#+CAPTION: Clock summary at [2016-12-05 Mon 16:19]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *22:31* |       |      | 100.0 |
+| *Total time*                                                                | *23:21* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 22:31   |       |      | 100.0 |
-| Active                                                                      |         | 22:31 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:51 |   8.2 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 1:02 |   4.6 |
+| Stories                                                                     | 23:21   |       |      | 100.0 |
+| Active                                                                      |         | 23:21 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:51 |   7.9 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 1:02 |   4.4 |
 | COMPLETED Update readme                                                     |         |       | 0:11 |   0.8 |
 | COMPLETED Test data generation for dates generates invalid dates            |         |       | 0:33 |   2.4 |
-| COMPLETED Handle missing stitch templates scenario                          |         |       | 1:04 |   4.7 |
-| COMPLETED Move project directory to output options                          |         |       | 1:10 |   5.2 |
-| COMPLETED Update the conceptual model to clarify backends and kernels       |         |       | 4:20 |  19.2 |
-| COMPLETED Detect knitter and disable code generation accordingly            |         |       | 1:15 |   5.6 |
-| STARTED Clean up kernel and backend confusion                               |         |       | 4:10 |  18.5 |
-| STARTED Add support for Decimal numbers                                     |         |       | 0:32 |   2.4 |
-| STARTED Add support for C#                                                  |         |       | 5:46 |  25.6 |
-| STARTED Add a "language" directory for each backend                         |         |       | 0:37 |   2.7 |
+| COMPLETED Handle missing stitch templates scenario                          |         |       | 1:04 |   4.6 |
+| COMPLETED Move project directory to output options                          |         |       | 1:10 |   5.0 |
+| COMPLETED Update the conceptual model to clarify backends and kernels       |         |       | 4:20 |  18.6 |
+| COMPLETED Detect knitter and disable code generation accordingly            |         |       | 1:15 |   5.4 |
+| STARTED Clean up kernel and backend confusion                               |         |       | 5:00 |  21.4 |
+| STARTED Add a "language" directory for each backend                         |         |       | 0:37 |   2.6 |
+| STARTED Add support for C#                                                  |         |       | 5:46 |  24.7 |
+| STARTED Add support for Decimal numbers                                     |         |       | 0:32 |   2.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -170,6 +170,7 @@ before you built knitter. We should make them conditional on detecting
 =knitter=. We just need to make sure this is not cached by CMake.
 
 *** STARTED Clean up kernel and backend confusion                     :story:
+    CLOCK: [2016-12-05 Mon 15:30]--[2016-12-05 Mon 16:20] =>  0:50
     CLOCK: [2016-12-05 Mon 13:34]--[2016-12-05 Mon 14:01] =>  0:42
     CLOCK: [2016-12-05 Mon 11:09]--[2016-12-05 Mon 12:30] =>  1:21
     CLOCK: [2016-12-05 Mon 11:01]--[2016-12-05 Mon 11:08] =>  0:07
@@ -201,32 +202,11 @@ difficult to isolate faults. We can break it down somewhat:
 - split kernel from family;
 - rename formatter to archetype in template kinds;
 - rename global template to recursive template;
-- make recursive template work at all levels;
-- make prefix a recursive field at archetype level, adding default
-  values to profiles.
-- make directory a recursive field at facet level,  adding default
-  values to profiles.
+- make recursive template work at all levels.
 
-*** STARTED Add support for Decimal numbers                           :story:
-    CLOCK: [2016-11-30 Wed 13:04]--[2016-11-30 Wed 13:36] =>  0:32
-
-- try using ICU DecNumber library.
-- check compiler support (MSVC may have decimals; if so, use that instead)
-
-*** STARTED Add support for C#                                        :story:
-    CLOCK: [2016-12-04 Sun 18:45]--[2016-12-04 Sun 18:52] =>  0:07
-    CLOCK: [2016-12-04 Sun 18:29]--[2016-12-04 Sun 18:33] =>  0:04
-    CLOCK: [2016-12-02 Fri 13:10]--[2016-12-02 Fri 13:28] =>  0:18
-    CLOCK: [2016-12-02 Fri 11:06]--[2016-12-02 Fri 11:12] =>  0:06
-    CLOCK: [2016-12-02 Fri 10:35]--[2016-12-02 Fri 11:05] =>  0:30
-    CLOCK: [2016-12-02 Fri 10:15]--[2016-12-02 Fri 10:35] =>  0:20
-    CLOCK: [2016-12-01 Thu 11:01]--[2016-12-01 Thu 12:16] =>  1:15
-    CLOCK: [2016-11-30 Wed 16:21]--[2016-11-30 Wed 17:45] =>  1:24
-    CLOCK: [2016-11-30 Wed 16:19]--[2016-11-30 Wed 16:20] =>  0:01
-    CLOCK: [2016-11-30 Wed 16:01]--[2016-11-30 Wed 16:19] =>  0:18
-    CLOCK: [2016-11-30 Wed 13:37]--[2016-11-30 Wed 15:00] =>  1:23
-
-Create a quilt model for C#.
+Actually its not easy to split these tasks because they are
+interrelated. However, we've moved out any work which is not strictly
+required and done all the required work in one go.
 
 *** STARTED Add a "language" directory for each backend               :story:
     CLOCK: [2016-12-04 Sun 19:37]--[2016-12-04 Sun 19:40] =>  0:03
@@ -272,6 +252,42 @@ Tasks:
   fields.
 - set =quilt.csharp.enabled= to false on all test models to start off
   with, and update them as we start adding C# support.
+
+*** STARTED Add support for C#                                        :story:
+    CLOCK: [2016-12-04 Sun 18:45]--[2016-12-04 Sun 18:52] =>  0:07
+    CLOCK: [2016-12-04 Sun 18:29]--[2016-12-04 Sun 18:33] =>  0:04
+    CLOCK: [2016-12-02 Fri 13:10]--[2016-12-02 Fri 13:28] =>  0:18
+    CLOCK: [2016-12-02 Fri 11:06]--[2016-12-02 Fri 11:12] =>  0:06
+    CLOCK: [2016-12-02 Fri 10:35]--[2016-12-02 Fri 11:05] =>  0:30
+    CLOCK: [2016-12-02 Fri 10:15]--[2016-12-02 Fri 10:35] =>  0:20
+    CLOCK: [2016-12-01 Thu 11:01]--[2016-12-01 Thu 12:16] =>  1:15
+    CLOCK: [2016-11-30 Wed 16:21]--[2016-11-30 Wed 17:45] =>  1:24
+    CLOCK: [2016-11-30 Wed 16:19]--[2016-11-30 Wed 16:20] =>  0:01
+    CLOCK: [2016-11-30 Wed 16:01]--[2016-11-30 Wed 16:19] =>  0:18
+    CLOCK: [2016-11-30 Wed 13:37]--[2016-11-30 Wed 15:00] =>  1:23
+
+Create a quilt model for C#.
+
+*** STARTED Add support for Decimal numbers                           :story:
+    CLOCK: [2016-11-30 Wed 13:04]--[2016-11-30 Wed 13:36] =>  0:32
+
+- try using ICU DecNumber library.
+- check compiler support (MSVC may have decimals; if so, use that instead)
+
+*** Use templates for directory and prefix fields                     :story:
+
+At present we have a lot of duplication on the annotations for certain
+fields. This is because we need different defaults depending on the
+facet etc. A different approach would be to use the appropriate
+template (without default values) and then using profiles to default
+those that need defaulting.
+
+Tasks:
+
+- make prefix a recursive field at archetype level, adding default
+  values to profiles.
+- make directory a recursive field at facet level,  adding default
+  values to profiles.
 
 *** Add an example of redis and dogen                                 :story:
 

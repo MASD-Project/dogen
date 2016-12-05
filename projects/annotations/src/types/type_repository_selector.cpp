@@ -103,8 +103,8 @@ select_type_by_facet_name(const std::string& n) const {
 }
 
 const std::list<type>& type_repository_selector::
-select_type_by_model_name(const std::string& n) const {
-    const auto& c(repository_.types_by_model_name());
+select_type_by_kernel_name(const std::string& n) const {
+    const auto& c(repository_.types_by_kernel_name());
     const auto i(c.find(n));
     if (i == c.end()) {
         BOOST_LOG_SEV(lg, error) << no_fields_for_model << n;

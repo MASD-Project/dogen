@@ -35,6 +35,7 @@ namespace annotations {
 std::ostream& operator<<(std::ostream& s, const archetype_location& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::annotations::archetype_location\"" << ", "
+      << "\"family\": " << "\"" << tidy_up_string(v.family()) << "\"" << ", "
       << "\"kernel\": " << "\"" << tidy_up_string(v.kernel()) << "\"" << ", "
       << "\"facet\": " << "\"" << tidy_up_string(v.facet()) << "\"" << ", "
       << "\"archetype\": " << "\"" << tidy_up_string(v.archetype()) << "\""
