@@ -53,8 +53,13 @@ managed_directories(const options::knitting_options& ko,
     return r;
 }
 
+annotations::archetype_location workflow::archetype_location() const {
+    annotations::archetype_location r;
+    return r;
+}
+
 std::forward_list<annotations::archetype_location>
-workflow::archetype_location() const {
+workflow::archetype_locations() const {
     std::forward_list<annotations::archetype_location> r;
     return r;
 }

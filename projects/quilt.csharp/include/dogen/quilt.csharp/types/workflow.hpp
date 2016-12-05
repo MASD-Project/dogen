@@ -64,8 +64,10 @@ public:
         managed_directories(const options::knitting_options& ko,
             const yarn::name& model_name) const override;
 
+    annotations::archetype_location archetype_location() const override;
+
     std::forward_list<annotations::archetype_location>
-        archetype_location() const override;
+        archetype_locations() const override;
 
     std::forward_list<dogen::formatters::artefact> generate(
         const options::knitting_options& ko,

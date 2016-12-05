@@ -128,7 +128,7 @@ void registrar::validate() const {
 
     BOOST_LOG_SEV(lg, debug) << "Registrar is in a valid state. Repository: "
                              << frp;
-    BOOST_LOG_SEV(lg, debug) << "Ownership hierarchy: " << ownership_hierarchy_;
+    BOOST_LOG_SEV(lg, debug) << "Archetype locations: " << archetype_locations_;
 }
 
 void registrar::register_formatter_helper(
@@ -162,7 +162,7 @@ register_formatter(std::shared_ptr<artefact_formatter_interface> f) {
     if (al.kernel().empty())
         BOOST_THROW_EXCEPTION(registrar_error(empty_model_name));
 
-    ownership_hierarchy_.push_front(al);
+    archetype_locations_.push_front(al);
     formatter_repository_.stock_artefact_formatters_.push_front(f);
 
     /*
@@ -192,8 +192,8 @@ const repository& registrar::formatter_repository() const {
 }
 
 const std::forward_list<annotations::archetype_location>&
-registrar::ownership_hierarchy() const {
-    return ownership_hierarchy_;
+registrar::archetype_locations() const {
+    return archetype_locations_;
 }
 
 const std::unordered_map<

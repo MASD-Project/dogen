@@ -79,12 +79,7 @@ std::vector<boost::filesystem::path> workflow::obtain_data_dirs() const {
 
 annotations::archetype_location_repository workflow::
 obtain_archetype_location_repository() const {
-    std::list<annotations::archetype_location> als;
-    const auto& rg(quilt::workflow::registrar());
-    for (const auto b : rg.backends())
-        for (const auto al : b->archetype_location())
-            als.push_back(al);
-
+    const auto als(quilt::workflow::archetype_locations());
     annotations::archetype_location_repository_factory f;
     const auto r(f.make(als));
     return r;

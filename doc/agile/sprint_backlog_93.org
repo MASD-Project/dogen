@@ -12,25 +12,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-12-05 Mon 17:26]
+#+CAPTION: Clock summary at [2016-12-05 Mon 18:08]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *23:59* |       |      | 100.0 |
+| *Total time*                                                                | *24:40* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 23:59   |       |      | 100.0 |
-| Active                                                                      |         | 23:59 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:51 |   7.7 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 1:02 |   4.3 |
-| COMPLETED Update readme                                                     |         |       | 0:11 |   0.8 |
-| COMPLETED Test data generation for dates generates invalid dates            |         |       | 0:33 |   2.3 |
-| COMPLETED Handle missing stitch templates scenario                          |         |       | 1:04 |   4.4 |
-| COMPLETED Move project directory to output options                          |         |       | 1:10 |   4.9 |
-| COMPLETED Update the conceptual model to clarify backends and kernels       |         |       | 4:20 |  18.1 |
-| COMPLETED Detect knitter and disable code generation accordingly            |         |       | 1:15 |   5.2 |
-| COMPLETED Clean up kernel and backend confusion                             |         |       | 5:17 |  22.0 |
-| STARTED Add a "language" directory for each backend                         |         |       | 0:58 |   4.0 |
-| STARTED Add support for C#                                                  |         |       | 5:46 |  24.0 |
+| Stories                                                                     | 24:40   |       |      | 100.0 |
+| Active                                                                      |         | 24:40 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:51 |   7.5 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 1:02 |   4.2 |
+| COMPLETED Update readme                                                     |         |       | 0:11 |   0.7 |
+| COMPLETED Test data generation for dates generates invalid dates            |         |       | 0:33 |   2.2 |
+| COMPLETED Handle missing stitch templates scenario                          |         |       | 1:04 |   4.3 |
+| COMPLETED Move project directory to output options                          |         |       | 1:10 |   4.7 |
+| COMPLETED Update the conceptual model to clarify backends and kernels       |         |       | 4:20 |  17.6 |
+| COMPLETED Detect knitter and disable code generation accordingly            |         |       | 1:15 |   5.1 |
+| COMPLETED Clean up kernel and backend confusion                             |         |       | 5:17 |  21.4 |
+| STARTED Add a "language" directory for each backend                         |         |       | 1:39 |   6.7 |
+| STARTED Add support for C#                                                  |         |       | 5:46 |  23.4 |
 | STARTED Add support for Decimal numbers                                     |         |       | 0:32 |   2.2 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -211,6 +211,7 @@ interrelated. However, we've moved out any work which is not strictly
 required and done all the required work in one go.
 
 *** STARTED Add a "language" directory for each backend               :story:
+    CLOCK: [2016-12-05 Mon 17:27]--[2016-12-05 Mon 18:08] =>  0:41
     CLOCK: [2016-12-05 Mon 17:10]--[2016-12-05 Mon 17:26] =>  0:16
     CLOCK: [2016-12-05 Mon 16:38]--[2016-12-05 Mon 16:43] =>  0:05
     CLOCK: [2016-12-04 Sun 19:37]--[2016-12-04 Sun 19:40] =>  0:03
@@ -251,9 +252,25 @@ For this to work we need:
 
 Tasks:
 
-- add quilt level fields. Ensure we have at least one formatter in
-  =quilt.csharp=, with a archetype location so that we generate its
-  fields.
+- rename archetype location in backend to something else to reflect
+  its real purpose (locations of all formatters). Source it directly
+  from quilt rather than the quilt registrar in knit.
+- add archetype location for the backend itself.
+- read enabled field in the quilt model for all backends. Remember the
+  number of enabled backends.
+- before executing a backend, get its archetype location and obtain
+  the corresponding enabled field. If not enabled, do not execute.
+- if enabled, supply the number of enabled backends to the backend and
+  pass it on to locator.
+- add a field at quilt level: =enable_kernel_directories=. Defaults to
+  false. If true, we always generate it. If false, and number of
+  enabled backends > 1 we also generate it (logging a warning). Add a
+  "kernel_type_group" to locator to read these new fields.
+- add a field at quit.cpp level: directory. If we need a kernel
+  directory, read this field and use it when creating output
+  directory.
+- add one formatter in =quilt.csharp=, with a archetype location so
+  that we generate its fields.
 - set =quilt.csharp.enabled= to false on all test models to start off
   with, and update them as we start adding C# support.
 

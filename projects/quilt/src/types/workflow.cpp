@@ -54,6 +54,18 @@ backend_registrar& workflow::registrar() {
     return *registrar_;
 }
 
+std::list<annotations::archetype_location> workflow::archetype_locations() {
+    std::list<annotations::archetype_location> r;
+    const auto& rg(quilt::workflow::registrar());
+    for (const auto b : rg.backends()) {
+        // Note: not splicing due to a mistmatch in the list types
+        // (forward list vs regular list.)
+        for (const auto al : b->archetype_locations())
+            r.push_back(al);
+    }
+    return r;
+}
+
 std::forward_list<boost::filesystem::path>
 workflow::managed_directories(const yarn::model& m) const {
     const auto& ko(knitting_options_);

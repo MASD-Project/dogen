@@ -66,10 +66,11 @@ public:
     const repository& formatter_repository() const;
 
     /**
-     * @brief Returns the ownership hierarchy for all formatters.
+     * @brief Returns the archetype locations for the registered
+     * formatters.
      */
     const std::forward_list<annotations::archetype_location>&
-    ownership_hierarchy() const;
+    archetype_locations() const;
 
     const std::unordered_map<
         std::string,
@@ -80,7 +81,7 @@ public:
 
 private:
     repository formatter_repository_;
-    std::forward_list<annotations::archetype_location> ownership_hierarchy_;
+    std::forward_list<annotations::archetype_location> archetype_locations_;
 };
 
 template<typename Formatter>

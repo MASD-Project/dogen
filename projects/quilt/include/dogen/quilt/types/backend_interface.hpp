@@ -62,11 +62,18 @@ public:
         const yarn::name& model_name) const = 0;
 
     /**
-     * @brief All artefact locations for this backend, listing all
-     * available kernels, facets and artchetypes.
+     * @brief The artefact location for the backend itself.
+     */
+    virtual annotations::archetype_location archetype_location() const = 0;
+
+    /**
+     * @brief All archetype locations for the archetypes owned by this
+     * backend, listing all available kernels, facets and archetypes.
+     *
+     * FIXME: we need a better name for this.
      */
     virtual std::forward_list<annotations::archetype_location>
-    archetype_location() const = 0;
+    archetype_locations() const = 0;
 
     /**
      * @brief Generates the source code for the backend.

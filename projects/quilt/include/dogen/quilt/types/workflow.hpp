@@ -56,6 +56,14 @@ public:
     static backend_registrar& registrar();
 
     /**
+     * @brief Returns all of the available archetype locations across
+     * all backends.
+     */
+    static std::list<annotations::archetype_location>
+    archetype_locations();
+
+public:
+    /**
      * @brief Returns all directories managed by all backends.
      */
     std::forward_list<boost::filesystem::path>

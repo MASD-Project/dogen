@@ -100,9 +100,14 @@ workflow::format(const annotations::type_repository& atrp,
     return wf.execute(fm);
 }
 
+annotations::archetype_location workflow::archetype_location() const {
+    static annotations::archetype_location r;
+    return r;
+}
+
 std::forward_list<annotations::archetype_location>
-workflow::archetype_location() const {
-    return formatters::workflow::registrar().ownership_hierarchy();
+workflow::archetype_locations() const {
+    return formatters::workflow::registrar().archetype_locations();
 }
 
 std::forward_list<dogen::formatters::artefact>
