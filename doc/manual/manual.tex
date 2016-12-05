@@ -309,9 +309,9 @@ examples to clarify intent~--- but there is no requirement for such
 mapping to exist at the conceptual level.
 
 Note also that each file under the \texttt{physical directory} is
-considered a distinct element in the set of the \texttt{physical
-  model}, even if it has the same content as other files in the
-\texttt{physical directory}.
+considered a distinct element in the \texttt{physical model}, even if
+it has the same content as other files in the \texttt{physical
+  directory}.
 
 \begin{concept}
   An \texttt{artefact} is defined as a logical representation of a
@@ -391,11 +391,11 @@ something like ``C++ header file'', ``class definition'',
 It is important to keep in mind that \texttt{structural features} are
 not directly related to programming language constructs. It just so
 happens that it is possible to map some \texttt{structural features}
-to programming language constructs~--- but it's not always possible on
-all cases. Note also that at the \texttt{conceptual model} level we
-are not particularly interested in defining an exhaustive list of
-\texttt{structural features}; it will later became clearer why that is
-the case.
+to programming language constructs~--- but it's not always the
+case. Note also that at the \texttt{conceptual model} level we are not
+particularly interested in defining an exhaustive list of
+\texttt{structural features}; it will later became clearer why that
+is.
 
 \begin{concept}
 An \texttt{artefact} may have a meta-type associated with it, called
@@ -419,11 +419,11 @@ with a set of \texttt{structural features}. Not all \texttt{structural
   features} that belong to an \texttt{archetype} need be expressed on
 all of its \texttt{artefacts}; however, all \texttt{structural
   features} of an \texttt{artefact} must be part of its
-\texttt{archetype}. \texttt{Structural elements} which are common
+\texttt{archetype}. \texttt{Structural features} which are common
 across artefacts are called \texttt{aspects}.
 
 Finally, whilst \texttt{artefacts} are specific to a \texttt{logical
-  model}, \texttt{archetypes} span a set of \texttt{logical model}
+  model}, \texttt{archetypes} span a set of \texttt{logical models}
 because, by definition, their objective is to extract structural
 commonalities between them.
 
@@ -459,8 +459,8 @@ The \texttt{archetype space} is the set of all possible
 \begin{concept}
 The \texttt{archetype location} is a location within the
 \texttt{archetype space}, which maps one-to-one to the
-\texttt{archetype}'s identity. It is made up of all the hierarchical
-levels.
+\texttt{archetype}'s identity. It is made up of instances of the
+hierarchical levels.
 \end{concept}
 
 \texttt{Archetype space} is just the general notion of a ``space'' in
@@ -475,51 +475,64 @@ well-defined purpose such as for example ``providing a definition of a
 domain type in a programming language P''. \texttt{Facets} can be
 grouped into \texttt{kernels}: these are sets of \texttt{facets} that
 provide related functionality such as for example ``providing domain
-models for a programming language P''. \texttt{Kernels} themselves can
-be grouped into \texttt{families}: ``providing domain models''.
+models for a programming language P''. There is no requirement that a
+\texttt{kernel} must only support a single programming language from a
+conceptual level, but in practice that is how the concept evolved.
+\texttt{Kernels} themselves can be grouped into \texttt{families}:
+``providing domain models''.
 
-
-
-
-
- Thus, an
-\texttt{output model} can map to one or more ``projects'' from a user
-perspective, across several programming languages; as far as Dogen is
-concerned, these can all be part of the same \texttt{output model}.
-
-
-
-
-  The \texttt{archetype model} is defined as a set of elements called
-  \texttt{archetypes}.
-
-
-
-
-
-
-\begin{quote}
-  \textbf{\texttt{Output Model} and Programming Languages}
-\end{quote}
-
-
-
-
-
+\begin{concept}
 An \texttt{archetype} has a meta-type: its \texttt{modeling
   element}. A \texttt{modeling element} is an entity with
-identity. The objective of the \texttt{element} is to factor out the
-information needed to recreate its set of associated
-\texttt{archetypes}. Example: if the user intends to generate a domain
-model with a class called ``hello'', there will be a one-to-one
-mapping to a \texttt{modeling element} representing
-``hello''. However, its important to note that the \texttt{modeling
-  element} \emph{is not a programming language construct}; it is
-merely mappable to them. This means that the same \texttt{modeling
-  element} can be mapped to constructs in many programming languages,
-depending on their structure. Other modeling elements may specialise
-in different kinds of content such as build system information and so
-on.
+identity.
+\end{concept}
+
+Just like an \texttt{archetype} distils the essence of a set of
+related files, the objective of the \texttt{modeling element} is to
+factor out the information needed to recreate its set of associated
+\texttt{archetypes}. Whilst \texttt{archetypes} must concern
+themselves with implementation specific notions~--- remember that each
+\texttt{archetype} traditionally maps to a \texttt{formatting
+  function}~--- the \texttt{modeling element} has no such
+concerns. Lets now look at a more concrete example to make these
+definitions clearer. Say you have a ``class X'' which needs to support
+a binary serialisation protocol~--- call it ``protocol Y''~--- as well
+as provide a definition for the type. We shall have a separate
+\texttt{kernel} for each of the programming languages required: say
+one for C\# and another one for C++. In addition, each \texttt{kernel}
+will need to support at least two \texttt{facets}: the domain type
+definition and ``protocol Y'' support. For C++ we will end up with a
+number of \texttt{archetypes}:
+
+\begin{itemize}
+\item the header file for a class;
+\item the implementation file for a class;
+\item possibly a forward declaration for a class;
+\item the header file providing ``protocol Y'' support for a class;
+\item the implementation file providing ``protocol Y'' support for a class;
+\end{itemize}
+
+In C\# we may end up with the following \texttt{archetypes}:
+
+\begin{itemize}
+\item the file for the class;
+\item the file providing ``protocol Y'' for the class;
+\end{itemize}
+
+However, all of these constructs map to one and only one
+\texttt{modeling element}~--- in this case, a \texttt{modeling
+  element} representing ``class X''. However, its important to note
+that the \texttt{modeling element} \emph{is not a programming language
+  construct} such as a class; it is merely mappable to them. This
+means that the same \texttt{modeling element} can be mapped to
+constructs in many programming languages, depending on their
+structure. Other modeling elements may specialise in different kinds
+of content such as build system information and so on.
+
+
+
+
+
 
 A \texttt{model} is then a container of \texttt{modeling elements}.  A
 \texttt{product} is composed of a set of \texttt{models}. It is up to
@@ -544,6 +557,36 @@ arranged in a hierarchy:
     \texttt{formatters} live.
   \item the \texttt{artefact space}, where \texttt{artefacts}.
 \end{itemize}
+
+ Thus, an
+\texttt{output model} can map to one or more ``projects'' from a user
+perspective, across several programming languages; as far as Dogen is
+concerned, these can all be part of the same \texttt{output model}.
+
+
+
+
+  The \texttt{archetype model} is defined as a set of elements called
+  \texttt{archetypes}.
+
+
+
+
+
+
+\begin{quote}
+  \textbf{\texttt{Output Model} and Programming Languages}
+\end{quote}
+
+
+Things that need to be addressed:
+
+- logical model/logical space is the space where all the meta-models
+live, including modeling space, archetype space and artefact space.
+- introduce M0 for files, M1 for artefacts, M2 for archetypes, M3 for
+modeling elements.
+
+
 
 \chapter{Model Driven Software Development}
 \label{mdsd}
