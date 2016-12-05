@@ -8,6 +8,7 @@
 <#@ stitch.inclusion_dependency="dogen/yarn/types/object.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/formatters/types/sequence_formatter.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/fabric/odb_options.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/assistant.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/inclusion_constants.hpp" #>
@@ -29,7 +30,7 @@ std::string odb_options_formatter::formatter_name() const {
 annotations::archetype_location
 odb_options_formatter::archetype_location() const {
     static annotations::archetype_location
-        r(formatters::traits::family(), formatters::traits::kernel(),
+        r(cpp::traits::family(), cpp::traits::kernel(),
           traits::facet(), odb_options_formatter::static_artefact());
     return r;
 }

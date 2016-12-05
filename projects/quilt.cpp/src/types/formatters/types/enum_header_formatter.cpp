@@ -23,6 +23,7 @@
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
+#include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/formatters/types/sequence_formatter.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
 #include <boost/make_shared.hpp>
@@ -46,8 +47,9 @@ std::string enum_header_formatter::formatter_name() const {
 annotations::archetype_location
 enum_header_formatter::archetype_location() const {
     static annotations::archetype_location
-        r(formatters::traits::family(), formatters::traits::kernel(),
-          traits::facet(), enum_header_formatter::static_artefact());
+        r(cpp::traits::family(), cpp::traits::kernel(),
+          traits::facet(),
+          enum_header_formatter::static_artefact());
     return r;
 }
 

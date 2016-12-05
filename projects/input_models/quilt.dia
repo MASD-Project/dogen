@@ -634,7 +634,7 @@
         <dia:point val="34.9167,-10"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="34.8667,-10.05;73.9667,-1.55"/>
+        <dia:rectangle val="34.8667,-10.05;73.9667,-0.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="34.9167,-10"/>
@@ -643,7 +643,7 @@
         <dia:real val="39"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="8.4000000000000004"/>
+        <dia:real val="9.1999999999999993"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#backend_interface#</dia:string>
@@ -767,6 +767,36 @@
         <dia:composite type="umloperation">
           <dia:attribute name="name">
             <dia:string>#archetype_location#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="stereotype">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#annotations::archetype_location#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="inheritance_type">
+            <dia:enum val="2"/>
+          </dia:attribute>
+          <dia:attribute name="query">
+            <dia:boolean val="true"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="parameters"/>
+        </dia:composite>
+        <dia:composite type="umloperation">
+          <dia:attribute name="name">
+            <dia:string>#archetype_locations#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -988,7 +1018,7 @@
         <dia:point val="83.9175,8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="73.8667,-1.65;84.6675,8.8"/>
+        <dia:rectangle val="73.8667,-0.85;84.6675,8.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -997,7 +1027,7 @@
         <dia:point val="83.9175,8"/>
         <dia:point val="83.9175,3"/>
         <dia:point val="73.9167,3"/>
-        <dia:point val="73.9167,-1.6"/>
+        <dia:point val="73.9167,-0.8"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -1059,7 +1089,7 @@
         <dia:point val="27.3775,8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="26.6275,-1.65;35.1167,8.8"/>
+        <dia:rectangle val="26.6275,-0.85;35.1167,8.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1068,7 +1098,7 @@
         <dia:point val="27.3775,8"/>
         <dia:point val="27.3775,3"/>
         <dia:point val="34.9167,3"/>
-        <dia:point val="34.9167,-1.6"/>
+        <dia:point val="34.9167,-0.8"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -1319,7 +1349,7 @@
       <dia:attribute name="orth_points">
         <dia:point val="27.3775,13"/>
         <dia:point val="27.3775,19"/>
-        <dia:point val="21.6389,19"/>
+        <dia:point val="21.6388,19"/>
         <dia:point val="21.6388,23.9504"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
@@ -1346,7 +1376,7 @@
         <dia:point val="10,-21"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="9.95,-21.05;30.2,-15.25"/>
+        <dia:rectangle val="9.95,-21.05;30.2,-14.45"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1358,7 +1388,7 @@
         <dia:real val="20.150000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.7000000000000002"/>
+        <dia:real val="6.5"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>

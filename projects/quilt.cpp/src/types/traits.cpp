@@ -24,6 +24,16 @@ namespace dogen {
 namespace quilt {
 namespace cpp {
 
+std::string traits::family() {
+    static std::string r("quilt");
+    return r;
+}
+
+std::string traits::kernel() {
+    static std::string r("quilt.cpp");
+    return r;
+}
+
 std::string traits::enabled() {
     static std::string r("enabled");
     return r;

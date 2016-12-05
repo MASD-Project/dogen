@@ -11,8 +11,9 @@ std::string {{class.simple_name}}::formatter_name() const {
 annotations::archetype_location
 {{class.simple_name}}::archetype_location() const {
     static annotations::archetype_location
-        r(formatters::traits::family(),  formatters::traits::kernel(),
-          traits::facet(), {{class.simple_name}}::static_artefact());
+        r(cpp::traits::family(),  cpp::traits::kernel(),
+          traits::facet(),
+          {{class.simple_name}}::static_artefact());
     return r;
 }
 

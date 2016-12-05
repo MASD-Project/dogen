@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/traits.hpp"
 
@@ -28,7 +29,7 @@ namespace formatters {
 namespace hash {
 
 std::string traits::facet() {
-    static std::string r(formatters::traits::kernel() + ".hash");
+    static std::string r(cpp::traits::kernel() + ".hash");
     return r;
 }
 

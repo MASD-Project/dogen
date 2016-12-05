@@ -25,6 +25,7 @@
 #include "dogen/quilt.cpp/types/formatters/io/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/inclusion_constants.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
+#include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/yarn/types/exception.hpp"
 #include <boost/make_shared.hpp>
@@ -48,8 +49,9 @@ std::string exception_header_formatter::formatter_name() const {
 annotations::archetype_location
 exception_header_formatter::archetype_location() const {
     static annotations::archetype_location
-        r(formatters::traits::family(), formatters::traits::kernel(),
-          traits::facet(), exception_header_formatter::static_artefact());
+        r(cpp::traits::family(), cpp::traits::kernel(),
+          traits::facet(),
+          exception_header_formatter::static_artefact());
     return r;
 }
 

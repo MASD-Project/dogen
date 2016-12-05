@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/test_data/traits.hpp"
 
@@ -28,7 +29,7 @@ namespace formatters {
 namespace test_data {
 
 std::string traits::facet() {
-    static std::string r(formatters::traits::kernel() + ".test_data");
+    static std::string r(cpp::traits::kernel() + ".test_data");
     return r;
 }
 

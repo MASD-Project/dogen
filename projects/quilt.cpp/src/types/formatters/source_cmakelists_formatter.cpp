@@ -23,6 +23,7 @@
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/fabric/cmakelists.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
+#include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/formatters/types/sequence_formatter.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include <boost/algorithm/string/case_conv.hpp>
@@ -47,8 +48,9 @@ std::string source_cmakelists_formatter::formatter_name() const {
 annotations::archetype_location source_cmakelists_formatter::
 archetype_location() const {
     static annotations::archetype_location
-        r(formatters::traits::family(), formatters::traits::kernel(),
-          traits::cmake_facet(), source_cmakelists_formatter::static_artefact());
+        r(cpp::traits::family(), cpp::traits::kernel(),
+          traits::cmake_facet(),
+          source_cmakelists_formatter::static_artefact());
     return r;
 }
 

@@ -6,6 +6,7 @@
 <#@ stitch.inclusion_dependency="dogen/utility/log/logger.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/formatters/types/sequence_formatter.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/yarn/types/enumeration.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/assistant.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/inclusion_constants.hpp" #>

@@ -46,8 +46,9 @@ std::string primitive_header_formatter::formatter_name() const {
 annotations::archetype_location
 primitive_header_formatter::archetype_location() const {
     static annotations::archetype_location
-        r(formatters::traits::family(), formatters::traits::kernel(),
-          traits::facet(), primitive_header_formatter::static_artefact());
+        r(cpp::traits::family(), cpp::traits::kernel(),
+          traits::facet(),
+          primitive_header_formatter::static_artefact());
     return r;
 }
 

@@ -18,35 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_TRAITS_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_TRAITS_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <string>
+#include "dogen/quilt.csharp/types/traits.hpp"
 
 namespace dogen {
 namespace quilt {
-namespace cpp {
-namespace formatters {
+namespace csharp {
 
-struct traits {
-    /**
-     * @brief Name of the master header archetype for a given facet.
-     */
-    static std::string master_header_archetype(const std::string& facet);
+std::string traits::family() {
+    static std::string r("quilt");
+    return r;
+}
 
-    static std::string to_formatter_name(const std::string& archetype);
+std::string traits::kernel() {
+    static std::string r("quilt.csharp");
+    return r;
+}
 
-    static std::string cmake_facet();
-    static std::string include_cmakelists_archetype();
-    static std::string source_cmakelists_archetype();
+std::string traits::enabled() {
+    static std::string r("enabled");
+    return r;
+}
 
-    static std::string canonical_archetype(const std::string& facet);
-};
-
-} } } }
-
-#endif
+} } }

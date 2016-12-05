@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/odb/traits.hpp"
 
@@ -28,7 +29,7 @@ namespace formatters {
 namespace odb {
 
 std::string traits::facet() {
-    static std::string r(formatters::traits::kernel() + ".odb");
+    static std::string r(cpp::traits::kernel() + ".odb");
     return r;
 }
 

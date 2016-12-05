@@ -33,16 +33,6 @@ namespace quilt {
 namespace cpp {
 namespace formatters {
 
-std::string traits::family() {
-    static std::string r("quilt");
-    return r;
-}
-
-std::string traits::kernel() {
-    static std::string r("quilt.cpp");
-    return r;
-}
-
 std::string traits::
 master_header_archetype(const std::string& facet) {
     return facet + master_header_postfix;

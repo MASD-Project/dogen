@@ -4,13 +4,14 @@
 <#@ stitch.inclusion_dependency="dogen/formatters/types/sequence_formatter.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/fabric/master_header.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/assistant.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/assistant.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/master_header_formatter.hpp" #>
 <#+
 
 master_header_formatter::master_header_formatter(const std::string& facet_name)
-    : archetype_location_(formatters::traits::family(), formatters::traits::kernel(),
+    : archetype_location_(cpp::traits::family(), cpp::traits::kernel(),
           facet_name, traits::master_header_archetype(facet_name)) { }
 
 std::string master_header_formatter::formatter_name() const {

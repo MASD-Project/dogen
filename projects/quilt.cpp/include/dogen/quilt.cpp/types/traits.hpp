@@ -37,6 +37,16 @@ namespace cpp {
  */
 struct traits {
     /**
+     * @brief Name of this family.
+     */
+    static std::string family();
+
+    /**
+     * @brief Name of this kernel.
+     */
+    static std::string kernel();
+
+    /**
      * @brief If set to false, no generation will occur.
      */
     static std::string enabled();
