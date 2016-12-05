@@ -38,12 +38,14 @@ set_target_properties(${name} PROPERTIES OUTPUT_NAME ${binary_name})
 set_target_properties(${name}
     PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_MAJOR_VERSION})
 
-# add_custom_target(stitch_${name}
-#     COMMENT "Stitching Quilt C++ model" VERBATIM
-#     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-#     COMMAND ${stitcher_binary}
-#     --target ${CMAKE_CURRENT_SOURCE_DIR}/
-#     --verbose)
-# add_dependencies(stitch_all stitch_${name})
+# if (DOGEN_STITCHER_COMMAND)
+#     add_custom_target(stitch_${name}
+#         COMMENT "Stitching Quilt C++ model" VERBATIM
+#         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+#         COMMAND ${DOGEN_STITCHER_COMMAND}
+#         --target ${CMAKE_CURRENT_SOURCE_DIR}/
+#         --verbose)
+#     add_dependencies(stitch_all stitch_${name})
+# endif()
 
 install(TARGETS ${name} ARCHIVE DESTINATION lib COMPONENT libraries)

@@ -290,67 +290,73 @@ else()
 endif()
 
 #
-# Top-level knitter target.
+# knitter setup.
 #
-add_custom_target(knit_all)
-set(use_latest_knitter FALSE)
-if(use_latest_knitter)
-    add_dependencies(knit_all knitter)
+list(APPEND CMAKE_PROGRAM_PATH ${stage_bin_dir})
+find_program(DOGEN_KNITTER_COMMAND NAMES dogen.knitter)
+if (DOGEN_KNITTER_COMMAND)
+    execute_process(
+        COMMAND ${DOGEN_KNITTER_COMMAND} --version
+        COMMAND grep ^Dogen
+        COMMAND cut -b15-
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        ERROR_VARIABLE git_error
+        OUTPUT_VARIABLE DOGEN_KNITTER_VERSION
+        RESULT_VARIABLE ret_var
+        OUTPUT_STRIP_TRAILING_WHITESPACE)
+
+      set(knitter "${DOGEN_KNITTER_VERSION} (${DOGEN_KNITTER_COMMAND})")
+      message(STATUS "Found dogen knitter: ${knitter}...")
+      add_custom_target(knit_all)
+else()
+    message(STATUS "Dogen Knitter not found, not adding knit targets.")
 endif()
 
-set(knitter_binary "${stage_bin_dir}/dogen.knitter")
-set(knitter_version "")
-execute_process(
-    COMMAND ${knitter_binary} --version
-    COMMAND head -n1
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    OUTPUT_VARIABLE knitter_version
-    RESULT_VARIABLE ret_var
-    OUTPUT_STRIP_TRAILING_WHITESPACE)
-
-message(STATUS "Using: ${knitter_version}")
-
 #
-# Top-level stitcher target.
+# Stitcher setup.
 #
-add_custom_target(stitch_all)
-set(use_latest_stitcher FALSE)
-if(use_latest_stitcher)
-    add_dependencies(stitch_all stitcher)
-endif()
-
 set(stitcher_binary "${stage_bin_dir}/dogen.stitcher")
-set(stitcher_version "")
-execute_process(
-    COMMAND ${stitcher_binary} --version
-    COMMAND head -n1
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    OUTPUT_VARIABLE stitcher_version
-    RESULT_VARIABLE ret_var
-    OUTPUT_STRIP_TRAILING_WHITESPACE)
+find_program(DOGEN_STITCHER_COMMAND NAMES dogen.stitcher)
+if (DOGEN_STITCHER_COMMAND)
+    execute_process(
+        COMMAND ${DOGEN_STITCHER_COMMAND} --version
+        COMMAND grep ^Dogen
+        COMMAND cut -b15-
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        ERROR_VARIABLE git_error
+        OUTPUT_VARIABLE DOGEN_STITCHER_VERSION
+        RESULT_VARIABLE ret_var
+        OUTPUT_STRIP_TRAILING_WHITESPACE)
 
-message(STATUS "Using: ${stitcher_version}")
-
-#
-# Top-level tailor target.
-#
-add_custom_target(tailor_all)
-set(use_latest_tailor FALSE)
-if(use_latest_tailor)
-    add_dependencies(tailor_all tailor)
+      set(stitcher "${DOGEN_STITCHER_VERSION} (${DOGEN_STITCHER_COMMAND})")
+      message(STATUS "Found Dogen Stitcher: ${stitcher}...")
+      add_custom_target(stitch_all)
+else()
+    message(STATUS "Dogen Stitcher not found, not adding stitch targets.")
 endif()
 
+#
+# Tailor setup.
+#
 set(tailor_binary "${stage_bin_dir}/dogen.tailor")
-set(tailor_version "")
-execute_process(
-    COMMAND ${tailor_binary} --version
-    COMMAND head -n1
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    OUTPUT_VARIABLE tailor_version
-    RESULT_VARIABLE ret_var
-    OUTPUT_STRIP_TRAILING_WHITESPACE)
+find_program(DOGEN_TAILOR_COMMAND NAMES dogen.tailor)
+if (DOGEN_TAILOR_COMMAND)
+    execute_process(
+        COMMAND ${DOGEN_TAILOR_COMMAND} --version
+        COMMAND grep ^Dogen
+        COMMAND cut -b15-
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        ERROR_VARIABLE git_error
+        OUTPUT_VARIABLE DOGEN_TAILOR_VERSION
+        RESULT_VARIABLE ret_var
+        OUTPUT_STRIP_TRAILING_WHITESPACE)
 
-message(STATUS "Using: ${tailor_version}")
+      set(tailor "${DOGEN_TAILOR_VERSION} (${DOGEN_TAILOR_COMMAND})")
+      message(STATUS "Found Dogen Tailor: ${tailor}...")
+      add_custom_target(tailor_all)
+else()
+    message(STATUS "Dogen Tailor not found, not adding tailor targets.")
+endif()
 
 #
 # aggregate targets
@@ -359,21 +365,29 @@ add_custom_target(run_all_tests)
 add_custom_target(run_windows_green_tests)
 add_custom_target(rebase)
 add_custom_target(diff)
-add_custom_target(knit_and_stitch)
-add_dependencies(knit_and_stitch knit_all)
-add_dependencies(knit_and_stitch stitch_all)
+if (DOGEN_KNITTER_COMMAND AND DOGEN_STITCHER_COMMAND)
+    add_custom_target(knit_and_stitch)
+    add_dependencies(knit_and_stitch knit_all)
+    add_dependencies(knit_and_stitch stitch_all)
+endif()
 
 #
 # target aliases
 #
 add_custom_target(rat)
-add_custom_target(kas)
-add_custom_target(ka)
-add_custom_target(sa)
 add_dependencies(rat run_all_tests)
-add_dependencies(kas knit_and_stitch)
-add_dependencies(ka knit_all)
-add_dependencies(sa stitch_all)
+
+if (DOGEN_KNITTER_COMMAND AND DOGEN_STITCHER_COMMAND)
+    add_custom_target(kas)
+    add_custom_target(ka)
+    add_custom_target(sa)
+
+    add_dependencies(kas knit_and_stitch)
+    add_dependencies(ka knit_all)
+    add_dependencies(sa stitch_all)
+endif()
+
+
 
 #
 # include all sub directories

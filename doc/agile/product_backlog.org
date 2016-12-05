@@ -760,12 +760,6 @@ We need a test for composition / recursion.
   =-Wall=
 - =-Winconsistent-missing-override=: new clang warning, probably 3.6.
 
-*** Detect knitter and disable code generation accordingly            :story:
-
-At present you can try to build the codegen knitting targets even
-before you built knitter. We should make them conditional on detecting
-=knitter=. We just need to make sure this is not cached by CMake.
-
 *** Create utility methods for =__type__= etc                         :story:
 
 At present we've hard-coded the field name for =__type__= and so forth

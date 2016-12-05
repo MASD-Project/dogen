@@ -1,4 +1,4 @@
-# -*- mode: cmake; tab-width: 4; indent-tabs-mode: nil -*-
+# -*- mode: cmake; cmake-tab-width: 4; indent-tabs-mode: nil -*-
 #
 # Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
 #
@@ -19,241 +19,200 @@
 set(projects_dir "${CMAKE_SOURCE_DIR}/projects")
 set(models_dir "${projects_dir}/input_models")
 
-set(target yarn)
-add_custom_target(knit_${target}
-    COMMENT "Knitting Yarn model" VERBATIM
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    COMMAND ${knitter_binary}
-    --target ${models_dir}/${target}.dia
-    --output-dir ${projects_dir}/
-    --ignore-files-matching-regex .*/CMakeLists.txt
-    --ignore-files-matching-regex .*/test/.*
-    --ignore-files-matching-regex .*/tests/.*
-    --verbose
-    --delete-extra-files)
-if(use_latest_knitter)
-    add_dependencies(knit_${target} knitter)
-endif()
-add_dependencies(knit_all knit_${target})
+if (DOGEN_KNITTER_COMMAND)
+    set(target yarn)
+    add_custom_target(knit_${target}
+        COMMENT "Knitting Yarn model" VERBATIM
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+        COMMAND ${DOGEN_KNITTER_COMMAND}
+        --target ${models_dir}/${target}.dia
+        --output-dir ${projects_dir}/
+        --ignore-files-matching-regex .*/CMakeLists.txt
+        --ignore-files-matching-regex .*/test/.*
+        --ignore-files-matching-regex .*/tests/.*
+        --verbose
+        --delete-extra-files)
+    add_dependencies(knit_all knit_${target})
 
-set(target yarn.json)
-add_custom_target(knit_${target}
-    COMMENT "Knitting Yarn JSON model" VERBATIM
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    COMMAND ${knitter_binary}
-    --target ${models_dir}/${target}.dia
-    --output-dir ${projects_dir}/
-    --ignore-files-matching-regex .*/CMakeLists.txt
-    --ignore-files-matching-regex .*/tests/.*
-    --ignore-files-matching-regex .*/test/.*
-    --verbose
-    --delete-extra-files)
-if(use_latest_knitter)
-    add_dependencies(knit_${target} knitter)
-endif()
-add_dependencies(knit_all knit_${target})
+    set(target yarn.json)
+    add_custom_target(knit_${target}
+        COMMENT "Knitting Yarn JSON model" VERBATIM
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+        COMMAND ${DOGEN_KNITTER_COMMAND}
+        --target ${models_dir}/${target}.dia
+        --output-dir ${projects_dir}/
+        --ignore-files-matching-regex .*/CMakeLists.txt
+        --ignore-files-matching-regex .*/tests/.*
+        --ignore-files-matching-regex .*/test/.*
+        --verbose
+        --delete-extra-files)
+    add_dependencies(knit_all knit_${target})
 
-set(target dia)
-add_custom_target(knit_${target}
-    COMMENT "Knitting Dia model" VERBATIM
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    COMMAND ${knitter_binary}
-    --target ${models_dir}/${target}.dia
-    --output-dir ${projects_dir}/
-    --ignore-files-matching-regex .*/CMakeLists.txt
-    --ignore-files-matching-regex .*/test/.*
-    --ignore-files-matching-regex .*/tests/.*
-    --verbose
-    --delete-extra-files)
-if(use_latest_knitter)
-    add_dependencies(knit_${target} knitter)
-endif()
-add_dependencies(knit_all knit_${target})
+    set(target dia)
+    add_custom_target(knit_${target}
+        COMMENT "Knitting Dia model" VERBATIM
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+        COMMAND ${DOGEN_KNITTER_COMMAND}
+        --target ${models_dir}/${target}.dia
+        --output-dir ${projects_dir}/
+        --ignore-files-matching-regex .*/CMakeLists.txt
+        --ignore-files-matching-regex .*/test/.*
+        --ignore-files-matching-regex .*/tests/.*
+        --verbose
+        --delete-extra-files)
+    add_dependencies(knit_all knit_${target})
 
-set(target options)
-add_custom_target(knit_${target}
-    COMMENT "Knitting Options model" VERBATIM
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    COMMAND ${knitter_binary}
-    --target ${models_dir}/${target}.dia
-    --output-dir ${projects_dir}/
-    --ignore-files-matching-regex .*/CMakeLists.txt
-    --ignore-files-matching-regex .*/test/.*
-    --ignore-files-matching-regex .*/tests/.*
-    --verbose
-    --delete-extra-files)
-if(use_latest_knitter)
-    add_dependencies(knit_${target} knitter)
-endif()
-add_dependencies(knit_all knit_${target})
+    set(target options)
+    add_custom_target(knit_${target}
+        COMMENT "Knitting Options model" VERBATIM
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+        COMMAND ${DOGEN_KNITTER_COMMAND}
+        --target ${models_dir}/${target}.dia
+        --output-dir ${projects_dir}/
+        --ignore-files-matching-regex .*/CMakeLists.txt
+        --ignore-files-matching-regex .*/test/.*
+        --ignore-files-matching-regex .*/tests/.*
+        --verbose
+        --delete-extra-files)
+    add_dependencies(knit_all knit_${target})
 
-set(target quilt.cpp)
-add_custom_target(knit_${target}
-    COMMENT "Knitting Quilt C++ model" VERBATIM
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    COMMAND ${knitter_binary}
-    --target ${models_dir}/${target}.dia
-    --output-dir ${projects_dir}/
-    --ignore-files-matching-regex .*/CMakeLists.txt
-    --ignore-files-matching-regex .*/tests/.*
-    --verbose
-    --delete-extra-files)
-if(use_latest_knitter)
-    add_dependencies(knit_${target} knitter)
-endif()
-add_dependencies(knit_all knit_${target})
+    set(target quilt.cpp)
+    add_custom_target(knit_${target}
+        COMMENT "Knitting Quilt C++ model" VERBATIM
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+        COMMAND ${DOGEN_KNITTER_COMMAND}
+        --target ${models_dir}/${target}.dia
+        --output-dir ${projects_dir}/
+        --ignore-files-matching-regex .*/CMakeLists.txt
+        --ignore-files-matching-regex .*/tests/.*
+        --verbose
+        --delete-extra-files)
+    add_dependencies(knit_all knit_${target})
 
-set(target quilt.csharp)
-add_custom_target(knit_${target}
-    COMMENT "Knitting Quilt C# model" VERBATIM
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    COMMAND ${knitter_binary}
-    --target ${models_dir}/${target}.dia
-    --output-dir ${projects_dir}/
-    --ignore-files-matching-regex .*/CMakeLists.txt
-    --ignore-files-matching-regex .*/tests/.*
-    --ignore-files-matching-regex .*/test/.*
-    --verbose
-    --delete-extra-files)
-if(use_latest_knitter)
-    add_dependencies(knit_${target} knitter)
-endif()
-add_dependencies(knit_all knit_${target})
+    set(target quilt.csharp)
+    add_custom_target(knit_${target}
+        COMMENT "Knitting Quilt C# model" VERBATIM
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+        COMMAND ${DOGEN_KNITTER_COMMAND}
+        --target ${models_dir}/${target}.dia
+        --output-dir ${projects_dir}/
+        --ignore-files-matching-regex .*/CMakeLists.txt
+        --ignore-files-matching-regex .*/tests/.*
+        --ignore-files-matching-regex .*/test/.*
+        --verbose
+        --delete-extra-files)
+    add_dependencies(knit_all knit_${target})
 
-set(target database)
-add_custom_target(knit_${target}
-    COMMENT "Knitting database model" VERBATIM
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    COMMAND ${knitter_binary}
-    --target ${models_dir}/${target}.dia
-    --output-dir ${projects_dir}/test_models
-    --ignore-files-matching-regex .*CMakeLists.txt
-    --ignore-files-matching-regex .*/test/.*
-    --ignore-files-matching-regex .*/tests/.*
-    --ignore-files-matching-regex .*sql
-    --ignore-files-matching-regex .*-odb.*
-    --verbose
-    --delete-extra-files)
-if(use_latest_knitter)
-    add_dependencies(knit_${target} knitter)
-endif()
-add_dependencies(knit_all knit_${target})
+    set(target database)
+    add_custom_target(knit_${target}
+        COMMENT "Knitting database model" VERBATIM
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+        COMMAND ${DOGEN_KNITTER_COMMAND}
+        --target ${models_dir}/${target}.dia
+        --output-dir ${projects_dir}/test_models
+        --ignore-files-matching-regex .*CMakeLists.txt
+        --ignore-files-matching-regex .*/test/.*
+        --ignore-files-matching-regex .*/tests/.*
+        --ignore-files-matching-regex .*sql
+        --ignore-files-matching-regex .*-odb.*
+        --verbose
+        --delete-extra-files)
+    add_dependencies(knit_all knit_${target})
 
-set(target knit)
-add_custom_target(knit_${target}
-    COMMENT "Knitting knit model" VERBATIM
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    COMMAND ${knitter_binary}
-    --target ${models_dir}/${target}.dia
-    --output-dir ${projects_dir}/
-    --ignore-files-matching-regex .*/CMakeLists.txt
-    --ignore-files-matching-regex .*/tests/.*
-    --verbose
-    --delete-extra-files)
-if(use_latest_knitter)
-    add_dependencies(knit_${target} knitter)
-endif()
-add_dependencies(knit_all knit_${target})
+    set(target knit)
+    add_custom_target(knit_${target}
+        COMMENT "Knitting knit model" VERBATIM
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+        COMMAND ${DOGEN_KNITTER_COMMAND}
+        --target ${models_dir}/${target}.dia
+        --output-dir ${projects_dir}/
+        --ignore-files-matching-regex .*/CMakeLists.txt
+        --ignore-files-matching-regex .*/tests/.*
+        --verbose
+        --delete-extra-files)
+    add_dependencies(knit_all knit_${target})
 
-set(target yarn.dia)
-add_custom_target(knit_${target}
-    COMMENT "Knitting Yarn Dia model" VERBATIM
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    COMMAND ${knitter_binary}
-    --target ${models_dir}/${target}.dia
-    --output-dir ${projects_dir}/
-    --ignore-files-matching-regex .*/CMakeLists.txt
-    --ignore-files-matching-regex .*/tests/.*
-    --ignore-files-matching-regex .*/test/.*
-    --verbose
-    --delete-extra-files)
-if(use_latest_knitter)
-    add_dependencies(knit_${target} knitter)
-endif()
-add_dependencies(knit_all knit_${target})
+    set(target yarn.dia)
+    add_custom_target(knit_${target}
+        COMMENT "Knitting Yarn Dia model" VERBATIM
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+        COMMAND ${DOGEN_KNITTER_COMMAND}
+        --target ${models_dir}/${target}.dia
+        --output-dir ${projects_dir}/
+        --ignore-files-matching-regex .*/CMakeLists.txt
+        --ignore-files-matching-regex .*/tests/.*
+        --ignore-files-matching-regex .*/test/.*
+        --verbose
+        --delete-extra-files)
+    add_dependencies(knit_all knit_${target})
 
-set(target formatters)
-add_custom_target(knit_${target}
-    COMMENT "Knitting the Formatters Model" VERBATIM
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    COMMAND ${knitter_binary}
-    --target ${models_dir}/${target}.dia
-    --output-dir ${projects_dir}/
-    --ignore-files-matching-regex .*/CMakeLists.txt
-    --ignore-files-matching-regex .*/tests/.*
-    --ignore-files-matching-regex .*/test/.*
-    --verbose
-    --delete-extra-files)
+    set(target formatters)
+    add_custom_target(knit_${target}
+        COMMENT "Knitting the Formatters Model" VERBATIM
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+        COMMAND ${DOGEN_KNITTER_COMMAND}
+        --target ${models_dir}/${target}.dia
+        --output-dir ${projects_dir}/
+        --ignore-files-matching-regex .*/CMakeLists.txt
+        --ignore-files-matching-regex .*/tests/.*
+        --ignore-files-matching-regex .*/test/.*
+        --verbose
+        --delete-extra-files)
+    add_dependencies(knit_all knit_${target})
 
-if(use_latest_knitter)
-    add_dependencies(knit_${target} knitter)
-endif()
-add_dependencies(knit_all knit_${target})
+    set(target quilt)
+    add_custom_target(knit_${target}
+        COMMENT "Knitting Quilt model" VERBATIM
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+        COMMAND ${DOGEN_KNITTER_COMMAND}
+        --target ${models_dir}/${target}.dia
+        --output-dir ${projects_dir}/
+        --ignore-files-matching-regex .*/CMakeLists.txt
+        --ignore-files-matching-regex .*/tests/.*
+        --ignore-files-matching-regex .*/test/.*
+        --verbose
+        --delete-extra-files)
+    add_dependencies(knit_all knit_${target})
 
-set(target quilt)
-add_custom_target(knit_${target}
-    COMMENT "Knitting Quilt model" VERBATIM
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    COMMAND ${knitter_binary}
-    --target ${models_dir}/${target}.dia
-    --output-dir ${projects_dir}/
-    --ignore-files-matching-regex .*/CMakeLists.txt
-    --ignore-files-matching-regex .*/tests/.*
-    --ignore-files-matching-regex .*/test/.*
-    --verbose
-    --delete-extra-files)
-if(use_latest_knitter)
-    add_dependencies(knit_${target} knitter)
-endif()
-add_dependencies(knit_all knit_${target})
+    set(target annotations)
+    add_custom_target(knit_${target}
+        COMMENT "Knitting Annotations model" VERBATIM
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+        COMMAND ${DOGEN_KNITTER_COMMAND}
+        --target ${models_dir}/${target}.dia
+        --output-dir ${projects_dir}/
+        --ignore-files-matching-regex .*/CMakeLists.txt
+        --ignore-files-matching-regex .*/tests/.*
+        --ignore-files-matching-regex .*/test/.*
+        --verbose
+        --delete-extra-files)
+    add_dependencies(knit_all knit_${target})
 
-set(target annotations)
-add_custom_target(knit_${target}
-    COMMENT "Knitting Annotations model" VERBATIM
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    COMMAND ${knitter_binary}
-    --target ${models_dir}/${target}.dia
-    --output-dir ${projects_dir}/
-    --ignore-files-matching-regex .*/CMakeLists.txt
-    --ignore-files-matching-regex .*/tests/.*
-    --ignore-files-matching-regex .*/test/.*
-    --verbose
-    --delete-extra-files)
-if(use_latest_knitter)
-    add_dependencies(knit_${target} knitter)
-endif()
-add_dependencies(knit_all knit_${target})
+    set(target stitch)
+    add_custom_target(knit_${target}
+        COMMENT "Knitting Stitch model" VERBATIM
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+        COMMAND ${DOGEN_KNITTER_COMMAND}
+        --target ${models_dir}/${target}.dia
+        --output-dir ${projects_dir}/
+        --ignore-files-matching-regex .*/CMakeLists.txt
+        --ignore-files-matching-regex .*/tests/.*
+        --ignore-files-matching-regex .*/test/.*
+        --verbose
+        --delete-extra-files)
+    add_dependencies(knit_all knit_${target})
 
-set(target stitch)
-add_custom_target(knit_${target}
-    COMMENT "Knitting Stitch model" VERBATIM
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    COMMAND ${knitter_binary}
-    --target ${models_dir}/${target}.dia
-    --output-dir ${projects_dir}/
-    --ignore-files-matching-regex .*/CMakeLists.txt
-    --ignore-files-matching-regex .*/tests/.*
-    --ignore-files-matching-regex .*/test/.*
-    --verbose
-    --delete-extra-files)
-if(use_latest_knitter)
-    add_dependencies(knit_${target} knitter)
+    set(target wale)
+    add_custom_target(knit_${target}
+        COMMENT "Knitting Wale model" VERBATIM
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+        COMMAND ${DOGEN_KNITTER_COMMAND}
+        --target ${models_dir}/${target}.dia
+        --output-dir ${projects_dir}/
+        --ignore-files-matching-regex .*/CMakeLists.txt
+        --ignore-files-matching-regex .*/tests/.*
+        --ignore-files-matching-regex .*/test/.*
+        --verbose
+        --delete-extra-files)
+    add_dependencies(knit_all knit_${target})
 endif()
-add_dependencies(knit_all knit_${target})
-
-set(target wale)
-add_custom_target(knit_${target}
-    COMMENT "Knitting Wale model" VERBATIM
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    COMMAND ${knitter_binary}
-    --target ${models_dir}/${target}.dia
-    --output-dir ${projects_dir}/
-    --ignore-files-matching-regex .*/CMakeLists.txt
-    --ignore-files-matching-regex .*/tests/.*
-    --ignore-files-matching-regex .*/test/.*
-    --verbose
-    --delete-extra-files)
-if(use_latest_knitter)
-    add_dependencies(knit_${target} knitter)
-endif()
-add_dependencies(knit_all knit_${target})

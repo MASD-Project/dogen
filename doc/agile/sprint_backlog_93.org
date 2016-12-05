@@ -12,25 +12,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-12-05 Mon 09:40]
+#+CAPTION: Clock summary at [2016-12-05 Mon 15:29]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *18:22* |       |      | 100.0 |
+| *Total time*                                                                | *22:31* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 18:22   |       |      | 100.0 |
-| Active                                                                      |         | 18:22 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:51 |  10.1 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 1:02 |   5.6 |
-| COMPLETED Update readme                                                     |         |       | 0:11 |   1.0 |
-| COMPLETED Test data generation for dates generates invalid dates            |         |       | 0:33 |   3.0 |
-| COMPLETED Handle missing stitch templates scenario                          |         |       | 1:04 |   5.8 |
-| COMPLETED Move project directory to output options                          |         |       | 1:10 |   6.4 |
-| COMPLETED Update the conceptual model to clarify backends and kernels       |         |       | 4:20 |  23.6 |
-| STARTED Clean up kernel and backend confusion                               |         |       | 1:16 |   6.9 |
-| STARTED Add support for Decimal numbers                                     |         |       | 0:32 |   2.9 |
-| STARTED Add support for C#                                                  |         |       | 5:46 |  31.4 |
-| STARTED Add a "language" directory for each backend                         |         |       | 0:37 |   3.4 |
+| Stories                                                                     | 22:31   |       |      | 100.0 |
+| Active                                                                      |         | 22:31 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:51 |   8.2 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 1:02 |   4.6 |
+| COMPLETED Update readme                                                     |         |       | 0:11 |   0.8 |
+| COMPLETED Test data generation for dates generates invalid dates            |         |       | 0:33 |   2.4 |
+| COMPLETED Handle missing stitch templates scenario                          |         |       | 1:04 |   4.7 |
+| COMPLETED Move project directory to output options                          |         |       | 1:10 |   5.2 |
+| COMPLETED Update the conceptual model to clarify backends and kernels       |         |       | 4:20 |  19.2 |
+| COMPLETED Detect knitter and disable code generation accordingly            |         |       | 1:15 |   5.6 |
+| STARTED Clean up kernel and backend confusion                               |         |       | 4:10 |  18.5 |
+| STARTED Add support for Decimal numbers                                     |         |       | 0:32 |   2.4 |
+| STARTED Add support for C#                                                  |         |       | 5:46 |  25.6 |
+| STARTED Add a "language" directory for each backend                         |         |       | 0:37 |   2.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -158,7 +159,21 @@ It seems we did not do a great job at our first stab of the conceptual
 model. Add the required clarifications for kernel and backends and do
 a small tidy-up to ensure what's there makes sense.
 
+*** COMPLETED Detect knitter and disable code generation accordingly  :story:
+    CLOSED: [2016-12-05 Mon 14:50]
+    CLOCK: [2016-12-05 Mon 15:23]--[2016-12-05 Mon 15:29] =>  0:06
+    CLOCK: [2016-12-05 Mon 14:50]--[2016-12-05 Mon 15:22] =>  0:32
+    CLOCK: [2016-12-05 Mon 14:12]--[2016-12-05 Mon 14:49] =>  0:37
+
+At present you can try to build the codegen knitting targets even
+before you built knitter. We should make them conditional on detecting
+=knitter=. We just need to make sure this is not cached by CMake.
+
 *** STARTED Clean up kernel and backend confusion                     :story:
+    CLOCK: [2016-12-05 Mon 13:34]--[2016-12-05 Mon 14:01] =>  0:42
+    CLOCK: [2016-12-05 Mon 11:09]--[2016-12-05 Mon 12:30] =>  1:21
+    CLOCK: [2016-12-05 Mon 11:01]--[2016-12-05 Mon 11:08] =>  0:07
+    CLOCK: [2016-12-05 Mon 09:41]--[2016-12-05 Mon 10:40] =>  1:24
     CLOCK: [2016-12-05 Mon 09:18]--[2016-12-05 Mon 09:40] =>  0:22
     CLOCK: [2016-12-04 Sun 19:41]--[2016-12-04 Sun 20:35] =>  0:54
 
@@ -179,6 +194,18 @@ Tasks:
   just the kernel rather than the family.
 - rename all data files that refer to it, update JSON processing
   etc.
+
+We are trying to introduce too many changes in one go, so it will be
+difficult to isolate faults. We can break it down somewhat:
+
+- split kernel from family;
+- rename formatter to archetype in template kinds;
+- rename global template to recursive template;
+- make recursive template work at all levels;
+- make prefix a recursive field at archetype level, adding default
+  values to profiles.
+- make directory a recursive field at facet level,  adding default
+  values to profiles.
 
 *** STARTED Add support for Decimal numbers                           :story:
     CLOCK: [2016-11-30 Wed 13:04]--[2016-11-30 Wed 13:36] =>  0:32
