@@ -1,0 +1,14 @@
+[
+  {
+    "name": {
+      "simple": "enabled"
+    },
+    "archetype_location": {
+      "family": "quilt"
+    },
+    "value_type": "boolean",
+    "template_kind": "recursive_template",
+    "scope": "any",
+    "default_value": true
+  }
+]

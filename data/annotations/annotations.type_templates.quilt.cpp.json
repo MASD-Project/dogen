@@ -1,16 +1,17 @@
 [
   {
     "name": {
-      "simple": "enabled"
+      "simple": "directory",
+      "qualified": "quilt.cpp.directory"
     },
     "archetype_location": {
       "family": "quilt",
       "kernel": "quilt.cpp"
     },
-    "value_type": "boolean",
-    "template_kind": "recursive_template",
-    "scope": "any",
-    "default_value": true
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": "cpp"
   },
   {
     "name": {

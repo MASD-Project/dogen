@@ -1,0 +1,16 @@
+[
+  {
+    "name": {
+      "simple": "directory",
+      "qualified": "quilt.csharp.directory"
+    },
+    "archetype_location": {
+      "family": "quilt",
+      "kernel": "quilt.csharp"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": "cs"
+  }
+]
