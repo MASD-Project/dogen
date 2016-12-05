@@ -10,5 +10,18 @@
     "template_kind": "recursive_template",
     "scope": "any",
     "default_value": true
+  },
+  {
+    "name": {
+      "simple": "enable_kernel_directories",
+      "qualified": "quilt.enable_kernel_directories"
+    },
+    "archetype_location": {
+      "family": "quilt"
+    },
+    "value_type": "boolean",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": false
   }
 ]
