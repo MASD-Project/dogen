@@ -48,7 +48,7 @@ const std::string untyped_value_key("untyped_value");
 
 const std::string template_kind_instance("instance");
 const std::string template_kind_global_template("global_template");
-const std::string template_kind_model_template("model_template");
+const std::string template_kind_kernel_template("kernel_template");
 const std::string template_kind_facet_template("facet_template");
 const std::string template_kind_formatter_template(
     "formatter_template");
@@ -76,8 +76,8 @@ template_kinds profile_hydrator::to_template_kind(const std::string& s) const {
         return template_kinds::instance;
     if (s == template_kind_global_template)
         return template_kinds::global_template;
-    if (s == template_kind_model_template)
-        return template_kinds::model_template;
+    if (s == template_kind_kernel_template)
+        return template_kinds::kernel_template;
     if (s == template_kind_facet_template)
         return template_kinds::facet_template;
     if (s == template_kind_formatter_template)

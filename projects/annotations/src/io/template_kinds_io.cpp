@@ -40,8 +40,8 @@ std::ostream& operator<<(std::ostream& s, const template_kinds& v) {
     case template_kinds::global_template:
         attr = "\"global_template\"";
         break;
-    case template_kinds::model_template:
-        attr = "\"model_template\"";
+    case template_kinds::kernel_template:
+        attr = "\"kernel_template\"";
         break;
     case template_kinds::facet_template:
         attr = "\"facet_template\"";

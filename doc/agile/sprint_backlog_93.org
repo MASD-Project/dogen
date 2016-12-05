@@ -12,24 +12,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-12-05 Mon 09:18]
+#+CAPTION: Clock summary at [2016-12-05 Mon 09:40]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *18:00* |       |      | 100.0 |
+| *Total time*                                                                | *18:22* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 18:00   |       |      | 100.0 |
-| Active                                                                      |         | 18:00 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:51 |  10.3 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 1:02 |   5.7 |
+| Stories                                                                     | 18:22   |       |      | 100.0 |
+| Active                                                                      |         | 18:22 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:51 |  10.1 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 1:02 |   5.6 |
 | COMPLETED Update readme                                                     |         |       | 0:11 |   1.0 |
-| COMPLETED Test data generation for dates generates invalid dates            |         |       | 0:33 |   3.1 |
-| COMPLETED Handle missing stitch templates scenario                          |         |       | 1:04 |   5.9 |
-| COMPLETED Move project directory to output options                          |         |       | 1:10 |   6.5 |
-| COMPLETED Update the conceptual model to clarify backends and kernels       |         |       | 4:20 |  24.1 |
-| STARTED Clean up kernel and backend confusion                               |         |       | 0:54 |   5.0 |
-| STARTED Add support for Decimal numbers                                     |         |       | 0:32 |   3.0 |
-| STARTED Add support for C#                                                  |         |       | 5:46 |  32.0 |
+| COMPLETED Test data generation for dates generates invalid dates            |         |       | 0:33 |   3.0 |
+| COMPLETED Handle missing stitch templates scenario                          |         |       | 1:04 |   5.8 |
+| COMPLETED Move project directory to output options                          |         |       | 1:10 |   6.4 |
+| COMPLETED Update the conceptual model to clarify backends and kernels       |         |       | 4:20 |  23.6 |
+| STARTED Clean up kernel and backend confusion                               |         |       | 1:16 |   6.9 |
+| STARTED Add support for Decimal numbers                                     |         |       | 0:32 |   2.9 |
+| STARTED Add support for C#                                                  |         |       | 5:46 |  31.4 |
 | STARTED Add a "language" directory for each backend                         |         |       | 0:37 |   3.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -159,6 +159,7 @@ model. Add the required clarifications for kernel and backends and do
 a small tidy-up to ensure what's there makes sense.
 
 *** STARTED Clean up kernel and backend confusion                     :story:
+    CLOCK: [2016-12-05 Mon 09:18]--[2016-12-05 Mon 09:40] =>  0:22
     CLOCK: [2016-12-04 Sun 19:41]--[2016-12-04 Sun 20:35] =>  0:54
 
 We made it clear in the conceptual model that a kernel is made up of
@@ -173,9 +174,9 @@ imply that a kernel is what we've been calling a sub-kernel.
 Tasks:
 
 - clean up these definitions in the conceptual model.
-- rename model in annotations to backend (templates).
-- add backend to archetype location, and update existing kernel to be
-  just the kernel rather than the backend.
+- rename model in annotations to kernel (templates).
+- add family to archetype location, and update existing kernel to be
+  just the kernel rather than the family.
 - rename all data files that refer to it, update JSON processing
   etc.
 

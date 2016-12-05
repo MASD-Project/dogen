@@ -33,11 +33,11 @@ namespace dogen {
 namespace annotations {
 
 /**
- * @brief Location of an archetype or set of archetypes in artchetype space.
+ * @brief Location of an archetype or set of archetypes in the hierarchical artchetype space.
  *
- * These must be populated in order, e.g. in order to have a facet we must have a
- * kernel and in order to have a formatter we must have a facet. We may not have
- * any.
+ * These must be populated in order, e.g. in order to have a kernel we must have a
+ * family; in order to have a facet we must have a kernel and in order to have a
+ * formatter we must have a facet. We may not have any.
  */
 class archetype_location final {
 public:

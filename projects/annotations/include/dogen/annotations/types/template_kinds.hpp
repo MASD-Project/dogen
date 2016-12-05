@@ -32,7 +32,7 @@ enum class template_kinds : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
     instance = 1,
     global_template = 2, ///< This field applies to all models, facets and formatters.
-    model_template = 3, ///< This field applies to all models.
+    kernel_template = 3, ///< This field applies to all models.
     facet_template = 4, ///< This field applies to all facets.
     formatter_template = 5 ///< This field applies to all formatters.
 };

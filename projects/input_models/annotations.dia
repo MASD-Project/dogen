@@ -2492,11 +2492,11 @@ content of entries.#</dia:string>
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Location of an archetype or set of archetypes in artchetype space.
+        <dia:string>#Location of an archetype or set of archetypes in the hierarchical artchetype space.
 
-These must be populated in order, e.g. in order to have a facet we must have a
-kernel and in order to have a formatter we must have a facet. We may not have
-any.#</dia:string>
+These must be populated in order, e.g. in order to have a kernel we must have a 
+family; in order to have a facet we must have a kernel and in order to have a
+formatter we must have a facet. We may not have any.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -5220,7 +5220,7 @@ any.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#model_template#</dia:string>
+            <dia:string>#kernel_template#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>

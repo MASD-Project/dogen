@@ -332,7 +332,7 @@ template_instantiator::instantiate_formatter_template(
 bool template_instantiator::is_instantiable(const template_kinds tk) const {
     return
         tk == template_kinds::global_template ||
-        tk == template_kinds::model_template ||
+        tk == template_kinds::kernel_template ||
         tk == template_kinds::facet_template ||
         tk == template_kinds::formatter_template;
 }
