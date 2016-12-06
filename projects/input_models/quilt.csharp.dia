@@ -1803,7 +1803,7 @@
         <dia:string>#class_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#artefact formatter#</dia:string>
+        <dia:string>#C# Artefact Formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -1914,7 +1914,7 @@
         <dia:string>#enum_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#artefact formatter#</dia:string>
+        <dia:string>#C# Artefact Formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2025,7 +2025,7 @@
         <dia:string>#namespace_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#artefact formatter#</dia:string>
+        <dia:string>#C# Artefact Formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2136,7 +2136,7 @@
         <dia:string>#visitor_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#artefact formatter#</dia:string>
+        <dia:string>#C# Artefact Formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2286,7 +2286,7 @@
         <dia:string>#class_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#artefact formatter#</dia:string>
+        <dia:string>#C# Artefact Formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2397,7 +2397,7 @@
         <dia:string>#enum_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#artefact formatter#</dia:string>
+        <dia:string>#C# Artefact Formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2547,7 +2547,7 @@
         <dia:string>#class_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#artefact formatter#</dia:string>
+        <dia:string>#C# Artefact Formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2658,7 +2658,7 @@
         <dia:string>#enum_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#artefact formatter#</dia:string>
+        <dia:string>#C# Artefact Formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2769,7 +2769,7 @@
         <dia:string>#exception_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#artefact formatter#</dia:string>
+        <dia:string>#C# Artefact Formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2880,7 +2880,7 @@
         <dia:string>#vcproj_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#artefact formatter#</dia:string>
+        <dia:string>#C# Artefact Formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>

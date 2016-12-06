@@ -4,7 +4,7 @@
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/assistant.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formattables/helper_properties.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/hash/ptime_helper.hpp" #>
-<#@ stitch.wale.template=helper_formatter_implementation_enabled.wale #>
+<#@ stitch.wale.template=cpp_helper_formatter_implementation_enabled.wale #>
 <#@ stitch.wale.kvp.helper.family=BoostPTime #>
 <#@ stitch.wale.kvp.class.simple_name=ptime_helper #>
 <#$ stitch.wale.template_instantiation_result #>

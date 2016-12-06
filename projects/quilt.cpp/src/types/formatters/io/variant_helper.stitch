@@ -5,7 +5,7 @@
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/io/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/types/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formattables/helper_properties.hpp" #>
-<#@ stitch.wale.template=helper_formatter_implementation.wale #>
+<#@ stitch.wale.template=cpp_helper_formatter_implementation.wale #>
 <#@ stitch.wale.kvp.helper.family=BoostVariant #>
 <#@ stitch.wale.kvp.class.simple_name=variant_helper #>
 <#$ stitch.wale.template_instantiation_result #>

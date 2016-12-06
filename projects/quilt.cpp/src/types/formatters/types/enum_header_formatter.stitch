@@ -10,7 +10,7 @@
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/assistant.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/types/enum_header_formatter.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/types/enum_header_formatter.hpp" #>
-<#@ stitch.wale.template=artefact_formatter_implementation_header.wale #>
+<#@ stitch.wale.template=cpp_artefact_formatter_implementation_header.wale #>
 <#@ stitch.wale.kvp.class.simple_name=enum_header_formatter #>
 <#@ stitch.wale.kvp.archetype.simple_name=enum_header #>
 <#@ stitch.wale.kvp.class.inclusion_support_type=canonical_support #>

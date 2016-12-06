@@ -1,7 +1,7 @@
 {
-  "name": "dogen.artefact_formatter",
+  "name": "dogen.cpp_helper_formatter",
   "labels": [
-    "artefact formatter"
+    "C++ Helper Formatter"
   ],
   "parents": [
     "dogen.handcrafted"
@@ -18,7 +18,7 @@
       },
       "template_kind": "instance",
       "untyped_value": [
-        "formatters::artefact_formatter_interface"
+        "formatters::helper_formatter_interface"
       ]
     },
     {
@@ -46,7 +46,7 @@
       },
       "template_kind": "instance",
       "untyped_value": [
-        "artefact_formatter_header.wale"
+        "cpp_helper_formatter_header.wale"
       ]
     },
     {

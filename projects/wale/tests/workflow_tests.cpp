@@ -40,7 +40,7 @@ BOOST_AUTO_TEST_CASE(wale_templates_in_data_produce_expected_instantiation) {
     };
 
     dogen::wale::workflow w;
-    w.execute("artefact_formatter_header.wale", kvps);
+    w.execute("cpp_artefact_formatter_header.wale", kvps);
     BOOST_TEST_CHECKPOINT("Instantiated template.");
 }
 
