@@ -1,0 +1,38 @@
+<#@ annotations.profile=dogen.stitch #>
+<#@ stitch.containing_namespaces=dogen::quilt::csharp::formatters::types #>
+<#@ stitch.inclusion_dependency=<typeinfo> #>
+<#@ stitch.inclusion_dependency=<boost/make_shared.hpp> #>
+<#@ stitch.inclusion_dependency="dogen/yarn/types/object.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/formatters/types/sequence_formatter.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.csharp/types/traits.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.csharp/types/formatters/assistant.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.csharp/types/formatters/types/class_formatter.hpp" #>
+<#+
+
+dogen::formatters::artefact class_formatter::format(const yarn::element& e) const {
+    assistant a;
+    const auto id(e.name().id());
+    {
+        const auto sn(e.name().simple());
+        // const auto qn(a.get_qualified_name(e.name()));
+        // auto sbf(a.make_scoped_boilerplate_formatter());
+        {
+            // const auto ns(a.make_namespaces(e.name()));
+            // auto snf(a.make_scoped_namespace_formatter(ns));
+#>
+
+<#+
+            // a.comment(o.documentation());
+#>
+class <#= sn #> {
+};
+
+<#+
+        }
+#>
+
+<#+
+    } // sbf
+    return a.make_artefact();
+}
+#>

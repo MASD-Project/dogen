@@ -26,7 +26,6 @@
 #endif
 
 #include <memory>
-#include <algorithm>
 #include <typeindex>
 #include <forward_list>
 #include <unordered_map>
@@ -37,47 +36,70 @@ namespace quilt {
 namespace csharp {
 namespace formatters {
 
+/**
+ * @brief Repository for all formatters.
+ */
 class repository final {
-public:
-    repository() = default;
-    repository(const repository&) = default;
-    repository(repository&&) = default;
-    ~repository() = default;
-
-public:
-    explicit repository(const std::unordered_map<std::type_index, std::forward_list<std::shared_ptr<dogen::quilt::csharp::formatters::artefact_formatter_interface> > >& stock_artefact_formatters_by_type_index);
-
-public:
-    const std::unordered_map<std::type_index, std::forward_list<std::shared_ptr<dogen::quilt::csharp::formatters::artefact_formatter_interface> > >& stock_artefact_formatters_by_type_index() const;
-    std::unordered_map<std::type_index, std::forward_list<std::shared_ptr<dogen::quilt::csharp::formatters::artefact_formatter_interface> > >& stock_artefact_formatters_by_type_index();
-    void stock_artefact_formatters_by_type_index(const std::unordered_map<std::type_index, std::forward_list<std::shared_ptr<dogen::quilt::csharp::formatters::artefact_formatter_interface> > >& v);
-    void stock_artefact_formatters_by_type_index(const std::unordered_map<std::type_index, std::forward_list<std::shared_ptr<dogen::quilt::csharp::formatters::artefact_formatter_interface> > >&& v);
-
-public:
-    bool operator==(const repository& rhs) const;
-    bool operator!=(const repository& rhs) const {
-        return !this->operator==(rhs);
-    }
-
-public:
-    void swap(repository& other) noexcept;
-    repository& operator=(repository other);
+private:
+    friend class registrar;
 
 private:
-    std::unordered_map<std::type_index, std::forward_list<std::shared_ptr<dogen::quilt::csharp::formatters::artefact_formatter_interface> > > stock_artefact_formatters_by_type_index_;
+    /**
+     * @brief Returns all available file formatters by type indx.
+     */
+    std::unordered_map<
+        std::type_index,
+        std::forward_list<std::shared_ptr<artefact_formatter_interface>>
+    >&
+    stock_artefact_formatters_by_type_index();
+
+    /**
+     * @brief Returns all available file formatters by archetype name.
+     */
+    std::unordered_map<std::string,
+                       std::shared_ptr<artefact_formatter_interface>>&
+    stock_artefact_formatters_by_archetype();
+
+    /**
+     * @brief Returns all available file formatters.
+     */
+    std::forward_list<std::shared_ptr<artefact_formatter_interface>>&
+    stock_artefact_formatters();
+
+public:
+    /**
+     * @brief Returns all available file formatters by type indx.
+     */
+    const std::unordered_map<
+    std::type_index,
+    std::forward_list<std::shared_ptr<artefact_formatter_interface>>>&
+    stock_artefact_formatters_by_type_index() const;
+
+    /**
+     * @brief Returns all available file formatters by formatter name.
+     */
+    const std::unordered_map<std::string,
+                             std::shared_ptr<artefact_formatter_interface>>&
+    stock_artefact_formatters_by_archetype() const;
+
+    /**
+     * @brief Returns all available file formatters.
+     */
+    const std::forward_list<std::shared_ptr<artefact_formatter_interface>>&
+    stock_artefact_formatters() const;
+
+private:
+    std::unordered_map<
+        std::type_index,
+        std::forward_list<std::shared_ptr<artefact_formatter_interface>>>
+    stock_artefact_formatters_by_type_index_;
+    std::unordered_map<std::string,
+                       std::shared_ptr<artefact_formatter_interface>>
+    stock_artefact_formatters_by_archetype_;
+    std::forward_list<std::shared_ptr<artefact_formatter_interface>>
+    stock_artefact_formatters_;
 };
 
 } } } }
-
-namespace std {
-
-template<>
-inline void swap(
-    dogen::quilt::csharp::formatters::repository& lhs,
-    dogen::quilt::csharp::formatters::repository& rhs) {
-    lhs.swap(rhs);
-}
-
-}
 
 #endif

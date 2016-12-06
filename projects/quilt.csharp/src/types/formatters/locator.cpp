@@ -18,13 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CSHARP_IO_ALL_IO_HPP
-#define DOGEN_QUILT_CSHARP_IO_ALL_IO_HPP
+#include "dogen/quilt.csharp/types/formatters/locator.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace dogen {
+namespace quilt {
+namespace csharp {
+namespace formatters {
 
-#include "dogen/quilt.csharp/io/formatters/repository_io.hpp"
+boost::filesystem::path locator::make_full_path(
+    const yarn::name& /*n*/, const std::string& /*archetype*/) const {
+    boost::filesystem::path r;
+    return r;
+}
 
-#endif
+} } } }

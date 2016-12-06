@@ -18,13 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CSHARP_IO_ALL_IO_HPP
-#define DOGEN_QUILT_CSHARP_IO_ALL_IO_HPP
+#ifndef DOGEN_QUILT_CSHARP_IO_FORMATTERS_REPOSITORY_IO_HPP
+#define DOGEN_QUILT_CSHARP_IO_FORMATTERS_REPOSITORY_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/quilt.csharp/io/formatters/repository_io.hpp"
+#include <iosfwd>
+#include "dogen/quilt.csharp/types/formatters/repository.hpp"
+
+namespace dogen {
+namespace quilt {
+namespace csharp {
+namespace formatters {
+
+std::ostream& operator<<(std::ostream& s, const repository& v);
+
+} } } }
 
 #endif

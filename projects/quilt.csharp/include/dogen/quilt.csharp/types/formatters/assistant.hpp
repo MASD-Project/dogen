@@ -18,13 +18,39 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CSHARP_IO_ALL_IO_HPP
-#define DOGEN_QUILT_CSHARP_IO_ALL_IO_HPP
+#ifndef DOGEN_QUILT_CSHARP_TYPES_FORMATTERS_ASSISTANT_HPP
+#define DOGEN_QUILT_CSHARP_TYPES_FORMATTERS_ASSISTANT_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/quilt.csharp/io/formatters/repository_io.hpp"
+#include <sstream>
+#include "dogen/formatters/types/artefact.hpp"
+
+namespace dogen {
+namespace quilt {
+namespace csharp {
+namespace formatters {
+
+class assistant final {
+public:
+    /**
+     * @brief Returns the stream that is currently being populated.
+     */
+    std::ostream& stream();
+
+    /**
+     * @brief Generates a file with the current contents of the
+     * stream.
+     */
+    dogen::formatters::artefact make_artefact() const;
+
+private:
+    std::ostringstream stream_;
+
+};
+
+} } } }
 
 #endif

@@ -21,52 +21,44 @@
 #include "dogen/quilt.csharp/types/formatters/repository.hpp"
 #include "dogen/quilt.csharp/types/formatters/artefact_formatter_interface.hpp"
 
-namespace std {
-
-inline bool operator==(const std::shared_ptr<dogen::quilt::csharp::formatters::artefact_formatter_interface>& lhs,
-const std::shared_ptr<dogen::quilt::csharp::formatters::artefact_formatter_interface>& rhs) {
-    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
-}
-
-}
-
 namespace dogen {
 namespace quilt {
 namespace csharp {
 namespace formatters {
 
-repository::repository(const std::unordered_map<std::type_index, std::forward_list<std::shared_ptr<dogen::quilt::csharp::formatters::artefact_formatter_interface> > >& stock_artefact_formatters_by_type_index)
-    : stock_artefact_formatters_by_type_index_(stock_artefact_formatters_by_type_index) { }
-
-void repository::swap(repository& other) noexcept {
-    using std::swap;
-    swap(stock_artefact_formatters_by_type_index_, other.stock_artefact_formatters_by_type_index_);
-}
-
-bool repository::operator==(const repository& rhs) const {
-    return stock_artefact_formatters_by_type_index_ == rhs.stock_artefact_formatters_by_type_index_;
-}
-
-repository& repository::operator=(repository other) {
-    using std::swap;
-    swap(*this, other);
-    return *this;
-}
-
-const std::unordered_map<std::type_index, std::forward_list<std::shared_ptr<dogen::quilt::csharp::formatters::artefact_formatter_interface> > >& repository::stock_artefact_formatters_by_type_index() const {
+std::unordered_map<
+    std::type_index,
+    std::forward_list<std::shared_ptr<artefact_formatter_interface>>>&
+repository::stock_artefact_formatters_by_type_index() {
     return stock_artefact_formatters_by_type_index_;
 }
 
-std::unordered_map<std::type_index, std::forward_list<std::shared_ptr<dogen::quilt::csharp::formatters::artefact_formatter_interface> > >& repository::stock_artefact_formatters_by_type_index() {
+std::unordered_map<std::string, std::shared_ptr<artefact_formatter_interface>>&
+repository::stock_artefact_formatters_by_archetype() {
+    return stock_artefact_formatters_by_archetype_;
+}
+
+std::forward_list<std::shared_ptr<artefact_formatter_interface>>&
+repository::stock_artefact_formatters() {
+    return stock_artefact_formatters_;
+}
+
+const std::unordered_map<
+    std::type_index,
+    std::forward_list<std::shared_ptr<artefact_formatter_interface>>>&
+repository::stock_artefact_formatters_by_type_index() const {
     return stock_artefact_formatters_by_type_index_;
 }
 
-void repository::stock_artefact_formatters_by_type_index(const std::unordered_map<std::type_index, std::forward_list<std::shared_ptr<dogen::quilt::csharp::formatters::artefact_formatter_interface> > >& v) {
-    stock_artefact_formatters_by_type_index_ = v;
+const std::unordered_map<std::string,
+                         std::shared_ptr<artefact_formatter_interface>>&
+repository::stock_artefact_formatters_by_archetype() const {
+    return stock_artefact_formatters_by_archetype_;
 }
 
-void repository::stock_artefact_formatters_by_type_index(const std::unordered_map<std::type_index, std::forward_list<std::shared_ptr<dogen::quilt::csharp::formatters::artefact_formatter_interface> > >&& v) {
-    stock_artefact_formatters_by_type_index_ = std::move(v);
+const std::forward_list<std::shared_ptr<artefact_formatter_interface>>&
+repository::stock_artefact_formatters() const {
+    return stock_artefact_formatters_;
 }
 
 } } } }

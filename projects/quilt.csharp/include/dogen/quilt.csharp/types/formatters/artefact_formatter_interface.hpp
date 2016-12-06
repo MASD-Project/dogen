@@ -25,7 +25,13 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include <typeindex>
+#include <boost/filesystem/path.hpp>
+#include "dogen/annotations/types/archetype_location.hpp"
+#include "dogen/formatters/types/artefact.hpp"
+#include "dogen/yarn/types/element.hpp"
+#include "dogen/quilt.csharp/types/formatters/locator.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -35,27 +41,48 @@ namespace formatters {
 class artefact_formatter_interface {
 public:
     artefact_formatter_interface() = default;
-    artefact_formatter_interface(const artefact_formatter_interface&) = default;
     artefact_formatter_interface(artefact_formatter_interface&&) = default;
-    artefact_formatter_interface& operator=(const artefact_formatter_interface&) = default;
-
+    artefact_formatter_interface(const artefact_formatter_interface&) = delete;
     virtual ~artefact_formatter_interface() noexcept = 0;
 
-protected:
-    bool compare(const artefact_formatter_interface& rhs) const;
 public:
-    virtual bool equals(const artefact_formatter_interface& other) const = 0;
+    /**
+     * @brief Unique identifier for the formatter in formatter space.
+     */
+    virtual std::string formatter_name() const = 0;
 
-protected:
-    void swap(artefact_formatter_interface& other) noexcept;
+    /**
+     * @brief Ownership hierarchy for this formatter
+     */
+    virtual annotations::archetype_location archetype_location() const = 0;
 
+    /**
+     * @brief Returns the type index of the element supported by this
+     * formatter.
+     */
+    virtual std::type_index element_type_index() const = 0;
+
+public:
+    /**
+     * @brief Provides the full path.
+     */
+    virtual boost::filesystem::path
+    full_path(const locator& l, const yarn::name& n) const = 0;
+
+    /**
+     * @brief Creates the inclusion dependencies for this formatter
+     * against the supplied element.
+     */
+    virtual std::list<std::string>
+    inclusion_dependencies(const yarn::element& e) const = 0;
+
+public:
+    /**
+     * @brief Generate a file representation for the element.
+     */
+    virtual dogen::formatters::artefact
+    format(const yarn::element& e) const = 0;
 };
-
-inline artefact_formatter_interface::~artefact_formatter_interface() noexcept { }
-
-inline bool operator==(const artefact_formatter_interface& lhs, const artefact_formatter_interface& rhs) {
-    return lhs.equals(rhs);
-}
 
 } } } }
 

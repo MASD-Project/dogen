@@ -25,55 +25,51 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <memory>
+#include <forward_list>
+#include "dogen/annotations/types/archetype_location.hpp"
 #include "dogen/quilt.csharp/types/formatters/repository.hpp"
+#include "dogen/quilt.csharp/types/formatters/artefact_formatter_interface.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace csharp {
 namespace formatters {
 
+/**
+ * @brief Manages formatter registration.
+ */
 class registrar final {
 public:
-    registrar() = default;
-    registrar(const registrar&) = default;
-    registrar(registrar&&) = default;
-    ~registrar() = default;
+    /**
+     * @brief Ensures the registrar is ready to be used.
+     */
+    void validate() const;
 
 public:
-    explicit registrar(const dogen::quilt::csharp::formatters::repository& formatter_repository_);
+    /**
+     * @brief Registers a file formatter.
+     */
+    void register_formatter(std::shared_ptr<artefact_formatter_interface> f);
 
 public:
-    const dogen::quilt::csharp::formatters::repository& formatter_repository_() const;
-    dogen::quilt::csharp::formatters::repository& formatter_repository_();
-    void formatter_repository_(const dogen::quilt::csharp::formatters::repository& v);
-    void formatter_repository_(const dogen::quilt::csharp::formatters::repository&& v);
+    /**
+     * @brief Returns all available formatters.
+     */
+    const repository& formatter_repository() const;
 
-public:
-    bool operator==(const registrar& rhs) const;
-    bool operator!=(const registrar& rhs) const {
-        return !this->operator==(rhs);
-    }
-
-public:
-    void swap(registrar& other) noexcept;
-    registrar& operator=(registrar other);
+    /**
+     * @brief Returns the archetype locations for the registered
+     * formatters.
+     */
+    const std::forward_list<annotations::archetype_location>&
+    archetype_locations() const;
 
 private:
-    dogen::quilt::csharp::formatters::repository formatter_repository__;
+    repository formatter_repository_;
+    std::forward_list<annotations::archetype_location> archetype_locations_;
 };
 
 } } } }
-
-namespace std {
-
-template<>
-inline void swap(
-    dogen::quilt::csharp::formatters::registrar& lhs,
-    dogen::quilt::csharp::formatters::registrar& rhs) {
-    lhs.swap(rhs);
-}
-
-}
 
 #endif

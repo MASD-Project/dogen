@@ -18,13 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CSHARP_IO_ALL_IO_HPP
-#define DOGEN_QUILT_CSHARP_IO_ALL_IO_HPP
+#include "dogen/quilt.csharp/types/formatters/assistant.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace dogen {
+namespace quilt {
+namespace csharp {
+namespace formatters {
 
-#include "dogen/quilt.csharp/io/formatters/repository_io.hpp"
+std::ostream& assistant::stream() {
+    return stream_;
+}
 
-#endif
+dogen::formatters::artefact assistant::make_artefact() const {
+    dogen::formatters::artefact r;
+    r.content(stream_.str());
+    // r.path(artefact_properties_.file_path());
+    // r.overwrite(artefact_properties_.overwrite());
+
+    return r;
+}
+
+} } } }

@@ -25,11 +25,6 @@ namespace quilt {
 namespace csharp {
 namespace formatters {
 
-void artefact_formatter_interface::swap(artefact_formatter_interface&) noexcept {
-}
-
-bool artefact_formatter_interface::compare(const artefact_formatter_interface& /*rhs*/) const {
-    return true;
-}
+artefact_formatter_interface::~artefact_formatter_interface() noexcept { }
 
 } } } }

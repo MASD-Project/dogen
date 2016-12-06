@@ -18,45 +18,98 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/io/forward_list_io.hpp"
+#include "dogen/annotations/io/archetype_location_io.hpp"
+#include "dogen/quilt.csharp/io/formatters/repository_io.hpp"
+#include "dogen/quilt.csharp/types/formatters/registrar_error.hpp"
 #include "dogen/quilt.csharp/types/formatters/registrar.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory("quilt.csharp.formatters.registrar"));
+
+const std::string no_file_formatters("File formatters repository is empty.");
+const std::string no_file_formatters_by_type_index(
+    "No file formatters by type index provided.");
+
+const std::string null_formatter("Formatter supplied is null.");
+const std::string empty_formatter_name("Formatter name is empty.");
+const std::string empty_facet_name("Facet name is empty.");
+const std::string empty_model_name("Model name is empty.");
+const std::string duplicate_formatter_name("Duplicate formatter name: ");
+const std::string empty_family("Family cannot be empty.");
+
+}
 
 namespace dogen {
 namespace quilt {
 namespace csharp {
 namespace formatters {
 
-registrar::registrar(const dogen::quilt::csharp::formatters::repository& formatter_repository_)
-    : formatter_repository__(formatter_repository_) { }
+void registrar::validate() const {
+    /*
+     * We must have at least one registered formatter. This is a quick
+     * way of troubleshooting validation errors.
+     */
+    const auto& frp(formatter_repository_);
+    if (frp.stock_artefact_formatters_by_type_index().empty()) {
+        BOOST_LOG_SEV(lg, error) << no_file_formatters_by_type_index;
+        BOOST_THROW_EXCEPTION(
+            registrar_error(no_file_formatters_by_type_index));
+    }
 
-void registrar::swap(registrar& other) noexcept {
-    using std::swap;
-    swap(formatter_repository__, other.formatter_repository__);
+    if (frp.stock_artefact_formatters().empty()) {
+        BOOST_LOG_SEV(lg, error) << no_file_formatters;
+        BOOST_THROW_EXCEPTION(registrar_error(no_file_formatters));
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Registrar is in a valid state. Repository: "
+                             << frp;
+    BOOST_LOG_SEV(lg, debug) << "Archetype locations: " << archetype_locations_;
 }
 
-bool registrar::operator==(const registrar& rhs) const {
-    return formatter_repository__ == rhs.formatter_repository__;
-}
+void registrar::
+register_formatter(std::shared_ptr<artefact_formatter_interface> f) {
+    // note: not logging by design
+    if (!f)
+        BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
 
-registrar& registrar::operator=(registrar other) {
-    using std::swap;
-    swap(*this, other);
-    return *this;
-}
+    const auto& al(f->archetype_location());
+    if (al.archetype().empty())
+        BOOST_THROW_EXCEPTION(registrar_error(empty_formatter_name));
 
-const dogen::quilt::csharp::formatters::repository& registrar::formatter_repository_() const {
-    return formatter_repository__;
-}
+    if (al.facet().empty())
+        BOOST_THROW_EXCEPTION(registrar_error(empty_facet_name));
 
-dogen::quilt::csharp::formatters::repository& registrar::formatter_repository_() {
-    return formatter_repository__;
-}
+    if (al.kernel().empty())
+        BOOST_THROW_EXCEPTION(registrar_error(empty_model_name));
 
-void registrar::formatter_repository_(const dogen::quilt::csharp::formatters::repository& v) {
-    formatter_repository__ = v;
-}
+    archetype_locations_.push_front(al);
+    formatter_repository_.stock_artefact_formatters_.push_front(f);
 
-void registrar::formatter_repository_(const dogen::quilt::csharp::formatters::repository&& v) {
-    formatter_repository__ = std::move(v);
+    /*
+     * Add the formatter to the index by element type index.
+     */
+    auto& ffti(formatter_repository_.stock_artefact_formatters_by_type_index());
+    auto& ti(ffti[f->element_type_index()]);
+    ti.push_front(f);
+
+    /*
+     * Add formatter to the index by archetype name. Inserting the
+     * formatter into this repository has the helpful side-effect of
+     * ensuring the formatter id is unique in formatter space.
+     */
+    const auto arch(al.archetype());
+    auto& fffn(formatter_repository_.stock_artefact_formatters_by_archetype());
+    const auto pair(std::make_pair(arch, f));
+    const auto inserted(fffn.insert(pair).second);
+    if (!inserted) {
+        BOOST_LOG_SEV(lg, error) << duplicate_formatter_name << arch;
+        BOOST_THROW_EXCEPTION(registrar_error(duplicate_formatter_name + arch));
+    }
 }
 
 } } } }
