@@ -70,6 +70,7 @@ public:
     static boost::filesystem::path input_enable_facet_serialization_dia();
     static boost::filesystem::path input_rename_facet_folder_dia();
     static boost::filesystem::path input_all_primitives_dia();
+    static boost::filesystem::path input_csharp_model_dia();
     static boost::filesystem::path input_trivial_inheritance_dia();
     static boost::filesystem::path input_trivial_association_dia();
     static boost::filesystem::path input_comments_dia();

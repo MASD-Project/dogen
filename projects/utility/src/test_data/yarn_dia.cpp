@@ -66,6 +66,7 @@ path input_enable_facet_serialization_dia(
     );
 path input_rename_facet_folder_dia("yarn.dia/input/rename_facet_folder.dia");
 path input_all_primitives_dia("yarn.dia/input/all_primitives.dia");
+path input_csharp_model_dia("yarn.dia/input/csharp_model.dia");
 path input_trivial_inheritance_dia("yarn.dia/input/trivial_inheritance.dia");
 path input_trivial_association_dia("yarn.dia/input/trivial_association.dia");
 path input_comments_dia("yarn.dia/input/comments.dia");
@@ -379,6 +380,10 @@ path yarn_dia::input_rename_facet_folder_dia() {
 
 path yarn_dia::input_all_primitives_dia() {
     return validating_resolver::resolve(::input_all_primitives_dia);
+}
+
+path yarn_dia::input_csharp_model_dia() {
+    return validating_resolver::resolve(::input_csharp_model_dia);
 }
 
 path yarn_dia::input_trivial_inheritance_dia() {

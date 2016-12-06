@@ -350,4 +350,10 @@ BOOST_AUTO_TEST_CASE(all_primitives_model_generates_expected_code) {
     BOOST_CHECK(generate_and_diff(json, actual_json_dir));
 }
 
+BOOST_AUTO_TEST_CASE(csharp_model_generates_expected_code) {
+    SETUP_TEST_LOG("csharp_model_generates_expected_code");
+    // const auto dia(yarn_dia::input_csharp_model_dia());
+    // BOOST_CHECK(generate_and_diff(dia, actual_dia_dir));
+}
+
 BOOST_AUTO_TEST_SUITE_END()
