@@ -50,7 +50,10 @@ std::shared_ptr<cpp::formatters::registrar> workflow::registrar_;
 workflow::workflow(const annotations::type_repository& atrp,
     const annotations::annotation_groups_factory& af,
     const dogen::formatters::repository& frp)
-    : stitch_formatter_(atrp, af, frp) {}
+    : stitch_formatter_(atrp, af, frp) {
+
+    workflow::registrar().validate();
+}
 
 cpp::formatters::registrar& workflow::registrar() {
     if (!registrar_)

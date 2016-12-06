@@ -157,7 +157,7 @@ void formatting_expander::expand(const annotations::type_repository& atrp,
             art_prop.formatting_input(cfg.input());
         }
     }
-    BOOST_LOG_SEV(lg, debug) << "Finishedexpanding formatting properties.";
+    BOOST_LOG_SEV(lg, debug) << "Finished expanding formatting properties.";
 }
 
 } } } }

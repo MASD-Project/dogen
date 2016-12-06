@@ -78,6 +78,8 @@ void registrar::validate() const {
      */
     const auto cs(inclusion_support_types::canonical_support);
     for (const auto& pair : frp.stock_artefact_formatters_by_type_index()) {
+        BOOST_LOG_SEV(lg, debug) << "Processing type: " << pair.first.name();
+
         const auto& ti(pair.first);
         const auto& formatters(pair.second);
         std::set<std::string> facets_found;
@@ -105,18 +107,28 @@ void registrar::validate() const {
             facets_found.insert(fct);
         }
 
+        BOOST_LOG_SEV(lg, debug) << "All Facets: " << all_facets;
+        BOOST_LOG_SEV(lg, debug) << "Facets found: " << facets_found;
+
         /*
          * We must have one canonical formatter per type per facet.
+         * FIXME: this check is broken at the moment because this is
+         * only applicable to yarn types, not fabric types. It is also
+         * not applicable to forward declarations. We need some
+         * additional information from yarn to be able to figure out
+         * which types must have a canonical archetype.
          */
         std::set<std::string> result;
         std::set_difference(all_facets.begin(), all_facets.end(),
             facets_found.begin(), facets_found.end(),
             std::inserter(result, result.end()));
         if (!result.empty()) {
-            BOOST_LOG_SEV(lg, error) << facets_missing_canonical_archetype
-                                     << " : " << result;
-            BOOST_THROW_EXCEPTION(
-                registrar_error(facets_missing_canonical_archetype));
+            BOOST_LOG_SEV(lg, warn) << facets_missing_canonical_archetype
+                                    << " : " << result;
+
+            // FIXME: broken at present.
+            // BOOST_THROW_EXCEPTION(
+            //     registrar_error(facets_missing_canonical_archetype));
         }
     }
 
