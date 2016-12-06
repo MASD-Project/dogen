@@ -18,13 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_TEST_DATA_ALL_TD_HPP
-#define DOGEN_QUILT_TEST_DATA_ALL_TD_HPP
+#include "dogen/quilt/types/configuration_factory.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace dogen {
+namespace quilt {
 
-#include "dogen/quilt/test_data/configuration_td.hpp"
+bool configuration_factory::operator==(const configuration_factory& /*rhs*/) const {
+    return true;
+}
 
-#endif
+} }

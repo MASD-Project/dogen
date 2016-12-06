@@ -18,13 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_TEST_DATA_ALL_TD_HPP
-#define DOGEN_QUILT_TEST_DATA_ALL_TD_HPP
+#ifndef DOGEN_QUILT_HASH_CONFIGURATION_HASH_HPP
+#define DOGEN_QUILT_HASH_CONFIGURATION_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/quilt/test_data/configuration_td.hpp"
+#include <functional>
+#include "dogen/quilt/types/configuration.hpp"
 
+namespace dogen {
+namespace quilt {
+
+struct configuration_hasher {
+public:
+    static std::size_t hash(const configuration& v);
+};
+
+} }
+
+namespace std {
+
+template<>
+struct hash<dogen::quilt::configuration> {
+public:
+    size_t operator()(const dogen::quilt::configuration& v) const {
+        return dogen::quilt::configuration_hasher::hash(v);
+    }
+};
+
+}
 #endif

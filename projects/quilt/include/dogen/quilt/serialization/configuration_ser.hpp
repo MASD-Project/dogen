@@ -18,13 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_TEST_DATA_ALL_TD_HPP
-#define DOGEN_QUILT_TEST_DATA_ALL_TD_HPP
+#ifndef DOGEN_QUILT_SERIALIZATION_CONFIGURATION_SER_HPP
+#define DOGEN_QUILT_SERIALIZATION_CONFIGURATION_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/quilt/test_data/configuration_td.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen/quilt/types/configuration.hpp"
+
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::quilt::configuration)
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+void save(Archive& ar, const dogen::quilt::configuration& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::quilt::configuration& v, unsigned int version);
+
+} }
 
 #endif

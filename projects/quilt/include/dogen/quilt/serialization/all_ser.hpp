@@ -25,4 +25,6 @@
 #pragma once
 #endif
 
+#include "dogen/quilt/serialization/configuration_ser.hpp"
+
 #endif

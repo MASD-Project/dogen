@@ -18,13 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_TEST_DATA_ALL_TD_HPP
-#define DOGEN_QUILT_TEST_DATA_ALL_TD_HPP
+#ifndef DOGEN_QUILT_TYPES_CONFIGURATION_FACTORY_HPP
+#define DOGEN_QUILT_TYPES_CONFIGURATION_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/quilt/test_data/configuration_td.hpp"
+#include <algorithm>
+
+namespace dogen {
+namespace quilt {
+
+class configuration_factory final {
+public:
+    configuration_factory() = default;
+    configuration_factory(const configuration_factory&) = default;
+    configuration_factory(configuration_factory&&) = default;
+    ~configuration_factory() = default;
+    configuration_factory& operator=(const configuration_factory&) = default;
+
+public:
+    bool operator==(const configuration_factory& rhs) const;
+    bool operator!=(const configuration_factory& rhs) const {
+        return !this->operator==(rhs);
+    }
+
+};
+
+} }
 
 #endif

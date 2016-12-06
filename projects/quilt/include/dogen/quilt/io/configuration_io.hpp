@@ -18,13 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_TEST_DATA_ALL_TD_HPP
-#define DOGEN_QUILT_TEST_DATA_ALL_TD_HPP
+#ifndef DOGEN_QUILT_IO_CONFIGURATION_IO_HPP
+#define DOGEN_QUILT_IO_CONFIGURATION_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/quilt/test_data/configuration_td.hpp"
+#include <iosfwd>
+#include "dogen/quilt/types/configuration.hpp"
+
+namespace dogen {
+namespace quilt {
+
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::quilt::configuration& v);
+
+} }
 
 #endif

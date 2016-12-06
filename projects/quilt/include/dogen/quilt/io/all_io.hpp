@@ -25,4 +25,6 @@
 #pragma once
 #endif
 
+#include "dogen/quilt/io/configuration_io.hpp"
+
 #endif

@@ -25,4 +25,6 @@
 #pragma once
 #endif
 
+#include "dogen/quilt/hash/configuration_hash.hpp"
+
 #endif

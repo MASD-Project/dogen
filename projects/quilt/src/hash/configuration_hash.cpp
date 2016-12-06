@@ -18,13 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_TEST_DATA_ALL_TD_HPP
-#define DOGEN_QUILT_TEST_DATA_ALL_TD_HPP
+#include "dogen/quilt/hash/configuration_hash.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace {
 
-#include "dogen/quilt/test_data/configuration_td.hpp"
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value) {
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
 
-#endif
+inline std::size_t hash_std_unordered_set_std_string(const std::unordered_set<std::string>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
+}
+
+}
+
+namespace dogen {
+namespace quilt {
+
+std::size_t configuration_hasher::hash(const configuration& v) {
+    std::size_t seed(0);
+
+    combine(seed, hash_std_unordered_set_std_string(v.enabled_kernels()));
+    combine(seed, v.enable_kernel_directories());
+
+    return seed;
+}
+
+} }

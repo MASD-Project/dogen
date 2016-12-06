@@ -18,13 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_TEST_DATA_ALL_TD_HPP
-#define DOGEN_QUILT_TEST_DATA_ALL_TD_HPP
+#ifndef DOGEN_QUILT_TEST_DATA_CONFIGURATION_TD_HPP
+#define DOGEN_QUILT_TEST_DATA_CONFIGURATION_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/quilt/test_data/configuration_td.hpp"
+#include "dogen/quilt/types/configuration.hpp"
+
+namespace dogen {
+namespace quilt {
+
+class configuration_generator {
+public:
+    configuration_generator();
+
+public:
+    typedef dogen::quilt::configuration result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
+
+} }
 
 #endif
