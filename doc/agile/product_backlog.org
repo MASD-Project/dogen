@@ -11,6 +11,21 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Distinguish between meta-types that require canonical archetypes  :story:
+
+At present it is not possible to know which meta-types require
+canonical archetypes and which don't. In the validation we said:
+
+:         * We must have one canonical formatter per type per facet.
+:         * FIXME: this check is broken at the moment because this is
+:         * only applicable to yarn types, not fabric types. It is also
+:         * not applicable to forward declarations. We need some
+:         * additional information from yarn to be able to figure out
+:         * which types must have a canonical archetype.
+
+We should have some kind of flag in yarn to distinguish. This still
+requires a bit of thinking.
+
 *** Consider simplifying frontend testing                             :story:
 
 At present we are outputting code for every supported frontend, and
