@@ -332,6 +332,7 @@ registrar.
 When we add this back, validation fails.
 
 *** STARTED Add support for C#                                        :story:
+    CLOCK: [2016-12-06 Tue 18:10]--[2016-12-06 Tue 18:21] =>  0:11
     CLOCK: [2016-12-06 Tue 17:54]--[2016-12-06 Tue 18:09] =>  0:15
     CLOCK: [2016-12-06 Tue 17:18]--[2016-12-06 Tue 17:53] =>  0:35
     CLOCK: [2016-12-06 Tue 16:19]--[2016-12-06 Tue 16:56] =>  0:37
@@ -359,6 +360,18 @@ Notes:
   start off with just hand craft the formatters until we can see a
   pattern emerging.
 - we need to figure out a way to move enablement out to quilt.
+- inclusion is probably now just a question of reference management;
+  we've probably got enough in yarn for this.
+
+Key problems:
+
+- not calculating path at present.
+- no enablement support - need some formattables like structure for
+  this.
+- no helper support - will be needed for test data.
+- will need fabric in order to support =csproj=.
+- no support for facet directory, facet postfix, kernel directory, etc.
+  Locator needs to be moved into formattables.
 
 Tasks:
 
