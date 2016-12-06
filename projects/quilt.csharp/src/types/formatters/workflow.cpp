@@ -18,8 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
+#include "dogen/utility/log/logger.hpp"
 #include "dogen/quilt.csharp/types/formatters/workflow.hpp"
 
+namespace {
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory("quit.csharp.formatters.workflow"));
+
+}
 namespace dogen {
 namespace quilt {
 namespace csharp {
@@ -27,11 +35,53 @@ namespace formatters {
 
 std::shared_ptr<csharp::formatters::registrar> workflow::registrar_;
 
+workflow::workflow() {
+    registrar().validate();
+}
+
 csharp::formatters::registrar& workflow::registrar() {
     if (!registrar_)
         registrar_ = std::make_shared<csharp::formatters::registrar>();
 
     return *registrar_;
+}
+
+std::forward_list<dogen::formatters::artefact>
+workflow::execute(const yarn::model& m) const {
+
+    BOOST_LOG_SEV(lg, debug) << "Started formatting. Model " << m.name().id();
+    std::forward_list<dogen::formatters::artefact> r;
+    for (const auto& eptr : m.elements()) {
+        const auto& e(*eptr);
+        const auto id(e.name().id());
+        BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
+
+        const auto ti(std::type_index(typeid(e)));
+        BOOST_LOG_SEV(lg, debug) << "Type index: " << ti.name();
+
+        const auto& frp(registrar().formatter_repository());
+        const auto i(frp.stock_artefact_formatters_by_type_index().find(ti));
+        if (i == frp.stock_artefact_formatters_by_type_index().end()) {
+            BOOST_LOG_SEV(lg, debug) << "No formatters for type: " << ti.name();
+            return r;
+        }
+
+        const auto& fmts(i->second);
+        for (const auto& fmt_ptr : fmts) {
+            const auto& fmt(*fmt_ptr);
+            const auto fmtn(fmt.formatter_name());
+            BOOST_LOG_SEV(lg, debug) << "Using formatter: " << fmtn;
+
+            const auto artefact(fmt.format(e));
+            const auto& p(artefact.path());
+
+            BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;
+            r.push_front(artefact);
+        }
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Finished formatting.";
+    return r;
 }
 
 } } } }

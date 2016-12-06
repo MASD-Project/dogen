@@ -112,4 +112,13 @@ register_formatter(std::shared_ptr<artefact_formatter_interface> f) {
     }
 }
 
+const repository& registrar::formatter_repository() const {
+    return formatter_repository_;
+}
+
+const std::forward_list<annotations::archetype_location>&
+registrar::archetype_locations() const {
+    return archetype_locations_;
+}
+
 } } } }

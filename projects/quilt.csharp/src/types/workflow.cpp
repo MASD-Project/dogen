@@ -21,6 +21,7 @@
 #include <boost/algorithm/string/join.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/quilt.csharp/types/traits.hpp"
+#include "dogen/quilt.csharp/types/formatters/workflow.hpp"
 #include "dogen/quilt.csharp/types/workflow.hpp"
 
 namespace {
@@ -57,13 +58,7 @@ annotations::archetype_location workflow::archetype_location() const {
 
 std::forward_list<annotations::archetype_location>
 workflow::archetype_locations() const {
-    std::forward_list<annotations::archetype_location> r;
-    r.push_front(
-        annotations::archetype_location(traits::family(), traits::kernel(),
-            traits::kernel() + dot + "types",
-            traits::kernel() + dot + "types.class")
-        );
-    return r;
+    return formatters::workflow::registrar().archetype_locations();
 }
 
 std::forward_list<dogen::formatters::artefact> workflow::generate(

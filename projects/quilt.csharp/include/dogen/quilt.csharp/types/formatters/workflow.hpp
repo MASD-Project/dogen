@@ -26,6 +26,9 @@
 #endif
 
 #include <memory>
+#include <forward_list>
+#include "dogen/formatters/types/artefact.hpp"
+#include "dogen/yarn/types/model.hpp"
 #include "dogen/quilt.csharp/types/formatters/registrar.hpp"
 
 namespace dogen {
@@ -35,11 +38,18 @@ namespace formatters {
 
 class workflow final {
 public:
+    workflow();
+
+public:
     /**
      * @brief Returns the registrar. If it has not yet been
      * initialised, initialises it.
      */
     static csharp::formatters::registrar& registrar();
+
+public:
+    std::forward_list<dogen::formatters::artefact>
+    execute(const yarn::model& m) const;
 
 private:
     static std::shared_ptr<csharp::formatters::registrar> registrar_;
