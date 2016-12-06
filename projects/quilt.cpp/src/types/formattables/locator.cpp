@@ -117,6 +117,9 @@ locator::type_group locator::make_type_group(
     const auto& dt(traits::cpp::disable_facet_directories());
     r.disable_facet_directories = s.select_type_by_name(dt);
 
+    const auto& kdn(traits::cpp::kernel_directory_name());
+    r.kernel_directory_name = s.select_type_by_name(kdn);
+
     return r;
 }
 
@@ -171,6 +174,9 @@ locator_configuration locator::make_configuration(
 
     const auto& dt(tg.disable_facet_directories);
     r.disable_facet_directories(s.get_boolean_content_or_default(dt));
+
+    const auto& kdn(tg.kernel_directory_name);
+    r.kernel_directory_name(s.get_text_content_or_default(kdn));
 
     return r;
 }

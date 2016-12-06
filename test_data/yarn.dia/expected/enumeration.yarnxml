@@ -933,7 +933,7 @@ this is a long comment
 				<second class_id="49" tracking_level="0" version="0">
 					<parent class_id="50" tracking_level="0" version="0">
 						<entries class_id="51" tracking_level="0" version="0">
-							<count>3</count>
+							<count>4</count>
 							<item_version>0</item_version>
 							<item class_id="52" tracking_level="0" version="0">
 								<first>yarn.dia.comment</first>
@@ -942,6 +942,10 @@ this is a long comment
 							<item>
 								<first>yarn.dia.external_modules</first>
 								<second>dogen::test_models</second>
+							</item>
+							<item>
+								<first>quilt.csharp.enabled</first>
+								<second>false</second>
 							</item>
 							<item>
 								<first>annotations.profile</first>

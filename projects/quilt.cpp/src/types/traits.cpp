@@ -119,6 +119,11 @@ std::string traits::cpp::source_directory_name() {
     return r;
 }
 
+std::string traits::cpp::kernel_directory_name() {
+    static std::string r("quilt.cpp.directory");
+    return r;
+}
+
 std::string traits::cpp::disable_facet_directories() {
     static std::string r("quilt.cpp.disable_facet_directories");
     return r;

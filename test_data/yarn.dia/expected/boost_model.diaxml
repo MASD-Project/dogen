@@ -9945,6 +9945,7 @@
 															<value>
 																<value>##DOGEN yarn.dia.comment=true
 #DOGEN yarn.dia.external_modules=dogen::test_models
+#DOGEN quilt.csharp.enabled=false
 #DOGEN annotations.profile=dogen#</value>
 															</value>
 														</item>

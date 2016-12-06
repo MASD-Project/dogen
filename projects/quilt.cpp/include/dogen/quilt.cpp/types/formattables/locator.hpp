@@ -77,6 +77,7 @@ private:
         annotations::type include_directory_name;
         annotations::type source_directory_name;
         annotations::type disable_facet_directories;
+        annotations::type kernel_directory_name;
     };
 
     type_group make_type_group(const annotations::type_repository& atrp,

@@ -4,6 +4,7 @@
   "annotation": {
     "yarn.dia.comment": "true",
     "yarn.dia.external_modules": "dogen::test_models",
+    "quilt.csharp.enabled": false,
     "annotations.profile": "dogen.disable_facet_directories"
   },
   "elements": [

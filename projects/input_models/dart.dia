@@ -96,6 +96,7 @@
           <dia:attribute name="string">
             <dia:string>##DOGEN yarn.dia.comment=true
 #DOGEN yarn.dia.external_modules=dogen
+#DOGEN quilt.csharp.enabled=false
 #DOGEN annotations.profile=dogen.disable_odb_cmake#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">

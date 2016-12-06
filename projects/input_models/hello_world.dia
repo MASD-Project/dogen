@@ -93,7 +93,8 @@ property. You can see the use of comments at the class level and property
 level.
 
 #DOGEN yarn.dia.comment=true
-#DOGEN yarn.dia.external_modules=dogen#</dia:string>
+#DOGEN yarn.dia.external_modules=dogen
+#DOGEN quilt.csharp.enabled=false#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

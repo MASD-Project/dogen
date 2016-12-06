@@ -1391,11 +1391,12 @@
           <dia:attribute name="string">
             <dia:string>##DOGEN yarn.dia.comment=true
 #DOGEN yarn.dia.external_modules=dogen
-#DOGEN annotations.profile=dogen.disable_odb_cmake
 #DOGEN yarn.reference=options.dia
 #DOGEN yarn.reference=annotations.dia
 #DOGEN yarn.reference=yarn.dia
-#DOGEN yarn.reference=formatters.dia#</dia:string>
+#DOGEN yarn.reference=formatters.dia
+#DOGEN quilt.csharp.enabled=false
+#DOGEN annotations.profile=dogen.disable_odb_cmake#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>

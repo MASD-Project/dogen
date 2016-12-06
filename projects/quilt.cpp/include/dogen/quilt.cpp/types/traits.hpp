@@ -133,6 +133,11 @@ struct traits {
         static std::string source_directory_name();
 
         /**
+         * @brief Name of the directory housing the kernel.
+         */
+        static std::string kernel_directory_name();
+
+        /**
          * @brief If true, facet directories will be ignored.
          */
         static std::string disable_facet_directories();

@@ -292,6 +292,7 @@
           <dia:attribute name="string">
             <dia:string>##DOGEN yarn.dia.comment=true
 #DOGEN yarn.dia.external_modules=dogen::test_models
+#DOGEN quilt.csharp.enabled=false
 #DOGEN annotations.profile=dogen.disable_facet_directories#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">

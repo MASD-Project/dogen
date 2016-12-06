@@ -1713,6 +1713,7 @@ and to build it.
 #DOGEN yarn.dia.comment=true
 #DOGEN yarn.dia.external_modules=dogen
 #DOGEN yarn.reference=annotations.dia
+#DOGEN quilt.csharp.enabled=false
 #DOGEN annotations.profile=dogen.disable_odb_cmake#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
@@ -2407,7 +2408,7 @@ Children are concepts that refine at least one other concept.#</dia:string>
           <dia:attribute name="string">
             <dia:string>#The resolver validates all
 dependencies and resolves
-all types in the merged 
+all types in the merged
 intermediate model.#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">

@@ -828,6 +828,7 @@ languages.
 #DOGEN yarn.reference=yarn.dia
 #DOGEN yarn.reference=quilt.cpp.dia
 #DOGEN yarn.reference=formatters.dia
+#DOGEN quilt.csharp.enabled=false
 #DOGEN annotations.profile=dogen.disable_odb_cmake#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
