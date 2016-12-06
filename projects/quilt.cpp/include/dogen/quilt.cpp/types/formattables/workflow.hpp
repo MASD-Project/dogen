@@ -68,7 +68,7 @@ public:
         const annotations::type_repository& atrp,
         const annotations::annotation& ra,
         const dogen::formatters::decoration_properties_factory& dpf,
-        const formatters::repository& frp, const bool requires_kernel_directory,
+        const formatters::repository& frp, const bool enable_kernel_directories,
         const yarn::model& m) const;
 };
 

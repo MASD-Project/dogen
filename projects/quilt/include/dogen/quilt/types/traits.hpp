@@ -32,6 +32,7 @@ namespace quilt {
 
 struct traits final {
     static std::string enabled();
+    static std::string enable_kernel_directories();
 };
 
 } }

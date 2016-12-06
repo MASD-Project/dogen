@@ -25,25 +25,37 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <string>
+#include <unordered_set>
+#include "dogen/annotations/types/type.hpp"
+#include "dogen/annotations/types/annotation.hpp"
+#include "dogen/annotations/types/type_repository.hpp"
+#include "dogen/quilt/types/configuration.hpp"
 
 namespace dogen {
 namespace quilt {
 
 class configuration_factory final {
-public:
-    configuration_factory() = default;
-    configuration_factory(const configuration_factory&) = default;
-    configuration_factory(configuration_factory&&) = default;
-    ~configuration_factory() = default;
-    configuration_factory& operator=(const configuration_factory&) = default;
+private:
+    struct type_group {
+        annotations::type enable_kernel_directories;
+        std::list<annotations::type> enabled;
+    };
+
+    type_group make_type_group(const annotations::type_repository& atrp,
+        const std::list<annotations::archetype_location>& als) const;
+
+    std::unordered_set<std::string> obtain_enabled_kernels(const type_group& tg,
+        const annotations::annotation& ra) const;
+
+    bool obtain_enable_kernel_directories(const type_group& tg,
+        const annotations::annotation& ra) const;
 
 public:
-    bool operator==(const configuration_factory& rhs) const;
-    bool operator!=(const configuration_factory& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    configuration make(const annotations::type_repository& atrp,
+        const std::list<annotations::archetype_location>& als,
+        const annotations::annotation& ra) const;
 };
 
 } }

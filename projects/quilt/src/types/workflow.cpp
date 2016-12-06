@@ -22,9 +22,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/annotations/io/type_io.hpp"
-#include "dogen/annotations/types/entry_selector.hpp"
-#include "dogen/annotations/types/type_repository_selector.hpp"
-#include "dogen/quilt/types/traits.hpp"
+#include "dogen/quilt/types/configuration_factory.hpp"
 #include "dogen/quilt/types/workflow_error.hpp"
 #include "dogen/quilt/types/workflow.hpp"
 
@@ -44,56 +42,21 @@ const std::string multiple_generatable_model_modules(
 namespace dogen {
 namespace quilt {
 
-std::ostream&
-operator<<(std::ostream& s, const workflow::type_group& v) {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::quilt::workflow::type_group\"" << ", "
-      << "\"requires_manual_default_constructor\": "
-      << v.enabled
-      << " }";
-
-    return s;
-}
-
 std::shared_ptr<kernel_registrar> workflow::registrar_;
-
-std::list<workflow::type_group>
-workflow::make_type_groups(const annotations::type_repository& atrp) const {
-    std::list<type_group> r;
-
-    const auto en(traits::enabled());
-    const annotations::type_repository_selector rs(atrp);
-    for (const auto b : registrar().kernels()) {
-        type_group tg;
-        const auto kernel(b->archetype_location().kernel());
-        tg.enabled = rs.select_type_by_name(kernel, en);
-        r.push_back(tg);
-    }
-
-    return r;
-}
-
-std::unordered_set<std::string>
-workflow::obtain_enabled_kernels(const std::list<type_group>& tgs,
-    const annotations::annotation& ra) const {
-
-    std::unordered_set<std::string> r;
-    const annotations::entry_selector s(ra);
-    for (const auto& tg : tgs) {
-        const bool enabled(s.get_boolean_content_or_default(tg.enabled));
-        if (!enabled)
-            continue;
-
-        r.insert(tg.enabled.archetype_location().kernel());
-    }
-
-    return r;
-}
 
 workflow::workflow(const options::knitting_options& o,
     const annotations::type_repository& atrp,
     const annotations::annotation_groups_factory& agf)
     : knitting_options_(o), repository_(atrp), annotation_factory_(agf) {}
+
+std::list<annotations::archetype_location>
+workflow::kernel_archetype_locations() const {
+    std::list<annotations::archetype_location> r;
+    const auto& rg(quilt::workflow::registrar());
+    for (const auto k : rg.kernels())
+        r.push_back(k->archetype_location());
+    return r;
+}
 
 kernel_registrar& workflow::registrar() {
     if (!registrar_)
@@ -105,9 +68,9 @@ kernel_registrar& workflow::registrar() {
 std::list<annotations::archetype_location> workflow::archetype_locations() {
     std::list<annotations::archetype_location> r;
     const auto& rg(quilt::workflow::registrar());
-    for (const auto b : rg.kernels()) {
+    for (const auto k : rg.kernels()) {
         // not splicing due to a mistmatch in the list types
-        for (const auto al : b->archetype_locations())
+        for (const auto al : k->archetype_locations())
             r.push_back(al);
     }
     return r;
@@ -128,27 +91,27 @@ workflow::managed_directories(const yarn::model& m) const {
 
 std::forward_list<formatters::artefact>
 workflow::execute(const yarn::model& m) const {
-
-    const auto tgs(make_type_groups(repository_));
     const auto ra(m.root_module().annotation());
-    const auto eb(obtain_enabled_kernels(tgs, ra));
-    const bool requires_kernel_directory(eb.size() > 1);
+    const auto kals(kernel_archetype_locations());
+    configuration_factory cf;
+    const auto cfg(cf.make(repository_, kals, ra));
 
     std::forward_list<formatters::artefact> r;
-    for(const auto b : registrar().kernels()) {
-        const auto kernel(b->archetype_location().kernel());
-        BOOST_LOG_SEV(lg, debug) << "Generating files for: " << kernel;
+    for(const auto k : registrar().kernels()) {
+        const auto kn(k->archetype_location().kernel());
+        BOOST_LOG_SEV(lg, debug) << "Generating files for: " << kn;
 
-        const auto is_enabled(eb.find(kernel) != eb.end());
+        const auto& ek(cfg.enabled_kernels());
+        const auto is_enabled(ek.find(kn) != ek.end());
         if (!is_enabled) {
-            BOOST_LOG_SEV(lg, warn) << "Kernel is not enabled: " << kernel;
+            BOOST_LOG_SEV(lg, warn) << "Kernel is not enabled: " << kn;
             continue;
         }
 
         const auto& ko(knitting_options_);
-        const bool rkd(requires_kernel_directory);
-        auto files(b->generate(ko, repository_, annotation_factory_, rkd, m));
-        BOOST_LOG_SEV(lg, debug) << "Generated files for : " << kernel
+        const bool ekd(cfg.enable_kernel_directories());
+        auto files(k->generate(ko, repository_, annotation_factory_, ekd, m));
+        BOOST_LOG_SEV(lg, debug) << "Generated files for : " << kn
                                  << ". Total files: "
                                  << std::distance(files.begin(), files.end());
         r.splice_after(r.before_begin(), files);

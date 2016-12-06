@@ -28,4 +28,9 @@ std::string traits::enabled() {
     return r;
 }
 
+std::string traits::enable_kernel_directories() {
+    static std::string r("quilt.enable_kernel_directories");
+    return r;
+}
+
 } }

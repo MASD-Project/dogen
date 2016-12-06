@@ -12,25 +12,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-12-06 Tue 10:34]
+#+CAPTION: Clock summary at [2016-12-06 Tue 11:15]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *28:06* |       |      | 100.0 |
+| *Total time*                                                                | *28:45* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 28:06   |       |      | 100.0 |
-| Active                                                                      |         | 28:06 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:51 |   6.6 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 1:02 |   3.7 |
-| COMPLETED Update readme                                                     |         |       | 0:11 |   0.7 |
-| COMPLETED Test data generation for dates generates invalid dates            |         |       | 0:33 |   2.0 |
-| COMPLETED Handle missing stitch templates scenario                          |         |       | 1:04 |   3.8 |
-| COMPLETED Move project directory to output options                          |         |       | 1:10 |   4.2 |
-| COMPLETED Update the conceptual model to clarify backends and kernels       |         |       | 4:20 |  15.4 |
-| COMPLETED Detect knitter and disable code generation accordingly            |         |       | 1:15 |   4.4 |
-| COMPLETED Clean up kernel and backend confusion                             |         |       | 5:17 |  18.8 |
-| STARTED Add a "language" directory for each backend                         |         |       | 5:05 |  18.1 |
-| STARTED Add support for C#                                                  |         |       | 5:46 |  20.5 |
+| Stories                                                                     | 28:45   |       |      | 100.0 |
+| Active                                                                      |         | 28:45 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:51 |   6.4 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 1:02 |   3.6 |
+| COMPLETED Update readme                                                     |         |       | 0:11 |   0.6 |
+| COMPLETED Test data generation for dates generates invalid dates            |         |       | 0:33 |   1.9 |
+| COMPLETED Handle missing stitch templates scenario                          |         |       | 1:04 |   3.7 |
+| COMPLETED Move project directory to output options                          |         |       | 1:10 |   4.1 |
+| COMPLETED Update the conceptual model to clarify backends and kernels       |         |       | 4:20 |  15.1 |
+| COMPLETED Detect knitter and disable code generation accordingly            |         |       | 1:15 |   4.3 |
+| COMPLETED Clean up kernel and backend confusion                             |         |       | 5:17 |  18.4 |
+| COMPLETED Add a "language" directory for each backend                       |         |       | 5:44 |  19.9 |
+| STARTED Add support for C#                                                  |         |       | 5:46 |  20.1 |
 | STARTED Add support for Decimal numbers                                     |         |       | 0:32 |   1.9 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -210,7 +210,10 @@ Actually its not easy to split these tasks because they are
 interrelated. However, we've moved out any work which is not strictly
 required and done all the required work in one go.
 
-*** STARTED Add a "language" directory for each backend               :story:
+*** COMPLETED Add a "language" directory for each backend             :story:
+    CLOSED: [2016-12-06 Tue 11:15]
+    CLOCK: [2016-12-06 Tue 11:12]--[2016-12-06 Tue 11:15] =>  0:03
+    CLOCK: [2016-12-06 Tue 10:35]--[2016-12-06 Tue 11:11] =>  0:36
     CLOCK: [2016-12-06 Tue 10:23]--[2016-12-06 Tue 10:34] =>  0:11
     CLOCK: [2016-12-06 Tue 09:51]--[2016-12-06 Tue 10:22] =>  0:31
     CLOCK: [2016-12-06 Tue 09:02]--[2016-12-06 Tue 09:50] =>  0:48

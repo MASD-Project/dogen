@@ -109,7 +109,7 @@ public:
         const options::knitting_options& ko,
         const annotations::type_repository& atrp,
         const annotations::annotation_groups_factory& agf,
-        const bool requires_kernel_directory,
+        const bool enable_kernel_directories,
         const yarn::model& m) const override;
 };
 

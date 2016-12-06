@@ -72,10 +72,10 @@ formattables::model workflow::create_formattables_model(
     const annotations::type_repository& atrp,
     const annotations::annotation& ra,
     const dogen::formatters::decoration_properties_factory& dpf,
-    const formatters::repository& frp, const bool requires_kernel_directory,
+    const formatters::repository& frp, const bool enable_kernel_directories,
     const yarn::model& m) const {
     formattables::workflow fw;
-    return fw.execute(ko, atrp, ra, dpf, frp, requires_kernel_directory, m);
+    return fw.execute(ko, atrp, ra, dpf, frp, enable_kernel_directories, m);
 }
 
 std::forward_list<boost::filesystem::path>
@@ -112,7 +112,7 @@ std::forward_list<dogen::formatters::artefact>
 workflow::generate(const options::knitting_options& ko,
     const annotations::type_repository& atrp,
     const annotations::annotation_groups_factory& agf,
-    const bool requires_kernel_directory,
+    const bool enable_kernel_directories,
     const yarn::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started backend.";
 
@@ -121,8 +121,8 @@ workflow::generate(const options::knitting_options& ko,
     const auto ra(m.root_module().annotation());
     const auto dpf(create_decoration_properties_factory(atrp, drp, ra));
     const auto& frp(formatters::workflow::registrar().formatter_repository());
-    const bool rkd(requires_kernel_directory);
-    const auto fm(create_formattables_model(ko, atrp, ra, dpf, frp, rkd, m));
+    const bool ekd(enable_kernel_directories);
+    const auto fm(create_formattables_model(ko, atrp, ra, dpf, frp, ekd, m));
     const auto r(format(atrp, agf, drp, fm));
 
     BOOST_LOG_SEV(lg, debug) << "Finished backend.";

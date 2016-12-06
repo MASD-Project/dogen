@@ -26,9 +26,8 @@
 #endif
 
 #include <list>
-#include <memory>
 #include <string>
-#include <unordered_set>
+#include <memory>
 #include <forward_list>
 #include <boost/filesystem/path.hpp>
 #include "dogen/options/types/knitting_options.hpp"
@@ -46,24 +45,14 @@ namespace quilt {
  * @brief Manages the entire kernel workflow.
  */
 class workflow {
-private:
-    struct type_group {
-        annotations::type enabled;
-    };
-
-    friend std::ostream& operator<<(std::ostream& s, const type_group& v);
-
-    std::list<type_group>
-    make_type_groups(const annotations::type_repository& atrp) const;
-
-    std::unordered_set<std::string>
-    obtain_enabled_kernels(const std::list<type_group>& tgs,
-        const annotations::annotation& ra) const;
-
 public:
     workflow(const options::knitting_options& o,
         const annotations::type_repository& atrp,
         const annotations::annotation_groups_factory& agf);
+
+private:
+    std::list<annotations::archetype_location>
+    kernel_archetype_locations() const;
 
 public:
     /**
