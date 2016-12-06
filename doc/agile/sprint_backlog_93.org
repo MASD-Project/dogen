@@ -317,6 +317,9 @@ When we invoke =knit_quilt= for some reason we seem to knit
 
 This seems to be some kind of ninja "feature".
 
+For the moment we've put in a very ugly fix: we renamed the target
+=knit_quiltx=.
+
 *** Use templates for directory and prefix fields                     :story:
 
 At present we have a lot of duplication on the annotations for certain
