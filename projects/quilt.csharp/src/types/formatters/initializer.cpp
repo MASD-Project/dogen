@@ -18,33 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CSHARP_TYPES_FORMATTERS_WORKFLOW_HPP
-#define DOGEN_QUILT_CSHARP_TYPES_FORMATTERS_WORKFLOW_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <memory>
 #include "dogen/quilt.csharp/types/formatters/registrar.hpp"
+#include "dogen/quilt.csharp/types/formatters/types/initializer.hpp"
+#include "dogen/quilt.csharp/types/formatters/initializer.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace csharp {
 namespace formatters {
 
-class workflow final {
-public:
-    /**
-     * @brief Returns the registrar. If it has not yet been
-     * initialised, initialises it.
-     */
-    static csharp::formatters::registrar& registrar();
-
-private:
-    static std::shared_ptr<csharp::formatters::registrar> registrar_;
-};
+void initializer::initialize(registrar& rg) {
+    types::initializer::initialize(rg);
+}
 
 } } } }
-
-#endif

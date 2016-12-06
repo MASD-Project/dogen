@@ -18,6 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/quilt.csharp/types/formatters/registrar.hpp"
+#include "dogen/quilt.csharp/types/formatters/types/class_formatter.hpp"
 #include "dogen/quilt.csharp/types/formatters/types/initializer.hpp"
 
 namespace dogen {
@@ -26,8 +28,8 @@ namespace csharp {
 namespace formatters {
 namespace types {
 
-bool initializer::operator==(const initializer& /*rhs*/) const {
-    return true;
+void initializer::initialize(registrar& rg) {
+    register_formatter<class_formatter>(rg);
 }
 
 } } } } }

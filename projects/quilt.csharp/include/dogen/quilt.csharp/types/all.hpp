@@ -36,6 +36,7 @@
 #include "dogen/quilt.csharp/types/formatters/io/traits.hpp"
 #include "dogen/quilt.csharp/types/formatters/registrar.hpp"
 #include "dogen/quilt.csharp/types/formatters/repository.hpp"
+#include "dogen/quilt.csharp/types/formatters/initializer.hpp"
 #include "dogen/quilt.csharp/types/formatters/types/traits.hpp"
 #include "dogen/quilt.csharp/types/formatters/io/initializer.hpp"
 #include "dogen/quilt.csharp/types/formatters/registrar_error.hpp"

@@ -25,8 +25,13 @@ namespace quilt {
 namespace csharp {
 namespace formatters {
 
-bool workflow::operator==(const workflow& /*rhs*/) const {
-    return true;
+std::shared_ptr<csharp::formatters::registrar> workflow::registrar_;
+
+csharp::formatters::registrar& workflow::registrar() {
+    if (!registrar_)
+        registrar_ = std::make_shared<csharp::formatters::registrar>();
+
+    return *registrar_;
 }
 
 } } } }

@@ -20,6 +20,7 @@
  */
 #include "dogen/quilt.csharp/types/formatters/types/class_formatter.hpp"
 #include "dogen/quilt.csharp/types/formatters/assistant.hpp"
+#include "dogen/quilt.csharp/types/formatters/types/traits.hpp"
 #include "dogen/quilt.csharp/types/traits.hpp"
 #include "dogen/formatters/types/sequence_formatter.hpp"
 #include "dogen/yarn/types/object.hpp"
@@ -31,6 +32,39 @@ namespace quilt {
 namespace csharp {
 namespace formatters {
 namespace types {
+
+std::string class_formatter::static_artefact() {
+    return traits::class_archetype();
+}
+
+std::string class_formatter::formatter_name() const {
+    static auto r(archetype_location().archetype());
+    return r;
+}
+
+annotations::archetype_location class_formatter::archetype_location() const {
+    static annotations::archetype_location
+        r(csharp::traits::family(), csharp::traits::kernel(),
+          traits::facet(),
+          class_formatter::static_artefact());
+    return r;
+}
+
+std::type_index class_formatter::element_type_index() const {
+    static auto r(std::type_index(typeid(yarn::object)));
+    return r;
+}
+
+boost::filesystem::path class_formatter::
+full_path(const locator& l, const yarn::name& n) const {
+    return l.make_full_path(n, static_artefact());
+}
+
+std::list<std::string> class_formatter::
+inclusion_dependencies(const yarn::element& /*e*/) const {
+    std::list<std::string> r;
+    return r;
+}
 
 dogen::formatters::artefact class_formatter::format(const yarn::element& e) const {
     assistant a;

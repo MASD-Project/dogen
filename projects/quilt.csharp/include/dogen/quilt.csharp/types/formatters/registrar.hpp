@@ -70,6 +70,12 @@ private:
     std::forward_list<annotations::archetype_location> archetype_locations_;
 };
 
+template<typename Formatter>
+inline void register_formatter(registrar& rg) {
+    const auto f(std::make_shared<Formatter>());
+    rg.register_formatter(f);
+}
+
 } } } }
 
 #endif
