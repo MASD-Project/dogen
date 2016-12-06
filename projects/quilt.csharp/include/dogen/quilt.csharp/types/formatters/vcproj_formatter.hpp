@@ -44,20 +44,14 @@ public:
 
 public:
     std::list<std::string> inclusion_dependencies(
-        const formattables::inclusion_dependencies_builder_factory& f,
         const yarn::element& e) const override;
 
-    inclusion_support_types inclusion_support_type() const override;
-
-    boost::filesystem::path inclusion_path(
-        const formattables::locator& l, const yarn::name& n) const override;
-
     boost::filesystem::path full_path(
-        const formattables::locator& l, const yarn::name& n) const override;
+        const locator& l, const yarn::name& n) const override;
 
 public:
     dogen::formatters::artefact
-    format(const context& ctx, const yarn::element& e) const override;
+    format(const yarn::element& e) const override;
 };
 
 } } } }

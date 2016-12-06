@@ -12,26 +12,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-12-06 Tue 16:03]
+#+CAPTION: Clock summary at [2016-12-06 Tue 16:18]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *31:00* |       |      | 100.0 |
+| *Total time*                                                                | *31:13* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 31:00   |       |      | 100.0 |
-| Active                                                                      |         | 31:00 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:51 |   6.0 |
+| Stories                                                                     | 31:13   |       |      | 100.0 |
+| Active                                                                      |         | 31:13 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:51 |   5.9 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 1:02 |   3.3 |
 | COMPLETED Update readme                                                     |         |       | 0:11 |   0.6 |
 | COMPLETED Test data generation for dates generates invalid dates            |         |       | 0:33 |   1.8 |
 | COMPLETED Handle missing stitch templates scenario                          |         |       | 1:04 |   3.4 |
-| COMPLETED Move project directory to output options                          |         |       | 1:10 |   3.8 |
-| COMPLETED Update the conceptual model to clarify backends and kernels       |         |       | 4:20 |  14.0 |
+| COMPLETED Move project directory to output options                          |         |       | 1:10 |   3.7 |
+| COMPLETED Update the conceptual model to clarify backends and kernels       |         |       | 4:20 |  13.9 |
 | COMPLETED Detect knitter and disable code generation accordingly            |         |       | 1:15 |   4.0 |
-| COMPLETED Clean up kernel and backend confusion                             |         |       | 5:17 |  17.0 |
-| COMPLETED Add a "language" directory for each backend                       |         |       | 5:44 |  18.5 |
+| COMPLETED Clean up kernel and backend confusion                             |         |       | 5:17 |  16.9 |
+| COMPLETED Add a "language" directory for each backend                       |         |       | 5:44 |  18.4 |
 | COMPLETED Split C++ profiles and templates from C#                          |         |       | 1:11 |   3.8 |
-| STARTED Add support for C#                                                  |         |       | 6:50 |  22.0 |
+| STARTED Add support for C#                                                  |         |       | 7:03 |  22.6 |
 | STARTED Add support for Decimal numbers                                     |         |       | 0:32 |   1.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -320,6 +320,7 @@ that clarity. Options:
 : c++ helper formatter
 
 *** STARTED Add support for C#                                        :story:
+    CLOCK: [2016-12-06 Tue 16:05]--[2016-12-06 Tue 16:18] =>  0:13
     CLOCK: [2016-12-06 Tue 11:24]--[2016-12-06 Tue 12:20] =>  0:56
     CLOCK: [2016-12-06 Tue 11:16]--[2016-12-06 Tue 11:24] =>  0:08
     CLOCK: [2016-12-04 Sun 18:45]--[2016-12-04 Sun 18:52] =>  0:07
