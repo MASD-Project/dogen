@@ -18,18 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_TYPES_BACKEND_REGISTRAR_FWD_HPP
-#define DOGEN_QUILT_TYPES_BACKEND_REGISTRAR_FWD_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+#include "dogen/quilt/types/kernel_interface.hpp"
 
 namespace dogen {
 namespace quilt {
 
-class backend_registrar;
+kernel_interface::~kernel_interface() noexcept { }
 
 } }
-
-#endif

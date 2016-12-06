@@ -36,14 +36,14 @@
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/formatters/types/artefact.hpp"
-#include "dogen/quilt/types/backend_registrar.hpp"
-#include "dogen/quilt/types/backend_interface.hpp"
+#include "dogen/quilt/types/kernel_registrar.hpp"
+#include "dogen/quilt/types/kernel_interface.hpp"
 
 namespace dogen {
 namespace quilt {
 
 /**
- * @brief Manages the entire backend workflow.
+ * @brief Manages the entire kernel workflow.
  */
 class workflow {
 private:
@@ -57,7 +57,7 @@ private:
     make_type_groups(const annotations::type_repository& atrp) const;
 
     std::unordered_set<std::string>
-    obtain_enabled_backends(const std::list<type_group>& tgs,
+    obtain_enabled_kernels(const std::list<type_group>& tgs,
         const annotations::annotation& ra) const;
 
 public:
@@ -70,31 +70,31 @@ public:
      * @brief Returns the registrar. If it has not yet been
      * initialised, initialises it.
      */
-    static backend_registrar& registrar();
+    static kernel_registrar& registrar();
 
     /**
      * @brief Returns all of the available archetype locations across
-     * all backends.
+     * all kernels.
      */
     static std::list<annotations::archetype_location>
     archetype_locations();
 
 public:
     /**
-     * @brief Returns all directories managed by all backends.
+     * @brief Returns all directories managed by all kernels.
      */
     std::forward_list<boost::filesystem::path>
     managed_directories(const yarn::model& m) const;
 
     /**
      * @brief Generates files for the supplied model using all
-     * registered backends.
+     * registered kernels.
      */
     std::forward_list<formatters::artefact>
     execute(const yarn::model& m) const;
 
 private:
-    static std::shared_ptr<backend_registrar> registrar_;
+    static std::shared_ptr<kernel_registrar> registrar_;
     const options::knitting_options knitting_options_;
     const annotations::type_repository& repository_;
     const annotations::annotation_groups_factory& annotation_factory_;

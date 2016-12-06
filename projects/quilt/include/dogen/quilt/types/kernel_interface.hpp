@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_TYPES_BACKEND_INTERFACE_HPP
-#define DOGEN_QUILT_TYPES_BACKEND_INTERFACE_HPP
+#ifndef DOGEN_QUILT_TYPES_KERNEL_INTERFACE_HPP
+#define DOGEN_QUILT_TYPES_KERNEL_INTERFACE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -41,23 +41,23 @@ namespace quilt {
  * @brief Responsible for converting a Yarn model into source code
  * according to a well-defined grammar.
  */
-class backend_interface {
+class kernel_interface {
 public:
-    backend_interface() = default;
-    backend_interface(const backend_interface&) = delete;
-    backend_interface(backend_interface&&) = default;
-    virtual ~backend_interface() noexcept = 0;
+    kernel_interface() = default;
+    kernel_interface(const kernel_interface&) = delete;
+    kernel_interface(kernel_interface&&) = default;
+    virtual ~kernel_interface() noexcept = 0;
 
 public:
     /**
-     * @brief Returns all directories managed by this backend.
+     * @brief Returns all directories managed by this kernel.
      */
     virtual std::forward_list<boost::filesystem::path>
     managed_directories(const options::knitting_options& ko,
         const yarn::name& model_name) const = 0;
 
     /**
-     * @brief The artefact location for the backend itself.
+     * @brief The artefact location for the kernel itself.
      *
      * Note that this is not a "true" archetype location, but a
      * location of a container of archetypes (the kernel).
@@ -66,7 +66,7 @@ public:
 
     /**
      * @brief All archetype locations for the archetypes owned by this
-     * backend, listing all available kernels, facets and archetypes.
+     * kernel, listing all available kernels, facets and archetypes.
      *
      * FIXME: we need a better name for this.
      */
@@ -74,7 +74,7 @@ public:
     archetype_locations() const = 0;
 
     /**
-     * @brief Generates the source code for the backend.
+     * @brief Generates the source code for the kernel.
      *
      * @param gs General settings for the Yarn types.
      * @param m Model to generate.

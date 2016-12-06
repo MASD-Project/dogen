@@ -18,17 +18,53 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_TYPES_BACKEND_INTERFACE_FWD_HPP
-#define DOGEN_QUILT_TYPES_BACKEND_INTERFACE_FWD_HPP
+#ifndef DOGEN_QUILT_TYPES_KERNEL_REGISTRAR_HPP
+#define DOGEN_QUILT_TYPES_KERNEL_REGISTRAR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <memory>
+#include <forward_list>
+#include "dogen/quilt/types/kernel_interface.hpp"
+
 namespace dogen {
 namespace quilt {
 
-class backend_interface;
+/**
+ * @brief Keeps track of all the available kernels.
+ */
+class kernel_registrar {
+public:
+    /**
+     * @brief Ensures the registrar is ready to be used.
+     */
+    void validate() const;
+
+    /**
+     * @brief Registers a kernel.
+     */
+    void register_kernel(std::shared_ptr<kernel_interface> b);
+
+    /**
+     * @brief Returns all available kernels.
+     */
+    const std::forward_list<std::shared_ptr<kernel_interface> >&
+    kernels() const;
+
+private:
+    std::forward_list<std::shared_ptr<kernel_interface> > kernels_;
+};
+
+/*
+ * Helper method to register kernels.
+ */
+template<typename Kernel>
+inline void register_kernel(kernel_registrar& rg) {
+    auto be(std::make_shared<Kernel>());
+    rg.register_kernel(be);
+}
 
 } }
 

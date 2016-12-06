@@ -29,7 +29,7 @@
 #include "dogen/quilt/types/workflow.hpp"
 #include "dogen/quilt/types/workflow_error.hpp"
 #include "dogen/quilt/types/registrar_error.hpp"
-#include "dogen/quilt/types/backend_interface.hpp"
-#include "dogen/quilt/types/backend_registrar.hpp"
+#include "dogen/quilt/types/kernel_interface.hpp"
+#include "dogen/quilt/types/kernel_registrar.hpp"
 
 #endif

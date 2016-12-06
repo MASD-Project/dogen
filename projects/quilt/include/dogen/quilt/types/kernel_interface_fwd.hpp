@@ -18,11 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt/types/backend_interface.hpp"
+#ifndef DOGEN_QUILT_TYPES_KERNEL_INTERFACE_FWD_HPP
+#define DOGEN_QUILT_TYPES_KERNEL_INTERFACE_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace quilt {
 
-backend_interface::~backend_interface() noexcept { }
+class kernel_interface;
 
 } }
+
+#endif

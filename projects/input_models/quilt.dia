@@ -172,7 +172,7 @@
             <dia:string>#registrar#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#backend_registrar#</dia:string>
+            <dia:string>#kernel_registrar#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -281,19 +281,19 @@
         <dia:point val="70,8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="69.95,7.95;97.885,13.85"/>
+        <dia:rectangle val="69.95,7.95;97.115,13.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="70,8"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.835000000000001"/>
+        <dia:real val="27.064999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.8000000000000007"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#backend_registrar#</dia:string>
+        <dia:string>#kernel_registrar#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#handcrafted#</dia:string>
@@ -382,10 +382,10 @@
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#backends_#</dia:string>
+            <dia:string>#kernels_#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;std::shared_ptr&lt;backend_interface&gt;&gt;#</dia:string>
+            <dia:string>#std::list&lt;std::shared_ptr&lt;kernel_interface&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -407,7 +407,7 @@
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#register_backend#</dia:string>
+            <dia:string>#register_kernel#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -439,7 +439,7 @@
                 <dia:string>#b#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#std::shared_ptr&lt;backend_interface&gt;#</dia:string>
+                <dia:string>#std::shared_ptr&lt;kernel_interface&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -485,13 +485,13 @@
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#backends#</dia:string>
+            <dia:string>#kernels#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#const std::list&lt;std::shared_ptr&lt;backend_interface&gt;&gt;&amp;#</dia:string>
+            <dia:string>#const std::list&lt;std::shared_ptr&lt;kernel_interface&gt;&gt;&amp;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -646,7 +646,7 @@
         <dia:real val="9.1999999999999993"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#backend_interface#</dia:string>
+        <dia:string>#kernel_interface#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#handcrafted#</dia:string>
@@ -1002,17 +1002,17 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="83.9175,8"/>
+        <dia:point val="83.5325,8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="73.8667,-0.85;84.6675,8.8"/>
+        <dia:rectangle val="73.8667,-0.85;84.2825,8.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="83.9175,8"/>
-        <dia:point val="83.9175,3"/>
+        <dia:point val="83.5325,8"/>
+        <dia:point val="83.5325,3"/>
         <dia:point val="73.9167,3"/>
         <dia:point val="73.9167,-0.8"/>
       </dia:attribute>
@@ -1144,17 +1144,17 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="83.9175,13.8"/>
+        <dia:point val="83.5325,13.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="83.1675,13.05;90.775,24.8"/>
+        <dia:rectangle val="82.7825,13.05;90.775,24.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="83.9175,13.8"/>
-        <dia:point val="83.9175,19"/>
+        <dia:point val="83.5325,13.8"/>
+        <dia:point val="83.5325,19"/>
         <dia:point val="90.575,19"/>
         <dia:point val="90.575,24"/>
       </dia:attribute>
@@ -1363,7 +1363,7 @@
         <dia:point val="10,-21"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="9.95,-21.05;30.2,-14.45"/>
+        <dia:rectangle val="9.95,-21.05;30.2,-13.65"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1375,7 +1375,7 @@
         <dia:real val="20.150000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.5"/>
+        <dia:real val="7.2999999999999998"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>

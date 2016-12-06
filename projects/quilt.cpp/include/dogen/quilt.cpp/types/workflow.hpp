@@ -37,7 +37,7 @@
 #include "dogen/formatters/types/repository.hpp"
 #include "dogen/formatters/types/decoration_properties_factory.hpp"
 #include "dogen/yarn/types/model.hpp"
-#include "dogen/quilt/types/backend_interface.hpp"
+#include "dogen/quilt/types/kernel_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/repository.hpp"
 #include "dogen/quilt.cpp/types/formattables/model.hpp"
 
@@ -46,9 +46,9 @@ namespace quilt {
 namespace cpp {
 
 /**
- * @brief Manages the c++ backend workflow.
+ * @brief Manages the c++ kernel workflow.
  */
-class workflow final : public quilt::backend_interface {
+class workflow final : public quilt::kernel_interface {
 public:
     workflow() = default;
     workflow(const workflow&) = delete;

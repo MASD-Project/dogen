@@ -34,7 +34,7 @@ namespace cpp {
 void initializer::initialize() {
     formatters::initializer::initialize(formatters::workflow::registrar());
     fabric::initializer::initialize(yarn::workflow::injector_registrar());
-    quilt::register_backend<workflow>(quilt::workflow::registrar());
+    quilt::register_kernel<workflow>(quilt::workflow::registrar());
 }
 
 } } }

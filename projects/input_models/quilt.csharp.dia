@@ -68,7 +68,7 @@
         <dia:point val="3,-12"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="2.95,-12.05;23.2,-3.85"/>
+        <dia:rectangle val="2.95,-12.05;23.2,-3.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -80,7 +80,7 @@
         <dia:real val="20.150000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="8.0999999999999996"/>
+        <dia:real val="8.9000000000000004"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -3695,7 +3695,7 @@
         <dia:point val="53,-14"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="52.95,-14.05;66.655,-12.25"/>
+        <dia:rectangle val="52.95,-14.05;66.27,-12.25"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3704,7 +3704,7 @@
         <dia:point val="53,-14"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.605"/>
+        <dia:real val="13.220000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="1.7000000000000002"/>
@@ -3721,7 +3721,7 @@
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#Implements the backend interface.#</dia:string>
+            <dia:string>#Implements the kernel interface.#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -3743,16 +3743,16 @@
     </dia:object>
     <dia:object type="UML - Message" version="0" id="O34">
       <dia:attribute name="obj_pos">
-        <dia:point val="59.8025,-12.3"/>
+        <dia:point val="59.61,-12.3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="55.6458,-12.3698;59.8723,-6.7262"/>
+        <dia:rectangle val="55.6413,-12.3695;59.6795,-6.7335"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
-        <dia:point val="59.8025,-12.3"/>
+        <dia:point val="59.61,-12.3"/>
         <dia:point val="56,-7"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
@@ -3768,7 +3768,7 @@
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="57.9017,-9.1505"/>
+        <dia:point val="57.8054,-9.1505"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O33" connection="6"/>

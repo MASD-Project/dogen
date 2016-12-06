@@ -27,7 +27,7 @@ namespace quilt {
 namespace csharp {
 
 void initializer::initialize() {
-    quilt::register_backend<workflow>(quilt::workflow::registrar());
+    quilt::register_kernel<workflow>(quilt::workflow::registrar());
 }
 
 } } }

@@ -106,7 +106,7 @@
         <dia:point val="-39,25"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-39.05,24.95;-18.8,33.15"/>
+        <dia:rectangle val="-39.05,24.95;-18.8,33.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -118,7 +118,7 @@
         <dia:real val="20.150000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="8.0999999999999996"/>
+        <dia:real val="8.9000000000000004"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -7152,7 +7152,7 @@ registry of all available formatters.#</dia:string>
         <dia:point val="45.083,154.167"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="45.033,154.117;58.738,155.917"/>
+        <dia:rectangle val="45.033,154.117;58.353,155.917"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7161,7 +7161,7 @@ registry of all available formatters.#</dia:string>
         <dia:point val="45.083,154.167"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.605"/>
+        <dia:real val="13.220000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="1.7000000000000002"/>
@@ -7178,7 +7178,7 @@ registry of all available formatters.#</dia:string>
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#Implements the backend interface.#</dia:string>
+            <dia:string>#Implements the kernel interface.#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -7200,16 +7200,16 @@ registry of all available formatters.#</dia:string>
     </dia:object>
     <dia:object type="UML - Message" version="0" id="O70">
       <dia:attribute name="obj_pos">
-        <dia:point val="58.688,155.017"/>
+        <dia:point val="58.303,155.017"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="58.6374,154.699;66.0545,155.758"/>
+        <dia:rectangle val="58.2525,154.699;66.0543,155.758"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
-        <dia:point val="58.688,155.017"/>
+        <dia:point val="58.303,155.017"/>
         <dia:point val="66,155.1"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
@@ -7225,7 +7225,7 @@ registry of all available formatters.#</dia:string>
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="62.3445,155.558"/>
+        <dia:point val="62.152,155.558"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O69" connection="4"/>

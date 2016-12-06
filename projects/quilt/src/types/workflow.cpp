@@ -55,7 +55,7 @@ operator<<(std::ostream& s, const workflow::type_group& v) {
     return s;
 }
 
-std::shared_ptr<backend_registrar> workflow::registrar_;
+std::shared_ptr<kernel_registrar> workflow::registrar_;
 
 std::list<workflow::type_group>
 workflow::make_type_groups(const annotations::type_repository& atrp) const {
@@ -63,7 +63,7 @@ workflow::make_type_groups(const annotations::type_repository& atrp) const {
 
     const auto en(traits::enabled());
     const annotations::type_repository_selector rs(atrp);
-    for (const auto b : registrar().backends()) {
+    for (const auto b : registrar().kernels()) {
         type_group tg;
         const auto kernel(b->archetype_location().kernel());
         tg.enabled = rs.select_type_by_name(kernel, en);
@@ -74,7 +74,7 @@ workflow::make_type_groups(const annotations::type_repository& atrp) const {
 }
 
 std::unordered_set<std::string>
-workflow::obtain_enabled_backends(const std::list<type_group>& tgs,
+workflow::obtain_enabled_kernels(const std::list<type_group>& tgs,
     const annotations::annotation& ra) const {
 
     std::unordered_set<std::string> r;
@@ -95,9 +95,9 @@ workflow::workflow(const options::knitting_options& o,
     const annotations::annotation_groups_factory& agf)
     : knitting_options_(o), repository_(atrp), annotation_factory_(agf) {}
 
-backend_registrar& workflow::registrar() {
+kernel_registrar& workflow::registrar() {
     if (!registrar_)
-        registrar_ = std::make_shared<backend_registrar>();
+        registrar_ = std::make_shared<kernel_registrar>();
 
     return *registrar_;
 }
@@ -105,7 +105,7 @@ backend_registrar& workflow::registrar() {
 std::list<annotations::archetype_location> workflow::archetype_locations() {
     std::list<annotations::archetype_location> r;
     const auto& rg(quilt::workflow::registrar());
-    for (const auto b : rg.backends()) {
+    for (const auto b : rg.kernels()) {
         // not splicing due to a mistmatch in the list types
         for (const auto al : b->archetype_locations())
             r.push_back(al);
@@ -117,7 +117,7 @@ std::forward_list<boost::filesystem::path>
 workflow::managed_directories(const yarn::model& m) const {
     const auto& ko(knitting_options_);
     std::forward_list<boost::filesystem::path> r;
-    for(const auto b : registrar().backends()) {
+    for(const auto b : registrar().kernels()) {
         // not splicing due to a mistmatch in the list types
         const auto md(b->managed_directories(ko, m.name()));
         for (const auto& d : md)
@@ -131,17 +131,17 @@ workflow::execute(const yarn::model& m) const {
 
     const auto tgs(make_type_groups(repository_));
     const auto ra(m.root_module().annotation());
-    const auto eb(obtain_enabled_backends(tgs, ra));
+    const auto eb(obtain_enabled_kernels(tgs, ra));
     const bool requires_kernel_directory(eb.size() > 1);
 
     std::forward_list<formatters::artefact> r;
-    for(const auto b : registrar().backends()) {
+    for(const auto b : registrar().kernels()) {
         const auto kernel(b->archetype_location().kernel());
         BOOST_LOG_SEV(lg, debug) << "Generating files for: " << kernel;
 
         const auto is_enabled(eb.find(kernel) != eb.end());
         if (!is_enabled) {
-            BOOST_LOG_SEV(lg, warn) << "Backend is not enabled: " << kernel;
+            BOOST_LOG_SEV(lg, warn) << "Kernel is not enabled: " << kernel;
             continue;
         }
 

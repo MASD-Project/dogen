@@ -21,40 +21,40 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/quilt/types/registrar_error.hpp"
-#include "dogen/quilt/types/backend_registrar.hpp"
+#include "dogen/quilt/types/kernel_registrar.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("quilt.backend_registrar"));
+static logger lg(logger_factory("quilt.kernel_registrar"));
 
-const std::string no_backends("No backends provided.");
-const std::string null_backend("Backend supplied is null");
+const std::string no_kernels("No kernels provided.");
+const std::string null_kernel("Kernel supplied is null");
 
 }
 
 namespace dogen {
 namespace quilt {
 
-void backend_registrar::validate() const {
-    if (backends_.empty()) {
-        BOOST_LOG_SEV(lg, error) << no_backends;
-        BOOST_THROW_EXCEPTION(registrar_error(no_backends));
+void kernel_registrar::validate() const {
+    if (kernels_.empty()) {
+        BOOST_LOG_SEV(lg, error) << no_kernels;
+        BOOST_THROW_EXCEPTION(registrar_error(no_kernels));
     }
     BOOST_LOG_SEV(lg, debug) << "Registrar is in a valid state.";
 }
 
-void backend_registrar::register_backend(std::shared_ptr<backend_interface> b) {
+void kernel_registrar::register_kernel(std::shared_ptr<kernel_interface> b) {
     // no logging by design
     if (!b)
-        BOOST_THROW_EXCEPTION(registrar_error(null_backend));
+        BOOST_THROW_EXCEPTION(registrar_error(null_kernel));
 
-    backends_.push_front(b);
+    kernels_.push_front(b);
 }
 
-const std::forward_list<std::shared_ptr<backend_interface> >&
-backend_registrar::backends() const {
-    return backends_;
+const std::forward_list<std::shared_ptr<kernel_interface> >&
+kernel_registrar::kernels() const {
+    return kernels_;
 }
 
 } }
