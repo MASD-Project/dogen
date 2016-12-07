@@ -47,7 +47,7 @@ public:
         const yarn::element& e) const override;
 
     boost::filesystem::path full_path(
-        const locator& l, const yarn::name& n) const override;
+        const formattables::locator& l, const yarn::name& n) const override;
 
 public:
     dogen::formatters::artefact
