@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
 #include "dogen/yarn/test_data/name_td.hpp"
 #include "dogen/yarn/test_data/model_td.hpp"
 #include "dogen/yarn/test_data/module_td.hpp"
@@ -55,6 +56,20 @@ create_dogen_yarn_module(const unsigned int position) {
     return dogen::yarn::module_generator::create(position);
 }
 
+std::string create_std_string(const unsigned int position) {
+    std::ostringstream s;
+    s << "a_string_" << position;
+    return s.str();
+}
+
+std::unordered_set<std::string> create_std_unordered_set_std_string(unsigned int position) {
+    std::unordered_set<std::string> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(create_std_string(position + i));
+    }
+    return r;
+}
+
 bool create_bool(const unsigned int position) {
     return (position % 2) == 0;
 }
@@ -71,7 +86,8 @@ populate(const unsigned int position, result_type& v) {
     v.name(create_dogen_yarn_name(position + 0));
     v.elements(create_std_vector_boost_shared_ptr_dogen_yarn_element(position + 1));
     v.root_module(create_dogen_yarn_module(position + 2));
-    v.has_generatable_types(create_bool(position + 3));
+    v.module_ids(create_std_unordered_set_std_string(position + 3));
+    v.has_generatable_types(create_bool(position + 4));
 }
 
 model_generator::result_type

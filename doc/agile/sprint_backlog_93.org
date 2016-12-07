@@ -12,28 +12,29 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-12-07 Wed 12:41]
+#+CAPTION: Clock summary at [2016-12-07 Wed 13:51]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *36:59* |       |       | 100.0 |
+| *Total time*                                                                | *37:42* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 36:59   |       |       | 100.0 |
-| Active                                                                      |         | 36:59 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  1:51 |   5.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  1:02 |   2.8 |
+| Stories                                                                     | 37:42   |       |       | 100.0 |
+| Active                                                                      |         | 37:42 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  1:51 |   4.9 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  1:02 |   2.7 |
 | COMPLETED Update readme                                                     |         |       |  0:11 |   0.5 |
 | COMPLETED Test data generation for dates generates invalid dates            |         |       |  0:33 |   1.5 |
-| COMPLETED Handle missing stitch templates scenario                          |         |       |  1:04 |   2.9 |
-| COMPLETED Move project directory to output options                          |         |       |  1:10 |   3.2 |
-| COMPLETED Update the conceptual model to clarify backends and kernels       |         |       |  4:20 |  11.7 |
-| COMPLETED Detect knitter and disable code generation accordingly            |         |       |  1:15 |   3.4 |
-| COMPLETED Clean up kernel and backend confusion                             |         |       |  5:17 |  14.3 |
-| COMPLETED Add a "language" directory for each backend                       |         |       |  5:44 |  15.5 |
-| COMPLETED Split C++ profiles and templates from C#                          |         |       |  1:11 |   3.2 |
+| COMPLETED Handle missing stitch templates scenario                          |         |       |  1:04 |   2.8 |
+| COMPLETED Move project directory to output options                          |         |       |  1:10 |   3.1 |
+| COMPLETED Update the conceptual model to clarify backends and kernels       |         |       |  4:20 |  11.5 |
+| COMPLETED Detect knitter and disable code generation accordingly            |         |       |  1:15 |   3.3 |
+| COMPLETED Clean up kernel and backend confusion                             |         |       |  5:17 |  14.0 |
+| COMPLETED Add a "language" directory for each backend                       |         |       |  5:44 |  15.2 |
+| COMPLETED Split C++ profiles and templates from C#                          |         |       |  1:11 |   3.1 |
 | COMPLETED Formatter registrar validation is not being called                |         |       |  0:20 |   0.9 |
 | COMPLETED Move decoration repository to quilt                               |         |       |  0:43 |   1.9 |
-| STARTED Add basic infrastructure for C#                                     |         |       | 11:46 |  31.8 |
+| STARTED Move module id container into yarn                                  |         |       |  0:09 |   0.4 |
+| STARTED Add basic infrastructure for C#                                     |         |       | 12:20 |  32.7 |
 | STARTED Add support for Decimal numbers                                     |         |       |  0:32 |   1.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -340,7 +341,16 @@ At present the data directories and the decoration repository are
 created in =quilt.cpp=. We need to move it to =quilt= so that
 =quilt.csharp= can reuse it.
 
+*** STARTED Move module id container into yarn                        :story:
+    CLOCK: [2016-12-07 Wed 13:42]--[2016-12-07 Wed 13:51] =>  0:09
+
+At present we are obtaining the set of module id's inside
+=quilt.cpp=. This is also required by =quilt.csharp= so we need to
+move it up into yarn.
+
 *** STARTED Add basic infrastructure for C#                           :story:
+    CLOCK: [2016-12-07 Wed 13:25]--[2016-12-07 Wed 13:41] =>  0:16
+    CLOCK: [2016-12-07 Wed 12:42]--[2016-12-07 Wed 13:00] =>  0:18
     CLOCK: [2016-12-07 Wed 12:16]--[2016-12-07 Wed 12:41] =>  0:25
     CLOCK: [2016-12-07 Wed 11:15]--[2016-12-07 Wed 12:15] =>  1:00
     CLOCK: [2016-12-07 Wed 08:50]--[2016-12-07 Wed 10:30] =>  1:40
@@ -393,15 +403,6 @@ Tasks:
 - add one formatter in =quilt.csharp=, with a archetype location so
   that we generate its fields - remove the hack of manually generating
   archetype locations.
-
-    boost::filesystem::path make_full_path(
-        const yarn::name& n, const std::string& archetype) const;
-
-boost::filesystem::path locator::make_full_path(
-    const yarn::name& /*n*/, const std::string& /*archetype*/) const {
-    boost::filesystem::path r;
-    return r;
-}
 
 *** STARTED Add support for Decimal numbers                           :story:
     CLOCK: [2016-11-30 Wed 13:04]--[2016-11-30 Wed 13:36] =>  0:32

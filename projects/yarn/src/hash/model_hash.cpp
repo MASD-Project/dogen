@@ -45,6 +45,14 @@ inline std::size_t hash_std_vector_boost_shared_ptr_dogen_yarn_element(const std
     return seed;
 }
 
+inline std::size_t hash_std_unordered_set_std_string(const std::unordered_set<std::string>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -56,6 +64,7 @@ std::size_t model_hasher::hash(const model& v) {
     combine(seed, v.name());
     combine(seed, hash_std_vector_boost_shared_ptr_dogen_yarn_element(v.elements()));
     combine(seed, v.root_module());
+    combine(seed, hash_std_unordered_set_std_string(v.module_ids()));
     combine(seed, v.has_generatable_types());
 
     return seed;

@@ -40,10 +40,12 @@ model::model(
     const dogen::yarn::name& name,
     const std::vector<boost::shared_ptr<dogen::yarn::element> >& elements,
     const dogen::yarn::module& root_module,
+    const std::unordered_set<std::string>& module_ids,
     const bool has_generatable_types)
     : name_(name),
       elements_(elements),
       root_module_(root_module),
+      module_ids_(module_ids),
       has_generatable_types_(has_generatable_types) { }
 
 void model::swap(model& other) noexcept {
@@ -51,6 +53,7 @@ void model::swap(model& other) noexcept {
     swap(name_, other.name_);
     swap(elements_, other.elements_);
     swap(root_module_, other.root_module_);
+    swap(module_ids_, other.module_ids_);
     swap(has_generatable_types_, other.has_generatable_types_);
 }
 
@@ -58,6 +61,7 @@ bool model::operator==(const model& rhs) const {
     return name_ == rhs.name_ &&
         elements_ == rhs.elements_ &&
         root_module_ == rhs.root_module_ &&
+        module_ids_ == rhs.module_ids_ &&
         has_generatable_types_ == rhs.has_generatable_types_;
 }
 
@@ -113,6 +117,22 @@ void model::root_module(const dogen::yarn::module& v) {
 
 void model::root_module(const dogen::yarn::module&& v) {
     root_module_ = std::move(v);
+}
+
+const std::unordered_set<std::string>& model::module_ids() const {
+    return module_ids_;
+}
+
+std::unordered_set<std::string>& model::module_ids() {
+    return module_ids_;
+}
+
+void model::module_ids(const std::unordered_set<std::string>& v) {
+    module_ids_ = v;
+}
+
+void model::module_ids(const std::unordered_set<std::string>&& v) {
+    module_ids_ = std::move(v);
 }
 
 bool model::has_generatable_types() const {

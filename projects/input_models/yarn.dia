@@ -1654,7 +1654,7 @@ intermediate merged model.#</dia:string>
         <dia:point val="-202,-59"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-202.05,-59.05;-174.1,-30.85"/>
+        <dia:rectangle val="-202.05,-59.05;-174.1,-30.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1666,7 +1666,7 @@ intermediate merged model.#</dia:string>
         <dia:real val="27.850000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="28.100000000000005"/>
+        <dia:real val="28.900000000000002"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000149011612"/>
@@ -12588,7 +12588,7 @@ meta-types (concepts) and non-types (modules and backend specific entities).#</d
         <dia:point val="1,49"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="0.95,48.95;20.8,54.25"/>
+        <dia:rectangle val="0.95,48.95;20.8,55.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="1,49"/>
@@ -12597,7 +12597,7 @@ meta-types (concepts) and non-types (modules and backend specific entities).#</d
         <dia:real val="19.75"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.2000000000000011"/>
+        <dia:real val="6.0000000000000009"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#model#</dia:string>
@@ -12722,6 +12722,29 @@ meta-types (concepts) and non-types (modules and backend specific entities).#</d
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#The module that represents the model.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#module_ids#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::unordered_set&lt;std::string&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#IDs of all of the model elements which are modules.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -12943,16 +12966,16 @@ meta-types (concepts) and non-types (modules and backend specific entities).#</d
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="10.875,54.2"/>
+        <dia:point val="10.875,55"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-1.6025,53.45;11.625,66.8"/>
+        <dia:rectangle val="-1.6025,54.25;11.625,66.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="10.875,54.2"/>
+        <dia:point val="10.875,55"/>
         <dia:point val="10.875,61"/>
         <dia:point val="-1.5525,61"/>
         <dia:point val="-1.5525,66"/>

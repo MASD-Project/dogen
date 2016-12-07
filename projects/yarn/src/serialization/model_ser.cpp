@@ -21,12 +21,14 @@
 #include <boost/serialization/nvp.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
+#include <boost/serialization/string.hpp>
 #include <boost/serialization/vector.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/serialization/shared_ptr.hpp>
+#include <boost/serialization/unordered_set.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/yarn/serialization/name_ser.hpp"
@@ -44,6 +46,7 @@ void save(Archive& ar,
     ar << make_nvp("name", v.name_);
     ar << make_nvp("elements", v.elements_);
     ar << make_nvp("root_module", v.root_module_);
+    ar << make_nvp("module_ids", v.module_ids_);
     ar << make_nvp("has_generatable_types", v.has_generatable_types_);
 }
 
@@ -54,6 +57,7 @@ void load(Archive& ar,
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("elements", v.elements_);
     ar >> make_nvp("root_module", v.root_module_);
+    ar >> make_nvp("module_ids", v.module_ids_);
     ar >> make_nvp("has_generatable_types", v.has_generatable_types_);
 }
 

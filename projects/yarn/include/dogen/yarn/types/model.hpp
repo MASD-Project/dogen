@@ -25,8 +25,10 @@
 #pragma once
 #endif
 
+#include <string>
 #include <vector>
 #include <algorithm>
+#include <unordered_set>
 #include <boost/shared_ptr.hpp>
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/module.hpp"
@@ -53,6 +55,7 @@ public:
         const dogen::yarn::name& name,
         const std::vector<boost::shared_ptr<dogen::yarn::element> >& elements,
         const dogen::yarn::module& root_module,
+        const std::unordered_set<std::string>& module_ids,
         const bool has_generatable_types);
 
 private:
@@ -89,6 +92,16 @@ public:
     /**@}*/
 
     /**
+     * @brief IDs of all of the model elements which are modules.
+     */
+    /**@{*/
+    const std::unordered_set<std::string>& module_ids() const;
+    std::unordered_set<std::string>& module_ids();
+    void module_ids(const std::unordered_set<std::string>& v);
+    void module_ids(const std::unordered_set<std::string>&& v);
+    /**@}*/
+
+    /**
      * @brief If true the intermediate model has at least one generable type, false otherwise.
      */
     /**@{*/
@@ -110,6 +123,7 @@ private:
     dogen::yarn::name name_;
     std::vector<boost::shared_ptr<dogen::yarn::element> > elements_;
     dogen::yarn::module root_module_;
+    std::unordered_set<std::string> module_ids_;
     bool has_generatable_types_;
 };
 

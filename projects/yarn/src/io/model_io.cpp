@@ -20,6 +20,7 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
+#include <boost/algorithm/string.hpp>
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/io/model_io.hpp"
 #include "dogen/yarn/io/module_io.hpp"
@@ -55,6 +56,27 @@ inline std::ostream& operator<<(std::ostream& s, const std::vector<boost::shared
 
 }
 
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::string>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << tidy_up_string(*i) << "\"";
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace yarn {
 
@@ -70,6 +92,7 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"name\": " << v.name() << ", "
       << "\"elements\": " << v.elements() << ", "
       << "\"root_module\": " << v.root_module() << ", "
+      << "\"module_ids\": " << v.module_ids() << ", "
       << "\"has_generatable_types\": " << v.has_generatable_types()
       << " }";
     return(s);
