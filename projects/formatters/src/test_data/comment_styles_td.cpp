@@ -26,7 +26,7 @@ namespace formatters {
 comment_styles_generator::comment_styles_generator() : position_(0) { }
 void comment_styles_generator::
 populate(const unsigned int position, result_type& v) {
-    v = static_cast<comment_styles>(position % 5);
+    v = static_cast<comment_styles>(position % 6);
 }
 
 comment_styles_generator::result_type

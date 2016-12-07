@@ -3421,19 +3421,19 @@ only be written to the filesystem if it does not exist.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O23">
       <dia:attribute name="obj_pos">
-        <dia:point val="19,-5"/>
+        <dia:point val="20,-5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="18.95,-5.05;26.8075,1.05"/>
+        <dia:rectangle val="19.95,-5.05;27.8075,1.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="19,-5"/>
+        <dia:point val="20,-5"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="7.7575000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.0000000000000009"/>
+        <dia:real val="6.8000000000000007"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#comment_styles#</dia:string>
@@ -3571,6 +3571,29 @@ only be written to the filesystem if it does not exist.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
+            <dia:string>#csharp_style#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#C# programming language style.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
             <dia:string>#shell_style#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
@@ -3663,7 +3686,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:point val="-1.43,-5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-2.18,-11.75;19.2,-4.2"/>
+        <dia:rectangle val="-2.18,-11.75;20.2,-4.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3671,8 +3694,8 @@ only be written to the filesystem if it does not exist.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-1.43,-5"/>
         <dia:point val="-1.43,-11"/>
-        <dia:point val="19,-11"/>
-        <dia:point val="19,-5"/>
+        <dia:point val="20,-11"/>
+        <dia:point val="20,-5"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -10621,7 +10644,7 @@ than one element.#</dia:string>
         <dia:point val="24.6075,-16"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="23.8575,-16.75;26.9575,-4.2"/>
+        <dia:rectangle val="23.8575,-16.75;27.9575,-4.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -10629,8 +10652,8 @@ than one element.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="24.6075,-16"/>
         <dia:point val="24.6075,-11"/>
-        <dia:point val="26.7575,-11"/>
-        <dia:point val="26.7575,-5"/>
+        <dia:point val="27.7575,-11"/>
+        <dia:point val="27.7575,-5"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

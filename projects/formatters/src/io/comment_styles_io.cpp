@@ -40,6 +40,9 @@ std::ostream& operator<<(std::ostream& s, const comment_styles& v) {
     case comment_styles::cpp_style:
         attr = "\"cpp_style\"";
         break;
+    case comment_styles::csharp_style:
+        attr = "\"csharp_style\"";
+        break;
     case comment_styles::shell_style:
         attr = "\"shell_style\"";
         break;
