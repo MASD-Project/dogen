@@ -40,9 +40,9 @@ namespace yarn {
 
 namespace {
 
-class generator {
+class model_populator {
 public:
-    explicit generator(model& m) : result_(m) { }
+    explicit model_populator(model& m) : result_(m) { }
 
 private:
     void ensure_not_yet_processed(const std::string& id) {
@@ -54,7 +54,7 @@ private:
         }
     }
 
-    void add(boost::shared_ptr<element> e) {
+    void add_element(boost::shared_ptr<element> e) {
         /*
          * Element extensions share the same id as the original
          * element, so they are not considered duplicates. All other
@@ -69,22 +69,25 @@ private:
     }
 
     template<typename Element>
-    void generate(const Element& e) { add(boost::make_shared<Element>(e)); }
+    void add(const Element& e) { add_element(boost::make_shared<Element>(e)); }
 
 public:
-    void operator()(const yarn::module& m) { generate(m); }
-    void operator()(const yarn::concept& c) { generate(c); }
-    void operator()(const yarn::primitive& p) { generate(p); }
-    void operator()(const yarn::enumeration& e) { generate(e); }
-    void operator()(const yarn::object& o) { generate(o); }
-    void operator()(const yarn::exception& e) { generate(e); }
-    void operator()(const yarn::visitor& v) { generate(v); }
+    void operator()(const yarn::module& m) {
+        result_.module_ids().insert(m.name().id());
+        add(m);
+    }
+    void operator()(const yarn::concept& c) { add(c); }
+    void operator()(const yarn::primitive& p) { add(p); }
+    void operator()(const yarn::enumeration& e) { add(e); }
+    void operator()(const yarn::object& o) { add(o); }
+    void operator()(const yarn::exception& e) { add(e); }
+    void operator()(const yarn::visitor& v) { add(v); }
 
 public:
     void add_injected_elements(
         const std::unordered_map<std::string, boost::shared_ptr<element>>& ie) {
         for (const auto& pair : ie)
-            add(pair.second);
+            add_element(pair.second);
     }
 
 public:
@@ -120,9 +123,9 @@ model transformer::transform(const intermediate_model& im) const {
     const auto size(compute_total_size(im));
     r.elements().reserve(size);
 
-    generator g(r);
-    yarn::elements_traversal(im, g);
-    g.add_injected_elements(im.injected_elements());
+    model_populator mp(r);
+    yarn::elements_traversal(im, mp);
+    mp.add_injected_elements(im.injected_elements());
 
     return r;
 }

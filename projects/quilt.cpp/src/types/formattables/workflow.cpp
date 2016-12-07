@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn/types/element_visitor.hpp"
 #include "dogen/quilt.cpp/types/formattables/transformer.hpp"
 #include "dogen/quilt.cpp/types/formattables/model_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/workflow.hpp"
@@ -35,31 +34,6 @@ namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
-
-class module_id_collector : public yarn::element_visitor {
-public:
-    const std::unordered_set<std::string>& result() { return module_ids_; }
-
-public:
-    using yarn::element_visitor::visit;
-    void visit(const yarn::module& m) override {
-        module_ids_.insert(m.name().id());
-    }
-
-private:
-    std::unordered_set<std::string> module_ids_;
-};
-
-
-std::unordered_set<std::string>
-workflow::obtain_module_ids(const yarn::model& m) const {
-    module_id_collector c;
-    for (const auto& ptr : m.elements()) {
-        const auto& e(*ptr);
-        e.accept(c);
-    }
-    return c.result();
-}
 
 model workflow::
 make_model(const formatters::repository& frp, const yarn::model& m) const {
@@ -90,11 +64,9 @@ model workflow::execute(
     const yarn::model& m) const {
 
     auto r(make_model(frp, m));
-
-    const auto module_ids(obtain_module_ids(m));
     const auto odp(ko.output_directory_path());
     const auto rkd(enable_kernel_directories);
-    const locator l(odp, atrp, frp, ra, m.name(), module_ids, rkd);
+    const locator l(odp, atrp, frp, ra, m.name(), m.module_ids(), rkd);
     expand_model(atrp, ra, dpf, frp, l, r);
 
     return r;

@@ -44,12 +44,6 @@ namespace formattables {
 
 class workflow {
 private:
-    /**
-     * @brief Retrieves the ids of all the modules in the model.
-     */
-    std::unordered_set<std::string>
-    obtain_module_ids(const yarn::model& m) const;
-
     model
     make_model(const formatters::repository& frp, const yarn::model& m) const;
 
