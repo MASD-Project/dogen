@@ -31,7 +31,7 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("quilt.csharp.formattables.locator"));
 
 const std::string empty;
-const std::string extension(".cs");
+const std::string extension("cs");
 const std::string underscore("_");
 const std::string double_quote("\"");
 const std::string dot(".");
