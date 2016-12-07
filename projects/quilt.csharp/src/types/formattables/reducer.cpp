@@ -18,15 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/types/element.hpp"
 #include "dogen/quilt.csharp/types/formattables/reducer.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory("quit.cpp.formatters.reducer"));
+
+}
 
 namespace dogen {
 namespace quilt {
 namespace csharp {
 namespace formattables {
 
-bool reducer::operator==(const reducer& /*rhs*/) const {
-    return true;
+void reducer::reduce(model& fm) const {
+    BOOST_LOG_SEV(lg, debug) << "Starting reduction.";
+    BOOST_LOG_SEV(lg, debug) << "Original size: " << fm.formattables().size();
+
+    std::unordered_map<std::string, formattable> reduced;
+    for (const auto& pair : fm.formattables()) {
+        const auto& formattable(pair.second);
+        const auto& e(*formattable.element());
+        if (e.origin_type() != yarn::origin_types::target)
+            continue;
+
+        reduced.insert(pair);
+    }
+
+    fm.formattables().swap(reduced);
+    BOOST_LOG_SEV(lg, debug) << "Reduced size: " << fm.formattables().size();
 }
 
 } } } }

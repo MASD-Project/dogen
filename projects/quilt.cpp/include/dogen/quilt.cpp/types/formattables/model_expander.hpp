@@ -25,13 +25,8 @@
 #pragma once
 #endif
 
-#include <list>
-#include <vector>
-#include <string>
-#include <unordered_map>
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
-#include "dogen/yarn/types/model.hpp"
 #include "dogen/formatters/types/decoration_properties_factory.hpp"
 #include "dogen/quilt.cpp/types/formatters/repository.hpp"
 #include "dogen/quilt.cpp/types/formattables/locator.hpp"
@@ -82,7 +77,7 @@ private:
 
 public:
     void expand(const annotations::type_repository& atrp,
-        const annotations::annotation& rat,
+        const annotations::annotation& ra,
         const dogen::formatters::decoration_properties_factory& dpf,
         const formatters::repository& frp, const locator& l, model& fm) const;
 };

@@ -25,9 +25,6 @@
 #pragma once
 #endif
 
-#include <string>
-#include <unordered_map>
-#include "dogen/quilt.cpp/types/formattables/formattable.hpp"
 #include "dogen/quilt.cpp/types/formattables/model.hpp"
 
 namespace dogen {

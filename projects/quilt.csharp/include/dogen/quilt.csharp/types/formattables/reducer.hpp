@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen/quilt.csharp/types/formattables/model.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -34,18 +34,7 @@ namespace formattables {
 
 class reducer final {
 public:
-    reducer() = default;
-    reducer(const reducer&) = default;
-    reducer(reducer&&) = default;
-    ~reducer() = default;
-    reducer& operator=(const reducer&) = default;
-
-public:
-    bool operator==(const reducer& rhs) const;
-    bool operator!=(const reducer& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    void reduce(model& fm) const;
 };
 
 } } } }

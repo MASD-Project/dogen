@@ -25,7 +25,12 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen/annotations/types/annotation.hpp"
+#include "dogen/annotations/types/type_repository.hpp"
+#include "dogen/formatters/types/decoration_properties_factory.hpp"
+#include "dogen/quilt.csharp/types/formatters/repository.hpp"
+#include "dogen/quilt.csharp/types/formattables/locator.hpp"
+#include "dogen/quilt.csharp/types/formattables/model.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -33,19 +38,14 @@ namespace csharp {
 namespace formattables {
 
 class model_expander final {
-public:
-    model_expander() = default;
-    model_expander(const model_expander&) = default;
-    model_expander(model_expander&&) = default;
-    ~model_expander() = default;
-    model_expander& operator=(const model_expander&) = default;
+private:
+    void reduce(model& fm) const;
 
 public:
-    bool operator==(const model_expander& rhs) const;
-    bool operator!=(const model_expander& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    void expand(const annotations::type_repository& atrp,
+        const annotations::annotation& ra,
+        const dogen::formatters::decoration_properties_factory& dpf,
+        const formatters::repository& frp, const locator& l, model& fm) const;
 };
 
 } } } }

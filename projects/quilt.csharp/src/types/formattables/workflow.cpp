@@ -47,27 +47,28 @@ make_model(const formatters::repository& frp, const yarn::model& m) const {
 }
 
 void workflow::expand_model(
-    const annotations::type_repository& /*atrp*/,
-    const annotations::annotation& /*ra*/,
-    const dogen::formatters::decoration_properties_factory& /*dpf*/,
-    const formatters::repository& /*frp*/, const locator& /*l*/, model& /*fm*/) const {
-    /*model_expander ex;
-      ex.expand(atrp, ra, dpf, frp, l, fm);*/
+    const annotations::type_repository& atrp,
+    const annotations::annotation& ra,
+    const dogen::formatters::decoration_properties_factory& dpf,
+    const formatters::repository& frp, const locator& l, model& fm) const {
+    model_expander ex;
+    ex.expand(atrp, ra, dpf, frp, l, fm);
 }
 
 model workflow::execute(
-    const options::knitting_options& /*ko*/,
-    const annotations::type_repository& /*atrp*/,
-    const annotations::annotation& /*ra*/,
-    const dogen::formatters::decoration_properties_factory& /*dpf*/,
+    const options::knitting_options& ko,
+    const annotations::type_repository& atrp,
+    const annotations::annotation& ra,
+    const dogen::formatters::decoration_properties_factory& dpf,
     const formatters::repository& frp, const bool /*enable_kernel_directories*/,
     const yarn::model& m) const {
 
     auto r(make_model(frp, m));
-    /*const auto odp(ko.output_directory_path());
-    const auto rkd(enable_kernel_directories);
-    const locator l(odp, atrp, frp, ra, m.name(), rkd);
-    expand_model(atrp, ra, dpf, frp, l, r);*/
+    const auto odp(ko.output_directory_path());
+    // const auto rkd(enable_kernel_directories);
+    // const locator l(odp, atrp, frp, ra, m.name(), rkd);
+    locator l;
+    expand_model(atrp, ra, dpf, frp, l, r);
 
     return r;
 }

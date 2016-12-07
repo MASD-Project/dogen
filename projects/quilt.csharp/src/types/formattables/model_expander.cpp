@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/quilt.csharp/types/formattables/reducer.hpp"
 #include "dogen/quilt.csharp/types/formattables/model_expander.hpp"
 
 namespace dogen {
@@ -25,8 +26,18 @@ namespace quilt {
 namespace csharp {
 namespace formattables {
 
-bool model_expander::operator==(const model_expander& /*rhs*/) const {
-    return true;
+void model_expander::reduce(model& fm) const {
+    reducer rd;
+    rd.reduce(fm);
+}
+
+void model_expander::expand(
+    const annotations::type_repository& /*atrp*/,
+    const annotations::annotation& /*ra*/,
+    const dogen::formatters::decoration_properties_factory& /*dpf*/,
+    const formatters::repository& /*frp*/, const locator& /*l*/, model& fm) const {
+
+    reduce(fm);
 }
 
 } } } }
