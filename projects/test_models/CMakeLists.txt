@@ -155,10 +155,14 @@ foreach(dia_model ${all_dia_test_models})
     set(expected_dir "${top_dir}/expected/${model_folder_name}")
     set(git_dir "${CMAKE_CURRENT_SOURCE_DIR}/${model_folder_name}")
 
-    if(EXISTS "${actual_dir}")
+    if (EXISTS "${actual_dir}")
         set(main_target_name "${model_name}")
         if (NOT ignore_dependencies)
-            add_dependencies(build_test_models ${main_target_name})
+            # Checking the presence of the cmake file to ensure this
+            # is a valid project to build - e.g. ignore C#.
+            if (EXISTS "${expected_dir}/CMakeLists.txt")
+                add_dependencies(build_test_models ${main_target_name})
+            endif()
         endif()
 
         set(target_name "diff_${model_name}_dia")
@@ -184,7 +188,7 @@ foreach(dia_model ${all_dia_test_models})
     endif()
 
     set(actual_dir "${top_dir}/actual.json/${model_folder_name}")
-    if(EXISTS "${actual_dir}")
+    if (EXISTS "${actual_dir}")
         set(main_target_name "${model_name}")
 
         set(target_name "diff_${model_name}_json")
