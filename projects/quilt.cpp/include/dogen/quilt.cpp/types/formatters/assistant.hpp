@@ -34,11 +34,11 @@
 #include <boost/iostreams/filtering_stream.hpp>
 #include "dogen/annotations/types/archetype_location.hpp"
 #include "dogen/formatters/types/artefact.hpp"
+#include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
+#include "dogen/formatters/types/cpp/scoped_boilerplate_formatter.hpp"
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/name_tree.hpp"
-#include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
-#include "dogen/formatters/types/cpp/scoped_boilerplate_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/context.hpp"
 #include "dogen/quilt.cpp/types/formattables/helper_properties.hpp"
 

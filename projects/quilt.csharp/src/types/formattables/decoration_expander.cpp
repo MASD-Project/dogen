@@ -18,15 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
+#include <typeindex>
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/types/element.hpp"
 #include "dogen/quilt.csharp/types/formattables/decoration_expander.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory(
+        "quilt.csharp.formattables.decoration_expander"));
+
+const std::string cs_modeline_name("cs");
+
+}
 
 namespace dogen {
 namespace quilt {
 namespace csharp {
 namespace formattables {
 
-bool decoration_expander::operator==(const decoration_expander& /*rhs*/) const {
-    return true;
+void decoration_expander::
+expand(const dogen::formatters::decoration_properties_factory& dpf,
+    model& fm) const {
+
+    const auto dc(dpf.make(cs_modeline_name));
+    for (auto& pair : fm.formattables()) {
+        const auto id(pair.first);
+        auto& formattable(pair.second);
+        auto& eprops(formattable.element_properties());
+        eprops.decoration_properties(dc);
+    }
 }
 
 } } } }

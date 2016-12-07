@@ -73,10 +73,10 @@ class_formatter::format(const context& ctx, const yarn::element& e) const {
     {
         const auto sn(e.name().simple());
         // const auto qn(a.get_qualified_name(e.name()));
-        // auto sbf(a.make_scoped_boilerplate_formatter());
+        auto sbf(a.make_scoped_boilerplate_formatter());
         {
             // const auto ns(a.make_namespaces(e.name()));
-            // auto snf(a.make_scoped_namespace_formatter(ns));
+            // aauto snf(a.make_scoped_namespace_formatter(ns));
 a.stream() << std::endl;
             // a.comment(o.documentation());
 a.stream() << "class " << sn << " {" << std::endl;

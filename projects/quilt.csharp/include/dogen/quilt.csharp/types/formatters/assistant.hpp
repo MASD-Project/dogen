@@ -28,6 +28,7 @@
 #include <sstream>
 #include "dogen/annotations/types/archetype_location.hpp"
 #include "dogen/formatters/types/artefact.hpp"
+#include "dogen/formatters/types/csharp/scoped_boilerplate_formatter.hpp"
 #include "dogen/quilt.csharp/types/formatters/context.hpp"
 
 namespace dogen {
@@ -43,6 +44,13 @@ public:
 private:
     const formattables::artefact_properties&
     obtain_artefact_properties(const std::string& archetype) const;
+
+public:
+    /**
+     * @brief Returns a scoped boilerplate formatter.
+     */
+    dogen::formatters::csharp::scoped_boilerplate_formatter
+    make_scoped_boilerplate_formatter();
 
 public:
     /**

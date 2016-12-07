@@ -28,8 +28,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory(
-        "quilt.cpp.formattables.element_properties_repository_factory"));
+static logger lg(logger_factory("quilt.cpp.formattables.decoration_expander"));
 
 const std::string cpp_modeline_name("cpp");
 const std::string cmake_modeline_name("cmake");

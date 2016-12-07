@@ -62,6 +62,18 @@ obtain_artefact_properties(const std::string& archetype) const {
     return i->second;
 }
 
+dogen::formatters::csharp::scoped_boilerplate_formatter
+assistant::make_scoped_boilerplate_formatter() {
+    const auto& ep(context_.element_properties());
+    const auto& dp(ep.decoration_properties());
+
+    const auto& art_props(artefact_properties_);
+    const auto& deps(art_props.using_dependencies());
+
+    using dogen::formatters::csharp::scoped_boilerplate_formatter;
+    return scoped_boilerplate_formatter(stream(), dp, deps);
+}
+
 std::ostream& assistant::stream() {
     return stream_;
 }

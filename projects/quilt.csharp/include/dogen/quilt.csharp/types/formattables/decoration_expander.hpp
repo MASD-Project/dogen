@@ -25,27 +25,18 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen/formatters/types/decoration_properties_factory.hpp"
+#include "dogen/quilt.csharp/types/formattables/model.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace csharp {
 namespace formattables {
 
-class decoration_expander final {
+class decoration_expander {
 public:
-    decoration_expander() = default;
-    decoration_expander(const decoration_expander&) = default;
-    decoration_expander(decoration_expander&&) = default;
-    ~decoration_expander() = default;
-    decoration_expander& operator=(const decoration_expander&) = default;
-
-public:
-    bool operator==(const decoration_expander& rhs) const;
-    bool operator!=(const decoration_expander& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    void expand(const dogen::formatters::decoration_properties_factory& dpf,
+        model& fm) const;
 };
 
 } } } }

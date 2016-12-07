@@ -25,6 +25,29 @@
       ]
     },
     {
+      "modeline_name": "cs",
+      "editor": "emacs",
+      "location": "top",
+      "fields": [
+        {
+          "name": "mode",
+          "value": "c#"
+        },
+        {
+          "name": "tab-width",
+          "value": "4"
+        },
+        {
+          "name": "indent-tabs-mode",
+          "value": "nil"
+        },
+        {
+          "name": "c-basic-offset",
+          "value": "4"
+        }
+      ]
+    },
+    {
       "modeline_name": "cmake",
       "editor": "emacs",
       "location": "top",

@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/quilt.csharp/types/formattables/decoration_expander.hpp"
 #include "dogen/quilt.csharp/types/formattables/reducer.hpp"
 #include "dogen/quilt.csharp/types/formattables/file_path_expander.hpp"
 #include "dogen/quilt.csharp/types/formattables/model_expander.hpp"
@@ -26,6 +27,13 @@ namespace dogen {
 namespace quilt {
 namespace csharp {
 namespace formattables {
+
+void model_expander::expand_decoration(
+    const dogen::formatters::decoration_properties_factory& dpf,
+    model& fm) const {
+    decoration_expander ex;
+    ex.expand(dpf, fm);
+}
 
 void model_expander::expand_file_paths(
     const formatters::repository& frp, const locator& l, model& fm) const {
@@ -41,10 +49,11 @@ void model_expander::reduce(model& fm) const {
 void model_expander::expand(
     const annotations::type_repository& /*atrp*/,
     const annotations::annotation& /*ra*/,
-    const dogen::formatters::decoration_properties_factory& /*dpf*/,
+    const dogen::formatters::decoration_properties_factory& dpf,
     const formatters::repository& frp, const locator& l, model& fm) const {
 
     reduce(fm);
+    expand_decoration(dpf, fm);
     expand_file_paths(frp, l, fm);
 }
 
