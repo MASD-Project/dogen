@@ -21,7 +21,9 @@
 #include <iterator>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/filesystem/path.hpp"
 #include "dogen/annotations/io/type_io.hpp"
+#include "dogen/formatters/types/repository_factory.hpp"
 #include "dogen/quilt/types/configuration_factory.hpp"
 #include "dogen/quilt/types/workflow_error.hpp"
 #include "dogen/quilt/types/workflow.hpp"
@@ -55,6 +57,30 @@ workflow::kernel_archetype_locations() const {
     const auto& rg(quilt::workflow::registrar());
     for (const auto k : rg.kernels())
         r.push_back(k->archetype_location());
+    return r;
+}
+
+std::vector<boost::filesystem::path> workflow::
+obtain_data_directories() const {
+    const auto dir(dogen::utility::filesystem::data_files_directory());
+    const auto r(std::vector<boost::filesystem::path> { dir });
+    return r;
+}
+
+dogen::formatters::repository workflow::
+create_formatters_decoration_repository(
+    const std::vector<boost::filesystem::path>& data_directories) const {
+    dogen::formatters::repository_factory hw;
+    return hw.make(data_directories);
+}
+
+dogen::formatters::decoration_properties_factory
+workflow::create_decoration_properties_factory(
+    const annotations::type_repository& atrp,
+    const dogen::formatters::repository& frp,
+    const annotations::annotation& ra) const {
+    using dogen::formatters::decoration_properties_factory;
+    decoration_properties_factory r(atrp, frp, ra);
     return r;
 }
 
@@ -96,6 +122,13 @@ workflow::execute(const yarn::model& m) const {
     configuration_factory cf;
     const auto cfg(cf.make(repository_, kals, ra));
 
+    const auto& atrp(repository_);
+    const auto& af(annotation_factory_);
+
+    const auto dd(obtain_data_directories());
+    const auto drp(create_formatters_decoration_repository(dd));
+    const auto dpf(create_decoration_properties_factory(repository_, drp, ra));
+
     std::forward_list<formatters::artefact> r;
     for(const auto k : registrar().kernels()) {
         const auto kn(k->archetype_location().kernel());
@@ -110,7 +143,7 @@ workflow::execute(const yarn::model& m) const {
 
         const auto& ko(knitting_options_);
         const bool ekd(cfg.enable_kernel_directories());
-        auto files(k->generate(ko, repository_, annotation_factory_, ekd, m));
+        auto files(k->generate(ko, atrp, af, drp, dpf, ekd, m));
         BOOST_LOG_SEV(lg, debug) << "Generated files for : " << kn
                                  << ". Total files: "
                                  << std::distance(files.begin(), files.end());

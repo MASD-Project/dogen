@@ -33,8 +33,11 @@
 #include "dogen/options/types/knitting_options.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
-#include "dogen/yarn/types/model.hpp"
+#include "dogen/annotations/types/annotation.hpp"
 #include "dogen/formatters/types/artefact.hpp"
+#include "dogen/formatters/types/repository.hpp"
+#include "dogen/formatters/types/decoration_properties_factory.hpp"
+#include "dogen/yarn/types/model.hpp"
 #include "dogen/quilt/types/kernel_registrar.hpp"
 #include "dogen/quilt/types/kernel_interface.hpp"
 
@@ -53,6 +56,24 @@ public:
 private:
     std::list<annotations::archetype_location>
     kernel_archetype_locations() const;
+
+private:
+    std::vector<boost::filesystem::path> obtain_data_directories() const;
+
+    /**
+     * @brief Creates the formatters' repository with decoration data.
+     */
+    dogen::formatters::repository create_formatters_decoration_repository(const
+        std::vector<boost::filesystem::path>& data_directories) const;
+
+    /**
+     * @brief Create the decoration configuration factory.
+     */
+    dogen::formatters::decoration_properties_factory
+    create_decoration_properties_factory(
+        const annotations::type_repository& atrp,
+        const dogen::formatters::repository& frp,
+        const annotations::annotation& ra) const;
 
 public:
     /**

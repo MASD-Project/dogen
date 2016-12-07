@@ -65,6 +65,8 @@ std::forward_list<dogen::formatters::artefact> workflow::generate(
     const options::knitting_options& /*ko*/,
     const annotations::type_repository& /*atrp*/,
     const annotations::annotation_groups_factory& /*agf*/,
+    const dogen::formatters::repository& /*drp*/,
+    const dogen::formatters::decoration_properties_factory& /*dpf*/,
     const bool /*requires_kernel_directory*/,
     const yarn::model& /*m*/) const {
     std::forward_list<dogen::formatters::artefact> r;

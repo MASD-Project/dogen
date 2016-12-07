@@ -43,30 +43,6 @@ namespace cpp {
 
 workflow::~workflow() noexcept { }
 
-std::vector<boost::filesystem::path> workflow::
-obtain_data_directories() const {
-    const auto dir(dogen::utility::filesystem::data_files_directory());
-    const auto r(std::vector<boost::filesystem::path> { dir });
-    return r;
-}
-
-dogen::formatters::repository workflow::
-create_formatters_decoration_repository(
-    const std::vector<boost::filesystem::path>& data_directories) const {
-    dogen::formatters::repository_factory hw;
-    return hw.make(data_directories);
-}
-
-dogen::formatters::decoration_properties_factory
-workflow::create_decoration_properties_factory(
-    const annotations::type_repository& atrp,
-    const dogen::formatters::repository& frp,
-    const annotations::annotation& ra) const {
-    using dogen::formatters::decoration_properties_factory;
-    decoration_properties_factory r(atrp, frp, ra);
-    return r;
-}
-
 formattables::model workflow::create_formattables_model(
     const options::knitting_options& ko,
     const annotations::type_repository& atrp,
@@ -112,14 +88,13 @@ std::forward_list<dogen::formatters::artefact>
 workflow::generate(const options::knitting_options& ko,
     const annotations::type_repository& atrp,
     const annotations::annotation_groups_factory& agf,
+    const dogen::formatters::repository& drp,
+    const dogen::formatters::decoration_properties_factory& dpf,
     const bool enable_kernel_directories,
     const yarn::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started backend.";
 
-    const auto dd(obtain_data_directories());
-    const auto drp(create_formatters_decoration_repository(dd));
     const auto ra(m.root_module().annotation());
-    const auto dpf(create_decoration_properties_factory(atrp, drp, ra));
     const auto& frp(formatters::workflow::registrar().formatter_repository());
     const bool ekd(enable_kernel_directories);
     const auto fm(create_formattables_model(ko, atrp, ra, dpf, frp, ekd, m));
