@@ -25,26 +25,45 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <iosfwd>
+#include <string>
 
 namespace dogen {
 namespace formatters {
 namespace csharp {
 
-class namespace_formatter final {
+/**
+ * @brief Formats C# namespaces.
+ */
+class namespace_formatter {
 public:
-    namespace_formatter() = default;
-    namespace_formatter(const namespace_formatter&) = default;
-    namespace_formatter(namespace_formatter&&) = default;
-    ~namespace_formatter() = default;
-    namespace_formatter& operator=(const namespace_formatter&) = default;
+    explicit namespace_formatter(const bool add_new_line = false);
 
 public:
-    bool operator==(const namespace_formatter& rhs) const;
-    bool operator!=(const namespace_formatter& rhs) const {
-        return !this->operator==(rhs);
-    }
+    /**
+     * @brief Formats the opening of a single namespace.
+     */
+    void format_begin(std::ostream& s, const std::string& ns) const;
 
+    /**
+     * @brief Formats the closing of a single namespace.
+     */
+    void format_end(std::ostream& s, const std::string& ns) const;
+
+public:
+    /**
+     * @brief Formats the opening of the namespaces.
+     */
+    void format_begin(std::ostream& s, const std::list<std::string>& ns) const;
+
+    /**
+     * @brief Formats the closing of the namespaces.
+     */
+    void format_end(std::ostream& s, const std::list<std::string>& ns) const;
+
+private:
+    const bool add_new_line_;
 };
 
 } } }

@@ -31,7 +31,7 @@
 namespace {
 
 const std::string test_module("formatters");
-const std::string test_suite("boilerplate_formatter_tests");
+const std::string test_suite("cpp_boilerplate_formatter_tests");
 const std::string empty;
 
 dogen::formatters::test::mock_decoration_properties_factory factory_;
@@ -208,8 +208,7 @@ const std::string disabled_preamble(R"(#ifndef A_PATH_HPP
 )");
 
 std::string format(const dogen::formatters::decoration_properties& dc,
-    const std::list<std::string>& inclusion_dependencies,
-    const std::string& header_guard,
+    const std::list<std::string>& includes, const std::string& header_guard,
     const bool generate_premable = true) {
 
     std::ostringstream s;
@@ -218,7 +217,7 @@ std::string format(const dogen::formatters::decoration_properties& dc,
     fo.push(s);
 
     dogen::formatters::cpp::boilerplate_formatter f(generate_premable);
-    f.format_begin(fo, dc, inclusion_dependencies, header_guard);
+    f.format_begin(fo, dc, includes, header_guard);
     f.format_end(fo, dc, header_guard);
     return s.str();
 }
@@ -229,7 +228,7 @@ using namespace dogen::formatters;
 using namespace dogen::utility::test;
 using dogen::utility::test::asserter;
 
-BOOST_AUTO_TEST_SUITE(boilerplate_formatter_tests)
+BOOST_AUTO_TEST_SUITE(cpp_boilerplate_formatter_tests)
 
 BOOST_AUTO_TEST_CASE(top_modeline_is_formatted_correctly) {
     SETUP_TEST_LOG_SOURCE("top_modeline_is_formatted_correctly");

@@ -18,14 +18,52 @@
  * MA 02110-1301, USA.
  *
  */
+#include <ostream>
+#include "dogen/formatters/types/decoration_formatter.hpp"
+#include "dogen/formatters/types/csharp/using_formatter.hpp"
 #include "dogen/formatters/types/csharp/boilerplate_formatter.hpp"
 
 namespace dogen {
 namespace formatters {
 namespace csharp {
 
-bool boilerplate_formatter::operator==(const boilerplate_formatter& /*rhs*/) const {
-    return true;
+boilerplate_formatter::boilerplate_formatter(
+    const bool generate_preamble)
+    : generate_preamble_(generate_preamble) { }
+
+void boilerplate_formatter::
+format_preamble(std::ostream& s, const decoration_properties& dc) const {
+    if (!generate_preamble_)
+        return;
+
+    decoration_formatter af;
+    af.format_preamble(s, comment_styles::cpp_style/*single line*/,
+        comment_styles::cpp_style/*multi-line*/, dc);
+}
+
+void boilerplate_formatter::
+format_usings(std::ostream& s, const std::list<std::string>& usings) const {
+    using_formatter f;
+    f.format(s, usings);
+}
+
+void boilerplate_formatter::
+format_begin(std::ostream& s, const decoration_properties& dc,
+    const std::list<std::string>& usings) const {
+
+    format_preamble(s, dc);
+    format_usings(s, usings);
+}
+
+void boilerplate_formatter::
+format_postamble(std::ostream& s, const decoration_properties& dc) const {
+    decoration_formatter af;
+    af.format_postamble(s, comment_styles::cpp_style, dc);
+}
+
+void boilerplate_formatter::
+format_end(std::ostream& s, const decoration_properties& dc) const {
+    format_postamble(s, dc);
 }
 
 } } }

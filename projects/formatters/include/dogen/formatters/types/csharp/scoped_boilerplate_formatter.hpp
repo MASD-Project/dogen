@@ -25,26 +25,34 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <iosfwd>
+#include <string>
+#include <boost/optional.hpp>
+#include "dogen/formatters/types/decoration_properties.hpp"
+#include "dogen/formatters/types/csharp/boilerplate_formatter.hpp"
 
 namespace dogen {
 namespace formatters {
 namespace csharp {
 
-class scoped_boilerplate_formatter final {
+/**
+ * @brief RAII wrapper around the boilerplate formatter.
+ */
+class scoped_boilerplate_formatter {
 public:
-    scoped_boilerplate_formatter() = default;
-    scoped_boilerplate_formatter(const scoped_boilerplate_formatter&) = default;
-    scoped_boilerplate_formatter(scoped_boilerplate_formatter&&) = default;
-    ~scoped_boilerplate_formatter() = default;
-    scoped_boilerplate_formatter& operator=(const scoped_boilerplate_formatter&) = default;
+    scoped_boilerplate_formatter(
+        std::ostream& s,
+        const boost::optional<decoration_properties>& odp,
+        const std::list<std::string>& usings);
 
-public:
-    bool operator==(const scoped_boilerplate_formatter& rhs) const;
-    bool operator!=(const scoped_boilerplate_formatter& rhs) const {
-        return !this->operator==(rhs);
-    }
+    ~scoped_boilerplate_formatter();
 
+private:
+    std::ostream& stream_;
+    const boost::optional<decoration_properties> decoration_properties_;
+    const std::list<std::string> usings_;
+    const boilerplate_formatter formatter_;
 };
 
 } } }

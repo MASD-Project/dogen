@@ -18,14 +18,47 @@
  * MA 02110-1301, USA.
  *
  */
+#include <ostream>
+#include <boost/algorithm/string/join.hpp>
 #include "dogen/formatters/types/csharp/namespace_formatter.hpp"
+
+namespace {
+
+const std::string empty;
+const std::string dot(".");
+
+}
 
 namespace dogen {
 namespace formatters {
 namespace csharp {
 
-bool namespace_formatter::operator==(const namespace_formatter& /*rhs*/) const {
-    return true;
+namespace_formatter::namespace_formatter(const bool add_new_line)
+    : add_new_line_(add_new_line) {}
+
+void namespace_formatter::
+format_begin(std::ostream& s, const std::string& ns) const {
+    s << "namespace " << ns
+      << "{" << std::endl;
+}
+
+void namespace_formatter::
+format_end(std::ostream& s, const std::string& /*ns*/) const {
+    s << "}"; // no space and no std::endl by design
+}
+
+void namespace_formatter::
+format_begin(std::ostream& s, const std::list<std::string>& ns) const {
+    const auto joined_ns(boost::algorithm::join(ns, dot));
+    format_begin(s, joined_ns);
+}
+
+void namespace_formatter::
+format_end(std::ostream& s, const std::list<std::string>& /*ns*/) const {
+    format_end(s, empty);
+
+    if (add_new_line_)
+        s << std::endl;
 }
 
 } } }

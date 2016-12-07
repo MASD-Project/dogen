@@ -25,26 +25,30 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <iosfwd>
+#include <string>
+#include "dogen/formatters/types/csharp/namespace_formatter.hpp"
 
 namespace dogen {
 namespace formatters {
 namespace csharp {
 
-class scoped_namespace_formatter final {
+/**
+ * @brief RAII wrapper around the namespaces formatter.
+ */
+class scoped_namespace_formatter {
 public:
-    scoped_namespace_formatter() = default;
-    scoped_namespace_formatter(const scoped_namespace_formatter&) = default;
-    scoped_namespace_formatter(scoped_namespace_formatter&&) = default;
-    ~scoped_namespace_formatter() = default;
-    scoped_namespace_formatter& operator=(const scoped_namespace_formatter&) = default;
+    scoped_namespace_formatter(
+        std::ostream& s, const std::list<std::string>& ns,
+        const bool add_new_line = false);
 
-public:
-    bool operator==(const scoped_namespace_formatter& rhs) const;
-    bool operator!=(const scoped_namespace_formatter& rhs) const {
-        return !this->operator==(rhs);
-    }
+    ~scoped_namespace_formatter();
 
+private:
+    std::ostream& stream_;
+    const std::list<std::string>& namespaces_;
+    const namespace_formatter formatter_;
 };
 
 } } }

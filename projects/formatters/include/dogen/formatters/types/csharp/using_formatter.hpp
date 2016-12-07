@@ -25,26 +25,19 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <iosfwd>
 
 namespace dogen {
 namespace formatters {
 namespace csharp {
 
-class using_formatter final {
+/**
+ * @brief Generates using statements.
+ */
+class using_formatter {
 public:
-    using_formatter() = default;
-    using_formatter(const using_formatter&) = default;
-    using_formatter(using_formatter&&) = default;
-    ~using_formatter() = default;
-    using_formatter& operator=(const using_formatter&) = default;
-
-public:
-    bool operator==(const using_formatter& rhs) const;
-    bool operator!=(const using_formatter& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    void format(std::ostream& s, const std::list<std::string>& usings) const;
 };
 
 } } }

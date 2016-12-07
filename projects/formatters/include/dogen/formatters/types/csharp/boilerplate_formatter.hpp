@@ -25,26 +25,72 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <iosfwd>
+#include <string>
+#include "dogen/formatters/types/decoration_properties.hpp"
 
 namespace dogen {
 namespace formatters {
 namespace csharp {
 
-class boilerplate_formatter final {
+/**
+ * @brief Formats all of the boilerplate content in a C# file such as
+ * licence, modeline, using statements, etc.
+ */
+class boilerplate_formatter {
 public:
-    boilerplate_formatter() = default;
     boilerplate_formatter(const boilerplate_formatter&) = default;
-    boilerplate_formatter(boilerplate_formatter&&) = default;
-    ~boilerplate_formatter() = default;
-    boilerplate_formatter& operator=(const boilerplate_formatter&) = default;
+    boilerplate_formatter& operator=(const boilerplate_formatter&) = delete;
+    boilerplate_formatter(boilerplate_formatter&& rhs) = default;
 
 public:
-    bool operator==(const boilerplate_formatter& rhs) const;
-    bool operator!=(const boilerplate_formatter& rhs) const {
-        return !this->operator==(rhs);
-    }
+    /**
+     * @brief Initialise boiler plate formatter.
+     *
+     * @param generate_preamble if true, the preamble will be
+     * generated.
+     */
+    explicit boilerplate_formatter(const bool generate_preamble = true);
 
+private:
+    /**
+     * @brief Formats the file's preamble.
+     *
+     * The preamble is made up of the modeline, any potential code
+     * generation marker and the licence.
+     */
+    void format_preamble(std::ostream& s,
+        const decoration_properties& dc) const;
+
+    /**
+     * @brief Formats the file's postamble.
+     *
+     * The postamble is composed of a bottom modeline, if any.
+     */
+    void format_postamble(std::ostream& s,
+        const decoration_properties& dc) const;
+
+    /**
+     * @brief Formats the using statements.
+     */
+    void format_usings(std::ostream& s,
+        const std::list<std::string>& usings) const;
+
+public:
+    /**
+     * @brief Formats the initial section of boilerplate.
+     */
+    void format_begin(std::ostream& s, const decoration_properties& dc,
+        const std::list<std::string>& usings) const;
+
+    /**
+     * @brief Formats the end of the boilerplate.
+     */
+    void format_end(std::ostream& s, const decoration_properties& dc) const;
+
+private:
+    const bool generate_preamble_;
 };
 
 } } }

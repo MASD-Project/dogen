@@ -8715,7 +8715,7 @@ then make use of it.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
-            <dia:enum val="0"/>
+            <dia:enum val="1"/>
           </dia:attribute>
           <dia:attribute name="abstract">
             <dia:boolean val="false"/>
@@ -8726,7 +8726,7 @@ then make use of it.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#inclusion_dependencies_#</dia:string>
+            <dia:string>#includes_#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::list&lt;std::string&gt;#</dia:string>
@@ -8738,7 +8738,7 @@ then make use of it.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
-            <dia:enum val="0"/>
+            <dia:enum val="1"/>
           </dia:attribute>
           <dia:attribute name="abstract">
             <dia:boolean val="false"/>
@@ -8761,7 +8761,7 @@ then make use of it.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
-            <dia:enum val="0"/>
+            <dia:enum val="1"/>
           </dia:attribute>
           <dia:attribute name="abstract">
             <dia:boolean val="false"/>
@@ -8837,7 +8837,7 @@ then make use of it.
             </dia:composite>
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#inclusion_dependencies#</dia:string>
+                <dia:string>#includes#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
                 <dia:string>#std::list&lt;std::string&gt;#</dia:string>
@@ -11628,13 +11628,13 @@ than one element.#</dia:string>
         <dia:point val="60,49"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="59.95,48.95;87.115,52.65"/>
+        <dia:rectangle val="59.95,48.95;86.345,52.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="60,49"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.064999999999998"/>
+        <dia:real val="26.294999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -11776,7 +11776,7 @@ than one element.#</dia:string>
             </dia:composite>
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#includes#</dia:string>
+                <dia:string>#usings#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
                 <dia:string>#const std::list&lt;std::string&gt;&amp;#</dia:string>
@@ -12290,7 +12290,7 @@ than one element.#</dia:string>
         <dia:point val="82.185,39.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="73.4825,38.65;82.935,50.6"/>
+        <dia:rectangle val="73.0975,38.65;82.935,50.6"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -12298,8 +12298,8 @@ than one element.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="82.185,39.4"/>
         <dia:point val="82.185,45"/>
-        <dia:point val="73.5325,45"/>
-        <dia:point val="73.5325,49"/>
+        <dia:point val="73.1475,45"/>
+        <dia:point val="73.1475,49"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

@@ -69,8 +69,8 @@ make_licence(const bool is_empty, const bool is_multiline) const {
     return r;
 }
 
-std::list<std::string> mock_decoration_properties_factory::make_includes(
-    const bool is_empty) const {
+std::list<std::string> mock_decoration_properties_factory::
+make_includes(const bool is_empty) const {
     std::list<std::string> r;
     if (is_empty)
         return r;
@@ -80,6 +80,18 @@ std::list<std::string> mock_decoration_properties_factory::make_includes(
     r.push_back("<unix/system_inc_2>");
     r.push_back("\"user_inc_1\"");
     r.push_back("\"user_inc_2\"");
+    return r;
+}
+
+std::list<std::string> mock_decoration_properties_factory::
+make_usings(const bool is_empty) const {
+    std::list<std::string> r;
+    if (is_empty)
+        return r;
+
+    r.push_back("System");
+    r.push_back("System.Linq");
+    r.push_back("ICSharpCode.NRefactory.Editor");
     return r;
 }
 

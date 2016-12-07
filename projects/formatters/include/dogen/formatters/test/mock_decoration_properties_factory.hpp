@@ -55,6 +55,11 @@ public:
     std::list<std::string> make_includes(const bool is_empty = false) const;
 
     /**
+     * @brief Generates usings.
+     */
+    std::list<std::string> make_usings(const bool is_empty = false) const;
+
+    /**
      * @brief Generates a code generation marker.
      */
     std::string make_marker(const bool is_empty = false) const;

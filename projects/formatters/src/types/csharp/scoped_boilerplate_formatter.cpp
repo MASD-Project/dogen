@@ -18,14 +18,31 @@
  * MA 02110-1301, USA.
  *
  */
+#include <ostream>
 #include "dogen/formatters/types/csharp/scoped_boilerplate_formatter.hpp"
 
 namespace dogen {
 namespace formatters {
 namespace csharp {
 
-bool scoped_boilerplate_formatter::operator==(const scoped_boilerplate_formatter& /*rhs*/) const {
-    return true;
+scoped_boilerplate_formatter::scoped_boilerplate_formatter(std::ostream& s,
+    const boost::optional<decoration_properties>& odp,
+    const std::list<std::string>& usings)
+    : stream_(s), decoration_properties_(odp), usings_(usings) {
+
+    if (!decoration_properties_)
+        return;
+
+    const auto& dc(*decoration_properties_);
+    formatter_.format_begin(stream_, dc, usings);
+}
+
+scoped_boilerplate_formatter::~scoped_boilerplate_formatter() {
+    if (!decoration_properties_)
+        return;
+
+    const auto& dc(*decoration_properties_);
+    formatter_.format_end(stream_, dc);
 }
 
 } } }

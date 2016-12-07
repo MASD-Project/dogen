@@ -44,7 +44,7 @@ public:
     scoped_boilerplate_formatter(
         std::ostream& s,
         const boost::optional<decoration_properties>& odp,
-        const std::list<std::string>& inclusion_dependencies,
+        const std::list<std::string>& includes,
         const std::string& header_guard);
 
     ~scoped_boilerplate_formatter();
@@ -52,9 +52,9 @@ public:
 private:
     std::ostream& stream_;
     const boost::optional<decoration_properties> decoration_properties_;
-    const std::list<std::string> inclusion_dependencies_;
+    const std::list<std::string> includes_;
     const std::string header_guard_;
-    const dogen::formatters::cpp::boilerplate_formatter formatter_;
+    const boilerplate_formatter formatter_;
 };
 
 } } }

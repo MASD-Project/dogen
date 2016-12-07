@@ -25,20 +25,17 @@ namespace dogen {
 namespace formatters {
 namespace cpp {
 
-scoped_boilerplate_formatter::
-scoped_boilerplate_formatter(std::ostream& s,
+scoped_boilerplate_formatter::scoped_boilerplate_formatter(std::ostream& s,
     const boost::optional<decoration_properties>& odp,
-    const std::list<std::string>& inclusion_dependencies,
-    const std::string& header_guard)
-    : stream_(s), decoration_properties_(odp),
-      inclusion_dependencies_(inclusion_dependencies),
+    const std::list<std::string>& includes, const std::string& header_guard)
+    : stream_(s), decoration_properties_(odp), includes_(includes),
       header_guard_(header_guard) {
 
     if (!decoration_properties_)
         return;
 
     const auto& dc(*decoration_properties_);
-    formatter_.format_begin(stream_, dc, inclusion_dependencies, header_guard);
+    formatter_.format_begin(stream_, dc, includes, header_guard);
 }
 
 scoped_boilerplate_formatter::~scoped_boilerplate_formatter() {

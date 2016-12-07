@@ -38,7 +38,7 @@ namespace cpp {
  */
 class namespace_formatter {
 public:
-    namespace_formatter(const bool create_anonymous_namespace = true,
+    explicit namespace_formatter(const bool create_anonymous_namespace = true,
         const bool add_new_line = false);
 
 public:

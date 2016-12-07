@@ -18,14 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
+#include <ostream>
+#include <boost/filesystem/path.hpp>
+#include "dogen/formatters/types/indent_filter.hpp"
 #include "dogen/formatters/types/csharp/using_formatter.hpp"
 
 namespace dogen {
 namespace formatters {
 namespace csharp {
 
-bool using_formatter::operator==(const using_formatter& /*rhs*/) const {
-    return true;
+void using_formatter::
+format(std::ostream& s, const std::list<std::string>& usings) const {
+    for (const auto& u : usings)
+        s << "using " <<  u<< std::endl;
+
+    if (!usings.empty())
+        s << dogen::formatters::manage_blank_lines << std::endl;
 }
 
 } } }

@@ -18,14 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
+#include <ostream>
 #include "dogen/formatters/types/csharp/scoped_namespace_formatter.hpp"
 
 namespace dogen {
 namespace formatters {
 namespace csharp {
 
-bool scoped_namespace_formatter::operator==(const scoped_namespace_formatter& /*rhs*/) const {
-    return true;
+scoped_namespace_formatter::scoped_namespace_formatter(
+    std::ostream& s, const std::list<std::string>& ns,
+    const bool add_new_line) :
+    stream_(s), namespaces_(ns), formatter_(add_new_line) {
+    formatter_.format_begin(stream_, namespaces_);
+}
+
+scoped_namespace_formatter::~scoped_namespace_formatter() {
+    formatter_.format_end(stream_, namespaces_);
 }
 
 } } }
