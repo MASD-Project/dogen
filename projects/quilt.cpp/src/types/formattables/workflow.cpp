@@ -18,13 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include <memory>
-#include <algorithm>
-#include <forward_list>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/utility/io/memory_io.hpp"
-#include "dogen/utility/io/unordered_map_io.hpp"
-#include "dogen/utility/io/forward_list_io.hpp"
 #include "dogen/yarn/types/element_visitor.hpp"
 #include "dogen/quilt.cpp/types/formattables/transformer.hpp"
 #include "dogen/quilt.cpp/types/formattables/model_expander.hpp"

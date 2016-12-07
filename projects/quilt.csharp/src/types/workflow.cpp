@@ -21,6 +21,7 @@
 #include <boost/algorithm/string/join.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/quilt.csharp/types/traits.hpp"
+#include "dogen/quilt.csharp/types/formattables/workflow.hpp"
 #include "dogen/quilt.csharp/types/formatters/workflow.hpp"
 #include "dogen/quilt.csharp/types/workflow.hpp"
 
@@ -40,6 +41,17 @@ namespace csharp {
 
 workflow::~workflow() noexcept { }
 
+formattables::model workflow::create_formattables_model(
+    const options::knitting_options& ko,
+    const annotations::type_repository& atrp,
+    const annotations::annotation& ra,
+    const dogen::formatters::decoration_properties_factory& dpf,
+    const formatters::repository& frp, const bool enable_kernel_directories,
+    const yarn::model& m) const {
+    formattables::workflow fw;
+    return fw.execute(ko, atrp, ra, dpf, frp, enable_kernel_directories, m);
+}
+
 std::forward_list<boost::filesystem::path> workflow::
 managed_directories(const options::knitting_options& ko,
     const yarn::name& model_name) const {
@@ -48,6 +60,16 @@ managed_directories(const options::knitting_options& ko,
     std::forward_list<boost::filesystem::path> r;
     r.push_front(ko.output_directory_path() / mn);
     return r;
+}
+
+std::forward_list<dogen::formatters::artefact>
+workflow::format(const annotations::type_repository& /*atrp*/,
+    const annotations::annotation_groups_factory& /*agf*/,
+    const dogen::formatters::repository& /*drp*/,
+    const formattables::model& fm) const {
+    // formatters::workflow wf(atrp, agf, drp);
+    formatters::workflow wf;
+    return wf.execute(fm);
 }
 
 annotations::archetype_location workflow::archetype_location() const {
@@ -62,14 +84,22 @@ workflow::archetype_locations() const {
 }
 
 std::forward_list<dogen::formatters::artefact> workflow::generate(
-    const options::knitting_options& /*ko*/,
-    const annotations::type_repository& /*atrp*/,
-    const annotations::annotation_groups_factory& /*agf*/,
-    const dogen::formatters::repository& /*drp*/,
-    const dogen::formatters::decoration_properties_factory& /*dpf*/,
-    const bool /*requires_kernel_directory*/,
-    const yarn::model& /*m*/) const {
-    std::forward_list<dogen::formatters::artefact> r;
+    const options::knitting_options& ko,
+    const annotations::type_repository& atrp,
+    const annotations::annotation_groups_factory& agf,
+    const dogen::formatters::repository& drp,
+    const dogen::formatters::decoration_properties_factory& dpf,
+    const bool enable_kernel_directories,
+    const yarn::model& m) const {
+    BOOST_LOG_SEV(lg, debug) << "Started backend.";
+
+    const auto ra(m.root_module().annotation());
+    const auto& frp(formatters::workflow::registrar().formatter_repository());
+    const bool ekd(enable_kernel_directories);
+    const auto fm(create_formattables_model(ko, atrp, ra, dpf, frp, ekd, m));
+
+    const auto r(format(atrp, agf, drp, fm));
+    BOOST_LOG_SEV(lg, debug) << "Finished backend.";
     return r;
 }
 

@@ -38,8 +38,8 @@
 #include "dogen/formatters/types/decoration_properties_factory.hpp"
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/quilt/types/kernel_interface.hpp"
-#include "dogen/quilt.cpp/types/formatters/repository.hpp"
-#include "dogen/quilt.cpp/types/formattables/model.hpp"
+#include "dogen/quilt.csharp/types/formatters/repository.hpp"
+#include "dogen/quilt.csharp/types/formattables/model.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -57,6 +57,21 @@ public:
 public:
     ~workflow() noexcept;
 
+private:
+    formattables::model create_formattables_model(
+        const options::knitting_options& ko,
+        const annotations::type_repository& atrp,
+        const annotations::annotation& ra,
+        const dogen::formatters::decoration_properties_factory& dpf,
+        const formatters::repository& frp, const bool enable_kernel_directories,
+        const yarn::model& m) const;
+
+    std::forward_list<dogen::formatters::artefact> format(
+        const annotations::type_repository& atrp,
+        const annotations::annotation_groups_factory& agf,
+        const dogen::formatters::repository& drp,
+        const formattables::model& fm) const;
+
 public:
     std::forward_list<boost::filesystem::path>
         managed_directories(const options::knitting_options& ko,
@@ -73,7 +88,7 @@ public:
         const annotations::annotation_groups_factory& agf,
         const dogen::formatters::repository& drp,
         const dogen::formatters::decoration_properties_factory& dpf,
-        const bool requires_kernel_directory,
+        const bool enable_kernel_directories,
         const yarn::model& m) const override;
 };
 

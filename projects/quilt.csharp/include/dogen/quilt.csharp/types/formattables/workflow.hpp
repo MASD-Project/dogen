@@ -25,27 +25,43 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen/annotations/types/annotation.hpp"
+#include "dogen/annotations/types/type_repository.hpp"
+#include "dogen/options/types/knitting_options.hpp"
+#include "dogen/formatters/types/decoration_properties_factory.hpp"
+#include "dogen/yarn/types/model.hpp"
+#include "dogen/quilt.csharp/types/formattables/model.hpp"
+#include "dogen/quilt.csharp/types/formattables/locator.hpp"
+#include "dogen/quilt.csharp/types/formatters/repository.hpp"
+#include "dogen/quilt.csharp/types/formattables/formattable.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace csharp {
 namespace formattables {
 
-class workflow final {
-public:
-    workflow() = default;
-    workflow(const workflow&) = default;
-    workflow(workflow&&) = default;
-    ~workflow() = default;
-    workflow& operator=(const workflow&) = default;
+class workflow {
+private:
+    /**
+     * @brief Retrieves the ids of all the modules in the model.
+     */
+    model
+    make_model(const formatters::repository& frp, const yarn::model& m) const;
+
+    void expand_model(
+        const annotations::type_repository& atrp,
+        const annotations::annotation& ra,
+        const dogen::formatters::decoration_properties_factory& dpf,
+        const formatters::repository& frp, const locator& l, model& fm) const;
 
 public:
-    bool operator==(const workflow& rhs) const;
-    bool operator!=(const workflow& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    model execute(
+        const options::knitting_options& ko,
+        const annotations::type_repository& atrp,
+        const annotations::annotation& ra,
+        const dogen::formatters::decoration_properties_factory& dpf,
+        const formatters::repository& frp, const bool enable_kernel_directories,
+        const yarn::model& m) const;
 };
 
 } } } }

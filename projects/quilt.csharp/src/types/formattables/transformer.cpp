@@ -18,15 +18,77 @@
  * MA 02110-1301, USA.
  *
  */
+#include <typeindex>
+#include <boost/throw_exception.hpp>
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/quilt.csharp/types/formattables/artefact_properties.hpp"
+#include "dogen/quilt.csharp/types/formattables/transformation_error.hpp"
+#include "dogen/quilt.csharp/types/formatters/artefact_formatter_interface.hpp"
 #include "dogen/quilt.csharp/types/formattables/transformer.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory("quilt.cpp.formattables.transformer"));
+
+}
 
 namespace dogen {
 namespace quilt {
 namespace csharp {
 namespace formattables {
 
-bool transformer::operator==(const transformer& /*rhs*/) const {
-    return true;
+std::unordered_map<std::string, formattable> transformer::
+transform(const formatters::repository& frp, const yarn::model& m) const {
+    BOOST_LOG_SEV(lg, debug) << "Transforming yarn to formattables."
+                             << " Elements in model: " << m.elements().size();
+
+    std::unordered_map<std::string, formattable> r;
+    for (const auto& ptr : m.elements()) {
+        formattable fbl;
+        fbl.element(ptr);
+
+        const auto& e(*ptr);
+        const auto id(e.name().id());
+        BOOST_LOG_SEV(lg, debug) << "Processing element: " << id;
+
+        /*
+         * In C# we do not care about element extensions, just the
+         * master segment.
+         */
+        if (e.is_element_extension())
+            continue;
+
+        /*
+         * Check to see if the element has any formatters.
+         */
+        const auto ti(std::type_index(typeid(e)));
+        const auto j(frp.stock_artefact_formatters_by_type_index().find(ti));
+        if (j == frp.stock_artefact_formatters_by_type_index().end()) {
+            BOOST_LOG_SEV(lg, debug) << "Element has no formatters: " << id;
+            continue;
+        }
+        BOOST_LOG_SEV(lg, debug) << "Element has formatters " << id;
+
+        /*
+         * Perform the artefact expansion by looking at all the
+         * archetypes available via the formatters.
+         */
+        auto& art_props(fbl.element_properties().artefact_properties());
+        for (const auto& fmt : j->second) {
+            const auto arch(fmt->archetype_location().archetype());
+            art_props[arch] = artefact_properties();
+
+            BOOST_LOG_SEV(lg, trace) << "Added formatter: " << arch
+                                     << " to element: " << id;
+        }
+
+        r[id] = fbl;
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Finished transforming yarn to formattables."
+                             << "Size: " << r.size();
+    return r;
 }
 
 } } } }

@@ -47,12 +47,15 @@ csharp::formatters::registrar& workflow::registrar() {
 }
 
 std::forward_list<dogen::formatters::artefact>
-workflow::execute(const yarn::model& m) const {
+workflow::execute(const formattables::model& fm) const {
 
-    BOOST_LOG_SEV(lg, debug) << "Started formatting. Model " << m.name().id();
+    BOOST_LOG_SEV(lg, debug) << "Started formatting. Model " << fm.name().id();
     std::forward_list<dogen::formatters::artefact> r;
-    for (const auto& eptr : m.elements()) {
-        const auto& e(*eptr);
+    for (const auto& pair : fm.formattables()) {
+        const auto& formattable(pair.second);
+        // const auto& eprops(formattable.element_properties());
+
+        const auto& e(*formattable.element());
         const auto id(e.name().id());
         BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
 

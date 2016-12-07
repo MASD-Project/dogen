@@ -25,27 +25,28 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include <unordered_map>
+#include "dogen/yarn/types/model.hpp"
+#include "dogen/quilt.csharp/types/formatters/repository.hpp"
+#include "dogen/quilt.csharp/types/formattables/formattable.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace csharp {
 namespace formattables {
 
-class transformer final {
+/**
+ * @brief Provides a number of useful transformations in the
+ * formattables space.
+ */
+class transformer {
 public:
-    transformer() = default;
-    transformer(const transformer&) = default;
-    transformer(transformer&&) = default;
-    ~transformer() = default;
-    transformer& operator=(const transformer&) = default;
-
-public:
-    bool operator==(const transformer& rhs) const;
-    bool operator!=(const transformer& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    /**
+     * @brief Given a yarn model, produces the corresponding formattables.
+     */
+    std::unordered_map<std::string, formattable>
+    transform(const formatters::repository& frp, const yarn::model& m) const;
 };
 
 } } } }

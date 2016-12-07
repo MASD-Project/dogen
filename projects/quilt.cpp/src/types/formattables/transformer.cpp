@@ -32,7 +32,6 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("quilt.cpp.formattables.transformer"));
 
 const std::string duplicate_archetype("Duplicate archetype: ");
-const std::string duplicate_element("Duplicate element id: ");
 
 }
 

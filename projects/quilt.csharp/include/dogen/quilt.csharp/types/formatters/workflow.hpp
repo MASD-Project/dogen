@@ -28,7 +28,7 @@
 #include <memory>
 #include <forward_list>
 #include "dogen/formatters/types/artefact.hpp"
-#include "dogen/yarn/types/model.hpp"
+#include "dogen/quilt.csharp/types/formattables/model.hpp"
 #include "dogen/quilt.csharp/types/formatters/registrar.hpp"
 
 namespace dogen {
@@ -49,7 +49,7 @@ public:
 
 public:
     std::forward_list<dogen::formatters::artefact>
-    execute(const yarn::model& m) const;
+    execute(const formattables::model& fm) const;
 
 private:
     static std::shared_ptr<csharp::formatters::registrar> registrar_;

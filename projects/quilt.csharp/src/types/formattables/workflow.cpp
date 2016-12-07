@@ -18,15 +18,58 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/quilt.csharp/types/formattables/transformer.hpp"
+#include "dogen/quilt.csharp/types/formattables/model_expander.hpp"
 #include "dogen/quilt.csharp/types/formattables/workflow.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory("quilt.csharp.formattables.workflow"));
+
+}
 
 namespace dogen {
 namespace quilt {
 namespace csharp {
 namespace formattables {
 
-bool workflow::operator==(const workflow& /*rhs*/) const {
-    return true;
+model workflow::
+make_model(const formatters::repository& frp, const yarn::model& m) const {
+    model r;
+    r.name(m.name());
+
+    transformer t;
+    r.formattables(t.transform(frp, m));
+
+    return r;
+}
+
+void workflow::expand_model(
+    const annotations::type_repository& /*atrp*/,
+    const annotations::annotation& /*ra*/,
+    const dogen::formatters::decoration_properties_factory& /*dpf*/,
+    const formatters::repository& /*frp*/, const locator& /*l*/, model& /*fm*/) const {
+    /*model_expander ex;
+      ex.expand(atrp, ra, dpf, frp, l, fm);*/
+}
+
+model workflow::execute(
+    const options::knitting_options& /*ko*/,
+    const annotations::type_repository& /*atrp*/,
+    const annotations::annotation& /*ra*/,
+    const dogen::formatters::decoration_properties_factory& /*dpf*/,
+    const formatters::repository& frp, const bool /*enable_kernel_directories*/,
+    const yarn::model& m) const {
+
+    auto r(make_model(frp, m));
+    /*const auto odp(ko.output_directory_path());
+    const auto rkd(enable_kernel_directories);
+    const locator l(odp, atrp, frp, ra, m.name(), rkd);
+    expand_model(atrp, ra, dpf, frp, l, r);*/
+
+    return r;
 }
 
 } } } }
