@@ -53,7 +53,7 @@ public:
      * @param generate_header_guards if true, header guards will be
      * generated.
      */
-    boilerplate_formatter(const bool generate_preamble = true,
+    explicit boilerplate_formatter(const bool generate_preamble = true,
         const bool generate_header_guards = true);
 
 private:
