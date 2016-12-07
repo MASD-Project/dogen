@@ -80,7 +80,7 @@
         <dia:real val="12.400000000000002"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#SomeClass#</dia:string>
+        <dia:string>#AllPrimitives#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
