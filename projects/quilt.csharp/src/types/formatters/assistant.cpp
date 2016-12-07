@@ -18,12 +18,49 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/quilt.csharp/types/formatters/formatting_error.hpp"
 #include "dogen/quilt.csharp/types/formatters/assistant.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory("quilt.csharp.formatters.assistant"));
+
+const std::string artefact_properties_missing(
+    "Could not find formatter configuration for formatter: ");
+
+}
 
 namespace dogen {
 namespace quilt {
 namespace csharp {
 namespace formatters {
+
+assistant::
+assistant(const context& ctx, const annotations::archetype_location& al,
+    const std::string& id) :
+    element_id_(id), context_(ctx),
+    artefact_properties_(obtain_artefact_properties(al.archetype())),
+    archetype_location_(al) {
+
+    BOOST_LOG_SEV(lg, debug) << "Processing element: " << element_id_
+                             << " for archetype: " << al.archetype();
+
+}
+
+const formattables::artefact_properties& assistant::
+obtain_artefact_properties(const std::string& archetype) const {
+    const auto& eprops(context_.element_properties());
+    const auto i(eprops.artefact_properties().find(archetype));
+    if (i == eprops.artefact_properties().end()) {
+        BOOST_LOG_SEV(lg, error) << artefact_properties_missing
+                                 << archetype;
+        BOOST_THROW_EXCEPTION(
+            formatting_error(artefact_properties_missing + archetype));
+    }
+    return i->second;
+}
 
 std::ostream& assistant::stream() {
     return stream_;
@@ -32,8 +69,8 @@ std::ostream& assistant::stream() {
 dogen::formatters::artefact assistant::make_artefact() const {
     dogen::formatters::artefact r;
     r.content(stream_.str());
-    // r.path(artefact_properties_.file_path());
-    // r.overwrite(artefact_properties_.overwrite());
+    r.path(artefact_properties_.file_path());
+    r.overwrite(artefact_properties_.overwrite());
 
     return r;
 }

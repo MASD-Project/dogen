@@ -333,7 +333,7 @@ private:
     const std::string element_id_;
     const context& context_;
     formattables::artefact_properties artefact_properties_;
-    const annotations::archetype_location ownership_hierarchy_;
+    const annotations::archetype_location archetype_location_;
     const bool requires_header_guard_;
 };
 

@@ -25,6 +25,9 @@
 #pragma once
 #endif
 
+#include <string>
+#include <boost/exception/info.hpp>
+
 namespace dogen {
 namespace quilt {
 namespace csharp {
@@ -33,8 +36,19 @@ namespace formattables {
 /**
  * @brief An error occurred whilst performing model expansion.
  */
-enum class expansion_error : unsigned int {
-    invalid = 0 ///< Represents an uninitialised enum
+class expansion_error : public virtual std::exception, public virtual boost::exception {
+public:
+    expansion_error() = default;
+    ~expansion_error() noexcept = default;
+
+public:
+    expansion_error(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
 };
 
 } } } }

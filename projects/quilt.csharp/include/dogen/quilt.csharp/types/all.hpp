@@ -52,6 +52,7 @@
 #include "dogen/quilt.csharp/types/formatters/registrar_error.hpp"
 #include "dogen/quilt.csharp/types/formattables/model_expander.hpp"
 #include "dogen/quilt.csharp/types/formattables/using_expander.hpp"
+#include "dogen/quilt.csharp/types/formatters/formatting_error.hpp"
 #include "dogen/quilt.csharp/types/formatters/test_data/traits.hpp"
 #include "dogen/quilt.csharp/types/fabric/visual_studio_project.hpp"
 #include "dogen/quilt.csharp/types/formattables/expansion_error.hpp"

@@ -60,14 +60,13 @@ model workflow::execute(
     const annotations::type_repository& atrp,
     const annotations::annotation& ra,
     const dogen::formatters::decoration_properties_factory& dpf,
-    const formatters::repository& frp, const bool /*enable_kernel_directories*/,
+    const formatters::repository& frp, const bool enable_kernel_directories,
     const yarn::model& m) const {
 
     auto r(make_model(frp, m));
     const auto odp(ko.output_directory_path());
-    // const auto rkd(enable_kernel_directories);
-    // const locator l(odp, atrp, frp, ra, m.name(), rkd);
-    locator l;
+    const auto rkd(enable_kernel_directories);
+    const locator l(odp, atrp, frp, ra, m.name(), m.module_ids(), rkd);
     expand_model(atrp, ra, dpf, frp, l, r);
 
     return r;

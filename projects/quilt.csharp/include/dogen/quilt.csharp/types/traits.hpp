@@ -50,6 +50,11 @@ struct traits {
      * @brief Name of this kernel.
      */
     static std::string kernel();
+
+    /**
+     * @brief Name of the directory housing the kernel.
+     */
+    static std::string kernel_directory_name();
 };
 
 } } }

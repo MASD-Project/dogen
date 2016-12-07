@@ -39,4 +39,9 @@ std::string traits::enabled() {
     return r;
 }
 
+std::string traits::kernel_directory_name() {
+    static std::string r("quilt.csharp.directory");
+    return r;
+}
+
 } } }

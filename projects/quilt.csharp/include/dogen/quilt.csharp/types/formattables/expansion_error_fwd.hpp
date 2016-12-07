@@ -30,7 +30,7 @@ namespace quilt {
 namespace csharp {
 namespace formattables {
 
-enum class expansion_error : unsigned int;
+class expansion_error;
 
 } } } }
 

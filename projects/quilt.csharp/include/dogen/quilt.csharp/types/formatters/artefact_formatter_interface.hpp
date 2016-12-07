@@ -32,6 +32,7 @@
 #include "dogen/formatters/types/artefact.hpp"
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/quilt.csharp/types/formattables/locator.hpp"
+#include "dogen/quilt.csharp/types/formatters/context.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -81,7 +82,7 @@ public:
      * @brief Generate a file representation for the element.
      */
     virtual dogen::formatters::artefact
-    format(const yarn::element& e) const = 0;
+    format(const context& ctx, const yarn::element& e) const = 0;
 };
 
 } } } }

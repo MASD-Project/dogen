@@ -18,15 +18,63 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/types/element.hpp"
+#include "dogen/quilt.csharp/types/formatters/artefact_formatter_interface.hpp"
+#include "dogen/quilt.csharp/types/formattables/expansion_error.hpp"
 #include "dogen/quilt.csharp/types/formattables/file_path_expander.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory(
+        "quilt.csharp.formattables.file_path_expander"));
+
+const std::string missing_archetype("Archetype not found: ");
+
+}
 
 namespace dogen {
 namespace quilt {
 namespace csharp {
 namespace formattables {
 
-bool file_path_expander::operator==(const file_path_expander& /*rhs*/) const {
-    return true;
+void file_path_expander::
+expand(const formatters::repository& frp, const locator& l, model& fm) const {
+
+    const auto safba(frp.stock_artefact_formatters_by_archetype());
+    for (auto& pair : fm.formattables()) {
+        const auto id(pair.first);
+        auto& formattable(pair.second);
+
+        const auto& e(*formattable.element());
+        const auto n(e.name());
+        auto& eprops(formattable.element_properties());
+
+        /*
+         * Go thorough all the artefact properties and, for each, find
+         * the associated formatter.
+         */
+        for (auto& pair : eprops.artefact_properties()) {
+            const auto arch(pair.first);
+            auto& art_props(pair.second);
+
+            const auto i(safba.find(arch));
+            if (i == safba.end()) {
+                BOOST_LOG_SEV(lg, error) << missing_archetype << arch;
+                BOOST_THROW_EXCEPTION(
+                    expansion_error(missing_archetype + arch));
+            }
+
+            /*
+             * Ask the formatter to generate the full path for the
+             * artefact.
+             */
+            const auto& fmt(i->second);
+            art_props.file_path(fmt->full_path(l, n));
+        }
+    }
 }
 
 } } } }

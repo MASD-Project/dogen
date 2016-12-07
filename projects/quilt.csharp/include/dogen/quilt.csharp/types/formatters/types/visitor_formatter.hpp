@@ -52,7 +52,7 @@ public:
 
 public:
     dogen::formatters::artefact
-    format(const yarn::element& e) const override;
+    format(const context& ctx, const yarn::element& e) const override;
 };
 
 } } } } }

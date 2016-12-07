@@ -101,7 +101,7 @@ assistant(const context& ctx, const annotations::archetype_location& al,
     context_(ctx),
     artefact_properties_(
         obtain_artefact_properties(element_id_, al.archetype())),
-    ownership_hierarchy_(al), requires_header_guard_(requires_header_guard) {
+    archetype_location_(al), requires_header_guard_(requires_header_guard) {
 
     BOOST_LOG_SEV(lg, debug) << "Processing element: " << element_id_
                              << " for archetype: " << al.archetype();
@@ -113,7 +113,7 @@ assistant(const context& ctx, const annotations::archetype_location& al,
 }
 
 void assistant::validate() const {
-    const auto& fn(ownership_hierarchy_.archetype());
+    const auto& fn(archetype_location_.archetype());
     const auto& fp(artefact_properties_);
     if (fp.file_path().empty()) {
         BOOST_LOG_SEV(lg, error) << file_path_not_set << fn;
@@ -416,20 +416,20 @@ assistant::get_helpers(const formattables::helper_properties& hp) const {
      * Not all formatters need help, so its fine not to have a
      * helper registered against a particular formatter.
      */
-    const auto j(i->second.find(ownership_hierarchy_.archetype()));
+    const auto j(i->second.find(archetype_location_.archetype()));
     if (j != i->second.end()) {
         BOOST_LOG_SEV(lg, debug) << "Found helpers for formatter: "
-                                 << ownership_hierarchy_.archetype();
+                                 << archetype_location_.archetype();
         return j->second;
     }
 
     BOOST_LOG_SEV(lg, debug) << "Could not find helpers for formatter:"
-                             << ownership_hierarchy_.archetype();
+                             << archetype_location_.archetype();
     return std::list<std::shared_ptr<formatters::helper_formatter_interface>>();
 }
 
 bool assistant::is_io() const {
-    const auto fn(ownership_hierarchy_.facet());
+    const auto fn(archetype_location_.facet());
     return formatters::io::traits::facet()  == fn;
 }
 
@@ -454,7 +454,7 @@ is_streaming_enabled(const formattables::helper_properties& hp) const {
      */
     using tt = formatters::types::traits;
     const auto cifn(tt::class_implementation_archetype());
-    const auto arch(ownership_hierarchy_.archetype());
+    const auto arch(archetype_location_.archetype());
     bool in_types_class_implementation(arch == cifn);
     return in_types_class_implementation && hp.in_inheritance_relationship();
 }

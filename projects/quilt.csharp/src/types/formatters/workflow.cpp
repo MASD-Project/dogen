@@ -20,6 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/quilt.csharp/types/formatters/context.hpp"
 #include "dogen/quilt.csharp/types/formatters/workflow.hpp"
 
 namespace {
@@ -69,13 +70,14 @@ workflow::execute(const formattables::model& fm) const {
             return r;
         }
 
+        context ctx(formattable.element_properties());
         const auto& fmts(i->second);
         for (const auto& fmt_ptr : fmts) {
             const auto& fmt(*fmt_ptr);
             const auto fmtn(fmt.formatter_name());
             BOOST_LOG_SEV(lg, debug) << "Using formatter: " << fmtn;
 
-            const auto artefact(fmt.format(e));
+            const auto artefact(fmt.format(ctx, e));
             const auto& p(artefact.path());
 
             BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;

@@ -56,10 +56,8 @@ std::type_index class_formatter::element_type_index() const {
 }
 
 boost::filesystem::path class_formatter::
-full_path(const formattables::locator& /*l*/, const yarn::name& /*n*/) const {
-    boost::filesystem::path r;
-    return r;
-    //return l.make_full_path(n, static_artefact());
+full_path(const formattables::locator& l, const yarn::name& n) const {
+    return l.make_full_path(n, static_artefact());
 }
 
 std::list<std::string> class_formatter::
@@ -68,9 +66,10 @@ inclusion_dependencies(const yarn::element& /*e*/) const {
     return r;
 }
 
-dogen::formatters::artefact class_formatter::format(const yarn::element& e) const {
-    assistant a;
+dogen::formatters::artefact
+class_formatter::format(const context& ctx, const yarn::element& e) const {
     const auto id(e.name().id());
+    assistant a(ctx, archetype_location(), id);
     {
         const auto sn(e.name().simple());
         // const auto qn(a.get_qualified_name(e.name()));

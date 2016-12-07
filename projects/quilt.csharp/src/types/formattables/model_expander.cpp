@@ -19,12 +19,19 @@
  *
  */
 #include "dogen/quilt.csharp/types/formattables/reducer.hpp"
+#include "dogen/quilt.csharp/types/formattables/file_path_expander.hpp"
 #include "dogen/quilt.csharp/types/formattables/model_expander.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace csharp {
 namespace formattables {
+
+void model_expander::expand_file_paths(
+    const formatters::repository& frp, const locator& l, model& fm) const {
+    file_path_expander ex;
+    ex.expand(frp, l, fm);
+}
 
 void model_expander::reduce(model& fm) const {
     reducer rd;
@@ -35,9 +42,10 @@ void model_expander::expand(
     const annotations::type_repository& /*atrp*/,
     const annotations::annotation& /*ra*/,
     const dogen::formatters::decoration_properties_factory& /*dpf*/,
-    const formatters::repository& /*frp*/, const locator& /*l*/, model& fm) const {
+    const formatters::repository& frp, const locator& l, model& fm) const {
 
     reduce(fm);
+    expand_file_paths(frp, l, fm);
 }
 
 } } } }

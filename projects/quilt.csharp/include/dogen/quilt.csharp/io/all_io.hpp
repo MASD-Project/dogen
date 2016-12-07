@@ -29,7 +29,6 @@
 #include "dogen/quilt.csharp/io/formatters/repository_io.hpp"
 #include "dogen/quilt.csharp/io/formattables/formattable_io.hpp"
 #include "dogen/quilt.csharp/io/fabric/visual_studio_project_io.hpp"
-#include "dogen/quilt.csharp/io/formattables/expansion_error_io.hpp"
 #include "dogen/quilt.csharp/io/formattables/element_properties_io.hpp"
 #include "dogen/quilt.csharp/io/formattables/artefact_properties_io.hpp"
 #include "dogen/quilt.csharp/io/formattables/locator_configuration_io.hpp"

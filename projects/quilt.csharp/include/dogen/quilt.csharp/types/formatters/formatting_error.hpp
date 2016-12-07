@@ -18,20 +18,39 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CSHARP_SERIALIZATION_FORMATTABLES_EXPANSION_ERROR_SER_HPP
-#define DOGEN_QUILT_CSHARP_SERIALIZATION_FORMATTABLES_EXPANSION_ERROR_SER_HPP
+#ifndef DOGEN_QUILT_CSHARP_TYPES_FORMATTERS_FORMATTING_ERROR_HPP
+#define DOGEN_QUILT_CSHARP_TYPES_FORMATTERS_FORMATTING_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/nvp.hpp>
-#include "dogen/quilt.csharp/types/formattables/expansion_error.hpp"
+#include <string>
+#include <boost/exception/info.hpp>
 
-template<class Archive>
-void serialize(Archive& ar, dogen::quilt::csharp::formattables::expansion_error& v, unsigned int /*version*/){
-    using boost::serialization::make_nvp;
-    ar & make_nvp("expansion_error", v);
-}
+namespace dogen {
+namespace quilt {
+namespace csharp {
+namespace formatters {
+
+/**
+ * @brief An error occurred whilst formatting.
+ */
+class formatting_error : public virtual std::exception, public virtual boost::exception {
+public:
+    formatting_error() = default;
+    ~formatting_error() noexcept = default;
+
+public:
+    formatting_error(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
+};
+
+} } } }
 
 #endif

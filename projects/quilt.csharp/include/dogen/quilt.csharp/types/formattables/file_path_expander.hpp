@@ -25,7 +25,10 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <boost/filesystem/path.hpp>
+#include "dogen/quilt.csharp/types/formatters/repository.hpp"
+#include "dogen/quilt.csharp/types/formattables/locator.hpp"
+#include "dogen/quilt.csharp/types/formattables/model.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -34,18 +37,8 @@ namespace formattables {
 
 class file_path_expander final {
 public:
-    file_path_expander() = default;
-    file_path_expander(const file_path_expander&) = default;
-    file_path_expander(file_path_expander&&) = default;
-    ~file_path_expander() = default;
-    file_path_expander& operator=(const file_path_expander&) = default;
-
-public:
-    bool operator==(const file_path_expander& rhs) const;
-    bool operator!=(const file_path_expander& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    void expand(const formatters::repository& frp, const locator& l,
+        model& fm) const;
 };
 
 } } } }

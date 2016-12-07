@@ -39,6 +39,9 @@ namespace formattables {
 
 class model_expander final {
 private:
+    void expand_file_paths(const formatters::repository& frp,
+        const locator& l, model& fm) const;
+
     void reduce(model& fm) const;
 
 public:
