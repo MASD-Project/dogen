@@ -25,4 +25,12 @@
 #pragma once
 #endif
 
+#include "dogen/quilt.csharp/hash/formattables/model_hash.hpp"
+#include "dogen/quilt.csharp/hash/formattables/formattable_hash.hpp"
+#include "dogen/quilt.csharp/hash/fabric/visual_studio_project_hash.hpp"
+#include "dogen/quilt.csharp/hash/formattables/expansion_error_hash.hpp"
+#include "dogen/quilt.csharp/hash/formattables/element_properties_hash.hpp"
+#include "dogen/quilt.csharp/hash/formattables/artefact_properties_hash.hpp"
+#include "dogen/quilt.csharp/hash/formattables/locator_configuration_hash.hpp"
+
 #endif

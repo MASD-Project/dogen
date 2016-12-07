@@ -31,7 +31,7 @@
 #include "dogen/annotations/types/archetype_location.hpp"
 #include "dogen/formatters/types/artefact.hpp"
 #include "dogen/yarn/types/element.hpp"
-#include "dogen/quilt.csharp/types/formatters/locator.hpp"
+#include "dogen/quilt.csharp/types/formattables/locator.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -67,7 +67,7 @@ public:
      * @brief Provides the full path.
      */
     virtual boost::filesystem::path
-    full_path(const locator& l, const yarn::name& n) const = 0;
+    full_path(const formattables::locator& l, const yarn::name& n) const = 0;
 
     /**
      * @brief Creates the inclusion dependencies for this formatter

@@ -25,4 +25,12 @@
 #pragma once
 #endif
 
+#include "dogen/quilt.csharp/test_data/formattables/model_td.hpp"
+#include "dogen/quilt.csharp/test_data/formattables/formattable_td.hpp"
+#include "dogen/quilt.csharp/test_data/fabric/visual_studio_project_td.hpp"
+#include "dogen/quilt.csharp/test_data/formattables/expansion_error_td.hpp"
+#include "dogen/quilt.csharp/test_data/formattables/element_properties_td.hpp"
+#include "dogen/quilt.csharp/test_data/formattables/artefact_properties_td.hpp"
+#include "dogen/quilt.csharp/test_data/formattables/locator_configuration_td.hpp"
+
 #endif

@@ -18,26 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CSHARP_TYPES_FORMATTERS_LOCATOR_HPP
-#define DOGEN_QUILT_CSHARP_TYPES_FORMATTERS_LOCATOR_HPP
+#ifndef DOGEN_QUILT_CSHARP_TYPES_FABRIC_VCPROJ_FACTORY_HPP
+#define DOGEN_QUILT_CSHARP_TYPES_FABRIC_VCPROJ_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <string>
-#include <boost/filesystem/path.hpp>
-#include "dogen/yarn/types/name.hpp"
+#include <algorithm>
 
 namespace dogen {
 namespace quilt {
 namespace csharp {
-namespace formatters {
+namespace fabric {
 
-class locator final {
+class vcproj_factory final {
 public:
-    boost::filesystem::path make_full_path(
-        const yarn::name& n, const std::string& archetype) const;
+    vcproj_factory() = default;
+    vcproj_factory(const vcproj_factory&) = default;
+    vcproj_factory(vcproj_factory&&) = default;
+    ~vcproj_factory() = default;
+    vcproj_factory& operator=(const vcproj_factory&) = default;
+
+public:
+    bool operator==(const vcproj_factory& rhs) const;
+    bool operator!=(const vcproj_factory& rhs) const {
+        return !this->operator==(rhs);
+    }
+
 };
 
 } } } }

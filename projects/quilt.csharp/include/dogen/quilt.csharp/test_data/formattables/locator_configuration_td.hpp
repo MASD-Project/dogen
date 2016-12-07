@@ -18,19 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CSHARP_TYPES_FORMATTERS_LOCATOR_FWD_HPP
-#define DOGEN_QUILT_CSHARP_TYPES_FORMATTERS_LOCATOR_FWD_HPP
+#ifndef DOGEN_QUILT_CSHARP_TEST_DATA_FORMATTABLES_LOCATOR_CONFIGURATION_TD_HPP
+#define DOGEN_QUILT_CSHARP_TEST_DATA_FORMATTABLES_LOCATOR_CONFIGURATION_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include "dogen/quilt.csharp/types/formattables/locator_configuration.hpp"
+
 namespace dogen {
 namespace quilt {
 namespace csharp {
-namespace formatters {
+namespace formattables {
 
-class locator;
+class locator_configuration_generator {
+public:
+    locator_configuration_generator();
+
+public:
+    typedef dogen::quilt::csharp::formattables::locator_configuration result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 } } } }
 

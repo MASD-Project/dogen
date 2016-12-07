@@ -18,17 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.csharp/types/formatters/locator.hpp"
+#ifndef DOGEN_QUILT_CSHARP_IO_FABRIC_VISUAL_STUDIO_PROJECT_IO_HPP
+#define DOGEN_QUILT_CSHARP_IO_FABRIC_VISUAL_STUDIO_PROJECT_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <iosfwd>
+#include "dogen/quilt.csharp/types/fabric/visual_studio_project.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace csharp {
-namespace formatters {
+namespace fabric {
 
-boost::filesystem::path locator::make_full_path(
-    const yarn::name& /*n*/, const std::string& /*archetype*/) const {
-    boost::filesystem::path r;
-    return r;
-}
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::quilt::csharp::fabric::visual_studio_project& v);
 
 } } } }
+
+#endif

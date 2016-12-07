@@ -18,40 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CSHARP_TYPES_FORMATTERS_VCPROJ_FORMATTER_HPP
-#define DOGEN_QUILT_CSHARP_TYPES_FORMATTERS_VCPROJ_FORMATTER_HPP
+#ifndef DOGEN_QUILT_CSHARP_TEST_DATA_FORMATTABLES_ARTEFACT_PROPERTIES_TD_HPP
+#define DOGEN_QUILT_CSHARP_TEST_DATA_FORMATTABLES_ARTEFACT_PROPERTIES_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <algorithm>
-#include "dogen/quilt.csharp/types/formatters/artefact_formatter_interface.hpp"
+#include "dogen/quilt.csharp/types/formattables/artefact_properties.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace csharp {
-namespace formatters {
+namespace formattables {
 
-class vcproj_formatter final : public artefact_formatter_interface {
+class artefact_properties_generator {
 public:
-    static std::string static_artefact();
-
-public:
-    std::string formatter_name() const override;
-    annotations::archetype_location archetype_location() const override;
-    std::type_index element_type_index() const override;
+    artefact_properties_generator();
 
 public:
-    std::list<std::string> inclusion_dependencies(
-        const yarn::element& e) const override;
-
-    boost::filesystem::path full_path(
-        const locator& l, const yarn::name& n) const override;
+    typedef dogen::quilt::csharp::formattables::artefact_properties result_type;
 
 public:
-    dogen::formatters::artefact
-    format(const yarn::element& e) const override;
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
 };
 
 } } } }
