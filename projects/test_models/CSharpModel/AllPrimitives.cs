@@ -1,4 +1,4 @@
-// -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+// -*- mode: csharp; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
 //
 // Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
 //
@@ -17,9 +17,9 @@
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 // MA 02110-1301, USA.
 //
-namespace CSharpModel
+namespace Dogen.TestModels.CSharpModel
 {
-     class AllPrimitives
-     {
-     }
+    class AllPrimitives
+    {
+    };
 }

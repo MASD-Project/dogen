@@ -478,7 +478,7 @@
         <dia:point val="4,3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="3.95,2.95;24.585,7.95"/>
+        <dia:rectangle val="3.95,2.95;24.2,7.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -487,7 +487,7 @@
         <dia:point val="4,3"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="20.535"/>
+        <dia:real val="20.150000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.8999999999999995"/>
@@ -505,7 +505,7 @@
         <dia:composite type="text">
           <dia:attribute name="string">
             <dia:string>##DOGEN yarn.dia.comment=true
-#DOGEN yarn.dia.external_modules=dogen::test_models
+#DOGEN yarn.dia.external_modules=Dogen::TestModels
 #DOGEN quilt.csharp.enabled=true
 #DOGEN quilt.cpp.enabled=false
 #DOGEN annotations.profile=dogen#</dia:string>

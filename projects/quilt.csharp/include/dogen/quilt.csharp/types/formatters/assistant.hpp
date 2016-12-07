@@ -29,6 +29,7 @@
 #include "dogen/annotations/types/archetype_location.hpp"
 #include "dogen/formatters/types/artefact.hpp"
 #include "dogen/formatters/types/csharp/scoped_boilerplate_formatter.hpp"
+#include "dogen/formatters/types/csharp/scoped_namespace_formatter.hpp"
 #include "dogen/quilt.csharp/types/formatters/context.hpp"
 
 namespace dogen {
@@ -51,6 +52,18 @@ public:
      */
     dogen::formatters::csharp::scoped_boilerplate_formatter
     make_scoped_boilerplate_formatter();
+
+    /**
+     * @brief Returns a scoped namespace formatter.
+     */
+    dogen::formatters::csharp::scoped_namespace_formatter
+    make_scoped_namespace_formatter(const std::list<std::string>& ns);
+
+public:
+    /**
+     * @brief returns the c# namespaces for the name.
+     */
+    std::list<std::string> make_namespaces(const yarn::name& n) const;
 
 public:
     /**

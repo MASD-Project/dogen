@@ -38,7 +38,7 @@ namespace_formatter::namespace_formatter(const bool add_new_line)
 
 void namespace_formatter::
 format_begin(std::ostream& s, const std::string& ns) const {
-    s << "namespace " << ns
+    s << "namespace " << ns  << std::endl
       << "{" << std::endl;
 }
 

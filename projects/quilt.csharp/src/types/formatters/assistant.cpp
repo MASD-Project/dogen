@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/types/name_flattener.hpp"
 #include "dogen/quilt.csharp/types/formatters/formatting_error.hpp"
 #include "dogen/quilt.csharp/types/formatters/assistant.hpp"
 
@@ -72,6 +73,17 @@ assistant::make_scoped_boilerplate_formatter() {
 
     using dogen::formatters::csharp::scoped_boilerplate_formatter;
     return scoped_boilerplate_formatter(stream(), dp, deps);
+}
+
+dogen::formatters::csharp::scoped_namespace_formatter
+assistant::make_scoped_namespace_formatter(const std::list<std::string>& ns) {
+    return dogen::formatters::csharp::scoped_namespace_formatter(
+        stream(), ns, true/*add_new_line*/);
+}
+
+std::list<std::string> assistant::make_namespaces(const yarn::name& n) const {
+    yarn::name_flattener nf;
+    return nf.flatten(n);
 }
 
 std::ostream& assistant::stream() {

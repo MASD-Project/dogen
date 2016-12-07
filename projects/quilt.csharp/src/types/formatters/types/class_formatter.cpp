@@ -75,15 +75,13 @@ class_formatter::format(const context& ctx, const yarn::element& e) const {
         // const auto qn(a.get_qualified_name(e.name()));
         auto sbf(a.make_scoped_boilerplate_formatter());
         {
-            // const auto ns(a.make_namespaces(e.name()));
-            // aauto snf(a.make_scoped_namespace_formatter(ns));
-a.stream() << std::endl;
+            const auto ns(a.make_namespaces(e.name()));
+            auto snf(a.make_scoped_namespace_formatter(ns));
             // a.comment(o.documentation());
-a.stream() << "class " << sn << " {" << std::endl;
-a.stream() << "};" << std::endl;
-a.stream() << std::endl;
+a.stream() << "    class " << sn << std::endl;
+a.stream() << "    {" << std::endl;
+a.stream() << "    };" << std::endl;
         }
-a.stream() << std::endl;
     } // sbf
     return a.make_artefact();
 }
