@@ -26,6 +26,7 @@
 #endif
 
 #include <sstream>
+#include <boost/iostreams/filtering_stream.hpp>
 #include "dogen/annotations/types/archetype_location.hpp"
 #include "dogen/formatters/types/artefact.hpp"
 #include "dogen/formatters/types/csharp/scoped_boilerplate_formatter.hpp"
@@ -67,6 +68,12 @@ public:
 
 public:
     /**
+     * @brief Adds a top-level comment with mark-up.
+     */
+    void comment(const std::string& c);
+
+public:
+    /**
      * @brief Returns the stream that is currently being populated.
      */
     std::ostream& stream();
@@ -79,6 +86,7 @@ public:
 
 private:
     std::ostringstream stream_;
+    boost::iostreams::filtering_ostream filtering_stream_;
     const std::string element_id_;
     const context& context_;
     formattables::artefact_properties artefact_properties_;

@@ -19,6 +19,8 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/formatters/types/indent_filter.hpp"
+#include "dogen/formatters/types/comment_formatter.hpp"
 #include "dogen/yarn/types/name_flattener.hpp"
 #include "dogen/quilt.csharp/types/formatters/formatting_error.hpp"
 #include "dogen/quilt.csharp/types/formatters/assistant.hpp"
@@ -27,6 +29,11 @@ namespace {
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory("quilt.csharp.formatters.assistant"));
+
+const bool start_on_first_line(true);
+const bool use_documentation_tool_markup(true);
+const bool last_line_is_blank(true);
+const bool documenting_previous_identifier(true);
 
 const std::string artefact_properties_missing(
     "Could not find formatter configuration for formatter: ");
@@ -48,6 +55,8 @@ assistant(const context& ctx, const annotations::archetype_location& al,
     BOOST_LOG_SEV(lg, debug) << "Processing element: " << element_id_
                              << " for archetype: " << al.archetype();
 
+    dogen::formatters::indent_filter::push(filtering_stream_, 4);
+    filtering_stream_.push(stream_);
 }
 
 const formattables::artefact_properties& assistant::
@@ -86,8 +95,24 @@ std::list<std::string> assistant::make_namespaces(const yarn::name& n) const {
     return nf.flatten(n);
 }
 
+void assistant::comment(const std::string& c) {
+    if (c.empty())
+        return;
+
+    {
+        dogen::formatters::positive_indenter_scope pis(stream());
+        dogen::formatters::comment_formatter f(
+            !start_on_first_line,
+            use_documentation_tool_markup,
+            !documenting_previous_identifier,
+            dogen::formatters::comment_styles::c_style,
+            !last_line_is_blank);
+        f.format(stream(), c);
+    }
+}
+
 std::ostream& assistant::stream() {
-    return stream_;
+    return filtering_stream_;
 }
 
 dogen::formatters::artefact assistant::make_artefact() const {

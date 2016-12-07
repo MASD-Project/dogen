@@ -77,7 +77,7 @@ class_formatter::format(const context& ctx, const yarn::element& e) const {
         {
             const auto ns(a.make_namespaces(e.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
-            // a.comment(o.documentation());
+            a.comment(e.documentation());
 a.stream() << "    class " << sn << std::endl;
 a.stream() << "    {" << std::endl;
 a.stream() << "    };" << std::endl;
