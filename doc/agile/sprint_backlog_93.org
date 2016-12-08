@@ -12,34 +12,37 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-12-07 Wed 23:38]
+#+CAPTION: Clock summary at [2016-12-08 Thu 11:35]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *42:36* |       |       | 100.0 |
+| *Total time*                                                                | *45:06* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 42:36   |       |       | 100.0 |
-| Active                                                                      |         | 42:36 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  1:51 |   4.3 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  1:02 |   2.4 |
+| Stories                                                                     | 45:06   |       |       | 100.0 |
+| Active                                                                      |         | 45:06 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  2:24 |   5.3 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  1:02 |   2.3 |
 | COMPLETED Update readme                                                     |         |       |  0:11 |   0.4 |
-| COMPLETED Test data generation for dates generates invalid dates            |         |       |  0:33 |   1.3 |
-| COMPLETED Handle missing stitch templates scenario                          |         |       |  1:04 |   2.5 |
-| COMPLETED Move project directory to output options                          |         |       |  1:10 |   2.7 |
-| COMPLETED Update the conceptual model to clarify backends and kernels       |         |       |  4:20 |  10.2 |
-| COMPLETED Detect knitter and disable code generation accordingly            |         |       |  1:15 |   2.9 |
-| COMPLETED Clean up kernel and backend confusion                             |         |       |  5:17 |  12.4 |
-| COMPLETED Add a "language" directory for each backend                       |         |       |  5:44 |  13.5 |
-| COMPLETED Split C++ profiles and templates from C#                          |         |       |  1:11 |   2.8 |
-| COMPLETED Formatter registrar validation is not being called                |         |       |  0:20 |   0.8 |
-| COMPLETED Move decoration repository to quilt                               |         |       |  0:43 |   1.7 |
+| COMPLETED Test data generation for dates generates invalid dates            |         |       |  0:33 |   1.2 |
+| COMPLETED Handle missing stitch templates scenario                          |         |       |  1:04 |   2.4 |
+| COMPLETED Move project directory to output options                          |         |       |  1:10 |   2.6 |
+| COMPLETED Update the conceptual model to clarify backends and kernels       |         |       |  4:20 |   9.6 |
+| COMPLETED Detect knitter and disable code generation accordingly            |         |       |  1:15 |   2.8 |
+| COMPLETED Clean up kernel and backend confusion                             |         |       |  5:17 |  11.7 |
+| COMPLETED Add a "language" directory for each backend                       |         |       |  5:44 |  12.7 |
+| COMPLETED Split C++ profiles and templates from C#                          |         |       |  1:11 |   2.6 |
+| COMPLETED Formatter registrar validation is not being called                |         |       |  0:20 |   0.7 |
+| COMPLETED Move decoration repository to quilt                               |         |       |  0:43 |   1.6 |
 | COMPLETED Move module id container into yarn                                |         |       |  0:24 |   0.9 |
-| STARTED Add basic infrastructure for C#                                     |         |       | 16:59 |  39.9 |
-| STARTED Add support for Decimal numbers                                     |         |       |  0:32 |   1.3 |
+| COMPLETED Add basic infrastructure for C#                                   |         |       | 16:59 |  37.7 |
+| COMPLETED Add support for C#-style documentation                            |         |       |  1:57 |   4.3 |
+| STARTED Add support for Decimal numbers                                     |         |       |  0:32 |   1.2 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-12-08 Thu 11:31]--[2016-12-08 Thu 11:34] =>  0:03
+    CLOCK: [2016-12-08 Thu 11:00]--[2016-12-08 Thu 11:30] =>  0:30
     CLOCK: [2016-12-02 Fri 09:01]--[2016-12-02 Fri 09:09] =>  0:08
     CLOCK: [2016-11-30 Wed 16:20]--[2016-11-30 Wed 16:30] =>  0:10
     CLOCK: [2016-11-30 Wed 13:37]--[2016-11-30 Wed 15:00] =>  1:23
@@ -437,6 +440,54 @@ Add a new enum for it and update comment formatter with this style.
 
 - try using ICU DecNumber library.
 - check compiler support (MSVC may have decimals; if so, use that instead)
+
+*** STARTED Add support for properties in C#                          :story:
+
+We need to go through yarn and populate the properties in the types
+facet.
+
+*** Add visibility to yarn elements                                   :story:
+
+We need to be able to mark yarn types as:
+
+- public
+- internal
+
+This can then be used by C++ as well for visibility etc.
+
+*** Add partial element support to yarn                               :story:
+
+We need to be able to mark yarn elements as "partial". It is then up
+to programming languages to map this to a language feature. At present
+only [[https://msdn.microsoft.com/en-us/library/wa80x488.aspx][C# would do so]].
+
+It would be nice to have a more meaningful name at yarn
+level. However, seems like this is a fairly general programming
+concept now: [[https://en.wikipedia.org/wiki/Class_(computer_programming)#Partial][wikipedia]].
+
+*** Add visibility to yarn attributes                                 :story:
+
+We need to be able to mark yarn attributes as:
+
+- public
+- private
+- protected
+
+*** Add aspects for C# serialisation support                          :story:
+
+We need to add serialisation support:
+
+- C# serialisation
+- Data Contract serialisation
+- Json serialisation
+
+In C# these are done via attributes so we do not need additional
+facets. We will need a lot of configuration knobs though:
+
+- ability to switch a serialisation method on at model level or
+  element level.
+- support for serialisation specific arguments such as parameters for
+  Json.Net.
 
 *** Clean up comment formatter                                        :story:
 
