@@ -30,7 +30,6 @@ std::string traits::visual_studio_facet() {
     return r;
 }
 
-
 std::string traits::visual_studio_project_archetype() {
     static std::string r("quilt.csharp.visual_studio.project");
     return r;

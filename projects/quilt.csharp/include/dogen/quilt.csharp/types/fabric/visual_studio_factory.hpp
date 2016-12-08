@@ -27,9 +27,13 @@
 
 #include <list>
 #include <boost/shared_ptr.hpp>
+#include "dogen/annotations/types/type.hpp"
+#include "dogen/annotations/types/annotation.hpp"
+#include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/quilt.cpp/types/formatters/repository.hpp"
+#include "dogen/quilt.csharp/types/fabric/visual_studio_configuration.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -38,20 +42,39 @@ namespace fabric {
 
 class visual_studio_factory final {
 private:
+    struct type_group {
+        annotations::type project_solution_guid;
+        annotations::type project_guid;
+    };
+
+    type_group make_type_group(const annotations::type_repository& atrp) const;
+
+    visual_studio_configuration make_configuration(const type_group& tg,
+        const annotations::annotation& ra) const;
+
+    visual_studio_configuration make_configuration(
+        const annotations::type_repository& atrp,
+        const annotations::annotation& ra) const;
+
+private:
     std::string obtain_project_name(const yarn::intermediate_model& im) const;
 
 private:
     boost::shared_ptr<yarn::element>
-    make_solution(const std::string& project_name,
+    make_solution(const visual_studio_configuration cfg,
+        const std::string& project_name,
         const yarn::intermediate_model& im) const;
 
     boost::shared_ptr<yarn::element>
-    make_project(const std::string& project_name,
+    make_project(const visual_studio_configuration cfg,
+        const std::string& project_name,
         const yarn::intermediate_model& im) const;
 
 public:
     std::list<boost::shared_ptr<yarn::element>>
-    make(const yarn::intermediate_model& im) const;
+    make(const annotations::type_repository& atrp,
+        const annotations::annotation& ra,
+        const yarn::intermediate_model& im) const;
 };
 
 } } } }

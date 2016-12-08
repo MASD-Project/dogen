@@ -70,9 +70,10 @@ dogen::formatters::artefact
 visual_studio_solution_formatter::format(const context& ctx, const yarn::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), id);
+    const auto& vsl(a.as<fabric::visual_studio_solution>(static_artefact(), e));
 a.stream() << "Microsoft Visual Studio Solution File, Format Version 12.00" << std::endl;
 a.stream() << "# Visual Studio 2012" << std::endl;
-a.stream() << "Project(\"{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\") = \"CSharpModel\", \"CSharpModel.csproj\", \"{9E645ACD-C04A-4734-AB23-C3FCC0F7981B}\"" << std::endl;
+a.stream() << "Project(\"{" << vsl.project_solution_guid() << "}\") = \"" << vsl.project_name() << "\", \"" << vsl.project_name() << ".csproj\", \"{" << vsl.project_guid() << "}\"" << std::endl;
 a.stream() << "EndProject" << std::endl;
 a.stream() << "Global" << std::endl;
 a.stream() << "	GlobalSection(SolutionConfigurationPlatforms) = preSolution" << std::endl;
@@ -80,10 +81,10 @@ a.stream() << "		Debug|Any CPU = Debug|Any CPU" << std::endl;
 a.stream() << "		Release|Any CPU = Release|Any CPU" << std::endl;
 a.stream() << "	EndGlobalSection" << std::endl;
 a.stream() << "	GlobalSection(ProjectConfigurationPlatforms) = postSolution" << std::endl;
-a.stream() << "		{9E645ACD-C04A-4734-AB23-C3FCC0F7981B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU" << std::endl;
-a.stream() << "		{9E645ACD-C04A-4734-AB23-C3FCC0F7981B}.Debug|Any CPU.Build.0 = Debug|Any CPU" << std::endl;
-a.stream() << "		{9E645ACD-C04A-4734-AB23-C3FCC0F7981B}.Release|Any CPU.ActiveCfg = Release|Any CPU" << std::endl;
-a.stream() << "		{9E645ACD-C04A-4734-AB23-C3FCC0F7981B}.Release|Any CPU.Build.0 = Release|Any CPU" << std::endl;
+a.stream() << "		{" << vsl.project_guid() << "}.Debug|Any CPU.ActiveCfg = Debug|Any CPU" << std::endl;
+a.stream() << "		{" << vsl.project_guid() << "}.Debug|Any CPU.Build.0 = Debug|Any CPU" << std::endl;
+a.stream() << "		{" << vsl.project_guid() << "}.Release|Any CPU.ActiveCfg = Release|Any CPU" << std::endl;
+a.stream() << "		{" << vsl.project_guid() << "}.Release|Any CPU.Build.0 = Release|Any CPU" << std::endl;
 a.stream() << "	EndGlobalSection" << std::endl;
 a.stream() << "	GlobalSection(MonoDevelopProperties) = preSolution" << std::endl;
 a.stream() << "		StartupItem = CSharpModel.csproj" << std::endl;

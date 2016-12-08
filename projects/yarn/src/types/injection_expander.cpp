@@ -35,13 +35,15 @@ namespace dogen {
 namespace yarn {
 
 void injection_expander::
-expand(const injector_registrar& rg, intermediate_model& m) {
+expand(const annotations::type_repository& atrp,
+    const annotations::annotation& ra, const injector_registrar& rg,
+    intermediate_model& m) {
 
-    BOOST_LOG_SEV(lg, debug) << "Performing injection expansion on: "
-                             << m.name().id();
+    const auto id(m.name().id());
+    BOOST_LOG_SEV(lg, debug) << "Performing injection expansion on: " << id;
 
     for (const auto& inj : rg.injectors())
-        inj->inject(m);
+        inj->inject(atrp, ra, m);
 
     BOOST_LOG_SEV(lg, debug) << "Finished performing injection expansion.";
 }

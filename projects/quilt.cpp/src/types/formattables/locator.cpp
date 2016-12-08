@@ -183,10 +183,10 @@ locator_configuration locator::make_configuration(
 
 locator_configuration locator::make_configuration(
     const annotations::type_repository& atrp, const formatters::repository& frp,
-    const annotations::annotation& o) {
+    const annotations::annotation& a) {
 
     const auto tg(make_type_group (atrp, frp));
-    const auto r(make_configuration(tg, o));
+    const auto r(make_configuration(tg, a));
     return r;
 }
 

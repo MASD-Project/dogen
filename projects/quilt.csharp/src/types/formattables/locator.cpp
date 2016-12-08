@@ -72,10 +72,10 @@ locator::type_group locator::make_type_group(
 }
 
 locator_configuration locator::make_configuration(
-    const type_group& tg, const annotations::annotation& o) const {
+    const type_group& tg, const annotations::annotation& a) const {
 
     locator_configuration r;
-    const annotations::entry_selector s(o);
+    const annotations::entry_selector s(a);
 
     const auto& kdn(tg.kernel_directory_name);
     r.kernel_directory_name(s.get_text_content_or_default(kdn));

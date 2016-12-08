@@ -48,16 +48,18 @@ dogen::formatters::artefact
 visual_studio_project_formatter::format(const context& ctx, const yarn::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), id);
+    const auto& vsp(a.as<fabric::visual_studio_project>(static_artefact(), e));
+
 #>
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9E645ACD-C04A-4734-AB23-C3FCC0F7981B}</ProjectGuid>
+    <ProjectGuid>{<#= vsp.project_guid() #>}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>CSharpModel</RootNamespace>
-    <AssemblyName>CSharpModel</AssemblyName>
+    <RootNamespace><#= vsp.project_name() #></RootNamespace>
+    <AssemblyName><#= vsp.project_name() #></AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

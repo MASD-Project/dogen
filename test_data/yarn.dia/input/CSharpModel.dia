@@ -510,6 +510,8 @@ This is a remark.#</dia:string>
 #DOGEN yarn.dia.external_modules=Dogen::TestModels
 #DOGEN quilt.csharp.enabled=true
 #DOGEN quilt.cpp.enabled=false
+#DOGEN quilt.csharp.visual_studio.project_guid=9E645ACD-C04A-4734-AB23-C3FCC0F7981B
+#DOGEN quilt.csharp.visual_studio.project_solution_guid=FAE04EC0-301F-11D3-BF4B-00C04F79EFBC
 #DOGEN annotations.profile=dogen#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">

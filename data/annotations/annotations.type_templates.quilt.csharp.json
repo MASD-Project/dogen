@@ -25,7 +25,8 @@
     },
     "value_type": "text",
     "template_kind": "instance",
-    "scope": "root_module"
+    "scope": "root_module",
+    "default_value": "00000000-0000-0000-0000-000000000000"
   },
   {
     "name": {
@@ -39,6 +40,7 @@
     },
     "value_type": "text",
     "template_kind": "instance",
-    "scope": "root_module"
+    "scope": "root_module",
+    "default_value": "00000000-0000-0000-0000-000000000000"
   }
 ]

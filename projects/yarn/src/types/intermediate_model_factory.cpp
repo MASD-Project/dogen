@@ -118,7 +118,7 @@ make(const std::vector<boost::filesystem::path>& dirs,
      */
     const auto timd(f.make(ko.target()));
     const auto tim(intermediate_model_for_descriptor(agf, atrp, rg, timd));
-    const auto& a(tim.root_module().annotation());
+    const auto& ra(tim.root_module().annotation());
 
     /*
      * Now obtain all of the descriptors for the reference models,
@@ -126,7 +126,7 @@ make(const std::vector<boost::filesystem::path>& dirs,
      * load all reference intermediate models and post-process them.
      */
     const auto target_dir(timd.path().parent_path());
-    const auto rimd(f.make(dirs, target_dir, atrp, a));
+    const auto rimd(f.make(dirs, target_dir, atrp, ra));
     std::vector<intermediate_model> r;
     r.reserve(rimd.size() + 1/*target model*/);
     r.push_back(tim);

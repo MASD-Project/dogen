@@ -56,7 +56,9 @@ private:
 
 public:
     std::string id() const override;
-    void inject(yarn::intermediate_model& im) const override;
+    void inject(const annotations::type_repository& atrp,
+        const annotations::annotation& ra,
+        yarn::intermediate_model& im) const override;
 };
 
 } } } }

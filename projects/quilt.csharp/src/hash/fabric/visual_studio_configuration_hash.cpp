@@ -18,22 +18,30 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CSHARP_IO_ALL_IO_HPP
-#define DOGEN_QUILT_CSHARP_IO_ALL_IO_HPP
+#include "dogen/quilt.csharp/hash/fabric/visual_studio_configuration_hash.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace {
 
-#include "dogen/quilt.csharp/io/formattables/model_io.hpp"
-#include "dogen/quilt.csharp/io/fabric/assembly_info_io.hpp"
-#include "dogen/quilt.csharp/io/formatters/repository_io.hpp"
-#include "dogen/quilt.csharp/io/formattables/formattable_io.hpp"
-#include "dogen/quilt.csharp/io/fabric/visual_studio_project_io.hpp"
-#include "dogen/quilt.csharp/io/fabric/visual_studio_solution_io.hpp"
-#include "dogen/quilt.csharp/io/formattables/element_properties_io.hpp"
-#include "dogen/quilt.csharp/io/formattables/artefact_properties_io.hpp"
-#include "dogen/quilt.csharp/io/fabric/visual_studio_configuration_io.hpp"
-#include "dogen/quilt.csharp/io/formattables/locator_configuration_io.hpp"
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value) {
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
 
-#endif
+}
+
+namespace dogen {
+namespace quilt {
+namespace csharp {
+namespace fabric {
+
+std::size_t visual_studio_configuration_hasher::hash(const visual_studio_configuration& v) {
+    std::size_t seed(0);
+
+    combine(seed, v.project_solution_guid());
+    combine(seed, v.project_guid());
+
+    return seed;
+}
+
+} } } }

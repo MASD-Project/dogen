@@ -27,6 +27,7 @@
 
 #include <list>
 #include <utility>
+#include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/injector_registrar.hpp"
@@ -111,7 +112,8 @@ private:
     /**
      * @brief Injects any external types into the model.
      */
-    void inject_model(const injector_registrar& rg,
+    void inject_model(const annotations::type_repository& atrp,
+        const annotations::annotation& ra, const injector_registrar& rg,
         intermediate_model& im) const;
 
     /**

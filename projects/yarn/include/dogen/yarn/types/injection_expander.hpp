@@ -25,6 +25,8 @@
 #pragma once
 #endif
 
+#include "dogen/annotations/types/annotation.hpp"
+#include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/injector_registrar.hpp"
 
@@ -33,7 +35,9 @@ namespace yarn {
 
 class injection_expander {
 public:
-    void expand(const injector_registrar& rg, intermediate_model& im);
+    void expand(const annotations::type_repository& atrp,
+        const annotations::annotation& ra, const injector_registrar& rg,
+        intermediate_model& im);
 };
 
 } }

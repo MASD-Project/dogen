@@ -5,8 +5,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{9E645ACD-C04A-4734-AB23-C3FCC0F7981B}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>CSharpModel</RootNamespace>
-    <AssemblyName>CSharpModel</AssemblyName>
+    <RootNamespace>Dogen.TestModels.CSharpModel</RootNamespace>
+    <AssemblyName>Dogen.TestModels.CSharpModel</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

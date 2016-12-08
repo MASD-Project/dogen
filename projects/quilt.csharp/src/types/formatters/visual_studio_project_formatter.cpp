@@ -70,15 +70,17 @@ dogen::formatters::artefact
 visual_studio_project_formatter::format(const context& ctx, const yarn::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), id);
+    const auto& vsp(a.as<fabric::visual_studio_project>(static_artefact(), e));
+
 a.stream() << "<?xml version=\"1.0\" encoding=\"utf-8\"?>" << std::endl;
 a.stream() << "<Project DefaultTargets=\"Build\" ToolsVersion=\"4.0\" xmlns=\"http://schemas.microsoft.com/developer/msbuild/2003\">" << std::endl;
 a.stream() << "  <PropertyGroup>" << std::endl;
 a.stream() << "    <Configuration Condition=\" '$(Configuration)' == '' \">Debug</Configuration>" << std::endl;
 a.stream() << "    <Platform Condition=\" '$(Platform)' == '' \">AnyCPU</Platform>" << std::endl;
-a.stream() << "    <ProjectGuid>{9E645ACD-C04A-4734-AB23-C3FCC0F7981B}</ProjectGuid>" << std::endl;
+a.stream() << "    <ProjectGuid>{" << vsp.project_guid() << "}</ProjectGuid>" << std::endl;
 a.stream() << "    <OutputType>Library</OutputType>" << std::endl;
-a.stream() << "    <RootNamespace>CSharpModel</RootNamespace>" << std::endl;
-a.stream() << "    <AssemblyName>CSharpModel</AssemblyName>" << std::endl;
+a.stream() << "    <RootNamespace>" << vsp.project_name() << "</RootNamespace>" << std::endl;
+a.stream() << "    <AssemblyName>" << vsp.project_name() << "</AssemblyName>" << std::endl;
 a.stream() << "  </PropertyGroup>" << std::endl;
 a.stream() << "  <PropertyGroup Condition=\" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' \">" << std::endl;
 a.stream() << "    <DebugSymbols>true</DebugSymbols>" << std::endl;

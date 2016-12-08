@@ -31,6 +31,7 @@
 #include "dogen/formatters/types/artefact.hpp"
 #include "dogen/formatters/types/csharp/scoped_boilerplate_formatter.hpp"
 #include "dogen/formatters/types/csharp/scoped_namespace_formatter.hpp"
+#include "dogen/yarn/types/element.hpp"
 #include "dogen/quilt.csharp/types/formatters/context.hpp"
 
 namespace dogen {
@@ -46,6 +47,13 @@ public:
 private:
     const formattables::artefact_properties&
     obtain_artefact_properties(const std::string& archetype) const;
+
+public:
+    template<typename T>
+        static const T&
+        as(const std::string& /*archetype*/, const yarn::element& e) {
+        return dynamic_cast<const T&>(e);
+    }
 
 public:
     /**

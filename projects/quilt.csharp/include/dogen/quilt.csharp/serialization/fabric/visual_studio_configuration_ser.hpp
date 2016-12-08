@@ -18,22 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CSHARP_IO_ALL_IO_HPP
-#define DOGEN_QUILT_CSHARP_IO_ALL_IO_HPP
+#ifndef DOGEN_QUILT_CSHARP_SERIALIZATION_FABRIC_VISUAL_STUDIO_CONFIGURATION_SER_HPP
+#define DOGEN_QUILT_CSHARP_SERIALIZATION_FABRIC_VISUAL_STUDIO_CONFIGURATION_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/quilt.csharp/io/formattables/model_io.hpp"
-#include "dogen/quilt.csharp/io/fabric/assembly_info_io.hpp"
-#include "dogen/quilt.csharp/io/formatters/repository_io.hpp"
-#include "dogen/quilt.csharp/io/formattables/formattable_io.hpp"
-#include "dogen/quilt.csharp/io/fabric/visual_studio_project_io.hpp"
-#include "dogen/quilt.csharp/io/fabric/visual_studio_solution_io.hpp"
-#include "dogen/quilt.csharp/io/formattables/element_properties_io.hpp"
-#include "dogen/quilt.csharp/io/formattables/artefact_properties_io.hpp"
-#include "dogen/quilt.csharp/io/fabric/visual_studio_configuration_io.hpp"
-#include "dogen/quilt.csharp/io/formattables/locator_configuration_io.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen/quilt.csharp/types/fabric/visual_studio_configuration.hpp"
+
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::quilt::csharp::fabric::visual_studio_configuration)
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+void save(Archive& ar, const dogen::quilt::csharp::fabric::visual_studio_configuration& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::quilt::csharp::fabric::visual_studio_configuration& v, unsigned int version);
+
+} }
 
 #endif

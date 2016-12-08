@@ -119,7 +119,8 @@ void injector::inject_forward_declarations(yarn::intermediate_model& im) const {
     add_elements(e, im);
 }
 
-void injector::inject(yarn::intermediate_model& im) const {
+void injector::inject(const annotations::type_repository& /*atrp*/,
+    const annotations::annotation& /*ra*/, yarn::intermediate_model& im) const {
     inject_registrar(im);
     inject_cmakelists(im);
     inject_odb_options(im);

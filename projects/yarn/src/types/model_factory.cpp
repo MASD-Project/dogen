@@ -149,10 +149,11 @@ update_model_generability(intermediate_model& im) const {
     im.has_generatable_types(has_generatable_types(im));
 }
 
-void model_factory::inject_model(const injector_registrar& rg,
+void model_factory::inject_model(const annotations::type_repository& atrp,
+    const annotations::annotation& ra, const injector_registrar& rg,
     intermediate_model& im) const {
     injection_expander ex;
-    ex.expand(rg, im);
+    ex.expand(atrp, ra, rg, im);
 }
 
 model model_factory::transform_intermediate_model(
@@ -221,7 +222,9 @@ model model_factory::make(const annotations::type_repository& atrp,
      */
     expand_associations(im);
     update_model_generability(im);
-    inject_model(rg, im);
+
+    const auto ra(im.root_module().annotation());
+    inject_model(atrp, ra, rg, im);
 
     /*
      * Perform the final transformation.
