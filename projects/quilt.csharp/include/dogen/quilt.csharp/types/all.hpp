@@ -75,6 +75,7 @@
 #include "dogen/quilt.csharp/types/fabric/visual_studio_configuration.hpp"
 #include "dogen/quilt.csharp/types/formattables/locator_configuration.hpp"
 #include "dogen/quilt.csharp/types/formatters/types/visitor_formatter.hpp"
+#include "dogen/quilt.csharp/types/formattables/project_items_expander.hpp"
 #include "dogen/quilt.csharp/types/formatters/test_data/enum_formatter.hpp"
 #include "dogen/quilt.csharp/types/formatters/test_data/class_formatter.hpp"
 #include "dogen/quilt.csharp/types/formatters/types/exception_formatter.hpp"

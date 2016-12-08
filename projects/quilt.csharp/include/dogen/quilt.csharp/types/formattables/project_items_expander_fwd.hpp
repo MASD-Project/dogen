@@ -18,23 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.csharp/types/formatters/context.hpp"
+#ifndef DOGEN_QUILT_CSHARP_TYPES_FORMATTABLES_PROJECT_ITEMS_EXPANDER_FWD_HPP
+#define DOGEN_QUILT_CSHARP_TYPES_FORMATTABLES_PROJECT_ITEMS_EXPANDER_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace quilt {
 namespace csharp {
-namespace formatters {
+namespace formattables {
 
-context::context(const formattables::element_properties& element_properties,
-    const formattables::model& fm)
-    : element_properties_(element_properties), model_(fm) { }
-
-const formattables::element_properties& context::element_properties() const {
-    return element_properties_;
-}
-
-const formattables::model& context::model() const {
-    return model_;
-}
+class project_items_expander;
 
 } } } }
+
+#endif

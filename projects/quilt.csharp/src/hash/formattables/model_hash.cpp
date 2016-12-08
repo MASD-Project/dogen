@@ -65,7 +65,7 @@ std::size_t model_hasher::hash(const model& v) {
 
     combine(seed, v.name());
     combine(seed, hash_std_unordered_map_std_string_dogen_quilt_csharp_formattables_formattable(v.formattables()));
-    combine(seed, hash_std_list_boost_filesystem_path(v.file_list()));
+    combine(seed, hash_std_list_boost_filesystem_path(v.project_items()));
 
     return seed;
 }

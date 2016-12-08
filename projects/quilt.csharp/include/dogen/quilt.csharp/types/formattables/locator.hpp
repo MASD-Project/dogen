@@ -90,6 +90,10 @@ private:
         const std::string& extension, const yarn::name& n) const;
 
 public:
+    boost::filesystem::path make_relative_path(
+        const boost::filesystem::path& full_path) const;
+
+public:
     boost::filesystem::path
     make_full_path(const yarn::name& n, const std::string& archetype) const;
 

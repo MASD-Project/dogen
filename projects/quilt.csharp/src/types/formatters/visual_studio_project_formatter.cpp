@@ -104,7 +104,8 @@ a.stream() << "  <ItemGroup>" << std::endl;
 a.stream() << "    <Reference Include=\"System\" />" << std::endl;
 a.stream() << "  </ItemGroup>" << std::endl;
 a.stream() << "  <ItemGroup>" << std::endl;
-a.stream() << "    <Compile Include=\"AllPrimitives.cs\" />" << std::endl;
+    for (const auto& f : ctx.model().project_items())
+a.stream() << "    <Compile Include=\"" << f.generic_string() << "\" />" << std::endl;
 a.stream() << "  </ItemGroup>" << std::endl;
 a.stream() << "  <Import Project=\"$(MSBuildBinPath)\\Microsoft.CSharp.targets\" />" << std::endl;
 a.stream() << "</Project>" << std::endl;

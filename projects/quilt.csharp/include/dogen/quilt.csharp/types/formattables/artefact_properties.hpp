@@ -52,6 +52,7 @@ public:
         const bool enabled,
         const bool overwrite,
         const boost::filesystem::path& file_path,
+        const boost::filesystem::path& relative_path,
         const std::list<std::string>& using_dependencies);
 
 private:
@@ -73,6 +74,11 @@ public:
     void file_path(const boost::filesystem::path& v);
     void file_path(const boost::filesystem::path&& v);
 
+    const boost::filesystem::path& relative_path() const;
+    boost::filesystem::path& relative_path();
+    void relative_path(const boost::filesystem::path& v);
+    void relative_path(const boost::filesystem::path&& v);
+
     const std::list<std::string>& using_dependencies() const;
     std::list<std::string>& using_dependencies();
     void using_dependencies(const std::list<std::string>& v);
@@ -92,6 +98,7 @@ private:
     bool enabled_;
     bool overwrite_;
     boost::filesystem::path file_path_;
+    boost::filesystem::path relative_path_;
     std::list<std::string> using_dependencies_;
 };
 

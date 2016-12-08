@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/quilt.csharp/types/formattables/project_items_expander.hpp"
 #include "dogen/quilt.csharp/types/formattables/decoration_expander.hpp"
 #include "dogen/quilt.csharp/types/formattables/reducer.hpp"
 #include "dogen/quilt.csharp/types/formattables/file_path_expander.hpp"
@@ -46,6 +47,11 @@ void model_expander::reduce(model& fm) const {
     rd.reduce(fm);
 }
 
+void model_expander::expand_project_items(model& fm) const {
+    project_items_expander pie;
+    pie.expand(fm);
+}
+
 void model_expander::expand(
     const annotations::type_repository& /*atrp*/,
     const annotations::annotation& /*ra*/,
@@ -55,6 +61,7 @@ void model_expander::expand(
     reduce(fm);
     expand_decoration(dpf, fm);
     expand_file_paths(frp, l, fm);
+    expand_project_items(fm);
 }
 
 } } } }

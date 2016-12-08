@@ -65,6 +65,7 @@ void save(Archive& ar,
     ar << make_nvp("enabled", v.enabled_);
     ar << make_nvp("overwrite", v.overwrite_);
     ar << make_nvp("file_path", v.file_path_);
+    ar << make_nvp("relative_path", v.relative_path_);
     ar << make_nvp("using_dependencies", v.using_dependencies_);
 }
 
@@ -75,6 +76,7 @@ void load(Archive& ar,
     ar >> make_nvp("enabled", v.enabled_);
     ar >> make_nvp("overwrite", v.overwrite_);
     ar >> make_nvp("file_path", v.file_path_);
+    ar >> make_nvp("relative_path", v.relative_path_);
     ar >> make_nvp("using_dependencies", v.using_dependencies_);
 }
 

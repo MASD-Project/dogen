@@ -25,7 +25,9 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include <unordered_map>
+#include "dogen/quilt.csharp/types/formattables/model.hpp"
 #include "dogen/quilt.csharp/types/formattables/element_properties.hpp"
 
 namespace dogen {
@@ -35,45 +37,18 @@ namespace formatters {
 
 class context final {
 public:
-    context() = default;
-    context(const context&) = default;
-    context(context&&) = default;
-    ~context() = default;
+    context(const formattables::element_properties& element_properties,
+        const formattables::model& fm);
 
 public:
-    explicit context(const dogen::quilt::csharp::formattables::element_properties& element_properties);
-
-public:
-    const dogen::quilt::csharp::formattables::element_properties& element_properties() const;
-    dogen::quilt::csharp::formattables::element_properties& element_properties();
-    void element_properties(const dogen::quilt::csharp::formattables::element_properties& v);
-    void element_properties(const dogen::quilt::csharp::formattables::element_properties&& v);
-
-public:
-    bool operator==(const context& rhs) const;
-    bool operator!=(const context& rhs) const {
-        return !this->operator==(rhs);
-    }
-
-public:
-    void swap(context& other) noexcept;
-    context& operator=(context other);
+    const formattables::element_properties& element_properties() const;
+    const formattables::model& model() const;
 
 private:
-    dogen::quilt::csharp::formattables::element_properties element_properties_;
+    const formattables::element_properties& element_properties_;
+    const formattables::model& model_;
 };
 
 } } } }
-
-namespace std {
-
-template<>
-inline void swap(
-    dogen::quilt::csharp::formatters::context& lhs,
-    dogen::quilt::csharp::formatters::context& rhs) {
-    lhs.swap(rhs);
-}
-
-}
 
 #endif

@@ -55,6 +55,7 @@ std::size_t artefact_properties_hasher::hash(const artefact_properties& v) {
     combine(seed, v.enabled());
     combine(seed, v.overwrite());
     combine(seed, hash_boost_filesystem_path(v.file_path()));
+    combine(seed, hash_boost_filesystem_path(v.relative_path()));
     combine(seed, hash_std_list_std_string(v.using_dependencies()));
 
     return seed;

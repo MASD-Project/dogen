@@ -53,7 +53,6 @@ workflow::execute(const formattables::model& fm) const {
     std::forward_list<dogen::formatters::artefact> r;
     for (const auto& pair : fm.formattables()) {
         const auto& formattable(pair.second);
-        // const auto& eprops(formattable.element_properties());
 
         const auto& e(*formattable.element());
         const auto id(e.name().id());
@@ -69,7 +68,7 @@ workflow::execute(const formattables::model& fm) const {
             return r;
         }
 
-        context ctx(formattable.element_properties());
+        const context ctx(formattable.element_properties(), fm);
         const auto& fmts(i->second);
         for (const auto& fmt_ptr : fmts) {
             const auto& fmt(*fmt_ptr);

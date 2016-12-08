@@ -73,7 +73,7 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"__type__\": " << "\"dogen::quilt::csharp::formattables::model\"" << ", "
       << "\"name\": " << v.name() << ", "
       << "\"formattables\": " << v.formattables() << ", "
-      << "\"file_list\": " << v.file_list()
+      << "\"project_items\": " << v.project_items()
       << " }";
     return(s);
 }

@@ -61,6 +61,7 @@ std::ostream& operator<<(std::ostream& s, const artefact_properties& v) {
       << "\"enabled\": " << v.enabled() << ", "
       << "\"overwrite\": " << v.overwrite() << ", "
       << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\"" << ", "
+      << "\"relative_path\": " << "\"" << v.relative_path().generic_string() << "\"" << ", "
       << "\"using_dependencies\": " << v.using_dependencies()
       << " }";
     return(s);

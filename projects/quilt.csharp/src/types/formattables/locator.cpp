@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/join.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/annotations/types/entry_selector.hpp"
@@ -156,6 +157,15 @@ boost::filesystem::path locator::make_facet_path(
 
     BOOST_LOG_SEV(lg, debug) << "Done making the facet path. Result: " << r;
     return r;
+}
+
+boost::filesystem::path locator::make_relative_path(
+    const boost::filesystem::path& full_path) const {
+
+    const std::string fp(full_path.generic_string());
+    std::string pp(project_path_.generic_string());
+    pp += "/";
+    return boost::replace_first_copy(fp, pp, empty);
 }
 
 boost::filesystem::path locator::make_full_path(

@@ -67,7 +67,7 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("name", v.name_);
     ar << make_nvp("formattables", v.formattables_);
-    ar << make_nvp("file_list", v.file_list_);
+    ar << make_nvp("project_items", v.project_items_);
 }
 
 template<typename Archive>
@@ -76,7 +76,7 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("formattables", v.formattables_);
-    ar >> make_nvp("file_list", v.file_list_);
+    ar >> make_nvp("project_items", v.project_items_);
 }
 
 } }

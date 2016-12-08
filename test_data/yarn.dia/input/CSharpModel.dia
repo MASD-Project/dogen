@@ -65,13 +65,13 @@
   <dia:layer name="Background" visible="true" active="true">
     <dia:object type="UML - Class" version="0" id="O0">
       <dia:attribute name="obj_pos">
-        <dia:point val="4,11"/>
+        <dia:point val="4,15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="3.95,10.95;19.95,23.45"/>
+        <dia:rectangle val="3.95,14.95;19.95,27.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="4,11"/>
+        <dia:point val="4,15"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.9"/>
@@ -477,22 +477,22 @@ This is a remark.#</dia:string>
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O1">
       <dia:attribute name="obj_pos">
-        <dia:point val="4,3"/>
+        <dia:point val="4,5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="3.95,2.95;24.2,7.95"/>
+        <dia:rectangle val="3.95,4.95;40.37,11.55"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="4,3"/>
+        <dia:point val="4,5"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="20.150000000000002"/>
+        <dia:real val="36.32"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.8999999999999995"/>
+        <dia:real val="6.5"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -521,7 +521,7 @@ This is a remark.#</dia:string>
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="4.35,4.245"/>
+            <dia:point val="4.35,6.245"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>

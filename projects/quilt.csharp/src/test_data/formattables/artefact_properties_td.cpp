@@ -62,7 +62,8 @@ populate(const unsigned int position, result_type& v) {
     v.enabled(create_bool(position + 0));
     v.overwrite(create_bool(position + 1));
     v.file_path(create_boost_filesystem_path(position + 2));
-    v.using_dependencies(create_std_list_std_string(position + 3));
+    v.relative_path(create_boost_filesystem_path(position + 3));
+    v.using_dependencies(create_std_list_std_string(position + 4));
 }
 
 artefact_properties_generator::result_type

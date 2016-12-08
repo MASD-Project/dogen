@@ -42,7 +42,6 @@ namespace formattables {
 
 void file_path_expander::
 expand(const formatters::repository& frp, const locator& l, model& fm) const {
-
     const auto safba(frp.stock_artefact_formatters_by_archetype());
     for (auto& pair : fm.formattables()) {
         const auto id(pair.first);
@@ -73,6 +72,9 @@ expand(const formatters::repository& frp, const locator& l, model& fm) const {
              */
             const auto& fmt(i->second);
             art_props.file_path(fmt->full_path(l, n));
+
+            const auto rp(l.make_relative_path(art_props.file_path()));
+            art_props.relative_path(rp);
         }
     }
 }

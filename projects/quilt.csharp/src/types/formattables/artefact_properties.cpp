@@ -33,16 +33,19 @@ artefact_properties::artefact_properties(artefact_properties&& rhs)
     : enabled_(std::move(rhs.enabled_)),
       overwrite_(std::move(rhs.overwrite_)),
       file_path_(std::move(rhs.file_path_)),
+      relative_path_(std::move(rhs.relative_path_)),
       using_dependencies_(std::move(rhs.using_dependencies_)) { }
 
 artefact_properties::artefact_properties(
     const bool enabled,
     const bool overwrite,
     const boost::filesystem::path& file_path,
+    const boost::filesystem::path& relative_path,
     const std::list<std::string>& using_dependencies)
     : enabled_(enabled),
       overwrite_(overwrite),
       file_path_(file_path),
+      relative_path_(relative_path),
       using_dependencies_(using_dependencies) { }
 
 void artefact_properties::swap(artefact_properties& other) noexcept {
@@ -50,6 +53,7 @@ void artefact_properties::swap(artefact_properties& other) noexcept {
     swap(enabled_, other.enabled_);
     swap(overwrite_, other.overwrite_);
     swap(file_path_, other.file_path_);
+    swap(relative_path_, other.relative_path_);
     swap(using_dependencies_, other.using_dependencies_);
 }
 
@@ -57,6 +61,7 @@ bool artefact_properties::operator==(const artefact_properties& rhs) const {
     return enabled_ == rhs.enabled_ &&
         overwrite_ == rhs.overwrite_ &&
         file_path_ == rhs.file_path_ &&
+        relative_path_ == rhs.relative_path_ &&
         using_dependencies_ == rhs.using_dependencies_;
 }
 
@@ -96,6 +101,22 @@ void artefact_properties::file_path(const boost::filesystem::path& v) {
 
 void artefact_properties::file_path(const boost::filesystem::path&& v) {
     file_path_ = std::move(v);
+}
+
+const boost::filesystem::path& artefact_properties::relative_path() const {
+    return relative_path_;
+}
+
+boost::filesystem::path& artefact_properties::relative_path() {
+    return relative_path_;
+}
+
+void artefact_properties::relative_path(const boost::filesystem::path& v) {
+    relative_path_ = v;
+}
+
+void artefact_properties::relative_path(const boost::filesystem::path&& v) {
+    relative_path_ = std::move(v);
 }
 
 const std::list<std::string>& artefact_properties::using_dependencies() const {
