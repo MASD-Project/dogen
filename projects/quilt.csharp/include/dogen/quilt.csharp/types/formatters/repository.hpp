@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <string>
 #include <memory>
 #include <typeindex>
 #include <forward_list>

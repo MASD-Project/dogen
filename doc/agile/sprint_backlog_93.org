@@ -12,32 +12,33 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-12-08 Thu 17:27]
+#+CAPTION: Clock summary at [2016-12-08 Thu 19:34]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *49:46* |       |       | 100.0 |
+| *Total time*                                                                | *50:19* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 49:46   |       |       | 100.0 |
-| Active                                                                      |         | 49:46 |       | 100.0 |
+| Stories                                                                     | 50:19   |       |       | 100.0 |
+| Active                                                                      |         | 50:19 |       | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  2:24 |   4.8 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  1:02 |   2.1 |
 | COMPLETED Update readme                                                     |         |       |  0:11 |   0.4 |
 | COMPLETED Test data generation for dates generates invalid dates            |         |       |  0:33 |   1.1 |
 | COMPLETED Handle missing stitch templates scenario                          |         |       |  1:04 |   2.1 |
 | COMPLETED Move project directory to output options                          |         |       |  1:10 |   2.3 |
-| COMPLETED Update the conceptual model to clarify backends and kernels       |         |       |  4:20 |   8.7 |
+| COMPLETED Update the conceptual model to clarify backends and kernels       |         |       |  4:20 |   8.6 |
 | COMPLETED Detect knitter and disable code generation accordingly            |         |       |  1:15 |   2.5 |
-| COMPLETED Clean up kernel and backend confusion                             |         |       |  5:17 |  10.6 |
-| COMPLETED Add a "language" directory for each backend                       |         |       |  5:44 |  11.5 |
+| COMPLETED Clean up kernel and backend confusion                             |         |       |  5:17 |  10.5 |
+| COMPLETED Add a "language" directory for each backend                       |         |       |  5:44 |  11.4 |
 | COMPLETED Split C++ profiles and templates from C#                          |         |       |  1:11 |   2.4 |
 | COMPLETED Formatter registrar validation is not being called                |         |       |  0:20 |   0.7 |
 | COMPLETED Move decoration repository to quilt                               |         |       |  0:43 |   1.4 |
 | COMPLETED Move module id container into yarn                                |         |       |  0:24 |   0.8 |
-| COMPLETED Add basic infrastructure for C#                                   |         |       | 16:59 |  34.1 |
+| COMPLETED Add basic infrastructure for C#                                   |         |       | 16:59 |  33.8 |
 | COMPLETED Add support for C#-style documentation                            |         |       |  1:57 |   3.9 |
+| STARTED OSX build is borked                                                 |         |       |  0:21 |   0.7 |
 | STARTED Add support for Decimal numbers                                     |         |       |  0:32 |   1.1 |
-| STARTED Add support for visual studio projects and solutions                |         |       |  4:40 |   9.4 |
+| STARTED Add support for visual studio projects and solutions                |         |       |  4:52 |   9.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -436,6 +437,30 @@ Formatters at present does not support C# documentation. Sample ([[https://githu
 
 Add a new enum for it and update comment formatter with this style.
 
+*** STARTED OSX build is borked
+    CLOCK: [2016-12-08 Thu 19:29]--[2016-12-08 Thu 19:33] =>  0:04
+    CLOCK: [2016-12-08 Thu 19:11]--[2016-12-08 Thu 19:28] =>  0:17
+
+We seem to have broken the OSX build with commit 8799814. The error
+is:
+
+: In file included from /Users/travis/build/DomainDrivenConsulting/dogen/projects/quilt.csharp/src/types/formatters/repository.cpp:21:
+: In file included from /Users/travis/build/DomainDrivenConsulting/dogen/projects/quilt.csharp/include/dogen/quilt.csharp/types/formatters/repository.hpp:31:
+: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/unordered_map:383:35: error: no member named 'value' in 'std::__1::is_empty<std::__1::hash<std::__1::basic_string<char> > >'
+:          bool = is_empty<_Hash>::value && !__libcpp_is_final<_Hash>::value
+                 ~~~~~~~~~~~~~~~~~^
+: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/unordered_map:765:13: note: in instantiation of default argument for '__unordered_map_hasher<std::__1::basic_string<char>, std::__1::__hash_value_type<std::__1::basic_string<char>, boost::shared_ptr<dogen::annotations::value> >, std::__1::hash<std::__1::basic_string<char> > >' required here
+:    typedef __unordered_map_hasher<key_type, __value_type, hasher>   __hasher;
+:            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+: /Users/travis/build/DomainDrivenConsulting/dogen/projects/annotations/include/dogen/annotations/types/annotation.hpp:88:84: note: in instantiation of template class 'std::__1::unordered_map<std::__1::basic_string<char>, boost::shared_ptr<dogen::annotations::value>, std::__1::hash<std::__1::basic_string<char> >, std::__1::equal_to<std::__1::basic_string<char> >, std::__1::allocator<std::__1::pair<const std::__1::basic_string<char>, boost::shared_ptr<dogen::annotations::value> > > >' requested here
+:    std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> > entries_;
+
+https://travis-ci.org/DomainDrivenConsulting/dogen/jobs/181637659
+
+According to this SO post, seems like we're missing a string include:
+
+[[http://stackoverflow.com/questions/32121497/this-hash-only-works-for-enumeration-types][This hash only works for enumeration types]]
+
 *** STARTED Add support for Decimal numbers                           :story:
     CLOCK: [2016-11-30 Wed 13:04]--[2016-11-30 Wed 13:36] =>  0:32
 
@@ -443,6 +468,8 @@ Add a new enum for it and update comment formatter with this style.
 - check compiler support (MSVC may have decimals; if so, use that instead)
 
 *** STARTED Add support for visual studio projects and solutions      :story:
+    CLOCK: [2016-12-08 Thu 17:37]--[2016-12-08 Thu 17:42] =>  0:05
+    CLOCK: [2016-12-08 Thu 17:29]--[2016-12-08 Thu 17:36] =>  0:07
     CLOCK: [2016-12-08 Thu 16:15]--[2016-12-08 Thu 17:27] =>  1:12
     CLOCK: [2016-12-08 Thu 15:03]--[2016-12-08 Thu 16:14] =>  1:11
     CLOCK: [2016-12-08 Thu 14:21]--[2016-12-08 Thu 15:02] =>  0:41
