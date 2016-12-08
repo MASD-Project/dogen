@@ -1,0 +1,91 @@
+<#@ annotations.profile=dogen.stitch #>
+<#@ stitch.containing_namespaces=dogen::quilt::csharp::formatters #>
+<#@ stitch.inclusion_dependency=<typeinfo> #>
+<#@ stitch.inclusion_dependency=<boost/make_shared.hpp> #>
+<#@ stitch.inclusion_dependency="dogen/formatters/types/sequence_formatter.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.csharp/types/traits.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.csharp/types/formatters/traits.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.csharp/types/formatters/types/traits.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.csharp/types/formatters/assistant.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.csharp/types/fabric/visual_studio_project.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.csharp/types/formatters/visual_studio_project_formatter.hpp" #>
+<#+
+
+std::string visual_studio_project_formatter::static_artefact() {
+    return traits::visual_studio_project_archetype();
+}
+
+std::string visual_studio_project_formatter::formatter_name() const {
+    static auto r(archetype_location().archetype());
+    return r;
+}
+
+annotations::archetype_location visual_studio_project_formatter::archetype_location() const {
+    static annotations::archetype_location
+        r(csharp::traits::family(), csharp::traits::kernel(),
+          traits::visual_studio_facet(),
+          visual_studio_project_formatter::static_artefact());
+    return r;
+}
+
+std::type_index visual_studio_project_formatter::element_type_index() const {
+    static auto r(std::type_index(typeid(fabric::visual_studio_project)));
+    return r;
+}
+
+boost::filesystem::path visual_studio_project_formatter::
+full_path(const formattables::locator& l, const yarn::name& n) const {
+    return l.make_full_path_for_project(n, static_artefact());
+}
+
+std::list<std::string> visual_studio_project_formatter::
+inclusion_dependencies(const yarn::element& /*e*/) const {
+    std::list<std::string> r;
+    return r;
+}
+
+dogen::formatters::artefact
+visual_studio_project_formatter::format(const context& ctx, const yarn::element& e) const {
+    const auto id(e.name().id());
+    assistant a(ctx, archetype_location(), id);
+#>
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9E645ACD-C04A-4734-AB23-C3FCC0F7981B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>CSharpModel</RootNamespace>
+    <AssemblyName>CSharpModel</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AllPrimitives.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>
+<#+
+    return a.make_artefact();
+}
+#>

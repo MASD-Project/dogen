@@ -31,6 +31,7 @@
 #include "dogen/quilt.csharp/types/initializer.hpp"
 #include "dogen/quilt.csharp/types/workflow_error.hpp"
 #include "dogen/quilt.csharp/types/fabric/injector.hpp"
+#include "dogen/quilt.csharp/types/formatters/traits.hpp"
 #include "dogen/quilt.csharp/types/fabric/initializer.hpp"
 #include "dogen/quilt.csharp/types/formattables/model.hpp"
 #include "dogen/quilt.csharp/types/formatters/context.hpp"
@@ -79,5 +80,6 @@
 #include "dogen/quilt.csharp/types/fabric/visual_studio_solution_factory.hpp"
 #include "dogen/quilt.csharp/types/formatters/artefact_formatter_interface.hpp"
 #include "dogen/quilt.csharp/types/formatters/visual_studio_project_formatter.hpp"
+#include "dogen/quilt.csharp/types/formatters/visual_studio_solution_formatter.hpp"
 
 #endif

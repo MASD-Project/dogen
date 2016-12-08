@@ -149,7 +149,9 @@ boost::filesystem::path locator::make_facet_path(
     std::ostringstream stream;
     stream << n.simple();
 
-    stream << dot << extension;
+    if (!extension.empty())
+        stream << dot << extension;
+
     r /= stream.str();
 
     BOOST_LOG_SEV(lg, debug) << "Done making the facet path. Result: " << r;
@@ -161,6 +163,22 @@ boost::filesystem::path locator::make_full_path(
 
     auto r(project_path_);
     const auto facet_path(make_facet_path(archetype, extension, n));
+    r /= facet_path;
+    return r;
+}
+
+boost::filesystem::path locator::make_full_path_for_project(
+    const yarn::name& n, const std::string& archetype) const {
+    auto r(project_path_);
+    const auto facet_path(make_facet_path(archetype, empty, n));
+    r /= facet_path;
+    return r;
+}
+
+boost::filesystem::path locator::make_full_path_for_solution(
+    const yarn::name& n, const std::string& archetype) const {
+    auto r(project_path_);
+    const auto facet_path(make_facet_path(archetype, empty, n));
     r /= facet_path;
     return r;
 }

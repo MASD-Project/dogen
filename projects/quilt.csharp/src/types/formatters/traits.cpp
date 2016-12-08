@@ -18,21 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.csharp/types/formatters/registrar.hpp"
-#include "dogen/quilt.csharp/types/formatters/visual_studio_project_formatter.hpp"
-#include "dogen/quilt.csharp/types/formatters/visual_studio_solution_formatter.hpp"
-#include "dogen/quilt.csharp/types/formatters/types/initializer.hpp"
-#include "dogen/quilt.csharp/types/formatters/initializer.hpp"
+#include "dogen/quilt.csharp/types/formatters/traits.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace csharp {
 namespace formatters {
 
-void initializer::initialize(registrar& rg) {
-    register_formatter<visual_studio_project_formatter>(rg);
-    register_formatter<visual_studio_solution_formatter>(rg);
-    types::initializer::initialize(rg);
+std::string traits::visual_studio_facet() {
+    static std::string r("visual_studio");
+    return r;
+}
+
+
+std::string traits::visual_studio_project_archetype() {
+    static std::string r("quilt.cpp.cmake.visual_studio_project_archetype");
+    return r;
+}
+
+std::string traits::visual_studio_solution_archetype() {
+    static std::string r("quilt.cpp.cmake.visual_studio_solution_archetype");
+    return r;
 }
 
 } } } }

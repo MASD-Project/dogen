@@ -1,0 +1,74 @@
+<#@ annotations.profile=dogen.stitch #>
+<#@ stitch.containing_namespaces=dogen::quilt::csharp::formatters #>
+<#@ stitch.inclusion_dependency=<typeinfo> #>
+<#@ stitch.inclusion_dependency=<boost/make_shared.hpp> #>
+<#@ stitch.inclusion_dependency="dogen/formatters/types/sequence_formatter.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.csharp/types/traits.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.csharp/types/formatters/traits.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.csharp/types/formatters/types/traits.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.csharp/types/formatters/assistant.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.csharp/types/fabric/visual_studio_solution.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.csharp/types/formatters/visual_studio_solution_formatter.hpp" #>
+<#+
+
+std::string visual_studio_solution_formatter::static_artefact() {
+    return traits::visual_studio_solution_archetype();
+}
+
+std::string visual_studio_solution_formatter::formatter_name() const {
+    static auto r(archetype_location().archetype());
+    return r;
+}
+
+annotations::archetype_location visual_studio_solution_formatter::archetype_location() const {
+    static annotations::archetype_location
+        r(csharp::traits::family(), csharp::traits::kernel(),
+          traits::visual_studio_facet(),
+          visual_studio_solution_formatter::static_artefact());
+    return r;
+}
+
+std::type_index visual_studio_solution_formatter::element_type_index() const {
+    static auto r(std::type_index(typeid(fabric::visual_studio_solution)));
+    return r;
+}
+
+boost::filesystem::path visual_studio_solution_formatter::
+full_path(const formattables::locator& l, const yarn::name& n) const {
+    return l.make_full_path_for_solution(n, static_artefact());
+}
+
+std::list<std::string> visual_studio_solution_formatter::
+inclusion_dependencies(const yarn::element& /*e*/) const {
+    std::list<std::string> r;
+    return r;
+}
+
+dogen::formatters::artefact
+visual_studio_solution_formatter::format(const context& ctx, const yarn::element& e) const {
+    const auto id(e.name().id());
+    assistant a(ctx, archetype_location(), id);
+#>
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpModel", "CSharpModel.csproj", "{9E645ACD-C04A-4734-AB23-C3FCC0F7981B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9E645ACD-C04A-4734-AB23-C3FCC0F7981B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E645ACD-C04A-4734-AB23-C3FCC0F7981B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E645ACD-C04A-4734-AB23-C3FCC0F7981B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E645ACD-C04A-4734-AB23-C3FCC0F7981B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = CSharpModel.csproj
+	EndGlobalSection
+EndGlobal
+<#+
+    return a.make_artefact();
+}
+#>

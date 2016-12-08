@@ -93,6 +93,12 @@ public:
     boost::filesystem::path
     make_full_path(const yarn::name& n, const std::string& archetype) const;
 
+    boost::filesystem::path make_full_path_for_project(
+        const yarn::name& n, const std::string& archetype) const;
+
+    boost::filesystem::path make_full_path_for_solution(
+        const yarn::name& n, const std::string& archetype) const;
+
 private:
     const yarn::name& model_name_;
     const locator_configuration configuration_;

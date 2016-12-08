@@ -18,21 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.csharp/types/formatters/registrar.hpp"
-#include "dogen/quilt.csharp/types/formatters/visual_studio_project_formatter.hpp"
-#include "dogen/quilt.csharp/types/formatters/visual_studio_solution_formatter.hpp"
-#include "dogen/quilt.csharp/types/formatters/types/initializer.hpp"
-#include "dogen/quilt.csharp/types/formatters/initializer.hpp"
+#ifndef DOGEN_QUILT_CSHARP_TYPES_FORMATTERS_TRAITS_HPP
+#define DOGEN_QUILT_CSHARP_TYPES_FORMATTERS_TRAITS_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <string>
 
 namespace dogen {
 namespace quilt {
 namespace csharp {
 namespace formatters {
 
-void initializer::initialize(registrar& rg) {
-    register_formatter<visual_studio_project_formatter>(rg);
-    register_formatter<visual_studio_solution_formatter>(rg);
-    types::initializer::initialize(rg);
-}
+struct traits final {
+    static std::string visual_studio_facet();
+    static std::string visual_studio_project_archetype();
+    static std::string visual_studio_solution_archetype();
+};
 
 } } } }
+
+#endif
