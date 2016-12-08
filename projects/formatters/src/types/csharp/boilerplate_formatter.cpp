@@ -37,8 +37,8 @@ format_preamble(std::ostream& s, const decoration_properties& dc) const {
         return;
 
     decoration_formatter af;
-    af.format_preamble(s, comment_styles::cpp_style/*single line*/,
-        comment_styles::cpp_style/*multi-line*/, dc);
+    af.format_preamble(s, comment_styles::csharp_style/*single line*/,
+        comment_styles::csharp_style/*multi-line*/, dc);
 }
 
 void boilerplate_formatter::
@@ -58,7 +58,7 @@ format_begin(std::ostream& s, const decoration_properties& dc,
 void boilerplate_formatter::
 format_postamble(std::ostream& s, const decoration_properties& dc) const {
     decoration_formatter af;
-    af.format_postamble(s, comment_styles::cpp_style, dc);
+    af.format_postamble(s, comment_styles::csharp_style, dc);
 }
 
 void boilerplate_formatter::

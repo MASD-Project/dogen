@@ -42,6 +42,21 @@ const std::string doxygen_c_style_empty(R"(/**
  */
 )");
 
+const std::string csharp_style_empty(R"(//
+//
+//
+)");
+
+const std::string doxygen_csharp_style_empty(R"(/**
+ *
+ */
+)");
+
+const std::string sandcastle_csharp_style_empty(R"(///
+///
+///
+)");
+
 const std::string licence_c_style(R"(/* -*- mode: xyz; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
  * Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
@@ -49,6 +64,14 @@ const std::string licence_c_style(R"(/* -*- mode: xyz; tab-width: 4; indent-tabs
  * This program is free software; you can redistribute it and/or modify
  *
  */
+)");
+
+const std::string licence_csharp_style(R"(// -*- mode: xyz; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+//
+// Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
+//
+// This program is free software; you can redistribute it and/or modify
+//
 )");
 
 const std::string licence_shell_style(R"(# -*- mode: xyz; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
@@ -67,6 +90,10 @@ const std::string function_doxygen(R"(/**
  */
 )");
 const std::string doxygen_brief("Ends the comment block.");
+const std::string function_sandcastle(R"(/// <summary>
+/// Ends the comment block.
+/// </summary>
+)");
 
 const std::string modeline(
     "-*- mode: xyz; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-");
@@ -91,6 +118,18 @@ const std::string multi_line_doxygen_c_style(R"(/**
  * required level of flexibility needed by Dogen. Thus it does not aim to model
  *
  */
+)");
+
+const std::string multi_line_sandcastle_csharp_style(R"(/// <summary>
+/// OM is the Output Model.
+/// </summary>
+/// <remarks>
+/// @section om_0 Objective
+///
+/// OM was designed to model the contents of the files to output with only the
+/// required level of flexibility needed by Dogen. Thus it does not aim to model
+/// </remarks>
+///
 )");
 
 const std::string multi_line_text(R"(use extensions similar to the dogen ones
@@ -157,6 +196,35 @@ BOOST_AUTO_TEST_CASE(formatting_empty_string_as_doxygen_c_style_comment_produces
     BOOST_CHECK(asserter::assert_equals_marker(doxygen_c_style_empty, r));
 }
 
+BOOST_AUTO_TEST_CASE(formatting_empty_string_as_csharp_style_comment_produces_expected_output) {
+    SETUP_TEST_LOG_SOURCE("formatting_empty_string_as_csharp_style_comment_produces_expected_output");
+
+    dogen::formatters::comment_formatter f(
+        start_on_first_line,
+        !use_documentation_tool_markup,
+        !documenting_previous_identifier,
+        dogen::formatters::comment_styles::csharp_style,
+        last_line_is_blank);
+
+    const auto r(format(f, empty));
+    BOOST_CHECK(asserter::assert_equals_marker(csharp_style_empty, r));
+}
+
+BOOST_AUTO_TEST_CASE(formatting_empty_string_as_sandcastle_csharp_style_comment_produces_expected_output) {
+    SETUP_TEST_LOG_SOURCE("formatting_empty_string_as_sandcastle_csharp_style_comment_produces_expected_output");
+
+    dogen::formatters::comment_formatter f(
+        start_on_first_line,
+        use_documentation_tool_markup,
+        !documenting_previous_identifier,
+        dogen::formatters::comment_styles::csharp_style,
+        last_line_is_blank);
+
+    const auto r(format(f, empty));
+    BOOST_CHECK(
+        asserter::assert_equals_marker(sandcastle_csharp_style_empty, r));
+}
+
 BOOST_AUTO_TEST_CASE(formatting_licence_as_c_style_comment_produces_expected_output) {
     SETUP_TEST_LOG_SOURCE("formatting_licence_as_c_style_comment_produces_expected_output");
 
@@ -170,6 +238,21 @@ BOOST_AUTO_TEST_CASE(formatting_licence_as_c_style_comment_produces_expected_out
     std::list<std::string> content { modeline, licence };
     const auto r(format(f, content, line_between_blocks));
     BOOST_CHECK(asserter::assert_equals_marker(licence_c_style, r));
+}
+
+BOOST_AUTO_TEST_CASE(formatting_licence_as_csharp_style_comment_produces_expected_output) {
+    SETUP_TEST_LOG_SOURCE("formatting_licence_as_csharp_style_comment_produces_expected_output");
+
+    dogen::formatters::comment_formatter f(
+        start_on_first_line,
+        !use_documentation_tool_markup,
+        !documenting_previous_identifier,
+        dogen::formatters::comment_styles::csharp_style,
+        last_line_is_blank);
+
+    std::list<std::string> content { modeline, licence };
+    const auto r(format(f, content, line_between_blocks));
+    BOOST_CHECK(asserter::assert_equals_marker(licence_csharp_style, r));
 }
 
 BOOST_AUTO_TEST_CASE(formatting_licence_as_shell_style_comment_produces_expected_output) {
@@ -215,6 +298,20 @@ BOOST_AUTO_TEST_CASE(formatting_one_line_as_doxygen_c_style_comment_produces_exp
     BOOST_CHECK(asserter::assert_equals_marker(function_doxygen, r));
 }
 
+BOOST_AUTO_TEST_CASE(formatting_one_line_as_sandcastle_csharp_style_comment_produces_expected_output) {
+    SETUP_TEST_LOG_SOURCE("formatting_one_line_as_sandcastle_csharp_style_comment_produces_expected_output");
+
+    dogen::formatters::comment_formatter f(
+        start_on_first_line,
+        use_documentation_tool_markup,
+        !documenting_previous_identifier,
+        dogen::formatters::comment_styles::csharp_style,
+        !last_line_is_blank);
+
+    const auto r(format(f, doxygen_brief));
+    BOOST_CHECK(asserter::assert_equals_marker(function_sandcastle, r));
+}
+
 BOOST_AUTO_TEST_CASE(formatting_multi_line_as_doxygen_c_style_comment_produces_expected_output) {
     SETUP_TEST_LOG_SOURCE("formatting_multi_line_as_doxygen_c_style_comment_produces_expected_output");
 
@@ -227,6 +324,21 @@ BOOST_AUTO_TEST_CASE(formatting_multi_line_as_doxygen_c_style_comment_produces_e
 
     const auto r(format(f, doxgen_multi_line));
     BOOST_CHECK(asserter::assert_equals_marker(multi_line_doxygen_c_style, r));
+}
+
+BOOST_AUTO_TEST_CASE(formatting_multi_line_as_sandcastle_csharp_style_comment_produces_expected_output) {
+    SETUP_TEST_LOG_SOURCE("formatting_multi_line_as_sandcastle_csharp_style_comment_produces_expected_output");
+
+    dogen::formatters::comment_formatter f(
+        start_on_first_line,
+        use_documentation_tool_markup,
+        !documenting_previous_identifier,
+        dogen::formatters::comment_styles::csharp_style,
+        last_line_is_blank);
+
+    const auto r(format(f, doxgen_multi_line));
+    BOOST_CHECK(
+        asserter::assert_equals_marker(multi_line_sandcastle_csharp_style, r));
 }
 
 BOOST_AUTO_TEST_CASE(formatting_one_line_as_doxygen_cpp_style_comment_produces_expected_output) {

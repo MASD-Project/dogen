@@ -106,10 +106,8 @@ register_formatter(std::shared_ptr<artefact_formatter_interface> f) {
     auto& fffn(formatter_repository_.stock_artefact_formatters_by_archetype());
     const auto pair(std::make_pair(arch, f));
     const auto inserted(fffn.insert(pair).second);
-    if (!inserted) {
-        BOOST_LOG_SEV(lg, error) << duplicate_formatter_name << arch;
+    if (!inserted)
         BOOST_THROW_EXCEPTION(registrar_error(duplicate_formatter_name + arch));
-    }
 }
 
 const repository& registrar::formatter_repository() const {

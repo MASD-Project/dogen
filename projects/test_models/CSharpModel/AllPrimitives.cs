@@ -19,11 +19,12 @@
 //
 namespace Dogen.TestModels.CSharpModel
 {
-    /**
-     * @brief This is a class made up of just primitives.
-     *
-     * This is a remark.
-     */
+    /// <summary>
+    /// This is a class made up of just primitives.
+    /// </summary>
+    /// <remarks>
+    /// This is a remark.
+    /// </remarks>
     class AllPrimitives
     {
     };

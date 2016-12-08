@@ -71,6 +71,38 @@ public:
 
 private:
     /**
+     * @brief Ensures formatter is in a valid state.
+     */
+    void validate() const;
+
+private:
+    /**
+     * @brief Adds any documentation tool specific markers (if any) to
+     * denote the start of the overview.
+     */
+    void add_start_overview(std::ostream& s) const;
+
+    /**
+     * @brief Adds any documentation tool specific markers (if any) to
+     * denote the end of the overview.
+     */
+    void add_end_overview(std::ostream& s,
+        const bool add_new_line = false) const;
+
+    /**
+     * @brief Adds any documentation tool specific markers (if any) to
+     * denote the start of the body of the documentation.
+     */
+    void add_start_body(std::ostream& s) const;
+
+    /**
+     * @brief Adds any documentation tool specific markers (if any) to
+     * denote the start of the body of the documentation.
+     */
+    void add_end_body(std::ostream& s) const;
+
+private:
+    /**
      * @brief Starts the comment block.
      */
     void add_comment_start_marker(std::ostream& s) const;

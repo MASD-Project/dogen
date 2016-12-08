@@ -350,7 +350,8 @@ At present we are obtaining the set of module id's inside
 =quilt.cpp=. This is also required by =quilt.csharp= so we need to
 move it up into yarn.
 
-*** STARTED Add basic infrastructure for C#                           :story:
+*** COMPLETED Add basic infrastructure for C#                         :story:
+    CLOSED: [2016-12-08 Thu 09:13]
     CLOCK: [2016-12-07 Wed 23:18]--[2016-12-07 Wed 23:38] =>  0:20
     CLOCK: [2016-12-07 Wed 22:55]--[2016-12-07 Wed 23:17] =>  0:22
     CLOCK: [2016-12-07 Wed 22:25]--[2016-12-07 Wed 22:54] =>  0:29
@@ -414,11 +415,34 @@ Tasks:
   that we generate its fields - remove the hack of manually generating
   archetype locations.
 
+*** COMPLETED Add support for C#-style documentation                  :story:
+    CLOSED: [2016-12-08 Thu 10:59]
+    CLOCK: [2016-12-08 Thu 09:02]--[2016-12-08 Thu 10:59] =>  1:57
+
+Formatters at present does not support C# documentation. Sample ([[https://github.com/mono/monodevelop/blob/master/main/src/core/MonoDevelop.Core/MonoDevelop.Core.Execution/ExecutionTarget.cs][source]]):
+
+: /// <summary>
+: /// Gets or sets a value indicating whether this <see cref="MonoDevelop.Core.Execution.ExecutionTarget"/> is notable.
+: /// </summary>
+: /// <remarks>
+: /// This is introduced to be able to highlight execution targets for whatever reason makes sense for the project.
+: /// For example, the android add-in uses this to indicate which emulators are currently running but other addins can use this
+: /// for their own purposes
+: /// </remarks>
+
+Add a new enum for it and update comment formatter with this style.
+
 *** STARTED Add support for Decimal numbers                           :story:
     CLOCK: [2016-11-30 Wed 13:04]--[2016-11-30 Wed 13:36] =>  0:32
 
 - try using ICU DecNumber library.
 - check compiler support (MSVC may have decimals; if so, use that instead)
+
+*** Clean up comment formatter                                        :story:
+
+Comment formatter is now a mess of ifs and boolean variables. We need
+to create a proper state machine describing its internals and then
+implement it.
 
 *** Consider removing filtering ostream                               :story:
 

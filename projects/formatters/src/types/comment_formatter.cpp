@@ -20,10 +20,18 @@
  */
 #include <ostream>
 #include <sstream>
+#include <boost/throw_exception.hpp>
+#include <boost/lexical_cast.hpp>
 #include <boost/algorithm/string.hpp>
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/formatters/io/comment_styles_io.hpp"
 #include "dogen/formatters/types/comment_formatter.hpp"
+#include "dogen/formatters/types/formatting_error.hpp"
 
 namespace {
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory("formatters.comment_formatter"));
 
 const std::string empty;
 const std::string plain_c_style_start("/*");
@@ -39,6 +47,8 @@ const std::string space(" ");
 const std::string brief("@brief");
 const std::string block_start("@{");
 const std::string block_end("@}");
+
+const std::string unsupported_style("Style is not supported: ");
 
 }
 
@@ -62,35 +72,106 @@ comment_formatter::comment_formatter(
       use_documentation_tool_markup_(use_documentation_tool_markup),
       documenting_previous_identifier_(documenting_previous_identifier),
       style_(style),
-      last_line_is_blank_(last_line_is_blank) { }
+      last_line_is_blank_(last_line_is_blank) {
+    validate();
+}
+
+void comment_formatter::validate() const {
+    bool is_syle_supported(
+        style_ == comment_styles::c_style ||
+        style_ == comment_styles::shell_style ||
+        style_ == comment_styles::sql_style ||
+        style_ == comment_styles::csharp_style ||
+        style_ == comment_styles::cpp_style);
+
+    if (!is_syle_supported) {
+        const auto s(boost::lexical_cast<std::string>(style_));
+        BOOST_LOG_SEV(lg, error) << unsupported_style << s;
+        BOOST_THROW_EXCEPTION(formatting_error(unsupported_style + s));
+    }
+}
+
+void comment_formatter::add_start_overview(std::ostream& s) const {
+    if (style_ == comment_styles::c_style ||
+        style_ == comment_styles::cpp_style)
+        s << brief << space;
+    else if (style_ == comment_styles::csharp_style) {
+        s << "<summary>" << std::endl;
+        add_comment_middle_marker(s);
+        s << space;
+    }
+}
+
+void comment_formatter::
+add_end_overview(std::ostream& s, bool add_new_line) const {
+    if (style_ == comment_styles::csharp_style) {
+        if (add_new_line)
+            add_comment_middle_marker(s);
+
+        s  << space << "</summary>";
+        if (add_new_line)
+            s << std::endl;
+    }
+}
+
+void comment_formatter::add_start_body(std::ostream& s) const {
+    if (style_ == comment_styles::csharp_style) {
+        s << "<remarks>" << std::endl;
+        add_comment_middle_marker(s);
+        s << space;
+    }
+}
+
+void comment_formatter::add_end_body(std::ostream& s) const {
+    if (style_ == comment_styles::csharp_style) {
+        add_comment_middle_marker(s);
+        s << space << "</remarks>" << std::endl;
+    }
+}
 
 void comment_formatter::add_comment_start_marker(std::ostream& s) const {
-    if (style_ == comment_styles::c_style) {
-        if (use_documentation_tool_markup_) {
-            s << doxygen_c_style_start;
-            if (documenting_previous_identifier_)
-                s << doxygen_previous_identifier;
-        } else
-            s << plain_c_style_start;
-    } else
+    if (style_ != comment_styles::c_style) {
         add_comment_middle_marker(s);
+        return;
+    }
+
+    if (use_documentation_tool_markup_) {
+        s << doxygen_c_style_start;
+        if (documenting_previous_identifier_)
+            s << doxygen_previous_identifier;
+    } else
+        s << plain_c_style_start;
 }
 
 void comment_formatter::add_comment_middle_marker(std::ostream& s) const {
-    if (style_ == comment_styles::c_style)
+    switch(style_) {
+    case comment_styles::c_style:
         s << c_style_middle;
-    else if (style_ == comment_styles::cpp_style) {
+        break;
+    case comment_styles::cpp_style:
         if (use_documentation_tool_markup_) {
             s << doxygen_cpp_style;
             if (documenting_previous_identifier_)
                 s << doxygen_previous_identifier;
-        }
-        else
+        } else
             s << plain_cpp_style;
-    } else if (style_ == comment_styles::shell_style) {
+        break;
+    case comment_styles::shell_style:
         s << shell_style;
-    } else if (style_ == comment_styles::sql_style) {
+        break;
+    case comment_styles::sql_style:
         s << sql_style;
+        break;
+    case comment_styles::csharp_style:
+        if (use_documentation_tool_markup_) {
+            s << doxygen_cpp_style;
+        } else
+            s << plain_cpp_style;
+        break;
+    default:
+        const auto s(boost::lexical_cast<std::string>(style_));
+        BOOST_LOG_SEV(lg, error) << unsupported_style << s;
+        BOOST_THROW_EXCEPTION(formatting_error(unsupported_style + s));
     }
 }
 
@@ -127,6 +208,11 @@ format(std::ostream& s, const std::list<std::string>& content,
     bool is_first_line(true);
     bool is_first_block(true);
     bool content_found(false);
+    bool in_overview(true);
+    bool in_body(false);
+    bool needs_start_body(false);
+    bool needs_end_body(false);
+    bool needs_end_overview(false);
     for (const auto& c : content) {
         content_found = content_found || !c.empty();
 
@@ -135,8 +221,8 @@ format(std::ostream& s, const std::list<std::string>& content,
             s << std::endl;
         }
 
-        std::istringstream content_stream(c);
         std::string line;
+        std::istringstream content_stream(c);
         while (std::getline(content_stream, line)) {
             boost::algorithm::trim_right(line);
             if (is_first_line) {
@@ -151,9 +237,22 @@ format(std::ostream& s, const std::list<std::string>& content,
                 s << space;
                 if (is_first_line && is_first_block &&
                     use_documentation_tool_markup_ &&
-                    !documenting_previous_identifier_)
-                    s << brief << space;
+                    !documenting_previous_identifier_) {
+                    add_start_overview(s);
+                    needs_end_overview = true;
+                } else if (in_body && needs_start_body) {
+                    add_start_body(s);
+                    needs_start_body = false;
+                    needs_end_body = true;
+                }
                 s << line;
+            } else if (!is_first_line && use_documentation_tool_markup_ &&
+                in_overview) {
+                add_end_overview(s);
+                needs_end_overview = false;
+                in_overview = false;
+                in_body = true;
+                needs_start_body = true;
             }
 
             // FIXME: massive hack: we assume that documenting
@@ -167,6 +266,11 @@ format(std::ostream& s, const std::list<std::string>& content,
         }
         is_first_block = false;
     }
+
+    if (needs_end_overview)
+        add_end_overview(s, true);
+    else if (needs_end_body)
+        add_end_body(s);
 
     if (!content_found) {
         s << std::endl;

@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/quilt.csharp/types/formatters/context.hpp"
 #include "dogen/quilt.csharp/types/formatters/workflow.hpp"

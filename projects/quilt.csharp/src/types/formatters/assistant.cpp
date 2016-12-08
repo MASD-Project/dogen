@@ -102,10 +102,10 @@ void assistant::comment(const std::string& c) {
     {
         dogen::formatters::positive_indenter_scope pis(stream());
         dogen::formatters::comment_formatter f(
-            !start_on_first_line,
+            start_on_first_line,
             use_documentation_tool_markup,
             !documenting_previous_identifier,
-            dogen::formatters::comment_styles::c_style,
+            dogen::formatters::comment_styles::csharp_style,
             !last_line_is_blank);
         f.format(stream(), c);
     }
