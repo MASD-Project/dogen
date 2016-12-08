@@ -18,20 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CSHARP_SERIALIZATION_ALL_SER_HPP
-#define DOGEN_QUILT_CSHARP_SERIALIZATION_ALL_SER_HPP
+#ifndef DOGEN_QUILT_CSHARP_TEST_DATA_FABRIC_VISUAL_STUDIO_SOLUTION_TD_HPP
+#define DOGEN_QUILT_CSHARP_TEST_DATA_FABRIC_VISUAL_STUDIO_SOLUTION_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/quilt.csharp/serialization/formattables/model_ser.hpp"
-#include "dogen/quilt.csharp/serialization/fabric/assembly_info_ser.hpp"
-#include "dogen/quilt.csharp/serialization/formattables/formattable_ser.hpp"
-#include "dogen/quilt.csharp/serialization/fabric/visual_studio_project_ser.hpp"
-#include "dogen/quilt.csharp/serialization/fabric/visual_studio_solution_ser.hpp"
-#include "dogen/quilt.csharp/serialization/formattables/element_properties_ser.hpp"
-#include "dogen/quilt.csharp/serialization/formattables/artefact_properties_ser.hpp"
-#include "dogen/quilt.csharp/serialization/formattables/locator_configuration_ser.hpp"
+#include "dogen/quilt.csharp/types/fabric/visual_studio_solution.hpp"
+
+namespace dogen {
+namespace quilt {
+namespace csharp {
+namespace fabric {
+
+class visual_studio_solution_generator {
+public:
+    visual_studio_solution_generator();
+
+public:
+    typedef dogen::quilt::csharp::fabric::visual_studio_solution result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
+
+} } } }
 
 #endif

@@ -18,20 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CSHARP_SERIALIZATION_ALL_SER_HPP
-#define DOGEN_QUILT_CSHARP_SERIALIZATION_ALL_SER_HPP
+#ifndef DOGEN_QUILT_CSHARP_SERIALIZATION_FABRIC_ASSEMBLY_INFO_FWD_SER_HPP
+#define DOGEN_QUILT_CSHARP_SERIALIZATION_FABRIC_ASSEMBLY_INFO_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/quilt.csharp/serialization/formattables/model_ser.hpp"
-#include "dogen/quilt.csharp/serialization/fabric/assembly_info_ser.hpp"
-#include "dogen/quilt.csharp/serialization/formattables/formattable_ser.hpp"
-#include "dogen/quilt.csharp/serialization/fabric/visual_studio_project_ser.hpp"
-#include "dogen/quilt.csharp/serialization/fabric/visual_studio_solution_ser.hpp"
-#include "dogen/quilt.csharp/serialization/formattables/element_properties_ser.hpp"
-#include "dogen/quilt.csharp/serialization/formattables/artefact_properties_ser.hpp"
-#include "dogen/quilt.csharp/serialization/formattables/locator_configuration_ser.hpp"
+#include "dogen/quilt.csharp/types/fabric/assembly_info_fwd.hpp"
+
+namespace boost {
+namespace serialization {
+
+template<class Archive>
+void save(Archive& ar, const dogen::quilt::csharp::fabric::assembly_info& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, dogen::quilt::csharp::fabric::assembly_info& v, unsigned int version);
+
+} }
 
 #endif

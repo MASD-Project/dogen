@@ -18,20 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CSHARP_SERIALIZATION_ALL_SER_HPP
-#define DOGEN_QUILT_CSHARP_SERIALIZATION_ALL_SER_HPP
+#ifndef DOGEN_QUILT_CSHARP_TYPES_FABRIC_ASSEMBLY_INFO_FACTORY_HPP
+#define DOGEN_QUILT_CSHARP_TYPES_FABRIC_ASSEMBLY_INFO_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/quilt.csharp/serialization/formattables/model_ser.hpp"
-#include "dogen/quilt.csharp/serialization/fabric/assembly_info_ser.hpp"
-#include "dogen/quilt.csharp/serialization/formattables/formattable_ser.hpp"
-#include "dogen/quilt.csharp/serialization/fabric/visual_studio_project_ser.hpp"
-#include "dogen/quilt.csharp/serialization/fabric/visual_studio_solution_ser.hpp"
-#include "dogen/quilt.csharp/serialization/formattables/element_properties_ser.hpp"
-#include "dogen/quilt.csharp/serialization/formattables/artefact_properties_ser.hpp"
-#include "dogen/quilt.csharp/serialization/formattables/locator_configuration_ser.hpp"
+#include <algorithm>
+
+namespace dogen {
+namespace quilt {
+namespace csharp {
+namespace fabric {
+
+class assembly_info_factory final {
+public:
+    assembly_info_factory() = default;
+    assembly_info_factory(const assembly_info_factory&) = default;
+    assembly_info_factory(assembly_info_factory&&) = default;
+    ~assembly_info_factory() = default;
+    assembly_info_factory& operator=(const assembly_info_factory&) = default;
+
+public:
+    bool operator==(const assembly_info_factory& rhs) const;
+    bool operator!=(const assembly_info_factory& rhs) const {
+        return !this->operator==(rhs);
+    }
+
+};
+
+} } } }
 
 #endif

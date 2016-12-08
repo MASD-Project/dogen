@@ -18,36 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CSHARP_TYPES_FABRIC_VCPROJ_FACTORY_HPP
-#define DOGEN_QUILT_CSHARP_TYPES_FABRIC_VCPROJ_FACTORY_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <algorithm>
+#include "dogen/quilt.csharp/types/fabric/visual_studio_solution_factory.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace csharp {
 namespace fabric {
 
-class vcproj_factory final {
-public:
-    vcproj_factory() = default;
-    vcproj_factory(const vcproj_factory&) = default;
-    vcproj_factory(vcproj_factory&&) = default;
-    ~vcproj_factory() = default;
-    vcproj_factory& operator=(const vcproj_factory&) = default;
-
-public:
-    bool operator==(const vcproj_factory& rhs) const;
-    bool operator!=(const vcproj_factory& rhs) const {
-        return !this->operator==(rhs);
-    }
-
-};
+bool visual_studio_solution_factory::operator==(const visual_studio_solution_factory& /*rhs*/) const {
+    return true;
+}
 
 } } } }
-
-#endif

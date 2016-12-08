@@ -18,20 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CSHARP_SERIALIZATION_ALL_SER_HPP
-#define DOGEN_QUILT_CSHARP_SERIALIZATION_ALL_SER_HPP
+#include "dogen/quilt.csharp/test_data/fabric/assembly_info_td.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace dogen {
+namespace quilt {
+namespace csharp {
+namespace fabric {
 
-#include "dogen/quilt.csharp/serialization/formattables/model_ser.hpp"
-#include "dogen/quilt.csharp/serialization/fabric/assembly_info_ser.hpp"
-#include "dogen/quilt.csharp/serialization/formattables/formattable_ser.hpp"
-#include "dogen/quilt.csharp/serialization/fabric/visual_studio_project_ser.hpp"
-#include "dogen/quilt.csharp/serialization/fabric/visual_studio_solution_ser.hpp"
-#include "dogen/quilt.csharp/serialization/formattables/element_properties_ser.hpp"
-#include "dogen/quilt.csharp/serialization/formattables/artefact_properties_ser.hpp"
-#include "dogen/quilt.csharp/serialization/formattables/locator_configuration_ser.hpp"
+assembly_info_generator::assembly_info_generator() : position_(0) { }
 
-#endif
+void assembly_info_generator::
+populate(const unsigned int /*position*/, result_type& /*v*/) {
+}
+
+assembly_info_generator::result_type
+assembly_info_generator::create(const unsigned int/*position*/) {
+    assembly_info r;
+    return r;
+}
+
+assembly_info_generator::result_type*
+assembly_info_generator::create_ptr(const unsigned int position) {
+    assembly_info* p = new assembly_info();
+    assembly_info_generator::populate(position, *p);
+    return p;
+}
+
+assembly_info_generator::result_type
+assembly_info_generator::operator()() {
+    return create(position_++);
+}
+
+} } } }

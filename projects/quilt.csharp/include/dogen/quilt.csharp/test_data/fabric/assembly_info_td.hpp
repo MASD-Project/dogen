@@ -18,19 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CSHARP_TYPES_FABRIC_VCPROJ_FACTORY_FWD_HPP
-#define DOGEN_QUILT_CSHARP_TYPES_FABRIC_VCPROJ_FACTORY_FWD_HPP
+#ifndef DOGEN_QUILT_CSHARP_TEST_DATA_FABRIC_ASSEMBLY_INFO_TD_HPP
+#define DOGEN_QUILT_CSHARP_TEST_DATA_FABRIC_ASSEMBLY_INFO_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
+
+#include "dogen/quilt.csharp/types/fabric/assembly_info.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace csharp {
 namespace fabric {
 
-class vcproj_factory;
+class assembly_info_generator {
+public:
+    assembly_info_generator();
+
+public:
+    typedef dogen::quilt::csharp::fabric::assembly_info result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 } } } }
 

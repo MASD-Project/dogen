@@ -18,20 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CSHARP_SERIALIZATION_ALL_SER_HPP
-#define DOGEN_QUILT_CSHARP_SERIALIZATION_ALL_SER_HPP
+#ifndef DOGEN_QUILT_CSHARP_HASH_FABRIC_ASSEMBLY_INFO_HASH_HPP
+#define DOGEN_QUILT_CSHARP_HASH_FABRIC_ASSEMBLY_INFO_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/quilt.csharp/serialization/formattables/model_ser.hpp"
-#include "dogen/quilt.csharp/serialization/fabric/assembly_info_ser.hpp"
-#include "dogen/quilt.csharp/serialization/formattables/formattable_ser.hpp"
-#include "dogen/quilt.csharp/serialization/fabric/visual_studio_project_ser.hpp"
-#include "dogen/quilt.csharp/serialization/fabric/visual_studio_solution_ser.hpp"
-#include "dogen/quilt.csharp/serialization/formattables/element_properties_ser.hpp"
-#include "dogen/quilt.csharp/serialization/formattables/artefact_properties_ser.hpp"
-#include "dogen/quilt.csharp/serialization/formattables/locator_configuration_ser.hpp"
+#include <functional>
+#include "dogen/quilt.csharp/types/fabric/assembly_info.hpp"
 
+namespace dogen {
+namespace quilt {
+namespace csharp {
+namespace fabric {
+
+struct assembly_info_hasher {
+public:
+    static std::size_t hash(const assembly_info& v);
+};
+
+} } } }
+
+namespace std {
+
+template<>
+struct hash<dogen::quilt::csharp::fabric::assembly_info> {
+public:
+    size_t operator()(const dogen::quilt::csharp::fabric::assembly_info& v) const {
+        return dogen::quilt::csharp::fabric::assembly_info_hasher::hash(v);
+    }
+};
+
+}
 #endif

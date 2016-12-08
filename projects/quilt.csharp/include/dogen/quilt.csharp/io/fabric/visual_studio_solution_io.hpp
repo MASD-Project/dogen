@@ -18,20 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CSHARP_SERIALIZATION_ALL_SER_HPP
-#define DOGEN_QUILT_CSHARP_SERIALIZATION_ALL_SER_HPP
+#ifndef DOGEN_QUILT_CSHARP_IO_FABRIC_VISUAL_STUDIO_SOLUTION_IO_HPP
+#define DOGEN_QUILT_CSHARP_IO_FABRIC_VISUAL_STUDIO_SOLUTION_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/quilt.csharp/serialization/formattables/model_ser.hpp"
-#include "dogen/quilt.csharp/serialization/fabric/assembly_info_ser.hpp"
-#include "dogen/quilt.csharp/serialization/formattables/formattable_ser.hpp"
-#include "dogen/quilt.csharp/serialization/fabric/visual_studio_project_ser.hpp"
-#include "dogen/quilt.csharp/serialization/fabric/visual_studio_solution_ser.hpp"
-#include "dogen/quilt.csharp/serialization/formattables/element_properties_ser.hpp"
-#include "dogen/quilt.csharp/serialization/formattables/artefact_properties_ser.hpp"
-#include "dogen/quilt.csharp/serialization/formattables/locator_configuration_ser.hpp"
+#include <iosfwd>
+#include "dogen/quilt.csharp/types/fabric/visual_studio_solution.hpp"
+
+namespace dogen {
+namespace quilt {
+namespace csharp {
+namespace fabric {
+
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::quilt::csharp::fabric::visual_studio_solution& v);
+
+} } } }
 
 #endif

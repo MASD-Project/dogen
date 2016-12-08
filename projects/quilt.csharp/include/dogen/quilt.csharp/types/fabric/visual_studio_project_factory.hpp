@@ -18,20 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CSHARP_SERIALIZATION_ALL_SER_HPP
-#define DOGEN_QUILT_CSHARP_SERIALIZATION_ALL_SER_HPP
+#ifndef DOGEN_QUILT_CSHARP_TYPES_FABRIC_VISUAL_STUDIO_PROJECT_FACTORY_HPP
+#define DOGEN_QUILT_CSHARP_TYPES_FABRIC_VISUAL_STUDIO_PROJECT_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/quilt.csharp/serialization/formattables/model_ser.hpp"
-#include "dogen/quilt.csharp/serialization/fabric/assembly_info_ser.hpp"
-#include "dogen/quilt.csharp/serialization/formattables/formattable_ser.hpp"
-#include "dogen/quilt.csharp/serialization/fabric/visual_studio_project_ser.hpp"
-#include "dogen/quilt.csharp/serialization/fabric/visual_studio_solution_ser.hpp"
-#include "dogen/quilt.csharp/serialization/formattables/element_properties_ser.hpp"
-#include "dogen/quilt.csharp/serialization/formattables/artefact_properties_ser.hpp"
-#include "dogen/quilt.csharp/serialization/formattables/locator_configuration_ser.hpp"
+#include <algorithm>
+
+namespace dogen {
+namespace quilt {
+namespace csharp {
+namespace fabric {
+
+class visual_studio_project_factory final {
+public:
+    visual_studio_project_factory() = default;
+    visual_studio_project_factory(const visual_studio_project_factory&) = default;
+    visual_studio_project_factory(visual_studio_project_factory&&) = default;
+    ~visual_studio_project_factory() = default;
+    visual_studio_project_factory& operator=(const visual_studio_project_factory&) = default;
+
+public:
+    bool operator==(const visual_studio_project_factory& rhs) const;
+    bool operator!=(const visual_studio_project_factory& rhs) const {
+        return !this->operator==(rhs);
+    }
+
+};
+
+} } } }
 
 #endif

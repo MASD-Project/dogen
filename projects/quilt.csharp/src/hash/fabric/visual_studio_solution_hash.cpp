@@ -18,15 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.csharp/types/fabric/vcproj_factory.hpp"
+#include "dogen/yarn/hash/element_hash.hpp"
+#include "dogen/quilt.csharp/hash/fabric/visual_studio_solution_hash.hpp"
+
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value) {
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+}
 
 namespace dogen {
 namespace quilt {
 namespace csharp {
 namespace fabric {
 
-bool vcproj_factory::operator==(const vcproj_factory& /*rhs*/) const {
-    return true;
+std::size_t visual_studio_solution_hasher::hash(const visual_studio_solution& v) {
+    std::size_t seed(0);
+
+    combine(seed, dynamic_cast<const dogen::yarn::element&>(v));
+    return seed;
 }
 
 } } } }

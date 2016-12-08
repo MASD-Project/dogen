@@ -441,7 +441,37 @@ Add a new enum for it and update comment formatter with this style.
 - try using ICU DecNumber library.
 - check compiler support (MSVC may have decimals; if so, use that instead)
 
-*** STARTED Add support for properties in C#                          :story:
+*** STARTED Add support for visual studio projects and solutions      :story:
+    CLOCK: [2016-12-08 Thu 11:35]--[2016-12-08 Thu 11:52] =>  0:17
+
+We need to start compiling the generated code to make sure it is
+valid. For this we need support for solutions and projects.
+
+*** Add msbuild target for C# test model                              :story:
+
+Once we are generating solutions, we should detect msbuild (or xbuild)
+and build the solution. This should be a CMake target that runs on
+Travis.
+
+*** Generate AssemblyInfo in C#                                       :story:
+
+We need to inject a type for this in fabric. For now we can leave it
+mainly blank but in the future we need to have meta-data in yarn for
+all of its properties:
+
+: [assembly: AssemblyTitle ("TestDogen")]
+: [assembly: AssemblyDescription ("")]
+: [assembly: AssemblyConfiguration ("")]
+: [assembly: AssemblyCompany ("")]
+: [assembly: AssemblyProduct ("")]
+: [assembly: AssemblyCopyright ("marco")]
+: [assembly: AssemblyTrademark ("")]
+: [assembly: AssemblyCulture ("")]
+: [assembly: AssemblyVersion ("1.0.*")]
+
+These appear to just be properties at the model level.
+
+*** Add support for properties in C#                                  :story:
 
 We need to go through yarn and populate the properties in the types
 facet.

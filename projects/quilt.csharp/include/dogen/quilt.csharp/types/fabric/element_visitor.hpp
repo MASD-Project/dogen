@@ -27,6 +27,7 @@
 
 #include "dogen/yarn/types/element_visitor.hpp"
 #include "dogen/quilt.csharp/types/fabric/visual_studio_project_fwd.hpp"
+#include "dogen/quilt.csharp/types/fabric/visual_studio_solution_fwd.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -51,6 +52,16 @@ public:
     virtual void visit(const dogen::quilt::csharp::fabric::visual_studio_project&) { }
     virtual void visit(dogen::quilt::csharp::fabric::visual_studio_project&) const { }
     virtual void visit(dogen::quilt::csharp::fabric::visual_studio_project&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type dogen::quilt::csharp::fabric::visual_studio_solution
+     */
+    /**@{*/
+    virtual void visit(const dogen::quilt::csharp::fabric::visual_studio_solution&) const { }
+    virtual void visit(const dogen::quilt::csharp::fabric::visual_studio_solution&) { }
+    virtual void visit(dogen::quilt::csharp::fabric::visual_studio_solution&) const { }
+    virtual void visit(dogen::quilt::csharp::fabric::visual_studio_solution&) { }
     /**@}*/
 };
 

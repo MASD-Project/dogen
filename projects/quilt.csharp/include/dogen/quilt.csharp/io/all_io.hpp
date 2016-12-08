@@ -26,9 +26,11 @@
 #endif
 
 #include "dogen/quilt.csharp/io/formattables/model_io.hpp"
+#include "dogen/quilt.csharp/io/fabric/assembly_info_io.hpp"
 #include "dogen/quilt.csharp/io/formatters/repository_io.hpp"
 #include "dogen/quilt.csharp/io/formattables/formattable_io.hpp"
 #include "dogen/quilt.csharp/io/fabric/visual_studio_project_io.hpp"
+#include "dogen/quilt.csharp/io/fabric/visual_studio_solution_io.hpp"
 #include "dogen/quilt.csharp/io/formattables/element_properties_io.hpp"
 #include "dogen/quilt.csharp/io/formattables/artefact_properties_io.hpp"
 #include "dogen/quilt.csharp/io/formattables/locator_configuration_io.hpp"
