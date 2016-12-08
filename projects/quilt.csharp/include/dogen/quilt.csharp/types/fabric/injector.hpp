@@ -43,10 +43,13 @@ private:
     void add_element(const boost::shared_ptr<yarn::element>& e,
         yarn::intermediate_model& im) const;
 
+    void add_elements(
+        const std::list<boost::shared_ptr<yarn::element>>& elements,
+        yarn::intermediate_model& im) const;
+
 private:
-    void inject_visual_studio_project(yarn::intermediate_model& im) const;
+    void inject_visual_studio(yarn::intermediate_model& im) const;
     void inject_assembly_info(yarn::intermediate_model& im) const;
-    void inject_visual_studio_solution(yarn::intermediate_model& im) const;
 
 public:
     std::string id() const override;

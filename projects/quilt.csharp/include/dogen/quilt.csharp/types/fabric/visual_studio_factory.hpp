@@ -18,19 +18,41 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CSHARP_TYPES_FABRIC_VISUAL_STUDIO_PROJECT_FACTORY_FWD_HPP
-#define DOGEN_QUILT_CSHARP_TYPES_FABRIC_VISUAL_STUDIO_PROJECT_FACTORY_FWD_HPP
+#ifndef DOGEN_QUILT_CSHARP_TYPES_FABRIC_VISUAL_STUDIO_FACTORY_HPP
+#define DOGEN_QUILT_CSHARP_TYPES_FABRIC_VISUAL_STUDIO_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
+
+#include <list>
+#include <boost/shared_ptr.hpp>
+#include "dogen/yarn/types/element.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/quilt.cpp/types/formatters/repository.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace csharp {
 namespace fabric {
 
-class visual_studio_project_factory;
+class visual_studio_factory final {
+private:
+    std::string obtain_project_name(const yarn::intermediate_model& im) const;
+
+private:
+    boost::shared_ptr<yarn::element>
+    make_solution(const std::string& project_name,
+        const yarn::intermediate_model& im) const;
+
+    boost::shared_ptr<yarn::element>
+    make_project(const std::string& project_name,
+        const yarn::intermediate_model& im) const;
+
+public:
+    std::list<boost::shared_ptr<yarn::element>>
+    make(const yarn::intermediate_model& im) const;
+};
 
 } } } }
 

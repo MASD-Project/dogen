@@ -15,12 +15,13 @@
   },
   {
     "name": {
-      "simple": "directory",
-      "qualified": "quilt.csharp.project_solution_guid"
+      "simple": "project_solution_guid",
+      "qualified": "quilt.csharp.visual_studio.project_solution_guid"
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.csharp"
+      "kernel": "quilt.csharp",
+      "facet": "quilt.csharp.visual_studio"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -28,12 +29,13 @@
   },
   {
     "name": {
-      "simple": "directory",
-      "qualified": "quilt.csharp.project_guid"
+      "simple": "project_guid",
+      "qualified": "quilt.csharp.visual_studio.project_guid"
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.csharp"
+      "kernel": "quilt.csharp",
+      "facet": "quilt.csharp.visual_studio"
     },
     "value_type": "text",
     "template_kind": "instance",

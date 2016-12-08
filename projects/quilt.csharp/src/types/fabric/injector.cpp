@@ -24,8 +24,7 @@
 #include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/yarn/types/injection_error.hpp"
 #include "dogen/quilt.csharp/types/fabric/assembly_info_factory.hpp"
-#include "dogen/quilt.csharp/types/fabric/visual_studio_project_factory.hpp"
-#include "dogen/quilt.csharp/types/fabric/visual_studio_solution_factory.hpp"
+#include "dogen/quilt.csharp/types/fabric/visual_studio_factory.hpp"
 #include "dogen/quilt.csharp/types/fabric/injector.hpp"
 
 namespace {
@@ -38,7 +37,6 @@ static logger lg(logger_factory(id));
 const std::string duplicate_qualified_name("Duplicate qualified name: ");
 
 }
-
 
 namespace dogen {
 namespace quilt {
@@ -63,10 +61,16 @@ void injector::add_element(const boost::shared_ptr<yarn::element>& e,
 }
 
 void injector::
-inject_visual_studio_project(yarn::intermediate_model& im) const {
-    visual_studio_project_factory f;
+add_elements(const std::list<boost::shared_ptr<yarn::element>>& elements,
+    yarn::intermediate_model& im) const {
+    for (auto& e : elements)
+        add_element(e, im);
+}
+
+void injector::inject_visual_studio(yarn::intermediate_model& im) const {
+    visual_studio_factory f;
     const auto e(f.make(im));
-    add_element(e, im);
+    add_elements(e, im);
 }
 
 void injector::inject_assembly_info(yarn::intermediate_model& im) const {
@@ -75,17 +79,9 @@ void injector::inject_assembly_info(yarn::intermediate_model& im) const {
     add_element(e, im);
 }
 
-void injector::
-inject_visual_studio_solution(yarn::intermediate_model& im) const {
-    visual_studio_solution_factory f;
-    const auto e(f.make(im));
-    add_element(e, im);
-}
-
 void injector::inject(yarn::intermediate_model& im) const {
-    inject_visual_studio_project(im);
+    inject_visual_studio(im);
     inject_assembly_info(im);
-    inject_visual_studio_solution(im);
 }
 
 } } } }

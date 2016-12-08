@@ -45,7 +45,7 @@ populate(const unsigned int position, result_type& v) {
     v.project_guid(create_std_string(position + 0));
     v.project_solution_guid(create_std_string(position + 1));
     v.version(create_std_string(position + 2));
-    v.project_location(create_std_string(position + 3));
+    v.project_name(create_std_string(position + 3));
 }
 
 visual_studio_solution_generator::result_type

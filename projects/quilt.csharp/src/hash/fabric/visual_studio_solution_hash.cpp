@@ -44,7 +44,7 @@ std::size_t visual_studio_solution_hasher::hash(const visual_studio_solution& v)
     combine(seed, v.project_guid());
     combine(seed, v.project_solution_guid());
     combine(seed, v.version());
-    combine(seed, v.project_location());
+    combine(seed, v.project_name());
 
     return seed;
 }

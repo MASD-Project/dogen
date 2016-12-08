@@ -23,6 +23,9 @@
 namespace dogen {
 namespace yarn {
 
+name_flattener::name_flattener(const bool detect_model_name)
+    : detect_model_name_(detect_model_name) {}
+
 std::list<std::string> name_flattener::flatten(const name& n) const {
     const auto& l(n.location());
     std::list<std::string> r(l.external_modules());
@@ -32,6 +35,10 @@ std::list<std::string> name_flattener::flatten(const name& n) const {
 
     for (const auto& m : l.internal_modules())
         r.push_back(m);
+
+
+    if (!detect_model_name_)
+        return r;
 
     /* if the name belongs to the model's module, we need to remove the
      * module's simple name from the module path (it is in both the

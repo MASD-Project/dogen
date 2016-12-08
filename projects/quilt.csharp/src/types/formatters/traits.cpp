@@ -26,18 +26,18 @@ namespace csharp {
 namespace formatters {
 
 std::string traits::visual_studio_facet() {
-    static std::string r("visual_studio");
+    static std::string r("quilt.csharp.visual_studio");
     return r;
 }
 
 
 std::string traits::visual_studio_project_archetype() {
-    static std::string r("quilt.cpp.cmake.visual_studio_project_archetype");
+    static std::string r("quilt.csharp.visual_studio.project");
     return r;
 }
 
 std::string traits::visual_studio_solution_archetype() {
-    static std::string r("quilt.cpp.cmake.visual_studio_solution_archetype");
+    static std::string r("quilt.csharp.visual_studio.solution");
     return r;
 }
 

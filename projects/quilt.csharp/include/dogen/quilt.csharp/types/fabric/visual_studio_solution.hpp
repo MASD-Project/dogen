@@ -57,7 +57,7 @@ public:
         const std::string& project_guid,
         const std::string& project_solution_guid,
         const std::string& version,
-        const std::string& project_location);
+        const std::string& project_name);
 
 private:
     template<typename Archive>
@@ -92,10 +92,10 @@ public:
     void version(const std::string& v);
     void version(const std::string&& v);
 
-    const std::string& project_location() const;
-    std::string& project_location();
-    void project_location(const std::string& v);
-    void project_location(const std::string&& v);
+    const std::string& project_name() const;
+    std::string& project_name();
+    void project_name(const std::string& v);
+    void project_name(const std::string&& v);
 
 public:
     bool operator==(const visual_studio_solution& rhs) const;
@@ -114,7 +114,7 @@ private:
     std::string project_guid_;
     std::string project_solution_guid_;
     std::string version_;
-    std::string project_location_;
+    std::string project_name_;
 };
 
 } } } }

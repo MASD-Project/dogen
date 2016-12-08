@@ -47,7 +47,7 @@ void save(Archive& ar,
     ar << make_nvp("project_guid", v.project_guid_);
     ar << make_nvp("project_solution_guid", v.project_solution_guid_);
     ar << make_nvp("version", v.version_);
-    ar << make_nvp("project_location", v.project_location_);
+    ar << make_nvp("project_name", v.project_name_);
 }
 
 template<typename Archive>
@@ -59,7 +59,7 @@ void load(Archive& ar,
     ar >> make_nvp("project_guid", v.project_guid_);
     ar >> make_nvp("project_solution_guid", v.project_solution_guid_);
     ar >> make_nvp("version", v.version_);
-    ar >> make_nvp("project_location", v.project_location_);
+    ar >> make_nvp("project_name", v.project_name_);
 }
 
 } }

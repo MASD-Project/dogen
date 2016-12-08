@@ -48,7 +48,7 @@ visual_studio_solution::visual_studio_solution(
     const std::string& project_guid,
     const std::string& project_solution_guid,
     const std::string& version,
-    const std::string& project_location)
+    const std::string& project_name)
     : dogen::yarn::element(
       documentation,
       annotation,
@@ -61,7 +61,7 @@ visual_studio_solution::visual_studio_solution(
       project_guid_(project_guid),
       project_solution_guid_(project_solution_guid),
       version_(version),
-      project_location_(project_location) { }
+      project_name_(project_name) { }
 
 void visual_studio_solution::accept(const dogen::yarn::element_visitor& v) const {
     typedef const element_visitor* derived_ptr;
@@ -101,7 +101,7 @@ void visual_studio_solution::to_stream(std::ostream& s) const {
       << "\"project_guid\": " << "\"" << tidy_up_string(project_guid_) << "\"" << ", "
       << "\"project_solution_guid\": " << "\"" << tidy_up_string(project_solution_guid_) << "\"" << ", "
       << "\"version\": " << "\"" << tidy_up_string(version_) << "\"" << ", "
-      << "\"project_location\": " << "\"" << tidy_up_string(project_location_) << "\""
+      << "\"project_name\": " << "\"" << tidy_up_string(project_name_) << "\""
       << " }";
 }
 
@@ -112,7 +112,7 @@ void visual_studio_solution::swap(visual_studio_solution& other) noexcept {
     swap(project_guid_, other.project_guid_);
     swap(project_solution_guid_, other.project_solution_guid_);
     swap(version_, other.version_);
-    swap(project_location_, other.project_location_);
+    swap(project_name_, other.project_name_);
 }
 
 bool visual_studio_solution::equals(const dogen::yarn::element& other) const {
@@ -126,7 +126,7 @@ bool visual_studio_solution::operator==(const visual_studio_solution& rhs) const
         project_guid_ == rhs.project_guid_ &&
         project_solution_guid_ == rhs.project_solution_guid_ &&
         version_ == rhs.version_ &&
-        project_location_ == rhs.project_location_;
+        project_name_ == rhs.project_name_;
 }
 
 visual_studio_solution& visual_studio_solution::operator=(visual_studio_solution other) {
@@ -183,20 +183,20 @@ void visual_studio_solution::version(const std::string&& v) {
     version_ = std::move(v);
 }
 
-const std::string& visual_studio_solution::project_location() const {
-    return project_location_;
+const std::string& visual_studio_solution::project_name() const {
+    return project_name_;
 }
 
-std::string& visual_studio_solution::project_location() {
-    return project_location_;
+std::string& visual_studio_solution::project_name() {
+    return project_name_;
 }
 
-void visual_studio_solution::project_location(const std::string& v) {
-    project_location_ = v;
+void visual_studio_solution::project_name(const std::string& v) {
+    project_name_ = v;
 }
 
-void visual_studio_solution::project_location(const std::string&& v) {
-    project_location_ = std::move(v);
+void visual_studio_solution::project_name(const std::string&& v) {
+    project_name_ = std::move(v);
 }
 
 } } } }

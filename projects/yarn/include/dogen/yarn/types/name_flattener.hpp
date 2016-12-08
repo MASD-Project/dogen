@@ -34,7 +34,13 @@ namespace yarn {
 
 class name_flattener {
 public:
+    explicit name_flattener(const bool detect_model_name = true);
+
+public:
     std::list<std::string> flatten(const name& n) const;
+
+private:
+    const bool detect_model_name_;
 };
 
 } }
