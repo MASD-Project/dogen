@@ -31,6 +31,7 @@
 #include "dogen/formatters/serialization/registrar_ser.hpp"
 #include "dogen/annotations/serialization/registrar_ser.hpp"
 #include "dogen/quilt.csharp/serialization/registrar_ser.hpp"
+#include "dogen/quilt.csharp/serialization/fabric/assembly_info_ser.hpp"
 #include "dogen/quilt.csharp/serialization/fabric/visual_studio_project_ser.hpp"
 #include "dogen/quilt.csharp/serialization/fabric/visual_studio_solution_ser.hpp"
 
@@ -45,6 +46,7 @@ void register_types(Archive& ar) {
     dogen::annotations::register_types(ar);
     dogen::options::register_types(ar);
 
+    ar.template register_type<dogen::quilt::csharp::fabric::assembly_info>();
     ar.template register_type<dogen::quilt::csharp::fabric::visual_studio_project>();
     ar.template register_type<dogen::quilt::csharp::fabric::visual_studio_solution>();
 }

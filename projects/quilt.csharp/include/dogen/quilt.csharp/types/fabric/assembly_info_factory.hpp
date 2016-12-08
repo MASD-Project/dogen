@@ -25,27 +25,19 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <boost/shared_ptr.hpp>
+#include "dogen/yarn/types/element.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace csharp {
 namespace fabric {
 
-class assembly_info_factory final {
+class assembly_info_factory {
 public:
-    assembly_info_factory() = default;
-    assembly_info_factory(const assembly_info_factory&) = default;
-    assembly_info_factory(assembly_info_factory&&) = default;
-    ~assembly_info_factory() = default;
-    assembly_info_factory& operator=(const assembly_info_factory&) = default;
-
-public:
-    bool operator==(const assembly_info_factory& rhs) const;
-    bool operator!=(const assembly_info_factory& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    boost::shared_ptr<yarn::element>
+    make(const yarn::intermediate_model& im) const;
 };
 
 } } } }

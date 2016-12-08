@@ -39,6 +39,20 @@ inline std::size_t hash_std_unordered_map_std_string_dogen_quilt_csharp_formatta
     return seed;
 }
 
+inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) {
+    std::size_t seed(0);
+    combine(seed, v.generic_string());
+    return seed;
+}
+
+inline std::size_t hash_std_list_boost_filesystem_path(const std::list<boost::filesystem::path>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, hash_boost_filesystem_path(i));
+    }
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -51,6 +65,7 @@ std::size_t model_hasher::hash(const model& v) {
 
     combine(seed, v.name());
     combine(seed, hash_std_unordered_map_std_string_dogen_quilt_csharp_formattables_formattable(v.formattables()));
+    combine(seed, hash_std_list_boost_filesystem_path(v.file_list()));
 
     return seed;
 }

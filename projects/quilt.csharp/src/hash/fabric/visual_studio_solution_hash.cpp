@@ -40,6 +40,12 @@ std::size_t visual_studio_solution_hasher::hash(const visual_studio_solution& v)
     std::size_t seed(0);
 
     combine(seed, dynamic_cast<const dogen::yarn::element&>(v));
+
+    combine(seed, v.project_guid());
+    combine(seed, v.project_solution_guid());
+    combine(seed, v.version());
+    combine(seed, v.project_location());
+
     return seed;
 }
 

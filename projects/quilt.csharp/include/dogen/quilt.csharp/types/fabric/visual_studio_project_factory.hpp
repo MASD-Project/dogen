@@ -25,7 +25,10 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <boost/shared_ptr.hpp>
+#include "dogen/yarn/types/element.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/quilt.cpp/types/formatters/repository.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -34,18 +37,8 @@ namespace fabric {
 
 class visual_studio_project_factory final {
 public:
-    visual_studio_project_factory() = default;
-    visual_studio_project_factory(const visual_studio_project_factory&) = default;
-    visual_studio_project_factory(visual_studio_project_factory&&) = default;
-    ~visual_studio_project_factory() = default;
-    visual_studio_project_factory& operator=(const visual_studio_project_factory&) = default;
-
-public:
-    bool operator==(const visual_studio_project_factory& rhs) const;
-    bool operator!=(const visual_studio_project_factory& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    boost::shared_ptr<yarn::element>
+    make(const yarn::intermediate_model& im) const;
 };
 
 } } } }

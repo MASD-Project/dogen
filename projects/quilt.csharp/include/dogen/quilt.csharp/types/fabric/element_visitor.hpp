@@ -26,6 +26,7 @@
 #endif
 
 #include "dogen/yarn/types/element_visitor.hpp"
+#include "dogen/quilt.csharp/types/fabric/assembly_info_fwd.hpp"
 #include "dogen/quilt.csharp/types/fabric/visual_studio_project_fwd.hpp"
 #include "dogen/quilt.csharp/types/fabric/visual_studio_solution_fwd.hpp"
 
@@ -43,6 +44,16 @@ public:
 
 public:
     using dogen::yarn::element_visitor::visit;
+
+    /**
+     * @brief Accept visits for type dogen::quilt::csharp::fabric::assembly_info
+     */
+    /**@{*/
+    virtual void visit(const dogen::quilt::csharp::fabric::assembly_info&) const { }
+    virtual void visit(const dogen::quilt::csharp::fabric::assembly_info&) { }
+    virtual void visit(dogen::quilt::csharp::fabric::assembly_info&) const { }
+    virtual void visit(dogen::quilt::csharp::fabric::assembly_info&) { }
+    /**@}*/
 
     /**
      * @brief Accept visits for type dogen::quilt::csharp::fabric::visual_studio_project

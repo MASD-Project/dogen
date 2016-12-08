@@ -49,6 +49,20 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<boost::filesystem::path>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << (*i).generic_string() << "\"";
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace quilt {
 namespace csharp {
@@ -58,7 +72,8 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::csharp::formattables::model\"" << ", "
       << "\"name\": " << v.name() << ", "
-      << "\"formattables\": " << v.formattables()
+      << "\"formattables\": " << v.formattables() << ", "
+      << "\"file_list\": " << v.file_list()
       << " }";
     return(s);
 }

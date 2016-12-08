@@ -18,15 +18,47 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/make_shared.hpp>
+#include <boost/algorithm/string/join.hpp>
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/types/name_factory.hpp"
+#include "dogen/quilt.csharp/types/fabric/visual_studio_solution.hpp"
 #include "dogen/quilt.csharp/types/fabric/visual_studio_solution_factory.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory(
+        "quit.csharp.fabric.visual_studio_solution_factory"));
+
+const std::string dot(".");
+const std::string extension(".sln");
+
+}
 
 namespace dogen {
 namespace quilt {
 namespace csharp {
 namespace fabric {
 
-bool visual_studio_solution_factory::operator==(const visual_studio_solution_factory& /*rhs*/) const {
-    return true;
+boost::shared_ptr<yarn::element> visual_studio_solution_factory::
+make(const yarn::intermediate_model& im) const {
+    BOOST_LOG_SEV(lg, debug) << "Generating Visual Studio Solution.";
+
+    using boost::algorithm::join;
+    auto sn(join(im.name().location().model_modules(), dot));
+    sn += extension;
+
+    yarn::name_factory nf;
+    const auto n(nf.build_element_in_model(im.name(), sn));
+
+    auto r(boost::make_shared<visual_studio_solution>());
+    r->name(n);
+    r->origin_type(im.origin_type());
+
+    BOOST_LOG_SEV(lg, debug) << "Generated Visual Studio Solution.";
+
+    return r;
 }
 
 } } } }

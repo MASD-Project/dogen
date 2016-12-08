@@ -25,7 +25,9 @@
 #pragma once
 #endif
 
+#include <iosfwd>
 #include <algorithm>
+#include "dogen/yarn/types/element.hpp"
 #include "dogen/quilt.csharp/serialization/fabric/assembly_info_fwd_ser.hpp"
 
 namespace dogen {
@@ -33,13 +35,24 @@ namespace quilt {
 namespace csharp {
 namespace fabric {
 
-class assembly_info final {
+class assembly_info final : public dogen::yarn::element {
 public:
     assembly_info() = default;
     assembly_info(const assembly_info&) = default;
     assembly_info(assembly_info&&) = default;
-    ~assembly_info() = default;
-    assembly_info& operator=(const assembly_info&) = default;
+
+    virtual ~assembly_info() noexcept { }
+
+public:
+    assembly_info(
+        const std::string& documentation,
+        const dogen::annotations::annotation& annotation,
+        const dogen::yarn::name& name,
+        const dogen::yarn::origin_types origin_type,
+        const boost::optional<dogen::yarn::name>& contained_by,
+        const bool in_global_module,
+        const std::vector<std::string>& stereotypes,
+        const bool is_element_extension);
 
 private:
     template<typename Archive>
@@ -49,13 +62,41 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::quilt::csharp::fabric::assembly_info& v, unsigned int version);
 
 public:
+    using dogen::yarn::element::accept;
+
+    virtual void accept(const dogen::yarn::element_visitor& v) const override;
+    virtual void accept(dogen::yarn::element_visitor& v) const override;
+    virtual void accept(const dogen::yarn::element_visitor& v) override;
+    virtual void accept(dogen::yarn::element_visitor& v) override;
+public:
+    void to_stream(std::ostream& s) const override;
+
+public:
     bool operator==(const assembly_info& rhs) const;
     bool operator!=(const assembly_info& rhs) const {
         return !this->operator==(rhs);
     }
 
+public:
+    bool equals(const dogen::yarn::element& other) const override;
+
+public:
+    void swap(assembly_info& other) noexcept;
+    assembly_info& operator=(assembly_info other);
+
 };
 
 } } } }
+
+namespace std {
+
+template<>
+inline void swap(
+    dogen::quilt::csharp::fabric::assembly_info& lhs,
+    dogen::quilt::csharp::fabric::assembly_info& rhs) {
+    lhs.swap(rhs);
+}
+
+}
 
 #endif

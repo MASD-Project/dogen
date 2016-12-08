@@ -40,6 +40,11 @@ std::size_t visual_studio_project_hasher::hash(const visual_studio_project& v) {
     std::size_t seed(0);
 
     combine(seed, dynamic_cast<const dogen::yarn::element&>(v));
+
+    combine(seed, v.project_guid());
+    combine(seed, v.project_name());
+    combine(seed, v.tools_version());
+
     return seed;
 }
 

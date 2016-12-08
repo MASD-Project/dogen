@@ -27,21 +27,28 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
+#include "dogen/yarn/serialization/element_ser.hpp"
 #include "dogen/quilt.csharp/serialization/fabric/assembly_info_ser.hpp"
+
+BOOST_CLASS_TRACKING(
+    dogen::quilt::csharp::fabric::assembly_info,
+    boost::serialization::track_selectively)
 
 namespace boost {
 namespace serialization {
 
 template<typename Archive>
-void save(Archive& /*ar*/,
-    const dogen::quilt::csharp::fabric::assembly_info& /*v*/,
+void save(Archive& ar,
+    const dogen::quilt::csharp::fabric::assembly_info& v,
     const unsigned int /*version*/) {
+    ar << make_nvp("element", base_object<dogen::yarn::element>(v));
 }
 
 template<typename Archive>
-void load(Archive& /*ar*/,
-    dogen::quilt::csharp::fabric::assembly_info& /*v*/,
+void load(Archive& ar,
+    dogen::quilt::csharp::fabric::assembly_info& v,
     const unsigned int /*version*/) {
+    ar >> make_nvp("element", base_object<dogen::yarn::element>(v));
 }
 
 } }

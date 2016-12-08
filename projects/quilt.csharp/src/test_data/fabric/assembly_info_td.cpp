@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/yarn/test_data/element_td.hpp"
 #include "dogen/quilt.csharp/test_data/fabric/assembly_info_td.hpp"
 
 namespace dogen {
@@ -28,12 +29,14 @@ namespace fabric {
 assembly_info_generator::assembly_info_generator() : position_(0) { }
 
 void assembly_info_generator::
-populate(const unsigned int /*position*/, result_type& /*v*/) {
+populate(const unsigned int position, result_type& v) {
+    dogen::yarn::element_generator::populate(position, v);
 }
 
 assembly_info_generator::result_type
-assembly_info_generator::create(const unsigned int/*position*/) {
+assembly_info_generator::create(const unsigned int position) {
     assembly_info r;
+    assembly_info_generator::populate(position, r);
     return r;
 }
 

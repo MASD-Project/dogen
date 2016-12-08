@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include <boost/algorithm/string.hpp>
 #include "dogen/yarn/io/element_io.hpp"
 #include "dogen/quilt.csharp/io/fabric/visual_studio_project_io.hpp"
 

@@ -18,10 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/yarn/hash/element_hash.hpp"
 #include "dogen/quilt.csharp/hash/fabric/assembly_info_hash.hpp"
 
 namespace {
 
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value) {
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
 
 }
 
@@ -30,8 +36,10 @@ namespace quilt {
 namespace csharp {
 namespace fabric {
 
-std::size_t assembly_info_hasher::hash(const assembly_info&) {
+std::size_t assembly_info_hasher::hash(const assembly_info& v) {
     std::size_t seed(0);
+
+    combine(seed, dynamic_cast<const dogen::yarn::element&>(v));
     return seed;
 }
 

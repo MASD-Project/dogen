@@ -26,6 +26,7 @@
 #endif
 
 #include <iosfwd>
+#include <string>
 #include <algorithm>
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/quilt.csharp/serialization/fabric/visual_studio_solution_fwd_ser.hpp"
@@ -52,7 +53,11 @@ public:
         const boost::optional<dogen::yarn::name>& contained_by,
         const bool in_global_module,
         const std::vector<std::string>& stereotypes,
-        const bool is_element_extension);
+        const bool is_element_extension,
+        const std::string& project_guid,
+        const std::string& project_solution_guid,
+        const std::string& version,
+        const std::string& project_location);
 
 private:
     template<typename Archive>
@@ -72,6 +77,27 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
+    const std::string& project_guid() const;
+    std::string& project_guid();
+    void project_guid(const std::string& v);
+    void project_guid(const std::string&& v);
+
+    const std::string& project_solution_guid() const;
+    std::string& project_solution_guid();
+    void project_solution_guid(const std::string& v);
+    void project_solution_guid(const std::string&& v);
+
+    const std::string& version() const;
+    std::string& version();
+    void version(const std::string& v);
+    void version(const std::string&& v);
+
+    const std::string& project_location() const;
+    std::string& project_location();
+    void project_location(const std::string& v);
+    void project_location(const std::string&& v);
+
+public:
     bool operator==(const visual_studio_solution& rhs) const;
     bool operator!=(const visual_studio_solution& rhs) const {
         return !this->operator==(rhs);
@@ -84,6 +110,11 @@ public:
     void swap(visual_studio_solution& other) noexcept;
     visual_studio_solution& operator=(visual_studio_solution other);
 
+private:
+    std::string project_guid_;
+    std::string project_solution_guid_;
+    std::string version_;
+    std::string project_location_;
 };
 
 } } } }

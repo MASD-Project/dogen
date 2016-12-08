@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen/yarn/types/injector_registrar.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -34,18 +34,7 @@ namespace fabric {
 
 class initializer final {
 public:
-    initializer() = default;
-    initializer(const initializer&) = default;
-    initializer(initializer&&) = default;
-    ~initializer() = default;
-    initializer& operator=(const initializer&) = default;
-
-public:
-    bool operator==(const initializer& rhs) const;
-    bool operator!=(const initializer& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void initialize(yarn::injector_registrar& rg);
 };
 
 } } } }

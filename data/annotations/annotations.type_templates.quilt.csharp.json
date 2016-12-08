@@ -12,5 +12,31 @@
     "template_kind": "instance",
     "scope": "root_module",
     "default_value": "cs"
+  },
+  {
+    "name": {
+      "simple": "directory",
+      "qualified": "quilt.csharp.project_solution_guid"
+    },
+    "archetype_location": {
+      "family": "quilt",
+      "kernel": "quilt.csharp"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module"
+  },
+  {
+    "name": {
+      "simple": "directory",
+      "qualified": "quilt.csharp.project_guid"
+    },
+    "archetype_location": {
+      "family": "quilt",
+      "kernel": "quilt.csharp"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module"
   }
 ]

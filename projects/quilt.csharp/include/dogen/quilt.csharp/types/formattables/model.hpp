@@ -25,9 +25,11 @@
 #pragma once
 #endif
 
+#include <list>
 #include <string>
 #include <algorithm>
 #include <unordered_map>
+#include <boost/filesystem/path.hpp>
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/quilt.csharp/types/formattables/formattable.hpp"
 #include "dogen/quilt.csharp/serialization/formattables/model_fwd_ser.hpp"
@@ -47,7 +49,8 @@ public:
 public:
     model(
         const dogen::yarn::name& name,
-        const std::unordered_map<std::string, dogen::quilt::csharp::formattables::formattable>& formattables);
+        const std::unordered_map<std::string, dogen::quilt::csharp::formattables::formattable>& formattables,
+        const std::list<boost::filesystem::path>& file_list);
 
 private:
     template<typename Archive>
@@ -67,6 +70,11 @@ public:
     void formattables(const std::unordered_map<std::string, dogen::quilt::csharp::formattables::formattable>& v);
     void formattables(const std::unordered_map<std::string, dogen::quilt::csharp::formattables::formattable>&& v);
 
+    const std::list<boost::filesystem::path>& file_list() const;
+    std::list<boost::filesystem::path>& file_list();
+    void file_list(const std::list<boost::filesystem::path>& v);
+    void file_list(const std::list<boost::filesystem::path>&& v);
+
 public:
     bool operator==(const model& rhs) const;
     bool operator!=(const model& rhs) const {
@@ -80,6 +88,7 @@ public:
 private:
     dogen::yarn::name name_;
     std::unordered_map<std::string, dogen::quilt::csharp::formattables::formattable> formattables_;
+    std::list<boost::filesystem::path> file_list_;
 };
 
 } } } }

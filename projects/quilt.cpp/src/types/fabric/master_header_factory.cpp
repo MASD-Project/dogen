@@ -171,7 +171,7 @@ void generator::process_element(const yarn::element& e) {
 }
 
 boost::shared_ptr<yarn::element>
-master_header_factory::build(const formatters::repository& frp,
+master_header_factory::make(const formatters::repository& frp,
     const yarn::intermediate_model& im) const {
     BOOST_LOG_SEV(lg, debug) << "Generating the master header.";
 

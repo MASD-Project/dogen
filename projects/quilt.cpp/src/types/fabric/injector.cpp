@@ -109,7 +109,7 @@ void injector::inject_master_headers(yarn::intermediate_model& im) const {
     const auto& rg(formatters::workflow::registrar());
     const auto& frp(rg.formatter_repository());
     master_header_factory f;
-    const auto e(f.build(frp, im));
+    const auto e(f.make(frp, im));
     add_element(e, im);
 }
 

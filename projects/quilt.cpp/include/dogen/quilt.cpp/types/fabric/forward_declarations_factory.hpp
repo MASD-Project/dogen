@@ -35,7 +35,7 @@ namespace quilt {
 namespace cpp {
 namespace fabric {
 
-class forward_declarations_factory {
+class forward_declarations_factory final {
 public:
     std::list<boost::shared_ptr<yarn::element>>
     make(const yarn::intermediate_model& im) const;

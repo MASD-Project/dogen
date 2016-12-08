@@ -27,19 +27,23 @@ namespace formattables {
 
 model::model(
     const dogen::yarn::name& name,
-    const std::unordered_map<std::string, dogen::quilt::csharp::formattables::formattable>& formattables)
+    const std::unordered_map<std::string, dogen::quilt::csharp::formattables::formattable>& formattables,
+    const std::list<boost::filesystem::path>& file_list)
     : name_(name),
-      formattables_(formattables) { }
+      formattables_(formattables),
+      file_list_(file_list) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
     swap(formattables_, other.formattables_);
+    swap(file_list_, other.file_list_);
 }
 
 bool model::operator==(const model& rhs) const {
     return name_ == rhs.name_ &&
-        formattables_ == rhs.formattables_;
+        formattables_ == rhs.formattables_ &&
+        file_list_ == rhs.file_list_;
 }
 
 model& model::operator=(model other) {
@@ -78,6 +82,22 @@ void model::formattables(const std::unordered_map<std::string, dogen::quilt::csh
 
 void model::formattables(const std::unordered_map<std::string, dogen::quilt::csharp::formattables::formattable>&& v) {
     formattables_ = std::move(v);
+}
+
+const std::list<boost::filesystem::path>& model::file_list() const {
+    return file_list_;
+}
+
+std::list<boost::filesystem::path>& model::file_list() {
+    return file_list_;
+}
+
+void model::file_list(const std::list<boost::filesystem::path>& v) {
+    file_list_ = v;
+}
+
+void model::file_list(const std::list<boost::filesystem::path>&& v) {
+    file_list_ = std::move(v);
 }
 
 } } } }

@@ -35,9 +35,10 @@ namespace quilt {
 namespace cpp {
 namespace fabric {
 
-class master_header_factory {
+class master_header_factory final {
 public:
-    boost::shared_ptr<yarn::element> build(const formatters::repository& rp,
+    boost::shared_ptr<yarn::element>
+    make(const formatters::repository& rp,
         const yarn::intermediate_model& im) const;
 };
 

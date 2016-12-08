@@ -19,6 +19,7 @@
  *
  */
 #include <boost/serialization/nvp.hpp>
+#include <boost/serialization/list.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/string.hpp>
@@ -29,9 +30,33 @@
 #include <boost/serialization/unordered_map.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
+#include "dogen/utility/serialization/path.hpp"
 #include "dogen/yarn/serialization/name_ser.hpp"
 #include "dogen/quilt.csharp/serialization/formattables/model_ser.hpp"
 #include "dogen/quilt.csharp/serialization/formattables/formattable_ser.hpp"
+
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+inline void save(Archive& ar,
+    const boost::filesystem::path& p,
+    const unsigned int /*version*/) {
+    std::string s;
+    s = p.generic_string();
+    ar & boost::serialization::make_nvp("path", s);
+}
+
+template<typename Archive>
+inline void load(Archive& ar,
+    boost::filesystem::path& p,
+    const unsigned int /*version*/) {
+    std::string s;
+    ar & boost::serialization::make_nvp("path", s);
+    p = s;
+}
+
+} }
 
 namespace boost {
 namespace serialization {
@@ -42,6 +67,7 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("name", v.name_);
     ar << make_nvp("formattables", v.formattables_);
+    ar << make_nvp("file_list", v.file_list_);
 }
 
 template<typename Archive>
@@ -50,6 +76,7 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("formattables", v.formattables_);
+    ar >> make_nvp("file_list", v.file_list_);
 }
 
 } }

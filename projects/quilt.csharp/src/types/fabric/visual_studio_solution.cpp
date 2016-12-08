@@ -19,9 +19,17 @@
  *
  */
 #include <ostream>
+#include <boost/algorithm/string.hpp>
 #include "dogen/yarn/io/element_io.hpp"
 #include "dogen/quilt.csharp/types/fabric/element_visitor.hpp"
 #include "dogen/quilt.csharp/types/fabric/visual_studio_solution.hpp"
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
 
 namespace dogen {
 namespace quilt {
@@ -36,7 +44,11 @@ visual_studio_solution::visual_studio_solution(
     const boost::optional<dogen::yarn::name>& contained_by,
     const bool in_global_module,
     const std::vector<std::string>& stereotypes,
-    const bool is_element_extension)
+    const bool is_element_extension,
+    const std::string& project_guid,
+    const std::string& project_solution_guid,
+    const std::string& version,
+    const std::string& project_location)
     : dogen::yarn::element(
       documentation,
       annotation,
@@ -45,7 +57,11 @@ visual_studio_solution::visual_studio_solution(
       contained_by,
       in_global_module,
       stereotypes,
-      is_element_extension) { }
+      is_element_extension),
+      project_guid_(project_guid),
+      project_solution_guid_(project_solution_guid),
+      version_(version),
+      project_location_(project_location) { }
 
 void visual_studio_solution::accept(const dogen::yarn::element_visitor& v) const {
     typedef const element_visitor* derived_ptr;
@@ -81,12 +97,22 @@ void visual_studio_solution::to_stream(std::ostream& s) const {
       << "\"__type__\": " << "\"dogen::quilt::csharp::fabric::visual_studio_solution\"" << ", "
       << "\"__parent_0__\": ";
     element::to_stream(s);
-    s << " }";
+    s << ", "
+      << "\"project_guid\": " << "\"" << tidy_up_string(project_guid_) << "\"" << ", "
+      << "\"project_solution_guid\": " << "\"" << tidy_up_string(project_solution_guid_) << "\"" << ", "
+      << "\"version\": " << "\"" << tidy_up_string(version_) << "\"" << ", "
+      << "\"project_location\": " << "\"" << tidy_up_string(project_location_) << "\""
+      << " }";
 }
 
 void visual_studio_solution::swap(visual_studio_solution& other) noexcept {
     element::swap(other);
 
+    using std::swap;
+    swap(project_guid_, other.project_guid_);
+    swap(project_solution_guid_, other.project_solution_guid_);
+    swap(version_, other.version_);
+    swap(project_location_, other.project_location_);
 }
 
 bool visual_studio_solution::equals(const dogen::yarn::element& other) const {
@@ -96,13 +122,81 @@ bool visual_studio_solution::equals(const dogen::yarn::element& other) const {
 }
 
 bool visual_studio_solution::operator==(const visual_studio_solution& rhs) const {
-    return element::compare(rhs);
+    return element::compare(rhs) &&
+        project_guid_ == rhs.project_guid_ &&
+        project_solution_guid_ == rhs.project_solution_guid_ &&
+        version_ == rhs.version_ &&
+        project_location_ == rhs.project_location_;
 }
 
 visual_studio_solution& visual_studio_solution::operator=(visual_studio_solution other) {
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+const std::string& visual_studio_solution::project_guid() const {
+    return project_guid_;
+}
+
+std::string& visual_studio_solution::project_guid() {
+    return project_guid_;
+}
+
+void visual_studio_solution::project_guid(const std::string& v) {
+    project_guid_ = v;
+}
+
+void visual_studio_solution::project_guid(const std::string&& v) {
+    project_guid_ = std::move(v);
+}
+
+const std::string& visual_studio_solution::project_solution_guid() const {
+    return project_solution_guid_;
+}
+
+std::string& visual_studio_solution::project_solution_guid() {
+    return project_solution_guid_;
+}
+
+void visual_studio_solution::project_solution_guid(const std::string& v) {
+    project_solution_guid_ = v;
+}
+
+void visual_studio_solution::project_solution_guid(const std::string&& v) {
+    project_solution_guid_ = std::move(v);
+}
+
+const std::string& visual_studio_solution::version() const {
+    return version_;
+}
+
+std::string& visual_studio_solution::version() {
+    return version_;
+}
+
+void visual_studio_solution::version(const std::string& v) {
+    version_ = v;
+}
+
+void visual_studio_solution::version(const std::string&& v) {
+    version_ = std::move(v);
+}
+
+const std::string& visual_studio_solution::project_location() const {
+    return project_location_;
+}
+
+std::string& visual_studio_solution::project_location() {
+    return project_location_;
+}
+
+void visual_studio_solution::project_location(const std::string& v) {
+    project_location_ = v;
+}
+
+void visual_studio_solution::project_location(const std::string&& v) {
+    project_location_ = std::move(v);
 }
 
 } } } }

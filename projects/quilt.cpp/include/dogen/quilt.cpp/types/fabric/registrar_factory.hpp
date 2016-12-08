@@ -36,7 +36,7 @@ namespace quilt {
 namespace cpp {
 namespace fabric {
 
-class registrar_factory {
+class registrar_factory final {
 private:
     boost::shared_ptr<fabric::registrar>
     make(const yarn::name& model_name) const;

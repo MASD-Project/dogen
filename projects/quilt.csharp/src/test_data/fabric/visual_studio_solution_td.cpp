@@ -18,8 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
 #include "dogen/yarn/test_data/element_td.hpp"
 #include "dogen/quilt.csharp/test_data/fabric/visual_studio_solution_td.hpp"
+
+namespace {
+
+std::string create_std_string(const unsigned int position) {
+    std::ostringstream s;
+    s << "a_string_" << position;
+    return s.str();
+}
+
+}
 
 namespace dogen {
 namespace quilt {
@@ -31,6 +42,10 @@ visual_studio_solution_generator::visual_studio_solution_generator() : position_
 void visual_studio_solution_generator::
 populate(const unsigned int position, result_type& v) {
     dogen::yarn::element_generator::populate(position, v);
+    v.project_guid(create_std_string(position + 0));
+    v.project_solution_guid(create_std_string(position + 1));
+    v.version(create_std_string(position + 2));
+    v.project_location(create_std_string(position + 3));
 }
 
 visual_studio_solution_generator::result_type

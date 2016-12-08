@@ -26,7 +26,18 @@
 #endif
 
 #include <boost/serialization/split_free.hpp>
+#include <boost/type_traits/is_virtual_base_of.hpp>
 #include "dogen/quilt.csharp/types/fabric/assembly_info.hpp"
+
+namespace boost {
+
+template<>struct
+is_virtual_base_of<
+    dogen::yarn::element,
+    dogen::quilt::csharp::fabric::assembly_info
+> : public mpl::true_ {};
+
+}
 
 BOOST_SERIALIZATION_SPLIT_FREE(dogen::quilt::csharp::fabric::assembly_info)
 namespace boost {

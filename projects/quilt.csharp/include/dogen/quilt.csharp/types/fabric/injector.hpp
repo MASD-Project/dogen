@@ -25,27 +25,32 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <boost/shared_ptr.hpp>
+#include "dogen/yarn/types/element.hpp"
+#include "dogen/yarn/types/injector_interface.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace csharp {
 namespace fabric {
 
-class injector final {
+class injector : public yarn::injector_interface {
 public:
-    injector() = default;
-    injector(const injector&) = default;
-    injector(injector&&) = default;
-    ~injector() = default;
-    injector& operator=(const injector&) = default;
+    virtual ~injector() noexcept;
+
+private:
+    void add_element(const boost::shared_ptr<yarn::element>& e,
+        yarn::intermediate_model& im) const;
+
+private:
+    void inject_visual_studio_project(yarn::intermediate_model& im) const;
+    void inject_assembly_info(yarn::intermediate_model& im) const;
+    void inject_visual_studio_solution(yarn::intermediate_model& im) const;
 
 public:
-    bool operator==(const injector& rhs) const;
-    bool operator!=(const injector& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    std::string id() const override;
+    void inject(yarn::intermediate_model& im) const override;
 };
 
 } } } }

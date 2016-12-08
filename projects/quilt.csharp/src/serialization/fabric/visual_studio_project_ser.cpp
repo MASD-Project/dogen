@@ -21,6 +21,7 @@
 #include <boost/serialization/nvp.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
+#include <boost/serialization/string.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
@@ -42,6 +43,10 @@ void save(Archive& ar,
     const dogen::quilt::csharp::fabric::visual_studio_project& v,
     const unsigned int /*version*/) {
     ar << make_nvp("element", base_object<dogen::yarn::element>(v));
+
+    ar << make_nvp("project_guid", v.project_guid_);
+    ar << make_nvp("project_name", v.project_name_);
+    ar << make_nvp("tools_version", v.tools_version_);
 }
 
 template<typename Archive>
@@ -49,6 +54,10 @@ void load(Archive& ar,
     dogen::quilt::csharp::fabric::visual_studio_project& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("element", base_object<dogen::yarn::element>(v));
+
+    ar >> make_nvp("project_guid", v.project_guid_);
+    ar >> make_nvp("project_name", v.project_name_);
+    ar >> make_nvp("tools_version", v.tools_version_);
 }
 
 } }

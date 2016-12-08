@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include "dogen/yarn/io/element_io.hpp"
 #include "dogen/quilt.csharp/io/fabric/assembly_info_io.hpp"
 
 namespace dogen {
@@ -26,9 +27,8 @@ namespace quilt {
 namespace csharp {
 namespace fabric {
 
-std::ostream& operator<<(std::ostream& s, const assembly_info&) {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::quilt::csharp::fabric::assembly_info\"" << " }";
+std::ostream& operator<<(std::ostream& s, const assembly_info& v) {
+    v.to_stream(s);
     return(s);
 }
 

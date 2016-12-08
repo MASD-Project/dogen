@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/quilt.csharp/types/fabric/injector.hpp"
 #include "dogen/quilt.csharp/types/fabric/initializer.hpp"
 
 namespace dogen {
@@ -25,8 +26,8 @@ namespace quilt {
 namespace csharp {
 namespace fabric {
 
-bool initializer::operator==(const initializer& /*rhs*/) const {
-    return true;
+void initializer::initialize(yarn::injector_registrar& rg) {
+    yarn::register_injector<injector>(rg);
 }
 
 } } } }
