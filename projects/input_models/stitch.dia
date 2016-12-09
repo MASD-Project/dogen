@@ -3838,6 +3838,8 @@
 #DOGEN yarn.dia.external_modules=dogen
 #DOGEN yarn.reference=annotations.dia
 #DOGEN yarn.reference=formatters.dia
+#DOGEN yarn.language=cpp
+#DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.csharp.enabled=false
 #DOGEN annotations.profile=dogen.disable_odb_cmake#</dia:string>
           </dia:attribute>

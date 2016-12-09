@@ -58,18 +58,16 @@ languages language_expander::to_language(const std::string& s) const {
 
 language_expander::type_group language_expander::
 make_type_group(const annotations::type_repository& atrp) const {
-
     type_group r;
     const annotations::type_repository_selector s(atrp);
     r.language = s.select_type_by_name(traits::language());
-
     return r;
 }
 
 languages language_expander::make_language(const type_group& tg,
     const annotations::annotation& a) const {
     const annotations::entry_selector s(a);
-    const auto lang_str(s.get_text_content(tg.language));
+    const auto lang_str(s.get_text_content_or_default(tg.language));
     return to_language(lang_str);
 }
 

@@ -2,6 +2,7 @@
   "model_name": "std",
   "documentation": "C++ Standard Library types.",
   "annotation": {
+    "yarn.language": "cpp",
     "yarn.is_proxy_model": true
   },
   "elements": [

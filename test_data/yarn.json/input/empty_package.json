@@ -1,6 +1,6 @@
 {
   "model_name": "empty_package",
-  "external_modules": "dogen::test_models",
+  "external_modules": "",
   "elements": [
     {
       "name": {

@@ -97,6 +97,7 @@
     },
     "value_type": "text",
     "template_kind": "instance",
-    "scope": "entity"
+    "scope": "root_module",
+    "default_value": "language_agnostic"
   }
 ]

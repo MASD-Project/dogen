@@ -5454,7 +5454,7 @@
 				<second class_id="46" tracking_level="0" version="0">
 					<parent class_id="47" tracking_level="0" version="0">
 						<entries class_id="48" tracking_level="0" version="0">
-							<count>4</count>
+							<count>6</count>
 							<item_version>0</item_version>
 							<item class_id="49" tracking_level="0" version="0">
 								<first>yarn.dia.comment</first>
@@ -5463,6 +5463,14 @@
 							<item>
 								<first>yarn.dia.external_modules</first>
 								<second>dogen::test_models</second>
+							</item>
+							<item>
+								<first>yarn.language</first>
+								<second>cpp</second>
+							</item>
+							<item>
+								<first>quilt.cpp.enabled</first>
+								<second>true</second>
 							</item>
 							<item>
 								<first>quilt.csharp.enabled</first>

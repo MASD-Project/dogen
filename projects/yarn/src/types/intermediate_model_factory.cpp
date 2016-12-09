@@ -81,12 +81,6 @@ void intermediate_model_factory::
 post_process(const annotations::annotation_groups_factory& agf,
     const annotations::type_repository& atrp, intermediate_model& im) const {
     /*
-     * We can safely expand language first as its not related to
-     * anything else.
-     */
-    // expand_language(atrp, im);
-
-    /*
      * We must expand annotations before we expand modules to
      * ensure the root module is populated with entries
      * before being copied over.
@@ -94,6 +88,7 @@ post_process(const annotations::annotation_groups_factory& agf,
     expand_annotations(agf, im);
     expand_modules(im);
     expand_origin(atrp, im);
+    expand_language(atrp, im);
     expand_type_parameters(atrp, im);
     expand_parsing(atrp, im);
 }
