@@ -55,6 +55,21 @@ struct traits {
      * @brief Name of the directory housing the kernel.
      */
     static std::string kernel_directory_name();
+
+    /**
+     * @brief If set to true, the file will be overwritten.
+     */
+    static std::string overwrite();
+
+    /**
+     * @brief Directory in which to place files for this facet.
+     */
+    static std::string directory();
+
+    /**
+     * @brief Post-fix to apply to file names.
+     */
+    static std::string postfix();
 };
 
 } } }

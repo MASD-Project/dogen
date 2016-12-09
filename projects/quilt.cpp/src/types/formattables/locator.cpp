@@ -26,7 +26,7 @@
 #include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
-#include "dogen/quilt.cpp/types/formattables/building_error.hpp"
+#include "dogen/quilt.cpp/types/formattables/location_error.hpp"
 #include "dogen/quilt.cpp/types/formatters/artefact_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formattables/locator.hpp"
 
@@ -196,7 +196,7 @@ configuration_for_archetype(const std::string& archetype) const {
     const auto i(arch_cfg.find(archetype));
     if (i == arch_cfg.end()) {
         BOOST_LOG_SEV(lg, error) << missing_archetype_configuration;
-        BOOST_THROW_EXCEPTION(building_error(missing_archetype_configuration));
+        BOOST_THROW_EXCEPTION(location_error(missing_archetype_configuration));
     }
 
     return i->second;

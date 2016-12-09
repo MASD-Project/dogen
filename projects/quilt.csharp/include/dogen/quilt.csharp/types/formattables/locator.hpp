@@ -45,10 +45,22 @@ namespace formattables {
 
 class locator final {
 private:
+    struct facet_type_group {
+        annotations::type directory;
+        annotations::type postfix;
+    };
+
+    struct formatter_type_group {
+        boost::optional<annotations::type> facet_directory;
+        boost::optional<annotations::type> facet_postfix;
+        annotations::type archetype_postfix;
+    };
+
     struct type_group {
-        std::unordered_map<std::string, annotations::type> facet_directories;
-        std::unordered_map<std::string, annotations::type>
-        formatters_directories;
+        std::unordered_map<std::string, facet_type_group>
+        facets_type_group;
+        std::unordered_map<std::string, formatter_type_group>
+        formatters_type_group;
         annotations::type kernel_directory_name;
     };
 
@@ -61,6 +73,15 @@ private:
     locator_configuration
     make_configuration(const annotations::type_repository& atrp,
         const formatters::repository& frp, const annotations::annotation& a);
+
+private:
+    /**
+     * @brief Given an archetype, returns its configuration.
+     *
+     * @pre Archetype must have a configuration.
+     */
+    const locator_archetype_configuration& configuration_for_archetype(
+        const std::string& archetype) const;
 
 public:
     locator(

@@ -18,23 +18,39 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.csharp/types/traits.hpp"
-#include "dogen/quilt.csharp/types/formatters/types/traits.hpp"
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_LOCATION_ERROR_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_LOCATION_ERROR_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <string>
+#include <boost/exception/info.hpp>
 
 namespace dogen {
 namespace quilt {
-namespace csharp {
-namespace formatters {
-namespace types {
+namespace cpp {
+namespace formattables {
 
-std::string traits::facet() {
-    static std::string r(csharp::traits::kernel() + ".types");
-    return r;
-}
+/**
+ * @brief An error occurred while the locator was creating a path.
+ */
+class location_error : public virtual std::exception, public virtual boost::exception {
+public:
+    location_error() = default;
+    ~location_error() noexcept = default;
 
-std::string traits::class_archetype() {
-    static std::string r(traits::facet() + ".class");
-    return r;
-}
+public:
+    location_error(const std::string& message) : message_(message) { }
 
-} } } } }
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
+};
+
+} } } }
+
+#endif

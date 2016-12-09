@@ -52,6 +52,7 @@
 #include "dogen/quilt.csharp/types/formattables/transformer.hpp"
 #include "dogen/quilt.csharp/types/formatters/io/initializer.hpp"
 #include "dogen/quilt.csharp/types/formatters/registrar_error.hpp"
+#include "dogen/quilt.csharp/types/formattables/location_error.hpp"
 #include "dogen/quilt.csharp/types/formattables/model_expander.hpp"
 #include "dogen/quilt.csharp/types/formattables/using_expander.hpp"
 #include "dogen/quilt.csharp/types/formatters/formatting_error.hpp"

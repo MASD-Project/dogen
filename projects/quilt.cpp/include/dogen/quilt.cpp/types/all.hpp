@@ -65,6 +65,7 @@
 #include "dogen/quilt.cpp/types/formatters/registrar_error.hpp"
 #include "dogen/quilt.cpp/types/fabric/forward_declarations.hpp"
 #include "dogen/quilt.cpp/types/formattables/building_error.hpp"
+#include "dogen/quilt.cpp/types/formattables/location_error.hpp"
 #include "dogen/quilt.cpp/types/formattables/model_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/odb_properties.hpp"
 #include "dogen/quilt.cpp/types/formatters/formatting_error.hpp"

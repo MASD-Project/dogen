@@ -39,6 +39,21 @@ std::string traits::enabled() {
     return r;
 }
 
+std::string traits::overwrite() {
+    static std::string r("overwrite");
+    return r;
+}
+
+std::string traits::directory() {
+    static std::string r("directory");
+    return r;
+}
+
+std::string traits::postfix() {
+    static std::string r("postfix");
+    return r;
+}
+
 std::string traits::kernel_directory_name() {
     static std::string r("quilt.csharp.directory");
     return r;

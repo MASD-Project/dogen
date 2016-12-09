@@ -18,23 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.csharp/types/traits.hpp"
-#include "dogen/quilt.csharp/types/formatters/types/traits.hpp"
+#ifndef DOGEN_QUILT_CSHARP_TYPES_FORMATTABLES_LOCATION_ERROR_FWD_HPP
+#define DOGEN_QUILT_CSHARP_TYPES_FORMATTABLES_LOCATION_ERROR_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace quilt {
 namespace csharp {
-namespace formatters {
-namespace types {
+namespace formattables {
 
-std::string traits::facet() {
-    static std::string r(csharp::traits::kernel() + ".types");
-    return r;
-}
+class location_error;
 
-std::string traits::class_archetype() {
-    static std::string r(traits::facet() + ".class");
-    return r;
-}
+} } } }
 
-} } } } }
+#endif

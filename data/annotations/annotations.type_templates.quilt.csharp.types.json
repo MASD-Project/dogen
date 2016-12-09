@@ -1,0 +1,48 @@
+[
+  {
+    "name": {
+      "simple": "directory",
+      "qualified": "quilt.csharp.types.directory"
+    },
+    "archetype_location": {
+      "family": "quilt",
+      "kernel": "quilt.cpp",
+      "facet": "quilt.csharp.types"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": "types"
+  },
+  {
+    "name": {
+      "simple": "postfix",
+      "qualified": "quilt.csharp.types.postfix"
+    },
+    "archetype_location": {
+      "family": "quilt",
+      "kernel": "quilt.cpp",
+      "facet": "quilt.csharp.types"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": ""
+  },
+  {
+    "name": {
+      "simple": "postfix",
+      "qualified": "quilt.csharp.types.class.postfix"
+    },
+    "archetype_location": {
+      "family": "quilt",
+      "kernel": "quilt.cpp",
+      "facet": "quilt.csharp.types",
+      "archetype": "quilt.csharp.types.class"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": ""
+  }
+]

@@ -385,7 +385,7 @@
     "archetype_location": {
       "family": "quilt",
       "kernel": "quilt.cpp",
-      "facet": "cmake",
+      "facet": "quilt.cpp.cmake",
       "archetype": "quilt.cpp.cmake.source_cmakelists.postfix"
     },
     "value_type": "text",
@@ -401,7 +401,7 @@
     "archetype_location": {
       "family": "quilt",
       "kernel": "quilt.cpp",
-      "facet": "cmake",
+      "facet": "quilt.cpp.cmake",
       "archetype": "quilt.cpp.cmake.include_cmakelists.postfix"
     },
     "value_type": "text",
