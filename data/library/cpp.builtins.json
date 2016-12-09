@@ -1,5 +1,5 @@
 {
-  "model_name": "hardware",
+  "model_name": "cpp.builtins",
   "documentation": "Hardware-provided primitive types.",
   "annotation": {
     "yarn.is_proxy_model": true

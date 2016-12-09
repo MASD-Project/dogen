@@ -58,8 +58,9 @@ const std::string cpp_std_model_path("library/cpp.std.json");
 const std::string cpp_std_model_name("std");
 const std::string cpp_boost_model_name("boost");
 const std::string cpp_boost_model_path("library/cpp.boost.json");
-const std::string hardware_model_path("library/hardware.json");
-const std::string hardware_model_name("hardware");
+const std::string hardware_model_path("library/cpp.builtins.json");
+const std::string hardware_model_name_front("cpp");
+const std::string hardware_model_name_back("builtins");
 
 const std::string missing_model_name("model_name");
 const std::string missing_type_name("name is mandatory.");
@@ -380,9 +381,11 @@ BOOST_AUTO_TEST_CASE(hardware_model_hydrates_into_expected_model) {
     const auto m(hydrate(p));
 
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
-    BOOST_REQUIRE(m.name().location().model_modules().size() == 1);
-    BOOST_CHECK(*(m.name().location().model_modules().begin())
-        == hardware_model_name);
+    BOOST_REQUIRE(m.name().location().model_modules().size() == 2);
+    BOOST_CHECK(m.name().location().model_modules().front()
+        == hardware_model_name_front);
+    BOOST_CHECK(m.name().location().model_modules().back()
+        == hardware_model_name_back);
 
     BOOST_CHECK(m.objects().empty());
     const auto primitives(m.primitives());
