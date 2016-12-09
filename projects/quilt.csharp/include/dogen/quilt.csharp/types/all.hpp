@@ -81,7 +81,9 @@
 #include "dogen/quilt.csharp/types/formatters/types/exception_formatter.hpp"
 #include "dogen/quilt.csharp/types/formatters/types/namespace_formatter.hpp"
 #include "dogen/quilt.csharp/types/formatters/artefact_formatter_interface.hpp"
+#include "dogen/quilt.csharp/types/formattables/locator_facet_configuration.hpp"
 #include "dogen/quilt.csharp/types/formatters/visual_studio_project_formatter.hpp"
 #include "dogen/quilt.csharp/types/formatters/visual_studio_solution_formatter.hpp"
+#include "dogen/quilt.csharp/types/formattables/locator_archetype_configuration.hpp"
 
 #endif

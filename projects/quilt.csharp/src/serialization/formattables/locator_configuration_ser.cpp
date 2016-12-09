@@ -30,6 +30,8 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/quilt.csharp/serialization/formattables/locator_configuration_ser.hpp"
+#include "dogen/quilt.csharp/serialization/formattables/locator_facet_configuration_ser.hpp"
+#include "dogen/quilt.csharp/serialization/formattables/locator_archetype_configuration_ser.hpp"
 
 namespace boost {
 namespace serialization {
@@ -38,7 +40,8 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::quilt::csharp::formattables::locator_configuration& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("facet_directories", v.facet_directories_);
+    ar << make_nvp("facet_configurations", v.facet_configurations_);
+    ar << make_nvp("archetype_configurations", v.archetype_configurations_);
     ar << make_nvp("disable_facet_directories", v.disable_facet_directories_);
     ar << make_nvp("kernel_directory_name", v.kernel_directory_name_);
 }
@@ -47,7 +50,8 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::quilt::csharp::formattables::locator_configuration& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("facet_directories", v.facet_directories_);
+    ar >> make_nvp("facet_configurations", v.facet_configurations_);
+    ar >> make_nvp("archetype_configurations", v.archetype_configurations_);
     ar >> make_nvp("disable_facet_directories", v.disable_facet_directories_);
     ar >> make_nvp("kernel_directory_name", v.kernel_directory_name_);
 }

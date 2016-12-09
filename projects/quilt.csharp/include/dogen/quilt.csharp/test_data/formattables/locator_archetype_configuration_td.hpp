@@ -18,23 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CSHARP_HASH_ALL_HASH_HPP
-#define DOGEN_QUILT_CSHARP_HASH_ALL_HASH_HPP
+#ifndef DOGEN_QUILT_CSHARP_TEST_DATA_FORMATTABLES_LOCATOR_ARCHETYPE_CONFIGURATION_TD_HPP
+#define DOGEN_QUILT_CSHARP_TEST_DATA_FORMATTABLES_LOCATOR_ARCHETYPE_CONFIGURATION_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/quilt.csharp/hash/formattables/model_hash.hpp"
-#include "dogen/quilt.csharp/hash/fabric/assembly_info_hash.hpp"
-#include "dogen/quilt.csharp/hash/formattables/formattable_hash.hpp"
-#include "dogen/quilt.csharp/hash/fabric/visual_studio_project_hash.hpp"
-#include "dogen/quilt.csharp/hash/fabric/visual_studio_solution_hash.hpp"
-#include "dogen/quilt.csharp/hash/formattables/element_properties_hash.hpp"
-#include "dogen/quilt.csharp/hash/formattables/artefact_properties_hash.hpp"
-#include "dogen/quilt.csharp/hash/fabric/visual_studio_configuration_hash.hpp"
-#include "dogen/quilt.csharp/hash/formattables/locator_configuration_hash.hpp"
-#include "dogen/quilt.csharp/hash/formattables/locator_facet_configuration_hash.hpp"
-#include "dogen/quilt.csharp/hash/formattables/locator_archetype_configuration_hash.hpp"
+#include "dogen/quilt.csharp/types/formattables/locator_archetype_configuration.hpp"
+
+namespace dogen {
+namespace quilt {
+namespace csharp {
+namespace formattables {
+
+class locator_archetype_configuration_generator {
+public:
+    locator_archetype_configuration_generator();
+
+public:
+    typedef dogen::quilt::csharp::formattables::locator_archetype_configuration result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
+
+} } } }
 
 #endif

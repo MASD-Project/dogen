@@ -20,6 +20,8 @@
  */
 #include <sstream>
 #include "dogen/quilt.csharp/test_data/formattables/locator_configuration_td.hpp"
+#include "dogen/quilt.csharp/test_data/formattables/locator_facet_configuration_td.hpp"
+#include "dogen/quilt.csharp/test_data/formattables/locator_archetype_configuration_td.hpp"
 
 namespace {
 
@@ -29,10 +31,28 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-std::unordered_map<std::string, std::string> create_std_unordered_map_std_string_std_string(unsigned int position) {
-    std::unordered_map<std::string, std::string> r;
+dogen::quilt::csharp::formattables::locator_facet_configuration
+create_dogen_quilt_csharp_formattables_locator_facet_configuration(const unsigned int position) {
+    return dogen::quilt::csharp::formattables::locator_facet_configuration_generator::create(position);
+}
+
+std::unordered_map<std::string, dogen::quilt::csharp::formattables::locator_facet_configuration> create_std_unordered_map_std_string_dogen_quilt_csharp_formattables_locator_facet_configuration(unsigned int position) {
+    std::unordered_map<std::string, dogen::quilt::csharp::formattables::locator_facet_configuration> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_std_string(position + i)));
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_quilt_csharp_formattables_locator_facet_configuration(position + i)));
+    }
+    return r;
+}
+
+dogen::quilt::csharp::formattables::locator_archetype_configuration
+create_dogen_quilt_csharp_formattables_locator_archetype_configuration(const unsigned int position) {
+    return dogen::quilt::csharp::formattables::locator_archetype_configuration_generator::create(position);
+}
+
+std::unordered_map<std::string, dogen::quilt::csharp::formattables::locator_archetype_configuration> create_std_unordered_map_std_string_dogen_quilt_csharp_formattables_locator_archetype_configuration(unsigned int position) {
+    std::unordered_map<std::string, dogen::quilt::csharp::formattables::locator_archetype_configuration> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_quilt_csharp_formattables_locator_archetype_configuration(position + i)));
     }
     return r;
 }
@@ -52,9 +72,10 @@ locator_configuration_generator::locator_configuration_generator() : position_(0
 
 void locator_configuration_generator::
 populate(const unsigned int position, result_type& v) {
-    v.facet_directories(create_std_unordered_map_std_string_std_string(position + 0));
-    v.disable_facet_directories(create_bool(position + 1));
-    v.kernel_directory_name(create_std_string(position + 2));
+    v.facet_configurations(create_std_unordered_map_std_string_dogen_quilt_csharp_formattables_locator_facet_configuration(position + 0));
+    v.archetype_configurations(create_std_unordered_map_std_string_dogen_quilt_csharp_formattables_locator_archetype_configuration(position + 1));
+    v.disable_facet_directories(create_bool(position + 2));
+    v.kernel_directory_name(create_std_string(position + 3));
 }
 
 locator_configuration_generator::result_type

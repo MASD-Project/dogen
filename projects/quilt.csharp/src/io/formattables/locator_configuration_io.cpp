@@ -22,6 +22,8 @@
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen/quilt.csharp/io/formattables/locator_configuration_io.hpp"
+#include "dogen/quilt.csharp/io/formattables/locator_facet_configuration_io.hpp"
+#include "dogen/quilt.csharp/io/formattables/locator_archetype_configuration_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -32,14 +34,32 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::string>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::quilt::csharp::formattables::locator_facet_configuration>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
         s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
         s << "\"" << tidy_up_string(i->first) << "\"";
         s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->second) << "\"";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::quilt::csharp::formattables::locator_archetype_configuration>& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
         s << " } ]";
     }
     s << " ] ";
@@ -62,7 +82,8 @@ std::ostream& operator<<(std::ostream& s, const locator_configuration& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::csharp::formattables::locator_configuration\"" << ", "
-      << "\"facet_directories\": " << v.facet_directories() << ", "
+      << "\"facet_configurations\": " << v.facet_configurations() << ", "
+      << "\"archetype_configurations\": " << v.archetype_configurations() << ", "
       << "\"disable_facet_directories\": " << v.disable_facet_directories() << ", "
       << "\"kernel_directory_name\": " << "\"" << tidy_up_string(v.kernel_directory_name()) << "\""
       << " }";

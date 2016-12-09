@@ -19,6 +19,8 @@
  *
  */
 #include "dogen/quilt.csharp/hash/formattables/locator_configuration_hash.hpp"
+#include "dogen/quilt.csharp/hash/formattables/locator_facet_configuration_hash.hpp"
+#include "dogen/quilt.csharp/hash/formattables/locator_archetype_configuration_hash.hpp"
 
 namespace {
 
@@ -28,7 +30,16 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_unordered_map_std_string_std_string(const std::unordered_map<std::string, std::string>& v) {
+inline std::size_t hash_std_unordered_map_std_string_dogen_quilt_csharp_formattables_locator_facet_configuration(const std::unordered_map<std::string, dogen::quilt::csharp::formattables::locator_facet_configuration>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, i.second);
+    }
+    return seed;
+}
+
+inline std::size_t hash_std_unordered_map_std_string_dogen_quilt_csharp_formattables_locator_archetype_configuration(const std::unordered_map<std::string, dogen::quilt::csharp::formattables::locator_archetype_configuration>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -47,7 +58,8 @@ namespace formattables {
 std::size_t locator_configuration_hasher::hash(const locator_configuration& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_unordered_map_std_string_std_string(v.facet_directories()));
+    combine(seed, hash_std_unordered_map_std_string_dogen_quilt_csharp_formattables_locator_facet_configuration(v.facet_configurations()));
+    combine(seed, hash_std_unordered_map_std_string_dogen_quilt_csharp_formattables_locator_archetype_configuration(v.archetype_configurations()));
     combine(seed, v.disable_facet_directories());
     combine(seed, v.kernel_directory_name());
 

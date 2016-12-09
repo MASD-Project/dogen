@@ -18,23 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CSHARP_HASH_ALL_HASH_HPP
-#define DOGEN_QUILT_CSHARP_HASH_ALL_HASH_HPP
+#ifndef DOGEN_QUILT_CSHARP_IO_FORMATTABLES_LOCATOR_FACET_CONFIGURATION_IO_HPP
+#define DOGEN_QUILT_CSHARP_IO_FORMATTABLES_LOCATOR_FACET_CONFIGURATION_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/quilt.csharp/hash/formattables/model_hash.hpp"
-#include "dogen/quilt.csharp/hash/fabric/assembly_info_hash.hpp"
-#include "dogen/quilt.csharp/hash/formattables/formattable_hash.hpp"
-#include "dogen/quilt.csharp/hash/fabric/visual_studio_project_hash.hpp"
-#include "dogen/quilt.csharp/hash/fabric/visual_studio_solution_hash.hpp"
-#include "dogen/quilt.csharp/hash/formattables/element_properties_hash.hpp"
-#include "dogen/quilt.csharp/hash/formattables/artefact_properties_hash.hpp"
-#include "dogen/quilt.csharp/hash/fabric/visual_studio_configuration_hash.hpp"
-#include "dogen/quilt.csharp/hash/formattables/locator_configuration_hash.hpp"
-#include "dogen/quilt.csharp/hash/formattables/locator_facet_configuration_hash.hpp"
-#include "dogen/quilt.csharp/hash/formattables/locator_archetype_configuration_hash.hpp"
+#include <iosfwd>
+#include "dogen/quilt.csharp/types/formattables/locator_facet_configuration.hpp"
+
+namespace dogen {
+namespace quilt {
+namespace csharp {
+namespace formattables {
+
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::quilt::csharp::formattables::locator_facet_configuration& v);
+
+} } } }
 
 #endif

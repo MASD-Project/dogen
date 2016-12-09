@@ -29,22 +29,26 @@ locator_configuration::locator_configuration()
     : disable_facet_directories_(static_cast<bool>(0)) { }
 
 locator_configuration::locator_configuration(
-    const std::unordered_map<std::string, std::string>& facet_directories,
+    const std::unordered_map<std::string, dogen::quilt::csharp::formattables::locator_facet_configuration>& facet_configurations,
+    const std::unordered_map<std::string, dogen::quilt::csharp::formattables::locator_archetype_configuration>& archetype_configurations,
     const bool disable_facet_directories,
     const std::string& kernel_directory_name)
-    : facet_directories_(facet_directories),
+    : facet_configurations_(facet_configurations),
+      archetype_configurations_(archetype_configurations),
       disable_facet_directories_(disable_facet_directories),
       kernel_directory_name_(kernel_directory_name) { }
 
 void locator_configuration::swap(locator_configuration& other) noexcept {
     using std::swap;
-    swap(facet_directories_, other.facet_directories_);
+    swap(facet_configurations_, other.facet_configurations_);
+    swap(archetype_configurations_, other.archetype_configurations_);
     swap(disable_facet_directories_, other.disable_facet_directories_);
     swap(kernel_directory_name_, other.kernel_directory_name_);
 }
 
 bool locator_configuration::operator==(const locator_configuration& rhs) const {
-    return facet_directories_ == rhs.facet_directories_ &&
+    return facet_configurations_ == rhs.facet_configurations_ &&
+        archetype_configurations_ == rhs.archetype_configurations_ &&
         disable_facet_directories_ == rhs.disable_facet_directories_ &&
         kernel_directory_name_ == rhs.kernel_directory_name_;
 }
@@ -55,20 +59,36 @@ locator_configuration& locator_configuration::operator=(locator_configuration ot
     return *this;
 }
 
-const std::unordered_map<std::string, std::string>& locator_configuration::facet_directories() const {
-    return facet_directories_;
+const std::unordered_map<std::string, dogen::quilt::csharp::formattables::locator_facet_configuration>& locator_configuration::facet_configurations() const {
+    return facet_configurations_;
 }
 
-std::unordered_map<std::string, std::string>& locator_configuration::facet_directories() {
-    return facet_directories_;
+std::unordered_map<std::string, dogen::quilt::csharp::formattables::locator_facet_configuration>& locator_configuration::facet_configurations() {
+    return facet_configurations_;
 }
 
-void locator_configuration::facet_directories(const std::unordered_map<std::string, std::string>& v) {
-    facet_directories_ = v;
+void locator_configuration::facet_configurations(const std::unordered_map<std::string, dogen::quilt::csharp::formattables::locator_facet_configuration>& v) {
+    facet_configurations_ = v;
 }
 
-void locator_configuration::facet_directories(const std::unordered_map<std::string, std::string>&& v) {
-    facet_directories_ = std::move(v);
+void locator_configuration::facet_configurations(const std::unordered_map<std::string, dogen::quilt::csharp::formattables::locator_facet_configuration>&& v) {
+    facet_configurations_ = std::move(v);
+}
+
+const std::unordered_map<std::string, dogen::quilt::csharp::formattables::locator_archetype_configuration>& locator_configuration::archetype_configurations() const {
+    return archetype_configurations_;
+}
+
+std::unordered_map<std::string, dogen::quilt::csharp::formattables::locator_archetype_configuration>& locator_configuration::archetype_configurations() {
+    return archetype_configurations_;
+}
+
+void locator_configuration::archetype_configurations(const std::unordered_map<std::string, dogen::quilt::csharp::formattables::locator_archetype_configuration>& v) {
+    archetype_configurations_ = v;
+}
+
+void locator_configuration::archetype_configurations(const std::unordered_map<std::string, dogen::quilt::csharp::formattables::locator_archetype_configuration>&& v) {
+    archetype_configurations_ = std::move(v);
 }
 
 bool locator_configuration::disable_facet_directories() const {

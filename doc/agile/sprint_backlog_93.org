@@ -12,32 +12,33 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-12-08 Thu 20:48]
+#+CAPTION: Clock summary at [2016-12-09 Fri 09:03]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *51:32* |       |       | 100.0 |
+| *Total time*                                                                | *52:01* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 51:32   |       |       | 100.0 |
-| Active                                                                      |         | 51:32 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  2:24 |   4.7 |
+| Stories                                                                     | 52:01   |       |       | 100.0 |
+| Active                                                                      |         | 52:01 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  2:24 |   4.6 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  1:02 |   2.0 |
 | COMPLETED Update readme                                                     |         |       |  0:11 |   0.4 |
 | COMPLETED Test data generation for dates generates invalid dates            |         |       |  0:33 |   1.1 |
 | COMPLETED Handle missing stitch templates scenario                          |         |       |  1:04 |   2.1 |
-| COMPLETED Move project directory to output options                          |         |       |  1:10 |   2.3 |
-| COMPLETED Update the conceptual model to clarify backends and kernels       |         |       |  4:20 |   8.4 |
+| COMPLETED Move project directory to output options                          |         |       |  1:10 |   2.2 |
+| COMPLETED Update the conceptual model to clarify backends and kernels       |         |       |  4:20 |   8.3 |
 | COMPLETED Detect knitter and disable code generation accordingly            |         |       |  1:15 |   2.4 |
-| COMPLETED Clean up kernel and backend confusion                             |         |       |  5:17 |  10.3 |
-| COMPLETED Add a "language" directory for each backend                       |         |       |  5:44 |  11.1 |
+| COMPLETED Clean up kernel and backend confusion                             |         |       |  5:17 |  10.2 |
+| COMPLETED Add a "language" directory for each backend                       |         |       |  5:44 |  11.0 |
 | COMPLETED Split C++ profiles and templates from C#                          |         |       |  1:11 |   2.3 |
 | COMPLETED Formatter registrar validation is not being called                |         |       |  0:20 |   0.6 |
 | COMPLETED Move decoration repository to quilt                               |         |       |  0:43 |   1.4 |
 | COMPLETED Move module id container into yarn                                |         |       |  0:24 |   0.8 |
-| COMPLETED Add basic infrastructure for C#                                   |         |       | 16:59 |  33.0 |
-| COMPLETED Add support for C#-style documentation                            |         |       |  1:57 |   3.8 |
-| COMPLETED Add support for visual studio projects and solutions              |         |       |  6:05 |  11.8 |
+| COMPLETED Add basic infrastructure for C#                                   |         |       | 16:59 |  32.6 |
+| COMPLETED Add support for C#-style documentation                            |         |       |  1:57 |   3.7 |
+| COMPLETED Add support for visual studio projects and solutions              |         |       |  6:05 |  11.7 |
 | COMPLETED OSX build is borked                                               |         |       |  0:21 |   0.7 |
+| STARTED Add facet directories to locator                                    |         |       |  0:29 |   0.9 |
 | STARTED Add support for Decimal numbers                                     |         |       |  0:32 |   1.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -483,11 +484,23 @@ According to this SO post, seems like we're missing a string include:
 
 [[http://stackoverflow.com/questions/32121497/this-hash-only-works-for-enumeration-types][This hash only works for enumeration types]]
 
+*** STARTED Add facet directories to locator                          :story:
+    CLOCK: [2016-12-09 Fri 08:45]--[2016-12-09 Fri 09:03] =>  0:18
+    CLOCK: [2016-12-08 Thu 20:49]--[2016-12-08 Thu 21:00] =>  0:11
+
+At present we are ignoring facet directories. Read them from the meta
+data and place items in the correct locations.
+
 *** STARTED Add support for Decimal numbers                           :story:
     CLOCK: [2016-11-30 Wed 13:04]--[2016-11-30 Wed 13:36] =>  0:32
 
 - try using ICU DecNumber library.
 - check compiler support (MSVC may have decimals; if so, use that instead)
+
+*** Add support for properties in C#                                  :story:
+
+We need to go through yarn and populate the properties in the types
+facet.
 
 *** Add msbuild target for C# test model                              :story:
 
@@ -516,11 +529,6 @@ all of its properties:
 : [assembly: AssemblyVersion ("1.0.*")]
 
 These appear to just be properties at the model level.
-
-*** Add support for properties in C#                                  :story:
-
-We need to go through yarn and populate the properties in the types
-facet.
 
 *** Add visibility to yarn elements                                   :story:
 

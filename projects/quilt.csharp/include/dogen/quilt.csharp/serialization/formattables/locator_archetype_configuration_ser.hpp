@@ -18,23 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CSHARP_HASH_ALL_HASH_HPP
-#define DOGEN_QUILT_CSHARP_HASH_ALL_HASH_HPP
+#ifndef DOGEN_QUILT_CSHARP_SERIALIZATION_FORMATTABLES_LOCATOR_ARCHETYPE_CONFIGURATION_SER_HPP
+#define DOGEN_QUILT_CSHARP_SERIALIZATION_FORMATTABLES_LOCATOR_ARCHETYPE_CONFIGURATION_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/quilt.csharp/hash/formattables/model_hash.hpp"
-#include "dogen/quilt.csharp/hash/fabric/assembly_info_hash.hpp"
-#include "dogen/quilt.csharp/hash/formattables/formattable_hash.hpp"
-#include "dogen/quilt.csharp/hash/fabric/visual_studio_project_hash.hpp"
-#include "dogen/quilt.csharp/hash/fabric/visual_studio_solution_hash.hpp"
-#include "dogen/quilt.csharp/hash/formattables/element_properties_hash.hpp"
-#include "dogen/quilt.csharp/hash/formattables/artefact_properties_hash.hpp"
-#include "dogen/quilt.csharp/hash/fabric/visual_studio_configuration_hash.hpp"
-#include "dogen/quilt.csharp/hash/formattables/locator_configuration_hash.hpp"
-#include "dogen/quilt.csharp/hash/formattables/locator_facet_configuration_hash.hpp"
-#include "dogen/quilt.csharp/hash/formattables/locator_archetype_configuration_hash.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen/quilt.csharp/types/formattables/locator_archetype_configuration.hpp"
+
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::quilt::csharp::formattables::locator_archetype_configuration)
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+void save(Archive& ar, const dogen::quilt::csharp::formattables::locator_archetype_configuration& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::quilt::csharp::formattables::locator_archetype_configuration& v, unsigned int version);
+
+} }
 
 #endif
