@@ -12,33 +12,34 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-12-09 Fri 10:13]
+#+CAPTION: Clock summary at [2016-12-09 Fri 10:18]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *52:41* |       |       | 100.0 |
+| *Total time*                                                                | *53:12* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 52:41   |       |       | 100.0 |
-| Active                                                                      |         | 52:41 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  2:24 |   4.6 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  1:02 |   2.0 |
+| Stories                                                                     | 53:12   |       |       | 100.0 |
+| Active                                                                      |         | 53:12 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  2:24 |   4.5 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  1:02 |   1.9 |
 | COMPLETED Update readme                                                     |         |       |  0:11 |   0.3 |
 | COMPLETED Test data generation for dates generates invalid dates            |         |       |  0:33 |   1.0 |
 | COMPLETED Handle missing stitch templates scenario                          |         |       |  1:04 |   2.0 |
 | COMPLETED Move project directory to output options                          |         |       |  1:10 |   2.2 |
-| COMPLETED Update the conceptual model to clarify backends and kernels       |         |       |  4:20 |   8.2 |
-| COMPLETED Detect knitter and disable code generation accordingly            |         |       |  1:15 |   2.4 |
-| COMPLETED Clean up kernel and backend confusion                             |         |       |  5:17 |  10.0 |
-| COMPLETED Add a "language" directory for each backend                       |         |       |  5:44 |  10.9 |
+| COMPLETED Update the conceptual model to clarify backends and kernels       |         |       |  4:20 |   8.1 |
+| COMPLETED Detect knitter and disable code generation accordingly            |         |       |  1:15 |   2.3 |
+| COMPLETED Clean up kernel and backend confusion                             |         |       |  5:17 |   9.9 |
+| COMPLETED Add a "language" directory for each backend                       |         |       |  5:44 |  10.8 |
 | COMPLETED Split C++ profiles and templates from C#                          |         |       |  1:11 |   2.2 |
 | COMPLETED Formatter registrar validation is not being called                |         |       |  0:20 |   0.6 |
-| COMPLETED Move decoration repository to quilt                               |         |       |  0:43 |   1.4 |
+| COMPLETED Move decoration repository to quilt                               |         |       |  0:43 |   1.3 |
 | COMPLETED Move module id container into yarn                                |         |       |  0:24 |   0.8 |
-| COMPLETED Add basic infrastructure for C#                                   |         |       | 16:59 |  32.2 |
+| COMPLETED Add basic infrastructure for C#                                   |         |       | 16:59 |  31.9 |
 | COMPLETED Add support for C#-style documentation                            |         |       |  1:57 |   3.7 |
-| COMPLETED Add support for visual studio projects and solutions              |         |       |  6:05 |  11.5 |
+| COMPLETED Add support for visual studio projects and solutions              |         |       |  6:05 |  11.4 |
 | COMPLETED OSX build is borked                                               |         |       |  0:21 |   0.7 |
 | COMPLETED Add facet directories to locator                                  |         |       |  1:09 |   2.2 |
+| STARTED Mapping of language namespaces to modeling element locations        |         |       |  0:31 |   1.0 |
 | STARTED Add support for Decimal numbers                                     |         |       |  0:32 |   1.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -486,7 +487,6 @@ According to this SO post, seems like we're missing a string include:
 
 *** COMPLETED Add facet directories to locator                        :story:
     CLOSED: [2016-12-09 Fri 10:13]
-    CLOCK: [2016-12-09 Fri 10:13]
     CLOCK: [2016-12-09 Fri 09:22]--[2016-12-09 Fri 09:45] =>  0:23
     CLOCK: [2016-12-09 Fri 09:04]--[2016-12-09 Fri 09:21] =>  0:17
     CLOCK: [2016-12-09 Fri 08:45]--[2016-12-09 Fri 09:03] =>  0:18
@@ -494,6 +494,60 @@ According to this SO post, seems like we're missing a string include:
 
 At present we are ignoring facet directories. Read them from the meta
 data and place items in the correct locations.
+
+*** STARTED Language namespaces and modeling element locations        :story:
+    CLOCK: [2016-12-09 Fri 10:13]--[2016-12-09 Fri 10:18] =>  0:05
+    CLOCK: [2016-12-09 Fri 09:46]--[2016-12-09 Fri 10:12] =>  0:26
+
+
+When we designed Dogen's meta-model yarn, we created a separation from
+"physical space" and "modeling space". That is, a modeling element
+living in modeling space does not know of any implementation specific
+details such as serialisation or test data generation. Those are
+concerns left to the kernels that implement "physical space" such as
+the C++ kernel and are normally implemented as separate facets. Again,
+facets are a "physical concept" and have no equivalent in modeling
+space.
+
+Facets normally tend to have a folder associated, originally
+envisioned as a way keep the code a bit more manageable. If we take
+the [[https://github.com/DomainDrivenConsulting/dogen/tree/master/projects/yarn/include/dogen/yarn][yarn model itself]] as an example:
+
+- types: domain types
+- hash: support for std::hash
+- io: iostreams support
+- serialization: boost serialisation support
+- test_data: test data generators
+
+Crucially, modeling space is not aware at all of these folders and
+thus they are not related to modules. So it is that the domain type is
+[[https://github.com/DomainDrivenConsulting/dogen/blob/master/projects/yarn/include/dogen/yarn/types/enumeration.hpp][defined as]]:
+
+#+begin_src
+...
+namespace dogen {
+namespace yarn {
+
+/**
+ * @brief Defines a bounded set of logically related values for a primitive type
+ * or a string.
+ */
+class enumeration final : public dogen::yarn::element {
+...
+#+end_src
+
+And so forth. This worked well for C++. However, this approach may
+cause problems for C# and will certainly cause problems for Java. This
+is because in these languages, folders are supposed to correspond to
+namespaces. In C# this is largely optional, but in Java it is
+mandatory. Thus we need some way of injecting the facet directories as
+internal modules before we code generate.
+
+Tasks:
+
+- add a meta-data flag to enable/disable this feature.
+- in assistant, during code generation, provide a function which
+  injects the internal module.
 
 *** STARTED Add support for Decimal numbers                           :story:
     CLOCK: [2016-11-30 Wed 13:04]--[2016-11-30 Wed 13:36] =>  0:32
