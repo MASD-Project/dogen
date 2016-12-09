@@ -69,6 +69,7 @@ public:
     static boost::filesystem::path input_enable_facet_serialization_json();
     static boost::filesystem::path input_rename_facet_folder_json();
     static boost::filesystem::path input_all_primitives_json();
+    static boost::filesystem::path input_csharp_model_json();
     static boost::filesystem::path input_trivial_inheritance_json();
     static boost::filesystem::path input_trivial_association_json();
     static boost::filesystem::path input_comments_json();

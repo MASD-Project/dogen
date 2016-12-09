@@ -65,6 +65,7 @@ path input_enable_facet_serialization_json(
     );
 path input_rename_facet_folder_json("yarn.json/input/rename_facet_folder.json");
 path input_all_primitives_json("yarn.json/input/all_primitives.json");
+path input_csharp_model_json("yarn.json/input/CSharpModel.json");
 path input_trivial_inheritance_json("yarn.json/input/trivial_inheritance.json");
 path input_trivial_association_json("yarn.json/input/trivial_association.json");
 path input_comments_json("yarn.json/input/comments.json");
@@ -193,6 +194,10 @@ path yarn_json::input_rename_facet_folder_json() {
 
 path yarn_json::input_all_primitives_json() {
     return validating_resolver::resolve(::input_all_primitives_json);
+}
+
+path yarn_json::input_csharp_model_json() {
+    return validating_resolver::resolve(::input_csharp_model_json);
 }
 
 path yarn_json::input_trivial_inheritance_json() {
