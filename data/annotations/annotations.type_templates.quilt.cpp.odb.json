@@ -38,7 +38,7 @@
       "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.odb",
-      "archetype": "quilt.cpp.odb.class_header_formatter"
+      "archetype": "quilt.cpp.odb.class_header"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -54,7 +54,7 @@
       "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.odb",
-      "archetype": "quilt.cpp.odb.enum_header_formatter"
+      "archetype": "quilt.cpp.odb.enum_header"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -70,7 +70,7 @@
       "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.odb",
-      "archetype": "quilt.cpp.odb.odb_options_formatter"
+      "archetype": "quilt.cpp.odb.odb_options"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -86,7 +86,7 @@
       "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.odb",
-      "archetype": "quilt.cpp.odb.master_header_formatter"
+      "archetype": "quilt.cpp.odb.master_header"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -116,7 +116,7 @@
       "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.odb",
-      "archetype": "quilt.cpp.odb.primitive_header_formatter"
+      "archetype": "quilt.cpp.odb.primitive_header"
     },
     "value_type": "text",
     "template_kind": "instance",

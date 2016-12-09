@@ -38,7 +38,7 @@
       "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.serialization",
-      "archetype": "quilt.cpp.serialization.class_header_formatter"
+      "archetype": "quilt.cpp.serialization.class_header"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -54,7 +54,7 @@
       "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.serialization",
-      "archetype": "quilt.cpp.serialization.class_implementation_formatter"
+      "archetype": "quilt.cpp.serialization.class_implementation"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -70,7 +70,7 @@
       "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.serialization",
-      "archetype": "quilt.cpp.serialization.enum_header_formatter"
+      "archetype": "quilt.cpp.serialization.enum_header"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -86,7 +86,7 @@
       "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.serialization",
-      "archetype": "quilt.cpp.serialization.registrar_header_formatter"
+      "archetype": "quilt.cpp.serialization.registrar_header"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -102,7 +102,7 @@
       "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.serialization",
-      "archetype": "quilt.cpp.serialization.registrar_implementation_formatter"
+      "archetype": "quilt.cpp.serialization.registrar_implementation"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -118,7 +118,7 @@
       "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.serialization",
-      "archetype": "quilt.cpp.serialization.forward_declarations_formatter"
+      "archetype": "quilt.cpp.serialization.forward_declarations"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -134,7 +134,7 @@
       "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.serialization",
-      "archetype": "quilt.cpp.serialization.master_header_formatter"
+      "archetype": "quilt.cpp.serialization.master_header"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -150,7 +150,7 @@
       "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.serialization",
-      "archetype": "quilt.cpp.serialization.primitive_header_formatter"
+      "archetype": "quilt.cpp.serialization.primitive_header"
     },
     "value_type": "text",
     "template_kind": "instance",

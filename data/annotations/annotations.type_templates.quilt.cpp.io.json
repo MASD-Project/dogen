@@ -38,7 +38,7 @@
       "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.io",
-      "archetype": "quilt.cpp.io.class_header_formatter"
+      "archetype": "quilt.cpp.io.class_header"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -54,7 +54,7 @@
       "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.io",
-      "archetype": "quilt.cpp.io.class_implementation_formatter"
+      "archetype": "quilt.cpp.io.class_implementation"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -70,7 +70,7 @@
       "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.io",
-      "archetype": "quilt.cpp.io.enum_header_formatter"
+      "archetype": "quilt.cpp.io.enum_header"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -86,7 +86,7 @@
       "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.io",
-      "archetype": "quilt.cpp.io.enum_implementation_formatter"
+      "archetype": "quilt.cpp.io.enum_implementation"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -102,7 +102,7 @@
       "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.io",
-      "archetype": "quilt.cpp.io.master_header_formatter"
+      "archetype": "quilt.cpp.io.master_header"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -118,7 +118,7 @@
       "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.io",
-      "archetype": "quilt.cpp.io.primitive_header_formatter"
+      "archetype": "quilt.cpp.io.primitive_header"
     },
     "value_type": "text",
     "template_kind": "instance",

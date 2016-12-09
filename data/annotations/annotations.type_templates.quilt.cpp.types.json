@@ -38,7 +38,7 @@
       "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.types",
-      "archetype": "quilt.cpp.types.class_header_formatter"
+      "archetype": "quilt.cpp.types.class_header"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -54,7 +54,7 @@
       "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.types",
-      "archetype": "quilt.cpp.types.class_implementation_formatter"
+      "archetype": "quilt.cpp.types.class_implementation"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -70,7 +70,7 @@
       "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.types",
-      "archetype": "quilt.cpp.types.enum_header_formatter"
+      "archetype": "quilt.cpp.types.enum_header"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -86,7 +86,7 @@
       "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.types",
-      "archetype": "quilt.cpp.types.enum_implementation_formatter"
+      "archetype": "quilt.cpp.types.enum_implementation"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -102,7 +102,7 @@
       "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.types",
-      "archetype": "quilt.cpp.types.exception_header_formatter"
+      "archetype": "quilt.cpp.types.exception_header"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -118,7 +118,7 @@
       "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.types",
-      "archetype": "quilt.cpp.types.namespace_header_formatter"
+      "archetype": "quilt.cpp.types.namespace_header"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -134,7 +134,7 @@
       "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.types",
-      "archetype": "quilt.cpp.types.visitor_header_formatter"
+      "archetype": "quilt.cpp.types.visitor_header"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -150,7 +150,7 @@
       "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.types",
-      "archetype": "quilt.cpp.types.forward_declarations_formatter"
+      "archetype": "quilt.cpp.types.forward_declarations"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -166,7 +166,7 @@
       "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.types",
-      "archetype": "quilt.cpp.types.master_header_formatter"
+      "archetype": "quilt.cpp.types.master_header"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -182,7 +182,7 @@
       "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.types",
-      "archetype": "quilt.cpp.types.primitive_header_formatter"
+      "archetype": "quilt.cpp.types.primitive_header"
     },
     "value_type": "text",
     "template_kind": "instance",
