@@ -2,10 +2,10 @@
 <dia:diagram xmlns:dia="http://www.lysator.liu.se/~alla/dia/">
   <dia:diagramdata>
     <dia:attribute name="background">
-      <dia:color val="#ffffff"/>
+      <dia:color val="#ffffffff"/>
     </dia:attribute>
     <dia:attribute name="pagebreak">
-      <dia:color val="#000099"/>
+      <dia:color val="#000099ff"/>
     </dia:attribute>
     <dia:attribute name="paper">
       <dia:composite type="paper">
@@ -37,6 +37,9 @@
     </dia:attribute>
     <dia:attribute name="grid">
       <dia:composite type="grid">
+        <dia:attribute name="dynamic">
+          <dia:boolean val="true"/>
+        </dia:attribute>
         <dia:attribute name="width_x">
           <dia:real val="1"/>
         </dia:attribute>
@@ -53,7 +56,7 @@
       </dia:composite>
     </dia:attribute>
     <dia:attribute name="color">
-      <dia:color val="#d6d6d6"/>
+      <dia:color val="#d6d6d6ff"/>
     </dia:attribute>
     <dia:attribute name="guides">
       <dia:composite type="guides">
@@ -61,17 +64,36 @@
         <dia:attribute name="vguides"/>
       </dia:composite>
     </dia:attribute>
+    <dia:attribute name="display">
+      <dia:composite type="display">
+        <dia:attribute name="antialiased">
+          <dia:boolean val="false"/>
+        </dia:attribute>
+        <dia:attribute name="snap-to-grid">
+          <dia:boolean val="true"/>
+        </dia:attribute>
+        <dia:attribute name="snap-to-object">
+          <dia:boolean val="true"/>
+        </dia:attribute>
+        <dia:attribute name="show-grid">
+          <dia:boolean val="true"/>
+        </dia:attribute>
+        <dia:attribute name="show-connection-points">
+          <dia:boolean val="true"/>
+        </dia:attribute>
+      </dia:composite>
+    </dia:attribute>
   </dia:diagramdata>
-  <dia:layer name="Background" visible="true" active="true">
+  <dia:layer name="Background" visible="true" connectable="true" active="true">
     <dia:object type="UML - Class" version="0" id="O0">
       <dia:attribute name="obj_pos">
-        <dia:point val="29.6833,-0.491667"/>
+        <dia:point val="43,-19"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="29.6333,-0.541667;38.7033,2.35833"/>
+        <dia:rectangle val="42.95,-19.05;52.02,-16.15"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="29.6833,-0.491667"/>
+        <dia:point val="43,-19"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="8.9700000000000006"/>
@@ -86,17 +108,7 @@
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Welcome to Dogen!
-
-This is one of the simplest models you can generate, a single class with one
-property. You can see the use of comments at the class level and property
-level.
-
-#DOGEN yarn.dia.comment=true
-#DOGEN yarn.dia.external_modules=dogen
-#DOGEN yarn.language=cpp
-#DOGEN quilt.cpp.enabled=true
-#DOGEN quilt.csharp.enabled=false#</dia:string>
+        <dia:string>#Hello World class.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -128,17 +140,20 @@ level.
       <dia:attribute name="comment_tagging">
         <dia:boolean val="false"/>
       </dia:attribute>
+      <dia:attribute name="allow_resizing">
+        <dia:boolean val="false"/>
+      </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
       </dia:attribute>
       <dia:attribute name="line_color">
-        <dia:color val="#000000"/>
+        <dia:color val="#000000ff"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#ffffff"/>
+        <dia:color val="#ffffffff"/>
       </dia:attribute>
       <dia:attribute name="text_color">
-        <dia:color val="#000000"/>
+        <dia:color val="#000000ff"/>
       </dia:attribute>
       <dia:attribute name="normal_font">
         <dia:font family="monospace" style="0" name="Courier"/>
@@ -206,6 +221,67 @@ level.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
+    </dia:object>
+    <dia:object type="UML - Note" version="0" id="O1">
+      <dia:attribute name="obj_pos">
+        <dia:point val="6,-19"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="5.95,-19.05;36.21,-9.25"/>
+      </dia:attribute>
+      <dia:attribute name="meta">
+        <dia:composite type="dict"/>
+      </dia:attribute>
+      <dia:attribute name="elem_corner">
+        <dia:point val="6,-19"/>
+      </dia:attribute>
+      <dia:attribute name="elem_width">
+        <dia:real val="30.160000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="elem_height">
+        <dia:real val="9.7000000000000011"/>
+      </dia:attribute>
+      <dia:attribute name="text">
+        <dia:composite type="text">
+          <dia:attribute name="string">
+            <dia:string>#Welcome to Dogen!
+
+This is one of the simplest models you can generate, a single class with one
+property. You can see the use of comments at the class level and property
+level.
+
+#DOGEN yarn.dia.comment=true
+#DOGEN yarn.dia.external_modules=dogen
+#DOGEN yarn.language=cpp
+#DOGEN quilt.cpp.enabled=true
+#DOGEN quilt.csharp.enabled=false#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="font">
+            <dia:font family="monospace" style="0" name="Courier"/>
+          </dia:attribute>
+          <dia:attribute name="height">
+            <dia:real val="0.80000000000000004"/>
+          </dia:attribute>
+          <dia:attribute name="pos">
+            <dia:point val="6.35,-17.755"/>
+          </dia:attribute>
+          <dia:attribute name="color">
+            <dia:color val="#000000ff"/>
+          </dia:attribute>
+          <dia:attribute name="alignment">
+            <dia:enum val="0"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
+      <dia:attribute name="line_width">
+        <dia:real val="0.10000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="line_colour">
+        <dia:color val="#000000ff"/>
+      </dia:attribute>
+      <dia:attribute name="fill_colour">
+        <dia:color val="#ffffffff"/>
+      </dia:attribute>
     </dia:object>
   </dia:layer>
 </dia:diagram>
