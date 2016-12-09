@@ -32,6 +32,7 @@
 #include <boost/shared_ptr.hpp>
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/module.hpp"
+#include "dogen/yarn/types/languages.hpp"
 #include "dogen/yarn/types/element_fwd.hpp"
 #include "dogen/yarn/serialization/model_fwd_ser.hpp"
 
@@ -56,7 +57,8 @@ public:
         const std::vector<boost::shared_ptr<dogen::yarn::element> >& elements,
         const dogen::yarn::module& root_module,
         const std::unordered_set<std::string>& module_ids,
-        const bool has_generatable_types);
+        const bool has_generatable_types,
+        const dogen::yarn::languages language);
 
 private:
     template<typename Archive>
@@ -109,6 +111,14 @@ public:
     void has_generatable_types(const bool v);
     /**@}*/
 
+    /**
+     * @brief Language that this model supports.
+     */
+    /**@{*/
+    dogen::yarn::languages language() const;
+    void language(const dogen::yarn::languages v);
+    /**@}*/
+
 public:
     bool operator==(const model& rhs) const;
     bool operator!=(const model& rhs) const {
@@ -125,6 +135,7 @@ private:
     dogen::yarn::module root_module_;
     std::unordered_set<std::string> module_ids_;
     bool has_generatable_types_;
+    dogen::yarn::languages language_;
 };
 
 } }

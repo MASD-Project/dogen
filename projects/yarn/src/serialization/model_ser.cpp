@@ -35,6 +35,7 @@
 #include "dogen/yarn/serialization/model_ser.hpp"
 #include "dogen/yarn/serialization/module_ser.hpp"
 #include "dogen/yarn/serialization/element_ser.hpp"
+#include "dogen/yarn/serialization/languages_ser.hpp"
 
 namespace boost {
 namespace serialization {
@@ -48,6 +49,7 @@ void save(Archive& ar,
     ar << make_nvp("root_module", v.root_module_);
     ar << make_nvp("module_ids", v.module_ids_);
     ar << make_nvp("has_generatable_types", v.has_generatable_types_);
+    ar << make_nvp("language", v.language_);
 }
 
 template<typename Archive>
@@ -59,6 +61,7 @@ void load(Archive& ar,
     ar >> make_nvp("root_module", v.root_module_);
     ar >> make_nvp("module_ids", v.module_ids_);
     ar >> make_nvp("has_generatable_types", v.has_generatable_types_);
+    ar >> make_nvp("language", v.language_);
 }
 
 } }

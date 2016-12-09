@@ -38,6 +38,7 @@
 #include "dogen/yarn/types/visitor.hpp"
 #include "dogen/yarn/hash/name_hash.hpp"
 #include "dogen/yarn/types/exception.hpp"
+#include "dogen/yarn/types/languages.hpp"
 #include "dogen/yarn/types/primitive.hpp"
 #include "dogen/yarn/types/element_fwd.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
@@ -75,7 +76,8 @@ public:
         const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> >& injected_elements,
         const bool has_generatable_types,
         const dogen::yarn::indices& indices,
-        const dogen::yarn::module& root_module);
+        const dogen::yarn::module& root_module,
+        const dogen::yarn::languages language);
 
 private:
     template<typename Archive>
@@ -218,6 +220,14 @@ public:
     void root_module(const dogen::yarn::module& v);
     void root_module(const dogen::yarn::module&& v);
 
+    /**
+     * @brief Language that this model supports.
+     */
+    /**@{*/
+    dogen::yarn::languages language() const;
+    void language(const dogen::yarn::languages v);
+    /**@}*/
+
 public:
     bool operator==(const intermediate_model& rhs) const;
     bool operator!=(const intermediate_model& rhs) const {
@@ -244,6 +254,7 @@ private:
     bool has_generatable_types_;
     dogen::yarn::indices indices_;
     dogen::yarn::module root_module_;
+    dogen::yarn::languages language_;
 };
 
 } }

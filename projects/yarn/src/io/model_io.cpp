@@ -25,6 +25,7 @@
 #include "dogen/yarn/io/model_io.hpp"
 #include "dogen/yarn/io/module_io.hpp"
 #include "dogen/yarn/io/element_io.hpp"
+#include "dogen/yarn/io/languages_io.hpp"
 
 namespace boost {
 
@@ -93,7 +94,8 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"elements\": " << v.elements() << ", "
       << "\"root_module\": " << v.root_module() << ", "
       << "\"module_ids\": " << v.module_ids() << ", "
-      << "\"has_generatable_types\": " << v.has_generatable_types()
+      << "\"has_generatable_types\": " << v.has_generatable_types() << ", "
+      << "\"language\": " << v.language()
       << " }";
     return(s);
 }

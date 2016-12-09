@@ -26,7 +26,7 @@ namespace yarn {
 languages_generator::languages_generator() : position_(0) { }
 void languages_generator::
 populate(const unsigned int position, result_type& v) {
-    v = static_cast<languages>(position % 2);
+    v = static_cast<languages>(position % 4);
 }
 
 languages_generator::result_type

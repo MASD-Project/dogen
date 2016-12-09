@@ -29,6 +29,7 @@
 #include "dogen/yarn/io/indices_io.hpp"
 #include "dogen/yarn/io/visitor_io.hpp"
 #include "dogen/yarn/io/exception_io.hpp"
+#include "dogen/yarn/io/languages_io.hpp"
 #include "dogen/yarn/io/primitive_io.hpp"
 #include "dogen/yarn/io/enumeration_io.hpp"
 #include "dogen/yarn/io/origin_types_io.hpp"
@@ -259,7 +260,8 @@ std::ostream& operator<<(std::ostream& s, const intermediate_model& v) {
       << "\"injected_elements\": " << v.injected_elements() << ", "
       << "\"has_generatable_types\": " << v.has_generatable_types() << ", "
       << "\"indices\": " << v.indices() << ", "
-      << "\"root_module\": " << v.root_module()
+      << "\"root_module\": " << v.root_module() << ", "
+      << "\"language\": " << v.language()
       << " }";
     return(s);
 }

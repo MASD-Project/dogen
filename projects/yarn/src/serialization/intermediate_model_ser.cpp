@@ -39,6 +39,7 @@
 #include "dogen/yarn/serialization/indices_ser.hpp"
 #include "dogen/yarn/serialization/visitor_ser.hpp"
 #include "dogen/yarn/serialization/exception_ser.hpp"
+#include "dogen/yarn/serialization/languages_ser.hpp"
 #include "dogen/yarn/serialization/primitive_ser.hpp"
 #include "dogen/yarn/serialization/enumeration_ser.hpp"
 #include "dogen/yarn/serialization/origin_types_ser.hpp"
@@ -66,6 +67,7 @@ void save(Archive& ar,
     ar << make_nvp("has_generatable_types", v.has_generatable_types_);
     ar << make_nvp("indices", v.indices_);
     ar << make_nvp("root_module", v.root_module_);
+    ar << make_nvp("language", v.language_);
 }
 
 template<typename Archive>
@@ -87,6 +89,7 @@ void load(Archive& ar,
     ar >> make_nvp("has_generatable_types", v.has_generatable_types_);
     ar >> make_nvp("indices", v.indices_);
     ar >> make_nvp("root_module", v.root_module_);
+    ar >> make_nvp("language", v.language_);
 }
 
 } }

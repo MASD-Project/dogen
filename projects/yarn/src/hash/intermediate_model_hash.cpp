@@ -26,6 +26,7 @@
 #include "dogen/yarn/hash/indices_hash.hpp"
 #include "dogen/yarn/hash/visitor_hash.hpp"
 #include "dogen/yarn/hash/exception_hash.hpp"
+#include "dogen/yarn/hash/languages_hash.hpp"
 #include "dogen/yarn/hash/primitive_hash.hpp"
 #include "dogen/yarn/hash/enumeration_hash.hpp"
 #include "dogen/yarn/hash/origin_types_hash.hpp"
@@ -157,6 +158,7 @@ std::size_t intermediate_model_hasher::hash(const intermediate_model& v) {
     combine(seed, v.has_generatable_types());
     combine(seed, v.indices());
     combine(seed, v.root_module());
+    combine(seed, v.language());
 
     return seed;
 }

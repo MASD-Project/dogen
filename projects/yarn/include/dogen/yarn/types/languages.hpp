@@ -29,11 +29,13 @@ namespace dogen {
 namespace yarn {
 
 /**
- * @brief For language specific aspects, identifies which language is being used.
+ * @brief Models need to declare upfront the programming language they will target.
  */
 enum class languages : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
-    cpp = 1
+    cpp = 1,
+    csharp = 2,
+    language_agnostic = 3
 };
 
 } }

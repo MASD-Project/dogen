@@ -22,6 +22,7 @@
 #include "dogen/yarn/hash/model_hash.hpp"
 #include "dogen/yarn/hash/module_hash.hpp"
 #include "dogen/yarn/hash/element_hash.hpp"
+#include "dogen/yarn/hash/languages_hash.hpp"
 
 namespace {
 
@@ -66,6 +67,7 @@ std::size_t model_hasher::hash(const model& v) {
     combine(seed, v.root_module());
     combine(seed, hash_std_unordered_set_std_string(v.module_ids()));
     combine(seed, v.has_generatable_types());
+    combine(seed, v.language());
 
     return seed;
 }

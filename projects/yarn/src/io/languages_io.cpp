@@ -37,6 +37,12 @@ std::ostream& operator<<(std::ostream& s, const languages& v) {
     case languages::cpp:
         attr = "\"cpp\"";
         break;
+    case languages::csharp:
+        attr = "\"csharp\"";
+        break;
+    case languages::language_agnostic:
+        attr = "\"language_agnostic\"";
+        break;
     default:
         throw std::invalid_argument("Invalid value for languages");
     }

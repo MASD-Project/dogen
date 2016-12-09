@@ -23,6 +23,7 @@
 #include "dogen/yarn/test_data/model_td.hpp"
 #include "dogen/yarn/test_data/module_td.hpp"
 #include "dogen/yarn/test_data/element_td.hpp"
+#include "dogen/yarn/test_data/languages_td.hpp"
 
 namespace {
 
@@ -74,6 +75,11 @@ bool create_bool(const unsigned int position) {
     return (position % 2) == 0;
 }
 
+dogen::yarn::languages
+create_dogen_yarn_languages(const unsigned int position) {
+    return dogen::yarn::languages_generator::create(position);
+}
+
 }
 
 namespace dogen {
@@ -88,6 +94,7 @@ populate(const unsigned int position, result_type& v) {
     v.root_module(create_dogen_yarn_module(position + 2));
     v.module_ids(create_std_unordered_set_std_string(position + 3));
     v.has_generatable_types(create_bool(position + 4));
+    v.language(create_dogen_yarn_languages(position + 5));
 }
 
 model_generator::result_type

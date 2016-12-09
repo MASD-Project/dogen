@@ -495,6 +495,52 @@ According to this SO post, seems like we're missing a string include:
 At present we are ignoring facet directories. Read them from the meta
 data and place items in the correct locations.
 
+*** STARTED Split the "built-ins" by language                         :story:
+    CLOCK: [2016-12-09 Fri 10:38]--[2016-12-09 Fri 10:42] =>  0:04
+    CLOCK: [2016-12-09 Fri 10:28]--[2016-12-09 Fri 10:37] =>  0:09
+
+Originally, we created the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/data/library/hardware.json][hardware]] proxy model with the assumption
+that, in general, all programming languages would map to it. However,
+this is not the case: not all languages support what we deemed to be
+the fundamental types. For example, in C# there is no =long long=, and
+=unsigned long= is called =ulong=. Thus we need to split out the
+hardware model into language specific "built-ins" models. This also
+means we need to completely segregate models by language, as per story
+[[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_93.org#models-should-have-an-associated-language][Models should have an associated language]]. We need to implement this
+first.
+
+*** STARTED Models should have an associated language                  :epic:
+    CLOCK: [2016-12-09 Fri 10:42]--[2016-12-09 Fri 11:16] =>  0:34
+
+#+begin_quote
+*Story*: As a dogen user, I want to make sure I only use valid system
+models so that I don't generate models that code generate but do not
+compile.
+#+end_quote
+
+Certain models (e.g. system / library models) can only be used in a
+give language; for example =boost= and =std= only make sense in C++. A
+.Net library model would only make sense in .Net, etc. These are
+Language Specific Models (LSM). Once a model depends on a LSM it
+itself becomes an LSM and it should not be able to then make use of
+models of other languages nor should one be able to request a code
+generation for other languages.
+
+However, one day we will have a system model which is a Language
+Agnostic Model (LAM). The system model will provide a base set of
+functionality across languages such as containers, and for each type
+it will have mappings to language specific types. The mapping is
+declared as dynamic extensions in the appropriate section
+(i.e. =tags::cpp::mapped_type= or something of that ilk). If a model
+depends only on LAMs, it is itself a LAM and can be used to generate
+code on any supported language (presumably a supported language is
+defined to be that for which we have both mappings and a code
+generation backend).
+
+A first step for this would be to have a language enumeration in yarn
+which is a property of the model, and one entry of which is "language
+agnostic".
+
 *** STARTED Language namespaces and modeling element locations        :story:
     CLOCK: [2016-12-09 Fri 10:19]--[2016-12-09 Fri 10:27] =>  0:08
     CLOCK: [2016-12-09 Fri 10:13]--[2016-12-09 Fri 10:18] =>  0:05
@@ -521,8 +567,8 @@ the [[https://github.com/DomainDrivenConsulting/dogen/tree/master/projects/yarn/
 - test_data: test data generators
 
 Crucially, modeling space is not aware at all of these folders and
-thus they are not related to modules. So it is that the domain type is
-[[https://github.com/DomainDrivenConsulting/dogen/blob/master/projects/yarn/include/dogen/yarn/types/enumeration.hpp][defined as]]:
+thus they are not related to the modeling space concept of modules. So
+it is that the domain type, housed in the types folder, is [[https://github.com/DomainDrivenConsulting/dogen/blob/master/projects/yarn/include/dogen/yarn/types/enumeration.hpp][defined as]]:
 
 #+begin_src
 ...
@@ -537,7 +583,8 @@ class enumeration final : public dogen::yarn::element {
 ...
 #+end_src
 
-And so forth. This worked well for C++. However, this approach may
+And so forth (note the absence of "types" in the namespace
+declaration). This worked well for C++. However, this approach may
 cause problems for C# and will certainly cause problems for Java. This
 is because in these languages, folders are supposed to correspond to
 namespaces. In C# this is largely optional, but in Java it is
@@ -563,20 +610,16 @@ Tasks:
 - try using ICU DecNumber library.
 - check compiler support (MSVC may have decimals; if so, use that instead)
 
-*** Add support for properties in C#                                  :story:
-
-We need to go through yarn and populate the properties in the types
-facet.
-
 *** Add msbuild target for C# test model                              :story:
 
 Once we are generating solutions, we should detect msbuild (or xbuild)
 and build the solution. This should be a CMake target that runs on
 Travis.
 
-*** Split the "built-ins" by language                                 :story:
+*** Add support for properties in C#                                  :story:
 
-At present we have a had
+We need to go through yarn and populate the properties in the types
+facet.
 
 *** Generate AssemblyInfo in C#                                       :story:
 
@@ -722,37 +765,6 @@ could translate to:
 - create a type to string which converts a key made up of primitives
   into a underscore delimited string, used as a key in the cache.
 - we should also consider external libraries like [[https://github.com/cripplet/cachepp][cachepp]].
-
-*** Models should have an associated language                          :epic:
-
-#+begin_quote
-*Story*: As a dogen user, I want to make sure I only use valid system
-models so that I don't generate models that code generate but do not
-compile.
-#+end_quote
-
-Certain models (e.g. system / library models) can only be used in a
-give language; for example =boost= and =std= only make sense in C++. A
-.Net library model would only make sense in .Net, etc. These are
-Language Specific Models (LSM). Once a model depends on a LSM it
-itself becomes an LSM and it should not be able to then make use of
-models of other languages nor should one be able to request a code
-generation for other languages.
-
-However, one day we will have a system model which is a Language
-Agnostic Model (LAM). The system model will provide a base set of
-functionality across languages such as containers, and for each type
-it will have mappings to language specific types. The mapping is
-declared as dynamic extensions in the appropriate section
-(i.e. =tags::cpp::mapped_type= or something of that ilk). If a model
-depends only on LAMs, it is itself a LAM and can be used to generate
-code on any supported language (presumably a supported language is
-defined to be that for which we have both mappings and a code
-generation backend).
-
-A first step for this would be to have a language enumeration in yarn
-which is a property of the model, and one entry of which is "language
-agnostic".
 
 *** Add support for Language Agnostic Models (LAM)                    :story:
 

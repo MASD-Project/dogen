@@ -34,19 +34,22 @@ namespace dogen {
 namespace yarn {
 
 model::model()
-    : has_generatable_types_(static_cast<bool>(0)) { }
+    : has_generatable_types_(static_cast<bool>(0)),
+      language_(static_cast<dogen::yarn::languages>(0)) { }
 
 model::model(
     const dogen::yarn::name& name,
     const std::vector<boost::shared_ptr<dogen::yarn::element> >& elements,
     const dogen::yarn::module& root_module,
     const std::unordered_set<std::string>& module_ids,
-    const bool has_generatable_types)
+    const bool has_generatable_types,
+    const dogen::yarn::languages language)
     : name_(name),
       elements_(elements),
       root_module_(root_module),
       module_ids_(module_ids),
-      has_generatable_types_(has_generatable_types) { }
+      has_generatable_types_(has_generatable_types),
+      language_(language) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
@@ -55,6 +58,7 @@ void model::swap(model& other) noexcept {
     swap(root_module_, other.root_module_);
     swap(module_ids_, other.module_ids_);
     swap(has_generatable_types_, other.has_generatable_types_);
+    swap(language_, other.language_);
 }
 
 bool model::operator==(const model& rhs) const {
@@ -62,7 +66,8 @@ bool model::operator==(const model& rhs) const {
         elements_ == rhs.elements_ &&
         root_module_ == rhs.root_module_ &&
         module_ids_ == rhs.module_ids_ &&
-        has_generatable_types_ == rhs.has_generatable_types_;
+        has_generatable_types_ == rhs.has_generatable_types_ &&
+        language_ == rhs.language_;
 }
 
 model& model::operator=(model other) {
@@ -141,6 +146,14 @@ bool model::has_generatable_types() const {
 
 void model::has_generatable_types(const bool v) {
     has_generatable_types_ = v;
+}
+
+dogen::yarn::languages model::language() const {
+    return language_;
+}
+
+void model::language(const dogen::yarn::languages v) {
+    language_ = v;
 }
 
 } }

@@ -6252,6 +6252,7 @@ in the context of inheritance.
 		<is_root>0</is_root>
 		<is_global_module>0</is_global_module>
 	</root_module>
+	<language>0</language>
 </entity>
 </boost_serialization>
 

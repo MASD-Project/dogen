@@ -27,6 +27,7 @@
 #include "dogen/yarn/test_data/indices_td.hpp"
 #include "dogen/yarn/test_data/visitor_td.hpp"
 #include "dogen/yarn/test_data/exception_td.hpp"
+#include "dogen/yarn/test_data/languages_td.hpp"
 #include "dogen/yarn/test_data/primitive_td.hpp"
 #include "dogen/yarn/test_data/enumeration_td.hpp"
 #include "dogen/yarn/test_data/origin_types_td.hpp"
@@ -186,6 +187,11 @@ create_dogen_yarn_indices(const unsigned int position) {
     return dogen::yarn::indices_generator::create(position);
 }
 
+dogen::yarn::languages
+create_dogen_yarn_languages(const unsigned int position) {
+    return dogen::yarn::languages_generator::create(position);
+}
+
 }
 
 namespace dogen {
@@ -210,6 +216,7 @@ populate(const unsigned int position, result_type& v) {
     v.has_generatable_types(create_bool(position + 12));
     v.indices(create_dogen_yarn_indices(position + 13));
     v.root_module(create_dogen_yarn_module(position + 14));
+    v.language(create_dogen_yarn_languages(position + 15));
 }
 
 intermediate_model_generator::result_type
