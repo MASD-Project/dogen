@@ -68,9 +68,9 @@ expand_type_parameters(const type_group& tg, object& o) const {
 }
 
 void type_parameters_expander::
-expand(const annotations::type_repository& atrp, intermediate_model& m) const {
+expand(const annotations::type_repository& atrp, intermediate_model& im) const {
     const auto tg(make_type_group(atrp));
-    for (auto& pair : m.objects()) {
+    for (auto& pair : im.objects()) {
         auto& o(pair.second);
         expand_type_parameters(tg, o);
     }

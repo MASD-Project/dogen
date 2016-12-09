@@ -26,6 +26,7 @@
 #include "dogen/yarn/types/origin_expander.hpp"
 #include "dogen/yarn/types/parsing_expander.hpp"
 #include "dogen/yarn/types/type_parameters_expander.hpp"
+#include "dogen/yarn/types/language_expander.hpp"
 #include "dogen/yarn/types/descriptor_factory.hpp"
 #include "dogen/yarn/types/intermediate_model_factory.hpp"
 
@@ -38,6 +39,12 @@ static logger lg(logger_factory("yarn.intermediate_model_factory"));
 
 namespace dogen {
 namespace yarn {
+
+void intermediate_model_factory::expand_language(
+    const annotations::type_repository& atrp, intermediate_model& im) const {
+    language_expander ex;
+    ex.expand(atrp, im);
+}
 
 void intermediate_model_factory::expand_modules(intermediate_model& im) const {
     modules_expander ex;
@@ -73,6 +80,12 @@ void intermediate_model_factory::expand_parsing(
 void intermediate_model_factory::
 post_process(const annotations::annotation_groups_factory& agf,
     const annotations::type_repository& atrp, intermediate_model& im) const {
+    /*
+     * We can safely expand language first as its not related to
+     * anything else.
+     */
+    // expand_language(atrp, im);
+
     /*
      * We must expand annotations before we expand modules to
      * ensure the root module is populated with entries

@@ -78,6 +78,7 @@
 #include "dogen/yarn/types/parsing_expander.hpp"
 #include "dogen/yarn/types/resolution_error.hpp"
 #include "dogen/yarn/types/string_processor.hpp"
+#include "dogen/yarn/types/language_expander.hpp"
 #include "dogen/yarn/types/name_tree_builder.hpp"
 #include "dogen/yarn/types/descriptor_factory.hpp"
 #include "dogen/yarn/types/elements_traversal.hpp"

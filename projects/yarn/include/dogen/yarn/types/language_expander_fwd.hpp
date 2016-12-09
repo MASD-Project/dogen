@@ -18,42 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TYPE_PARAMETERS_EXPANDER_HPP
-#define DOGEN_YARN_TYPES_TYPE_PARAMETERS_EXPANDER_HPP
+#ifndef DOGEN_YARN_TYPES_LANGUAGE_EXPANDER_FWD_HPP
+#define DOGEN_YARN_TYPES_LANGUAGE_EXPANDER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/annotations/types/annotation.hpp"
-#include "dogen/annotations/types/type_repository.hpp"
-#include "dogen/annotations/types/type.hpp"
-#include "dogen/yarn/types/type_parameters.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
-
 namespace dogen {
 namespace yarn {
 
-class type_parameters_expander {
-private:
-    struct type_group {
-        annotations::type variable_number_of_parameters;
-        annotations::type type_parameters_count;
-        annotations::type type_parameters_always_in_heap;
-    };
-
-    type_group make_type_group(const annotations::type_repository& atrp) const;
-
-    type_parameters make_type_parameters(const type_group& tg,
-        const annotations::annotation& a) const;
-
-private:
-    void expand_type_parameters(const type_group& tg, object& o) const;
-
-public:
-    void expand(const annotations::type_repository& atrp,
-        intermediate_model& im) const;
-};
+class language_expander;
 
 } }
 

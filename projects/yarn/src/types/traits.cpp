@@ -23,6 +23,11 @@
 namespace dogen {
 namespace yarn {
 
+std::string traits::language() {
+    static std::string r("yarn.language");
+    return r;
+}
+
 std::string traits::is_proxy_model() {
     static std::string r("yarn.is_proxy_model");
     return r;
