@@ -35,10 +35,7 @@ static logger lg(logger_factory("quilt.csharp.formattables.locator"));
 
 const std::string empty;
 const std::string extension("cs");
-const std::string underscore("_");
-const std::string double_quote("\"");
 const std::string dot(".");
-const std::string separator("_");
 
 const std::string missing_archetype_configuration(
     "Could not find configuration for archetype: ");
@@ -228,10 +225,10 @@ boost::filesystem::path locator::make_facet_path(
     stream << n.simple();
 
     if (!arch_cfg.archetype_postfix().empty())
-        stream << underscore << arch_cfg.archetype_postfix();
+        stream << arch_cfg.archetype_postfix();
 
     if (!arch_cfg.facet_postfix().empty())
-        stream << underscore << arch_cfg.facet_postfix();
+        stream << arch_cfg.facet_postfix();
 
     if (!extension.empty())
         stream << dot << extension;

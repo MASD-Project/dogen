@@ -2,43 +2,43 @@
   {
     "name": {
       "simple": "directory",
-      "qualified": "quilt.csharp.types.directory"
+      "qualified": "quilt.csharp.test_data.directory"
     },
     "archetype_location": {
       "family": "quilt",
       "kernel": "quilt.csharp",
-      "facet": "quilt.csharp.types"
+      "facet": "quilt.csharp.test_data"
     },
     "value_type": "text",
     "template_kind": "instance",
     "scope": "root_module",
-    "default_value": "Types"
+    "default_value": "SequenceGenerators"
   },
   {
     "name": {
       "simple": "postfix",
-      "qualified": "quilt.csharp.types.postfix"
+      "qualified": "quilt.csharp.test_data.postfix"
     },
     "archetype_location": {
       "family": "quilt",
       "kernel": "quilt.csharp",
-      "facet": "quilt.csharp.types"
+      "facet": "quilt.csharp.test_data"
     },
     "value_type": "text",
     "template_kind": "instance",
     "scope": "root_module",
-    "default_value": ""
+    "default_value": "SequenceGenerator"
   },
   {
     "name": {
       "simple": "postfix",
-      "qualified": "quilt.csharp.types.class.postfix"
+      "qualified": "quilt.csharp.test_data.class.postfix"
     },
     "archetype_location": {
       "family": "quilt",
       "kernel": "quilt.csharp",
-      "facet": "quilt.csharp.types",
-      "archetype": "quilt.csharp.types.class"
+      "facet": "quilt.csharp.test_data",
+      "archetype": "quilt.csharp.test_data.class"
     },
     "value_type": "text",
     "template_kind": "instance",

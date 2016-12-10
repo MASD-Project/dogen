@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.csharp/types/formatters/types/class_formatter.hpp"
+#include "dogen/quilt.csharp/types/formatters/test_data/class_formatter.hpp"
 #include "dogen/quilt.csharp/types/formatters/assistant.hpp"
-#include "dogen/quilt.csharp/types/formatters/types/traits.hpp"
+#include "dogen/quilt.csharp/types/formatters/test_data/traits.hpp"
 #include "dogen/quilt.csharp/types/traits.hpp"
 #include "dogen/formatters/types/sequence_formatter.hpp"
 #include "dogen/yarn/types/object.hpp"
@@ -31,7 +31,7 @@ namespace dogen {
 namespace quilt {
 namespace csharp {
 namespace formatters {
-namespace types {
+namespace test_data {
 
 std::string class_formatter::static_artefact() {
     return traits::class_archetype();
@@ -70,29 +70,29 @@ dogen::formatters::artefact
 class_formatter::format(const context& ctx, const yarn::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), id);
-    const auto& o(a.as<yarn::object>(static_artefact(), e));
+    // const auto& o(a.as<yarn::object>(static_artefact(), e));
     {
         const auto sn(e.name().simple());
         // const auto qn(a.get_qualified_name(e.name()));
         auto sbf(a.make_scoped_boilerplate_formatter());
         {
+a.stream() << "using System.Collections.Generic;" << std::endl;
+a.stream() << std::endl;
             const auto ns(a.make_namespaces(e.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
-            a.comment(e.documentation(), 1/*indent*/);
-a.stream() << "    class " << sn << std::endl;
+a.stream() << "    /// <summary>" << std::endl;
+a.stream() << "    /// Generates sequences of " << sn << "." << std::endl;
+a.stream() << "    /// </summary>" << std::endl;
+a.stream() << "    static class " << sn << "SequenceGenerator" << std::endl;
 a.stream() << "    {" << std::endl;
-           /*
-            * Getters and setters.
-            */
-            if (!o.local_attributes().empty()) {
-a.stream() << "        #region Properties" << std::endl;
-                for (const auto& attr : o.local_attributes()) {
-                    a.comment(attr.documentation(), 2/*indent*/);
-a.stream() << "        public " << a.get_qualified_name(attr.parsed_type()) << " " << attr.name().simple() << " { get; set; }" << std::endl;
-           }
-a.stream() << "        #endregion" << std::endl;
-       }
-a.stream() << "    };" << std::endl;
+a.stream() << "        public static IEnumerable<" << sn << "> Sequence()" << std::endl;
+a.stream() << "        {" << std::endl;
+a.stream() << "            int _position = 0;" << std::endl;
+a.stream() << "            var current = new " << sn << "();" << std::endl;
+a.stream() << "            yield return current;" << std::endl;
+a.stream() << "            ++_position;" << std::endl;
+a.stream() << "        }" << std::endl;
+a.stream() << "    }" << std::endl;
         }
     } // sbf
     return a.make_artefact();

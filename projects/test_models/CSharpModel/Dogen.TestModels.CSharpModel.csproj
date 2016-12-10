@@ -30,7 +30,8 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="types/AllBuiltins.cs" />
+    <Compile Include="Types/AllBuiltins.cs" />
+    <Compile Include="SequenceGenerators/AllBuiltinsSequenceGenerator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

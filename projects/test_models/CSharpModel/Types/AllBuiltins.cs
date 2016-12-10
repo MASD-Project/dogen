@@ -27,6 +27,7 @@ namespace Dogen.TestModels.CSharpModel
     /// </remarks>
     class AllBuiltins
     {
+        #region Properties
         /// <summary>
         /// A comment at property level.
         /// </summary>
@@ -51,5 +52,6 @@ namespace Dogen.TestModels.CSharpModel
         public object ObjectProperty { get; set; }
         public string StringProperty { get; set; }
         public decimal DecimalProperty { get; set; }
+        #endregion
     };
 }

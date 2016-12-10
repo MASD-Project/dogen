@@ -22,6 +22,7 @@
 #include "dogen/quilt.csharp/types/formatters/visual_studio_project_formatter.hpp"
 #include "dogen/quilt.csharp/types/formatters/visual_studio_solution_formatter.hpp"
 #include "dogen/quilt.csharp/types/formatters/types/initializer.hpp"
+#include "dogen/quilt.csharp/types/formatters/test_data/initializer.hpp"
 #include "dogen/quilt.csharp/types/formatters/initializer.hpp"
 
 namespace dogen {
@@ -33,6 +34,7 @@ void initializer::initialize(registrar& rg) {
     register_formatter<visual_studio_project_formatter>(rg);
     register_formatter<visual_studio_solution_formatter>(rg);
     types::initializer::initialize(rg);
+    test_data::initializer::initialize(rg);
 }
 
 } } } }
