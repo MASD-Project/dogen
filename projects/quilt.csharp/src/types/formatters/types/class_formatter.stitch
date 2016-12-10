@@ -53,6 +53,14 @@ class_formatter::format(const context& ctx, const yarn::element& e) const {
         // const auto qn(a.get_qualified_name(e.name()));
         auto sbf(a.make_scoped_boilerplate_formatter());
         {
+            // for Object in operator == 
+            if (!o.local_attributes().empty()) {
+#>
+using System;
+
+<#+
+            }
+
             const auto ns(a.make_namespaces(e.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
             a.comment(e.documentation(), 1/*indent*/);
@@ -111,6 +119,22 @@ class_formatter::format(const context& ctx, const yarn::element& e) const {
                     sf.next();
                 }
 #>
+        }
+
+        public static bool operator ==(<#= sn #> lhs, <#= sn #> rhs)
+        {
+            if (Object.ReferenceEquals(lhs, rhs))
+                return true;
+
+            if(Object.ReferenceEquals(null, lhs))
+                return false;
+
+            return (lhs.Equals(rhs));
+        }
+
+        public static bool operator !=(<#= sn #> lhs, <#= sn #> rhs)
+        {
+            return !(lhs == rhs);
         }
 
         public override int GetHashCode()
