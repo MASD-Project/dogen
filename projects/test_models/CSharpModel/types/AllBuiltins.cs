@@ -27,5 +27,20 @@ namespace Dogen.TestModels.CSharpModel
     /// </remarks>
     class AllBuiltins
     {
+        public byte byte_property { get; set; }
+        public sbyte short_byte_property { get; set; }
+        public int int_property { get; set; }
+        public uint uint_property { get; set; }
+        public short short_property { get; set; }
+        public ushort ushort_property { get; set; }
+        public long long_property { get; set; }
+        public ulong ulong_property { get; set; }
+        public float float_property { get; set; }
+        public double double_property { get; set; }
+        public char char_property { get; set; }
+        public bool bool_property { get; set; }
+        public object object_property { get; set; }
+        public string string_property { get; set; }
+        public decimal decimal_property { get; set; }
     };
 }

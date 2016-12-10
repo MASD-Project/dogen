@@ -22,6 +22,7 @@
 #include "dogen/formatters/types/indent_filter.hpp"
 #include "dogen/formatters/types/comment_formatter.hpp"
 #include "dogen/yarn/types/name_flattener.hpp"
+#include "dogen/yarn/io/languages_io.hpp"
 #include "dogen/quilt.csharp/types/formatters/formatting_error.hpp"
 #include "dogen/quilt.csharp/types/formatters/assistant.hpp"
 
@@ -37,6 +38,7 @@ const bool documenting_previous_identifier(true);
 
 const std::string artefact_properties_missing(
     "Could not find formatter configuration for formatter: ");
+const std::string qn_missing("Could not find qualified name for language.");
 
 }
 
@@ -44,6 +46,29 @@ namespace dogen {
 namespace quilt {
 namespace csharp {
 namespace formatters {
+
+template<typename IdentifiableAndQualified>
+inline std::pair<std::string, std::string>
+get_identifiable_and_qualified(const IdentifiableAndQualified& iaq) {
+    const auto l(yarn::languages::cpp); // FIXME: just for now
+    const auto i(iaq.qualified().find(l));
+    if (i == iaq.qualified().end()) {
+        BOOST_LOG_SEV(lg, error) << qn_missing << l;
+        BOOST_THROW_EXCEPTION(formatting_error(qn_missing));
+    }
+
+    return std::make_pair(iaq.identifiable(), i->second);
+}
+
+std::string assistant::get_qualified_name(const yarn::name& n) const {
+    const auto pair(get_identifiable_and_qualified(n));
+    return pair.second;
+}
+
+std::string assistant::get_qualified_name(const yarn::name_tree& nt) const {
+    const auto pair(get_identifiable_and_qualified(nt));
+    return pair.second;
+}
 
 assistant::
 assistant(const context& ctx, const annotations::archetype_location& al,

@@ -31,6 +31,8 @@
 #include "dogen/formatters/types/artefact.hpp"
 #include "dogen/formatters/types/csharp/scoped_boilerplate_formatter.hpp"
 #include "dogen/formatters/types/csharp/scoped_namespace_formatter.hpp"
+#include "dogen/yarn/types/name.hpp"
+#include "dogen/yarn/types/name_tree.hpp"
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/quilt.csharp/types/formatters/context.hpp"
 
@@ -54,6 +56,15 @@ public:
         as(const std::string& /*archetype*/, const yarn::element& e) {
         return dynamic_cast<const T&>(e);
     }
+
+public:
+    /**
+     * @brief Obtains the qualified name.
+     */
+    /**@{*/
+    std::string get_qualified_name(const yarn::name& n) const;
+    std::string get_qualified_name(const yarn::name_tree& nt) const;
+    /**@}*/
 
 public:
     /**

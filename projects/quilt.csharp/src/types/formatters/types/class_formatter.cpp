@@ -70,6 +70,7 @@ dogen::formatters::artefact
 class_formatter::format(const context& ctx, const yarn::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), id);
+    const auto& o(a.as<yarn::object>(static_artefact(), e));
     {
         const auto sn(e.name().simple());
         // const auto qn(a.get_qualified_name(e.name()));
@@ -80,6 +81,14 @@ class_formatter::format(const context& ctx, const yarn::element& e) const {
             a.comment(e.documentation());
 a.stream() << "    class " << sn << std::endl;
 a.stream() << "    {" << std::endl;
+           /*
+            * Getters and setters.
+            */
+            if (!o.local_attributes().empty()) {
+                for (const auto& attr : o.local_attributes()) {
+a.stream() << "        public " << a.get_qualified_name(attr.parsed_type()) << " " << attr.name().simple() << " { get; set; }" << std::endl;
+           }
+       }
 a.stream() << "    };" << std::endl;
         }
     } // sbf
