@@ -50,8 +50,6 @@ public:
 
 private:
     std::string compute_id();
-    std::string compute_qualified_for_cpp();
-    std::string compute_identifiable(const std::string& qualified);
     void setup_computed_properties();
 
 public:

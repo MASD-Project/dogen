@@ -29,6 +29,7 @@
 #include "dogen/yarn/types/building_error.hpp"
 #include "dogen/yarn/types/string_processor.hpp"
 #include "dogen/yarn/types/pretty_printer.hpp"
+#include "dogen/yarn/types/identifiable_and_qualified_builder.hpp"
 #include "dogen/yarn/types/name_builder.hpp"
 
 namespace {
@@ -62,26 +63,13 @@ std::string name_builder::compute_id() {
     return r;
 }
 
-std::string name_builder::compute_qualified_for_cpp() {
-    pretty_printer pp(separators::double_colons);
-    pp.add(name_, model_name_mode_);
-    const auto r(pp.print());
-    BOOST_LOG_SEV(lg, debug) << "Computed qualified: " << r;
-    return r;
-}
-
-std::string name_builder::compute_identifiable(const std::string& qualified) {
-    string_processor sp;
-    const auto r(sp.to_identifiable(qualified));
-    BOOST_LOG_SEV(lg, debug) << "Computed identifiable: " << r;
-    return r;
-}
-
 void name_builder::setup_computed_properties() {
     name_.id(compute_id());
-    const auto q(compute_qualified_for_cpp());
-    name_.qualified()[languages::cpp] = q;
-    name_.identifiable(compute_identifiable(q));
+
+    identifiable_and_qualified_builder iqb;
+    const auto iq(iqb.build(name_, model_name_mode_));
+    name_.identifiable(iq.first);
+    name_.qualified(iq.second);
 }
 
 name_builder& name_builder::simple_name(const std::string& sn) {

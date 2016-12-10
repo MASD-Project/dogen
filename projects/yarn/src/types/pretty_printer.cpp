@@ -31,6 +31,7 @@ auto lg(logger_factory("yarn.pretty_printer"));
 const char space(' ');
 const std::string comma_space(", ");
 const std::string double_colon("::");
+const std::string dot("::");
 const char less_than('<');
 const char greater_than('>');
 const std::string unsupported_separator("Unsupported separator");
@@ -107,6 +108,9 @@ void pretty_printer::add(const name& n, const bool model_name_mode) {
     case separators::double_colons:
         print_scoped(double_colon, l);
         break;
+    case separators::dots:
+        print_scoped(dot, l);
+        break;
     default:
         BOOST_LOG_SEV(lg, error) << unsupported_separator << ": "
                                  << static_cast<unsigned int>(separator_);
@@ -164,6 +168,10 @@ std::string pretty_printer::print() {
     stream_ << greater_than;
 
     return stream_.str();
+}
+
+void pretty_printer::clear() {
+    stream_.str("");
 }
 
 } }

@@ -18,49 +18,41 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_PRETTY_PRINTER_HPP
-#define DOGEN_YARN_TYPES_PRETTY_PRINTER_HPP
+#ifndef DOGEN_YARN_TYPES_IDENTIFIABLE_AND_QUALIFIED_BUILDER_HPP
+#define DOGEN_YARN_TYPES_IDENTIFIABLE_AND_QUALIFIED_BUILDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <string>
-#include <sstream>
 #include "dogen/yarn/types/name.hpp"
+#include "dogen/yarn/types/name_tree.hpp"
 #include "dogen/yarn/types/separators.hpp"
+#include "dogen/yarn/types/languages.hpp"
 
 namespace dogen {
 namespace yarn {
 
-class pretty_printer {
+class identifiable_and_qualified_builder final {
 public:
-    pretty_printer();
-    explicit pretty_printer(const separators s);
+    identifiable_and_qualified_builder();
 
 private:
-    std::list<std::string> to_list(const name& n,
-        const bool model_name_mode) const;
-
-private:
-    void print_scoped(const std::string& separator,
-        const std::list<std::string>& l);
-    void print_enclosed(const std::list<std::string>& l);
+    std::string obtain_qualified(const std::map<languages, std::string>& map,
+        const languages& l) const;
 
 public:
-    void add(const name& n, const bool model_name_mode = false);
-    void add(const std::string& c);
-    void add_child(const std::string& c);
+    void add(const name& n);
+    void add(const name_tree& nt);
 
 public:
-    std::string print();
-    void clear();
+    std::pair<std::string, std::map<languages, std::string>> build();
+    std::pair<std::string, std::map<languages, std::string>>
+    build(const name& n, const bool model_name_mode);
 
 private:
-    bool has_children_;
-    bool last_child_had_children_;
-    std::ostringstream stream_;
-    const separators separator_;
+    pretty_printer csharp_pp_;
+    pretty_printer cpp_pp_;
 };
 
 } }

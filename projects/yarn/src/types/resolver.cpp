@@ -36,7 +36,7 @@
 #include "dogen/yarn/types/separators.hpp"
 #include "dogen/yarn/types/pretty_printer.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
-#include "dogen/yarn/types/string_processor.hpp"
+#include "dogen/yarn/types/identifiable_and_qualified_builder.hpp"
 #include "dogen/yarn/types/resolver.hpp"
 
 namespace {
@@ -54,7 +54,6 @@ const std::string missing_default(
     "Model does not have a default enumeration type: ");
 const std::string invalid_default(
     "Model has a default enumeration type that cannot be found: ");
-const std::string qn_missing("Could not find qualified name for language.");
 
 typedef boost::error_info<struct tag_errmsg, std::string> errmsg_info;
 
@@ -62,17 +61,6 @@ typedef boost::error_info<struct tag_errmsg, std::string> errmsg_info;
 
 namespace dogen {
 namespace yarn {
-
-template<typename Qualifiable>
-inline std::string obtain_qualified(const Qualifiable& q) {
-    const auto i(q.qualified().find(languages::cpp));
-    if (i == q.qualified().end()) {
-        BOOST_LOG_SEV(lg, error) << qn_missing << yarn::languages::cpp;
-        BOOST_THROW_EXCEPTION(resolution_error(qn_missing));
-    }
-
-    return i->second;
-}
 
 bool resolver::is_primitive(const intermediate_model& im, const name& n) const {
     auto i(im.primitives().find(n.id()));
@@ -240,8 +228,8 @@ void resolver::resolve_name_tree(const intermediate_model& im,
     const auto i(im.indices().objects_always_in_heap().find(n.id()));
     nt.are_children_opaque(i != im.indices().objects_always_in_heap().end());
 
-    pretty_printer pp(separators::double_colons);
-    pp.add(obtain_qualified(n));
+    identifiable_and_qualified_builder iqb;
+    iqb.add(n);
 
     /*
      * Strictly speaking this is not directly related to
@@ -257,14 +245,12 @@ void resolver::resolve_name_tree(const intermediate_model& im,
 
     for (auto& c : nt.children()) {
         resolve_name_tree(im, owner, c);
-        pp.add_child(obtain_qualified(c));
+        iqb.add(c);
     }
 
-    const auto cpp_qn(pp.print());
-    nt.qualified()[languages::cpp] = cpp_qn;
-
-    string_processor sp;
-    nt.identifiable(sp.to_identifiable(cpp_qn));
+    const auto iq(iqb.build());
+    nt.identifiable(iq.first);
+    nt.qualified(iq.second);
 }
 
 void resolver::resolve_attributes(const intermediate_model& im,

@@ -40,6 +40,9 @@ std::ostream& operator<<(std::ostream& s, const separators& v) {
     case separators::double_colons:
         attr = "\"double_colons\"";
         break;
+    case separators::dots:
+        attr = "\"dots\"";
+        break;
     default:
         throw std::invalid_argument("Invalid value for separators");
     }

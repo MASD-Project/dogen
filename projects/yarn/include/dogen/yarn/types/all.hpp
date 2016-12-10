@@ -97,5 +97,6 @@
 #include "dogen/yarn/types/generalization_expander.hpp"
 #include "dogen/yarn/types/type_parameters_expander.hpp"
 #include "dogen/yarn/types/intermediate_model_factory.hpp"
+#include "dogen/yarn/types/identifiable_and_qualified_builder.hpp"
 
 #endif
