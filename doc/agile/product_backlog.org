@@ -107,6 +107,11 @@ Random notes:
 We should move qualified names to quilt. We can create a simple map of
 id to qualified name and add that to the formattables model.
 
+In addition we are using a map instead of unordered map due to some
+weird differences when serialising (the yarn serialisation tests are
+failing for some reason). This needs to be investigated. We've added a
+patch: =change_qualified_to_unordered_map.patch=.
+
 *Previous Understanding*
 
 We used a =std::map= to store qualified names. In practice, we don't
