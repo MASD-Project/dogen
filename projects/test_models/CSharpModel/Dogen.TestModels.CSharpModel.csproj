@@ -32,6 +32,10 @@
   <ItemGroup>
     <Compile Include="Types/AllBuiltins.cs" />
     <Compile Include="SequenceGenerators/AllBuiltinsSequenceGenerator.cs" />
+    <Compile Include="Types/OneProperty.cs" />
+    <Compile Include="SequenceGenerators/OnePropertySequenceGenerator.cs" />
+    <Compile Include="Types/NoProperties.cs" />
+    <Compile Include="SequenceGenerators/NoPropertiesSequenceGenerator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

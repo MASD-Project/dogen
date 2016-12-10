@@ -82,6 +82,27 @@
           "type": "decimal"
         }
       ]
+    },
+    {
+      "name": {
+        "simple_name": "NoProperties"
+      },
+      "meta_type": "object",
+      "documentation": "This class tests the use case of no properties\n"
+    },
+    {
+      "name": {
+        "simple_name": "OneProperty"
+      },
+      "meta_type": "object",
+      "documentation": "This class tests the use case of one property.\n",
+      "attributes": [
+        {
+          "simple_name": "Property",
+          "type": "int",
+          "documentation": "Just the one property.\n"
+        }
+      ]
     }
   ]
 }
