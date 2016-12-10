@@ -14,22 +14,18 @@
   "elements": [
     {
       "name": {
-        "simple_name": "AllPrimitives"
+        "simple_name": "AllBuiltins"
       },
       "meta_type": "object",
-      "documentation": "This is a class made up of just primitives.\n\nThis is a remark.\n",
+      "documentation": "This is a class made up of just built-in types.\n\nThis is a remark.\n",
       "attributes": [
         {
-          "simple_name": "bool_property",
-          "type": "bool"
+          "simple_name": "byte_property",
+          "type": "byte"
         },
         {
-          "simple_name": "char_property",
-          "type": "char"
-        },
-        {
-          "simple_name": "uchar_property",
-          "type": "unsigned char"
+          "simple_name": "short_byte_property",
+          "type": "sbyte"
         },
         {
           "simple_name": "int_property",
@@ -37,23 +33,7 @@
         },
         {
           "simple_name": "uint_property",
-          "type": "unsigned int"
-        },
-        {
-          "simple_name": "long_property",
-          "type": "long"
-        },
-        {
-          "simple_name": "ulong_property",
-          "type": "unsigned long"
-        },
-        {
-          "simple_name": "long_long_property",
-          "type": "long long"
-        },
-        {
-          "simple_name": "ulong_long_property",
-          "type": "unsigned long long"
+          "type": "uint"
         },
         {
           "simple_name": "short_property",
@@ -61,15 +41,43 @@
         },
         {
           "simple_name": "ushort_property",
-          "type": "unsigned short"
+          "type": "ushort"
+        },
+        {
+          "simple_name": "long_property",
+          "type": "long"
+        },
+        {
+          "simple_name": "ulong_property",
+          "type": "ulong"
+        },
+        {
+          "simple_name": "float_property",
+          "type": "float"
         },
         {
           "simple_name": "double_property",
           "type": "double"
         },
         {
-          "simple_name": "float_property",
-          "type": "float"
+          "simple_name": "char_property",
+          "type": "char"
+        },
+        {
+          "simple_name": "bool_property",
+          "type": "bool"
+        },
+        {
+          "simple_name": "object_property",
+          "type": "object"
+        },
+        {
+          "simple_name": "string_property",
+          "type": "string"
+        },
+        {
+          "simple_name": "decimal_property",
+          "type": "decimal"
         }
       ]
     }

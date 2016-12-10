@@ -29,6 +29,7 @@
 #include <vector>
 #include <string>
 #include <unordered_map>
+#include "dogen/yarn/types/languages.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
@@ -157,6 +158,7 @@ private:
     intermediate_model merged_model_;
     bool has_target_;
     bool has_merged_;
+    languages target_language_;
 };
 
 } }

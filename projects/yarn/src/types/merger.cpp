@@ -29,6 +29,7 @@
 #include "dogen/yarn/io/attribute_io.hpp"
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/io/origin_types_io.hpp"
+#include "dogen/yarn/io/languages_io.hpp"
 #include "dogen/yarn/io/intermediate_model_io.hpp"
 #include "dogen/yarn/types/merger.hpp"
 
@@ -48,7 +49,8 @@ const std::string multiple_merge("Attempt to merge more than once.");
 namespace dogen {
 namespace yarn {
 
-merger::merger() : has_target_(false), has_merged_(false) { }
+merger::merger() : has_target_(false), has_merged_(false),
+                   target_language_(languages::invalid) { }
 
 void merger::require_not_has_target(const std::string& name) const {
     if (!has_target())
@@ -125,6 +127,7 @@ void merger::add_target(const intermediate_model& target) {
     require_not_has_target(id);
 
     has_target_ = true;
+    target_language_ = target.language();
     merged_model_.name(target.name());
     merged_model_.leaves(target.leaves());
     merged_model_.modules(target.modules());
@@ -149,7 +152,7 @@ void merger::add(const intermediate_model& m) {
 
 void merger::merge_model(const intermediate_model& m) {
     const auto mn(m.name());
-    BOOST_LOG_SEV(lg, info) << "Merging model: '"
+    BOOST_LOG_SEV(lg, debug) << "Merging model: '"
                             << mn.id()
                             << " modules: " << m.modules().size()
                             << " concepts: " << m.concepts().size()
@@ -167,8 +170,20 @@ void merger::merge_model(const intermediate_model& m) {
 }
 
 void merger::merge_models() {
-    for (const auto& pair : models_)
-        merge_model(pair.second);
+    BOOST_LOG_SEV(lg, debug) << "Merging models: ";
+    for (const auto& pair : models_) {
+        const auto& id(pair.first.id());
+        const auto& im(pair.second);
+        if (im.language() != target_language_) {
+            BOOST_LOG_SEV(lg, debug) << "Skipping model as language does "
+                                     << " not match target's. Model: "
+                                     << id << " Language: " << im.language();
+            continue;
+        }
+        BOOST_LOG_SEV(lg, debug) << "Merging model: " << id;
+        merge_model(im);
+    }
+    BOOST_LOG_SEV(lg, debug) << "Finished merging models.";
 }
 
 intermediate_model merger::merge() {

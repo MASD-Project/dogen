@@ -1,0 +1,160 @@
+{
+  "model_name": "csharp.builtins",
+  "documentation": "CLR-provided primitive types.",
+  "annotation": {
+    "yarn.language": "csharp",
+    "yarn.is_proxy_model": true
+  },
+  "elements": [
+    {
+      "name": {
+        "simple_name": "byte"
+      },
+      "meta_type": "primitive",
+      "in_global_module": true,
+      "annotation": {
+        "quilt.csharp.helper.family": "Byte"
+      }
+    },
+    {
+      "name": {
+        "simple_name": "sbyte"
+      },
+      "meta_type": "primitive",
+      "in_global_module": true,
+      "annotation": {
+        "quilt.csharp.helper.family": "Byte"
+      }
+    },
+    {
+      "name": {
+        "simple_name": "int"
+      },
+      "meta_type": "primitive",
+      "in_global_module": true,
+      "annotation": {
+        "quilt.csharp.helper.family": "Number"
+      }
+    },
+    {
+      "name": {
+        "simple_name": "uint"
+      },
+      "meta_type": "primitive",
+      "in_global_module": true,
+      "annotation": {
+        "quilt.csharp.helper.family": "Number"
+      }
+    },
+    {
+      "name": {
+        "simple_name": "short"
+      },
+      "meta_type": "primitive",
+      "in_global_module": true,
+      "annotation": {
+        "quilt.csharp.helper.family": "Number"
+      }
+    },
+    {
+      "name": {
+        "simple_name": "ushort"
+      },
+      "meta_type": "primitive",
+      "in_global_module": true,
+      "annotation": {
+        "quilt.csharp.helper.family": "Number"
+      }
+    },
+    {
+      "name": {
+        "simple_name": "long"
+      },
+      "meta_type": "primitive",
+      "in_global_module": true,
+      "annotation": {
+        "quilt.csharp.helper.family": "Number"
+      }
+    },
+    {
+      "name": {
+        "simple_name": "ulong"
+      },
+      "meta_type": "primitive",
+      "in_global_module": true,
+      "annotation": {
+        "quilt.csharp.helper.family": "Number"
+      }
+    },
+    {
+      "name": {
+        "simple_name": "float"
+      },
+      "meta_type": "primitive",
+      "in_global_module": true,
+      "annotation": {
+        "quilt.csharp.helper.family": "Number"
+      }
+    },
+    {
+      "name": {
+        "simple_name": "double"
+      },
+      "meta_type": "primitive",
+      "in_global_module": true,
+      "annotation": {
+        "quilt.csharp.helper.family": "Number"
+      }
+    },
+    {
+      "name": {
+        "simple_name": "char"
+      },
+      "meta_type": "primitive",
+      "in_global_module": true,
+      "annotation": {
+        "quilt.csharp.helper.family": "Character"
+      }
+    },
+    {
+      "name": {
+        "simple_name": "bool"
+      },
+      "meta_type": "primitive",
+      "in_global_module": true,
+      "annotation": {
+        "quilt.csharp.helper.family": "Boolean"
+      }
+    },
+    {
+      "name": {
+        "simple_name": "object"
+      },
+      "meta_type": "primitive",
+      "in_global_module": true,
+      "annotation": {
+        "quilt.csharp.helper.family": "Object"
+      }
+    },
+    {
+      "name": {
+        "simple_name": "string"
+      },
+      "meta_type": "primitive",
+      "in_global_module": true,
+      "annotation": {
+        "quilt.csharp.helper.family": "String"
+      }
+    },
+    {
+      "name": {
+        "simple_name": "decimal"
+      },
+      "meta_type": "primitive",
+      "in_global_module": true,
+      "annotation": {
+        "quilt.csharp.helper.family": "Decimal"
+      }
+    }
+  ]
+}

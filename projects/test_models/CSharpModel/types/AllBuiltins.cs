@@ -20,12 +20,12 @@
 namespace Dogen.TestModels.CSharpModel
 {
     /// <summary>
-    /// This is a class made up of just primitives.
+    /// This is a class made up of just built-in types.
     /// </summary>
     /// <remarks>
     /// This is a remark.
     /// </remarks>
-    class AllPrimitives
+    class AllBuiltins
     {
     };
 }
