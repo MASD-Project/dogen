@@ -1929,6 +1929,18 @@ We need a =is_floating_point_like= method to be able to distinguish
 between them, and then the associated changes in the generators to
 create floating point numbers.
 
+*** Equality in floating point numbers is incorrect                   :story:
+
+At present we are blindly comparing floating point numbers. In
+all_primitives test model:
+
+:         double_property_ == rhs.double_property_ &&
+:         float_property_ == rhs.float_property_;
+
+Links:
+
+- [[http://realtimecollisiondetection.net/blog/?p%3D89][Floating-point tolerances revisited]]
+
 *** Create different kinds of master header files                     :story:
 
 #+begin_quote
