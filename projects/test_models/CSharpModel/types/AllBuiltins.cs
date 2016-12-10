@@ -27,20 +27,29 @@ namespace Dogen.TestModels.CSharpModel
     /// </remarks>
     class AllBuiltins
     {
-        public byte byte_property { get; set; }
-        public sbyte short_byte_property { get; set; }
-        public int int_property { get; set; }
-        public uint uint_property { get; set; }
-        public short short_property { get; set; }
-        public ushort ushort_property { get; set; }
-        public long long_property { get; set; }
-        public ulong ulong_property { get; set; }
-        public float float_property { get; set; }
-        public double double_property { get; set; }
-        public char char_property { get; set; }
-        public bool bool_property { get; set; }
-        public object object_property { get; set; }
-        public string string_property { get; set; }
-        public decimal decimal_property { get; set; }
+        /// <summary>
+        /// A comment at property level.
+        /// </summary>
+        public byte ByteProperty { get; set; }
+        /// <summary>
+        /// A comment at property level.
+        /// </summary>
+        /// <remarks>
+        /// This is a remark.
+        /// </remarks>
+        public sbyte ShortByteProperty { get; set; }
+        public int IntProperty { get; set; }
+        public uint UIntProperty { get; set; }
+        public short ShortProperty { get; set; }
+        public ushort UShortProperty { get; set; }
+        public long LongProperty { get; set; }
+        public ulong ULongProperty { get; set; }
+        public float FloatProperty { get; set; }
+        public double DoubleProperty { get; set; }
+        public char CharProperty { get; set; }
+        public bool BoolProperty { get; set; }
+        public object ObjectProperty { get; set; }
+        public string StringProperty { get; set; }
+        public decimal DecimalProperty { get; set; }
     };
 }

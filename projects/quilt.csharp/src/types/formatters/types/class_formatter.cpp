@@ -78,7 +78,7 @@ class_formatter::format(const context& ctx, const yarn::element& e) const {
         {
             const auto ns(a.make_namespaces(e.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
-            a.comment(e.documentation());
+            a.comment(e.documentation(), 1/*indent*/);
 a.stream() << "    class " << sn << std::endl;
 a.stream() << "    {" << std::endl;
            /*
@@ -86,6 +86,7 @@ a.stream() << "    {" << std::endl;
             */
             if (!o.local_attributes().empty()) {
                 for (const auto& attr : o.local_attributes()) {
+                    a.comment(attr.documentation(), 2/*indent*/);
 a.stream() << "        public " << a.get_qualified_name(attr.parsed_type()) << " " << attr.name().simple() << " { get; set; }" << std::endl;
            }
        }

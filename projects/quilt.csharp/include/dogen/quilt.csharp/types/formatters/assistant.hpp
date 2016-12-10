@@ -89,7 +89,7 @@ public:
     /**
      * @brief Adds a top-level comment with mark-up.
      */
-    void comment(const std::string& c);
+    void comment(const std::string& c, const unsigned int identation_level = 0);
 
 public:
     /**

@@ -120,20 +120,24 @@ std::list<std::string> assistant::make_namespaces(const yarn::name& n) const {
     return nf.flatten(n);
 }
 
-void assistant::comment(const std::string& c) {
+void assistant::
+comment(const std::string& c, const unsigned int identation_level) {
     if (c.empty())
         return;
 
-    {
-        dogen::formatters::positive_indenter_scope pis(stream());
-        dogen::formatters::comment_formatter f(
-            start_on_first_line,
-            use_documentation_tool_markup,
-            !documenting_previous_identifier,
-            dogen::formatters::comment_styles::csharp_style,
-            !last_line_is_blank);
-        f.format(stream(), c);
-    }
+    for (unsigned int i = 0; i < identation_level; ++i)
+        stream() << dogen::formatters::indent_in;
+
+    dogen::formatters::comment_formatter f(
+        start_on_first_line,
+        use_documentation_tool_markup,
+        !documenting_previous_identifier,
+        dogen::formatters::comment_styles::csharp_style,
+        !last_line_is_blank);
+    f.format(stream(), c);
+
+    for (unsigned int i = 0; i < identation_level; ++i)
+        stream() << dogen::formatters::indent_out;
 }
 
 std::ostream& assistant::stream() {

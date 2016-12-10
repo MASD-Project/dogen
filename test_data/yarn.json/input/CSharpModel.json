@@ -20,63 +20,65 @@
       "documentation": "This is a class made up of just built-in types.\n\nThis is a remark.\n",
       "attributes": [
         {
-          "simple_name": "byte_property",
-          "type": "byte"
+          "simple_name": "ByteProperty",
+          "type": "byte",
+          "documentation": "A comment at property level.\n"
         },
         {
-          "simple_name": "short_byte_property",
-          "type": "sbyte"
+          "simple_name": "ShortByteProperty",
+          "type": "sbyte",
+          "documentation": "A comment at property level.\n\nThis is a remark.\n"
         },
         {
-          "simple_name": "int_property",
+          "simple_name": "IntProperty",
           "type": "int"
         },
         {
-          "simple_name": "uint_property",
+          "simple_name": "UIntProperty",
           "type": "uint"
         },
         {
-          "simple_name": "short_property",
+          "simple_name": "ShortProperty",
           "type": "short"
         },
         {
-          "simple_name": "ushort_property",
+          "simple_name": "UShortProperty",
           "type": "ushort"
         },
         {
-          "simple_name": "long_property",
+          "simple_name": "LongProperty",
           "type": "long"
         },
         {
-          "simple_name": "ulong_property",
+          "simple_name": "ULongProperty",
           "type": "ulong"
         },
         {
-          "simple_name": "float_property",
+          "simple_name": "FloatProperty",
           "type": "float"
         },
         {
-          "simple_name": "double_property",
+          "simple_name": "DoubleProperty",
           "type": "double"
         },
         {
-          "simple_name": "char_property",
+          "simple_name": "CharProperty",
           "type": "char"
         },
         {
-          "simple_name": "bool_property",
+          "simple_name": "BoolProperty",
           "type": "bool"
         },
         {
-          "simple_name": "object_property",
+          "simple_name": "ObjectProperty",
           "type": "object"
         },
         {
-          "simple_name": "string_property",
+          "simple_name": "StringProperty",
           "type": "string"
         },
         {
-          "simple_name": "decimal_property",
+          "simple_name": "DecimalProperty",
           "type": "decimal"
         }
       ]
