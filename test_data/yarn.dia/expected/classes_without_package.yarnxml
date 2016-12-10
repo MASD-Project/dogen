@@ -6,10 +6,14 @@
 		<id>&lt;dogen&gt;&lt;test_models&gt;&lt;classes_without_package&gt;</id>
 		<simple>classes_without_package</simple>
 		<qualified class_id="14" tracking_level="0" version="0">
-			<count>1</count>
+			<count>2</count>
 			<item_version>0</item_version>
 			<item class_id="15" tracking_level="0" version="0">
 				<first>1</first>
+				<second>dogen::test_models::classes_without_package</second>
+			</item>
+			<item>
+				<first>2</first>
 				<second>dogen::test_models::classes_without_package</second>
 			</item>
 		</qualified>
@@ -65,10 +69,14 @@
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;classes_without_package&gt;</id>
 						<simple>classes_without_package</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::classes_without_package</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::classes_without_package</second>
 							</item>
 						</qualified>
@@ -148,10 +156,14 @@
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;classes_without_package&gt;&lt;class_5&gt;</id>
 						<simple>class_5</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::classes_without_package::class_5</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::classes_without_package::class_5</second>
 							</item>
 						</qualified>
@@ -207,10 +219,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;classes_without_package&gt;&lt;class_5&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::classes_without_package::class_5::prop_0</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::classes_without_package::class_5::prop_0</second>
 								</item>
 							</qualified>
@@ -349,10 +365,14 @@
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;classes_without_package&gt;&lt;class_1&gt;</id>
 						<simple>class_1</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::classes_without_package::class_1</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::classes_without_package::class_1</second>
 							</item>
 						</qualified>
@@ -408,10 +428,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;classes_without_package&gt;&lt;class_1&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::classes_without_package::class_1::prop_0</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::classes_without_package::class_1::prop_0</second>
 								</item>
 							</qualified>
@@ -550,10 +574,14 @@
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;classes_without_package&gt;&lt;class_3&gt;</id>
 						<simple>class_3</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::classes_without_package::class_3</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::classes_without_package::class_3</second>
 							</item>
 						</qualified>
@@ -609,10 +637,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;classes_without_package&gt;&lt;class_3&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::classes_without_package::class_3::prop_0</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::classes_without_package::class_3::prop_0</second>
 								</item>
 							</qualified>
@@ -751,10 +783,14 @@
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;classes_without_package&gt;&lt;class_2&gt;</id>
 						<simple>class_2</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::classes_without_package::class_2</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::classes_without_package::class_2</second>
 							</item>
 						</qualified>
@@ -810,10 +846,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;classes_without_package&gt;&lt;class_2&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::classes_without_package::class_2::prop_0</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::classes_without_package::class_2::prop_0</second>
 								</item>
 							</qualified>
@@ -952,10 +992,14 @@
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;classes_without_package&gt;&lt;class_4&gt;</id>
 						<simple>class_4</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::classes_without_package::class_4</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::classes_without_package::class_4</second>
 							</item>
 						</qualified>
@@ -1011,10 +1055,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;classes_without_package&gt;&lt;class_4&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::classes_without_package::class_4::prop_0</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::classes_without_package::class_4::prop_0</second>
 								</item>
 							</qualified>

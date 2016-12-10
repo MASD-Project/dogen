@@ -6,10 +6,14 @@
 		<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;</id>
 		<simple>std_model</simple>
 		<qualified class_id="14" tracking_level="0" version="0">
-			<count>1</count>
+			<count>2</count>
 			<item_version>0</item_version>
 			<item class_id="15" tracking_level="0" version="0">
 				<first>1</first>
+				<second>dogen::test_models::std_model</second>
+			</item>
+			<item>
+				<first>2</first>
 				<second>dogen::test_models::std_model</second>
 			</item>
 		</qualified>
@@ -65,10 +69,14 @@
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;pkg1&gt;</id>
 						<simple>pkg1</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::std_model::pkg1</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::std_model::pkg1</second>
 							</item>
 						</qualified>
@@ -128,10 +136,14 @@
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;</id>
 						<simple>std_model</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::std_model</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::std_model</second>
 							</item>
 						</qualified>
@@ -211,10 +223,14 @@
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_j&gt;</id>
 						<simple>class_j</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::std_model::class_j</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::std_model::class_j</second>
 							</item>
 						</qualified>
@@ -270,10 +286,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_j&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::std_model::class_j::prop_0</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::std_model::class_j::prop_0</second>
 								</item>
 							</qualified>
@@ -353,10 +373,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_j&gt;&lt;prop_1&gt;</id>
 							<simple>prop_1</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::std_model::class_j::prop_1</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::std_model::class_j::prop_1</second>
 								</item>
 							</qualified>
@@ -436,10 +460,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_j&gt;&lt;prop_2&gt;</id>
 							<simple>prop_2</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::std_model::class_j::prop_2</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::std_model::class_j::prop_2</second>
 								</item>
 							</qualified>
@@ -578,10 +606,14 @@
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;primitives&gt;</id>
 						<simple>primitives</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::std_model::primitives</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::std_model::primitives</second>
 							</item>
 						</qualified>
@@ -637,10 +669,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;primitives&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::std_model::primitives::prop_0</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::std_model::primitives::prop_0</second>
 								</item>
 							</qualified>
@@ -720,10 +756,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;primitives&gt;&lt;prop_1&gt;</id>
 							<simple>prop_1</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::std_model::primitives::prop_1</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::std_model::primitives::prop_1</second>
 								</item>
 							</qualified>
@@ -803,10 +843,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;primitives&gt;&lt;prop_2&gt;</id>
 							<simple>prop_2</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::std_model::primitives::prop_2</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::std_model::primitives::prop_2</second>
 								</item>
 							</qualified>
@@ -886,10 +930,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;primitives&gt;&lt;prop_3&gt;</id>
 							<simple>prop_3</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::std_model::primitives::prop_3</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::std_model::primitives::prop_3</second>
 								</item>
 							</qualified>
@@ -969,10 +1017,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;primitives&gt;&lt;prop_4&gt;</id>
 							<simple>prop_4</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::std_model::primitives::prop_4</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::std_model::primitives::prop_4</second>
 								</item>
 							</qualified>
@@ -1052,10 +1104,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;primitives&gt;&lt;prop_5&gt;</id>
 							<simple>prop_5</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::std_model::primitives::prop_5</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::std_model::primitives::prop_5</second>
 								</item>
 							</qualified>
@@ -1135,10 +1191,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;primitives&gt;&lt;prop_6&gt;</id>
 							<simple>prop_6</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::std_model::primitives::prop_6</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::std_model::primitives::prop_6</second>
 								</item>
 							</qualified>
@@ -1218,10 +1278,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;primitives&gt;&lt;prop_7&gt;</id>
 							<simple>prop_7</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::std_model::primitives::prop_7</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::std_model::primitives::prop_7</second>
 								</item>
 							</qualified>
@@ -1360,10 +1424,14 @@
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_d&gt;</id>
 						<simple>class_d</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::std_model::class_d</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::std_model::class_d</second>
 							</item>
 						</qualified>
@@ -1419,10 +1487,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_d&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::std_model::class_d::prop_0</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::std_model::class_d::prop_0</second>
 								</item>
 							</qualified>
@@ -1502,10 +1574,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_d&gt;&lt;prop_1&gt;</id>
 							<simple>prop_1</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::std_model::class_d::prop_1</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::std_model::class_d::prop_1</second>
 								</item>
 							</qualified>
@@ -1585,10 +1661,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_d&gt;&lt;prop_2&gt;</id>
 							<simple>prop_2</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::std_model::class_d::prop_2</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::std_model::class_d::prop_2</second>
 								</item>
 							</qualified>
@@ -1668,10 +1748,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_d&gt;&lt;prop_3&gt;</id>
 							<simple>prop_3</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::std_model::class_d::prop_3</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::std_model::class_d::prop_3</second>
 								</item>
 							</qualified>
@@ -1751,10 +1835,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_d&gt;&lt;prop_4&gt;</id>
 							<simple>prop_4</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::std_model::class_d::prop_4</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::std_model::class_d::prop_4</second>
 								</item>
 							</qualified>
@@ -1834,10 +1922,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_d&gt;&lt;prop_5&gt;</id>
 							<simple>prop_5</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::std_model::class_d::prop_5</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::std_model::class_d::prop_5</second>
 								</item>
 							</qualified>
@@ -1976,10 +2068,14 @@
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;pkg1&gt;&lt;class_c&gt;</id>
 						<simple>class_c</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::std_model::pkg1::class_c</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::std_model::pkg1::class_c</second>
 							</item>
 						</qualified>
@@ -2036,10 +2132,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;pkg1&gt;&lt;class_c&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::std_model::pkg1::class_c::prop_0</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::std_model::pkg1::class_c::prop_0</second>
 								</item>
 							</qualified>
@@ -2120,10 +2220,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;pkg1&gt;&lt;class_c&gt;&lt;prop_1&gt;</id>
 							<simple>prop_1</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::std_model::pkg1::class_c::prop_1</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::std_model::pkg1::class_c::prop_1</second>
 								</item>
 							</qualified>
@@ -2263,10 +2367,14 @@
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_b&gt;</id>
 						<simple>class_b</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::std_model::class_b</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::std_model::class_b</second>
 							</item>
 						</qualified>
@@ -2322,10 +2430,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_b&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::std_model::class_b::prop_0</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::std_model::class_b::prop_0</second>
 								</item>
 							</qualified>
@@ -2405,10 +2517,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_b&gt;&lt;prop_1&gt;</id>
 							<simple>prop_1</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::std_model::class_b::prop_1</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::std_model::class_b::prop_1</second>
 								</item>
 							</qualified>
@@ -2488,10 +2604,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_b&gt;&lt;prop_2&gt;</id>
 							<simple>prop_2</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::std_model::class_b::prop_2</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::std_model::class_b::prop_2</second>
 								</item>
 							</qualified>
@@ -2571,10 +2691,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_b&gt;&lt;prop_3&gt;</id>
 							<simple>prop_3</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::std_model::class_b::prop_3</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::std_model::class_b::prop_3</second>
 								</item>
 							</qualified>
@@ -2654,10 +2778,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_b&gt;&lt;prop_4&gt;</id>
 							<simple>prop_4</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::std_model::class_b::prop_4</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::std_model::class_b::prop_4</second>
 								</item>
 							</qualified>
@@ -2737,10 +2865,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_b&gt;&lt;prop_5&gt;</id>
 							<simple>prop_5</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::std_model::class_b::prop_5</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::std_model::class_b::prop_5</second>
 								</item>
 							</qualified>
@@ -2879,10 +3011,14 @@
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_a&gt;</id>
 						<simple>class_a</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::std_model::class_a</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::std_model::class_a</second>
 							</item>
 						</qualified>
@@ -2938,10 +3074,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_a&gt;&lt;prop0&gt;</id>
 							<simple>prop0</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::std_model::class_a::prop0</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::std_model::class_a::prop0</second>
 								</item>
 							</qualified>
@@ -3022,10 +3162,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_a&gt;&lt;prop1&gt;</id>
 							<simple>prop1</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::std_model::class_a::prop1</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::std_model::class_a::prop1</second>
 								</item>
 							</qualified>
@@ -3164,10 +3308,14 @@
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;some_service&gt;</id>
 						<simple>some_service</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::std_model::some_service</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::std_model::some_service</second>
 							</item>
 						</qualified>
@@ -3224,10 +3372,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;some_service&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::std_model::some_service::prop_0</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::std_model::some_service::prop_0</second>
 								</item>
 							</qualified>
@@ -3366,10 +3518,14 @@
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_e&gt;</id>
 						<simple>class_e</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::std_model::class_e</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::std_model::class_e</second>
 							</item>
 						</qualified>
@@ -3425,10 +3581,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_e&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::std_model::class_e::prop_0</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::std_model::class_e::prop_0</second>
 								</item>
 							</qualified>
@@ -3508,10 +3668,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_e&gt;&lt;prop_1&gt;</id>
 							<simple>prop_1</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::std_model::class_e::prop_1</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::std_model::class_e::prop_1</second>
 								</item>
 							</qualified>
@@ -3591,10 +3755,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_e&gt;&lt;prop_2&gt;</id>
 							<simple>prop_2</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::std_model::class_e::prop_2</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::std_model::class_e::prop_2</second>
 								</item>
 							</qualified>
@@ -3674,10 +3842,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_e&gt;&lt;prop_3&gt;</id>
 							<simple>prop_3</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::std_model::class_e::prop_3</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::std_model::class_e::prop_3</second>
 								</item>
 							</qualified>
@@ -3757,10 +3929,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_e&gt;&lt;prop_4&gt;</id>
 							<simple>prop_4</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::std_model::class_e::prop_4</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::std_model::class_e::prop_4</second>
 								</item>
 							</qualified>
@@ -3840,10 +4016,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_e&gt;&lt;prop_5&gt;</id>
 							<simple>prop_5</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::std_model::class_e::prop_5</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::std_model::class_e::prop_5</second>
 								</item>
 							</qualified>
@@ -3982,10 +4162,14 @@
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_f&gt;</id>
 						<simple>class_f</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::std_model::class_f</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::std_model::class_f</second>
 							</item>
 						</qualified>
@@ -4041,10 +4225,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_f&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::std_model::class_f::prop_0</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::std_model::class_f::prop_0</second>
 								</item>
 							</qualified>
@@ -4124,10 +4312,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_f&gt;&lt;prop_1&gt;</id>
 							<simple>prop_1</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::std_model::class_f::prop_1</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::std_model::class_f::prop_1</second>
 								</item>
 							</qualified>
@@ -4207,10 +4399,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_f&gt;&lt;prop_2&gt;</id>
 							<simple>prop_2</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::std_model::class_f::prop_2</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::std_model::class_f::prop_2</second>
 								</item>
 							</qualified>
@@ -4349,10 +4545,14 @@
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_g&gt;</id>
 						<simple>class_g</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::std_model::class_g</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::std_model::class_g</second>
 							</item>
 						</qualified>
@@ -4408,10 +4608,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_g&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::std_model::class_g::prop_0</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::std_model::class_g::prop_0</second>
 								</item>
 							</qualified>
@@ -4491,10 +4695,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_g&gt;&lt;prop_1&gt;</id>
 							<simple>prop_1</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::std_model::class_g::prop_1</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::std_model::class_g::prop_1</second>
 								</item>
 							</qualified>
@@ -4574,10 +4782,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_g&gt;&lt;prop_2&gt;</id>
 							<simple>prop_2</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::std_model::class_g::prop_2</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::std_model::class_g::prop_2</second>
 								</item>
 							</qualified>
@@ -4716,10 +4928,14 @@
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;base&gt;</id>
 						<simple>base</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::std_model::base</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::std_model::base</second>
 							</item>
 						</qualified>
@@ -4775,10 +4991,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;base&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::std_model::base::prop_0</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::std_model::base::prop_0</second>
 								</item>
 							</qualified>
@@ -4917,10 +5137,14 @@
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;derived&gt;</id>
 						<simple>derived</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::std_model::derived</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::std_model::derived</second>
 							</item>
 						</qualified>
@@ -4976,10 +5200,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;derived&gt;&lt;prop_1&gt;</id>
 							<simple>prop_1</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::std_model::derived::prop_1</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::std_model::derived::prop_1</second>
 								</item>
 							</qualified>
@@ -5067,10 +5295,14 @@
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;base&gt;</id>
 						<simple>base</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::std_model::base</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::std_model::base</second>
 							</item>
 						</qualified>
@@ -5150,10 +5382,14 @@
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_h&gt;</id>
 						<simple>class_h</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::std_model::class_h</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::std_model::class_h</second>
 							</item>
 						</qualified>
@@ -5209,10 +5445,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_h&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::std_model::class_h::prop_0</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::std_model::class_h::prop_0</second>
 								</item>
 							</qualified>
@@ -5292,10 +5532,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_h&gt;&lt;prop_1&gt;</id>
 							<simple>prop_1</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::std_model::class_h::prop_1</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::std_model::class_h::prop_1</second>
 								</item>
 							</qualified>

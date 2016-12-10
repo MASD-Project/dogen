@@ -6,10 +6,14 @@
 		<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;</id>
 		<simple>trivial_inheritance</simple>
 		<qualified class_id="14" tracking_level="0" version="0">
-			<count>1</count>
+			<count>2</count>
 			<item_version>0</item_version>
 			<item class_id="15" tracking_level="0" version="0">
 				<first>1</first>
+				<second>dogen::test_models::trivial_inheritance</second>
+			</item>
+			<item>
+				<first>2</first>
 				<second>dogen::test_models::trivial_inheritance</second>
 			</item>
 		</qualified>
@@ -69,10 +73,14 @@ in the context of inheritance.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;</id>
 						<simple>trivial_inheritance</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::trivial_inheritance</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::trivial_inheritance</second>
 							</item>
 						</qualified>
@@ -132,10 +140,14 @@ in the context of inheritance.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;pkg4&gt;</id>
 						<simple>pkg4</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::trivial_inheritance::pkg4</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::trivial_inheritance::pkg4</second>
 							</item>
 						</qualified>
@@ -195,10 +207,14 @@ in the context of inheritance.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;pkg1&gt;</id>
 						<simple>pkg1</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::trivial_inheritance::pkg1</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::trivial_inheritance::pkg1</second>
 							</item>
 						</qualified>
@@ -258,10 +274,14 @@ in the context of inheritance.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;pkg2&gt;</id>
 						<simple>pkg2</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::trivial_inheritance::pkg2</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::trivial_inheritance::pkg2</second>
 							</item>
 						</qualified>
@@ -321,10 +341,14 @@ in the context of inheritance.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;pkg3&gt;</id>
 						<simple>pkg3</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::trivial_inheritance::pkg3</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::trivial_inheritance::pkg3</second>
 							</item>
 						</qualified>
@@ -404,10 +428,14 @@ in the context of inheritance.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;pkg4&gt;&lt;child_via_settings&gt;</id>
 						<simple>child_via_settings</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::trivial_inheritance::pkg4::child_via_settings</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::trivial_inheritance::pkg4::child_via_settings</second>
 							</item>
 						</qualified>
@@ -464,10 +492,14 @@ in the context of inheritance.
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;pkg4&gt;&lt;child_via_settings&gt;&lt;prop_1&gt;</id>
 							<simple>prop_1</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::trivial_inheritance::pkg4::child_via_settings::prop_1</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::trivial_inheritance::pkg4::child_via_settings::prop_1</second>
 								</item>
 							</qualified>
@@ -607,10 +639,14 @@ in the context of inheritance.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;pkg3&gt;&lt;child_via_settings&gt;</id>
 						<simple>child_via_settings</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::trivial_inheritance::pkg3::child_via_settings</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::trivial_inheritance::pkg3::child_via_settings</second>
 							</item>
 						</qualified>
@@ -667,10 +703,14 @@ in the context of inheritance.
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;pkg3&gt;&lt;child_via_settings&gt;&lt;prop_1&gt;</id>
 							<simple>prop_1</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::trivial_inheritance::pkg3::child_via_settings::prop_1</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::trivial_inheritance::pkg3::child_via_settings::prop_1</second>
 								</item>
 							</qualified>
@@ -810,10 +850,14 @@ in the context of inheritance.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;pkg1&gt;&lt;child_via_settings&gt;</id>
 						<simple>child_via_settings</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::trivial_inheritance::pkg1::child_via_settings</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::trivial_inheritance::pkg1::child_via_settings</second>
 							</item>
 						</qualified>
@@ -870,10 +914,14 @@ in the context of inheritance.
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;pkg1&gt;&lt;child_via_settings&gt;&lt;prop_1&gt;</id>
 							<simple>prop_1</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::trivial_inheritance::pkg1::child_via_settings::prop_1</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::trivial_inheritance::pkg1::child_via_settings::prop_1</second>
 								</item>
 							</qualified>
@@ -1013,10 +1061,14 @@ in the context of inheritance.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;child_via_settings&gt;</id>
 						<simple>child_via_settings</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::trivial_inheritance::child_via_settings</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::trivial_inheritance::child_via_settings</second>
 							</item>
 						</qualified>
@@ -1072,10 +1124,14 @@ in the context of inheritance.
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;child_via_settings&gt;&lt;prop_1&gt;</id>
 							<simple>prop_1</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::trivial_inheritance::child_via_settings::prop_1</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::trivial_inheritance::child_via_settings::prop_1</second>
 								</item>
 							</qualified>
@@ -1215,10 +1271,14 @@ in the context of inheritance.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;move_ctor_base&gt;</id>
 						<simple>move_ctor_base</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::trivial_inheritance::move_ctor_base</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::trivial_inheritance::move_ctor_base</second>
 							</item>
 						</qualified>
@@ -1275,10 +1335,14 @@ in the context of inheritance.
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;move_ctor_base&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::trivial_inheritance::move_ctor_base::prop_0</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::trivial_inheritance::move_ctor_base::prop_0</second>
 								</item>
 							</qualified>
@@ -1417,10 +1481,14 @@ in the context of inheritance.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;third_child_with_members&gt;</id>
 						<simple>third_child_with_members</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::trivial_inheritance::third_child_with_members</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::trivial_inheritance::third_child_with_members</second>
 							</item>
 						</qualified>
@@ -1476,10 +1544,14 @@ in the context of inheritance.
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;third_child_with_members&gt;&lt;prop_1&gt;</id>
 							<simple>prop_1</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::trivial_inheritance::third_child_with_members::prop_1</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::trivial_inheritance::third_child_with_members::prop_1</second>
 								</item>
 							</qualified>
@@ -1567,10 +1639,14 @@ in the context of inheritance.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;parent_with_members&gt;</id>
 						<simple>parent_with_members</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::trivial_inheritance::parent_with_members</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::trivial_inheritance::parent_with_members</second>
 							</item>
 						</qualified>
@@ -1650,10 +1726,14 @@ in the context of inheritance.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;non_final_orphan&gt;</id>
 						<simple>non_final_orphan</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::trivial_inheritance::non_final_orphan</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::trivial_inheritance::non_final_orphan</second>
 							</item>
 						</qualified>
@@ -1709,10 +1789,14 @@ in the context of inheritance.
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;non_final_orphan&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::trivial_inheritance::non_final_orphan::prop_0</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::trivial_inheritance::non_final_orphan::prop_0</second>
 								</item>
 							</qualified>
@@ -1851,10 +1935,14 @@ in the context of inheritance.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;parent_without_members&gt;</id>
 						<simple>parent_without_members</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::trivial_inheritance::parent_without_members</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::trivial_inheritance::parent_without_members</second>
 							</item>
 						</qualified>
@@ -1969,10 +2057,14 @@ in the context of inheritance.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;pkg4&gt;&lt;child&gt;</id>
 						<simple>child</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::trivial_inheritance::pkg4::child</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::trivial_inheritance::pkg4::child</second>
 							</item>
 						</qualified>
@@ -2029,10 +2121,14 @@ in the context of inheritance.
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;pkg4&gt;&lt;child&gt;&lt;prop_1&gt;</id>
 							<simple>prop_1</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::trivial_inheritance::pkg4::child::prop_1</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::trivial_inheritance::pkg4::child::prop_1</second>
 								</item>
 							</qualified>
@@ -2121,10 +2217,14 @@ in the context of inheritance.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;parent_outside&gt;</id>
 						<simple>parent_outside</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::trivial_inheritance::parent_outside</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::trivial_inheritance::parent_outside</second>
 							</item>
 						</qualified>
@@ -2204,10 +2304,14 @@ in the context of inheritance.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;second_child_without_members&gt;</id>
 						<simple>second_child_without_members</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::trivial_inheritance::second_child_without_members</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::trivial_inheritance::second_child_without_members</second>
 							</item>
 						</qualified>
@@ -2271,10 +2375,14 @@ in the context of inheritance.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;parent_with_members&gt;</id>
 						<simple>parent_with_members</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::trivial_inheritance::parent_with_members</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::trivial_inheritance::parent_with_members</second>
 							</item>
 						</qualified>
@@ -2354,10 +2462,14 @@ in the context of inheritance.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;pkg2&gt;&lt;parent&gt;</id>
 						<simple>parent</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::trivial_inheritance::pkg2::parent</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::trivial_inheritance::pkg2::parent</second>
 							</item>
 						</qualified>
@@ -2414,10 +2526,14 @@ in the context of inheritance.
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;pkg2&gt;&lt;parent&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::trivial_inheritance::pkg2::parent::prop_0</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::trivial_inheritance::pkg2::parent::prop_0</second>
 								</item>
 							</qualified>
@@ -2557,10 +2673,14 @@ in the context of inheritance.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;service&gt;</id>
 						<simple>service</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::trivial_inheritance::service</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::trivial_inheritance::service</second>
 							</item>
 						</qualified>
@@ -2676,10 +2796,14 @@ in the context of inheritance.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;child_without_members&gt;</id>
 						<simple>child_without_members</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::trivial_inheritance::child_without_members</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::trivial_inheritance::child_without_members</second>
 							</item>
 						</qualified>
@@ -2743,10 +2867,14 @@ in the context of inheritance.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;parent_without_members&gt;</id>
 						<simple>parent_without_members</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::trivial_inheritance::parent_without_members</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::trivial_inheritance::parent_without_members</second>
 							</item>
 						</qualified>
@@ -2826,10 +2954,14 @@ in the context of inheritance.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;child_with_members&gt;</id>
 						<simple>child_with_members</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::trivial_inheritance::child_with_members</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::trivial_inheritance::child_with_members</second>
 							</item>
 						</qualified>
@@ -2885,10 +3017,14 @@ in the context of inheritance.
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;child_with_members&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::trivial_inheritance::child_with_members::prop_0</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::trivial_inheritance::child_with_members::prop_0</second>
 								</item>
 							</qualified>
@@ -2976,10 +3112,14 @@ in the context of inheritance.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;parent_without_members&gt;</id>
 						<simple>parent_without_members</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::trivial_inheritance::parent_without_members</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::trivial_inheritance::parent_without_members</second>
 							</item>
 						</qualified>
@@ -3059,10 +3199,14 @@ in the context of inheritance.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;child_of_a_child2&gt;</id>
 						<simple>child_of_a_child2</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::trivial_inheritance::child_of_a_child2</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::trivial_inheritance::child_of_a_child2</second>
 							</item>
 						</qualified>
@@ -3118,10 +3262,14 @@ in the context of inheritance.
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;child_of_a_child2&gt;&lt;prop_2&gt;</id>
 							<simple>prop_2</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::trivial_inheritance::child_of_a_child2::prop_2</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::trivial_inheritance::child_of_a_child2::prop_2</second>
 								</item>
 							</qualified>
@@ -3209,10 +3357,14 @@ in the context of inheritance.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;third_child_with_members&gt;</id>
 						<simple>third_child_with_members</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::trivial_inheritance::third_child_with_members</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::trivial_inheritance::third_child_with_members</second>
 							</item>
 						</qualified>
@@ -3292,10 +3444,14 @@ in the context of inheritance.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;pkg1&gt;&lt;parent&gt;</id>
 						<simple>parent</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::trivial_inheritance::pkg1::parent</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::trivial_inheritance::pkg1::parent</second>
 							</item>
 						</qualified>
@@ -3352,10 +3508,14 @@ in the context of inheritance.
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;pkg1&gt;&lt;parent&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::trivial_inheritance::pkg1::parent::prop_0</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::trivial_inheritance::pkg1::parent::prop_0</second>
 								</item>
 							</qualified>
@@ -3495,10 +3655,14 @@ in the context of inheritance.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;child_of_a_child1&gt;</id>
 						<simple>child_of_a_child1</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::trivial_inheritance::child_of_a_child1</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::trivial_inheritance::child_of_a_child1</second>
 							</item>
 						</qualified>
@@ -3562,10 +3726,14 @@ in the context of inheritance.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;third_child_with_members&gt;</id>
 						<simple>third_child_with_members</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::trivial_inheritance::third_child_with_members</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::trivial_inheritance::third_child_with_members</second>
 							</item>
 						</qualified>
@@ -3645,10 +3813,14 @@ in the context of inheritance.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;pkg1&gt;&lt;child&gt;</id>
 						<simple>child</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::trivial_inheritance::pkg1::child</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::trivial_inheritance::pkg1::child</second>
 							</item>
 						</qualified>
@@ -3705,10 +3877,14 @@ in the context of inheritance.
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;pkg1&gt;&lt;child&gt;&lt;prop_1&gt;</id>
 							<simple>prop_1</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::trivial_inheritance::pkg1::child::prop_1</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::trivial_inheritance::pkg1::child::prop_1</second>
 								</item>
 							</qualified>
@@ -3797,10 +3973,14 @@ in the context of inheritance.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;pkg1&gt;&lt;parent&gt;</id>
 						<simple>parent</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::trivial_inheritance::pkg1::parent</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::trivial_inheritance::pkg1::parent</second>
 							</item>
 						</qualified>
@@ -3881,10 +4061,14 @@ in the context of inheritance.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;parent_with_members&gt;</id>
 						<simple>parent_with_members</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::trivial_inheritance::parent_with_members</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::trivial_inheritance::parent_with_members</second>
 							</item>
 						</qualified>
@@ -3940,10 +4124,14 @@ in the context of inheritance.
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;parent_with_members&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::trivial_inheritance::parent_with_members::prop_0</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::trivial_inheritance::parent_with_members::prop_0</second>
 								</item>
 							</qualified>
@@ -4082,10 +4270,14 @@ in the context of inheritance.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;non_final_leaf&gt;</id>
 						<simple>non_final_leaf</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::trivial_inheritance::non_final_leaf</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::trivial_inheritance::non_final_leaf</second>
 							</item>
 						</qualified>
@@ -4141,10 +4333,14 @@ in the context of inheritance.
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;non_final_leaf&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::trivial_inheritance::non_final_leaf::prop_0</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::trivial_inheritance::non_final_leaf::prop_0</second>
 								</item>
 							</qualified>
@@ -4232,10 +4428,14 @@ in the context of inheritance.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;descendant1&gt;</id>
 						<simple>descendant1</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::trivial_inheritance::descendant1</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::trivial_inheritance::descendant1</second>
 							</item>
 						</qualified>
@@ -4315,10 +4515,14 @@ in the context of inheritance.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;descendant2&gt;</id>
 						<simple>descendant2</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::trivial_inheritance::descendant2</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::trivial_inheritance::descendant2</second>
 							</item>
 						</qualified>
@@ -4375,10 +4579,14 @@ in the context of inheritance.
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;descendant2&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::trivial_inheritance::descendant2::prop_0</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::trivial_inheritance::descendant2::prop_0</second>
 								</item>
 							</qualified>
@@ -4466,10 +4674,14 @@ in the context of inheritance.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;base&gt;</id>
 						<simple>base</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::trivial_inheritance::base</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::trivial_inheritance::base</second>
 							</item>
 						</qualified>
@@ -4549,10 +4761,14 @@ in the context of inheritance.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;descendant3&gt;</id>
 						<simple>descendant3</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::trivial_inheritance::descendant3</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::trivial_inheritance::descendant3</second>
 							</item>
 						</qualified>
@@ -4608,10 +4824,14 @@ in the context of inheritance.
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;descendant3&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::trivial_inheritance::descendant3::prop_0</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::trivial_inheritance::descendant3::prop_0</second>
 								</item>
 							</qualified>
@@ -4699,10 +4919,14 @@ in the context of inheritance.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;descendant1&gt;</id>
 						<simple>descendant1</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::trivial_inheritance::descendant1</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::trivial_inheritance::descendant1</second>
 							</item>
 						</qualified>
@@ -4782,10 +5006,14 @@ in the context of inheritance.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;pkg3&gt;&lt;child&gt;</id>
 						<simple>child</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::trivial_inheritance::pkg3::child</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::trivial_inheritance::pkg3::child</second>
 							</item>
 						</qualified>
@@ -4842,10 +5070,14 @@ in the context of inheritance.
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;pkg3&gt;&lt;child&gt;&lt;prop_1&gt;</id>
 							<simple>prop_1</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::trivial_inheritance::pkg3::child::prop_1</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::trivial_inheritance::pkg3::child::prop_1</second>
 								</item>
 							</qualified>
@@ -4934,10 +5166,14 @@ in the context of inheritance.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;pkg2&gt;&lt;parent&gt;</id>
 						<simple>parent</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::trivial_inheritance::pkg2::parent</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::trivial_inheritance::pkg2::parent</second>
 							</item>
 						</qualified>
@@ -5018,10 +5254,14 @@ in the context of inheritance.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;parent_outside&gt;</id>
 						<simple>parent_outside</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::trivial_inheritance::parent_outside</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::trivial_inheritance::parent_outside</second>
 							</item>
 						</qualified>
@@ -5077,10 +5317,14 @@ in the context of inheritance.
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;parent_outside&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::trivial_inheritance::parent_outside::prop_0</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::trivial_inheritance::parent_outside::prop_0</second>
 								</item>
 							</qualified>
@@ -5219,10 +5463,14 @@ in the context of inheritance.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;service_interface&gt;</id>
 						<simple>service_interface</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::trivial_inheritance::service_interface</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::trivial_inheritance::service_interface</second>
 							</item>
 						</qualified>
@@ -5338,10 +5586,14 @@ in the context of inheritance.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;base&gt;</id>
 						<simple>base</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::trivial_inheritance::base</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::trivial_inheritance::base</second>
 							</item>
 						</qualified>
@@ -5458,10 +5710,14 @@ in the context of inheritance.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;descendant1&gt;</id>
 						<simple>descendant1</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::trivial_inheritance::descendant1</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::trivial_inheritance::descendant1</second>
 							</item>
 						</qualified>
@@ -5526,10 +5782,14 @@ in the context of inheritance.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;base&gt;</id>
 						<simple>base</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::trivial_inheritance::base</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::trivial_inheritance::base</second>
 							</item>
 						</qualified>
@@ -5610,10 +5870,14 @@ in the context of inheritance.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;move_ctor_empty_descendant&gt;</id>
 						<simple>move_ctor_empty_descendant</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::trivial_inheritance::move_ctor_empty_descendant</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::trivial_inheritance::move_ctor_empty_descendant</second>
 							</item>
 						</qualified>
@@ -5677,10 +5941,14 @@ in the context of inheritance.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;move_ctor_base&gt;</id>
 						<simple>move_ctor_base</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::trivial_inheritance::move_ctor_base</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::trivial_inheritance::move_ctor_base</second>
 							</item>
 						</qualified>
@@ -5761,10 +6029,14 @@ in the context of inheritance.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;move_ctor_descendant&gt;</id>
 						<simple>move_ctor_descendant</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::trivial_inheritance::move_ctor_descendant</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::trivial_inheritance::move_ctor_descendant</second>
 							</item>
 						</qualified>
@@ -5821,10 +6093,14 @@ in the context of inheritance.
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;move_ctor_descendant&gt;&lt;prop_1&gt;</id>
 							<simple>prop_1</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::trivial_inheritance::move_ctor_descendant::prop_1</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::trivial_inheritance::move_ctor_descendant::prop_1</second>
 								</item>
 							</qualified>
@@ -5912,10 +6188,14 @@ in the context of inheritance.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;move_ctor_base&gt;</id>
 						<simple>move_ctor_base</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::trivial_inheritance::move_ctor_base</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::trivial_inheritance::move_ctor_base</second>
 							</item>
 						</qualified>

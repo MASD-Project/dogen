@@ -53,12 +53,12 @@ std::string identifiable_and_qualified_builder::obtain_qualified(
 }
 
 void identifiable_and_qualified_builder::add(const name& n) {
-    // csharp_pp_.add(obtain_qualified(n.qualified(), languages::csharp));
+    csharp_pp_.add(obtain_qualified(n.qualified(), languages::csharp));
     cpp_pp_.add(obtain_qualified(n.qualified(), languages::cpp));
 }
 
 void identifiable_and_qualified_builder::add(const name_tree& nt) {
-    // csharp_pp_.add_child(obtain_qualified(nt.qualified(), languages::csharp));
+    csharp_pp_.add_child(obtain_qualified(nt.qualified(), languages::csharp));
     cpp_pp_.add_child(obtain_qualified(nt.qualified(), languages::cpp));
 }
 
@@ -66,7 +66,7 @@ std::pair<std::string, std::map<languages, std::string> >
 identifiable_and_qualified_builder::build() {
     const auto cpp_qn(cpp_pp_.print());
     const auto qualified(std::map<languages, std::string> {
-            /*{ languages::csharp, csharp_pp_.print() },*/
+            { languages::csharp, csharp_pp_.print() },
             { languages::cpp, cpp_qn }
         });
 

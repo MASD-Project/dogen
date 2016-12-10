@@ -6,10 +6,14 @@
 		<id>&lt;dogen&gt;&lt;test_models&gt;&lt;exception&gt;</id>
 		<simple>exception</simple>
 		<qualified class_id="14" tracking_level="0" version="0">
-			<count>1</count>
+			<count>2</count>
 			<item_version>0</item_version>
 			<item class_id="15" tracking_level="0" version="0">
 				<first>1</first>
+				<second>dogen::test_models::exception</second>
+			</item>
+			<item>
+				<first>2</first>
 				<second>dogen::test_models::exception</second>
 			</item>
 		</qualified>
@@ -65,10 +69,14 @@
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;exception&gt;&lt;pkg&gt;</id>
 						<simple>pkg</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::exception::pkg</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::exception::pkg</second>
 							</item>
 						</qualified>
@@ -128,10 +136,14 @@
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;exception&gt;</id>
 						<simple>exception</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::exception</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::exception</second>
 							</item>
 						</qualified>
@@ -216,10 +228,14 @@
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;exception&gt;&lt;pkg&gt;&lt;catastrophic_error&gt;</id>
 						<simple>catastrophic_error</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::exception::pkg::catastrophic_error</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::exception::pkg::catastrophic_error</second>
 							</item>
 						</qualified>
@@ -275,10 +291,14 @@
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;exception&gt;&lt;my_error&gt;</id>
 						<simple>my_error</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::exception::my_error</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::exception::my_error</second>
 							</item>
 						</qualified>

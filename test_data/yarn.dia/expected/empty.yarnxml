@@ -6,10 +6,14 @@
 		<id>&lt;empty&gt;</id>
 		<simple>empty</simple>
 		<qualified class_id="14" tracking_level="0" version="0">
-			<count>1</count>
+			<count>2</count>
 			<item_version>0</item_version>
 			<item class_id="15" tracking_level="0" version="0">
 				<first>1</first>
+				<second>empty</second>
+			</item>
+			<item>
+				<first>2</first>
 				<second>empty</second>
 			</item>
 		</qualified>
@@ -63,10 +67,14 @@
 						<id>&lt;empty&gt;</id>
 						<simple>empty</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>empty</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>empty</second>
 							</item>
 						</qualified>

@@ -6,10 +6,14 @@
 		<id>&lt;dogen&gt;&lt;test_models&gt;&lt;enumeration&gt;</id>
 		<simple>enumeration</simple>
 		<qualified class_id="14" tracking_level="0" version="0">
-			<count>1</count>
+			<count>2</count>
 			<item_version>0</item_version>
 			<item class_id="15" tracking_level="0" version="0">
 				<first>1</first>
+				<second>dogen::test_models::enumeration</second>
+			</item>
+			<item>
+				<first>2</first>
 				<second>dogen::test_models::enumeration</second>
 			</item>
 		</qualified>
@@ -65,10 +69,14 @@
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;enumeration&gt;&lt;pkg1&gt;</id>
 						<simple>pkg1</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::enumeration::pkg1</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::enumeration::pkg1</second>
 							</item>
 						</qualified>
@@ -128,10 +136,14 @@
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;enumeration&gt;</id>
 						<simple>enumeration</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::enumeration</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::enumeration</second>
 							</item>
 						</qualified>
@@ -206,10 +218,14 @@
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;enumeration&gt;&lt;pkg1&gt;&lt;shape_types&gt;</id>
 						<simple>shape_types</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::enumeration::pkg1::shape_types</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::enumeration::pkg1::shape_types</second>
 							</item>
 						</qualified>
@@ -320,10 +336,14 @@
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;enumeration&gt;&lt;colour_types&gt;</id>
 						<simple>colour_types</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::enumeration::colour_types</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::enumeration::colour_types</second>
 							</item>
 						</qualified>
@@ -436,10 +456,14 @@ this is a long comment
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;enumeration&gt;&lt;book_types&gt;</id>
 						<simple>book_types</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::enumeration::book_types</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::enumeration::book_types</second>
 							</item>
 						</qualified>
@@ -546,10 +570,14 @@ this is a long comment
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;enumeration&gt;&lt;a_class&gt;</id>
 						<simple>a_class</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::enumeration::a_class</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::enumeration::a_class</second>
 							</item>
 						</qualified>
@@ -605,10 +633,14 @@ this is a long comment
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;enumeration&gt;&lt;a_class&gt;&lt;colour_type&gt;</id>
 							<simple>colour_type</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::enumeration::a_class::colour_type</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::enumeration::a_class::colour_type</second>
 								</item>
 							</qualified>
@@ -688,10 +720,14 @@ this is a long comment
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;enumeration&gt;&lt;a_class&gt;&lt;book_type&gt;</id>
 							<simple>book_type</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::enumeration::a_class::book_type</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::enumeration::a_class::book_type</second>
 								</item>
 							</qualified>
@@ -771,10 +807,14 @@ this is a long comment
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;enumeration&gt;&lt;a_class&gt;&lt;shape_type&gt;</id>
 							<simple>shape_type</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::enumeration::a_class::shape_type</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::enumeration::a_class::shape_type</second>
 								</item>
 							</qualified>

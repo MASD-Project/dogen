@@ -6,10 +6,14 @@
 		<id>&lt;dogen&gt;&lt;test_models&gt;&lt;class_without_package&gt;</id>
 		<simple>class_without_package</simple>
 		<qualified class_id="14" tracking_level="0" version="0">
-			<count>1</count>
+			<count>2</count>
 			<item_version>0</item_version>
 			<item class_id="15" tracking_level="0" version="0">
 				<first>1</first>
+				<second>dogen::test_models::class_without_package</second>
+			</item>
+			<item>
+				<first>2</first>
 				<second>dogen::test_models::class_without_package</second>
 			</item>
 		</qualified>
@@ -65,10 +69,14 @@
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;class_without_package&gt;</id>
 						<simple>class_without_package</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::class_without_package</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::class_without_package</second>
 							</item>
 						</qualified>
@@ -148,10 +156,14 @@
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;class_without_package&gt;&lt;class_1&gt;</id>
 						<simple>class_1</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::class_without_package::class_1</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::class_without_package::class_1</second>
 							</item>
 						</qualified>
@@ -207,10 +219,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;class_without_package&gt;&lt;class_1&gt;&lt;an_attribute&gt;</id>
 							<simple>an_attribute</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::class_without_package::class_1::an_attribute</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::class_without_package::class_1::an_attribute</second>
 								</item>
 							</qualified>

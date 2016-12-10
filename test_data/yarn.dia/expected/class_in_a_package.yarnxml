@@ -6,10 +6,14 @@
 		<id>&lt;dogen&gt;&lt;test_models&gt;&lt;class_in_a_package&gt;</id>
 		<simple>class_in_a_package</simple>
 		<qualified class_id="14" tracking_level="0" version="0">
-			<count>1</count>
+			<count>2</count>
 			<item_version>0</item_version>
 			<item class_id="15" tracking_level="0" version="0">
 				<first>1</first>
+				<second>dogen::test_models::class_in_a_package</second>
+			</item>
+			<item>
+				<first>2</first>
 				<second>dogen::test_models::class_in_a_package</second>
 			</item>
 		</qualified>
@@ -65,10 +69,14 @@
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;class_in_a_package&gt;&lt;package1&gt;</id>
 						<simple>package1</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::class_in_a_package::package1</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::class_in_a_package::package1</second>
 							</item>
 						</qualified>
@@ -128,10 +136,14 @@
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;class_in_a_package&gt;</id>
 						<simple>class_in_a_package</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::class_in_a_package</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::class_in_a_package</second>
 							</item>
 						</qualified>
@@ -211,10 +223,14 @@
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;class_in_a_package&gt;&lt;package1&gt;&lt;first_class&gt;</id>
 						<simple>first_class</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::class_in_a_package::package1::first_class</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::class_in_a_package::package1::first_class</second>
 							</item>
 						</qualified>
@@ -271,10 +287,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;class_in_a_package&gt;&lt;package1&gt;&lt;first_class&gt;&lt;public_attribute&gt;</id>
 							<simple>public_attribute</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::class_in_a_package::package1::first_class::public_attribute</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::class_in_a_package::package1::first_class::public_attribute</second>
 								</item>
 							</qualified>
@@ -355,10 +375,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;class_in_a_package&gt;&lt;package1&gt;&lt;first_class&gt;&lt;private_attribute&gt;</id>
 							<simple>private_attribute</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::class_in_a_package::package1::first_class::private_attribute</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::class_in_a_package::package1::first_class::private_attribute</second>
 								</item>
 							</qualified>

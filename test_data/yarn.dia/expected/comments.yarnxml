@@ -6,10 +6,14 @@
 		<id>&lt;dogen&gt;&lt;test_models&gt;&lt;comments&gt;</id>
 		<simple>comments</simple>
 		<qualified class_id="14" tracking_level="0" version="0">
-			<count>1</count>
+			<count>2</count>
 			<item_version>0</item_version>
 			<item class_id="15" tracking_level="0" version="0">
 				<first>1</first>
+				<second>dogen::test_models::comments</second>
+			</item>
+			<item>
+				<first>2</first>
 				<second>dogen::test_models::comments</second>
 			</item>
 		</qualified>
@@ -66,10 +70,14 @@
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;comments&gt;&lt;package&gt;&lt;package2&gt;</id>
 						<simple>package2</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::comments::package::package2</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::comments::package::package2</second>
 							</item>
 						</qualified>
@@ -131,10 +139,14 @@
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;comments&gt;&lt;package&gt;</id>
 						<simple>package</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::comments::package</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::comments::package</second>
 							</item>
 						</qualified>
@@ -197,10 +209,14 @@ This comment will be applied to the model namespace itself.
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;comments&gt;</id>
 						<simple>comments</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::comments</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::comments</second>
 							</item>
 						</qualified>
@@ -284,10 +300,14 @@ third line with &quot;quote&quot;
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;comments&gt;&lt;multi_line&gt;</id>
 						<simple>multi_line</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::comments::multi_line</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::comments::multi_line</second>
 							</item>
 						</qualified>
@@ -403,10 +423,14 @@ third line with &quot;quote&quot;
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;comments&gt;&lt;one_line&gt;</id>
 						<simple>one_line</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::comments::one_line</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::comments::one_line</second>
 							</item>
 						</qualified>
@@ -463,10 +487,14 @@ third line with &quot;quote&quot;
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;comments&gt;&lt;one_line&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::comments::one_line::prop_0</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::comments::one_line::prop_0</second>
 								</item>
 							</qualified>
@@ -549,10 +577,14 @@ a second line
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;comments&gt;&lt;one_line&gt;&lt;prop_1&gt;</id>
 							<simple>prop_1</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::comments::one_line::prop_1</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::comments::one_line::prop_1</second>
 								</item>
 							</qualified>
@@ -632,10 +664,14 @@ a second line
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;comments&gt;&lt;one_line&gt;&lt;prop_2&gt;</id>
 							<simple>prop_2</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::comments::one_line::prop_2</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::comments::one_line::prop_2</second>
 								</item>
 							</qualified>

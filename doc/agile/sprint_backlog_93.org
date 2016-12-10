@@ -12,14 +12,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-12-10 Sat 12:34]
+#+CAPTION: Clock summary at [2016-12-10 Sat 12:37]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *58:49* |       |       | 100.0 |
+| *Total time*                                                                | *58:51* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 58:49   |       |       | 100.0 |
-| Active                                                                      |         | 58:49 |       | 100.0 |
+| Stories                                                                     | 58:51   |       |       | 100.0 |
+| Active                                                                      |         | 58:51 |       | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  2:24 |   4.1 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  1:02 |   1.8 |
 | COMPLETED Update readme                                                     |         |       |  0:11 |   0.3 |
@@ -34,7 +34,7 @@
 | COMPLETED Formatter registrar validation is not being called                |         |       |  0:20 |   0.6 |
 | COMPLETED Move decoration repository to quilt                               |         |       |  0:43 |   1.2 |
 | COMPLETED Move module id container into yarn                                |         |       |  0:24 |   0.7 |
-| COMPLETED Add basic infrastructure for C#                                   |         |       | 17:02 |  29.0 |
+| COMPLETED Add basic infrastructure for C#                                   |         |       | 17:02 |  28.9 |
 | COMPLETED Add support for C#-style documentation                            |         |       |  1:57 |   3.3 |
 | COMPLETED Add support for visual studio projects and solutions              |         |       |  6:05 |  10.3 |
 | COMPLETED OSX build is borked                                               |         |       |  0:21 |   0.6 |
@@ -42,7 +42,7 @@
 | COMPLETED Split json and dia tests                                          |         |       |  0:12 |   0.3 |
 | COMPLETED Split the "built-ins" by language                                 |         |       |  0:28 |   0.8 |
 | COMPLETED Models should have an associated language                         |         |       |  2:57 |   5.0 |
-| STARTED Add support for properties in C#                                    |         |       |  1:49 |   3.1 |
+| STARTED Add support for properties in C#                                    |         |       |  1:51 |   3.1 |
 | STARTED Language namespaces and modeling element locations                  |         |       |  0:39 |   1.1 |
 | STARTED Add support for Decimal numbers in c++                              |         |       |  0:32 |   0.9 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
@@ -577,6 +577,7 @@ which is a property of the model, and one entry of which is "language
 agnostic".
 
 *** STARTED Add support for properties in C#                          :story:
+    CLOCK: [2016-12-10 Sat 12:35]--[2016-12-10 Sat 12:37] =>  0:02
     CLOCK: [2016-12-10 Sat 12:26]--[2016-12-10 Sat 12:34] =>  0:08
     CLOCK: [2016-12-10 Sat 11:40]--[2016-12-10 Sat 12:25] =>  0:45
     CLOCK: [2016-12-10 Sat 11:31]--[2016-12-10 Sat 11:39] =>  0:08

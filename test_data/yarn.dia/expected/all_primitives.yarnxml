@@ -6,10 +6,14 @@
 		<id>&lt;dogen&gt;&lt;test_models&gt;&lt;all_primitives&gt;</id>
 		<simple>all_primitives</simple>
 		<qualified class_id="14" tracking_level="0" version="0">
-			<count>1</count>
+			<count>2</count>
 			<item_version>0</item_version>
 			<item class_id="15" tracking_level="0" version="0">
 				<first>1</first>
+				<second>dogen::test_models::all_primitives</second>
+			</item>
+			<item>
+				<first>2</first>
 				<second>dogen::test_models::all_primitives</second>
 			</item>
 		</qualified>
@@ -65,10 +69,14 @@
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;all_primitives&gt;</id>
 						<simple>all_primitives</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::all_primitives</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::all_primitives</second>
 							</item>
 						</qualified>
@@ -148,10 +156,14 @@
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;all_primitives&gt;&lt;a_class&gt;</id>
 						<simple>a_class</simple>
 						<qualified>
-							<count>1</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
+								<second>dogen::test_models::all_primitives::a_class</second>
+							</item>
+							<item>
+								<first>2</first>
 								<second>dogen::test_models::all_primitives::a_class</second>
 							</item>
 						</qualified>
@@ -207,10 +219,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;all_primitives&gt;&lt;a_class&gt;&lt;bool_property&gt;</id>
 							<simple>bool_property</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::all_primitives::a_class::bool_property</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::all_primitives::a_class::bool_property</second>
 								</item>
 							</qualified>
@@ -290,10 +306,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;all_primitives&gt;&lt;a_class&gt;&lt;char_property&gt;</id>
 							<simple>char_property</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::all_primitives::a_class::char_property</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::all_primitives::a_class::char_property</second>
 								</item>
 							</qualified>
@@ -373,10 +393,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;all_primitives&gt;&lt;a_class&gt;&lt;uchar_property&gt;</id>
 							<simple>uchar_property</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::all_primitives::a_class::uchar_property</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::all_primitives::a_class::uchar_property</second>
 								</item>
 							</qualified>
@@ -456,10 +480,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;all_primitives&gt;&lt;a_class&gt;&lt;int_property&gt;</id>
 							<simple>int_property</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::all_primitives::a_class::int_property</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::all_primitives::a_class::int_property</second>
 								</item>
 							</qualified>
@@ -539,10 +567,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;all_primitives&gt;&lt;a_class&gt;&lt;uint_property&gt;</id>
 							<simple>uint_property</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::all_primitives::a_class::uint_property</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::all_primitives::a_class::uint_property</second>
 								</item>
 							</qualified>
@@ -622,10 +654,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;all_primitives&gt;&lt;a_class&gt;&lt;long_property&gt;</id>
 							<simple>long_property</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::all_primitives::a_class::long_property</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::all_primitives::a_class::long_property</second>
 								</item>
 							</qualified>
@@ -705,10 +741,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;all_primitives&gt;&lt;a_class&gt;&lt;ulong_property&gt;</id>
 							<simple>ulong_property</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::all_primitives::a_class::ulong_property</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::all_primitives::a_class::ulong_property</second>
 								</item>
 							</qualified>
@@ -788,10 +828,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;all_primitives&gt;&lt;a_class&gt;&lt;long_long_property&gt;</id>
 							<simple>long_long_property</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::all_primitives::a_class::long_long_property</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::all_primitives::a_class::long_long_property</second>
 								</item>
 							</qualified>
@@ -871,10 +915,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;all_primitives&gt;&lt;a_class&gt;&lt;ulong_long_property&gt;</id>
 							<simple>ulong_long_property</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::all_primitives::a_class::ulong_long_property</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::all_primitives::a_class::ulong_long_property</second>
 								</item>
 							</qualified>
@@ -954,10 +1002,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;all_primitives&gt;&lt;a_class&gt;&lt;short_property&gt;</id>
 							<simple>short_property</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::all_primitives::a_class::short_property</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::all_primitives::a_class::short_property</second>
 								</item>
 							</qualified>
@@ -1037,10 +1089,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;all_primitives&gt;&lt;a_class&gt;&lt;ushort_property&gt;</id>
 							<simple>ushort_property</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::all_primitives::a_class::ushort_property</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::all_primitives::a_class::ushort_property</second>
 								</item>
 							</qualified>
@@ -1120,10 +1176,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;all_primitives&gt;&lt;a_class&gt;&lt;double_property&gt;</id>
 							<simple>double_property</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::all_primitives::a_class::double_property</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::all_primitives::a_class::double_property</second>
 								</item>
 							</qualified>
@@ -1203,10 +1263,14 @@
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;all_primitives&gt;&lt;a_class&gt;&lt;float_property&gt;</id>
 							<simple>float_property</simple>
 							<qualified>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
+									<second>dogen::test_models::all_primitives::a_class::float_property</second>
+								</item>
+								<item>
+									<first>2</first>
 									<second>dogen::test_models::all_primitives::a_class::float_property</second>
 								</item>
 							</qualified>
