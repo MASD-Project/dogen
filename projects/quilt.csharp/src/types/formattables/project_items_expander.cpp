@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <set>
 #include"dogen/yarn/types/object.hpp"
 #include"dogen/yarn/types/visitor.hpp"
 #include"dogen/yarn/types/primitive.hpp"
@@ -40,6 +41,7 @@ bool project_items_expander::is_project_item(const std::type_index& ti) const {
 }
 
 void project_items_expander::expand(model& fm) const {
+    std::set<boost::filesystem::path> set;
     for (const auto& pair : fm.formattables()) {
         const auto& formattable(pair.second);
         const auto& e(*formattable.element());
@@ -51,9 +53,12 @@ void project_items_expander::expand(model& fm) const {
         const auto& eprops(formattable.element_properties());
         for (const auto& art_pair : eprops.artefact_properties()) {
             const auto art_props(art_pair.second);
-            fm.project_items().push_back(art_props.relative_path());
+            set.insert(art_props.relative_path());
         }
     }
+
+    for (const auto& p : set)
+        fm.project_items().push_back(p);
 }
 
 } } } }

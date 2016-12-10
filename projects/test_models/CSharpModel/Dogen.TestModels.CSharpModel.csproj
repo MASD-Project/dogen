@@ -30,12 +30,12 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Types/AllBuiltins.cs" />
     <Compile Include="SequenceGenerators/AllBuiltinsSequenceGenerator.cs" />
-    <Compile Include="Types/OneProperty.cs" />
-    <Compile Include="SequenceGenerators/OnePropertySequenceGenerator.cs" />
-    <Compile Include="Types/NoProperties.cs" />
     <Compile Include="SequenceGenerators/NoPropertiesSequenceGenerator.cs" />
+    <Compile Include="SequenceGenerators/OnePropertySequenceGenerator.cs" />
+    <Compile Include="Types/AllBuiltins.cs" />
+    <Compile Include="Types/NoProperties.cs" />
+    <Compile Include="Types/OneProperty.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
