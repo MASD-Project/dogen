@@ -81,19 +81,71 @@ class_formatter::format(const context& ctx, const yarn::element& e) const {
             a.comment(e.documentation(), 1/*indent*/);
 a.stream() << "    class " << sn << std::endl;
 a.stream() << "    {" << std::endl;
-           /*
-            * Getters and setters.
-            */
             if (!o.local_attributes().empty()) {
+               /*
+                * Properties
+                */
 a.stream() << "        #region Properties" << std::endl;
                 for (const auto& attr : o.local_attributes()) {
                     a.comment(attr.documentation(), 2/*indent*/);
 a.stream() << "        public " << a.get_qualified_name(attr.parsed_type()) << " " << attr.name().simple() << " { get; set; }" << std::endl;
-           }
+                }
 a.stream() << "        #endregion" << std::endl;
-       }
-a.stream() << "    };" << std::endl;
-        }
+a.stream() << std::endl;
+               /*
+                * Equals
+                */
+a.stream() << "        #region Equality" << std::endl;
+a.stream() << "        public override bool Equals(object obj)" << std::endl;
+a.stream() << "        {" << std::endl;
+a.stream() << "            if (ReferenceEquals(null, obj)) return false;" << std::endl;
+a.stream() << "            if (ReferenceEquals(this, obj)) return true;" << std::endl;
+a.stream() << "            if (obj.GetType() != this.GetType()) return false;" << std::endl;
+a.stream() << std::endl;
+a.stream() << "            var value = obj as " << sn << ";" << std::endl;
+a.stream() << "            if (value == null) return false;" << std::endl;
+a.stream() << std::endl;
+a.stream() << "            return" << std::endl;
+                dogen::formatters::sequence_formatter sf(o.local_attributes().size());
+                sf.element_separator("");
+                sf.postfix_configuration().not_last(" &&");
+                sf.postfix_configuration().last(";");
+                for (const auto& attr : o.local_attributes()) {
+                    if (attr.parsed_type().is_current_simple_type()) {
+a.stream() << "                " << attr.name().simple() << " == value." << attr.name().simple() << sf.postfix() << std::endl;
+                    } else {
+a.stream() << "                " << attr.name().simple() << " != null && value." << attr.name().simple() << " != null &&" << std::endl;
+a.stream() << "                " << attr.name().simple() << ".Equals(value." << attr.name().simple() << ")" << sf.postfix() << std::endl;
+                    }
+                    sf.next();
+                }
+a.stream() << "        }" << std::endl;
+a.stream() << std::endl;
+a.stream() << "        public override int GetHashCode()" << std::endl;
+a.stream() << "        {" << std::endl;
+a.stream() << "            unchecked" << std::endl;
+a.stream() << "            {" << std::endl;
+a.stream() << "                // Choose large primes to avoid hashing collisions" << std::endl;
+a.stream() << "                const int HashingBase = (int) 2166136261;" << std::endl;
+a.stream() << "                const int HashingMultiplier = 16777619;" << std::endl;
+a.stream() << std::endl;
+a.stream() << "                int hash = HashingBase;" << std::endl;
+                for (const auto& attr : o.local_attributes()) {
+                    if (attr.parsed_type().is_current_simple_type()) {
+a.stream() << "                hash = (hash * HashingMultiplier) ^ " << attr.name().simple() << ".GetHashCode();" << std::endl;
+                    } else {
+a.stream() << "                hash = (hash * HashingMultiplier) ^" << std::endl;
+a.stream() << "                    (!" << attr.name().simple() << ".ReferenceEquals(null, " << attr.name().simple() << ") ? " << attr.name().simple() << ".GetHashCode() : 0);" << std::endl;
+                    }
+                    sf.next();
+                }
+a.stream() << "                return hash;" << std::endl;
+a.stream() << "            }" << std::endl;
+a.stream() << "       }" << std::endl;
+a.stream() << "       #endregion" << std::endl;
+            }
+a.stream() << "    }" << std::endl;
+        } // snf
     } // sbf
     return a.make_artefact();
 }

@@ -5,46 +5,47 @@
 
 * Mission Statement
 
-- add cross-language support.
+- add the basic infrastructure for C# support.
 
 * Stories
 
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-12-10 Sat 16:33]
+#+CAPTION: Clock summary at [2016-12-10 Sat 17:51]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *60:33* |       |       | 100.0 |
+| *Total time*                                                                | *61:49* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 60:33   |       |       | 100.0 |
-| Active                                                                      |         | 60:33 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  2:24 |   4.0 |
+| Stories                                                                     | 61:49   |       |       | 100.0 |
+| Active                                                                      |         | 61:49 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  2:24 |   3.9 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  1:02 |   1.7 |
 | COMPLETED Update readme                                                     |         |       |  0:11 |   0.3 |
 | COMPLETED Test data generation for dates generates invalid dates            |         |       |  0:33 |   0.9 |
-| COMPLETED Handle missing stitch templates scenario                          |         |       |  1:04 |   1.8 |
+| COMPLETED Handle missing stitch templates scenario                          |         |       |  1:04 |   1.7 |
 | COMPLETED Move project directory to output options                          |         |       |  1:10 |   1.9 |
-| COMPLETED Update the conceptual model to clarify backends and kernels       |         |       |  4:20 |   7.2 |
-| COMPLETED Detect knitter and disable code generation accordingly            |         |       |  1:15 |   2.1 |
-| COMPLETED Clean up kernel and backend confusion                             |         |       |  5:17 |   8.7 |
-| COMPLETED Add a "language" directory for each backend                       |         |       |  5:44 |   9.5 |
-| COMPLETED Split C++ profiles and templates from C#                          |         |       |  1:11 |   2.0 |
-| COMPLETED Formatter registrar validation is not being called                |         |       |  0:20 |   0.6 |
+| COMPLETED Update the conceptual model to clarify backends and kernels       |         |       |  4:20 |   7.0 |
+| COMPLETED Detect knitter and disable code generation accordingly            |         |       |  1:15 |   2.0 |
+| COMPLETED Clean up kernel and backend confusion                             |         |       |  5:17 |   8.5 |
+| COMPLETED Add a "language" directory for each backend                       |         |       |  5:44 |   9.3 |
+| COMPLETED Split C++ profiles and templates from C#                          |         |       |  1:11 |   1.9 |
+| COMPLETED Formatter registrar validation is not being called                |         |       |  0:20 |   0.5 |
 | COMPLETED Move decoration repository to quilt                               |         |       |  0:43 |   1.2 |
-| COMPLETED Move module id container into yarn                                |         |       |  0:24 |   0.7 |
-| COMPLETED Add basic infrastructure for C#                                   |         |       | 17:02 |  28.1 |
+| COMPLETED Move module id container into yarn                                |         |       |  0:24 |   0.6 |
+| COMPLETED Add basic infrastructure for C#                                   |         |       | 17:02 |  27.6 |
 | COMPLETED Add support for C#-style documentation                            |         |       |  1:57 |   3.2 |
-| COMPLETED Add support for visual studio projects and solutions              |         |       |  6:05 |  10.0 |
+| COMPLETED Add support for visual studio projects and solutions              |         |       |  6:05 |   9.8 |
 | COMPLETED OSX build is borked                                               |         |       |  0:21 |   0.6 |
 | COMPLETED Add facet directories to locator                                  |         |       |  1:09 |   1.9 |
 | COMPLETED Split json and dia tests                                          |         |       |  0:12 |   0.3 |
 | COMPLETED Split the "built-ins" by language                                 |         |       |  0:28 |   0.8 |
-| COMPLETED Models should have an associated language                         |         |       |  2:57 |   4.9 |
-| COMPLETED Add support for properties in C#                                  |         |       |  2:20 |   3.9 |
+| COMPLETED Models should have an associated language                         |         |       |  2:57 |   4.8 |
+| COMPLETED Add support for properties in C#                                  |         |       |  2:20 |   3.8 |
 | POSTPONED Use an unordered map in qualified name                            |         |       |  0:10 |   0.3 |
 | STARTED Add support for test data generation in C#                          |         |       |  1:03 |   1.7 |
+| STARTED Add support for Equals in C#                                        |         |       |  1:16 |   2.0 |
 | STARTED Language namespaces and modeling element locations                  |         |       |  0:39 |   1.1 |
 | STARTED Add support for Decimal numbers in c++                              |         |       |  0:32 |   0.9 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
@@ -606,6 +607,26 @@ patch and investigate this later.
 
 We need to create a facet that generates domain types. It should be
 idiomatic in C# - =IEnumerable=, etc.
+
+*** STARTED Add support for Equals in C#                              :story:
+    CLOCK: [2016-12-10 Sat 16:34]--[2016-12-10 Sat 17:50] =>  1:16
+
+We need some basic support for Equals and GetHashCode.
+
+Links:
+
+- [[http://www.loganfranken.com/blog/687/overriding-equals-in-c-part-1/][Overriding Equals in C# (Part 1)]]
+- [[http://www.loganfranken.com/blog/692/overriding-equals-in-c-part-2/][Overriding Equals in C# (Part 2)]]
+
+Problems with GetHashCode:
+
+: Types/AllBuiltins.cs(109,38): error CS0176: Static member `object.ReferenceEquals(object, object)' cannot be accessed with an instance reference, qualify it with a type name instead
+: Types/AllBuiltins.cs(111,38): error CS0176: Static member `object.ReferenceEquals(object, object)' cannot be accessed with an instance reference, qualify it with a type name instead
+
+We need a way to know if a type has a static GetHashCode or not.
+
+We also need a way to compare floating point numbers. In both cases
+the easiest thing is to use helpers.
 
 *** STARTED Language namespaces and modeling element locations        :story:
     CLOCK: [2016-12-09 Fri 10:19]--[2016-12-09 Fri 10:27] =>  0:08

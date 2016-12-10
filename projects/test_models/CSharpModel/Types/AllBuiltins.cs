@@ -53,5 +53,66 @@ namespace Dogen.TestModels.CSharpModel
         public string StringProperty { get; set; }
         public decimal DecimalProperty { get; set; }
         #endregion
-    };
+
+        #region Equality
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+
+            var value = obj as AllBuiltins;
+            if (value == null) return false;
+
+            return
+                ByteProperty == value.ByteProperty &&
+                ShortByteProperty == value.ShortByteProperty &&
+                IntProperty == value.IntProperty &&
+                UIntProperty == value.UIntProperty &&
+                ShortProperty == value.ShortProperty &&
+                UShortProperty == value.UShortProperty &&
+                LongProperty == value.LongProperty &&
+                ULongProperty == value.ULongProperty &&
+                FloatProperty == value.FloatProperty &&
+                DoubleProperty == value.DoubleProperty &&
+                CharProperty == value.CharProperty &&
+                BoolProperty == value.BoolProperty &&
+                ObjectProperty != null && value.ObjectProperty != null &&
+                ObjectProperty.Equals(value.ObjectProperty) &&
+                StringProperty != null && value.StringProperty != null &&
+                StringProperty.Equals(value.StringProperty) &&
+                DecimalProperty == value.DecimalProperty;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                // Choose large primes to avoid hashing collisions
+                const int HashingBase = (int) 2166136261;
+                const int HashingMultiplier = 16777619;
+
+                int hash = HashingBase;
+                hash = (hash * HashingMultiplier) ^ ByteProperty.GetHashCode();
+                hash = (hash * HashingMultiplier) ^ ShortByteProperty.GetHashCode();
+                hash = (hash * HashingMultiplier) ^ IntProperty.GetHashCode();
+                hash = (hash * HashingMultiplier) ^ UIntProperty.GetHashCode();
+                hash = (hash * HashingMultiplier) ^ ShortProperty.GetHashCode();
+                hash = (hash * HashingMultiplier) ^ UShortProperty.GetHashCode();
+                hash = (hash * HashingMultiplier) ^ LongProperty.GetHashCode();
+                hash = (hash * HashingMultiplier) ^ ULongProperty.GetHashCode();
+                hash = (hash * HashingMultiplier) ^ FloatProperty.GetHashCode();
+                hash = (hash * HashingMultiplier) ^ DoubleProperty.GetHashCode();
+                hash = (hash * HashingMultiplier) ^ CharProperty.GetHashCode();
+                hash = (hash * HashingMultiplier) ^ BoolProperty.GetHashCode();
+                hash = (hash * HashingMultiplier) ^
+                    (!ObjectProperty.ReferenceEquals(null, ObjectProperty) ? ObjectProperty.GetHashCode() : 0);
+                hash = (hash * HashingMultiplier) ^
+                    (!StringProperty.ReferenceEquals(null, StringProperty) ? StringProperty.GetHashCode() : 0);
+                hash = (hash * HashingMultiplier) ^ DecimalProperty.GetHashCode();
+                return hash;
+            }
+       }
+       #endregion
+    }
 }

@@ -130,7 +130,7 @@
       "name": {
         "simple_name": "object"
       },
-      "meta_type": "primitive",
+      "meta_type": "object",
       "in_global_module": true,
       "annotation": {
         "quilt.csharp.helper.family": "Object"
@@ -140,7 +140,7 @@
       "name": {
         "simple_name": "string"
       },
-      "meta_type": "primitive",
+      "meta_type": "object",
       "in_global_module": true,
       "annotation": {
         "quilt.csharp.helper.family": "String"

@@ -60,10 +60,10 @@ class_formatter::format(const context& ctx, const yarn::element& e) const {
     class <#= sn #>
     {
 <#+
-           /*
-            * Getters and setters.
-            */
             if (!o.local_attributes().empty()) {
+               /*
+                * Properties
+                */
 #>
         #region Properties
 <#+
@@ -72,15 +72,81 @@ class_formatter::format(const context& ctx, const yarn::element& e) const {
 #>
         public <#= a.get_qualified_name(attr.parsed_type()) #> <#= attr.name().simple() #> { get; set; }
 <#+
-           }
+                }
 #>
         #endregion
+
 <#+
-       }
+               /*
+                * Equals
+                */
 #>
-    };
+        #region Equality
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+
+            var value = obj as <#= sn #>;
+            if (value == null) return false;
+
+            return
 <#+
+                dogen::formatters::sequence_formatter sf(o.local_attributes().size());
+                sf.element_separator("");
+                sf.postfix_configuration().not_last(" &&");
+                sf.postfix_configuration().last(";");
+                for (const auto& attr : o.local_attributes()) {
+                    if (attr.parsed_type().is_current_simple_type()) {
+#>
+                <#= attr.name().simple() #> == value.<#= attr.name().simple() #><#= sf.postfix() #>
+<#+
+                    } else {
+#>
+                <#= attr.name().simple() #> != null && value.<#= attr.name().simple() #> != null &&
+                <#= attr.name().simple() #>.Equals(value.<#= attr.name().simple() #>)<#= sf.postfix() #>
+<#+
+                    }
+                    sf.next();
+                }
+#>
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                // Choose large primes to avoid hashing collisions
+                const int HashingBase = (int) 2166136261;
+                const int HashingMultiplier = 16777619;
+
+                int hash = HashingBase;
+<#+
+                for (const auto& attr : o.local_attributes()) {
+                    if (attr.parsed_type().is_current_simple_type()) {
+#>
+                hash = (hash * HashingMultiplier) ^ <#= attr.name().simple() #>.GetHashCode();
+<#+
+                    } else {
+#>
+                hash = (hash * HashingMultiplier) ^
+                    (!<#= attr.name().simple() #>.ReferenceEquals(null, <#= attr.name().simple() #>) ? <#= attr.name().simple() #>.GetHashCode() : 0);
+<#+
+                    }
+                    sf.next();
+                }
+#>
+                return hash;
+            }
+       }
+       #endregion
+<#+
+            }
+#>
+    }
+<#+
+        } // snf
     } // sbf
     return a.make_artefact();
 }
