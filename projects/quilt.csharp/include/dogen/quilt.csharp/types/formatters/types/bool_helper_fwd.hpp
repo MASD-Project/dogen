@@ -18,13 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.csharp/types/formatters/helper_formatter_interface.hpp"
+#ifndef DOGEN_QUILT_CSHARP_TYPES_FORMATTERS_TYPES_BOOL_HELPER_FWD_HPP
+#define DOGEN_QUILT_CSHARP_TYPES_FORMATTERS_TYPES_BOOL_HELPER_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace quilt {
 namespace csharp {
 namespace formatters {
+namespace types {
 
-helper_formatter_interface::~helper_formatter_interface() noexcept { }
+class bool_helper;
 
-} } } }
+} } } } }
+
+#endif

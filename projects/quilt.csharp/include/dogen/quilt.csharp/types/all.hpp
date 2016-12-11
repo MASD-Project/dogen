@@ -64,6 +64,7 @@
 #include "dogen/quilt.csharp/types/formattables/expansion_error.hpp"
 #include "dogen/quilt.csharp/types/formattables/helper_expander.hpp"
 #include "dogen/quilt.csharp/types/formatters/io/enum_formatter.hpp"
+#include "dogen/quilt.csharp/types/formatters/types/bool_helper.hpp"
 #include "dogen/quilt.csharp/types/formatters/types/initializer.hpp"
 #include "dogen/quilt.csharp/types/fabric/visual_studio_solution.hpp"
 #include "dogen/quilt.csharp/types/formatters/io/class_formatter.hpp"

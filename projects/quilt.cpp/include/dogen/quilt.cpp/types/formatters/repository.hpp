@@ -30,8 +30,8 @@
 #include <typeindex>
 #include <forward_list>
 #include <unordered_map>
-#include "dogen/quilt.cpp/types/formatters/artefact_formatter_interface_fwd.hpp"
 #include "dogen/quilt.cpp/types/formatters/helper_formatter_interface_fwd.hpp"
+#include "dogen/quilt.cpp/types/formatters/artefact_formatter_interface_fwd.hpp"
 
 namespace dogen {
 namespace quilt {

@@ -25,11 +25,13 @@
 #pragma once
 #endif
 
+#include <list>
 #include <string>
 #include <memory>
 #include <typeindex>
 #include <forward_list>
 #include <unordered_map>
+#include "dogen/quilt.csharp/types/formatters/helper_formatter_interface_fwd.hpp"
 #include "dogen/quilt.csharp/types/formatters/artefact_formatter_interface_fwd.hpp"
 
 namespace dogen {
@@ -67,6 +69,16 @@ private:
     std::forward_list<std::shared_ptr<artefact_formatter_interface>>&
     stock_artefact_formatters();
 
+    /**
+     * @brief Returns all available helpers.
+     */
+    std::unordered_map<
+        std::string,
+        std::unordered_map<std::string,
+                           std::list<
+                               std::shared_ptr<helper_formatter_interface>>>>&
+    helper_formatters();
+
 public:
     /**
      * @brief Returns all available file formatters by type indx.
@@ -89,6 +101,16 @@ public:
     const std::forward_list<std::shared_ptr<artefact_formatter_interface>>&
     stock_artefact_formatters() const;
 
+    /**
+     * @brief Returns all available helpers.
+     */
+    const std::unordered_map<
+        std::string,
+        std::unordered_map<std::string,
+                           std::list<
+                               std::shared_ptr<helper_formatter_interface>>>>&
+    helper_formatters() const;
+
 private:
     std::unordered_map<
         std::type_index,
@@ -99,6 +121,12 @@ private:
     stock_artefact_formatters_by_archetype_;
     std::forward_list<std::shared_ptr<artefact_formatter_interface>>
     stock_artefact_formatters_;
+    std::unordered_map<
+        std::string,
+        std::unordered_map<std::string,
+                           std::list<
+                               std::shared_ptr<helper_formatter_interface>>>>
+    helper_formatters_;
 };
 
 } } } }

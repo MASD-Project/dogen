@@ -1,0 +1,95 @@
+{
+  "name": "dogen.csharp_helper_formatter",
+  "labels": [
+      "C# Helper Formatter"
+  ],
+  "parents": [
+    "dogen.handcrafted"
+  ],
+  "scope": "root_module",
+  "templates": [
+    {
+      "name": {
+        "simple": "parent",
+        "qualified": "yarn.generalization.parent"
+      },
+      "archetype_location": {
+        "family": "yarn"
+      },
+      "template_kind": "instance",
+      "untyped_value": [
+        "formatters::helper_formatter_interface"
+      ]
+    },
+    {
+      "name": {
+        "simple": "formatting_style",
+        "qualified": "quilt.cpp.types.class_header.formatting_style"
+      },
+      "archetype_location": {
+        "family": "quilt",
+        "kernel": "quilt.cpp"
+      },
+      "template_kind": "instance",
+      "untyped_value": [
+        "wale"
+      ]
+    },
+    {
+      "name": {
+        "simple": "formatting_style",
+        "qualified": "quilt.cpp.types.class_header.formatting_input"
+      },
+      "archetype_location": {
+        "family": "quilt",
+        "kernel": "quilt.cpp"
+      },
+      "template_kind": "instance",
+      "untyped_value": [
+        "csharp_helper_formatter_header.wale"
+      ]
+    },
+    {
+      "name": {
+        "simple": "overwrite",
+        "qualified": "quilt.cpp.types.class_header.overwrite"
+      },
+      "archetype_location": {
+        "family": "quilt",
+        "kernel": "quilt.cpp"
+      },
+      "template_kind": "instance",
+      "untyped_value": [
+        "true"
+      ]
+    },
+    {
+      "name": {
+        "simple": "formatting_style",
+        "qualified": "quilt.cpp.types.class_implementation.formatting_style"
+      },
+      "archetype_location": {
+        "family": "quilt",
+        "kernel": "quilt.cpp"
+      },
+      "template_kind": "instance",
+      "untyped_value": [
+        "stitch"
+      ]
+    },
+    {
+      "name": {
+        "simple": "overwrite",
+        "qualified": "quilt.cpp.types.class_implementation.overwrite"
+      },
+      "archetype_location": {
+        "family": "quilt",
+        "kernel": "quilt.cpp"
+      },
+      "template_kind": "instance",
+      "untyped_value": [
+        "true"
+      ]
+    }
+  ]
+}

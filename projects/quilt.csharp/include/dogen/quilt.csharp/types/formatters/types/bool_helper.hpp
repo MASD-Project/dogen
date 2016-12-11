@@ -18,13 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_QUILT_CSHARP_TYPES_FORMATTERS_TYPES_BOOL_HELPER_HPP
+#define DOGEN_QUILT_CSHARP_TYPES_FORMATTERS_TYPES_BOOL_HELPER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <algorithm>
 #include "dogen/quilt.csharp/types/formatters/helper_formatter_interface.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace csharp {
 namespace formatters {
+namespace types {
 
-helper_formatter_interface::~helper_formatter_interface() noexcept { }
+class bool_helper : public helper_formatter_interface {
+public:
+    std::string formatter_name() const override;
+    std::string family() const override;
+    std::list<std::string> owning_formatters() const override;
+    std::list<std::string> owning_facets() const override;
+    std::string helper_name() const override;
+    void format(assistant& a,
+        const formattables::helper_properties& hc) const override;
+};
 
-} } } }
+} } } } }
+
+#endif

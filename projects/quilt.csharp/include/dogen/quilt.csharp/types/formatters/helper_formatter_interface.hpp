@@ -25,27 +25,32 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <string>
+#include "dogen/yarn/types/name_tree.hpp"
+#include "dogen/quilt.csharp/types/formatters/assistant_fwd.hpp"
+#include "dogen/quilt.csharp/types/formattables/helper_properties_fwd.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace csharp {
 namespace formatters {
 
-class helper_formatter_interface final {
+class helper_formatter_interface {
 public:
     helper_formatter_interface() = default;
-    helper_formatter_interface(const helper_formatter_interface&) = default;
+    helper_formatter_interface(const helper_formatter_interface&) = delete;
     helper_formatter_interface(helper_formatter_interface&&) = default;
-    ~helper_formatter_interface() = default;
-    helper_formatter_interface& operator=(const helper_formatter_interface&) = default;
+    virtual ~helper_formatter_interface() noexcept = 0;
 
 public:
-    bool operator==(const helper_formatter_interface& rhs) const;
-    bool operator!=(const helper_formatter_interface& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    virtual std::string formatter_name() const = 0;
+    virtual std::string family() const = 0;
+    virtual std::list<std::string> owning_formatters() const = 0;
+    virtual std::list<std::string> owning_facets() const = 0;
+    virtual std::string helper_name() const = 0;
+    virtual void format(assistant& a,
+        const formattables::helper_properties& hp) const = 0;
 };
 
 } } } }

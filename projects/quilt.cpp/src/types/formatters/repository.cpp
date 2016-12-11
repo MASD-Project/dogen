@@ -44,20 +44,20 @@ repository::stock_artefact_formatters() {
     return stock_artefact_formatters_;
 }
 
-std::unordered_map<
-    std::string, std::unordered_map<
-                     std::string,
-                     std::list<
-                         std::shared_ptr<helper_formatter_interface>>>>&
-repository::helper_formatters() {
-    return helper_formatters_;
-}
-
 const std::unordered_map<
     std::type_index,
     std::forward_list<std::shared_ptr<artefact_formatter_interface>>>&
 repository::stock_artefact_formatters_by_type_index() const {
     return stock_artefact_formatters_by_type_index_;
+}
+
+std::unordered_map<
+    std::string, std::unordered_map<
+                     std::string,
+                     std::list<
+                         std::shared_ptr<helper_formatter_interface>>>>&
+    repository::helper_formatters() {
+    return helper_formatters_;
 }
 
 const std::unordered_map<std::string,

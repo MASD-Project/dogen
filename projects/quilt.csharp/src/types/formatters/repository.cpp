@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.csharp/types/formatters/repository.hpp"
 #include "dogen/quilt.csharp/types/formatters/artefact_formatter_interface.hpp"
+#include "dogen/quilt.csharp/types/formatters/repository.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -43,6 +43,15 @@ repository::stock_artefact_formatters() {
     return stock_artefact_formatters_;
 }
 
+std::unordered_map<
+    std::string, std::unordered_map<
+                     std::string,
+                     std::list<
+                         std::shared_ptr<helper_formatter_interface>>>>&
+    repository::helper_formatters() {
+    return helper_formatters_;
+}
+
 const std::unordered_map<
     std::type_index,
     std::forward_list<std::shared_ptr<artefact_formatter_interface>>>&
@@ -59,6 +68,15 @@ repository::stock_artefact_formatters_by_archetype() const {
 const std::forward_list<std::shared_ptr<artefact_formatter_interface>>&
 repository::stock_artefact_formatters() const {
     return stock_artefact_formatters_;
+}
+
+const std::unordered_map<
+    std::string, std::unordered_map<
+                     std::string,
+                     std::list<
+                         std::shared_ptr<helper_formatter_interface>>>>&
+    repository::helper_formatters() const {
+    return helper_formatters_;
 }
 
 } } } }
