@@ -21,6 +21,7 @@
 #include "dogen/yarn/hash/name_hash.hpp"
 #include "dogen/quilt.csharp/hash/formattables/model_hash.hpp"
 #include "dogen/quilt.csharp/hash/formattables/formattable_hash.hpp"
+#include "dogen/quilt.csharp/hash/formattables/aspect_properties_hash.hpp"
 
 namespace {
 
@@ -53,6 +54,15 @@ inline std::size_t hash_std_list_boost_filesystem_path(const std::list<boost::fi
     return seed;
 }
 
+inline std::size_t hash_std_unordered_map_std_string_dogen_quilt_csharp_formattables_aspect_properties(const std::unordered_map<std::string, dogen::quilt::csharp::formattables::aspect_properties>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, i.second);
+    }
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -66,6 +76,7 @@ std::size_t model_hasher::hash(const model& v) {
     combine(seed, v.name());
     combine(seed, hash_std_unordered_map_std_string_dogen_quilt_csharp_formattables_formattable(v.formattables()));
     combine(seed, hash_std_list_boost_filesystem_path(v.project_items()));
+    combine(seed, hash_std_unordered_map_std_string_dogen_quilt_csharp_formattables_aspect_properties(v.aspect_properties()));
 
     return seed;
 }

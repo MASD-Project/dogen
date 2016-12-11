@@ -34,6 +34,7 @@
 #include "dogen/yarn/serialization/name_ser.hpp"
 #include "dogen/quilt.csharp/serialization/formattables/model_ser.hpp"
 #include "dogen/quilt.csharp/serialization/formattables/formattable_ser.hpp"
+#include "dogen/quilt.csharp/serialization/formattables/aspect_properties_ser.hpp"
 
 namespace boost {
 namespace serialization {
@@ -68,6 +69,7 @@ void save(Archive& ar,
     ar << make_nvp("name", v.name_);
     ar << make_nvp("formattables", v.formattables_);
     ar << make_nvp("project_items", v.project_items_);
+    ar << make_nvp("aspect_properties", v.aspect_properties_);
 }
 
 template<typename Archive>
@@ -77,6 +79,7 @@ void load(Archive& ar,
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("formattables", v.formattables_);
     ar >> make_nvp("project_items", v.project_items_);
+    ar >> make_nvp("aspect_properties", v.aspect_properties_);
 }
 
 } }

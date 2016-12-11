@@ -28,22 +28,26 @@ namespace formattables {
 model::model(
     const dogen::yarn::name& name,
     const std::unordered_map<std::string, dogen::quilt::csharp::formattables::formattable>& formattables,
-    const std::list<boost::filesystem::path>& project_items)
+    const std::list<boost::filesystem::path>& project_items,
+    const std::unordered_map<std::string, dogen::quilt::csharp::formattables::aspect_properties>& aspect_properties)
     : name_(name),
       formattables_(formattables),
-      project_items_(project_items) { }
+      project_items_(project_items),
+      aspect_properties_(aspect_properties) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
     swap(formattables_, other.formattables_);
     swap(project_items_, other.project_items_);
+    swap(aspect_properties_, other.aspect_properties_);
 }
 
 bool model::operator==(const model& rhs) const {
     return name_ == rhs.name_ &&
         formattables_ == rhs.formattables_ &&
-        project_items_ == rhs.project_items_;
+        project_items_ == rhs.project_items_ &&
+        aspect_properties_ == rhs.aspect_properties_;
 }
 
 model& model::operator=(model other) {
@@ -98,6 +102,22 @@ void model::project_items(const std::list<boost::filesystem::path>& v) {
 
 void model::project_items(const std::list<boost::filesystem::path>&& v) {
     project_items_ = std::move(v);
+}
+
+const std::unordered_map<std::string, dogen::quilt::csharp::formattables::aspect_properties>& model::aspect_properties() const {
+    return aspect_properties_;
+}
+
+std::unordered_map<std::string, dogen::quilt::csharp::formattables::aspect_properties>& model::aspect_properties() {
+    return aspect_properties_;
+}
+
+void model::aspect_properties(const std::unordered_map<std::string, dogen::quilt::csharp::formattables::aspect_properties>& v) {
+    aspect_properties_ = v;
+}
+
+void model::aspect_properties(const std::unordered_map<std::string, dogen::quilt::csharp::formattables::aspect_properties>&& v) {
+    aspect_properties_ = std::move(v);
 }
 
 } } } }

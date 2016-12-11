@@ -31,6 +31,7 @@
 #include "dogen/quilt.csharp/io/formattables/formattable_io.hpp"
 #include "dogen/quilt.csharp/io/fabric/visual_studio_project_io.hpp"
 #include "dogen/quilt.csharp/io/fabric/visual_studio_solution_io.hpp"
+#include "dogen/quilt.csharp/io/formattables/aspect_properties_io.hpp"
 #include "dogen/quilt.csharp/io/formattables/element_properties_io.hpp"
 #include "dogen/quilt.csharp/io/formattables/artefact_properties_io.hpp"
 #include "dogen/quilt.csharp/io/fabric/visual_studio_configuration_io.hpp"

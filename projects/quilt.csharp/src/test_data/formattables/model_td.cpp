@@ -22,6 +22,7 @@
 #include "dogen/yarn/test_data/name_td.hpp"
 #include "dogen/quilt.csharp/test_data/formattables/model_td.hpp"
 #include "dogen/quilt.csharp/test_data/formattables/formattable_td.hpp"
+#include "dogen/quilt.csharp/test_data/formattables/aspect_properties_td.hpp"
 
 namespace {
 
@@ -64,6 +65,19 @@ std::list<boost::filesystem::path> create_std_list_boost_filesystem_path(unsigne
     return r;
 }
 
+dogen::quilt::csharp::formattables::aspect_properties
+create_dogen_quilt_csharp_formattables_aspect_properties(const unsigned int position) {
+    return dogen::quilt::csharp::formattables::aspect_properties_generator::create(position);
+}
+
+std::unordered_map<std::string, dogen::quilt::csharp::formattables::aspect_properties> create_std_unordered_map_std_string_dogen_quilt_csharp_formattables_aspect_properties(unsigned int position) {
+    std::unordered_map<std::string, dogen::quilt::csharp::formattables::aspect_properties> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_quilt_csharp_formattables_aspect_properties(position + i)));
+    }
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -78,6 +92,7 @@ populate(const unsigned int position, result_type& v) {
     v.name(create_dogen_yarn_name(position + 0));
     v.formattables(create_std_unordered_map_std_string_dogen_quilt_csharp_formattables_formattable(position + 1));
     v.project_items(create_std_list_boost_filesystem_path(position + 2));
+    v.aspect_properties(create_std_unordered_map_std_string_dogen_quilt_csharp_formattables_aspect_properties(position + 3));
 }
 
 model_generator::result_type

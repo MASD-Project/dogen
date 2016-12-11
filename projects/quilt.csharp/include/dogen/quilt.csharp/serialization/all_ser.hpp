@@ -30,6 +30,7 @@
 #include "dogen/quilt.csharp/serialization/formattables/formattable_ser.hpp"
 #include "dogen/quilt.csharp/serialization/fabric/visual_studio_project_ser.hpp"
 #include "dogen/quilt.csharp/serialization/fabric/visual_studio_solution_ser.hpp"
+#include "dogen/quilt.csharp/serialization/formattables/aspect_properties_ser.hpp"
 #include "dogen/quilt.csharp/serialization/formattables/element_properties_ser.hpp"
 #include "dogen/quilt.csharp/serialization/formattables/artefact_properties_ser.hpp"
 #include "dogen/quilt.csharp/serialization/fabric/visual_studio_configuration_ser.hpp"

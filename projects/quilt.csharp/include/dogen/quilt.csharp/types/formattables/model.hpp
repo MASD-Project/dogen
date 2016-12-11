@@ -32,6 +32,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/quilt.csharp/types/formattables/formattable.hpp"
+#include "dogen/quilt.csharp/types/formattables/aspect_properties.hpp"
 #include "dogen/quilt.csharp/serialization/formattables/model_fwd_ser.hpp"
 
 namespace dogen {
@@ -50,7 +51,8 @@ public:
     model(
         const dogen::yarn::name& name,
         const std::unordered_map<std::string, dogen::quilt::csharp::formattables::formattable>& formattables,
-        const std::list<boost::filesystem::path>& project_items);
+        const std::list<boost::filesystem::path>& project_items,
+        const std::unordered_map<std::string, dogen::quilt::csharp::formattables::aspect_properties>& aspect_properties);
 
 private:
     template<typename Archive>
@@ -75,6 +77,11 @@ public:
     void project_items(const std::list<boost::filesystem::path>& v);
     void project_items(const std::list<boost::filesystem::path>&& v);
 
+    const std::unordered_map<std::string, dogen::quilt::csharp::formattables::aspect_properties>& aspect_properties() const;
+    std::unordered_map<std::string, dogen::quilt::csharp::formattables::aspect_properties>& aspect_properties();
+    void aspect_properties(const std::unordered_map<std::string, dogen::quilt::csharp::formattables::aspect_properties>& v);
+    void aspect_properties(const std::unordered_map<std::string, dogen::quilt::csharp::formattables::aspect_properties>&& v);
+
 public:
     bool operator==(const model& rhs) const;
     bool operator!=(const model& rhs) const {
@@ -89,6 +96,7 @@ private:
     dogen::yarn::name name_;
     std::unordered_map<std::string, dogen::quilt::csharp::formattables::formattable> formattables_;
     std::list<boost::filesystem::path> project_items_;
+    std::unordered_map<std::string, dogen::quilt::csharp::formattables::aspect_properties> aspect_properties_;
 };
 
 } } } }

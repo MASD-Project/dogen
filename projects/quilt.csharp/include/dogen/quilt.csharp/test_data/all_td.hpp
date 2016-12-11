@@ -30,6 +30,7 @@
 #include "dogen/quilt.csharp/test_data/formattables/formattable_td.hpp"
 #include "dogen/quilt.csharp/test_data/fabric/visual_studio_project_td.hpp"
 #include "dogen/quilt.csharp/test_data/fabric/visual_studio_solution_td.hpp"
+#include "dogen/quilt.csharp/test_data/formattables/aspect_properties_td.hpp"
 #include "dogen/quilt.csharp/test_data/formattables/element_properties_td.hpp"
 #include "dogen/quilt.csharp/test_data/formattables/artefact_properties_td.hpp"
 #include "dogen/quilt.csharp/test_data/fabric/visual_studio_configuration_td.hpp"
