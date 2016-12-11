@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <unordered_set>
 #include <unordered_map>
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/quilt.csharp/types/formatters/repository.hpp"
@@ -47,6 +48,18 @@ private:
 
     helper_configuration
     make_configuration(const type_group& tg, const model& fm) const;
+
+public:
+    typedef std::unordered_map<std::string, std::unordered_set<std::string>>
+    facets_for_family_type;
+
+private:
+    facets_for_family_type
+        facets_for_family(const formatters::repository& frp) const;
+
+    void populate_helper_properties(
+        const helper_configuration& cfg, const formatters::repository& frp,
+        std::unordered_map<std::string, formattable>& formattables) const;
 
 public:
     void expand(const annotations::type_repository& atrp,
