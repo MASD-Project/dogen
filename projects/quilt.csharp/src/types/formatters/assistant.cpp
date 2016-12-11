@@ -36,6 +36,7 @@ const bool use_documentation_tool_markup(true);
 const bool last_line_is_blank(true);
 const bool documenting_previous_identifier(true);
 
+const std::string static_reference_equals("object");
 const std::string artefact_properties_missing(
     "Could not find formatter configuration for formatter: ");
 const std::string qn_missing("Could not find qualified name for language.");
@@ -129,7 +130,7 @@ std::string assistant::reference_equals(const yarn::attribute& attr) const {
         false : i->second.requires_static_reference_equals());
 
     if (requires_static_reference_equals)
-        return n.simple(); // FIXME: qualified
+        return static_reference_equals;
 
     return attr.name().simple();
 }
