@@ -35,7 +35,7 @@ unsigned char create_unsigned_char(const unsigned int position) {
 }
 
 int create_int(const unsigned int position) {
-    return position;
+    return static_cast<int>(position);
 }
 
 unsigned int create_unsigned_int(const unsigned int position) {

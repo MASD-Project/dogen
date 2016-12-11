@@ -74,10 +74,6 @@ format(assistant& a, const formattables::helper_properties& hp) const {
     const auto ident(d.name_tree_identifiable());
 a.stream() << std::endl;
 a.stream() << qn << " create_" << ident << "(const unsigned int position) {" << std::endl;
-    // FIXME: hack, and not even a good one! position is unsigned
-    if (qn == "int")
-a.stream() << "    return position;" << std::endl;
-    else
 a.stream() << "    return static_cast<" << qn << ">(position);" << std::endl;
 a.stream() << "}" << std::endl;
 }

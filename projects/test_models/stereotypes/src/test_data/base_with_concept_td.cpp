@@ -25,7 +25,7 @@
 namespace {
 
 int create_int(const unsigned int position) {
-    return position;
+    return static_cast<int>(position);
 }
 
 std::string create_std_string(const unsigned int position) {

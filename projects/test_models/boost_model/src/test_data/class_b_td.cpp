@@ -46,7 +46,7 @@ std::vector<boost::shared_ptr<dogen::test_models::boost_model::class_a> > create
 }
 
 int create_int(const unsigned int position) {
-    return position;
+    return static_cast<int>(position);
 }
 
 std::unordered_map<int, boost::shared_ptr<dogen::test_models::boost_model::class_a> > create_std_unordered_map_int_boost_shared_ptr_dogen_test_models_boost_model_class_a(unsigned int position) {

@@ -24,7 +24,7 @@
 namespace {
 
 int create_int(const unsigned int position) {
-    return position;
+    return static_cast<int>(position);
 }
 
 dogen::test_models::std_model::class_a

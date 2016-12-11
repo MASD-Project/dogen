@@ -25,7 +25,7 @@
 namespace {
 
 int create_int(const unsigned int position) {
-    return position;
+    return static_cast<int>(position);
 }
 
 double create_double(const unsigned int position) {

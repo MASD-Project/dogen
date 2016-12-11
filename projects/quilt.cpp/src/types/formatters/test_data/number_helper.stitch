@@ -19,14 +19,6 @@ format(assistant& a, const formattables::helper_properties& hp) const {
 #>
 
 <#= qn #> create_<#= ident #>(const unsigned int position) {
-<#+
-    // FIXME: hack, and not even a good one! position is unsigned
-    if (qn == "int")
-#>
-    return position;
-<#+
-    else
-#>
     return static_cast<<#= qn #>>(position);
 }
 <#+
