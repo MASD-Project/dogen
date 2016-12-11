@@ -15,6 +15,20 @@
   },
   {
     "name": {
+      "simple": "requires_static_reference_equals",
+      "qualified": "quilt.csharp.requires_static_reference_equals"
+    },
+    "archetype_location": {
+      "family": "quilt",
+      "kernel": "quilt.csharp"
+    },
+    "value_type": "boolean",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": false
+  },
+  {
+    "name": {
       "simple": "project_solution_guid",
       "qualified": "quilt.csharp.visual_studio.project_solution_guid"
     },

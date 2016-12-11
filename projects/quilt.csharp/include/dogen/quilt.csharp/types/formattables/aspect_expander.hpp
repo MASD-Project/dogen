@@ -25,7 +25,10 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <boost/filesystem/path.hpp>
+#include "dogen/annotations/types/type.hpp"
+#include "dogen/annotations/types/type_repository.hpp"
+#include "dogen/quilt.csharp/types/formattables/model.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -34,18 +37,7 @@ namespace formattables {
 
 class aspect_expander final {
 public:
-    aspect_expander() = default;
-    aspect_expander(const aspect_expander&) = default;
-    aspect_expander(aspect_expander&&) = default;
-    ~aspect_expander() = default;
-    aspect_expander& operator=(const aspect_expander&) = default;
-
-public:
-    bool operator==(const aspect_expander& rhs) const;
-    bool operator!=(const aspect_expander& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    void expand(const annotations::type_repository& atrp, model& fm) const;
 };
 
 } } } }

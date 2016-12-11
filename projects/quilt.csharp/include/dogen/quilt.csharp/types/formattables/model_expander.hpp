@@ -42,9 +42,15 @@ private:
     void expand_decoration(
         const dogen::formatters::decoration_properties_factory& dpf,
         model& fm) const;
+
     void expand_file_paths(const formatters::repository& frp,
         const locator& l, model& fm) const;
+
+    void expand_aspect_properties(
+        const annotations::type_repository& atrp, model& fm) const;
+
     void reduce(model& fm) const;
+
     void expand_project_items(model& fm) const;
 
 public:

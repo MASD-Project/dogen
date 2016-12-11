@@ -59,4 +59,9 @@ std::string traits::kernel_directory_name() {
     return r;
 }
 
+std::string traits::requires_static_reference_equals() {
+    static std::string r("quilt.csharp.requires_static_reference_equals");
+    return r;
+}
+
 } } }

@@ -70,6 +70,12 @@ struct traits {
      * @brief Post-fix to apply to file names.
      */
     static std::string postfix();
+
+    /**
+     * @brief If true, the type requires a static method for reference
+     * equals.
+     */
+    static std::string requires_static_reference_equals();
 };
 
 } } }

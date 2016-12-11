@@ -20,6 +20,7 @@
  */
 #include "dogen/quilt.csharp/types/formattables/project_items_expander.hpp"
 #include "dogen/quilt.csharp/types/formattables/decoration_expander.hpp"
+#include "dogen/quilt.csharp/types/formattables/aspect_expander.hpp"
 #include "dogen/quilt.csharp/types/formattables/reducer.hpp"
 #include "dogen/quilt.csharp/types/formattables/file_path_expander.hpp"
 #include "dogen/quilt.csharp/types/formattables/model_expander.hpp"
@@ -42,6 +43,13 @@ void model_expander::expand_file_paths(
     ex.expand(frp, l, fm);
 }
 
+void model_expander::expand_aspect_properties(
+    const annotations::type_repository& atrp, model& fm) const {
+
+    aspect_expander ex;
+    ex.expand(atrp, fm);
+}
+
 void model_expander::reduce(model& fm) const {
     reducer rd;
     rd.reduce(fm);
@@ -53,12 +61,19 @@ void model_expander::expand_project_items(model& fm) const {
 }
 
 void model_expander::expand(
-    const annotations::type_repository& /*atrp*/,
+    const annotations::type_repository& atrp,
     const annotations::annotation& /*ra*/,
     const dogen::formatters::decoration_properties_factory& dpf,
     const formatters::repository& frp, const locator& l, model& fm) const {
 
+    /*
+     * We must expand the aspect properties before reduction because
+     * we need to know about properties from non-target elements.
+     */
+    expand_aspect_properties(atrp, fm);
+
     reduce(fm);
+
     expand_decoration(dpf, fm);
     expand_file_paths(frp, l, fm);
     expand_project_items(fm);
