@@ -27,12 +27,8 @@
 
 #include <unordered_map>
 #include "dogen/annotations/types/type_repository.hpp"
-#include "dogen/yarn/types/name_tree.hpp"
-#include "dogen/yarn/types/attribute.hpp"
-#include "dogen/quilt.cpp/types/formattables/streaming_properties.hpp"
 #include "dogen/quilt.cpp/types/formatters/repository.hpp"
 #include "dogen/quilt.cpp/types/formattables/helper_configuration.hpp"
-#include "dogen/quilt.cpp/types/formattables/helper_properties.hpp"
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
 #include "dogen/quilt.cpp/types/formattables/model.hpp"
 
@@ -49,42 +45,16 @@ private:
 
     type_group make_type_group(const annotations::type_repository& atrp) const;
 
-private:
     helper_configuration
     make_configuration(const type_group& tg, const model& fm) const;
 
-private:
+public:
     typedef std::unordered_map<std::string, std::unordered_set<std::string>>
     facets_for_family_type;
 
+private:
     facets_for_family_type
     facets_for_family(const formatters::repository& frp) const;
-
-    bool requires_hashing_helper(const facets_for_family_type& fff,
-        const std::string& family) const;
-
-    std::string helper_family_for_id(const helper_configuration& cfg,
-        const std::string& id) const;
-
-    boost::optional<streaming_properties> streaming_properties_for_id(
-        const helper_configuration& cfg, const std::string& id) const;
-
-    std::list<std::string> namespace_list(const yarn::name& n) const;
-
-private:
-    boost::optional<helper_descriptor>
-    walk_name_tree(const helper_configuration& cfg,
-        const facets_for_family_type& fff,
-        const bool in_inheritance_relationship,
-        const bool inherit_opaqueness_from_parent, const yarn::name_tree& nt,
-        std::unordered_set<std::string>& done,
-        std::list<helper_properties>& hps) const;
-
-    std::list<helper_properties>
-    compute_helper_properties(const helper_configuration& cfg,
-        const facets_for_family_type& fff,
-        const bool in_inheritance_relationship,
-        const std::list<yarn::attribute>& attrs) const;
 
     void populate_helper_properties(const helper_configuration& cfg,
         const formatters::repository& frp,

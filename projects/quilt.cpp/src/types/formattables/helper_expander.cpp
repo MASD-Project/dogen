@@ -24,9 +24,13 @@
 #include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/yarn/types/element.hpp"
+#include "dogen/yarn/types/name_tree.hpp"
+#include "dogen/yarn/types/attribute.hpp"
 #include "dogen/yarn/io/languages_io.hpp"
 #include "dogen/yarn/types/name_flattener.hpp"
+#include "dogen/yarn/types/element_visitor.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
+#include "dogen/quilt.cpp/types/formattables/helper_properties.hpp"
 #include "dogen/quilt.cpp/io/formattables/helper_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/streaming_properties_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/helper_properties_io.hpp"
@@ -55,8 +59,14 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-template<typename Qualified>
-inline std::string get_qualified(const Qualified& iaq) {
+class helper_properties_generator : public yarn::element_visitor {
+public:
+    helper_properties_generator(const helper_configuration& cfg,
+        const helper_expander::facets_for_family_type& fff);
+
+private:
+    template<typename Qualified>
+    std::string get_qualified(const Qualified& iaq) const {
     const auto i(iaq.qualified().find(yarn::languages::cpp));
     if (i == iaq.qualified().end()) {
         BOOST_LOG_SEV(lg, error) << qn_missing << yarn::languages::cpp;
@@ -65,61 +75,58 @@ inline std::string get_qualified(const Qualified& iaq) {
     return i->second;
 }
 
-helper_expander::type_group helper_expander::
-make_type_group(const annotations::type_repository& atrp) const {
-    const annotations::type_repository_selector s(atrp);
-    const auto hf(traits::cpp::helper::family());
-    type_group r;
-    r.family = s.select_type_by_name(hf);
-    return r;
-}
+private:
+    bool requires_hashing_helper(
+        const helper_expander::facets_for_family_type& fff,
+        const std::string& family) const;
 
-helper_configuration helper_expander::
-make_configuration(const type_group& tg, const model& fm) const {
+    std::string helper_family_for_id(const helper_configuration& cfg,
+        const std::string& id) const;
 
-    BOOST_LOG_SEV(lg, debug) << "Started making the configuration.";
-    helper_configuration r;
-    r.streaming_properties(fm.streaming_properties());
+    boost::optional<streaming_properties> streaming_properties_for_id(
+        const helper_configuration& cfg, const std::string& id) const;
 
-    for (auto& pair : fm.formattables()) {
-        const auto id(pair.first);
-        BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
+    std::list<std::string> namespace_list(const yarn::name& n) const;
 
-        auto& formattable(pair.second);
-        auto& segment(*formattable.master_segment());
-        const annotations::entry_selector s(segment.annotation());
-        const auto fam(s.get_text_content_or_default(tg.family));
-        r.helper_families()[id] = fam;
-    }
+private:
+    boost::optional<helper_descriptor>
+    walk_name_tree(const helper_configuration& cfg,
+        const helper_expander::facets_for_family_type& fff,
+        const bool in_inheritance_relationship,
+        const bool inherit_opaqueness_from_parent, const yarn::name_tree& nt,
+        std::unordered_set<std::string>& done,
+        std::list<helper_properties>& hps) const;
 
-    BOOST_LOG_SEV(lg, debug) << "Finished making the configuration. Result:"
-                             << r;
+    std::list<helper_properties>
+    compute_helper_properties(const helper_configuration& cfg,
+        const helper_expander::facets_for_family_type& fff,
+        const bool in_inheritance_relationship,
+        const std::list<yarn::attribute>& attrs) const;
 
-    return r;
-}
-
-helper_expander::facets_for_family_type
-helper_expander::facets_for_family(const formatters::repository& frp) const {
-    BOOST_LOG_SEV(lg, debug) << "Started making facets for family.";
-
+public:
     /*
-     * Unpack the helper formatter container to generate a mapping of
-     * helper family to facet. The container has helpers by family, by
-     * owning file formatter.
+     * We are only interested in yarn objects; all other element
+     * types do not need helpers.
      */
-    facets_for_family_type r;
-    for (const auto& families_pair : frp.helper_formatters())
-        for (const auto& file_formatter_pair : families_pair.second)
-            for (const auto& hf : file_formatter_pair.second)
-                for (const auto& f : hf->owning_facets())
-                    r[hf->family()].insert(f);
+    using yarn::element_visitor::visit;
+    void visit(const yarn::object& o);
 
-    BOOST_LOG_SEV(lg, debug) << "Finished making facets for family. Result: "
-                             << r;
-    return r;
-}
+public:
+    const std::list<formattables::helper_properties>& result() const;
 
-bool helper_expander::requires_hashing_helper(const facets_for_family_type& fff,
+private:
+    const helper_configuration& helper_configuration_;
+    const helper_expander::facets_for_family_type& facets_for_family_;
+    std::list<formattables::helper_properties> result_;
+};
+
+helper_properties_generator::
+helper_properties_generator(const helper_configuration& cfg,
+    const helper_expander::facets_for_family_type& fff)
+    : helper_configuration_(cfg), facets_for_family_(fff) {}
+
+bool helper_properties_generator::
+requires_hashing_helper(const helper_expander::facets_for_family_type& fff,
     const std::string& family) const {
 
     /*
@@ -138,7 +145,7 @@ bool helper_expander::requires_hashing_helper(const facets_for_family_type& fff,
     return j != i->second.end();
 }
 
-std::string helper_expander::helper_family_for_id(
+std::string helper_properties_generator::helper_family_for_id(
     const helper_configuration& cfg, const std::string& id) const {
 
     const auto i(cfg.helper_families().find(id));
@@ -153,8 +160,8 @@ std::string helper_expander::helper_family_for_id(
 }
 
 boost::optional<formattables::streaming_properties>
-helper_expander::streaming_properties_for_id(const helper_configuration& cfg,
-    const std::string& id) const {
+helper_properties_generator::streaming_properties_for_id(
+    const helper_configuration& cfg, const std::string& id) const {
 
     const auto i(cfg.streaming_properties().find(id));
     if (i == cfg.streaming_properties().end())
@@ -166,13 +173,14 @@ helper_expander::streaming_properties_for_id(const helper_configuration& cfg,
 }
 
 std::list<std::string>
-helper_expander::namespace_list(const yarn::name& n) const {
+helper_properties_generator::namespace_list(const yarn::name& n) const {
     yarn::name_flattener nf;
     return nf.flatten(n);
 }
 
-boost::optional<helper_descriptor> helper_expander::walk_name_tree(
-    const helper_configuration& cfg, const facets_for_family_type& fff,
+boost::optional<helper_descriptor>
+helper_properties_generator::walk_name_tree(const helper_configuration& cfg,
+    const helper_expander::facets_for_family_type& fff,
     const bool in_inheritance_relationship,
     const bool inherit_opaqueness_from_parent, const yarn::name_tree& nt,
     std::unordered_set<std::string>& done,
@@ -271,8 +279,18 @@ boost::optional<helper_descriptor> helper_expander::walk_name_tree(
     return r;
 }
 
-std::list<helper_properties> helper_expander::compute_helper_properties(
-    const helper_configuration& cfg, const facets_for_family_type& fff,
+void helper_properties_generator::visit(const yarn::object& o) {
+    const auto& fff(facets_for_family_);
+    const auto& cfg(helper_configuration_);
+    const auto& attrs(o.local_attributes());
+    const auto iir(o.in_inheritance_relationship());
+    result_ = compute_helper_properties(cfg, fff, iir, attrs);
+}
+
+std::list<helper_properties>
+helper_properties_generator::
+compute_helper_properties(const helper_configuration& cfg,
+    const helper_expander::facets_for_family_type& fff,
     const bool in_inheritance_relationship,
     const std::list<yarn::attribute>& attrs) const {
 
@@ -298,6 +316,65 @@ std::list<helper_properties> helper_expander::compute_helper_properties(
         BOOST_LOG_SEV(lg, debug) << "No helper properties found.";
 
     BOOST_LOG_SEV(lg, debug) << "Finished making helper properties.";
+    return r;
+}
+
+const std::list<formattables::helper_properties>&
+helper_properties_generator::result() const {
+    return result_;
+}
+
+helper_expander::type_group helper_expander::
+make_type_group(const annotations::type_repository& atrp) const {
+    const annotations::type_repository_selector s(atrp);
+    const auto hf(traits::cpp::helper::family());
+    type_group r;
+    r.family = s.select_type_by_name(hf);
+    return r;
+}
+
+helper_configuration helper_expander::
+make_configuration(const type_group& tg, const model& fm) const {
+
+    BOOST_LOG_SEV(lg, debug) << "Started making the configuration.";
+    helper_configuration r;
+    r.streaming_properties(fm.streaming_properties());
+
+    for (auto& pair : fm.formattables()) {
+        const auto id(pair.first);
+        BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
+
+        auto& formattable(pair.second);
+        auto& segment(*formattable.master_segment());
+        const annotations::entry_selector s(segment.annotation());
+        const auto fam(s.get_text_content_or_default(tg.family));
+        r.helper_families()[id] = fam;
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Finished making the configuration. Result:"
+                             << r;
+
+    return r;
+}
+
+helper_expander::facets_for_family_type
+helper_expander::facets_for_family(const formatters::repository& frp) const {
+    BOOST_LOG_SEV(lg, debug) << "Started making facets for family.";
+
+    /*
+     * Unpack the helper formatter container to generate a mapping of
+     * helper family to facet. The container has helpers by family, by
+     * owning file formatter.
+     */
+    facets_for_family_type r;
+    for (const auto& families_pair : frp.helper_formatters())
+        for (const auto& file_formatter_pair : families_pair.second)
+            for (const auto& hf : file_formatter_pair.second)
+                for (const auto& f : hf->owning_facets())
+                    r[hf->family()].insert(f);
+
+    BOOST_LOG_SEV(lg, debug) << "Finished making facets for family. Result: "
+                             << r;
     return r;
 }
 
@@ -330,20 +407,12 @@ void helper_expander::populate_helper_properties(
             continue;
 
         /*
-         * We are only interested in yarn objects; all other element
-         * types do not need helpers.
+         * Update the helper properties, if any exist.
          */
-        const auto ptr(dynamic_cast<const yarn::object*>(segment.get()));
-        if (ptr == nullptr)
-            continue;
-
-        /*
-         * Update the helper properties.
-         */
-        const auto& attrs(ptr->local_attributes());
-        const auto iir(ptr->in_inheritance_relationship());
-        const auto hlp_props(compute_helper_properties(cfg, fff, iir, attrs));
-        eprops.helper_properties(hlp_props);
+        const auto& e(*segment);
+        helper_properties_generator g(cfg, fff);
+        e.accept(g);
+        eprops.helper_properties(g.result());
     }
 }
 
