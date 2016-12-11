@@ -41,6 +41,7 @@
 #include "dogen/quilt.cpp/io/formattables/helper_properties_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/element_properties_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/artefact_properties_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/helper_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/streaming_properties_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/locator_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formatters/inclusion_support_types_io.hpp"

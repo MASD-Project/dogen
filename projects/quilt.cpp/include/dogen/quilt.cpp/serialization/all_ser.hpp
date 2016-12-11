@@ -40,6 +40,7 @@
 #include "dogen/quilt.cpp/serialization/formattables/helper_properties_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/element_properties_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/artefact_properties_ser.hpp"
+#include "dogen/quilt.cpp/serialization/formattables/helper_configuration_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/streaming_properties_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/locator_configuration_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formatters/inclusion_support_types_ser.hpp"

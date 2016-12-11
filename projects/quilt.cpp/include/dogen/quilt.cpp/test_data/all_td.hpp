@@ -40,6 +40,7 @@
 #include "dogen/quilt.cpp/test_data/formattables/helper_properties_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/element_properties_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/artefact_properties_td.hpp"
+#include "dogen/quilt.cpp/test_data/formattables/helper_configuration_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/streaming_properties_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/locator_configuration_td.hpp"
 #include "dogen/quilt.cpp/test_data/formatters/inclusion_support_types_td.hpp"

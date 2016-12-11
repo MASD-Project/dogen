@@ -108,6 +108,7 @@
 #include "dogen/quilt.cpp/types/formatters/test_data/initializer.hpp"
 #include "dogen/quilt.cpp/types/formatters/test_data/pair_helper.hpp"
 #include "dogen/quilt.cpp/types/formatters/test_data/path_helper.hpp"
+#include "dogen/quilt.cpp/types/formattables/helper_configuration.hpp"
 #include "dogen/quilt.cpp/types/formattables/streaming_properties.hpp"
 #include "dogen/quilt.cpp/types/formattables/transformation_error.hpp"
 #include "dogen/quilt.cpp/types/formatters/test_data/ptime_helper.hpp"
