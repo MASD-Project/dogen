@@ -33,7 +33,7 @@ std::string create_std_string(const unsigned int position) {
 }
 
 int create_int(const unsigned int position) {
-    return position;
+    return static_cast<int>(position);
 }
 
 dogen::dia::connection
