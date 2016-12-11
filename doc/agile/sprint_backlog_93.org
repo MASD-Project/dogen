@@ -12,44 +12,45 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-12-10 Sat 21:49]
+#+CAPTION: Clock summary at [2016-12-11 Sun 11:43]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *62:49* |       |       | 100.0 |
+| *Total time*                                                                | *64:28* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 62:49   |       |       | 100.0 |
-| Active                                                                      |         | 62:49 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  2:48 |   4.5 |
+| Stories                                                                     | 64:28   |       |       | 100.0 |
+| Active                                                                      |         | 64:28 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  2:48 |   4.3 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  1:02 |   1.6 |
 | COMPLETED Update readme                                                     |         |       |  0:11 |   0.3 |
 | COMPLETED Test data generation for dates generates invalid dates            |         |       |  0:33 |   0.9 |
 | COMPLETED Handle missing stitch templates scenario                          |         |       |  1:04 |   1.7 |
-| COMPLETED Move project directory to output options                          |         |       |  1:10 |   1.9 |
-| COMPLETED Update the conceptual model to clarify backends and kernels       |         |       |  4:20 |   6.9 |
-| COMPLETED Detect knitter and disable code generation accordingly            |         |       |  1:15 |   2.0 |
-| COMPLETED Clean up kernel and backend confusion                             |         |       |  5:17 |   8.4 |
-| COMPLETED Add a "language" directory for each backend                       |         |       |  5:44 |   9.1 |
-| COMPLETED Split C++ profiles and templates from C#                          |         |       |  1:11 |   1.9 |
+| COMPLETED Move project directory to output options                          |         |       |  1:10 |   1.8 |
+| COMPLETED Update the conceptual model to clarify backends and kernels       |         |       |  4:20 |   6.7 |
+| COMPLETED Detect knitter and disable code generation accordingly            |         |       |  1:15 |   1.9 |
+| COMPLETED Clean up kernel and backend confusion                             |         |       |  5:17 |   8.2 |
+| COMPLETED Add a "language" directory for each backend                       |         |       |  5:44 |   8.9 |
+| COMPLETED Split C++ profiles and templates from C#                          |         |       |  1:11 |   1.8 |
 | COMPLETED Formatter registrar validation is not being called                |         |       |  0:20 |   0.5 |
 | COMPLETED Move decoration repository to quilt                               |         |       |  0:43 |   1.1 |
 | COMPLETED Move module id container into yarn                                |         |       |  0:24 |   0.6 |
-| COMPLETED Add basic infrastructure for C#                                   |         |       | 17:02 |  27.1 |
-| COMPLETED Add support for C#-style documentation                            |         |       |  1:57 |   3.1 |
-| COMPLETED Add support for visual studio projects and solutions              |         |       |  6:05 |   9.7 |
-| COMPLETED OSX build is borked                                               |         |       |  0:21 |   0.6 |
+| COMPLETED Add basic infrastructure for C#                                   |         |       | 17:02 |  26.4 |
+| COMPLETED Add support for C#-style documentation                            |         |       |  1:57 |   3.0 |
+| COMPLETED Add support for visual studio projects and solutions              |         |       |  6:05 |   9.4 |
+| COMPLETED OSX build is borked                                               |         |       |  0:21 |   0.5 |
 | COMPLETED Add facet directories to locator                                  |         |       |  1:09 |   1.8 |
 | COMPLETED Split json and dia tests                                          |         |       |  0:12 |   0.3 |
 | COMPLETED Split the "built-ins" by language                                 |         |       |  0:28 |   0.7 |
-| COMPLETED Models should have an associated language                         |         |       |  2:57 |   4.7 |
-| COMPLETED Add support for properties in C#                                  |         |       |  2:20 |   3.7 |
+| COMPLETED Models should have an associated language                         |         |       |  2:57 |   4.6 |
+| COMPLETED Add support for properties in C#                                  |         |       |  2:20 |   3.6 |
 | POSTPONED Use an unordered map in qualified name                            |         |       |  0:10 |   0.3 |
 | COMPLETED Add types with no properties and one property                     |         |       |  0:05 |   0.1 |
-| STARTED Ensure a stable sort of project items                               |         |       |  0:17 |   0.5 |
-| STARTED Add support for test data generation in C#                          |         |       |  1:03 |   1.7 |
-| STARTED Add support for Equals in C#                                        |         |       |  1:30 |   2.4 |
-| STARTED Language namespaces and modeling element locations                  |         |       |  0:39 |   1.0 |
-| STARTED Add support for Decimal numbers in c++                              |         |       |  0:32 |   0.8 |
+| COMPLETED Ensure a stable sort of project items                             |         |       |  0:17 |   0.4 |
+| COMPLETED Identify floating point types in yarn                             |         |       |  1:25 |   2.2 |
+| STARTED Add support for test data generation in C#                          |         |       |  1:03 |   1.6 |
+| STARTED Add support for Equals in C#                                        |         |       |  1:30 |   2.3 |
+| STARTED Language namespaces and modeling element locations                  |         |       |  0:53 |   1.4 |
+| STARTED Add support for Decimal numbers in C++                              |         |       |  0:32 |   0.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -639,6 +640,23 @@ in the project:
 
 We need to sort the project items before we create the project.
 
+*** COMPLETED Identify floating point types in yarn                   :story:
+    CLOSED: [2016-12-11 Sun 11:42]
+    CLOCK: [2016-12-11 Sun 11:31]--[2016-12-11 Sun 11:42] =>  0:11
+    CLOCK: [2016-12-11 Sun 11:16]--[2016-12-11 Sun 11:30] =>  0:14
+    CLOCK: [2016-12-11 Sun 10:16]--[2016-12-11 Sun 11:16] =>  1:00
+
+At present C# code is generating warnings on floats and doubles:
+
+: FloatProperty == value.FloatProperty &&
+: DoubleProperty == value.DoubleProperty &&
+: Warning: Comparison of floating point numbers can be unequal due to the
+: differing precision of the two values.
+
+This is a similar problem to what we have in [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#equality-in-floating-point-numbers-is-incorrect][the c++
+implementation]]. Since this is common across all languages, we can add
+floating point as a yarn concept.
+
 *** STARTED Add support for test data generation in C#                :story:
     CLOCK: [2016-12-10 Sat 15:30]--[2016-12-10 Sat 16:33] =>  1:03
 
@@ -746,21 +764,6 @@ Tasks:
 - add a meta-data flag to enable/disable this feature.
 - in assistant, during code generation, provide a function which
   injects the internal module.
-
-*** STARTED Identify floating point types in yarn                     :story:
-    CLOCK: [2016-12-11 Sun 11:16]--[2016-12-11 Sun 11:30] =>  0:14
-    CLOCK: [2016-12-11 Sun 10:16]--[2016-12-11 Sun 11:16] =>  1:00
-
-At present C# code is generating warnings on floats and doubles:
-
-: FloatProperty == value.FloatProperty &&
-: DoubleProperty == value.DoubleProperty &&
-: Warning: Comparison of floating point numbers can be unequal due to the
-: differing precision of the two values.
-
-This is a similar problem to what we have in [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#equality-in-floating-point-numbers-is-incorrect][the c++
-implementation]]. Since this is common across all languages, we can add
-floating point as a yarn concept.
 
 *** STARTED Add support for Decimal numbers in C++                    :story:
     CLOCK: [2016-11-30 Wed 13:04]--[2016-11-30 Wed 13:36] =>  0:32

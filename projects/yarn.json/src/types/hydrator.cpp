@@ -44,6 +44,7 @@ auto lg(logger_factory("yarn.json.hydrator"));
 const std::string empty;
 const std::string is_default_enumeration_type_key(
     "is_default_enumeration_type");
+const std::string is_floating_point_key("is_floating_point");
 const std::string in_global_module_key("in_global_module");
 const std::string name_key("name");
 const std::string parent_key("parent");
@@ -287,6 +288,10 @@ void hydrator::read_element(const boost::property_tree::ptree& pt,
         yarn::primitive p;
         const auto dit(pt.get(is_default_enumeration_type_key, false));
         p.is_default_enumeration_type(dit);
+
+        const auto ifp(pt.get(is_floating_point_key, false));
+        p.is_floating_point(ifp);
+
         lambda(p);
         const auto pair(std::make_pair(n.id(), p));
         const bool inserted(im.primitives().insert(pair).second);

@@ -150,6 +150,7 @@
       },
       "meta_type": "primitive",
       "in_global_module": true,
+      "is_floating_point": true,
       "annotation": {
         "quilt.cpp.helper.family": "Number",
         "quilt.cpp.inclusion_required": false,
@@ -162,6 +163,7 @@
       },
       "meta_type": "primitive",
       "in_global_module": true,
+      "is_floating_point": true,
       "annotation": {
         "quilt.cpp.helper.family": "Number",
         "quilt.cpp.inclusion_required": false,

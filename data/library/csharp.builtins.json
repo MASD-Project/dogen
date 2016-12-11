@@ -92,6 +92,7 @@
       },
       "meta_type": "primitive",
       "in_global_module": true,
+      "is_floating_point": true,
       "annotation": {
         "quilt.csharp.helper.family": "Number"
       }
@@ -102,6 +103,7 @@
       },
       "meta_type": "primitive",
       "in_global_module": true,
+      "is_floating_point": true,
       "annotation": {
         "quilt.csharp.helper.family": "Number"
       }
