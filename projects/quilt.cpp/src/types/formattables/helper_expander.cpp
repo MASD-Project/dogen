@@ -86,8 +86,6 @@ private:
     boost::optional<streaming_properties> streaming_properties_for_id(
         const helper_configuration& cfg, const std::string& id) const;
 
-    std::list<std::string> namespace_list(const yarn::name& n) const;
-
 private:
     boost::optional<helper_descriptor>
     walk_name_tree(const helper_configuration& cfg,
@@ -172,12 +170,6 @@ helper_properties_generator::streaming_properties_for_id(
     return i->second;
 }
 
-std::list<std::string>
-helper_properties_generator::namespace_list(const yarn::name& n) const {
-    yarn::name_flattener nf;
-    return nf.flatten(n);
-}
-
 boost::optional<helper_descriptor>
 helper_properties_generator::walk_name_tree(const helper_configuration& cfg,
     const helper_expander::facets_for_family_type& fff,
@@ -190,7 +182,8 @@ helper_properties_generator::walk_name_tree(const helper_configuration& cfg,
     BOOST_LOG_SEV(lg, debug) << "Processing type: " << id;
 
     helper_descriptor r;
-    r.namespaces(namespace_list(nt.current()));
+    yarn::name_flattener nf;
+    r.namespaces(nf.flatten(nt.current()));
     r.is_simple_type(nt.is_current_simple_type());
 
     const auto sp(streaming_properties_for_id(cfg, id));

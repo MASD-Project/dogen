@@ -66,7 +66,6 @@ make_configuration(const type_group& tg, const model& fm) const {
 
     BOOST_LOG_SEV(lg, debug) << "Finished making the configuration. Result:"
                              << r;
-
     return r;
 }
 
