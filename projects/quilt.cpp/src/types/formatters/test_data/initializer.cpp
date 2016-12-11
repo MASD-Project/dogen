@@ -30,7 +30,7 @@
 #include "dogen/quilt.cpp/types/formatters/test_data/char_helper.hpp"
 #include "dogen/quilt.cpp/types/formatters/test_data/date_helper.hpp"
 #include "dogen/quilt.cpp/types/formatters/test_data/domain_type_helper.hpp"
-#include "dogen/quilt.cpp/types/formatters/test_data/int_helper.hpp"
+#include "dogen/quilt.cpp/types/formatters/test_data/number_helper.hpp"
 #include "dogen/quilt.cpp/types/formatters/test_data/optional_helper.hpp"
 #include "dogen/quilt.cpp/types/formatters/test_data/pair_helper.hpp"
 #include "dogen/quilt.cpp/types/formatters/test_data/path_helper.hpp"
@@ -61,7 +61,7 @@ void initializer::initialize(registrar& rg) {
     register_formatter_helper<char_helper>(rg);
     register_formatter_helper<date_helper>(rg);
     register_formatter_helper<domain_type_helper>(rg);
-    register_formatter_helper<int_helper>(rg);
+    register_formatter_helper<number_helper>(rg);
     register_formatter_helper<optional_helper>(rg);
     register_formatter_helper<pair_helper>(rg);
     register_formatter_helper<path_helper>(rg);

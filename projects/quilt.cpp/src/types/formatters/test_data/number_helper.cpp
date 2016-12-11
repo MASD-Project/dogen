@@ -21,7 +21,7 @@
 #include "dogen/quilt.cpp/types/formattables/helper_properties.hpp"
 #include "dogen/quilt.cpp/types/formatters/test_data/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
-#include "dogen/quilt.cpp/types/formatters/test_data/int_helper.hpp"
+#include "dogen/quilt.cpp/types/formatters/test_data/number_helper.hpp"
 #include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
 
 namespace dogen {
@@ -30,19 +30,19 @@ namespace cpp {
 namespace formatters {
 namespace test_data {
 
-std::string int_helper::formatter_name() const {
+std::string number_helper::formatter_name() const {
     static auto r(std::string("<") + traits::facet() + std::string(">") +
         std::string("<") + helper_name() + std::string(">"));
     return r;
 }
 
-std::string int_helper::family() const {
+std::string number_helper::family() const {
     static std::string r("Number");
     return r;
 }
 
 std::list<std::string>
-int_helper::owning_formatters() const {
+number_helper::owning_formatters() const {
     static auto r(std::list<std::string> {
         traits::class_implementation_archetype()
     });
@@ -50,24 +50,24 @@ int_helper::owning_formatters() const {
 }
 
 std::list<std::string>
-int_helper::owning_facets() const {
+number_helper::owning_facets() const {
     static auto r(std::list<std::string> {
         traits::facet()
     });
     return r;
 }
 
-std::string int_helper::helper_name() const {
-    static std::string r("int_helper");
+std::string number_helper::helper_name() const {
+    static std::string r("number_helper");
     return r;
 }
 
-bool int_helper::is_enabled(const assistant& /*a*/,
+bool number_helper::is_enabled(const assistant& /*a*/,
     const formattables::helper_properties& /*hp*/) const {
     return true;
 }
 
-void int_helper::
+void number_helper::
 format(assistant& a, const formattables::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());

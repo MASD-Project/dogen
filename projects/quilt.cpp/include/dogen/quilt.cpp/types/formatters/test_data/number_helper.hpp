@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_TEST_DATA_INT_HELPER_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_TEST_DATA_INT_HELPER_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_TEST_DATA_NUMBER_HELPER_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_TEST_DATA_NUMBER_HELPER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -34,7 +34,7 @@ namespace cpp {
 namespace formatters {
 namespace test_data {
 
-class int_helper : public helper_formatter_interface {
+class number_helper : public helper_formatter_interface {
 public:
     std::string formatter_name() const override;
     std::string family() const override;
