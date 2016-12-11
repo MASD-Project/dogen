@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.csharp/types/formatters/types/bool_helper.hpp"
+#include "dogen/quilt.csharp/types/formatters/types/number_helper.hpp"
 #include "dogen/quilt.csharp/types/formattables/helper_properties.hpp"
 #include "dogen/quilt.csharp/types/formatters/types/traits.hpp"
 #include "dogen/quilt.csharp/types/formatters/assistant.hpp"
@@ -30,19 +30,19 @@ namespace csharp {
 namespace formatters {
 namespace types {
 
-std::string bool_helper::formatter_name() const {
+std::string number_helper::formatter_name() const {
     static auto r(std::string("<") + traits::facet() + std::string(">") +
         std::string("<") + helper_name() + std::string(">"));
     return r;
 }
 
-std::string bool_helper::family() const {
-    static std::string r("Boolean");
+std::string number_helper::family() const {
+    static std::string r("Number");
     return r;
 }
 
 std::list<std::string>
-bool_helper::owning_formatters() const {
+number_helper::owning_formatters() const {
     static auto r(std::list<std::string> {
         types::traits::class_archetype()
     });
@@ -50,22 +50,22 @@ bool_helper::owning_formatters() const {
 }
 
 std::list<std::string>
-bool_helper::owning_facets() const {
+number_helper::owning_facets() const {
     static auto r(std::list<std::string> {
         traits::facet()
     });
     return r;
 }
 
-std::string bool_helper::helper_name() const {
-    static std::string r("bool_helper");
+std::string number_helper::helper_name() const {
+    static std::string r("number_helper");
     return r;
 }
 
-void bool_helper::
+void number_helper::
 format(assistant& a, const formattables::helper_properties& /*hp*/) const {
 a.stream() << std::endl;
-a.stream() << "bool create_bool(const unsigned int position) {" << std::endl;
+a.stream() << "bool create_number(const unsigned int position) {" << std::endl;
 a.stream() << "    return (position % 2) == 0;" << std::endl;
 a.stream() << "}" << std::endl;
 }

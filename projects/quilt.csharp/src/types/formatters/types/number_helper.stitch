@@ -4,18 +4,18 @@
 <#@ stitch.inclusion_dependency="dogen/quilt.csharp/types/formatters/assistant.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.csharp/types/formatters/types/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.csharp/types/formattables/helper_properties.hpp" #>
-<#@ stitch.inclusion_dependency="dogen/quilt.csharp/types/formatters/types/bool_helper.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.csharp/types/formatters/types/number_helper.hpp" #>
 <#@ stitch.wale.template=csharp_helper_formatter_implementation.wale #>
-<#@ stitch.wale.kvp.helper.family=Boolean #>
-<#@ stitch.wale.kvp.class.simple_name=bool_helper #>
+<#@ stitch.wale.kvp.helper.family=Number #>
+<#@ stitch.wale.kvp.class.simple_name=number_helper #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-void bool_helper::
+void number_helper::
 format(assistant& a, const formattables::helper_properties& /*hp*/) const {
 #>
 
-bool create_bool(const unsigned int position) {
+bool create_number(const unsigned int position) {
     return (position % 2) == 0;
 }
 <#+

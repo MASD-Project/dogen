@@ -13807,7 +13807,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#bool_helper#</dia:string>
+        <dia:string>#number_helper#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#C# Helper Formatter#</dia:string>

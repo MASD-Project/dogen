@@ -20,7 +20,7 @@
  */
 #include "dogen/quilt.csharp/types/formatters/registrar.hpp"
 #include "dogen/quilt.csharp/types/formatters/types/class_formatter.hpp"
-#include "dogen/quilt.csharp/types/formatters/types/bool_helper.hpp"
+#include "dogen/quilt.csharp/types/formatters/types/number_helper.hpp"
 #include "dogen/quilt.csharp/types/formatters/types/initializer.hpp"
 
 namespace dogen {
@@ -31,7 +31,7 @@ namespace types {
 
 void initializer::initialize(registrar& rg) {
     register_formatter<class_formatter>(rg);
-    register_formatter_helper<bool_helper>(rg);
+    register_formatter_helper<number_helper>(rg);
 }
 
 } } } } }
