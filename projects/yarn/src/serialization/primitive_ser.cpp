@@ -44,6 +44,7 @@ void save(Archive& ar,
     ar << make_nvp("element", base_object<dogen::yarn::element>(v));
 
     ar << make_nvp("is_default_enumeration_type", v.is_default_enumeration_type_);
+    ar << make_nvp("is_floating_point", v.is_floating_point_);
 }
 
 template<typename Archive>
@@ -53,6 +54,7 @@ void load(Archive& ar,
     ar >> make_nvp("element", base_object<dogen::yarn::element>(v));
 
     ar >> make_nvp("is_default_enumeration_type", v.is_default_enumeration_type_);
+    ar >> make_nvp("is_floating_point", v.is_floating_point_);
 }
 
 } }

@@ -618,7 +618,8 @@ In order to make sure we're not hard-coding for the multiple
 properties scenario, create simple classes with no properties and one
 property.
 
-*** STARTED Ensure a stable sort of project items                     :story:
+*** COMPLETED Ensure a stable sort of project items                   :story:
+    CLOSED: [2016-12-11 Sun 10:20]
     CLOCK: [2016-12-10 Sat 21:41]--[2016-12-10 Sat 21:48] =>  0:07
     CLOCK: [2016-12-10 Sat 20:20]--[2016-12-10 Sat 20:30] =>  0:10
 
@@ -673,6 +674,7 @@ We also need a way to compare floating point numbers. In both cases
 the easiest thing is to use helpers.
 
 *** STARTED Language namespaces and modeling element locations        :story:
+    CLOCK: [2016-12-11 Sun 10:01]--[2016-12-11 Sun 10:15] =>  0:14
     CLOCK: [2016-12-09 Fri 10:19]--[2016-12-09 Fri 10:27] =>  0:08
     CLOCK: [2016-12-09 Fri 10:13]--[2016-12-09 Fri 10:18] =>  0:05
     CLOCK: [2016-12-09 Fri 09:46]--[2016-12-09 Fri 10:12] =>  0:26
@@ -729,17 +731,56 @@ qualified correctly, as they are in different namespaces. This
 requires quite a bit of thinking in order to generate compilable
 code.
 
+On further thought, perhaps its not that bad. We just to be able to
+distinguish proxy from non-proxy types (in order to know whether to
+apply the "fake" facet namespace); then, we either apply the current
+facet (say test data) or types. We don't refer to a third facet. In
+addition, we can also use the facet folder as the fake namespace. So,
+before we make use of a name, we need to call the assistant to inject
+the fake internal module, either with the current facet or types; this
+is done for all non-proxy names. The "is proxy" property needs to be
+added to names.
+
 Tasks:
 
 - add a meta-data flag to enable/disable this feature.
 - in assistant, during code generation, provide a function which
   injects the internal module.
 
-*** STARTED Add support for Decimal numbers in c++                    :story:
+*** STARTED Identify floating point types in yarn                     :story:
+    CLOCK: [2016-12-11 Sun 11:16]--[2016-12-11 Sun 11:30] =>  0:14
+    CLOCK: [2016-12-11 Sun 10:16]--[2016-12-11 Sun 11:16] =>  1:00
+
+At present C# code is generating warnings on floats and doubles:
+
+: FloatProperty == value.FloatProperty &&
+: DoubleProperty == value.DoubleProperty &&
+: Warning: Comparison of floating point numbers can be unequal due to the
+: differing precision of the two values.
+
+This is a similar problem to what we have in [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#equality-in-floating-point-numbers-is-incorrect][the c++
+implementation]]. Since this is common across all languages, we can add
+floating point as a yarn concept.
+
+*** STARTED Add support for Decimal numbers in C++                    :story:
     CLOCK: [2016-11-30 Wed 13:04]--[2016-11-30 Wed 13:36] =>  0:32
 
 - try using ICU DecNumber library.
 - check compiler support (MSVC may have decimals; if so, use that instead)
+
+*** Add support for enumerations in C#                                :story:
+
+Add all the machinery needed to generate enums in C#. We need to also
+add the flag for default enum:
+
+:         "is_default_enumeration_type": true,
+
+This is causing errors at the moment:
+
+: std::exception::what: Type not found: is_default_enumeration_type
+
+Which is weird since it exists in C++. Actually this is not a
+meta-data parameter, just a regular Json element.
 
 *** Add complete constructor for C# types                             :story:
 

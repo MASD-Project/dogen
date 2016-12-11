@@ -38,6 +38,7 @@ void primitive_generator::
 populate(const unsigned int position, result_type& v) {
     dogen::yarn::element_generator::populate(position, v);
     v.is_default_enumeration_type(create_bool(position + 0));
+    v.is_floating_point(create_bool(position + 1));
 }
 
 primitive_generator::result_type

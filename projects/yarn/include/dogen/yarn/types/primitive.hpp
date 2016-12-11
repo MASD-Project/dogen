@@ -56,7 +56,8 @@ public:
         const bool in_global_module,
         const std::vector<std::string>& stereotypes,
         const bool is_element_extension,
-        const bool is_default_enumeration_type);
+        const bool is_default_enumeration_type,
+        const bool is_floating_point);
 
 private:
     template<typename Archive>
@@ -84,6 +85,14 @@ public:
     void is_default_enumeration_type(const bool v);
     /**@}*/
 
+    /**
+     * @brief If true, this primitive represents a floating point number.
+     */
+    /**@{*/
+    bool is_floating_point() const;
+    void is_floating_point(const bool v);
+    /**@}*/
+
 public:
     bool operator==(const primitive& rhs) const;
     bool operator!=(const primitive& rhs) const {
@@ -99,6 +108,7 @@ public:
 
 private:
     bool is_default_enumeration_type_;
+    bool is_floating_point_;
 };
 
 } }

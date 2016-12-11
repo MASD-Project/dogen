@@ -3416,19 +3416,19 @@ It is not required for any other purpose.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O30">
       <dia:attribute name="obj_pos">
-        <dia:point val="27,78"/>
+        <dia:point val="26,78"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="26.95,77.95;40.64,80.85"/>
+        <dia:rectangle val="25.95,77.95;39.64,81.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="27,78"/>
+        <dia:point val="26,78"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="13.59"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="2.7999999999999998"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#primitive#</dia:string>
@@ -3541,6 +3541,29 @@ It is not required for any other purpose.#</dia:string>
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#is_floating_point#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#bool#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#If true, this primitive represents a floating point number.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -3553,7 +3576,7 @@ It is not required for any other purpose.#</dia:string>
         <dia:point val="-1.5525,69.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-2.4025,69.55;33.845,78.05"/>
+        <dia:rectangle val="-2.4025,69.55;32.845,78.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3561,8 +3584,8 @@ It is not required for any other purpose.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-1.5525,69.6"/>
         <dia:point val="-1.5525,73"/>
-        <dia:point val="33.795,73"/>
-        <dia:point val="33.795,78"/>
+        <dia:point val="32.795,73"/>
+        <dia:point val="32.795,78"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -23394,7 +23417,7 @@ space.#</dia:string>
         <dia:point val="-124,-36.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-124.75,-37.15;-114.54,-27.4"/>
+        <dia:rectangle val="-124.75,-37.15;-114.54,-28.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
