@@ -18,41 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_HELPER_FORMATTER_INTERFACE_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_HELPER_FORMATTER_INTERFACE_HPP
+#ifndef DOGEN_QUILT_CSHARP_TYPES_FORMATTERS_HELPER_FORMATTER_INTERFACE_HPP
+#define DOGEN_QUILT_CSHARP_TYPES_FORMATTERS_HELPER_FORMATTER_INTERFACE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <list>
-#include <string>
-#include "dogen/yarn/types/name_tree.hpp"
-#include "dogen/quilt.cpp/types/formatters/assistant_fwd.hpp"
-#include "dogen/quilt.cpp/types/formattables/helper_properties_fwd.hpp"
+#include <algorithm>
 
 namespace dogen {
 namespace quilt {
-namespace cpp {
+namespace csharp {
 namespace formatters {
 
-class helper_formatter_interface {
+class helper_formatter_interface final {
 public:
     helper_formatter_interface() = default;
-    helper_formatter_interface(const helper_formatter_interface&) = delete;
+    helper_formatter_interface(const helper_formatter_interface&) = default;
     helper_formatter_interface(helper_formatter_interface&&) = default;
-    virtual ~helper_formatter_interface() noexcept = 0;
+    ~helper_formatter_interface() = default;
+    helper_formatter_interface& operator=(const helper_formatter_interface&) = default;
 
 public:
-    virtual std::string formatter_name() const = 0;
-    virtual std::string family() const = 0;
-    virtual std::list<std::string> owning_formatters() const = 0;
-    virtual std::list<std::string> owning_facets() const = 0;
-    virtual std::string helper_name() const = 0;
-    virtual bool is_enabled(const assistant& a,
-        const formattables::helper_properties& hp) const = 0;
-    virtual void format(assistant& a,
-        const formattables::helper_properties& hp) const = 0;
+    bool operator==(const helper_formatter_interface& rhs) const;
+    bool operator!=(const helper_formatter_interface& rhs) const {
+        return !this->operator==(rhs);
+    }
+
 };
 
 } } } }

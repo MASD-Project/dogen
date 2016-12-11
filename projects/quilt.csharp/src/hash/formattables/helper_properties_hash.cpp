@@ -18,10 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/hash/decoration_properties_hash.hpp"
+#include "dogen/quilt.csharp/hash/formattables/helper_descriptor_hash.hpp"
 #include "dogen/quilt.csharp/hash/formattables/helper_properties_hash.hpp"
-#include "dogen/quilt.csharp/hash/formattables/element_properties_hash.hpp"
-#include "dogen/quilt.csharp/hash/formattables/artefact_properties_hash.hpp"
 
 namespace {
 
@@ -31,26 +29,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_boost_optional_dogen_formatters_decoration_properties(const boost::optional<dogen::formatters::decoration_properties>& v) {
-    std::size_t seed(0);
-
-    if (!v)
-        return seed;
-
-    combine(seed, *v);
-    return seed;
-}
-
-inline std::size_t hash_std_unordered_map_std_string_dogen_quilt_csharp_formattables_artefact_properties(const std::unordered_map<std::string, dogen::quilt::csharp::formattables::artefact_properties>& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i.first);
-        combine(seed, i.second);
-    }
-    return seed;
-}
-
-inline std::size_t hash_std_list_dogen_quilt_csharp_formattables_helper_properties(const std::list<dogen::quilt::csharp::formattables::helper_properties>& v) {
+inline std::size_t hash_std_list_dogen_quilt_csharp_formattables_helper_descriptor(const std::list<dogen::quilt::csharp::formattables::helper_descriptor>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -65,12 +44,12 @@ namespace quilt {
 namespace csharp {
 namespace formattables {
 
-std::size_t element_properties_hasher::hash(const element_properties& v) {
+std::size_t helper_properties_hasher::hash(const helper_properties& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_boost_optional_dogen_formatters_decoration_properties(v.decoration_properties()));
-    combine(seed, hash_std_unordered_map_std_string_dogen_quilt_csharp_formattables_artefact_properties(v.artefact_properties()));
-    combine(seed, hash_std_list_dogen_quilt_csharp_formattables_helper_properties(v.helper_properties()));
+    combine(seed, v.current());
+    combine(seed, hash_std_list_dogen_quilt_csharp_formattables_helper_descriptor(v.direct_descendants()));
+    combine(seed, v.in_inheritance_relationship());
 
     return seed;
 }

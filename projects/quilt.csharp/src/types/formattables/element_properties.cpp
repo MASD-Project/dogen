@@ -27,23 +27,28 @@ namespace formattables {
 
 element_properties::element_properties(element_properties&& rhs)
     : decoration_properties_(std::move(rhs.decoration_properties_)),
-      artefact_properties_(std::move(rhs.artefact_properties_)) { }
+      artefact_properties_(std::move(rhs.artefact_properties_)),
+      helper_properties_(std::move(rhs.helper_properties_)) { }
 
 element_properties::element_properties(
     const boost::optional<dogen::formatters::decoration_properties>& decoration_properties,
-    const std::unordered_map<std::string, dogen::quilt::csharp::formattables::artefact_properties>& artefact_properties)
+    const std::unordered_map<std::string, dogen::quilt::csharp::formattables::artefact_properties>& artefact_properties,
+    const std::list<dogen::quilt::csharp::formattables::helper_properties>& helper_properties)
     : decoration_properties_(decoration_properties),
-      artefact_properties_(artefact_properties) { }
+      artefact_properties_(artefact_properties),
+      helper_properties_(helper_properties) { }
 
 void element_properties::swap(element_properties& other) noexcept {
     using std::swap;
     swap(decoration_properties_, other.decoration_properties_);
     swap(artefact_properties_, other.artefact_properties_);
+    swap(helper_properties_, other.helper_properties_);
 }
 
 bool element_properties::operator==(const element_properties& rhs) const {
     return decoration_properties_ == rhs.decoration_properties_ &&
-        artefact_properties_ == rhs.artefact_properties_;
+        artefact_properties_ == rhs.artefact_properties_ &&
+        helper_properties_ == rhs.helper_properties_;
 }
 
 element_properties& element_properties::operator=(element_properties other) {
@@ -82,6 +87,22 @@ void element_properties::artefact_properties(const std::unordered_map<std::strin
 
 void element_properties::artefact_properties(const std::unordered_map<std::string, dogen::quilt::csharp::formattables::artefact_properties>&& v) {
     artefact_properties_ = std::move(v);
+}
+
+const std::list<dogen::quilt::csharp::formattables::helper_properties>& element_properties::helper_properties() const {
+    return helper_properties_;
+}
+
+std::list<dogen::quilt::csharp::formattables::helper_properties>& element_properties::helper_properties() {
+    return helper_properties_;
+}
+
+void element_properties::helper_properties(const std::list<dogen::quilt::csharp::formattables::helper_properties>& v) {
+    helper_properties_ = v;
+}
+
+void element_properties::helper_properties(const std::list<dogen::quilt::csharp::formattables::helper_properties>&& v) {
+    helper_properties_ = std::move(v);
 }
 
 } } } }

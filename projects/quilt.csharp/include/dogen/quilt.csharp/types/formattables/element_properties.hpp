@@ -25,11 +25,13 @@
 #pragma once
 #endif
 
+#include <list>
 #include <string>
 #include <algorithm>
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include "dogen/formatters/types/decoration_properties.hpp"
+#include "dogen/quilt.csharp/types/formattables/helper_properties.hpp"
 #include "dogen/quilt.csharp/types/formattables/artefact_properties.hpp"
 #include "dogen/quilt.csharp/serialization/formattables/element_properties_fwd_ser.hpp"
 
@@ -53,7 +55,8 @@ public:
 public:
     element_properties(
         const boost::optional<dogen::formatters::decoration_properties>& decoration_properties,
-        const std::unordered_map<std::string, dogen::quilt::csharp::formattables::artefact_properties>& artefact_properties);
+        const std::unordered_map<std::string, dogen::quilt::csharp::formattables::artefact_properties>& artefact_properties,
+        const std::list<dogen::quilt::csharp::formattables::helper_properties>& helper_properties);
 
 private:
     template<typename Archive>
@@ -73,6 +76,11 @@ public:
     void artefact_properties(const std::unordered_map<std::string, dogen::quilt::csharp::formattables::artefact_properties>& v);
     void artefact_properties(const std::unordered_map<std::string, dogen::quilt::csharp::formattables::artefact_properties>&& v);
 
+    const std::list<dogen::quilt::csharp::formattables::helper_properties>& helper_properties() const;
+    std::list<dogen::quilt::csharp::formattables::helper_properties>& helper_properties();
+    void helper_properties(const std::list<dogen::quilt::csharp::formattables::helper_properties>& v);
+    void helper_properties(const std::list<dogen::quilt::csharp::formattables::helper_properties>&& v);
+
 public:
     bool operator==(const element_properties& rhs) const;
     bool operator!=(const element_properties& rhs) const {
@@ -86,6 +94,7 @@ public:
 private:
     boost::optional<dogen::formatters::decoration_properties> decoration_properties_;
     std::unordered_map<std::string, dogen::quilt::csharp::formattables::artefact_properties> artefact_properties_;
+    std::list<dogen::quilt::csharp::formattables::helper_properties> helper_properties_;
 };
 
 } } } }
