@@ -18,40 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CSHARP_TYPES_FORMATTABLES_HELPER_EXPANDER_HPP
-#define DOGEN_QUILT_CSHARP_TYPES_FORMATTABLES_HELPER_EXPANDER_HPP
+#ifndef DOGEN_QUILT_CSHARP_TEST_DATA_FORMATTABLES_HELPER_CONFIGURATION_TD_HPP
+#define DOGEN_QUILT_CSHARP_TEST_DATA_FORMATTABLES_HELPER_CONFIGURATION_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <unordered_map>
-#include "dogen/annotations/types/type_repository.hpp"
-#include "dogen/quilt.csharp/types/formatters/repository.hpp"
 #include "dogen/quilt.csharp/types/formattables/helper_configuration.hpp"
-#include "dogen/quilt.csharp/types/formattables/formattable.hpp"
-#include "dogen/quilt.csharp/types/formattables/model.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace csharp {
 namespace formattables {
 
-class helper_expander final {
-private:
-    struct type_group {
-        annotations::type family;
-    };
-
-    type_group make_type_group(const annotations::type_repository& atrp) const;
-
-    helper_configuration
-    make_configuration(const type_group& tg, const model& fm) const;
+class helper_configuration_generator {
+public:
+    helper_configuration_generator();
 
 public:
-    void expand(const annotations::type_repository& atrp,
-        const formatters::repository& frp, model& fm) const;
+    typedef dogen::quilt::csharp::formattables::helper_configuration result_type;
 
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
 };
 
 } } } }

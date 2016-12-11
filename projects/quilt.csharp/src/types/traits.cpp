@@ -64,4 +64,9 @@ std::string traits::requires_static_reference_equals() {
     return r;
 }
 
+std::string traits::csharp::helper::family() {
+    static std::string r("quilt.csharp.helper.family");
+    return r;
+}
+
 } } }

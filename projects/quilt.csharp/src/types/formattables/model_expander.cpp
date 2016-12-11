@@ -23,6 +23,7 @@
 #include "dogen/quilt.csharp/types/formattables/aspect_expander.hpp"
 #include "dogen/quilt.csharp/types/formattables/reducer.hpp"
 #include "dogen/quilt.csharp/types/formattables/file_path_expander.hpp"
+#include "dogen/quilt.csharp/types/formattables/helper_expander.hpp"
 #include "dogen/quilt.csharp/types/formattables/model_expander.hpp"
 
 namespace dogen {
@@ -58,6 +59,13 @@ void model_expander::reduce(model& fm) const {
 void model_expander::expand_project_items(model& fm) const {
     project_items_expander pie;
     pie.expand(fm);
+}
+
+void model_expander::expand_helpers(const annotations::type_repository& atrp,
+    const formatters::repository& frp,
+    model& fm) const {
+    helper_expander he;
+    he.expand(atrp, frp, fm);
 }
 
 void model_expander::expand(

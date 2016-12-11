@@ -18,42 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CSHARP_TYPES_FORMATTABLES_HELPER_EXPANDER_HPP
-#define DOGEN_QUILT_CSHARP_TYPES_FORMATTABLES_HELPER_EXPANDER_HPP
+#ifndef DOGEN_QUILT_CSHARP_HASH_FORMATTABLES_HELPER_CONFIGURATION_HASH_HPP
+#define DOGEN_QUILT_CSHARP_HASH_FORMATTABLES_HELPER_CONFIGURATION_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <unordered_map>
-#include "dogen/annotations/types/type_repository.hpp"
-#include "dogen/quilt.csharp/types/formatters/repository.hpp"
+#include <functional>
 #include "dogen/quilt.csharp/types/formattables/helper_configuration.hpp"
-#include "dogen/quilt.csharp/types/formattables/formattable.hpp"
-#include "dogen/quilt.csharp/types/formattables/model.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace csharp {
 namespace formattables {
 
-class helper_expander final {
-private:
-    struct type_group {
-        annotations::type family;
-    };
-
-    type_group make_type_group(const annotations::type_repository& atrp) const;
-
-    helper_configuration
-    make_configuration(const type_group& tg, const model& fm) const;
-
+struct helper_configuration_hasher {
 public:
-    void expand(const annotations::type_repository& atrp,
-        const formatters::repository& frp, model& fm) const;
-
+    static std::size_t hash(const helper_configuration& v);
 };
 
 } } } }
 
+namespace std {
+
+template<>
+struct hash<dogen::quilt::csharp::formattables::helper_configuration> {
+public:
+    size_t operator()(const dogen::quilt::csharp::formattables::helper_configuration& v) const {
+        return dogen::quilt::csharp::formattables::helper_configuration_hasher::hash(v);
+    }
+};
+
+}
 #endif

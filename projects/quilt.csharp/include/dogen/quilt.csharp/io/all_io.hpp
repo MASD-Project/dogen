@@ -36,6 +36,7 @@
 #include "dogen/quilt.csharp/io/formattables/helper_properties_io.hpp"
 #include "dogen/quilt.csharp/io/formattables/element_properties_io.hpp"
 #include "dogen/quilt.csharp/io/formattables/artefact_properties_io.hpp"
+#include "dogen/quilt.csharp/io/formattables/helper_configuration_io.hpp"
 #include "dogen/quilt.csharp/io/fabric/visual_studio_configuration_io.hpp"
 #include "dogen/quilt.csharp/io/formattables/locator_configuration_io.hpp"
 #include "dogen/quilt.csharp/io/formattables/locator_facet_configuration_io.hpp"

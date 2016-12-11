@@ -78,6 +78,7 @@
 #include "dogen/quilt.csharp/types/formattables/decoration_expander.hpp"
 #include "dogen/quilt.csharp/types/formatters/test_data/initializer.hpp"
 #include "dogen/quilt.csharp/types/formatters/types/class_formatter.hpp"
+#include "dogen/quilt.csharp/types/formattables/helper_configuration.hpp"
 #include "dogen/quilt.csharp/types/formattables/transformation_error.hpp"
 #include "dogen/quilt.csharp/types/fabric/visual_studio_configuration.hpp"
 #include "dogen/quilt.csharp/types/formattables/locator_configuration.hpp"

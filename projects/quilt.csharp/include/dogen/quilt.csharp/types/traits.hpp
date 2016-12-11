@@ -76,6 +76,16 @@ struct traits {
      * equals.
      */
     static std::string requires_static_reference_equals();
+
+    struct csharp {
+        struct helper {
+            /**
+             * @brief Family of the helper methods.
+             */
+            static std::string family();
+        };
+    };
+
 };
 
 } } }

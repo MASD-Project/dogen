@@ -35,6 +35,7 @@
 #include "dogen/quilt.csharp/hash/formattables/helper_properties_hash.hpp"
 #include "dogen/quilt.csharp/hash/formattables/element_properties_hash.hpp"
 #include "dogen/quilt.csharp/hash/formattables/artefact_properties_hash.hpp"
+#include "dogen/quilt.csharp/hash/formattables/helper_configuration_hash.hpp"
 #include "dogen/quilt.csharp/hash/fabric/visual_studio_configuration_hash.hpp"
 #include "dogen/quilt.csharp/hash/formattables/locator_configuration_hash.hpp"
 #include "dogen/quilt.csharp/hash/formattables/locator_facet_configuration_hash.hpp"

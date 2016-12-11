@@ -18,42 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CSHARP_TYPES_FORMATTABLES_HELPER_EXPANDER_HPP
-#define DOGEN_QUILT_CSHARP_TYPES_FORMATTABLES_HELPER_EXPANDER_HPP
+#include "dogen/quilt.csharp/hash/formattables/helper_configuration_hash.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace {
 
-#include <unordered_map>
-#include "dogen/annotations/types/type_repository.hpp"
-#include "dogen/quilt.csharp/types/formatters/repository.hpp"
-#include "dogen/quilt.csharp/types/formattables/helper_configuration.hpp"
-#include "dogen/quilt.csharp/types/formattables/formattable.hpp"
-#include "dogen/quilt.csharp/types/formattables/model.hpp"
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value) {
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+inline std::size_t hash_std_unordered_map_std_string_std_string(const std::unordered_map<std::string, std::string>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, i.second);
+    }
+    return seed;
+}
+
+}
 
 namespace dogen {
 namespace quilt {
 namespace csharp {
 namespace formattables {
 
-class helper_expander final {
-private:
-    struct type_group {
-        annotations::type family;
-    };
+std::size_t helper_configuration_hasher::hash(const helper_configuration& v) {
+    std::size_t seed(0);
 
-    type_group make_type_group(const annotations::type_repository& atrp) const;
-
-    helper_configuration
-    make_configuration(const type_group& tg, const model& fm) const;
-
-public:
-    void expand(const annotations::type_repository& atrp,
-        const formatters::repository& frp, model& fm) const;
-
-};
+    combine(seed, hash_std_unordered_map_std_string_std_string(v.helper_families()));
+    return seed;
+}
 
 } } } }
-
-#endif

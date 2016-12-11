@@ -23,18 +23,5 @@
     "template_kind": "instance",
     "scope": "root_module",
     "default_value": false
-  },
-  {
-    "name": {
-      "simple": "helper.family",
-      "qualified": "quilt.csharp.helper.family"
-    },
-    "archetype_location": {
-      "family": "quilt"
-    },
-    "value_type": "text",
-    "template_kind": "instance",
-    "scope": "entity",
-    "default_value": "Default"
   }
 ]

@@ -52,6 +52,9 @@ private:
     void reduce(model& fm) const;
 
     void expand_project_items(model& fm) const;
+    void expand_helpers(const annotations::type_repository& atrp,
+        const formatters::repository& frp,
+        model& fm) const;
 
 public:
     void expand(const annotations::type_repository& atrp,
