@@ -64,10 +64,11 @@ inline std::string get_qualified(const Qualified& iaq) {
     return i->second;
 }
 
-std::ostream& operator<<(std::ostream& s, const helper_expander::context& v) {
+std::ostream&
+operator<<(std::ostream& s, const helper_expander::configuration& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::"
-      << "helper_expander::context\"" << ", "
+      << "helper_expander::configuration\"" << ", "
       << "\"helper_families\": " << v.helper_families << ", "
       << "\"streaming_propertiess\": " << v.streaming_propertiess
       << " }";
@@ -75,11 +76,11 @@ std::ostream& operator<<(std::ostream& s, const helper_expander::context& v) {
     return s;
 }
 
-helper_expander::context helper_expander::make_context(
+helper_expander::configuration helper_expander::make_configuration(
     const annotations::type_repository& atrp, const model& fm) const {
 
-    BOOST_LOG_SEV(lg, debug) << "Started making the context.";
-    context r;
+    BOOST_LOG_SEV(lg, debug) << "Started making the configuration.";
+    configuration r;
     r.streaming_propertiess = fm.streaming_properties();
 
     const annotations::type_repository_selector s(atrp);
@@ -97,7 +98,7 @@ helper_expander::context helper_expander::make_context(
         r.helper_families[id] = fam;
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Finished making the context. Result:" << r;
+    BOOST_LOG_SEV(lg, debug) << "Finished making the configuration. Result:" << r;
 
     return r;
 }
@@ -143,10 +144,10 @@ bool helper_expander::requires_hashing_helper(const facets_for_family_type& fff,
 }
 
 std::string helper_expander::helper_family_for_id(
-    const context& ctx, const std::string& id) const {
+    const configuration& cfg, const std::string& id) const {
 
-    const auto i(ctx.helper_families.find(id));
-    if (i == ctx.helper_families.end()) {
+    const auto i(cfg.helper_families.find(id));
+    if (i == cfg.helper_families.end()) {
         BOOST_LOG_SEV(lg, debug) << missing_helper_family << id;
         BOOST_THROW_EXCEPTION(expansion_error(missing_helper_family + id));
     }
@@ -157,11 +158,11 @@ std::string helper_expander::helper_family_for_id(
 }
 
 boost::optional<formattables::streaming_properties>
-helper_expander::streaming_properties_for_id(const context& ctx,
+helper_expander::streaming_properties_for_id(const configuration& cfg,
     const std::string& id) const {
 
-    const auto i(ctx.streaming_propertiess.find(id));
-    if (i == ctx.streaming_propertiess.end())
+    const auto i(cfg.streaming_propertiess.find(id));
+    if (i == cfg.streaming_propertiess.end())
         return boost::optional<formattables::streaming_properties>();
 
     BOOST_LOG_SEV(lg, debug) << "Found streaming configuration for type: " << id
@@ -176,7 +177,7 @@ helper_expander::namespace_list(const yarn::name& n) const {
 }
 
 boost::optional<helper_descriptor> helper_expander::walk_name_tree(
-    const context& ctx, const facets_for_family_type& fff,
+    const configuration& cfg, const facets_for_family_type& fff,
     const bool in_inheritance_relationship,
     const bool inherit_opaqueness_from_parent, const yarn::name_tree& nt,
     std::unordered_set<std::string>& done,
@@ -189,11 +190,11 @@ boost::optional<helper_descriptor> helper_expander::walk_name_tree(
     r.namespaces(namespace_list(nt.current()));
     r.is_simple_type(nt.is_current_simple_type());
 
-    const auto sp(streaming_properties_for_id(ctx, id));
+    const auto sp(streaming_properties_for_id(cfg, id));
     if (sp)
         r.streaming_properties(sp);
 
-    const auto fam(helper_family_for_id(ctx, id));
+    const auto fam(helper_family_for_id(cfg, id));
     r.family(fam);
     r.requires_hashing_helper(requires_hashing_helper(fff, fam));
 
@@ -231,7 +232,7 @@ boost::optional<helper_descriptor> helper_expander::walk_name_tree(
          * children. If we have a child, we must have a descriptor.
          */
         const auto aco(nt.are_children_opaque());
-        const auto dd(walk_name_tree(ctx, fff, iir, aco, c, done, hps));
+        const auto dd(walk_name_tree(cfg, fff, iir, aco, c, done, hps));
         if (!dd) {
             BOOST_LOG_SEV(lg, error) << descriptor_expected;
             BOOST_THROW_EXCEPTION(expansion_error(descriptor_expected));
@@ -276,7 +277,7 @@ boost::optional<helper_descriptor> helper_expander::walk_name_tree(
 }
 
 std::list<helper_properties> helper_expander::compute_helper_properties(
-    const context& ctx, const facets_for_family_type& fff,
+    const configuration& cfg, const facets_for_family_type& fff,
     const bool in_inheritance_relationship,
     const std::list<yarn::attribute>& attrs) const {
 
@@ -295,7 +296,7 @@ std::list<helper_properties> helper_expander::compute_helper_properties(
     const bool iir(in_inheritance_relationship);
     for (const auto attr : attrs) {
         const auto& nt(attr.parsed_type());
-        walk_name_tree(ctx, fff, iir, opaqueness_from_parent, nt, done, r);
+        walk_name_tree(cfg, fff, iir, opaqueness_from_parent, nt, done, r);
     }
 
     if (r.empty())
@@ -305,7 +306,7 @@ std::list<helper_properties> helper_expander::compute_helper_properties(
     return r;
 }
 
-void helper_expander::populate_helper_properties(const context& ctx,
+void helper_expander::populate_helper_properties(const configuration& cfg,
     const formatters::repository& frp,
     std::unordered_map<std::string, formattable>& formattables) const {
 
@@ -346,15 +347,15 @@ void helper_expander::populate_helper_properties(const context& ctx,
          */
         const auto& attrs(ptr->local_attributes());
         const auto iir(ptr->in_inheritance_relationship());
-        const auto hlp_props(compute_helper_properties(ctx, fff, iir, attrs));
+        const auto hlp_props(compute_helper_properties(cfg, fff, iir, attrs));
         eprops.helper_properties(hlp_props);
     }
 }
 
 void helper_expander::expand(const annotations::type_repository& atrp,
     const formatters::repository& frp, model& fm) const {
-    const auto ctx(make_context(atrp, fm));
-    populate_helper_properties(ctx, frp, fm.formattables());
+    const auto cfg(make_configuration(atrp, fm));
+    populate_helper_properties(cfg, frp, fm.formattables());
 }
 
 } } } }

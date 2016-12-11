@@ -42,14 +42,14 @@ namespace formattables {
 
 class helper_expander {
 private:
-    struct context {
+    struct configuration {
         std::unordered_map<std::string, std::string> helper_families;
         std::unordered_map<std::string, streaming_properties>
         streaming_propertiess;
     };
-    friend std::ostream& operator<<(std::ostream& s, const context& v);
+    friend std::ostream& operator<<(std::ostream& s, const configuration& v);
 
-    context make_context(const annotations::type_repository& atrp,
+    configuration make_configuration(const annotations::type_repository& atrp,
         const model& fm) const;
 
 private:
@@ -62,29 +62,29 @@ private:
     bool requires_hashing_helper(const facets_for_family_type& fff,
         const std::string& family) const;
 
-    std::string helper_family_for_id(const context& ctx,
+    std::string helper_family_for_id(const configuration& cfg,
         const std::string& id) const;
 
     boost::optional<streaming_properties> streaming_properties_for_id(
-        const context& ctx, const std::string& id) const;
+        const configuration& cfg, const std::string& id) const;
 
     std::list<std::string> namespace_list(const yarn::name& n) const;
 
 private:
     boost::optional<helper_descriptor>
-    walk_name_tree(const context& ctx, const facets_for_family_type& fff,
+    walk_name_tree(const configuration& cfg, const facets_for_family_type& fff,
         const bool in_inheritance_relationship,
         const bool inherit_opaqueness_from_parent, const yarn::name_tree& nt,
         std::unordered_set<std::string>& done,
         std::list<helper_properties>& hps) const;
 
     std::list<helper_properties>
-    compute_helper_properties(const context& ctx,
+    compute_helper_properties(const configuration& cfg,
         const facets_for_family_type& fff,
         const bool in_inheritance_relationship,
         const std::list<yarn::attribute>& attrs) const;
 
-    void populate_helper_properties(const context& ctx,
+    void populate_helper_properties(const configuration& cfg,
         const formatters::repository& frp,
         std::unordered_map<std::string, formattable>& formattables) const;
 
