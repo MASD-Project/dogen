@@ -31,6 +31,7 @@
 #include "dogen/yarn/types/attribute.hpp"
 #include "dogen/quilt.cpp/types/formattables/streaming_properties.hpp"
 #include "dogen/quilt.cpp/types/formatters/repository.hpp"
+#include "dogen/quilt.cpp/types/formattables/helper_configuration.hpp"
 #include "dogen/quilt.cpp/types/formattables/helper_properties.hpp"
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
 #include "dogen/quilt.cpp/types/formattables/model.hpp"
@@ -42,15 +43,15 @@ namespace formattables {
 
 class helper_expander {
 private:
-    struct configuration {
-        std::unordered_map<std::string, std::string> helper_families;
-        std::unordered_map<std::string, streaming_properties>
-        streaming_propertiess;
+    struct type_group {
+        annotations::type family;
     };
-    friend std::ostream& operator<<(std::ostream& s, const configuration& v);
 
-    configuration make_configuration(const annotations::type_repository& atrp,
-        const model& fm) const;
+    type_group make_type_group(const annotations::type_repository& atrp) const;
+
+private:
+    helper_configuration
+    make_configuration(const type_group& tg, const model& fm) const;
 
 private:
     typedef std::unordered_map<std::string, std::unordered_set<std::string>>
@@ -62,29 +63,30 @@ private:
     bool requires_hashing_helper(const facets_for_family_type& fff,
         const std::string& family) const;
 
-    std::string helper_family_for_id(const configuration& cfg,
+    std::string helper_family_for_id(const helper_configuration& cfg,
         const std::string& id) const;
 
     boost::optional<streaming_properties> streaming_properties_for_id(
-        const configuration& cfg, const std::string& id) const;
+        const helper_configuration& cfg, const std::string& id) const;
 
     std::list<std::string> namespace_list(const yarn::name& n) const;
 
 private:
     boost::optional<helper_descriptor>
-    walk_name_tree(const configuration& cfg, const facets_for_family_type& fff,
+    walk_name_tree(const helper_configuration& cfg,
+        const facets_for_family_type& fff,
         const bool in_inheritance_relationship,
         const bool inherit_opaqueness_from_parent, const yarn::name_tree& nt,
         std::unordered_set<std::string>& done,
         std::list<helper_properties>& hps) const;
 
     std::list<helper_properties>
-    compute_helper_properties(const configuration& cfg,
+    compute_helper_properties(const helper_configuration& cfg,
         const facets_for_family_type& fff,
         const bool in_inheritance_relationship,
         const std::list<yarn::attribute>& attrs) const;
 
-    void populate_helper_properties(const configuration& cfg,
+    void populate_helper_properties(const helper_configuration& cfg,
         const formatters::repository& frp,
         std::unordered_map<std::string, formattable>& formattables) const;
 
