@@ -50,14 +50,13 @@ public:
     void validate() const;
 
 public:
-    void register_formatter_helper(
-        std::shared_ptr<helper_formatter_interface> fh);
-
-public:
     /**
      * @brief Registers a file formatter.
      */
     void register_formatter(std::shared_ptr<artefact_formatter_interface> f);
+
+    void register_formatter_helper(
+        std::shared_ptr<helper_formatter_interface> fh);
 
 public:
     /**

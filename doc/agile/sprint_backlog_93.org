@@ -12,15 +12,15 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-12-11 Sun 17:44]
+#+CAPTION: Clock summary at [2016-12-11 Sun 17:57]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *67:18* |       |       | 100.0 |
+| *Total time*                                                                | *67:29* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 67:18   |       |       | 100.0 |
-| Active                                                                      |         | 67:18 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  2:48 |   4.2 |
+| Stories                                                                     | 67:29   |       |       | 100.0 |
+| Active                                                                      |         | 67:29 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  2:48 |   4.1 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  1:02 |   1.5 |
 | COMPLETED Update readme                                                     |         |       |  0:11 |   0.3 |
 | COMPLETED Test data generation for dates generates invalid dates            |         |       |  0:33 |   0.8 |
@@ -28,13 +28,13 @@
 | COMPLETED Move project directory to output options                          |         |       |  1:10 |   1.7 |
 | COMPLETED Update the conceptual model to clarify backends and kernels       |         |       |  4:20 |   6.4 |
 | COMPLETED Detect knitter and disable code generation accordingly            |         |       |  1:15 |   1.9 |
-| COMPLETED Clean up kernel and backend confusion                             |         |       |  5:17 |   7.9 |
+| COMPLETED Clean up kernel and backend confusion                             |         |       |  5:17 |   7.8 |
 | COMPLETED Add a "language" directory for each backend                       |         |       |  5:44 |   8.5 |
 | COMPLETED Split C++ profiles and templates from C#                          |         |       |  1:11 |   1.8 |
 | COMPLETED Formatter registrar validation is not being called                |         |       |  0:20 |   0.5 |
 | COMPLETED Move decoration repository to quilt                               |         |       |  0:43 |   1.1 |
 | COMPLETED Move module id container into yarn                                |         |       |  0:24 |   0.6 |
-| COMPLETED Add basic infrastructure for C#                                   |         |       | 17:02 |  25.3 |
+| COMPLETED Add basic infrastructure for C#                                   |         |       | 17:02 |  25.2 |
 | COMPLETED Add support for C#-style documentation                            |         |       |  1:57 |   2.9 |
 | COMPLETED Add support for visual studio projects and solutions              |         |       |  6:05 |   9.0 |
 | COMPLETED OSX build is borked                                               |         |       |  0:21 |   0.5 |
@@ -48,7 +48,7 @@
 | COMPLETED Ensure a stable sort of project items                             |         |       |  0:17 |   0.4 |
 | COMPLETED Identify floating point types in yarn                             |         |       |  1:25 |   2.1 |
 | STARTED Add support for test data generation in C#                          |         |       |  1:03 |   1.6 |
-| STARTED Add helper infrastructure to C#                                     |         |       |  1:31 |   2.3 |
+| STARTED Add helper infrastructure to C#                                     |         |       |  1:42 |   2.5 |
 | STARTED Add support for Equals in C#                                        |         |       |  2:49 |   4.2 |
 | STARTED Language namespaces and modeling element locations                  |         |       |  0:53 |   1.3 |
 | STARTED Add support for Decimal numbers in C++                              |         |       |  0:32 |   0.8 |
@@ -671,6 +671,7 @@ Links:
 - [[https://coding.abel.nu/2011/12/return-ienumerable-with-yield-return/][Return IEnumerable with yield return]]
 
 *** STARTED Add helper infrastructure to C#                           :story:
+    CLOCK: [2016-12-11 Sun 17:45]--[2016-12-11 Sun 17:56] =>  0:11
     CLOCK: [2016-12-11 Sun 17:04]--[2016-12-11 Sun 17:44] =>  0:40
     CLOCK: [2016-12-11 Sun 16:42]--[2016-12-11 Sun 17:03] =>  0:21
     CLOCK: [2016-12-11 Sun 16:11]--[2016-12-11 Sun 16:41] =>  0:30

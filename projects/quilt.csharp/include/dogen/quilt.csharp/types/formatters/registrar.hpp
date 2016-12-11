@@ -29,6 +29,7 @@
 #include <forward_list>
 #include "dogen/annotations/types/archetype_location.hpp"
 #include "dogen/quilt.csharp/types/formatters/repository.hpp"
+#include "dogen/quilt.csharp/types/formatters/helper_formatter_interface.hpp"
 #include "dogen/quilt.csharp/types/formatters/artefact_formatter_interface.hpp"
 
 namespace dogen {
@@ -52,6 +53,9 @@ public:
      */
     void register_formatter(std::shared_ptr<artefact_formatter_interface> f);
 
+    void register_formatter_helper(
+        std::shared_ptr<helper_formatter_interface> fh);
+
 public:
     /**
      * @brief Returns all available formatters.
@@ -74,6 +78,12 @@ template<typename Formatter>
 inline void register_formatter(registrar& rg) {
     const auto f(std::make_shared<Formatter>());
     rg.register_formatter(f);
+}
+
+template<typename Formatter>
+inline void register_formatter_helper(registrar& rg) {
+    const auto f(std::make_shared<Formatter>());
+    rg.register_formatter_helper(f);
 }
 
 } } } }

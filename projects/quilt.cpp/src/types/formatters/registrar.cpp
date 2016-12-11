@@ -143,21 +143,6 @@ void registrar::validate() const {
     BOOST_LOG_SEV(lg, debug) << "Archetype locations: " << archetype_locations_;
 }
 
-void registrar::register_formatter_helper(
-    std::shared_ptr<helper_formatter_interface> fh) {
-
-    // note: not logging by design
-    if (!fh)
-        BOOST_THROW_EXCEPTION(registrar_error(null_formatter_helper));
-
-    if(fh->family().empty())
-        BOOST_THROW_EXCEPTION(registrar_error(empty_family));
-
-    auto& f(formatter_repository_.helper_formatters_[fh->family()]);
-    for (const auto& of : fh->owning_formatters())
-        f[of].push_back(fh);
-}
-
 void registrar::
 register_formatter(std::shared_ptr<artefact_formatter_interface> f) {
     // note: not logging by design
@@ -197,6 +182,21 @@ register_formatter(std::shared_ptr<artefact_formatter_interface> f) {
         BOOST_LOG_SEV(lg, error) << duplicate_formatter_name << arch;
         BOOST_THROW_EXCEPTION(registrar_error(duplicate_formatter_name + arch));
     }
+}
+
+void registrar::register_formatter_helper(
+    std::shared_ptr<helper_formatter_interface> fh) {
+
+    // note: not logging by design
+    if (!fh)
+        BOOST_THROW_EXCEPTION(registrar_error(null_formatter_helper));
+
+    if(fh->family().empty())
+        BOOST_THROW_EXCEPTION(registrar_error(empty_family));
+
+    auto& f(formatter_repository_.helper_formatters_[fh->family()]);
+    for (const auto& of : fh->owning_formatters())
+        f[of].push_back(fh);
 }
 
 const repository& registrar::formatter_repository() const {
