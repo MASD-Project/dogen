@@ -120,6 +120,20 @@ std::list<std::string> assistant::make_namespaces(const yarn::name& n) const {
     return nf.flatten(n);
 }
 
+std::string assistant::reference_equals(const yarn::attribute& attr) const {
+    const auto& c(context_.model().aspect_properties());
+    const auto n(attr.parsed_type().current());
+    const auto i(c.find(n.id()));
+
+    bool requires_static_reference_equals(i == c.end() ?
+        false : i->second.requires_static_reference_equals());
+
+    if (requires_static_reference_equals)
+        return n.simple(); // FIXME: qualified
+
+    return attr.name().simple();
+}
+
 void assistant::
 comment(const std::string& c, const unsigned int identation_level) {
     if (c.empty())

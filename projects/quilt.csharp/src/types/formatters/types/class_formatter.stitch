@@ -155,7 +155,7 @@ using System;
                     } else {
 #>
                 hash = (hash * HashingMultiplier) ^
-                    (!<#= attr.name().simple() #>.ReferenceEquals(null, <#= attr.name().simple() #>) ? <#= attr.name().simple() #>.GetHashCode() : 0);
+                    (!<#= a.reference_equals(attr) #>.ReferenceEquals(null, <#= attr.name().simple() #>) ? <#= attr.name().simple() #>.GetHashCode() : 0);
 <#+
                     }
                     sf.next();

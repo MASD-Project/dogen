@@ -124,9 +124,9 @@ namespace Dogen.TestModels.CSharpModel
                 hash = (hash * HashingMultiplier) ^ CharProperty.GetHashCode();
                 hash = (hash * HashingMultiplier) ^ BoolProperty.GetHashCode();
                 hash = (hash * HashingMultiplier) ^
-                    (!ObjectProperty.ReferenceEquals(null, ObjectProperty) ? ObjectProperty.GetHashCode() : 0);
+                    (!object.ReferenceEquals(null, ObjectProperty) ? ObjectProperty.GetHashCode() : 0);
                 hash = (hash * HashingMultiplier) ^
-                    (!StringProperty.ReferenceEquals(null, StringProperty) ? StringProperty.GetHashCode() : 0);
+                    (!string.ReferenceEquals(null, StringProperty) ? StringProperty.GetHashCode() : 0);
                 hash = (hash * HashingMultiplier) ^ DecimalProperty.GetHashCode();
                 return hash;
             }

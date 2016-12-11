@@ -157,7 +157,7 @@ a.stream() << "                int hash = HashingBase;" << std::endl;
 a.stream() << "                hash = (hash * HashingMultiplier) ^ " << attr.name().simple() << ".GetHashCode();" << std::endl;
                     } else {
 a.stream() << "                hash = (hash * HashingMultiplier) ^" << std::endl;
-a.stream() << "                    (!" << attr.name().simple() << ".ReferenceEquals(null, " << attr.name().simple() << ") ? " << attr.name().simple() << ".GetHashCode() : 0);" << std::endl;
+a.stream() << "                    (!" << a.reference_equals(attr) << ".ReferenceEquals(null, " << attr.name().simple() << ") ? " << attr.name().simple() << ".GetHashCode() : 0);" << std::endl;
                     }
                     sf.next();
                 }

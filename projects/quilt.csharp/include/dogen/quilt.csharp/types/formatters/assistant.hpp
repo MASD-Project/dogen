@@ -32,6 +32,7 @@
 #include "dogen/formatters/types/csharp/scoped_boilerplate_formatter.hpp"
 #include "dogen/formatters/types/csharp/scoped_namespace_formatter.hpp"
 #include "dogen/yarn/types/name.hpp"
+#include "dogen/yarn/types/attribute.hpp"
 #include "dogen/yarn/types/name_tree.hpp"
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/quilt.csharp/types/formatters/context.hpp"
@@ -84,6 +85,9 @@ public:
      * @brief returns the c# namespaces for the name.
      */
     std::list<std::string> make_namespaces(const yarn::name& n) const;
+
+public:
+    std::string reference_equals(const yarn::attribute& attr) const;
 
 public:
     /**

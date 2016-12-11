@@ -24,7 +24,7 @@
     },
     "value_type": "boolean",
     "template_kind": "instance",
-    "scope": "root_module",
+    "scope": "entity",
     "default_value": false
   },
   {

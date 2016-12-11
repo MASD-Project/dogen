@@ -135,7 +135,8 @@
       "meta_type": "object",
       "in_global_module": true,
       "annotation": {
-        "quilt.csharp.helper.family": "Object"
+        "quilt.csharp.helper.family": "Object",
+        "quilt.csharp.requires_static_reference_equals" : true
       }
     },
     {
@@ -145,7 +146,8 @@
       "meta_type": "object",
       "in_global_module": true,
       "annotation": {
-        "quilt.csharp.helper.family": "String"
+        "quilt.csharp.helper.family": "String",
+        "quilt.csharp.requires_static_reference_equals" : true
       }
     },
     {
