@@ -12,17 +12,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-12-12 Mon 15:13]
+#+CAPTION: Clock summary at [2016-12-12 Mon 16:30]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *1:54* |      |      | 100.0 |
+| *Total time*                                                                | *3:10* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 1:54   |      |      | 100.0 |
-| Active                                                                      |        | 1:54 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:23 |  20.2 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:16 |  14.0 |
-| STARTED Add helper infrastructure to C#                                     |        |      | 1:15 |  65.8 |
+| Stories                                                                     | 3:10   |      |      | 100.0 |
+| Active                                                                      |        | 3:10 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:23 |  12.1 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:16 |   8.4 |
+| STARTED Add helper infrastructure to C#                                     |        |      | 2:31 |  79.5 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -135,6 +135,7 @@ Same on OSX:
 Emailed bintray for help.
 
 *** STARTED Add helper infrastructure to C#                           :story:
+    CLOCK: [2016-12-12 Mon 15:14]--[2016-12-12 Mon 16:30] =>  1:16
     CLOCK: [2016-12-12 Mon 13:51]--[2016-12-12 Mon 15:06] =>  1:15
 
 It is now clear we will need helpers:

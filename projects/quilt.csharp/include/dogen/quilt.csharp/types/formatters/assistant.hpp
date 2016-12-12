@@ -36,6 +36,8 @@
 #include "dogen/yarn/types/name_tree.hpp"
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/quilt.csharp/types/formatters/context.hpp"
+#include "dogen/quilt.csharp/types/formattables/helper_properties.hpp"
+#include "dogen/quilt.csharp/types/formatters/helper_formatter_interface.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -94,6 +96,17 @@ public:
      * @brief Adds a top-level comment with mark-up.
      */
     void comment(const std::string& c, const unsigned int identation_level = 0);
+
+private:
+    std::list<std::shared_ptr<formatters::helper_formatter_interface>>
+    get_helpers(const formattables::helper_properties& hp) const;
+
+public:
+    /**
+     * @brief Creates any helper methods that may be required for this
+     * formatter.
+     */
+    void add_helper_methods(const std::string& element_id);
 
 public:
     /**

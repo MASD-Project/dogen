@@ -23,6 +23,7 @@
 #include "dogen/formatters/types/comment_formatter.hpp"
 #include "dogen/yarn/types/name_flattener.hpp"
 #include "dogen/yarn/io/languages_io.hpp"
+#include "dogen/quilt.csharp/io/formattables/helper_properties_io.hpp"
 #include "dogen/quilt.csharp/types/formatters/formatting_error.hpp"
 #include "dogen/quilt.csharp/types/formatters/assistant.hpp"
 
@@ -39,7 +40,9 @@ const bool documenting_previous_identifier(true);
 const std::string static_reference_equals("object");
 const std::string artefact_properties_missing(
     "Could not find formatter configuration for formatter: ");
+const std::string no_helpers_for_family("No helpers found for family: ");
 const std::string qn_missing("Could not find qualified name for language.");
+const std::string helpless_family("No registered helpers found for family: ");
 
 }
 
@@ -153,6 +156,61 @@ comment(const std::string& c, const unsigned int identation_level) {
 
     for (unsigned int i = 0; i < identation_level; ++i)
         stream() << dogen::formatters::indent_out;
+}
+
+std::list<std::shared_ptr<formatters::helper_formatter_interface>>
+assistant::get_helpers(const formattables::helper_properties& hp) const {
+    /*
+     * A family must have at least one helper registered. This is a
+     * good way to detect spurious families in data files.
+     */
+    const auto fam(hp.current().family());
+    const auto i(context_.helpers().find(fam));
+    if (i == context_.helpers().end()) {
+        BOOST_LOG_SEV(lg, error) << no_helpers_for_family << fam;
+        BOOST_THROW_EXCEPTION(formatting_error(no_helpers_for_family + fam));
+    }
+    BOOST_LOG_SEV(lg, debug) << "Found helpers for family: " << fam;
+
+    /*
+     * Not all formatters need help, so its fine not to have a
+     * helper registered against a particular formatter.
+     */
+    const auto j(i->second.find(archetype_location_.archetype()));
+    if (j != i->second.end()) {
+        BOOST_LOG_SEV(lg, debug) << "Found helpers for formatter: "
+                                 << archetype_location_.archetype();
+        return j->second;
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Could not find helpers for formatter:"
+                             << archetype_location_.archetype();
+    return std::list<std::shared_ptr<formatters::helper_formatter_interface>>();
+}
+
+void assistant::add_helper_methods(const std::string& element_id) {
+    BOOST_LOG_SEV(lg, debug) << "Generating helper methods. Element: "
+                             << element_id;
+
+    if (context_.element_properties().helper_properties().empty())
+        BOOST_LOG_SEV(lg, debug) << "No helper methods found.";
+
+    const auto& eprops(context_.element_properties());
+    for (const auto& hlp_props : eprops.helper_properties()) {
+        BOOST_LOG_SEV(lg, debug) << "Helper configuration: " << hlp_props;
+        const auto helpers(get_helpers(hlp_props));
+
+        /*
+         * Check to see if the helper is enabled, given the system's
+         * current configuration. If enabled, format it.
+         */
+        for (const auto& hlp : helpers) {
+            const auto fmtn(hlp->formatter_name());
+            BOOST_LOG_SEV(lg, debug) << "Formatting with helper: " << fmtn;
+            hlp->format(*this, hlp_props);
+        }
+    }
+    BOOST_LOG_SEV(lg, debug) << "Finished generating helper methods.";
 }
 
 std::ostream& assistant::stream() {

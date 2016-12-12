@@ -29,6 +29,7 @@
 #include <unordered_map>
 #include "dogen/quilt.csharp/types/formattables/model.hpp"
 #include "dogen/quilt.csharp/types/formattables/element_properties.hpp"
+#include "dogen/quilt.csharp/types/formatters/helper_formatter_interface.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -38,15 +39,29 @@ namespace formatters {
 class context final {
 public:
     context(const formattables::element_properties& element_properties,
-        const formattables::model& fm);
+        const formattables::model& fm, const std::unordered_map<std::string,
+        std::unordered_map<std::string, std::list<std::shared_ptr<
+        helper_formatter_interface>>>>& helpers);
 
 public:
     const formattables::element_properties& element_properties() const;
     const formattables::model& model() const;
+    const std::unordered_map<
+        std::string,
+        std::unordered_map<
+            std::string,
+            std::list<std::shared_ptr<helper_formatter_interface>>>>&
+        helpers() const;
 
 private:
     const formattables::element_properties& element_properties_;
     const formattables::model& model_;
+    const std::unordered_map<
+        std::string,
+        std::unordered_map<
+            std::string, std::list<
+                             std::shared_ptr<helper_formatter_interface>>>>&
+        helpers_;
 };
 
 } } } }

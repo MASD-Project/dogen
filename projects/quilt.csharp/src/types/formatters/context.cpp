@@ -26,8 +26,11 @@ namespace csharp {
 namespace formatters {
 
 context::context(const formattables::element_properties& element_properties,
-    const formattables::model& fm)
-    : element_properties_(element_properties), model_(fm) { }
+    const formattables::model& fm,
+    const std::unordered_map<std::string, std::unordered_map<std::string,
+    std::list<std::shared_ptr<helper_formatter_interface>>>>& helpers)
+    : element_properties_(element_properties), model_(fm),
+      helpers_(helpers) { }
 
 const formattables::element_properties& context::element_properties() const {
     return element_properties_;
@@ -35,6 +38,14 @@ const formattables::element_properties& context::element_properties() const {
 
 const formattables::model& context::model() const {
     return model_;
+}
+
+const std::unordered_map<
+    std::string,
+    std::unordered_map<
+        std::string, std::list<std::shared_ptr<helper_formatter_interface>>>>&
+    context::helpers() const {
+    return helpers_;
 }
 
 } } } }

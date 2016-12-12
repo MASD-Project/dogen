@@ -68,7 +68,9 @@ workflow::execute(const formattables::model& fm) const {
             return r;
         }
 
-        const context ctx(formattable.element_properties(), fm);
+        const auto& eprops(formattable.element_properties());
+        const auto& hlp_fmts(frp.helper_formatters());
+        const context ctx(eprops, fm, hlp_fmts);
         const auto& fmts(i->second);
         for (const auto& fmt_ptr : fmts) {
             const auto& fmt(*fmt_ptr);
