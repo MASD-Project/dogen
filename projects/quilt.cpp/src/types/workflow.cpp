@@ -92,7 +92,7 @@ workflow::generate(const options::knitting_options& ko,
     const dogen::formatters::decoration_properties_factory& dpf,
     const bool enable_kernel_directories,
     const yarn::model& m) const {
-    BOOST_LOG_SEV(lg, debug) << "Started backend.";
+    BOOST_LOG_SEV(lg, debug) << "Started kernel.";
 
     const auto ra(m.root_module().annotation());
     const auto& frp(formatters::workflow::registrar().formatter_repository());
@@ -100,7 +100,7 @@ workflow::generate(const options::knitting_options& ko,
     const auto fm(create_formattables_model(ko, atrp, ra, dpf, frp, ekd, m));
     const auto r(format(atrp, agf, drp, fm));
 
-    BOOST_LOG_SEV(lg, debug) << "Finished backend.";
+    BOOST_LOG_SEV(lg, debug) << "Finished kernel.";
     return r;
 }
 

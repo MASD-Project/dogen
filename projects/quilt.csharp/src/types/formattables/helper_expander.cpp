@@ -27,8 +27,12 @@
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/yarn/types/attribute.hpp"
 #include "dogen/yarn/types/element_visitor.hpp"
+#include "dogen/yarn/io/languages_io.hpp"
+#include "dogen/yarn/types/name_flattener.hpp"
 #include "dogen/quilt.csharp/types/traits.hpp"
+#include "dogen/quilt.csharp/io/formattables/helper_properties_io.hpp"
 #include "dogen/quilt.csharp/io/formattables/helper_configuration_io.hpp"
+#include "dogen/quilt.csharp/types/formattables/expansion_error.hpp"
 #include "dogen/quilt.csharp/types/formatters/helper_formatter_interface.hpp"
 #include "dogen/quilt.csharp/types/formattables/helper_expander.hpp"
 
@@ -36,6 +40,13 @@ namespace {
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory("quilt.csharp.formattables.helper_expander"));
+
+const std::string qn_missing("Could not find qualified name for language.");
+const std::string descriptor_expected(
+    "Child name tree has no associated helper descriptor");
+const std::string missing_helper_family("Helper family not found for: ");
+const std::string empty_identifiable(
+    "Identifiable was not generated correctly and is empty.");
 
 }
 
@@ -50,6 +61,28 @@ public:
         const helper_expander::facets_for_family_type& fff);
 
 private:
+    template<typename Qualified>
+    std::string get_qualified(const Qualified& iaq) const {
+        const auto i(iaq.qualified().find(yarn::languages::cpp));
+        if (i == iaq.qualified().end()) {
+            BOOST_LOG_SEV(lg, error) << qn_missing << yarn::languages::cpp;
+            BOOST_THROW_EXCEPTION(expansion_error(qn_missing));
+        }
+        return i->second;
+    }
+
+private:
+    std::string helper_family_for_id(const helper_configuration& cfg,
+        const std::string& id) const;
+
+private:
+    boost::optional<helper_descriptor>
+    walk_name_tree(const helper_configuration& cfg,
+        const helper_expander::facets_for_family_type& fff,
+        const bool in_inheritance_relationship,
+        const yarn::name_tree& nt, std::unordered_set<std::string>& done,
+        std::list<helper_properties>& hps) const;
+
     std::list<helper_properties>
     compute_helper_properties(const helper_configuration& cfg,
         const helper_expander::facets_for_family_type& fff,
@@ -78,6 +111,20 @@ helper_properties_generator(const helper_configuration& cfg,
     const helper_expander::facets_for_family_type& fff)
     : helper_configuration_(cfg), facets_for_family_(fff) {}
 
+std::string helper_properties_generator::helper_family_for_id(
+    const helper_configuration& cfg, const std::string& id) const {
+
+    const auto i(cfg.helper_families().find(id));
+    if (i == cfg.helper_families().end()) {
+        BOOST_LOG_SEV(lg, debug) << missing_helper_family << id;
+        BOOST_THROW_EXCEPTION(expansion_error(missing_helper_family + id));
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Found helper family for type: " << id
+                             << ". Family:" << i->second;
+    return i->second;
+}
+
 void helper_properties_generator::visit(const yarn::object& o) {
     const auto& fff(facets_for_family_);
     const auto& cfg(helper_configuration_);
@@ -91,12 +138,120 @@ helper_properties_generator::result() const {
     return result_;
 }
 
+boost::optional<helper_descriptor>
+helper_properties_generator::walk_name_tree(const helper_configuration& cfg,
+    const helper_expander::facets_for_family_type& fff,
+    const bool in_inheritance_relationship,
+    const yarn::name_tree& nt, std::unordered_set<std::string>& done,
+    std::list<helper_properties>& hps) const {
+
+    const auto id(nt.current().id());
+    BOOST_LOG_SEV(lg, debug) << "Processing type: " << id;
+
+    helper_descriptor r;
+    yarn::name_flattener nf;
+    r.namespaces(nf.flatten(nt.current()));
+    r.is_simple_type(nt.is_current_simple_type());
+
+    const auto fam(helper_family_for_id(cfg, id));
+    r.family(fam);
+
+    r.name_identifiable(nt.current().identifiable());
+    r.name_qualified(get_qualified(nt.current()));
+    r.name_tree_identifiable(nt.identifiable());
+    r.name_tree_qualified(get_qualified(nt));
+    r.is_circular_dependency(nt.is_circular_dependency());
+
+    helper_properties hp;
+    hp.current(r);
+
+    const auto iir(in_inheritance_relationship);
+    hp.in_inheritance_relationship(iir);
+
+    /*
+     * Note that we are processing the children even though the parent
+     * may not require a helper. This is slight over-caution and may
+     * even be wrong. We are basically saying that in a name tree,
+     * there may be nodes which do not require helpers followed by
+     * nodes that do.
+     */
+    for (const auto c : nt.children()) {
+        /*
+         * We need to remember the descriptors of the direct
+         * descendants - and just the direct descendants, not its
+         * children. If we have a child, we must have a descriptor.
+         */
+        const auto dd(walk_name_tree(cfg, fff, iir, c, done, hps));
+        if (!dd) {
+            BOOST_LOG_SEV(lg, error) << descriptor_expected;
+            BOOST_THROW_EXCEPTION(expansion_error(descriptor_expected));
+        }
+
+        const auto ident(dd->name_tree_identifiable());
+        if (ident.empty()) {
+            BOOST_LOG_SEV(lg, error) << empty_identifiable;
+            BOOST_THROW_EXCEPTION(expansion_error(empty_identifiable));
+        }
+        hp.direct_descendants().push_back(*dd);
+    }
+    BOOST_LOG_SEV(lg, debug) << "Helper properties: " << hp;
+
+    /*
+     * Ensure we have not yet created a helper for this name
+     * tree. Note that we must still do the processing above in
+     * order to ensure the direct descendants are computed, even
+     * though the helper itself may not be required. As an
+     * example, take the case of a map of string to string. We
+     * need the helper for the map to have two direct descendants
+     * (one per string), but we do not want to generate two helper
+     * methods for the strings.
+     *
+     * Note also we are using the return type's identifiable name
+     * rather than the input name tree's identifiable. This is because
+     * we may have augmented it - e.g. the "is pointer" use case.
+     */
+    const auto ident(r.name_tree_identifiable());
+    if (ident.empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_identifiable;
+        BOOST_THROW_EXCEPTION(expansion_error(empty_identifiable));
+    }
+
+    if (done.find(ident) == done.end()) {
+        hps.push_back(hp);
+        done.insert(ident);
+    } else
+        BOOST_LOG_SEV(lg, debug) << "Name tree already processed: " << ident;
+
+    return r;
+
+}
+
 std::list<helper_properties> helper_properties_generator::
-compute_helper_properties(const helper_configuration& /*cfg*/,
-    const helper_expander::facets_for_family_type& /*fff*/,
-    const bool /*in_inheritance_relationship*/,
-    const std::list<yarn::attribute>& /*attrs*/) const {
+compute_helper_properties(const helper_configuration& cfg,
+    const helper_expander::facets_for_family_type& fff,
+    const bool in_inheritance_relationship,
+    const std::list<yarn::attribute>& attrs) const {
+    BOOST_LOG_SEV(lg, debug) << "Started making helper properties.";
+
     std::list<helper_properties> r;
+    if (attrs.empty()) {
+        BOOST_LOG_SEV(lg, debug) << "No properties found.";
+        return r;
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Properties found: " << attrs.size();
+
+    std::unordered_set<std::string> done;
+    const bool iir(in_inheritance_relationship);
+    for (const auto attr : attrs) {
+        const auto& nt(attr.parsed_type());
+        walk_name_tree(cfg, fff, iir, nt, done, r);
+    }
+
+    if (r.empty())
+        BOOST_LOG_SEV(lg, debug) << "No helper properties found.";
+
+    BOOST_LOG_SEV(lg, debug) << "Finished making helper properties.";
     return r;
 }
 
@@ -190,10 +345,10 @@ void helper_expander::populate_helper_properties(
 }
 
 void helper_expander::expand(const annotations::type_repository& atrp,
-    const formatters::repository& /*frp*/, model& fm) const {
+    const formatters::repository& frp, model& fm) const {
     const auto tg(make_type_group(atrp));
-    /*const auto cfg(*/make_configuration(tg, fm)/*)*/;
-    // populate_helper_properties(cfg, frp, fm.formattables());
+    const auto cfg(make_configuration(tg, fm));
+    populate_helper_properties(cfg, frp, fm.formattables());
 }
 
 } } } }

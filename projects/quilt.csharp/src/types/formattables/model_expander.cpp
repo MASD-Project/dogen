@@ -62,8 +62,7 @@ void model_expander::expand_project_items(model& fm) const {
 }
 
 void model_expander::expand_helpers(const annotations::type_repository& atrp,
-    const formatters::repository& frp,
-    model& fm) const {
+    const formatters::repository& frp, model& fm) const {
     helper_expander he;
     he.expand(atrp, frp, fm);
 }
@@ -79,6 +78,13 @@ void model_expander::expand(
      * we need to know about properties from non-target elements.
      */
     expand_aspect_properties(atrp, fm);
+
+    /*
+     * We must expand helpers before reduction because we want to
+     * generate helpers for all referenced types, not just those in
+     * the target model.
+     */
+    expand_helpers(atrp, frp, fm);
 
     reduce(fm);
 

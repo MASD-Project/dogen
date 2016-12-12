@@ -22,6 +22,7 @@
 #include <ostream>
 #include <forward_list>
 #include "dogen/quilt.csharp/types/formatters/artefact_formatter_interface.hpp"
+#include "dogen/quilt.csharp/types/formatters/helper_formatter_interface.hpp"
 #include "dogen/quilt.csharp/io/formatters/repository_io.hpp"
 
 namespace dogen {
@@ -41,6 +42,31 @@ inline std::ostream& to_stream(std::ostream& s, const std::string& key,
     s << " ], ";
     return s;
 }
+
+inline std::ostream& to_stream(std::ostream& s,
+    const std::unordered_map<std::string, std::unordered_map<std::string,
+    std::list<std::shared_ptr<helper_formatter_interface>>>>& helpers) {
+    s << "\"helper_formatters\": " << "[ ";
+
+    for(auto i(helpers.begin()); i != helpers.end(); ++i) {
+        if (i != helpers.begin()) s << ", ";
+        s <<  "{ \"" << i->first << "\":" << "[ ";
+        for(auto j(i->second.begin()); j != i->second.end(); ++j) {
+            if (j != i->second.begin()) s << ", ";
+            s <<  "{ \"" << j->first << "\":" << "[ ";
+            for(auto k(j->second.begin()); k != j->second.end(); ++k) {
+                if (k != j->second.begin()) s << ", ";
+                s <<  "\"" << (*k)->formatter_name() << "\"";
+            }
+            s << "] }";
+        }
+        s << "] }";
+
+    }
+    s << " ]";
+    return s;
+}
+
 inline std::ostream& to_stream(std::ostream& s,
     const std::unordered_map<std::type_index,
     std::forward_list<std::shared_ptr<artefact_formatter_interface>>>& safti) {
@@ -65,6 +91,7 @@ std::ostream& operator<<(std::ostream& s, const repository& rp) {
       << "\"dogen::quilt::cpp::formatters::container\", ";
     to_stream(s, rp.stock_artefact_formatters_by_type_index());
     to_stream(s, "stock_artefact_formatters", rp.stock_artefact_formatters());
+    to_stream(s, rp.helper_formatters());
     s << " }";
     return s;
 }

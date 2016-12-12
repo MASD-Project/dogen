@@ -67,13 +67,13 @@ public:
 private:
     template<typename Qualified>
     std::string get_qualified(const Qualified& iaq) const {
-    const auto i(iaq.qualified().find(yarn::languages::cpp));
-    if (i == iaq.qualified().end()) {
-        BOOST_LOG_SEV(lg, error) << qn_missing << yarn::languages::cpp;
-        BOOST_THROW_EXCEPTION(expansion_error(qn_missing));
+        const auto i(iaq.qualified().find(yarn::languages::cpp));
+        if (i == iaq.qualified().end()) {
+            BOOST_LOG_SEV(lg, error) << qn_missing << yarn::languages::cpp;
+            BOOST_THROW_EXCEPTION(expansion_error(qn_missing));
+        }
+        return i->second;
     }
-    return i->second;
-}
 
 private:
     bool requires_hashing_helper(
