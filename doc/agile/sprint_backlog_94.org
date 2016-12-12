@@ -12,16 +12,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-12-12 Mon 13:43]
+#+CAPTION: Clock summary at [2016-12-12 Mon 13:50]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *0:25* |      |      | 100.0 |
+| *Total time*                                                                | *0:33* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 0:25   |      |      | 100.0 |
-| Active                                                                      |        | 0:25 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:17 |  68.0 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:08 |  32.0 |
+| Stories                                                                     | 0:33   |      |      | 100.0 |
+| Active                                                                      |        | 0:33 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:17 |  51.5 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:16 |  48.5 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -32,6 +32,7 @@ Updates to sprint and product backlog.
 
 *** COMPLETED Edit release notes for previous sprint                  :story:
     CLOSED: [2016-12-12 Mon 13:41]
+    CLOCK: [2016-12-12 Mon 13:42]--[2016-12-12 Mon 13:50] =>  0:08
     CLOCK: [2016-12-12 Mon 13:33]--[2016-12-12 Mon 13:41] =>  0:08
 
 Add github release notes for previous sprint.
@@ -40,29 +41,21 @@ Title: Dogen v0.93.0, "Tombwa"
 
 #+begin_src markdown
 Overview
-========
-The sprint's headline feature is the start of the C# kernel. It is only an experimental feature, but Dogen can already generate the basic infrastructure such as projects, solutions and simple classes.
+=======
+The sprint's headline feature is the start of the C# kernel. It is only an experimental feature, but Dogen can already generate the basic infrastructure such as projects, solutions and simple classes. Only primitives are supported at present. For an example of a C# model see the test data sets ([Dia](https://github.com/DomainDrivenConsulting/dogen/blob/master/test_data/yarn.dia/input/CSharpModel.dia), [JSON](https://github.com/DomainDrivenConsulting/dogen/blob/master/test_data/yarn.json/input/CSharpModel.json)).
 
-Most of the work carried out this sprint was related to adding multiple kernels to Dogen, so it is not user visible. The remaining work was related to the required C# infrastructure.
+Most of the work carried out this sprint was related to adding multiple kernels to Dogen, so it is not user visible. Similarly, the remaining work was related to the required C# infrastructure.
 
 Other user visible changes
-==========================
+===================
 
 - when outputting more than one kernel, Dogen now adds a kernel specific directory (e.g. =cpp=. =csharp=).
-- the =--project-dir= command line option has been renamed to =--output-dir=
+- the ```--project-dir``` command line option has been renamed to ```--output-dir```
 - the =hardware= model has been split into language-specific "builtin" models
 
 For more details see the [sprint log](https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_93.org).
 
 #+end_src
-
-*** Use an unordered map in qualified name                            :story:
-
-For some reason we are using a map, but its not clear that we need
-sorting. Change it to unordered and see what breaks.
-
-It seems we get errors in serialisation when using the map. Create a
-patch and investigate this later.
 
 *** Add helper infrastructure to C#                                   :story:
 
@@ -225,6 +218,14 @@ We need a constructor that takes in all properties.
 Once we are generating solutions, we should detect msbuild (or xbuild)
 and build the solution. This should be a CMake target that runs on
 Travis.
+
+*** Use an unordered map in qualified name                            :story:
+
+For some reason we are using a map, but its not clear that we need
+sorting. Change it to unordered and see what breaks.
+
+It seems we get errors in serialisation when using the map. Create a
+patch and investigate this later.
 
 *** Generate AssemblyInfo in C#                                       :story:
 
