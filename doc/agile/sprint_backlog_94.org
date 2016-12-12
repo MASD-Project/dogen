@@ -1,0 +1,719 @@
+#+title: Sprint Backlog 94
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: STARTED | COMPLETED CANCELLED POSTPONED
+#+tags: { story(s) epic(e) }
+
+* Mission Statement
+
+- Finish adding C# support
+
+* Stories
+
+** Active
+
+#+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
+#+CAPTION: Clock summary at [2016-12-12 Mon 13:43]
+| <75>                                                                        |        |      |      |       |
+| Headline                                                                    | Time   |      |      |     % |
+|-----------------------------------------------------------------------------+--------+------+------+-------|
+| *Total time*                                                                | *0:25* |      |      | 100.0 |
+|-----------------------------------------------------------------------------+--------+------+------+-------|
+| Stories                                                                     | 0:25   |      |      | 100.0 |
+| Active                                                                      |        | 0:25 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:17 |  68.0 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:08 |  32.0 |
+#+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
+#+end:
+
+*** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-12-12 Mon 13:15]--[2016-12-12 Mon 13:32] =>  0:17
+
+Updates to sprint and product backlog.
+
+*** COMPLETED Edit release notes for previous sprint                  :story:
+    CLOSED: [2016-12-12 Mon 13:41]
+    CLOCK: [2016-12-12 Mon 13:33]--[2016-12-12 Mon 13:41] =>  0:08
+
+Add github release notes for previous sprint.
+
+Title: Dogen v0.93.0, "Tombwa"
+
+#+begin_src markdown
+Overview
+========
+The sprint's headline feature is the start of the C# kernel. It is only an experimental feature, but Dogen can already generate the basic infrastructure such as projects, solutions and simple classes.
+
+Most of the work carried out this sprint was related to adding multiple kernels to Dogen, so it is not user visible. The remaining work was related to the required C# infrastructure.
+
+Other user visible changes
+==========================
+
+- when outputting more than one kernel, Dogen now adds a kernel specific directory (e.g. =cpp=. =csharp=).
+- the =--project-dir= command line option has been renamed to =--output-dir=
+- the =hardware= model has been split into language-specific "builtin" models
+
+For more details see the [sprint log](https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_93.org).
+
+#+end_src
+
+*** Use an unordered map in qualified name                            :story:
+
+For some reason we are using a map, but its not clear that we need
+sorting. Change it to unordered and see what breaks.
+
+It seems we get errors in serialisation when using the map. Create a
+patch and investigate this later.
+
+*** Add helper infrastructure to C#                                   :story:
+
+It is now clear we will need helpers:
+
+- types: floating point comparison.
+- test data: for most proxy types.
+- io: for most proxy types.
+
+Add all of the required infrastructure to C# so we can make use of
+helpers in these facets.
+
+*** Add support for test data generation in C#                        :story:
+
+We need to create a facet that generates domain types. It should be
+idiomatic in C# - =IEnumerable=, etc.
+
+Links:
+
+- [[http://geekswithblogs.net/BlackRabbitCoder/archive/2010/04/21/more-fun-with-c-iterators-and-generators.aspx][More Fun with C# Iterators and Generators]]
+- [[https://gist.github.com/DForshner/5533088][NaiveFibonacciSequenceGenerator.cs]]
+- [[https://coding.abel.nu/2011/12/return-ienumerable-with-yield-return/][Return IEnumerable with yield return]]
+
+*** Add support for Equals in C#                                      :story:
+
+We need some basic support for Equals and GetHashCode.
+
+Links:
+
+- [[http://www.loganfranken.com/blog/687/overriding-equals-in-c-part-1/][Overriding Equals in C# (Part 1)]]
+- [[http://www.loganfranken.com/blog/692/overriding-equals-in-c-part-2/][Overriding Equals in C# (Part 2)]]
+- [[http://www.loganfranken.com/blog/698/overriding-equals-in-c-part-3/][Overriding Equals in C# (Part 3)]]
+
+Problems with GetHashCode:
+
+: Types/AllBuiltins.cs(109,38): error CS0176: Static member `object.ReferenceEquals(object, object)' cannot be accessed with an instance reference, qualify it with a type name instead
+: Types/AllBuiltins.cs(111,38): error CS0176: Static member `object.ReferenceEquals(object, object)' cannot be accessed with an instance reference, qualify it with a type name instead
+
+We need a way to know if a type has a static GetHashCode or not.
+
+We also need a way to compare floating point numbers. In both cases
+the easiest thing is to use helpers. See:
+
+- [[http://stackoverflow.com/questions/3874627/floating-point-comparison-functions-for-c-sharp][Floating point comparison functions for C#]]
+
+*** Language namespaces and modeling element locations                :story:
+
+When we designed Dogen's meta-model yarn, we created a separation from
+"physical space" and "modeling space". That is, a modeling element
+living in modeling space does not know of any implementation specific
+details such as serialisation or test data generation. Those are
+concerns left to the kernels that implement "physical space" such as
+the C++ kernel and are normally implemented as separate facets. Again,
+facets are a "physical concept" and have no equivalent in modeling
+space.
+
+Facets normally tend to have a folder associated, originally
+envisioned as a way keep the code a bit more manageable. If we take
+the [[https://github.com/DomainDrivenConsulting/dogen/tree/master/projects/yarn/include/dogen/yarn][yarn model itself]] as an example:
+
+- types: domain types
+- hash: support for std::hash
+- io: iostreams support
+- serialization: boost serialisation support
+- test_data: test data generators
+
+Crucially, modeling space is not aware at all of these folders and
+thus they are not related to the modeling space concept of modules. So
+it is that the domain type, housed in the types folder, is [[https://github.com/DomainDrivenConsulting/dogen/blob/master/projects/yarn/include/dogen/yarn/types/enumeration.hpp][defined as]]:
+
+#+begin_src
+...
+namespace dogen {
+namespace yarn {
+
+/**
+ * @brief Defines a bounded set of logically related values for a primitive type
+ * or a string.
+ */
+class enumeration final : public dogen::yarn::element {
+...
+#+end_src
+
+And so forth (note the absence of "types" in the namespace
+declaration). This worked well for C++. However, this approach may
+cause problems for C# and will certainly cause problems for Java. This
+is because in these languages, folders are supposed to correspond to
+namespaces. In C# this is largely optional, but in Java it is
+mandatory. Thus we need some way of injecting the facet directories as
+internal modules before we code generate.
+
+Actually this is non-trivial; all references to types will now have to
+concern themselves with the facet. For example, say test data
+generator is referring to the domain type; this now needs to be
+qualified correctly, as they are in different namespaces. This
+requires quite a bit of thinking in order to generate compilable
+code.
+
+On further thought, perhaps its not that bad. We just to be able to
+distinguish proxy from non-proxy types (in order to know whether to
+apply the "fake" facet namespace); then, we either apply the current
+facet (say test data) or types. We don't refer to a third facet. In
+addition, we can also use the facet folder as the fake namespace. So,
+before we make use of a name, we need to call the assistant to inject
+the fake internal module, either with the current facet or types; this
+is done for all non-proxy names. The "is proxy" property needs to be
+added to names.
+
+Tasks:
+
+- add a meta-data flag to enable/disable this feature.
+- in assistant, during code generation, provide a function which
+  injects the internal module.
+
+*** Add support for Decimal numbers in C++                            :story:
+
+- try using ICU DecNumber library.
+- check compiler support (MSVC may have decimals; if so, use that instead)
+
+*** Add feature to disable regions                                    :story:
+
+We need a way to stop outputting regions if the user does not want
+them.
+
+*** Add parameters for using and imported assembly                    :story:
+
+Assemblies imported via proxy models need to have the ability to
+supply two parameters:
+
+- assembly name: this is not always the same as the proxy model name;
+- root namespace: similarly this may differ from the proxy model name.
+
+These should be supplied as meta data and used when constructing
+fabric types.
+
+*** Add support for enumerations in C#                                :story:
+
+Add all the machinery needed to generate enums in C#. We need to also
+add the flag for default enum:
+
+:         "is_default_enumeration_type": true,
+
+This is causing errors at the moment:
+
+: std::exception::what: Type not found: is_default_enumeration_type
+
+Which is weird since it exists in C++. Actually this is not a
+meta-data parameter, just a regular Json element.
+
+Links:
+
+- [[https://msdn.microsoft.com/en-us/library/sbbt4032.aspx][enum (C# Reference)]]
+
+*** Add complete constructor for C# types                             :story:
+
+We need a constructor that takes in all properties.
+
+*** Add msbuild target for C# test model                              :story:
+
+Once we are generating solutions, we should detect msbuild (or xbuild)
+and build the solution. This should be a CMake target that runs on
+Travis.
+
+*** Generate AssemblyInfo in C#                                       :story:
+
+We need to inject a type for this in fabric. For now we can leave it
+mainly blank but in the future we need to have meta-data in yarn for
+all of its properties:
+
+: [assembly: AssemblyTitle ("TestDogen")]
+: [assembly: AssemblyDescription ("")]
+: [assembly: AssemblyConfiguration ("")]
+: [assembly: AssemblyCompany ("")]
+: [assembly: AssemblyProduct ("")]
+: [assembly: AssemblyCopyright ("marco")]
+: [assembly: AssemblyTrademark ("")]
+: [assembly: AssemblyCulture ("")]
+: [assembly: AssemblyVersion ("1.0.*")]
+
+These appear to just be properties at the model level.
+
+*** Add visibility to yarn elements                                   :story:
+
+We need to be able to mark yarn types as:
+
+- public
+- internal
+
+This can then be used by C++ as well for visibility etc.
+
+*** Add partial element support to yarn                               :story:
+
+We need to be able to mark yarn elements as "partial". It is then up
+to programming languages to map this to a language feature. At present
+only [[https://msdn.microsoft.com/en-us/library/wa80x488.aspx][C# would do so]].
+
+It would be nice to have a more meaningful name at yarn
+level. However, seems like this is a fairly general programming
+concept now: [[https://en.wikipedia.org/wiki/Class_(computer_programming)#Partial][wikipedia]].
+
+*** Add visibility to yarn attributes                                 :story:
+
+We need to be able to mark yarn attributes as:
+
+- public
+- private
+- protected
+
+*** Add final support in C#                                           :story:
+
+Links:
+
+- [[https://msdn.microsoft.com/en-us/library/88c54tsw.aspx][sealed (C# Reference)]]
+
+*** Add aspects for C# serialisation support                          :story:
+
+We need to add serialisation support:
+
+- C# serialisation
+- Data Contract serialisation
+- Json serialisation
+
+In C# these are done via attributes so we do not need additional
+facets. We will need a lot of configuration knobs though:
+
+- ability to switch a serialisation method on at model level or
+  element level.
+- support for serialisation specific arguments such as parameters for
+  Json.Net.
+
+Links:
+
+- [[https://msdn.microsoft.com/en-us/library/ms731923(v%3Dvs.110).aspx][Types Supported by the Data Contract Serializer]]
+- [[https://msdn.microsoft.com/en-us/library/ms731073(v%3Dvs.110).aspx][Serialization and Deserialization]]
+- [[https://msdn.microsoft.com/en-us/library/ms733127(v%3Dvs.110).aspx][Using Data Contracts]]
+- [[https://msdn.microsoft.com/en-us/library/ms731923(v%3Dvs.110).aspx][Types Supported by the Data Contract Serializer]]
+
+*** Clean up comment formatter                                        :story:
+
+Comment formatter is now a mess of ifs and boolean variables. We need
+to create a proper state machine describing its internals and then
+implement it.
+
+*** Consider removing filtering ostream                               :story:
+
+Originally we added a boost based stream to handle
+indentation. However, since we moved over to stitch, there probably is
+no need to use it any longer. We need to investigate if the formatters
+model is making use of it (generating comments, namespaces, etc). If
+not, remove it.
+
+*** Knitting =quilt= does not work                                    :story:
+
+When we invoke =knit_quilt= for some reason we seem to knit
+=quilt.cpp=:
+
+: $ ninja knit_quilt
+: [1/1] Knitting Quilt C++ model
+
+This seems to be some kind of ninja "feature".
+
+For the moment we've put in a very ugly fix: we renamed the target
+=knit_quiltx=.
+
+*** Use templates for directory and prefix fields                     :story:
+
+At present we have a lot of duplication on the annotations for certain
+fields. This is because we need different defaults depending on the
+facet etc. A different approach would be to use the appropriate
+template (without default values) and then using profiles to default
+those that need defaulting.
+
+Other fields may also need a similar clean up:
+
+- overwrite
+
+In addition, we could add support for "default value variables". These
+are useful for directories. They work as follows: the default value is
+something like =${facet.simple_name}= or perhaps just
+=${simple_name}=, in which case we assume the template kind determines
+the target. Say the target is the kernel:
+
+:      "family": "quilt",
+:      "kernel": "quilt.cpp",
+
+The simple name is then =kernel - family=, e.g. =cpp=. Unfortunately
+this does not work for prefix.
+
+Tasks:
+
+- make prefix a recursive field at archetype level, adding default
+  values to profiles.
+- make directory a recursive field at facet level,  adding default
+  values to profiles.
+
+*** Add an example of redis and dogen                                 :story:
+
+Building external project:
+
+: cd /home/marco/Development/DomainDrivenConsulting/redis/build/output/gcc-6/Release &&
+: CMAKE_PROGRAM_PATH=/home/marco/Development/DomainDrivenConsulting/dogen/build/output/gcc/Release/stage/bin
+: CMAKE_INCLUDE_PATH=/usr/local/personal/include CMAKE_LIB_PATH=/usr/local/personal/lib
+: cmake ../../../.. -G Ninja && Ninja -j5
+
+Redis client:
+
+https://github.com/nekipelov/redisclient
+git@github.com:nekipelov/redisclient.git
+
+*** Add support for object caches                                      :epic:
+
+It would be good to have meta-model knowledge of "cacheability". This
+is done by marking objects with a stereotype of =Cacheable=. It then
+could translate to:
+
+- adding a serialisation like interface with gets, puts, etc. We need
+  to bind this to a specific cache such as memcache, coherence, etc.
+- create a type to string which converts a key made up of primitives
+  into a underscore delimited string, used as a key in the cache.
+- we should also consider external libraries like [[https://github.com/cripplet/cachepp][cachepp]].
+
+*** Add support for Language Agnostic Models (LAM)                    :story:
+
+When we start supporting more than one language, one interesting
+feature would be to be able to define a model once and have it
+generated for all supported languages. This would be achieved by
+having a system model (or set of system models) that define all the
+key types in a language agnostic manner. For example:
+
+: lam::string
+: lam::int
+: lam::int16
+
+Each of these types then has a set of meta-data fields that map them
+to a type in a supported language:
+
+: lam:string: cpp.concrete_type_mapping = std::string
+: lam:string: csharp.concrete_type_mapping = string
+
+And so on. We load the user model that makes use of LAM, we generate
+the merged model still with LAM types and then we perform a
+translation for each of the supported and enabled languages: for every
+LAM type, we replace all its references with the corresponding
+concrete type. We need to split the supplied mapping into a QName, use
+the QName to load the system models for that language, look up the
+type and replace it. After the translation no LAM types are left. We
+end up with N yarn merged models where N is the number of supported and
+enabled languages.
+
+Each of these models is then sent down to code generation. This should
+be equivalent to manually generating models per language - we could
+use this as a test.
+
+Once we have LAM, it would be great to be able to exchange data
+between languages. This could be done as follows:
+
+- XML: create a "LAM" XML schema, and a set of formatters that read
+  and write from it. This is kind of like reverse mapping the types
+  back to LAM types when writing the XML.
+- JSON: similar approach to XML, minus the schema.
+- POF: use the coherence libraries to dump the models into POF.
+
+Tasks:
+
+- create the LAM model with a set of basic types.
+- add a set of mapping fields into yarn: =yarn.mapping.csharp=, etc
+  and populate the types with entries for each supported language.
+- create a notion of mapping of intermediate models into
+  languages. The input is the merged intermediate model and the output
+  is N models one per language. We also need a way to associate
+  backends with languages. Each model is sent down to its backend.
+- note that reverse mapping is possible: we should be able to
+  associate a type on a given language with it's lam type. This means
+  that, given a model in say C#, we could reconstruct a yarn lam model
+  (or tell the user about the list of failures to map). This should be
+  logged as a separate story.
+
+Links:
+
+- [[http://stackoverflow.com/questions/741054/mapping-between-stl-c-and-c-sharp-containers][Mapping between stl C++ and C# containers]]
+- [[http://stackoverflow.com/questions/3659044/comparison-of-c-stl-collections-and-c-sharp-collections][Comparison of C++ STL collections and C# collections?]]
+
+*** Add C++-03 mode                                                    :epic:
+
+#+begin_quote
+*Story*: As a dogen user, I want to create models in C++ 03 so that I
+can interface with legacy code.
+#+end_quote
+
+It shouldn't be too hard to generate C++-03 code in addition to
+C++-14. We could follow the gcc/odb convention and have a =-std=
+option for this in meta-data. The only problem would be testing - at
+present the language settings comes from cmake, and we'd have to make
+sure the compiler is not in C++-14 mode when compiling test models
+in 03. Also, the mixing and matching of 03 with 14 may not be
+trivial. We should wait for a use case.
+
+It may be possible to add different flags to different projects in CMake.
+
+*** Add support for thrift and protocol buffers                        :epic:
+
+#+begin_quote
+*Story*: As a dogen user, I want to expose dogen models to other
+languages so that I can make use of them on these languages.
+#+end_quote
+
+Amongst other things, these technologies provide cross-language
+support, allowing one to create c++ services and consume them from say
+ruby, python, etc. At their heart they are simplified versions of
+CORBA/DCOM, with IDL equivalents, IDL compilers, specification for
+wire formats, etc. As they all share a number of commonalities, we
+shall refer to these technologies in general as Distributed Services
+Technologies (DST). We could integrate DST's with Dogen in two
+ways. First approach A:
+
+- generate the IDL for a model; we have enough information to produce
+  something that is very close to it's Dogen representation,
+  translated to the type system of the IDL; e.g. map =std::string=,
+  =std::vector=, etc to their types. This IDL is then compiled by the
+  DST's IDL to C++ compiler. Note: we could use LAM for this, but the
+  problem is if one starts with a C++ model, one would have to convert
+  it into LAM just to be able to do the mappings. A solution for this
+  problem would be to "reverse map" LAM from C++ and get to the
+  generic type this way.
+- possibly generate the transformation code that takes a C++ object
+  generated by Dogen and converts it into the C++ object generated by
+  the DST's C++ compiler and vice-versa. We probably have enough
+  information to generate these transformers automatically, after some
+  analysis of the code generated by the DST's C++ compiler.
+
+In order for this to work we need to have the ability to understand
+function signatures for services so that we can generate the correct
+service IDL for the DST. In fact, we should be able to mark certain
+services as DST-only so that we do not generate a Dogen representation
+for them. The DST service then internally uses the transformer to take
+the DST's domain types and convert them into Dogen domain types, and
+then uses the Dogen object model to implement the guts of the
+service. When shipping data out, the reverse process takes place.
+
+Approach A works really well when a service has a very narrow
+interface, and performs most of it's work internally without exposing
+it via the interface. Once the service requires the input (and/or
+output) of a large number of domain types, we hit a cost limitation;
+we may end up defining as many types in Dogen as there are in the IDL,
+thus resulting in a large amount of transformations between the two
+object models.
+
+In these cases one may be tempted to ignore Dogen and implement the
+service directly in terms of the DST's object model. This is not very
+convenient as the type system is not as expressive as regular C++ -
+there are a number of conventions that must be adopted, and
+limitations imposed too due to the expressiveness of the IDL. We'd
+also loose all the services provided by Dogen, which was the main
+reason why we created it in the first place.
+
+Approach B is more difficult. We could look into the wire format of
+each DST and implement it as serialisation mechanism. For this to
+work, the DST must:
+
+- provide some kind of raw interface that allows one to plug in types
+  serialisation manually. Ideally we wouldn't have to do this for
+  services, just for domain types, but it depends on the low-level
+  facilities available. A cursory look at both thrift and protocol
+  buffers does not reveal easy access to such an interface.
+- provide either a low-level wire format library (e.g. =std::string=
+  to =string=, etc) or a well specified wire format that we could
+  easily implement from scratch.
+
+This approach is the cleaner technically, but its a lot of work, and
+very hard to get right. We would have to have a lot of round-trip
+tests. In addition, DST's such as thrift provide a wealth of wire
+formats, so if there is no easy-access low-level wire format library,
+it would be very difficult to get this right.
+
+*** Add support for BSON serialisation                                :story:
+
+It would be useful to support Mongo DB's BSON. There is a C++ stand
+alone library for this:
+
+https://github.com/jbenet/bson-cpp
+
+For examples on how to use the C++ API see the tutorial:
+
+https://github.com/mongodb/mongo-cxx-driver/wiki/Tutorial
+
+*** Add support for deprecation                                       :story:
+
+#+begin_quote
+*Story*: As a dogen user, I want to mark certain properties, classes
+or methods as deprecated so that I can tell my users to stop using
+them.
+#+end_quote
+
+We should be able to mark classes and properties as deprecated and
+have that reflected in both doxygen and C++-11 deprecated attributes.
+
+Note that at present nothing stops the users from adding the marker
+themselves.
+
+Perhaps we should add general support for attributes. This would be
+useful for languages like C# and Java, to control serialisation, etc.
+
+*** Add a frontend for visual studio models                           :story:
+
+It should be "fairly straightforward" to add a frontend for visual
+studio. A sample project has been added to test data:
+
+: test_data/visual_studio_modeling
+
+We should also extend tailor to output these projects so we can test
+it with existing models.
+
+*** Create a tool to generate product skeletons                       :story:
+
+Now that dogen is evolving to a MDSD tool, it would be great to be
+able to create a complete product skeleton from a tool. This would
+entail:
+
+- directory structure. We should document our standard product
+  directory structure as part of this exercise. Initial document added
+  to manual as "project_structure.org".
+- licence: user can choose one.
+- copyright: input by user, used in CMakeFiles, etc. added to the
+  licence.
+- CI support: travis, appveyor
+- EDE support:
+- CMake support: top-level CMakefiles, CPack. versioning
+  templates, valgrind, doxygen. For CTest we should also generate a
+  "setup cron" and "setup windows scheduler" scripts. User can just
+  run these from the build machine and it will start running CTest.
+- conan support: perhaps with just boost for now
+- agile with first sprint
+- README with emblems.
+
+Name for the tool: dart.
+
+Tool should have different "template sets" so that we could have a
+"standard dogen product" but users can come up with other project
+structures.
+
+Tool should add FindODB if user wants ODB support. Similar for EOS
+when we support it again. We should probably have HTTP links to the
+sources of these packages and download them on the fly.
+
+Tool should also create git repo and do first commit (optional).
+
+For extra bonus points, we should create a project in GitHub, Travis
+and AppVeyor from dart.
+
+We should also generate a RPM/Deb installation script for at least
+boost, doxygen, build essentials, clang.
+
+We should also consider a "refresh" or "force" statement, perhaps on a
+file-by-file basis, which would allow one to regenerate all of these
+files. This would be useful to pick-up changes in travis files, etc.
+
+One problem with travis files is that each project has its own
+dependencies. We should move these over to a shell script and call
+these. The script is not generated or perhaps we just generate a
+skeleton. This also highlights the issue that we have different kinds
+of files:
+
+- files that we generate and expect the user to modify;
+- files that we generate but don't expect user modifications;
+- files that the user generates.
+
+We need a way to classify these.
+
+Dart should use stitch templates to generate files.
+
+We may need some options such as "generate boost test ctest
+integration", etc.
+
+Notes:
+
+- [[https://github.com/elbeno/skeleton][Skeleton]]: project to generate c++ project skeletons.
+- split all of the configuration of CMake dependencies from main CMake
+  file. Possible name: ConfigureX? ConfigureODB, etc. See how find_X
+  is implemented.
+- detect all projects by looping through directories.
+- fix CMake generation so that most projects are generated by Dogen.
+- add option to Dogen to generate test skeleton.
+- detect all input models and generate targets by looping through
+  them.
+- add CMake file to find knitter etc and include those files in
+  package. We probably should install dogen now and have dogen rely on
+  installed dogen first, with an option to switch to "built" dogen.
+
+*** Merge properties factory with stitching factory                   :story:
+
+In stitch we still have a few classes that are light on
+responsibilities. One case is the stitching properties factory, traits
+etc. We should merge all of this into a single class, properties
+factory.
+
+*** Rename project directory path                                     :story:
+
+The C++ options have an attribute called
+=project_directory_path=. This is a bit misleading; it is actually the
+top-level directory that will contain the project directory. In
+addition, this is not really C++ specific at all; it would apply to
+any kernel and sub-kernel. We should rename it and move it to output
+options.
+
+*** Add log-level to command line                                     :story:
+
+We are now increasingly logging at trace levels. We need to allow
+users to supply a more fine-grained log configuration. This could be
+done by simply allowing users to set the log level via a command-line
+flag: =log_level=. It would replace verbose.
+
+*** Consider adding =artefact_set= to formatters' model               :story:
+
+We are using collections of artefacts quite a bit, and it makes sense
+to create an abstraction for it such as a =artefact_set=. However, for
+this to work properly we need to add at least one basic behaviour: the
+ability to merge two artefact sets. Or else we will end up having to
+unpack the artefacts, then merging them, then creating a new artefact
+set.
+
+Problem is, we either create the artefact set as a non-generatable
+type - not ideal - or we create it as generatable and need to add this
+as a free function. We need to wait until dogen has support for
+merging code generation.
+
+*** Consider supplying element configuration as a parameter           :story:
+
+Figure out if element configuration is context or if it is better
+expressed as a stand alone formatting parameter.
+
+*** Formatters' repository should be created in quilt                 :story:
+
+At present we are creating the formatters' repository in
+=quilt.cpp=. However it will be shared by all backends in the
+kernel. Move it up to =quilt= level and supply it as a paramter to the
+backends.
+
+*** Initialise formatters in the formatter's translation unit         :story:
+
+At present we are initialising the formatters in each of the facet
+initialisers. However, it makes more sense to initialise them on the
+translation unit for each formatter. This will also make life easier
+when we move to a mustache world where there may not be a formatter
+header file at all.
+
+*** Add knobs to control output of constructors and operators         :story:
+
+At present we are outputting all of the default constructors and the
+operators in the handcrafted templates. Ideally it should just be the
+class name. We need a way of controlling all of the default
+constructors and all of the operators in one go so we can set it on
+the handcrafted profile.
+
+** Deprecated
