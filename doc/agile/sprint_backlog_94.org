@@ -135,6 +135,7 @@ Same on OSX:
 Emailed bintray for help.
 
 *** STARTED Add helper infrastructure to C#                           :story:
+    CLOCK: [2016-12-12 Mon 16:31]--[2016-12-12 Mon 17:06] =>  0:35
     CLOCK: [2016-12-12 Mon 15:14]--[2016-12-12 Mon 16:30] =>  1:16
     CLOCK: [2016-12-12 Mon 13:51]--[2016-12-12 Mon 15:06] =>  1:15
 
@@ -146,6 +147,29 @@ It is now clear we will need helpers:
 
 Add all of the required infrastructure to C# so we can make use of
 helpers in these facets.
+
+Notes:
+
+- problem: we are transforming only those types for which we have
+  formatters. This worked ok in C++ because we pretty much have
+  formatters for all types. However, in C# we've only hooked
+  =object=. This means we are filtering out all primitives, which then
+  means helpers cannot bind. This also illustrates that helper
+  families are really a yarn level concept - or at least should be
+  extracted from the model prior to transformation. It is also a bit
+  surprising that the transformer is performing some kind of
+  reduction.
+
+Patch:
+
+#+begin_src
+@@ -323,7 +324,7 @@ void helper_expander::populate_helper_properties(
+          * We only want to process the master segment; the extensions
+          * can be ignored.
+          */
+-        auto& e(*formattable.element());
++        const auto& e(*formattable.element());
+#+end_src
 
 *** Add support for test data generation in C#                        :story:
 
@@ -179,6 +203,30 @@ We also need a way to compare floating point numbers. In both cases
 the easiest thing is to use helpers. See:
 
 - [[http://stackoverflow.com/questions/3874627/floating-point-comparison-functions-for-c-sharp][Floating point comparison functions for C#]]
+
+#+begin_src
+public bool NearlyEqual(double a, double b, double epsilon)
+{
+    double absA = Math.Abs(a);
+    double absB = Math.Abs(b);
+    double diff = Math.Abs(a - b);
+
+    if (a == b)
+    { // shortcut, handles infinities
+        return true;
+    }
+    else if (a == 0 || b == 0 || diff < Double.Epsilon)
+    {
+        // a or b is zero or both are extremely close to it
+        // relative error is less meaningful here
+        return diff < epsilon;
+    }
+    else
+    { // use relative error
+        return diff / (absA + absB) < epsilon;
+    }
+}
+#+end_src
 
 *** Generate windows packages with CPack                              :story:
 
