@@ -148,7 +148,7 @@ std::string helper_properties_generator::helper_family_for_id(
 
     const auto i(cfg.helper_families().find(id));
     if (i == cfg.helper_families().end()) {
-        BOOST_LOG_SEV(lg, debug) << missing_helper_family << id;
+        BOOST_LOG_SEV(lg, error) << missing_helper_family << id;
         BOOST_THROW_EXCEPTION(expansion_error(missing_helper_family + id));
     }
 
