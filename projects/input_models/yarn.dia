@@ -21529,7 +21529,7 @@ space.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#Stereotipable#</dia:string>
+        <dia:string>#Stereotypable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#concept#</dia:string>
