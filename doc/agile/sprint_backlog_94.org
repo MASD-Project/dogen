@@ -12,21 +12,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-12-12 Mon 15:07]
+#+CAPTION: Clock summary at [2016-12-12 Mon 15:13]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *1:48* |      |      | 100.0 |
+| *Total time*                                                                | *1:54* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 1:48   |      |      | 100.0 |
-| Active                                                                      |        | 1:48 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:17 |  15.7 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:16 |  14.8 |
-| STARTED Add helper infrastructure to C#                                     |        |      | 1:15 |  69.4 |
+| Stories                                                                     | 1:54   |      |      | 100.0 |
+| Active                                                                      |        | 1:54 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:23 |  20.2 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:16 |  14.0 |
+| STARTED Add helper infrastructure to C#                                     |        |      | 1:15 |  65.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-12-12 Mon 15:07]--[2016-12-12 Mon 15:13] =>  0:06
     CLOCK: [2016-12-12 Mon 13:15]--[2016-12-12 Mon 13:32] =>  0:17
 
 Updates to sprint and product backlog.
@@ -57,6 +58,81 @@ Other user visible changes
 For more details see the [sprint log](https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_93.org).
 
 #+end_src
+
+*** COMPLETED Add travis support for bintray                          :story:
+    CLOSED: [2016-12-12 Mon 15:12]
+
+*Rationale*: as of sprint 93 we are now generating packages in bintray
+for OSX and Debian.
+
+There is a new web application that interfaces with GitHub:
+[[https://bintray.com/][bintray]].
+
+- add JSON validation to bintray deployment descriptor.
+
+Notes:
+
+- an account was created [[https://bintray.com/mcraveiro][linked to GitHub]].
+- it supports the uploads of [[https://bintray.com/mcraveiro/deb][debs]].
+- [[https://bintray.com/docs/usermanual/uploads/uploads_howdoiuploadmystufftobintray.html][How Do I Upload My Stuff to Bintray?]]
+- [[https://github.com/tim-janik/beast][Beast]] project [[https://raw.githubusercontent.com/tim-janik/beast/master/README.md][README]] with emblems
+- Beast [[https://github.com/tim-janik/beast/blob/master/.travis.yml][travis.yml]]
+- [[https://github.com/tim-janik/rapicorn/blob/master/citool.sh.][citool.sh]] script from [[https://github.com/tim-janik/rapicorn][Rapicorn]] project and their [[https://raw.githubusercontent.com/tim-janik/rapicorn/master/README.md][README]].
+
+At present we are getting the following error:
+
+: Skipping a deployment with the bintray provider because this branch is not permitted
+
+This was fixed. We are now getting the following errors:
+
+: Installing deploy dependencies
+: [Bintray Upload] Reading descriptor file: build/scripts/bintray.json
+: [Bintray Upload] Creating package 'auto-upload'...
+: [Bintray Upload] Bintray response: 400 Bad Request. License 'GPL3' does not exist
+: [Bintray Upload] Creating version '0.88.0'...
+: [Bintray Upload] Bintray response: 404 Not Found. Package 'auto-upload' was not found
+: [Bintray Upload] Warning: Path: build/output/Release/stage/pkg/*.deb does not exist.
+: [Bintray Upload] Publishing version '0.88.0' of package 'auto-upload'...
+: [Bintray Upload] Bintray response: 404 Not Found. Package 'auto-upload' was not found
+
+Actually now we can't even find the bintray file:
+
+: Installing deploy dependencies
+: [Bintray Upload] Reading descriptor file: build/output/gcc/Release/stage/pkg/bintray.json
+: /home/travis/.rvm/gems/ruby-2.2.5/gems/dpl-1.8.21/lib/dpl/provider/bintray.rb:54:in `read': No such file or directory @ rb_sysopen - build/output/gcc/Release/stage/pkg/bintray.json (Errno::ENOENT)
+:   from /home/travis/.rvm/gems/ruby-2.2.5/gems/dpl-1.8.21/lib/dpl/provider/bintray.rb:54:in `read_descriptor'
+:   from /home/travis/.rvm/gems/ruby-2.2.5/gems/dpl-1.8.21/lib/dpl/provider/bintray.rb:443:in `deploy'
+:   from /home/travis/.rvm/gems/ruby-2.2.5/gems/dpl-1.8.21/lib/dpl/cli.rb:32:in `run'
+:   from /home/travis/.rvm/gems/ruby-2.2.5/gems/dpl-1.8.21/lib/dpl/cli.rb:7:in `run'
+:   from /home/travis/.rvm/gems/ruby-2.2.5/gems/dpl-1.8.21/bin/dpl:5:in `<top (required)>'
+:   from /home/travis/.rvm/gems/ruby-2.2.5/bin/dpl:23:in `load'
+:   from /home/travis/.rvm/gems/ruby-2.2.5/bin/dpl:23:in `<main>'
+: failed to deploy
+
+Ok so now we can find the bintray file but the upload fails with a
+strange error:
+
+: [Bintray Upload] Reading descriptor file: /home/travis/build/DomainDrivenConsulting/dogen/build/output/gcc/Release/stage/pkg/bintray.json
+: [Bintray Upload] Warning: Path: /home/travis/build/DomainDrivenConsulting/dogen/build/output/gcc/Release/stage/pkg/dogen-0.91.0-Darwin-x86_64.dmg does not exist.
+: [Bintray Upload] Uploading file '/home/travis/build/DomainDrivenConsulting/dogen/build/output/gcc/Release/stage/pkg/dogen_0.91.0_amd64-applications.deb' to
+: [Bintray Upload] Bintray response: 400 Bad Request. Invalid file path and name
+: [Bintray Upload] Uploading file '/home/travis/build/DomainDrivenConsulting/dogen/build/output/gcc/Release/stage/pkg/dogen_0.91.0_amd64-headers.deb' to
+: [Bintray Upload] Bintray response: 400 Bad Request. Invalid file path and name
+: [Bintray Upload] Uploading file '/home/travis/build/DomainDrivenConsulting/dogen/build/output/gcc/Release/stage/pkg/dogen_0.91.0_amd64-libraries.deb' to
+: [Bintray Upload] Bintray response: 400 Bad Request. Invalid file path and name
+: [Bintray Upload] Uploading file '/home/travis/build/DomainDrivenConsulting/dogen/build/output/gcc/Release/stage/pkg/dogen_0.91.0_amd64-tests.deb' to
+: [Bintray Upload] Bintray response: 400 Bad Request. Invalid file path and name
+: [Bintray Upload] Publishing version '0.91.0' of package 'dogen'...
+: [Bintray Upload] Bintray response: 200 OK.
+
+Same on OSX:
+
+: [Bintray Upload] Uploading file '/Users/travis/build/DomainDrivenConsulting/dogen/build/output/clang/Release/stage/pkg/dogen-0.91.0-Darwin-x86_64.dmg' to
+: [Bintray Upload] Bintray response: 400 Bad Request. Invalid file path and name
+: [Bintray Upload] Publishing version '0.91.0' of package 'dogen'...
+: [Bintray Upload] Bintray response: 200 OK.
+
+Emailed bintray for help.
 
 *** STARTED Add helper infrastructure to C#                           :story:
     CLOCK: [2016-12-12 Mon 13:51]--[2016-12-12 Mon 15:06] =>  1:15
@@ -102,6 +178,17 @@ We also need a way to compare floating point numbers. In both cases
 the easiest thing is to use helpers. See:
 
 - [[http://stackoverflow.com/questions/3874627/floating-point-comparison-functions-for-c-sharp][Floating point comparison functions for C#]]
+
+*** Generate windows packages with CPack                              :story:
+
+We tried to generate windows packages by using the NSIS tool, but
+there are no binaries available for it at present. However, it seems
+CPack can now generate MSIs directly:
+
+- [[http://stackoverflow.com/questions/18437356/how-to-generate-msi-installer-with-cmake][How to generate .msi installer with cmake?]]
+- [[https://cmake.org/cmake/help/v3.0/module/CPackWIX.html][CPackWIX]]
+
+We need to investigate how to get the build to produce MSIs using WIX.
 
 *** Language namespaces and modeling element locations                :story:
 
