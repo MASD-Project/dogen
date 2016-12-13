@@ -92,12 +92,22 @@
           "type": "ulong"
         },
         {
-          "simple_name": "FloatProperty",
+          "simple_name": "FloatPropertyOne",
           "type": "float"
         },
         {
-          "simple_name": "DoubleProperty",
+          "simple_name": "FloatPropertyTwo",
+          "type": "double",
+          "documentation": "Second float to ensure helpers are generated correctly.\n"
+        },
+        {
+          "simple_name": "DoublePropertyOne",
           "type": "double"
+        },
+        {
+          "simple_name": "DoublePropertyTwo",
+          "type": "double",
+          "documentation": "Second double to ensure helpers are generated correctly.\n"
         },
         {
           "simple_name": "CharProperty",

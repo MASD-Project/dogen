@@ -204,7 +204,7 @@ void assistant::add_helper_methods(const std::string& element_id) {
         for (const auto& hlp : helpers) {
             if (!has_helpers) {
                 has_helpers = true;
-                stream() << "        #region Helpers";
+                stream() << "        #region Helpers" << std::endl;
             }
 
             const auto fmtn(hlp->formatter_name());

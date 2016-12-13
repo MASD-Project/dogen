@@ -30,12 +30,17 @@ namespace Dogen.TestModels.CSharpModel
     class PrimitiveBuiltins
     {
         #region Helpers
+        /// <summary>
+        /// Compare floating point numbers, taking precision into account (float version).
+        /// </summary>
         static private bool NearlyEqual(float lhs, float rhs)
         {
             float epsilon = Math.Max(Math.Abs(lhs), Math.Abs(rhs)) * float.Epsilon;
             return Math.Abs(lhs - rhs) <= epsilon;
         }
-
+        /// <summary>
+        /// Compare floating point numbers, taking precision into account (double version).
+        /// </summary>
         static private bool NearlyEqual(double lhs, double rhs)
         {
             double epsilon = Math.Max(Math.Abs(lhs), Math.Abs(rhs)) * double.Epsilon;
@@ -61,8 +66,16 @@ namespace Dogen.TestModels.CSharpModel
         public ushort UShortProperty { get; set; }
         public long LongProperty { get; set; }
         public ulong ULongProperty { get; set; }
-        public float FloatProperty { get; set; }
-        public double DoubleProperty { get; set; }
+        public float FloatPropertyOne { get; set; }
+        /// <summary>
+        /// Second float to ensure helpers are generated correctly.
+        /// </summary>
+        public double FloatPropertyTwo { get; set; }
+        public double DoublePropertyOne { get; set; }
+        /// <summary>
+        /// Second double to ensure helpers are generated correctly.
+        /// </summary>
+        public double DoublePropertyTwo { get; set; }
         public char CharProperty { get; set; }
         public bool BoolProperty { get; set; }
         public decimal DecimalProperty { get; set; }
@@ -87,8 +100,10 @@ namespace Dogen.TestModels.CSharpModel
                 UShortProperty == value.UShortProperty &&
                 LongProperty == value.LongProperty &&
                 ULongProperty == value.ULongProperty &&
-                FloatProperty == value.FloatProperty &&
-                DoubleProperty == value.DoubleProperty &&
+                FloatPropertyOne == value.FloatPropertyOne &&
+                FloatPropertyTwo == value.FloatPropertyTwo &&
+                DoublePropertyOne == value.DoublePropertyOne &&
+                DoublePropertyTwo == value.DoublePropertyTwo &&
                 CharProperty == value.CharProperty &&
                 BoolProperty == value.BoolProperty &&
                 DecimalProperty == value.DecimalProperty;
@@ -127,8 +142,10 @@ namespace Dogen.TestModels.CSharpModel
                 hash = (hash * HashingMultiplier) ^ UShortProperty.GetHashCode();
                 hash = (hash * HashingMultiplier) ^ LongProperty.GetHashCode();
                 hash = (hash * HashingMultiplier) ^ ULongProperty.GetHashCode();
-                hash = (hash * HashingMultiplier) ^ FloatProperty.GetHashCode();
-                hash = (hash * HashingMultiplier) ^ DoubleProperty.GetHashCode();
+                hash = (hash * HashingMultiplier) ^ FloatPropertyOne.GetHashCode();
+                hash = (hash * HashingMultiplier) ^ FloatPropertyTwo.GetHashCode();
+                hash = (hash * HashingMultiplier) ^ DoublePropertyOne.GetHashCode();
+                hash = (hash * HashingMultiplier) ^ DoublePropertyTwo.GetHashCode();
                 hash = (hash * HashingMultiplier) ^ CharProperty.GetHashCode();
                 hash = (hash * HashingMultiplier) ^ BoolProperty.GetHashCode();
                 hash = (hash * HashingMultiplier) ^ DecimalProperty.GetHashCode();

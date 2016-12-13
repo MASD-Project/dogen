@@ -66,7 +66,9 @@ void floating_point_number_helper::
 format(assistant& a, const formattables::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
-a.stream() << std::endl;
+a.stream() << "        /// <summary>" << std::endl;
+a.stream() << "        /// Compare floating point numbers, taking precision into account (" << qn << " version)." << std::endl;
+a.stream() << "        /// </summary>" << std::endl;
 a.stream() << "        static private bool NearlyEqual(" << qn << " lhs, " << qn << " rhs)" << std::endl;
 a.stream() << "        {" << std::endl;
 a.stream() << "            " << qn << " epsilon = Math.Max(Math.Abs(lhs), Math.Abs(rhs)) * " << qn << ".Epsilon;" << std::endl;

@@ -88,9 +88,8 @@ a.stream() << std::endl;
 a.stream() << "    class " << sn << std::endl;
 a.stream() << "    {" << std::endl;
             if (!o.local_attributes().empty()) {
-                if (!ctx.element_properties().helper_properties().empty()) {
+                if (!ctx.element_properties().helper_properties().empty())
                     a.add_helper_methods(id);
-                }
 
                 /*
                 * Properties
