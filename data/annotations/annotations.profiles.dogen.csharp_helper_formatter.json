@@ -1,7 +1,7 @@
 {
   "name": "dogen.csharp_helper_formatter",
   "labels": [
-      "C# Helper Formatter"
+    "C# Helper Formatter"
   ],
   "parents": [
     "dogen.handcrafted"

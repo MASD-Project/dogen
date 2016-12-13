@@ -22,14 +22,14 @@ using System.Collections.Generic;
 namespace Dogen.TestModels.CSharpModel
 {
     /// <summary>
-    /// Generates sequences of AllBuiltins.
+    /// Generates sequences of ComplexBuiltins.
     /// </summary>
-    static class AllBuiltinsSequenceGenerator
+    static class ComplexBuiltinsSequenceGenerator
     {
-        public static IEnumerable<AllBuiltins> Sequence()
+        public static IEnumerable<ComplexBuiltins> Sequence()
         {
             int _position = 0;
-            var current = new AllBuiltins();
+            var current = new ComplexBuiltins();
             yield return current;
             ++_position;
         }

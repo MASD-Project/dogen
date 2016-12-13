@@ -14,10 +14,48 @@
   "elements": [
     {
       "name": {
-        "simple_name": "AllBuiltins"
+        "simple_name": "ComplexBuiltins"
       },
       "meta_type": "object",
-      "documentation": "This is a class made up of just built-in types.\n\nThis is a remark.\n",
+      "documentation": "This is a class made up of just complex builtin types.\n\nThis is a remark.\n",
+      "attributes": [
+        {
+          "simple_name": "ObjectProperty",
+          "type": "object"
+        },
+        {
+          "simple_name": "StringProperty",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple_name": "NoProperties"
+      },
+      "meta_type": "object",
+      "documentation": "This class tests the use case of no properties\n"
+    },
+    {
+      "name": {
+        "simple_name": "OneProperty"
+      },
+      "meta_type": "object",
+      "documentation": "This class tests the use case of one property.\n",
+      "attributes": [
+        {
+          "simple_name": "Property",
+          "type": "int",
+          "documentation": "Just the one property.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple_name": "PrimitiveBuiltins"
+      },
+      "meta_type": "object",
+      "documentation": "This is a class made up of just primitive builtin types.\n\nThis is a remark.\n",
       "attributes": [
         {
           "simple_name": "ByteProperty",
@@ -70,37 +108,8 @@
           "type": "bool"
         },
         {
-          "simple_name": "ObjectProperty",
-          "type": "object"
-        },
-        {
-          "simple_name": "StringProperty",
-          "type": "string"
-        },
-        {
           "simple_name": "DecimalProperty",
           "type": "decimal"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple_name": "NoProperties"
-      },
-      "meta_type": "object",
-      "documentation": "This class tests the use case of no properties\n"
-    },
-    {
-      "name": {
-        "simple_name": "OneProperty"
-      },
-      "meta_type": "object",
-      "documentation": "This class tests the use case of one property.\n",
-      "attributes": [
-        {
-          "simple_name": "Property",
-          "type": "int",
-          "documentation": "Just the one property.\n"
         }
       ]
     }

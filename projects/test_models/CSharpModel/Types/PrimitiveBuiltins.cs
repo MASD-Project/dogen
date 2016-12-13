@@ -22,12 +22,12 @@ using System;
 namespace Dogen.TestModels.CSharpModel
 {
     /// <summary>
-    /// This is a class made up of just built-in types.
+    /// This is a class made up of just primitive builtin types.
     /// </summary>
     /// <remarks>
     /// This is a remark.
     /// </remarks>
-    class AllBuiltins
+    class PrimitiveBuiltins
     {
         #region Properties
         /// <summary>
@@ -51,8 +51,6 @@ namespace Dogen.TestModels.CSharpModel
         public double DoubleProperty { get; set; }
         public char CharProperty { get; set; }
         public bool BoolProperty { get; set; }
-        public object ObjectProperty { get; set; }
-        public string StringProperty { get; set; }
         public decimal DecimalProperty { get; set; }
         #endregion
 
@@ -63,7 +61,7 @@ namespace Dogen.TestModels.CSharpModel
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != this.GetType()) return false;
 
-            var value = obj as AllBuiltins;
+            var value = obj as PrimitiveBuiltins;
             if (value == null) return false;
 
             return
@@ -79,14 +77,10 @@ namespace Dogen.TestModels.CSharpModel
                 DoubleProperty == value.DoubleProperty &&
                 CharProperty == value.CharProperty &&
                 BoolProperty == value.BoolProperty &&
-                ObjectProperty != null && value.ObjectProperty != null &&
-                ObjectProperty.Equals(value.ObjectProperty) &&
-                StringProperty != null && value.StringProperty != null &&
-                StringProperty.Equals(value.StringProperty) &&
                 DecimalProperty == value.DecimalProperty;
         }
 
-        public static bool operator ==(AllBuiltins lhs, AllBuiltins rhs)
+        public static bool operator ==(PrimitiveBuiltins lhs, PrimitiveBuiltins rhs)
         {
             if (Object.ReferenceEquals(lhs, rhs))
                 return true;
@@ -97,7 +91,7 @@ namespace Dogen.TestModels.CSharpModel
             return (lhs.Equals(rhs));
         }
 
-        public static bool operator !=(AllBuiltins lhs, AllBuiltins rhs)
+        public static bool operator !=(PrimitiveBuiltins lhs, PrimitiveBuiltins rhs)
         {
             return !(lhs == rhs);
         }
@@ -123,10 +117,6 @@ namespace Dogen.TestModels.CSharpModel
                 hash = (hash * HashingMultiplier) ^ DoubleProperty.GetHashCode();
                 hash = (hash * HashingMultiplier) ^ CharProperty.GetHashCode();
                 hash = (hash * HashingMultiplier) ^ BoolProperty.GetHashCode();
-                hash = (hash * HashingMultiplier) ^
-                    (!object.ReferenceEquals(null, ObjectProperty) ? ObjectProperty.GetHashCode() : 0);
-                hash = (hash * HashingMultiplier) ^
-                    (!object.ReferenceEquals(null, StringProperty) ? StringProperty.GetHashCode() : 0);
                 hash = (hash * HashingMultiplier) ^ DecimalProperty.GetHashCode();
                 return hash;
             }
