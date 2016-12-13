@@ -63,7 +63,8 @@ public:
         const bool is_circular_dependency,
         const std::map<dogen::yarn::languages, std::string>& qualified,
         const std::string& identifiable,
-        const bool is_current_simple_type);
+        const bool is_current_simple_type,
+        const bool is_floating_point);
 
 private:
     template<typename Archive>
@@ -142,6 +143,14 @@ public:
     void is_current_simple_type(const bool v);
     /**@}*/
 
+    /**
+     * @brief If true, "current" stores a floating point type.
+     */
+    /**@{*/
+    bool is_floating_point() const;
+    void is_floating_point(const bool v);
+    /**@}*/
+
 public:
     bool operator==(const name_tree& rhs) const;
     bool operator!=(const name_tree& rhs) const {
@@ -160,6 +169,7 @@ private:
     std::map<dogen::yarn::languages, std::string> qualified_;
     std::string identifiable_;
     bool is_current_simple_type_;
+    bool is_floating_point_;
 };
 
 } }

@@ -288,6 +288,7 @@
 							</qualified>
 							<identifiable></identifiable>
 							<is_current_simple_type>0</is_current_simple_type>
+							<is_floating_point>0</is_floating_point>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>

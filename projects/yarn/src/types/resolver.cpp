@@ -62,6 +62,12 @@ typedef boost::error_info<struct tag_errmsg, std::string> errmsg_info;
 namespace dogen {
 namespace yarn {
 
+bool resolver::
+is_floating_point(const intermediate_model& im, const name& n) const {
+    auto i(im.primitives().find(n.id()));
+    return i == im.primitives().end() || i->second.is_floating_point();
+}
+
 bool resolver::is_primitive(const intermediate_model& im, const name& n) const {
     auto i(im.primitives().find(n.id()));
     if (i != im.primitives().end()) {
@@ -223,7 +229,10 @@ void resolver::resolve_name_tree(const intermediate_model& im,
     BOOST_LOG_SEV(lg, debug) << "Resolved name: " << nt.current().id()
                              << " to: " << n.id();
     nt.current(n);
-    nt.is_current_simple_type(is_enumeration(im, n) || is_primitive(im, n));
+    const auto is_prim(is_primitive(im, n));
+    nt.is_current_simple_type(is_enumeration(im, n) || is_prim);
+    if (is_prim)
+        nt.is_floating_point(is_floating_point(im, n));
 
     const auto i(im.indices().objects_always_in_heap().find(n.id()));
     nt.are_children_opaque(i != im.indices().objects_always_in_heap().end());

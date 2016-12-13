@@ -48,6 +48,7 @@ void save(Archive& ar,
     ar << make_nvp("qualified", v.qualified_);
     ar << make_nvp("identifiable", v.identifiable_);
     ar << make_nvp("is_current_simple_type", v.is_current_simple_type_);
+    ar << make_nvp("is_floating_point", v.is_floating_point_);
 }
 
 template<typename Archive>
@@ -61,6 +62,7 @@ void load(Archive& ar,
     ar >> make_nvp("qualified", v.qualified_);
     ar >> make_nvp("identifiable", v.identifiable_);
     ar >> make_nvp("is_current_simple_type", v.is_current_simple_type_);
+    ar >> make_nvp("is_floating_point", v.is_floating_point_);
 }
 
 } }

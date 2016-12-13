@@ -62,6 +62,7 @@ std::size_t name_tree_hasher::hash(const name_tree& v) {
     combine(seed, hash_std_map_dogen_yarn_languages_std_string(v.qualified()));
     combine(seed, v.identifiable());
     combine(seed, v.is_current_simple_type());
+    combine(seed, v.is_floating_point());
 
     return seed;
 }

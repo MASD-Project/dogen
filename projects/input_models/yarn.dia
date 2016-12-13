@@ -383,7 +383,7 @@ Name must be in one of the supported notations.#</dia:string>
         <dia:point val="-40,-1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-40.05,-1.05;-22.51,6.65"/>
+        <dia:rectangle val="-40.05,-1.05;-22.51,7.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-40,-1"/>
@@ -392,7 +392,7 @@ Name must be in one of the supported notations.#</dia:string>
         <dia:real val="17.440000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="7.5999999999999996"/>
+        <dia:real val="8.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#name_tree#</dia:string>
@@ -653,6 +653,29 @@ supported languages.#</dia:string>
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#is_floating_point#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#bool#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#If true, "current" stores a floating point type.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -701,7 +724,7 @@ supported languages.#</dia:string>
         <dia:point val="-39.2425,16"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-39.9925,6.55;-22.36,16.8"/>
+        <dia:rectangle val="-39.9925,7.35;-22.36,16.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -710,7 +733,7 @@ supported languages.#</dia:string>
         <dia:point val="-39.2425,16"/>
         <dia:point val="-39.2425,12"/>
         <dia:point val="-22.56,12"/>
-        <dia:point val="-22.56,6.6"/>
+        <dia:point val="-22.56,7.4"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -17612,7 +17635,7 @@ space.#</dia:string>
         <dia:point val="-47.09,5"/>
         <dia:point val="-47.09,9"/>
         <dia:point val="-40,9"/>
-        <dia:point val="-40,6.6"/>
+        <dia:point val="-40,7.4"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

@@ -26,7 +26,8 @@ namespace yarn {
 name_tree::name_tree()
     : are_children_opaque_(static_cast<bool>(0)),
       is_circular_dependency_(static_cast<bool>(0)),
-      is_current_simple_type_(static_cast<bool>(0)) { }
+      is_current_simple_type_(static_cast<bool>(0)),
+      is_floating_point_(static_cast<bool>(0)) { }
 
 name_tree::name_tree(
     const dogen::yarn::name& current,
@@ -35,14 +36,16 @@ name_tree::name_tree(
     const bool is_circular_dependency,
     const std::map<dogen::yarn::languages, std::string>& qualified,
     const std::string& identifiable,
-    const bool is_current_simple_type)
+    const bool is_current_simple_type,
+    const bool is_floating_point)
     : current_(current),
       children_(children),
       are_children_opaque_(are_children_opaque),
       is_circular_dependency_(is_circular_dependency),
       qualified_(qualified),
       identifiable_(identifiable),
-      is_current_simple_type_(is_current_simple_type) { }
+      is_current_simple_type_(is_current_simple_type),
+      is_floating_point_(is_floating_point) { }
 
 void name_tree::swap(name_tree& other) noexcept {
     using std::swap;
@@ -53,6 +56,7 @@ void name_tree::swap(name_tree& other) noexcept {
     swap(qualified_, other.qualified_);
     swap(identifiable_, other.identifiable_);
     swap(is_current_simple_type_, other.is_current_simple_type_);
+    swap(is_floating_point_, other.is_floating_point_);
 }
 
 bool name_tree::operator==(const name_tree& rhs) const {
@@ -62,7 +66,8 @@ bool name_tree::operator==(const name_tree& rhs) const {
         is_circular_dependency_ == rhs.is_circular_dependency_ &&
         qualified_ == rhs.qualified_ &&
         identifiable_ == rhs.identifiable_ &&
-        is_current_simple_type_ == rhs.is_current_simple_type_;
+        is_current_simple_type_ == rhs.is_current_simple_type_ &&
+        is_floating_point_ == rhs.is_floating_point_;
 }
 
 name_tree& name_tree::operator=(name_tree other) {
@@ -157,6 +162,14 @@ bool name_tree::is_current_simple_type() const {
 
 void name_tree::is_current_simple_type(const bool v) {
     is_current_simple_type_ = v;
+}
+
+bool name_tree::is_floating_point() const {
+    return is_floating_point_;
+}
+
+void name_tree::is_floating_point(const bool v) {
+    is_floating_point_ = v;
 }
 
 } }

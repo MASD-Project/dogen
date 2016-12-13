@@ -82,7 +82,8 @@ std::ostream& operator<<(std::ostream& s, const name_tree& v) {
       << "\"is_circular_dependency\": " << v.is_circular_dependency() << ", "
       << "\"qualified\": " << v.qualified() << ", "
       << "\"identifiable\": " << "\"" << tidy_up_string(v.identifiable()) << "\"" << ", "
-      << "\"is_current_simple_type\": " << v.is_current_simple_type()
+      << "\"is_current_simple_type\": " << v.is_current_simple_type() << ", "
+      << "\"is_floating_point\": " << v.is_floating_point()
       << " }";
     return(s);
 }
