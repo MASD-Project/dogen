@@ -120,9 +120,12 @@ a.stream() << "            return" << std::endl;
                 sf.postfix_configuration().not_last(" &&");
                 sf.postfix_configuration().last(";");
                 for (const auto& attr : o.local_attributes()) {
-                    if (attr.parsed_type().is_current_simple_type()) {
+                    if (attr.parsed_type().is_current_simple_type())
+                        if (attr.parsed_type().is_floating_point())
+a.stream() << "                NearlyEqual(" << attr.name().simple() << ", value." << attr.name().simple() << ")" << sf.postfix() << std::endl;
+                        else
 a.stream() << "                " << attr.name().simple() << " == value." << attr.name().simple() << sf.postfix() << std::endl;
-                    } else {
+                    else {
 a.stream() << "                " << attr.name().simple() << " != null && value." << attr.name().simple() << " != null &&" << std::endl;
 a.stream() << "                " << attr.name().simple() << ".Equals(value." << attr.name().simple() << ")" << sf.postfix() << std::endl;
                     }
@@ -138,7 +141,7 @@ a.stream() << std::endl;
 a.stream() << "            if(Object.ReferenceEquals(null, lhs))" << std::endl;
 a.stream() << "                return false;" << std::endl;
 a.stream() << std::endl;
-a.stream() << "            return (lhs.Equals(rhs));" << std::endl;
+a.stream() << "            return lhs.Equals(rhs);" << std::endl;
 a.stream() << "        }" << std::endl;
 a.stream() << std::endl;
 a.stream() << "        public static bool operator !=(" << sn << " lhs, " << sn << " rhs)" << std::endl;

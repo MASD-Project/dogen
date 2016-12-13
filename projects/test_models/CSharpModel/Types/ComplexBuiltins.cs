@@ -59,7 +59,7 @@ namespace Dogen.TestModels.CSharpModel
             if(Object.ReferenceEquals(null, lhs))
                 return false;
 
-            return (lhs.Equals(rhs));
+            return lhs.Equals(rhs);
         }
 
         public static bool operator !=(ComplexBuiltins lhs, ComplexBuiltins rhs)

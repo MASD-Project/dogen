@@ -100,10 +100,10 @@ namespace Dogen.TestModels.CSharpModel
                 UShortProperty == value.UShortProperty &&
                 LongProperty == value.LongProperty &&
                 ULongProperty == value.ULongProperty &&
-                FloatPropertyOne == value.FloatPropertyOne &&
-                FloatPropertyTwo == value.FloatPropertyTwo &&
-                DoublePropertyOne == value.DoublePropertyOne &&
-                DoublePropertyTwo == value.DoublePropertyTwo &&
+                NearlyEqual(FloatPropertyOne, value.FloatPropertyOne) &&
+                NearlyEqual(FloatPropertyTwo, value.FloatPropertyTwo) &&
+                NearlyEqual(DoublePropertyOne, value.DoublePropertyOne) &&
+                NearlyEqual(DoublePropertyTwo, value.DoublePropertyTwo) &&
                 CharProperty == value.CharProperty &&
                 BoolProperty == value.BoolProperty &&
                 DecimalProperty == value.DecimalProperty;
@@ -117,7 +117,7 @@ namespace Dogen.TestModels.CSharpModel
             if(Object.ReferenceEquals(null, lhs))
                 return false;
 
-            return (lhs.Equals(rhs));
+            return lhs.Equals(rhs);
         }
 
         public static bool operator !=(PrimitiveBuiltins lhs, PrimitiveBuiltins rhs)

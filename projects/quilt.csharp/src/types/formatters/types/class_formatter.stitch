@@ -109,11 +109,16 @@ using System;
                 sf.postfix_configuration().not_last(" &&");
                 sf.postfix_configuration().last(";");
                 for (const auto& attr : o.local_attributes()) {
-                    if (attr.parsed_type().is_current_simple_type()) {
+                    if (attr.parsed_type().is_current_simple_type())
+                        if (attr.parsed_type().is_floating_point())
+#>
+                NearlyEqual(<#= attr.name().simple() #>, value.<#= attr.name().simple() #>)<#= sf.postfix() #>
+<#+
+                        else
 #>
                 <#= attr.name().simple() #> == value.<#= attr.name().simple() #><#= sf.postfix() #>
 <#+
-                    } else {
+                    else {
 #>
                 <#= attr.name().simple() #> != null && value.<#= attr.name().simple() #> != null &&
                 <#= attr.name().simple() #>.Equals(value.<#= attr.name().simple() #>)<#= sf.postfix() #>
@@ -132,7 +137,7 @@ using System;
             if(Object.ReferenceEquals(null, lhs))
                 return false;
 
-            return (lhs.Equals(rhs));
+            return lhs.Equals(rhs);
         }
 
         public static bool operator !=(<#= sn #> lhs, <#= sn #> rhs)
