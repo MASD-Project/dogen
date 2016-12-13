@@ -21,6 +21,7 @@
 #include "dogen/quilt.csharp/types/formatters/registrar.hpp"
 #include "dogen/quilt.csharp/types/formatters/test_data/class_formatter.hpp"
 #include "dogen/quilt.csharp/types/formatters/test_data/number_helper.hpp"
+#include "dogen/quilt.csharp/types/formatters/test_data/floating_point_number_helper.hpp"
 #include "dogen/quilt.csharp/types/formatters/test_data/object_helper.hpp"
 #include "dogen/quilt.csharp/types/formatters/test_data/boolean_helper.hpp"
 #include "dogen/quilt.csharp/types/formatters/test_data/string_helper.hpp"

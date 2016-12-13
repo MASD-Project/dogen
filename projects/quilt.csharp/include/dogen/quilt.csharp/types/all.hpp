@@ -70,7 +70,6 @@
 #include "dogen/quilt.csharp/types/formattables/aspect_properties.hpp"
 #include "dogen/quilt.csharp/types/formattables/helper_descriptor.hpp"
 #include "dogen/quilt.csharp/types/formattables/helper_properties.hpp"
-#include "dogen/quilt.csharp/types/formatters/types/number_helper.hpp"
 #include "dogen/quilt.csharp/types/formattables/element_properties.hpp"
 #include "dogen/quilt.csharp/types/formattables/file_path_expander.hpp"
 #include "dogen/quilt.csharp/types/formatters/types/enum_formatter.hpp"
@@ -102,5 +101,7 @@
 #include "dogen/quilt.csharp/types/formatters/visual_studio_project_formatter.hpp"
 #include "dogen/quilt.csharp/types/formatters/visual_studio_solution_formatter.hpp"
 #include "dogen/quilt.csharp/types/formattables/locator_archetype_configuration.hpp"
+#include "dogen/quilt.csharp/types/formatters/types/floating_point_number_helper.hpp"
+#include "dogen/quilt.csharp/types/formatters/test_data/floating_point_number_helper.hpp"
 
 #endif

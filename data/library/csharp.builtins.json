@@ -94,7 +94,7 @@
       "in_global_module": true,
       "is_floating_point": true,
       "annotation": {
-        "quilt.csharp.helper.family": "Number"
+        "quilt.csharp.helper.family": "FloatingPointNumber"
       }
     },
     {
@@ -105,7 +105,7 @@
       "in_global_module": true,
       "is_floating_point": true,
       "annotation": {
-        "quilt.csharp.helper.family": "Number"
+        "quilt.csharp.helper.family": "FloatingPointNumber"
       }
     },
     {

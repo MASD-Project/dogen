@@ -18,11 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.csharp/types/formatters/registrar.hpp"
-#include "dogen/quilt.csharp/types/formatters/types/class_formatter.hpp"
-#include "dogen/quilt.csharp/types/formatters/types/primitive_formatter.hpp"
-#include "dogen/quilt.csharp/types/formatters/types/floating_point_number_helper.hpp"
-#include "dogen/quilt.csharp/types/formatters/types/initializer.hpp"
+#ifndef DOGEN_QUILT_CSHARP_TYPES_FORMATTERS_TYPES_FLOATING_POINT_NUMBER_HELPER_FWD_HPP
+#define DOGEN_QUILT_CSHARP_TYPES_FORMATTERS_TYPES_FLOATING_POINT_NUMBER_HELPER_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace quilt {
@@ -30,10 +31,8 @@ namespace csharp {
 namespace formatters {
 namespace types {
 
-void initializer::initialize(registrar& rg) {
-    register_formatter<class_formatter>(rg);
-    register_formatter<primitive_formatter>(rg);
-    register_formatter_helper<floating_point_number_helper>(rg);
-}
+class floating_point_number_helper;
 
 } } } } }
+
+#endif
