@@ -259,10 +259,57 @@ public bool NearlyEqual(double a, double b, double epsilon)
 : NearlyEqual(DoubleProperty, value.DoubleProperty) &&
 
 *** STARTED Add io support in C#                                      :story:
+    CLOCK: [2016-12-13 Tue 15:53]--[2016-12-13 Tue 18:24] =>  2:31
     CLOCK: [2016-12-13 Tue 15:15]--[2016-12-13 Tue 15:52] =>  0:37
     CLOCK: [2016-12-13 Tue 14:14]--[2016-12-13 Tue 14:23] =>  0:09
 
 We need to implement the Dogen JSON debug output format in C#.
+
+- namespaces for dumpers on other models
+- use helper or dumper
+- is simple type or not
+- needs quotes or not
+- needs tidy-up or not
+
+Notes:
+
+- create a dumper registrar per model
+- add a static constructor that registers the dumper
+- at the meta-model level we need to be able to distinguish between
+  a) primitives that need quoting and those that do not b) proxy types
+  with helpers c) regular model types with dumpers.
+
+Tasks:
+
+- Implement dumper registrar in MonoDevelop
+
+Links:
+
+- [[http://stackoverflow.com/questions/852181/c-printing-all-properties-of-an-object][C#: Printing all properties of an object]]
+
+Code:
+
+#+begin_src
+<#+
+            for (const auto attr : o.local_attributes()) {
+#>
+            sb.Append("\"<#= attr.name().simple() #>\": ");
+<#+
+                if (!attr.parsed_type().is_current_simple_type())
+#>
+            sb.Append(<#= attr.parsed_type().current().simple() #>Dumper.Dump(target.<#= attr.name().simple() #>));
+<#+
+                else
+#>
+            sb.Append("\"<#= attr.name().simple() #>\": ");
+<#+
+            }
+#>
+#+end_src
+
+*** Identifiable needs to use camel case in C#                        :story:
+
+At present we are building identifiables with underscores.
 
 *** Add support for test data generation in C#                        :story:
 

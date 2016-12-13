@@ -70,14 +70,18 @@ dogen::formatters::artefact
 class_formatter::format(const context& ctx, const yarn::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), id);
-    // const auto& o(a.as<yarn::object>(static_artefact(), e));
+    const auto& o(a.as<yarn::object>(static_artefact(), e));
     {
         const auto sn(e.name().simple());
-        // const auto qn(a.get_qualified_name(e.name()));
+        const auto qn(a.get_qualified_name(e.name()));
         auto sbf(a.make_scoped_boilerplate_formatter());
         {
+a.stream() << "using System.Text;" << std::endl;
+a.stream() << std::endl;
             const auto ns(a.make_namespaces(e.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
+            const bool no_parent_and_no_attributes(!o.parent() &&
+                o.all_attributes().empty());
 a.stream() << "    /// <summary>" << std::endl;
 a.stream() << "    /// Generates sequences of " << sn << "." << std::endl;
 a.stream() << "    /// </summary>" << std::endl;
@@ -85,6 +89,9 @@ a.stream() << "    static class " << sn << "Dumper" << std::endl;
 a.stream() << "    {" << std::endl;
 a.stream() << "        public static string Dump(" << sn << " target)" << std::endl;
 a.stream() << "        {" << std::endl;
+a.stream() << "            var sb = new StringBuilder();" << std::endl;
+a.stream() << "            sb.Append(\"{ \\\"__type__\\\": \\\"" << sn << "\\\"" << (no_parent_and_no_attributes ? " }" : ", ") << "\");" << std::endl;
+a.stream() << "            return sb.ToString();" << std::endl;
 a.stream() << "        }" << std::endl;
 a.stream() << "    }" << std::endl;
         }

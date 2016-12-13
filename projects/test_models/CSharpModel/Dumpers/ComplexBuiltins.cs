@@ -17,6 +17,8 @@
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 // MA 02110-1301, USA.
 //
+using System.Text;
+
 namespace Dogen.TestModels.CSharpModel
 {
     /// <summary>
@@ -26,6 +28,9 @@ namespace Dogen.TestModels.CSharpModel
     {
         public static string Dump(ComplexBuiltins target)
         {
+            var sb = new StringBuilder();
+            sb.Append("{ \"__type__\": \"ComplexBuiltins\", ");
+            return sb.ToString();
         }
     }
 }

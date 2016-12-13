@@ -76,7 +76,6 @@ class_formatter::format(const context& ctx, const yarn::element& e) const {
         // const auto qn(a.get_qualified_name(e.name()));
         auto sbf(a.make_scoped_boilerplate_formatter());
         {
-            // for Object in operator == 
             if (!o.local_attributes().empty()) {
 a.stream() << "using System;" << std::endl;
 a.stream() << std::endl;
