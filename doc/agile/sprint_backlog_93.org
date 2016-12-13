@@ -12,21 +12,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-12-12 Mon 13:28]
+#+CAPTION: Clock summary at [2016-12-13 Tue 08:41]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *70:25* |       |       | 100.0 |
+| *Total time*                                                                | *70:37* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 70:25   |       |       | 100.0 |
-| Active                                                                      |         | 70:25 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  2:48 |   4.0 |
+| Stories                                                                     | 70:37   |       |       | 100.0 |
+| Active                                                                      |         | 70:37 |       | 100.0 |
+| COMPLETED Sprint and product backlog grooming                               |         |       |  3:00 |   4.2 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  1:02 |   1.5 |
 | COMPLETED Update readme                                                     |         |       |  0:11 |   0.3 |
 | COMPLETED Test data generation for dates generates invalid dates            |         |       |  0:33 |   0.8 |
 | COMPLETED Handle missing stitch templates scenario                          |         |       |  1:04 |   1.5 |
 | COMPLETED Move project directory to output options                          |         |       |  1:10 |   1.7 |
-| COMPLETED Update the conceptual model to clarify backends and kernels       |         |       |  4:20 |   6.2 |
+| COMPLETED Update the conceptual model to clarify backends and kernels       |         |       |  4:20 |   6.1 |
 | COMPLETED Detect knitter and disable code generation accordingly            |         |       |  1:15 |   1.8 |
 | COMPLETED Clean up kernel and backend confusion                             |         |       |  5:17 |   7.5 |
 | COMPLETED Add a "language" directory for each backend                       |         |       |  5:44 |   8.1 |
@@ -34,7 +34,7 @@
 | COMPLETED Formatter registrar validation is not being called                |         |       |  0:20 |   0.5 |
 | COMPLETED Move decoration repository to quilt                               |         |       |  0:43 |   1.0 |
 | COMPLETED Move module id container into yarn                                |         |       |  0:24 |   0.6 |
-| COMPLETED Add basic infrastructure for C#                                   |         |       | 17:02 |  24.2 |
+| COMPLETED Add basic infrastructure for C#                                   |         |       | 17:02 |  24.1 |
 | COMPLETED Add support for C#-style documentation                            |         |       |  1:57 |   2.8 |
 | COMPLETED Add support for visual studio projects and solutions              |         |       |  6:05 |   8.6 |
 | COMPLETED OSX build is borked                                               |         |       |  0:21 |   0.5 |
@@ -57,6 +57,7 @@
 
 *** COMPLETED Sprint and product backlog grooming                     :story:
     CLOSED: [2016-12-12 Mon 13:28]
+    CLOCK: [2016-12-11 Sun 22:09]--[2016-12-11 Sun 22:21] =>  0:12
     CLOCK: [2016-12-10 Sat 20:31]--[2016-12-10 Sat 20:55] =>  0:24
     CLOCK: [2016-12-08 Thu 11:31]--[2016-12-08 Thu 11:34] =>  0:03
     CLOCK: [2016-12-08 Thu 11:00]--[2016-12-08 Thu 11:30] =>  0:30

@@ -34,6 +34,7 @@ Updates to sprint and product backlog.
 
 *** COMPLETED Edit release notes for previous sprint                  :story:
     CLOSED: [2016-12-12 Mon 13:41]
+    CLOCK: [2016-12-13 Tue 08:25]--[2016-12-13 Tue 08:40] =>  0:15
     CLOCK: [2016-12-12 Mon 13:42]--[2016-12-12 Mon 13:50] =>  0:08
     CLOCK: [2016-12-12 Mon 13:33]--[2016-12-12 Mon 13:41] =>  0:08
 
@@ -44,20 +45,33 @@ Title: Dogen v0.93.0, "Tombwa"
 #+begin_src markdown
 Overview
 =======
-The sprint's headline feature is the start of the C# kernel. It is only an experimental feature, but Dogen can already generate the basic infrastructure such as projects, solutions and simple classes. Only primitives are supported at present. For an example of a C# model see the test data sets ([Dia](https://github.com/DomainDrivenConsulting/dogen/blob/master/test_data/yarn.dia/input/CSharpModel.dia), [JSON](https://github.com/DomainDrivenConsulting/dogen/blob/master/test_data/yarn.json/input/CSharpModel.json)).
+The sprint's headline feature is the start of the C# kernel. It is only an experimental feature, but Dogen can already generate the basic infrastructure such as projects, solutions and simple classes. Only primitives are supported at present. For an example of a C# model see the test data sets:
 
-Most of the work carried out this sprint was related to adding multiple kernels to Dogen, so it is not user visible. Similarly, the remaining work was related to the required C# infrastructure.
+- input: [Dia](https://github.com/DomainDrivenConsulting/dogen/blob/master/test_data/yarn.dia/input/CSharpModel.dia), [JSON](https://github.com/DomainDrivenConsulting/dogen/blob/master/test_data/yarn.json/input/CSharpModel.json)
+- output: [CSharpModel](https://github.com/DomainDrivenConsulting/dogen/tree/master/projects/test_models/CSharpModel)
 
-Other user visible changes
-===================
+Most of the work carried out this sprint was related to adding multiple kernels to Dogen, so it is not user visible. Similarly, most of the remaining work was related to the C# kernel.
 
-- when outputting more than one kernel, Dogen now adds a kernel specific directory (e.g. =cpp=. =csharp=).
+User visible changes
+===============
+
+- when outputting more than one kernel, Dogen now adds a kernel specific directory (e.g. ```cpp```. ```csharp```).
 - the ```--project-dir``` command line option has been renamed to ```--output-dir```
-- the =hardware= model has been split into language-specific "builtin" models
+- the ```hardware``` model has been split into language-specific "builtin" models
 
 For more details see the [sprint log](https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_93.org).
 
+Binaries
+======
+You can download experimental binaries from [Bintray](https://bintray.com/domaindrivenconsulting/Dogen) for OSX and Linux:
+
+- [dogen_0.93.0_amd64-applications.deb](https://dl.bintray.com/domaindrivenconsulting/Dogen/0.93.0/dogen_0.93.0_amd64-applications.deb)
+- [dogen-0.93.0-Darwin-x86_64.dmg](https://dl.bintray.com/domaindrivenconsulting/Dogen/0.93.0/dogen-0.93.0-Darwin-x86_64.dmg)
+
+For other operative systems you need to build it from source. Source downloads are available below.
 #+end_src
+
+- [[https://twitter.com/MarcoCraveiro/status/808591399855734784][Tweet]]
 
 *** COMPLETED Add travis support for bintray                          :story:
     CLOSED: [2016-12-12 Mon 15:12]
@@ -307,6 +321,13 @@ Tasks:
 - add a meta-data flag to enable/disable this feature.
 - in assistant, during code generation, provide a function which
   injects the internal module.
+
+*** Move enablement into quilt                                        :story:
+
+We need to make use of the exact same logic as implemented in
+=quilt.cpp= for enablement. Perhaps all of the enablement related
+functionality can be lifted and grafted onto quilt without any major
+changes.
 
 *** Add support for Decimal numbers in C++                            :story:
 
