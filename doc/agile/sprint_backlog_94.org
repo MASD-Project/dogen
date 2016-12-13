@@ -12,17 +12,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-12-13 Tue 12:45]
+#+CAPTION: Clock summary at [2016-12-13 Tue 13:19]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *6:49* |      |      | 100.0 |
+| *Total time*                                                                | *7:22* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 6:49   |      |      | 100.0 |
-| Active                                                                      |        | 6:49 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:23 |   5.6 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:31 |   7.6 |
-| STARTED Add helper infrastructure to C#                                     |        |      | 5:55 |  86.8 |
+| Stories                                                                     | 7:22   |      |      | 100.0 |
+| Active                                                                      |        | 7:22 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:23 |   5.2 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:31 |   7.0 |
+| COMPLETED Add helper infrastructure to C#                                   |        |      | 5:55 |  80.3 |
+| STARTED Add support for Equals in C#                                        |        |      | 0:33 |   7.5 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -148,7 +149,8 @@ Same on OSX:
 
 Emailed bintray for help.
 
-*** STARTED Add helper infrastructure to C#                           :story:
+*** COMPLETED Add helper infrastructure to C#                         :story:
+    CLOSED: [2016-12-13 Tue 12:47]
     CLOCK: [2016-12-13 Tue 12:21]--[2016-12-13 Tue 12:45] =>  0:24
     CLOCK: [2016-12-13 Tue 10:51]--[2016-12-13 Tue 11:42] =>  0:51
     CLOCK: [2016-12-13 Tue 09:55]--[2016-12-13 Tue 10:50] =>  0:55
@@ -200,18 +202,9 @@ Patch:
 +        const auto& e(*formattable.element());
 #+end_src
 
-*** Add support for test data generation in C#                        :story:
-
-We need to create a facet that generates domain types. It should be
-idiomatic in C# - =IEnumerable=, etc.
-
-Links:
-
-- [[http://geekswithblogs.net/BlackRabbitCoder/archive/2010/04/21/more-fun-with-c-iterators-and-generators.aspx][More Fun with C# Iterators and Generators]]
-- [[https://gist.github.com/DForshner/5533088][NaiveFibonacciSequenceGenerator.cs]]
-- [[https://coding.abel.nu/2011/12/return-ienumerable-with-yield-return/][Return IEnumerable with yield return]]
-
-*** Add support for Equals in C#                                      :story:
+*** STARTED Add support for Equals in C#                              :story:
+    CLOCK: [2016-12-13 Tue 12:47]--[2016-12-13 Tue 13:19] =>  0:32
+    CLOCK: [2016-12-13 Tue 12:46]--[2016-12-13 Tue 12:47] =>  0:01
 
 We need some basic support for Equals and GetHashCode.
 
@@ -256,6 +249,20 @@ public bool NearlyEqual(double a, double b, double epsilon)
     }
 }
 #+end_src
+
+: NearlyEqual(FloatProperty, value.FloatProperty) &&
+: NearlyEqual(DoubleProperty, value.DoubleProperty) &&
+
+*** Add support for test data generation in C#                        :story:
+
+We need to create a facet that generates domain types. It should be
+idiomatic in C# - =IEnumerable=, etc.
+
+Links:
+
+- [[http://geekswithblogs.net/BlackRabbitCoder/archive/2010/04/21/more-fun-with-c-iterators-and-generators.aspx][More Fun with C# Iterators and Generators]]
+- [[https://gist.github.com/DForshner/5533088][NaiveFibonacciSequenceGenerator.cs]]
+- [[https://coding.abel.nu/2011/12/return-ienumerable-with-yield-return/][Return IEnumerable with yield return]]
 
 *** Generate windows packages with CPack                              :story:
 

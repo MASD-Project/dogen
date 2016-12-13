@@ -39,7 +39,7 @@ namespace Dogen.TestModels.CSharpModel
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
+            if (obj.GetType() != GetType()) return false;
 
             var value = obj as ComplexBuiltins;
             if (value == null) return false;

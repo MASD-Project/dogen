@@ -29,6 +29,20 @@ namespace Dogen.TestModels.CSharpModel
     /// </remarks>
     class PrimitiveBuiltins
     {
+        #region Helpers
+        static private bool NearlyEqual(float lhs, float rhs)
+        {
+            float epsilon = Math.Max(Math.Abs(lhs), Math.Abs(rhs)) * float.Epsilon;
+            return Math.Abs(lhs - rhs) <= epsilon;
+        }
+
+        static private bool NearlyEqual(double lhs, double rhs)
+        {
+            double epsilon = Math.Max(Math.Abs(lhs), Math.Abs(rhs)) * double.Epsilon;
+            return Math.Abs(lhs - rhs) <= epsilon;
+        }
+        #endregion
+
         #region Properties
         /// <summary>
         /// A comment at property level.
@@ -59,7 +73,7 @@ namespace Dogen.TestModels.CSharpModel
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
+            if (obj.GetType() != GetType()) return false;
 
             var value = obj as PrimitiveBuiltins;
             if (value == null) return false;

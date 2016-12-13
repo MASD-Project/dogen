@@ -89,10 +89,7 @@ a.stream() << "    class " << sn << std::endl;
 a.stream() << "    {" << std::endl;
             if (!o.local_attributes().empty()) {
                 if (!ctx.element_properties().helper_properties().empty()) {
-a.stream() << "        #region Helpers" << std::endl;
                     a.add_helper_methods(id);
-a.stream() << "        #endregion" << std::endl;
-a.stream() << std::endl;
                 }
 
                 /*
@@ -113,7 +110,7 @@ a.stream() << "        public override bool Equals(object obj)" << std::endl;
 a.stream() << "        {" << std::endl;
 a.stream() << "            if (ReferenceEquals(null, obj)) return false;" << std::endl;
 a.stream() << "            if (ReferenceEquals(this, obj)) return true;" << std::endl;
-a.stream() << "            if (obj.GetType() != this.GetType()) return false;" << std::endl;
+a.stream() << "            if (obj.GetType() != GetType()) return false;" << std::endl;
 a.stream() << std::endl;
 a.stream() << "            var value = obj as " << sn << ";" << std::endl;
 a.stream() << "            if (value == null) return false;" << std::endl;

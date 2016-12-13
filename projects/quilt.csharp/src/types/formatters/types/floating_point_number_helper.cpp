@@ -63,10 +63,14 @@ std::string floating_point_number_helper::helper_name() const {
 }
 
 void floating_point_number_helper::
-format(assistant& a, const formattables::helper_properties& /*hp*/) const {
+format(assistant& a, const formattables::helper_properties& hp) const {
+    const auto d(hp.current());
+    const auto qn(d.name_tree_qualified());
 a.stream() << std::endl;
-a.stream() << "bool create_number(const unsigned int position) {" << std::endl;
-a.stream() << "    return (position % 2) == 0;" << std::endl;
-a.stream() << "}" << std::endl;
+a.stream() << "        static private bool NearlyEqual(" << qn << " lhs, " << qn << " rhs)" << std::endl;
+a.stream() << "        {" << std::endl;
+a.stream() << "            " << qn << " epsilon = Math.Max(Math.Abs(lhs), Math.Abs(rhs)) * " << qn << ".Epsilon;" << std::endl;
+a.stream() << "            return Math.Abs(lhs - rhs) <= epsilon;" << std::endl;
+a.stream() << "        }" << std::endl;
 }
 } } } } }

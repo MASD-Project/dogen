@@ -70,14 +70,7 @@ using System;
 <#+
             if (!o.local_attributes().empty()) {
                 if (!ctx.element_properties().helper_properties().empty()) {
-#>
-        #region Helpers
-<#+
                     a.add_helper_methods(id);
-#>
-        #endregion
-
-<#+
                 }
 
                 /*
@@ -105,7 +98,7 @@ using System;
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
+            if (obj.GetType() != GetType()) return false;
 
             var value = obj as <#= sn #>;
             if (value == null) return false;

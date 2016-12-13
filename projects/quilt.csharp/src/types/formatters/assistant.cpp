@@ -195,17 +195,29 @@ void assistant::add_helper_methods(const std::string& element_id) {
     if (context_.element_properties().helper_properties().empty())
         BOOST_LOG_SEV(lg, debug) << "No helper methods found.";
 
+    bool has_helpers(false);
     const auto& eprops(context_.element_properties());
     for (const auto& hlp_props : eprops.helper_properties()) {
         BOOST_LOG_SEV(lg, debug) << "Helper configuration: " << hlp_props;
         const auto helpers(get_helpers(hlp_props));
 
         for (const auto& hlp : helpers) {
+            if (!has_helpers) {
+                has_helpers = true;
+                stream() << "        #region Helpers";
+            }
+
             const auto fmtn(hlp->formatter_name());
             BOOST_LOG_SEV(lg, debug) << "Formatting with helper: " << fmtn;
             hlp->format(*this, hlp_props);
         }
     }
+
+    if (has_helpers) {
+        stream() << "        #endregion" << std::endl << std::endl;
+        has_helpers = false;
+    }
+
     BOOST_LOG_SEV(lg, debug) << "Finished generating helper methods.";
 }
 

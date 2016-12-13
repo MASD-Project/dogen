@@ -324,7 +324,7 @@ void helper_expander::populate_helper_properties(
          * We only want to process the master segment; the extensions
          * can be ignored.
          */
-        /*const*/ auto& e(*formattable.element()); // FIXME: comment to stop helpers
+        const auto& e(*formattable.element());
 
         /*
          * We only need to generate helpers for the target
