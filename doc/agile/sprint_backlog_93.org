@@ -541,7 +541,6 @@ first.
 Links:
 
 - [[https://msdn.microsoft.com/en-us/library/ms228360(v%3Dvs.90).aspx][Data Types (C# vs. Java)]]
--
 
 *** COMPLETED Models should have an associated language                :epic:
     CLOSED: [2016-12-10 Sat 10:41]
