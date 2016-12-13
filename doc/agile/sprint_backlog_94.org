@@ -12,18 +12,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-12-13 Tue 14:13]
+#+CAPTION: Clock summary at [2016-12-13 Tue 15:52]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *8:13* |      |      | 100.0 |
+| *Total time*                                                                | *8:59* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 8:13   |      |      | 100.0 |
-| Active                                                                      |        | 8:13 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:23 |   4.7 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:31 |   6.3 |
-| COMPLETED Add helper infrastructure to C#                                   |        |      | 5:55 |  72.0 |
-| COMPLETED Add support for Equals in C#                                      |        |      | 1:24 |  17.0 |
+| Stories                                                                     | 8:59   |      |      | 100.0 |
+| Active                                                                      |        | 8:59 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:23 |   4.3 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:31 |   5.8 |
+| COMPLETED Add helper infrastructure to C#                                   |        |      | 5:55 |  65.9 |
+| COMPLETED Add support for Equals in C#                                      |        |      | 1:24 |  15.6 |
+| STARTED Add io support in C#                                                |        |      | 0:46 |   8.5 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -256,6 +257,12 @@ public bool NearlyEqual(double a, double b, double epsilon)
 
 : NearlyEqual(FloatProperty, value.FloatProperty) &&
 : NearlyEqual(DoubleProperty, value.DoubleProperty) &&
+
+*** STARTED Add io support in C#                                      :story:
+    CLOCK: [2016-12-13 Tue 15:15]--[2016-12-13 Tue 15:52] =>  0:37
+    CLOCK: [2016-12-13 Tue 14:14]--[2016-12-13 Tue 14:23] =>  0:09
+
+We need to implement the Dogen JSON debug output format in C#.
 
 *** Add support for test data generation in C#                        :story:
 

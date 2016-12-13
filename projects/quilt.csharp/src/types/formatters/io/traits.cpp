@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/quilt.csharp/types/traits.hpp"
 #include "dogen/quilt.csharp/types/formatters/io/traits.hpp"
 
 namespace dogen {
@@ -26,8 +27,14 @@ namespace csharp {
 namespace formatters {
 namespace io {
 
-bool traits::operator==(const traits& /*rhs*/) const {
-    return true;
+std::string traits::facet() {
+    static std::string r(csharp::traits::kernel() + ".io");
+    return r;
+}
+
+std::string traits::class_archetype() {
+    static std::string r(traits::facet() + ".class");
+    return r;
 }
 
 } } } } }

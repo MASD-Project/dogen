@@ -33,20 +33,12 @@ namespace csharp {
 namespace formatters {
 namespace io {
 
+/**
+ * @brief Initialises the types facet.
+ */
 class initializer final {
 public:
-    initializer() = default;
-    initializer(const initializer&) = default;
-    initializer(initializer&&) = default;
-    ~initializer() = default;
-    initializer& operator=(const initializer&) = default;
-
-public:
-    bool operator==(const initializer& rhs) const;
-    bool operator!=(const initializer& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void initialize(registrar& r);
 };
 
 } } } } }
