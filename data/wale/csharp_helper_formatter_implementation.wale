@@ -13,7 +13,7 @@ std::string {{class.simple_name}}::family() const {
 std::list<std::string>
 {{class.simple_name}}::owning_formatters() const {
     static auto r(std::list<std::string> {
-        types::traits::class_archetype()
+        traits::class_archetype()
     });
     return r;
 }

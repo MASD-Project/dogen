@@ -13,7 +13,7 @@
       "meta_type": "primitive",
       "in_global_module": true,
       "annotation": {
-        "quilt.csharp.helper.family": "Byte"
+        "quilt.csharp.helper.family": "Number"
       }
     },
     {
@@ -23,7 +23,7 @@
       "meta_type": "primitive",
       "in_global_module": true,
       "annotation": {
-        "quilt.csharp.helper.family": "Byte"
+        "quilt.csharp.helper.family": "Number"
       }
     },
     {
@@ -157,7 +157,7 @@
       "meta_type": "primitive",
       "in_global_module": true,
       "annotation": {
-        "quilt.csharp.helper.family": "Decimal"
+        "quilt.csharp.helper.family": "Number"
       }
     }
   ]

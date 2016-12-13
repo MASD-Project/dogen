@@ -69,7 +69,18 @@ using System;
     {
 <#+
             if (!o.local_attributes().empty()) {
-               /*
+                if (!ctx.element_properties().helper_properties().empty()) {
+#>
+        #region Helpers
+<#+
+                    a.add_helper_methods(id);
+#>
+        #endregion
+
+<#+
+                }
+
+                /*
                 * Properties
                 */
 #>

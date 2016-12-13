@@ -43,6 +43,11 @@ struct traits final {
      * @brief Name of the class header archetype.
      */
     static std::string class_archetype();
+
+    /**
+     * @brief Name of the primitive header archetype.
+     */
+    static std::string primitive_archetype();
 };
 
 } } } } }

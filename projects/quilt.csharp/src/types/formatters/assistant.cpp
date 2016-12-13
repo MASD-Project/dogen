@@ -200,10 +200,6 @@ void assistant::add_helper_methods(const std::string& element_id) {
         BOOST_LOG_SEV(lg, debug) << "Helper configuration: " << hlp_props;
         const auto helpers(get_helpers(hlp_props));
 
-        /*
-         * Check to see if the helper is enabled, given the system's
-         * current configuration. If enabled, format it.
-         */
         for (const auto& hlp : helpers) {
             const auto fmtn(hlp->formatter_name());
             BOOST_LOG_SEV(lg, debug) << "Formatting with helper: " << fmtn;

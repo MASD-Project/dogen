@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.csharp/types/formatters/types/number_helper.hpp"
+#include "dogen/quilt.csharp/types/formatters/test_data/number_helper.hpp"
 #include "dogen/quilt.csharp/types/formattables/helper_properties.hpp"
-#include "dogen/quilt.csharp/types/formatters/types/traits.hpp"
+#include "dogen/quilt.csharp/types/formatters/test_data/traits.hpp"
 #include "dogen/quilt.csharp/types/formatters/assistant.hpp"
 #include "dogen/formatters/types/csharp/scoped_namespace_formatter.hpp"
 
@@ -28,7 +28,7 @@ namespace dogen {
 namespace quilt {
 namespace csharp {
 namespace formatters {
-namespace types {
+namespace test_data {
 
 std::string number_helper::formatter_name() const {
     static auto r(std::string("<") + traits::facet() + std::string(">") +

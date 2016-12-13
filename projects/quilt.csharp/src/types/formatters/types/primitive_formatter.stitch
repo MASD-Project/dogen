@@ -1,0 +1,51 @@
+<#@ annotations.profile=dogen.stitch #>
+<#@ stitch.containing_namespaces=dogen::quilt::csharp::formatters::types #>
+<#@ stitch.inclusion_dependency=<typeinfo> #>
+<#@ stitch.inclusion_dependency=<boost/make_shared.hpp> #>
+<#@ stitch.inclusion_dependency="dogen/yarn/types/primitive.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.csharp/types/traits.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.csharp/types/formatters/types/traits.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.csharp/types/formatters/assistant.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.csharp/types/formatters/types/primitive_formatter.hpp" #>
+<#+
+
+std::string primitive_formatter::static_artefact() {
+    return traits::primitive_archetype();
+}
+
+std::string primitive_formatter::formatter_name() const {
+    static auto r(archetype_location().archetype());
+    return r;
+}
+
+annotations::archetype_location primitive_formatter::archetype_location() const {
+    static annotations::archetype_location
+        r(csharp::traits::family(), csharp::traits::kernel(),
+          traits::facet(),
+          primitive_formatter::static_artefact());
+    return r;
+}
+
+std::type_index primitive_formatter::element_type_index() const {
+    static auto r(std::type_index(typeid(yarn::primitive)));
+    return r;
+}
+
+boost::filesystem::path primitive_formatter::
+full_path(const formattables::locator& l, const yarn::name& n) const {
+    return l.make_full_path(n, static_artefact());
+}
+
+std::list<std::string> primitive_formatter::
+inclusion_dependencies(const yarn::element& /*e*/) const {
+    std::list<std::string> r;
+    return r;
+}
+
+dogen::formatters::artefact primitive_formatter::
+format(const context& /*ctx*/, const yarn::element& /*e*/) const {
+    dogen::formatters::artefact r;
+    return r;
+}
+
+#>

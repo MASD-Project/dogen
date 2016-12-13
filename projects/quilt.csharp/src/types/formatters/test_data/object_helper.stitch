@@ -1,0 +1,23 @@
+<#@ annotations.profile=dogen.stitch #>
+<#@ stitch.containing_namespaces=dogen::quilt::csharp::formatters::test_data #>
+<#@ stitch.inclusion_dependency="dogen/formatters/types/csharp/scoped_namespace_formatter.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.csharp/types/formatters/assistant.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.csharp/types/formatters/test_data/traits.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.csharp/types/formattables/helper_properties.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.csharp/types/formatters/test_data/object_helper.hpp" #>
+<#@ stitch.wale.template=csharp_helper_formatter_implementation.wale #>
+<#@ stitch.wale.kvp.helper.family=Object #>
+<#@ stitch.wale.kvp.class.simple_name=object_helper #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void object_helper::
+format(assistant& a, const formattables::helper_properties& /*hp*/) const {
+#>
+
+bool create_object(const unsigned int position) {
+    return (position % 2) == 0;
+}
+<#+
+}
+#>

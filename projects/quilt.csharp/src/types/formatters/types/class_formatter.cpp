@@ -88,7 +88,14 @@ a.stream() << std::endl;
 a.stream() << "    class " << sn << std::endl;
 a.stream() << "    {" << std::endl;
             if (!o.local_attributes().empty()) {
-               /*
+                if (!ctx.element_properties().helper_properties().empty()) {
+a.stream() << "        #region Helpers" << std::endl;
+                    a.add_helper_methods(id);
+a.stream() << "        #endregion" << std::endl;
+a.stream() << std::endl;
+                }
+
+                /*
                 * Properties
                 */
 a.stream() << "        #region Properties" << std::endl;

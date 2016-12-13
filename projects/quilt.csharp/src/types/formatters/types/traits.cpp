@@ -37,4 +37,9 @@ std::string traits::class_archetype() {
     return r;
 }
 
+std::string traits::primitive_archetype() {
+    static std::string r(traits::facet() + ".primitive");
+    return r;
+}
+
 } } } } }

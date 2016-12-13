@@ -314,7 +314,8 @@ void helper_expander::populate_helper_properties(
     const auto fff(facets_for_family(frp));
     for (auto& pair : formattables) {
         const auto id(pair.first);
-        BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
+        BOOST_LOG_SEV(lg, debug) << "Populating helper properties for element: "
+                                 << id;
 
         auto& formattable(pair.second);
         auto& eprops(formattable.element_properties());
@@ -323,7 +324,7 @@ void helper_expander::populate_helper_properties(
          * We only want to process the master segment; the extensions
          * can be ignored.
          */
-        auto& e(*formattable.element());
+        /*const*/ auto& e(*formattable.element()); // FIXME: comment to stop helpers
 
         /*
          * We only need to generate helpers for the target
@@ -341,14 +342,21 @@ void helper_expander::populate_helper_properties(
         helper_properties_generator g(cfg, fff);
         e.accept(g);
         eprops.helper_properties(g.result());
+
+        BOOST_LOG_SEV(lg, debug) << "Finished populating helper properties "
+                                 << "for element";
     }
 }
 
 void helper_expander::expand(const annotations::type_repository& atrp,
     const formatters::repository& frp, model& fm) const {
+    BOOST_LOG_SEV(lg, debug) << "Started helper expansion.";
+
     const auto tg(make_type_group(atrp));
     const auto cfg(make_configuration(tg, fm));
     populate_helper_properties(cfg, frp, fm.formattables());
+
+    BOOST_LOG_SEV(lg, debug) << "Finished helper expansion.";
 }
 
 } } } }

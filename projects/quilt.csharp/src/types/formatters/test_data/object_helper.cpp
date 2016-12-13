@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.csharp/types/formatters/types/number_helper.hpp"
+#include "dogen/quilt.csharp/types/formatters/test_data/object_helper.hpp"
 #include "dogen/quilt.csharp/types/formattables/helper_properties.hpp"
-#include "dogen/quilt.csharp/types/formatters/types/traits.hpp"
+#include "dogen/quilt.csharp/types/formatters/test_data/traits.hpp"
 #include "dogen/quilt.csharp/types/formatters/assistant.hpp"
 #include "dogen/formatters/types/csharp/scoped_namespace_formatter.hpp"
 
@@ -28,21 +28,21 @@ namespace dogen {
 namespace quilt {
 namespace csharp {
 namespace formatters {
-namespace types {
+namespace test_data {
 
-std::string number_helper::formatter_name() const {
+std::string object_helper::formatter_name() const {
     static auto r(std::string("<") + traits::facet() + std::string(">") +
         std::string("<") + helper_name() + std::string(">"));
     return r;
 }
 
-std::string number_helper::family() const {
-    static std::string r("Number");
+std::string object_helper::family() const {
+    static std::string r("Object");
     return r;
 }
 
 std::list<std::string>
-number_helper::owning_formatters() const {
+object_helper::owning_formatters() const {
     static auto r(std::list<std::string> {
         traits::class_archetype()
     });
@@ -50,22 +50,22 @@ number_helper::owning_formatters() const {
 }
 
 std::list<std::string>
-number_helper::owning_facets() const {
+object_helper::owning_facets() const {
     static auto r(std::list<std::string> {
         traits::facet()
     });
     return r;
 }
 
-std::string number_helper::helper_name() const {
-    static std::string r("number_helper");
+std::string object_helper::helper_name() const {
+    static std::string r("object_helper");
     return r;
 }
 
-void number_helper::
+void object_helper::
 format(assistant& a, const formattables::helper_properties& /*hp*/) const {
 a.stream() << std::endl;
-a.stream() << "bool create_number(const unsigned int position) {" << std::endl;
+a.stream() << "bool create_object(const unsigned int position) {" << std::endl;
 a.stream() << "    return (position % 2) == 0;" << std::endl;
 a.stream() << "}" << std::endl;
 }

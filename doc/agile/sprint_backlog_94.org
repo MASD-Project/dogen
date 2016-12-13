@@ -12,17 +12,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-12-13 Tue 09:54]
+#+CAPTION: Clock summary at [2016-12-13 Tue 11:41]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *4:39* |      |      | 100.0 |
+| *Total time*                                                                | *6:25* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 4:39   |      |      | 100.0 |
-| Active                                                                      |        | 4:39 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:23 |   8.2 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:31 |  11.1 |
-| STARTED Add helper infrastructure to C#                                     |        |      | 3:45 |  80.6 |
+| Stories                                                                     | 6:25   |      |      | 100.0 |
+| Active                                                                      |        | 6:25 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:23 |   6.0 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:31 |   8.1 |
+| STARTED Add helper infrastructure to C#                                     |        |      | 5:31 |  86.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -149,6 +149,8 @@ Same on OSX:
 Emailed bintray for help.
 
 *** STARTED Add helper infrastructure to C#                           :story:
+    CLOCK: [2016-12-13 Tue 10:51]--[2016-12-13 Tue 11:42] =>  0:51
+    CLOCK: [2016-12-13 Tue 09:55]--[2016-12-13 Tue 10:50] =>  0:55
     CLOCK: [2016-12-13 Tue 09:15]--[2016-12-13 Tue 09:54] =>  0:39
     CLOCK: [2016-12-12 Mon 16:31]--[2016-12-12 Mon 17:06] =>  0:35
     CLOCK: [2016-12-12 Mon 15:14]--[2016-12-12 Mon 16:30] =>  1:16
@@ -174,6 +176,17 @@ Notes:
   extracted from the model prior to transformation. It is also a bit
   surprising that the transformer is performing some kind of
   reduction.
+- we need to add "is enabled" to suppress number helpers for
+  non-floating point elements in types. We also need to split the wale
+  template for the helpers that need a different "is enabled".
+
+Families:
+
+- boolean
+- object
+- string
+- character
+- number
 
 Patch:
 
