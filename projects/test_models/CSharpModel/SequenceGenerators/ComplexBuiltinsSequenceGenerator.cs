@@ -24,7 +24,7 @@ namespace Dogen.TestModels.CSharpModel
     /// <summary>
     /// Generates sequences of ComplexBuiltins.
     /// </summary>
-    static class ComplexBuiltinsSequenceGenerator
+    public static class ComplexBuiltinsSequenceGenerator
     {
         public static IEnumerable<ComplexBuiltins> Sequence()
         {

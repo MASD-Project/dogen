@@ -24,7 +24,7 @@ namespace Dogen.TestModels.CSharpModel
     /// <summary>
     /// This class tests the use case of one property.
     /// </summary>
-    class OneProperty
+    public class OneProperty
     {
         #region Properties
         /// <summary>

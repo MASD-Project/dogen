@@ -27,7 +27,7 @@ namespace Dogen.TestModels.CSharpModel
     /// <remarks>
     /// This is a remark.
     /// </remarks>
-    class PrimitiveBuiltins
+    public class PrimitiveBuiltins
     {
         #region Helpers
         /// <summary>

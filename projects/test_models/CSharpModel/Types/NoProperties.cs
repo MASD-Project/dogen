@@ -22,7 +22,7 @@ namespace Dogen.TestModels.CSharpModel
     /// <summary>
     /// This class tests the use case of no properties
     /// </summary>
-    class NoProperties
+    public class NoProperties
     {
     }
 }

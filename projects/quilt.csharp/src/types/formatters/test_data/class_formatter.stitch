@@ -63,7 +63,7 @@ using System.Collections.Generic;
     /// <summary>
     /// Generates sequences of <#= sn #>.
     /// </summary>
-    static class <#= sn #>SequenceGenerator
+    public static class <#= sn #>SequenceGenerator
     {
         public static IEnumerable<<#= sn #>> Sequence()
         {

@@ -83,7 +83,7 @@ a.stream() << std::endl;
 a.stream() << "    /// <summary>" << std::endl;
 a.stream() << "    /// Generates sequences of " << sn << "." << std::endl;
 a.stream() << "    /// </summary>" << std::endl;
-a.stream() << "    static class " << sn << "SequenceGenerator" << std::endl;
+a.stream() << "    public static class " << sn << "SequenceGenerator" << std::endl;
 a.stream() << "    {" << std::endl;
 a.stream() << "        public static IEnumerable<" << sn << "> Sequence()" << std::endl;
 a.stream() << "        {" << std::endl;

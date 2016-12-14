@@ -24,7 +24,7 @@ namespace Dogen.TestModels.CSharpModel
     /// <summary>
     /// Generates sequences of OneProperty.
     /// </summary>
-    static class OnePropertySequenceGenerator
+    public static class OnePropertySequenceGenerator
     {
         public static IEnumerable<OneProperty> Sequence()
         {

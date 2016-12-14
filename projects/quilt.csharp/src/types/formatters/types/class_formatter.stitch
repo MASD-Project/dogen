@@ -64,7 +64,7 @@ using System;
             auto snf(a.make_scoped_namespace_formatter(ns));
             a.comment(e.documentation(), 1/*indent*/);
 #>
-    class <#= sn #>
+    public class <#= sn #>
     {
 <#+
             if (!o.local_attributes().empty()) {

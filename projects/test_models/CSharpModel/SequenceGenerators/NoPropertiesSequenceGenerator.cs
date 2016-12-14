@@ -24,7 +24,7 @@ namespace Dogen.TestModels.CSharpModel
     /// <summary>
     /// Generates sequences of NoProperties.
     /// </summary>
-    static class NoPropertiesSequenceGenerator
+    public static class NoPropertiesSequenceGenerator
     {
         public static IEnumerable<NoProperties> Sequence()
         {

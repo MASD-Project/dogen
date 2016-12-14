@@ -27,7 +27,7 @@ namespace Dogen.TestModels.CSharpModel
     /// <remarks>
     /// This is a remark.
     /// </remarks>
-    class ComplexBuiltins
+    public class ComplexBuiltins
     {
         #region Properties
         public object ObjectProperty { get; set; }
