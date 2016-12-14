@@ -12,20 +12,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-12-14 Wed 15:40]
+#+CAPTION: Clock summary at [2016-12-14 Wed 17:24]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *15:17* |       |      | 100.0 |
+| *Total time*                                                                | *16:36* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 15:17   |       |      | 100.0 |
-| Active                                                                      |         | 15:17 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:23 |   2.5 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:31 |   3.4 |
-| COMPLETED Add helper infrastructure to C#                                   |         |       | 5:55 |  38.7 |
-| COMPLETED Add support for Equals in C#                                      |         |       | 1:24 |   9.2 |
-| STARTED Add io support in C#                                                |         |       | 3:17 |  21.5 |
-| STARTED Create a test model solution to validate C# code                    |         |       | 3:47 |  24.8 |
+| Stories                                                                     | 16:36   |       |      | 100.0 |
+| Active                                                                      |         | 16:36 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:23 |   2.3 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:31 |   3.1 |
+| COMPLETED Add helper infrastructure to C#                                   |         |       | 5:55 |  35.6 |
+| COMPLETED Add support for Equals in C#                                      |         |       | 1:24 |   8.4 |
+| COMPLETED Create a test model solution to validate C# code                  |         |       | 3:47 |  22.8 |
+| STARTED Add io support in C#                                                |         |       | 4:36 |  27.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -259,56 +259,8 @@ public bool NearlyEqual(double a, double b, double epsilon)
 : NearlyEqual(FloatProperty, value.FloatProperty) &&
 : NearlyEqual(DoubleProperty, value.DoubleProperty) &&
 
-*** STARTED Add io support in C#                                      :story:
-    CLOCK: [2016-12-13 Tue 15:53]--[2016-12-13 Tue 18:24] =>  2:31
-    CLOCK: [2016-12-13 Tue 15:15]--[2016-12-13 Tue 15:52] =>  0:37
-    CLOCK: [2016-12-13 Tue 14:14]--[2016-12-13 Tue 14:23] =>  0:09
-
-We need to implement the Dogen JSON debug output format in C#.
-
-- namespaces for dumpers on other models
-- use helper or dumper
-- is simple type or not
-- needs quotes or not
-- needs tidy-up or not
-
-Notes:
-
-- create a dumper registrar per model
-- add a static constructor that registers the dumper
-- at the meta-model level we need to be able to distinguish between
-  a) primitives that need quoting and those that do not b) proxy types
-  with helpers c) regular model types with dumpers.
-
-Tasks:
-
-- Implement dumper registrar in MonoDevelop
-
-Links:
-
-- [[http://stackoverflow.com/questions/852181/c-printing-all-properties-of-an-object][C#: Printing all properties of an object]]
-
-Code:
-
-#+begin_src
-<#+
-            for (const auto attr : o.local_attributes()) {
-#>
-            sb.Append("\"<#= attr.name().simple() #>\": ");
-<#+
-                if (!attr.parsed_type().is_current_simple_type())
-#>
-            sb.Append(<#= attr.parsed_type().current().simple() #>Dumper.Dump(target.<#= attr.name().simple() #>));
-<#+
-                else
-#>
-            sb.Append("\"<#= attr.name().simple() #>\": ");
-<#+
-            }
-#>
-#+end_src
-
-*** STARTED Create a test model solution to validate C# code          :story:
+*** COMPLETED Create a test model solution to validate C# code        :story:
+    CLOSED: [2016-12-14 Wed 16:04]
     CLOCK: [2016-12-14 Wed 15:05]--[2016-12-14 Wed 15:40] =>  0:35
     CLOCK: [2016-12-14 Wed 12:35]--[2016-12-14 Wed 12:53] =>  0:18
     CLOCK: [2016-12-14 Wed 11:23]--[2016-12-14 Wed 12:00] =>  0:37
@@ -345,6 +297,57 @@ The requirements are:
 
 One way to achieve this is to delete these directories after we copy
 the data set across.
+
+*** STARTED Add io support in C#                                      :story:
+    CLOCK: [2016-12-14 Wed 16:05]--[2016-12-14 Wed 17:24] =>  1:19
+    CLOCK: [2016-12-13 Tue 15:53]--[2016-12-13 Tue 18:24] =>  2:31
+    CLOCK: [2016-12-13 Tue 15:15]--[2016-12-13 Tue 15:52] =>  0:37
+    CLOCK: [2016-12-13 Tue 14:14]--[2016-12-13 Tue 14:23] =>  0:09
+
+We need to implement the Dogen JSON debug output format in C#.
+
+- namespaces for dumpers on other models
+- use helper or dumper
+- is simple type or not
+- needs quotes or not
+- needs tidy-up or not
+
+Notes:
+
+- create a dumper registrar per model
+- add a static constructor that registers the dumper
+- at the meta-model level we need to be able to distinguish between
+  a) primitives that need quoting and those that do not b) proxy types
+  with helpers c) regular model types with dumpers.
+
+Tasks:
+
+- Implement dumper registrar in MonoDevelop
+
+Links:
+
+- [[http://stackoverflow.com/questions/852181/c-printing-all-properties-of-an-object][C#: Printing all properties of an object]]
+- [[https://github.com/mcshaz/BlowTrial/blob/master/GenericToDataFile/ObjectDumper.cs][GenericToDataFile/ObjectDumper.cs]]
+
+Code:
+
+#+begin_src
+<#+
+            for (const auto attr : o.local_attributes()) {
+#>
+            sb.Append("\"<#= attr.name().simple() #>\": ");
+<#+
+                if (!attr.parsed_type().is_current_simple_type())
+#>
+            sb.Append(<#= attr.parsed_type().current().simple() #>Dumper.Dump(target.<#= attr.name().simple() #>));
+<#+
+                else
+#>
+            sb.Append("\"<#= attr.name().simple() #>\": ");
+<#+
+            }
+#>
+#+end_src
 
 *** Add support for nuget                                             :story:
 

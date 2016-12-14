@@ -49,6 +49,7 @@
  */
 #define ENABLE_DIA_TESTS
 #define ENABLE_JSON_TESTS
+// #define ENABLE_CSHARP_TESTS
 
 using dogen::utility::test_data::yarn_dia;
 using dogen::utility::test_data::yarn_json;
@@ -274,11 +275,15 @@ BOOST_AUTO_TEST_CASE(all_primitives_model_generates_expected_code_dia) {
     BOOST_CHECK(generate_and_diff(dia, actual_dia_dir));
 }
 
+#ifdef ENABLE_CSHARP_TESTS
+
 BOOST_AUTO_TEST_CASE(csharp_model_generates_expected_code_dia) {
     SETUP_TEST_LOG("csharp_model_generates_expected_code_dia");
     const auto dia(yarn_dia::input_csharp_model_dia());
     BOOST_CHECK(generate_and_diff(dia, actual_dia_dir));
 }
+
+#endif // ENABLE_CSHARP_TESTS
 
 #endif // ENABLE_DIA_TESTS
 
@@ -447,11 +452,15 @@ BOOST_AUTO_TEST_CASE(all_primitives_model_generates_expected_code_json) {
     BOOST_CHECK(generate_and_diff(json, actual_json_dir));
 }
 
+#ifdef ENABLE_CSHARP_TESTS
+
 BOOST_AUTO_TEST_CASE(csharp_model_generates_expected_code_json) {
     SETUP_TEST_LOG("csharp_model_generates_expected_code_json");
     const auto dia(yarn_json::input_csharp_model_json());
     BOOST_CHECK(generate_and_diff(dia, actual_json_dir));
 }
+
+#endif // ENABLE_CSHARP_TESTS
 
 #endif // ENABLE_JSON_TESTS
 
