@@ -29,7 +29,14 @@ file(MAKE_DIRECTORY ${stage_test_data_dir}/empty_tds/expected)
 foreach(dir ${sub_dir})
     if(IS_DIRECTORY ${cur_dir}/${dir})
         file(REMOVE_RECURSE ${stage_test_data_dir}/${dir}/expected)
+
+        # Its not exactly clear what the below line is doing but it
+        # copies a number of the test data files into the test data
+        # directories. We are probably doing extra work by copying it
+        # here, then deleting it in test models and copying again.
+        # FIXME: investigate this
         file(COPY ${cur_dir}/${dir} DESTINATION ${stage_dir}/test_data)
+
         file(MAKE_DIRECTORY ${stage_test_data_dir}/${dir}/actual)
         file(MAKE_DIRECTORY ${stage_test_data_dir}/${dir}/expected)
 

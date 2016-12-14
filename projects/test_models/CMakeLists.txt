@@ -129,6 +129,13 @@ foreach(dia_model ${all_dia_test_models})
     set(git_dir "${CMAKE_CURRENT_SOURCE_DIR}/${model_folder_name}")
     if(IS_DIRECTORY "${git_dir}")
         file(COPY "${git_dir}" DESTINATION "${expected_dir}")
+
+        # ensure we remove the IDE directories before copying for the C#
+        # projects.
+        if ("${model_name}" STREQUAL "CSharpModel")
+            file(REMOVE_RECURSE "${expected_dir}/CSharpModel/bin")
+            file(REMOVE_RECURSE "${expected_dir}/CSharpModel/obj")
+        endif()
     else()
         if(NOT EXISTS "${expected_dir}")
             file(MAKE_DIRECTORY "${expected_dir}")

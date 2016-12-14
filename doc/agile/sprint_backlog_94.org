@@ -12,20 +12,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-12-14 Wed 12:53]
+#+CAPTION: Clock summary at [2016-12-14 Wed 15:40]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *14:42* |       |      | 100.0 |
+| *Total time*                                                                | *15:17* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 14:42   |       |      | 100.0 |
-| Active                                                                      |         | 14:42 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:23 |   2.6 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:31 |   3.5 |
-| COMPLETED Add helper infrastructure to C#                                   |         |       | 5:55 |  40.2 |
-| COMPLETED Add support for Equals in C#                                      |         |       | 1:24 |   9.5 |
-| STARTED Add io support in C#                                                |         |       | 3:17 |  22.3 |
-| STARTED Create a test model solution to validate C# code                    |         |       | 3:12 |  21.8 |
+| Stories                                                                     | 15:17   |       |      | 100.0 |
+| Active                                                                      |         | 15:17 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:23 |   2.5 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:31 |   3.4 |
+| COMPLETED Add helper infrastructure to C#                                   |         |       | 5:55 |  38.7 |
+| COMPLETED Add support for Equals in C#                                      |         |       | 1:24 |   9.2 |
+| STARTED Add io support in C#                                                |         |       | 3:17 |  21.5 |
+| STARTED Create a test model solution to validate C# code                    |         |       | 3:47 |  24.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -309,6 +309,7 @@ Code:
 #+end_src
 
 *** STARTED Create a test model solution to validate C# code          :story:
+    CLOCK: [2016-12-14 Wed 15:05]--[2016-12-14 Wed 15:40] =>  0:35
     CLOCK: [2016-12-14 Wed 12:35]--[2016-12-14 Wed 12:53] =>  0:18
     CLOCK: [2016-12-14 Wed 11:23]--[2016-12-14 Wed 12:00] =>  0:37
     CLOCK: [2016-12-14 Wed 10:30]--[2016-12-14 Wed 11:22] =>  0:52
@@ -330,6 +331,20 @@ Build:
 Run tests:
 
 : mono packages/NUnit.ConsoleRunner.3.5.0/tools/nunit3-console.exe CSharpModel.Tests/bin/Debug/CSharpModel.Tests.dll
+
+We have a problem with this approach: when we build from msbuild we
+generate obj and bin directories; these then cause errors in the
+codegen tests. We solved this in the Travis build by doing the C#
+build at the end, but this is not ideal for local development.
+
+The requirements are:
+
+- we must be able to build from monodevelop without breaking code gen
+  tests;
+- we must be able to diff and rebase the monodevelop code.
+
+One way to achieve this is to delete these directories after we copy
+the data set across.
 
 *** Add support for nuget                                             :story:
 
