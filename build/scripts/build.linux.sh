@@ -81,6 +81,15 @@ target="$*"
 echo "* Target: '${target}'"
 
 #
+# C#
+#
+if [[ "x${WITH_CSHARP}" = "x" ]]; then
+    echo "* C#: disabled"
+else
+    echo "* C#: enabled"
+fi
+
+#
 # Setup directories
 #
 output_dir="${product_dir}/build/output";
@@ -117,10 +126,28 @@ if [ "${WITH_CSHARP}" == "1" ]; then
     csharp_dir="${product_dir}/projects/test_models";
     cd ${csharp_dir}
     nuget restore Dogen.TestModels.sln
+    if [ $? -ne 0 ]; then
+        echo "Error in nuget restore.";
+        exit 1;
+    fi
+
     xbuild Dogen.TestModels.sln
-    mono packages/NUnit.ConsoleRunner.3.5.0/tools/nunit3-console.exe CSharpModel.Tests/bin/Debug/CSharpModel.Tests.dll
+    if [ $? -ne 0 ]; then
+        echo "Error building C# solution.";
+        exit 1;
+    fi
+
+    mono packages/NUnit.ConsoleRunner.3.5.0/tools/nunit3-console.exe CSharpModel.Tests/bin/Debug/Dogen.TestModels.CSharpModel.Tests.dll
+    if [ $? -ne 0 ]; then
+        echo "Error running C# unit tests.";
+        exit 1;
+    fi
 fi
 
 echo "* Starting C++ build."
 cd ${build_type_dir}
 cmake ${product_dir} -G Ninja ${cmake_defines} && ninja -j5 ${target}
+if [ $? -ne 0 ]; then
+    echo "Error running CMake.";
+    exit 1;
+fi
