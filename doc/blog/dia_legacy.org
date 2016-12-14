@@ -1,0 +1,10 @@
+Create a blog post on installing dia legacy
+
+sudo apt-get install dia-common=0.97.3-1 dia-libs=0.97.3-1 dia=0.97.3-1
+apt-get -o Acquire::Check-Valid-Until=false update
+deb http://snapshot.debian.org/archive/debian/20140913T220820Z testing main
+https://bugs.debian.org/cgi-bin/pkgreport.cgi?package=dia
+http://snapshot.debian.org/archive/debian/20140913T220820Z/
+http://mindref.blogspot.co.uk/2012/02/apt-revert-upgrade.html
+https://packages.qa.debian.org/d/dia/news/20140913T163911Z.html
+https://git.gnome.org/browse/dia/refs/
