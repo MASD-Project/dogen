@@ -112,6 +112,15 @@ fi
 #
 # Build
 #
-echo "* Starting build."
+if [ "${WITH_CSHARP}" == "1" ]; then
+    echo "* Starting C# build."
+    csharp_dir="${product_dir}/projects/test_models";
+    cd ${csharp_dir}
+    nuget restore Dogen.TestModels.sln
+    xbuild Dogen.TestModels.sln
+    mono packages/NUnit.ConsoleRunner.3.5.0/tools/nunit3-console.exe CSharpModel.Tests/bin/Debug/CSharpModel.Tests.dll
+fi
+
+echo "* Starting C++ build."
 cd ${build_type_dir}
 cmake ${product_dir} -G Ninja ${cmake_defines} && ninja -j5 ${target}

@@ -12,20 +12,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-12-14 Wed 10:29]
+#+CAPTION: Clock summary at [2016-12-14 Wed 12:53]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *12:55* |       |      | 100.0 |
+| *Total time*                                                                | *14:42* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 12:55   |       |      | 100.0 |
-| Active                                                                      |         | 12:55 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:23 |   3.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:31 |   4.0 |
-| COMPLETED Add helper infrastructure to C#                                   |         |       | 5:55 |  45.8 |
-| COMPLETED Add support for Equals in C#                                      |         |       | 1:24 |  10.8 |
-| STARTED Add io support in C#                                                |         |       | 3:17 |  25.4 |
-| STARTED Create a test model solution to validate C# code                    |         |       | 1:25 |  11.0 |
+| Stories                                                                     | 14:42   |       |      | 100.0 |
+| Active                                                                      |         | 14:42 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:23 |   2.6 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:31 |   3.5 |
+| COMPLETED Add helper infrastructure to C#                                   |         |       | 5:55 |  40.2 |
+| COMPLETED Add support for Equals in C#                                      |         |       | 1:24 |   9.5 |
+| STARTED Add io support in C#                                                |         |       | 3:17 |  22.3 |
+| STARTED Create a test model solution to validate C# code                    |         |       | 3:12 |  21.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -309,12 +309,27 @@ Code:
 #+end_src
 
 *** STARTED Create a test model solution to validate C# code          :story:
+    CLOCK: [2016-12-14 Wed 12:35]--[2016-12-14 Wed 12:53] =>  0:18
+    CLOCK: [2016-12-14 Wed 11:23]--[2016-12-14 Wed 12:00] =>  0:37
+    CLOCK: [2016-12-14 Wed 10:30]--[2016-12-14 Wed 11:22] =>  0:52
     CLOCK: [2016-12-14 Wed 10:25]--[2016-12-14 Wed 10:29] =>  0:04
     CLOCK: [2016-12-14 Wed 10:19]--[2016-12-14 Wed 10:24] =>  0:05
     CLOCK: [2016-12-14 Wed 09:02]--[2016-12-14 Wed 10:18] =>  1:16
 
 We need to first implement the main C# features in MonoDevelop, and
 then use that as a starting point for the templates.
+
+Nuget:
+
+: nuget restore Dogen.TestModels.sln
+
+Build:
+
+: xbuild Dogen.TestModels.sln
+
+Run tests:
+
+: mono packages/NUnit.ConsoleRunner.3.5.0/tools/nunit3-console.exe CSharpModel.Tests/bin/Debug/CSharpModel.Tests.dll
 
 *** Add support for nuget                                             :story:
 

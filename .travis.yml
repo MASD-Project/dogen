@@ -38,7 +38,7 @@ matrix:
       env: BUILD_TYPE=Debug COMPILER="clang"
     - os: linux
       compiler: gcc
-      env: BUILD_TYPE=Release DEPLOY="1" COMPILER="gcc"
+      env: BUILD_TYPE=Release DEPLOY="1" COMPILER="gcc" WITH_CSHARP="1"
     - os: linux
       compiler: clang
       env: BUILD_TYPE=Release COMPILER="clang"
