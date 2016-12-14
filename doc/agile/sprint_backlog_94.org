@@ -12,19 +12,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-12-13 Tue 15:52]
-| <75>                                                                        |        |      |      |       |
-| Headline                                                                    | Time   |      |      |     % |
-|-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *8:59* |      |      | 100.0 |
-|-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 8:59   |      |      | 100.0 |
-| Active                                                                      |        | 8:59 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:23 |   4.3 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:31 |   5.8 |
-| COMPLETED Add helper infrastructure to C#                                   |        |      | 5:55 |  65.9 |
-| COMPLETED Add support for Equals in C#                                      |        |      | 1:24 |  15.6 |
-| STARTED Add io support in C#                                                |        |      | 0:46 |   8.5 |
+#+CAPTION: Clock summary at [2016-12-14 Wed 10:24]
+| <75>                                                                        |         |       |      |       |
+| Headline                                                                    | Time    |       |      |     % |
+|-----------------------------------------------------------------------------+---------+-------+------+-------|
+| *Total time*                                                                | *12:51* |       |      | 100.0 |
+|-----------------------------------------------------------------------------+---------+-------+------+-------|
+| Stories                                                                     | 12:51   |       |      | 100.0 |
+| Active                                                                      |         | 12:51 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:23 |   3.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:31 |   4.0 |
+| COMPLETED Add helper infrastructure to C#                                   |         |       | 5:55 |  46.0 |
+| COMPLETED Add support for Equals in C#                                      |         |       | 1:24 |  10.9 |
+| STARTED Add io support in C#                                                |         |       | 3:17 |  25.6 |
+| STARTED Create a test model solution to validate C# code                    |         |       | 1:21 |  10.5 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -306,6 +307,21 @@ Code:
             }
 #>
 #+end_src
+
+*** STARTED Create a test model solution to validate C# code          :story:
+    CLOCK: [2016-12-14 Wed 10:19]--[2016-12-14 Wed 10:24] =>  0:05
+    CLOCK: [2016-12-14 Wed 09:02]--[2016-12-14 Wed 10:18] =>  1:16
+
+We need to first implement the main C# features in MonoDevelop, and
+then use that as a starting point for the templates.
+
+*** Add support for nuget                                             :story:
+
+A proxy model may require obtaining a nuget package. Users should be
+able to define a proxy model as requiring a nuget package and then
+Dogen should generate packages.config and add all such models to it.
+
+: +  <package id="NUnit" version="2.6.4" targetFramework="net45" />
 
 *** Identifiable needs to use camel case in C#                        :story:
 

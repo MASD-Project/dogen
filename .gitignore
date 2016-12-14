@@ -17,3 +17,11 @@ Thumbs.db
 
 # build directory
 build/output
+
+# .Net ignores
+packages
+*.userprefs
+test-results
+obj
+bin
+*.suo
