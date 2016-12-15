@@ -24,18 +24,28 @@ namespace Dogen.TestModels.CSharpModel
     /// <summary>
     /// Generates sequences of ComplexBuiltins.
     /// </summary>
-    static class ComplexBuiltinsDumper
+	public static class ComplexBuiltinsDumper
     {
-        public static string Dump(ComplexBuiltins target)
+		static void Dump(DumpHelper helper, ComplexBuiltins value)
+		{
+			helper.IncrementDepth();
+			if (helper.MaximumDepthExceeded())
+				return;
+
+			helper.AddStartObject();
+			helper.AddType("Dogen.TestModels.CSharpModel.ComplexBuiltins", withSeparator:true);
+			helper.Add("ObjectProperty", value.ObjectProperty, withSeparator:true);
+			helper.Add("StringProperty", value.StringProperty);
+			helper.AddEndObject();
+
+			helper.DecrementDepth();
+		}
+
+		public static string Dump(ComplexBuiltins value)
         {
-			var dumper = new Dumper();
-			dumper.AddStartObject();
-			dumper.AddObjectType("Dogen.TestModels.CSharpModel.ComplexBuiltins");
-			dumper.AddMemberSeparator();
-			dumper.AddQuoted("ObjectProperty");
-			dumper.AddPairSeparator();
-			dumper.AddEndObject();
-			return dumper.Dump();
+			var helper = new DumpHelper();
+			Dump(helper, value);
+			return helper.Dump();
         }
     }
 }

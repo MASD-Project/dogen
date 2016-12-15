@@ -12,20 +12,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-12-15 Thu 14:44]
-| <75>                                                                        |         |       |      |       |
-| Headline                                                                    | Time    |       |      |     % |
-|-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *21:04* |       |      | 100.0 |
-|-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 21:04   |       |      | 100.0 |
-| Active                                                                      |         | 21:04 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:56 |   4.4 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:31 |   2.5 |
-| COMPLETED Add helper infrastructure to C#                                   |         |       | 5:55 |  28.1 |
-| COMPLETED Add support for Equals in C#                                      |         |       | 1:24 |   6.6 |
-| COMPLETED Create a test model solution to validate C# code                  |         |       | 3:47 |  18.0 |
-| STARTED Add io support in C#                                                |         |       | 8:31 |  40.4 |
+#+CAPTION: Clock summary at [2016-12-15 Thu 17:48]
+| <75>                                                                        |         |       |       |       |
+| Headline                                                                    | Time    |       |       |     % |
+|-----------------------------------------------------------------------------+---------+-------+-------+-------|
+| *Total time*                                                                | *24:07* |       |       | 100.0 |
+|-----------------------------------------------------------------------------+---------+-------+-------+-------|
+| Stories                                                                     | 24:07   |       |       | 100.0 |
+| Active                                                                      |         | 24:07 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  0:56 |   3.9 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  0:31 |   2.1 |
+| COMPLETED Add helper infrastructure to C#                                   |         |       |  5:55 |  24.5 |
+| COMPLETED Add support for Equals in C#                                      |         |       |  1:24 |   5.8 |
+| COMPLETED Create a test model solution to validate C# code                  |         |       |  3:47 |  15.7 |
+| STARTED Add io support in C#                                                |         |       | 11:34 |  48.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -300,6 +300,7 @@ One way to achieve this is to delete these directories after we copy
 the data set across.
 
 *** STARTED Add io support in C#                                      :story:
+    CLOCK: [2016-12-15 Thu 14:45]--[2016-12-15 Thu 17:48] =>  3:03
     CLOCK: [2016-12-15 Thu 13:42]--[2016-12-15 Thu 14:10] =>  1:02
     CLOCK: [2016-12-15 Thu 10:05]--[2016-12-15 Thu 12:39] =>  2:34
     CLOCK: [2016-12-15 Thu 08:45]--[2016-12-15 Thu 09:38] =>  0:53
@@ -355,6 +356,13 @@ Code:
             }
 #>
 #+end_src
+
+*** Add depth detection to io in C++                                  :story:
+
+In C# we added support for detecting the depth of the graph and
+exiting after we've gone too deep. This is an effective way of
+handling cycles in the graph until we have better solutions. We need
+to adopt something similar for C++.
 
 *** Move io code in types in C++ to io facet                          :story:
 

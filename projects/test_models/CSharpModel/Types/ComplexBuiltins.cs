@@ -27,7 +27,7 @@ namespace Dogen.TestModels.CSharpModel
     /// <remarks>
     /// This is a remark.
     /// </remarks>
-    public class ComplexBuiltins
+	public class ComplexBuiltins
     {
 		#region Properties
         public object ObjectProperty { get; set; }
@@ -83,10 +83,5 @@ namespace Dogen.TestModels.CSharpModel
 			}
 		}
  		#endregion
-
-		public override string ToString()
-		{
-			return ComplexBuiltinsDumper.Dump(this);
-		}
     }
 }

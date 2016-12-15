@@ -26,7 +26,7 @@ namespace Dogen.TestModels.CSharpModel
 	/// <summary>
 	/// Generates sequences of ComplexBuiltins.
 	/// </summary>
-	public static class ComplexBuiltinsGenerator {
+	public static class ComplexBuiltinsSequenceGenerator {
 		#region Factory methods
 		static object CreateObject(uint position)
 		{
@@ -48,10 +48,10 @@ namespace Dogen.TestModels.CSharpModel
 		#endregion
 
 		#region Enumerator
-		private class ComplexBuiltinsSequenceEnumerator : IEnumerator, IEnumerator<ComplexBuiltins>, IDisposable 
+		private class ComplexBuiltinsEnumerator : IEnumerator, IEnumerator<ComplexBuiltins>, IDisposable 
 		{
 			#region Properties
-			private uint _position = 0;
+			private uint _position;
 			private readonly ComplexBuiltins _current;
 			#endregion
 
@@ -91,25 +91,25 @@ namespace Dogen.TestModels.CSharpModel
 			}                                                                           
 			#endregion
 
-			public ComplexBuiltinsSequenceEnumerator()
+			public ComplexBuiltinsEnumerator()
 			{
-				_current = ComplexBuiltinsGenerator.Create(_position);
+				_current = ComplexBuiltinsSequenceGenerator.Create(_position);
 			}
 		}
 		#endregion
 
 		#region Enumerable
-		private class ComplexBuiltinsSequenceEnumerable : IEnumerable, IEnumerable<ComplexBuiltins>
+		private class ComplexBuiltinsEnumerable : IEnumerable, IEnumerable<ComplexBuiltins>
 		{
 			#region IEnumerable implementation
 			public IEnumerator GetEnumerator()
 			{
-				return new ComplexBuiltinsSequenceEnumerator();
+				return new ComplexBuiltinsEnumerator();
 			}
 
 			IEnumerator<ComplexBuiltins> IEnumerable<ComplexBuiltins>.GetEnumerator()
 			{
-				return new ComplexBuiltinsSequenceEnumerator();
+				return new ComplexBuiltinsEnumerator();
 			}
 			#endregion
 		}
@@ -117,7 +117,7 @@ namespace Dogen.TestModels.CSharpModel
 
 		static public IEnumerable<ComplexBuiltins> Sequence()
 		{
-			return new ComplexBuiltinsSequenceEnumerable();
+			return new ComplexBuiltinsEnumerable();
 		}
 	}
 }

@@ -18,6 +18,8 @@
 // MA 02110-1301, USA.
 //
 using System.Collections.Generic;
+using System.Collections;
+using System;
 
 namespace Dogen.TestModels.CSharpModel
 {
@@ -26,12 +28,85 @@ namespace Dogen.TestModels.CSharpModel
     /// </summary>
     public static class NoPropertiesSequenceGenerator
     {
-        public static IEnumerable<NoProperties> Sequence()
-        {
-            int _position = 0;
-            var current = new NoProperties();
-            yield return current;
-            ++_position;
-        }
-    }
+		#region Factory methods
+		static internal NoProperties Create(uint position)
+		{
+			var result = new NoProperties();
+			return result;
+		}
+		#endregion
+
+		#region Enumerator
+		private class NoPropertiesEnumerator : IEnumerator, IEnumerator<NoProperties>, IDisposable 
+		{
+			#region Properties
+			private uint _position;
+			private readonly NoProperties _current;
+			#endregion
+
+			#region IDisposable
+			public void Dispose()
+			{
+			}
+			#endregion
+
+			#region IEnumerator implementation
+			public bool MoveNext()
+			{
+				++_position;
+				Create(_position);
+				return true;
+			}
+
+			public void Reset()
+			{
+				_position = 0;
+				Create(_position);
+			}
+
+			public object Current {
+				get
+				{
+					return _current;
+				}
+			}
+
+			NoProperties IEnumerator<NoProperties>.Current                                                
+			{                                                                           
+				get                                                                     
+				{                                                                       
+					return _current;                                           
+				}                                                                       
+			}                                                                           
+			#endregion
+
+			public NoPropertiesEnumerator()
+			{
+				_current = NoPropertiesSequenceGenerator.Create(_position);
+			}
+		}
+		#endregion
+
+		#region Enumerable
+		private class NoPropertiesEnumerable : IEnumerable, IEnumerable<NoProperties>
+		{
+			#region IEnumerable implementation
+			public IEnumerator GetEnumerator()
+			{
+				return new NoPropertiesEnumerator();
+			}
+
+			IEnumerator<NoProperties> IEnumerable<NoProperties>.GetEnumerator()
+			{
+				return new NoPropertiesEnumerator();
+			}
+			#endregion
+		}
+		#endregion
+
+		static public IEnumerable<NoProperties> Sequence()
+		{
+			return new NoPropertiesEnumerable();
+		}
+	}
 }

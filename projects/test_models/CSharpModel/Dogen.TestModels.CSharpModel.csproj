@@ -42,7 +42,7 @@
     <Compile Include="Types\NoProperties.cs" />
     <Compile Include="Types\OneProperty.cs" />
     <Compile Include="Types\PrimitiveBuiltins.cs" />
-    <Compile Include="Dumpers\Dumper.cs" />
+    <Compile Include="Dumpers\DumpHelper.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
