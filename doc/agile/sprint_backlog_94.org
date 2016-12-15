@@ -12,24 +12,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-12-15 Thu 12:39]
+#+CAPTION: Clock summary at [2016-12-15 Thu 14:44]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *20:03* |       |      | 100.0 |
+| *Total time*                                                                | *21:04* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 20:03   |       |      | 100.0 |
-| Active                                                                      |         | 20:03 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:23 |   1.9 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:31 |   2.6 |
-| COMPLETED Add helper infrastructure to C#                                   |         |       | 5:55 |  29.5 |
-| COMPLETED Add support for Equals in C#                                      |         |       | 1:24 |   7.0 |
-| COMPLETED Create a test model solution to validate C# code                  |         |       | 3:47 |  18.9 |
-| STARTED Add io support in C#                                                |         |       | 8:03 |  40.1 |
+| Stories                                                                     | 21:04   |       |      | 100.0 |
+| Active                                                                      |         | 21:04 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:56 |   4.4 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:31 |   2.5 |
+| COMPLETED Add helper infrastructure to C#                                   |         |       | 5:55 |  28.1 |
+| COMPLETED Add support for Equals in C#                                      |         |       | 1:24 |   6.6 |
+| COMPLETED Create a test model solution to validate C# code                  |         |       | 3:47 |  18.0 |
+| STARTED Add io support in C#                                                |         |       | 8:31 |  40.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-12-15 Thu 14:11]--[2016-12-15 Thu 14:44] =>  0:33
     CLOCK: [2016-12-12 Mon 15:07]--[2016-12-12 Mon 15:13] =>  0:06
     CLOCK: [2016-12-12 Mon 13:15]--[2016-12-12 Mon 13:32] =>  0:17
 
@@ -299,6 +300,7 @@ One way to achieve this is to delete these directories after we copy
 the data set across.
 
 *** STARTED Add io support in C#                                      :story:
+    CLOCK: [2016-12-15 Thu 13:42]--[2016-12-15 Thu 14:10] =>  1:02
     CLOCK: [2016-12-15 Thu 10:05]--[2016-12-15 Thu 12:39] =>  2:34
     CLOCK: [2016-12-15 Thu 08:45]--[2016-12-15 Thu 09:38] =>  0:53
     CLOCK: [2016-12-14 Wed 16:05]--[2016-12-14 Wed 17:24] =>  1:19
@@ -320,7 +322,8 @@ Notes:
 - add a static constructor that registers the dumper
 - at the meta-model level we need to be able to distinguish between
   a) primitives that need quoting and those that do not b) proxy types
-  with helpers c) regular model types with dumpers.
+  with helpers c) regular model types with dumpers d) regular model
+  types with dumpers and inheritance.
 
 Tasks:
 
@@ -352,6 +355,73 @@ Code:
             }
 #>
 #+end_src
+
+*** Move io code in types in C++ to io facet                          :story:
+
+Originally we implemented io support for inheritance by making use of
+virtual functions. This is still the easiest way to do type
+dispatching; however, we then placed the io implementation in
+types. This is a bit annoying because it clutters types with io
+machinery. Another way of doing this is:
+
+- create a class to do the streaming for each type, call it =dumper=;
+- when there is no inheritance, =operator<<= simply calls the
+  appropriate dumper.
+- when there is inheritance, to_stream calls the appropriate dumper
+  directly; =operator<<= calls =to_stream=. in an ideal world we could
+  even make it private and =operator<<= a friend.
+
+With this, we no longer need all the complications of supporting io
+helpers in types (enabled in helpers, etc). We just need to determine
+if io is enabled (and in inheritance), in which case we output
+=to_stream= and for implementation, also include/use the dumper. Note
+that we still need to declare the dumpers in the io headers - at least
+for types involved in inheritance, but probably in all cases for
+consistency.
+
+*** Reducing the overhead of other facets in types                    :story:
+
+Note: This story is a bit far-fetched at the moment, but it is a place
+to collect ideas on this space.
+
+There is a tricky problem with io and inheritance: when using a facet,
+a user should only pay the cost of that facet and nothing else;
+however, we could not find any efficient ways of type dispatching
+across models for io. This meant that we ended up adding a
+=to_stream= method to types that are part of an inheritance
+relationship. The downside of this approach is that even if one does
+not use io, one ends up paying the cost of carrying this method
+around.
+
+No good alternatives have been found:
+
+- its not possible to use visitors because we now allow cross-model
+  inheritance; thus we do not know what visitor to use.
+- one could register types against a base streamer for an inheritance
+  tree; the downside of this approach is efficiency. We'd have to do a
+  map look-up to find the correct streamer. Its possible but not
+  entirely trivial to use a vector as we only know the size of the
+  inheritance tree at run-time and so we'd have to assign positions in
+  the vector as types register. This means we'd have to have some kind
+  of static member variable on each type to remember their index, and
+  this would be populated as a result of registration. This also means
+  we'd still be impacting types with the static index. This is akin to
+  a vtable but with a twist. Whereas the vtable is associated with an
+  object, we'd have a vtable per inheritance tree; the index for each
+  object is in each class (but it must be populated at run time). The
+  size of the vtable must also be determined once all types have
+  registered (or we can continue to grow it during the registration
+  phase; a one-off cost).
+
+Actually this seems to be a common problem; we did the same for
+visitors. It would be nice to only pay visitor costs when one intends
+to use it. The current implementation menas we are carrying a vtable
+just because of this (and of =to_stream=). In an ideal scenario,
+visitor would itself carry the vtable.
+
+Links:
+
+- [[http://www.learncpp.com/cpp-tutorial/125-the-virtual-table/][12.5 — The virtual table]]
 
 *** Add support for nuget                                             :story:
 
