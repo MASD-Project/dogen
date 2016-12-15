@@ -12,20 +12,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-12-14 Wed 17:24]
+#+CAPTION: Clock summary at [2016-12-15 Thu 12:39]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *16:36* |       |      | 100.0 |
+| *Total time*                                                                | *20:03* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 16:36   |       |      | 100.0 |
-| Active                                                                      |         | 16:36 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:23 |   2.3 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:31 |   3.1 |
-| COMPLETED Add helper infrastructure to C#                                   |         |       | 5:55 |  35.6 |
-| COMPLETED Add support for Equals in C#                                      |         |       | 1:24 |   8.4 |
-| COMPLETED Create a test model solution to validate C# code                  |         |       | 3:47 |  22.8 |
-| STARTED Add io support in C#                                                |         |       | 4:36 |  27.7 |
+| Stories                                                                     | 20:03   |       |      | 100.0 |
+| Active                                                                      |         | 20:03 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:23 |   1.9 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:31 |   2.6 |
+| COMPLETED Add helper infrastructure to C#                                   |         |       | 5:55 |  29.5 |
+| COMPLETED Add support for Equals in C#                                      |         |       | 1:24 |   7.0 |
+| COMPLETED Create a test model solution to validate C# code                  |         |       | 3:47 |  18.9 |
+| STARTED Add io support in C#                                                |         |       | 8:03 |  40.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -299,6 +299,8 @@ One way to achieve this is to delete these directories after we copy
 the data set across.
 
 *** STARTED Add io support in C#                                      :story:
+    CLOCK: [2016-12-15 Thu 10:05]--[2016-12-15 Thu 12:39] =>  2:34
+    CLOCK: [2016-12-15 Thu 08:45]--[2016-12-15 Thu 09:38] =>  0:53
     CLOCK: [2016-12-14 Wed 16:05]--[2016-12-14 Wed 17:24] =>  1:19
     CLOCK: [2016-12-13 Tue 15:53]--[2016-12-13 Tue 18:24] =>  2:31
     CLOCK: [2016-12-13 Tue 15:15]--[2016-12-13 Tue 15:52] =>  0:37
@@ -323,6 +325,8 @@ Notes:
 Tasks:
 
 - Implement dumper registrar in MonoDevelop
+- dumpers do not have the correct postfix
+- change project to backslashes
 
 Links:
 

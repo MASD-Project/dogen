@@ -1,3 +1,4 @@
+using System;
 using NUnit.Framework;
 
 namespace Dogen.TestModels.CSharpModel.Tests
@@ -8,8 +9,10 @@ namespace Dogen.TestModels.CSharpModel.Tests
         [Test]
         public void CreatingTypesSucceeds()
         {
-            var seq = ComplexBuiltinsSequenceGenerator.Sequence().GetEnumerator();
-            var t = seq.Current;
+			var seq = ComplexBuiltinsGenerator.Sequence();
+			var en = seq.GetEnumerator();
+			var c = en.Current;
+			Console.WriteLine(c.ToString());
 
             // var baseDir = PathUtils.ResolveRelative("TestData/TestCases/ExtendedDataStore");
             // var store = new ExtendedDataStore(new FileBasedDataStore(baseDir));

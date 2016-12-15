@@ -28,9 +28,14 @@ namespace Dogen.TestModels.CSharpModel
     {
         public static string Dump(ComplexBuiltins target)
         {
-            var sb = new StringBuilder();
-            sb.Append("{ \"__type__\": \"ComplexBuiltins\", ");
-            return sb.ToString();
+			var dumper = new Dumper();
+			dumper.AddStartObject();
+			dumper.AddObjectType("Dogen.TestModels.CSharpModel.ComplexBuiltins");
+			dumper.AddMemberSeparator();
+			dumper.AddQuoted("ObjectProperty");
+			dumper.AddPairSeparator();
+			dumper.AddEndObject();
+			return dumper.Dump();
         }
     }
 }
