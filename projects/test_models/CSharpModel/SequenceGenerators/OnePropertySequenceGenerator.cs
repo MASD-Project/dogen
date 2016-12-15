@@ -28,19 +28,12 @@ namespace Dogen.TestModels.CSharpModel
     /// </summary>
     public static class OnePropertySequenceGenerator
     {
-		#region Factory methods
-		static int CreateInt(uint position)
-		{
-			return Convert.ToInt32(position);
-		}
-
 		static internal OneProperty Create(uint position)
 		{
 			var result = new OneProperty();
-			result.Property = CreateInt(position + 0);
+			result.Property = GeneratorHelper.CreateInt(position + 0);
 			return result;
 		}
-		#endregion
 
 		#region Enumerator
 		private class OnePropertyEnumerator : IEnumerator, IEnumerator<OneProperty>, IDisposable 

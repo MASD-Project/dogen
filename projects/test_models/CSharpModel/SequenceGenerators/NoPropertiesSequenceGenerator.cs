@@ -28,13 +28,11 @@ namespace Dogen.TestModels.CSharpModel
     /// </summary>
     public static class NoPropertiesSequenceGenerator
     {
-		#region Factory methods
 		static internal NoProperties Create(uint position)
 		{
 			var result = new NoProperties();
 			return result;
 		}
-		#endregion
 
 		#region Enumerator
 		private class NoPropertiesEnumerator : IEnumerator, IEnumerator<NoProperties>, IDisposable 
