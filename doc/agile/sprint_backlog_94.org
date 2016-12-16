@@ -12,20 +12,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-12-15 Thu 18:34]
+#+CAPTION: Clock summary at [2016-12-16 Fri 09:37]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *24:29* |       |       | 100.0 |
+| *Total time*                                                                | *25:10* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 24:29   |       |       | 100.0 |
-| Active                                                                      |         | 24:29 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  0:56 |   3.8 |
+| Stories                                                                     | 25:10   |       |       | 100.0 |
+| Active                                                                      |         | 25:10 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  0:56 |   3.7 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:31 |   2.1 |
-| COMPLETED Add helper infrastructure to C#                                   |         |       |  5:55 |  24.2 |
-| COMPLETED Add support for Equals in C#                                      |         |       |  1:24 |   5.7 |
-| COMPLETED Create a test model solution to validate C# code                  |         |       |  3:47 |  15.5 |
-| STARTED Add io support in C#                                                |         |       | 11:56 |  48.7 |
+| COMPLETED Add helper infrastructure to C#                                   |         |       |  5:55 |  23.5 |
+| COMPLETED Add support for Equals in C#                                      |         |       |  1:24 |   5.6 |
+| COMPLETED Create a test model solution to validate C# code                  |         |       |  3:47 |  15.0 |
+| COMPLETED Add basic io support to C#                                        |         |       | 11:56 |  47.4 |
+| COMPLETED Add basic test data generation support to C#                      |         |       |  0:41 |   2.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -299,7 +300,8 @@ The requirements are:
 One way to achieve this is to delete these directories after we copy
 the data set across.
 
-*** STARTED Add io support in C#                                      :story:
+*** COMPLETED Add basic io support to C#                              :story:
+    CLOSED: [2016-12-16 Fri 09:14]
     CLOCK: [2016-12-15 Thu 18:10]--[2016-12-15 Thu 18:32] =>  0:22
     CLOCK: [2016-12-15 Thu 14:45]--[2016-12-15 Thu 17:48] =>  3:03
     CLOCK: [2016-12-15 Thu 13:42]--[2016-12-15 Thu 14:10] =>  1:02
@@ -357,6 +359,19 @@ Code:
             }
 #>
 #+end_src
+
+*** COMPLETED Add basic test data generation support to C#            :story:
+    CLOSED: [2016-12-16 Fri 09:37]
+    CLOCK: [2016-12-16 Fri 08:55]--[2016-12-16 Fri 09:36] =>  0:41
+
+We need to create a facet that generates domain types. It should be
+idiomatic in C# - =IEnumerable=, etc.
+
+Links:
+
+- [[http://geekswithblogs.net/BlackRabbitCoder/archive/2010/04/21/more-fun-with-c-iterators-and-generators.aspx][More Fun with C# Iterators and Generators]]
+- [[https://gist.github.com/DForshner/5533088][NaiveFibonacciSequenceGenerator.cs]]
+- [[https://coding.abel.nu/2011/12/return-ienumerable-with-yield-return/][Return IEnumerable with yield return]]
 
 *** Add depth detection to io in C++                                  :story:
 
@@ -443,17 +458,6 @@ Dogen should generate packages.config and add all such models to it.
 *** Identifiable needs to use camel case in C#                        :story:
 
 At present we are building identifiables with underscores.
-
-*** Add support for test data generation in C#                        :story:
-
-We need to create a facet that generates domain types. It should be
-idiomatic in C# - =IEnumerable=, etc.
-
-Links:
-
-- [[http://geekswithblogs.net/BlackRabbitCoder/archive/2010/04/21/more-fun-with-c-iterators-and-generators.aspx][More Fun with C# Iterators and Generators]]
-- [[https://gist.github.com/DForshner/5533088][NaiveFibonacciSequenceGenerator.cs]]
-- [[https://coding.abel.nu/2011/12/return-ienumerable-with-yield-return/][Return IEnumerable with yield return]]
 
 *** Generate windows packages with CPack                              :story:
 

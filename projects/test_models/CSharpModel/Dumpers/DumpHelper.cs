@@ -113,7 +113,7 @@ namespace Dogen.TestModels.CSharpModel
 		{
 			AddKeyWithSeparator(key);
 			AddStartObject();
-			AddType(SystemObjectType, withSeparator:true);
+			AddType(SystemObjectType, true/*withSeparator*/);
 			AddKey(HashCode);
 			AddPairSeparator();
 			AddNonQuoted(value.GetHashCode());

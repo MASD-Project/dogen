@@ -114,10 +114,7 @@ namespace Dogen.TestModels.CSharpModel
             if (Object.ReferenceEquals(lhs, rhs))
                 return true;
 
-            if(Object.ReferenceEquals(null, lhs))
-                return false;
-
-            return lhs.Equals(rhs);
+			return !Object.ReferenceEquals(null, lhs) && lhs.Equals(rhs);
         }
 
         public static bool operator !=(PrimitiveBuiltins lhs, PrimitiveBuiltins rhs)
