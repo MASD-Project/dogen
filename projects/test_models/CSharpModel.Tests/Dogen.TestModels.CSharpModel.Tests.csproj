@@ -56,8 +56,8 @@
   </Target>
   -->
   <ItemGroup>
-    <Compile Include="TypesTests.cs" />
     <Compile Include="LogConfigurator.cs" />
+    <Compile Include="equality_tests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CSharpModel\Dogen.TestModels.CSharpModel.csproj">

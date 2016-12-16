@@ -17,6 +17,9 @@
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 // MA 02110-1301, USA.
 //
+using System;
+
+
 namespace Dogen.TestModels.CSharpModel
 {
     /// <summary>
@@ -24,5 +27,35 @@ namespace Dogen.TestModels.CSharpModel
     /// </summary>
     public class NoProperties
     {
+        #region Equality
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != GetType()) return false;
+
+            var value = obj as NoProperties;
+            return value != null;
+        }
+
+        public static bool operator ==(NoProperties lhs, NoProperties rhs)
+        {
+            if (Object.ReferenceEquals(lhs, rhs))
+                return true;
+
+            return !Object.ReferenceEquals(null, lhs) && lhs.Equals(rhs);
+        }
+
+        public static bool operator !=(NoProperties lhs, NoProperties rhs)
+        {
+            return !(lhs == rhs);
+        }
+
+        public override int GetHashCode()
+        {
+            return 0;
+        }
+        #endregion
+
     }
 }
