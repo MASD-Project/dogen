@@ -35,12 +35,17 @@ namespace Dogen.TestModels.CSharpModel
         }
 
         #region Enumerator
-        private class NoPropertiesEnumerator : IEnumerator, IEnumerator<NoProperties>, IDisposable 
+        private class NoPropertiesEnumerator : IEnumerator, IEnumerator<NoProperties>, IDisposable
         {
             #region Properties
             private uint _position;
-            private readonly NoProperties _current;
+            private NoProperties _current;
             #endregion
+
+            private void PopulateCurrent()
+            {
+                _current = NoPropertiesSequenceGenerator.Create(_position);
+            }
 
             #region IDisposable
             public void Dispose()
@@ -52,14 +57,14 @@ namespace Dogen.TestModels.CSharpModel
             public bool MoveNext()
             {
                 ++_position;
-                Create(_position);
+                PopulateCurrent();
                 return true;
             }
 
             public void Reset()
             {
                 _position = 0;
-                Create(_position);
+                PopulateCurrent();
             }
 
             public object Current {
@@ -69,18 +74,18 @@ namespace Dogen.TestModels.CSharpModel
                 }
             }
 
-            NoProperties IEnumerator<NoProperties>.Current                                                
-            {                                                                           
-                get                                                                     
-                {                                                                       
-                    return _current;                                           
-                }                                                                       
-            }                                                                           
+            NoProperties IEnumerator<NoProperties>.Current
+            {
+                get
+                {
+                    return _current;
+                }
+            }
             #endregion
 
             public NoPropertiesEnumerator()
             {
-                _current = NoPropertiesSequenceGenerator.Create(_position);
+                PopulateCurrent();
             }
         }
         #endregion

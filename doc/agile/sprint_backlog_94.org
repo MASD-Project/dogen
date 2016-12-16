@@ -12,22 +12,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-12-16 Fri 12:13]
+#+CAPTION: Clock summary at [2016-12-16 Fri 15:20]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *27:43* |       |       | 100.0 |
+| *Total time*                                                                | *28:48* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 27:43   |       |       | 100.0 |
-| Active                                                                      |         | 27:43 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  0:56 |   3.4 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  0:31 |   1.9 |
-| COMPLETED Add helper infrastructure to C#                                   |         |       |  5:55 |  21.3 |
-| COMPLETED Add support for Equals in C#                                      |         |       |  1:24 |   5.1 |
-| COMPLETED Create a test model solution to validate C# code                  |         |       |  3:47 |  13.7 |
-| COMPLETED Add basic io support to C#                                        |         |       | 11:56 |  43.1 |
-| COMPLETED Add basic test data generation support to C#                      |         |       |  0:41 |   2.5 |
-| STARTED Add canned unit tests to C# model                                   |         |       |  2:33 |   9.2 |
+| Stories                                                                     | 28:48   |       |       | 100.0 |
+| Active                                                                      |         | 28:48 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  0:56 |   3.2 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  0:31 |   1.8 |
+| COMPLETED Add helper infrastructure to C#                                   |         |       |  5:55 |  20.5 |
+| COMPLETED Add support for Equals in C#                                      |         |       |  1:24 |   4.9 |
+| COMPLETED Create a test model solution to validate C# code                  |         |       |  3:47 |  13.1 |
+| COMPLETED Add basic io support to C#                                        |         |       | 11:56 |  41.4 |
+| COMPLETED Add basic test data generation support to C#                      |         |       |  0:41 |   2.4 |
+| STARTED Add canned unit tests to C# model                                   |         |       |  3:38 |  12.6 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -375,6 +375,7 @@ Links:
 - [[https://coding.abel.nu/2011/12/return-ienumerable-with-yield-return/][Return IEnumerable with yield return]]
 
 *** STARTED Add canned unit tests to C# model                         :story:
+    CLOCK: [2016-12-16 Fri 14:15]--[2016-12-16 Fri 15:20] =>  1:05
     CLOCK: [2016-12-16 Fri 11:07]--[2016-12-16 Fri 12:13] =>  1:06
     CLOCK: [2016-12-16 Fri 10:54]--[2016-12-16 Fri 11:07] =>  0:13
     CLOCK: [2016-12-16 Fri 10:42]--[2016-12-16 Fri 10:53] =>  0:11

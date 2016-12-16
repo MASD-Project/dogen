@@ -51,12 +51,17 @@ namespace Dogen.TestModels.CSharpModel
         }
 
         #region Enumerator
-        private class PrimitiveBuiltinsEnumerator : IEnumerator, IEnumerator<PrimitiveBuiltins>, IDisposable 
+        private class PrimitiveBuiltinsEnumerator : IEnumerator, IEnumerator<PrimitiveBuiltins>, IDisposable
         {
             #region Properties
             private uint _position;
-            private readonly PrimitiveBuiltins _current;
+            private PrimitiveBuiltins _current;
             #endregion
+
+            private void PopulateCurrent()
+            {
+                _current = PrimitiveBuiltinsSequenceGenerator.Create(_position);
+            }
 
             #region IDisposable
             public void Dispose()
@@ -68,14 +73,14 @@ namespace Dogen.TestModels.CSharpModel
             public bool MoveNext()
             {
                 ++_position;
-                Create(_position);
+                PopulateCurrent();
                 return true;
             }
 
             public void Reset()
             {
                 _position = 0;
-                Create(_position);
+                PopulateCurrent();
             }
 
             public object Current {
@@ -85,18 +90,18 @@ namespace Dogen.TestModels.CSharpModel
                 }
             }
 
-            PrimitiveBuiltins IEnumerator<PrimitiveBuiltins>.Current                                                
-            {                                                                           
-                get                                                                     
-                {                                                                       
-                    return _current;                                           
-                }                                                                       
-            }                                                                           
+            PrimitiveBuiltins IEnumerator<PrimitiveBuiltins>.Current
+            {
+                get
+                {
+                    return _current;
+                }
+            }
             #endregion
 
             public PrimitiveBuiltinsEnumerator()
             {
-                _current = PrimitiveBuiltinsSequenceGenerator.Create(_position);
+                PopulateCurrent();
             }
         }
         #endregion

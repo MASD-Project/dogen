@@ -36,12 +36,17 @@ namespace Dogen.TestModels.CSharpModel
         }
 
         #region Enumerator
-        private class ComplexBuiltinsEnumerator : IEnumerator, IEnumerator<ComplexBuiltins>, IDisposable 
+        private class ComplexBuiltinsEnumerator : IEnumerator, IEnumerator<ComplexBuiltins>, IDisposable
         {
             #region Properties
             private uint _position;
-            private readonly ComplexBuiltins _current;
+            private ComplexBuiltins _current;
             #endregion
+
+            private void PopulateCurrent()
+            {
+                _current = ComplexBuiltinsSequenceGenerator.Create(_position);
+            }
 
             #region IDisposable
             public void Dispose()
@@ -53,14 +58,14 @@ namespace Dogen.TestModels.CSharpModel
             public bool MoveNext()
             {
                 ++_position;
-                Create(_position);
+                PopulateCurrent();
                 return true;
             }
 
             public void Reset()
             {
                 _position = 0;
-                Create(_position);
+                PopulateCurrent();
             }
 
             public object Current {
@@ -70,18 +75,18 @@ namespace Dogen.TestModels.CSharpModel
                 }
             }
 
-            ComplexBuiltins IEnumerator<ComplexBuiltins>.Current                                                
-            {                                                                           
-                get                                                                     
-                {                                                                       
-                    return _current;                                           
-                }                                                                       
-            }                                                                           
+            ComplexBuiltins IEnumerator<ComplexBuiltins>.Current
+            {
+                get
+                {
+                    return _current;
+                }
+            }
             #endregion
 
             public ComplexBuiltinsEnumerator()
             {
-                _current = ComplexBuiltinsSequenceGenerator.Create(_position);
+                PopulateCurrent();
             }
         }
         #endregion
