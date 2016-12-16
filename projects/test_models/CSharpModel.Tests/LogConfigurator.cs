@@ -38,7 +38,7 @@ namespace Dogen.TestModels.CSharpModel.Tests
         {
             var hierarchy = (Hierarchy)LogManager.GetRepository();
             var patternLayout = new PatternLayout();
-            patternLayout.ConversionPattern = "%date [%thread] %-5level %logger - %message%newline";
+            patternLayout.ConversionPattern = "%date{yyyy-MM-dd HH:mm:ss.ffffff} [%-5level] [%logger] %message%newline";
             patternLayout.ActivateOptions();
 
             _appender = new FileAppender();

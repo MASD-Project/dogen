@@ -28,18 +28,10 @@ namespace Dogen.TestModels.CSharpModel.Tests
         private static readonly ILog Log = LogManager.GetLogger(typeof(TypesTests));
         private static readonly string FixtureName = typeof(TypesTests).Name;
 
-        static LogConfigurator LogConfigurator
-        {
-            get
-            {
-                return new LogConfigurator(FixtureName);
-            }
-        }
-
         [Test]
         public void GeneratingComplexBuiltinsResultsInExpectedDump()
         {
-            using (var lc = LogConfigurator)
+            using (var lc = new LogConfigurator(FixtureName))
             {
                 var seq = ComplexBuiltinsSequenceGenerator.Sequence();
                 var c = seq.GetEnumerator().Current;
@@ -50,7 +42,7 @@ namespace Dogen.TestModels.CSharpModel.Tests
         [Test]
         public void GeneratingPrimitiveBuiltinsResultsInExpectedDump()
         {
-            using (var lc = LogConfigurator)
+            using (var lc = new LogConfigurator(FixtureName))
             {
                 var seq = PrimitiveBuiltinsSequenceGenerator.Sequence();
                 var c = seq.GetEnumerator().Current;
@@ -61,7 +53,7 @@ namespace Dogen.TestModels.CSharpModel.Tests
         [Test]
         public void GeneratingOnePropertyResultsInExpectedDump()
         {
-            using (var lc = LogConfigurator)
+            using (var lc = new LogConfigurator(FixtureName))
             {
                 var seq = OnePropertySequenceGenerator.Sequence();
                 var c = seq.GetEnumerator().Current;
@@ -72,7 +64,7 @@ namespace Dogen.TestModels.CSharpModel.Tests
         [Test]
         public void GeneratingNoPropertiesResultsInExpectedDump()
         {
-            using (var lc = LogConfigurator)
+            using (var lc = new LogConfigurator(FixtureName))
             {
                 var seq = NoPropertiesSequenceGenerator.Sequence();
                 var c = seq.GetEnumerator().Current;
