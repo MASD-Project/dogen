@@ -381,6 +381,11 @@ Links:
 We developed a number of C++ "canned tests" for all model elements. We
 need to port them across to C#.
 
+*** Consider adding a clone method for C#                             :story:
+
+It would be nice to have a way to clone a object graph. We probably
+have an equivalent story for this for C++ in the backlog.
+
 *** Consider making the output directory configurable in C#           :story:
 
 At present we are outputting binaries into the =bin= directory,
