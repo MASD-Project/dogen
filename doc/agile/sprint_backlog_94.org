@@ -381,6 +381,13 @@ Links:
 We developed a number of C++ "canned tests" for all model elements. We
 need to port them across to C#.
 
+*** Consider making the output directory configurable in C#           :story:
+
+At present we are outputting binaries into the =bin= directory,
+locally on the project directory. However, it would make more sense to
+output to =build/output= like C++ does. For this to work, we need to
+be able to supply an output directory as meta-data.
+
 *** Add depth detection to io in C++                                  :story:
 
 In C# we added support for detecting the depth of the graph and
