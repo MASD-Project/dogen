@@ -52,7 +52,7 @@ namespace Dogen.TestModels.CSharpModel
             if (Object.ReferenceEquals(lhs, rhs))
                 return true;
 
-			return !Object.ReferenceEquals(null, lhs) && lhs.Equals(rhs);
+            return !Object.ReferenceEquals(null, lhs) && lhs.Equals(rhs);
         }
 
         public static bool operator !=(OneProperty lhs, OneProperty rhs)

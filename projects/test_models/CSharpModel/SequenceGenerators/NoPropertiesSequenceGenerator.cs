@@ -28,83 +28,83 @@ namespace Dogen.TestModels.CSharpModel
     /// </summary>
     public static class NoPropertiesSequenceGenerator
     {
-		static internal NoProperties Create(uint position)
-		{
-			var result = new NoProperties();
-			return result;
-		}
+        static internal NoProperties Create(uint position)
+        {
+            var result = new NoProperties();
+            return result;
+        }
 
-		#region Enumerator
-		private class NoPropertiesEnumerator : IEnumerator, IEnumerator<NoProperties>, IDisposable 
-		{
-			#region Properties
-			private uint _position;
-			private readonly NoProperties _current;
-			#endregion
+        #region Enumerator
+        private class NoPropertiesEnumerator : IEnumerator, IEnumerator<NoProperties>, IDisposable 
+        {
+            #region Properties
+            private uint _position;
+            private readonly NoProperties _current;
+            #endregion
 
-			#region IDisposable
-			public void Dispose()
-			{
-			}
-			#endregion
+            #region IDisposable
+            public void Dispose()
+            {
+            }
+            #endregion
 
-			#region IEnumerator implementation
-			public bool MoveNext()
-			{
-				++_position;
-				Create(_position);
-				return true;
-			}
+            #region IEnumerator implementation
+            public bool MoveNext()
+            {
+                ++_position;
+                Create(_position);
+                return true;
+            }
 
-			public void Reset()
-			{
-				_position = 0;
-				Create(_position);
-			}
+            public void Reset()
+            {
+                _position = 0;
+                Create(_position);
+            }
 
-			public object Current {
-				get
-				{
-					return _current;
-				}
-			}
+            public object Current {
+                get
+                {
+                    return _current;
+                }
+            }
 
-			NoProperties IEnumerator<NoProperties>.Current                                                
-			{                                                                           
-				get                                                                     
-				{                                                                       
-					return _current;                                           
-				}                                                                       
-			}                                                                           
-			#endregion
+            NoProperties IEnumerator<NoProperties>.Current                                                
+            {                                                                           
+                get                                                                     
+                {                                                                       
+                    return _current;                                           
+                }                                                                       
+            }                                                                           
+            #endregion
 
-			public NoPropertiesEnumerator()
-			{
-				_current = NoPropertiesSequenceGenerator.Create(_position);
-			}
-		}
-		#endregion
+            public NoPropertiesEnumerator()
+            {
+                _current = NoPropertiesSequenceGenerator.Create(_position);
+            }
+        }
+        #endregion
 
-		#region Enumerable
-		private class NoPropertiesEnumerable : IEnumerable, IEnumerable<NoProperties>
-		{
-			#region IEnumerable implementation
-			public IEnumerator GetEnumerator()
-			{
-				return new NoPropertiesEnumerator();
-			}
+        #region Enumerable
+        private class NoPropertiesEnumerable : IEnumerable, IEnumerable<NoProperties>
+        {
+            #region IEnumerable implementation
+            public IEnumerator GetEnumerator()
+            {
+                return new NoPropertiesEnumerator();
+            }
 
-			IEnumerator<NoProperties> IEnumerable<NoProperties>.GetEnumerator()
-			{
-				return new NoPropertiesEnumerator();
-			}
-			#endregion
-		}
-		#endregion
+            IEnumerator<NoProperties> IEnumerable<NoProperties>.GetEnumerator()
+            {
+                return new NoPropertiesEnumerator();
+            }
+            #endregion
+        }
+        #endregion
 
-		static public IEnumerable<NoProperties> Sequence()
-		{
-			return new NoPropertiesEnumerable();
-		}
-	}
+        static public IEnumerable<NoProperties> Sequence()
+        {
+            return new NoPropertiesEnumerable();
+        }
+    }
 }

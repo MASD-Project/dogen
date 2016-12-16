@@ -23,28 +23,28 @@ namespace Dogen.TestModels.CSharpModel
     /// <summary>
     /// Generates sequences of ComplexBuiltins.
     /// </summary>
-	public static class ComplexBuiltinsDumper
+    public static class ComplexBuiltinsDumper
     {
-		static void Dump(DumpHelper helper, ComplexBuiltins value)
-		{
-			helper.IncrementDepth();
-			if (helper.MaximumDepthExceeded())
-				return;
-
-			helper.AddStartObject();
-			helper.AddType("Dogen.TestModels.CSharpModel.ComplexBuiltins", true/*withSeparator*/);
-			helper.Add("ObjectProperty", value.ObjectProperty, true/*withSeparator*/);
-			helper.Add("StringProperty", value.StringProperty);
-			helper.AddEndObject();
-
-			helper.DecrementDepth();
-		}
-
-		public static string Dump(ComplexBuiltins value)
+        static void Dump(DumpHelper helper, ComplexBuiltins value)
         {
-			var helper = new DumpHelper();
-			Dump(helper, value);
-			return helper.Dump();
+            helper.IncrementDepth();
+            if (helper.MaximumDepthExceeded())
+                return;
+
+            helper.AddStartObject();
+            helper.AddType("Dogen.TestModels.CSharpModel.ComplexBuiltins", true/*withSeparator*/);
+            helper.Add("ObjectProperty", value.ObjectProperty, true/*withSeparator*/);
+            helper.Add("StringProperty", value.StringProperty);
+            helper.AddEndObject();
+
+            helper.DecrementDepth();
+        }
+
+        public static string Dump(ComplexBuiltins value)
+        {
+            var helper = new DumpHelper();
+            Dump(helper, value);
+            return helper.Dump();
         }
     }
 }

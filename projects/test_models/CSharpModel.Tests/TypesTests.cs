@@ -26,35 +26,35 @@ namespace Dogen.TestModels.CSharpModel.Tests
     class TypesTests
     {
         [Test]
-		public void GeneratingComplexBuiltinsResultsInExpectedDump()
+        public void GeneratingComplexBuiltinsResultsInExpectedDump()
         {
-			var seq = ComplexBuiltinsSequenceGenerator.Sequence();
-			var c = seq.GetEnumerator().Current;
-			Console.WriteLine("JSON: {0}", ComplexBuiltinsDumper.Dump(c));
+            var seq = ComplexBuiltinsSequenceGenerator.Sequence();
+            var c = seq.GetEnumerator().Current;
+            Console.WriteLine("JSON: {0}", ComplexBuiltinsDumper.Dump(c));
         }
 
-		[Test]
-		public void GeneratingPrimitiveBuiltinsResultsInExpectedDump()
-		{
-			var seq = PrimitiveBuiltinsSequenceGenerator.Sequence();
-			var c = seq.GetEnumerator().Current;
-			Console.WriteLine("JSON: {0}", PrimitiveBuiltinsDumper.Dump(c));
-		}
+        [Test]
+        public void GeneratingPrimitiveBuiltinsResultsInExpectedDump()
+        {
+            var seq = PrimitiveBuiltinsSequenceGenerator.Sequence();
+            var c = seq.GetEnumerator().Current;
+            Console.WriteLine("JSON: {0}", PrimitiveBuiltinsDumper.Dump(c));
+        }
 
-		[Test]
-		public void GeneratingOnePropertyResultsInExpectedDump()
-		{
-			var seq = OnePropertySequenceGenerator.Sequence();
-			var c = seq.GetEnumerator().Current;
-			Console.WriteLine("JSON: {0}", OnePropertyDumper.Dump(c));
-		}
+        [Test]
+        public void GeneratingOnePropertyResultsInExpectedDump()
+        {
+            var seq = OnePropertySequenceGenerator.Sequence();
+            var c = seq.GetEnumerator().Current;
+            Console.WriteLine("JSON: {0}", OnePropertyDumper.Dump(c));
+        }
 
-		[Test]
-		public void GeneratingNoPropertiesResultsInExpectedDump()
-		{
-			var seq = NoPropertiesSequenceGenerator.Sequence();
-			var c = seq.GetEnumerator().Current;
-			Console.WriteLine("JSON: {0}", NoPropertiesDumper.Dump(c));
-		}
+        [Test]
+        public void GeneratingNoPropertiesResultsInExpectedDump()
+        {
+            var seq = NoPropertiesSequenceGenerator.Sequence();
+            var c = seq.GetEnumerator().Current;
+            Console.WriteLine("JSON: {0}", NoPropertiesDumper.Dump(c));
+        }
     }
 }

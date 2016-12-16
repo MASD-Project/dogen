@@ -27,9 +27,9 @@ namespace Dogen.TestModels.CSharpModel
     /// <remarks>
     /// This is a remark.
     /// </remarks>
-	public class ComplexBuiltins
+    public class ComplexBuiltins
     {
-		#region Properties
+        #region Properties
         public object ObjectProperty { get; set; }
         public string StringProperty { get; set; }
         #endregion
@@ -56,7 +56,7 @@ namespace Dogen.TestModels.CSharpModel
             if (Object.ReferenceEquals(lhs, rhs))
                 return true;
 
-			return !Object.ReferenceEquals(null, lhs) && lhs.Equals(rhs);
+            return !Object.ReferenceEquals(null, lhs) && lhs.Equals(rhs);
         }
 
         public static bool operator !=(ComplexBuiltins lhs, ComplexBuiltins rhs)
@@ -65,20 +65,20 @@ namespace Dogen.TestModels.CSharpModel
         }
 
         public override int GetHashCode()
-		{
-			unchecked {
-				// Choose large primes to avoid hashing collisions
-				const int HashingBase = (int)2166136261;
-				const int HashingMultiplier = 16777619;
+        {
+            unchecked {
+                // Choose large primes to avoid hashing collisions
+                const int HashingBase = (int)2166136261;
+                const int HashingMultiplier = 16777619;
 
-				int hash = HashingBase;
-				hash = (hash * HashingMultiplier) ^
-				(!object.ReferenceEquals(null, ObjectProperty) ? ObjectProperty.GetHashCode() : 0);
-				hash = (hash * HashingMultiplier) ^
-				(!object.ReferenceEquals(null, StringProperty) ? StringProperty.GetHashCode() : 0);
-				return hash;
-			}
-		}
- 		#endregion
+                int hash = HashingBase;
+                hash = (hash * HashingMultiplier) ^
+                (!object.ReferenceEquals(null, ObjectProperty) ? ObjectProperty.GetHashCode() : 0);
+                hash = (hash * HashingMultiplier) ^
+                (!object.ReferenceEquals(null, StringProperty) ? StringProperty.GetHashCode() : 0);
+                return hash;
+            }
+        }
+        #endregion
     }
 }

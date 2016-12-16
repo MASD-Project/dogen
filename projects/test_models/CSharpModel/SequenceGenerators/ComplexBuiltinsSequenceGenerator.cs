@@ -23,89 +23,89 @@ using System.Collections.Generic;
 
 namespace Dogen.TestModels.CSharpModel
 {
-	/// <summary>
-	/// Generates sequences of ComplexBuiltins.
-	/// </summary>
-	public static class ComplexBuiltinsSequenceGenerator {
-		static internal ComplexBuiltins Create(uint position)
-		{
-			var result = new ComplexBuiltins();
-			result.ObjectProperty = GeneratorHelper.CreateObject(position + 0);
-			result.StringProperty = GeneratorHelper.CreateString(position + 1);
-			return result;
-		}
+    /// <summary>
+    /// Generates sequences of ComplexBuiltins.
+    /// </summary>
+    public static class ComplexBuiltinsSequenceGenerator {
+        static internal ComplexBuiltins Create(uint position)
+        {
+            var result = new ComplexBuiltins();
+            result.ObjectProperty = GeneratorHelper.CreateObject(position + 0);
+            result.StringProperty = GeneratorHelper.CreateString(position + 1);
+            return result;
+        }
 
-		#region Enumerator
-		private class ComplexBuiltinsEnumerator : IEnumerator, IEnumerator<ComplexBuiltins>, IDisposable 
-		{
-			#region Properties
-			private uint _position;
-			private readonly ComplexBuiltins _current;
-			#endregion
+        #region Enumerator
+        private class ComplexBuiltinsEnumerator : IEnumerator, IEnumerator<ComplexBuiltins>, IDisposable 
+        {
+            #region Properties
+            private uint _position;
+            private readonly ComplexBuiltins _current;
+            #endregion
 
-			#region IDisposable
-			public void Dispose()
-			{
-			}
-			#endregion
+            #region IDisposable
+            public void Dispose()
+            {
+            }
+            #endregion
 
-			#region IEnumerator implementation
-			public bool MoveNext()
-			{
-				++_position;
-				Create(_position);
-				return true;
-			}
+            #region IEnumerator implementation
+            public bool MoveNext()
+            {
+                ++_position;
+                Create(_position);
+                return true;
+            }
 
-			public void Reset()
-			{
-				_position = 0;
-				Create(_position);
-			}
+            public void Reset()
+            {
+                _position = 0;
+                Create(_position);
+            }
 
-			public object Current {
-				get
-				{
-					return _current;
-				}
-			}
+            public object Current {
+                get
+                {
+                    return _current;
+                }
+            }
 
-			ComplexBuiltins IEnumerator<ComplexBuiltins>.Current                                                
-			{                                                                           
-				get                                                                     
-				{                                                                       
-					return _current;                                           
-				}                                                                       
-			}                                                                           
-			#endregion
+            ComplexBuiltins IEnumerator<ComplexBuiltins>.Current                                                
+            {                                                                           
+                get                                                                     
+                {                                                                       
+                    return _current;                                           
+                }                                                                       
+            }                                                                           
+            #endregion
 
-			public ComplexBuiltinsEnumerator()
-			{
-				_current = ComplexBuiltinsSequenceGenerator.Create(_position);
-			}
-		}
-		#endregion
+            public ComplexBuiltinsEnumerator()
+            {
+                _current = ComplexBuiltinsSequenceGenerator.Create(_position);
+            }
+        }
+        #endregion
 
-		#region Enumerable
-		private class ComplexBuiltinsEnumerable : IEnumerable, IEnumerable<ComplexBuiltins>
-		{
-			#region IEnumerable implementation
-			public IEnumerator GetEnumerator()
-			{
-				return new ComplexBuiltinsEnumerator();
-			}
+        #region Enumerable
+        private class ComplexBuiltinsEnumerable : IEnumerable, IEnumerable<ComplexBuiltins>
+        {
+            #region IEnumerable implementation
+            public IEnumerator GetEnumerator()
+            {
+                return new ComplexBuiltinsEnumerator();
+            }
 
-			IEnumerator<ComplexBuiltins> IEnumerable<ComplexBuiltins>.GetEnumerator()
-			{
-				return new ComplexBuiltinsEnumerator();
-			}
-			#endregion
-		}
-		#endregion
+            IEnumerator<ComplexBuiltins> IEnumerable<ComplexBuiltins>.GetEnumerator()
+            {
+                return new ComplexBuiltinsEnumerator();
+            }
+            #endregion
+        }
+        #endregion
 
-		static public IEnumerable<ComplexBuiltins> Sequence()
-		{
-			return new ComplexBuiltinsEnumerable();
-		}
-	}
+        static public IEnumerable<ComplexBuiltins> Sequence()
+        {
+            return new ComplexBuiltinsEnumerable();
+        }
+    }
 }

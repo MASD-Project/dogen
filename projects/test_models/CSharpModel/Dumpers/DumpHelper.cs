@@ -22,202 +22,202 @@ using System.Text;
 
 namespace Dogen.TestModels.CSharpModel
 {
-	class DumpHelper
+    class DumpHelper
     {
-		#region Properties
+        #region Properties
         private readonly StringBuilder _stringBuilder;
-		private int _currentDepth;
+        private int _currentDepth;
 
-		private const uint MaxDepth = 1000;
-		private const string Type = "__type__";
-		private const string HashCode = "HashCode";
-		private const string SystemObjectType = "System.Object";
-		#endregion
+        private const uint MaxDepth = 1000;
+        private const string Type = "__type__";
+        private const string HashCode = "HashCode";
+        private const string SystemObjectType = "System.Object";
+        #endregion
 
-		#region Depth management
-		public void IncrementDepth()
-		{
-			++_currentDepth;
-		}
-
-		public void DecrementDepth()
-		{
-			++_currentDepth;
-		}
-
-		public bool MaximumDepthExceeded()
-		{
-			return _currentDepth > MaxDepth;
-		}
-		#endregion
-
-		#region Adds for JSON syntax
-		public void AddStartObject()
-		{
-			_stringBuilder.Append("{ ");
-		}
-
-		public void AddEndObject()
-		{
-			_stringBuilder.Append(" }");
-		}
-
-		public void AddPairSeparator()
-		{
-			_stringBuilder.Append(" : ");
-		}
-
-		public void AddMemberSeparator()
-		{
-			_stringBuilder.Append(", ");
-		}
-
-		public void AddQuoted(string value)
+        #region Depth management
+        public void IncrementDepth()
         {
-			_stringBuilder.Append("\"" + value + "\"");
+            ++_currentDepth;
         }
 
-		public void AddNonQuoted(int value)
-		{
-			_stringBuilder.Append(Convert.ToString(value));
-		}
+        public void DecrementDepth()
+        {
+            ++_currentDepth;
+        }
 
-		public void AddKey(string k)
-		{
-			AddQuoted(k);
-		}
+        public bool MaximumDepthExceeded()
+        {
+            return _currentDepth > MaxDepth;
+        }
+        #endregion
 
-		public void AddType(string typeName, bool withSeparator = false)
-		{
-			AddKey(Type);
-			AddPairSeparator();
-			AddQuoted(typeName);
-			HandleMemberSeparator(withSeparator);
-		}
+        #region Adds for JSON syntax
+        public void AddStartObject()
+        {
+            _stringBuilder.Append("{ ");
+        }
 
-		private void AddKeyWithSeparator(string key)
-		{
-			AddKey(key);
-			AddPairSeparator();
-		}
+        public void AddEndObject()
+        {
+            _stringBuilder.Append(" }");
+        }
 
-		private void HandleMemberSeparator(bool withSeparator)
-		{
-			if (withSeparator)
-				AddMemberSeparator();
-		}
-		#endregion
+        public void AddPairSeparator()
+        {
+            _stringBuilder.Append(" : ");
+        }
 
-		#region Adds for well known types
-		public void Add(string key, object value, bool withSeparator = false)
-		{
-			AddKeyWithSeparator(key);
-			AddStartObject();
-			AddType(SystemObjectType, true/*withSeparator*/);
-			AddKey(HashCode);
-			AddPairSeparator();
-			AddNonQuoted(value.GetHashCode());
-			AddEndObject();
-			HandleMemberSeparator(withSeparator);
-		}
+        public void AddMemberSeparator()
+        {
+            _stringBuilder.Append(", ");
+        }
 
-		public void Add(string key, string value, bool withSeparator = false)
-		{
-			AddKeyWithSeparator(key);
-			AddQuoted(value);
-			HandleMemberSeparator(withSeparator);
-		}
+        public void AddQuoted(string value)
+        {
+            _stringBuilder.Append("\"" + value + "\"");
+        }
 
-		public void Add(string key, byte value, bool withSeparator = false)
-		{
-			AddKeyWithSeparator(key);
-			_stringBuilder.Append(Convert.ToString(value));
-			HandleMemberSeparator(withSeparator);
-		}
+        public void AddNonQuoted(int value)
+        {
+            _stringBuilder.Append(Convert.ToString(value));
+        }
 
-		public void Add(string key, sbyte value, bool withSeparator = false)
-		{
-			AddKeyWithSeparator(key);
-			_stringBuilder.Append(Convert.ToString(value));
-			HandleMemberSeparator(withSeparator);
-		}
+        public void AddKey(string k)
+        {
+            AddQuoted(k);
+        }
 
-		public void Add(string key, int value, bool withSeparator = false)
-		{
-			AddKeyWithSeparator(key);
-			_stringBuilder.Append(Convert.ToString(value));
-			HandleMemberSeparator(withSeparator);
-		}
+        public void AddType(string typeName, bool withSeparator = false)
+        {
+            AddKey(Type);
+            AddPairSeparator();
+            AddQuoted(typeName);
+            HandleMemberSeparator(withSeparator);
+        }
 
-		public void Add(string key, uint value, bool withSeparator = false)
-		{
-			AddKeyWithSeparator(key);
-			_stringBuilder.Append(Convert.ToString(value));
-			HandleMemberSeparator(withSeparator);
-		}
+        private void AddKeyWithSeparator(string key)
+        {
+            AddKey(key);
+            AddPairSeparator();
+        }
 
-		public void Add(string key, long value, bool withSeparator = false)
-		{
-			AddKeyWithSeparator(key);
-			_stringBuilder.Append(Convert.ToString(value));
-			HandleMemberSeparator(withSeparator);
-		}
+        private void HandleMemberSeparator(bool withSeparator)
+        {
+            if (withSeparator)
+                AddMemberSeparator();
+        }
+        #endregion
 
-		public void Add(string key, ulong value, bool withSeparator = false)
-		{
-			AddKeyWithSeparator(key);
-			_stringBuilder.Append(Convert.ToString(value));
-			HandleMemberSeparator(withSeparator);
-		}
+        #region Adds for well known types
+        public void Add(string key, object value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            AddStartObject();
+            AddType(SystemObjectType, true/*withSeparator*/);
+            AddKey(HashCode);
+            AddPairSeparator();
+            AddNonQuoted(value.GetHashCode());
+            AddEndObject();
+            HandleMemberSeparator(withSeparator);
+        }
 
-		public void Add(string key, float value, bool withSeparator = false)
-		{
-			AddKeyWithSeparator(key);
-			_stringBuilder.Append(Convert.ToString(value));
-			HandleMemberSeparator(withSeparator);
-		}
+        public void Add(string key, string value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            AddQuoted(value);
+            HandleMemberSeparator(withSeparator);
+        }
 
-		public void Add(string key, double value, bool withSeparator = false)
-		{
-			AddKeyWithSeparator(key);
-			_stringBuilder.Append(Convert.ToString(value));
-			HandleMemberSeparator(withSeparator);
-		}
+        public void Add(string key, byte value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            _stringBuilder.Append(Convert.ToString(value));
+            HandleMemberSeparator(withSeparator);
+        }
 
-		public void Add(string key, char value, bool withSeparator = false)
-		{
-			AddKeyWithSeparator(key);
-			_stringBuilder.Append(Convert.ToString(Convert.ToInt16(value)));
-			HandleMemberSeparator(withSeparator);
-		}
+        public void Add(string key, sbyte value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            _stringBuilder.Append(Convert.ToString(value));
+            HandleMemberSeparator(withSeparator);
+        }
 
-		public void Add(string key, decimal value, bool withSeparator = false)
-		{
-			AddKeyWithSeparator(key);
-			_stringBuilder.Append(Convert.ToString(value));
-			HandleMemberSeparator(withSeparator);
-		}
+        public void Add(string key, int value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            _stringBuilder.Append(Convert.ToString(value));
+            HandleMemberSeparator(withSeparator);
+        }
 
-		public void Add(string key, bool value, bool withSeparator = false)
-		{
-			AddKeyWithSeparator(key);
-			if (value)
-				_stringBuilder.Append("true");
-			else
-				_stringBuilder.Append("false");
+        public void Add(string key, uint value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            _stringBuilder.Append(Convert.ToString(value));
+            HandleMemberSeparator(withSeparator);
+        }
 
-			HandleMemberSeparator(withSeparator);
-		}
-		#endregion
+        public void Add(string key, long value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            _stringBuilder.Append(Convert.ToString(value));
+            HandleMemberSeparator(withSeparator);
+        }
 
-		public DumpHelper()
-		{
-			_stringBuilder = new StringBuilder();
-		}
+        public void Add(string key, ulong value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            _stringBuilder.Append(Convert.ToString(value));
+            HandleMemberSeparator(withSeparator);
+        }
 
-		public string Dump()
-		{
-			return _stringBuilder.ToString();
-		}
+        public void Add(string key, float value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            _stringBuilder.Append(Convert.ToString(value));
+            HandleMemberSeparator(withSeparator);
+        }
+
+        public void Add(string key, double value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            _stringBuilder.Append(Convert.ToString(value));
+            HandleMemberSeparator(withSeparator);
+        }
+
+        public void Add(string key, char value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            _stringBuilder.Append(Convert.ToString(Convert.ToInt16(value)));
+            HandleMemberSeparator(withSeparator);
+        }
+
+        public void Add(string key, decimal value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            _stringBuilder.Append(Convert.ToString(value));
+            HandleMemberSeparator(withSeparator);
+        }
+
+        public void Add(string key, bool value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            if (value)
+                _stringBuilder.Append("true");
+            else
+                _stringBuilder.Append("false");
+
+            HandleMemberSeparator(withSeparator);
+        }
+        #endregion
+
+        public DumpHelper()
+        {
+            _stringBuilder = new StringBuilder();
+        }
+
+        public string Dump()
+        {
+            return _stringBuilder.ToString();
+        }
     }
 }

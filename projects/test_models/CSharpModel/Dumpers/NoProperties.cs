@@ -23,26 +23,26 @@ namespace Dogen.TestModels.CSharpModel
     /// <summary>
     /// Generates sequences of NoProperties.
     /// </summary>
-	public static class NoPropertiesDumper
+    public static class NoPropertiesDumper
     {
-		static void Dump(DumpHelper helper, NoProperties value)
-		{
-			helper.IncrementDepth();
-			if (helper.MaximumDepthExceeded())
-				return;
+        static void Dump(DumpHelper helper, NoProperties value)
+        {
+            helper.IncrementDepth();
+            if (helper.MaximumDepthExceeded())
+                return;
 
-			helper.AddStartObject();
-			helper.AddType("Dogen.TestModels.CSharpModel.NoPropertiesDumper");
-			helper.AddEndObject();
+            helper.AddStartObject();
+            helper.AddType("Dogen.TestModels.CSharpModel.NoPropertiesDumper");
+            helper.AddEndObject();
 
-			helper.DecrementDepth();
-		}
+            helper.DecrementDepth();
+        }
 
-		public static string Dump(NoProperties value)
-		{
-			var helper = new DumpHelper();
-			Dump(helper, value);
-			return helper.Dump();
-		}
-	}
+        public static string Dump(NoProperties value)
+        {
+            var helper = new DumpHelper();
+            Dump(helper, value);
+            return helper.Dump();
+        }
+    }
 }

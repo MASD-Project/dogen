@@ -26,101 +26,101 @@ namespace Dogen.TestModels.CSharpModel
     /// <summary>
     /// Generates sequences of PrimitiveBuiltins.
     /// </summary>
-	public static class PrimitiveBuiltinsSequenceGenerator {
-		static internal PrimitiveBuiltins Create(uint position)
-		{
-			var result = new PrimitiveBuiltins();
+    public static class PrimitiveBuiltinsSequenceGenerator {
+        static internal PrimitiveBuiltins Create(uint position)
+        {
+            var result = new PrimitiveBuiltins();
 
-			result.ByteProperty = GeneratorHelper.CreateByte(position + 0);
-			result.ShortByteProperty = GeneratorHelper.CreateShortByte(position + 1);
-			result.IntProperty = GeneratorHelper.CreateInt(position + 2);
-			result.UIntProperty = GeneratorHelper.CreateUInt(position + 3);
-			result.ShortProperty = GeneratorHelper.CreateShort(position + 4);
-			result.UShortProperty = GeneratorHelper.CreateUShort(position + 5);
-			result.LongProperty = GeneratorHelper.CreateLong(position + 6);
-			result.ULongProperty = GeneratorHelper.CreateULong(position + 7);
-			result.FloatPropertyOne = GeneratorHelper.CreateFloat(position + 8);
-			result.FloatPropertyTwo = GeneratorHelper.CreateFloat(position + 9);
-			result.DoublePropertyOne = GeneratorHelper.CreateDouble(position + 10);
-			result.DoublePropertyTwo = GeneratorHelper.CreateDouble(position + 11);
-			result.CharProperty = GeneratorHelper.CreateChar(position + 12);
-			result.BoolProperty = GeneratorHelper.CreateBool(position + 13);
-			result.DecimalProperty = GeneratorHelper.CreateDecimal(position + 14);
+            result.ByteProperty = GeneratorHelper.CreateByte(position + 0);
+            result.ShortByteProperty = GeneratorHelper.CreateShortByte(position + 1);
+            result.IntProperty = GeneratorHelper.CreateInt(position + 2);
+            result.UIntProperty = GeneratorHelper.CreateUInt(position + 3);
+            result.ShortProperty = GeneratorHelper.CreateShort(position + 4);
+            result.UShortProperty = GeneratorHelper.CreateUShort(position + 5);
+            result.LongProperty = GeneratorHelper.CreateLong(position + 6);
+            result.ULongProperty = GeneratorHelper.CreateULong(position + 7);
+            result.FloatPropertyOne = GeneratorHelper.CreateFloat(position + 8);
+            result.FloatPropertyTwo = GeneratorHelper.CreateFloat(position + 9);
+            result.DoublePropertyOne = GeneratorHelper.CreateDouble(position + 10);
+            result.DoublePropertyTwo = GeneratorHelper.CreateDouble(position + 11);
+            result.CharProperty = GeneratorHelper.CreateChar(position + 12);
+            result.BoolProperty = GeneratorHelper.CreateBool(position + 13);
+            result.DecimalProperty = GeneratorHelper.CreateDecimal(position + 14);
 
-			return result;
-		}
+            return result;
+        }
 
-		#region Enumerator
-		private class PrimitiveBuiltinsEnumerator : IEnumerator, IEnumerator<PrimitiveBuiltins>, IDisposable 
-		{
-			#region Properties
-			private uint _position;
-			private readonly PrimitiveBuiltins _current;
-			#endregion
+        #region Enumerator
+        private class PrimitiveBuiltinsEnumerator : IEnumerator, IEnumerator<PrimitiveBuiltins>, IDisposable 
+        {
+            #region Properties
+            private uint _position;
+            private readonly PrimitiveBuiltins _current;
+            #endregion
 
-			#region IDisposable
-			public void Dispose()
-			{
-			}
-			#endregion
+            #region IDisposable
+            public void Dispose()
+            {
+            }
+            #endregion
 
-			#region IEnumerator implementation
-			public bool MoveNext()
-			{
-				++_position;
-				Create(_position);
-				return true;
-			}
+            #region IEnumerator implementation
+            public bool MoveNext()
+            {
+                ++_position;
+                Create(_position);
+                return true;
+            }
 
-			public void Reset()
-			{
-				_position = 0;
-				Create(_position);
-			}
+            public void Reset()
+            {
+                _position = 0;
+                Create(_position);
+            }
 
-			public object Current {
-				get
-				{
-					return _current;
-				}
-			}
+            public object Current {
+                get
+                {
+                    return _current;
+                }
+            }
 
-			PrimitiveBuiltins IEnumerator<PrimitiveBuiltins>.Current                                                
-			{                                                                           
-				get                                                                     
-				{                                                                       
-					return _current;                                           
-				}                                                                       
-			}                                                                           
-			#endregion
+            PrimitiveBuiltins IEnumerator<PrimitiveBuiltins>.Current                                                
+            {                                                                           
+                get                                                                     
+                {                                                                       
+                    return _current;                                           
+                }                                                                       
+            }                                                                           
+            #endregion
 
-			public PrimitiveBuiltinsEnumerator()
-			{
-				_current = PrimitiveBuiltinsSequenceGenerator.Create(_position);
-			}
-		}
-		#endregion
+            public PrimitiveBuiltinsEnumerator()
+            {
+                _current = PrimitiveBuiltinsSequenceGenerator.Create(_position);
+            }
+        }
+        #endregion
 
-		#region Enumerable
-		private class PrimitiveBuiltinsEnumerable : IEnumerable, IEnumerable<PrimitiveBuiltins>
-		{
-			#region IEnumerable implementation
-			public IEnumerator GetEnumerator()
-			{
-				return new PrimitiveBuiltinsEnumerator();
-			}
+        #region Enumerable
+        private class PrimitiveBuiltinsEnumerable : IEnumerable, IEnumerable<PrimitiveBuiltins>
+        {
+            #region IEnumerable implementation
+            public IEnumerator GetEnumerator()
+            {
+                return new PrimitiveBuiltinsEnumerator();
+            }
 
-			IEnumerator<PrimitiveBuiltins> IEnumerable<PrimitiveBuiltins>.GetEnumerator()
-			{
-				return new PrimitiveBuiltinsEnumerator();
-			}
-			#endregion
-		}
-		#endregion
+            IEnumerator<PrimitiveBuiltins> IEnumerable<PrimitiveBuiltins>.GetEnumerator()
+            {
+                return new PrimitiveBuiltinsEnumerator();
+            }
+            #endregion
+        }
+        #endregion
 
-		static public IEnumerable<PrimitiveBuiltins> Sequence()
-		{
-			return new PrimitiveBuiltinsEnumerable();
-		}
-	}
+        static public IEnumerable<PrimitiveBuiltins> Sequence()
+        {
+            return new PrimitiveBuiltinsEnumerable();
+        }
+    }
 }

@@ -28,84 +28,84 @@ namespace Dogen.TestModels.CSharpModel
     /// </summary>
     public static class OnePropertySequenceGenerator
     {
-		static internal OneProperty Create(uint position)
-		{
-			var result = new OneProperty();
-			result.Property = GeneratorHelper.CreateInt(position + 0);
-			return result;
-		}
+        static internal OneProperty Create(uint position)
+        {
+            var result = new OneProperty();
+            result.Property = GeneratorHelper.CreateInt(position + 0);
+            return result;
+        }
 
-		#region Enumerator
-		private class OnePropertyEnumerator : IEnumerator, IEnumerator<OneProperty>, IDisposable 
-		{
-			#region Properties
-			private uint _position;
-			private readonly OneProperty _current;
-			#endregion
+        #region Enumerator
+        private class OnePropertyEnumerator : IEnumerator, IEnumerator<OneProperty>, IDisposable 
+        {
+            #region Properties
+            private uint _position;
+            private readonly OneProperty _current;
+            #endregion
 
-			#region IDisposable
-			public void Dispose()
-			{
-			}
-			#endregion
+            #region IDisposable
+            public void Dispose()
+            {
+            }
+            #endregion
 
-			#region IEnumerator implementation
-			public bool MoveNext()
-			{
-				++_position;
-				Create(_position);
-				return true;
-			}
+            #region IEnumerator implementation
+            public bool MoveNext()
+            {
+                ++_position;
+                Create(_position);
+                return true;
+            }
 
-			public void Reset()
-			{
-				_position = 0;
-				Create(_position);
-			}
+            public void Reset()
+            {
+                _position = 0;
+                Create(_position);
+            }
 
-			public object Current {
-				get
-				{
-					return _current;
-				}
-			}
+            public object Current {
+                get
+                {
+                    return _current;
+                }
+            }
 
-			OneProperty IEnumerator<OneProperty>.Current                                                
-			{                                                                           
-				get                                                                     
-				{                                                                       
-					return _current;                                           
-				}                                                                       
-			}                                                                           
-			#endregion
+            OneProperty IEnumerator<OneProperty>.Current                                                
+            {                                                                           
+                get                                                                     
+                {                                                                       
+                    return _current;                                           
+                }                                                                       
+            }                                                                           
+            #endregion
 
-			public OnePropertyEnumerator()
-			{
-				_current = OnePropertySequenceGenerator.Create(_position);
-			}
-		}
-		#endregion
+            public OnePropertyEnumerator()
+            {
+                _current = OnePropertySequenceGenerator.Create(_position);
+            }
+        }
+        #endregion
 
-		#region Enumerable
-		private class OnePropertyEnumerable : IEnumerable, IEnumerable<OneProperty>
-		{
-			#region IEnumerable implementation
-			public IEnumerator GetEnumerator()
-			{
-				return new OnePropertyEnumerator();
-			}
+        #region Enumerable
+        private class OnePropertyEnumerable : IEnumerable, IEnumerable<OneProperty>
+        {
+            #region IEnumerable implementation
+            public IEnumerator GetEnumerator()
+            {
+                return new OnePropertyEnumerator();
+            }
 
-			IEnumerator<OneProperty> IEnumerable<OneProperty>.GetEnumerator()
-			{
-				return new OnePropertyEnumerator();
-			}
-			#endregion
-		}
-		#endregion
+            IEnumerator<OneProperty> IEnumerable<OneProperty>.GetEnumerator()
+            {
+                return new OnePropertyEnumerator();
+            }
+            #endregion
+        }
+        #endregion
 
-		static public IEnumerable<OneProperty> Sequence()
-		{
-			return new OnePropertyEnumerable();
-		}
+        static public IEnumerable<OneProperty> Sequence()
+        {
+            return new OnePropertyEnumerable();
+        }
     }
 }

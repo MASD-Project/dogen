@@ -23,27 +23,27 @@ namespace Dogen.TestModels.CSharpModel
     /// <summary>
     /// Generates sequences of OneProperty.
     /// </summary>
-	public static class OnePropertyDumper
+    public static class OnePropertyDumper
     {
-		static void Dump(DumpHelper helper, OneProperty value)
-		{
-			helper.IncrementDepth();
-			if (helper.MaximumDepthExceeded())
-				return;
+        static void Dump(DumpHelper helper, OneProperty value)
+        {
+            helper.IncrementDepth();
+            if (helper.MaximumDepthExceeded())
+                return;
 
-			helper.AddStartObject();
-			helper.AddType("Dogen.TestModels.CSharpModel.ComplexBuiltins", true/*withSeparator*/);
-			helper.Add("Property", value.Property);
-			helper.AddEndObject();
+            helper.AddStartObject();
+            helper.AddType("Dogen.TestModels.CSharpModel.ComplexBuiltins", true/*withSeparator*/);
+            helper.Add("Property", value.Property);
+            helper.AddEndObject();
 
-			helper.DecrementDepth();
-		}
+            helper.DecrementDepth();
+        }
 
-		public static string Dump(OneProperty value)
-		{
-			var helper = new DumpHelper();
-			Dump(helper, value);
-			return helper.Dump();
-		}
-	}
+        public static string Dump(OneProperty value)
+        {
+            var helper = new DumpHelper();
+            Dump(helper, value);
+            return helper.Dump();
+        }
+    }
 }
