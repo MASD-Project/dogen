@@ -43,6 +43,9 @@
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
@@ -58,6 +61,7 @@
   <ItemGroup>
     <Compile Include="LogConfigurator.cs" />
     <Compile Include="equality_tests.cs" />
+    <Compile Include="sequence_generator_tests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CSharpModel\Dogen.TestModels.CSharpModel.csproj">

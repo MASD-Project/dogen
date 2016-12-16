@@ -23,6 +23,7 @@ using NUnit.Framework;
 namespace Dogen.TestModels.CSharpModel.Tests
 {
     [TestFixture]
+    // Analysis disable once InconsistentNaming
     class equality_tests
     {
         private static readonly ILog Log = LogManager.GetLogger(typeof(equality_tests));
@@ -168,50 +169,6 @@ namespace Dogen.TestModels.CSharpModel.Tests
                 Assert.That(g.Equals(h), Is.False);
                 Assert.That(g == h, Is.False);
                 Assert.That(g != h, Is.True);
-            }
-        }
-
-        [Test]
-        public void GeneratingComplexBuiltinsResultsInExpectedDump()
-        {
-            using (var lc = new LogConfigurator(FixtureName))
-            {
-                var seq = ComplexBuiltinsSequenceGenerator.Sequence();
-                var c = seq.GetEnumerator().Current;
-                Log.DebugFormat("JSON: {0}", ComplexBuiltinsDumper.Dump(c));
-            }
-        }
-
-        [Test]
-        public void GeneratingPrimitiveBuiltinsResultsInExpectedDump()
-        {
-            using (var lc = new LogConfigurator(FixtureName))
-            {
-                var seq = PrimitiveBuiltinsSequenceGenerator.Sequence();
-                var c = seq.GetEnumerator().Current;
-                Log.DebugFormat("JSON: {0}", PrimitiveBuiltinsDumper.Dump(c));
-            }
-        }
-
-        [Test]
-        public void GeneratingOnePropertyResultsInExpectedDump()
-        {
-            using (var lc = new LogConfigurator(FixtureName))
-            {
-                var seq = OnePropertySequenceGenerator.Sequence();
-                var c = seq.GetEnumerator().Current;
-                Log.DebugFormat("JSON: {0}", OnePropertyDumper.Dump(c));
-            }
-        }
-
-        [Test]
-        public void GeneratingNoPropertiesResultsInExpectedDump()
-        {
-            using (var lc = new LogConfigurator(FixtureName))
-            {
-                var seq = NoPropertiesSequenceGenerator.Sequence();
-                var c = seq.GetEnumerator().Current;
-                Log.DebugFormat("JSON: {0}", NoPropertiesDumper.Dump(c));
             }
         }
     }
