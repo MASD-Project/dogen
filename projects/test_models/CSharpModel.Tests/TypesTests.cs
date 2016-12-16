@@ -17,7 +17,7 @@
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 // MA 02110-1301, USA.
 //
-using System;
+using log4net;
 using NUnit.Framework;
 
 namespace Dogen.TestModels.CSharpModel.Tests
@@ -25,36 +25,59 @@ namespace Dogen.TestModels.CSharpModel.Tests
     [TestFixture]
     class TypesTests
     {
+        private static readonly ILog Log = LogManager.GetLogger(typeof(TypesTests));
+        private static readonly string FixtureName = typeof(TypesTests).Name;
+
+        static LogConfigurator LogConfigurator
+        {
+            get
+            {
+                return new LogConfigurator(FixtureName);
+            }
+        }
+
         [Test]
         public void GeneratingComplexBuiltinsResultsInExpectedDump()
         {
-            var seq = ComplexBuiltinsSequenceGenerator.Sequence();
-            var c = seq.GetEnumerator().Current;
-            Console.WriteLine("JSON: {0}", ComplexBuiltinsDumper.Dump(c));
+            using (var lc = LogConfigurator)
+            {
+                var seq = ComplexBuiltinsSequenceGenerator.Sequence();
+                var c = seq.GetEnumerator().Current;
+                Log.DebugFormat("JSON: {0}", ComplexBuiltinsDumper.Dump(c));
+            }
         }
 
         [Test]
         public void GeneratingPrimitiveBuiltinsResultsInExpectedDump()
         {
-            var seq = PrimitiveBuiltinsSequenceGenerator.Sequence();
-            var c = seq.GetEnumerator().Current;
-            Console.WriteLine("JSON: {0}", PrimitiveBuiltinsDumper.Dump(c));
+            using (var lc = LogConfigurator)
+            {
+                var seq = PrimitiveBuiltinsSequenceGenerator.Sequence();
+                var c = seq.GetEnumerator().Current;
+                Log.DebugFormat("JSON: {0}", PrimitiveBuiltinsDumper.Dump(c));
+            }
         }
 
         [Test]
         public void GeneratingOnePropertyResultsInExpectedDump()
         {
-            var seq = OnePropertySequenceGenerator.Sequence();
-            var c = seq.GetEnumerator().Current;
-            Console.WriteLine("JSON: {0}", OnePropertyDumper.Dump(c));
+            using (var lc = LogConfigurator)
+            {
+                var seq = OnePropertySequenceGenerator.Sequence();
+                var c = seq.GetEnumerator().Current;
+                Log.DebugFormat("JSON: {0}", OnePropertyDumper.Dump(c));
+            }
         }
 
         [Test]
         public void GeneratingNoPropertiesResultsInExpectedDump()
         {
-            var seq = NoPropertiesSequenceGenerator.Sequence();
-            var c = seq.GetEnumerator().Current;
-            Console.WriteLine("JSON: {0}", NoPropertiesDumper.Dump(c));
+            using (var lc = LogConfigurator)
+            {
+                var seq = NoPropertiesSequenceGenerator.Sequence();
+                var c = seq.GetEnumerator().Current;
+                Log.DebugFormat("JSON: {0}", NoPropertiesDumper.Dump(c));
+            }
         }
     }
 }

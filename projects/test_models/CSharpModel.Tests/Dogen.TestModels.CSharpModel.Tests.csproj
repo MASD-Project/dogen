@@ -40,6 +40,9 @@
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.3.5.0\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
@@ -54,6 +57,7 @@
   -->
   <ItemGroup>
     <Compile Include="TypesTests.cs" />
+    <Compile Include="LogConfigurator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CSharpModel\Dogen.TestModels.CSharpModel.csproj">
