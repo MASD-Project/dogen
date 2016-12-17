@@ -14,7 +14,7 @@
 			</item>
 			<item>
 				<first>2</first>
-				<second>dogen::test_models::two_layers_with_objects</second>
+				<second>dogen.test_models.two_layers_with_objects</second>
 			</item>
 		</qualified>
 		<location class_id="16" tracking_level="0" version="0">
@@ -77,7 +77,7 @@
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::two_layers_with_objects::Package_2</second>
+								<second>dogen.test_models.two_layers_with_objects.Package_2</second>
 							</item>
 						</qualified>
 						<location>
@@ -144,7 +144,7 @@
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::two_layers_with_objects::package_1</second>
+								<second>dogen.test_models.two_layers_with_objects.package_1</second>
 							</item>
 						</qualified>
 						<location>
@@ -211,7 +211,7 @@
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::two_layers_with_objects</second>
+								<second>dogen.test_models.two_layers_with_objects</second>
 							</item>
 						</qualified>
 						<location>
@@ -298,7 +298,7 @@
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::two_layers_with_objects::Package_2::class_2</second>
+								<second>dogen.test_models.two_layers_with_objects.Package_2.class_2</second>
 							</item>
 						</qualified>
 						<location>
@@ -362,7 +362,7 @@
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::two_layers_with_objects::Package_2::class_2::prop_0</second>
+									<second>dogen.test_models.two_layers_with_objects.Package_2.class_2.prop_0</second>
 								</item>
 							</qualified>
 							<location>
@@ -510,7 +510,7 @@
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::two_layers_with_objects::package_1::class_1</second>
+								<second>dogen.test_models.two_layers_with_objects.package_1.class_1</second>
 							</item>
 						</qualified>
 						<location>
@@ -574,7 +574,7 @@
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::two_layers_with_objects::package_1::class_1::prop_0</second>
+									<second>dogen.test_models.two_layers_with_objects.package_1.class_1.prop_0</second>
 								</item>
 							</qualified>
 							<location>

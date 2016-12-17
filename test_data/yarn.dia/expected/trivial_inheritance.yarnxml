@@ -14,7 +14,7 @@
 			</item>
 			<item>
 				<first>2</first>
-				<second>dogen::test_models::trivial_inheritance</second>
+				<second>dogen.test_models.trivial_inheritance</second>
 			</item>
 		</qualified>
 		<location class_id="16" tracking_level="0" version="0">
@@ -81,7 +81,7 @@ in the context of inheritance.
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::trivial_inheritance</second>
+								<second>dogen.test_models.trivial_inheritance</second>
 							</item>
 						</qualified>
 						<location>
@@ -148,7 +148,7 @@ in the context of inheritance.
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::trivial_inheritance::pkg4</second>
+								<second>dogen.test_models.trivial_inheritance.pkg4</second>
 							</item>
 						</qualified>
 						<location>
@@ -215,7 +215,7 @@ in the context of inheritance.
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::trivial_inheritance::pkg1</second>
+								<second>dogen.test_models.trivial_inheritance.pkg1</second>
 							</item>
 						</qualified>
 						<location>
@@ -282,7 +282,7 @@ in the context of inheritance.
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::trivial_inheritance::pkg2</second>
+								<second>dogen.test_models.trivial_inheritance.pkg2</second>
 							</item>
 						</qualified>
 						<location>
@@ -349,7 +349,7 @@ in the context of inheritance.
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::trivial_inheritance::pkg3</second>
+								<second>dogen.test_models.trivial_inheritance.pkg3</second>
 							</item>
 						</qualified>
 						<location>
@@ -436,7 +436,7 @@ in the context of inheritance.
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::trivial_inheritance::pkg4::child_via_settings</second>
+								<second>dogen.test_models.trivial_inheritance.pkg4.child_via_settings</second>
 							</item>
 						</qualified>
 						<location>
@@ -500,7 +500,7 @@ in the context of inheritance.
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::trivial_inheritance::pkg4::child_via_settings::prop_1</second>
+									<second>dogen.test_models.trivial_inheritance.pkg4.child_via_settings.prop_1</second>
 								</item>
 							</qualified>
 							<location>
@@ -648,7 +648,7 @@ in the context of inheritance.
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::trivial_inheritance::pkg3::child_via_settings</second>
+								<second>dogen.test_models.trivial_inheritance.pkg3.child_via_settings</second>
 							</item>
 						</qualified>
 						<location>
@@ -712,7 +712,7 @@ in the context of inheritance.
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::trivial_inheritance::pkg3::child_via_settings::prop_1</second>
+									<second>dogen.test_models.trivial_inheritance.pkg3.child_via_settings.prop_1</second>
 								</item>
 							</qualified>
 							<location>
@@ -860,7 +860,7 @@ in the context of inheritance.
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::trivial_inheritance::pkg1::child_via_settings</second>
+								<second>dogen.test_models.trivial_inheritance.pkg1.child_via_settings</second>
 							</item>
 						</qualified>
 						<location>
@@ -924,7 +924,7 @@ in the context of inheritance.
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::trivial_inheritance::pkg1::child_via_settings::prop_1</second>
+									<second>dogen.test_models.trivial_inheritance.pkg1.child_via_settings.prop_1</second>
 								</item>
 							</qualified>
 							<location>
@@ -1072,7 +1072,7 @@ in the context of inheritance.
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::trivial_inheritance::child_via_settings</second>
+								<second>dogen.test_models.trivial_inheritance.child_via_settings</second>
 							</item>
 						</qualified>
 						<location>
@@ -1135,7 +1135,7 @@ in the context of inheritance.
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::trivial_inheritance::child_via_settings::prop_1</second>
+									<second>dogen.test_models.trivial_inheritance.child_via_settings.prop_1</second>
 								</item>
 							</qualified>
 							<location>
@@ -1283,7 +1283,7 @@ in the context of inheritance.
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::trivial_inheritance::move_ctor_base</second>
+								<second>dogen.test_models.trivial_inheritance.move_ctor_base</second>
 							</item>
 						</qualified>
 						<location>
@@ -1347,7 +1347,7 @@ in the context of inheritance.
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::trivial_inheritance::move_ctor_base::prop_0</second>
+									<second>dogen.test_models.trivial_inheritance.move_ctor_base.prop_0</second>
 								</item>
 							</qualified>
 							<location>
@@ -1494,7 +1494,7 @@ in the context of inheritance.
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::trivial_inheritance::third_child_with_members</second>
+								<second>dogen.test_models.trivial_inheritance.third_child_with_members</second>
 							</item>
 						</qualified>
 						<location>
@@ -1557,7 +1557,7 @@ in the context of inheritance.
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::trivial_inheritance::third_child_with_members::prop_1</second>
+									<second>dogen.test_models.trivial_inheritance.third_child_with_members.prop_1</second>
 								</item>
 							</qualified>
 							<location>
@@ -1653,7 +1653,7 @@ in the context of inheritance.
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::trivial_inheritance::parent_with_members</second>
+								<second>dogen.test_models.trivial_inheritance.parent_with_members</second>
 							</item>
 						</qualified>
 						<location>
@@ -1740,7 +1740,7 @@ in the context of inheritance.
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::trivial_inheritance::non_final_orphan</second>
+								<second>dogen.test_models.trivial_inheritance.non_final_orphan</second>
 							</item>
 						</qualified>
 						<location>
@@ -1803,7 +1803,7 @@ in the context of inheritance.
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::trivial_inheritance::non_final_orphan::prop_0</second>
+									<second>dogen.test_models.trivial_inheritance.non_final_orphan.prop_0</second>
 								</item>
 							</qualified>
 							<location>
@@ -1950,7 +1950,7 @@ in the context of inheritance.
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::trivial_inheritance::parent_without_members</second>
+								<second>dogen.test_models.trivial_inheritance.parent_without_members</second>
 							</item>
 						</qualified>
 						<location>
@@ -2072,7 +2072,7 @@ in the context of inheritance.
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::trivial_inheritance::pkg4::child</second>
+								<second>dogen.test_models.trivial_inheritance.pkg4.child</second>
 							</item>
 						</qualified>
 						<location>
@@ -2136,7 +2136,7 @@ in the context of inheritance.
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::trivial_inheritance::pkg4::child::prop_1</second>
+									<second>dogen.test_models.trivial_inheritance.pkg4.child.prop_1</second>
 								</item>
 							</qualified>
 							<location>
@@ -2233,7 +2233,7 @@ in the context of inheritance.
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::trivial_inheritance::parent_outside</second>
+								<second>dogen.test_models.trivial_inheritance.parent_outside</second>
 							</item>
 						</qualified>
 						<location>
@@ -2320,7 +2320,7 @@ in the context of inheritance.
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::trivial_inheritance::second_child_without_members</second>
+								<second>dogen.test_models.trivial_inheritance.second_child_without_members</second>
 							</item>
 						</qualified>
 						<location>
@@ -2391,7 +2391,7 @@ in the context of inheritance.
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::trivial_inheritance::parent_with_members</second>
+								<second>dogen.test_models.trivial_inheritance.parent_with_members</second>
 							</item>
 						</qualified>
 						<location>
@@ -2478,7 +2478,7 @@ in the context of inheritance.
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::trivial_inheritance::pkg2::parent</second>
+								<second>dogen.test_models.trivial_inheritance.pkg2.parent</second>
 							</item>
 						</qualified>
 						<location>
@@ -2542,7 +2542,7 @@ in the context of inheritance.
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::trivial_inheritance::pkg2::parent::prop_0</second>
+									<second>dogen.test_models.trivial_inheritance.pkg2.parent.prop_0</second>
 								</item>
 							</qualified>
 							<location>
@@ -2690,7 +2690,7 @@ in the context of inheritance.
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::trivial_inheritance::service</second>
+								<second>dogen.test_models.trivial_inheritance.service</second>
 							</item>
 						</qualified>
 						<location>
@@ -2813,7 +2813,7 @@ in the context of inheritance.
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::trivial_inheritance::child_without_members</second>
+								<second>dogen.test_models.trivial_inheritance.child_without_members</second>
 							</item>
 						</qualified>
 						<location>
@@ -2884,7 +2884,7 @@ in the context of inheritance.
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::trivial_inheritance::parent_without_members</second>
+								<second>dogen.test_models.trivial_inheritance.parent_without_members</second>
 							</item>
 						</qualified>
 						<location>
@@ -2971,7 +2971,7 @@ in the context of inheritance.
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::trivial_inheritance::child_with_members</second>
+								<second>dogen.test_models.trivial_inheritance.child_with_members</second>
 							</item>
 						</qualified>
 						<location>
@@ -3034,7 +3034,7 @@ in the context of inheritance.
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::trivial_inheritance::child_with_members::prop_0</second>
+									<second>dogen.test_models.trivial_inheritance.child_with_members.prop_0</second>
 								</item>
 							</qualified>
 							<location>
@@ -3130,7 +3130,7 @@ in the context of inheritance.
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::trivial_inheritance::parent_without_members</second>
+								<second>dogen.test_models.trivial_inheritance.parent_without_members</second>
 							</item>
 						</qualified>
 						<location>
@@ -3217,7 +3217,7 @@ in the context of inheritance.
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::trivial_inheritance::child_of_a_child2</second>
+								<second>dogen.test_models.trivial_inheritance.child_of_a_child2</second>
 							</item>
 						</qualified>
 						<location>
@@ -3280,7 +3280,7 @@ in the context of inheritance.
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::trivial_inheritance::child_of_a_child2::prop_2</second>
+									<second>dogen.test_models.trivial_inheritance.child_of_a_child2.prop_2</second>
 								</item>
 							</qualified>
 							<location>
@@ -3376,7 +3376,7 @@ in the context of inheritance.
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::trivial_inheritance::third_child_with_members</second>
+								<second>dogen.test_models.trivial_inheritance.third_child_with_members</second>
 							</item>
 						</qualified>
 						<location>
@@ -3463,7 +3463,7 @@ in the context of inheritance.
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::trivial_inheritance::pkg1::parent</second>
+								<second>dogen.test_models.trivial_inheritance.pkg1.parent</second>
 							</item>
 						</qualified>
 						<location>
@@ -3527,7 +3527,7 @@ in the context of inheritance.
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::trivial_inheritance::pkg1::parent::prop_0</second>
+									<second>dogen.test_models.trivial_inheritance.pkg1.parent.prop_0</second>
 								</item>
 							</qualified>
 							<location>
@@ -3675,7 +3675,7 @@ in the context of inheritance.
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::trivial_inheritance::child_of_a_child1</second>
+								<second>dogen.test_models.trivial_inheritance.child_of_a_child1</second>
 							</item>
 						</qualified>
 						<location>
@@ -3746,7 +3746,7 @@ in the context of inheritance.
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::trivial_inheritance::third_child_with_members</second>
+								<second>dogen.test_models.trivial_inheritance.third_child_with_members</second>
 							</item>
 						</qualified>
 						<location>
@@ -3833,7 +3833,7 @@ in the context of inheritance.
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::trivial_inheritance::pkg1::child</second>
+								<second>dogen.test_models.trivial_inheritance.pkg1.child</second>
 							</item>
 						</qualified>
 						<location>
@@ -3897,7 +3897,7 @@ in the context of inheritance.
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::trivial_inheritance::pkg1::child::prop_1</second>
+									<second>dogen.test_models.trivial_inheritance.pkg1.child.prop_1</second>
 								</item>
 							</qualified>
 							<location>
@@ -3994,7 +3994,7 @@ in the context of inheritance.
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::trivial_inheritance::pkg1::parent</second>
+								<second>dogen.test_models.trivial_inheritance.pkg1.parent</second>
 							</item>
 						</qualified>
 						<location>
@@ -4082,7 +4082,7 @@ in the context of inheritance.
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::trivial_inheritance::parent_with_members</second>
+								<second>dogen.test_models.trivial_inheritance.parent_with_members</second>
 							</item>
 						</qualified>
 						<location>
@@ -4145,7 +4145,7 @@ in the context of inheritance.
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::trivial_inheritance::parent_with_members::prop_0</second>
+									<second>dogen.test_models.trivial_inheritance.parent_with_members.prop_0</second>
 								</item>
 							</qualified>
 							<location>
@@ -4292,7 +4292,7 @@ in the context of inheritance.
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::trivial_inheritance::non_final_leaf</second>
+								<second>dogen.test_models.trivial_inheritance.non_final_leaf</second>
 							</item>
 						</qualified>
 						<location>
@@ -4355,7 +4355,7 @@ in the context of inheritance.
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::trivial_inheritance::non_final_leaf::prop_0</second>
+									<second>dogen.test_models.trivial_inheritance.non_final_leaf.prop_0</second>
 								</item>
 							</qualified>
 							<location>
@@ -4451,7 +4451,7 @@ in the context of inheritance.
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::trivial_inheritance::descendant1</second>
+								<second>dogen.test_models.trivial_inheritance.descendant1</second>
 							</item>
 						</qualified>
 						<location>
@@ -4538,7 +4538,7 @@ in the context of inheritance.
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::trivial_inheritance::descendant2</second>
+								<second>dogen.test_models.trivial_inheritance.descendant2</second>
 							</item>
 						</qualified>
 						<location>
@@ -4602,7 +4602,7 @@ in the context of inheritance.
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::trivial_inheritance::descendant2::prop_0</second>
+									<second>dogen.test_models.trivial_inheritance.descendant2.prop_0</second>
 								</item>
 							</qualified>
 							<location>
@@ -4698,7 +4698,7 @@ in the context of inheritance.
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::trivial_inheritance::base</second>
+								<second>dogen.test_models.trivial_inheritance.base</second>
 							</item>
 						</qualified>
 						<location>
@@ -4785,7 +4785,7 @@ in the context of inheritance.
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::trivial_inheritance::descendant3</second>
+								<second>dogen.test_models.trivial_inheritance.descendant3</second>
 							</item>
 						</qualified>
 						<location>
@@ -4848,7 +4848,7 @@ in the context of inheritance.
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::trivial_inheritance::descendant3::prop_0</second>
+									<second>dogen.test_models.trivial_inheritance.descendant3.prop_0</second>
 								</item>
 							</qualified>
 							<location>
@@ -4944,7 +4944,7 @@ in the context of inheritance.
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::trivial_inheritance::descendant1</second>
+								<second>dogen.test_models.trivial_inheritance.descendant1</second>
 							</item>
 						</qualified>
 						<location>
@@ -5031,7 +5031,7 @@ in the context of inheritance.
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::trivial_inheritance::pkg3::child</second>
+								<second>dogen.test_models.trivial_inheritance.pkg3.child</second>
 							</item>
 						</qualified>
 						<location>
@@ -5095,7 +5095,7 @@ in the context of inheritance.
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::trivial_inheritance::pkg3::child::prop_1</second>
+									<second>dogen.test_models.trivial_inheritance.pkg3.child.prop_1</second>
 								</item>
 							</qualified>
 							<location>
@@ -5192,7 +5192,7 @@ in the context of inheritance.
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::trivial_inheritance::pkg2::parent</second>
+								<second>dogen.test_models.trivial_inheritance.pkg2.parent</second>
 							</item>
 						</qualified>
 						<location>
@@ -5280,7 +5280,7 @@ in the context of inheritance.
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::trivial_inheritance::parent_outside</second>
+								<second>dogen.test_models.trivial_inheritance.parent_outside</second>
 							</item>
 						</qualified>
 						<location>
@@ -5343,7 +5343,7 @@ in the context of inheritance.
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::trivial_inheritance::parent_outside::prop_0</second>
+									<second>dogen.test_models.trivial_inheritance.parent_outside.prop_0</second>
 								</item>
 							</qualified>
 							<location>
@@ -5490,7 +5490,7 @@ in the context of inheritance.
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::trivial_inheritance::service_interface</second>
+								<second>dogen.test_models.trivial_inheritance.service_interface</second>
 							</item>
 						</qualified>
 						<location>
@@ -5613,7 +5613,7 @@ in the context of inheritance.
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::trivial_inheritance::base</second>
+								<second>dogen.test_models.trivial_inheritance.base</second>
 							</item>
 						</qualified>
 						<location>
@@ -5737,7 +5737,7 @@ in the context of inheritance.
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::trivial_inheritance::descendant1</second>
+								<second>dogen.test_models.trivial_inheritance.descendant1</second>
 							</item>
 						</qualified>
 						<location>
@@ -5809,7 +5809,7 @@ in the context of inheritance.
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::trivial_inheritance::base</second>
+								<second>dogen.test_models.trivial_inheritance.base</second>
 							</item>
 						</qualified>
 						<location>
@@ -5897,7 +5897,7 @@ in the context of inheritance.
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::trivial_inheritance::move_ctor_empty_descendant</second>
+								<second>dogen.test_models.trivial_inheritance.move_ctor_empty_descendant</second>
 							</item>
 						</qualified>
 						<location>
@@ -5968,7 +5968,7 @@ in the context of inheritance.
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::trivial_inheritance::move_ctor_base</second>
+								<second>dogen.test_models.trivial_inheritance.move_ctor_base</second>
 							</item>
 						</qualified>
 						<location>
@@ -6056,7 +6056,7 @@ in the context of inheritance.
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::trivial_inheritance::move_ctor_descendant</second>
+								<second>dogen.test_models.trivial_inheritance.move_ctor_descendant</second>
 							</item>
 						</qualified>
 						<location>
@@ -6120,7 +6120,7 @@ in the context of inheritance.
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::trivial_inheritance::move_ctor_descendant::prop_1</second>
+									<second>dogen.test_models.trivial_inheritance.move_ctor_descendant.prop_1</second>
 								</item>
 							</qualified>
 							<location>
@@ -6216,7 +6216,7 @@ in the context of inheritance.
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::trivial_inheritance::move_ctor_base</second>
+								<second>dogen.test_models.trivial_inheritance.move_ctor_base</second>
 							</item>
 						</qualified>
 						<location>

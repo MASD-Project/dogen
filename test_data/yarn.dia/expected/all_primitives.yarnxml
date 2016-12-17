@@ -14,7 +14,7 @@
 			</item>
 			<item>
 				<first>2</first>
-				<second>dogen::test_models::all_primitives</second>
+				<second>dogen.test_models.all_primitives</second>
 			</item>
 		</qualified>
 		<location class_id="16" tracking_level="0" version="0">
@@ -77,7 +77,7 @@
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::all_primitives</second>
+								<second>dogen.test_models.all_primitives</second>
 							</item>
 						</qualified>
 						<location>
@@ -164,7 +164,7 @@
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::all_primitives::a_class</second>
+								<second>dogen.test_models.all_primitives.a_class</second>
 							</item>
 						</qualified>
 						<location>
@@ -227,7 +227,7 @@
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::all_primitives::a_class::bool_property</second>
+									<second>dogen.test_models.all_primitives.a_class.bool_property</second>
 								</item>
 							</qualified>
 							<location>
@@ -315,7 +315,7 @@
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::all_primitives::a_class::char_property</second>
+									<second>dogen.test_models.all_primitives.a_class.char_property</second>
 								</item>
 							</qualified>
 							<location>
@@ -403,7 +403,7 @@
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::all_primitives::a_class::uchar_property</second>
+									<second>dogen.test_models.all_primitives.a_class.uchar_property</second>
 								</item>
 							</qualified>
 							<location>
@@ -491,7 +491,7 @@
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::all_primitives::a_class::int_property</second>
+									<second>dogen.test_models.all_primitives.a_class.int_property</second>
 								</item>
 							</qualified>
 							<location>
@@ -579,7 +579,7 @@
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::all_primitives::a_class::uint_property</second>
+									<second>dogen.test_models.all_primitives.a_class.uint_property</second>
 								</item>
 							</qualified>
 							<location>
@@ -667,7 +667,7 @@
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::all_primitives::a_class::long_property</second>
+									<second>dogen.test_models.all_primitives.a_class.long_property</second>
 								</item>
 							</qualified>
 							<location>
@@ -755,7 +755,7 @@
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::all_primitives::a_class::ulong_property</second>
+									<second>dogen.test_models.all_primitives.a_class.ulong_property</second>
 								</item>
 							</qualified>
 							<location>
@@ -843,7 +843,7 @@
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::all_primitives::a_class::long_long_property</second>
+									<second>dogen.test_models.all_primitives.a_class.long_long_property</second>
 								</item>
 							</qualified>
 							<location>
@@ -931,7 +931,7 @@
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::all_primitives::a_class::ulong_long_property</second>
+									<second>dogen.test_models.all_primitives.a_class.ulong_long_property</second>
 								</item>
 							</qualified>
 							<location>
@@ -1019,7 +1019,7 @@
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::all_primitives::a_class::short_property</second>
+									<second>dogen.test_models.all_primitives.a_class.short_property</second>
 								</item>
 							</qualified>
 							<location>
@@ -1107,7 +1107,7 @@
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::all_primitives::a_class::ushort_property</second>
+									<second>dogen.test_models.all_primitives.a_class.ushort_property</second>
 								</item>
 							</qualified>
 							<location>
@@ -1195,7 +1195,7 @@
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::all_primitives::a_class::double_property</second>
+									<second>dogen.test_models.all_primitives.a_class.double_property</second>
 								</item>
 							</qualified>
 							<location>
@@ -1283,7 +1283,7 @@
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::all_primitives::a_class::float_property</second>
+									<second>dogen.test_models.all_primitives.a_class.float_property</second>
 								</item>
 							</qualified>
 							<location>

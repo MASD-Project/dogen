@@ -75,7 +75,7 @@
 							</item>
 							<item>
 								<first>2</first>
-								<second>empty_package::package_1</second>
+								<second>empty_package.package_1</second>
 							</item>
 						</qualified>
 						<location>

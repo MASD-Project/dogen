@@ -31,7 +31,7 @@ auto lg(logger_factory("yarn.pretty_printer"));
 const char space(' ');
 const std::string comma_space(", ");
 const std::string double_colon("::");
-const std::string dot("::");
+const std::string dot(".");
 const char less_than('<');
 const char greater_than('>');
 const std::string unsupported_separator("Unsupported separator");

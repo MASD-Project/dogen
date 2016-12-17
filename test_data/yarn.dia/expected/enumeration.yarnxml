@@ -14,7 +14,7 @@
 			</item>
 			<item>
 				<first>2</first>
-				<second>dogen::test_models::enumeration</second>
+				<second>dogen.test_models.enumeration</second>
 			</item>
 		</qualified>
 		<location class_id="16" tracking_level="0" version="0">
@@ -77,7 +77,7 @@
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::enumeration::pkg1</second>
+								<second>dogen.test_models.enumeration.pkg1</second>
 							</item>
 						</qualified>
 						<location>
@@ -144,7 +144,7 @@
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::enumeration</second>
+								<second>dogen.test_models.enumeration</second>
 							</item>
 						</qualified>
 						<location>
@@ -226,7 +226,7 @@
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::enumeration::pkg1::shape_types</second>
+								<second>dogen.test_models.enumeration.pkg1.shape_types</second>
 							</item>
 						</qualified>
 						<location>
@@ -344,7 +344,7 @@
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::enumeration::colour_types</second>
+								<second>dogen.test_models.enumeration.colour_types</second>
 							</item>
 						</qualified>
 						<location>
@@ -464,7 +464,7 @@ this is a long comment
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::enumeration::book_types</second>
+								<second>dogen.test_models.enumeration.book_types</second>
 							</item>
 						</qualified>
 						<location>
@@ -578,7 +578,7 @@ this is a long comment
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::enumeration::a_class</second>
+								<second>dogen.test_models.enumeration.a_class</second>
 							</item>
 						</qualified>
 						<location>
@@ -641,7 +641,7 @@ this is a long comment
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::enumeration::a_class::colour_type</second>
+									<second>dogen.test_models.enumeration.a_class.colour_type</second>
 								</item>
 							</qualified>
 							<location>
@@ -729,7 +729,7 @@ this is a long comment
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::enumeration::a_class::book_type</second>
+									<second>dogen.test_models.enumeration.a_class.book_type</second>
 								</item>
 							</qualified>
 							<location>
@@ -817,7 +817,7 @@ this is a long comment
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::enumeration::a_class::shape_type</second>
+									<second>dogen.test_models.enumeration.a_class.shape_type</second>
 								</item>
 							</qualified>
 							<location>

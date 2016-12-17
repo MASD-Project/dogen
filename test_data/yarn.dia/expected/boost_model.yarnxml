@@ -14,7 +14,7 @@
 			</item>
 			<item>
 				<first>2</first>
-				<second>dogen::test_models::boost_model</second>
+				<second>dogen.test_models.boost_model</second>
 			</item>
 		</qualified>
 		<location class_id="16" tracking_level="0" version="0">
@@ -77,7 +77,7 @@
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::boost_model::pkg1</second>
+								<second>dogen.test_models.boost_model.pkg1</second>
 							</item>
 						</qualified>
 						<location>
@@ -144,7 +144,7 @@
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::boost_model</second>
+								<second>dogen.test_models.boost_model</second>
 							</item>
 						</qualified>
 						<location>
@@ -231,7 +231,7 @@
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::boost_model::class_h</second>
+								<second>dogen.test_models.boost_model.class_h</second>
 							</item>
 						</qualified>
 						<location>
@@ -294,7 +294,7 @@
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::boost_model::class_h::prop_0</second>
+									<second>dogen.test_models.boost_model.class_h.prop_0</second>
 								</item>
 							</qualified>
 							<location>
@@ -441,7 +441,7 @@
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::boost_model::class_base</second>
+								<second>dogen.test_models.boost_model.class_base</second>
 							</item>
 						</qualified>
 						<location>
@@ -504,7 +504,7 @@
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::boost_model::class_base::prop_0</second>
+									<second>dogen.test_models.boost_model.class_base.prop_0</second>
 								</item>
 							</qualified>
 							<location>
@@ -651,7 +651,7 @@
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::boost_model::class_derived</second>
+								<second>dogen.test_models.boost_model.class_derived</second>
 							</item>
 						</qualified>
 						<location>
@@ -714,7 +714,7 @@
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::boost_model::class_derived::prop_1</second>
+									<second>dogen.test_models.boost_model.class_derived.prop_1</second>
 								</item>
 							</qualified>
 							<location>
@@ -810,7 +810,7 @@
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::boost_model::class_base</second>
+								<second>dogen.test_models.boost_model.class_base</second>
 							</item>
 						</qualified>
 						<location>
@@ -897,7 +897,7 @@
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::boost_model::class_a</second>
+								<second>dogen.test_models.boost_model.class_a</second>
 							</item>
 						</qualified>
 						<location>
@@ -960,7 +960,7 @@
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::boost_model::class_a::prop_0</second>
+									<second>dogen.test_models.boost_model.class_a.prop_0</second>
 								</item>
 							</qualified>
 							<location>
@@ -1107,7 +1107,7 @@
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::boost_model::pkg1::class_c</second>
+								<second>dogen.test_models.boost_model.pkg1.class_c</second>
 							</item>
 						</qualified>
 						<location>
@@ -1171,7 +1171,7 @@
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::boost_model::pkg1::class_c::prop_0</second>
+									<second>dogen.test_models.boost_model.pkg1.class_c.prop_0</second>
 								</item>
 							</qualified>
 							<location>
@@ -1260,7 +1260,7 @@
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::boost_model::pkg1::class_c::prop_1</second>
+									<second>dogen.test_models.boost_model.pkg1.class_c.prop_1</second>
 								</item>
 							</qualified>
 							<location>
@@ -1408,7 +1408,7 @@
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::boost_model::class_b</second>
+								<second>dogen.test_models.boost_model.class_b</second>
 							</item>
 						</qualified>
 						<location>
@@ -1471,7 +1471,7 @@
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::boost_model::class_b::prop_0</second>
+									<second>dogen.test_models.boost_model.class_b.prop_0</second>
 								</item>
 							</qualified>
 							<location>
@@ -1559,7 +1559,7 @@
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::boost_model::class_b::prop_1</second>
+									<second>dogen.test_models.boost_model.class_b.prop_1</second>
 								</item>
 							</qualified>
 							<location>
@@ -1647,7 +1647,7 @@
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::boost_model::class_b::prop_2</second>
+									<second>dogen.test_models.boost_model.class_b.prop_2</second>
 								</item>
 							</qualified>
 							<location>
@@ -1735,7 +1735,7 @@
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::boost_model::class_b::prop_3</second>
+									<second>dogen.test_models.boost_model.class_b.prop_3</second>
 								</item>
 							</qualified>
 							<location>
@@ -1823,7 +1823,7 @@
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::boost_model::class_b::prop_4</second>
+									<second>dogen.test_models.boost_model.class_b.prop_4</second>
 								</item>
 							</qualified>
 							<location>
@@ -1911,7 +1911,7 @@
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::boost_model::class_b::prop_5</second>
+									<second>dogen.test_models.boost_model.class_b.prop_5</second>
 								</item>
 							</qualified>
 							<location>
@@ -1999,7 +1999,7 @@
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::boost_model::class_b::prop_6</second>
+									<second>dogen.test_models.boost_model.class_b.prop_6</second>
 								</item>
 							</qualified>
 							<location>
@@ -2146,7 +2146,7 @@
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::boost_model::class_d</second>
+								<second>dogen.test_models.boost_model.class_d</second>
 							</item>
 						</qualified>
 						<location>
@@ -2209,7 +2209,7 @@
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::boost_model::class_d::prop_0</second>
+									<second>dogen.test_models.boost_model.class_d.prop_0</second>
 								</item>
 							</qualified>
 							<location>
@@ -2297,7 +2297,7 @@
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::boost_model::class_d::prop_1</second>
+									<second>dogen.test_models.boost_model.class_d.prop_1</second>
 								</item>
 							</qualified>
 							<location>
@@ -2385,7 +2385,7 @@
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::boost_model::class_d::prop_2</second>
+									<second>dogen.test_models.boost_model.class_d.prop_2</second>
 								</item>
 							</qualified>
 							<location>
@@ -2473,7 +2473,7 @@
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::boost_model::class_d::prop_3</second>
+									<second>dogen.test_models.boost_model.class_d.prop_3</second>
 								</item>
 							</qualified>
 							<location>
@@ -2620,7 +2620,7 @@
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::boost_model::class_e</second>
+								<second>dogen.test_models.boost_model.class_e</second>
 							</item>
 						</qualified>
 						<location>
@@ -2683,7 +2683,7 @@
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::boost_model::class_e::prop_0</second>
+									<second>dogen.test_models.boost_model.class_e.prop_0</second>
 								</item>
 							</qualified>
 							<location>
@@ -2771,7 +2771,7 @@
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::boost_model::class_e::prop_1</second>
+									<second>dogen.test_models.boost_model.class_e.prop_1</second>
 								</item>
 							</qualified>
 							<location>
@@ -2859,7 +2859,7 @@
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::boost_model::class_e::prop_2</second>
+									<second>dogen.test_models.boost_model.class_e.prop_2</second>
 								</item>
 							</qualified>
 							<location>
@@ -2947,7 +2947,7 @@
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::boost_model::class_e::prop_3</second>
+									<second>dogen.test_models.boost_model.class_e.prop_3</second>
 								</item>
 							</qualified>
 							<location>
@@ -3094,7 +3094,7 @@
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::boost_model::some_service</second>
+								<second>dogen.test_models.boost_model.some_service</second>
 							</item>
 						</qualified>
 						<location>
@@ -3158,7 +3158,7 @@
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::boost_model::some_service::prop_0</second>
+									<second>dogen.test_models.boost_model.some_service.prop_0</second>
 								</item>
 							</qualified>
 							<location>
@@ -3305,7 +3305,7 @@
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::boost_model::class_g</second>
+								<second>dogen.test_models.boost_model.class_g</second>
 							</item>
 						</qualified>
 						<location>
@@ -3368,7 +3368,7 @@
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::boost_model::class_g::prop_0</second>
+									<second>dogen.test_models.boost_model.class_g.prop_0</second>
 								</item>
 							</qualified>
 							<location>
@@ -3456,7 +3456,7 @@
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::boost_model::class_g::prop_1</second>
+									<second>dogen.test_models.boost_model.class_g.prop_1</second>
 								</item>
 							</qualified>
 							<location>
@@ -3603,7 +3603,7 @@
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen::test_models::boost_model::class_f</second>
+								<second>dogen.test_models.boost_model.class_f</second>
 							</item>
 						</qualified>
 						<location>
@@ -3666,7 +3666,7 @@
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::boost_model::class_f::prop_0</second>
+									<second>dogen.test_models.boost_model.class_f.prop_0</second>
 								</item>
 							</qualified>
 							<location>
@@ -3754,7 +3754,7 @@
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::boost_model::class_f::prop_1</second>
+									<second>dogen.test_models.boost_model.class_f.prop_1</second>
 								</item>
 							</qualified>
 							<location>
@@ -3842,7 +3842,7 @@
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::boost_model::class_f::prop_2</second>
+									<second>dogen.test_models.boost_model.class_f.prop_2</second>
 								</item>
 							</qualified>
 							<location>
@@ -3930,7 +3930,7 @@
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::boost_model::class_f::prop_3</second>
+									<second>dogen.test_models.boost_model.class_f.prop_3</second>
 								</item>
 							</qualified>
 							<location>
@@ -4018,7 +4018,7 @@
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::boost_model::class_f::prop_4</second>
+									<second>dogen.test_models.boost_model.class_f.prop_4</second>
 								</item>
 							</qualified>
 							<location>
@@ -4106,7 +4106,7 @@
 								</item>
 								<item>
 									<first>2</first>
-									<second>dogen::test_models::boost_model::class_f::prop_5</second>
+									<second>dogen.test_models.boost_model.class_f.prop_5</second>
 								</item>
 							</qualified>
 							<location>
