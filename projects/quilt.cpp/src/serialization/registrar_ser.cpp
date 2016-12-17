@@ -43,8 +43,8 @@ namespace cpp {
 
 template<typename Archive>
 void register_types(Archive& ar) {
-    dogen::yarn::register_types(ar);
     dogen::options::register_types(ar);
+    dogen::yarn::register_types(ar);
     dogen::formatters::register_types(ar);
     dogen::annotations::register_types(ar);
 
