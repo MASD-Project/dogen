@@ -25,8 +25,10 @@
 #pragma once
 #endif
 
+#include "dogen/quilt.csharp/test_data/fabric/dump_helper_td.hpp"
 #include "dogen/quilt.csharp/test_data/formattables/model_td.hpp"
 #include "dogen/quilt.csharp/test_data/fabric/assembly_info_td.hpp"
+#include "dogen/quilt.csharp/test_data/fabric/generator_helper_td.hpp"
 #include "dogen/quilt.csharp/test_data/formattables/formattable_td.hpp"
 #include "dogen/quilt.csharp/test_data/fabric/visual_studio_project_td.hpp"
 #include "dogen/quilt.csharp/test_data/fabric/visual_studio_solution_td.hpp"

@@ -33,6 +33,7 @@
 #include "dogen/quilt.csharp/types/workflow_error.hpp"
 #include "dogen/quilt.csharp/types/fabric/injector.hpp"
 #include "dogen/quilt.csharp/types/formatters/traits.hpp"
+#include "dogen/quilt.csharp/types/fabric/dump_helper.hpp"
 #include "dogen/quilt.csharp/types/fabric/initializer.hpp"
 #include "dogen/quilt.csharp/types/formattables/model.hpp"
 #include "dogen/quilt.csharp/types/formatters/context.hpp"
@@ -46,7 +47,9 @@
 #include "dogen/quilt.csharp/types/formattables/workflow.hpp"
 #include "dogen/quilt.csharp/types/formatters/repository.hpp"
 #include "dogen/quilt.csharp/types/fabric/element_visitor.hpp"
+#include "dogen/quilt.csharp/types/fabric/helpers_factory.hpp"
 #include "dogen/quilt.csharp/types/formatters/initializer.hpp"
+#include "dogen/quilt.csharp/types/fabric/generator_helper.hpp"
 #include "dogen/quilt.csharp/types/formatters/types/traits.hpp"
 #include "dogen/quilt.csharp/types/formattables/formattable.hpp"
 #include "dogen/quilt.csharp/types/formattables/transformer.hpp"
@@ -87,6 +90,7 @@
 #include "dogen/quilt.csharp/types/formatters/test_data/string_helper.hpp"
 #include "dogen/quilt.csharp/types/formatters/types/visitor_formatter.hpp"
 #include "dogen/quilt.csharp/types/formattables/project_items_expander.hpp"
+#include "dogen/quilt.csharp/types/formatters/io/dump_helper_formatter.hpp"
 #include "dogen/quilt.csharp/types/formatters/test_data/boolean_helper.hpp"
 #include "dogen/quilt.csharp/types/formatters/test_data/enum_formatter.hpp"
 #include "dogen/quilt.csharp/types/formatters/test_data/class_formatter.hpp"
@@ -102,6 +106,7 @@
 #include "dogen/quilt.csharp/types/formatters/visual_studio_solution_formatter.hpp"
 #include "dogen/quilt.csharp/types/formattables/locator_archetype_configuration.hpp"
 #include "dogen/quilt.csharp/types/formatters/types/floating_point_number_helper.hpp"
+#include "dogen/quilt.csharp/types/formatters/test_data/generator_helper_formatter.hpp"
 #include "dogen/quilt.csharp/types/formatters/test_data/floating_point_number_helper.hpp"
 
 #endif

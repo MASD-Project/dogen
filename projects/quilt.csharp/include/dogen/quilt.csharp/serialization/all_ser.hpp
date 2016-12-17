@@ -25,8 +25,10 @@
 #pragma once
 #endif
 
+#include "dogen/quilt.csharp/serialization/fabric/dump_helper_ser.hpp"
 #include "dogen/quilt.csharp/serialization/formattables/model_ser.hpp"
 #include "dogen/quilt.csharp/serialization/fabric/assembly_info_ser.hpp"
+#include "dogen/quilt.csharp/serialization/fabric/generator_helper_ser.hpp"
 #include "dogen/quilt.csharp/serialization/formattables/formattable_ser.hpp"
 #include "dogen/quilt.csharp/serialization/fabric/visual_studio_project_ser.hpp"
 #include "dogen/quilt.csharp/serialization/fabric/visual_studio_solution_ser.hpp"

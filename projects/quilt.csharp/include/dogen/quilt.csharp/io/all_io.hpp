@@ -25,9 +25,11 @@
 #pragma once
 #endif
 
+#include "dogen/quilt.csharp/io/fabric/dump_helper_io.hpp"
 #include "dogen/quilt.csharp/io/formattables/model_io.hpp"
 #include "dogen/quilt.csharp/io/fabric/assembly_info_io.hpp"
 #include "dogen/quilt.csharp/io/formatters/repository_io.hpp"
+#include "dogen/quilt.csharp/io/fabric/generator_helper_io.hpp"
 #include "dogen/quilt.csharp/io/formattables/formattable_io.hpp"
 #include "dogen/quilt.csharp/io/fabric/visual_studio_project_io.hpp"
 #include "dogen/quilt.csharp/io/fabric/visual_studio_solution_io.hpp"
