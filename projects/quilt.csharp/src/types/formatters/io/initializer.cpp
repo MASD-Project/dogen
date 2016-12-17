@@ -20,6 +20,7 @@
  */
 #include "dogen/quilt.csharp/types/formatters/registrar.hpp"
 #include "dogen/quilt.csharp/types/formatters/io/class_formatter.hpp"
+#include "dogen/quilt.csharp/types/formatters/io/dump_helper_formatter.hpp"
 #include "dogen/quilt.csharp/types/formatters/io/initializer.hpp"
 
 namespace dogen {
@@ -30,6 +31,7 @@ namespace io {
 
 void initializer::initialize(registrar& rg) {
     register_formatter<class_formatter>(rg);
+    register_formatter<dump_helper_formatter>(rg);
 }
 
 } } } } }
