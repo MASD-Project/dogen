@@ -17,7 +17,6 @@
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 // MA 02110-1301, USA.
 //
-
 namespace Dogen.TestModels.CSharpModel
 {
     /// <summary>
@@ -32,7 +31,7 @@ namespace Dogen.TestModels.CSharpModel
                 return;
 
             helper.AddStartObject();
-            helper.AddType("Dogen.TestModels.CSharpModel.PrimitiveBuiltinsDumper", true/*withSeparator*/);
+            helper.AddType("Dogen.TestModels.CSharpModel.PrimitiveBuiltins", true/*withSeparator*/);
             helper.Add("ByteProperty", value.ByteProperty, true/*withSeparator*/);
             helper.Add("ShortByteProperty", value.ShortByteProperty, true/*withSeparator*/);
             helper.Add("IntProperty", value.IntProperty, true/*withSeparator*/);

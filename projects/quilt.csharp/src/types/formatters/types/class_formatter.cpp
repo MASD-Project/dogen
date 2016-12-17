@@ -84,7 +84,7 @@ a.stream() << std::endl;
             const auto ns(a.make_namespaces(e.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
             a.comment(e.documentation(), 1/*indent*/);
-a.stream() << "    public class " << sn << std::endl;
+a.stream() << "    public static class " << sn << std::endl;
 a.stream() << "    {" << std::endl;
             if (!o.local_attributes().empty()) {
                 if (!ctx.element_properties().helper_properties().empty())

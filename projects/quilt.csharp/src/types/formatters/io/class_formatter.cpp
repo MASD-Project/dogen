@@ -76,22 +76,43 @@ class_formatter::format(const context& ctx, const yarn::element& e) const {
         const auto qn(a.get_qualified_name(e.name()));
         auto sbf(a.make_scoped_boilerplate_formatter());
         {
-a.stream() << "using System.Text;" << std::endl;
-a.stream() << std::endl;
             const auto ns(a.make_namespaces(e.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
             const bool no_parent_and_no_attributes(!o.parent() &&
                 o.all_attributes().empty());
+
 a.stream() << "    /// <summary>" << std::endl;
 a.stream() << "    /// Generates sequences of " << sn << "." << std::endl;
 a.stream() << "    /// </summary>" << std::endl;
-a.stream() << "    static class " << sn << "Dumper" << std::endl;
+a.stream() << "    public static class " << sn << "Dumper" << std::endl;
 a.stream() << "    {" << std::endl;
-a.stream() << "        public static string Dump(" << sn << " target)" << std::endl;
+a.stream() << "        static void Dump(DumpHelper helper, " << sn << " value)" << std::endl;
 a.stream() << "        {" << std::endl;
-a.stream() << "            var sb = new StringBuilder();" << std::endl;
-a.stream() << "            sb.Append(\"{ \\\"__type__\\\": \\\"" << sn << "\\\"" << (no_parent_and_no_attributes ? " }" : ", ") << "\");" << std::endl;
-a.stream() << "            return sb.ToString();" << std::endl;
+a.stream() << "            helper.IncrementDepth();" << std::endl;
+a.stream() << "            if (helper.MaximumDepthExceeded())" << std::endl;
+a.stream() << "                return;" << std::endl;
+a.stream() << std::endl;
+a.stream() << "            helper.AddStartObject();" << std::endl;
+a.stream() << "            helper.AddType(\"" << qn << "\"" << (no_parent_and_no_attributes ? "" : ", true/*withSeparator*/") << ");" << std::endl;
+                dogen::formatters::sequence_formatter sf(o.local_attributes().size());
+                sf.element_separator("");
+                sf.postfix_configuration().not_last(", true/*withSeparator*/");
+                sf.postfix_configuration().last("");
+
+                for (const auto& attr : o.local_attributes()) {
+a.stream() << "            helper.Add(\"" << attr.name().simple() << "\", value." << attr.name().simple() << sf.postfix() << ");" << std::endl;
+                    sf.next();
+                }
+a.stream() << "            helper.AddEndObject();" << std::endl;
+a.stream() << std::endl;
+a.stream() << "            helper.DecrementDepth();" << std::endl;
+a.stream() << "        }" << std::endl;
+a.stream() << std::endl;
+a.stream() << "        public static string Dump(" << sn << " value)" << std::endl;
+a.stream() << "        {" << std::endl;
+a.stream() << "            var helper = new DumpHelper();" << std::endl;
+a.stream() << "            Dump(helper, value);" << std::endl;
+a.stream() << "            return helper.Dump();" << std::endl;
 a.stream() << "        }" << std::endl;
 a.stream() << "    }" << std::endl;
         }
