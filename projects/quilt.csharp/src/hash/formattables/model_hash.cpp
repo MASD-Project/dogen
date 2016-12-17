@@ -22,6 +22,7 @@
 #include "dogen/quilt.csharp/hash/formattables/model_hash.hpp"
 #include "dogen/quilt.csharp/hash/formattables/formattable_hash.hpp"
 #include "dogen/quilt.csharp/hash/formattables/aspect_properties_hash.hpp"
+#include "dogen/quilt.csharp/hash/formattables/assistant_properties_hash.hpp"
 
 namespace {
 
@@ -57,6 +58,15 @@ inline std::size_t hash_std_unordered_map_std_string_dogen_quilt_csharp_formatta
     return seed;
 }
 
+inline std::size_t hash_std_unordered_map_std_string_dogen_quilt_csharp_formattables_assistant_properties(const std::unordered_map<std::string, dogen::quilt::csharp::formattables::assistant_properties>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, i.second);
+    }
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -71,6 +81,7 @@ std::size_t model_hasher::hash(const model& v) {
     combine(seed, hash_std_unordered_map_std_string_dogen_quilt_csharp_formattables_formattable(v.formattables()));
     combine(seed, hash_std_list_std_string(v.project_items()));
     combine(seed, hash_std_unordered_map_std_string_dogen_quilt_csharp_formattables_aspect_properties(v.aspect_properties()));
+    combine(seed, hash_std_unordered_map_std_string_dogen_quilt_csharp_formattables_assistant_properties(v.assistant_properties()));
 
     return seed;
 }

@@ -24,6 +24,7 @@
 #include "dogen/quilt.csharp/io/formattables/model_io.hpp"
 #include "dogen/quilt.csharp/io/formattables/formattable_io.hpp"
 #include "dogen/quilt.csharp/io/formattables/aspect_properties_io.hpp"
+#include "dogen/quilt.csharp/io/formattables/assistant_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -82,6 +83,24 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::quilt::csharp::formattables::assistant_properties>& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace quilt {
 namespace csharp {
@@ -93,7 +112,8 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"name\": " << v.name() << ", "
       << "\"formattables\": " << v.formattables() << ", "
       << "\"project_items\": " << v.project_items() << ", "
-      << "\"aspect_properties\": " << v.aspect_properties()
+      << "\"aspect_properties\": " << v.aspect_properties() << ", "
+      << "\"assistant_properties\": " << v.assistant_properties()
       << " }";
     return(s);
 }

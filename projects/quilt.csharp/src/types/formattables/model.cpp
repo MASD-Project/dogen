@@ -29,11 +29,13 @@ model::model(
     const dogen::yarn::name& name,
     const std::unordered_map<std::string, dogen::quilt::csharp::formattables::formattable>& formattables,
     const std::list<std::string>& project_items,
-    const std::unordered_map<std::string, dogen::quilt::csharp::formattables::aspect_properties>& aspect_properties)
+    const std::unordered_map<std::string, dogen::quilt::csharp::formattables::aspect_properties>& aspect_properties,
+    const std::unordered_map<std::string, dogen::quilt::csharp::formattables::assistant_properties>& assistant_properties)
     : name_(name),
       formattables_(formattables),
       project_items_(project_items),
-      aspect_properties_(aspect_properties) { }
+      aspect_properties_(aspect_properties),
+      assistant_properties_(assistant_properties) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
@@ -41,13 +43,15 @@ void model::swap(model& other) noexcept {
     swap(formattables_, other.formattables_);
     swap(project_items_, other.project_items_);
     swap(aspect_properties_, other.aspect_properties_);
+    swap(assistant_properties_, other.assistant_properties_);
 }
 
 bool model::operator==(const model& rhs) const {
     return name_ == rhs.name_ &&
         formattables_ == rhs.formattables_ &&
         project_items_ == rhs.project_items_ &&
-        aspect_properties_ == rhs.aspect_properties_;
+        aspect_properties_ == rhs.aspect_properties_ &&
+        assistant_properties_ == rhs.assistant_properties_;
 }
 
 model& model::operator=(model other) {
@@ -118,6 +122,22 @@ void model::aspect_properties(const std::unordered_map<std::string, dogen::quilt
 
 void model::aspect_properties(const std::unordered_map<std::string, dogen::quilt::csharp::formattables::aspect_properties>&& v) {
     aspect_properties_ = std::move(v);
+}
+
+const std::unordered_map<std::string, dogen::quilt::csharp::formattables::assistant_properties>& model::assistant_properties() const {
+    return assistant_properties_;
+}
+
+std::unordered_map<std::string, dogen::quilt::csharp::formattables::assistant_properties>& model::assistant_properties() {
+    return assistant_properties_;
+}
+
+void model::assistant_properties(const std::unordered_map<std::string, dogen::quilt::csharp::formattables::assistant_properties>& v) {
+    assistant_properties_ = v;
+}
+
+void model::assistant_properties(const std::unordered_map<std::string, dogen::quilt::csharp::formattables::assistant_properties>&& v) {
+    assistant_properties_ = std::move(v);
 }
 
 } } } }

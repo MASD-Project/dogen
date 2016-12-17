@@ -23,6 +23,7 @@
 #include "dogen/quilt.csharp/test_data/formattables/model_td.hpp"
 #include "dogen/quilt.csharp/test_data/formattables/formattable_td.hpp"
 #include "dogen/quilt.csharp/test_data/formattables/aspect_properties_td.hpp"
+#include "dogen/quilt.csharp/test_data/formattables/assistant_properties_td.hpp"
 
 namespace {
 
@@ -71,6 +72,19 @@ std::unordered_map<std::string, dogen::quilt::csharp::formattables::aspect_prope
     return r;
 }
 
+dogen::quilt::csharp::formattables::assistant_properties
+create_dogen_quilt_csharp_formattables_assistant_properties(const unsigned int position) {
+    return dogen::quilt::csharp::formattables::assistant_properties_generator::create(position);
+}
+
+std::unordered_map<std::string, dogen::quilt::csharp::formattables::assistant_properties> create_std_unordered_map_std_string_dogen_quilt_csharp_formattables_assistant_properties(unsigned int position) {
+    std::unordered_map<std::string, dogen::quilt::csharp::formattables::assistant_properties> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_quilt_csharp_formattables_assistant_properties(position + i)));
+    }
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -86,6 +100,7 @@ populate(const unsigned int position, result_type& v) {
     v.formattables(create_std_unordered_map_std_string_dogen_quilt_csharp_formattables_formattable(position + 1));
     v.project_items(create_std_list_std_string(position + 2));
     v.aspect_properties(create_std_unordered_map_std_string_dogen_quilt_csharp_formattables_aspect_properties(position + 3));
+    v.assistant_properties(create_std_unordered_map_std_string_dogen_quilt_csharp_formattables_assistant_properties(position + 4));
 }
 
 model_generator::result_type

@@ -32,6 +32,7 @@
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/quilt.csharp/types/formattables/formattable.hpp"
 #include "dogen/quilt.csharp/types/formattables/aspect_properties.hpp"
+#include "dogen/quilt.csharp/types/formattables/assistant_properties.hpp"
 #include "dogen/quilt.csharp/serialization/formattables/model_fwd_ser.hpp"
 
 namespace dogen {
@@ -51,7 +52,8 @@ public:
         const dogen::yarn::name& name,
         const std::unordered_map<std::string, dogen::quilt::csharp::formattables::formattable>& formattables,
         const std::list<std::string>& project_items,
-        const std::unordered_map<std::string, dogen::quilt::csharp::formattables::aspect_properties>& aspect_properties);
+        const std::unordered_map<std::string, dogen::quilt::csharp::formattables::aspect_properties>& aspect_properties,
+        const std::unordered_map<std::string, dogen::quilt::csharp::formattables::assistant_properties>& assistant_properties);
 
 private:
     template<typename Archive>
@@ -81,6 +83,11 @@ public:
     void aspect_properties(const std::unordered_map<std::string, dogen::quilt::csharp::formattables::aspect_properties>& v);
     void aspect_properties(const std::unordered_map<std::string, dogen::quilt::csharp::formattables::aspect_properties>&& v);
 
+    const std::unordered_map<std::string, dogen::quilt::csharp::formattables::assistant_properties>& assistant_properties() const;
+    std::unordered_map<std::string, dogen::quilt::csharp::formattables::assistant_properties>& assistant_properties();
+    void assistant_properties(const std::unordered_map<std::string, dogen::quilt::csharp::formattables::assistant_properties>& v);
+    void assistant_properties(const std::unordered_map<std::string, dogen::quilt::csharp::formattables::assistant_properties>&& v);
+
 public:
     bool operator==(const model& rhs) const;
     bool operator!=(const model& rhs) const {
@@ -96,6 +103,7 @@ private:
     std::unordered_map<std::string, dogen::quilt::csharp::formattables::formattable> formattables_;
     std::list<std::string> project_items_;
     std::unordered_map<std::string, dogen::quilt::csharp::formattables::aspect_properties> aspect_properties_;
+    std::unordered_map<std::string, dogen::quilt::csharp::formattables::assistant_properties> assistant_properties_;
 };
 
 } } } }
