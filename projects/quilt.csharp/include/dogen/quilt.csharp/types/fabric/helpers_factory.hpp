@@ -25,7 +25,9 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <boost/shared_ptr.hpp>
+#include "dogen/yarn/types/element.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -34,18 +36,7 @@ namespace fabric {
 
 class helpers_factory final {
 public:
-    helpers_factory() = default;
-    helpers_factory(const helpers_factory&) = default;
-    helpers_factory(helpers_factory&&) = default;
-    ~helpers_factory() = default;
-    helpers_factory& operator=(const helpers_factory&) = default;
-
-public:
-    bool operator==(const helpers_factory& rhs) const;
-    bool operator!=(const helpers_factory& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    std::list<boost::shared_ptr<yarn::element>> make() const;
 };
 
 } } } }

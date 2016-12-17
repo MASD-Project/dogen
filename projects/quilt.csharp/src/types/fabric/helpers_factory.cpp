@@ -18,6 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/make_shared.hpp>
+#include "dogen/quilt.csharp/types/fabric/dump_helper.hpp"
+#include "dogen/quilt.csharp/types/fabric/generator_helper.hpp"
 #include "dogen/quilt.csharp/types/fabric/helpers_factory.hpp"
 
 namespace dogen {
@@ -25,8 +28,13 @@ namespace quilt {
 namespace csharp {
 namespace fabric {
 
-bool helpers_factory::operator==(const helpers_factory& /*rhs*/) const {
-    return true;
+std::list<boost::shared_ptr<yarn::element>> helpers_factory::make() const {
+    std::list<boost::shared_ptr<yarn::element>> r;
+
+    r.push_back(boost::make_shared<dump_helper>());
+    r.push_back(boost::make_shared<generator_helper>());
+
+    return r;
 }
 
 } } } }
