@@ -388,6 +388,7 @@ We developed a number of C++ "canned tests" for all model elements. We
 need to port them across to C#.
 
 *** STARTED Update C# stitch templates to match code                  :story:
+    CLOCK: [2016-12-17 Sat 14:15]--[2016-12-17 Sat 14:23] =>  0:08
     CLOCK: [2016-12-17 Sat 14:02]--[2016-12-17 Sat 14:14] =>  0:12
     CLOCK: [2016-12-17 Sat 13:41]--[2016-12-17 Sat 14:01] =>  0:20
     CLOCK: [2016-12-17 Sat 12:11]--[2016-12-17 Sat 12:19] =>  0:08
