@@ -25,13 +25,10 @@ class_formatter::format(const context& ctx, const yarn::element& e) const {
         // const auto qn(a.get_qualified_name(e.name()));
         auto sbf(a.make_scoped_boilerplate_formatter());
         {
-            if (!o.local_attributes().empty()) {
 #>
 using System;
 
 <#+
-            }
-
             const auto ns(a.make_namespaces(e.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
             a.comment(e.documentation(), 1/*indent*/);
@@ -59,9 +56,11 @@ using System;
         #endregion
 
 <#+
-               /*
-                * Equals
-                */
+            }
+
+            /*
+             * Equals
+             */
 #>
         #region Equality
         public override bool Equals(object obj)
@@ -71,6 +70,13 @@ using System;
             if (obj.GetType() != GetType()) return false;
 
             var value = obj as <#= sn #>;
+<#+
+            if (o.local_attributes().empty()) {
+#>
+            return value != null;
+<#+
+            } else {
+#>
             if (value == null) return false;
 
             return
@@ -97,6 +103,7 @@ using System;
                     }
                     sf.next();
                 }
+            }
 #>
         }
 
@@ -115,6 +122,13 @@ using System;
 
         public override int GetHashCode()
         {
+<#+
+            if (o.local_attributes().empty()) {
+#>
+            return 0;
+<#+
+            } else {
+#>
             unchecked
             {
                 // Choose large primes to avoid hashing collisions
@@ -134,16 +148,15 @@ using System;
                     (!<#= a.reference_equals(attr) #>.ReferenceEquals(null, <#= attr.name().simple() #>) ? <#= attr.name().simple() #>.GetHashCode() : 0);
 <#+
                     }
-                    sf.next();
                 }
 #>
                 return hash;
             }
-        }
-        #endregion
 <#+
             }
 #>
+        }
+        #endregion
     }
 <#+
         } // snf

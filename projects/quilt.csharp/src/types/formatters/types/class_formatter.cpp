@@ -76,11 +76,8 @@ class_formatter::format(const context& ctx, const yarn::element& e) const {
         // const auto qn(a.get_qualified_name(e.name()));
         auto sbf(a.make_scoped_boilerplate_formatter());
         {
-            if (!o.local_attributes().empty()) {
 a.stream() << "using System;" << std::endl;
 a.stream() << std::endl;
-            }
-
             const auto ns(a.make_namespaces(e.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
             a.comment(e.documentation(), 1/*indent*/);
@@ -100,9 +97,11 @@ a.stream() << "        public " << a.get_qualified_name(attr.parsed_type()) << "
                 }
 a.stream() << "        #endregion" << std::endl;
 a.stream() << std::endl;
-               /*
-                * Equals
-                */
+            }
+
+            /*
+             * Equals
+             */
 a.stream() << "        #region Equality" << std::endl;
 a.stream() << "        public override bool Equals(object obj)" << std::endl;
 a.stream() << "        {" << std::endl;
@@ -111,6 +110,9 @@ a.stream() << "            if (ReferenceEquals(this, obj)) return true;" << std:
 a.stream() << "            if (obj.GetType() != GetType()) return false;" << std::endl;
 a.stream() << std::endl;
 a.stream() << "            var value = obj as " << sn << ";" << std::endl;
+            if (o.local_attributes().empty()) {
+a.stream() << "            return value != null;" << std::endl;
+            } else {
 a.stream() << "            if (value == null) return false;" << std::endl;
 a.stream() << std::endl;
 a.stream() << "            return" << std::endl;
@@ -130,6 +132,7 @@ a.stream() << "                " << attr.name().simple() << ".Equals(value." << 
                     }
                     sf.next();
                 }
+            }
 a.stream() << "        }" << std::endl;
 a.stream() << std::endl;
 a.stream() << "        public static bool operator ==(" << sn << " lhs, " << sn << " rhs)" << std::endl;
@@ -147,6 +150,9 @@ a.stream() << "        }" << std::endl;
 a.stream() << std::endl;
 a.stream() << "        public override int GetHashCode()" << std::endl;
 a.stream() << "        {" << std::endl;
+            if (o.local_attributes().empty()) {
+a.stream() << "            return 0;" << std::endl;
+            } else {
 a.stream() << "            unchecked" << std::endl;
 a.stream() << "            {" << std::endl;
 a.stream() << "                // Choose large primes to avoid hashing collisions" << std::endl;
@@ -161,13 +167,12 @@ a.stream() << "                hash = (hash * HashingMultiplier) ^ " << attr.nam
 a.stream() << "                hash = (hash * HashingMultiplier) ^" << std::endl;
 a.stream() << "                    (!" << a.reference_equals(attr) << ".ReferenceEquals(null, " << attr.name().simple() << ") ? " << attr.name().simple() << ".GetHashCode() : 0);" << std::endl;
                     }
-                    sf.next();
                 }
 a.stream() << "                return hash;" << std::endl;
 a.stream() << "            }" << std::endl;
+            }
 a.stream() << "        }" << std::endl;
 a.stream() << "        #endregion" << std::endl;
-            }
 a.stream() << "    }" << std::endl;
         } // snf
     } // sbf
