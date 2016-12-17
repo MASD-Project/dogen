@@ -44,5 +44,21 @@
     "template_kind": "instance",
     "scope": "root_module",
     "default_value": ""
+  },
+  {
+    "name": {
+      "simple": "postfix",
+      "qualified": "quilt.csharp.test_data.generator_helper.postfix"
+    },
+    "archetype_location": {
+      "family": "quilt",
+      "kernel": "quilt.csharp",
+      "facet": "quilt.csharp.test_data",
+      "archetype": "quilt.csharp.generator_helper.class"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": ""
   }
 ]
