@@ -30,10 +30,10 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dumpers\ComplexBuiltins.cs" />
-    <Compile Include="Dumpers\NoProperties.cs" />
-    <Compile Include="Dumpers\OneProperty.cs" />
-    <Compile Include="Dumpers\PrimitiveBuiltins.cs" />
+    <Compile Include="Dumpers\ComplexBuiltinsDumper.cs" />
+    <Compile Include="Dumpers\NoPropertiesDumper.cs" />
+    <Compile Include="Dumpers\OnePropertyDumper.cs" />
+    <Compile Include="Dumpers\PrimitiveBuiltinsDumper.cs" />
     <Compile Include="SequenceGenerators\ComplexBuiltinsSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\NoPropertiesSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\OnePropertySequenceGenerator.cs" />

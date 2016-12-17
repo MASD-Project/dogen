@@ -43,7 +43,7 @@
     "value_type": "text",
     "template_kind": "instance",
     "scope": "root_module",
-    "default_value": ""
+    "default_value": "Dumper"
   },
   {
     "name": {
