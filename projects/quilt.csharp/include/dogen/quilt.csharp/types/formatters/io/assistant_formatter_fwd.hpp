@@ -18,25 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CSHARP_IO_FABRIC_GENERATOR_HELPER_IO_HPP
-#define DOGEN_QUILT_CSHARP_IO_FABRIC_GENERATOR_HELPER_IO_HPP
+#ifndef DOGEN_QUILT_CSHARP_TYPES_FORMATTERS_IO_ASSISTANT_FORMATTER_FWD_HPP
+#define DOGEN_QUILT_CSHARP_TYPES_FORMATTERS_IO_ASSISTANT_FORMATTER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/quilt.csharp/types/fabric/generator_helper.hpp"
-
 namespace dogen {
 namespace quilt {
 namespace csharp {
-namespace fabric {
+namespace formatters {
+namespace io {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::quilt::csharp::fabric::generator_helper& v);
+class assistant_formatter;
 
-} } } }
+} } } } }
 
 #endif

@@ -18,38 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/test_data/element_td.hpp"
-#include "dogen/quilt.csharp/test_data/fabric/dump_helper_td.hpp"
+#include "dogen/yarn/hash/element_hash.hpp"
+#include "dogen/quilt.csharp/hash/fabric/assistant_hash.hpp"
+
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value) {
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+}
 
 namespace dogen {
 namespace quilt {
 namespace csharp {
 namespace fabric {
 
-dump_helper_generator::dump_helper_generator() : position_(0) { }
+std::size_t assistant_hasher::hash(const assistant& v) {
+    std::size_t seed(0);
 
-void dump_helper_generator::
-populate(const unsigned int position, result_type& v) {
-    dogen::yarn::element_generator::populate(position, v);
-}
-
-dump_helper_generator::result_type
-dump_helper_generator::create(const unsigned int position) {
-    dump_helper r;
-    dump_helper_generator::populate(position, r);
-    return r;
-}
-
-dump_helper_generator::result_type*
-dump_helper_generator::create_ptr(const unsigned int position) {
-    dump_helper* p = new dump_helper();
-    dump_helper_generator::populate(position, *p);
-    return p;
-}
-
-dump_helper_generator::result_type
-dump_helper_generator::operator()() {
-    return create(position_++);
+    combine(seed, dynamic_cast<const dogen::yarn::element&>(v));
+    return seed;
 }
 
 } } } }

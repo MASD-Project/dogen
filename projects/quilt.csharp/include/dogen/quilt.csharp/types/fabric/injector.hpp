@@ -51,7 +51,7 @@ private:
     void inject_visual_studio(const annotations::type_repository& atrp,
         const annotations::annotation& ra, yarn::intermediate_model& im) const;
     void inject_assembly_info(yarn::intermediate_model& im) const;
-    void inject_helpers(yarn::intermediate_model& im) const;
+    void inject_assistant(yarn::intermediate_model& im) const;
 
 public:
     std::string id() const override;

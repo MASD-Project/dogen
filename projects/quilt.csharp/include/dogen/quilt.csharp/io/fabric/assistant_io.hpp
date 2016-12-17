@@ -18,37 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CSHARP_SERIALIZATION_FABRIC_DUMP_HELPER_SER_HPP
-#define DOGEN_QUILT_CSHARP_SERIALIZATION_FABRIC_DUMP_HELPER_SER_HPP
+#ifndef DOGEN_QUILT_CSHARP_IO_FABRIC_ASSISTANT_IO_HPP
+#define DOGEN_QUILT_CSHARP_IO_FABRIC_ASSISTANT_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/split_free.hpp>
-#include <boost/type_traits/is_virtual_base_of.hpp>
-#include "dogen/quilt.csharp/types/fabric/dump_helper.hpp"
+#include <iosfwd>
+#include "dogen/quilt.csharp/types/fabric/assistant.hpp"
 
-namespace boost {
+namespace dogen {
+namespace quilt {
+namespace csharp {
+namespace fabric {
 
-template<>struct
-is_virtual_base_of<
-    dogen::yarn::element,
-    dogen::quilt::csharp::fabric::dump_helper
-> : public mpl::true_ {};
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::quilt::csharp::fabric::assistant& v);
 
-}
-
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::quilt::csharp::fabric::dump_helper)
-namespace boost {
-namespace serialization {
-
-template<typename Archive>
-void save(Archive& ar, const dogen::quilt::csharp::fabric::dump_helper& v, unsigned int version);
-
-template<typename Archive>
-void load(Archive& ar, dogen::quilt::csharp::fabric::dump_helper& v, unsigned int version);
-
-} }
+} } } }
 
 #endif

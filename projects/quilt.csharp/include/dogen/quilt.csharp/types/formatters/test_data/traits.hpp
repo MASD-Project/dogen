@@ -45,9 +45,9 @@ struct traits final {
     static std::string class_archetype();
 
     /**
-     * @brief Name of the sequence generator helper archetype.
+     * @brief Name of the assistant archetype.
      */
-    static std::string generator_helper_archetype();
+    static std::string assistant_archetype();
 };
 
 } } } } }

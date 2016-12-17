@@ -31,9 +31,8 @@
 #include "dogen/formatters/serialization/registrar_ser.hpp"
 #include "dogen/annotations/serialization/registrar_ser.hpp"
 #include "dogen/quilt.csharp/serialization/registrar_ser.hpp"
-#include "dogen/quilt.csharp/serialization/fabric/dump_helper_ser.hpp"
+#include "dogen/quilt.csharp/serialization/fabric/assistant_ser.hpp"
 #include "dogen/quilt.csharp/serialization/fabric/assembly_info_ser.hpp"
-#include "dogen/quilt.csharp/serialization/fabric/generator_helper_ser.hpp"
 #include "dogen/quilt.csharp/serialization/fabric/visual_studio_project_ser.hpp"
 #include "dogen/quilt.csharp/serialization/fabric/visual_studio_solution_ser.hpp"
 
@@ -49,8 +48,7 @@ void register_types(Archive& ar) {
     dogen::annotations::register_types(ar);
 
     ar.template register_type<dogen::quilt::csharp::fabric::assembly_info>();
-    ar.template register_type<dogen::quilt::csharp::fabric::dump_helper>();
-    ar.template register_type<dogen::quilt::csharp::fabric::generator_helper>();
+    ar.template register_type<dogen::quilt::csharp::fabric::assistant>();
     ar.template register_type<dogen::quilt::csharp::fabric::visual_studio_project>();
     ar.template register_type<dogen::quilt::csharp::fabric::visual_studio_solution>();
 }

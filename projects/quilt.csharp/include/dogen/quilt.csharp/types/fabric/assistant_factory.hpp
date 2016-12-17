@@ -18,37 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CSHARP_HASH_FABRIC_GENERATOR_HELPER_HASH_HPP
-#define DOGEN_QUILT_CSHARP_HASH_FABRIC_GENERATOR_HELPER_HASH_HPP
+#ifndef DOGEN_QUILT_CSHARP_TYPES_FABRIC_ASSISTANT_FACTORY_HPP
+#define DOGEN_QUILT_CSHARP_TYPES_FABRIC_ASSISTANT_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/quilt.csharp/types/fabric/generator_helper.hpp"
+#include <list>
+#include <boost/shared_ptr.hpp>
+#include "dogen/yarn/types/element.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace csharp {
 namespace fabric {
 
-struct generator_helper_hasher {
+class assistant_factory final {
 public:
-    static std::size_t hash(const generator_helper& v);
+    std::list<boost::shared_ptr<yarn::element>> make() const;
 };
 
 } } } }
 
-namespace std {
-
-template<>
-struct hash<dogen::quilt::csharp::fabric::generator_helper> {
-public:
-    size_t operator()(const dogen::quilt::csharp::fabric::generator_helper& v) const {
-        return dogen::quilt::csharp::fabric::generator_helper_hasher::hash(v);
-    }
-};
-
-}
 #endif

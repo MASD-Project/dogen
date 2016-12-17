@@ -28,10 +28,10 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/yarn/serialization/element_ser.hpp"
-#include "dogen/quilt.csharp/serialization/fabric/dump_helper_ser.hpp"
+#include "dogen/quilt.csharp/serialization/fabric/assistant_ser.hpp"
 
 BOOST_CLASS_TRACKING(
-    dogen::quilt::csharp::fabric::dump_helper,
+    dogen::quilt::csharp::fabric::assistant,
     boost::serialization::track_selectively)
 
 namespace boost {
@@ -39,14 +39,14 @@ namespace serialization {
 
 template<typename Archive>
 void save(Archive& ar,
-    const dogen::quilt::csharp::fabric::dump_helper& v,
+    const dogen::quilt::csharp::fabric::assistant& v,
     const unsigned int /*version*/) {
     ar << make_nvp("element", base_object<dogen::yarn::element>(v));
 }
 
 template<typename Archive>
 void load(Archive& ar,
-    dogen::quilt::csharp::fabric::dump_helper& v,
+    dogen::quilt::csharp::fabric::assistant& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("element", base_object<dogen::yarn::element>(v));
 }
@@ -56,16 +56,16 @@ void load(Archive& ar,
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const dogen::quilt::csharp::fabric::dump_helper& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, dogen::quilt::csharp::fabric::dump_helper& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const dogen::quilt::csharp::fabric::assistant& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, dogen::quilt::csharp::fabric::assistant& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const dogen::quilt::csharp::fabric::dump_helper& v, unsigned int version);
-template void load(archive::text_iarchive& ar, dogen::quilt::csharp::fabric::dump_helper& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const dogen::quilt::csharp::fabric::assistant& v, unsigned int version);
+template void load(archive::text_iarchive& ar, dogen::quilt::csharp::fabric::assistant& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const dogen::quilt::csharp::fabric::dump_helper& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, dogen::quilt::csharp::fabric::dump_helper& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const dogen::quilt::csharp::fabric::assistant& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, dogen::quilt::csharp::fabric::assistant& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const dogen::quilt::csharp::fabric::dump_helper& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, dogen::quilt::csharp::fabric::dump_helper& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const dogen::quilt::csharp::fabric::assistant& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, dogen::quilt::csharp::fabric::assistant& v, unsigned int version);
 
 } }

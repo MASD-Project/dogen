@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CSHARP_TYPES_FABRIC_DUMP_HELPER_HPP
-#define DOGEN_QUILT_CSHARP_TYPES_FABRIC_DUMP_HELPER_HPP
+#ifndef DOGEN_QUILT_CSHARP_TYPES_FABRIC_ASSISTANT_HPP
+#define DOGEN_QUILT_CSHARP_TYPES_FABRIC_ASSISTANT_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,23 +28,23 @@
 #include <iosfwd>
 #include <algorithm>
 #include "dogen/yarn/types/element.hpp"
-#include "dogen/quilt.csharp/serialization/fabric/dump_helper_fwd_ser.hpp"
+#include "dogen/quilt.csharp/serialization/fabric/assistant_fwd_ser.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace csharp {
 namespace fabric {
 
-class dump_helper final : public dogen::yarn::element {
+class assistant final : public dogen::yarn::element {
 public:
-    dump_helper() = default;
-    dump_helper(const dump_helper&) = default;
-    dump_helper(dump_helper&&) = default;
+    assistant() = default;
+    assistant(const assistant&) = default;
+    assistant(assistant&&) = default;
 
-    virtual ~dump_helper() noexcept { }
+    virtual ~assistant() noexcept { }
 
 public:
-    dump_helper(
+    assistant(
         const std::string& documentation,
         const dogen::annotations::annotation& annotation,
         const dogen::yarn::name& name,
@@ -56,10 +56,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::quilt::csharp::fabric::dump_helper& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::quilt::csharp::fabric::assistant& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::quilt::csharp::fabric::dump_helper& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::quilt::csharp::fabric::assistant& v, unsigned int version);
 
 public:
     using dogen::yarn::element::accept;
@@ -72,8 +72,8 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
-    bool operator==(const dump_helper& rhs) const;
-    bool operator!=(const dump_helper& rhs) const {
+    bool operator==(const assistant& rhs) const;
+    bool operator!=(const assistant& rhs) const {
         return !this->operator==(rhs);
     }
 
@@ -81,8 +81,8 @@ public:
     bool equals(const dogen::yarn::element& other) const override;
 
 public:
-    void swap(dump_helper& other) noexcept;
-    dump_helper& operator=(dump_helper other);
+    void swap(assistant& other) noexcept;
+    assistant& operator=(assistant other);
 
 };
 
@@ -92,8 +92,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::quilt::csharp::fabric::dump_helper& lhs,
-    dogen::quilt::csharp::fabric::dump_helper& rhs) {
+    dogen::quilt::csharp::fabric::assistant& lhs,
+    dogen::quilt::csharp::fabric::assistant& rhs) {
     lhs.swap(rhs);
 }
 

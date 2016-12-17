@@ -48,13 +48,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "quilt.csharp.test_data.generator_helper.postfix"
+      "qualified": "quilt.csharp.test_data.assistant.postfix"
     },
     "archetype_location": {
       "family": "quilt",
       "kernel": "quilt.csharp",
       "facet": "quilt.csharp.test_data",
-      "archetype": "quilt.csharp.generator_helper.class"
+      "archetype": "quilt.csharp.assistant.class"
     },
     "value_type": "text",
     "template_kind": "instance",

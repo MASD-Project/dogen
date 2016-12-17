@@ -46,9 +46,9 @@ public:
     static std::string class_archetype();
 
     /**
-     * @brief Name of the dump helper archetype.
+     * @brief Name of the assistant archetype.
      */
-    static std::string dump_helper_archetype();
+    static std::string assistant_archetype();
 };
 
 } } } } }

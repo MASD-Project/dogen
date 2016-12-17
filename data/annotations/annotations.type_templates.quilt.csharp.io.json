@@ -64,13 +64,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "quilt.csharp.io.dump_helper.postfix"
+      "qualified": "quilt.csharp.io.assistant.postfix"
     },
     "archetype_location": {
       "family": "quilt",
       "kernel": "quilt.csharp",
       "facet": "quilt.csharp.io",
-      "archetype": "quilt.csharp.io.dump_helper"
+      "archetype": "quilt.csharp.io.assistant"
     },
     "value_type": "text",
     "template_kind": "instance",

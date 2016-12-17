@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include "dogen/yarn/io/element_io.hpp"
-#include "dogen/quilt.csharp/types/fabric/dump_helper.hpp"
+#include "dogen/quilt.csharp/types/fabric/assistant.hpp"
 #include "dogen/quilt.csharp/types/fabric/element_visitor.hpp"
 
 namespace dogen {
@@ -28,7 +28,7 @@ namespace quilt {
 namespace csharp {
 namespace fabric {
 
-dump_helper::dump_helper(
+assistant::assistant(
     const std::string& documentation,
     const dogen::annotations::annotation& annotation,
     const dogen::yarn::name& name,
@@ -47,28 +47,28 @@ dump_helper::dump_helper(
       stereotypes,
       is_element_extension) { }
 
-void dump_helper::accept(const dogen::yarn::element_visitor& v) const {
+void assistant::accept(const dogen::yarn::element_visitor& v) const {
     typedef const element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
         dv->visit(*this);
 }
 
-void dump_helper::accept(dogen::yarn::element_visitor& v) const {
+void assistant::accept(dogen::yarn::element_visitor& v) const {
     typedef element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
         dv->visit(*this);
     }
 
-void dump_helper::accept(const dogen::yarn::element_visitor& v) {
+void assistant::accept(const dogen::yarn::element_visitor& v) {
     typedef const element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
         dv->visit(*this);
 }
 
-void dump_helper::accept(dogen::yarn::element_visitor& v) {
+void assistant::accept(dogen::yarn::element_visitor& v) {
     typedef element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
@@ -76,30 +76,30 @@ void dump_helper::accept(dogen::yarn::element_visitor& v) {
 }
 
 
-void dump_helper::to_stream(std::ostream& s) const {
+void assistant::to_stream(std::ostream& s) const {
     s << " { "
-      << "\"__type__\": " << "\"dogen::quilt::csharp::fabric::dump_helper\"" << ", "
+      << "\"__type__\": " << "\"dogen::quilt::csharp::fabric::assistant\"" << ", "
       << "\"__parent_0__\": ";
     element::to_stream(s);
     s << " }";
 }
 
-void dump_helper::swap(dump_helper& other) noexcept {
+void assistant::swap(assistant& other) noexcept {
     element::swap(other);
 
 }
 
-bool dump_helper::equals(const dogen::yarn::element& other) const {
-    const dump_helper* const p(dynamic_cast<const dump_helper* const>(&other));
+bool assistant::equals(const dogen::yarn::element& other) const {
+    const assistant* const p(dynamic_cast<const assistant* const>(&other));
     if (!p) return false;
     return *this == *p;
 }
 
-bool dump_helper::operator==(const dump_helper& rhs) const {
+bool assistant::operator==(const assistant& rhs) const {
     return element::compare(rhs);
 }
 
-dump_helper& dump_helper::operator=(dump_helper other) {
+assistant& assistant::operator=(assistant other) {
     using std::swap;
     swap(*this, other);
     return *this;

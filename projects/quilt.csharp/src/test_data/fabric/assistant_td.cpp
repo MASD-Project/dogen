@@ -18,23 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/make_shared.hpp>
-#include "dogen/quilt.csharp/types/fabric/dump_helper.hpp"
-#include "dogen/quilt.csharp/types/fabric/generator_helper.hpp"
-#include "dogen/quilt.csharp/types/fabric/helpers_factory.hpp"
+#include "dogen/yarn/test_data/element_td.hpp"
+#include "dogen/quilt.csharp/test_data/fabric/assistant_td.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace csharp {
 namespace fabric {
 
-std::list<boost::shared_ptr<yarn::element>> helpers_factory::make() const {
-    std::list<boost::shared_ptr<yarn::element>> r;
+assistant_generator::assistant_generator() : position_(0) { }
 
-    r.push_back(boost::make_shared<dump_helper>());
-    r.push_back(boost::make_shared<generator_helper>());
+void assistant_generator::
+populate(const unsigned int position, result_type& v) {
+    dogen::yarn::element_generator::populate(position, v);
+}
 
+assistant_generator::result_type
+assistant_generator::create(const unsigned int position) {
+    assistant r;
+    assistant_generator::populate(position, r);
     return r;
+}
+
+assistant_generator::result_type*
+assistant_generator::create_ptr(const unsigned int position) {
+    assistant* p = new assistant();
+    assistant_generator::populate(position, *p);
+    return p;
+}
+
+assistant_generator::result_type
+assistant_generator::operator()() {
+    return create(position_++);
 }
 
 } } } }

@@ -18,20 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CSHARP_TYPES_FABRIC_DUMP_HELPER_FWD_HPP
-#define DOGEN_QUILT_CSHARP_TYPES_FABRIC_DUMP_HELPER_FWD_HPP
+#ifndef DOGEN_QUILT_CSHARP_SERIALIZATION_FABRIC_ASSISTANT_FWD_SER_HPP
+#define DOGEN_QUILT_CSHARP_SERIALIZATION_FABRIC_ASSISTANT_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen {
-namespace quilt {
-namespace csharp {
-namespace fabric {
+#include "dogen/quilt.csharp/types/fabric/assistant_fwd.hpp"
 
-class dump_helper;
+namespace boost {
+namespace serialization {
 
-} } } }
+template<class Archive>
+void save(Archive& ar, const dogen::quilt::csharp::fabric::assistant& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, dogen::quilt::csharp::fabric::assistant& v, unsigned int version);
+
+} }
 
 #endif

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CSHARP_TYPES_FORMATTERS_TEST_DATA_GENERATOR_HELPER_FORMATTER_HPP
-#define DOGEN_QUILT_CSHARP_TYPES_FORMATTERS_TEST_DATA_GENERATOR_HELPER_FORMATTER_HPP
+#ifndef DOGEN_QUILT_CSHARP_TYPES_FORMATTERS_TEST_DATA_ASSISTANT_FORMATTER_HPP
+#define DOGEN_QUILT_CSHARP_TYPES_FORMATTERS_TEST_DATA_ASSISTANT_FORMATTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -34,7 +34,7 @@ namespace csharp {
 namespace formatters {
 namespace test_data {
 
-class generator_helper_formatter final : public artefact_formatter_interface {
+class assistant_formatter final : public artefact_formatter_interface {
 public:
     static std::string static_artefact();
 

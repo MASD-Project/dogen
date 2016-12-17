@@ -18,24 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CSHARP_SERIALIZATION_FABRIC_DUMP_HELPER_FWD_SER_HPP
-#define DOGEN_QUILT_CSHARP_SERIALIZATION_FABRIC_DUMP_HELPER_FWD_SER_HPP
+#ifndef DOGEN_QUILT_CSHARP_HASH_FABRIC_ASSISTANT_HASH_HPP
+#define DOGEN_QUILT_CSHARP_HASH_FABRIC_ASSISTANT_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/quilt.csharp/types/fabric/dump_helper_fwd.hpp"
+#include <functional>
+#include "dogen/quilt.csharp/types/fabric/assistant.hpp"
 
-namespace boost {
-namespace serialization {
+namespace dogen {
+namespace quilt {
+namespace csharp {
+namespace fabric {
 
-template<class Archive>
-void save(Archive& ar, const dogen::quilt::csharp::fabric::dump_helper& v, unsigned int version);
+struct assistant_hasher {
+public:
+    static std::size_t hash(const assistant& v);
+};
 
-template<class Archive>
-void load(Archive& ar, dogen::quilt::csharp::fabric::dump_helper& v, unsigned int version);
+} } } }
 
-} }
+namespace std {
 
+template<>
+struct hash<dogen::quilt::csharp::fabric::assistant> {
+public:
+    size_t operator()(const dogen::quilt::csharp::fabric::assistant& v) const {
+        return dogen::quilt::csharp::fabric::assistant_hasher::hash(v);
+    }
+};
+
+}
 #endif

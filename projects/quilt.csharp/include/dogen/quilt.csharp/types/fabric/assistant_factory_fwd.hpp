@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CSHARP_TYPES_FORMATTERS_IO_DUMP_HELPER_FORMATTER_FWD_HPP
-#define DOGEN_QUILT_CSHARP_TYPES_FORMATTERS_IO_DUMP_HELPER_FORMATTER_FWD_HPP
+#ifndef DOGEN_QUILT_CSHARP_TYPES_FABRIC_ASSISTANT_FACTORY_FWD_HPP
+#define DOGEN_QUILT_CSHARP_TYPES_FABRIC_ASSISTANT_FACTORY_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,11 +28,10 @@
 namespace dogen {
 namespace quilt {
 namespace csharp {
-namespace formatters {
-namespace io {
+namespace fabric {
 
-class dump_helper_formatter;
+class assistant_factory;
 
-} } } } }
+} } } }
 
 #endif

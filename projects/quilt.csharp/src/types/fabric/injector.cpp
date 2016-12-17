@@ -25,7 +25,7 @@
 #include "dogen/yarn/types/injection_error.hpp"
 #include "dogen/quilt.csharp/types/fabric/assembly_info_factory.hpp"
 #include "dogen/quilt.csharp/types/fabric/visual_studio_factory.hpp"
-#include "dogen/quilt.csharp/types/fabric/helpers_factory.hpp"
+#include "dogen/quilt.csharp/types/fabric/assistant_factory.hpp"
 #include "dogen/quilt.csharp/types/fabric/injector.hpp"
 
 namespace {
@@ -81,8 +81,8 @@ void injector::inject_assembly_info(yarn::intermediate_model& im) const {
     add_element(e, im);
 }
 
-void injector::inject_helpers(yarn::intermediate_model& im) const {
-    helpers_factory f;
+void injector::inject_assistant(yarn::intermediate_model& im) const {
+    assistant_factory f;
     const auto e(f.make());
     add_elements(e, im);
 }

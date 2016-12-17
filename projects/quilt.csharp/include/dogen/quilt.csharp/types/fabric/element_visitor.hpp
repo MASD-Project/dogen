@@ -26,9 +26,8 @@
 #endif
 
 #include "dogen/yarn/types/element_visitor.hpp"
-#include "dogen/quilt.csharp/types/fabric/dump_helper_fwd.hpp"
+#include "dogen/quilt.csharp/types/fabric/assistant_fwd.hpp"
 #include "dogen/quilt.csharp/types/fabric/assembly_info_fwd.hpp"
-#include "dogen/quilt.csharp/types/fabric/generator_helper_fwd.hpp"
 #include "dogen/quilt.csharp/types/fabric/visual_studio_project_fwd.hpp"
 #include "dogen/quilt.csharp/types/fabric/visual_studio_solution_fwd.hpp"
 
@@ -58,23 +57,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Accept visits for type dogen::quilt::csharp::fabric::dump_helper
+     * @brief Accept visits for type dogen::quilt::csharp::fabric::assistant
      */
     /**@{*/
-    virtual void visit(const dogen::quilt::csharp::fabric::dump_helper&) const { }
-    virtual void visit(const dogen::quilt::csharp::fabric::dump_helper&) { }
-    virtual void visit(dogen::quilt::csharp::fabric::dump_helper&) const { }
-    virtual void visit(dogen::quilt::csharp::fabric::dump_helper&) { }
-    /**@}*/
-
-    /**
-     * @brief Accept visits for type dogen::quilt::csharp::fabric::generator_helper
-     */
-    /**@{*/
-    virtual void visit(const dogen::quilt::csharp::fabric::generator_helper&) const { }
-    virtual void visit(const dogen::quilt::csharp::fabric::generator_helper&) { }
-    virtual void visit(dogen::quilt::csharp::fabric::generator_helper&) const { }
-    virtual void visit(dogen::quilt::csharp::fabric::generator_helper&) { }
+    virtual void visit(const dogen::quilt::csharp::fabric::assistant&) const { }
+    virtual void visit(const dogen::quilt::csharp::fabric::assistant&) { }
+    virtual void visit(dogen::quilt::csharp::fabric::assistant&) const { }
+    virtual void visit(dogen::quilt::csharp::fabric::assistant&) { }
     /**@}*/
 
     /**

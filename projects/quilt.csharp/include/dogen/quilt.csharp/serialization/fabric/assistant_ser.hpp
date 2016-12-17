@@ -18,29 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/hash/element_hash.hpp"
-#include "dogen/quilt.csharp/hash/fabric/dump_helper_hash.hpp"
+#ifndef DOGEN_QUILT_CSHARP_SERIALIZATION_FABRIC_ASSISTANT_SER_HPP
+#define DOGEN_QUILT_CSHARP_SERIALIZATION_FABRIC_ASSISTANT_SER_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value) {
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+#include <boost/serialization/split_free.hpp>
+#include <boost/type_traits/is_virtual_base_of.hpp>
+#include "dogen/quilt.csharp/types/fabric/assistant.hpp"
+
+namespace boost {
+
+template<>struct
+is_virtual_base_of<
+    dogen::yarn::element,
+    dogen::quilt::csharp::fabric::assistant
+> : public mpl::true_ {};
+
 }
 
-}
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::quilt::csharp::fabric::assistant)
+namespace boost {
+namespace serialization {
 
-namespace dogen {
-namespace quilt {
-namespace csharp {
-namespace fabric {
+template<typename Archive>
+void save(Archive& ar, const dogen::quilt::csharp::fabric::assistant& v, unsigned int version);
 
-std::size_t dump_helper_hasher::hash(const dump_helper& v) {
-    std::size_t seed(0);
+template<typename Archive>
+void load(Archive& ar, dogen::quilt::csharp::fabric::assistant& v, unsigned int version);
 
-    combine(seed, dynamic_cast<const dogen::yarn::element&>(v));
-    return seed;
-}
+} }
 
-} } } }
+#endif

@@ -18,21 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CSHARP_TYPES_FORMATTERS_TEST_DATA_GENERATOR_HELPER_FORMATTER_FWD_HPP
-#define DOGEN_QUILT_CSHARP_TYPES_FORMATTERS_TEST_DATA_GENERATOR_HELPER_FORMATTER_FWD_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+#include <boost/make_shared.hpp>
+#include "dogen/quilt.csharp/types/fabric/assistant.hpp"
+#include "dogen/quilt.csharp/types/fabric/assistant_factory.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace csharp {
-namespace formatters {
-namespace test_data {
+namespace fabric {
 
-class generator_helper_formatter;
+std::list<boost::shared_ptr<yarn::element>> assistant_factory::make() const {
+    std::list<boost::shared_ptr<yarn::element>> r;
 
-} } } } }
+    r.push_back(boost::make_shared<assistant>());
 
-#endif
+    return r;
+}
+
+} } } }

@@ -37,8 +37,8 @@ std::string traits::class_archetype() {
     return r;
 }
 
-std::string traits::generator_helper_archetype() {
-    static std::string r(traits::facet() + ".generator_helper");
+std::string traits::assistant_archetype() {
+    static std::string r(traits::facet() + ".assistant");
     return r;
 }
 

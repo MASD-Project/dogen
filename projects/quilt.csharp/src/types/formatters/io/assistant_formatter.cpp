@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.csharp/types/formatters/io/dump_helper_formatter.hpp"
-#include "dogen/quilt.csharp/types/fabric/dump_helper.hpp"
+#include "dogen/quilt.csharp/types/formatters/io/assistant_formatter.hpp"
+#include "dogen/quilt.csharp/types/fabric/assistant.hpp"
 #include "dogen/quilt.csharp/types/formatters/assistant.hpp"
 #include "dogen/quilt.csharp/types/formatters/io/traits.hpp"
 #include "dogen/quilt.csharp/types/traits.hpp"
@@ -33,41 +33,41 @@ namespace csharp {
 namespace formatters {
 namespace io {
 
-std::string dump_helper_formatter::static_artefact() {
-    return traits::dump_helper_archetype();
+std::string assistant_formatter::static_artefact() {
+    return traits::assistant_archetype();
 }
 
-std::string dump_helper_formatter::formatter_name() const {
+std::string assistant_formatter::formatter_name() const {
     static auto r(archetype_location().archetype());
     return r;
 }
 
-annotations::archetype_location dump_helper_formatter::archetype_location() const {
+annotations::archetype_location assistant_formatter::archetype_location() const {
     static annotations::archetype_location
         r(csharp::traits::family(), csharp::traits::kernel(),
           traits::facet(),
-          dump_helper_formatter::static_artefact());
+          assistant_formatter::static_artefact());
     return r;
 }
 
-std::type_index dump_helper_formatter::element_type_index() const {
-    static auto r(std::type_index(typeid(fabric::dump_helper)));
+std::type_index assistant_formatter::element_type_index() const {
+    static auto r(std::type_index(typeid(fabric::assistant)));
     return r;
 }
 
-boost::filesystem::path dump_helper_formatter::
+boost::filesystem::path assistant_formatter::
 full_path(const formattables::locator& l, const yarn::name& n) const {
     return l.make_full_path(n, static_artefact());
 }
 
-std::list<std::string> dump_helper_formatter::
+std::list<std::string> assistant_formatter::
 inclusion_dependencies(const yarn::element& /*e*/) const {
     std::list<std::string> r;
     return r;
 }
 
 dogen::formatters::artefact
-dump_helper_formatter::format(const context& ctx, const yarn::element& e) const {
+assistant_formatter::format(const context& ctx, const yarn::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), id);
     {
