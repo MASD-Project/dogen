@@ -36,14 +36,14 @@ class_formatter::format(const context& ctx, const yarn::element& e) const {
     /// </summary>
     public static class <#= sn #>Dumper
     {
-        static void Dump(DumpHelper helper, <#= sn #> value)
+        static void Dump(AssistantDumper assistant, <#= sn #> value)
         {
-            helper.IncrementDepth();
-            if (helper.MaximumDepthExceeded())
+            assistant.IncrementDepth();
+            if (assistant.MaximumDepthExceeded())
                 return;
 
-            helper.AddStartObject();
-            helper.AddType("<#= qn #>"<#= (no_parent_and_no_attributes ? "" : ", true/*withSeparator*/") #>);
+            assistant.AddStartObject();
+            assistant.AddType("<#= qn #>"<#= (no_parent_and_no_attributes ? "" : ", true/*withSeparator*/") #>);
 <#+
                 dogen::formatters::sequence_formatter sf(o.local_attributes().size());
                 sf.element_separator("");
@@ -52,21 +52,21 @@ class_formatter::format(const context& ctx, const yarn::element& e) const {
 
                 for (const auto& attr : o.local_attributes()) {
 #>
-            helper.Add("<#= attr.name().simple() #>", value.<#= attr.name().simple() #><#= sf.postfix() #>);
+            assistant.Add("<#= attr.name().simple() #>", value.<#= attr.name().simple() #><#= sf.postfix() #>);
 <#+
                     sf.next();
                 }
 #>
-            helper.AddEndObject();
+            assistant.AddEndObject();
 
-            helper.DecrementDepth();
+            assistant.DecrementDepth();
         }
 
         public static string Dump(<#= sn #> value)
         {
-            var helper = new DumpHelper();
-            Dump(helper, value);
-            return helper.Dump();
+            var assistant = new AssistantDumper();
+            Dump(assistant, value);
+            return assistant.Dump();
         }
     }
 <#+
