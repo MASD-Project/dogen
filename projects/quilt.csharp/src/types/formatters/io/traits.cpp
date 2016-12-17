@@ -37,4 +37,9 @@ std::string traits::class_archetype() {
     return r;
 }
 
+std::string traits::dump_helper_archetype() {
+    static std::string r(traits::facet() + ".dump_helper");
+    return r;
+}
+
 } } } } }

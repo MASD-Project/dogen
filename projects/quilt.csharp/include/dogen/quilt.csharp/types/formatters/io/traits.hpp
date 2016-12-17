@@ -44,6 +44,11 @@ public:
      * @brief Name of the class header archetype.
      */
     static std::string class_archetype();
+
+    /**
+     * @brief Name of the dump helper archetype.
+     */
+    static std::string dump_helper_archetype();
 };
 
 } } } } }

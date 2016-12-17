@@ -43,6 +43,11 @@ struct traits final {
      * @brief Name of the class header archetype.
      */
     static std::string class_archetype();
+
+    /**
+     * @brief Name of the sequence generator helper archetype.
+     */
+    static std::string generator_helper_archetype();
 };
 
 } } } } }
