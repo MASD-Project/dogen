@@ -1,4 +1,4 @@
-﻿// -*- mode: csharp; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+// -*- mode: csharp; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
 //
 // Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
 //
@@ -102,4 +102,3 @@ namespace Dogen.TestModels.CSharpModel
         }
     }
 }
-

@@ -88,7 +88,7 @@ a.stream() << "    public static class " << sn << "Dumper" << std::endl;
 a.stream() << "    {" << std::endl;
 a.stream() << "        static void Dump(AssistantDumper assistant, " << sn << " value)" << std::endl;
 a.stream() << "        {" << std::endl;
-a.stream() << "            helper.IncrementDepth();" << std::endl;
+a.stream() << "            assistant.IncrementDepth();" << std::endl;
 a.stream() << "            if (assistant.MaximumDepthExceeded())" << std::endl;
 a.stream() << "                return;" << std::endl;
 a.stream() << std::endl;

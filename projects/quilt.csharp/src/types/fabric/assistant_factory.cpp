@@ -41,6 +41,7 @@ assistant_factory::make(const yarn::intermediate_model& im) const {
 
     auto r(boost::make_shared<assistant>());
     r->name(n);
+    r->origin_type(im.origin_type());
 
     return r;
 }
