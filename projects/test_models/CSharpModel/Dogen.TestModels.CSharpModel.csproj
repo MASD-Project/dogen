@@ -30,10 +30,12 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dumpers\Assistant.cs" />
     <Compile Include="Dumpers\ComplexBuiltinsDumper.cs" />
     <Compile Include="Dumpers\NoPropertiesDumper.cs" />
     <Compile Include="Dumpers\OnePropertyDumper.cs" />
     <Compile Include="Dumpers\PrimitiveBuiltinsDumper.cs" />
+    <Compile Include="SequenceGenerators\AssistantSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\ComplexBuiltinsSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\NoPropertiesSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\OnePropertySequenceGenerator.cs" />
@@ -42,8 +44,6 @@
     <Compile Include="Types\NoProperties.cs" />
     <Compile Include="Types\OneProperty.cs" />
     <Compile Include="Types\PrimitiveBuiltins.cs" />
-    <Compile Include="SequenceGenerators\AssistantSequenceGenerator.cs" />
-    <Compile Include="Dumpers\AssistantDumper.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
