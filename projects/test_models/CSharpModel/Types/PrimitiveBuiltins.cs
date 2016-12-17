@@ -148,7 +148,7 @@ namespace Dogen.TestModels.CSharpModel
                 hash = (hash * HashingMultiplier) ^ DecimalProperty.GetHashCode();
                 return hash;
             }
-       }
-       #endregion
+        }
+        #endregion
     }
 }

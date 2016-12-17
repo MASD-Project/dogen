@@ -84,7 +84,7 @@ a.stream() << std::endl;
             const auto ns(a.make_namespaces(e.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
             a.comment(e.documentation(), 1/*indent*/);
-a.stream() << "    public static class " << sn << std::endl;
+a.stream() << "    public class " << sn << std::endl;
 a.stream() << "    {" << std::endl;
             if (!o.local_attributes().empty()) {
                 if (!ctx.element_properties().helper_properties().empty())
@@ -137,10 +137,7 @@ a.stream() << "        {" << std::endl;
 a.stream() << "            if (Object.ReferenceEquals(lhs, rhs))" << std::endl;
 a.stream() << "                return true;" << std::endl;
 a.stream() << std::endl;
-a.stream() << "            if(Object.ReferenceEquals(null, lhs))" << std::endl;
-a.stream() << "                return false;" << std::endl;
-a.stream() << std::endl;
-a.stream() << "            return lhs.Equals(rhs);" << std::endl;
+a.stream() << "            return !Object.ReferenceEquals(null, lhs) && lhs.Equals(rhs);" << std::endl;
 a.stream() << "        }" << std::endl;
 a.stream() << std::endl;
 a.stream() << "        public static bool operator !=(" << sn << " lhs, " << sn << " rhs)" << std::endl;
@@ -168,8 +165,8 @@ a.stream() << "                    (!" << a.reference_equals(attr) << ".Referenc
                 }
 a.stream() << "                return hash;" << std::endl;
 a.stream() << "            }" << std::endl;
-a.stream() << "       }" << std::endl;
-a.stream() << "       #endregion" << std::endl;
+a.stream() << "        }" << std::endl;
+a.stream() << "        #endregion" << std::endl;
             }
 a.stream() << "    }" << std::endl;
         } // snf

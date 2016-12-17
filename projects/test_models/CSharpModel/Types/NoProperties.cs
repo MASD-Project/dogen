@@ -56,6 +56,5 @@ namespace Dogen.TestModels.CSharpModel
             return 0;
         }
         #endregion
-
     }
 }

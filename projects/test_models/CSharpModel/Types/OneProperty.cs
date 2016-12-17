@@ -72,7 +72,7 @@ namespace Dogen.TestModels.CSharpModel
                 hash = (hash * HashingMultiplier) ^ Property.GetHashCode();
                 return hash;
             }
-       }
-       #endregion
+        }
+        #endregion
     }
 }

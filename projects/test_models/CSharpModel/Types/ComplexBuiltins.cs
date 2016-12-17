@@ -66,16 +66,17 @@ namespace Dogen.TestModels.CSharpModel
 
         public override int GetHashCode()
         {
-            unchecked {
+            unchecked
+            {
                 // Choose large primes to avoid hashing collisions
-                const int HashingBase = (int)2166136261;
+                const int HashingBase = (int) 2166136261;
                 const int HashingMultiplier = 16777619;
 
                 int hash = HashingBase;
                 hash = (hash * HashingMultiplier) ^
-                (!object.ReferenceEquals(null, ObjectProperty) ? ObjectProperty.GetHashCode() : 0);
+                    (!object.ReferenceEquals(null, ObjectProperty) ? ObjectProperty.GetHashCode() : 0);
                 hash = (hash * HashingMultiplier) ^
-                (!object.ReferenceEquals(null, StringProperty) ? StringProperty.GetHashCode() : 0);
+                    (!object.ReferenceEquals(null, StringProperty) ? StringProperty.GetHashCode() : 0);
                 return hash;
             }
         }
