@@ -22,6 +22,7 @@
 #include "dogen/quilt.csharp/types/formattables/transformer.hpp"
 #include "dogen/quilt.csharp/types/formattables/model_expander.hpp"
 #include "dogen/quilt.csharp/types/formattables/workflow.hpp"
+#include "dogen/quilt.csharp/io/formattables/model_io.hpp"
 
 namespace {
 
@@ -68,6 +69,8 @@ model workflow::execute(
     const auto rkd(enable_kernel_directories);
     const locator l(odp, atrp, frp, ra, m.name(), m.module_ids(), rkd);
     expand_model(atrp, ra, dpf, frp, l, r);
+
+    BOOST_LOG_SEV(lg, trace) << "Formattables model: " << r;
 
     return r;
 }

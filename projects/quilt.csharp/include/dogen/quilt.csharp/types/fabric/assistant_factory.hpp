@@ -28,6 +28,7 @@
 #include <list>
 #include <boost/shared_ptr.hpp>
 #include "dogen/yarn/types/element.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -36,7 +37,8 @@ namespace fabric {
 
 class assistant_factory final {
 public:
-    std::list<boost::shared_ptr<yarn::element>> make() const;
+    boost::shared_ptr<yarn::element>
+    make(const yarn::intermediate_model& im) const;
 };
 
 } } } }

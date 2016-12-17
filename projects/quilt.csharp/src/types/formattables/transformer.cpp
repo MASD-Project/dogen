@@ -79,7 +79,7 @@ transform(const formatters::repository& frp, const yarn::model& m) const {
             const auto arch(fmt->archetype_location().archetype());
             art_props[arch] = artefact_properties();
 
-            BOOST_LOG_SEV(lg, trace) << "Added formatter: " << arch
+            BOOST_LOG_SEV(lg, debug) << "Added formatter: " << arch
                                      << " to element: " << id;
         }
 

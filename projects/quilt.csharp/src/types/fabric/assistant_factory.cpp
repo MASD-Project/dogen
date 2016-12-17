@@ -19,18 +19,28 @@
  *
  */
 #include <boost/make_shared.hpp>
+#include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/quilt.csharp/types/fabric/assistant.hpp"
 #include "dogen/quilt.csharp/types/fabric/assistant_factory.hpp"
+
+namespace {
+
+const std::string assistant_name("Assistant");
+
+}
 
 namespace dogen {
 namespace quilt {
 namespace csharp {
 namespace fabric {
 
-std::list<boost::shared_ptr<yarn::element>> assistant_factory::make() const {
-    std::list<boost::shared_ptr<yarn::element>> r;
+boost::shared_ptr<yarn::element>
+assistant_factory::make(const yarn::intermediate_model& im) const {
+    yarn::name_factory nf;
+    const auto n(nf.build_element_in_model(im.name(), assistant_name));
 
-    r.push_back(boost::make_shared<assistant>());
+    auto r(boost::make_shared<assistant>());
+    r->name(n);
 
     return r;
 }

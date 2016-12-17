@@ -83,8 +83,8 @@ void injector::inject_assembly_info(yarn::intermediate_model& im) const {
 
 void injector::inject_assistant(yarn::intermediate_model& im) const {
     assistant_factory f;
-    const auto e(f.make());
-    add_elements(e, im);
+    const auto e(f.make(im));
+    add_element(e, im);
 }
 
 void injector::inject(const annotations::type_repository& atrp,
@@ -92,6 +92,7 @@ void injector::inject(const annotations::type_repository& atrp,
     yarn::intermediate_model& im) const {
     inject_visual_studio(atrp, ra, im);
     inject_assembly_info(im);
+    inject_assistant(im);
 }
 
 } } } }
