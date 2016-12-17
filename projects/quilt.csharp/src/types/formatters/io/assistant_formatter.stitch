@@ -230,7 +230,6 @@ using System.Text;
             return _stringBuilder.ToString();
         }
     }
-}
 <#+
         }
     } // sbf

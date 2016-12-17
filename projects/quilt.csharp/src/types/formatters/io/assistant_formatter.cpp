@@ -278,7 +278,6 @@ a.stream() << "        {" << std::endl;
 a.stream() << "            return _stringBuilder.ToString();" << std::endl;
 a.stream() << "        }" << std::endl;
 a.stream() << "    }" << std::endl;
-a.stream() << "}" << std::endl;
         }
     } // sbf
     return a.make_artefact();
