@@ -50,17 +50,10 @@ std::unordered_map<std::string, dogen::quilt::csharp::formattables::formattable>
     return r;
 }
 
-boost::filesystem::path
-create_boost_filesystem_path(const unsigned int position) {
-    std::ostringstream s;
-    s << "/a/path/number_" << position;
-    return boost::filesystem::path(s.str());
-}
-
-std::list<boost::filesystem::path> create_std_list_boost_filesystem_path(unsigned int position) {
-    std::list<boost::filesystem::path> r;
+std::list<std::string> create_std_list_std_string(unsigned int position) {
+    std::list<std::string> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_boost_filesystem_path(position + i));
+        r.push_back(create_std_string(position + i));
     }
     return r;
 }
@@ -91,7 +84,7 @@ void model_generator::
 populate(const unsigned int position, result_type& v) {
     v.name(create_dogen_yarn_name(position + 0));
     v.formattables(create_std_unordered_map_std_string_dogen_quilt_csharp_formattables_formattable(position + 1));
-    v.project_items(create_std_list_boost_filesystem_path(position + 2));
+    v.project_items(create_std_list_std_string(position + 2));
     v.aspect_properties(create_std_unordered_map_std_string_dogen_quilt_csharp_formattables_aspect_properties(position + 3));
 }
 

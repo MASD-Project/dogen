@@ -28,7 +28,7 @@ namespace formattables {
 model::model(
     const dogen::yarn::name& name,
     const std::unordered_map<std::string, dogen::quilt::csharp::formattables::formattable>& formattables,
-    const std::list<boost::filesystem::path>& project_items,
+    const std::list<std::string>& project_items,
     const std::unordered_map<std::string, dogen::quilt::csharp::formattables::aspect_properties>& aspect_properties)
     : name_(name),
       formattables_(formattables),
@@ -88,19 +88,19 @@ void model::formattables(const std::unordered_map<std::string, dogen::quilt::csh
     formattables_ = std::move(v);
 }
 
-const std::list<boost::filesystem::path>& model::project_items() const {
+const std::list<std::string>& model::project_items() const {
     return project_items_;
 }
 
-std::list<boost::filesystem::path>& model::project_items() {
+std::list<std::string>& model::project_items() {
     return project_items_;
 }
 
-void model::project_items(const std::list<boost::filesystem::path>& v) {
+void model::project_items(const std::list<std::string>& v) {
     project_items_ = v;
 }
 
-void model::project_items(const std::list<boost::filesystem::path>&& v) {
+void model::project_items(const std::list<std::string>&& v) {
     project_items_ = std::move(v);
 }
 

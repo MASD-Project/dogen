@@ -52,11 +52,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<boost::filesystem::path>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
-        s << "\"" << (*i).generic_string() << "\"";
+        s << "\"" << tidy_up_string(*i) << "\"";
     }
     s << "] ";
     return s;

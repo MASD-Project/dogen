@@ -30,34 +30,10 @@
 #include <boost/serialization/unordered_map.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/utility/serialization/path.hpp"
 #include "dogen/yarn/serialization/name_ser.hpp"
 #include "dogen/quilt.csharp/serialization/formattables/model_ser.hpp"
 #include "dogen/quilt.csharp/serialization/formattables/formattable_ser.hpp"
 #include "dogen/quilt.csharp/serialization/formattables/aspect_properties_ser.hpp"
-
-namespace boost {
-namespace serialization {
-
-template<typename Archive>
-inline void save(Archive& ar,
-    const boost::filesystem::path& p,
-    const unsigned int /*version*/) {
-    std::string s;
-    s = p.generic_string();
-    ar & boost::serialization::make_nvp("path", s);
-}
-
-template<typename Archive>
-inline void load(Archive& ar,
-    boost::filesystem::path& p,
-    const unsigned int /*version*/) {
-    std::string s;
-    ar & boost::serialization::make_nvp("path", s);
-    p = s;
-}
-
-} }
 
 namespace boost {
 namespace serialization {

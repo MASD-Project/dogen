@@ -86,7 +86,7 @@ visual_studio_project_formatter::format(const context& ctx, const yarn::element&
 <#+
     for (const auto& f : ctx.model().project_items())
 #>
-    <Compile Include="<#= f.generic_string() #>" />
+    <Compile Include="<#= f #>" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

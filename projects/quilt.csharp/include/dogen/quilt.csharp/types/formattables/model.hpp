@@ -29,7 +29,6 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include <boost/filesystem/path.hpp>
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/quilt.csharp/types/formattables/formattable.hpp"
 #include "dogen/quilt.csharp/types/formattables/aspect_properties.hpp"
@@ -51,7 +50,7 @@ public:
     model(
         const dogen::yarn::name& name,
         const std::unordered_map<std::string, dogen::quilt::csharp::formattables::formattable>& formattables,
-        const std::list<boost::filesystem::path>& project_items,
+        const std::list<std::string>& project_items,
         const std::unordered_map<std::string, dogen::quilt::csharp::formattables::aspect_properties>& aspect_properties);
 
 private:
@@ -72,10 +71,10 @@ public:
     void formattables(const std::unordered_map<std::string, dogen::quilt::csharp::formattables::formattable>& v);
     void formattables(const std::unordered_map<std::string, dogen::quilt::csharp::formattables::formattable>&& v);
 
-    const std::list<boost::filesystem::path>& project_items() const;
-    std::list<boost::filesystem::path>& project_items();
-    void project_items(const std::list<boost::filesystem::path>& v);
-    void project_items(const std::list<boost::filesystem::path>&& v);
+    const std::list<std::string>& project_items() const;
+    std::list<std::string>& project_items();
+    void project_items(const std::list<std::string>& v);
+    void project_items(const std::list<std::string>&& v);
 
     const std::unordered_map<std::string, dogen::quilt::csharp::formattables::aspect_properties>& aspect_properties() const;
     std::unordered_map<std::string, dogen::quilt::csharp::formattables::aspect_properties>& aspect_properties();
@@ -95,7 +94,7 @@ public:
 private:
     dogen::yarn::name name_;
     std::unordered_map<std::string, dogen::quilt::csharp::formattables::formattable> formattables_;
-    std::list<boost::filesystem::path> project_items_;
+    std::list<std::string> project_items_;
     std::unordered_map<std::string, dogen::quilt::csharp::formattables::aspect_properties> aspect_properties_;
 };
 

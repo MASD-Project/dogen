@@ -19,6 +19,7 @@
  *
  */
 #include <set>
+#include <algorithm>
 #include"dogen/yarn/types/object.hpp"
 #include"dogen/yarn/types/visitor.hpp"
 #include"dogen/yarn/types/primitive.hpp"
@@ -41,7 +42,7 @@ bool project_items_expander::is_project_item(const std::type_index& ti) const {
 }
 
 void project_items_expander::expand(model& fm) const {
-    std::set<boost::filesystem::path> set;
+    std::set<std::string> set;
     for (const auto& pair : fm.formattables()) {
         const auto& formattable(pair.second);
         const auto& e(*formattable.element());
@@ -53,7 +54,14 @@ void project_items_expander::expand(model& fm) const {
         const auto& eprops(formattable.element_properties());
         for (const auto& art_pair : eprops.artefact_properties()) {
             const auto art_props(art_pair.second);
-            set.insert(art_props.relative_path());
+
+            /*
+             * Ensure the item path uses backslashes for compatibility
+             * with Visual Studio and MonoDevelop.
+             */
+            auto rp(art_props.relative_path().generic_string());
+            std::replace(rp.begin(), rp.end(), '/', '\\');
+            set.insert(rp);
         }
     }
 
