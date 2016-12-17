@@ -24,26 +24,26 @@ namespace Dogen.TestModels.CSharpModel
     /// </summary>
     public static class ComplexBuiltinsDumper
     {
-        static void Dump(DumpHelper helper, ComplexBuiltins value)
+        static void Dump(AssistantDumper assistant, ComplexBuiltins value)
         {
-            helper.IncrementDepth();
-            if (helper.MaximumDepthExceeded())
+            assistant.IncrementDepth();
+            if (assistant.MaximumDepthExceeded())
                 return;
 
-            helper.AddStartObject();
-            helper.AddType("Dogen.TestModels.CSharpModel.ComplexBuiltins", true/*withSeparator*/);
-            helper.Add("ObjectProperty", value.ObjectProperty, true/*withSeparator*/);
-            helper.Add("StringProperty", value.StringProperty);
-            helper.AddEndObject();
+            assistant.AddStartObject();
+            assistant.AddType("Dogen.TestModels.CSharpModel.ComplexBuiltins", true/*withSeparator*/);
+            assistant.Add("ObjectProperty", value.ObjectProperty, true/*withSeparator*/);
+            assistant.Add("StringProperty", value.StringProperty);
+            assistant.AddEndObject();
 
-            helper.DecrementDepth();
+            assistant.DecrementDepth();
         }
 
         public static string Dump(ComplexBuiltins value)
         {
-            var helper = new DumpHelper();
-            Dump(helper, value);
-            return helper.Dump();
+            var assistant = new AssistantDumper();
+            Dump(assistant, value);
+            return assistant.Dump();
         }
     }
 }

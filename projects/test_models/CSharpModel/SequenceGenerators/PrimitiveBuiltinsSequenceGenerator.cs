@@ -32,21 +32,21 @@ namespace Dogen.TestModels.CSharpModel
         {
             var result = new PrimitiveBuiltins();
 
-            result.ByteProperty = GeneratorHelper.CreateByte(position + 0);
-            result.ShortByteProperty = GeneratorHelper.CreateShortByte(position + 1);
-            result.IntProperty = GeneratorHelper.CreateInt(position + 2);
-            result.UIntProperty = GeneratorHelper.CreateUInt(position + 3);
-            result.ShortProperty = GeneratorHelper.CreateShort(position + 4);
-            result.UShortProperty = GeneratorHelper.CreateUShort(position + 5);
-            result.LongProperty = GeneratorHelper.CreateLong(position + 6);
-            result.ULongProperty = GeneratorHelper.CreateULong(position + 7);
-            result.FloatPropertyOne = GeneratorHelper.CreateFloat(position + 8);
-            result.FloatPropertyTwo = GeneratorHelper.CreateFloat(position + 9);
-            result.DoublePropertyOne = GeneratorHelper.CreateDouble(position + 10);
-            result.DoublePropertyTwo = GeneratorHelper.CreateDouble(position + 11);
-            result.CharProperty = GeneratorHelper.CreateChar(position + 12);
-            result.BoolProperty = GeneratorHelper.CreateBool(position + 13);
-            result.DecimalProperty = GeneratorHelper.CreateDecimal(position + 14);
+            result.ByteProperty = AssistantSequenceGenerator.CreateByte(position + 0);
+            result.ShortByteProperty = AssistantSequenceGenerator.CreateShortByte(position + 1);
+            result.IntProperty = AssistantSequenceGenerator.CreateInt(position + 2);
+            result.UIntProperty = AssistantSequenceGenerator.CreateUInt(position + 3);
+            result.ShortProperty = AssistantSequenceGenerator.CreateShort(position + 4);
+            result.UShortProperty = AssistantSequenceGenerator.CreateUShort(position + 5);
+            result.LongProperty = AssistantSequenceGenerator.CreateLong(position + 6);
+            result.ULongProperty = AssistantSequenceGenerator.CreateULong(position + 7);
+            result.FloatPropertyOne = AssistantSequenceGenerator.CreateFloat(position + 8);
+            result.FloatPropertyTwo = AssistantSequenceGenerator.CreateFloat(position + 9);
+            result.DoublePropertyOne = AssistantSequenceGenerator.CreateDouble(position + 10);
+            result.DoublePropertyTwo = AssistantSequenceGenerator.CreateDouble(position + 11);
+            result.CharProperty = AssistantSequenceGenerator.CreateChar(position + 12);
+            result.BoolProperty = AssistantSequenceGenerator.CreateBool(position + 13);
+            result.DecimalProperty = AssistantSequenceGenerator.CreateDecimal(position + 14);
 
             return result;
         }

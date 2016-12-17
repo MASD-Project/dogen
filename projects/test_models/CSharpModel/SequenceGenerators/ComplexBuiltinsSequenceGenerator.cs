@@ -32,8 +32,8 @@ namespace Dogen.TestModels.CSharpModel
         {
             var result = new ComplexBuiltins();
 
-            result.ObjectProperty = GeneratorHelper.CreateObject(position + 0);
-            result.StringProperty = GeneratorHelper.CreateString(position + 1);
+            result.ObjectProperty = AssistantSequenceGenerator.CreateObject(position + 0);
+            result.StringProperty = AssistantSequenceGenerator.CreateString(position + 1);
 
             return result;
         }

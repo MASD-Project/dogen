@@ -24,39 +24,39 @@ namespace Dogen.TestModels.CSharpModel
     /// </summary>
     public static class PrimitiveBuiltinsDumper
     {
-        static void Dump(DumpHelper helper, PrimitiveBuiltins value)
+        static void Dump(AssistantDumper assistant, PrimitiveBuiltins value)
         {
-            helper.IncrementDepth();
-            if (helper.MaximumDepthExceeded())
+            assistant.IncrementDepth();
+            if (assistant.MaximumDepthExceeded())
                 return;
 
-            helper.AddStartObject();
-            helper.AddType("Dogen.TestModels.CSharpModel.PrimitiveBuiltins", true/*withSeparator*/);
-            helper.Add("ByteProperty", value.ByteProperty, true/*withSeparator*/);
-            helper.Add("ShortByteProperty", value.ShortByteProperty, true/*withSeparator*/);
-            helper.Add("IntProperty", value.IntProperty, true/*withSeparator*/);
-            helper.Add("UIntProperty", value.UIntProperty, true/*withSeparator*/);
-            helper.Add("ShortProperty", value.ShortProperty, true/*withSeparator*/);
-            helper.Add("UShortProperty", value.UShortProperty, true/*withSeparator*/);
-            helper.Add("LongProperty", value.LongProperty, true/*withSeparator*/);
-            helper.Add("ULongProperty", value.ULongProperty, true/*withSeparator*/);
-            helper.Add("FloatPropertyOne", value.FloatPropertyOne, true/*withSeparator*/);
-            helper.Add("FloatPropertyTwo", value.FloatPropertyTwo, true/*withSeparator*/);
-            helper.Add("DoublePropertyOne", value.DoublePropertyOne, true/*withSeparator*/);
-            helper.Add("DoublePropertyTwo", value.DoublePropertyTwo, true/*withSeparator*/);
-            helper.Add("CharProperty", value.CharProperty, true/*withSeparator*/);
-            helper.Add("BoolProperty", value.BoolProperty, true/*withSeparator*/);
-            helper.Add("DecimalProperty", value.DecimalProperty);
-            helper.AddEndObject();
+            assistant.AddStartObject();
+            assistant.AddType("Dogen.TestModels.CSharpModel.PrimitiveBuiltins", true/*withSeparator*/);
+            assistant.Add("ByteProperty", value.ByteProperty, true/*withSeparator*/);
+            assistant.Add("ShortByteProperty", value.ShortByteProperty, true/*withSeparator*/);
+            assistant.Add("IntProperty", value.IntProperty, true/*withSeparator*/);
+            assistant.Add("UIntProperty", value.UIntProperty, true/*withSeparator*/);
+            assistant.Add("ShortProperty", value.ShortProperty, true/*withSeparator*/);
+            assistant.Add("UShortProperty", value.UShortProperty, true/*withSeparator*/);
+            assistant.Add("LongProperty", value.LongProperty, true/*withSeparator*/);
+            assistant.Add("ULongProperty", value.ULongProperty, true/*withSeparator*/);
+            assistant.Add("FloatPropertyOne", value.FloatPropertyOne, true/*withSeparator*/);
+            assistant.Add("FloatPropertyTwo", value.FloatPropertyTwo, true/*withSeparator*/);
+            assistant.Add("DoublePropertyOne", value.DoublePropertyOne, true/*withSeparator*/);
+            assistant.Add("DoublePropertyTwo", value.DoublePropertyTwo, true/*withSeparator*/);
+            assistant.Add("CharProperty", value.CharProperty, true/*withSeparator*/);
+            assistant.Add("BoolProperty", value.BoolProperty, true/*withSeparator*/);
+            assistant.Add("DecimalProperty", value.DecimalProperty);
+            assistant.AddEndObject();
 
-            helper.DecrementDepth();
+            assistant.DecrementDepth();
         }
 
         public static string Dump(PrimitiveBuiltins value)
         {
-            var helper = new DumpHelper();
-            Dump(helper, value);
-            return helper.Dump();
+            var assistant = new AssistantDumper();
+            Dump(assistant, value);
+            return assistant.Dump();
         }
     }
 }

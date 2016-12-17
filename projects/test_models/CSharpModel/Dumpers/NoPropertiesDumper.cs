@@ -24,24 +24,24 @@ namespace Dogen.TestModels.CSharpModel
     /// </summary>
     public static class NoPropertiesDumper
     {
-        static void Dump(DumpHelper helper, NoProperties value)
+        static void Dump(AssistantDumper assistant, NoProperties value)
         {
-            helper.IncrementDepth();
-            if (helper.MaximumDepthExceeded())
+            assistant.IncrementDepth();
+            if (assistant.MaximumDepthExceeded())
                 return;
 
-            helper.AddStartObject();
-            helper.AddType("Dogen.TestModels.CSharpModel.NoProperties");
-            helper.AddEndObject();
+            assistant.AddStartObject();
+            assistant.AddType("Dogen.TestModels.CSharpModel.NoProperties");
+            assistant.AddEndObject();
 
-            helper.DecrementDepth();
+            assistant.DecrementDepth();
         }
 
         public static string Dump(NoProperties value)
         {
-            var helper = new DumpHelper();
-            Dump(helper, value);
-            return helper.Dump();
+            var assistant = new AssistantDumper();
+            Dump(assistant, value);
+            return assistant.Dump();
         }
     }
 }

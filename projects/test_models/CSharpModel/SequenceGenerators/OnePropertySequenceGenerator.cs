@@ -32,7 +32,7 @@ namespace Dogen.TestModels.CSharpModel
         {
             var result = new OneProperty();
 
-            result.Property = GeneratorHelper.CreateInt(position + 0);
+            result.Property = AssistantSequenceGenerator.CreateInt(position + 0);
 
             return result;
         }

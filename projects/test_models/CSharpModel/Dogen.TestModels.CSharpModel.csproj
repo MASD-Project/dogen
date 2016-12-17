@@ -42,8 +42,8 @@
     <Compile Include="Types\NoProperties.cs" />
     <Compile Include="Types\OneProperty.cs" />
     <Compile Include="Types\PrimitiveBuiltins.cs" />
-    <Compile Include="Dumpers\DumpHelper.cs" />
-    <Compile Include="SequenceGenerators\GeneratorHelper.cs" />
+    <Compile Include="Dumpers\AssistantDumper.cs" />
+    <Compile Include="SequenceGenerators\AssistantSequenceGenerator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

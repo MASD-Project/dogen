@@ -24,7 +24,7 @@ namespace Dogen.TestModels.CSharpModel
     /// <summary>
     /// Provides helper methods for the sequence generators.
     /// </summary>
-    static class GeneratorHelper
+    static class AssistantSequenceGenerator
     {
         public static object CreateObject(uint position)
         {

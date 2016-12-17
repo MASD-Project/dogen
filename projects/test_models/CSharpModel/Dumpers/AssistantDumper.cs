@@ -22,7 +22,7 @@ using System.Text;
 
 namespace Dogen.TestModels.CSharpModel
 {
-    class DumpHelper
+    class AssistantDumper
     {
         #region Properties
         private readonly StringBuilder _stringBuilder;
@@ -210,7 +210,7 @@ namespace Dogen.TestModels.CSharpModel
         }
         #endregion
 
-        public DumpHelper()
+        public AssistantDumper()
         {
             _stringBuilder = new StringBuilder();
         }

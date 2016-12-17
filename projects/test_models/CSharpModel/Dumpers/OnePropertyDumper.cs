@@ -24,25 +24,25 @@ namespace Dogen.TestModels.CSharpModel
     /// </summary>
     public static class OnePropertyDumper
     {
-        static void Dump(DumpHelper helper, OneProperty value)
+        static void Dump(AssistantDumper assistant, OneProperty value)
         {
-            helper.IncrementDepth();
-            if (helper.MaximumDepthExceeded())
+            assistant.IncrementDepth();
+            if (assistant.MaximumDepthExceeded())
                 return;
 
-            helper.AddStartObject();
-            helper.AddType("Dogen.TestModels.CSharpModel.OneProperty", true/*withSeparator*/);
-            helper.Add("Property", value.Property);
-            helper.AddEndObject();
+            assistant.AddStartObject();
+            assistant.AddType("Dogen.TestModels.CSharpModel.OneProperty", true/*withSeparator*/);
+            assistant.Add("Property", value.Property);
+            assistant.AddEndObject();
 
-            helper.DecrementDepth();
+            assistant.DecrementDepth();
         }
 
         public static string Dump(OneProperty value)
         {
-            var helper = new DumpHelper();
-            Dump(helper, value);
-            return helper.Dump();
+            var assistant = new AssistantDumper();
+            Dump(assistant, value);
+            return assistant.Dump();
         }
     }
 }
