@@ -31,7 +31,9 @@ namespace Dogen.TestModels.CSharpModel
         static internal OneProperty Create(uint position)
         {
             var result = new OneProperty();
+
             result.Property = GeneratorHelper.CreateInt(position + 0);
+
             return result;
         }
 

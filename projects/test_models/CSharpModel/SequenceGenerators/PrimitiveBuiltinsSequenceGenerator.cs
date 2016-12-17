@@ -26,7 +26,8 @@ namespace Dogen.TestModels.CSharpModel
     /// <summary>
     /// Generates sequences of PrimitiveBuiltins.
     /// </summary>
-    public static class PrimitiveBuiltinsSequenceGenerator {
+    public static class PrimitiveBuiltinsSequenceGenerator
+    {
         static internal PrimitiveBuiltins Create(uint position)
         {
             var result = new PrimitiveBuiltins();

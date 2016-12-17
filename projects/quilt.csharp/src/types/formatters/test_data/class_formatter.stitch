@@ -47,30 +47,131 @@ dogen::formatters::artefact
 class_formatter::format(const context& ctx, const yarn::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), id);
-    // const auto& o(a.as<yarn::object>(static_artefact(), e));
+    const auto& o(a.as<yarn::object>(static_artefact(), e));
     {
         const auto sn(e.name().simple());
         // const auto qn(a.get_qualified_name(e.name()));
         auto sbf(a.make_scoped_boilerplate_formatter());
         {
 #>
+using System;
+using System.Collections;
 using System.Collections.Generic;
 
 <#+
             const auto ns(a.make_namespaces(e.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
+            const bool no_parent_and_no_attributes(!o.parent() &&
+                o.all_attributes().empty());
+
 #>
     /// <summary>
     /// Generates sequences of <#= sn #>.
     /// </summary>
     public static class <#= sn #>SequenceGenerator
     {
-        public static IEnumerable<<#= sn #>> Sequence()
+        static internal <#= sn #> Create(uint position)
         {
-            int _position = 0;
-            var current = new <#= sn #>();
-            yield return current;
-            ++_position;
+            var result = new <#= sn #>();
+<#+
+                if (no_parent_and_no_attributes)
+#>
+            return result;
+<#+
+                else {
+#>
+
+<#+
+                    unsigned int count(0);
+                    for (const auto& attr : o.local_attributes()) {
+#>
+            result.<#= attr.name().simple() #> = GeneratorHelper.Create<#= attr.name().simple() #> (position + <#= count++ #>);
+<#+
+                    }
+#>
+
+            return result;
+<#+
+                }
+#>
+        }
+
+        #region Enumerator
+        private class <#= sn #>Enumerator : IEnumerator, IEnumerator<<#= sn #>>, IDisposable
+        {
+            #region Properties
+            private uint _position;
+            private <#= sn #> _current;
+            #endregion
+
+            private void PopulateCurrent()
+            {
+                _current = <#= sn #>SequenceGenerator.Create(_position);
+            }
+
+            #region IDisposable
+            public void Dispose()
+            {
+            }
+            #endregion
+
+            #region IEnumerator implementation
+            public bool MoveNext()
+            {
+                ++_position;
+                PopulateCurrent();
+                return true;
+            }
+
+            public void Reset()
+            {
+                _position = 0;
+                PopulateCurrent();
+            }
+
+            public object Current {
+                get
+                {
+                    return _current;
+                }
+            }
+
+            <#= sn #> IEnumerator<<#= sn #>>.Current
+            {
+                get
+                {
+                    return _current;
+                }
+            }
+            #endregion
+
+            public <#= sn #>Enumerator()
+            {
+                PopulateCurrent();
+            }
+        }
+        #endregion
+
+        #region Enumerable
+        private class <#= sn #>Enumerable : IEnumerable, IEnumerable<<#= sn #>>
+        {
+            #region IEnumerable implementation
+            public IEnumerator GetEnumerator()
+            {
+                return new <#= sn #>Enumerator();
+            }
+
+            IEnumerator<<#= sn #>> IEnumerable<<#= sn #>>.GetEnumerator()
+            {
+                return new <#= sn #>Enumerator();
+            }
+            #endregion
+        }
+        #endregion
+
+        static public IEnumerable<<#= sn #>> Sequence()
+        {
+            return new <#= sn #>Enumerable();
         }
     }
 <#+
