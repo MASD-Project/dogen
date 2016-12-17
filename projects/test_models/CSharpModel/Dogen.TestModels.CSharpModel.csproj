@@ -30,7 +30,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dumpers\Assistant.cs" />
+    <Compile Include="Dumpers\AssistantDumper.cs" />
     <Compile Include="Dumpers\ComplexBuiltinsDumper.cs" />
     <Compile Include="Dumpers\NoPropertiesDumper.cs" />
     <Compile Include="Dumpers\OnePropertyDumper.cs" />
