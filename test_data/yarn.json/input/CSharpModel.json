@@ -258,6 +258,20 @@
           "documentation": "some comment\n"
         }
       ]
+    },
+    {
+      "name": {
+        "simple_name": "MyException"
+      },
+      "meta_type": "exception",
+      "documentation": "this is an exception\n"
+    },
+    {
+      "name": {
+        "simple_name": "CatastrophicException",
+        "internal_modules": "Package1"
+      },
+      "meta_type": "exception"
     }
   ]
 }

@@ -76,5 +76,21 @@
     "template_kind": "instance",
     "scope": "root_module",
     "default_value": ""
+  },
+  {
+    "name": {
+      "simple": "postfix",
+      "qualified": "quilt.csharp.types.exception.postfix"
+    },
+    "archetype_location": {
+      "family": "quilt",
+      "kernel": "quilt.csharp",
+      "facet": "quilt.csharp.types",
+      "archetype": "quilt.csharp.exception.primitive"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": ""
   }
 ]

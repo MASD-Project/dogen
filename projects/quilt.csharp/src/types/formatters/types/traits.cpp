@@ -42,6 +42,11 @@ std::string traits::enum_archetype() {
     return r;
 }
 
+std::string traits::exception_archetype() {
+    static std::string r(traits::facet() + ".exception");
+    return r;
+}
+
 std::string traits::primitive_archetype() {
     static std::string r(traits::facet() + ".primitive");
     return r;

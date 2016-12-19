@@ -59,8 +59,10 @@
     <Compile Include="Types\BookTypes.cs" />
     <Compile Include="Types\ColourTypes.cs" />
     <Compile Include="Types\ComplexBuiltins.cs" />
+    <Compile Include="Types\MyException.cs" />
     <Compile Include="Types\NoProperties.cs" />
     <Compile Include="Types\OneProperty.cs" />
+    <Compile Include="Types\Package1\CatastrophicException.cs" />
     <Compile Include="Types\Package1\Class1.cs" />
     <Compile Include="Types\Package1\Class2.cs" />
     <Compile Include="Types\Package1\Class3.cs" />

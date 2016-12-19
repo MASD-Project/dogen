@@ -21,6 +21,7 @@
 #include "dogen/quilt.csharp/types/formatters/registrar.hpp"
 #include "dogen/quilt.csharp/types/formatters/types/class_formatter.hpp"
 #include "dogen/quilt.csharp/types/formatters/types/enum_formatter.hpp"
+#include "dogen/quilt.csharp/types/formatters/types/exception_formatter.hpp"
 #include "dogen/quilt.csharp/types/formatters/types/primitive_formatter.hpp"
 #include "dogen/quilt.csharp/types/formatters/types/floating_point_number_helper.hpp"
 #include "dogen/quilt.csharp/types/formatters/types/initializer.hpp"
@@ -34,6 +35,7 @@ namespace types {
 void initializer::initialize(registrar& rg) {
     register_formatter<class_formatter>(rg);
     register_formatter<enum_formatter>(rg);
+    register_formatter<exception_formatter>(rg);
     register_formatter<primitive_formatter>(rg);
     register_formatter_helper<floating_point_number_helper>(rg);
 }
