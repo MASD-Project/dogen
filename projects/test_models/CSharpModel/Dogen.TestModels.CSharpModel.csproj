@@ -40,6 +40,8 @@
     <Compile Include="SequenceGenerators\NoPropertiesSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\OnePropertySequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\PrimitiveBuiltinsSequenceGenerator.cs" />
+    <Compile Include="Types\BookTypes.cs" />
+    <Compile Include="Types\ColourTypes.cs" />
     <Compile Include="Types\ComplexBuiltins.cs" />
     <Compile Include="Types\NoProperties.cs" />
     <Compile Include="Types\OneProperty.cs" />

@@ -32,6 +32,7 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("quilt.csharp.formatters.assistant"));
 
+const std::string empty;
 const bool start_on_first_line(true);
 const bool use_documentation_tool_markup(true);
 const bool last_line_is_blank(true);
@@ -156,6 +157,23 @@ comment(const std::string& c, const unsigned int identation_level) {
 
     for (unsigned int i = 0; i < identation_level; ++i)
         stream() << dogen::formatters::indent_out;
+}
+
+std::string assistant::comment_inline(const std::string& c) const {
+    if (c.empty())
+        return empty;
+
+    std::ostringstream s;
+    s << " ";
+    dogen::formatters::comment_formatter f(
+        start_on_first_line,
+        use_documentation_tool_markup,
+        documenting_previous_identifier,
+        dogen::formatters::comment_styles::csharp_style,
+        !last_line_is_blank);
+
+    f.format(s, c);
+    return s.str();
 }
 
 std::list<std::shared_ptr<formatters::helper_formatter_interface>>

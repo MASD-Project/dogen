@@ -35,6 +35,7 @@
         "simple_name": "int"
       },
       "meta_type": "primitive",
+      "is_default_enumeration_type": true,
       "in_global_module": true,
       "annotation": {
         "quilt.csharp.helper.family": "Number",

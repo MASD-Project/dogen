@@ -99,6 +99,11 @@ public:
      */
     void comment(const std::string& c, const unsigned int identation_level = 0);
 
+    /**
+     * @brief Returns @code c as as an inline comment.
+     */
+    std::string comment_inline(const std::string& c) const;
+
 private:
     std::list<std::shared_ptr<formatters::helper_formatter_interface>>
     get_helpers(const formattables::helper_properties& hp) const;

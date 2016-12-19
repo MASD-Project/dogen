@@ -122,6 +122,47 @@
           "type": "decimal"
         }
       ]
+    },
+    {
+      "name": {
+        "simple_name": "BookTypes"
+      },
+      "meta_type": "enumeration",
+      "documentation": "this is a brief comment\n\nthis is a long comment\n",
+      "enumerators": [
+        {
+          "simple_name": "Great"
+        },
+        {
+          "simple_name": "NotSoGreat"
+        },
+        {
+          "simple_name": "Bad"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple_name": "ColourTypes"
+      },
+      "meta_type": "enumeration",
+      "enumerators": [
+        {
+          "simple_name": "Red",
+          "documentation": "this is colour red\n"
+        },
+        {
+          "simple_name": "Blue",
+          "documentation": "this is blue\n"
+        },
+        {
+          "simple_name": "Green"
+        },
+        {
+          "simple_name": "Gray",
+          "documentation": "another comment\n"
+        }
+      ]
     }
   ]
 }

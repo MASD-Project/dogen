@@ -45,6 +45,11 @@ struct traits final {
     static std::string class_archetype();
 
     /**
+     * @brief Name of the enum header archetype.
+     */
+    static std::string enum_archetype();
+
+    /**
      * @brief Name of the primitive header archetype.
      */
     static std::string primitive_archetype();
