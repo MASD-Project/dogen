@@ -83,7 +83,7 @@ a.stream() << "    /// Generates sequences of " << sn << "." << std::endl;
 a.stream() << "    /// </summary>" << std::endl;
 a.stream() << "    public static class " << sn << "Dumper" << std::endl;
 a.stream() << "    {" << std::endl;
-a.stream() << "        static void Dump(AssistantDumper assistant, " << sn << " value, bool withSeparator = false)" << std::endl;
+a.stream() << "        static internal void Dump(AssistantDumper assistant, " << sn << " value, bool withSeparator = false)" << std::endl;
 a.stream() << "        {" << std::endl;
 a.stream() << "            assistant.IncrementDepth();" << std::endl;
 a.stream() << "            if (assistant.MaximumDepthExceeded())" << std::endl;

@@ -74,6 +74,26 @@ namespace Dogen.TestModels.CSharpModel.Tests
                 Assert.That(g.Equals(h), Is.True);
                 Assert.That(g == h, Is.True);
                 Assert.That(g != h, Is.False);
+
+                var i = AssociationSequenceGenerator.Sequence().GetEnumerator().Current;
+                var j = AssociationSequenceGenerator.Sequence().GetEnumerator().Current;
+                Log.DebugFormat("g: {0}", AssociationDumper.Dump(i));
+                Log.DebugFormat("h: {0}", AssociationDumper.Dump(j));
+
+                Assert.That(object.ReferenceEquals(i, j), Is.False);
+                Assert.That(i.Equals(j), Is.True);
+                Assert.That(i == j, Is.True);
+                Assert.That(i != j, Is.False);
+
+                var k = Package1.AssociationInPackageSequenceGenerator.Sequence().GetEnumerator().Current;
+                var m = Package1.AssociationInPackageSequenceGenerator.Sequence().GetEnumerator().Current;
+                Log.DebugFormat("k: {0}", Package1.AssociationInPackageDumper.Dump(k));
+                Log.DebugFormat("m: {0}", Package1.AssociationInPackageDumper.Dump(m));
+
+                Assert.That(object.ReferenceEquals(k, m), Is.False);
+                Assert.That(k.Equals(m), Is.True);
+                Assert.That(k == m, Is.True);
+                Assert.That(k != m, Is.False);
             }
         }
 
@@ -121,6 +141,24 @@ namespace Dogen.TestModels.CSharpModel.Tests
                 Assert.That(d == d, Is.True);
                 // Analysis disable once EqualExpressionComparison
                 Assert.That(d != d, Is.False);
+
+                var e = AssociationSequenceGenerator.Sequence().GetEnumerator().Current;
+                Log.DebugFormat("e: {0}", AssociationDumper.Dump(e));
+                // Analysis disable once EqualExpressionComparison
+                Assert.That(e.Equals(e), Is.True);
+                // Analysis disable once EqualExpressionComparison
+                Assert.That(e == e, Is.True);
+                // Analysis disable once EqualExpressionComparison
+                Assert.That(e != e, Is.False);
+
+                var f = Package1.AssociationInPackageSequenceGenerator.Sequence().GetEnumerator().Current;
+                Log.DebugFormat("f: {0}", Package1.AssociationInPackageDumper.Dump(f));
+                // Analysis disable once EqualExpressionComparison
+                Assert.That(f.Equals(f), Is.True);
+                // Analysis disable once EqualExpressionComparison
+                Assert.That(f == f, Is.True);
+                // Analysis disable once EqualExpressionComparison
+                Assert.That(f != f, Is.False);
                 #pragma warning restore 1718
             }
         }
@@ -169,6 +207,30 @@ namespace Dogen.TestModels.CSharpModel.Tests
                 Assert.That(g.Equals(h), Is.False);
                 Assert.That(g == h, Is.False);
                 Assert.That(g != h, Is.True);
+
+                var en5 = AssociationSequenceGenerator.Sequence().GetEnumerator();
+                var i = en5.Current;
+                en5.MoveNext();
+                var j = en5.Current;
+                Log.DebugFormat("g: {0}", AssociationDumper.Dump(i));
+                Log.DebugFormat("h: {0}", AssociationDumper.Dump(j));
+
+                Assert.That(object.ReferenceEquals(i, j), Is.False);
+                Assert.That(i.Equals(j), Is.False);
+                Assert.That(i == j, Is.False);
+                Assert.That(i != j, Is.True);
+
+                var en6 = Package1.AssociationInPackageSequenceGenerator.Sequence().GetEnumerator();
+                var k = en6.Current;
+                en6.MoveNext();
+                var m = en6.Current;
+                Log.DebugFormat("k: {0}", Package1.AssociationInPackageDumper.Dump(k));
+                Log.DebugFormat("m: {0}", Package1.AssociationInPackageDumper.Dump(m));
+
+                Assert.That(object.ReferenceEquals(k, m), Is.False);
+                Assert.That(k.Equals(m), Is.False);
+                Assert.That(k == m, Is.False);
+                Assert.That(k != m, Is.True);
             }
         }
     }

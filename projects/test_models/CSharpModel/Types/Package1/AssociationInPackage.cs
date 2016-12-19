@@ -19,20 +19,14 @@
 //
 using System;
 
-namespace Dogen.TestModels.CSharpModel
+namespace Dogen.TestModels.CSharpModel.Package1
 {
-    public class Association
+    public class AssociationInPackage
     {
         #region Properties
-        /// <summary>
-        /// Simple builtin association.
-        /// </summary>
-        public int Prop0 { get; set; }
-        /// <summary>
-        /// Association with a class that has no properties.
-        /// </summary>
-        public Dogen.TestModels.CSharpModel.NoProperties Prop1 { get; set; }
-        public Dogen.TestModels.CSharpModel.ColourTypes Prop2 { get; set; }
+        public Dogen.TestModels.CSharpModel.PrimitiveBuiltins Prop0 { get; set; }
+        public Dogen.TestModels.CSharpModel.ComplexBuiltins Prop1 { get; set; }
+        public Dogen.TestModels.CSharpModel.Package1.Class1 Prop2 { get; set; }
         #endregion
 
         #region Equality
@@ -42,17 +36,19 @@ namespace Dogen.TestModels.CSharpModel
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != GetType()) return false;
 
-            var value = obj as Association;
+            var value = obj as AssociationInPackage;
             if (value == null) return false;
 
             return
-                Prop0 == value.Prop0 &&
+                Prop0 != null && value.Prop0 != null &&
+                Prop0.Equals(value.Prop0) &&
                 Prop1 != null && value.Prop1 != null &&
                 Prop1.Equals(value.Prop1) &&
-                Prop2 == value.Prop2;
+                Prop2 != null && value.Prop2 != null &&
+                Prop2.Equals(value.Prop2);
         }
 
-        public static bool operator ==(Association lhs, Association rhs)
+        public static bool operator ==(AssociationInPackage lhs, AssociationInPackage rhs)
         {
             if (Object.ReferenceEquals(lhs, rhs))
                 return true;
@@ -60,7 +56,7 @@ namespace Dogen.TestModels.CSharpModel
             return !Object.ReferenceEquals(null, lhs) && lhs.Equals(rhs);
         }
 
-        public static bool operator !=(Association lhs, Association rhs)
+        public static bool operator !=(AssociationInPackage lhs, AssociationInPackage rhs)
         {
             return !(lhs == rhs);
         }
@@ -74,10 +70,12 @@ namespace Dogen.TestModels.CSharpModel
                 const int HashingMultiplier = 16777619;
 
                 int hash = HashingBase;
-                hash = (hash * HashingMultiplier) ^ Prop0.GetHashCode();
+                hash = (hash * HashingMultiplier) ^
+                    (!object.ReferenceEquals(null, Prop0) ? Prop0.GetHashCode() : 0);
                 hash = (hash * HashingMultiplier) ^
                     (!object.ReferenceEquals(null, Prop1) ? Prop1.GetHashCode() : 0);
-                hash = (hash * HashingMultiplier) ^ Prop2.GetHashCode();
+                hash = (hash * HashingMultiplier) ^
+                    (!object.ReferenceEquals(null, Prop2) ? Prop2.GetHashCode() : 0);
                 return hash;
             }
         }

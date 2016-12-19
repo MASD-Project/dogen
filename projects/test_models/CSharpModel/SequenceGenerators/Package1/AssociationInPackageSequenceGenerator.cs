@@ -21,35 +21,35 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Dogen.TestModels.CSharpModel
+namespace Dogen.TestModels.CSharpModel.Package1
 {
     /// <summary>
-    /// Generates sequences of Association.
+    /// Generates sequences of AssociationInPackage.
     /// </summary>
-    public static class AssociationSequenceGenerator
+    public static class AssociationInPackageSequenceGenerator
     {
-        static internal Association Create(uint position)
+        static internal AssociationInPackage Create(uint position)
         {
-            var result = new Association();
+            var result = new AssociationInPackage();
 
-            result.Prop0 = AssistantSequenceGenerator.CreateInt(position + 0);
-            result.Prop1 = Dogen.TestModels.CSharpModel.NoPropertiesSequenceGenerator.Create(position + 1);
-            result.Prop2 = Dogen.TestModels.CSharpModel.ColourTypesSequenceGenerator.Create(position + 2);
+            result.Prop0 = Dogen.TestModels.CSharpModel.PrimitiveBuiltinsSequenceGenerator.Create(position + 0);
+            result.Prop1 = Dogen.TestModels.CSharpModel.ComplexBuiltinsSequenceGenerator.Create(position + 1);
+            result.Prop2 = Dogen.TestModels.CSharpModel.Package1.Class1SequenceGenerator.Create(position + 2);
 
             return result;
         }
 
         #region Enumerator
-        private class AssociationEnumerator : IEnumerator, IEnumerator<Association>, IDisposable
+        private class AssociationInPackageEnumerator : IEnumerator, IEnumerator<AssociationInPackage>, IDisposable
         {
             #region Properties
             private uint _position;
-            private Association _current;
+            private AssociationInPackage _current;
             #endregion
 
             private void PopulateCurrent()
             {
-                _current = AssociationSequenceGenerator.Create(_position);
+                _current = AssociationInPackageSequenceGenerator.Create(_position);
             }
 
             #region IDisposable
@@ -79,7 +79,7 @@ namespace Dogen.TestModels.CSharpModel
                 }
             }
 
-            Association IEnumerator<Association>.Current
+            AssociationInPackage IEnumerator<AssociationInPackage>.Current
             {
                 get
                 {
@@ -88,7 +88,7 @@ namespace Dogen.TestModels.CSharpModel
             }
             #endregion
 
-            public AssociationEnumerator()
+            public AssociationInPackageEnumerator()
             {
                 PopulateCurrent();
             }
@@ -96,25 +96,25 @@ namespace Dogen.TestModels.CSharpModel
         #endregion
 
         #region Enumerable
-        private class AssociationEnumerable : IEnumerable, IEnumerable<Association>
+        private class AssociationInPackageEnumerable : IEnumerable, IEnumerable<AssociationInPackage>
         {
             #region IEnumerable implementation
             public IEnumerator GetEnumerator()
             {
-                return new AssociationEnumerator();
+                return new AssociationInPackageEnumerator();
             }
 
-            IEnumerator<Association> IEnumerable<Association>.GetEnumerator()
+            IEnumerator<AssociationInPackage> IEnumerable<AssociationInPackage>.GetEnumerator()
             {
-                return new AssociationEnumerator();
+                return new AssociationInPackageEnumerator();
             }
             #endregion
         }
         #endregion
 
-        static public IEnumerable<Association> Sequence()
+        static public IEnumerable<AssociationInPackage> Sequence()
         {
-            return new AssociationEnumerable();
+            return new AssociationInPackageEnumerable();
         }
     }
 }

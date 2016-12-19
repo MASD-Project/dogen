@@ -19,21 +19,21 @@
 //
 using System;
 
-namespace Dogen.TestModels.CSharpModel
+namespace Dogen.TestModels.CSharpModel.Package1
 {
     /// <summary>
-    /// Generates sequences of Association.
+    /// Generates sequences of AssociationInPackage.
     /// </summary>
-    public static class AssociationDumper
+    public static class AssociationInPackageDumper
     {
-        static internal void Dump(AssistantDumper assistant, Association value, bool withSeparator = false)
+        static internal void Dump(AssistantDumper assistant, AssociationInPackage value, bool withSeparator = false)
         {
             assistant.IncrementDepth();
             if (assistant.MaximumDepthExceeded())
                 return;
 
             assistant.AddStartObject();
-            assistant.AddType("Dogen.TestModels.CSharpModel.Association", true/*withSeparator*/);
+            assistant.AddType("Dogen.TestModels.CSharpModel.Package1.AssociationInPackage", true/*withSeparator*/);
             if (value == null)
             {
                 assistant.Add("data", "<null>");
@@ -44,13 +44,15 @@ namespace Dogen.TestModels.CSharpModel
             assistant.AddKey("data");
             assistant.AddPairSeparator();
             assistant.AddStartObject();
-            assistant.Add("Prop0", value.Prop0, true/*withSeparator*/);
+            assistant.AddKey("Prop0");
+            assistant.AddPairSeparator();
+            Dogen.TestModels.CSharpModel.PrimitiveBuiltinsDumper.Dump(assistant, value.Prop0, true/*withSeparator*/);
             assistant.AddKey("Prop1");
             assistant.AddPairSeparator();
-            Dogen.TestModels.CSharpModel.NoPropertiesDumper.Dump(assistant, value.Prop1, true/*withSeparator*/);
+            Dogen.TestModels.CSharpModel.ComplexBuiltinsDumper.Dump(assistant, value.Prop1, true/*withSeparator*/);
             assistant.AddKey("Prop2");
             assistant.AddPairSeparator();
-            Dogen.TestModels.CSharpModel.ColourTypesDumper.Dump(assistant, value.Prop2);
+            Dogen.TestModels.CSharpModel.Package1.Class1Dumper.Dump(assistant, value.Prop2);
             assistant.AddEndObject(); // data
             assistant.AddEndObject(); // main object
             assistant.HandleMemberSeparator(withSeparator);
@@ -58,7 +60,7 @@ namespace Dogen.TestModels.CSharpModel
             assistant.DecrementDepth();
         }
 
-        public static string Dump(Association value)
+        public static string Dump(AssociationInPackage value)
         {
             var assistant = new AssistantDumper();
             Dump(assistant, value);

@@ -37,6 +37,7 @@
     <Compile Include="Dumpers\ComplexBuiltinsDumper.cs" />
     <Compile Include="Dumpers\NoPropertiesDumper.cs" />
     <Compile Include="Dumpers\OnePropertyDumper.cs" />
+    <Compile Include="Dumpers\Package1\AssociationInPackageDumper.cs" />
     <Compile Include="Dumpers\Package1\Class1Dumper.cs" />
     <Compile Include="Dumpers\Package1\Class2Dumper.cs" />
     <Compile Include="Dumpers\Package1\Class3Dumper.cs" />
@@ -51,6 +52,7 @@
     <Compile Include="SequenceGenerators\ComplexBuiltinsSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\NoPropertiesSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\OnePropertySequenceGenerator.cs" />
+    <Compile Include="SequenceGenerators\Package1\AssociationInPackageSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\Package1\Class1SequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\Package1\Class2SequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\Package1\Class3SequenceGenerator.cs" />
@@ -65,6 +67,7 @@
     <Compile Include="Types\MyException.cs" />
     <Compile Include="Types\NoProperties.cs" />
     <Compile Include="Types\OneProperty.cs" />
+    <Compile Include="Types\Package1\AssociationInPackage.cs" />
     <Compile Include="Types\Package1\CatastrophicException.cs" />
     <Compile Include="Types\Package1\Class1.cs" />
     <Compile Include="Types\Package1\Class2.cs" />

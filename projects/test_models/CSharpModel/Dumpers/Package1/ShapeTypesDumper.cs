@@ -24,7 +24,7 @@ namespace Dogen.TestModels.CSharpModel.Package1
     /// </summary>
     public static class ShapeTypesDumper
     {
-        static void Dump(AssistantDumper assistant, ShapeTypes value, bool withSeparator = false)
+        static internal void Dump(AssistantDumper assistant, ShapeTypes value, bool withSeparator = false)
         {
             assistant.IncrementDepth();
             if (assistant.MaximumDepthExceeded())
