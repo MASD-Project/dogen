@@ -11,6 +11,12 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Add test for parent with no derived classes on the same model     :story:
+
+We need to check that when a parent that has no leaves on its own
+model generates correct code. The most likely problem is that the
+parent will not be marked as abstract.
+
 *** Add "is abstract" to yarn                                         :story:
 
 With C# we have started deciding if a class is abstract or not on the
