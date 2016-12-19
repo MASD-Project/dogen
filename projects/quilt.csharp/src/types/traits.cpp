@@ -65,7 +65,7 @@ std::string traits::csharp::helper::family() {
 }
 
 std::string traits::csharp::aspect::requires_static_reference_equals() {
-    static std::string r("quilt.csharp.requires_static_reference_equals");
+    static std::string r("quilt.csharp.aspect.requires_static_reference_equals");
     return r;
 }
 

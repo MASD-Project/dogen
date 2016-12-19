@@ -16,7 +16,7 @@
   {
     "name": {
       "simple": "requires_static_reference_equals",
-      "qualified": "quilt.csharp.requires_static_reference_equals"
+      "qualified": "quilt.csharp.aspect.requires_static_reference_equals"
     },
     "archetype_location": {
       "family": "quilt",
@@ -25,7 +25,7 @@
     "value_type": "boolean",
     "template_kind": "instance",
     "scope": "entity",
-    "default_value": false
+    "default_value": true
   },
   {
     "name": {

@@ -14,6 +14,7 @@
       "in_global_module": true,
       "annotation": {
         "quilt.csharp.helper.family": "Number",
+        "quilt.csharp.aspect.requires_static_reference_equals": false,
         "quilt.csharp.assistant.requires_assistance": true,
         "quilt.csharp.assistant.method_postfix": "Byte"
       }
@@ -26,6 +27,7 @@
       "in_global_module": true,
       "annotation": {
         "quilt.csharp.helper.family": "Number",
+        "quilt.csharp.aspect.requires_static_reference_equals": false,
         "quilt.csharp.assistant.requires_assistance": true,
         "quilt.csharp.assistant.method_postfix": "ShortByte"
       }
@@ -39,6 +41,7 @@
       "in_global_module": true,
       "annotation": {
         "quilt.csharp.helper.family": "Number",
+        "quilt.csharp.aspect.requires_static_reference_equals": false,
         "quilt.csharp.assistant.requires_assistance": true,
         "quilt.csharp.assistant.method_postfix": "Int"
       }
@@ -51,6 +54,7 @@
       "in_global_module": true,
       "annotation": {
         "quilt.csharp.helper.family": "Number",
+        "quilt.csharp.aspect.requires_static_reference_equals": false,
         "quilt.csharp.assistant.requires_assistance": true,
         "quilt.csharp.assistant.method_postfix": "UInt"
       }
@@ -63,6 +67,7 @@
       "in_global_module": true,
       "annotation": {
         "quilt.csharp.helper.family": "Number",
+        "quilt.csharp.aspect.requires_static_reference_equals": false,
         "quilt.csharp.assistant.requires_assistance": true,
         "quilt.csharp.assistant.method_postfix": "Short"
       }
@@ -75,6 +80,7 @@
       "in_global_module": true,
       "annotation": {
         "quilt.csharp.helper.family": "Number",
+        "quilt.csharp.aspect.requires_static_reference_equals": false,
         "quilt.csharp.assistant.requires_assistance": true,
         "quilt.csharp.assistant.method_postfix": "UShort"
       }
@@ -87,6 +93,7 @@
       "in_global_module": true,
       "annotation": {
         "quilt.csharp.helper.family": "Number",
+        "quilt.csharp.aspect.requires_static_reference_equals": false,
         "quilt.csharp.assistant.requires_assistance": true,
         "quilt.csharp.assistant.method_postfix": "Long"
       }
@@ -99,6 +106,7 @@
       "in_global_module": true,
       "annotation": {
         "quilt.csharp.helper.family": "Number",
+        "quilt.csharp.aspect.requires_static_reference_equals": false,
         "quilt.csharp.assistant.requires_assistance": true,
         "quilt.csharp.assistant.method_postfix": "ULong"
       }
@@ -112,6 +120,7 @@
       "is_floating_point": true,
       "annotation": {
         "quilt.csharp.helper.family": "FloatingPointNumber",
+        "quilt.csharp.aspect.requires_static_reference_equals": false,
         "quilt.csharp.assistant.requires_assistance": true,
         "quilt.csharp.assistant.method_postfix": "Float"
       }
@@ -125,6 +134,7 @@
       "is_floating_point": true,
       "annotation": {
         "quilt.csharp.helper.family": "FloatingPointNumber",
+        "quilt.csharp.aspect.requires_static_reference_equals": false,
         "quilt.csharp.assistant.requires_assistance": true,
         "quilt.csharp.assistant.method_postfix": "Double"
       }
@@ -137,6 +147,7 @@
       "in_global_module": true,
       "annotation": {
         "quilt.csharp.helper.family": "Character",
+        "quilt.csharp.aspect.requires_static_reference_equals": false,
         "quilt.csharp.assistant.requires_assistance": true,
         "quilt.csharp.assistant.method_postfix": "Char"
       }
@@ -149,6 +160,7 @@
       "in_global_module": true,
       "annotation": {
         "quilt.csharp.helper.family": "Boolean",
+        "quilt.csharp.aspect.requires_static_reference_equals": false,
         "quilt.csharp.assistant.requires_assistance": true,
         "quilt.csharp.assistant.method_postfix": "Bool"
       }
@@ -161,7 +173,6 @@
       "in_global_module": true,
       "annotation": {
         "quilt.csharp.helper.family": "Object",
-        "quilt.csharp.requires_static_reference_equals": true,
         "quilt.csharp.assistant.requires_assistance": true,
         "quilt.csharp.assistant.method_postfix": "Object"
       }
@@ -174,7 +185,6 @@
       "in_global_module": true,
       "annotation": {
         "quilt.csharp.helper.family": "String",
-        "quilt.csharp.requires_static_reference_equals": true,
         "quilt.csharp.assistant.requires_assistance": true,
         "quilt.csharp.assistant.method_postfix": "String"
       }
@@ -187,6 +197,7 @@
       "in_global_module": true,
       "annotation": {
         "quilt.csharp.helper.family": "Number",
+        "quilt.csharp.aspect.requires_static_reference_equals": false,
         "quilt.csharp.assistant.requires_assistance": true,
         "quilt.csharp.assistant.method_postfix": "Decimal"
       }

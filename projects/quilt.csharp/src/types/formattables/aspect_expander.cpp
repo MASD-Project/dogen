@@ -101,21 +101,18 @@ void aspect_properties_generator::handle_aspect_properties(
     const bool is_floating_point) {
     const annotations::entry_selector s(a);
 
+    /*
+     * FIXME: It would be nice to make this container sparse rather
+     * than dense. However, because we now default "require static
+     * reference equals" to true, sparseness becomes a bit
+     * confusing. This needs some rethinking.
+     */
     aspect_properties ap;
-    bool has_properties(false);
     const auto& rsrq(type_group_.requires_static_reference_equals);
-    if (s.has_entry(rsrq)) {
-        has_properties = true;
-        ap.requires_static_reference_equals(s.get_boolean_content(rsrq));
-    }
+    ap.requires_static_reference_equals(s.get_boolean_content_or_default(rsrq));
+    ap.is_floating_point(is_floating_point);
 
-    if (is_floating_point) {
-        has_properties = true;
-        ap.is_floating_point(true);
-    }
-
-    if (has_properties)
-        result_[id] = ap;
+    result_[id] = ap;
 }
 
 void aspect_properties_generator::visit(const yarn::enumeration& e) {
