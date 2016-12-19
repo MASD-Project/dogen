@@ -46,6 +46,11 @@ public:
     static std::string class_archetype();
 
     /**
+     * @brief Name of the enum header archetype.
+     */
+    static std::string enum_archetype();
+
+    /**
      * @brief Name of the assistant archetype.
      */
     static std::string assistant_archetype();

@@ -31,6 +31,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dumpers\AssistantDumper.cs" />
+    <Compile Include="Dumpers\BookTypesDumper.cs" />
+    <Compile Include="Dumpers\ColourTypesDumper.cs" />
     <Compile Include="Dumpers\ComplexBuiltinsDumper.cs" />
     <Compile Include="Dumpers\NoPropertiesDumper.cs" />
     <Compile Include="Dumpers\OnePropertyDumper.cs" />
