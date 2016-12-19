@@ -49,7 +49,7 @@
  */
 #define ENABLE_DIA_TESTS
 #define ENABLE_JSON_TESTS
-// #define ENABLE_CSHARP_TESTS
+#define ENABLE_CSHARP_TESTS
 
 using dogen::utility::test_data::yarn_dia;
 using dogen::utility::test_data::yarn_json;

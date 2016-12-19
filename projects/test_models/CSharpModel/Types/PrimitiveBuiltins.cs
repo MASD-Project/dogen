@@ -70,7 +70,7 @@ namespace Dogen.TestModels.CSharpModel
         /// <summary>
         /// Second float to ensure helpers are generated correctly.
         /// </summary>
-        public double FloatPropertyTwo { get; set; }
+        public float FloatPropertyTwo { get; set; }
         public double DoublePropertyOne { get; set; }
         /// <summary>
         /// Second double to ensure helpers are generated correctly.

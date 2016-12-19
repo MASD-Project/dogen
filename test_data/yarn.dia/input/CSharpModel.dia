@@ -383,7 +383,7 @@ This is a remark.#</dia:string>
             <dia:string>#FloatPropertyTwo#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#double#</dia:string>
+            <dia:string>#float#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

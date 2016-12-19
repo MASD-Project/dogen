@@ -97,7 +97,7 @@
         },
         {
           "simple_name": "FloatPropertyTwo",
-          "type": "double",
+          "type": "float",
           "documentation": "Second float to ensure helpers are generated correctly.\n"
         },
         {
