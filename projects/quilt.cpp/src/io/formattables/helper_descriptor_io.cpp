@@ -53,7 +53,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::qu
     if (v)
         s << "\"data\": " << *v;
     else
-        s << "\"data\": ""\"<empty>\"";
+        s << "\"data\": ""\"<null>\"";
     s << " }";
     return s;
 }

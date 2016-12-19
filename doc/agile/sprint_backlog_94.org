@@ -12,14 +12,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-12-19 Mon 18:07]
+#+CAPTION: Clock summary at [2016-12-19 Mon 18:12]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *42:17* |       |       | 100.0 |
+| *Total time*                                                                | *42:21* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 42:17   |       |       | 100.0 |
-| Active                                                                      |         | 42:17 |       | 100.0 |
+| Stories                                                                     | 42:21   |       |       | 100.0 |
+| Active                                                                      |         | 42:21 |       | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  0:56 |   2.2 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:31 |   1.2 |
 | COMPLETED Add helper infrastructure to C#                                   |         |       |  5:55 |  14.0 |
@@ -27,13 +27,13 @@
 | COMPLETED Create a test model solution to validate C# code                  |         |       |  3:47 |   8.9 |
 | COMPLETED Add basic io support to C#                                        |         |       | 11:56 |  28.2 |
 | COMPLETED Add basic test data generation support to C#                      |         |       |  0:41 |   1.6 |
-| COMPLETED Add io and equality canned unit tests to C# model                 |         |       |  3:55 |   9.3 |
-| COMPLETED Update C# stitch templates to match code                          |         |       |  7:28 |  17.7 |
+| COMPLETED Add io and equality canned unit tests to C# model                 |         |       |  3:55 |   9.2 |
+| COMPLETED Update C# stitch templates to match code                          |         |       |  7:28 |  17.6 |
 | COMPLETED Move enumeration population to yarn                               |         |       |  0:43 |   1.7 |
 | COMPLETED Add support for types in packages in C#                           |         |       |  0:18 |   0.7 |
 | COMPLETED Add support for enumerations in C#                                |         |       |  1:48 |   4.3 |
 | COMPLETED Add support for exceptions in C#                                  |         |       |  0:14 |   0.6 |
-| STARTED Add support for associations in C#                                  |         |       |  2:41 |   6.3 |
+| STARTED Add support for associations in C#                                  |         |       |  2:45 |   6.5 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -483,6 +483,7 @@ Links:
 - [[https://msdn.microsoft.com/en-us/library/ms173163.aspx][Creating and Throwing Exceptions (C# Programming Guide)]]
 
 *** STARTED Add support for associations in C#                        :story:
+    CLOCK: [2016-12-19 Mon 18:08]--[2016-12-19 Mon 18:12] =>  0:04
     CLOCK: [2016-12-19 Mon 18:02]--[2016-12-19 Mon 18:07] =>  0:05
     CLOCK: [2016-12-19 Mon 17:45]--[2016-12-19 Mon 18:01] =>  0:16
     CLOCK: [2016-12-19 Mon 17:01]--[2016-12-19 Mon 17:44] =>  0:43
