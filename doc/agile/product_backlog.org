@@ -11,6 +11,16 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Add "is abstract" to yarn                                         :story:
+
+With C# we have started deciding if a class is abstract or not on the
+basis of whether its a parent, etc. The right thing to do is to have a
+"is abstract" property which is populated on the guts of yarn (using
+the current logic of parents are abstract).
+
+We then need to review the C++ templates and figure out where we were
+also inferring "abstractness", and use the new flag.
+
 *** Consider supplying element configuration as a parameter           :story:
 
 Figure out if element configuration is context or if it is better
