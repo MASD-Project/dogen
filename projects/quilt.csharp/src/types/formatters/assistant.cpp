@@ -188,6 +188,17 @@ assistant::get_helpers(const formattables::helper_properties& hp) const {
     return std::list<std::shared_ptr<formatters::helper_formatter_interface>>();
 }
 
+boost::optional<formattables::assistant_properties> assistant::
+get_assistant_properties(const yarn::attribute& attr) const {
+
+    const auto& ap(context_.model().assistant_properties());
+    const auto i(ap.find(attr.parsed_type().current().id()));
+    if (i == ap.end())
+        return boost::optional<formattables::assistant_properties>();
+
+    return i->second;
+}
+
 void assistant::add_helper_methods(const std::string& element_id) {
     BOOST_LOG_SEV(lg, debug) << "Generating helper methods. Element: "
                              << element_id;

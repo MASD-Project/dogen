@@ -26,6 +26,7 @@
 #endif
 
 #include <sstream>
+#include <boost/optional.hpp>
 #include <boost/iostreams/filtering_stream.hpp>
 #include "dogen/annotations/types/archetype_location.hpp"
 #include "dogen/formatters/types/artefact.hpp"
@@ -37,6 +38,7 @@
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/quilt.csharp/types/formatters/context.hpp"
 #include "dogen/quilt.csharp/types/formattables/helper_properties.hpp"
+#include "dogen/quilt.csharp/types/formattables/assistant_properties.hpp"
 #include "dogen/quilt.csharp/types/formatters/helper_formatter_interface.hpp"
 
 namespace dogen {
@@ -107,6 +109,10 @@ public:
      * formatter.
      */
     void add_helper_methods(const std::string& element_id);
+
+public:
+    boost::optional<formattables::assistant_properties>
+    get_assistant_properties(const yarn::attribute& attr) const;
 
 public:
     /**

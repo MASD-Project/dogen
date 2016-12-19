@@ -56,9 +56,12 @@ using System.Collections.Generic;
 <#+
                     unsigned int count(0);
                     for (const auto& attr : o.local_attributes()) {
+                        const auto oap(a.get_assistant_properties(attr));
+                        if (oap && oap->requires_assistance()) {
 #>
-            result.<#= attr.name().simple() #> = AssistantSequenceGenerator.Create<#= attr.name().simple() #> (position + <#= count++ #>);
+            result.<#= attr.name().simple() #> = AssistantSequenceGenerator.Create<#= oap->method_postfix() #>(position + <#= count++ #>);
 <#+
+                        }
                     }
 #>
 

@@ -99,7 +99,10 @@ a.stream() << "            return result;" << std::endl;
 a.stream() << std::endl;
                     unsigned int count(0);
                     for (const auto& attr : o.local_attributes()) {
-a.stream() << "            result." << attr.name().simple() << " = AssistantSequenceGenerator.Create" << attr.name().simple() << " (position + " << count++ << ");" << std::endl;
+                        const auto oap(a.get_assistant_properties(attr));
+                        if (oap && oap->requires_assistance()) {
+a.stream() << "            result." << attr.name().simple() << " = AssistantSequenceGenerator.Create" << oap->method_postfix() << "(position + " << count++ << ");" << std::endl;
+                        }
                     }
 a.stream() << std::endl;
 a.stream() << "            return result;" << std::endl;
