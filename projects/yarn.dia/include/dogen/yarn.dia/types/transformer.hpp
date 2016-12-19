@@ -103,12 +103,10 @@ private:
      * @brief Converts a processed attribute into an yarn enumerator.
      *
      * @param a the Dia UML attribute in processed form.
-     * @param value what value should the enumeration take.
      *
      * @pre name and type of attribute must not be empty.
      */
-    yarn::enumerator to_enumerator(const processed_attribute& a,
-        const unsigned int value) const;
+    yarn::enumerator to_enumerator(const processed_attribute& a) const;
 
 private:
     /**

@@ -21,13 +21,15 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/yarn/io/descriptor_io.hpp"
-#include "dogen/yarn/types/modules_expander.hpp"
-#include "dogen/yarn/types/annotations_expander.hpp"
 #include "dogen/yarn/types/origin_expander.hpp"
 #include "dogen/yarn/types/parsing_expander.hpp"
-#include "dogen/yarn/types/type_parameters_expander.hpp"
+#include "dogen/yarn/types/modules_expander.hpp"
 #include "dogen/yarn/types/language_expander.hpp"
 #include "dogen/yarn/types/descriptor_factory.hpp"
+#include "dogen/yarn/types/enumeration_expander.hpp"
+#include "dogen/yarn/types/annotations_expander.hpp"
+#include "dogen/yarn/types/type_parameters_expander.hpp"
+
 #include "dogen/yarn/types/intermediate_model_factory.hpp"
 
 namespace {
@@ -39,6 +41,12 @@ static logger lg(logger_factory("yarn.intermediate_model_factory"));
 
 namespace dogen {
 namespace yarn {
+
+void intermediate_model_factory::
+expand_enumerations(intermediate_model& im) const {
+    enumeration_expander ex;
+    ex.expand(im);
+}
 
 void intermediate_model_factory::expand_language(
     const annotations::type_repository& atrp, intermediate_model& im) const {
@@ -80,6 +88,9 @@ void intermediate_model_factory::expand_parsing(
 void intermediate_model_factory::
 post_process(const annotations::annotation_groups_factory& agf,
     const annotations::type_repository& atrp, intermediate_model& im) const {
+
+    expand_enumerations(im);
+
     /*
      * We must expand annotations before we expand modules to
      * ensure the root module is populated with entries

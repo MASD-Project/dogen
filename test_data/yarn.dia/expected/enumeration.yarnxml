@@ -286,35 +286,30 @@
 					<identifiable></identifiable>
 				</underlying_type>
 				<enumerators class_id="32" tracking_level="0" version="0">
-					<count>5</count>
+					<count>4</count>
 					<item_version>0</item_version>
 					<item class_id="33" tracking_level="0" version="0">
-						<documentation>Represents an uninitialised enum</documentation>
-						<name>invalid</name>
-						<value>0</value>
-					</item>
-					<item>
 						<documentation>some comment
 </documentation>
 						<name>triangle</name>
-						<value>1</value>
+						<value></value>
 					</item>
 					<item>
 						<documentation>other comment
 </documentation>
 						<name>square</name>
-						<value>2</value>
+						<value></value>
 					</item>
 					<item>
 						<documentation></documentation>
 						<name>rectangle</name>
-						<value>3</value>
+						<value></value>
 					</item>
 					<item>
 						<documentation>some comment
 </documentation>
 						<name>cube</name>
-						<value>4</value>
+						<value></value>
 					</item>
 				</enumerators>
 			</second>
@@ -403,35 +398,30 @@
 					<identifiable></identifiable>
 				</underlying_type>
 				<enumerators>
-					<count>5</count>
+					<count>4</count>
 					<item_version>0</item_version>
-					<item>
-						<documentation>Represents an uninitialised enum</documentation>
-						<name>invalid</name>
-						<value>0</value>
-					</item>
 					<item>
 						<documentation>this is colour red
 </documentation>
 						<name>red</name>
-						<value>1</value>
+						<value></value>
 					</item>
 					<item>
 						<documentation>this is blue
 </documentation>
 						<name>blue</name>
-						<value>2</value>
+						<value></value>
 					</item>
 					<item>
 						<documentation></documentation>
 						<name>green</name>
-						<value>3</value>
+						<value></value>
 					</item>
 					<item>
 						<documentation>another comment
 </documentation>
 						<name>gray</name>
-						<value>4</value>
+						<value></value>
 					</item>
 				</enumerators>
 			</second>
@@ -523,27 +513,22 @@ this is a long comment
 					<identifiable></identifiable>
 				</underlying_type>
 				<enumerators>
-					<count>4</count>
+					<count>3</count>
 					<item_version>0</item_version>
-					<item>
-						<documentation>Represents an uninitialised enum</documentation>
-						<name>invalid</name>
-						<value>0</value>
-					</item>
 					<item>
 						<documentation></documentation>
 						<name>great</name>
-						<value>1</value>
+						<value></value>
 					</item>
 					<item>
 						<documentation></documentation>
 						<name>not_so_great</name>
-						<value>2</value>
+						<value></value>
 					</item>
 					<item>
 						<documentation></documentation>
 						<name>bad</name>
-						<value>3</value>
+						<value></value>
 					</item>
 				</enumerators>
 			</second>

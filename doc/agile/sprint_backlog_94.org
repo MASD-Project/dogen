@@ -12,23 +12,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-12-19 Mon 11:33]
+#+CAPTION: Clock summary at [2016-12-19 Mon 12:17]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *37:14* |       |       | 100.0 |
+| *Total time*                                                                | *37:57* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 37:14   |       |       | 100.0 |
-| Active                                                                      |         | 37:14 |       | 100.0 |
+| Stories                                                                     | 37:57   |       |       | 100.0 |
+| Active                                                                      |         | 37:57 |       | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  0:56 |   2.5 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:31 |   1.4 |
-| COMPLETED Add helper infrastructure to C#                                   |         |       |  5:55 |  15.9 |
-| COMPLETED Add support for Equals in C#                                      |         |       |  1:24 |   3.8 |
-| COMPLETED Create a test model solution to validate C# code                  |         |       |  3:47 |  10.2 |
-| COMPLETED Add basic io support to C#                                        |         |       | 11:56 |  32.1 |
+| COMPLETED Add helper infrastructure to C#                                   |         |       |  5:55 |  15.6 |
+| COMPLETED Add support for Equals in C#                                      |         |       |  1:24 |   3.7 |
+| COMPLETED Create a test model solution to validate C# code                  |         |       |  3:47 |  10.0 |
+| COMPLETED Add basic io support to C#                                        |         |       | 11:56 |  31.4 |
 | COMPLETED Add basic test data generation support to C#                      |         |       |  0:41 |   1.8 |
-| COMPLETED Add io and equality canned unit tests to C# model                 |         |       |  3:55 |  10.5 |
-| COMPLETED Update C# stitch templates to match code                          |         |       |  7:28 |  20.1 |
+| COMPLETED Add io and equality canned unit tests to C# model                 |         |       |  3:55 |  10.3 |
+| COMPLETED Update C# stitch templates to match code                          |         |       |  7:28 |  19.7 |
+| COMPLETED Move enumeration population to yarn                               |         |       |  0:43 |   1.9 |
 | STARTED Add support for enumerations in C#                                  |         |       |  0:41 |   1.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -426,6 +427,15 @@ handcrafted code.
 - helpers must end in "Dumper" since we're using that as the facet
   postfix. Also, its very confusing to have helpers which are not
   Dogen helpers. We need to rename them.
+
+*** COMPLETED Move enumeration population to yarn                     :story:
+    CLOSED: [2016-12-19 Mon 12:17]
+    CLOCK: [2016-12-19 Mon 11:34]--[2016-12-19 Mon 12:17] =>  0:43
+
+At present we are populating enumeration values, adding =invalid=
+enumerator, etc in each of the frontends. This is not ideal; we should
+only populate the basic information in the frontend and then expand it
+in yarn.
 
 *** STARTED Add support for enumerations in C#                        :story:
     CLOCK: [2016-12-19 Mon 11:26]--[2016-12-19 Mon 11:33] =>  0:07

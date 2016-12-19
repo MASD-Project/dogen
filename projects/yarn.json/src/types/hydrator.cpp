@@ -202,21 +202,12 @@ std::vector<enumerator> hydrator::
 read_enumerators(const boost::property_tree::ptree& pt) const {
     std::vector<enumerator> r;
 
-    dogen::yarn::enumerator invalid;
-    invalid.name("invalid");
-    invalid.documentation("Represents an uninitialised enum");
-    invalid.value("0");
-    r.push_back(invalid);
-
-    unsigned int pos(1);
     for (auto i(pt.begin()); i != pt.end(); ++i) {
         const auto& apt(i->second);
         enumerator e;
         e.name(apt.get<std::string>(simple_name_key));
         e.documentation(read_documentation(apt));
-        e.value(boost::lexical_cast<std::string>(pos));
         r.push_back(e);
-        ++pos;
     }
     return r;
 }

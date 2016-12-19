@@ -5337,7 +5337,6 @@ of the enumerator. This is not ideal:
 
 We could:
 
-- move it to =yarn= so that JSON and Dia share the same code;
 - add meta-data for users to supply their own values;
 - add meta-data to disable setting the enumerator value altogether.
 

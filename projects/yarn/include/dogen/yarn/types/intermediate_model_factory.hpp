@@ -43,6 +43,11 @@ namespace yarn {
 class intermediate_model_factory {
 private:
     /**
+     * @brief Expands all enumerations.
+     */
+    void expand_enumerations(intermediate_model& im) const;
+
+    /**
      * @brief Reads the model language from meta-data.
      */
     void expand_language(const annotations::type_repository& atrp,

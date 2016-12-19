@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include <set>
 #include <boost/make_shared.hpp>
 #include <boost/variant/get.hpp>
 #include <boost/lexical_cast.hpp>
@@ -39,7 +38,6 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("yarn.dia.transformer"));
 
-const std::string duplicate_enumerator("Duplicate enumerator name: ");
 const std::string empty_dia_object_name("Dia object name is empty");
 const std::string multiple_inheritance(
     "Child has more than one parent, but multiple inheritance not supported:");
@@ -88,13 +86,12 @@ yarn::attribute transformer::to_attribute(const yarn::name& owning_element,
     return r;
 }
 
-yarn::enumerator transformer::to_enumerator(const processed_attribute& a,
-    const unsigned int position) const {
+yarn::enumerator
+transformer::to_enumerator(const processed_attribute& a) const {
     validate_dia_object_name(a.name());
 
     yarn::enumerator r;
     r.name(a.name());
-    r.value(boost::lexical_cast<std::string>(position));
     r.documentation(a.comment().documentation());
     return r;
 }
@@ -175,44 +172,17 @@ yarn::exception transformer::to_exception(const processed_object& po) const {
     return e;
 }
 
-yarn::enumeration transformer::to_enumeration(const processed_object& po) const {
+yarn::enumeration
+transformer::to_enumeration(const processed_object& po) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming dia object to enumeration: "
                              << po.id();
 
     yarn::enumeration r;
     update_element(po, r);
 
-    /*
-     * Setup the invalid enumeration.
-     */
-    dogen::yarn::enumerator invalid;
-    invalid.name("invalid");
-    invalid.documentation("Represents an uninitialised enum");
-    invalid.value("0");
-    r.enumerators().push_back(invalid);
+    for (const auto& attr : po.attributes())
+        r.enumerators().push_back(to_enumerator(attr));
 
-    std::set<std::string> enumerator_names;
-    enumerator_names.insert(invalid.name());
-
-    /*
-     * Convert each attribute into an enumerator, ensuring the
-     * enumerator names is unique within this enumeration. For each
-     * enumerator we compute a position. Note that the zeroth position
-     * is already taken by invalid, so we skip it.
-     */
-    unsigned int pos(0);
-    for (const auto& attr : po.attributes()) {
-        auto enumerator(to_enumerator(attr, ++pos));
-        const auto i(enumerator_names.find(enumerator.name()));
-        if (i != enumerator_names.end()) {
-            BOOST_LOG_SEV(lg, error) << duplicate_enumerator
-                                     << enumerator.name();
-            BOOST_THROW_EXCEPTION(
-                transformation_error(duplicate_enumerator + enumerator.name()));
-        }
-        enumerator_names.insert(enumerator.name());
-        r.enumerators().push_back(enumerator);
-    }
     return r;
 }
 

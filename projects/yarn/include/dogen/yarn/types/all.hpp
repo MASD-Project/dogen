@@ -92,6 +92,7 @@
 #include "dogen/yarn/types/annotations_expander.hpp"
 #include "dogen/yarn/types/association_expander.hpp"
 #include "dogen/yarn/types/containment_expander.hpp"
+#include "dogen/yarn/types/enumeration_expander.hpp"
 #include "dogen/yarn/types/stereotypes_expander.hpp"
 #include "dogen/yarn/types/transformation_error.hpp"
 #include "dogen/yarn/types/generalization_expander.hpp"
