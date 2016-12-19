@@ -26,6 +26,7 @@
 #include "dogen/quilt.csharp/types/formatters/test_data/character_helper.hpp"
 #include "dogen/quilt.csharp/types/formatters/test_data/floating_point_number_helper.hpp"
 #include "dogen/quilt.csharp/types/formatters/test_data/class_formatter.hpp"
+#include "dogen/quilt.csharp/types/formatters/test_data/enum_formatter.hpp"
 #include "dogen/quilt.csharp/types/formatters/test_data/assistant_formatter.hpp"
 #include "dogen/quilt.csharp/types/formatters/test_data/initializer.hpp"
 
@@ -43,6 +44,7 @@ void initializer::initialize(registrar& rg) {
     register_formatter_helper<character_helper>(rg);
 
     register_formatter<class_formatter>(rg);
+    register_formatter<enum_formatter>(rg);
     register_formatter<assistant_formatter>(rg);
 }
 

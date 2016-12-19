@@ -60,5 +60,21 @@
     "template_kind": "instance",
     "scope": "root_module",
     "default_value": ""
+  },
+  {
+    "name": {
+      "simple": "postfix",
+      "qualified": "quilt.csharp.test_data.enum.postfix"
+    },
+    "archetype_location": {
+      "family": "quilt",
+      "kernel": "quilt.csharp",
+      "facet": "quilt.csharp.test_data",
+      "archetype": "quilt.csharp.assistant.enum"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": ""
   }
 ]

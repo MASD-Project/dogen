@@ -36,6 +36,8 @@
     <Compile Include="Dumpers\OnePropertyDumper.cs" />
     <Compile Include="Dumpers\PrimitiveBuiltinsDumper.cs" />
     <Compile Include="SequenceGenerators\AssistantSequenceGenerator.cs" />
+    <Compile Include="SequenceGenerators\BookTypesSequenceGenerator.cs" />
+    <Compile Include="SequenceGenerators\ColourTypesSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\ComplexBuiltinsSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\NoPropertiesSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\OnePropertySequenceGenerator.cs" />
