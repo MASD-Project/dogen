@@ -4199,7 +4199,7 @@ this is a long comment#</value>
 								<item>
 									<which>5</which>
 									<value>
-										<value>9,6</value>
+										<value>9,3</value>
 									</value>
 								</item>
 							</values>
@@ -4212,7 +4212,7 @@ this is a long comment#</value>
 								<item>
 									<which>8</which>
 									<value>
-										<value>8.95,5.95;22.27,8.55</value>
+										<value>8.95,2.95;29.585,8.75</value>
 									</value>
 								</item>
 							</values>
@@ -4245,7 +4245,7 @@ this is a long comment#</value>
 								<item>
 									<which>5</which>
 									<value>
-										<value>9,6</value>
+										<value>9,3</value>
 									</value>
 								</item>
 							</values>
@@ -4258,7 +4258,7 @@ this is a long comment#</value>
 								<item>
 									<which>1</which>
 									<value>
-										<value>13.220000000000001</value>
+										<value>20.535</value>
 									</value>
 								</item>
 							</values>
@@ -4271,7 +4271,7 @@ this is a long comment#</value>
 								<item>
 									<which>1</which>
 									<value>
-										<value>2.5</value>
+										<value>5.7000000000000002</value>
 									</value>
 								</item>
 							</values>
@@ -4388,7 +4388,7 @@ this is a long comment#</value>
 														<item>
 															<which>5</which>
 															<value>
-																<value>9.35,7.245</value>
+																<value>9.35,4.245</value>
 															</value>
 														</item>
 													</values>
