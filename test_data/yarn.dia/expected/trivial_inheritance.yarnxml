@@ -4567,9 +4567,8 @@ in the context of inheritance.
 					</contained_by>
 					<in_global_module>0</in_global_module>
 					<stereotypes>
-						<count>1</count>
+						<count>0</count>
 						<item_version>0</item_version>
-						<item>value object</item>
 					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
@@ -5642,9 +5641,8 @@ in the context of inheritance.
 					</contained_by>
 					<in_global_module>0</in_global_module>
 					<stereotypes>
-						<count>2</count>
+						<count>1</count>
 						<item_version>0</item_version>
-						<item>value object</item>
 						<item>visitable</item>
 					</stereotypes>
 					<is_element_extension>0</is_element_extension>
@@ -5766,9 +5764,8 @@ in the context of inheritance.
 					</contained_by>
 					<in_global_module>0</in_global_module>
 					<stereotypes>
-						<count>1</count>
+						<count>0</count>
 						<item_version>0</item_version>
-						<item>value object</item>
 					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
