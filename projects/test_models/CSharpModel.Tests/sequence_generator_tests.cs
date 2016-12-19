@@ -99,5 +99,28 @@ namespace Dogen.TestModels.CSharpModel.Tests
                 Assert.That(ValidateJson(jsonH), Is.True);
             }
         }
+
+        [Test]
+        // Analysis disable once InconsistentNaming
+        public void sequence_dumper_handles_null_objects()
+        {
+            using (var lc = new LogConfigurator(FixtureName))
+            {
+                NoProperties a = null;
+                var jsonA = NoPropertiesDumper.Dump(a);
+                Log.DebugFormat("JSON: {0}", jsonA);
+                Assert.That(ValidateJson(jsonA), Is.True);
+
+                var b = new ComplexBuiltins() { StringProperty = "test" };
+                var jsonB = ComplexBuiltinsDumper.Dump(b);
+                Log.DebugFormat("JSON: {0}", jsonB);
+                Assert.That(ValidateJson(jsonB), Is.True);
+
+                var c = new ComplexBuiltins() { ObjectProperty = "test" };
+                var jsonC = ComplexBuiltinsDumper.Dump(c);
+                Log.DebugFormat("JSON: {0}", jsonC);
+                Assert.That(ValidateJson(jsonC), Is.True);
+            }
+        }
     }
 }

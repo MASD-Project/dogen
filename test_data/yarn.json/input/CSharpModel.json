@@ -14,6 +14,24 @@
   "elements": [
     {
       "name": {
+        "simple_name": "Association"
+      },
+      "meta_type": "object",
+      "attributes": [
+        {
+          "simple_name": "Prop0",
+          "type": "int",
+          "documentation": "Simple builtin association.\n"
+        },
+        {
+          "simple_name": "Prop1",
+          "type": "NoProperties",
+          "documentation": "Association with a class that has no properties.\n"
+        }
+      ]
+    },
+    {
+      "name": {
         "simple_name": "ComplexBuiltins"
       },
       "meta_type": "object",

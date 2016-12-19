@@ -36,7 +36,7 @@ namespace Dogen.TestModels.CSharpModel.Package1
             assistant.AddType("Dogen.TestModels.CSharpModel.Package1.Class3", true/*withSeparator*/);
             if (value == null)
             {
-                assistant.Add("data", "<empty>");
+                assistant.Add("data", "<null>");
                 assistant.AddEndObject();
                 return;
             }

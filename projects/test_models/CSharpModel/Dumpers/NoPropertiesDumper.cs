@@ -36,7 +36,7 @@ namespace Dogen.TestModels.CSharpModel
             assistant.AddType("Dogen.TestModels.CSharpModel.NoProperties", true/*withSeparator*/);
             if (value == null)
             {
-                assistant.Add("data", "<empty>");
+                assistant.Add("data", "<null>");
                 assistant.AddEndObject();
                 return;
             }

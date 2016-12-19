@@ -95,7 +95,7 @@ a.stream() << "            assistant.AddStartObject();" << std::endl;
 a.stream() << "            assistant.AddType(\"" << qn << "\", true/*withSeparator*/);" << std::endl;
 a.stream() << "            if (value == null)" << std::endl;
 a.stream() << "            {" << std::endl;
-a.stream() << "                assistant.Add(\"data\", \"<empty>\");" << std::endl;
+a.stream() << "                assistant.Add(\"data\", \"<null>\");" << std::endl;
 a.stream() << "                assistant.AddEndObject();" << std::endl;
 a.stream() << "                return;" << std::endl;
 a.stream() << "            }" << std::endl;

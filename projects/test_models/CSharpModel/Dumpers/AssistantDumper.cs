@@ -74,7 +74,10 @@ namespace Dogen.TestModels.CSharpModel
 
         public void AddQuoted(string value)
         {
-            _stringBuilder.Append("\"" + value + "\"");
+            if (value == null)
+                _stringBuilder.Append("\"<null>\"");
+            else
+                _stringBuilder.Append("\"" + value + "\"");
         }
 
         public void AddNonQuoted(int value)
@@ -114,9 +117,24 @@ namespace Dogen.TestModels.CSharpModel
             AddKeyWithSeparator(key);
             AddStartObject();
             AddType(SystemObjectType, true/*withSeparator*/);
+
+            if (value == null)
+            {
+                Add("data", "<null>");
+                AddEndObject();
+                HandleMemberSeparator(withSeparator);
+                return;
+            }
+
+            AddKey("data");
+            AddPairSeparator();
+            AddStartObject();
+
             AddKey(HashCode);
             AddPairSeparator();
             AddNonQuoted(value.GetHashCode());
+
+            AddEndObject(); // data
             AddEndObject();
             HandleMemberSeparator(withSeparator);
         }
