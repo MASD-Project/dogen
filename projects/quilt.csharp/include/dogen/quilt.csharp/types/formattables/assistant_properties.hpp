@@ -46,7 +46,7 @@ public:
 public:
     assistant_properties(
         const bool requires_assistance,
-        const std::string& assistant_method_postfix);
+        const std::string& method_postfix);
 
 private:
     template<typename Archive>
@@ -68,10 +68,10 @@ public:
      * @brief Postfix to use to call the appropriate assistant method, if required.
      */
     /**@{*/
-    const std::string& assistant_method_postfix() const;
-    std::string& assistant_method_postfix();
-    void assistant_method_postfix(const std::string& v);
-    void assistant_method_postfix(const std::string&& v);
+    const std::string& method_postfix() const;
+    std::string& method_postfix();
+    void method_postfix(const std::string& v);
+    void method_postfix(const std::string&& v);
     /**@}*/
 
 public:
@@ -86,7 +86,7 @@ public:
 
 private:
     bool requires_assistance_;
-    std::string assistant_method_postfix_;
+    std::string method_postfix_;
 };
 
 } } } }

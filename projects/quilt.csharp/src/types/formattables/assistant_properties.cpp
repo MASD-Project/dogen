@@ -30,19 +30,19 @@ assistant_properties::assistant_properties()
 
 assistant_properties::assistant_properties(
     const bool requires_assistance,
-    const std::string& assistant_method_postfix)
+    const std::string& method_postfix)
     : requires_assistance_(requires_assistance),
-      assistant_method_postfix_(assistant_method_postfix) { }
+      method_postfix_(method_postfix) { }
 
 void assistant_properties::swap(assistant_properties& other) noexcept {
     using std::swap;
     swap(requires_assistance_, other.requires_assistance_);
-    swap(assistant_method_postfix_, other.assistant_method_postfix_);
+    swap(method_postfix_, other.method_postfix_);
 }
 
 bool assistant_properties::operator==(const assistant_properties& rhs) const {
     return requires_assistance_ == rhs.requires_assistance_ &&
-        assistant_method_postfix_ == rhs.assistant_method_postfix_;
+        method_postfix_ == rhs.method_postfix_;
 }
 
 assistant_properties& assistant_properties::operator=(assistant_properties other) {
@@ -59,20 +59,20 @@ void assistant_properties::requires_assistance(const bool v) {
     requires_assistance_ = v;
 }
 
-const std::string& assistant_properties::assistant_method_postfix() const {
-    return assistant_method_postfix_;
+const std::string& assistant_properties::method_postfix() const {
+    return method_postfix_;
 }
 
-std::string& assistant_properties::assistant_method_postfix() {
-    return assistant_method_postfix_;
+std::string& assistant_properties::method_postfix() {
+    return method_postfix_;
 }
 
-void assistant_properties::assistant_method_postfix(const std::string& v) {
-    assistant_method_postfix_ = v;
+void assistant_properties::method_postfix(const std::string& v) {
+    method_postfix_ = v;
 }
 
-void assistant_properties::assistant_method_postfix(const std::string&& v) {
-    assistant_method_postfix_ = std::move(v);
+void assistant_properties::method_postfix(const std::string&& v) {
+    method_postfix_ = std::move(v);
 }
 
 } } } }

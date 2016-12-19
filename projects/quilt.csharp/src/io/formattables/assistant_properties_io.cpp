@@ -45,7 +45,7 @@ std::ostream& operator<<(std::ostream& s, const assistant_properties& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::csharp::formattables::assistant_properties\"" << ", "
       << "\"requires_assistance\": " << v.requires_assistance() << ", "
-      << "\"assistant_method_postfix\": " << "\"" << tidy_up_string(v.assistant_method_postfix()) << "\""
+      << "\"method_postfix\": " << "\"" << tidy_up_string(v.method_postfix()) << "\""
       << " }";
     return(s);
 }

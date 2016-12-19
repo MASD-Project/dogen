@@ -38,8 +38,8 @@ make_type_group(const annotations::type_repository& atrp) const {
     const auto ra(traits::csharp::assistant::requires_assistance());
     r.requires_assistance = s.select_type_by_name(ra);
 
-    const auto amp(traits::csharp::assistant::assistant_method_postfix());
-    r.assistant_method_postfix = s.select_type_by_name(amp);
+    const auto amp(traits::csharp::assistant::method_postfix());
+    r.method_postfix = s.select_type_by_name(amp);
 
     return r;
 }
@@ -58,10 +58,10 @@ assistant_expander::make_assistant_properties(const type_group& tg,
         r.requires_assistance(s.get_boolean_content(ra));
     }
 
-    const auto amp(tg.assistant_method_postfix);
+    const auto amp(tg.method_postfix);
     if (s.has_entry(amp)) {
         has_properties = true;
-        r.assistant_method_postfix(s.get_text_content(amp));
+        r.method_postfix(s.get_text_content(amp));
     }
 
     if (has_properties)

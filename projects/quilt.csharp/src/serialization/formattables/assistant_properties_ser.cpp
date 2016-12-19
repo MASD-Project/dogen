@@ -38,7 +38,7 @@ void save(Archive& ar,
     const dogen::quilt::csharp::formattables::assistant_properties& v,
     const unsigned int /*version*/) {
     ar << make_nvp("requires_assistance", v.requires_assistance_);
-    ar << make_nvp("assistant_method_postfix", v.assistant_method_postfix_);
+    ar << make_nvp("method_postfix", v.method_postfix_);
 }
 
 template<typename Archive>
@@ -46,7 +46,7 @@ void load(Archive& ar,
     dogen::quilt::csharp::formattables::assistant_properties& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("requires_assistance", v.requires_assistance_);
-    ar >> make_nvp("assistant_method_postfix", v.assistant_method_postfix_);
+    ar >> make_nvp("method_postfix", v.method_postfix_);
 }
 
 } }

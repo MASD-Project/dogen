@@ -120,7 +120,7 @@
   {
     "name": {
       "simple": "assistant_method_postfix",
-      "qualified": "quilt.csharp.assistant.assistant_method_postfix"
+      "qualified": "quilt.csharp.assistant.method_postfix"
     },
     "archetype_location": {
       "family": "quilt",

@@ -45,7 +45,7 @@ assistant_properties_generator::assistant_properties_generator() : position_(0) 
 void assistant_properties_generator::
 populate(const unsigned int position, result_type& v) {
     v.requires_assistance(create_bool(position + 0));
-    v.assistant_method_postfix(create_std_string(position + 1));
+    v.method_postfix(create_std_string(position + 1));
 }
 
 assistant_properties_generator::result_type

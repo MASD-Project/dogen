@@ -70,12 +70,12 @@ std::string traits::csharp::aspect::requires_static_reference_equals() {
 }
 
 std::string traits::csharp::assistant::requires_assistance() {
-    static std::string r("quilt.csharp.requires_assistance");
+    static std::string r("quilt.csharp.assistant.requires_assistance");
     return r;
 }
 
-std::string traits::csharp::assistant::assistant_method_postfix() {
-    static std::string r("quilt.csharp.assistant_method_postfix");
+std::string traits::csharp::assistant::method_postfix() {
+    static std::string r("quilt.csharp.assistant.method_postfix");
     return r;
 }
 

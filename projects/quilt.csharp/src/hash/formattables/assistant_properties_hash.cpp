@@ -39,7 +39,7 @@ std::size_t assistant_properties_hasher::hash(const assistant_properties& v) {
     std::size_t seed(0);
 
     combine(seed, v.requires_assistance());
-    combine(seed, v.assistant_method_postfix());
+    combine(seed, v.method_postfix());
 
     return seed;
 }

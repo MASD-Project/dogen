@@ -98,7 +98,7 @@ struct traits {
              * @brief The postfix to use when calling the assistant method, if
              * any.
              */
-            static std::string assistant_method_postfix();
+            static std::string method_postfix();
         };
     };
 };

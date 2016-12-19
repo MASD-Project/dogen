@@ -41,7 +41,7 @@ class assistant_expander final {
 private:
     struct type_group {
         annotations::type requires_assistance;
-        annotations::type assistant_method_postfix;
+        annotations::type method_postfix;
     };
 
     type_group make_type_group(const annotations::type_repository& atrp) const;
