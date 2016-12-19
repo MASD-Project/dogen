@@ -5392,6 +5392,47 @@ has been pointed out, keys should be immutable; having pointers as
 keys opens the doors to all sorts of problems. We need to throw an
 error at model building time if an user tries to do this.
 
+** Useful improvements but lacking use cases
+
+This bucket contains stories with ideas that have potential but for
+which we do not currently have a use case.
+
+*** Sequences that support multiple postfixes                         :story:
+
+In C# we encountered what is probably a new use case for sequences: a
+single sequence with two different postfixes, depending on the element
+we're processing. We solved the problem by using two separate
+sequences, with lots of copy and paste and duplication. However, a
+more elegant solution is to allow "indices" for the configuration,
+e.g. instead of:
+
+:                dogen::formatters::sequence_formatter sf1(o.local_attributes().size());
+:                dogen::formatters::sequence_formatter sf2(o.local_attributes().size());
+:                sf1.element_separator("");
+:                sf2.element_separator("");
+:                sf1.postfix_configuration().not_last(", true/*withSeparator*/");
+:                sf2.postfix_configuration().not_last("   ");
+:                sf1.postfix_configuration().last("");
+:                sf2.postfix_configuration().last("");
+
+We'd do:
+
+:                dogen::formatters::sequence_formatter sf(o.local_attributes().size());
+:                sf.element_separator("");
+:                sf.postfix_configuration(0).not_last(", true/*withSeparator*/");
+:                sf.postfix_configuration(1).not_last("   ");
+:                sf.postfix_configuration(0).last("");
+:                sf.postfix_configuration(1).last("");
+
+And then, we'd use it as:
+
+: sf1.postfix(0)
+
+and so forth.
+
+We lost the C# use case for this though, as we managed to make the API
+symmetric for both use cases.
+
 ** Tooling, infrastructure, blog posts, etc.
 
 Stuff that is not directly related to the problem domain but its
