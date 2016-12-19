@@ -23,7 +23,7 @@ namespace Dogen.TestModels.CSharpModel
 {
     public enum ColourTypes : int
     {
-        invalid = 0, /// Represents an uninitialised enum
+        Invalid = 0, /// Represents an uninitialised enum
         Red = 1, /// this is colour red
         Blue = 2, /// this is blue
         Green = 3,

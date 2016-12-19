@@ -35,8 +35,8 @@ namespace Dogen.TestModels.CSharpModel.Package1
             string valueAsString = "Unsupported Value";
             switch (value)
             {
-                case ShapeTypes.invalid:
-                    valueAsString = "invalid";
+                case ShapeTypes.Invalid:
+                    valueAsString = "Invalid";
                     break;
                 case ShapeTypes.Triangle:
                     valueAsString = "Triangle";

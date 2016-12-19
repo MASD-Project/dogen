@@ -89,8 +89,6 @@ void intermediate_model_factory::
 post_process(const annotations::annotation_groups_factory& agf,
     const annotations::type_repository& atrp, intermediate_model& im) const {
 
-    expand_enumerations(im);
-
     /*
      * We must expand annotations before we expand modules to
      * ensure the root module is populated with entries
@@ -100,6 +98,13 @@ post_process(const annotations::annotation_groups_factory& agf,
     expand_modules(im);
     expand_origin(atrp, im);
     expand_language(atrp, im);
+
+    /*
+     * Enumeration expansion must be done after language expansion as
+     * we do some language-specific processing.
+     */
+    expand_enumerations(im);
+
     expand_type_parameters(atrp, im);
     expand_parsing(atrp, im);
 }

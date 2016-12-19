@@ -35,8 +35,8 @@ namespace Dogen.TestModels.CSharpModel
             string valueAsString = "Unsupported Value";
             switch (value)
             {
-                case ColourTypes.invalid:
-                    valueAsString = "invalid";
+                case ColourTypes.Invalid:
+                    valueAsString = "Invalid";
                     break;
                 case ColourTypes.Red:
                     valueAsString = "Red";

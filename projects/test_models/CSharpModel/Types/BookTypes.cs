@@ -29,7 +29,7 @@ namespace Dogen.TestModels.CSharpModel
     /// </remarks>
     public enum BookTypes : int
     {
-        invalid = 0, /// Represents an uninitialised enum
+        Invalid = 0, /// Represents an uninitialised enum
         Great = 1,
         NotSoGreat = 2,
         Bad = 3

@@ -23,7 +23,7 @@ namespace Dogen.TestModels.CSharpModel.Package1
 {
     public enum ShapeTypes : int
     {
-        invalid = 0, /// Represents an uninitialised enum
+        Invalid = 0, /// Represents an uninitialised enum
         Triangle = 1, /// some comment
         Square = 2, /// other comment
         Rectangle = 3,

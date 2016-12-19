@@ -44,7 +44,12 @@ void enumeration_expander::expand(intermediate_model& im) {
      * Setup the invalid enumeration.
      */
     dogen::yarn::enumerator invalid;
-    invalid.name("invalid");
+
+    if (im.language() == languages::csharp)
+        invalid.name("Invalid");
+    else
+        invalid.name("invalid");
+
     invalid.documentation("Represents an uninitialised enum");
     invalid.value("0");
 
