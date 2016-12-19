@@ -18,6 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/annotations/types/annotation.hpp"
+#include "dogen/annotations/types/entry_selector.hpp"
+#include "dogen/annotations/types/type_repository_selector.hpp"
+#include "dogen/yarn/types/element.hpp"
+#include "dogen/quilt.csharp/types/traits.hpp"
 #include "dogen/quilt.csharp/types/formattables/assistant_expander.hpp"
 
 namespace dogen {
@@ -25,8 +30,62 @@ namespace quilt {
 namespace csharp {
 namespace formattables {
 
-bool assistant_expander::operator==(const assistant_expander& /*rhs*/) const {
-    return true;
+assistant_expander::type_group assistant_expander::
+make_type_group(const annotations::type_repository& atrp) const {
+    type_group r;
+    const annotations::type_repository_selector s(atrp);
+
+    const auto ra(traits::csharp::assistant::requires_assistance());
+    r.requires_assistance = s.select_type_by_name(ra);
+
+    const auto amp(traits::csharp::assistant::assistant_method_postfix());
+    r.assistant_method_postfix = s.select_type_by_name(amp);
+
+    return r;
+}
+
+boost::optional<assistant_properties>
+assistant_expander::make_assistant_properties(const type_group& tg,
+    const annotations::annotation& a) const {
+
+    assistant_properties r;
+    bool has_properties(false);
+
+    const annotations::entry_selector s(a);
+    const auto& ra(tg.requires_assistance);
+    if (s.has_entry(ra)) {
+        has_properties = true;
+        r.requires_assistance(s.get_boolean_content(ra));
+    }
+
+    const auto amp(tg.assistant_method_postfix);
+    if (s.has_entry(amp)) {
+        has_properties = true;
+        r.assistant_method_postfix(s.get_text_content(amp));
+    }
+
+    if (has_properties)
+        return r;
+
+    return boost::optional<assistant_properties>();
+}
+
+void assistant_expander::
+expand(const annotations::type_repository& atrp, model& fm) const {
+    const auto tg(make_type_group(atrp));
+
+    for (const auto& pair : fm.formattables()) {
+        const auto& formattable(pair.second);
+        const auto& e(*formattable.element());
+        const auto a(e.annotation());
+        const auto oap(make_assistant_properties(tg, a));
+        if (!oap)
+            continue;
+
+        const auto id(pair.first);
+        const auto& ap(*oap);
+        fm.assistant_properties()[id] = ap;
+    }
 }
 
 } } } }

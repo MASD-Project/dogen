@@ -21,6 +21,7 @@
 #include "dogen/quilt.csharp/types/formattables/project_items_expander.hpp"
 #include "dogen/quilt.csharp/types/formattables/decoration_expander.hpp"
 #include "dogen/quilt.csharp/types/formattables/aspect_expander.hpp"
+#include "dogen/quilt.csharp/types/formattables/assistant_expander.hpp"
 #include "dogen/quilt.csharp/types/formattables/reducer.hpp"
 #include "dogen/quilt.csharp/types/formattables/file_path_expander.hpp"
 #include "dogen/quilt.csharp/types/formattables/helper_expander.hpp"
@@ -51,6 +52,13 @@ void model_expander::expand_aspect_properties(
     ex.expand(atrp, fm);
 }
 
+void model_expander::expand_assistant_properties(
+    const annotations::type_repository& atrp, model& fm) const {
+
+    assistant_expander ex;
+    ex.expand(atrp, fm);
+}
+
 void model_expander::reduce(model& fm) const {
     reducer rd;
     rd.reduce(fm);
@@ -74,10 +82,12 @@ void model_expander::expand(
     const formatters::repository& frp, const locator& l, model& fm) const {
 
     /*
-     * We must expand the aspect properties before reduction because
-     * we need to know about properties from non-target elements.
+     * We must expand the aspect and assistant properties before
+     * reduction because we need to know about properties from
+     * non-target elements.
      */
     expand_aspect_properties(atrp, fm);
+    expand_assistant_properties(atrp, fm);
 
     /*
      * We must expand helpers before reduction because we want to

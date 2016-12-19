@@ -90,7 +90,7 @@ make_type_group(const annotations::type_repository& atrp) const {
     type_group r;
     const annotations::type_repository_selector s(atrp);
 
-    const auto rsrq(traits::requires_static_reference_equals());
+    const auto rsrq(traits::csharp::aspect::requires_static_reference_equals());
     r.requires_static_reference_equals = s.select_type_by_name(rsrq);
 
     return r;
@@ -143,7 +143,7 @@ void aspect_expander::
 expand(const annotations::type_repository& atrp, model& fm) const {
     aspect_properties_generator g(atrp);
     for (const auto& pair : fm.formattables()) {
-         const auto& formattable(pair.second);
+        const auto& formattable(pair.second);
         const auto& e(*formattable.element());
 
         e.accept(g);

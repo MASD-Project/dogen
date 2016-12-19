@@ -71,12 +71,6 @@ struct traits {
      */
     static std::string postfix();
 
-    /**
-     * @brief If true, the type requires a static method for reference
-     * equals.
-     */
-    static std::string requires_static_reference_equals();
-
     struct csharp {
         struct helper {
             /**
@@ -84,8 +78,29 @@ struct traits {
              */
             static std::string family();
         };
-    };
 
+        struct aspect {
+            /**
+             * @brief If true, the type requires a static method for reference
+             * equals.
+             */
+            static std::string requires_static_reference_equals();
+
+        };
+
+        struct assistant {
+            /**
+             * @brief If true, the element needs help from an assistant.
+             */
+            static std::string requires_assistance();
+
+            /**
+             * @brief The postfix to use when calling the assistant method, if
+             * any.
+             */
+            static std::string assistant_method_postfix();
+        };
+    };
 };
 
 } } }

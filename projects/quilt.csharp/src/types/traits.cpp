@@ -59,13 +59,23 @@ std::string traits::kernel_directory_name() {
     return r;
 }
 
-std::string traits::requires_static_reference_equals() {
+std::string traits::csharp::helper::family() {
+    static std::string r("quilt.csharp.helper.family");
+    return r;
+}
+
+std::string traits::csharp::aspect::requires_static_reference_equals() {
     static std::string r("quilt.csharp.requires_static_reference_equals");
     return r;
 }
 
-std::string traits::csharp::helper::family() {
-    static std::string r("quilt.csharp.helper.family");
+std::string traits::csharp::assistant::requires_assistance() {
+    static std::string r("quilt.csharp.requires_assistance");
+    return r;
+}
+
+std::string traits::csharp::assistant::assistant_method_postfix() {
+    static std::string r("quilt.csharp.assistant_method_postfix");
     return r;
 }
 

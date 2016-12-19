@@ -49,6 +49,9 @@ private:
     void expand_aspect_properties(
         const annotations::type_repository& atrp, model& fm) const;
 
+    void expand_assistant_properties(
+        const annotations::type_repository& atrp, model& fm) const;
+
     void reduce(model& fm) const;
 
     void expand_project_items(model& fm) const;

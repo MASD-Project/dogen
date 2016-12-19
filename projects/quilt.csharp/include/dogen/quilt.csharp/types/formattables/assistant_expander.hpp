@@ -25,7 +25,12 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <boost/optional.hpp>
+#include "dogen/annotations/types/type.hpp"
+#include "dogen/annotations/types/annotation.hpp"
+#include "dogen/annotations/types/type_repository.hpp"
+#include "dogen/quilt.csharp/types/formattables/model.hpp"
+#include "dogen/quilt.csharp/types/formattables/assistant_properties.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -33,19 +38,19 @@ namespace csharp {
 namespace formattables {
 
 class assistant_expander final {
-public:
-    assistant_expander() = default;
-    assistant_expander(const assistant_expander&) = default;
-    assistant_expander(assistant_expander&&) = default;
-    ~assistant_expander() = default;
-    assistant_expander& operator=(const assistant_expander&) = default;
+private:
+    struct type_group {
+        annotations::type requires_assistance;
+        annotations::type assistant_method_postfix;
+    };
+
+    type_group make_type_group(const annotations::type_repository& atrp) const;
+
+    boost::optional<assistant_properties> make_assistant_properties(
+        const type_group& tg, const annotations::annotation& a) const;
 
 public:
-    bool operator==(const assistant_expander& rhs) const;
-    bool operator!=(const assistant_expander& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    void expand(const annotations::type_repository& atrp, model& fm) const;
 };
 
 } } } }

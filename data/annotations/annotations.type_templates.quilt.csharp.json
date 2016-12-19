@@ -102,5 +102,32 @@
     "template_kind": "instance",
     "scope": "entity",
     "default_value": "Default"
+  },
+  {
+    "name": {
+      "simple": "requires_assistance",
+      "qualified": "quilt.csharp.assistant.requires_assistance"
+    },
+    "archetype_location": {
+      "family": "quilt",
+      "kernel": "quilt.csharp"
+    },
+    "value_type": "boolean",
+    "template_kind": "instance",
+    "scope": "entity",
+    "default_value": false
+  },
+  {
+    "name": {
+      "simple": "assistant_method_postfix",
+      "qualified": "quilt.csharp.assistant.assistant_method_postfix"
+    },
+    "archetype_location": {
+      "family": "quilt",
+      "kernel": "quilt.csharp"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "entity"
   }
 ]
