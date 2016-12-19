@@ -17,6 +17,8 @@
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 // MA 02110-1301, USA.
 //
+using System;
+
 namespace Dogen.TestModels.CSharpModel
 {
     /// <summary>
@@ -24,7 +26,7 @@ namespace Dogen.TestModels.CSharpModel
     /// </summary>
     public static class PrimitiveBuiltinsDumper
     {
-        static void Dump(AssistantDumper assistant, PrimitiveBuiltins value)
+        static internal void Dump(AssistantDumper assistant, PrimitiveBuiltins value, bool withSeparator = false)
         {
             assistant.IncrementDepth();
             if (assistant.MaximumDepthExceeded())
@@ -32,6 +34,16 @@ namespace Dogen.TestModels.CSharpModel
 
             assistant.AddStartObject();
             assistant.AddType("Dogen.TestModels.CSharpModel.PrimitiveBuiltins", true/*withSeparator*/);
+            if (value == null)
+            {
+                assistant.Add("data", "<empty>");
+                assistant.AddEndObject();
+                return;
+            }
+
+            assistant.AddKey("data");
+            assistant.AddPairSeparator();
+            assistant.AddStartObject();
             assistant.Add("ByteProperty", value.ByteProperty, true/*withSeparator*/);
             assistant.Add("ShortByteProperty", value.ShortByteProperty, true/*withSeparator*/);
             assistant.Add("IntProperty", value.IntProperty, true/*withSeparator*/);
@@ -47,7 +59,9 @@ namespace Dogen.TestModels.CSharpModel
             assistant.Add("CharProperty", value.CharProperty, true/*withSeparator*/);
             assistant.Add("BoolProperty", value.BoolProperty, true/*withSeparator*/);
             assistant.Add("DecimalProperty", value.DecimalProperty);
-            assistant.AddEndObject();
+            assistant.AddEndObject(); // data
+            assistant.AddEndObject(); // main object
+            assistant.HandleMemberSeparator(withSeparator);
 
             assistant.DecrementDepth();
         }

@@ -92,6 +92,11 @@ namespace Dogen.TestModels.CSharpModel.Tests
                 var jsonG = Package1.ShapeTypesDumper.Dump(g);
                 Log.DebugFormat("JSON: {0}", jsonG);
                 Assert.That(ValidateJson(jsonG), Is.True);
+
+                var h = AssociationSequenceGenerator.Sequence().GetEnumerator().Current;
+                var jsonH = AssociationDumper.Dump(h);
+                Log.DebugFormat("JSON: {0}", jsonH);
+                Assert.That(ValidateJson(jsonH), Is.True);
             }
         }
     }

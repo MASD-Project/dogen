@@ -33,7 +33,7 @@ enum_formatter::format(const context& ctx, const yarn::element& e) const {
     /// </summary>
     public static class <#= sn #>Dumper
     {
-        static void Dump(AssistantDumper assistant, <#= sn #> value)
+        static void Dump(AssistantDumper assistant, <#= sn #> value, bool withSeparator = false)
         {
             assistant.IncrementDepth();
             if (assistant.MaximumDepthExceeded())

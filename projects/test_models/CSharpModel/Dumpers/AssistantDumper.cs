@@ -101,7 +101,7 @@ namespace Dogen.TestModels.CSharpModel
             AddPairSeparator();
         }
 
-        private void HandleMemberSeparator(bool withSeparator)
+        public void HandleMemberSeparator(bool withSeparator)
         {
             if (withSeparator)
                 AddMemberSeparator();

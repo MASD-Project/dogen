@@ -76,34 +76,54 @@ class_formatter::format(const context& ctx, const yarn::element& e) const {
         const auto qn(a.get_qualified_name(e.name()));
         auto sbf(a.make_scoped_boilerplate_formatter());
         {
+a.stream() << "using System;" << std::endl;
+a.stream() << std::endl;
             const auto ns(a.make_namespaces(e.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
-            const bool no_parent_and_no_attributes(!o.parent() &&
-                o.all_attributes().empty());
-
 a.stream() << "    /// <summary>" << std::endl;
 a.stream() << "    /// Generates sequences of " << sn << "." << std::endl;
 a.stream() << "    /// </summary>" << std::endl;
 a.stream() << "    public static class " << sn << "Dumper" << std::endl;
 a.stream() << "    {" << std::endl;
-a.stream() << "        static void Dump(AssistantDumper assistant, " << sn << " value)" << std::endl;
+a.stream() << "        static internal void Dump(AssistantDumper assistant, " << sn << " value, bool withSeparator = false)" << std::endl;
 a.stream() << "        {" << std::endl;
 a.stream() << "            assistant.IncrementDepth();" << std::endl;
 a.stream() << "            if (assistant.MaximumDepthExceeded())" << std::endl;
 a.stream() << "                return;" << std::endl;
 a.stream() << std::endl;
 a.stream() << "            assistant.AddStartObject();" << std::endl;
-a.stream() << "            assistant.AddType(\"" << qn << "\"" << (no_parent_and_no_attributes ? "" : ", true/*withSeparator*/") << ");" << std::endl;
+a.stream() << "            assistant.AddType(\"" << qn << "\", true/*withSeparator*/);" << std::endl;
+a.stream() << "            if (value == null)" << std::endl;
+a.stream() << "            {" << std::endl;
+a.stream() << "                assistant.Add(\"data\", \"<empty>\");" << std::endl;
+a.stream() << "                assistant.AddEndObject();" << std::endl;
+a.stream() << "                return;" << std::endl;
+a.stream() << "            }" << std::endl;
+a.stream() << std::endl;
+a.stream() << "            assistant.AddKey(\"data\");" << std::endl;
+a.stream() << "            assistant.AddPairSeparator();" << std::endl;
+a.stream() << "            assistant.AddStartObject();" << std::endl;
                 dogen::formatters::sequence_formatter sf(o.local_attributes().size());
                 sf.element_separator("");
                 sf.postfix_configuration().not_last(", true/*withSeparator*/");
                 sf.postfix_configuration().last("");
 
                 for (const auto& attr : o.local_attributes()) {
+                    const auto oap(a.get_assistant_properties(attr));
+                    if (oap && oap->requires_assistance()) {
 a.stream() << "            assistant.Add(\"" << attr.name().simple() << "\", value." << attr.name().simple() << sf.postfix() << ");" << std::endl;
+                    } else {
+                        const auto attr_qn(a.get_qualified_name(attr.parsed_type().current()));
+a.stream() << "            assistant.AddKey(\"" << attr.name().simple() << "\");" << std::endl;
+a.stream() << "            assistant.AddPairSeparator();" << std::endl;
+a.stream() << "            " << attr_qn << "Dumper.Dump(assistant, value." << attr.name().simple() << sf.postfix() << ");" << std::endl;
+                    }
+
                     sf.next();
                 }
-a.stream() << "            assistant.AddEndObject();" << std::endl;
+a.stream() << "            assistant.AddEndObject(); // data" << std::endl;
+a.stream() << "            assistant.AddEndObject(); // main object" << std::endl;
+a.stream() << "            assistant.HandleMemberSeparator(withSeparator);" << std::endl;
 a.stream() << std::endl;
 a.stream() << "            assistant.DecrementDepth();" << std::endl;
 a.stream() << "        }" << std::endl;

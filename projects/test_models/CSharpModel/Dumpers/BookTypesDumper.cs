@@ -24,7 +24,7 @@ namespace Dogen.TestModels.CSharpModel
     /// </summary>
     public static class BookTypesDumper
     {
-        static void Dump(AssistantDumper assistant, BookTypes value)
+        static void Dump(AssistantDumper assistant, BookTypes value, bool withSeparator = false)
         {
             assistant.IncrementDepth();
             if (assistant.MaximumDepthExceeded())

@@ -17,6 +17,8 @@
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 // MA 02110-1301, USA.
 //
+using System;
+
 namespace Dogen.TestModels.CSharpModel
 {
     /// <summary>
@@ -24,7 +26,7 @@ namespace Dogen.TestModels.CSharpModel
     /// </summary>
     public static class OnePropertyDumper
     {
-        static void Dump(AssistantDumper assistant, OneProperty value)
+        static internal void Dump(AssistantDumper assistant, OneProperty value, bool withSeparator = false)
         {
             assistant.IncrementDepth();
             if (assistant.MaximumDepthExceeded())
@@ -32,8 +34,20 @@ namespace Dogen.TestModels.CSharpModel
 
             assistant.AddStartObject();
             assistant.AddType("Dogen.TestModels.CSharpModel.OneProperty", true/*withSeparator*/);
+            if (value == null)
+            {
+                assistant.Add("data", "<empty>");
+                assistant.AddEndObject();
+                return;
+            }
+
+            assistant.AddKey("data");
+            assistant.AddPairSeparator();
+            assistant.AddStartObject();
             assistant.Add("Property", value.Property);
-            assistant.AddEndObject();
+            assistant.AddEndObject(); // data
+            assistant.AddEndObject(); // main object
+            assistant.HandleMemberSeparator(withSeparator);
 
             assistant.DecrementDepth();
         }

@@ -159,7 +159,7 @@ a.stream() << "            AddKey(key);" << std::endl;
 a.stream() << "            AddPairSeparator();" << std::endl;
 a.stream() << "        }" << std::endl;
 a.stream() << std::endl;
-a.stream() << "        private void HandleMemberSeparator(bool withSeparator)" << std::endl;
+a.stream() << "        public void HandleMemberSeparator(bool withSeparator)" << std::endl;
 a.stream() << "        {" << std::endl;
 a.stream() << "            if (withSeparator)" << std::endl;
 a.stream() << "                AddMemberSeparator();" << std::endl;

@@ -31,6 +31,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dumpers\AssistantDumper.cs" />
+    <Compile Include="Dumpers\AssociationDumper.cs" />
     <Compile Include="Dumpers\BookTypesDumper.cs" />
     <Compile Include="Dumpers\ColourTypesDumper.cs" />
     <Compile Include="Dumpers\ComplexBuiltinsDumper.cs" />
@@ -44,6 +45,7 @@
     <Compile Include="Dumpers\Package1\ShapeTypesDumper.cs" />
     <Compile Include="Dumpers\PrimitiveBuiltinsDumper.cs" />
     <Compile Include="SequenceGenerators\AssistantSequenceGenerator.cs" />
+    <Compile Include="SequenceGenerators\AssociationSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\BookTypesSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\ColourTypesSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\ComplexBuiltinsSequenceGenerator.cs" />
@@ -56,6 +58,7 @@
     <Compile Include="SequenceGenerators\Package1\Class5SequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\Package1\ShapeTypesSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\PrimitiveBuiltinsSequenceGenerator.cs" />
+    <Compile Include="Types\Association.cs" />
     <Compile Include="Types\BookTypes.cs" />
     <Compile Include="Types\ColourTypes.cs" />
     <Compile Include="Types\ComplexBuiltins.cs" />

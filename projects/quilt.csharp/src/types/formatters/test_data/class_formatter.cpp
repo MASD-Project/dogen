@@ -73,7 +73,7 @@ class_formatter::format(const context& ctx, const yarn::element& e) const {
     const auto& o(a.as<yarn::object>(static_artefact(), e));
     {
         const auto sn(e.name().simple());
-        // const auto qn(a.get_qualified_name(e.name()));
+        const auto qn(a.get_qualified_name(e.name()));
         auto sbf(a.make_scoped_boilerplate_formatter());
         {
 a.stream() << "using System;" << std::endl;
@@ -102,6 +102,9 @@ a.stream() << std::endl;
                         const auto oap(a.get_assistant_properties(attr));
                         if (oap && oap->requires_assistance()) {
 a.stream() << "            result." << attr.name().simple() << " = AssistantSequenceGenerator.Create" << oap->method_postfix() << "(position + " << count++ << ");" << std::endl;
+                        } else {
+                            const auto attr_qn(a.get_qualified_name(attr.parsed_type().current()));
+a.stream() << "            result." << attr.name().simple() << " = " << attr_qn << "SequenceGenerator.Create(position + " << count++ << ");" << std::endl;
                         }
                     }
 a.stream() << std::endl;

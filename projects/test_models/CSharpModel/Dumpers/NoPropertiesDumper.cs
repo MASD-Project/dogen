@@ -17,6 +17,8 @@
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 // MA 02110-1301, USA.
 //
+using System;
+
 namespace Dogen.TestModels.CSharpModel
 {
     /// <summary>
@@ -24,15 +26,27 @@ namespace Dogen.TestModels.CSharpModel
     /// </summary>
     public static class NoPropertiesDumper
     {
-        static void Dump(AssistantDumper assistant, NoProperties value)
+        static internal void Dump(AssistantDumper assistant, NoProperties value, bool withSeparator = false)
         {
             assistant.IncrementDepth();
             if (assistant.MaximumDepthExceeded())
                 return;
 
             assistant.AddStartObject();
-            assistant.AddType("Dogen.TestModels.CSharpModel.NoProperties");
-            assistant.AddEndObject();
+            assistant.AddType("Dogen.TestModels.CSharpModel.NoProperties", true/*withSeparator*/);
+            if (value == null)
+            {
+                assistant.Add("data", "<empty>");
+                assistant.AddEndObject();
+                return;
+            }
+
+            assistant.AddKey("data");
+            assistant.AddPairSeparator();
+            assistant.AddStartObject();
+            assistant.AddEndObject(); // data
+            assistant.AddEndObject(); // main object
+            assistant.HandleMemberSeparator(withSeparator);
 
             assistant.DecrementDepth();
         }

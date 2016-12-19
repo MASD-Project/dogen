@@ -17,48 +17,45 @@
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 // MA 02110-1301, USA.
 //
+using System;
+
 namespace Dogen.TestModels.CSharpModel
 {
     /// <summary>
-    /// Generates sequences of ColourTypes.
+    /// Generates sequences of Association.
     /// </summary>
-    public static class ColourTypesDumper
+    public static class AssociationDumper
     {
-        static void Dump(AssistantDumper assistant, ColourTypes value, bool withSeparator = false)
+        static internal void Dump(AssistantDumper assistant, Association value, bool withSeparator = false)
         {
             assistant.IncrementDepth();
             if (assistant.MaximumDepthExceeded())
                 return;
 
             assistant.AddStartObject();
-            assistant.AddType("Dogen.TestModels.CSharpModel.ColourTypes", true/*withSeparator*/);
-            string valueAsString = "Unsupported Value";
-            switch (value)
+            assistant.AddType("Dogen.TestModels.CSharpModel.Association", true/*withSeparator*/);
+            if (value == null)
             {
-                case ColourTypes.Invalid:
-                    valueAsString = "Invalid";
-                    break;
-                case ColourTypes.Red:
-                    valueAsString = "Red";
-                    break;
-                case ColourTypes.Blue:
-                    valueAsString = "Blue";
-                    break;
-                case ColourTypes.Green:
-                    valueAsString = "Green";
-                    break;
-                case ColourTypes.Gray:
-                    valueAsString = "Gray";
-                    break;
+                assistant.Add("data", "<empty>");
+                assistant.AddEndObject();
+                return;
             }
 
-            assistant.Add("value", valueAsString);
-            assistant.AddEndObject();
+            assistant.AddKey("data");
+            assistant.AddPairSeparator();
+            assistant.AddStartObject();
+            assistant.Add("Prop0", value.Prop0, true/*withSeparator*/);
+            assistant.AddKey("Prop1");
+            assistant.AddPairSeparator();
+            Dogen.TestModels.CSharpModel.NoPropertiesDumper.Dump(assistant, value.Prop1);
+            assistant.AddEndObject(); // data
+            assistant.AddEndObject(); // main object
+            assistant.HandleMemberSeparator(withSeparator);
 
             assistant.DecrementDepth();
         }
 
-        public static string Dump(ColourTypes value)
+        public static string Dump(Association value)
         {
             var assistant = new AssistantDumper();
             Dump(assistant, value);

@@ -38,6 +38,7 @@ const bool use_documentation_tool_markup(true);
 const bool last_line_is_blank(true);
 const bool documenting_previous_identifier(true);
 
+const std::string default_family("Default");
 const std::string static_reference_equals("object");
 const std::string artefact_properties_missing(
     "Could not find formatter configuration for formatter: ");
@@ -178,27 +179,35 @@ std::string assistant::comment_inline(const std::string& c) const {
 
 std::list<std::shared_ptr<formatters::helper_formatter_interface>>
 assistant::get_helpers(const formattables::helper_properties& hp) const {
-    /*
-     * A family must have at least one helper registered. This is a
-     * good way to detect spurious families in data files.
-     */
     const auto fam(hp.current().family());
-    const auto i(context_.helpers().find(fam));
-    if (i == context_.helpers().end()) {
-        BOOST_LOG_SEV(lg, error) << no_helpers_for_family << fam;
-        BOOST_THROW_EXCEPTION(formatting_error(no_helpers_for_family + fam));
-    }
-    BOOST_LOG_SEV(lg, debug) << "Found helpers for family: " << fam;
 
     /*
-     * Not all formatters need help, so its fine not to have a
-     * helper registered against a particular formatter.
+     * Bit of a hack: we manually ignore the "Default" family. This is
+     * a quick way to solve a mismatch between C# and C++: in C++ we
+     * need a helper for all domain types, but not so in C#.
      */
-    const auto j(i->second.find(archetype_location_.archetype()));
-    if (j != i->second.end()) {
-        BOOST_LOG_SEV(lg, debug) << "Found helpers for formatter: "
-                                 << archetype_location_.archetype();
-        return j->second;
+    if (fam != default_family) {
+        /*
+         * A family must have at least one helper registered. This is a
+         * good way to detect spurious families in data files.
+         */
+        const auto i(context_.helpers().find(fam));
+        if (i == context_.helpers().end()) {
+            BOOST_LOG_SEV(lg, error) << no_helpers_for_family << fam;
+            BOOST_THROW_EXCEPTION(formatting_error(no_helpers_for_family + fam));
+        }
+        BOOST_LOG_SEV(lg, debug) << "Found helpers for family: " << fam;
+
+        /*
+         * Not all formatters need help, so its fine not to have a
+         * helper registered against a particular formatter.
+         */
+        const auto j(i->second.find(archetype_location_.archetype()));
+        if (j != i->second.end()) {
+            BOOST_LOG_SEV(lg, debug) << "Found helpers for formatter: "
+                                     << archetype_location_.archetype();
+            return j->second;
+        }
     }
 
     BOOST_LOG_SEV(lg, debug) << "Could not find helpers for formatter:"
