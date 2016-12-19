@@ -17,7 +17,6 @@
       },
       "meta_type": "object",
       "stereotypes": [
-        "value object",
         "visitable"
       ]
     },
@@ -89,9 +88,6 @@
         "simple_name": "descendant1"
       },
       "meta_type": "object",
-      "stereotypes": [
-        "value object"
-      ],
       "parent": {
         "simple_name": "base"
       }
@@ -101,9 +97,6 @@
         "simple_name": "descendant2"
       },
       "meta_type": "object",
-      "stereotypes": [
-        "value object"
-      ],
       "parent": {
         "simple_name": "base"
       },

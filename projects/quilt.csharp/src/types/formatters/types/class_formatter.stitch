@@ -32,8 +32,18 @@ using System;
             const auto ns(a.make_namespaces(e.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
             a.comment(e.documentation(), 1/*indent*/);
+            if (!o.in_inheritance_relationship() || o.is_parent()) {
 #>
-    public class <#= sn #>
+    public <#= a.make_inheritance_keyword_text(o) #>class <#= sn #>
+<#+
+            } else {
+                const auto& pn(*o.parent());
+                const auto pqn(a.get_qualified_name(pn));
+#>
+    public <#= a.make_inheritance_keyword_text(o) #>class <#= sn #> : <#= pqn #>
+<#+
+            }
+#>
     {
 <#+
             if (!o.local_attributes().empty()) {

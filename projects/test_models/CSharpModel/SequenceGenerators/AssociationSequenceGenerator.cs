@@ -28,14 +28,16 @@ namespace Dogen.TestModels.CSharpModel
     /// </summary>
     public static class AssociationSequenceGenerator
     {
+        static internal void Populate(Association value, uint position)
+        {
+            value.Prop0 = AssistantSequenceGenerator.CreateInt(position + 0);
+            value.Prop1 = Dogen.TestModels.CSharpModel.NoPropertiesSequenceGenerator.Create(position + 1);
+            value.Prop2 = Dogen.TestModels.CSharpModel.ColourTypesSequenceGenerator.Create(position + 2);
+        }
         static internal Association Create(uint position)
         {
             var result = new Association();
-
-            result.Prop0 = AssistantSequenceGenerator.CreateInt(position + 0);
-            result.Prop1 = Dogen.TestModels.CSharpModel.NoPropertiesSequenceGenerator.Create(position + 1);
-            result.Prop2 = Dogen.TestModels.CSharpModel.ColourTypesSequenceGenerator.Create(position + 2);
-
+            Populate(result, position);
             return result;
         }
 

@@ -33,8 +33,8 @@ using System.Collections.Generic;
 <#+
             const auto ns(a.make_namespaces(e.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
-            const bool no_parent_and_no_attributes(!o.parent() &&
-                o.all_attributes().empty());
+            const bool has_attributes(!o.all_attributes().empty());
+            const bool is_parent_or_has_attributes(o.parent() || has_attributes);
 
 #>
     /// <summary>
@@ -42,37 +42,62 @@ using System.Collections.Generic;
     /// </summary>
     public static class <#= sn #>SequenceGenerator
     {
+<#+
+            if (is_parent_or_has_attributes) {
+#>
+        static internal void Populate(<#= sn #> value, uint position)
+        {
+<#+
+                unsigned int count(0);
+                for (const auto& attr : o.local_attributes()) {
+                    const auto oap(a.get_assistant_properties(attr));
+                    if (oap && oap->requires_assistance()) {
+#>
+            value.<#= attr.name().simple() #> = AssistantSequenceGenerator.Create<#= oap->method_postfix() #>(position + <#= count++ #>);
+<#+
+                    } else {
+                        const auto attr_qn(a.get_qualified_name(attr.parsed_type().current()));
+#>
+            value.<#= attr.name().simple() #> = <#= attr_qn #>SequenceGenerator.Create(position + <#= count++ #>);
+<#+
+                    }
+                }
+#>
+        }
+<#+
+            }
+#>
         static internal <#= sn #> Create(uint position)
         {
+<#+
+            if (!o.is_parent()) {
+#>
             var result = new <#= sn #>();
 <#+
-                if (no_parent_and_no_attributes)
+                if (has_attributes) {
 #>
-            return result;
-<#+
-                else {
-#>
-
-<#+
-                    unsigned int count(0);
-                    for (const auto& attr : o.local_attributes()) {
-                        const auto oap(a.get_assistant_properties(attr));
-                        if (oap && oap->requires_assistance()) {
-#>
-            result.<#= attr.name().simple() #> = AssistantSequenceGenerator.Create<#= oap->method_postfix() #>(position + <#= count++ #>);
-<#+
-                        } else {
-                            const auto attr_qn(a.get_qualified_name(attr.parsed_type().current()));
-#>
-            result.<#= attr.name().simple() #> = <#= attr_qn #>SequenceGenerator.Create(position + <#= count++ #>);
-<#+
-                        }
-                    }
-#>
-
-            return result;
+            Populate(result, position);
 <#+
                 }
+#>
+            return result;
+<#+
+            } else {
+                auto leaves(o.leaves());
+                const auto front(leaves.front());
+                leaves.pop_front();
+                unsigned int i(0);
+                unsigned int total(leaves.size());
+                for (const auto& l : leaves) {
+#>
+            if ((position % <#= total #>) == <#= i++ #>)
+                return <#= a.get_qualified_name(l) #>SequenceGenerator.Create(position);
+<#+
+                }
+#>
+            return <#= a.get_qualified_name(front) #>SequenceGenerator.Create(position);
+<#+
+            }
 #>
         }
 

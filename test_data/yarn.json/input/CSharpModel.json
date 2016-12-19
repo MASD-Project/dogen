@@ -36,6 +36,12 @@
     },
     {
       "name": {
+        "simple_name": "Base"
+      },
+      "meta_type": "object"
+    },
+    {
+      "name": {
         "simple_name": "ComplexBuiltins"
       },
       "meta_type": "object",
@@ -50,6 +56,15 @@
           "type": "string"
         }
       ]
+    },
+    {
+      "name": {
+        "simple_name": "Descendant1"
+      },
+      "meta_type": "object",
+      "parent": {
+        "simple_name": "Base"
+      }
     },
     {
       "name": {

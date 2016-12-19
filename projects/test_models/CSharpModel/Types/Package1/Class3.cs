@@ -21,7 +21,7 @@ using System;
 
 namespace Dogen.TestModels.CSharpModel.Package1
 {
-    public class Class3
+    public sealed class Class3
     {
         #region Properties
         public int Prop0 { get; set; }

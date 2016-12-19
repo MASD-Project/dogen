@@ -21,7 +21,7 @@ using System;
 
 namespace Dogen.TestModels.CSharpModel
 {
-    public class Association
+    public sealed class Association
     {
         #region Properties
         /// <summary>

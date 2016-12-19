@@ -21,37 +21,29 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Dogen.TestModels.CSharpModel.Package1
+namespace Dogen.TestModels.CSharpModel
 {
     /// <summary>
-    /// Generates sequences of AssociationInPackage.
+    /// Generates sequences of Base.
     /// </summary>
-    public static class AssociationInPackageSequenceGenerator
+    public static class BaseSequenceGenerator
     {
-        static internal void Populate(AssociationInPackage value, uint position)
+        static internal Base Create(uint position)
         {
-            value.Prop0 = Dogen.TestModels.CSharpModel.PrimitiveBuiltinsSequenceGenerator.Create(position + 0);
-            value.Prop1 = Dogen.TestModels.CSharpModel.ComplexBuiltinsSequenceGenerator.Create(position + 1);
-            value.Prop2 = Dogen.TestModels.CSharpModel.Package1.Class1SequenceGenerator.Create(position + 2);
-        }
-        static internal AssociationInPackage Create(uint position)
-        {
-            var result = new AssociationInPackage();
-            Populate(result, position);
-            return result;
+            return Dogen.TestModels.CSharpModel.Descendant1SequenceGenerator.Create(position);
         }
 
         #region Enumerator
-        private class AssociationInPackageEnumerator : IEnumerator, IEnumerator<AssociationInPackage>, IDisposable
+        private class BaseEnumerator : IEnumerator, IEnumerator<Base>, IDisposable
         {
             #region Properties
             private uint _position;
-            private AssociationInPackage _current;
+            private Base _current;
             #endregion
 
             private void PopulateCurrent()
             {
-                _current = AssociationInPackageSequenceGenerator.Create(_position);
+                _current = BaseSequenceGenerator.Create(_position);
             }
 
             #region IDisposable
@@ -81,7 +73,7 @@ namespace Dogen.TestModels.CSharpModel.Package1
                 }
             }
 
-            AssociationInPackage IEnumerator<AssociationInPackage>.Current
+            Base IEnumerator<Base>.Current
             {
                 get
                 {
@@ -90,7 +82,7 @@ namespace Dogen.TestModels.CSharpModel.Package1
             }
             #endregion
 
-            public AssociationInPackageEnumerator()
+            public BaseEnumerator()
             {
                 PopulateCurrent();
             }
@@ -98,25 +90,25 @@ namespace Dogen.TestModels.CSharpModel.Package1
         #endregion
 
         #region Enumerable
-        private class AssociationInPackageEnumerable : IEnumerable, IEnumerable<AssociationInPackage>
+        private class BaseEnumerable : IEnumerable, IEnumerable<Base>
         {
             #region IEnumerable implementation
             public IEnumerator GetEnumerator()
             {
-                return new AssociationInPackageEnumerator();
+                return new BaseEnumerator();
             }
 
-            IEnumerator<AssociationInPackage> IEnumerable<AssociationInPackage>.GetEnumerator()
+            IEnumerator<Base> IEnumerable<Base>.GetEnumerator()
             {
-                return new AssociationInPackageEnumerator();
+                return new BaseEnumerator();
             }
             #endregion
         }
         #endregion
 
-        static public IEnumerable<AssociationInPackage> Sequence()
+        static public IEnumerable<Base> Sequence()
         {
-            return new AssociationInPackageEnumerable();
+            return new BaseEnumerable();
         }
     }
 }

@@ -36,6 +36,7 @@
 #include "dogen/yarn/types/attribute.hpp"
 #include "dogen/yarn/types/name_tree.hpp"
 #include "dogen/yarn/types/element.hpp"
+#include "dogen/yarn/types/object.hpp"
 #include "dogen/quilt.csharp/types/formatters/context.hpp"
 #include "dogen/quilt.csharp/types/formattables/helper_properties.hpp"
 #include "dogen/quilt.csharp/types/formattables/assistant_properties.hpp"
@@ -61,6 +62,13 @@ public:
         as(const std::string& /*archetype*/, const yarn::element& e) {
         return dynamic_cast<const T&>(e);
     }
+
+    /**
+     * @brief Returns the keyword to use for a given class, defining
+     * its inheritance properties: sealed or abstract. If non-empty,
+     * includes a trailing space.
+     */
+    static std::string make_inheritance_keyword_text(const yarn::object& o);
 
 public:
     /**

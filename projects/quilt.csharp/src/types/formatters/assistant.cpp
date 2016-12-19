@@ -34,6 +34,8 @@ static logger lg(logger_factory("quilt.csharp.formatters.assistant"));
 
 const std::string empty;
 const bool start_on_first_line(true);
+const std::string sealed_keyword_text("sealed ");
+const std::string abstract_keyword_text("abstract ");
 const bool use_documentation_tool_markup(true);
 const bool last_line_is_blank(true);
 const bool documenting_previous_identifier(true);
@@ -88,6 +90,13 @@ assistant(const context& ctx, const annotations::archetype_location& al,
 
     dogen::formatters::indent_filter::push(filtering_stream_, 4);
     filtering_stream_.push(stream_);
+}
+
+std::string assistant::make_inheritance_keyword_text(const yarn::object& o) {
+    if (o.is_parent())
+        return abstract_keyword_text;
+
+    return o.is_final() ? sealed_keyword_text : empty;
 }
 
 const formattables::artefact_properties& assistant::

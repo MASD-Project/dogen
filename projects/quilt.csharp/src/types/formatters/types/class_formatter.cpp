@@ -81,7 +81,13 @@ a.stream() << std::endl;
             const auto ns(a.make_namespaces(e.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
             a.comment(e.documentation(), 1/*indent*/);
-a.stream() << "    public class " << sn << std::endl;
+            if (!o.in_inheritance_relationship() || o.is_parent()) {
+a.stream() << "    public " << a.make_inheritance_keyword_text(o) << "class " << sn << std::endl;
+            } else {
+                const auto& pn(*o.parent());
+                const auto pqn(a.get_qualified_name(pn));
+a.stream() << "    public " << a.make_inheritance_keyword_text(o) << "class " << sn << " : " << pqn << std::endl;
+            }
 a.stream() << "    {" << std::endl;
             if (!o.local_attributes().empty()) {
                 if (!ctx.element_properties().helper_properties().empty())

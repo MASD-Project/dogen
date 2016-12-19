@@ -28,12 +28,14 @@ namespace Dogen.TestModels.CSharpModel
     /// </summary>
     public static class OnePropertySequenceGenerator
     {
+        static internal void Populate(OneProperty value, uint position)
+        {
+            value.Property = AssistantSequenceGenerator.CreateInt(position + 0);
+        }
         static internal OneProperty Create(uint position)
         {
             var result = new OneProperty();
-
-            result.Property = AssistantSequenceGenerator.CreateInt(position + 0);
-
+            Populate(result, position);
             return result;
         }
 

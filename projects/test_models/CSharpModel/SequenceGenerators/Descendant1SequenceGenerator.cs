@@ -21,37 +21,33 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Dogen.TestModels.CSharpModel.Package1
+namespace Dogen.TestModels.CSharpModel
 {
     /// <summary>
-    /// Generates sequences of AssociationInPackage.
+    /// Generates sequences of Descendant1.
     /// </summary>
-    public static class AssociationInPackageSequenceGenerator
+    public static class Descendant1SequenceGenerator
     {
-        static internal void Populate(AssociationInPackage value, uint position)
+        static internal void Populate(Descendant1 value, uint position)
         {
-            value.Prop0 = Dogen.TestModels.CSharpModel.PrimitiveBuiltinsSequenceGenerator.Create(position + 0);
-            value.Prop1 = Dogen.TestModels.CSharpModel.ComplexBuiltinsSequenceGenerator.Create(position + 1);
-            value.Prop2 = Dogen.TestModels.CSharpModel.Package1.Class1SequenceGenerator.Create(position + 2);
         }
-        static internal AssociationInPackage Create(uint position)
+        static internal Descendant1 Create(uint position)
         {
-            var result = new AssociationInPackage();
-            Populate(result, position);
+            var result = new Descendant1();
             return result;
         }
 
         #region Enumerator
-        private class AssociationInPackageEnumerator : IEnumerator, IEnumerator<AssociationInPackage>, IDisposable
+        private class Descendant1Enumerator : IEnumerator, IEnumerator<Descendant1>, IDisposable
         {
             #region Properties
             private uint _position;
-            private AssociationInPackage _current;
+            private Descendant1 _current;
             #endregion
 
             private void PopulateCurrent()
             {
-                _current = AssociationInPackageSequenceGenerator.Create(_position);
+                _current = Descendant1SequenceGenerator.Create(_position);
             }
 
             #region IDisposable
@@ -81,7 +77,7 @@ namespace Dogen.TestModels.CSharpModel.Package1
                 }
             }
 
-            AssociationInPackage IEnumerator<AssociationInPackage>.Current
+            Descendant1 IEnumerator<Descendant1>.Current
             {
                 get
                 {
@@ -90,7 +86,7 @@ namespace Dogen.TestModels.CSharpModel.Package1
             }
             #endregion
 
-            public AssociationInPackageEnumerator()
+            public Descendant1Enumerator()
             {
                 PopulateCurrent();
             }
@@ -98,25 +94,25 @@ namespace Dogen.TestModels.CSharpModel.Package1
         #endregion
 
         #region Enumerable
-        private class AssociationInPackageEnumerable : IEnumerable, IEnumerable<AssociationInPackage>
+        private class Descendant1Enumerable : IEnumerable, IEnumerable<Descendant1>
         {
             #region IEnumerable implementation
             public IEnumerator GetEnumerator()
             {
-                return new AssociationInPackageEnumerator();
+                return new Descendant1Enumerator();
             }
 
-            IEnumerator<AssociationInPackage> IEnumerable<AssociationInPackage>.GetEnumerator()
+            IEnumerator<Descendant1> IEnumerable<Descendant1>.GetEnumerator()
             {
-                return new AssociationInPackageEnumerator();
+                return new Descendant1Enumerator();
             }
             #endregion
         }
         #endregion
 
-        static public IEnumerable<AssociationInPackage> Sequence()
+        static public IEnumerable<Descendant1> Sequence()
         {
-            return new AssociationInPackageEnumerable();
+            return new Descendant1Enumerable();
         }
     }
 }

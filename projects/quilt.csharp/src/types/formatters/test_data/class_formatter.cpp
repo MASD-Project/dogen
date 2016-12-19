@@ -82,34 +82,49 @@ a.stream() << "using System.Collections.Generic;" << std::endl;
 a.stream() << std::endl;
             const auto ns(a.make_namespaces(e.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
-            const bool no_parent_and_no_attributes(!o.parent() &&
-                o.all_attributes().empty());
+            const bool has_attributes(!o.all_attributes().empty());
+            const bool is_parent_or_has_attributes(o.parent() || has_attributes);
 
 a.stream() << "    /// <summary>" << std::endl;
 a.stream() << "    /// Generates sequences of " << sn << "." << std::endl;
 a.stream() << "    /// </summary>" << std::endl;
 a.stream() << "    public static class " << sn << "SequenceGenerator" << std::endl;
 a.stream() << "    {" << std::endl;
+            if (is_parent_or_has_attributes) {
+a.stream() << "        static internal void Populate(" << sn << " value, uint position)" << std::endl;
+a.stream() << "        {" << std::endl;
+                unsigned int count(0);
+                for (const auto& attr : o.local_attributes()) {
+                    const auto oap(a.get_assistant_properties(attr));
+                    if (oap && oap->requires_assistance()) {
+a.stream() << "            value." << attr.name().simple() << " = AssistantSequenceGenerator.Create" << oap->method_postfix() << "(position + " << count++ << ");" << std::endl;
+                    } else {
+                        const auto attr_qn(a.get_qualified_name(attr.parsed_type().current()));
+a.stream() << "            value." << attr.name().simple() << " = " << attr_qn << "SequenceGenerator.Create(position + " << count++ << ");" << std::endl;
+                    }
+                }
+a.stream() << "        }" << std::endl;
+            }
 a.stream() << "        static internal " << sn << " Create(uint position)" << std::endl;
 a.stream() << "        {" << std::endl;
+            if (!o.is_parent()) {
 a.stream() << "            var result = new " << sn << "();" << std::endl;
-                if (no_parent_and_no_attributes)
-a.stream() << "            return result;" << std::endl;
-                else {
-a.stream() << std::endl;
-                    unsigned int count(0);
-                    for (const auto& attr : o.local_attributes()) {
-                        const auto oap(a.get_assistant_properties(attr));
-                        if (oap && oap->requires_assistance()) {
-a.stream() << "            result." << attr.name().simple() << " = AssistantSequenceGenerator.Create" << oap->method_postfix() << "(position + " << count++ << ");" << std::endl;
-                        } else {
-                            const auto attr_qn(a.get_qualified_name(attr.parsed_type().current()));
-a.stream() << "            result." << attr.name().simple() << " = " << attr_qn << "SequenceGenerator.Create(position + " << count++ << ");" << std::endl;
-                        }
-                    }
-a.stream() << std::endl;
-a.stream() << "            return result;" << std::endl;
+                if (has_attributes) {
+a.stream() << "            Populate(result, position);" << std::endl;
                 }
+a.stream() << "            return result;" << std::endl;
+            } else {
+                auto leaves(o.leaves());
+                const auto front(leaves.front());
+                leaves.pop_front();
+                unsigned int i(0);
+                unsigned int total(leaves.size());
+                for (const auto& l : leaves) {
+a.stream() << "            if ((position % " << total << ") == " << i++ << ")" << std::endl;
+a.stream() << "                return " << a.get_qualified_name(l) << "SequenceGenerator.Create(position);" << std::endl;
+                }
+a.stream() << "            return " << a.get_qualified_name(front) << "SequenceGenerator.Create(position);" << std::endl;
+            }
 a.stream() << "        }" << std::endl;
 a.stream() << std::endl;
 a.stream() << "        #region Enumerator" << std::endl;

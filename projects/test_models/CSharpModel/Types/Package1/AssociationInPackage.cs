@@ -21,7 +21,7 @@ using System;
 
 namespace Dogen.TestModels.CSharpModel.Package1
 {
-    public class AssociationInPackage
+    public sealed class AssociationInPackage
     {
         #region Properties
         public Dogen.TestModels.CSharpModel.PrimitiveBuiltins Prop0 { get; set; }

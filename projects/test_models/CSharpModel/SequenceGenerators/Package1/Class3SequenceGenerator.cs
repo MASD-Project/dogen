@@ -28,12 +28,14 @@ namespace Dogen.TestModels.CSharpModel.Package1
     /// </summary>
     public static class Class3SequenceGenerator
     {
+        static internal void Populate(Class3 value, uint position)
+        {
+            value.Prop0 = AssistantSequenceGenerator.CreateInt(position + 0);
+        }
         static internal Class3 Create(uint position)
         {
             var result = new Class3();
-
-            result.Prop0 = AssistantSequenceGenerator.CreateInt(position + 0);
-
+            Populate(result, position);
             return result;
         }
 

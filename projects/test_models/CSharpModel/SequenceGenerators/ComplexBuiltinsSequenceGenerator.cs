@@ -28,13 +28,15 @@ namespace Dogen.TestModels.CSharpModel
     /// </summary>
     public static class ComplexBuiltinsSequenceGenerator
     {
+        static internal void Populate(ComplexBuiltins value, uint position)
+        {
+            value.ObjectProperty = AssistantSequenceGenerator.CreateObject(position + 0);
+            value.StringProperty = AssistantSequenceGenerator.CreateString(position + 1);
+        }
         static internal ComplexBuiltins Create(uint position)
         {
             var result = new ComplexBuiltins();
-
-            result.ObjectProperty = AssistantSequenceGenerator.CreateObject(position + 0);
-            result.StringProperty = AssistantSequenceGenerator.CreateString(position + 1);
-
+            Populate(result, position);
             return result;
         }
 

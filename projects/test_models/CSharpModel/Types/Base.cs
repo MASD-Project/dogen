@@ -21,18 +21,8 @@ using System;
 
 namespace Dogen.TestModels.CSharpModel
 {
-    /// <summary>
-    /// This class tests the use case of one property.
-    /// </summary>
-    public sealed class OneProperty
+    public abstract class Base
     {
-        #region Properties
-        /// <summary>
-        /// Just the one property.
-        /// </summary>
-        public int Property { get; set; }
-        #endregion
-
         #region Equality
         public override bool Equals(object obj)
         {
@@ -40,14 +30,11 @@ namespace Dogen.TestModels.CSharpModel
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != GetType()) return false;
 
-            var value = obj as OneProperty;
-            if (value == null) return false;
-
-            return
-                Property == value.Property;
+            var value = obj as Base;
+            return value != null;
         }
 
-        public static bool operator ==(OneProperty lhs, OneProperty rhs)
+        public static bool operator ==(Base lhs, Base rhs)
         {
             if (Object.ReferenceEquals(lhs, rhs))
                 return true;
@@ -55,23 +42,14 @@ namespace Dogen.TestModels.CSharpModel
             return !Object.ReferenceEquals(null, lhs) && lhs.Equals(rhs);
         }
 
-        public static bool operator !=(OneProperty lhs, OneProperty rhs)
+        public static bool operator !=(Base lhs, Base rhs)
         {
             return !(lhs == rhs);
         }
 
         public override int GetHashCode()
         {
-            unchecked
-            {
-                // Choose large primes to avoid hashing collisions
-                const int HashingBase = (int) 2166136261;
-                const int HashingMultiplier = 16777619;
-
-                int hash = HashingBase;
-                hash = (hash * HashingMultiplier) ^ Property.GetHashCode();
-                return hash;
-            }
+            return 0;
         }
         #endregion
     }
