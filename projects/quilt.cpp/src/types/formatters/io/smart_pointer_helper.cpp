@@ -84,7 +84,7 @@ a.stream() << std::endl;
 a.stream() << "    if (v)" << std::endl;
 a.stream() << "        s << \"\\\"data\\\": \" << " << a.streaming_for_type(containee, "*v") << ";" << std::endl;
 a.stream() << "    else" << std::endl;
-a.stream() << "        s << \"\\\"data\\\": \"\"\\\"<empty>\\\"\";" << std::endl;
+a.stream() << "        s << \"\\\"data\\\": \"\"\\\"<null>\\\"\";" << std::endl;
 a.stream() << "    s << \" }\";" << std::endl;
 a.stream() << "    return s;" << std::endl;
 a.stream() << "}" << std::endl;

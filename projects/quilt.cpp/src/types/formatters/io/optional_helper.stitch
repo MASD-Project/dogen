@@ -27,7 +27,7 @@ inline std::ostream& operator<<(std::ostream& s, const <#= nt_qn #>& v) {
     if (v)
         s << "\"data\": " << <#= a.streaming_for_type(containee, "*v") #>;
     else
-        s << "\"data\": ""\"<empty>\"";
+        s << "\"data\": ""\"<null>\"";
     s << " }";
     return s;
 }
