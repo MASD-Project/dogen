@@ -52,6 +52,71 @@
     },
     {
       "name": {
+        "simple_name": "Class1",
+        "internal_modules": "Package1"
+      },
+      "meta_type": "object",
+      "attributes": [
+        {
+          "simple_name": "Prop0",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple_name": "Class2",
+        "internal_modules": "Package1"
+      },
+      "meta_type": "object",
+      "attributes": [
+        {
+          "simple_name": "Prop0",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple_name": "Class3",
+        "internal_modules": "Package1"
+      },
+      "meta_type": "object",
+      "attributes": [
+        {
+          "simple_name": "Prop0",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple_name": "Class4",
+        "internal_modules": "Package1"
+      },
+      "meta_type": "object",
+      "attributes": [
+        {
+          "simple_name": "Prop0",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple_name": "Class5",
+        "internal_modules": "Package1"
+      },
+      "meta_type": "object",
+      "attributes": [
+        {
+          "simple_name": "Prop0",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
         "simple_name": "PrimitiveBuiltins"
       },
       "meta_type": "object",
@@ -125,6 +190,12 @@
     },
     {
       "name": {
+        "simple_name": "Package1"
+      },
+      "meta_type": "module"
+    },
+    {
+      "name": {
         "simple_name": "BookTypes"
       },
       "meta_type": "enumeration",
@@ -161,6 +232,30 @@
         {
           "simple_name": "Gray",
           "documentation": "another comment\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple_name": "ShapeTypes",
+        "internal_modules": "Package1"
+      },
+      "meta_type": "enumeration",
+      "enumerators": [
+        {
+          "simple_name": "Triangle",
+          "documentation": "some comment\n"
+        },
+        {
+          "simple_name": "Square",
+          "documentation": "other comment\n"
+        },
+        {
+          "simple_name": "Rectangle"
+        },
+        {
+          "simple_name": "Cube",
+          "documentation": "some comment\n"
         }
       ]
     }

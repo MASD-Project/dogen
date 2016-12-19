@@ -82,6 +82,16 @@ namespace Dogen.TestModels.CSharpModel.Tests
                 jsonE = BookTypesDumper.Dump(e);
                 Log.DebugFormat("JSON: {0}", jsonE);
                 Assert.That(ValidateJson(jsonE), Is.True);
+
+                var f = Package1.Class1SequenceGenerator.Sequence().GetEnumerator().Current;
+                var jsonF = Package1.Class1Dumper.Dump(f);
+                Log.DebugFormat("JSON: {0}", jsonF);
+                Assert.That(ValidateJson(jsonF), Is.True);
+
+                var g = Package1.ShapeTypesSequenceGenerator.Sequence().GetEnumerator().Current;
+                var jsonG = Package1.ShapeTypesDumper.Dump(g);
+                Log.DebugFormat("JSON: {0}", jsonG);
+                Assert.That(ValidateJson(jsonG), Is.True);
             }
         }
     }

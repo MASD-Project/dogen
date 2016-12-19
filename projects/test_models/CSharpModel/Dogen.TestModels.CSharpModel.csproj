@@ -36,6 +36,12 @@
     <Compile Include="Dumpers\ComplexBuiltinsDumper.cs" />
     <Compile Include="Dumpers\NoPropertiesDumper.cs" />
     <Compile Include="Dumpers\OnePropertyDumper.cs" />
+    <Compile Include="Dumpers\Package1\Class1Dumper.cs" />
+    <Compile Include="Dumpers\Package1\Class2Dumper.cs" />
+    <Compile Include="Dumpers\Package1\Class3Dumper.cs" />
+    <Compile Include="Dumpers\Package1\Class4Dumper.cs" />
+    <Compile Include="Dumpers\Package1\Class5Dumper.cs" />
+    <Compile Include="Dumpers\Package1\ShapeTypesDumper.cs" />
     <Compile Include="Dumpers\PrimitiveBuiltinsDumper.cs" />
     <Compile Include="SequenceGenerators\AssistantSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\BookTypesSequenceGenerator.cs" />
@@ -43,12 +49,24 @@
     <Compile Include="SequenceGenerators\ComplexBuiltinsSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\NoPropertiesSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\OnePropertySequenceGenerator.cs" />
+    <Compile Include="SequenceGenerators\Package1\Class1SequenceGenerator.cs" />
+    <Compile Include="SequenceGenerators\Package1\Class2SequenceGenerator.cs" />
+    <Compile Include="SequenceGenerators\Package1\Class3SequenceGenerator.cs" />
+    <Compile Include="SequenceGenerators\Package1\Class4SequenceGenerator.cs" />
+    <Compile Include="SequenceGenerators\Package1\Class5SequenceGenerator.cs" />
+    <Compile Include="SequenceGenerators\Package1\ShapeTypesSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\PrimitiveBuiltinsSequenceGenerator.cs" />
     <Compile Include="Types\BookTypes.cs" />
     <Compile Include="Types\ColourTypes.cs" />
     <Compile Include="Types\ComplexBuiltins.cs" />
     <Compile Include="Types\NoProperties.cs" />
     <Compile Include="Types\OneProperty.cs" />
+    <Compile Include="Types\Package1\Class1.cs" />
+    <Compile Include="Types\Package1\Class2.cs" />
+    <Compile Include="Types\Package1\Class3.cs" />
+    <Compile Include="Types\Package1\Class4.cs" />
+    <Compile Include="Types\Package1\Class5.cs" />
+    <Compile Include="Types\Package1\ShapeTypes.cs" />
     <Compile Include="Types\PrimitiveBuiltins.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
