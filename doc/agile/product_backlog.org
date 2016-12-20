@@ -517,6 +517,12 @@ that we still need to declare the dumpers in the io headers - at least
 for types involved in inheritance, but probably in all cases for
 consistency.
 
+In fact we should go one step further and rename the io facet
+"dumper", "data_dumper" or some such name. We called it "io" because
+it uses iostreams in C++ but that is just an implementation
+detail. The facet itself should be mainly composed of the dumpers
+themselves and then simply have =operator<<= as entry points to call
+the dumpers.
 
 *** Rename formatting assistant                                       :story:
 
