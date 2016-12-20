@@ -32,9 +32,10 @@ void inserter_implementation_helper(
     sf.element_separator("");
     if (o.parent()) {
         const auto& pn(*o.parent());
+        const auto pqn(a.get_qualified_name(pn));
 #>
     <#= sf.prefix() #>"\"__parent_<#= sf.current_position() #>__\": "<#= sf.postfix() #>;
-    <#= pn.simple() #>::to_stream(s);
+    <#= pqn #>::to_stream(s);
 <#+
         sf.next();
     }

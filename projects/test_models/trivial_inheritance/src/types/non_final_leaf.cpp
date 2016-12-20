@@ -50,19 +50,18 @@ void non_final_leaf::accept(base_visitor& v) {
     v.visit(*this);
 }
 
-
 void non_final_leaf::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::test_models::trivial_inheritance::non_final_leaf\"" << ", "
       << "\"__parent_0__\": ";
-    descendant1::to_stream(s);
+    dogen::test_models::trivial_inheritance::descendant1::to_stream(s);
     s << ", "
       << "\"prop_0\": " << prop_0_
       << " }";
 }
 
 void non_final_leaf::swap(non_final_leaf& other) noexcept {
-    descendant1::swap(other);
+    dogen::test_models::trivial_inheritance::descendant1::swap(other);
 
     using std::swap;
     swap(prop_0_, other.prop_0_);
@@ -75,7 +74,7 @@ bool non_final_leaf::equals(const dogen::test_models::trivial_inheritance::base&
 }
 
 bool non_final_leaf::operator==(const non_final_leaf& rhs) const {
-    return descendant1::compare(rhs) &&
+    return dogen::test_models::trivial_inheritance::descendant1::compare(rhs) &&
         prop_0_ == rhs.prop_0_;
 }
 

@@ -39,21 +39,21 @@ void third_child_with_members::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::test_models::trivial_inheritance::third_child_with_members\"" << ", "
       << "\"__parent_0__\": ";
-    parent_with_members::to_stream(s);
+    dogen::test_models::trivial_inheritance::parent_with_members::to_stream(s);
     s << ", "
       << "\"prop_1\": " << prop_1_
       << " }";
 }
 
 void third_child_with_members::swap(third_child_with_members& other) noexcept {
-    parent_with_members::swap(other);
+    dogen::test_models::trivial_inheritance::parent_with_members::swap(other);
 
     using std::swap;
     swap(prop_1_, other.prop_1_);
 }
 
 bool third_child_with_members::compare(const third_child_with_members& rhs) const {
-    return parent_with_members::compare(rhs) &&
+    return dogen::test_models::trivial_inheritance::parent_with_members::compare(rhs) &&
         prop_1_ == rhs.prop_1_;
 }
 

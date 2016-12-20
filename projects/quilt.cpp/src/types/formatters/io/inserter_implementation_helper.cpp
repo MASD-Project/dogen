@@ -51,8 +51,9 @@ a.stream() << "      << \"\\\"__type__\\\": \" << \"\\\"" << qn << "\\\"\"" << (
     sf.element_separator("");
     if (o.parent()) {
         const auto& pn(*o.parent());
+        const auto pqn(a.get_qualified_name(pn));
 a.stream() << "    " << sf.prefix() << "\"\\\"__parent_" << sf.current_position() << "__\\\": \"" << sf.postfix() << ";" << std::endl;
-a.stream() << "    " << pn.simple() << "::to_stream(s);" << std::endl;
+a.stream() << "    " << pqn << "::to_stream(s);" << std::endl;
         sf.next();
     }
 

@@ -37,12 +37,12 @@ void child_of_a_child1::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::test_models::trivial_inheritance::child_of_a_child1\"" << ", "
       << "\"__parent_0__\": ";
-    third_child_with_members::to_stream(s);
+    dogen::test_models::trivial_inheritance::third_child_with_members::to_stream(s);
     s << " }";
 }
 
 void child_of_a_child1::swap(child_of_a_child1& other) noexcept {
-    third_child_with_members::swap(other);
+    dogen::test_models::trivial_inheritance::third_child_with_members::swap(other);
 
 }
 
@@ -53,7 +53,7 @@ bool child_of_a_child1::equals(const dogen::test_models::trivial_inheritance::pa
 }
 
 bool child_of_a_child1::operator==(const child_of_a_child1& rhs) const {
-    return third_child_with_members::compare(rhs);
+    return dogen::test_models::trivial_inheritance::third_child_with_members::compare(rhs);
 }
 
 child_of_a_child1& child_of_a_child1::operator=(child_of_a_child1 other) {

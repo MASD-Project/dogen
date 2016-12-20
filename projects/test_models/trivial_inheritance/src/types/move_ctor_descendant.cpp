@@ -41,14 +41,14 @@ void move_ctor_descendant::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::test_models::trivial_inheritance::move_ctor_descendant\"" << ", "
       << "\"__parent_0__\": ";
-    move_ctor_base::to_stream(s);
+    dogen::test_models::trivial_inheritance::move_ctor_base::to_stream(s);
     s << ", "
       << "\"prop_1\": " << "\"" << prop_1_.generic_string() << "\""
       << " }";
 }
 
 void move_ctor_descendant::swap(move_ctor_descendant& other) noexcept {
-    move_ctor_base::swap(other);
+    dogen::test_models::trivial_inheritance::move_ctor_base::swap(other);
 
     using std::swap;
     swap(prop_1_, other.prop_1_);
@@ -61,7 +61,7 @@ bool move_ctor_descendant::equals(const dogen::test_models::trivial_inheritance:
 }
 
 bool move_ctor_descendant::operator==(const move_ctor_descendant& rhs) const {
-    return move_ctor_base::compare(rhs) &&
+    return dogen::test_models::trivial_inheritance::move_ctor_base::compare(rhs) &&
         prop_1_ == rhs.prop_1_;
 }
 

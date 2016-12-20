@@ -37,14 +37,14 @@ void child_with_members::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::test_models::trivial_inheritance::child_with_members\"" << ", "
       << "\"__parent_0__\": ";
-    parent_without_members::to_stream(s);
+    dogen::test_models::trivial_inheritance::parent_without_members::to_stream(s);
     s << ", "
       << "\"prop_0\": " << prop_0_
       << " }";
 }
 
 void child_with_members::swap(child_with_members& other) noexcept {
-    parent_without_members::swap(other);
+    dogen::test_models::trivial_inheritance::parent_without_members::swap(other);
 
     using std::swap;
     swap(prop_0_, other.prop_0_);
@@ -57,7 +57,7 @@ bool child_with_members::equals(const dogen::test_models::trivial_inheritance::p
 }
 
 bool child_with_members::operator==(const child_with_members& rhs) const {
-    return parent_without_members::compare(rhs) &&
+    return dogen::test_models::trivial_inheritance::parent_without_members::compare(rhs) &&
         prop_0_ == rhs.prop_0_;
 }
 

@@ -45,7 +45,7 @@ void further_refined::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::test_models::stereotypes::further_refined\"" << ", "
       << "\"__parent_0__\": ";
-    base_with_concept::to_stream(s);
+    dogen::test_models::stereotypes::base_with_concept::to_stream(s);
     s << ", "
       << "\"prop_3\": " << prop_3_ << ", "
       << "\"prop_1\": " << prop_1_
@@ -53,7 +53,7 @@ void further_refined::to_stream(std::ostream& s) const {
 }
 
 void further_refined::swap(further_refined& other) noexcept {
-    base_with_concept::swap(other);
+    dogen::test_models::stereotypes::base_with_concept::swap(other);
 
     using std::swap;
     swap(prop_3_, other.prop_3_);
@@ -67,7 +67,7 @@ bool further_refined::equals(const dogen::test_models::stereotypes::base_with_co
 }
 
 bool further_refined::operator==(const further_refined& rhs) const {
-    return base_with_concept::compare(rhs) &&
+    return dogen::test_models::stereotypes::base_with_concept::compare(rhs) &&
         prop_3_ == rhs.prop_3_ &&
         prop_1_ == rhs.prop_1_;
 }

@@ -39,14 +39,14 @@ void child_via_settings::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::test_models::trivial_inheritance::child_via_settings\"" << ", "
       << "\"__parent_0__\": ";
-    parent_with_members::to_stream(s);
+    dogen::test_models::trivial_inheritance::parent_with_members::to_stream(s);
     s << ", "
       << "\"prop_1\": " << prop_1_
       << " }";
 }
 
 void child_via_settings::swap(child_via_settings& other) noexcept {
-    parent_with_members::swap(other);
+    dogen::test_models::trivial_inheritance::parent_with_members::swap(other);
 
     using std::swap;
     swap(prop_1_, other.prop_1_);
@@ -59,7 +59,7 @@ bool child_via_settings::equals(const dogen::test_models::trivial_inheritance::p
 }
 
 bool child_via_settings::operator==(const child_via_settings& rhs) const {
-    return parent_with_members::compare(rhs) &&
+    return dogen::test_models::trivial_inheritance::parent_with_members::compare(rhs) &&
         prop_1_ == rhs.prop_1_;
 }
 

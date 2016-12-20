@@ -319,7 +319,6 @@ a.stream() << "        dv->visit(*this);" << std::endl;
 a.stream() << "    v.visit(*this);" << std::endl;
                 }
 a.stream() << "}" << std::endl;
-a.stream() << std::endl;
             }
 
             /*
@@ -343,7 +342,8 @@ a.stream() << std::endl;
 a.stream() << "void " << sn << "::swap(" << sn << "&" << (empty ? "" : " other") << ") noexcept {" << std::endl;
                if (o.parent()) {
                     const auto& pn(*o.parent());
-a.stream() << "    " << pn.simple() << "::swap(other);" << std::endl;
+                    const auto pqn(a.get_qualified_name(pn));
+a.stream() << "    " << pqn << "::swap(other);" << std::endl;
 a.stream() << std::endl;
 
                }
@@ -396,7 +396,8 @@ a.stream() << "    return true;" << std::endl;
 
                 if (o.parent()) {
                     const auto& pn(*o.parent());
-a.stream() << "    " << sf.prefix() << pn.simple() << "::compare(rhs)" << sf.postfix() << std::endl;
+                    const auto pqn(a.get_qualified_name(pn));
+a.stream() << "    " << sf.prefix() << pqn << "::compare(rhs)" << sf.postfix() << std::endl;
                     sf.next();
                 }
                 sf.reset(o.local_attributes().size());

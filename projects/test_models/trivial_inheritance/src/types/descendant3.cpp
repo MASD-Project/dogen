@@ -51,7 +51,6 @@ void descendant3::accept(base_visitor& v) {
     v.visit(*this);
 }
 
-
 void descendant3::to_stream(std::ostream& s) const {
     boost::io::ios_flags_saver ifs(s);
     s.setf(std::ios_base::boolalpha);
@@ -62,14 +61,14 @@ void descendant3::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::test_models::trivial_inheritance::descendant3\"" << ", "
       << "\"__parent_0__\": ";
-    descendant1::to_stream(s);
+    dogen::test_models::trivial_inheritance::descendant1::to_stream(s);
     s << ", "
       << "\"prop_0\": " << prop_0_
       << " }";
 }
 
 void descendant3::swap(descendant3& other) noexcept {
-    descendant1::swap(other);
+    dogen::test_models::trivial_inheritance::descendant1::swap(other);
 
     using std::swap;
     swap(prop_0_, other.prop_0_);
@@ -82,7 +81,7 @@ bool descendant3::equals(const dogen::test_models::trivial_inheritance::base& ot
 }
 
 bool descendant3::operator==(const descendant3& rhs) const {
-    return descendant1::compare(rhs) &&
+    return dogen::test_models::trivial_inheritance::descendant1::compare(rhs) &&
         prop_0_ == rhs.prop_0_;
 }
 

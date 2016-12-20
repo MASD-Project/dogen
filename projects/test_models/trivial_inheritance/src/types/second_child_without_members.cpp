@@ -33,12 +33,12 @@ void second_child_without_members::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::test_models::trivial_inheritance::second_child_without_members\"" << ", "
       << "\"__parent_0__\": ";
-    parent_with_members::to_stream(s);
+    dogen::test_models::trivial_inheritance::parent_with_members::to_stream(s);
     s << " }";
 }
 
 void second_child_without_members::swap(second_child_without_members& other) noexcept {
-    parent_with_members::swap(other);
+    dogen::test_models::trivial_inheritance::parent_with_members::swap(other);
 
 }
 
@@ -49,7 +49,7 @@ bool second_child_without_members::equals(const dogen::test_models::trivial_inhe
 }
 
 bool second_child_without_members::operator==(const second_child_without_members& rhs) const {
-    return parent_with_members::compare(rhs);
+    return dogen::test_models::trivial_inheritance::parent_with_members::compare(rhs);
 }
 
 second_child_without_members& second_child_without_members::operator=(second_child_without_members other) {

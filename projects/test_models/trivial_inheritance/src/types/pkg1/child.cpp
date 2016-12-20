@@ -40,14 +40,14 @@ void child::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::test_models::trivial_inheritance::pkg1::child\"" << ", "
       << "\"__parent_0__\": ";
-    parent::to_stream(s);
+    dogen::test_models::trivial_inheritance::pkg1::parent::to_stream(s);
     s << ", "
       << "\"prop_1\": " << prop_1_
       << " }";
 }
 
 void child::swap(child& other) noexcept {
-    parent::swap(other);
+    dogen::test_models::trivial_inheritance::pkg1::parent::swap(other);
 
     using std::swap;
     swap(prop_1_, other.prop_1_);
@@ -60,7 +60,7 @@ bool child::equals(const dogen::test_models::trivial_inheritance::pkg1::parent& 
 }
 
 bool child::operator==(const child& rhs) const {
-    return parent::compare(rhs) &&
+    return dogen::test_models::trivial_inheritance::pkg1::parent::compare(rhs) &&
         prop_1_ == rhs.prop_1_;
 }
 

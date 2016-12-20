@@ -51,14 +51,14 @@ void derived::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::test_models::std_model::derived\"" << ", "
       << "\"__parent_0__\": ";
-    base::to_stream(s);
+    dogen::test_models::std_model::base::to_stream(s);
     s << ", "
       << "\"prop_1\": " << prop_1_
       << " }";
 }
 
 void derived::swap(derived& other) noexcept {
-    base::swap(other);
+    dogen::test_models::std_model::base::swap(other);
 
     using std::swap;
     swap(prop_1_, other.prop_1_);
@@ -71,7 +71,7 @@ bool derived::equals(const dogen::test_models::std_model::base& other) const {
 }
 
 bool derived::operator==(const derived& rhs) const {
-    return base::compare(rhs) &&
+    return dogen::test_models::std_model::base::compare(rhs) &&
         prop_1_ == rhs.prop_1_;
 }
 

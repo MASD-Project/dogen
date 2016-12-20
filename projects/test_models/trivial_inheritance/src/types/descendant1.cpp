@@ -30,12 +30,12 @@ void descendant1::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::test_models::trivial_inheritance::descendant1\"" << ", "
       << "\"__parent_0__\": ";
-    base::to_stream(s);
+    dogen::test_models::trivial_inheritance::base::to_stream(s);
     s << " }";
 }
 
 void descendant1::swap(descendant1& other) noexcept {
-    base::swap(other);
+    dogen::test_models::trivial_inheritance::base::swap(other);
 
 }
 
