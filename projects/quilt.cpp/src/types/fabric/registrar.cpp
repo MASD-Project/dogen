@@ -96,12 +96,11 @@ void registrar::accept(dogen::yarn::element_visitor& v) {
         dv->visit(*this);
 }
 
-
 void registrar::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::fabric::registrar\"" << ", "
       << "\"__parent_0__\": ";
-    element::to_stream(s);
+    dogen::yarn::element::to_stream(s);
     s << ", "
       << "\"leaves\": " << leaves_ << ", "
       << "\"model_dependencies\": " << model_dependencies_ << ", "
@@ -110,7 +109,7 @@ void registrar::to_stream(std::ostream& s) const {
 }
 
 void registrar::swap(registrar& other) noexcept {
-    element::swap(other);
+    dogen::yarn::element::swap(other);
 
     using std::swap;
     swap(leaves_, other.leaves_);
@@ -125,7 +124,7 @@ bool registrar::equals(const dogen::yarn::element& other) const {
 }
 
 bool registrar::operator==(const registrar& rhs) const {
-    return element::compare(rhs) &&
+    return dogen::yarn::element::compare(rhs) &&
         leaves_ == rhs.leaves_ &&
         model_dependencies_ == rhs.model_dependencies_ &&
         registrar_dependencies_ == rhs.registrar_dependencies_;

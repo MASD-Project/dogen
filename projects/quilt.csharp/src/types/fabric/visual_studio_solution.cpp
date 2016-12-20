@@ -91,12 +91,11 @@ void visual_studio_solution::accept(dogen::yarn::element_visitor& v) {
         dv->visit(*this);
 }
 
-
 void visual_studio_solution::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::csharp::fabric::visual_studio_solution\"" << ", "
       << "\"__parent_0__\": ";
-    element::to_stream(s);
+    dogen::yarn::element::to_stream(s);
     s << ", "
       << "\"project_guid\": " << "\"" << tidy_up_string(project_guid_) << "\"" << ", "
       << "\"project_solution_guid\": " << "\"" << tidy_up_string(project_solution_guid_) << "\"" << ", "
@@ -106,7 +105,7 @@ void visual_studio_solution::to_stream(std::ostream& s) const {
 }
 
 void visual_studio_solution::swap(visual_studio_solution& other) noexcept {
-    element::swap(other);
+    dogen::yarn::element::swap(other);
 
     using std::swap;
     swap(project_guid_, other.project_guid_);
@@ -122,7 +121,7 @@ bool visual_studio_solution::equals(const dogen::yarn::element& other) const {
 }
 
 bool visual_studio_solution::operator==(const visual_studio_solution& rhs) const {
-    return element::compare(rhs) &&
+    return dogen::yarn::element::compare(rhs) &&
         project_guid_ == rhs.project_guid_ &&
         project_solution_guid_ == rhs.project_solution_guid_ &&
         version_ == rhs.version_ &&

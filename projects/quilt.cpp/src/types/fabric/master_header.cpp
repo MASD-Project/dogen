@@ -136,19 +136,18 @@ void master_header::accept(dogen::yarn::element_visitor& v) {
         dv->visit(*this);
 }
 
-
 void master_header::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::fabric::master_header\"" << ", "
       << "\"__parent_0__\": ";
-    element::to_stream(s);
+    dogen::yarn::element::to_stream(s);
     s << ", "
       << "\"inclusion_by_facet\": " << inclusion_by_facet_
       << " }";
 }
 
 void master_header::swap(master_header& other) noexcept {
-    element::swap(other);
+    dogen::yarn::element::swap(other);
 
     using std::swap;
     swap(inclusion_by_facet_, other.inclusion_by_facet_);
@@ -161,7 +160,7 @@ bool master_header::equals(const dogen::yarn::element& other) const {
 }
 
 bool master_header::operator==(const master_header& rhs) const {
-    return element::compare(rhs) &&
+    return dogen::yarn::element::compare(rhs) &&
         inclusion_by_facet_ == rhs.inclusion_by_facet_;
 }
 

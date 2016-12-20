@@ -54,19 +54,18 @@ void text::accept(value_visitor& v) {
     v.visit(*this);
 }
 
-
 void text::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::annotations::text\"" << ", "
       << "\"__parent_0__\": ";
-    value::to_stream(s);
+    dogen::annotations::value::to_stream(s);
     s << ", "
       << "\"content\": " << "\"" << tidy_up_string(content_) << "\""
       << " }";
 }
 
 void text::swap(text& other) noexcept {
-    value::swap(other);
+    dogen::annotations::value::swap(other);
 
     using std::swap;
     swap(content_, other.content_);
@@ -79,7 +78,7 @@ bool text::equals(const dogen::annotations::value& other) const {
 }
 
 bool text::operator==(const text& rhs) const {
-    return value::compare(rhs) &&
+    return dogen::annotations::value::compare(rhs) &&
         content_ == rhs.content_;
 }
 

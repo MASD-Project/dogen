@@ -87,7 +87,6 @@ void forward_declarations::accept(dogen::yarn::element_visitor& v) {
         dv->visit(*this);
 }
 
-
 void forward_declarations::to_stream(std::ostream& s) const {
     boost::io::ios_flags_saver ifs(s);
     s.setf(std::ios_base::boolalpha);
@@ -98,7 +97,7 @@ void forward_declarations::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::fabric::forward_declarations\"" << ", "
       << "\"__parent_0__\": ";
-    element::to_stream(s);
+    dogen::yarn::element::to_stream(s);
     s << ", "
       << "\"is_enum\": " << is_enum_ << ", "
       << "\"underlying_type\": " << underlying_type_ << ", "
@@ -107,7 +106,7 @@ void forward_declarations::to_stream(std::ostream& s) const {
 }
 
 void forward_declarations::swap(forward_declarations& other) noexcept {
-    element::swap(other);
+    dogen::yarn::element::swap(other);
 
     using std::swap;
     swap(is_enum_, other.is_enum_);
@@ -122,7 +121,7 @@ bool forward_declarations::equals(const dogen::yarn::element& other) const {
 }
 
 bool forward_declarations::operator==(const forward_declarations& rhs) const {
-    return element::compare(rhs) &&
+    return dogen::yarn::element::compare(rhs) &&
         is_enum_ == rhs.is_enum_ &&
         underlying_type_ == rhs.underlying_type_ &&
         is_exception_ == rhs.is_exception_;

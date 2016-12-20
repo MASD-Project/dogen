@@ -75,17 +75,16 @@ void assistant::accept(dogen::yarn::element_visitor& v) {
         dv->visit(*this);
 }
 
-
 void assistant::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::csharp::fabric::assistant\"" << ", "
       << "\"__parent_0__\": ";
-    element::to_stream(s);
+    dogen::yarn::element::to_stream(s);
     s << " }";
 }
 
 void assistant::swap(assistant& other) noexcept {
-    element::swap(other);
+    dogen::yarn::element::swap(other);
 
 }
 
@@ -96,7 +95,7 @@ bool assistant::equals(const dogen::yarn::element& other) const {
 }
 
 bool assistant::operator==(const assistant& rhs) const {
-    return element::compare(rhs);
+    return dogen::yarn::element::compare(rhs);
 }
 
 assistant& assistant::operator=(assistant other) {

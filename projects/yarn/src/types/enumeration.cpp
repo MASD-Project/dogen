@@ -81,12 +81,11 @@ void enumeration::accept(element_visitor& v) {
     v.visit(*this);
 }
 
-
 void enumeration::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::enumeration\"" << ", "
       << "\"__parent_0__\": ";
-    element::to_stream(s);
+    dogen::yarn::element::to_stream(s);
     s << ", "
       << "\"underlying_type\": " << underlying_type_ << ", "
       << "\"enumerators\": " << enumerators_
@@ -94,7 +93,7 @@ void enumeration::to_stream(std::ostream& s) const {
 }
 
 void enumeration::swap(enumeration& other) noexcept {
-    element::swap(other);
+    dogen::yarn::element::swap(other);
 
     using std::swap;
     swap(underlying_type_, other.underlying_type_);
@@ -108,7 +107,7 @@ bool enumeration::equals(const dogen::yarn::element& other) const {
 }
 
 bool enumeration::operator==(const enumeration& rhs) const {
-    return element::compare(rhs) &&
+    return dogen::yarn::element::compare(rhs) &&
         underlying_type_ == rhs.underlying_type_ &&
         enumerators_ == rhs.enumerators_;
 }

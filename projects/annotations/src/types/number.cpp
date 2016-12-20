@@ -49,19 +49,18 @@ void number::accept(value_visitor& v) {
     v.visit(*this);
 }
 
-
 void number::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::annotations::number\"" << ", "
       << "\"__parent_0__\": ";
-    value::to_stream(s);
+    dogen::annotations::value::to_stream(s);
     s << ", "
       << "\"content\": " << content_
       << " }";
 }
 
 void number::swap(number& other) noexcept {
-    value::swap(other);
+    dogen::annotations::value::swap(other);
 
     using std::swap;
     swap(content_, other.content_);
@@ -74,7 +73,7 @@ bool number::equals(const dogen::annotations::value& other) const {
 }
 
 bool number::operator==(const number& rhs) const {
-    return value::compare(rhs) &&
+    return dogen::annotations::value::compare(rhs) &&
         content_ == rhs.content_;
 }
 

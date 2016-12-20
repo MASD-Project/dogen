@@ -75,17 +75,16 @@ void cmakelists::accept(dogen::yarn::element_visitor& v) {
         dv->visit(*this);
 }
 
-
 void cmakelists::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::fabric::cmakelists\"" << ", "
       << "\"__parent_0__\": ";
-    element::to_stream(s);
+    dogen::yarn::element::to_stream(s);
     s << " }";
 }
 
 void cmakelists::swap(cmakelists& other) noexcept {
-    element::swap(other);
+    dogen::yarn::element::swap(other);
 
 }
 
@@ -96,7 +95,7 @@ bool cmakelists::equals(const dogen::yarn::element& other) const {
 }
 
 bool cmakelists::operator==(const cmakelists& rhs) const {
-    return element::compare(rhs);
+    return dogen::yarn::element::compare(rhs);
 }
 
 cmakelists& cmakelists::operator=(cmakelists other) {

@@ -50,7 +50,6 @@ void boolean::accept(value_visitor& v) {
     v.visit(*this);
 }
 
-
 void boolean::to_stream(std::ostream& s) const {
     boost::io::ios_flags_saver ifs(s);
     s.setf(std::ios_base::boolalpha);
@@ -61,14 +60,14 @@ void boolean::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::annotations::boolean\"" << ", "
       << "\"__parent_0__\": ";
-    value::to_stream(s);
+    dogen::annotations::value::to_stream(s);
     s << ", "
       << "\"content\": " << content_
       << " }";
 }
 
 void boolean::swap(boolean& other) noexcept {
-    value::swap(other);
+    dogen::annotations::value::swap(other);
 
     using std::swap;
     swap(content_, other.content_);
@@ -81,7 +80,7 @@ bool boolean::equals(const dogen::annotations::value& other) const {
 }
 
 bool boolean::operator==(const boolean& rhs) const {
-    return value::compare(rhs) &&
+    return dogen::annotations::value::compare(rhs) &&
         content_ == rhs.content_;
 }
 

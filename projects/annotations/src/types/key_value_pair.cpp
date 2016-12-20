@@ -72,19 +72,18 @@ void key_value_pair::accept(value_visitor& v) {
     v.visit(*this);
 }
 
-
 void key_value_pair::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::annotations::key_value_pair\"" << ", "
       << "\"__parent_0__\": ";
-    value::to_stream(s);
+    dogen::annotations::value::to_stream(s);
     s << ", "
       << "\"content\": " << content_
       << " }";
 }
 
 void key_value_pair::swap(key_value_pair& other) noexcept {
-    value::swap(other);
+    dogen::annotations::value::swap(other);
 
     using std::swap;
     swap(content_, other.content_);
@@ -97,7 +96,7 @@ bool key_value_pair::equals(const dogen::annotations::value& other) const {
 }
 
 bool key_value_pair::operator==(const key_value_pair& rhs) const {
-    return value::compare(rhs) &&
+    return dogen::annotations::value::compare(rhs) &&
         content_ == rhs.content_;
 }
 

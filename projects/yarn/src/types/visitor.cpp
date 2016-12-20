@@ -101,12 +101,11 @@ void visitor::accept(element_visitor& v) {
     v.visit(*this);
 }
 
-
 void visitor::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::visitor\"" << ", "
       << "\"__parent_0__\": ";
-    element::to_stream(s);
+    dogen::yarn::element::to_stream(s);
     s << ", "
       << "\"visits\": " << visits_ << ", "
       << "\"parent\": " << parent_
@@ -114,7 +113,7 @@ void visitor::to_stream(std::ostream& s) const {
 }
 
 void visitor::swap(visitor& other) noexcept {
-    element::swap(other);
+    dogen::yarn::element::swap(other);
 
     using std::swap;
     swap(visits_, other.visits_);
@@ -128,7 +127,7 @@ bool visitor::equals(const dogen::yarn::element& other) const {
 }
 
 bool visitor::operator==(const visitor& rhs) const {
-    return element::compare(rhs) &&
+    return dogen::yarn::element::compare(rhs) &&
         visits_ == rhs.visits_ &&
         parent_ == rhs.parent_;
 }

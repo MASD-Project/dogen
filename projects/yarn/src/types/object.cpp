@@ -216,7 +216,6 @@ void object::accept(element_visitor& v) {
     v.visit(*this);
 }
 
-
 void object::to_stream(std::ostream& s) const {
     boost::io::ios_flags_saver ifs(s);
     s.setf(std::ios_base::boolalpha);
@@ -227,7 +226,7 @@ void object::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::object\"" << ", "
       << "\"__parent_0__\": ";
-    element::to_stream(s);
+    dogen::yarn::element::to_stream(s);
     s << ", "
       << "\"all_attributes\": " << all_attributes_ << ", "
       << "\"local_attributes\": " << local_attributes_ << ", "
@@ -257,7 +256,7 @@ void object::to_stream(std::ostream& s) const {
 }
 
 void object::swap(object& other) noexcept {
-    element::swap(other);
+    dogen::yarn::element::swap(other);
 
     using std::swap;
     swap(all_attributes_, other.all_attributes_);
@@ -293,7 +292,7 @@ bool object::equals(const dogen::yarn::element& other) const {
 }
 
 bool object::operator==(const object& rhs) const {
-    return element::compare(rhs) &&
+    return dogen::yarn::element::compare(rhs) &&
         all_attributes_ == rhs.all_attributes_ &&
         local_attributes_ == rhs.local_attributes_ &&
         inherited_attributes_ == rhs.inherited_attributes_ &&

@@ -61,17 +61,16 @@ void exception::accept(element_visitor& v) {
     v.visit(*this);
 }
 
-
 void exception::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::exception\"" << ", "
       << "\"__parent_0__\": ";
-    element::to_stream(s);
+    dogen::yarn::element::to_stream(s);
     s << " }";
 }
 
 void exception::swap(exception& other) noexcept {
-    element::swap(other);
+    dogen::yarn::element::swap(other);
 
 }
 
@@ -82,7 +81,7 @@ bool exception::equals(const dogen::yarn::element& other) const {
 }
 
 bool exception::operator==(const exception& rhs) const {
-    return element::compare(rhs);
+    return dogen::yarn::element::compare(rhs);
 }
 
 exception& exception::operator=(exception other) {

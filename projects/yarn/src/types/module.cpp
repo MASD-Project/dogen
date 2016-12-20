@@ -87,7 +87,6 @@ void module::accept(element_visitor& v) {
     v.visit(*this);
 }
 
-
 void module::to_stream(std::ostream& s) const {
     boost::io::ios_flags_saver ifs(s);
     s.setf(std::ios_base::boolalpha);
@@ -98,7 +97,7 @@ void module::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::module\"" << ", "
       << "\"__parent_0__\": ";
-    element::to_stream(s);
+    dogen::yarn::element::to_stream(s);
     s << ", "
       << "\"members\": " << members_ << ", "
       << "\"is_root\": " << is_root_ << ", "
@@ -107,7 +106,7 @@ void module::to_stream(std::ostream& s) const {
 }
 
 void module::swap(module& other) noexcept {
-    element::swap(other);
+    dogen::yarn::element::swap(other);
 
     using std::swap;
     swap(members_, other.members_);
@@ -122,7 +121,7 @@ bool module::equals(const dogen::yarn::element& other) const {
 }
 
 bool module::operator==(const module& rhs) const {
-    return element::compare(rhs) &&
+    return dogen::yarn::element::compare(rhs) &&
         members_ == rhs.members_ &&
         is_root_ == rhs.is_root_ &&
         is_global_module_ == rhs.is_global_module_;

@@ -68,19 +68,18 @@ void text_collection::accept(value_visitor& v) {
     v.visit(*this);
 }
 
-
 void text_collection::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::annotations::text_collection\"" << ", "
       << "\"__parent_0__\": ";
-    value::to_stream(s);
+    dogen::annotations::value::to_stream(s);
     s << ", "
       << "\"content\": " << content_
       << " }";
 }
 
 void text_collection::swap(text_collection& other) noexcept {
-    value::swap(other);
+    dogen::annotations::value::swap(other);
 
     using std::swap;
     swap(content_, other.content_);
@@ -93,7 +92,7 @@ bool text_collection::equals(const dogen::annotations::value& other) const {
 }
 
 bool text_collection::operator==(const text_collection& rhs) const {
-    return value::compare(rhs) &&
+    return dogen::annotations::value::compare(rhs) &&
         content_ == rhs.content_;
 }
 

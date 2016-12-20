@@ -75,17 +75,16 @@ void assembly_info::accept(dogen::yarn::element_visitor& v) {
         dv->visit(*this);
 }
 
-
 void assembly_info::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::csharp::fabric::assembly_info\"" << ", "
       << "\"__parent_0__\": ";
-    element::to_stream(s);
+    dogen::yarn::element::to_stream(s);
     s << " }";
 }
 
 void assembly_info::swap(assembly_info& other) noexcept {
-    element::swap(other);
+    dogen::yarn::element::swap(other);
 
 }
 
@@ -96,7 +95,7 @@ bool assembly_info::equals(const dogen::yarn::element& other) const {
 }
 
 bool assembly_info::operator==(const assembly_info& rhs) const {
-    return element::compare(rhs);
+    return dogen::yarn::element::compare(rhs);
 }
 
 assembly_info& assembly_info::operator=(assembly_info other) {

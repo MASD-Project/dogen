@@ -70,7 +70,6 @@ void primitive::accept(element_visitor& v) {
     v.visit(*this);
 }
 
-
 void primitive::to_stream(std::ostream& s) const {
     boost::io::ios_flags_saver ifs(s);
     s.setf(std::ios_base::boolalpha);
@@ -81,7 +80,7 @@ void primitive::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::primitive\"" << ", "
       << "\"__parent_0__\": ";
-    element::to_stream(s);
+    dogen::yarn::element::to_stream(s);
     s << ", "
       << "\"is_default_enumeration_type\": " << is_default_enumeration_type_ << ", "
       << "\"is_floating_point\": " << is_floating_point_
@@ -89,7 +88,7 @@ void primitive::to_stream(std::ostream& s) const {
 }
 
 void primitive::swap(primitive& other) noexcept {
-    element::swap(other);
+    dogen::yarn::element::swap(other);
 
     using std::swap;
     swap(is_default_enumeration_type_, other.is_default_enumeration_type_);
@@ -103,7 +102,7 @@ bool primitive::equals(const dogen::yarn::element& other) const {
 }
 
 bool primitive::operator==(const primitive& rhs) const {
-    return element::compare(rhs) &&
+    return dogen::yarn::element::compare(rhs) &&
         is_default_enumeration_type_ == rhs.is_default_enumeration_type_ &&
         is_floating_point_ == rhs.is_floating_point_;
 }

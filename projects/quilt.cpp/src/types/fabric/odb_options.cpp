@@ -75,17 +75,16 @@ void odb_options::accept(dogen::yarn::element_visitor& v) {
         dv->visit(*this);
 }
 
-
 void odb_options::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::fabric::odb_options\"" << ", "
       << "\"__parent_0__\": ";
-    element::to_stream(s);
+    dogen::yarn::element::to_stream(s);
     s << " }";
 }
 
 void odb_options::swap(odb_options& other) noexcept {
-    element::swap(other);
+    dogen::yarn::element::swap(other);
 
 }
 
@@ -96,7 +95,7 @@ bool odb_options::equals(const dogen::yarn::element& other) const {
 }
 
 bool odb_options::operator==(const odb_options& rhs) const {
-    return element::compare(rhs);
+    return dogen::yarn::element::compare(rhs);
 }
 
 odb_options& odb_options::operator=(odb_options other) {
