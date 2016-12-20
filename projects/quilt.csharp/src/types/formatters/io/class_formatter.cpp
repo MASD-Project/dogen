@@ -80,6 +80,7 @@ a.stream() << "using System;" << std::endl;
 a.stream() << std::endl;
             const auto ns(a.make_namespaces(e.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
+            const bool has_attributes(o.local_attributes().size());
 a.stream() << "    /// <summary>" << std::endl;
 a.stream() << "    /// Generates sequences of " << sn << "." << std::endl;
 a.stream() << "    /// </summary>" << std::endl;
@@ -103,6 +104,14 @@ a.stream() << std::endl;
 a.stream() << "            assistant.AddKey(\"data\");" << std::endl;
 a.stream() << "            assistant.AddPairSeparator();" << std::endl;
 a.stream() << "            assistant.AddStartObject();" << std::endl;
+                if (o.parent()) {
+                    const auto& pn(*o.parent());
+                    const auto pqn(a.get_qualified_name(pn));
+a.stream() << "            assistant.AddKey(\"__parent_0__\");" << std::endl;
+a.stream() << "            assistant.AddPairSeparator();" << std::endl;
+a.stream() << "            " << pqn << "Dumper.Dump(assistant, value" << (has_attributes ? ", true/*withSeparator*/" : "") << ");" << std::endl;
+                }
+
                 dogen::formatters::sequence_formatter sf(o.local_attributes().size());
                 sf.element_separator("");
                 sf.postfix_configuration().not_last(", true/*withSeparator*/");
