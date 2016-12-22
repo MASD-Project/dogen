@@ -179,6 +179,20 @@ a.stream() << "            }" << std::endl;
             }
 a.stream() << "        }" << std::endl;
 a.stream() << "        #endregion" << std::endl;
+            if (o.in_inheritance_relationship())
+            {
+a.stream() << std::endl;
+a.stream() << "        #region Dumpers" << std::endl;
+                if (o.is_parent() && !o.is_child()) {
+a.stream() << "        internal abstract string Dump();" << std::endl;
+                } else if (o.is_leaf()) {
+a.stream() << "        internal override string Dump()" << std::endl;
+a.stream() << "        {" << std::endl;
+a.stream() << "            return Descendant1Dumper.Dump(this);" << std::endl;
+a.stream() << "        }" << std::endl;
+                }
+a.stream() << "        #endregion" << std::endl;
+        }
 a.stream() << "    }" << std::endl;
         } // snf
     } // sbf

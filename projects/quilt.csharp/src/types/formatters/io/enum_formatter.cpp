@@ -111,7 +111,7 @@ a.stream() << "        public static string Dump(" << sn << " value)" << std::en
 a.stream() << "        {" << std::endl;
 a.stream() << "            var assistant = new AssistantDumper();" << std::endl;
 a.stream() << "            Dump(assistant, value);" << std::endl;
-a.stream() << "            return assistant.Dump();" << std::endl;
+a.stream() << "            return assistant.ToString();" << std::endl;
 a.stream() << "        }" << std::endl;
 a.stream() << "    }" << std::endl;
         }

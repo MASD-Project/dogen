@@ -139,9 +139,13 @@ a.stream() << "        }" << std::endl;
 a.stream() << std::endl;
 a.stream() << "        public static string Dump(" << sn << " value)" << std::endl;
 a.stream() << "        {" << std::endl;
+                if (o.is_parent()) {
+a.stream() << "            return value.Dump();" << std::endl;
+                } else {
 a.stream() << "            var assistant = new AssistantDumper();" << std::endl;
 a.stream() << "            Dump(assistant, value);" << std::endl;
-a.stream() << "            return assistant.Dump();" << std::endl;
+a.stream() << "            return assistant.ToString();" << std::endl;
+                }
 a.stream() << "        }" << std::endl;
 a.stream() << "    }" << std::endl;
         }

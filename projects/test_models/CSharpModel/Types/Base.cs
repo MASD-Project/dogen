@@ -52,5 +52,9 @@ namespace Dogen.TestModels.CSharpModel
             return 0;
         }
         #endregion
+
+        #region Dumpers
+        internal abstract string Dump();
+        #endregion
     }
 }

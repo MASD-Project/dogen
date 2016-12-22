@@ -28,11 +28,15 @@ namespace Dogen.TestModels.CSharpModel.Tests
     // Analysis disable once InconsistentNaming
     public class sequence_generator_tests
     {
+        #region Properties
         private static readonly ILog Log = LogManager.GetLogger(typeof(equality_tests));
         private static readonly string FixtureName = typeof(sequence_generator_tests).Name;
+        #endregion
 
+        #region Helpers
         static bool ValidateJson(string jsonString)
         {
+            Log.DebugFormat("JSON: {0}", jsonString);
             try
             {
                 JToken.Parse(jsonString);
@@ -44,69 +48,106 @@ namespace Dogen.TestModels.CSharpModel.Tests
                 return false;
             }
         }
+        #endregion
 
+        #region Tests
         [Test]
         // Analysis disable once InconsistentNaming
-        public void sequence_dumper_produces_valid_json()
+        public void dumping_objects_with_properties_produces_valid_json()
         {
             using (var lc = new LogConfigurator(FixtureName))
             {
-                var a = ComplexBuiltinsSequenceGenerator.Sequence().GetEnumerator().Current;
-                var jsonA = ComplexBuiltinsDumper.Dump(a);
-                Log.DebugFormat("JSON: {0}", jsonA);
-                Assert.That(ValidateJson(jsonA), Is.True);
+                /*
+                 * Class without any properties.
+                */
+                var a = NoPropertiesSequenceGenerator.Sequence().GetEnumerator().Current;
+                Assert.That(ValidateJson(NoPropertiesDumper.Dump(a)), Is.True);
 
-                var b = PrimitiveBuiltinsSequenceGenerator.Sequence().GetEnumerator().Current;
-                var jsonB = PrimitiveBuiltinsDumper.Dump(b);
-                Log.DebugFormat("JSON: {0}", jsonB);
-                Assert.That(ValidateJson(jsonB), Is.True);
+                /*
+                 * Class with only one primitive property.
+                 */
+                var b = OnePropertySequenceGenerator.Sequence().GetEnumerator().Current;
+                Assert.That(ValidateJson(OnePropertyDumper.Dump(b)), Is.True);
 
-                var c = OnePropertySequenceGenerator.Sequence().GetEnumerator().Current;
-                var jsonC = OnePropertyDumper.Dump(c);
-                Log.DebugFormat("JSON: {0}", jsonC);
-                Assert.That(ValidateJson(jsonC), Is.True);
+                /*
+                 * Class with multiple primitive properties.
+                 */
+                var c = PrimitiveBuiltinsSequenceGenerator.Sequence().GetEnumerator().Current;
+                Assert.That(ValidateJson(PrimitiveBuiltinsDumper.Dump(c)), Is.True);
 
-                var d = NoPropertiesSequenceGenerator.Sequence().GetEnumerator().Current;
-                var jsonD = NoPropertiesDumper.Dump(d);
-                Log.DebugFormat("JSON: {0}", jsonD);
-                Assert.That(ValidateJson(jsonD), Is.True);
+                /*
+                 * Class with multiple object properties.
+                 */
+                var d = ComplexBuiltinsSequenceGenerator.Sequence().GetEnumerator().Current;
+                Assert.That(ValidateJson(ComplexBuiltinsDumper.Dump(d)), Is.True);
 
-                var en = BookTypesSequenceGenerator.Sequence().GetEnumerator();
-                var e = en.Current;
-                var jsonE = BookTypesDumper.Dump(e);
-                Log.DebugFormat("JSON: {0}", jsonE);
-                Assert.That(ValidateJson(jsonE), Is.True);
+                /*
+                 * Class with an object property that is code generated.
+                 */
+                var e = AssociationSequenceGenerator.Sequence().GetEnumerator().Current;
+                Assert.That(ValidateJson(AssociationDumper.Dump(e)), Is.True);
+            }
+        }
 
-                en.MoveNext();
-                e = en.Current;
-                jsonE = BookTypesDumper.Dump(e);
-                Log.DebugFormat("JSON: {0}", jsonE);
-                Assert.That(ValidateJson(jsonE), Is.True);
+        [Test]
+        // Analysis disable once InconsistentNaming
+        public void dumping_objects_without_properties_produces_valid_json()
+        {
+            using (var lc = new LogConfigurator(FixtureName))
+            {
+                var a = NoPropertiesSequenceGenerator.Sequence().GetEnumerator().Current;
+                Assert.That(ValidateJson(NoPropertiesDumper.Dump(a)), Is.True);
+            }
+        }
 
-                var f = Package1.Class1SequenceGenerator.Sequence().GetEnumerator().Current;
-                var jsonF = Package1.Class1Dumper.Dump(f);
-                Log.DebugFormat("JSON: {0}", jsonF);
-                Assert.That(ValidateJson(jsonF), Is.True);
+        [Test]
+        // Analysis disable once InconsistentNaming
+        public void dumping_enumerations_produces_valid_json()
+        {
+            using (var lc = new LogConfigurator(FixtureName))
+            {
+                /*
+                 * First value of the enumeration is "invalid".
+                 */
+                var e = BookTypesSequenceGenerator.Sequence().GetEnumerator();
+                Assert.That(ValidateJson(BookTypesDumper.Dump(e.Current)), Is.True);
 
-                var g = Package1.ShapeTypesSequenceGenerator.Sequence().GetEnumerator().Current;
-                var jsonG = Package1.ShapeTypesDumper.Dump(g);
-                Log.DebugFormat("JSON: {0}", jsonG);
-                Assert.That(ValidateJson(jsonG), Is.True);
+                /*
+                 * Do second value as well.
+                 */
+                e.MoveNext();
+                Assert.That(ValidateJson(BookTypesDumper.Dump(e.Current)), Is.True);
+            }
+        }
 
-                var h = AssociationSequenceGenerator.Sequence().GetEnumerator().Current;
-                var jsonH = AssociationDumper.Dump(h);
-                Log.DebugFormat("JSON: {0}", jsonH);
-                Assert.That(ValidateJson(jsonH), Is.True);
+        [Test]
+        // Analysis disable once InconsistentNaming
+        public void dumping_classes_in_namespaces_produces_valid_json()
+        {
+            using (var lc = new LogConfigurator(FixtureName))
+            {
+                var a = Package1.Class1SequenceGenerator.Sequence().GetEnumerator().Current;
+                Assert.That(ValidateJson(Package1.Class1Dumper.Dump(a)), Is.True);
 
-                var i = Package1.AssociationInPackageSequenceGenerator.Sequence().GetEnumerator().Current;
-                var jsonI = Package1.AssociationInPackageDumper.Dump(i);
-                Log.DebugFormat("JSON: {0}", jsonI);
-                Assert.That(ValidateJson(jsonI), Is.True);
+                var b = Package1.ShapeTypesSequenceGenerator.Sequence().GetEnumerator().Current;
+                Assert.That(ValidateJson(Package1.ShapeTypesDumper.Dump(b)), Is.True);
 
-                var j = Descendant1SequenceGenerator.Sequence().GetEnumerator().Current;
-                var jsonJ = Descendant1Dumper.Dump(j);
-                Log.DebugFormat("JSON: {0}", jsonJ);
-                Assert.That(ValidateJson(jsonJ), Is.True);
+                var c = Package1.AssociationInPackageSequenceGenerator.Sequence().GetEnumerator().Current;
+                Assert.That(ValidateJson(Package1.AssociationInPackageDumper.Dump(c)), Is.True);
+            }
+        }
+
+        [Test]
+        // Analysis disable once InconsistentNaming
+        public void classes_in_inheritance_relationships_produce_valid_json()
+        {
+            using (var lc = new LogConfigurator(FixtureName))
+            {
+                var a = Descendant1SequenceGenerator.Sequence().GetEnumerator().Current;
+                Assert.That(ValidateJson(Descendant1Dumper.Dump(a)), Is.True);
+
+                var b = BaseSequenceGenerator.Sequence().GetEnumerator().Current;
+                Assert.That(ValidateJson(BaseDumper.Dump(b)), Is.True);
             }
         }
 
@@ -117,20 +158,15 @@ namespace Dogen.TestModels.CSharpModel.Tests
             using (var lc = new LogConfigurator(FixtureName))
             {
                 NoProperties a = null;
-                var jsonA = NoPropertiesDumper.Dump(a);
-                Log.DebugFormat("JSON: {0}", jsonA);
-                Assert.That(ValidateJson(jsonA), Is.True);
+                Assert.That(ValidateJson(NoPropertiesDumper.Dump(a)), Is.True);
 
                 var b = new ComplexBuiltins() { StringProperty = "test" };
-                var jsonB = ComplexBuiltinsDumper.Dump(b);
-                Log.DebugFormat("JSON: {0}", jsonB);
-                Assert.That(ValidateJson(jsonB), Is.True);
+                Assert.That(ValidateJson(ComplexBuiltinsDumper.Dump(b)), Is.True);
 
                 var c = new ComplexBuiltins() { ObjectProperty = "test" };
-                var jsonC = ComplexBuiltinsDumper.Dump(c);
-                Log.DebugFormat("JSON: {0}", jsonC);
-                Assert.That(ValidateJson(jsonC), Is.True);
+                Assert.That(ValidateJson(ComplexBuiltinsDumper.Dump(c)), Is.True);
             }
         }
+        #endregion
     }
 }

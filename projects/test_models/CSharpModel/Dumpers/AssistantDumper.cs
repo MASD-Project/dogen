@@ -233,7 +233,7 @@ namespace Dogen.TestModels.CSharpModel
             _stringBuilder = new StringBuilder();
         }
 
-        public string Dump()
+        public override string ToString()
         {
             return _stringBuilder.ToString();
         }

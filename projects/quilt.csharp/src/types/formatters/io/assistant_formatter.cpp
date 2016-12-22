@@ -291,7 +291,7 @@ a.stream() << "        {" << std::endl;
 a.stream() << "            _stringBuilder = new StringBuilder();" << std::endl;
 a.stream() << "        }" << std::endl;
 a.stream() << std::endl;
-a.stream() << "        public string Dump()" << std::endl;
+a.stream() << "        public override string ToString()" << std::endl;
 a.stream() << "        {" << std::endl;
 a.stream() << "            return _stringBuilder.ToString();" << std::endl;
 a.stream() << "        }" << std::endl;

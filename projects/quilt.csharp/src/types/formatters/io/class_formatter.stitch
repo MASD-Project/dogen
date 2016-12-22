@@ -99,9 +99,19 @@ using System;
 
         public static string Dump(<#= sn #> value)
         {
+<#+
+                if (o.is_parent()) {
+#>
+            return value.Dump();
+<#+
+                } else {
+#>
             var assistant = new AssistantDumper();
             Dump(assistant, value);
-            return assistant.Dump();
+            return assistant.ToString();
+<#+
+                }
+#>
         }
     }
 <#+

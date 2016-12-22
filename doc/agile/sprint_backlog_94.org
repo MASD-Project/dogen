@@ -12,29 +12,29 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-12-20 Tue 10:21]
+#+CAPTION: Clock summary at [2016-12-22 Thu 11:53]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *45:44* |       |       | 100.0 |
+| *Total time*                                                                | *46:55* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 45:44   |       |       | 100.0 |
-| Active                                                                      |         | 45:44 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  1:03 |   2.3 |
+| Stories                                                                     | 46:55   |       |       | 100.0 |
+| Active                                                                      |         | 46:55 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  1:03 |   2.2 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:31 |   1.1 |
-| COMPLETED Add helper infrastructure to C#                                   |         |       |  5:55 |  12.9 |
-| COMPLETED Add support for Equals in C#                                      |         |       |  1:24 |   3.1 |
-| COMPLETED Create a test model solution to validate C# code                  |         |       |  3:47 |   8.3 |
-| COMPLETED Add basic io support to C#                                        |         |       | 11:56 |  26.1 |
+| COMPLETED Add helper infrastructure to C#                                   |         |       |  5:55 |  12.6 |
+| COMPLETED Add support for Equals in C#                                      |         |       |  1:24 |   3.0 |
+| COMPLETED Create a test model solution to validate C# code                  |         |       |  3:47 |   8.1 |
+| COMPLETED Add basic io support to C#                                        |         |       | 11:56 |  25.4 |
 | COMPLETED Add basic test data generation support to C#                      |         |       |  0:41 |   1.5 |
-| COMPLETED Add io and equality canned unit tests to C# model                 |         |       |  3:55 |   8.6 |
-| COMPLETED Update C# stitch templates to match code                          |         |       |  7:28 |  16.3 |
-| COMPLETED Move enumeration population to yarn                               |         |       |  0:43 |   1.6 |
-| COMPLETED Add support for types in packages in C#                           |         |       |  0:18 |   0.7 |
-| COMPLETED Add support for enumerations in C#                                |         |       |  1:48 |   3.9 |
+| COMPLETED Add io and equality canned unit tests to C# model                 |         |       |  3:55 |   8.3 |
+| COMPLETED Update C# stitch templates to match code                          |         |       |  7:28 |  15.9 |
+| COMPLETED Move enumeration population to yarn                               |         |       |  0:43 |   1.5 |
+| COMPLETED Add support for types in packages in C#                           |         |       |  0:18 |   0.6 |
+| COMPLETED Add support for enumerations in C#                                |         |       |  1:48 |   3.8 |
 | COMPLETED Add support for exceptions in C#                                  |         |       |  0:14 |   0.5 |
-| COMPLETED Add support for associations in C#                                |         |       |  3:14 |   7.1 |
-| STARTED Add support for inheritance in C#                                   |         |       |  2:44 |   6.0 |
+| COMPLETED Add support for associations in C#                                |         |       |  3:14 |   6.9 |
+| COMPLETED Add support for inheritance in C#                                 |         |       |  3:55 |   8.3 |
 | STARTED Add complete constructor for C# types                               |         |       |  0:03 |   0.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -523,7 +523,11 @@ addition, this is not really C++ specific at all; it would apply to
 any kernel and sub-kernel. We should rename it and move it to output
 options.
 
-*** STARTED Add support for inheritance in C#                         :story:
+*** COMPLETED Add support for inheritance in C#                       :story:
+    CLOSED: [2016-12-22 Thu 11:53]
+    CLOCK: [2016-12-22 Thu 11:31]--[2016-12-22 Thu 11:53] =>  0:22
+    CLOCK: [2016-12-22 Thu 11:20]--[2016-12-22 Thu 11:30] =>  0:10
+    CLOCK: [2016-12-22 Thu 10:01]--[2016-12-22 Thu 10:40] =>  1:29
     CLOCK: [2016-12-20 Tue 10:07]--[2016-12-20 Tue 10:21] =>  0:14
     CLOCK: [2016-12-20 Tue 10:00]--[2016-12-20 Tue 10:06] =>  0:06
     CLOCK: [2016-12-20 Tue 09:05]--[2016-12-20 Tue 09:59] =>  0:54
@@ -541,6 +545,15 @@ We need a constructor that takes in all properties.
 
 Actually we should take on this story after inheritance, because the
 implementation is affected by it.
+
+*** Add immutability support for C# types                             :story:
+
+We need to implement immutability. This can only be done after
+complete constructor.
+
+*** Add fluency support for C#                                        :story:
+
+We need to add fluent support for C#.
 
 *** Add visitor support to C#                                         :story:
 

@@ -167,6 +167,30 @@ using System;
 #>
         }
         #endregion
+<#+
+            if (o.in_inheritance_relationship())
+            {
+#>
+
+        #region Dumpers
+<#+
+                if (o.is_parent() && !o.is_child()) {
+#>
+        internal abstract string Dump();
+<#+
+                } else if (o.is_leaf()) {
+#>
+        internal override string Dump()
+        {
+            return Descendant1Dumper.Dump(this);
+        }
+<#+
+                }
+#>
+        #endregion
+<#+
+        }
+#>
     }
 <#+
         } // snf

@@ -53,9 +53,7 @@ namespace Dogen.TestModels.CSharpModel
 
         public static string Dump(Base value)
         {
-            var assistant = new AssistantDumper();
-            Dump(assistant, value);
-            return assistant.Dump();
+            return value.Dump();
         }
     }
 }

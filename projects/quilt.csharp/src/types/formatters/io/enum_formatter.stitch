@@ -65,7 +65,7 @@ enum_formatter::format(const context& ctx, const yarn::element& e) const {
         {
             var assistant = new AssistantDumper();
             Dump(assistant, value);
-            return assistant.Dump();
+            return assistant.ToString();
         }
     }
 <#+

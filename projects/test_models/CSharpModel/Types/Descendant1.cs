@@ -52,5 +52,12 @@ namespace Dogen.TestModels.CSharpModel
             return 0;
         }
         #endregion
+
+        #region Dumpers
+        internal override string Dump()
+        {
+            return Descendant1Dumper.Dump(this);
+        }
+        #endregion
     }
 }
