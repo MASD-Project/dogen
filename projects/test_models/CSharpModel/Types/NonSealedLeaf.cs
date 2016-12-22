@@ -21,8 +21,12 @@ using System;
 
 namespace Dogen.TestModels.CSharpModel
 {
-    public abstract class Descendant1 : Dogen.TestModels.CSharpModel.Base
+    public class NonSealedLeaf : Dogen.TestModels.CSharpModel.Descendant1
     {
+        #region Properties
+        public int Prop0 { get; set; }
+        #endregion
+
         #region Equality
         public override bool Equals(object obj)
         {
@@ -30,11 +34,14 @@ namespace Dogen.TestModels.CSharpModel
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != GetType()) return false;
 
-            var value = obj as Descendant1;
-            return value != null;
+            var value = obj as NonSealedLeaf;
+            if (value == null) return false;
+
+            return
+                Prop0 == value.Prop0;
         }
 
-        public static bool operator ==(Descendant1 lhs, Descendant1 rhs)
+        public static bool operator ==(NonSealedLeaf lhs, NonSealedLeaf rhs)
         {
             if (Object.ReferenceEquals(lhs, rhs))
                 return true;
@@ -42,18 +49,31 @@ namespace Dogen.TestModels.CSharpModel
             return !Object.ReferenceEquals(null, lhs) && lhs.Equals(rhs);
         }
 
-        public static bool operator !=(Descendant1 lhs, Descendant1 rhs)
+        public static bool operator !=(NonSealedLeaf lhs, NonSealedLeaf rhs)
         {
             return !(lhs == rhs);
         }
 
         public override int GetHashCode()
         {
-            return 0;
+            unchecked
+            {
+                // Choose large primes to avoid hashing collisions
+                const int HashingBase = (int) 2166136261;
+                const int HashingMultiplier = 16777619;
+
+                int hash = HashingBase;
+                hash = (hash * HashingMultiplier) ^ Prop0.GetHashCode();
+                return hash;
+            }
         }
         #endregion
 
         #region Dumpers
+        internal override string Dump()
+        {
+            return NonSealedLeafDumper.Dump(this);
+        }
         #endregion
     }
 }

@@ -81,7 +81,7 @@ a.stream() << std::endl;
             const auto ns(a.make_namespaces(e.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
             a.comment(e.documentation(), 1/*indent*/);
-            if (!o.in_inheritance_relationship() || o.is_parent()) {
+            if (!o.in_inheritance_relationship() || !o.is_child()) {
 a.stream() << "    public " << a.make_inheritance_keyword_text(o) << "class " << sn << std::endl;
             } else {
                 const auto& pn(*o.parent());
@@ -188,7 +188,7 @@ a.stream() << "        internal abstract string Dump();" << std::endl;
                 } else if (o.is_leaf()) {
 a.stream() << "        internal override string Dump()" << std::endl;
 a.stream() << "        {" << std::endl;
-a.stream() << "            return Descendant1Dumper.Dump(this);" << std::endl;
+a.stream() << "            return " << sn << "Dumper.Dump(this);" << std::endl;
 a.stream() << "        }" << std::endl;
                 }
 a.stream() << "        #endregion" << std::endl;

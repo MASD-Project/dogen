@@ -37,7 +37,10 @@
     <Compile Include="Dumpers\ColourTypesDumper.cs" />
     <Compile Include="Dumpers\ComplexBuiltinsDumper.cs" />
     <Compile Include="Dumpers\Descendant1Dumper.cs" />
+    <Compile Include="Dumpers\Descendant2Dumper.cs" />
+    <Compile Include="Dumpers\Descendant3Dumper.cs" />
     <Compile Include="Dumpers\NoPropertiesDumper.cs" />
+    <Compile Include="Dumpers\NonSealedLeafDumper.cs" />
     <Compile Include="Dumpers\OnePropertyDumper.cs" />
     <Compile Include="Dumpers\Package1\AssociationInPackageDumper.cs" />
     <Compile Include="Dumpers\Package1\Class1Dumper.cs" />
@@ -54,7 +57,10 @@
     <Compile Include="SequenceGenerators\ColourTypesSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\ComplexBuiltinsSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\Descendant1SequenceGenerator.cs" />
+    <Compile Include="SequenceGenerators\Descendant2SequenceGenerator.cs" />
+    <Compile Include="SequenceGenerators\Descendant3SequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\NoPropertiesSequenceGenerator.cs" />
+    <Compile Include="SequenceGenerators\NonSealedLeafSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\OnePropertySequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\Package1\AssociationInPackageSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\Package1\Class1SequenceGenerator.cs" />
@@ -70,8 +76,11 @@
     <Compile Include="Types\ColourTypes.cs" />
     <Compile Include="Types\ComplexBuiltins.cs" />
     <Compile Include="Types\Descendant1.cs" />
+    <Compile Include="Types\Descendant2.cs" />
+    <Compile Include="Types\Descendant3.cs" />
     <Compile Include="Types\MyException.cs" />
     <Compile Include="Types\NoProperties.cs" />
+    <Compile Include="Types\NonSealedLeaf.cs" />
     <Compile Include="Types\OneProperty.cs" />
     <Compile Include="Types\Package1\AssociationInPackage.cs" />
     <Compile Include="Types\Package1\CatastrophicException.cs" />

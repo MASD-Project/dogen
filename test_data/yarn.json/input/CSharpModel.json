@@ -68,10 +68,58 @@
     },
     {
       "name": {
+        "simple_name": "Descendant2"
+      },
+      "meta_type": "object",
+      "parent": {
+        "simple_name": "Base"
+      },
+      "attributes": [
+        {
+          "simple_name": "Prop0",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple_name": "Descendant3"
+      },
+      "meta_type": "object",
+      "parent": {
+        "simple_name": "Descendant1"
+      },
+      "attributes": [
+        {
+          "simple_name": "Prop0",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": {
         "simple_name": "NoProperties"
       },
       "meta_type": "object",
       "documentation": "This class tests the use case of no properties\n"
+    },
+    {
+      "name": {
+        "simple_name": "NonSealedLeaf"
+      },
+      "meta_type": "object",
+      "annotation": {
+        "yarn.generalization.is_final": "false"
+      },
+      "parent": {
+        "simple_name": "Descendant1"
+      },
+      "attributes": [
+        {
+          "simple_name": "Prop0",
+          "type": "int"
+        }
+      ]
     },
     {
       "name": {

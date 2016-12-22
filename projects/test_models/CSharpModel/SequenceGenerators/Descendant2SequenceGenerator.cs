@@ -24,30 +24,32 @@ using System.Collections.Generic;
 namespace Dogen.TestModels.CSharpModel
 {
     /// <summary>
-    /// Generates sequences of Base.
+    /// Generates sequences of Descendant2.
     /// </summary>
-    public static class BaseSequenceGenerator
+    public static class Descendant2SequenceGenerator
     {
-        static internal Base Create(uint position)
+        static internal void Populate(Descendant2 value, uint position)
         {
-            if ((position % 2) == 0)
-                return Dogen.TestModels.CSharpModel.Descendant3SequenceGenerator.Create(position);
-            if ((position % 2) == 1)
-                return Dogen.TestModels.CSharpModel.NonSealedLeafSequenceGenerator.Create(position);
-            return Dogen.TestModels.CSharpModel.Descendant2SequenceGenerator.Create(position);
+            value.Prop0 = AssistantSequenceGenerator.CreateInt(position + 0);
+        }
+        static internal Descendant2 Create(uint position)
+        {
+            var result = new Descendant2();
+            Populate(result, position);
+            return result;
         }
 
         #region Enumerator
-        private class BaseEnumerator : IEnumerator, IEnumerator<Base>, IDisposable
+        private class Descendant2Enumerator : IEnumerator, IEnumerator<Descendant2>, IDisposable
         {
             #region Properties
             private uint _position;
-            private Base _current;
+            private Descendant2 _current;
             #endregion
 
             private void PopulateCurrent()
             {
-                _current = BaseSequenceGenerator.Create(_position);
+                _current = Descendant2SequenceGenerator.Create(_position);
             }
 
             #region IDisposable
@@ -77,7 +79,7 @@ namespace Dogen.TestModels.CSharpModel
                 }
             }
 
-            Base IEnumerator<Base>.Current
+            Descendant2 IEnumerator<Descendant2>.Current
             {
                 get
                 {
@@ -86,7 +88,7 @@ namespace Dogen.TestModels.CSharpModel
             }
             #endregion
 
-            public BaseEnumerator()
+            public Descendant2Enumerator()
             {
                 PopulateCurrent();
             }
@@ -94,25 +96,25 @@ namespace Dogen.TestModels.CSharpModel
         #endregion
 
         #region Enumerable
-        private class BaseEnumerable : IEnumerable, IEnumerable<Base>
+        private class Descendant2Enumerable : IEnumerable, IEnumerable<Descendant2>
         {
             #region IEnumerable implementation
             public IEnumerator GetEnumerator()
             {
-                return new BaseEnumerator();
+                return new Descendant2Enumerator();
             }
 
-            IEnumerator<Base> IEnumerable<Base>.GetEnumerator()
+            IEnumerator<Descendant2> IEnumerable<Descendant2>.GetEnumerator()
             {
-                return new BaseEnumerator();
+                return new Descendant2Enumerator();
             }
             #endregion
         }
         #endregion
 
-        static public IEnumerable<Base> Sequence()
+        static public IEnumerable<Descendant2> Sequence()
         {
-            return new BaseEnumerable();
+            return new Descendant2Enumerable();
         }
     }
 }

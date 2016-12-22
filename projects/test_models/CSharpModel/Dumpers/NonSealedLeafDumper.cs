@@ -22,18 +22,18 @@ using System;
 namespace Dogen.TestModels.CSharpModel
 {
     /// <summary>
-    /// Generates sequences of Descendant1.
+    /// Generates sequences of NonSealedLeaf.
     /// </summary>
-    public static class Descendant1Dumper
+    public static class NonSealedLeafDumper
     {
-        static internal void Dump(AssistantDumper assistant, Descendant1 value, bool withSeparator = false)
+        static internal void Dump(AssistantDumper assistant, NonSealedLeaf value, bool withSeparator = false)
         {
             assistant.IncrementDepth();
             if (assistant.MaximumDepthExceeded())
                 return;
 
             assistant.AddStartObject();
-            assistant.AddType("Dogen.TestModels.CSharpModel.Descendant1", true/*withSeparator*/);
+            assistant.AddType("Dogen.TestModels.CSharpModel.NonSealedLeaf", true/*withSeparator*/);
             if (value == null)
             {
                 assistant.Add("data", "<null>");
@@ -46,7 +46,8 @@ namespace Dogen.TestModels.CSharpModel
             assistant.AddStartObject();
             assistant.AddKey("__parent_0__");
             assistant.AddPairSeparator();
-            Dogen.TestModels.CSharpModel.BaseDumper.Dump(assistant, value);
+            Dogen.TestModels.CSharpModel.Descendant1Dumper.Dump(assistant, value, true/*withSeparator*/);
+            assistant.Add("Prop0", value.Prop0);
             assistant.AddEndObject(); // data
             assistant.AddEndObject(); // main object
             assistant.HandleMemberSeparator(withSeparator);
@@ -54,9 +55,11 @@ namespace Dogen.TestModels.CSharpModel
             assistant.DecrementDepth();
         }
 
-        public static string Dump(Descendant1 value)
+        public static string Dump(NonSealedLeaf value)
         {
-            return value.Dump();
+            var assistant = new AssistantDumper();
+            Dump(assistant, value);
+            return assistant.ToString();
         }
     }
 }

@@ -24,30 +24,32 @@ using System.Collections.Generic;
 namespace Dogen.TestModels.CSharpModel
 {
     /// <summary>
-    /// Generates sequences of Base.
+    /// Generates sequences of NonSealedLeaf.
     /// </summary>
-    public static class BaseSequenceGenerator
+    public static class NonSealedLeafSequenceGenerator
     {
-        static internal Base Create(uint position)
+        static internal void Populate(NonSealedLeaf value, uint position)
         {
-            if ((position % 2) == 0)
-                return Dogen.TestModels.CSharpModel.Descendant3SequenceGenerator.Create(position);
-            if ((position % 2) == 1)
-                return Dogen.TestModels.CSharpModel.NonSealedLeafSequenceGenerator.Create(position);
-            return Dogen.TestModels.CSharpModel.Descendant2SequenceGenerator.Create(position);
+            value.Prop0 = AssistantSequenceGenerator.CreateInt(position + 0);
+        }
+        static internal NonSealedLeaf Create(uint position)
+        {
+            var result = new NonSealedLeaf();
+            Populate(result, position);
+            return result;
         }
 
         #region Enumerator
-        private class BaseEnumerator : IEnumerator, IEnumerator<Base>, IDisposable
+        private class NonSealedLeafEnumerator : IEnumerator, IEnumerator<NonSealedLeaf>, IDisposable
         {
             #region Properties
             private uint _position;
-            private Base _current;
+            private NonSealedLeaf _current;
             #endregion
 
             private void PopulateCurrent()
             {
-                _current = BaseSequenceGenerator.Create(_position);
+                _current = NonSealedLeafSequenceGenerator.Create(_position);
             }
 
             #region IDisposable
@@ -77,7 +79,7 @@ namespace Dogen.TestModels.CSharpModel
                 }
             }
 
-            Base IEnumerator<Base>.Current
+            NonSealedLeaf IEnumerator<NonSealedLeaf>.Current
             {
                 get
                 {
@@ -86,7 +88,7 @@ namespace Dogen.TestModels.CSharpModel
             }
             #endregion
 
-            public BaseEnumerator()
+            public NonSealedLeafEnumerator()
             {
                 PopulateCurrent();
             }
@@ -94,25 +96,25 @@ namespace Dogen.TestModels.CSharpModel
         #endregion
 
         #region Enumerable
-        private class BaseEnumerable : IEnumerable, IEnumerable<Base>
+        private class NonSealedLeafEnumerable : IEnumerable, IEnumerable<NonSealedLeaf>
         {
             #region IEnumerable implementation
             public IEnumerator GetEnumerator()
             {
-                return new BaseEnumerator();
+                return new NonSealedLeafEnumerator();
             }
 
-            IEnumerator<Base> IEnumerable<Base>.GetEnumerator()
+            IEnumerator<NonSealedLeaf> IEnumerable<NonSealedLeaf>.GetEnumerator()
             {
-                return new BaseEnumerator();
+                return new NonSealedLeafEnumerator();
             }
             #endregion
         }
         #endregion
 
-        static public IEnumerable<Base> Sequence()
+        static public IEnumerable<NonSealedLeaf> Sequence()
         {
-            return new BaseEnumerable();
+            return new NonSealedLeafEnumerable();
         }
     }
 }

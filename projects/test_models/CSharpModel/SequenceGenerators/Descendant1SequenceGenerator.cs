@@ -33,8 +33,9 @@ namespace Dogen.TestModels.CSharpModel
         }
         static internal Descendant1 Create(uint position)
         {
-            var result = new Descendant1();
-            return result;
+            if ((position % 1) == 0)
+                return Dogen.TestModels.CSharpModel.NonSealedLeafSequenceGenerator.Create(position);
+            return Dogen.TestModels.CSharpModel.Descendant3SequenceGenerator.Create(position);
         }
 
         #region Enumerator

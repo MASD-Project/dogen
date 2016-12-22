@@ -32,7 +32,7 @@ using System;
             const auto ns(a.make_namespaces(e.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
             a.comment(e.documentation(), 1/*indent*/);
-            if (!o.in_inheritance_relationship() || o.is_parent()) {
+            if (!o.in_inheritance_relationship() || !o.is_child()) {
 #>
     public <#= a.make_inheritance_keyword_text(o) #>class <#= sn #>
 <#+
@@ -182,7 +182,7 @@ using System;
 #>
         internal override string Dump()
         {
-            return Descendant1Dumper.Dump(this);
+            return <#= sn #>Dumper.Dump(this);
         }
 <#+
                 }

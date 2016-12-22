@@ -148,6 +148,9 @@ namespace Dogen.TestModels.CSharpModel.Tests
 
                 var b = BaseSequenceGenerator.Sequence().GetEnumerator().Current;
                 Assert.That(ValidateJson(BaseDumper.Dump(b)), Is.True);
+
+				var c = Descendant2SequenceGenerator.Sequence().GetEnumerator().Current;
+				Assert.That(ValidateJson(Descendant2Dumper.Dump(c)), Is.True);
             }
         }
 
