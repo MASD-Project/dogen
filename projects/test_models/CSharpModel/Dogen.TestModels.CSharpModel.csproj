@@ -56,6 +56,9 @@
     <Compile Include="Dumpers\Package2\ChildDumper.cs" />
     <Compile Include="Dumpers\Package2\ChildViaSettingsDumper.cs" />
     <Compile Include="Dumpers\Package2\ParentDumper.cs" />
+    <Compile Include="Dumpers\Package3\ParentDumper.cs" />
+    <Compile Include="Dumpers\Package4\ChildDumper.cs" />
+    <Compile Include="Dumpers\Package4\ChildViaSettingsDumper.cs" />
     <Compile Include="Dumpers\ParentWithMembersDumper.cs" />
     <Compile Include="Dumpers\PrimitiveBuiltinsDumper.cs" />
     <Compile Include="Dumpers\SecondChildWithoutMembersDumper.cs" />
@@ -86,6 +89,9 @@
     <Compile Include="SequenceGenerators\Package2\ChildSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\Package2\ChildViaSettingsSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\Package2\ParentSequenceGenerator.cs" />
+    <Compile Include="SequenceGenerators\Package3\ParentSequenceGenerator.cs" />
+    <Compile Include="SequenceGenerators\Package4\ChildSequenceGenerator.cs" />
+    <Compile Include="SequenceGenerators\Package4\ChildViaSettingsSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\ParentWithMembersSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\PrimitiveBuiltinsSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\SecondChildWithoutMembersSequenceGenerator.cs" />
@@ -117,6 +123,9 @@
     <Compile Include="Types\Package2\Child.cs" />
     <Compile Include="Types\Package2\ChildViaSettings.cs" />
     <Compile Include="Types\Package2\Parent.cs" />
+    <Compile Include="Types\Package3\Parent.cs" />
+    <Compile Include="Types\Package4\Child.cs" />
+    <Compile Include="Types\Package4\ChildViaSettings.cs" />
     <Compile Include="Types\ParentWithMembers.cs" />
     <Compile Include="Types\PrimitiveBuiltins.cs" />
     <Compile Include="Types\SecondChildWithoutMembers.cs" />

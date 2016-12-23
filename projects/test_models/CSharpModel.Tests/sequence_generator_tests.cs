@@ -157,6 +157,9 @@ namespace Dogen.TestModels.CSharpModel.Tests
                  */
                 var d = Package2.ChildSequenceGenerator.Sequence().GetEnumerator().Current;
                 Assert.That(ValidateJson(Package2.ChildDumper.Dump(d)), Is.True);
+
+                var e = Package4.ChildSequenceGenerator.Sequence().GetEnumerator().Current;
+                Assert.That(ValidateJson(Package4.ChildDumper.Dump(e)), Is.True);
             }
         }
 
