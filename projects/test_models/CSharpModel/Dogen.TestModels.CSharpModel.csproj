@@ -40,6 +40,7 @@
     <Compile Include="Dumpers\Descendant2Dumper.cs" />
     <Compile Include="Dumpers\Descendant3Dumper.cs" />
     <Compile Include="Dumpers\NoPropertiesDumper.cs" />
+    <Compile Include="Dumpers\NonFinalOrphanDumper.cs" />
     <Compile Include="Dumpers\NonSealedLeafDumper.cs" />
     <Compile Include="Dumpers\OnePropertyDumper.cs" />
     <Compile Include="Dumpers\Package1\AssociationInPackageDumper.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="SequenceGenerators\Descendant2SequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\Descendant3SequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\NoPropertiesSequenceGenerator.cs" />
+    <Compile Include="SequenceGenerators\NonFinalOrphanSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\NonSealedLeafSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\OnePropertySequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\Package1\AssociationInPackageSequenceGenerator.cs" />
@@ -80,6 +82,7 @@
     <Compile Include="Types\Descendant3.cs" />
     <Compile Include="Types\MyException.cs" />
     <Compile Include="Types\NoProperties.cs" />
+    <Compile Include="Types\NonFinalOrphan.cs" />
     <Compile Include="Types\NonSealedLeaf.cs" />
     <Compile Include="Types\OneProperty.cs" />
     <Compile Include="Types\Package1\AssociationInPackage.cs" />

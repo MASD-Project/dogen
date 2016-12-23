@@ -105,6 +105,21 @@
     },
     {
       "name": {
+        "simple_name": "NonFinalOrphan"
+      },
+      "meta_type": "object",
+      "annotation": {
+        "yarn.generalization.is_final": "false"
+      },
+      "attributes": [
+        {
+          "simple_name": "Prop0",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
         "simple_name": "NonSealedLeaf"
       },
       "meta_type": "object",
