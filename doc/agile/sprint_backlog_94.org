@@ -12,32 +12,34 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-12-23 Fri 14:29]
+#+CAPTION: Clock summary at [2016-12-23 Fri 17:39]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *51:55* |       |       | 100.0 |
+| *Total time*                                                                | *54:44* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 51:55   |       |       | 100.0 |
-| Active                                                                      |         | 51:55 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  1:09 |   2.2 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  0:31 |   1.0 |
-| COMPLETED Add helper infrastructure to C#                                   |         |       |  5:55 |  11.4 |
-| COMPLETED Add support for Equals in C#                                      |         |       |  1:24 |   2.7 |
-| COMPLETED Create a test model solution to validate C# code                  |         |       |  3:47 |   7.3 |
-| COMPLETED Add basic io support to C#                                        |         |       | 11:56 |  23.0 |
-| COMPLETED Add basic test data generation support to C#                      |         |       |  0:41 |   1.3 |
-| COMPLETED Add io and equality canned unit tests to C# model                 |         |       |  3:55 |   7.5 |
-| COMPLETED Update C# stitch templates to match code                          |         |       |  7:28 |  14.4 |
-| COMPLETED Move enumeration population to yarn                               |         |       |  0:43 |   1.4 |
-| COMPLETED Add support for types in packages in C#                           |         |       |  0:18 |   0.6 |
-| COMPLETED Add support for enumerations in C#                                |         |       |  1:48 |   3.5 |
+| Stories                                                                     | 54:44   |       |       | 100.0 |
+| Active                                                                      |         | 54:44 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  1:09 |   2.1 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  0:31 |   0.9 |
+| COMPLETED Add helper infrastructure to C#                                   |         |       |  5:55 |  10.8 |
+| COMPLETED Add support for Equals in C#                                      |         |       |  1:24 |   2.6 |
+| COMPLETED Create a test model solution to validate C# code                  |         |       |  3:47 |   6.9 |
+| COMPLETED Add basic io support to C#                                        |         |       | 11:56 |  21.8 |
+| COMPLETED Add basic test data generation support to C#                      |         |       |  0:41 |   1.2 |
+| COMPLETED Add io and equality canned unit tests to C# model                 |         |       |  3:55 |   7.2 |
+| COMPLETED Update C# stitch templates to match code                          |         |       |  7:28 |  13.6 |
+| COMPLETED Move enumeration population to yarn                               |         |       |  0:43 |   1.3 |
+| COMPLETED Add support for types in packages in C#                           |         |       |  0:18 |   0.5 |
+| COMPLETED Add support for enumerations in C#                                |         |       |  1:48 |   3.3 |
 | COMPLETED Add support for exceptions in C#                                  |         |       |  0:14 |   0.4 |
-| COMPLETED Add support for associations in C#                                |         |       |  3:14 |   6.2 |
-| COMPLETED Add support for inheritance in C#                                 |         |       |  6:21 |  12.2 |
-| COMPLETED Consider changing inherited attributes to a list                  |         |       |  0:34 |   1.1 |
-| COMPLETED Add complete constructor for C# types                             |         |       |  1:44 |   3.3 |
+| COMPLETED Add support for associations in C#                                |         |       |  3:14 |   5.9 |
+| COMPLETED Add support for inheritance in C#                                 |         |       |  6:21 |  11.6 |
+| COMPLETED Consider changing inherited attributes to a list                  |         |       |  0:34 |   1.0 |
+| COMPLETED Add complete constructor for C# types                             |         |       |  1:44 |   3.2 |
 | COMPLETED Add immutability support for C# types                             |         |       |  0:13 |   0.4 |
+| STARTED Add handcrafted class to C# test model                              |         |       |  0:03 |   0.1 |
+| STARTED Add container types to C# proxy models                              |         |       |  2:46 |   5.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -605,9 +607,178 @@ Links:
 We need to implement immutability. This can only be done after
 complete constructor.
 
-*** Add handcrafted class to C# test model                            :story:
+*** STARTED Add handcrafted class to C# test model                    :story:
+    CLOCK: [2016-12-23 Fri 14:30]--[2016-12-23 Fri 14:33] =>  0:03
 
 We should make sure handcrafted code works in C#.
+
+Actually in order to get handcrafted types to work we need support for
+enablement. This is a somewhat tricky feature so we should leave it
+for after all the main ones are done.
+
+*** STARTED Add container types to C# proxy models                    :story:
+    CLOCK: [2016-12-23 Fri 15:58]--[2016-12-23 Fri 17:35] =>  1:37
+    CLOCK: [2016-12-23 Fri 15:54]--[2016-12-23 Fri 15:57] =>  0:03
+    CLOCK: [2016-12-23 Fri 15:30]--[2016-12-23 Fri 15:54] =>  0:24
+    CLOCK: [2016-12-23 Fri 14:33]--[2016-12-23 Fri 15:15] =>  0:42
+
+We should add all major container types and tests for them.
+
+: IEnumerable, IEnumerable<T>
+: ICollection, ICollection<T>
+: IList, IList<T>
+: IDictionary, IDictionary<K, V>
+: ArrayList, List<T>
+: Queue, ConcurrentQueue<T>, Stack, ConcurrentStack<T>, LinkedList<T>
+: Hashtable, SortedList classes
+: Dictionary<TKey, TValue>, SortedList<TKey, TValue>
+: ConcurrentDictionary<TKey, TValue>
+: KeyedCollection<TKey, TItem>
+
+Notes:
+
+- abstract types require knowing the leaves. We could use the existing
+  machinery to map them.
+- many c# types implement multiple interfaces; we need support for
+  multiple inheritance at the non-proxy model level.
+
+Links:
+
+- [[https://msdn.microsoft.com/en-us/library/0ytkdh4s(v%3Dvs.110).aspx][Commonly Used Collection Types]]
+
+**** Create an inheritance graph of the main collections
+
+System.Collections:
+
+: IEnumerable
+: ICollection: IEnumerable
+: IDictionary : ICollection, IEnumerable
+: IList : ICollection, IEnumerable
+: ArrayList : IList, ICollection, IEnumerable
+: BitArray : ICollection, IEnumerable
+: Hashtable : IDictionary, ICollection, IEnumerable
+: Queue : ICollection, IEnumerable, ICloneable
+: SortedList : IDictionary, ICollection, IEnumerable, ICloneable
+: Stack : ICollection, IEnumerable, ICloneable
+
+System.Collections.ObjectModel:
+
+: Collection<T> : IList<T>, ICollection<T>, IEnumerable<T>,
+:                 IEnumerable, IList, ICollection, IReadOnlyList<T>,
+:                 IReadOnlyCollection<T>
+: KeyedCollection<TKey, TItem> : Collection<TItem>
+
+System.Collections.Generic:
+
+: KeyValuePair<TKey, TValue> (structure)
+: IEnumerable<out T> : IEnumerable
+: ICollection<T> : IEnumerable<T>, IEnumerable
+: IList<T> : ICollection<T>, IEnumerable<T>, IEnumerable
+: IReadOnlyCollection<out T> : IEnumerable<T>, IEnumerable
+: IReadOnlyList<out T> : IReadOnlyCollection<T>, IEnumerable<T>, IEnumerable
+: IReadOnlyDictionary<K, V>: IReadOnlyDictionary<K, V> :
+:                            IReadOnlyCollection<KeyValuePair<K, V>>,
+:                            IEnumerable<KeyValuePair<K, V>>, IEnumerable
+: ISet<T> : ICollection<T>, IEnumerable<T>, IEnumerable
+: HashSet<T> : ICollection<T>, IEnumerable<T>, IEnumerable,  ISet<T>,
+:              IReadOnlyCollection<T>
+: List<T> : IList<T>, ICollection<T>, IEnumerable<T>,  IEnumerable, IList,
+:           ICollection, IReadOnlyList<T>, IReadOnlyCollection<T>
+:           -> IList<T>, IReadOnlyList<T>
+: Queue<T> : IEnumerable<T>, IEnumerable, ICollection, IReadOnlyCollection<T>
+: HashSet<T> : ICollection<T>, IEnumerable<T>, IEnumerable, ISet<T>,
+:              IReadOnlyCollection<T>
+: IDictionary<K, V> : ICollection<KeyValuePair<K, V>>,
+:                     IEnumerable<KeyValuePair<K, V>>, IEnumerable
+: Dictionary<K, V> : IDictionary<K, V>, ICollection<KeyValuePair<K, V>>,
+:                    IEnumerable<KeyValuePair<K, V>>, IEnumerable, IDictionary,
+:                    ICollection, IReadOnlyDictionary<K, V>,
+:                    IReadOnlyCollection<KeyValuePair<K, V>>
+: SortedDictionary<K, V> : IDictionary<K, V>,
+:                          ICollection<KeyValuePair<K, V>>,
+:                          IEnumerable<KeyValuePair<K, V>>,
+:                          IEnumerable, IDictionary, ICollection,
+:                          IReadOnlyDictionary<K, V>,
+:                          IReadOnlyCollection<KeyValuePair<K, V>>
+: SortedList<K, V> : IDictionary<K, V>, ICollection<KeyValuePair<K, V>>,
+:                    IEnumerable<KeyValuePair<K, V>>, IEnumerable, IDictionary,
+:                    ICollection, IReadOnlyDictionary<K, V>,
+:                    IReadOnlyCollection<KeyValuePair<K, V>>
+: SortedSet<T> : ISet<T>, ICollection<T>, IEnumerable<T>, IEnumerable,
+:                ICollection, IReadOnlyCollection<T>
+: KeyedByTypeCollection<TItem> : KeyedCollection<Type, TItem>
+: LinkedList<T> : ICollection<T>, IEnumerable<T>, IEnumerable, ICollection,
+:                 IReadOnlyCollection<T>
+: Stack<T> : IEnumerable<T>, IEnumerable, ICollection, IReadOnlyCollection<T>
+: SynchronizedCollection<T> : IList<T>, ICollection<T>, IEnumerable<T>,
+:                             IEnumerable, IList, ICollection
+: SynchronizedKeyedCollection<K, T> : SynchronizedCollection<T>
+: SynchronizedReadOnlyCollection<T> : IList<T>, ICollection<T>, IEnumerable<T>,
+:                                     IEnumerable, IList, ICollection
+
+System.Collections.Immutable:
+
+: IImmutableList<T> : IReadOnlyList<T>,  IReadOnlyCollection<T>, IEnumerable<T>,
+:                     IEnumerable
+: ImmutableList<T>: IImmutableList<T>,  IList<T>, ICollection<T>, IList,
+:                   ICollection,, IReadOnlyList<T>,  IReadOnlyCollection<T>,
+:                   IEnumerable<T>, IEnumerable
+: IImmutableQueue<T> : IEnumerable<T>, IEnumerable
+: ImmutableQueue<T> : IImmutableQueue<T>, IEnumerable<T>,  IEnumerable
+: IImmutableStack<T> : IEnumerable<T>, IEnumerable
+: ImmutableStack<T> : IImmutableStack<T>, IEnumerable<T>,  IEnumerable
+: IImmutableDictionary<K, V> : IReadOnlyDictionary<K, V>,
+:                              IReadOnlyCollection<KeyValuePair<K, V>>,
+:                              IEnumerable<KeyValuePair<K, V>>, IEnumerable
+: ImmutableDictionary<K, V> : IImmutableDictionary<K, V>,
+:                             IReadOnlyDictionary<K, V>,
+:                             IReadOnlyCollection<KeyValuePair<K, V>>,
+:                             IDictionary<K, V>, ICollection<KeyValuePair<K, V>>,
+:                             IEnumerable<KeyValuePair<K, V>>, IDictionary
+:                             ICollection, IEnumerable
+: ImmutableSortedDictionary<K, V> : IImmutableDictionary<K, V>,
+:                                   IReadOnlyDictionary<K, V>,
+:                                   IReadOnlyCollection<KeyValuePair<K, V>>,
+:                                   IDictionary<K, V>,
+:                                   ICollection<KeyValuePair<K, V>>,
+:                                   IEnumerable<KeyValuePair<K, V>>,
+:                                   IDictionary, ICollection, IEnumerable
+: IImmutableSet<T> : IReadOnlyCollection<T>, IEnumerable<T>, IEnumerable
+: ImmutableSortedSet<T> : IImmutableSet<T>,  IReadOnlyList<T>,
+:                         IReadOnlyCollection<T>, IList<T>, ISet<T>,
+:                         ICollection<T>, IEnumerable<T>, IList, ICollection,
+:                          IEnumerable
+: ImmutableHashSet<T> : IImmutableSet<T>, IReadOnlyCollection<T>,
+:                       ISet<T>, ICollection<T>, IEnumerable<T>, ICollection,
+:                       IEnumerable
+
+System.Collections.Concurrent
+
+*** Consider supporting multiple inheritance on non-proxy models      :story:
+
+We need to be able to express relationships such as the ones used by
+C# containers. But first we need to build an inheritance graph of all
+relevant collections.
+
+
+*** Parsing should support dot notation                               :story:
+
+At present we only support the c++ scope operator =::= as a separator
+for fully qualified names in a model. However, it probably would be
+quite trivial to have a "mode" in the parser and support either =.= or
+=::=, depending on a construction-supplied flag (inferred from the
+model language). This would allow C# users to enter their model in a
+more natural way, instead of forcing them to use C++ notation.
+
+*** Add support for arrays                                            :story:
+
+At present the yarn parser does not support array notation:
+=string[]=. We need to look into how arrays would work for C++ and
+implement it in a compatible way.
+
+Links:
+
+- [[https://www.dotnetperls.com/array][array]]
 
 *** Add fluency support for C#                                        :story:
 
