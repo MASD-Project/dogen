@@ -555,6 +555,7 @@ Problems:
 - child equals is not calling parent's
 
 *** STARTED Add complete constructor for C# types                     :story:
+    CLOCK: [2016-12-23 Fri 11:24]--[2016-12-23 Fri 12:03] =>  0:39
     CLOCK: [2016-12-23 Fri 11:21]--[2016-12-23 Fri 11:23] =>  0:02
     CLOCK: [2016-12-23 Fri 11:13]--[2016-12-23 Fri 11:20] =>  0:07
     CLOCK: [2016-12-19 Mon 20:19]--[2016-12-19 Mon 20:22] =>  0:03
@@ -570,6 +571,13 @@ Links:
 
 - [[http://stackoverflow.com/questions/12561333/why-do-i-need-a-parameterless-constructor][Why do I need a parameterless constructor?]]
 - [[http://stackoverflow.com/questions/267724/why-xml-serializable-class-need-a-parameterless-constructor][Why XML-Serializable class need a parameterless constructor]]
+- [[http://stackoverflow.com/questions/12051/calling-the-base-constructor-in-c-sharp][Calling the base constructor in C#]]
+
+*** Inherited attributes should just be a list                        :story:
+
+In yarn's =Stateful= we have a map of parent name to attributes. But
+the entire code base assumes we can only have one parent for an
+object. Drop the map, and use a list.
 
 *** Add immutability support for C# types                             :story:
 
