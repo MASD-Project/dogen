@@ -30,7 +30,9 @@ namespace Dogen.TestModels.CSharpModel
     {
         static internal void Populate(SecondChildWithoutMembers value, uint position)
         {
+            Dogen.TestModels.CSharpModel.ParentWithMembersSequenceGenerator.Populate(value, position);
         }
+
         static internal SecondChildWithoutMembers Create(uint position)
         {
             var result = new SecondChildWithoutMembers();

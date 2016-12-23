@@ -35,7 +35,7 @@ namespace Dogen.TestModels.CSharpModel
             if (obj.GetType() != GetType()) return false;
 
             var value = obj as ThirdChildWithMembers;
-            if (value == null) return false;
+            if (value == null || !base.Equals(value)) return false;
 
             return
                 Prop1 == value.Prop1;

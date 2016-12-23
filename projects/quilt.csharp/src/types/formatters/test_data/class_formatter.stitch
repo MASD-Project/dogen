@@ -42,31 +42,40 @@ using System.Collections.Generic;
     /// </summary>
     public static class <#= sn #>SequenceGenerator
     {
-<#+
-            if (is_parent_or_has_attributes) {
-#>
         static internal void Populate(<#= sn #> value, uint position)
         {
 <#+
-                unsigned int count(0);
-                for (const auto& attr : o.local_attributes()) {
-                    const auto oap(a.get_assistant_properties(attr));
-                    if (oap && oap->requires_assistance()) {
+                if (!is_parent_or_has_attributes) {
+#>
+            // nothing to populate
+<#+
+                } else {
+                    unsigned int count(0);
+                    if (o.parent()) {
+                        const auto& pn(*o.parent());
+                        const auto pqn(a.get_qualified_name(pn));
+#>
+            <#= pqn #>SequenceGenerator.Populate(value, position);
+<#+
+                    }
+
+                    for (const auto& attr : o.local_attributes()) {
+                        const auto oap(a.get_assistant_properties(attr));
+                        if (oap && oap->requires_assistance()) {
 #>
             value.<#= attr.name().simple() #> = AssistantSequenceGenerator.Create<#= oap->method_postfix() #>(position + <#= count++ #>);
 <#+
-                    } else {
-                        const auto attr_qn(a.get_qualified_name(attr.parsed_type().current()));
+                        } else {
+                            const auto attr_qn(a.get_qualified_name(attr.parsed_type().current()));
 #>
             value.<#= attr.name().simple() #> = <#= attr_qn #>SequenceGenerator.Create(position + <#= count++ #>);
 <#+
+                        }
                     }
                 }
 #>
         }
-<#+
-            }
-#>
+
         static internal <#= sn #> Create(uint position)
         {
 <#+

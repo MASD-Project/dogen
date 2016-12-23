@@ -34,6 +34,7 @@ namespace Dogen.TestModels.CSharpModel
             value.Prop1 = Dogen.TestModels.CSharpModel.NoPropertiesSequenceGenerator.Create(position + 1);
             value.Prop2 = Dogen.TestModels.CSharpModel.ColourTypesSequenceGenerator.Create(position + 2);
         }
+
         static internal Association Create(uint position)
         {
             var result = new Association();

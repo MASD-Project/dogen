@@ -30,8 +30,10 @@ namespace Dogen.TestModels.CSharpModel
     {
         static internal void Populate(ThirdChildWithMembers value, uint position)
         {
+            Dogen.TestModels.CSharpModel.ParentWithMembersSequenceGenerator.Populate(value, position);
             value.Prop1 = AssistantSequenceGenerator.CreateInt(position + 0);
         }
+
         static internal ThirdChildWithMembers Create(uint position)
         {
             if ((position % 1) == 0)

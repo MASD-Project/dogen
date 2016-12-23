@@ -28,6 +28,11 @@ namespace Dogen.TestModels.CSharpModel
     /// </summary>
     public static class BaseSequenceGenerator
     {
+        static internal void Populate(Base value, uint position)
+        {
+            // nothing to populate
+        }
+
         static internal Base Create(uint position)
         {
             if ((position % 2) == 0)

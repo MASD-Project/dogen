@@ -117,9 +117,17 @@ a.stream() << "            if (obj.GetType() != GetType()) return false;" << std
 a.stream() << std::endl;
 a.stream() << "            var value = obj as " << sn << ";" << std::endl;
             if (o.local_attributes().empty()) {
+                if (o.parent()) {
+a.stream() << "            return (value != null && base.Equals(value));" << std::endl;
+                } else {
 a.stream() << "            return value != null;" << std::endl;
+                }
             } else {
+                if (o.parent()) {
+a.stream() << "            if (value == null || !base.Equals(value)) return false;" << std::endl;
+                } else {
 a.stream() << "            if (value == null) return false;" << std::endl;
+                }
 a.stream() << std::endl;
 a.stream() << "            return" << std::endl;
                 dogen::formatters::sequence_formatter sf(o.local_attributes().size());
@@ -127,12 +135,13 @@ a.stream() << "            return" << std::endl;
                 sf.postfix_configuration().not_last(" &&");
                 sf.postfix_configuration().last(";");
                 for (const auto& attr : o.local_attributes()) {
-                    if (attr.parsed_type().is_current_simple_type())
-                        if (attr.parsed_type().is_floating_point())
+                    if (attr.parsed_type().is_current_simple_type()) {
+                        if (attr.parsed_type().is_floating_point()) {
 a.stream() << "                NearlyEqual(" << attr.name().simple() << ", value." << attr.name().simple() << ")" << sf.postfix() << std::endl;
-                        else
+                        } else {
 a.stream() << "                " << attr.name().simple() << " == value." << attr.name().simple() << sf.postfix() << std::endl;
-                    else {
+                        }
+                    } else {
 a.stream() << "                " << attr.name().simple() << " != null && value." << attr.name().simple() << " != null &&" << std::endl;
 a.stream() << "                " << attr.name().simple() << ".Equals(value." << attr.name().simple() << ")" << sf.postfix() << std::endl;
                     }

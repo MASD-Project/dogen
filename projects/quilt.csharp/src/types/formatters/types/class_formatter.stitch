@@ -82,12 +82,26 @@ using System;
             var value = obj as <#= sn #>;
 <#+
             if (o.local_attributes().empty()) {
+                if (o.parent()) {
+#>
+            return (value != null && base.Equals(value));
+<#+
+                } else {
 #>
             return value != null;
 <#+
+                }
             } else {
+                if (o.parent()) {
+#>
+            if (value == null || !base.Equals(value)) return false;
+<#+
+                } else {
 #>
             if (value == null) return false;
+<#+
+                }
+#>
 
             return
 <#+
@@ -96,16 +110,17 @@ using System;
                 sf.postfix_configuration().not_last(" &&");
                 sf.postfix_configuration().last(";");
                 for (const auto& attr : o.local_attributes()) {
-                    if (attr.parsed_type().is_current_simple_type())
-                        if (attr.parsed_type().is_floating_point())
+                    if (attr.parsed_type().is_current_simple_type()) {
+                        if (attr.parsed_type().is_floating_point()) {
 #>
                 NearlyEqual(<#= attr.name().simple() #>, value.<#= attr.name().simple() #>)<#= sf.postfix() #>
 <#+
-                        else
+                        } else {
 #>
                 <#= attr.name().simple() #> == value.<#= attr.name().simple() #><#= sf.postfix() #>
 <#+
-                    else {
+                        }
+                    } else {
 #>
                 <#= attr.name().simple() #> != null && value.<#= attr.name().simple() #> != null &&
                 <#= attr.name().simple() #>.Equals(value.<#= attr.name().simple() #>)<#= sf.postfix() #>

@@ -32,6 +32,7 @@ namespace Dogen.TestModels.CSharpModel
         {
             value.Prop0 = AssistantSequenceGenerator.CreateInt(position + 0);
         }
+
         static internal ParentWithMembers Create(uint position)
         {
             if ((position % 2) == 0)

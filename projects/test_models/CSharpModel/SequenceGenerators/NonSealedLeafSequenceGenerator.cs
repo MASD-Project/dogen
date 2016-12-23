@@ -30,8 +30,10 @@ namespace Dogen.TestModels.CSharpModel
     {
         static internal void Populate(NonSealedLeaf value, uint position)
         {
+            Dogen.TestModels.CSharpModel.Descendant1SequenceGenerator.Populate(value, position);
             value.Prop0 = AssistantSequenceGenerator.CreateInt(position + 0);
         }
+
         static internal NonSealedLeaf Create(uint position)
         {
             var result = new NonSealedLeaf();

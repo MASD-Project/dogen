@@ -32,6 +32,7 @@ namespace Dogen.TestModels.CSharpModel.Package1
         {
             value.Prop0 = AssistantSequenceGenerator.CreateInt(position + 0);
         }
+
         static internal Class1 Create(uint position)
         {
             var result = new Class1();

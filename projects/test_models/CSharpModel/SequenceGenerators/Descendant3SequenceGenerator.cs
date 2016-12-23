@@ -30,8 +30,10 @@ namespace Dogen.TestModels.CSharpModel
     {
         static internal void Populate(Descendant3 value, uint position)
         {
+            Dogen.TestModels.CSharpModel.Descendant1SequenceGenerator.Populate(value, position);
             value.Prop0 = AssistantSequenceGenerator.CreateBool(position + 0);
         }
+
         static internal Descendant3 Create(uint position)
         {
             var result = new Descendant3();

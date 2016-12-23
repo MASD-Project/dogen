@@ -33,6 +33,7 @@ namespace Dogen.TestModels.CSharpModel
             value.ObjectProperty = AssistantSequenceGenerator.CreateObject(position + 0);
             value.StringProperty = AssistantSequenceGenerator.CreateString(position + 1);
         }
+
         static internal ComplexBuiltins Create(uint position)
         {
             var result = new ComplexBuiltins();

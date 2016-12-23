@@ -46,6 +46,7 @@ namespace Dogen.TestModels.CSharpModel
             value.BoolProperty = AssistantSequenceGenerator.CreateBool(position + 13);
             value.DecimalProperty = AssistantSequenceGenerator.CreateDecimal(position + 14);
         }
+
         static internal PrimitiveBuiltins Create(uint position)
         {
             var result = new PrimitiveBuiltins();

@@ -34,6 +34,7 @@ namespace Dogen.TestModels.CSharpModel.Package1
             value.Prop1 = Dogen.TestModels.CSharpModel.ComplexBuiltinsSequenceGenerator.Create(position + 1);
             value.Prop2 = Dogen.TestModels.CSharpModel.Package1.Class1SequenceGenerator.Create(position + 2);
         }
+
         static internal AssociationInPackage Create(uint position)
         {
             var result = new AssociationInPackage();

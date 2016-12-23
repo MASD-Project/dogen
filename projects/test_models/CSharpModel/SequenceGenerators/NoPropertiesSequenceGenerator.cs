@@ -28,6 +28,11 @@ namespace Dogen.TestModels.CSharpModel
     /// </summary>
     public static class NoPropertiesSequenceGenerator
     {
+        static internal void Populate(NoProperties value, uint position)
+        {
+            // nothing to populate
+        }
+
         static internal NoProperties Create(uint position)
         {
             var result = new NoProperties();

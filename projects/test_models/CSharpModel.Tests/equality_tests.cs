@@ -26,9 +26,12 @@ namespace Dogen.TestModels.CSharpModel.Tests
     // Analysis disable once InconsistentNaming
     class equality_tests
     {
+		#region Properties
         private static readonly ILog Log = LogManager.GetLogger(typeof(equality_tests));
         private static readonly string FixtureName = typeof(equality_tests).Name;
+		#endregion
 
+		#region Tests
         [Test]
         // Analysis disable once InconsistentNaming
         public void identical_objects_are_equal()
@@ -232,6 +235,76 @@ namespace Dogen.TestModels.CSharpModel.Tests
                 Assert.That(k == m, Is.False);
                 Assert.That(k != m, Is.True);
             }
-        }
+		}
+
+		[Test]
+		// Analysis disable once InconsistentNaming
+		public void equality_in_inheritance_works_correctly()
+		{
+			using (var lc = new LogConfigurator(FixtureName))
+			{
+				/*
+				 * Two instances of the same descendant with the same values are equal.  
+				 */
+				var en = ChildOfAChild1SequenceGenerator.Sequence().GetEnumerator();
+				var a = en.Current;
+				var b = ChildOfAChild1SequenceGenerator.Sequence().GetEnumerator().Current;
+				Log.DebugFormat("a: {0}", ChildOfAChild1Dumper.Dump(a));
+				Log.DebugFormat("b: {0}", ChildOfAChild1Dumper.Dump(b));
+
+				Assert.That(object.ReferenceEquals(a, b), Is.False);
+				Assert.That(a.Equals(b), Is.True);
+				Assert.That(a == b, Is.True);
+				Assert.That(a != b, Is.False);
+
+				/*
+				 * Two instances of the same descendant with different values are equal.  
+				 */
+				en.MoveNext();
+				var c = en.Current;
+				en.MoveNext();
+				var d = en.Current;
+				Log.DebugFormat("c: {0}", ChildOfAChild1Dumper.Dump(c));
+				Log.DebugFormat("d: {0}", ChildOfAChild1Dumper.Dump(d));
+
+				Assert.That(object.ReferenceEquals(c, d), Is.False);
+				Assert.That(c.Equals(d), Is.False);
+				Assert.That(c == d, Is.False);
+				Assert.That(c != d, Is.True);
+
+				/*
+				 * Two instances of the same type with only one different property, inherited
+				 * from the base class, are not equal. 
+				*/
+				var e = ChildOfAChild1SequenceGenerator.Sequence().GetEnumerator().Current;
+				var f = ChildOfAChild1SequenceGenerator.Sequence().GetEnumerator().Current;
+				e.Prop0 = 10;
+				f.Prop0 = 20;
+				Log.DebugFormat("e: {0}", ChildOfAChild1Dumper.Dump(e));
+				Log.DebugFormat("f: {0}", ChildOfAChild1Dumper.Dump(f));
+
+				Assert.That(object.ReferenceEquals(e, f), Is.False);
+				Assert.That(e.Equals(f), Is.False);
+				Assert.That(e == f, Is.False);
+				Assert.That(e != f, Is.True);
+
+				/*
+				 * Two instances of the same type with only one different property, inherited
+				 * from the direct parent, are not equal. 
+				*/
+				var g = ChildOfAChild1SequenceGenerator.Sequence().GetEnumerator().Current;
+				var h = ChildOfAChild1SequenceGenerator.Sequence().GetEnumerator().Current;
+				g.Prop1 = 30;
+				h.Prop1 = 40;
+				Log.DebugFormat("g: {0}", ChildOfAChild1Dumper.Dump(g));
+				Log.DebugFormat("h: {0}", ChildOfAChild1Dumper.Dump(h));
+
+				Assert.That(object.ReferenceEquals(g, h), Is.False);
+				Assert.That(g.Equals(h), Is.False);
+				Assert.That(g == h, Is.False);
+				Assert.That(g != h, Is.True);
+			}
+		}
+		#endregion
     }
 }

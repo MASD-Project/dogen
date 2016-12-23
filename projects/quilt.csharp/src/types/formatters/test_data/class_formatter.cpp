@@ -90,21 +90,30 @@ a.stream() << "    /// Generates sequences of " << sn << "." << std::endl;
 a.stream() << "    /// </summary>" << std::endl;
 a.stream() << "    public static class " << sn << "SequenceGenerator" << std::endl;
 a.stream() << "    {" << std::endl;
-            if (is_parent_or_has_attributes) {
 a.stream() << "        static internal void Populate(" << sn << " value, uint position)" << std::endl;
 a.stream() << "        {" << std::endl;
-                unsigned int count(0);
-                for (const auto& attr : o.local_attributes()) {
-                    const auto oap(a.get_assistant_properties(attr));
-                    if (oap && oap->requires_assistance()) {
+                if (!is_parent_or_has_attributes) {
+a.stream() << "            // nothing to populate" << std::endl;
+                } else {
+                    unsigned int count(0);
+                    if (o.parent()) {
+                        const auto& pn(*o.parent());
+                        const auto pqn(a.get_qualified_name(pn));
+a.stream() << "            " << pqn << "SequenceGenerator.Populate(value, position);" << std::endl;
+                    }
+
+                    for (const auto& attr : o.local_attributes()) {
+                        const auto oap(a.get_assistant_properties(attr));
+                        if (oap && oap->requires_assistance()) {
 a.stream() << "            value." << attr.name().simple() << " = AssistantSequenceGenerator.Create" << oap->method_postfix() << "(position + " << count++ << ");" << std::endl;
-                    } else {
-                        const auto attr_qn(a.get_qualified_name(attr.parsed_type().current()));
+                        } else {
+                            const auto attr_qn(a.get_qualified_name(attr.parsed_type().current()));
 a.stream() << "            value." << attr.name().simple() << " = " << attr_qn << "SequenceGenerator.Create(position + " << count++ << ");" << std::endl;
+                        }
                     }
                 }
 a.stream() << "        }" << std::endl;
-            }
+a.stream() << std::endl;
 a.stream() << "        static internal " << sn << " Create(uint position)" << std::endl;
 a.stream() << "        {" << std::endl;
             if (!o.is_parent()) {

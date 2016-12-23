@@ -31,7 +31,7 @@ namespace Dogen.TestModels.CSharpModel
             if (obj.GetType() != GetType()) return false;
 
             var value = obj as Descendant1;
-            return value != null;
+            return (value != null && base.Equals(value));
         }
 
         public static bool operator ==(Descendant1 lhs, Descendant1 rhs)

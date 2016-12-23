@@ -35,7 +35,7 @@ namespace Dogen.TestModels.CSharpModel
             if (obj.GetType() != GetType()) return false;
 
             var value = obj as ChildOfAChild2;
-            if (value == null) return false;
+            if (value == null || !base.Equals(value)) return false;
 
             return
                 Prop2 == value.Prop2;
