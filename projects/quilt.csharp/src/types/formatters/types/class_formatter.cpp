@@ -99,7 +99,7 @@ a.stream() << "    {" << std::endl;
 a.stream() << "        #region Properties" << std::endl;
                 for (const auto& attr : o.local_attributes()) {
                     a.comment(attr.documentation(), 2/*indent*/);
-a.stream() << "        public " << a.get_qualified_name(attr.parsed_type()) << " " << attr.name().simple() << " { get; set; }" << std::endl;
+a.stream() << "        public " << a.get_qualified_name(attr.parsed_type()) << " " << attr.name().simple() << " { get; " << (o.is_immutable() ? "internal " : "") << "set; }" << std::endl;
                 }
 a.stream() << "        #endregion" << std::endl;
 a.stream() << std::endl;

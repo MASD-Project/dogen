@@ -42,6 +42,10 @@
     <Compile Include="Dumpers\Descendant1Dumper.cs" />
     <Compile Include="Dumpers\Descendant2Dumper.cs" />
     <Compile Include="Dumpers\Descendant3Dumper.cs" />
+    <Compile Include="Dumpers\ImmutableFourDumper.cs" />
+    <Compile Include="Dumpers\ImmutableOnePrimitiveDumper.cs" />
+    <Compile Include="Dumpers\ImmutableTwoDumper.cs" />
+    <Compile Include="Dumpers\ImmutableZeroDumper.cs" />
     <Compile Include="Dumpers\NoPropertiesDumper.cs" />
     <Compile Include="Dumpers\NonFinalOrphanDumper.cs" />
     <Compile Include="Dumpers\NonSealedLeafDumper.cs" />
@@ -78,6 +82,10 @@
     <Compile Include="SequenceGenerators\Descendant1SequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\Descendant2SequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\Descendant3SequenceGenerator.cs" />
+    <Compile Include="SequenceGenerators\ImmutableFourSequenceGenerator.cs" />
+    <Compile Include="SequenceGenerators\ImmutableOnePrimitiveSequenceGenerator.cs" />
+    <Compile Include="SequenceGenerators\ImmutableTwoSequenceGenerator.cs" />
+    <Compile Include="SequenceGenerators\ImmutableZeroSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\NoPropertiesSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\NonFinalOrphanSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\NonSealedLeafSequenceGenerator.cs" />
@@ -113,6 +121,10 @@
     <Compile Include="Types\Descendant1.cs" />
     <Compile Include="Types\Descendant2.cs" />
     <Compile Include="Types\Descendant3.cs" />
+    <Compile Include="Types\ImmutableFour.cs" />
+    <Compile Include="Types\ImmutableOnePrimitive.cs" />
+    <Compile Include="Types\ImmutableTwo.cs" />
+    <Compile Include="Types\ImmutableZero.cs" />
     <Compile Include="Types\MyException.cs" />
     <Compile Include="Types\NoProperties.cs" />
     <Compile Include="Types\NonFinalOrphan.cs" />

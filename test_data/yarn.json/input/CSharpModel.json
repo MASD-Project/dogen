@@ -143,6 +143,79 @@
     },
     {
       "name": {
+        "simple_name": "ImmutableFour"
+      },
+      "meta_type": "object",
+      "documentation": "Immutable class with non-immutable and immutable elements as properties.\n",
+      "stereotypes": [
+        "immutable"
+      ],
+      "attributes": [
+        {
+          "simple_name": "Prop0",
+          "type": "bool"
+        },
+        {
+          "simple_name": "Prop1",
+          "type": "string"
+        },
+        {
+          "simple_name": "Prop2",
+          "type": "ComplexBuiltins"
+        },
+        {
+          "simple_name": "Prop3",
+          "type": "ImmutableOnePrimitive"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple_name": "ImmutableOnePrimitive"
+      },
+      "meta_type": "object",
+      "documentation": "Immutable class with a primitive property.\n",
+      "stereotypes": [
+        "immutable"
+      ],
+      "attributes": [
+        {
+          "simple_name": "Prop0",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple_name": "ImmutableTwo"
+      },
+      "meta_type": "object",
+      "stereotypes": [
+        "immutable"
+      ],
+      "attributes": [
+        {
+          "simple_name": "Prop0",
+          "type": "bool"
+        },
+        {
+          "simple_name": "Prop1",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple_name": "ImmutableZero"
+      },
+      "meta_type": "object",
+      "documentation": "Immutable class with no properties.\n",
+      "stereotypes": [
+        "immutable"
+      ]
+    },
+    {
+      "name": {
         "simple_name": "NoProperties"
       },
       "meta_type": "object",
