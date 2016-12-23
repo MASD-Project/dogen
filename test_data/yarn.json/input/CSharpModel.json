@@ -72,6 +72,21 @@
     },
     {
       "name": {
+        "simple_name": "ChildViaSettings"
+      },
+      "meta_type": "object",
+      "annotation": {
+        "yarn.generalization.parent": "ParentWithMembers"
+      },
+      "attributes": [
+        {
+          "simple_name": "Prop1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
         "simple_name": "ComplexBuiltins"
       },
       "meta_type": "object",

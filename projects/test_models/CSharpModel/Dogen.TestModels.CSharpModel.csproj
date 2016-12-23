@@ -36,6 +36,7 @@
     <Compile Include="Dumpers\BookTypesDumper.cs" />
     <Compile Include="Dumpers\ChildOfAChild1Dumper.cs" />
     <Compile Include="Dumpers\ChildOfAChild2Dumper.cs" />
+    <Compile Include="Dumpers\ChildViaSettingsDumper.cs" />
     <Compile Include="Dumpers\ColourTypesDumper.cs" />
     <Compile Include="Dumpers\ComplexBuiltinsDumper.cs" />
     <Compile Include="Dumpers\Descendant1Dumper.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="SequenceGenerators\BookTypesSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\ChildOfAChild1SequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\ChildOfAChild2SequenceGenerator.cs" />
+    <Compile Include="SequenceGenerators\ChildViaSettingsSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\ColourTypesSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\ComplexBuiltinsSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\Descendant1SequenceGenerator.cs" />
@@ -87,6 +89,7 @@
     <Compile Include="Types\BookTypes.cs" />
     <Compile Include="Types\ChildOfAChild1.cs" />
     <Compile Include="Types\ChildOfAChild2.cs" />
+    <Compile Include="Types\ChildViaSettings.cs" />
     <Compile Include="Types\ColourTypes.cs" />
     <Compile Include="Types\ComplexBuiltins.cs" />
     <Compile Include="Types\Descendant1.cs" />

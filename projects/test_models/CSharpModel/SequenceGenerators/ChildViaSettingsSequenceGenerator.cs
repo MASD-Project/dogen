@@ -24,37 +24,34 @@ using System.Collections.Generic;
 namespace Dogen.TestModels.CSharpModel
 {
     /// <summary>
-    /// Generates sequences of ParentWithMembers.
+    /// Generates sequences of ChildViaSettings.
     /// </summary>
-    public static class ParentWithMembersSequenceGenerator
+    public static class ChildViaSettingsSequenceGenerator
     {
-        static internal void Populate(ParentWithMembers value, uint position)
+        static internal void Populate(ChildViaSettings value, uint position)
         {
-            value.Prop0 = AssistantSequenceGenerator.CreateInt(position + 0);
+            Dogen.TestModels.CSharpModel.ParentWithMembersSequenceGenerator.Populate(value, position);
+            value.Prop1 = AssistantSequenceGenerator.CreateInt(position + 0);
         }
 
-        static internal ParentWithMembers Create(uint position)
+        static internal ChildViaSettings Create(uint position)
         {
-            if ((position % 3) == 0)
-                return Dogen.TestModels.CSharpModel.ChildOfAChild2SequenceGenerator.Create(position);
-            if ((position % 3) == 1)
-                return Dogen.TestModels.CSharpModel.ChildViaSettingsSequenceGenerator.Create(position);
-            if ((position % 3) == 2)
-                return Dogen.TestModels.CSharpModel.SecondChildWithoutMembersSequenceGenerator.Create(position);
-            return Dogen.TestModels.CSharpModel.ChildOfAChild1SequenceGenerator.Create(position);
+            var result = new ChildViaSettings();
+            Populate(result, position);
+            return result;
         }
 
         #region Enumerator
-        private class ParentWithMembersEnumerator : IEnumerator, IEnumerator<ParentWithMembers>, IDisposable
+        private class ChildViaSettingsEnumerator : IEnumerator, IEnumerator<ChildViaSettings>, IDisposable
         {
             #region Properties
             private uint _position;
-            private ParentWithMembers _current;
+            private ChildViaSettings _current;
             #endregion
 
             private void PopulateCurrent()
             {
-                _current = ParentWithMembersSequenceGenerator.Create(_position);
+                _current = ChildViaSettingsSequenceGenerator.Create(_position);
             }
 
             #region IDisposable
@@ -84,7 +81,7 @@ namespace Dogen.TestModels.CSharpModel
                 }
             }
 
-            ParentWithMembers IEnumerator<ParentWithMembers>.Current
+            ChildViaSettings IEnumerator<ChildViaSettings>.Current
             {
                 get
                 {
@@ -93,7 +90,7 @@ namespace Dogen.TestModels.CSharpModel
             }
             #endregion
 
-            public ParentWithMembersEnumerator()
+            public ChildViaSettingsEnumerator()
             {
                 PopulateCurrent();
             }
@@ -101,25 +98,25 @@ namespace Dogen.TestModels.CSharpModel
         #endregion
 
         #region Enumerable
-        private class ParentWithMembersEnumerable : IEnumerable, IEnumerable<ParentWithMembers>
+        private class ChildViaSettingsEnumerable : IEnumerable, IEnumerable<ChildViaSettings>
         {
             #region IEnumerable implementation
             public IEnumerator GetEnumerator()
             {
-                return new ParentWithMembersEnumerator();
+                return new ChildViaSettingsEnumerator();
             }
 
-            IEnumerator<ParentWithMembers> IEnumerable<ParentWithMembers>.GetEnumerator()
+            IEnumerator<ChildViaSettings> IEnumerable<ChildViaSettings>.GetEnumerator()
             {
-                return new ParentWithMembersEnumerator();
+                return new ChildViaSettingsEnumerator();
             }
             #endregion
         }
         #endregion
 
-        static public IEnumerable<ParentWithMembers> Sequence()
+        static public IEnumerable<ChildViaSettings> Sequence()
         {
-            return new ParentWithMembersEnumerable();
+            return new ChildViaSettingsEnumerable();
         }
     }
 }
