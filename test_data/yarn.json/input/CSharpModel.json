@@ -375,6 +375,50 @@
     },
     {
       "name": {
+        "simple_name": "Child",
+        "internal_modules": "Package5"
+      },
+      "meta_type": "object",
+      "parent": {
+        "simple_name": "ParentOutside"
+      },
+      "attributes": [
+        {
+          "simple_name": "Prop1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple_name": "ChildViaSettings",
+        "internal_modules": "Package5"
+      },
+      "meta_type": "object",
+      "annotation": {
+        "yarn.generalization.parent": "ParentOutside"
+      },
+      "attributes": [
+        {
+          "simple_name": "Prop1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple_name": "ParentOutside"
+      },
+      "meta_type": "object",
+      "attributes": [
+        {
+          "simple_name": "Prop0",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
         "simple_name": "ParentWithMembers"
       },
       "meta_type": "object",
@@ -503,6 +547,12 @@
     {
       "name": {
         "simple_name": "Package4"
+      },
+      "meta_type": "module"
+    },
+    {
+      "name": {
+        "simple_name": "Package5"
       },
       "meta_type": "module"
     },
