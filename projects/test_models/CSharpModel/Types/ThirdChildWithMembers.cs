@@ -29,6 +29,14 @@ namespace Dogen.TestModels.CSharpModel
 
         #region Constructors
         public ThirdChildWithMembers() { }
+
+        public ThirdChildWithMembers(
+            int prop0,
+            int prop1)
+            : base(prop0)
+        {
+            Prop1 = prop1;
+        }
         #endregion
 
         #region Equality

@@ -29,6 +29,14 @@ namespace Dogen.TestModels.CSharpModel
 
         #region Constructors
         public ChildViaSettings() { }
+
+        public ChildViaSettings(
+            int prop0,
+            int prop1)
+            : base(prop0)
+        {
+            Prop1 = prop1;
+        }
         #endregion
 
         #region Equality

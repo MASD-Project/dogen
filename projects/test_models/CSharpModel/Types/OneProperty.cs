@@ -35,6 +35,10 @@ namespace Dogen.TestModels.CSharpModel
 
         #region Constructors
         public OneProperty() { }
+        public OneProperty(int property)
+        {
+            Property = property;
+        }
         #endregion
 
         #region Equality

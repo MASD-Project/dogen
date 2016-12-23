@@ -112,6 +112,9 @@ public:
      */
     std::string comment_inline(const std::string& c) const;
 
+public:
+    std::string make_argument_name(const yarn::attribute& attr) const;
+
 private:
     std::list<std::shared_ptr<formatters::helper_formatter_interface>>
     get_helpers(const formattables::helper_properties& hp) const;

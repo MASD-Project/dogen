@@ -31,6 +31,16 @@ namespace Dogen.TestModels.CSharpModel.Package1
 
         #region Constructors
         public AssociationInPackage() { }
+
+        public AssociationInPackage(
+            Dogen.TestModels.CSharpModel.PrimitiveBuiltins prop0,
+            Dogen.TestModels.CSharpModel.ComplexBuiltins prop1,
+            Dogen.TestModels.CSharpModel.Package1.Class1 prop2)
+        {
+            Prop0 = prop0;
+            Prop1 = prop1;
+            Prop2 = prop2;
+        }
         #endregion
 
         #region Equality

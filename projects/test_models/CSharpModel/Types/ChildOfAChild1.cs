@@ -29,6 +29,17 @@ namespace Dogen.TestModels.CSharpModel
 
         #region Constructors
         public ChildOfAChild1() { }
+
+        public ChildOfAChild1(
+            int prop0,
+            int prop1,
+            int prop2)
+            : base(
+                prop0,
+                prop1)
+        {
+            Prop2 = prop2;
+        }
         #endregion
 
         #region Equality

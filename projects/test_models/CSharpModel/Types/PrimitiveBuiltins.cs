@@ -83,6 +83,40 @@ namespace Dogen.TestModels.CSharpModel
 
         #region Constructors
         public PrimitiveBuiltins() { }
+
+        public PrimitiveBuiltins(
+            byte byteProperty,
+            sbyte shortByteProperty,
+            int intProperty,
+            uint uIntProperty,
+            short shortProperty,
+            ushort uShortProperty,
+            long longProperty,
+            ulong uLongProperty,
+            float floatPropertyOne,
+            float floatPropertyTwo,
+            double doublePropertyOne,
+            double doublePropertyTwo,
+            char charProperty,
+            bool boolProperty,
+            decimal decimalProperty)
+        {
+            ByteProperty = byteProperty;
+            ShortByteProperty = shortByteProperty;
+            IntProperty = intProperty;
+            UIntProperty = uIntProperty;
+            ShortProperty = shortProperty;
+            UShortProperty = uShortProperty;
+            LongProperty = longProperty;
+            ULongProperty = uLongProperty;
+            FloatPropertyOne = floatPropertyOne;
+            FloatPropertyTwo = floatPropertyTwo;
+            DoublePropertyOne = doublePropertyOne;
+            DoublePropertyTwo = doublePropertyTwo;
+            CharProperty = charProperty;
+            BoolProperty = boolProperty;
+            DecimalProperty = decimalProperty;
+        }
         #endregion
 
         #region Equality

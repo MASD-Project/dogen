@@ -25,6 +25,11 @@ namespace Dogen.TestModels.CSharpModel
     {
         #region Constructors
         public SecondChildWithoutMembers() { }
+        public SecondChildWithoutMembers(int prop0)
+            : base(prop0)
+        {
+            // no properties
+        }
         #endregion
 
         #region Equality

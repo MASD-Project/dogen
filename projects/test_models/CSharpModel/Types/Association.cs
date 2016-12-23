@@ -37,6 +37,16 @@ namespace Dogen.TestModels.CSharpModel
 
         #region Constructors
         public Association() { }
+
+        public Association(
+            int prop0,
+            Dogen.TestModels.CSharpModel.NoProperties prop1,
+            Dogen.TestModels.CSharpModel.ColourTypes prop2)
+        {
+            Prop0 = prop0;
+            Prop1 = prop1;
+            Prop2 = prop2;
+        }
         #endregion
 
         #region Equality

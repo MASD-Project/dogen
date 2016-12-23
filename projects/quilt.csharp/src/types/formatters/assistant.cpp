@@ -47,6 +47,8 @@ const std::string artefact_properties_missing(
 const std::string no_helpers_for_family("No helpers found for family: ");
 const std::string qn_missing("Could not find qualified name for language.");
 const std::string helpless_family("No registered helpers found for family: ");
+const std::string attribute_with_no_simple_name(
+    "Attribute has empty simple name.");
 
 }
 
@@ -184,6 +186,17 @@ std::string assistant::comment_inline(const std::string& c) const {
 
     f.format(s, c);
     return s.str();
+}
+
+std::string assistant::make_argument_name(const yarn::attribute& attr) const {
+    auto r(attr.name().simple());
+    if (r.empty()) {
+        BOOST_LOG_SEV(lg, error) << attribute_with_no_simple_name;
+        BOOST_THROW_EXCEPTION(formatting_error(attribute_with_no_simple_name));
+    }
+
+    r[0] = std::tolower(r[0]);
+    return r;
 }
 
 std::list<std::shared_ptr<formatters::helper_formatter_interface>>

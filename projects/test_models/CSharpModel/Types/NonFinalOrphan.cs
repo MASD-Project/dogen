@@ -29,6 +29,10 @@ namespace Dogen.TestModels.CSharpModel
 
         #region Constructors
         public NonFinalOrphan() { }
+        public NonFinalOrphan(int prop0)
+        {
+            Prop0 = prop0;
+        }
         #endregion
 
         #region Equality

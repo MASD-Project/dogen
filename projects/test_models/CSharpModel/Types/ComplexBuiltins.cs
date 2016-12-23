@@ -36,6 +36,14 @@ namespace Dogen.TestModels.CSharpModel
 
         #region Constructors
         public ComplexBuiltins() { }
+
+        public ComplexBuiltins(
+            object objectProperty,
+            string stringProperty)
+        {
+            ObjectProperty = objectProperty;
+            StringProperty = stringProperty;
+        }
         #endregion
 
         #region Equality

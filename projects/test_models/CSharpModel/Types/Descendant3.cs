@@ -29,6 +29,11 @@ namespace Dogen.TestModels.CSharpModel
 
         #region Constructors
         public Descendant3() { }
+        public Descendant3(bool prop0)
+            : base()
+        {
+            Prop0 = prop0;
+        }
         #endregion
 
         #region Equality

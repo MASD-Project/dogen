@@ -29,6 +29,10 @@ namespace Dogen.TestModels.CSharpModel.Package2
 
         #region Constructors
         public Parent() { }
+        public Parent(int prop0)
+        {
+            Prop0 = prop0;
+        }
         #endregion
 
         #region Equality

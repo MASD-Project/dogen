@@ -110,6 +110,52 @@ a.stream() << std::endl;
              */
 a.stream() << "        #region Constructors" << std::endl;
 a.stream() << "        public " << sn << "() { }" << std::endl;
+            if (!o.all_attributes().empty()) {
+                const auto attr_count(o.all_attributes().size());
+                if (attr_count == 1) {
+                     const auto attr(*o.all_attributes().begin());
+a.stream() << "        public " << sn << "(" << a.get_qualified_name(attr.parsed_type()) << " " << a.make_argument_name(attr) << ")" << std::endl;
+                } else {
+a.stream() << std::endl;
+a.stream() << "        public " << sn << "(" << std::endl;
+                    dogen::formatters::sequence_formatter sf(attr_count);
+                    sf.postfix_configuration().last(")");
+                    for (const auto attr : o.all_attributes()) {
+a.stream() << "            " << a.get_qualified_name(attr.parsed_type()) << " " << a.make_argument_name(attr) << sf.postfix() << std::endl;
+                        sf.next();
+                    }
+                }
+
+                if (o.parent()) {
+                    const auto& pair(*o.inherited_attributes().begin());
+                    const auto& pattrs(pair.second);
+                    const auto size(pattrs.size());
+
+                    if (size == 0) {
+a.stream() << "            : base()" << std::endl;
+                    } else if (size == 1) {
+a.stream() << "            : base(" << a.make_argument_name(pattrs.front()) << ")" << std::endl;
+                    } else {
+                        dogen::formatters::sequence_formatter sf(size);
+                        sf.postfix_configuration().last(")");
+                        sf.prefix_configuration().first(",").not_first(",");
+a.stream() << "            : base(" << std::endl;
+                        for (const auto& pattr : pattrs) {
+a.stream() << "                " << a.make_argument_name(pattr) << sf.postfix() << std::endl;
+                            sf.next();
+                        }
+                    }
+                }
+a.stream() << "        {" << std::endl;
+                if (o.local_attributes().empty()) {
+a.stream() << "            // no properties" << std::endl;
+                } else {
+                    for (const auto& attr : o.local_attributes()) {
+a.stream() << "            " << attr.name().simple() << " = " << a.make_argument_name(attr) << ";" << std::endl;
+                    }
+                }
+a.stream() << "        }" << std::endl;
+            }
 a.stream() << "        #endregion" << std::endl;
 a.stream() << std::endl;
             /*
