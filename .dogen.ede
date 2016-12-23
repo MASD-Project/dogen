@@ -1,8 +1,0 @@
-;; -*- mode: emacs-lisp; tab-width: 4; indent-tabs-mode: nil -*-
-(ede-add-project-to-global-list
- (ede-compdb-project
-  "Dogen"
-  :name "Dogen Project"
-  :version "0.0.1"
-  :file (expand-file-name ".dogen.ede")
-  :compdb-file (expand-file-name "build/output/gcc-6/Release/compile_commands.json")))
