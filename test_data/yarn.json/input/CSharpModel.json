@@ -283,6 +283,52 @@
     },
     {
       "name": {
+        "simple_name": "Child",
+        "internal_modules": "Package2"
+      },
+      "meta_type": "object",
+      "parent": {
+        "simple_name": "Parent",
+        "internal_modules": "Package2"
+      },
+      "attributes": [
+        {
+          "simple_name": "Prop1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple_name": "ChildViaSettings",
+        "internal_modules": "Package2"
+      },
+      "meta_type": "object",
+      "annotation": {
+        "yarn.generalization.parent": "Package2::Parent"
+      },
+      "attributes": [
+        {
+          "simple_name": "prop_1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple_name": "Parent",
+        "internal_modules": "Package2"
+      },
+      "meta_type": "object",
+      "attributes": [
+        {
+          "simple_name": "Prop0",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
         "simple_name": "ParentWithMembers"
       },
       "meta_type": "object",
@@ -393,6 +439,12 @@
     {
       "name": {
         "simple_name": "Package1"
+      },
+      "meta_type": "module"
+    },
+    {
+      "name": {
+        "simple_name": "Package2"
       },
       "meta_type": "module"
     },
