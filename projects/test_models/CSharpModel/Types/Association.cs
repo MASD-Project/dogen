@@ -35,6 +35,10 @@ namespace Dogen.TestModels.CSharpModel
         public Dogen.TestModels.CSharpModel.ColourTypes Prop2 { get; set; }
         #endregion
 
+        #region Constructors
+        public Association() { }
+        #endregion
+
         #region Equality
         public override bool Equals(object obj)
         {

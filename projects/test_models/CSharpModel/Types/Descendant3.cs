@@ -27,6 +27,10 @@ namespace Dogen.TestModels.CSharpModel
         public bool Prop0 { get; set; }
         #endregion
 
+        #region Constructors
+        public Descendant3() { }
+        #endregion
+
         #region Equality
         public override bool Equals(object obj)
         {

@@ -26,6 +26,10 @@ namespace Dogen.TestModels.CSharpModel
     /// </summary>
     public sealed class NoProperties
     {
+        #region Constructors
+        public NoProperties() { }
+        #endregion
+
         #region Equality
         public override bool Equals(object obj)
         {

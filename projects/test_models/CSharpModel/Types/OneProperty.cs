@@ -33,6 +33,10 @@ namespace Dogen.TestModels.CSharpModel
         public int Property { get; set; }
         #endregion
 
+        #region Constructors
+        public OneProperty() { }
+        #endregion
+
         #region Equality
         public override bool Equals(object obj)
         {

@@ -23,6 +23,10 @@ namespace Dogen.TestModels.CSharpModel
 {
     public sealed class SecondChildWithoutMembers : Dogen.TestModels.CSharpModel.ParentWithMembers
     {
+        #region Constructors
+        public SecondChildWithoutMembers() { }
+        #endregion
+
         #region Equality
         public override bool Equals(object obj)
         {

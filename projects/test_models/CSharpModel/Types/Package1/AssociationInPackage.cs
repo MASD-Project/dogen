@@ -29,6 +29,10 @@ namespace Dogen.TestModels.CSharpModel.Package1
         public Dogen.TestModels.CSharpModel.Package1.Class1 Prop2 { get; set; }
         #endregion
 
+        #region Constructors
+        public AssociationInPackage() { }
+        #endregion
+
         #region Equality
         public override bool Equals(object obj)
         {

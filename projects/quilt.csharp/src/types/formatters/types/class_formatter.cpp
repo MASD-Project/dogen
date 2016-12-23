@@ -106,6 +106,13 @@ a.stream() << std::endl;
             }
 
             /*
+             * Constructors.
+             */
+a.stream() << "        #region Constructors" << std::endl;
+a.stream() << "        public " << sn << "() { }" << std::endl;
+a.stream() << "        #endregion" << std::endl;
+a.stream() << std::endl;
+            /*
              * Equals
              */
 a.stream() << "        #region Equality" << std::endl;

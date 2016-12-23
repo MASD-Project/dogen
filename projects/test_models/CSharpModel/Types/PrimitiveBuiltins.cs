@@ -81,6 +81,10 @@ namespace Dogen.TestModels.CSharpModel
         public decimal DecimalProperty { get; set; }
         #endregion
 
+        #region Constructors
+        public PrimitiveBuiltins() { }
+        #endregion
+
         #region Equality
         public override bool Equals(object obj)
         {

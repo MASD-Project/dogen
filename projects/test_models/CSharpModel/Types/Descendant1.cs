@@ -23,6 +23,10 @@ namespace Dogen.TestModels.CSharpModel
 {
     public abstract class Descendant1 : Dogen.TestModels.CSharpModel.Base
     {
+        #region Constructors
+        public Descendant1() { }
+        #endregion
+
         #region Equality
         public override bool Equals(object obj)
         {

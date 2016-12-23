@@ -69,6 +69,15 @@ using System;
             }
 
             /*
+             * Constructors.
+             */
+#>
+        #region Constructors
+        public <#= sn #>() { }
+        #endregion
+
+<#+
+            /*
              * Equals
              */
 #>
