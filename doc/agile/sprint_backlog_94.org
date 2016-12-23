@@ -12,34 +12,35 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-12-23 Fri 17:39]
+#+CAPTION: Clock summary at [2016-12-23 Fri 22:13]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *54:44* |       |       | 100.0 |
+| *Total time*                                                                | *56:39* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 54:44   |       |       | 100.0 |
-| Active                                                                      |         | 54:44 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  1:09 |   2.1 |
+| Stories                                                                     | 56:39   |       |       | 100.0 |
+| Active                                                                      |         | 56:39 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  1:09 |   2.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:31 |   0.9 |
-| COMPLETED Add helper infrastructure to C#                                   |         |       |  5:55 |  10.8 |
-| COMPLETED Add support for Equals in C#                                      |         |       |  1:24 |   2.6 |
-| COMPLETED Create a test model solution to validate C# code                  |         |       |  3:47 |   6.9 |
-| COMPLETED Add basic io support to C#                                        |         |       | 11:56 |  21.8 |
+| COMPLETED Add helper infrastructure to C#                                   |         |       |  5:55 |  10.4 |
+| COMPLETED Add support for Equals in C#                                      |         |       |  1:24 |   2.5 |
+| COMPLETED Create a test model solution to validate C# code                  |         |       |  3:47 |   6.7 |
+| COMPLETED Add basic io support to C#                                        |         |       | 11:56 |  21.1 |
 | COMPLETED Add basic test data generation support to C#                      |         |       |  0:41 |   1.2 |
-| COMPLETED Add io and equality canned unit tests to C# model                 |         |       |  3:55 |   7.2 |
-| COMPLETED Update C# stitch templates to match code                          |         |       |  7:28 |  13.6 |
+| COMPLETED Add io and equality canned unit tests to C# model                 |         |       |  3:55 |   6.9 |
+| COMPLETED Update C# stitch templates to match code                          |         |       |  7:28 |  13.2 |
 | COMPLETED Move enumeration population to yarn                               |         |       |  0:43 |   1.3 |
 | COMPLETED Add support for types in packages in C#                           |         |       |  0:18 |   0.5 |
-| COMPLETED Add support for enumerations in C#                                |         |       |  1:48 |   3.3 |
+| COMPLETED Add support for enumerations in C#                                |         |       |  1:48 |   3.2 |
 | COMPLETED Add support for exceptions in C#                                  |         |       |  0:14 |   0.4 |
-| COMPLETED Add support for associations in C#                                |         |       |  3:14 |   5.9 |
-| COMPLETED Add support for inheritance in C#                                 |         |       |  6:21 |  11.6 |
+| COMPLETED Add support for associations in C#                                |         |       |  3:14 |   5.7 |
+| COMPLETED Add support for inheritance in C#                                 |         |       |  6:21 |  11.2 |
 | COMPLETED Consider changing inherited attributes to a list                  |         |       |  0:34 |   1.0 |
-| COMPLETED Add complete constructor for C# types                             |         |       |  1:44 |   3.2 |
+| COMPLETED Add complete constructor for C# types                             |         |       |  1:44 |   3.1 |
 | COMPLETED Add immutability support for C# types                             |         |       |  0:13 |   0.4 |
+| STARTED Consider supporting multiple inheritance on non-proxy models        |         |       |  1:55 |   3.4 |
 | STARTED Add handcrafted class to C# test model                              |         |       |  0:03 |   0.1 |
-| STARTED Add container types to C# proxy models                              |         |       |  2:46 |   5.1 |
+| STARTED Add container types to C# proxy models                              |         |       |  2:46 |   4.9 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -607,6 +608,43 @@ Links:
 We need to implement immutability. This can only be done after
 complete constructor.
 
+*** CANCELLED Split =Stateful= concept with regards to inheritance    :story:
+    CLOSED: [2016-12-23 Fri 20:37]
+
+*Rationale*: we will need multiple inheritance in order to support C#.
+
+At present both concepts and objects use the =Stateful= concept in
+order to have attributes. The problem is with
+=inherited_attributes=. For objects we can only have
+single-inheritance, so this map of names to list of attributes
+introduces unnecessary complexity. However, for concepts we do support
+multiple inheritance and this is a key requirement.
+
+If we decide never to support multiple inheritance at the object
+level - which may be desirable, given we are yet to find a use case
+and also we now support C# which does not have multiple inheritance -
+then we should split this property into two, one for each. We should
+remove it from the concept. We could make use of the =Generalization=
+concept, etc.
+*** STARTED Consider supporting multiple inheritance on non-proxy models :story:
+    CLOCK: [2016-12-23 Fri 20:15]--[2016-12-23 Fri 22:10] =>  1:55
+
+We need to be able to express relationships such as the ones used by
+C# containers. But first we need to build an inheritance graph of all
+relevant collections.
+
+Notes:
+
+- if we have leaves at all levels of an hierarchy, we may need to map
+  them to the base class. Actually, in practice, we only care about
+  leaves at the base class level.
+- we need to know which root parent we are visiting. So presumably the
+  question is: did we use root parent as a short-hand for visitation
+  root?
+- equals method is using root parent because apparently "service leafs
+  are not being processed atm". We should remove this check and add a
+  method to assistant that checks there is one root parent.
+
 *** STARTED Add handcrafted class to C# test model                    :story:
     CLOCK: [2016-12-23 Fri 14:30]--[2016-12-23 Fri 14:33] =>  0:03
 
@@ -753,12 +791,6 @@ System.Collections.Immutable:
 :                       IEnumerable
 
 System.Collections.Concurrent
-
-*** Consider supporting multiple inheritance on non-proxy models      :story:
-
-We need to be able to express relationships such as the ones used by
-C# containers. But first we need to build an inheritance graph of all
-relevant collections.
 
 *** Parsing should support dot notation                               :story:
 
