@@ -1,0 +1,89 @@
+diff --git a/projects/quilt.csharp/src/types/formatters/types/class_formatter.stitch b/projects/quilt.csharp/src/types/formatters/types/class_formatter.stitch
+index 7547d15..74d01de 100644
+--- a/projects/quilt.csharp/src/types/formatters/types/class_formatter.stitch
++++ b/projects/quilt.csharp/src/types/formatters/types/class_formatter.stitch
+@@ -1,4 +1,4 @@
+-<#@ annotations.profile=dogen.stitch #>
++<<#@ annotations.profile=dogen.stitch #>
+ <#@ stitch.containing_namespaces=dogen::quilt::csharp::formatters::types #>
+ <#@ stitch.inclusion_dependency=<typeinfo> #>
+ <#@ stitch.inclusion_dependency=<boost/make_shared.hpp> #>
+@@ -74,6 +74,78 @@ using System;
+ #>
+         #region Constructors
+         public <#= sn #>() { }
++
++<#+
++            if (!o.all_attributes().empty()) {
++                const auto attr_count(o.all_attributes().size());
++                if (attr_count == 1) {
++                     const auto attr(*o.all_attributes().begin());
++#>
++        public <#= sn #>(<#= a.get_qualified_name(attr.parsed_type()) #> <#= attr.name().simple() #>)
++<#+
++                } else {
++#>
++
++        public <#= sn #>(
++<#+
++                    dogen::formatters::sequence_formatter sf(attr_count);
++                    sf.postfix_configuration().last(")");
++                    for (const auto attr : o.all_attributes()) {
++#>
++            <#= a.get_qualified_name(attr.parsed_type()) #> <#= attr.name().simple() #><#= sf.postfix() #>
++<#+
++                        sf.next();
++                    }
++                }
++
++                if (o.parent()) {
++                    const auto size(o.inherited_attributes().size());
++
++                    if (size == 0) {
++#>
++            : base()
++<#+
++                    } else if (size == 1) {
++                        const auto& pair(*o.inherited_attributes().begin());
++                        const auto& pattr(pair.second);
++#>
++            : base(<#= pattrs.front().name().simple() #>)
++<#+
++                    } else {
++                        dogen::formatters::sequence_formatter sf(size);
++                        sf.postfix_configuration().last(")");
++                        sf.prefix_configuration().first(",").not_first(",");
++#>
++            : base(
++<#+
++                        for (const auto pair : o.inherited_attributes()) {
++                            const auto& pattrs(pair.second);
++#>
++                <#= pattrs.front().name().simple() #><#= sf.postfix() #>
++<#+
++                            sf.next();
++                        }
++                    }
++                }
++#>
++        {
++<#+
++                if (o.local_attributes().empty()) {
++#>
++            // no properties
++<#+
++                } else {
++                    for (const auto attr : o.local_attributes()) {
++#>
++            <#= attr.name().simple() #> = <#= attr.name().simple() #>;
++<#+
++                    }
++                }
++#>
++        }
++<#+
++            }
++#>
+         #endregion
+ 
+ <#+
