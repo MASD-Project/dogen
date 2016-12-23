@@ -42,6 +42,36 @@
     },
     {
       "name": {
+        "simple_name": "ChildOfAChild1"
+      },
+      "meta_type": "object",
+      "parent": {
+        "simple_name": "ThirdChildWithMembers"
+      },
+      "attributes": [
+        {
+          "simple_name": "Prop2",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple_name": "ChildOfAChild2"
+      },
+      "meta_type": "object",
+      "parent": {
+        "simple_name": "ThirdChildWithMembers"
+      },
+      "attributes": [
+        {
+          "simple_name": "Prop2",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
         "simple_name": "ComplexBuiltins"
       },
       "meta_type": "object",
@@ -238,6 +268,18 @@
     },
     {
       "name": {
+        "simple_name": "ParentWithMembers"
+      },
+      "meta_type": "object",
+      "attributes": [
+        {
+          "simple_name": "Prop0",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
         "simple_name": "PrimitiveBuiltins"
       },
       "meta_type": "object",
@@ -306,6 +348,30 @@
         {
           "simple_name": "DecimalProperty",
           "type": "decimal"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple_name": "SecondChildWithoutMembers"
+      },
+      "meta_type": "object",
+      "parent": {
+        "simple_name": "ParentWithMembers"
+      }
+    },
+    {
+      "name": {
+        "simple_name": "ThirdChildWithMembers"
+      },
+      "meta_type": "object",
+      "parent": {
+        "simple_name": "ParentWithMembers"
+      },
+      "attributes": [
+        {
+          "simple_name": "Prop1",
+          "type": "int"
         }
       ]
     },

@@ -523,8 +523,9 @@ addition, this is not really C++ specific at all; it would apply to
 any kernel and sub-kernel. We should rename it and move it to output
 options.
 
-*** COMPLETED Add support for inheritance in C#                       :story:
-    CLOSED: [2016-12-22 Thu 11:53]
+*** STARTED Add support for inheritance in C#                         :story:
+    CLOCK: [2016-12-23 Fri 09:48]--[2016-12-23 Fri 09:49] =>  0:01
+    CLOCK: [2016-12-23 Fri 09:35]--[2016-12-23 Fri 09:48] =>  0:13
     CLOCK: [2016-12-23 Fri 09:01]--[2016-12-23 Fri 09:34] =>  0:33
     CLOCK: [2016-12-22 Thu 13:24]--[2016-12-22 Thu 13:46] =>  0:22
     CLOCK: [2016-12-22 Thu 11:54]--[2016-12-22 Thu 12:00] =>  1:35
