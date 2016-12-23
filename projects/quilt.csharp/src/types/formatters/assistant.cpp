@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <cctype>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/formatters/types/indent_filter.hpp"
 #include "dogen/formatters/types/comment_formatter.hpp"

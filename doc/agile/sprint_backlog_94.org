@@ -5,7 +5,7 @@
 
 * Mission Statement
 
-- Finish adding C# support
+- Continue adding C# support.
 
 * Stories
 
@@ -759,7 +759,6 @@ System.Collections.Concurrent
 We need to be able to express relationships such as the ones used by
 C# containers. But first we need to build an inheritance graph of all
 relevant collections.
-
 
 *** Parsing should support dot notation                               :story:
 
