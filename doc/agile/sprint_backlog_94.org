@@ -12,30 +12,31 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-12-23 Fri 11:23]
+#+CAPTION: Clock summary at [2016-12-23 Fri 13:04]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *49:36* |       |       | 100.0 |
+| *Total time*                                                                | *50:31* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 49:36   |       |       | 100.0 |
-| Active                                                                      |         | 49:36 |       | 100.0 |
+| Stories                                                                     | 50:31   |       |       | 100.0 |
+| Active                                                                      |         | 50:31 |       | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  1:09 |   2.3 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:31 |   1.0 |
-| COMPLETED Add helper infrastructure to C#                                   |         |       |  5:55 |  11.9 |
+| COMPLETED Add helper infrastructure to C#                                   |         |       |  5:55 |  11.7 |
 | COMPLETED Add support for Equals in C#                                      |         |       |  1:24 |   2.8 |
-| COMPLETED Create a test model solution to validate C# code                  |         |       |  3:47 |   7.6 |
-| COMPLETED Add basic io support to C#                                        |         |       | 11:56 |  24.1 |
+| COMPLETED Create a test model solution to validate C# code                  |         |       |  3:47 |   7.5 |
+| COMPLETED Add basic io support to C#                                        |         |       | 11:56 |  23.6 |
 | COMPLETED Add basic test data generation support to C#                      |         |       |  0:41 |   1.4 |
-| COMPLETED Add io and equality canned unit tests to C# model                 |         |       |  3:55 |   7.9 |
-| COMPLETED Update C# stitch templates to match code                          |         |       |  7:28 |  15.1 |
+| COMPLETED Add io and equality canned unit tests to C# model                 |         |       |  3:55 |   7.8 |
+| COMPLETED Update C# stitch templates to match code                          |         |       |  7:28 |  14.8 |
 | COMPLETED Move enumeration population to yarn                               |         |       |  0:43 |   1.4 |
 | COMPLETED Add support for types in packages in C#                           |         |       |  0:18 |   0.6 |
 | COMPLETED Add support for enumerations in C#                                |         |       |  1:48 |   3.6 |
 | COMPLETED Add support for exceptions in C#                                  |         |       |  0:14 |   0.5 |
-| COMPLETED Add support for associations in C#                                |         |       |  3:14 |   6.5 |
-| COMPLETED Add support for inheritance in C#                                 |         |       |  6:21 |  12.8 |
-| STARTED Add complete constructor for C# types                               |         |       |  0:12 |   0.4 |
+| COMPLETED Add support for associations in C#                                |         |       |  3:14 |   6.4 |
+| COMPLETED Add support for inheritance in C#                                 |         |       |  6:21 |  12.6 |
+| STARTED Add complete constructor for C# types                               |         |       |  0:51 |   1.7 |
+| CANCELLED Inherited attributes should just be a list                        |         |       |  0:16 |   0.5 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -573,11 +574,25 @@ Links:
 - [[http://stackoverflow.com/questions/267724/why-xml-serializable-class-need-a-parameterless-constructor][Why XML-Serializable class need a parameterless constructor]]
 - [[http://stackoverflow.com/questions/12051/calling-the-base-constructor-in-c-sharp][Calling the base constructor in C#]]
 
-*** Inherited attributes should just be a list                        :story:
+*** COMPLETED Consider changing inherited attributes to a list        :story:
+    CLOSED: [2016-12-23 Fri 13:33]
+    CLOCK: [2016-12-23 Fri 13:02]--[2016-12-23 Fri 13:20] =>  0:18
+    CLOCK: [2016-12-23 Fri 12:45]--[2016-12-23 Fri 13:01] =>  0:16
+
+*Rationale*: We need to keep it as is for now. See analysis below.
 
 In yarn's =Stateful= we have a map of parent name to attributes. But
 the entire code base assumes we can only have one parent for an
 object. Drop the map, and use a list.
+
+Actually this keeps track of the inheritance graph.
+
+Actually that's not quite right either. We do keep track of properties
+for our "direct" parent, and as such for objects there can only be one
+such parent. However, this is used in the =Stateful= concept which is
+also used by concepts themselves, and they do support multiple
+inheritance. Thus if we changed it to a list we'd break concepts. This
+requires quite a bit of thinking. A story for this is backlogged.
 
 *** Add immutability support for C# types                             :story:
 

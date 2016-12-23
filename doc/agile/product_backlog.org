@@ -1739,6 +1739,22 @@ The release will not be made unless these stories are closed, but we
 won't be addressing them in the near term. This release is all about
 getting the architecture right.
 
+*** Split =Stateful= concept with regards to inheritance              :story:
+
+At present both concepts and objects use the =Stateful= concept in
+order to have attributes. The problem is with
+=inherited_attributes=. For objects we can only have
+single-inheritance, so this map of names to list of attributes
+introduces unnecessary complexity. However, for concepts we do support
+multiple inheritance and this is a key requirement.
+
+If we decide never to support multiple inheritance at the object
+level - which may be desirable, given we are yet to find a use case
+and also we now support C# which does not have multiple inheritance -
+then we should split this property into two, one for each. We should
+remove it from the concept. We could make use of the =Generalization=
+concept, etc.
+
 *** Using =std::set<std::string>= causes compilation errors           :story:
 
 In theory sets of strings (and any other type that has =operator<=
