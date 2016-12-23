@@ -43,9 +43,9 @@ namespace csharp {
 template<typename Archive>
 void register_types(Archive& ar) {
     dogen::yarn::register_types(ar);
-    dogen::options::register_types(ar);
     dogen::formatters::register_types(ar);
     dogen::annotations::register_types(ar);
+    dogen::options::register_types(ar);
 
     ar.template register_type<dogen::quilt::csharp::fabric::assembly_info>();
     ar.template register_type<dogen::quilt::csharp::fabric::assistant>();
