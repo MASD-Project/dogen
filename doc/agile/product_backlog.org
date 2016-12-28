@@ -2620,131 +2620,6 @@ bit of a hack. So instead we created a model with all the specs.
 
 Dependencies is a map of reference; why not call it references?
 
-*** Create a validator in yarn                                        :story:
-
-#+begin_quote
-*Story*: As a dogen user, I want to know exactly why my diagram is not
-correct so that I can fix the issues. I also want dogen to pick up
-errors and generate valid code so that I don't have to figure out what
-went wrong by looking at the generated code and the compiler errors.
-#+end_quote
-
-We need a class responsible for checking the consistency of the yarn
-model. There are several things we need to check for non-merged
-models:
-
-- vistor is only supported at the base class level: due to
-  implementation constraints, we only support visitable at the base
-  class level. Add an exception if users attempt to use visitable
-  stereotype in a class that has parents. Note: is this true? We are
-  using derived visitable in C++ model.
-- there must be at least one element for a given id with
-  =is_element_extension= set to false.
-- ensure that we can only define identity once across concepts and
-  parents
-- concepts must have at least one property (or method).
-- refined concepts must not have properties (or methods) with clashing
-  names.
-- type names, model names, etc must not contain spaces or other
-  invalid characters. They should also not be a keyword on the target
-  language (e.g. =if=, =default=, etc.). We should use a identifier
-  parser for name validation. We should have a data file that lists
-  keywords by language.
-- the name of all keys in objects, etc must be part of the current
-  model.
-- the qnames of all types as keys are consistent with the values.
-- type_name is non-empty; cannot be blank or a variable name
-- type name must not exist on any model: basically detect duplicate
-  element names. At present we simply silently drop duplicates.
-- parent names and original parent names must exist in current model
-  (resolver?)
-- leaves exist in current model.
-- entity must have at least one key attribute.
-- non entity must not have key attributes (value, service)
-- keyed must be entity.
-- aggregate root must be entity.
-- all properties of types in current model must exist.
-- properties of types in other models result in dependencies.
-- enumeration must have at least one enumerator
-- enumerator name must not be empty
-- enumerator name must be unique
-- external package path of the model matches all objects, etc in current
-  model.
-- model name is non-empty.
-- documentation does not have non-printable characters.
-- number of type arguments is consistent with objects type.
-- objects marked as is comparable must follow the [[*Add%20is%20comparable%20to%20yarn][comparison rules]].
-- objects marked as is parent must have at least one child.
-- property can only have a default value if primitive
-- property default value must be castable to primitive type.
-- property must have non-empty name.
-- is versioned objects must have a property called version.
-- string table cannot have duplicate entries.
-- duplicate checks: properties cannot have duplicate names; classes in
-  a package cannot have the same name; namespaces at the same level
-  cannot have the same name;
-- Issue error when a property is a value of an abstract class: yarn
-  should fail to merge if the user attempts to create a property of a
-  base class. It should allow pointers to the base class though (raw,
-  shared pointers, boost optional etc).
-- Test relationships between objects and other meta types: We should
-  validate that objects are only related to other objects - e.g. they
-  cannot inherit from exception or enumeration or vice-versa. Add
-  tests for this.
-- Its not possible to be immutable and fluent.
-- it is not possible to be immutable and be in an inheritance
-  relationship. FIXME: why is that?
-- user models cannot have stereotype of primitive.
-- we don't support generic types (see [[Supporting%20user%20defined%20generic%20types][Supporting user defined generic
-types]]) so we should throw if a user attempts to use them.
-- a type marked as final cannot have descendants.
-- types in global namespace must have an empty location.
-- if model module path is empty, location must also be empty.
-- check the number of type parameters in the type definition and
-  ensure that all name tree's have the expected number of type
-  parameters.
-
-For merged models:
-
-- issue error when a property is a value of an abstract class
-- properties exist in merged model.
-
-Existing validation code:
-
-:    if ((o.is_parent() || o.is_child()) && p.is_immutable())  {
-:        BOOST_LOG_SEV(lg, error) << immutabilty_with_inheritance
-:                                 << o.name().id();
-:
-:        BOOST_THROW_EXCEPTION(
-:            transformation_error(immutabilty_with_inheritance +
-:                o.name().id()));
-:    }
-
-: BOOST_AUTO_TEST_CASE(inheritance_with_immutability_throws) {
-:     SETUP_TEST_LOG_SOURCE("inheritance_with_immutability_throws");
-:     auto c(mock_context(model_name));
-:
-:     const auto po(mock_processed_object_factory::make_generalization());
-:     const auto con(po[0].connection());
-:     BOOST_REQUIRE(con);
-:     const auto parents = std::list<std::string> { con->first };
-:     c.child_id_to_parent_ids().insert(std::make_pair(con->second, parents));
-:
-:     transform(c, {po[1]});
-:
-:     auto po1(po[2]);
-:     po1.stereotype(immutable_stereotype);
-:     const auto op1(mock_profile(po1));
-:     contains_checker<transformation_error> cc(immutability_inheritance);
-:     BOOST_CHECK_EXCEPTION(transform(c, po1, op1), transformation_error, cc);
-:
-:     c.child_id_to_parent_ids().clear();
-:     auto po2(po[1]);
-:     po2.stereotype(immutable_stereotype);
-:     const auto op2(mock_profile(po2));
-:     BOOST_CHECK_EXCEPTION(transform(c, po2, op2), transformation_error, cc);
-: }
-
 *** Add warning support for validation                                :story:
 
 Once we implement a validator, we will soon run into warnings: cases
@@ -5159,6 +5034,18 @@ in the future.
 
 This was removed in 4ed3fbd.
 
+Validation rules:
+
+- ensure that we can only define identity once across concepts and
+  parents
+- the name of all keys in objects, etc must be part of the current
+  model.
+- the qnames of all types as keys are consistent with the values.
+- entity must have at least one key attribute.
+- non entity must not have key attributes (value, service)
+- keyed must be entity.
+- aggregate root must be entity.
+
 Merged stories:
 
 *Definition of Identity Attribute*
@@ -5472,6 +5359,10 @@ Relation to keys:
 If an object itself is marked as comparable, then it is equivalent to mark
 all properties as comparable using their relative position as the
 comparison order.
+
+Validation:
+
+- objects marked as is comparable must follow the [[*Add%20is%20comparable%20to%20yarn][comparison rules]].
 
 *Merged with ordered containers story:*
 
@@ -5795,6 +5686,11 @@ Note also that there are two levels of default values: the type-level
 (all primitives of type =x= default to =y=) and the property level
 (instances of type =x= in class =z= default to =y=). The meta-data can
 be applied at each level to achieve the desired effect.
+
+Validation rules:
+
+- property can only have a default value if primitive
+- property default value must be castable to primitive type.
 
 *** Add support for interfaces                                         :epic:
 
