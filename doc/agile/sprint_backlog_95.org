@@ -1,0 +1,426 @@
+#+title: Sprint Backlog 95
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: STARTED | COMPLETED CANCELLED POSTPONED
+#+tags: { story(s) epic(e) }
+
+* Mission Statement
+
+- Finish C# support.
+
+* Stories
+
+** Active
+
+#+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
+#+CAPTION: Clock summary at [2016-12-28 Wed 12:48]
+| <75>                                                                        |        |      |      |       |
+| Headline                                                                    | Time   |      |      |     % |
+|-----------------------------------------------------------------------------+--------+------+------+-------|
+| *Total time*                                                                | *0:46* |      |      | 100.0 |
+|-----------------------------------------------------------------------------+--------+------+------+-------|
+| Stories                                                                     | 0:46   |      |      | 100.0 |
+| Active                                                                      |        | 0:46 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:21 |  45.7 |
+| STARTED Edit release notes for previous sprint                              |        |      | 0:25 |  54.3 |
+#+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
+#+end:
+
+*** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-12-28 Wed 12:02]--[2016-12-28 Wed 12:23] =>  0:21
+
+Updates to sprint and product backlog.
+
+*** STARTED Edit release notes for previous sprint                    :story:
+    CLOCK: [2016-12-28 Wed 12:23]--[2016-12-28 Wed 12:48] =>  0:25
+
+Add github release notes for previous sprint.
+
+Title: Dogen v0.94.0, "Baía dos Tigres"
+
+#+begin_src markdown
+Overview
+=======
+The sprint's headline feature is the continued work on the C# kernel. It is still considered experimental.
+
+User visible changes
+===============
+
+In this sprint, a number of user visible features were added to C#:
+
+- **improved ```Types``` facet support**: including exceptions and enumerations, immutability, complete constructors, improvements around equality, associations and inheritance with other model types, as well as support for modules (namespaces) and inheritance.
+- **basic ```IO``` facet support**: dumping the POCOs as a JSON stream. The JSON format is the same as used in C++.
+- **basic ```Test Data``` facet support**: We tried to use C# idioms for this, so Sequence Generators are based on ```IEnumerable```.
+
+Please refer to the test data sets for the sample model:
+
+- input: [Dia](https://github.com/DomainDrivenConsulting/dogen/blob/master/test_data/yarn.dia/input/CSharpModel.dia), [JSON](https://github.com/DomainDrivenConsulting/dogen/blob/master/test_data/yarn.json/input/CSharpModel.json)
+- output: [CSharpModel](https://github.com/DomainDrivenConsulting/dogen/tree/master/projects/test_models/CSharpModel)
+
+For more details see the [sprint log](https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_94.org).
+
+Binaries
+======
+You can download experimental binaries from [Bintray](https://bintray.com/domaindrivenconsulting/Dogen) for OSX and Linux:
+
+- [dogen_0.94.0_amd64-applications.deb](https://dl.bintray.com/domaindrivenconsulting/Dogen/0.94.0/dogen_0.94.0_amd64-applications.deb)
+- [dogen-0.94.0-Darwin-x86_64.dmg](https://dl.bintray.com/domaindrivenconsulting/Dogen/0.94.0/dogen-0.94.0-Darwin-x86_64.dmg)
+
+For other operative systems you need to build it from source. Source downloads are available below.
+#+end_src
+
+- [[https://twitter.com/MarcoCraveiro/status/808591399855734784][Tweet]]
+
+*** Consider supporting multiple inheritance on non-proxy models      :story:
+
+We need to be able to express relationships such as the ones used by
+C# containers. But first we need to build an inheritance graph of all
+relevant collections.
+
+Notes:
+
+- if we have leaves at all levels of an hierarchy, we may need to map
+  them to the base class. Actually, in practice, we only care about
+  leaves at the base class level.
+- we need to know which root parent we are visiting. So presumably the
+  question is: did we use root parent as a short-hand for visitation
+  root?
+- equals method is using root parent because apparently "service leafs
+  are not being processed atm". We should remove this check and add a
+  method to assistant that checks there is one root parent.
+
+*** Add handcrafted class to C# test model                            :story:
+
+We should make sure handcrafted code works in C#.
+
+Actually in order to get handcrafted types to work we need support for
+enablement. This is a somewhat tricky feature so we should leave it
+for after all the main ones are done.
+
+*** Add container types to C# proxy models                            :story:
+
+We should add all major container types and tests for them.
+
+: IEnumerable, IEnumerable<T>
+: ICollection, ICollection<T>
+: IList, IList<T>
+: IDictionary, IDictionary<K, V>
+: ArrayList, List<T>
+: Queue, ConcurrentQueue<T>, Stack, ConcurrentStack<T>, LinkedList<T>
+: Hashtable, SortedList classes
+: Dictionary<TKey, TValue>, SortedList<TKey, TValue>
+: ConcurrentDictionary<TKey, TValue>
+: KeyedCollection<TKey, TItem>
+
+Notes:
+
+- abstract types require knowing the leaves. We could use the existing
+  machinery to map them.
+- many c# types implement multiple interfaces; we need support for
+  multiple inheritance at the non-proxy model level.
+
+Links:
+
+- [[https://msdn.microsoft.com/en-us/library/0ytkdh4s(v%3Dvs.110).aspx][Commonly Used Collection Types]]
+
+**** Create an inheritance graph of the main collections
+
+System.Collections:
+
+: IEnumerable
+: ICollection: IEnumerable
+: IDictionary : ICollection, IEnumerable
+: IList : ICollection, IEnumerable
+: ArrayList : IList, ICollection, IEnumerable
+: BitArray : ICollection, IEnumerable
+: Hashtable : IDictionary, ICollection, IEnumerable
+: Queue : ICollection, IEnumerable, ICloneable
+: SortedList : IDictionary, ICollection, IEnumerable, ICloneable
+: Stack : ICollection, IEnumerable, ICloneable
+
+System.Collections.ObjectModel:
+
+: Collection<T> : IList<T>, ICollection<T>, IEnumerable<T>,
+:                 IEnumerable, IList, ICollection, IReadOnlyList<T>,
+:                 IReadOnlyCollection<T>
+: KeyedCollection<TKey, TItem> : Collection<TItem>
+
+System.Collections.Generic:
+
+: KeyValuePair<TKey, TValue> (structure)
+: IEnumerable<out T> : IEnumerable
+: ICollection<T> : IEnumerable<T>, IEnumerable
+: IList<T> : ICollection<T>, IEnumerable<T>, IEnumerable
+: IReadOnlyCollection<out T> : IEnumerable<T>, IEnumerable
+: IReadOnlyList<out T> : IReadOnlyCollection<T>, IEnumerable<T>, IEnumerable
+: IReadOnlyDictionary<K, V>: IReadOnlyDictionary<K, V> :
+:                            IReadOnlyCollection<KeyValuePair<K, V>>,
+:                            IEnumerable<KeyValuePair<K, V>>, IEnumerable
+: ISet<T> : ICollection<T>, IEnumerable<T>, IEnumerable
+: HashSet<T> : ICollection<T>, IEnumerable<T>, IEnumerable,  ISet<T>,
+:              IReadOnlyCollection<T>
+: List<T> : IList<T>, ICollection<T>, IEnumerable<T>,  IEnumerable, IList,
+:           ICollection, IReadOnlyList<T>, IReadOnlyCollection<T>
+:           -> IList<T>, IReadOnlyList<T>
+: Queue<T> : IEnumerable<T>, IEnumerable, ICollection, IReadOnlyCollection<T>
+: HashSet<T> : ICollection<T>, IEnumerable<T>, IEnumerable, ISet<T>,
+:              IReadOnlyCollection<T>
+: IDictionary<K, V> : ICollection<KeyValuePair<K, V>>,
+:                     IEnumerable<KeyValuePair<K, V>>, IEnumerable
+: Dictionary<K, V> : IDictionary<K, V>, ICollection<KeyValuePair<K, V>>,
+:                    IEnumerable<KeyValuePair<K, V>>, IEnumerable, IDictionary,
+:                    ICollection, IReadOnlyDictionary<K, V>,
+:                    IReadOnlyCollection<KeyValuePair<K, V>>
+: SortedDictionary<K, V> : IDictionary<K, V>,
+:                          ICollection<KeyValuePair<K, V>>,
+:                          IEnumerable<KeyValuePair<K, V>>,
+:                          IEnumerable, IDictionary, ICollection,
+:                          IReadOnlyDictionary<K, V>,
+:                          IReadOnlyCollection<KeyValuePair<K, V>>
+: SortedList<K, V> : IDictionary<K, V>, ICollection<KeyValuePair<K, V>>,
+:                    IEnumerable<KeyValuePair<K, V>>, IEnumerable, IDictionary,
+:                    ICollection, IReadOnlyDictionary<K, V>,
+:                    IReadOnlyCollection<KeyValuePair<K, V>>
+: SortedSet<T> : ISet<T>, ICollection<T>, IEnumerable<T>, IEnumerable,
+:                ICollection, IReadOnlyCollection<T>
+: KeyedByTypeCollection<TItem> : KeyedCollection<Type, TItem>
+: LinkedList<T> : ICollection<T>, IEnumerable<T>, IEnumerable, ICollection,
+:                 IReadOnlyCollection<T>
+: Stack<T> : IEnumerable<T>, IEnumerable, ICollection, IReadOnlyCollection<T>
+: SynchronizedCollection<T> : IList<T>, ICollection<T>, IEnumerable<T>,
+:                             IEnumerable, IList, ICollection
+: SynchronizedKeyedCollection<K, T> : SynchronizedCollection<T>
+: SynchronizedReadOnlyCollection<T> : IList<T>, ICollection<T>, IEnumerable<T>,
+:                                     IEnumerable, IList, ICollection
+
+System.Collections.Immutable:
+
+: IImmutableList<T> : IReadOnlyList<T>,  IReadOnlyCollection<T>, IEnumerable<T>,
+:                     IEnumerable
+: ImmutableList<T>: IImmutableList<T>,  IList<T>, ICollection<T>, IList,
+:                   ICollection,, IReadOnlyList<T>,  IReadOnlyCollection<T>,
+:                   IEnumerable<T>, IEnumerable
+: IImmutableQueue<T> : IEnumerable<T>, IEnumerable
+: ImmutableQueue<T> : IImmutableQueue<T>, IEnumerable<T>,  IEnumerable
+: IImmutableStack<T> : IEnumerable<T>, IEnumerable
+: ImmutableStack<T> : IImmutableStack<T>, IEnumerable<T>,  IEnumerable
+: IImmutableDictionary<K, V> : IReadOnlyDictionary<K, V>,
+:                              IReadOnlyCollection<KeyValuePair<K, V>>,
+:                              IEnumerable<KeyValuePair<K, V>>, IEnumerable
+: ImmutableDictionary<K, V> : IImmutableDictionary<K, V>,
+:                             IReadOnlyDictionary<K, V>,
+:                             IReadOnlyCollection<KeyValuePair<K, V>>,
+:                             IDictionary<K, V>, ICollection<KeyValuePair<K, V>>,
+:                             IEnumerable<KeyValuePair<K, V>>, IDictionary
+:                             ICollection, IEnumerable
+: ImmutableSortedDictionary<K, V> : IImmutableDictionary<K, V>,
+:                                   IReadOnlyDictionary<K, V>,
+:                                   IReadOnlyCollection<KeyValuePair<K, V>>,
+:                                   IDictionary<K, V>,
+:                                   ICollection<KeyValuePair<K, V>>,
+:                                   IEnumerable<KeyValuePair<K, V>>,
+:                                   IDictionary, ICollection, IEnumerable
+: IImmutableSet<T> : IReadOnlyCollection<T>, IEnumerable<T>, IEnumerable
+: ImmutableSortedSet<T> : IImmutableSet<T>,  IReadOnlyList<T>,
+:                         IReadOnlyCollection<T>, IList<T>, ISet<T>,
+:                         ICollection<T>, IEnumerable<T>, IList, ICollection,
+:                          IEnumerable
+: ImmutableHashSet<T> : IImmutableSet<T>, IReadOnlyCollection<T>,
+:                       ISet<T>, ICollection<T>, IEnumerable<T>, ICollection,
+:                       IEnumerable
+
+System.Collections.Concurrent
+
+*** Parsing should support dot notation                               :story:
+
+At present we only support the c++ scope operator =::= as a separator
+for fully qualified names in a model. However, it probably would be
+quite trivial to have a "mode" in the parser and support either =.= or
+=::=, depending on a construction-supplied flag (inferred from the
+model language). This would allow C# users to enter their model in a
+more natural way, instead of forcing them to use C++ notation.
+
+*** Add support for arrays                                            :story:
+
+At present the yarn parser does not support array notation:
+=string[]=. We need to look into how arrays would work for C++ and
+implement it in a compatible way.
+
+Links:
+
+- [[https://www.dotnetperls.com/array][array]]
+
+*** Add fluency support for C#                                        :story:
+
+We need to add fluent support for C#.
+
+C# properties are not compatible with the fluent pattern. Instead, one
+needs to create builders, across the inheritance tree.
+
+Links:
+
+- [[http://stackoverflow.com/questions/13761666/how-to-use-fluent-style-syntactic-sugar-with-c-sharp-property-declaration][How to use Fluent style syntactic sugar with c# property declaration]]
+
+*** Add visitor support to C#                                         :story:
+
+Implement the visitor formatters for C#.
+
+*** Add cross-model support to C#                                     :story:
+
+At present we do not have any tests that prove that cross-model
+support is working (other than proxy models). We need to create a user
+level model that makes use of types from another model. In theory it
+should just work since we are using fully qualified names everywhere.
+
+*** Generate AssemblyInfo in C#                                       :story:
+
+We need to inject a type for this in fabric. For now we can leave it
+mainly blank but in the future we need to have meta-data in yarn for
+all of its properties:
+
+: [assembly: AssemblyTitle ("TestDogen")]
+: [assembly: AssemblyDescription ("")]
+: [assembly: AssemblyConfiguration ("")]
+: [assembly: AssemblyCompany ("")]
+: [assembly: AssemblyProduct ("")]
+: [assembly: AssemblyCopyright ("marco")]
+: [assembly: AssemblyTrademark ("")]
+: [assembly: AssemblyCulture ("")]
+: [assembly: AssemblyVersion ("1.0.*")]
+
+These appear to just be properties at the model level.
+
+*** Consider adding a clone method for C#                             :story:
+
+It would be nice to have a way to clone a object graph. We probably
+have an equivalent story for this for C++ in the backlog.
+
+*** Consider making the output directory configurable in C#           :story:
+
+At present we are outputting binaries into the =bin= directory,
+locally on the project directory. However, it would make more sense to
+output to =build/output= like C++ does. For this to work, we need to
+be able to supply an output directory as meta-data.
+
+*** Add support for nuget                                             :story:
+
+A proxy model may require obtaining a nuget package. Users should be
+able to define a proxy model as requiring a nuget package and then
+Dogen should generate packages.config and add all such models to it.
+
+: +  <package id="NUnit" version="2.6.4" targetFramework="net45" />
+
+*** Identifiable needs to use camel case in C#                        :story:
+
+At present we are building identifiables with underscores.
+
+*** Generate windows packages with CPack                              :story:
+
+We tried to generate windows packages by using the NSIS tool, but
+there are no binaries available for it at present. However, it seems
+CPack can now generate MSIs directly:
+
+- [[http://stackoverflow.com/questions/18437356/how-to-generate-msi-installer-with-cmake][How to generate .msi installer with cmake?]]
+- [[https://cmake.org/cmake/help/v3.0/module/CPackWIX.html][CPackWIX]]
+
+We need to investigate how to get the build to produce MSIs using WIX.
+
+*** Move enablement into quilt                                        :story:
+
+We need to make use of the exact same logic as implemented in
+=quilt.cpp= for enablement. Perhaps all of the enablement related
+functionality can be lifted and grafted onto quilt without any major
+changes.
+
+*** Add feature to disable regions                                    :story:
+
+We need a way to stop outputting regions if the user does not want
+them.
+
+*** Add parameters for using imported assemblies                      :story:
+
+Assemblies imported via proxy models need to have the ability to
+supply two parameters:
+
+- assembly name: this is not always the same as the proxy model name;
+- root namespace: similarly this may differ from the proxy model name.
+
+These should be supplied as meta data and used when constructing
+fabric types.
+
+*** Add msbuild target for C# test model                              :story:
+
+Once we are generating solutions, we should detect msbuild (or xbuild)
+and build the solution. This should be a CMake target that runs on
+Travis.
+
+*** Add visibility to yarn elements                                   :story:
+
+We need to be able to mark yarn types as:
+
+- public
+- internal
+
+This can then be used by C++ as well for visibility etc.
+
+*** Add partial element support to yarn                               :story:
+
+We need to be able to mark yarn elements as "partial". It is then up
+to programming languages to map this to a language feature. At present
+only [[https://msdn.microsoft.com/en-us/library/wa80x488.aspx][C# would do so]].
+
+It would be nice to have a more meaningful name at yarn
+level. However, seems like this is a fairly general programming
+concept now: [[https://en.wikipedia.org/wiki/Class_(computer_programming)#Partial][wikipedia]].
+
+*** Add visibility to yarn attributes                                 :story:
+
+We need to be able to mark yarn attributes as:
+
+- public
+- private
+- protected
+
+*** Add final support in C#                                           :story:
+
+Links:
+
+- [[https://msdn.microsoft.com/en-us/library/88c54tsw.aspx][sealed (C# Reference)]]
+
+*** Add aspects for C# serialisation support                          :story:
+
+We need to add serialisation support:
+
+- C# serialisation
+- Data Contract serialisation
+- Json serialisation
+
+In C# these are done via attributes so we do not need additional
+facets. We will need a lot of configuration knobs though:
+
+- ability to switch a serialisation method on at model level or
+  element level.
+- support for serialisation specific arguments such as parameters for
+  Json.Net.
+
+Links:
+
+- [[https://msdn.microsoft.com/en-us/library/ms731923(v%3Dvs.110).aspx][Types Supported by the Data Contract Serializer]]
+- [[https://msdn.microsoft.com/en-us/library/ms731073(v%3Dvs.110).aspx][Serialization and Deserialization]]
+- [[https://msdn.microsoft.com/en-us/library/ms733127(v%3Dvs.110).aspx][Using Data Contracts]]
+- [[https://msdn.microsoft.com/en-us/library/ms731923(v%3Dvs.110).aspx][Types Supported by the Data Contract Serializer]]
+
+*** Consider adding =artefact_set= to formatters' model               :story:
+
+We are using collections of artefacts quite a bit, and it makes sense
+to create an abstraction for it such as a =artefact_set=. However, for
+this to work properly we need to add at least one basic behaviour: the
+ability to merge two artefact sets. Or else we will end up having to
+unpack the artefacts, then merging them, then creating a new artefact
+set.
+
+Problem is, we either create the artefact set as a non-generatable
+type - not ideal - or we create it as generatable and need to add this
+as a free function. We need to wait until dogen has support for
+merging code generation.
+
+** Deprecated
