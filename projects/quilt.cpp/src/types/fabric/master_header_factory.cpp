@@ -112,7 +112,8 @@ generator::create_master_header(const yarn::name& model_name) {
 std::forward_list<std::shared_ptr<formatters::artefact_formatter_interface>>
 generator::filter_formatters(const std::forward_list<std::shared_ptr<
     formatters::artefact_formatter_interface>>& formatters) const {
-    std::forward_list<std::shared_ptr<formatters::artefact_formatter_interface>> r;
+    std::forward_list<std::shared_ptr<formatters::artefact_formatter_interface>>
+        r;
 
     /*
      * We are only interested in formatters that generate

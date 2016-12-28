@@ -32,6 +32,7 @@ namespace yarn {
 
 class model_validator final {
 private:
+    // void concepts_should_have_at_least_one_property(const model& im) const;
 
 public:
     void validate(const model& m) const;

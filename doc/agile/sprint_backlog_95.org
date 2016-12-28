@@ -12,18 +12,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-12-28 Wed 20:23]
+#+CAPTION: Clock summary at [2016-12-28 Wed 21:27]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *5:51* |      |      | 100.0 |
+| *Total time*                                                                | *6:52* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 5:51   |      |      | 100.0 |
-| Active                                                                      |        | 5:51 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:21 |   6.0 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:57 |  16.2 |
-| COMPLETED Consider supporting multiple inheritance on non-proxy models      |        |      | 3:24 |  58.1 |
-| STARTED Create a validator in yarn                                          |        |      | 1:09 |  19.7 |
+| Stories                                                                     | 6:52   |      |      | 100.0 |
+| Active                                                                      |        | 6:52 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:21 |   5.1 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:57 |  13.8 |
+| COMPLETED Consider supporting multiple inheritance on non-proxy models      |        |      | 3:24 |  49.5 |
+| STARTED Create a validator in yarn                                          |        |      | 2:10 |  31.6 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -122,6 +122,7 @@ Validation check removed from transformer:
 :        }
 
 *** STARTED Create a validator in yarn                                :story:
+    CLOCK: [2016-12-28 Wed 20:24]--[2016-12-28 Wed 21:25] =>  1:01
     CLOCK: [2016-12-28 Wed 19:21]--[2016-12-28 Wed 20:23] =>  1:02
     CLOCK: [2016-12-28 Wed 17:29]--[2016-12-28 Wed 17:36] =>  0:07
 
@@ -133,32 +134,21 @@ went wrong by looking at the generated code and the compiler errors.
 #+end_quote
 
 We need a class responsible for checking the consistency of the yarn
-model. There are several things we need to check for non-merged
-models:
+model.
 
-- vistor is only supported at the base class level: due to
-  implementation constraints, we only support visitable at the base
-  class level. Add an exception if users attempt to use visitable
-  stereotype in a class that has parents. Note: is this true? We are
-  using derived visitable in C++ model.
-- there must be at least one element for a given id with
-  =is_element_extension= set to false.
-- concepts must have at least one property (or method). Maybe just warn?
-- refined concepts must not have properties (or methods) with clashing
-  names.
+*Dia level checks*:
+
+- exceptions and enumerations can't inherit
+- exceptions shouldn't have properties.
+
+*Intermediate model checks*:
+
 - type names, model names, etc must not contain spaces or other
   invalid characters. They should also not be a keyword on the target
   language (e.g. =if=, =default=, etc.). We should use a identifier
   parser for name validation. We should have a data file that lists
   keywords by language. See [[http://en.cppreference.com/w/cpp/keyword][C++ keywords]]
 - type_name is non-empty; cannot be blank or a variable name
-- type name must not exist on any model: basically detect duplicate
-  element names. At present we simply silently drop duplicates.
-- parent names and original parent names must exist in current model
-  (resolver?)
-- leaves exist in current model.
-- all properties of types in current model must exist.
-- properties of types in other models result in dependencies.
 - enumeration must have at least one enumerator. warning?
 - enumerator name must not be empty
 - enumerator name must be unique
@@ -167,10 +157,7 @@ models:
 - model name is non-empty.
 - documentation does not have non-printable characters.
 - number of type arguments is consistent with objects type.
-- objects marked as is parent must have at least one child.
 - property must have non-empty name.
-- is versioned objects must have a property called version.
-- string table cannot have duplicate entries.
 - duplicate checks: properties cannot have duplicate names; classes in
   a package cannot have the same name; namespaces at the same level
   cannot have the same name;
@@ -195,10 +182,29 @@ types]]) so we should throw if a user attempts to use them.
   ensure that all name tree's have the expected number of type
   parameters.
 
-For merged models:
+*Merged model checks*
 
+- properties of types in other models result in dependencies.
+- all properties of types in current model must exist.
+- parent names and original parent names must exist in current model
+  (resolver?)
+- concepts that don't refine must have at least one property (or
+  method). Maybe just warn?
 - issue error when a property is a value of an abstract class
 - properties exist in merged model.
+- multiple inheritance is only allowed on non-proxy models.
+- vistor is only supported at the base class level: due to
+  implementation constraints, we only support visitable at the base
+  class level. Add an exception if users attempt to use visitable
+  stereotype in a class that has parents. Note: is this true? We are
+  using derived visitable in C++ model.
+- there must be at least one element for a given id with
+  =is_element_extension= set to false.
+- refined concepts must not have properties (or methods) with clashing
+  names.
+- type name must not exist on any model: basically detect duplicate
+  element names. At present we simply silently drop duplicates.
+- leaves exist in current model.
 
 Existing validation code:
 

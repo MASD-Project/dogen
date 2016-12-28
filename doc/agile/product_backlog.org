@@ -5114,6 +5114,10 @@ incrementally.
 We had some basic support for versioning but it was half-baked. It was
 removed in 4ed3fbd.
 
+Validation rules:
+
+- is versioned objects must have a property called version.
+
 *New understanding*:
 
 - Add versioning support by adding versions at the object level and at
@@ -5283,6 +5287,10 @@ would be static public members of a class.
 We should also add a validate method which checks to see if a string
 is a valid value according to the string table. We could have a "case
 insensitive" validate too.
+
+Validation rules:
+
+- string table cannot have duplicate entries.
 
 *** Enumeration string conversion could be configurable               :story:
 

@@ -31,6 +31,14 @@ auto lg(logger_factory("yarn.model_validator"));
 namespace dogen {
 namespace yarn {
 
+/*
+void model_validator::
+concepts_should_have_at_least_one_property(const model& im) const {
+    for (const auto& c : im.concepts()) {
+    }
+}
+*/
+
 void model_validator::validate(const model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started validation. Model: " << m.name().id();
 
