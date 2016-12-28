@@ -105,7 +105,7 @@ std::list<std::string> class_header_formatter::inclusion_dependencies(
     builder.add(o.opaque_associations(), fwd_arch);
 
     const auto self_arch(class_header_formatter::static_artefact());
-    builder.add(o.parent(), self_arch);
+    builder.add(o.parents(), self_arch);
 
     using hash = formatters::hash::traits;
     const auto hash_carch(hash::traits::canonical_archetype());
@@ -139,10 +139,10 @@ format(const context& ctx, const yarn::element& e) const {
             auto snf(a.make_scoped_namespace_formatter(ns));
 a.stream() << std::endl;
             a.comment(o.documentation());
-            if (!o.parent()) {
+            if (o.parents().empty()) {
 a.stream() << "class " << sn << " " << a.make_final_keyword_text(o) << "{" << std::endl;
             } else {
-                const auto& pn(*o.parent());
+                const auto& pn(o.parents().front());
                 const auto pqn(a.get_qualified_name(pn));
 a.stream() << "class " << sn << " " << a.make_final_keyword_text(o) << ": public " << pqn << " {" << std::endl;
             }
@@ -248,10 +248,10 @@ a.stream() << std::endl;
                 std::string rpn;
                 if (o.derived_visitor()) {
                     bvn = a.get_qualified_name(*o.base_visitor());
-                    rpn = a.get_qualified_name(*o.root_parent());
+                    rpn = a.get_qualified_name(o.root_parents().front());
                 } else {
                     bvn = o.base_visitor()->simple();
-                    rpn = o.root_parent()->simple();
+                    rpn = o.root_parents().front().simple();
                 }
 a.stream() << "public:" << std::endl;
 a.stream() << "    using " << rpn << "::accept;" << std::endl;
@@ -270,7 +270,7 @@ a.stream() << "    virtual void accept(" << bvn << "& v) override;" << std::endl
 a.stream() << "public:" << std::endl;
 a.stream() << "    virtual void to_stream(std::ostream& s) const;" << std::endl;
 a.stream() << std::endl;
-                } else if (o.parent()) {
+                } else if (!o.parents().empty()) {
 a.stream() << "public:" << std::endl;
 a.stream() << "    void to_stream(std::ostream& s) const override;" << std::endl;
 a.stream() << std::endl;
@@ -329,10 +329,10 @@ a.stream() << "public:" << std::endl;
                 if (o.is_parent() && !o.is_child()) {
 a.stream() << "    virtual bool equals(const " << sn << "& other) const = 0;" << std::endl;
                 } else if (o.is_parent()) {
-                    const auto rpn(*o.root_parent());
+                    const auto rpn(o.root_parents().front());
 a.stream() << "    virtual bool equals(const " << a.get_qualified_name(rpn) << "& other) const = 0;" << std::endl;
-                } else if (o.root_parent()) {
-                    const auto rpn(*o.root_parent());
+                } else if (!o.root_parents().empty()) {
+                    const auto rpn(o.root_parents().front());
 a.stream() << "    bool equals(const " << a.get_qualified_name(rpn) << "& other) const override;" << std::endl;
                 }
 a.stream() << std::endl;

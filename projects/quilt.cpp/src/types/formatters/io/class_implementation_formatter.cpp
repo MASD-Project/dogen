@@ -121,7 +121,7 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
 
     builder.add(o.transparent_associations(), io_carch);
     builder.add(o.opaque_associations(), io_carch);
-    builder.add(o.parent(), io_carch);
+    builder.add(o.parents(), io_carch);
 
     return builder.build();
 }
@@ -141,11 +141,11 @@ format(const context& ctx, const yarn::element& e) const {
             auto snf(a.make_scoped_namespace_formatter(ns));
             const auto sn(o.name().simple());
             const auto qn(a.get_qualified_name(o.name()));
-            const bool no_arg(!o.is_parent() && !o.parent() &&
+            const bool no_arg(!o.is_parent() && o.parents().empty() &&
                 o.local_attributes().empty());
 a.stream() << std::endl;
 a.stream() << "std::ostream& operator<<(std::ostream& s, const " << sn << "&" << (no_arg ? "" : " v") << ") {" << std::endl;
-            if (o.is_parent() || o.parent()) {
+            if (o.is_parent() || !o.parents().empty()) {
 a.stream() << "    v.to_stream(s);" << std::endl;
 a.stream() << "    return(s);" << std::endl;
             } else

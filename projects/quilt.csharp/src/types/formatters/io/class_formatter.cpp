@@ -104,8 +104,8 @@ a.stream() << std::endl;
 a.stream() << "            assistant.AddKey(\"data\");" << std::endl;
 a.stream() << "            assistant.AddPairSeparator();" << std::endl;
 a.stream() << "            assistant.AddStartObject();" << std::endl;
-                if (o.parent()) {
-                    const auto& pn(*o.parent());
+                if (!o.parents().empty()) {
+                    const auto& pn(o.parents().front());
                     const auto pqn(a.get_qualified_name(pn));
 a.stream() << "            assistant.AddKey(\"__parent_0__\");" << std::endl;
 a.stream() << "            assistant.AddPairSeparator();" << std::endl;

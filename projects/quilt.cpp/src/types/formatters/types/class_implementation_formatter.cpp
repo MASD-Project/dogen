@@ -115,7 +115,7 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
     const auto io_carch(io::traits::canonical_archetype());
     builder.add(o.transparent_associations(), io_carch);
     builder.add(o.opaque_associations(), io_carch);
-    builder.add(o.parent(), io_carch);
+    builder.add(o.parents(), io_carch);
 
     if (o.is_visitation_leaf()) {
         /*
@@ -183,13 +183,13 @@ a.stream() << "    : " << out << std::endl;
             if (a.requires_manual_move_constructor()) {
 a.stream() << std::endl;
 a.stream() << sn << "::" << sn << "(" << sn << "&& rhs)" << std::endl;
-                unsigned int size((o.parent() ? 1 : 0) + o.local_attributes().size());
+                unsigned int size(o.parents().size() + o.local_attributes().size());
 
                 dogen::formatters::sequence_formatter sf(size);
                 sf.prefix_configuration().first(": ").not_first("  ");
                 sf.postfix_configuration().last(" { }");
-                if (o.parent()) {
-                    const auto& pn(*o.parent());
+                if (!o.parents().empty()) {
+                    const auto& pn(o.parents().front());
                     const auto pqn(a.get_qualified_name(pn));
 a.stream() << "    " << sf.prefix() << pqn << "(" << std::endl;
 a.stream() << "        std::forward<" << pqn << ">(rhs))" << sf.postfix() << std::endl;
@@ -223,7 +223,7 @@ a.stream() << "    const " << a.get_qualified_name(attr.parsed_type()) << a.make
                     }
                 }
 
-                int sequence_size(o.local_attributes().size() + (o.parent() ? 1 : 0));
+                int sequence_size(o.local_attributes().size() + o.parents().size());
                 for (const auto pair : o.inherited_attributes()) {
                     const auto& pattrs(pair.second);
                     sequence_size += (pattrs.size() > 1 ? pattrs.size() : 0);
@@ -270,10 +270,10 @@ a.stream() << "    " << sf.prefix() << a.make_member_variable_name(attr) << "(" 
                 if (o.derived_visitor()) {
                     bvn = a.get_qualified_name(*o.base_visitor());
                     dvn = o.derived_visitor()->simple();
-                    rpn = a.get_qualified_name(*o.root_parent());
+                    rpn = a.get_qualified_name(o.root_parents().front());
                 } else {
                     bvn = o.base_visitor()->simple();
-                    rpn = o.root_parent()->simple();
+                    rpn = o.root_parents().front().simple();
                 }
 a.stream() << std::endl;
 a.stream() << "void " << sn << "::accept(const " << bvn << "& v) const {" << std::endl;
@@ -337,11 +337,11 @@ a.stream() << "}" << std::endl;
              * Swap
              */
             if (!o.is_immutable() && (!o.all_attributes().empty() || o.is_parent())) {
-                const bool empty(o.all_attributes().empty() && !o.parent());
+                const bool empty(o.all_attributes().empty() && o.parents().empty());
 a.stream() << std::endl;
 a.stream() << "void " << sn << "::swap(" << sn << "&" << (empty ? "" : " other") << ") noexcept {" << std::endl;
-               if (o.parent()) {
-                    const auto& pn(*o.parent());
+               if (!o.parents().empty()) {
+                    const auto& pn(o.parents().front());
                     const auto pqn(a.get_qualified_name(pn));
 a.stream() << "    " << pqn << "::swap(other);" << std::endl;
 a.stream() << std::endl;
@@ -361,8 +361,8 @@ a.stream() << "}" << std::endl;
              */
             // FIXME: looking at root_parent as a hack due to service leafs not
             // FIXME: being processed atm.
-            if (!o.is_parent() && o.parent() && o.root_parent()) {
-                const auto rpn(*o.root_parent());
+            if (!o.is_parent() && !o.parents().empty() && !o.root_parents().empty()) {
+                const auto rpn(o.root_parents().front());
 a.stream() << std::endl;
 a.stream() << "bool " << sn << "::equals(const " << a.get_qualified_name(rpn) << "& other) const {" << std::endl;
 a.stream() << "    const " << sn << "* const p(dynamic_cast<const " << sn << "* const>(&other));" << std::endl;
@@ -385,7 +385,7 @@ a.stream() << "bool " << sn << "::" << method_name << "(const " << sn << "& " <<
             if (o.all_attributes().empty())
 a.stream() << "    return true;" << std::endl;
             else {
-                dogen::formatters::sequence_formatter sf(o.parent() ? 1 : 0);
+                dogen::formatters::sequence_formatter sf(o.parents().size());
                 sf.element_separator("");
                 sf.prefix_configuration().first("return ").not_first("    ");
                 sf.postfix_configuration().not_last(" &&");
@@ -394,15 +394,15 @@ a.stream() << "    return true;" << std::endl;
                 else
                     sf.postfix_configuration().last(" &&");
 
-                if (o.parent()) {
-                    const auto& pn(*o.parent());
+                if (!o.parents().empty()) {
+                    const auto& pn(o.parents().front());
                     const auto pqn(a.get_qualified_name(pn));
 a.stream() << "    " << sf.prefix() << pqn << "::compare(rhs)" << sf.postfix() << std::endl;
                     sf.next();
                 }
                 sf.reset(o.local_attributes().size());
                 sf.element_separator("");
-                if (!o.parent())
+                if (o.parents().empty())
                    sf.prefix_configuration().first("return ");
                 else
                    sf.prefix_configuration().first("    ");

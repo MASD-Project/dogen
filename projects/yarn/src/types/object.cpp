@@ -60,6 +60,20 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::yarn::name>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
 namespace boost {
 
 inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::yarn::name>& v) {
@@ -70,20 +84,6 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::ya
     else
         s << "\"data\": ""\"<null>\"";
     s << " }";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::yarn::name>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
     return s;
 }
 
@@ -117,10 +117,10 @@ object::object(object&& rhs)
       is_child_(std::move(rhs.is_child_)),
       is_leaf_(std::move(rhs.is_leaf_)),
       is_final_(std::move(rhs.is_final_)),
-      root_parent_(std::move(rhs.root_parent_)),
-      parent_(std::move(rhs.parent_)),
-      leaves_(std::move(rhs.leaves_)),
       in_inheritance_relationship_(std::move(rhs.in_inheritance_relationship_)),
+      root_parents_(std::move(rhs.root_parents_)),
+      parents_(std::move(rhs.parents_)),
+      leaves_(std::move(rhs.leaves_)),
       transparent_associations_(std::move(rhs.transparent_associations_)),
       opaque_associations_(std::move(rhs.opaque_associations_)),
       base_visitor_(std::move(rhs.base_visitor_)),
@@ -151,10 +151,10 @@ object::object(
     const bool is_child,
     const bool is_leaf,
     const bool is_final,
-    const boost::optional<dogen::yarn::name>& root_parent,
-    const boost::optional<dogen::yarn::name>& parent,
-    const std::list<dogen::yarn::name>& leaves,
     const bool in_inheritance_relationship,
+    const std::list<dogen::yarn::name>& root_parents,
+    const std::list<dogen::yarn::name>& parents,
+    const std::list<dogen::yarn::name>& leaves,
     const std::list<dogen::yarn::name>& transparent_associations,
     const std::list<dogen::yarn::name>& opaque_associations,
     const boost::optional<dogen::yarn::name>& base_visitor,
@@ -184,10 +184,10 @@ object::object(
       is_child_(is_child),
       is_leaf_(is_leaf),
       is_final_(is_final),
-      root_parent_(root_parent),
-      parent_(parent),
-      leaves_(leaves),
       in_inheritance_relationship_(in_inheritance_relationship),
+      root_parents_(root_parents),
+      parents_(parents),
+      leaves_(leaves),
       transparent_associations_(transparent_associations),
       opaque_associations_(opaque_associations),
       base_visitor_(base_visitor),
@@ -237,10 +237,10 @@ void object::to_stream(std::ostream& s) const {
       << "\"is_child\": " << is_child_ << ", "
       << "\"is_leaf\": " << is_leaf_ << ", "
       << "\"is_final\": " << is_final_ << ", "
-      << "\"root_parent\": " << root_parent_ << ", "
-      << "\"parent\": " << parent_ << ", "
-      << "\"leaves\": " << leaves_ << ", "
       << "\"in_inheritance_relationship\": " << in_inheritance_relationship_ << ", "
+      << "\"root_parents\": " << root_parents_ << ", "
+      << "\"parents\": " << parents_ << ", "
+      << "\"leaves\": " << leaves_ << ", "
       << "\"transparent_associations\": " << transparent_associations_ << ", "
       << "\"opaque_associations\": " << opaque_associations_ << ", "
       << "\"base_visitor\": " << base_visitor_ << ", "
@@ -268,10 +268,10 @@ void object::swap(object& other) noexcept {
     swap(is_child_, other.is_child_);
     swap(is_leaf_, other.is_leaf_);
     swap(is_final_, other.is_final_);
-    swap(root_parent_, other.root_parent_);
-    swap(parent_, other.parent_);
-    swap(leaves_, other.leaves_);
     swap(in_inheritance_relationship_, other.in_inheritance_relationship_);
+    swap(root_parents_, other.root_parents_);
+    swap(parents_, other.parents_);
+    swap(leaves_, other.leaves_);
     swap(transparent_associations_, other.transparent_associations_);
     swap(opaque_associations_, other.opaque_associations_);
     swap(base_visitor_, other.base_visitor_);
@@ -302,10 +302,10 @@ bool object::operator==(const object& rhs) const {
         is_child_ == rhs.is_child_ &&
         is_leaf_ == rhs.is_leaf_ &&
         is_final_ == rhs.is_final_ &&
-        root_parent_ == rhs.root_parent_ &&
-        parent_ == rhs.parent_ &&
-        leaves_ == rhs.leaves_ &&
         in_inheritance_relationship_ == rhs.in_inheritance_relationship_ &&
+        root_parents_ == rhs.root_parents_ &&
+        parents_ == rhs.parents_ &&
+        leaves_ == rhs.leaves_ &&
         transparent_associations_ == rhs.transparent_associations_ &&
         opaque_associations_ == rhs.opaque_associations_ &&
         base_visitor_ == rhs.base_visitor_ &&
@@ -421,36 +421,44 @@ void object::is_final(const bool v) {
     is_final_ = v;
 }
 
-const boost::optional<dogen::yarn::name>& object::root_parent() const {
-    return root_parent_;
+bool object::in_inheritance_relationship() const {
+    return in_inheritance_relationship_;
 }
 
-boost::optional<dogen::yarn::name>& object::root_parent() {
-    return root_parent_;
+void object::in_inheritance_relationship(const bool v) {
+    in_inheritance_relationship_ = v;
 }
 
-void object::root_parent(const boost::optional<dogen::yarn::name>& v) {
-    root_parent_ = v;
+const std::list<dogen::yarn::name>& object::root_parents() const {
+    return root_parents_;
 }
 
-void object::root_parent(const boost::optional<dogen::yarn::name>&& v) {
-    root_parent_ = std::move(v);
+std::list<dogen::yarn::name>& object::root_parents() {
+    return root_parents_;
 }
 
-const boost::optional<dogen::yarn::name>& object::parent() const {
-    return parent_;
+void object::root_parents(const std::list<dogen::yarn::name>& v) {
+    root_parents_ = v;
 }
 
-boost::optional<dogen::yarn::name>& object::parent() {
-    return parent_;
+void object::root_parents(const std::list<dogen::yarn::name>&& v) {
+    root_parents_ = std::move(v);
 }
 
-void object::parent(const boost::optional<dogen::yarn::name>& v) {
-    parent_ = v;
+const std::list<dogen::yarn::name>& object::parents() const {
+    return parents_;
 }
 
-void object::parent(const boost::optional<dogen::yarn::name>&& v) {
-    parent_ = std::move(v);
+std::list<dogen::yarn::name>& object::parents() {
+    return parents_;
+}
+
+void object::parents(const std::list<dogen::yarn::name>& v) {
+    parents_ = v;
+}
+
+void object::parents(const std::list<dogen::yarn::name>&& v) {
+    parents_ = std::move(v);
 }
 
 const std::list<dogen::yarn::name>& object::leaves() const {
@@ -467,14 +475,6 @@ void object::leaves(const std::list<dogen::yarn::name>& v) {
 
 void object::leaves(const std::list<dogen::yarn::name>&& v) {
     leaves_ = std::move(v);
-}
-
-bool object::in_inheritance_relationship() const {
-    return in_inheritance_relationship_;
-}
-
-void object::in_inheritance_relationship(const bool v) {
-    in_inheritance_relationship_ = v;
 }
 
 const std::list<dogen::yarn::name>& object::transparent_associations() const {

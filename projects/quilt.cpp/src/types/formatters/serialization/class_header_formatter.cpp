@@ -102,8 +102,8 @@ format(const context& ctx, const yarn::element& e) const {
         const auto qn(a.get_qualified_name(o.name()));
         auto sbf(a.make_scoped_boilerplate_formatter());
 
-        if (!o.is_parent() && o.parent()) {
-            const auto& pn(*o.parent());
+        if (!o.is_parent() && !o.parents().empty()) {
+            const auto& pn(o.parents().front());
             const auto pqn(a.get_qualified_name(pn));
 a.stream() << "namespace boost {" << std::endl;
 a.stream() << std::endl;

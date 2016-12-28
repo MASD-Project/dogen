@@ -99,9 +99,11 @@
         "simple_name": "class_derived"
       },
       "meta_type": "object",
-      "parent": {
-        "simple_name": "class_base"
-      },
+      "parents": [
+        {
+          "simple_name": "class_base"
+        }
+      ],
       "attributes": [
         {
           "simple_name": "prop_1",

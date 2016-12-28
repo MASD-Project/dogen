@@ -52,6 +52,7 @@ private:
 
 private:
     void dehydrate_name(const name& n, std::ostream& s) const;
+    void dehydrate_names(const std::list<name>& names, std::ostream& s) const;
     void dehydrate_annotations(const intermediate_model& im,
         const std::string& id, std::ostream& s) const;
     void dehydrate_element(const intermediate_model& im, const element& e,

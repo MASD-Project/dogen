@@ -98,7 +98,7 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
     const auto carch(traits::canonical_archetype());
     builder.add(o.transparent_associations(), carch);
     builder.add(o.opaque_associations(), carch);
-    builder.add(o.parent(), carch);
+    builder.add(o.parents(), carch);
     builder.add(o.leaves(), carch);
 
     return builder.build();
@@ -138,7 +138,7 @@ a.stream() << sn << "_generator::" << sn << "_generator() : position_(0) { }" <<
              * Populate method.
              */
             if (!o.is_immutable()) {
-                bool no_args(o.local_attributes().empty() && !o.parent());
+                bool no_args(o.local_attributes().empty() && o.parents().empty());
                 if (no_args) {
 a.stream() << std::endl;
 a.stream() << "void " << sn << "_generator::" << std::endl;
@@ -149,8 +149,8 @@ a.stream() << "void " << sn << "_generator::" << std::endl;
 a.stream() << "populate(const unsigned int position, result_type& v) {" << std::endl;
                 }
 
-                if (o.parent()) {
-                    const auto& pn(*o.parent());
+                if (!o.parents().empty()) {
+                    const auto& pn(o.parents().front());
                     const auto pqn(a.get_qualified_name(pn));
 a.stream() << "    " << pqn << "_generator::populate(position, v);" << std::endl;
                 }

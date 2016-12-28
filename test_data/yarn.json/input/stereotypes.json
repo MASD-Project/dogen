@@ -64,9 +64,11 @@
       "stereotypes": [
         "MultipleRefinements"
       ],
-      "parent": {
-        "simple_name": "base_with_concept"
-      }
+      "parents": [
+        {
+          "simple_name": "base_with_concept"
+        }
+      ]
     },
     {
       "name": {

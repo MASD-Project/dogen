@@ -274,8 +274,8 @@ void parent_to_child(const bool attributes_indexed,
     dogen::yarn::object& root_parent,
     const bool add_leaf_relationship = true) {
 
-    child.parent(parent.name());
-    parent.root_parent(root_parent.name());
+    child.parents().push_back(parent.name());
+    parent.root_parents().push_back(root_parent.name());
 
     if (add_leaf_relationship)
         parent.leaves().push_back(child.name());

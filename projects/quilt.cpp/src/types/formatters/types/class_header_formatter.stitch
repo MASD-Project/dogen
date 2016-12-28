@@ -51,7 +51,7 @@ std::list<std::string> class_header_formatter::inclusion_dependencies(
     builder.add(o.opaque_associations(), fwd_arch);
 
     const auto self_arch(class_header_formatter::static_artefact());
-    builder.add(o.parent(), self_arch);
+    builder.add(o.parents(), self_arch);
 
     using hash = formatters::hash::traits;
     const auto hash_carch(hash::traits::canonical_archetype());
@@ -87,12 +87,12 @@ format(const context& ctx, const yarn::element& e) const {
 
 <#+
             a.comment(o.documentation());
-            if (!o.parent()) {
+            if (o.parents().empty()) {
 #>
 class <#= sn #> <#= a.make_final_keyword_text(o) #>{
 <#+
             } else {
-                const auto& pn(*o.parent());
+                const auto& pn(o.parents().front());
                 const auto pqn(a.get_qualified_name(pn));
 #>
 class <#= sn #> <#= a.make_final_keyword_text(o) #>: public <#= pqn #> {
@@ -234,10 +234,10 @@ public:
                 std::string rpn;
                 if (o.derived_visitor()) {
                     bvn = a.get_qualified_name(*o.base_visitor());
-                    rpn = a.get_qualified_name(*o.root_parent());
+                    rpn = a.get_qualified_name(o.root_parents().front());
                 } else {
                     bvn = o.base_visitor()->simple();
-                    rpn = o.root_parent()->simple();
+                    rpn = o.root_parents().front().simple();
                 }
 #>
 public:
@@ -260,7 +260,7 @@ public:
     virtual void to_stream(std::ostream& s) const;
 
 <#+
-                } else if (o.parent()) {
+                } else if (!o.parents().empty()) {
 #>
 public:
     void to_stream(std::ostream& s) const override;
@@ -345,12 +345,12 @@ public:
     virtual bool equals(const <#= sn #>& other) const = 0;
 <#+
                 } else if (o.is_parent()) {
-                    const auto rpn(*o.root_parent());
+                    const auto rpn(o.root_parents().front());
 #>
     virtual bool equals(const <#= a.get_qualified_name(rpn) #>& other) const = 0;
 <#+
-                } else if (o.root_parent()) {
-                    const auto rpn(*o.root_parent());
+                } else if (!o.root_parents().empty()) {
+                    const auto rpn(o.root_parents().front());
 #>
     bool equals(const <#= a.get_qualified_name(rpn) #>& other) const override;
 <#+

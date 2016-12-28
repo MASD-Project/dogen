@@ -133,7 +133,7 @@ void concept_expander::expand_object(object& o, intermediate_model& im,
      * First handle the simpler case of objects that do not have a
      * parent.
      */
-    if (!o.parent()) {
+    if (o.parents().empty()) {
         o.modeled_concepts(expanded_refines);
         BOOST_LOG_SEV(lg, debug) << "Object has no parent, using reduced set.";
         return;
@@ -149,7 +149,7 @@ void concept_expander::expand_object(object& o, intermediate_model& im,
     our_concepts.insert(expanded_refines.begin(), expanded_refines.end());
 
     std::set<name> their_concepts;
-    const auto& n(*o.parent());
+    const auto& n(o.parents().front());
     auto& parent(find_object(n, im));
     expand_object(parent, im, processed_names);
 

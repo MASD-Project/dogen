@@ -45,9 +45,11 @@
         "simple_name": "ChildOfAChild1"
       },
       "meta_type": "object",
-      "parent": {
-        "simple_name": "ThirdChildWithMembers"
-      },
+      "parents": [
+        {
+          "simple_name": "ThirdChildWithMembers"
+        }
+      ],
       "attributes": [
         {
           "simple_name": "Prop2",
@@ -60,9 +62,11 @@
         "simple_name": "ChildOfAChild2"
       },
       "meta_type": "object",
-      "parent": {
-        "simple_name": "ThirdChildWithMembers"
-      },
+      "parents": [
+        {
+          "simple_name": "ThirdChildWithMembers"
+        }
+      ],
       "attributes": [
         {
           "simple_name": "Prop2",
@@ -107,18 +111,22 @@
         "simple_name": "Descendant1"
       },
       "meta_type": "object",
-      "parent": {
-        "simple_name": "Base"
-      }
+      "parents": [
+        {
+          "simple_name": "Base"
+        }
+      ]
     },
     {
       "name": {
         "simple_name": "Descendant2"
       },
       "meta_type": "object",
-      "parent": {
-        "simple_name": "Base"
-      },
+      "parents": [
+        {
+          "simple_name": "Base"
+        }
+      ],
       "attributes": [
         {
           "simple_name": "Prop0",
@@ -131,9 +139,11 @@
         "simple_name": "Descendant3"
       },
       "meta_type": "object",
-      "parent": {
-        "simple_name": "Descendant1"
-      },
+      "parents": [
+        {
+          "simple_name": "Descendant1"
+        }
+      ],
       "attributes": [
         {
           "simple_name": "Prop0",
@@ -244,9 +254,11 @@
       "annotation": {
         "yarn.generalization.is_final": "false"
       },
-      "parent": {
-        "simple_name": "Descendant1"
-      },
+      "parents": [
+        {
+          "simple_name": "Descendant1"
+        }
+      ],
       "attributes": [
         {
           "simple_name": "Prop0",
@@ -360,10 +372,12 @@
         "internal_modules": "Package2"
       },
       "meta_type": "object",
-      "parent": {
-        "simple_name": "Parent",
-        "internal_modules": "Package2"
-      },
+      "parents": [
+        {
+          "simple_name": "Parent",
+          "internal_modules": "Package2"
+        }
+      ],
       "attributes": [
         {
           "simple_name": "Prop1",
@@ -419,10 +433,12 @@
         "internal_modules": "Package4"
       },
       "meta_type": "object",
-      "parent": {
-        "simple_name": "Parent",
-        "internal_modules": "Package3"
-      },
+      "parents": [
+        {
+          "simple_name": "Parent",
+          "internal_modules": "Package3"
+        }
+      ],
       "attributes": [
         {
           "simple_name": "Prop1",
@@ -452,9 +468,11 @@
         "internal_modules": "Package5"
       },
       "meta_type": "object",
-      "parent": {
-        "simple_name": "ParentOutside"
-      },
+      "parents": [
+        {
+          "simple_name": "ParentOutside"
+        }
+      ],
       "attributes": [
         {
           "simple_name": "Prop1",
@@ -580,18 +598,22 @@
         "simple_name": "SecondChildWithoutMembers"
       },
       "meta_type": "object",
-      "parent": {
-        "simple_name": "ParentWithMembers"
-      }
+      "parents": [
+        {
+          "simple_name": "ParentWithMembers"
+        }
+      ]
     },
     {
       "name": {
         "simple_name": "ThirdChildWithMembers"
       },
       "meta_type": "object",
-      "parent": {
-        "simple_name": "ParentWithMembers"
-      },
+      "parents": [
+        {
+          "simple_name": "ParentWithMembers"
+        }
+      ],
       "attributes": [
         {
           "simple_name": "Prop1",

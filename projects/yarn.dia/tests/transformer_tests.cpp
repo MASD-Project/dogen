@@ -114,7 +114,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_no_stereotype_transforms_into_expected_value
     BOOST_LOG_SEV(lg, debug) << "Object: " << o;
 
     BOOST_CHECK(o.name().simple() == po.name());
-    BOOST_CHECK(!o.parent());
+    BOOST_REQUIRE(o.parents().empty());
     BOOST_REQUIRE(o.name().location().model_modules().size() == 1);
     BOOST_CHECK(o.name().location().model_modules().front() == model_name);
     BOOST_CHECK(o.local_attributes().empty());
@@ -198,7 +198,7 @@ BOOST_AUTO_TEST_CASE(uml_class_in_package_transforms_into_expected_elements) {
     BOOST_LOG_SEV(lg, debug) << "Object: " << o;
 
     BOOST_CHECK(o.name().simple() == pos[1].name());
-    BOOST_CHECK(!o.parent());
+    BOOST_REQUIRE(o.parents().empty());
     BOOST_REQUIRE(o.name().location().model_modules().size() == 1);
     BOOST_CHECK(o.name().location().model_modules().front() == model_name);
     BOOST_CHECK(o.local_attributes().empty());
@@ -452,7 +452,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_inheritance_results_in_expected_object) {
     const auto p(t.to_object(pos[1]));
     BOOST_LOG_SEV(lg, debug) << "Parent: " << p;
 
-    BOOST_CHECK(!p.parent());
+    BOOST_REQUIRE(p.parents().empty());
     BOOST_CHECK(p.name().simple() == pos[1].name());
     BOOST_REQUIRE(p.name().location().model_modules().size() == 1);
     BOOST_CHECK(p.name().location().model_modules().front() == model_name);
@@ -465,8 +465,8 @@ BOOST_AUTO_TEST_CASE(uml_class_with_inheritance_results_in_expected_object) {
 
     const auto c(t.to_object(pos[2]));
     BOOST_LOG_SEV(lg, debug) << "Child: " << c;
-    BOOST_REQUIRE(c.parent());
-    BOOST_CHECK(c.parent() == p.name());
+    BOOST_REQUIRE(c.parents().size() == 1);
+    BOOST_CHECK(c.parents().front() == p.name());
     BOOST_CHECK(c.name().simple() == pos[2].name());
     BOOST_REQUIRE(c.name().location().model_modules().size() == 1);
     BOOST_CHECK(c.name().location().model_modules().front() == model_name);
@@ -485,7 +485,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_one_attribute_transforms_into_object_with_on
     const auto o(t.to_object(po));
     BOOST_LOG_SEV(lg, debug) << "Object: " << o;
 
-    BOOST_CHECK(!o.parent());
+    BOOST_REQUIRE(o.parents().empty());
     BOOST_CHECK(o.name().simple() == po.name());
     BOOST_REQUIRE(o.name().location().model_modules().size() == 1);
     BOOST_CHECK(o.name().location().model_modules().front() == model_name);

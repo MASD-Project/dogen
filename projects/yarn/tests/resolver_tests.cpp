@@ -188,8 +188,8 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_the_same_model_resolves_successfully)
             found = true;
 
             const auto& o(pair.second);
-            BOOST_REQUIRE(o.parent());
-            const auto pn(*o.parent());
+            BOOST_REQUIRE(o.parents().size() == 1);
+            const auto& pn(o.parents().front());
             BOOST_LOG_SEV(lg, debug) << "parent: " << pn.id();
             BOOST_CHECK(factory.is_type_name_n(1, pn));
             BOOST_CHECK(factory.is_model_n(0, pn));
@@ -220,8 +220,8 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_different_models_resolves_successfull
             found = true;
 
             const auto& o(pair.second);
-            BOOST_REQUIRE(o.parent());
-            const auto pn(*o.parent());
+            BOOST_REQUIRE(o.parents().size() == 1);
+            const auto& pn(o.parents().front());
             BOOST_LOG_SEV(lg, debug) << "parent: " << pn.id();
             BOOST_CHECK(factory.is_type_name_n(1, pn));
             BOOST_CHECK(factory.is_model_n(1, pn));
@@ -252,8 +252,8 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_same_model_resolves_succ
             found_one = true;
 
             const auto& o(pair.second);
-            BOOST_REQUIRE(o.parent());
-            const auto pn(*o.parent());
+            BOOST_REQUIRE(o.parents().size() == 1);
+            const auto& pn(o.parents().front());
             BOOST_LOG_SEV(lg, debug) << "parent: " << pn.id();
             BOOST_CHECK(factory.is_type_name_n(1, pn));
             BOOST_CHECK(factory.is_model_n(0, pn));
@@ -262,8 +262,8 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_same_model_resolves_succ
             found_two = true;
 
             const auto& o(pair.second);
-            BOOST_REQUIRE(o.parent());
-            const auto pn(*o.parent());
+            BOOST_REQUIRE(o.parents().size() == 1);
+            const auto& pn(o.parents().front());
             BOOST_LOG_SEV(lg, debug) << "parent: " << pn.id();
             BOOST_CHECK(factory.is_type_name_n(2, pn));
             BOOST_CHECK(factory.is_model_n(0, pn));
@@ -311,8 +311,8 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_different_models_resolve
             found = true;
 
             const auto& o(pair.second);
-            BOOST_REQUIRE(o.parent());
-            const auto pn(*o.parent());
+            BOOST_REQUIRE(o.parents().size() == 1);
+            const auto& pn(o.parents().front());
             BOOST_LOG_SEV(lg, debug) << "parent: " << pn.id();
             BOOST_CHECK(factory.is_type_name_n(1, pn));
             BOOST_CHECK(factory.is_model_n(1, pn));

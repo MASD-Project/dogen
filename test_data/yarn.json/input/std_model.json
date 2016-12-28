@@ -216,9 +216,11 @@
         "simple_name": "derived"
       },
       "meta_type": "object",
-      "parent": {
-        "simple_name": "base"
-      },
+      "parents": [
+        {
+          "simple_name": "base"
+        }
+      ],
       "attributes": [
         {
           "simple_name": "prop_1",

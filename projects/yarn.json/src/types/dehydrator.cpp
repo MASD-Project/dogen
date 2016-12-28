@@ -72,6 +72,20 @@ void dehydrator::dehydrate_name(const name& n, std::ostream& s) const {
     s << " } ";
 }
 
+void dehydrator::
+dehydrate_names(const std::list<name>& names, std::ostream& s) const {
+    s << " [ ";
+    bool is_first(true);
+    for (const auto& n : names) {
+        if (!is_first)
+            s << comma_space;
+
+        dehydrate_name(n, s);
+        is_first = false;
+    }
+    s << " ] ";
+}
+
 void dehydrator::dehydrate_annotations(const intermediate_model& im,
     const std::string& id, std::ostream& s) const {
 
@@ -192,12 +206,11 @@ dehydrate_objects(const intermediate_model& im, std::ostream& s) const {
         const auto& o(pair.second);
         s << " { ";
         dehydrate_element(im, o, "object", s);
-
-        if (o.parent()) {
+        if (!o.parents().empty()) {
             s << comma_space;
-            uf.insert_quoted("parent");
+            uf.insert_quoted("parents");
             s << " : ";
-            dehydrate_name(*o.parent(), s);
+            dehydrate_names(o.parents(), s);
         }
 
         if (!o.local_attributes().empty()) {
@@ -228,16 +241,8 @@ dehydrate_concepts(const intermediate_model& im, std::ostream& s) const {
         if (!c.refines().empty()) {
             s << comma_space;
             uf.insert_quoted("refines");
-            s << " : [ ";
-            bool is_first(true);
-            for (const auto& n : c.refines()) {
-                if (!is_first)
-                    s << comma_space;
-
-                dehydrate_name(n, s);
-                is_first = false;
-            }
-            s << " ] ";
+            s << " : ";
+            dehydrate_names(c.refines(), s);
         }
 
         if (!c.local_attributes().empty()) {

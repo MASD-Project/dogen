@@ -25,18 +25,22 @@
         "simple_name": "child_of_a_child1"
       },
       "meta_type": "object",
-      "parent": {
-        "simple_name": "third_child_with_members"
-      }
+      "parents": [
+        {
+          "simple_name": "third_child_with_members"
+        }
+      ]
     },
     {
       "name": {
         "simple_name": "child_of_a_child2"
       },
       "meta_type": "object",
-      "parent": {
-        "simple_name": "third_child_with_members"
-      },
+      "parents": [
+        {
+          "simple_name": "third_child_with_members"
+        }
+      ],
       "attributes": [
         {
           "simple_name": "prop_2",
@@ -64,9 +68,11 @@
         "simple_name": "child_with_members"
       },
       "meta_type": "object",
-      "parent": {
-        "simple_name": "parent_without_members"
-      },
+      "parents": [
+        {
+          "simple_name": "parent_without_members"
+        }
+      ],
       "attributes": [
         {
           "simple_name": "prop_0",
@@ -79,27 +85,33 @@
         "simple_name": "child_without_members"
       },
       "meta_type": "object",
-      "parent": {
-        "simple_name": "parent_without_members"
-      }
+      "parents": [
+        {
+          "simple_name": "parent_without_members"
+        }
+      ]
     },
     {
       "name": {
         "simple_name": "descendant1"
       },
       "meta_type": "object",
-      "parent": {
-        "simple_name": "base"
-      }
+      "parents": [
+        {
+          "simple_name": "base"
+        }
+      ]
     },
     {
       "name": {
         "simple_name": "descendant2"
       },
       "meta_type": "object",
-      "parent": {
-        "simple_name": "base"
-      },
+      "parents": [
+        {
+          "simple_name": "base"
+        }
+      ],
       "attributes": [
         {
           "simple_name": "prop_0",
@@ -112,9 +124,11 @@
         "simple_name": "descendant3"
       },
       "meta_type": "object",
-      "parent": {
-        "simple_name": "descendant1"
-      },
+      "parents": [
+        {
+          "simple_name": "descendant1"
+        }
+      ],
       "attributes": [
         {
           "simple_name": "prop_0",
@@ -142,9 +156,11 @@
       },
       "meta_type": "object",
       "documentation": "Descendant class for scenario that tests code generated move contructors.\n",
-      "parent": {
-        "simple_name": "move_ctor_base"
-      },
+      "parents": [
+        {
+          "simple_name": "move_ctor_base"
+        }
+      ],
       "attributes": [
         {
           "simple_name": "prop_1",
@@ -159,9 +175,11 @@
       },
       "meta_type": "object",
       "documentation": "Descendant class for scenario that tests code generated move contructors.\n",
-      "parent": {
-        "simple_name": "move_ctor_base"
-      }
+      "parents": [
+        {
+          "simple_name": "move_ctor_base"
+        }
+      ]
     },
     {
       "name": {
@@ -171,9 +189,11 @@
       "annotation": {
         "yarn.generalization.is_final": "false"
       },
-      "parent": {
-        "simple_name": "descendant1"
-      },
+      "parents": [
+        {
+          "simple_name": "descendant1"
+        }
+      ],
       "attributes": [
         {
           "simple_name": "prop_0",
@@ -232,10 +252,12 @@
         "internal_modules": "pkg1"
       },
       "meta_type": "object",
-      "parent": {
-        "simple_name": "parent",
-        "internal_modules": "pkg1"
-      },
+      "parents": [
+        {
+          "simple_name": "parent",
+          "internal_modules": "pkg1"
+        }
+      ],
       "attributes": [
         {
           "simple_name": "prop_1",
@@ -291,10 +313,12 @@
         "internal_modules": "pkg3"
       },
       "meta_type": "object",
-      "parent": {
-        "simple_name": "parent",
-        "internal_modules": "pkg2"
-      },
+      "parents": [
+        {
+          "simple_name": "parent",
+          "internal_modules": "pkg2"
+        }
+      ],
       "attributes": [
         {
           "simple_name": "prop_1",
@@ -324,9 +348,11 @@
         "internal_modules": "pkg4"
       },
       "meta_type": "object",
-      "parent": {
-        "simple_name": "parent_outside"
-      },
+      "parents": [
+        {
+          "simple_name": "parent_outside"
+        }
+      ],
       "attributes": [
         {
           "simple_name": "prop_1",
@@ -355,9 +381,11 @@
         "simple_name": "second_child_without_members"
       },
       "meta_type": "object",
-      "parent": {
-        "simple_name": "parent_with_members"
-      }
+      "parents": [
+        {
+          "simple_name": "parent_with_members"
+        }
+      ]
     },
     {
       "name": {
@@ -382,9 +410,11 @@
         "simple_name": "third_child_with_members"
       },
       "meta_type": "object",
-      "parent": {
-        "simple_name": "parent_with_members"
-      },
+      "parents": [
+        {
+          "simple_name": "parent_with_members"
+        }
+      ],
       "attributes": [
         {
           "simple_name": "prop_1",

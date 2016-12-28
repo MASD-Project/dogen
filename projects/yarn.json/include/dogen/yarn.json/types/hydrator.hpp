@@ -70,6 +70,11 @@ private:
     /**@}*/
 
     /**
+     * @brief Reads a list of names.
+     */
+    std::list<name> read_names(const boost::property_tree::ptree& pt) const;
+
+    /**
      * @brief Reads the stereotypes.
      */
     std::vector<std::string>

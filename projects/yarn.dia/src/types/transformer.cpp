@@ -142,21 +142,12 @@ yarn::object transformer::to_object(const processed_object& po) const {
     const_repository_selector crs(repository_);
     const auto parent_names(crs.parent_names_for_id(po.id()));
     if (!parent_names.empty()) {
-        /*
-         * Ensure we have at most one parent as we do not support
-         * multiple inheritance for objects.
-         */
-        if (parent_names.size() > 1) {
-            BOOST_LOG_SEV(lg, error) << multiple_inheritance
-                                     << po.id();
-            BOOST_THROW_EXCEPTION(transformation_error(multiple_inheritance +
-                    po.id()));
-        }
+        for (const auto& pn : parent_names) {
+            r.parents().push_back(pn);
 
-        const auto parent_name(parent_names.front());
-        r.parent(parent_name);
-        BOOST_LOG_SEV(lg, debug) << "Set parent. Child: " << r.name().id()
-                                 << " parent: " << parent_name.id();
+            BOOST_LOG_SEV(lg, debug) << "Added parent. Child: " << r.name().id()
+                                     << " parent: " << pn.id();
+        }
     } else
         BOOST_LOG_SEV(lg, debug) << "Object has no parent: " << r.name().id();
 

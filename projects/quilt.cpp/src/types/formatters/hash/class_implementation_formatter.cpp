@@ -98,7 +98,7 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
 
     builder.add(o.transparent_associations(), carch);
     builder.add(o.opaque_associations(), carch);
-    builder.add(o.parent(), carch);
+    builder.add(o.parents(), carch);
 
     return builder.build();
 }
@@ -114,7 +114,7 @@ format(const context& ctx, const yarn::element& e) const {
 a.stream() << std::endl;
 a.stream() << "namespace {" << std::endl;
 a.stream() << std::endl;
-        if (!o.local_attributes().empty() || o.parent()) {
+        if (!o.local_attributes().empty() || !o.parents().empty()) {
 a.stream() << "template <typename HashableType>" << std::endl;
 a.stream() << "inline void combine(std::size_t& seed, const HashableType& value) {" << std::endl;
 a.stream() << "    std::hash<HashableType> hasher;" << std::endl;
@@ -133,11 +133,11 @@ a.stream() << std::endl;
             const auto qn(a.get_qualified_name(o.name()));
 
 a.stream() << std::endl;
-a.stream() << "std::size_t " << sn << "_hasher::hash(const " << sn << "&" << ((o.local_attributes().empty() && !o.parent()) ? "" : " v") << ") {" << std::endl;
+a.stream() << "std::size_t " << sn << "_hasher::hash(const " << sn << "&" << ((o.local_attributes().empty() && o.parents().empty()) ? "" : " v") << ") {" << std::endl;
 a.stream() << "    std::size_t seed(0);" << std::endl;
-            if (o.parent()) {
+            if (!o.parents().empty()) {
 a.stream() << std::endl;
-                const auto& pn(*o.parent());
+                const auto& pn(o.parents().front());
                 const auto pqn(a.get_qualified_name(pn));
 a.stream() << "    combine(seed, dynamic_cast<const " << pqn << "&>(v));" << std::endl;
             }

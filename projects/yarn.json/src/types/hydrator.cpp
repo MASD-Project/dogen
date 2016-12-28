@@ -47,7 +47,7 @@ const std::string is_default_enumeration_type_key(
 const std::string is_floating_point_key("is_floating_point");
 const std::string in_global_module_key("in_global_module");
 const std::string name_key("name");
-const std::string parent_key("parent");
+const std::string parents_key("parents");
 const std::string refines_key("refines");
 const std::string model_name_key("model_name");
 const std::string bool_true("true");
@@ -187,6 +187,16 @@ name hydrator::read_name(const boost::property_tree::ptree& pt,
     return r;
 }
 
+std::list<name>
+hydrator::read_names(const boost::property_tree::ptree& pt) const {
+    std::list<name> r;
+    for (auto i(pt.begin()); i != pt.end(); ++i) {
+        const auto& apt(i->second);
+        r.push_back(read_name(apt));
+    }
+    return r;
+}
+
 std::string
 hydrator::read_documentation(const boost::property_tree::ptree& pt) const {
     const auto opt(pt.get_optional<std::string>(documentation_key));
@@ -265,9 +275,9 @@ void hydrator::read_element(const boost::property_tree::ptree& pt,
         if (i != pt.not_found())
             o.local_attributes(read_attributes(i->second));
 
-        i = pt.find(parent_key);
+        i = pt.find(parents_key);
         if (i != pt.not_found())
-            o.parent(read_name(i->second));
+            o.parents(read_names(i->second));
 
         const auto pair(std::make_pair(n.id(), o));
         const bool inserted(im.objects().insert(pair).second);

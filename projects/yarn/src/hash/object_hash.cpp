@@ -50,6 +50,14 @@ inline std::size_t hash_std_unordered_map_dogen_yarn_name_std_list_dogen_yarn_at
     return seed;
 }
 
+inline std::size_t hash_std_list_dogen_yarn_name(const std::list<dogen::yarn::name>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
+}
+
 inline std::size_t hash_boost_optional_dogen_yarn_name(const boost::optional<dogen::yarn::name>& v) {
     std::size_t seed(0);
 
@@ -57,14 +65,6 @@ inline std::size_t hash_boost_optional_dogen_yarn_name(const boost::optional<dog
         return seed;
 
     combine(seed, *v);
-    return seed;
-}
-
-inline std::size_t hash_std_list_dogen_yarn_name(const std::list<dogen::yarn::name>& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
     return seed;
 }
 
@@ -87,10 +87,10 @@ std::size_t object_hasher::hash(const object& v) {
     combine(seed, v.is_child());
     combine(seed, v.is_leaf());
     combine(seed, v.is_final());
-    combine(seed, hash_boost_optional_dogen_yarn_name(v.root_parent()));
-    combine(seed, hash_boost_optional_dogen_yarn_name(v.parent()));
-    combine(seed, hash_std_list_dogen_yarn_name(v.leaves()));
     combine(seed, v.in_inheritance_relationship());
+    combine(seed, hash_std_list_dogen_yarn_name(v.root_parents()));
+    combine(seed, hash_std_list_dogen_yarn_name(v.parents()));
+    combine(seed, hash_std_list_dogen_yarn_name(v.leaves()));
     combine(seed, hash_std_list_dogen_yarn_name(v.transparent_associations()));
     combine(seed, hash_std_list_dogen_yarn_name(v.opaque_associations()));
     combine(seed, hash_boost_optional_dogen_yarn_name(v.base_visitor()));

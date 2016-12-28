@@ -36,7 +36,7 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
 
     builder.add(o.transparent_associations(), carch);
     builder.add(o.opaque_associations(), carch);
-    builder.add(o.parent(), carch);
+    builder.add(o.parents(), carch);
 
     return builder.build();
 }
@@ -54,7 +54,7 @@ format(const context& ctx, const yarn::element& e) const {
 namespace {
 
 <#+
-        if (!o.local_attributes().empty() || o.parent()) {
+        if (!o.local_attributes().empty() || !o.parents().empty()) {
 #>
 template <typename HashableType>
 inline void combine(std::size_t& seed, const HashableType& value) {
@@ -78,14 +78,14 @@ inline void combine(std::size_t& seed, const HashableType& value) {
 
 #>
 
-std::size_t <#= sn #>_hasher::hash(const <#= sn #>&<#= ((o.local_attributes().empty() && !o.parent()) ? "" : " v") #>) {
+std::size_t <#= sn #>_hasher::hash(const <#= sn #>&<#= ((o.local_attributes().empty() && o.parents().empty()) ? "" : " v") #>) {
     std::size_t seed(0);
 <#+
-            if (o.parent()) {
+            if (!o.parents().empty()) {
 #>
 
 <#+
-                const auto& pn(*o.parent());
+                const auto& pn(o.parents().front());
                 const auto pqn(a.get_qualified_name(pn));
 #>
     combine(seed, dynamic_cast<const <#= pqn #>&>(v));

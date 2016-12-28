@@ -84,7 +84,7 @@ a.stream() << std::endl;
             if (!o.in_inheritance_relationship() || !o.is_child()) {
 a.stream() << "    public " << a.make_inheritance_keyword_text(o) << "class " << sn << std::endl;
             } else {
-                const auto& pn(*o.parent());
+                const auto& pn(o.parents().front());
                 const auto pqn(a.get_qualified_name(pn));
 a.stream() << "    public " << a.make_inheritance_keyword_text(o) << "class " << sn << " : " << pqn << std::endl;
             }
@@ -126,7 +126,7 @@ a.stream() << "            " << a.get_qualified_name(attr.parsed_type()) << " " 
                     }
                 }
 
-                if (o.parent()) {
+                if (!o.parents().empty()) {
                     const auto& pair(*o.inherited_attributes().begin());
                     const auto& pattrs(pair.second);
                     const auto size(pattrs.size());
@@ -170,13 +170,13 @@ a.stream() << "            if (obj.GetType() != GetType()) return false;" << std
 a.stream() << std::endl;
 a.stream() << "            var value = obj as " << sn << ";" << std::endl;
             if (o.local_attributes().empty()) {
-                if (o.parent()) {
+                if (!o.parents().empty()) {
 a.stream() << "            return (value != null && base.Equals(value));" << std::endl;
                 } else {
 a.stream() << "            return value != null;" << std::endl;
                 }
             } else {
-                if (o.parent()) {
+                if (!o.parents().empty()) {
 a.stream() << "            if (value == null || !base.Equals(value)) return false;" << std::endl;
                 } else {
 a.stream() << "            if (value == null) return false;" << std::endl;

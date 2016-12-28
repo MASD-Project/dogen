@@ -372,17 +372,19 @@
 				<is_child>0</is_child>
 				<is_leaf>0</is_leaf>
 				<is_final>0</is_final>
-				<root_parent>
-					<initialized>0</initialized>
-				</root_parent>
-				<parent>
-					<initialized>0</initialized>
-				</parent>
+				<in_inheritance_relationship>0</in_inheritance_relationship>
+				<root_parents>
+					<count>0</count>
+					<item_version>0</item_version>
+				</root_parents>
+				<parents>
+					<count>0</count>
+					<item_version>0</item_version>
+				</parents>
 				<leaves>
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<in_inheritance_relationship>0</in_inheritance_relationship>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -582,17 +584,19 @@
 				<is_child>0</is_child>
 				<is_leaf>0</is_leaf>
 				<is_final>0</is_final>
-				<root_parent>
-					<initialized>0</initialized>
-				</root_parent>
-				<parent>
-					<initialized>0</initialized>
-				</parent>
+				<in_inheritance_relationship>0</in_inheritance_relationship>
+				<root_parents>
+					<count>0</count>
+					<item_version>0</item_version>
+				</root_parents>
+				<parents>
+					<count>0</count>
+					<item_version>0</item_version>
+				</parents>
 				<leaves>
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<in_inheritance_relationship>0</in_inheritance_relationship>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -792,13 +796,15 @@
 				<is_child>0</is_child>
 				<is_leaf>0</is_leaf>
 				<is_final>0</is_final>
-				<root_parent>
-					<initialized>0</initialized>
-				</root_parent>
-				<parent>
-					<initialized>1</initialized>
+				<in_inheritance_relationship>0</in_inheritance_relationship>
+				<root_parents>
+					<count>0</count>
 					<item_version>0</item_version>
-					<value>
+				</root_parents>
+				<parents>
+					<count>1</count>
+					<item_version>0</item_version>
+					<item>
 						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;boost_model&gt;&lt;class_base&gt;</id>
 						<simple>class_base</simple>
 						<qualified>
@@ -832,13 +838,12 @@
 							<element></element>
 						</location>
 						<identifiable>dogen_test_models_boost_model_class_base</identifiable>
-					</value>
-				</parent>
+					</item>
+				</parents>
 				<leaves>
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<in_inheritance_relationship>0</in_inheritance_relationship>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -1038,17 +1043,19 @@
 				<is_child>0</is_child>
 				<is_leaf>0</is_leaf>
 				<is_final>0</is_final>
-				<root_parent>
-					<initialized>0</initialized>
-				</root_parent>
-				<parent>
-					<initialized>0</initialized>
-				</parent>
+				<in_inheritance_relationship>0</in_inheritance_relationship>
+				<root_parents>
+					<count>0</count>
+					<item_version>0</item_version>
+				</root_parents>
+				<parents>
+					<count>0</count>
+					<item_version>0</item_version>
+				</parents>
 				<leaves>
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<in_inheritance_relationship>0</in_inheritance_relationship>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -1339,17 +1346,19 @@
 				<is_child>0</is_child>
 				<is_leaf>0</is_leaf>
 				<is_final>0</is_final>
-				<root_parent>
-					<initialized>0</initialized>
-				</root_parent>
-				<parent>
-					<initialized>0</initialized>
-				</parent>
+				<in_inheritance_relationship>0</in_inheritance_relationship>
+				<root_parents>
+					<count>0</count>
+					<item_version>0</item_version>
+				</root_parents>
+				<parents>
+					<count>0</count>
+					<item_version>0</item_version>
+				</parents>
 				<leaves>
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<in_inheritance_relationship>0</in_inheritance_relationship>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -2077,17 +2086,19 @@
 				<is_child>0</is_child>
 				<is_leaf>0</is_leaf>
 				<is_final>0</is_final>
-				<root_parent>
-					<initialized>0</initialized>
-				</root_parent>
-				<parent>
-					<initialized>0</initialized>
-				</parent>
+				<in_inheritance_relationship>0</in_inheritance_relationship>
+				<root_parents>
+					<count>0</count>
+					<item_version>0</item_version>
+				</root_parents>
+				<parents>
+					<count>0</count>
+					<item_version>0</item_version>
+				</parents>
 				<leaves>
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<in_inheritance_relationship>0</in_inheritance_relationship>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -2551,17 +2562,19 @@
 				<is_child>0</is_child>
 				<is_leaf>0</is_leaf>
 				<is_final>0</is_final>
-				<root_parent>
-					<initialized>0</initialized>
-				</root_parent>
-				<parent>
-					<initialized>0</initialized>
-				</parent>
+				<in_inheritance_relationship>0</in_inheritance_relationship>
+				<root_parents>
+					<count>0</count>
+					<item_version>0</item_version>
+				</root_parents>
+				<parents>
+					<count>0</count>
+					<item_version>0</item_version>
+				</parents>
 				<leaves>
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<in_inheritance_relationship>0</in_inheritance_relationship>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -3025,17 +3038,19 @@
 				<is_child>0</is_child>
 				<is_leaf>0</is_leaf>
 				<is_final>0</is_final>
-				<root_parent>
-					<initialized>0</initialized>
-				</root_parent>
-				<parent>
-					<initialized>0</initialized>
-				</parent>
+				<in_inheritance_relationship>0</in_inheritance_relationship>
+				<root_parents>
+					<count>0</count>
+					<item_version>0</item_version>
+				</root_parents>
+				<parents>
+					<count>0</count>
+					<item_version>0</item_version>
+				</parents>
 				<leaves>
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<in_inheritance_relationship>0</in_inheritance_relationship>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -3236,17 +3251,19 @@
 				<is_child>0</is_child>
 				<is_leaf>0</is_leaf>
 				<is_final>0</is_final>
-				<root_parent>
-					<initialized>0</initialized>
-				</root_parent>
-				<parent>
-					<initialized>0</initialized>
-				</parent>
+				<in_inheritance_relationship>0</in_inheritance_relationship>
+				<root_parents>
+					<count>0</count>
+					<item_version>0</item_version>
+				</root_parents>
+				<parents>
+					<count>0</count>
+					<item_version>0</item_version>
+				</parents>
 				<leaves>
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<in_inheritance_relationship>0</in_inheritance_relationship>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -3534,17 +3551,19 @@
 				<is_child>0</is_child>
 				<is_leaf>0</is_leaf>
 				<is_final>0</is_final>
-				<root_parent>
-					<initialized>0</initialized>
-				</root_parent>
-				<parent>
-					<initialized>0</initialized>
-				</parent>
+				<in_inheritance_relationship>0</in_inheritance_relationship>
+				<root_parents>
+					<count>0</count>
+					<item_version>0</item_version>
+				</root_parents>
+				<parents>
+					<count>0</count>
+					<item_version>0</item_version>
+				</parents>
 				<leaves>
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<in_inheritance_relationship>0</in_inheritance_relationship>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -4184,17 +4203,19 @@
 				<is_child>0</is_child>
 				<is_leaf>0</is_leaf>
 				<is_final>0</is_final>
-				<root_parent>
-					<initialized>0</initialized>
-				</root_parent>
-				<parent>
-					<initialized>0</initialized>
-				</parent>
+				<in_inheritance_relationship>0</in_inheritance_relationship>
+				<root_parents>
+					<count>0</count>
+					<item_version>0</item_version>
+				</root_parents>
+				<parents>
+					<count>0</count>
+					<item_version>0</item_version>
+				</parents>
 				<leaves>
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<in_inheritance_relationship>0</in_inheritance_relationship>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>

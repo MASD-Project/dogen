@@ -31,7 +31,7 @@ std::list<std::string> class_header_formatter::inclusion_dependencies(
     builder.add(o.opaque_associations(), carch);
 
     const auto self_fn(class_header_formatter::static_artefact());
-    builder.add(o.parent(), self_fn);
+    builder.add(o.parents(), self_fn);
 
     return builder.build();
 }

@@ -83,7 +83,7 @@ a.stream() << std::endl;
             const auto ns(a.make_namespaces(e.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
             const bool has_attributes(!o.all_attributes().empty());
-            const bool is_parent_or_has_attributes(o.parent() || has_attributes);
+            const bool is_parent_or_has_attributes(!o.parents().empty() || has_attributes);
 
 a.stream() << "    /// <summary>" << std::endl;
 a.stream() << "    /// Generates sequences of " << sn << "." << std::endl;
@@ -96,8 +96,8 @@ a.stream() << "        {" << std::endl;
 a.stream() << "            // nothing to populate" << std::endl;
                 } else {
                     unsigned int count(0);
-                    if (o.parent()) {
-                        const auto& pn(*o.parent());
+                    if (!o.parents().empty()) {
+                        const auto& pn(o.parents().front());
                         const auto pqn(a.get_qualified_name(pn));
 a.stream() << "            " << pqn << "SequenceGenerator.Populate(value, position);" << std::endl;
                     }

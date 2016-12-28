@@ -37,7 +37,7 @@ using System;
     public <#= a.make_inheritance_keyword_text(o) #>class <#= sn #>
 <#+
             } else {
-                const auto& pn(*o.parent());
+                const auto& pn(o.parents().front());
                 const auto pqn(a.get_qualified_name(pn));
 #>
     public <#= a.make_inheritance_keyword_text(o) #>class <#= sn #> : <#= pqn #>
@@ -97,7 +97,7 @@ using System;
                     }
                 }
 
-                if (o.parent()) {
+                if (!o.parents().empty()) {
                     const auto& pair(*o.inherited_attributes().begin());
                     const auto& pattrs(pair.second);
                     const auto size(pattrs.size());
@@ -161,7 +161,7 @@ using System;
             var value = obj as <#= sn #>;
 <#+
             if (o.local_attributes().empty()) {
-                if (o.parent()) {
+                if (!o.parents().empty()) {
 #>
             return (value != null && base.Equals(value));
 <#+
@@ -171,7 +171,7 @@ using System;
 <#+
                 }
             } else {
-                if (o.parent()) {
+                if (!o.parents().empty()) {
 #>
             if (value == null || !base.Equals(value)) return false;
 <#+

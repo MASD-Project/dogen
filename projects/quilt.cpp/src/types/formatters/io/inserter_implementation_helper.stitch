@@ -20,18 +20,18 @@ void inserter_implementation_helper(
 <#+
     }
 
-    const bool no_parent_and_no_attributes(!o.parent() &&
+    const bool no_parent_and_no_attributes(o.parents().empty() &&
         o.all_attributes().empty());
 #>
     s << " { "
       << "\"__type__\": " << "\"<#= qn #>\""<#= (no_parent_and_no_attributes ? " << \" }\";" : " << \", \"") #>
 <#+
 
-    dogen::formatters::sequence_formatter sf(o.parent() ? 1 : 0);
+    dogen::formatters::sequence_formatter sf(o.parents().size());
     sf.prefix_configuration().first("  << ").not_first("s << ");
     sf.element_separator("");
-    if (o.parent()) {
-        const auto& pn(*o.parent());
+    if (!o.parents().empty()) {
+        const auto& pn(o.parents().front());
         const auto pqn(a.get_qualified_name(pn));
 #>
     <#= sf.prefix() #>"\"__parent_<#= sf.current_position() #>__\": "<#= sf.postfix() #>;
@@ -42,7 +42,7 @@ void inserter_implementation_helper(
 
     sf.reset(o.local_attributes().size());
 
-    if (o.parent())
+    if (!o.parents().empty())
         sf.prefix_configuration().first("s << \", \"\n      ");
     else
         sf.prefix_configuration().first("  ");

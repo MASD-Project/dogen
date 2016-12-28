@@ -53,7 +53,7 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
     const auto io_carch(io::traits::canonical_archetype());
     builder.add(o.transparent_associations(), io_carch);
     builder.add(o.opaque_associations(), io_carch);
-    builder.add(o.parent(), io_carch);
+    builder.add(o.parents(), io_carch);
 
     if (o.is_visitation_leaf()) {
         /*
@@ -127,13 +127,13 @@ format(const context& ctx, const yarn::element& e) const {
 
 <#= sn #>::<#= sn #>(<#= sn #>&& rhs)
 <#+
-                unsigned int size((o.parent() ? 1 : 0) + o.local_attributes().size());
+                unsigned int size(o.parents().size() + o.local_attributes().size());
 
                 dogen::formatters::sequence_formatter sf(size);
                 sf.prefix_configuration().first(": ").not_first("  ");
                 sf.postfix_configuration().last(" { }");
-                if (o.parent()) {
-                    const auto& pn(*o.parent());
+                if (!o.parents().empty()) {
+                    const auto& pn(o.parents().front());
                     const auto pqn(a.get_qualified_name(pn));
 #>
     <#= sf.prefix() #><#= pqn #>(
@@ -177,7 +177,7 @@ format(const context& ctx, const yarn::element& e) const {
                     }
                 }
 
-                int sequence_size(o.local_attributes().size() + (o.parent() ? 1 : 0));
+                int sequence_size(o.local_attributes().size() + o.parents().size());
                 for (const auto pair : o.inherited_attributes()) {
                     const auto& pattrs(pair.second);
                     sequence_size += (pattrs.size() > 1 ? pattrs.size() : 0);
@@ -232,10 +232,10 @@ format(const context& ctx, const yarn::element& e) const {
                 if (o.derived_visitor()) {
                     bvn = a.get_qualified_name(*o.base_visitor());
                     dvn = o.derived_visitor()->simple();
-                    rpn = a.get_qualified_name(*o.root_parent());
+                    rpn = a.get_qualified_name(o.root_parents().front());
                 } else {
                     bvn = o.base_visitor()->simple();
-                    rpn = o.root_parent()->simple();
+                    rpn = o.root_parents().front().simple();
                 }
 #>
 
@@ -329,13 +329,13 @@ void <#= sn #>::to_stream(std::ostream& s) const {
              * Swap
              */
             if (!o.is_immutable() && (!o.all_attributes().empty() || o.is_parent())) {
-                const bool empty(o.all_attributes().empty() && !o.parent());
+                const bool empty(o.all_attributes().empty() && o.parents().empty());
 #>
 
 void <#= sn #>::swap(<#= sn #>&<#= (empty ? "" : " other") #>) noexcept {
 <#+
-               if (o.parent()) {
-                    const auto& pn(*o.parent());
+               if (!o.parents().empty()) {
+                    const auto& pn(o.parents().front());
                     const auto pqn(a.get_qualified_name(pn));
 #>
     <#= pqn #>::swap(other);
@@ -363,8 +363,8 @@ void <#= sn #>::swap(<#= sn #>&<#= (empty ? "" : " other") #>) noexcept {
              */
             // FIXME: looking at root_parent as a hack due to service leafs not
             // FIXME: being processed atm.
-            if (!o.is_parent() && o.parent() && o.root_parent()) {
-                const auto rpn(*o.root_parent());
+            if (!o.is_parent() && !o.parents().empty() && !o.root_parents().empty()) {
+                const auto rpn(o.root_parents().front());
 #>
 
 bool <#= sn #>::equals(const <#= a.get_qualified_name(rpn) #>& other) const {
@@ -393,7 +393,7 @@ bool <#= sn #>::<#= method_name #>(const <#= sn #>& <#= (o.all_attributes().empt
     return true;
 <#+
             else {
-                dogen::formatters::sequence_formatter sf(o.parent() ? 1 : 0);
+                dogen::formatters::sequence_formatter sf(o.parents().size());
                 sf.element_separator("");
                 sf.prefix_configuration().first("return ").not_first("    ");
                 sf.postfix_configuration().not_last(" &&");
@@ -402,8 +402,8 @@ bool <#= sn #>::<#= method_name #>(const <#= sn #>& <#= (o.all_attributes().empt
                 else
                     sf.postfix_configuration().last(" &&");
 
-                if (o.parent()) {
-                    const auto& pn(*o.parent());
+                if (!o.parents().empty()) {
+                    const auto& pn(o.parents().front());
                     const auto pqn(a.get_qualified_name(pn));
 #>
     <#= sf.prefix() #><#= pqn #>::compare(rhs)<#= sf.postfix() #>
@@ -412,7 +412,7 @@ bool <#= sn #>::<#= method_name #>(const <#= sn #>& <#= (o.all_attributes().empt
                 }
                 sf.reset(o.local_attributes().size());
                 sf.element_separator("");
-                if (!o.parent())
+                if (o.parents().empty())
                    sf.prefix_configuration().first("return ");
                 else
                    sf.prefix_configuration().first("    ");

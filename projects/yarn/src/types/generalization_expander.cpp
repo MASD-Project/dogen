@@ -78,19 +78,25 @@ update_and_collect_parent_ids(intermediate_model& im) const {
         BOOST_LOG_SEV(lg, debug) << "Processing type: " << id;
 
         auto& o(pair.second);
-        if (!o.parent())
+        if (o.parents().empty())
             continue;
 
         /*
-         * Resolve the name of the parent. This is required because it
-         * may have been supplied via meta-data, and as such, it may
-         * not be complete. We can't wait for the resolution step
-         * because there is a circular dependency (resolution needs
+         * Resolve the parent names. This is required because they may
+         * have been supplied via meta-data, and as such, be
+         * incomplete. We can't wait for the resolution step proper
+         * because there is a circular dependency: resolution needs
          * injection and injection needs generalization, which needs
-         * resolution).
+         * resolution. So we must resolve here.
          */
-        o.parent(rs.resolve(im, o.name(), *o.parent()));
-        r.insert(o.parent()->id());
+        std::list<name> resolved_parents;
+        for (const auto& pn : o.parents()) {
+            const auto resolved_pn(rs.resolve(im, o.name(), pn));
+            r.insert(resolved_pn.id());
+            resolved_parents.push_back(resolved_pn);
+        }
+
+        o.parents(resolved_parents);
     }
     BOOST_LOG_SEV(lg, debug) << "Finished updating and collecting parent ids: "
                              << r;
@@ -109,10 +115,10 @@ void generalization_expander::populate_properties_up_the_generalization_tree(
         o.leaves().push_back(leaf);
 
     /*
-     * If we do not have a parent we have reached the top of the
+     * If we do not have any parents, we have reached the top of the
      * generalisation tree.
      */
-    if (!o.parent()) {
+    if (o.parents().empty()) {
         /*
          * If the leaf name belongs to the target model, add it to
          * the model's list of leaves. Ignore non-target leaves.
@@ -125,29 +131,31 @@ void generalization_expander::populate_properties_up_the_generalization_tree(
         return;
     }
 
-    const auto pid(o.parent()->id());
-    auto j(im.objects().find(pid));
-    if (j == im.objects().end()) {
-        BOOST_LOG_SEV(lg, error) << parent_not_found << pid;
-        BOOST_THROW_EXCEPTION(expansion_error(parent_not_found + pid));
-    }
+    for (const auto& pn : o.parents()) {
+        auto i(im.objects().find(pn.id()));
+        if (i == im.objects().end()) {
+            BOOST_LOG_SEV(lg, error) << parent_not_found << pn.id();
+            BOOST_THROW_EXCEPTION(expansion_error(parent_not_found + pn.id()));
+        }
 
-    auto& parent(j->second);
-    populate_properties_up_the_generalization_tree(tg, leaf, im, parent);
+        auto& parent(i->second);
+        populate_properties_up_the_generalization_tree(tg, leaf, im, parent);
 
-    if (!parent.parent()) {
-        /*
-         * If our parent does not have a parent then it is our root
-         * parent.
-         */
-        o.root_parent(parent.name());
-    } else {
-        /*
-         * On all other cases, inherit the root parent properties for
-         * our direct parent; these would have been populated from the
-         * root parent as per above.
-         */
-        o.root_parent(parent.root_parent());
+        if (parent.parents().empty()) {
+            /*
+             * If our parent does not have a parent, then it is our
+             * root parent.
+             */
+            o.root_parents().push_back(parent.name());
+        } else {
+            /*
+             * On all other cases, inherit the root parents property
+             * from our direct parent; these would have been populated
+             * from the root parent as per above.
+             */
+            for (const auto& rp : parent.root_parents())
+                o.root_parents().push_back(rp);
+        }
     }
 }
 
@@ -163,9 +171,9 @@ populate_generalizable_properties(const type_group& tg,
         auto& o(pair.second);
 
         /*
-         * We are a child if we have a parent (double-bang by design).
+         * We are a child if we have at least one parent.
          */
-         o.is_child(!!o.parent());
+        o.is_child(!o.parents().empty());
 
          /*
           * We are a parent if someone else declared us as their parent.

@@ -120,7 +120,7 @@ parse_parent(const type_group& tg, const location& model_location,
      * If we've already have a parent name, this means there are now
      * two conflicting sources of parenting information so bomb out.
      */
-    if (o.parent()) {
+    if (!o.parents().empty()) {
         const auto& id(o.name().id());
         BOOST_LOG_SEV(lg, error) << parent_name_conflict << id;
         BOOST_THROW_EXCEPTION(expansion_error(parent_name_conflict + id));
@@ -132,7 +132,7 @@ parse_parent(const type_group& tg, const location& model_location,
      */
     const auto& tpm(top_level_modules);
     const auto pn(name_builder::build(model_location, tpm, parent));
-    o.parent(pn);
+    o.parents().push_back(pn);
 }
 
 void parsing_expander::

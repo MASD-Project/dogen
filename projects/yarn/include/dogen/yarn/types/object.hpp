@@ -80,10 +80,10 @@ public:
         const bool is_child,
         const bool is_leaf,
         const bool is_final,
-        const boost::optional<dogen::yarn::name>& root_parent,
-        const boost::optional<dogen::yarn::name>& parent,
-        const std::list<dogen::yarn::name>& leaves,
         const bool in_inheritance_relationship,
+        const std::list<dogen::yarn::name>& root_parents,
+        const std::list<dogen::yarn::name>& parents,
+        const std::list<dogen::yarn::name>& leaves,
         const std::list<dogen::yarn::name>& transparent_associations,
         const std::list<dogen::yarn::name>& opaque_associations,
         const boost::optional<dogen::yarn::name>& base_visitor,
@@ -202,23 +202,31 @@ public:
     /**@}*/
 
     /**
-     * @brief Top-most parent at the root of the inheritance hierarchy, if any.
+     * @brief True if the object is related to at least one other object as a parent or a child.
      */
     /**@{*/
-    const boost::optional<dogen::yarn::name>& root_parent() const;
-    boost::optional<dogen::yarn::name>& root_parent();
-    void root_parent(const boost::optional<dogen::yarn::name>& v);
-    void root_parent(const boost::optional<dogen::yarn::name>&& v);
+    bool in_inheritance_relationship() const;
+    void in_inheritance_relationship(const bool v);
+    /**@}*/
+
+    /**
+     * @brief Top-most parents at the root of the inheritance hierarchy, if any.
+     */
+    /**@{*/
+    const std::list<dogen::yarn::name>& root_parents() const;
+    std::list<dogen::yarn::name>& root_parents();
+    void root_parents(const std::list<dogen::yarn::name>& v);
+    void root_parents(const std::list<dogen::yarn::name>&& v);
     /**@}*/
 
     /**
      * @brief Direct parent of this element, if any.
      */
     /**@{*/
-    const boost::optional<dogen::yarn::name>& parent() const;
-    boost::optional<dogen::yarn::name>& parent();
-    void parent(const boost::optional<dogen::yarn::name>& v);
-    void parent(const boost::optional<dogen::yarn::name>&& v);
+    const std::list<dogen::yarn::name>& parents() const;
+    std::list<dogen::yarn::name>& parents();
+    void parents(const std::list<dogen::yarn::name>& v);
+    void parents(const std::list<dogen::yarn::name>&& v);
     /**@}*/
 
     /**
@@ -229,14 +237,6 @@ public:
     std::list<dogen::yarn::name>& leaves();
     void leaves(const std::list<dogen::yarn::name>& v);
     void leaves(const std::list<dogen::yarn::name>&& v);
-    /**@}*/
-
-    /**
-     * @brief True if the object is related to at least one other object as a parent or a child.
-     */
-    /**@{*/
-    bool in_inheritance_relationship() const;
-    void in_inheritance_relationship(const bool v);
     /**@}*/
 
     /**
@@ -352,10 +352,10 @@ private:
     bool is_child_;
     bool is_leaf_;
     bool is_final_;
-    boost::optional<dogen::yarn::name> root_parent_;
-    boost::optional<dogen::yarn::name> parent_;
-    std::list<dogen::yarn::name> leaves_;
     bool in_inheritance_relationship_;
+    std::list<dogen::yarn::name> root_parents_;
+    std::list<dogen::yarn::name> parents_;
+    std::list<dogen::yarn::name> leaves_;
     std::list<dogen::yarn::name> transparent_associations_;
     std::list<dogen::yarn::name> opaque_associations_;
     boost::optional<dogen::yarn::name> base_visitor_;

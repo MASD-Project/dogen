@@ -12,16 +12,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-12-28 Wed 13:23]
+#+CAPTION: Clock summary at [2016-12-28 Wed 17:26]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *1:18* |      |      | 100.0 |
+| *Total time*                                                                | *4:42* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 1:18   |      |      | 100.0 |
-| Active                                                                      |        | 1:18 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:21 |  26.9 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:57 |  73.1 |
+| Stories                                                                     | 4:42   |      |      | 100.0 |
+| Active                                                                      |        | 4:42 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:21 |   7.4 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:57 |  20.2 |
+| COMPLETED Consider supporting multiple inheritance on non-proxy models      |        |      | 3:24 |  72.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -83,7 +84,10 @@ For all other operative systems you need to build it from source. Source downloa
 
 - [[https://twitter.com/MarcoCraveiro/status/808591399855734784][Tweet]]
 
-*** Consider supporting multiple inheritance on non-proxy models      :story:
+*** COMPLETED Consider supporting multiple inheritance on non-proxy models :story:
+    CLOSED: [2016-12-28 Wed 17:25]
+    CLOCK: [2016-12-28 Wed 16:03]--[2016-12-28 Wed 17:25] =>  1:22
+    CLOCK: [2016-12-28 Wed 14:01]--[2016-12-28 Wed 16:03] =>  2:02
 
 We need to be able to express relationships such as the ones used by
 C# containers. But first we need to build an inheritance graph of all
@@ -100,6 +104,36 @@ Notes:
 - equals method is using root parent because apparently "service leafs
   are not being processed atm". We should remove this check and add a
   method to assistant that checks there is one root parent.
+- we need to (should?) introduce the validator to ensure non-proxy
+  model objects have only one parent and root parent.
+
+Validation check removed from transformer:
+
+:        /*
+:         * Ensure we have at most one parent as we do not support
+:         * multiple inheritance for objects.
+:         */
+:        if (parent_names.size() > 1) {
+:            BOOST_LOG_SEV(lg, error) << multiple_inheritance
+:                                     << po.id();
+:            BOOST_THROW_EXCEPTION(transformation_error(multiple_inheritance +
+:                    po.id()));
+:        }
+
+*** Augment element ID with meta-model type                           :story:
+
+The element ID is considered to be a system-level, opaque
+identifier. It could, for all intents and purposes, be a large int. We
+have decided to use a string so we can dump it to the log and figure
+out what is going on without having to map IDs to a human-readable
+value. In the same vein, we could also add another component to the ID
+that would contain the meta-model element for that ID. This
+information could be placed at the start.
+
+Of course, we will not be able to remove the look-ups we have at
+present that try to figure out the meta-model element because they are
+related to resolution. But for any other cases it may result in
+slightly more performant code. We need to look at all the use cases.
 
 *** Add handcrafted class to C# test model                            :story:
 

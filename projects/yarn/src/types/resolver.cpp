@@ -282,27 +282,28 @@ void resolver::resolve_attributes(const intermediate_model& im,
 
 void resolver::validate_inheritance_graph(const intermediate_model& im,
     const object& o) const {
-    if (!o.parent())
-        return;
 
-    const auto& pn(*o.parent());
-    if (!is_object(im, pn)) {
+    /*
+     * Ensure that all parents and original parents exist as objects.
+     */
+    const auto id(o.name().id());
+    for (const auto& pn : o.parents()) {
+        if (is_object(im, pn))
+            continue;
+
         std::ostringstream s;
-        s << orphan_object << ": " << o.name().id()
-          << ". parent: " << pn.id();
+        s << orphan_object << ": " << id << ". Parent: " << pn.id();
 
         BOOST_LOG_SEV(lg, error) << s.str();
         BOOST_THROW_EXCEPTION(resolution_error(s.str()));
     }
 
-    if (!o.root_parent())
-        return;
+    for (const auto& rp : o.root_parents()) {
+        if (is_object(im, rp))
+            continue;
 
-    const auto& rp(*o.root_parent());
-    if (!is_object(im, rp)) {
         std::ostringstream s;
-        s << orphan_object << ": " << o.name().id()
-          << ". Root parent: " << rp.id();
+        s << orphan_object << ": " << id << ". Root parent: " << rp.id();
 
         BOOST_LOG_SEV(lg, error) << s.str();
         BOOST_THROW_EXCEPTION(resolution_error(s.str()));
@@ -311,16 +312,21 @@ void resolver::validate_inheritance_graph(const intermediate_model& im,
 
 void resolver::validate_refinements(const intermediate_model& im,
     const concept& c) const {
-    for (const auto& n : c.refines()) {
-        if (!is_concept(im, n)) {
-            std::ostringstream stream;
-            stream << orphan_concept << ". concept: "
-                   << c.name().id()
-                   << ". refined concept: " << n.id();
 
-            BOOST_LOG_SEV(lg, error) << stream.str();
-            BOOST_THROW_EXCEPTION(resolution_error(stream.str()));
-        }
+    /*
+     * Ensure that all refined concepts exist as concepts.
+     */
+    const auto id(c.name().id());
+    for (const auto& n : c.refines()) {
+        if (is_concept(im, n))
+            continue;
+
+        std::ostringstream stream;
+        stream << orphan_concept << ". Concept: " << id
+               << ". Refined concept: " << n.id();
+
+        BOOST_LOG_SEV(lg, error) << stream.str();
+        BOOST_THROW_EXCEPTION(resolution_error(stream.str()));
     }
 }
 

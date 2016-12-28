@@ -41,16 +41,16 @@ a.stream() << "    s.setf(std::ios::showpoint);" << std::endl;
 a.stream() << std::endl;
     }
 
-    const bool no_parent_and_no_attributes(!o.parent() &&
+    const bool no_parent_and_no_attributes(o.parents().empty() &&
         o.all_attributes().empty());
 a.stream() << "    s << \" { \"" << std::endl;
 a.stream() << "      << \"\\\"__type__\\\": \" << \"\\\"" << qn << "\\\"\"" << (no_parent_and_no_attributes ? " << \" }\";" : " << \", \"") << std::endl;
 
-    dogen::formatters::sequence_formatter sf(o.parent() ? 1 : 0);
+    dogen::formatters::sequence_formatter sf(o.parents().size());
     sf.prefix_configuration().first("  << ").not_first("s << ");
     sf.element_separator("");
-    if (o.parent()) {
-        const auto& pn(*o.parent());
+    if (!o.parents().empty()) {
+        const auto& pn(o.parents().front());
         const auto pqn(a.get_qualified_name(pn));
 a.stream() << "    " << sf.prefix() << "\"\\\"__parent_" << sf.current_position() << "__\\\": \"" << sf.postfix() << ";" << std::endl;
 a.stream() << "    " << pqn << "::to_stream(s);" << std::endl;
@@ -59,7 +59,7 @@ a.stream() << "    " << pqn << "::to_stream(s);" << std::endl;
 
     sf.reset(o.local_attributes().size());
 
-    if (o.parent())
+    if (!o.parents().empty())
         sf.prefix_configuration().first("s << \", \"\n      ");
     else
         sf.prefix_configuration().first("  ");

@@ -119,12 +119,12 @@ void attributes_expander::expand_object(object& o, intermediate_model& im,
 
     /*
      * Now handle all of the inherited properties. We insert our
-     * parent properties first on our all attributes container by
-     * design; local attributes are last.
+     * parent's properties first on our all attributes container by
+     * design; local attributes are last. This minimises changes when
+     * new properties are added to the descendant.
      */
-    if (o.parent()) {
-        const auto& n(*o.parent());
-        auto& parent(find_object(n, im));
+    for (const auto& pn : o.parents()) {
+        auto& parent(find_object(pn, im));
         expand_object(parent, im, processed_ids);
 
         /*
@@ -132,7 +132,6 @@ void attributes_expander::expand_object(object& o, intermediate_model& im,
          * _regardless_ of whether it has any attributes or not into
          * the inherited attributes container.
          */
-        const auto& pn(parent.name());
         const auto& pattrs(parent.all_attributes());
         o.inherited_attributes().insert(std::make_pair(pn, pattrs));
 
