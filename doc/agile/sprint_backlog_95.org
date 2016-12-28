@@ -12,16 +12,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-12-28 Wed 12:48]
+#+CAPTION: Clock summary at [2016-12-28 Wed 13:05]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *0:46* |      |      | 100.0 |
+| *Total time*                                                                | *1:01* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 0:46   |      |      | 100.0 |
-| Active                                                                      |        | 0:46 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:21 |  45.7 |
-| STARTED Edit release notes for previous sprint                              |        |      | 0:25 |  54.3 |
+| Stories                                                                     | 1:01   |      |      | 100.0 |
+| Active                                                                      |        | 1:01 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:21 |  34.4 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:40 |  65.6 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -30,7 +30,10 @@
 
 Updates to sprint and product backlog.
 
-*** STARTED Edit release notes for previous sprint                    :story:
+*** COMPLETED Edit release notes for previous sprint                  :story:
+    CLOSED: [2016-12-28 Wed 13:01]
+    CLOCK: [2016-12-28 Wed 13:02]--[2016-12-28 Wed 13:05] =>  0:03
+    CLOCK: [2016-12-28 Wed 12:49]--[2016-12-28 Wed 13:01] =>  0:12
     CLOCK: [2016-12-28 Wed 12:23]--[2016-12-28 Wed 12:48] =>  0:25
 
 Add github release notes for previous sprint.
@@ -40,14 +43,14 @@ Title: Dogen v0.94.0, "Baía dos Tigres"
 #+begin_src markdown
 Overview
 =======
-The sprint's headline feature is the continued work on the C# kernel. It is still considered experimental.
+The sprint's headline feature is the continued work on the C# kernel. It is still considered experimental and the generated code has an unstable API, liable to change without notice.
 
 User visible changes
 ===============
 
 In this sprint, a number of user visible features were added to C#:
 
-- **improved ```Types``` facet support**: including exceptions and enumerations, immutability, complete constructors, improvements around equality, associations and inheritance with other model types, as well as support for modules (namespaces) and inheritance.
+- **improvements in the ```Types``` facet**: support for exceptions and enumerations, initial immutability support, complete constructors, improvements around equality, associations and inheritance with other model types, as well as support for modules (namespaces).
 - **basic ```IO``` facet support**: dumping the POCOs as a JSON stream. The JSON format is the same as used in C++.
 - **basic ```Test Data``` facet support**: We tried to use C# idioms for this, so Sequence Generators are based on ```IEnumerable```.
 
@@ -58,6 +61,10 @@ Please refer to the test data sets for the sample model:
 
 For more details see the [sprint log](https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_94.org).
 
+Next Sprint
+========
+The next sprint will continue to focus on C#, particularly the addition of collections.
+
 Binaries
 ======
 You can download experimental binaries from [Bintray](https://bintray.com/domaindrivenconsulting/Dogen) for OSX and Linux:
@@ -65,7 +72,9 @@ You can download experimental binaries from [Bintray](https://bintray.com/domain
 - [dogen_0.94.0_amd64-applications.deb](https://dl.bintray.com/domaindrivenconsulting/Dogen/0.94.0/dogen_0.94.0_amd64-applications.deb)
 - [dogen-0.94.0-Darwin-x86_64.dmg](https://dl.bintray.com/domaindrivenconsulting/Dogen/0.94.0/dogen-0.94.0-Darwin-x86_64.dmg)
 
-For other operative systems you need to build it from source. Source downloads are available below.
+**Note**: They are produced by CI so they may not yet be ready.
+
+For all other operative systems you need to build it from source. Source downloads are available below.
 #+end_src
 
 - [[https://twitter.com/MarcoCraveiro/status/808591399855734784][Tweet]]
