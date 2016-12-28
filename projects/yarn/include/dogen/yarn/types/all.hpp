@@ -68,6 +68,7 @@
 #include "dogen/yarn/types/element_visitor.hpp"
 #include "dogen/yarn/types/expansion_error.hpp"
 #include "dogen/yarn/types/injection_error.hpp"
+#include "dogen/yarn/types/model_validator.hpp"
 #include "dogen/yarn/types/origin_expander.hpp"
 #include "dogen/yarn/types/persister_error.hpp"
 #include "dogen/yarn/types/registrar_error.hpp"
@@ -78,6 +79,7 @@
 #include "dogen/yarn/types/parsing_expander.hpp"
 #include "dogen/yarn/types/resolution_error.hpp"
 #include "dogen/yarn/types/string_processor.hpp"
+#include "dogen/yarn/types/validation_error.hpp"
 #include "dogen/yarn/types/language_expander.hpp"
 #include "dogen/yarn/types/name_tree_builder.hpp"
 #include "dogen/yarn/types/descriptor_factory.hpp"
@@ -98,6 +100,7 @@
 #include "dogen/yarn/types/generalization_expander.hpp"
 #include "dogen/yarn/types/type_parameters_expander.hpp"
 #include "dogen/yarn/types/intermediate_model_factory.hpp"
+#include "dogen/yarn/types/intermediate_model_validator.hpp"
 #include "dogen/yarn/types/identifiable_and_qualified_builder.hpp"
 
 #endif

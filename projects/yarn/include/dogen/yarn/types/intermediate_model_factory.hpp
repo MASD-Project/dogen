@@ -87,6 +87,12 @@ private:
         const annotations::type_repository& atrp, intermediate_model& im) const;
 
     /**
+     * @brief Ensures the intermediate model passes all validation
+     * rules.
+     */
+    void validate(const intermediate_model& im) const;
+
+    /**
      * @brief Obtains an intermediate model.
      */
     intermediate_model intermediate_model_for_descriptor(

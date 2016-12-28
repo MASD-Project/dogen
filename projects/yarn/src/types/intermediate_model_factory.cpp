@@ -29,7 +29,7 @@
 #include "dogen/yarn/types/enumeration_expander.hpp"
 #include "dogen/yarn/types/annotations_expander.hpp"
 #include "dogen/yarn/types/type_parameters_expander.hpp"
-
+#include "dogen/yarn/types/intermediate_model_validator.hpp"
 #include "dogen/yarn/types/intermediate_model_factory.hpp"
 
 namespace {
@@ -85,6 +85,11 @@ void intermediate_model_factory::expand_parsing(
     ex.expand(atrp, im);
 }
 
+void intermediate_model_factory::validate(const intermediate_model& im) const {
+    intermediate_model_validator v;
+    v.validate(im);
+}
+
 void intermediate_model_factory::
 post_process(const annotations::annotation_groups_factory& agf,
     const annotations::type_repository& atrp, intermediate_model& im) const {
@@ -107,6 +112,11 @@ post_process(const annotations::annotation_groups_factory& agf,
 
     expand_type_parameters(atrp, im);
     expand_parsing(atrp, im);
+
+    /*
+     * Ensure the model is valid.
+     */
+    validate(im);
 }
 
 intermediate_model

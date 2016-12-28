@@ -32,12 +32,12 @@
 #include "dogen/yarn/types/association_expander.hpp"
 #include "dogen/yarn/types/generalization_expander.hpp"
 #include "dogen/yarn/types/injection_expander.hpp"
+#include "dogen/yarn/types/model_validator.hpp"
 #include "dogen/yarn/types/model_factory.hpp"
-
-using namespace dogen::utility::log;
 
 namespace {
 
+using namespace dogen::utility::log;
 auto lg(logger_factory("yarn.model_factory"));
 
 }
@@ -162,6 +162,11 @@ model model_factory::transform_intermediate_model(
     return t.transform(im);
 }
 
+void model_factory::validate(const model& m) const {
+    model_validator v;
+    v.validate(m);
+}
+
 model model_factory::make(const annotations::type_repository& atrp,
     const injector_registrar& rg,
     const std::vector<intermediate_model>& ims) const {
@@ -230,6 +235,11 @@ model model_factory::make(const annotations::type_repository& atrp,
      * Perform the final transformation.
      */
     const auto r(transform_intermediate_model(im));
+
+    /*
+     * Ensure the model is valid.
+     */
+    validate(r);
 
     BOOST_LOG_SEV(lg, debug) << "Finished creating final model.";
     return r;
