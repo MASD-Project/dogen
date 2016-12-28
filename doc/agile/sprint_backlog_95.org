@@ -12,16 +12,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-12-28 Wed 13:05]
+#+CAPTION: Clock summary at [2016-12-28 Wed 13:23]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *1:01* |      |      | 100.0 |
+| *Total time*                                                                | *1:18* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 1:01   |      |      | 100.0 |
-| Active                                                                      |        | 1:01 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:21 |  34.4 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:40 |  65.6 |
+| Stories                                                                     | 1:18   |      |      | 100.0 |
+| Active                                                                      |        | 1:18 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:21 |  26.9 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:57 |  73.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -32,6 +32,7 @@ Updates to sprint and product backlog.
 
 *** COMPLETED Edit release notes for previous sprint                  :story:
     CLOSED: [2016-12-28 Wed 13:01]
+    CLOCK: [2016-12-28 Wed 13:06]--[2016-12-28 Wed 13:23] =>  0:17
     CLOCK: [2016-12-28 Wed 13:02]--[2016-12-28 Wed 13:05] =>  0:03
     CLOCK: [2016-12-28 Wed 12:49]--[2016-12-28 Wed 13:01] =>  0:12
     CLOCK: [2016-12-28 Wed 12:23]--[2016-12-28 Wed 12:48] =>  0:25
@@ -58,8 +59,11 @@ Please refer to the test data sets for the sample model:
 
 - input: [Dia](https://github.com/DomainDrivenConsulting/dogen/blob/master/test_data/yarn.dia/input/CSharpModel.dia), [JSON](https://github.com/DomainDrivenConsulting/dogen/blob/master/test_data/yarn.json/input/CSharpModel.json)
 - output: [CSharpModel](https://github.com/DomainDrivenConsulting/dogen/tree/master/projects/test_models/CSharpModel)
+- tests: [CSharpModel.Tests](https://github.com/DomainDrivenConsulting/dogen/tree/master/projects/test_models/CSharpModel.Tests)
 
-For more details see the [sprint log](https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_94.org).
+C# development is being validated at present with Mono and MonoDevelop from Xamarin's Alpha channel, but should work equally well with any recent versions of Visual Studio.
+
+For more details of the work carried out this sprint, see the [sprint log](https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_94.org).
 
 Next Sprint
 ========
