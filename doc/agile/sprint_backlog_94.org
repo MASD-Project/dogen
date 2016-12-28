@@ -12,7 +12,7 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-12-23 Fri 22:13]
+#+CAPTION: Clock summary at [2016-12-28 Wed 12:14]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
@@ -20,7 +20,7 @@
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
 | Stories                                                                     | 56:39   |       |       | 100.0 |
 | Active                                                                      |         | 56:39 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  1:09 |   2.0 |
+| COMPLETED Sprint and product backlog grooming                               |         |       |  1:09 |   2.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:31 |   0.9 |
 | COMPLETED Add helper infrastructure to C#                                   |         |       |  5:55 |  10.4 |
 | COMPLETED Add support for Equals in C#                                      |         |       |  1:24 |   2.5 |
@@ -38,13 +38,14 @@
 | COMPLETED Consider changing inherited attributes to a list                  |         |       |  0:34 |   1.0 |
 | COMPLETED Add complete constructor for C# types                             |         |       |  1:44 |   3.1 |
 | COMPLETED Add immutability support for C# types                             |         |       |  0:13 |   0.4 |
-| STARTED Consider supporting multiple inheritance on non-proxy models        |         |       |  1:55 |   3.4 |
-| STARTED Add handcrafted class to C# test model                              |         |       |  0:03 |   0.1 |
-| STARTED Add container types to C# proxy models                              |         |       |  2:46 |   4.9 |
+| POSTPONED Consider supporting multiple inheritance on non-proxy models      |         |       |  1:55 |   3.4 |
+| POSTPONED Add handcrafted class to C# test model                            |         |       |  0:03 |   0.1 |
+| POSTPONED Add container types to C# proxy models                            |         |       |  2:46 |   4.9 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
-*** STARTED Sprint and product backlog grooming                       :story:
+*** COMPLETED Sprint and product backlog grooming                     :story:
+    CLOSED: [2016-12-28 Wed 12:13]
     CLOCK: [2016-12-23 Fri 11:06]--[2016-12-23 Fri 11:12] =>  0:06
     CLOCK: [2016-12-19 Mon 20:11]--[2016-12-19 Mon 20:18] =>  0:07
     CLOCK: [2016-12-15 Thu 14:11]--[2016-12-15 Thu 14:44] =>  0:33
@@ -626,7 +627,8 @@ and also we now support C# which does not have multiple inheritance -
 then we should split this property into two, one for each. We should
 remove it from the concept. We could make use of the =Generalization=
 concept, etc.
-*** STARTED Consider supporting multiple inheritance on non-proxy models :story:
+*** POSTPONED Consider supporting multiple inheritance on non-proxy models :story:
+    CLOSED: [2016-12-28 Wed 12:13]
     CLOCK: [2016-12-23 Fri 20:15]--[2016-12-23 Fri 22:10] =>  1:55
 
 We need to be able to express relationships such as the ones used by
@@ -645,7 +647,8 @@ Notes:
   are not being processed atm". We should remove this check and add a
   method to assistant that checks there is one root parent.
 
-*** STARTED Add handcrafted class to C# test model                    :story:
+*** POSTPONED Add handcrafted class to C# test model                  :story:
+    CLOSED: [2016-12-28 Wed 12:13]
     CLOCK: [2016-12-23 Fri 14:30]--[2016-12-23 Fri 14:33] =>  0:03
 
 We should make sure handcrafted code works in C#.
@@ -654,7 +657,8 @@ Actually in order to get handcrafted types to work we need support for
 enablement. This is a somewhat tricky feature so we should leave it
 for after all the main ones are done.
 
-*** STARTED Add container types to C# proxy models                    :story:
+*** POSTPONED Add container types to C# proxy models                  :story:
+    CLOSED: [2016-12-28 Wed 12:14]
     CLOCK: [2016-12-23 Fri 15:58]--[2016-12-23 Fri 17:35] =>  1:37
     CLOCK: [2016-12-23 Fri 15:54]--[2016-12-23 Fri 15:57] =>  0:03
     CLOCK: [2016-12-23 Fri 15:30]--[2016-12-23 Fri 15:54] =>  0:24
@@ -791,198 +795,5 @@ System.Collections.Immutable:
 :                       IEnumerable
 
 System.Collections.Concurrent
-
-*** Parsing should support dot notation                               :story:
-
-At present we only support the c++ scope operator =::= as a separator
-for fully qualified names in a model. However, it probably would be
-quite trivial to have a "mode" in the parser and support either =.= or
-=::=, depending on a construction-supplied flag (inferred from the
-model language). This would allow C# users to enter their model in a
-more natural way, instead of forcing them to use C++ notation.
-
-*** Add support for arrays                                            :story:
-
-At present the yarn parser does not support array notation:
-=string[]=. We need to look into how arrays would work for C++ and
-implement it in a compatible way.
-
-Links:
-
-- [[https://www.dotnetperls.com/array][array]]
-
-*** Add fluency support for C#                                        :story:
-
-We need to add fluent support for C#.
-
-C# properties are not compatible with the fluent pattern. Instead, one
-needs to create builders, across the inheritance tree.
-
-Links:
-
-- [[http://stackoverflow.com/questions/13761666/how-to-use-fluent-style-syntactic-sugar-with-c-sharp-property-declaration][How to use Fluent style syntactic sugar with c# property declaration]]
-
-*** Add visitor support to C#                                         :story:
-
-Implement the visitor formatters for C#.
-
-*** Add cross-model support to C#                                     :story:
-
-At present we do not have any tests that prove that cross-model
-support is working (other than proxy models). We need to create a user
-level model that makes use of types from another model. In theory it
-should just work since we are using fully qualified names everywhere.
-
-*** Generate AssemblyInfo in C#                                       :story:
-
-We need to inject a type for this in fabric. For now we can leave it
-mainly blank but in the future we need to have meta-data in yarn for
-all of its properties:
-
-: [assembly: AssemblyTitle ("TestDogen")]
-: [assembly: AssemblyDescription ("")]
-: [assembly: AssemblyConfiguration ("")]
-: [assembly: AssemblyCompany ("")]
-: [assembly: AssemblyProduct ("")]
-: [assembly: AssemblyCopyright ("marco")]
-: [assembly: AssemblyTrademark ("")]
-: [assembly: AssemblyCulture ("")]
-: [assembly: AssemblyVersion ("1.0.*")]
-
-These appear to just be properties at the model level.
-
-*** Consider adding a clone method for C#                             :story:
-
-It would be nice to have a way to clone a object graph. We probably
-have an equivalent story for this for C++ in the backlog.
-
-*** Consider making the output directory configurable in C#           :story:
-
-At present we are outputting binaries into the =bin= directory,
-locally on the project directory. However, it would make more sense to
-output to =build/output= like C++ does. For this to work, we need to
-be able to supply an output directory as meta-data.
-
-*** Add support for nuget                                             :story:
-
-A proxy model may require obtaining a nuget package. Users should be
-able to define a proxy model as requiring a nuget package and then
-Dogen should generate packages.config and add all such models to it.
-
-: +  <package id="NUnit" version="2.6.4" targetFramework="net45" />
-
-*** Identifiable needs to use camel case in C#                        :story:
-
-At present we are building identifiables with underscores.
-
-*** Generate windows packages with CPack                              :story:
-
-We tried to generate windows packages by using the NSIS tool, but
-there are no binaries available for it at present. However, it seems
-CPack can now generate MSIs directly:
-
-- [[http://stackoverflow.com/questions/18437356/how-to-generate-msi-installer-with-cmake][How to generate .msi installer with cmake?]]
-- [[https://cmake.org/cmake/help/v3.0/module/CPackWIX.html][CPackWIX]]
-
-We need to investigate how to get the build to produce MSIs using WIX.
-
-*** Move enablement into quilt                                        :story:
-
-We need to make use of the exact same logic as implemented in
-=quilt.cpp= for enablement. Perhaps all of the enablement related
-functionality can be lifted and grafted onto quilt without any major
-changes.
-
-*** Add feature to disable regions                                    :story:
-
-We need a way to stop outputting regions if the user does not want
-them.
-
-*** Add parameters for using imported assemblies                      :story:
-
-Assemblies imported via proxy models need to have the ability to
-supply two parameters:
-
-- assembly name: this is not always the same as the proxy model name;
-- root namespace: similarly this may differ from the proxy model name.
-
-These should be supplied as meta data and used when constructing
-fabric types.
-
-*** Add msbuild target for C# test model                              :story:
-
-Once we are generating solutions, we should detect msbuild (or xbuild)
-and build the solution. This should be a CMake target that runs on
-Travis.
-
-*** Add visibility to yarn elements                                   :story:
-
-We need to be able to mark yarn types as:
-
-- public
-- internal
-
-This can then be used by C++ as well for visibility etc.
-
-*** Add partial element support to yarn                               :story:
-
-We need to be able to mark yarn elements as "partial". It is then up
-to programming languages to map this to a language feature. At present
-only [[https://msdn.microsoft.com/en-us/library/wa80x488.aspx][C# would do so]].
-
-It would be nice to have a more meaningful name at yarn
-level. However, seems like this is a fairly general programming
-concept now: [[https://en.wikipedia.org/wiki/Class_(computer_programming)#Partial][wikipedia]].
-
-*** Add visibility to yarn attributes                                 :story:
-
-We need to be able to mark yarn attributes as:
-
-- public
-- private
-- protected
-
-*** Add final support in C#                                           :story:
-
-Links:
-
-- [[https://msdn.microsoft.com/en-us/library/88c54tsw.aspx][sealed (C# Reference)]]
-
-*** Add aspects for C# serialisation support                          :story:
-
-We need to add serialisation support:
-
-- C# serialisation
-- Data Contract serialisation
-- Json serialisation
-
-In C# these are done via attributes so we do not need additional
-facets. We will need a lot of configuration knobs though:
-
-- ability to switch a serialisation method on at model level or
-  element level.
-- support for serialisation specific arguments such as parameters for
-  Json.Net.
-
-Links:
-
-- [[https://msdn.microsoft.com/en-us/library/ms731923(v%3Dvs.110).aspx][Types Supported by the Data Contract Serializer]]
-- [[https://msdn.microsoft.com/en-us/library/ms731073(v%3Dvs.110).aspx][Serialization and Deserialization]]
-- [[https://msdn.microsoft.com/en-us/library/ms733127(v%3Dvs.110).aspx][Using Data Contracts]]
-- [[https://msdn.microsoft.com/en-us/library/ms731923(v%3Dvs.110).aspx][Types Supported by the Data Contract Serializer]]
-
-*** Consider adding =artefact_set= to formatters' model               :story:
-
-We are using collections of artefacts quite a bit, and it makes sense
-to create an abstraction for it such as a =artefact_set=. However, for
-this to work properly we need to add at least one basic behaviour: the
-ability to merge two artefact sets. Or else we will end up having to
-unpack the artefacts, then merging them, then creating a new artefact
-set.
-
-Problem is, we either create the artefact set as a non-generatable
-type - not ideal - or we create it as generatable and need to add this
-as a free function. We need to wait until dogen has support for
-merging code generation.
 
 ** Deprecated
