@@ -12,20 +12,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-03 Tue 22:37]
+#+CAPTION: Clock summary at [2017-01-03 Tue 23:43]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *15:02* |       |      | 100.0 |
+| *Total time*                                                                | *16:08* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 15:02   |       |      | 100.0 |
-| Active                                                                      |         | 15:02 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:30 |   3.3 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:57 |   6.3 |
-| COMPLETED Consider supporting multiple inheritance on non-proxy models      |         |       | 3:24 |  22.6 |
-| COMPLETED Add basic validation infrastructure                               |         |       | 8:40 |  57.6 |
-| COMPLETED Fix borked windows build                                          |         |       | 0:26 |   2.9 |
-| COMPLETED Clean up enumerator implementation                                |         |       | 1:05 |   7.2 |
+| Stories                                                                     | 16:08   |       |      | 100.0 |
+| Active                                                                      |         | 16:08 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:30 |   3.1 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:57 |   5.9 |
+| COMPLETED Consider supporting multiple inheritance on non-proxy models      |         |       | 3:24 |  21.1 |
+| COMPLETED Add basic validation infrastructure                               |         |       | 8:40 |  53.7 |
+| COMPLETED Fix borked windows build                                          |         |       | 0:26 |   2.7 |
+| COMPLETED Clean up enumerator implementation                                |         |       | 1:05 |   6.7 |
+| STARTED Measure validation slowdown                                         |         |       | 1:06 |   6.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -208,7 +209,8 @@ We've borked the windows build with the validator changes.
 - move value computations to yarn so that in the future we can add
   meta-data to override it.
 
-*** Measure validation slowdown                                       :story:
+*** STARTED Measure validation slowdown                               :story:
+    CLOCK: [2017-01-03 Tue 22:37]--[2017-01-03 Tue 23:43] =>  1:06
 
 It appears generating the dogen models is a lot slower with validation
 enabled. We need to measure this using the traditional benchmark. If
@@ -221,6 +223,76 @@ validation.
 One of the reasons for the slowdown is probably the use of regular
 expressions to validate names. It is probably faster to hard-code a
 validator by hand, given that the regex is so trivial.
+
+Actually, having to manually benchmark is a pain in the backside. We
+need a simple script that performs a number of runs and records all
+the data in a CSV. We can then easily perform measurements (std dev,
+etc) and diff runs.
+
+: echo "elapsed real time, filesystem inputs, filesystem outputs, Max RSS, Avg RSS, Avg total memory, Avg unshared, Avg shared, Page faults, Soft page faults" > bench.csv && /usr/bin/time -f "%e,%I,%O,%M,%t,%K,%D,%X,%F,%R" -o bench.csv -a ./dogen.knit.tests
+
+Links:
+
+- [[https://gist.github.com/bytespider/3864921][bytespider/benchmark.sh]]
+
+**** Manual Measurements
+
+*Knit tests Validation Off*
+
+: $ time ./dogen.knit.tests
+: Running 61 test cases...
+:
+: *** No errors detected
+:
+: real  0m8.360s
+: user  0m6.340s
+: sys     0m1.780s
+: $ time ./dogen.knit.tests
+: Running 61 test cases...
+:
+: *** No errors detected
+:
+: real    0m9.576s
+: user    0m6.556s
+: sys     0m1.620s
+: $ time ./dogen.knit.tests
+: Running 61 test cases...
+:
+: *** No errors detected
+:
+: real    0m8.852s
+: user    0m6.752s
+: sys     0m1.780s
+
+*Knit tests Validation On*
+
+: [marco@lorenz bin(integration)]$ time ./dogen.knit.tests
+: Running 61 test cases...
+:
+: *** No errors detected
+:
+: real    0m9.755s
+: user    0m7.524s
+: sys     0m1.964s
+: $ time ./dogen.knit.tests
+: Running 61 test cases...
+:
+: *** No errors detected
+:
+: real    0m10.323s
+: user    0m6.720s
+: sys     0m1.684s
+: $ time ./dogen.knit.tests
+: Running 61 test cases...
+:
+: *** No errors detected
+:
+: real    0m9.172s
+: user    0m7.216s
+: sys     0m1.884s
+
+An increase of around 1s - 1.5s.
+
 
 *** Augment element ID with meta-model type                           :story:
 
