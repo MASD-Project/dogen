@@ -56,8 +56,8 @@ std::ostream& operator<<(std::ostream& s, const <#= ye.name().simple() #>& v) {
 <#+
             for (const auto& en : ye.enumerators()) {
 #>
-    case <#= ye.name().simple() #>::<#= en.name() #>:
-        attr = "\"<#= en.name() #>\"";
+    case <#= ye.name().simple() #>::<#= en.name().simple() #>:
+        attr = "\"<#= en.name().simple() #>\"";
         break;
 <#+
             }

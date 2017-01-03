@@ -291,24 +291,116 @@
 					<item class_id="33" tracking_level="0" version="0">
 						<documentation>some comment
 </documentation>
-						<name>triangle</name>
+						<name>
+							<id></id>
+							<simple>triangle</simple>
+							<qualified>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element></element>
+							</location>
+							<identifiable></identifiable>
+						</name>
 						<value></value>
 					</item>
 					<item>
 						<documentation>other comment
 </documentation>
-						<name>square</name>
+						<name>
+							<id></id>
+							<simple>square</simple>
+							<qualified>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element></element>
+							</location>
+							<identifiable></identifiable>
+						</name>
 						<value></value>
 					</item>
 					<item>
 						<documentation></documentation>
-						<name>rectangle</name>
+						<name>
+							<id></id>
+							<simple>rectangle</simple>
+							<qualified>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element></element>
+							</location>
+							<identifiable></identifiable>
+						</name>
 						<value></value>
 					</item>
 					<item>
 						<documentation>some comment
 </documentation>
-						<name>cube</name>
+						<name>
+							<id></id>
+							<simple>cube</simple>
+							<qualified>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element></element>
+							</location>
+							<identifiable></identifiable>
+						</name>
 						<value></value>
 					</item>
 				</enumerators>
@@ -403,24 +495,116 @@
 					<item>
 						<documentation>this is colour red
 </documentation>
-						<name>red</name>
+						<name>
+							<id></id>
+							<simple>red</simple>
+							<qualified>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element></element>
+							</location>
+							<identifiable></identifiable>
+						</name>
 						<value></value>
 					</item>
 					<item>
 						<documentation>this is blue
 </documentation>
-						<name>blue</name>
+						<name>
+							<id></id>
+							<simple>blue</simple>
+							<qualified>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element></element>
+							</location>
+							<identifiable></identifiable>
+						</name>
 						<value></value>
 					</item>
 					<item>
 						<documentation></documentation>
-						<name>green</name>
+						<name>
+							<id></id>
+							<simple>green</simple>
+							<qualified>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element></element>
+							</location>
+							<identifiable></identifiable>
+						</name>
 						<value></value>
 					</item>
 					<item>
 						<documentation>another comment
 </documentation>
-						<name>gray</name>
+						<name>
+							<id></id>
+							<simple>gray</simple>
+							<qualified>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element></element>
+							</location>
+							<identifiable></identifiable>
+						</name>
 						<value></value>
 					</item>
 				</enumerators>
@@ -517,17 +701,86 @@ this is a long comment
 					<item_version>0</item_version>
 					<item>
 						<documentation></documentation>
-						<name>great</name>
+						<name>
+							<id></id>
+							<simple>great</simple>
+							<qualified>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element></element>
+							</location>
+							<identifiable></identifiable>
+						</name>
 						<value></value>
 					</item>
 					<item>
 						<documentation></documentation>
-						<name>not_so_great</name>
+						<name>
+							<id></id>
+							<simple>not_so_great</simple>
+							<qualified>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element></element>
+							</location>
+							<identifiable></identifiable>
+						</name>
 						<value></value>
 					</item>
 					<item>
 						<documentation></documentation>
-						<name>bad</name>
+						<name>
+							<id></id>
+							<simple>bad</simple>
+							<qualified>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element></element>
+							</location>
+							<identifiable></identifiable>
+						</name>
 						<value></value>
 					</item>
 				</enumerators>

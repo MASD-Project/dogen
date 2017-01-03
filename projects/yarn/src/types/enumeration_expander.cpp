@@ -22,7 +22,9 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/io/languages_io.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
+#include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/yarn/types/expansion_error.hpp"
 #include "dogen/yarn/types/enumeration_expander.hpp"
 
@@ -31,33 +33,47 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("yarn.enumeration_expander"));
 
+const std::string csharp_invalid("Invalid");
+const std::string cpp_invalid("invalid");
+
 const std::string duplicate_enumerator("Duplicate enumerator name: ");
+const std::string unsupported_language("Invalid or unsupported language: ");
 
 }
 
 namespace dogen {
 namespace yarn {
 
+std::string enumeration_expander::
+obtain_invalid_enumerator_name(const languages l) const {
+    switch(l) {
+    case languages::csharp: return csharp_invalid;
+    case languages::cpp: return cpp_invalid;
+    default: {
+        const auto s(boost::lexical_cast<std::string>(l));
+        BOOST_LOG_SEV(lg, error) << unsupported_language << s;
+        BOOST_THROW_EXCEPTION(expansion_error(unsupported_language + s));
+    } }
+}
+
 void enumeration_expander::expand(intermediate_model& im) {
 
     /*
      * Setup the invalid enumeration.
      */
-    dogen::yarn::enumerator invalid;
-
-    if (im.language() == languages::csharp)
-        invalid.name("Invalid");
-    else
-        invalid.name("invalid");
-
+    enumerator invalid;
     invalid.documentation("Represents an uninitialised enum");
     invalid.value("0");
 
+    yarn::name_factory nf;
     for (auto& pair : im.enumerations()) {
         auto& e(pair.second);
 
         std::vector<enumerator> enumerators;
-        enumerators.reserve(e.enumerators().size() + 1);
+        enumerators.reserve(e.enumerators().size() + 1/*for invalid*/);
+
+        const std::string sn(obtain_invalid_enumerator_name(im.language()));
+        invalid.name(nf.build_attribute_name(e.name(), sn));
         enumerators.push_back(invalid);
 
         /*
@@ -68,16 +84,22 @@ void enumeration_expander::expand(intermediate_model& im) {
         unsigned int pos(1);
         std::set<std::string> enumerator_names;
         for (const auto& en : e.enumerators()) {
-            const auto n(en.name());
-            const auto i(enumerator_names.find(n));
+            const auto sn(en.name().simple());
+            const auto i(enumerator_names.find(sn));
             if (i != enumerator_names.end()) {
-                BOOST_LOG_SEV(lg, error) << duplicate_enumerator << n;
+                BOOST_LOG_SEV(lg, error) << duplicate_enumerator << sn;
                 BOOST_THROW_EXCEPTION(
-                    expansion_error(duplicate_enumerator + n));
+                    expansion_error(duplicate_enumerator + sn));
             }
 
             auto copy(en);
             copy.value(boost::lexical_cast<std::string>(pos));
+
+            /*
+             * Expand name. At this point, we've only populated
+             * the enumerator simple name.
+             */
+            copy.name(nf.build_attribute_name(e.name(), copy.name().simple()));
             enumerators.push_back(copy);
             ++pos;
         }

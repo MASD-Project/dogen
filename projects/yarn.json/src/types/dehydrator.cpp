@@ -301,7 +301,8 @@ dehydrate_enumerations(const intermediate_model& im, std::ostream& s) const {
         std::vector<enumerator> enumerators;
         enumerators.reserve(o.enumerators().size());
         for (const auto& en : o.enumerators()) {
-            if (en.name() != "invalid")
+            // FIXME: to lower
+            if (en.name().simple() != "invalid")
                 enumerators.push_back(en);
         }
 
@@ -316,7 +317,7 @@ dehydrate_enumerations(const intermediate_model& im, std::ostream& s) const {
             s << " { ";
             uf.insert_quoted("simple_name");
             s << " : ";
-            uf.insert_quoted(en.name());
+            uf.insert_quoted(en.name().simple());
 
             if (!en.documentation().empty()) {
                 s << comma_space;

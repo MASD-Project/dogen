@@ -12,19 +12,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-03 Tue 22:02]
+#+CAPTION: Clock summary at [2017-01-03 Tue 22:28]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *13:57* |       |      | 100.0 |
+| *Total time*                                                                | *14:54* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 13:57   |       |      | 100.0 |
-| Active                                                                      |         | 13:57 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:30 |   3.6 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:57 |   6.8 |
-| COMPLETED Consider supporting multiple inheritance on non-proxy models      |         |       | 3:24 |  24.4 |
-| COMPLETED Add basic validation infrastructure                               |         |       | 8:40 |  62.1 |
-| COMPLETED Fix borked windows build                                          |         |       | 0:26 |   3.1 |
+| Stories                                                                     | 14:54   |       |      | 100.0 |
+| Active                                                                      |         | 14:54 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:30 |   3.4 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:57 |   6.4 |
+| COMPLETED Consider supporting multiple inheritance on non-proxy models      |         |       | 3:24 |  22.8 |
+| COMPLETED Add basic validation infrastructure                               |         |       | 8:40 |  58.2 |
+| COMPLETED Fix borked windows build                                          |         |       | 0:26 |   2.9 |
+| STARTED Clean up enumerator implementation                                  |         |       | 0:57 |   6.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -196,7 +197,9 @@ We've borked the windows build with the validator changes.
 :  C:\projects\dogen\projects\yarn\src\types\model_validator.cpp(62): error C2440: 'initializing': cannot convert from 'initializer list' to 'int' [C:\projects\dogen\build\output\msvc\Debug\projects\yarn\src\yarn.vcxproj]
 :  C:\projects\dogen\projects\yarn\src\types\model_validator.cpp(64): error C2079: 'cpp_builtins' uses undefined class 'std::array<std::string,11>' [C:\projects\dogen\build\output\msvc\Debug\projects\yarn\src\yarn.vcxproj]
 
-*** Clean up enumerator implementation                                :story:
+*** STARTED Clean up enumerator implementation                        :story:
+    CLOCK: [2017-01-03 Tue 22:03]--[2017-01-03 Tue 22:28] =>  0:25
+    CLOCK: [2017-01-03 Tue 18:30]--[2017-01-03 Tue 19:02] =>  0:32
 
 - make enumerator nameable, and compute name correctly (qualified,
   etc). This makes it conceptually consistent

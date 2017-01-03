@@ -20,6 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
+#include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/io/enumerator_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -36,7 +37,7 @@ std::ostream& operator<<(std::ostream& s, const enumerator& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::enumerator\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
-      << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
+      << "\"name\": " << v.name() << ", "
       << "\"value\": " << "\"" << tidy_up_string(v.value()) << "\""
       << " }";
     return(s);

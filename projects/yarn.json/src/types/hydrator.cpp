@@ -215,7 +215,7 @@ read_enumerators(const boost::property_tree::ptree& pt) const {
     for (auto i(pt.begin()); i != pt.end(); ++i) {
         const auto& apt(i->second);
         enumerator e;
-        e.name(apt.get<std::string>(simple_name_key));
+        e.name().simple(apt.get<std::string>(simple_name_key));
         e.documentation(read_documentation(apt));
         r.push_back(e);
     }

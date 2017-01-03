@@ -87,7 +87,7 @@ transformer::to_enumerator(const processed_attribute& a) const {
     validate_dia_object_name(a.name());
 
     yarn::enumerator r;
-    r.name(a.name());
+    r.name().simple(a.name());
     r.documentation(a.comment().documentation());
     return r;
 }

@@ -115,8 +115,8 @@ a.stream() << std::endl;
 a.stream() << "    std::string attr;" << std::endl;
 a.stream() << "    switch (v) {" << std::endl;
             for (const auto& en : ye.enumerators()) {
-a.stream() << "    case " << ye.name().simple() << "::" << en.name() << ":" << std::endl;
-a.stream() << "        attr = \"\\\"" << en.name() << "\\\"\";" << std::endl;
+a.stream() << "    case " << ye.name().simple() << "::" << en.name().simple() << ":" << std::endl;
+a.stream() << "        attr = \"\\\"" << en.name().simple() << "\\\"\";" << std::endl;
 a.stream() << "        break;" << std::endl;
             }
 a.stream() << "    default:" << std::endl;

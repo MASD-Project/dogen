@@ -27,12 +27,17 @@
 
 #include <list>
 #include <unordered_set>
+#include "dogen/yarn/types/languages.hpp"
+#include "dogen/yarn/types/enumerator.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
 namespace yarn {
 
 class enumeration_expander final {
+private:
+    std::string obtain_invalid_enumerator_name(const languages l) const;
+
 public:
     /**
      * @brief Expands all enumerations in model.

@@ -534,10 +534,10 @@ make_enumeration(const unsigned int i, const name& model_name,
     un.simple(unsigned_int);
     r.underlying_type(un);
 
-    const auto lambda([&](const unsigned int n) -> enumerator {
+    const auto lambda([&](const unsigned int pos) -> enumerator {
             enumerator r;
-            r.name(type_name(n));
-            r.value(boost::lexical_cast<std::string>(n));
+            r.name(nf.build_attribute_name(n, type_name(pos)));;
+            r.value(boost::lexical_cast<std::string>(pos));
             return r;
         });
 

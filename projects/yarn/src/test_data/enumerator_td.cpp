@@ -19,6 +19,7 @@
  *
  */
 #include <sstream>
+#include "dogen/yarn/test_data/name_td.hpp"
 #include "dogen/yarn/test_data/enumerator_td.hpp"
 
 namespace {
@@ -27,6 +28,11 @@ std::string create_std_string(const unsigned int position) {
     std::ostringstream s;
     s << "a_string_" << position;
     return s.str();
+}
+
+dogen::yarn::name
+create_dogen_yarn_name(const unsigned int position) {
+    return dogen::yarn::name_generator::create(position);
 }
 
 }
@@ -39,7 +45,7 @@ enumerator_generator::enumerator_generator() : position_(0) { }
 void enumerator_generator::
 populate(const unsigned int position, result_type& v) {
     v.documentation(create_std_string(position + 0));
-    v.name(create_std_string(position + 1));
+    v.name(create_dogen_yarn_name(position + 1));
     v.value(create_std_string(position + 2));
 }
 

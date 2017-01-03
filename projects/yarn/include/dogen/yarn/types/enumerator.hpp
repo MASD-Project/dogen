@@ -27,6 +27,7 @@
 
 #include <string>
 #include <algorithm>
+#include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/serialization/enumerator_fwd_ser.hpp"
 
 namespace dogen {
@@ -47,7 +48,7 @@ public:
 public:
     enumerator(
         const std::string& documentation,
-        const std::string& name,
+        const dogen::yarn::name& name,
         const std::string& value);
 
 private:
@@ -73,13 +74,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Name of the enumerator.
+     * @brief Fully qualified name.
      */
     /**@{*/
-    const std::string& name() const;
-    std::string& name();
-    void name(const std::string& v);
-    void name(const std::string&& v);
+    const dogen::yarn::name& name() const;
+    dogen::yarn::name& name();
+    void name(const dogen::yarn::name& v);
+    void name(const dogen::yarn::name&& v);
     /**@}*/
 
     /**
@@ -106,7 +107,7 @@ public:
 
 private:
     std::string documentation_;
-    std::string name_;
+    dogen::yarn::name name_;
     std::string value_;
 };
 

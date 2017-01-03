@@ -95,8 +95,8 @@ a.stream() << "            string valueAsString = \"Unsupported Value\";" << std
 a.stream() << "            switch (value)" << std::endl;
 a.stream() << "            {" << std::endl;
             for (const auto& en : ye.enumerators()) {
-a.stream() << "                case " << ye.name().simple() << "." << en.name() << ":" << std::endl;
-a.stream() << "                    valueAsString = \"" << en.name() << "\";" << std::endl;
+a.stream() << "                case " << ye.name().simple() << "." << en.name().simple() << ":" << std::endl;
+a.stream() << "                    valueAsString = \"" << en.name().simple() << "\";" << std::endl;
 a.stream() << "                    break;" << std::endl;
             }
 a.stream() << "            }" << std::endl;

@@ -46,7 +46,7 @@ enum class <#= ye.name().simple() #> : <#= a.get_qualified_name(ye.underlying_ty
             dogen::formatters::sequence_formatter sf(ye.enumerators().size());
             for (const auto& en : ye.enumerators()) {
 #>
-    <#= en.name() #> = <#= en.value() #><#= sf.postfix() #><#= a.comment_inline(en.documentation()) #>
+    <#= en.name().simple() #> = <#= en.value() #><#= sf.postfix() #><#= a.comment_inline(en.documentation()) #>
 <#+
                 sf.next();
             }

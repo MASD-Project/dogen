@@ -25,7 +25,7 @@ namespace yarn {
 
 enumerator::enumerator(
     const std::string& documentation,
-    const std::string& name,
+    const dogen::yarn::name& name,
     const std::string& value)
     : documentation_(documentation),
       name_(name),
@@ -66,19 +66,19 @@ void enumerator::documentation(const std::string&& v) {
     documentation_ = std::move(v);
 }
 
-const std::string& enumerator::name() const {
+const dogen::yarn::name& enumerator::name() const {
     return name_;
 }
 
-std::string& enumerator::name() {
+dogen::yarn::name& enumerator::name() {
     return name_;
 }
 
-void enumerator::name(const std::string& v) {
+void enumerator::name(const dogen::yarn::name& v) {
     name_ = v;
 }
 
-void enumerator::name(const std::string&& v) {
+void enumerator::name(const dogen::yarn::name&& v) {
     name_ = std::move(v);
 }
 

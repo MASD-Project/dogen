@@ -85,7 +85,7 @@ a.stream() << "    public enum " << sn << " : " << a.get_qualified_name(ye.under
 a.stream() << "    {" << std::endl;
             dogen::formatters::sequence_formatter sf(ye.enumerators().size());
             for (const auto& en : ye.enumerators()) {
-a.stream() << "        " << en.name() << " = " << en.value() << sf.postfix() << a.comment_inline(en.documentation()) << std::endl;
+a.stream() << "        " << en.name().simple() << " = " << en.value() << sf.postfix() << a.comment_inline(en.documentation()) << std::endl;
                 sf.next();
             }
 a.stream() << "    }" << std::endl;

@@ -3798,22 +3798,22 @@ or a string.#</dia:string>
         <dia:point val="6,90"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="5.95,89.95;13.865,94.45"/>
+        <dia:rectangle val="5.95,89.95;16.56,93.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="6,90"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.8150000000000004"/>
+        <dia:real val="10.51"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#enumerator#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#Documentable#</dia:string>
+        <dia:string>#Documentable, Nameable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#One of a set of valid values that an enumeration can assume.
@@ -3901,29 +3901,6 @@ The enumerator defines an element in the domain of the enumeration.#</dia:string
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#name#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::string#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Name of the enumerator.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
             <dia:string>#value#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
@@ -3995,7 +3972,7 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
         <dia:point val="3.3725,81.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="2.6225,80.85;10.1075,90.8"/>
+        <dia:rectangle val="2.6225,80.85;11.455,90.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4003,8 +3980,8 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
       <dia:attribute name="orth_points">
         <dia:point val="3.3725,81.6"/>
         <dia:point val="3.3725,85"/>
-        <dia:point val="9.9075,85"/>
-        <dia:point val="9.9075,90"/>
+        <dia:point val="11.255,85"/>
+        <dia:point val="11.255,90"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -17557,7 +17534,7 @@ space.#</dia:string>
         <dia:point val="59.3025,81.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="49.5662,80.85;60.0525,90.8"/>
+        <dia:rectangle val="49.5663,80.85;60.0525,90.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -23902,7 +23879,7 @@ space.#</dia:string>
         <dia:point val="12,66"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="11.25,55.75;19.95,67.6"/>
+        <dia:rectangle val="11.25,55.75;19.95,66.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -24132,7 +24109,7 @@ space.#</dia:string>
         <dia:point val="49,63"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="41.075,62.95;49.2,79.6"/>
+        <dia:rectangle val="41.075,62.95;49.2,78.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -24313,7 +24290,7 @@ space.#</dia:string>
         <dia:point val="24.435,66"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="23.685,60.95;36.04,67.6"/>
+        <dia:rectangle val="23.685,60.25;36.04,66.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -24384,7 +24361,7 @@ space.#</dia:string>
         <dia:point val="24,78"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="23.25,68.95;36.04,79.6"/>
+        <dia:rectangle val="23.25,68.95;36.04,78.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

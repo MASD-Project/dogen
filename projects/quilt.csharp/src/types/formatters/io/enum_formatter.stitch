@@ -47,8 +47,8 @@ enum_formatter::format(const context& ctx, const yarn::element& e) const {
 <#+
             for (const auto& en : ye.enumerators()) {
 #>
-                case <#= ye.name().simple() #>.<#= en.name() #>:
-                    valueAsString = "<#= en.name() #>";
+                case <#= ye.name().simple() #>.<#= en.name().simple() #>:
+                    valueAsString = "<#= en.name().simple() #>";
                     break;
 <#+
             }
