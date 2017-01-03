@@ -11,6 +11,94 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Additional validation rules for yarn                               :epic:
+
+Now that we have introduced the basic validation infrastructure
+([[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_95.org][sprint 95]]), we should start adding more and more checks. This story
+keeps track of all ideas around validation. We should convert these
+ideas into stories and add them as we go along.
+
+*Dia level checks*:
+
+- exceptions and enumerations can't inherit
+- exceptions shouldn't have properties.
+
+*Intermediate model checks*:
+
+- enumeration must have at least one enumerator. warning?
+- external module path of the model matches all objects, etc in
+  current model.
+- documentation does not have non-printable characters.
+- number of type arguments is consistent with objects type.
+- Issue error when a property is a value of an abstract class: yarn
+  should fail to merge if the user attempts to create a property of a
+  base class. It should allow pointers to the base class though (raw,
+  shared pointers, boost optional etc).
+- Test relationships between objects and other meta types: We should
+  validate that objects are only related to other objects - e.g. they
+  cannot inherit from exception or enumeration or vice-versa. Add
+  tests for this.
+- Its not possible to be immutable and fluent.
+- it is not possible to be immutable and be in an inheritance
+  relationship. FIXME: why is that?
+- user models cannot have stereotype of primitive.
+- we don't support generic types so we should throw if a user attempts
+  to use them.
+- a type marked as final cannot have descendants.
+- types in global namespace must have an empty location.
+- if model module path is empty, location must also be empty.
+- check the number of type parameters in the type definition and
+  ensure that all name tree's have the expected number of type
+  parameters.
+- properties of types in other models result in dependencies.
+- concepts that don't refine must have at least one property (or
+  method). Maybe just warn?
+- issue error when a property is a value of an abstract class
+- properties exist in merged model.
+- vistor is only supported at the base class level: due to
+  implementation constraints, we only support visitable at the base
+  class level. Add an exception if users attempt to use visitable
+  stereotype in a class that has parents. Note: is this true? We are
+  using derived visitable in C++ model.
+- there must be at least one element for a given id with
+  =is_element_extension= set to false.
+
+Existing validation code:
+
+:    if ((o.is_parent() || o.is_child()) && p.is_immutable())  {
+:        BOOST_LOG_SEV(lg, error) << immutabilty_with_inheritance
+:                                 << o.name().id();
+:
+:        BOOST_THROW_EXCEPTION(
+:            transformation_error(immutabilty_with_inheritance +
+:                o.name().id()));
+:    }
+
+: BOOST_AUTO_TEST_CASE(inheritance_with_immutability_throws) {
+:     SETUP_TEST_LOG_SOURCE("inheritance_with_immutability_throws");
+:     auto c(mock_context(model_name));
+:
+:     const auto po(mock_processed_object_factory::make_generalization());
+:     const auto con(po[0].connection());
+:     BOOST_REQUIRE(con);
+:     const auto parents = std::list<std::string> { con->first };
+:     c.child_id_to_parent_ids().insert(std::make_pair(con->second, parents));
+:
+:     transform(c, {po[1]});
+:
+:     auto po1(po[2]);
+:     po1.stereotype(immutable_stereotype);
+:     const auto op1(mock_profile(po1));
+:     contains_checker<transformation_error> cc(immutability_inheritance);
+:     BOOST_CHECK_EXCEPTION(transform(c, po1, op1), transformation_error, cc);
+:
+:     c.child_id_to_parent_ids().clear();
+:     auto po2(po[1]);
+:     po2.stereotype(immutable_stereotype);
+:     const auto op2(mock_profile(po2));
+:     BOOST_CHECK_EXCEPTION(transform(c, po2, op2), transformation_error, cc);
+: }
+
 *** Add test for parent with no derived classes on the same model     :story:
 
 We need to check that when a parent that has no leaves on its own
@@ -2844,13 +2932,6 @@ depend only on the forward declarations.
 
 If we have enough time and disposition, we may sneak some of these
 in. This release is all about getting the architecture right.
-
-*** Clean up enumerator implementation                                :story:
-
-- make enumerator nameable, and compute name correctly (qualified,
-  etc). This makes it conceptually consistent
-- move value computations to yarn so that in the future we can add
-  meta-data to override it.
 
 *** Assignment operator seems to pass types by value                  :story:
 
