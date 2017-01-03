@@ -117,6 +117,7 @@ transformer::compute_total_size(const intermediate_model& im) const {
 model transformer::transform(const intermediate_model& im) const {
     model r;
     r.name(im.name());
+    r.language(im.language());
     r.root_module(im.root_module());
     r.has_generatable_types(im.has_generatable_types());
 

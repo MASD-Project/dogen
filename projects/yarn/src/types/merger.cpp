@@ -127,7 +127,10 @@ void merger::add_target(const intermediate_model& target) {
     require_not_has_target(id);
 
     has_target_ = true;
+
     target_language_ = target.language();
+    merged_model_.language(target_language_);
+
     merged_model_.name(target.name());
     merged_model_.leaves(target.leaves());
     merged_model_.modules(target.modules());
