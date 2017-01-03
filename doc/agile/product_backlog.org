@@ -11,6 +11,16 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Rename yarn types that clash with reserved keywords               :story:
+
+When we added the new validation rules, yarn did not pass
+validation. This is because =module= and =concept= are reserved on
+current C++ TS's. Since we know these features will land in C++ sooner
+or later, we should rename these types to avoid problems. Namestorm:
+
+- module: package (clashes with java?)
+- concept: meta-object?
+
 *** Additional validation rules for yarn                               :epic:
 
 Now that we have introduced the basic validation infrastructure
