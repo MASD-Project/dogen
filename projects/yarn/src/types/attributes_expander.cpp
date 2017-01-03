@@ -79,16 +79,6 @@ void attributes_expander::expand_object(object& o, intermediate_model& im,
     }
 
     /*
-     * Expand all attribute names. At this point, we've only populated
-     * attribute simple names.
-     */
-    yarn::name_factory f;
-    for (auto& attr : o.local_attributes()) {
-        const auto n(f.build_attribute_name(o.name(), attr.name().simple()));
-        attr.name(n);
-    }
-
-    /*
      * Setup fluency and immutability on all local attributes.
      */
     if (o.is_fluent() || o.is_immutable()) {
@@ -127,6 +117,19 @@ void attributes_expander::expand_object(object& o, intermediate_model& im,
 
     o.local_attributes().insert(o.local_attributes().begin(),
         concept_attributes.begin(), concept_attributes.end());
+
+    /*
+     * Expand all attribute names. At this point, we've only populated
+     * attribute simple names. Note that we are doing this after
+     * expanding concept attributes. This is because we want to ensure
+     * the attributes are located correctly in element space: they are
+     * no longer part of the concept but are now part of the object.
+     */
+    yarn::name_factory f;
+    for (auto& attr : o.local_attributes()) {
+        const auto n(f.build_attribute_name(o.name(), attr.name().simple()));
+        attr.name(n);
+    }
 
     /*
      * Now handle all of the inherited properties. We insert our
