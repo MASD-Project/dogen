@@ -283,39 +283,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;classes_inout_package&gt;&lt;class_2&gt;&lt;prop_0&gt;</id>
+							<id></id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::classes_inout_package::class_2::prop_0</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.classes_inout_package.class_2.prop_0</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>classes_inout_package</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>class_2</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_classes_inout_package_class_2_prop_0</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>int</unparsed_type>
 						<parsed_type class_id="35" tracking_level="0" version="0">
@@ -496,40 +485,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;classes_inout_package&gt;&lt;package_1&gt;&lt;class_1&gt;&lt;prop_0&gt;</id>
+							<id></id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::classes_inout_package::package_1::class_1::prop_0</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.classes_inout_package.package_1.class_1.prop_0</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>classes_inout_package</item>
 								</model_modules>
 								<internal_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>package_1</item>
 								</internal_modules>
-								<element>class_1</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_classes_inout_package_package_1_class_1_prop_0</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>int</unparsed_type>
 						<parsed_type>

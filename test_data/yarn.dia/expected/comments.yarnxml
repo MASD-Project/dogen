@@ -486,39 +486,28 @@ third line with &quot;quote&quot;
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;comments&gt;&lt;one_line&gt;&lt;prop_0&gt;</id>
+							<id></id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::comments::one_line::prop_0</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.comments.one_line.prop_0</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>comments</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>one_line</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_comments_one_line_prop_0</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>int</unparsed_type>
 						<parsed_type class_id="37" tracking_level="0" version="0">
@@ -577,39 +566,28 @@ a second line
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;comments&gt;&lt;one_line&gt;&lt;prop_1&gt;</id>
+							<id></id>
 							<simple>prop_1</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::comments::one_line::prop_1</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.comments.one_line.prop_1</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>comments</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>one_line</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_comments_one_line_prop_1</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>int</unparsed_type>
 						<parsed_type>
@@ -665,39 +643,28 @@ a second line
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;comments&gt;&lt;one_line&gt;&lt;prop_2&gt;</id>
+							<id></id>
 							<simple>prop_2</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::comments::one_line::prop_2</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.comments.one_line.prop_2</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>comments</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>one_line</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_comments_one_line_prop_2</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>int</unparsed_type>
 						<parsed_type>

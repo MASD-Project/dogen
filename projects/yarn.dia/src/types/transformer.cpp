@@ -72,15 +72,11 @@ to_name(const std::string& n, const yarn::name& module_n) const {
     return f.build_element_in_module(module_n, n);
 }
 
-yarn::attribute transformer::to_attribute(const yarn::name& owning_element,
-    const processed_attribute& a) const {
+yarn::attribute transformer::to_attribute(const processed_attribute& a) const {
     validate_dia_object_name(a.name());
 
-    yarn::name_factory f;
-    const auto n(f.build_attribute_name(owning_element, a.name()));
-
     yarn::attribute r;
-    r.name(n);
+    r.name().simple(a.name());
     r.unparsed_type(a.type());
     r.documentation(a.comment().documentation());
     return r;
@@ -134,7 +130,7 @@ yarn::object transformer::to_object(const processed_object& po) const {
         r.stereotypes().push_back(us);
 
     for (const auto& p : po.attributes())
-        r.local_attributes().push_back(to_attribute(r.name(), p));
+        r.local_attributes().push_back(to_attribute(p));
 
     /*
      * If we have any parents, setup generalisation properties.
@@ -194,7 +190,7 @@ yarn::concept transformer::to_concept(const processed_object& po) const {
     update_element(po, r);
 
     for (const auto& attr : po.attributes())
-        r.local_attributes().push_back(to_attribute(r.name(), attr));
+        r.local_attributes().push_back(to_attribute(attr));
 
     const_repository_selector crs(repository_);
     const auto parent_names(crs.parent_names_for_id(po.id()));

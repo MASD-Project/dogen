@@ -216,39 +216,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;all_primitives&gt;&lt;a_class&gt;&lt;bool_property&gt;</id>
+							<id></id>
 							<simple>bool_property</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::all_primitives::a_class::bool_property</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.all_primitives.a_class.bool_property</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>all_primitives</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>a_class</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_all_primitives_a_class_bool_property</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>bool</unparsed_type>
 						<parsed_type class_id="35" tracking_level="0" version="0">
@@ -304,39 +293,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;all_primitives&gt;&lt;a_class&gt;&lt;char_property&gt;</id>
+							<id></id>
 							<simple>char_property</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::all_primitives::a_class::char_property</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.all_primitives.a_class.char_property</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>all_primitives</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>a_class</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_all_primitives_a_class_char_property</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>char</unparsed_type>
 						<parsed_type>
@@ -392,39 +370,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;all_primitives&gt;&lt;a_class&gt;&lt;uchar_property&gt;</id>
+							<id></id>
 							<simple>uchar_property</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::all_primitives::a_class::uchar_property</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.all_primitives.a_class.uchar_property</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>all_primitives</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>a_class</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_all_primitives_a_class_uchar_property</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>unsigned char</unparsed_type>
 						<parsed_type>
@@ -480,39 +447,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;all_primitives&gt;&lt;a_class&gt;&lt;int_property&gt;</id>
+							<id></id>
 							<simple>int_property</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::all_primitives::a_class::int_property</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.all_primitives.a_class.int_property</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>all_primitives</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>a_class</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_all_primitives_a_class_int_property</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>int</unparsed_type>
 						<parsed_type>
@@ -568,39 +524,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;all_primitives&gt;&lt;a_class&gt;&lt;uint_property&gt;</id>
+							<id></id>
 							<simple>uint_property</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::all_primitives::a_class::uint_property</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.all_primitives.a_class.uint_property</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>all_primitives</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>a_class</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_all_primitives_a_class_uint_property</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>unsigned int</unparsed_type>
 						<parsed_type>
@@ -656,39 +601,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;all_primitives&gt;&lt;a_class&gt;&lt;long_property&gt;</id>
+							<id></id>
 							<simple>long_property</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::all_primitives::a_class::long_property</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.all_primitives.a_class.long_property</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>all_primitives</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>a_class</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_all_primitives_a_class_long_property</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>long</unparsed_type>
 						<parsed_type>
@@ -744,39 +678,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;all_primitives&gt;&lt;a_class&gt;&lt;ulong_property&gt;</id>
+							<id></id>
 							<simple>ulong_property</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::all_primitives::a_class::ulong_property</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.all_primitives.a_class.ulong_property</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>all_primitives</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>a_class</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_all_primitives_a_class_ulong_property</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>unsigned long</unparsed_type>
 						<parsed_type>
@@ -832,39 +755,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;all_primitives&gt;&lt;a_class&gt;&lt;long_long_property&gt;</id>
+							<id></id>
 							<simple>long_long_property</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::all_primitives::a_class::long_long_property</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.all_primitives.a_class.long_long_property</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>all_primitives</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>a_class</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_all_primitives_a_class_long_long_property</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>long long</unparsed_type>
 						<parsed_type>
@@ -920,39 +832,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;all_primitives&gt;&lt;a_class&gt;&lt;ulong_long_property&gt;</id>
+							<id></id>
 							<simple>ulong_long_property</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::all_primitives::a_class::ulong_long_property</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.all_primitives.a_class.ulong_long_property</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>all_primitives</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>a_class</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_all_primitives_a_class_ulong_long_property</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>unsigned long long</unparsed_type>
 						<parsed_type>
@@ -1008,39 +909,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;all_primitives&gt;&lt;a_class&gt;&lt;short_property&gt;</id>
+							<id></id>
 							<simple>short_property</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::all_primitives::a_class::short_property</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.all_primitives.a_class.short_property</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>all_primitives</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>a_class</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_all_primitives_a_class_short_property</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>short</unparsed_type>
 						<parsed_type>
@@ -1096,39 +986,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;all_primitives&gt;&lt;a_class&gt;&lt;ushort_property&gt;</id>
+							<id></id>
 							<simple>ushort_property</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::all_primitives::a_class::ushort_property</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.all_primitives.a_class.ushort_property</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>all_primitives</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>a_class</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_all_primitives_a_class_ushort_property</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>unsigned short</unparsed_type>
 						<parsed_type>
@@ -1184,39 +1063,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;all_primitives&gt;&lt;a_class&gt;&lt;double_property&gt;</id>
+							<id></id>
 							<simple>double_property</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::all_primitives::a_class::double_property</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.all_primitives.a_class.double_property</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>all_primitives</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>a_class</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_all_primitives_a_class_double_property</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>double</unparsed_type>
 						<parsed_type>
@@ -1272,39 +1140,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;all_primitives&gt;&lt;a_class&gt;&lt;float_property&gt;</id>
+							<id></id>
 							<simple>float_property</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::all_primitives::a_class::float_property</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.all_primitives.a_class.float_property</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>all_primitives</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>a_class</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_all_primitives_a_class_float_property</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>float</unparsed_type>
 						<parsed_type>

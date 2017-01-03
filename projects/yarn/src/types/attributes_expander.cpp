@@ -26,6 +26,7 @@
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/object.hpp"
+#include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/yarn/types/expansion_error.hpp"
 #include "dogen/yarn/types/attributes_expander.hpp"
 
@@ -75,6 +76,16 @@ void attributes_expander::expand_object(object& o, intermediate_model& im,
     if (processed_ids.find(id) != processed_ids.end()) {
         BOOST_LOG_SEV(lg, debug) << "Object already processed: " << id;
         return;
+    }
+
+    /*
+     * Expand all attribute names. At this point, we've only populated
+     * attribute simple names.
+     */
+    yarn::name_factory f;
+    for (auto& attr : o.local_attributes()) {
+        const auto n(f.build_attribute_name(o.name(), attr.name().simple()));
+        attr.name(n);
     }
 
     /*
@@ -167,6 +178,19 @@ void attributes_expander::expand_concept(concept& c, intermediate_model& im,
         return;
     }
 
+    /*
+     * Expand all attribute names. At this point, we've only populated
+     * attribute simple names.
+     */
+    yarn::name_factory f;
+    for (auto& attr : c.local_attributes()) {
+        const auto n(f.build_attribute_name(c.name(), attr.name().simple()));
+        attr.name(n);
+    }
+
+    /*
+     * Setup the all attributes and inherited attributes containers.
+     */
     c.all_attributes().insert(c.all_attributes().end(),
         c.local_attributes().begin(), c.local_attributes().end());
 

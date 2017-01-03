@@ -91,13 +91,11 @@ private:
     /**
      * @brief Converts a processed attribute into an yarn attribute.
      *
-     * @param owning_element yarn element that owns the attribute.
      * @param a the Dia UML attribute in processed form.
      *
      * @pre name and type of attribute must not be empty.
      */
-    yarn::attribute to_attribute(const yarn::name& owning_element,
-        const processed_attribute& a) const;
+    yarn::attribute to_attribute(const processed_attribute& a) const;
 
     /**
      * @brief Converts a processed attribute into an yarn enumerator.

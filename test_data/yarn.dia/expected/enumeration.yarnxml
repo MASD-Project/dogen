@@ -615,39 +615,28 @@ this is a long comment
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;enumeration&gt;&lt;a_class&gt;&lt;colour_type&gt;</id>
+							<id></id>
 							<simple>colour_type</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::enumeration::a_class::colour_type</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.enumeration.a_class.colour_type</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>enumeration</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>a_class</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_enumeration_a_class_colour_type</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>colour_types</unparsed_type>
 						<parsed_type class_id="38" tracking_level="0" version="0">
@@ -703,39 +692,28 @@ this is a long comment
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;enumeration&gt;&lt;a_class&gt;&lt;book_type&gt;</id>
+							<id></id>
 							<simple>book_type</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::enumeration::a_class::book_type</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.enumeration.a_class.book_type</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>enumeration</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>a_class</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_enumeration_a_class_book_type</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>book_types</unparsed_type>
 						<parsed_type>
@@ -791,39 +769,28 @@ this is a long comment
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;enumeration&gt;&lt;a_class&gt;&lt;shape_type&gt;</id>
+							<id></id>
 							<simple>shape_type</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::enumeration::a_class::shape_type</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.enumeration.a_class.shape_type</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>enumeration</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>a_class</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_enumeration_a_class_shape_type</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>pkg1::shape_types</unparsed_type>
 						<parsed_type>

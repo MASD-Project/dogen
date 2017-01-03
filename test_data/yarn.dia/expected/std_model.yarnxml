@@ -283,39 +283,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_j&gt;&lt;prop_0&gt;</id>
+							<id></id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::std_model::class_j::prop_0</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.std_model.class_j.prop_0</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>std_model</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>class_j</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_std_model_class_j_prop_0</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::pair&lt;int,int&gt;</unparsed_type>
 						<parsed_type class_id="35" tracking_level="0" version="0">
@@ -371,39 +360,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_j&gt;&lt;prop_1&gt;</id>
+							<id></id>
 							<simple>prop_1</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::std_model::class_j::prop_1</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.std_model.class_j.prop_1</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>std_model</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>class_j</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_std_model_class_j_prop_1</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::pair&lt;std::string,std::string&gt;</unparsed_type>
 						<parsed_type>
@@ -459,39 +437,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_j&gt;&lt;prop_2&gt;</id>
+							<id></id>
 							<simple>prop_2</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::std_model::class_j::prop_2</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.std_model.class_j.prop_2</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>std_model</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>class_j</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_std_model_class_j_prop_2</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::vector&lt;std::pair&lt;std::string,int&gt;&gt;</unparsed_type>
 						<parsed_type>
@@ -671,39 +638,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;primitives&gt;&lt;prop_0&gt;</id>
+							<id></id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::std_model::primitives::prop_0</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.std_model.primitives.prop_0</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>std_model</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>primitives</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_std_model_primitives_prop_0</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::int8_t</unparsed_type>
 						<parsed_type>
@@ -759,39 +715,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;primitives&gt;&lt;prop_1&gt;</id>
+							<id></id>
 							<simple>prop_1</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::std_model::primitives::prop_1</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.std_model.primitives.prop_1</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>std_model</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>primitives</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_std_model_primitives_prop_1</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::int16_t</unparsed_type>
 						<parsed_type>
@@ -847,39 +792,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;primitives&gt;&lt;prop_2&gt;</id>
+							<id></id>
 							<simple>prop_2</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::std_model::primitives::prop_2</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.std_model.primitives.prop_2</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>std_model</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>primitives</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_std_model_primitives_prop_2</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::int32_t</unparsed_type>
 						<parsed_type>
@@ -935,39 +869,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;primitives&gt;&lt;prop_3&gt;</id>
+							<id></id>
 							<simple>prop_3</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::std_model::primitives::prop_3</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.std_model.primitives.prop_3</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>std_model</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>primitives</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_std_model_primitives_prop_3</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::int64_t</unparsed_type>
 						<parsed_type>
@@ -1023,39 +946,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;primitives&gt;&lt;prop_4&gt;</id>
+							<id></id>
 							<simple>prop_4</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::std_model::primitives::prop_4</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.std_model.primitives.prop_4</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>std_model</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>primitives</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_std_model_primitives_prop_4</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::uint8_t</unparsed_type>
 						<parsed_type>
@@ -1111,39 +1023,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;primitives&gt;&lt;prop_5&gt;</id>
+							<id></id>
 							<simple>prop_5</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::std_model::primitives::prop_5</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.std_model.primitives.prop_5</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>std_model</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>primitives</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_std_model_primitives_prop_5</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::uint16_t</unparsed_type>
 						<parsed_type>
@@ -1199,39 +1100,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;primitives&gt;&lt;prop_6&gt;</id>
+							<id></id>
 							<simple>prop_6</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::std_model::primitives::prop_6</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.std_model.primitives.prop_6</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>std_model</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>primitives</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_std_model_primitives_prop_6</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::uint32_t</unparsed_type>
 						<parsed_type>
@@ -1287,39 +1177,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;primitives&gt;&lt;prop_7&gt;</id>
+							<id></id>
 							<simple>prop_7</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::std_model::primitives::prop_7</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.std_model.primitives.prop_7</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>std_model</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>primitives</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_std_model_primitives_prop_7</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::uint64_t</unparsed_type>
 						<parsed_type>
@@ -1499,39 +1378,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_d&gt;&lt;prop_0&gt;</id>
+							<id></id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::std_model::class_d::prop_0</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.std_model.class_d.prop_0</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>std_model</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>class_d</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_std_model_class_d_prop_0</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::list&lt;std::string&gt;</unparsed_type>
 						<parsed_type>
@@ -1587,39 +1455,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_d&gt;&lt;prop_1&gt;</id>
+							<id></id>
 							<simple>prop_1</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::std_model::class_d::prop_1</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.std_model.class_d.prop_1</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>std_model</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>class_d</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_std_model_class_d_prop_1</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::list&lt;class_a&gt;</unparsed_type>
 						<parsed_type>
@@ -1675,39 +1532,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_d&gt;&lt;prop_2&gt;</id>
+							<id></id>
 							<simple>prop_2</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::std_model::class_d::prop_2</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.std_model.class_d.prop_2</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>std_model</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>class_d</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_std_model_class_d_prop_2</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::list&lt;pkg1::class_c&gt;</unparsed_type>
 						<parsed_type>
@@ -1763,39 +1609,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_d&gt;&lt;prop_3&gt;</id>
+							<id></id>
 							<simple>prop_3</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::std_model::class_d::prop_3</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.std_model.class_d.prop_3</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>std_model</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>class_d</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_std_model_class_d_prop_3</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::list&lt;unsigned int&gt;</unparsed_type>
 						<parsed_type>
@@ -1851,39 +1686,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_d&gt;&lt;prop_4&gt;</id>
+							<id></id>
 							<simple>prop_4</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::std_model::class_d::prop_4</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.std_model.class_d.prop_4</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>std_model</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>class_d</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_std_model_class_d_prop_4</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::list&lt;class_a&gt;</unparsed_type>
 						<parsed_type>
@@ -1939,39 +1763,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_d&gt;&lt;prop_5&gt;</id>
+							<id></id>
 							<simple>prop_5</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::std_model::class_d::prop_5</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.std_model.class_d.prop_5</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>std_model</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>class_d</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_std_model_class_d_prop_5</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::list&lt;std::list&lt;unsigned int&gt;&gt;</unparsed_type>
 						<parsed_type>
@@ -2152,40 +1965,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;pkg1&gt;&lt;class_c&gt;&lt;prop_0&gt;</id>
+							<id></id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::std_model::pkg1::class_c::prop_0</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.std_model.pkg1.class_c.prop_0</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>std_model</item>
 								</model_modules>
 								<internal_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>pkg1</item>
 								</internal_modules>
-								<element>class_c</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_std_model_pkg1_class_c_prop_0</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>int</unparsed_type>
 						<parsed_type>
@@ -2241,40 +2042,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;pkg1&gt;&lt;class_c&gt;&lt;prop_1&gt;</id>
+							<id></id>
 							<simple>prop_1</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::std_model::pkg1::class_c::prop_1</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.std_model.pkg1.class_c.prop_1</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>std_model</item>
 								</model_modules>
 								<internal_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>pkg1</item>
 								</internal_modules>
-								<element>class_c</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_std_model_pkg1_class_c_prop_1</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::vector&lt;class_a&gt;</unparsed_type>
 						<parsed_type>
@@ -2454,39 +2243,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_b&gt;&lt;prop_0&gt;</id>
+							<id></id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::std_model::class_b::prop_0</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.std_model.class_b.prop_0</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>std_model</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>class_b</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_std_model_class_b_prop_0</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::vector&lt;std::string&gt;</unparsed_type>
 						<parsed_type>
@@ -2542,39 +2320,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_b&gt;&lt;prop_1&gt;</id>
+							<id></id>
 							<simple>prop_1</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::std_model::class_b::prop_1</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.std_model.class_b.prop_1</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>std_model</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>class_b</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_std_model_class_b_prop_1</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::vector&lt;class_a&gt;</unparsed_type>
 						<parsed_type>
@@ -2630,39 +2397,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_b&gt;&lt;prop_2&gt;</id>
+							<id></id>
 							<simple>prop_2</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::std_model::class_b::prop_2</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.std_model.class_b.prop_2</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>std_model</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>class_b</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_std_model_class_b_prop_2</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::vector&lt;pkg1::class_c&gt;</unparsed_type>
 						<parsed_type>
@@ -2718,39 +2474,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_b&gt;&lt;prop_3&gt;</id>
+							<id></id>
 							<simple>prop_3</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::std_model::class_b::prop_3</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.std_model.class_b.prop_3</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>std_model</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>class_b</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_std_model_class_b_prop_3</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::vector&lt;unsigned int&gt;</unparsed_type>
 						<parsed_type>
@@ -2806,39 +2551,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_b&gt;&lt;prop_4&gt;</id>
+							<id></id>
 							<simple>prop_4</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::std_model::class_b::prop_4</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.std_model.class_b.prop_4</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>std_model</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>class_b</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_std_model_class_b_prop_4</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::vector&lt;class_a&gt;</unparsed_type>
 						<parsed_type>
@@ -2894,39 +2628,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_b&gt;&lt;prop_5&gt;</id>
+							<id></id>
 							<simple>prop_5</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::std_model::class_b::prop_5</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.std_model.class_b.prop_5</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>std_model</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>class_b</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_std_model_class_b_prop_5</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::vector&lt;std::vector&lt;unsigned int&gt;&gt;</unparsed_type>
 						<parsed_type>
@@ -3106,39 +2829,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_a&gt;&lt;prop0&gt;</id>
+							<id></id>
 							<simple>prop0</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::std_model::class_a::prop0</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.std_model.class_a.prop0</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>std_model</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>class_a</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_std_model_class_a_prop0</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::string</unparsed_type>
 						<parsed_type>
@@ -3195,39 +2907,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_a&gt;&lt;prop1&gt;</id>
+							<id></id>
 							<simple>prop1</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::std_model::class_a::prop1</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.std_model.class_a.prop1</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>std_model</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>class_a</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_std_model_class_a_prop1</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::string</unparsed_type>
 						<parsed_type>
@@ -3408,39 +3109,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;some_service&gt;&lt;prop_0&gt;</id>
+							<id></id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::std_model::some_service::prop_0</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.std_model.some_service.prop_0</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>std_model</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>some_service</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_std_model_some_service_prop_0</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::shared_ptr&lt;base&gt;</unparsed_type>
 						<parsed_type>
@@ -3620,39 +3310,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_e&gt;&lt;prop_0&gt;</id>
+							<id></id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::std_model::class_e::prop_0</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.std_model.class_e.prop_0</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>std_model</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>class_e</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_std_model_class_e_prop_0</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::deque&lt;std::string&gt;</unparsed_type>
 						<parsed_type>
@@ -3708,39 +3387,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_e&gt;&lt;prop_1&gt;</id>
+							<id></id>
 							<simple>prop_1</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::std_model::class_e::prop_1</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.std_model.class_e.prop_1</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>std_model</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>class_e</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_std_model_class_e_prop_1</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::deque&lt;class_a&gt;</unparsed_type>
 						<parsed_type>
@@ -3796,39 +3464,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_e&gt;&lt;prop_2&gt;</id>
+							<id></id>
 							<simple>prop_2</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::std_model::class_e::prop_2</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.std_model.class_e.prop_2</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>std_model</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>class_e</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_std_model_class_e_prop_2</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::deque&lt;pkg1::class_c&gt;</unparsed_type>
 						<parsed_type>
@@ -3884,39 +3541,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_e&gt;&lt;prop_3&gt;</id>
+							<id></id>
 							<simple>prop_3</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::std_model::class_e::prop_3</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.std_model.class_e.prop_3</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>std_model</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>class_e</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_std_model_class_e_prop_3</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::deque&lt;unsigned int&gt;</unparsed_type>
 						<parsed_type>
@@ -3972,39 +3618,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_e&gt;&lt;prop_4&gt;</id>
+							<id></id>
 							<simple>prop_4</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::std_model::class_e::prop_4</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.std_model.class_e.prop_4</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>std_model</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>class_e</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_std_model_class_e_prop_4</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::deque&lt;class_a&gt;</unparsed_type>
 						<parsed_type>
@@ -4060,39 +3695,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_e&gt;&lt;prop_5&gt;</id>
+							<id></id>
 							<simple>prop_5</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::std_model::class_e::prop_5</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.std_model.class_e.prop_5</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>std_model</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>class_e</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_std_model_class_e_prop_5</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::deque&lt;std::deque&lt;unsigned int&gt;&gt;</unparsed_type>
 						<parsed_type>
@@ -4272,39 +3896,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_f&gt;&lt;prop_0&gt;</id>
+							<id></id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::std_model::class_f::prop_0</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.std_model.class_f.prop_0</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>std_model</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>class_f</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_std_model_class_f_prop_0</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::unordered_map&lt;std::string,std::string&gt;</unparsed_type>
 						<parsed_type>
@@ -4360,39 +3973,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_f&gt;&lt;prop_1&gt;</id>
+							<id></id>
 							<simple>prop_1</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::std_model::class_f::prop_1</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.std_model.class_f.prop_1</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>std_model</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>class_f</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_std_model_class_f_prop_1</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::unordered_map&lt;std::string,class_a&gt;</unparsed_type>
 						<parsed_type>
@@ -4448,39 +4050,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_f&gt;&lt;prop_2&gt;</id>
+							<id></id>
 							<simple>prop_2</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::std_model::class_f::prop_2</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.std_model.class_f.prop_2</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>std_model</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>class_f</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_std_model_class_f_prop_2</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::unordered_map&lt;class_a,pkg1::class_c&gt;</unparsed_type>
 						<parsed_type>
@@ -4660,39 +4251,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_g&gt;&lt;prop_0&gt;</id>
+							<id></id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::std_model::class_g::prop_0</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.std_model.class_g.prop_0</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>std_model</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>class_g</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_std_model_class_g_prop_0</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::unordered_map&lt;class_a,std::vector&lt;pkg1::class_c&gt;&gt;</unparsed_type>
 						<parsed_type>
@@ -4748,39 +4328,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_g&gt;&lt;prop_1&gt;</id>
+							<id></id>
 							<simple>prop_1</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::std_model::class_g::prop_1</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.std_model.class_g.prop_1</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>std_model</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>class_g</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_std_model_class_g_prop_1</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::unordered_map&lt;pkg1::class_c,std::list&lt;class_a&gt;&gt;</unparsed_type>
 						<parsed_type>
@@ -4836,39 +4405,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_g&gt;&lt;prop_2&gt;</id>
+							<id></id>
 							<simple>prop_2</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::std_model::class_g::prop_2</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.std_model.class_g.prop_2</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>std_model</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>class_g</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_std_model_class_g_prop_2</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::unordered_map&lt;std::string, class_a&gt;</unparsed_type>
 						<parsed_type>
@@ -5048,39 +4606,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;base&gt;&lt;prop_0&gt;</id>
+							<id></id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::std_model::base::prop_0</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.std_model.base.prop_0</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>std_model</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>base</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_std_model_base_prop_0</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::vector&lt;std::string&gt;</unparsed_type>
 						<parsed_type>
@@ -5260,39 +4807,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;derived&gt;&lt;prop_1&gt;</id>
+							<id></id>
 							<simple>prop_1</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::std_model::derived::prop_1</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.std_model.derived.prop_1</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>std_model</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>derived</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_std_model_derived_prop_1</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::list&lt;pkg1::class_c&gt;</unparsed_type>
 						<parsed_type>
@@ -5507,39 +5043,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_h&gt;&lt;prop_0&gt;</id>
+							<id></id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::std_model::class_h::prop_0</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.std_model.class_h.prop_0</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>std_model</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>class_h</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_std_model_class_h_prop_0</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::unordered_set&lt;class_a&gt;</unparsed_type>
 						<parsed_type>
@@ -5595,39 +5120,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_h&gt;&lt;prop_1&gt;</id>
+							<id></id>
 							<simple>prop_1</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::std_model::class_h::prop_1</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.std_model.class_h.prop_1</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>std_model</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>class_h</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_std_model_class_h_prop_1</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::unordered_set&lt;pkg1::class_c&gt;</unparsed_type>
 						<parsed_type>

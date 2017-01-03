@@ -284,40 +284,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;class_in_a_package&gt;&lt;package1&gt;&lt;first_class&gt;&lt;public_attribute&gt;</id>
+							<id></id>
 							<simple>public_attribute</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::class_in_a_package::package1::first_class::public_attribute</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.class_in_a_package.package1.first_class.public_attribute</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>class_in_a_package</item>
 								</model_modules>
 								<internal_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>package1</item>
 								</internal_modules>
-								<element>first_class</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_class_in_a_package_package1_first_class_public_attribute</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>int</unparsed_type>
 						<parsed_type class_id="35" tracking_level="0" version="0">
@@ -373,40 +361,28 @@
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;class_in_a_package&gt;&lt;package1&gt;&lt;first_class&gt;&lt;private_attribute&gt;</id>
+							<id></id>
 							<simple>private_attribute</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::class_in_a_package::package1::first_class::private_attribute</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.class_in_a_package.package1.first_class.private_attribute</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>class_in_a_package</item>
 								</model_modules>
 								<internal_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>package1</item>
 								</internal_modules>
-								<element>first_class</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_class_in_a_package_package1_first_class_private_attribute</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>int</unparsed_type>
 						<parsed_type>

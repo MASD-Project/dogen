@@ -489,40 +489,28 @@ in the context of inheritance.
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;pkg4&gt;&lt;child_via_settings&gt;&lt;prop_1&gt;</id>
+							<id></id>
 							<simple>prop_1</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::trivial_inheritance::pkg4::child_via_settings::prop_1</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.trivial_inheritance.pkg4.child_via_settings.prop_1</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>trivial_inheritance</item>
 								</model_modules>
 								<internal_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>pkg4</item>
 								</internal_modules>
-								<element>child_via_settings</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_trivial_inheritance_pkg4_child_via_settings_prop_1</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>int</unparsed_type>
 						<parsed_type class_id="35" tracking_level="0" version="0">
@@ -703,40 +691,28 @@ in the context of inheritance.
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;pkg3&gt;&lt;child_via_settings&gt;&lt;prop_1&gt;</id>
+							<id></id>
 							<simple>prop_1</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::trivial_inheritance::pkg3::child_via_settings::prop_1</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.trivial_inheritance.pkg3.child_via_settings.prop_1</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>trivial_inheritance</item>
 								</model_modules>
 								<internal_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>pkg3</item>
 								</internal_modules>
-								<element>child_via_settings</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_trivial_inheritance_pkg3_child_via_settings_prop_1</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>int</unparsed_type>
 						<parsed_type>
@@ -917,40 +893,28 @@ in the context of inheritance.
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;pkg1&gt;&lt;child_via_settings&gt;&lt;prop_1&gt;</id>
+							<id></id>
 							<simple>prop_1</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::trivial_inheritance::pkg1::child_via_settings::prop_1</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.trivial_inheritance.pkg1.child_via_settings.prop_1</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>trivial_inheritance</item>
 								</model_modules>
 								<internal_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>pkg1</item>
 								</internal_modules>
-								<element>child_via_settings</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_trivial_inheritance_pkg1_child_via_settings_prop_1</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>int</unparsed_type>
 						<parsed_type>
@@ -1130,39 +1094,28 @@ in the context of inheritance.
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;child_via_settings&gt;&lt;prop_1&gt;</id>
+							<id></id>
 							<simple>prop_1</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::trivial_inheritance::child_via_settings::prop_1</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.trivial_inheritance.child_via_settings.prop_1</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>trivial_inheritance</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>child_via_settings</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_trivial_inheritance_child_via_settings_prop_1</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>int</unparsed_type>
 						<parsed_type>
@@ -1344,39 +1297,28 @@ in the context of inheritance.
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;move_ctor_base&gt;&lt;prop_0&gt;</id>
+							<id></id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::trivial_inheritance::move_ctor_base::prop_0</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.trivial_inheritance.move_ctor_base.prop_0</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>trivial_inheritance</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>move_ctor_base</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_trivial_inheritance_move_ctor_base_prop_0</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>boost::filesystem::path</unparsed_type>
 						<parsed_type>
@@ -1556,39 +1498,28 @@ in the context of inheritance.
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;third_child_with_members&gt;&lt;prop_1&gt;</id>
+							<id></id>
 							<simple>prop_1</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::trivial_inheritance::third_child_with_members::prop_1</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.trivial_inheritance.third_child_with_members.prop_1</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>trivial_inheritance</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>third_child_with_members</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_trivial_inheritance_third_child_with_members_prop_1</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>unsigned int</unparsed_type>
 						<parsed_type>
@@ -1803,39 +1734,28 @@ in the context of inheritance.
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;non_final_orphan&gt;&lt;prop_0&gt;</id>
+							<id></id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::trivial_inheritance::non_final_orphan::prop_0</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.trivial_inheritance.non_final_orphan.prop_0</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>trivial_inheritance</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>non_final_orphan</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_trivial_inheritance_non_final_orphan_prop_0</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>int</unparsed_type>
 						<parsed_type>
@@ -2140,40 +2060,28 @@ in the context of inheritance.
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;pkg4&gt;&lt;child&gt;&lt;prop_1&gt;</id>
+							<id></id>
 							<simple>prop_1</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::trivial_inheritance::pkg4::child::prop_1</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.trivial_inheritance.pkg4.child.prop_1</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>trivial_inheritance</item>
 								</model_modules>
 								<internal_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>pkg4</item>
 								</internal_modules>
-								<element>child</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_trivial_inheritance_pkg4_child_prop_1</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>int</unparsed_type>
 						<parsed_type>
@@ -2548,40 +2456,28 @@ in the context of inheritance.
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;pkg2&gt;&lt;parent&gt;&lt;prop_0&gt;</id>
+							<id></id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::trivial_inheritance::pkg2::parent::prop_0</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.trivial_inheritance.pkg2.parent.prop_0</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>trivial_inheritance</item>
 								</model_modules>
 								<internal_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>pkg2</item>
 								</internal_modules>
-								<element>parent</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_trivial_inheritance_pkg2_parent_prop_0</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>int</unparsed_type>
 						<parsed_type>
@@ -3045,39 +2941,28 @@ in the context of inheritance.
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;child_with_members&gt;&lt;prop_0&gt;</id>
+							<id></id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::trivial_inheritance::child_with_members::prop_0</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.trivial_inheritance.child_with_members.prop_0</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>trivial_inheritance</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>child_with_members</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_trivial_inheritance_child_with_members_prop_0</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>unsigned int</unparsed_type>
 						<parsed_type>
@@ -3292,39 +3177,28 @@ in the context of inheritance.
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;child_of_a_child2&gt;&lt;prop_2&gt;</id>
+							<id></id>
 							<simple>prop_2</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::trivial_inheritance::child_of_a_child2::prop_2</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.trivial_inheritance.child_of_a_child2.prop_2</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>trivial_inheritance</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>child_of_a_child2</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_trivial_inheritance_child_of_a_child2_prop_2</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>unsigned int</unparsed_type>
 						<parsed_type>
@@ -3540,40 +3414,28 @@ in the context of inheritance.
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;pkg1&gt;&lt;parent&gt;&lt;prop_0&gt;</id>
+							<id></id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::trivial_inheritance::pkg1::parent::prop_0</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.trivial_inheritance.pkg1.parent.prop_0</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>trivial_inheritance</item>
 								</model_modules>
 								<internal_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>pkg1</item>
 								</internal_modules>
-								<element>parent</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_trivial_inheritance_pkg1_parent_prop_0</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>unsigned int</unparsed_type>
 						<parsed_type>
@@ -3913,40 +3775,28 @@ in the context of inheritance.
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;pkg1&gt;&lt;child&gt;&lt;prop_1&gt;</id>
+							<id></id>
 							<simple>prop_1</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::trivial_inheritance::pkg1::child::prop_1</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.trivial_inheritance.pkg1.child.prop_1</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>trivial_inheritance</item>
 								</model_modules>
 								<internal_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>pkg1</item>
 								</internal_modules>
-								<element>child</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_trivial_inheritance_pkg1_child_prop_1</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>int</unparsed_type>
 						<parsed_type>
@@ -4162,39 +4012,28 @@ in the context of inheritance.
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;parent_with_members&gt;&lt;prop_0&gt;</id>
+							<id></id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::trivial_inheritance::parent_with_members::prop_0</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.trivial_inheritance.parent_with_members.prop_0</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>trivial_inheritance</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>parent_with_members</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_trivial_inheritance_parent_with_members_prop_0</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>int</unparsed_type>
 						<parsed_type>
@@ -4374,39 +4213,28 @@ in the context of inheritance.
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;non_final_leaf&gt;&lt;prop_0&gt;</id>
+							<id></id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::trivial_inheritance::non_final_leaf::prop_0</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.trivial_inheritance.non_final_leaf.prop_0</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>trivial_inheritance</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>non_final_leaf</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_trivial_inheritance_non_final_leaf_prop_0</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>int</unparsed_type>
 						<parsed_type>
@@ -4621,39 +4449,28 @@ in the context of inheritance.
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;descendant2&gt;&lt;prop_0&gt;</id>
+							<id></id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::trivial_inheritance::descendant2::prop_0</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.trivial_inheritance.descendant2.prop_0</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>trivial_inheritance</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>descendant2</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_trivial_inheritance_descendant2_prop_0</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>bool</unparsed_type>
 						<parsed_type>
@@ -4868,39 +4685,28 @@ in the context of inheritance.
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;descendant3&gt;&lt;prop_0&gt;</id>
+							<id></id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::trivial_inheritance::descendant3::prop_0</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.trivial_inheritance.descendant3.prop_0</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>trivial_inheritance</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>descendant3</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_trivial_inheritance_descendant3_prop_0</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>bool</unparsed_type>
 						<parsed_type>
@@ -5116,40 +4922,28 @@ in the context of inheritance.
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;pkg3&gt;&lt;child&gt;&lt;prop_1&gt;</id>
+							<id></id>
 							<simple>prop_1</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::trivial_inheritance::pkg3::child::prop_1</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.trivial_inheritance.pkg3.child.prop_1</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>trivial_inheritance</item>
 								</model_modules>
 								<internal_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>pkg3</item>
 								</internal_modules>
-								<element>child</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_trivial_inheritance_pkg3_child_prop_1</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>int</unparsed_type>
 						<parsed_type>
@@ -5365,39 +5159,28 @@ in the context of inheritance.
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;parent_outside&gt;&lt;prop_0&gt;</id>
+							<id></id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::trivial_inheritance::parent_outside::prop_0</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.trivial_inheritance.parent_outside.prop_0</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>trivial_inheritance</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>parent_outside</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_trivial_inheritance_parent_outside_prop_0</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>int</unparsed_type>
 						<parsed_type>
@@ -6148,39 +5931,28 @@ in the context of inheritance.
 							<scope>0</scope>
 						</annotation>
 						<name>
-							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;move_ctor_descendant&gt;&lt;prop_1&gt;</id>
+							<id></id>
 							<simple>prop_1</simple>
 							<qualified>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>dogen::test_models::trivial_inheritance::move_ctor_descendant::prop_1</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>dogen.test_models.trivial_inheritance.move_ctor_descendant.prop_1</second>
-								</item>
 							</qualified>
 							<location>
 								<external_modules>
-									<count>2</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>dogen</item>
-									<item>test_models</item>
 								</external_modules>
 								<model_modules>
-									<count>1</count>
+									<count>0</count>
 									<item_version>0</item_version>
-									<item>trivial_inheritance</item>
 								</model_modules>
 								<internal_modules>
 									<count>0</count>
 									<item_version>0</item_version>
 								</internal_modules>
-								<element>move_ctor_descendant</element>
+								<element></element>
 							</location>
-							<identifiable>dogen_test_models_trivial_inheritance_move_ctor_descendant_prop_1</identifiable>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>boost::filesystem::path</unparsed_type>
 						<parsed_type>
