@@ -12,22 +12,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-03 Tue 17:01]
+#+CAPTION: Clock summary at [2017-01-03 Tue 17:06]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *12:39* |       |      | 100.0 |
+| *Total time*                                                                | *12:43* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 12:39   |       |      | 100.0 |
-| Active                                                                      |         | 12:39 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:21 |   2.8 |
+| Stories                                                                     | 12:43   |       |      | 100.0 |
+| Active                                                                      |         | 12:43 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:25 |   3.3 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:57 |   7.5 |
-| COMPLETED Consider supporting multiple inheritance on non-proxy models      |         |       | 3:24 |  26.9 |
-| STARTED Add basic validation infrastructure                                 |         |       | 7:57 |  62.8 |
+| COMPLETED Consider supporting multiple inheritance on non-proxy models      |         |       | 3:24 |  26.7 |
+| STARTED Add basic validation infrastructure                                 |         |       | 7:57 |  62.5 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2017-01-03 Tue 17:02]--[2017-01-03 Tue 17:06] =>  0:04
     CLOCK: [2016-12-28 Wed 12:02]--[2016-12-28 Wed 12:23] =>  0:21
 
 Updates to sprint and product backlog.
@@ -187,6 +188,20 @@ model.
   etc). This makes it conceptually consistent
 - move value computations to yarn so that in the future we can add
   meta-data to override it.
+
+*** Measure validation slowdown                                       :story:
+
+It appears generating the dogen models is a lot slower with validation
+enabled. We need to measure this using the traditional benchmark. If
+there is really a slowdown, we need to add a command line flag to
+enable validation (disabled by default). This makes sense from a
+workflow perspective - one can occasionally check if the model is not
+quite right, but its probably not a requirement to always check
+validation.
+
+One of the reasons for the slowdown is probably the use of regular
+expressions to validate names. It is probably faster to hard-code a
+validator by hand, given that the regex is so trivial.
 
 *** Augment element ID with meta-model type                           :story:
 
