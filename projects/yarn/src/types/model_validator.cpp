@@ -19,6 +19,7 @@
  *
  */
 #include <regex>
+#include <array>
 #include <algorithm>
 #include <unordered_set>
 #include "dogen/utility/log/logger.hpp"
