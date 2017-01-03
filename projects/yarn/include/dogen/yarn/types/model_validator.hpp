@@ -25,14 +25,25 @@
 #pragma once
 #endif
 
+#include <list>
+#include <string>
+#include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn/types/languages.hpp"
 
 namespace dogen {
 namespace yarn {
 
 class model_validator final {
 private:
-    // void concepts_should_have_at_least_one_property(const model& im) const;
+    bool allow_spaces_in_built_in_types(const languages l) const;
+    void sanity_check_string(const std::string& s,
+        bool check_not_builtin = true) const;
+    void sanity_check_strings(const std::list<std::string>& strings) const;
+    std::list<name> decompose_model_into_element_names(const model& m) const;
+    void sanity_check_name(const name& n,
+        const bool allow_spaces_in_built_in_types) const;
+    void sanity_check_all_names(const model& m) const;
 
 public:
     void validate(const model& m) const;
