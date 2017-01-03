@@ -1,0 +1,544 @@
+diff --git a/doc/agile/sprint_backlog_95.org b/doc/agile/sprint_backlog_95.org
+index 8237c5bd9..bd6316a51 100644
+--- a/doc/agile/sprint_backlog_95.org
++++ b/doc/agile/sprint_backlog_95.org
+@@ -185,7 +185,8 @@ went wrong by looking at the generated code and the compiler errors.
+ We need a class responsible for checking the consistency of the yarn
+ model.
+ 
+-*** Clean up enumerator implementation                                :story:
++*** STARTED Clean up enumerator implementation                        :story:
++    CLOCK: [2017-01-03 Tue 18:30]--[2017-01-03 Tue 19:02] =>  0:32
+ 
+ - make enumerator nameable, and compute name correctly (qualified,
+   etc). This makes it conceptually consistent
+diff --git a/projects/input_models/yarn.dia b/projects/input_models/yarn.dia
+index fbfb6a674..9c2aff47b 100644
+--- a/projects/input_models/yarn.dia
++++ b/projects/input_models/yarn.dia
+@@ -3798,22 +3798,22 @@ or a string.#</dia:string>
+         <dia:point val="6,90"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="5.95,89.95;13.865,94.45"/>
++        <dia:rectangle val="5.95,89.95;16.56,93.65"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+         <dia:point val="6,90"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="7.8150000000000004"/>
++        <dia:real val="10.51"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+-        <dia:real val="4.4000000000000004"/>
++        <dia:real val="3.6000000000000001"/>
+       </dia:attribute>
+       <dia:attribute name="name">
+         <dia:string>#enumerator#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="stereotype">
+-        <dia:string>#Documentable#</dia:string>
++        <dia:string>#Documentable, Nameable#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="comment">
+         <dia:string>#One of a set of valid values that an enumeration can assume.
+@@ -3901,29 +3901,6 @@ The enumerator defines an element in the domain of the enumeration.#</dia:string
+       <dia:attribute name="attributes">
+         <dia:composite type="umlattribute">
+           <dia:attribute name="name">
+-            <dia:string>#name#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="type">
+-            <dia:string>#std::string#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="value">
+-            <dia:string>##</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="comment">
+-            <dia:string>#Name of the enumerator.#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="visibility">
+-            <dia:enum val="0"/>
+-          </dia:attribute>
+-          <dia:attribute name="abstract">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-          <dia:attribute name="class_scope">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-        </dia:composite>
+-        <dia:composite type="umlattribute">
+-          <dia:attribute name="name">
+             <dia:string>#value#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+@@ -3995,7 +3972,7 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
+         <dia:point val="3.3725,81.6"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="2.6225,80.85;10.1075,90.8"/>
++        <dia:rectangle val="2.6225,80.85;11.455,90.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -4003,8 +3980,8 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
+       <dia:attribute name="orth_points">
+         <dia:point val="3.3725,81.6"/>
+         <dia:point val="3.3725,85"/>
+-        <dia:point val="9.9075,85"/>
+-        <dia:point val="9.9075,90"/>
++        <dia:point val="11.255,85"/>
++        <dia:point val="11.255,90"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -17557,7 +17534,7 @@ space.#</dia:string>
+         <dia:point val="59.3025,81.6"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="49.5662,80.85;60.0525,90.8"/>
++        <dia:rectangle val="49.5663,80.85;60.0525,90.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -23902,7 +23879,7 @@ space.#</dia:string>
+         <dia:point val="12,66"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="11.25,55.75;19.95,67.6"/>
++        <dia:rectangle val="11.25,55.75;19.95,66.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -24132,7 +24109,7 @@ space.#</dia:string>
+         <dia:point val="49,63"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="41.075,62.95;49.2,79.6"/>
++        <dia:rectangle val="41.075,62.95;49.2,78.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -24313,7 +24290,7 @@ space.#</dia:string>
+         <dia:point val="24.435,66"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="23.685,60.95;36.04,67.6"/>
++        <dia:rectangle val="23.685,60.25;36.04,66.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -24384,7 +24361,7 @@ space.#</dia:string>
+         <dia:point val="24,78"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="23.25,68.95;36.04,79.6"/>
++        <dia:rectangle val="23.25,68.95;36.04,78.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+diff --git a/projects/quilt.cpp/src/types/formatters/io/enum_implementation_formatter.stitch b/projects/quilt.cpp/src/types/formatters/io/enum_implementation_formatter.stitch
+index d3ecf6a33..217ccc3fd 100644
+--- a/projects/quilt.cpp/src/types/formatters/io/enum_implementation_formatter.stitch
++++ b/projects/quilt.cpp/src/types/formatters/io/enum_implementation_formatter.stitch
+@@ -57,7 +57,7 @@ std::ostream& operator<<(std::ostream& s, const <#= ye.name().simple() #>& v) {
+             for (const auto& en : ye.enumerators()) {
+ #>
+     case <#= ye.name().simple() #>::<#= en.name() #>:
+-        attr = "\"<#= en.name() #>\"";
++        attr = "\"<#= en.name().simple() #>\"";
+         break;
+ <#+
+             }
+diff --git a/projects/quilt.cpp/src/types/formatters/types/enum_header_formatter.stitch b/projects/quilt.cpp/src/types/formatters/types/enum_header_formatter.stitch
+index a452fc945..78097bb85 100644
+--- a/projects/quilt.cpp/src/types/formatters/types/enum_header_formatter.stitch
++++ b/projects/quilt.cpp/src/types/formatters/types/enum_header_formatter.stitch
+@@ -46,7 +46,7 @@ enum class <#= ye.name().simple() #> : <#= a.get_qualified_name(ye.underlying_ty
+             dogen::formatters::sequence_formatter sf(ye.enumerators().size());
+             for (const auto& en : ye.enumerators()) {
+ #>
+-    <#= en.name() #> = <#= en.value() #><#= sf.postfix() #><#= a.comment_inline(en.documentation()) #>
++    <#= en.name().simple() #> = <#= en.value() #><#= sf.postfix() #><#= a.comment_inline(en.documentation()) #>
+ <#+
+                 sf.next();
+             }
+diff --git a/projects/quilt.csharp/src/types/formatters/io/enum_formatter.stitch b/projects/quilt.csharp/src/types/formatters/io/enum_formatter.stitch
+index 7c3c1a11c..7ea48b255 100644
+--- a/projects/quilt.csharp/src/types/formatters/io/enum_formatter.stitch
++++ b/projects/quilt.csharp/src/types/formatters/io/enum_formatter.stitch
+@@ -47,8 +47,8 @@ enum_formatter::format(const context& ctx, const yarn::element& e) const {
+ <#+
+             for (const auto& en : ye.enumerators()) {
+ #>
+-                case <#= ye.name().simple() #>.<#= en.name() #>:
+-                    valueAsString = "<#= en.name() #>";
++                case <#= ye.name().simple() #>.<#= en.name().simple() #>:
++                    valueAsString = "<#= en.name().simple() #>";
+                     break;
+ <#+
+             }
+diff --git a/projects/quilt.csharp/src/types/formatters/types/enum_formatter.stitch b/projects/quilt.csharp/src/types/formatters/types/enum_formatter.stitch
+index d2ad53b25..6cdfffbfa 100644
+--- a/projects/quilt.csharp/src/types/formatters/types/enum_formatter.stitch
++++ b/projects/quilt.csharp/src/types/formatters/types/enum_formatter.stitch
+@@ -39,7 +39,7 @@ using System;
+             dogen::formatters::sequence_formatter sf(ye.enumerators().size());
+             for (const auto& en : ye.enumerators()) {
+ #>
+-        <#= en.name() #> = <#= en.value() #><#= sf.postfix() #><#= a.comment_inline(en.documentation()) #>
++        <#= en.name().simple() #> = <#= en.value() #><#= sf.postfix() #><#= a.comment_inline(en.documentation()) #>
+ <#+
+                 sf.next();
+             }
+diff --git a/projects/yarn.dia/src/types/transformer.cpp b/projects/yarn.dia/src/types/transformer.cpp
+index c6c2f36a1..d1490a486 100644
+--- a/projects/yarn.dia/src/types/transformer.cpp
++++ b/projects/yarn.dia/src/types/transformer.cpp
+@@ -87,7 +87,7 @@ transformer::to_enumerator(const processed_attribute& a) const {
+     validate_dia_object_name(a.name());
+ 
+     yarn::enumerator r;
+-    r.name(a.name());
++    r.name().simple(a.name());
+     r.documentation(a.comment().documentation());
+     return r;
+ }
+diff --git a/projects/yarn.json/src/types/dehydrator.cpp b/projects/yarn.json/src/types/dehydrator.cpp
+index f3a1ef192..8693531c1 100644
+--- a/projects/yarn.json/src/types/dehydrator.cpp
++++ b/projects/yarn.json/src/types/dehydrator.cpp
+@@ -301,7 +301,8 @@ dehydrate_enumerations(const intermediate_model& im, std::ostream& s) const {
+         std::vector<enumerator> enumerators;
+         enumerators.reserve(o.enumerators().size());
+         for (const auto& en : o.enumerators()) {
+-            if (en.name() != "invalid")
++            // FIXME: to lower
++            if (en.name().simple() != "invalid")
+                 enumerators.push_back(en);
+         }
+ 
+@@ -316,7 +317,7 @@ dehydrate_enumerations(const intermediate_model& im, std::ostream& s) const {
+             s << " { ";
+             uf.insert_quoted("simple_name");
+             s << " : ";
+-            uf.insert_quoted(en.name());
++            uf.insert_quoted(en.name().simple());
+ 
+             if (!en.documentation().empty()) {
+                 s << comma_space;
+diff --git a/projects/yarn.json/src/types/hydrator.cpp b/projects/yarn.json/src/types/hydrator.cpp
+index e008d4103..ad5a06eba 100644
+--- a/projects/yarn.json/src/types/hydrator.cpp
++++ b/projects/yarn.json/src/types/hydrator.cpp
+@@ -215,7 +215,7 @@ read_enumerators(const boost::property_tree::ptree& pt) const {
+     for (auto i(pt.begin()); i != pt.end(); ++i) {
+         const auto& apt(i->second);
+         enumerator e;
+-        e.name(apt.get<std::string>(simple_name_key));
++        e.name().simple(apt.get<std::string>(simple_name_key));
+         e.documentation(read_documentation(apt));
+         r.push_back(e);
+     }
+diff --git a/projects/yarn/include/dogen/yarn/types/enumeration_expander.hpp b/projects/yarn/include/dogen/yarn/types/enumeration_expander.hpp
+index 61b346b41..258212562 100644
+--- a/projects/yarn/include/dogen/yarn/types/enumeration_expander.hpp
++++ b/projects/yarn/include/dogen/yarn/types/enumeration_expander.hpp
+@@ -27,12 +27,17 @@
+ 
+ #include <list>
+ #include <unordered_set>
++#include "dogen/yarn/types/languages.hpp"
++#include "dogen/yarn/types/enumerator.hpp"
+ #include "dogen/yarn/types/intermediate_model.hpp"
+ 
+ namespace dogen {
+ namespace yarn {
+ 
+ class enumeration_expander final {
++private:
++    std::string obtain_invalid_enumerator_name(const languages l) const;
++
+ public:
+     /**
+      * @brief Expands all enumerations in model.
+diff --git a/projects/yarn/include/dogen/yarn/types/enumerator.hpp b/projects/yarn/include/dogen/yarn/types/enumerator.hpp
+index 1f570607f..b38cc4c68 100644
+--- a/projects/yarn/include/dogen/yarn/types/enumerator.hpp
++++ b/projects/yarn/include/dogen/yarn/types/enumerator.hpp
+@@ -27,6 +27,7 @@
+ 
+ #include <string>
+ #include <algorithm>
++#include "dogen/yarn/types/name.hpp"
+ #include "dogen/yarn/serialization/enumerator_fwd_ser.hpp"
+ 
+ namespace dogen {
+@@ -47,7 +48,7 @@ public:
+ public:
+     enumerator(
+         const std::string& documentation,
+-        const std::string& name,
++        const dogen::yarn::name& name,
+         const std::string& value);
+ 
+ private:
+@@ -73,13 +74,13 @@ public:
+     /**@}*/
+ 
+     /**
+-     * @brief Name of the enumerator.
++     * @brief Fully qualified name.
+      */
+     /**@{*/
+-    const std::string& name() const;
+-    std::string& name();
+-    void name(const std::string& v);
+-    void name(const std::string&& v);
++    const dogen::yarn::name& name() const;
++    dogen::yarn::name& name();
++    void name(const dogen::yarn::name& v);
++    void name(const dogen::yarn::name&& v);
+     /**@}*/
+ 
+     /**
+@@ -106,7 +107,7 @@ public:
+ 
+ private:
+     std::string documentation_;
+-    std::string name_;
++    dogen::yarn::name name_;
+     std::string value_;
+ };
+ 
+diff --git a/projects/yarn/src/hash/enumerator_hash.cpp b/projects/yarn/src/hash/enumerator_hash.cpp
+index f2853996e..794ccbae0 100644
+--- a/projects/yarn/src/hash/enumerator_hash.cpp
++++ b/projects/yarn/src/hash/enumerator_hash.cpp
+@@ -18,6 +18,7 @@
+  * MA 02110-1301, USA.
+  *
+  */
++#include "dogen/yarn/hash/name_hash.hpp"
+ #include "dogen/yarn/hash/enumerator_hash.hpp"
+ 
+ namespace {
+diff --git a/projects/yarn/src/io/enumerator_io.cpp b/projects/yarn/src/io/enumerator_io.cpp
+index 143ae1738..b3001191a 100644
+--- a/projects/yarn/src/io/enumerator_io.cpp
++++ b/projects/yarn/src/io/enumerator_io.cpp
+@@ -20,6 +20,7 @@
+  */
+ #include <ostream>
+ #include <boost/algorithm/string.hpp>
++#include "dogen/yarn/io/name_io.hpp"
+ #include "dogen/yarn/io/enumerator_io.hpp"
+ 
+ inline std::string tidy_up_string(std::string s) {
+@@ -36,7 +37,7 @@ std::ostream& operator<<(std::ostream& s, const enumerator& v) {
+     s << " { "
+       << "\"__type__\": " << "\"dogen::yarn::enumerator\"" << ", "
+       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
+-      << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
++      << "\"name\": " << v.name() << ", "
+       << "\"value\": " << "\"" << tidy_up_string(v.value()) << "\""
+       << " }";
+     return(s);
+diff --git a/projects/yarn/src/serialization/enumerator_ser.cpp b/projects/yarn/src/serialization/enumerator_ser.cpp
+index 753fc0927..42af10014 100644
+--- a/projects/yarn/src/serialization/enumerator_ser.cpp
++++ b/projects/yarn/src/serialization/enumerator_ser.cpp
+@@ -28,6 +28,7 @@
+ #include <boost/archive/binary_oarchive.hpp>
+ #include <boost/archive/polymorphic_iarchive.hpp>
+ #include <boost/archive/polymorphic_oarchive.hpp>
++#include "dogen/yarn/serialization/name_ser.hpp"
+ #include "dogen/yarn/serialization/enumerator_ser.hpp"
+ 
+ namespace boost {
+diff --git a/projects/yarn/src/test/mock_intermediate_model_factory.cpp b/projects/yarn/src/test/mock_intermediate_model_factory.cpp
+index be879a536..792866763 100644
+--- a/projects/yarn/src/test/mock_intermediate_model_factory.cpp
++++ b/projects/yarn/src/test/mock_intermediate_model_factory.cpp
+@@ -534,10 +534,10 @@ make_enumeration(const unsigned int i, const name& model_name,
+     un.simple(unsigned_int);
+     r.underlying_type(un);
+ 
+-    const auto lambda([&](const unsigned int n) -> enumerator {
++    const auto lambda([&](const unsigned int pos) -> enumerator {
+             enumerator r;
+-            r.name(type_name(n));
+-            r.value(boost::lexical_cast<std::string>(n));
++            r.name(nf.build_attribute_name(n, type_name(pos)));;
++            r.value(boost::lexical_cast<std::string>(pos));
+             return r;
+         });
+ 
+diff --git a/projects/yarn/src/test_data/enumerator_td.cpp b/projects/yarn/src/test_data/enumerator_td.cpp
+index aca58eece..bdbaf00da 100644
+--- a/projects/yarn/src/test_data/enumerator_td.cpp
++++ b/projects/yarn/src/test_data/enumerator_td.cpp
+@@ -19,6 +19,7 @@
+  *
+  */
+ #include <sstream>
++#include "dogen/yarn/test_data/name_td.hpp"
+ #include "dogen/yarn/test_data/enumerator_td.hpp"
+ 
+ namespace {
+@@ -29,6 +30,11 @@ std::string create_std_string(const unsigned int position) {
+     return s.str();
+ }
+ 
++dogen::yarn::name
++create_dogen_yarn_name(const unsigned int position) {
++    return dogen::yarn::name_generator::create(position);
++}
++
+ }
+ 
+ namespace dogen {
+@@ -39,7 +45,7 @@ enumerator_generator::enumerator_generator() : position_(0) { }
+ void enumerator_generator::
+ populate(const unsigned int position, result_type& v) {
+     v.documentation(create_std_string(position + 0));
+-    v.name(create_std_string(position + 1));
++    v.name(create_dogen_yarn_name(position + 1));
+     v.value(create_std_string(position + 2));
+ }
+ 
+diff --git a/projects/yarn/src/types/enumeration_expander.cpp b/projects/yarn/src/types/enumeration_expander.cpp
+index fb6d5444b..e28a16e3c 100644
+--- a/projects/yarn/src/types/enumeration_expander.cpp
++++ b/projects/yarn/src/types/enumeration_expander.cpp
+@@ -22,7 +22,9 @@
+ #include <boost/lexical_cast.hpp>
+ #include <boost/throw_exception.hpp>
+ #include "dogen/utility/log/logger.hpp"
++#include "dogen/yarn/io/languages_io.hpp"
+ #include "dogen/yarn/types/enumeration.hpp"
++#include "dogen/yarn/types/name_factory.hpp"
+ #include "dogen/yarn/types/expansion_error.hpp"
+ #include "dogen/yarn/types/enumeration_expander.hpp"
+ 
+@@ -31,33 +33,47 @@ namespace {
+ using namespace dogen::utility::log;
+ static logger lg(logger_factory("yarn.enumeration_expander"));
+ 
++const std::string csharp_invalid("Invalid");
++const std::string cpp_invalid("invalid");
++
+ const std::string duplicate_enumerator("Duplicate enumerator name: ");
++const std::string unsupported_language("Invalid or unsupported language: ");
+ 
+ }
+ 
+ namespace dogen {
+ namespace yarn {
+ 
++std::string enumeration_expander::
++obtain_invalid_enumerator_name(const languages l) const {
++    switch(l) {
++    case languages::csharp: return csharp_invalid;
++    case languages::cpp: return cpp_invalid;
++    default: {
++        const auto s(boost::lexical_cast<std::string>(l));
++        BOOST_LOG_SEV(lg, error) << unsupported_language << s;
++        BOOST_THROW_EXCEPTION(expansion_error(unsupported_language + s));
++    } }
++}
++
+ void enumeration_expander::expand(intermediate_model& im) {
+ 
+     /*
+      * Setup the invalid enumeration.
+      */
+-    dogen::yarn::enumerator invalid;
+-
+-    if (im.language() == languages::csharp)
+-        invalid.name("Invalid");
+-    else
+-        invalid.name("invalid");
+-
++    enumerator invalid;
+     invalid.documentation("Represents an uninitialised enum");
+     invalid.value("0");
+ 
++    yarn::name_factory nf;
+     for (auto& pair : im.enumerations()) {
+         auto& e(pair.second);
+ 
+         std::vector<enumerator> enumerators;
+-        enumerators.reserve(e.enumerators().size() + 1);
++        enumerators.reserve(e.enumerators().size() + 1/*for invalid*/);
++
++        const std::string sn(obtain_invalid_enumerator_name(im.language()));
++        invalid.name(nf.build_attribute_name(e.name(), sn));
+         enumerators.push_back(invalid);
+ 
+         /*
+@@ -68,16 +84,22 @@ void enumeration_expander::expand(intermediate_model& im) {
+         unsigned int pos(1);
+         std::set<std::string> enumerator_names;
+         for (const auto& en : e.enumerators()) {
+-            const auto n(en.name());
+-            const auto i(enumerator_names.find(n));
++            const auto sn(en.name().simple());
++            const auto i(enumerator_names.find(sn));
+             if (i != enumerator_names.end()) {
+-                BOOST_LOG_SEV(lg, error) << duplicate_enumerator << n;
++                BOOST_LOG_SEV(lg, error) << duplicate_enumerator << sn;
+                 BOOST_THROW_EXCEPTION(
+-                    expansion_error(duplicate_enumerator + n));
++                    expansion_error(duplicate_enumerator + sn));
+             }
+ 
+             auto copy(en);
+             copy.value(boost::lexical_cast<std::string>(pos));
++
++            /*
++             * Expand name. At this point, we've only populated
++             * the enumerator simple name.
++             */
++            copy.name(nf.build_attribute_name(e.name(), copy.name().simple()));
+             enumerators.push_back(copy);
+             ++pos;
+         }
+diff --git a/projects/yarn/src/types/enumerator.cpp b/projects/yarn/src/types/enumerator.cpp
+index a809a515c..94b4a555f 100644
+--- a/projects/yarn/src/types/enumerator.cpp
++++ b/projects/yarn/src/types/enumerator.cpp
+@@ -25,7 +25,7 @@ namespace yarn {
+ 
+ enumerator::enumerator(
+     const std::string& documentation,
+-    const std::string& name,
++    const dogen::yarn::name& name,
+     const std::string& value)
+     : documentation_(documentation),
+       name_(name),
+@@ -66,19 +66,19 @@ void enumerator::documentation(const std::string&& v) {
+     documentation_ = std::move(v);
+ }
+ 
+-const std::string& enumerator::name() const {
++const dogen::yarn::name& enumerator::name() const {
+     return name_;
+ }
+ 
+-std::string& enumerator::name() {
++dogen::yarn::name& enumerator::name() {
+     return name_;
+ }
+ 
+-void enumerator::name(const std::string& v) {
++void enumerator::name(const dogen::yarn::name& v) {
+     name_ = v;
+ }
+ 
+-void enumerator::name(const std::string&& v) {
++void enumerator::name(const dogen::yarn::name&& v) {
+     name_ = std::move(v);
+ }
+ 
