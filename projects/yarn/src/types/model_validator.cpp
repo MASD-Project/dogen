@@ -135,12 +135,13 @@ void name_collector::visit(const yarn::module& m) {
     if (m.is_global_module())
         return;
 
-    result_.push_back(m.name());
+    add_name(m.name());
 }
 
 void name_collector::visit(const yarn::enumeration& e) {
     process_element(e);
-    // FIXME: add enumerator names
+    for (const auto& en : e.enumerators())
+        add_name(en.name());
 }
 
 void name_collector::visit(const yarn::exception& e) {
