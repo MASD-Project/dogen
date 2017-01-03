@@ -31,9 +31,6 @@ namespace dogen {
 namespace yarn {
 
 class intermediate_model_validator final {
-private:
-    void sanity_check_all_names(const intermediate_model& im) const;
-
 public:
     void validate(const intermediate_model& im) const;
 };

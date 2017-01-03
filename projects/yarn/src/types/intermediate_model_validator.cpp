@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/types/validation_error.hpp"
 #include "dogen/yarn/types/elements_traversal.hpp"
 #include "dogen/yarn/types/intermediate_model_validator.hpp"
 
@@ -27,41 +28,71 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("yarn.intermediate_model_validator"));
 
+const std::string multiple_inheritance_not_supported(
+    "Multiple inheritance is not supported on target models: ");
+
 }
 
 namespace dogen {
 namespace yarn {
 
-namespace {
-
-class name_accumulator final {
+class validator {
 public:
-    void operator()(const yarn::concept& /*c*/) {}
-    void operator()(const yarn::primitive& /*p*/) {}
-    void operator()(const dogen::yarn::visitor& /*v*/) { }
-    void operator()(const yarn::enumeration& /*e*/) { }
-    void operator()(const yarn::object& /*o*/) { }
-    void operator()(const yarn::exception& /*e*/) { }
-    void operator()(const yarn::module& /*m*/) { }
+    validator(const bool is_proxy_reference);
 
 public:
-    const std::list<name>& result() const;
+    void operator()(const yarn::concept& c) const;
+    void operator()(const yarn::primitive& p) const;
+    void operator()(const dogen::yarn::visitor& v) const;
+    void operator()(const yarn::enumeration& e) const;
+    void operator()(const yarn::object& o) const;
+    void operator()(const yarn::exception& e) const;
+    void operator()(const yarn::module& m) const;
 
 private:
-    std::list<name> result_;
+    const bool is_proxy_reference_;
 };
 
+validator::validator(const bool is_proxy_reference)
+    : is_proxy_reference_(is_proxy_reference) {}
+
+void validator::operator()(const yarn::concept& /*c*/) const {
 }
 
-void intermediate_model_validator::
-sanity_check_all_names(const intermediate_model& im) const {
-    name_accumulator na;
-    yarn::elements_traversal(im, na);
+void validator::operator()(const yarn::primitive& /*p*/) const {
+}
+
+void validator::operator()(const dogen::yarn::visitor& /*v*/) const {
+}
+
+void validator::operator()(const yarn::enumeration& /*e*/) const {
+}
+
+void validator::operator()(const yarn::object& o) const {
+    /*
+     * Only proxy reference models can have multiple inheritance.
+     */
+    if (o.parents().size() > 1 && !is_proxy_reference_) {
+        const auto id(o.name().id());
+        BOOST_LOG_SEV(lg, error) << multiple_inheritance_not_supported << id;
+        BOOST_THROW_EXCEPTION(validation_error(
+                multiple_inheritance_not_supported + id));
+    }
+}
+
+void validator::operator()(const yarn::exception& /*e*/) const {
+}
+
+void validator::operator()(const yarn::module& /*m*/) const {
 }
 
 void intermediate_model_validator::
 validate(const intermediate_model& im) const {
     BOOST_LOG_SEV(lg, debug) << "Started validation. Model: " << im.name().id();
+
+    const bool ipr(im.origin_type() == origin_types::proxy_reference);
+    validator v(ipr/*is_proxy_reference*/);
+    yarn::elements_traversal(im, v);
 
     BOOST_LOG_SEV(lg, debug) << "Finished validation.";
 }

@@ -40,11 +40,11 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("yarn.model_validator"));
 
-// FIXME: we've removed the following keywords for now because yarn
-// uses these terms. We need to first rename it to package or somesuch
-// other name and then add it back.
-//
-// module, concept
+/*
+ * FIXME: we've removed the following keywords for now because yarn
+ * uses these terms: module, concept. We need to first rename it to
+ * package or somesuch other name and then add it back.
+ */
 std::array<std::string, 81> cpp_reserved = { {
     "alignas", "alignof", "and", "and_eq", "asm", "atomic_cancel",
     "atomic_commit", "atomic_noexcept", "auto", "bitand", "bitor",
