@@ -297,7 +297,7 @@
         },
         {
           "simple_name": "Prop2",
-          "type": "Package1::Class1"
+          "type": "Package1.Class1"
         }
       ]
     },

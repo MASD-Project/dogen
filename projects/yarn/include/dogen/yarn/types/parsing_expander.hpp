@@ -68,7 +68,7 @@ private:
      */
     void parse_attributes(const location& model_location,
         const std::unordered_set<std::string>& top_level_modules,
-        std::list<attribute>& attrs) const;
+        const languages language, std::list<attribute>& attrs) const;
 
     /**
      * @brief Parses parent name in the supplied object.

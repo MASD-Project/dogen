@@ -58,7 +58,7 @@ ideas into stories and add them as we go along.
 - types in global namespace must have an empty location.
 - if model module path is empty, location must also be empty.
 - check the number of type parameters in the type definition and
-  ensure that all name tree's have the expected number of type
+  ensure that all name trees have the expected number of type
   parameters.
 - properties of types in other models result in dependencies.
 - concepts that don't refine must have at least one property (or

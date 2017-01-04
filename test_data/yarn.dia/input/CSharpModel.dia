@@ -2842,7 +2842,7 @@ this is a long comment#</dia:string>
             <dia:string>#Prop2#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#Package1::Class1#</dia:string>
+            <dia:string>#Package1.Class1#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -3268,7 +3268,7 @@ this is a long comment#</dia:string>
         <dia:point val="21.3337,46.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="20.4838,46.15;30.2462,53.05"/>
+        <dia:rectangle val="20.4837,46.15;30.2462,53.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4212,7 +4212,7 @@ this is a long comment#</dia:string>
         <dia:point val="56.88,46.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="46.6512,46.75;57.73,53.05"/>
+        <dia:rectangle val="46.6513,46.75;57.73,53.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6050,7 +6050,7 @@ this is a long comment#</dia:string>
         <dia:point val="80.4963,66.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="79.6462,66.75;90.4175,73.05"/>
+        <dia:rectangle val="79.6463,66.75;90.4175,73.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

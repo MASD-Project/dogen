@@ -95,9 +95,9 @@ parsing_expander::obtain_top_level_modules(const intermediate_model& m) const {
 void parsing_expander::
 parse_attributes(const location& model_location,
     const std::unordered_set<std::string>& top_level_modules,
-    std::list<attribute>& attrs) const {
+    const languages language, std::list<attribute>& attrs) const {
 
-    const name_tree_parser ntp(top_level_modules, model_location);
+    const name_tree_parser ntp(top_level_modules, model_location, language);
     for (auto& attr : attrs) {
         auto nt(ntp.parse(attr.unparsed_type()));
         attr.parsed_type(nt);
@@ -140,16 +140,17 @@ expand(const annotations::type_repository& atrp, intermediate_model& m) const {
     const auto tg(make_type_group(atrp));
     const auto tlmn(obtain_top_level_modules(m));
     const auto ml(m.name().location());
+    const auto l(m.language());
 
     for (auto& pair : m.objects()) {
         auto& o(pair.second);
-        parse_attributes(ml, tlmn, o.local_attributes());
+        parse_attributes(ml, tlmn, l, o.local_attributes());
         parse_parent(tg, ml, tlmn, o);
     }
 
     for (auto& pair : m.concepts()) {
         auto& c(pair.second);
-        parse_attributes(ml, tlmn, c.local_attributes());
+        parse_attributes(ml, tlmn, l, c.local_attributes());
     }
 }
 

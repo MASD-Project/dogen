@@ -12,7 +12,7 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-04 Wed 16:22]
+#+CAPTION: Clock summary at [2017-01-04 Wed 16:41]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
@@ -361,40 +361,24 @@ Links:
 
 An increase of around 1s - 1.5s.
 
-*** Benchmarks do not work for utility tests                          :story:
+*** STARTED Parsing should support dot notation                       :story:
+    CLOCK: [2017-01-04 Wed 17:09]--[2017-01-04 Wed 17:44] =>  0:35
 
-When we run the benchmarks for utility we get an error:
+At present we only support the c++ scope operator =::= as a separator
+for fully qualified names in a model. However, it probably would be
+quite trivial to have a "mode" in the parser and support either =.= or
+=::=, depending on a construction-supplied flag (inferred from the
+model language). This would allow C# users to enter their model in a
+more natural way, instead of forcing them to use C++ notation.
 
-: Running 95 test cases...
-: /home/marco/Development/DomainDrivenConsulting/dogen/projects/utility/tests/asserter_tests.cpp(141): error: in "asserter_tests/assert_directory_good_data_set_returns_true": check asserter::assert_directory(e, a) has failed
+Notes:
 
-Seems like the tests do not clean up after themselves. We need to add
-some clean up logic and re-enable the tests.
+- we seem to use a different parser for the external modules, which
+  means that we are still using the C++ scope operator for those even
+  after fixing the parser.
 
-*** Augment element ID with meta-model type                           :story:
-
-The element ID is considered to be a system-level, opaque
-identifier. It could, for all intents and purposes, be a large int. We
-have decided to use a string so we can dump it to the log and figure
-out what is going on without having to map IDs to a human-readable
-value. In the same vein, we could also add another component to the ID
-that would contain the meta-model element for that ID. This
-information could be placed at the start.
-
-Of course, we will not be able to remove the look-ups we have at
-present that try to figure out the meta-model element because they are
-related to resolution. But for any other cases it may result in
-slightly more performant code. We need to look at all the use cases.
-
-*** Add handcrafted class to C# test model                            :story:
-
-We should make sure handcrafted code works in C#.
-
-Actually in order to get handcrafted types to work we need support for
-enablement. This is a somewhat tricky feature so we should leave it
-for after all the main ones are done.
-
-*** Add container types to C# proxy models                            :story:
+*** STARTED Add container types to C# proxy models                    :story:
+    CLOCK: [2017-01-04 Wed 16:22]--[2017-01-04 Wed 17:08] =>  0:46
 
 We should add all major container types and tests for them.
 
@@ -415,6 +399,8 @@ Notes:
   machinery to map them.
 - many c# types implement multiple interfaces; we need support for
   multiple inheritance at the non-proxy model level.
+- we need a way to mark a type as abstract so that we don't attempt to
+  instantiate it.
 
 Links:
 
@@ -528,14 +514,22 @@ System.Collections.Immutable:
 
 System.Collections.Concurrent
 
-*** Parsing should support dot notation                               :story:
+**** Add support for ArrayList
 
-At present we only support the c++ scope operator =::= as a separator
-for fully qualified names in a model. However, it probably would be
-quite trivial to have a "mode" in the parser and support either =.= or
-=::=, depending on a construction-supplied flag (inferred from the
-model language). This would allow C# users to enter their model in a
-more natural way, instead of forcing them to use C++ notation.
+In System.Collections:
+
+: IEnumerable
+: ICollection: IEnumerable
+: IList : ICollection, IEnumerable
+: ArrayList : IList, ICollection, IEnumerable
+
+*** Add handcrafted class to C# test model                            :story:
+
+We should make sure handcrafted code works in C#.
+
+Actually in order to get handcrafted types to work we need support for
+enablement. This is a somewhat tricky feature so we should leave it
+for after all the main ones are done.
 
 *** Add support for arrays                                            :story:
 
@@ -561,6 +555,16 @@ Links:
 *** Add visitor support to C#                                         :story:
 
 Implement the visitor formatters for C#.
+
+*** Benchmarks do not work for utility tests                          :story:
+
+When we run the benchmarks for utility we get an error:
+
+: Running 95 test cases...
+: /home/marco/Development/DomainDrivenConsulting/dogen/projects/utility/tests/asserter_tests.cpp(141): error: in "asserter_tests/assert_directory_good_data_set_returns_true": check asserter::assert_directory(e, a) has failed
+
+Seems like the tests do not clean up after themselves. We need to add
+some clean up logic and re-enable the tests.
 
 *** Add cross-model support to C#                                     :story:
 
@@ -606,6 +610,21 @@ able to define a proxy model as requiring a nuget package and then
 Dogen should generate packages.config and add all such models to it.
 
 : +  <package id="NUnit" version="2.6.4" targetFramework="net45" />
+
+*** Augment element ID with meta-model type                           :story:
+
+The element ID is considered to be a system-level, opaque
+identifier. It could, for all intents and purposes, be a large int. We
+have decided to use a string so we can dump it to the log and figure
+out what is going on without having to map IDs to a human-readable
+value. In the same vein, we could also add another component to the ID
+that would contain the meta-model element for that ID. This
+information could be placed at the start.
+
+Of course, we will not be able to remove the look-ups we have at
+present that try to figure out the meta-model element because they are
+related to resolution. But for any other cases it may result in
+slightly more performant code. We need to look at all the use cases.
 
 *** Identifiable needs to use camel case in C#                        :story:
 

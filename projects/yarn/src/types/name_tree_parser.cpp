@@ -20,6 +20,7 @@
  */
 #define BOOST_SPIRIT_USE_PHOENIX_V3
 #include <functional>
+#include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/spirit/include/qi.hpp>
 #include <boost/spirit/include/phoenix_function.hpp>
@@ -30,6 +31,7 @@
 #include <boost/spirit/include/phoenix_object.hpp>
 #include <boost/spirit/repository/include/qi_distinct.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/io/languages_io.hpp"
 #include "dogen/yarn/io/name_tree_io.hpp"
 #include "dogen/yarn/types/parsing_error.hpp"
 #include "dogen/yarn/types/name_tree_builder.hpp"
@@ -40,6 +42,7 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("yarn.name_tree_parser"));
 
+const std::string unsupported_language("Invalid or unsupported language: ");
 const std::string error_msg("Failed to parse string: ");
 using namespace boost::spirit;
 
@@ -106,7 +109,20 @@ struct grammar : qi::grammar<Iterator> {
         end_template_ = std::bind(&grammar::end_template, this);
     }
 
-    grammar(std::shared_ptr<name_tree_builder> b)
+    std::string scope_operator_for_language(const dogen::yarn::languages l) {
+        switch (l) {
+        case dogen::yarn::languages::csharp: return ".";
+        case dogen::yarn::languages::cpp: return "::";
+        default: {
+            const auto s(boost::lexical_cast<std::string>(l));
+            BOOST_LOG_SEV(lg, error) << unsupported_language << s;
+            BOOST_THROW_EXCEPTION(
+                dogen::yarn::parsing_error(unsupported_language + s));
+        } }
+    }
+
+    grammar(std::shared_ptr<name_tree_builder> b,
+        const dogen::yarn::languages language)
         : grammar::base_type(type_name), builder(b) {
         setup_functors();
         using qi::on_error;
@@ -123,7 +139,8 @@ struct grammar : qi::grammar<Iterator> {
         alphanum = boost::spirit::qi::alnum | string("_");
         nondigit = boost::spirit::qi::alpha | string("_");
         name %= lexeme[nondigit >> *(alphanum)];
-        scope_operator = "::";
+        scope_operator = scope_operator_for_language(language);
+
         name_tree = name[add_name_tree_]
             >> *(scope_operator >> name[add_name_tree_]);
         signable_primitive =
@@ -169,15 +186,16 @@ namespace yarn {
 
 name_tree_parser::
 name_tree_parser(const std::unordered_set<std::string>& top_level_modules,
-    const location& model_location)
-    : top_level_modules_(top_level_modules), model_location_(model_location) { }
+    const location& model_location, const languages language)
+    : top_level_modules_(top_level_modules), model_location_(model_location),
+      language_(language) {}
 
 name_tree name_tree_parser::parse(const std::string& s) const {
     BOOST_LOG_SEV(lg, debug) << "parsing name: " << s;
 
     auto builder(std::make_shared<name_tree_builder>(
             top_level_modules_, model_location_));
-    grammar<std::string::const_iterator> g(builder);
+    grammar<std::string::const_iterator> g(builder, language_);
 
     std::string::const_iterator i(s.begin());
     std::string::const_iterator end(s.end());

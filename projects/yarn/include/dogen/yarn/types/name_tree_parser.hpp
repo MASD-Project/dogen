@@ -28,6 +28,7 @@
 #include <list>
 #include <string>
 #include <unordered_set>
+#include "dogen/yarn/types/languages.hpp"
 #include "dogen/yarn/types/location.hpp"
 #include "dogen/yarn/types/name_tree.hpp"
 
@@ -47,9 +48,10 @@ public:
      * the current model.
      * @param model_location location for the element representing the
      * model.
+     * @param language what programming language syntax to use.
      */
     name_tree_parser(const std::unordered_set<std::string>& top_level_modules,
-        const location& model_location);
+        const location& model_location, const languages language);
 
 public:
     /**
@@ -60,6 +62,7 @@ public:
 private:
     const std::unordered_set<std::string>& top_level_modules_;
     const location& model_location_;
+    const languages language_;
 };
 
 } }
