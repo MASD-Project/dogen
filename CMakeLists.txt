@@ -407,12 +407,6 @@ if(WITH_BENCHMARKS)
     add_custom_target(benchmark_all)
     add_custom_target(ba)
     add_dependencies(ba benchmark_all)
-
-    set(git_dir "${CMAKE_SOURCE_DIR}/test_data/benchmarks/expected")
-    add_custom_target(rebase_benchmarks
-        COMMAND rm -rf ${git_dir}
-        COMMAND cp -r ${benchmark_directory} ${git_dir}
-        WORKING_DIRECTORY ${stage_bin_dir})
 endif()
 
 #

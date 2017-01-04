@@ -1,0 +1,6 @@
+elapsed_real_time, filesystem_inputs, filesystem_outputs, max_rss, avg_rss, avg_total_memory, avg_unshared_memory, avg_shared_memory, total_page_faults, total_soft_page_faults
+0.46, 0, 10712, 35920, 0, 0, 0, 0, 0, 9535
+0.80, 0, 10712, 36020, 0, 0, 0, 0, 0, 9541
+0.96, 0, 10712, 36096, 0, 0, 0, 0, 0, 9529
+0.70, 0, 10712, 35992, 0, 0, 0, 0, 0, 9539
+1.17, 0, 10712, 36080, 0, 0, 0, 0, 0, 9534
