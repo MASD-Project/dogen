@@ -12,21 +12,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-04 Wed 16:41]
+#+CAPTION: Clock summary at [2017-01-04 Wed 17:55]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *21:40* |       |      | 100.0 |
+| *Total time*                                                                | *23:11* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 21:40   |       |      | 100.0 |
-| Active                                                                      |         | 21:40 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:30 |   2.3 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:57 |   4.4 |
-| COMPLETED Consider supporting multiple inheritance on non-proxy models      |         |       | 3:24 |  15.7 |
-| COMPLETED Add basic validation infrastructure                               |         |       | 8:40 |  40.0 |
-| COMPLETED Fix borked windows build                                          |         |       | 0:26 |   2.0 |
-| COMPLETED Clean up enumerator implementation                                |         |       | 1:05 |   5.0 |
-| COMPLETED Measure validation slowdown                                       |         |       | 6:38 |  30.6 |
+| Stories                                                                     | 23:11   |       |      | 100.0 |
+| Active                                                                      |         | 23:11 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:30 |   2.2 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:57 |   4.1 |
+| COMPLETED Consider supporting multiple inheritance on non-proxy models      |         |       | 3:24 |  14.7 |
+| COMPLETED Add basic validation infrastructure                               |         |       | 8:40 |  37.4 |
+| COMPLETED Fix borked windows build                                          |         |       | 0:26 |   1.9 |
+| COMPLETED Clean up enumerator implementation                                |         |       | 1:05 |   4.7 |
+| COMPLETED Measure validation slowdown                                       |         |       | 6:38 |  28.6 |
+| STARTED Parsing should support dot notation                                 |         |       | 0:45 |   3.2 |
+| STARTED Add container types to C# proxy models                              |         |       | 0:46 |   3.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -362,6 +364,7 @@ Links:
 An increase of around 1s - 1.5s.
 
 *** STARTED Parsing should support dot notation                       :story:
+    CLOCK: [2017-01-04 Wed 17:45]--[2017-01-04 Wed 17:55] =>  0:10
     CLOCK: [2017-01-04 Wed 17:09]--[2017-01-04 Wed 17:44] =>  0:35
 
 At present we only support the c++ scope operator =::= as a separator
@@ -375,7 +378,8 @@ Notes:
 
 - we seem to use a different parser for the external modules, which
   means that we are still using the C++ scope operator for those even
-  after fixing the parser.
+  after fixing the parser. We need to update the name builder to infer
+  the scope delimiter.
 
 *** STARTED Add container types to C# proxy models                    :story:
     CLOCK: [2017-01-04 Wed 16:22]--[2017-01-04 Wed 17:08] =>  0:46
