@@ -28,22 +28,45 @@
 #include <list>
 #include <string>
 #include <unordered_set>
+#include <boost/exception/info.hpp>
 
 namespace dogen {
 namespace utility {
 namespace string {
 
-/**
- * @brief Splits a string given a separator.
- */
+class splitting_error : public virtual std::exception, public virtual boost::exception {
+public:
+    splitting_error() = default;
+    ~splitting_error() noexcept = default;
 
+public:
+    splitting_error(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
+};
+
+/**
+ * @brief Utility methods to split strings given delimiters.
+ */
 class splitter {
 public:
     /**
-     * @brief Splits the string by a supplied scope operator, e.g. '::'.
+     * @brief Splits the string by one of the supported scope operators.
+     *
+     * @pre The string cannot have a mix of scope operators.
      */
-    static std::list<std::string> split_scoped(const std::string& n,
-        const std::string& scope_operator = "::");
+    static std::list<std::string> split_scoped(const std::string& n);
+
+    /**
+     * @brief Splits the string by one or more single character
+     * delimiters, supplied as a string.
+     */
+    static std::list<std::string>
+    split_delimited(const std::string& n, const std::string& delimiter);
 
     /**
      * @brief Splits a string using CSV.

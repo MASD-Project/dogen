@@ -19,6 +19,7 @@
  *
  */
 #include <boost/tokenizer.hpp>
+#include <boost/throw_exception.hpp>
 #include <boost/range/algorithm.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include "dogen/utility/log/logger.hpp"
@@ -31,6 +32,9 @@ using namespace dogen::utility::log;
 auto lg(logger_factory("utility.string.splitter"));
 
 const char* comma_delimiter = ",";
+const std::string scope_delimiters(":.");
+
+const std::string multiple_delimiters("String has more than one delimiter: ");
 
 }
 
@@ -38,22 +42,53 @@ namespace dogen {
 namespace utility {
 namespace string {
 
-std::list<std::string> splitter::
-split_scoped(const std::string& n, const std::string& scope_operator) {
-    BOOST_LOG_SEV(lg, debug) << "parsing scoped name: " << n;
+std::list<std::string> splitter::split_scoped(const std::string& n) {
+    BOOST_LOG_SEV(lg, debug) << "Parsing scoped name: " << n;
 
-    const boost::char_separator<char> sep(scope_operator.c_str());
+    if (n.empty())
+        return std::list<std::string> {};
+
+    const auto i(n.find_first_of("."));
+    const auto k(n.find_first_of(":"));
+
+    /*
+     * If there are no delimiters we can just return the string.
+     */
+    if (i == std::string::npos && k == std::string::npos)
+        return std::list<std::string>{ n };
+
+    /*
+     * We do not support mixing and matching delimiters.
+     */
+    if (i != std::string::npos && k != std::string::npos) {
+        BOOST_LOG_SEV(lg, error) << multiple_delimiters << n;
+        BOOST_THROW_EXCEPTION(splitting_error(multiple_delimiters + n));
+    }
+
+    return split_delimited(n, scope_delimiters);
+}
+
+std::list<std::string> splitter::
+split_delimited(const std::string& n, const std::string& delimiter) {
+    BOOST_LOG_SEV(lg, debug) << "Parsing scoped name: " << n;
+
+    if (n.empty())
+        return std::list<std::string> {};
+
+    const boost::char_separator<char> sep(delimiter.c_str());
     boost::tokenizer<boost::char_separator<char> > tokens(n, sep);
 
     std::list<std::string> r;
     boost::copy(tokens, std::inserter(r, r.end()));
-    BOOST_LOG_SEV(lg, debug) << "result: " << r;
+    BOOST_LOG_SEV(lg, debug) << "Result: " << r;
     return r;
 }
 
-std::list<std::string>
-splitter::split_csv(const std::string& n) {
-    BOOST_LOG_SEV(lg, debug) << "parsing csv string: " << n;
+std::list<std::string> splitter::split_csv(const std::string& n) {
+    BOOST_LOG_SEV(lg, debug) << "Parsing csv string: " << n;
+
+    if (n.empty())
+        return std::list<std::string> {};
 
     const boost::char_separator<char> sep(comma_delimiter);
     boost::tokenizer<boost::char_separator<char> > tokens(n, sep);
@@ -64,7 +99,7 @@ splitter::split_csv(const std::string& n) {
         r.push_back(t);
     }
 
-    BOOST_LOG_SEV(lg, debug) << "result: " << r;
+    BOOST_LOG_SEV(lg, debug) << "Result: " << r;
     return r;
 }
 

@@ -219,14 +219,6 @@ model_validator::decompose_model_into_element_names(const model& m) const {
     return names;
 }
 
-/*
-void model_validator::
-non_refined_concepts_should_have_at_least_one_property(const model& im) const {
-    for (const auto& c : im.concepts()) {
-    }
-}
-*/
-
 void model_validator::sanity_check_name(
     const name& n, const bool allow_spaces_in_built_in_types) const {
 
@@ -253,7 +245,7 @@ void model_validator::sanity_check_name(
                              << allow_spaces_in_built_in_types;
     if (at_global_namespace && allow_spaces_in_built_in_types) {
         using utility::string::splitter;
-        const auto splitted(splitter::split_scoped(n.simple(), space));
+        const auto splitted(splitter::split_delimited(n.simple(), space));
         BOOST_LOG_SEV(lg, debug) << "Splitted simple name: " << splitted;
         for (const auto& s : splitted)
             sanity_check_string(s, check_not_builtin);

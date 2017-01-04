@@ -37,8 +37,6 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("yarn.name_builder"));
 
-const std::string dot(".");
-const std::string scope("::");
 const std::string empty_type_name("Type name is empty.");
 const std::string empty_model_name("Model name is empty.");
 const std::string empty_internal_modules("Internal modules are empty.");
@@ -90,7 +88,7 @@ name_builder& name_builder::model_name(const std::string& mn) {
     }
 
     using utility::string::splitter;
-    name_.location().model_modules(splitter::split_scoped(mn, dot));
+    name_.location().model_modules(splitter::split_scoped(mn));
 
     if (model_name_mode_)
         name_.simple(*name_.location().model_modules().rbegin());
@@ -107,45 +105,44 @@ name_builder& name_builder::model_name(const yarn::location& l) {
 }
 
 name_builder& name_builder::
-model_modules(const std::list<std::string>& mmp) {
-    name_.location().model_modules(mmp);
-    BOOST_LOG_SEV(lg, debug) << "Added model module path: " << mmp;
+model_modules(const std::list<std::string>& mm) {
+    name_.location().model_modules(mm);
+    BOOST_LOG_SEV(lg, debug) << "Added model modules: " << mm;
     return *this;
 }
 
-name_builder& name_builder::internal_modules(const std::string& imp) {
-    if (imp.empty()) {
+name_builder& name_builder::internal_modules(const std::string& im) {
+    if (im.empty()) {
         BOOST_LOG_SEV(lg, error) << empty_internal_modules;
         BOOST_THROW_EXCEPTION(building_error(empty_internal_modules));
     }
 
     using utility::string::splitter;
-    name_.location().internal_modules(splitter::split_scoped(imp));
-    BOOST_LOG_SEV(lg, debug) << "Added internal model path: " << imp;
+    name_.location().internal_modules(splitter::split_scoped(im));
+    BOOST_LOG_SEV(lg, debug) << "Added internal modules: " << im;
     return *this;
 }
 
 name_builder& name_builder::internal_modules(
-    const std::list<std::string>& imp) {
-    name_.location().internal_modules(imp);
-    BOOST_LOG_SEV(lg, debug) << "Added external model path: " << imp;
+    const std::list<std::string>& im) {
+    name_.location().internal_modules(im);
+    BOOST_LOG_SEV(lg, debug) << "Added external models: " << im;
     return *this;
 }
 
-name_builder& name_builder::external_modules(const std::string& emp) {
-    if (emp.empty())
+name_builder& name_builder::external_modules(const std::string& em) {
+    if (em.empty())
         return *this;
 
     using utility::string::splitter;
-    name_.location().external_modules(splitter::split_scoped(emp));
-    BOOST_LOG_SEV(lg, debug) << "Added external model path: " << emp;
+    name_.location().external_modules(splitter::split_scoped(em));
+    BOOST_LOG_SEV(lg, debug) << "Added external models: " << em;
     return *this;
 }
 
-name_builder& name_builder::external_modules(
-    const std::list<std::string>& emp) {
-    name_.location().external_modules(emp);
-    BOOST_LOG_SEV(lg, debug) << "Added external model path: " << emp;
+name_builder& name_builder::external_modules(const std::list<std::string>& em) {
+    name_.location().external_modules(em);
+    BOOST_LOG_SEV(lg, debug) << "Added external modules: " << em;
     return *this;
 }
 
@@ -222,7 +219,7 @@ name name_builder::build(const yarn::location& model_location,
     const std::string& names) {
 
     using utility::string::splitter;
-    const auto names_as_list(splitter::split_scoped(names, scope));
+    const auto names_as_list(splitter::split_scoped(names));
     return build(model_location, top_level_modules, names_as_list);
 }
 

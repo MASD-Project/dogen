@@ -21,6 +21,7 @@
 #include <boost/test/unit_test.hpp>
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/io/list_io.hpp"
+#include "dogen/utility/test/exception_checkers.hpp"
 #include "dogen/utility/string/splitter.hpp"
 
 namespace {
@@ -29,7 +30,11 @@ const std::string empty;
 const std::string test_module("utility");
 const std::string test_suite("splitter_tests");
 
+const std::string mixed_scopes("String has more than one");
+
 }
+
+using dogen::utility::test::contains_checker;
 
 BOOST_AUTO_TEST_SUITE(splitter_tests)
 
@@ -89,6 +94,33 @@ BOOST_AUTO_TEST_CASE(parsing_scoped_string_with_only_scope_operators_produces_ex
     auto a(splitter::split_scoped(i));
     BOOST_LOG_SEV(lg, info) << "actual: " << a;
     BOOST_REQUIRE(a.empty());
+}
+
+BOOST_AUTO_TEST_CASE(parsing_scoped_string_with_dots_produces_expected_result) {
+    SETUP_TEST_LOG_SOURCE("parsing_scoped_string_with_dots_produces_expected_result");
+
+    const std::string i("a.b");
+    BOOST_LOG_SEV(lg, info) << "input: " << i;
+
+    using dogen::utility::string::splitter;
+    const auto a(splitter::split_scoped(i));
+    BOOST_LOG_SEV(lg, info) << "actual: " << a;
+
+    BOOST_CHECK(a.front() == "a");
+    BOOST_CHECK(a.back() == "b");
+}
+
+BOOST_AUTO_TEST_CASE(parsing_string_with_mixed_scope_operators_throws) {
+    SETUP_TEST_LOG_SOURCE("parsing_string_with_mixed_scope_operators_throws");
+
+    const std::string i("a.b:c");
+    BOOST_LOG_SEV(lg, info) << "input: " << i;
+
+    using dogen::utility::string::splitting_error;
+    contains_checker<splitting_error> c(mixed_scopes);
+
+    using dogen::utility::string::splitter;
+    BOOST_CHECK_EXCEPTION(splitter::split_scoped(i), splitting_error, c);
 }
 
 BOOST_AUTO_TEST_CASE(parsing_csv_string_with_no_commas_produces_expected_result) {
