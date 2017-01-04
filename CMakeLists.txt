@@ -43,6 +43,7 @@ option(WITH_PROFILING "Build the project with profiling support" off)
 option(WITH_COVERALLS "Generate coveralls coverage." off)
 option(WITH_MINIMAL_PACKAGING "Package just the main application" off)
 option(WITH_JSON_VALIDATION "Adds JSON validation targets. Requires jq." on)
+option(WITH_BENCHMARKS "Adds targets for running benchmarks" on)
 
 #
 # check for dependencies
@@ -387,7 +388,32 @@ if (DOGEN_KNITTER_COMMAND AND DOGEN_STITCHER_COMMAND)
     add_dependencies(sa stitch_all)
 endif()
 
+#
+# Benchmarks
+#
+if(NOT UNIX)
+    set(WITH_BENCHMARKS "off")
+endif()
 
+if(WITH_BENCHMARKS)
+    set(benchmark_repeats "5")
+    set(benchmark_command "${CMAKE_SOURCE_DIR}/build/scripts/benchmark.linux.sh")
+    set(benchmark_directory "${stage_test_data_dir}/benchmarks/actual")
+    set(benchmark_prefix "")
+    if(NOT EXISTS "${benchmark_directory}")
+        make_directory("${benchmark_directory}")
+    endif()
+
+    add_custom_target(benchmark_all)
+    add_custom_target(ba)
+    add_dependencies(ba benchmark_all)
+
+    set(git_dir "${CMAKE_SOURCE_DIR}/test_data/benchmarks/expected")
+    add_custom_target(rebase_benchmarks
+        COMMAND rm -rf ${git_dir}
+        COMMAND cp -r ${benchmark_directory} ${git_dir}
+        WORKING_DIRECTORY ${stage_bin_dir})
+endif()
 
 #
 # include all sub directories

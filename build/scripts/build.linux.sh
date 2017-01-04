@@ -113,6 +113,7 @@ fi
 cmake_defines="-DCMAKE_BUILD_TYPE=${build_type}"
 cmake_defines="${cmake_defines} -DCMAKE_EXPORT_COMPILE_COMMANDS=TRUE"
 cmake_defines="${cmake_defines} -DWITH_LATEX=OFF"
+cmake_defines="${cmake_defines} -DWITH_BENCHMARKS=ON"
 if [ "${COVERALLS}" = "1" ]; then
     cmake_defines="${cmake_defines} -DWITH_PROFILING=ON"
     cmake_defines="${cmake_defines} -DWITH_COVERALLS=ON"
@@ -127,19 +128,19 @@ if [ "${WITH_CSHARP}" == "1" ]; then
     cd ${csharp_dir}
     nuget restore Dogen.TestModels.sln
     if [ $? -ne 0 ]; then
-        echo "Error in nuget restore.";
+        echo "Error in nuget restore." >&2
         exit 1;
     fi
 
     xbuild Dogen.TestModels.sln
     if [ $? -ne 0 ]; then
-        echo "Error building C# solution.";
+        echo "Error building C# solution." >&2
         exit 1;
     fi
 
     mono packages/NUnit.ConsoleRunner.3.5.0/tools/nunit3-console.exe CSharpModel.Tests/bin/Debug/Dogen.TestModels.CSharpModel.Tests.dll
     if [ $? -ne 0 ]; then
-        echo "Error running C# unit tests.";
+        echo "Error running C# unit tests." >&2
         exit 1;
     fi
 fi
@@ -148,6 +149,6 @@ echo "* Starting C++ build."
 cd ${build_type_dir}
 cmake ${product_dir} -G Ninja ${cmake_defines} && ninja -j5 ${target}
 if [ $? -ne 0 ]; then
-    echo "Error running CMake.";
+    echo "Error running CMake." >&2
     exit 1;
 fi

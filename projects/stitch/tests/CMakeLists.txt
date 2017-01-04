@@ -41,7 +41,18 @@ add_custom_target(run_${tests_name}
     COMMAND ${command}
     WORKING_DIRECTORY ${stage_bin_dir}
     DEPENDS ${tests_name})
+
 add_dependencies(run_all_tests run_${tests_name})
+
+if(WITH_BENCHMARKS)
+    add_custom_target(benchmark_${tests_name}
+        COMMAND ${benchmark_command} ${benchmark_repeats}
+        ${benchmark_directory}/${benchmark_prefix}${tests_name}.csv ${command}
+        WORKING_DIRECTORY ${stage_bin_dir}
+        DEPENDS ${tests_name})
+
+    add_dependencies(benchmark_all benchmark_${tests_name})
+endif()
 
 add_boost_tests(${name} ${files})
 
