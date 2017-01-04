@@ -3,7 +3,7 @@
   "external_modules": "Dogen::TestModels",
   "annotation": {
     "yarn.dia.comment": "true",
-    "yarn.dia.external_modules": "Dogen::TestModels",
+    "yarn.dia.external_modules": "Dogen.TestModels",
     "yarn.language": "csharp",
     "quilt.csharp.enabled": "true",
     "quilt.cpp.enabled": "false",
@@ -392,7 +392,7 @@
       },
       "meta_type": "object",
       "annotation": {
-        "yarn.generalization.parent": "Package2::Parent"
+        "yarn.generalization.parent": "Package2.Parent"
       },
       "attributes": [
         {
@@ -453,7 +453,7 @@
       },
       "meta_type": "object",
       "annotation": {
-        "yarn.generalization.parent": "Package3::Parent"
+        "yarn.generalization.parent": "Package3.Parent"
       },
       "attributes": [
         {

@@ -555,7 +555,7 @@ This is a remark.#</dia:string>
         <dia:composite type="text">
           <dia:attribute name="string">
             <dia:string>##DOGEN yarn.dia.comment=true
-#DOGEN yarn.dia.external_modules=Dogen::TestModels
+#DOGEN yarn.dia.external_modules=Dogen.TestModels
 #DOGEN yarn.language=csharp
 #DOGEN quilt.csharp.enabled=true
 #DOGEN quilt.cpp.enabled=false
@@ -5104,7 +5104,7 @@ this is a long comment#</dia:string>
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN yarn.generalization.parent=Package2::Parent#</dia:string>
+        <dia:string>##DOGEN yarn.generalization.parent=Package2.Parent#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -5626,7 +5626,7 @@ this is a long comment#</dia:string>
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN yarn.generalization.parent=Package3::Parent#</dia:string>
+        <dia:string>##DOGEN yarn.generalization.parent=Package3.Parent#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
