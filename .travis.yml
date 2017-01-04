@@ -59,6 +59,7 @@ install:
   - source ${SCRIPTS_DIR}/travis.install.${TRAVIS_OS_NAME}.sh
 
 script:
+  - JOBS=2
   - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then
         export TARGET="package run_all_tests";
         export THIRD_PARTY="/tmp/dogen_deps/dogen_deps_gcc_5.3_linux_amd64";
@@ -67,7 +68,7 @@ script:
         export THIRD_PARTY="/tmp/dogen_deps/dogen_deps_clang_7_3_0_osx_amd64";
         export TARGET="package";
     fi
-  - ${SCRIPTS_DIR}/build.${TRAVIS_OS_NAME}.sh ${BUILD_TYPE} ${COMPILER} ${THIRD_PARTY} ${TARGET}
+  - ${SCRIPTS_DIR}/build.${TRAVIS_OS_NAME}.sh ${BUILD_TYPE} ${JOBS} ${COMPILER} ${THIRD_PARTY} ${TARGET}
   - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then ${SCRIPTS_DIR}/test_package.linux.sh ${BUILD_TYPE} ${COMPILER} ; fi
 
 notifications:

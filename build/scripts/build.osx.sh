@@ -30,6 +30,18 @@ else
     echo "* Build type: ${build_type}"
 fi
 
+#
+# Concurrent jobs.
+#
+number_of_jobs="$1"
+shift
+if [[ "x${number_of_jobs}" = "x" ]]; then
+    number_of_jobs="5";
+    echo "* Jobs: ${number_of_jobs} (default)"
+else
+    echo "* Jobs: ${number_of_jobs}"
+fi
+
 realpath() {
     [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
 }
@@ -112,4 +124,4 @@ fi
 #
 echo "* Starting build."
 cd ${build_type_dir}
-cmake ${product_dir} ${cmake_defines} && make -j5 ${target}
+cmake ${product_dir} ${cmake_defines} && make -j ${number_of_jobs} ${target}

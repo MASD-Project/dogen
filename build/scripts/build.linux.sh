@@ -31,6 +31,18 @@ else
 fi
 
 #
+# Concurrent jobs
+#
+number_of_jobs="$1"
+shift
+if [[ "x${number_of_jobs}" = "x" ]]; then
+    number_of_jobs="5";
+    echo "* Jobs: ${number_of_jobs} (default)"
+else
+    echo "* Jobs: ${number_of_jobs}"
+fi
+
+#
 # Root directory for the product.
 #
 dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -147,7 +159,7 @@ fi
 
 echo "* Starting C++ build."
 cd ${build_type_dir}
-cmake ${product_dir} -G Ninja ${cmake_defines} && ninja -j5 ${target}
+cmake ${product_dir} -G Ninja ${cmake_defines} && ninja -j${number_of_jobs} ${target}
 if [ $? -ne 0 ]; then
     echo "Error running CMake." >&2
     exit 1;
