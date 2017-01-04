@@ -38,6 +38,7 @@ target_link_libraries(${tests_name}
 set(command $<TARGET_FILE:${tests_name}> ${boost_test_parameters})
 
 add_custom_target(run_${tests_name}
+    COMMENT "Running ${tests_name}" VERBATIM
     COMMAND ${command}
     WORKING_DIRECTORY ${stage_bin_dir}
     DEPENDS ${tests_name})
@@ -47,6 +48,7 @@ add_dependencies(run_windows_green_tests run_${tests_name})
 
 if(WITH_BENCHMARKS)
     add_custom_target(benchmark_${tests_name}
+        COMMENT "Benchmarking testing ${tests_name}" VERBATIM
         COMMAND ${benchmark_command} ${benchmark_repeats}
         ${benchmark_directory}/${benchmark_prefix}${tests_name}.csv ${command}
         WORKING_DIRECTORY ${stage_bin_dir}

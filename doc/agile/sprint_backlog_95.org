@@ -12,21 +12,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-04 Wed 11:48]
+#+CAPTION: Clock summary at [2017-01-04 Wed 11:57]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *18:54* |       |      | 100.0 |
+| *Total time*                                                                | *19:01* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 18:54   |       |      | 100.0 |
-| Active                                                                      |         | 18:54 |      | 100.0 |
+| Stories                                                                     | 19:01   |       |      | 100.0 |
+| Active                                                                      |         | 19:01 |      | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:30 |   2.6 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:57 |   5.0 |
-| COMPLETED Consider supporting multiple inheritance on non-proxy models      |         |       | 3:24 |  18.0 |
-| COMPLETED Add basic validation infrastructure                               |         |       | 8:40 |  45.9 |
+| COMPLETED Consider supporting multiple inheritance on non-proxy models      |         |       | 3:24 |  17.9 |
+| COMPLETED Add basic validation infrastructure                               |         |       | 8:40 |  45.6 |
 | COMPLETED Fix borked windows build                                          |         |       | 0:26 |   2.3 |
 | COMPLETED Clean up enumerator implementation                                |         |       | 1:05 |   5.7 |
-| STARTED Measure validation slowdown                                         |         |       | 3:52 |  20.5 |
+| STARTED Measure validation slowdown                                         |         |       | 3:59 |  20.9 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -210,6 +210,7 @@ We've borked the windows build with the validator changes.
   meta-data to override it.
 
 *** STARTED Measure validation slowdown                               :story:
+    CLOCK: [2017-01-04 Wed 11:49]--[2017-01-04 Wed 11:56] =>  0:07
     CLOCK: [2017-01-04 Wed 11:34]--[2017-01-04 Wed 11:48] =>  0:14
     CLOCK: [2017-01-04 Wed 09:01]--[2017-01-04 Wed 11:33] =>  2:32
     CLOCK: [2017-01-03 Tue 22:37]--[2017-01-03 Tue 23:43] =>  1:06
