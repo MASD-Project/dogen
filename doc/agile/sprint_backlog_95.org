@@ -12,21 +12,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-04 Wed 11:57]
+#+CAPTION: Clock summary at [2017-01-04 Wed 16:22]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *19:01* |       |      | 100.0 |
+| *Total time*                                                                | *21:40* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 19:01   |       |      | 100.0 |
-| Active                                                                      |         | 19:01 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:30 |   2.6 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:57 |   5.0 |
-| COMPLETED Consider supporting multiple inheritance on non-proxy models      |         |       | 3:24 |  17.9 |
-| COMPLETED Add basic validation infrastructure                               |         |       | 8:40 |  45.6 |
-| COMPLETED Fix borked windows build                                          |         |       | 0:26 |   2.3 |
-| COMPLETED Clean up enumerator implementation                                |         |       | 1:05 |   5.7 |
-| STARTED Measure validation slowdown                                         |         |       | 3:59 |  20.9 |
+| Stories                                                                     | 21:40   |       |      | 100.0 |
+| Active                                                                      |         | 21:40 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:30 |   2.3 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:57 |   4.4 |
+| COMPLETED Consider supporting multiple inheritance on non-proxy models      |         |       | 3:24 |  15.7 |
+| COMPLETED Add basic validation infrastructure                               |         |       | 8:40 |  40.0 |
+| COMPLETED Fix borked windows build                                          |         |       | 0:26 |   2.0 |
+| COMPLETED Clean up enumerator implementation                                |         |       | 1:05 |   5.0 |
+| COMPLETED Measure validation slowdown                                       |         |       | 6:38 |  30.6 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -209,11 +209,76 @@ We've borked the windows build with the validator changes.
 - move value computations to yarn so that in the future we can add
   meta-data to override it.
 
-*** STARTED Measure validation slowdown                               :story:
+*** COMPLETED Add unit test benchmarking                              :story:
+    CLOSED: [2017-01-04 Wed 16:03]
+
+*Rationale*: the new benchmark infrastructure - external to the c++
+code - is good enough.
+
+#+begin_quote
+*Story*: As a dogen developer, I would like to know if any of my
+changes impact performance so that I can address these problems early.
+#+end_quote
+
+*New understanding*:
+
+Create a set of performance specific tests. These wont get executed by
+regular users (e.g. they are not part of =run_all_specs=) but they do
+get executed in the build machine. These are selected tests with big
+loops (say 1M times) doing things like reading dia diagrams etc. We
+could chose a few key things just to give us some metrics around
+performance.
+
+In fact, we could create a set of colossi models: models with really
+large number of classes (say 500), maybe 5 of these with
+references. We could then use the diagrams to test the individual
+workflows: dia, dia_to_sml, cpp and engine with no writing. We should
+avoid writing files to filesystem to avoid number jitter caused by the
+hard drive. There should be no comparisons between actual and expected
+for the same reason.
+
+We need to make sure the benchmark tests won't run on valgrind or else
+the nightly builds will take over 24 hours. However, if we had it
+running on continuous we'd spot regressions on every check-in. But we
+don't want to delay continuous any more than necessary. Perhaps we
+need a separate build called performance which is also continuous and
+only runs these tests. We could pass in some kind of variable to CMake
+so that if performance is on, it ignores all tests other than
+performance and vice-versa. We'd also need a performance target that
+only builds the performance binary, and a =run_performance= target
+that executes it.
+
+Perhaps we could use a ruby script to generate the test models?
+
+Also, investigate nonius:
+
+https://github.com/rmartinho/nonius
+
+*Old understanding*:
+
+[[https://svn.boost.org/trac/boost/ticket/7082][Raised ticket]]
+
+- nightly builds should run all unit tests in "benchmarking mode";
+- for each test we should find the sweet spot for N repetitions;
+- when plugged into ctest, make sure the benchmark tests have
+  different names from the main tests otherwise the timing history
+  will be nonsense.
+- [[http://lists.boost.org/boost-users/2011/01/65790.php][sent]] email to boost users mailing list asking for benchmarking
+  support.
+- some tips on using chrono to benchmark [[http://www.cookandcommit.eu/2014/11/simple-macro-for-algorithms-time.html][here]].
+
+*** COMPLETED Measure validation slowdown                             :story:
+    CLOSED: [2017-01-04 Wed 16:21]
+    CLOCK: [2017-01-04 Wed 16:10]--[2017-01-04 Wed 16:21] =>  0:11
+    CLOCK: [2017-01-04 Wed 13:41]--[2017-01-04 Wed 16:09] =>  2:28
     CLOCK: [2017-01-04 Wed 11:49]--[2017-01-04 Wed 11:56] =>  0:07
     CLOCK: [2017-01-04 Wed 11:34]--[2017-01-04 Wed 11:48] =>  0:14
     CLOCK: [2017-01-04 Wed 09:01]--[2017-01-04 Wed 11:33] =>  2:32
     CLOCK: [2017-01-03 Tue 22:37]--[2017-01-03 Tue 23:43] =>  1:06
+
+*Rationale*: The new benchmark infrastructure points to a small change
+in knit tests, and not a lot of movements in model generation. The
+movement is signed-off.
 
 It appears generating the dogen models is a lot slower with validation
 enabled. We need to measure this using the traditional benchmark. If

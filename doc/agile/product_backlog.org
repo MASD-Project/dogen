@@ -3744,60 +3744,6 @@ lines to a marker (say =<new_line>= or whatever we are already doing
 for JSON output). This should be applied to all cases where there is a
 potential to have new lines (comments, etc).
 
-*** Add unit test benchmarking                                        :story:
-
-#+begin_quote
-*Story*: As a dogen developer, I would like to know if any of my
-changes impact performance so that I can address these problems early.
-#+end_quote
-
-*New understanding*:
-
-Create a set of performance specific tests. These wont get executed by
-regular users (e.g. they are not part of =run_all_specs=) but they do
-get executed in the build machine. These are selected tests with big
-loops (say 1M times) doing things like reading dia diagrams etc. We
-could chose a few key things just to give us some metrics around
-performance.
-
-In fact, we could create a set of colossi models: models with really
-large number of classes (say 500), maybe 5 of these with
-references. We could then use the diagrams to test the individual
-workflows: dia, dia_to_sml, cpp and engine with no writing. We should
-avoid writing files to filesystem to avoid number jitter caused by the
-hard drive. There should be no comparisons between actual and expected
-for the same reason.
-
-We need to make sure the benchmark tests won't run on valgrind or else
-the nightly builds will take over 24 hours. However, if we had it
-running on continuous we'd spot regressions on every check-in. But we
-don't want to delay continuous any more than necessary. Perhaps we
-need a separate build called performance which is also continuous and
-only runs these tests. We could pass in some kind of variable to CMake
-so that if performance is on, it ignores all tests other than
-performance and vice-versa. We'd also need a performance target that
-only builds the performance binary, and a =run_performance= target
-that executes it.
-
-Perhaps we could use a ruby script to generate the test models?
-
-Also, investigate nonius:
-
-https://github.com/rmartinho/nonius
-
-*Old understanding*:
-
-[[https://svn.boost.org/trac/boost/ticket/7082][Raised ticket]]
-
-- nightly builds should run all unit tests in "benchmarking mode";
-- for each test we should find the sweet spot for N repetitions;
-- when plugged into ctest, make sure the benchmark tests have
-  different names from the main tests otherwise the timing history
-  will be nonsense.
-- [[http://lists.boost.org/boost-users/2011/01/65790.php][sent]] email to boost users mailing list asking for benchmarking
-  support.
-- some tips on using chrono to benchmark [[http://www.cookandcommit.eu/2014/11/simple-macro-for-algorithms-time.html][here]].
-
 *** Attributes versus properties                                      :story:
 
 At present we have assumed that all attributes in objects should be
