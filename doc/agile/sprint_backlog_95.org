@@ -12,23 +12,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-04 Wed 22:43]
+#+CAPTION: Clock summary at [2017-01-05 Thu 12:30]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *25:20* |       |      | 100.0 |
+| *Total time*                                                                | *27:55* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 25:20   |       |      | 100.0 |
-| Active                                                                      |         | 25:20 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:30 |   2.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:57 |   3.8 |
-| COMPLETED Consider supporting multiple inheritance on non-proxy models      |         |       | 3:24 |  13.4 |
-| COMPLETED Add basic validation infrastructure                               |         |       | 8:40 |  34.2 |
-| COMPLETED Fix borked windows build                                          |         |       | 0:26 |   1.7 |
-| COMPLETED Clean up enumerator implementation                                |         |       | 1:05 |   4.3 |
-| COMPLETED Measure validation slowdown                                       |         |       | 6:38 |  26.2 |
-| COMPLETED Parsing should support dot notation                               |         |       | 2:54 |  11.4 |
-| STARTED Add container types to C# proxy models                              |         |       | 0:46 |   3.0 |
+| Stories                                                                     | 27:55   |       |      | 100.0 |
+| Active                                                                      |         | 27:55 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:30 |   1.8 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:57 |   3.4 |
+| COMPLETED Consider supporting multiple inheritance on non-proxy models      |         |       | 3:24 |  12.2 |
+| COMPLETED Add basic validation infrastructure                               |         |       | 8:40 |  31.0 |
+| COMPLETED Fix borked windows build                                          |         |       | 0:26 |   1.6 |
+| COMPLETED Clean up enumerator implementation                                |         |       | 1:05 |   3.9 |
+| COMPLETED Measure validation slowdown                                       |         |       | 6:38 |  23.8 |
+| COMPLETED Parsing should support dot notation                               |         |       | 2:54 |  10.4 |
+| STARTED Add container types to C# proxy models                              |         |       | 3:21 |  12.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -390,6 +390,10 @@ Notes:
   meta-data (name builder).
 
 *** STARTED Add container types to C# proxy models                    :story:
+    CLOCK: [2017-01-05 Thu 12:26]--[2017-01-05 Thu 12:30] =>  0:04
+    CLOCK: [2017-01-05 Thu 12:23]--[2017-01-05 Thu 12:25] =>  0:02
+    CLOCK: [2017-01-05 Thu 10:05]--[2017-01-05 Thu 12:22] =>  2:17
+    CLOCK: [2017-01-05 Thu 09:03]--[2017-01-05 Thu 09:15] =>  0:12
     CLOCK: [2017-01-04 Wed 16:22]--[2017-01-04 Wed 17:08] =>  0:46
 
 We should add all major container types and tests for them.
@@ -413,6 +417,58 @@ Notes:
   multiple inheritance at the non-proxy model level.
 - we need a way to mark a type as abstract so that we don't attempt to
   instantiate it.
+- at present we do not support inheritance from generic types, so we
+  need to update yarn for this in order to support generic collections
+  properly. This should be doable by making the parents a name tree
+  rather than a name. Validator will ensure only non-proxy models use
+  generic inheritance. In addition, when generating helpers for
+  abstract classes, we need to take into account additional generic
+  parameters supplied by the leaves. For example:
+
+: IDictionary<K, V> : ICollection<KeyValuePair<K, V>>
+
+  when we generate the helper for =ICollection<T>=, it must take into
+  account the =KeyValuePair<K, V>= when it tries to instantiate a
+  dictionary. In fact, it should probably just ignore it since we only
+  have =T= and we need =K= and =V=. So for =ICollection<T>=, only
+  descendants with a single type parameter should be leaf
+  candidates. However, if the user supplies:
+
+: ICollection<KeyValuePair<K, V>>
+
+  then we should consider =Dictionary<K, V>= as a leaf. This is quite
+  tricky. We need to navigate the name tree to figure out what
+  matches.
+
+Approach:
+
+- first we add support for all non-generic collections. This should
+  require no changes at all to the meta-model. It will prove the
+  helpers work correctly.
+- then we update the meta-model to have parent and original parent as
+  name trees (with validation to ensure only non-proxy models).
+- then we add support for trivial cases of generic collections such as
+  =List<T>=.
+- finally we handle dictionaries. The solution is to ignore
+  dictionaries on the =ICollection<KeyValuePair<K, V>>= scenario. We
+  basically filter out all leaves that require more than one type
+  parameter. As a result we end up creating a
+  =List<KeyValuePair<K, V>>= etc. This means we will add name trees as
+  parents purely to ensure we express the inheritance relationship
+  correctly but not actually make use of it. It will lay the ground
+  work to add generics in the future. We need to update the story in
+  the backlog to reflect these changes.
+
+Other notes:
+
+- removed unused helper families:
+
+:         "quilt.csharp.helper.family": "Number",
+:         "quilt.csharp.helper.family": "Character",
+:         "quilt.csharp.helper.family": "Boolean",
+:         "quilt.csharp.helper.family": "Object",
+:         "quilt.csharp.helper.family": "String",
+:         "quilt.csharp.helper.family": "Number",
 
 Links:
 
@@ -534,6 +590,16 @@ In System.Collections:
 : ICollection: IEnumerable
 : IList : ICollection, IEnumerable
 : ArrayList : IList, ICollection, IEnumerable
+
+*** Add support for boxed types                                       :story:
+
+At present we support built-in types such as =int= but not
+=System.Integer=. In theory we should be able to add these types with:
+
+:        "quilt.csharp.assistant.requires_assistance": true,
+:        "quilt.csharp.assistant.method_postfix": "ShortByte"
+
+And they should behave just like built-ins.
 
 *** Add handcrafted class to C# test model                            :story:
 

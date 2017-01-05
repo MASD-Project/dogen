@@ -19,12 +19,6 @@
  *
  */
 #include "dogen/quilt.csharp/types/formatters/registrar.hpp"
-#include "dogen/quilt.csharp/types/formatters/test_data/number_helper.hpp"
-#include "dogen/quilt.csharp/types/formatters/test_data/object_helper.hpp"
-#include "dogen/quilt.csharp/types/formatters/test_data/string_helper.hpp"
-#include "dogen/quilt.csharp/types/formatters/test_data/boolean_helper.hpp"
-#include "dogen/quilt.csharp/types/formatters/test_data/character_helper.hpp"
-#include "dogen/quilt.csharp/types/formatters/test_data/floating_point_number_helper.hpp"
 #include "dogen/quilt.csharp/types/formatters/test_data/class_formatter.hpp"
 #include "dogen/quilt.csharp/types/formatters/test_data/enum_formatter.hpp"
 #include "dogen/quilt.csharp/types/formatters/test_data/assistant_formatter.hpp"
@@ -37,12 +31,6 @@ namespace formatters {
 namespace test_data {
 
 void initializer::initialize(registrar& rg) {
-    register_formatter_helper<number_helper>(rg);
-    register_formatter_helper<object_helper>(rg);
-    register_formatter_helper<boolean_helper>(rg);
-    register_formatter_helper<string_helper>(rg);
-    register_formatter_helper<character_helper>(rg);
-
     register_formatter<class_formatter>(rg);
     register_formatter<enum_formatter>(rg);
     register_formatter<assistant_formatter>(rg);
