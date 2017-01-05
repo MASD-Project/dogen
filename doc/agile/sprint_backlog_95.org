@@ -389,7 +389,35 @@ Notes:
   name via file name (name builder) c) external module path via
   meta-data (name builder).
 
+*** STARTED Add internal object dumper resolution                     :story:
+    CLOCK: [2017-01-05 Thu 17:38]
+    CLOCK: [2017-01-05 Thu 14:54]--[2017-01-05 Thu 17:37] =>  2:43
+
+We should try to resolve an object to a local dumper, if one exists;
+for all model types and primitives. Add a registrar for local dumpers.
+
+: using System;
+: using System.Collections.Generic;
+:
+: namespace Dogen.TestModels.CSharpModel
+: {
+:     static public class DynamicDumperRegistrar
+:     {
+:         public interface IDynamicDumper
+:         {
+:             void Dump(AssistantDumper assistant, object value);
+:         }
+:
+:         static private IDictionary<Type, IDynamicDumper> _dumpers = new Dictionary<Type, IDynamicDumper>();
+:
+:         static void RegisterDumper(Type type, IDynamicDumper dumper)
+:         {
+:         }
+:     }
+: }
+
 *** STARTED Add container types to C# proxy models                    :story:
+    CLOCK: [2017-01-05 Thu 14:01]--[2017-01-05 Thu 14:53] =>  0:52
     CLOCK: [2017-01-05 Thu 12:26]--[2017-01-05 Thu 12:30] =>  0:04
     CLOCK: [2017-01-05 Thu 12:23]--[2017-01-05 Thu 12:25] =>  0:02
     CLOCK: [2017-01-05 Thu 10:05]--[2017-01-05 Thu 12:22] =>  2:17
@@ -439,6 +467,22 @@ Notes:
   then we should consider =Dictionary<K, V>= as a leaf. This is quite
   tricky. We need to navigate the name tree to figure out what
   matches.
+- for collection IO we probably just need a method in the assistant
+  that loops through the =IEnumerable=, plus the usual assistant
+  machinery.
+- For test data and IO we have a problem: given a type presented as an
+  =object=, we cannot statically determine what generators/dumpers to
+  use. Thus for non-generic collections, we cannot dump its
+  contents. We have several possible solutions for this: a) create a
+  needle library, add the appropriate interfaces and a registrar, add
+  a dependency on the model. Downside is the models are no longer
+  self-contained. b) use castle - but its still not clear how
+  cross-model dependencies would work c) leave as is; anything
+  presented as an object will be dumped using the opaque object
+  dumper. d) mix-and-match: support dynamic dumper resolution, but
+  only within the current model. This should solve most of the
+  use cases. We could also extend it to look up on any dependant
+  models.
 
 Approach:
 
