@@ -47,7 +47,9 @@ namespace Dogen.TestModels.CSharpModel
             assistant.Add("Prop0", value.Prop0, true/*withSeparator*/);
             assistant.Add("Prop1", value.Prop1, true/*withSeparator*/);
             assistant.Add("Prop2", value.Prop2, true/*withSeparator*/);
-            assistant.Add("Prop3", value.Prop3);
+            assistant.Add("Prop3", value.Prop3, true/*withSeparator*/);
+            assistant.Add("Prop4", value.Prop4, true/*withSeparator*/);
+            assistant.Add("Prop5", value.Prop5);
             assistant.AddEndObject(); // data
             assistant.AddEndObject(); // main object
             assistant.HandleMemberSeparator(withSeparator);

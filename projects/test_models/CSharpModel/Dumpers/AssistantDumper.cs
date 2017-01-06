@@ -30,8 +30,8 @@ namespace Dogen.TestModels.CSharpModel
         private int _currentDepth;
 
         private const uint MaxDepth = 1000;
-        private const string Type = "__type__";
         private const string HashCode = "HashCode";
+        private const string Type = "__type__";
         private const string StringType = "string";
         private const string ByteType = "byte";
         private const string SByteType = "sbyte";
@@ -46,6 +46,8 @@ namespace Dogen.TestModels.CSharpModel
         private const string BoolType = "bool";
         private const string NullValue = "<null>";
         private const string SystemObjectType = "System.Object";
+        private const string KeyType = "key";
+        private const string ValueType = "value";
         private const string DataKey = "data";
         #endregion
 
@@ -450,6 +452,43 @@ namespace Dogen.TestModels.CSharpModel
                     AddMemberSeparator();
 
                 AddValue(item);
+                isFirst = false;
+            }
+            AddEndArray();
+            HandleMemberSeparator(withSeparator);
+        }
+
+        public void Add(string key, Hashtable value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            AddValue(value, withSeparator);
+        }
+
+        public void Add(string key, IDictionary value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            AddStartArray();
+            bool isFirst = true;
+            foreach (DictionaryEntry item in value)
+            {
+                if (!isFirst)
+                    AddMemberSeparator();
+
+                AddStartArray();
+
+                AddStartObject();
+                AddType(KeyType, true/*withSeparator*/);
+                Add(DataKey, item.Key);
+                AddEndObject();
+
+                AddMemberSeparator();
+
+                AddStartObject();
+                AddType(ValueType, true/*withSeparator*/);
+                Add(DataKey, item.Value);
+                AddEndObject();
+
+                AddEndArray();
                 isFirst = false;
             }
             AddEndArray();

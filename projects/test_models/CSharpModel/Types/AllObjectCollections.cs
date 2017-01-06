@@ -28,6 +28,8 @@ namespace Dogen.TestModels.CSharpModel
         public System.Collections.IEnumerable Prop1 { get; set; }
         public System.Collections.ICollection Prop2 { get; set; }
         public System.Collections.IList Prop3 { get; set; }
+        public System.Collections.Hashtable Prop4 { get; set; }
+        public System.Collections.IDictionary Prop5 { get; set; }
         #endregion
 
         #region Constructors
@@ -37,12 +39,16 @@ namespace Dogen.TestModels.CSharpModel
             System.Collections.ArrayList prop0,
             System.Collections.IEnumerable prop1,
             System.Collections.ICollection prop2,
-            System.Collections.IList prop3)
+            System.Collections.IList prop3,
+            System.Collections.Hashtable prop4,
+            System.Collections.IDictionary prop5)
         {
             Prop0 = prop0;
             Prop1 = prop1;
             Prop2 = prop2;
             Prop3 = prop3;
+            Prop4 = prop4;
+            Prop5 = prop5;
         }
         #endregion
 
@@ -64,7 +70,11 @@ namespace Dogen.TestModels.CSharpModel
                 Prop2 != null && value.Prop2 != null &&
                 Prop2.Equals(value.Prop2) &&
                 Prop3 != null && value.Prop3 != null &&
-                Prop3.Equals(value.Prop3);
+                Prop3.Equals(value.Prop3) &&
+                Prop4 != null && value.Prop4 != null &&
+                Prop4.Equals(value.Prop4) &&
+                Prop5 != null && value.Prop5 != null &&
+                Prop5.Equals(value.Prop5);
         }
 
         public static bool operator ==(AllObjectCollections lhs, AllObjectCollections rhs)
@@ -97,6 +107,10 @@ namespace Dogen.TestModels.CSharpModel
                     (!object.ReferenceEquals(null, Prop2) ? Prop2.GetHashCode() : 0);
                 hash = (hash * HashingMultiplier) ^
                     (!object.ReferenceEquals(null, Prop3) ? Prop3.GetHashCode() : 0);
+                hash = (hash * HashingMultiplier) ^
+                    (!object.ReferenceEquals(null, Prop4) ? Prop4.GetHashCode() : 0);
+                hash = (hash * HashingMultiplier) ^
+                    (!object.ReferenceEquals(null, Prop5) ? Prop5.GetHashCode() : 0);
                 return hash;
             }
         }

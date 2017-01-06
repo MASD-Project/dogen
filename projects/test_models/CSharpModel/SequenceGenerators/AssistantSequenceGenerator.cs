@@ -136,5 +136,20 @@ namespace Dogen.TestModels.CSharpModel
             }
             return result;
         }
+
+        public static System.Collections.IDictionary CreateIDictionary(uint position)
+        {
+            return CreateHashtable(position);
+        }
+
+        public static System.Collections.Hashtable CreateHashtable(uint position)
+        {
+            var result = new System.Collections.Hashtable();
+            for (uint i = 0; i < SequenceSize; i++)
+            {
+                result.Add("key_" + i, "value_" + i);
+            }
+            return result;
+        }
     }
 }

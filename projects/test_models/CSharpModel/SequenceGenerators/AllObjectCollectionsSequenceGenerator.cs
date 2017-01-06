@@ -34,6 +34,8 @@ namespace Dogen.TestModels.CSharpModel
             value.Prop1 = AssistantSequenceGenerator.CreateIEnumerable(position + 1);
             value.Prop2 = AssistantSequenceGenerator.CreateICollection(position + 2);
             value.Prop3 = AssistantSequenceGenerator.CreateIList(position + 3);
+            value.Prop4 = AssistantSequenceGenerator.CreateHashtable(position + 4);
+            value.Prop5 = AssistantSequenceGenerator.CreateIDictionary(position + 5);
         }
 
         static internal AllObjectCollections Create(uint position)

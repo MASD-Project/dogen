@@ -33,6 +33,14 @@
         {
           "simple_name": "Prop3",
           "type": "System.Collections.IList"
+        },
+        {
+          "simple_name": "Prop4",
+          "type": "System.Collections.Hashtable"
+        },
+        {
+          "simple_name": "Prop5",
+          "type": "System.Collections.IDictionary"
         }
       ]
     },

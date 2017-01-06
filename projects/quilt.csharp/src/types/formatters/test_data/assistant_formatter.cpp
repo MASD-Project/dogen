@@ -194,6 +194,21 @@ a.stream() << "                }" << std::endl;
 a.stream() << "            }" << std::endl;
 a.stream() << "            return result;" << std::endl;
 a.stream() << "        }" << std::endl;
+a.stream() << std::endl;
+a.stream() << "        public static System.Collections.IDictionary CreateIDictionary(uint position)" << std::endl;
+a.stream() << "        {" << std::endl;
+a.stream() << "            return CreateHashtable(position);" << std::endl;
+a.stream() << "        }" << std::endl;
+a.stream() << std::endl;
+a.stream() << "        public static System.Collections.Hashtable CreateHashtable(uint position)" << std::endl;
+a.stream() << "        {" << std::endl;
+a.stream() << "            var result = new System.Collections.Hashtable();" << std::endl;
+a.stream() << "            for (uint i = 0; i < SequenceSize; i++)" << std::endl;
+a.stream() << "            {" << std::endl;
+a.stream() << "                result.Add(\"key_\" + i, \"value_\" + i);" << std::endl;
+a.stream() << "            }" << std::endl;
+a.stream() << "            return result;" << std::endl;
+a.stream() << "        }" << std::endl;
 a.stream() << "    }" << std::endl;
         }
     } // sbf
