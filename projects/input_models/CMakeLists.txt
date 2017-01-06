@@ -28,8 +28,8 @@ if (DOGEN_KNITTER_COMMAND)
     set(other_options ${other_options} --delete-extra-files)
 
     set(common_arguments --output-dir ${projects_dir}/)
-    set(common_arguments ${other_options})
-    set(common_arguments ${ignore_regexes})
+    set(common_arguments ${common_arguments} ${other_options})
+    set(common_arguments ${common_arguments} ${ignore_regexes})
 
     set(target yarn)
     add_custom_target(knit_${target}
