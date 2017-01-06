@@ -14,6 +14,18 @@
   "elements": [
     {
       "name": {
+        "simple_name": "AllCollections"
+      },
+      "meta_type": "object",
+      "attributes": [
+        {
+          "simple_name": "Prop0",
+          "type": "System.Collections.ArrayList"
+        }
+      ]
+    },
+    {
+      "name": {
         "simple_name": "Association"
       },
       "meta_type": "object",

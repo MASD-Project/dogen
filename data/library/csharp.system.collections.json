@@ -14,7 +14,7 @@
       "annotation": {
         "quilt.csharp.aspect.requires_static_reference_equals": true,
         "quilt.csharp.assistant.requires_assistance": true,
-        "quilt.csharp.assistant.method_postfix": "Collection"
+        "quilt.csharp.assistant.method_postfix": "IEnumerable"
       }
     },
     {
@@ -30,7 +30,7 @@
       "annotation": {
         "quilt.csharp.aspect.requires_static_reference_equals": true,
         "quilt.csharp.assistant.requires_assistance": true,
-        "quilt.csharp.assistant.method_postfix": "Collection"
+        "quilt.csharp.assistant.method_postfix": "ICollection"
       }
     },
     {
@@ -46,7 +46,7 @@
       "annotation": {
         "quilt.csharp.aspect.requires_static_reference_equals": true,
         "quilt.csharp.assistant.requires_assistance": true,
-        "quilt.csharp.assistant.method_postfix": "Collection"
+        "quilt.csharp.assistant.method_postfix": "IList"
       }
     },
     {
@@ -62,7 +62,7 @@
       "annotation": {
         "quilt.csharp.aspect.requires_static_reference_equals": true,
         "quilt.csharp.assistant.requires_assistance": true,
-        "quilt.csharp.assistant.method_postfix": "Collection"
+        "quilt.csharp.assistant.method_postfix": "ArrayList"
       }
     }
   ]

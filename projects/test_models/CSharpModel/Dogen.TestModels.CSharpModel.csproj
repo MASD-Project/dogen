@@ -30,6 +30,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dumpers\AllCollectionsDumper.cs" />
     <Compile Include="Dumpers\AssistantDumper.cs" />
     <Compile Include="Dumpers\AssociationDumper.cs" />
     <Compile Include="Dumpers\BaseDumper.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Dumpers\PrimitiveBuiltinsDumper.cs" />
     <Compile Include="Dumpers\SecondChildWithoutMembersDumper.cs" />
     <Compile Include="Dumpers\ThirdChildWithMembersDumper.cs" />
+    <Compile Include="SequenceGenerators\AllCollectionsSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\AssistantSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\AssociationSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\BaseSequenceGenerator.cs" />
@@ -110,6 +112,7 @@
     <Compile Include="SequenceGenerators\PrimitiveBuiltinsSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\SecondChildWithoutMembersSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\ThirdChildWithMembersSequenceGenerator.cs" />
+    <Compile Include="Types\AllCollections.cs" />
     <Compile Include="Types\Association.cs" />
     <Compile Include="Types\Base.cs" />
     <Compile Include="Types\BookTypes.cs" />

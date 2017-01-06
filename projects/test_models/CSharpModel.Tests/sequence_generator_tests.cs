@@ -180,6 +180,20 @@ namespace Dogen.TestModels.CSharpModel.Tests
 
                 var c = new ComplexBuiltins() { ObjectProperty = "test" };
                 Assert.That(ValidateJson(ComplexBuiltinsDumper.Dump(c)), Is.True);
+
+                AllCollections d = null;
+                Assert.That(ValidateJson(AllCollectionsDumper.Dump(d)), Is.True);
+            }
+        }
+
+        [Test]
+        // Analysis disable once InconsistentNaming
+        public void dumping_class_with_object_based_collections_produces_valid_json()
+        {
+            using (var lc = new LogConfigurator(FixtureName))
+            {
+                var a = AllCollectionsSequenceGenerator.Sequence().GetEnumerator().Current;
+                Assert.That(ValidateJson(AllCollectionsDumper.Dump(a)), Is.True);
             }
         }
         #endregion

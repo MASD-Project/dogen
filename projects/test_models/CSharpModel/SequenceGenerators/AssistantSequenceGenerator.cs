@@ -26,6 +26,8 @@ namespace Dogen.TestModels.CSharpModel
     /// </summary>
     static class AssistantSequenceGenerator
     {
+        private const int SequenceSize = 10;
+
         public static object CreateObject(uint position)
         {
             return "this is an object: " + Convert.ToString(position);
@@ -99,6 +101,25 @@ namespace Dogen.TestModels.CSharpModel
         public static decimal CreateDecimal(uint position)
         {
             return Convert.ToDecimal(position);
+        }
+
+        public static System.Collections.ArrayList CreateArrayList(uint position)
+        {
+            var result = new System.Collections.ArrayList();
+            for (uint i = 0; i < SequenceSize; i++)
+            {
+                switch((position + i) % 5)
+                {
+                case 0: result.Add(CreateString(position + i)); break;
+                case 1: result.Add(CreateByte(position + i)); break;
+                case 2: result.Add(CreateInt(position + i)); break;
+                case 3: result.Add(CreateLong(position + i)); break;
+                case 4: result.Add(CreateFloat(position + i)); break;
+                case 5: result.Add(CreateDecimal(position + i)); break;
+                default: result.Add(CreateBool(position + i)); break;
+                }
+            }
+            return result;
         }
     }
 }
