@@ -35,6 +35,11 @@ ideas into stories and add them as we go along.
 
 *Intermediate model checks*:
 
+- For C# models: attribute that start with lower case will cause
+  problems because the property name will match the argument name,
+  resulting in warnings in the complete constructor (argument assigned
+  to itself). A simple validation check is to error if a user add an
+  attribute that starts with lower case in C#.
 - enumeration must have at least one enumerator. warning?
 - external module path of the model matches all objects, etc in
   current model.
