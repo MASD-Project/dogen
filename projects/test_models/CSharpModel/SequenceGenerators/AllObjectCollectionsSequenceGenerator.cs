@@ -24,33 +24,36 @@ using System.Collections.Generic;
 namespace Dogen.TestModels.CSharpModel
 {
     /// <summary>
-    /// Generates sequences of AllCollections.
+    /// Generates sequences of AllObjectCollections.
     /// </summary>
-    public static class AllCollectionsSequenceGenerator
+    public static class AllObjectCollectionsSequenceGenerator
     {
-        static internal void Populate(AllCollections value, uint position)
+        static internal void Populate(AllObjectCollections value, uint position)
         {
             value.Prop0 = AssistantSequenceGenerator.CreateArrayList(position + 0);
+            value.Prop1 = AssistantSequenceGenerator.CreateIEnumerable(position + 1);
+            value.Prop2 = AssistantSequenceGenerator.CreateICollection(position + 2);
+            value.Prop3 = AssistantSequenceGenerator.CreateIList(position + 3);
         }
 
-        static internal AllCollections Create(uint position)
+        static internal AllObjectCollections Create(uint position)
         {
-            var result = new AllCollections();
+            var result = new AllObjectCollections();
             Populate(result, position);
             return result;
         }
 
         #region Enumerator
-        private class AllCollectionsEnumerator : IEnumerator, IEnumerator<AllCollections>, IDisposable
+        private class AllObjectCollectionsEnumerator : IEnumerator, IEnumerator<AllObjectCollections>, IDisposable
         {
             #region Properties
             private uint _position;
-            private AllCollections _current;
+            private AllObjectCollections _current;
             #endregion
 
             private void PopulateCurrent()
             {
-                _current = AllCollectionsSequenceGenerator.Create(_position);
+                _current = AllObjectCollectionsSequenceGenerator.Create(_position);
             }
 
             #region IDisposable
@@ -80,7 +83,7 @@ namespace Dogen.TestModels.CSharpModel
                 }
             }
 
-            AllCollections IEnumerator<AllCollections>.Current
+            AllObjectCollections IEnumerator<AllObjectCollections>.Current
             {
                 get
                 {
@@ -89,7 +92,7 @@ namespace Dogen.TestModels.CSharpModel
             }
             #endregion
 
-            public AllCollectionsEnumerator()
+            public AllObjectCollectionsEnumerator()
             {
                 PopulateCurrent();
             }
@@ -97,25 +100,25 @@ namespace Dogen.TestModels.CSharpModel
         #endregion
 
         #region Enumerable
-        private class AllCollectionsEnumerable : IEnumerable, IEnumerable<AllCollections>
+        private class AllObjectCollectionsEnumerable : IEnumerable, IEnumerable<AllObjectCollections>
         {
             #region IEnumerable implementation
             public IEnumerator GetEnumerator()
             {
-                return new AllCollectionsEnumerator();
+                return new AllObjectCollectionsEnumerator();
             }
 
-            IEnumerator<AllCollections> IEnumerable<AllCollections>.GetEnumerator()
+            IEnumerator<AllObjectCollections> IEnumerable<AllObjectCollections>.GetEnumerator()
             {
-                return new AllCollectionsEnumerator();
+                return new AllObjectCollectionsEnumerator();
             }
             #endregion
         }
         #endregion
 
-        static public IEnumerable<AllCollections> Sequence()
+        static public IEnumerable<AllObjectCollections> Sequence()
         {
-            return new AllCollectionsEnumerable();
+            return new AllObjectCollectionsEnumerable();
         }
     }
 }

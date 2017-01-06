@@ -181,8 +181,8 @@ namespace Dogen.TestModels.CSharpModel.Tests
                 var c = new ComplexBuiltins() { ObjectProperty = "test" };
                 Assert.That(ValidateJson(ComplexBuiltinsDumper.Dump(c)), Is.True);
 
-                AllCollections d = null;
-                Assert.That(ValidateJson(AllCollectionsDumper.Dump(d)), Is.True);
+                AllObjectCollections d = null;
+                Assert.That(ValidateJson(AllObjectCollectionsDumper.Dump(d)), Is.True);
             }
         }
 
@@ -192,8 +192,8 @@ namespace Dogen.TestModels.CSharpModel.Tests
         {
             using (var lc = new LogConfigurator(FixtureName))
             {
-                var a = AllCollectionsSequenceGenerator.Sequence().GetEnumerator().Current;
-                Assert.That(ValidateJson(AllCollectionsDumper.Dump(a)), Is.True);
+                var a = AllObjectCollectionsSequenceGenerator.Sequence().GetEnumerator().Current;
+                Assert.That(ValidateJson(AllObjectCollectionsDumper.Dump(a)), Is.True);
             }
         }
         #endregion

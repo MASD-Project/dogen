@@ -14,13 +14,25 @@
   "elements": [
     {
       "name": {
-        "simple_name": "AllCollections"
+        "simple_name": "AllObjectCollections"
       },
       "meta_type": "object",
       "attributes": [
         {
           "simple_name": "Prop0",
           "type": "System.Collections.ArrayList"
+        },
+        {
+          "simple_name": "Prop1",
+          "type": "System.Collections.IEnumerable"
+        },
+        {
+          "simple_name": "Prop2",
+          "type": "System.Collections.ICollection"
+        },
+        {
+          "simple_name": "Prop3",
+          "type": "System.Collections.IList"
         }
       ]
     },

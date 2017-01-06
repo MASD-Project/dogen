@@ -21,17 +21,28 @@ using System;
 
 namespace Dogen.TestModels.CSharpModel
 {
-    public sealed class AllCollections
+    public sealed class AllObjectCollections
     {
         #region Properties
         public System.Collections.ArrayList Prop0 { get; set; }
+        public System.Collections.IEnumerable Prop1 { get; set; }
+        public System.Collections.ICollection Prop2 { get; set; }
+        public System.Collections.IList Prop3 { get; set; }
         #endregion
 
         #region Constructors
-        public AllCollections() { }
-        public AllCollections(System.Collections.ArrayList prop0)
+        public AllObjectCollections() { }
+
+        public AllObjectCollections(
+            System.Collections.ArrayList prop0,
+            System.Collections.IEnumerable prop1,
+            System.Collections.ICollection prop2,
+            System.Collections.IList prop3)
         {
             Prop0 = prop0;
+            Prop1 = prop1;
+            Prop2 = prop2;
+            Prop3 = prop3;
         }
         #endregion
 
@@ -42,15 +53,21 @@ namespace Dogen.TestModels.CSharpModel
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != GetType()) return false;
 
-            var value = obj as AllCollections;
+            var value = obj as AllObjectCollections;
             if (value == null) return false;
 
             return
                 Prop0 != null && value.Prop0 != null &&
-                Prop0.Equals(value.Prop0);
+                Prop0.Equals(value.Prop0) &&
+                Prop1 != null && value.Prop1 != null &&
+                Prop1.Equals(value.Prop1) &&
+                Prop2 != null && value.Prop2 != null &&
+                Prop2.Equals(value.Prop2) &&
+                Prop3 != null && value.Prop3 != null &&
+                Prop3.Equals(value.Prop3);
         }
 
-        public static bool operator ==(AllCollections lhs, AllCollections rhs)
+        public static bool operator ==(AllObjectCollections lhs, AllObjectCollections rhs)
         {
             if (Object.ReferenceEquals(lhs, rhs))
                 return true;
@@ -58,7 +75,7 @@ namespace Dogen.TestModels.CSharpModel
             return !Object.ReferenceEquals(null, lhs) && lhs.Equals(rhs);
         }
 
-        public static bool operator !=(AllCollections lhs, AllCollections rhs)
+        public static bool operator !=(AllObjectCollections lhs, AllObjectCollections rhs)
         {
             return !(lhs == rhs);
         }
@@ -74,6 +91,12 @@ namespace Dogen.TestModels.CSharpModel
                 int hash = HashingBase;
                 hash = (hash * HashingMultiplier) ^
                     (!object.ReferenceEquals(null, Prop0) ? Prop0.GetHashCode() : 0);
+                hash = (hash * HashingMultiplier) ^
+                    (!object.ReferenceEquals(null, Prop1) ? Prop1.GetHashCode() : 0);
+                hash = (hash * HashingMultiplier) ^
+                    (!object.ReferenceEquals(null, Prop2) ? Prop2.GetHashCode() : 0);
+                hash = (hash * HashingMultiplier) ^
+                    (!object.ReferenceEquals(null, Prop3) ? Prop3.GetHashCode() : 0);
                 return hash;
             }
         }

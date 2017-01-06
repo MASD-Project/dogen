@@ -22,18 +22,18 @@ using System;
 namespace Dogen.TestModels.CSharpModel
 {
     /// <summary>
-    /// Generates sequences of AllCollections.
+    /// Generates sequences of AllObjectCollections.
     /// </summary>
-    public static class AllCollectionsDumper
+    public static class AllObjectCollectionsDumper
     {
-        static internal void Dump(AssistantDumper assistant, AllCollections value, bool withSeparator = false)
+        static internal void Dump(AssistantDumper assistant, AllObjectCollections value, bool withSeparator = false)
         {
             assistant.IncrementDepth();
             if (assistant.MaximumDepthExceeded())
                 return;
 
             assistant.AddStartObject();
-            assistant.AddType("Dogen.TestModels.CSharpModel.AllCollections", true/*withSeparator*/);
+            assistant.AddType("Dogen.TestModels.CSharpModel.AllObjectCollections", true/*withSeparator*/);
             if (value == null)
             {
                 assistant.Add("data", "<null>");
@@ -44,7 +44,10 @@ namespace Dogen.TestModels.CSharpModel
             assistant.AddKey("data");
             assistant.AddPairSeparator();
             assistant.AddStartObject();
-            assistant.Add("Prop0", value.Prop0);
+            assistant.Add("Prop0", value.Prop0, true/*withSeparator*/);
+            assistant.Add("Prop1", value.Prop1, true/*withSeparator*/);
+            assistant.Add("Prop2", value.Prop2, true/*withSeparator*/);
+            assistant.Add("Prop3", value.Prop3);
             assistant.AddEndObject(); // data
             assistant.AddEndObject(); // main object
             assistant.HandleMemberSeparator(withSeparator);
@@ -52,7 +55,7 @@ namespace Dogen.TestModels.CSharpModel
             assistant.DecrementDepth();
         }
 
-        public static string Dump(AllCollections value)
+        public static string Dump(AllObjectCollections value)
         {
             var assistant = new AssistantDumper();
             Dump(assistant, value);

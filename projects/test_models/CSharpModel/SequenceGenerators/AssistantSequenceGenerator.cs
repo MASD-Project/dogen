@@ -103,6 +103,21 @@ namespace Dogen.TestModels.CSharpModel
             return Convert.ToDecimal(position);
         }
 
+        public static System.Collections.IEnumerable CreateIEnumerable(uint position)
+        {
+            return CreateArrayList(position);
+        }
+
+        public static System.Collections.ICollection CreateICollection(uint position)
+        {
+            return CreateArrayList(position);
+        }
+
+        public static System.Collections.IList CreateIList(uint position)
+        {
+            return CreateArrayList(position);
+        }
+
         public static System.Collections.ArrayList CreateArrayList(uint position)
         {
             var result = new System.Collections.ArrayList();
