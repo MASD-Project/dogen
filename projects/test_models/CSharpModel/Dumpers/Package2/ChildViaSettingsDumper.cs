@@ -47,7 +47,7 @@ namespace Dogen.TestModels.CSharpModel.Package2
             assistant.AddKey("__parent_0__");
             assistant.AddPairSeparator();
             Dogen.TestModels.CSharpModel.Package2.ParentDumper.Dump(assistant, value, true/*withSeparator*/);
-            assistant.Add("prop_1", value.prop_1);
+            assistant.Add("Prop1", value.Prop1);
             assistant.AddEndObject(); // data
             assistant.AddEndObject(); // main object
             assistant.HandleMemberSeparator(withSeparator);

@@ -5187,7 +5187,7 @@ this is a long comment#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#prop_1#</dia:string>
+            <dia:string>#Prop1#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#int#</dia:string>

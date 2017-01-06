@@ -31,7 +31,7 @@ namespace Dogen.TestModels.CSharpModel.Package2
         static internal void Populate(ChildViaSettings value, uint position)
         {
             Dogen.TestModels.CSharpModel.Package2.ParentSequenceGenerator.Populate(value, position);
-            value.prop_1 = AssistantSequenceGenerator.CreateInt(position + 0);
+            value.Prop1 = AssistantSequenceGenerator.CreateInt(position + 0);
         }
 
         static internal ChildViaSettings Create(uint position)

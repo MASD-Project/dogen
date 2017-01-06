@@ -389,8 +389,10 @@ Notes:
   name via file name (name builder) c) external module path via
   meta-data (name builder).
 
-*** STARTED Add internal object dumper resolution                     :story:
-    CLOCK: [2017-01-05 Thu 17:38]
+*** COMPLETED Add internal object dumper resolution                   :story:
+    CLOSED: [2017-01-06 Fri 12:55]
+    CLOCK: [2017-01-06 Fri 11:10]--[2017-01-06 Fri 12:55] =>  1:45
+    CLOCK: [2017-01-05 Thu 17:38]--[2017-01-05 Thu 18:01] =>  0:23
     CLOCK: [2017-01-05 Thu 14:54]--[2017-01-05 Thu 17:37] =>  2:43
 
 We should try to resolve an object to a local dumper, if one exists;

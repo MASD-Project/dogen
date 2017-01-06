@@ -139,7 +139,7 @@ namespace Dogen.TestModels.CSharpModel.Tests
 
         [Test]
         // Analysis disable once InconsistentNaming
-        public void classes_in_inheritance_relationships_produce_valid_json()
+        public void dumping_classes_in_inheritance_relationships_produce_valid_json()
         {
             using (var lc = new LogConfigurator(FixtureName))
             {
@@ -168,7 +168,7 @@ namespace Dogen.TestModels.CSharpModel.Tests
 
         [Test]
         // Analysis disable once InconsistentNaming
-        public void sequence_dumper_handles_null_objects()
+        public void dumping_null_objects_produces_valid_json()
         {
             using (var lc = new LogConfigurator(FixtureName))
             {

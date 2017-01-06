@@ -19,6 +19,7 @@
 //
 using System;
 using System.Text;
+using System.Collections;
 
 namespace Dogen.TestModels.CSharpModel
 {
@@ -31,7 +32,21 @@ namespace Dogen.TestModels.CSharpModel
         private const uint MaxDepth = 1000;
         private const string Type = "__type__";
         private const string HashCode = "HashCode";
+        private const string StringType = "string";
+        private const string ByteType = "byte";
+        private const string SByteType = "sbyte";
+        private const string IntType = "int";
+        private const string UIntType = "uint";
+        private const string LongType = "long";
+        private const string ULongType = "ulong";
+        private const string FloatType = "float";
+        private const string DoubleType = "double";
+        private const string CharType = "char";
+        private const string DecimalType = "decimal";
+        private const string BoolType = "bool";
+        private const string NullValue = "<null>";
         private const string SystemObjectType = "System.Object";
+        private const string DataKey = "data";
         #endregion
 
         #region Depth management
@@ -60,6 +75,16 @@ namespace Dogen.TestModels.CSharpModel
         public void AddEndObject()
         {
             _stringBuilder.Append(" }");
+        }
+
+        public void AddStartArray()
+        {
+            _stringBuilder.Append("[ ");
+        }
+
+        public void AddEndArray()
+        {
+            _stringBuilder.Append(" ]");
         }
 
         public void AddPairSeparator()
@@ -111,25 +136,144 @@ namespace Dogen.TestModels.CSharpModel
         }
         #endregion
 
-        #region Adds for well known types
-        public void Add(string key, object value, bool withSeparator = false)
+        #region Add value for well known types
+        private bool HandleBoxedPrimitives(object value)
         {
-            AddKeyWithSeparator(key);
+            var type = value.GetType();
+            if (type == typeof(string))
+            {
+                AddStartObject();
+                AddType(StringType, true/*withSeparator*/);
+                Add(DataKey, value as string);
+                AddEndObject();
+                return true;
+            }
+
+            if (type == typeof(byte))
+            {
+                AddStartObject();
+                AddType(ByteType, true/*withSeparator*/);
+                Add(DataKey, (byte)value);
+                AddEndObject();
+                return true;
+            }
+
+            if (type == typeof(sbyte))
+            {
+                AddStartObject();
+                AddType(SByteType, true/*withSeparator*/);
+                Add(DataKey, (sbyte)value);
+                AddEndObject();
+                return true;
+            }
+
+            if (type == typeof(int))
+            {
+                AddStartObject();
+                AddType(IntType, true/*withSeparator*/);
+                Add(DataKey, (int)value);
+                AddEndObject();
+                return true;
+            }
+
+            if (type == typeof(uint))
+            {
+                AddStartObject();
+                AddType(UIntType, true/*withSeparator*/);
+                Add(DataKey, (uint)value);
+                AddEndObject();
+                return true;
+            }
+
+            if (type == typeof(long))
+            {
+                AddStartObject();
+                AddType(LongType, true/*withSeparator*/);
+                Add(DataKey, (long)value);
+                AddEndObject();
+                return true;
+            }
+
+            if (type == typeof(ulong))
+            {
+                AddStartObject();
+                AddType(ULongType, true/*withSeparator*/);
+                Add(DataKey, (ulong)value);
+                AddEndObject();
+                return true;
+            }
+
+            if (type == typeof(float))
+            {
+                AddStartObject();
+                AddType(FloatType, true/*withSeparator*/);
+                Add(DataKey, (float)value);
+                AddEndObject();
+                return true;
+            }
+
+            if (type == typeof(double))
+            {
+                AddStartObject();
+                AddType(DoubleType, true/*withSeparator*/);
+                Add(DataKey, (double)value);
+                AddEndObject();
+                return true;
+            }
+
+            if (type == typeof(char))
+            {
+                AddStartObject();
+                AddType(CharType, true/*withSeparator*/);
+                Add(DataKey, (char)value);
+                AddEndObject();
+                return true;
+            }
+
+            if (type == typeof(decimal))
+            {
+                AddStartObject();
+                AddType(DecimalType, true/*withSeparator*/);
+                Add(DataKey, (decimal)value);
+                AddEndObject();
+                return true;
+            }
+
+            if (type == typeof(bool))
+            {
+                AddStartObject();
+                AddType(BoolType, true/*withSeparator*/);
+                Add(DataKey, (bool)value);
+                AddEndObject();
+                return true;
+            }
+
+            return false;
+        }
+
+        private void AddValue(object value, bool withSeparator = false)
+        {
             AddStartObject();
             AddType(SystemObjectType, true/*withSeparator*/);
 
             if (value == null)
             {
-                Add("data", "<null>");
+                Add(DataKey, NullValue);
                 AddEndObject();
                 HandleMemberSeparator(withSeparator);
                 return;
             }
 
-            AddKey("data");
+            AddKey(DataKey);
             AddPairSeparator();
-            AddStartObject();
+            if (HandleBoxedPrimitives(value))
+            {
+                AddEndObject();
+                HandleMemberSeparator(withSeparator);
+                return;
+            }
 
+            AddStartObject();
             AddKey(HashCode);
             AddPairSeparator();
             AddNonQuoted(value.GetHashCode());
@@ -139,91 +283,176 @@ namespace Dogen.TestModels.CSharpModel
             HandleMemberSeparator(withSeparator);
         }
 
-        public void Add(string key, string value, bool withSeparator = false)
+        private void AddValue(string value, bool withSeparator = false)
         {
-            AddKeyWithSeparator(key);
             AddQuoted(value);
             HandleMemberSeparator(withSeparator);
         }
 
-        public void Add(string key, byte value, bool withSeparator = false)
+        private void AddValue(byte value, bool withSeparator = false)
         {
-            AddKeyWithSeparator(key);
             _stringBuilder.Append(Convert.ToString(value));
             HandleMemberSeparator(withSeparator);
         }
 
-        public void Add(string key, sbyte value, bool withSeparator = false)
+        private void AddValue(sbyte value, bool withSeparator = false)
         {
-            AddKeyWithSeparator(key);
             _stringBuilder.Append(Convert.ToString(value));
             HandleMemberSeparator(withSeparator);
         }
 
-        public void Add(string key, int value, bool withSeparator = false)
+        private void AddValue(int value, bool withSeparator = false)
         {
-            AddKeyWithSeparator(key);
             _stringBuilder.Append(Convert.ToString(value));
             HandleMemberSeparator(withSeparator);
         }
 
-        public void Add(string key, uint value, bool withSeparator = false)
+        private void AddValue(uint value, bool withSeparator = false)
         {
-            AddKeyWithSeparator(key);
             _stringBuilder.Append(Convert.ToString(value));
             HandleMemberSeparator(withSeparator);
         }
 
-        public void Add(string key, long value, bool withSeparator = false)
+        private void AddValue(long value, bool withSeparator = false)
         {
-            AddKeyWithSeparator(key);
             _stringBuilder.Append(Convert.ToString(value));
             HandleMemberSeparator(withSeparator);
         }
 
-        public void Add(string key, ulong value, bool withSeparator = false)
+        private void AddValue(ulong value, bool withSeparator = false)
         {
-            AddKeyWithSeparator(key);
             _stringBuilder.Append(Convert.ToString(value));
             HandleMemberSeparator(withSeparator);
         }
 
-        public void Add(string key, float value, bool withSeparator = false)
+        private void AddValue(float value, bool withSeparator = false)
         {
-            AddKeyWithSeparator(key);
             _stringBuilder.Append(Convert.ToString(value));
             HandleMemberSeparator(withSeparator);
         }
 
-        public void Add(string key, double value, bool withSeparator = false)
+        private void AddValue(double value, bool withSeparator = false)
         {
-            AddKeyWithSeparator(key);
             _stringBuilder.Append(Convert.ToString(value));
             HandleMemberSeparator(withSeparator);
         }
 
-        public void Add(string key, char value, bool withSeparator = false)
+        private void AddValue(char value, bool withSeparator = false)
         {
-            AddKeyWithSeparator(key);
             _stringBuilder.Append(Convert.ToString(Convert.ToInt16(value)));
             HandleMemberSeparator(withSeparator);
         }
 
-        public void Add(string key, decimal value, bool withSeparator = false)
+        private void AddValue(decimal value, bool withSeparator = false)
         {
-            AddKeyWithSeparator(key);
             _stringBuilder.Append(Convert.ToString(value));
             HandleMemberSeparator(withSeparator);
         }
 
-        public void Add(string key, bool value, bool withSeparator = false)
+        private void AddValue(bool value, bool withSeparator = false)
         {
-            AddKeyWithSeparator(key);
             if (value)
                 _stringBuilder.Append("true");
             else
                 _stringBuilder.Append("false");
 
+            HandleMemberSeparator(withSeparator);
+        }
+        #endregion
+
+        #region Add for well known types
+        public void Add(string key, object value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            AddValue(value, withSeparator);
+        }
+
+        public void Add(string key, string value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            AddValue(value, withSeparator);
+        }
+
+        public void Add(string key, byte value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            AddValue(value, withSeparator);
+        }
+
+        public void Add(string key, sbyte value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            AddValue(value, withSeparator);
+        }
+
+        public void Add(string key, int value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            AddValue(value, withSeparator);
+        }
+
+        public void Add(string key, uint value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            AddValue(value, withSeparator);
+        }
+
+        public void Add(string key, long value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            AddValue(value, withSeparator);
+        }
+
+        public void Add(string key, ulong value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            AddValue(value, withSeparator);
+        }
+
+        public void Add(string key, float value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            AddValue(value, withSeparator);
+        }
+
+        public void Add(string key, double value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            AddValue(value, withSeparator);
+        }
+
+        public void Add(string key, char value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            AddValue(value, withSeparator);
+        }
+
+        public void Add(string key, decimal value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            AddValue(value, withSeparator);
+        }
+
+        public void Add(string key, bool value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            AddValue(value, withSeparator);
+        }
+
+        public void Add(string key, IEnumerable value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            AddStartArray();
+            bool isFirst = true;
+            foreach (var item in value)
+            {
+                if (!isFirst)
+                    AddMemberSeparator();
+
+                AddValue(item);
+                isFirst = false;
+            }
+            AddEndArray();
             HandleMemberSeparator(withSeparator);
         }
         #endregion

@@ -396,7 +396,7 @@
       },
       "attributes": [
         {
-          "simple_name": "prop_1",
+          "simple_name": "Prop1",
           "type": "int"
         }
       ]

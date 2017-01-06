@@ -48,7 +48,7 @@ using System.Collections;
         private const string IntType = "int";
         private const string UIntType = "uint";
         private const string LongType = "long";
-        private const string ULongType "ulong";
+        private const string ULongType = "ulong";
         private const string FloatType = "float";
         private const string DoubleType = "double";
         private const string CharType = "char";
@@ -146,7 +146,7 @@ using System.Collections;
         }
         #endregion
 
-        #region Adds for well known types
+        #region Add value for well known types
         private bool HandleBoxedPrimitives(object value)
         {
             var type = value.GetType();
@@ -163,7 +163,7 @@ using System.Collections;
             {
                 AddStartObject();
                 AddType(ByteType, true/*withSeparator*/);
-                Add(DataKey, value as byte);
+                Add(DataKey, (byte)value);
                 AddEndObject();
                 return true;
             }
@@ -172,16 +172,16 @@ using System.Collections;
             {
                 AddStartObject();
                 AddType(SByteType, true/*withSeparator*/);
-                Add(DataKey, value as sbyte);
+                Add(DataKey, (sbyte)value);
                 AddEndObject();
                 return true;
             }
 
-            if (type == typeof(int)) 
+            if (type == typeof(int))
             {
                 AddStartObject();
                 AddType(IntType, true/*withSeparator*/);
-                Add(DataKey, value as int);
+                Add(DataKey, (int)value);
                 AddEndObject();
                 return true;
             }
@@ -190,7 +190,7 @@ using System.Collections;
             {
                 AddStartObject();
                 AddType(UIntType, true/*withSeparator*/);
-                Add(DataKey, value as uint);
+                Add(DataKey, (uint)value);
                 AddEndObject();
                 return true;
             }
@@ -199,7 +199,7 @@ using System.Collections;
             {
                 AddStartObject();
                 AddType(LongType, true/*withSeparator*/);
-                Add(DataKey, value as long);
+                Add(DataKey, (long)value);
                 AddEndObject();
                 return true;
             }
@@ -208,7 +208,7 @@ using System.Collections;
             {
                 AddStartObject();
                 AddType(ULongType, true/*withSeparator*/);
-                Add(DataKey, value as ulong);
+                Add(DataKey, (ulong)value);
                 AddEndObject();
                 return true;
             }
@@ -217,7 +217,7 @@ using System.Collections;
             {
                 AddStartObject();
                 AddType(FloatType, true/*withSeparator*/);
-                Add(DataKey, value as float);
+                Add(DataKey, (float)value);
                 AddEndObject();
                 return true;
             }
@@ -226,7 +226,7 @@ using System.Collections;
             {
                 AddStartObject();
                 AddType(DoubleType, true/*withSeparator*/);
-                Add(DataKey, value as double);
+                Add(DataKey, (double)value);
                 AddEndObject();
                 return true;
             }
@@ -235,7 +235,7 @@ using System.Collections;
             {
                 AddStartObject();
                 AddType(CharType, true/*withSeparator*/);
-                Add(DataKey, value as char);
+                Add(DataKey, (char)value);
                 AddEndObject();
                 return true;
             }
@@ -244,7 +244,7 @@ using System.Collections;
             {
                 AddStartObject();
                 AddType(DecimalType, true/*withSeparator*/);
-                Add(DataKey, value as decimal);
+                Add(DataKey, (decimal)value);
                 AddEndObject();
                 return true;
             }
@@ -253,7 +253,7 @@ using System.Collections;
             {
                 AddStartObject();
                 AddType(BoolType, true/*withSeparator*/);
-                Add(DataKey, value as bool);
+                Add(DataKey, (bool)value);
                 AddEndObject();
                 return true;
             }
@@ -261,7 +261,7 @@ using System.Collections;
             return false;
         }
 
-        public void Add(object value, bool withSeparator = false)
+        private void AddValue(object value, bool withSeparator = false)
         {
             AddStartObject();
             AddType(SystemObjectType, true/*withSeparator*/);
@@ -274,15 +274,15 @@ using System.Collections;
                 return;
             }
 
-            if (HandleBoxedPrimitives(value, withSeparator))
+            AddKey(DataKey);
+            AddPairSeparator();
+            if (HandleBoxedPrimitives(value))
             {
                 AddEndObject();
                 HandleMemberSeparator(withSeparator);
                 return;
             }
 
-            AddKey(DataKey);
-            AddPairSeparator();
             AddStartObject();
             AddKey(HashCode);
             AddPairSeparator();
@@ -293,79 +293,73 @@ using System.Collections;
             HandleMemberSeparator(withSeparator);
         }
 
-        public void Add(string value, bool withSeparator = false)
+        private void AddValue(string value, bool withSeparator = false)
         {
             AddQuoted(value);
             HandleMemberSeparator(withSeparator);
         }
 
-        public void Add(byte value, bool withSeparator = false)
+        private void AddValue(byte value, bool withSeparator = false)
         {
             _stringBuilder.Append(Convert.ToString(value));
             HandleMemberSeparator(withSeparator);
         }
 
-        public void Add(sbyte value, bool withSeparator = false)
+        private void AddValue(sbyte value, bool withSeparator = false)
         {
             _stringBuilder.Append(Convert.ToString(value));
             HandleMemberSeparator(withSeparator);
         }
 
-        public void Add(int value, bool withSeparator = false)
+        private void AddValue(int value, bool withSeparator = false)
         {
             _stringBuilder.Append(Convert.ToString(value));
             HandleMemberSeparator(withSeparator);
         }
 
-        public void Add(uint value, bool withSeparator = false)
+        private void AddValue(uint value, bool withSeparator = false)
         {
             _stringBuilder.Append(Convert.ToString(value));
             HandleMemberSeparator(withSeparator);
         }
 
-        public void Add(long value, bool withSeparator = false)
+        private void AddValue(long value, bool withSeparator = false)
         {
             _stringBuilder.Append(Convert.ToString(value));
             HandleMemberSeparator(withSeparator);
         }
 
-        public void Add(ulong value, bool withSeparator = false)
+        private void AddValue(ulong value, bool withSeparator = false)
         {
             _stringBuilder.Append(Convert.ToString(value));
             HandleMemberSeparator(withSeparator);
         }
 
-        public void Add(float value, bool withSeparator = false)
+        private void AddValue(float value, bool withSeparator = false)
         {
             _stringBuilder.Append(Convert.ToString(value));
             HandleMemberSeparator(withSeparator);
         }
 
-        public void Add(double value, bool withSeparator = false)
+        private void AddValue(double value, bool withSeparator = false)
         {
             _stringBuilder.Append(Convert.ToString(value));
             HandleMemberSeparator(withSeparator);
         }
 
-        public void Add(double value, bool withSeparator = false)
-        {
-            _stringBuilder.Append(Convert.ToString(value));
-            HandleMemberSeparator(withSeparator);
-        }
-
-        public void Add(char value, bool withSeparator = false)
+        private void AddValue(char value, bool withSeparator = false)
         {
             _stringBuilder.Append(Convert.ToString(Convert.ToInt16(value)));
             HandleMemberSeparator(withSeparator);
         }
 
-        public void Add(decimal value, bool withSeparator = false)
+        private void AddValue(decimal value, bool withSeparator = false)
         {
             _stringBuilder.Append(Convert.ToString(value));
             HandleMemberSeparator(withSeparator);
         }
 
-        public void Add(bool value, bool withSeparator = false)
+        private void AddValue(bool value, bool withSeparator = false)
         {
             if (value)
                 _stringBuilder.Append("true");
@@ -374,83 +368,85 @@ using System.Collections;
 
             HandleMemberSeparator(withSeparator);
         }
+        #endregion
 
+        #region Add for well known types
         public void Add(string key, object value, bool withSeparator = false)
         {
             AddKeyWithSeparator(key);
-            Add(value, withSeparator);
+            AddValue(value, withSeparator);
         }
 
         public void Add(string key, string value, bool withSeparator = false)
         {
             AddKeyWithSeparator(key);
-            Add(value);
+            AddValue(value, withSeparator);
         }
 
         public void Add(string key, byte value, bool withSeparator = false)
         {
             AddKeyWithSeparator(key);
-            Add(value);
+            AddValue(value, withSeparator);
         }
 
         public void Add(string key, sbyte value, bool withSeparator = false)
         {
             AddKeyWithSeparator(key);
-            Add(value);
+            AddValue(value, withSeparator);
         }
 
         public void Add(string key, int value, bool withSeparator = false)
         {
             AddKeyWithSeparator(key);
-            Add(value);
+            AddValue(value, withSeparator);
         }
 
         public void Add(string key, uint value, bool withSeparator = false)
         {
             AddKeyWithSeparator(key);
-            Add(value);
+            AddValue(value, withSeparator);
         }
 
         public void Add(string key, long value, bool withSeparator = false)
         {
             AddKeyWithSeparator(key);
-            Add(value);
+            AddValue(value, withSeparator);
         }
 
         public void Add(string key, ulong value, bool withSeparator = false)
         {
             AddKeyWithSeparator(key);
-            Add(value);
+            AddValue(value, withSeparator);
         }
 
         public void Add(string key, float value, bool withSeparator = false)
         {
             AddKeyWithSeparator(key);
-            Add(value);
+            AddValue(value, withSeparator);
         }
 
         public void Add(string key, double value, bool withSeparator = false)
         {
             AddKeyWithSeparator(key);
-            Add(value);
+            AddValue(value, withSeparator);
         }
 
         public void Add(string key, char value, bool withSeparator = false)
         {
             AddKeyWithSeparator(key);
-            Add(value);
+            AddValue(value, withSeparator);
         }
 
         public void Add(string key, decimal value, bool withSeparator = false)
         {
             AddKeyWithSeparator(key);
-            Add(value);
+            AddValue(value, withSeparator);
         }
 
         public void Add(string key, bool value, bool withSeparator = false)
         {
             AddKeyWithSeparator(key);
-            Add(value);
+            AddValue(value, withSeparator);
         }
 
         public void Add(string key, IEnumerable value, bool withSeparator = false)
@@ -458,16 +454,13 @@ using System.Collections;
             AddKeyWithSeparator(key);
             AddStartArray();
             bool isFirst = true;
-            using (var enumerator = value.GetEnumerator())
+            foreach (var item in value)
             {
-                while (enumerator.MoveNext())
-                {
-                    if (!isFirst)
-                        AddMemberSeparator();
+                if (!isFirst)
+                    AddMemberSeparator();
 
-                    Add(enumerator.Current);
-                    isFirst = false;
-                }
+                AddValue(item);
+                isFirst = false;
             }
             AddEndArray();
             HandleMemberSeparator(withSeparator);

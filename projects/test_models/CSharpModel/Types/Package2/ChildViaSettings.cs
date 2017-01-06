@@ -24,7 +24,7 @@ namespace Dogen.TestModels.CSharpModel.Package2
     public sealed class ChildViaSettings : Dogen.TestModels.CSharpModel.Package2.Parent
     {
         #region Properties
-        public int prop_1 { get; set; }
+        public int Prop1 { get; set; }
         #endregion
 
         #region Constructors
@@ -32,10 +32,10 @@ namespace Dogen.TestModels.CSharpModel.Package2
 
         public ChildViaSettings(
             int prop0,
-            int prop_1)
+            int prop1)
             : base(prop0)
         {
-            prop_1 = prop_1;
+            Prop1 = prop1;
         }
         #endregion
 
@@ -50,7 +50,7 @@ namespace Dogen.TestModels.CSharpModel.Package2
             if (value == null || !base.Equals(value)) return false;
 
             return
-                prop_1 == value.prop_1;
+                Prop1 == value.Prop1;
         }
 
         public static bool operator ==(ChildViaSettings lhs, ChildViaSettings rhs)
@@ -75,7 +75,7 @@ namespace Dogen.TestModels.CSharpModel.Package2
                 const int HashingMultiplier = 16777619;
 
                 int hash = HashingBase;
-                hash = (hash * HashingMultiplier) ^ prop_1.GetHashCode();
+                hash = (hash * HashingMultiplier) ^ Prop1.GetHashCode();
                 return hash;
             }
         }
