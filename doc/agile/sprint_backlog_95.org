@@ -12,24 +12,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-07 Sat 11:57]
+#+CAPTION: Clock summary at [2017-01-07 Sat 12:57]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *37:22* |       |      | 100.0 |
+| *Total time*                                                                | *37:49* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 37:22   |       |      | 100.0 |
-| Active                                                                      |         | 37:22 |      | 100.0 |
+| Stories                                                                     | 37:49   |       |      | 100.0 |
+| Active                                                                      |         | 37:49 |      | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:30 |   1.3 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:57 |   2.5 |
-| COMPLETED Consider supporting multiple inheritance on non-proxy models      |         |       | 3:24 |   9.1 |
-| COMPLETED Add basic validation infrastructure                               |         |       | 8:40 |  23.2 |
-| COMPLETED Fix borked windows build                                          |         |       | 0:26 |   1.2 |
+| COMPLETED Consider supporting multiple inheritance on non-proxy models      |         |       | 3:24 |   9.0 |
+| COMPLETED Add basic validation infrastructure                               |         |       | 8:40 |  22.9 |
+| COMPLETED Fix borked windows build                                          |         |       | 0:26 |   1.1 |
 | COMPLETED Clean up enumerator implementation                                |         |       | 1:05 |   2.9 |
-| COMPLETED Measure validation slowdown                                       |         |       | 6:38 |  17.8 |
-| COMPLETED Parsing should support dot notation                               |         |       | 2:54 |   7.8 |
-| COMPLETED Add internal object dumper resolution                             |         |       | 4:51 |  13.0 |
-| STARTED Add container types to C# proxy models                              |         |       | 7:57 |  21.3 |
+| COMPLETED Measure validation slowdown                                       |         |       | 6:38 |  17.5 |
+| COMPLETED Parsing should support dot notation                               |         |       | 2:54 |   7.7 |
+| COMPLETED Add internal object dumper resolution                             |         |       | 4:51 |  12.8 |
+| STARTED Add container types to C# proxy models                              |         |       | 8:24 |  22.2 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -420,6 +420,7 @@ for all model types and primitives. Add a registrar for local dumpers.
 : }
 
 *** STARTED Add container types to C# proxy models                    :story:
+    CLOCK: [2017-01-07 Sat 12:30]--[2017-01-07 Sat 12:57] =>  0:27
     CLOCK: [2017-01-07 Sat 11:02]--[2017-01-07 Sat 11:57] =>  0:55
     CLOCK: [2017-01-06 Fri 22:01]--[2017-01-06 Fri 23:27] =>  1:26
     CLOCK: [2017-01-06 Fri 17:52]--[2017-01-06 Fri 18:05] =>  0:13
@@ -540,12 +541,12 @@ System.Collections:
 : DictionaryEntry
 : HybridDictionary : IDictionary, ICollection, IEnumerable (System.Collections.Specialized)
 : IOrderedDictionary : IDictionary, ICollection, IEnumerable (System.Collections.Specialized)
+: NameValueCollection NameObjectCollectionBase (System.Collections.Specialized)
+:    ICollection, IEnumerable
 : BitArray : ICollection, IEnumerable
 : Queue : ICollection, IEnumerable
 : SortedList : IDictionary, ICollection, IEnumerable
 : Stack : ICollection, IEnumerable
-: NameValueCollection NameObjectCollectionBase (System.Collections.Specialized)
-:    ICollection, IEnumerable, ISerializable,
 
 https://msdn.microsoft.com/en-us/library/system.collections.specialized.namevaluecollection(v=vs.110).aspx
 
@@ -650,6 +651,12 @@ In System.Collections:
 : ICollection: IEnumerable
 : IList : ICollection, IEnumerable
 : ArrayList : IList, ICollection, IEnumerable
+
+**** Skipped collections and types
+
+- =IOrderedDictionary=: no implementations in framework. This means
+  generators will not work.
+- =DictionaryEntry=: no use case.
 
 *** Add support for boxed types                                       :story:
 

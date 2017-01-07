@@ -26,6 +26,8 @@ assistant_formatter::format(const context& ctx, const yarn::element& e) const {
         {
 #>
 using System;
+using System.Collections;
+using System.Collections.Specialized;
 
 <#+
             const auto ns(a.make_namespaces(e.name()));
@@ -113,24 +115,24 @@ using System;
             return Convert.ToDecimal(position);
         }
 
-        public static System.Collections.IEnumerable CreateIEnumerable(uint position)
+        public static IEnumerable CreateIEnumerable(uint position)
         {
             return CreateArrayList(position);
         }
 
-        public static System.Collections.ICollection CreateICollection(uint position)
+        public static ICollection CreateICollection(uint position)
         {
             return CreateArrayList(position);
         }
 
-        public static System.Collections.IList CreateIList(uint position)
+        public static IList CreateIList(uint position)
         {
             return CreateArrayList(position);
         }
 
-        public static System.Collections.ArrayList CreateArrayList(uint position)
+        public static ArrayList CreateArrayList(uint position)
         {
-            var result = new System.Collections.ArrayList();
+            var result = new ArrayList();
             for (uint i = 0; i < SequenceSize; i++)
             {
                 switch((position + i) % 5)
@@ -147,27 +149,37 @@ using System;
             return result;
         }
 
-        public static System.Collections.IDictionary CreateIDictionary(uint position)
+        public static IDictionary CreateIDictionary(uint position)
         {
             return CreateHashtable(position);
         }
 
-        public static System.Collections.Hashtable CreateHashtable(uint position)
+        public static Hashtable CreateHashtable(uint position)
         {
-            var result = new System.Collections.Hashtable();
+            var result = new Hashtable();
             for (uint i = 0; i < SequenceSize; i++)
             {
-                result.Add("key_" + i, "value_" + i);
+                result.Add("key_" + position + i, "value_" + position + i);
             }
             return result;
         }
 
-        public static System.Collections.Specialized.HybridDictionary CreateHybridDictionary(uint position)
+        public static HybridDictionary CreateHybridDictionary(uint position)
         {
-            var result = new System.Collections.Specialized.HybridDictionary();
+            var result = new HybridDictionary();
             for (uint i = 0; i < SequenceSize; i++)
             {
-                result.Add("key_" + i, "value_" + i);
+                result.Add("key_" + position + i, "value_" + position + i);
+            }
+            return result;
+        }
+
+        public static NameValueCollection CreateNameValueCollection(uint position)
+        {
+            var result = new NameValueCollection();
+            for (uint i = 0; i < SequenceSize; i++)
+            {
+                result.Add("key_" + position + i, "value_" + position + i);
             }
             return result;
         }
