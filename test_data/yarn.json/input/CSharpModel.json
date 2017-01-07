@@ -53,6 +53,10 @@
         {
           "simple_name": "Prop8",
           "type": "System.Collections.BitArray"
+        },
+        {
+          "simple_name": "Prop9",
+          "type": "System.Collections.Queue"
         }
       ]
     },

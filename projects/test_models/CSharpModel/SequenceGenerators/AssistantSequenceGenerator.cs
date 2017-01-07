@@ -183,5 +183,15 @@ namespace Dogen.TestModels.CSharpModel
             }
             return result;
         }
+
+        public static Queue CreateQueue(uint position)
+        {
+            var result = new Queue();
+            for (int i = 0; i < SequenceSize; i++)
+            {
+                result.Enqueue("value_" + position + i);
+            }
+            return result;
+        }
     }
 }

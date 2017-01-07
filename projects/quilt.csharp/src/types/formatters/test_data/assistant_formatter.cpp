@@ -241,6 +241,16 @@ a.stream() << "                result[i] = position % 2 == 0;" << std::endl;
 a.stream() << "            }" << std::endl;
 a.stream() << "            return result;" << std::endl;
 a.stream() << "        }" << std::endl;
+a.stream() << std::endl;
+a.stream() << "        public static Queue CreateQueue(uint position)" << std::endl;
+a.stream() << "        {" << std::endl;
+a.stream() << "            var result = new Queue();" << std::endl;
+a.stream() << "            for (int i = 0; i < SequenceSize; i++)" << std::endl;
+a.stream() << "            {" << std::endl;
+a.stream() << "                result.Enqueue(\"value_\" + position + i);" << std::endl;
+a.stream() << "            }" << std::endl;
+a.stream() << "            return result;" << std::endl;
+a.stream() << "        }" << std::endl;
 a.stream() << "    }" << std::endl;
         }
     } // sbf
