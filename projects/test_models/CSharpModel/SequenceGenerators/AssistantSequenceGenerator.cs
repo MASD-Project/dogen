@@ -151,5 +151,15 @@ namespace Dogen.TestModels.CSharpModel
             }
             return result;
         }
+
+        public static System.Collections.Specialized.HybridDictionary CreateHybridDictionary(uint position)
+        {
+            var result = new System.Collections.Specialized.HybridDictionary();
+            for (uint i = 0; i < SequenceSize; i++)
+            {
+                result.Add("key_" + i, "value_" + i);
+            }
+            return result;
+        }
     }
 }

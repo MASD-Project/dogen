@@ -41,6 +41,10 @@
         {
           "simple_name": "Prop5",
           "type": "System.Collections.IDictionary"
+        },
+        {
+          "simple_name": "Prop6",
+          "type": "System.Collections.Specialized.HybridDictionary"
         }
       ]
     },

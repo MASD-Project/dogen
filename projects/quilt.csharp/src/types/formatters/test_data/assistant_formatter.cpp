@@ -209,6 +209,16 @@ a.stream() << "                result.Add(\"key_\" + i, \"value_\" + i);" << std
 a.stream() << "            }" << std::endl;
 a.stream() << "            return result;" << std::endl;
 a.stream() << "        }" << std::endl;
+a.stream() << std::endl;
+a.stream() << "        public static System.Collections.Specialized.HybridDictionary CreateHybridDictionary(uint position)" << std::endl;
+a.stream() << "        {" << std::endl;
+a.stream() << "            var result = new System.Collections.Specialized.HybridDictionary();" << std::endl;
+a.stream() << "            for (uint i = 0; i < SequenceSize; i++)" << std::endl;
+a.stream() << "            {" << std::endl;
+a.stream() << "                result.Add(\"key_\" + i, \"value_\" + i);" << std::endl;
+a.stream() << "            }" << std::endl;
+a.stream() << "            return result;" << std::endl;
+a.stream() << "        }" << std::endl;
 a.stream() << "    }" << std::endl;
         }
     } // sbf

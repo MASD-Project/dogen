@@ -360,6 +360,52 @@ namespace Dogen.TestModels.CSharpModel
 
             HandleMemberSeparator(withSeparator);
         }
+
+        private void AddValue(IEnumerable value, bool withSeparator = false)
+        {
+            AddStartArray();
+            bool isFirst = true;
+            foreach (var item in value)
+            {
+                if (!isFirst)
+                    AddMemberSeparator();
+
+                AddValue(item);
+                isFirst = false;
+            }
+            AddEndArray();
+            HandleMemberSeparator(withSeparator);
+        }
+
+        private void AddValue(IDictionary value, bool withSeparator = false)
+        {
+            AddStartArray();
+            bool isFirst = true;
+            foreach (DictionaryEntry item in value)
+            {
+                if (!isFirst)
+                    AddMemberSeparator();
+
+                AddStartArray();
+
+                AddStartObject();
+                AddType(KeyType, true/*withSeparator*/);
+                Add(DataKey, item.Key);
+                AddEndObject();
+
+                AddMemberSeparator();
+
+                AddStartObject();
+                AddType(ValueType, true/*withSeparator*/);
+                Add(DataKey, item.Value);
+                AddEndObject();
+
+                AddEndArray();
+                isFirst = false;
+            }
+            AddEndArray();
+            HandleMemberSeparator(withSeparator);
+        }
         #endregion
 
         #region Add for well known types
@@ -444,55 +490,13 @@ namespace Dogen.TestModels.CSharpModel
         public void Add(string key, IEnumerable value, bool withSeparator = false)
         {
             AddKeyWithSeparator(key);
-            AddStartArray();
-            bool isFirst = true;
-            foreach (var item in value)
-            {
-                if (!isFirst)
-                    AddMemberSeparator();
-
-                AddValue(item);
-                isFirst = false;
-            }
-            AddEndArray();
-            HandleMemberSeparator(withSeparator);
-        }
-
-        public void Add(string key, Hashtable value, bool withSeparator = false)
-        {
-            AddKeyWithSeparator(key);
             AddValue(value, withSeparator);
         }
 
         public void Add(string key, IDictionary value, bool withSeparator = false)
         {
             AddKeyWithSeparator(key);
-            AddStartArray();
-            bool isFirst = true;
-            foreach (DictionaryEntry item in value)
-            {
-                if (!isFirst)
-                    AddMemberSeparator();
-
-                AddStartArray();
-
-                AddStartObject();
-                AddType(KeyType, true/*withSeparator*/);
-                Add(DataKey, item.Key);
-                AddEndObject();
-
-                AddMemberSeparator();
-
-                AddStartObject();
-                AddType(ValueType, true/*withSeparator*/);
-                Add(DataKey, item.Value);
-                AddEndObject();
-
-                AddEndArray();
-                isFirst = false;
-            }
-            AddEndArray();
-            HandleMemberSeparator(withSeparator);
+            AddValue(value, withSeparator);
         }
         #endregion
 
