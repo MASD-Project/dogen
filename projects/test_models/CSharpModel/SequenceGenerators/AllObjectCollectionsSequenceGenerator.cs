@@ -40,6 +40,7 @@ namespace Dogen.TestModels.CSharpModel
             value.Prop7 = AssistantSequenceGenerator.CreateNameValueCollection(position + 7);
             value.Prop8 = AssistantSequenceGenerator.CreateBitArray(position + 8);
             value.Prop9 = AssistantSequenceGenerator.CreateQueue(position + 9);
+            value.Prop10 = AssistantSequenceGenerator.CreateStack(position + 10);
         }
 
         static internal AllObjectCollections Create(uint position)

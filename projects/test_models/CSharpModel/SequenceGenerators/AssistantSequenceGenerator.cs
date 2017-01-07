@@ -193,5 +193,15 @@ namespace Dogen.TestModels.CSharpModel
             }
             return result;
         }
+
+        public static Stack CreateStack(uint position)
+        {
+            var result = new Stack();
+            for (int i = 0; i < SequenceSize; i++)
+            {
+                result.Push("value_" + position + i);
+            }
+            return result;
+        }
     }
 }

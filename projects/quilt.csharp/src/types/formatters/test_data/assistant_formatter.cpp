@@ -251,6 +251,16 @@ a.stream() << "                result.Enqueue(\"value_\" + position + i);" << st
 a.stream() << "            }" << std::endl;
 a.stream() << "            return result;" << std::endl;
 a.stream() << "        }" << std::endl;
+a.stream() << std::endl;
+a.stream() << "        public static Stack CreateStack(uint position)" << std::endl;
+a.stream() << "        {" << std::endl;
+a.stream() << "            var result = new Stack();" << std::endl;
+a.stream() << "            for (int i = 0; i < SequenceSize; i++)" << std::endl;
+a.stream() << "            {" << std::endl;
+a.stream() << "                result.Push(\"value_\" + position + i);" << std::endl;
+a.stream() << "            }" << std::endl;
+a.stream() << "            return result;" << std::endl;
+a.stream() << "        }" << std::endl;
 a.stream() << "    }" << std::endl;
         }
     } // sbf

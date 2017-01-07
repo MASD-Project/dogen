@@ -34,6 +34,7 @@ namespace Dogen.TestModels.CSharpModel
         public System.Collections.Specialized.NameValueCollection Prop7 { get; set; }
         public System.Collections.BitArray Prop8 { get; set; }
         public System.Collections.Queue Prop9 { get; set; }
+        public System.Collections.Stack Prop10 { get; set; }
         #endregion
 
         #region Constructors
@@ -49,7 +50,8 @@ namespace Dogen.TestModels.CSharpModel
             System.Collections.Specialized.HybridDictionary prop6,
             System.Collections.Specialized.NameValueCollection prop7,
             System.Collections.BitArray prop8,
-            System.Collections.Queue prop9)
+            System.Collections.Queue prop9,
+            System.Collections.Stack prop10)
         {
             Prop0 = prop0;
             Prop1 = prop1;
@@ -61,6 +63,7 @@ namespace Dogen.TestModels.CSharpModel
             Prop7 = prop7;
             Prop8 = prop8;
             Prop9 = prop9;
+            Prop10 = prop10;
         }
         #endregion
 
@@ -94,7 +97,9 @@ namespace Dogen.TestModels.CSharpModel
                 Prop8 != null && value.Prop8 != null &&
                 Prop8.Equals(value.Prop8) &&
                 Prop9 != null && value.Prop9 != null &&
-                Prop9.Equals(value.Prop9);
+                Prop9.Equals(value.Prop9) &&
+                Prop10 != null && value.Prop10 != null &&
+                Prop10.Equals(value.Prop10);
         }
 
         public static bool operator ==(AllObjectCollections lhs, AllObjectCollections rhs)
@@ -139,6 +144,8 @@ namespace Dogen.TestModels.CSharpModel
                     (!object.ReferenceEquals(null, Prop8) ? Prop8.GetHashCode() : 0);
                 hash = (hash * HashingMultiplier) ^
                     (!object.ReferenceEquals(null, Prop9) ? Prop9.GetHashCode() : 0);
+                hash = (hash * HashingMultiplier) ^
+                    (!object.ReferenceEquals(null, Prop10) ? Prop10.GetHashCode() : 0);
                 return hash;
             }
         }

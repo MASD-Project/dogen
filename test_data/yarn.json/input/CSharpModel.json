@@ -57,6 +57,10 @@
         {
           "simple_name": "Prop9",
           "type": "System.Collections.Queue"
+        },
+        {
+          "simple_name": "Prop10",
+          "type": "System.Collections.Stack"
         }
       ]
     },
