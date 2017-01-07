@@ -19,6 +19,7 @@
  *
  */
 #include <boost/throw_exception.hpp>
+#include <boost/algorithm/string.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_set_io.hpp"
@@ -35,6 +36,7 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("yarn.parsing_expander"));
 
+const std::string empty_type("Attribute type is empty: ");
 const std::string parent_name_conflict(
     "Parent name is defined in both meta-data and structure of model: ");
 
@@ -99,7 +101,18 @@ parse_attributes(const location& model_location,
 
     const name_tree_parser ntp(top_level_modules, model_location, language);
     for (auto& attr : attrs) {
-        auto nt(ntp.parse(attr.unparsed_type()));
+        const auto ut(boost::algorithm::trim_copy(attr.unparsed_type()));
+
+        /*
+         * Attribute must always supply the unparsed type.
+         */
+        if (ut.empty()) {
+            const auto sn(attr.name().simple());
+            BOOST_LOG_SEV(lg, error) << empty_type << sn;
+            BOOST_THROW_EXCEPTION(expansion_error(empty_type + sn));
+        }
+
+        auto nt(ntp.parse(ut));
         attr.parsed_type(nt);
     }
 }
