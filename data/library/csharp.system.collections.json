@@ -130,6 +130,22 @@
         "quilt.csharp.assistant.requires_assistance": true,
         "quilt.csharp.assistant.method_postfix": "NameValueCollection"
       }
+    },
+    {
+      "name": {
+        "simple_name": "BitArray"
+      },
+      "parents": [
+        {
+          "simple_name": "ICollection"
+        }
+      ],
+      "meta_type": "object",
+      "annotation": {
+        "quilt.csharp.aspect.requires_static_reference_equals": true,
+        "quilt.csharp.assistant.requires_assistance": true,
+        "quilt.csharp.assistant.method_postfix": "BitArray"
+      }
     }
   ]
 }

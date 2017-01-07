@@ -173,5 +173,15 @@ namespace Dogen.TestModels.CSharpModel
             }
             return result;
         }
+
+        public static BitArray CreateBitArray(uint position)
+        {
+            var result = new BitArray(SequenceSize);
+            for (int i = 0; i < SequenceSize; i++)
+            {
+                result[i] = position % 2 == 0;
+            }
+            return result;
+        }
     }
 }

@@ -32,6 +32,7 @@ namespace Dogen.TestModels.CSharpModel
         public System.Collections.IDictionary Prop5 { get; set; }
         public System.Collections.Specialized.HybridDictionary Prop6 { get; set; }
         public System.Collections.Specialized.NameValueCollection Prop7 { get; set; }
+        public System.Collections.BitArray Prop8 { get; set; }
         #endregion
 
         #region Constructors
@@ -45,7 +46,8 @@ namespace Dogen.TestModels.CSharpModel
             System.Collections.Hashtable prop4,
             System.Collections.IDictionary prop5,
             System.Collections.Specialized.HybridDictionary prop6,
-            System.Collections.Specialized.NameValueCollection prop7)
+            System.Collections.Specialized.NameValueCollection prop7,
+            System.Collections.BitArray prop8)
         {
             Prop0 = prop0;
             Prop1 = prop1;
@@ -55,6 +57,7 @@ namespace Dogen.TestModels.CSharpModel
             Prop5 = prop5;
             Prop6 = prop6;
             Prop7 = prop7;
+            Prop8 = prop8;
         }
         #endregion
 
@@ -84,7 +87,9 @@ namespace Dogen.TestModels.CSharpModel
                 Prop6 != null && value.Prop6 != null &&
                 Prop6.Equals(value.Prop6) &&
                 Prop7 != null && value.Prop7 != null &&
-                Prop7.Equals(value.Prop7);
+                Prop7.Equals(value.Prop7) &&
+                Prop8 != null && value.Prop8 != null &&
+                Prop8.Equals(value.Prop8);
         }
 
         public static bool operator ==(AllObjectCollections lhs, AllObjectCollections rhs)
@@ -125,6 +130,8 @@ namespace Dogen.TestModels.CSharpModel
                     (!object.ReferenceEquals(null, Prop6) ? Prop6.GetHashCode() : 0);
                 hash = (hash * HashingMultiplier) ^
                     (!object.ReferenceEquals(null, Prop7) ? Prop7.GetHashCode() : 0);
+                hash = (hash * HashingMultiplier) ^
+                    (!object.ReferenceEquals(null, Prop8) ? Prop8.GetHashCode() : 0);
                 return hash;
             }
         }

@@ -49,6 +49,10 @@
         {
           "simple_name": "Prop7",
           "type": "System.Collections.Specialized.NameValueCollection"
+        },
+        {
+          "simple_name": "Prop8",
+          "type": "System.Collections.BitArray"
         }
       ]
     },

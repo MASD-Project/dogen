@@ -6830,7 +6830,7 @@ this is a long comment#</dia:string>
         <dia:point val="29,96"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="28.95,95.95;51.88,104.45"/>
+        <dia:rectangle val="28.95,95.95;51.88,105.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="29,96"/>
@@ -6839,7 +6839,7 @@ this is a long comment#</dia:string>
         <dia:real val="22.830000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="8.4000000000000004"/>
+        <dia:real val="9.1999999999999993"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#AllObjectCollections#</dia:string>
@@ -7096,6 +7096,29 @@ this is a long comment#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#System.Collections.Specialized.NameValueCollection#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#Prop8#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#System.Collections.BitArray#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

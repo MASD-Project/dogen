@@ -38,6 +38,7 @@ namespace Dogen.TestModels.CSharpModel
             value.Prop5 = AssistantSequenceGenerator.CreateIDictionary(position + 5);
             value.Prop6 = AssistantSequenceGenerator.CreateHybridDictionary(position + 6);
             value.Prop7 = AssistantSequenceGenerator.CreateNameValueCollection(position + 7);
+            value.Prop8 = AssistantSequenceGenerator.CreateBitArray(position + 8);
         }
 
         static internal AllObjectCollections Create(uint position)

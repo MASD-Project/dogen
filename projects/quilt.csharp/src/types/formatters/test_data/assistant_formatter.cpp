@@ -231,6 +231,16 @@ a.stream() << "                result.Add(\"key_\" + position + i, \"value_\" + 
 a.stream() << "            }" << std::endl;
 a.stream() << "            return result;" << std::endl;
 a.stream() << "        }" << std::endl;
+a.stream() << std::endl;
+a.stream() << "        public static BitArray CreateBitArray(uint position)" << std::endl;
+a.stream() << "        {" << std::endl;
+a.stream() << "            var result = new BitArray(SequenceSize);" << std::endl;
+a.stream() << "            for (int i = 0; i < SequenceSize; i++)" << std::endl;
+a.stream() << "            {" << std::endl;
+a.stream() << "                result[i] = position % 2 == 0;" << std::endl;
+a.stream() << "            }" << std::endl;
+a.stream() << "            return result;" << std::endl;
+a.stream() << "        }" << std::endl;
 a.stream() << "    }" << std::endl;
         }
     } // sbf
