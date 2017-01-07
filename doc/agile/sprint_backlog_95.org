@@ -12,28 +12,30 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-07 Sat 13:29]
+#+CAPTION: Clock summary at [2017-01-07 Sat 13:46]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *38:18* |       |      | 100.0 |
+| *Total time*                                                                | *38:33* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 38:18   |       |      | 100.0 |
-| Active                                                                      |         | 38:18 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:30 |   1.3 |
+| Stories                                                                     | 38:33   |       |      | 100.0 |
+| Active                                                                      |         | 38:33 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:35 |   1.5 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:57 |   2.5 |
-| COMPLETED Consider supporting multiple inheritance on non-proxy models      |         |       | 3:24 |   8.9 |
-| COMPLETED Add basic validation infrastructure                               |         |       | 8:40 |  22.6 |
+| COMPLETED Consider supporting multiple inheritance on non-proxy models      |         |       | 3:24 |   8.8 |
+| COMPLETED Add basic validation infrastructure                               |         |       | 8:40 |  22.5 |
 | COMPLETED Fix borked windows build                                          |         |       | 0:26 |   1.1 |
 | COMPLETED Clean up enumerator implementation                                |         |       | 1:05 |   2.8 |
-| COMPLETED Measure validation slowdown                                       |         |       | 6:38 |  17.3 |
-| COMPLETED Parsing should support dot notation                               |         |       | 2:54 |   7.6 |
-| COMPLETED Add internal object dumper resolution                             |         |       | 4:51 |  12.7 |
-| STARTED Add container types to C# proxy models                              |         |       | 8:53 |  23.2 |
+| COMPLETED Measure validation slowdown                                       |         |       | 6:38 |  17.2 |
+| COMPLETED Parsing should support dot notation                               |         |       | 2:54 |   7.5 |
+| COMPLETED Add internal object dumper resolution                             |         |       | 4:51 |  12.6 |
+| COMPLETED Analysis for changes required in order to support containers      |         |       | 3:15 |   8.4 |
+| COMPLETED Add support for object based container types in C#                |         |       | 5:48 |  15.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2017-01-07 Sat 13:41]--[2017-01-07 Sat 13:46] =>  0:05
     CLOCK: [2017-01-03 Tue 17:06]--[2017-01-03 Tue 17:11] =>  0:05
     CLOCK: [2017-01-03 Tue 17:02]--[2017-01-03 Tue 17:06] =>  0:04
     CLOCK: [2016-12-28 Wed 12:02]--[2016-12-28 Wed 12:23] =>  0:21
@@ -419,37 +421,11 @@ for all model types and primitives. Add a registrar for local dumpers.
 :     }
 : }
 
-*** STARTED Add container types to C# proxy models                    :story:
-    CLOCK: [2017-01-07 Sat 13:30]--[2017-01-07 Sat 13:40] =>  0:10
-    CLOCK: [2017-01-07 Sat 13:24]--[2017-01-07 Sat 13:29] =>  0:05
-    CLOCK: [2017-01-07 Sat 13:12]--[2017-01-07 Sat 13:23] =>  0:11
-    CLOCK: [2017-01-07 Sat 12:58]--[2017-01-07 Sat 13:11] =>  0:13
-    CLOCK: [2017-01-07 Sat 12:30]--[2017-01-07 Sat 12:57] =>  0:27
-    CLOCK: [2017-01-07 Sat 11:02]--[2017-01-07 Sat 11:57] =>  0:55
-    CLOCK: [2017-01-06 Fri 22:01]--[2017-01-06 Fri 23:27] =>  1:26
-    CLOCK: [2017-01-06 Fri 17:52]--[2017-01-06 Fri 18:05] =>  0:13
-    CLOCK: [2017-01-06 Fri 17:37]--[2017-01-06 Fri 17:51] =>  0:14
-    CLOCK: [2017-01-06 Fri 17:32]--[2017-01-06 Fri 17:36] =>  0:04
-    CLOCK: [2017-01-06 Fri 16:40]--[2017-01-06 Fri 17:32] =>  0:52
-    CLOCK: [2017-01-05 Thu 14:01]--[2017-01-05 Thu 14:53] =>  0:52
-    CLOCK: [2017-01-05 Thu 12:26]--[2017-01-05 Thu 12:30] =>  0:04
-    CLOCK: [2017-01-05 Thu 12:23]--[2017-01-05 Thu 12:25] =>  0:02
+*** COMPLETED Analysis for changes required in order to support containers :story:
+    CLOSED: [2017-01-07 Sat 13:43]
     CLOCK: [2017-01-05 Thu 10:05]--[2017-01-05 Thu 12:22] =>  2:17
     CLOCK: [2017-01-05 Thu 09:03]--[2017-01-05 Thu 09:15] =>  0:12
     CLOCK: [2017-01-04 Wed 16:22]--[2017-01-04 Wed 17:08] =>  0:46
-
-We should add all major container types and tests for them.
-
-: IEnumerable, IEnumerable<T>
-: ICollection, ICollection<T>
-: IList, IList<T>
-: IDictionary, IDictionary<K, V>
-: ArrayList, List<T>
-: Queue, ConcurrentQueue<T>, Stack, ConcurrentStack<T>, LinkedList<T>
-: Hashtable, SortedList classes
-: Dictionary<TKey, TValue>, SortedList<TKey, TValue>
-: ConcurrentDictionary<TKey, TValue>
-: KeyedCollection<TKey, TItem>
 
 Notes:
 
@@ -647,20 +623,58 @@ System.Collections.Immutable:
 
 System.Collections.Concurrent
 
-**** Add support for ArrayList
+*** COMPLETED Add support for object based container types in C#      :story:
+    CLOSED: [2017-01-07 Sat 13:44]
+    CLOCK: [2017-01-07 Sat 13:30]--[2017-01-07 Sat 13:40] =>  0:10
+    CLOCK: [2017-01-07 Sat 13:24]--[2017-01-07 Sat 13:29] =>  0:05
+    CLOCK: [2017-01-07 Sat 13:12]--[2017-01-07 Sat 13:23] =>  0:11
+    CLOCK: [2017-01-07 Sat 12:58]--[2017-01-07 Sat 13:11] =>  0:13
+    CLOCK: [2017-01-07 Sat 12:30]--[2017-01-07 Sat 12:57] =>  0:27
+    CLOCK: [2017-01-07 Sat 11:02]--[2017-01-07 Sat 11:57] =>  0:55
+    CLOCK: [2017-01-06 Fri 22:01]--[2017-01-06 Fri 23:27] =>  1:26
+    CLOCK: [2017-01-06 Fri 17:52]--[2017-01-06 Fri 18:05] =>  0:13
+    CLOCK: [2017-01-06 Fri 17:37]--[2017-01-06 Fri 17:51] =>  0:14
+    CLOCK: [2017-01-06 Fri 17:32]--[2017-01-06 Fri 17:36] =>  0:04
+    CLOCK: [2017-01-06 Fri 16:40]--[2017-01-06 Fri 17:32] =>  0:52
+    CLOCK: [2017-01-05 Thu 14:01]--[2017-01-05 Thu 14:53] =>  0:52
+    CLOCK: [2017-01-05 Thu 12:26]--[2017-01-05 Thu 12:30] =>  0:04
+    CLOCK: [2017-01-05 Thu 12:23]--[2017-01-05 Thu 12:25] =>  0:02
 
-In System.Collections:
+Add all the main object based containers and perform all the required
+changes to the framework in order to support them. Add also the
+interfaces.
 
 : IEnumerable
-: ICollection: IEnumerable
-: IList : ICollection, IEnumerable
-: ArrayList : IList, ICollection, IEnumerable
+: ICollection
+: IList
+: IDictionary
+: ArrayList
+: Queue
+: Stack
+: Hashtable
+: SortedList
 
-**** Skipped collections and types
+*Skipped collections and types*
 
 - =IOrderedDictionary=: no implementations in framework. This means
   generators will not work.
 - =DictionaryEntry=: no use case.
+
+
+*** Add support for generic container types to C#                     :story:
+
+We should add all major container types and tests for them.
+
+: IEnumerable<T>
+: ICollection<T>
+: IList<T>
+: IDictionary<K, V>
+: List<T>
+: ConcurrentQueue<T>, ConcurrentStack<T>, LinkedList<T>
+: Dictionary<TKey, TValue>
+: SortedList<TKey, TValue>
+: ConcurrentDictionary<TKey, TValue>
+: KeyedCollection<TKey, TItem>
 
 *** Add support for boxed types                                       :story:
 
