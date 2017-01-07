@@ -12,25 +12,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-07 Sat 13:46]
+#+CAPTION: Clock summary at [2017-01-07 Sat 15:36]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *38:33* |       |      | 100.0 |
+| *Total time*                                                                | *39:08* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 38:33   |       |      | 100.0 |
-| Active                                                                      |         | 38:33 |      | 100.0 |
+| Stories                                                                     | 39:08   |       |      | 100.0 |
+| Active                                                                      |         | 39:08 |      | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:35 |   1.5 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:57 |   2.5 |
-| COMPLETED Consider supporting multiple inheritance on non-proxy models      |         |       | 3:24 |   8.8 |
-| COMPLETED Add basic validation infrastructure                               |         |       | 8:40 |  22.5 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:57 |   2.4 |
+| COMPLETED Consider supporting multiple inheritance on non-proxy models      |         |       | 3:24 |   8.7 |
+| COMPLETED Add basic validation infrastructure                               |         |       | 8:40 |  22.1 |
 | COMPLETED Fix borked windows build                                          |         |       | 0:26 |   1.1 |
 | COMPLETED Clean up enumerator implementation                                |         |       | 1:05 |   2.8 |
-| COMPLETED Measure validation slowdown                                       |         |       | 6:38 |  17.2 |
-| COMPLETED Parsing should support dot notation                               |         |       | 2:54 |   7.5 |
-| COMPLETED Add internal object dumper resolution                             |         |       | 4:51 |  12.6 |
-| COMPLETED Analysis for changes required in order to support containers      |         |       | 3:15 |   8.4 |
-| COMPLETED Add support for object based container types in C#                |         |       | 5:48 |  15.0 |
+| COMPLETED Measure validation slowdown                                       |         |       | 6:38 |  17.0 |
+| COMPLETED Parsing should support dot notation                               |         |       | 2:54 |   7.4 |
+| COMPLETED Add internal object dumper resolution                             |         |       | 4:51 |  12.4 |
+| COMPLETED Analysis for changes required in order to support containers      |         |       | 3:15 |   8.3 |
+| COMPLETED Add support for object based container types in C#                |         |       | 5:48 |  14.8 |
+| STARTED Add support for generic parents in yarn                             |         |       | 0:35 |   1.5 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -660,6 +661,28 @@ interfaces.
   generators will not work.
 - =DictionaryEntry=: no use case.
 
+*** STARTED Add support for generic parents in yarn                   :story:
+    CLOCK: [2017-01-07 Sat 15:01]--[2017-01-07 Sat 15:36] =>  0:35
+
+At present in yarn a parent can only be a name. This means that if we
+have a parent with type parameters, we cannot capture the value of the
+type parameter in the inheritance relationship. For example, say the
+parent is =std::vector<my_type>=. This is of course not a good idea as
+STL containers were not designed for inheritance but one can imagine
+the exact same approach with user types (were dogen to support the
+generation of generic types). Yarn would see only =std::vector=.
+
+We should be able to "trivially" extend yarn to cope with this though,
+by making parents and original parents name trees.
+
+Actually it is not entirely clear we need to do this. The core problem
+we are trying to solve is: if the user creates an =IList<T>=, we just
+need to iterate through the leaves of =IList= which have the same
+number of type parameters. So in this case =Dictionary<K, V>= would
+not be considered.
+
+We should attempt to implement generic collections with the existing
+yarn infrastructure first and see where/if it breaks.
 
 *** Add support for generic container types to C#                     :story:
 
