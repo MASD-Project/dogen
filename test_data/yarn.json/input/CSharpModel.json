@@ -61,6 +61,10 @@
         {
           "simple_name": "Prop10",
           "type": "System.Collections.Stack"
+        },
+        {
+          "simple_name": "Prop11",
+          "type": "System.Collections.SortedList"
         }
       ]
     },

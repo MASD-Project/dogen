@@ -203,5 +203,15 @@ namespace Dogen.TestModels.CSharpModel
             }
             return result;
         }
+
+        public static SortedList CreateSortedList(uint position)
+        {
+            var result = new SortedList();
+            for (int i = 0; i < SequenceSize; i++)
+            {
+                result.Add("key_" + position + i, "value_" + position + i);
+            }
+            return result;
+        }
     }
 }

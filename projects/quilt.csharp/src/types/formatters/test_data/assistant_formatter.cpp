@@ -261,6 +261,16 @@ a.stream() << "                result.Push(\"value_\" + position + i);" << std::
 a.stream() << "            }" << std::endl;
 a.stream() << "            return result;" << std::endl;
 a.stream() << "        }" << std::endl;
+a.stream() << std::endl;
+a.stream() << "        public static SortedList CreateSortedList(uint position)" << std::endl;
+a.stream() << "        {" << std::endl;
+a.stream() << "            var result = new SortedList();" << std::endl;
+a.stream() << "            for (int i = 0; i < SequenceSize; i++)" << std::endl;
+a.stream() << "            {" << std::endl;
+a.stream() << "                result.Add(\"key_\" + position + i, \"value_\" + position + i);" << std::endl;
+a.stream() << "            }" << std::endl;
+a.stream() << "            return result;" << std::endl;
+a.stream() << "        }" << std::endl;
 a.stream() << "    }" << std::endl;
         }
     } // sbf

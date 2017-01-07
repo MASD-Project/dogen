@@ -41,6 +41,7 @@ namespace Dogen.TestModels.CSharpModel
             value.Prop8 = AssistantSequenceGenerator.CreateBitArray(position + 8);
             value.Prop9 = AssistantSequenceGenerator.CreateQueue(position + 9);
             value.Prop10 = AssistantSequenceGenerator.CreateStack(position + 10);
+            value.Prop11 = AssistantSequenceGenerator.CreateSortedList(position + 11);
         }
 
         static internal AllObjectCollections Create(uint position)
