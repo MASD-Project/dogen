@@ -37,10 +37,13 @@
 #include "dogen/quilt.csharp/test_data/formattables/element_properties_td.hpp"
 #include "dogen/quilt.csharp/test_data/formattables/artefact_properties_td.hpp"
 #include "dogen/quilt.csharp/test_data/formattables/assistant_properties_td.hpp"
+#include "dogen/quilt.csharp/test_data/formattables/attribute_properties_td.hpp"
 #include "dogen/quilt.csharp/test_data/formattables/helper_configuration_td.hpp"
 #include "dogen/quilt.csharp/test_data/fabric/visual_studio_configuration_td.hpp"
 #include "dogen/quilt.csharp/test_data/formattables/locator_configuration_td.hpp"
+#include "dogen/quilt.csharp/test_data/formattables/auxiliary_function_types_td.hpp"
 #include "dogen/quilt.csharp/test_data/formattables/locator_facet_configuration_td.hpp"
+#include "dogen/quilt.csharp/test_data/formattables/auxiliary_function_properties_td.hpp"
 #include "dogen/quilt.csharp/test_data/formattables/locator_archetype_configuration_td.hpp"
 
 #endif

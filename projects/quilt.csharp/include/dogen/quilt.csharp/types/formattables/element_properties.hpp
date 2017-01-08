@@ -33,6 +33,7 @@
 #include "dogen/formatters/types/decoration_properties.hpp"
 #include "dogen/quilt.csharp/types/formattables/helper_properties.hpp"
 #include "dogen/quilt.csharp/types/formattables/artefact_properties.hpp"
+#include "dogen/quilt.csharp/types/formattables/attribute_properties.hpp"
 #include "dogen/quilt.csharp/serialization/formattables/element_properties_fwd_ser.hpp"
 
 namespace dogen {
@@ -56,7 +57,8 @@ public:
     element_properties(
         const boost::optional<dogen::formatters::decoration_properties>& decoration_properties,
         const std::unordered_map<std::string, dogen::quilt::csharp::formattables::artefact_properties>& artefact_properties,
-        const std::list<dogen::quilt::csharp::formattables::helper_properties>& helper_properties);
+        const std::list<dogen::quilt::csharp::formattables::helper_properties>& helper_properties,
+        const std::unordered_map<std::string, dogen::quilt::csharp::formattables::attribute_properties>& attribute_properties);
 
 private:
     template<typename Archive>
@@ -81,6 +83,11 @@ public:
     void helper_properties(const std::list<dogen::quilt::csharp::formattables::helper_properties>& v);
     void helper_properties(const std::list<dogen::quilt::csharp::formattables::helper_properties>&& v);
 
+    const std::unordered_map<std::string, dogen::quilt::csharp::formattables::attribute_properties>& attribute_properties() const;
+    std::unordered_map<std::string, dogen::quilt::csharp::formattables::attribute_properties>& attribute_properties();
+    void attribute_properties(const std::unordered_map<std::string, dogen::quilt::csharp::formattables::attribute_properties>& v);
+    void attribute_properties(const std::unordered_map<std::string, dogen::quilt::csharp::formattables::attribute_properties>&& v);
+
 public:
     bool operator==(const element_properties& rhs) const;
     bool operator!=(const element_properties& rhs) const {
@@ -95,6 +102,7 @@ private:
     boost::optional<dogen::formatters::decoration_properties> decoration_properties_;
     std::unordered_map<std::string, dogen::quilt::csharp::formattables::artefact_properties> artefact_properties_;
     std::list<dogen::quilt::csharp::formattables::helper_properties> helper_properties_;
+    std::unordered_map<std::string, dogen::quilt::csharp::formattables::attribute_properties> attribute_properties_;
 };
 
 } } } }

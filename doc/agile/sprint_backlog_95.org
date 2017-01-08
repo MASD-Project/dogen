@@ -12,27 +12,29 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-07 Sat 21:14]
+#+CAPTION: Clock summary at [2017-01-08 Sun 11:40]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *40:24* |       |      | 100.0 |
+| *Total time*                                                                | *42:48* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 40:24   |       |      | 100.0 |
-| Active                                                                      |         | 40:24 |      | 100.0 |
+| Stories                                                                     | 42:48   |       |      | 100.0 |
+| Active                                                                      |         | 42:48 |      | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:35 |   1.4 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:57 |   2.4 |
-| COMPLETED Consider supporting multiple inheritance on non-proxy models      |         |       | 3:24 |   8.4 |
-| COMPLETED Add basic validation infrastructure                               |         |       | 8:40 |  21.5 |
-| COMPLETED Fix borked windows build                                          |         |       | 0:26 |   1.1 |
-| COMPLETED Clean up enumerator implementation                                |         |       | 1:05 |   2.7 |
-| COMPLETED Measure validation slowdown                                       |         |       | 6:38 |  16.4 |
-| COMPLETED Parsing should support dot notation                               |         |       | 2:54 |   7.2 |
-| COMPLETED Analysis for changes required in order to support containers      |         |       | 3:15 |   8.0 |
-| COMPLETED Add support for object based container types in C#                |         |       | 5:48 |  14.4 |
-| STARTED Add support for generic parents in yarn                             |         |       | 0:35 |   1.4 |
-| STARTED Add internal object dumper resolution                               |         |       | 4:51 |  12.0 |
-| STARTED Add support for generic container types to C#                       |         |       | 1:16 |   3.1 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:57 |   2.2 |
+| COMPLETED Consider supporting multiple inheritance on non-proxy models      |         |       | 3:24 |   7.9 |
+| COMPLETED Add basic validation infrastructure                               |         |       | 8:40 |  20.2 |
+| COMPLETED Fix borked windows build                                          |         |       | 0:26 |   1.0 |
+| COMPLETED Clean up enumerator implementation                                |         |       | 1:05 |   2.5 |
+| COMPLETED Measure validation slowdown                                       |         |       | 6:38 |  15.5 |
+| COMPLETED Parsing should support dot notation                               |         |       | 2:54 |   6.8 |
+| COMPLETED Analysis for changes required in order to support containers      |         |       | 3:15 |   7.6 |
+| COMPLETED Add support for object based container types in C#                |         |       | 5:48 |  13.6 |
+| COMPLETED Understand the behaviour of helpers and assistants                |         |       | 1:13 |   2.8 |
+| CANCELLED Add support for generic parents in yarn                           |         |       | 0:35 |   1.4 |
+| STARTED Add auxiliary function properties to c#                             |         |       | 1:11 |   2.8 |
+| STARTED Add internal object dumper resolution                               |         |       | 4:51 |  11.3 |
+| STARTED Add support for generic container types to C#                       |         |       | 1:16 |   3.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -691,6 +693,9 @@ Notes:
   nothing). This is because the function prototype is not always the
   same. But we could possibly enforce this though, at least given the
   current use cases.
+- the assistant is mapped to a type rather than an attribute. We just
+  check to see if the attribute's type is in the assistant properties
+  map.
 
 Conclusions:
 
@@ -731,11 +736,39 @@ not be considered.
 We should attempt to implement generic collections with the existing
 yarn infrastructure first and see where/if it breaks.
 
-*** STARTED Add the concept of "auxiliary function" to c#             :story:
+*** STARTED Add auxiliary function properties to c#                   :story:
+    CLOCK: [2017-01-08 Sun 11:27]--[2017-01-08 Sun 11:40] =>  0:13
+    CLOCK: [2017-01-08 Sun 10:56]--[2017-01-08 Sun 11:26] =>  0:30
+    CLOCK: [2017-01-08 Sun 10:50]--[2017-01-08 Sun 10:55] =>  0:05
+    CLOCK: [2017-01-08 Sun 10:37]--[2017-01-08 Sun 10:49] =>  0:12
+    CLOCK: [2017-01-08 Sun 10:28]--[2017-01-08 Sun 10:37] =>  0:09
     CLOCK: [2017-01-08 Sun 10:25]--[2017-01-08 Sun 10:27] =>  0:02
 
-We need to associate a function with an attribute. This could be the
-helper or the assistant (or nothing).
+We need to associate a function with an attribute and a
+formatter. This could be the helper or the assistant (or nothing).
+
+Actually this is not quite so straightforward. In =io= (c#) we have:
+
+: assistant.Add("ByteProperty", value.ByteProperty, true/*withSeparator*/);
+
+This is a bit of a problem because we now need to different
+invocations, one for helper another for the assistant, which differ on
+the function prototype. For the helper we need something like:
+
+: Add(assistant, "ByteProperty", value.ByteProperty, true/*withSeparator*/);
+
+So a string is no longer sufficient. Maybe we could have a struct with
+auxiliary function properties:
+
+- auxiliary function types = enum with { assistant, helper }
+- auxiliary function name = string
+
+So we can have a map of attribute id to map of formatter id to
+auxiliary function properties.
+
+Actually we should also create "attribute properties" as a top-level
+container so that in the future we can latch on other attribute level
+properties.
 
 *** STARTED Add internal object dumper resolution                     :story:
     CLOCK: [2017-01-06 Fri 11:10]--[2017-01-06 Fri 12:55] =>  1:45

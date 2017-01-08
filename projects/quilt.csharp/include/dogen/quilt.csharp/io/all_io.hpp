@@ -38,10 +38,13 @@
 #include "dogen/quilt.csharp/io/formattables/element_properties_io.hpp"
 #include "dogen/quilt.csharp/io/formattables/artefact_properties_io.hpp"
 #include "dogen/quilt.csharp/io/formattables/assistant_properties_io.hpp"
+#include "dogen/quilt.csharp/io/formattables/attribute_properties_io.hpp"
 #include "dogen/quilt.csharp/io/formattables/helper_configuration_io.hpp"
 #include "dogen/quilt.csharp/io/fabric/visual_studio_configuration_io.hpp"
 #include "dogen/quilt.csharp/io/formattables/locator_configuration_io.hpp"
+#include "dogen/quilt.csharp/io/formattables/auxiliary_function_types_io.hpp"
 #include "dogen/quilt.csharp/io/formattables/locator_facet_configuration_io.hpp"
+#include "dogen/quilt.csharp/io/formattables/auxiliary_function_properties_io.hpp"
 #include "dogen/quilt.csharp/io/formattables/locator_archetype_configuration_io.hpp"
 
 #endif

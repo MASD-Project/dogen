@@ -35,6 +35,7 @@
 #include "dogen/quilt.csharp/serialization/formattables/helper_properties_ser.hpp"
 #include "dogen/quilt.csharp/serialization/formattables/element_properties_ser.hpp"
 #include "dogen/quilt.csharp/serialization/formattables/artefact_properties_ser.hpp"
+#include "dogen/quilt.csharp/serialization/formattables/attribute_properties_ser.hpp"
 
 namespace boost {
 namespace serialization {
@@ -46,6 +47,7 @@ void save(Archive& ar,
     ar << make_nvp("decoration_properties", v.decoration_properties_);
     ar << make_nvp("artefact_properties", v.artefact_properties_);
     ar << make_nvp("helper_properties", v.helper_properties_);
+    ar << make_nvp("attribute_properties", v.attribute_properties_);
 }
 
 template<typename Archive>
@@ -55,6 +57,7 @@ void load(Archive& ar,
     ar >> make_nvp("decoration_properties", v.decoration_properties_);
     ar >> make_nvp("artefact_properties", v.artefact_properties_);
     ar >> make_nvp("helper_properties", v.helper_properties_);
+    ar >> make_nvp("attribute_properties", v.attribute_properties_);
 }
 
 } }
