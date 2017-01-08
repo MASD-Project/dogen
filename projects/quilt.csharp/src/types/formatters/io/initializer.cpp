@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/quilt.csharp/types/formatters/registrar.hpp"
+#include "dogen/quilt.csharp/types/formatters/io/enumerable_helper.hpp"
 #include "dogen/quilt.csharp/types/formatters/io/class_formatter.hpp"
 #include "dogen/quilt.csharp/types/formatters/io/enum_formatter.hpp"
 #include "dogen/quilt.csharp/types/formatters/io/assistant_formatter.hpp"
@@ -34,6 +35,7 @@ void initializer::initialize(registrar& rg) {
     register_formatter<class_formatter>(rg);
     register_formatter<enum_formatter>(rg);
     register_formatter<assistant_formatter>(rg);
+    register_formatter_helper<enumerable_helper>(rg);
 }
 
 } } } } }
