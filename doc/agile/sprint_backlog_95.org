@@ -12,26 +12,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-07 Sat 15:36]
+#+CAPTION: Clock summary at [2017-01-07 Sat 21:14]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *39:08* |       |      | 100.0 |
+| *Total time*                                                                | *40:24* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 39:08   |       |      | 100.0 |
-| Active                                                                      |         | 39:08 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:35 |   1.5 |
+| Stories                                                                     | 40:24   |       |      | 100.0 |
+| Active                                                                      |         | 40:24 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:35 |   1.4 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:57 |   2.4 |
-| COMPLETED Consider supporting multiple inheritance on non-proxy models      |         |       | 3:24 |   8.7 |
-| COMPLETED Add basic validation infrastructure                               |         |       | 8:40 |  22.1 |
+| COMPLETED Consider supporting multiple inheritance on non-proxy models      |         |       | 3:24 |   8.4 |
+| COMPLETED Add basic validation infrastructure                               |         |       | 8:40 |  21.5 |
 | COMPLETED Fix borked windows build                                          |         |       | 0:26 |   1.1 |
-| COMPLETED Clean up enumerator implementation                                |         |       | 1:05 |   2.8 |
-| COMPLETED Measure validation slowdown                                       |         |       | 6:38 |  17.0 |
-| COMPLETED Parsing should support dot notation                               |         |       | 2:54 |   7.4 |
-| COMPLETED Add internal object dumper resolution                             |         |       | 4:51 |  12.4 |
-| COMPLETED Analysis for changes required in order to support containers      |         |       | 3:15 |   8.3 |
-| COMPLETED Add support for object based container types in C#                |         |       | 5:48 |  14.8 |
-| STARTED Add support for generic parents in yarn                             |         |       | 0:35 |   1.5 |
+| COMPLETED Clean up enumerator implementation                                |         |       | 1:05 |   2.7 |
+| COMPLETED Measure validation slowdown                                       |         |       | 6:38 |  16.4 |
+| COMPLETED Parsing should support dot notation                               |         |       | 2:54 |   7.2 |
+| COMPLETED Analysis for changes required in order to support containers      |         |       | 3:15 |   8.0 |
+| COMPLETED Add support for object based container types in C#                |         |       | 5:48 |  14.4 |
+| STARTED Add support for generic parents in yarn                             |         |       | 0:35 |   1.4 |
+| STARTED Add internal object dumper resolution                               |         |       | 4:51 |  12.0 |
+| STARTED Add support for generic container types to C#                       |         |       | 1:16 |   3.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -393,35 +394,6 @@ Notes:
   name via file name (name builder) c) external module path via
   meta-data (name builder).
 
-*** COMPLETED Add internal object dumper resolution                   :story:
-    CLOSED: [2017-01-06 Fri 12:55]
-    CLOCK: [2017-01-06 Fri 11:10]--[2017-01-06 Fri 12:55] =>  1:45
-    CLOCK: [2017-01-05 Thu 17:38]--[2017-01-05 Thu 18:01] =>  0:23
-    CLOCK: [2017-01-05 Thu 14:54]--[2017-01-05 Thu 17:37] =>  2:43
-
-We should try to resolve an object to a local dumper, if one exists;
-for all model types and primitives. Add a registrar for local dumpers.
-
-: using System;
-: using System.Collections.Generic;
-:
-: namespace Dogen.TestModels.CSharpModel
-: {
-:     static public class DynamicDumperRegistrar
-:     {
-:         public interface IDynamicDumper
-:         {
-:             void Dump(AssistantDumper assistant, object value);
-:         }
-:
-:         static private IDictionary<Type, IDynamicDumper> _dumpers = new Dictionary<Type, IDynamicDumper>();
-:
-:         static void RegisterDumper(Type type, IDynamicDumper dumper)
-:         {
-:         }
-:     }
-: }
-
 *** COMPLETED Analysis for changes required in order to support containers :story:
     CLOSED: [2017-01-07 Sat 13:43]
     CLOCK: [2017-01-05 Thu 10:05]--[2017-01-05 Thu 12:22] =>  2:17
@@ -661,8 +633,83 @@ interfaces.
   generators will not work.
 - =DictionaryEntry=: no use case.
 
-*** STARTED Add support for generic parents in yarn                   :story:
+*** COMPLETED Understand the behaviour of helpers and assistants      :story:
+    CLOSED: [2017-01-08 Sun 10:24]
+    CLOCK: [2017-01-08 Sun 09:49]--[2017-01-08 Sun 10:24] =>  0:35
+    CLOCK: [2017-01-08 Sun 09:02]--[2017-01-08 Sun 09:40] =>  0:38
+
+Notes:
+
+- the difference in implementation between C++ and C# is that we
+  always call the helpers in C++, and the decision on whether to call
+  another helper or to use the class generator is made within the
+  helper. Helpers already contain all the information required to make
+  this decision (helper descriptor etc). In C# we are trying to decide
+  whether to call the assistant, or the class sequence generator or
+  the helper.
+- in types we are using helpers via the aspect properties: if a type
+  is floating point, we call the helper. Separately, we use the usual
+  helper binding mechanism to generate the helper. For assistants we
+  have taken a different approach: if the type requires an assistant,
+  via the assistant properties, we call the assistant across the board
+  on all facets which have assistants (test data and io). This works
+  so far because we do not have assistants in types, so any clashes
+  between is floating point and requires assistant are not causing
+  issues.
+- seems like a clear pattern is emerging. Use cases:
+  - template itself is sufficient to handle the case - e.g. baseline
+    case for most types;
+  - type dependent behaviour but still handled within the template -
+    i.e. we need some switch, but the code is self-contained at one
+    point.
+  - type dependent behaviour that requires calling "external" code -
+    i.e. the assistant. The calling code is "manually" generated. C#
+    only at present.
+  - type dependent behaviour that requires generating additional
+    code - i.e. helpers. The calling code is "automatically" generated
+    based on the types.
+- all of the above is associated with a property.
+- in addition to this, we then have the helper properties, which are
+  associated with an element. These are basically the other side of
+  use case four: the automatically generated code used by the calling
+  code. We may have n instances of calling code, but only one helper
+  (say if we have n properties of =std::vector<std::string>=).
+- in c++ we go a step further and add configuration of the helper
+  itself: streaming properties, requires hashing helper and so forth.
+- why do we make a distinction between helpers/assistants and say
+  =requires_manual_default_constructor=? Mainly because these are at
+  the element level? In addition, can we make these common across all
+  languages?
+- note that the behaviour of helpers is "homogeneous": we either do
+  not need helpers or if we do, all helpers provide the same
+  "functionality" but for different type parameters. E.g. it is never
+  the case (up to now) that we have one type that needs two different
+  helpers for two distinct purposes. This may be a consequence of
+  having facets.
+- note also that we cannot simply have a string with a method name to
+  call (which could either be the assistant, the helper or
+  nothing). This is because the function prototype is not always the
+  same. But we could possibly enforce this though, at least given the
+  current use cases.
+
+Conclusions:
+
+- some future taxonomy work is required to clean up these
+  concepts. This can be done as we move code from the kernels into
+  quilt.
+- add the concept of "auxiliary function". This is a string that is
+  set to either nothing, the helper invocation or the assistant
+  invocation. There is a map of attribute id to "auxiliary
+  function". Whenever we are processing an attribute we request its
+  auxiliary function first.
+
+*** CANCELLED Add support for generic parents in yarn                 :story:
+    CLOSED: [2017-01-08 Sun 10:24]
     CLOCK: [2017-01-07 Sat 15:01]--[2017-01-07 Sat 15:36] =>  0:35
+
+*Rationale*: its not clear this is required at present. If so we can
+always revisit. This story should be tidied up and moved to product
+backlog.
 
 At present in yarn a parent can only be a name. This means that if we
 have a parent with type parameters, we cannot capture the value of the
@@ -684,7 +731,43 @@ not be considered.
 We should attempt to implement generic collections with the existing
 yarn infrastructure first and see where/if it breaks.
 
-*** Add support for generic container types to C#                     :story:
+*** STARTED Add the concept of "auxiliary function" to c#             :story:
+    CLOCK: [2017-01-08 Sun 10:25]--[2017-01-08 Sun 10:27] =>  0:02
+
+We need to associate a function with an attribute. This could be the
+helper or the assistant (or nothing).
+
+*** STARTED Add internal object dumper resolution                     :story:
+    CLOCK: [2017-01-06 Fri 11:10]--[2017-01-06 Fri 12:55] =>  1:45
+    CLOCK: [2017-01-05 Thu 17:38]--[2017-01-05 Thu 18:01] =>  0:23
+    CLOCK: [2017-01-05 Thu 14:54]--[2017-01-05 Thu 17:37] =>  2:43
+
+We should try to resolve an object to a local dumper, if one exists;
+for all model types and primitives. Add a registrar for local dumpers.
+
+: using System;
+: using System.Collections.Generic;
+:
+: namespace Dogen.TestModels.CSharpModel
+: {
+:     static public class DynamicDumperRegistrar
+:     {
+:         public interface IDynamicDumper
+:         {
+:             void Dump(AssistantDumper assistant, object value);
+:         }
+:
+:         static private IDictionary<Type, IDynamicDumper> _dumpers = new Dictionary<Type, IDynamicDumper>();
+:
+:         static void RegisterDumper(Type type, IDynamicDumper dumper)
+:         {
+:         }
+:     }
+: }
+
+*** STARTED Add support for generic container types to C#             :story:
+    CLOCK: [2017-01-07 Sat 20:43]--[2017-01-07 Sat 21:08] =>  0:25
+    CLOCK: [2017-01-07 Sat 18:05]--[2017-01-07 Sat 18:56] =>  0:51
 
 We should add all major container types and tests for them.
 
@@ -698,6 +781,11 @@ We should add all major container types and tests for them.
 : SortedList<TKey, TValue>
 : ConcurrentDictionary<TKey, TValue>
 : KeyedCollection<TKey, TItem>
+
+Notes:
+
+- we need a way to determine if we are using a helper, the assistant
+  or a sequence generator directly.
 
 *** Add support for boxed types                                       :story:
 
