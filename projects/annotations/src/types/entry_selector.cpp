@@ -96,7 +96,7 @@ std::string entry_selector::get_text_content(const value& v) {
     try {
         const auto& b(dynamic_cast<const text&>(v));
         return b.content();
-    } catch(const std::bad_cast& e) {
+    } catch(const std::bad_cast& /*e*/) {
         BOOST_LOG_SEV(lg, error) << unexpected_value_type;
         BOOST_THROW_EXCEPTION(selection_error(unexpected_value_type));
     }
@@ -138,7 +138,7 @@ entry_selector::get_text_collection_content(const value& v) {
     try {
         const auto& b(dynamic_cast<const text_collection&>(v));
         return b.content();
-    } catch(const std::bad_cast& e) {
+    } catch(const std::bad_cast& /*e*/) {
         BOOST_LOG_SEV(lg, error) << unexpected_value_type;
         BOOST_THROW_EXCEPTION(selection_error(unexpected_value_type));
     }
@@ -155,7 +155,7 @@ get_text_collection_content(const std::string& qualified_name) const {
     try {
         const auto& tc(dynamic_cast<const text_collection&>(v));
         return tc.content();
-    } catch(const std::bad_cast& e) {
+    } catch(const std::bad_cast& /*e*/) {
         BOOST_LOG_SEV(lg, error) << unexpected_entry_type
                                  << qualified_name;
         BOOST_THROW_EXCEPTION(selection_error(unexpected_entry_type +
@@ -190,7 +190,7 @@ bool entry_selector::get_boolean_content(const value& v) {
     try {
         const auto& b(dynamic_cast<const boolean&>(v));
         return b.content();
-    } catch(const std::bad_cast& e) {
+    } catch(const std::bad_cast& /*e*/) {
         BOOST_LOG_SEV(lg, error) << unexpected_value_type;
         BOOST_THROW_EXCEPTION(selection_error(unexpected_value_type));
     }
@@ -235,7 +235,7 @@ int entry_selector::get_number_content(const value& v) {
     try {
         const auto& b(dynamic_cast<const number&>(v));
         return b.content();
-    } catch(const std::bad_cast& e) {
+    } catch(const std::bad_cast& /*e*/) {
         BOOST_LOG_SEV(lg, error) << unexpected_value_type;
         BOOST_THROW_EXCEPTION(selection_error(unexpected_value_type));
     }
@@ -281,7 +281,7 @@ entry_selector::get_kvp_content(const value& v) {
     try {
         const auto& b(dynamic_cast<const key_value_pair&>(v));
         return b.content();
-    } catch(const std::bad_cast& e) {
+    } catch(const std::bad_cast& /*e*/) {
         BOOST_LOG_SEV(lg, error) << unexpected_value_type;
         BOOST_THROW_EXCEPTION(selection_error(unexpected_value_type));
     }

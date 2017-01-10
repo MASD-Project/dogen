@@ -80,7 +80,7 @@ a.stream() << "using System;" << std::endl;
 a.stream() << std::endl;
             const auto ns(a.make_namespaces(e.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
-            const bool has_attributes(o.local_attributes().size());
+            const bool has_attributes(!o.local_attributes().empty());
 a.stream() << "    /// <summary>" << std::endl;
 a.stream() << "    /// Generates sequences of " << sn << "." << std::endl;
 a.stream() << "    /// </summary>" << std::endl;

@@ -31,7 +31,7 @@ using System;
 <#+
             const auto ns(a.make_namespaces(e.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
-            const bool has_attributes(o.local_attributes().size());
+            const bool has_attributes(!o.local_attributes().empty());
 #>
     /// <summary>
     /// Generates sequences of <#= sn #>.

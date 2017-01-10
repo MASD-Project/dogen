@@ -176,10 +176,10 @@ make_knitting_options(const variables_map& vm) const {
     if (!vm.count(target_arg))
         BOOST_THROW_EXCEPTION(parser_validation_error(missing_target));
 
-    r.verbose(vm.count(verbose_arg));
+    r.verbose(vm.count(verbose_arg) != 0);
     r.target(vm[target_arg].as<std::string>());
-    r.delete_extra_files(vm.count(delete_extra_files_arg));
-    r.force_write(vm.count(force_write_arg));
+    r.delete_extra_files(vm.count(delete_extra_files_arg) != 0);
+    r.force_write(vm.count(force_write_arg) != 0);
 
     if (vm.count(ignore_files_matching_regex_arg)) {
         typedef std::vector<std::string> argument_type;

@@ -74,7 +74,7 @@ namespace annotations {
 int value_factory::to_int(const std::string& s) const {
     try {
         return boost::lexical_cast<int>(s);
-    } catch (boost::bad_lexical_cast& e) {
+    } catch (boost::bad_lexical_cast& /*e*/) {
         BOOST_LOG_SEV(lg, error) << invalid_numeric_value << s;
         BOOST_THROW_EXCEPTION(building_error(invalid_numeric_value + s));
     }
@@ -83,7 +83,7 @@ int value_factory::to_int(const std::string& s) const {
 bool value_factory::to_bool(const std::string& s) const {
     try {
         return boost::lexical_cast<locale_bool>(s);
-    } catch (boost::bad_lexical_cast& e) {
+    } catch (boost::bad_lexical_cast& /*e*/) {
         BOOST_LOG_SEV(lg, error) << invalid_boolean_value << s;
         BOOST_THROW_EXCEPTION(building_error(invalid_boolean_value + s));
     }
