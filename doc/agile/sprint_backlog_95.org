@@ -12,32 +12,33 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-10 Tue 16:30]
+#+CAPTION: Clock summary at [2017-01-10 Tue 21:35]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *54:23* |       |      | 100.0 |
+| *Total time*                                                                | *55:02* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 54:23   |       |      | 100.0 |
-| Active                                                                      |         | 54:23 |      | 100.0 |
+| Stories                                                                     | 55:02   |       |      | 100.0 |
+| Active                                                                      |         | 55:02 |      | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:35 |   1.1 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:57 |   1.7 |
-| COMPLETED Consider supporting multiple inheritance on non-proxy models      |         |       | 3:24 |   6.3 |
-| COMPLETED Add basic validation infrastructure                               |         |       | 8:40 |  15.9 |
+| COMPLETED Consider supporting multiple inheritance on non-proxy models      |         |       | 3:24 |   6.2 |
+| COMPLETED Add basic validation infrastructure                               |         |       | 8:40 |  15.7 |
 | COMPLETED Fix borked windows build                                          |         |       | 0:26 |   0.8 |
 | COMPLETED Clean up enumerator implementation                                |         |       | 1:05 |   2.0 |
-| COMPLETED Measure validation slowdown                                       |         |       | 6:38 |  12.2 |
+| COMPLETED Measure validation slowdown                                       |         |       | 6:38 |  12.1 |
 | COMPLETED Parsing should support dot notation                               |         |       | 2:54 |   5.3 |
-| COMPLETED Analysis for changes required in order to support containers      |         |       | 3:15 |   6.0 |
-| COMPLETED Add support for object based container types in C#                |         |       | 5:48 |  10.7 |
+| COMPLETED Analysis for changes required in order to support containers      |         |       | 3:15 |   5.9 |
+| COMPLETED Add support for object based container types in C#                |         |       | 5:48 |  10.5 |
 | COMPLETED Understand the behaviour of helpers and assistants                |         |       | 1:13 |   2.2 |
 | CANCELLED Add support for generic parents in yarn                           |         |       | 0:35 |   1.1 |
 | COMPLETED Fix assorted windows warnings                                     |         |       | 0:19 |   0.6 |
-| COMPLETED Build dogen on windows locally                                    |         |       | 7:32 |  13.9 |
+| COMPLETED Build dogen on windows locally                                    |         |       | 7:32 |  13.7 |
+| COMPLETED Fix borked windows build                                          |         |       | 0:39 |   1.2 |
 | STARTED Generate windows packages with WIX                                  |         |       | 2:44 |   5.0 |
 | STARTED Add appveyor support for bintray                                    |         |       | 1:00 |   1.8 |
 | STARTED Add auxiliary function properties to c#                             |         |       | 1:11 |   2.2 |
-| STARTED Add internal object dumper resolution                               |         |       | 4:51 |   8.9 |
+| STARTED Add internal object dumper resolution                               |         |       | 4:51 |   8.8 |
 | STARTED Add support for generic container types to C#                       |         |       | 1:16 |   2.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -756,6 +757,85 @@ At present we are building on AppVeyor and that works well
 enough. However, in order to fix the errors we are getting in AppVeyor
 we need to build locally on windows. This may not be quite so trivial
 due to proxy, etc.
+
+*** COMPLETED Fix borked windows build                                :story:
+    CLOSED: [2017-01-10 Tue 21:34]
+    CLOCK: [2017-01-10 Tue 20:55]--[2017-01-10 Tue 21:34] =>  0:39
+
+It seems that conan does not support static runtimes for boost or
+libxml. We need to use our build of boost instead.
+
+*** COMPLETED Windows build debug failures                             :epic:
+    CLOSED: [2017-01-10 Tue 21:35]
+
+*Rationale*: the changes around runtimes should fix this problem.
+
+The windows debug build fails to link with the following errors:
+
+: C:\projects\dogen\build\output\projects\config\tests\config.tests.vcxproj" (default target) (14) ->
+: (Link target) ->
+:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\config\tests\config.tests.vcxproj]
+: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
+: "C:\projects\dogen\build\output\projects\dia\tests\dia.tests.vcxproj" (default target) (17) ->
+:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\dia\tests\dia.tests.vcxproj]
+: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
+: "C:\projects\dogen\build\output\projects\dynamic\tests\dynamic.tests.vcxproj" (default target) (21) ->
+:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\dynamic\tests\dynamic.tests.vcxproj]
+: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
+: "C:\projects\dogen\build\output\projects\formatters\tests\formatters.tests.vcxproj" (default target) (29) ->
+:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\formatters\tests\formatters.tests.vcxproj]
+: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
+: "C:\projects\dogen\build\output\projects\knit\tests\knit.tests.vcxproj" (default target) (36) ->
+:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\knit\tests\knit.tests.vcxproj]
+: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
+: "C:\projects\dogen\build\output\projects\knitter\src\knitter.vcxproj" (default target) (37) ->
+:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\knitter\src\knitter.vcxproj]
+: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
+: "C:\projects\dogen\build\output\projects\knitter\tests\knitter.tests.vcxproj" (default target) (38) ->
+:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\knitter\tests\knitter.tests.vcxproj]
+: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
+: "C:\projects\dogen\build\output\projects\quilt.cpp\tests\quilt.cpp.tests.vcxproj" (default target) (39) ->
+:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\quilt.cpp\tests\quilt.cpp.tests.vcxproj]
+: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
+: "C:\projects\dogen\build\output\projects\quilt\tests\quilt.tests.vcxproj" (default target) (40) ->
+:   libboost_log-vc140-mt-gd-1_60.lib(default_attribute_names.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\quilt\tests\quilt.tests.vcxproj]
+: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
+: "C:\projects\dogen\build\output\projects\test_models\seam\tests\seam.tests.vcxproj" (default target) (41) ->
+:   libboost_log-vc140-mt-gd-1_60.lib(core.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\test_models\seam\tests\seam.tests.vcxproj]
+: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
+: "C:\projects\dogen\build\output\projects\stitch\tests\stitch.tests.vcxproj" (default target) (46) ->
+:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\stitch\tests\stitch.tests.vcxproj]
+: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
+: "C:\projects\dogen\build\output\projects\stitcher\src\stitcher.vcxproj" (default target) (47) ->
+:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\stitcher\src\stitcher.vcxproj]
+: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
+: "C:\projects\dogen\build\output\projects\stitcher\tests\stitcher.tests.vcxproj" (default target) (48) ->
+:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\stitcher\tests\stitcher.tests.vcxproj]
+: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
+: "C:\projects\dogen\build\output\projects\test_models\test_model_sanitizer\tests\test_model_sanitizer.tests.vcxproj" (default target) (49) ->
+:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\test_models\test_model_sanitizer\tests\test_model_sanitizer.tests.vcxproj]
+: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
+: "C:\projects\dogen\build\output\projects\utility\tests\utility.tests.vcxproj" (default target) (53) ->
+:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\utility\tests\utility.tests.vcxproj]
+: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
+: "C:\projects\dogen\build\output\projects\yarn.dia\tests\yarn.dia.tests.vcxproj" (default target) (54) ->
+:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\yarn.dia\tests\yarn.dia.tests.vcxproj]
+: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
+: "C:\projects\dogen\build\output\projects\yarn.json\tests\yarn.json.tests.vcxproj" (default target) (55) ->
+:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\yarn.json\tests\yarn.json.tests.vcxproj]
+: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
+: "C:\projects\dogen\build\output\projects\yarn\tests\yarn.tests.vcxproj" (default target) (56) ->
+:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\yarn\tests\yarn.tests.vcxproj]
+:     910 Warning(s)
+:     18 Error(s)
+
+This appears to be a mixing of 32-bit and 64-bit settings somewhere in
+the boost tests, according to SO:
+
+[[http://stackoverflow.com/questions/3563756/fatal-error-lnk1112-module-machine-type-x64-conflicts-with-target-machine-typ][fatal error LNK1112: module machine type 'x64' conflicts with target
+machine type 'X86']]
+
+Debug build is back down to =knit= target again.
 
 *** STARTED Generate windows packages with WIX                        :story:
     CLOCK: [2017-01-10 Tue 14:00]--[2017-01-10 Tue 15:09] =>  1:09
