@@ -1,6 +1,5 @@
 [requires]
 libxml2/2.9.3@lasote/stable
-Boost/1.60.0@lasote/stable
 
 [generators]
 cmake
