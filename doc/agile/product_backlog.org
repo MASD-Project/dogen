@@ -6086,30 +6086,6 @@ machine type 'X86']]
 
 Debug build is back down to =knit= target again.
 
-*** Add appveyor support for bintray                                  :story:
-
-It seems appveyor also supports bintray:
-
-[[https://www.appveyor.com/docs/deployment/bintray/][Deploying to Bintray]]
-
-We need to change our targets to generate the MSI, and then try to
-deploy it over to bintray.
-
-Sample:
-
-: deploy:
-: - provider: BinTray
-:   username: johnsmith
-:   api_key:
-:     secure: AABBCC+DDD==
-:   subject: johnsmith
-:   repo: myrepo
-:   package: mypackage
-:   version: version
-:   publish: true
-:   override: true
-:   explode: true
-
 *** Fix the dynamic linker errors in OSX when running tests           :story:
 
 At present we are building for OSX but not running the tests. Most of
