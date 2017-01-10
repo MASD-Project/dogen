@@ -24,11 +24,7 @@ install:
 build_script:
   - ps: $build_type="$env:configuration";
   - ps: $third_party="$env:temp\dogen_deps\dogen_deps_vc14_windows_amd64";
-  - ps: if ($build_type -eq "Release") {
-            $target = "ALL_BUILD run_windows_green_tests";
-        } elseif ($build_type -eq "Debug") {
-            $target = "knit";
-        }
+  - ps: $target = "ALL_BUILD run_windows_green_tests";
   - ps: cd $project_dir
   - ps: .\build\scripts\build.windows.ps1 -build_type $build_type -compiler $env:compiler -third_party $third_party -target $target
   - ps: if ($build_type -eq "Release") {
