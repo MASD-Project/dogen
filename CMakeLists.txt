@@ -27,10 +27,12 @@ project(dogen)
 # conan support
 if(EXISTS "${CMAKE_BINARY_DIR}/conanbuildinfo.cmake")
     message(STATUS "Setting up Conan support.")
+    set(FOUND_CONAN "true")
     include("${CMAKE_BINARY_DIR}/conanbuildinfo.cmake")
     CONAN_BASIC_SETUP()
 else()
     message(STATUS "Conan build file not found, skipping include")
+    set(FOUND_CONAN "false")
 endif()
 
 # add our own modules
@@ -67,6 +69,7 @@ find_package(Boost 1.59 REQUIRED COMPONENTS
     log
     filesystem
     program_options
+    unit_test_framework
     )
 
 if(Boost_FOUND)
@@ -232,10 +235,21 @@ if(NOT EXISTS "${stage_doxygen_dir}")
     make_directory("${stage_doxygen_dir}")
 endif()
 
+#
 # ensure cmake dumps binaries in the right places
+#
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${stage_bin_dir})
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${stage_bin_dir})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${stage_bin_dir})
+
+if(MSVC)
+    foreach(CONFIGURATION_TYPE ${CMAKE_CONFIGURATION_TYPES})
+        string(TOUPPER ${CONFIGURATION_TYPE} CONFIGURATION_TYPE)
+        set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_${CONFIGURATION_TYPE} ${stage_bin_dir})
+        set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_${CONFIGURATION_TYPE} ${stage_bin_dir})
+        set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_${CONFIGURATION_TYPE} ${stage_bin_dir})
+    endforeach()
+endif()
 
 # version info
 set(DOGEN_MAJOR_VERSION 0)

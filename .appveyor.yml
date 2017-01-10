@@ -31,6 +31,11 @@ build_script:
         }
   - ps: cd $project_dir
   - ps: .\build\scripts\build.windows.ps1 -build_type $build_type -compiler $env:compiler -third_party $third_party -target $target
+  - ps: if ($build_type -eq "Release") {
+            cd .\build\output\$env:compiler\$build_type
+            $env:WIX = "C:/Program Files (x86)/WiX Toolset v3.10/bin"
+            cpack -G WIX -C Release
+        }
 
 notifications:
   - provider: Webhook
@@ -44,3 +49,14 @@ notifications:
     on_build_success: false
     on_build_failure: true
     on_build_status_changed: true
+
+deploy:
+  - provider: BinTray
+    username: domaindrivenconsulting
+    api_key:
+      secure: IrFRrzzMnnFzj2s2hYctnvMjTf7HRe5uQVPcioAjbuNrxXX5XYmRH6ce8osxoRhcpQYS9ppCmrt8VbRBB57piWS3yKfM6WftDrmNQil7XwqowKAKm/VuX6K5psjJHRCYoNUAovwvfLmaLIWvVd+I+NkU48EXvflClXx13Qp8GtU=
+    subject: domaindrivenconsulting
+    repo: Dogen
+    package: Dogen
+    artifact: $project_dir/build/output/msvc/Release/stage/pkg/*.msi
+    version: 0.94.0

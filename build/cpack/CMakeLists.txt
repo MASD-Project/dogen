@@ -1,4 +1,4 @@
-# -*- mode: cmake; tab-width: 4; indent-tabs-mode: nil -*-
+# -*- mode: cmake; cmake-tab-width: 4; indent-tabs-mode: nil -*-
 #
 # Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
 #
@@ -26,7 +26,7 @@ set(CPACK_PACKAGE_VERSION_PATCH "${DOGEN_PATCH_VERSION}")
 set(CPACK_PACKAGE_VERSION "${DOGEN_MAJOR_VERSION}.${DOGEN_MINOR_VERSION}.${DOGEN_PATCH_VERSION}")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Dogen - domain generator")
 set(CPACK_PACKAGE_CONTACT "https://github.com/DomainDrivenConsulting/dogen")
-set(CPACK_PACKAGE_VENDOR "DomainDrivenConsulting")
+set(CPACK_PACKAGE_VENDOR "Domain Driven Consulting Plc")
 set(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/ReadMe.txt")
 set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/Copyright.txt")
 
@@ -94,32 +94,24 @@ endif()
 set(CPACK_COMPONENTS_IGNORE_GROUPS TRUE)
 set(CPACK_ARCHIVE_COMPONENT_INSTALL TRUE)
 
-#
-# add the boost libraries from the PFH
-#
-set(boost_deps "")
 if(NOT EXISTS "${stage_lib_dir}")
     file(MAKE_DIRECTORY "${stage_lib_dir}")
 endif()
 
-foreach(library_path ${Boost_LIBRARIES})
-    if (WIN32 OR APPLE)
-        execute_process(
-            COMMAND cp -L ${library_path} ${stage_lib_dir}
-            RESULT_VARIABLE ret_var
-            OUTPUT_VARIABLE output_var)
+if(FOUND_CONAN AND WIN32)
+    message(STATUS "Copying conan dependencies to stage.")
+    execute_process(
+        COMMAND cp -L ${CONAN_BIN_DIRS_LIBXML2}/libxml2.dll ${CONAN_BIN_DIRS_WINICONV}/iconv.dll ${stage_lib_dir}
+        RESULT_VARIABLE ret_var
+        OUTPUT_VARIABLE output_var)
 
-        set(library_name "")
-        get_filename_component(library_name ${library_path} NAME)
-        install(FILES ${stage_lib_dir}/${library_name}
-            DESTINATION bin COMPONENT applications)
-    endif()
-endforeach()
+    install(FILES ${CONAN_BIN_DIRS_LIBXML2}/libxml2.dll ${CONAN_BIN_DIRS_WINICONV}/iconv.dll
+        DESTINATION bin COMPONENT applications)
+endif()
 
 #
-# add c++ run time DLLs
+# add c++ runtime DLLs
 #
-set(pfh_location "$ENV{PFH_LOCATION}")
 if(NOT EXISTS "${stage_lib_dir}")
     file(MAKE_DIRECTORY "${stage_lib_dir}")
 endif()
@@ -136,12 +128,7 @@ if (MINGW)
     set (cpp_runtime_libs
         ${cpp_runtime_libs} e:/mingw/bin/LIBSTDC++-6.DLL)
 elseif (APPLE)
-    if(EXISTS "${pfh_location}/lib/libstdc++.6.dylib")
-        set (cpp_runtime_libs
-            ${cpp_runtime_libs} ${pfh_location}/lib/libstdc++.6.dylib)
-        set (cpp_runtime_libs
-            ${cpp_runtime_libs} ${pfh_location}/lib/libgcc_s.1.dylib)
-    elseif(EXISTS "/usr/local/lib/i386/libstdc++.6.dylib")
+    if(EXISTS "/usr/local/lib/i386/libstdc++.6.dylib")
         set (cpp_runtime_libs
             ${cpp_runtime_libs} "/usr/local/lib/i386/libstdc++.6.dylib")
         set (cpp_runtime_libs
@@ -169,28 +156,37 @@ endforeach()
 # platform specific
 #
 if(WIN32)
-    set(CPACK_GENERATOR "NSIS")
-    set(CPACK_SOURCE_GENERATOR "ZIP")
-    set(CPACK_PACKAGE_EXECUTABLES "dogen_knitter" "Dogen - domain generator")
-
-    if(CMAKE_CL_64)
-        set(CPACK_NSIS_INSTALL_ROOT "$PROGRAMFILES64")
+    set(CPACK_PACKAGE_INSTALL_DIRECTORY "${PROJECT_NAME}")
+    set(CPACK_PACKAGE_ICON "${CMAKE_SOURCE_DIR}\\\\doc\\\\images\\\\application_dogen.png")
+    if (MSVC)
+        # don't forget to set the WIX path, e.g.:
+        # WIX="C:/Program Files (x86)/WiX Toolset v3.10/bin" cpack -G WIX -C Release
+        set(CPACK_GENERATOR "WIX")
+        set(CPACK_PACKAGE_EXECUTABLES "dogen.knitter" "Dogen - domain generator")
+        set(CPACK_WIX_PRODUCT_GUID "6CEB9CA0-B274-41A0-8B46-D35FF3FE46B6")
+        set(CPACK_WIX_UPGRADE_GUID "B634B583-2F49-41D3-AC4C-8A67E88E88E3")
     else()
-        set(CPACK_NSIS_INSTALL_ROOT "$PROGRAMFILES")
+        set(CPACK_GENERATOR "NSIS")
+        set(CPACK_SOURCE_GENERATOR "ZIP")
+        set(CPACK_PACKAGE_EXECUTABLES "dogen_knitter" "Dogen - domain generator")
+
+        if(CMAKE_CL_64)
+            set(CPACK_NSIS_INSTALL_ROOT "$PROGRAMFILES64")
+        else()
+            set(CPACK_NSIS_INSTALL_ROOT "$PROGRAMFILES")
+        endif()
+
+        # There is a bug in NSI that does not handle full unix paths properly. Make
+        # sure there is at least one set of four (4) backslashes.
+        set(CPACK_PACKAGE_ICON "${CMAKE_SOURCE_DIR}\\\\images\\\\application_dogen.png")
+        set(CPACK_NSIS_INSTALLED_ICON_NAME "bin\\\\dogen_knitter.exe")
+        set(CPACK_NSIS_DISPLAY_NAME "Dogen")
+        set(CPACK_NSIS_PACKAGE_NAME "Dogen ${DOGEN_VERSION}")
+        set(CPACK_NSIS_HELP_LINK "http:\\\\\\\\https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/manual/manual.org")
+        set(CPACK_NSIS_URL_INFO_ABOUT "http:\\\\\\\\https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/manual/manual.org")
+        set(CPACK_NSIS_CONTACT "")
+        set(CPACK_NSIS_MODIFY_PATH ON)
     endif()
-
-    # There is a bug in NSI that does not handle full unix paths properly. Make
-    # sure there is at least one set of four (4) backslashes.
-    set(CPACK_PACKAGE_INSTALL_DIRECTORY "${PROJECT_NAME}-${DOGEN_VERSION}")
-    set(CPACK_PACKAGE_ICON "${CMAKE_SOURCE_DIR}\\\\images\\\\application_dogen.png")
-    set(CPACK_NSIS_INSTALLED_ICON_NAME "bin\\\\dogen_knitter.exe")
-    set(CPACK_NSIS_DISPLAY_NAME "Dogen")
-    set(CPACK_NSIS_PACKAGE_NAME "Dogen ${DOGEN_VERSION}")
-    set(CPACK_NSIS_HELP_LINK "http:\\\\\\\\https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/manual/manual.org")
-    set(CPACK_NSIS_URL_INFO_ABOUT "http:\\\\\\\\https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/manual/manual.org")
-    set(CPACK_NSIS_CONTACT "")
-    set(CPACK_NSIS_MODIFY_PATH ON)
-
 elseif(APPLE)
     set(CPACK_SOURCE_GENERATOR "TGZ")
     set(CPACK_PACKAGE_INSTALL_DIRECTORY "${PROJECT_NAME}")
@@ -202,7 +198,7 @@ elseif(APPLE)
     set(CPACK_BUNDLE_ICON ${CMAKE_CURRENT_SOURCE_DIR}/application_dogen.icns)
     set(CPACK_BUNDLE_NAME "dogen")
     set(CPACK_BUNDLE_STARTUP_COMMAND ${stage_dir}/tmp_pkg/macosx/start)
-    set(CPACK_PACKAGE_EXECUTABLES "dogen_knitter" "Dogen - domain generator")
+    set(CPACK_PACKAGE_EXECUTABLES "dogen.knitter" "Dogen - domain generator")
 
     set(CPACK_ALL_INSTALL_TYPES Full Developer)
     set(CPACK_COMPONENT_LIBRARIES_INSTALL_TYPES Developer Full)
@@ -265,7 +261,6 @@ elseif(UNIX)
         if (CMAKE_COMPILER_IS_CLANGXX)
             set(deps "${deps}, llvm-3.1-dev (>= 3.1.0)")
         endif()
-        # set(deps "${deps}, ${boost_deps}")
 
         set(CPACK_DEBIAN_PACKAGE_DEPENDS ${deps})
         string(TOLOWER
