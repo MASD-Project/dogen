@@ -102,6 +102,8 @@ formats, it will be deprecated.
 #DOGEN yarn.dia.comment=true
 #DOGEN yarn.dia.external_modules=dogen
 #DOGEN yarn.reference=yarn.dia
+#DOGEN yarn.reference=upsilon.dia
+#DOGEN yarn.reference=annotations.dia
 #DOGEN yarn.language=cpp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.csharp.enabled=false

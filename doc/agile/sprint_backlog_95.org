@@ -866,6 +866,19 @@ Rule:
   base class. It should allow pointers to the base class though (raw,
   shared pointers, boost optional etc).
 
+*** STARTED Add upsilon support                                       :story:
+    CLOCK: [2017-01-11 Wed 21:28]--[2017-01-11 Wed 21:46] =>  0:18
+    CLOCK: [2017-01-11 Wed 21:17]--[2017-01-11 Wed 21:28] =>  0:11
+    CLOCK: [2017-01-11 Wed 18:16]--[2017-01-11 Wed 18:32] =>  0:16
+    CLOCK: [2017-01-11 Wed 17:35]--[2017-01-11 Wed 18:15] =>  0:40
+    CLOCK: [2017-01-11 Wed 16:05]--[2017-01-11 Wed 17:17] =>  1:12
+
+A customer has models in a legacy format, which need to be imported
+into Dogen. The easiest thing to do is to create a simple frontend
+which imports these models into yarn. We will subsequently have to
+map these types into native types, depending on the language - or
+probably into LAM types.
+
 *** STARTED Add appveyor support for bintray                          :story:
     CLOCK: [2017-01-10 Tue 15:10]--[2017-01-10 Tue 16:10] =>  1:00
 
@@ -974,17 +987,6 @@ Notes:
 
 - we need a way to determine if we are using a helper, the assistant
   or a sequence generator directly.
-
-*** STARTED Add upsilon support                                       :story:
-    CLOCK: [2017-01-11 Wed 18:16]--[2017-01-11 Wed 18:32] =>  0:16
-    CLOCK: [2017-01-11 Wed 17:35]--[2017-01-11 Wed 18:15] =>  0:40
-    CLOCK: [2017-01-11 Wed 16:05]--[2017-01-11 Wed 17:17] =>  1:12
-
-A customer has models in a legacy format, which need to be imported
-into Dogen. The easiest thing to do is to create a simple frontend
-which imports these models into yarn. We will subsequently have to
-map these types into native types, depending on the language - or
-probably into LAM types.
 
 *** Model references are not transitive                               :story:
 
