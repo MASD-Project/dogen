@@ -18,37 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_MODEL_VALIDATOR_HPP
-#define DOGEN_YARN_TYPES_MODEL_VALIDATOR_HPP
+#ifndef DOGEN_YARN_TEST_DATA_DECOMPOSITION_RESULT_TD_HPP
+#define DOGEN_YARN_TEST_DATA_DECOMPOSITION_RESULT_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <list>
-#include <string>
-#include "dogen/yarn/types/name.hpp"
-#include "dogen/yarn/types/model.hpp"
-#include "dogen/yarn/types/languages.hpp"
 #include "dogen/yarn/types/decomposition_result.hpp"
 
 namespace dogen {
 namespace yarn {
 
-class model_validator final {
-private:
-    bool allow_spaces_in_built_in_types(const languages l) const;
-    void sanity_check_string(const std::string& s,
-        bool check_not_builtin = true) const;
-    void sanity_check_strings(const std::list<std::string>& strings) const;
-    decomposition_result decompose_model(const model& m) const;
-    void sanity_check_name(const name& n,
-        const bool allow_spaces_in_built_in_types) const;
-    void sanity_check_all_names(const std::list<name>& names,
-        const languages l) const;
+class decomposition_result_generator {
+public:
+    decomposition_result_generator();
 
 public:
-    void validate(const model& m) const;
+    typedef dogen::yarn::decomposition_result result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
 };
 
 } }

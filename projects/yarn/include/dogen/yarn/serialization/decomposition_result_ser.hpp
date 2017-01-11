@@ -18,38 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_MODEL_VALIDATOR_HPP
-#define DOGEN_YARN_TYPES_MODEL_VALIDATOR_HPP
+#ifndef DOGEN_YARN_SERIALIZATION_DECOMPOSITION_RESULT_SER_HPP
+#define DOGEN_YARN_SERIALIZATION_DECOMPOSITION_RESULT_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <list>
-#include <string>
-#include "dogen/yarn/types/name.hpp"
-#include "dogen/yarn/types/model.hpp"
-#include "dogen/yarn/types/languages.hpp"
+#include <boost/serialization/split_free.hpp>
 #include "dogen/yarn/types/decomposition_result.hpp"
 
-namespace dogen {
-namespace yarn {
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::yarn::decomposition_result)
+namespace boost {
+namespace serialization {
 
-class model_validator final {
-private:
-    bool allow_spaces_in_built_in_types(const languages l) const;
-    void sanity_check_string(const std::string& s,
-        bool check_not_builtin = true) const;
-    void sanity_check_strings(const std::list<std::string>& strings) const;
-    decomposition_result decompose_model(const model& m) const;
-    void sanity_check_name(const name& n,
-        const bool allow_spaces_in_built_in_types) const;
-    void sanity_check_all_names(const std::list<name>& names,
-        const languages l) const;
+template<typename Archive>
+void save(Archive& ar, const dogen::yarn::decomposition_result& v, unsigned int version);
 
-public:
-    void validate(const model& m) const;
-};
+template<typename Archive>
+void load(Archive& ar, dogen::yarn::decomposition_result& v, unsigned int version);
 
 } }
 

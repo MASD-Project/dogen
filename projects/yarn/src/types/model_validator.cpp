@@ -26,14 +26,8 @@
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/string/splitter.hpp"
 #include "dogen/yarn/io/name_io.hpp"
-#include "dogen/yarn/types/concept.hpp"
-#include "dogen/yarn/types/object.hpp"
-#include "dogen/yarn/types/element.hpp"
-#include "dogen/yarn/types/exception.hpp"
-#include "dogen/yarn/types/primitive.hpp"
-#include "dogen/yarn/types/enumeration.hpp"
+#include "dogen/yarn/types/decomposer.hpp"
 #include "dogen/yarn/types/validation_error.hpp"
-#include "dogen/yarn/types/element_visitor.hpp"
 #include "dogen/yarn/types/model_validator.hpp"
 
 namespace {
@@ -81,86 +75,6 @@ const std::string space(" ");
 namespace dogen {
 namespace yarn {
 
-class name_collector final : public element_visitor {
-private:
-    void add_name(const name& n);
-    void add_names(const std::list<name>& names);
-    void process_element(const element& e);
-    void process_attributes(const std::list<attribute>& attrs);
-
-public:
-    using yarn::element_visitor::visit;
-    void visit(const yarn::concept& c);
-    void visit(const yarn::module& m);
-    void visit(const yarn::enumeration& e);
-    void visit(const yarn::exception& e);
-    void visit(const yarn::object& o);
-    void visit(const yarn::primitive& p);
-
-public:
-    const std::list<name>& result() const;
-
-private:
-    std::list<name> result_;
-};
-
-void name_collector::add_name(const name& n) {
-    result_.push_back(n);
-}
-void name_collector::add_names(const std::list<name>& names) {
-    for (const auto& n : names)
-        add_name(n);
-}
-
-void name_collector::process_attributes(const std::list<attribute>& attrs) {
-    for (const auto& attr : attrs)
-        add_name(attr.name());
-}
-
-void name_collector::process_element(const element& e) {
-    add_name(e.name());
-}
-
-void name_collector::visit(const yarn::concept& c) {
-    process_element(c);
-    process_attributes(c.local_attributes());
-}
-
-void name_collector::visit(const yarn::module& m) {
-    /*
-     * The global module represents the unnamed global
-     * namespace. There can only be one of these and it is generated
-     * internally by Dogen so there is nothing to validate.
-     */
-    if (m.is_global_module())
-        return;
-
-    add_name(m.name());
-}
-
-void name_collector::visit(const yarn::enumeration& e) {
-    process_element(e);
-    for (const auto& en : e.enumerators())
-        add_name(en.name());
-}
-
-void name_collector::visit(const yarn::exception& e) {
-    process_element(e);
-}
-
-void name_collector::visit(const yarn::object& o) {
-    process_element(o);
-    process_attributes(o.local_attributes());
-}
-
-void name_collector::visit(const yarn::primitive& p) {
-    process_element(p);
-}
-
-const std::list<name>& name_collector::result() const {
-    return result_;
-}
-
 bool model_validator::allow_spaces_in_built_in_types(const languages l) const {
     return l == languages::cpp;
 }
@@ -196,18 +110,16 @@ sanity_check_strings(const std::list<std::string>& strings) const {
         sanity_check_string(s);
 }
 
-std::list<name>
-model_validator::decompose_model_into_element_names(const model& m) const {
-    BOOST_LOG_SEV(lg, debug) << "Obtaining a list of all names for model: "
-                             << m.name().id();
+decomposition_result model_validator::decompose_model(const model& m) const {
+    BOOST_LOG_SEV(lg, debug) << "Decomposing model: " << m.name().id();
 
     /*
      * Collect the names of all elements and attributes.
      */
-    name_collector nc;
+    decomposer dc;
     for (const auto& ptr : m.elements()) {
         const auto& e(*ptr);
-        e.accept(nc);
+        e.accept(dc);
     }
 
     /*
@@ -215,8 +127,7 @@ model_validator::decompose_model_into_element_names(const model& m) const {
      * we will validate the model's module, which is generated from
      * the model name.
      */
-    const auto names(nc.result());
-    return names;
+    return dc.result();
 }
 
 void model_validator::sanity_check_name(
@@ -260,10 +171,10 @@ void model_validator::sanity_check_name(
         sanity_check_string(l.element());
 }
 
-void model_validator::sanity_check_all_names(const model& m) const {
+void model_validator::
+sanity_check_all_names(const std::list<name>& names, const languages l) const {
     BOOST_LOG_SEV(lg, debug) << "Sanity checking all names.";
     std::unordered_set<std::string> ids_done;
-    const auto names(decompose_model_into_element_names(m));
 
     for (const auto& n : names) {
         const auto& id(n.id());
@@ -282,7 +193,7 @@ void model_validator::sanity_check_all_names(const model& m) const {
         /*
          * Element name must pass all sanity checks.
          */
-        const bool allow_spaces(allow_spaces_in_built_in_types(m.language()));
+        const bool allow_spaces(allow_spaces_in_built_in_types(l));
         sanity_check_name(n, allow_spaces);
 
         BOOST_LOG_SEV(lg, debug) << "Name is valid.";
@@ -292,7 +203,10 @@ void model_validator::sanity_check_all_names(const model& m) const {
 
 void model_validator::validate(const model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started validation. Model: " << m.name().id();
-    sanity_check_all_names(m);
+
+    const auto dr(decompose_model(m));
+    sanity_check_all_names(dr.names(), m.language());
+
     BOOST_LOG_SEV(lg, debug) << "Finished validation.";
 }
 

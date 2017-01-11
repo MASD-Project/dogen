@@ -18,39 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_MODEL_VALIDATOR_HPP
-#define DOGEN_YARN_TYPES_MODEL_VALIDATOR_HPP
+#ifndef DOGEN_YARN_HASH_DECOMPOSITION_RESULT_HASH_HPP
+#define DOGEN_YARN_HASH_DECOMPOSITION_RESULT_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <list>
-#include <string>
-#include "dogen/yarn/types/name.hpp"
-#include "dogen/yarn/types/model.hpp"
-#include "dogen/yarn/types/languages.hpp"
+#include <functional>
 #include "dogen/yarn/types/decomposition_result.hpp"
 
 namespace dogen {
 namespace yarn {
 
-class model_validator final {
-private:
-    bool allow_spaces_in_built_in_types(const languages l) const;
-    void sanity_check_string(const std::string& s,
-        bool check_not_builtin = true) const;
-    void sanity_check_strings(const std::list<std::string>& strings) const;
-    decomposition_result decompose_model(const model& m) const;
-    void sanity_check_name(const name& n,
-        const bool allow_spaces_in_built_in_types) const;
-    void sanity_check_all_names(const std::list<name>& names,
-        const languages l) const;
-
+struct decomposition_result_hasher {
 public:
-    void validate(const model& m) const;
+    static std::size_t hash(const decomposition_result& v);
 };
 
 } }
 
+namespace std {
+
+template<>
+struct hash<dogen::yarn::decomposition_result> {
+public:
+    size_t operator()(const dogen::yarn::decomposition_result& v) const {
+        return dogen::yarn::decomposition_result_hasher::hash(v);
+    }
+};
+
+}
 #endif

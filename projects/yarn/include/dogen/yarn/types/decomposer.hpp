@@ -18,37 +18,42 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_MODEL_VALIDATOR_HPP
-#define DOGEN_YARN_TYPES_MODEL_VALIDATOR_HPP
+#ifndef DOGEN_YARN_TYPES_DECOMPOSER_HPP
+#define DOGEN_YARN_TYPES_DECOMPOSER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <list>
-#include <string>
-#include "dogen/yarn/types/name.hpp"
-#include "dogen/yarn/types/model.hpp"
-#include "dogen/yarn/types/languages.hpp"
+#include "dogen/yarn/types/element.hpp"
+#include "dogen/yarn/types/attribute.hpp"
+#include "dogen/yarn/types/element_visitor.hpp"
 #include "dogen/yarn/types/decomposition_result.hpp"
 
 namespace dogen {
 namespace yarn {
 
-class model_validator final {
+class decomposer final : public element_visitor {
 private:
-    bool allow_spaces_in_built_in_types(const languages l) const;
-    void sanity_check_string(const std::string& s,
-        bool check_not_builtin = true) const;
-    void sanity_check_strings(const std::list<std::string>& strings) const;
-    decomposition_result decompose_model(const model& m) const;
-    void sanity_check_name(const name& n,
-        const bool allow_spaces_in_built_in_types) const;
-    void sanity_check_all_names(const std::list<name>& names,
-        const languages l) const;
+    void add_name(const name& n);
+    void add_names(const std::list<name>& names);
+    void process_element(const element& e);
+    void process_attributes(const std::list<attribute>& attrs);
 
 public:
-    void validate(const model& m) const;
+    using element_visitor::visit;
+    void visit(const yarn::concept& c);
+    void visit(const yarn::module& m);
+    void visit(const yarn::enumeration& e);
+    void visit(const yarn::exception& e);
+    void visit(const yarn::object& o);
+    void visit(const yarn::primitive& p);
+
+public:
+    const decomposition_result& result() const;
+
+private:
+    decomposition_result result_;
 };
 
 } }

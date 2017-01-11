@@ -48,5 +48,6 @@
 #include "dogen/yarn/io/origin_types_io.hpp"
 #include "dogen/yarn/io/type_parameters_io.hpp"
 #include "dogen/yarn/io/intermediate_model_io.hpp"
+#include "dogen/yarn/io/decomposition_result_io.hpp"
 
 #endif

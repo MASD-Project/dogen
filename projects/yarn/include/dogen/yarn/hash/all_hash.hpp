@@ -48,5 +48,6 @@
 #include "dogen/yarn/hash/origin_types_hash.hpp"
 #include "dogen/yarn/hash/type_parameters_hash.hpp"
 #include "dogen/yarn/hash/intermediate_model_hash.hpp"
+#include "dogen/yarn/hash/decomposition_result_hash.hpp"
 
 #endif
