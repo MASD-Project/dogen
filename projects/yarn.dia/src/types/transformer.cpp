@@ -38,6 +38,7 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("yarn.dia.transformer"));
 
+const std::string enumerator_with_type("Enumerators cannot have a type: ");
 const std::string empty_dia_object_name("Dia object name is empty");
 const std::string multiple_inheritance(
     "Child has more than one parent, but multiple inheritance not supported:");
@@ -85,6 +86,12 @@ yarn::attribute transformer::to_attribute(const processed_attribute& a) const {
 yarn::enumerator
 transformer::to_enumerator(const processed_attribute& a) const {
     validate_dia_object_name(a.name());
+
+    if (!a.type().empty()) {
+        BOOST_LOG_SEV(lg, error) << enumerator_with_type << a.type();
+        BOOST_THROW_EXCEPTION(transformation_error(
+                enumerator_with_type + a.type()));
+    }
 
     yarn::enumerator r;
     r.name().simple(a.name());
