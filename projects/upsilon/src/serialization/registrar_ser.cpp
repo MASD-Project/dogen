@@ -30,6 +30,7 @@
 #include "dogen/upsilon/serialization/primitive_ser.hpp"
 #include "dogen/upsilon/serialization/registrar_ser.hpp"
 #include "dogen/upsilon/serialization/collection_ser.hpp"
+#include "dogen/upsilon/serialization/enumeration_ser.hpp"
 
 namespace dogen {
 namespace upsilon {
@@ -38,6 +39,7 @@ template<typename Archive>
 void register_types(Archive& ar) {
     ar.template register_type<dogen::upsilon::collection>();
     ar.template register_type<dogen::upsilon::compound>();
+    ar.template register_type<dogen::upsilon::enumeration>();
     ar.template register_type<dogen::upsilon::primitive>();
 }
 

@@ -25,15 +25,91 @@
 #pragma once
 #endif
 
+#include <list>
+#include <iosfwd>
+#include <string>
+#include <algorithm>
+#include "dogen/upsilon/types/type.hpp"
+#include "dogen/upsilon/serialization/enumeration_fwd_ser.hpp"
+
 namespace dogen {
 namespace upsilon {
 
-enum class enumeration : unsigned int {
-    invalid = 0, ///< Represents an uninitialised enum
-    values = 1,
-    default_value = 2
+class enumeration final : public dogen::upsilon::type {
+public:
+    enumeration() = default;
+    enumeration(const enumeration&) = default;
+    enumeration(enumeration&&) = default;
+
+    virtual ~enumeration() noexcept { }
+
+public:
+    enumeration(
+        const std::string& name,
+        const std::string& extends,
+        const std::string& comment,
+        const std::list<std::string>& tag_refs,
+        const std::string& pof_id,
+        const std::list<std::string>& values,
+        const std::string& default_value);
+
+private:
+    template<typename Archive>
+    friend void boost::serialization::save(Archive& ar, const dogen::upsilon::enumeration& v, unsigned int version);
+
+    template<typename Archive>
+    friend void boost::serialization::load(Archive& ar, dogen::upsilon::enumeration& v, unsigned int version);
+
+public:
+    using type::accept;
+
+    virtual void accept(const type_visitor& v) const override;
+    virtual void accept(type_visitor& v) const override;
+    virtual void accept(const type_visitor& v) override;
+    virtual void accept(type_visitor& v) override;
+public:
+    void to_stream(std::ostream& s) const override;
+
+public:
+    const std::list<std::string>& values() const;
+    std::list<std::string>& values();
+    void values(const std::list<std::string>& v);
+    void values(const std::list<std::string>&& v);
+
+    const std::string& default_value() const;
+    std::string& default_value();
+    void default_value(const std::string& v);
+    void default_value(const std::string&& v);
+
+public:
+    bool operator==(const enumeration& rhs) const;
+    bool operator!=(const enumeration& rhs) const {
+        return !this->operator==(rhs);
+    }
+
+public:
+    bool equals(const dogen::upsilon::type& other) const override;
+
+public:
+    void swap(enumeration& other) noexcept;
+    enumeration& operator=(enumeration other);
+
+private:
+    std::list<std::string> values_;
+    std::string default_value_;
 };
 
 } }
+
+namespace std {
+
+template<>
+inline void swap(
+    dogen::upsilon::enumeration& lhs,
+    dogen::upsilon::enumeration& rhs) {
+    lhs.swap(rhs);
+}
+
+}
 
 #endif

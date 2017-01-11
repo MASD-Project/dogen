@@ -25,13 +25,30 @@
 #pragma once
 #endif
 
-#include <boost/serialization/nvp.hpp>
+#include <boost/serialization/split_free.hpp>
+#include <boost/type_traits/is_virtual_base_of.hpp>
 #include "dogen/upsilon/types/enumeration.hpp"
 
-template<class Archive>
-void serialize(Archive& ar, dogen::upsilon::enumeration& v, unsigned int /*version*/){
-    using boost::serialization::make_nvp;
-    ar & make_nvp("enumeration", v);
+namespace boost {
+
+template<>struct
+is_virtual_base_of<
+    dogen::upsilon::type,
+    dogen::upsilon::enumeration
+> : public mpl::true_ {};
+
 }
+
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::upsilon::enumeration)
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+void save(Archive& ar, const dogen::upsilon::enumeration& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::upsilon::enumeration& v, unsigned int version);
+
+} }
 
 #endif

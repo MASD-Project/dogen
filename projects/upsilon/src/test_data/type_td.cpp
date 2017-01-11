@@ -23,6 +23,7 @@
 #include "dogen/upsilon/test_data/compound_td.hpp"
 #include "dogen/upsilon/test_data/primitive_td.hpp"
 #include "dogen/upsilon/test_data/collection_td.hpp"
+#include "dogen/upsilon/test_data/enumeration_td.hpp"
 
 namespace {
 
@@ -56,9 +57,11 @@ populate(const unsigned int position, result_type& v) {
 
 type_generator::result_type*
 type_generator::create_ptr(const unsigned int position) {
-    if ((position % 2) == 0)
+    if ((position % 3) == 0)
         return dogen::upsilon::compound_generator::create_ptr(position);
-    if ((position % 2) == 1)
+    if ((position % 3) == 1)
+        return dogen::upsilon::enumeration_generator::create_ptr(position);
+    if ((position % 3) == 2)
         return dogen::upsilon::primitive_generator::create_ptr(position);
     return dogen::upsilon::collection_generator::create_ptr(position);
 }

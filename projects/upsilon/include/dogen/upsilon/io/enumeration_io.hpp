@@ -31,7 +31,9 @@
 namespace dogen {
 namespace upsilon {
 
-std::ostream& operator<<(std::ostream& s, const enumeration& v);
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::upsilon::enumeration& v);
 
 } }
 

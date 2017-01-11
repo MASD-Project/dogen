@@ -28,6 +28,7 @@
 #include "dogen/upsilon/types/compound_fwd.hpp"
 #include "dogen/upsilon/types/primitive_fwd.hpp"
 #include "dogen/upsilon/types/collection_fwd.hpp"
+#include "dogen/upsilon/types/enumeration_fwd.hpp"
 
 namespace dogen {
 namespace upsilon {
@@ -58,6 +59,16 @@ public:
     virtual void visit(const dogen::upsilon::compound&) { }
     virtual void visit(dogen::upsilon::compound&) const { }
     virtual void visit(dogen::upsilon::compound&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type dogen::upsilon::enumeration
+     */
+    /**@{*/
+    virtual void visit(const dogen::upsilon::enumeration&) const { }
+    virtual void visit(const dogen::upsilon::enumeration&) { }
+    virtual void visit(dogen::upsilon::enumeration&) const { }
+    virtual void visit(dogen::upsilon::enumeration&) { }
     /**@}*/
 
     /**

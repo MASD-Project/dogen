@@ -18,18 +18,39 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UPSILON_TYPES_ENUMERATION_FWD_HPP
-#define DOGEN_UPSILON_TYPES_ENUMERATION_FWD_HPP
+#include "dogen/upsilon/hash/type_hash.hpp"
+#include "dogen/upsilon/hash/enumeration_hash.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value) {
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
+}
+
+}
 
 namespace dogen {
 namespace upsilon {
 
-class enumeration;
+std::size_t enumeration_hasher::hash(const enumeration& v) {
+    std::size_t seed(0);
+
+    combine(seed, dynamic_cast<const dogen::upsilon::type&>(v));
+
+    combine(seed, hash_std_list_std_string(v.values()));
+    combine(seed, v.default_value());
+
+    return seed;
+}
 
 } }
-
-#endif

@@ -28,16 +28,25 @@
 #include <functional>
 #include "dogen/upsilon/types/enumeration.hpp"
 
+namespace dogen {
+namespace upsilon {
+
+struct enumeration_hasher {
+public:
+    static std::size_t hash(const enumeration& v);
+};
+
+} }
+
 namespace std {
 
 template<>
 struct hash<dogen::upsilon::enumeration> {
 public:
     size_t operator()(const dogen::upsilon::enumeration& v) const {
-        return std::hash<unsigned int>()(static_cast<unsigned int>(v));
+        return dogen::upsilon::enumeration_hasher::hash(v);
     }
 };
 
 }
-
 #endif

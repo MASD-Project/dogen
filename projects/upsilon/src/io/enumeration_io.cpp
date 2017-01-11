@@ -18,33 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#include <string>
 #include <ostream>
-#include <stdexcept>
+#include <boost/algorithm/string.hpp>
+#include "dogen/upsilon/io/type_io.hpp"
 #include "dogen/upsilon/io/enumeration_io.hpp"
 
 namespace dogen {
 namespace upsilon {
 
 std::ostream& operator<<(std::ostream& s, const enumeration& v) {
-    s << "{ " << "\"__type__\": " << "\"enumeration\", " << "\"value\": ";
-
-    std::string attr;
-    switch (v) {
-    case enumeration::invalid:
-        attr = "\"invalid\"";
-        break;
-    case enumeration::values:
-        attr = "\"values\"";
-        break;
-    case enumeration::default_value:
-        attr = "\"default_value\"";
-        break;
-    default:
-        throw std::invalid_argument("Invalid value for enumeration");
-    }
-    s << attr << " }";
-    return s;
+    v.to_stream(s);
+    return(s);
 }
 
 } }

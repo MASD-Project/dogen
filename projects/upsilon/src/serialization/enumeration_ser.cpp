@@ -30,13 +30,10 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/upsilon/serialization/type_ser.hpp"
-#include "dogen/upsilon/serialization/compound_ser.hpp"
-#include "dogen/upsilon/serialization/primitive_ser.hpp"
-#include "dogen/upsilon/serialization/collection_ser.hpp"
 #include "dogen/upsilon/serialization/enumeration_ser.hpp"
 
 BOOST_CLASS_TRACKING(
-    dogen::upsilon::type,
+    dogen::upsilon::enumeration,
     boost::serialization::track_selectively)
 
 namespace boost {
@@ -44,24 +41,22 @@ namespace serialization {
 
 template<typename Archive>
 void save(Archive& ar,
-    const dogen::upsilon::type& v,
+    const dogen::upsilon::enumeration& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("name", v.name_);
-    ar << make_nvp("extends", v.extends_);
-    ar << make_nvp("comment", v.comment_);
-    ar << make_nvp("tag_refs", v.tag_refs_);
-    ar << make_nvp("pof_id", v.pof_id_);
+    ar << make_nvp("type", base_object<dogen::upsilon::type>(v));
+
+    ar << make_nvp("values", v.values_);
+    ar << make_nvp("default_value", v.default_value_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
-    dogen::upsilon::type& v,
+    dogen::upsilon::enumeration& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("name", v.name_);
-    ar >> make_nvp("extends", v.extends_);
-    ar >> make_nvp("comment", v.comment_);
-    ar >> make_nvp("tag_refs", v.tag_refs_);
-    ar >> make_nvp("pof_id", v.pof_id_);
+    ar >> make_nvp("type", base_object<dogen::upsilon::type>(v));
+
+    ar >> make_nvp("values", v.values_);
+    ar >> make_nvp("default_value", v.default_value_);
 }
 
 } }
@@ -69,16 +64,16 @@ void load(Archive& ar,
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const dogen::upsilon::type& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, dogen::upsilon::type& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const dogen::upsilon::enumeration& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, dogen::upsilon::enumeration& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const dogen::upsilon::type& v, unsigned int version);
-template void load(archive::text_iarchive& ar, dogen::upsilon::type& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const dogen::upsilon::enumeration& v, unsigned int version);
+template void load(archive::text_iarchive& ar, dogen::upsilon::enumeration& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const dogen::upsilon::type& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, dogen::upsilon::type& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const dogen::upsilon::enumeration& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, dogen::upsilon::enumeration& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const dogen::upsilon::type& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, dogen::upsilon::type& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const dogen::upsilon::enumeration& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, dogen::upsilon::enumeration& v, unsigned int version);
 
 } }
