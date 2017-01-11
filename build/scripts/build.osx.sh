@@ -112,7 +112,7 @@ fi
 # CMake setup
 #
 cmake_defines="-DCMAKE_BUILD_TYPE=${build_type}"
-cmake_defines="${cmake_defines} -DCMAKE_EXPORT_COMPILE_COMMANDS=TRUE"
+cmake_defines="${cmake_defines} -DWITH_MINIMAL_PACKAGING=ON"
 cmake_defines="${cmake_defines} -DWITH_LATEX=OFF"
 if [ "${COVERALLS}" = "1" ]; then
     cmake_defines="${cmake_defines} -DWITH_PROFILING=ON"
