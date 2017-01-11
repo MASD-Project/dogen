@@ -55,7 +55,7 @@ deploy:
   - provider: BinTray
     username: domaindrivenconsulting
     api_key:
-      secure: IrFRrzzMnnFzj2s2hYctnvMjTf7HRe5uQVPcioAjbuNrxXX5XYmRH6ce8osxoRhcpQYS9ppCmrt8VbRBB57piWS3yKfM6WftDrmNQil7XwqowKAKm/VuX6K5psjJHRCYoNUAovwvfLmaLIWvVd+I+NkU48EXvflClXx13Qp8GtU=
+      secure: aeW66aeBxn5W4wOnb5Ae9L1/dYRsAyWiJatWTpKPSwEgR1diIFPUUeSqQ4jTxeF8
     subject: domaindrivenconsulting
     repo: Dogen
     package: Dogen
