@@ -25,6 +25,8 @@ git:
   depth: 5
 
 matrix:
+  allow_failures:
+    - os: osx
   include:
     - os: osx
       compiler: clang
