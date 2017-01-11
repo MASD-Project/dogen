@@ -12,34 +12,35 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-11 Wed 10:52]
+#+CAPTION: Clock summary at [2017-01-11 Wed 18:15]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *57:01* |       |      | 100.0 |
+| *Total time*                                                                | *58:53* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 57:01   |       |      | 100.0 |
-| Active                                                                      |         | 57:01 |      | 100.0 |
+| Stories                                                                     | 58:53   |       |      | 100.0 |
+| Active                                                                      |         | 58:53 |      | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:35 |   1.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:57 |   1.7 |
-| COMPLETED Consider supporting multiple inheritance on non-proxy models      |         |       | 3:24 |   6.0 |
-| COMPLETED Add basic validation infrastructure                               |         |       | 8:40 |  15.2 |
-| COMPLETED Fix borked windows build                                          |         |       | 0:26 |   0.8 |
-| COMPLETED Clean up enumerator implementation                                |         |       | 1:05 |   1.9 |
-| COMPLETED Measure validation slowdown                                       |         |       | 6:38 |  11.6 |
-| COMPLETED Parsing should support dot notation                               |         |       | 2:54 |   5.1 |
-| COMPLETED Analysis for changes required in order to support containers      |         |       | 3:15 |   5.7 |
-| COMPLETED Add support for object based container types in C#                |         |       | 5:48 |  10.2 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:57 |   1.6 |
+| COMPLETED Consider supporting multiple inheritance on non-proxy models      |         |       | 3:24 |   5.8 |
+| COMPLETED Add basic validation infrastructure                               |         |       | 8:40 |  14.7 |
+| COMPLETED Fix borked windows build                                          |         |       | 0:26 |   0.7 |
+| COMPLETED Clean up enumerator implementation                                |         |       | 1:05 |   1.8 |
+| COMPLETED Measure validation slowdown                                       |         |       | 6:38 |  11.3 |
+| COMPLETED Parsing should support dot notation                               |         |       | 2:54 |   4.9 |
+| COMPLETED Analysis for changes required in order to support containers      |         |       | 3:15 |   5.5 |
+| COMPLETED Add support for object based container types in C#                |         |       | 5:48 |   9.8 |
 | COMPLETED Understand the behaviour of helpers and assistants                |         |       | 1:13 |   2.1 |
 | CANCELLED Add support for generic parents in yarn                           |         |       | 0:35 |   1.0 |
-| COMPLETED Fix assorted windows warnings                                     |         |       | 0:19 |   0.6 |
-| COMPLETED Build dogen on windows locally                                    |         |       | 7:32 |  13.2 |
-| COMPLETED Fix borked windows build                                          |         |       | 1:54 |   3.3 |
-| STARTED Generate windows packages with WIX                                  |         |       | 3:28 |   6.1 |
-| STARTED Add appveyor support for bintray                                    |         |       | 1:00 |   1.8 |
-| STARTED Add auxiliary function properties to c#                             |         |       | 1:11 |   2.1 |
-| STARTED Add internal object dumper resolution                               |         |       | 4:51 |   8.5 |
+| COMPLETED Fix assorted windows warnings                                     |         |       | 0:19 |   0.5 |
+| COMPLETED Build dogen on windows locally                                    |         |       | 7:32 |  12.8 |
+| COMPLETED Fix borked windows build                                          |         |       | 1:54 |   3.2 |
+| COMPLETED Generate windows packages with WIX                                |         |       | 3:28 |   5.9 |
+| STARTED Add appveyor support for bintray                                    |         |       | 1:00 |   1.7 |
+| STARTED Add auxiliary function properties to c#                             |         |       | 1:11 |   2.0 |
+| STARTED Add internal object dumper resolution                               |         |       | 4:51 |   8.2 |
 | STARTED Add support for generic container types to C#                       |         |       | 1:16 |   2.2 |
+| STARTED Add upsilon support                                                 |         |       | 1:52 |   3.2 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -838,7 +839,8 @@ machine type 'X86']]
 
 Debug build is back down to =knit= target again.
 
-*** STARTED Generate windows packages with WIX                        :story:
+*** COMPLETED Generate windows packages with WIX                      :story:
+    CLOSED: [2017-01-11 Wed 16:22]
     CLOCK: [2017-01-11 Wed 10:08]--[2017-01-11 Wed 10:52] =>  0:44
     CLOCK: [2017-01-10 Tue 14:00]--[2017-01-10 Tue 15:09] =>  1:09
     CLOCK: [2017-01-10 Tue 12:00]--[2017-01-10 Tue 13:35] =>  1:35
@@ -954,6 +956,16 @@ Notes:
 
 - we need a way to determine if we are using a helper, the assistant
   or a sequence generator directly.
+
+*** STARTED Add upsilon support                                       :story:
+    CLOCK: [2017-01-11 Wed 17:35]--[2017-01-11 Wed 18:15] =>  0:40
+    CLOCK: [2017-01-11 Wed 16:05]--[2017-01-11 Wed 17:17] =>  1:12
+
+A customer has models in a legacy format, which need to be imported
+into Dogen. The easiest thing to do is to create a simple frontend
+which imports these models into yarn. We will subsequently have to
+map these types into native types, depending on the language - or
+probably into LAM types.
 
 *** Add support for boxed types                                       :story:
 

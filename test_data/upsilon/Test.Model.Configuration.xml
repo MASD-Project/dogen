@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<Config xmlns="http://tempuri.org/XMLSchema.xsd">
+    <Directory>
+        <Public Value="projects\test_models\common"/>
+        <Private Value="projects\test_models"/>
+    </Directory>
+
+    <SchemaRefs>
+        <SchemaRef Name="Zeta" File="test_data\upsilon\Zeta.Model.xml" />
+        <SchemaRef Name="Phi" File="test_data\upsilon\Phi.Model.xml" />
+    </SchemaRefs>
+
+    <Outputs>
+        <Output SchemaName="Zeta">
+            <Representations>
+                <Representation Target="JAVA"/>
+                <Representation Target="CPP" Pof="true"/>
+                <Representation Target="CS"/>
+            </Representations>
+        </Output>
+    </Outputs>
+</Config>
