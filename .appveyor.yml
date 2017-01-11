@@ -28,8 +28,9 @@ build_script:
   - ps: cd $project_dir
   - ps: .\build\scripts\build.windows.ps1 -build_type $build_type -compiler $env:compiler -third_party $third_party -target $target
   - ps: if ($build_type -eq "Release") {
-            cd .\build\output\$env:compiler\$build_type;
-            $env:WIX = "C:/Program Files (x86)/WiX Toolset v3.10/bin";
+            cd $project_dir\build\output\$env:compiler\$build_type;
+            $env:Path += ";C:\Program Files (x86)\WiX Toolset v3.10\bin"
+            $env:WIX = "C:\Program Files (x86)\WiX Toolset v3.10\bin";
             cpack -G WIX -C Release;
         }
 
