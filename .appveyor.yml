@@ -55,5 +55,5 @@ deploy:
     subject: domaindrivenconsulting
     repo: Dogen
     package: Dogen
-    artifact: $project_dir/build/output/msvc/Release/stage/pkg/*.msi
+    artifact: C:/projects/dogen/build/output/msvc/Release/stage/pkg/dogen-0.95.0-Windows-AMD64.msi
     version: 0.94.0
