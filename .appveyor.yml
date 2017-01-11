@@ -34,6 +34,10 @@ build_script:
             cpack -G WIX -C Release;
         }
 
+artifacts:
+  - path: $project_dir/dogen/build/output/msvc/Release/stage/pkg/*.msi
+    name: x86_64 MSI
+
 notifications:
   - provider: Webhook
     url: https://webhooks.gitter.im/e/90f86ee1561e8f3c3056
