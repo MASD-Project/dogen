@@ -31,6 +31,9 @@
 #include "dogen/yarn/types/expansion_error.hpp"
 #include "dogen/yarn/types/parsing_expander.hpp"
 
+typedef boost::error_info<struct owner, std::string>
+errmsg_parsing_owner;
+
 namespace {
 
 using namespace dogen::utility::log;
@@ -157,13 +160,27 @@ expand(const annotations::type_repository& atrp, intermediate_model& m) const {
 
     for (auto& pair : m.objects()) {
         auto& o(pair.second);
-        parse_attributes(ml, tlmn, l, o.local_attributes());
-        parse_parent(tg, ml, tlmn, o);
+        const auto id(o.name().id());
+
+        try {
+            parse_attributes(ml, tlmn, l, o.local_attributes());
+            parse_parent(tg, ml, tlmn, o);
+        } catch (boost::exception& e) {
+            e << errmsg_parsing_owner(id);
+            throw;
+        }
     }
 
     for (auto& pair : m.concepts()) {
         auto& c(pair.second);
-        parse_attributes(ml, tlmn, l, c.local_attributes());
+        const auto id(c.name().id());
+
+        try {
+            parse_attributes(ml, tlmn, l, c.local_attributes());
+        } catch (boost::exception& e) {
+            e << errmsg_parsing_owner(id);
+            throw;
+        }
     }
 }
 

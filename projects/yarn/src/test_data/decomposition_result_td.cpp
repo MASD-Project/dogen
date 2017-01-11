@@ -25,15 +25,29 @@
 
 namespace {
 
+std::string create_std_string(const unsigned int position) {
+    std::ostringstream s;
+    s << "a_string_" << position;
+    return s.str();
+}
+
 dogen::yarn::name
 create_dogen_yarn_name(const unsigned int position) {
     return dogen::yarn::name_generator::create(position);
 }
 
-std::list<dogen::yarn::name> create_std_list_dogen_yarn_name(unsigned int position) {
-    std::list<dogen::yarn::name> r;
+std::pair<std::string, dogen::yarn::name>
+create_std_pair_std_string_dogen_yarn_name(unsigned int position) {
+    std::pair<std::string, dogen::yarn::name> r(
+        create_std_string(position),
+        create_dogen_yarn_name(position));
+    return r;
+}
+
+std::list<std::pair<std::string, dogen::yarn::name> > create_std_list_std_pair_std_string_dogen_yarn_name(unsigned int position) {
+    std::list<std::pair<std::string, dogen::yarn::name> > r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_dogen_yarn_name(position + i));
+        r.push_back(create_std_pair_std_string_dogen_yarn_name(position + i));
     }
     return r;
 }
@@ -43,18 +57,20 @@ create_dogen_yarn_name_tree(const unsigned int position) {
     return dogen::yarn::name_tree_generator::create(position);
 }
 
-std::list<dogen::yarn::name_tree> create_std_list_dogen_yarn_name_tree(unsigned int position) {
-    std::list<dogen::yarn::name_tree> r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_dogen_yarn_name_tree(position + i));
-    }
+std::pair<std::string, dogen::yarn::name_tree>
+create_std_pair_std_string_dogen_yarn_name_tree(unsigned int position) {
+    std::pair<std::string, dogen::yarn::name_tree> r(
+        create_std_string(position),
+        create_dogen_yarn_name_tree(position));
     return r;
 }
 
-std::string create_std_string(const unsigned int position) {
-    std::ostringstream s;
-    s << "a_string_" << position;
-    return s.str();
+std::list<std::pair<std::string, dogen::yarn::name_tree> > create_std_list_std_pair_std_string_dogen_yarn_name_tree(unsigned int position) {
+    std::list<std::pair<std::string, dogen::yarn::name_tree> > r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.push_back(create_std_pair_std_string_dogen_yarn_name_tree(position + i));
+    }
+    return r;
 }
 
 std::unordered_set<std::string> create_std_unordered_set_std_string(unsigned int position) {
@@ -74,8 +90,8 @@ decomposition_result_generator::decomposition_result_generator() : position_(0) 
 
 void decomposition_result_generator::
 populate(const unsigned int position, result_type& v) {
-    v.names(create_std_list_dogen_yarn_name(position + 0));
-    v.name_trees(create_std_list_dogen_yarn_name_tree(position + 1));
+    v.names(create_std_list_std_pair_std_string_dogen_yarn_name(position + 0));
+    v.name_trees(create_std_list_std_pair_std_string_dogen_yarn_name_tree(position + 1));
     v.abstract_elements(create_std_unordered_set_std_string(position + 2));
 }
 

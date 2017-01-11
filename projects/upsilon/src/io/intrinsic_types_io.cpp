@@ -58,8 +58,8 @@ std::ostream& operator<<(std::ostream& s, const intrinsic_types& v) {
     case intrinsic_types::integer64:
         attr = "\"integer64\"";
         break;
-    case intrinsic_types::string_x:
-        attr = "\"string_x\"";
+    case intrinsic_types::string:
+        attr = "\"string\"";
         break;
     case intrinsic_types::utc_time:
         attr = "\"utc_time\"";

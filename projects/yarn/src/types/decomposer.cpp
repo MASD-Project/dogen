@@ -30,33 +30,41 @@
 namespace dogen {
 namespace yarn {
 
-void decomposer::add_name(const name& n) {
-    result_.names().push_back(n);
+void decomposer::add_name(const std::string& owner, const name& n) {
+    std::pair<std::string, name> pair;
+    pair.first = owner;
+    pair.second = n;
+    result_.names().push_back(pair);
 }
 
-void decomposer::add_name_tree(const name_tree& nt) {
-    result_.name_trees().push_back(nt);
+void decomposer::add_name_tree(const std::string& owner, const name_tree& nt) {
+    std::pair<std::string, name_tree> pair;
+    pair.first = owner;
+    pair.second = nt;
+    result_.name_trees().push_back(pair);
 }
 
-void decomposer::add_names(const std::list<name>& names) {
+void decomposer::
+add_names(const std::string& owner, const std::list<name>& names) {
     for (const auto& n : names)
-        add_name(n);
+        add_name(owner, n);
 }
 
-void decomposer::process_attributes(const std::list<attribute>& attrs) {
+void decomposer::
+process_attributes(const std::string& owner, const std::list<attribute>& attrs) {
     for (const auto& attr : attrs) {
-        add_name(attr.name());
-        add_name_tree(attr.parsed_type());
+        add_name(owner, attr.name());
+        add_name_tree(owner, attr.parsed_type());
     }
 }
 
 void decomposer::process_element(const element& e) {
-    add_name(e.name());
+    add_name(e.name().id(), e.name());
 }
 
 void decomposer::visit(const yarn::concept& c) {
     process_element(c);
-    process_attributes(c.local_attributes());
+    process_attributes(c.name().id(), c.local_attributes());
 }
 
 void decomposer::visit(const yarn::module& m) {
@@ -68,13 +76,13 @@ void decomposer::visit(const yarn::module& m) {
     if (m.is_global_module())
         return;
 
-    add_name(m.name());
+    process_element(m);
 }
 
 void decomposer::visit(const yarn::enumeration& e) {
     process_element(e);
     for (const auto& en : e.enumerators())
-        add_name(en.name());
+        add_name(e.name().id(), en.name());
 }
 
 void decomposer::visit(const yarn::exception& e) {
@@ -83,7 +91,7 @@ void decomposer::visit(const yarn::exception& e) {
 
 void decomposer::visit(const yarn::object& o) {
     process_element(o);
-    process_attributes(o.local_attributes());
+    process_attributes(o.name().id(), o.local_attributes());
 
     if (o.is_abstract())
         result_.abstract_elements().insert(o.name().id());

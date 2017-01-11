@@ -27,6 +27,7 @@
 
 #include <list>
 #include <string>
+#include <utility>
 #include <unordered_set>
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/model.hpp"
@@ -47,14 +48,16 @@ private:
     void validate_strings(const std::list<std::string>& strings) const;
     void validate_name(const name& n,
         const bool allow_spaces_in_built_in_types) const;
-    void validate_names(const std::list<name>& names, const languages l) const;
+    void validate_names(const std::list<std::pair<std::string, name>>& names,
+        const languages l) const;
 
     void validate_name_tree(const std::unordered_set<std::string>&
         abstract_elements, const languages l, const name_tree& nt,
         const bool inherit_opaqueness_from_parent = false) const;
     void validate_name_trees(
         const std::unordered_set<std::string>& abstract_elements,
-        const languages l, const std::list<name_tree>& nts) const;
+        const languages l,
+        const std::list<std::pair<std::string, name_tree>>& nts) const;
 
 public:
     void validate(const model& m) const;

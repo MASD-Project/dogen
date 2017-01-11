@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <string>
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/yarn/types/attribute.hpp"
 #include "dogen/yarn/types/element_visitor.hpp"
@@ -35,11 +36,12 @@ namespace yarn {
 
 class decomposer final : public element_visitor {
 private:
-    void add_name(const name& n);
-    void add_name_tree(const name_tree& nt);
-    void add_names(const std::list<name>& names);
+    void add_name(const std::string& owner, const name& n);
+    void add_name_tree(const std::string& owner, const name_tree& nt);
+    void add_names(const std::string& owner, const std::list<name>& names);
+    void process_attributes(const std::string& owner,
+        const std::list<attribute>& attrs);
     void process_element(const element& e);
-    void process_attributes(const std::list<attribute>& attrs);
 
 public:
     using element_visitor::visit;

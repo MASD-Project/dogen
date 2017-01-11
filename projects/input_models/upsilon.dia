@@ -1401,7 +1401,7 @@ formats, it will be deprecated.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#string_x#</dia:string>
+            <dia:string>#string#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>

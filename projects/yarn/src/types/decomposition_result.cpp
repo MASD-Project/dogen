@@ -24,8 +24,8 @@ namespace dogen {
 namespace yarn {
 
 decomposition_result::decomposition_result(
-    const std::list<dogen::yarn::name>& names,
-    const std::list<dogen::yarn::name_tree>& name_trees,
+    const std::list<std::pair<std::string, dogen::yarn::name> >& names,
+    const std::list<std::pair<std::string, dogen::yarn::name_tree> >& name_trees,
     const std::unordered_set<std::string>& abstract_elements)
     : names_(names),
       name_trees_(name_trees),
@@ -50,35 +50,35 @@ decomposition_result& decomposition_result::operator=(decomposition_result other
     return *this;
 }
 
-const std::list<dogen::yarn::name>& decomposition_result::names() const {
+const std::list<std::pair<std::string, dogen::yarn::name> >& decomposition_result::names() const {
     return names_;
 }
 
-std::list<dogen::yarn::name>& decomposition_result::names() {
+std::list<std::pair<std::string, dogen::yarn::name> >& decomposition_result::names() {
     return names_;
 }
 
-void decomposition_result::names(const std::list<dogen::yarn::name>& v) {
+void decomposition_result::names(const std::list<std::pair<std::string, dogen::yarn::name> >& v) {
     names_ = v;
 }
 
-void decomposition_result::names(const std::list<dogen::yarn::name>&& v) {
+void decomposition_result::names(const std::list<std::pair<std::string, dogen::yarn::name> >&& v) {
     names_ = std::move(v);
 }
 
-const std::list<dogen::yarn::name_tree>& decomposition_result::name_trees() const {
+const std::list<std::pair<std::string, dogen::yarn::name_tree> >& decomposition_result::name_trees() const {
     return name_trees_;
 }
 
-std::list<dogen::yarn::name_tree>& decomposition_result::name_trees() {
+std::list<std::pair<std::string, dogen::yarn::name_tree> >& decomposition_result::name_trees() {
     return name_trees_;
 }
 
-void decomposition_result::name_trees(const std::list<dogen::yarn::name_tree>& v) {
+void decomposition_result::name_trees(const std::list<std::pair<std::string, dogen::yarn::name_tree> >& v) {
     name_trees_ = v;
 }
 
-void decomposition_result::name_trees(const std::list<dogen::yarn::name_tree>&& v) {
+void decomposition_result::name_trees(const std::list<std::pair<std::string, dogen::yarn::name_tree> >&& v) {
     name_trees_ = std::move(v);
 }
 

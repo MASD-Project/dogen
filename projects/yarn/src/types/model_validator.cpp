@@ -30,6 +30,9 @@
 #include "dogen/yarn/types/validation_error.hpp"
 #include "dogen/yarn/types/model_validator.hpp"
 
+typedef boost::error_info<struct owner, std::string>
+errmsg_validation_owner;
+
 namespace {
 
 using namespace dogen::utility::log;
@@ -151,9 +154,11 @@ validate_name(const name& n, const bool allow_spaces_in_built_in_types) const {
      * language where built-ins can have spaces, we split the name on
      * space and validate each component separately.
      */
-    BOOST_LOG_SEV(lg, debug) << "at_global_namespace: " << at_global_namespace
+    BOOST_LOG_SEV(lg, debug) << "at_global_namespace: "
+                             << at_global_namespace
                              << " allow_spaces_in_built_in_types: "
                              << allow_spaces_in_built_in_types;
+
     if (at_global_namespace && allow_spaces_in_built_in_types) {
         using utility::string::splitter;
         const auto splitted(splitter::split_delimited(n.simple(), space));
@@ -172,31 +177,39 @@ validate_name(const name& n, const bool allow_spaces_in_built_in_types) const {
 }
 
 void model_validator::
-validate_names(const std::list<name>& names, const languages l) const {
+validate_names(const std::list<std::pair<std::string, name>>& names,
+    const languages l) const {
     BOOST_LOG_SEV(lg, debug) << "Sanity checking all names.";
     std::unordered_set<std::string> ids_done;
 
-    for (const auto& n : names) {
+    for (const auto& pair : names) {
+        const auto& owner(pair.first);
+        const auto& n(pair.second);
         const auto& id(n.id());
         BOOST_LOG_SEV(lg, debug) << "Validating: '" << id << "'";
 
-        /*
-         * Element identifier must be unique across all model
-         * elements.
-         */
-        const auto inserted(ids_done.insert(id).second);
-        if (!inserted) {
-            BOOST_LOG_SEV(lg, error) << duplicate_element << id;
-            BOOST_THROW_EXCEPTION(validation_error(duplicate_element + id));
+        try {
+            /*
+             * Element identifier must be unique across all model
+             * elements.
+             */
+            const auto inserted(ids_done.insert(id).second);
+            if (!inserted) {
+                BOOST_LOG_SEV(lg, error) << duplicate_element << id;
+                BOOST_THROW_EXCEPTION(validation_error(duplicate_element + id));
+            }
+
+            /*
+             * Element name must pass all sanity checks.
+             */
+            const bool allow_spaces(allow_spaces_in_built_in_types(l));
+            validate_name(n, allow_spaces);
+
+            BOOST_LOG_SEV(lg, debug) << "Name is valid.";
+        } catch (boost::exception& e) {
+            e << errmsg_validation_owner(owner);
+            throw;
         }
-
-        /*
-         * Element name must pass all sanity checks.
-         */
-        const bool allow_spaces(allow_spaces_in_built_in_types(l));
-        validate_name(n, allow_spaces);
-
-        BOOST_LOG_SEV(lg, debug) << "Name is valid.";
     }
     BOOST_LOG_SEV(lg, debug) << "Finished validating all names.";
 }
@@ -218,9 +231,9 @@ validate_name_tree(const std::unordered_set<std::string>& abstract_elements,
         validate_name_tree(ae, l, c, nt.are_children_opaque());
 }
 
-void model_validator::
-validate_name_trees(const std::unordered_set<std::string>& abstract_elements,
-    const languages l, const std::list<name_tree>& nts) const {
+void model_validator::validate_name_trees(
+    const std::unordered_set<std::string>& abstract_elements, const languages l,
+    const std::list<std::pair<std::string, name_tree>>& nts) const {
 
     /*
      * The only validation we perform on name trees at present is only
@@ -229,9 +242,17 @@ validate_name_trees(const std::unordered_set<std::string>& abstract_elements,
     if (l != languages::cpp)
         return;
 
-    for (const auto& nt : nts) {
+    for (const auto& pair : nts) {
+        const auto& owner(pair.first);
+        const auto& nt(pair.second);
         BOOST_LOG_SEV(lg, trace) << "Validating: '" << nt.identifiable() << "'";
-        validate_name_tree(abstract_elements, l, nt);
+
+        try {
+            validate_name_tree(abstract_elements, l, nt);
+        } catch (boost::exception& e) {
+            e << errmsg_validation_owner(owner);
+            throw;
+        }
     }
 }
 

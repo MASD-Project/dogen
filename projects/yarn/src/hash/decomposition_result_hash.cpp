@@ -30,18 +30,34 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_list_dogen_yarn_name(const std::list<dogen::yarn::name>& v) {
+inline std::size_t hash_std_pair_std_string_dogen_yarn_name(const std::pair<std::string, dogen::yarn::name>& v) {
+    std::size_t seed(0);
+
+    combine(seed, v.first);
+    combine(seed, v.second);
+    return seed;
+}
+
+inline std::size_t hash_std_list_std_pair_std_string_dogen_yarn_name(const std::list<std::pair<std::string, dogen::yarn::name> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
-        combine(seed, i);
+        combine(seed, hash_std_pair_std_string_dogen_yarn_name(i));
     }
     return seed;
 }
 
-inline std::size_t hash_std_list_dogen_yarn_name_tree(const std::list<dogen::yarn::name_tree>& v) {
+inline std::size_t hash_std_pair_std_string_dogen_yarn_name_tree(const std::pair<std::string, dogen::yarn::name_tree>& v) {
+    std::size_t seed(0);
+
+    combine(seed, v.first);
+    combine(seed, v.second);
+    return seed;
+}
+
+inline std::size_t hash_std_list_std_pair_std_string_dogen_yarn_name_tree(const std::list<std::pair<std::string, dogen::yarn::name_tree> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
-        combine(seed, i);
+        combine(seed, hash_std_pair_std_string_dogen_yarn_name_tree(i));
     }
     return seed;
 }
@@ -62,8 +78,8 @@ namespace yarn {
 std::size_t decomposition_result_hasher::hash(const decomposition_result& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_list_dogen_yarn_name(v.names()));
-    combine(seed, hash_std_list_dogen_yarn_name_tree(v.name_trees()));
+    combine(seed, hash_std_list_std_pair_std_string_dogen_yarn_name(v.names()));
+    combine(seed, hash_std_list_std_pair_std_string_dogen_yarn_name_tree(v.name_trees()));
     combine(seed, hash_std_unordered_set_std_string(v.abstract_elements()));
 
     return seed;

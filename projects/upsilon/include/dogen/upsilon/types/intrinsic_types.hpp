@@ -38,7 +38,7 @@ enum class intrinsic_types : unsigned int {
     double_x = 6,
     guid = 7,
     integer64 = 8,
-    string_x = 9,
+    string = 9,
     utc_time = 10,
     utc_date_time = 11
 };

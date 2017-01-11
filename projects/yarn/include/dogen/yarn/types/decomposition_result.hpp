@@ -27,6 +27,7 @@
 
 #include <list>
 #include <string>
+#include <utility>
 #include <algorithm>
 #include <unordered_set>
 #include "dogen/yarn/types/name.hpp"
@@ -45,8 +46,8 @@ public:
 
 public:
     decomposition_result(
-        const std::list<dogen::yarn::name>& names,
-        const std::list<dogen::yarn::name_tree>& name_trees,
+        const std::list<std::pair<std::string, dogen::yarn::name> >& names,
+        const std::list<std::pair<std::string, dogen::yarn::name_tree> >& name_trees,
         const std::unordered_set<std::string>& abstract_elements);
 
 private:
@@ -57,15 +58,15 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::yarn::decomposition_result& v, unsigned int version);
 
 public:
-    const std::list<dogen::yarn::name>& names() const;
-    std::list<dogen::yarn::name>& names();
-    void names(const std::list<dogen::yarn::name>& v);
-    void names(const std::list<dogen::yarn::name>&& v);
+    const std::list<std::pair<std::string, dogen::yarn::name> >& names() const;
+    std::list<std::pair<std::string, dogen::yarn::name> >& names();
+    void names(const std::list<std::pair<std::string, dogen::yarn::name> >& v);
+    void names(const std::list<std::pair<std::string, dogen::yarn::name> >&& v);
 
-    const std::list<dogen::yarn::name_tree>& name_trees() const;
-    std::list<dogen::yarn::name_tree>& name_trees();
-    void name_trees(const std::list<dogen::yarn::name_tree>& v);
-    void name_trees(const std::list<dogen::yarn::name_tree>&& v);
+    const std::list<std::pair<std::string, dogen::yarn::name_tree> >& name_trees() const;
+    std::list<std::pair<std::string, dogen::yarn::name_tree> >& name_trees();
+    void name_trees(const std::list<std::pair<std::string, dogen::yarn::name_tree> >& v);
+    void name_trees(const std::list<std::pair<std::string, dogen::yarn::name_tree> >&& v);
 
     const std::unordered_set<std::string>& abstract_elements() const;
     std::unordered_set<std::string>& abstract_elements();
@@ -83,8 +84,8 @@ public:
     decomposition_result& operator=(decomposition_result other);
 
 private:
-    std::list<dogen::yarn::name> names_;
-    std::list<dogen::yarn::name_tree> name_trees_;
+    std::list<std::pair<std::string, dogen::yarn::name> > names_;
+    std::list<std::pair<std::string, dogen::yarn::name_tree> > name_trees_;
     std::unordered_set<std::string> abstract_elements_;
 };
 
