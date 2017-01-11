@@ -1778,7 +1778,7 @@
             <dia:string>#stock_artefact_formatters_by_archetype#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, formatters::artefact_formatter_interface&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, std::shared_ptr&lt;formatters::artefact_formatter_interface&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -7613,7 +7613,7 @@
         <dia:point val="156.075,-64"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="131.412,-72.85;156.825,-63.2"/>
+        <dia:rectangle val="131.413,-72.85;156.825,-63.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -14776,7 +14776,7 @@
         <dia:point val="198.18,-61.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="195.257,-62.15;198.93,-52.2"/>
+        <dia:rectangle val="195.258,-62.15;198.93,-52.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -15850,7 +15850,7 @@
         <dia:point val="30.575,-64"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="25.99,-75.25;31.325,-62.4"/>
+        <dia:rectangle val="25.99,-75.25;31.325,-63.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -16080,7 +16080,7 @@
         <dia:point val="33.9125,-94"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="11.6712,-98.05;34.6625,-92.4"/>
+        <dia:rectangle val="11.6712,-98.75;34.6625,-93.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -16310,7 +16310,7 @@
         <dia:point val="26.04,-78"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="25.29,-90.45;34.1125,-76.4"/>
+        <dia:rectangle val="25.29,-90.45;34.1125,-77.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

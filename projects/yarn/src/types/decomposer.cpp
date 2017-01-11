@@ -33,14 +33,21 @@ namespace yarn {
 void decomposer::add_name(const name& n) {
     result_.names().push_back(n);
 }
+
+void decomposer::add_name_tree(const name_tree& nt) {
+    result_.name_trees().push_back(nt);
+}
+
 void decomposer::add_names(const std::list<name>& names) {
     for (const auto& n : names)
         add_name(n);
 }
 
 void decomposer::process_attributes(const std::list<attribute>& attrs) {
-    for (const auto& attr : attrs)
+    for (const auto& attr : attrs) {
         add_name(attr.name());
+        add_name_tree(attr.parsed_type());
+    }
 }
 
 void decomposer::process_element(const element& e) {
@@ -77,6 +84,9 @@ void decomposer::visit(const yarn::exception& e) {
 void decomposer::visit(const yarn::object& o) {
     process_element(o);
     process_attributes(o.local_attributes());
+
+    if (o.is_abstract())
+        result_.abstract_elements().insert(o.name().id());
 }
 
 void decomposer::visit(const yarn::primitive& p) {

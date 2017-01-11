@@ -46,6 +46,14 @@ inline std::size_t hash_std_list_dogen_yarn_name_tree(const std::list<dogen::yar
     return seed;
 }
 
+inline std::size_t hash_std_unordered_set_std_string(const std::unordered_set<std::string>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -56,6 +64,7 @@ std::size_t decomposition_result_hasher::hash(const decomposition_result& v) {
 
     combine(seed, hash_std_list_dogen_yarn_name(v.names()));
     combine(seed, hash_std_list_dogen_yarn_name_tree(v.name_trees()));
+    combine(seed, hash_std_unordered_set_std_string(v.abstract_elements()));
 
     return seed;
 }

@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
 #include "dogen/yarn/test_data/name_td.hpp"
 #include "dogen/yarn/test_data/name_tree_td.hpp"
 #include "dogen/yarn/test_data/decomposition_result_td.hpp"
@@ -50,6 +51,20 @@ std::list<dogen::yarn::name_tree> create_std_list_dogen_yarn_name_tree(unsigned 
     return r;
 }
 
+std::string create_std_string(const unsigned int position) {
+    std::ostringstream s;
+    s << "a_string_" << position;
+    return s.str();
+}
+
+std::unordered_set<std::string> create_std_unordered_set_std_string(unsigned int position) {
+    std::unordered_set<std::string> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(create_std_string(position + i));
+    }
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -61,6 +76,7 @@ void decomposition_result_generator::
 populate(const unsigned int position, result_type& v) {
     v.names(create_std_list_dogen_yarn_name(position + 0));
     v.name_trees(create_std_list_dogen_yarn_name_tree(position + 1));
+    v.abstract_elements(create_std_unordered_set_std_string(position + 2));
 }
 
 decomposition_result_generator::result_type

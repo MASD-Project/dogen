@@ -361,6 +361,7 @@
 				<is_child>0</is_child>
 				<is_leaf>0</is_leaf>
 				<is_final>0</is_final>
+				<is_abstract>0</is_abstract>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
 				<root_parents>
 					<count>0</count>
@@ -562,6 +563,7 @@
 				<is_child>0</is_child>
 				<is_leaf>0</is_leaf>
 				<is_final>0</is_final>
+				<is_abstract>0</is_abstract>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
 				<root_parents>
 					<count>0</count>
@@ -763,6 +765,7 @@
 				<is_child>0</is_child>
 				<is_leaf>0</is_leaf>
 				<is_final>0</is_final>
+				<is_abstract>0</is_abstract>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
 				<root_parents>
 					<count>0</count>
@@ -999,6 +1002,7 @@
 				<is_child>0</is_child>
 				<is_leaf>0</is_leaf>
 				<is_final>0</is_final>
+				<is_abstract>0</is_abstract>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
 				<root_parents>
 					<count>0</count>
@@ -1278,6 +1282,7 @@
 				<is_child>0</is_child>
 				<is_leaf>0</is_leaf>
 				<is_final>0</is_final>
+				<is_abstract>0</is_abstract>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
 				<root_parents>
 					<count>0</count>
@@ -1941,6 +1946,7 @@
 				<is_child>0</is_child>
 				<is_leaf>0</is_leaf>
 				<is_final>0</is_final>
+				<is_abstract>0</is_abstract>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
 				<root_parents>
 					<count>0</count>
@@ -2373,6 +2379,7 @@
 				<is_child>0</is_child>
 				<is_leaf>0</is_leaf>
 				<is_final>0</is_final>
+				<is_abstract>0</is_abstract>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
 				<root_parents>
 					<count>0</count>
@@ -2805,6 +2812,7 @@
 				<is_child>0</is_child>
 				<is_leaf>0</is_leaf>
 				<is_final>0</is_final>
+				<is_abstract>0</is_abstract>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
 				<root_parents>
 					<count>0</count>
@@ -3007,6 +3015,7 @@
 				<is_child>0</is_child>
 				<is_leaf>0</is_leaf>
 				<is_final>0</is_final>
+				<is_abstract>0</is_abstract>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
 				<root_parents>
 					<count>0</count>
@@ -3285,6 +3294,7 @@
 				<is_child>0</is_child>
 				<is_leaf>0</is_leaf>
 				<is_final>0</is_final>
+				<is_abstract>0</is_abstract>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
 				<root_parents>
 					<count>0</count>
@@ -3871,6 +3881,7 @@
 				<is_child>0</is_child>
 				<is_leaf>0</is_leaf>
 				<is_final>0</is_final>
+				<is_abstract>0</is_abstract>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
 				<root_parents>
 					<count>0</count>

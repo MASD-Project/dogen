@@ -68,6 +68,7 @@ const std::string invalid_string(
 const std::string reserved_keyword(
     "String matches a resvered keyword on one of the supported languages: ");
 const std::string builtin_name("String matches the name of a built in type: ");
+const std::string abstract_instance("Attempt to instantiate an abstract type: ");
 const std::string space(" ");
 
 }
@@ -79,8 +80,28 @@ bool model_validator::allow_spaces_in_built_in_types(const languages l) const {
     return l == languages::cpp;
 }
 
+decomposition_result model_validator::decompose_model(const model& m) const {
+    BOOST_LOG_SEV(lg, debug) << "Decomposing model: " << m.name().id();
+
+    /*
+     * Collect the names of all elements and attributes.
+     */
+    decomposer dc;
+    for (const auto& ptr : m.elements()) {
+        const auto& e(*ptr);
+        e.accept(dc);
+    }
+
+    /*
+     * Note that we do not add the model name itself; this is because
+     * we will validate the model's module, which is generated from
+     * the model name.
+     */
+    return dc.result();
+}
+
 void model_validator::
-sanity_check_string(const std::string& s, bool check_not_builtin) const {
+validate_string(const std::string& s, bool check_not_builtin) const {
     static std::regex name_regex("^[a-zA-Z_][a-zA-Z0-9_]*$");
     if (!std::regex_match(s, name_regex)) {
         BOOST_LOG_SEV(lg, error) << invalid_string << "'" << s << "'";
@@ -105,34 +126,13 @@ sanity_check_string(const std::string& s, bool check_not_builtin) const {
 }
 
 void model_validator::
-sanity_check_strings(const std::list<std::string>& strings) const {
+validate_strings(const std::list<std::string>& strings) const {
     for (const auto& s : strings)
-        sanity_check_string(s);
+        validate_string(s);
 }
 
-decomposition_result model_validator::decompose_model(const model& m) const {
-    BOOST_LOG_SEV(lg, debug) << "Decomposing model: " << m.name().id();
-
-    /*
-     * Collect the names of all elements and attributes.
-     */
-    decomposer dc;
-    for (const auto& ptr : m.elements()) {
-        const auto& e(*ptr);
-        e.accept(dc);
-    }
-
-    /*
-     * Note that we do not add the model name itself; this is because
-     * we will validate the model's module, which is generated from
-     * the model name.
-     */
-    return dc.result();
-}
-
-void model_validator::sanity_check_name(
-    const name& n, const bool allow_spaces_in_built_in_types) const {
-
+void model_validator::
+validate_name(const name& n, const bool allow_spaces_in_built_in_types) const {
     /*
      * Built-in types are defined at the global namespace level; if we
      * are at the global namespace level, then built-ins are valid
@@ -159,26 +159,26 @@ void model_validator::sanity_check_name(
         const auto splitted(splitter::split_delimited(n.simple(), space));
         BOOST_LOG_SEV(lg, debug) << "Splitted simple name: " << splitted;
         for (const auto& s : splitted)
-            sanity_check_string(s, check_not_builtin);
+            validate_string(s, check_not_builtin);
     } else
-        sanity_check_string(n.simple(), check_not_builtin);
+        validate_string(n.simple(), check_not_builtin);
 
-    sanity_check_strings(l.external_modules());
-    sanity_check_strings(l.model_modules());
-    sanity_check_strings(l.internal_modules());
+    validate_strings(l.external_modules());
+    validate_strings(l.model_modules());
+    validate_strings(l.internal_modules());
 
     if (!l.element().empty())
-        sanity_check_string(l.element());
+        validate_string(l.element());
 }
 
 void model_validator::
-sanity_check_all_names(const std::list<name>& names, const languages l) const {
+validate_names(const std::list<name>& names, const languages l) const {
     BOOST_LOG_SEV(lg, debug) << "Sanity checking all names.";
     std::unordered_set<std::string> ids_done;
 
     for (const auto& n : names) {
         const auto& id(n.id());
-        BOOST_LOG_SEV(lg, debug) << "Sanity checking: '" << id << "'";
+        BOOST_LOG_SEV(lg, debug) << "Validating: '" << id << "'";
 
         /*
          * Element identifier must be unique across all model
@@ -194,18 +194,54 @@ sanity_check_all_names(const std::list<name>& names, const languages l) const {
          * Element name must pass all sanity checks.
          */
         const bool allow_spaces(allow_spaces_in_built_in_types(l));
-        sanity_check_name(n, allow_spaces);
+        validate_name(n, allow_spaces);
 
         BOOST_LOG_SEV(lg, debug) << "Name is valid.";
     }
-    BOOST_LOG_SEV(lg, debug) << "Finished sanity checking all names.";
+    BOOST_LOG_SEV(lg, debug) << "Finished validating all names.";
+}
+
+void model_validator::
+validate_name_tree(const std::unordered_set<std::string>& abstract_elements,
+    const languages l, const name_tree& nt,
+    const bool inherit_opaqueness_from_parent) const {
+
+    const auto& ae(abstract_elements);
+    const auto id(nt.current().id());
+    const bool is_abstract(ae.find(id) != ae.end());
+    if (is_abstract && !inherit_opaqueness_from_parent) {
+        BOOST_LOG_SEV(lg, error) << abstract_instance << id;
+        BOOST_THROW_EXCEPTION(validation_error(abstract_instance + id));
+    }
+
+    for (const auto& c : nt.children())
+        validate_name_tree(ae, l, c, nt.are_children_opaque());
+}
+
+void model_validator::
+validate_name_trees(const std::unordered_set<std::string>& abstract_elements,
+    const languages l, const std::list<name_tree>& nts) const {
+
+    /*
+     * The only validation we perform on name trees at present is only
+     * applicable to c++.
+     */
+    if (l != languages::cpp)
+        return;
+
+    for (const auto& nt : nts) {
+        BOOST_LOG_SEV(lg, trace) << "Validating: '" << nt.identifiable() << "'";
+        validate_name_tree(abstract_elements, l, nt);
+    }
 }
 
 void model_validator::validate(const model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started validation. Model: " << m.name().id();
 
+    const auto l(m.language());
     const auto dr(decompose_model(m));
-    sanity_check_all_names(dr.names(), m.language());
+    validate_names(dr.names(), l);
+    validate_name_trees(dr.abstract_elements(), l, dr.name_trees());
 
     BOOST_LOG_SEV(lg, debug) << "Finished validation.";
 }

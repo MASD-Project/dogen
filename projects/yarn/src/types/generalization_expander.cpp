@@ -182,6 +182,11 @@ populate_generalizable_properties(const type_group& tg,
          o.is_parent(i != parent_ids.end());
 
          /*
+          * Parents are always abstract.
+          */
+         o.is_abstract(o.is_parent());
+
+         /*
           * Handle the case where the user decided to override final.
           */
          const auto is_final(make_is_final(tg, o.annotation()));

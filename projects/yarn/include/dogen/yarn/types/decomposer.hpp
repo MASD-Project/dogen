@@ -36,6 +36,7 @@ namespace yarn {
 class decomposer final : public element_visitor {
 private:
     void add_name(const name& n);
+    void add_name_tree(const name_tree& nt);
     void add_names(const std::list<name>& names);
     void process_element(const element& e);
     void process_attributes(const std::list<attribute>& attrs);

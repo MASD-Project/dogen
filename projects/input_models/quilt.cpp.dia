@@ -5720,7 +5720,7 @@ facet of the C++ language.
             <dia:string>#stock_artefact_formatters_by_archetype#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, formatters::artefact_formatter_interface&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, std::shared_ptr&lt;formatters::artefact_formatter_interface&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

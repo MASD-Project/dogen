@@ -99,6 +99,7 @@ object::object()
       is_child_(static_cast<bool>(0)),
       is_leaf_(static_cast<bool>(0)),
       is_final_(static_cast<bool>(0)),
+      is_abstract_(static_cast<bool>(0)),
       in_inheritance_relationship_(static_cast<bool>(0)),
       is_visitation_root_(static_cast<bool>(0)),
       is_visitation_leaf_(static_cast<bool>(0)),
@@ -117,6 +118,7 @@ object::object(object&& rhs)
       is_child_(std::move(rhs.is_child_)),
       is_leaf_(std::move(rhs.is_leaf_)),
       is_final_(std::move(rhs.is_final_)),
+      is_abstract_(std::move(rhs.is_abstract_)),
       in_inheritance_relationship_(std::move(rhs.in_inheritance_relationship_)),
       root_parents_(std::move(rhs.root_parents_)),
       parents_(std::move(rhs.parents_)),
@@ -151,6 +153,7 @@ object::object(
     const bool is_child,
     const bool is_leaf,
     const bool is_final,
+    const bool is_abstract,
     const bool in_inheritance_relationship,
     const std::list<dogen::yarn::name>& root_parents,
     const std::list<dogen::yarn::name>& parents,
@@ -184,6 +187,7 @@ object::object(
       is_child_(is_child),
       is_leaf_(is_leaf),
       is_final_(is_final),
+      is_abstract_(is_abstract),
       in_inheritance_relationship_(in_inheritance_relationship),
       root_parents_(root_parents),
       parents_(parents),
@@ -237,6 +241,7 @@ void object::to_stream(std::ostream& s) const {
       << "\"is_child\": " << is_child_ << ", "
       << "\"is_leaf\": " << is_leaf_ << ", "
       << "\"is_final\": " << is_final_ << ", "
+      << "\"is_abstract\": " << is_abstract_ << ", "
       << "\"in_inheritance_relationship\": " << in_inheritance_relationship_ << ", "
       << "\"root_parents\": " << root_parents_ << ", "
       << "\"parents\": " << parents_ << ", "
@@ -268,6 +273,7 @@ void object::swap(object& other) noexcept {
     swap(is_child_, other.is_child_);
     swap(is_leaf_, other.is_leaf_);
     swap(is_final_, other.is_final_);
+    swap(is_abstract_, other.is_abstract_);
     swap(in_inheritance_relationship_, other.in_inheritance_relationship_);
     swap(root_parents_, other.root_parents_);
     swap(parents_, other.parents_);
@@ -302,6 +308,7 @@ bool object::operator==(const object& rhs) const {
         is_child_ == rhs.is_child_ &&
         is_leaf_ == rhs.is_leaf_ &&
         is_final_ == rhs.is_final_ &&
+        is_abstract_ == rhs.is_abstract_ &&
         in_inheritance_relationship_ == rhs.in_inheritance_relationship_ &&
         root_parents_ == rhs.root_parents_ &&
         parents_ == rhs.parents_ &&
@@ -419,6 +426,14 @@ bool object::is_final() const {
 
 void object::is_final(const bool v) {
     is_final_ = v;
+}
+
+bool object::is_abstract() const {
+    return is_abstract_;
+}
+
+void object::is_abstract(const bool v) {
+    is_abstract_ = v;
 }
 
 bool object::in_inheritance_relationship() const {

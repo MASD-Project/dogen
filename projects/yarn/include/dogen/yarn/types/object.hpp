@@ -80,6 +80,7 @@ public:
         const bool is_child,
         const bool is_leaf,
         const bool is_final,
+        const bool is_abstract,
         const bool in_inheritance_relationship,
         const std::list<dogen::yarn::name>& root_parents,
         const std::list<dogen::yarn::name>& parents,
@@ -199,6 +200,14 @@ public:
     /**@{*/
     bool is_final() const;
     void is_final(const bool v);
+    /**@}*/
+
+    /**
+     * @brief If true, the type is an abstract type.
+     */
+    /**@{*/
+    bool is_abstract() const;
+    void is_abstract(const bool v);
     /**@}*/
 
     /**
@@ -352,6 +361,7 @@ private:
     bool is_child_;
     bool is_leaf_;
     bool is_final_;
+    bool is_abstract_;
     bool in_inheritance_relationship_;
     std::list<dogen::yarn::name> root_parents_;
     std::list<dogen::yarn::name> parents_;

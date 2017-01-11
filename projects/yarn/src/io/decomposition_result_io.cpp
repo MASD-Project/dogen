@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include <boost/algorithm/string.hpp>
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/io/name_tree_io.hpp"
 #include "dogen/yarn/io/decomposition_result_io.hpp"
@@ -51,6 +52,27 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::yarn::na
 
 }
 
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::string>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << tidy_up_string(*i) << "\"";
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace yarn {
 
@@ -58,7 +80,8 @@ std::ostream& operator<<(std::ostream& s, const decomposition_result& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::decomposition_result\"" << ", "
       << "\"names\": " << v.names() << ", "
-      << "\"name_trees\": " << v.name_trees()
+      << "\"name_trees\": " << v.name_trees() << ", "
+      << "\"abstract_elements\": " << v.abstract_elements()
       << " }";
     return(s);
 }
