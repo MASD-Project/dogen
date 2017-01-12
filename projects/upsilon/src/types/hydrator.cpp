@@ -23,5 +23,25 @@
 namespace dogen {
 namespace upsilon {
 
+config hydrator::hydrate_config(boost::filesystem::path /*f*/) {
+    config r;
+    return r;
+}
+
+schema hydrator::hydrate_schema(boost::filesystem::path /*f*/) {
+    schema r;
+    return r;
+}
+
+type_information hydrator::
+hydrate_type_information(boost::filesystem::path /*f*/) {
+    type_information r;
+    return r;
+}
+
+model hydrator::hydrate(boost::filesystem::path /*config_file*/) {
+    model r;
+    return r;
+}
 
 } }

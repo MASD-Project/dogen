@@ -2560,13 +2560,13 @@ formats, it will be deprecated.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O20">
       <dia:attribute name="obj_pos">
-        <dia:point val="77,14"/>
+        <dia:point val="73,11"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="76.95,13.95;85.2575,17.65"/>
+        <dia:rectangle val="72.95,10.95;81.2575,14.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="77,14"/>
+        <dia:point val="73,11"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="8.2074999999999996"/>
@@ -2717,13 +2717,13 @@ formats, it will be deprecated.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O21">
       <dia:attribute name="obj_pos">
-        <dia:point val="95,14"/>
+        <dia:point val="95,11"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="94.95,13.95;109.025,18.45"/>
+        <dia:rectangle val="94.95,10.95;109.025,15.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="95,14"/>
+        <dia:point val="95,11"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="13.975"/>
@@ -3247,16 +3247,16 @@ formats, it will be deprecated.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="95,18.4"/>
+        <dia:point val="95,15.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="87.665,17.65;95.75,28.6"/>
+        <dia:rectangle val="87.665,14.65;95.75,28.6"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="95,18.4"/>
+        <dia:point val="95,15.4"/>
         <dia:point val="95,23"/>
         <dia:point val="87.715,23"/>
         <dia:point val="87.715,27"/>
@@ -3318,16 +3318,16 @@ formats, it will be deprecated.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="101.987,18.4"/>
+        <dia:point val="101.987,15.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="101.237,17.65;102.737,28.6"/>
+        <dia:rectangle val="101.237,14.65;102.737,28.6"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="101.987,18.4"/>
+        <dia:point val="101.987,15.4"/>
         <dia:point val="101.987,23"/>
         <dia:point val="102.025,23"/>
         <dia:point val="102.025,27"/>
@@ -3546,16 +3546,16 @@ formats, it will be deprecated.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="108.975,18.4"/>
+        <dia:point val="108.975,15.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="108.225,17.65;120.728,28.6"/>
+        <dia:rectangle val="108.225,14.65;120.728,28.6"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="108.975,18.4"/>
+        <dia:point val="108.975,15.4"/>
         <dia:point val="108.975,23"/>
         <dia:point val="120.528,23"/>
         <dia:point val="120.528,27"/>
@@ -4473,7 +4473,7 @@ formats, it will be deprecated.
         <dia:point val="79.105,4.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="78.355,3.45;81.3038,15.5528"/>
+        <dia:rectangle val="77.0538,3.45;79.855,12.5502"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4481,8 +4481,8 @@ formats, it will be deprecated.
       <dia:attribute name="orth_points">
         <dia:point val="79.105,4.2"/>
         <dia:point val="79.105,8"/>
-        <dia:point val="81.1038,8"/>
-        <dia:point val="81.1038,13.9528"/>
+        <dia:point val="77.1038,8"/>
+        <dia:point val="77.1038,10.9502"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -4544,7 +4544,7 @@ formats, it will be deprecated.
         <dia:point val="88.21,4.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="87.46,3.45;102.188,15.6"/>
+        <dia:rectangle val="87.46,3.45;102.188,12.6"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4553,7 +4553,7 @@ formats, it will be deprecated.
         <dia:point val="88.21,4.2"/>
         <dia:point val="88.21,8"/>
         <dia:point val="101.987,8"/>
-        <dia:point val="101.987,14"/>
+        <dia:point val="101.987,11"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

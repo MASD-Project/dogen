@@ -26,20 +26,22 @@
 #endif
 
 #include <boost/filesystem/path.hpp>
+#include "dogen/upsilon/types/model.hpp"
+#include "dogen/upsilon/types/schema.hpp"
+#include "dogen/upsilon/types/config.hpp"
+#include "dogen/upsilon/types/type_information.hpp"
 
 namespace dogen {
 namespace upsilon {
 
 class hydrator final {
 public:
-    hydrator() = delete;
-    hydrator(const hydrator&) = delete;
-    ~hydrator() = default;
-    hydrator(hydrator&&) = default;
-    hydrator& operator=(const hydrator&) = delete;
+    config hydrate_config(boost::filesystem::path f);
+    schema hydrate_schema(boost::filesystem::path f);
+    type_information hydrate_type_information(boost::filesystem::path f);
 
 public:
-    hydrator(boost::filesystem::path file_name);
+    model hydrate(boost::filesystem::path config_file);
 };
 
 } }
