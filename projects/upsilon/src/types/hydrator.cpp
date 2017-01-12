@@ -33,6 +33,10 @@ const std::string directory_name("Directory");
 const std::string public_name("Public");
 const std::string private_name("Private");
 const std::string value_name("Value");
+const std::string name_name("Name");
+const std::string file_name("File");
+const std::string schema_refs_name("SchemaRefs");
+const std::string schema_ref_name("SchemaRef");
 
 }
 
@@ -45,6 +49,7 @@ public:
 
 private:
     directory read_directory();
+    std::list<schema_ref> read_schema_refs();
 
 public:
     config hydrate();
@@ -82,6 +87,30 @@ directory config_hydrator::read_directory() {
     return r;
 }
 
+std::list<schema_ref> config_hydrator::read_schema_refs() {
+    reader_.validate_current_element(schema_refs_name);
+    BOOST_LOG_SEV(lg, debug) << "Reading Schema Refs.";
+
+    std::list<schema_ref> r;
+    reader_.move_next();
+
+    do {
+        if (reader_.is_start_element(schema_ref_name)) {
+            schema_ref sr;
+            sr.name(reader_.get_attribute<std::string>(name_name));
+            sr.file(reader_.get_attribute<std::string>(file_name));
+            r.push_back(sr);
+        } else {
+            BOOST_LOG_SEV(lg, warn) << "Unsupported element: "
+                                    << reader_.name();
+        }
+
+        reader_.move_next();
+    } while (!reader_.is_end_element(schema_refs_name));
+
+    return r;
+}
+
 config config_hydrator::hydrate() {
     reader_.next_element(config_name);
     BOOST_LOG_SEV(lg, debug) << "Reading Config.";
@@ -92,6 +121,8 @@ config config_hydrator::hydrate() {
     do {
         if (reader_.is_start_element(directory_name))
             r.directory(read_directory());
+        if (reader_.is_start_element(schema_refs_name))
+            r.schema_refs(read_schema_refs());
         else {
             BOOST_LOG_SEV(lg, warn) << "Unsupported element: "
                                     << reader_.name();
