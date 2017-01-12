@@ -21,9 +21,14 @@
 #include <list>
 #include <vector>
 #include <algorithm>
+#include <boost/make_shared.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/xml/text_reader.hpp"
 #include "dogen/upsilon/types/hydration_error.hpp"
+#include "dogen/upsilon/types/primitive.hpp"
+#include "dogen/upsilon/types/compound.hpp"
+#include "dogen/upsilon/types/enumeration.hpp"
+#include "dogen/upsilon/types/collection.hpp"
 #include "dogen/upsilon/types/hydrator.hpp"
 
 namespace {
@@ -59,10 +64,28 @@ const std::string dependencies_name("Dependencies");
 const std::string tags_name("Tags");
 const std::string comment_name("Comment");
 const std::string text_name("Text");
+const std::string id_name("Id");
+const std::string tag_refs_name("TagRefs");
+const std::string extends_name("Extends");
+const std::string intrinsic_name("Intrinsic");
+const std::string default_name("Default");
+const std::string xsi_type_name("xsi:type");
 
 const std::string target_java("JAVA");
 const std::string target_cpp("CPP");
 const std::string target_cs("CS");
+
+const std::string intrinsic_types_integer("Integer");
+const std::string intrinsic_types_binary("Binary");
+const std::string intrinsic_types_boolean("Boolean");
+const std::string intrinsic_types_date("Date");
+const std::string intrinsic_types_decimal("Decimal");
+const std::string intrinsic_types_double("Double");
+const std::string intrinsic_types_guid("Guid");
+const std::string intrinsic_types_integer64("Integer64");
+const std::string intrinsic_types_string("String");
+const std::string intrinsic_types_utc_time("UtcTime");
+const std::string intrinsic_types_utc_date_time("UtcDateTime");
 
 const std::string unsupported_value("Unsupported attribute value: ");
 
@@ -339,8 +362,18 @@ private:
     void log_unsupported_element();
 
 private:
+    intrinsic_types to_intrinsic_types(const std::string& s) const;
+
+private:
     std::vector<dependency> read_dependencies();
     tag read_tag();
+
+    bool read_type_base_fields(type& t);
+    boost::shared_ptr<type> read_primitive();
+    boost::shared_ptr<type> read_compound();
+    boost::shared_ptr<type> read_enumeration();
+    boost::shared_ptr<type> read_collection();
+    boost::shared_ptr<type> read_type();
 
 public:
     schema hydrate();
@@ -357,6 +390,36 @@ schema_hydrator::schema_hydrator(boost::filesystem::path file_name)
 void schema_hydrator::log_unsupported_element() {
     BOOST_LOG_SEV(lg, warn) << "Unsupported element: "
                             << reader_.name();
+}
+
+intrinsic_types
+schema_hydrator::to_intrinsic_types(const std::string& s) const {
+    if (s == intrinsic_types_integer)
+        return intrinsic_types::integer;
+    else if (s == intrinsic_types_binary)
+        return intrinsic_types::binary;
+    else if (s == intrinsic_types_boolean)
+        return intrinsic_types::boolean;
+    else if (s == intrinsic_types_date)
+        return intrinsic_types::date;
+    else if (s == intrinsic_types_decimal)
+        return intrinsic_types::decimal;
+    else if (s == intrinsic_types_double)
+        return intrinsic_types::double_x;
+    else if (s == intrinsic_types_guid)
+        return intrinsic_types::guid;
+    else if (s == intrinsic_types_integer64)
+        return intrinsic_types::integer64;
+    else if (s == intrinsic_types_string)
+        return intrinsic_types::string;
+    else if (s == intrinsic_types_utc_time)
+        return intrinsic_types::utc_time;
+    else if (s == intrinsic_types_utc_date_time)
+        return intrinsic_types::utc_date_time;
+    else {
+        BOOST_LOG_SEV(lg, error) << unsupported_value << s;
+        BOOST_THROW_EXCEPTION(hydration_error(unsupported_value + s));
+    }
 }
 
 std::vector<dependency> schema_hydrator::read_dependencies() {
@@ -396,11 +459,13 @@ tag schema_hydrator::read_tag() {
     reader_.move_next();
 
     do {
-        if (reader_.is_start_element(name_name))
+        if (reader_.is_start_element(name_name)) {
+            reader_.validate_self_closing();
             r.name(reader_.get_attribute<std::string>(value_name));
-        else if (reader_.is_start_element(comment_name))
+        } else if (reader_.is_start_element(comment_name)) {
+            reader_.validate_self_closing();
             r.comment(reader_.get_attribute<std::string>(text_name));
-        else
+        } else
             log_unsupported_element();
 
         reader_.move_next();
@@ -409,6 +474,145 @@ tag schema_hydrator::read_tag() {
 
     BOOST_LOG_SEV(lg, debug) << "Read Tag.";
     return r;
+}
+
+bool schema_hydrator::read_type_base_fields(type& t) {
+    if (reader_.is_start_element(name_name)) {
+        reader_.validate_self_closing();
+        t.name(reader_.get_attribute<std::string>(value_name));
+        return true;
+    } else if (reader_.is_start_element(id_name)) {
+        reader_.validate_self_closing();
+        t.pof_id(reader_.get_attribute<std::string>(value_name));
+        return true;
+    } else if (reader_.is_start_element(comment_name)) {
+        reader_.validate_self_closing();
+        t.comment(reader_.get_attribute<std::string>(text_name));
+        return true;
+    } else if (reader_.is_start_element(extends_name)) {
+        reader_.validate_self_closing();
+        t.extends(reader_.get_attribute<std::string>(value_name));
+        return true;
+    } else if (reader_.is_start_element(tag_refs_name)) {
+        reader_.validate_self_closing();
+        t.tag_refs().push_back(
+            reader_.get_attribute<std::string>(value_name));
+        return true;
+    }
+    return false;
+}
+
+boost::shared_ptr<type> schema_hydrator::read_primitive() {
+    reader_.validate_current_element(types_name);
+    BOOST_LOG_SEV(lg, debug) << "Reading Primitive.";
+
+    auto r(boost::make_shared<primitive>());
+    reader_.move_next();
+
+    do {
+        if (read_type_base_fields(*r)) {
+            // do nothing
+        } else if (reader_.is_start_element(intrinsic_name)) {
+            reader_.validate_self_closing();
+            const auto s(reader_.get_attribute<std::string>(value_name));
+            r->intrinsic(to_intrinsic_types(s));
+        } else if (reader_.is_start_element(default_name)) {
+            reader_.validate_self_closing();
+            r->default_value(reader_.get_attribute<std::string>(value_name));
+        } else
+            log_unsupported_element();
+
+        reader_.move_next();
+    } while (!reader_.is_end_element(types_name));
+    reader_.move_next();
+
+    BOOST_LOG_SEV(lg, debug) << "Read Primitive.";
+    return r;
+}
+
+boost::shared_ptr<type> schema_hydrator::read_compound() {
+    reader_.validate_current_element(types_name);
+    BOOST_LOG_SEV(lg, debug) << "Reading Compound.";
+
+    auto r(boost::make_shared<compound>());
+    reader_.move_next();
+
+    do {
+        if (read_type_base_fields(*r)) {
+            // do nothing
+        } else
+            log_unsupported_element();
+
+        reader_.move_next();
+    } while (!reader_.is_end_element(types_name));
+    reader_.move_next();
+
+    BOOST_LOG_SEV(lg, debug) << "Read Compound.";
+    return r;
+}
+
+boost::shared_ptr<type> schema_hydrator::read_enumeration() {
+    reader_.validate_current_element(types_name);
+    BOOST_LOG_SEV(lg, debug) << "Reading Enumeration.";
+
+    auto r(boost::make_shared<enumeration>());
+    reader_.move_next();
+
+    do {
+        if (read_type_base_fields(*r)) {
+            // do nothing
+        } else
+            log_unsupported_element();
+
+        reader_.move_next();
+    } while (!reader_.is_end_element(types_name));
+    reader_.move_next();
+
+    BOOST_LOG_SEV(lg, debug) << "Read Enumeration.";
+    return r;
+}
+
+boost::shared_ptr<type> schema_hydrator::read_collection() {
+    reader_.validate_current_element(types_name);
+    BOOST_LOG_SEV(lg, debug) << "Reading Collection.";
+
+    auto r(boost::make_shared<collection>());
+    reader_.move_next();
+
+    do {
+        if (read_type_base_fields(*r)) {
+            // do nothing
+        } else
+            log_unsupported_element();
+
+        reader_.move_next();
+    } while (!reader_.is_end_element(types_name));
+    reader_.move_next();
+
+    BOOST_LOG_SEV(lg, debug) << "Read Collection.";
+    return r;
+}
+
+boost::shared_ptr<type> schema_hydrator::read_type() {
+    reader_.validate_current_element(types_name);
+    BOOST_LOG_SEV(lg, debug) << "Reading Type.";
+
+    const auto s(reader_.get_attribute<std::string>(xsi_type_name));
+    if (s == "Primitive")
+        return read_primitive();
+    else if (s == "Compound")
+        return read_compound();
+    else if (s == "Enumeration")
+        return read_enumeration();
+    else if (s == "Collection")
+        return read_collection();
+    else {
+        BOOST_LOG_SEV(lg, warn) << "Unsupported type: " << s;
+        reader_.move_next();
+        return boost::shared_ptr<type>();
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Read Tag.";
 }
 
 schema schema_hydrator::hydrate() {
@@ -422,6 +626,7 @@ schema schema_hydrator::hydrate() {
     r.base_guid(reader_.get_attribute<std::string>(base_guid_name));
 
     std::list<tag> tags;
+    std::list<boost::shared_ptr<type>> types;
 
     reader_.move_next();
     do {
@@ -429,9 +634,11 @@ schema schema_hydrator::hydrate() {
             r.dependencies(read_dependencies());
         else if (reader_.is_start_element(tags_name))
             tags.push_back(read_tag());
-        // else if (reader_.is_start_element(outputs_name))
-        //     r.outputs(read_outputs());
-        else {
+        else if (reader_.is_start_element(types_name)) {
+            const auto t(read_type());
+            if (t)
+                types.push_back(t);
+        } else {
             log_unsupported_element();
             reader_.move_next();
         }
@@ -440,7 +647,10 @@ schema schema_hydrator::hydrate() {
     r.tags().reserve(tags.size());
     std::copy(tags.begin(), tags.end(), std::back_inserter(r.tags()));
 
-    BOOST_LOG_SEV(lg, debug) << "Schema.";
+    r.types().reserve(types.size());
+    std::copy(types.begin(), types.end(), std::back_inserter(r.types()));
+
+    BOOST_LOG_SEV(lg, debug) << "Read Schema.";
     return r;
 }
 
