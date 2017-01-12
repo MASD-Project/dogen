@@ -100,14 +100,29 @@ BOOST_AUTO_TEST_CASE(hydrating_phi_model_typeinfos_results_in_expected_object) {
     BOOST_CHECK(a[3].pof_id() == "5154");
 }
 
-BOOST_AUTO_TEST_CASE(hydrating_phi_model_results_in_expected_object) {
-    SETUP_TEST_LOG_SOURCE("hydrating_phi_model_model_results_in_expected_object");
+BOOST_AUTO_TEST_CASE(hydrating_phi_schema_results_in_expected_object) {
+    SETUP_TEST_LOG_SOURCE("hydrating_phi_schema_model_results_in_expected_object");
 
     using dogen::utility::test_data::yarn_upsilon;
     const auto input(yarn_upsilon::input_phi_model_xml());
     dogen::upsilon::hydrator h;
-    const auto a(h.hydrate(input));
+    const auto a(h.hydrate_schema(input));
     BOOST_LOG_SEV(lg, debug) << "actual: " << a;
+
+    BOOST_CHECK(a.name() == "Phi");
+    BOOST_CHECK(a.id_min() == "1001");
+    BOOST_CHECK(a.id_max() == "10000");
+    BOOST_CHECK(a.base_guid() == "469C1EBC-57F8-458A-A892-1FF640846124");
+
+    BOOST_REQUIRE(a.dependencies().size() == 1);
+    BOOST_CHECK(a.dependencies()[0].name() == "Zeta");
+
+    BOOST_REQUIRE(a.tags().size() == 2);
+    BOOST_CHECK(a.tags()[0].name() == "Configuration");
+    BOOST_CHECK(a.tags()[0].comment() ==
+        "Types that represent configurations.");
+    BOOST_CHECK(a.tags()[1].name() == "AnotherTag");
+    BOOST_CHECK(a.tags()[1].comment() == "Another Comment");
 }
 
 BOOST_AUTO_TEST_CASE(hydrating_zeta_model_typeinfos_results_in_expected_object) {
@@ -136,14 +151,24 @@ BOOST_AUTO_TEST_CASE(hydrating_zeta_model_typeinfos_results_in_expected_object) 
     BOOST_CHECK(a[4].pof_id() == "1155");
 }
 
-BOOST_AUTO_TEST_CASE(hydrating_zeta_model_results_in_expected_object) {
-    SETUP_TEST_LOG_SOURCE("hydrating_zeta_model_model_results_in_expected_object");
+BOOST_AUTO_TEST_CASE(hydrating_zeta_schema_results_in_expected_object) {
+    SETUP_TEST_LOG_SOURCE("hydrating_zeta_schema_model_results_in_expected_object");
 
     using dogen::utility::test_data::yarn_upsilon;
     const auto input(yarn_upsilon::input_zeta_model_xml());
     dogen::upsilon::hydrator h;
-    const auto a(h.hydrate(input));
+    const auto a(h.hydrate_schema(input));
     BOOST_LOG_SEV(lg, debug) << "actual: " << a;
+
+    BOOST_CHECK(a.name() == "Zeta");
+    BOOST_CHECK(a.id_min() == "1100");
+    BOOST_CHECK(a.id_max() == "1500");
+    BOOST_CHECK(a.base_guid() == "23188BEF-A85B-4CC2-AE27-508CE5EE286E");
+    BOOST_CHECK(a.dependencies().empty());
+
+    BOOST_REQUIRE(a.tags().size() == 1);
+    BOOST_CHECK(a.tags()[0].name() == "ZetaTypes");
+    BOOST_CHECK(a.tags()[0].comment().empty());
 }
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -325,7 +325,7 @@ formats, it will be deprecated.
             <dia:string>#dependencies#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;dependency&gt;#</dia:string>
+            <dia:string>#std::vector&lt;dependency&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

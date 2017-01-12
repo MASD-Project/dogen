@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include <list>
 #include <string>
 #include <vector>
 #include <algorithm>
@@ -51,7 +50,7 @@ public:
         const std::string& id_min,
         const std::string& id_max,
         const std::string& base_guid,
-        const std::list<dogen::upsilon::dependency>& dependencies,
+        const std::vector<dogen::upsilon::dependency>& dependencies,
         const std::vector<dogen::upsilon::tag>& tags,
         const std::vector<boost::shared_ptr<dogen::upsilon::type> >& types);
 
@@ -83,10 +82,10 @@ public:
     void base_guid(const std::string& v);
     void base_guid(const std::string&& v);
 
-    const std::list<dogen::upsilon::dependency>& dependencies() const;
-    std::list<dogen::upsilon::dependency>& dependencies();
-    void dependencies(const std::list<dogen::upsilon::dependency>& v);
-    void dependencies(const std::list<dogen::upsilon::dependency>&& v);
+    const std::vector<dogen::upsilon::dependency>& dependencies() const;
+    std::vector<dogen::upsilon::dependency>& dependencies();
+    void dependencies(const std::vector<dogen::upsilon::dependency>& v);
+    void dependencies(const std::vector<dogen::upsilon::dependency>&& v);
 
     const std::vector<dogen::upsilon::tag>& tags() const;
     std::vector<dogen::upsilon::tag>& tags();
@@ -113,7 +112,7 @@ private:
     std::string id_min_;
     std::string id_max_;
     std::string base_guid_;
-    std::list<dogen::upsilon::dependency> dependencies_;
+    std::vector<dogen::upsilon::dependency> dependencies_;
     std::vector<dogen::upsilon::tag> tags_;
     std::vector<boost::shared_ptr<dogen::upsilon::type> > types_;
 };

@@ -42,7 +42,8 @@ const std::string file_name("File");
 const std::string target_name("Target");
 const std::string pof_name("Pof");
 const std::string pof_id_name("pofId");
-const std::string schema_name("SchemaName");
+const std::string schema_name("Schema");
+const std::string schema_name_name("SchemaName");
 const std::string schema_refs_name("SchemaRefs");
 const std::string schema_ref_name("SchemaRef");
 const std::string outputs_name("Outputs");
@@ -51,6 +52,13 @@ const std::string representations_name("Representations");
 const std::string representation_name("Representation");
 const std::string type_info_name("TypeInfo");
 const std::string types_name("Types");
+const std::string id_min_name("IdMin");
+const std::string id_max_name("IdMax");
+const std::string base_guid_name("BaseGuid");
+const std::string dependencies_name("Dependencies");
+const std::string tags_name("Tags");
+const std::string comment_name("Comment");
+const std::string text_name("Text");
 
 const std::string target_java("JAVA");
 const std::string target_cpp("CPP");
@@ -206,7 +214,7 @@ output config_hydrator::read_output() {
     BOOST_LOG_SEV(lg, debug) << "Reading Output.";
 
     output r;
-    r.schema_name(reader_.get_attribute<std::string>(schema_name));
+    r.schema_name(reader_.get_attribute<std::string>(schema_name_name));
     reader_.move_next();
 
     do {
@@ -280,7 +288,6 @@ private:
     void log_unsupported_element();
 
 public:
-
     std::vector<type_information> hydrate();
 
 private:
@@ -324,15 +331,129 @@ std::vector<type_information> type_information_hydrator::hydrate() {
     return r;
 }
 
+class schema_hydrator {
+public:
+    schema_hydrator(boost::filesystem::path file_name);
+
+private:
+    void log_unsupported_element();
+
+private:
+    std::vector<dependency> read_dependencies();
+    tag read_tag();
+
+public:
+    schema hydrate();
+
+private:
+    boost::filesystem::path file_name_;
+    utility::xml::text_reader reader_;
+};
+
+schema_hydrator::schema_hydrator(boost::filesystem::path file_name)
+    : file_name_(file_name),
+      reader_(file_name, true/*skip_whitespace*/) { }
+
+void schema_hydrator::log_unsupported_element() {
+    BOOST_LOG_SEV(lg, warn) << "Unsupported element: "
+                            << reader_.name();
+}
+
+std::vector<dependency> schema_hydrator::read_dependencies() {
+    reader_.validate_current_element(dependencies_name);
+    BOOST_LOG_SEV(lg, debug) << "Reading Dependencies.";
+
+    std::list<dependency> l;
+    reader_.move_next();
+
+    do {
+        if (reader_.is_start_element(name_name)) {
+            reader_.validate_self_closing();
+
+            dependency d;
+            d.name(reader_.get_attribute<std::string>(value_name));
+            l.push_back(d);
+        } else
+            log_unsupported_element();
+
+        reader_.move_next();
+    } while (!reader_.is_end_element(dependencies_name));
+    reader_.move_next();
+
+    std::vector<dependency> r;
+    r.reserve(l.size());
+    std::copy(l.begin(), l.end(), std::back_inserter(r));
+
+    BOOST_LOG_SEV(lg, debug) << "Read Dependencies.";
+    return r;
+}
+
+tag schema_hydrator::read_tag() {
+    reader_.validate_current_element(tags_name);
+    BOOST_LOG_SEV(lg, debug) << "Reading Tag.";
+
+    tag r;
+    reader_.move_next();
+
+    do {
+        if (reader_.is_start_element(name_name))
+            r.name(reader_.get_attribute<std::string>(value_name));
+        else if (reader_.is_start_element(comment_name))
+            r.comment(reader_.get_attribute<std::string>(text_name));
+        else
+            log_unsupported_element();
+
+        reader_.move_next();
+    } while (!reader_.is_end_element(tags_name));
+    reader_.move_next();
+
+    BOOST_LOG_SEV(lg, debug) << "Read Tag.";
+    return r;
+}
+
+schema schema_hydrator::hydrate() {
+    reader_.next_element(schema_name);
+    BOOST_LOG_SEV(lg, debug) << "Reading Schema.";
+
+    schema r;
+    r.name(reader_.get_attribute<std::string>(name_name));
+    r.id_min(reader_.get_attribute<std::string>(id_min_name));
+    r.id_max(reader_.get_attribute<std::string>(id_max_name));
+    r.base_guid(reader_.get_attribute<std::string>(base_guid_name));
+
+    std::list<tag> tags;
+
+    reader_.move_next();
+    do {
+        if (reader_.is_start_element(dependencies_name))
+            r.dependencies(read_dependencies());
+        else if (reader_.is_start_element(tags_name))
+            tags.push_back(read_tag());
+        // else if (reader_.is_start_element(outputs_name))
+        //     r.outputs(read_outputs());
+        else {
+            log_unsupported_element();
+            reader_.move_next();
+        }
+    } while (!reader_.is_end_element(schema_name));
+
+    r.tags().reserve(tags.size());
+    std::copy(tags.begin(), tags.end(), std::back_inserter(r.tags()));
+
+    BOOST_LOG_SEV(lg, debug) << "Schema.";
+    return r;
+}
+
 config hydrator::hydrate_config(boost::filesystem::path f) {
     BOOST_LOG_SEV(lg, debug) << "Hydrating config file: " << f;
     config_hydrator h(f);
     return h.hydrate();
 }
 
-schema hydrator::hydrate_schema(boost::filesystem::path /*f*/) {
-    schema r;
-    return r;
+schema hydrator::hydrate_schema(boost::filesystem::path f) {
+    BOOST_LOG_SEV(lg, debug) << "Hydrating schema file: " << f;
+    schema_hydrator h(f);
+    return h.hydrate();
 }
 
 std::vector<type_information> hydrator::

@@ -19,7 +19,6 @@
  *
  */
 #include <boost/serialization/nvp.hpp>
-#include <boost/serialization/list.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/string.hpp>

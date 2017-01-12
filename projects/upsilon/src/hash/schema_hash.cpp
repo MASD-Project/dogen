@@ -31,7 +31,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_list_dogen_upsilon_dependency(const std::list<dogen::upsilon::dependency>& v) {
+inline std::size_t hash_std_vector_dogen_upsilon_dependency(const std::vector<dogen::upsilon::dependency>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -73,7 +73,7 @@ std::size_t schema_hasher::hash(const schema& v) {
     combine(seed, v.id_min());
     combine(seed, v.id_max());
     combine(seed, v.base_guid());
-    combine(seed, hash_std_list_dogen_upsilon_dependency(v.dependencies()));
+    combine(seed, hash_std_vector_dogen_upsilon_dependency(v.dependencies()));
     combine(seed, hash_std_vector_dogen_upsilon_tag(v.tags()));
     combine(seed, hash_std_vector_boost_shared_ptr_dogen_upsilon_type(v.types()));
 

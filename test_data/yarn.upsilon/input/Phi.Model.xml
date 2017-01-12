@@ -1,6 +1,5 @@
 <?xml version="1.0"?>
-<Schema xmlns:xsi="http://www,w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www,w3.org/2001/XMLSchema" xmlns="http://tempuri.org/XMLSchema.xsd" Name="Phi" IdMin="1001" IdMax="10000" BaseGuid="469C1EBC-57F8-458A-A892-1FF640846124
-">
+<Schema xmlns:xsi="http://www,w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www,w3.org/2001/XMLSchema" xmlns="http://tempuri.org/XMLSchema.xsd" Name="Phi" IdMin="1001" IdMax="10000" BaseGuid="469C1EBC-57F8-458A-A892-1FF640846124">
     <Dependencies>
         <Name Value="Zeta"/>
     </Dependencies>

@@ -38,7 +38,7 @@ schema::schema(
     const std::string& id_min,
     const std::string& id_max,
     const std::string& base_guid,
-    const std::list<dogen::upsilon::dependency>& dependencies,
+    const std::vector<dogen::upsilon::dependency>& dependencies,
     const std::vector<dogen::upsilon::tag>& tags,
     const std::vector<boost::shared_ptr<dogen::upsilon::type> >& types)
     : name_(name),
@@ -140,19 +140,19 @@ void schema::base_guid(const std::string&& v) {
     base_guid_ = std::move(v);
 }
 
-const std::list<dogen::upsilon::dependency>& schema::dependencies() const {
+const std::vector<dogen::upsilon::dependency>& schema::dependencies() const {
     return dependencies_;
 }
 
-std::list<dogen::upsilon::dependency>& schema::dependencies() {
+std::vector<dogen::upsilon::dependency>& schema::dependencies() {
     return dependencies_;
 }
 
-void schema::dependencies(const std::list<dogen::upsilon::dependency>& v) {
+void schema::dependencies(const std::vector<dogen::upsilon::dependency>& v) {
     dependencies_ = v;
 }
 
-void schema::dependencies(const std::list<dogen::upsilon::dependency>&& v) {
+void schema::dependencies(const std::vector<dogen::upsilon::dependency>&& v) {
     dependencies_ = std::move(v);
 }
 
