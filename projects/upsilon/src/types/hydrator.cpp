@@ -18,14 +18,102 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/xml/text_reader.hpp"
+#include "dogen/upsilon/types/hydration_error.hpp"
 #include "dogen/upsilon/types/hydrator.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+auto lg(dogen::utility::log::logger_factory("upsilon.hydrator"));
+
+const std::string unexpected_eod("Unexpected end of document");
+
+const std::string config_name("Config");
+const std::string directory_name("Directory");
+const std::string public_name("Public");
+const std::string private_name("Private");
+const std::string value_name("Value");
+
+}
 
 namespace dogen {
 namespace upsilon {
 
-config hydrator::hydrate_config(boost::filesystem::path /*f*/) {
-    config r;
+class config_hydrator {
+public:
+    config_hydrator(boost::filesystem::path file_name);
+
+private:
+    directory read_directory();
+
+public:
+    config hydrate();
+
+private:
+    boost::filesystem::path file_name_;
+    utility::xml::text_reader reader_;
+};
+
+config_hydrator::config_hydrator(boost::filesystem::path file_name)
+    : file_name_(file_name),
+      reader_(file_name, true/*skip_whitespace*/) { }
+
+
+directory config_hydrator::read_directory() {
+    reader_.validate_current_element(directory_name);
+    BOOST_LOG_SEV(lg, debug) << "Reading Directory.";
+
+    directory r;
+    if (!reader_.read()) {
+        BOOST_LOG_SEV(lg, error) << unexpected_eod;
+        BOOST_THROW_EXCEPTION(hydration_error(unexpected_eod));
+    }
+
+    do {
+        if (reader_.is_start_element(public_name))
+            r.public_location(reader_.get_attribute<std::string>(value_name));
+        else if (reader_.is_start_element(private_name))
+            r.private_location(reader_.get_attribute<std::string>(value_name));
+
+        if (!reader_.read()) {
+            BOOST_LOG_SEV(lg, error) << unexpected_eod;
+            BOOST_THROW_EXCEPTION(hydration_error(unexpected_eod));
+        }
+    } while (!reader_.is_end_element(directory_name));
+
     return r;
+}
+
+config config_hydrator::hydrate() {
+    reader_.next_element(config_name);
+    BOOST_LOG_SEV(lg, debug) << "Reading Config.";
+
+    if (!reader_.read()) {
+        BOOST_LOG_SEV(lg, error) << unexpected_eod;
+        BOOST_THROW_EXCEPTION(hydration_error(unexpected_eod));
+    }
+
+    config r;
+    do {
+        if (reader_.is_start_element(directory_name))
+            r.directory(read_directory());
+
+        if (!reader_.read()) {
+            BOOST_LOG_SEV(lg, error) << unexpected_eod;
+            BOOST_THROW_EXCEPTION(hydration_error(unexpected_eod));
+        }
+
+    } while (!reader_.is_end_element(config_name));
+
+    return r;
+}
+
+config hydrator::hydrate_config(boost::filesystem::path f) {
+    BOOST_LOG_SEV(lg, debug) << "Hydrating config file: " << f;
+    config_hydrator h(f);
+    return h.hydrate();
 }
 
 schema hydrator::hydrate_schema(boost::filesystem::path /*f*/) {

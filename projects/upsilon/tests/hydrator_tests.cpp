@@ -37,6 +37,9 @@ const std::string empty;
 const std::string test_module("upsilon");
 const std::string test_suite("hydrator_tests");
 
+const std::string public_location("projects/test_models/common");
+const std::string private_location("projects/test_models");
+
 }
 
 BOOST_AUTO_TEST_SUITE(hydrator_tests)
@@ -49,6 +52,10 @@ BOOST_AUTO_TEST_CASE(hydrating_config_results_in_expected_object) {
     dogen::upsilon::hydrator h;
     const auto a(h.hydrate_config(input));
     BOOST_LOG_SEV(lg, debug) << "actual: " << a;
+
+    BOOST_CHECK(a.directory().public_location() == public_location);
+    BOOST_CHECK(a.directory().private_location() == private_location);
+
 }
 
 BOOST_AUTO_TEST_CASE(hydrating_phi_model_typeinfos_results_in_expected_object) {
