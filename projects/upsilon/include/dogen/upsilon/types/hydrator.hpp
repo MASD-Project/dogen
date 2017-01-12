@@ -38,7 +38,8 @@ class hydrator final {
 public:
     config hydrate_config(boost::filesystem::path f);
     schema hydrate_schema(boost::filesystem::path f);
-    type_information hydrate_type_information(boost::filesystem::path f);
+    std::vector<type_information>
+    hydrate_type_information(boost::filesystem::path f);
 
 public:
     model hydrate(boost::filesystem::path config_file);

@@ -19,6 +19,7 @@
  *
  */
 #include <boost/test/unit_test.hpp>
+#include "dogen/utility/io/vector_io.hpp"
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test_data/yarn_upsilon.hpp"
 #include "dogen/upsilon/types/model.hpp"
@@ -84,6 +85,19 @@ BOOST_AUTO_TEST_CASE(hydrating_phi_model_typeinfos_results_in_expected_object) {
     dogen::upsilon::hydrator h;
     const auto a(h.hydrate_type_information(input));
     BOOST_LOG_SEV(lg, debug) << "actual: " << a;
+
+    BOOST_REQUIRE(a.size() == 4);
+    BOOST_CHECK(a[0].name() == "Date");
+    BOOST_CHECK(a[0].pof_id() == "5123");
+
+    BOOST_CHECK(a[1].name() == "TestType");
+    BOOST_CHECK(a[1].pof_id() == "5124");
+
+    BOOST_CHECK(a[2].name() == "CollectionTestType");
+    BOOST_CHECK(a[2].pof_id() == "5125");
+
+    BOOST_CHECK(a[3].name() == "Enumeration");
+    BOOST_CHECK(a[3].pof_id() == "5154");
 }
 
 BOOST_AUTO_TEST_CASE(hydrating_phi_model_results_in_expected_object) {
@@ -97,13 +111,29 @@ BOOST_AUTO_TEST_CASE(hydrating_phi_model_results_in_expected_object) {
 }
 
 BOOST_AUTO_TEST_CASE(hydrating_zeta_model_typeinfos_results_in_expected_object) {
-    SETUP_TEST_LOG_SOURCE("hydrating_phi_model_typeinfos_model_results_in_expected_object");
+    SETUP_TEST_LOG_SOURCE("hydrating_zeta_model_typeinfos_results_in_expected_object");
 
     using dogen::utility::test_data::yarn_upsilon;
     const auto input(yarn_upsilon::input_zeta_model_xml_typeinfos());
     dogen::upsilon::hydrator h;
-    const auto a(h.hydrate(input));
+    const auto a(h.hydrate_type_information(input));
     BOOST_LOG_SEV(lg, debug) << "actual: " << a;
+
+    BOOST_REQUIRE(a.size() == 5);
+    BOOST_CHECK(a[0].name() == "MissingValue");
+    BOOST_CHECK(a[0].pof_id() == "1123");
+
+    BOOST_CHECK(a[1].name() == "Binary");
+    BOOST_CHECK(a[1].pof_id() == "1124");
+
+    BOOST_CHECK(a[2].name() == "Date");
+    BOOST_CHECK(a[2].pof_id() == "1125");
+
+    BOOST_CHECK(a[3].name() == "ModelValues");
+    BOOST_CHECK(a[3].pof_id() == "1154");
+
+    BOOST_CHECK(a[4].name() == "Binaries");
+    BOOST_CHECK(a[4].pof_id() == "1155");
 }
 
 BOOST_AUTO_TEST_CASE(hydrating_zeta_model_results_in_expected_object) {

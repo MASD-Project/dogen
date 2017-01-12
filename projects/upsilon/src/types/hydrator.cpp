@@ -37,9 +37,11 @@ const std::string public_name("Public");
 const std::string private_name("Private");
 const std::string value_name("Value");
 const std::string name_name("Name");
+const std::string name_lower_case_name("name");
 const std::string file_name("File");
 const std::string target_name("Target");
 const std::string pof_name("Pof");
+const std::string pof_id_name("pofId");
 const std::string schema_name("SchemaName");
 const std::string schema_refs_name("SchemaRefs");
 const std::string schema_ref_name("SchemaRef");
@@ -47,6 +49,8 @@ const std::string outputs_name("Outputs");
 const std::string output_name("Output");
 const std::string representations_name("Representations");
 const std::string representation_name("Representation");
+const std::string type_info_name("TypeInfo");
+const std::string types_name("Types");
 
 const std::string target_java("JAVA");
 const std::string target_cpp("CPP");
@@ -268,6 +272,58 @@ config config_hydrator::hydrate() {
     return r;
 }
 
+class type_information_hydrator {
+public:
+    type_information_hydrator(boost::filesystem::path file_name);
+
+private:
+    void log_unsupported_element();
+
+public:
+
+    std::vector<type_information> hydrate();
+
+private:
+    boost::filesystem::path file_name_;
+    utility::xml::text_reader reader_;
+};
+
+type_information_hydrator::
+type_information_hydrator(boost::filesystem::path file_name)
+    : file_name_(file_name),
+      reader_(file_name, true/*skip_whitespace*/) { }
+
+void type_information_hydrator::log_unsupported_element() {
+    BOOST_LOG_SEV(lg, warn) << "Unsupported element: "
+                            << reader_.name();
+}
+
+std::vector<type_information> type_information_hydrator::hydrate() {
+    reader_.next_element(types_name);
+    BOOST_LOG_SEV(lg, debug) << "Reading Type Infos.";
+
+    std::list<type_information> l;
+    reader_.move_next();
+    do {
+        reader_.validate_current_element(type_info_name);
+        reader_.validate_self_closing();
+
+        type_information ti;
+        ti.name(reader_.get_attribute<std::string>(name_lower_case_name));
+        ti.pof_id(reader_.get_attribute<std::string>(pof_id_name));
+        l.push_back(ti);
+
+        reader_.move_next();
+    } while (!reader_.is_end_element(types_name));
+
+    std::vector<type_information> r;
+    r.reserve(l.size());
+    std::copy(l.begin(), l.end(), std::back_inserter(r));
+
+    BOOST_LOG_SEV(lg, debug) << "Read Type Infos.";
+    return r;
+}
+
 config hydrator::hydrate_config(boost::filesystem::path f) {
     BOOST_LOG_SEV(lg, debug) << "Hydrating config file: " << f;
     config_hydrator h(f);
@@ -279,10 +335,10 @@ schema hydrator::hydrate_schema(boost::filesystem::path /*f*/) {
     return r;
 }
 
-type_information hydrator::
-hydrate_type_information(boost::filesystem::path /*f*/) {
-    type_information r;
-    return r;
+std::vector<type_information> hydrator::
+hydrate_type_information(boost::filesystem::path f) {
+    type_information_hydrator h(f);
+    return h.hydrate();
 }
 
 model hydrator::hydrate(boost::filesystem::path /*config_file*/) {
