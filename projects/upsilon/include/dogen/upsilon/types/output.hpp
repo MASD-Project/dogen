@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include <list>
 #include <string>
+#include <vector>
 #include <algorithm>
 #include "dogen/upsilon/types/representation.hpp"
 #include "dogen/upsilon/serialization/output_fwd_ser.hpp"
@@ -44,7 +44,7 @@ public:
 public:
     output(
         const std::string& schema_name,
-        const std::list<dogen::upsilon::representation>& representations);
+        const std::vector<dogen::upsilon::representation>& representations);
 
 private:
     template<typename Archive>
@@ -59,10 +59,10 @@ public:
     void schema_name(const std::string& v);
     void schema_name(const std::string&& v);
 
-    const std::list<dogen::upsilon::representation>& representations() const;
-    std::list<dogen::upsilon::representation>& representations();
-    void representations(const std::list<dogen::upsilon::representation>& v);
-    void representations(const std::list<dogen::upsilon::representation>&& v);
+    const std::vector<dogen::upsilon::representation>& representations() const;
+    std::vector<dogen::upsilon::representation>& representations();
+    void representations(const std::vector<dogen::upsilon::representation>& v);
+    void representations(const std::vector<dogen::upsilon::representation>&& v);
 
 public:
     bool operator==(const output& rhs) const;
@@ -76,7 +76,7 @@ public:
 
 private:
     std::string schema_name_;
-    std::list<dogen::upsilon::representation> representations_;
+    std::vector<dogen::upsilon::representation> representations_;
 };
 
 } }

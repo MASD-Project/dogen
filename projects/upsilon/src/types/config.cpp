@@ -25,8 +25,8 @@ namespace upsilon {
 
 config::config(
     const dogen::upsilon::directory& directory,
-    const std::list<dogen::upsilon::schema_ref>& schema_refs,
-    const std::list<dogen::upsilon::output>& outputs)
+    const std::vector<dogen::upsilon::schema_ref>& schema_refs,
+    const std::vector<dogen::upsilon::output>& outputs)
     : directory_(directory),
       schema_refs_(schema_refs),
       outputs_(outputs) { }
@@ -66,35 +66,35 @@ void config::directory(const dogen::upsilon::directory&& v) {
     directory_ = std::move(v);
 }
 
-const std::list<dogen::upsilon::schema_ref>& config::schema_refs() const {
+const std::vector<dogen::upsilon::schema_ref>& config::schema_refs() const {
     return schema_refs_;
 }
 
-std::list<dogen::upsilon::schema_ref>& config::schema_refs() {
+std::vector<dogen::upsilon::schema_ref>& config::schema_refs() {
     return schema_refs_;
 }
 
-void config::schema_refs(const std::list<dogen::upsilon::schema_ref>& v) {
+void config::schema_refs(const std::vector<dogen::upsilon::schema_ref>& v) {
     schema_refs_ = v;
 }
 
-void config::schema_refs(const std::list<dogen::upsilon::schema_ref>&& v) {
+void config::schema_refs(const std::vector<dogen::upsilon::schema_ref>&& v) {
     schema_refs_ = std::move(v);
 }
 
-const std::list<dogen::upsilon::output>& config::outputs() const {
+const std::vector<dogen::upsilon::output>& config::outputs() const {
     return outputs_;
 }
 
-std::list<dogen::upsilon::output>& config::outputs() {
+std::vector<dogen::upsilon::output>& config::outputs() {
     return outputs_;
 }
 
-void config::outputs(const std::list<dogen::upsilon::output>& v) {
+void config::outputs(const std::vector<dogen::upsilon::output>& v) {
     outputs_ = v;
 }
 
-void config::outputs(const std::list<dogen::upsilon::output>&& v) {
+void config::outputs(const std::vector<dogen::upsilon::output>&& v) {
     outputs_ = std::move(v);
 }
 

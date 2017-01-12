@@ -29,7 +29,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_list_dogen_upsilon_representation(const std::list<dogen::upsilon::representation>& v) {
+inline std::size_t hash_std_vector_dogen_upsilon_representation(const std::vector<dogen::upsilon::representation>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -46,7 +46,7 @@ std::size_t output_hasher::hash(const output& v) {
     std::size_t seed(0);
 
     combine(seed, v.schema_name());
-    combine(seed, hash_std_list_dogen_upsilon_representation(v.representations()));
+    combine(seed, hash_std_vector_dogen_upsilon_representation(v.representations()));
 
     return seed;
 }

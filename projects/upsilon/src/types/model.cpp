@@ -25,8 +25,8 @@ namespace upsilon {
 
 model::model(
     const dogen::upsilon::schema& target,
-    const std::list<dogen::upsilon::schema>& refs,
-    const std::list<dogen::upsilon::type_information>& type_information,
+    const std::vector<dogen::upsilon::schema>& refs,
+    const std::vector<dogen::upsilon::type_information>& type_information,
     const dogen::upsilon::config& config)
     : target_(target),
       refs_(refs),
@@ -70,35 +70,35 @@ void model::target(const dogen::upsilon::schema&& v) {
     target_ = std::move(v);
 }
 
-const std::list<dogen::upsilon::schema>& model::refs() const {
+const std::vector<dogen::upsilon::schema>& model::refs() const {
     return refs_;
 }
 
-std::list<dogen::upsilon::schema>& model::refs() {
+std::vector<dogen::upsilon::schema>& model::refs() {
     return refs_;
 }
 
-void model::refs(const std::list<dogen::upsilon::schema>& v) {
+void model::refs(const std::vector<dogen::upsilon::schema>& v) {
     refs_ = v;
 }
 
-void model::refs(const std::list<dogen::upsilon::schema>&& v) {
+void model::refs(const std::vector<dogen::upsilon::schema>&& v) {
     refs_ = std::move(v);
 }
 
-const std::list<dogen::upsilon::type_information>& model::type_information() const {
+const std::vector<dogen::upsilon::type_information>& model::type_information() const {
     return type_information_;
 }
 
-std::list<dogen::upsilon::type_information>& model::type_information() {
+std::vector<dogen::upsilon::type_information>& model::type_information() {
     return type_information_;
 }
 
-void model::type_information(const std::list<dogen::upsilon::type_information>& v) {
+void model::type_information(const std::vector<dogen::upsilon::type_information>& v) {
     type_information_ = v;
 }
 
-void model::type_information(const std::list<dogen::upsilon::type_information>&& v) {
+void model::type_information(const std::vector<dogen::upsilon::type_information>&& v) {
     type_information_ = std::move(v);
 }
 

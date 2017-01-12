@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include <list>
+#include <vector>
 #include <algorithm>
 #include "dogen/upsilon/types/output.hpp"
 #include "dogen/upsilon/types/directory.hpp"
@@ -45,8 +45,8 @@ public:
 public:
     config(
         const dogen::upsilon::directory& directory,
-        const std::list<dogen::upsilon::schema_ref>& schema_refs,
-        const std::list<dogen::upsilon::output>& outputs);
+        const std::vector<dogen::upsilon::schema_ref>& schema_refs,
+        const std::vector<dogen::upsilon::output>& outputs);
 
 private:
     template<typename Archive>
@@ -61,15 +61,15 @@ public:
     void directory(const dogen::upsilon::directory& v);
     void directory(const dogen::upsilon::directory&& v);
 
-    const std::list<dogen::upsilon::schema_ref>& schema_refs() const;
-    std::list<dogen::upsilon::schema_ref>& schema_refs();
-    void schema_refs(const std::list<dogen::upsilon::schema_ref>& v);
-    void schema_refs(const std::list<dogen::upsilon::schema_ref>&& v);
+    const std::vector<dogen::upsilon::schema_ref>& schema_refs() const;
+    std::vector<dogen::upsilon::schema_ref>& schema_refs();
+    void schema_refs(const std::vector<dogen::upsilon::schema_ref>& v);
+    void schema_refs(const std::vector<dogen::upsilon::schema_ref>&& v);
 
-    const std::list<dogen::upsilon::output>& outputs() const;
-    std::list<dogen::upsilon::output>& outputs();
-    void outputs(const std::list<dogen::upsilon::output>& v);
-    void outputs(const std::list<dogen::upsilon::output>&& v);
+    const std::vector<dogen::upsilon::output>& outputs() const;
+    std::vector<dogen::upsilon::output>& outputs();
+    void outputs(const std::vector<dogen::upsilon::output>& v);
+    void outputs(const std::vector<dogen::upsilon::output>&& v);
 
 public:
     bool operator==(const config& rhs) const;
@@ -83,8 +83,8 @@ public:
 
 private:
     dogen::upsilon::directory directory_;
-    std::list<dogen::upsilon::schema_ref> schema_refs_;
-    std::list<dogen::upsilon::output> outputs_;
+    std::vector<dogen::upsilon::schema_ref> schema_refs_;
+    std::vector<dogen::upsilon::output> outputs_;
 };
 
 } }

@@ -48,7 +48,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::upsilon:
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::upsilon::tag>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::upsilon::tag>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -78,7 +78,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<boost::shared_ptr<dogen::upsilon::type> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::vector<boost::shared_ptr<dogen::upsilon::type> >& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

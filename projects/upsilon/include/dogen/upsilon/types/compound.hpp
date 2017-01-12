@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include <list>
 #include <iosfwd>
+#include <vector>
 #include <algorithm>
 #include "dogen/upsilon/types/type.hpp"
 #include "dogen/upsilon/types/field.hpp"
@@ -50,7 +50,7 @@ public:
         const std::string& comment,
         const std::list<std::string>& tag_refs,
         const std::string& pof_id,
-        const std::list<dogen::upsilon::field>& fields);
+        const std::vector<dogen::upsilon::field>& fields);
 
 private:
     template<typename Archive>
@@ -70,10 +70,10 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
-    const std::list<dogen::upsilon::field>& fields() const;
-    std::list<dogen::upsilon::field>& fields();
-    void fields(const std::list<dogen::upsilon::field>& v);
-    void fields(const std::list<dogen::upsilon::field>&& v);
+    const std::vector<dogen::upsilon::field>& fields() const;
+    std::vector<dogen::upsilon::field>& fields();
+    void fields(const std::vector<dogen::upsilon::field>& v);
+    void fields(const std::vector<dogen::upsilon::field>&& v);
 
 public:
     bool operator==(const compound& rhs) const;
@@ -89,7 +89,7 @@ public:
     compound& operator=(compound other);
 
 private:
-    std::list<dogen::upsilon::field> fields_;
+    std::vector<dogen::upsilon::field> fields_;
 };
 
 } }

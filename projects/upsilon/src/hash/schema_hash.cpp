@@ -39,7 +39,7 @@ inline std::size_t hash_std_list_dogen_upsilon_dependency(const std::list<dogen:
     return seed;
 }
 
-inline std::size_t hash_std_list_dogen_upsilon_tag(const std::list<dogen::upsilon::tag>& v) {
+inline std::size_t hash_std_vector_dogen_upsilon_tag(const std::vector<dogen::upsilon::tag>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -53,7 +53,7 @@ inline std::size_t hash_boost_shared_ptr_dogen_upsilon_type(const boost::shared_
     return seed;
 }
 
-inline std::size_t hash_std_list_boost_shared_ptr_dogen_upsilon_type(const std::list<boost::shared_ptr<dogen::upsilon::type> >& v) {
+inline std::size_t hash_std_vector_boost_shared_ptr_dogen_upsilon_type(const std::vector<boost::shared_ptr<dogen::upsilon::type> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, hash_boost_shared_ptr_dogen_upsilon_type(i));
@@ -74,8 +74,8 @@ std::size_t schema_hasher::hash(const schema& v) {
     combine(seed, v.id_max());
     combine(seed, v.base_guid());
     combine(seed, hash_std_list_dogen_upsilon_dependency(v.dependencies()));
-    combine(seed, hash_std_list_dogen_upsilon_tag(v.tags()));
-    combine(seed, hash_std_list_boost_shared_ptr_dogen_upsilon_type(v.types()));
+    combine(seed, hash_std_vector_dogen_upsilon_tag(v.tags()));
+    combine(seed, hash_std_vector_boost_shared_ptr_dogen_upsilon_type(v.types()));
 
     return seed;
 }

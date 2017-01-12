@@ -29,7 +29,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
+inline std::size_t hash_std_vector_std_string(const std::vector<std::string>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -47,7 +47,7 @@ std::size_t enumeration_hasher::hash(const enumeration& v) {
 
     combine(seed, dynamic_cast<const dogen::upsilon::type&>(v));
 
-    combine(seed, hash_std_list_std_string(v.values()));
+    combine(seed, hash_std_vector_std_string(v.values()));
     combine(seed, v.default_value());
 
     return seed;

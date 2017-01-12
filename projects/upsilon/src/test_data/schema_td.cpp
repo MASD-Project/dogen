@@ -50,8 +50,8 @@ create_dogen_upsilon_tag(const unsigned int position) {
     return dogen::upsilon::tag_generator::create(position);
 }
 
-std::list<dogen::upsilon::tag> create_std_list_dogen_upsilon_tag(unsigned int position) {
-    std::list<dogen::upsilon::tag> r;
+std::vector<dogen::upsilon::tag> create_std_vector_dogen_upsilon_tag(unsigned int position) {
+    std::vector<dogen::upsilon::tag> r;
     for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_dogen_upsilon_tag(position + i));
     }
@@ -70,8 +70,8 @@ create_boost_shared_ptr_dogen_upsilon_type(unsigned int position) {
     return r;
 }
 
-std::list<boost::shared_ptr<dogen::upsilon::type> > create_std_list_boost_shared_ptr_dogen_upsilon_type(unsigned int position) {
-    std::list<boost::shared_ptr<dogen::upsilon::type> > r;
+std::vector<boost::shared_ptr<dogen::upsilon::type> > create_std_vector_boost_shared_ptr_dogen_upsilon_type(unsigned int position) {
+    std::vector<boost::shared_ptr<dogen::upsilon::type> > r;
     for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_boost_shared_ptr_dogen_upsilon_type(position + i));
     }
@@ -92,8 +92,8 @@ populate(const unsigned int position, result_type& v) {
     v.id_max(create_std_string(position + 2));
     v.base_guid(create_std_string(position + 3));
     v.dependencies(create_std_list_dogen_upsilon_dependency(position + 4));
-    v.tags(create_std_list_dogen_upsilon_tag(position + 5));
-    v.types(create_std_list_boost_shared_ptr_dogen_upsilon_type(position + 6));
+    v.tags(create_std_vector_dogen_upsilon_tag(position + 5));
+    v.types(create_std_vector_boost_shared_ptr_dogen_upsilon_type(position + 6));
 }
 
 schema_generator::result_type

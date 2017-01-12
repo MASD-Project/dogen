@@ -56,6 +56,12 @@ BOOST_AUTO_TEST_CASE(hydrating_config_results_in_expected_object) {
     BOOST_CHECK(a.directory().public_location() == public_location);
     BOOST_CHECK(a.directory().private_location() == private_location);
 
+    BOOST_REQUIRE(a.schema_refs().size() == 2);
+    BOOST_CHECK(a.schema_refs()[0].name() == "Zeta");
+    BOOST_CHECK(
+        a.schema_refs()[0].file() == "test_data/upsilon/Zeta.Model.xml");
+    BOOST_CHECK(a.schema_refs()[1].name() == "Phi");
+    BOOST_CHECK(a.schema_refs()[1].file() == "test_data/upsilon/Phi.Model.xml");
 }
 
 BOOST_AUTO_TEST_CASE(hydrating_phi_model_typeinfos_results_in_expected_object) {

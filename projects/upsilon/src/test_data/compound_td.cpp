@@ -29,8 +29,8 @@ create_dogen_upsilon_field(const unsigned int position) {
     return dogen::upsilon::field_generator::create(position);
 }
 
-std::list<dogen::upsilon::field> create_std_list_dogen_upsilon_field(unsigned int position) {
-    std::list<dogen::upsilon::field> r;
+std::vector<dogen::upsilon::field> create_std_vector_dogen_upsilon_field(unsigned int position) {
+    std::vector<dogen::upsilon::field> r;
     for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_dogen_upsilon_field(position + i));
     }
@@ -47,7 +47,7 @@ compound_generator::compound_generator() : position_(0) { }
 void compound_generator::
 populate(const unsigned int position, result_type& v) {
     dogen::upsilon::type_generator::populate(position, v);
-    v.fields(create_std_list_dogen_upsilon_field(position + 0));
+    v.fields(create_std_vector_dogen_upsilon_field(position + 0));
 }
 
 compound_generator::result_type

@@ -39,8 +39,8 @@ schema::schema(
     const std::string& id_max,
     const std::string& base_guid,
     const std::list<dogen::upsilon::dependency>& dependencies,
-    const std::list<dogen::upsilon::tag>& tags,
-    const std::list<boost::shared_ptr<dogen::upsilon::type> >& types)
+    const std::vector<dogen::upsilon::tag>& tags,
+    const std::vector<boost::shared_ptr<dogen::upsilon::type> >& types)
     : name_(name),
       id_min_(id_min),
       id_max_(id_max),
@@ -156,35 +156,35 @@ void schema::dependencies(const std::list<dogen::upsilon::dependency>&& v) {
     dependencies_ = std::move(v);
 }
 
-const std::list<dogen::upsilon::tag>& schema::tags() const {
+const std::vector<dogen::upsilon::tag>& schema::tags() const {
     return tags_;
 }
 
-std::list<dogen::upsilon::tag>& schema::tags() {
+std::vector<dogen::upsilon::tag>& schema::tags() {
     return tags_;
 }
 
-void schema::tags(const std::list<dogen::upsilon::tag>& v) {
+void schema::tags(const std::vector<dogen::upsilon::tag>& v) {
     tags_ = v;
 }
 
-void schema::tags(const std::list<dogen::upsilon::tag>&& v) {
+void schema::tags(const std::vector<dogen::upsilon::tag>&& v) {
     tags_ = std::move(v);
 }
 
-const std::list<boost::shared_ptr<dogen::upsilon::type> >& schema::types() const {
+const std::vector<boost::shared_ptr<dogen::upsilon::type> >& schema::types() const {
     return types_;
 }
 
-std::list<boost::shared_ptr<dogen::upsilon::type> >& schema::types() {
+std::vector<boost::shared_ptr<dogen::upsilon::type> >& schema::types() {
     return types_;
 }
 
-void schema::types(const std::list<boost::shared_ptr<dogen::upsilon::type> >& v) {
+void schema::types(const std::vector<boost::shared_ptr<dogen::upsilon::type> >& v) {
     types_ = v;
 }
 
-void schema::types(const std::list<boost::shared_ptr<dogen::upsilon::type> >&& v) {
+void schema::types(const std::vector<boost::shared_ptr<dogen::upsilon::type> >&& v) {
     types_ = std::move(v);
 }
 

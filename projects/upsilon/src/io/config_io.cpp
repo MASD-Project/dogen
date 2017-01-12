@@ -26,7 +26,7 @@
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::upsilon::schema_ref>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::upsilon::schema_ref>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -40,7 +40,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::upsilon:
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::upsilon::output>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::upsilon::output>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

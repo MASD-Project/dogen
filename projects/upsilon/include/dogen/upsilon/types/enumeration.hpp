@@ -25,9 +25,9 @@
 #pragma once
 #endif
 
-#include <list>
 #include <iosfwd>
 #include <string>
+#include <vector>
 #include <algorithm>
 #include "dogen/upsilon/types/type.hpp"
 #include "dogen/upsilon/serialization/enumeration_fwd_ser.hpp"
@@ -50,7 +50,7 @@ public:
         const std::string& comment,
         const std::list<std::string>& tag_refs,
         const std::string& pof_id,
-        const std::list<std::string>& values,
+        const std::vector<std::string>& values,
         const std::string& default_value);
 
 private:
@@ -71,10 +71,10 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
-    const std::list<std::string>& values() const;
-    std::list<std::string>& values();
-    void values(const std::list<std::string>& v);
-    void values(const std::list<std::string>&& v);
+    const std::vector<std::string>& values() const;
+    std::vector<std::string>& values();
+    void values(const std::vector<std::string>& v);
+    void values(const std::vector<std::string>&& v);
 
     const std::string& default_value() const;
     std::string& default_value();
@@ -95,7 +95,7 @@ public:
     enumeration& operator=(enumeration other);
 
 private:
-    std::list<std::string> values_;
+    std::vector<std::string> values_;
     std::string default_value_;
 };
 

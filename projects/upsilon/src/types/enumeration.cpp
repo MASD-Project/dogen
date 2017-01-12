@@ -33,7 +33,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::vector<std::string>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -54,7 +54,7 @@ enumeration::enumeration(
     const std::string& comment,
     const std::list<std::string>& tag_refs,
     const std::string& pof_id,
-    const std::list<std::string>& values,
+    const std::vector<std::string>& values,
     const std::string& default_value)
     : dogen::upsilon::type(
       name,
@@ -118,19 +118,19 @@ enumeration& enumeration::operator=(enumeration other) {
     return *this;
 }
 
-const std::list<std::string>& enumeration::values() const {
+const std::vector<std::string>& enumeration::values() const {
     return values_;
 }
 
-std::list<std::string>& enumeration::values() {
+std::vector<std::string>& enumeration::values() {
     return values_;
 }
 
-void enumeration::values(const std::list<std::string>& v) {
+void enumeration::values(const std::vector<std::string>& v) {
     values_ = v;
 }
 
-void enumeration::values(const std::list<std::string>&& v) {
+void enumeration::values(const std::vector<std::string>&& v) {
     values_ = std::move(v);
 }
 

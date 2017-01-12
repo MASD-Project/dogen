@@ -26,7 +26,7 @@
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::upsilon::field>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::upsilon::field>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -47,7 +47,7 @@ compound::compound(
     const std::string& comment,
     const std::list<std::string>& tag_refs,
     const std::string& pof_id,
-    const std::list<dogen::upsilon::field>& fields)
+    const std::vector<dogen::upsilon::field>& fields)
     : dogen::upsilon::type(
       name,
       extends,
@@ -106,19 +106,19 @@ compound& compound::operator=(compound other) {
     return *this;
 }
 
-const std::list<dogen::upsilon::field>& compound::fields() const {
+const std::vector<dogen::upsilon::field>& compound::fields() const {
     return fields_;
 }
 
-std::list<dogen::upsilon::field>& compound::fields() {
+std::vector<dogen::upsilon::field>& compound::fields() {
     return fields_;
 }
 
-void compound::fields(const std::list<dogen::upsilon::field>& v) {
+void compound::fields(const std::vector<dogen::upsilon::field>& v) {
     fields_ = v;
 }
 
-void compound::fields(const std::list<dogen::upsilon::field>&& v) {
+void compound::fields(const std::vector<dogen::upsilon::field>&& v) {
     fields_ = std::move(v);
 }
 

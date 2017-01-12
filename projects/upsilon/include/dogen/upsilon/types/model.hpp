@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include <list>
+#include <vector>
 #include <algorithm>
 #include "dogen/upsilon/types/config.hpp"
 #include "dogen/upsilon/types/schema.hpp"
@@ -45,8 +45,8 @@ public:
 public:
     model(
         const dogen::upsilon::schema& target,
-        const std::list<dogen::upsilon::schema>& refs,
-        const std::list<dogen::upsilon::type_information>& type_information,
+        const std::vector<dogen::upsilon::schema>& refs,
+        const std::vector<dogen::upsilon::type_information>& type_information,
         const dogen::upsilon::config& config);
 
 private:
@@ -62,15 +62,15 @@ public:
     void target(const dogen::upsilon::schema& v);
     void target(const dogen::upsilon::schema&& v);
 
-    const std::list<dogen::upsilon::schema>& refs() const;
-    std::list<dogen::upsilon::schema>& refs();
-    void refs(const std::list<dogen::upsilon::schema>& v);
-    void refs(const std::list<dogen::upsilon::schema>&& v);
+    const std::vector<dogen::upsilon::schema>& refs() const;
+    std::vector<dogen::upsilon::schema>& refs();
+    void refs(const std::vector<dogen::upsilon::schema>& v);
+    void refs(const std::vector<dogen::upsilon::schema>&& v);
 
-    const std::list<dogen::upsilon::type_information>& type_information() const;
-    std::list<dogen::upsilon::type_information>& type_information();
-    void type_information(const std::list<dogen::upsilon::type_information>& v);
-    void type_information(const std::list<dogen::upsilon::type_information>&& v);
+    const std::vector<dogen::upsilon::type_information>& type_information() const;
+    std::vector<dogen::upsilon::type_information>& type_information();
+    void type_information(const std::vector<dogen::upsilon::type_information>& v);
+    void type_information(const std::vector<dogen::upsilon::type_information>&& v);
 
     const dogen::upsilon::config& config() const;
     dogen::upsilon::config& config();
@@ -89,8 +89,8 @@ public:
 
 private:
     dogen::upsilon::schema target_;
-    std::list<dogen::upsilon::schema> refs_;
-    std::list<dogen::upsilon::type_information> type_information_;
+    std::vector<dogen::upsilon::schema> refs_;
+    std::vector<dogen::upsilon::type_information> type_information_;
     dogen::upsilon::config config_;
 };
 

@@ -32,7 +32,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::upsilon::representation>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::upsilon::representation>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

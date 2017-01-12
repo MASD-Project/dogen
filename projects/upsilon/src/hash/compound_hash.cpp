@@ -30,7 +30,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_list_dogen_upsilon_field(const std::list<dogen::upsilon::field>& v) {
+inline std::size_t hash_std_vector_dogen_upsilon_field(const std::vector<dogen::upsilon::field>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -48,7 +48,7 @@ std::size_t compound_hasher::hash(const compound& v) {
 
     combine(seed, dynamic_cast<const dogen::upsilon::type&>(v));
 
-    combine(seed, hash_std_list_dogen_upsilon_field(v.fields()));
+    combine(seed, hash_std_vector_dogen_upsilon_field(v.fields()));
     return seed;
 }
 

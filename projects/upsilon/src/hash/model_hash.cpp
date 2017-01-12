@@ -31,7 +31,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_list_dogen_upsilon_schema(const std::list<dogen::upsilon::schema>& v) {
+inline std::size_t hash_std_vector_dogen_upsilon_schema(const std::vector<dogen::upsilon::schema>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -39,7 +39,7 @@ inline std::size_t hash_std_list_dogen_upsilon_schema(const std::list<dogen::ups
     return seed;
 }
 
-inline std::size_t hash_std_list_dogen_upsilon_type_information(const std::list<dogen::upsilon::type_information>& v) {
+inline std::size_t hash_std_vector_dogen_upsilon_type_information(const std::vector<dogen::upsilon::type_information>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -56,8 +56,8 @@ std::size_t model_hasher::hash(const model& v) {
     std::size_t seed(0);
 
     combine(seed, v.target());
-    combine(seed, hash_std_list_dogen_upsilon_schema(v.refs()));
-    combine(seed, hash_std_list_dogen_upsilon_type_information(v.type_information()));
+    combine(seed, hash_std_vector_dogen_upsilon_schema(v.refs()));
+    combine(seed, hash_std_vector_dogen_upsilon_type_information(v.type_information()));
     combine(seed, v.config());
 
     return seed;

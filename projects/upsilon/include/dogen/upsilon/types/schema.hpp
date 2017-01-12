@@ -27,6 +27,7 @@
 
 #include <list>
 #include <string>
+#include <vector>
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
 #include "dogen/upsilon/types/tag.hpp"
@@ -51,8 +52,8 @@ public:
         const std::string& id_max,
         const std::string& base_guid,
         const std::list<dogen::upsilon::dependency>& dependencies,
-        const std::list<dogen::upsilon::tag>& tags,
-        const std::list<boost::shared_ptr<dogen::upsilon::type> >& types);
+        const std::vector<dogen::upsilon::tag>& tags,
+        const std::vector<boost::shared_ptr<dogen::upsilon::type> >& types);
 
 private:
     template<typename Archive>
@@ -87,15 +88,15 @@ public:
     void dependencies(const std::list<dogen::upsilon::dependency>& v);
     void dependencies(const std::list<dogen::upsilon::dependency>&& v);
 
-    const std::list<dogen::upsilon::tag>& tags() const;
-    std::list<dogen::upsilon::tag>& tags();
-    void tags(const std::list<dogen::upsilon::tag>& v);
-    void tags(const std::list<dogen::upsilon::tag>&& v);
+    const std::vector<dogen::upsilon::tag>& tags() const;
+    std::vector<dogen::upsilon::tag>& tags();
+    void tags(const std::vector<dogen::upsilon::tag>& v);
+    void tags(const std::vector<dogen::upsilon::tag>&& v);
 
-    const std::list<boost::shared_ptr<dogen::upsilon::type> >& types() const;
-    std::list<boost::shared_ptr<dogen::upsilon::type> >& types();
-    void types(const std::list<boost::shared_ptr<dogen::upsilon::type> >& v);
-    void types(const std::list<boost::shared_ptr<dogen::upsilon::type> >&& v);
+    const std::vector<boost::shared_ptr<dogen::upsilon::type> >& types() const;
+    std::vector<boost::shared_ptr<dogen::upsilon::type> >& types();
+    void types(const std::vector<boost::shared_ptr<dogen::upsilon::type> >& v);
+    void types(const std::vector<boost::shared_ptr<dogen::upsilon::type> >&& v);
 
 public:
     bool operator==(const schema& rhs) const;
@@ -113,8 +114,8 @@ private:
     std::string id_max_;
     std::string base_guid_;
     std::list<dogen::upsilon::dependency> dependencies_;
-    std::list<dogen::upsilon::tag> tags_;
-    std::list<boost::shared_ptr<dogen::upsilon::type> > types_;
+    std::vector<dogen::upsilon::tag> tags_;
+    std::vector<boost::shared_ptr<dogen::upsilon::type> > types_;
 };
 
 } }

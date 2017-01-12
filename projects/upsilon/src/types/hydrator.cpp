@@ -18,6 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
+#include <list>
+#include <vector>
+#include <algorithm>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/xml/text_reader.hpp"
 #include "dogen/upsilon/types/hydration_error.hpp"
@@ -49,7 +52,7 @@ public:
 
 private:
     directory read_directory();
-    std::list<schema_ref> read_schema_refs();
+    std::vector<schema_ref> read_schema_refs();
 
 public:
     config hydrate();
@@ -87,11 +90,11 @@ directory config_hydrator::read_directory() {
     return r;
 }
 
-std::list<schema_ref> config_hydrator::read_schema_refs() {
+std::vector<schema_ref> config_hydrator::read_schema_refs() {
     reader_.validate_current_element(schema_refs_name);
     BOOST_LOG_SEV(lg, debug) << "Reading Schema Refs.";
 
-    std::list<schema_ref> r;
+    std::list<schema_ref> l;
     reader_.move_next();
 
     do {
@@ -99,7 +102,7 @@ std::list<schema_ref> config_hydrator::read_schema_refs() {
             schema_ref sr;
             sr.name(reader_.get_attribute<std::string>(name_name));
             sr.file(reader_.get_attribute<std::string>(file_name));
-            r.push_back(sr);
+            l.push_back(sr);
         } else {
             BOOST_LOG_SEV(lg, warn) << "Unsupported element: "
                                     << reader_.name();
@@ -107,6 +110,10 @@ std::list<schema_ref> config_hydrator::read_schema_refs() {
 
         reader_.move_next();
     } while (!reader_.is_end_element(schema_refs_name));
+
+    std::vector<schema_ref> r;
+    r.reserve(l.size());
+    std::copy(l.begin(), l.end(), std::back_inserter(r));
 
     return r;
 }

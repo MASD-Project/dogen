@@ -35,8 +35,8 @@ create_dogen_upsilon_representation(const unsigned int position) {
     return dogen::upsilon::representation_generator::create(position);
 }
 
-std::list<dogen::upsilon::representation> create_std_list_dogen_upsilon_representation(unsigned int position) {
-    std::list<dogen::upsilon::representation> r;
+std::vector<dogen::upsilon::representation> create_std_vector_dogen_upsilon_representation(unsigned int position) {
+    std::vector<dogen::upsilon::representation> r;
     for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_dogen_upsilon_representation(position + i));
     }
@@ -53,7 +53,7 @@ output_generator::output_generator() : position_(0) { }
 void output_generator::
 populate(const unsigned int position, result_type& v) {
     v.schema_name(create_std_string(position + 0));
-    v.representations(create_std_list_dogen_upsilon_representation(position + 1));
+    v.representations(create_std_vector_dogen_upsilon_representation(position + 1));
 }
 
 output_generator::result_type

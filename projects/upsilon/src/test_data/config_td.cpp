@@ -35,8 +35,8 @@ create_dogen_upsilon_schema_ref(const unsigned int position) {
     return dogen::upsilon::schema_ref_generator::create(position);
 }
 
-std::list<dogen::upsilon::schema_ref> create_std_list_dogen_upsilon_schema_ref(unsigned int position) {
-    std::list<dogen::upsilon::schema_ref> r;
+std::vector<dogen::upsilon::schema_ref> create_std_vector_dogen_upsilon_schema_ref(unsigned int position) {
+    std::vector<dogen::upsilon::schema_ref> r;
     for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_dogen_upsilon_schema_ref(position + i));
     }
@@ -48,8 +48,8 @@ create_dogen_upsilon_output(const unsigned int position) {
     return dogen::upsilon::output_generator::create(position);
 }
 
-std::list<dogen::upsilon::output> create_std_list_dogen_upsilon_output(unsigned int position) {
-    std::list<dogen::upsilon::output> r;
+std::vector<dogen::upsilon::output> create_std_vector_dogen_upsilon_output(unsigned int position) {
+    std::vector<dogen::upsilon::output> r;
     for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_dogen_upsilon_output(position + i));
     }
@@ -66,8 +66,8 @@ config_generator::config_generator() : position_(0) { }
 void config_generator::
 populate(const unsigned int position, result_type& v) {
     v.directory(create_dogen_upsilon_directory(position + 0));
-    v.schema_refs(create_std_list_dogen_upsilon_schema_ref(position + 1));
-    v.outputs(create_std_list_dogen_upsilon_output(position + 2));
+    v.schema_refs(create_std_vector_dogen_upsilon_schema_ref(position + 1));
+    v.outputs(create_std_vector_dogen_upsilon_output(position + 2));
 }
 
 config_generator::result_type

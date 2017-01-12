@@ -25,7 +25,7 @@ namespace upsilon {
 
 output::output(
     const std::string& schema_name,
-    const std::list<dogen::upsilon::representation>& representations)
+    const std::vector<dogen::upsilon::representation>& representations)
     : schema_name_(schema_name),
       representations_(representations) { }
 
@@ -62,19 +62,19 @@ void output::schema_name(const std::string&& v) {
     schema_name_ = std::move(v);
 }
 
-const std::list<dogen::upsilon::representation>& output::representations() const {
+const std::vector<dogen::upsilon::representation>& output::representations() const {
     return representations_;
 }
 
-std::list<dogen::upsilon::representation>& output::representations() {
+std::vector<dogen::upsilon::representation>& output::representations() {
     return representations_;
 }
 
-void output::representations(const std::list<dogen::upsilon::representation>& v) {
+void output::representations(const std::vector<dogen::upsilon::representation>& v) {
     representations_ = v;
 }
 
-void output::representations(const std::list<dogen::upsilon::representation>&& v) {
+void output::representations(const std::vector<dogen::upsilon::representation>&& v) {
     representations_ = std::move(v);
 }
 
