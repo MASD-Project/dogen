@@ -53,7 +53,7 @@ notifications:
 
 deploy:
   - provider: BinTray
-    username: domaindrivenconsulting
+    username: mcraveiro
     api_key:
       secure: aeW66aeBxn5W4wOnb5Ae9L1/dYRsAyWiJatWTpKPSwEgR1diIFPUUeSqQ4jTxeF8
     subject: domaindrivenconsulting
