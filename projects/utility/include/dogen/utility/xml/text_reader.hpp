@@ -59,6 +59,35 @@ public:
 
 public:
     /**
+     * @brief Ensures the current element has the expected name.
+     */
+    void validate_current_element(std::string name) const;
+
+    /**
+     * @brief Ensures the current element is self closing.
+     */
+    void validate_self_closing() const;
+
+    /**
+     * @brief Moves to the next element and ensures it has the
+     * expected name.
+     */
+    void next_element(std::string name);
+
+    /**
+     * @brief Returns true if the current node is the start of the
+     * supplied element, false otherwise.
+     */
+    bool is_start_element(std::string element_name) const;
+
+    /**
+     * @brief Returns true if the current node is the end of the
+     * supplied element, false otherwise.
+     */
+    bool is_end_element(std::string element_name) const;
+
+public:
+    /**
      * @brief Reads the next node from the stream.
      * @return True if there's more data to read, false otherwise.
      */

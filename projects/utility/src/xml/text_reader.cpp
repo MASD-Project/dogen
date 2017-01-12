@@ -63,6 +63,9 @@ const std::string error_converting_bool("Error converting boolean value: ");
 const std::string error_converting_double("Error converting double value: ");
 const std::string error_converting_int("Error converting int value: ");
 const std::string error_converting_long("Error converting long value: ");
+const std::string error_unexpected_element("Unexpected element: ");
+const std::string error_expected_self_closing("Expected self-closing: ");
+const std::string error_unexpected_eod("Unexpected end of document");
 
 // boolean values
 const std::string bool_true("true");
@@ -264,6 +267,39 @@ text_reader::text_reader(const boost::filesystem::path& file_name,
 
 text_reader::~text_reader() {
     // required here due to uncomplete type in unique_ptr
+}
+
+void text_reader::validate_current_element(std::string name) const {
+    const auto n(this->name());
+    if (n != name || impl_->node_type() != node_types::element) {
+        BOOST_LOG_SEV(lg, error) << error_unexpected_element << n;
+        BOOST_THROW_EXCEPTION(exception(error_unexpected_element + n));
+    }
+}
+
+void text_reader::validate_self_closing() const {
+    const bool is_self_closing(is_empty());
+    if (!is_self_closing) {
+        const auto n(name());
+        BOOST_LOG_SEV(lg, error) << error_expected_self_closing << n;
+        BOOST_THROW_EXCEPTION(exception(error_expected_self_closing + n));
+    }
+}
+
+void text_reader::next_element(std::string name) {
+    if (!read()) {
+        BOOST_LOG_SEV(lg, error) << error_unexpected_eod;
+        BOOST_THROW_EXCEPTION(exception(error_unexpected_eod));
+    }
+    validate_current_element(name);
+}
+
+bool text_reader::is_start_element(std::string element_name) const {
+    return is_start_element() && name() == element_name;
+}
+
+bool text_reader::is_end_element(std::string element_name) const {
+    return is_end_element() && name() == element_name;
 }
 
 bool text_reader::read() {
