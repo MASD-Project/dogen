@@ -62,6 +62,18 @@ BOOST_AUTO_TEST_CASE(hydrating_config_results_in_expected_object) {
         a.schema_refs()[0].file() == "test_data/upsilon/Zeta.Model.xml");
     BOOST_CHECK(a.schema_refs()[1].name() == "Phi");
     BOOST_CHECK(a.schema_refs()[1].file() == "test_data/upsilon/Phi.Model.xml");
+
+    BOOST_REQUIRE(a.outputs().size() == 1);
+    const auto& o(a.outputs()[0]);
+    BOOST_REQUIRE(o.representations().size() == 3);
+
+    using dogen::upsilon::target_types;
+    BOOST_CHECK(o.representations()[0].target() == target_types::java);
+    BOOST_CHECK(!o.representations()[0].pof());
+    BOOST_CHECK(o.representations()[1].target() == target_types::cpp);
+    BOOST_CHECK(o.representations()[1].pof());
+    BOOST_CHECK(o.representations()[2].target() == target_types::cs);
+    BOOST_CHECK(!o.representations()[2].pof());
 }
 
 BOOST_AUTO_TEST_CASE(hydrating_phi_model_typeinfos_results_in_expected_object) {
