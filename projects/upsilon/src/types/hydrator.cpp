@@ -38,8 +38,21 @@ const std::string private_name("Private");
 const std::string value_name("Value");
 const std::string name_name("Name");
 const std::string file_name("File");
+const std::string target_name("Target");
+const std::string pof_name("Pof");
+const std::string schema_name("SchemaName");
 const std::string schema_refs_name("SchemaRefs");
 const std::string schema_ref_name("SchemaRef");
+const std::string outputs_name("Outputs");
+const std::string output_name("Output");
+const std::string representations_name("Representations");
+const std::string representation_name("Representation");
+
+const std::string target_java("JAVA");
+const std::string target_cpp("CPP");
+const std::string target_cs("CS");
+
+const std::string unsupported_value("Unsupported attribute value: ");
 
 }
 
@@ -51,8 +64,18 @@ public:
     config_hydrator(boost::filesystem::path file_name);
 
 private:
+    void log_unsupported_element();
+
+private:
+    target_types to_target(const std::string& s) const;
+
+private:
     directory read_directory();
     std::vector<schema_ref> read_schema_refs();
+
+    std::vector<representation> read_representations();
+    output read_output();
+    std::vector<output> read_outputs();
 
 public:
     config hydrate();
@@ -66,6 +89,23 @@ config_hydrator::config_hydrator(boost::filesystem::path file_name)
     : file_name_(file_name),
       reader_(file_name, true/*skip_whitespace*/) { }
 
+void config_hydrator::log_unsupported_element() {
+    BOOST_LOG_SEV(lg, warn) << "Unsupported element: "
+                            << reader_.name();
+}
+
+target_types config_hydrator::to_target(const std::string& s) const {
+    if (s == target_java)
+        return target_types::java;
+    else if (s == target_cpp)
+        return target_types::cpp;
+    else if (s == target_cs)
+        return target_types::cs;
+    else {
+        BOOST_LOG_SEV(lg, error) << unsupported_value << s;
+        BOOST_THROW_EXCEPTION(hydration_error(unsupported_value + s));
+    }
+}
 
 directory config_hydrator::read_directory() {
     reader_.validate_current_element(directory_name);
@@ -75,17 +115,20 @@ directory config_hydrator::read_directory() {
     reader_.move_next();
 
     do {
-        if (reader_.is_start_element(public_name))
+        if (reader_.is_start_element(public_name)) {
+            reader_.validate_self_closing();
             r.public_location(reader_.get_attribute<std::string>(value_name));
-        else if (reader_.is_start_element(private_name))
+        } else if (reader_.is_start_element(private_name)) {
+            reader_.validate_self_closing();
             r.private_location(reader_.get_attribute<std::string>(value_name));
-        else {
-            BOOST_LOG_SEV(lg, warn) << "Unsupported element: "
-                                    << reader_.name();
-        }
+        } else
+            log_unsupported_element();
 
         reader_.move_next();
     } while (!reader_.is_end_element(directory_name));
+    reader_.move_next();
+
+    BOOST_LOG_SEV(lg, debug) << "Read Directory.";
 
     return r;
 }
@@ -99,22 +142,105 @@ std::vector<schema_ref> config_hydrator::read_schema_refs() {
 
     do {
         if (reader_.is_start_element(schema_ref_name)) {
+            reader_.validate_self_closing();
+
             schema_ref sr;
             sr.name(reader_.get_attribute<std::string>(name_name));
             sr.file(reader_.get_attribute<std::string>(file_name));
             l.push_back(sr);
-        } else {
-            BOOST_LOG_SEV(lg, warn) << "Unsupported element: "
-                                    << reader_.name();
-        }
+        } else
+            log_unsupported_element();
 
         reader_.move_next();
     } while (!reader_.is_end_element(schema_refs_name));
+    reader_.move_next();
 
     std::vector<schema_ref> r;
     r.reserve(l.size());
     std::copy(l.begin(), l.end(), std::back_inserter(r));
 
+    BOOST_LOG_SEV(lg, debug) << "Read Schema Refs.";
+    return r;
+}
+
+std::vector<representation> config_hydrator::read_representations() {
+    reader_.validate_current_element(representations_name);
+    BOOST_LOG_SEV(lg, debug) << "Reading Representations.";
+
+    std::list<representation> l;
+    reader_.move_next();
+
+    do {
+        if (reader_.is_start_element(representation_name)) {
+            reader_.validate_self_closing();
+
+            representation rep;
+            const auto s(reader_.get_attribute<std::string>(target_name));
+            rep.target(to_target(s));
+            if (reader_.has_attribute(pof_name))
+                rep.pof(reader_.get_attribute_as_boolean(pof_name));
+
+            l.push_back(rep);
+        } else
+            log_unsupported_element();
+
+        reader_.move_next();
+    } while (!reader_.is_end_element(representations_name));
+    reader_.move_next();
+
+    std::vector<representation> r;
+    r.reserve(l.size());
+    std::copy(l.begin(), l.end(), std::back_inserter(r));
+
+    BOOST_LOG_SEV(lg, debug) << "Read Representations.";
+
+    return r;
+}
+
+output config_hydrator::read_output() {
+    reader_.validate_current_element(output_name);
+    BOOST_LOG_SEV(lg, debug) << "Reading Output.";
+
+    output r;
+    r.schema_name(reader_.get_attribute<std::string>(schema_name));
+    reader_.move_next();
+
+    do {
+        if (reader_.is_start_element(representations_name))
+            r.representations(read_representations());
+        else {
+            log_unsupported_element();
+            reader_.move_next();
+        }
+    } while (!reader_.is_end_element(output_name));
+    reader_.move_next();
+
+    BOOST_LOG_SEV(lg, debug) << "Read Output.";
+    return r;
+}
+
+std::vector<output> config_hydrator::read_outputs() {
+    reader_.validate_current_element(outputs_name);
+    BOOST_LOG_SEV(lg, debug) << "Reading Outputs.";
+
+    std::list<output> l;
+    reader_.move_next();
+
+    do {
+        if (reader_.is_start_element(output_name))
+            l.push_back(read_output());
+        else {
+            log_unsupported_element();
+            reader_.move_next();
+        }
+    } while (!reader_.is_end_element(outputs_name));
+    reader_.move_next();
+
+    std::vector<output> r;
+    r.reserve(l.size());
+    std::copy(l.begin(), l.end(), std::back_inserter(r));
+
+    BOOST_LOG_SEV(lg, debug) << "Read Outputs.";
     return r;
 }
 
@@ -128,16 +254,17 @@ config config_hydrator::hydrate() {
     do {
         if (reader_.is_start_element(directory_name))
             r.directory(read_directory());
-        if (reader_.is_start_element(schema_refs_name))
+        else if (reader_.is_start_element(schema_refs_name))
             r.schema_refs(read_schema_refs());
+        else if (reader_.is_start_element(outputs_name))
+            r.outputs(read_outputs());
         else {
-            BOOST_LOG_SEV(lg, warn) << "Unsupported element: "
-                                    << reader_.name();
+            log_unsupported_element();
+            reader_.move_next();
         }
-
-        reader_.move_next();
     } while (!reader_.is_end_element(config_name));
 
+    BOOST_LOG_SEV(lg, debug) << "Read Config.";
     return r;
 }
 
