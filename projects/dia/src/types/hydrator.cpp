@@ -47,7 +47,6 @@ auto lg(dogen::utility::log::logger_factory("dia.hydrator"));
 
 // exception messages
 const std::string unexpected_element("Unexpected element: ");
-const std::string unexpected_eod("Unexpected end of document");
 const std::string unsupported_value("Unsupported attribute value: ");
 const std::string unexpected_connection_type("Unexpected connection type: ");
 const std::string expected_one_inner_composite("Expected only one inner composite");
@@ -162,11 +161,7 @@ child_node hydrator_impl::read_child_node() {
     child_node child_node;
     child_node.parent(read_xml_string_attribute(dia_parent));
     reader_.validate_self_closing();
-
-    if (!reader_.read()) {
-        BOOST_LOG_SEV(lg, error) << unexpected_eod;
-        BOOST_THROW_EXCEPTION(hydration_error(unexpected_eod));
-    }
+    reader_.move_next();
     return child_node;
 }
 
@@ -260,11 +255,7 @@ attribute hydrator_impl::read_attribute() {
     attribute.name(read_xml_string_attribute(dia_name));
     BOOST_LOG_SEV(lg, debug) << "Reading attribute: " << attribute.name();
     const bool is_self_closing(reader_.is_empty());
-
-    if (!reader_.read()) {
-        BOOST_LOG_SEV(lg, error) << unexpected_eod;
-        BOOST_THROW_EXCEPTION(hydration_error(unexpected_eod));
-    }
+    reader_.move_next();
     if (is_self_closing)
         return attribute; // no more content to read related to this attribute
 
@@ -348,10 +339,7 @@ object hydrator_impl::read_object() {
     BOOST_LOG_SEV(lg, debug) << "Reading object: '" << object.id()
                              << "' of type: " << object.type();
 
-    if (!reader_.read()) {
-        BOOST_LOG_SEV(lg, error) << unexpected_eod;
-        BOOST_THROW_EXCEPTION(hydration_error(unexpected_eod));
-    }
+    reader_.move_next();
 
     std::vector<attribute> attributes;
     do {
@@ -404,10 +392,7 @@ diagram_data hydrator_impl::read_diagram_data() {
     diagram_data diagram_data;
     BOOST_LOG_SEV(lg, debug) << "Reading diagram data.";
 
-    if (!reader_.read()) {
-        BOOST_LOG_SEV(lg, error) << unexpected_eod;
-        BOOST_THROW_EXCEPTION(hydration_error(unexpected_eod));
-    }
+    reader_.move_next();
 
     std::vector<attribute> attributes;
     do {

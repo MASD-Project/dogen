@@ -28,8 +28,6 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(dogen::utility::log::logger_factory("upsilon.hydrator"));
 
-const std::string unexpected_eod("Unexpected end of document");
-
 const std::string config_name("Config");
 const std::string directory_name("Directory");
 const std::string public_name("Public");
@@ -66,21 +64,19 @@ directory config_hydrator::read_directory() {
     BOOST_LOG_SEV(lg, debug) << "Reading Directory.";
 
     directory r;
-    if (!reader_.read()) {
-        BOOST_LOG_SEV(lg, error) << unexpected_eod;
-        BOOST_THROW_EXCEPTION(hydration_error(unexpected_eod));
-    }
+    reader_.move_next();
 
     do {
         if (reader_.is_start_element(public_name))
             r.public_location(reader_.get_attribute<std::string>(value_name));
         else if (reader_.is_start_element(private_name))
             r.private_location(reader_.get_attribute<std::string>(value_name));
-
-        if (!reader_.read()) {
-            BOOST_LOG_SEV(lg, error) << unexpected_eod;
-            BOOST_THROW_EXCEPTION(hydration_error(unexpected_eod));
+        else {
+            BOOST_LOG_SEV(lg, warn) << "Unsupported element: "
+                                    << reader_.name();
         }
+
+        reader_.move_next();
     } while (!reader_.is_end_element(directory_name));
 
     return r;
@@ -90,21 +86,18 @@ config config_hydrator::hydrate() {
     reader_.next_element(config_name);
     BOOST_LOG_SEV(lg, debug) << "Reading Config.";
 
-    if (!reader_.read()) {
-        BOOST_LOG_SEV(lg, error) << unexpected_eod;
-        BOOST_THROW_EXCEPTION(hydration_error(unexpected_eod));
-    }
+    reader_.move_next();
 
     config r;
     do {
         if (reader_.is_start_element(directory_name))
             r.directory(read_directory());
-
-        if (!reader_.read()) {
-            BOOST_LOG_SEV(lg, error) << unexpected_eod;
-            BOOST_THROW_EXCEPTION(hydration_error(unexpected_eod));
+        else {
+            BOOST_LOG_SEV(lg, warn) << "Unsupported element: "
+                                    << reader_.name();
         }
 
+        reader_.move_next();
     } while (!reader_.is_end_element(config_name));
 
     return r;

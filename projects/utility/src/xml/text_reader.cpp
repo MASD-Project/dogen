@@ -294,6 +294,13 @@ void text_reader::next_element(std::string name) {
     validate_current_element(name);
 }
 
+void text_reader::move_next() {
+    if (!read()) {
+        BOOST_LOG_SEV(lg, error) << error_unexpected_eod;
+        BOOST_THROW_EXCEPTION(exception(error_unexpected_eod));
+    }
+}
+
 bool text_reader::is_start_element(std::string element_name) const {
     return is_start_element() && name() == element_name;
 }

@@ -75,6 +75,11 @@ public:
     void next_element(std::string name);
 
     /**
+     * @brief Moves to the next element, which must exist.
+     */
+    void move_next();
+
+    /**
      * @brief Returns true if the current node is the start of the
      * supplied element, false otherwise.
      */
