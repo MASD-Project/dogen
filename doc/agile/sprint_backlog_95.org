@@ -877,6 +877,7 @@ resulted in an enumeration. The error should have been picked up by
 noticing the enumerators had a type. Add a validation error for this.
 
 *** STARTED Add appveyor support for bintray                          :story:
+    CLOCK: [2017-01-12 Thu 11:02]--[2017-01-12 Thu 11:17] =>  0:15
     CLOCK: [2017-01-12 Thu 09:10]--[2017-01-12 Thu 09:43] =>  0:33
     CLOCK: [2017-01-11 Wed 22:10]--[2017-01-11 Wed 22:25] =>  0:15
     CLOCK: [2017-01-10 Tue 15:10]--[2017-01-10 Tue 16:10] =>  1:00

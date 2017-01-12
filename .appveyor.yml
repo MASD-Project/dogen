@@ -61,3 +61,5 @@ deploy:
     package: Dogen
     artifact: build/output/msvc/Release/stage/pkg/dogen-0.95.0-Windows-AMD64.msi
     version: 0.94.0
+    publish: true
+    override: true
