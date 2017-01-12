@@ -4063,7 +4063,7 @@ formats, it will be deprecated.
         <dia:point val="68,-13"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="67.95,-13.05;102.43,-7.75"/>
+        <dia:rectangle val="67.95,-13.05;102.43,-6.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="68,-13"/>
@@ -4072,13 +4072,13 @@ formats, it will be deprecated.
         <dia:real val="34.380000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.2000000000000002"/>
+        <dia:real val="6"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#hydrator#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>##</dia:string>
+        <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -4815,16 +4815,16 @@ formats, it will be deprecated.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="85.19,-7.8"/>
+        <dia:point val="85.19,-7"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="79.055,-8.55;85.94,0.6"/>
+        <dia:rectangle val="79.055,-7.75;85.94,0.6"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="85.19,-7.8"/>
+        <dia:point val="85.19,-7"/>
         <dia:point val="85.19,-4"/>
         <dia:point val="79.105,-4"/>
         <dia:point val="79.105,-1"/>

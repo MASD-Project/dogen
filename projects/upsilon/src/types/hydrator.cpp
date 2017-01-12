@@ -23,8 +23,5 @@
 namespace dogen {
 namespace upsilon {
 
-bool hydrator::operator==(const hydrator& /*rhs*/) const {
-    return true;
-}
 
 } }

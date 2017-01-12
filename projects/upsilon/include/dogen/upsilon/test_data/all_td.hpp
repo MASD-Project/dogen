@@ -33,7 +33,6 @@
 #include "dogen/upsilon/test_data/output_td.hpp"
 #include "dogen/upsilon/test_data/schema_td.hpp"
 #include "dogen/upsilon/test_data/compound_td.hpp"
-#include "dogen/upsilon/test_data/hydrator_td.hpp"
 #include "dogen/upsilon/test_data/directory_td.hpp"
 #include "dogen/upsilon/test_data/primitive_td.hpp"
 #include "dogen/upsilon/test_data/collection_td.hpp"

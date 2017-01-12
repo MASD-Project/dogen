@@ -25,33 +25,21 @@
 #pragma once
 #endif
 
-#include <algorithm>
-#include "dogen/upsilon/serialization/hydrator_fwd_ser.hpp"
+#include <boost/filesystem/path.hpp>
 
 namespace dogen {
 namespace upsilon {
 
 class hydrator final {
 public:
-    hydrator() = default;
-    hydrator(const hydrator&) = default;
-    hydrator(hydrator&&) = default;
+    hydrator() = delete;
+    hydrator(const hydrator&) = delete;
     ~hydrator() = default;
-    hydrator& operator=(const hydrator&) = default;
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::upsilon::hydrator& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::upsilon::hydrator& v, unsigned int version);
+    hydrator(hydrator&&) = default;
+    hydrator& operator=(const hydrator&) = delete;
 
 public:
-    bool operator==(const hydrator& rhs) const;
-    bool operator!=(const hydrator& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    hydrator(boost::filesystem::path file_name);
 };
 
 } }

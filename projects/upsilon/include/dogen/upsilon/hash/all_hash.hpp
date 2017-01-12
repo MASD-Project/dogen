@@ -33,7 +33,6 @@
 #include "dogen/upsilon/hash/output_hash.hpp"
 #include "dogen/upsilon/hash/schema_hash.hpp"
 #include "dogen/upsilon/hash/compound_hash.hpp"
-#include "dogen/upsilon/hash/hydrator_hash.hpp"
 #include "dogen/upsilon/hash/directory_hash.hpp"
 #include "dogen/upsilon/hash/primitive_hash.hpp"
 #include "dogen/upsilon/hash/collection_hash.hpp"

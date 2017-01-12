@@ -33,7 +33,6 @@
 #include "dogen/upsilon/serialization/output_ser.hpp"
 #include "dogen/upsilon/serialization/schema_ser.hpp"
 #include "dogen/upsilon/serialization/compound_ser.hpp"
-#include "dogen/upsilon/serialization/hydrator_ser.hpp"
 #include "dogen/upsilon/serialization/directory_ser.hpp"
 #include "dogen/upsilon/serialization/primitive_ser.hpp"
 #include "dogen/upsilon/serialization/collection_ser.hpp"
