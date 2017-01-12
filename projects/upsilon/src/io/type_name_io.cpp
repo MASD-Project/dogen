@@ -20,7 +20,6 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/upsilon/io/field_io.hpp"
 #include "dogen/upsilon/io/type_name_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -33,12 +32,11 @@ inline std::string tidy_up_string(std::string s) {
 namespace dogen {
 namespace upsilon {
 
-std::ostream& operator<<(std::ostream& s, const field& v) {
+std::ostream& operator<<(std::ostream& s, const type_name& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::upsilon::field\"" << ", "
+      << "\"__type__\": " << "\"dogen::upsilon::type_name\"" << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
-      << "\"type_name\": " << v.type_name() << ", "
-      << "\"comment\": " << "\"" << tidy_up_string(v.comment()) << "\""
+      << "\"schema_name\": " << "\"" << tidy_up_string(v.schema_name()) << "\""
       << " }";
     return(s);
 }

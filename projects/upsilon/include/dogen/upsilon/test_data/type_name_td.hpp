@@ -18,31 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UPSILON_IO_ALL_IO_HPP
-#define DOGEN_UPSILON_IO_ALL_IO_HPP
+#ifndef DOGEN_UPSILON_TEST_DATA_TYPE_NAME_TD_HPP
+#define DOGEN_UPSILON_TEST_DATA_TYPE_NAME_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/upsilon/io/tag_io.hpp"
-#include "dogen/upsilon/io/type_io.hpp"
-#include "dogen/upsilon/io/field_io.hpp"
-#include "dogen/upsilon/io/model_io.hpp"
-#include "dogen/upsilon/io/config_io.hpp"
-#include "dogen/upsilon/io/output_io.hpp"
-#include "dogen/upsilon/io/schema_io.hpp"
-#include "dogen/upsilon/io/compound_io.hpp"
-#include "dogen/upsilon/io/directory_io.hpp"
-#include "dogen/upsilon/io/primitive_io.hpp"
-#include "dogen/upsilon/io/type_name_io.hpp"
-#include "dogen/upsilon/io/collection_io.hpp"
-#include "dogen/upsilon/io/dependency_io.hpp"
-#include "dogen/upsilon/io/schema_ref_io.hpp"
-#include "dogen/upsilon/io/enumeration_io.hpp"
-#include "dogen/upsilon/io/target_types_io.hpp"
-#include "dogen/upsilon/io/representation_io.hpp"
-#include "dogen/upsilon/io/intrinsic_types_io.hpp"
-#include "dogen/upsilon/io/type_information_io.hpp"
+#include "dogen/upsilon/types/type_name.hpp"
+
+namespace dogen {
+namespace upsilon {
+
+class type_name_generator {
+public:
+    type_name_generator();
+
+public:
+    typedef dogen::upsilon::type_name result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
+
+} }
 
 #endif

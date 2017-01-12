@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/upsilon/hash/field_hash.hpp"
+#include "dogen/upsilon/hash/type_name_hash.hpp"
 
 namespace {
 

@@ -70,6 +70,8 @@ const std::string extends_name("Extends");
 const std::string intrinsic_name("Intrinsic");
 const std::string default_name("Default");
 const std::string xsi_type_name("xsi:type");
+const std::string fields_name("Fields");
+const std::string field_type_name("TypeName");
 
 const std::string target_java("JAVA");
 const std::string target_cpp("CPP");
@@ -370,6 +372,8 @@ private:
 
     bool read_type_base_fields(type& t);
     boost::shared_ptr<type> read_primitive();
+
+    field read_field();
     boost::shared_ptr<type> read_compound();
     boost::shared_ptr<type> read_enumeration();
     boost::shared_ptr<type> read_collection();
@@ -530,6 +534,38 @@ boost::shared_ptr<type> schema_hydrator::read_primitive() {
     return r;
 }
 
+field schema_hydrator::read_field() {
+    reader_.validate_current_element(fields_name);
+    BOOST_LOG_SEV(lg, debug) << "Reading Field.";
+
+    field r;
+    reader_.move_next();
+
+    do {
+        if (reader_.is_start_element(name_name)) {
+            reader_.validate_self_closing();
+            r.name(reader_.get_attribute<std::string>(value_name));
+        } else if (reader_.is_start_element(comment_name)) {
+            reader_.validate_self_closing();
+            r.comment(reader_.get_attribute<std::string>(text_name));
+        } else if (reader_.is_start_element(field_type_name)) {
+            reader_.validate_self_closing();
+            type_name tn;
+            tn.name(reader_.get_attribute<std::string>(value_name));
+            tn.schema_name(
+                reader_.get_attribute<std::string>(schema_name_name));
+            r.type_name(tn);
+        } else
+            log_unsupported_element();
+
+        reader_.move_next();
+    } while (!reader_.is_end_element(fields_name));
+    reader_.move_next();
+
+    BOOST_LOG_SEV(lg, debug) << "Read Field.";
+    return r;
+}
+
 boost::shared_ptr<type> schema_hydrator::read_compound() {
     reader_.validate_current_element(types_name);
     BOOST_LOG_SEV(lg, debug) << "Reading Compound.";
@@ -537,15 +573,21 @@ boost::shared_ptr<type> schema_hydrator::read_compound() {
     auto r(boost::make_shared<compound>());
     reader_.move_next();
 
+    std::list<field> fields;
     do {
         if (read_type_base_fields(*r)) {
-            // do nothing
-        } else
+            reader_.move_next();
+        } else if (reader_.is_start_element(fields_name)) {
+            fields.push_back(read_field());
+        } else {
             log_unsupported_element();
-
-        reader_.move_next();
+            reader_.move_next();
+        }
     } while (!reader_.is_end_element(types_name));
     reader_.move_next();
+
+    r->fields().reserve(fields.size());
+    std::copy(fields.begin(), fields.end(), std::back_inserter(r->fields()));
 
     BOOST_LOG_SEV(lg, debug) << "Read Compound.";
     return r;

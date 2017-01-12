@@ -35,6 +35,7 @@
 #include "dogen/upsilon/hash/compound_hash.hpp"
 #include "dogen/upsilon/hash/directory_hash.hpp"
 #include "dogen/upsilon/hash/primitive_hash.hpp"
+#include "dogen/upsilon/hash/type_name_hash.hpp"
 #include "dogen/upsilon/hash/collection_hash.hpp"
 #include "dogen/upsilon/hash/dependency_hash.hpp"
 #include "dogen/upsilon/hash/schema_ref_hash.hpp"

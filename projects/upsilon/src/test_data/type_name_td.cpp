@@ -19,7 +19,6 @@
  *
  */
 #include <sstream>
-#include "dogen/upsilon/test_data/field_td.hpp"
 #include "dogen/upsilon/test_data/type_name_td.hpp"
 
 namespace {
@@ -30,41 +29,35 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-dogen::upsilon::type_name
-create_dogen_upsilon_type_name(const unsigned int position) {
-    return dogen::upsilon::type_name_generator::create(position);
-}
-
 }
 
 namespace dogen {
 namespace upsilon {
 
-field_generator::field_generator() : position_(0) { }
+type_name_generator::type_name_generator() : position_(0) { }
 
-void field_generator::
+void type_name_generator::
 populate(const unsigned int position, result_type& v) {
     v.name(create_std_string(position + 0));
-    v.type_name(create_dogen_upsilon_type_name(position + 1));
-    v.comment(create_std_string(position + 2));
+    v.schema_name(create_std_string(position + 1));
 }
 
-field_generator::result_type
-field_generator::create(const unsigned int position) {
-    field r;
-    field_generator::populate(position, r);
+type_name_generator::result_type
+type_name_generator::create(const unsigned int position) {
+    type_name r;
+    type_name_generator::populate(position, r);
     return r;
 }
 
-field_generator::result_type*
-field_generator::create_ptr(const unsigned int position) {
-    field* p = new field();
-    field_generator::populate(position, *p);
+type_name_generator::result_type*
+type_name_generator::create_ptr(const unsigned int position) {
+    type_name* p = new type_name();
+    type_name_generator::populate(position, *p);
     return p;
 }
 
-field_generator::result_type
-field_generator::operator()() {
+type_name_generator::result_type
+type_name_generator::operator()() {
     return create(position_++);
 }
 

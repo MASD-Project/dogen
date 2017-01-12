@@ -18,84 +18,64 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/upsilon/types/field.hpp"
+#include "dogen/upsilon/types/type_name.hpp"
 
 namespace dogen {
 namespace upsilon {
 
-field::field(
+type_name::type_name(
     const std::string& name,
-    const dogen::upsilon::type_name& type_name,
-    const std::string& comment)
+    const std::string& schema_name)
     : name_(name),
-      type_name_(type_name),
-      comment_(comment) { }
+      schema_name_(schema_name) { }
 
-void field::swap(field& other) noexcept {
+void type_name::swap(type_name& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
-    swap(type_name_, other.type_name_);
-    swap(comment_, other.comment_);
+    swap(schema_name_, other.schema_name_);
 }
 
-bool field::operator==(const field& rhs) const {
+bool type_name::operator==(const type_name& rhs) const {
     return name_ == rhs.name_ &&
-        type_name_ == rhs.type_name_ &&
-        comment_ == rhs.comment_;
+        schema_name_ == rhs.schema_name_;
 }
 
-field& field::operator=(field other) {
+type_name& type_name::operator=(type_name other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const std::string& field::name() const {
+const std::string& type_name::name() const {
     return name_;
 }
 
-std::string& field::name() {
+std::string& type_name::name() {
     return name_;
 }
 
-void field::name(const std::string& v) {
+void type_name::name(const std::string& v) {
     name_ = v;
 }
 
-void field::name(const std::string&& v) {
+void type_name::name(const std::string&& v) {
     name_ = std::move(v);
 }
 
-const dogen::upsilon::type_name& field::type_name() const {
-    return type_name_;
+const std::string& type_name::schema_name() const {
+    return schema_name_;
 }
 
-dogen::upsilon::type_name& field::type_name() {
-    return type_name_;
+std::string& type_name::schema_name() {
+    return schema_name_;
 }
 
-void field::type_name(const dogen::upsilon::type_name& v) {
-    type_name_ = v;
+void type_name::schema_name(const std::string& v) {
+    schema_name_ = v;
 }
 
-void field::type_name(const dogen::upsilon::type_name&& v) {
-    type_name_ = std::move(v);
-}
-
-const std::string& field::comment() const {
-    return comment_;
-}
-
-std::string& field::comment() {
-    return comment_;
-}
-
-void field::comment(const std::string& v) {
-    comment_ = v;
-}
-
-void field::comment(const std::string&& v) {
-    comment_ = std::move(v);
+void type_name::schema_name(const std::string&& v) {
+    schema_name_ = std::move(v);
 }
 
 } }

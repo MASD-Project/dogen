@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UPSILON_TYPES_FIELD_HPP
-#define DOGEN_UPSILON_TYPES_FIELD_HPP
+#ifndef DOGEN_UPSILON_TYPES_TYPE_NAME_HPP
+#define DOGEN_UPSILON_TYPES_TYPE_NAME_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,31 +27,29 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen/upsilon/types/type_name.hpp"
-#include "dogen/upsilon/serialization/field_fwd_ser.hpp"
+#include "dogen/upsilon/serialization/type_name_fwd_ser.hpp"
 
 namespace dogen {
 namespace upsilon {
 
-class field final {
+class type_name final {
 public:
-    field() = default;
-    field(const field&) = default;
-    field(field&&) = default;
-    ~field() = default;
+    type_name() = default;
+    type_name(const type_name&) = default;
+    type_name(type_name&&) = default;
+    ~type_name() = default;
 
 public:
-    field(
+    type_name(
         const std::string& name,
-        const dogen::upsilon::type_name& type_name,
-        const std::string& comment);
+        const std::string& schema_name);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::upsilon::field& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::upsilon::type_name& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::upsilon::field& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::upsilon::type_name& v, unsigned int version);
 
 public:
     const std::string& name() const;
@@ -59,30 +57,24 @@ public:
     void name(const std::string& v);
     void name(const std::string&& v);
 
-    const dogen::upsilon::type_name& type_name() const;
-    dogen::upsilon::type_name& type_name();
-    void type_name(const dogen::upsilon::type_name& v);
-    void type_name(const dogen::upsilon::type_name&& v);
-
-    const std::string& comment() const;
-    std::string& comment();
-    void comment(const std::string& v);
-    void comment(const std::string&& v);
+    const std::string& schema_name() const;
+    std::string& schema_name();
+    void schema_name(const std::string& v);
+    void schema_name(const std::string&& v);
 
 public:
-    bool operator==(const field& rhs) const;
-    bool operator!=(const field& rhs) const {
+    bool operator==(const type_name& rhs) const;
+    bool operator!=(const type_name& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(field& other) noexcept;
-    field& operator=(field other);
+    void swap(type_name& other) noexcept;
+    type_name& operator=(type_name other);
 
 private:
     std::string name_;
-    dogen::upsilon::type_name type_name_;
-    std::string comment_;
+    std::string schema_name_;
 };
 
 } }
@@ -91,8 +83,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::upsilon::field& lhs,
-    dogen::upsilon::field& rhs) {
+    dogen::upsilon::type_name& lhs,
+    dogen::upsilon::type_name& rhs) {
     lhs.swap(rhs);
 }
 

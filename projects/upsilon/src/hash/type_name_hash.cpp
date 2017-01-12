@@ -18,29 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/algorithm/string.hpp>
-#include "dogen/upsilon/io/field_io.hpp"
-#include "dogen/upsilon/io/type_name_io.hpp"
+#include "dogen/upsilon/hash/type_name_hash.hpp"
 
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    return s;
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value) {
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
 }
 
 namespace dogen {
 namespace upsilon {
 
-std::ostream& operator<<(std::ostream& s, const field& v) {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::upsilon::field\"" << ", "
-      << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
-      << "\"type_name\": " << v.type_name() << ", "
-      << "\"comment\": " << "\"" << tidy_up_string(v.comment()) << "\""
-      << " }";
-    return(s);
+std::size_t type_name_hasher::hash(const type_name& v) {
+    std::size_t seed(0);
+
+    combine(seed, v.name());
+    combine(seed, v.schema_name());
+
+    return seed;
 }
 
 } }
