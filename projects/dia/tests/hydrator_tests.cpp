@@ -45,8 +45,8 @@ bool test_hydrator(
     boost::filesystem::path expected_path,
     boost::filesystem::path actual_path) {
 
-    dogen::dia::hydrator hydrator(input_path);
-    dogen::dia::diagram actual(hydrator.hydrate());
+    dogen::dia::hydrator h;
+    dogen::dia::diagram actual(h.hydrate(input_path));
 
     using dogen::utility::test::asserter;
     return asserter::assert_object(expected_path, actual_path, actual);

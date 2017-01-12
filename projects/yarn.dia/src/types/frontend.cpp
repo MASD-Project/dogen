@@ -57,8 +57,8 @@ std::list<std::string> frontend::supported_extensions() const {
 yarn::intermediate_model frontend::read(const yarn::descriptor& d) {
     BOOST_LOG_SEV(lg, debug) << "Loading Dia diagram. ";
 
-    dogen::dia::hydrator h(d.path());
-    dogen::dia::diagram diagram(h.hydrate());
+    dogen::dia::hydrator h;
+    dogen::dia::diagram diagram(h.hydrate(d.path()));
 
     dogen::yarn::dia::workflow wf;
     const std::string name(d.path().stem().string());
