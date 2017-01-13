@@ -28,7 +28,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
+inline std::size_t hash_std_vector_std_string(const std::vector<std::string>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -47,7 +47,7 @@ std::size_t type_hasher::hash(const type& v) {
     combine(seed, v.name());
     combine(seed, v.extends());
     combine(seed, v.comment());
-    combine(seed, hash_std_list_std_string(v.tag_refs()));
+    combine(seed, hash_std_vector_std_string(v.tag_refs()));
     combine(seed, v.pof_id());
 
     return seed;

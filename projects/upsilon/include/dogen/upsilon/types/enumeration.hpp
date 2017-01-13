@@ -48,7 +48,7 @@ public:
         const std::string& name,
         const std::string& extends,
         const std::string& comment,
-        const std::list<std::string>& tag_refs,
+        const std::vector<std::string>& tag_refs,
         const std::string& pof_id,
         const std::vector<std::string>& values,
         const std::string& default_value);

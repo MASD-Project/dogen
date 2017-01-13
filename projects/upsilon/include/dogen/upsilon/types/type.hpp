@@ -25,9 +25,9 @@
 #pragma once
 #endif
 
-#include <list>
 #include <iosfwd>
 #include <string>
+#include <vector>
 #include <algorithm>
 #include "dogen/upsilon/types/type_visitor_fwd.hpp"
 #include "dogen/upsilon/serialization/type_fwd_ser.hpp"
@@ -48,7 +48,7 @@ public:
         const std::string& name,
         const std::string& extends,
         const std::string& comment,
-        const std::list<std::string>& tag_refs,
+        const std::vector<std::string>& tag_refs,
         const std::string& pof_id);
 
 private:
@@ -83,10 +83,10 @@ public:
     void comment(const std::string& v);
     void comment(const std::string&& v);
 
-    const std::list<std::string>& tag_refs() const;
-    std::list<std::string>& tag_refs();
-    void tag_refs(const std::list<std::string>& v);
-    void tag_refs(const std::list<std::string>&& v);
+    const std::vector<std::string>& tag_refs() const;
+    std::vector<std::string>& tag_refs();
+    void tag_refs(const std::vector<std::string>& v);
+    void tag_refs(const std::vector<std::string>&& v);
 
     const std::string& pof_id() const;
     std::string& pof_id();
@@ -105,7 +105,7 @@ private:
     std::string name_;
     std::string extends_;
     std::string comment_;
-    std::list<std::string> tag_refs_;
+    std::vector<std::string> tag_refs_;
     std::string pof_id_;
 };
 

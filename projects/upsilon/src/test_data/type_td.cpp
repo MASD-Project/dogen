@@ -33,8 +33,8 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-std::list<std::string> create_std_list_std_string(unsigned int position) {
-    std::list<std::string> r;
+std::vector<std::string> create_std_vector_std_string(unsigned int position) {
+    std::vector<std::string> r;
     for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_std_string(position + i));
     }
@@ -51,7 +51,7 @@ populate(const unsigned int position, result_type& v) {
     v.name(create_std_string(position + 0));
     v.extends(create_std_string(position + 1));
     v.comment(create_std_string(position + 2));
-    v.tag_refs(create_std_list_std_string(position + 3));
+    v.tag_refs(create_std_vector_std_string(position + 3));
     v.pof_id(create_std_string(position + 4));
 }
 

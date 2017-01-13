@@ -23,6 +23,11 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test_data/yarn_upsilon.hpp"
 #include "dogen/upsilon/types/model.hpp"
+#include "dogen/upsilon/types/type.hpp"
+#include "dogen/upsilon/types/primitive.hpp"
+#include "dogen/upsilon/types/enumeration.hpp"
+#include "dogen/upsilon/types/compound.hpp"
+#include "dogen/upsilon/types/collection.hpp"
 #include "dogen/upsilon/types/schema.hpp"
 #include "dogen/upsilon/types/config.hpp"
 #include "dogen/upsilon/types/type_information.hpp"
@@ -123,6 +128,70 @@ BOOST_AUTO_TEST_CASE(hydrating_phi_schema_results_in_expected_object) {
         "Types that represent configurations.");
     BOOST_CHECK(a.tags()[1].name() == "AnotherTag");
     BOOST_CHECK(a.tags()[1].comment() == "Another Comment");
+
+    BOOST_REQUIRE(a.types().size() == 5);
+
+    const auto& type_0(*a.types()[0]);
+    BOOST_CHECK(type_0.name() == "Date");
+    BOOST_CHECK(type_0.extends().empty());
+    BOOST_CHECK(type_0.pof_id() == "1125");
+    BOOST_REQUIRE(type_0.tag_refs().size() == 1);
+    BOOST_CHECK(type_0.tag_refs()[0] == "ZetaTypes");
+
+    const auto ptr_0(dynamic_cast<const dogen::upsilon::primitive*>(&type_0));
+    BOOST_REQUIRE(ptr_0 != nullptr);
+
+    const auto& primitive(*ptr_0);
+    using dogen::upsilon::intrinsic_types;
+    BOOST_CHECK(primitive.intrinsic() == intrinsic_types::date);
+    BOOST_CHECK(primitive.default_value() == "1970-01-01");
+
+    const auto& type_1(*a.types()[1]);
+    BOOST_CHECK(type_1.name() == "TestType");
+    BOOST_CHECK(type_1.extends() == "ModelValue");
+    BOOST_CHECK(type_1.pof_id().empty());
+    BOOST_REQUIRE(type_1.tag_refs().size() == 1);
+    BOOST_CHECK(type_1.tag_refs()[0] == "Configuration");
+
+    const auto ptr_1(dynamic_cast<const dogen::upsilon::compound*>(&type_1));
+    BOOST_REQUIRE(ptr_1 != nullptr);
+    const auto& compound(*ptr_1);
+    BOOST_REQUIRE(compound.fields().size() == 2);
+
+    const auto& field_0(compound.fields()[0]);
+    BOOST_CHECK(field_0.name() == "Version");
+    BOOST_CHECK(field_0.type_name().name() == "String");
+    BOOST_CHECK(field_0.type_name().schema_name() == "Zeta");
+    BOOST_CHECK(field_0.comment() == "Some comment");
+
+    const auto& field_1(compound.fields()[1]);
+    BOOST_CHECK(field_1.name() == "AField");
+    BOOST_CHECK(field_1.type_name().name() == "String");
+    BOOST_CHECK(field_1.type_name().schema_name() == "Zeta");
+    BOOST_CHECK(field_1.comment().empty());
+
+    const auto& type_3(*a.types()[3]);
+    BOOST_CHECK(type_3.name() == "NoFields");
+
+    const auto ptr_3(dynamic_cast<const dogen::upsilon::compound*>(&type_3));
+    BOOST_REQUIRE(ptr_3 != nullptr);
+    const auto& compound_3(*ptr_3);
+    BOOST_REQUIRE(compound_3.fields().empty());
+
+    const auto& type_4(*a.types()[4]);
+    BOOST_CHECK(type_4.name() == "SomeEnum");
+    BOOST_CHECK(type_4.extends().empty());
+    BOOST_CHECK(type_4.pof_id().empty());
+    BOOST_REQUIRE(type_4.tag_refs().empty());
+
+    const auto ptr_4(dynamic_cast<const dogen::upsilon::enumeration*>(&type_4));
+    BOOST_REQUIRE(ptr_4 != nullptr);
+    const auto& enumeration(*ptr_4);
+    BOOST_REQUIRE(enumeration.values().size() == 3);
+    BOOST_CHECK(enumeration.values()[0] == "AValue");
+    BOOST_CHECK(enumeration.values()[1] == "AnotherValue");
+    BOOST_CHECK(enumeration.values()[2] == "FinalValue");
+    BOOST_CHECK(enumeration.default_value() == "AnotherValue");
 }
 
 BOOST_AUTO_TEST_CASE(hydrating_zeta_model_typeinfos_results_in_expected_object) {
@@ -169,6 +238,20 @@ BOOST_AUTO_TEST_CASE(hydrating_zeta_schema_results_in_expected_object) {
     BOOST_REQUIRE(a.tags().size() == 1);
     BOOST_CHECK(a.tags()[0].name() == "ZetaTypes");
     BOOST_CHECK(a.tags()[0].comment().empty());
+
+    BOOST_REQUIRE(a.types().size() == 6);
+    const auto& type_4(*a.types()[4]);
+    BOOST_CHECK(type_4.name() == "ModelValues");
+    BOOST_CHECK(type_4.extends().empty());
+    BOOST_CHECK(type_4.pof_id() == "1154");
+    BOOST_REQUIRE(type_4.tag_refs().size() == 1);
+    BOOST_CHECK(type_4.tag_refs()[0] == "ZetaTypes");
+
+    const auto ptr_4(dynamic_cast<const dogen::upsilon::collection*>(&type_4));
+    BOOST_REQUIRE(ptr_4 != nullptr);
+    const auto& collection(*ptr_4);
+    BOOST_CHECK(collection.type_name().name() == "ModelValue");
+    BOOST_CHECK(collection.type_name().schema_name().empty());
 }
 
 BOOST_AUTO_TEST_SUITE_END()

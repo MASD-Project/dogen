@@ -31,7 +31,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::vector<std::string>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -50,7 +50,7 @@ type::type(
     const std::string& name,
     const std::string& extends,
     const std::string& comment,
-    const std::list<std::string>& tag_refs,
+    const std::vector<std::string>& tag_refs,
     const std::string& pof_id)
     : name_(name),
       extends_(extends),
@@ -134,19 +134,19 @@ void type::comment(const std::string&& v) {
     comment_ = std::move(v);
 }
 
-const std::list<std::string>& type::tag_refs() const {
+const std::vector<std::string>& type::tag_refs() const {
     return tag_refs_;
 }
 
-std::list<std::string>& type::tag_refs() {
+std::vector<std::string>& type::tag_refs() {
     return tag_refs_;
 }
 
-void type::tag_refs(const std::list<std::string>& v) {
+void type::tag_refs(const std::vector<std::string>& v) {
     tag_refs_ = v;
 }
 
-void type::tag_refs(const std::list<std::string>&& v) {
+void type::tag_refs(const std::vector<std::string>&& v) {
     tag_refs_ = std::move(v);
 }
 

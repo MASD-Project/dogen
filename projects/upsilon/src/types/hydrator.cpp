@@ -501,8 +501,7 @@ bool schema_hydrator::read_type_base_fields(type& t) {
         return true;
     } else if (reader_.is_start_element(tag_refs_name)) {
         reader_.validate_self_closing();
-        t.tag_refs().push_back(
-            reader_.get_attribute<std::string>(value_name));
+        t.tag_refs().push_back(reader_.get_attribute<std::string>(value_name));
         return true;
     }
     return false;
