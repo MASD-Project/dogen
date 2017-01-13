@@ -44,6 +44,7 @@ add_custom_target(run_${tests_name}
     DEPENDS ${tests_name})
 
 add_dependencies(run_all_tests run_${tests_name})
+add_dependencies(run_windows_green_tests run_${tests_name})
 
 if(WITH_BENCHMARKS)
     add_custom_target(benchmark_${tests_name}

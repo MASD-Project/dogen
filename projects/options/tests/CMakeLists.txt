@@ -56,7 +56,6 @@ if(WITH_BENCHMARKS)
         DEPENDS ${tests_name})
 
     add_dependencies(benchmark_all benchmark_${tests_name})
-
 endif()
 
 add_boost_tests(${name} ${files})
