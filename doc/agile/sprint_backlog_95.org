@@ -12,14 +12,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-13 Fri 12:15]
+#+CAPTION: Clock summary at [2017-01-13 Fri 12:27]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *74:10* |       |       | 100.0 |
+| *Total time*                                                                | *74:21* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 74:10   |       |       | 100.0 |
-| Active                                                                      |         | 74:10 |       | 100.0 |
+| Stories                                                                     | 74:21   |       |       | 100.0 |
+| Active                                                                      |         | 74:21 |       | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  0:35 |   0.8 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:57 |   1.3 |
 | COMPLETED Consider supporting multiple inheritance on non-proxy models      |         |       |  3:24 |   4.6 |
@@ -33,13 +33,13 @@
 | COMPLETED Understand the behaviour of helpers and assistants                |         |       |  1:13 |   1.6 |
 | CANCELLED Add support for generic parents in yarn                           |         |       |  0:35 |   0.8 |
 | COMPLETED Fix assorted windows warnings                                     |         |       |  0:19 |   0.4 |
-| COMPLETED Build dogen on windows locally                                    |         |       |  7:32 |  10.2 |
+| COMPLETED Build dogen on windows locally                                    |         |       |  7:32 |  10.1 |
 | COMPLETED Fix borked windows build                                          |         |       |  1:54 |   2.6 |
 | COMPLETED Generate windows packages with WIX                                |         |       |  3:28 |   4.7 |
 | COMPLETED Add validation around instatitation of abstract classes           |         |       |  2:25 |   3.3 |
 | COMPLETED Add validation to ensure enumerators do not have types            |         |       |  0:21 |   0.5 |
 | COMPLETED Add appveyor support for bintray                                  |         |       |  2:23 |   3.2 |
-| STARTED Add upsilon support                                                 |         |       | 13:00 |  17.5 |
+| STARTED Add upsilon support                                                 |         |       | 13:11 |  17.7 |
 | STARTED Add auxiliary function properties to c#                             |         |       |  1:11 |   1.6 |
 | STARTED Add internal object dumper resolution                               |         |       |  4:51 |   6.5 |
 | STARTED Add support for generic container types to C#                       |         |       |  1:16 |   1.7 |
@@ -933,6 +933,7 @@ Notes:
 : https://git.gnome.org/browse/dia/refs/
 
 *** STARTED Add upsilon support                                       :story:
+    CLOCK: [2017-01-13 Fri 12:16]--[2017-01-13 Fri 12:27] =>  0:11
     CLOCK: [2017-01-13 Fri 12:11]--[2017-01-13 Fri 12:15] =>  0:04
     CLOCK: [2017-01-13 Fri 10:55]--[2017-01-13 Fri 12:10] =>  1:15
     CLOCK: [2017-01-13 Fri 10:12]--[2017-01-13 Fri 10:54] =>  0:42
