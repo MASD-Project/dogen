@@ -19,17 +19,10 @@
  *
  */
 #include <ostream>
-#include <boost/algorithm/string.hpp>
 #include "dogen/upsilon/io/type_io.hpp"
+#include "dogen/upsilon/io/type_name_io.hpp"
 #include "dogen/upsilon/types/collection.hpp"
 #include "dogen/upsilon/types/type_visitor.hpp"
-
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    return s;
-}
 
 namespace dogen {
 namespace upsilon {
@@ -40,7 +33,7 @@ collection::collection(
     const std::string& comment,
     const std::list<std::string>& tag_refs,
     const std::string& pof_id,
-    const std::string& type_name)
+    const dogen::upsilon::type_name& type_name)
     : dogen::upsilon::type(
       name,
       extends,
@@ -71,7 +64,7 @@ void collection::to_stream(std::ostream& s) const {
       << "\"__parent_0__\": ";
     dogen::upsilon::type::to_stream(s);
     s << ", "
-      << "\"type_name\": " << "\"" << tidy_up_string(type_name_) << "\""
+      << "\"type_name\": " << type_name_
       << " }";
 }
 
@@ -99,19 +92,19 @@ collection& collection::operator=(collection other) {
     return *this;
 }
 
-const std::string& collection::type_name() const {
+const dogen::upsilon::type_name& collection::type_name() const {
     return type_name_;
 }
 
-std::string& collection::type_name() {
+dogen::upsilon::type_name& collection::type_name() {
     return type_name_;
 }
 
-void collection::type_name(const std::string& v) {
+void collection::type_name(const dogen::upsilon::type_name& v) {
     type_name_ = v;
 }
 
-void collection::type_name(const std::string&& v) {
+void collection::type_name(const dogen::upsilon::type_name&& v) {
     type_name_ = std::move(v);
 }
 

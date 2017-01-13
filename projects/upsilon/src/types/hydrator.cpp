@@ -71,7 +71,8 @@ const std::string intrinsic_name("Intrinsic");
 const std::string default_name("Default");
 const std::string xsi_type_name("xsi:type");
 const std::string fields_name("Fields");
-const std::string field_type_name("TypeName");
+const std::string type_name_name("TypeName");
+const std::string values_name("Values");
 
 const std::string target_java("JAVA");
 const std::string target_cpp("CPP");
@@ -374,6 +375,7 @@ private:
     boost::shared_ptr<type> read_primitive();
 
     field read_field();
+    type_name read_type_name();
     boost::shared_ptr<type> read_compound();
     boost::shared_ptr<type> read_enumeration();
     boost::shared_ptr<type> read_collection();
@@ -545,24 +547,36 @@ field schema_hydrator::read_field() {
         if (reader_.is_start_element(name_name)) {
             reader_.validate_self_closing();
             r.name(reader_.get_attribute<std::string>(value_name));
+            reader_.move_next();
         } else if (reader_.is_start_element(comment_name)) {
             reader_.validate_self_closing();
             r.comment(reader_.get_attribute<std::string>(text_name));
-        } else if (reader_.is_start_element(field_type_name)) {
-            reader_.validate_self_closing();
-            type_name tn;
-            tn.name(reader_.get_attribute<std::string>(value_name));
-            tn.schema_name(
-                reader_.get_attribute<std::string>(schema_name_name));
-            r.type_name(tn);
-        } else
+            reader_.move_next();
+        } else if (reader_.is_start_element(type_name_name))
+            r.type_name(read_type_name());
+        else {
             log_unsupported_element();
-
-        reader_.move_next();
+            reader_.move_next();
+        }
     } while (!reader_.is_end_element(fields_name));
     reader_.move_next();
 
     BOOST_LOG_SEV(lg, debug) << "Read Field.";
+    return r;
+}
+
+type_name schema_hydrator::read_type_name() {
+    reader_.validate_current_element(type_name_name);
+    BOOST_LOG_SEV(lg, debug) << "Reading Type Name.";
+
+    type_name r;
+    reader_.validate_self_closing();
+
+    r.name(reader_.get_attribute<std::string>(value_name));
+    if (reader_.has_attribute(schema_name_name))
+        r.schema_name(reader_.get_attribute<std::string>(schema_name_name));
+
+    reader_.move_next();
     return r;
 }
 
@@ -600,15 +614,25 @@ boost::shared_ptr<type> schema_hydrator::read_enumeration() {
     auto r(boost::make_shared<enumeration>());
     reader_.move_next();
 
+    std::list<std::string> values;
     do {
         if (read_type_base_fields(*r)) {
             // do nothing
-        } else
+        } else if (reader_.is_start_element(values_name)) {
+            reader_.move_next();
+            values.push_back(reader_.value_as_string());
+            reader_.move_next();
+        } else if (reader_.is_start_element(default_name))
+            r->default_value(reader_.get_attribute<std::string>(value_name));
+        else
             log_unsupported_element();
 
         reader_.move_next();
     } while (!reader_.is_end_element(types_name));
     reader_.move_next();
+
+    r->values().reserve(values.size());
+    std::copy(values.begin(), values.end(), std::back_inserter(r->values()));
 
     BOOST_LOG_SEV(lg, debug) << "Read Enumeration.";
     return r;
@@ -622,12 +646,14 @@ boost::shared_ptr<type> schema_hydrator::read_collection() {
     reader_.move_next();
 
     do {
-        if (read_type_base_fields(*r)) {
-            // do nothing
-        } else
+        if (read_type_base_fields(*r))
+            reader_.move_next();
+        else if (reader_.is_start_element(type_name_name))
+            r->type_name(read_type_name());
+        else {
             log_unsupported_element();
-
-        reader_.move_next();
+            reader_.move_next();
+        }
     } while (!reader_.is_end_element(types_name));
     reader_.move_next();
 

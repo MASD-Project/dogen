@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/upsilon/hash/type_hash.hpp"
+#include "dogen/upsilon/hash/type_name_hash.hpp"
 #include "dogen/upsilon/hash/collection_hash.hpp"
 
 namespace {

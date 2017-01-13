@@ -19,8 +19,8 @@
  *
  */
 #include <ostream>
-#include <boost/algorithm/string.hpp>
 #include "dogen/upsilon/io/type_io.hpp"
+#include "dogen/upsilon/io/type_name_io.hpp"
 #include "dogen/upsilon/io/collection_io.hpp"
 
 namespace dogen {

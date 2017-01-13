@@ -26,9 +26,9 @@
 #endif
 
 #include <iosfwd>
-#include <string>
 #include <algorithm>
 #include "dogen/upsilon/types/type.hpp"
+#include "dogen/upsilon/types/type_name.hpp"
 #include "dogen/upsilon/serialization/collection_fwd_ser.hpp"
 
 namespace dogen {
@@ -49,7 +49,7 @@ public:
         const std::string& comment,
         const std::list<std::string>& tag_refs,
         const std::string& pof_id,
-        const std::string& type_name);
+        const dogen::upsilon::type_name& type_name);
 
 private:
     template<typename Archive>
@@ -69,10 +69,10 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
-    const std::string& type_name() const;
-    std::string& type_name();
-    void type_name(const std::string& v);
-    void type_name(const std::string&& v);
+    const dogen::upsilon::type_name& type_name() const;
+    dogen::upsilon::type_name& type_name();
+    void type_name(const dogen::upsilon::type_name& v);
+    void type_name(const dogen::upsilon::type_name&& v);
 
 public:
     bool operator==(const collection& rhs) const;
@@ -88,7 +88,7 @@ public:
     collection& operator=(collection other);
 
 private:
-    std::string type_name_;
+    dogen::upsilon::type_name type_name_;
 };
 
 } }

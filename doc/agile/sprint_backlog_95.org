@@ -12,37 +12,37 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-12 Thu 23:28]
-| <75>                                                                        |         |       |      |       |
-| Headline                                                                    | Time    |       |      |     % |
-|-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *70:59* |       |      | 100.0 |
-|-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 70:59   |       |      | 100.0 |
-| Active                                                                      |         | 70:59 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:35 |   0.8 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:57 |   1.3 |
-| COMPLETED Consider supporting multiple inheritance on non-proxy models      |         |       | 3:24 |   4.8 |
-| COMPLETED Add basic validation infrastructure                               |         |       | 8:40 |  12.2 |
-| COMPLETED Fix borked windows build                                          |         |       | 0:26 |   0.6 |
-| COMPLETED Clean up enumerator implementation                                |         |       | 1:05 |   1.5 |
-| COMPLETED Measure validation slowdown                                       |         |       | 6:38 |   9.3 |
-| COMPLETED Parsing should support dot notation                               |         |       | 2:54 |   4.1 |
-| COMPLETED Analysis for changes required in order to support containers      |         |       | 3:15 |   4.6 |
-| COMPLETED Add support for object based container types in C#                |         |       | 5:48 |   8.2 |
-| COMPLETED Understand the behaviour of helpers and assistants                |         |       | 1:13 |   1.7 |
-| CANCELLED Add support for generic parents in yarn                           |         |       | 0:35 |   0.8 |
-| COMPLETED Fix assorted windows warnings                                     |         |       | 0:19 |   0.4 |
-| COMPLETED Build dogen on windows locally                                    |         |       | 7:32 |  10.6 |
-| COMPLETED Fix borked windows build                                          |         |       | 1:54 |   2.7 |
-| COMPLETED Generate windows packages with WIX                                |         |       | 3:28 |   4.9 |
-| COMPLETED Add validation around instatitation of abstract classes           |         |       | 2:25 |   3.4 |
-| COMPLETED Add validation to ensure enumerators do not have types            |         |       | 0:21 |   0.5 |
-| COMPLETED Add appveyor support for bintray                                  |         |       | 2:23 |   3.4 |
-| STARTED Add upsilon support                                                 |         |       | 9:49 |  13.8 |
-| STARTED Add auxiliary function properties to c#                             |         |       | 1:11 |   1.7 |
-| STARTED Add internal object dumper resolution                               |         |       | 4:51 |   6.8 |
-| STARTED Add support for generic container types to C#                       |         |       | 1:16 |   1.8 |
+#+CAPTION: Clock summary at [2017-01-13 Fri 10:11]
+| <75>                                                                        |         |       |       |       |
+| Headline                                                                    | Time    |       |       |     % |
+|-----------------------------------------------------------------------------+---------+-------+-------+-------|
+| *Total time*                                                                | *72:09* |       |       | 100.0 |
+|-----------------------------------------------------------------------------+---------+-------+-------+-------|
+| Stories                                                                     | 72:09   |       |       | 100.0 |
+| Active                                                                      |         | 72:09 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  0:35 |   0.8 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  0:57 |   1.3 |
+| COMPLETED Consider supporting multiple inheritance on non-proxy models      |         |       |  3:24 |   4.7 |
+| COMPLETED Add basic validation infrastructure                               |         |       |  8:40 |  12.0 |
+| COMPLETED Fix borked windows build                                          |         |       |  0:26 |   0.6 |
+| COMPLETED Clean up enumerator implementation                                |         |       |  1:05 |   1.5 |
+| COMPLETED Measure validation slowdown                                       |         |       |  6:38 |   9.2 |
+| COMPLETED Parsing should support dot notation                               |         |       |  2:54 |   4.0 |
+| COMPLETED Analysis for changes required in order to support containers      |         |       |  3:15 |   4.5 |
+| COMPLETED Add support for object based container types in C#                |         |       |  5:48 |   8.0 |
+| COMPLETED Understand the behaviour of helpers and assistants                |         |       |  1:13 |   1.7 |
+| CANCELLED Add support for generic parents in yarn                           |         |       |  0:35 |   0.8 |
+| COMPLETED Fix assorted windows warnings                                     |         |       |  0:19 |   0.4 |
+| COMPLETED Build dogen on windows locally                                    |         |       |  7:32 |  10.4 |
+| COMPLETED Fix borked windows build                                          |         |       |  1:54 |   2.6 |
+| COMPLETED Generate windows packages with WIX                                |         |       |  3:28 |   4.8 |
+| COMPLETED Add validation around instatitation of abstract classes           |         |       |  2:25 |   3.3 |
+| COMPLETED Add validation to ensure enumerators do not have types            |         |       |  0:21 |   0.5 |
+| COMPLETED Add appveyor support for bintray                                  |         |       |  2:23 |   3.3 |
+| STARTED Add upsilon support                                                 |         |       | 10:59 |  15.2 |
+| STARTED Add auxiliary function properties to c#                             |         |       |  1:11 |   1.6 |
+| STARTED Add internal object dumper resolution                               |         |       |  4:51 |   6.7 |
+| STARTED Add support for generic container types to C#                       |         |       |  1:16 |   1.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -915,7 +915,25 @@ Errors:
 : Deploying using BinTray provider
 : Uploading "dogen-0.95.0-Windows-AMD64.msi" to BinTray as domaindrivenconsulting/Dogen/Dogen/0.94.0/dogen-0.95.0-Windows-AMD64.msi...Error uploading artifact to BinTray (401 status): This resource requires authentication
 
+*** COMPLETED Downgrade Dia to last stable release                    :story:
+    CLOSED: [2017-01-13 Fri 09:50]
+
+It seems the version of Dia released with debian at present does not
+work very well. We need to downgrade it.
+
+Notes:
+
+: sudo apt-get install dia-common=0.97.3-1 dia-libs=0.97.3-1 dia=0.97.3-1
+: apt-get -o Acquire::Check-Valid-Until=false update
+: deb http://snapshot.debian.org/archive/debian/20140913T220820Z testing main
+: https://bugs.debian.org/cgi-bin/pkgreport.cgi?package=dia
+: http://snapshot.debian.org/archive/debian/20140913T220820Z/
+: http://mindref.blogspot.co.uk/2012/02/apt-revert-upgrade.html
+: https://packages.qa.debian.org/d/dia/news/20140913T163911Z.html
+: https://git.gnome.org/browse/dia/refs/
+
 *** STARTED Add upsilon support                                       :story:
+    CLOCK: [2017-01-13 Fri 09:01]--[2017-01-13 Fri 10:11] =>  1:10
     CLOCK: [2017-01-12 Thu 22:50]--[2017-01-12 Thu 23:28] =>  0:38
     CLOCK: [2017-01-12 Thu 22:00]--[2017-01-12 Thu 22:49] =>  0:49
     CLOCK: [2017-01-12 Thu 21:16]--[2017-01-12 Thu 21:59] =>  0:43

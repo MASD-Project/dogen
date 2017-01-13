@@ -21,7 +21,6 @@
 #include <boost/serialization/nvp.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
-#include <boost/serialization/string.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
@@ -29,6 +28,7 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/upsilon/serialization/type_ser.hpp"
+#include "dogen/upsilon/serialization/type_name_ser.hpp"
 #include "dogen/upsilon/serialization/collection_ser.hpp"
 
 BOOST_CLASS_TRACKING(
