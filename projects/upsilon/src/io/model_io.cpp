@@ -52,13 +52,17 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::upsilon::type_information>& v) {
-    s << "[ ";
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::upsilon::type_information>& v) {
+    s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
-        s << *i;
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
     }
-    s << "] ";
+    s << " ] ";
     return s;
 }
 

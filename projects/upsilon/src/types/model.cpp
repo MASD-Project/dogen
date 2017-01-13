@@ -25,7 +25,7 @@ namespace upsilon {
 
 model::model(
     const std::unordered_map<std::string, dogen::upsilon::schema>& schemas,
-    const std::vector<dogen::upsilon::type_information>& type_information,
+    const std::unordered_map<std::string, dogen::upsilon::type_information>& type_information,
     const dogen::upsilon::config& config)
     : schemas_(schemas),
       type_information_(type_information),
@@ -66,19 +66,19 @@ void model::schemas(const std::unordered_map<std::string, dogen::upsilon::schema
     schemas_ = std::move(v);
 }
 
-const std::vector<dogen::upsilon::type_information>& model::type_information() const {
+const std::unordered_map<std::string, dogen::upsilon::type_information>& model::type_information() const {
     return type_information_;
 }
 
-std::vector<dogen::upsilon::type_information>& model::type_information() {
+std::unordered_map<std::string, dogen::upsilon::type_information>& model::type_information() {
     return type_information_;
 }
 
-void model::type_information(const std::vector<dogen::upsilon::type_information>& v) {
+void model::type_information(const std::unordered_map<std::string, dogen::upsilon::type_information>& v) {
     type_information_ = v;
 }
 
-void model::type_information(const std::vector<dogen::upsilon::type_information>&& v) {
+void model::type_information(const std::unordered_map<std::string, dogen::upsilon::type_information>&& v) {
     type_information_ = std::move(v);
 }
 
