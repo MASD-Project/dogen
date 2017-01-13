@@ -21,11 +21,13 @@
 #include <boost/serialization/nvp.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
+#include <boost/serialization/string.hpp>
 #include <boost/serialization/vector.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
+#include <boost/serialization/unordered_map.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/upsilon/serialization/model_ser.hpp"
@@ -40,8 +42,7 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::upsilon::model& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("target", v.target_);
-    ar << make_nvp("refs", v.refs_);
+    ar << make_nvp("schemas", v.schemas_);
     ar << make_nvp("type_information", v.type_information_);
     ar << make_nvp("config", v.config_);
 }
@@ -50,8 +51,7 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::upsilon::model& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("target", v.target_);
-    ar >> make_nvp("refs", v.refs_);
+    ar >> make_nvp("schemas", v.schemas_);
     ar >> make_nvp("type_information", v.type_information_);
     ar >> make_nvp("config", v.config_);
 }

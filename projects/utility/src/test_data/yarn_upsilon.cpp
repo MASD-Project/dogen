@@ -34,6 +34,8 @@ path input_phi_model_xml_typeinfos(
     "yarn.upsilon/input/Phi.Model.xml.typeinfos");
 path input_test_model_configuration_xml(
     "yarn.upsilon/input/Test.Model.Configuration.xml");
+path input_dodgy_model_configuration_xml(
+    "yarn.upsilon/input/Dodgy.Model.Configuration.xml");
 path input_zeta_model_xml("yarn.upsilon/input/Zeta.Model.xml");
 path input_zeta_model_xml_typeinfos(
     "yarn.upsilon/input/Zeta.Model.xml.typeinfos");
@@ -65,6 +67,10 @@ path yarn_upsilon::input_phi_model_xml_typeinfos() {
 
 path yarn_upsilon::input_test_model_configuration_xml() {
     return validating_resolver::resolve(::input_test_model_configuration_xml);
+}
+
+path yarn_upsilon::input_dodgy_model_configuration_xml() {
+    return validating_resolver::resolve(::input_dodgy_model_configuration_xml);
 }
 
 path yarn_upsilon::input_zeta_model_xml() {

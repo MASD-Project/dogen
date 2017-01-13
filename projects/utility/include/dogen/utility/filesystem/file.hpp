@@ -68,6 +68,14 @@ std::set<boost::filesystem::path> find_files(const boost::filesystem::path& d);
 std::set<boost::filesystem::path>
 find_files(const std::vector<boost::filesystem::path>& dirs);
 
+/**
+ * @brief Finds the relative path, by searching recursively upwards
+ * from the starting directory.
+ */
+boost::filesystem::path find_file_recursively_upwards(
+    const boost::filesystem::path& starting_directory,
+    const boost::filesystem::path& relative_file_path);
+
 } } }
 
 #endif

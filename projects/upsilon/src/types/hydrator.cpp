@@ -22,6 +22,9 @@
 #include <vector>
 #include <algorithm>
 #include <boost/make_shared.hpp>
+#include <boost/filesystem/path.hpp>
+#include <boost/filesystem/operations.hpp>
+#include "dogen/utility/filesystem/file.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/xml/text_reader.hpp"
 #include "dogen/upsilon/types/hydration_error.hpp"
@@ -91,6 +94,8 @@ const std::string intrinsic_types_utc_time("UtcTime");
 const std::string intrinsic_types_utc_date_time("UtcDateTime");
 
 const std::string unsupported_value("Unsupported attribute value: ");
+const std::string duplicate_schema("Schema name already exists: ");
+const std::string schema_not_found("Could not locate schema: ");
 
 }
 
@@ -732,12 +737,39 @@ schema hydrator::hydrate_schema(boost::filesystem::path f) {
 
 std::vector<type_information> hydrator::
 hydrate_type_information(boost::filesystem::path f) {
+    BOOST_LOG_SEV(lg, debug) << "Hydrating type infos file: " << f;
     type_information_hydrator h(f);
     return h.hydrate();
 }
 
-model hydrator::hydrate(boost::filesystem::path /*config_file*/) {
+model hydrator::hydrate(boost::filesystem::path config_file) {
     model r;
+    r.config(hydrate_config(config_file));
+
+    using namespace boost::filesystem;
+    using utility::filesystem::find_file_recursively_upwards;
+
+    auto directory_path(config_file.parent_path());
+    for (const auto& schema_ref : r.config().schema_refs()) {
+        path schema_path(schema_ref.file());
+        path abs(find_file_recursively_upwards(directory_path, schema_path));
+
+        if (abs.empty()) {
+            const auto gs(schema_path.generic_string());
+            BOOST_LOG_SEV(lg, error) << schema_not_found << gs;
+            BOOST_THROW_EXCEPTION(hydration_error(schema_not_found + gs));
+        }
+
+        const auto s(hydrate_schema(abs));
+        const auto pair(std::make_pair(schema_ref.name(), s));
+        const auto inserted(r.schemas().insert(pair).second);
+        if (!inserted) {
+            const auto sn(schema_ref.name());
+            BOOST_LOG_SEV(lg, error) << duplicate_schema << sn;
+            BOOST_THROW_EXCEPTION(hydration_error(duplicate_schema + sn));
+        }
+    }
+
     return r;
 }
 

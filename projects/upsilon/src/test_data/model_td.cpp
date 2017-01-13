@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
 #include "dogen/upsilon/test_data/model_td.hpp"
 #include "dogen/upsilon/test_data/config_td.hpp"
 #include "dogen/upsilon/test_data/schema_td.hpp"
@@ -25,15 +26,21 @@
 
 namespace {
 
+std::string create_std_string(const unsigned int position) {
+    std::ostringstream s;
+    s << "a_string_" << position;
+    return s.str();
+}
+
 dogen::upsilon::schema
 create_dogen_upsilon_schema(const unsigned int position) {
     return dogen::upsilon::schema_generator::create(position);
 }
 
-std::vector<dogen::upsilon::schema> create_std_vector_dogen_upsilon_schema(unsigned int position) {
-    std::vector<dogen::upsilon::schema> r;
+std::unordered_map<std::string, dogen::upsilon::schema> create_std_unordered_map_std_string_dogen_upsilon_schema(unsigned int position) {
+    std::unordered_map<std::string, dogen::upsilon::schema> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_dogen_upsilon_schema(position + i));
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_upsilon_schema(position + i)));
     }
     return r;
 }
@@ -65,10 +72,9 @@ model_generator::model_generator() : position_(0) { }
 
 void model_generator::
 populate(const unsigned int position, result_type& v) {
-    v.target(create_dogen_upsilon_schema(position + 0));
-    v.refs(create_std_vector_dogen_upsilon_schema(position + 1));
-    v.type_information(create_std_vector_dogen_upsilon_type_information(position + 2));
-    v.config(create_dogen_upsilon_config(position + 3));
+    v.schemas(create_std_unordered_map_std_string_dogen_upsilon_schema(position + 0));
+    v.type_information(create_std_vector_dogen_upsilon_type_information(position + 1));
+    v.config(create_dogen_upsilon_config(position + 2));
 }
 
 model_generator::result_type

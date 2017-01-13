@@ -91,4 +91,34 @@ find_files(const std::vector<boost::filesystem::path>& dirs) {
     return r;
 }
 
+boost::filesystem::path find_file_recursively_upwards(
+    const boost::filesystem::path& starting_directory,
+    const boost::filesystem::path& relative_file_path) {
+
+    if (relative_file_path.is_absolute()) {
+        /*
+         * User is lying, the path is already absolute.
+         */
+        return relative_file_path;
+    }
+
+    if (!boost::filesystem::is_directory(starting_directory)) {
+        const auto gs(starting_directory.generic_string());
+        BOOST_THROW_EXCEPTION(file_not_found(invalid_directory + gs));
+    }
+
+    using namespace boost::filesystem;
+    auto directory_path(starting_directory);
+
+    do {
+        path abs = absolute(directory_path / relative_file_path);
+        if (exists(abs))
+            return abs;
+
+        directory_path = directory_path.parent_path();
+    } while (directory_path.has_parent_path());
+
+    return path();
+}
+
 } } }

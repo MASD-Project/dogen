@@ -22,6 +22,7 @@
 #include "dogen/utility/io/vector_io.hpp"
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test_data/yarn_upsilon.hpp"
+#include "dogen/utility/test/exception_checkers.hpp"
 #include "dogen/upsilon/types/model.hpp"
 #include "dogen/upsilon/types/type.hpp"
 #include "dogen/upsilon/types/primitive.hpp"
@@ -35,6 +36,7 @@
 #include "dogen/upsilon/io/schema_io.hpp"
 #include "dogen/upsilon/io/config_io.hpp"
 #include "dogen/upsilon/io/type_information_io.hpp"
+#include "dogen/upsilon/types/hydration_error.hpp"
 #include "dogen/upsilon/types/hydrator.hpp"
 
 namespace {
@@ -46,7 +48,11 @@ const std::string test_suite("hydrator_tests");
 const std::string public_location("projects/test_models/common");
 const std::string private_location("projects/test_models");
 
+const std::string schema_not_found("Could not locate schema: ");
+
 }
+
+using dogen::utility::test::contains_checker;
 
 BOOST_AUTO_TEST_SUITE(hydrator_tests)
 
@@ -252,6 +258,28 @@ BOOST_AUTO_TEST_CASE(hydrating_zeta_schema_results_in_expected_object) {
     const auto& collection(*ptr_4);
     BOOST_CHECK(collection.type_name().name() == "ModelValue");
     BOOST_CHECK(collection.type_name().schema_name().empty());
+}
+
+BOOST_AUTO_TEST_CASE(full_hydration_of_test_data_config_results_in_expected_model) {
+    SETUP_TEST_LOG_SOURCE("full_hydration_of_test_data_config_results_in_expected_model");
+
+    using dogen::utility::test_data::yarn_upsilon;
+    const auto input(yarn_upsilon::input_test_model_configuration_xml());
+    dogen::upsilon::hydrator h;
+    const auto a(h.hydrate(input));
+    BOOST_LOG_SEV(lg, debug) << "actual: " << a;
+}
+
+BOOST_AUTO_TEST_CASE(full_hydration_of_dodgy_test_data_config_throws) {
+    SETUP_TEST_LOG_SOURCE("full_hydration_of_dodgy_test_data_config_throws");
+
+    using dogen::utility::test_data::yarn_upsilon;
+    const auto input(yarn_upsilon::input_dodgy_model_configuration_xml());
+    dogen::upsilon::hydrator h;
+
+    using dogen::upsilon::hydration_error;
+    contains_checker<hydration_error> c(schema_not_found);
+    BOOST_CHECK_EXCEPTION(h.hydrate(input), hydration_error, c);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

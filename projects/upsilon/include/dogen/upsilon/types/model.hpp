@@ -25,8 +25,10 @@
 #pragma once
 #endif
 
+#include <string>
 #include <vector>
 #include <algorithm>
+#include <unordered_map>
 #include "dogen/upsilon/types/config.hpp"
 #include "dogen/upsilon/types/schema.hpp"
 #include "dogen/upsilon/types/type_information.hpp"
@@ -44,8 +46,7 @@ public:
 
 public:
     model(
-        const dogen::upsilon::schema& target,
-        const std::vector<dogen::upsilon::schema>& refs,
+        const std::unordered_map<std::string, dogen::upsilon::schema>& schemas,
         const std::vector<dogen::upsilon::type_information>& type_information,
         const dogen::upsilon::config& config);
 
@@ -57,15 +58,10 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::upsilon::model& v, unsigned int version);
 
 public:
-    const dogen::upsilon::schema& target() const;
-    dogen::upsilon::schema& target();
-    void target(const dogen::upsilon::schema& v);
-    void target(const dogen::upsilon::schema&& v);
-
-    const std::vector<dogen::upsilon::schema>& refs() const;
-    std::vector<dogen::upsilon::schema>& refs();
-    void refs(const std::vector<dogen::upsilon::schema>& v);
-    void refs(const std::vector<dogen::upsilon::schema>&& v);
+    const std::unordered_map<std::string, dogen::upsilon::schema>& schemas() const;
+    std::unordered_map<std::string, dogen::upsilon::schema>& schemas();
+    void schemas(const std::unordered_map<std::string, dogen::upsilon::schema>& v);
+    void schemas(const std::unordered_map<std::string, dogen::upsilon::schema>&& v);
 
     const std::vector<dogen::upsilon::type_information>& type_information() const;
     std::vector<dogen::upsilon::type_information>& type_information();
@@ -88,8 +84,7 @@ public:
     model& operator=(model other);
 
 private:
-    dogen::upsilon::schema target_;
-    std::vector<dogen::upsilon::schema> refs_;
+    std::unordered_map<std::string, dogen::upsilon::schema> schemas_;
     std::vector<dogen::upsilon::type_information> type_information_;
     dogen::upsilon::config config_;
 };

@@ -24,26 +24,22 @@ namespace dogen {
 namespace upsilon {
 
 model::model(
-    const dogen::upsilon::schema& target,
-    const std::vector<dogen::upsilon::schema>& refs,
+    const std::unordered_map<std::string, dogen::upsilon::schema>& schemas,
     const std::vector<dogen::upsilon::type_information>& type_information,
     const dogen::upsilon::config& config)
-    : target_(target),
-      refs_(refs),
+    : schemas_(schemas),
       type_information_(type_information),
       config_(config) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
-    swap(target_, other.target_);
-    swap(refs_, other.refs_);
+    swap(schemas_, other.schemas_);
     swap(type_information_, other.type_information_);
     swap(config_, other.config_);
 }
 
 bool model::operator==(const model& rhs) const {
-    return target_ == rhs.target_ &&
-        refs_ == rhs.refs_ &&
+    return schemas_ == rhs.schemas_ &&
         type_information_ == rhs.type_information_ &&
         config_ == rhs.config_;
 }
@@ -54,36 +50,20 @@ model& model::operator=(model other) {
     return *this;
 }
 
-const dogen::upsilon::schema& model::target() const {
-    return target_;
+const std::unordered_map<std::string, dogen::upsilon::schema>& model::schemas() const {
+    return schemas_;
 }
 
-dogen::upsilon::schema& model::target() {
-    return target_;
+std::unordered_map<std::string, dogen::upsilon::schema>& model::schemas() {
+    return schemas_;
 }
 
-void model::target(const dogen::upsilon::schema& v) {
-    target_ = v;
+void model::schemas(const std::unordered_map<std::string, dogen::upsilon::schema>& v) {
+    schemas_ = v;
 }
 
-void model::target(const dogen::upsilon::schema&& v) {
-    target_ = std::move(v);
-}
-
-const std::vector<dogen::upsilon::schema>& model::refs() const {
-    return refs_;
-}
-
-std::vector<dogen::upsilon::schema>& model::refs() {
-    return refs_;
-}
-
-void model::refs(const std::vector<dogen::upsilon::schema>& v) {
-    refs_ = v;
-}
-
-void model::refs(const std::vector<dogen::upsilon::schema>&& v) {
-    refs_ = std::move(v);
+void model::schemas(const std::unordered_map<std::string, dogen::upsilon::schema>&& v) {
+    schemas_ = std::move(v);
 }
 
 const std::vector<dogen::upsilon::type_information>& model::type_information() const {
