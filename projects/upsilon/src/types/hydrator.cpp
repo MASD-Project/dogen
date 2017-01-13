@@ -648,13 +648,10 @@ boost::shared_ptr<type> schema_hydrator::read_type() {
         return read_enumeration();
     else if (s == "Collection")
         return read_collection();
-    else {
-        BOOST_LOG_SEV(lg, warn) << "Unsupported type: " << s;
-        reader_.move_next();
-        return boost::shared_ptr<type>();
-    }
 
-    BOOST_LOG_SEV(lg, debug) << "Read Tag.";
+    BOOST_LOG_SEV(lg, warn) << "Unsupported type: " << s;
+    reader_.move_next();
+    return boost::shared_ptr<type>();
 }
 
 schema schema_hydrator::hydrate() {
