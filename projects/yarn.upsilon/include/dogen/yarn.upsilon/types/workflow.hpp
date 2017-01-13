@@ -25,7 +25,9 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <boost/filesystem/path.hpp>
+#include "dogen/upsilon/types/model.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -33,18 +35,7 @@ namespace upsilon {
 
 class workflow final {
 public:
-    workflow() = default;
-    workflow(const workflow&) = default;
-    workflow(workflow&&) = default;
-    ~workflow() = default;
-    workflow& operator=(const workflow&) = default;
-
-public:
-    bool operator==(const workflow& rhs) const;
-    bool operator!=(const workflow& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    yarn::intermediate_model execute(const dogen::upsilon::model& p) const;
 };
 
 } } }

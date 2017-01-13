@@ -25,26 +25,21 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen/yarn/types/frontend_interface.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace upsilon {
 
-class frontend final {
+class frontend final : public yarn::frontend_interface {
 public:
-    frontend() = default;
-    frontend(const frontend&) = default;
-    frontend(frontend&&) = default;
-    ~frontend() = default;
-    frontend& operator=(const frontend&) = default;
+    virtual ~frontend() noexcept;
 
 public:
-    bool operator==(const frontend& rhs) const;
-    bool operator!=(const frontend& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    std::string id() const override;
+    std::list<std::string> supported_extensions() const override;
+    yarn::intermediate_model read(const yarn::descriptor& d) override;
+    void write(const intermediate_model& im, const descriptor& d) override;
 };
 
 } } }

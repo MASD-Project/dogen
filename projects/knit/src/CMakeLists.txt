@@ -37,6 +37,7 @@ target_link_libraries(${name}
     yarn
     yarn.dia
     yarn.json
+    yarn.upsilon
     quilt
     quilt.cpp
     quilt.csharp

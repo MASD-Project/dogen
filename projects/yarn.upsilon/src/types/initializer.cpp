@@ -18,14 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/yarn/types/workflow.hpp"
+#include "dogen/yarn.upsilon/types/frontend.hpp"
 #include "dogen/yarn.upsilon/types/initializer.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace upsilon {
 
-bool initializer::operator==(const initializer& /*rhs*/) const {
-    return true;
+void initializer::initialize() {
+    yarn::register_frontend<frontend>(yarn::workflow::frontend_registrar());
 }
 
 } } }

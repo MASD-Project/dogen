@@ -24,8 +24,10 @@ namespace dogen {
 namespace yarn {
 namespace upsilon {
 
-bool workflow::operator==(const workflow& /*rhs*/) const {
-    return true;
+yarn::intermediate_model
+workflow::execute(const dogen::upsilon::model& /*m*/) const {
+    yarn::intermediate_model r;
+    return r;
 }
 
 } } }

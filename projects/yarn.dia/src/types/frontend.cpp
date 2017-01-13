@@ -26,14 +26,12 @@
 #include "dogen/yarn.dia/types/workflow.hpp"
 #include "dogen/yarn.dia/types/frontend.hpp"
 
-using namespace dogen::utility::log;
-
 namespace {
 
+using namespace dogen::utility::log;
 const std::string id("yarn.dia.frontend");
 auto lg(logger_factory(id));
 
-const std::string empty;
 const std::string no_saving_support(
     "Saving not supported for yarn.dia frontend");
 
@@ -55,15 +53,17 @@ std::list<std::string> frontend::supported_extensions() const {
 }
 
 yarn::intermediate_model frontend::read(const yarn::descriptor& d) {
-    BOOST_LOG_SEV(lg, debug) << "Loading Dia diagram. ";
-
+    BOOST_LOG_SEV(lg, debug) << "Loading Dia diagram.";
     dogen::dia::hydrator h;
-    dogen::dia::diagram diagram(h.hydrate(d.path()));
+    const auto diagram(h.hydrate(d.path()));
+    BOOST_LOG_SEV(lg, debug) << "Loaded Dia diagram.";
 
+    BOOST_LOG_SEV(lg, debug) << "Converting it into yarn.";
     dogen::yarn::dia::workflow wf;
-    const std::string name(d.path().stem().string());
+    const auto name(d.path().stem().string());
     const auto r(wf.execute(diagram, name, d.is_target()));
-    BOOST_LOG_SEV(lg, debug) << "Finished loading diagram.";
+    BOOST_LOG_SEV(lg, debug) << "Finished converting it into yarn.";
+
     return r;
 }
 

@@ -24,10 +24,9 @@
 #include "dogen/yarn.json/types/dehydrator.hpp"
 #include "dogen/yarn.json/types/frontend.hpp"
 
-using namespace dogen::utility::log;
-
 namespace {
 
+using namespace dogen::utility::log;
 const std::string id("yarn.json.frontend");
 auto lg(logger_factory(id));
 const std::string empty;
