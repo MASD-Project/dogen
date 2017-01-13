@@ -12,18 +12,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-13 Fri 12:27]
+#+CAPTION: Clock summary at [2017-01-13 Fri 12:45]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *74:21* |       |       | 100.0 |
+| *Total time*                                                                | *74:38* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 74:21   |       |       | 100.0 |
-| Active                                                                      |         | 74:21 |       | 100.0 |
+| Stories                                                                     | 74:38   |       |       | 100.0 |
+| Active                                                                      |         | 74:38 |       | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  0:35 |   0.8 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:57 |   1.3 |
 | COMPLETED Consider supporting multiple inheritance on non-proxy models      |         |       |  3:24 |   4.6 |
-| COMPLETED Add basic validation infrastructure                               |         |       |  8:40 |  11.7 |
+| COMPLETED Add basic validation infrastructure                               |         |       |  8:40 |  11.6 |
 | COMPLETED Fix borked windows build                                          |         |       |  0:26 |   0.6 |
 | COMPLETED Clean up enumerator implementation                                |         |       |  1:05 |   1.5 |
 | COMPLETED Measure validation slowdown                                       |         |       |  6:38 |   8.9 |
@@ -34,12 +34,13 @@
 | CANCELLED Add support for generic parents in yarn                           |         |       |  0:35 |   0.8 |
 | COMPLETED Fix assorted windows warnings                                     |         |       |  0:19 |   0.4 |
 | COMPLETED Build dogen on windows locally                                    |         |       |  7:32 |  10.1 |
-| COMPLETED Fix borked windows build                                          |         |       |  1:54 |   2.6 |
-| COMPLETED Generate windows packages with WIX                                |         |       |  3:28 |   4.7 |
-| COMPLETED Add validation around instatitation of abstract classes           |         |       |  2:25 |   3.3 |
+| COMPLETED Fix borked windows build                                          |         |       |  1:54 |   2.5 |
+| COMPLETED Generate windows packages with WIX                                |         |       |  3:28 |   4.6 |
+| COMPLETED Add validation around instatitation of abstract classes           |         |       |  2:25 |   3.2 |
 | COMPLETED Add validation to ensure enumerators do not have types            |         |       |  0:21 |   0.5 |
 | COMPLETED Add appveyor support for bintray                                  |         |       |  2:23 |   3.2 |
-| STARTED Add upsilon support                                                 |         |       | 13:11 |  17.7 |
+| COMPLETED Add read support for upsilon models                               |         |       | 13:11 |  17.7 |
+| STARTED Create an upsilon yarn frontend                                     |         |       |  0:17 |   0.4 |
 | STARTED Add auxiliary function properties to c#                             |         |       |  1:11 |   1.6 |
 | STARTED Add internal object dumper resolution                               |         |       |  4:51 |   6.5 |
 | STARTED Add support for generic container types to C#                       |         |       |  1:16 |   1.7 |
@@ -932,7 +933,8 @@ Notes:
 : https://packages.qa.debian.org/d/dia/news/20140913T163911Z.html
 : https://git.gnome.org/browse/dia/refs/
 
-*** STARTED Add upsilon support                                       :story:
+*** COMPLETED Add read support for upsilon models                     :story:
+    CLOSED: [2017-01-13 Fri 12:32]
     CLOCK: [2017-01-13 Fri 12:16]--[2017-01-13 Fri 12:27] =>  0:11
     CLOCK: [2017-01-13 Fri 12:11]--[2017-01-13 Fri 12:15] =>  0:04
     CLOCK: [2017-01-13 Fri 10:55]--[2017-01-13 Fri 12:10] =>  1:15
@@ -965,6 +967,42 @@ into Dogen. The easiest thing to do is to create a simple frontend
 which imports these models into yarn. We will subsequently have to
 map these types into native types, depending on the language - or
 probably into LAM types.
+
+This task only covers the reading of the upsilon models.
+
+*** STARTED Create an upsilon yarn frontend
+    CLOCK: [2017-01-13 Fri 12:28]--[2017-01-13 Fri 12:45] =>  0:17
+
+Now we can read upsilon models, we need to transform them into yarn
+models. This fairly straightforward as a meta-model
+transformation. There are however a few corner cases:
+
+- we need to inject model value into the yarn model
+- we need to inject a =Collection= type into the yarn model, which has
+  one type parameter.
+- we need to hard-code the model to a given language. At present we do
+  not have proper multi-language workflows. When a model comes out of
+  the frontend it has to either be C++, C# or LAM. To make life easy
+  we can just set it as either C++ or C# for now. Ideally we want to
+  retrieve a LAM model, mappable to C++ and C#. Actually that's not
+  quite right as we do not have the LAM types in the frontend. For now
+  lets just hack it and retrieve it either as C++ or C#. But perhaps
+  the right solution is to create a "upsilon language" which is
+  mappable to LAM/C++/C#. In fact we should just map against LAM, and
+  deduce the mappings for all other languages from there. The "upsilon
+  language" is not generatable, so it must be mapped. Which raises an
+  interesting point: there are two uses of "language": the language in
+  which the model is written and the language in which one wants to
+  output it. Normally they are the same. However, if I supply a LAM
+  model I may want to choose a language. For Dogen/JSON frontends this
+  is simply a meta-data extension. For upsilon we need to piggy-back
+  on the existing language infrastructure.
+
+Tasks:
+
+- add new "upsilon" language which is not generatable; entire yarn
+  workflow should work for upsilon, but then quilt just does nothing.
+- add tailor support so that we can convert upsilon to JSON.
 
 *** STARTED Add auxiliary function properties to c#                   :story:
     CLOCK: [2017-01-08 Sun 11:27]--[2017-01-08 Sun 11:40] =>  0:13
@@ -1049,6 +1087,67 @@ Notes:
 
 - we need a way to determine if we are using a helper, the assistant
   or a sequence generator directly.
+
+*** Add support for Language Agnostic Models (LAM)                    :story:
+
+When we start supporting more than one language, one interesting
+feature would be to be able to define a model once and have it
+generated for all supported languages. This would be achieved by
+having a system model (or set of system models) that define all the
+key types in a language agnostic manner. For example:
+
+: lam::string
+: lam::int
+: lam::int16
+
+Each of these types then has a set of meta-data fields that map them
+to a type in a supported language:
+
+: lam:string: cpp.concrete_type_mapping = std::string
+: lam:string: csharp.concrete_type_mapping = string
+
+And so on. We load the user model that makes use of LAM, we generate
+the merged model still with LAM types and then we perform a
+translation for each of the supported and enabled languages: for every
+LAM type, we replace all its references with the corresponding
+concrete type. We need to split the supplied mapping into a QName, use
+the QName to load the system models for that language, look up the
+type and replace it. After the translation no LAM types are left. We
+end up with N yarn merged models where N is the number of supported and
+enabled languages.
+
+Each of these models is then sent down to code generation. This should
+be equivalent to manually generating models per language - we could
+use this as a test.
+
+Once we have LAM, it would be great to be able to exchange data
+between languages. This could be done as follows:
+
+- XML: create a "LAM" XML schema, and a set of formatters that read
+  and write from it. This is kind of like reverse mapping the types
+  back to LAM types when writing the XML.
+- JSON: similar approach to XML, minus the schema.
+- POF: use the coherence libraries to dump the models into POF.
+
+Tasks:
+
+- create the LAM model with a set of basic types.
+- add a set of mapping fields into yarn: =yarn.mapping.csharp=, etc
+  and populate the types with entries for each supported language.
+- create a notion of mapping of intermediate models into
+  languages. The input is the merged intermediate model and the output
+  is N models one per language. We also need a way to associate
+  backends with languages. Each model is sent down to its backend.
+- note that reverse mapping is possible: we should be able to
+  associate a type on a given language with it's lam type. This means
+  that, given a model in say C#, we could reconstruct a yarn lam model
+  (or tell the user about the list of failures to map). This should be
+  logged as a separate story.
+
+Links:
+
+- [[http://stackoverflow.com/questions/741054/mapping-between-stl-c-and-c-sharp-containers][Mapping between stl C++ and C# containers]]
+- [[http://stackoverflow.com/questions/3659044/comparison-of-c-stl-collections-and-c-sharp-collections][Comparison of C++ STL collections and C# collections?]]
 
 *** Fix issues with bintray windows uploads                           :story:
 
