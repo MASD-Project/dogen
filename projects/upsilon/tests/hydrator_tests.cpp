@@ -71,9 +71,11 @@ BOOST_AUTO_TEST_CASE(hydrating_config_results_in_expected_object) {
     BOOST_REQUIRE(a.schema_refs().size() == 2);
     BOOST_CHECK(a.schema_refs()[0].name() == "Zeta");
     BOOST_CHECK(
-        a.schema_refs()[0].file() == "test_data/upsilon/Zeta.Model.xml");
+        a.schema_refs()[0].file() ==
+        "test_data/yarn.upsilon/input/Zeta.Model.xml");
     BOOST_CHECK(a.schema_refs()[1].name() == "Phi");
-    BOOST_CHECK(a.schema_refs()[1].file() == "test_data/upsilon/Phi.Model.xml");
+    BOOST_CHECK(a.schema_refs()[1].file() ==
+        "test_data/yarn.upsilon/input/Phi.Model.xml");
 
     BOOST_REQUIRE(a.outputs().size() == 1);
     const auto& o(a.outputs()[0]);

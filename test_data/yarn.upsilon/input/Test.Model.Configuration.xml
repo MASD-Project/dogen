@@ -6,8 +6,8 @@
     </Directory>
 
     <SchemaRefs>
-        <SchemaRef Name="Zeta" File="test_data/upsilon/Zeta.Model.xml" />
-        <SchemaRef Name="Phi" File="test_data/upsilon/Phi.Model.xml" />
+        <SchemaRef Name="Zeta" File="test_data/yarn.upsilon/input/Zeta.Model.xml" />
+        <SchemaRef Name="Phi" File="test_data/yarn.upsilon/input/Phi.Model.xml" />
     </SchemaRefs>
 
     <Outputs>

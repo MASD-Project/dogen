@@ -12,24 +12,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-13 Fri 12:45]
+#+CAPTION: Clock summary at [2017-01-13 Fri 14:16]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *74:38* |       |       | 100.0 |
+| *Total time*                                                                | *74:53* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 74:38   |       |       | 100.0 |
-| Active                                                                      |         | 74:38 |       | 100.0 |
+| Stories                                                                     | 74:53   |       |       | 100.0 |
+| Active                                                                      |         | 74:53 |       | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  0:35 |   0.8 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:57 |   1.3 |
-| COMPLETED Consider supporting multiple inheritance on non-proxy models      |         |       |  3:24 |   4.6 |
+| COMPLETED Consider supporting multiple inheritance on non-proxy models      |         |       |  3:24 |   4.5 |
 | COMPLETED Add basic validation infrastructure                               |         |       |  8:40 |  11.6 |
 | COMPLETED Fix borked windows build                                          |         |       |  0:26 |   0.6 |
-| COMPLETED Clean up enumerator implementation                                |         |       |  1:05 |   1.5 |
+| COMPLETED Clean up enumerator implementation                                |         |       |  1:05 |   1.4 |
 | COMPLETED Measure validation slowdown                                       |         |       |  6:38 |   8.9 |
 | COMPLETED Parsing should support dot notation                               |         |       |  2:54 |   3.9 |
-| COMPLETED Analysis for changes required in order to support containers      |         |       |  3:15 |   4.4 |
-| COMPLETED Add support for object based container types in C#                |         |       |  5:48 |   7.8 |
+| COMPLETED Analysis for changes required in order to support containers      |         |       |  3:15 |   4.3 |
+| COMPLETED Add support for object based container types in C#                |         |       |  5:48 |   7.7 |
 | COMPLETED Understand the behaviour of helpers and assistants                |         |       |  1:13 |   1.6 |
 | CANCELLED Add support for generic parents in yarn                           |         |       |  0:35 |   0.8 |
 | COMPLETED Fix assorted windows warnings                                     |         |       |  0:19 |   0.4 |
@@ -39,7 +39,7 @@
 | COMPLETED Add validation around instatitation of abstract classes           |         |       |  2:25 |   3.2 |
 | COMPLETED Add validation to ensure enumerators do not have types            |         |       |  0:21 |   0.5 |
 | COMPLETED Add appveyor support for bintray                                  |         |       |  2:23 |   3.2 |
-| COMPLETED Add read support for upsilon models                               |         |       | 13:11 |  17.7 |
+| COMPLETED Add read support for upsilon models                               |         |       | 13:26 |  17.9 |
 | STARTED Create an upsilon yarn frontend                                     |         |       |  0:17 |   0.4 |
 | STARTED Add auxiliary function properties to c#                             |         |       |  1:11 |   1.6 |
 | STARTED Add internal object dumper resolution                               |         |       |  4:51 |   6.5 |
@@ -935,6 +935,7 @@ Notes:
 
 *** COMPLETED Add read support for upsilon models                     :story:
     CLOSED: [2017-01-13 Fri 12:32]
+    CLOCK: [2017-01-13 Fri 14:01]--[2017-01-13 Fri 14:16] =>  0:15
     CLOCK: [2017-01-13 Fri 12:16]--[2017-01-13 Fri 12:27] =>  0:11
     CLOCK: [2017-01-13 Fri 12:11]--[2017-01-13 Fri 12:15] =>  0:04
     CLOCK: [2017-01-13 Fri 10:55]--[2017-01-13 Fri 12:10] =>  1:15
@@ -970,7 +971,7 @@ probably into LAM types.
 
 This task only covers the reading of the upsilon models.
 
-*** STARTED Create an upsilon yarn frontend
+*** STARTED Create an upsilon yarn frontend                           :story:
     CLOCK: [2017-01-13 Fri 12:28]--[2017-01-13 Fri 12:45] =>  0:17
 
 Now we can read upsilon models, we need to transform them into yarn

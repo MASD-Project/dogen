@@ -22,12 +22,17 @@
 #include <boost/filesystem/path.hpp>
 #include <boost/filesystem/fstream.hpp>
 #include <boost/filesystem/operations.hpp>
+#include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/filesystem/file_not_found.hpp"
 #include "dogen/utility/filesystem/file.hpp"
 
 namespace {
 
+using namespace dogen::utility::log;
+auto lg(dogen::utility::log::logger_factory("utility.filesystem.file"));
+
 const std::string invalid_directory("Not a directory: ");
+const std::string file_not_found("File not found: ");
 const std::string directory_not_found("Could not find directory: ");
 
 }
@@ -47,7 +52,9 @@ std::string read_file_content(std::istream& s) {
 
 std::string read_file_content(const boost::filesystem::path& path) {
     if (!boost::filesystem::exists(path)) {
-        BOOST_THROW_EXCEPTION(file_not_found(path.string()));
+        const auto gs(path.generic_string());
+        BOOST_LOG_SEV(lg, error) << ::file_not_found << gs;
+        BOOST_THROW_EXCEPTION(file_not_found(gs));
     }
 
     boost::filesystem::ifstream s(path);
@@ -64,11 +71,17 @@ void write_file_content(const boost::filesystem::path& path,
 std::set<boost::filesystem::path> find_files(const boost::filesystem::path& d) {
     std::set<boost::filesystem::path> r;
 
-    if (!boost::filesystem::exists(d))
-        BOOST_THROW_EXCEPTION(file_not_found(directory_not_found + d.string()));
+    if (!boost::filesystem::exists(d)) {
+        const auto gs(d.generic_string());
+        BOOST_LOG_SEV(lg, error) << directory_not_found << gs;
+        BOOST_THROW_EXCEPTION(file_not_found(directory_not_found + gs));
+    }
 
-    if (!boost::filesystem::is_directory(d))
-        BOOST_THROW_EXCEPTION(file_not_found(invalid_directory + d.string()));
+    if (!boost::filesystem::is_directory(d)) {
+        const auto gs(d.generic_string());
+        BOOST_LOG_SEV(lg, error) << invalid_directory << gs;
+        BOOST_THROW_EXCEPTION(file_not_found(invalid_directory + gs));
+    }
 
     using boost::filesystem::recursive_directory_iterator;
     for (recursive_directory_iterator end, i(d); i != end; ++i) {
@@ -99,11 +112,14 @@ boost::filesystem::path find_file_recursively_upwards(
         /*
          * User is lying, the path is already absolute.
          */
+        const auto gs(relative_file_path.generic_string());
+        BOOST_LOG_SEV(lg, debug) << "Path is absolute: " << gs;
         return relative_file_path;
     }
 
     if (!boost::filesystem::is_directory(starting_directory)) {
         const auto gs(starting_directory.generic_string());
+        BOOST_LOG_SEV(lg, error) << invalid_directory << gs;
         BOOST_THROW_EXCEPTION(file_not_found(invalid_directory + gs));
     }
 
@@ -112,12 +128,18 @@ boost::filesystem::path find_file_recursively_upwards(
 
     do {
         path abs = absolute(directory_path / relative_file_path);
-        if (exists(abs))
+        BOOST_LOG_SEV(lg, debug) << "Trying: " << abs.generic_string();
+
+        if (exists(abs)) {
+            BOOST_LOG_SEV(lg, debug) << "Found file.";
             return abs;
+        }
 
         directory_path = directory_path.parent_path();
     } while (directory_path.has_parent_path());
 
+    const auto gs(relative_file_path.generic_string());
+    BOOST_LOG_SEV(lg, debug) << "Could not find file: " << gs;
     return path();
 }
 
