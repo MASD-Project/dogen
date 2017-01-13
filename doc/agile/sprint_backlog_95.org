@@ -971,6 +971,35 @@ probably into LAM types.
 
 This task only covers the reading of the upsilon models.
 
+*** COMPLETED Use official boost with windows                         :story:
+    CLOSED: [2017-01-13 Fri 14:20]
+
+*Rationale*: this was due to the problems of static vs dynamic
+runtime. We are now using the dropbox build of boost, the official
+build should work just as well.
+
+We tried replacing the conan boost with the official boost but it
+resulted in additional errors:
+
+: libboost_system-vc140-mt-sgd-1_62.lib(error_code.obj) : error LNK2038:
+:   mismatch detected for 'RuntimeLibrary': value 'MTd_StaticDebug' doesn't
+:   match value 'MDd_DynamicDebug' in equality_tests.obj
+:   [C:\projects\dogen\build\output\msvc\Debug\projects\dia\tests\dia.tests.vcxproj]
+: libboost_serialization-vc140-mt-sgd-1_62.lib(basic_oarchive.obj) : error LNK2038:
+:   mismatch detected for 'RuntimeLibrary': value 'MTd_StaticDebug' doesn't match
+:   value 'MDd_DynamicDebug' in equality_tests.obj
+:   [C:\projects\dogen\build\output\msvc\Debug\projects\dia\tests\dia.tests.vcxproj]
+: libboost_serialization-vc140-mt-sgd-1_62.lib(extended_type_info.obj) : error LNK2038:
+:   mismatch detected for 'RuntimeLibrary': value 'MTd_StaticDebug' doesn't match
+:   value 'MDd_DynamicDebug' in equality_tests.obj
+:   [C:\projects\dogen\build\output\msvc\Debug\projects\dia\tests\dia.tests.vcxproj]
+: ...
+
+- see [[https://ci.appveyor.com/project/mcraveiro/dogen/build/2.2.485/job/6rseroy5hk2akvxe][this build]] for details.
+- boost binaries sourced [[https://sourceforge.net/projects/boost/files/boost-binaries/1.62.0/][from here]], boost_1_62_0-msvc-14.0-64.exe
+- binraries still available in dropbox, code to use them still in
+  appveyor.install.windows.ps1.
+
 *** STARTED Create an upsilon yarn frontend                           :story:
     CLOCK: [2017-01-13 Fri 12:28]--[2017-01-13 Fri 12:45] =>  0:17
 
