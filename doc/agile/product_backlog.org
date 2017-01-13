@@ -5928,6 +5928,17 @@ Yarn:
 : [00:27:44]
 : [00:27:44]   *** 3 failures are detected in the test module "yarn_tests"
 
+Utility:
+
+:  Building Custom Rule C:/projects/dogen/projects/utility/tests/CMakeLists.txt
+:  CMake does not need to re-run because C:\projects\dogen\build\output\msvc\Debug\projects\utility\tests\CMakeFiles\generate.stamp is up-to-date.
+:  Running utility.tests
+: C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppCommon.targets(171,5): error MSB6006: "cmd.exe" exited with code -1073741515. [C:\projects\dogen\build\output\msvc\Debug\projects\utility\tests\run_utility.tests.vcxproj]
+: Done Building Project "C:\projects\dogen\build\output\msvc\Debug\projects\utility\tests\run_utility.tests.vcxproj" (default targets) -- FAILED.
+: Done Building Project "C:\projects\dogen\build\output\msvc\Debug\run_windows_green_tests.vcxproj" (default targets) -- FAILED.
+: Build FAILED.
+: "C:\projects\dogen\build\output\msvc\Debug\run_windows_green_tests.vcxproj" (default target) (1) ->
+
 *** Fix the dynamic linker errors in OSX when running tests           :story:
 
 At present we are building for OSX but not running the tests. Most of
