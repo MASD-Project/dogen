@@ -8599,6 +8599,18 @@ Notes:
 
 Stories we just don't quite know where to bucket them.
 
+*** Test data extensions are not ideal                                :story:
+
+At present we use extensions for test data like so:
+
+- =.diaxml=
+- =.yarnxml=
+
+It would be nicer to have these files called =.dia.xml= etc but when
+we tried to do this, the first extension started contributing to the
+model name (as expected) so we had to revert the change. Still, these
+are not very nice extensions.
+
 *** Mine MongoDB Smasher for test data ideas                          :story:
 
 There is a project to generate large data sets for MongoDB:
