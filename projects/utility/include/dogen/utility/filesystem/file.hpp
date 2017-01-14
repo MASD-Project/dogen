@@ -76,12 +76,6 @@ boost::filesystem::path find_file_recursively_upwards(
     const boost::filesystem::path& starting_directory,
     const boost::filesystem::path& relative_file_path);
 
-/**
- * @brief Returns the extension of the supplied path, if any
- * exists. Unlike boost's extension, this returns all extensions.
- */
-std::string extension(const boost::filesystem::path& p);
-
 } } }
 
 #endif

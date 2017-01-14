@@ -144,14 +144,4 @@ boost::filesystem::path find_file_recursively_upwards(
     return path();
 }
 
-std::string extension(const boost::filesystem::path& p) {
-    const auto s(p.filename().generic_string());
-
-    const auto i(s.find(dot));
-    if (i == std::string::npos)
-        return std::string();
-
-    return s.substr(i);
-}
-
 } } }

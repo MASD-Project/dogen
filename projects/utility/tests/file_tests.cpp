@@ -204,47 +204,4 @@ BOOST_AUTO_TEST_CASE(find_files_throws_when_directory_does_not_exist) {
         file_not_found, c);
 }
 
-BOOST_AUTO_TEST_CASE(extension_returns_returns_the_expected_extension) {
-    SETUP_TEST_LOG_SOURCE("extension_returns_returns_the_expected_extension");
-
-    {
-        // empty
-        boost::filesystem::path p;
-        const auto a(dogen::utility::filesystem::extension(p));
-        BOOST_LOG_SEV(lg, info) << "Input: " << p.generic_string();
-        BOOST_LOG_SEV(lg, info) << "Actual: " << a;
-        BOOST_CHECK(a.empty());
-    }
-
-    {
-        // no file name
-        boost::filesystem::path p(".extension");
-        const std::string e(".extension");
-        const auto a(dogen::utility::filesystem::extension(p));
-        BOOST_LOG_SEV(lg, info) << "Input: " << p.generic_string();
-        BOOST_LOG_SEV(lg, info) << "Actual: " << a;
-        BOOST_CHECK(e == a);
-    }
-
-    {
-        // single extension
-        boost::filesystem::path p("file_name.extension");
-        const std::string e(".extension");
-        const auto a(dogen::utility::filesystem::extension(p));
-        BOOST_LOG_SEV(lg, info) << "Input: " << p.generic_string();
-        BOOST_LOG_SEV(lg, info) << "Actual: " << a;
-        BOOST_CHECK(e == a);
-    }
-
-    {
-        // "composite" extension
-        boost::filesystem::path p("file_name.extension_1.extension_2");
-        const std::string e(".extension_1.extension_2");
-        const auto a(dogen::utility::filesystem::extension(p));
-        BOOST_LOG_SEV(lg, info) << "Input: " << p.generic_string();
-        BOOST_LOG_SEV(lg, info) << "Actual: " << a;
-        BOOST_CHECK(e == a);
-    }
-}
-
 BOOST_AUTO_TEST_SUITE_END()
